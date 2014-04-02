@@ -18,6 +18,7 @@ class AppKernel extends Kernel {
 			new Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
+			new SS6\AdminBundle\SS6AdminBundle(),
 			new SS6\CoreBundle\SS6CoreBundle(),
 			new SS6\FrontBundle\SS6FrontBundle(),
 		);

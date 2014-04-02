@@ -1,0 +1,3 @@
+admin_homepage:
+    pattern:  /
+    defaults: { _controller: SS6AdminBundle:Default:index }
