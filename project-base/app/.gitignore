@@ -1,0 +1,5 @@
+/logs
+/cache
+bootstrap.php.cache
+check.php
+SymfonyRequirements.php

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Shopsys6" default="build">
+	
+	<property name="path.app" value="${path.root}/app"/>
+	<property name="path.bin" value="${path.root}/bin"/>
+	<property name="path.build" value="${path.root}/build"/>
+	<property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
+	<property name="path.composer.executable" value="composer"/>
+	<property name="path.root" value="."/>
+	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
+	<property name="path.phpcs.ruleset" value="${path.build}/rulesetCS.xml"/>
+	<property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
+	<property name="path.phpmd.executable" value="${path.bin}/phpmd"/>
+	<property name="path.phpmd.ruleset" value="${path.build}/rulesetMD.xml"/>
+	<property name="path.phpunit.configuration" value="${path.app}/phpunit.xml"/>
+	<property name="path.phpunit.executable" value="${path.bin}/phpunit"/>
+	<property name="path.src" value="${path.root}/src"/>
+	<property name="path.vendor" value="${path.root}/vendor"/>
+	
+	<property file="${path.build.properties.local}" override="true"/>
+ 
+	<target name="build" depends="composer,phplint,phpcs,phpmd,tests,db-rebuild"/>
+	<target name="build-demo" depends="composer,phplint,phpcs,phpmd,tests,db-demo"/>
+	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
+	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
+	<target name="db-demo" depends="db-rebuild,db-fixtures-demo"/>
+	
+	<target name="composer">
+		<exec
+			executable="${path.composer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="install"/>
+		</exec>
+	</target>
+ 
+	<target name="phpcs">
+		<exec
+			executable="${path.phpcs.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--standard=${path.phpcs.ruleset}"/>
+			<arg value="--extensions=php"/>
+			<arg value="--encoding=utf-8"/>
+			<arg value="-sp"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+ 
+	<target name="phplint">
+		<exec
+			executable="${path.phplint.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+	
+	<target name="phpmd">
+		<exec
+			executable="${path.phpmd.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="${path.src}"/>
+			<arg value="text"/>
+			<arg value="${path.phpmd.ruleset}"/>
+			<arg value="--extensions=php"/>
+		</exec>
+	</target>
+ 
+	<target name="tests">
+		<exec
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+	
+	<target name="db-drop">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:schema:drop" />
+			<arg value="--force" />
+			<arg value="--full-database" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+		
+	<target name="db-create">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:schema:create" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="db-fixtures-base-settings">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/CoreBundle/DataFixtures/Base" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="db-fixtures-demo">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/CoreBundle/DataFixtures/Demo" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+</project>

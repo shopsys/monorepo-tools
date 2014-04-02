@@ -1,0 +1,24 @@
+*	-text
+
+*.bat	text
+*.css	text
+*.inc	text
+*.ini	text
+*.js	text
+*.json	text
+*.php	text
+*.php3	text
+*.php4	text
+*.php5	text
+*.properties	text
+*.sh	text
+*.tpl	text
+*.twig	text
+*.xml	text
+*.xsd	text
+*.xsl	text
+*.xslt	text
+*.yml	text
+
+composer.json eol=lf
+composer.lock text
