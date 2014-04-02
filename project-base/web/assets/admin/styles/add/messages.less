@@ -1,0 +1,28 @@
+//
+// Forms
+// --------------------------------------------------
+
+.message {
+	margin: 20px 0;
+	padding: 20px;
+	border: 1px solid @gray-lighter;
+	background: lighten(@gray-lighter, 10%);
+	.border-bottom-radius(@border-radius-base);
+	.border-top-radius(@border-radius-base);
+}
+.message-success {
+	.bg-variant(@state-success-bg);
+	border-color: darken(@state-success-bg, 10%);
+}
+.message-info {
+	.bg-variant(@state-info-bg);
+	border-color: darken(@state-info-bg, 10%);
+}
+.message-warning {
+	.bg-variant(@state-warning-bg);
+	border-color: darken(@state-warning-bg, 10%);
+}
+.message-danger {
+	.bg-variant(@state-danger-bg);
+	border-color: darken(@state-danger-bg, 10%);
+}

@@ -1,0 +1,68 @@
+{% extends 'SS6AdminBundle:Layout:base.html.twig' %}
+
+{% block htmlBody %}
+	<div class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<a href="{{ url('admin_homepage') }}" class="navbar-brand">ShopSys6</a>
+			</div>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="./">Seznam zboží</a>
+					</li>
+					<li>
+						<a href="./">Objednávky</a>
+					</li>
+					<li>
+						<a href="./">Uživatelé</a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nastavení <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="./">Obchod</a>
+							</li>								
+							<li>
+								<a href="./">Cenotvorba</a>
+							</li>					
+							<li>
+								<a href="./">Věrnostní systém</a>
+							</li>			
+							<li>
+								<a href="./">Dopravy a platby</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">Odhlásit</a>
+					</li>
+				</ul>
+		</div>
+	</div>
+
+	<div class="content container-fluid">
+		<div class="row">
+			<div class="col-xs-2">
+				{% block panel %}
+					<div class="list-group">
+						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+						<a href="#" class="list-group-item">Morbi leo risus</a>
+						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+						<a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
+				{% endblock %}
+			</div>
+
+			<div class="main-content col-xs-10">
+				<h1>{% block h1 %}Adminstrace{% endblock %}</h1>
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
