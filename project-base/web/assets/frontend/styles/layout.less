@@ -1,0 +1,29 @@
+body {
+	font-size: @font-size;
+	line-height: @line-height-base;
+	color: @color-base;
+	background: @bg-web url('images/bg.png') 0 90px repeat-x;
+}
+
+.web-wrap {
+	width: @width-page;
+	margin: 0 auto;
+	background: @bg-page;
+	padding: 20px;
+	.box-sizing(border-box);
+}
+
+.header {
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid @color-border;
+	position: relative;
+	.clearfix();
+}
+
+.footer {
+	margin-top: 20px;
+	background: @bg-box;
+	padding: 20px;
+	font-size: 12px;
+}

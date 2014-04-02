@@ -1,0 +1,32 @@
+{% extends 'SS6FrontBundle:Layout:base.html.twig' %}
+
+{% block htmlBody %}
+	<div class="web-wrap">
+
+			<div class="header">
+				<div class="logo">
+					<a href="{{ url('front_homepage') }}">Internetový obchod</a>
+				</div>
+
+				<ul class="top-menu">
+					<li class="top-menu__item">
+						<a href="#">Registrace</a>
+					</li>
+					<li class="top-menu__item">
+						<a href="#"><strong>Přihlásit se</strong></a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="content">
+				<div class="main-content">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+
+			<div class="footer">
+				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+			</div>
+		</div>
+
+{% endblock %}

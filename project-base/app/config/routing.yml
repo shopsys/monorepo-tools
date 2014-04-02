@@ -1,0 +1,8 @@
+ss6_front:
+  resource: "@SS6FrontBundle/Resources/config/routing.yml"
+  prefix: /
+  
+ss6_admin:
+  resource: "@SS6AdminBundle/Resources/config/routing.yml"
+  prefix: /admin
+
