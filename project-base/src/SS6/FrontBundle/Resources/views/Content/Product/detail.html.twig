@@ -1,0 +1,32 @@
+{% extends 'SS6FrontBundle:Layout:layout.html.twig' %}
+
+{% block title %}
+	- {{ product.name }}
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="product-image">
+				<span>
+					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}">
+				</span>
+			</div>
+			
+		</div>
+
+		<div class="col-xs-6">
+			<h1>{{ product.name }}</h1>
+			<p>Katalogové číslo: {{ product.catnum }}</p>
+			<p>Výrobní číslo: {{ product.partno }}</p>
+			<p>EAN: {{ product.ean }}</p>
+			<p>
+				{{ product.description|raw }}
+			</p>
+
+			<p>
+				<strong>Cena: <span class="price-main">{{ product.price }} Kč</span></strong>
+			</p>
+		</div>
+	</div>
+{% endblock %}
