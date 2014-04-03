@@ -1,7 +1,6 @@
 parameters:
-#  ss6_core.example.class: SS6\CoreBundle\Example
+  ss6.core.security.login_service.class: SS6\CoreBundle\Model\Security\Service\LoginService
 
 services:
-#  ss6_core.example:
-#    class: %ss6_core.example.class%
-#    arguments: [@service_id, "plain_value", %parameter%]
+  ss6.core.security.login_service:
+    class: %ss6.core.security.login_service.class%
