@@ -6,15 +6,9 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
 use SS6\CoreBundle\Model\Security\TimelimitLoginInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener {
-	
-	/**
-	 * @var Session
-	 */
-	private $session;
 	
 	/**
 	 * @var EntityManager
@@ -22,11 +16,9 @@ class LoginListener {
 	private $em;
 	
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
-	public function __construct(Session $session, EntityManager $em) {
-		$this->session = $session;
+	public function __construct(EntityManager $em) {
 		$this->em = $em;
 	}
 	
