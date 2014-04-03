@@ -67,6 +67,7 @@ class Bootstrap {
 			__DIR__ . '/config/parameters_common.yml',
 			__DIR__ . '/config/parameters.yml',
 			__DIR__ . '/config/config.yml',
+			__DIR__ . '/config/security.yml',
 		);
 		switch ($this->enviroment) {
 			case self::ENVIROMENT_DEVELOPMENT:
