@@ -35,6 +35,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
 		$administrator->setUsername('admin');
 		$administrator->setRealname('netdevelo s.r.o.');
 		$administrator->setPassword($passwordHash);
+		$administrator->setLoginToken('');
 		
 		$manager->persist($administrator);
 		$manager->flush();

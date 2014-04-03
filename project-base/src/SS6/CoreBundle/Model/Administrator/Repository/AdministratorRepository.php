@@ -3,16 +3,18 @@
 namespace SS6\CoreBundle\Model\Administrator\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use SS6\CoreBundle\Model\Administrator\Entity\Administrator;
+use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class AdministratorRepository extends EntityRepository implements UserProviderInterface {
 
 	/**
 	 * @param string $username The username
-	 * @return SS6\CoreBundle\Model\Administrator\Entity\Administrator
+	 * @return Administrator
 	 * @throws UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($username) {
@@ -29,8 +31,8 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 	}
 
 	/**
-	 * @param Symfony\Component\Security\Core\User\UserInterface $administrator
-	 * @return SS6\CoreBundle\Model\Administrator\Entity\Administrator
+	 * @param UserInterface $administrator
+	 * @return Administrator
 	 * @throws UnsupportedUserException
 	 */
 	public function refreshUser(UserInterface $administrator) {
@@ -38,8 +40,20 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 		if (!$this->supportsClass($class)) {
 			throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
 		}
+		
+		$findParams = array(
+			'id' => $administrator->getId(),
+		);
+		if ($administrator instanceof SingletonLoginInterface) {
+			$findParams['loginToken'] = $administrator->getLoginToken();
+		}
+		$freshAdministrator = $this->findOneBy($findParams);
 
-		return $this->find($administrator->getId());
+		if ($freshAdministrator === null) {
+			throw new UsernameNotFoundException('Unable to find an active admin');
+		}
+		
+		return $freshAdministrator;
 	}
 
 	/**
