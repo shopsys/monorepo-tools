@@ -2,9 +2,11 @@
 
 namespace SS6\CoreBundle\Model\Administrator\Repository;
 
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 use SS6\CoreBundle\Model\Administrator\Entity\Administrator;
 use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
+use SS6\CoreBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,13 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 		$class = get_class($administrator);
 		if (!$this->supportsClass($class)) {
 			throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+		}
+		
+		if ($administrator instanceof TimelimitLoginInterface) {
+			if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
+				throw new UsernameNotFoundException('Admin was too long unactive.');
+			}
+			$administrator->setLastActivity(new DateTime());
 		}
 		
 		$findParams = array(

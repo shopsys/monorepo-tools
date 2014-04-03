@@ -2,9 +2,11 @@
 
 namespace SS6\CoreBundle\Model\Administrator\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
+use SS6\CoreBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -12,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="administrators")
  * @ORM\Entity(repositoryClass="SS6\CoreBundle\Model\Administrator\Repository\AdministratorRepository")
  */
-class Administrator implements UserInterface, Serializable, SingletonLoginInterface {
+class Administrator implements UserInterface, Serializable, SingletonLoginInterface, TimelimitLoginInterface {
 
 	/**
 	 * @ORM\Column(name="id", type="integer")
@@ -40,6 +42,15 @@ class Administrator implements UserInterface, Serializable, SingletonLoginInterf
 	 * @ORM\Column(name="login_token", type="string", length=32)
 	 */
 	protected $loginToken;
+	
+	/**
+	 * @var DateTime 
+	 */
+	protected $lastActivity;
+	
+	public function __construct() {
+		$this->lastActivity = new DateTime();
+	}
 	
 	/**
 	 * @return int
@@ -77,6 +88,13 @@ class Administrator implements UserInterface, Serializable, SingletonLoginInterf
 	}
 	
 	/**
+	 * @return DateTime
+	 */
+	public function getLastActivity() {
+		return $this->lastActivity;
+	}
+
+	/**
 	 * @param string $username
 	 */
 	public function setUsername($username) {
@@ -105,6 +123,13 @@ class Administrator implements UserInterface, Serializable, SingletonLoginInterf
 	}
 	
 	/**
+	 * @param DateTime $lastActivity
+	 */
+	public function setLastActivity($lastActivity) {
+		$this->lastActivity = $lastActivity;
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function serialize() {
@@ -114,6 +139,7 @@ class Administrator implements UserInterface, Serializable, SingletonLoginInterf
 			$this->password,
 			$this->realname,
 			$this->loginToken,
+			time(),
 		));
 	}
 
@@ -127,7 +153,10 @@ class Administrator implements UserInterface, Serializable, SingletonLoginInterf
 			$this->password,
 			$this->realname,
 			$this->loginToken,
+			$timestamp
 		) = unserialize($serialized);
+		$this->lastActivity = new DateTime();
+		$this->lastActivity->setTimestamp($timestamp);
 	}
 
 	/**
