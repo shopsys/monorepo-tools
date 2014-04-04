@@ -42,8 +42,15 @@ doctrine:
 
   orm:
     auto_generate_proxy_classes: "%kernel.debug%"
-    auto_mapping: true
     naming_strategy: doctrine.orm.naming_strategy.underscore
+    auto_mapping: false
+    mappings:
+      SS6CoreBundle:
+        type: annotation
+        dir: %kernel.root_dir%/../src/SS6/CoreBundle/Model
+        alias: SS6CoreBundle
+        prefix: SS6\CoreBundle\Model
+        is_bundle: false
 
 # Swiftmailer Configuration
 swiftmailer:
