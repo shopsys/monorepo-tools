@@ -31,41 +31,39 @@ class Product {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="catnum", type="string", length=100)
+	 * @ORM\Column(name="catnum", type="string", length=100, nullable=true)
 	 */
 	private $catnum;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="partno", type="string", length=100)
+	 * @ORM\Column(name="partno", type="string", length=100, nullable=true)
 	 */
 	private $partno;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="ean", type="string", length=100)
+	 * @ORM\Column(name="ean", type="string", length=100, nullable=true)
 	 */
 	private $ean;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="description", type="text")
+	 * @ORM\Column(name="description", type="text", nullable=true)
 	 */
 	private $description;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="price", type="decimal")
+	 * @ORM\Column(name="price", type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $price;
 
 	/**
-	 * Get id
-	 *
 	 * @return integer 
 	 */
 	public function getId() {
@@ -73,126 +71,84 @@ class Product {
 	}
 
 	/**
-	 * Set name
-	 *
 	 * @param string $name
-	 * @return Product
 	 */
 	public function setName($name) {
 		$this->name = $name;
-
-		return $this;
 	}
 
 	/**
-	 * Get name
-	 *
-	 * @return string 
+	 * @return string|null
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * Set catnum
-	 *
-	 * @param string $catnum
-	 * @return Product
+	 * @param string|null $catnum
 	 */
 	public function setCatnum($catnum) {
 		$this->catnum = $catnum;
-
-		return $this;
 	}
 
 	/**
-	 * Get catnum
-	 *
-	 * @return string 
+	 * @return string|null
 	 */
 	public function getCatnum() {
 		return $this->catnum;
 	}
 
 	/**
-	 * Set partno
-	 *
-	 * @param string $partno
-	 * @return Product
+	 * @param string|null $partno
 	 */
 	public function setPartno($partno) {
 		$this->partno = $partno;
-
-		return $this;
 	}
 
 	/**
-	 * Get partno
-	 *
-	 * @return string 
+	 * @return string|null
 	 */
 	public function getPartno() {
 		return $this->partno;
 	}
 
 	/**
-	 * Set ean
-	 *
-	 * @param string $ean
-	 * @return Product
+	 * @param string|null $ean
 	 */
 	public function setEan($ean) {
 		$this->ean = $ean;
-
-		return $this;
 	}
 
 	/**
-	 * Get ean
-	 *
-	 * @return string 
+	 * @return string|null
 	 */
 	public function getEan() {
 		return $this->ean;
 	}
 
 	/**
-	 * Set description
-	 *
-	 * @param string $description
-	 * @return Product
+	 * @param string|null $description
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
-
-		return $this;
 	}
 
 	/**
-	 * Get description
-	 *
-	 * @return string 
+	 * @return string|null
 	 */
 	public function getDescription() {
 		return $this->description;
 	}
 
 	/**
-	 * Set price
-	 *
-	 * @param string $price
-	 * @return Product
+	 * @param string|null $price
 	 */
 	public function setPrice($price) {
 		$this->price = $price;
-
-		return $this;
 	}
 
 	/**
-	 * Get price
-	 *
-	 * @return string 
+	 * @return string|null
 	 */
 	public function getPrice() {
 		return $this->price;
