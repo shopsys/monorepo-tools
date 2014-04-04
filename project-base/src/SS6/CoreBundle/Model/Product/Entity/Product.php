@@ -68,14 +68,14 @@ class Product {
 	/**
 	 * @var DateTime
 	 * 
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $sellingFrom;
 	
 	/**
 	 * @var DateTime
 	 * 
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $sellingTo;
 	
@@ -193,7 +193,7 @@ class Product {
 	/**
 	 * @param DateTime|null $sellingFrom
 	 */
-	public function setSellingFrom(DateTime $sellingFrom) {
+	public function setSellingFrom($sellingFrom) {
 		$this->sellingFrom = $sellingFrom;
 	}
 	
@@ -207,7 +207,7 @@ class Product {
 	/**
 	 * @param DateTime|null $sellingTo
 	 */
-	public function setSellingTo(DateTime $sellingTo) {
+	public function setSellingTo($sellingTo) {
 		$this->sellingTo = $sellingTo;
 	}
 

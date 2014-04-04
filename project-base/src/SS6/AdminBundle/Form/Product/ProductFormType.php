@@ -15,15 +15,15 @@ class ProductFormType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('id', 'integer', array('read_only' => true))
+			->add('id', 'integer', array('disabled' => true))
 			->add('name', 'text')
 			->add('catnum', 'text', array('required' => false))
 			->add('partno', 'text', array('required' => false))
 			->add('ean', 'text', array('required' => false))
 			->add('description', 'textarea', array('required' => false))
 			->add('price', 'money', array('currency' => false, 'required' => false))
-			->add('sellingFrom', 'datetime', array('required' => false))
-			->add('sellingTo', 'datetime', array('required' => false))
+			->add('sellingFrom', 'date', array('required' => false))
+			->add('sellingTo', 'date', array('required' => false))
 			->add('stockQuantity', 'integer', array('required' => false))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('save', 'submit');
