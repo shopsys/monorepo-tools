@@ -3,14 +3,20 @@ body {
 	line-height: @line-height-base;
 	color: @color-base;
 	background: @bg-web url('images/bg.png') 0 90px repeat-x;
+	.backface-visibility(hidden);
 }
 
-.web-wrap {
-	width: @width-page;
-	margin: 0 auto;
+.web-wrap {	
 	background: @bg-page;
 	padding: 20px;
 	.box-sizing(border-box);
+}
+
+@media @query-4 {
+	.web-wrap {
+		width: @width-page;
+		margin: 0 auto;
+	}
 }
 
 .header {
@@ -18,7 +24,7 @@ body {
 	margin-bottom: 20px;
 	border-bottom: 1px solid @color-border;
 	position: relative;
-	.clearfix();
+	.cfx();
 }
 
 .footer {

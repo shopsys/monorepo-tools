@@ -1,10 +1,29 @@
-// colors
+
+/*******************************************************************
+// SIZES 
+*******************************************************************/
+
+@width-page:					1140px;
+
+
+/*******************************************************************
+// PATHS 
+*******************************************************************/
+@path-images:					'images/';
+@path-fonts:					'fonts/';
+
+/*******************************************************************
+// COLORS 
+*******************************************************************/
 
 @color-base:					#333;
 @color-primary:					#138ee4;
 
 @color-info:					#1fa322;
 @color-alert:					#d42244;
+
+@color-white:					#fff;
+@color-black:					#000;
 
 @gray-darker:            		lighten(#000, 13.5%); // #222
 @gray-dark:              		lighten(#000, 20%);   // #333
@@ -23,10 +42,35 @@
 @bg-web:						@gray-lighter;
 @bg-page:						#fff;
 @bg-box:						#fafafa;
+@bg-primary:					@color-primary;
 
 
+/*******************************************************************
+// RADIUS 
+*******************************************************************/
 
-// fonts
+@border-radius-base:        	4px;
+@border-radius-large:       	6px;
+@border-radius-small:       	3px;
+
+
+/*******************************************************************
+// BUTTONS 
+*******************************************************************/
+@button-bg:						@bg-primary;
+@button-height:					26px;
+@button-padding:				5px 15px;
+@button-color:					@color-white;
+@button-radius:					@border-radius-base;
+
+@button-bg-hover:				@color-base;
+@button-color-hover:			@color-white;
+
+
+/*******************************************************************
+// FONTS 
+*******************************************************************/
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,latin-ext);
 
@@ -37,16 +81,30 @@
 
 
 
-// radius
-@border-radius-base:        	4px;
-@border-radius-large:       	6px;
-@border-radius-small:       	3px;
 
 
-// widths heights
-@width-page:					1140px;
+/*******************************************************************
+// MEDIA QUERIES 
+*******************************************************************/
 
+@respons-1: 					480px;
+@respons-2: 					768px;
+@respons-3: 					982px;
+@respons-4: 					@width-page;
+
+
+@query-1: 						~"screen and (min-width: @{respons-1})";		// resp-point 1
+@query-2: 						~"screen and (min-width: @{respons-2})";		// resp-point 2
+@query-3: 						~"screen and (min-width: @{respons-3})";		// resp-point 3
+@query-4: 						~"screen and (min-width: @{respons-4})";		// resp-point 4
+
+
+/*******************************************************************
+// OTHER 
+*******************************************************************/
 
 // transition
 @transition: 					cubic-bezier(.61, .20, .48, 1.01);
 @transition-time: 				0.3s;
+
+

@@ -1,0 +1,20 @@
+input[type=submit], a.button, button {
+	display: inline-block;
+	.box-sizing(box-sizing);
+	
+	padding: @button-padding;
+	color: @button-color;
+	background: @button-bg;
+	.border-radius(@button-radius);
+	
+	text-decoration: none;
+	border: 0;
+	.set-transition();
+	.transition(~"background, color");
+	
+	&:hover {
+		color: @button-color-hover;
+		background: @button-bg-hover;
+		text-decoration: none;
+	}
+}
