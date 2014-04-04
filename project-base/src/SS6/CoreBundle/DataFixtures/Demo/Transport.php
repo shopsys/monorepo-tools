@@ -32,7 +32,7 @@ class Transport extends AbstractFixture implements OrderedFixtureInterface {
 		$transport->setName($name);
 		$transport->setPrice($price);
 		$transport->setDescription($description);
-		$transport->setHide($hide);
+		$transport->setHidden($hide);
 		$transport->setDeleted($deleted);
 		$manager->persist($transport);
 	}

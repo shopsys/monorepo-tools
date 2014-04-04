@@ -5,6 +5,7 @@ parameters:
   ss6.core.product.product_repository.class: SS6\CoreBundle\Model\Product\Repository\ProductRepository
   ss6.core.security.login_listener.class: SS6\CoreBundle\Model\Security\Listener\LoginListener
   ss6.core.security.login_service.class: SS6\CoreBundle\Model\Security\Service\LoginService
+  ss6.core.transport.transport_repository.class: SS6\CoreBundle\Model\Transport\Repository\TransportRepository
 
 services:
   ss6.core.administrator.administrator_repository:
@@ -33,3 +34,10 @@ services:
     
   ss6.core.security.login_service:
     class: %ss6.core.security.login_service.class%
+    
+  ss6.core.transport.transport_repository:
+    class: %ss6.core.transport.transport_repository.class%
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: ['SS6CoreBundle:Transport\entity\Transport']
+
