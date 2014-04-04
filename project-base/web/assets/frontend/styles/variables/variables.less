@@ -1,110 +1,97 @@
-
 /*******************************************************************
-// SIZES 
+// SIZES
 *******************************************************************/
-
-@width-page:					1140px;
+@width-page: 1140px;
 
 
 /*******************************************************************
-// PATHS 
+// PATHS
 *******************************************************************/
-@path-images:					'images/';
-@path-fonts:					'fonts/';
+@path-images: 'images/';
+@path-fonts: 'fonts/';
+
 
 /*******************************************************************
-// COLORS 
+// COLORS
 *******************************************************************/
+@color-base: #333;
+@color-primary: #138ee4;
 
-@color-base:					#333;
-@color-primary:					#138ee4;
+@color-info: #1fa322;
+@color-alert: #d42244;
 
-@color-info:					#1fa322;
-@color-alert:					#d42244;
+@color-white: #fff;
+@color-black: #000;
 
-@color-white:					#fff;
-@color-black:					#000;
+@gray-darker: lighten(#000, 13.5%);
+@gray-dark: lighten(#000, 20%);
+@gray: lighten(#000, 33.5%);
+@gray-light: lighten(#000, 60%);
+@gray-lighter: lighten(#000, 93.5%);
 
-@gray-darker:            		lighten(#000, 13.5%); // #222
-@gray-dark:              		lighten(#000, 20%);   // #333
-@gray:                   		lighten(#000, 33.5%); // #555
-@gray-light:             		lighten(#000, 60%);   // #999
-@gray-lighter:           		lighten(#000, 93.5%); // #eee
+@color-link: @color-primary;
+@color-link-hover: @color-base;
 
-@color-link:					@color-primary;
-@color-link-hover:				@color-base;
-
-@color-border:					@gray-lighter;
-
-
+@color-border: @gray-lighter;
 
 // backgrounds
-@bg-web:						@gray-lighter;
-@bg-page:						#fff;
-@bg-box:						#fafafa;
-@bg-primary:					@color-primary;
+@bg-web: @gray-lighter;
+@bg-page: #fff;
+@bg-box: #fafafa;
+@bg-primary: @color-primary;
 
 
 /*******************************************************************
-// RADIUS 
+// RADIUS
 *******************************************************************/
-
-@border-radius-base:        	4px;
-@border-radius-large:       	6px;
-@border-radius-small:       	3px;
+@border-radius-base: 4px;
+@border-radius-large: 6px;
+@border-radius-small: 3px;
 
 
 /*******************************************************************
-// BUTTONS 
+// BUTTONS
 *******************************************************************/
-@button-bg:						@bg-primary;
-@button-height:					26px;
-@button-padding:				5px 15px;
-@button-color:					@color-white;
-@button-radius:					@border-radius-base;
+@button-bg: @bg-primary;
+@button-height: 26px;
+@button-padding: 5px 15px;
+@button-color: @color-white;
+@button-radius: @border-radius-base;
 
-@button-bg-hover:				@color-base;
-@button-color-hover:			@color-white;
+@button-bg-hover: @color-base;
+@button-color-hover: @color-white;
 
 
 /*******************************************************************
-// FONTS 
+// FONTS
 *******************************************************************/
-
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,latin-ext);
 
-@font:							'Open Sans', Arial, Helvetica, sans-serif;
-@font-title:					'Roboto Condensed', Arial, Helvetica, sans-serif;
+@font: 'Open Sans', Arial, Helvetica, sans-serif;
+@font-title: 'Roboto Condensed', Arial, Helvetica, sans-serif;
 
-@font-size:						14px;
-
-
-
+@font-size: 14px;
 
 
 /*******************************************************************
-// MEDIA QUERIES 
+// MEDIA QUERIES
 *******************************************************************/
+@respons-1: 480px;
+@respons-2: 768px;
+@respons-3: 982px;
+@respons-4: @width-page;
 
-@respons-1: 					480px;
-@respons-2: 					768px;
-@respons-3: 					982px;
-@respons-4: 					@width-page;
-
-
-@query-1: 						~"screen and (min-width: @{respons-1})";		// resp-point 1
-@query-2: 						~"screen and (min-width: @{respons-2})";		// resp-point 2
-@query-3: 						~"screen and (min-width: @{respons-3})";		// resp-point 3
-@query-4: 						~"screen and (min-width: @{respons-4})";		// resp-point 4
+@query-1: ~"screen and (min-width: @{respons-1})";
+@query-2: ~"screen and (min-width: @{respons-2})";
+@query-3: ~"screen and (min-width: @{respons-3})";
+@query-4: ~"screen and (min-width: @{respons-4})";
 
 
 /*******************************************************************
-// OTHER 
+// OTHER
 *******************************************************************/
 
 // transition
-@transition: 					cubic-bezier(.61, .20, .48, 1.01);
-@transition-time: 				0.3s;
-
-
+@transition: cubic-bezier(.61, .20, .48, 1.01);
+@transition-time: 0.3s;
