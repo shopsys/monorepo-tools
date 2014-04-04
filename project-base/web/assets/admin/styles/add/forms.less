@@ -3,19 +3,15 @@
 // --------------------------------------------------
 
 .form-signin {
-	max-width: 330px;
-	padding: 15px;
+	max-width: 420px;
+	padding: 40px;
 	margin: 40px auto 0;
 	border: 1px solid @modal-content-border-color;
-	.border-top-radius(@border-radius-base);
-	.border-bottom-radius(@border-radius-base);
-	background: @gray-lighter;
+	.box-shadow(~"0 0 30px #dadada");
+	.border-top-radius(@border-radius-large);
+	.border-bottom-radius(@border-radius-large);
+	background: #fff;
 	text-align: center;
-	
-	.form-signin-heading {
-		font-size: @font-size-large;
-		text-transform: uppercase;
-	}
 	
 	input[type="text"] {
 		margin-bottom: -1px;
@@ -25,4 +21,11 @@
 		margin-bottom: 10px;
 		.border-top-radius(0);
 	}
+}
+
+.form-signin-heading {
+	font-size: 28px;
+	text-align: left;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
