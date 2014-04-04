@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\CoreBundle\Model\Transport\Entity;
+namespace SS6\CoreBundle\Model\Payment\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="transports")
- * @ORM\Entity(repositoryClass="SS6\CoreBundle\Model\Transport\Repository\TransportRepository")
+ * @ORM\Table(name="payments")
+ * @ORM\Entity(repositoryClass="SS6\CoreBundle\Model\Payment\Repository\PaymentRepository")
  */
-class Transport {
+class Payment {
 
 	/**
 	 * @var integer
