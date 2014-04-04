@@ -1,0 +1,37 @@
+<h2>Platby</h2>
+		
+{% if payments|length %}
+	<table class="table table-striped table-responsive">
+		<thead>
+			<tr>
+				<th>Název</th>
+				<th>Cena</th>
+				<th>Viditelné</th>
+				<th>Akce</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for payment in payments %}
+				<tr>
+					<td><a href="#">{{ payment.name }}</a></td>
+					<td>{{ payment.price }} Kč</td>
+					<td>
+						{% if payment.hidden %}
+							Skryté
+						{% else %}
+							Viditelné
+						{% endif %}
+					</td>
+					<td>
+						<a href="#">Upravit</a>
+						<a href="#">Smazat</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% else %}
+	<p>
+		Doposud nebyly vytvořeny žádné platby. Nejdříve nějakou <a href="#">vytvořte</a>.
+	</p>
+{% endif %}

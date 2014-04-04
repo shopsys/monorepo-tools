@@ -19,4 +19,14 @@ class TransportAndPaymentController extends Controller {
 			'transports' => $transports,
 		));
 	}
+	
+	public function paymentListAction() {
+		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
+		/* @var $paymentRepository \SS6\CoreBundle\Model\Payment\Repository\PaymentRepository */
+		$payments = $paymentRepository->getAllUndeleted();
+		
+		return $this->render('SS6AdminBundle:Content:TransportAndPayment/paymentList.html.twig', array(
+			'payments' => $payments,
+		));
+	}
 }
