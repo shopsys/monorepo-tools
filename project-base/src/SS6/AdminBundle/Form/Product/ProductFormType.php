@@ -14,10 +14,10 @@ class ProductFormType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array('label' => 'Název'))
-			->add('price', 'money', array('label' => 'Cena', 'currency' => false))
-			->add('description', 'textarea', array('label' => 'Popis', 'required' => false))
-			->add('save', 'submit', array('label' => 'Uložit'));
+			->add('name', 'text')
+			->add('price', 'money', array('currency' => false, 'required' => false))
+			->add('description', 'textarea', array('required' => false))
+			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
