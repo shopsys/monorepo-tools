@@ -245,5 +245,29 @@ class Product {
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
 	}
+	
+	public function isVisible($datetime = null) {
+		if ($datetime === null) {
+			$datetime = new DateTime();
+		}
+		
+		if ($this->isHidden()) {
+			return false;
+		}
+		
+		if ($this->getSellingFrom() instanceof DateTime) {
+			if ($this->getSellingFrom() > $datetime) {
+				return false;
+			}
+		}
+		
+		if ($this->getSellingTo() instanceof DateTime) {
+			if ($this->getSellingTo() < $datetime) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
 }

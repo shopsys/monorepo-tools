@@ -11,7 +11,7 @@ class ProductRepository {
 	private $entityManager;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
+	 * @param EntityManager $entityManager
 	 */
 	public function __construct(EntityManager $entityManager) {
 		$this->entityManager = $entityManager;
@@ -19,10 +19,26 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\CoreBundle\Model\Product\Entity\Product|null
+	 * @return Product|null
 	 */
 	public function findById($id) {
 		return $this->entityManager->find('SS6CoreBundle:Product\Entity\Product', $id);
+	}
+	
+	/**
+	 * @param int $id
+	 * @return Product|null
+	 */
+	public function findVisibleById($id) {
+		$product = $this->findById($id);
+		
+		if ($product instanceof Product) {
+			if (!$product->isVisible()) {
+				$product = null;
+			}
+		}
+		
+		return $product;
 	}
 	
 	/**
