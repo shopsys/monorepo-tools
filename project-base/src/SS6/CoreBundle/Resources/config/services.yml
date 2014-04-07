@@ -1,5 +1,7 @@
 parameters:
   ss6.core.administrator.administrator_repository.class: SS6\CoreBundle\Model\Administrator\Repository\AdministratorRepository
+  ss6.core.product.product_edit_facade.class: SS6\CoreBundle\Model\Product\Facade\ProductEditFacade
+  ss6.core.product.product_edit_service.class: SS6\CoreBundle\Model\Product\Service\ProductEditService
   ss6.core.product.product_repository.class: SS6\CoreBundle\Model\Product\Repository\ProductRepository
   ss6.core.security.login_listener.class: SS6\CoreBundle\Model\Security\Listener\LoginListener
   ss6.core.security.login_service.class: SS6\CoreBundle\Model\Security\Service\LoginService
@@ -10,6 +12,14 @@ services:
     factory_service: doctrine.orm.entity_manager
     factory_method: getRepository
     arguments: ["NDShopSys6Bundle:Identities\Identity"]
+
+  ss6.core.product.product_edit_facade:
+    class: %ss6.core.product.product_edit_facade.class%
+    arguments: ["@doctrine.orm.entity_manager", "@ss6.core.product.product_repository", "@ss6.core.product.product_edit_service"]
+    
+  ss6.core.product.product_edit_service:
+    class: %ss6.core.product.product_edit_service.class%
+    arguments: ["@validator"]
   
   ss6.core.product.product_repository:
     class: %ss6.core.product.product_repository.class%

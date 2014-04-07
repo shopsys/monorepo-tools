@@ -1,0 +1,51 @@
+{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+
+{% block title %}Detail zboží{% endblock %}
+{% block h1 %}Detail zboží{% endblock %}
+
+{% block panel %}
+	<div class="list-group">
+		<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+		<a href="#" class="list-group-item">Morbi leo risus</a>
+		<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+		<a href="#" class="list-group-item">Vestibulum at eros</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+
+		<div class="col-xs-8">
+			
+			{{ form_start(form, { attr: { role: 'form'}}) }}
+				{{ form_errors(form) }}
+
+				<div class="form-group">
+					{{ form_label(form.name, 'Název:') }}
+					{{ form_errors(form.name) }}
+					{{ form_widget(form.name, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.price, 'Cena:') }}
+					{{ form_errors(form.price) }}
+					{{ form_widget(form.price, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.description, 'Popis:') }}
+					{{ form_errors(form.description) }}
+					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_widget(form.save, { label: 'Uložit', attr: {class: 'btn btn-primary'}}) }}
+				</div>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+
+
+		
+{% endblock %}
