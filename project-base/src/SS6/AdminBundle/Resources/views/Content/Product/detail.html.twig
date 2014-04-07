@@ -26,6 +26,8 @@
 					{{ form_widget(form.id, { attr: {class: 'form-control'}}) }}
 				</div>
 				
+				{% block product_url %}{% endblock %}
+				
 				<div class="form-group">
 					{{ form_label(form.name, 'Název:') }}
 					{{ form_errors(form.name) }}
