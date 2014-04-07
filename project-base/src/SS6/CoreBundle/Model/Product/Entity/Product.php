@@ -95,6 +95,10 @@ class Product {
 	 */
 	private $hidden;
 	
+	public function __construct() {
+		$this->hidden = false;
+	}
+	
 	/**
 	 * @return integer 
 	 */
