@@ -2,6 +2,7 @@
 
 namespace SS6\AdminBundle\Form\Product;
 
+use SS6\CoreBundle\Form\YesNoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,9 +15,17 @@ class ProductFormType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
+			->add('id', 'integer', array('read_only' => true))
 			->add('name', 'text')
-			->add('price', 'money', array('currency' => false, 'required' => false))
+			->add('catnum', 'text', array('required' => false))
+			->add('partno', 'text', array('required' => false))
+			->add('ean', 'text', array('required' => false))
 			->add('description', 'textarea', array('required' => false))
+			->add('price', 'money', array('currency' => false, 'required' => false))
+			->add('sellingFrom', 'datetime', array('required' => false))
+			->add('sellingTo', 'datetime', array('required' => false))
+			->add('stockQuantity', 'integer', array('required' => false))
+			->add('hidden', new YesNoType(), array('required' => false))
 			->add('save', 'submit');
 	}
 

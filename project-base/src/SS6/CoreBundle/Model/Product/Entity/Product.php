@@ -2,7 +2,9 @@
 
 namespace SS6\CoreBundle\Model\Product\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -24,45 +26,75 @@ class Product {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="name", type="text")
+	 * @ORM\Column(type="text")
 	 */
 	private $name;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="catnum", type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $catnum;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="partno", type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $partno;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="ean", type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $ean;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="description", type="text", nullable=true)
+	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="price", type="decimal", precision=20, scale=6, nullable=true)
+	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $price;
-
+	
+	/**
+	 * @var DateTime
+	 * 
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $sellingFrom;
+	
+	/**
+	 * @var DateTime
+	 * 
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $sellingTo;
+	
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 * @Assert\Type(type="integer")
+	 * @Assert\GreaterThanOrEqual(value=0)
+	 */
+	private $stockQuantity;
+	
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $hidden;
+	
 	/**
 	 * @return integer 
 	 */
@@ -152,6 +184,62 @@ class Product {
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @param DateTime|null $sellingFrom
+	 */
+	public function setSellingFrom(DateTime $sellingFrom) {
+		$this->sellingFrom = $sellingFrom;
+	}
+	
+	/**
+	 * @return DateTime|null
+	 */
+	public function getSellingFrom() {
+		return $this->sellingFrom;
+	}
+	
+	/**
+	 * @param DateTime|null $sellingTo
+	 */
+	public function setSellingTo(DateTime $sellingTo) {
+		$this->sellingTo = $sellingTo;
+	}
+
+	/**
+	 * @return DateTime|null
+	 */
+	public function getSellingTo() {
+		return $this->sellingTo;
+	}
+	
+	/**
+	 * @param int|null $stockQuantity
+	 */
+	public function setStockQuantity($stockQuantity) {
+		$this->stockQuantity = $stockQuantity;
+	}
+	
+	/**
+	 * @return int|null
+	 */
+	public function getStockQuantity() {
+		return $this->stockQuantity;
+	}
+	
+	/**
+	 * @return boolean
+	 */
+	public function isHidden() {
+		return $this->hidden;
+	}
+
+	/**
+	 * @param boolean $hidden
+	 */
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
 	}
 
 }

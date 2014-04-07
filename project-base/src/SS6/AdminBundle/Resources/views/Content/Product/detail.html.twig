@@ -21,9 +21,39 @@
 				{{ form_errors(form) }}
 
 				<div class="form-group">
+					{{ form_label(form.id, 'ID:') }}
+					{{ form_errors(form.id) }}
+					{{ form_widget(form.id, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
 					{{ form_label(form.name, 'Název:') }}
 					{{ form_errors(form.name) }}
 					{{ form_widget(form.name, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.catnum, 'Katalogové číslo:') }}
+					{{ form_errors(form.catnum) }}
+					{{ form_widget(form.catnum, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.partno, 'PartNo (výrobní číslo):') }}
+					{{ form_errors(form.partno) }}
+					{{ form_widget(form.partno, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.ean, 'EAN:') }}
+					{{ form_errors(form.ean) }}
+					{{ form_widget(form.ean, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.description, 'Popis:') }}
+					{{ form_errors(form.description) }}
+					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
 				</div>
 
 				<div class="form-group">
@@ -31,11 +61,29 @@
 					{{ form_errors(form.price) }}
 					{{ form_widget(form.price, { attr: {class: 'form-control'}}) }}
 				</div>
-
+				
 				<div class="form-group">
-					{{ form_label(form.description, 'Popis:') }}
-					{{ form_errors(form.description) }}
-					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
+					{{ form_label(form.sellingFrom, 'Datum vložení:') }}
+					{{ form_errors(form.sellingFrom) }}
+					{{ form_widget(form.sellingFrom, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.sellingTo, 'Datum stažení:') }}
+					{{ form_errors(form.sellingTo) }}
+					{{ form_widget(form.sellingTo, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.stockQuantity, 'Skladem:') }}
+					{{ form_errors(form.stockQuantity) }}
+					{{ form_widget(form.stockQuantity, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.hidden, 'Skryté:') }}
+					{{ form_errors(form.hidden) }}
+					{{ form_widget(form.hidden, { attr: {class: 'form-control'}}) }}
 				</div>
 
 				<div class="form-group">
