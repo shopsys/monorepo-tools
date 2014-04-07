@@ -2,7 +2,7 @@
 
 namespace SS6\CoreBundle\Model\Security;
 
-interface SingletonLoginInterface {
+interface UniqueLoginInterface {
 	
 	/**
 	 * @return string

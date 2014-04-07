@@ -7,7 +7,7 @@ use SS6\CoreBundle\Model\Security\Listener\LoginListener;
 
 class LoginListenerTest extends PHPUnit_Framework_TestCase {
 	
-	public function testOnSecurityInteractiveLoginSingleton() {
+	public function testOnSecurityInteractiveLoginUnique() {
 		$emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
 			->setMethods(array('__construct', 'persist', 'flush'))
 			->disableOriginalConstructor()
@@ -15,7 +15,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 		$emMock->expects($this->atLeastOnce())->method('persist');
 		$emMock->expects($this->once())->method('flush');
 		
-		$userMock = $this->getMock('SS6\CoreBundle\Model\Security\SingletonLoginInterface');
+		$userMock = $this->getMock('SS6\CoreBundle\Model\Security\UniqueLoginInterface');
 		$userMock->expects($this->once())->method('setLoginToken');
 		
 		$tokenMock = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');

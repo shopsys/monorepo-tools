@@ -4,7 +4,7 @@ namespace SS6\CoreBundle\Model\Security\Listener;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
-use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
+use SS6\CoreBundle\Model\Security\UniqueLoginInterface;
 use SS6\CoreBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
@@ -33,7 +33,7 @@ class LoginListener {
 			$user->setLastActivity(new DateTime());
 		}
 		
-		if ($user instanceof SingletonLoginInterface) {
+		if ($user instanceof UniqueLoginInterface) {
 			$user->setLoginToken(uniqid());
 			$this->em->persist($user);
 			$this->em->flush();

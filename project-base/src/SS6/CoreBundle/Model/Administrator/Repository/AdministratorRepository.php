@@ -5,7 +5,7 @@ namespace SS6\CoreBundle\Model\Administrator\Repository;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use SS6\CoreBundle\Model\Administrator\Entity\Administrator;
-use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
+use SS6\CoreBundle\Model\Security\UniqueLoginInterface;
 use SS6\CoreBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -53,7 +53,7 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 		$findParams = array(
 			'id' => $administrator->getId(),
 		);
-		if ($administrator instanceof SingletonLoginInterface) {
+		if ($administrator instanceof UniqueLoginInterface) {
 			$findParams['loginToken'] = $administrator->getLoginToken();
 		}
 		$freshAdministrator = $this->findOneBy($findParams);

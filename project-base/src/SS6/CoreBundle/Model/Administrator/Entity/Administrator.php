@@ -5,7 +5,7 @@ namespace SS6\CoreBundle\Model\Administrator\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use SS6\CoreBundle\Model\Security\SingletonLoginInterface;
+use SS6\CoreBundle\Model\Security\UniqueLoginInterface;
 use SS6\CoreBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="administrators")
  * @ORM\Entity(repositoryClass="SS6\CoreBundle\Model\Administrator\Repository\AdministratorRepository")
  */
-class Administrator implements UserInterface, Serializable, SingletonLoginInterface, TimelimitLoginInterface {
+class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 
 	/**
 	 * @ORM\Column(name="id", type="integer")
