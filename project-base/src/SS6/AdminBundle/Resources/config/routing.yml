@@ -1,3 +1,13 @@
 admin_homepage:
-    pattern:  /
-    defaults: { _controller: SS6AdminBundle:Default:index }
+  pattern:  /dashboard/
+  defaults: { _controller: SS6AdminBundle:Default:index }
+    
+admin_login:
+  pattern:  /
+  defaults: { _controller: SS6AdminBundle:Login:login }
+  
+admin_login_check:
+  pattern: /login_check/
+    
+admin_logout:
+  pattern:  /logout/

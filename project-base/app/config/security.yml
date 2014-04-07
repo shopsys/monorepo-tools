@@ -10,13 +10,7 @@ security:
   providers:
     administrators:
       entity: 
-        class: NDShopSys6Bundle:Administrators\Administrator
-        property: username
-                
-    customers:
-      entity: 
-        class: NDShopSys6Bundle:Identities\Identity
-        property: email
+        class: SS6CoreBundle:Administrator\Entity\Administrator
 
   firewalls:
     administration:
@@ -26,7 +20,7 @@ security:
       form_login:
         check_path: admin_login_check
         login_path: admin_login
-        default_target_path: admin_index
+        default_target_path: admin_homepage
         use_referer: true
         username_parameter: "admin_login[username]"
         password_parameter: "admin_login[password]"
@@ -34,27 +28,6 @@ security:
       logout:
         path: admin_logout
         target: admin_login
-        
-    frontend:
-      pattern: ^/
-      anonymous: ~
-      provider: customers
-      form_login:
-        check_path: login_check
-        login_path: login
-        default_target_path: nd_shop_sys6_homepage
-        username_parameter: "login[email]"
-        password_parameter: "login[password]"
-        csrf_parameter: "login[_token]"
-      logout:
-        path: logout
-        target: nd_shop_sys6_homepage
-      remember_me:
-        key: "%secret%"
-        lifetime: 2592000 # 30 days in seconds
-        path: /
-        domain: ~
-        remember_me_parameter: "login[remember_me]"
 
   access_control:
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
