@@ -54,9 +54,31 @@ class Payment {
 	 */
 	private $deleted;
 	
-	public function __construct() {
-		$this->hidden = false;
+	/**
+	 * @param string $name
+	 * @param string $price
+	 * @param string|boolean $description
+	 * @param boolean $hidden
+	 */
+	public function __construct($name, $price, $description = null, $hidden = false) {
+		$this->name = $name;
+		$this->price = $price;
+		$this->description = $description;
+		$this->hidden = $hidden;
 		$this->deleted = false;
+	}
+	
+	/**
+	 * @param string $name
+	 * @param string $price
+	 * @param string|boolean $description
+	 * @param boolean $hidden
+	 */
+	public function setEdit($name, $price, $description, $hidden) {
+		$this->name = $name;
+		$this->price = $price;
+		$this->description = $description;
+		$this->hidden = $hidden;
 	}
 
 	/**
@@ -67,25 +89,12 @@ class Payment {
 	}
 
 	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
 	 * @return string 
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
-	/**
-	 * @param string $price
-	 */
-	public function setPrice($price) {
-		$this->price = $price;
-	}
 
 	/**
 	 * @return string 
@@ -95,24 +104,10 @@ class Payment {
 	}
 
 	/**
-	 * @param string|null $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
-
-	/**
 	 * @return string|null 
 	 */
 	public function getDescription() {
 		return $this->description;
-	}
-
-	/**
-	 * @param boolean $hide
-	 */
-	public function setHidden($hide) {
-		$this->hidden = $hide;
 	}
 
 	/**
@@ -132,7 +127,7 @@ class Payment {
 	/**
 	 * @param boolean $deleted
 	 */
-	public function setDeleted($deleted) {
-		$this->deleted = $deleted;
+	public function markAsDeleted() {
+		$this->deleted = true;
 	}
 }

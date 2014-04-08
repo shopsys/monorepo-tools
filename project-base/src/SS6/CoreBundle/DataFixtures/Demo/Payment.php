@@ -27,13 +27,8 @@ class Payment extends AbstractFixture implements OrderedFixtureInterface {
 	 * @param boolean $hide
 	 * @param boolean $deleted
 	 */
-	private function createPayment(ObjectManager $manager, $name, $price, $description, $hide = false, $deleted = false) {
-		$payment = new PaymentEntity();
-		$payment->setName($name);
-		$payment->setPrice($price);
-		$payment->setDescription($description);
-		$payment->setHidden($hide);
-		$payment->setDeleted($deleted);
+	private function createPayment(ObjectManager $manager, $name, $price, $description, $hide = false) {
+		$payment = new PaymentEntity($name, $price, $description, $hide);
 		$manager->persist($payment);
 	}
 
