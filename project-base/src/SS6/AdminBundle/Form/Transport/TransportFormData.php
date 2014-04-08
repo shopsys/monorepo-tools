@@ -27,7 +27,7 @@ class TransportFormData {
 	/**
 	 * @var integer
 	 */
-	private $hidden;
+	private $hidden = false;
 	
 	/**
 	 * @return int
@@ -55,6 +55,13 @@ class TransportFormData {
 	 */
 	public function getDescription() {
 		return $this->description;
+	}
+	
+	/**
+	 * @param int $id
+	 */
+	public function setId($id) {
+		$this->id = $id;
 	}
 
 	/**

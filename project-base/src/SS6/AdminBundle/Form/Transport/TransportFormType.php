@@ -18,7 +18,7 @@ class TransportFormType extends AbstractType {
 			->add('id', 'integer', array('read_only' => true))
 			->add('name', 'text')
 			->add('hidden', new YesNoType(), array('required' => false))
-			->add('price', 'money', array('currency' => false, 'required' => false))
+			->add('price', 'money', array('currency' => false, 'required' => true))
 			->add('description', 'textarea', array('required' => false))
 			->add('save', 'submit');
 	}

@@ -15,7 +15,7 @@
 		<tbody>
 			{% for transport in transports %}
 				<tr>
-					<td><a href="#">{{ transport.name }}</a></td>
+					<td><a href="{{ url('admin_transport_edit', {id: transport.id}) }}">{{ transport.name }}</a></td>
 					<td>{{ transport.price }} Kč</td>
 					<td>
 						{% if transport.hidden %}
@@ -25,7 +25,7 @@
 						{% endif %}
 					</td>
 					<td>
-						<a href="#">Upravit</a>
+						<a href="{{ url('admin_transport_edit', {id: transport.id}) }}">Upravit</a>
 						<a href="#">Smazat</a>
 					</td>
 				</tr>
