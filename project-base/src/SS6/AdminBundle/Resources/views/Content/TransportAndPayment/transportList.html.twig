@@ -1,6 +1,8 @@
 <h2>Dopravy</h2>
 		
 {% if transports|length %}
+	<a href="{{ url('admin_transport_new') }}">Vytvořit dopravu</a>
+	
 	<table class="table table-striped table-responsive">
 		<thead>
 			<tr>
@@ -32,6 +34,6 @@
 	</table>
 {% else %}
 	<p>
-		Doposud nebyly vytvořeny žádné dopravy. Nejdříve nějakou <a href="#">vytvořte</a>.
+		Doposud nebyly vytvořeny žádné dopravy. Nejdříve nějakou <a href="{{ url('admin_transport_new') }}">vytvořte</a>.
 	</p>
 {% endif %}

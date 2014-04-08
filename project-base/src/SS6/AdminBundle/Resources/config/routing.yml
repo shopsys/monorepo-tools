@@ -35,3 +35,7 @@ admin_product_new:
 admin_transport_and_payment_list:
   pattern:  /transport_and_payment/list/
   defaults: { _controller: SS6AdminBundle:TransportAndPayment:index }
+  
+admin_transport_new:
+  pattern:  /transport/new/
+  defaults: { _controller: SS6AdminBundle:Transport:new }
