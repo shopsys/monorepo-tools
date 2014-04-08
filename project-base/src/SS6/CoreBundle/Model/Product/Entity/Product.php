@@ -246,10 +246,8 @@ class Product {
 		$this->hidden = $hidden;
 	}
 	
-	public function isVisible($datetime = null) {
-		if ($datetime === null) {
-			$datetime = new DateTime();
-		}
+	public function isVisible() {
+		$datetime = new DateTime();
 		
 		if ($this->isHidden()) {
 			return false;
