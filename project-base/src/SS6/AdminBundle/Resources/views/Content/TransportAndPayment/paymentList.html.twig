@@ -13,7 +13,7 @@
 		<tbody>
 			{% for payment in payments %}
 				<tr>
-					<td><a href="#">{{ payment.name }}</a></td>
+					<td><a href="{{ url('admin_payment_edit', {id: payment.id}) }}">{{ payment.name }}</a></td>
 					<td>{{ payment.price }} Kč</td>
 					<td>
 						{% if payment.hidden %}
@@ -23,8 +23,8 @@
 						{% endif %}
 					</td>
 					<td>
-						<a href="#">Upravit</a>
-						<a href="#">Smazat</a>
+						<a href="{{ url('admin_payment_edit', {id: payment.id}) }}">Upravit</a>
+						<a href="{{ url('admin_payment_delete', {id: payment.id}) }}">Smazat</a>
 					</td>
 				</tr>
 			{% endfor %}
@@ -32,6 +32,6 @@
 	</table>
 {% else %}
 	<p>
-		Doposud nebyly vytvořeny žádné platby. Nejdříve nějakou <a href="#">vytvořte</a>.
+		Doposud nebyly vytvořeny žádné platby. Nejdříve nějakou <a href="{{ url('admin_payment_new') }}">vytvořte</a>.
 	</p>
 {% endif %}

@@ -5,6 +5,7 @@ parameters:
   ss6.core.product.product_repository.class: SS6\CoreBundle\Model\Product\Repository\ProductRepository
   ss6.core.security.login_listener.class: SS6\CoreBundle\Model\Security\Listener\LoginListener
   ss6.core.security.login_service.class: SS6\CoreBundle\Model\Security\Service\LoginService
+  ss6.core.payment.payment_edit_facade.class: SS6\CoreBundle\Model\Payment\Facade\PaymentEditFacade
   ss6.core.payment.payment_repository.class: SS6\CoreBundle\Model\Payment\Repository\PaymentRepository
   ss6.core.transport.transport_edit_facade.class: SS6\CoreBundle\Model\Transport\Facade\TransportEditFacade
   ss6.core.transport.transport_repository.class: SS6\CoreBundle\Model\Transport\Repository\TransportRepository
@@ -36,6 +37,10 @@ services:
     
   ss6.core.security.login_service:
     class: %ss6.core.security.login_service.class%
+    
+  ss6.core.payment.payment_edit_facade:
+    class: %ss6.core.payment.payment_edit_facade.class%
+    arguments: ['@doctrine.orm.entity_manager', '@ss6.core.payment.payment_repository']
     
   ss6.core.payment.payment_repository:
     class: %ss6.core.payment.payment_repository.class%

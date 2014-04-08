@@ -29,7 +29,7 @@ class PaymentRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\CoreBundle\Model\Payment\Entity\Transport
-	 * @throws TransportNotFoundException
+	 * @throws PaymentNotFoundException
 	 */
 	public function getById($id) {
 		$criteria = array('id' => $id);
