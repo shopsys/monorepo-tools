@@ -27,13 +27,8 @@ class Transport extends AbstractFixture implements OrderedFixtureInterface {
 	 * @param boolean $hide
 	 * @param boolean $deleted
 	 */
-	private function createTransport(ObjectManager $manager, $name, $price, $description, $hide = false, $deleted = false) {
-		$transport = new TransportEntity();
-		$transport->setName($name);
-		$transport->setPrice($price);
-		$transport->setDescription($description);
-		$transport->setHidden($hide);
-		$transport->setDeleted($deleted);
+	private function createTransport(ObjectManager $manager, $name, $price, $description, $hide = false) {
+		$transport = new TransportEntity($name, $price, $description, $hide);
 		$manager->persist($transport);
 	}
 
