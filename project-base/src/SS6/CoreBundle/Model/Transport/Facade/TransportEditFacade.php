@@ -49,4 +49,13 @@ class TransportEditFacade {
 	public function getById($id) {
 		return $this->transportRepository->getById($id);
 	}
+	
+	/**
+	 * @param int $id
+	 */
+	public function deleteById($id) {
+		$transport = $this->getById($id);
+		$transport->markAsDeleted();
+		$this->em->flush();
+	}
 }

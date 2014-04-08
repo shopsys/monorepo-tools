@@ -45,3 +45,9 @@ admin_transport_edit:
   defaults: { _controller: SS6AdminBundle:Transport:edit }
   requirements:
     id: \d+
+    
+admin_transport_delete:
+  pattern:  /transport/delete/{id}
+  defaults: { _controller: SS6AdminBundle:Transport:delete }
+  requirements:
+    id: \d+

@@ -77,5 +77,20 @@ class TransportController extends Controller {
 			'transport' => $transport,
 		));
 	}
+	
+	/**
+	 * @param int $id
+	 */
+	public function deleteAction($id) {
+		$transportEditFacade = $this->get('ss6.core.transport.transport_edit_facade');
+		/* @var $transportEditFacade TransportEditFacade */
+		
+		try {
+			$transportEditFacade->deleteById($id);
+			return $this->redirect($this->generateUrl('admin_transport_and_payment_list'));
+		} catch (TransportNotFoundException $e) {
+			throw $this->createNotFoundException($e->getMessage(), $e);
+		}
+	}
 
 }
