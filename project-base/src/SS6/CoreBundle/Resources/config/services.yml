@@ -39,17 +39,13 @@ services:
     
   ss6.core.payment.payment_repository:
     class: %ss6.core.payment.payment_repository.class%
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: ['SS6CoreBundle:Payment\Entity\Payment']
+    arguments: ['@doctrine.orm.entity_manager']
 
   ss6.core.transport.transport_edit_facade:
     class: %ss6.core.transport.transport_edit_facade.class%
-    arguments: ['@doctrine.orm.entity_manager']
+    arguments: ['@doctrine.orm.entity_manager', '@ss6.core.transport.transport_repository']
 
   ss6.core.transport.transport_repository:
     class: %ss6.core.transport.transport_repository.class%
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: ['SS6CoreBundle:Transport\entity\Transport']
+    arguments: ['@doctrine.orm.entity_manager']
 

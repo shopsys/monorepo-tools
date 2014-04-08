@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="transports")
- * @ORM\Entity(repositoryClass="SS6\CoreBundle\Model\Transport\Repository\TransportRepository")
+ * @ORM\Entity
  */
 class Transport {
 
