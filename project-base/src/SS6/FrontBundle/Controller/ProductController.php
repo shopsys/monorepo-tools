@@ -11,7 +11,7 @@ class ProductController extends Controller {
 		$productRepository = $this->get('ss6.core.product.product_repository');
 		/* @var $productRepository ProductRepository */
 			
-		$product = $productRepository->findById($id);
+		$product = $productRepository->findVisibleById($id);
 		if (!$product) {
 			throw new NotFoundHttpException('Product not found');
 		}

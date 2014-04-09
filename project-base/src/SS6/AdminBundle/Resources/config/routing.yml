@@ -11,3 +11,13 @@ admin_login_check:
     
 admin_logout:
   pattern:  /logout/
+
+admin_product_edit:
+  pattern: /product/edit/{id}
+  defaults: { _controller: SS6AdminBundle:Product:edit }
+  requirements:
+    id: \d+
+
+admin_product_new:
+  pattern: /product/new/
+  defaults: { _controller: SS6AdminBundle:Product:new }
