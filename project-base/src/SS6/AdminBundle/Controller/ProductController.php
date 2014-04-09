@@ -26,7 +26,7 @@ class ProductController extends Controller {
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $id)));
 			}
 		} catch (ProductNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage());
+			throw $this->createNotFoundException($e->getMessage(), $e);
 		} catch (ValidationException $e) {
 			$this->get('session')->getFlashBag()->add(
 				'error', $e->getMessage()
@@ -55,7 +55,7 @@ class ProductController extends Controller {
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $form->getData()->getId())));
 			}
 		} catch (ProductNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage());
+			throw $this->createNotFoundException($e->getMessage(), $e);
 		} catch (ValidationException $e) {
 			$this->get('session')->getFlashBag()->add(
 				'error', $e->getMessage()
