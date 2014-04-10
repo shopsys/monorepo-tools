@@ -82,4 +82,13 @@ class ProductEditFacade {
 
 		return true;
 	}
+	
+	/**
+	 * @param int $productId
+	 */
+	public function delete($productId) {
+		$product = $this->productRepository->getById($productId);
+		$this->em->remove($product);
+		$this->em->flush();
+	}
 }

@@ -1,0 +1,10 @@
+{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+
+{% block title %}- Seznam zboží{% endblock %}
+{% block h1 %}Seznam zboží{% endblock %}
+
+{% block content %}
+	<link rel="stylesheet" href="{{ asset('http://localhost:8080/shopsys6/web/assets/admin/styles/grid.css') }}" />
+	
+	{{ grid(grid, 'SS6AdminBundle:Content/Product:listGrid.html.twig') }}
+{% endblock %}
