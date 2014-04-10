@@ -77,7 +77,15 @@ class ProductController extends Controller {
 		/* @var $grid Grid */
 		$grid->setSource($source);
 		
-		$grid->setVisibleColumns(array('name', 'price'));
+		$grid->getColumns()->addColumn(new \APY\DataGridBundle\Grid\Column\BooleanColumn(array(
+			'id' => 'visible',
+			'filterable' => false,
+			'sortable' => false,
+		)));
+		
+		$grid->setVisibleColumns(array('visible', 'name', 'price'));
+		$grid->setColumnsOrder(array('visible', 'name', 'price'));
+		$grid->getColumns()->getColumnById('visible')->setTitle('Viditelné');
 		$grid->getColumns()->getColumnById('name')->setTitle('Název');
 		$grid->getColumns()->getColumnById('price')->setTitle('Cena');
 		
@@ -94,6 +102,14 @@ class ProductController extends Controller {
 		$deleteRowAction->setConfirmMessage('Opravdu si přejete zboží smazat?');
 		$deleteRowAction->setRouteParameters(array('id'));
 		$grid->addRowAction($deleteRowAction);
+		
+		$repository = $this->getDoctrine()->getRepository('SS6CoreBundle:Product\Entity\Product');
+		$source->manipulateRow(function (\APY\DataGridBundle\Grid\Row $row) use ($repository) {
+			$product = $repository->find($row->getField('id'));
+			$row->setField('visible', $product->isVisible());
+			
+			return $row;
+		});
 		
 		return $grid->getGridResponse('SS6AdminBundle:Content/Product:list.html.twig');
 	}
