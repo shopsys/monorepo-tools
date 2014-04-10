@@ -2,6 +2,7 @@
 
 namespace SS6\CoreBundle\Model\Transport\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\CoreBundle\Model\Payment\Entity\Payment;
