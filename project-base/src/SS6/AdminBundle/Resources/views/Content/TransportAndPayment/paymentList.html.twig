@@ -1,6 +1,8 @@
 <h2>Platby</h2>
 		
 {% if payments|length %}
+	<a href="{{ url('admin_payment_new') }}">Vytvořit platbu</a>
+	
 	<table class="table table-striped table-responsive">
 		<thead>
 			<tr>
@@ -24,7 +26,7 @@
 					</td>
 					<td>
 						<a href="{{ url('admin_payment_edit', {id: payment.id}) }}">Upravit</a>
-						<a href="{{ url('admin_payment_delete', {id: payment.id}) }}">Smazat</a>
+						<a href="{{ url('admin_payment_delete', {id: payment.id}) }}" onclick="return confirm('Opravdu chcete tuto platbu smazat?')">Smazat</a>
 					</td>
 				</tr>
 			{% endfor %}

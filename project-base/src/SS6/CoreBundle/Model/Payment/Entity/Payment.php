@@ -45,9 +45,9 @@ class Payment {
 	/**
 	 * @var Collection
 	 * 
-	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport", inversedBy="transports")
+	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport", inversedBy="payments")
 	 * @ORM\JoinTable(name="payments_transports")
-	 * */
+	 */
 	private $transports;
 
 	/**

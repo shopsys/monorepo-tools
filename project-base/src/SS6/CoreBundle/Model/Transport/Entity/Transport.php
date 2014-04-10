@@ -45,7 +45,7 @@ class Transport {
 	/**
 	 * @var Collection
 	 * 
-	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Payment\Entity\Payment", mappedBy="payments")
+	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Payment\Entity\Payment", mappedBy="transports")
 	 **/
 	private $payments;
 
@@ -66,7 +66,7 @@ class Transport {
 	/**
 	 * @param string $name
 	 * @param string $price
-	 * @param string|boolean $description
+	 * @param string $description
 	 * @param boolean $hidden
 	 */
 	public function __construct($name, $price, $description = null, $hidden = false) {
