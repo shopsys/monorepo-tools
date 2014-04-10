@@ -157,5 +157,28 @@ class Payment {
 	 */
 	public function markAsDeleted() {
 		$this->deleted = true;
+		$this->transports->clear();
+	}
+	
+	/**
+	 * @param boolean $withoutRelations
+	 * @return boolean
+	 */
+	public function isVisible($withoutRelations = false) {
+		if ($this->isHidden() || $this->getTransports()->isEmpty()) {
+			return false;
+		}
+		
+		if ($withoutRelations) {
+			return true;
+		} else {
+			foreach ($this->getTransports() as $transport) {
+				/* @var $transport Transport */
+				if ($transport->isVisible(true)) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

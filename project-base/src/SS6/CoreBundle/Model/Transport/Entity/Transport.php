@@ -155,5 +155,28 @@ class Transport {
 	 */
 	public function markAsDeleted() {
 		$this->deleted = true;
+		$this->payments->clear();
+	}
+	
+	/**
+	 * @param boolean $withoutRelations
+	 * @return boolean
+	 */
+	public function isVisible($withoutRelations = false) {
+		if ($this->isHidden() || $this->getPayments()->isEmpty()) {
+			return false;
+		}
+		
+		if ($withoutRelations) {
+			return true;
+		} else {
+			foreach ($this->getPayments() as $payment) {
+				/* @var $payment Payment */
+				if ($payment->isVisible(true)) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

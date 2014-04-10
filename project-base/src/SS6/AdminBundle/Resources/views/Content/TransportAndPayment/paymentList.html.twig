@@ -18,10 +18,10 @@
 					<td><a href="{{ url('admin_payment_edit', {id: payment.id}) }}">{{ payment.name }}</a></td>
 					<td>{{ payment.price }} Kč</td>
 					<td>
-						{% if payment.hidden %}
-							Skryté
-						{% else %}
+						{% if payment.visible %}
 							Viditelné
+						{% else %}
+							Skryté
 						{% endif %}
 					</td>
 					<td>
