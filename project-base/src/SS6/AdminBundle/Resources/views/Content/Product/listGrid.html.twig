@@ -1,0 +1,9 @@
+{% extends 'APYDataGridBundle::blocks.html.twig' %}
+
+{% block grid_column_name_cell %}
+	<a href="{{ url('admin_product_edit', { id: row.field('id') }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_no_data %}
+	Nebylo nalezeno žádné zboží. Nejdřív musíte nějaké vytvořit.
+{% endblock %}

@@ -12,11 +12,21 @@ admin_login_check:
 admin_logout:
   pattern:  /logout/
 
+admin_product_delete:
+  pattern: /product/delete/{id}
+  defaults: { _controller: SS6AdminBundle:Product:delete }
+  requirements:
+    id: \d+
+
 admin_product_edit:
   pattern: /product/edit/{id}
   defaults: { _controller: SS6AdminBundle:Product:edit }
   requirements:
     id: \d+
+    
+admin_product_list:
+  pattern: /product/list/
+  defaults: { _controller: SS6AdminBundle:Product:list }
 
 admin_product_new:
   pattern: /product/new/
