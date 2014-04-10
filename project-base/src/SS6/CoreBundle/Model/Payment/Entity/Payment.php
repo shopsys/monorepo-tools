@@ -2,7 +2,9 @@
 
 namespace SS6\CoreBundle\Model\Payment\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\CoreBundle\Model\Transport\Entity\Transport;
 
 /**
  * @ORM\Table(name="payments")
@@ -39,6 +41,14 @@ class Payment {
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
+	
+	/**
+	 * @var Collection
+	 * 
+	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport", inversedBy="transports")
+	 * @ORM\JoinTable(name="payments_transports")
+	 * */
+	private $transports;
 
 	/**
 	 * @var integer
@@ -60,12 +70,30 @@ class Payment {
 	 * @param string|boolean $description
 	 * @param boolean $hidden
 	 */
-	public function __construct($name, $price, $description = null, $hidden = false) {
+	public function __construct($name, $price, Collection $transports = null, $description = null, $hidden = false) {
 		$this->name = $name;
 		$this->price = $price;
 		$this->description = $description;
+		$this->transports = $transports instanceof Collection ? $transports : new ArrayCollection();
 		$this->hidden = $hidden;
 		$this->deleted = false;
+	}
+	
+	/**
+	 * @param \SS6\CoreBundle\Model\Transport\Entity\Transport $transport
+	 */
+	public function addTransport(Transport $transport) {
+		if (!$this->transports->contains($transport)) {
+			$transport->addPayment($this);
+			$this->transports[] = $transport;
+		}
+	}
+	
+	/**
+	 * @return \SS6\CoreBundle\Model\Transport\Entity\Transport[]
+	 */
+	public function getTransports() {
+		return $this->transports;
 	}
 	
 	/**

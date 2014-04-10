@@ -41,6 +41,23 @@
 				</div>
 				
 				<div class="form-group">
+					<h3>Dopravy:</h3>
+					{% for transport in form.transports %}
+						<div class="form-group">
+							{{ form_widget(transport, { attr: {class: 'form-control'}}) }}
+							{{ form_label(transport, transport.vars.label ~ ':') }}
+							{{ form_errors(transport) }}
+						</div>
+					{% else %}
+						Musíte nejdřív nějakou dopravu vytvořit.
+						<div style="display: none;">
+							{# Must be called, otherwise it is rendered at end of form. #}
+							{{ form_row(form.transports) }}
+						</div>
+					{% endfor %}
+				</div>
+				
+				<div class="form-group">
 					{{ form_label(form.description, 'Popis:') }}
 					{{ form_errors(form.description) }}
 					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}

@@ -23,7 +23,16 @@ class TransportRepository {
 	 * @return array
 	 */
 	public function getAllUndeleted() {
-		return $this->repository->findBy(array('deleted' => false), array('name' => 'ASC'));
+		return $this->getAllUndeletedQueryBuilder()->getQuery()->getResult();
+	}
+	
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllUndeletedQueryBuilder() {
+		$qb = $this->repository->createQueryBuilder('t')
+			->where('t.deleted = :deleted')->setParameter('deleted', false);
+		return $qb;
 	}
 	
 	/**

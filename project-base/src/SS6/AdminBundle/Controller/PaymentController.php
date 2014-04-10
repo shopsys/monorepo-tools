@@ -7,21 +7,27 @@ use SS6\AdminBundle\Form\Payment\PaymentFormType;
 use SS6\CoreBundle\Model\Payment\Entity\Payment;
 use SS6\CoreBundle\Model\Payment\Exception\PaymentNotFoundException;
 use SS6\CoreBundle\Model\Payment\Facade\PaymentEditFacade;
+use SS6\CoreBundle\Model\Transport\Repository\TransportRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends Controller {
 
 	public function newAction(Request $request) {
+		$transportRepository = $this->get('ss6.core.transport.transport_repository');
+		/* @var $transportRepository TransportRepository */
+		$transportQueryBuilder = $transportRepository->getAllUndeletedQueryBuilder();
+		
 		$formData = new PaymentFormData();
-		$form = $this->createForm(new PaymentFormType(), $formData);
+		$form = $this->createForm(new PaymentFormType($transportQueryBuilder), $formData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$payment = new Payment(
 				$formData->getName(), 
 				$formData->getPrice(), 
-				$formData->getDescription(), 
+				$formData->getTransports(),
+				$formData->getDescription(),
 				$formData->isHidden()
 			);
 			
@@ -41,6 +47,10 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
+		$transportRepository = $this->get('ss6.core.transport.transport_repository');
+		/* @var $transportRepository TransportRepository */
+		$transportQueryBuilder = $transportRepository->getAllUndeletedQueryBuilder();
+		
 		$paymentEditFacade = $this->get('ss6.core.payment.payment_edit_facade');
 		/* @var $paymentEditFacade PaymentEditFacade */
 		
@@ -54,8 +64,9 @@ class PaymentController extends Controller {
 			$formData->setPrice($payment->getPrice());
 			$formData->setDescription($payment->getDescription());
 			$formData->setHidden($payment->isHidden());
+			$formData->setTransports($payment->getTransports());
 			
-			$form = $this->createForm(new PaymentFormType(), $formData);
+			$form = $this->createForm(new PaymentFormType($transportQueryBuilder), $formData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {

@@ -2,6 +2,7 @@
 
 namespace SS6\AdminBundle\Form\Payment;
 
+use Doctrine\ORM\QueryBuilder;
 use SS6\CoreBundle\Form\YesNoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,6 +10,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PaymentFormType extends AbstractType {
 	
+	/**
+	 * @var QueryBuilder
+	 */
+	private $transportQueryBuilder;
+	
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $transportQueryBuilder
+	 */
+	public function __construct(QueryBuilder $transportQueryBuilder) {
+		$this->transportQueryBuilder = $transportQueryBuilder;
+	}
+
 	public function getName() {
 		return 'payment';
 	}
@@ -18,6 +31,13 @@ class PaymentFormType extends AbstractType {
 			->add('id', 'integer', array('read_only' => true))
 			->add('name', 'text')
 			->add('hidden', new YesNoType(), array('required' => false))
+			->add('transports', 'entity', array(
+				'class' => 'SS6CoreBundle:Transport\Entity\Transport',
+				'property' => 'name',
+				'multiple' => true,
+				'expanded' => true,
+				'query_builder' => $this->transportQueryBuilder,
+			))
 			->add('price', 'money', array('currency' => false, 'required' => true))
 			->add('description', 'textarea', array('required' => false))
 			->add('save', 'submit');

@@ -2,6 +2,8 @@
 
 namespace SS6\AdminBundle\Form\Payment;
 
+use Doctrine\Common\Collections\Collection;
+
 class PaymentFormData {
 	
 	/**
@@ -30,6 +32,11 @@ class PaymentFormData {
 	private $hidden = false;
 	
 	/**
+	 * @var Collection 
+	 */
+	private $transports;
+	
+	/**
 	 * @return int
 	 */
 	public function getId() {
@@ -55,6 +62,13 @@ class PaymentFormData {
 	 */
 	public function getDescription() {
 		return $this->description;
+	}
+	
+	/**
+	 * @return Collection
+	 */
+	public function getTransports() {
+		return $this->transports;
 	}
 	
 	/**
@@ -91,7 +105,14 @@ class PaymentFormData {
 	public function setDescription($description) {
 		$this->description = $description;
 	}
-
+	
+	/**
+	 * @param Collection $transports
+	 */
+	public function setTransports($transports) {
+		$this->transports = $transports;
+	}
+	
 	/**
 	 * @param boolean $hidden
 	 */
