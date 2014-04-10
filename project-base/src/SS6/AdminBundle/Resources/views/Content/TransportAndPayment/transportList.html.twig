@@ -1,0 +1,39 @@
+<h2>Dopravy</h2>
+		
+{% if transports|length %}
+	<a href="{{ url('admin_transport_new') }}">Vytvořit dopravu</a>
+	
+	<table class="table table-striped table-responsive">
+		<thead>
+			<tr>
+				<th>Název</th>
+				<th>Cena</th>
+				<th>Viditelné</th>
+				<th>Akce</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for transport in transports %}
+				<tr>
+					<td><a href="{{ url('admin_transport_edit', {id: transport.id}) }}">{{ transport.name }}</a></td>
+					<td>{{ transport.price }} Kč</td>
+					<td>
+						{% if transport.visible %}
+							Viditelné
+						{% else %}
+							Skryté
+						{% endif %}
+					</td>
+					<td>
+						<a href="{{ url('admin_transport_edit', {id: transport.id}) }}">Upravit</a>
+						<a href="{{ url('admin_transport_delete', {id: transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')">Smazat</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% else %}
+	<p>
+		Doposud nebyly vytvořeny žádné dopravy. Nejdříve nějakou <a href="{{ url('admin_transport_new') }}">vytvořte</a>.
+	</p>
+{% endif %}

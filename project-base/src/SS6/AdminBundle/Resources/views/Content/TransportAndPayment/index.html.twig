@@ -1,0 +1,14 @@
+{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+
+{% block title %}
+	- Dopravy a platby
+{% endblock %}
+
+{% block h1 %}
+	Dopravy a platby
+{% endblock %}
+
+{% block content %}
+	{{ render(controller('SS6AdminBundle:TransportAndPayment:transportList')) }}
+	{{ render(controller('SS6AdminBundle:TransportAndPayment:paymentList')) }}
+{% endblock %}

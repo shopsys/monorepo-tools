@@ -1,0 +1,73 @@
+{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+
+{% block title %}
+	- Platba
+{% endblock %}
+
+{% block h1 %}
+	Platba
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+
+		<div class="col-xs-8">
+			
+			{{ form_start(form, { attr: { role: 'form'}}) }}
+				{{ form_errors(form) }}
+
+				<div class="form-group">
+					{{ form_label(form.id, 'ID:') }}
+					{{ form_errors(form.id) }}
+					{{ form_widget(form.id, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.name, 'Název:') }}
+					{{ form_errors(form.name) }}
+					{{ form_widget(form.name, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.hidden, 'Skryté:') }}
+					{{ form_errors(form.hidden) }}
+					{{ form_widget(form.hidden, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.price, 'Cena:') }}
+					{{ form_errors(form.price) }}
+					{{ form_widget(form.price, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					<h3>Dopravy:</h3>
+					{% for transport in form.transports %}
+						<div class="form-group">
+							{{ form_widget(transport, { attr: {class: 'form-control'}}) }}
+							{{ form_label(transport, transport.vars.label ~ ':') }}
+							{{ form_errors(transport) }}
+						</div>
+					{% else %}
+						Musíte nejdřív nějakou dopravu vytvořit.
+						<div style="display: none;">
+							{# Must be called, otherwise it is rendered at end of form. #}
+							{{ form_row(form.transports) }}
+						</div>
+					{% endfor %}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.description, 'Popis:') }}
+					{{ form_errors(form.description) }}
+					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_widget(form.save, { label: 'Uložit', attr: {class: 'btn btn-primary'}}) }}
+				</div>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+{% endblock %}
