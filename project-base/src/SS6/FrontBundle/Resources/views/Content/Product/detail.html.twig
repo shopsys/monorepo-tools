@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="row">
-		<div class="col-xs-6">
+		<div class="col-xs-12 col-md-6">
 			<div class="product-image">
 				<span>
 					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}">
@@ -15,18 +15,53 @@
 			
 		</div>
 
-		<div class="col-xs-6">
+		<div class="col-xs-12 col-md-6">
 			<h1>{{ product.name }}</h1>
-			<p>Katalogové číslo: {{ product.catnum }}</p>
-			<p>Výrobní číslo: {{ product.partno }}</p>
-			<p>EAN: {{ product.ean }}</p>
-			<p>
-				{{ product.description|raw }}
-			</p>
 
-			<p>
-				<strong>Cena: <span class="price-main">{{ product.price|price }}</span></strong>
-			</p>
+			{% if product.catnum %}
+				<dl class="simple-list">
+					<dt class="simple-list__title">
+						Katalogové číslo:
+					</dt>
+					<dd class="simple-list__definition">
+						{{ product.catnum }}
+					</dd>
+				</dl>
+			{% endif %}
+
+			{% if product.partno %}
+				<dl class="simple-list">
+					<dt class="simple-list__title">
+						Výrobní číslo:
+					</dt>
+					<dd class="simple-list__definition">
+						{{ product.partno }}
+					</dd>
+				</dl>
+			{% endif %}
+
+			{% if product.ean %}
+				<dl class="simple-list">
+					<dt class="simple-list__title">
+						EAN:
+					</dt>
+					<dd class="simple-list__definition">
+						{{ product.ean }}
+					</dd>
+				</dl>
+			{% endif %}
+
+			{% if product.description %}
+				<p>
+					{{ product.description|raw }}
+				</p>
+			{% endif %}
+
+			{% if product.price %}
+				<div class="box-important">
+					<strong>Cena: <span class="price-main">{{ product.price|price }}</span></strong>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

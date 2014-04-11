@@ -1,0 +1,31 @@
+.simple-list {
+	margin: 0 0 @margin-gap/2;
+	padding: 0;
+	border-bottom: 1px solid @color-border;
+	.cfx();
+}
+
+.simple-list .simple-list__title {
+	float: left;
+	width: 30%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 5%;
+	margin: 0;
+	.box-sizing(border-box);
+	font-weight: bold;
+	color: @color-desc;
+	clear: both;
+	font-size: 12px;
+}
+
+.simple-list .simple-list__definition {
+	float: left;
+	width: 70%;
+	.box-sizing(border-box);
+	color: @color-desc;
+	margin: 0;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
