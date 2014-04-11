@@ -1,0 +1,14 @@
+{% block choice_widget_expanded %}
+	{% spaceless %}
+			<div {{ block('widget_container_attributes') }}>
+			{% for child in form %}
+				<div class="radio">
+					<label>
+						{{ form_widget(child) }}
+						{{ child.vars.label }}
+					</label>
+				</div>
+			{% endfor %}
+			</div>
+	{% endspaceless %}
+{% endblock %}
