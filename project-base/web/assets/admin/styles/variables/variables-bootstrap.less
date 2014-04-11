@@ -13,11 +13,11 @@
 @gray-light:             lighten(#000, 60%);   // #999
 @gray-lighter:           lighten(#000, 93.5%); // #eee
 
-@brand-primary:         #428bca;
-@brand-success:         #5cb85c;
-@brand-info:            #5bc0de;
-@brand-warning:         #f0ad4e;
-@brand-danger:          #d9534f;
+@brand-primary:         #1983ce;
+@brand-success:         #5faf2f;
+@brand-info:            #868686;
+@brand-warning:         #d76f2a;
+@brand-danger:          #d22525;
 
 
 //== Scaffolding
@@ -38,8 +38,9 @@
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -326,7 +327,7 @@
 //##
 
 // Basics of a navbar
-@navbar-height:                    50px;
+@navbar-height:                    80px;
 @navbar-margin-bottom:             @line-height-computed;
 @navbar-border-radius:             @border-radius-base;
 @navbar-padding-horizontal:        floor((@grid-gutter-width / 2));
@@ -388,7 +389,8 @@
 //##
 
 //=== Shared nav styles
-@nav-link-padding:                          10px 15px;
+@nav-link-padding-left:                     15px;
+@nav-link-padding:                          10px @nav-link-padding-left;
 @nav-link-hover-bg:                         @gray-lighter;
 
 @nav-disabled-link-color:                   @gray-light;
@@ -744,16 +746,18 @@
 //
 //##
 
-@breadcrumb-padding-vertical:   8px;
+@breadcrumb-padding-vertical:   12px;
 @breadcrumb-padding-horizontal: 15px;
 //** Breadcrumb background color
-@breadcrumb-bg:                 #f5f5f5;
+@breadcrumb-bg:                 #fff;
+//** Breadcrumb text color
+@breadcrumb-border:             @gray-lighter;
 //** Breadcrumb text color
 @breadcrumb-color:              #ccc;
 //** Text color of current page in the breadcrumb
 @breadcrumb-active-color:       @gray-light;
 //** Textual separator for between breadcrumb elements
-@breadcrumb-separator:          "/";
+@breadcrumb-separator:          "-";
 
 
 //== Carousel

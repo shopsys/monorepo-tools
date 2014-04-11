@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/index.css': 'web/assets/admin/styles/bootstrap.less'
+					'web/assets/admin/index.css': 'web/assets/admin/styles/main.less'
 				},
 				options: {
 					compress: true,
