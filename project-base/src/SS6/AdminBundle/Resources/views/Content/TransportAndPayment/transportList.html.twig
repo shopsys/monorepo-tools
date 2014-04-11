@@ -16,7 +16,7 @@
 			{% for transport in transports %}
 				<tr>
 					<td><a href="{{ url('admin_transport_edit', {id: transport.id}) }}">{{ transport.name }}</a></td>
-					<td>{{ transport.price }} Kč</td>
+					<td>{{ transport.price|price }}</td>
 					<td>
 						{% if transport.visible %}
 							Viditelné
