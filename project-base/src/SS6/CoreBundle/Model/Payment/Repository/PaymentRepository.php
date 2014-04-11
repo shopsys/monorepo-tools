@@ -22,8 +22,15 @@ class PaymentRepository {
 	/**
 	 * @return array
 	 */
-	public function getAllUndeleted() {
+	public function getAll() {
 		return $this->repository->findBy(array('deleted' => false), array('name' => 'ASC'));
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getAllIncludingDeleted() {
+		return $this->repository->findAll();
 	}
 	
 	/**

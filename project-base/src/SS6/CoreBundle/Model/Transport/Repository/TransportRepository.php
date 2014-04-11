@@ -22,17 +22,24 @@ class TransportRepository {
 	/**
 	 * @return array
 	 */
-	public function getAllUndeleted() {
-		return $this->getAllUndeletedQueryBuilder()->getQuery()->getResult();
+	public function getAll() {
+		return $this->getAllQueryBuilder()->getQuery()->getResult();
 	}
 	
 	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllUndeletedQueryBuilder() {
+	public function getAllQueryBuilder() {
 		$qb = $this->repository->createQueryBuilder('t')
 			->where('t.deleted = :deleted')->setParameter('deleted', false);
 		return $qb;
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getAllIncludingDeleted() {
+		return $this->repository->findAll();
 	}
 	
 	/**
