@@ -13,7 +13,10 @@
 
 {% block mainContent %}
 	
-	<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
+	<div class="col-xs-12 col-lg-8">
 	
-	{{ grid(grid, 'SS6AdminBundle:Content/Product:listGrid.html.twig') }}
+		<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
+		
+		{{ grid(grid, 'SS6AdminBundle:Content/Product:listGrid.html.twig') }}
+	</div>
 {% endblock %}
