@@ -1,30 +1,29 @@
 <h2>Dopravy</h2>
 		
 {% if transports|length %}
-	<a href="{{ url('admin_transport_new') }}">Vytvořit dopravu</a>
 	
 	<table class="table table-striped table-responsive">
 		<thead>
 			<tr>
 				<th>Název</th>
-				<th>Cena</th>
-				<th>Viditelné</th>
-				<th>Akce</th>
+				<th class="table-col table-col-10 text-center">Viditelné</th>
+				<th class="table-col table-col-15 text-right">Cena</th>
+				<th class="table-col table-col-20 text-right">Akce</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for transport in transports %}
 				<tr>
 					<td><a href="{{ url('admin_transport_edit', {id: transport.id}) }}">{{ transport.name }}</a></td>
-					<td>{{ transport.price|price }}</td>
-					<td>
+					<td class="text-center">
 						{% if transport.visible %}
-							Viditelné
+							<span class="semaphore semaphore--run"></span>
 						{% else %}
-							Skryté
+							<span class="semaphore semaphore--stop"></span>
 						{% endif %}
 					</td>
-					<td>
+					<td class="text-right">{{ transport.price|price }}</td>
+					<td class="text-right">
 						<a href="{{ url('admin_transport_edit', {id: transport.id}) }}">Upravit</a>
 						<a href="{{ url('admin_transport_delete', {id: transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')">Smazat</a>
 					</td>
@@ -32,6 +31,8 @@
 			{% endfor %}
 		</tbody>
 	</table>
+
+	<a href="{{ url('admin_transport_new') }}" class="btn btn-primary mb-1">Vytvořit dopravu</a>
 {% else %}
 	<p>
 		Doposud nebyly vytvořeny žádné dopravy. Nejdříve nějakou <a href="{{ url('admin_transport_new') }}">vytvořte</a>.

@@ -14,7 +14,7 @@ th {
 
 // Baseline styles
 
-.table {
+.table, .grid table {
   width: 100%;
   margin-bottom: @line-height-computed;
   // Cells
@@ -53,7 +53,7 @@ th {
   }
 
   // Nesting
-  .table {
+  .table, .grid table {
     background-color: @body-bg;
   }
 }
@@ -79,7 +79,7 @@ th {
 //
 // Add borders all around the table and between all the columns.
 
-.table-bordered {
+.table-bordered, .grid table  {
   border: 1px solid @table-border-color;
   > thead,
   > tbody,
@@ -118,7 +118,7 @@ th {
 //
 // Placed here since it has to come after the potential zebra striping
 
-.table-hover {
+.table-hover, .grid table {
   > tbody > tr:hover {
     > td,
     > th {
@@ -169,7 +169,7 @@ table {
 // will display normally.
 
 @media (max-width: @screen-xs-max) {
-  .table-responsive {
+  .table-responsive, .grid {
     width: 100%;
     margin-bottom: (@line-height-computed * 0.75);
     overflow-y: hidden;
@@ -179,7 +179,7 @@ table {
     -webkit-overflow-scrolling: touch;
 
     // Tighten up spacing
-    > .table {
+    > .table, .grid_body > table {
       margin-bottom: 0;
 
       // Ensure the content doesn't wrap
@@ -229,29 +229,5 @@ table {
       }
 
     }
-  }
-}
-
-.grid_body {
-  > table {
-    width: 100%;
-    border: 0;
-    
-    th, td {
-      padding: 2px 10px;
-      border-bottom: 1px solid @gray-lighter;
-    }
-
-    .grid-row-titles, .grid-row-filters {
-      th, td{
-        border-bottom: 0;
-        background: @gray-lighter;
-      }
-    }
-  }
-  .grid-row-actions {
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 }

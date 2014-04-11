@@ -1,4 +1,4 @@
-{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+{% extends 'SS6AdminBundle:Layout:layoutWithPanel.html.twig' %}
 
 {% block title %}
 	- Doprava
@@ -8,10 +8,21 @@
 	Doprava
 {% endblock %}
 
-{% block content %}
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Ediace dopravy</span>
+		</li>
+		<li>
+			<a href="{{ url('admin_transport_and_payment_list') }}">Zpět na seznam doprav a plateb</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
 	<div class="row">
 
-		<div class="col-xs-8">
+		<div class="col-xs-12 col-lg-8">
 			
 			{{ form_start(form, { attr: { role: 'form'}}) }}
 				{{ form_errors(form) }}
@@ -31,7 +42,9 @@
 				<div class="form-group">
 					{{ form_label(form.hidden, 'Skryté:') }}
 					{{ form_errors(form.hidden) }}
-					{{ form_widget(form.hidden, { attr: {class: 'form-control'}}) }}
+					<div class="form-control form-control-radios">
+						{{ form_widget(form.hidden) }}
+					</div>
 				</div>
 
 				<div class="form-group">

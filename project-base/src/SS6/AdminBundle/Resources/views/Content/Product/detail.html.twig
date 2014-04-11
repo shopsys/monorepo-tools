@@ -1,21 +1,23 @@
-{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+{% extends 'SS6AdminBundle:Layout:layoutWithPanel.html.twig' %}
 
 {% block title %}- Karta zboží{% endblock %}
 {% block h1 %}Karta zboží{% endblock %}
 
 {% block panel %}
-	<div class="list-group">
-		<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-		<a href="#" class="list-group-item">Morbi leo risus</a>
-		<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-		<a href="#" class="list-group-item">Vestibulum at eros</a>
-	</div>
+	<ul class="nav nav-panel">
+		<li>
+			<span>Ediace zboží</span>
+		</li>
+		<li>
+			<a href="{{ url('admin_product_list') }}">Zpět na seznam zboží</a>
+		</li>
+	</ul>
 {% endblock %}
 
-{% block content %}
+{% block mainContent %}
 	<div class="row">
 
-		<div class="col-xs-8">
+		<div class="col-xs-12 col-lg-8">
 			
 			{{ form_start(form, { attr: { role: 'form'}}) }}
 				{{ form_errors(form) }}
@@ -85,7 +87,10 @@
 				<div class="form-group">
 					{{ form_label(form.hidden, 'Skryté:') }}
 					{{ form_errors(form.hidden) }}
-					{{ form_widget(form.hidden, { attr: {class: 'form-control'}}) }}
+					<div class="form-control form-control-radios">
+						{{ form_widget(form.hidden) }}
+					</div>
+					
 				</div>
 
 				<div class="form-group">
