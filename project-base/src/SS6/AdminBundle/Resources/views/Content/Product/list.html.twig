@@ -1,12 +1,19 @@
-{% extends 'SS6AdminBundle:Layout:layout.html.twig' %}
+{% extends 'SS6AdminBundle:Layout:layoutWithPanel.html.twig' %}
 
 {% block title %}- Seznam zboží{% endblock %}
 {% block h1 %}Seznam zboží{% endblock %}
 
-{% block content %}
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Seznam zboží</span>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
 	
-	<a href="{{ url('admin_product_new') }}">Vytvořit nové zboží</a>
+	<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
 	
-	<link rel="stylesheet" href="{{ asset('assets/admin/styles/grid.css') }}" />
 	{{ grid(grid, 'SS6AdminBundle:Content/Product:listGrid.html.twig') }}
 {% endblock %}

@@ -1,0 +1,21 @@
+.semaphore, .grid .grid_boolean_true, .grid .grid_boolean_false {
+	width: 12px;
+	height: 12px;
+	.border-radius(@border-radius-large);
+	border: 1px solid @gray-dark;
+	display: inline-block;
+	margin: 0 3px;
+	text-indent: -9999px;
+	position: relative;
+	top: 5px;
+}
+
+.semaphore--run, .grid .grid_boolean_true {
+	background: @brand-success;
+}
+.semaphore--wait {
+	background: @brand-warning;
+}
+.semaphore--stop, .grid .grid_boolean_false {
+	background: @brand-danger;
+}
