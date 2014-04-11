@@ -13,6 +13,7 @@ class AppKernel extends Kernel {
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+			new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new Symfony\Bundle\MonologBundle\MonologBundle(),

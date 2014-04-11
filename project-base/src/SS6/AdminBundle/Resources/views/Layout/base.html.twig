@@ -8,9 +8,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/index.css') }}" media="screen, projection">
+	<link rel="stylesheet" type="text/css" href="{{ asset('http://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css') }}">
+	
 	<script src="{{ asset('http://code.jquery.com/jquery-1.11.0.min.js') }}"></script>
+	<script src="{{ asset('http://code.jquery.com/ui/1.10.4/jquery-ui.min.js') }}"></script>
+	<script src="{{ asset('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/i18n/jquery.ui.datepicker-cs.js') }}"></script>
 	
 	<script src="{{ asset('assets/admin/scripts/dropdown.js') }}"></script>
+	<script src="{{ asset('assets/admin/scripts/date_picker.js') }}"></script>
+	<script type="text/javascript">
+		global = {
+			locale: '{{ app.request.locale }}'
+		};
+	</script>
 	
 	<title>Adminstrace {% block title %}ShopSys 6{% endblock %}</title>
 

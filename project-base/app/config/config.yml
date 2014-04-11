@@ -19,6 +19,9 @@ framework:
 # Twig Configuration
 twig:
   debug: "%kernel.debug%"
+  form:
+    resources:
+      - 'StnwDatePickerBundle:Form:fields.html.twig'
   strict_variables: "%kernel.debug%"
 
 # Assetic Configuration
