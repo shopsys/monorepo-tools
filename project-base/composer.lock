@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "678373bcd054449da4d31871e02e3141",
+    "hash": "35a046e5d7bd5f31e154c1f5d3b6665e",
     "packages": [
         {
             "name": "apy/datagrid-bundle",
@@ -1830,6 +1830,48 @@
             "time": "2014-02-04 23:49:58"
         },
         {
+            "name": "stnw/date-picker-bundle",
+            "version": "dev-master",
+            "target-dir": "Stnw/DatePickerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stnw/StnwDatePickerBundle.git",
+                "reference": "c00bf5904e1738371ea5c8be1e907ea50063351e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stnw/StnwDatePickerBundle/zipball/c00bf5904e1738371ea5c8be1e907ea50063351e",
+                "reference": "c00bf5904e1738371ea5c8be1e907ea50063351e",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=v2.4.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Stnw\\DatePickerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sergey Studenikin",
+                    "email": "studenikin.s@gmail.com"
+                }
+            ],
+            "description": "DatePicker and DateTimePicker field type for Symfony2 and SonataAdminBundle.",
+            "keywords": [
+                "DatePickerType",
+                "DateTimePicker",
+                "DateTymePickerType",
+                "FormType",
+                "datepicker",
+                "picker"
+            ],
+            "time": "2014-03-28 11:44:06"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.1.0",
             "source": {
@@ -2338,9 +2380,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "stnw/date-picker-bundle": 20
+    },
     "platform": {
         "php": ">=5.4"
     },

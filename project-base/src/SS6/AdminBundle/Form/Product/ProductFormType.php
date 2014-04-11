@@ -22,8 +22,8 @@ class ProductFormType extends AbstractType {
 			->add('ean', 'text', array('required' => false))
 			->add('description', 'textarea', array('required' => false))
 			->add('price', 'money', array('currency' => false, 'required' => false))
-			->add('sellingFrom', 'date', array('required' => false))
-			->add('sellingTo', 'date', array('required' => false))
+			->add('sellingFrom', 'datePicker', array('required' => false))
+			->add('sellingTo', 'datePicker', array('required' => false))
 			->add('stockQuantity', 'integer', array('required' => false))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('save', 'submit');
