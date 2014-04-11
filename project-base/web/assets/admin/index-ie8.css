@@ -1,4 +1,5 @@
-.table-responsive {
+.table-responsive,
+.grid {
   width: 100%;
   margin-bottom: 15px;
   overflow-y: hidden;
@@ -8,45 +9,83 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.table-responsive>.table {
+.table-responsive>.table,
+.grid>.table,
+.table-responsive .grid_body>table,
+.grid .grid_body>table {
   margin-bottom: 0;
 }
 
 .table-responsive>.table>thead>tr>th,
+.grid>.table>thead>tr>th,
+.table-responsive .grid_body>table>thead>tr>th,
+.grid .grid_body>table>thead>tr>th,
 .table-responsive>.table>tbody>tr>th,
+.grid>.table>tbody>tr>th,
+.table-responsive .grid_body>table>tbody>tr>th,
+.grid .grid_body>table>tbody>tr>th,
 .table-responsive>.table>tfoot>tr>th,
+.grid>.table>tfoot>tr>th,
+.table-responsive .grid_body>table>tfoot>tr>th,
+.grid .grid_body>table>tfoot>tr>th,
 .table-responsive>.table>thead>tr>td,
+.grid>.table>thead>tr>td,
+.table-responsive .grid_body>table>thead>tr>td,
+.grid .grid_body>table>thead>tr>td,
 .table-responsive>.table>tbody>tr>td,
-.table-responsive>.table>tfoot>tr>td {
+.grid>.table>tbody>tr>td,
+.table-responsive .grid_body>table>tbody>tr>td,
+.grid .grid_body>table>tbody>tr>td,
+.table-responsive>.table>tfoot>tr>td,
+.grid>.table>tfoot>tr>td,
+.table-responsive .grid_body>table>tfoot>tr>td,
+.grid .grid_body>table>tfoot>tr>td {
   white-space: nowrap;
 }
 
-.table-responsive>.table-bordered {
+.table-responsive>.table-bordered,
+.grid>.table-bordered {
   border: 0;
 }
 
 .table-responsive>.table-bordered>thead>tr>th:first-child,
+.grid>.table-bordered>thead>tr>th:first-child,
 .table-responsive>.table-bordered>tbody>tr>th:first-child,
+.grid>.table-bordered>tbody>tr>th:first-child,
 .table-responsive>.table-bordered>tfoot>tr>th:first-child,
+.grid>.table-bordered>tfoot>tr>th:first-child,
 .table-responsive>.table-bordered>thead>tr>td:first-child,
+.grid>.table-bordered>thead>tr>td:first-child,
 .table-responsive>.table-bordered>tbody>tr>td:first-child,
-.table-responsive>.table-bordered>tfoot>tr>td:first-child {
+.grid>.table-bordered>tbody>tr>td:first-child,
+.table-responsive>.table-bordered>tfoot>tr>td:first-child,
+.grid>.table-bordered>tfoot>tr>td:first-child {
   border-left: 0;
 }
 
 .table-responsive>.table-bordered>thead>tr>th:last-child,
+.grid>.table-bordered>thead>tr>th:last-child,
 .table-responsive>.table-bordered>tbody>tr>th:last-child,
+.grid>.table-bordered>tbody>tr>th:last-child,
 .table-responsive>.table-bordered>tfoot>tr>th:last-child,
+.grid>.table-bordered>tfoot>tr>th:last-child,
 .table-responsive>.table-bordered>thead>tr>td:last-child,
+.grid>.table-bordered>thead>tr>td:last-child,
 .table-responsive>.table-bordered>tbody>tr>td:last-child,
-.table-responsive>.table-bordered>tfoot>tr>td:last-child {
+.grid>.table-bordered>tbody>tr>td:last-child,
+.table-responsive>.table-bordered>tfoot>tr>td:last-child,
+.grid>.table-bordered>tfoot>tr>td:last-child {
   border-right: 0;
 }
 
 .table-responsive>.table-bordered>tbody>tr:last-child>th,
+.grid>.table-bordered>tbody>tr:last-child>th,
 .table-responsive>.table-bordered>tfoot>tr:last-child>th,
+.grid>.table-bordered>tfoot>tr:last-child>th,
 .table-responsive>.table-bordered>tbody>tr:last-child>td,
-.table-responsive>.table-bordered>tfoot>tr:last-child>td {
+.grid>.table-bordered>tbody>tr:last-child>td,
+.table-responsive>.table-bordered>tfoot>tr:last-child>td,
+.grid>.table-bordered>tfoot>tr:last-child>td {
   border-bottom: 0;
 }
 
