@@ -92,7 +92,8 @@ class ProductController extends Controller {
 		$grid->hideFilters();
 		$grid->setActionsColumnTitle('Akce');
 		$grid->setDefaultOrder('name', 'asc');
-		$grid->setLimits(2);
+		$grid->setLimits(array(2, 20));
+		$grid->setDefaultLimit(20);
 		
 		$detailRowAction = new RowAction('Detail', 'admin_product_edit');
 		$detailRowAction->setRouteParameters(array('id'));
