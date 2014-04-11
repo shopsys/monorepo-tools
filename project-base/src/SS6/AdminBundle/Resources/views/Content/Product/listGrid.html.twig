@@ -1,4 +1,4 @@
-{% extends 'APYDataGridBundle::blocks.html.twig' %}
+{% extends 'SS6AdminBundle:Grid:grid.html.twig' %}
 
 {% block grid_column_name_cell %}
 	<a href="{{ url('admin_product_edit', { id: row.field('id') }) }}">{{ value }}</a>
