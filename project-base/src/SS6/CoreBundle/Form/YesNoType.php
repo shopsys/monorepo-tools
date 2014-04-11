@@ -13,8 +13,8 @@ class YesNoType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'choices' => array(
-				true => 'Yes',
-				false => 'No',
+				true => 'Ano',
+				false => 'Ne',
 			),
 			'expanded' => true,
 			'empty_value' => false,
