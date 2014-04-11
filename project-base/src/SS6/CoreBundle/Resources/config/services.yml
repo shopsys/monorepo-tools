@@ -1,3 +1,6 @@
+imports:
+  - { resource: ../../Twig/services.yml }
+
 parameters:
   ss6.core.administrator.administrator_repository.class: SS6\CoreBundle\Model\Administrator\Repository\AdministratorRepository
   ss6.core.product.product_edit_facade.class: SS6\CoreBundle\Model\Product\Facade\ProductEditFacade

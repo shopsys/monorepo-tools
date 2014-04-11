@@ -16,7 +16,7 @@
 			{% for payment in payments %}
 				<tr>
 					<td><a href="{{ url('admin_payment_edit', {id: payment.id}) }}">{{ payment.name }}</a></td>
-					<td>{{ payment.price }} Kč</td>
+					<td>{{ payment.price|price }}</td>
 					<td>
 						{% if payment.visible %}
 							Viditelné
