@@ -2,6 +2,18 @@ imports:
   - { resource: ../../Twig/services.yml }
 
 services:
+  
+  doctrine.orm.default_entity_manager:
+    class: %doctrine.orm.entity_manager.class%
+    factory_class: %doctrine.orm.entity_manager.class%
+    factory_method: create
+    arguments: 
+      - @doctrine.dbal.default_connection
+      - @doctrine.orm.default_configuration
+  
+  doctrine.orm.entity_manager.abstract:
+    synthetic: true
+  
   ss6.core.administrator.administrator_repository:
     class: SS6\CoreBundle\Model\Administrator\Repository\AdministratorRepository
     factory_service: doctrine.orm.entity_manager
@@ -10,19 +22,15 @@ services:
 
   ss6.core.product.product_edit_facade:
     class: SS6\CoreBundle\Model\Product\Facade\ProductEditFacade
-    arguments: ["@doctrine.orm.entity_manager", "@ss6.core.product.product_repository", "@ss6.core.product.product_edit_service"]
     
   ss6.core.product.product_edit_service:
     class: SS6\CoreBundle\Model\Product\Service\ProductEditService
-    arguments: ["@validator"]
   
   ss6.core.product.product_repository:
     class: SS6\CoreBundle\Model\Product\Repository\ProductRepository
-    arguments: [@doctrine.orm.entity_manager]
   
   ss6.core.security.login_listener:
     class: SS6\CoreBundle\Model\Security\Listener\LoginListener
-    arguments: ["@doctrine.orm.entity_manager"]
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
     
@@ -31,17 +39,12 @@ services:
     
   ss6.core.payment.payment_edit_facade:
     class: SS6\CoreBundle\Model\Payment\Facade\PaymentEditFacade
-    arguments: ['@doctrine.orm.entity_manager', '@ss6.core.payment.payment_repository']
     
   ss6.core.payment.payment_repository:
     class: SS6\CoreBundle\Model\Payment\Repository\PaymentRepository
-    arguments: ['@doctrine.orm.entity_manager']
 
   ss6.core.transport.transport_edit_facade:
     class: SS6\CoreBundle\Model\Transport\Facade\TransportEditFacade
-    arguments: ['@doctrine.orm.entity_manager', '@ss6.core.transport.transport_repository']
 
   ss6.core.transport.transport_repository:
     class: SS6\CoreBundle\Model\Transport\Repository\TransportRepository
-    arguments: ['@doctrine.orm.entity_manager']
-

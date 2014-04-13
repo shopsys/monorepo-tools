@@ -14,6 +14,8 @@
 		"doctrine/doctrine-fixtures-bundle": "2.2.*",
 		"incenteev/composer-parameter-handler": "~2.0",
 		"jakub-onderka/php-parallel-lint": "0.4",
+		"jms/translation-bundle": "1.1.0",
+		"kutny/autowiring-bundle": "1.0",
 		"phing/phing": "2.7.0",
 		"phpmd/phpmd": "1.4.*",
 		"phpunit/phpunit": "3.7.*",

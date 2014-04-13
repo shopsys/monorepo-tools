@@ -12,6 +12,7 @@ class AppKernel extends Kernel {
 			new APY\DataGridBundle\APYDataGridBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+			new Kutny\AutowiringBundle\KutnyAutowiringBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
