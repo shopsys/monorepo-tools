@@ -83,9 +83,9 @@ class Transport {
 	 * @param \SS6\CoreBundle\Model\Payment\Entity\Payment $payment
 	 */
 	public function addPayment(Payment $payment) {
-		if (!$this->transports->contains($payment)) {
+		if (!$this->payments->contains($payment)) {
+			$this->payments->add($payment);
 			$payment->addTransport($this);
-			$this->payments[] = $payment;
 		}
 	}
 	

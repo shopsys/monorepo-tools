@@ -2,6 +2,7 @@
 
 namespace SS6\CoreBundle\Model\Payment\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\CoreBundle\Model\Transport\Entity\Transport;
@@ -65,9 +66,11 @@ class Payment {
 	private $deleted;
 	
 	/**
+	 * 
 	 * @param string $name
 	 * @param string $price
-	 * @param string|boolean $description
+	 * @param \Doctrine\Common\Collections\Collection $transports
+	 * @param string|null $description
 	 * @param boolean $hidden
 	 */
 	public function __construct($name, $price, $description = null, $hidden = false) {
@@ -84,8 +87,8 @@ class Payment {
 	 */
 	public function addTransport(Transport $transport) {
 		if (!$this->transports->contains($transport)) {
+			$this->transports->add($transport);
 			$transport->addPayment($this);
-			$this->transports[] = $transport;
 		}
 	}
 	
