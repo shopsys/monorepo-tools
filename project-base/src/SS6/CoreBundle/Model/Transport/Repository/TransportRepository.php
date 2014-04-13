@@ -3,20 +3,28 @@
 namespace SS6\CoreBundle\Model\Transport\Repository;
 
 use Doctrine\ORM\EntityManager;
+use SS6\CoreBundle\Model\Transport\Entity\Transport;
 use SS6\CoreBundle\Model\Transport\Exception\TransportNotFoundException;
 
 class TransportRepository {
 	
 	/**
-	 * @var EntityRepository
+	 * @var EntityManager
 	 */
-	private $repository;
+	private $em;
 	
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	public function __construct(EntityManager $em) {
-		$this->repository = $em->getRepository('SS6CoreBundle:Transport\Entity\Transport');
+		$this->em = $em;
+	}
+	
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getTransportRepository() {
+		return $this->em->getRepository(Transport::class);
 	}
 	
 	/**
@@ -30,7 +38,7 @@ class TransportRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getAllQueryBuilder() {
-		$qb = $this->repository->createQueryBuilder('t')
+		$qb = $this->getTransportRepository()->createQueryBuilder('t')
 			->where('t.deleted = :deleted')->setParameter('deleted', false);
 		return $qb;
 	}
@@ -39,7 +47,7 @@ class TransportRepository {
 	 * @return array
 	 */
 	public function getAllIncludingDeleted() {
-		return $this->repository->findAll();
+		return $this->getTransportRepository()->findAll();
 	}
 	
 	/**
@@ -49,7 +57,7 @@ class TransportRepository {
 	 */
 	public function getById($id) {
 		$criteria = array('id' => $id);
-		$transport = $this->repository->findOneBy($criteria);
+		$transport = $this->getTransportRepository()->findOneBy($criteria);
 		if ($transport === null) {
 			throw new TransportNotFoundException($criteria);
 		}
