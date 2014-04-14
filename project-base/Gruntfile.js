@@ -14,8 +14,7 @@ module.exports = function(grunt) {
 					sourceMap: true,
 					sourceMapFilename: 'web/assets/admin/index.css.map',
 					sourceMapRootpath: '../../',
-					sourceMapBasepath: 'web/',
-					sourceMapURL: 'http://shopsys6:8080/assets/admin/index.css.map'
+					sourceMapBasepath: 'web/'
 				}
 			},
 
@@ -28,8 +27,7 @@ module.exports = function(grunt) {
 					sourceMap: true,
 					sourceMapFilename: 'web/assets/frontend/index.css.map',
 					sourceMapRootpath: '../../',
-					sourceMapBasepath: 'web/',
-					sourceMapURL: 'http://shopsys6:8080/assets/frontend/index.css.map'
+					sourceMapBasepath: 'web/'
 				}
 			}
 		},
