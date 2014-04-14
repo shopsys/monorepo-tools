@@ -177,21 +177,17 @@ class Payment {
 	 * @param boolean $withoutRelations
 	 * @return boolean
 	 */
-	public function isVisible($withoutRelations = false) {
+	public function isVisible() {
 		if ($this->isHidden() || $this->getTransports()->isEmpty()) {
 			return false;
 		}
 		
-		if ($withoutRelations) {
-			return true;
-		} else {
-			foreach ($this->getTransports() as $transport) {
-				/* @var $transport Transport */
-				if (!$transport->isHidden()) {
-					return true;
-				}
+		foreach ($this->getTransports() as $transport) {
+			/* @var $transport Transport */
+			if (!$transport->isHidden()) {
+				return true;
 			}
-			return false;
 		}
+		return false;
 	}
 }

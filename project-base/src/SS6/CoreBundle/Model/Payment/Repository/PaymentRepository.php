@@ -70,4 +70,12 @@ class PaymentRepository {
 			throw new PaymentNotFoundException($criteria, $e);
 		}
 	}
+	
+	/**
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getAllWithTransports() {
+		$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.deleted = :deleted', Payment::class);
+		return $this->em->createQuery($dql)->setParameter('deleted', false)->getResult();
+	}
 }
