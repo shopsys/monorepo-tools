@@ -46,7 +46,7 @@ class Payment {
 	/**
 	 * @var Collection
 	 * 
-	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport", inversedBy="payments")
+	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport")
 	 * @ORM\JoinTable(name="payments_transports")
 	 */
 	private $transports;
@@ -88,7 +88,6 @@ class Payment {
 	public function addTransport(Transport $transport) {
 		if (!$this->transports->contains($transport)) {
 			$this->transports->add($transport);
-			$transport->addPayment($this);
 		}
 	}
 	
@@ -102,7 +101,7 @@ class Payment {
 			$this->addTransport($transport);
 		}
 	}
-	
+
 	/**
 	 * @return \SS6\CoreBundle\Model\Transport\Entity\Transport[]
 	 */
@@ -188,7 +187,7 @@ class Payment {
 		} else {
 			foreach ($this->getTransports() as $transport) {
 				/* @var $transport Transport */
-				if ($transport->isVisible(true)) {
+				if (!$transport->isHidden()) {
 					return true;
 				}
 			}

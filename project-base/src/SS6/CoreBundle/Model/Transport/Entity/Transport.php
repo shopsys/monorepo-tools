@@ -42,13 +42,6 @@ class Transport {
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
-	
-	/**
-	 * @var Collection
-	 * 
-	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Payment\Entity\Payment", mappedBy="transports")
-	 **/
-	private $payments;
 
 	/**
 	 * @var integer
@@ -74,27 +67,10 @@ class Transport {
 		$this->name = $name;
 		$this->price = $price;
 		$this->description = $description;
-		$this->payments = new ArrayCollection();
 		$this->hidden = $hidden;
 		$this->deleted = false;
 	}
 	
-	/**
-	 * @param \SS6\CoreBundle\Model\Payment\Entity\Payment $payment
-	 */
-	public function addPayment(Payment $payment) {
-		if (!$this->payments->contains($payment)) {
-			$this->payments->add($payment);
-			$payment->addTransport($this);
-		}
-	}
-	
-	/**
-	 * @return Collection
-	 */
-	public function getPayments() {
-		return $this->payments;
-	}
 	/**
 	 * @param string $name
 	 * @param string $price
@@ -156,28 +132,5 @@ class Transport {
 	 */
 	public function markAsDeleted() {
 		$this->deleted = true;
-		$this->payments->clear();
-	}
-	
-	/**
-	 * @param boolean $withoutRelations
-	 * @return boolean
-	 */
-	public function isVisible($withoutRelations = false) {
-		if ($this->isHidden() || $this->getPayments()->isEmpty()) {
-			return false;
-		}
-		
-		if ($withoutRelations) {
-			return true;
-		} else {
-			foreach ($this->getPayments() as $payment) {
-				/* @var $payment Payment */
-				if ($payment->isVisible(true)) {
-					return true;
-				}
-			}
-			return false;
-		}
 	}
 }
