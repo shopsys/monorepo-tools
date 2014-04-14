@@ -7,27 +7,25 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/index.css': 'web/assets/admin/styles/main.less'
+					'web/assets/admin/index.css': 'src/SS6/AdminBundle/Resources/styles/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
 					sourceMapFilename: 'web/assets/admin/index.css.map',
-					sourceMapRootpath: '../../',
-					sourceMapBasepath: 'web/'
+					sourceMapRootpath: '../../../'
 				}
 			},
 
 			frontend: {
 				files: {
-					'web/assets/frontend/index.css': 'web/assets/frontend/styles/main.less'
+					'web/assets/frontend/index.css': 'src/SS6/FrontBundle/Resources/styles/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
 					sourceMapFilename: 'web/assets/frontend/index.css.map',
-					sourceMapRootpath: '../../',
-					sourceMapBasepath: 'web/'
+					sourceMapRootpath: '../../../'
 				}
 			}
 		},
@@ -58,21 +56,20 @@ module.exports = function(grunt) {
 
 
 		watch: {
-			frontend: {
-				files: ['web/assets/frontend/styles/**/*.less'],
-				tasks: ['frontend'],
-				options: {
-					livereload: true,
-				}
-			},
 			admin: {
-				files: ['web/assets/admin/styles/**/*.less'],
+				files: ['src/SS6/AdminBundle/Resources/styles/**/*.less'],
 				tasks: ['admin'],
 				options: {
 					livereload: true,
 				}
+			},
+			frontend: {
+				files: ['src/SS6/FrontBundle/Resources/styles/**/*.less'],
+				tasks: ['frontend'],
+				options: {
+					livereload: true,
+				}
 			}
-			
 		}
 
 
