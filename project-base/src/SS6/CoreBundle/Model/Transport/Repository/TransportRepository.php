@@ -35,6 +35,18 @@ class TransportRepository {
 	}
 	
 	/**
+	 * @param array $transportIds
+	 * @return array
+	 */
+	public function findAllByIds(array $transportIds) {
+		$dql = sprintf('SELECT t FROM %s t WHERE t.deleted = :deleted AND t.id IN (:trasportIds)', Transport::class);
+		return $this->em->createQuery($dql)
+			->setParameter('deleted', false)
+			->setParameter('trasportIds', $transportIds)
+			->getResult();
+	}
+	
+	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getAllQueryBuilder() {

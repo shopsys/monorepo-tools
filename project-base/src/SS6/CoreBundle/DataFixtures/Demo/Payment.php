@@ -32,11 +32,10 @@ class Payment extends AbstractFixture implements OrderedFixtureInterface {
 	 */
 	private function createPayment(
 			ObjectManager $manager, $name, $price, array $transportsReferenceName, $description, $hide = false) {
-		$transports = new ArrayCollection();
-		foreach ($transportsReferenceName as $referenceName) {
-			$transports->add($this->getReference($referenceName));
-		}
 		$payment = new PaymentEntity($name, $price, $transports, $description, $hide);
+		foreach ($transportsReferenceName as $referenceName) {
+			$payment->addTransport($this->getReference($referenceName));
+		}
 		$manager->persist($payment);
 	}
 

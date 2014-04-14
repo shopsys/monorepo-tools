@@ -52,6 +52,14 @@ class PaymentEditFacade {
 	
 	/**
 	 * @param int $id
+	 * @return \SS6\CoreBundle\Model\Payment\Entity\Payment
+	 */
+	public function getByIdWithTransports($id) {
+		return $this->paymentRepository->getByIdWithTransports($id);
+	}
+	
+	/**
+	 * @param int $id
 	 */
 	public function deleteById($id) {
 		$payment = $this->getById($id);

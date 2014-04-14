@@ -34,7 +34,7 @@ class PaymentFormData {
 	/**
 	 * @var Collection 
 	 */
-	private $transports;
+	private $transports = array();
 	
 	/**
 	 * @return int

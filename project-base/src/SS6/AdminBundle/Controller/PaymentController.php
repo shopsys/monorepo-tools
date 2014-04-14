@@ -16,20 +16,23 @@ class PaymentController extends Controller {
 	public function newAction(Request $request) {
 		$transportRepository = $this->get('ss6.core.transport.transport_repository');
 		/* @var $transportRepository TransportRepository */
-		$transportQueryBuilder = $transportRepository->getAllQueryBuilder();
+		$allTransports = $transportRepository->getAll(); // TODO
 		
 		$formData = new PaymentFormData();
-		$form = $this->createForm(new PaymentFormType($transportQueryBuilder), $formData);
+		$form = $this->createForm(new PaymentFormType($allTransports), $formData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
+			$transportRepository->getAll();
 			$payment = new Payment(
 				$formData->getName(), 
 				$formData->getPrice(), 
-				$formData->getTransports(),
 				$formData->getDescription(),
 				$formData->isHidden()
 			);
+			
+			$transports = $transportRepository->findAllByIds($formData->getTransports());
+			$payment->setTransports($transports);
 			
 			$paymentEditFacade = $this->get('ss6.core.payment.payment_edit_facade');
 			/* @var $paymentEditFacade PaymentEditFacade */
@@ -55,8 +58,10 @@ class PaymentController extends Controller {
 		/* @var $paymentEditFacade PaymentEditFacade */
 		
 		try {
-			$payment = $paymentEditFacade->getById($id);
+			$allTransports = $transportRepository->getAll(); // TODO
+			
 			/* @var $payment Payment */
+			$payment = $paymentEditFacade->getByIdWithTransports($id); 
 			
 			$formData = new PaymentFormData();
 			$formData->setId($payment->getId());
@@ -64,9 +69,14 @@ class PaymentController extends Controller {
 			$formData->setPrice($payment->getPrice());
 			$formData->setDescription($payment->getDescription());
 			$formData->setHidden($payment->isHidden());
-			$formData->setTransports($payment->getTransports());
 			
-			$form = $this->createForm(new PaymentFormType($transportQueryBuilder), $formData);
+			$transports = array();
+			foreach ($payment->getTransports() as $transport) {
+				$transports[] = $transport->getId();
+			}
+			$formData->setTransports($transports);
+			
+			$form = $this->createForm(new PaymentFormType($allTransports), $formData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
@@ -76,6 +86,9 @@ class PaymentController extends Controller {
 					$formData->getDescription(), 
 					$formData->isHidden()
 				);
+				$transports = $transportRepository->findAllByIds($formData->getTransports());
+				$payment->setTransports($transports);
+				
 				$paymentEditFacade->edit($payment);
 				return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $id)));
 			}

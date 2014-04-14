@@ -70,11 +70,11 @@ class Payment {
 	 * @param string|boolean $description
 	 * @param boolean $hidden
 	 */
-	public function __construct($name, $price, Collection $transports = null, $description = null, $hidden = false) {
+	public function __construct($name, $price, $description = null, $hidden = false) {
 		$this->name = $name;
 		$this->price = $price;
 		$this->description = $description;
-		$this->transports = $transports instanceof Collection ? $transports : new ArrayCollection();
+		$this->transports = new ArrayCollection();
 		$this->hidden = $hidden;
 		$this->deleted = false;
 	}
@@ -86,6 +86,17 @@ class Payment {
 		if (!$this->transports->contains($transport)) {
 			$transport->addPayment($this);
 			$this->transports[] = $transport;
+		}
+	}
+	
+	/**
+	 * @param array $transports
+	 */
+	public function setTransports(array $transports) {
+		$this->transports->clear();
+		foreach ($transports as $transport) {
+			/* @var $transport SS6\CoreBundle\Model\Transport\Entity\Transport */
+			$this->addTransport($transport);
 		}
 	}
 	
