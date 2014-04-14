@@ -19,8 +19,8 @@
 	
 	<property file="${path.build.properties.local}" override="true"/>
  
-	<target name="build" depends="composer,phplint,phpcs,phpmd,tests,db-rebuild"/>
-	<target name="build-demo" depends="composer,phplint,phpcs,phpmd,tests,db-demo"/>
+	<target name="build" depends="composer,phplint,phpcs,phpmd,grunt,tests,db-rebuild"/>
+	<target name="build-demo" depends="composer,phplint,phpcs,phpmd,grunt,tests,db-demo"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="db-demo" depends="db-rebuild,db-fixtures-demo"/>
@@ -125,6 +125,10 @@
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
+	</target>
+	
+	<target name="grunt">
+		<exec executable="grunt" passthru="true" checkreturn="true" />
 	</target>
 	
 </project>
