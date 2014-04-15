@@ -1,0 +1,22 @@
+{% extends 'SS6ShopBundle::Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+	- Dopravy a platby
+{% endblock %}
+
+{% block h1 %}
+	Dopravy a platby
+{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Dopravy a platby</span>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	{{ render(controller('SS6ShopBundle:Admin/TransportAndPayment:transportList')) }}
+	{{ render(controller('SS6ShopBundle:Admin/TransportAndPayment:paymentList')) }}
+{% endblock %}

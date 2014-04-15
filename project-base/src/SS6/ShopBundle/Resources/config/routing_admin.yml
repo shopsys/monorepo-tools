@@ -1,0 +1,69 @@
+admin_homepage:
+  pattern:  /dashboard/
+  defaults: { _controller: SS6ShopBundle:Admin\Default:index }
+    
+admin_login:
+  pattern:  /
+  defaults: { _controller: SS6ShopBundle:Admin\Login:login }
+  
+admin_login_check:
+  pattern: /login_check/
+    
+admin_logout:
+  pattern:  /logout/
+
+admin_product_delete:
+  pattern: /product/delete/{id}
+  defaults: { _controller: SS6ShopBundle:Admin\Product:delete }
+  requirements:
+    id: \d+
+
+admin_product_edit:
+  pattern: /product/edit/{id}
+  defaults: { _controller: SS6ShopBundle:Admin\Product:edit }
+  requirements:
+    id: \d+
+    
+admin_product_list:
+  pattern: /product/list/
+  defaults: { _controller: SS6ShopBundle:Admin\Product:list }
+
+admin_product_new:
+  pattern: /product/new/
+  defaults: { _controller: SS6ShopBundle:Admin\Product:new }
+  
+admin_payment_new:
+  pattern:  /payment/new/
+  defaults: { _controller: SS6ShopBundle:Admin\Payment:new }
+  
+admin_payment_edit:
+  pattern:  /payment/edit/{id}
+  defaults: { _controller: SS6ShopBundle:Admin\Payment:edit }
+  requirements:
+    id: \d+
+    
+admin_payment_delete:
+  pattern:  /payment/delete/{id}
+  defaults: { _controller: SS6ShopBundle:Admin\Payment:delete }
+  requirements:
+    id: \d+
+
+admin_transport_and_payment_list:
+  pattern:  /transport_and_payment/list/
+  defaults: { _controller: SS6ShopBundle:Admin\TransportAndPayment:index }
+  
+admin_transport_new:
+  pattern:  /transport/new/
+  defaults: { _controller: SS6ShopBundle:Admin\Transport:new }
+  
+admin_transport_edit:
+  pattern:  /transport/edit/{id}
+  defaults: { _controller: SS6ShopBundle:Admin\Transport:edit }
+  requirements:
+    id: \d+
+    
+admin_transport_delete:
+  pattern:  /transport/delete/{id}
+  defaults: { _controller: SS6ShopBundle:Admin\Transport:delete }
+  requirements:
+    id: \d+
