@@ -13,6 +13,8 @@ module.exports = function(grunt) {
 					compress: true,
 					sourceMap: true,
 					sourceMapFilename: 'web/assets/admin/index.css.map',
+					sourceMapBasepath: 'web',
+					sourceMapURL: 'index.css.map',
 					sourceMapRootpath: '../../../'
 				}
 			},
@@ -25,6 +27,8 @@ module.exports = function(grunt) {
 					compress: true,
 					sourceMap: true,
 					sourceMapFilename: 'web/assets/frontend/index.css.map',
+					sourceMapBasepath: 'web',
+					sourceMapURL: 'index.css.map',
 					sourceMapRootpath: '../../../'
 				}
 			}
