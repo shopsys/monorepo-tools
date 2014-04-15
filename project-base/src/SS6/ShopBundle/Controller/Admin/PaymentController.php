@@ -4,10 +4,10 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
-use SS6\ShopBundle\Model\Payment\Entity\Payment;
 use SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException;
-use SS6\ShopBundle\Model\Payment\Facade\PaymentEditFacade;
-use SS6\ShopBundle\Model\Transport\Repository\TransportRepository;
+use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
+use SS6\ShopBundle\Model\Transport\TransportRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

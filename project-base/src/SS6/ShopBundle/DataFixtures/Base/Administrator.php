@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Base\Administrator;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Model\Administrator\Entity\Administrator;
+use SS6\ShopBundle\Model\Administrator\Administrator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

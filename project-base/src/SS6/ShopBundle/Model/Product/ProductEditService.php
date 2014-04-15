@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Service;
+namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Exception\ValidationException;
-use SS6\ShopBundle\Model\Product\Entity\Product;
+use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Component\Validator\Validator;
 
 class ProductEditService {

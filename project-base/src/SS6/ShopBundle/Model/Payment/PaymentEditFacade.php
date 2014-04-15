@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment\Facade;
+namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Payment\Entity\Payment;
-use SS6\ShopBundle\Model\Payment\Repository\PaymentRepository;
+use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentRepository;
 
 class PaymentEditFacade {
 	
@@ -27,7 +27,7 @@ class PaymentEditFacade {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Entity\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function create(Payment $payment) {
 		$this->em->persist($payment);
@@ -35,7 +35,7 @@ class PaymentEditFacade {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Entity\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function edit(Payment $payment) {
 		$this->em->persist($payment);
@@ -44,7 +44,7 @@ class PaymentEditFacade {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Entity\Payment
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	public function getById($id) {
 		return $this->paymentRepository->getById($id);
@@ -52,7 +52,7 @@ class PaymentEditFacade {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Entity\Payment
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	public function getByIdWithTransports($id) {
 		return $this->paymentRepository->getByIdWithTransports($id);

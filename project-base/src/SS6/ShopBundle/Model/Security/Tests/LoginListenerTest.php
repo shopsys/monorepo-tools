@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Tests\Listener;
+namespace SS6\ShopBundle\Model\Security\Tests;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Security\Listener\LoginListener;
+use SS6\ShopBundle\Model\Security\LoginListener;
 
 class LoginListenerTest extends PHPUnit_Framework_TestCase {
 	

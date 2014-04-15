@@ -25,7 +25,7 @@ class LoginController extends Controller {
 		));
 
 		$loginService = $this->container->get('ss6.core.security.login_service');
-		/* @var $loginService SS6\ShopBundle\Model\Security\Service\LoginService */
+		/* @var $loginService SS6\ShopBundle\Model\Security\LoginService */
 		try {
 			$loginService->checkLoginProcess($request);
 		} catch (LoginFailedException $e) {

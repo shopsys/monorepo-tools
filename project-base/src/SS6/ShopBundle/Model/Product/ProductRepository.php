@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Repository;
+namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use SS6\ShopBundle\Model\Product\Entity\Product;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException;
 
 class ProductRepository {
@@ -17,12 +17,12 @@ class ProductRepository {
 	 * @param \Doctrine\ORM\EntityManager $entityManager
 	 */
 	public function __construct(EntityManager $entityManager) {
-		$this->entityRepository = $entityManager->getRepository('SS6ShopBundle:Product\Entity\Product');
+		$this->entityRepository = $entityManager->getRepository(Product::class);
 	}
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Entity\Product|null
+	 * @return SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function findById($id) {
 		return $this->entityRepository->find($id);
@@ -30,7 +30,7 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Entity\Product|null
+	 * @return SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function findVisibleById($id) {
 		$product = $this->findById($id);
@@ -46,7 +46,7 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Entity\Product
+	 * @return SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getById($id) {
 		$product = $this->findById($id);

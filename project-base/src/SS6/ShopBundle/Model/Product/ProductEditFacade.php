@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Facade;
+namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Entity\Product;
-use SS6\ShopBundle\Model\Product\Repository\ProductRepository;
-use SS6\ShopBundle\Model\Product\Service\ProductEditService;
+use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductEditService;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 

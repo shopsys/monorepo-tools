@@ -1,11 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport\Entity;
+namespace SS6\ShopBundle\Model\Transport;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Payment\Entity\Payment;
 
 /**
  * @ORM\Table(name="transports")

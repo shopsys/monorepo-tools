@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Listener;
+namespace SS6\ShopBundle\Model\Security;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
+use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener {

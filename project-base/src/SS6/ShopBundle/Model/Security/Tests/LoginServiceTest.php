@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Tests\Service;
+namespace SS6\ShopBundle\Model\Security\Tests;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Security\Service\LoginService;
+use SS6\ShopBundle\Model\Security\LoginService;
 use StdClass;
 
 class LoginServiceTest extends PHPUnit_Framework_TestCase {

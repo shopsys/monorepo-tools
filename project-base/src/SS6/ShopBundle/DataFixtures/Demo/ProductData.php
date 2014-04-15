@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Model\Product\Entity\Product;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductData extends AbstractFixture {
 

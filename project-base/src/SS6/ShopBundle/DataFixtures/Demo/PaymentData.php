@@ -2,13 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Model\Payment\Entity\Payment as PaymentEntity;
+use SS6\ShopBundle\Model\Payment\Payment;
 
-class Payment extends AbstractFixture implements OrderedFixtureInterface {
+class PaymentData extends AbstractFixture implements OrderedFixtureInterface {
 
 	/**
 	 * @param ObjectManager $manager
@@ -32,7 +31,7 @@ class Payment extends AbstractFixture implements OrderedFixtureInterface {
 	 */
 	private function createPayment(
 			ObjectManager $manager, $name, $price, array $transportsReferenceName, $description, $hide = false) {
-		$payment = new PaymentEntity($name, $price, $description, $hide);
+		$payment = new Payment($name, $price, $description, $hide);
 		foreach ($transportsReferenceName as $referenceName) {
 			$payment->addTransport($this->getReference($referenceName));
 		}
@@ -43,6 +42,6 @@ class Payment extends AbstractFixture implements OrderedFixtureInterface {
 	 * @return int
 	 */
 	public function getOrder() {
-		return 15;
+		return 15; // after TransportData
 	}	
 }

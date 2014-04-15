@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment\Repository;
+namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Payment\Entity\Payment;
-use SS6\ShopBundle\Model\Transport\Entity\Transport;
+use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException;
+use SS6\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository {
 	
@@ -44,7 +44,7 @@ class PaymentRepository {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Entity\Transport
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 * @throws PaymentNotFoundException
 	 */
 	public function getById($id) {
@@ -58,7 +58,7 @@ class PaymentRepository {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Entity\Transport
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 * @throws PaymentNotFoundException
 	 */
 	public function getByIdWithTransports($id) {
@@ -80,7 +80,7 @@ class PaymentRepository {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Entity\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return array
 	 */
 	public function getAllByTransport(Transport $transport) {

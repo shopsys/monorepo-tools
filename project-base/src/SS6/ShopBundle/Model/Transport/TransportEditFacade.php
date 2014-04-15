@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport\Facade;
+namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Payment\Repository\PaymentRepository;
-use SS6\ShopBundle\Model\Transport\Entity\Transport;
-use SS6\ShopBundle\Model\Transport\Repository\TransportRepository;
+use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class TransportEditFacade {
 	
@@ -34,7 +34,7 @@ class TransportEditFacade {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Entity\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function create(Transport $transport) {
 		$this->em->persist($transport);
@@ -42,7 +42,7 @@ class TransportEditFacade {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Entity\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function edit(Transport $transport) {
 		$this->em->persist($transport);
@@ -51,7 +51,7 @@ class TransportEditFacade {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Transport\Entity\Transport
+	 * @return \SS6\ShopBundle\Model\Transport\Transport
 	 */
 	public function getById($id) {
 		return $this->transportRepository->getById($id);
@@ -65,7 +65,7 @@ class TransportEditFacade {
 		$transport->markAsDeleted();
 		$paymentsByTransport = $this->paymentRepository->getAllByTransport($transport);
 		foreach ($paymentsByTransport as $payment) {
-			/* @var $payment \SS6\ShopBundle\Model\Payment\Entity\Payment */
+			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment->getTransports()->removeElement($transport);
 		}
 		$this->em->flush();

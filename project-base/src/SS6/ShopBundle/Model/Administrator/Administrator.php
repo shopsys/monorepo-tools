@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Entity;
+namespace SS6\ShopBundle\Model\Administrator;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity
  * @ORM\Table(name="administrators")
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Administrator\Repository\AdministratorRepository")
+ * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Administrator\AdministratorRepository")
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 

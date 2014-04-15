@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Entity;
+namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Form\YesNoType;
-use SS6\ShopBundle\Model\Product\Entity\Product;
+use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

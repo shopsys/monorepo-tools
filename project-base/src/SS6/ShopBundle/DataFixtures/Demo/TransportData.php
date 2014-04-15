@@ -5,9 +5,9 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Model\Transport\Entity\Transport as TransportEntity;
+use SS6\ShopBundle\Model\Transport\Transport;
 
-class Transport extends AbstractFixture implements OrderedFixtureInterface {
+class TransportTada extends AbstractFixture implements OrderedFixtureInterface {
 
 	/**
 	 * @param ObjectManager $manager
@@ -29,7 +29,7 @@ class Transport extends AbstractFixture implements OrderedFixtureInterface {
 	 * @param boolean $deleted
 	 */
 	private function createTransport(ObjectManager $manager, $referenceName, $name, $price, $description, $hide = false) {
-		$transport = new TransportEntity($name, $price, $description, $hide);
+		$transport = new Transport($name, $price, $description, $hide);
 		$manager->persist($transport);
 		$this->addReference($referenceName, $transport);
 	}
@@ -38,6 +38,6 @@ class Transport extends AbstractFixture implements OrderedFixtureInterface {
 	 * @return int
 	 */
 	public function getOrder() {
-		return 10;
+		return 10; // before PaymentData
 	}	
 }

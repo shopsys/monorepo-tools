@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Login;
 
+use SS6\ShopBundle\Model\Administrator\Administrator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -31,7 +32,7 @@ class LoginFormType extends AbstractType {
 	 */
 	public function getDefaultOptions(array $options) {
 		return array(
-			'data_class' => 'SS6\ShopBundle\Model\Administrator\Entity\Administrator',
+			'data_class' => Administrator::class,
 		);
 	}
 

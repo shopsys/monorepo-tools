@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment\Entity;
+namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Transport\Entity\Transport;
+use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="payments")
@@ -46,7 +46,7 @@ class Payment {
 	/**
 	 * @var Collection
 	 * 
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Transport\Entity\Transport")
+	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
 	 * @ORM\JoinTable(name="payments_transports")
 	 */
 	private $transports;
@@ -83,7 +83,7 @@ class Payment {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Entity\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function addTransport(Transport $transport) {
 		if (!$this->transports->contains($transport)) {
@@ -97,13 +97,13 @@ class Payment {
 	public function setTransports(array $transports) {
 		$this->transports->clear();
 		foreach ($transports as $transport) {
-			/* @var $transport SS6\ShopBundle\Model\Transport\Entity\Transport */
+			/* @var $transport SS6\ShopBundle\Model\Transport\Transport */
 			$this->addTransport($transport);
 		}
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Entity\Transport[]
+	 * @return \Doctrine\Common\Collections\Collection
 	 */
 	public function getTransports() {
 		return $this->transports;

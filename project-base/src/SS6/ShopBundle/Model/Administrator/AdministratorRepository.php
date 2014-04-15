@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Repository;
+namespace SS6\ShopBundle\Model\Administrator;
 
 use DateTime;
 use Doctrine\ORM\EntityRepository;
-use SS6\ShopBundle\Model\Administrator\Entity\Administrator;
+use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -24,7 +24,7 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 
 		if ($administrator === null) {
 			$message = sprintf(
-				'Unable to find an active admin SS6\ShopBundle\Model\Administrator\Entity\Administrator object identified by "%s".', $username
+				'Unable to find an active admin SS6\ShopBundle\Model\Administrator\Administrator object identified by "%s".', $username
 			);
 			throw new UsernameNotFoundException($message, 0);
 		}

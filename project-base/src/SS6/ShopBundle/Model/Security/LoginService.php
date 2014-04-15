@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Service;
+namespace SS6\ShopBundle\Model\Security;
 
 use SS6\ShopBundle\Model\Security\Exception\LoginFailedException;
 use Symfony\Component\HttpFoundation\Request;

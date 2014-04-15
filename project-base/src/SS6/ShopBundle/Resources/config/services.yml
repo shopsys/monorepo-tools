@@ -13,38 +13,32 @@ services:
   
   doctrine.orm.entity_manager.abstract:
     synthetic: true
-  
-  ss6.core.administrator.administrator_repository:
-    class: SS6\ShopBundle\Model\Administrator\Repository\AdministratorRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: ["NDShopSys6Bundle:Identities\Identity"]
 
   ss6.core.product.product_edit_facade:
-    class: SS6\ShopBundle\Model\Product\Facade\ProductEditFacade
+    class: SS6\ShopBundle\Model\Product\ProductEditFacade
     
   ss6.core.product.product_edit_service:
-    class: SS6\ShopBundle\Model\Product\Service\ProductEditService
+    class: SS6\ShopBundle\Model\Product\ProductEditService
   
   ss6.core.product.product_repository:
-    class: SS6\ShopBundle\Model\Product\Repository\ProductRepository
+    class: SS6\ShopBundle\Model\Product\ProductRepository
   
   ss6.core.security.login_listener:
-    class: SS6\ShopBundle\Model\Security\Listener\LoginListener
+    class: SS6\ShopBundle\Model\Security\LoginListener
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
     
   ss6.core.security.login_service:
-    class: SS6\ShopBundle\Model\Security\Service\LoginService
+    class: SS6\ShopBundle\Model\Security\LoginService
     
   ss6.core.payment.payment_edit_facade:
-    class: SS6\ShopBundle\Model\Payment\Facade\PaymentEditFacade
+    class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
     
   ss6.core.payment.payment_repository:
-    class: SS6\ShopBundle\Model\Payment\Repository\PaymentRepository
+    class: SS6\ShopBundle\Model\Payment\PaymentRepository
 
   ss6.core.transport.transport_edit_facade:
-    class: SS6\ShopBundle\Model\Transport\Facade\TransportEditFacade
+    class: SS6\ShopBundle\Model\Transport\TransportEditFacade
 
   ss6.core.transport.transport_repository:
-    class: SS6\ShopBundle\Model\Transport\Repository\TransportRepository
+    class: SS6\ShopBundle\Model\Transport\TransportRepository

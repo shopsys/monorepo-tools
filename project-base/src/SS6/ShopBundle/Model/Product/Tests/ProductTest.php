@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Tests\Listener;
+namespace SS6\ShopBundle\Model\Product\Tests;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Entity\Product;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductTest extends PHPUnit_Framework_TestCase {
 	

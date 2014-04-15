@@ -12,9 +12,9 @@ class TransportAndPaymentController extends Controller {
 	
 	public function transportListAction() {
 		$transportRepository = $this->get('ss6.core.transport.transport_repository');
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\Repository\TransportRepository */
+		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\Repository\PaymentRepository */
+		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		
 		$allPayments = $paymentRepository->getAllWithTransports();
 		$transports = $transportRepository->getAllDataWithVisibility($allPayments);
@@ -26,7 +26,7 @@ class TransportAndPaymentController extends Controller {
 	
 	public function paymentListAction() {
 		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\Repository\PaymentRepository */
+		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$payments = $paymentRepository->getAll();
 		
 		return $this->render('SS6ShopBundle::Admin/Content/TransportAndPayment/paymentList.html.twig', array(

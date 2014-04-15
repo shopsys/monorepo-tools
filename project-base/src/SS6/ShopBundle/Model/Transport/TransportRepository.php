@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport\Repository;
+namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Transport\Entity\Transport;
+use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException;
 
 class TransportRepository {
@@ -64,7 +64,7 @@ class TransportRepository {
 	
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Transport\Entity\Transport
+	 * @return \SS6\ShopBundle\Model\Transport\Transport
 	 * @throws TransportNotFoundException
 	 */
 	public function getById($id) {
@@ -85,7 +85,7 @@ class TransportRepository {
 		$transportsData = [];
 		
 		foreach ($transports as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Entity\Transport */
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			$visible = false;
 			if (!$transport->isHidden()) {
 				$visible = $this->existVisiblePaymentWithTransport($allPayments, $transport);
@@ -101,12 +101,12 @@ class TransportRepository {
 	
 	/**
 	 * @param array $allPayments
-	 * @param \SS6\ShopBundle\Model\Transport\Entity\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return boolean
 	 */
 	private function existVisiblePaymentWithTransport(array $allPayments, Transport $transport) {
 		foreach ($allPayments as $payment) {
-			/* @var $payment \SS6\ShopBundle\Model\Payment\Entity\Payment */
+			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			if ($payment->isVisible() && $payment->getTransports()->contains($transport)) {
 				return true;
 			}

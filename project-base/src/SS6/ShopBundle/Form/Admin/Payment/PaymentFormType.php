@@ -32,7 +32,7 @@ class PaymentFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$transportChoices = array();
 		foreach ($this->allTransports as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Entity\Transport */
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			$transportChoices[$transport->getId()] = $transport->getName();
 		}
 		
@@ -55,7 +55,7 @@ class PaymentFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => 'SS6\ShopBundle\Form\Admin\Payment\PaymentFormData',
+			'data_class' => PaymentFormData::class,
 		));
 	}
 }
