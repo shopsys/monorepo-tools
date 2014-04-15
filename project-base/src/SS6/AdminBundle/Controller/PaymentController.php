@@ -16,7 +16,7 @@ class PaymentController extends Controller {
 	public function newAction(Request $request) {
 		$transportRepository = $this->get('ss6.core.transport.transport_repository');
 		/* @var $transportRepository TransportRepository */
-		$allTransports = $transportRepository->getAll(); // TODO
+		$allTransports = $transportRepository->getAll();
 		
 		$formData = new PaymentFormData();
 		$form = $this->createForm(new PaymentFormType($allTransports), $formData);
@@ -52,7 +52,6 @@ class PaymentController extends Controller {
 	public function editAction(Request $request, $id) {
 		$transportRepository = $this->get('ss6.core.transport.transport_repository');
 		/* @var $transportRepository TransportRepository */
-		
 		$paymentEditFacade = $this->get('ss6.core.payment.payment_edit_facade');
 		/* @var $paymentEditFacade PaymentEditFacade */
 		
