@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
-use SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -68,7 +67,7 @@ class TransportController extends Controller {
 				$transportEditFacade->edit($transport);
 				return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $id)));
 			}
-		} catch (TransportNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 
@@ -88,7 +87,7 @@ class TransportController extends Controller {
 		try {
 			$transportEditFacade->deleteById($id);
 			return $this->redirect($this->generateUrl('admin_transport_and_payment_list'));
-		} catch (TransportNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 	}

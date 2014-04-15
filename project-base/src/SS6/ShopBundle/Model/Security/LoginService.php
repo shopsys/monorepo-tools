@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Security;
 
-use SS6\ShopBundle\Model\Security\Exception\LoginFailedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -24,7 +23,7 @@ class LoginService {
 		}
 
 		if ($error !== null) {
-			throw new LoginFailedException('Login failed.');
+			throw new Exception\LoginFailedException('Login failed.');
 		}
 		
 		return true;

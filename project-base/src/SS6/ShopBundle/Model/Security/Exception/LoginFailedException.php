@@ -8,9 +8,9 @@ class LoginFailedException extends Exception implements SecurityException {
 	
 	/**
 	 * @param string $message
-	 * @param integer $code
+	 * @param Exception $previous
 	 */
-	public function __construct($message, $code = 0) {
-		parent::__construct($message, $code, null);
+	public function __construct($message, Exception $previous = null) {
+		parent::__construct($message, 0, $previous);
 	}
 }

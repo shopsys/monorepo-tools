@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
-use SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -90,7 +89,7 @@ class PaymentController extends Controller {
 				$paymentEditFacade->edit($payment);
 				return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $id)));
 			}
-		} catch (PaymentNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 
@@ -110,7 +109,7 @@ class PaymentController extends Controller {
 		try {
 			$paymentEditFacade->deleteById($id);
 			return $this->redirect($this->generateUrl('admin_transport_and_payment_list'));
-		} catch (PaymentNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 	}

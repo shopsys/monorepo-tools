@@ -7,9 +7,7 @@ use APY\DataGridBundle\Grid\Column\BooleanColumn;
 use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Row;
 use APY\DataGridBundle\Grid\Source\Entity;
-use SS6\ShopBundle\Exception\ValidationException;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
-use SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,9 +29,9 @@ class ProductController extends Controller {
 				);
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $id)));
 			}
-		} catch (ProductNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
-		} catch (ValidationException $e) {
+		} catch (\SS6\ShopBundle\Exception\ValidationException $e) {
 			$this->get('session')->getFlashBag()->add(
 				'error', $e->getMessage()
 			);
@@ -60,9 +58,9 @@ class ProductController extends Controller {
 				);
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $form->getData()->getId())));
 			}
-		} catch (ProductNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
-		} catch (ValidationException $e) {
+		} catch (\SS6\ShopBundle\Exception\ValidationException $e) {
 			$this->get('session')->getFlashBag()->add(
 				'error', $e->getMessage()
 			);
@@ -128,8 +126,8 @@ class ProductController extends Controller {
 			$this->get('session')->getFlashBag()->add(
 				'success', 'Produkt byl úspěšně smazán.'
 			);
-		} catch (ProductNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage());
+		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+			throw $this->createNotFoundException('Product to delete not found.', $e);
 		}
 		
 		return $this->redirect($this->generateUrl('admin_product_list'));

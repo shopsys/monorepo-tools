@@ -7,8 +7,6 @@ use Doctrine\ORM\EntityRepository;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -26,7 +24,7 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 			$message = sprintf(
 				'Unable to find an active admin SS6\ShopBundle\Model\Administrator\Administrator object identified by "%s".', $username
 			);
-			throw new UsernameNotFoundException($message, 0);
+			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
 		}
 
 		return $administrator;
@@ -40,12 +38,13 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 	public function refreshUser(UserInterface $administrator) {
 		$class = get_class($administrator);
 		if (!$this->supportsClass($class)) {
-			throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+			$message = sprintf('Instances of "%s" are not supported.', $class);
+			throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
 		}
 		
 		if ($administrator instanceof TimelimitLoginInterface) {
 			if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
-				throw new UsernameNotFoundException('Admin was too long unactive.');
+				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Admin was too long unactive.');
 			}
 			$administrator->setLastActivity(new DateTime());
 		}
@@ -59,7 +58,7 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 		$freshAdministrator = $this->findOneBy($findParams);
 
 		if ($freshAdministrator === null) {
-			throw new UsernameNotFoundException('Unable to find an active admin');
+			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
 		}
 		
 		return $freshAdministrator;

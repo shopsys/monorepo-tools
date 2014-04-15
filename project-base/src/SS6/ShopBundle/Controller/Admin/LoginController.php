@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
-use SS6\ShopBundle\Model\Security\Exception\LoginFailedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,7 +27,7 @@ class LoginController extends Controller {
 		/* @var $loginService SS6\ShopBundle\Model\Security\LoginService */
 		try {
 			$loginService->checkLoginProcess($request);
-		} catch (LoginFailedException $e) {
+		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
 			$error = 'Přihlášení se nepodařilo.';
 		}
 

@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller {
 	public function detailAction($id) {
@@ -13,7 +12,7 @@ class ProductController extends Controller {
 			
 		$product = $productRepository->findVisibleById($id);
 		if (!$product) {
-			throw new NotFoundHttpException('Product not found');
+			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Product not found');
 		}
 		
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(

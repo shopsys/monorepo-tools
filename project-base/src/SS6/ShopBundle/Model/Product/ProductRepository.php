@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException;
 
 class ProductRepository {
 	/** 
@@ -52,7 +51,7 @@ class ProductRepository {
 		$product = $this->findById($id);
 		
 		if ($product === null) {
-			throw new ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
+			throw new Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
 		}
 		
 		return $product;

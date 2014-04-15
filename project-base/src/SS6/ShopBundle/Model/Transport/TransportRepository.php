@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException;
 
 class TransportRepository {
 	
@@ -71,7 +70,7 @@ class TransportRepository {
 		$criteria = array('id' => $id);
 		$transport = $this->getTransportRepository()->findOneBy($criteria);
 		if ($transport === null) {
-			throw new TransportNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException($criteria);
 		}
 		return $transport;
 	}

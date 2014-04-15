@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Exception\ValidationException;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Component\Validator\Validator;
 
@@ -29,7 +28,7 @@ class ProductEditService {
 		$constraintViolations = $this->validator->validate($product);
 		
 		if ($constraintViolations->count() > 0) {
-			throw new ValidationException($constraintViolations);
+			throw new \SS6\ShopBundle\Exception\ValidationException($constraintViolations);
 		}
 		
 		return $product;

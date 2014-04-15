@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository {
@@ -51,7 +50,7 @@ class PaymentRepository {
 		$criteria = array('id' => $id);
 		$payment = $this->getPaymentRepository()->findOneBy($criteria);
 		if ($payment === null) {
-			throw new PaymentNotFoundException($criteria);
+			throw new Exception\PaymentNotFoundException($criteria);
 		}
 		return $payment;
 	}
@@ -67,7 +66,7 @@ class PaymentRepository {
 			$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.id = :id', Payment::class);
 			return $this->em->createQuery($dql)->setParameters($criteria)->getSingleResult();
 		} catch (\Doctrine\ORM\NoResultException $e) {
-			throw new PaymentNotFoundException($criteria, $e);
+			throw new Exception\PaymentNotFoundException($criteria, $e);
 		}
 	}
 	
