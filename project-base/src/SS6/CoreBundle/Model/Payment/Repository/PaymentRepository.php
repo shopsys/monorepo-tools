@@ -78,4 +78,13 @@ class PaymentRepository {
 		$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.deleted = :deleted', Payment::class);
 		return $this->em->createQuery($dql)->setParameter('deleted', false)->getResult();
 	}
+	
+	/**
+	 * @param \SS6\CoreBundle\Model\Transport\Entity\Transport $transport
+	 * @return array
+	 */
+	public function getAllByTransport(Transport $transport) {
+		$dql = sprintf('SELECT p, t FROM %s p JOIN p.transports t WHERE t.id = :transportId', Payment::class);
+		return $this->em->createQuery($dql)->setParameter('transportId', $transport->getId())->getResult();
+	}
 }

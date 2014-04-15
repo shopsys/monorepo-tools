@@ -2,7 +2,6 @@
 
 namespace SS6\CoreBundle\Model\Transport\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use SS6\CoreBundle\Model\Transport\Entity\Transport;
 use SS6\CoreBundle\Model\Transport\Exception\TransportNotFoundException;

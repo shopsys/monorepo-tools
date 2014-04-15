@@ -57,7 +57,7 @@ class PaymentController extends Controller {
 		/* @var $paymentEditFacade PaymentEditFacade */
 		
 		try {
-			$allTransports = $transportRepository->getAll(); // TODO
+			$allTransports = $transportRepository->getAll();
 			
 			/* @var $payment Payment */
 			$payment = $paymentEditFacade->getByIdWithTransports($id); 
