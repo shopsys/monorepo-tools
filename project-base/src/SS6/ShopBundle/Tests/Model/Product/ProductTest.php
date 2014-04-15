@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Tests;
+namespace SS6\ShopBundle\Tests\Model\Product;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;

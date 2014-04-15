@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Tests;
+namespace SS6\ShopBundle\Tests\Model\Security;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Security\LoginService;
