@@ -2,7 +2,7 @@
 
 namespace SS6\AdminBundle\Form\Transport;
 
-use SS6\CoreBundle\Form\YesNoType;
+use SS6\ShopBundle\Form\YesNoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

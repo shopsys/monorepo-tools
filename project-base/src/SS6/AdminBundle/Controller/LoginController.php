@@ -3,7 +3,7 @@
 namespace SS6\AdminBundle\Controller;
 
 use SS6\AdminBundle\Form\Login\LoginFormType;
-use SS6\CoreBundle\Model\Security\Exception\LoginFailedException;
+use SS6\ShopBundle\Model\Security\Exception\LoginFailedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,7 +25,7 @@ class LoginController extends Controller {
 		));
 
 		$loginService = $this->container->get('ss6.core.security.login_service');
-		/* @var $loginService SS6\CoreBundle\Model\Security\Service\LoginService */
+		/* @var $loginService SS6\ShopBundle\Model\Security\Service\LoginService */
 		try {
 			$loginService->checkLoginProcess($request);
 		} catch (LoginFailedException $e) {

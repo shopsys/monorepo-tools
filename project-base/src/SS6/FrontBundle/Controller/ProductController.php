@@ -2,7 +2,7 @@
 
 namespace SS6\FrontBundle\Controller;
 
-use SS6\CoreBundle\Model\Product\Repository\ProductRepository;
+use SS6\ShopBundle\Model\Product\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

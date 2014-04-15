@@ -1,0 +1,50 @@
+imports:
+  - { resource: ../../Twig/services.yml }
+
+services:
+  
+  doctrine.orm.default_entity_manager:
+    class: %doctrine.orm.entity_manager.class%
+    factory_class: %doctrine.orm.entity_manager.class%
+    factory_method: create
+    arguments: 
+      - @doctrine.dbal.default_connection
+      - @doctrine.orm.default_configuration
+  
+  doctrine.orm.entity_manager.abstract:
+    synthetic: true
+  
+  ss6.core.administrator.administrator_repository:
+    class: SS6\ShopBundle\Model\Administrator\Repository\AdministratorRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: ["NDShopSys6Bundle:Identities\Identity"]
+
+  ss6.core.product.product_edit_facade:
+    class: SS6\ShopBundle\Model\Product\Facade\ProductEditFacade
+    
+  ss6.core.product.product_edit_service:
+    class: SS6\ShopBundle\Model\Product\Service\ProductEditService
+  
+  ss6.core.product.product_repository:
+    class: SS6\ShopBundle\Model\Product\Repository\ProductRepository
+  
+  ss6.core.security.login_listener:
+    class: SS6\ShopBundle\Model\Security\Listener\LoginListener
+    tags:
+      - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+    
+  ss6.core.security.login_service:
+    class: SS6\ShopBundle\Model\Security\Service\LoginService
+    
+  ss6.core.payment.payment_edit_facade:
+    class: SS6\ShopBundle\Model\Payment\Facade\PaymentEditFacade
+    
+  ss6.core.payment.payment_repository:
+    class: SS6\ShopBundle\Model\Payment\Repository\PaymentRepository
+
+  ss6.core.transport.transport_edit_facade:
+    class: SS6\ShopBundle\Model\Transport\Facade\TransportEditFacade
+
+  ss6.core.transport.transport_repository:
+    class: SS6\ShopBundle\Model\Transport\Repository\TransportRepository

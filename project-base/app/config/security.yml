@@ -10,7 +10,7 @@ security:
   providers:
     administrators:
       entity: 
-        class: SS6CoreBundle:Administrator\Entity\Administrator
+        class: SS6ShopBundle:Administrator\Entity\Administrator
 
   firewalls:
     administration:

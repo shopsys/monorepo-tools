@@ -3,7 +3,7 @@
 namespace SS6\AdminBundle\Form\Payment;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\CoreBundle\Form\YesNoType;
+use SS6\ShopBundle\Form\YesNoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -33,7 +33,7 @@ class PaymentFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$transportChoices = array();
 		foreach ($this->allTransports as $transport) {
-			/* @var $transport \SS6\CoreBundle\Model\Transport\Entity\Transport */
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Entity\Transport */
 			$transportChoices[$transport->getId()] = $transport->getName();
 		}
 		

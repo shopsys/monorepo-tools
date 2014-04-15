@@ -1,5 +1,0 @@
-services:
-    ss6.twig.price_extension:
-        class: SS6\CoreBundle\Twig\PriceExtension
-        tags:
-            - { name: twig.extension }

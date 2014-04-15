@@ -33,7 +33,7 @@ class LoginFormType extends AbstractType {
 	 */
 	public function getDefaultOptions(array $options) {
 		return array(
-			'data_class' => 'SS6\\CoreBundle\\Model\\Administrator\\Entity\\Administrator',
+			'data_class' => 'SS6\\ShopBundle\\Model\\Administrator\\Entity\\Administrator',
 		);
 	}
 

@@ -4,9 +4,9 @@ namespace SS6\AdminBundle\Controller;
 
 use SS6\AdminBundle\Form\Transport\TransportFormData;
 use SS6\AdminBundle\Form\Transport\TransportFormType;
-use SS6\CoreBundle\Model\Transport\Entity\Transport;
-use SS6\CoreBundle\Model\Transport\Exception\TransportNotFoundException;
-use SS6\CoreBundle\Model\Transport\Facade\TransportEditFacade;
+use SS6\ShopBundle\Model\Transport\Entity\Transport;
+use SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException;
+use SS6\ShopBundle\Model\Transport\Facade\TransportEditFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

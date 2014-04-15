@@ -6,8 +6,8 @@ use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Source\Entity;
 use SS6\AdminBundle\Form\Product\ProductFormType;
-use SS6\CoreBundle\Exception\ValidationException;
-use SS6\CoreBundle\Model\Product\Exception\ProductNotFoundException;
+use SS6\ShopBundle\Exception\ValidationException;
+use SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -71,7 +71,7 @@ class ProductController extends Controller {
 	}
 	
 	public function listAction() {
-		$source = new Entity('SS6CoreBundle:Product\Entity\Product');
+		$source = new Entity('SS6ShopBundle:Product\Entity\Product');
 				
 		$grid = $this->get('grid');
 		/* @var $grid Grid */
@@ -104,7 +104,7 @@ class ProductController extends Controller {
 		$deleteRowAction->setRouteParameters(array('id'));
 		$grid->addRowAction($deleteRowAction);
 		
-		$repository = $this->getDoctrine()->getRepository('SS6CoreBundle:Product\Entity\Product');
+		$repository = $this->getDoctrine()->getRepository('SS6ShopBundle:Product\Entity\Product');
 		$source->manipulateRow(function (\APY\DataGridBundle\Grid\Row $row) use ($repository) {
 			$product = $repository->find($row->getField('id'));
 			$row->setField('visible', $product->isVisible());
