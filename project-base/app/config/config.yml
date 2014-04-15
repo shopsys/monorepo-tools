@@ -21,8 +21,8 @@ twig:
   debug: "%kernel.debug%"
   form:
     resources:
-      - 'SS6ShopBundle::Admin/Form/fields.html.twig'
-      - 'StnwDatePickerBundle::Form/fields.html.twig'
+      - '@SS6Shop/Admin/Form/fields.html.twig'
+      - '@StnwDatePicker/Form/fields.html.twig'
   strict_variables: "%kernel.debug%"
 
 # Assetic Configuration

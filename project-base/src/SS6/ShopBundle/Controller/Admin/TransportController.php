@@ -31,7 +31,7 @@ class TransportController extends Controller {
 			return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $transport->getId())));
 		}
 
-		return $this->render('SS6ShopBundle::Admin/Content/Transport/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -72,7 +72,7 @@ class TransportController extends Controller {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 
-		return $this->render('SS6ShopBundle::Admin/Content/Transport/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(
 			'form' => $form->createView(),
 			'transport' => $transport,
 		));

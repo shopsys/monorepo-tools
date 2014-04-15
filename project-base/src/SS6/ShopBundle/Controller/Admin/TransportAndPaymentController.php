@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TransportAndPaymentController extends Controller {
 	
 	public function indexAction() {
-		return $this->render('SS6ShopBundle::Admin/Content/TransportAndPayment/index.html.twig');
+		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/index.html.twig');
 	}
 	
 	public function transportListAction() {
@@ -19,7 +19,7 @@ class TransportAndPaymentController extends Controller {
 		$allPayments = $paymentRepository->getAllWithTransports();
 		$transports = $transportRepository->getAllDataWithVisibility($allPayments);
 		
-		return $this->render('SS6ShopBundle::Admin/Content/TransportAndPayment/transportList.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/transportList.html.twig', array(
 			'transports' => $transports,
 		));
 	}
@@ -29,7 +29,7 @@ class TransportAndPaymentController extends Controller {
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$payments = $paymentRepository->getAll();
 		
-		return $this->render('SS6ShopBundle::Admin/Content/TransportAndPayment/paymentList.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/paymentList.html.twig', array(
 			'payments' => $payments,
 		));
 	}

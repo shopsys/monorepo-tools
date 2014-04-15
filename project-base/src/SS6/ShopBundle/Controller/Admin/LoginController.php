@@ -32,7 +32,7 @@ class LoginController extends Controller {
 			$error = 'Přihlášení se nepodařilo.';
 		}
 
-		return $this->render('SS6ShopBundle::Admin/Content/Login/loginForm.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Login/loginForm.html.twig', array(
 				'form' => $form->createView(),
 				'error' => $error,
 		));

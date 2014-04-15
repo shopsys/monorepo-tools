@@ -40,7 +40,7 @@ class PaymentController extends Controller {
 			return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $payment->getId())));
 		}
 
-		return $this->render('SS6ShopBundle::Admin/Content/Payment/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -94,7 +94,7 @@ class PaymentController extends Controller {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 
-		return $this->render('SS6ShopBundle::Admin/Content/Payment/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', array(
 			'form' => $form->createView(),
 			'payment' => $payment,
 		));

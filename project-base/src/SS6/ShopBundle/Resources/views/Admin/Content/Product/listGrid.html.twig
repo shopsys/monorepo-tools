@@ -1,4 +1,4 @@
-{% extends 'SS6ShopBundle::Admin/Grid/grid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/grid.html.twig' %}
 
 {% block grid_column_name_cell %}
 	<a href="{{ url('admin_product_edit', { id: row.field('id') }) }}">{{ value }}</a>

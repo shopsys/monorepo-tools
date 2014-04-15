@@ -16,7 +16,7 @@ class ProductController extends Controller {
 			throw new NotFoundHttpException('Product not found');
 		}
 		
-		return $this->render('SS6ShopBundle::Front/Content/Product/detail.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(
 			'product' => $product,
 		));
 	}

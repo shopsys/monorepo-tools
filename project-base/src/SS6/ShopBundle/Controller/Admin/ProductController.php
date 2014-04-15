@@ -39,7 +39,7 @@ class ProductController extends Controller {
 			);
 		}
 		
-		return $this->render('SS6ShopBundle::Admin/Content/Product/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(
 			'form' => $form->createView(),
 			'product' => $form->getData(),
 		));
@@ -68,7 +68,7 @@ class ProductController extends Controller {
 			);
 		}
 		
-		return $this->render('SS6ShopBundle::Admin/Content/Product/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
@@ -115,7 +115,7 @@ class ProductController extends Controller {
 			return $row;
 		});
 		
-		return $grid->getGridResponse('SS6ShopBundle::Admin/Content/Product/list.html.twig');
+		return $grid->getGridResponse('@SS6Shop/Admin/Content/Product/list.html.twig');
 	}
 	
 	/**
