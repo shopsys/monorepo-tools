@@ -6,6 +6,10 @@ use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductController extends Controller {
+	
+	/**
+	 * @param int $id
+	 */
 	public function detailAction($id) {
 		$productRepository = $this->get('ss6.core.product.product_repository');
 		/* @var $productRepository ProductRepository */

@@ -10,10 +10,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TransportFormType extends AbstractType {
 	
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'transport';
 	}
 
+	/**
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
+	 * @param array $options
+	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('id', 'integer', array('read_only' => true))
@@ -24,6 +31,9 @@ class TransportFormType extends AbstractType {
 			->add('save', 'submit');
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'data_class' => TransportFormData::class,

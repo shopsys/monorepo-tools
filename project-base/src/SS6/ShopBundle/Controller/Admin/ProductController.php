@@ -13,8 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
+	
 	/**
-	 * @param Request $request
+	 * 
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
@@ -44,7 +46,7 @@ class ProductController extends Controller {
 	}
 	
 	/**
-	 * @param Request $request
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
 		$form = $this->createForm(new ProductFormType());

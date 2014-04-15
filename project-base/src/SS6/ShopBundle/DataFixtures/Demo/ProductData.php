@@ -9,6 +9,9 @@ use SS6\ShopBundle\Model\Product\Product;
 
 class ProductData extends AbstractFixture {
 
+	/**
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 */
 	public function load(ObjectManager $manager) {
 		// @codingStandardsIgnoreStart
 		$this->createProduct($manager, 'LG 42LN577S', 'ABC101', 'LG123456', '889977446655', 'Přivítejte nový tablet Note 8.0, vašeho každodenního společníka na cestě životem. Nabízí výborné připojení a hbitý výkon, je vybavený perem S Pen s přirozeným držením a má perfektní rozměry k tomu, aby mohl být vždy s vámi a okamžitě po ruce. Dokonalá velikost na cesty.', '11790', null, null , 10, false);
@@ -21,6 +24,19 @@ class ProductData extends AbstractFixture {
 		$manager->flush();
 	}
 	
+	/**
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @param string $name
+	 * @param string|null $catnum
+	 * @param string|null $partno
+	 * @param string|null $ean
+	 * @param string|null $description
+	 * @param string|null $price
+	 * @param \DateTime|null $sellingFrom
+	 * @param \DateTime|null $sellingTo
+	 * @param int|null $stockQuantity
+	 * @param boolean $hidden
+	 */
 	private function createProduct(ObjectManager $manager, $name, $catnum, $partno, $ean, $description, $price, $sellingFrom, $sellingTo, $stockQuantity, $hidden) {
 		$product = new Product();
 		$product->setName($name);

@@ -10,22 +10,24 @@ use SS6\ShopBundle\Model\Transport\TransportRepository;
 class TransportEditFacade {
 	
 	/**
-	 * @var EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 	
 	/**
-	 * @var PaymentRepository
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;
 	
 	/**
-	 * @var TransportRepository
+	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
 	 */
 	private $transportRepository;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
 	 */
 	public function __construct(EntityManager $em, TransportRepository $transportRepository, PaymentRepository $paymentRepository) {
 		$this->em = $em;

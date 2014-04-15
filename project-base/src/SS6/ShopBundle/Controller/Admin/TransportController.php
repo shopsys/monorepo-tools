@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends Controller {
 
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
 	public function newAction(Request $request) {
 		$formData = new TransportFormData();
 		$form = $this->createForm(new TransportFormType(), $formData);

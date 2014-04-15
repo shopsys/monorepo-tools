@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class YesNoType extends AbstractType {
 
 	/**
-	 * @param OptionsResolverInterface $resolver
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
@@ -21,10 +21,16 @@ class YesNoType extends AbstractType {
 		));
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getParent() {
 		return 'choice';
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'yes_no';
 	}

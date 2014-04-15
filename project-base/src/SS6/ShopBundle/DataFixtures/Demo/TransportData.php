@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class TransportTada extends AbstractFixture implements OrderedFixtureInterface {
 
 	/**
-	 * @param ObjectManager $manager
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
 		$this->createTransport($manager, 'transport_cp', 'Česká pošta - balík do ruky', 99.95, '<p>Pouze na vlastní nebezpečí</p>');
@@ -21,12 +21,11 @@ class TransportTada extends AbstractFixture implements OrderedFixtureInterface {
 	
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @param string $referenceName
 	 * @param string $name
 	 * @param string $price
-	 * @param string $referenceName
 	 * @param string|null $description
 	 * @param boolean $hide
-	 * @param boolean $deleted
 	 */
 	private function createTransport(ObjectManager $manager, $referenceName, $name, $price, $description, $hide = false) {
 		$transport = new Transport($name, $price, $description, $hide);

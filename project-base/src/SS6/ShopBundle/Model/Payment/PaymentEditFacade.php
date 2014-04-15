@@ -9,17 +9,18 @@ use SS6\ShopBundle\Model\Payment\PaymentRepository;
 class PaymentEditFacade {
 	
 	/**
-	 * @var EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 	
 	/**
-	 * @var PaymentRepository
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
 	 */
 	public function __construct(EntityManager $em, PaymentRepository $paymentRepository) {
 		$this->em = $em;

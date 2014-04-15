@@ -10,10 +10,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProductFormType extends AbstractType {
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'product';
 	}
 
+	/**
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
+	 * @param array $options
+	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('id', 'integer', array('disabled' => true))
@@ -30,6 +37,9 @@ class ProductFormType extends AbstractType {
 			->add('save', 'submit');
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'data_class' => Product::class,

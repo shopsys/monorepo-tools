@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class PaymentRepository {
 	
 	/**
-	 * @var EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 	

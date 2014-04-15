@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class LoginListener {
 	
 	/**
-	 * @var EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 	

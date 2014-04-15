@@ -11,12 +11,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
 	
 	/**
-	 * @var ContainerInterface
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	private $container;
 	
 	/**
-	 * {@inheritDoc}
+	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 */
 	public function setContainer(ContainerInterface $container = null) {
 		$this->container = $container;

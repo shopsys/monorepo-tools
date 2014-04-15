@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Payment\Payment;
 class PaymentData extends AbstractFixture implements OrderedFixtureInterface {
 
 	/**
-	 * @param ObjectManager $manager
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
 		$this->createPayment($manager, 'Kreditní kartou', 0, array('transport_personal', 'transport_ppl'), 
@@ -27,7 +27,6 @@ class PaymentData extends AbstractFixture implements OrderedFixtureInterface {
 	 * @param array $transportsReferenceName
 	 * @param string|null $description
 	 * @param boolean $hide
-	 * @param boolean $deleted
 	 */
 	private function createPayment(
 			ObjectManager $manager, $name, $price, array $transportsReferenceName, $description, $hide = false) {

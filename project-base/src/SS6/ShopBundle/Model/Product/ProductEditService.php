@@ -8,21 +8,21 @@ use Symfony\Component\Validator\Validator;
 class ProductEditService {
 	
 	/**
-	 * @var Validator
+	 * @var \Symfony\Component\Validator\Validator
 	 */
 	private $validator;
 	
 	/**
-	 * @param Validator $validator
+	 * @param \Symfony\Component\Validator\Validator $validator
 	 */
 	public function __construct(Validator $validator) {
 		$this->validator = $validator;
 	}
 	
 	/**
-	 * @param Product $product
-	 * @return Product
-	 * @throws ValidationException
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @throws \SS6\ShopBundle\Exception\ValidationException
 	 */
 	public function edit(Product $product) {
 		$constraintViolations = $this->validator->validate($product);

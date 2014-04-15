@@ -66,10 +66,8 @@ class Payment {
 	private $deleted;
 	
 	/**
-	 * 
 	 * @param string $name
 	 * @param string $price
-	 * @param \Doctrine\Common\Collections\Collection $transports
 	 * @param string|null $description
 	 * @param boolean $hidden
 	 */

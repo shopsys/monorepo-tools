@@ -7,8 +7,9 @@ use Doctrine\ORM\EntityRepository;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductRepository {
+	
 	/** 
-	 * @var EntityRepository
+	 * @var \Doctrine\ORM\EntityRepository
 	 */
 	private $entityRepository;
 

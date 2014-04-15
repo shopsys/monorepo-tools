@@ -9,7 +9,7 @@ class LoginService {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @return bool
+	 * @return boolean
 	 */
 	public function checkLoginProcess(Request $request) {
 		$error = null;

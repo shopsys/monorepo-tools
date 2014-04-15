@@ -57,7 +57,7 @@ class Transport {
 	/**
 	 * @param string $name
 	 * @param string $price
-	 * @param string $description
+	 * @param string|null $description
 	 * @param boolean $hidden
 	 */
 	public function __construct($name, $price, $description = null, $hidden = false) {
@@ -71,7 +71,7 @@ class Transport {
 	/**
 	 * @param string $name
 	 * @param string $price
-	 * @param string|boolean $description
+	 * @param string|null $description
 	 * @param boolean $hidden
 	 */
 	public function setEdit($name, $price, $description, $hidden) {

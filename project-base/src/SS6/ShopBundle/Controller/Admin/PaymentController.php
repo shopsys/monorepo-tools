@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends Controller {
 
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
 	public function newAction(Request $request) {
 		$transportRepository = $this->get('ss6.core.transport.transport_repository');
 		/* @var $transportRepository TransportRepository */

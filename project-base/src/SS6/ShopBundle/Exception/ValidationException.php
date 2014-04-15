@@ -28,7 +28,7 @@ class ValidationException extends Exception {
 	}
 	
 	/**
-	 * @return ConstraintViolationList
+	 * @return \Symfony\Component\Validator\ConstraintViolationList
 	 */
 	public function getConstraintViolations() {
 		return $this->constraintViolations;

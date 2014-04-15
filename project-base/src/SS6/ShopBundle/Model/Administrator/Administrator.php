@@ -177,7 +177,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function getSalt() {
-		return null;
+		return null; // bcrypt include salt in password hash
 	}
 
 }

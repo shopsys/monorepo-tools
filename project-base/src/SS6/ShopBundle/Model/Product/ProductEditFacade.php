@@ -12,24 +12,24 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductEditFacade {
 
 	/**
-	 * @var EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 	
 	/**
-	 * @var ProductRepository
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var ProductEditService
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditService
 	 */
 	private $productEditService;
 
 	/**
-	 * @param EntityManager $em
-	 * @param ProductRepository $productRepository
-	 * @param ProductEditService $productEditService
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditService $productEditService
 	 */
 	public function __construct(EntityManager $em, ProductRepository $productRepository,
 			ProductEditService $productEditService) {
@@ -39,8 +39,8 @@ class ProductEditFacade {
 	}
 	
 	/**
-	 * @param Request $request
-	 * @param Form $form
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param \Symfony\Component\Form\Form $form
 	 * @return boolean
 	 */
 	public function create(Request $request, Form $form) {
@@ -62,8 +62,8 @@ class ProductEditFacade {
 	
 	/**
 	 * @param int $productId
-	 * @param Request $request
-	 * @param Form $form
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param \Symfony\Component\Form\Form $form
 	 * @return boolean
 	 */
 	public function edit($productId, Request $request, Form $form) {

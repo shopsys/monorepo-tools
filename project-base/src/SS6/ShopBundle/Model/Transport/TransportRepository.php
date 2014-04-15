@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class TransportRepository {
 	
 	/**
-	 * @var EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 	
