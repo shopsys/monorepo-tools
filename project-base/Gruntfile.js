@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/styles/index.css': 'src/SS6/AdminBundle/Resources/styles/main.less'
+					'web/assets/admin/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/admin/main.less'
 				},
 				options: {
 					compress: true,
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
 			frontend: {
 				files: {
-					'web/assets/frontend/styles/index.css': 'src/SS6/FrontBundle/Resources/styles/main.less'
+					'web/assets/frontend/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/front/main.less'
 				},
 				options: {
 					compress: true,
@@ -61,14 +61,14 @@ module.exports = function(grunt) {
 
 		watch: {
 			admin: {
-				files: ['src/SS6/AdminBundle/Resources/styles/**/*.less'],
+				files: ['src/SS6/ShopBundle/Resources/styles/admin/**/*.less'],
 				tasks: ['admin'],
 				options: {
 					livereload: true,
 				}
 			},
 			frontend: {
-				files: ['src/SS6/FrontBundle/Resources/styles/**/*.less'],
+				files: ['src/SS6/ShopBundle/Resources/styles/front/**/*.less'],
 				tasks: ['frontend'],
 				options: {
 					livereload: true,
