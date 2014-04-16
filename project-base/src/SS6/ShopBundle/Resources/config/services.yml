@@ -1,6 +1,9 @@
 imports:
   - { resource: ../../Twig/services.yml }
 
+parameters:
+  sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
+
 services:
   
   doctrine.orm.default_entity_manager:
