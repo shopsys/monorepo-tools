@@ -98,5 +98,19 @@ class TransportController extends Controller {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 	}
+	
+	public function listAction() {
+		$transportRepository = $this->get('ss6.core.transport.transport_repository');
+		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
+		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
+		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
+		
+		$allPayments = $paymentRepository->getAllWithTransports();
+		$transports = $transportRepository->getAllDataWithVisibility($allPayments);
+		
+		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
+			'transports' => $transports,
+		));
+	}
 
 }

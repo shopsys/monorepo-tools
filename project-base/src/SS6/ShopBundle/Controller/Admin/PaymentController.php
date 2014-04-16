@@ -120,5 +120,15 @@ class PaymentController extends Controller {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 	}
+	
+	public function listAction() {
+		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
+		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
+		$payments = $paymentRepository->getAll();
+		
+		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
+			'payments' => $payments,
+		));
+	}
 
 }
