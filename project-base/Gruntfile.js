@@ -7,29 +7,29 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/index.css': 'web/assets/admin/styles/main.less'
+					'web/assets/admin/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/admin/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
-					sourceMapFilename: 'web/assets/admin/index.css.map',
-					sourceMapRootpath: '../../',
-					sourceMapBasepath: 'web/',
-					sourceMapURL: 'http://shopsys6:8080/assets/admin/index.css.map'
+					sourceMapFilename: 'web/assets/admin/styles/index.css.map',
+					sourceMapBasepath: 'web',
+					sourceMapURL: 'index.css.map',
+					sourceMapRootpath: '../../../'
 				}
 			},
 
 			frontend: {
 				files: {
-					'web/assets/frontend/index.css': 'web/assets/frontend/styles/main.less'
+					'web/assets/frontend/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/front/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
-					sourceMapFilename: 'web/assets/frontend/index.css.map',
-					sourceMapRootpath: '../../',
-					sourceMapBasepath: 'web/',
-					sourceMapURL: 'http://shopsys6:8080/assets/frontend/index.css.map'
+					sourceMapFilename: 'web/assets/frontend/styles/index.css.map',
+					sourceMapBasepath: 'web',
+					sourceMapURL: 'index.css.map',
+					sourceMapRootpath: '../../../'
 				}
 			}
 		},
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 					overridesOnly: true
 				},
 				files: {
-						'web/assets/admin/index-ie8.css': 'web/assets/admin/index.css'
+						'web/assets/admin/styles/index-ie8.css': 'web/assets/admin/styles/index.css'
 				}
 			},
 			frontend: {
@@ -53,28 +53,27 @@ module.exports = function(grunt) {
 					overridesOnly: true
 				},
 				files: {
-					'web/assets/frontend/index-ie8.css': 'web/assets/frontend/index.css'
+					'web/assets/frontend/styles/index-ie8.css': 'web/assets/frontend/styles/index.css'
 				}
 			}
 		},
 
 
 		watch: {
-			frontend: {
-				files: ['web/assets/frontend/styles/**/*.less'],
-				tasks: ['frontend'],
-				options: {
-					livereload: true,
-				}
-			},
 			admin: {
-				files: ['web/assets/admin/styles/**/*.less'],
+				files: ['src/SS6/ShopBundle/Resources/styles/admin/**/*.less'],
 				tasks: ['admin'],
 				options: {
 					livereload: true,
 				}
+			},
+			frontend: {
+				files: ['src/SS6/ShopBundle/Resources/styles/front/**/*.less'],
+				tasks: ['frontend'],
+				options: {
+					livereload: true,
+				}
 			}
-			
 		}
 
 
