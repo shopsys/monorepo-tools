@@ -1,0 +1,19 @@
+{% extends '@SS6Shop/Admin/Layout/layout.html.twig' %}
+
+
+{% block content %}	
+	<div class="main-content main-content--alone">
+		<ul class="breadcrumb">
+			<li>
+				<a href="./">Úvodni strana</a>
+			</li>
+
+			<li>
+				Nastavení
+			</li>
+		</ul>
+
+		<h1>{% block h1 %}Adminstrace{% endblock %}</h1>
+		{% block mainContent %}{% endblock %}
+	</div>
+{% endblock %}

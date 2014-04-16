@@ -21,11 +21,9 @@ twig:
   debug: "%kernel.debug%"
   form:
     resources:
-      - 'StnwDatePickerBundle:Form:fields.html.twig'
+      - '@SS6Shop/Admin/Form/fields.html.twig'
+      - '@StnwDatePicker/Form/fields.html.twig'
   strict_variables: "%kernel.debug%"
-  form:
-    resources:
-      - 'SS6AdminBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -51,11 +49,11 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore
     auto_mapping: false
     mappings:
-      SS6CoreBundle:
+      SS6ShopBundle:
         type: annotation
-        dir: %kernel.root_dir%/../src/SS6/CoreBundle/Model
-        alias: SS6CoreBundle
-        prefix: SS6\CoreBundle\Model
+        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Model
+        alias: SS6ShopBundle
+        prefix: SS6\ShopBundle\Model
         is_bundle: false
 
 # Swiftmailer Configuration

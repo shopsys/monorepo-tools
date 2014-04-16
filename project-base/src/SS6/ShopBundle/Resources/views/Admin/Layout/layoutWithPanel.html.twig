@@ -1,0 +1,48 @@
+{% extends '@SS6Shop/Admin/Layout/layout.html.twig' %}
+
+{% block content %}	
+	<div class="main-panel col-xs-12 col-sm-4 col-md-3 col-lg-2">
+		{% block panel %}
+			<ul class="nav nav-panel">
+				<li>
+					<a href="./">Položka cislo jedna</a>
+				</li>
+				<li>
+					<a href="./">Položka cislo jedna</a>
+				</li>
+				<li>
+					<a href="./">Položka cislo jedna</a>
+					<ul>
+						<li>
+							<a href="./">Položka cislo jedna</a>
+						</li>
+						<li>
+							<a href="./">Položka cislo jedna</a>
+						</li>
+						<li>
+							<a href="./">Položka cislo jedna</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="./">Položka cislo jedna</a>
+				</li>
+			</ul>
+		{% endblock %}
+	</div>
+
+	<div class="main-content col-xs-12 col-sm-8 col-md-9 col-lg-10">
+		<ul class="breadcrumb">
+			<li>
+				<a href="./">Úvodni strana</a>
+			</li>
+
+			<li>
+				Nastavení
+			</li>
+		</ul>
+
+		<h1>{% block h1 %}Adminstrace{% endblock %}</h1>
+		{% block mainContent %}{% endblock %}
+	</div>
+{% endblock %}

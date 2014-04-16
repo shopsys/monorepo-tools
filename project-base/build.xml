@@ -111,7 +111,7 @@
 		<exec executable="php" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/CoreBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
@@ -121,7 +121,7 @@
 		<exec executable="php" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/CoreBundle/DataFixtures/Demo" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>

@@ -1,0 +1,106 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Karta zboží{% endblock %}
+{% block h1 %}Karta zboží{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Ediace zboží</span>
+		</li>
+		<li>
+			<a href="{{ url('admin_product_list') }}">Zpět na seznam zboží</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-8">
+			
+			{{ form_start(form, { attr: { role: 'form'}}) }}
+				{{ form_errors(form) }}
+
+				<div class="form-group">
+					{{ form_label(form.id, 'ID:') }}
+					{{ form_errors(form.id) }}
+					{{ form_widget(form.id, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				{% block product_url %}{% endblock %}
+				
+				<div class="form-group">
+					{{ form_label(form.name, 'Název:') }}
+					{{ form_errors(form.name) }}
+					{{ form_widget(form.name, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.catnum, 'Katalogové číslo:') }}
+					{{ form_errors(form.catnum) }}
+					{{ form_widget(form.catnum, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.partno, 'PartNo (výrobní číslo):') }}
+					{{ form_errors(form.partno) }}
+					{{ form_widget(form.partno, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.ean, 'EAN:') }}
+					{{ form_errors(form.ean) }}
+					{{ form_widget(form.ean, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.description, 'Popis:') }}
+					{{ form_errors(form.description) }}
+					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.price, 'Cena:') }}
+					{{ form_errors(form.price) }}
+					{{ form_widget(form.price, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.sellingFrom, 'Datum vložení:') }}
+					{{ form_errors(form.sellingFrom) }}
+					{{ form_widget(form.sellingFrom, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.sellingTo, 'Datum stažení:') }}
+					{{ form_errors(form.sellingTo) }}
+					{{ form_widget(form.sellingTo, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.stockQuantity, 'Skladem:') }}
+					{{ form_errors(form.stockQuantity) }}
+					{{ form_widget(form.stockQuantity, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.hidden, 'Skryté:') }}
+					{{ form_errors(form.hidden) }}
+					<div class="form-control form-control-radios">
+						{{ form_widget(form.hidden) }}
+					</div>
+					
+				</div>
+
+				<div class="form-group">
+					{{ form_widget(form.save, { label: 'Uložit', attr: {class: 'btn btn-primary'}}) }}
+				</div>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+
+
+		
+{% endblock %}

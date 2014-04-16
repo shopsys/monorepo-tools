@@ -1,0 +1,9 @@
+front_homepage:
+  pattern: /
+  defaults: { _controller: SS6ShopBundle:Front\Default:index }
+
+front_product_detail:
+  pattern: /product/detail/{id}
+  defaults: { _controller: SS6ShopBundle:Front\Product:detail }
+  requirements:
+    id: \d+

@@ -10,7 +10,7 @@ security:
   providers:
     administrators:
       entity: 
-        class: SS6CoreBundle:Administrator\Entity\Administrator
+        class: SS6ShopBundle:Administrator\Administrator
 
   firewalls:
     administration:
@@ -20,7 +20,7 @@ security:
       form_login:
         check_path: admin_login_check
         login_path: admin_login
-        default_target_path: admin_homepage
+        default_target_path: admin_default_dashboard
         use_referer: true
         username_parameter: "admin_login[username]"
         password_parameter: "admin_login[password]"

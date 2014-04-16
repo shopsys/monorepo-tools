@@ -1,0 +1,82 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+	- Platba
+{% endblock %}
+
+{% block h1 %}
+	Platba
+{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Ediace platby</span>
+		</li>
+		<li>
+			<a href="{{ url('admin_transportandpayment_list') }}">Zpět na seznam doprav a plateb</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-8">
+			
+			{{ form_start(form, { attr: { role: 'form'}}) }}
+				{{ form_errors(form) }}
+
+				<div class="form-group">
+					{{ form_label(form.id, 'ID:') }}
+					{{ form_errors(form.id) }}
+					{{ form_widget(form.id, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.name, 'Název:') }}
+					{{ form_errors(form.name) }}
+					{{ form_widget(form.name, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.hidden, 'Skryté:') }}
+					{{ form_errors(form.hidden) }}
+					<div class="form-control form-control-radios">
+						{{ form_widget(form.hidden) }}
+					</div>
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.price, 'Cena:') }}
+					{{ form_errors(form.price) }}
+					{{ form_widget(form.price, { attr: {class: 'form-control'}}) }}
+				</div>
+				
+				<div class="form-group">
+					<h3>Dopravy:</h3>
+					{% if form.transports|length %}
+						{{ form_widget(form.transports) }}
+					{% else %}
+						Musíte nejdřív nějakou dopravu vytvořit.
+						<div style="display: none;">
+							{# Must be called, otherwise it is rendered at end of form. #}
+							{{ form_row(form.transports) }}
+						</div>
+					{% endif %}
+				</div>
+				
+				<div class="form-group">
+					{{ form_label(form.description, 'Popis:') }}
+					{{ form_errors(form.description) }}
+					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_widget(form.save, { label: 'Uložit', attr: {class: 'btn btn-primary'}}) }}
+				</div>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+{% endblock %}
