@@ -24,44 +24,16 @@
 
 		<div class="col-xs-12 col-lg-8">
 			
-			{{ form_start(form, { attr: { role: 'form'}}) }}
+			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				<div class="form-group">
-					{{ form_label(form.id, 'ID:') }}
-					{{ form_errors(form.id) }}
-					{{ form_widget(form.id, { attr: {class: 'form-control'}}) }}
-				</div>
+				{{ form_row(form.id) }}
+				{{ form_row(form.name, { label: 'Název'}) }}
+				{{ form_row(form.hidden, { label: 'Skryté'}) }}
+				{{ form_row(form.price, { label: 'Cena'}) }}
+				{{ form_row(form.description, { label: 'Popis'}) }}
 				
-				<div class="form-group">
-					{{ form_label(form.name, 'Název:') }}
-					{{ form_errors(form.name) }}
-					{{ form_widget(form.name, { attr: {class: 'form-control'}}) }}
-				</div>
-				
-				<div class="form-group">
-					{{ form_label(form.hidden, 'Skryté:') }}
-					{{ form_errors(form.hidden) }}
-					<div class="form-control form-control-radios">
-						{{ form_widget(form.hidden) }}
-					</div>
-				</div>
-
-				<div class="form-group">
-					{{ form_label(form.price, 'Cena:') }}
-					{{ form_errors(form.price) }}
-					{{ form_widget(form.price, { attr: {class: 'form-control'}}) }}
-				</div>
-				
-				<div class="form-group">
-					{{ form_label(form.description, 'Popis:') }}
-					{{ form_errors(form.description) }}
-					{{ form_widget(form.description, { attr: {class: 'form-control'}}) }}
-				</div>
-
-				<div class="form-group">
-					{{ form_widget(form.save, { label: 'Uložit', attr: {class: 'btn btn-primary'}}) }}
-				</div>
+				{{ form_row(form.save, { label: 'Uložit'}) }}
 			{{ form_end(form) }}
 		</div>
 		

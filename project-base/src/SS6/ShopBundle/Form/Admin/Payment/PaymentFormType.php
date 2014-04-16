@@ -44,6 +44,7 @@ class PaymentFormType extends AbstractType {
 				'choices' => $transportChoices,
 				'multiple' => true,
 				'expanded' => true,
+				'required' => false,
 			))
 			->add('price', 'money', array('currency' => false, 'required' => true))
 			->add('description', 'textarea', array('required' => false))
