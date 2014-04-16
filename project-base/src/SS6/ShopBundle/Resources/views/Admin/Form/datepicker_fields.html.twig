@@ -1,0 +1,12 @@
+{% extends '@StnwDatePicker/Form/fields.html.twig' %}
+
+{% block datePicker_widget %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+  {{ parent('datePicker_widget') }}
+{% endblock datePicker_widget %}
+
+
+{% block dateTimePicker_widget %}
+  {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+  {{ parent('dateTimePicker_widget') }}
+{% endblock %}
