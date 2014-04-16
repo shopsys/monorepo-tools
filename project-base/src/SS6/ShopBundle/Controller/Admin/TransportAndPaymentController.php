@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TransportAndPaymentController extends Controller {
 	
 	/**
-	 * @Route("transport_and_payment/list/", name="admin_transport_and_payment_list")
+	 * @Route("/transport_and_payment/list/")
 	 */
-	public function indexAction() {
-		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/index.html.twig');
+	public function listAction() {
+		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/list.html.twig');
 	}
 	
 }

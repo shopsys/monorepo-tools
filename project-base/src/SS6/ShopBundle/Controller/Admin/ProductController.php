@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends Controller {
 	
 	/**
-	 * @Route("product/edit/{id}", requirements={"id" = "\d+"}, name="admin_product_edit")
+	 * @Route("/product/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
@@ -47,7 +47,7 @@ class ProductController extends Controller {
 	}
 	
 	/**
-	 * @Route("product/new/", name="admin_product_new")
+	 * @Route("/product/new/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -76,7 +76,7 @@ class ProductController extends Controller {
 	}
 	
 	/**
-	 * @Route("product/list/", name="admin_product_list")
+	 * @Route("/product/list/")
 	 */
 	public function listAction() {
 		$source = new Entity(Product::class);
@@ -124,7 +124,7 @@ class ProductController extends Controller {
 	}
 	
 	/**
-	 * @Route("product/delete/{id}", requirements={"id" = "\d+"}, name="admin_product_delete")
+	 * @Route("/product/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteAction($id) {

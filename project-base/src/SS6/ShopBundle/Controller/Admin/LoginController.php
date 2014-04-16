@@ -11,13 +11,13 @@ class LoginController extends Controller {
 
 	/**
 	 * @Route("/", name="admin_login")
-	 * @Route("login_check/", name="admin_login_check")
-	 * @Route("logout/", name="admin_logout")
+	 * @Route("/login_check/", name="admin_login_check")
+	 * @Route("/logout/", name="admin_logout")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAction(Request $request) {
 		if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
-			return $this->redirect($this->generateUrl('admin_homepage'));
+			return $this->redirect($this->generateUrl('admin_default_dashboard'));
 		}
 		
 		$error = null;

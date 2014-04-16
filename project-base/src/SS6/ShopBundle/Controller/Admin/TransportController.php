@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TransportController extends Controller {
 
 	/**
-	 * @Route("transport/new/", name="admin_transport_new")
+	 * @Route("/transport/new/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -41,7 +41,7 @@ class TransportController extends Controller {
 	}
 	
 	/**
-	 * @Route("transport/edit/{id}", requirements={"id" = "\d+"}, name="admin_transport_edit")
+	 * @Route("/transport/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
@@ -84,7 +84,7 @@ class TransportController extends Controller {
 	}
 	
 	/**
-	 * @Route("transport/delete/{id}", requirements={"id" = "\d+"}, name="admin_transport_delete")
+	 * @Route("/transport/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
@@ -93,7 +93,7 @@ class TransportController extends Controller {
 		
 		try {
 			$transportEditFacade->deleteById($id);
-			return $this->redirect($this->generateUrl('admin_transport_and_payment_list'));
+			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}

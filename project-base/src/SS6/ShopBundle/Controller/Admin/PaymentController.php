@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PaymentController extends Controller {
 
 	/**
-	 * @Route("payment/new/", name="admin_payment_new")
+	 * @Route("/payment/new/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -50,7 +50,7 @@ class PaymentController extends Controller {
 	}
 	
 	/**
-	 * @Route("payment/edit/{id}", requirements={"id" = "\d+"}, name="admin_payment_edit")
+	 * @Route("/payment/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
@@ -106,7 +106,7 @@ class PaymentController extends Controller {
 	}
 	
 	/**
-	 * @Route("payment/delete/{id}", requirements={"id" = "\d+"}, name="admin_payment_delete")
+	 * @Route("/payment/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
@@ -115,7 +115,7 @@ class PaymentController extends Controller {
 		
 		try {
 			$paymentEditFacade->deleteById($id);
-			return $this->redirect($this->generateUrl('admin_transport_and_payment_list'));
+			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}

@@ -20,7 +20,7 @@ security:
       form_login:
         check_path: admin_login_check
         login_path: admin_login
-        default_target_path: admin_homepage
+        default_target_path: admin_default_dashboard
         use_referer: true
         username_parameter: "admin_login[username]"
         password_parameter: "admin_login[password]"
