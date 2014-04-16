@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Column\BooleanColumn;
-use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Row;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -82,7 +81,7 @@ class ProductController extends Controller {
 		$source = new Entity(Product::class);
 				
 		$grid = $this->get('grid');
-		/* @var $grid Grid */
+		/* @var $grid \APY\DataGridBundle\Grid\Grid */
 		$grid->setSource($source);
 		
 		$grid->getColumns()->addColumn(new BooleanColumn(array(

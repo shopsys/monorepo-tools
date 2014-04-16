@@ -6,8 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,7 +17,7 @@ class PaymentController extends Controller {
 	 */
 	public function newAction(Request $request) {
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository TransportRepository */
+		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$allTransports = $transportRepository->getAll();
 		
 		$formData = new PaymentFormData();
@@ -39,7 +37,7 @@ class PaymentController extends Controller {
 			$payment->setTransports($transports);
 			
 			$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
-			/* @var $paymentEditFacade PaymentEditFacade */
+			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 			$paymentEditFacade->create($payment);
 			return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $payment->getId())));
 		}
@@ -56,14 +54,14 @@ class PaymentController extends Controller {
 	 */
 	public function editAction(Request $request, $id) {
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository TransportRepository */
+		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
-		/* @var $paymentEditFacade PaymentEditFacade */
+		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		
 		try {
 			$allTransports = $transportRepository->getAll();
 			
-			/* @var $payment Payment */
+			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment = $paymentEditFacade->getByIdWithTransports($id); 
 			
 			$formData = new PaymentFormData();
@@ -111,7 +109,7 @@ class PaymentController extends Controller {
 	 */
 	public function deleteAction($id) {
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
-		/* @var $paymentEditFacade PaymentEditFacade */
+		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		
 		try {
 			$paymentEditFacade->deleteById($id);

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Exception;
 
 use Exception;
-use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 class ValidationException extends Exception {
@@ -20,7 +19,7 @@ class ValidationException extends Exception {
 		
 		$messages = array();
 		foreach ($constraintViolations as $constraintViolation) {
-			/* @var $constraintViolation ConstraintViolation */
+			/* @var $constraintViolation \Symfony\Component\Validator\ConstraintViolation */
 			$messages[] = $constraintViolation->getMessage();
 		}
 		

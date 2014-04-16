@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,7 +29,7 @@ class TransportController extends Controller {
 			);
 			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
-			/* @var $transportEditFacade TransportEditFacade */
+			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transportEditFacade->create($transport);
 			return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $transport->getId())));
 		}
@@ -47,11 +46,11 @@ class TransportController extends Controller {
 	 */
 	public function editAction(Request $request, $id) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
-		/* @var $transportEditFacade TransportEditFacade */
+		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		
 		try {
 			$transport = $transportEditFacade->getById($id);
-			/* @var $transport Transport */
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			
 			$formData = new TransportFormData();
 			$formData->setId($transport->getId());
@@ -89,7 +88,7 @@ class TransportController extends Controller {
 	 */
 	public function deleteAction($id) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
-		/* @var $transportEditFacade TransportEditFacade */
+		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		
 		try {
 			$transportEditFacade->deleteById($id);

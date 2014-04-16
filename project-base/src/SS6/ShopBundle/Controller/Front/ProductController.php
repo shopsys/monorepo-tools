@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductController extends Controller {
@@ -12,7 +11,7 @@ class ProductController extends Controller {
 	 */
 	public function detailAction($id) {
 		$productRepository = $this->get('ss6.shop.product.product_repository');
-		/* @var $productRepository ProductRepository */
+		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 			
 		$product = $productRepository->findVisibleById($id);
 		if (!$product) {

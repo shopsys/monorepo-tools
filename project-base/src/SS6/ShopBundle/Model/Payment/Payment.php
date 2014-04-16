@@ -181,7 +181,7 @@ class Payment {
 		}
 		
 		foreach ($this->getTransports() as $transport) {
-			/* @var $transport Transport */
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			if (!$transport->isHidden()) {
 				return true;
 			}
