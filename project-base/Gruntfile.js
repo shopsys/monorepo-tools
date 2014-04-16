@@ -7,12 +7,12 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/index.css': 'src/SS6/AdminBundle/Resources/styles/main.less'
+					'web/assets/admin/styles/index.css': 'src/SS6/AdminBundle/Resources/styles/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
-					sourceMapFilename: 'web/assets/admin/index.css.map',
+					sourceMapFilename: 'web/assets/admin/styles/index.css.map',
 					sourceMapBasepath: 'web',
 					sourceMapURL: 'index.css.map',
 					sourceMapRootpath: '../../../'
@@ -21,12 +21,12 @@ module.exports = function(grunt) {
 
 			frontend: {
 				files: {
-					'web/assets/frontend/index.css': 'src/SS6/FrontBundle/Resources/styles/main.less'
+					'web/assets/frontend/styles/index.css': 'src/SS6/FrontBundle/Resources/styles/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
-					sourceMapFilename: 'web/assets/frontend/index.css.map',
+					sourceMapFilename: 'web/assets/frontend/styles/index.css.map',
 					sourceMapBasepath: 'web',
 					sourceMapURL: 'index.css.map',
 					sourceMapRootpath: '../../../'
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 					overridesOnly: true
 				},
 				files: {
-						'web/assets/admin/index-ie8.css': 'web/assets/admin/index.css'
+						'web/assets/admin/styles/index-ie8.css': 'web/assets/admin/styles/index.css'
 				}
 			},
 			frontend: {
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 					overridesOnly: true
 				},
 				files: {
-					'web/assets/frontend/index-ie8.css': 'web/assets/frontend/index.css'
+					'web/assets/frontend/styles/index-ie8.css': 'web/assets/frontend/styles/index.css'
 				}
 			}
 		},
