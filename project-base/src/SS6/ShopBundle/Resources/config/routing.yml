@@ -3,5 +3,6 @@ ss6_shop_front:
   prefix: /
   
 ss6_shop_admin:
-  resource: "@SS6ShopBundle/Resources/config/routing_admin.yml"
+  resource: "@SS6ShopBundle/Controller/Admin"
   prefix: /admin
+  type: annotation

@@ -7,6 +7,7 @@ use APY\DataGridBundle\Grid\Column\BooleanColumn;
 use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Row;
 use APY\DataGridBundle\Grid\Source\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends Controller {
 	
 	/**
-	 * 
+	 * @Route("product/edit/{id}", requirements={"id" = "\d+"}, name="admin_product_edit")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
@@ -46,6 +47,7 @@ class ProductController extends Controller {
 	}
 	
 	/**
+	 * @Route("product/new/", name="admin_product_new")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -73,6 +75,9 @@ class ProductController extends Controller {
 		));
 	}
 	
+	/**
+	 * @Route("product/list/", name="admin_product_list")
+	 */
 	public function listAction() {
 		$source = new Entity(Product::class);
 				
@@ -119,6 +124,7 @@ class ProductController extends Controller {
 	}
 	
 	/**
+	 * @Route("product/delete/{id}", requirements={"id" = "\d+"}, name="admin_product_delete")
 	 * @param int $id
 	 */
 	public function deleteAction($id) {

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends Controller {
 
 	/**
+	 * @Route("/", name="admin_login")
+	 * @Route("login_check/", name="admin_login_check")
+	 * @Route("logout/", name="admin_logout")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAction(Request $request) {

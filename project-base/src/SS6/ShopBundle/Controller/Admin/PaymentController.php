@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PaymentController extends Controller {
 
 	/**
+	 * @Route("payment/new/", name="admin_payment_new")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -48,6 +50,7 @@ class PaymentController extends Controller {
 	}
 	
 	/**
+	 * @Route("payment/edit/{id}", requirements={"id" = "\d+"}, name="admin_payment_edit")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
@@ -103,6 +106,7 @@ class PaymentController extends Controller {
 	}
 	
 	/**
+	 * @Route("payment/delete/{id}", requirements={"id" = "\d+"}, name="admin_payment_delete")
 	 * @param int $id
 	 */
 	public function deleteAction($id) {

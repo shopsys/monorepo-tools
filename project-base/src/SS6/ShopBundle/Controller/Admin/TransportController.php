@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TransportController extends Controller {
 
 	/**
+	 * @Route("transport/new/", name="admin_transport_new")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -39,6 +41,7 @@ class TransportController extends Controller {
 	}
 	
 	/**
+	 * @Route("transport/edit/{id}", requirements={"id" = "\d+"}, name="admin_transport_edit")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
@@ -81,6 +84,7 @@ class TransportController extends Controller {
 	}
 	
 	/**
+	 * @Route("transport/delete/{id}", requirements={"id" = "\d+"}, name="admin_transport_delete")
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
