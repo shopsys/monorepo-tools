@@ -2,6 +2,7 @@
 
 namespace SS6\CoreBundle\Model\Payment\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\CoreBundle\Model\Transport\Entity\Transport;
@@ -45,7 +46,7 @@ class Payment {
 	/**
 	 * @var Collection
 	 * 
-	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport", inversedBy="payments")
+	 * @ORM\ManyToMany(targetEntity="SS6\CoreBundle\Model\Transport\Entity\Transport")
 	 * @ORM\JoinTable(name="payments_transports")
 	 */
 	private $transports;
@@ -65,16 +66,18 @@ class Payment {
 	private $deleted;
 	
 	/**
+	 * 
 	 * @param string $name
 	 * @param string $price
-	 * @param string|boolean $description
+	 * @param \Doctrine\Common\Collections\Collection $transports
+	 * @param string|null $description
 	 * @param boolean $hidden
 	 */
-	public function __construct($name, $price, Collection $transports = null, $description = null, $hidden = false) {
+	public function __construct($name, $price, $description = null, $hidden = false) {
 		$this->name = $name;
 		$this->price = $price;
 		$this->description = $description;
-		$this->transports = $transports instanceof Collection ? $transports : new ArrayCollection();
+		$this->transports = new ArrayCollection();
 		$this->hidden = $hidden;
 		$this->deleted = false;
 	}
@@ -84,11 +87,21 @@ class Payment {
 	 */
 	public function addTransport(Transport $transport) {
 		if (!$this->transports->contains($transport)) {
-			$transport->addPayment($this);
-			$this->transports[] = $transport;
+			$this->transports->add($transport);
 		}
 	}
 	
+	/**
+	 * @param array $transports
+	 */
+	public function setTransports(array $transports) {
+		$this->transports->clear();
+		foreach ($transports as $transport) {
+			/* @var $transport SS6\CoreBundle\Model\Transport\Entity\Transport */
+			$this->addTransport($transport);
+		}
+	}
+
 	/**
 	 * @return \SS6\CoreBundle\Model\Transport\Entity\Transport[]
 	 */
@@ -164,21 +177,17 @@ class Payment {
 	 * @param boolean $withoutRelations
 	 * @return boolean
 	 */
-	public function isVisible($withoutRelations = false) {
+	public function isVisible() {
 		if ($this->isHidden() || $this->getTransports()->isEmpty()) {
 			return false;
 		}
 		
-		if ($withoutRelations) {
-			return true;
-		} else {
-			foreach ($this->getTransports() as $transport) {
-				/* @var $transport Transport */
-				if ($transport->isVisible(true)) {
-					return true;
-				}
+		foreach ($this->getTransports() as $transport) {
+			/* @var $transport Transport */
+			if (!$transport->isHidden()) {
+				return true;
 			}
-			return false;
 		}
+		return false;
 	}
 }

@@ -14,7 +14,7 @@
 		<tbody>
 			{% for transport in transports %}
 				<tr>
-					<td><a href="{{ url('admin_transport_edit', {id: transport.id}) }}">{{ transport.name }}</a></td>
+					<td><a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}">{{ transport.entity.name }}</a></td>
 					<td class="text-center">
 						{% if transport.visible %}
 							<span class="semaphore semaphore--run"></span>
@@ -22,10 +22,10 @@
 							<span class="semaphore semaphore--stop"></span>
 						{% endif %}
 					</td>
-					<td class="text-right">{{ transport.price|price }}</td>
+					<td class="text-right">{{ transport.entity.price|price }}</td>
 					<td class="text-right">
-						<a href="{{ url('admin_transport_edit', {id: transport.id}) }}">Upravit</a>
-						<a href="{{ url('admin_transport_delete', {id: transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')">Smazat</a>
+						<a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}">Upravit</a>
+						<a href="{{ url('admin_transport_delete', {id: transport.entity.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')">Smazat</a>
 					</td>
 				</tr>
 			{% endfor %}

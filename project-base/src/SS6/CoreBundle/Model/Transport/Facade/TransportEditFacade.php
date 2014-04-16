@@ -3,6 +3,7 @@
 namespace SS6\CoreBundle\Model\Transport\Facade;
 
 use Doctrine\ORM\EntityManager;
+use SS6\CoreBundle\Model\Payment\Repository\PaymentRepository;
 use SS6\CoreBundle\Model\Transport\Entity\Transport;
 use SS6\CoreBundle\Model\Transport\Repository\TransportRepository;
 
@@ -14,6 +15,11 @@ class TransportEditFacade {
 	private $em;
 	
 	/**
+	 * @var PaymentRepository
+	 */
+	private $paymentRepository;
+	
+	/**
 	 * @var TransportRepository
 	 */
 	private $transportRepository;
@@ -21,9 +27,10 @@ class TransportEditFacade {
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
-	public function __construct(EntityManager $em, TransportRepository $transportRepository) {
+	public function __construct(EntityManager $em, TransportRepository $transportRepository, PaymentRepository $paymentRepository) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
+		$this->paymentRepository = $paymentRepository;
 	}
 	
 	/**
@@ -56,6 +63,11 @@ class TransportEditFacade {
 	public function deleteById($id) {
 		$transport = $this->getById($id);
 		$transport->markAsDeleted();
+		$paymentsByTransport = $this->paymentRepository->getAllByTransport($transport);
+		foreach ($paymentsByTransport as $payment) {
+			/* @var $payment \SS6\CoreBundle\Model\Payment\Entity\Payment */
+			$payment->getTransports()->removeElement($transport);
+		}
 		$this->em->flush();
 	}
 }
