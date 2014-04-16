@@ -11,7 +11,7 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function detailAction($id) {
-		$productRepository = $this->get('ss6.core.product.product_repository');
+		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository ProductRepository */
 			
 		$product = $productRepository->findVisibleById($id);

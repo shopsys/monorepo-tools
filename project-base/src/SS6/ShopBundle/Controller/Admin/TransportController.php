@@ -29,7 +29,7 @@ class TransportController extends Controller {
 				$formData->isHidden()
 			);
 			
-			$transportEditFacade = $this->get('ss6.core.transport.transport_edit_facade');
+			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade TransportEditFacade */
 			$transportEditFacade->create($transport);
 			return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $transport->getId())));
@@ -46,7 +46,7 @@ class TransportController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$transportEditFacade = $this->get('ss6.core.transport.transport_edit_facade');
+		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade TransportEditFacade */
 		
 		try {
@@ -88,7 +88,7 @@ class TransportController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$transportEditFacade = $this->get('ss6.core.transport.transport_edit_facade');
+		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade TransportEditFacade */
 		
 		try {
@@ -100,9 +100,9 @@ class TransportController extends Controller {
 	}
 	
 	public function listAction() {
-		$transportRepository = $this->get('ss6.core.transport.transport_repository');
+		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
+		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		
 		$allPayments = $paymentRepository->getAllWithTransports();

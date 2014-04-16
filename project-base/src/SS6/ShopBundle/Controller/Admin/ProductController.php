@@ -24,7 +24,7 @@ class ProductController extends Controller {
 		$form = $this->createForm(new ProductFormType());
 						
 		try {
-			$result = $this->get('ss6.core.product.product_edit_facade')->edit($id, $request, $form);
+			$result = $this->get('ss6.shop.product.product_edit_facade')->edit($id, $request, $form);
 
 			if ($result) {
 				$this->get('session')->getFlashBag()->add(
@@ -54,7 +54,7 @@ class ProductController extends Controller {
 		$form = $this->createForm(new ProductFormType());
 						
 		try {
-			$result = $this->get('ss6.core.product.product_edit_facade')->create($request, $form);
+			$result = $this->get('ss6.shop.product.product_edit_facade')->create($request, $form);
 
 			if ($result) {
 				$this->get('session')->getFlashBag()->add(
@@ -129,7 +129,7 @@ class ProductController extends Controller {
 	 */
 	public function deleteAction($id) {
 		try {
-			$this->get('ss6.core.product.product_edit_facade')->delete($id);
+			$this->get('ss6.shop.product.product_edit_facade')->delete($id);
 
 			$this->get('session')->getFlashBag()->add(
 				'success', 'Produkt byl úspěšně smazán.'

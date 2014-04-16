@@ -27,7 +27,7 @@ class LoginController extends Controller {
 			'method' => 'POST',
 		));
 
-		$loginService = $this->container->get('ss6.core.security.login_service');
+		$loginService = $this->container->get('ss6.shop.security.login_service');
 		/* @var $loginService SS6\ShopBundle\Model\Security\LoginService */
 		try {
 			$loginService->checkLoginProcess($request);

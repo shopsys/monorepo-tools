@@ -18,7 +18,7 @@ class PaymentController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$transportRepository = $this->get('ss6.core.transport.transport_repository');
+		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository TransportRepository */
 		$allTransports = $transportRepository->getAll();
 		
@@ -38,7 +38,7 @@ class PaymentController extends Controller {
 			$transports = $transportRepository->findAllByIds($formData->getTransports());
 			$payment->setTransports($transports);
 			
-			$paymentEditFacade = $this->get('ss6.core.payment.payment_edit_facade');
+			$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 			/* @var $paymentEditFacade PaymentEditFacade */
 			$paymentEditFacade->create($payment);
 			return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $payment->getId())));
@@ -55,9 +55,9 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$transportRepository = $this->get('ss6.core.transport.transport_repository');
+		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository TransportRepository */
-		$paymentEditFacade = $this->get('ss6.core.payment.payment_edit_facade');
+		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade PaymentEditFacade */
 		
 		try {
@@ -110,7 +110,7 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$paymentEditFacade = $this->get('ss6.core.payment.payment_edit_facade');
+		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade PaymentEditFacade */
 		
 		try {
@@ -122,7 +122,7 @@ class PaymentController extends Controller {
 	}
 	
 	public function listAction() {
-		$paymentRepository = $this->get('ss6.core.payment.payment_repository');
+		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$payments = $paymentRepository->getAll();
 		
