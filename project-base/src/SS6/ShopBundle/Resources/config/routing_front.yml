@@ -6,6 +6,10 @@ front_cart_box:
   pattern: /cart/box/
   defaults: { _controller: SS6ShopBundle:Front\Cart:box }
 
+front_basket_index:
+  pattern: /basket/
+  defaults: { _controller: SS6ShopBundle:Front\Basket:index }
+
 front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
