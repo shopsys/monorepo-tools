@@ -9,18 +9,25 @@
 
 	<ul class="product-list">
 		{% for product in products %}
-			<li class="product-list__item">
+			<li class="product-list__item col-xs-12 col-sm-6 col-md-4">
 				<a href="{{ url('front_product_detail', {'id': product.id}) }}" class="product-list__block">
-					<h2 class="product-list__title">{{ product.name }}</h2>
 					<div class="product-list__image">
 						<span>
-							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}">
+							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="300px" height="200px">
 						</span>
 					</div>
+					<h2 class="product-list__title">
+						{{ product.name }}
+					</h2>
 					<p class="product-list__price">
 						<strong>Cena: <span class="price-main">{{ product.price|price }}</span></strong>
 					</p>
 				</a>
+				<div class="product-list__button">
+					<a href="{{ url('front_product_detail', {'id': product.id}) }}" class="button">
+						Více informací
+					</a>
+				</div>
 			</li>
 		{% endfor %}
 	</ul>
