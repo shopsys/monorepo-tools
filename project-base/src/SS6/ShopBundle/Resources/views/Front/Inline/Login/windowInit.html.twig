@@ -1,0 +1,5 @@
+{{ include('@SS6Shop/Front/Inline/jsWindow.html.twig', {
+	id: windowName, 
+	text: include('@SS6Shop/Front/Inline/Login/windowForm.html.twig', {form: form}, with_context = false),
+	noEscape: true,
+}) }}

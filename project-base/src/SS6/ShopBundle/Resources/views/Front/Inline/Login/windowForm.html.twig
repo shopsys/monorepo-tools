@@ -1,0 +1,14 @@
+{{ form_start(form, {attr: {class: 'form-signin'}}) }}
+	{{ form_errors(form) }}
+
+	<h3 class="form-signin-heading">Přihlášení</h3>
+
+	{{ form_errors(form.email) }}
+	{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+
+	{{ form_errors(form.password) }}
+	{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+
+	{{ form_widget(form.login, {label: 'Přihlásit', attr: {class: 'btn-lg btn-block'}}) }}
+
+{{ form_end(form) }}

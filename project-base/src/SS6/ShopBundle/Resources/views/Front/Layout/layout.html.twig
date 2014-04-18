@@ -9,13 +9,26 @@
 				</div>
 
 				<ul class="top-menu">
-					<li class="top-menu__item">
-						<a href="#">Registrace</a>
-					</li>
-					<li class="top-menu__item">
-						<a href="#"><strong>Přihlásit se</strong></a>
-					</li>
+					{% if is_granted('ROLE_CUSTOMER') %}
+						<li class="top-menu__item">
+							{{ app.user.fullname }}
+						</li>
+						<li class="top-menu__item">
+							<a href="{{ url('front_logout') }}"><strong>Odhlásit se</strong></a>
+						</li>
+					{% else %}
+						<li class="top-menu__item">
+							<a href="#">Registrace</a>
+						</li>
+						<li class="top-menu__item">
+							<a href="{{ url('front_login') }}" onclick="jQuery.fn.SS6.window.open('loginForm'); return false;"><strong>Přihlásit se</strong></a>
+						</li>
+					{% endif %}
 				</ul>
+				
+				{% if not is_granted('ROLE_CUSTOMER') %}
+					{{ render(controller('SS6ShopBundle:Front/Login:windowInit', {windowName: 'loginForm'})) }}
+				{% endif %}
 			</div>
 
 			<div class="content">
