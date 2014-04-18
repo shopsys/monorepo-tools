@@ -25,6 +25,9 @@ services:
   
   ss6.shop.product.product_repository:
     class: SS6\ShopBundle\Model\Product\ProductRepository
+    
+  ss6.shop.product.product_visibility_repository:
+    class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
   
   ss6.shop.security.login_listener:
     class: SS6\ShopBundle\Model\Security\LoginListener
