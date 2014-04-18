@@ -1,15 +1,66 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_start %}
+	{% set attr = attr|merge({'role': attr.role|default('form')}) %}
+	{{ parent('form_start') }}
+{% endblock form_start %}
+
+{% block form_row %}
+	<div class="form-group">
+		{{ form_label(form) }}
+		{{ form_errors(form) }}
+		{{ form_widget(form) }}
+	</div>
+{% endblock form_row %}
+
+{% block form_label %}
+	{% spaceless %}
+		{% if label is not sameas(false) %}
+			{% if not compound %}
+				{% set label_attr = label_attr|merge({'for': id}) %}
+			{% endif %}
+			{% if required %}
+				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+			{% endif %}
+			{% if label is empty %}
+				{% set label = name|humanize %}
+			{% endif %}
+			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+				{{ label|trans({}, translation_domain) }}:{% if required %}<span class="form-input-required">*</span>{% endif %}
+			</label>
+		{% endif %}
+	{% endspaceless %}
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{{ parent('form_widget_simple') }}
+{% endblock form_widget_simple %}
+
+{% block textarea_widget %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
+	{{ parent('textarea_widget') }}
+{% endblock textarea_widget %}
+	
+{% block button_widget %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary')|trim}) %}
+	{{ parent('button_widget') }}
+{% endblock button_widget %}
+
 {% block choice_widget_expanded %}
 	{% spaceless %}
 			<div {{ block('widget_container_attributes') }}>
 			{% for child in form %}
 				<div class="radio checkbox">
-					<label>
+					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 						{{ form_widget(child) }}
 						{{ child.vars.label }}
 					</label>
 				</div>
+			{% else %}		
+				{{ empty_message|default('Není z čeho vybírat.') }}
 			{% endfor %}
 			</div>
 	{% endspaceless %}
-{% endblock %}
-
+{% endblock choice_widget_expanded %}
