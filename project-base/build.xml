@@ -23,6 +23,7 @@
 	<target name="build-demo" depends="composer,phplint,phpcs,phpmd,grunt,tests,db-demo"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
+	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
 	<target name="db-demo" depends="db-rebuild,db-fixtures-demo"/>
 	
 	<target name="composer">
@@ -85,7 +86,22 @@
 		>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
-			<arg path="${path.src}"/>
+			<arg value="--testsuite"/>
+			<arg value="Tests"/>
+		</exec>
+	</target>
+	
+	<target name="tests-db" depends="test-db-rebuild">
+		<exec
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="TestsDb"/>
 		</exec>
 	</target>
 	
@@ -120,6 +136,48 @@
 	<target name="db-fixtures-demo">
 		<exec executable="php" passthru="true" checkreturn="true">
 			<arg value="app/console" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="test-db-drop">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:schema:drop" />
+			<arg value="--force" />
+			<arg value="--full-database" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+		
+	<target name="test-db-create">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:schema:create" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="test-db-fixtures-base-settings">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="test-db-fixtures-demo">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
 			<arg value="doctrine:fixtures:load" />
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
