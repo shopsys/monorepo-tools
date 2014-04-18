@@ -95,8 +95,16 @@ class Product {
 	 */
 	private $hidden;
 	
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $visible;
+	
 	public function __construct() {
 		$this->hidden = false;
+		$this->visible = true;
 	}
 	
 	/**
@@ -250,25 +258,14 @@ class Product {
 	 * @return boolean
 	 */
 	public function isVisible() {
-		$datetime = new DateTime();
-		
-		if ($this->isHidden()) {
-			return false;
-		}
-		
-		if ($this->getSellingFrom() instanceof DateTime) {
-			if ($this->getSellingFrom() > $datetime) {
-				return false;
-			}
-		}
-		
-		if ($this->getSellingTo() instanceof DateTime) {
-			if ($this->getSellingTo() < $datetime) {
-				return false;
-			}
-		}
-		
-		return true;
+		return $this->visible;
+	}
+
+	/**
+	 * @param boolean $visible
+	 */
+	public function setVisible($visible) {
+		$this->visible = $visible;
 	}
 
 }

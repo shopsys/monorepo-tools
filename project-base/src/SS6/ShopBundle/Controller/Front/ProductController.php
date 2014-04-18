@@ -22,4 +22,15 @@ class ProductController extends Controller {
 			'product' => $product,
 		));
 	}
+	
+	public function listAction() {
+		$productRepository = $this->get('ss6.shop.product.product_repository');
+		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+			
+		$products = $productRepository->findAllVisible();
+		
+		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
+			'products' => $products,
+		));
+	}
 }

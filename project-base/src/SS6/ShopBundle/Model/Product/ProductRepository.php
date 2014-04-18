@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductRepository {
@@ -42,6 +41,13 @@ class ProductRepository {
 		}
 		
 		return $product;
+	}
+	
+	/**
+	 * @return SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function findAllVisible() {
+		return $this->entityRepository->findBy(array('visible' => true));
 	}
 	
 	/**
