@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Transport\Transport;
 
-class TransportTada extends AbstractFixture implements OrderedFixtureInterface {
+class TransportData extends AbstractFixture implements OrderedFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
