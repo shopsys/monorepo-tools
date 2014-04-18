@@ -42,6 +42,7 @@
 @bg-page: #fff;
 @bg-box: #fafafa;
 @bg-window: #fff;
+@bg-table: #fafafa;
 @bg-primary: @color-primary;
 
 
@@ -57,13 +58,20 @@
 // BUTTONS
 *******************************************************************/
 @button-bg: @bg-primary;
-@button-height: 26px;
+@button-height: 20px;
 @button-padding: 5px 15px;
 @button-color: @color-white;
 @button-radius: @border-radius-base;
 
 @button-bg-hover: @color-base;
 @button-color-hover: @color-white;
+
+// alter
+@button-bg-alter: #aaa;
+
+// large
+@button-height-large: 30px;
+@button-padding-large: 5px 25px;
 
 
 /*******************************************************************
@@ -90,7 +98,7 @@
 *******************************************************************/
 @respons-1: 480px;
 @respons-2: 768px;
-@respons-3: 982px;
+@respons-3: 980px;
 @respons-4: @width-page;
 
 @query-1: ~"screen and (min-width: @{respons-1})";
