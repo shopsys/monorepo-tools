@@ -26,7 +26,7 @@
 				{% set label = name|humanize %}
 			{% endif %}
 			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-				{{ label|trans({}, translation_domain) }}{% if required %}<span class="form-input-required">*</span>{% endif %}:
+				{{ label|trans({}, translation_domain) }}:{% if required %}<span class="form-input-required">*</span>{% endif %}
 			</label>
 		{% endif %}
 	{% endspaceless %}
@@ -52,7 +52,7 @@
 	{% spaceless %}
 			<div {{ block('widget_container_attributes') }}>
 			{% for child in form %}
-				<div class="form-choice">
+				<div class="radio checkbox">
 					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 						{{ form_widget(child) }}
 						{{ child.vars.label }}
