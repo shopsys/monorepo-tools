@@ -11,6 +11,10 @@ security:
     administrators:
       entity: 
         class: SS6ShopBundle:Administrator\Administrator
+        
+    user_identities:
+      entity: 
+        class: SS6ShopBundle:Customer\UserIdentity
 
   firewalls:
     administration:
@@ -28,7 +32,24 @@ security:
       logout:
         path: admin_logout
         target: admin_login
+        
+    frontend:
+      pattern: ^/
+      anonymous: ~
+      provider: user_identities
+      form_login:
+        check_path: front_login_check
+        login_path: front_login
+        default_target_path: front_homepage
+        use_referer: true
+        username_parameter: "front_login[email]"
+        password_parameter: "front_login[password]"
+        csrf_parameter: "front_login[_token]"
+      logout:
+        path: front_logout
+        target: front_homepage
 
   access_control:
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/, roles: ROLE_ADMIN }
+    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
