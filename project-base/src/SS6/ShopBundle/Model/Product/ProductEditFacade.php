@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditService;
 use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,6 +21,11 @@ class ProductEditFacade {
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
+	
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+	 */
+	private $productVisibilityRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductEditService
@@ -32,9 +38,11 @@ class ProductEditFacade {
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditService $productEditService
 	 */
 	public function __construct(EntityManager $em, ProductRepository $productRepository,
+			ProductVisibilityRepository $productVisibilityRepository,
 			ProductEditService $productEditService) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
+		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->productEditService = $productEditService;
 	}
 	
@@ -56,6 +64,8 @@ class ProductEditFacade {
 
 		$this->em->persist($product);
 		$this->em->flush();
+		
+		$this->productVisibilityRepository->refreshProductsVisibility();
 
 		return true;
 	}
@@ -79,6 +89,8 @@ class ProductEditFacade {
 
 		$this->em->persist($product);
 		$this->em->flush();
+		
+		$this->productVisibilityRepository->refreshProductsVisibility();
 
 		return true;
 	}

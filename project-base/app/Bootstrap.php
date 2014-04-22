@@ -77,6 +77,7 @@ class Bootstrap {
 				$configs[] = __DIR__ . '/config/config_prod.yml';
 				break;
 			case self::ENVIROMENT_TEST:
+				$configs[] = __DIR__ . '/config/parameters_test.yml';
 				$configs[] = __DIR__ . '/config/config_dev.yml';
 				$configs[] = __DIR__ . '/config/config_test.yml';
 				break;
