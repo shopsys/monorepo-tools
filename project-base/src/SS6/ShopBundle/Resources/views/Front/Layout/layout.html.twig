@@ -7,6 +7,8 @@
 				<div class="logo">
 					<a href="{{ url('front_homepage') }}">Internetový obchod</a>
 				</div>
+				
+				{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
 
 				<ul class="top-menu">
 					{% if is_granted('ROLE_CUSTOMER') %}
