@@ -27,6 +27,9 @@ services:
   ss6.shop.cart.cart_singleton_factory:
     class: SS6\ShopBundle\Model\Cart\CartSingletonFactory
     
+  ss6.shop.cart.cart_item_repository:
+    class: SS6\ShopBundle\Model\Cart\CartItemRepository
+    
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
