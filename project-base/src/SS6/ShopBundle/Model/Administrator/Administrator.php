@@ -89,7 +89,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 	
 	/**
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function getLastActivity() {
 		return $this->lastActivity;

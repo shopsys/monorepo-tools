@@ -21,7 +21,7 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Product|null
+	 * @return \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function findById($id) {
 		return $this->entityRepository->find($id);
@@ -29,7 +29,7 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Product|null
+	 * @return \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function findVisibleById($id) {
 		$product = $this->findById($id);
@@ -44,7 +44,7 @@ class ProductRepository {
 	}
 	
 	/**
-	 * @return SS6\ShopBundle\Model\Product\Product[]
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function findAllVisible() {
 		return $this->entityRepository->findBy(array('visible' => true));
@@ -52,7 +52,7 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Product
+	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getById($id) {
 		$product = $this->findById($id);
