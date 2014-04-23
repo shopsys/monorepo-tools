@@ -27,6 +27,12 @@ services:
   ss6.shop.cart.cart_singleton_factory:
     class: SS6\ShopBundle\Model\Cart\CartSingletonFactory
     
+  ss6.shop.cart.cart_facade:
+    class: SS6\ShopBundle\Model\Cart\CartFacade
+    
+  ss6.shop.cart.cart_service:
+    class: SS6\ShopBundle\Model\Cart\CartService
+    
   ss6.shop.cart.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\CartItemRepository
     
