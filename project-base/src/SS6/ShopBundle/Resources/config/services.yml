@@ -17,6 +17,16 @@ services:
   doctrine.orm.entity_manager.abstract:
     synthetic: true
     
+  ss6.shop.cart:
+    class: SS6\ShopBundle\Model\Cart\Cart
+    factory_service: ss6.shop.cart.cart_singleton_factory
+    factory_method: get
+    arguments: 
+      - @ss6.shop.customer.customer_identifier
+    
+  ss6.shop.cart.cart_singleton_factory:
+    class: SS6\ShopBundle\Model\Cart\CartSingletonFactory
+    
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
