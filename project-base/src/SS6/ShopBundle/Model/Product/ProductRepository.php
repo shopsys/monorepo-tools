@@ -53,12 +53,13 @@ class ProductRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @throws \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException
 	 */
 	public function getById($id) {
 		$product = $this->findById($id);
 		
 		if ($product === null) {
-			throw new Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
 		}
 		
 		return $product;

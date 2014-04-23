@@ -31,56 +31,56 @@ class Product {
 	private $name;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $catnum;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $partno;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $ean;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $price;
 	
 	/**
-	 * @var DateTime
+	 * @var \DateTime|null
 	 * 
 	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $sellingFrom;
 	
 	/**
-	 * @var DateTime
+	 * @var \DateTime|null
 	 * 
 	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $sellingTo;
 	
 	/**
-	 * @var string
+	 * @var int|null
 	 *
 	 * @ORM\Column(type="integer", nullable=true)
 	 * @Assert\Type(type="integer")
@@ -102,23 +102,65 @@ class Product {
 	 */
 	private $visible;
 	
-	public function __construct() {
-		$this->hidden = false;
-		$this->visible = true;
+	/**
+	 * @param string $name
+	 * @param string|null $catnum
+	 * @param string|null $partno
+	 * @param string|null $ean
+	 * @param string|null $description
+	 * @param string|null $price
+	 * @param \DateTime|null $sellingFrom
+	 * @param \DateTime|null $sellingTo
+	 * @param int|null $stockQuantity
+	 * @param boolean $hidden
+	 */
+	public function __construct($name, $catnum = null, $partno = null, $ean = null,
+			$description = null, $price = null, $sellingFrom = null, $sellingTo = null,
+			$stockQuantity = null, $hidden = false) {
+		$this->name = $name;
+		$this->catnum = $catnum;
+		$this->partno = $partno;
+		$this->ean = $ean;
+		$this->description = $description;
+		$this->price = $price;
+		$this->sellingFrom = $sellingFrom;
+		$this->sellingTo = $sellingTo;
+		$this->stockQuantity = $stockQuantity;
+		$this->hidden = $hidden;
+		$this->visible = false;
 	}
 	
+	/**
+	 * @param string $name
+	 * @param string|null $catnum
+	 * @param string|null $partno
+	 * @param string|null $ean
+	 * @param string|null $description
+	 * @param string|null $price
+	 * @param \DateTime|null $sellingFrom
+	 * @param \DateTime|null $sellingTo
+	 * @param int|null $stockQuantity
+	 * @param boolean $hidden
+	 */
+	public function edit($name, $catnum, $partno, $ean, $description, $price, $sellingFrom,
+			$sellingTo, $stockQuantity, $hidden) {
+		$this->name = $name;
+		$this->catnum = $catnum;
+		$this->partno = $partno;
+		$this->ean = $ean;
+		$this->description = $description;
+		$this->price = $price;
+		$this->sellingFrom = $sellingFrom;
+		$this->sellingTo = $sellingTo;
+		$this->stockQuantity = $stockQuantity;
+		$this->hidden = $hidden;
+	}
+
 	/**
 	 * @return integer 
 	 */
 	public function getId() {
 		return $this->id;
-	}
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
 	}
 
 	/**
@@ -129,24 +171,10 @@ class Product {
 	}
 
 	/**
-	 * @param string|null $catnum
-	 */
-	public function setCatnum($catnum) {
-		$this->catnum = $catnum;
-	}
-
-	/**
 	 * @return string|null
 	 */
 	public function getCatnum() {
 		return $this->catnum;
-	}
-
-	/**
-	 * @param string|null $partno
-	 */
-	public function setPartno($partno) {
-		$this->partno = $partno;
 	}
 
 	/**
@@ -157,24 +185,10 @@ class Product {
 	}
 
 	/**
-	 * @param string|null $ean
-	 */
-	public function setEan($ean) {
-		$this->ean = $ean;
-	}
-
-	/**
 	 * @return string|null
 	 */
 	public function getEan() {
 		return $this->ean;
-	}
-
-	/**
-	 * @param string|null $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
 	}
 
 	/**
@@ -185,13 +199,6 @@ class Product {
 	}
 
 	/**
-	 * @param string|null $price
-	 */
-	public function setPrice($price) {
-		$this->price = $price;
-	}
-
-	/**
 	 * @return string|null
 	 */
 	public function getPrice() {
@@ -199,24 +206,10 @@ class Product {
 	}
 
 	/**
-	 * @param DateTime|null $sellingFrom
-	 */
-	public function setSellingFrom($sellingFrom) {
-		$this->sellingFrom = $sellingFrom;
-	}
-	
-	/**
 	 * @return DateTime|null
 	 */
 	public function getSellingFrom() {
 		return $this->sellingFrom;
-	}
-	
-	/**
-	 * @param DateTime|null $sellingTo
-	 */
-	public function setSellingTo($sellingTo) {
-		$this->sellingTo = $sellingTo;
 	}
 
 	/**
@@ -224,13 +217,6 @@ class Product {
 	 */
 	public function getSellingTo() {
 		return $this->sellingTo;
-	}
-	
-	/**
-	 * @param int|null $stockQuantity
-	 */
-	public function setStockQuantity($stockQuantity) {
-		$this->stockQuantity = $stockQuantity;
 	}
 	
 	/**
@@ -246,26 +232,12 @@ class Product {
 	public function isHidden() {
 		return $this->hidden;
 	}
-
-	/**
-	 * @param boolean $hidden
-	 */
-	public function setHidden($hidden) {
-		$this->hidden = $hidden;
-	}
 	
 	/**
 	 * @return boolean
 	 */
 	public function isVisible() {
 		return $this->visible;
-	}
-
-	/**
-	 * @param boolean $visible
-	 */
-	public function setVisible($visible) {
-		$this->visible = $visible;
 	}
 
 }

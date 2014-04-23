@@ -4,11 +4,8 @@ namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditService;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Request;
 
 class ProductEditFacade {
 
@@ -28,71 +25,64 @@ class ProductEditFacade {
 	private $productVisibilityRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditService
-	 */
-	private $productEditService;
-
-	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditService $productEditService
 	 */
 	public function __construct(EntityManager $em, ProductRepository $productRepository,
-			ProductVisibilityRepository $productVisibilityRepository,
-			ProductEditService $productEditService) {
+			ProductVisibilityRepository $productVisibilityRepository) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productVisibilityRepository = $productVisibilityRepository;
-		$this->productEditService = $productEditService;
 	}
 	
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param \Symfony\Component\Form\Form $form
-	 * @return boolean
+	 * @param array $productData
+	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function create(Request $request, Form $form) {
-		$product = new Product();
-		$form->setData($product);
-		$form->handleRequest($request);
-		
-		if (!$form->isSubmitted()) {
-			return false;
-		}
-		
-		$this->productEditService->edit($product);
+	public function create(array $productData) {
+		$product = new Product($productData['name'],
+			$productData['catnum'],
+			$productData['partno'],
+			$productData['ean'],
+			$productData['description'],
+			$productData['price'],
+			$productData['sellingFrom'],
+			$productData['sellingTo'],
+			$productData['stockQuantity'],
+			$productData['hidden']);
 
 		$this->em->persist($product);
 		$this->em->flush();
 		
 		$this->productVisibilityRepository->refreshProductsVisibility();
-
-		return true;
+		
+		return $this->productRepository->getById($product->getId());
 	}
 	
 	/**
 	 * @param int $productId
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param \Symfony\Component\Form\Form $form
-	 * @return boolean
+	 * @param array $productData
+	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function edit($productId, Request $request, Form $form) {
+	public function edit($productId, array $productData) {
 		$product = $this->productRepository->getById($productId);
-		$form->setData($product);
-		$form->handleRequest($request);
-		
-		if (!$form->isSubmitted()) {
-			return false;
-		}
-		
-		$this->productEditService->edit($product);
+		$product->edit($productData['name'],
+			$productData['catnum'],
+			$productData['partno'],
+			$productData['ean'],
+			$productData['description'],
+			$productData['price'],
+			$productData['sellingFrom'],
+			$productData['sellingTo'],
+			$productData['stockQuantity'],
+			$productData['hidden']);
 
 		$this->em->persist($product);
 		$this->em->flush();
 		
 		$this->productVisibilityRepository->refreshProductsVisibility();
-
-		return true;
+		
+		return $this->productRepository->getById($product->getId());
 	}
 	
 	/**

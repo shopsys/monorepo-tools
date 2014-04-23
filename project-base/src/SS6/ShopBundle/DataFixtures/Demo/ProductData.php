@@ -38,17 +38,16 @@ class ProductData extends AbstractFixture {
 	 * @param boolean $hidden
 	 */
 	private function createProduct(ObjectManager $manager, $name, $catnum, $partno, $ean, $description, $price, $sellingFrom, $sellingTo, $stockQuantity, $hidden) {
-		$product = new Product();
-		$product->setName($name);
-		$product->setCatnum($catnum);
-		$product->setPartno($partno);
-		$product->setEan($ean);
-		$product->setDescription($description);
-		$product->setPrice($price);
-		$product->setSellingFrom($sellingFrom);
-		$product->setSellingTo($sellingTo);
-		$product->setStockQuantity($stockQuantity);
-		$product->setHidden($hidden);
+		$product = new Product($name,
+			$catnum,
+			$partno,
+			$ean,
+			$description,
+			$price,
+			$sellingFrom,
+			$sellingTo,
+			$stockQuantity,
+			$hidden);
 
 		$manager->persist($product);
 	}
