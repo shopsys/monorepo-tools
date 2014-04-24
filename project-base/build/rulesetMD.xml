@@ -24,6 +24,7 @@
 		<priority>3</priority>
 		<properties>
 			<property name="minimum" value="51"/>
+			<property name="ignore-whitespace" description="Count whitespace in reporting threshold" value="true"/>
 		</properties>
 	</rule>
 
@@ -33,6 +34,7 @@
 		<priority>3</priority>
 		<properties>
 			<property name="minimum"  value="501"/>
+			<property name="ignore-whitespace" description="Count whitespace in reporting threshold" value="true"/>
 		</properties>
 	</rule>
 	
