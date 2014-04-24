@@ -18,6 +18,10 @@ front_order_index:
   pattern: /order/
   defaults: { _controller: SS6ShopBundle:Front\Order:index }
 
+front_order_personal:
+  pattern: /order/personal/
+  defaults: { _controller: SS6ShopBundle:Front\Order:personal }
+
 front_product_detail:
   pattern: /product/detail/{id}
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }

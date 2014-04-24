@@ -1,0 +1,210 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block title %}
+	Objednávka
+{% endblock %}
+
+{% block content %}
+
+	<form action="">
+		<h1>Objednávka - osobní údaje</h1>
+
+		<div class="info-box">
+			<h2 class="mt-0">Osobní údaje</h2>
+			
+			<fieldset>
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Jméno: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Příjmení: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						E-mail: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Telefón: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control input-little">
+					</div>
+				</div>
+			</fieldset>
+			
+		</div>
+
+		<div class="info-box">
+			<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
+
+
+			<fieldset>
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Název firmy:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						IČ:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control input-little">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						DIČ:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control input-little">
+					</div>
+				</div>
+			</fieldset>
+
+			
+		</div>
+
+		<div class="info-box">
+			<h2 class="mt-0">Fakturační údaje <span class="heading-addition">(Tato adresa bude na daňovém dokladu)</span></h2>
+
+			<fieldset>
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Ulice: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Město: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						PSČ: <span class="form-input-required">*</span>
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control input-micro">
+					</div>
+				</div>
+
+			</fieldset>
+
+			
+		</div>
+
+		<div class="info-box">
+			<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
+
+			<fieldset>
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Jméno:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Příjmení:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						E-mail:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Telefón:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control input-little">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Ulice:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						Město:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-place">
+					<label for="" class="form-place__title">
+						PSČ:
+					</label>
+					<div class="form-place__input-wrap">
+						<input type="text" class="form-control input-micro">
+					</div>
+				</div>
+
+			</fieldset>
+		</div>
+
+		<div class="buttons-control">
+			<a href="./" class="button button--alter buttons-control__left">
+				Zpět na výběr dopravy a platby 
+			</a>
+
+			<a href="./" class="button button--large button-primary buttons-control__right">
+				Dokončit objednávku
+			</a>
+		</div>
+
+
+	</form>
+
+{% endblock %}
