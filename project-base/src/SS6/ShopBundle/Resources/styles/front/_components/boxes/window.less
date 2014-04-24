@@ -1,0 +1,38 @@
+.window {
+	display: none;
+	width: @window-width;
+	min-height: @window-height;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -@window-height/2 0 0 -@window-width/2;
+	padding: 10px 20px 20px;
+	text-align: center;
+	z-index: 10000;
+	.box-shadow(0 0 20px @color-shadow);
+	border: 1px solid @color-border;
+	background: @bg-window;
+}
+
+.window--active {
+	display: block;
+}
+
+a.window__close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	background: @bg-box;
+	color: @color-base;
+	text-decoration: none;
+	font-weight: bold;
+
+	&:hover {
+		background: @color-black;
+		color: @color-white;
+		text-decoration: none;
+	}
+}

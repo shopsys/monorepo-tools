@@ -1,0 +1,33 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block title %}
+	- Přihlášení
+{% endblock %}
+
+{% block content %}
+	{{ form_errors(form) }}
+
+	<div class="row">
+		<div class="col-md-4 col-sm-12">
+			{{ form_start(form) }}
+
+				<h1>Přihlášení</h1>
+
+				<div class="form-group">
+					{{ form_errors(form.email) }}
+					{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_errors(form.password) }}
+					{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+				</div>
+
+				{{ form_widget(form.login, {label: 'Přihlásit'}) }}
+
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+	
+{% endblock %}

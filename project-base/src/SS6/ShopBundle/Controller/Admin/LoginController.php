@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
+use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,7 +17,7 @@ class LoginController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAction(Request $request) {
-		if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+		if ($this->get('security.context')->isGranted(Roles::ROLE_ADMIN)) {
 			return $this->redirect($this->generateUrl('admin_default_dashboard'));
 		}
 		

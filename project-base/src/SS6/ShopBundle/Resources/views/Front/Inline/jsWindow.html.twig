@@ -1,0 +1,23 @@
+<div  id="window-container-{{ id }}" class="window">
+	{% if noEscape|default(false) %}
+		{{ text|raw }}
+	{% else %}
+		{{ text }}
+	{% endif %}
+	
+	{% if closeButton|default(true) %}
+		<a href="#" class="window-button-close window__close" title="Zavřít">{{ closeButtonText|default('X') }}</a>
+	{% endif %}
+	{% if continueButton|default(false) %}
+		<a href="{{ continueUrl|default('#') }}" class="window-button-continue button">{{ continueButtonText|default('Pokračovat')}}</a>
+	{% endif %}
+</div>
+<script type="text/javascript">
+	jQuery.fn.SS6.window.create({
+		{% if jsEventOnClose|default(false) %}eventOnClose: {{ jsEventOnClose }},{% endif %}
+		{% if jsEventCloseButton|default(false) %}eventCloseButton: {{ jsEventCloseButton }},{% endif %}
+		{% if jsEventContinueButton|default(false) %}eventContinueButton: {{ jsEventContinueButton }},{% endif %}
+		id: '{{ id|escape('js') }}'
+	});
+</script>
+

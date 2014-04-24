@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Administrator;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -170,7 +171,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function getRoles() {
-		return array('ROLE_ADMIN');
+		return array(Roles::ROLE_ADMIN);
 	}
 
 	/**
