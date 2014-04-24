@@ -29,6 +29,7 @@ class Cart {
 	
 	private function calcSummaryInfo() {
 		$this->quantity = 0;
+		$this->price = 0;
 		foreach ($this->cartItems as $carItem) {
 			$this->quantity += $carItem->getQuantity();
 			$this->price += $carItem->getProduct()->getPrice() * $carItem->getQuantity();
