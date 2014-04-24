@@ -1,6 +1,10 @@
 front_cart_add_product:
   pattern: /cart/addProduct/
   defaults: { _controller: SS6ShopBundle:Front\Cart:addProduct }
+  
+front_cart_box:
+  pattern: /cart/box/
+  defaults: { _controller: SS6ShopBundle:Front\Cart:box }
 
 front_homepage:
   pattern: /

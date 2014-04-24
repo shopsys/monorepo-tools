@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Product\Product;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,9 +46,7 @@ class CartController extends Controller {
 		$form->handleRequest($request);
 		
 		if ($request->isXmlHttpRequest()) {
-			$response = new JsonResponse();
-			
-			return $response;
+			return $this->addProductAjax($form);
 		} else {
 			if ($form->isValid()) {
 				try {
@@ -72,6 +71,42 @@ class CartController extends Controller {
 		}
 		
 		return $this->redirect($redirectTo);
+	}
+	
+	/**
+	 * @param \Symfony\Component\Form\Form $form
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 */
+	private function addProductAjax(Form $form) {
+		$responseData = array();
+		if ($form->isValid()) {
+			try {
+				$formData = $form->getData();
+				$cartFacade = $this->get('ss6.shop.cart.cart_facade');
+				/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
+				$addProductResult = $cartFacade->addProductToCart($formData['product_id'], $formData['quantity']);					
+				$responseData['success'] = true;
+				$responseData['message'] = $this->getAddProductResultMessage($addProductResult);
+			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
+				$responseData['success'] = false;
+				$responseData['message'] = 'Zvolené zboží již není v nabídce nebo neexistuje.';
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
+				$responseData['success'] = false;
+				$responseData['message'] = 'Zboží se nepodařilo vložit do košíku.';
+			}
+		}
+		$engine = $this->container->get('templating');
+		$responseData['jsWindowId'] = 'productAddResponse';
+		$responseData['jsWindow'] = $engine->render('@SS6Shop/Front/Inline/jsWindow.html.twig', array(
+			'id' => $responseData['jsWindowId'],
+			'text' => $responseData['message'],
+			'noEscape' => true,
+			'continueButton' => $responseData['success'],
+			'continueButtonText' => 'Pokračovat do košíku',
+			'continueUrl' => $this->get('router')->generate('front_homepage', array(), true),
+		));
+		$responseData['cartBoxReloadUrl'] = $this->get('router')->generate('front_cart_box', array(), true);
+		return new JsonResponse($responseData);
 	}
 	
 	/**
