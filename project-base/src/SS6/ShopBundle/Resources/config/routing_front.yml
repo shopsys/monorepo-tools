@@ -14,6 +14,10 @@ front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
 
+front_order_index:
+  pattern: /order/
+  defaults: { _controller: SS6ShopBundle:Front\Order:index }
+
 front_product_detail:
   pattern: /product/detail/{id}
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }
