@@ -4,6 +4,7 @@
 	"description": "Copyright by netdevelo s.r.o.",
 	"version": "6.0.0-dev",
 	"autoload": {
+		"classmap": ["src/"],
 		"psr-0": {"": "src/"}
 	},
 	"require": {
