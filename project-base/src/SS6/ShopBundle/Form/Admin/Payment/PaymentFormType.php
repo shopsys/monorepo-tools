@@ -6,11 +6,12 @@ use SS6\ShopBundle\Form\YesNoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class PaymentFormType extends AbstractType {
-	
+
 	private $allTransports;
-	
+
 	/**
 	 * @param array $allTransports
 	 */
@@ -35,10 +36,14 @@ class PaymentFormType extends AbstractType {
 			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			$transportChoices[$transport->getId()] = $transport->getName();
 		}
-		
+
 		$builder
 			->add('id', 'integer', array('read_only' => true))
-			->add('name', 'text')
+			->add('name', 'text', array(
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
+				),
+			))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('transports', 'choice', array(
 				'choices' => $transportChoices,
@@ -46,7 +51,14 @@ class PaymentFormType extends AbstractType {
 				'expanded' => true,
 				'required' => false,
 			))
-			->add('price', 'money', array('currency' => false, 'required' => true))
+			->add('price', 'money', array(
+				'currency' => false,
+				'required' => true,
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
+				),
+				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+			))
 			->add('description', 'textarea', array('required' => false))
 			->add('save', 'submit');
 	}
@@ -57,6 +69,7 @@ class PaymentFormType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'data_class' => PaymentFormData::class,
+			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}
 }
