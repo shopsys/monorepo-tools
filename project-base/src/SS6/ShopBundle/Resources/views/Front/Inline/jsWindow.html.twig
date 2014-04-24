@@ -1,4 +1,4 @@
-<div  id="window-container-{{ id }}" class="window-container">
+<div  id="window-container-{{ id }}" class="window">
 	{% if noEscape|default(false) %}
 		{{ text|raw }}
 	{% else %}
@@ -6,10 +6,10 @@
 	{% endif %}
 	
 	{% if closeButton|default(true) %}
-		<a href="#" class="window-button-close">{{ closeButtonText|default('Zavřít') }}</a>
+		<a href="#" class="window-button-close window__close" title="Zavřít">{{ closeButtonText|default('X') }}</a>
 	{% endif %}
 	{% if continueButton|default(false) %}
-		<a href="{{ continueUrl|default('#') }}" class="window-button-continue">{{ continueButtonText|default('Pokračovat')}}</a>
+		<a href="{{ continueUrl|default('#') }}" class="window-button-continue button">{{ continueButtonText|default('Pokračovat')}}</a>
 	{% endif %}
 </div>
 <script type="text/javascript">

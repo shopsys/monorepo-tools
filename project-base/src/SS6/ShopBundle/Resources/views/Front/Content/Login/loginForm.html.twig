@@ -9,19 +9,29 @@
 		<p class="message message-danger">{{ error }}</p>
 	{% endif %}
 
-	{{ form_start(form, {attr: {class: 'form-signin'}}) }}
-		{{ form_errors(form) }}
+	<div class="row">
+		<div class="col-md-4 col-sm-12">
+			{{ form_start(form) }}
 
-		<h1 class="form-signin-heading">Přihlášení</h1>
-		
-		{{ form_errors(form.email) }}
-		{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+				<h1>Přihlášení</h1>
+				
+				{{ form_errors(form) }}
 
-		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+				<div class="form-group">
+					{{ form_errors(form.email) }}
+					{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+				</div>
 
-		{{ form_widget(form.login, {label: 'Přihlásit', attr: {class: 'btn-lg btn-block'}}) }}
+				<div class="form-group">
+					{{ form_errors(form.password) }}
+					{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+				</div>
 
-	{{ form_end(form) }}
+				{{ form_widget(form.login, {label: 'Přihlásit'}) }}
+
+			{{ form_end(form) }}
+
+		</div>
+	</div>
 	
 {% endblock %}

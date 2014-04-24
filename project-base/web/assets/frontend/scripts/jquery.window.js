@@ -8,8 +8,8 @@
 	$.fn.SS6.window = $.fn.SS6.Window || {};
 	
 	var windowPrefix = '#window-container-';
-	var windowButtonCloseSelector = '.window-button-close';
-	var windowButtonContinueSelector = '.window-button-continue';
+	var windowButtonCloseSelector = '.window__close';
+	var windowButtonContinueSelector = '.window__continue';
 	var windowMainContainerId = 'window-main-container';
 	
 	/**
@@ -62,7 +62,7 @@
 		});
 		
 		if (!isOpenned) {
-			$window.hide().appendTo($mainContainer).fadeIn('fast');
+			$window.hide().appendTo($mainContainer).fadeIn('fast').addClass('window--active');
 		}
 	}
 	
