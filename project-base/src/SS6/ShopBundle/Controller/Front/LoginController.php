@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Form\Front\Login\LoginFormType;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller {
@@ -14,18 +15,19 @@ class LoginController extends Controller {
 			return $this->redirect($this->generateUrl('front_homepage'));
 		}
 		
-		$error = null;
 		$loginService = $this->container->get('ss6.shop.security.login_service');
 		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
+
+		$form = $this->getLoginForm();
+
 		try {
 			$loginService->checkLoginProcess($request);
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
-			$error = 'Zadal jste špatné přihlašovací údaje.';
+			$form->addError(new FormError('Byly zadány neplatné přihlašovací údaje'));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Login/loginForm.html.twig', array(
-			'form' => $this->getLoginForm()->createView(),
-			'error' => $error,
+			'form' => $form->createView(),
 		));
 	}
 	

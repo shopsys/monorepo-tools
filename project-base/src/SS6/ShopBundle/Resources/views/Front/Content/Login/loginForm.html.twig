@@ -5,17 +5,13 @@
 {% endblock %}
 
 {% block content %}
-	{% if error %}
-		<p class="message message-danger">{{ error }}</p>
-	{% endif %}
+	{{ form_errors(form) }}
 
 	<div class="row">
 		<div class="col-md-4 col-sm-12">
 			{{ form_start(form) }}
 
 				<h1>Přihlášení</h1>
-				
-				{{ form_errors(form) }}
 
 				<div class="form-group">
 					{{ form_errors(form.email) }}
