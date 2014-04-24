@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
@@ -54,10 +55,9 @@ class ProductController extends Controller {
 					'success', 'Produkt byl úspěšně upraven.'
 				);
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
-			} else {
-				if ($form->isSubmitted()) {
-					$product = $this->get('ss6.shop.product.product_repository')->getById($id);
-				}
+			} else if ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+				$product = $this->get('ss6.shop.product.product_repository')->getById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
@@ -95,6 +95,8 @@ class ProductController extends Controller {
 					'success', 'Produkt byl úspěšně vytvořen.'
 				);
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
+			} else if ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
