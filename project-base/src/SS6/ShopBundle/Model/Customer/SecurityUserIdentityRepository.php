@@ -21,7 +21,7 @@ class SecurityUserIdentityRepository extends EntityRepository implements UserPro
 	
 
 	/**
-	 * @param string $username The username
+	 * @param string $email
 	 * @return Administrator
 	 * @throws UsernameNotFoundException if the user is not found
 	 */
@@ -52,7 +52,7 @@ class SecurityUserIdentityRepository extends EntityRepository implements UserPro
 		
 		if ($userIdentity instanceof TimelimitLoginInterface) {
 			if (time() - $userIdentity->getLastActivity()->getTimestamp() > 3600 * 24) {
-				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('UserIdentity was too long unactive.');
+				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('UserIdentity was too long unactive');
 			}
 			$userIdentity->setLastActivity(new DateTime());
 		}
