@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
@@ -21,27 +22,50 @@ class ProductController extends Controller {
 	 */
 	public function editAction(Request $request, $id) {
 		$form = $this->createForm(new ProductFormType());
-						
+		
 		try {
-			$result = $this->get('ss6.shop.product.product_edit_facade')->edit($id, $request, $form);
+			$productData = array();
+			
+			if (!$form->isSubmitted()) {
+				$productRepository = $this->get('ss6.shop.product.product_repository');
+				/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+				$product = $productRepository->getById($id);
+				$productData['id'] = $product->getId();
+				$productData['name'] = $product->getName();
+				$productData['catnum'] = $product->getCatnum();
+				$productData['partno'] = $product->getPartno();
+				$productData['ean'] = $product->getEan();
+				$productData['description'] = $product->getDescription();
+				$productData['price'] = $product->getPrice();
+				$productData['sellingFrom'] = $product->getSellingFrom();
+				$productData['sellingTo'] = $product->getSellingTo();
+				$productData['stockQuantity'] = $product->getStockQuantity();
+				$productData['hidden'] = $product->isHidden();
+			}
+			
+			$form->setData($productData);
+			$form->handleRequest($request);
+				
+			if ($form->isValid()) {
+				$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+				/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+				$product = $productEditFacade->edit($id, $form->getData());
 
-			if ($result) {
 				$this->get('session')->getFlashBag()->add(
 					'success', 'Produkt byl úspěšně upraven.'
 				);
-				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $id)));
+				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
+			} elseif ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+				$product = $this->get('ss6.shop.product.product_repository')->getById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
-		} catch (\SS6\ShopBundle\Exception\ValidationException $e) {
-			$this->get('session')->getFlashBag()->add(
-				'error', $e->getMessage()
-			);
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(
 			'form' => $form->createView(),
-			'product' => $form->getData(),
+			'product' => $product,
 		));
 	}
 	
@@ -51,22 +75,31 @@ class ProductController extends Controller {
 	 */
 	public function newAction(Request $request) {
 		$form = $this->createForm(new ProductFormType());
-						
+		
 		try {
-			$result = $this->get('ss6.shop.product.product_edit_facade')->create($request, $form);
+			$productData = array();
+			
+			if (!$form->isSubmitted()) {
+				$productData['hidden'] = false;
+			}
+			
+			$form->setData($productData);
+			$form->handleRequest($request);
+				
+			if ($form->isValid()) {
+				$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+				/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+				$product = $productEditFacade->create($form->getData());
 
-			if ($result) {
 				$this->get('session')->getFlashBag()->add(
 					'success', 'Produkt byl úspěšně vytvořen.'
 				);
-				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $form->getData()->getId())));
+				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
+			} elseif ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
-		} catch (\SS6\ShopBundle\Exception\ValidationException $e) {
-			$this->get('session')->getFlashBag()->add(
-				'error', $e->getMessage()
-			);
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(

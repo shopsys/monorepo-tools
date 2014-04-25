@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\Payment\Payment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends Controller {
@@ -19,27 +20,29 @@ class PaymentController extends Controller {
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$allTransports = $transportRepository->getAll();
-		
-		$formData = new PaymentFormData();
-		$form = $this->createForm(new PaymentFormType($allTransports), $formData);
+
+		$paymentData = new PaymentFormData();
+		$form = $this->createForm(new PaymentFormType($allTransports), $paymentData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$transportRepository->getAll();
 			$payment = new Payment(
-				$formData->getName(), 
-				$formData->getPrice(), 
-				$formData->getDescription(),
-				$formData->isHidden()
+				$paymentData->getName(),
+				$paymentData->getPrice(),
+				$paymentData->getDescription(),
+				$paymentData->isHidden()
 			);
-			
-			$transports = $transportRepository->findAllByIds($formData->getTransports());
+
+			$transports = $transportRepository->findAllByIds($paymentData->getTransports());
 			$payment->setTransports($transports);
-			
+
 			$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 			$paymentEditFacade->create($payment);
 			return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $payment->getId())));
+		} elseif ($form->isSubmitted()) {
+			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', array(
@@ -92,6 +95,8 @@ class PaymentController extends Controller {
 				
 				$paymentEditFacade->edit($payment);
 				return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $id)));
+			} elseif ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);

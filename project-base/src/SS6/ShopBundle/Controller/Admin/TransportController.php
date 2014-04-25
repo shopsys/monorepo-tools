@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
 use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends Controller {
@@ -16,22 +17,24 @@ class TransportController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$formData = new TransportFormData();
-		$form = $this->createForm(new TransportFormType(), $formData);
+		$transportData = new TransportFormData();
+		$form = $this->createForm(new TransportFormType(), $transportData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$transport = new Transport(
-				$formData->getName(), 
-				$formData->getPrice(), 
-				$formData->getDescription(), 
-				$formData->isHidden()
+				$transportData->getName(),
+				$transportData->getPrice(),
+				$transportData->getDescription(),
+				$transportData->isHidden()
 			);
 			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transportEditFacade->create($transport);
 			return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $transport->getId())));
+		} elseif ($form->isSubmitted()) {
+			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
@@ -71,6 +74,8 @@ class TransportController extends Controller {
 				);
 				$transportEditFacade->edit($transport);
 				return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $id)));
+			} elseif ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);

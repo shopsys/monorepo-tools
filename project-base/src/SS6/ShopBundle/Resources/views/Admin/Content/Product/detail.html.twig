@@ -22,8 +22,9 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{{ form_row(form.id) }}
-				
+				{% block product_id %}
+					{{ form_widget(form.id, { type: 'hidden' }) }}
+				{% endblock %}
 				{% block product_url %}{% endblock %}
 				
 				{{ form_row(form.name, { label: 'Název'}) }}

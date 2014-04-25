@@ -32,7 +32,7 @@ class PaymentFormData {
 	private $hidden = false;
 	
 	/**
-	 * @var Collection 
+	 * @var \Doctrine\Common\Collections\Collection 
 	 */
 	private $transports = array();
 	
@@ -65,7 +65,7 @@ class PaymentFormData {
 	}
 	
 	/**
-	 * @return Collection
+	 * @return \Doctrine\Common\Collections\Collection
 	 */
 	public function getTransports() {
 		return $this->transports;

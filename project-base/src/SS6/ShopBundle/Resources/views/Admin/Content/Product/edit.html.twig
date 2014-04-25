@@ -3,6 +3,10 @@
 {% block title %}- Editace zboží - {{ product.name }}{% endblock %}
 {% block h1 %}Editace zboží - {{ product.name }}{% endblock %}
 
+{% block product_id %}
+	{{ form_row(form.id, { label: 'ID'}) }}
+{% endblock %}
+
 {% block product_url %}
 	<div class="form-group">
 		{% if (product.visible) %}

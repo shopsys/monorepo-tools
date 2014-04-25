@@ -32,6 +32,30 @@
 	{% endspaceless %}
 {% endblock form_label %}
 
+{% block form_errors %}
+	{% spaceless %}
+		{% if errors|length > 0 %}
+			{% if form.parent %}
+				<div class="message message-danger message-floating">
+					<ul class="message__list">
+						{% for error in errors %}
+							<li>{{ error.message }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% else %}
+				<div class="message message-danger">
+					<ul class="message__list">
+						{% for error in errors %}
+							<li>{{ error.message }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+		{% endif %}
+	{% endspaceless %}
+{% endblock form_errors %}
+
 {% block form_widget_simple %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
 	{{ parent('form_widget_simple') }}

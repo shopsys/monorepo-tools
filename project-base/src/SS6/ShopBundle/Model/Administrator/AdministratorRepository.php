@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Administrator;
 
 use DateTime;
 use Doctrine\ORM\EntityRepository;
-use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,8 +13,8 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 
 	/**
 	 * @param string $username The username
-	 * @return Administrator
-	 * @throws UsernameNotFoundException if the user is not found
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($username) {
 		$administrator = $this->findOneBy(array('username' => $username));
@@ -31,9 +30,9 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 	}
 
 	/**
-	 * @param UserInterface $administrator
-	 * @return Administrator
-	 * @throws UnsupportedUserException
+	 * @param \Symfony\Component\Security\Core\User\UserInterface $administrator
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
 	 */
 	public function refreshUser(UserInterface $administrator) {
 		$class = get_class($administrator);
