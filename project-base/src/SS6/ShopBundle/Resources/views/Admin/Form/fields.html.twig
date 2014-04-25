@@ -34,19 +34,17 @@
 
 {% block form_errors %}
 	{% spaceless %}
-		{% if false %}
-			{% if errors|length > 0 %}
-				<div class="message message-danger">
+		{% if errors|length > 0 %}
+			{% if form.parent %}
+				<div class="message message-danger message-floating">
 					<ul class="message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>
 						{% endfor %}
 					</ul>
 				</div>
-			{% endif %}
-		{% else %}
-			{% if errors|length > 0 %}
-				<div class="message message-danger message-floating">
+			{% else %}
+				<div class="message message-danger">
 					<ul class="message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>

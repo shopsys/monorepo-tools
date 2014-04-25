@@ -33,7 +33,7 @@ class TransportController extends Controller {
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transportEditFacade->create($transport);
 			return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $transport->getId())));
-		} else if ($form->isSubmitted()) {
+		} elseif ($form->isSubmitted()) {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
@@ -74,6 +74,8 @@ class TransportController extends Controller {
 				);
 				$transportEditFacade->edit($transport);
 				return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $id)));
+			} elseif ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);

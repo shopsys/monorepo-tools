@@ -48,7 +48,11 @@ class ProductFormType extends AbstractType {
 				),
 			))
 			->add('description', 'textarea', array('required' => false))
-			->add('price', 'money', array('currency' => false, 'required' => false))
+			->add('price', 'money', array(
+				'currency' => false,
+				'required' => false,
+				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+			))
 			->add('sellingFrom', 'datePicker', array(
 				'required' => false,
 				'constraints' => array(
@@ -72,7 +76,7 @@ class ProductFormType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
-    ));
+		));
 	}
 
 }

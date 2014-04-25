@@ -40,13 +40,13 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		
 		$em->persist($product);
 		$em->flush();
+		$id = $product->getId();
 		$em->clear();
 		
 		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 		
-		$id = $product->getId();
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 		
@@ -64,13 +64,13 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		
 		$em->persist($product);
 		$em->flush();
+		$id = $product->getId();
 		$em->clear();
 		
 		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 		
-		$id = $product->getId();
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 		
@@ -90,13 +90,13 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		
 		$em->persist($product);
 		$em->flush();
+		$id = $product->getId();
 		$em->clear();
 		
 		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 		
-		$id = $product->getId();
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 		

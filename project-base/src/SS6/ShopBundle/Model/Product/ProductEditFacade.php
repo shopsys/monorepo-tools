@@ -56,7 +56,7 @@ class ProductEditFacade {
 		
 		$this->productVisibilityRepository->refreshProductsVisibility();
 		
-		return $this->productRepository->getById($product->getId());
+		return $product;
 	}
 	
 	/**
@@ -82,7 +82,7 @@ class ProductEditFacade {
 		
 		$this->productVisibilityRepository->refreshProductsVisibility();
 		
-		return $this->productRepository->getById($product->getId());
+		return $product;
 	}
 	
 	/**

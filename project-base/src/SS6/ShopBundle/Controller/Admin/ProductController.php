@@ -55,7 +55,7 @@ class ProductController extends Controller {
 					'success', 'Produkt byl úspěšně upraven.'
 				);
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
-			} else if ($form->isSubmitted()) {
+			} elseif ($form->isSubmitted()) {
 				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 				$product = $this->get('ss6.shop.product.product_repository')->getById($id);
 			}
@@ -95,7 +95,7 @@ class ProductController extends Controller {
 					'success', 'Produkt byl úspěšně vytvořen.'
 				);
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
-			} else if ($form->isSubmitted()) {
+			} elseif ($form->isSubmitted()) {
 				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {

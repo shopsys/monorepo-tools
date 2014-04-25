@@ -41,7 +41,7 @@ class PaymentController extends Controller {
 			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 			$paymentEditFacade->create($payment);
 			return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $payment->getId())));
-		} else if ($form->isSubmitted()) {
+		} elseif ($form->isSubmitted()) {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
@@ -95,6 +95,8 @@ class PaymentController extends Controller {
 				
 				$paymentEditFacade->edit($payment);
 				return $this->redirect($this->generateUrl('admin_payment_edit', array('id' => $id)));
+			} elseif ($form->isSubmitted()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
