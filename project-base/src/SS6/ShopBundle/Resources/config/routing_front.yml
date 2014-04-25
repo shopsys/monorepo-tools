@@ -22,6 +22,10 @@ front_order_personal:
   pattern: /order/personal/
   defaults: { _controller: SS6ShopBundle:Front\Order:personal }
 
+front_order_sended:
+  pattern: /order/sended/
+  defaults: { _controller: SS6ShopBundle:Front\Order:sended }
+
 front_product_detail:
   pattern: /product/detail/{id}
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }
