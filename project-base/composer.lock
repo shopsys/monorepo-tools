@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "fe648dae8e12b649da7947756c956ff5",
+    "hash": "c4198bfde95449d29082e83bb612e18e",
     "packages": [
         {
             "name": "apy/datagrid-bundle",
@@ -1946,41 +1946,44 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "1.5.2",
+            "version": "dev-phpcs-fixer",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "a76a39b317ce8106abe6264daa505e24e1731860"
+                "reference": "e26cdb7196973aa5c32c11de588b6a3a6215137c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/a76a39b317ce8106abe6264daa505e24e1731860",
-                "reference": "a76a39b317ce8106abe6264daa505e24e1731860",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e26cdb7196973aa5c32c11de588b6a3a6215137c",
+                "reference": "e26cdb7196973aa5c32c11de588b6a3a6215137c",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "php": ">=5.1.2"
             },
-            "suggest": {
-                "phpunit/php-timer": "dev-master"
-            },
             "bin": [
-                "scripts/phpcs"
+                "scripts/phpcs",
+                "scripts/phpcbf"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-phpcs-fixer": "2.0.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "CodeSniffer.php",
                     "CodeSniffer/CLI.php",
                     "CodeSniffer/Exception.php",
                     "CodeSniffer/File.php",
+                    "CodeSniffer/Fixer.php",
                     "CodeSniffer/Report.php",
                     "CodeSniffer/Reporting.php",
                     "CodeSniffer/Sniff.php",
                     "CodeSniffer/Tokens.php",
                     "CodeSniffer/Reports/",
-                    "CodeSniffer/CommentParser/",
                     "CodeSniffer/Tokenizers/",
                     "CodeSniffer/DocGenerators/",
                     "CodeSniffer/Standards/AbstractPatternSniff.php",
@@ -2012,7 +2015,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2014-02-04 23:49:58"
+            "time": "2014-04-17 05:26:52"
         },
         {
             "name": "stnw/date-picker-bundle",
@@ -2569,6 +2572,7 @@
     "stability-flags": {
         "pdepend/pdepend": 20,
         "phpmd/phpmd": 20,
+        "squizlabs/php_codesniffer": 20,
         "stnw/date-picker-bundle": 20
     },
     "platform": {
