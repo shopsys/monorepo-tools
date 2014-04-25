@@ -24,7 +24,7 @@ class LoginController extends Controller {
 		$error = null;
 		
 		$form = $this->createForm(new LoginFormType(), null, array(
-			'action' =>	$this->get('router')->generate('admin_login_check', array(), true),
+			'action' => $this->generateUrl('admin_login_check'),
 			'method' => 'POST',
 		));
 

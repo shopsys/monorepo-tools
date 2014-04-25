@@ -30,13 +30,11 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	
 	public function testGetItemsCount() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		
-		$product1 = new Product();
-		$product1->setName('Product 1');
-		$product1->setPrice(100);
-		$product2 = new Product();
-		$product2->setName('Product 2');
-		$product2->setPrice(200);
+
+		$price1 = 100;
+		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$price2 = 200;
+		$product2 = new Product('Product 2', null, null, null, null, $price2);
 		
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
@@ -49,12 +47,10 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	public function testGetPrice() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		
-		$product1 = new Product();
-		$product1->setName('Product 1');
-		$product1->setPrice(100);
-		$product2 = new Product();
-		$product2->setName('Product 2');
-		$product2->setPrice(200);
+		$price1 = 100;
+		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$price2 = 200;
+		$product2 = new Product('Product 2', null, null, null, null, $price2);
 		
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
@@ -67,12 +63,10 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	public function testGetQuantity() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		
-		$product1 = new Product();
-		$product1->setName('Product 1');
-		$product1->setPrice(100);
-		$product2 = new Product();
-		$product2->setName('Product 2');
-		$product2->setPrice(200);
+		$price1 = 100;
+		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$price2 = 200;
+		$product2 = new Product('Product 2', null, null, null, null, $price2);
 		
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);

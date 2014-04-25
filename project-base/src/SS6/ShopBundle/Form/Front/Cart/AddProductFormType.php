@@ -14,7 +14,7 @@ class AddProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('product_id', 'hidden', array(
+			->add('productId', 'hidden', array(
 					'constraints' => array(
 						new Constraints\GreaterThan(0),
 						new Constraints\Regex(array('pattern' => '/^\d+$/')),

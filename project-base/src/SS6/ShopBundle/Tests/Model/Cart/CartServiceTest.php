@@ -15,12 +15,12 @@ class CarServicetTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = array();
 		$cart = new Cart($cartItems);
-		$product = new Product();
-		$product->setName('Product 1');
-		$product->setPrice(100);
+
+		$price = 100;
+		$product = new Product('Product 1', null, null, null, null, $price);
 		
 		$cartService = new CartService();
-		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidArgumentQuantityException');
+		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
 	}
 	
@@ -28,12 +28,12 @@ class CarServicetTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = array();
 		$cart = new Cart($cartItems);
-		$product = new Product();
-		$product->setName('Product 1');
-		$product->setPrice(100);
+
+		$price = 100;
+		$product = new Product('Product 1', null, null, null, null, $price);
 		
 		$cartService = new CartService();
-		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidArgumentQuantityException');
+		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
 	}
 	
@@ -41,12 +41,12 @@ class CarServicetTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = array();
 		$cart = new Cart($cartItems);
-		$product = new Product();
-		$product->setName('Product 1');
-		$product->setPrice(100);
+
+		$price = 100;
+		$product = new Product('Product 1', null, null, null, null, $price);
 		
 		$cartService = new CartService();
-		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidArgumentQuantityException');
+		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
 	}
 	
@@ -54,9 +54,10 @@ class CarServicetTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = array();
 		$cart = new Cart($cartItems);
-		$product = new Product();
-		$product->setName('Product 1');
-		$product->setPrice(100);
+		
+		$price = 100;
+		$product = new Product('Product 1', null, null, null, null, $price);
+
 		$quantity = 2;
 		
 		$cartService = new CartService();
@@ -67,9 +68,10 @@ class CarServicetTest extends PHPUnit_Framework_TestCase {
 	
 	public function testAddProductToCartSameProduct() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = new Product();
-		$product->setName('Product 1');
-		$product->setPrice(100);
+
+		$price = 100;
+		$product = new Product('Product 1', null, null, null, null, $price);
+
 		$cartItem = new CartItem($customerIdentifier, $product, 1);
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);

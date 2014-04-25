@@ -46,7 +46,7 @@ class LoginController extends Controller {
 	 */
 	private function getLoginForm() {
 		return $this->createForm(new LoginFormType(), null, array(
-			'action' =>	$this->get('router')->generate('front_login_check', array(), true),
+			'action' => $this->generateUrl('front_login_check'),
 			'method' => 'POST',
 		));
 	}

@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartItemRepository {
 
-		/**
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;

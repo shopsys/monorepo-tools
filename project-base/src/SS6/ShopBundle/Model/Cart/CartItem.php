@@ -45,14 +45,6 @@ class CartItem {
 	private $quantity;
 	
 	/**
-	 * @var \DateTime
-	 * 
-	 * @ORM\Column(type="date")
-	 */
-	private $lastUpdate;
-	
-	
-	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $quantity
@@ -61,11 +53,6 @@ class CartItem {
 		$this->sessionId = $customerIdentifier->getSessionId();
 		$this->product = $product;
 		$this->quantity = $quantity;
-		$this->setUpdate();
-	}
-	
-	private function setUpdate() {
-		$this->lastUpdate = new DateTime('now');
 	}
 
 	/**

@@ -1,7 +1,3 @@
-/**
- * Custom plugin window
- */
-
 (function ($) {
 
 	$.fn.SS6 = $.fn.SS6 || {};
@@ -44,5 +40,3 @@
 	});
 	
 })(jQuery);
-
-

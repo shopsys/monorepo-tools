@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Product\Product;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,9 +24,9 @@ class CartController extends Controller {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
 	public function addProductFormAction(Product $product) {
-		$formData = array('product_id' => $product->getId());
+		$formData = array('productId' => $product->getId());
 		$form = $this->createForm(new AddProductFormType(), $formData, array(
-			'action' =>	$this->get('router')->generate('front_cart_add_product', array(), true),
+			'action' => $this->generateUrl('front_cart_add_product'),
 			'method' => 'POST',
 		));
 		
@@ -45,21 +44,21 @@ class CartController extends Controller {
 		));
 		$form->handleRequest($request);
 		
-		$actionResult = array('success' => false, 'message' => 'Musíta zadat validní množství kusů, které chcete vložit do košíku.');
+		$actionResult = array('success' => false, 'message' => 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
 				$cartFacade = $this->get('ss6.shop.cart.cart_facade');
 				/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
-				$addProductResult = $cartFacade->addProductToCart($formData['product_id'], $formData['quantity']);					
+				$addProductResult = $cartFacade->addProductToCart($formData['productId'], $formData['quantity']);
 				$actionResult['success'] = true;
 				$actionResult['message'] = $this->getAddProductResultMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$actionResult['success'] = false;
 				$actionResult['message'] = 'Zvolené zboží již není v nabídce nebo neexistuje.';
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidArgumentQuantityException $ex) {
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$actionResult['success'] = false;
-				$actionResult['message'] = 'Musíta zadat validní množství kusů, které chcete vložit do košíku.';
+				$actionResult['message'] = 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.';
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
 				$actionResult['success'] = false;
 				$actionResult['message'] = 'Zboží se nepodařilo vložit do košíku.';
@@ -77,7 +76,7 @@ class CartController extends Controller {
 		if ($this->getRequest()->headers->get('referer')) {
 			$redirectTo = $this->getRequest()->headers->get('referer');
 		} else {
-			$redirectTo = $this->get('router')->generate('front_homepage', array(), true);
+			$redirectTo = $this->generateUrl('front_homepage');
 		}
 		
 		return $this->redirect($redirectTo);
@@ -96,9 +95,9 @@ class CartController extends Controller {
 			'noEscape' => true,
 			'continueButton' => $actionResult['success'],
 			'continueButtonText' => 'Pokračovat do košíku',
-			'continueUrl' => $this->get('router')->generate('front_homepage', array(), true),
+			'continueUrl' => $this->generateUrl('front_homepage'),
 		));
-		$actionResult['cartBoxReloadUrl'] = $this->get('router')->generate('front_cart_box', array(), true);
+		$actionResult['cartBoxReloadUrl'] = $this->generateUrl('front_cart_box');
 		return new JsonResponse($actionResult);
 	}
 	

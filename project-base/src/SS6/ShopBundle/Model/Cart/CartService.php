@@ -13,11 +13,11 @@ class CartService {
 	 * @param \SS6\ShopBundle\Model\Product\Product\Product $product
 	 * @param int $quantity
 	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
-	 * @throws \SS6\ShopBundle\Model\Cart\Exception\InvalidArgumentQuantityException
+	 * @throws \SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException
 	 */
 	public function addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
 		if (!is_int($quantity) || $quantity <= 0) {
-			throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidArgumentQuantityException($quantity);
+			throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
 		}
 
 		foreach ($cart->getItems() as $cartItem) {

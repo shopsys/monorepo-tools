@@ -67,14 +67,14 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
-	 * @return SS6\ShopBundle\Model\Product\Product
+	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getVisibleById($id) {
 		$criteria = array('id' => $id, 'visible' => true);
 		$product = $this->entityRepository->findOneBy($criteria);
 		
 		if ($product === null) {
-			throw new Exception\ProductNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException($criteria);
 		}
 		
 		return $product;

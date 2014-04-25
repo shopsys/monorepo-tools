@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Cart\Exception;
 
 use Exception;
 
-class InvalidArgumentQuantityException extends Exception implements CartException {
+class InvalidQuantityException extends Exception implements CartException {
 	
 	/**
 	 * @var mixed

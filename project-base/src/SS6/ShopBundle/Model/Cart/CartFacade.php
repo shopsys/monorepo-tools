@@ -49,11 +49,11 @@ class CartFacade {
 	}
 
 	/**
-	 * @param int $productid
+	 * @param int $productId
 	 * @param int $quantity
 	 */
-	public function addProductToCart($productid, $quantity) {
-		$product = $this->productRepository->getVisibleById($productid);		
+	public function addProductToCart($productId, $quantity) {
+		$product = $this->productRepository->getVisibleById($productId);
 		$result = $this->cartService->addProductToCart($this->cart, $this->customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
 		
