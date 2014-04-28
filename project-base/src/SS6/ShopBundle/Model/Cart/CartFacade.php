@@ -62,4 +62,12 @@ class CartFacade {
 		
 		return $result;
 	}
+
+	/**
+	 * @param array $quantities CartItem.id => quantity
+	 */
+	public function changeQuantities(array $quantities) {
+		$this->cartService->changeQuantities($this->cart, $quantities);
+		$this->em->flush();
+	}
 }

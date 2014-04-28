@@ -18,10 +18,43 @@ class CartController extends Controller {
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 
+		$cartFormData = array(
+			'quantities' => array(),
+		);
+		foreach ($cart->getItems() as $cartItem) {
+			$cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
+		}
+
+		$form = $this->createForm(new \SS6\ShopBundle\Form\Front\Cart\CartFormType($cart));
+		$form->setData($cartFormData);
+		$form->handleRequest($request);
+		$invalidCartRecalc = false;
+
+		if ($form->isValid()) {
+			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
+			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
+			try {
+				$cartFacade->changeQuantities($form->getData()['quantities']);
+				$this->get('session')->getFlashBag()->add(
+					'success', 'Množství v košíku bylo úspěšně přepočítáno.'
+				);
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+				$invalidCartRecalc = true;
+			}
+			return $this->redirect($this->generateUrl('front_cart'));
+		} elseif ($form->isSubmitted()) {
+			$invalidCartRecalc = true;
+		}
+
+		if ($invalidCartRecalc) {
+			$form->addError(new FormError('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.'));
+		}
+
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
 			'backUrl' => $this->getBackUrl($request),
 			'cart' => $cart,
 			'cartItems' => $cart->getItems(),
+			'form' => $form->createView(),
 		));
 	}
 

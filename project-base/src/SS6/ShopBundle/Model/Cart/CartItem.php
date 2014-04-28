@@ -61,6 +61,13 @@ class CartItem {
 	public function changeQuantity($newQuantity) {
 		$this->quantity = $newQuantity;
 	}
+
+	/**
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 	
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Product

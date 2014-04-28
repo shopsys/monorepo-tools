@@ -31,4 +31,16 @@ class CartService {
 		return new AddProductResult($newCartItem, true, $quantity);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param array $quantities CartItem.id => quantity
+	 */
+	public function changeQuantities(Cart $cart, array $quantities) {
+		foreach ($cart->getItems() as $cartItem) {
+			if (array_key_exists($cartItem->getId(), $quantities)) {
+				$cartItem->changeQuantity($quantities[$cartItem->getId()]);
+			}
+		}
+	}
+
 }
