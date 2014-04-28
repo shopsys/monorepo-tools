@@ -16,6 +16,7 @@ class CartController extends Controller {
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
+			'cart' => $cart,
 			'cartItems' => $cart->getItems(),
 		));
 	}

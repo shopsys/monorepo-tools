@@ -20,76 +20,43 @@
 		</thead>
 
 		<tbody>
-			<tr class="basket-list__item">
-				<td class="basket-list__image basket-list__cell-left">
-					<a href="./" title="">
-						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
-					</a>
-				</td>
+			{% for cartItem in cartItems  %}
+				<tr class="basket-list__item">
+					<td class="basket-list__image basket-list__cell-left">
+						<a href="./" title="">
+							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
+						</a>
+					</td>
 
-				<td class="basket-list__title basket-list__cell-left">
-					<a href="./" title="">
-						Brutální název produktu
-					</a>
-				</td>
+					<td class="basket-list__title basket-list__cell-left">
+						<a href="./" title="">
+							Brutální název produktu
+						</a>
+					</td>
 
-				<td class="basket-list__price-piece">
-					1 800 Kč
-				</td>
+					<td class="basket-list__price-piece">
+						1 800 Kč
+					</td>
 
-				<td class="basket-list__ammount">
-					<span class="input-spinbox">
-						<span class="button input-spinbox__button">-</span>
-						<input type="number" class="input-spinbox__input">
-						<span class="button input-spinbox__button">+</span>
-					</span>
-				</td>
+					<td class="basket-list__ammount">
+						<span class="input-spinbox">
+							<span class="button input-spinbox__button">-</span>
+							<input type="number" class="input-spinbox__input">
+							<span class="button input-spinbox__button">+</span>
+						</span>
+					</td>
 
-				<td class="basket-list__price-final">
-					1 800 Kč
-				</td>
+					<td class="basket-list__price-final">
+						1 800 Kč
+					</td>
 
-				<td class="basket-list__remove">
-					<a href="./">
-						odstranit
-					</a>
-				</td>
-			</tr>
-			<tr class="basket-list__item">
-				<td class="basket-list__image basket-list__cell-left">
-					<a href="./" title="">
-						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
-					</a>
-				</td>
-
-				<td class="basket-list__title basket-list__cell-left">
-					<a href="./" title="">
-						Brutální název produktu
-					</a>
-				</td>
-
-				<td class="basket-list__price-piece">
-					1 800 Kč
-				</td>
-
-				<td class="basket-list__ammount">
-					<div class="input-spinbox">
-						<span class="button input-spinbox__button">-</span>
-						<input type="number" class="input-spinbox__input">
-						<span class="button input-spinbox__button">+</span>
-					</div>
-				</td>
-
-				<td class="basket-list__price-final">
-					1 800 Kč
-				</td>
-
-				<td class="basket-list__remove">
-					<a href="./">
-						odstranit
-					</a>
-				</td>
-			</tr>
+					<td class="basket-list__remove">
+						<a href="./">
+							odstranit
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
 		</tbody>
 
 
