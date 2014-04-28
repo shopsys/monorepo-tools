@@ -11,14 +11,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CartController extends Controller {
 
-	public function indexAction() {
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function indexAction(Request $request) {
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
+			'backUrl' => $this->getBackUrl($request),
 			'cart' => $cart,
 			'cartItems' => $cart->getItems(),
 		));
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return string
+	 */
+	private function getBackUrl(Request $request) {
+		$refferer = $request->server->get('HTTP_REFERER');
+		$cartUrl = $this->generateUrl('front_cart', array(), true);
+		if ($refferer !== null && $refferer !== $cartUrl) {
+			return $refferer;
+		} else {
+			return $this->generateUrl('front_homepage', array(), true);
+		}
 	}
 
 	public function boxAction() {
