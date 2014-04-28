@@ -1,0 +1,9 @@
+<div id="cart-box" style="width: 250px; float: right; margin: -20px 0px 0px 30px;">
+	<h3><a href="#">Košík</a></h3>
+
+	{% if cart.itemsCount == 0 %}
+		Váš nákupní košík je prázdný
+	{% else %}
+		{{ cart.itemsCount }} položek ({{ cart.price|price }})
+	{% endif %}
+</div>

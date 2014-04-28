@@ -27,6 +27,7 @@
 					<a href="{{ url('front_product_detail', {'id': product.id}) }}" class="button">
 						Více informací
 					</a>
+					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
 				</div>
 			</li>
 		{% endfor %}
