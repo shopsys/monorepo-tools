@@ -116,7 +116,7 @@ class CartController extends Controller {
 	 * @return string
 	 */
 	private function getAddProductResultMessage(AddProductResult $addProductResult) {
-		$productName = $addProductResult->getCartItem()->getProduct()->getName();
+		$productName = $addProductResult->getCartItem()->getName();
 		if ($addProductResult->getIsNew()) {
 			$message = sprintf('Do košíku bylo vloženo zboží <b>%s</b> (%d ks)', 
 				htmlentities($productName, ENT_QUOTES),

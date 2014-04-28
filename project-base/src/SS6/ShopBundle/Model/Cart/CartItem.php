@@ -70,10 +70,30 @@ class CartItem {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getName() {
+		return $this->product->getName();
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getQuantity() {
 		return $this->quantity;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getPrice() {
+		return $this->product->getPrice();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTotalPrice() {
+		return $this->product->getPrice() * $this->quantity;
+	}
 }
