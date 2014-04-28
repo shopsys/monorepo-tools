@@ -1,68 +1,119 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	- Košík
+	Košík
 {% endblock %}
 
 {% block content %}
-	<div class="row">
-		<div class="col-xs-12 col-md-6">
-			<div class="product-image">
-				<span>
-					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}">
-				</span>
-			</div>
-			
-		</div>
+	<h1>Váš košík</h1>
 
-		<div class="col-xs-12 col-md-6">
-			<h1>{{ product.name }}</h1>
+	<table class="basket-list">
+		<thead class="basket-list__heading">
+			<tr>
+				<th class="table-col-10">Obrázek</th>
+				<th class="table-col-40">Název</th>
+				<th class="table-col-10 text-center">Cena za kus</th>
+				<th class="table-col-20 text-center">Počet kusů</th>
+				<th class="table-col-10 text-center">Cena</th>
+				<th class="table-col-10 text-right">&nbsp;</th>
+			</tr>
+		</thead>
 
-			{% if product.catnum %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
-						Katalogové číslo:
-					</dt>
-					<dd class="simple-list__definition">
-						{{ product.catnum }}
-					</dd>
-				</dl>
-			{% endif %}
+		<tbody>
+			<tr class="basket-list__item">
+				<td class="basket-list__image basket-list__cell-left">
+					<a href="./" title="">
+						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
+					</a>
+				</td>
 
-			{% if product.partno %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
-						Výrobní číslo:
-					</dt>
-					<dd class="simple-list__definition">
-						{{ product.partno }}
-					</dd>
-				</dl>
-			{% endif %}
+				<td class="basket-list__title basket-list__cell-left">
+					<a href="./" title="">
+						Brutální název produktu
+					</a>
+				</td>
 
-			{% if product.ean %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
-						EAN:
-					</dt>
-					<dd class="simple-list__definition">
-						{{ product.ean }}
-					</dd>
-				</dl>
-			{% endif %}
+				<td class="basket-list__price-piece">
+					1 800 Kč
+				</td>
 
-			{% if product.description %}
-				<p>
-					{{ product.description|raw }}
-				</p>
-			{% endif %}
+				<td class="basket-list__ammount">
+					<span class="input-spinbox">
+						<span class="button input-spinbox__button">-</span>
+						<input type="number" class="input-spinbox__input">
+						<span class="button input-spinbox__button">+</span>
+					</span>
+				</td>
 
-			{% if product.price %}
-				<div class="box-important">
-					<strong>Cena: <span class="price-main">{{ product.price|price }}</span></strong>
-				</div>
-			{% endif %}
-			{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
-		</div>
+				<td class="basket-list__price-final">
+					1 800 Kč
+				</td>
+
+				<td class="basket-list__remove">
+					<a href="./">
+						odstranit
+					</a>
+				</td>
+			</tr>
+			<tr class="basket-list__item">
+				<td class="basket-list__image basket-list__cell-left">
+					<a href="./" title="">
+						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
+					</a>
+				</td>
+
+				<td class="basket-list__title basket-list__cell-left">
+					<a href="./" title="">
+						Brutální název produktu
+					</a>
+				</td>
+
+				<td class="basket-list__price-piece">
+					1 800 Kč
+				</td>
+
+				<td class="basket-list__ammount">
+					<div class="input-spinbox">
+						<span class="button input-spinbox__button">-</span>
+						<input type="number" class="input-spinbox__input">
+						<span class="button input-spinbox__button">+</span>
+					</div>
+				</td>
+
+				<td class="basket-list__price-final">
+					1 800 Kč
+				</td>
+
+				<td class="basket-list__remove">
+					<a href="./">
+						odstranit
+					</a>
+				</td>
+			</tr>
+		</tbody>
+
+
+		<tfoot class="basket-list__foot">
+			<tr>
+				<td colspan="6">
+					Celková cena:
+					<span class="basket-list__price-total">
+						<span class="price-main price-big">12 054 Kč</span>
+					</span>
+				</td>
+			</tr>
+		</tfoot>
+
+	</table>
+
+	<div class="buttons-control">
+		<a href="./" class="button button--alter buttons-control__left">
+			Zpět k nákupu
+		</a>
+
+		<a href="./" class="button button--large button-primary buttons-control__right">
+			Objednat
+		</a>
 	</div>
+
 {% endblock %}

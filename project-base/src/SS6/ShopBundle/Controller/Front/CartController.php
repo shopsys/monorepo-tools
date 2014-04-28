@@ -11,6 +11,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CartController extends Controller {
 
+	public function indexAction() {
+		$cart = $this->get('ss6.shop.cart');
+		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
+
+		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
+			'cartItems' => $cart->getItems(),
+		));
+	}
+
 	public function boxAction() {
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
