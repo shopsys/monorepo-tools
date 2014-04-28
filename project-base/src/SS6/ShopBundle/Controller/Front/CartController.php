@@ -104,7 +104,7 @@ class CartController extends Controller {
 			'noEscape' => true,
 			'continueButton' => $actionResult['success'],
 			'continueButtonText' => 'Pokračovat do košíku',
-			'continueUrl' => $this->generateUrl('front_homepage'),
+			'continueUrl' => $this->generateUrl('front_cart'),
 		));
 		$actionResult['cartBoxReloadUrl'] = $this->generateUrl('front_cart_box');
 		return new JsonResponse($actionResult);
