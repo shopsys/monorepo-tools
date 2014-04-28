@@ -112,4 +112,21 @@ class TransportRepository {
 		}
 		return false;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePayments
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
+	public function getVisible(array $visiblePayments) {
+		$transportsWithVisibility = $this->getAllDataWithVisibility($visiblePayments);
+
+		$visibleTransports = array();
+		foreach ($transportsWithVisibility as $transportWithVisibility) {
+			if ($transportWithVisibility['visible']) {
+				$visibleTransports[] = $transportWithVisibility['entity'];
+			}
+		}
+
+		return $visibleTransports;
+	}
 }
