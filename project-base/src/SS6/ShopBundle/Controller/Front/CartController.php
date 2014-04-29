@@ -41,7 +41,12 @@ class CartController extends Controller {
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$invalidCartRecalc = true;
 			}
-			return $this->redirect($this->generateUrl('front_cart'));
+
+			if ($form->get('recalcToOrder')->isClicked()) {
+				return $this->redirect($this->generateUrl('front_order_index'));
+			} else {
+				return $this->redirect($this->generateUrl('front_cart'));
+			}
 		} elseif ($form->isSubmitted()) {
 			$invalidCartRecalc = true;
 		}

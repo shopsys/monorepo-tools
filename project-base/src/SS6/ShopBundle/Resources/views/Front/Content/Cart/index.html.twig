@@ -77,23 +77,27 @@
 
 			</table>
 			{{ form_row(form.recalc, { label: 'Přepočítat'}) }}
+			
+			<div class="buttons-control">
+				<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+					Zpět k nákupu
+				</a>
+
+				{% if cart.itemsCount > 0 %}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary buttons-control__right'}}) }}
+				{% endif %}
+			</div>
 		{{ form_end(form) }}
 	{% else %}
 		<div class="message message-info">
 			Váš nákupní košík je prázdný. pro vytvoření objednávky si musíte nejdříve nějaké zboží vybrat.
 		</div>
-	{% endif %}
-
-	<div class="buttons-control">
-		<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
-			Zpět k nákupu
-		</a>
-
-		{% if cart.itemsCount > 0 %}
-			<a href="{{ url('front_order_index') }}" class="button button--large button-primary buttons-control__right">
-				Objednat
+		
+		<div class="buttons-control">
+			<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+				Zpět k nákupu
 			</a>
-		{% endif %}
-	</div>
+		</div>
+	{% endif %}
 
 {% endblock %}
