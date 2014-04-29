@@ -142,9 +142,9 @@
 		var checkedPayment = $('input.payment:checked');
 		
 		if (checkedTransport.length && checkedPayment.length) {
-			$('#order-continue').removeClass('button--alter');
+			$('#order_payment_and_transport_submit').removeClass('button--alter');
 		} else {
-			$('#order-continue').addClass('button--alter');
+			$('#order_payment_and_transport_submit').addClass('button--alter');
 		}
 	};
 	

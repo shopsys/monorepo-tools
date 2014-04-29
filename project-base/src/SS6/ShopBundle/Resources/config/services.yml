@@ -72,3 +72,8 @@ services:
 
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository
+
+  ss6.shop.order.flow:
+    class: SS6\ShopBundle\Form\Front\Order\OrderFlow
+    parent: craue.form.flow
+    scope: request
