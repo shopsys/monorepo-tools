@@ -23,6 +23,7 @@ class OrderController extends Controller {
 		$flow->setFormTypesData($transports, $payments);
 		$flow->bind($formData);
 
+		// validate all constraints (not only step specific group)
 		$form = $flow->createForm(array('validation_groups' => array('Default')));
 
 		if ($flow->isValid($form)) {
@@ -35,7 +36,7 @@ class OrderController extends Controller {
 
 				$flow->reset();
 
-				return $this->redirect($this->generateUrl('front_basket_index'));
+				return $this->redirect($this->generateUrl('front_order_sent'));
 			}
 		}
 
@@ -46,12 +47,8 @@ class OrderController extends Controller {
 		));
 	}
 
-	public function personalAction() {
-		return $this->render('@SS6Shop/Front/Content/Order/personal.html.twig');
-	}
-
-	public function sendedAction() {
-		return $this->render('@SS6Shop/Front/Content/Order/sended.html.twig');
+	public function sentAction() {
+		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig');
 	}
 
 }

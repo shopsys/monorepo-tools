@@ -17,6 +17,7 @@
 
 {% block content %}
 	{{ form_start(form) }}
+		{% form_theme form '@SS6Shop/Front/Content/Order/formTheme.html.twig' %}
 		{{ form_errors(form) }}
 		{% include '@SS6Shop/Front/Content/Order/step' ~ flow.getCurrentStepNumber() ~ '.html.twig' %}	
 	{{ form_end(form) }}

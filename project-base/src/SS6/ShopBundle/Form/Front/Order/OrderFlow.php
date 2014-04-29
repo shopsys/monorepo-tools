@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form\Front\Order;
 
 use Craue\FormFlowBundle\Form\FormFlow;
 use SS6\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
+use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
 
 class OrderFlow extends FormFlow {
 	/**
@@ -28,8 +29,10 @@ class OrderFlow extends FormFlow {
 	protected function loadStepsConfig() {
 		return array(
 			array(
-				'label' => 'step1',
 				'type' => new TransportAndPaymentFormType($this->transports, $this->payments),
+			),
+			array(
+				'type' => new PersonalInfoFormType(),
 			),
 		);
 	}
