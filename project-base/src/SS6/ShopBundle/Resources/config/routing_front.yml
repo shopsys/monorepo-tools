@@ -9,6 +9,12 @@ front_cart_add_product:
 front_cart_box:
   pattern: /cart/box/
   defaults: { _controller: SS6ShopBundle:Front\Cart:box }
+  
+front_cart_delete:
+  pattern: /cart/delete/{cartItemId}/
+  defaults: { _controller: SS6ShopBundle:Front\Cart:delete }
+  requirements:
+    cartItemId: \d+
 
 front_homepage:
   pattern: /

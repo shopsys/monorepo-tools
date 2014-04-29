@@ -180,4 +180,32 @@ class CartController extends Controller {
 		return $message;
 	}
 
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $cartItemId
+	 */
+	public function deleteAction(Request $request, $cartItemId) {
+		$cartItemId = (int)$cartItemId;
+		$token = $request->query->get('_token', 'asd');
+
+		if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
+			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
+			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
+			try {
+				$cartFacade->deleteCartItem($cartItemId);
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
+				$this->get('session')->getFlashBag()->add(
+					'error', 'Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno'
+				);
+			}
+		} else {
+			$this->get('session')->getFlashBag()->add(
+				'error', 'Nepodařilo se odstranit položku z košíku.
+					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.'
+			);
+		}
+
+		return $this->redirect($this->generateUrl('front_cart'));
+	}
+
 }

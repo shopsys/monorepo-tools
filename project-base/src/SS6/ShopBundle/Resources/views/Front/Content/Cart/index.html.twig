@@ -55,7 +55,7 @@
 							</td>
 
 							<td class="basket-list__remove">
-								<a href="./">
+								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
 									odstranit
 								</a>
 							</td>

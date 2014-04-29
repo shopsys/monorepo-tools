@@ -43,4 +43,19 @@ class CartService {
 		}
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param int $cartItemId
+	 * @return \SS6\ShopBundle\Model\Cart\CartItem
+	 */
+	public function getCartItemToDelete(Cart $cart, $cartItemId) {
+		foreach ($cart->getItems() as $cartItem) {
+			if ($cartItem->getId() === $cartItemId) {
+				return $cartItem;
+			}
+		}
+		$message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
+		throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
+	}
+
 }

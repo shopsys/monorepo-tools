@@ -70,4 +70,13 @@ class CartFacade {
 		$this->cartService->changeQuantities($this->cart, $quantities);
 		$this->em->flush();
 	}
+
+	/**
+	 * @param int $cartItemId
+	 */
+	public function deleteCartItem($cartItemId) {
+		$cartItemToDelete = $this->cartService->getCartItemToDelete($this->cart, $cartItemId);
+		$this->em->remove($cartItemToDelete);
+		$this->em->flush();
+	}
 }

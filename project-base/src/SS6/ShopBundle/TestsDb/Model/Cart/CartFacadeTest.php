@@ -2,8 +2,9 @@
 
 namespace SS6\ShopBundle\TestsDb\Model\Cart;
 
-
+use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
+use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\Product;
@@ -92,6 +93,59 @@ class CartFacadeTest extends DatabaseTestCase {
 				$this->fail('Unexpected product in cart');
 			}
 		}
+	}
+
+	public function testDeleteCartItemNonexistItem() {
+		$em = $this->getEntityManager();
+
+		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$customerIdentifier = new CustomerIdentifier('randomString');
+
+		$product = new Product('productName');
+		$em->persist($product);
+		$cartItem = new CartItem($customerIdentifier, $product, 1);
+		$em->persist($cartItem);
+		$cartItems = array($cartItem);
+		$cart = new Cart($cartItems);
+		$em->flush();
+
+		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier);
+		$this->setExpectedException('\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
+		$cartFacade->deleteCartItem($cartItem->getId() + 1);
+	}
+
+	public function testDeleteCartItem() {
+		$em = $this->getEntityManager();
+
+		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$customerIdentifier = new CustomerIdentifier('randomString');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+
+		$product1 = new Product('productName1');
+		$product2 = new Product('productName2');
+		$em->persist($product1);
+		$em->persist($product2);
+		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
+		$cartItem2 = new CartItem($customerIdentifier, $product2, 1);
+		$em->persist($cartItem1);
+		$em->persist($cartItem2);
+		$cartItems = array($cartItem1, $cartItem2);
+		$cart = new Cart($cartItems);
+		$em->flush();
+
+		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier);
+		$cartFacade->deleteCartItem($cartItem1->getId());
+
+		$em->clear();
+		
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cart = $cartSingletonFactory->get($customerIdentifier);
+		$this->assertEquals(1, $cart->getItemsCount());
+		$cartItems = $cart->getItems();
+		$cartItem = array_pop($cartItems);
+		$this->assertEquals($cartItem2->getId(), $cartItem->getId());
 	}
 	
 }
