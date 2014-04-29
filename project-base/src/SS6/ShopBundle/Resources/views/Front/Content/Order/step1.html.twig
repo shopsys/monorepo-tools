@@ -38,6 +38,9 @@
 						{{ choice.data.price|price }}
 					</span>
 				</label>
+			{% else %}
+				{% do form.transport.setRendered %}
+				Není z čeho vybírat
 			{% endfor %}
 		</div>
 
@@ -76,6 +79,9 @@
 						{{ choice.data.price|price }}
 					</span>
 				</label>
+			{% else %}
+				{% do form.payment.setRendered %}
+				Není z čeho vybírat
 			{% endfor %}
 		</div>
 
