@@ -43,10 +43,10 @@
 							</td>
 
 							<td class="basket-list__ammount">
-								<span class="input-spinbox">
-									<span class="button input-spinbox__button">-</span>
-									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'input-spinbox__input'}}) }}
-									<span class="button input-spinbox__button">+</span>
+								<span class="input-spinbox js-spinbox">
+									<span class="button input-spinbox__button js-spinbox-minus">-</span>
+									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
+									<span class="button input-spinbox__button js-spinbox-plus">+</span>
 								</span>
 							</td>
 
