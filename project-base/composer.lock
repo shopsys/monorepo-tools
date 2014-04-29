@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c4198bfde95449d29082e83bb612e18e",
+    "hash": "e23ac275aa35432d2a89cce8e7312b03",
     "packages": [
         {
             "name": "apy/datagrid-bundle",
@@ -63,6 +63,60 @@
                 "symfony"
             ],
             "time": "2013-12-16 16:34:58"
+        },
+        {
+            "name": "craue/formflow-bundle",
+            "version": "2.1.4",
+            "target-dir": "Craue/FormFlowBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/craue/CraueFormFlowBundle.git",
+                "reference": "8ed63a05be06c2bdd820ccab15b08fa835ea9235"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/8ed63a05be06c2bdd820ccab15b08fa835ea9235",
+                "reference": "8ed63a05be06c2bdd820ccab15b08fa835ea9235",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/form": "~2.1",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.3",
+                "phpunit/phpunit": "~3.7.10",
+                "sensio/framework-extra-bundle": ">=2.1",
+                "symfony/symfony": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Craue\\FormFlowBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Raue",
+                    "email": "christian.raue@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/craue/CraueFormFlowBundle/contributors"
+                }
+            ],
+            "description": "Multi-step forms for your Symfony2 project.",
+            "homepage": "https://github.com/craue/CraueFormFlowBundle",
+            "keywords": [
+                "Symfony2",
+                "form"
+            ],
+            "time": "2013-12-05 16:13:22"
         },
         {
             "name": "doctrine/annotations",
@@ -1247,12 +1301,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pdepend/pdepend.git",
-                "reference": "06f230d429d6740482de0ca06598f46e45448736"
+                "reference": "268f01c9ea0259bdbc87fe7fce0ebe6d5246ae52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/06f230d429d6740482de0ca06598f46e45448736",
-                "reference": "06f230d429d6740482de0ca06598f46e45448736",
+                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/268f01c9ea0259bdbc87fe7fce0ebe6d5246ae52",
+                "reference": "268f01c9ea0259bdbc87fe7fce0ebe6d5246ae52",
                 "shasum": ""
             },
             "require": {
@@ -1283,7 +1337,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Official version of pdepend to be handled with Composer",
-            "time": "2014-04-23 20:25:37"
+            "time": "2014-04-28 19:29:31"
         },
         {
             "name": "phing/phing",
@@ -1343,12 +1397,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "e699fd3c5c3740751744e9a5ca341c5967afe93d"
+                "reference": "857ae7622b565a095f862c0bbde4d1359813cd36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/e699fd3c5c3740751744e9a5ca341c5967afe93d",
-                "reference": "e699fd3c5c3740751744e9a5ca341c5967afe93d",
+                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/857ae7622b565a095f862c0bbde4d1359813cd36",
+                "reference": "857ae7622b565a095f862c0bbde4d1359813cd36",
                 "shasum": ""
             },
             "require": {
@@ -1382,7 +1436,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Official version of PHPMD handled with Composer.",
-            "time": "2014-04-24 12:48:22"
+            "time": "2014-04-25 10:46:50"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1630,20 +1684,22 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.35",
+            "version": "3.7.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "83f9537e46346f75ed6925441ac259453213c7cc"
+                "reference": "1735d588c9f35bd8686cae0208d8adde77b45365"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/83f9537e46346f75ed6925441ac259453213c7cc",
-                "reference": "83f9537e46346f75ed6925441ac259453213c7cc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1735d588c9f35bd8686cae0208d8adde77b45365",
+                "reference": "1735d588c9f35bd8686cae0208d8adde77b45365",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
                 "ext-dom": "*",
+                "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
@@ -1659,9 +1715,6 @@
                 "pear-pear.php.net/pear": "1.9.4"
             },
             "suggest": {
-                "ext-json": "*",
-                "ext-simplexml": "*",
-                "ext-tokenizer": "*",
                 "phpunit/php-invoker": "~1.1"
             },
             "bin": [
@@ -1700,7 +1753,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-21 06:25:54"
+            "time": "2014-04-29 07:24:10"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1950,12 +2003,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e26cdb7196973aa5c32c11de588b6a3a6215137c"
+                "reference": "2a2dc1713bb09fe481c557536bc6116bb6aa460b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e26cdb7196973aa5c32c11de588b6a3a6215137c",
-                "reference": "e26cdb7196973aa5c32c11de588b6a3a6215137c",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/2a2dc1713bb09fe481c557536bc6116bb6aa460b",
+                "reference": "2a2dc1713bb09fe481c557536bc6116bb6aa460b",
                 "shasum": ""
             },
             "require": {
@@ -2015,7 +2068,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2014-04-17 05:26:52"
+            "time": "2014-04-29 04:36:11"
         },
         {
             "name": "stnw/date-picker-bundle",
@@ -2342,16 +2395,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.4.3",
+            "version": "v2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "3199b2e0d194f71fe2e13c95768b2ef22206682b"
+                "reference": "4697c33cdfb520dcf83fd6e4f7864fa26ddaebea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/3199b2e0d194f71fe2e13c95768b2ef22206682b",
-                "reference": "3199b2e0d194f71fe2e13c95768b2ef22206682b",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/4697c33cdfb520dcf83fd6e4f7864fa26ddaebea",
+                "reference": "4697c33cdfb520dcf83fd6e4f7864fa26ddaebea",
                 "shasum": ""
             },
             "require": {
@@ -2453,7 +2506,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-04-04 10:27:02"
+            "time": "2014-04-27 13:39:18"
         },
         {
             "name": "twig/extensions",
