@@ -50,7 +50,7 @@ class CartController extends Controller {
 				$formData = $form->getData();
 				$cartFacade = $this->get('ss6.shop.cart.cart_facade');
 				/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
-				$addProductResult = $cartFacade->addProductToCart($formData['productId'], $formData['quantity']);
+				$addProductResult = $cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
 				$actionResult['success'] = true;
 				$actionResult['message'] = $this->getAddProductResultMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {

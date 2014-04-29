@@ -21,10 +21,11 @@ class AddProductFormType extends AbstractType {
 					)
 				)
 			)
-			->add('quantity', 'integer', array(
+			->add('quantity', 'text', array(
 					'data' => 1,
 					'constraints' => array(
 						new Constraints\GreaterThan(0),
+						new Constraints\Regex(array('pattern' => '/^\d+$/')),
 					)
 				)
 			)
@@ -43,7 +44,9 @@ class AddProductFormType extends AbstractType {
 	 * @return array
 	 */
 	public function getDefaultOptions(array $options) {
-		return array();
+		return array(
+			'attr' => array('novalidate' => 'novalidate'),
+		);
 	}
 
 }
