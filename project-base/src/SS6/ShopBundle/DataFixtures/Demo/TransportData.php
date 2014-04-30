@@ -13,9 +13,9 @@ class TransportData extends AbstractFixture implements OrderedFixtureInterface {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$this->createTransport($manager, 'transport_cp', 'Česká pošta - balík do ruky', 99.95, '<p>Pouze na vlastní nebezpečí</p>');
+		$this->createTransport($manager, 'transport_cp', 'Česká pošta - balík do ruky', 99.95, 'Pouze na vlastní nebezpečí');
 		$this->createTransport($manager, 'transport_ppl', 'PPL', 199.95, null);
-		$this->createTransport($manager, 'transport_personal', 'Osobní převzetí', 0, '<p>Uvítá Vás milý personál!</p>');
+		$this->createTransport($manager, 'transport_personal', 'Osobní převzetí', 0, 'Uvítá Vás milý personál!');
 		$manager->flush();
 	}
 	
