@@ -86,4 +86,21 @@ class PaymentRepository {
 		$dql = sprintf('SELECT p, t FROM %s p JOIN p.transports t WHERE t.id = :transportId', Payment::class);
 		return $this->em->createQuery($dql)->setParameter('transportId', $transport->getId())->getResult();
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getVisible() {
+		$allPayments = $this->getAllWithTransports();
+
+		$visiblePayments = array();
+		foreach ($allPayments as $payment) {
+			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+			if ($payment->isVisible()) {
+				$visiblePayments[] = $payment;
+			}
+		}
+
+		return $visiblePayments;
+	}
 }

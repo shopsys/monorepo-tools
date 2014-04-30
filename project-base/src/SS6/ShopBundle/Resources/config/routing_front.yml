@@ -24,13 +24,9 @@ front_order_index:
   pattern: /order/
   defaults: { _controller: SS6ShopBundle:Front\Order:index }
 
-front_order_personal:
-  pattern: /order/personal/
-  defaults: { _controller: SS6ShopBundle:Front\Order:personal }
-
-front_order_sended:
-  pattern: /order/sended/
-  defaults: { _controller: SS6ShopBundle:Front\Order:sended }
+front_order_sent:
+  pattern: /order/sent/
+  defaults: { _controller: SS6ShopBundle:Front\Order:sent }
 
 front_product_detail:
   pattern: /product/detail/{id}

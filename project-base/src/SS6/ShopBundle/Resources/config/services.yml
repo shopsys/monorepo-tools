@@ -44,6 +44,9 @@ services:
   ss6.shop.customer.customer_identifier_factory:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
+  ss6.shop.order.order_facade:
+    class: SS6\ShopBundle\Model\Order\OrderFacade
+
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
   
@@ -72,3 +75,8 @@ services:
 
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository
+
+  ss6.shop.order.flow:
+    class: SS6\ShopBundle\Form\Front\Order\OrderFlow
+    parent: craue.form.flow
+    scope: request

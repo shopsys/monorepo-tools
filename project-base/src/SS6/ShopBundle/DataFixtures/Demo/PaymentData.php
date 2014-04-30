@@ -14,7 +14,7 @@ class PaymentData extends AbstractFixture implements OrderedFixtureInterface {
 	 */
 	public function load(ObjectManager $manager) {
 		$this->createPayment($manager, 'Kreditní kartou', 0, array('transport_personal', 'transport_ppl'), 
-			'<p>Rychle, levně a spolehlivě!</p>');
+			'Rychle, levně a spolehlivě!');
 		$this->createPayment($manager, 'Dobírka', 49.90, array('transport_cp'), null);
 		$this->createPayment($manager, 'Hotově', 0, array('transport_personal'), null);
 		$manager->flush();
