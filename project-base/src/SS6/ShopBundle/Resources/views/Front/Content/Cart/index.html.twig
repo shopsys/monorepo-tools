@@ -15,11 +15,11 @@
 				<thead class="basket-list__heading">
 					<tr>
 						<th class="table-col-10">Obrázek</th>
-						<th class="table-col-40">Název</th>
+						<th class="table-col-45">Název</th>
 						<th class="table-col-10 text-center">Cena za kus</th>
 						<th class="table-col-20 text-center">Počet kusů</th>
 						<th class="table-col-10 text-center">Cena</th>
-						<th class="table-col-10 text-right">&nbsp;</th>
+						<th class="table-col-15 text-right">&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -56,7 +56,7 @@
 
 							<td class="basket-list__remove">
 								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
-									odstranit
+									<img src="{{ asset('assets/frontend/images/icons/trash.png') }}" alt="Odstranit">
 								</a>
 							</td>
 						</tr>
@@ -66,7 +66,12 @@
 
 				<tfoot class="basket-list__foot">
 					<tr>
-						<td colspan="6">
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td class="text-center">
+							{{ form_widget(form.recalc, { label: 'Přepočítat'}) }}
+						</td>
+						<td colspan="3">
 							Celková cena:
 							<span class="basket-list__price-total">
 								<span class="price-main price-big">{{ cart.price|price }}</span>
@@ -76,7 +81,6 @@
 				</tfoot>
 
 			</table>
-			{{ form_row(form.recalc, { label: 'Přepočítat'}) }}
 			
 			<div class="buttons-control">
 				<a href="{{ backUrl }}" class="button button--alter buttons-control__left">

@@ -9,21 +9,38 @@
 }
 
 .input-spinbox .input-spinbox__input {
+	display: inline-block;
 	width: 40px;
-	text-align: center;
 	height: @input-height-base;
 	line-height: @input-height-base;
+	padding: 0;
+	
 	.border-radius(@border-radius-base);
 	border: 1px solid @input-border;
-	display: inline-block;
+	text-align: center;
 }
 
 
 // input special sizes
+.input-minimum {
+	width: 45px;
+}
+
 .input-micro {
 	width: 50px;
 }
 
 .input-little {
 	width: 100px;
+}
+
+
+/* deactivate spinbox */
+input[type='number'] {
+	-moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
 }
