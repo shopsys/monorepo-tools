@@ -68,7 +68,7 @@
 {% endblock textarea_widget %}
 	
 {% block button_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary button')|trim}) %}
 	{{ parent('button_widget') }}
 {% endblock button_widget %}
 

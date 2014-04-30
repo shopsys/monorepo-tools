@@ -13,7 +13,7 @@
 				<a href="{{ url('front_product_detail', {'id': product.id}) }}" class="product-list__block">
 					<div class="product-list__image">
 						<span>
-							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="300px" height="200px">
+							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="336px" height="200px">
 						</span>
 					</div>
 					<h2 class="product-list__title">
@@ -23,10 +23,7 @@
 						<strong>Cena: <span class="price-main price-big">{{ product.price|price }}</span></strong>
 					</p>
 				</a>
-				<div class="product-list__button">
-					<a href="{{ url('front_product_detail', {'id': product.id}) }}" class="button">
-						Více informací
-					</a>
+				<div class="product-list__actions">
 					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
 				</div>
 			</li>

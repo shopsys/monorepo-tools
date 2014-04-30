@@ -1,17 +1,18 @@
-input[type=submit], a.button, .button, button {
+a.button, .button {
 	display: inline-block;
-	cursor: pointer;
-	
+	padding: @button-padding;
 	height: @button-height;
 	line-height: @button-height;
 	
-	padding: @button-padding;
 	color: @button-color;
 	background: @button-bg;
-	.border-radius(@button-radius);
 	
 	text-decoration: none;
 	border: 0;
+	cursor: pointer;
+	font-size: @font-size;
+	
+	.border-radius(@button-radius);
 	.set-transition();
 	.transition(~"background, color");
 	
@@ -35,4 +36,13 @@ a.button--large, .button--large {
 	
 	text-transform: uppercase;
 	font-weight: bold;
+}
+
+
+// with cart icon
+a.button--cart, .button--cart {
+	position: relative;
+	padding-left: 30px;
+	
+	.after(15px, 15px, 'icons/cart-mini.png', 9px, 2px);
 }

@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="row">
-		<div class="col-xs-12 col-md-6">
+		<div class="col-xs-12 col-md-5">
 			<div class="product-image">
 				<span>
 					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}">
@@ -15,7 +15,7 @@
 			
 		</div>
 
-		<div class="col-xs-12 col-md-6">
+		<div class="col-xs-12 col-md-7">
 			<h1>{{ product.name }}</h1>
 
 			{% if product.catnum %}
@@ -58,7 +58,7 @@
 			{% endif %}
 
 			{% if product.price %}
-				<div class="box-important">
+				<div class="box-important mb-1">
 					<strong>Cena: <span class="price-main price-big">{{ product.price|price }}</span></strong>
 				</div>
 			{% endif %}

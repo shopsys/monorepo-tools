@@ -1,6 +1,8 @@
-<div class="form-box-adding">
+<span class="form-box-adding">
 	{{ form_start(form, {attr: {class: 'add-product'}}) }}
-		{{ form_widget(form.quantity, {attr: {style: 'width: 40px;'}}) }} Ks
-		{{ form_row(form.add, {label: 'Vložit do košíku'}) }}
+		<span class="form-box-adding__input">
+			{{ form_widget(form.quantity, {attr: {class: 'input-minimum text-center'}}) }} Ks
+		</span>
+		{{ form_widget(form.add, {label: 'Vložit do košíku', attr: {class: 'button--cart'}}) }}
 	{{ form_end(form) }}
-</div>
+</span>
