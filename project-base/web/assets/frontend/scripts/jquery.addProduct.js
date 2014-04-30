@@ -21,7 +21,6 @@
 	
 	$.fn.SS6.addProduct.processResponse = function (data) {
 		var jsWindowId = $(data.jsWindow).filter('.window:first').attr('id');
-		console.log(jsWindowId);
 		$('#' + jsWindowId).remove();
 		$('body').append(data.jsWindow);
 		$.fn.SS6.window.open(data.jsWindowId);

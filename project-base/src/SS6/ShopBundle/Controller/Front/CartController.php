@@ -3,8 +3,10 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
+use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Product\Product;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +27,7 @@ class CartController extends Controller {
 			$cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
 		}
 
-		$form = $this->createForm(new \SS6\ShopBundle\Form\Front\Cart\CartFormType($cart));
+		$form = $this->createForm(new CartFormType($cart));
 		$form->setData($cartFormData);
 		$form->handleRequest($request);
 		$invalidCartRecalc = false;
@@ -42,10 +44,12 @@ class CartController extends Controller {
 				$invalidCartRecalc = true;
 			}
 
-			if ($form->get('recalcToOrder')->isClicked()) {
-				return $this->redirect($this->generateUrl('front_order_index'));
-			} else {
-				return $this->redirect($this->generateUrl('front_cart'));
+			if (!$invalidCartRecalc) {
+				if ($form->get('recalcToOrder')->isClicked()) {
+					return $this->redirect($this->generateUrl('front_order_index'));
+				} else {
+					return $this->redirect($this->generateUrl('front_cart'));
+				}
 			}
 		} elseif ($form->isSubmitted()) {
 			$invalidCartRecalc = true;
@@ -191,7 +195,7 @@ class CartController extends Controller {
 	 */
 	public function deleteAction(Request $request, $cartItemId) {
 		$cartItemId = (int)$cartItemId;
-		$token = $request->query->get('_token', 'asd');
+		$token = $request->query->get('_token');
 
 		if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
 			$cartFacade = $this->get('ss6.shop.cart.cart_facade');

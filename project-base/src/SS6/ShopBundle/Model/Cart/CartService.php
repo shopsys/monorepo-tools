@@ -48,7 +48,7 @@ class CartService {
 	 * @param int $cartItemId
 	 * @return \SS6\ShopBundle\Model\Cart\CartItem
 	 */
-	public function getCartItemToDelete(Cart $cart, $cartItemId) {
+	public function getCartItemById(Cart $cart, $cartItemId) {
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getId() === $cartItemId) {
 				return $cartItem;

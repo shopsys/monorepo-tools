@@ -25,7 +25,7 @@ class CartFormType extends AbstractType {
 
 		$builder
 			->add('quantities', 'collection', array(
-				'type'   => 'integer',
+				'type' => 'integer',
 				'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Musíte zadat množství kusů zboží')),
 						new Constraints\GreaterThan(array('value' => 0, 'message' => 'Musíte zadat množství kusů zboží')),
@@ -39,7 +39,7 @@ class CartFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'front_login';
+		return 'cart';
 	}
 
 	/**
