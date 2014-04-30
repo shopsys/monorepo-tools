@@ -32,7 +32,7 @@ class Cart {
 		$this->price = 0;
 		foreach ($this->cartItems as $cartItem) {
 			$this->quantity += $cartItem->getQuantity();
-			$this->price += $cartItem->getProduct()->getPrice() * $cartItem->getQuantity();
+			$this->price += $cartItem->getTotalPrice();
 		}
 	}
 	

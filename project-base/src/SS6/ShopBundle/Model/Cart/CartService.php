@@ -31,4 +31,31 @@ class CartService {
 		return new AddProductResult($newCartItem, true, $quantity);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param array $quantities CartItem.id => quantity
+	 */
+	public function changeQuantities(Cart $cart, array $quantities) {
+		foreach ($cart->getItems() as $cartItem) {
+			if (array_key_exists($cartItem->getId(), $quantities)) {
+				$cartItem->changeQuantity($quantities[$cartItem->getId()]);
+			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param int $cartItemId
+	 * @return \SS6\ShopBundle\Model\Cart\CartItem
+	 */
+	public function getCartItemById(Cart $cart, $cartItemId) {
+		foreach ($cart->getItems() as $cartItem) {
+			if ($cartItem->getId() === $cartItemId) {
+				return $cartItem;
+			}
+		}
+		$message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
+		throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
+	}
+
 }

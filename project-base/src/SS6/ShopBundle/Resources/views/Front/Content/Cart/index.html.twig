@@ -1,68 +1,103 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	- Košík
+	Košík
 {% endblock %}
 
 {% block content %}
-	<div class="row">
-		<div class="col-xs-12 col-md-6">
-			<div class="product-image">
-				<span>
-					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}">
-				</span>
-			</div>
+	<h1>Váš košík</h1>
+	
+	
+	{% if cart.itemsCount > 0 %}
+		{{ form_start(form) }}
+			{{ form_errors(form) }}
+			<table class="basket-list">
+				<thead class="basket-list__heading">
+					<tr>
+						<th class="table-col-10">Obrázek</th>
+						<th class="table-col-40">Název</th>
+						<th class="table-col-10 text-center">Cena za kus</th>
+						<th class="table-col-20 text-center">Počet kusů</th>
+						<th class="table-col-10 text-center">Cena</th>
+						<th class="table-col-10 text-right">&nbsp;</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for cartItem in cartItems  %}
+						<tr class="basket-list__item">
+							<td class="basket-list__image basket-list__cell-left">
+								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
+									<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
+								</a>
+							</td>
+
+							<td class="basket-list__title basket-list__cell-left">
+								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
+									{{ cartItem.name }}
+								</a>
+							</td>
+
+							<td class="basket-list__price-piece">
+								{{ cartItem.price|price }}
+							</td>
+
+							<td class="basket-list__ammount">
+								<span class="input-spinbox js-spinbox">
+									<span class="button input-spinbox__button js-spinbox-minus">-</span>
+									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
+									<span class="button input-spinbox__button js-spinbox-plus">+</span>
+								</span>
+							</td>
+
+							<td class="basket-list__price-final">
+								{{ cartItem.totalPrice|price }}
+							</td>
+
+							<td class="basket-list__remove">
+								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
+									odstranit
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+
+
+				<tfoot class="basket-list__foot">
+					<tr>
+						<td colspan="6">
+							Celková cena:
+							<span class="basket-list__price-total">
+								<span class="price-main price-big">{{ cart.price|price }}</span>
+							</span>
+						</td>
+					</tr>
+				</tfoot>
+
+			</table>
+			{{ form_row(form.recalc, { label: 'Přepočítat'}) }}
 			
+			<div class="buttons-control">
+				<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+					Zpět k nákupu
+				</a>
+
+				{% if cart.itemsCount > 0 %}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary buttons-control__right'}}) }}
+				{% endif %}
+			</div>
+		{{ form_end(form) }}
+	{% else %}
+		<div class="message message-info">
+			Váš nákupní košík je prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží vybrat.
 		</div>
-
-		<div class="col-xs-12 col-md-6">
-			<h1>{{ product.name }}</h1>
-
-			{% if product.catnum %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
-						Katalogové číslo:
-					</dt>
-					<dd class="simple-list__definition">
-						{{ product.catnum }}
-					</dd>
-				</dl>
-			{% endif %}
-
-			{% if product.partno %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
-						Výrobní číslo:
-					</dt>
-					<dd class="simple-list__definition">
-						{{ product.partno }}
-					</dd>
-				</dl>
-			{% endif %}
-
-			{% if product.ean %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
-						EAN:
-					</dt>
-					<dd class="simple-list__definition">
-						{{ product.ean }}
-					</dd>
-				</dl>
-			{% endif %}
-
-			{% if product.description %}
-				<p>
-					{{ product.description|raw }}
-				</p>
-			{% endif %}
-
-			{% if product.price %}
-				<div class="box-important">
-					<strong>Cena: <span class="price-main">{{ product.price|price }}</span></strong>
-				</div>
-			{% endif %}
-			{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
+		
+		<div class="buttons-control">
+			<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+				Zpět k nákupu
+			</a>
 		</div>
-	</div>
+	{% endif %}
+
 {% endblock %}

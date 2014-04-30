@@ -6,37 +6,40 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-class AddProductFormType extends AbstractType {
+class CartFormType extends AbstractType {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 */
+	private $cart;
+
+	public function __construct(\SS6\ShopBundle\Model\Cart\Cart $cart) {
+		$this->cart = $cart;
+	}
+
+		/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+
 		$builder
-			->add('productId', 'hidden', array(
-					'constraints' => array(
-						new Constraints\GreaterThan(0),
-						new Constraints\Regex(array('pattern' => '/^\d+$/')),
-					)
-				)
-			)
-			->add('quantity', 'text', array(
-					'data' => 1,
-					'constraints' => array(
-						new Constraints\GreaterThan(0),
-						new Constraints\Regex(array('pattern' => '/^\d+$/')),
-					)
-				)
-			)
-			->add('add', 'submit');
+			->add('quantities', 'collection', array(
+				'type' => 'integer',
+				'constraints' => array(
+						new Constraints\NotBlank(array('message' => 'Musíte zadat množství kusů zboží')),
+						new Constraints\GreaterThan(array('value' => 0, 'message' => 'Musíte zadat množství kusů zboží')),
+					),
+				))
+			->add('recalc', 'submit')
+			->add('recalcToOrder', 'submit');
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getName() {
-		return 'addProduct';
+		return 'cart';
 	}
 
 	/**

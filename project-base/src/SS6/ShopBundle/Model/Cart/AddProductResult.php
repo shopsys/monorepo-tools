@@ -38,7 +38,6 @@ class AddProductResult {
 	}
 
 	/**
-	 * 
 	 * @return bool
 	 */
 	public function getIsNew() {
@@ -46,7 +45,7 @@ class AddProductResult {
 	}
 
 	/**
-	 * @return type
+	 * @return int
 	 */
 	public function getAddedQuantity() {
 		return $this->addedQuantity;

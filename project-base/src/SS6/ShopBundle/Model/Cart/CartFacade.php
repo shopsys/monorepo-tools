@@ -62,4 +62,21 @@ class CartFacade {
 		
 		return $result;
 	}
+
+	/**
+	 * @param array $quantities CartItem.id => quantity
+	 */
+	public function changeQuantities(array $quantities) {
+		$this->cartService->changeQuantities($this->cart, $quantities);
+		$this->em->flush();
+	}
+
+	/**
+	 * @param int $cartItemId
+	 */
+	public function deleteCartItem($cartItemId) {
+		$cartItemToDelete = $this->cartService->getCartItemById($this->cart, $cartItemId);
+		$this->em->remove($cartItemToDelete);
+		$this->em->flush();
+	}
 }

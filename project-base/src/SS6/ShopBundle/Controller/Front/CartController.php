@@ -3,13 +3,83 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
+use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Product\Product;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CartController extends Controller {
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function indexAction(Request $request) {
+		$cart = $this->get('ss6.shop.cart');
+		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
+
+		$cartFormData = array(
+			'quantities' => array(),
+		);
+		foreach ($cart->getItems() as $cartItem) {
+			$cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
+		}
+
+		$form = $this->createForm(new CartFormType($cart));
+		$form->setData($cartFormData);
+		$form->handleRequest($request);
+		$invalidCartRecalc = false;
+
+		if ($form->isValid()) {
+			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
+			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
+			try {
+				$cartFacade->changeQuantities($form->getData()['quantities']);
+				$this->get('session')->getFlashBag()->add(
+					'success', 'Množství v košíku bylo úspěšně přepočítáno.'
+				);
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+				$invalidCartRecalc = true;
+			}
+
+			if (!$invalidCartRecalc) {
+				if ($form->get('recalcToOrder')->isClicked()) {
+					return $this->redirect($this->generateUrl('front_order_index'));
+				} else {
+					return $this->redirect($this->generateUrl('front_cart'));
+				}
+			}
+		} elseif ($form->isSubmitted()) {
+			$invalidCartRecalc = true;
+		}
+
+		if ($invalidCartRecalc) {
+			$form->addError(new FormError('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.'));
+		}
+
+		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
+			'backUrl' => $this->getBackUrl($request),
+			'cart' => $cart,
+			'cartItems' => $cart->getItems(),
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return string
+	 */
+	private function getBackUrl(Request $request) {
+		$refferer = $request->server->get('HTTP_REFERER');
+		$cartUrl = $this->generateUrl('front_cart', array(), true);
+		if ($refferer !== null && $refferer !== $cartUrl) {
+			return $refferer;
+		} else {
+			return $this->generateUrl('front_homepage', array(), true);
+		}
+	}
 
 	public function boxAction() {
 		$cart = $this->get('ss6.shop.cart');
@@ -95,7 +165,7 @@ class CartController extends Controller {
 			'noEscape' => true,
 			'continueButton' => $actionResult['success'],
 			'continueButtonText' => 'Pokračovat do košíku',
-			'continueUrl' => $this->generateUrl('front_homepage'),
+			'continueUrl' => $this->generateUrl('front_cart'),
 		));
 		$actionResult['cartBoxReloadUrl'] = $this->generateUrl('front_cart_box');
 		return new JsonResponse($actionResult);
@@ -106,7 +176,7 @@ class CartController extends Controller {
 	 * @return string
 	 */
 	private function getAddProductResultMessage(AddProductResult $addProductResult) {
-		$productName = $addProductResult->getCartItem()->getProduct()->getName();
+		$productName = $addProductResult->getCartItem()->getName();
 		if ($addProductResult->getIsNew()) {
 			$message = sprintf('Do košíku bylo vloženo zboží <b>%s</b> (%d ks)', 
 				htmlentities($productName, ENT_QUOTES),
@@ -117,6 +187,34 @@ class CartController extends Controller {
 				$addProductResult->getCartItem()->getQuantity());
 		}
 		return $message;
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $cartItemId
+	 */
+	public function deleteAction(Request $request, $cartItemId) {
+		$cartItemId = (int)$cartItemId;
+		$token = $request->query->get('_token');
+
+		if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
+			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
+			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
+			try {
+				$cartFacade->deleteCartItem($cartItemId);
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
+				$this->get('session')->getFlashBag()->add(
+					'error', 'Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno'
+				);
+			}
+		} else {
+			$this->get('session')->getFlashBag()->add(
+				'error', 'Nepodařilo se odstranit položku z košíku.
+					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.'
+			);
+		}
+
+		return $this->redirect($this->generateUrl('front_cart'));
 	}
 
 }

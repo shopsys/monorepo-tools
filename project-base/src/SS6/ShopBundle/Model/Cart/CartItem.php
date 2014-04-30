@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\Product;
@@ -52,14 +51,25 @@ class CartItem {
 	public function __construct(CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
 		$this->sessionId = $customerIdentifier->getSessionId();
 		$this->product = $product;
-		$this->quantity = $quantity;
+		$this->changeQuantity($quantity);
 	}
 
 	/**
 	 * @param int $newQuantity
 	 */
 	public function changeQuantity($newQuantity) {
+		if (!is_int($newQuantity) || $newQuantity <= 0) {
+			throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException($newQuantity);
+		}
+
 		$this->quantity = $newQuantity;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
 	}
 	
 	/**
@@ -70,10 +80,30 @@ class CartItem {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getName() {
+		return $this->product->getName();
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getQuantity() {
 		return $this->quantity;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getPrice() {
+		return $this->product->getPrice();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTotalPrice() {
+		return $this->product->getPrice() * $this->quantity;
+	}
 }
