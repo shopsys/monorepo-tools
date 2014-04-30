@@ -6,9 +6,25 @@ front_cart_box:
   pattern: /cart/box/
   defaults: { _controller: SS6ShopBundle:Front\Cart:box }
 
+front_basket_index:
+  pattern: /basket/
+  defaults: { _controller: SS6ShopBundle:Front\Basket:index }
+
 front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
+
+front_order_index:
+  pattern: /order/
+  defaults: { _controller: SS6ShopBundle:Front\Order:index }
+
+front_order_personal:
+  pattern: /order/personal/
+  defaults: { _controller: SS6ShopBundle:Front\Order:personal }
+
+front_order_sended:
+  pattern: /order/sended/
+  defaults: { _controller: SS6ShopBundle:Front\Order:sended }
 
 front_product_detail:
   pattern: /product/detail/{id}

@@ -1,6 +1,9 @@
 input[type=submit], a.button, .button, button {
 	display: inline-block;
-	.box-sizing(box-sizing);
+	cursor: pointer;
+	
+	height: @button-height;
+	line-height: @button-height;
 	
 	padding: @button-padding;
 	color: @button-color;
@@ -17,4 +20,19 @@ input[type=submit], a.button, .button, button {
 		background: @button-bg-hover;
 		text-decoration: none;
 	}
+}
+
+// alter
+a.button--alter, .button--alter {
+	background: @button-bg-alter;
+}
+
+// large
+a.button--large, .button--large {
+	height: @button-height-large;
+	line-height: @button-height-large;
+	padding: @button-padding-large;
+	
+	text-transform: uppercase;
+	font-weight: bold;
 }

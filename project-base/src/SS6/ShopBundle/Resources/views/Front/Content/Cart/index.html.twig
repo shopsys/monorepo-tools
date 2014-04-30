@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	- {{ product.name }}
+	- Košík
 {% endblock %}
 
 {% block content %}
@@ -59,7 +59,7 @@
 
 			{% if product.price %}
 				<div class="box-important">
-					<strong>Cena: <span class="price-main price-big">{{ product.price|price }}</span></strong>
+					<strong>Cena: <span class="price-main">{{ product.price|price }}</span></strong>
 				</div>
 			{% endif %}
 			{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
