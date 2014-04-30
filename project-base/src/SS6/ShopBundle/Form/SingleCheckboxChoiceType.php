@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SingleCheckboxChoiceType extends AbstractType {
@@ -15,6 +16,9 @@ class SingleCheckboxChoiceType extends AbstractType {
 		return 'single_checkbox_choice';
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'multiple' => false,
@@ -22,7 +26,11 @@ class SingleCheckboxChoiceType extends AbstractType {
 		));
 	}
 
-	public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options) {
+	/**
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
+	 * @param array $options
+	 */
+	public function buildForm(FormBuilderInterface $builder, array $options) {
 		parent::buildForm($builder, $options);
 
 		foreach ($builder->all() as $i => $child) {

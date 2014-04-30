@@ -20,26 +20,32 @@ class PaymentFromType extends AbstractType {
 		$this->payments = $payments;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Form\SingleCheckboxChoiceType
+	 */
 	public function getParent() {
 		return new SingleCheckboxChoiceType();
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'payment';
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$paymentChoices = array();
-		foreach ($this->payments as $payment) {
-			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
-			$paymentChoices[$payment->getId()] = $payment;
-		}
-
 		$resolver->setDefaults(array(
 			'choice_list' => $this->getChoiceList(),
 		));
 	}
 
+	/**
+	 * @return \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList
+	 */
 	private function getChoiceList() {
 		$labels = array();
 		foreach ($this->payments as $payment) {

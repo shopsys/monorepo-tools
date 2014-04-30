@@ -18,6 +18,10 @@ class TransportAndPaymentFormType extends AbstractType {
 	 */
 	private $payments;
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[]$transports
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 */
 	public function __construct(array $transports, array $payments) {
 		$this->transports = $transports;
 		$this->payments = $payments;
@@ -42,10 +46,16 @@ class TransportAndPaymentFormType extends AbstractType {
 			->add('submit', 'submit');
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'orderTransportAndPayment';
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),

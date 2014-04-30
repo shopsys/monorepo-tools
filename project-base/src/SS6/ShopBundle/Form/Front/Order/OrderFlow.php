@@ -17,15 +17,25 @@ class OrderFlow extends FormFlow {
 	 */
 	private $payments;
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 */
 	public function setFormTypesData(array $transports, array $payments) {
 		$this->transports = $transports;
 		$this->payments = $payments;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'order';
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function loadStepsConfig() {
 		return array(
 			array(

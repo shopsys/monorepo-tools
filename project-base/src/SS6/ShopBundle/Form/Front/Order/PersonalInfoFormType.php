@@ -65,10 +65,16 @@ class PersonalInfoFormType extends AbstractType {
 			->add('submit', 'submit');
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return 'orderPersonalInfo';
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),

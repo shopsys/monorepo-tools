@@ -3,8 +3,6 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class OrderController extends Controller {
