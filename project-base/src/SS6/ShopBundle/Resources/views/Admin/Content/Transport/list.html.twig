@@ -17,9 +17,9 @@
 					<td><a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}">{{ transport.entity.name }}</a></td>
 					<td class="text-center">
 						{% if transport.visible %}
-							<span class="semaphore semaphore--run"></span>
+							<span class="semaphore semaphore--true"></span>
 						{% else %}
-							<span class="semaphore semaphore--stop"></span>
+							<span class="semaphore semaphore--false"></span>
 						{% endif %}
 					</td>
 					<td class="text-right">{{ transport.entity.price|price }}</td>
