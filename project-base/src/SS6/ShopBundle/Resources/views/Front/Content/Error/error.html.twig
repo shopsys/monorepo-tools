@@ -8,13 +8,19 @@
 
 	<div class="web-wrap">
 
+		<div class="header">
+			<div class="logo">
+				<a href="{{ url('front_homepage') }}" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">Internetový obchod</a>
+			</div>
+		</div>
+		
 			<div class="content">
 				<div class="main-content">
 					<div class="row">
 						{% if status_code == 404 %}
 							<div class="col-md-8 col-sm-12">
 								
-								<h1 class="heading-huge mb-0">Stránka nenalezena!</h1>
+								<h1 class="heading-huge mb-0 mt-0">Stránka nenalezena!</h1>
 
 								<p>
 									Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.
@@ -37,7 +43,7 @@
 
 							<div class="col-md-12 col-sm-12">
 
-								<h1 class="heading-huge mb-0">Jejda! Nastala chyba.</h1>
+								<h1 class="heading-huge mb-0 mt-0">Jejda! Nastala chyba.</h1>
 
 								<p>
 									To je nemilé, to je nemilé. A zrovna 
