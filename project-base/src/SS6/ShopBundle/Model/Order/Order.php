@@ -216,12 +216,12 @@ class Order {
 	 * @param string|null $deliveryZip
 	 * @param string|null $note
 	 */
-	public function __construct(Transport $transport, Payment $payment, $firstName, $lastName, $email,
+	public function __construct($number, Transport $transport, Payment $payment, $firstName, $lastName, $email,
 			$telephone, $street, $city, $zip, UserIdentity $userIdentity = null, $companyName = null,
 			$companyNumber = null, $companyTaxNumber = null, $deliveryFirstName = null, $deliveryLastName = null,
 			$deliveryCompanyName = null, $deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null,
 			$deliveryZip = null, $note = null) {
-		$this->number = time();
+		$this->number = $number;
 		$this->customer = $userIdentity;
 		$this->items = new ArrayCollection();
 		$this->createdOn = new DateTime();

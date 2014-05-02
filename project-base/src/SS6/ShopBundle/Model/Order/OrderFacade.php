@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\UserIdentity;
+use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
 class OrderFacade {
 	
@@ -15,16 +16,24 @@ class OrderFacade {
 	private $em;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
+	 */
+	private $orderNumberSequenceRepository;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
 	private $cart;
 	
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
-	public function __construct(EntityManager $em, Cart $cart) {
+	public function __construct(EntityManager $em, OrderNumberSequenceRepository $orderNumberSequenceRepository,
+		Cart $cart) {
 		$this->em = $em;
+		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
 		$this->cart = $cart;
 	}
 
@@ -33,7 +42,9 @@ class OrderFacade {
 	 * @param $userIdentity \SS6\ShopBundle\Model\Customer\UserIdentity|null
 	 */
 	public function createOrder(OrderFormData $orderFormData, UserIdentity $userIdentity = null) {
-		$order = new Order($orderFormData->getTransport(),
+		$order = new Order(
+			$this->orderNumberSequenceRepository->getNextNumber(),
+			$orderFormData->getTransport(),
 			$orderFormData->getPayment(),
 			$orderFormData->getFirstName(),
 			$orderFormData->getLastName(),
