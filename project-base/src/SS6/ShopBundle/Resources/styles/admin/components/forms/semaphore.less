@@ -1,4 +1,4 @@
-.semaphore, .grid .grid_boolean_true, .grid .grid_boolean_false {
+.semaphore {
 	width: 12px;
 	height: 12px;
 	.border-radius(@border-radius-large);
@@ -10,12 +10,12 @@
 	top: 1px;
 }
 
-.semaphore--run, .grid .grid_boolean_true {
+.semaphore--true {
 	background: @brand-success;
 }
-.semaphore--wait {
+.semaphore--maybe {
 	background: @brand-warning;
 }
-.semaphore--stop, .grid .grid_boolean_false {
+.semaphore--false {
 	background: @brand-danger;
 }

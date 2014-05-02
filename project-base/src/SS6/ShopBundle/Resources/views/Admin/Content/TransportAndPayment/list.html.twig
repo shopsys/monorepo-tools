@@ -17,6 +17,10 @@
 {% endblock %}
 
 {% block mainContent %}
-	{{ render(controller('SS6ShopBundle:Admin/Transport:list')) }}
-	{{ render(controller('SS6ShopBundle:Admin/Payment:list')) }}
+	<div class="row">
+		<div class="col-xs-12 col-lg-8">
+			{{ render(controller('SS6ShopBundle:Admin/Transport:list')) }}
+			{{ render(controller('SS6ShopBundle:Admin/Payment:list')) }}
+		</div>
+	</div>
 {% endblock %}

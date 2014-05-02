@@ -14,7 +14,7 @@ th {
 
 // Baseline styles
 
-.table, .grid table {
+.table {
   width: 100%;
   margin-bottom: @line-height-computed;
   // Cells
@@ -53,7 +53,7 @@ th {
   }
 
   // Nesting
-  .table, .grid table {
+  .table {
     background-color: @body-bg;
   }
 }
@@ -79,7 +79,7 @@ th {
 //
 // Add borders all around the table and between all the columns.
 
-.table-bordered, .grid table  {
+.table-bordered {
   border: 1px solid @table-border-color;
   > thead,
   > tbody,
@@ -118,7 +118,7 @@ th {
 //
 // Placed here since it has to come after the potential zebra striping
 
-.table-hover, .grid table {
+.table-hover {
   > tbody > tr:hover {
     > td,
     > th {
@@ -169,7 +169,7 @@ table {
 // will display normally.
 
 @media (max-width: @screen-xs-max) {
-  .table-responsive, .grid {
+  .table-responsive {
     width: 100%;
     margin-bottom: (@line-height-computed * 0.75);
     overflow-y: hidden;
@@ -179,7 +179,7 @@ table {
     -webkit-overflow-scrolling: touch;
 
     // Tighten up spacing
-    > .table, .grid_body > table {
+    > .table {
       margin-bottom: 0;
 
       // Ensure the content doesn't wrap
