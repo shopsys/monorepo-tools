@@ -55,7 +55,7 @@ class TransportAndPaymentFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'orderTransportAndPayment';
+		return 'transportAndPayment';
 	}
 
 	/**
