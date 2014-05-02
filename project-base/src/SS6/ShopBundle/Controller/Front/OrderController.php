@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 
 class OrderController extends Controller {
 
@@ -39,6 +40,10 @@ class OrderController extends Controller {
 				$flow->reset();
 
 				return $this->redirect($this->generateUrl('front_order_sent'));
+			}
+		} elseif ($form->isSubmitted()) {
+			if (!$form->getErrors()) {
+				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 			}
 		}
 
