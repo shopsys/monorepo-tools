@@ -19,6 +19,7 @@ framework:
 # Twig Configuration
 twig:
   debug: "%kernel.debug%"
+  exception_controller: 'SS6\ShopBundle\Controller\Front\ErrorController::showAction'
   form:
     resources:
       - '@SS6Shop/Admin/Form/fields.html.twig'

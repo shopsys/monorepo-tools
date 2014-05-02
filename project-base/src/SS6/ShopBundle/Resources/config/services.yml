@@ -3,6 +3,7 @@ imports:
 
 parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
+  twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
 
 services:
   

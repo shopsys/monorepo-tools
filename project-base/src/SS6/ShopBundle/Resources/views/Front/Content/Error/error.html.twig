@@ -1,0 +1,71 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block title %}
+	Nastala chyba: {{ status_text }}
+{% endblock %}
+
+{% block htmlBody %}
+
+	<div class="web-wrap">
+
+		<div class="header">
+			<div class="logo">
+				<a href="{{ url('front_homepage') }}" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">Internetový obchod</a>
+			</div>
+		</div>
+		
+			<div class="content">
+				<div class="main-content">
+					<div class="row">
+						{% if status_code == 404 %}
+							<div class="col-md-8 col-sm-12">
+								
+								<h1 class="heading-huge mb-0 mt-0">Stránka nenalezena!</h1>
+
+								<p>
+									Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.
+								</p>
+
+								<h2>Prosím, pokračujte podle pokynů:</h2>
+
+								<ul>
+									<li>Zkontrolujte správnost adresy</li>
+									<li>Zkuste použít vyhledávání na webu</li>
+								</ul>
+							</div>
+
+
+							<div class="col-md-4 col-sm-12 text-center">
+								<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="Stránka nenalezena!">
+							</div>
+									
+						{% else %}
+
+							<div class="col-md-12 col-sm-12">
+
+								<h1 class="heading-huge mb-0 mt-0">Jejda! Nastala chyba.</h1>
+
+								<p>
+									To je nemilé, to je nemilé. A zrovna 
+									<strong>"{{ status_code }} {{ status_text }}"</strong>, 
+									to je jak naschvál!
+								</p>
+								
+								<p>
+									Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789.
+								</p>
+
+							</div>
+
+						{% endif %}
+						
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="footer">
+				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+			</div>
+		</div>
+{% endblock %}
