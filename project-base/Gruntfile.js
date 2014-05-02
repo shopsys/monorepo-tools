@@ -58,17 +58,75 @@ module.exports = function(grunt) {
 			}
 		},
 
+		sprite: {
+			admin: {
+				src: 'web/assets/admin/images/icons/*.png',
+				dest: 'web/assets/admin/images/icons/*.png',
+				destImg: 'web/assets/admin/images/sprites/sprite.png',
+				destCSS: 'src/SS6/ShopBundle/Resources/styles/admin/libs/sprites.less',
+				imgPath: '../images/sprites/sprite.png',
+				algorithm: 'binary-tree',
+				padding: 50,
+				engine: 'auto',
+				cssFormat: 'css',
+				cssVarMap: function (sprite) {
+					sprite.name = 'sprite.sprite-' + sprite.name;
+				},
+				engineOpts: {
+					imagemagick: true
+				},
+				imgOpts: {
+					format: 'png',
+					quality: 90,
+					timeout: 10000
+				},
+				cssOpts: {
+					functions: false,
+					cssClass: function (item) {
+							return '.' + item.name;
+					}
+				}
+			},
+			frontend: {
+				src: 'web/assets/frontend/images/icons/*.png',
+				dest: 'web/assets/frontend/images/icons/*.png',
+				destImg: 'web/assets/frontend/images/sprites/sprite.png',
+				destCSS: 'src/SS6/ShopBundle/Resources/styles/front/libs/sprites.less',
+				imgPath: '../images/sprites/sprite.png',
+				algorithm: 'binary-tree',
+				padding: 50,
+				engine: 'auto',
+				cssFormat: 'css',
+				cssVarMap: function (sprite) {
+					sprite.name = 'sprite.sprite-' + sprite.name;
+				},
+				engineOpts: {
+					imagemagick: true
+				},
+				imgOpts: {
+					format: 'png',
+					quality: 90,
+					timeout: 10000
+				},
+				cssOpts: {
+					functions: false,
+					cssClass: function (item) {
+							return '.' + item.name;
+					}
+				}
+			}
+		},
 
 		watch: {
 			admin: {
-				files: ['src/SS6/ShopBundle/Resources/styles/admin/**/*.less'],
+				files: ['src/SS6/ShopBundle/Resources/styles/admin/**/*.less', 'web/assets/admin/images/icons/**/*.png'],
 				tasks: ['admin'],
 				options: {
 					livereload: true,
 				}
 			},
 			frontend: {
-				files: ['src/SS6/ShopBundle/Resources/styles/front/**/*.less'],
+				files: ['src/SS6/ShopBundle/Resources/styles/front/**/*.less', 'web/assets/frontend/images/icons/**/*.png'],
 				tasks: ['frontend'],
 				options: {
 					livereload: true,
@@ -82,9 +140,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-legacssy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-spritesmith');
 
-	grunt.registerTask('default', ['less', 'legacssy']);
+	grunt.registerTask('default', ['sprite', 'less', 'legacssy']);
 
-	grunt.registerTask('frontend', ['less:frontend', 'legacssy:frontend']);
-	grunt.registerTask('admin', ['less:admin', 'legacssy:admin' ]);
+	grunt.registerTask('frontend', ['sprite:frontend', 'less:frontend', 'legacssy:frontend']);
+	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
 };
