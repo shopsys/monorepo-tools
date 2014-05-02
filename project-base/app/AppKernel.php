@@ -14,6 +14,7 @@ class AppKernel extends Kernel {
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 			new Kutny\AutowiringBundle\KutnyAutowiringBundle(),
+			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
