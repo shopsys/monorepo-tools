@@ -13,7 +13,7 @@
 			{{ form_errors(form.transport) }}
 
 			{% for child in form.transport %}
-				{% set choice = form.transport.vars.choices[child.vars.value] %}
+				{% set choice = form.transport.vars.choices[child.vars.name] %}
 				<label class="chooser__item">
 					<span class="chooser__check">
 						{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
@@ -54,7 +54,7 @@
 			{{ form_errors(form.payment) }}
 
 			{% for child in form.payment %}
-				{% set choice = form.payment.vars.choices[child.vars.value] %}
+				{% set choice = form.payment.vars.choices[child.vars.name] %}
 				<label class="chooser__item">
 					<span class="chooser__check">
 						{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}

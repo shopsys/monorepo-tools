@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Form\Front\Order;
 
 use SS6\ShopBundle\Form\SingleCheckboxChoiceType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PaymentFromType extends AbstractType {
@@ -39,20 +39,8 @@ class PaymentFromType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'choice_list' => $this->getChoiceList(),
+			'choice_list' => new ObjectChoiceList($this->payments, 'name', array(), null, 'id'),
 		));
-	}
-
-	/**
-	 * @return \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList
-	 */
-	private function getChoiceList() {
-		$labels = array();
-		foreach ($this->payments as $payment) {
-			$labels[] = $payment->getName();
-		}
-
-		return new ChoiceList($this->payments, $labels);
 	}
 
 }
