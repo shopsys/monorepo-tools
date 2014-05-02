@@ -125,8 +125,8 @@ class ProductController extends Controller {
 		
 		$grid->setVisibleColumns(array('visible', 'name', 'price'));
 		$grid->setColumnsOrder(array('visible', 'name', 'price'));
-		$grid->getColumns()->getColumnById('visible')->setTitle('Viditelné');
-		$grid->getColumns()->getColumnById('name')->setTitle('Název');
+		$grid->getColumns()->getColumnById('visible')->setTitle('Viditelné')->setClass('table-col-10');
+		$grid->getColumns()->getColumnById('name')->setTitle('Název')->setClass('table-col-60');
 		$grid->getColumns()->getColumnById('price')->setTitle('Cena')->setClass('table-col-15');
 		
 		$grid->hideFilters();
