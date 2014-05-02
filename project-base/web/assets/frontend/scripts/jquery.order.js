@@ -141,10 +141,10 @@
 		var checkedTransport = $('input.transport:checked');
 		var checkedPayment = $('input.payment:checked');
 		
-		if (checkedTransport.length && checkedPayment.length) {
-			$('#order_payment_and_transport_submit').removeClass('button--alter');
+		if (checkedTransport.length === 1 && checkedPayment.length === 1) {
+			$('#transportAndPayment_submit').removeClass('button--alter');
 		} else {
-			$('#order_payment_and_transport_submit').addClass('button--alter');
+			$('#transportAndPayment_submit').addClass('button--alter');
 		}
 	};
 	
