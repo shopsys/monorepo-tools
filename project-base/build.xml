@@ -6,6 +6,7 @@
 	<property name="path.build" value="${path.root}/build"/>
 	<property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
 	<property name="path.composer.executable" value="composer"/>
+	<property name="path.npm.executable" value="npm"/>
 	<property name="path.root" value="."/>
 	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
 	<property name="path.phpcs.ruleset" value="${path.build}/rulesetCS.xml"/>
@@ -19,8 +20,8 @@
 	
 	<property file="${path.build.properties.local}" override="true"/>
  
-	<target name="build" depends="composer,phplint,phpcs,phpmd,grunt,tests,db-rebuild"/>
-	<target name="build-demo" depends="composer,phplint,phpcs,phpmd,grunt,tests,db-demo"/>
+	<target name="build" depends="composer,npm,phplint,phpcs,phpmd,grunt,tests,db-rebuild"/>
+	<target name="build-demo" depends="composer,npm,phplint,phpcs,phpmd,grunt,tests,db-demo"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
@@ -29,6 +30,17 @@
 	<target name="composer">
 		<exec
 			executable="${path.composer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="install"/>
+		</exec>
+	</target>
+	
+	<target name="npm">
+		<exec
+			executable="${path.npm.executable}"
 			logoutput="true"
 			passthru="true"
 			checkreturn="true"

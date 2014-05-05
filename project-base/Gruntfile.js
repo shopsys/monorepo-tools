@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 				imgPath: '../images/sprites/sprite.png',
 				algorithm: 'binary-tree',
 				padding: 50,
-				engine: 'auto',
+				engine: 'pngsmith',
 				cssFormat: 'css',
 				cssVarMap: function (sprite) {
 					sprite.name = 'sprite.sprite-' + sprite.name;
