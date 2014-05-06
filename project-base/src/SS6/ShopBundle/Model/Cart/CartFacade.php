@@ -79,4 +79,12 @@ class CartFacade {
 		$this->em->remove($cartItemToDelete);
 		$this->em->flush();
 	}
+
+	/**
+	 * @param int $cartItemId
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getProductByByIdCartItem($cartItemId) {
+		return $this->cartService->getCartItemById($this->cart, $cartItemId)->getProduct();
+	}
 }

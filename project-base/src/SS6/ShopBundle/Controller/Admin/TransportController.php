@@ -17,6 +17,9 @@ class TransportController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+
 		$transportData = new TransportFormData();
 		$form = $this->createForm(new TransportFormType(), $transportData);
 		$form->handleRequest($request);
@@ -32,9 +35,10 @@ class TransportController extends Controller {
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transportEditFacade->create($transport);
-			return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $transport->getId())));
+			$flashMessage->addSuccess('Byla vytvořena doprava ' . $transport->getName());
+			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		} elseif ($form->isSubmitted()) {
-			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
@@ -50,6 +54,8 @@ class TransportController extends Controller {
 	public function editAction(Request $request, $id) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
 		try {
 			$transport = $transportEditFacade->getById($id);
@@ -73,9 +79,10 @@ class TransportController extends Controller {
 					$formData->isHidden()
 				);
 				$transportEditFacade->edit($transport);
-				return $this->redirect($this->generateUrl('admin_transport_edit', array('id' => $id)));
+				$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
+				return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 			} elseif ($form->isSubmitted()) {
-				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
 			}
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
@@ -94,9 +101,13 @@ class TransportController extends Controller {
 	public function deleteAction($id) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
 		try {
+			$transportName = $transportEditFacade->getById($id)->getName();
 			$transportEditFacade->deleteById($id);
+			$flashMessage->addSuccess('Doprava ' . $transportName . ' byla odstraněna');
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
