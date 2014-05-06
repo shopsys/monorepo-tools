@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form\Front\Cart;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class CartFormType extends AbstractType {
@@ -43,13 +44,12 @@ class CartFormType extends AbstractType {
 	}
 
 	/**
-	 * @param array $options
-	 * @return array
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
-	public function getDefaultOptions(array $options) {
-		return array(
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
-		);
+		));
 	}
 
 }
