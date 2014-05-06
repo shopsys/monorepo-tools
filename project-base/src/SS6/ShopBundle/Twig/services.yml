@@ -1,4 +1,10 @@
 services:
+
+  ss6.twig.form_theme_extension:
+    class: SS6\ShopBundle\Twig\FormThemeExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.price_extension:
     class: SS6\ShopBundle\Twig\PriceExtension
     tags:
