@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Model\Customer\UserIdentity;
+use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,15 +26,15 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$userIdentity = new UserIdentity('John', 'Watson', 'no-reply@netdevelo.cz');
+		$user = new User('John', 'Watson', 'no-reply@netdevelo.cz');
 		
 		$encoderFactory = $this->container->get('security.encoder_factory');
-		$encoder = $encoderFactory->getEncoder($userIdentity);
-		$passwordHash = $encoder->encodePassword('user123', $userIdentity->getSalt());
+		$encoder = $encoderFactory->getEncoder($user);
+		$passwordHash = $encoder->encodePassword('user123', $user->getSalt());
 		
-		$userIdentity->changePassword($passwordHash);
+		$user->changePassword($passwordHash);
 				
-		$manager->persist($userIdentity);
+		$manager->persist($user);
 		$manager->flush();
 	}
 

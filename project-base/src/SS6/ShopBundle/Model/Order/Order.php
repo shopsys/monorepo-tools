@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Order;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Customer\UserIdentity;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -32,9 +32,9 @@ class Order {
 	private $number;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserIdentity
+	 * @var \SS6\ShopBundle\Model\Customer\User
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\UserIdentity")
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\User")
 	 */
 	private $customer;
 
@@ -203,7 +203,7 @@ class Order {
 	 * @param string $street
 	 * @param string $city
 	 * @param string $zip
-	 * @param \SS6\ShopBundle\Model\Customer\UserIdentity|null $userIdentity
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber
@@ -217,12 +217,12 @@ class Order {
 	 * @param string|null $note
 	 */
 	public function __construct($number, Transport $transport, Payment $payment, $firstName, $lastName, $email,
-			$telephone, $street, $city, $zip, UserIdentity $userIdentity = null, $companyName = null,
+			$telephone, $street, $city, $zip, User $user = null, $companyName = null,
 			$companyNumber = null, $companyTaxNumber = null, $deliveryFirstName = null, $deliveryLastName = null,
 			$deliveryCompanyName = null, $deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null,
 			$deliveryZip = null, $note = null) {
 		$this->number = $number;
-		$this->customer = $userIdentity;
+		$this->customer = $user;
 		$this->items = new ArrayCollection();
 		$this->createdOn = new DateTime();
 		$this->transport = $transport;

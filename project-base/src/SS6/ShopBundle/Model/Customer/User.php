@@ -11,10 +11,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="user_identities")
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserIdentityRepository")
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserRepository")
  */
-class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializable {
+class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
 	/**
 	 * @ORM\Column(name="id", type="integer")

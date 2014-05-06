@@ -4,19 +4,19 @@ namespace SS6\ShopBundle\Model\Customer;
 
 use DateTime;
 use Doctrine\ORM\EntityRepository;
-use SS6\ShopBundle\Model\Customer\UserIdentity;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class SecurityUserIdentityRepository extends EntityRepository implements UserProviderInterface {
+class SecurityUserRepository extends EntityRepository implements UserProviderInterface {
 
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
-	protected function getUserIdentityRepository() {
-		return $this->em->getRepository(UserIdentity::class);
+	protected function getUserRepository() {
+		return $this->em->getRepository(User::class);
 	}
 	
 
@@ -26,50 +26,50 @@ class SecurityUserIdentityRepository extends EntityRepository implements UserPro
 	 * @throws UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($email) {
-		$userIdentity = $this->findOneBy(array('email' => $email));
+		$user = $this->findOneBy(array('email' => $email));
 
-		if ($userIdentity === null) {
+		if ($user === null) {
 			$message = sprintf(
-				'Unable to find an active SS6\ShopBundle\Model\Customer\UserIdentity object identified by email "%s".', $email
+				'Unable to find an active SS6\ShopBundle\Model\Customer\User object identified by email "%s".', $email
 			);
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
 		}
 
-		return $userIdentity;
+		return $user;
 	}
 
 	/**
-	 * @param UserInterface $userIdentity
+	 * @param UserInterface $user
 	 * @return Administrator
 	 * @throws UnsupportedUserException
 	 */
-	public function refreshUser(UserInterface $userIdentity) {
-		$class = get_class($userIdentity);
+	public function refreshUser(UserInterface $user) {
+		$class = get_class($user);
 		if (!$this->supportsClass($class)) {
 			$message = sprintf('Instances of "%s" are not supported.', $class);
 			throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
 		}
 		
-		if ($userIdentity instanceof TimelimitLoginInterface) {
-			if (time() - $userIdentity->getLastActivity()->getTimestamp() > 3600 * 24) {
-				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('UserIdentity was too long unactive');
+		if ($user instanceof TimelimitLoginInterface) {
+			if (time() - $user->getLastActivity()->getTimestamp() > 3600 * 24) {
+				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('User was too long unactive');
 			}
-			$userIdentity->setLastActivity(new DateTime());
+			$user->setLastActivity(new DateTime());
 		}
 		
 		$findParams = array(
-			'id' => $userIdentity->getId(),
+			'id' => $user->getId(),
 		);
-		if ($userIdentity instanceof UniqueLoginInterface) {
-			$findParams['loginToken'] = $userIdentity->getLoginToken();
+		if ($user instanceof UniqueLoginInterface) {
+			$findParams['loginToken'] = $user->getLoginToken();
 		}
-		$freshUserIdentity = $this->findOneBy($findParams);
+		$freshUser = $this->findOneBy($findParams);
 
-		if ($freshUserIdentity === null) {
+		if ($freshUser === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
 		}
 		
-		return $freshUserIdentity;
+		return $freshUser;
 	}
 
 	/**
