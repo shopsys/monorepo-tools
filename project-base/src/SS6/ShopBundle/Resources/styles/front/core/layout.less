@@ -4,7 +4,8 @@
 
 body {
 	font-size: @font-size;
-	line-height: @line-height-base;
+	font-family: @font;
+	line-height: @line-height;
 	color: @color-base;
 	background: @bg-web url('../images/bg.png') 0 90px repeat-x;
 	.backface-visibility(hidden);
@@ -15,7 +16,7 @@ body {
 	padding: 20px;
 }
 
-@media @query-4 {
+@media @m-query-lg {
 	.web-wrap {
 		width: @width-page;
 		margin: 0 auto;

@@ -1,8 +1,21 @@
 /*******************************************************************
+// FONTS
+*******************************************************************/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,latin-ext);
+
+@font: 'Open Sans', Arial, Helvetica, sans-serif;
+@font-title: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+
+@font-size: 14px;
+@line-height: 20px;
+
+
+/*******************************************************************
 // SIZES
 *******************************************************************/
-@width-page: 1140px;
-@margin-gap: 20px;
+@width-page: 1200px;
+@margin-gap: @line-height;
 
 
 /*******************************************************************
@@ -15,36 +28,42 @@
 /*******************************************************************
 // COLORS
 *******************************************************************/
-@color-base: #333;
-@color-desc: #555;
-@color-primary: #138ee4;
+@color-0: #000;
+@color-3: #333;
+@color-5: #555;
+@color-7: #777;
+@color-8: #888;
+@color-9: #999;
+@color-a: #aaa;
+@color-c: #ccc;
+@color-e: #eee;
+@color-f: #fff;
+
+@color-light: #fafafa;
+
+@color-blue: #138ee4;
+
+// context colors
+@color-base: @color-3;
+@color-desc: @color-5;
+@color-primary: @color-blue;
 
 @color-info: #1fa322;
 @color-alert: #d42244;
 
-@color-white: #fff;
-@color-black: #000;
-
-@gray-darker: lighten(#000, 13.5%);
-@gray-dark: lighten(#000, 20%);
-@gray: lighten(#000, 33.5%);
-@gray-light: lighten(#000, 60%);
-@gray-lighter: lighten(#000, 93.5%);
-
-@color-link: @color-primary;
+@color-link: @color-blue;
 @color-link-hover: @color-base;
 
-@color-border: @gray-lighter;
-@color-shadow: @gray-lighter;
+@color-border: @color-e;
+@color-shadow: @color-e;
 @color-inactive: lighten(@color-base, 55%);
 
-// backgrounds
-@bg-web: @gray-lighter;
-@bg-page: #fff;
-@bg-box: #fafafa;
-@bg-window: #fff;
-@bg-table: #fafafa;
-@bg-primary: @color-primary;
+@bg-web: @color-e;
+@bg-page: @color-f;
+@bg-box: @color-light;
+@bg-window: @color-f;
+@bg-table: @color-light;
+@bg-primary: @color-blue;
 
 
 /*******************************************************************
@@ -61,30 +80,18 @@
 @button-bg: @bg-primary;
 @button-height: 34px;
 @button-padding: 0 15px;
-@button-color: @color-white;
+@button-color: @color-f;
 @button-radius: @border-radius-base;
 
 @button-bg-hover: @color-base;
-@button-color-hover: @color-white;
+@button-color-hover: @color-f;
 
 // alter
-@button-bg-alter: #aaa;
+@button-bg-alter: @color-a;
 
 // large
 @button-height-large: 45px;
 @button-padding-large: 0 25px;
-
-
-/*******************************************************************
-// FONTS
-*******************************************************************/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,latin-ext);
-
-@font: 'Open Sans', Arial, Helvetica, sans-serif;
-@font-title: 'Roboto Condensed', Arial, Helvetica, sans-serif;
-
-@font-size: 14px;
 
 
 /*******************************************************************
@@ -97,15 +104,15 @@
 /*******************************************************************
 // MEDIA QUERIES
 *******************************************************************/
-@respons-1: 480px;
-@respons-2: 768px;
-@respons-3: 980px;
-@respons-4: @width-page;
+@responsivity-xs: 480px;
+@responsivity-sm: 768px;
+@responsivity-md: 980px;
+@responsivity-lg: @width-page;
 
-@query-1: ~"screen and (min-width: @{respons-1})";
-@query-2: ~"screen and (min-width: @{respons-2})";
-@query-3: ~"screen and (min-width: @{respons-3})";
-@query-4: ~"screen and (min-width: @{respons-4})";
+@m-query-xs: ~"screen and (min-width: @{responsivity-xs})";
+@m-query-sm: ~"screen and (min-width: @{responsivity-sm})";
+@m-query-md: ~"screen and (min-width: @{responsivity-md})";
+@m-query-lg: ~"screen and (min-width: @{responsivity-lg})";
 
 
 /*******************************************************************
@@ -113,5 +120,13 @@
 *******************************************************************/
 
 // transition
-@transition: cubic-bezier(.61, .20, .48, 1.01);
+@transition: cubic-bezier(.61, .20, .48, 1.0);
 @transition-time: 0.3s;
+
+/*******************************************************************
+// BOOTSTRAP REWRITE VARIABLES
+*******************************************************************/
+@input-bg: @color-f;
+@input-bg-disabled: @color-e;
+@input-color: @color-base;
+@input-border: @color-border;
