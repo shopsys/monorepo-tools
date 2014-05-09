@@ -1,8 +1,8 @@
 {% if messages %}
 	<div class="message message-{{ type }} js-flash-message">
-		<a href="#" class="message-button-close js-flash-message-close" title="Zavřít" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">X</a>
+		<a href="#" class="message__close js-flash-message-close" title="Zavřít" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">X</a>
 		{% for message in messages %}
-			<div>{{ message }}</div>
+			{{ message }}
 		{% endfor %}
 	</div>
 {% endif %}
