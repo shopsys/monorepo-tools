@@ -7,7 +7,6 @@ use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
 use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends Controller {
@@ -113,7 +112,7 @@ class TransportController extends Controller {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 	}
-	
+
 	public function listAction() {
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */

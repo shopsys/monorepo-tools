@@ -2,3 +2,11 @@
 
 {% block title %}- Editace dopravy - {{ transport.name }}{% endblock %}
 {% block h1 %}Editace dopravy - {{ transport.name }}{% endblock %}
+
+{% block transport_id %}
+	{{ form_row(form.id, { label: 'ID'}) }}
+{% endblock %}
+
+{% block transport_save %}
+	{{ form_row(form.save, { label: 'Uložit změny'}) }}
+{% endblock %}
