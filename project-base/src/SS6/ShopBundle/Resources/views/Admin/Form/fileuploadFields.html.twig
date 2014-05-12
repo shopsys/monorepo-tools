@@ -1,0 +1,39 @@
+{% block file_upload_widget %}
+	{% spaceless %}
+		{%  set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-file-upload')|trim)}) %}
+		{%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
+		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletecachedfile')}) %}	
+		
+		<div {{ block('widget_attributes') }}>
+			<span class="js-file-upload-hidden" style="display: none;">
+				{{ form_row(form.children.file_uploaded) }}
+			</span>
+			{% if form.children.file_uploaded.vars.value is empty %}
+				{% set itemStyle = 'display: none;' %}
+			{% else %}
+				{% set itemStyle = '' %}
+			{% endif %}
+			<div class="js-file-upload-item" style="{{ itemStyle }}">
+				<div class="info">
+					<span class="js-file-upload-filename">{{ getNameByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
+					<br />
+					<small>Status: <span class="js-file-upload-status">Complete</span></small>
+				</div>
+				<div class="bar js-file-upload-progress" style="width: 200px; display: none;">
+					<div class="js-file-upload-progress-bar" style="width: 0%; background-color: green; text-align: center;">0%</div>
+				</div>
+			</div>
+			
+			<div class="js-file-upload-input">
+        <div class="js-file-upload-fallback-hide">Zde přetáhněte soubor</div>
+				<div class="js-file-upload-fallback-hide">-nebo-</div>
+				<div>
+					{{ form_widget(form.children.file) }}
+				</div>
+			</div>
+		</div>
+
+	{% endspaceless %}
+{% endblock file_upload_widget %}
+
+	

@@ -3,13 +3,27 @@
 namespace SS6\ShopBundle\Form\Admin\Transport;
 
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
+use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class TransportFormType extends AbstractType {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 */
+	public function __construct(FileUpload $fileUpload) {
+		$this->fileUpload = $fileUpload;
+	}
 
 	/**
 	 * @return string
@@ -40,6 +54,7 @@ class TransportFormType extends AbstractType {
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
 			))
 			->add('description', 'textarea', array('required' => false))
+			->add('image', new FileUploadType($this->fileUpload), array('required' => false))
 			->add('save', 'submit');
 	}
 

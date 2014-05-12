@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
