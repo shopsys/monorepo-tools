@@ -38,7 +38,7 @@ class PaymentFormType extends AbstractType {
 		}
 
 		$builder
-			->add('id', 'integer', array('read_only' => true))
+			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('name', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),

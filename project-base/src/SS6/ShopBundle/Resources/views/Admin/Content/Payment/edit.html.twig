@@ -2,3 +2,11 @@
 
 {% block title %}- Editace platby - {{ payment.name }}{% endblock %}
 {% block h1 %}Editace platby - {{ payment.name }}{% endblock %}
+
+{% block payment_id %}
+	{{ form_row(form.id, { label: 'ID'}) }}
+{% endblock %}
+
+{% block payment_save %}
+	{{ form_row(form.save, { label: 'Uložit změny'}) }}
+{% endblock %}

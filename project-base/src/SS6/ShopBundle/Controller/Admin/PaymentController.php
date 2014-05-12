@@ -7,7 +7,6 @@ use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\Payment\Payment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends Controller {
