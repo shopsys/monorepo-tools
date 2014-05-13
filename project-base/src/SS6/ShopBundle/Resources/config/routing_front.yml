@@ -33,6 +33,18 @@ front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
 
+front_login:
+  pattern: /login/
+  defaults: { _controller: SS6ShopBundle:Front\Login:login }
+
+front_login_check:
+  pattern: /login/check/
+  # controller's action is unnecessary, because firewall processes whole request
+
+front_logout:
+  pattern: /logout/
+  # controller's action is unnecessary, because firewall processes whole request 
+
 front_order_index:
   pattern: /order/
   defaults: { _controller: SS6ShopBundle:Front\Order:index }
@@ -46,18 +58,6 @@ front_product_detail:
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }
   requirements:
     id: \d+
-    
-front_login:
-  pattern: /login/
-  defaults: { _controller: SS6ShopBundle:Front\Login:login }
-  
-front_login_check:
-  pattern: /login/check/
-  # controller's action is unnecessary, because firewall processes whole request 
-
-front_logout:
-  pattern: /logout/
-  # controller's action is unnecessary, because firewall processes whole request 
   
 front_product_list:
   pattern: /product/list/
