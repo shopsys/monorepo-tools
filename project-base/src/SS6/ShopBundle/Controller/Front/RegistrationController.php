@@ -3,9 +3,12 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
+use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class RegistrationController extends Controller {
 
@@ -26,11 +29,13 @@ class RegistrationController extends Controller {
 				/* @var $registrationFacade \SS6\ShopBundle\Model\Customer\RegistrationFacade */
 
 				$userData = $form->getData();
-				$registrationFacade->register(
+				$user = $registrationFacade->register(
 					$userData['firstName'],
 					$userData['lastName'],
 					$userData['email'],
 					$userData['password']);
+
+				$this->login($user);
 
 				$flashMessage->addSuccess('Byli jste úspěšně zaregistrováni');
 				return $this->redirect($this->generateUrl('front_homepage'));
@@ -44,6 +49,19 @@ class RegistrationController extends Controller {
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', array(
 			'form' => $form->createView(),
 		));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 */
+	private function login(User $user) {
+		$token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
+		$this->get('security.context')->setToken($token);
+
+		// dispatch the login event
+		$request = $this->get('request');
+		$event = new InteractiveLoginEvent($request, $token);
+		$this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
 	}
 
 }
