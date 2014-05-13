@@ -102,7 +102,9 @@ class FlashMessage {
 	 */
 	private function addMessage($message, $key) {
 		if (is_array($message)) {
-			array_map(array($this, __METHOD__), $message, array_fill(0, count($message), $key));
+			foreach ($message as $item) {
+				$this->addMessage($item, $key);
+			}
 		} else {
 			$this->session->getFlashBag()->add($this->getFullbagName($key), $message);
 		}

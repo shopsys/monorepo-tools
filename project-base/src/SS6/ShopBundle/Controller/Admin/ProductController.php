@@ -58,7 +58,6 @@ class ProductController extends Controller {
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 			} elseif ($form->isSubmitted()) {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 				$product = $this->get('ss6.shop.product.product_repository')->getById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
