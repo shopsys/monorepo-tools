@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Item\OrderItemAbstract;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -46,9 +47,9 @@ class Order {
 	private $createdOn;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderItems
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Order\OrderItem", mappedBy="order", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Order\Item\OrderItemAbstract", mappedBy="order", orphanRemoval=true)
 	 */
 	private $items;
 
@@ -247,13 +248,33 @@ class Order {
 		$this->note = $note;
 	}
 
-	public function addItem(OrderItem $item) {
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract $item
+	 */
+	public function addItem(OrderItemAbstract $item) {
 		if (!$this->items->contains($item)) {
 			$this->items->add($item);
 		}
 	}
 
-	public function removeItem(OrderItem $item) {
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract $item
+	 */
+	public function removeItem(OrderItemAbstract $item) {
 		$this->items->removeElement($item);
+	}
+
+	/**
+	 * @return SS6\ShopBundle\Model\Payment\Payment
+	 */
+	public function getPayment() {
+		return $this->payment;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Transport\Transport
+	 */
+	public function getTransport() {
+		return $this->transport;
 	}
 }
