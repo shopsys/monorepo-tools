@@ -21,6 +21,9 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+
 		$form = $this->createForm(new ProductFormType());
 		
 		try {
@@ -51,12 +54,10 @@ class ProductController extends Controller {
 				/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 				$product = $productEditFacade->edit($id, $form->getData());
 
-				$this->get('session')->getFlashBag()->add(
-					'success', 'Produkt byl úspěšně upraven.'
-				);
+				$flashMessage->addSuccess('Bylo upraveno zboží ' . $product->getName());
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 			} elseif ($form->isSubmitted()) {
-				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 				$product = $this->get('ss6.shop.product.product_repository')->getById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
@@ -74,6 +75,9 @@ class ProductController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+
 		$form = $this->createForm(new ProductFormType());
 		
 		try {
@@ -91,12 +95,10 @@ class ProductController extends Controller {
 				/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 				$product = $productEditFacade->create($form->getData());
 
-				$this->get('session')->getFlashBag()->add(
-					'success', 'Produkt byl úspěšně vytvořen.'
-				);
+				$flashMessage->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
 				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 			} elseif ($form->isSubmitted()) {
-				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
@@ -160,12 +162,17 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+
+		$productRepository = $this->get('ss6.shop.product.product_repository');
+		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+
 		try {
+			$productName = $productRepository->getById($id)->getName();
 			$this->get('ss6.shop.product.product_edit_facade')->delete($id);
 
-			$this->get('session')->getFlashBag()->add(
-				'success', 'Produkt byl úspěšně smazán.'
-			);
+			$flashMessage->addSuccess('Produkt ' . $productName . ' byl smazán');
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 			throw $this->createNotFoundException('Product to delete not found.', $e);
 		}

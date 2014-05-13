@@ -44,6 +44,14 @@ services:
     
   ss6.shop.customer.customer_identifier_factory:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
+    
+  ss6.shop.flash_message.admin:
+    class: SS6\ShopBundle\Model\FlashMessage\FlashMessage
+    arguments: ['admin']
+    
+  ss6.shop.flash_message.front:
+    class: SS6\ShopBundle\Model\FlashMessage\FlashMessage
+    arguments: ['front']
 
   ss6.shop.order.order_facade:
     class: SS6\ShopBundle\Model\Order\OrderFacade
