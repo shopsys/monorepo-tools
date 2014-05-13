@@ -1,0 +1,24 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block title %}
+	Registrace
+{% endblock %}
+
+{% block content %}
+	<h1>Registrace</h1>
+
+	{{ form_errors(form) }}
+
+	{{ form_start(form) }}
+
+		{{ form_row(form.firstName, { label: 'Jméno' }) }}
+		{{ form_row(form.lastName, { label: 'Příjmení' }) }}
+		{{ form_row(form.email, { label: 'Email' }) }}
+		{{ form_row(form.password.first, { label: 'Heslo' }) }}
+		{{ form_row(form.password.second, { label: 'Heslo znovu' }) }}
+
+		{{ form_widget(form.submit, { label: 'Registrovat' }) }}
+
+	{{ form_end(form) }}
+
+{% endblock %}
