@@ -32,7 +32,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $realname;
+	protected $realName;
 
 	/**
 	 * @ORM\Column(name="password", type="string", length=100)
@@ -70,8 +70,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	/**
 	 * @return string
 	 */
-	public function getRealname() {
-		return $this->realname;
+	public function getRealName() {
+		return $this->realName;
 	}
 
 	/**
@@ -103,10 +103,10 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @param string $realname
+	 * @param string $realName
 	 */
-	public function setRealname($realname) {
-		$this->realname = $realname;
+	public function setRealname($realName) {
+		$this->realName = $realName;
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 			$this->id,
 			$this->username,
 			$this->password,
-			$this->realname,
+			$this->realName,
 			$this->loginToken,
 			time(),
 		));
@@ -152,7 +152,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 			$this->id,
 			$this->username,
 			$this->password,
-			$this->realname,
+			$this->realName,
 			$this->loginToken,
 			$timestamp
 		) = unserialize($serialized);
