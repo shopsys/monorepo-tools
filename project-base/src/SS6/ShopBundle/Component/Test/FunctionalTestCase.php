@@ -9,15 +9,22 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @var \Symfony\Bundle\FrameworkBundle\Client
 	 */
 	private $client;
-	
+
+	/**
+	 * @return \Symfony\Component\HttpKernel\Client
+	 */
+	protected function getClient() {
+		if (!isset($this->client)) {
+			$this->client = $this->createClient();
+		}
+
+		return $this->client;
+	}
+
 	/**
 	 * @return \Symfony\Component\DependencyInjection\Container
 	 */
 	protected function getContainer() {
-		if (!isset($this->client)) {
-			$this->client = $this->createClient();
-		}
-		
-		return $this->client->getContainer();
+		return $this->getClient()->getContainer();
 	}
 }

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Order;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Customer\UserIdentity;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
 class OrderFacade {
@@ -39,9 +39,9 @@ class OrderFacade {
 
 	/**
 	 * @param $orderFormData \SS6\ShopBundle\Form\Front\Order\OrderFormData
-	 * @param $userIdentity \SS6\ShopBundle\Model\Customer\UserIdentity|null
+	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
 	 */
-	public function createOrder(OrderFormData $orderFormData, UserIdentity $userIdentity = null) {
+	public function createOrder(OrderFormData $orderFormData, User $user = null) {
 		$order = new Order(
 			$this->orderNumberSequenceRepository->getNextNumber(),
 			$orderFormData->getTransport(),
@@ -53,7 +53,7 @@ class OrderFacade {
 			$orderFormData->getStreet(),
 			$orderFormData->getCity(),
 			$orderFormData->getZip(),
-			$userIdentity,
+			$user,
 			$orderFormData->getCompanyName(),
 			$orderFormData->getCompanyNumber(),
 			$orderFormData->getCompanyTaxNumber(),

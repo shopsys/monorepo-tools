@@ -1,12 +1,15 @@
-{% extends '@SS6Shop/Front/Form/theme.html.twig' %}
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_start %}
+	{% set attr = attr|merge({'role': attr.role|default('form')}) %}
+	{{ parent('form_start') }}
+{% endblock form_start %}
 
 {% block form_row %}
-	<div class="form-place">
+	<div class="form-group">
 		{{ form_label(form) }}
-		<div class="form-place__input-wrap">
-			{{ form_widget(form) }}
-		</div>
 		{{ form_errors(form) }}
+		{{ form_widget(form) }}
 	</div>
 {% endblock form_row %}
 
@@ -65,7 +68,7 @@
 {% endblock textarea_widget %}
 	
 {% block button_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary button')|trim}) %}
 	{{ parent('button_widget') }}
 {% endblock button_widget %}
 

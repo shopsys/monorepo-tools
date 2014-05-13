@@ -14,7 +14,7 @@ security:
         
     user_identities:
       entity: 
-        class: SS6ShopBundle:Customer\UserIdentity
+        class: SS6ShopBundle:Customer\User
 
   firewalls:
     administration:

@@ -1,4 +1,8 @@
 {% extends '@SS6Shop/Admin/Content/Product/detail.html.twig' %}
 
-{% block title %}- Přidat zboží{% endblock %}
-{% block h1 %}Přidat zboží{% endblock %}
+{% block title %}- Nové zboží{% endblock %}
+{% block h1 %}Nové zboží{% endblock %}
+
+{% block product_save %}
+	{{ form_row(form.save, { label: 'Vytvořit'}) }}
+{% endblock %}

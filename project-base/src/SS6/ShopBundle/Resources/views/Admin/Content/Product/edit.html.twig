@@ -16,3 +16,7 @@
 		{% endif %}
 	</div>
 {% endblock %}
+
+{% block product_save %}
+	{{ form_row(form.save, { label: 'Uložit změny'}) }}
+{% endblock %}

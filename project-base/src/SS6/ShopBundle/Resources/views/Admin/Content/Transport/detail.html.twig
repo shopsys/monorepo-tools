@@ -27,13 +27,17 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{{ form_row(form.id) }}
+				{% block transport_id %}
+					{{ form_widget(form.id, { type: 'hidden' }) }}
+				{% endblock %}
+				
 				{{ form_row(form.name, { label: 'Název'}) }}
 				{{ form_row(form.hidden, { label: 'Skryté'}) }}
 				{{ form_row(form.price, { label: 'Cena'}) }}
 				{{ form_row(form.description, { label: 'Popis'}) }}
-				
-				{{ form_row(form.save, { label: 'Uložit'}) }}
+
+				{% block transport_save %}{% endblock %}
+				<a href="{{ url('admin_transportandpayment_list') }}" class="btn">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>
 		

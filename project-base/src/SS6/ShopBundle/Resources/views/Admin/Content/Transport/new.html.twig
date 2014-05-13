@@ -1,4 +1,8 @@
 {% extends '@SS6Shop/Admin/Content/Transport/detail.html.twig' %}
 
-{% block title %}- Přidat dopravu{% endblock %}
-{% block h1 %}Přidat dopravu{% endblock %}
+{% block title %}- Nová doprava{% endblock %}
+{% block h1 %}Nová doprava{% endblock %}
+
+{% block transport_save %}
+	{{ form_row(form.save, { label: 'Vytvořit'}) }}
+{% endblock %}

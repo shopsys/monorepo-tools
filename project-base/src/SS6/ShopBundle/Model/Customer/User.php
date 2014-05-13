@@ -11,10 +11,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="user_identities")
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserIdentityRepository")
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserRepository")
  */
-class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializable {
+class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
 	/**
 	 * @ORM\Column(name="id", type="integer")
@@ -26,12 +26,12 @@ class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializab
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $firstname;
+	protected $firstName;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $lastname;
+	protected $lastName;
 	
 	/**
 	 * @ORM\Column(type="string", length=255, unique=true)
@@ -50,24 +50,24 @@ class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializab
 	protected $lastActivity;
 	
 	/**
-	 * @param string $firstname
-	 * @param string $lastname
+	 * @param string $firstName
+	 * @param string $lastName
 	 * @param string $email
 	 */
-	public function __construct($firstname, $lastname, $email) {
-		$this->firstname = $firstname;
-		$this->lastname = $lastname;
+	public function __construct($firstName, $lastName, $email) {
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
 		$this->email = $email;
 	}
 
 	/**
-	 * @param string $firstname
-	 * @param string $lastname
+	 * @param string $firstName
+	 * @param string $lastName
 	 * @param string $email
 	 */
-	public function edit($firstname, $lastname, $email) {
-		$this->firstname = $firstname;
-		$this->lastname = $lastname;
+	public function edit($firstName, $lastName, $email) {
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
 		$this->email = $email;
 	}
 	
@@ -88,8 +88,8 @@ class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializab
 	/**
 	 * @return string
 	 */
-	public function getFirstname() {
-		return $this->firstname;
+	public function getFirstName() {
+		return $this->firstName;
 	}
 	
 	/**
@@ -109,8 +109,8 @@ class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializab
 	/**
 	 * @return string
 	 */
-	public function getLastname() {
-		return $this->lastname;
+	public function getLastName() {
+		return $this->lastName;
 	}
 	
 	/**
@@ -137,8 +137,8 @@ class UserIdentity implements UserInterface, TimelimitLoginInterface, Serializab
 	/**
 	 * @return string
 	 */
-	public function getFullname() {
-		return $this->firstname . ' ' . $this->lastname;
+	public function getFullName() {
+		return $this->firstName . ' ' . $this->lastName;
 	}
 
 	/**

@@ -96,7 +96,7 @@ class ProductController extends Controller {
 				$product = $productEditFacade->create($form->getData());
 
 				$flashMessage->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
-				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
+				return $this->redirect($this->generateUrl('admin_product_list'));
 			} elseif ($form->isSubmitted()) {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
