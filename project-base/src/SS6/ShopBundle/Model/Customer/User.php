@@ -48,27 +48,49 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @var DateTime 
 	 */
 	protected $lastActivity;
-	
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\BillingAddress
+	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\BillingAddress")
+	 */
+	protected $billingAddress;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\DeliveryAddress")
+	 */
+	protected $deliveryAddress;
+
 	/**
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
 	 */
-	public function __construct($firstName, $lastName, $email) {
+	public function __construct($firstName, $lastName, $email,
+			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
+		$this->billingAddress = $billingAddress;
+		$this->deliveryAddress = $deliveryAddress;
 	}
 
 	/**
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
 	 */
-	public function edit($firstName, $lastName, $email) {
+	public function edit($firstName, $lastName, $email,
+			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
+		$this->billingAddress = $billingAddress;
+		$this->deliveryAddress = $deliveryAddress;
 	}
 	
 	/**
@@ -139,6 +161,20 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function getFullName() {
 		return $this->firstName . ' ' . $this->lastName;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
+	 */
+	public function getBillingAddress() {
+		return $this->billingAddress;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 */
+	public function getDeliveryAddress() {
+		return $this->deliveryAddress;
 	}
 
 	/**
