@@ -3,11 +3,14 @@
 namespace SS6\ShopBundle\Model\FileUpload;
 
 use SS6\ShopBundle\Model\String\TransformString;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUpload {
 
 	const CACHE_DIRECTORY = 'fileUploads';
+	const UPLOAD_FILE_DIRECTORY = 'files';
+	const UPLOAD_IMAGE_DIRECTORY = 'images';
 
 	/**
 	 * @var string
@@ -15,10 +18,31 @@ class FileUpload {
 	private $cacheDir;
 
 	/**
-	 * @param string $cacheDir
+	 * @var string
 	 */
-	public function __construct($cacheDir) {
+	private $webDir;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileNamingConvention
+	 */
+	private $fileNamingConvention;
+
+	/**
+	 * @var \Symfony\Component\Filesystem\Filesystem
+	 */
+	private $filesystem;
+
+	/**
+	 * @param string $cacheDir
+	 * @param string $webDir
+	 * @param \SS6\ShopBundle\Model\FileUpload\FileNamingConvention $fileNamingConvention
+	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+	 */
+	public function __construct($cacheDir, $webDir, FileNamingConvention $fileNamingConvention, Filesystem $filesystem) {
 		$this->cacheDir = $cacheDir;
+		$this->webDir = $webDir;
+		$this->fileNamingConvention = $fileNamingConvention;
+		$this->filesystem = $filesystem;
 	}
 
 	/**
@@ -41,13 +65,13 @@ class FileUpload {
 	 * @return boolean
 	 */
 	public function tryDeleteCachedFile($filename) {
-		$directory = $this->getCacheDirectory();
-		$filepath = $directory . DIRECTORY_SEPARATOR . TransformString::safeFilename($filename);
-		if (file_exists($filepath) && is_file($filepath) && is_writable($filepath)) {
-			unlink($filepath);
-			return true;
+		$filepath = $this->getCacheFilepath($filename);
+		try {
+			$this->filesystem->remove($filepath);
+		} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -59,10 +83,42 @@ class FileUpload {
 	}
 
 	/**
+	 * @param string $cacheFilename
+	 * @return string
+	 */
+	private function getCacheFilepath($cacheFilename) {
+		return $this->getCacheDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($cacheFilename);
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getCacheDirectory() {
 		return $this->cacheDir . DIRECTORY_SEPARATOR . self::CACHE_DIRECTORY;
+	}
+
+	/**
+	 *
+	 * @param string $isImage
+	 * @param string $category
+	 * @return string
+	 */
+	public function getUploadDirectory($isImage, $category) {
+		return $this->webDir .
+			DIRECTORY_SEPARATOR . 'assets' .
+			DIRECTORY_SEPARATOR . 'content' .
+			DIRECTORY_SEPARATOR . ($isImage ? self::UPLOAD_IMAGE_DIRECTORY : self::UPLOAD_FILE_DIRECTORY) .
+			DIRECTORY_SEPARATOR . $category;
+	}
+
+	/**
+	 * @param strinf $filename
+	 * @param bool $isImage
+	 * @param string $category
+	 * @return string
+	 */
+	private function getTargetFilepath($filename, $isImage, $category) {
+		return $this->getUploadDirectory($isImage, $category) . DIRECTORY_SEPARATOR . $filename;
 	}
 
 	/**
@@ -75,6 +131,42 @@ class FileUpload {
 			return $matches[1];
 		}
 		return '';
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface $entity
+	 */
+	public function preFlushEntity(EntityFileUploadInterface $entity) {
+		$filesForUpload = $entity->getCachedFilesForUpload();
+		foreach ($filesForUpload as $key => $fileForUpload) {
+			/* @var $fileForUpload FileForUpload */
+			$originFilename = $this->getOriginFilenameByCached($fileForUpload->getCacheFilename());
+			$entity->setFileAsUploaded($key, $originFilename);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface $entity
+	 * @throws \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException
+	 */
+	public function postFlushEntity(EntityFileUploadInterface $entity) {
+		$filesForUpload = $entity->getCachedFilesForUpload();
+		foreach ($filesForUpload as $key => $fileForUpload) {
+			/* @var $fileForUpload FileForUpload */
+			$sourceFilepath = $this->getCacheFilepath($fileForUpload->getCacheFilename());
+			$originFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
+				$fileForUpload->getNameConventionType(),
+				$fileForUpload->getCacheFilename(),
+				$entity->getId());
+			$targetFilename = $this->getTargetFilepath($originFilename, $fileForUpload->isImage(), $fileForUpload->getCategory());
+
+			try {
+				$this->filesystem->rename($sourceFilepath, $targetFilename, true);
+			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
+				$message = 'Failed rename file from cache to entity';
+				throw new \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException($message, $ex);
+			}
+		}
 	}
 	
 }

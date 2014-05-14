@@ -48,6 +48,21 @@ services:
     factory_service: ss6.shop.customer.customer_identifier_factory
     factory_method: get
     
+  ss6.shop.file_upload:
+    class: SS6\ShopBundle\Model\FileUpload\FileUpload
+    arguments: [%kernel.cache_dir%, "%kernel.root_dir%/../web"]
+    
+  ss6.shop.file_upload.doctrine_listener:
+    class: SS6\ShopBundle\Model\FileUpload\DoctrineListener
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }
+      - { name: doctrine.event_listener, event: postUpdate }
+      - { name: doctrine.event_listener, event: prePersist }
+      - { name: doctrine.event_listener, event: preUpdate }
+      
+  ss6.shop.file_upload.file_naming_convention:
+    class: SS6\ShopBundle\Model\FileUpload\FileNamingConvention
+    
   ss6.shop.customer.customer_identifier_factory:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
