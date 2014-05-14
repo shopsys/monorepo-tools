@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Customer;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 
-class RegistrationFacade {
+class CustomerEditFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

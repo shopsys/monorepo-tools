@@ -27,10 +27,10 @@ class CustomerController extends Controller {
 
 			if ($form->isValid()) {
 				$customerData = $form->getData();
-				$registrationFacade = $this->get('ss6.shop.customer.registration_facade');
-				/* @var $registrationFacade \SS6\ShopBundle\Model\Customer\RegistrationFacade */
+				$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
+				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-				$user = $registrationFacade->create(
+				$user = $customerEditFacade->create(
 					$customerData['firstName'],
 					$customerData['lastName'],
 					$customerData['email'],
