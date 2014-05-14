@@ -62,3 +62,7 @@ front_product_detail:
 front_product_list:
   pattern: /product/list/
   defaults: { _controller: SS6ShopBundle:Front\Product:list }
+
+front_registration_register:
+  pattern: /registration/
+  defaults: { _controller: SS6ShopBundle:Front\Registration:register }
