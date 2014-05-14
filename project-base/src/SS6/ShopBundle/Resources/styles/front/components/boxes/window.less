@@ -7,11 +7,13 @@
 	left: 50%;
 	margin: -@window-height/2 0 0 -@window-width/2;
 	padding: 25px 30px 30px;
-	text-align: center;
 	z-index: 10000;
-	.box-shadow(0 0 20px @color-shadow);
+
+	text-align: center;
 	border: 1px solid @color-border;
 	background: @bg-window;
+
+	.box-shadow(0 0 20px @color-shadow);
 }
 
 .window--active {
@@ -25,6 +27,7 @@
 	width: 25px;
 	height: 25px;
 	line-height: 25px;
+
 	background: @bg-box;
 	color: @color-base;
 	text-decoration: none;

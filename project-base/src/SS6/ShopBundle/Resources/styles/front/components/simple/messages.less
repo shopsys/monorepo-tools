@@ -1,25 +1,31 @@
 .message {
 	margin: 20px 0;
 	padding: 20px;
+
 	border: 1px solid @color-e;
 	background: lighten(@color-e, 10%);
+
 	.border-radius(@border-radius-base);
 }
 .message-success {
-	.bg-variant(@bg-success);
 	border-color: darken(@bg-success, 10%);
+
+	.bg-variant(@bg-success);
 }
 .message-info {
-	.bg-variant(@bg-info);
 	border-color: darken(@bg-info, 10%);
+
+	.bg-variant(@bg-info);
 }
 .message-warning {
-	.bg-variant(@bg-warning);
 	border-color: darken(@bg-warning, 10%);
+
+	.bg-variant(@bg-warning);
 }
 .message-danger {
-	.bg-variant(@bg-alert);
 	border-color: darken(@bg-alert, 10%);
+
+	.bg-variant(@bg-alert);
 }
 
 .message__list {
@@ -30,9 +36,10 @@
 	display: inline-block;
 	margin: 0;
 	padding: 2px 10px;
+	z-index: 10;
+
 	font-size: 12px;
 	font-weight: normal;
-	z-index: 10;
 	background: darken(@bg-alert, 10%);
 }
 

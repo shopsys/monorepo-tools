@@ -3,19 +3,18 @@ a.button, .button {
 	padding: @button-padding;
 	height: @button-height;
 	line-height: @button-height;
-	
+
 	color: @button-color;
 	background: @button-bg;
-	
 	text-decoration: none;
 	border: 0;
 	cursor: pointer;
 	font-size: @font-size;
-	
+
 	.border-radius(@button-radius);
 	.set-transition();
 	.transition(~"background, color");
-	
+
 	&:hover {
 		color: @button-color-hover;
 		background: @button-bg-hover;
@@ -33,7 +32,7 @@ a.button--large, .button--large {
 	height: @button-height-large;
 	line-height: @button-height-large;
 	padding: @button-padding-large;
-	
+
 	text-transform: uppercase;
 	font-weight: bold;
 }
@@ -43,6 +42,6 @@ a.button--large, .button--large {
 a.button--cart, .button--cart {
 	position: relative;
 	padding-left: 30px;
-	
+
 	.after(15px, 15px, 'icons/cart-mini.png', 9px, 2px);
 }
