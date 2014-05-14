@@ -1,25 +1,25 @@
 .message {
 	margin: 20px 0;
 	padding: 20px;
-	border: 1px solid @gray-lighter;
-	background: lighten(@gray-lighter, 10%);
+	border: 1px solid @color-e;
+	background: lighten(@color-e, 10%);
 	.border-radius(@border-radius-base);
 }
 .message-success {
-	.bg-variant(@state-success-bg);
-	border-color: darken(@state-success-bg, 10%);
+	.bg-variant(@bg-success);
+	border-color: darken(@bg-success, 10%);
 }
 .message-info {
-	.bg-variant(@state-info-bg);
-	border-color: darken(@state-info-bg, 10%);
+	.bg-variant(@bg-info);
+	border-color: darken(@bg-info, 10%);
 }
 .message-warning {
-	.bg-variant(@state-warning-bg);
-	border-color: darken(@state-warning-bg, 10%);
+	.bg-variant(@bg-warning);
+	border-color: darken(@bg-warning, 10%);
 }
 .message-danger {
-	.bg-variant(@state-danger-bg);
-	border-color: darken(@state-danger-bg, 10%);
+	.bg-variant(@bg-alert);
+	border-color: darken(@bg-alert, 10%);
 }
 
 .message__list {
@@ -33,7 +33,7 @@
 	font-size: 12px;
 	font-weight: normal;
 	z-index: 10;
-	background: darken(@state-danger-bg, 10%);
+	background: darken(@bg-alert, 10%);
 }
 
 .form-place .message-floating {
