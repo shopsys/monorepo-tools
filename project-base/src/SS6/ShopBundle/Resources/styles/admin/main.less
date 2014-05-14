@@ -1,23 +1,82 @@
-// Core variables and mixins
-@import "variables/variables.less";
-@import "variables/variables-bootstrap.less";
+// Bootstrap - used files from bootstrap
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
 
-@import "mixins.less";
-@import "components/helpers.less";
-
-// Reset
 @import "bootstrap/normalize.less";
 @import "bootstrap/print.less";
 
-// Bootstrap
-@import "bootstrap.less";
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+@import "bootstrap/grid.less";
+@import "bootstrap/tables.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/buttons.less";
 
-// Our component
-@import "components/components.less";
+@import "bootstrap/component-animations.less";
+@import "bootstrap/glyphicons.less";
+@import "bootstrap/dropdowns.less";
+@import "bootstrap/button-groups.less";
+@import "bootstrap/input-groups.less";
+@import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+@import "bootstrap/breadcrumbs.less";
+@import "bootstrap/pagination.less";
+@import "bootstrap/pager.less";
+@import "bootstrap/labels.less";
+@import "bootstrap/badges.less";
+@import "bootstrap/jumbotron.less";
+@import "bootstrap/thumbnails.less";
+@import "bootstrap/alerts.less";
+@import "bootstrap/progress-bars.less";
+@import "bootstrap/media.less";
+@import "bootstrap/list-group.less";
+@import "bootstrap/panels.less";
+@import "bootstrap/wells.less";
+@import "bootstrap/close.less";
 
-// Layuout
-@import "layout.less";
+@import "bootstrap/utilities.less";
+@import "bootstrap/responsive-utilities.less";
+
+
+// Core
+@import "core/variables.less";
+
+@import "core/mixins.less";
+@import "core/drawing.less";
+
+@import "core/helpers.less";
+@import "core/typography.less";
+
+@import "core/layout.less";
+
 
 // Libs
-@import "libs/sprites-set.less";
 @import "libs/sprites.less";
+@import "libs/sprites-set.less";
+
+
+// Components
+//// bootstrap extend
+@import "components/bootstrap/breadcrumbs.less";
+@import "components/bootstrap/forms.less";
+@import "components/bootstrap/navbar.less";
+@import "components/bootstrap/navs.less";
+
+//// forms
+@import "components/forms/form-group.less";
+@import "components/forms/signin.less";
+@import "components/forms/semaphore.less";
+@import "components/forms/validation.less";
+
+//// simple
+@import "components/simple/action-icons.less";
+@import "components/simple/messages.less";
+@import "components/simple/sort-arrows.less";
+
+//// tables
+@import "components/tables/table-col.less";
+
+
+// not in
+@import "todo.less";

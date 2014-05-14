@@ -4,12 +4,11 @@
 
 
 .breadcrumb {
-  padding: @breadcrumb-padding-vertical @breadcrumb-padding-horizontal @breadcrumb-padding-vertical - 1;
+  padding: @breadcrumb-padding-vertical @breadcrumb-padding-horizontal;
+  margin-bottom: @line-height-computed;
   list-style: none;
   background-color: @breadcrumb-bg;
-  border-bottom: 1px solid @breadcrumb-border;
-  margin: 0 -15px @line-height-computed;
-  font-size: 12px;
+  border-radius: @border-radius-base;
 
   > li {
     display: inline-block;
