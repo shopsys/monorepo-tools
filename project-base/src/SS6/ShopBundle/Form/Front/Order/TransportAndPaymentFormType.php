@@ -42,7 +42,7 @@ class TransportAndPaymentFormType extends AbstractType {
 				),
 				'invalid_message' => 'Vyberte prosím dopravu',
 			))
-			->add('payment', new PaymentFromType($this->payments), array(
+			->add('payment', new PaymentFormType($this->payments), array(
 				'constraints' => array(
 					new Constraints\NotNull(array('message' => 'Vyberte prosím platbu')),
 				),

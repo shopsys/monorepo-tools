@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\Product;
 
-class CarServicetTest extends PHPUnit_Framework_TestCase {
+class CartServiceTest extends PHPUnit_Framework_TestCase {
 	
 	public function testAddProductToCartInvalidFloatQuantity() {
 		$customerIdentifier = new CustomerIdentifier('randomString');

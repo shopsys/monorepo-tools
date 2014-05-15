@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PaymentFromType extends AbstractType {
+class PaymentFormType extends AbstractType {
 	/**
 	 * @var \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
