@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
@@ -82,7 +83,7 @@ class OrderFacade {
 		$cartItems = $cart->getItems();
 		foreach ($cartItems as $cartItem) {
 			/* @var $cartItem \SS6\ShopBundle\Model\Cart\CartItem */
-			$orderItem = new OrderItem($order,
+			$orderItem = new OrderProduct($order,
 				$cartItem->getProduct()->getName(),
 				$cartItem->getProduct()->getPrice(),
 				$cartItem->getQuantity(),
