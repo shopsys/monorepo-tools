@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Item\OrderPayment;
+use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
 class OrderFacade {
@@ -66,7 +68,18 @@ class OrderFacade {
 			$orderFormData->getDeliveryZip(),
 			$orderFormData->getNote());
 
-		$cartItems = $this->cart->getItems();
+		$this->fillOrderItems($order, $this->cart);
+
+		$this->em->persist($order);
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 */
+	private function fillOrderItems(Order $order, Cart $cart) {
+		$cartItems = $cart->getItems();
 		foreach ($cartItems as $cartItem) {
 			/* @var $cartItem \SS6\ShopBundle\Model\Cart\CartItem */
 			$orderItem = new OrderItem($order,
@@ -80,7 +93,24 @@ class OrderFacade {
 			$this->em->remove($cartItem);
 		}
 
-		$this->em->persist($order);
-		$this->em->flush();
+		$payment = $order->getPayment();
+		$orderPayment = new OrderPayment($order,
+			$payment->getName(),
+			$payment->getPrice(),
+			1,
+			$payment
+		);
+		$order->addItem($orderPayment);
+		$this->em->persist($orderPayment);
+
+		$transport = $order->getTransport();
+		$orderTransport = new OrderTransport($order,
+			$transport->getName(),
+			$transport->getPrice(),
+			1,
+			$transport
+		);
+		$order->addItem($orderTransport);
+		$this->em->persist($orderTransport);
 	}
 }

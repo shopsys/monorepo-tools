@@ -1,14 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Order\Order;
 
 /**
  * @ORM\Table(name="order_items")
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"payment" = "OrderPayment", "product" = "OrderProduct", "transport" = "OrderTransport"})
  */
-class OrderItem {
+abstract class OrderItemAbstract {
 
 	/**
 	 * @var integer
@@ -26,13 +30,6 @@ class OrderItem {
 	 * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false)
 	 */
 	private $order;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
-	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 */
-	private $product;
 
 	/**
 	 * @var string
@@ -61,13 +58,12 @@ class OrderItem {
 	 * @param string $price
 	 * @param int $quantity
 	 */
-	public function __construct(Order $order, $name, $price, $quantity, $product = null) {
+	public function __construct(Order $order, $name, $price, $quantity) {
 		$this->order = $order;
 		$order->addItem($this);
 		$this->name = $name;
 		$this->price = $price;
 		$this->quantity = $quantity;
-		$this->product = $product;
 	}
 
 }
