@@ -62,6 +62,18 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $deliveryAddress;
 
 	/**
+	 * @var \DateTime
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $createdAt;
+
+	/**
+	 * @var \DateTime|null
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	protected $lastLogin;
+
+	/**
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
@@ -75,6 +87,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		$this->email = $email;
 		$this->billingAddress = $billingAddress;
 		$this->deliveryAddress = $deliveryAddress;
+		$this->createdAt = new DateTime();
 	}
 
 	/**
@@ -124,6 +137,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
+	 * @param DateTime|null $lastLogin
+	 */
+	public function setLastLogin($lastLogin) {
+		$this->lastLogin = $lastLogin;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getLastName() {
@@ -170,6 +190,20 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function getDeliveryAddress() {
 		return $this->deliveryAddress;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getCreatedAt() {
+		return $this->createdAt;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getLastLogin() {
+		return $this->lastLogin;
 	}
 
 	/**

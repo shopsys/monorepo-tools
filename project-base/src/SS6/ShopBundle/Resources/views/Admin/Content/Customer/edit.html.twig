@@ -7,6 +7,16 @@
 	{{ form_row(form.id, { label: 'ID'}) }}
 {% endblock %}
 
+{% block customer_created_at %}
+	<label>Datum posledního přihlášení:</label>
+	{{ user.createdAt|date('j.n.Y H:i') }}
+{% endblock %}
+
+{% block customer_last_login %}
+	<label>Datum registrace:</label>
+	{{ user.lastLogin|date('j.n.Y H:i') }}
+{% endblock %}
+
 {% block customer_save %}
 	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}
