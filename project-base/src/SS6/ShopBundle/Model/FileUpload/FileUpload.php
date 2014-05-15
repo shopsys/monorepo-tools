@@ -20,7 +20,12 @@ class FileUpload {
 	/**
 	 * @var string
 	 */
-	private $webDir;
+	private $fileDir;
+
+	/**
+	 * @var string
+	 */
+	private $imageDir;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\FileUpload\FileNamingConvention
@@ -34,13 +39,16 @@ class FileUpload {
 
 	/**
 	 * @param string $cacheDir
-	 * @param string $webDir
+	 * @param string $fileDir
+	 * @param string $imageDir
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileNamingConvention $fileNamingConvention
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
-	public function __construct($cacheDir, $webDir, FileNamingConvention $fileNamingConvention, Filesystem $filesystem) {
+	public function __construct($cacheDir, $fileDir, $imageDir, FileNamingConvention $fileNamingConvention,
+			Filesystem $filesystem) {
 		$this->cacheDir = $cacheDir;
-		$this->webDir = $webDir;
+		$this->fileDir = $fileDir;
+		$this->imageDir = $imageDir;
 		$this->fileNamingConvention = $fileNamingConvention;
 		$this->filesystem = $filesystem;
 	}
@@ -101,24 +109,31 @@ class FileUpload {
 	 *
 	 * @param string $isImage
 	 * @param string $category
+	 * @param string|null $type
 	 * @return string
 	 */
-	public function getUploadDirectory($isImage, $category) {
-		return $this->webDir .
-			DIRECTORY_SEPARATOR . 'assets' .
-			DIRECTORY_SEPARATOR . 'content' .
-			DIRECTORY_SEPARATOR . ($isImage ? self::UPLOAD_IMAGE_DIRECTORY : self::UPLOAD_FILE_DIRECTORY) .
-			DIRECTORY_SEPARATOR . $category;
+	public function getUploadDirectory($isImage, $category, $type) {
+		if ($isImage) {
+			return $this->imageDir .
+				DIRECTORY_SEPARATOR . $category .
+				($type !== null ? DIRECTORY_SEPARATOR . $type : '');
+		} else {
+			return $this->fileDir .
+				DIRECTORY_SEPARATOR . $category .
+				($type !== null ? DIRECTORY_SEPARATOR . $type : '');
+		}
+		
 	}
 
 	/**
 	 * @param strinf $filename
 	 * @param bool $isImage
 	 * @param string $category
+	 * @param string|null $type
 	 * @return string
 	 */
-	private function getTargetFilepath($filename, $isImage, $category) {
-		return $this->getUploadDirectory($isImage, $category) . DIRECTORY_SEPARATOR . $filename;
+	private function getTargetFilepath($filename, $isImage, $category, $type) {
+		return $this->getUploadDirectory($isImage, $category, $type) . DIRECTORY_SEPARATOR . $filename;
 	}
 
 	/**
@@ -157,8 +172,14 @@ class FileUpload {
 			$originFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
 				$fileForUpload->getNameConventionType(),
 				$fileForUpload->getCacheFilename(),
-				$entity->getId());
-			$targetFilename = $this->getTargetFilepath($originFilename, $fileForUpload->isImage(), $fileForUpload->getCategory());
+				$entity->getId()
+			);
+			$targetFilename = $this->getTargetFilepath(
+				$originFilename,
+				$fileForUpload->isImage(),
+				$fileForUpload->getCategory(),
+				$fileForUpload->getType()
+			);
 
 			try {
 				$this->filesystem->rename($sourceFilepath, $targetFilename, true);
