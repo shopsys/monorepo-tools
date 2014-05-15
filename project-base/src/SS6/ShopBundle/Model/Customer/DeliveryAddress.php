@@ -88,4 +88,73 @@ class DeliveryAddress {
 		$this->telephone = $telephone;
 	}
 
+	/**
+	 * @param string|null $street
+	 * @param string|null $city
+	 * @param string|null $zip
+	 * @param string|null $country
+	 * @param string|null $companyName
+	 * @param string|null $contactPerson
+	 * @param string|null $telephone
+	 */
+	public function edit($street = null, $city = null, $zip = null, $country = null,
+			$companyName = null, $contactPerson = null, $telephone = null) {
+		$this->street = $street;
+		$this->city = $city;
+		$this->zip = $zip;
+		$this->country = $country;
+		$this->companyName = $companyName;
+		$this->contactPerson = $contactPerson;
+		$this->telephone = $telephone;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCompanyName() {
+		return $this->companyName;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getContactPerson() {
+		return $this->contactPerson;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getStreet() {
+		return $this->street;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getZip() {
+		return $this->zip;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getTelephone() {
+		return $this->telephone;
+	}
+
 }

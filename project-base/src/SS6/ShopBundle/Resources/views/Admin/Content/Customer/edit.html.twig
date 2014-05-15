@@ -1,0 +1,12 @@
+{% extends '@SS6Shop/Admin/Content/Customer/detail.html.twig' %}
+
+{% block title %}- Editace zákazníka - {{ user.fullName }}{% endblock %}
+{% block h1 %}Editace zákazníka - {{ user.fullName }}{% endblock %}
+
+{% block customer_id %}
+	{{ form_row(form.id, { label: 'ID'}) }}
+{% endblock %}
+
+{% block customer_save %}
+	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+{% endblock %}

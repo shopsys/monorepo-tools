@@ -81,16 +81,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
 	 */
-	public function edit($firstName, $lastName, $email,
-			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress) {
+	public function edit($firstName, $lastName, $email) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
-		$this->billingAddress = $billingAddress;
-		$this->deliveryAddress = $deliveryAddress;
 	}
 	
 	/**

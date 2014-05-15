@@ -98,4 +98,73 @@ class BillingAddress {
 		$this->telephone = $telephone;
 	}
 
+	public function edit($street = null, $city = null, $zip = null, $country = null,
+			$companyName = null, $companyNumber = null, $companyTaxNumber = null,
+			$telephone = null) {
+		$this->street = $street;
+		$this->city = $city;
+		$this->zip = $zip;
+		$this->country = $country;
+		$this->companyName = $companyName;
+		$this->companyNumber = $companyNumber;
+		$this->companyTaxNumber = $companyTaxNumber;
+		$this->telephone = $telephone;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCompanyName() {
+		return $this->companyName;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCompanyNumber() {
+		return $this->companyNumber;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCompanyTaxNumber() {
+		return $this->companyTaxNumber;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getStreet() {
+		return $this->street;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getZip() {
+		return $this->zip;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getTelephone() {
+		return $this->telephone;
+	}
+
 }

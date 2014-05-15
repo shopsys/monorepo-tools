@@ -42,9 +42,13 @@ class CustomerFormType extends AbstractType {
 			))
 			->add('password', 'repeated', array(
 				'type' => 'password',
+				'required' => (isset($options['validation_groups']) && in_array('create', $options['validation_groups'])),
 				'first_options' => array(
 					'constraints' => array(
-						new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
+						new Constraints\NotBlank(array(
+							'message' => 'Vyplňte prosím heslo',
+							'groups' => array('create'),
+						)),
 						new Constraints\Length(array('min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
 					)
 				),
