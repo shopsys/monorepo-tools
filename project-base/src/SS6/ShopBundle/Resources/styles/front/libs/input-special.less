@@ -1,0 +1,47 @@
+// spinbox
+.input-spinbox {
+}
+
+.input-spinbox .input-spinbox__button {
+	padding: 0;
+	width: @input-height-base;
+	display: inline-block;
+}
+
+.input-spinbox .input-spinbox__input {
+	display: inline-block;
+	width: 40px;
+	height: @input-height-base;
+	line-height: @input-height-base;
+	padding: 0;
+
+	border: 1px solid @input-border;
+	text-align: center;
+
+	.border-radius(@border-radius-base);
+}
+
+
+// input special sizes
+.input-minimum {
+	width: 45px;
+}
+
+.input-micro {
+	width: 50px;
+}
+
+.input-little {
+	width: 120px;
+}
+
+
+/* deactivate spinbox */
+input[type='number'] {
+	-moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
