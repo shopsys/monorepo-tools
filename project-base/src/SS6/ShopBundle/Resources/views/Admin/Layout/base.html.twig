@@ -28,6 +28,8 @@
 	<body>
 		{% block htmlBody %}{% endblock %}
 		
-		<script src="//localhost:35729/livereload.js"></script>
+		{% if app.environment == 'dev' %}
+			<script async src="//localhost:35729/livereload.js"></script>			
+		{% endif %}
 	</body>
 </html>
