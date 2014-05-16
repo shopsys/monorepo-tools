@@ -45,8 +45,8 @@ services:
   ss6.shop.customer.customer_identifier_factory:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
-  ss6.shop.customer.registration_facade:
-    class: SS6\ShopBundle\Model\Customer\RegistrationFacade
+  ss6.shop.customer.customer_edit_facade:
+    class: SS6\ShopBundle\Model\Customer\CustomerEditFacade
 
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService

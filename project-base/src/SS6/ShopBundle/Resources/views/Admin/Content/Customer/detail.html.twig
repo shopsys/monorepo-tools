@@ -1,0 +1,71 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Karta zákazníka{% endblock %}
+{% block h1 %}Karta zákazníka{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Editace zákazníka</span>
+		</li>
+		<li>
+			<a href="{{ url('admin_default_dashboard') }}">Zpět na seznam zákazníků</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-8">
+			
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<h2>Systémové údaje</h2>
+				{% block customer_id %}
+					{{ form_widget(form.id, { type: 'hidden' }) }}
+				{% endblock %}
+				{% block customer_created_at %}{% endblock %}
+
+				<h2>Osobní údaje</h2>
+				{{ form_row(form.firstName, { label: 'Jméno'}) }}
+				{{ form_row(form.lastName, { label: 'Příjmení'}) }}
+				{{ form_row(form.telephone, { label: 'Telefon'}) }}
+				{{ form_row(form.email, { label: 'Email'}) }}
+				
+				<h2>Registrovaní zák.</h2>
+				{{ form_row(form.password.first, { label: 'Heslo'}) }}
+				{{ form_row(form.password.second, { label: 'Heslo znovu'}) }}
+				{% block customer_last_login %}{% endblock %}
+
+				<h2>Firemní údaje</h2>
+				{{ form_row(form.companyName, { label: 'Firma'}) }}
+				{{ form_row(form.companyNumber, { label: 'IČ'}) }}
+				{{ form_row(form.companyTaxNumber, { label: 'DIČ'}) }}
+
+				<h2>Adresa</h2>
+				{{ form_row(form.street, { label: 'Ulice'}) }}
+				{{ form_row(form.city, { label: 'Město'}) }}
+				{{ form_row(form.zip, { label: 'PSČ'}) }}
+				{{ form_row(form.country, { label: 'Stát'}) }}
+
+				<h2>Doručovací adresa</h2>
+				{{ form_row(form.deliveryCompanyName, { label: 'Firma'}) }}
+				{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'}) }}
+				{{ form_row(form.deliveryTelephone, { label: 'Telefon'}) }}
+				{{ form_row(form.deliveryStreet, { label: 'Ulice'}) }}
+				{{ form_row(form.deliveryCity, { label: 'Město'}) }}
+				{{ form_row(form.deliveryZip, { label: 'PSČ'}) }}
+				{{ form_row(form.deliveryCountry, { label: 'Stát'}) }}
+
+				{% block customer_save %}{% endblock %}
+				<a href="{{ url('admin_default_dashboard') }}" class="btn btn-default">Zpět na přehled</a>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+
+
+		
+{% endblock %}

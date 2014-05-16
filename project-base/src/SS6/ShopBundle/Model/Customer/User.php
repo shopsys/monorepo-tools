@@ -48,16 +48,46 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @var DateTime 
 	 */
 	protected $lastActivity;
-	
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\BillingAddress
+	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\BillingAddress")
+	 */
+	protected $billingAddress;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\DeliveryAddress")
+	 */
+	protected $deliveryAddress;
+
+	/**
+	 * @var \DateTime
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $createdAt;
+
+	/**
+	 * @var \DateTime|null
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	protected $lastLogin;
+
 	/**
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
 	 */
-	public function __construct($firstName, $lastName, $email) {
+	public function __construct($firstName, $lastName, $email,
+			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
+		$this->billingAddress = $billingAddress;
+		$this->deliveryAddress = $deliveryAddress;
+		$this->createdAt = new DateTime();
 	}
 
 	/**
@@ -107,6 +137,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
+	 * @param DateTime|null $lastLogin
+	 */
+	public function setLastLogin($lastLogin) {
+		$this->lastLogin = $lastLogin;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getLastName() {
@@ -139,6 +176,34 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function getFullName() {
 		return $this->firstName . ' ' . $this->lastName;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
+	 */
+	public function getBillingAddress() {
+		return $this->billingAddress;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 */
+	public function getDeliveryAddress() {
+		return $this->deliveryAddress;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getCreatedAt() {
+		return $this->createdAt;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getLastLogin() {
+		return $this->lastLogin;
 	}
 
 	/**
