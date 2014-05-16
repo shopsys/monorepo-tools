@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItemAbstract;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -47,7 +48,7 @@ class Order {
 	private $createdOn;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract[]
 	 *
 	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Order\Item\OrderItemAbstract", mappedBy="order", orphanRemoval=true)
 	 */
@@ -66,6 +67,20 @@ class Order {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
 	 */
 	private $payment;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 */
+	private $totalPrice;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 */
+	private $totalProductPrice;
 
 	/**
 	 * @var string
@@ -255,6 +270,7 @@ class Order {
 		if (!$this->items->contains($item)) {
 			$this->items->add($item);
 		}
+		$this->recalcTotalPrices();
 	}
 
 	/**
@@ -262,6 +278,7 @@ class Order {
 	 */
 	public function removeItem(OrderItemAbstract $item) {
 		$this->items->removeElement($item);
+		$this->recalcTotalPrices();
 	}
 
 	/**
@@ -280,5 +297,34 @@ class Order {
 
 	public function detachCustomer() {
 		$this->customer = null;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTotalPrice() {
+		return $this->totalPrice;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTotalProductPrice() {
+		return $this->totalProductPrice;
+	}
+
+	public function recalcTotalPrices() {
+		$totalPrice = 0;
+		$totalProductPrice = 0;
+		foreach ($this->items as $item) {
+			/* @var $item \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract */
+			$totalPrice += $item->getTotalPrice();
+			
+			if ($item instanceof OrderProduct) {
+				$totalProductPrice += $item->getTotalPrice();
+			}
+		}
+		$this->totalPrice = $totalPrice;
+		$this->totalProductPrice = $totalProductPrice;
 	}
 }

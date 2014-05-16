@@ -59,11 +59,39 @@ abstract class OrderItemAbstract {
 	 * @param int $quantity
 	 */
 	public function __construct(Order $order, $name, $price, $quantity) {
-		$this->order = $order;
-		$order->addItem($this);
+		$this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
 		$this->name = $name;
 		$this->price = $price;
 		$this->quantity = $quantity;
+		$this->order->addItem($this); // call after setting attrs for recalc total price
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPrice() {
+		return $this->price;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getQuantity() {
+		return $this->quantity;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTotalPrice() {
+		return $this->price * $this->quantity;
 	}
 
 }
