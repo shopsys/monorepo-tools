@@ -30,7 +30,7 @@ class UserRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Customer\User
-	 * @throws PaymentNotFoundException
+	 * @throws \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException
 	 */
 	public function getUserById($id) {
 		$criteria = array('id' => $id);
