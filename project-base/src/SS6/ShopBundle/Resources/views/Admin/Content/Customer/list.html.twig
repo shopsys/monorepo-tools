@@ -1,0 +1,23 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Seznam zákazníků{% endblock %}
+{% block h1 %}Seznam zákazníků{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Seznam zákazníků</span>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-8">
+		
+			<a href="{{ url('admin_customer_new') }}" class="btn btn-primary mb-1">Vytvořit nového zákzníka</a>
+			
+			{{ grid(grid, '@SS6Shop/Admin/Content/Customer/listGrid.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

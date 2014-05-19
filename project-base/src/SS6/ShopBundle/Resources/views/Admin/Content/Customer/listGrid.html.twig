@@ -1,0 +1,9 @@
+{% extends '@SS6Shop/Admin/Grid/grid.html.twig' %}
+
+{% block grid_column_name_cell %}
+	<a href="{{ url('admin_customer_edit', { id: row.field('id') }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_no_data %}
+	Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit.
+{% endblock %}
