@@ -352,6 +352,7 @@ class Order {
 	 * @return string
 	 */
 	public function getTotalPrice() {
+		$this->recalcTotalPrices();
 		return $this->totalPrice;
 	}
 

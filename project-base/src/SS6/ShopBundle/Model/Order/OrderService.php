@@ -45,7 +45,8 @@ class OrderService {
 				$orderItemData->getQuantity()
 			);
 		}
-		
+
+		$order->recalcTotalPrices();
 	}
 
 	/**
