@@ -198,4 +198,13 @@ class CustomerEditFacade {
 		return $user;
 	}
 
+	/**
+	 * @param int $userId
+	 */
+	public function delete($userId) {
+		$user = $this->userRepository->getUserById($userId);
+		$this->em->remove($user);
+		$this->em->flush();
+	}
+
 }
