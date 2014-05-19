@@ -75,6 +75,12 @@ services:
 
   ss6.shop.order.order_facade:
     class: SS6\ShopBundle\Model\Order\OrderFacade
+    
+  ss6.shop.order.order_repository:
+    class: SS6\ShopBundle\Model\Order\OrderRepository
+    
+  ss6.shop.order.order_service:
+    class: SS6\ShopBundle\Model\Order\OrderService
 
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
