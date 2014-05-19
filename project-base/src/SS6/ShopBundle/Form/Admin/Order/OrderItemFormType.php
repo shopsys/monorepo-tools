@@ -28,19 +28,22 @@ class OrderItemFormType extends AbstractType {
 			->add('name', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název')),
-				)
+				),
+				'error_bubbling' => true,
 			))
 			->add('price', 'money', array(
 				'currency' => false,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím cenu')),
-				)
+				),
+				'error_bubbling' => true,
 			))
 			->add('quantity', 'integer', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím množství')),
 					new Constraints\GreaterThan(array('value' => 0, 'message' => 'Množství musí být větší než 0')),
-				)
+				),
+				'error_bubbling' => true,
 			));
 	}
 

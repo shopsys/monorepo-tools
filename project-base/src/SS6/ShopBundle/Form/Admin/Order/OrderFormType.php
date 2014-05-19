@@ -77,6 +77,7 @@ class OrderFormType extends AbstractType {
 			->add('note', 'textarea', array('required' => false))
 			->add('items', 'collection', array(
 				'type' => new OrderItemFormType(),
+				'error_bubbling' => false,
 				))
 			->add('submit', 'submit');
 	}

@@ -67,11 +67,12 @@
 					</fieldset>
 				</div>
 					
-				<div class="info-box">
+				<div class="info-box form-group">
 					<h2 class="mt-0">Položky objednávky</h2>
 					<fieldset>
 						{% if form.items is not empty %}
 							<div class="table-responsive">
+								{{ form_errors(form.items) }}
 								<table class="table table-striped table-hover">
 									<thead>
 										<tr>
