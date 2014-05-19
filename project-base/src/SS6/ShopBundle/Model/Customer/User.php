@@ -11,7 +11,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="users")
+ * @ORM\Table(
+ *   name="users",
+ *   indexes={
+ *     @ORM\Index(columns={"email"})
+ *   }
+ * )
  * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserRepository")
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable {

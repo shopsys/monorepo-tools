@@ -12,7 +12,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="administrators")
+ * @ORM\Table(
+ *   name="administrators",
+ *   indexes={
+ *     @ORM\Index(columns={"username"})
+ *   }
+ * )
  * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Administrator\AdministratorRepository")
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
