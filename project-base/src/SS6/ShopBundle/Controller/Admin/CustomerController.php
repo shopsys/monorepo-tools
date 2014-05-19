@@ -88,7 +88,7 @@ class CustomerController extends Controller {
 					$customerData['deliveryCountry']);
 
 				$flashMessage->addSuccess('Byl upraven zákazník ' . $user->getFullName());
-				return $this->redirect($this->generateUrl('admin_default_dashboard'));
+				return $this->redirect($this->generateUrl('admin_customer_list'));
 			} elseif ($form->isSubmitted()) {
 				$user = $this->get('ss6.shop.customer.user_repository')->getUserById($id);
 			}
@@ -226,10 +226,12 @@ class CustomerController extends Controller {
 					$customerData['deliveryCountry']);
 
 				$flashMessage->addSuccess('Byl vytvořen zákazník ' . $user->getFullName());
-				return $this->redirect($this->generateUrl('admin_default_dashboard'));
+				return $this->redirect($this->generateUrl('admin_customer_list'));
 			} elseif ($form->isSubmitted()) {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
+		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+			$flashMessage->addError('V databázi se již nachází zákazník s emailem ' . $e->getEmail());
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
