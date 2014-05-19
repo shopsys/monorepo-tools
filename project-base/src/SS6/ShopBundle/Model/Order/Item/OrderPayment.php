@@ -3,14 +3,14 @@
 namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Order\Item\OrderItemAbstract;
+use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Payment\Payment;
 
 /**
  * @ORM\Entity
  */
-class OrderPayment extends OrderItemAbstract {
+class OrderPayment extends OrderItem {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Payment\Payment

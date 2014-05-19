@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\Item\OrderItemAbstract;
+use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -14,6 +14,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 /**
  * @ORM\Table(name="orders")
  * @ORM\Entity
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Order {
 
@@ -48,9 +49,9 @@ class Order {
 	private $createdOn;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract[]
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Order\Item\OrderItemAbstract", mappedBy="order", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Order\Item\OrderItem", mappedBy="order", orphanRemoval=true)
 	 */
 	private $items;
 
@@ -264,9 +265,57 @@ class Order {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract $item
+	 * @param string $firstName
+	 * @param string $lastName
+	 * @param string $email
+	 * @param string $telephone
+	 * @param string $street
+	 * @param string $city
+	 * @param string $zip
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @param string|null $companyName
+	 * @param string|null $companyNumber
+	 * @param string|null $companyTaxNumber
+	 * @param string|null $deliveryFirstName
+	 * @param string|null $deliveryLastName
+	 * @param string|null $deliveryCompanyName
+	 * @param string|null $deliveryTelephone
+	 * @param string|null $deliveryStreet
+	 * @param string|null $deliveryCity
+	 * @param string|null $deliveryZip
+	 * @param string|null $note
 	 */
-	public function addItem(OrderItemAbstract $item) {
+	public function edit($firstName, $lastName, $email, $telephone, $street, $city, $zip, $user,
+			$companyName, $companyNumber, $companyTaxNumber,
+			$deliveryFirstName, $deliveryLastName, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
+			$deliveryCity, $deliveryZip, $note) {
+		$this->customer = $user;
+		//$this->transport = $transport;
+		//$this->payment = $payment;
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
+		$this->email = $email;
+		$this->telephone = $telephone;
+		$this->companyName = $companyName;
+		$this->companyNumber = $companyNumber;
+		$this->companyTaxNumber = $companyTaxNumber;
+		$this->street = $street;
+		$this->city = $city;
+		$this->zip = $zip;
+		$this->deliveryFirstName = $deliveryFirstName;
+		$this->deliveryLastName = $deliveryLastName;
+		$this->deliveryCompanyName = $deliveryCompanyName;
+		$this->deliveryTelephone = $deliveryTelephone;
+		$this->deliveryStreet = $deliveryStreet;
+		$this->deliveryCity = $deliveryCity;
+		$this->deliveryZip = $deliveryZip;
+		$this->note = $note;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $item
+	 */
+	public function addItem(OrderItem $item) {
 		if (!$this->items->contains($item)) {
 			$this->items->add($item);
 		}
@@ -274,9 +323,9 @@ class Order {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract $item
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $item
 	 */
-	public function removeItem(OrderItemAbstract $item) {
+	public function removeItem(OrderItem $item) {
 		$this->items->removeElement($item);
 		$this->recalcTotalPrices();
 	}
@@ -310,6 +359,7 @@ class Order {
 	 * @return string
 	 */
 	public function getTotalProductPrice() {
+		$this->recalcTotalPrices();
 		return $this->totalProductPrice;
 	}
 
@@ -317,7 +367,7 @@ class Order {
 		$totalPrice = 0;
 		$totalProductPrice = 0;
 		foreach ($this->items as $item) {
-			/* @var $item \SS6\ShopBundle\Model\Order\Item\OrderItemAbstract */
+			/* @var $item \SS6\ShopBundle\Model\Order\Item\OrderItem */
 			$totalPrice += $item->getTotalPrice();
 			
 			if ($item instanceof OrderProduct) {
@@ -327,4 +377,181 @@ class Order {
 		$this->totalPrice = $totalPrice;
 		$this->totalProductPrice = $totalProductPrice;
 	}
+
+	/**
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNumber() {
+		return $this->number;
+	}
+
+	/**
+	 * @return SS6\ShopBundle\Model\Customer\User
+	 */
+	public function getCustomer() {
+		return $this->customer;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getCreatedOn() {
+		return $this->createdOn;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 */
+	public function getItems() {
+		return $this->items;
+	}
+
+	/**
+	 *
+	 * @param int $orderItemId
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem
+	 * @throws \SS6\ShopBundle\Model\Order\Item\Exception\OrdetItemNotFoundException
+	 */
+	public function getItemById($orderItemId) {
+		foreach ($this->getItems() as $orderItem) {
+			if ($orderItem->getId() === $orderItemId) {
+				return $orderItem;
+			}
+		}
+		throw new \SS6\ShopBundle\Model\Order\Item\Exception\OrdetItemNotFoundException(array('id' => $orderItemId));
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFirstName() {
+		return $this->firstName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLastName() {
+		return $this->lastName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEmail() {
+		return $this->email;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTelephone() {
+		return $this->telephone;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCompanyName() {
+		return $this->companyName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCompanyNumber() {
+		return $this->companyNumber;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCompanyTaxNumber() {
+		return $this->companyTaxNumber;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getStreet() {
+		return $this->street;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getZip() {
+		return $this->zip;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryFirstName() {
+		return $this->deliveryFirstName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryLastName() {
+		return $this->deliveryLastName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryCompanyName() {
+		return $this->deliveryCompanyName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryTelephone() {
+		return $this->deliveryTelephone;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryStreet() {
+		return $this->deliveryStreet;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryCity() {
+		return $this->deliveryCity;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryZip() {
+		return $this->deliveryZip;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNote() {
+		return $this->note;
+	}
+
 }

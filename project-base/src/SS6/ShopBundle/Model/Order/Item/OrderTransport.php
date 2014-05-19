@@ -3,14 +3,14 @@
 namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Order\Item\OrderItemAbstract;
+use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Entity
  */
-class OrderTransport extends OrderItemAbstract {
+class OrderTransport extends OrderItem {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\Transport

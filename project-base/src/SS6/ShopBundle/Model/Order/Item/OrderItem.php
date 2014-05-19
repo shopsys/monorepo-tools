@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Order\Order;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"payment" = "OrderPayment", "product" = "OrderProduct", "transport" = "OrderTransport"})
  */
-abstract class OrderItemAbstract {
+abstract class OrderItem {
 
 	/**
 	 * @var integer
@@ -67,6 +67,13 @@ abstract class OrderItemAbstract {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -94,4 +101,15 @@ abstract class OrderItemAbstract {
 		return $this->price * $this->quantity;
 	}
 
+	/**
+	 * @param string $name
+	 * @param string $price
+	 * @param int $quantity
+	 */
+	public function edit($name, $price, $quantity) {
+		$this->name = $name;
+		$this->price = $price;
+		$this->quantity = $quantity;
+	}
+	
 }
