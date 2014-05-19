@@ -34,7 +34,7 @@ class RegistrationService {
 			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
 			if ($userByEmail->getEmail() === $email) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException('User with email ' . $email . ' already exists.');
+				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
 			}
 		}
 
@@ -57,7 +57,7 @@ class RegistrationService {
 			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
 			if ($userByEmail->getEmail() === $email && $user !== $userByEmail) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException('User with email ' . $email . ' already exists.');
+				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
 			}
 		}
 

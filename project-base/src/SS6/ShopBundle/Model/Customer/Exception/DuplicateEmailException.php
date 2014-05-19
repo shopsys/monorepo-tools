@@ -5,11 +5,26 @@ namespace SS6\ShopBundle\Model\Customer\Exception;
 use Exception;
 
 class DuplicateEmailException extends Exception implements CustomerException {
+
 	/**
-	 * @param string $message
+	 * @var string
+	 */
+	private $email;
+
+	/**
+	 * @param string $email
 	 * @param Exception $previous
 	 */
-	public function __construct($message = null, $previous = null) {
-		parent::__construct($message, 0, $previous);
+	public function __construct($email, $previous = null) {
+		$this->email = $email;
+
+		parent::__construct('User with email ' . $this->email . ' already exists.', 0, $previous);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEmail() {
+		return $this->email;
 	}
 }
