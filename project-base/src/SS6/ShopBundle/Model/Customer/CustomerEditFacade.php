@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
+use SS6\ShopBundle\Model\Order\OrderRepository;
+use SS6\ShopBundle\Model\Order\OrderService;
 
 class CustomerEditFacade {
 
@@ -13,9 +15,19 @@ class CustomerEditFacade {
 	private $em;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
+	 */
+	private $orderRepository;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 */
+	private $orderService;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\RegistrationService
@@ -24,13 +36,20 @@ class CustomerEditFacade {
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
+	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
 	 * @param \SS6\ShopBundle\Model\Customer\RegistrationService $registrationService
 	 */
-	public function __construct(EntityManager $em, UserRepository $userRepository,
+	public function __construct(EntityManager $em,
+			OrderRepository $orderRepository,
+			UserRepository $userRepository,
+			OrderService $orderService,
 			RegistrationService $registrationService) {
 		$this->em = $em;
+		$this->orderRepository = $orderRepository;
 		$this->userRepository = $userRepository;
+		$this->orderService = $orderService;
 		$this->registrationService = $registrationService;
 	}
 
@@ -203,6 +222,10 @@ class CustomerEditFacade {
 	 */
 	public function delete($userId) {
 		$user = $this->userRepository->getUserById($userId);
+
+		$orders = $this->orderRepository->findByUserId($userId);
+		$this->orderService->detachCustomer($orders);
+
 		$this->em->remove($user);
 		$this->em->flush();
 	}

@@ -277,4 +277,8 @@ class Order {
 	public function getTransport() {
 		return $this->transport;
 	}
+
+	public function detachCustomer() {
+		$this->customer = null;
+	}
 }
