@@ -8,6 +8,16 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 class OrderStatusService {
 
 	/**
+	 * @param string $name
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function create($name) {
+		$orderStatus = new OrderStatus($name);
+
+		return $orderStatus;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @throws Exception\DeletionForbiddenOrderStatusException
 	 */

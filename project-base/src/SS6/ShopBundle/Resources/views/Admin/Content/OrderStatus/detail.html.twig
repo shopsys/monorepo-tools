@@ -1,0 +1,34 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Stav objednávek{% endblock %}
+{% block h1 %}Stav objednávek{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<a href="{{ url('admin_order_list') }}">Přehled objednávek</a>
+		</li>
+		<li>
+			<a href="{{ url('admin_orderstatus_list') }}">Přehled stavů objednávek</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-8">
+			
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+				
+				{{ form_widget(form.id, { type: 'hidden' }) }}
+				{{ form_row(form.name, { label: 'Název' }) }}
+				
+				{% block order_status_save %}{% endblock %}
+				<a href="{{ url('admin_orderstatus_list') }}" class="btn btn-default">Zpět na přehled</a>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+{% endblock %}

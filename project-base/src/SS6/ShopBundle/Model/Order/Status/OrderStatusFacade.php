@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 
@@ -22,11 +23,31 @@ class OrderStatusFacade {
 	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusService
 	 */
 	private $orderStatusService;
-		
-	public function __construct(EntityManager $em, OrderStatusRepository $orderStatusRepository, OrderStatusService $orderStatusService) {
+
+	/**
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusService $orderStatusService
+	 */
+	public function __construct(EntityManager $em, OrderStatusRepository $orderStatusRepository, 
+		OrderStatusService $orderStatusService
+	) {
 		$this->em = $em;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusService = $orderStatusService;
+	}
+
+	/**
+	 *
+	 * @param \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData $orderStatusFormData
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function create(OrderStatusFormData $orderStatusFormData) {
+		$orderStatus = $this->orderStatusService->create($orderStatusFormData->getName());
+		$this->em->persist($orderStatus);
+		$this->em->flush();
+
+		return $orderStatus;
 	}
 
 	/**

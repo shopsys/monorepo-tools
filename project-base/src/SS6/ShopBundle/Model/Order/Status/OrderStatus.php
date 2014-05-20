@@ -22,7 +22,7 @@ class OrderStatus {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $name;
 

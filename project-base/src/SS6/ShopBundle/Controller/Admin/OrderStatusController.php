@@ -5,6 +5,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
+use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,12 +14,40 @@ use Symfony\Component\HttpFoundation\Request;
 class OrderStatusController extends Controller {
 
 	/**
-	 * @Route("/order_status/new/{id}", requirements={"id" = "\d+"})
+	 * @Route("/order_status/new/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $id
 	 */
-	public function newAction(Request $request, $id) {
+	public function newAction(Request $request) {
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 
+		$form = $this->createForm(new OrderStatusFormType());
+
+		try {
+			$orderStatusData = new OrderStatusFormData();
+
+			$form->setData($orderStatusData);
+			$form->handleRequest($request);
+
+			if ($form->isValid()) {
+				$orderStatusData = $form->getData();
+				$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
+				/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
+
+				$orderStatus = $orderStatusFacade->create($orderStatusData);
+
+				$flashMessage->addSuccess('Byl vytvořen stav objednávek ' . $orderStatus->getName());
+				return $this->redirect($this->generateUrl('admin_orderstatus_list'));
+			} elseif ($form->isSubmitted()) {
+				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			}
+		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
+			throw $this->createNotFoundException($e->getMessage(), $e);
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/OrderStatus/new.html.twig', array(
+			'form' => $form->createView(),
+		));
 	}
 
 	/**
