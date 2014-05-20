@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -83,8 +82,6 @@ class Product {
 	 * @var int|null
 	 *
 	 * @ORM\Column(type="integer", nullable=true)
-	 * @Assert\Type(type="integer")
-	 * @Assert\GreaterThanOrEqual(value=0)
 	 */
 	private $stockQuantity;
 	
