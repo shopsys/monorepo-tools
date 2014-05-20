@@ -2,10 +2,15 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use APY\DataGridBundle\Grid\Action\RowAction;
+use APY\DataGridBundle\Grid\Column\TextColumn;
+use APY\DataGridBundle\Grid\Source\Entity;
+use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
+use SS6\ShopBundle\Model\Order\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -97,5 +102,91 @@ class OrderController extends Controller {
 			'form' => $form->createView(),
 			'order' => $order,
 		));
+	}
+
+	/**
+	 * @Route("/order/list/")
+	 */
+	public function listAction() {
+		$source = new Entity(Order::class);
+
+		$tableAlias = $source->getTableAlias();
+		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias) {
+			$queryBuilder
+				->addSelect(
+					'(CASE WHEN ' . $tableAlias . '.companyName IS NOT NULL
+							THEN ' . $tableAlias . '.companyName
+							ELSE CONCAT(' . $tableAlias . ".firstName, ' ', " . $tableAlias . '.lastName)
+						END) AS name'
+				)
+				->add('where', $tableAlias . '.deleted = :deleted')
+				->setParameter('deleted', false);
+		});
+
+		$grid = $this->createGrid();
+		$grid->setSource($source);
+
+		$grid->getColumns()->addColumn(new TextColumn(array(
+			'id' => 'name',
+			'type' => 'text',
+		)));
+
+		$grid->setVisibleColumns(array('number', 'createdOn', 'name', 'totalPrice'));
+		$grid->setColumnsOrder(array('number', 'createdOn', 'name', 'totalPrice'));
+		$grid->setDefaultOrder('createdOn', 'desc');
+		$grid->getColumn('number')->setTitle('Č. objednávky');
+		$grid->getColumn('createdOn')->setTitle('Vytvořena');
+		$grid->getColumn('name')->setTitle('Zákazníka');
+		$grid->getColumn('totalPrice')->setTitle('Celková cena');
+
+		return $grid->getGridResponse('@SS6Shop/Admin/Content/Order/list.html.twig');
+	}
+
+	/**
+	 * @return \APY\DataGridBundle\Grid\Grid
+	 */
+	private function createGrid() {
+		$grid = $this->get('grid');
+		/* @var $grid \APY\DataGridBundle\Grid\Grid */
+
+		$grid->hideFilters();
+		$grid->setActionsColumnTitle('Akce');
+		$grid->setLimits(array(20));
+		$grid->setDefaultLimit(20);
+
+		$detailRowAction = new RowAction('Upravit', 'admin_order_edit');
+		$detailRowAction->setRouteParameters(array('id'));
+		$grid->addRowAction($detailRowAction);
+
+		$deleteRowAction = new RowAction('Smazat', 'admin_order_delete', true);
+		$deleteRowAction->setConfirmMessage('Opravdu si přejete objednávku smazat?');
+		$deleteRowAction->setRouteParameters(array('id'));
+		$grid->addRowAction($deleteRowAction);
+
+		return $grid;
+	}
+
+	/**
+	 * @Route("/order/delete/{id}", requirements={"id" = "\d+"})
+	 * @param int $id
+	 */
+	public function deleteAction($id) {
+		$flashMessage = $this->get('ss6.shop.flash_message.admin');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$orderRepository = $this->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+
+		try {
+			$orderNumber = $orderRepository->getById($id)->getNumber();
+			$orderFacade = $this->get('ss6.shop.order.order_facade');
+			/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+			$orderFacade->deleteById($id);
+
+			$flashMessage->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
+		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {
+			throw $this->createNotFoundException($e->getMessage(), $e);
+		}
+
+		return $this->redirect($this->generateUrl('admin_order_list'));
 	}
 }

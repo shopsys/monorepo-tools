@@ -210,6 +210,13 @@ class Order {
 	private $note;
 
 	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $deleted;
+
+	/**
 	 *
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
@@ -262,6 +269,7 @@ class Order {
 		$this->deliveryCity = $deliveryCity;
 		$this->deliveryZip = $deliveryZip;
 		$this->note = $note;
+		$this->deleted = false;
 	}
 
 	/**
@@ -375,6 +383,20 @@ class Order {
 		}
 		$this->totalPrice = $totalPrice;
 		$this->totalProductPrice = $totalProductPrice;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isDeleted() {
+		return $this->deleted;
+	}
+
+	/**
+	 * @param boolean $deleted
+	 */
+	public function markAsDeleted() {
+		$this->deleted = true;
 	}
 
 	/**

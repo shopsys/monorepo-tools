@@ -1,0 +1,20 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Přehled objednávek{% endblock %}
+{% block h1 %}Přehled objednávek{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Přehled objednávek</span>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-8">
+			{{ grid(grid, '@SS6Shop/Admin/Content/Order/listGrid.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

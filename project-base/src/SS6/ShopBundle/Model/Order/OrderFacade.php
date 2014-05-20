@@ -156,4 +156,13 @@ class OrderFacade {
 		$this->em->flush();
 		return $order;
 	}
+
+	/**
+	 * @param int $orderId
+	 */
+	public function deleteById($orderId) {
+		$order = $this->orderRepository->getById($orderId);
+		$order->markAsDeleted();
+		$this->em->flush();
+	}
 }
