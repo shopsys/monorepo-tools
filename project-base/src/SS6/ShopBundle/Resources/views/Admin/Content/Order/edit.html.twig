@@ -3,6 +3,17 @@
 {% block title %}Objednávka č. {{ order.number }}{% endblock %}
 {% block h1 %}Objednávka č. {{ order.number }}{% endblock %}
 
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<a href="{{ url('admin_order_list') }}">Přehled objednávek</a>
+		</li>
+		<li>
+			<a href="{{ url('admin_orderstatus_list') }}">Přehled stavů objednávek</a>
+		</li>
+	</ul>
+{% endblock %}
+
 {% block mainContent %}
 	<div class="row">
 		<div class="col-xs-12 col-lg-8">
