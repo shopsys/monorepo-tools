@@ -153,6 +153,7 @@ class CustomerController extends Controller {
 		$grid->getColumn('city')->setTitle('Město');
 		$grid->getColumn('telephone')->setTitle('Telefon');
 		$grid->getColumn('email')->setTitle('Email');
+		$grid->setDefaultOrder('name', 'asc');
 
 		return $grid->getGridResponse('@SS6Shop/Admin/Content/Customer/list.html.twig');
 	}
