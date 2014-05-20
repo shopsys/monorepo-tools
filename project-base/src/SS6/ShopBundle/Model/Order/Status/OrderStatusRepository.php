@@ -6,6 +6,10 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository {
+
+	const STATUS_NEW = 1;
+	const STATUS_IN_PROGRESS = 2;
+	const STATUS_DONE = 3;
 	
 	/** 
 	 * @var \Doctrine\ORM\EntityRepository

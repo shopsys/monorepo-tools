@@ -28,9 +28,11 @@ class OrderStatus {
 
 	/**
 	 * @param string $name
+	 * @param int $id
 	 */
-	public function __construct($name) {
+	public function __construct($name, $id = null) {
 		$this->name = $name;
+		$this->id = $id;
 	}
 
 	/**
