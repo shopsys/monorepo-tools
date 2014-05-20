@@ -1,0 +1,38 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Článek{% endblock %}
+{% block h1 %}Článek{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<span>Editace článku</span>
+		</li>
+		<li>
+			<a href="{{ url('admin_article_list') }}">Zpět na přehled článků</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-8">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				{% block article_id %}
+					{{ form_widget(form.id, { type: 'hidden' }) }}
+				{% endblock %}
+				{% block article_url %}{% endblock %}
+				
+				{{ form_row(form.name, { label: 'Název'}) }}
+				{{ form_row(form.text, { label: 'Text'}) }}
+				
+				{% block article_save %}{% endblock %}
+				<a href="{{ url('admin_article_list') }}" class="btn btn-default">Zpět na přehled</a>
+			{{ form_end(form) }}
+		</div>
+		
+	</div>
+{% endblock %}
