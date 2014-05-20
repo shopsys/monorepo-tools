@@ -39,7 +39,6 @@ class PaymentEditFacade {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function edit(Payment $payment) {
-		$this->em->persist($payment);
 		$this->em->flush();
 	}
 	

@@ -36,12 +36,10 @@ class LoginListener {
 
 		if ($user instanceof User) {
 			$user->setLastLogin(new DateTime());
-			$this->em->persist($user);
 		}
 
 		if ($user instanceof UniqueLoginInterface) {
 			$user->setLoginToken(uniqid());
-			$this->em->persist($user);
 		}
 
 		$this->em->flush();

@@ -77,7 +77,6 @@ class ProductEditFacade {
 			$productData['stockQuantity'],
 			$productData['hidden']);
 
-		$this->em->persist($product);
 		$this->em->flush();
 		
 		$this->productVisibilityRepository->refreshProductsVisibility();

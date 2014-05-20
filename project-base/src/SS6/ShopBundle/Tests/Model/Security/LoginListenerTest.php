@@ -12,7 +12,6 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 			->setMethods(array('__construct', 'persist', 'flush'))
 			->disableOriginalConstructor()
 			->getMock();
-		$emMock->expects($this->atLeastOnce())->method('persist');
 		$emMock->expects($this->once())->method('flush');
 		
 		$userMock = $this->getMock('SS6\ShopBundle\Model\Security\UniqueLoginInterface');
@@ -36,7 +35,6 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 			->setMethods(array('__construct', 'persist', 'flush'))
 			->disableOriginalConstructor()
 			->getMock();
-		$emMock->expects($this->any())->method('persist');
 		$emMock->expects($this->any())->method('flush');
 		
 		$userMock = $this->getMock('SS6\ShopBundle\Model\Security\TimelimitLoginInterface');

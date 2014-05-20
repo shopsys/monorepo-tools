@@ -47,7 +47,6 @@ class TransportEditFacade {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function edit(Transport $transport) {
-		$this->em->persist($transport);
 		$this->em->flush();
 	}
 	

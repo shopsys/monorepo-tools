@@ -51,7 +51,7 @@ class OrderNumberSequenceRepository {
 			}
 
 			$orderNumberSequence->setNumber($requestedNumber);
-			$this->em->persist($orderNumberSequence);
+
 			$this->em->flush($orderNumberSequence);
 			$this->em->commit();
 		} catch (Exception $e) {
