@@ -19,6 +19,16 @@ class OrderStatusService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param string $name
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function edit(OrderStatus $orderStatus, $name) {
+		$orderStatus->edit($name);
+		return $orderStatus;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @throws Exception\DeletionForbiddenOrderStatusException
 	 */
 	public function delete(OrderStatus $orderStatus) {

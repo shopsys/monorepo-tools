@@ -52,6 +52,19 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
+	 * @param \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData $orderStatusFormData
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function edit($orderStatusId, OrderStatusFormData $orderStatusFormData) {
+		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
+		$this->orderStatusService->edit($orderStatus, $orderStatusFormData->getName());
+		$this->em->flush();
+
+		return $orderStatus;
+	}
+
+	/**
+	 * @param int $orderStatusId
 	 */
 	public function deleteById($orderStatusId) {
 		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
