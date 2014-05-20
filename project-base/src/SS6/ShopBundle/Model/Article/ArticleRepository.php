@@ -27,6 +27,13 @@ class ArticleRepository {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Article\Article[]
+	 */
+	public function getArticlesForMenu() {
+		return $this->entityRepository->findAll();
+	}
+
+	/**
 	 * @param int $articleId
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 * @throws ArticleNotFoundException

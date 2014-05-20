@@ -24,4 +24,15 @@ class ArticleController extends Controller {
 		));
 	}
 
+	public function menuAction() {
+		$articleRepository = $this->get('ss6.shop.article.article_repository');
+		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
+
+		$articles = $articleRepository->getArticlesForMenu();
+
+		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', array(
+			'articles' => $articles,
+		));
+	}
+
 }
