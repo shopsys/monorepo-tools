@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderFacade {
 
@@ -47,13 +48,19 @@ class OrderFacade {
 	private $userRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
+	 */
+	private $orderStatusRepository;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
 	 */
 	public function __construct(EntityManager $em, OrderNumberSequenceRepository $orderNumberSequenceRepository,
-		Cart $cart, OrderRepository $orderRepository, OrderService $orderService, UserRepository $userRepository
+		Cart $cart, OrderRepository $orderRepository, OrderService $orderService, UserRepository $userRepository,
+		OrderStatusRepository $orderStatusRepository
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -61,6 +68,7 @@ class OrderFacade {
 		$this->orderRepository = $orderRepository;
 		$this->orderService = $orderService;
 		$this->userRepository = $userRepository;
+		$this->orderStatusRepository = $orderStatusRepository;
 	}
 
 	/**
@@ -68,10 +76,13 @@ class OrderFacade {
 	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
 	 */
 	public function createOrder(FrontOrderFormData $orderFormData, User $user = null) {
+		$orderStatus = $this->orderStatusRepository->getForNewOrder();
+
 		$order = new Order(
 			$this->orderNumberSequenceRepository->getNextNumber(),
 			$orderFormData->getTransport(),
 			$orderFormData->getPayment(),
+			$orderStatus,
 			$orderFormData->getFirstName(),
 			$orderFormData->getLastName(),
 			$orderFormData->getEmail(),

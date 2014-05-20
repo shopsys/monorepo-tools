@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\TestsDb\Model\Order\Item;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -15,6 +16,7 @@ class OrderItemTest extends PHPUnit_Framework_TestCase {
 		$number = '123456';
 		$transport = new Transport('TransportName', 0);
 		$payment = new Payment('PaymentName', 0);
+		$orderStatus = new OrderStatus('StatusName');
 		$firstName = 'FirstName';
 		$lastName = 'LastName';
 		$email = 'email@example.com';
@@ -22,7 +24,19 @@ class OrderItemTest extends PHPUnit_Framework_TestCase {
 		$street = 'Street';
 		$city = 'City';
 		$zip = '12345';
-		$order = new Order($number, $transport, $payment, $firstName, $lastName, $email, $telephone, $street, $city, $zip);
+		$order = new Order(
+			$number,
+			$transport,
+			$payment,
+			$orderStatus,
+			$firstName,
+			$lastName,
+			$email,
+			$telephone,
+			$street,
+			$city,
+			$zip
+		);
 
 		$productPrice1 = 1000;
 		$productPrice2 = 10000;

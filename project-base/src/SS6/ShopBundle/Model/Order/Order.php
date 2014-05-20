@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -70,6 +71,13 @@ class Order {
 	private $payment;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 *
+	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Order\Status\OrderStatus")
+	 */
+	private $status;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
@@ -92,7 +100,7 @@ class Order {
 
 	/**
 	 * @var string
-	 * 
+	 *
 	 * @ORM\Column(type="string", length=100)
 	 */
 	private $lastName;
@@ -217,9 +225,10 @@ class Order {
 	private $deleted;
 
 	/**
-	 *
+	 * @param string $number
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
@@ -240,8 +249,8 @@ class Order {
 	 * @param string|null $deliveryZip
 	 * @param string|null $note
 	 */
-	public function __construct($number, Transport $transport, Payment $payment, $firstName, $lastName, $email,
-			$telephone, $street, $city, $zip, User $user = null, $companyName = null,
+	public function __construct($number, Transport $transport, Payment $payment, OrderStatus $orderStatus, 
+			$firstName, $lastName, $email, $telephone, $street, $city, $zip, User $user = null, $companyName = null,
 			$companyNumber = null, $companyTaxNumber = null, $deliveryFirstName = null, $deliveryLastName = null,
 			$deliveryCompanyName = null, $deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null,
 			$deliveryZip = null, $note = null) {
@@ -251,6 +260,7 @@ class Order {
 		$this->createdOn = new DateTime();
 		$this->transport = $transport;
 		$this->payment = $payment;
+		$this->status = $orderStatus;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
@@ -350,6 +360,13 @@ class Order {
 		return $this->transport;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function getStatus() {
+		return $this->status;
+	}
+
 	public function detachCustomer() {
 		$this->customer = null;
 	}
@@ -376,7 +393,7 @@ class Order {
 		foreach ($this->items as $item) {
 			/* @var $item \SS6\ShopBundle\Model\Order\Item\OrderItem */
 			$totalPrice += $item->getTotalPrice();
-			
+
 			if ($item instanceof OrderProduct) {
 				$totalProductPrice += $item->getTotalPrice();
 			}

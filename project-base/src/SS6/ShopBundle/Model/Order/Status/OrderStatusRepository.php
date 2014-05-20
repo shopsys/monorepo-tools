@@ -52,4 +52,11 @@ class OrderStatusRepository {
 
 		return $orderStatus;
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function getForNewOrder() {
+		return $this->getById(self::STATUS_NEW);
+	}
 }
