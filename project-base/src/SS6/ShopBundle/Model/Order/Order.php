@@ -290,8 +290,6 @@ class Order {
 			$deliveryFirstName, $deliveryLastName, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
 			$deliveryCity, $deliveryZip, $note) {
 		$this->customer = $user;
-		//$this->transport = $transport;
-		//$this->payment = $payment;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
