@@ -22,6 +22,7 @@ class OrderController extends Controller {
 
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
+
 		$flow->setFormTypesData($transports, $payments);
 		$flow->bind($formData);
 
@@ -42,10 +43,10 @@ class OrderController extends Controller {
 
 				return $this->redirect($this->generateUrl('front_order_sent'));
 			}
-		} elseif ($form->isSubmitted()) {
-			if (!$form->getErrors()) {
-				$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
-			}
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', array(
