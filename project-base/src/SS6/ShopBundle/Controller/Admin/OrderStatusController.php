@@ -160,7 +160,7 @@ class OrderStatusController extends Controller {
 			$flashMessage->addSuccess('Stav objednávek ' . $statusName . ' byl smazán');
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\DeletionForbiddenOrderStatusException $e) {
+		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
 			$flashMessage->addError('Stav objednávek ' . $statusName . ' je rezervovaný a nelze jej smazat');
 		}
 

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Order\Status\Exception;
 use Exception;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
-class DeletionForbiddenOrderStatusException extends Exception implements OrderStatusException {
+class OrderStatusDeletionForbiddenException extends Exception implements OrderStatusException {
 
 	/**
 	 * @var SS6\ShopBundle\Model\Order\Status\OrderStatus
@@ -18,7 +18,7 @@ class DeletionForbiddenOrderStatusException extends Exception implements OrderSt
 	 */
 	public function __construct(OrderStatus $orderStatus, Exception $previous = null) {
 		$this->orderStatus = $orderStatus;
-		parent::__construct('Delete order status ID = ' . $orderStatus->getId() . 'is forbidden', 0, $previous);
+		parent::__construct('Deletion of order status ID = ' . $orderStatus->getId() . ' is forbidden', 0, $previous);
 	}
 	
 	/**

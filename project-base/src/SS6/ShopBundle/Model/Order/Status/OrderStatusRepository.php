@@ -56,7 +56,7 @@ class OrderStatusRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
-	public function getForNewOrder() {
+	public function getDefault() {
 		return $this->getById(self::STATUS_NEW);
 	}
 }

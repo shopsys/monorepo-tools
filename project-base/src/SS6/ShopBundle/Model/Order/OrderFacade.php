@@ -76,7 +76,7 @@ class OrderFacade {
 	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
 	 */
 	public function createOrder(FrontOrderFormData $orderFormData, User $user = null) {
-		$orderStatus = $this->orderStatusRepository->getForNewOrder();
+		$orderStatus = $this->orderStatusRepository->getDefault();
 
 		$order = new Order(
 			$this->orderNumberSequenceRepository->getNextNumber(),
