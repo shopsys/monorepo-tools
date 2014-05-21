@@ -8,15 +8,22 @@ use SS6\ShopBundle\Model\Customer\User;
 class UserRepository {
 
 	/**
-	 * @var \Doctrine\ORM\EntityRepository
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	private $entityRepository;
+	private $em;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $entityManager
 	 */
 	public function __construct(EntityManager $entityManager) {
-		$this->entityRepository = $entityManager->getRepository(User::class);
+		$this->em = $entityManager;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getUserRepository() {
+		return $this->em->getRepository(User::class);
 	}
 
 	/**
@@ -24,7 +31,7 @@ class UserRepository {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function findUserByEmail($email) {
-		return $this->entityRepository->findOneBy(array('email' => $email));
+		return $this->getUserRepository()->findOneBy(array('email' => $email));
 	}
 
 	/**
@@ -34,7 +41,7 @@ class UserRepository {
 	 */
 	public function getUserById($id) {
 		$criteria = array('id' => $id);
-		$user = $this->entityRepository->findOneBy($criteria);
+		$user = $this->getUserRepository()->findOneBy($criteria);
 		if ($user === null) {
 			throw new Exception\UserNotFoundException($criteria);
 		}

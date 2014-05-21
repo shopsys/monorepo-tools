@@ -1,0 +1,130 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}Objednávka č. {{ order.number }}{% endblock %}
+{% block h1 %}Objednávka č. {{ order.number }}{% endblock %}
+
+{% block panel %}
+	<ul class="nav nav-panel">
+		<li>
+			<a href="{{ url('admin_order_list') }}">Přehled objednávek</a>
+		</li>
+		<li>
+			<a href="{{ url('admin_orderstatus_list') }}">Přehled stavů objednávek</a>
+		</li>
+	</ul>
+{% endblock %}
+
+{% block mainContent %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-8">
+			
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+				
+				{{ form_widget(form.id, { type: 'hidden' }) }}
+				
+				<div class="info-box">
+					<fieldset>
+						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
+						{{ form_row(form.customerId, { label: 'ID zákazníka' }) }}
+					</fieldset>
+				</div>
+				
+				<div class="info-box">
+					<h2 class="mt-0">Osobní údaje</h2>
+					<fieldset>
+						{{ form_row(form.firstName, { label: 'Jméno' }) }}
+						{{ form_row(form.lastName, { label: 'Příjmení' }) }}
+						{{ form_row(form.email, { label: 'E-mail' }) }}
+						{{ form_row(form.telephone, { label: 'Telefon', attr: { class: 'input-little' } }) }}
+					</fieldset>
+				</div>
+
+				<div class="info-box">
+					<h2 class="mt-0">Firemní údaje</h2>
+					<fieldset>
+						{{ form_row(form.companyName, { label: 'Název firmy' }) }}
+						{{ form_row(form.companyNumber, { label: 'IČ' }) }}
+						{{ form_row(form.companyTaxNumber, { label: 'DIČ' }) }}
+					</fieldset>
+				</div>
+
+				<div class="info-box">
+					<h2 class="mt-0">Fakturační údaje</h2>
+					<fieldset>
+						{{ form_row(form.street, { label: 'Ulice' }) }}
+						{{ form_row(form.city, { label: 'Město' }) }}
+						{{ form_row(form.zip, { label: 'PSČ', attr: { class: 'input-little' } }) }}
+					</fieldset>
+				</div>
+
+				<div class="info-box">
+					<h2 class="mt-0">Doručovací adresa</h2>
+					<fieldset>
+						{{ form_row(form.deliveryFirstName, { label: 'Jméno' }) }}
+						{{ form_row(form.deliveryLastName, { label: 'Příjmení' }) }}
+						{{ form_row(form.deliveryCompanyName, { label: 'Firma' }) }}
+						{{ form_row(form.deliveryTelephone, { label: 'Telefon', attr: { class: 'input-little' } }) }}
+						{{ form_row(form.deliveryStreet, { label: 'Ulice' }) }}
+						{{ form_row(form.deliveryCity, { label: 'Město' }) }}
+						{{ form_row(form.deliveryZip, { label: 'PSČ', attr: { class: 'input-little' } }) }}
+					</fieldset>
+				</div>
+
+				<div class="info-box">
+					<h2 class="mt-0">Poznámka</h2>
+					<fieldset>
+						{{ form_row(form.note, { label: 'Napište nám' }) }}
+					</fieldset>
+				</div>
+					
+				<div class="info-box form-group">
+					<h2 class="mt-0">Položky objednávky</h2>
+					<fieldset>
+						{% if form.items is not empty %}
+							<div class="table-responsive">
+								{{ form_errors(form.items) }}
+								<table class="table table-striped table-hover">
+									<thead>
+										<tr>
+											<th>Název</th>
+											<th class="table-col-20">Cena</th>
+											<th class="table-col-10">Množství</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for orderItem in form.items %}
+											{{ form_widget(orderItem.id, { type: 'hidden' }) }}
+											<tr>
+												<td>{{ form_widget(orderItem.name) }}</td>
+												<td>{{ form_widget(orderItem.price, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItem.quantity) }}</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>Celkem:</th>
+											<th class="text-right">{{ order.totalPrice|price }}</th>
+											<th></th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						{% else %}
+							{{ form_widget(form.items, { type: 'hidden' }) }}
+							<div class="message message-info">
+								Objednávka neobsahuje žádné položky.
+							</div>
+						{% endif %}
+					</fieldset>
+				</div>
+
+				{{ form_widget(form.submit, { label: 'Uložit změny'}) }}
+				<a href="{{ url('admin_default_dashboard') }}" class="btn btn-default">Zpět na přehled</a>
+			{{ form_end(form) }}
+			
+		</div>		
+	</div>
+		
+{% endblock %}

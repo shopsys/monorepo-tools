@@ -2,7 +2,52 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
+use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
+use SS6\ShopBundle\Model\Order\Order;
+
 class OrderService {
+
+	/**
+	 *
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderFormData $orderData
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 */
+	public function editOrder(Order $order, OrderFormData $orderData, $user) {
+		$order->edit(
+			$orderData->getFirstName(),
+			$orderData->getLastName(),
+			$orderData->getEmail(),
+			$orderData->getTelephone(),
+			$orderData->getStreet(),
+			$orderData->getCity(),
+			$orderData->getZip(),
+			$user,
+			$orderData->getCompanyName(),
+			$orderData->getCompanyNumber(),
+			$orderData->getCompanyTaxNumber(),
+			$orderData->getDeliveryFirstName(),
+			$orderData->getDeliveryLastName(),
+			$orderData->getDeliveryCompanyName(),
+			$orderData->getDeliveryTelephone(),
+			$orderData->getDeliveryStreet(),
+			$orderData->getDeliveryCity(),
+			$orderData->getDeliveryZip(),
+			$orderData->getNote()
+		);
+
+		foreach ($orderData->getItems() as $orderItemData) {
+			/* @var $orderItemData \SS6\ShopBundle\Form\Admin\Order\OrderItemFormData */
+			$orderItem = $order->getItemById($orderItemData->getId());
+			$orderItem->edit(
+				$orderItemData->getName(),
+				$orderItemData->getPrice(),
+				$orderItemData->getQuantity()
+			);
+		}
+
+		$order->recalcTotalPrices();
+	}
 
 	/**
 	 * @param array \SS6\ShopBundle\Model\Order\Order[]
@@ -12,40 +57,6 @@ class OrderService {
 			/* @var $order \SS6\ShopBundle\Model\Order\Order */
 			$order->detachCustomer();
 		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string|null $password
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
-	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
-	 */
-	public function edit(User $user, $firstName, $lastName, $email, $password = null,
-			User $userByEmail = null) {
-		if ($userByEmail instanceof User) {
-			if ($userByEmail->getEmail() === $email && $user !== $userByEmail) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
-			}
-		}
-
-		$user->edit($firstName, $lastName, $email);
-
-		if ($password !== null) {
-			$this->changePassword($user, $password);
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param string $password
-	 */
-	public function changePassword(User $user, $password) {
-		$encoder = $this->encoderFactory->getEncoder($user);
-		$passwordHash = $encoder->encodePassword($password, $user->getSalt());
-		$user->changePassword($passwordHash);
 	}
 
 }
