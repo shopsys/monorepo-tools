@@ -3,9 +3,7 @@
 {% block title %}{{ parent() }} - {{ article.name }}{% endblock %}
 
 {% block content %}
-	<div class="row">
-		<h1>{{ article.name }}</h1>
+	<h1>{{ article.name }}</h1>
 
-		<p>{{ article.text }}</p>
-	</div>
+	<p>{{ article.text }}</p>
 {% endblock %}

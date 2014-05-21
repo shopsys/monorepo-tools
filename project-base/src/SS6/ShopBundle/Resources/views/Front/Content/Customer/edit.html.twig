@@ -7,48 +7,59 @@
 	<div class="row">
 
 		<div class="col-xs-12 col-lg-8">
-			
+
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
+				<div class="info-box">
+					<h2>Osobní údaje</h2>
+					{{ form_row(form.firstName, { label: 'Jméno'}) }}
+					{{ form_row(form.lastName, { label: 'Příjmení'}) }}
+					{{ form_row(form.telephone, { label: 'Telefon'}) }}
+					{{ form_row(form.email, { label: 'Email'}) }}
+					<p>
+						Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
+						Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte.
+					</p>
+				</div>
 
-				<h2>Osobní údaje</h2>
-				{{ form_row(form.firstName, { label: 'Jméno'}) }}
-				{{ form_row(form.lastName, { label: 'Příjmení'}) }}
-				{{ form_row(form.telephone, { label: 'Telefon'}) }}
-				{{ form_row(form.email, { label: 'Email'}) }}
-				<p>
-					Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
-					Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte.
-				</p>
-				
-				<h2>Registrovaní zák.</h2>
-				{{ form_row(form.password.first, { label: 'Heslo'}) }}
-				{{ form_row(form.password.second, { label: 'Heslo znovu'}) }}
+				<div class="info-box">
+					<h2>Registrovaní zák.</h2>
+					{{ form_row(form.password.first, { label: 'Heslo'}) }}
+					{{ form_row(form.password.second, { label: 'Heslo znovu'}) }}
+				</div>
 
-				<h2>Firemní údaje</h2>
-				{{ form_row(form.companyName, { label: 'Firma'}) }}
-				{{ form_row(form.companyNumber, { label: 'IČ'}) }}
-				{{ form_row(form.companyTaxNumber, { label: 'DIČ'}) }}
+				<div class="info-box">
+					<h2>Firemní údaje</h2>
+					{{ form_row(form.companyName, { label: 'Firma'}) }}
+					{{ form_row(form.companyNumber, { label: 'IČ'}) }}
+					{{ form_row(form.companyTaxNumber, { label: 'DIČ'}) }}
+				</div>
 
-				<h2>Adresa</h2>
-				{{ form_row(form.street, { label: 'Ulice'}) }}
-				{{ form_row(form.city, { label: 'Město'}) }}
-				{{ form_row(form.zip, { label: 'PSČ'}) }}
-				{{ form_row(form.country, { label: 'Stát'}) }}
 
-				<h2>Doručovací adresa</h2>
-				{{ form_row(form.deliveryCompanyName, { label: 'Firma'}) }}
-				{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'}) }}
-				{{ form_row(form.deliveryTelephone, { label: 'Telefon'}) }}
-				{{ form_row(form.deliveryStreet, { label: 'Ulice'}) }}
-				{{ form_row(form.deliveryCity, { label: 'Město'}) }}
-				{{ form_row(form.deliveryZip, { label: 'PSČ'}) }}
-				{{ form_row(form.deliveryCountry, { label: 'Stát'}) }}
+				<div class="info-box">
+					<h2>Adresa</h2>
+					{{ form_row(form.street, { label: 'Ulice'}) }}
+					{{ form_row(form.city, { label: 'Město'}) }}
+					{{ form_row(form.zip, { label: 'PSČ'}) }}
+					{{ form_row(form.country, { label: 'Stát'}) }}
+				</div>
+
+
+				<div class="info-box">
+					<h2>Doručovací adresa</h2>
+					{{ form_row(form.deliveryCompanyName, { label: 'Firma'}) }}
+					{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'}) }}
+					{{ form_row(form.deliveryTelephone, { label: 'Telefon'}) }}
+					{{ form_row(form.deliveryStreet, { label: 'Ulice'}) }}
+					{{ form_row(form.deliveryCity, { label: 'Město'}) }}
+					{{ form_row(form.deliveryZip, { label: 'PSČ'}) }}
+					{{ form_row(form.deliveryCountry, { label: 'Stát'}) }}
+				</div>
 
 				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 			{{ form_end(form) }}
 		</div>
-		
+
 	</div>
 
 {% endblock %}
