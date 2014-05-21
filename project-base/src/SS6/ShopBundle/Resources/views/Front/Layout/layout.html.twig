@@ -7,15 +7,15 @@
 				<div class="logo">
 					<a href="{{ url('front_homepage') }}">Internetový obchod</a>
 				</div>
-				
+
 				{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
 
 				<ul class="top-menu">
 					{% if is_granted('ROLE_CUSTOMER') %}
 						<li class="top-menu__item top-menu__item--main dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.fullname }} <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li>
+							<a href="#">{{ app.user.fullname }}</a>
+							<ul class="dropdown__menu">
+								<li class="dropdown__menu__item">
 									<a href="{{ url('front_customer_edit') }}">Osobní údaje</a>
 								</li>
 							</ul>
@@ -34,7 +34,7 @@
 
 					{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
 				</ul>
-				
+
 				{% if not is_granted('ROLE_CUSTOMER') %}
 					{{ render(controller('SS6ShopBundle:Front/Login:windowInit', {windowName: 'loginForm'})) }}
 				{% endif %}

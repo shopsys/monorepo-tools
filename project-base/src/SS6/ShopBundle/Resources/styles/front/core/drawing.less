@@ -1,1 +1,39 @@
-// mixins for css arrows
+.draw-arrow-right(@size, @bg, @pos-x, @pos-y) {
+	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+
+	&:after {
+		border-left: @size solid @bg;
+		border-bottom: @size solid transparent;
+		border-top: @size solid transparent;
+	}
+}
+
+.draw-arrow-left(@size, @bg, @pos-x, @pos-y) {
+	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+
+	&:after {
+		border-right: @size solid @bg;
+		border-bottom: @size solid transparent;
+		border-top: @size solid transparent;
+	}
+}
+
+.draw-arrow-top(@size, @bg, @pos-x, @pos-y) {
+	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+
+	&:after {
+		border-bottom: @size solid @bg;
+		border-left: @size solid transparent;
+		border-right: @size solid transparent;
+	}
+}
+
+.draw-arrow-bottom(@size, @bg, @pos-x, @pos-y) {
+	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+
+	&:after {
+		border-top: @size solid @bg;
+		border-left: @size solid transparent;
+		border-right: @size solid transparent;
+	}
+}
