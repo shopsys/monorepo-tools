@@ -118,32 +118,49 @@ class OrderController extends Controller {
 		$source = new Entity(Order::class);
 
 		$tableAlias = $source->getTableAlias();
-		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias) {
+		$grid = $this->createGrid();
+		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias, $grid) {
 			$queryBuilder
 				->addSelect(
 					'(CASE WHEN ' . $tableAlias . '.companyName IS NOT NULL
 							THEN ' . $tableAlias . '.companyName
 							ELSE CONCAT(' . $tableAlias . ".firstName, ' ', " . $tableAlias . '.lastName)
-						END) AS name'
+						END) AS customerName'
 				)
 				->add('where', $tableAlias . '.deleted = :deleted')
 				->setParameter('deleted', false);
+
+			 foreach ($grid->getColumns() as $column) {
+				if (!$column->isVisibleForSource() && $column->isSorted()) {
+					$queryBuilder->resetDQLPart('orderBy');
+					$queryBuilder->orderBy($column->getField(), $column->getOrder());
+				}
+			}
 		});
 
-		$grid = $this->createGrid();
-		$grid->setSource($source);
-
 		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'name',
+			'id' => 'customerName',
 			'type' => 'text',
+			'field' => 'customerName',
+			'sortable' => true,
+			'source' => false,
+		)));
+		$grid->getColumns()->addColumn(new TextColumn(array(
+			'id' => 'statusName',
+			'type' => 'text',
+			'field' => 'status.name',
+			'source' => true,
 		)));
 
-		$grid->setVisibleColumns(array('number', 'createdOn', 'name', 'totalPrice'));
-		$grid->setColumnsOrder(array('number', 'createdOn', 'name', 'totalPrice'));
+		$grid->setSource($source);
+
+		$grid->setVisibleColumns(array('number', 'createdOn', 'customerName', 'statusName', 'totalPrice'));
+		$grid->setColumnsOrder(array('number', 'createdOn', 'customerName', 'statusName', 'totalPrice'));
 		$grid->setDefaultOrder('createdOn', 'desc');
 		$grid->getColumn('number')->setTitle('Č. objednávky');
 		$grid->getColumn('createdOn')->setTitle('Vytvořena');
-		$grid->getColumn('name')->setTitle('Zákazníka');
+		$grid->getColumn('customerName')->setTitle('Zákazník');
+		$grid->getColumn('statusName')->setTitle('Stav');
 		$grid->getColumn('totalPrice')->setTitle('Celková cena');
 
 		return $grid->getGridResponse('@SS6Shop/Admin/Content/Order/list.html.twig');
