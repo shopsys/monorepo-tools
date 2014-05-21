@@ -25,8 +25,12 @@ class OrderController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
+
+		$allOrderStauses = $orderStatusRepository->getAll();
 		
-		$form = $this->createForm(new OrderFormType());
+		$form = $this->createForm(new OrderFormType($allOrderStauses));
 		
 		try {
 			$orderData = new OrderFormData();
@@ -45,6 +49,7 @@ class OrderController extends Controller {
 				/* @var $order \SS6\ShopBundle\Model\Order\Order */
 				$orderData->setId($order->getId());
 				$orderData->setOrderNumber($order->getNumber());
+				$orderData->setStatusId($order->getStatus()->getId());
 				$orderData->setCustomerId($customerId);
 				$orderData->setFirstName($order->getFirstName());
 				$orderData->setLastName($order->getLastName());
@@ -92,6 +97,8 @@ class OrderController extends Controller {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 				$order = $this->get('ss6.shop.order.order_repository')->getById($id);
 			}
+		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
+			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessage->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {

@@ -157,12 +157,13 @@ class OrderFacade {
 	 */
 	public function edit($orderId, AdminOrderFormData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
+		$orderStatus = $this->orderStatusRepository->getById($orderData->getStatusId());
 		$user = null;
 		if ($orderData->getCustomerId() !== null) {
 			$user = $this->userRepository->getUserById($orderData->getCustomerId());
 		}
 
-		$this->orderService->editOrder($order, $orderData, $user);
+		$this->orderService->editOrder($order, $orderData, $user, $orderStatus);
 
 		$this->em->flush();
 		return $order;

@@ -283,6 +283,7 @@ class Order {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @param string $firstName
 	 * @param string $lastName
 	 * @param string $email
@@ -303,10 +304,11 @@ class Order {
 	 * @param string|null $deliveryZip
 	 * @param string|null $note
 	 */
-	public function edit($firstName, $lastName, $email, $telephone, $street, $city, $zip, $user,
-			$companyName, $companyNumber, $companyTaxNumber,
+	public function edit(OrderStatus $orderStatus, $firstName, $lastName, $email, $telephone, $street, $city, 
+			$zip, $user, $companyName, $companyNumber, $companyTaxNumber,
 			$deliveryFirstName, $deliveryLastName, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
 			$deliveryCity, $deliveryZip, $note) {
+		$this->status = $orderStatus;
 		$this->customer = $user;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
