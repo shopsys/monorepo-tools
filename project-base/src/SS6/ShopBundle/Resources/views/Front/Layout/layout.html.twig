@@ -12,20 +12,22 @@
 
 				<ul class="top-menu">
 					{% if is_granted('ROLE_CUSTOMER') %}
-						<li class="top-menu__item">
+						<li class="top-menu__item top-menu__item--main">
 							{{ app.user.fullname }}
 						</li>
-						<li class="top-menu__item">
+						<li class="top-menu__item top-menu__item--main">
 							<a href="{{ url('front_logout') }}"><strong>Odhlásit se</strong></a>
 						</li>
 					{% else %}
-						<li class="top-menu__item">
+						<li class="top-menu__item top-menu__item--main">
 							<a href="{{ url('front_registration_register') }}">Registrace</a>
 						</li>
-						<li class="top-menu__item">
+						<li class="top-menu__item top-menu__item--main">
 							<a href="{{ url('front_login') }}" onclick="jQuery.fn.SS6.window.open('loginForm'); return false;"><strong>Přihlásit se</strong></a>
 						</li>
 					{% endif %}
+
+					{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
 				</ul>
 				
 				{% if not is_granted('ROLE_CUSTOMER') %}

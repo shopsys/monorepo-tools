@@ -1,0 +1,8 @@
+{% extends '@SS6Shop/Admin/Content/Article/detail.html.twig' %}
+
+{% block title %}- Nový článek{% endblock %}
+{% block h1 %}Nový článek{% endblock %}
+
+{% block article_save %}
+	{{ form_widget(form.save, { label: 'Vytvořit'}) }}
+{% endblock %}

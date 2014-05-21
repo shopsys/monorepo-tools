@@ -1,0 +1,18 @@
+{% extends '@SS6Shop/Admin/Content/Article/detail.html.twig' %}
+
+{% block title %}- Editace článku - {{ article.name }}{% endblock %}
+{% block h1 %}Editace článku - {{ article.name }}{% endblock %}
+
+{% block article_id %}
+	{{ form_row(form.id, { label: 'ID'}) }}
+{% endblock %}
+
+{% block article_url %}
+	<div class="form-group">
+		<a href="{{ url('front_article_detail', { id: article.id }) }}" target="_blank">{{ url('front_article_detail', { id: article.id }) }}</a>
+	</div>
+{% endblock %}
+
+{% block article_save %}
+	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+{% endblock %}
