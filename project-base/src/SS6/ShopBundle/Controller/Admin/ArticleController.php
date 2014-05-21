@@ -100,11 +100,13 @@ class ArticleController extends Controller {
 
 		$detailRowAction = new RowAction('Upravit', 'admin_article_edit');
 		$detailRowAction->setRouteParameters(array('id'));
+		$detailRowAction->setAttributes(array('type' => 'edit'));
 		$grid->addRowAction($detailRowAction);
 
 		$deleteRowAction = new RowAction('Smazat', 'admin_article_delete', true);
 		$deleteRowAction->setConfirmMessage('Opravdu si přejete článek smazat?');
 		$deleteRowAction->setRouteParameters(array('id'));
+		$deleteRowAction->setAttributes(array('type' => 'delete'));
 		$grid->addRowAction($deleteRowAction);
 
 		return $grid;

@@ -156,11 +156,13 @@ class OrderController extends Controller {
 
 		$detailRowAction = new RowAction('Upravit', 'admin_order_edit');
 		$detailRowAction->setRouteParameters(array('id'));
+		$detailRowAction->setAttributes(array('type' => 'edit'));
 		$grid->addRowAction($detailRowAction);
 
 		$deleteRowAction = new RowAction('Smazat', 'admin_order_delete', true);
 		$deleteRowAction->setConfirmMessage('Opravdu si přejete objednávku smazat?');
 		$deleteRowAction->setRouteParameters(array('id'));
+		$deleteRowAction->setAttributes(array('type' => 'delete'));
 		$grid->addRowAction($deleteRowAction);
 
 		return $grid;
