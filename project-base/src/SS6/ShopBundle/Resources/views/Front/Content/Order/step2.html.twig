@@ -1,73 +1,97 @@
 {% extends '@SS6Shop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
-	Objednávka - osobní údaje
+	Objednávka
 {% endblock %}
 
 {% block content %}
 	<div class="info-box">
-		<h2 class="mt-0">Osobní údaje</h2>
 
-		<fieldset>
-			{{ form_row(form.firstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.lastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.email, { label: 'E-mail', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.telephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-		</fieldset>
+		<h2 class="mt-0">Výběr dopravy</h2>
 
-	</div>
+		<div class="chooser">
+			{{ form_errors(form.transport) }}
 
-	<div class="info-box">
-		<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
+			{% for child in form.transport %}
+				{% set choice = form.transport.vars.choices[child.vars.name] %}
+				<label class="chooser__item">
+					<span class="chooser__check">
+						{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
+					</span>
 
-		<fieldset>
-			{{ form_row(form.companyName, { label: 'Název firmy', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.companyNumber, { label: 'IČ', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.companyTaxNumber, { label: 'DIČ', label_attr: { class: 'form-place__title' } }) }}
-		</fieldset>
+					<span class="chooser__image">
+						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="40px" height="20px">
+					</span>
 
-	</div>
+					<span class="chooser__title">
+						<strong>
+							{{ choice.data.name }}
+						</strong>
+						{% if choice.data.description %}
+							<span class="chooser__description">
+								- {{ choice.data.description }}
+							</span>
+						{% endif %}
+					</span>
 
-	<div class="info-box">
-		<h2 class="mt-0">Fakturační údaje <span class="heading-addition">(Tato adresa bude na daňovém dokladu)</span></h2>
-
-		<fieldset>
-			{{ form_row(form.street, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.city, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.zip, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-		</fieldset>
-
-	</div>
-
-	<div class="info-box">
-		<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
-
-		<fieldset>
-			{{ form_row(form.deliveryFirstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryLastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryCompanyName, { label: 'Firma', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryTelephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-			{{ form_row(form.deliveryStreet, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryCity, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryZip, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-		</fieldset>
+					<span class="chooser__price price-main">
+						{{ choice.data.price|price }}
+					</span>
+				</label>
+			{% else %}
+				{% do form.transport.setRendered %}
+				Není z čeho vybírat
+			{% endfor %}
+		</div>
 
 	</div>
 
 	<div class="info-box">
-		<h2 class="mt-0">Poznámka</h2>
 
-		<fieldset>
-			{{ form_row(form.note, { label: 'Napište nám', label_attr: { class: 'form-place__title' } }) }}
-		</fieldset>
+		<h2 class="mt-0">Výběr platby</h2>
+
+		<div class="chooser">
+			{{ form_errors(form.payment) }}
+
+			{% for child in form.payment %}
+				{% set choice = form.payment.vars.choices[child.vars.name] %}
+				<label class="chooser__item">
+					<span class="chooser__check">
+						{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
+					</span>
+
+					<span class="chooser__image">
+						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="40px" height="20px">
+					</span>
+
+					<span class="chooser__title">
+						<strong>
+							{{ choice.data.name }}
+						</strong>
+						{% if choice.data.description %}
+							<span class="chooser__description">
+								- {{ choice.data.description }}
+							</span>
+						{% endif %}
+					</span>
+
+					<span class="chooser__price price-main">
+						{{ choice.data.price|price }}
+					</span>
+				</label>
+			{% else %}
+				{% do form.payment.setRendered %}
+				Není z čeho vybírat
+			{% endfor %}
+		</div>
 
 	</div>
 
 	<div class="buttons-control">
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter buttons-control__left">
-			Zpět na výběr dopravy a platby
-		</button>
+		<a href="{{ url('front_cart') }}" class="button button--alter buttons-control__left">
+			Zpět do košíku
+		</a>
 
-		{{ form_widget(form.submit, { label: 'Dokončit objednávku', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
+		{{ form_widget(form.submit, { label: 'Pokračovat v objednávce', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
 	</div>
 {% endblock %}

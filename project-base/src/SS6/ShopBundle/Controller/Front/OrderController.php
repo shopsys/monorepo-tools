@@ -21,6 +21,7 @@ class OrderController extends Controller {
 		$formData = new OrderFormData();
 
 		$flow = $this->get('ss6.shop.order.flow');
+		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
 		$flow->setFormTypesData($transports, $payments);
 		$flow->bind($formData);
 
