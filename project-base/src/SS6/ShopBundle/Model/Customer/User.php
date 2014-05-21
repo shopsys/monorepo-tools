@@ -98,11 +98,16 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	/**
 	 * @param string $firstName
 	 * @param string $lastName
-	 * @param string $email
 	 */
-	public function edit($firstName, $lastName, $email) {
+	public function edit($firstName, $lastName) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
+	}
+
+	/**
+	 * @param string $email
+	 */
+	public function changeEmail($email) {
 		$this->email = $email;
 	}
 	

@@ -48,24 +48,30 @@ class RegistrationService {
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @param string $firstName
 	 * @param string $lastName
-	 * @param string $email
 	 * @param string|null $password
+	 */
+	public function edit(User $user, $firstName, $lastName, $password = null) {
+		$user->edit($firstName, $lastName);
+
+		if ($password !== null) {
+			$this->changePassword($user, $password);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param string $email
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
 	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
-	public function edit(User $user, $firstName, $lastName, $email, $password = null,
-			User $userByEmail = null) {
+	public function changeEmail(User $user, $email, User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
 			if ($userByEmail->getEmail() === $email && $user !== $userByEmail) {
 				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
 			}
 		}
 
-		$user->edit($firstName, $lastName, $email);
-
-		if ($password !== null) {
-			$this->changePassword($user, $password);
-		}
+		$user->changeEmail($email);
 	}
 
 	/**

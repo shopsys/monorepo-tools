@@ -21,6 +21,10 @@ front_cart_delete:
   defaults: { _controller: SS6ShopBundle:Front\Cart:delete }
   requirements:
     cartItemId: \d+
+
+front_customer_edit:
+  pattern: /customer/edit/
+  defaults: { _controller: SS6ShopBundle:Front\Customer:edit }
     
 front_error_page:
   pattern: /_error/{code}/

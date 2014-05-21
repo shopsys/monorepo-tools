@@ -12,8 +12,13 @@
 
 				<ul class="top-menu">
 					{% if is_granted('ROLE_CUSTOMER') %}
-						<li class="top-menu__item top-menu__item--main">
-							{{ app.user.fullname }}
+						<li class="top-menu__item top-menu__item--main dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.fullname }} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{{ url('front_customer_edit') }}">Osobní údaje</a>
+								</li>
+							</ul>
 						</li>
 						<li class="top-menu__item top-menu__item--main">
 							<a href="{{ url('front_logout') }}"><strong>Odhlásit se</strong></a>
