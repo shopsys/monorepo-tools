@@ -1,0 +1,28 @@
+.articles-menu {
+	clear: both;
+	float: right;
+	.reset-ul();
+}
+
+.articles-menu .articles-menu__item {
+	float: left;
+
+	border-left: 1px solid @color-border;
+
+	a {
+		padding: 10px 20px;
+		height: 40px;
+		line-height: 20px;
+		display: block;
+
+		color: @color-base;
+		font-size: 12px;
+		text-transform: uppercase;
+		text-decoration: none;
+
+		&:hover {
+			color: @color-f;
+			background: @bg-primary;
+		}
+	}
+}

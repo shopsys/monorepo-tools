@@ -32,8 +32,13 @@
 						</li>
 					{% endif %}
 
-					{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
 				</ul>
+
+				<div class="header-panel">
+					<ul class="articles-menu">
+						{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
+					</ul>
+				</div>
 
 				{% if not is_granted('ROLE_CUSTOMER') %}
 					{{ render(controller('SS6ShopBundle:Front/Login:windowInit', {windowName: 'loginForm'})) }}
