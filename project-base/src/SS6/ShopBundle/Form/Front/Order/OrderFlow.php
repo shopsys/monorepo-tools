@@ -39,6 +39,9 @@ class OrderFlow extends FormFlow {
 	protected function loadStepsConfig() {
 		return array(
 			array(
+				'skip' => true, // the 1st step is the shopping cart
+			),
+			array(
 				'type' => new TransportAndPaymentFormType($this->transports, $this->payments),
 			),
 			array(

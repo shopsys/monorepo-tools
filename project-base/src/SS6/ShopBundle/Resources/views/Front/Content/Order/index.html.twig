@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: flow.getCurrentStepNumber() + 1} only %}
+	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: flow.getCurrentStepNumber()} only %}
 	
 	{{ form_start(form) }}
 		{% form_theme form '@SS6Shop/Front/Content/Order/formTheme.html.twig' %}
