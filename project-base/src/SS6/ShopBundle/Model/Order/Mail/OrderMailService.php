@@ -49,7 +49,9 @@ class OrderMailService {
 			->setSubject($subject)
 			->setFrom($this->senderEmail)
 			->setTo($toEmail)
-			->setBody($body);
+			->setContentType('text/plain; charset=UTF-8')
+			->setBody(strip_tags($body), 'text/plain')
+			->addPart($body, 'text/html');
 		
 		return $message;
 	}
