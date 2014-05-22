@@ -32,8 +32,13 @@ class OrderController extends Controller {
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
 
 		$flow->setFormTypesData($transports, $payments);
-		$flow->bind($formData);
 		$flow->saveSentStepData();
+
+		if ($flow->isBackToCartTransition()) {
+			return $this->redirect($this->generateUrl('front_cart'));
+		}
+
+		$flow->bind($formData);
 
 		// validate all constraints (not only step specific group)
 		$form = $flow->createForm(array('validation_groups' => array('Default')));

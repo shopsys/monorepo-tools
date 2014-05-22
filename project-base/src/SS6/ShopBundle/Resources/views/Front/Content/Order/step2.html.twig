@@ -88,9 +88,9 @@
 	</div>
 
 	<div class="buttons-control">
-		<a href="{{ url('front_cart') }}" class="button button--alter buttons-control__left">
+		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter buttons-control__left">
 			Zpět do košíku
-		</a>
+		</button>
 
 		{{ form_widget(form.submit, { label: 'Pokračovat v objednávce', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
 	</div>

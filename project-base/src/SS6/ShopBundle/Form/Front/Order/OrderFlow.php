@@ -68,4 +68,9 @@ class OrderFlow extends FormFlow {
 		$this->saveStepData($stepData);
 	}
 
+	public function isBackToCartTransition() {
+		return $this->getRequestedStepNumber() === 2
+			&& $this->getRequestedTransition() === self::TRANSITION_BACK;
+	}
+
 }
