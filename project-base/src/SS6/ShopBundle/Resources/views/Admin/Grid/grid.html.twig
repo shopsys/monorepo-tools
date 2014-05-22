@@ -46,14 +46,30 @@
 	{% set actions = column.getActionsToRender(row) %}
 	<span class="grid-row-actions action-icons">
 	{% for action in actions %}
-		<a 
-			href="{{ url(action.route, column.routeParameters(row, action), false) }}"
-			class="action-icons__item" 
-			target="{{ action.target }}"
-			{% if action.confirm %} onclick="return confirm('{{ action.confirmMessage }}')"{% endif %}
-			{% if row.field('id')|default('') is not empty %} data-id="{{ row.field('id') }}"{% endif %}
-			{% for name, value in action.attributes %} {{ name }}="{{ value }}" {% endfor %}
-		>{{ action.title|trans }}</a>
+		{% spaceless %}
+			{% if action.attributes['type']|default('') in ['delete', 'edit'] %}
+				{% set class = 'table-action' %}
+			{% else %}
+				{% set class = 'action-icons__item' %}
+			{% endif %}
+			<a
+				title="{{ action.title|trans }}"
+				href="{{ url(action.route, column.routeParameters(row, action), false) }}"
+				target="{{ action.target }}"
+				class="{{ class }}"
+				{% if action.confirm %} onclick="return confirm('{{ action.confirmMessage }}')"{% endif %}
+				{% if row.field('id')|default('') is not empty %} data-id="{{ row.field('id') }}"{% endif %}
+				{% for name, value in action.attributes %} {{ name == 'type' ? 'data-action-name' : name }}="{{ value }}" {% endfor %}
+			>
+				{% if action.attributes['type']|default('') == 'delete' %}
+					<i class="fa fa-times"></i>
+				{% elseif action.attributes['type']|default('') == 'edit' %}
+					<i class="fa fa-pencil"></i>
+				{% else %}
+					{{ action.title|trans }}
+				{% endif %}
+			</a>
+		{% endspaceless %}
 	{% endfor %}
 	</span>
 {% endblock grid_column_actions_cell %}

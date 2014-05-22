@@ -1,7 +1,7 @@
 <h2>Dopravy</h2>
-		
+
 {% if transports|length %}
-	
+
 	<table class="table table-striped table-responsive">
 		<thead>
 			<tr>
@@ -24,8 +24,8 @@
 					</td>
 					<td class="text-right">{{ transport.entity.price|price }}</td>
 					<td class="text-right">
-						<a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}">Upravit</a>
-						<a href="{{ url('admin_transport_delete', {id: transport.entity.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')">Smazat</a>
+						<a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
+						<a href="{{ url('admin_transport_delete', {id: transport.entity.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')" class="table-action"><i class="fa fa-times"></i></a>
 					</td>
 				</tr>
 			{% endfor %}

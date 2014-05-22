@@ -112,7 +112,7 @@ class OrderStatusController extends Controller {
 		$grid->setColumnsOrder(array('name'));
 		$grid->setDefaultOrder('id', 'asc');
 		$grid->getColumn('name')->setTitle('Stav')->setClass('table-col-80');
-		
+
 		return $grid->getGridResponse('@SS6Shop/Admin/Content/OrderStatus/list.html.twig');
 	}
 
@@ -130,12 +130,13 @@ class OrderStatusController extends Controller {
 
 		$detailRowAction = new RowAction('Upravit', 'admin_orderstatus_edit');
 		$detailRowAction->setRouteParameters(array('id'));
+		$detailRowAction->setAttributes(array('type' => 'edit'));
 		$grid->addRowAction($detailRowAction);
 
 		$deleteRowAction = new RowAction('Smazat', 'admin_orderstatus_delete', true);
 		$deleteRowAction->setConfirmMessage('Opravdu si přejete stav objednávky smazat?');
 		$deleteRowAction->setRouteParameters(array('id'));
-		$deleteRowAction->setAttributes(array('data-action-name' => 'delete'));
+		$deleteRowAction->setAttributes(array('type' => 'delete'));
 		$grid->addRowAction($deleteRowAction);
 
 		return $grid;

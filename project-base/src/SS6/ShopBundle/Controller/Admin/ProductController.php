@@ -138,10 +138,12 @@ class ProductController extends Controller {
 		
 		$detailRowAction = new RowAction('Upravit', 'admin_product_edit');
 		$detailRowAction->setRouteParameters(array('id'));
+		$detailRowAction->setAttributes(array('type' => 'edit'));
 		$grid->addRowAction($detailRowAction);
 		
 		$deleteRowAction = new RowAction('Smazat', 'admin_product_delete', true);
 		$deleteRowAction->setConfirmMessage('Opravdu si přejete zboží smazat?');
+		$deleteRowAction->setAttributes(array('type' => 'delete'));
 		$deleteRowAction->setRouteParameters(array('id'));
 		$grid->addRowAction($deleteRowAction);
 		
