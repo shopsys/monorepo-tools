@@ -32,6 +32,7 @@ class TransportController extends Controller {
 				$transportData->getDescription(),
 				$transportData->isHidden()
 			);
+			$transport->setImageForUpload($transportData->getImage());
 			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */

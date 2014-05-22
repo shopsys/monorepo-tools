@@ -35,6 +35,8 @@
 				{{ form_row(form.hidden, { label: 'Skryté'}) }}
 				{{ form_row(form.price, { label: 'Cena'}) }}
 				{{ form_row(form.description, { label: 'Popis'}) }}
+				{% block image %}{% endblock %}
+				{{ form_row(form.image, { label: 'Obrázek'}) }}
 				
 				{% block transport_save %}{% endblock %}
 				<a href="{{ url('admin_transportandpayment_list') }}" class="btn btn-default">Zpět na přehled</a>

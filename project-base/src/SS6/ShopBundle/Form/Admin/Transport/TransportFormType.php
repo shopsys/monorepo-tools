@@ -54,8 +54,15 @@ class TransportFormType extends AbstractType {
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
 			))
 			->add('description', 'textarea', array('required' => false))
-			->add('image', new FileUploadType($this->fileUpload), array('required' => false))
+			->add('image', new FileUploadType($this->fileUpload), array(
+				'required' => false,
+				'file_constraints' => array(
+					new Constraints\File(array('maxSize' => '10M')),
+					new Constraints\Image(),
+				),
+			))
 			->add('save', 'submit');
+
 	}
 
 	/**

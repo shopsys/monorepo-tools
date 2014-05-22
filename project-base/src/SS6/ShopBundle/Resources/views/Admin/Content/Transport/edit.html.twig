@@ -7,6 +7,10 @@
 	{{ form_row(form.id, { label: 'ID'}) }}
 {% endblock %}
 
+{% block image %}
+	{{ image(transport, null, {height: 100}) }}
+{% endblock %}
+
 {% block transport_save %}
 	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}

@@ -46,8 +46,16 @@ class TransportEditFacade {
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Form\Admin\Transport\TransportFormData $transportData
 	 */
-	public function edit(Transport $transport) {
+	public function edit(Transport $transport, TransportFormData $transportData) {
+		$transport->setEdit(
+			$transportData->getName(),
+			$transportData->getPrice(),
+			$transportData->getDescription(),
+			$transportData->isHidden()
+		);
+		$transport->setImageForUpload($transportData->getImage());
 		$this->em->flush();
 	}
 	
