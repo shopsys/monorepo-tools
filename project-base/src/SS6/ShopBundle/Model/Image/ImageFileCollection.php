@@ -12,7 +12,7 @@ class ImageFileCollection {
 	/**
 	 * @param string $category
 	 */
-	function __construct($category) {
+	public function __construct($category) {
 		$this->category = $category;
 	}
 

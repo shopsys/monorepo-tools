@@ -30,7 +30,7 @@ class ImageExtension extends Twig_Extension {
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \Symfony\Component\Templating\Helper\CoreAssetsHelper $assetsHelper
 	 */
-	function __construct($imageUrlPrefix, ContainerInterface $container, CoreAssetsHelper $assetsHelper) {
+	public function __construct($imageUrlPrefix, ContainerInterface $container, CoreAssetsHelper $assetsHelper) {
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->assetsHelper = $assetsHelper;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347

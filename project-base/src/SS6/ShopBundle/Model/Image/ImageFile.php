@@ -29,7 +29,7 @@ class ImageFile {
 	 * @param string|null $type
 	 * @param string $filename
 	 */
-	function __construct($category, $type, $filename, $title = null) {
+	public function __construct($category, $type, $filename, $title = null) {
 		$this->category = $category;
 		$this->type = $type;
 		$this->filename = $filename;
