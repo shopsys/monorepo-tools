@@ -4,6 +4,11 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Image\EntityImageInterface;
+use SS6\ShopBundle\Model\Image\ImageFileCollection;
+use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
+use SS6\ShopBundle\Model\FileUpload\FileForUpload;
+use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 
 /**
  * Product
@@ -11,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="products")
  * @ORM\Entity
  */
-class Product {
+class Product implements EntityFileUploadInterface, EntityImageInterface {
 
 	/**
 	 * @var integer
@@ -98,6 +103,18 @@ class Product {
 	 * @ORM\Column(type="boolean")
 	 */
 	private $visible;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=4, nullable=true)
+	 */
+	private $image;
+
+	/**
+	 * @var string|null
+	 */
+	private $imageForUpload;
 	
 	/**
 	 * @param string $name
@@ -125,6 +142,7 @@ class Product {
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
 		$this->visible = false;
+		$this->image = null;
 	}
 	
 	/**
@@ -151,6 +169,45 @@ class Product {
 		$this->sellingTo = $sellingTo;
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
+	 */
+	public function getCachedFilesForUpload() {
+		$files = array();
+		if ($this->imageForUpload !== null) {
+			$files['image'] = new FileForUpload($this->imageForUpload, true, 'product', 'default', FileNamingConvention::TYPE_ID);
+		}
+		return $files;
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $originFilename
+	 */
+	public function setFileAsUploaded($key, $originFilename) {
+		if ($key === 'image') {
+			$this->image = pathinfo($originFilename, PATHINFO_EXTENSION);
+		} else {
+			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
+		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Image\ImageFileCollection
+	 */
+	public function getImageFileCollection() {
+		$imageFileCollection = new ImageFileCollection('product');
+		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName(), 'default');
+		return $imageFileCollection;
+	}
+
+	/**
+	 * @param string|null $cachedFilename
+	 */
+	public function setImageForUpload($cachedFilename) {
+		$this->imageForUpload = $cachedFilename;
 	}
 
 	/**

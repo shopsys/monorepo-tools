@@ -50,6 +50,7 @@ class ProductEditFacade {
 			$productData['sellingTo'],
 			$productData['stockQuantity'],
 			$productData['hidden']);
+		$product->setImageForUpload($productData['image']);
 
 		$this->em->persist($product);
 		$this->em->flush();
@@ -76,6 +77,7 @@ class ProductEditFacade {
 			$productData['sellingTo'],
 			$productData['stockQuantity'],
 			$productData['hidden']);
+		$product->setImageForUpload($productData['image']);
 
 		$this->em->flush();
 		

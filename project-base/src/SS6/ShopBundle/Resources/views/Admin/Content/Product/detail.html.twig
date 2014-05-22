@@ -37,6 +37,8 @@
 				{{ form_row(form.sellingTo, { label: 'Datum stažení'}) }}
 				{{ form_row(form.stockQuantity, { label: 'Skladem'}) }}
 				{{ form_row(form.hidden, { label: 'Skryté'}) }}
+				{% block image %}{% endblock %}
+				{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
 
 				{% block product_save %}{% endblock %}
 				<a href="{{ url('admin_product_list') }}" class="btn btn-default">Zpět na přehled</a>

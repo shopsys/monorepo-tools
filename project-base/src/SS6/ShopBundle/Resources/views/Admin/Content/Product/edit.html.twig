@@ -17,6 +17,17 @@
 	</div>
 {% endblock %}
 
+{% block image %}
+	<div class="form-group">
+		<label>
+			Obrázek:
+		</label>
+		<div>
+			{{ image(product, 'default', {height: 100}) }}
+		</div>
+	</div>
+{% endblock %}
+
 {% block product_save %}
 	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}
