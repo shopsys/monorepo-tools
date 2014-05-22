@@ -10,10 +10,17 @@ use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension {
 
+	const NOIMAGE_FILENAME = 'noimage.gif';
+
 	/**
 	 * @var \Symfony\Component\Templating\Helper\CoreAssetsHelper
 	 */
 	private $assetsHelper;
+
+	/**
+	 * @var string
+	 */
+	private $imageDir;
 
 	/**
 	 * @var string
@@ -26,11 +33,13 @@ class ImageExtension extends Twig_Extension {
 	private $container;
 
 	/**
+	 * @param string $imageDir
 	 * @param string $imageUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \Symfony\Component\Templating\Helper\CoreAssetsHelper $assetsHelper
 	 */
-	public function __construct($imageUrlPrefix, ContainerInterface $container, CoreAssetsHelper $assetsHelper) {
+	public function __construct($imageDir, $imageUrlPrefix, ContainerInterface $container, CoreAssetsHelper $assetsHelper) {
+		$this->imageDir = $imageDir;
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->assetsHelper = $assetsHelper;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
@@ -50,7 +59,8 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function getFunctions() {
 		return array(
-			new Twig_SimpleFunction('getImageUrl', array($this, 'getImageUrl')),
+			new Twig_SimpleFunction('imageExists', array($this, 'imageExists')),
+			new Twig_SimpleFunction('imageUrl', array($this, 'getImageUrl')),
 			new Twig_SimpleFunction('image', array($this, 'getImageHtml'), array('is_safe' => array('html'))),
 		);
 	}
@@ -62,7 +72,11 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function getImageUrl(EntityImageInterface $entity, $type = null) {
 		$imageFileCollection = $entity->getImageFileCollection();
-		return $this->assetsHelper->getUrl($this->imageUrlPrefix . $imageFileCollection->getRelativUrlImage($type));
+		if ($this->imageExists($entity, $type)) {
+			return $this->assetsHelper->getUrl($this->imageUrlPrefix . $imageFileCollection->getRelativImageUrl($type));
+		} else {
+			return $this->assetsHelper->getUrl($this->imageUrlPrefix . self::NOIMAGE_FILENAME);
+		}
 	}
 
 	/**
@@ -82,6 +96,16 @@ class ImageExtension extends Twig_Extension {
 			'type' => $type,
 			'title' => $imageFile->getTitle(),
 		));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\EntityImageInterface $entity
+	 * @param string|null $type
+	 */
+	public function imageExists(EntityImageInterface $entity, $type = null) {
+		$imageFileCollection = $entity->getImageFileCollection();
+		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $imageFileCollection->getRelativImageFilepath($type);
+		return is_file($imageFilepath) && is_readable($imageFilepath);
 	}
 
 	/**

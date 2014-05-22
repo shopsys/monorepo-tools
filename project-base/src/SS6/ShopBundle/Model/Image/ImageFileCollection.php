@@ -48,10 +48,18 @@ class ImageFileCollection {
 	 * @param string|null $type
 	 * @return string
 	 */
-	public function getRelativUrlImage($type) {
+	public function getRelativImageUrl($type) {
 		$pathPrefix = $this->category . '/' . ($type ? $type . '/' : '');
 		$filename = $this->getImageFile($type)->getFilename();
 		return $pathPrefix . $filename;
+	}
+
+	/**
+	 * @param string|null $type
+	 * @return string
+	 */
+	public function getRelativImageFilepath($type) {
+		return $this->getRelativImageUrl($type);
 	}
 
 	/**
