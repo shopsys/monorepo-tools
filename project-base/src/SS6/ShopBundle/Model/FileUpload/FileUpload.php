@@ -73,11 +73,13 @@ class FileUpload {
 	 * @return boolean
 	 */
 	public function tryDeleteCachedFile($filename) {
-		$filepath = $this->getCacheFilepath($filename);
-		try {
-			$this->filesystem->remove($filepath);
-		} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
-			return false;
+		if (!empty($filename)) {
+			$filepath = $this->getCacheFilepath($filename);
+			try {
+				$this->filesystem->remove($filepath);
+			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -94,7 +96,7 @@ class FileUpload {
 	 * @param string $cacheFilename
 	 * @return string
 	 */
-	private function getCacheFilepath($cacheFilename) {
+	public function getCacheFilepath($cacheFilename) {
 		return $this->getCacheDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($cacheFilename);
 	}
 
