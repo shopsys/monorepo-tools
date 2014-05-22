@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 class OrderStatusDeletionWithOrdersException extends Exception implements OrderStatusException {
 
 	/**
-	 * @var SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	private $orderStatus;
 	
@@ -22,7 +22,7 @@ class OrderStatusDeletionWithOrdersException extends Exception implements OrderS
 	}
 	
 	/**
-	 * @return SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function getOrderStatus() {
 		return $this->orderStatus;

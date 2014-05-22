@@ -349,7 +349,7 @@ class Order {
 	}
 
 	/**
-	 * @return SS6\ShopBundle\Model\Payment\Payment
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	public function getPayment() {
 		return $this->payment;
@@ -433,7 +433,7 @@ class Order {
 	}
 
 	/**
-	 * @return SS6\ShopBundle\Model\Customer\User
+	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function getCustomer() {
 		return $this->customer;
