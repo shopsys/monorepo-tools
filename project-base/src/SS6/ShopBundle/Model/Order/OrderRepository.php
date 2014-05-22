@@ -3,17 +3,19 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
+Use Doctrine\ORM\AbstractQuery;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderRepository {
 	
 	/** 
-	 * @var \Doctrine\ORM\EntityRepository
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
+	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
@@ -72,6 +74,20 @@ class OrderRepository {
 		}
 
 		return $order;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @return type
+	 */
+	public function getOrdersCountByStatus(OrderStatus $orderStatus) {
+		$query = $this->em->createQuery('
+			SELECT COUNT(o)
+			FROM ' . Order::class . ' o
+			WHERE o.status = :status')
+			->setParameter('status', $orderStatus->getId());
+		$result = $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $result;
 	}
 	
 }

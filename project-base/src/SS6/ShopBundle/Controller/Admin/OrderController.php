@@ -130,7 +130,7 @@ class OrderController extends Controller {
 				->add('where', $tableAlias . '.deleted = :deleted')
 				->setParameter('deleted', false);
 
-			 foreach ($grid->getColumns() as $column) {
+			foreach ($grid->getColumns() as $column) {
 				if (!$column->isVisibleForSource() && $column->isSorted()) {
 					$queryBuilder->resetDQLPart('orderBy');
 					$queryBuilder->orderBy($column->getField(), $column->getOrder());

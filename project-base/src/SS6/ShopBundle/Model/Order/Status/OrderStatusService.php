@@ -29,11 +29,15 @@ class OrderStatusService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param int $orderCountByStatus
 	 * @throws Exception\OrderStatusDeletionForbiddenException
 	 */
-	public function delete(OrderStatus $orderStatus) {
+	public function delete(OrderStatus $orderStatus, $orderCountByStatus) {
 		if ($orderStatus->getId() === OrderStatusRepository::STATUS_NEW) {
-			throw new Exception\OrderStatusDeletionForbiddenException($orderStatus);
+			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException($orderStatus);
+		}
+		if ($orderCountByStatus > 0) {
+			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException($orderStatus);
 		}
 	}
 }
