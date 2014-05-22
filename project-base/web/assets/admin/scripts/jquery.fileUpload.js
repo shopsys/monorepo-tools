@@ -3,13 +3,7 @@
 	$.fn.SS6 = $.fn.SS6 || {};
 	$.fn.SS6.fileUpload = $.fn.SS6.fileUpload || {};
 	
-	$.fn.SS6.fileUpload.init = function (formElement) {
-		$('.js-file-upload').each(function() {
-			new $.fn.SS6.fileUpload.uploader($(this));
-		});
-	}
-	
-	$.fn.SS6.fileUpload.init = function (formElement) {
+	$.fn.SS6.fileUpload.init = function () {
 		$('.js-file-upload').each(function() {
 			new $.fn.SS6.fileUpload.uploader($(this));
 		});
@@ -33,6 +27,7 @@
 		this.$item = $uploader.find('.js-file-upload-item');
 		this.$hiddenInput = $uploader.find('.js-file-upload-hidden input:first');
 		this.$filename = $uploader.find('.js-file-upload-filename');
+		this.$filenameRemove = $uploader.find('.js-file-upload-filename-delete');
 		this.$status = $uploader.find('.js-file-upload-status');
 		this.$progress = $uploader.find('.js-file-upload-progress');
 		this.$progressBar = $uploader.find('.js-file-upload-progress-bar');
@@ -51,6 +46,14 @@
 			}
 		}
 		
+		this.removeUploadedFile = function() {
+			$.fn.SS6.fileUpload.tryDeleteCachedFile(uploader);
+			uploader.$hiddenInput.val('');
+			uploader.$item.hide();
+		}
+		
+		this.$filenameRemove.bind('click', this.removeUploadedFile);
+		
 		$uploader.closest('form').bind('submit.file-upload', onFormSubmit);
 		
 		$uploader.dmUploader({
@@ -59,7 +62,7 @@
 			onBeforeUpload: function(id){
 				uploader.$progress.show();
 				uploader.ready = false;
-				updateFileStatus('uploading', 'Uploading...');
+				updateFileStatus('uploading', 'Nahrávám...');
 			},
 			onNewFile: function(id, file){
 				uploader.lastName = uploader.$filename.text();
@@ -80,7 +83,7 @@
 				if (data.status === 'success') {
 					$.fn.SS6.fileUpload.tryDeleteCachedFile(uploader);
 					uploader.$hiddenInput.val(data.filename);
-					updateFileStatus('success', 'Upload Complete');
+					updateFileStatus('success', 'Úspěšně nahráno');
 				} else {
 					uploader.$filename.text(uploader.lastName);
 				}
@@ -99,7 +102,6 @@
 				if (!uploader.$hiddenInput.val()) {
 					uploader.$fallbackHide.hide();
 				}
-				//alert('Browser not supported(do something else here!): ' + message);
 			}
 		});
 	}

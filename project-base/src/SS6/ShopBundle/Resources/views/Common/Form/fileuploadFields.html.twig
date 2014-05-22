@@ -15,12 +15,16 @@
 			{% endif %}
 			<div class="js-file-upload-item" style="{{ itemStyle }}">
 				<div class="info">
-					<span class="js-file-upload-filename">{{ getNameByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
-					<br />
-					<small>Status: <span class="js-file-upload-status">Complete</span></small>
+					<div>
+						<span class="js-file-upload-filename">{{ getNameByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
+						<i class="fa fa-times cursor-pointer js-file-upload-filename-delete"></i>
+					</div>
+					<div class="text-muted">
+						Stav: <span class="js-file-upload-status">Úspěšně nahráno</span>
+					</div>
 				</div>
-				<div class="bar js-file-upload-progress" style="width: 200px; display: none;">
-					<div class="js-file-upload-progress-bar" style="width: 0%; background-color: green; text-align: center;">0%</div>
+				<div class="js-file-upload-progress">
+					<div class="js-file-upload-progress-bar">0%</div>
 				</div>
 			</div>
 			
