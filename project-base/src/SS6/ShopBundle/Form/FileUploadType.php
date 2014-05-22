@@ -45,6 +45,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
+			'error_bubbling' => false,
 			'compound' => true,
 			'file_constraints' => array(),
 		));

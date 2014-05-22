@@ -57,8 +57,12 @@ class TransportFormType extends AbstractType {
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => false,
 				'file_constraints' => array(
-					new Constraints\File(array('maxSize' => '10M')),
-					new Constraints\Image(),
+					new Constraints\Image(array(
+						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),
+						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png, gif nebo bmp',
+						'maxSize' => '2M',
+						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+					)),
 				),
 			))
 			->add('save', 'submit');

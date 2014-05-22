@@ -8,7 +8,14 @@
 {% endblock %}
 
 {% block image %}
-	{{ image(transport, null, {height: 100}) }}
+	<div class="form-group">
+		<label>
+			Obrázek:
+		</label>
+		<div>
+			{{ image(transport, null, {height: 100}) }}
+		</div>
+	</div>
 {% endblock %}
 
 {% block transport_save %}
