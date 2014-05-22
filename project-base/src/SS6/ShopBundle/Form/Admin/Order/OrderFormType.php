@@ -12,6 +12,18 @@ use Symfony\Component\Validator\Constraints;
 class OrderFormType extends AbstractType {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 */
+	private $allOrderStatuses;
+
+	/**
+	 * @param array $allOrderStatuses
+	 */
+	public function __construct(array $allOrderStatuses) {
+		$this->allOrderStatuses = $allOrderStatuses;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -24,9 +36,21 @@ class OrderFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		$orderStatusChoices = array();
+		foreach ($this->allOrderStatuses as $orderStatus) {
+			/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
+			$orderStatusChoices[$orderStatus->getId()] = $orderStatus->getName();
+		}
+
 		$builder
 			->add('id', 'integer', array('read_only' => true))
 			->add('orderNumber', 'text', array('read_only' => true))
+			->add('statusId', 'choice', array(
+				'choices' => $orderStatusChoices,
+				'multiple' => false,
+				'expanded' => false,
+				'required' => true,
+			))
 			->add('customerId', 'integer', array('required' => false))
 			->add('firstName', 'text', array(
 				'constraints' => array(

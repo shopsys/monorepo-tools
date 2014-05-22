@@ -59,4 +59,11 @@ class OrderStatusRepository {
 	public function getDefault() {
 		return $this->getById(self::STATUS_NEW);
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 */
+	public function getAll() {
+		return $this->getOrderStatusRepository()->findBy(array(), array('id' => 'asc'));
+	}
 }

@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\Admin\Order\OrderFormData as AdminOrderFormData;
 use SS6\ShopBundle\Form\Front\Order\OrderFormData as FrontOrderFormData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderService {
 
@@ -14,9 +15,11 @@ class OrderService {
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderFormData $orderData
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 */
-	public function editOrder(Order $order, AdminOrderFormData $orderData, $user) {
+	public function editOrder(Order $order, AdminOrderFormData $orderData, $user, OrderStatus $orderStatus) {
 		$order->edit(
+			$orderStatus,
 			$orderData->getFirstName(),
 			$orderData->getLastName(),
 			$orderData->getEmail(),

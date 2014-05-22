@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Order\Status\Exception;
 use Exception;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
-class OrderStatusDeletionForbiddenException extends Exception implements OrderStatusException {
+class OrderStatusDeletionWithOrdersException extends Exception implements OrderStatusException {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus

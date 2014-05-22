@@ -162,7 +162,11 @@ class OrderStatusController extends Controller {
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
-			$flashMessage->addError('Stav objednávek ' . $statusName . ' je rezervovaný a nelze jej smazat');
+			$flashMessage->addError('Stav objednávek ' . $e->getOrderStatus()->getName() . ' je rezervovaný a nelze jej smazat');
+		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
+			$message = 'Stav objednávek ' . $e->getOrderStatus()->getName()
+				. ' mají nastaveny nějaké objednávky, před smazáním jim prosím změňte stav.';
+			$flashMessage->addError($message);
 		}
 
 		return $this->redirect($this->generateUrl('admin_orderstatus_list'));

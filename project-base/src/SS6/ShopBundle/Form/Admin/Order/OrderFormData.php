@@ -23,6 +23,11 @@ class OrderFormData {
 	private $orderNumber;
 
 	/**
+	 * @var int
+	 */
+	private $statusId;
+
+	/**
 	 * @var string
 	 */
 	private $firstName;
@@ -136,6 +141,13 @@ class OrderFormData {
 	 */
 	public function getOrderNumber() {
 		return $this->orderNumber;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStatusId() {
+		return $this->statusId;
 	}
 
 	/**
@@ -290,6 +302,13 @@ class OrderFormData {
 	 */
 	public function setOrderNumber($orderNumber) {
 		$this->orderNumber = $orderNumber;
+	}
+
+	/**
+	 * @param int $statusId
+	 */
+	public function setStatusId($statusId) {
+		$this->statusId = $statusId;
 	}
 
 	/**

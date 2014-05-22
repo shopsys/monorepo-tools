@@ -25,8 +25,12 @@ class OrderController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
+
+		$allOrderStauses = $orderStatusRepository->getAll();
 		
-		$form = $this->createForm(new OrderFormType());
+		$form = $this->createForm(new OrderFormType($allOrderStauses));
 		
 		try {
 			$orderData = new OrderFormData();
@@ -45,6 +49,7 @@ class OrderController extends Controller {
 				/* @var $order \SS6\ShopBundle\Model\Order\Order */
 				$orderData->setId($order->getId());
 				$orderData->setOrderNumber($order->getNumber());
+				$orderData->setStatusId($order->getStatus()->getId());
 				$orderData->setCustomerId($customerId);
 				$orderData->setFirstName($order->getFirstName());
 				$orderData->setLastName($order->getLastName());
@@ -92,6 +97,8 @@ class OrderController extends Controller {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 				$order = $this->get('ss6.shop.order.order_repository')->getById($id);
 			}
+		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
+			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessage->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {
@@ -111,32 +118,49 @@ class OrderController extends Controller {
 		$source = new Entity(Order::class);
 
 		$tableAlias = $source->getTableAlias();
-		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias) {
+		$grid = $this->createGrid();
+		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias, $grid) {
 			$queryBuilder
 				->addSelect(
 					'(CASE WHEN ' . $tableAlias . '.companyName IS NOT NULL
 							THEN ' . $tableAlias . '.companyName
 							ELSE CONCAT(' . $tableAlias . ".firstName, ' ', " . $tableAlias . '.lastName)
-						END) AS name'
+						END) AS customerName'
 				)
 				->add('where', $tableAlias . '.deleted = :deleted')
 				->setParameter('deleted', false);
+
+			foreach ($grid->getColumns() as $column) {
+				if (!$column->isVisibleForSource() && $column->isSorted()) {
+					$queryBuilder->resetDQLPart('orderBy');
+					$queryBuilder->orderBy($column->getField(), $column->getOrder());
+				}
+			}
 		});
 
-		$grid = $this->createGrid();
-		$grid->setSource($source);
-
 		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'name',
+			'id' => 'customerName',
 			'type' => 'text',
+			'field' => 'customerName',
+			'sortable' => true,
+			'source' => false,
+		)));
+		$grid->getColumns()->addColumn(new TextColumn(array(
+			'id' => 'statusName',
+			'type' => 'text',
+			'field' => 'status.name',
+			'source' => true,
 		)));
 
-		$grid->setVisibleColumns(array('number', 'createdOn', 'name', 'totalPrice'));
-		$grid->setColumnsOrder(array('number', 'createdOn', 'name', 'totalPrice'));
+		$grid->setSource($source);
+
+		$grid->setVisibleColumns(array('number', 'createdOn', 'customerName', 'statusName', 'totalPrice'));
+		$grid->setColumnsOrder(array('number', 'createdOn', 'customerName', 'statusName', 'totalPrice'));
 		$grid->setDefaultOrder('createdOn', 'desc');
 		$grid->getColumn('number')->setTitle('Č. objednávky');
 		$grid->getColumn('createdOn')->setTitle('Vytvořena');
-		$grid->getColumn('name')->setTitle('Zákazníka');
+		$grid->getColumn('customerName')->setTitle('Zákazník');
+		$grid->getColumn('statusName')->setTitle('Stav');
 		$grid->getColumn('totalPrice')->setTitle('Celková cena');
 
 		return $grid->getGridResponse('@SS6Shop/Admin/Content/Order/list.html.twig');

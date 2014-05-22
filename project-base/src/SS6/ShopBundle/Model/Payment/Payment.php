@@ -95,7 +95,7 @@ class Payment {
 	public function setTransports(array $transports) {
 		$this->transports->clear();
 		foreach ($transports as $transport) {
-			/* @var $transport SS6\ShopBundle\Model\Transport\Transport */
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			$this->addTransport($transport);
 		}
 	}
