@@ -8,6 +8,11 @@ use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
 
 class OrderFlow extends FormFlow {
 	/**
+	 * @var bool
+	 */
+	protected $allowDynamicStepNavigation = true;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $transports;
@@ -48,6 +53,19 @@ class OrderFlow extends FormFlow {
 				'type' => new PersonalInfoFormType(),
 			),
 		);
+	}
+
+	public function saveSentStepData() {
+		$stepData = $this->retrieveStepData();
+
+		foreach ($this->getSteps() as $step) {
+			$stepForm = $this->createFormForStep($step->getNumber());
+			if ($this->getRequest()->request->has($stepForm->getName())) {
+				$stepData[$step->getNumber()] = $this->getRequest()->request->get($stepForm->getName());
+			}
+		}
+
+		$this->saveStepData($stepData);
 	}
 
 }

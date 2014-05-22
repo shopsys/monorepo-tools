@@ -35,6 +35,21 @@ class OrderRepository {
 			'customer' => $userId,
 		));
 	}
+
+	/**
+	 * @param int $userId
+	 * @return \SS6\ShopBundle\Model\Order\Order|null
+	 */
+	public function findLastByUserId($userId) {
+		return $this->getOrderRepository()->findOneBy(
+			array(
+				'customer' => $userId,
+			),
+			array(
+				'createdOn' => 'DESC'
+			)
+		);
+	}
 	
 	/**
 	 * @param int $id

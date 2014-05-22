@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
+use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 
@@ -15,28 +16,32 @@ class OrderController extends Controller {
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+
 		$payments = $paymentRepository->getVisible();
 		$transports = $transportRepository->getVisible($payments);
+		$user = $this->getUser();
 
 		$formData = new OrderFormData();
+		if ($user instanceof User) {
+			$orderFacade->prefillOrderFormData($formData, $user);
+		}
 
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
 
 		$flow->setFormTypesData($transports, $payments);
 		$flow->bind($formData);
+		$flow->saveSentStepData();
 
 		// validate all constraints (not only step specific group)
 		$form = $flow->createForm(array('validation_groups' => array('Default')));
 
 		if ($flow->isValid($form)) {
-			$flow->saveCurrentStepData($form);
-
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
 			} else {
-				$orderFacade = $this->get('ss6.shop.order.order_facade');
-				/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 				$orderFacade->createOrder($formData, $this->getUser());
 
 				$flow->reset();
