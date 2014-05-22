@@ -7,6 +7,17 @@
 	{{ form_row(form.id, { label: 'ID'}) }}
 {% endblock %}
 
+{% block image %}
+	<div class="form-group">
+		<label>
+			Obrázek:
+		</label>
+		<div>
+			{{ image(payment, null, {height: 100}) }}
+		</div>
+	</div>
+{% endblock %}
+
 {% block payment_save %}
 	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}

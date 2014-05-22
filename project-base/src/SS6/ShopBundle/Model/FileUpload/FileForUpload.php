@@ -33,7 +33,7 @@ class FileForUpload {
 	 * @param string $cacheFilename
 	 * @param bool $isImage
 	 * @param string $category
-	 * @param string|null $category
+	 * @param string|null $type
 	 * @param int $nameConventionType
 	 */
 	public function __construct($cacheFilename, $isImage, $category, $type, $nameConventionType) {

@@ -5,13 +5,18 @@ namespace SS6\ShopBundle\Model\Payment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Image\EntityImageInterface;
+use SS6\ShopBundle\Model\Image\ImageFileCollection;
+use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
+use SS6\ShopBundle\Model\FileUpload\FileForUpload;
+use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment {
+class Payment implements EntityFileUploadInterface, EntityImageInterface {
 
 	/**
 	 * @var integer
@@ -64,6 +69,18 @@ class Payment {
 	 * @ORM\Column(type="boolean")
 	 */
 	private $deleted;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=4, nullable=true)
+	 */
+	private $image;
+
+	/**
+	 * @var string|null
+	 */
+	private $imageForUpload;
 	
 	/**
 	 * @param string $name
@@ -78,6 +95,7 @@ class Payment {
 		$this->transports = new ArrayCollection();
 		$this->hidden = $hidden;
 		$this->deleted = false;
+		$this->image = null;
 	}
 	
 	/**
@@ -118,6 +136,45 @@ class Payment {
 		$this->price = $price;
 		$this->description = $description;
 		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
+	 */
+	public function getCachedFilesForUpload() {
+		$files = array();
+		if ($this->imageForUpload !== null) {
+			$files['image'] = new FileForUpload($this->imageForUpload, true, 'payment', null, FileNamingConvention::TYPE_ID);
+		}
+		return $files;
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $originFilename
+	 */
+	public function setFileAsUploaded($key, $originFilename) {
+		if ($key === 'image') {
+			$this->image = pathinfo($originFilename, PATHINFO_EXTENSION);
+		} else {
+			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
+		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Image\ImageFileCollection
+	 */
+	public function getImageFileCollection() {
+		$imageFileCollection = new ImageFileCollection('payment');
+		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName());
+		return $imageFileCollection;
+	}
+
+	/**
+	 * @param string|null $cachedFilename
+	 */
+	public function setImageForUpload($cachedFilename) {
+		$this->imageForUpload = $cachedFilename;
 	}
 
 	/**
