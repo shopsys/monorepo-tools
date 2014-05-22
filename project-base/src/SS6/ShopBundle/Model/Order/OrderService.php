@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
+use SS6\ShopBundle\Form\Admin\Order\OrderFormData as AdminOrderFormData;
+use SS6\ShopBundle\Form\Front\Order\OrderFormData as FrontOrderFormData;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 
 class OrderService {
@@ -13,7 +15,7 @@ class OrderService {
 	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderFormData $orderData
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 */
-	public function editOrder(Order $order, OrderFormData $orderData, $user) {
+	public function editOrder(Order $order, AdminOrderFormData $orderData, $user) {
 		$order->edit(
 			$orderData->getFirstName(),
 			$orderData->getLastName(),
@@ -57,6 +59,68 @@ class OrderService {
 			/* @var $order \SS6\ShopBundle\Model\Order\Order */
 			$order->detachCustomer();
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 */
+	public function prefillFrontFormData(FrontOrderFormData $orderFormData, User $user, Order $order = null) {
+		if ($order instanceof Order) {
+			$this->prefillFrontFormDataFromOrder($orderFormData, $order);
+		} else {
+			$this->prefillFrontFormDataFromCustomer($orderFormData, $user);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 */
+	private function prefillFrontFormDataFromOrder(FrontOrderFormData $orderFormData, Order $order) {
+		$orderFormData->setTransport($order->getTransport());
+		$orderFormData->setPayment($order->getPayment());
+		$orderFormData->setFirstName($order->getFirstName());
+		$orderFormData->setLastName($order->getLastName());
+		$orderFormData->setEmail($order->getEmail());
+		$orderFormData->setTelephone($order->getTelephone());
+		$orderFormData->setCompanyName($order->getCompanyName());
+		$orderFormData->setCompanyNumber($order->getCompanyNumber());
+		$orderFormData->setCompanyTaxNumber($order->getCompanyTaxNumber());
+		$orderFormData->setStreet($order->getStreet());
+		$orderFormData->setCity($order->getCity());
+		$orderFormData->setZip($order->getZip());
+		$orderFormData->setDeliveryFirstName($order->getDeliveryFirstName());
+		$orderFormData->setDeliveryLastName($order->getDeliveryLastName());
+		$orderFormData->setDeliveryCompanyName($order->getDeliveryCompanyName());
+		$orderFormData->setDeliveryTelephone($order->getDeliveryTelephone());
+		$orderFormData->setDeliveryStreet($order->getDeliveryStreet());
+		$orderFormData->setDeliveryCity($order->getDeliveryCity());
+		$orderFormData->setDeliveryZip($order->getDeliveryZip());
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 */
+	private function prefillFrontFormDataFromCustomer(FrontOrderFormData $orderFormData, User $user) {
+		$orderFormData->setFirstName($user->getFirstName());
+		$orderFormData->setLastName($user->getLastName());
+		$orderFormData->setEmail($user->getEmail());
+		$orderFormData->setTelephone($user->getBillingAddress()->getTelephone());
+		$orderFormData->setCompanyName($user->getBillingAddress()->getCompanyName());
+		$orderFormData->setCompanyNumber($user->getBillingAddress()->getCompanyNumber());
+		$orderFormData->setCompanyTaxNumber($user->getBillingAddress()->getCompanyTaxNumber());
+		$orderFormData->setStreet($user->getBillingAddress()->getStreet());
+		$orderFormData->setCity($user->getBillingAddress()->getCity());
+		$orderFormData->setZip($user->getBillingAddress()->getZip());
+		// firstName + lastName ?
+		$orderFormData->setDeliveryCompanyName($user->getDeliveryAddress()->getCompanyName());
+		$orderFormData->setDeliveryTelephone($user->getDeliveryAddress()->getTelephone());
+		$orderFormData->setDeliveryStreet($user->getDeliveryAddress()->getStreet());
+		$orderFormData->setDeliveryCity($user->getDeliveryAddress()->getCity());
+		$orderFormData->setDeliveryZip($user->getDeliveryAddress()->getZip());
 	}
 
 }
