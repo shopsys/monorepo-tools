@@ -70,7 +70,7 @@
 // Nastavení background image, cesta do design se nastavuje sama, dále pozice a repeat, default hodnoty nastaveny
 .background(@backgroundUrl: none, @backgroundPosition: 0 0, @backgroundRepeat: no-repeat) {
 
-	background-image: url('@{path-image}/@{backgroundUrl}'); 
+	background-image: url('@{path-image}/@{backgroundUrl}');
 	background-repeat: @backgroundRepeat;
 	background-position: @backgroundPosition;
 } // .background
@@ -102,7 +102,7 @@
 		left: @left;
 		display: block;
 		width: @width;
-		height: @height; 
+		height: @height;
 	}
 } // .before
 
@@ -118,13 +118,13 @@
 		left: @left;
 		display: block;
 		width: @width;
-		height: @height; 
+		height: @height;
 	}
 } // .after
 
 
 // Náhrada za before, nastavuje hlasické nastavení pro before bez ikonky s možností nastavení pozadí
-// hodí se pro případ, kdy chceme udělat útvar bez ikonky, nebo pozadi s pismem, popř tímhle něco zakrýt 
+// hodí se pro případ, kdy chceme udělat útvar bez ikonky, nebo pozadi s pismem, popř tímhle něco zakrýt
 .before-c(@width, @height, @bg: transparent, @content: '' , @left: 0, @top: 0) {
 	position: relative;
 
@@ -135,7 +135,7 @@
 		left: @left;
 		display: block;
 		width: @width;
-		height: @height; 
+		height: @height;
 		background: @bg;
 	}
 } // .before
@@ -153,7 +153,7 @@
 		left: @left;
 		display: block;
 		width: @width;
-		height: @height; 
+		height: @height;
 		background: @bg;
 	}
 } // .after
@@ -163,7 +163,7 @@
 .font-face(@font-name, @font-file, @font-weight: 400, @font-style: normal) {
 
 	@font-face {
-	
+
 		font-family: '@{font-name}';
 		src: url('@{path-font}/@{font-file}.eot');
 		src: url('@{path-font}/@{font-file}.eot?#iefix') format('embedded-opentype'),
@@ -172,13 +172,13 @@
 			 url('@{path-font}/@{font-file}.svg#@{font-name}') format('svg');
 		font-weight: @font-weight;
 		font-style: @font-style;
-	
+
 	}
 
 		@media screen and (-webkit-min-device-pixel-ratio:0) {
-		
+
 			@font-face {
-		
+
 				font-family: '@{font-name}';
 				src: url('@{path-font}/@{font-file}.svg') format('svg');
 
@@ -209,12 +209,22 @@
 	&:after {
 			content:"";
 			display:table;
-	} 
+	}
 	&:after {
 			clear:both;
-	} 
+	}
 } // .cfx();
 
 .clearfix() {
 	.cfx();
 }
+
+
+// Rotate
+.rotate(@degrees) {
+	-webkit-transform: rotate(@degrees);
+	-moz-transform: rotate(@degrees);
+	-ms-transform: rotate(@degrees);
+	-o-transform: rotate(@degrees);
+	transform: rotate(@degrees);
+} // .rotate
