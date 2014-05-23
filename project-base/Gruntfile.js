@@ -38,9 +38,9 @@ module.exports = function(grunt) {
 		legacssy: {
 			admin: {
 				options: {
-					legacyWidth: 641,
-					matchingOnly: true,
-					overridesOnly: true
+					legacyWidth: 1200,
+					matchingOnly: false,
+					overridesOnly: false
 				},
 				files: {
 						'web/assets/admin/styles/index-ie8.css': 'web/assets/admin/styles/index.css'
@@ -48,9 +48,9 @@ module.exports = function(grunt) {
 			},
 			frontend: {
 				options: {
-					legacyWidth: 641,
-					matchingOnly: true,
-					overridesOnly: true
+					legacyWidth: 1200,
+					matchingOnly: false,
+					overridesOnly: false
 				},
 				files: {
 					'web/assets/frontend/styles/index-ie8.css': 'web/assets/frontend/styles/index.css'
@@ -136,7 +136,7 @@ module.exports = function(grunt) {
 
 
 	});
-	
+
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-legacssy');
 	grunt.loadNpmTasks('grunt-contrib-watch');

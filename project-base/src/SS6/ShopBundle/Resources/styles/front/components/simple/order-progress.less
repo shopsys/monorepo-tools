@@ -10,17 +10,43 @@
 	float: left;
 	width: 100% / 3;
 	height: 40px;
+	position: relative;
 
 	border-left: 1px solid @color-border;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
 
 	&:first-child {
 		border-left: 0;
 	}
 }
 
+.order-progress .order-progress__item__arrow {
+	display: block;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 50%;
+	right: -9px;
+	margin-top: -8px;
+	z-index: 2;
+
+	background: @color-f;
+	border-top: 1px solid @color-border;
+	border-right: 1px solid @color-border;
+
+	.rotate(45deg);
+}
 .order-progress .order-progress__item--active .order-progress__item__inner {
-	background: @bg-box;
-	color: @color-base;
+	color: @color-f;
+	background: @bg-primary;
+}
+
+
+.order-progress .order-progress__item--active .order-progress__item__arrow {
+	color: @color-f;
+	background: @bg-primary;
 }
 
 .order-progress .order-progress__item__inner {
@@ -34,11 +60,4 @@
 	&:hover {
 		text-decoration: none;
 	}
-}
-
-.order-progress .order-progress__item__number {
-	float: left;
-	margin-right: 10px;
-
-	font-size: 18px;
 }
