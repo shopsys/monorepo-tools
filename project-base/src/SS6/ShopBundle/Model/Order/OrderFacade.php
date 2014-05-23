@@ -12,6 +12,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
@@ -74,6 +75,7 @@ class OrderFacade {
 	/**
 	 * @param $orderFormData \SS6\ShopBundle\Form\Front\Order\OrderFormData
 	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
+	 * @return SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(FrontOrderFormData $orderFormData, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
@@ -107,6 +109,8 @@ class OrderFacade {
 
 		$this->em->persist($order);
 		$this->em->flush();
+
+		return $order;
 	}
 
 	/**

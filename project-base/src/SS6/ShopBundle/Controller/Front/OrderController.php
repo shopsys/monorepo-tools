@@ -47,9 +47,19 @@ class OrderController extends Controller {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
 			} else {
-				$orderFacade->createOrder($formData, $this->getUser());
+				$order = $orderFacade->createOrder($formData, $this->getUser());
 
 				$flow->reset();
+
+				try {
+					$orderMailFacade = $this->get('ss6.shop.order.order_mail_facade');
+					/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
+					$orderMailFacade->sendEmail($order);
+				} catch (SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
+					$flashMessage = $this->get('ss6.shop.flash_message.front');
+					/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+					$flashMessage->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
+				}
 
 				return $this->redirect($this->generateUrl('front_order_sent'));
 			}
