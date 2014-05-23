@@ -139,6 +139,11 @@ services:
   ss6.shop.product.product_repository:
     class: SS6\ShopBundle\Model\Product\ProductRepository
     
+  ss6.shop.product.product_visibility_facade:
+    class: SS6\ShopBundle\Model\Product\ProductVisibilityFacade
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+    
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
   
