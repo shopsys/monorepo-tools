@@ -24,6 +24,7 @@ class AppKernel extends Kernel {
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
 			new SS6\ShopBundle\SS6ShopBundle(),
+			new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 		);
 
 		if (in_array($this->getEnvironment(), array('dev', 'test'))) {
