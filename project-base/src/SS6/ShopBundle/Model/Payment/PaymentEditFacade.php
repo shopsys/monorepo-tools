@@ -3,8 +3,10 @@
 namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentEditFacade {
 	
@@ -19,12 +21,18 @@ class PaymentEditFacade {
 	private $paymentRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 */
+	private $transportRepository;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
 	 */
-	public function __construct(EntityManager $em, PaymentRepository $paymentRepository) {
+	public function __construct(EntityManager $em, PaymentRepository $paymentRepository, TransportRepository $transportRepository) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
+		$this->transportRepository = $transportRepository;
 	}
 	
 	/**
@@ -37,8 +45,18 @@ class PaymentEditFacade {
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Form\Admin\Payment\PaymentFormData $paymentData
 	 */
-	public function edit(Payment $payment) {
+	public function edit(Payment $payment, PaymentFormData $paymentData) {
+		$payment->setEdit(
+			$paymentData->getName(),
+			$paymentData->getPrice(),
+			$paymentData->getDescription(),
+			$paymentData->isHidden()
+		);
+		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
+		$payment->setTransports($transports);
+		$payment->setImageForUpload($paymentData->getImage());
 		$this->em->flush();
 	}
 	

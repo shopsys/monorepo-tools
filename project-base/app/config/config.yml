@@ -22,6 +22,7 @@ twig:
   exception_controller: 'SS6\ShopBundle\Controller\Front\ErrorController::showAction'
   form:
     resources:
+      - '@SS6Shop/Common/Form/fileuploadFields.html.twig'
       - '@SS6Shop/Common/Form/theme.html.twig'
       - '@SS6Shop/Admin/Form/datepicker_fields.html.twig'
   strict_variables: "%kernel.debug%"

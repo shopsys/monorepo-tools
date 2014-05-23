@@ -20,7 +20,11 @@
 					</span>
 
 					<span class="chooser__image">
-						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="40px" height="20px">
+						{% if imageExists(choice.data) %}
+							{{ image(choice.data, null, {height: '20px'}) }}
+						{% else %}
+							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="40px" height="20px">
+						{% endif %}
 					</span>
 
 					<span class="chooser__title">
@@ -61,7 +65,11 @@
 					</span>
 
 					<span class="chooser__image">
-						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="40px" height="20px">
+						{% if imageExists(choice.data) %}
+							{{ image(choice.data, null, {height: '20px'}) }}
+						{% else %}
+							<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="40px" height="20px">
+						{% endif %}
 					</span>
 
 					<span class="chooser__title">

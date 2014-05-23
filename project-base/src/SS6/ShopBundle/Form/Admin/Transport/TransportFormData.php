@@ -28,6 +28,11 @@ class TransportFormData {
 	 * @var integer
 	 */
 	private $hidden = false;
+
+	/**
+	 * @var string
+	 */
+	private $image;
 	
 	/**
 	 * @return int
@@ -55,6 +60,13 @@ class TransportFormData {
 	 */
 	public function getDescription() {
 		return $this->description;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getImage() {
+		return $this->image;
 	}
 	
 	/**
@@ -97,5 +109,12 @@ class TransportFormData {
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @param string $image
+	 */
+	public function setImage($image) {
+		$this->image = $image;
 	}
 }

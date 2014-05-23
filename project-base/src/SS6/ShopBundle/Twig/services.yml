@@ -1,7 +1,18 @@
 services:
+  
+  ss6.twig.file_upload_extension:
+    class: SS6\ShopBundle\Twig\FileUploadExtension
+    tags:
+      - { name: twig.extension }
 
   ss6.twig.form_theme_extension:
     class: SS6\ShopBundle\Twig\FormThemeExtension
+    tags:
+      - { name: twig.extension }
+      
+  ss6.twig.image_extension:
+    class: SS6\ShopBundle\Twig\ImageExtension
+    arguments: [%ss6.image_dir%, %ss6.image_url_prefix%, @service_container]
     tags:
       - { name: twig.extension }
 

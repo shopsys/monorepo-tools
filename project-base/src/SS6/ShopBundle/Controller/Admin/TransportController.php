@@ -16,11 +16,13 @@ class TransportController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$fileUpload = $this->get('ss6.shop.file_upload');
+		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 
 		$transportData = new TransportFormData();
-		$form = $this->createForm(new TransportFormType(), $transportData);
+		$form = $this->createForm(new TransportFormType($fileUpload), $transportData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -30,6 +32,7 @@ class TransportController extends Controller {
 				$transportData->getDescription(),
 				$transportData->isHidden()
 			);
+			$transport->setImageForUpload($transportData->getImage());
 			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
@@ -53,6 +56,8 @@ class TransportController extends Controller {
 	public function editAction(Request $request, $id) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		$fileUpload = $this->get('ss6.shop.file_upload');
+		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
@@ -67,17 +72,11 @@ class TransportController extends Controller {
 			$formData->setDescription($transport->getDescription());
 			$formData->setHidden($transport->isHidden());
 			
-			$form = $this->createForm(new TransportFormType(), $formData);
+			$form = $this->createForm(new TransportFormType($fileUpload), $formData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$transport->setEdit(
-					$formData->getName(), 
-					$formData->getPrice(), 
-					$formData->getDescription(), 
-					$formData->isHidden()
-				);
-				$transportEditFacade->edit($transport);
+				$transportEditFacade->edit($transport, $formData);
 				$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
 				return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 			} elseif ($form->isSubmitted()) {

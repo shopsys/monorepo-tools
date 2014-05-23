@@ -3,12 +3,17 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Image\EntityImageInterface;
+use SS6\ShopBundle\Model\Image\ImageFileCollection;
+use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
+use SS6\ShopBundle\Model\FileUpload\FileForUpload;
+use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 
 /**
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport {
+class Transport implements EntityFileUploadInterface, EntityImageInterface {
 
 	/**
 	 * @var integer
@@ -53,6 +58,18 @@ class Transport {
 	 * @ORM\Column(type="boolean")
 	 */
 	private $deleted;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=4, nullable=true)
+	 */
+	private $image;
+
+	/**
+	 * @var string|null
+	 */
+	private $imageForUpload;
 	
 	/**
 	 * @param string $name
@@ -66,6 +83,7 @@ class Transport {
 		$this->description = $description;
 		$this->hidden = $hidden;
 		$this->deleted = false;
+		$this->image = null;
 	}
 	
 	/**
@@ -79,6 +97,45 @@ class Transport {
 		$this->price = $price;
 		$this->description = $description;
 		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
+	 */
+	public function getCachedFilesForUpload() {
+		$files = array();
+		if ($this->imageForUpload !== null) {
+			$files['image'] = new FileForUpload($this->imageForUpload, true, 'transport', null, FileNamingConvention::TYPE_ID);
+		}
+		return $files;
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $originalFilename
+	 */
+	public function setFileAsUploaded($key, $originalFilename) {
+		if ($key === 'image') {
+			$this->image = pathinfo($originalFilename, PATHINFO_EXTENSION);
+		} else {
+			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
+		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Image\ImageFileCollection
+	 */
+	public function getImageFileCollection() {
+		$imageFileCollection = new ImageFileCollection('transport');
+		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName());
+		return $imageFileCollection;
+	}
+
+	/**
+	 * @param string|null $cachedFilename
+	 */
+	public function setImageForUpload($cachedFilename) {
+		$this->imageForUpload = $cachedFilename;
 	}
 
 	/**

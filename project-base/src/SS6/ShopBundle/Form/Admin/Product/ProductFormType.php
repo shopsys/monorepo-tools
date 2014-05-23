@@ -2,13 +2,27 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 */
+	public function __construct(FileUpload $fileUpload) {
+		$this->fileUpload = $fileUpload;
+	}
 
 	/**
 	 * @return string
@@ -71,6 +85,17 @@ class ProductFormType extends AbstractType {
 				'invalid_message' => 'Prosím zadejte číslo',
 			))
 			->add('hidden', new YesNoType(), array('required' => false))
+			->add('image', new FileUploadType($this->fileUpload), array(
+				'required' => false,
+				'file_constraints' => array(
+					new Constraints\Image(array(
+						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),
+						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png, gif nebo bmp',
+						'maxSize' => '2M',
+						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+					)),
+				),
+			))
 			->add('save', 'submit');
 	}
 

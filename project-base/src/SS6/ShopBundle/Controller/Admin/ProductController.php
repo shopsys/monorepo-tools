@@ -22,8 +22,10 @@ class ProductController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$fileUpload = $this->get('ss6.shop.file_upload');
+		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 
-		$form = $this->createForm(new ProductFormType());
+		$form = $this->createForm(new ProductFormType($fileUpload));
 		
 		try {
 			$productData = array();
@@ -76,8 +78,10 @@ class ProductController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$fileUpload = $this->get('ss6.shop.file_upload');
+		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 
-		$form = $this->createForm(new ProductFormType());
+		$form = $this->createForm(new ProductFormType($fileUpload));
 		
 		try {
 			$productData = array();

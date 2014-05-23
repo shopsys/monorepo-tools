@@ -16,6 +16,8 @@ class PaymentController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$fileUpload = $this->get('ss6.shop.file_upload');
+		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$allTransports = $transportRepository->getAll();
@@ -24,7 +26,7 @@ class PaymentController extends Controller {
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 
 		$paymentData = new PaymentFormData();
-		$form = $this->createForm(new PaymentFormType($allTransports), $paymentData);
+		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $paymentData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -35,6 +37,7 @@ class PaymentController extends Controller {
 				$paymentData->getDescription(),
 				$paymentData->isHidden()
 			);
+			$payment->setImageForUpload($paymentData->getImage());
 
 			$transports = $transportRepository->findAllByIds($paymentData->getTransports());
 			$payment->setTransports($transports);
@@ -66,6 +69,8 @@ class PaymentController extends Controller {
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$fileUpload = $this->get('ss6.shop.file_upload');
+		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		
 		try {
 			$allTransports = $transportRepository->getAll();
@@ -86,20 +91,11 @@ class PaymentController extends Controller {
 			}
 			$formData->setTransports($transports);
 			
-			$form = $this->createForm(new PaymentFormType($allTransports), $formData);
+			$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $formData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$payment->setEdit(
-					$formData->getName(), 
-					$formData->getPrice(), 
-					$formData->getDescription(), 
-					$formData->isHidden()
-				);
-				$transports = $transportRepository->findAllByIds($formData->getTransports());
-				$payment->setTransports($transports);
-				
-				$paymentEditFacade->edit($payment);
+				$paymentEditFacade->edit($payment, $formData);
 
 				$flashMessage->addSuccess('Byla upravena platba ' . $payment->getName());
 				return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
