@@ -18,7 +18,7 @@ class CartFormType extends AbstractType {
 		$this->cart = $cart;
 	}
 
-		/**
+	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
 	 */

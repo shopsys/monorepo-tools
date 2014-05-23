@@ -26,8 +26,8 @@
 		this.$uploader = $uploader;
 		this.$item = $uploader.find('.js-file-upload-item');
 		this.$hiddenInput = $uploader.find('.js-file-upload-hidden input:first');
-		this.$filename = $uploader.find('.js-file-upload-filename');
-		this.$filenameRemove = $uploader.find('.js-file-upload-filename-delete');
+		this.$label = $uploader.find('.js-file-upload-label');
+		this.$removeButton = $uploader.find('.js-file-upload-delete');
 		this.$status = $uploader.find('.js-file-upload-status');
 		this.$progress = $uploader.find('.js-file-upload-progress');
 		this.$progressBar = $uploader.find('.js-file-upload-progress-bar');
@@ -52,7 +52,7 @@
 			uploader.$item.hide();
 		}
 		
-		this.$filenameRemove.bind('click', this.removeUploadedFile);
+		this.$removeButton.bind('click', this.removeUploadedFile);
 		
 		$uploader.closest('form').bind('submit.file-upload', onFormSubmit);
 		
@@ -65,11 +65,11 @@
 				updateFileStatus('uploading', 'Nahrávám...');
 			},
 			onNewFile: function(id, file){
-				uploader.lastName = uploader.$filename.text();
+				uploader.lastName = uploader.$label.text();
 				uploader.id = id;
 				uploader.$item.show().addClass('js-file-upload-state_uploading');
 				var sizeInMB = Math.round(file.size / 1024 / 1024 * 100) / 100;
-				uploader.$filename.text(file.name + ' (' + sizeInMB + ' MB)');
+				uploader.$label.text(file.name + ' (' + sizeInMB + ' MB)');
 			},
 			onComplete: function(){
 				uploader.$progress.hide();
@@ -85,12 +85,12 @@
 					uploader.$hiddenInput.val(data.filename);
 					updateFileStatus('success', 'Úspěšně nahráno');
 				} else {
-					uploader.$filename.text(uploader.lastName);
+					uploader.$label.text(uploader.lastName);
 				}
 			},
 			onUploadError: function(id, message){
 				updateFileStatus('error', message);
-				uploader.$filename.text(uploader.lastName);
+				uploader.$label.text(uploader.lastName);
 			},
 			onFileTypeError: function(file){
 				

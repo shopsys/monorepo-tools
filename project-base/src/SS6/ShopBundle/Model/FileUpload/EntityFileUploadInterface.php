@@ -11,9 +11,9 @@ interface EntityFileUploadInterface {
 
 	/**
 	 * @param string $key
-	 * @param string $originFilename
+	 * @param string $originalFilename
 	 */
-	public function setFileAsUploaded($key, $originFilename);
+	public function setFileAsUploaded($key, $originalFilename);
 
 	/**
 	 * @return int

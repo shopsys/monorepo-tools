@@ -16,8 +16,8 @@
 			<div class="js-file-upload-item" style="{{ itemStyle }}">
 				<div class="info">
 					<div>
-						<span class="js-file-upload-filename">{{ getNameByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
-						<i class="fa fa-times cursor-pointer js-file-upload-filename-delete"></i>
+						<span class="js-file-upload-label">{{ getLabelByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
+						<i class="fa fa-times cursor-pointer js-file-upload-delete"></i>
 					</div>
 					<div class="text-muted">
 						Stav: <span class="js-file-upload-status">Úspěšně nahráno</span>

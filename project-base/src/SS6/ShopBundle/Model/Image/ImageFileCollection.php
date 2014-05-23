@@ -36,7 +36,7 @@ class ImageFileCollection {
 	 * @return \SS6\ShopBundle\Model\Image\ImageFile
 	 * @throws \SS6\ShopBundle\Model\Image\Exception\TypeNotExistException
 	 */
-	public function getImageFile($type) {
+	public function getImageFile($type = null) {
 		if (!array_key_exists($type ?: 0, $this->imageFiles)) {
 			throw new \SS6\ShopBundle\Model\Image\Exception\TypeNotExistException($this->category, $type);
 		}
@@ -48,7 +48,7 @@ class ImageFileCollection {
 	 * @param string|null $type
 	 * @return string
 	 */
-	public function getRelativImageUrl($type) {
+	public function getRelativeImageUrl($type) {
 		$pathPrefix = $this->category . '/' . ($type ? $type . '/' : '');
 		$filename = $this->getImageFile($type)->getFilename();
 		return $pathPrefix . $filename;
@@ -58,8 +58,8 @@ class ImageFileCollection {
 	 * @param string|null $type
 	 * @return string
 	 */
-	public function getRelativImageFilepath($type) {
-		return $this->getRelativImageUrl($type);
+	public function getRelativeImageFilepath($type) {
+		return $this->getRelativeImageUrl($type);
 	}
 
 	/**

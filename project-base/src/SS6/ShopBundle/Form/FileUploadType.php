@@ -87,7 +87,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 			))
 			->add('file', 'file');
 
-		// For backfall (IE9 and older)
+		// fallback for IE9 and older
 		$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
 	}
 
@@ -104,7 +104,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	/**
 	 * @param \Symfony\Component\Form\FormEvent $event
 	 */
-	public function onPreSubmit (FormEvent $event) {
+	public function onPreSubmit(FormEvent $event) {
 		$data = $event->getData();
 		if ($data['file'] instanceof UploadedFile) {
 			try {
@@ -114,7 +114,6 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 				$data['file_uploaded'] = $cachedFilename;
 				$event->setData($data);
 			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUploadException $ex) {
-				// nothing
 				$event->getForm()->addError('Nahrání souboru se nezdařilo.');
 			}
 		}

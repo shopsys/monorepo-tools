@@ -184,11 +184,11 @@ class Product implements EntityFileUploadInterface, EntityImageInterface {
 
 	/**
 	 * @param string $key
-	 * @param string $originFilename
+	 * @param string $originalFilename
 	 */
-	public function setFileAsUploaded($key, $originFilename) {
+	public function setFileAsUploaded($key, $originalFilename) {
 		if ($key === 'image') {
-			$this->image = pathinfo($originFilename, PATHINFO_EXTENSION);
+			$this->image = pathinfo($originalFilename, PATHINFO_EXTENSION);
 		} else {
 			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
 		}

@@ -54,7 +54,7 @@ class ImageExtension extends Twig_Extension {
 		return $this->container->get('templating');
 	}
 
-		/**
+	/**
 	 * @return array
 	 */
 	public function getFunctions() {
@@ -73,7 +73,7 @@ class ImageExtension extends Twig_Extension {
 	public function getImageUrl(EntityImageInterface $entity, $type = null) {
 		$imageFileCollection = $entity->getImageFileCollection();
 		if ($this->imageExists($entity, $type)) {
-			return $this->assetsHelper->getUrl($this->imageUrlPrefix . $imageFileCollection->getRelativImageUrl($type));
+			return $this->assetsHelper->getUrl($this->imageUrlPrefix . $imageFileCollection->getRelativeImageUrl($type));
 		} else {
 			return $this->assetsHelper->getUrl($this->imageUrlPrefix . self::NOIMAGE_FILENAME);
 		}
@@ -104,7 +104,7 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function imageExists(EntityImageInterface $entity, $type = null) {
 		$imageFileCollection = $entity->getImageFileCollection();
-		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $imageFileCollection->getRelativImageFilepath($type);
+		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $imageFileCollection->getRelativeImageFilepath($type);
 		return is_file($imageFilepath) && is_readable($imageFilepath);
 	}
 

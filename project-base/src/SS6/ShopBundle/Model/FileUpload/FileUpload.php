@@ -142,7 +142,7 @@ class FileUpload {
 	 * @param string $cachedFilename
 	 * @return string
 	 */
-	public function getOriginFilenameByCached($cachedFilename) {
+	public function getOriginalFilenameByCached($cachedFilename) {
 		$matches = array();
 		if ($cachedFilename && preg_match('/^.+?__(.+)$/', $cachedFilename, $matches)) {
 			return $matches[1];
@@ -157,8 +157,8 @@ class FileUpload {
 		$filesForUpload = $entity->getCachedFilesForUpload();
 		foreach ($filesForUpload as $key => $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
-			$originFilename = $this->getOriginFilenameByCached($fileForUpload->getCacheFilename());
-			$entity->setFileAsUploaded($key, $originFilename);
+			$originalFilename = $this->getOriginalFilenameByCached($fileForUpload->getCacheFilename());
+			$entity->setFileAsUploaded($key, $originalFilename);
 		}
 	}
 
@@ -171,13 +171,13 @@ class FileUpload {
 		foreach ($filesForUpload as $key => $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
 			$sourceFilepath = $this->getCacheFilepath($fileForUpload->getCacheFilename());
-			$originFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
+			$originalFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
 				$fileForUpload->getNameConventionType(),
 				$fileForUpload->getCacheFilename(),
 				$entity->getId()
 			);
 			$targetFilename = $this->getTargetFilepath(
-				$originFilename,
+				$originalFilename,
 				$fileForUpload->isImage(),
 				$fileForUpload->getCategory(),
 				$fileForUpload->getType()
@@ -186,7 +186,7 @@ class FileUpload {
 			try {
 				$this->filesystem->rename($sourceFilepath, $targetFilename, true);
 			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
-				$message = 'Failed rename file from cache to entity';
+				$message = 'Failed to rename file from cache to entity';
 				throw new \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException($message, $ex);
 			}
 		}
