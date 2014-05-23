@@ -31,7 +31,7 @@ twig:
 assetic:
   debug: "%kernel.debug%"
   use_controller: false
-  bundles: [ ]
+  bundles: [FMElfinderBundle]
   filters:
     cssrewrite: ~
 
@@ -65,3 +65,16 @@ swiftmailer:
   username: "%mailer_user%"
   password: "%mailer_password%"
   spool: { type: memory }
+
+ivory_ck_editor:
+  default_config: default
+  configs:
+    default:
+      filebrowserBrowseRoute: elfinder
+
+fm_elfinder:
+  connector:
+    roots:
+      uploads:
+        driver: elfinder.driver.filesystem
+        path: %kernel.root_dir%/../web/
