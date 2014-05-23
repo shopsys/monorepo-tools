@@ -165,7 +165,7 @@ class OrderStatusController extends Controller {
 			$flashMessage->addError('Stav objednávek ' . $e->getOrderStatus()->getName() . ' je rezervovaný a nelze jej smazat');
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
 			$message = 'Stav objednávek ' . $e->getOrderStatus()->getName()
-				. ' mají nastaveny nějaké objednávky, před smazáním jim prosím změňte stav.';
+				. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav.';
 			$flashMessage->addError($message);
 		}
 
