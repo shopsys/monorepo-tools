@@ -2,13 +2,13 @@
 
 	$.fn.SS6 = $.fn.SS6 || {};
 	$.fn.SS6.fileUpload = $.fn.SS6.fileUpload || {};
-	
+
 	$.fn.SS6.fileUpload.init = function () {
 		$('.js-file-upload').each(function() {
 			new $.fn.SS6.fileUpload.uploader($(this));
 		});
 	}
-	
+
 	$.fn.SS6.fileUpload.tryDeleteCachedFile = function (uploader) {
 		var filename = uploader.$hiddenInput.val();
 		if (filename) {
@@ -20,7 +20,7 @@
 			});
 		}
 	}
-	
+
 	$.fn.SS6.fileUpload.uploader = function ($uploader) {
 		var uploader = this;
 		this.$uploader = $uploader;
@@ -38,24 +38,24 @@
 		var updateFileStatus = function (status, message) {
 			uploader.$status.text(message).removeClass('error success uploading').addClass(status);
 		}
-		
+
 		var onFormSubmit = function (event) {
 			if (!uploader.ready) {
 				alert('Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.');
 				event.preventDefault();
 			}
 		}
-		
+
 		this.removeUploadedFile = function() {
 			$.fn.SS6.fileUpload.tryDeleteCachedFile(uploader);
 			uploader.$hiddenInput.val('');
 			uploader.$item.hide();
 		}
-		
+
 		this.$removeButton.bind('click', this.removeUploadedFile);
-		
+
 		$uploader.closest('form').bind('submit.file-upload', onFormSubmit);
-		
+
 		$uploader.dmUploader({
 			url: $uploader.data('fileupload-url'),
 			dataType: 'json',
@@ -76,6 +76,7 @@
 				uploader.ready = true;
 			},
 			onUploadProgress: function(id, percent){
+				percent = percent > 100 ? 100 : percent;
 				uploader.$progressBar.width(percent + '%').text(percent + '%');
 			},
 			onUploadSuccess: function(id, data){
@@ -93,10 +94,10 @@
 				uploader.$label.text(uploader.lastName);
 			},
 			onFileTypeError: function(file){
-				
+
 			},
 			onFileSizeError: function(file){
-	
+
 			},
 			onFallbackMode: function(message){
 				if (!uploader.$hiddenInput.val()) {
@@ -105,9 +106,9 @@
 			}
 		});
 	}
-	
+
 	$(document).ready(function () {
 		$.fn.SS6.fileUpload.init();
 	});
-	
+
 })(jQuery);

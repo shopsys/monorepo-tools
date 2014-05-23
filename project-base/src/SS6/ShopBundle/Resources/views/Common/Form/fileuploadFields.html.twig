@@ -2,37 +2,38 @@
 	{% spaceless %}
 		{%  set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-file-upload')|trim)}) %}
 		{%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
-		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletecachedfile')}) %}	
-		
-		<div {{ block('widget_attributes') }}>
-			<span class="js-file-upload-hidden" style="display: none;">
-				{{ form_row(form.children.file_uploaded) }}
-			</span>
-			{% if form.children.file_uploaded.vars.value is empty %}
-				{% set itemStyle = 'display: none;' %}
-			{% else %}
-				{% set itemStyle = '' %}
-			{% endif %}
-			<div class="js-file-upload-item" style="{{ itemStyle }}">
-				<div class="info">
-					<div>
-						<span class="js-file-upload-label">{{ getLabelByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
-						<i class="fa fa-times cursor-pointer js-file-upload-delete"></i>
+		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletecachedfile')}) %}
+		<div class="upload-box">
+			<div {{ block('widget_attributes') }}>
+				<span class="js-file-upload-hidden" style="display: none;">
+					{{ form_row(form.children.file_uploaded) }}
+				</span>
+				{% if form.children.file_uploaded.vars.value is empty %}
+					{% set itemStyle = 'display: none;' %}
+				{% else %}
+					{% set itemStyle = '' %}
+				{% endif %}
+				<div class="js-file-upload-item upload-box__result" style="{{ itemStyle }}">
+					<div class="info">
+						<div>
+							<span class="js-file-upload-label">{{ getLabelByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
+							<i class="fa fa-times cursor-pointer js-file-upload-delete"></i>
+						</div>
+						<div class="text-muted">
+							Stav: <span class="js-file-upload-status">Úspěšně nahráno</span>
+						</div>
 					</div>
-					<div class="text-muted">
-						Stav: <span class="js-file-upload-status">Úspěšně nahráno</span>
+					<div class="js-file-upload-progress upload-box__bar">
+						<div class="js-file-upload-progress-bar upload-box__bar__inner">0%</div>
 					</div>
 				</div>
-				<div class="js-file-upload-progress">
-					<div class="js-file-upload-progress-bar">0%</div>
-				</div>
-			</div>
-			
-			<div class="js-file-upload-input">
-				<div class="js-file-upload-fallback-hide">Zde přetáhněte soubor</div>
-				<div class="js-file-upload-fallback-hide">-nebo-</div>
-				<div>
-					{{ form_widget(form.children.file) }}
+
+				<div class="js-file-upload-input">
+					<div class="js-file-upload-fallback-hide upload-box__place"><i class="fa fa-lg fa-plus-circle"></i> Zde přetáhněte soubor</div>
+					<div class="js-file-upload-fallback-hide upload-box__between">- nebo -</div>
+					<div class="upload-box__file-input">
+						{{ form_widget(form.children.file) }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -40,4 +41,3 @@
 	{% endspaceless %}
 {% endblock file_upload_widget %}
 
-	
