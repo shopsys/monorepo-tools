@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
+use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductEditFacade {
 
@@ -20,19 +20,19 @@ class ProductEditFacade {
 	private $productRepository;
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
 	 */
-	private $productVisibilityRepository;
+	private $productVisibilityFacade;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
 	public function __construct(EntityManager $em, ProductRepository $productRepository,
-			ProductVisibilityRepository $productVisibilityRepository) {
+			ProductVisibilityFacade $productVisibilityFacade) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
-		$this->productVisibilityRepository = $productVisibilityRepository;
+		$this->productVisibilityFacade = $productVisibilityFacade;
 	}
 	
 	/**
@@ -55,7 +55,7 @@ class ProductEditFacade {
 		$this->em->persist($product);
 		$this->em->flush();
 		
-		$this->productVisibilityRepository->refreshProductsVisibility();
+		$this->productVisibilityFacade->refreshProductsVisibility();
 		
 		return $product;
 	}
@@ -81,7 +81,7 @@ class ProductEditFacade {
 
 		$this->em->flush();
 		
-		$this->productVisibilityRepository->refreshProductsVisibility();
+		$this->productVisibilityFacade->refreshProductsVisibility();
 		
 		return $product;
 	}
