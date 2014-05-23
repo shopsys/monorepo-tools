@@ -76,7 +76,6 @@
 				uploader.ready = true;
 			},
 			onUploadProgress: function(id, percent){
-				percent = percent > 100 ? 100 : percent;
 				uploader.$progressBar.width(percent + '%').text(percent + '%');
 			},
 			onUploadSuccess: function(id, data){
