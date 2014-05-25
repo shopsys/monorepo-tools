@@ -39,11 +39,13 @@ class RegistrationController extends Controller {
 
 				$flashMessage->addSuccess('Byli jste úspěšně zaregistrováni');
 				return $this->redirect($this->generateUrl('front_homepage'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError('Uživatel s tímto emailem již existuje'));
+			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s emailem ' . $e->getEmail()));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', array(
