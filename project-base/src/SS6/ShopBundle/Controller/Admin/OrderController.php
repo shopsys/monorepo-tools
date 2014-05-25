@@ -92,7 +92,7 @@ class OrderController extends Controller {
 				$order = $orderFacade->edit($id, $orderData);
 
 				$flashMessage->addSuccess('Byla upravena objednávka ' . $order->getNumber());
-				return $this->redirect($this->generateUrl('admin_order_edit', array('id' => $order->getId())));
+				return $this->redirect($this->generateUrl('admin_order_list'));
 			} elseif ($form->isSubmitted()) {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 				$order = $this->get('ss6.shop.order.order_repository')->getById($id);
