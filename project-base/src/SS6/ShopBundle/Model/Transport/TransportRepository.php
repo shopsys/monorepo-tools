@@ -80,7 +80,7 @@ class TransportRepository {
 	 * @return array
 	 */
 	public function getAllDataWithVisibility(array $allPayments) {
-		$transports = $this->getAllQueryBuilder()->getQuery()->getResult();
+		$transports = $this->getAllQueryBuilder()->addOrderBy('t.name')->getQuery()->getResult();
 		$transportsData = [];
 		
 		foreach ($transports as $transport) {
