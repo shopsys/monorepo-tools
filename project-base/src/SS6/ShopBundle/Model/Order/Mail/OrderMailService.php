@@ -6,7 +6,7 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use Swift_Message;
-use Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class OrderMailService {
 
@@ -19,15 +19,15 @@ class OrderMailService {
 	private $senderEmail;
 
 	/**
-	 * @var \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine
+	 * @var \Symfony\Bundle\TwigBundle\TwigEngine
 	 */
 	private $templating;
 	
 	/**
 	 * @param string $senderEmail
-	 * @param \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine $templating
+	 * @param \Symfony\Bundle\TwigBundle\TwigEngine $templating
 	 */
-	public function __construct($senderEmail, TimedTwigEngine $templating) {
+	public function __construct($senderEmail, TwigEngine $templating) {
 		$this->senderEmail = $senderEmail;
 		$this->templating = $templating;
 	}
