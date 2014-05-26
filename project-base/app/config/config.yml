@@ -71,6 +71,15 @@ ivory_ck_editor:
   configs:
     default:
       filebrowserBrowseRoute: elfinder
+      toolbar: 
+        - ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+        - ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+        - ['NumberedList', 'BulletedList', '-', 'CreateDiv', '-', 'AlignLeft', 'AlignCenter', 'AlignRight', 'AlignJustify']
+        - ['Link', 'Unlink']
+        - ['Image', 'Flash', 'Table', 'SpecialChar']
+        - '/'
+        - ['Styles', 'Format', 'Font', 'FontSize']
+        - ['Maximize', '-', 'Source', '-','Save', 'Preview']
 
 fm_elfinder:
   editor: ckeditor
