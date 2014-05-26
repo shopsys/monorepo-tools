@@ -95,7 +95,7 @@ class CustomerController extends Controller {
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s emailem ' . $e->getEmail()));
+			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -234,7 +234,7 @@ class CustomerController extends Controller {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$flashMessage->addError('V databázi se již nachází zákazník s emailem ' . $e->getEmail());
+			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			throw $this->createNotFoundException($e->getMessage(), $e);
 		}

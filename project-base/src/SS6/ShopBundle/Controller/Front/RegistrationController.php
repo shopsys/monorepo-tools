@@ -41,7 +41,7 @@ class RegistrationController extends Controller {
 				return $this->redirect($this->generateUrl('front_homepage'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s emailem ' . $e->getEmail()));
+			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
