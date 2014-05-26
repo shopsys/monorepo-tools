@@ -65,8 +65,12 @@ class RegistrationService {
 	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
 	public function changeEmail(User $user, $email, User $userByEmail = null) {
+		if ($email !== null) {
+			$email = strtolower($email);
+		}
+
 		if ($userByEmail instanceof User) {
-			if ($userByEmail->getEmail() === $email && $user !== $userByEmail) {
+			if (strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
 				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
 			}
 		}
