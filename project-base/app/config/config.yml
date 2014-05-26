@@ -74,10 +74,10 @@ ivory_ck_editor:
       toolbar: 
         - ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
         - ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
-        - ['NumberedList', 'BulletedList', '-', 'CreateDiv', '-', 'AlignLeft', 'AlignCenter', 'AlignRight', 'AlignJustify']
+        - ['NumberedList', 'BulletedList', '-', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
         - ['Link', 'Unlink']
-        - ['Image', 'Flash', 'Table', 'SpecialChar']
         - '/'
+        - ['Image', 'Flash', 'Table', 'SpecialChar']
         - ['Styles', 'Format', 'Font', 'FontSize']
         - ['Maximize', '-', 'Source', '-','Save', 'Preview']
 

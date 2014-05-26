@@ -14,7 +14,7 @@
 		"doctrine/orm": "~2.2,>=2.2.3",
 		"doctrine/doctrine-bundle": "~1.2",
 		"doctrine/doctrine-fixtures-bundle": "2.2.*",
-		"egeloen/ckeditor-bundle": "~2.0",
+		"egeloen/ckeditor-bundle": "2.3.*@dev",
 		"helios-ag/fm-elfinder-bundle": "1.x",
 		"incenteev/composer-parameter-handler": "~2.0",
 		"jakub-onderka/php-parallel-lint": "0.4",
