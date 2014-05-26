@@ -73,8 +73,9 @@ ivory_ck_editor:
       filebrowserBrowseRoute: elfinder
 
 fm_elfinder:
+  editor: ckeditor
   connector:
     roots:
       uploads:
-        driver: elfinder.driver.filesystem
-        path: %kernel.root_dir%/../web/
+        driver: LocalFileSystem
+        path: assets/uploads
