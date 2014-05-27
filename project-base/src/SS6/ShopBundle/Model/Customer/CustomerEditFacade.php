@@ -93,29 +93,29 @@ class CustomerEditFacade {
 	 * @param string|null $companyTaxNumber
 	 * @param string|null $street
 	 * @param string|null $city
-	 * @param string|null $zip
+	 * @param string|null $postcode
 	 * @param string|null $country
 	 * @param string|null $deliveryCompanyName
 	 * @param string|null $deliveryConatactPerson
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
 	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryZip
+	 * @param string|null $deliveryPostcode
 	 * @param string|null $deliveryCountry
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function create($firstName, $lastName, $email, $password,
 			$telephone = null, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$street = null, $city = null, $zip = null, $country = null,
+			$street = null, $city = null, $postcode = null, $country = null,
 			$deliveryCompanyName = null, $deliveryConatactPerson = null, $deliveryTelephone = null,
-			$deliveryStreet = null, $deliveryCity = null, $deliveryZip = null, $deliveryCountry = null) {
+			$deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null, $deliveryCountry = null) {
 
 		$userByEmail = $this->userRepository->findUserByEmail($email);
 
 		$billingAddress = new BillingAddress(
 			$street,
 			$city,
-			$zip,
+			$postcode,
 			$country,
 			$companyName,
 			$companyNumber,
@@ -125,7 +125,7 @@ class CustomerEditFacade {
 		$deliveryAddress = new DeliveryAddress(
 			$deliveryStreet,
 			$deliveryCity,
-			$deliveryZip,
+			$deliveryPostcode,
 			$deliveryCountry,
 			$deliveryCompanyName,
 			$deliveryConatactPerson,
@@ -159,22 +159,22 @@ class CustomerEditFacade {
 	 * @param string|null $companyTaxNumber
 	 * @param string|null $street
 	 * @param string|null $city
-	 * @param string|null $zip
+	 * @param string|null $postcode
 	 * @param string|null $country
 	 * @param string|null $deliveryCompanyName
 	 * @param string|null $deliveryConatactPerson
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
 	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryZip
+	 * @param string|null $deliveryPostcode
 	 * @param string|null $deliveryCountry
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function edit($userId, $firstName, $lastName, $email, $password = null,
 			$telephone = null, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$street = null, $city = null, $zip = null, $country = null,
+			$street = null, $city = null, $postcode = null, $country = null,
 			$deliveryCompanyName = null, $deliveryConatactPerson = null, $deliveryTelephone = null,
-			$deliveryStreet = null, $deliveryCity = null, $deliveryZip = null, $deliveryCountry = null) {
+			$deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null, $deliveryCountry = null) {
 
 		$user = $this->userRepository->getUserById($userId);
 
@@ -182,7 +182,7 @@ class CustomerEditFacade {
 		$billingAddress->edit(
 			$street,
 			$city,
-			$zip,
+			$postcode,
 			$country,
 			$companyName,
 			$companyNumber,
@@ -193,7 +193,7 @@ class CustomerEditFacade {
 		$deliveryAddress->edit(
 			$deliveryStreet,
 			$deliveryCity,
-			$deliveryZip,
+			$deliveryPostcode,
 			$deliveryCountry,
 			$deliveryCompanyName,
 			$deliveryConatactPerson,
@@ -227,22 +227,22 @@ class CustomerEditFacade {
 	 * @param string|null $companyTaxNumber
 	 * @param string|null $street
 	 * @param string|null $city
-	 * @param string|null $zip
+	 * @param string|null $postcode
 	 * @param string|null $country
 	 * @param string|null $deliveryCompanyName
 	 * @param string|null $deliveryConatactPerson
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
 	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryZip
+	 * @param string|null $deliveryPostcode
 	 * @param string|null $deliveryCountry
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function editByCustomer($userId, $firstName, $lastName, $password = null,
 			$telephone = null, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$street = null, $city = null, $zip = null, $country = null,
+			$street = null, $city = null, $postcode = null, $country = null,
 			$deliveryCompanyName = null, $deliveryConatactPerson = null, $deliveryTelephone = null,
-			$deliveryStreet = null, $deliveryCity = null, $deliveryZip = null, $deliveryCountry = null) {
+			$deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null, $deliveryCountry = null) {
 
 		$user = $this->userRepository->getUserById($userId);
 
@@ -250,7 +250,7 @@ class CustomerEditFacade {
 		$billingAddress->edit(
 			$street,
 			$city,
-			$zip,
+			$postcode,
 			$country,
 			$companyName,
 			$companyNumber,
@@ -261,7 +261,7 @@ class CustomerEditFacade {
 		$deliveryAddress->edit(
 			$deliveryStreet,
 			$deliveryCity,
-			$deliveryZip,
+			$deliveryPostcode,
 			$deliveryCountry,
 			$deliveryCompanyName,
 			$deliveryConatactPerson,

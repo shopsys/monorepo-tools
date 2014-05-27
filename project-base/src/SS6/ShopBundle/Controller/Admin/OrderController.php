@@ -60,14 +60,14 @@ class OrderController extends Controller {
 				$orderData->setCompanyTaxNumber($order->getCompanyTaxNumber());
 				$orderData->setStreet($order->getStreet());
 				$orderData->setCity($order->getCity());
-				$orderData->setZip($order->getZip());
+				$orderData->setPostcode($order->getPostcode());
 				$orderData->setDeliveryFirstName($order->getDeliveryFirstName());
 				$orderData->setDeliveryLastName($order->getDeliveryLastName());
 				$orderData->setDeliveryCompanyName($order->getDeliveryCompanyName());
 				$orderData->setDeliveryTelephone($order->getDeliveryTelephone());
 				$orderData->setDeliveryStreet($order->getDeliveryStreet());
 				$orderData->setDeliveryCity($order->getDeliveryCity());
-				$orderData->setDeliveryZip($order->getDeliveryZip());
+				$orderData->setDeliveryPostcode($order->getDeliveryPostcode());
 				$orderData->setNote($order->getNote());
 
 				$orderItemsData = array();

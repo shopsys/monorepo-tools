@@ -91,7 +91,7 @@ class OrderFacade {
 			$orderFormData->getTelephone(),
 			$orderFormData->getStreet(),
 			$orderFormData->getCity(),
-			$orderFormData->getZip(),
+			$orderFormData->getPostcode(),
 			$user,
 			$orderFormData->getCompanyName(),
 			$orderFormData->getCompanyNumber(),
@@ -102,7 +102,7 @@ class OrderFacade {
 			$orderFormData->getDeliveryTelephone(),
 			$orderFormData->getDeliveryStreet(),
 			$orderFormData->getDeliveryCity(),
-			$orderFormData->getDeliveryZip(),
+			$orderFormData->getDeliveryPostcode(),
 			$orderFormData->getNote());
 
 		$this->fillOrderItems($order, $this->cart);

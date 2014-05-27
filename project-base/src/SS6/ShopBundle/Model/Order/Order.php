@@ -159,7 +159,7 @@ class Order {
 	 *
 	 * @ORM\Column(type="string", length=30)
 	 */
-	private $zip;
+	private $postcode;
 
 	/**
 	 * @var string|null
@@ -208,7 +208,7 @@ class Order {
 	 *
 	 * @ORM\Column(type="string", length=30, nullable=true)
 	 */
-	private $deliveryZip;
+	private $deliveryPostcode;
 
 	/**
 	 * @var string|null
@@ -235,7 +235,7 @@ class Order {
 	 * @param string $telephone
 	 * @param string $street
 	 * @param string $city
-	 * @param string $zip
+	 * @param string $postcode
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
@@ -246,14 +246,14 @@ class Order {
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
 	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryZip
+	 * @param string|null $deliveryPostcode
 	 * @param string|null $note
 	 */
 	public function __construct($number, Transport $transport, Payment $payment, OrderStatus $orderStatus, 
-			$firstName, $lastName, $email, $telephone, $street, $city, $zip, User $user = null, $companyName = null,
+			$firstName, $lastName, $email, $telephone, $street, $city, $postcode, User $user = null, $companyName = null,
 			$companyNumber = null, $companyTaxNumber = null, $deliveryFirstName = null, $deliveryLastName = null,
 			$deliveryCompanyName = null, $deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null,
-			$deliveryZip = null, $note = null) {
+			$deliveryPostcode = null, $note = null) {
 		$this->number = $number;
 		$this->customer = $user;
 		$this->items = new ArrayCollection();
@@ -270,14 +270,14 @@ class Order {
 		$this->companyTaxNumber = $companyTaxNumber;
 		$this->street = $street;
 		$this->city = $city;
-		$this->zip = $zip;
+		$this->postcode = $postcode;
 		$this->deliveryFirstName = $deliveryFirstName;
 		$this->deliveryLastName = $deliveryLastName;
 		$this->deliveryCompanyName = $deliveryCompanyName;
 		$this->deliveryTelephone = $deliveryTelephone;
 		$this->deliveryStreet = $deliveryStreet;
 		$this->deliveryCity = $deliveryCity;
-		$this->deliveryZip = $deliveryZip;
+		$this->deliveryPostcode = $deliveryPostcode;
 		$this->note = $note;
 		$this->deleted = false;
 	}
@@ -290,7 +290,7 @@ class Order {
 	 * @param string $telephone
 	 * @param string $street
 	 * @param string $city
-	 * @param string $zip
+	 * @param string $postcode
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
@@ -301,13 +301,13 @@ class Order {
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
 	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryZip
+	 * @param string|null $deliveryPostcode
 	 * @param string|null $note
 	 */
 	public function edit(OrderStatus $orderStatus, $firstName, $lastName, $email, $telephone, $street, $city, 
-			$zip, $user, $companyName, $companyNumber, $companyTaxNumber,
+			$postcode, $user, $companyName, $companyNumber, $companyTaxNumber,
 			$deliveryFirstName, $deliveryLastName, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
-			$deliveryCity, $deliveryZip, $note) {
+			$deliveryCity, $deliveryPostcode, $note) {
 		$this->status = $orderStatus;
 		$this->customer = $user;
 		$this->firstName = $firstName;
@@ -319,14 +319,14 @@ class Order {
 		$this->companyTaxNumber = $companyTaxNumber;
 		$this->street = $street;
 		$this->city = $city;
-		$this->zip = $zip;
+		$this->postcode = $postcode;
 		$this->deliveryFirstName = $deliveryFirstName;
 		$this->deliveryLastName = $deliveryLastName;
 		$this->deliveryCompanyName = $deliveryCompanyName;
 		$this->deliveryTelephone = $deliveryTelephone;
 		$this->deliveryStreet = $deliveryStreet;
 		$this->deliveryCity = $deliveryCity;
-		$this->deliveryZip = $deliveryZip;
+		$this->deliveryPostcode = $deliveryPostcode;
 		$this->note = $note;
 	}
 
@@ -534,8 +534,8 @@ class Order {
 	/**
 	 * @return string
 	 */
-	public function getZip() {
-		return $this->zip;
+	public function getPostcode() {
+		return $this->postcode;
 	}
 
 	/**
@@ -583,8 +583,8 @@ class Order {
 	/**
 	 * @return string
 	 */
-	public function getDeliveryZip() {
-		return $this->deliveryZip;
+	public function getDeliveryPostcode() {
+		return $this->deliveryPostcode;
 	}
 
 	/**
