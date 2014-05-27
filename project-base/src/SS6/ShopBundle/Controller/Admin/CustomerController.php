@@ -225,11 +225,13 @@ class CustomerController extends Controller {
 
 				$flashMessage->addSuccess('Byl vytvořen zákazník ' . $user->getFullName());
 				return $this->redirect($this->generateUrl('admin_customer_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', array(

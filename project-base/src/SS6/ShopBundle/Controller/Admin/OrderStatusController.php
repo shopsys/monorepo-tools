@@ -37,7 +37,9 @@ class OrderStatusController extends Controller {
 
 			$flashMessage->addSuccess('Byl vytvořen stav objednávek ' . $orderStatus->getName());
 			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
-		} elseif ($form->isSubmitted()) {
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
@@ -78,7 +80,9 @@ class OrderStatusController extends Controller {
 
 			$flashMessage->addSuccess('Byla upraven stav objednávek ' . $orderStatus->getName());
 			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
-		} elseif ($form->isSubmitted()) {
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 

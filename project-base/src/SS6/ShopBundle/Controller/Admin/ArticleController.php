@@ -131,7 +131,9 @@ class ArticleController extends Controller {
 
 			$flashMessage->addSuccess('Byl vytvořen článek ' . $article->getName());
 			return $this->redirect($this->generateUrl('admin_article_list'));
-		} elseif ($form->isSubmitted()) {
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 

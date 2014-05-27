@@ -48,8 +48,10 @@ class PaymentController extends Controller {
 
 			$flashMessage->addSuccess('Byla vytvořena platba ' . $payment->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} elseif ($form->isSubmitted()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', array(
@@ -98,8 +100,10 @@ class PaymentController extends Controller {
 
 			$flashMessage->addSuccess('Byla upravena platba ' . $payment->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} elseif ($form->isSubmitted()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', array(

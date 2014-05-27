@@ -55,7 +55,9 @@ class ProductController extends Controller {
 
 			$flashMessage->addSuccess('Bylo upraveno zboží ' . $product->getName());
 			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
-		} elseif ($form->isSubmitted()) {
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		
@@ -93,7 +95,9 @@ class ProductController extends Controller {
 
 			$flashMessage->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
 			return $this->redirect($this->generateUrl('admin_product_list'));
-		} elseif ($form->isSubmitted()) {
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		

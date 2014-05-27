@@ -39,8 +39,10 @@ class TransportController extends Controller {
 			$transportEditFacade->create($transport);
 			$flashMessage->addSuccess('Byla vytvořena doprava ' . $transport->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} elseif ($form->isSubmitted()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
@@ -78,8 +80,10 @@ class TransportController extends Controller {
 			$transportEditFacade->edit($transport, $formData);
 			$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} elseif ($form->isSubmitted()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(

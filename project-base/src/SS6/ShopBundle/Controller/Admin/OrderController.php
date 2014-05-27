@@ -93,13 +93,15 @@ class OrderController extends Controller {
 
 				$flashMessage->addSuccess('Byla upravena objednávka ' . $order->getNumber());
 				return $this->redirect($this->generateUrl('admin_order_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
 			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessage->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
