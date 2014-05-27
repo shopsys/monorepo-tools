@@ -101,8 +101,6 @@ class OrderController extends Controller {
 			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessage->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
-		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
@@ -202,16 +200,11 @@ class OrderController extends Controller {
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
-		try {
-			$orderNumber = $orderRepository->getById($id)->getNumber();
-			$orderFacade = $this->get('ss6.shop.order.order_facade');
-			/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-			$orderFacade->deleteById($id);
-
-			$flashMessage->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
-		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
-		}
+		$orderNumber = $orderRepository->getById($id)->getNumber();
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+		$orderFacade->deleteById($id);
+		$flashMessage->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
 
 		return $this->redirect($this->generateUrl('admin_order_list'));
 	}

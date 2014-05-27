@@ -72,38 +72,34 @@ class PaymentController extends Controller {
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		
-		try {
-			$allTransports = $transportRepository->getAll();
-			
-			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
-			$payment = $paymentEditFacade->getByIdWithTransports($id); 
-			
-			$formData = new PaymentFormData();
-			$formData->setId($payment->getId());
-			$formData->setName($payment->getName());
-			$formData->setPrice($payment->getPrice());
-			$formData->setDescription($payment->getDescription());
-			$formData->setHidden($payment->isHidden());
-			
-			$transports = array();
-			foreach ($payment->getTransports() as $transport) {
-				$transports[] = $transport->getId();
-			}
-			$formData->setTransports($transports);
-			
-			$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $formData);
-			$form->handleRequest($request);
+		$allTransports = $transportRepository->getAll();
 
-			if ($form->isValid()) {
-				$paymentEditFacade->edit($payment, $formData);
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+		$payment = $paymentEditFacade->getByIdWithTransports($id);
 
-				$flashMessage->addSuccess('Byla upravena platba ' . $payment->getName());
-				return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
-			}
-		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+		$formData = new PaymentFormData();
+		$formData->setId($payment->getId());
+		$formData->setName($payment->getName());
+		$formData->setPrice($payment->getPrice());
+		$formData->setDescription($payment->getDescription());
+		$formData->setHidden($payment->isHidden());
+
+		$transports = array();
+		foreach ($payment->getTransports() as $transport) {
+			$transports[] = $transport->getId();
+		}
+		$formData->setTransports($transports);
+
+		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $formData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$paymentEditFacade->edit($payment, $formData);
+
+			$flashMessage->addSuccess('Byla upravena platba ' . $payment->getName());
+			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+		} elseif ($form->isSubmitted()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', array(
@@ -122,14 +118,11 @@ class PaymentController extends Controller {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
-		try {
-			$paymentName = $paymentEditFacade->getById($id)->getName();
-			$paymentEditFacade->deleteById($id);
-			$flashMessage->addSuccess('Platba ' . $paymentName . ' byla odstraněna');
-			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
-		}
+		$paymentName = $paymentEditFacade->getById($id)->getName();
+		$paymentEditFacade->deleteById($id);
+		$flashMessage->addSuccess('Platba ' . $paymentName . ' byla odstraněna');
+		
+		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
 	
 	public function listAction() {

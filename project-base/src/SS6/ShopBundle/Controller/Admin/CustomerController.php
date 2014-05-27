@@ -92,8 +92,6 @@ class CustomerController extends Controller {
 			} elseif ($form->isSubmitted()) {
 				$user = $this->get('ss6.shop.customer.user_repository')->getUserById($id);
 			}
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
 		}
@@ -235,8 +233,6 @@ class CustomerController extends Controller {
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', array(
@@ -255,14 +251,9 @@ class CustomerController extends Controller {
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
-		try {
-			$fullName = $userRepository->getUserById($id)->getFullName();
-			$this->get('ss6.shop.customer.customer_edit_facade')->delete($id);
-
-			$flashMessage->addSuccess('Zákazník ' . $fullName . ' byl smazán');
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
-		}
+		$fullName = $userRepository->getUserById($id)->getFullName();
+		$this->get('ss6.shop.customer.customer_edit_facade')->delete($id);
+		$flashMessage->addSuccess('Zákazník ' . $fullName . ' byl smazán');
 
 		return $this->redirect($this->generateUrl('admin_customer_list'));
 	}

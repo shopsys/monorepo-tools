@@ -13,11 +13,7 @@ class ArticleController extends Controller {
 		$articleRepository = $this->get('ss6.shop.article.article_repository');
 		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
-		try {
-			$article = $articleRepository->getById($id);
-		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $e) {
-			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Article not found', $e);
-		}
+		$article = $articleRepository->getById($id);
 
 		return $this->render('@SS6Shop/Front/Content/Article/detail.html.twig', array(
 			'article' => $article,
