@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base\Administrator;
+namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
