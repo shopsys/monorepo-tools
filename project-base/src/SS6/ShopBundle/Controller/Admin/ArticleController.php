@@ -20,16 +20,14 @@ class ArticleController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$articleRepository = $this->get('ss6.shop.article.article_repository');
+		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
+		$article = $articleRepository->getById($id);
 		$form = $this->createForm(new ArticleFormType());
-
 		$articleData = array();
 
 		if (!$form->isSubmitted()) {
-			$articleRepository = $this->get('ss6.shop.article.article_repository');
-			/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
-			$article = $articleRepository->getById($id);
-
 			$articleData['id'] = $article->getId();
 			$articleData['name'] = $article->getName();
 			$articleData['text'] = $article->getText();
@@ -51,8 +49,6 @@ class ArticleController extends Controller {
 
 			$flashMessage->addSuccess('Byl upraven článek ' . $article->getName());
 			return $this->redirect($this->generateUrl('admin_article_list'));
-		} elseif ($form->isSubmitted()) {
-			$article = $this->get('ss6.shop.article.article_repository')->getById($id);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {

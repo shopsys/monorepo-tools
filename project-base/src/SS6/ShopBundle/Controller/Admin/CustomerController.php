@@ -25,17 +25,16 @@ class CustomerController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
-
+		$userRepository = $this->get('ss6.shop.customer.user_repository');
+		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
+		
+		$user = $userRepository->getUserById($id);
 		$form = $this->createForm(new CustomerFormType());
 
 		try {
 			$customerData = array();
 
 			if (!$form->isSubmitted()) {
-				$userRepository = $this->get('ss6.shop.customer.user_repository');
-				/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
-				$user = $userRepository->getUserById($id);
-
 				$customerData['id'] = $user->getId();
 				$customerData['firstName'] = $user->getFirstName();
 				$customerData['lastName'] = $user->getLastName();
@@ -89,8 +88,6 @@ class CustomerController extends Controller {
 
 				$flashMessage->addSuccess('Byl upraven zákazník ' . $user->getFullName());
 				return $this->redirect($this->generateUrl('admin_customer_list'));
-			} elseif ($form->isSubmitted()) {
-				$user = $this->get('ss6.shop.customer.user_repository')->getUserById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));

@@ -27,18 +27,18 @@ class OrderController extends Controller {
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
-
-		$allOrderStauses = $orderStatusRepository->getAll();
+		$orderRepository = $this->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		
+		$order = $orderRepository->getById($id);
+		$allOrderStauses = $orderStatusRepository->getAll();
 		$form = $this->createForm(new OrderFormType($allOrderStauses));
 		
 		try {
 			$orderData = new OrderFormData();
 
 			if (!$form->isSubmitted()) {
-				$orderRepository = $this->get('ss6.shop.order.order_repository');
-				/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-				$order = $orderRepository->getById($id);
+				
 
 				$customer = $order->getCustomer();
 				$customerId = null;
@@ -95,7 +95,6 @@ class OrderController extends Controller {
 				return $this->redirect($this->generateUrl('admin_order_list'));
 			} elseif ($form->isSubmitted()) {
 				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-				$order = $this->get('ss6.shop.order.order_repository')->getById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
 			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');

@@ -24,15 +24,14 @@ class ProductController extends Controller {
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+		$productRepository = $this->get('ss6.shop.product.product_repository');
+		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 
+		$product = $productRepository->getById($id);
 		$form = $this->createForm(new ProductFormType($fileUpload));
-		
 		$productData = array();
 
 		if (!$form->isSubmitted()) {
-			$productRepository = $this->get('ss6.shop.product.product_repository');
-			/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
-			$product = $productRepository->getById($id);
 			$productData['id'] = $product->getId();
 			$productData['name'] = $product->getName();
 			$productData['catnum'] = $product->getCatnum();
@@ -58,7 +57,6 @@ class ProductController extends Controller {
 			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 		} elseif ($form->isSubmitted()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-			$product = $this->get('ss6.shop.product.product_repository')->getById($id);
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(

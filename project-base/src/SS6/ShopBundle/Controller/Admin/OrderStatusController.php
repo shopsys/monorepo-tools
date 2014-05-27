@@ -54,17 +54,15 @@ class OrderStatusController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 
+		$orderStatus = $orderStatusRepository->getById($id);
+		/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
 		$form = $this->createForm(new OrderStatusFormType());
-
 		$orderStatusData = new OrderStatusFormData();
 
 		if (!$form->isSubmitted()) {
-			$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
-			/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
-			$orderStatus = $orderStatusRepository->getById($id);
-			/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
-
 			$orderStatusData->setId($orderStatus->getId());
 			$orderStatusData->setName($orderStatus->getName());
 		}
@@ -82,7 +80,6 @@ class OrderStatusController extends Controller {
 			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
 		} elseif ($form->isSubmitted()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-			$orderStatus = $this->get('ss6.shop.order.order_status_repository')->getById($id);
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/edit.html.twig', array(
