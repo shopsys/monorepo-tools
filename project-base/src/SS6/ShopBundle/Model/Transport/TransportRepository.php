@@ -29,8 +29,8 @@ class TransportRepository {
 	/**
 	 * @return array
 	 */
-	public function getAll() {
-		return $this->getAllQueryBuilder()->getQuery()->getResult();
+	public function findAll() {
+		return $this->findAllQueryBuilder()->getQuery()->getResult();
 	}
 	
 	/**
@@ -48,7 +48,7 @@ class TransportRepository {
 	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllQueryBuilder() {
+	private function findAllQueryBuilder() {
 		$qb = $this->getTransportRepository()->createQueryBuilder('t')
 			->where('t.deleted = :deleted')->setParameter('deleted', false);
 		return $qb;
@@ -57,7 +57,7 @@ class TransportRepository {
 	/**
 	 * @return array
 	 */
-	public function getAllIncludingDeleted() {
+	public function findAllIncludingDeleted() {
 		return $this->getTransportRepository()->findAll();
 	}
 	
@@ -79,8 +79,8 @@ class TransportRepository {
 	 * @param array $allPayments
 	 * @return array
 	 */
-	public function getAllDataWithVisibility(array $allPayments) {
-		$transports = $this->getAllQueryBuilder()->addOrderBy('t.name')->getQuery()->getResult();
+	public function findAllDataWithVisibility(array $allPayments) {
+		$transports = $this->findAllQueryBuilder()->addOrderBy('t.name')->getQuery()->getResult();
 		$transportsData = [];
 		
 		foreach ($transports as $transport) {
@@ -118,7 +118,7 @@ class TransportRepository {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getVisible(array $visiblePayments) {
-		$transportsWithVisibility = $this->getAllDataWithVisibility($visiblePayments);
+		$transportsWithVisibility = $this->findAllDataWithVisibility($visiblePayments);
 
 		$visibleTransports = array();
 		foreach ($transportsWithVisibility as $transportWithVisibility) {

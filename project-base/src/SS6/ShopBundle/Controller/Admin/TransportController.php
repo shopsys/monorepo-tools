@@ -115,8 +115,8 @@ class TransportController extends Controller {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		
-		$allPayments = $paymentRepository->getAllWithTransports();
-		$transports = $transportRepository->getAllDataWithVisibility($allPayments);
+		$allPayments = $paymentRepository->findAllWithTransports();
+		$transports = $transportRepository->findAllDataWithVisibility($allPayments);
 		
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
 			'transports' => $transports,

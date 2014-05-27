@@ -20,7 +20,7 @@ class PaymentController extends Controller {
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$allTransports = $transportRepository->getAll();
+		$allTransports = $transportRepository->findAll();
 
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
@@ -30,7 +30,7 @@ class PaymentController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transportRepository->getAll();
+			$transportRepository->findAll();
 			$payment = new Payment(
 				$paymentData->getName(),
 				$paymentData->getPrice(),
@@ -74,7 +74,7 @@ class PaymentController extends Controller {
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		
-		$allTransports = $transportRepository->getAll();
+		$allTransports = $transportRepository->findAll();
 
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
@@ -132,7 +132,7 @@ class PaymentController extends Controller {
 	public function listAction() {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$payments = $paymentRepository->getAll();
+		$payments = $paymentRepository->findAll();
 		
 		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
 			'payments' => $payments,

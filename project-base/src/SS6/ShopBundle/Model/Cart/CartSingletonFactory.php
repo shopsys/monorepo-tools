@@ -40,7 +40,7 @@ class CartSingletonFactory {
 	 * @return \SS6\ShopBundle\Model\Cart\Cart
 	 */
 	private function createNewCart(CustomerIdentifier $customerIdentifier) {
-		$cartItems = $this->cartItemRepository->getAllByCustomerIdentifier($customerIdentifier);
+		$cartItems = $this->cartItemRepository->findAllByCustomerIdentifier($customerIdentifier);
 		$cart = new Cart($cartItems);
 		return $cart;
 	}

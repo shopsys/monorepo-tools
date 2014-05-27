@@ -31,7 +31,7 @@ class OrderController extends Controller {
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		
 		$order = $orderRepository->getById($id);
-		$allOrderStauses = $orderStatusRepository->getAll();
+		$allOrderStauses = $orderStatusRepository->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStauses));
 		
 		try {
