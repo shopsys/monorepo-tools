@@ -62,7 +62,7 @@ class PersonalInfoFormType extends AbstractType {
 			->add('deliveryCity', 'text', array('required' => false))
 			->add('deliveryPostcode', 'text', array('required' => false))
 			->add('note', 'textarea', array('required' => false))
-			->add('submit', 'submit');
+			->add('save', 'submit');
 	}
 
 	/**

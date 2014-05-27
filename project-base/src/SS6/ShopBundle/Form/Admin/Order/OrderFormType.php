@@ -103,7 +103,7 @@ class OrderFormType extends AbstractType {
 				'type' => new OrderItemFormType(),
 				'error_bubbling' => false,
 			))
-			->add('submit', 'submit');
+			->add('save', 'submit');
 	}
 
 	/**
