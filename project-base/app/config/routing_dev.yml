@@ -9,6 +9,10 @@ _profiler:
 _configurator:
   resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
   prefix: /_configurator
+  
+ss6_shop_errors:
+  resource: "@SS6ShopBundle/Resources/config/routing_dev.yml"
+  prefix: /
 
 _main:
   resource: routing.yml
