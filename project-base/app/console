@@ -7,14 +7,7 @@
 
 set_time_limit(0);
 
-require_once __DIR__ . '/bootstrap.php.cache';
-require_once __DIR__ . '/AppKernel.php';
 require_once __DIR__ . '/Bootstrap.php';
 
-use Symfony\Component\Console\Input\ArgvInput;
-
-$input = new ArgvInput();
-$enviroment = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: ND\Bootstrap::ENVIROMENT_DEVELOPMENT);
-
-$bootstrap = new ND\Bootstrap($enviroment, true);
+$bootstrap = new SS6\Bootstrap(true);
 $bootstrap->run();

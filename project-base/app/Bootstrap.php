@@ -1,7 +1,8 @@
 <?php
 
-namespace ND;
+namespace SS6;
 
+use SS6\ShopBundle\Component\Enviroment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -19,8 +20,12 @@ class Bootstrap {
 	private $enviroment;
 	private $console;
 	
-	public function __construct($enviroment, $console = false) {
-		$this->enviroment = $enviroment;
+	public function __construct($console = false, $enviroment = null) {
+		if ($enviroment === null) {
+			$this->enviroment = Enviroment::getEnviroment();
+		} else {
+			$this->enviroment = $enviroment;
+		}
 		$this->console = (bool)$console;
 	}
 	
