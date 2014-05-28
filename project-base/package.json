@@ -1,6 +1,11 @@
 {
-  "name": "ss6",
-  "description": "shopsys 6",
+  "name": "ShopSys6",
+  "description": "Copyright by Petr Svoboda - ShopSys 6 - www.ShopSys.cz - info@shopsys.cz",
+  "private": true,
+  "repository" : { 
+    "type": "git",
+    "url": "ssh://gitolite@wendy:4010/shopsys6"
+  },
   "devDependencies": {
     "grunt": "^0.4.4",
     "grunt-contrib-less": "^0.11.0",
