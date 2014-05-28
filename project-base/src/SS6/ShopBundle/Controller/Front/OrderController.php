@@ -19,6 +19,13 @@ class OrderController extends Controller {
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 
+		$cart = $this->get('ss6.shop.cart');
+		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
+
+		if ($cart->isEmpty()) {
+			return $this->redirect($this->generateUrl('front_cart'));
+		}
+
 		$payments = $paymentRepository->getVisible();
 		$transports = $transportRepository->getVisible($payments);
 		$user = $this->getUser();

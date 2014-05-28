@@ -64,4 +64,11 @@ class Cart {
 		return $this->price;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return $this->getItemsCount() === 0;
+	}
+
 }
