@@ -1,0 +1,39 @@
+<div class="navbar navbar navbar-static-top navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="{{ url('admin_default_dashboard') }}" class="navbar-logo">Shopsys</a>
+		</div>
+
+		<ul class="nav navbar-nav">
+			{% for item in menu.regularItems %}
+				<li>
+					{% if item.route %}
+						<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
+					{% else %}
+						<a href="#">{{ item.label }}</a>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nastavení <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					{% for item in menu.settingsItem.items %}
+						<li>
+							{% if item.route %}
+								<a href="{{ url(item.route) }}">{{ item.label }}</a>
+							{% else %}
+								<a href="#">{{ item.label }}</a>
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+			</li>
+			<li>
+				<a href="{{ url('admin_logout') }}">Odhlásit</a>
+			</li>
+		</ul>
+	</div>
+</div>
