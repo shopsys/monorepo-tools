@@ -122,4 +122,11 @@ class MenuLoaderTest extends FunctionalTestCase {
 		$menuLoader->loadFromArray($testMenu);
 	}
 
+	public function testLoadFromYamlHasSettingsItem() {
+		$menu = $this->getContainer()->get('ss6.shop.admin_menu.menu');
+		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
+
+		$this->assertInstanceOf(MenuItem::class, $menu->getSettingsItem());
+	}
+
 }
