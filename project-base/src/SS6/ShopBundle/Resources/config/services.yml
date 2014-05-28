@@ -4,9 +4,9 @@ imports:
 parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.file_dir: %kernel.root_dir%/../web/assets/content/files
-  ss6.file_url_prefix: assets/content/files/
+  ss6.file_url_prefix: /assets/content/files/
   ss6.image_dir: %kernel.root_dir%/../web/assets/content/images
-  ss6.image_url_prefix: assets/content/images/
+  ss6.image_url_prefix: /assets/content/images/
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
 
 services:

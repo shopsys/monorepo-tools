@@ -4,18 +4,13 @@ namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Model\Image\EntityImageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Templating\Helper\CoreAssetsHelper;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension {
 
 	const NOIMAGE_FILENAME = 'noimage.gif';
-
-	/**
-	 * @var \Symfony\Component\Templating\Helper\CoreAssetsHelper
-	 */
-	private $assetsHelper;
 
 	/**
 	 * @var string
@@ -33,16 +28,21 @@ class ImageExtension extends Twig_Extension {
 	private $container;
 
 	/**
+	 * @var \Symfony\Component\HttpFoundation\Request
+	 */
+	private $request;
+
+	/**
 	 * @param string $imageDir
 	 * @param string $imageUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 * @param \Symfony\Component\Templating\Helper\CoreAssetsHelper $assetsHelper
+	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 */
-	public function __construct($imageDir, $imageUrlPrefix, ContainerInterface $container, CoreAssetsHelper $assetsHelper) {
+	public function __construct($imageDir, $imageUrlPrefix, ContainerInterface $container, RequestStack $requestStack) {
 		$this->imageDir = $imageDir;
 		$this->imageUrlPrefix = $imageUrlPrefix;
-		$this->assetsHelper = $assetsHelper;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
+		$this->request = $requestStack->getMasterRequest();
 	}
 
 	/**
@@ -73,9 +73,9 @@ class ImageExtension extends Twig_Extension {
 	public function getImageUrl(EntityImageInterface $entity, $type = null) {
 		$imageFileCollection = $entity->getImageFileCollection();
 		if ($this->imageExists($entity, $type)) {
-			return $this->assetsHelper->getUrl($this->imageUrlPrefix . $imageFileCollection->getRelativeImageUrl($type));
+			return $this->request->getBaseUrl() . $this->imageUrlPrefix . $imageFileCollection->getRelativeImageUrl($type);
 		} else {
-			return $this->assetsHelper->getUrl($this->imageUrlPrefix . self::NOIMAGE_FILENAME);
+			return $this->request->getBaseUrl() . $this->imageUrlPrefix . self::NOIMAGE_FILENAME;
 		}
 	}
 

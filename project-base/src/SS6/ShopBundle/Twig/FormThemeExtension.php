@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FormThemeExtension extends \Twig_Extension {
