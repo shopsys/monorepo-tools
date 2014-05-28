@@ -3,11 +3,10 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Transport\Transport;
 
-class TransportData extends AbstractFixture implements OrderedFixtureInterface {
+class TransportData extends AbstractFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -33,10 +32,4 @@ class TransportData extends AbstractFixture implements OrderedFixtureInterface {
 		$this->addReference($referenceName, $transport);
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getOrder() {
-		return 10; // before PaymentData
-	}	
 }

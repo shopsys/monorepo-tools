@@ -120,10 +120,4 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
 		$manager->persist($user);
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getOrder() {
-		return 1;
-	}	
 }

@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ProductVisibilityData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface {
+class ProductVisibilityData extends AbstractFixture implements ContainerAwareInterface, DependentFixtureInterface {
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
@@ -31,9 +31,12 @@ class ProductVisibilityData extends AbstractFixture implements ContainerAwareInt
 	}
 
 	/**
-	 * @return int
+	 * {@inheritDoc}
 	 */
-	public function getOrder() {
-		return 1000; // must be last fixture (after all that use ORM)
-	}	
+	public function getDependencies() {
+		return array(
+			ProductData::class,
+		);
+	}
+
 }

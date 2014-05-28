@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Payment\Payment;
 
-class PaymentData extends AbstractFixture implements OrderedFixtureInterface {
+class PaymentData extends AbstractFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -38,9 +38,12 @@ class PaymentData extends AbstractFixture implements OrderedFixtureInterface {
 	}
 
 	/**
-	 * @return int
+	 * {@inheritDoc}
 	 */
-	public function getOrder() {
-		return 15; // after TransportData
-	}	
+	public function getDependencies() {
+		return array(
+			TransportData::class,
+		);
+	}
+
 }

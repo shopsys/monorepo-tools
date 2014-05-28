@@ -18,10 +18,4 @@ class OrderNumberSequenceData extends AbstractFixture {
 		$manager->flush();
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getOrder() {
-		return 1;
-	}	
 }

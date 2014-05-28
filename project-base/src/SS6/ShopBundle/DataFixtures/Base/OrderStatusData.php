@@ -24,10 +24,4 @@ class OrderStatusData extends AbstractFixture {
 		$manager->persist($orderStatus);
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getOrder() {
-		return 1;
-	}	
 }
