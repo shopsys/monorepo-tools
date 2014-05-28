@@ -3,7 +3,10 @@
 {% block html_body %}
 	<div class="navbar navbar navbar-static-top navbar-default">
 		<div class="container-fluid">
-			{{ render(controller('SS6ShopBundle:Admin/Menu:menu')) }}
+			{{ render(controller('SS6ShopBundle:Admin/Menu:menu', {
+				route: app.request.get('_route'),
+				parameters: app.request.attributes.get('_route_params')
+			}	)) }}
 		</div>
 	</div>
 

@@ -7,11 +7,13 @@
       route: admin_order_list
 
 - label: 'Zákazníci'
+  route: admin_customer_list
   items:
     - label: 'Registrovaní zákazníci'
       route: admin_customer_list
 
 - label: 'Zboží'
+  route: admin_product_list
   items:
     - label: 'Katalog zboží'
       route: admin_product_list

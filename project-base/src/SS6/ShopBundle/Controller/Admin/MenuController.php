@@ -6,12 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MenuController extends Controller {
 
-	public function menuAction() {
+	public function menuAction($route, array $parameters = null) {
 		$menu = $this->get('ss6.shop.admin_menu.menu');
 		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
 
+		$activePath = array();
+		$matchingItem = $menu->getItemMatchingRoute($route, $parameters);
+		if ($matchingItem !== null) {
+			$activePath = $menu->getItemPath($matchingItem);
+		}
+
 		return $this->render('@SS6Shop/Admin/Inline/Menu/menu.html.twig', array(
 			'menu' => $menu,
+			'activePath' => $activePath,
 		));
 	}
 
@@ -20,17 +27,19 @@ class MenuController extends Controller {
 		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
 
 		$items = array();
+		$activePath = array();
 
-		$activeItem = $menu->getItemMatchingRoute($route, $parameters);
-		if ($activeItem !== null) {
-			$path = $menu->getItemPath($activeItem);
-				if (isset($path[0])) {
-				$items = $path[0]->getItems();
+		$matchingItem = $menu->getItemMatchingRoute($route, $parameters);
+		if ($matchingItem !== null) {
+			$activePath = $menu->getItemPath($matchingItem);
+			if (isset($activePath[0])) {
+				$items = $activePath[0]->getItems();
 			}
 		}
 
 		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', array(
 			'items' => $items,
+			'activePath' => $activePath,
 		));
 	}
 

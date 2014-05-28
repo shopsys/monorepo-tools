@@ -4,7 +4,7 @@
 
 <ul class="nav navbar-nav">
 	{% for item in menu.regularItems %}
-		<li>
+		<li {% if item in activePath %}class="active"{% endif %} >
 			{% if item.route %}
 				<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
 			{% else %}
@@ -15,11 +15,11 @@
 </ul>
 
 <ul class="nav navbar-nav navbar-right">
-	<li class="dropdown">
+	<li class="dropdown {% if menu.settingsItem in activePath %}active{% endif %}" >
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nastavení <b class="caret"></b></a>
 		<ul class="dropdown-menu">
 			{% for item in menu.settingsItem.items %}
-				<li>
+				<li {% if item in activePath %}class="active"{% endif %} >
 					{% if item.route %}
 						<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
 					{% else %}
