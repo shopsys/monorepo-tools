@@ -32,7 +32,7 @@ class MenuLoaderTest extends FunctionalTestCase {
 				'route' => 'item_3'
 			),
 		);
-		
+
 		$menuLoader = new MenuLoader($this->getContainer()->get('filesystem'));
 		$menu = $menuLoader->loadFromArray($testMenu);
 
@@ -120,13 +120,6 @@ class MenuLoaderTest extends FunctionalTestCase {
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdminMenu\Exception\MissingSettingsItemException::class);
 		$menuLoader->loadFromArray($testMenu);
-	}
-
-	public function testLoadFromYamlHasSettingsItem() {
-		$menu = $this->getContainer()->get('ss6.shop.admin_menu.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
-
-		$this->assertInstanceOf(MenuItem::class, $menu->getSettingsItem());
 	}
 
 }
