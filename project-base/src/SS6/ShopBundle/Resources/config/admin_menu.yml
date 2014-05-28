@@ -1,4 +1,5 @@
 - label: 'Nástěnka'
+  route: admin_default_dashboard
 
 - label: 'Objednávky'
   route: admin_order_list
