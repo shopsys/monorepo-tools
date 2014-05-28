@@ -20,11 +20,13 @@
       route: admin_product_list
 
 - label: 'Marketing'
+  route: admin_article_list
   items:
     - label: 'Články'
       route: admin_article_list
 
 - label: 'Nastavení'
+  route: admin_orderstatus_list
   type: settings
   items:
     - label: 'Stavy objednávek'
