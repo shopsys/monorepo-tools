@@ -39,8 +39,10 @@ class TransportController extends Controller {
 			$transportEditFacade->create($transport);
 			$flashMessage->addSuccess('Byla vytvořena doprava ' . $transport->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} elseif ($form->isSubmitted()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
@@ -61,29 +63,27 @@ class TransportController extends Controller {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
-		try {
-			$transport = $transportEditFacade->getById($id);
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-			
-			$formData = new TransportFormData();
-			$formData->setId($transport->getId());
-			$formData->setName($transport->getName());
-			$formData->setPrice($transport->getPrice());
-			$formData->setDescription($transport->getDescription());
-			$formData->setHidden($transport->isHidden());
-			
-			$form = $this->createForm(new TransportFormType($fileUpload), $formData);
-			$form->handleRequest($request);
+		$transport = $transportEditFacade->getById($id);
+		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 
-			if ($form->isValid()) {
-				$transportEditFacade->edit($transport, $formData);
-				$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
-				return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů.');
-			}
-		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+		$formData = new TransportFormData();
+		$formData->setId($transport->getId());
+		$formData->setName($transport->getName());
+		$formData->setPrice($transport->getPrice());
+		$formData->setDescription($transport->getDescription());
+		$formData->setHidden($transport->isHidden());
+
+		$form = $this->createForm(new TransportFormType($fileUpload), $formData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$transportEditFacade->edit($transport, $formData);
+			$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
+			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(
@@ -102,14 +102,11 @@ class TransportController extends Controller {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
-		try {
-			$transportName = $transportEditFacade->getById($id)->getName();
-			$transportEditFacade->deleteById($id);
-			$flashMessage->addSuccess('Doprava ' . $transportName . ' byla odstraněna');
-			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
-		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
-		}
+		$transportName = $transportEditFacade->getById($id)->getName();
+		$transportEditFacade->deleteById($id);
+		$flashMessage->addSuccess('Doprava ' . $transportName . ' byla odstraněna');
+		
+		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
 
 	public function listAction() {
@@ -118,8 +115,8 @@ class TransportController extends Controller {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		
-		$allPayments = $paymentRepository->getAllWithTransports();
-		$transports = $transportRepository->getAllDataWithVisibility($allPayments);
+		$allPayments = $paymentRepository->findAllWithTransports();
+		$transports = $transportRepository->findAllDataWithVisibility($allPayments);
 		
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
 			'transports' => $transports,

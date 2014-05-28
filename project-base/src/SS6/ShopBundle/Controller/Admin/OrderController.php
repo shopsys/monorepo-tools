@@ -27,18 +27,18 @@ class OrderController extends Controller {
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
-
-		$allOrderStauses = $orderStatusRepository->getAll();
+		$orderRepository = $this->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		
+		$order = $orderRepository->getById($id);
+		$allOrderStauses = $orderStatusRepository->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStauses));
 		
 		try {
 			$orderData = new OrderFormData();
 
 			if (!$form->isSubmitted()) {
-				$orderRepository = $this->get('ss6.shop.order.order_repository');
-				/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-				$order = $orderRepository->getById($id);
+				
 
 				$customer = $order->getCustomer();
 				$customerId = null;
@@ -60,14 +60,14 @@ class OrderController extends Controller {
 				$orderData->setCompanyTaxNumber($order->getCompanyTaxNumber());
 				$orderData->setStreet($order->getStreet());
 				$orderData->setCity($order->getCity());
-				$orderData->setZip($order->getZip());
+				$orderData->setPostcode($order->getPostcode());
 				$orderData->setDeliveryFirstName($order->getDeliveryFirstName());
 				$orderData->setDeliveryLastName($order->getDeliveryLastName());
 				$orderData->setDeliveryCompanyName($order->getDeliveryCompanyName());
 				$orderData->setDeliveryTelephone($order->getDeliveryTelephone());
 				$orderData->setDeliveryStreet($order->getDeliveryStreet());
 				$orderData->setDeliveryCity($order->getDeliveryCity());
-				$orderData->setDeliveryZip($order->getDeliveryZip());
+				$orderData->setDeliveryPostcode($order->getDeliveryPostcode());
 				$orderData->setNote($order->getNote());
 
 				$orderItemsData = array();
@@ -93,16 +93,15 @@ class OrderController extends Controller {
 
 				$flashMessage->addSuccess('Byla upravena objednávka ' . $order->getNumber());
 				return $this->redirect($this->generateUrl('admin_order_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-				$order = $this->get('ss6.shop.order.order_repository')->getById($id);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
 			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessage->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
-		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
@@ -202,16 +201,11 @@ class OrderController extends Controller {
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
-		try {
-			$orderNumber = $orderRepository->getById($id)->getNumber();
-			$orderFacade = $this->get('ss6.shop.order.order_facade');
-			/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-			$orderFacade->deleteById($id);
-
-			$flashMessage->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
-		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
-		}
+		$orderNumber = $orderRepository->getById($id)->getNumber();
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+		$orderFacade->deleteById($id);
+		$flashMessage->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
 
 		return $this->redirect($this->generateUrl('admin_order_list'));
 	}

@@ -23,26 +23,24 @@ class OrderStatusController extends Controller {
 
 		$form = $this->createForm(new OrderStatusFormType());
 
-		try {
-			$orderStatusData = new OrderStatusFormData();
+		$orderStatusData = new OrderStatusFormData();
 
-			$form->setData($orderStatusData);
-			$form->handleRequest($request);
+		$form->setData($orderStatusData);
+		$form->handleRequest($request);
 
-			if ($form->isValid()) {
-				$orderStatusData = $form->getData();
-				$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
-				/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
+		if ($form->isValid()) {
+			$orderStatusData = $form->getData();
+			$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
+			/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
 
-				$orderStatus = $orderStatusFacade->create($orderStatusData);
+			$orderStatus = $orderStatusFacade->create($orderStatusData);
 
-				$flashMessage->addSuccess('Byl vytvořen stav objednávek ' . $orderStatus->getName());
-				return $this->redirect($this->generateUrl('admin_orderstatus_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-			}
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+			$flashMessage->addSuccess('Byl vytvořen stav objednávek ' . $orderStatus->getName());
+			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/new.html.twig', array(
@@ -58,39 +56,34 @@ class OrderStatusController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 
+		$orderStatus = $orderStatusRepository->getById($id);
+		/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
 		$form = $this->createForm(new OrderStatusFormType());
+		$orderStatusData = new OrderStatusFormData();
 
-		try {
-			$orderStatusData = new OrderStatusFormData();
+		if (!$form->isSubmitted()) {
+			$orderStatusData->setId($orderStatus->getId());
+			$orderStatusData->setName($orderStatus->getName());
+		}
 
-			if (!$form->isSubmitted()) {
-				$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
-				/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
-				$orderStatus = $orderStatusRepository->getById($id);
-				/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
+		$form->setData($orderStatusData);
+		$form->handleRequest($request);
 
-				$orderStatusData->setId($orderStatus->getId());
-				$orderStatusData->setName($orderStatus->getName());
-			}
+		if ($form->isValid()) {
+			$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
+			/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
 
-			$form->setData($orderStatusData);
-			$form->handleRequest($request);
+			$orderStatus = $orderStatusFacade->edit($id, $orderStatusData);
 
-			if ($form->isValid()) {
-				$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
-				/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
+			$flashMessage->addSuccess('Byla upraven stav objednávek ' . $orderStatus->getName());
+			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
+		}
 
-				$orderStatus = $orderStatusFacade->edit($id, $orderStatusData);
-
-				$flashMessage->addSuccess('Byla upraven stav objednávek ' . $orderStatus->getName());
-				return $this->redirect($this->generateUrl('admin_orderstatus_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-				$orderStatus = $this->get('ss6.shop.order.order_status_repository')->getById($id);
-			}
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/edit.html.twig', array(
@@ -159,8 +152,6 @@ class OrderStatusController extends Controller {
 			$orderStatusFacade->deleteById($id);
 
 			$flashMessage->addSuccess('Stav objednávek ' . $statusName . ' byl smazán');
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
 			$flashMessage->addError('Stav objednávek ' . $e->getOrderStatus()->getName() . ' je rezervovaný a nelze jej smazat');
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {

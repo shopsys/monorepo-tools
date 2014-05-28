@@ -59,14 +59,14 @@ class CustomerFormType extends AbstractType {
 			->add('companyTaxNumber', 'text', array('required' => false))
 			->add('street', 'text', array('required' => false))
 			->add('city', 'text', array('required' => false))
-			->add('zip', 'text', array('required' => false))
+			->add('postcode', 'text', array('required' => false))
 			->add('country', 'text', array('required' => false))
 			->add('deliveryCompanyName', 'text', array('required' => false))
 			->add('deliveryContactPerson', 'text', array('required' => false))
 			->add('deliveryTelephone', 'text', array('required' => false))
 			->add('deliveryStreet', 'text', array('required' => false))
 			->add('deliveryCity', 'text', array('required' => false))
-			->add('deliveryZip', 'text', array('required' => false))
+			->add('deliveryPostcode', 'text', array('required' => false))
 			->add('deliveryCountry', 'text', array('required' => false))
 			->add('save', 'submit');
 	}

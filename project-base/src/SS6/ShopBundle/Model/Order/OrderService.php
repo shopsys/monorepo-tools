@@ -26,7 +26,7 @@ class OrderService {
 			$orderData->getTelephone(),
 			$orderData->getStreet(),
 			$orderData->getCity(),
-			$orderData->getZip(),
+			$orderData->getPostcode(),
 			$user,
 			$orderData->getCompanyName(),
 			$orderData->getCompanyNumber(),
@@ -37,7 +37,7 @@ class OrderService {
 			$orderData->getDeliveryTelephone(),
 			$orderData->getDeliveryStreet(),
 			$orderData->getDeliveryCity(),
-			$orderData->getDeliveryZip(),
+			$orderData->getDeliveryPostcode(),
 			$orderData->getNote()
 		);
 
@@ -93,14 +93,14 @@ class OrderService {
 		$orderFormData->setCompanyTaxNumber($order->getCompanyTaxNumber());
 		$orderFormData->setStreet($order->getStreet());
 		$orderFormData->setCity($order->getCity());
-		$orderFormData->setZip($order->getZip());
+		$orderFormData->setPostcode($order->getPostcode());
 		$orderFormData->setDeliveryFirstName($order->getDeliveryFirstName());
 		$orderFormData->setDeliveryLastName($order->getDeliveryLastName());
 		$orderFormData->setDeliveryCompanyName($order->getDeliveryCompanyName());
 		$orderFormData->setDeliveryTelephone($order->getDeliveryTelephone());
 		$orderFormData->setDeliveryStreet($order->getDeliveryStreet());
 		$orderFormData->setDeliveryCity($order->getDeliveryCity());
-		$orderFormData->setDeliveryZip($order->getDeliveryZip());
+		$orderFormData->setDeliveryPostcode($order->getDeliveryPostcode());
 	}
 
 	/**
@@ -117,13 +117,13 @@ class OrderService {
 		$orderFormData->setCompanyTaxNumber($user->getBillingAddress()->getCompanyTaxNumber());
 		$orderFormData->setStreet($user->getBillingAddress()->getStreet());
 		$orderFormData->setCity($user->getBillingAddress()->getCity());
-		$orderFormData->setZip($user->getBillingAddress()->getZip());
+		$orderFormData->setPostcode($user->getBillingAddress()->getPostcode());
 		// firstName + lastName ?
 		$orderFormData->setDeliveryCompanyName($user->getDeliveryAddress()->getCompanyName());
 		$orderFormData->setDeliveryTelephone($user->getDeliveryAddress()->getTelephone());
 		$orderFormData->setDeliveryStreet($user->getDeliveryAddress()->getStreet());
 		$orderFormData->setDeliveryCity($user->getDeliveryAddress()->getCity());
-		$orderFormData->setDeliveryZip($user->getDeliveryAddress()->getZip());
+		$orderFormData->setDeliveryPostcode($user->getDeliveryAddress()->getPostcode());
 	}
 
 }

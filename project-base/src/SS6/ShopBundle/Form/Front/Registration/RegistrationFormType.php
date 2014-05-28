@@ -40,7 +40,7 @@ class RegistrationFormType extends AbstractType {
 				),
 				'invalid_message' => 'Hesla se neshodují',
 			))
-			->add('submit', 'submit');
+			->add('save', 'submit');
 	}
 
 	/**

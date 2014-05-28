@@ -68,7 +68,7 @@ class OrderFormData {
 	/**
 	 * @var string
 	 */
-	private $zip;
+	private $postcode;
 
 	/**
 	 * @var string|null
@@ -103,7 +103,7 @@ class OrderFormData {
 	/**
 	 * @var string|null
 	 */
-	private $deliveryZip;
+	private $deliveryPostcode;
 
 	/**
 	 * @var string|null
@@ -190,8 +190,8 @@ class OrderFormData {
 	/**
 	 * @return string
 	 */
-	public function getZip() {
-		return $this->zip;
+	public function getPostcode() {
+		return $this->postcode;
 	}
 
 	/**
@@ -239,8 +239,8 @@ class OrderFormData {
 	/**
 	 * @return string|null
 	 */
-	public function getDeliveryZip() {
-		return $this->deliveryZip;
+	public function getDeliveryPostcode() {
+		return $this->deliveryPostcode;
 	}
 
 	/**
@@ -328,10 +328,10 @@ class OrderFormData {
 	}
 
 	/**
-	 * @param string|null $zip
+	 * @param string|null $postcode
 	 */
-	public function setZip($zip) {
-		$this->zip = $zip;
+	public function setPostcode($postcode) {
+		$this->postcode = $postcode;
 	}
 
 	/**
@@ -377,10 +377,10 @@ class OrderFormData {
 	}
 
 	/**
-	 * @param string|null $deliveryZip
+	 * @param string|null $deliveryPostcode
 	 */
-	public function setDeliveryZip($deliveryZip) {
-		$this->deliveryZip = $deliveryZip;
+	public function setDeliveryPostcode($deliveryPostcode) {
+		$this->deliveryPostcode = $deliveryPostcode;
 	}
 
 	/**

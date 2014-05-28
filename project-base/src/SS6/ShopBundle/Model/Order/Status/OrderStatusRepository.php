@@ -63,7 +63,7 @@ class OrderStatusRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
-	public function getAll() {
+	public function findAll() {
 		return $this->getOrderStatusRepository()->findBy(array(), array('id' => 'asc'));
 	}
 }

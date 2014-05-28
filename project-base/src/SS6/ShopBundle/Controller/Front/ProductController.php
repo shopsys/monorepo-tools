@@ -13,10 +13,7 @@ class ProductController extends Controller {
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 			
-		$product = $productRepository->findVisibleById($id);
-		if (!$product) {
-			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Product not found');
-		}
+		$product = $productRepository->getVisibleById($id);
 		
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(
 			'product' => $product,

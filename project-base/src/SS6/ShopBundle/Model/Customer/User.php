@@ -146,11 +146,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		$this->lastActivity = $lastActivity;
 	}
 
-	/**
-	 * @param DateTime|null $lastLogin
-	 */
-	public function setLastLogin($lastLogin) {
-		$this->lastLogin = $lastLogin;
+	public function onLogin() {
+		$this->lastLogin = new DateTime();
 	}
 
 	/**

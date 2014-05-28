@@ -52,7 +52,7 @@ class DeliveryAddress {
 	 *
 	 * @ORM\Column(type="string", length=30, nullable=true)
 	 */
-	private $zip;
+	private $postcode;
 
 	/**
 	 * @var string|null
@@ -71,17 +71,17 @@ class DeliveryAddress {
 	/**
 	 * @param string|null $street
 	 * @param string|null $city
-	 * @param string|null $zip
+	 * @param string|null $postcode
 	 * @param string|null $country
 	 * @param string|null $companyName
 	 * @param string|null $contactPerson
 	 * @param string|null $telephone
 	 */
-	public function __construct($street = null, $city = null, $zip = null, $country = null,
+	public function __construct($street = null, $city = null, $postcode = null, $country = null,
 			$companyName = null, $contactPerson = null, $telephone = null) {
 		$this->street = $street;
 		$this->city = $city;
-		$this->zip = $zip;
+		$this->postcode = $postcode;
 		$this->country = $country;
 		$this->companyName = $companyName;
 		$this->contactPerson = $contactPerson;
@@ -91,17 +91,17 @@ class DeliveryAddress {
 	/**
 	 * @param string|null $street
 	 * @param string|null $city
-	 * @param string|null $zip
+	 * @param string|null $postcode
 	 * @param string|null $country
 	 * @param string|null $companyName
 	 * @param string|null $contactPerson
 	 * @param string|null $telephone
 	 */
-	public function edit($street = null, $city = null, $zip = null, $country = null,
+	public function edit($street = null, $city = null, $postcode = null, $country = null,
 			$companyName = null, $contactPerson = null, $telephone = null) {
 		$this->street = $street;
 		$this->city = $city;
-		$this->zip = $zip;
+		$this->postcode = $postcode;
 		$this->country = $country;
 		$this->companyName = $companyName;
 		$this->contactPerson = $contactPerson;
@@ -139,8 +139,8 @@ class DeliveryAddress {
 	/**
 	 * @return string|null
 	 */
-	public function getZip() {
-		return $this->zip;
+	public function getPostcode() {
+		return $this->postcode;
 	}
 
 	/**

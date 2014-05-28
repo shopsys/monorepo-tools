@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 
 class TransportRepositoryTest extends DatabaseTestCase {
 	
-	public function testGetAllDataWithVisibility() {
+	public function testFindAllDataWithVisibility() {
 		$em = $this->getEntityManager();
 
 		$transport1 = new Transport('name', 0, 'description', false);
@@ -28,11 +28,11 @@ class TransportRepositoryTest extends DatabaseTestCase {
 
 		$paymentRepository = $this->getContainer()->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$allPayments = $paymentRepository->getAllWithTransports();
+		$allPayments = $paymentRepository->findAllWithTransports();
 
 		$transportRepository = $this->getContainer()->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$transportsDataWithVisibility = $transportRepository->getAllDataWithVisibility($allPayments);
+		$transportsDataWithVisibility = $transportRepository->findAllDataWithVisibility($allPayments);
 
 		foreach ($transportsDataWithVisibility as $row) {
 			if ($row['entity']->getId() === $transport1->getId()) {

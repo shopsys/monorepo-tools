@@ -31,7 +31,7 @@ class CartItemRepository {
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @return array
 	 */
-	public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
+	public function findAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
 		$criteria = array('sessionId' => $customerIdentifier->getSessionId());
 		return $this->getCartItemRepository()->findBy($criteria, array('id' => 'desc'));
 	}

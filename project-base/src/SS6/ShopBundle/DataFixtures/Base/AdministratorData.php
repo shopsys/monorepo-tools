@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base\Administrator;
+namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Administrator\Administrator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
+class AdministratorData extends AbstractFixture implements ContainerAwareInterface {
 	
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface

@@ -80,16 +80,16 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
 
 	public function createCustomer(ObjectManager $manager, RegistrationService $registrationService,
 			$firstName, $lastName, $email, $password,
-			$billingStreet = null, $billingCity = null, $billingZip = null, $billingCountry = null,
+			$billingStreet = null, $billingCity = null, $billingPostcode = null, $billingCountry = null,
 			$billingCompanyName = null, $billingCompanyNumber = null, $billingCompanyTaxNumber = null,
 			$billingTelephone = null,
-			$deliveryStreet = null, $deliveryCity = null, $deliveryZip = null, $deliveryCountry = null,
+			$deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null, $deliveryCountry = null,
 			$deliveryCompanyName = null, $deliveryContactPerson = null, $deliveryTelephone = null) {
 
 		$billingAddress = new BillingAddress(
 			$billingStreet,
 			$billingCity,
-			$billingZip,
+			$billingPostcode,
 			$billingCountry,
 			$billingCompanyName,
 			$billingCompanyNumber,
@@ -99,7 +99,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
 		$deliveryAddress = new DeliveryAddress(
 			$deliveryStreet,
 			$deliveryCity,
-			$deliveryZip,
+			$deliveryPostcode,
 			$deliveryCountry,
 			$deliveryCompanyName,
 			$deliveryContactPerson,

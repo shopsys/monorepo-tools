@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class OrderStatusData extends AbstractFixture {
 

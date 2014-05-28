@@ -8,15 +8,22 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductRepository {
 	
 	/** 
-	 * @var \Doctrine\ORM\EntityRepository
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	private $entityRepository;
+	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
+	 * @param \Doctrine\ORM\EntityManager $em
 	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityRepository = $entityManager->getRepository(Product::class);
+	public function __construct(EntityManager $em) {
+		$this->em = $em;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getProductRepository() {
+		return $this->em->getRepository(Product::class);
 	}
 	
 	/**
@@ -24,7 +31,7 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function findById($id) {
-		return $this->entityRepository->find($id);
+		return $this->getProductRepository()->find($id);
 	}
 	
 	/**
@@ -47,7 +54,7 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function findAllVisible() {
-		return $this->entityRepository->findBy(array('visible' => true));
+		return $this->getProductRepository()->findBy(array('visible' => true));
 	}
 	
 	/**
@@ -71,7 +78,7 @@ class ProductRepository {
 	 */
 	public function getVisibleById($id) {
 		$criteria = array('id' => $id, 'visible' => true);
-		$product = $this->entityRepository->findOneBy($criteria);
+		$product = $this->getProductRepository()->findOneBy($criteria);
 		
 		if ($product === null) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException($criteria);

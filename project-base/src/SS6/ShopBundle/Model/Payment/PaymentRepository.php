@@ -30,14 +30,14 @@ class PaymentRepository {
 	/**
 	 * @return array
 	 */
-	public function getAll() {
+	public function findAll() {
 		return $this->getPaymentRepository()->findBy(array('deleted' => false), array('name' => 'ASC'));
 	}
 	
 	/**
 	 * @return array
 	 */
-	public function getAllIncludingDeleted() {
+	public function findAllIncludingDeleted() {
 		return $this->getPaymentRepository()->findAll();
 	}
 	
@@ -73,7 +73,7 @@ class PaymentRepository {
 	/**
 	 * @return \Doctrine\Common\Collections\Collection
 	 */
-	public function getAllWithTransports() {
+	public function findAllWithTransports() {
 		$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.deleted = :deleted', Payment::class);
 		return $this->em->createQuery($dql)->setParameter('deleted', false)->getResult();
 	}
@@ -82,7 +82,7 @@ class PaymentRepository {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return array
 	 */
-	public function getAllByTransport(Transport $transport) {
+	public function findAllByTransport(Transport $transport) {
 		$dql = sprintf('SELECT p, t FROM %s p JOIN p.transports t WHERE t.id = :transportId', Payment::class);
 		return $this->em->createQuery($dql)->setParameter('transportId', $transport->getId())->getResult();
 	}
@@ -91,7 +91,7 @@ class PaymentRepository {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getVisible() {
-		$allPayments = $this->getAllWithTransports();
+		$allPayments = $this->findAllWithTransports();
 
 		$visiblePayments = array();
 		foreach ($allPayments as $payment) {

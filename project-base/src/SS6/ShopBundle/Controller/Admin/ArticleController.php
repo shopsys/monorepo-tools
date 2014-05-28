@@ -20,43 +20,35 @@ class ArticleController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$articleRepository = $this->get('ss6.shop.article.article_repository');
+		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
+		$article = $articleRepository->getById($id);
 		$form = $this->createForm(new ArticleFormType());
+		$articleData = array();
 
-		try {
-			$articleData = array();
+		if (!$form->isSubmitted()) {
+			$articleData['id'] = $article->getId();
+			$articleData['name'] = $article->getName();
+			$articleData['text'] = $article->getText();
+		}
 
-			if (!$form->isSubmitted()) {
-				$articleRepository = $this->get('ss6.shop.article.article_repository');
-				/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
-				$article = $articleRepository->getById($id);
+		$form->setData($articleData);
+		$form->handleRequest($request);
 
-				$articleData['id'] = $article->getId();
-				$articleData['name'] = $article->getName();
-				$articleData['text'] = $article->getText();
-			}
+		if ($form->isValid()) {
+			$articleData = $form->getData();
 
-			$form->setData($articleData);
-			$form->handleRequest($request);
+			$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
+			$article = $articleEditFacade->edit(
+				$id,
+				$articleData['name'],
+				$articleData['text']
+			);
 
-			if ($form->isValid()) {
-				$articleData = $form->getData();
-
-				$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
-				/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
-				$article = $articleEditFacade->edit(
-					$id,
-					$articleData['name'],
-					$articleData['text']
-				);
-
-				$flashMessage->addSuccess('Byl upraven článek ' . $article->getName());
-				return $this->redirect($this->generateUrl('admin_article_list'));
-			} elseif ($form->isSubmitted()) {
-				$article = $this->get('ss6.shop.article.article_repository')->getById($id);
-			}
-		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+			$flashMessage->addSuccess('Byl upraven článek ' . $article->getName());
+			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -139,7 +131,9 @@ class ArticleController extends Controller {
 
 			$flashMessage->addSuccess('Byl vytvořen článek ' . $article->getName());
 			return $this->redirect($this->generateUrl('admin_article_list'));
-		} elseif ($form->isSubmitted()) {
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
@@ -159,14 +153,9 @@ class ArticleController extends Controller {
 		$articleRepository = $this->get('ss6.shop.article.article_repository');
 		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
-		try {
-			$fullName = $articleRepository->getById($id)->getName();
-			$this->get('ss6.shop.article.article_edit_facade')->delete($id);
-
-			$flashMessage->addSuccess('Článek ' . $fullName . ' byl smazán');
-		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
-		}
+		$fullName = $articleRepository->getById($id)->getName();
+		$this->get('ss6.shop.article.article_edit_facade')->delete($id);
+		$flashMessage->addSuccess('Článek ' . $fullName . ' byl smazán');
 
 		return $this->redirect($this->generateUrl('admin_article_list'));
 	}

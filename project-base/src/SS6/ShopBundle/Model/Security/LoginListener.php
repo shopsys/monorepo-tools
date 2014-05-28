@@ -35,7 +35,7 @@ class LoginListener {
 		}
 
 		if ($user instanceof User) {
-			$user->setLastLogin(new DateTime());
+			$user->onLogin();
 		}
 
 		if ($user instanceof UniqueLoginInterface) {

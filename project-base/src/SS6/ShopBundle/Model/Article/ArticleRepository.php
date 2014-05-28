@@ -7,15 +7,22 @@ use Doctrine\ORM\EntityManager;
 class ArticleRepository {
 
 	/**
-	 * @var \Doctrine\ORM\EntityRepository
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	private $entityRepository;
+	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
+	 * @param \Doctrine\ORM\EntityManager $em
 	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->entityRepository = $entityManager->getRepository(Article::class);
+	public function __construct(EntityManager $em) {
+		$this->em = $em;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getArticleRepository() {
+		return $this->em->getRepository(Article::class);
 	}
 
 	/**
@@ -23,14 +30,14 @@ class ArticleRepository {
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
 	public function findById($articleId) {
-		return $this->entityRepository->find($articleId);
+		return $this->getArticleRepository()->find($articleId);
 	}
 
 	/**
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
 	public function getArticlesForMenu() {
-		return $this->entityRepository->findAll();
+		return $this->getArticleRepository()->findAll();
 	}
 
 	/**
@@ -40,7 +47,7 @@ class ArticleRepository {
 	 */
 	public function getById($articleId) {
 		$criteria = array('id' => $articleId);
-		$user = $this->entityRepository->findOneBy($criteria);
+		$user = $this->getArticleRepository()->findOneBy($criteria);
 		if ($user === null) {
 			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($criteria);
 		}

@@ -25,7 +25,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$telephone = '123456789';
 		$street = 'Street';
 		$city = 'City';
-		$zip = '12345';
+		$postcode = '12345';
 		$order = new Order(
 			$number,
 			$transport,
@@ -37,7 +37,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 			$telephone,
 			$street,
 			$city,
-			$zip
+			$postcode
 		);
 
 		$product1 = new Product('ProductName1', null, null, null, null, 1000);

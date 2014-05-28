@@ -24,45 +24,41 @@ class ProductController extends Controller {
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+		$productRepository = $this->get('ss6.shop.product.product_repository');
+		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 
+		$product = $productRepository->getById($id);
 		$form = $this->createForm(new ProductFormType($fileUpload));
-		
-		try {
-			$productData = array();
-			
-			if (!$form->isSubmitted()) {
-				$productRepository = $this->get('ss6.shop.product.product_repository');
-				/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
-				$product = $productRepository->getById($id);
-				$productData['id'] = $product->getId();
-				$productData['name'] = $product->getName();
-				$productData['catnum'] = $product->getCatnum();
-				$productData['partno'] = $product->getPartno();
-				$productData['ean'] = $product->getEan();
-				$productData['description'] = $product->getDescription();
-				$productData['price'] = $product->getPrice();
-				$productData['sellingFrom'] = $product->getSellingFrom();
-				$productData['sellingTo'] = $product->getSellingTo();
-				$productData['stockQuantity'] = $product->getStockQuantity();
-				$productData['hidden'] = $product->isHidden();
-			}
-			
-			$form->setData($productData);
-			$form->handleRequest($request);
-				
-			if ($form->isValid()) {
-				$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-				/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-				$product = $productEditFacade->edit($id, $form->getData());
+		$productData = array();
 
-				$flashMessage->addSuccess('Bylo upraveno zboží ' . $product->getName());
-				return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-				$product = $this->get('ss6.shop.product.product_repository')->getById($id);
-			}
-		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+		if (!$form->isSubmitted()) {
+			$productData['id'] = $product->getId();
+			$productData['name'] = $product->getName();
+			$productData['catnum'] = $product->getCatnum();
+			$productData['partno'] = $product->getPartno();
+			$productData['ean'] = $product->getEan();
+			$productData['description'] = $product->getDescription();
+			$productData['price'] = $product->getPrice();
+			$productData['sellingFrom'] = $product->getSellingFrom();
+			$productData['sellingTo'] = $product->getSellingTo();
+			$productData['stockQuantity'] = $product->getStockQuantity();
+			$productData['hidden'] = $product->isHidden();
+		}
+
+		$form->setData($productData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+			$product = $productEditFacade->edit($id, $form->getData());
+
+			$flashMessage->addSuccess('Bylo upraveno zboží ' . $product->getName());
+			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(
@@ -83,28 +79,26 @@ class ProductController extends Controller {
 
 		$form = $this->createForm(new ProductFormType($fileUpload));
 		
-		try {
-			$productData = array();
-			
-			if (!$form->isSubmitted()) {
-				$productData['hidden'] = false;
-			}
-			
-			$form->setData($productData);
-			$form->handleRequest($request);
-				
-			if ($form->isValid()) {
-				$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-				/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-				$product = $productEditFacade->create($form->getData());
+		$productData = array();
 
-				$flashMessage->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
-				return $this->redirect($this->generateUrl('admin_product_list'));
-			} elseif ($form->isSubmitted()) {
-				$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
-			}
-		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
-			throw $this->createNotFoundException($e->getMessage(), $e);
+		if (!$form->isSubmitted()) {
+			$productData['hidden'] = false;
+		}
+
+		$form->setData($productData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+			$product = $productEditFacade->create($form->getData());
+
+			$flashMessage->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
+			return $this->redirect($this->generateUrl('admin_product_list'));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
@@ -173,14 +167,9 @@ class ProductController extends Controller {
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 
-		try {
-			$productName = $productRepository->getById($id)->getName();
-			$this->get('ss6.shop.product.product_edit_facade')->delete($id);
-
-			$flashMessage->addSuccess('Produkt ' . $productName . ' byl smazán');
-		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
-			throw $this->createNotFoundException('Product to delete not found.', $e);
-		}
+		$productName = $productRepository->getById($id)->getName();
+		$this->get('ss6.shop.product.product_edit_facade')->delete($id);
+		$flashMessage->addSuccess('Produkt ' . $productName . ' byl smazán');
 		
 		return $this->redirect($this->generateUrl('admin_product_list'));
 	}

@@ -37,14 +37,14 @@ class CustomerController extends Controller {
 			$customerData['companyTaxNumber'] = $user->getBillingAddress()->getCompanyTaxNumber();
 			$customerData['street'] = $user->getBillingAddress()->getStreet();
 			$customerData['city'] = $user->getBillingAddress()->getCity();
-			$customerData['zip'] = $user->getBillingAddress()->getZip();
+			$customerData['postcode'] = $user->getBillingAddress()->getPostcode();
 			$customerData['country'] = $user->getBillingAddress()->getCountry();
 			$customerData['deliveryCompanyName'] = $user->getDeliveryAddress()->getCompanyName();
 			$customerData['deliveryContactPerson'] = $user->getDeliveryAddress()->getContactPerson();
 			$customerData['deliveryTelephone'] = $user->getDeliveryAddress()->getTelephone();
 			$customerData['deliveryStreet'] = $user->getDeliveryAddress()->getStreet();
 			$customerData['deliveryCity'] = $user->getDeliveryAddress()->getCity();
-			$customerData['deliveryZip'] = $user->getDeliveryAddress()->getZip();
+			$customerData['deliveryPostcode'] = $user->getDeliveryAddress()->getPostcode();
 			$customerData['deliveryCountry'] = $user->getDeliveryAddress()->getCountry();
 		}
 
@@ -67,14 +67,14 @@ class CustomerController extends Controller {
 				$customerData['companyTaxNumber'],
 				$customerData['street'],
 				$customerData['city'],
-				$customerData['zip'],
+				$customerData['postcode'],
 				$customerData['country'],
 				$customerData['deliveryCompanyName'],
 				$customerData['deliveryContactPerson'],
 				$customerData['deliveryTelephone'],
 				$customerData['deliveryStreet'],
 				$customerData['deliveryCity'],
-				$customerData['deliveryZip'],
+				$customerData['deliveryPostcode'],
 				$customerData['deliveryCountry']
 			);
 

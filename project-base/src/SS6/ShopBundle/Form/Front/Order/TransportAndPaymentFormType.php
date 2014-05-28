@@ -48,7 +48,7 @@ class TransportAndPaymentFormType extends AbstractType {
 				),
 				'invalid_message' => 'Vyberte prosím platbu',
 			))
-			->add('submit', 'submit');
+			->add('save', 'submit');
 	}
 
 	/**

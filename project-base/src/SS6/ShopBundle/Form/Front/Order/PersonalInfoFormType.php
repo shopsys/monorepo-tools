@@ -49,7 +49,7 @@ class PersonalInfoFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím město')),
 				)
 			))
-			->add('zip', 'text', array(
+			->add('postcode', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím PSČ')),
 				)
@@ -60,9 +60,9 @@ class PersonalInfoFormType extends AbstractType {
 			->add('deliveryTelephone', 'text', array('required' => false))
 			->add('deliveryStreet', 'text', array('required' => false))
 			->add('deliveryCity', 'text', array('required' => false))
-			->add('deliveryZip', 'text', array('required' => false))
+			->add('deliveryPostcode', 'text', array('required' => false))
 			->add('note', 'textarea', array('required' => false))
-			->add('submit', 'submit');
+			->add('save', 'submit');
 	}
 
 	/**
