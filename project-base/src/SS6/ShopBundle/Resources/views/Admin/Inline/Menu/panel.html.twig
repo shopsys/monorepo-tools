@@ -1,0 +1,16 @@
+<ul class="nav nav-panel">
+	{% for item in items %}
+		<li>
+			<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
+			{% if item.items is not empty %}
+				<ul>
+					{% for subitem in item.items %}
+						</li>
+							<a href="{{ url(subitem.route, subitem.routeParameters) }}">{{ subitem.label }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>
