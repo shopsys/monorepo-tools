@@ -105,16 +105,25 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 		));
 	}
-	
+
 	/**
 	 * @Route("/product/list/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function listAction() {
-		$source = new Entity(Product::class);
-				
+	public function listAction(Request $request) {
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$grid = $this->get('grid');
 		/* @var $grid \APY\DataGridBundle\Grid\Grid */
+
+		$source = new Entity(Product::class);		
 		$grid->setSource($source);
+		$grid->setId('productList');
+		
+		$customLimit = $administrator->getLimitByGridId($grid->getId());
+		if ($customLimit !== null) {
+			$grid->setDefaultLimit($customLimit);
+		}
 		
 		$grid->getColumns()->addColumn(new BooleanColumn(array(
 			'id' => 'visible',
@@ -131,8 +140,6 @@ class ProductController extends Controller {
 		$grid->hideFilters();
 		$grid->setActionsColumnTitle('Akce');
 		$grid->setDefaultOrder('name', 'asc');
-		$grid->setLimits(array(2, 20));
-		$grid->setDefaultLimit(20);
 		
 		$detailRowAction = new RowAction('Upravit', 'admin_product_edit');
 		$detailRowAction->setRouteParameters(array('id'));
@@ -152,6 +159,18 @@ class ProductController extends Controller {
 			
 			return $row;
 		});
+
+		if ($grid->isReadyForRedirect()) {
+			$gridData = $request->get($grid->getHash());
+			if (!empty($gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT])) {
+				$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
+				/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
+				$gridLimit = $gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT];
+				if ($gridLimit !== null) {
+					$administratorGridFacade->saveGridLimit($administrator, $grid->getId(), (int)$gridLimit);
+				}
+			}
+		}
 		
 		return $grid->getGridResponse('@SS6Shop/Admin/Content/Product/list.html.twig');
 	}
