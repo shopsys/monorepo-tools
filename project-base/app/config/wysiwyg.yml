@@ -1,0 +1,24 @@
+ivory_ck_editor:
+  default_config: default
+  configs:
+    default:
+      contentsCss:
+        - assets/admin/styles/wysiwyg.css
+      filebrowserBrowseRoute: elfinder
+      toolbar: 
+        - ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+        - ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+        - ['NumberedList', 'BulletedList', '-', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+        - ['Link', 'Unlink']
+        - '/'
+        - ['Image', 'Flash', 'Table', 'SpecialChar']
+        - ['Styles', 'Format', 'Font', 'FontSize']
+        - ['Maximize', '-', 'Source', '-','Save', 'Preview']
+
+fm_elfinder:
+  editor: ckeditor
+  connector:
+    roots:
+      uploads:
+        driver: LocalFileSystem
+        path: assets/uploads

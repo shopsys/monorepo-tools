@@ -13,6 +13,7 @@ class AppKernel extends Kernel {
 			new Craue\FormFlowBundle\CraueFormFlowBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+			new FM\ElfinderBundle\FMElfinderBundle(),
 			new Kutny\AutowiringBundle\KutnyAutowiringBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
@@ -23,6 +24,7 @@ class AppKernel extends Kernel {
 			new Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
+			new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
 			new SS6\ShopBundle\SS6ShopBundle(),
 		);
 

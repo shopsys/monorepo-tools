@@ -58,9 +58,7 @@
 			{% endif %}
 
 			{% if product.description %}
-				<p>
-					{{ product.description|raw }}
-				</p>
+				{{ product.description|raw }}
 			{% endif %}
 
 			{% if product.price %}

@@ -18,7 +18,7 @@ security:
 
   firewalls:
     administration:
-      pattern: ^/admin/
+      pattern: ^/(admin/|efconnect|elfinder)
       anonymous: ~
       provider: administrators
       form_login:
@@ -52,4 +52,6 @@ security:
   access_control:
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/, roles: ROLE_ADMIN }
+    - { path: ^/efconnect, roles: ROLE_ADMIN }
+    - { path: ^/elfinder, roles: ROLE_ADMIN }
     - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

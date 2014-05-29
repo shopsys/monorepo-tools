@@ -62,7 +62,7 @@ class ProductFormType extends AbstractType {
 					new Constraints\Length(array('max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků')),
 				),
 			))
-			->add('description', 'textarea', array('required' => false))
+			->add('description', 'ckeditor', array('required' => false))
 			->add('price', 'money', array(
 				'currency' => false,
 				'required' => false,

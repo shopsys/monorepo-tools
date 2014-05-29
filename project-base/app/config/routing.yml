@@ -1,3 +1,6 @@
 ss6_shop:
   resource: "@SS6ShopBundle/Resources/config/routing.yml"
   prefix: /
+  
+elfinder:
+  resource: "@FMElfinderBundle/Resources/config/routing.yml"

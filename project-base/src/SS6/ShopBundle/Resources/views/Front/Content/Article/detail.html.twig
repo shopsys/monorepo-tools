@@ -5,5 +5,5 @@
 {% block content %}
 	<h1>{{ article.name }}</h1>
 
-	<p>{{ article.text|nl2br }}</p>
+	{{ article.text|raw }}
 {% endblock %}

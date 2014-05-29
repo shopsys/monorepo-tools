@@ -28,7 +28,7 @@ class ArticleFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název')),
 				),
 			))
-			->add('text', 'textarea', array('required' => false))
+			->add('text', 'ckeditor', array('required' => false))
 			->add('save', 'submit');
 	}
 
