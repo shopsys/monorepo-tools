@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cdea987b64d3ade534863a6fd0eee756",
+    "hash": "58ed1baa35bc34eebb86e50ec8727d87",
     "packages": [
         {
             "name": "apy/datagrid-bundle",
@@ -858,17 +858,17 @@
         },
         {
             "name": "egeloen/ckeditor-bundle",
-            "version": "2.3.*@dev",
+            "version": "dev-master",
             "target-dir": "Ivory/CKEditorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
-                "reference": "42d201a59fa0e1625f4dd7167a57a2337b9a528f"
+                "reference": "ea7eac9e1bcf8c50dbe5aca2187cc4ea2d8858d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/42d201a59fa0e1625f4dd7167a57a2337b9a528f",
-                "reference": "42d201a59fa0e1625f4dd7167a57a2337b9a528f",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/ea7eac9e1bcf8c50dbe5aca2187cc4ea2d8858d0",
+                "reference": "ea7eac9e1bcf8c50dbe5aca2187cc4ea2d8858d0",
                 "shasum": ""
             },
             "require": {
@@ -911,7 +911,7 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2014-05-26 19:08:21"
+            "time": "2014-05-28 16:52:06"
         },
         {
             "name": "egeloen/json-builder",
