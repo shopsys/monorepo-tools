@@ -55,7 +55,7 @@ class OrderController extends Controller {
 					$orderMailFacade = $this->get('ss6.shop.order.order_mail_facade');
 					/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
 					$orderMailFacade->sendEmail($order);
-				} catch (SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
+				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
 					$flashMessage = $this->get('ss6.shop.flash_message.front');
 					/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 					$flashMessage->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
