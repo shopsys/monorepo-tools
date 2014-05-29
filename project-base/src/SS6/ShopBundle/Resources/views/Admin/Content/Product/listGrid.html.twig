@@ -11,3 +11,8 @@
 {% block grid_no_data %}
 	Nebylo nalezeno žádné zboží. Nejdřív musíte nějaké vytvořit.
 {% endblock %}
+
+{% block grid_pager_totalcount %}
+	{% set entityName = 'zboží' %}
+	{{ parent() }}
+{% endblock %}
