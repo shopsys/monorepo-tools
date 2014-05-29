@@ -9,6 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,49 +106,76 @@ class CustomerController extends Controller {
 
 	/**
 	 * @Route("/customer/list/")
+	 *
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function listAction() {
 		$source = new Entity(User::class);
 
 		$tableAlias = $source->getTableAlias();
-		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias) {
+		$grid = $this->createGrid();
+		$grid->setSource($source);
+		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias, $grid) {
 			$queryBuilder
-				->addSelect(
-					'MAX(CASE WHEN ba.companyName IS NOT NULL
+				->addSelect('
+					MAX(CASE WHEN ba.companyName IS NOT NULL
 						THEN ba.companyName
 						ELSE CONCAT(' . $tableAlias . ".firstName, ' ', " . $tableAlias . '.lastName)
-					END) AS name'
+					END) AS name,
+					(SELECT COUNT(o1.id) FROM ' . Order::class . ' o1 WHERE o1.customer = ' . $tableAlias . '.id) AS orders_count,
+					(SELECT SUM(o2.totalPrice) FROM ' . Order::class . ' o2 WHERE o2.customer = ' . $tableAlias . '.id) AS orders_sum_price,
+					(SELECT MAX(o3.createdOn) FROM ' . Order::class . ' o3 WHERE o3.customer = ' . $tableAlias . '.id) AS last_order_on'
 				)
 				->join($tableAlias.'.billingAddress', 'ba')
 				->groupBy($tableAlias);
-		});
-
-		$grid = $this->createGrid();
-		$grid->setSource($source);
+			foreach ($grid->getColumns() as $column) {
+				if (!$column->isVisibleForSource() && $column->isSorted()) {
+					$queryBuilder->resetDQLPart('orderBy');
+					$queryBuilder->orderBy($column->getField(), $column->getOrder());
+				}
+			}
+		});		
 
 		$grid->getColumns()->addColumn(new TextColumn(array(
 			'id' => 'name',
-			'type' => 'text',
+			'field' => 'name',
+			'source' => false,
 		)));
 		$grid->getColumns()->addColumn(new TextColumn(array(
 			'id' => 'city',
-			'type' => 'text',
 			'field' => 'billingAddress.city:max',
 			'source' => true,
 		)));
 		$grid->getColumns()->addColumn(new TextColumn(array(
 			'id' => 'telephone',
-			'type' => 'text',
 			'field' => 'billingAddress.telephone:max',
 			'source' => true,
 		)));
+		$grid->getColumns()->addColumn(new TextColumn(array(
+			'id' => 'orders_count',
+			'field' => 'orders_count',
+			'source' => false,
+		)));
+		$grid->getColumns()->addColumn(new TextColumn(array(
+			'id' => 'orders_sum_price',
+			'field' => 'orders_sum_price',
+			'source' => false,
+		)));
+		$grid->getColumns()->addColumn(new TextColumn(array(
+			'id' => 'last_order_on',
+			'field' => 'last_order_on',
+			'source' => false,
+		)));
 
-		$grid->setVisibleColumns(array('name', 'city', 'telephone', 'email'));
-		$grid->setColumnsOrder(array('name', 'city', 'telephone', 'email'));
+		$grid->setVisibleColumns(array('name', 'city', 'telephone', 'email', 'orders_count', 'orders_sum_price', 'last_order_on'));
+		$grid->setColumnsOrder(array('name', 'city', 'telephone', 'email', 'orders_count', 'orders_sum_price', 'last_order_on'));
 		$grid->getColumn('name')->setTitle('Jméno');
 		$grid->getColumn('city')->setTitle('Město');
 		$grid->getColumn('telephone')->setTitle('Telefon');
 		$grid->getColumn('email')->setTitle('Email');
+		$grid->getColumn('orders_count')->setTitle('Počet objednávek')->setClass('text-right');
+		$grid->getColumn('orders_sum_price')->setTitle('Hodnota objednávek')->setClass('text-right');
+		$grid->getColumn('last_order_on')->setTitle('Poslední objednávka')->setClass('text-right');
 		$grid->setDefaultOrder('name', 'asc');
 
 		return $grid->getGridResponse('@SS6Shop/Admin/Content/Customer/list.html.twig');

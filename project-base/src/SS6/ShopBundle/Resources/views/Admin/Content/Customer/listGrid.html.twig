@@ -4,6 +4,18 @@
 	<a href="{{ url('admin_customer_edit', { id: row.field('id') }) }}">{{ value }}</a>
 {% endblock %}
 
+{% block grid_column_orders_sum_price_cell %}
+	{{ value|price }}
+{% endblock %}
+
+{% block grid_column_last_order_on_cell %}
+	{% if value is empty %}
+		-
+	{% else %}
+		{{ value|date('j.n.Y') }}
+	{% endif %}
+{% endblock %}
+
 {% block grid_no_data %}
 	Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit.
 {% endblock %}
