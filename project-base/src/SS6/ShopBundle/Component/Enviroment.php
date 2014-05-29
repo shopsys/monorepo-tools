@@ -40,9 +40,7 @@ class Enviroment {
 	 * @param \Composer\IO\IOInterface $io
 	 */
 	public static function printEnviromentInfo(IOInterface $io) {
-		$io->write('<info>---------------------------------------------</info>');
-		$io->write('<info>Enviroment is "<error>' . self::getEnviroment() . '</error>"</info>');
-		$io->write('<info>---------------------------------------------</info>');
+		$io->write("\nEnviroment is <info>" . self::getEnviroment() . "</info>\n");
 	}
 
 	/**
