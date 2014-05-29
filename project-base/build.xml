@@ -20,8 +20,8 @@
 	
 	<property file="${path.build.properties.local}" override="true"/>
  
-	<target name="build" depends="composer,npm,phplint,phpcs,phpmd,grunt,tests,db-rebuild"/>
-	<target name="build-demo" depends="composer,npm,phplint,phpcs,phpmd,grunt,tests,db-demo"/>
+	<target name="build" depends="composer,npm,phplint,phpcs,phpmd,assetic,grunt,tests,db-rebuild"/>
+	<target name="build-demo" depends="composer,npm,phplint,phpcs,phpmd,assetic,grunt,tests,db-demo"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
@@ -199,6 +199,14 @@
 	
 	<target name="grunt">
 		<exec executable="grunt" passthru="true" checkreturn="true" />
+	</target>
+	
+	<target name="assetic">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="assetic:dump" />
+			<arg value="-q" />
+		</exec>
 	</target>
 	
 </project>
