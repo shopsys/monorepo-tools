@@ -1,0 +1,35 @@
+- label: 'Nástěnka'
+  route: admin_default_dashboard
+
+- label: 'Objednávky'
+  route: admin_order_list
+  items:
+    - label: 'Přijaté objednávky'
+      route: admin_order_list
+
+- label: 'Zákazníci'
+  route: admin_customer_list
+  items:
+    - label: 'Registrovaní zákazníci'
+      route: admin_customer_list
+
+- label: 'Zboží'
+  route: admin_product_list
+  items:
+    - label: 'Katalog zboží'
+      route: admin_product_list
+
+- label: 'Marketing'
+  route: admin_article_list
+  items:
+    - label: 'Články'
+      route: admin_article_list
+
+- label: 'Nastavení'
+  route: admin_orderstatus_list
+  type: settings
+  items:
+    - label: 'Stavy objednávek'
+      route: admin_orderstatus_list
+    - label: 'Dopravy a platby'
+      route: admin_transportandpayment_list

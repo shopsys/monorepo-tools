@@ -2,53 +2,11 @@
 
 {% block html_body %}
 	<div class="navbar navbar navbar-static-top navbar-default">
-
 		<div class="container-fluid">
-
-			<div class="navbar-header">
-				<a href="{{ url('admin_default_dashboard') }}" class="navbar-logo">Shopsys</a>
-			</div>
-
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="{{ url('admin_order_list') }}">Přehled objednávek</a>
-				</li>
-				<li>
-					<a href="{{ url('admin_product_list') }}">Seznam zboží</a>
-				</li>
-				<li>
-					<a href="{{ url('admin_transportandpayment_list') }}">Dopravy a platby</a>
-				</li>
-				<li>
-					<a href="{{ url('admin_customer_list') }}">Zákazníci</a>
-				</li>
-				<li>
-					<a href="{{ url('admin_article_list') }}">Články</a>
-				</li>
-			</ul>
-
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nastavení <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="./">Obchod</a>
-						</li>								
-						<li>
-							<a href="./">Cenotvorba</a>
-						</li>					
-						<li>
-							<a href="./">Věrnostní systém</a>
-						</li>			
-						<li>
-							<a href="./">Dopravy a platby</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="{{ url('admin_logout') }}">Odhlásit</a>
-				</li>
-			</ul>
+			{{ render(controller('SS6ShopBundle:Admin/Menu:menu', {
+				route: app.request.get('_route'),
+				parameters: app.request.attributes.get('_route_params')
+			}	)) }}
 		</div>
 	</div>
 
