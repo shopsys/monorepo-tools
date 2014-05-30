@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Customer\RegistrationService;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements ContainerAwareInterface {
+class UserData extends AbstractFixture implements ContainerAwareInterface {
 	
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface

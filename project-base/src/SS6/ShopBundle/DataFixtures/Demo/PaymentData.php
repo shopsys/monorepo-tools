@@ -13,10 +13,10 @@ class PaymentData extends AbstractFixture implements DependentFixtureInterface {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$this->createPayment($manager, 'Kreditní kartou', 0, array('transport_personal', 'transport_ppl'), 
-			'Rychle, levně a spolehlivě!');
-		$this->createPayment($manager, 'Dobírka', 49.90, array('transport_cp'), null);
-		$this->createPayment($manager, 'Hotově', 0, array('transport_personal'), null);
+		$this->createPayment($manager, 'payment_card', 'Kreditní kartou', 0,
+			array('transport_personal', 'transport_ppl'), 'Rychle, levně a spolehlivě!');
+		$this->createPayment($manager, 'payment_cod', 'Dobírka', 49.90, array('transport_cp'), null);
+		$this->createPayment($manager, 'payment_cash', 'Hotově', 0, array('transport_personal'), null);
 		$manager->flush();
 	}
 	
@@ -24,17 +24,18 @@ class PaymentData extends AbstractFixture implements DependentFixtureInterface {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $name
 	 * @param string $price
-	 * @param array $transportsReferenceName
+	 * @param array $transportsReferenceNames
 	 * @param string|null $description
 	 * @param boolean $hide
 	 */
-	private function createPayment(
-			ObjectManager $manager, $name, $price, array $transportsReferenceName, $description, $hide = false) {
+	private function createPayment(ObjectManager $manager, $referenceName, $name, $price,
+			array $transportsReferenceNames, $description, $hide = false) {
 		$payment = new Payment($name, $price, $description, $hide);
-		foreach ($transportsReferenceName as $referenceName) {
-			$payment->addTransport($this->getReference($referenceName));
+		foreach ($transportsReferenceNames as $transportsReferenceName) {
+			$payment->addTransport($this->getReference($transportsReferenceName));
 		}
 		$manager->persist($payment);
+		$this->addReference($referenceName, $payment);
 	}
 
 	/**
