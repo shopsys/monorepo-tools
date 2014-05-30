@@ -75,7 +75,7 @@ class OrderFacade {
 	/**
 	 * @param $orderFormData \SS6\ShopBundle\Form\Front\Order\OrderFormData
 	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
-	 * @return SS6\ShopBundle\Model\Order\Order
+	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(FrontOrderFormData $orderFormData, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
@@ -103,7 +103,8 @@ class OrderFacade {
 			$orderFormData->getDeliveryStreet(),
 			$orderFormData->getDeliveryCity(),
 			$orderFormData->getDeliveryPostcode(),
-			$orderFormData->getNote());
+			$orderFormData->getNote()
+		);
 
 		$this->fillOrderItems($order, $this->cart);
 
