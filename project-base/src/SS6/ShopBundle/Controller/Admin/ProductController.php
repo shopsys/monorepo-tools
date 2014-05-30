@@ -117,82 +117,48 @@ class ProductController extends Controller {
 			->select('p')
 			->from(Product::class, 'p');
 
-		$PKGrid = new PKGrid($this->container, 'productList');
-		$PKGrid->allowPaging();
-		$PKGrid->setQueryBuilder($queryBuilder, 'p.id');
+		$grid = new PKGrid(
+			'productList',
+			$this->get('request_stack'),
+			$this->get('router'),
+			$this->get('twig')
+		);
+		$grid->allowPaging();
+		$grid->setQueryBuilder($queryBuilder, 'p.id');
 
-		$PKGrid->addColumn('visible', 'p.visible', 'Viditelnost', true);
-		$PKGrid->addColumn('name', 'p.name', 'Název', true);
-		$PKGrid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true);
+		$grid->addColumn('name', 'p.name', 'Název', true);
+		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
 
-		$PKGrid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' =>'p.id'));
-		$PKGrid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' =>'p.id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
-		return $PKGrid->getGridResponse('@SS6Shop/Admin/Content/Product/list.html.twig');
-
+		/*
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$grid = $this->get('grid');
-		/* @var $grid \APY\DataGridBundle\Grid\Grid */
-
-		$source = new Entity(Product::class);		
-		$grid->setSource($source);
-		$grid->setId('productList');
-		
+		/*
 		$customLimit = $administrator->getLimitByGridId($grid->getId());
 		if ($customLimit !== null) {
 			$grid->setDefaultLimit($customLimit);
 		}
-		
-		$grid->getColumns()->addColumn(new BooleanColumn(array(
-			'id' => 'visible',
-			'filterable' => false,
-			'sortable' => false,
-		)));
-		
-		$grid->setVisibleColumns(array('visible', 'name', 'price'));
-		$grid->setColumnsOrder(array('visible', 'name', 'price'));
-		$grid->getColumns()->getColumnById('visible')->setTitle('Viditelné')->setClass('table-col-10');
-		$grid->getColumns()->getColumnById('name')->setTitle('Název')->setClass('table-col-60');
-		$grid->getColumns()->getColumnById('price')->setTitle('Cena')->setClass('table-col-15');
-		
-		$grid->hideFilters();
-		$grid->setActionsColumnTitle('Akce');
-		$grid->setDefaultOrder('name', 'asc');
-		
-		$detailRowAction = new RowAction('Upravit', 'admin_product_edit');
-		$detailRowAction->setRouteParameters(array('id'));
-		$detailRowAction->setAttributes(array('type' => 'edit'));
-		$grid->addRowAction($detailRowAction);
-		
-		$deleteRowAction = new RowAction('Smazat', 'admin_product_delete', true);
-		$deleteRowAction->setConfirmMessage('Opravdu si přejete zboží smazat?');
-		$deleteRowAction->setAttributes(array('type' => 'delete'));
-		$deleteRowAction->setRouteParameters(array('id'));
-		$grid->addRowAction($deleteRowAction);
-		
-		$repository = $this->getDoctrine()->getRepository(Product::class);
-		$source->manipulateRow(function (Row $row) use ($repository) {
-			$product = $repository->find($row->getField('id'));
-			$row->setField('visible', $product->isVisible());
-			
-			return $row;
-		});
 
 		if ($grid->isReadyForRedirect()) {
 			$gridData = $request->get($grid->getHash());
 			if (!empty($gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT])) {
 				$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
 				/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
-				$gridLimit = $gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT];
+				/*$gridLimit = $gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT];
 				if ($gridLimit !== null) {
 					$administratorGridFacade->saveGridLimit($administrator, $grid->getId(), (int)$gridLimit);
 				}
 			}
 		}
-		
-		return $grid->getGridResponse('@SS6Shop/Admin/Content/Product/list.html.twig');
+		*/
+
+		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
 	}
 	
 	/**
