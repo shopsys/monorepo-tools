@@ -5,9 +5,15 @@
 // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
 //umask(0000);
 
-set_time_limit(0);
-
+require_once __DIR__ . '/bootstrap.php.cache';
+require_once __DIR__ . '/AppKernel.php';
 require_once __DIR__ . '/Bootstrap.php';
 
-$bootstrap = new SS6\Bootstrap(true);
+use SS6\Bootstrap;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+$enviroment = $input->getParameterOption(array('--env', '-e'), null);
+
+$bootstrap = new Bootstrap(true, $enviroment);
 $bootstrap->run();
