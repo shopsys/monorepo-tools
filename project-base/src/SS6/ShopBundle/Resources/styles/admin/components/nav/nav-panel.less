@@ -17,9 +17,16 @@
 		text-decoration: none;
 
 		&:hover {
-			color: @color-5;
-			background: @bg-alert;
+			color: @color-f;
+			background: @color-5;
 		}
+	}
+}
+
+.nav-panel .nav-panel__item--active {
+	a {
+		background: @bg-info;
+		color: @color-0;
 	}
 }
 
@@ -36,14 +43,21 @@
 		display: block;
 
 		color: @color-8;
-		background: @bg-info;
+		background: @color-e;
 		border-top: 1px dotted @color-f;
 		font-size: 12px;
 		text-decoration: none;
 
 		&:hover {
-			color: @color-5;
-			background: @bg-alert;
+			color: @color-f;
+			background: @color-5;
 		}
+	}
+}
+
+.nav-panel .nav-panel__submenu__item--active {
+	a {
+		background: @bg-info;
+		color: @color-0;
 	}
 }
