@@ -14,7 +14,7 @@ class AdministratorGridFacade {
 	private $em;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Administrator\AdministratorGridService
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridService
 	 */
 	private $administratorGridService;
 
