@@ -113,13 +113,29 @@ class PKGridView {
 	 * @param array $attrs
 	 * @return string
 	 */
-	public function getUrl(array $attrs = null) {
+	/**
+	 *
+	 * @param array $params
+	 * @param array|string|null $removeParams
+	 * @return string
+	 */
+	public function getUrl(array $params = null, $removeParams = null) {
+		$removeParams = (array)$removeParams;
 		$oldRouteParams = $this->request->attributes->get('_route_params');
-		$gridParams = array('q' => array(
-			$this->grid->getId() => $this->getGridAttrs((array)$attrs),
-		));
-		$routeParams = array_replace_recursive($oldRouteParams, $gridParams);
+
+		$gridParams = array_replace_recursive($this->getGridAttrs(), $params);
+		foreach ($gridParams as $key => $paramValue) {
+			if (in_array($key, $removeParams)) {
+				unset($gridParams[$key]);
+			}
+		}
+		
+		$routeParams = array_replace_recursive(
+			array('q' => array($this->grid->getId() => $gridParams)),
+			$oldRouteParams
+		);
 		$url = $this->router->generate($this->request->attributes->get('_route'), $routeParams, true);
+
 		return $url;
 	}
 
@@ -172,10 +188,9 @@ class PKGridView {
 	}
 
 	/**
-	 * @param array $attrs
 	 * @return array
 	 */
-	private function getGridAttrs(array $attrs) {
+	private function getGridAttrs() {
 		$gridData = array();
 		if ($this->grid->getLimit() !== null) {
 			$gridData['limit'] = $this->grid->getLimit();
@@ -186,7 +201,7 @@ class PKGridView {
 		if ($this->grid->getOrder() !== null) {
 			$gridData['order'] = $this->grid->getOrder();
 		}
-		return array_replace_recursive($gridData, $attrs);
+		return $gridData;
 	}
 
 	/**

@@ -151,7 +151,7 @@
 	<div class="right">
 		{{ ' Zobrazit'|trans }}
 		<span class="form-inline">
-			<select onchange="" class="form-control">
+			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="form-control">
 				{% for value in grid.limits %}
 					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
 				{% endfor %}
