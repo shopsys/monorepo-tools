@@ -84,7 +84,7 @@ class CartFacade {
 	 * @param int $cartItemId
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function getProductByByIdCartItem($cartItemId) {
+	public function getProductByIdCartItem($cartItemId) {
 		return $this->cartService->getCartItemById($this->cart, $cartItemId)->getProduct();
 	}
 }

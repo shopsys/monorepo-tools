@@ -208,7 +208,7 @@ class CartController extends Controller {
 			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
 			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 			try {
-				$productName = $cartFacade->getProductByByIdCartItem($cartItemId)->getName();
+				$productName = $cartFacade->getProductByIdCartItem($cartItemId)->getName();
 				$cartFacade->deleteCartItem($cartItemId);
 				$flashMessage->addSuccess('Z košíku bylo ostraněno zboží ' . $productName);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
