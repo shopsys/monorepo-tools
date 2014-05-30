@@ -1,11 +1,11 @@
-<ul class="nav nav-panel">
+<ul class="nav-panel">
 	{% for item in items %}
-		<li {% if item in activePath %}class="active"{% endif %} >
+		<li class="nav-panel__item {% if item in activePath %}nav-panel__item--active{% endif %}" >
 			<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
 			{% if item.items is not empty %}
-				<ul>
+				<ul class="nav-panel__submenu">
 					{% for subitem in item.items %}
-						<li {% if subitem in activePath %}class="active"{% endif %} >
+						<li class="nav-panel__submenu__item{% if subitem in activePath %}nav-panel__submenu__item--active{% endif %}" >
 							<a href="{{ url(subitem.route, subitem.routeParameters) }}">{{ subitem.label }}</a>
 						</li>
 					{% endfor %}
