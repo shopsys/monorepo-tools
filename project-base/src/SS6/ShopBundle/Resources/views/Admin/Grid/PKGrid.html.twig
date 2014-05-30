@@ -3,23 +3,23 @@
 	{% if grid.rows is not empty %}
 		<div class="grid_header">
 		{% if grid.limit %}
-			{{ grid.renderBlock('pkgrid_pager') }}
+			{{ gridView.renderBlock('pkgrid_pager') }}
 		{% endif %}
 		</div>
 		<div class="grid_body table-responsive">
 		<table class="table table-striped table-hover">
-			{{ grid.renderBlock('pkgrid_titles') }}
-			{{ grid.renderBlock('pkgrid_rows') }}
+			{{ gridView.renderBlock('pkgrid_titles') }}
+			{{ gridView.renderBlock('pkgrid_rows') }}
 		</table>
 		</div>
 		<div class="grid_footer">
 		{% if grid.limit %}
-			{{ grid.renderBlock('pkgrid_pager') }}
+			{{ gridView.renderBlock('pkgrid_pager') }}
 		{% endif %}
 		</div>
 	</form>
 {% else %}
-	{{ grid.renderBlock('pkgrid_no_data') }}
+	{{ gridView.renderBlock('pkgrid_no_data') }}
 {% endif %}
 </div>
 {% endblock %}
@@ -44,7 +44,7 @@
 						{% else %}
 							{% set orderBy = column.id %}
 						{% endif %}
-						<a class="order" href="{{ grid.url({'order': orderBy}) }}">
+						<a class="order" href="{{ gridView.url({'order': orderBy}) }}">
 							{{ column.title }}
 							{% if grid.order == column.id %}
 								{% if grid.orderDirection == 'desc' %}
@@ -73,7 +73,7 @@
 			<tr class="grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}">
 				{% for column in grid.columns %}
 					<td class="grid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}{% if last_row %} last-row{% endif %}">
-						{{ grid.renderCell(column, row)|raw }}
+						{{ gridView.renderCell(column, row)|raw }}
 					</td>
 				{% endfor %}
 				<td class="grid-column-actions last-column{% if last_row %} last-row{% endif %}">
@@ -90,9 +90,7 @@
 								class="{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
 								href="{{ actionColumn.targetUrl(row) }}"
 								{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
-							>
-								<i class="fa fa-{{ icon }}"></i>
-							</a>
+							><i class="fa fa-{{ icon }}"></i></a>
 						{% endfor %}
 					</span>
 				</td>
@@ -113,8 +111,8 @@
 		<span class="form-inline">
 			
 			{% if grid.page > 1 %}
-				<a class="btn btn-default" href="{{ grid.url({'page': grid.page - 1}) }}">&lt;</a>&nbsp;
-				<a class="btn btn-default" href="{{ grid.url({'page': 1}) }}">1</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': 1}) }}">1</a>&nbsp;
 			{% endif %}
 
 			{% set pagerExpand = 2 %}
@@ -124,13 +122,13 @@
 			{% endif %}
 
 			{% for page in (grid.page - pagerExpand)..(grid.page) if page > 1 and page < grid.page %}
-				<a class="btn btn-default" href="{{ grid.url({'page': page}) }}">{{ page }}</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': page}) }}">{{ page }}</a>&nbsp;
 			{% endfor %}
 
 			<a class="btn btn-default disabled" href="#" onclick="return false;">{{ grid.page }}</a>&nbsp;
 
 			{% for page in (grid.page + 1)..(grid.page + pagerExpand) if page > grid.page and page < grid.pageCount %}
-				<a class="btn btn-default" href="{{ grid.url({'page': page}) }}">{{ page }}</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': page}) }}">{{ page }}</a>&nbsp;
 			{% endfor %}
 
 			{% if grid.page < (grid.pageCount - 1) - pagerExpand - 1 %}
@@ -138,8 +136,8 @@
 			{% endif %}
 
 			{% if grid.page < grid.pageCount %}
-				<a class="btn btn-default" href="{{ grid.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>&nbsp;
-				<a class="btn btn-default" href="{{ grid.url({'page': grid.page + 1}) }}">&gt;</a>
+				<a class="btn btn-default" href="{{ gridView.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
 			{% endif %}
 
 			Přejít na:
@@ -154,8 +152,8 @@
 		{{ ' Zobrazit'|trans }}
 		<span class="form-inline">
 			<select onchange="" class="form-control">
-				{% for key, value in grid.limits %}
-					<option value="{{ key }}"{% if (key == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
+				{% for value in grid.limits %}
+					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
 				{% endfor %}
 			</select> {{ 'položek na stránku'|trans }}
 		</span>
@@ -164,11 +162,11 @@
 
 {% block pkgrid_pager %}
 	<div class="text-left clearfix well well-sm">
-		{{ grid.renderBlock('pkgrid_pager_totalcount') }}
+		{{ gridView.renderBlock('pkgrid_pager_totalcount') }}
 		{% if grid.pageCount > 1 %}
-			{{ grid.renderBlock('pkgrid_pager_selectpage') }}
+			{{ gridView.renderBlock('pkgrid_pager_selectpage') }}
 		{% endif %}
-		{{ grid.renderBlock('pkgrid_pager_results_perpage') }}
+		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
 	</div>
 {% endblock %}
 
