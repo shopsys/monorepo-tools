@@ -1,0 +1,5 @@
+front_error_page:
+  pattern: /_error/{code}/
+  defaults: { _controller: SS6ShopBundle:Front\Error:errorPage}
+  requirements:
+    code: \d+
