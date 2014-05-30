@@ -8,6 +8,7 @@ use APY\DataGridBundle\Grid\Row;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
+use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,6 +112,25 @@ class ProductController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
+		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		$queryBuilder
+			->select('p')
+			->from(Product::class, 'p');
+
+		$PKGrid = new PKGrid($this->container, 'productList');
+		$PKGrid->allowPaging();
+		$PKGrid->setQueryBuilder($queryBuilder, 'p.id');
+
+		$PKGrid->addColumn('visible', 'p.visible', 'Viditelnost', true);
+		$PKGrid->addColumn('name', 'p.name', 'Název', true);
+		$PKGrid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
+
+		$PKGrid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' =>'p.id'));
+		$PKGrid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' =>'p.id'))
+			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
+
+		return $PKGrid->getGridResponse('@SS6Shop/Admin/Content/Product/list.html.twig');
+
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$grid = $this->get('grid');
