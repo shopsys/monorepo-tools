@@ -35,6 +35,11 @@ class Cart {
 		$this->calcSummaryInfo();
 	}
 
+	public function clean() {
+		$this->cartItems = array();
+		$this->calcSummaryInfo();
+	}
+
 	public function calcSummaryInfo() {
 		$this->quantity = 0;
 		$this->price = 0;

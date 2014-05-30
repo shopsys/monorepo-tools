@@ -130,7 +130,6 @@ class OrderFacade {
 			);
 			$order->addItem($orderItem);
 			$this->em->persist($orderItem);
-			$this->em->remove($cartItem);
 		}
 
 		$payment = $order->getPayment();

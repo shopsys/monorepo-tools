@@ -61,4 +61,11 @@ class CartService {
 		throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 */
+	public function cleanCart(Cart $cart) {
+		$cart->clean();
+	}
+
 }

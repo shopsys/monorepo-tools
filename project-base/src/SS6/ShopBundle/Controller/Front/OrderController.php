@@ -11,6 +11,9 @@ class OrderController extends Controller {
 
 	const SESSION_CREATED_ORDER = 'created_order_id';
 
+	/**
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
 	public function indexAction() {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
@@ -20,6 +23,9 @@ class OrderController extends Controller {
 
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+
+		$cartFacade = $this->get('ss6.shop.cart.cart_facade');
+		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
@@ -57,6 +63,7 @@ class OrderController extends Controller {
 				$form = $flow->createForm();
 			} else {
 				$order = $orderFacade->createOrder($formData, $this->getUser());
+				$cartFacade->cleanCart();
 
 				$flow->reset();
 
