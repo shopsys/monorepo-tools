@@ -26,8 +26,16 @@ class Cart {
 		$this->cartItems = $cartItems;
 		$this->calcSummaryInfo();
 	}
-	
-	private function calcSummaryInfo() {
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\CartItem $item
+	 */
+	public function addItem(CartItem $item) {
+		$this->cartItems[] = $item;
+		$this->calcSummaryInfo();
+	}
+
+	public function calcSummaryInfo() {
 		$this->quantity = 0;
 		$this->price = 0;
 		foreach ($this->cartItems as $cartItem) {
