@@ -5,61 +5,141 @@
 {% endblock %}
 
 {% block content %}
-	<div class="info-box">
-		<h2 class="mt-0">Osobní údaje</h2>
+	<div class="row">
 
-		<fieldset>
-			{{ form_row(form.firstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.lastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.email, { label: 'E-mail', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.telephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-		</fieldset>
+		<div class="col-sm-12 col-md-8">
+			<div class="info-box">
+				<h2 class="mt-0">Osobní údaje</h2>
 
-	</div>
+				<fieldset>
+					{{ form_row(form.firstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.lastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.email, { label: 'E-mail', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.telephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+				</fieldset>
 
-	<div class="info-box">
-		<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
+			</div>
 
-		<fieldset>
-			{{ form_row(form.companyName, { label: 'Název firmy', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.companyNumber, { label: 'IČ', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.companyTaxNumber, { label: 'DIČ', label_attr: { class: 'form-place__title' } }) }}
-		</fieldset>
+			<div class="info-box">
+				<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
 
-	</div>
+				<fieldset>
+					{{ form_row(form.companyName, { label: 'Název firmy', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.companyNumber, { label: 'IČ', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.companyTaxNumber, { label: 'DIČ', label_attr: { class: 'form-place__title' } }) }}
+				</fieldset>
 
-	<div class="info-box">
-		<h2 class="mt-0">Fakturační údaje <span class="heading-addition">(Tato adresa bude na daňovém dokladu)</span></h2>
+			</div>
 
-		<fieldset>
-			{{ form_row(form.street, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.city, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.postcode, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-		</fieldset>
+			<div class="info-box">
+				<h2 class="mt-0">Fakturační údaje <span class="heading-addition">(Tato adresa bude na daňovém dokladu)</span></h2>
 
-	</div>
+				<fieldset>
+					{{ form_row(form.street, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.city, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.postcode, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+				</fieldset>
 
-	<div class="info-box">
-		<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
+			</div>
 
-		<fieldset>
-			{{ form_row(form.deliveryFirstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryLastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryCompanyName, { label: 'Firma', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryTelephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-			{{ form_row(form.deliveryStreet, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryCity, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
-			{{ form_row(form.deliveryPostcode, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-		</fieldset>
+			<div class="info-box">
+				<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
 
-	</div>
+				<fieldset>
+					{{ form_row(form.deliveryFirstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.deliveryLastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.deliveryCompanyName, { label: 'Firma', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.deliveryTelephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+					{{ form_row(form.deliveryStreet, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.deliveryCity, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.deliveryPostcode, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+				</fieldset>
 
-	<div class="info-box">
-		<h2 class="mt-0">Poznámka</h2>
+			</div>
 
-		<fieldset>
-			{{ form_row(form.note, { label: 'Napište nám', label_attr: { class: 'form-place__title' } }) }}
-		</fieldset>
+			<div class="info-box">
+				<h2 class="mt-0">Poznámka</h2>
+
+				<fieldset>
+					{{ form_row(form.note, { label: 'Napište nám', label_attr: { class: 'form-place__title' } }) }}
+				</fieldset>
+
+			</div>
+
+		</div>
+
+		<div class="col-sm-12 col-md-4">
+			<div class="info-box">
+				<h2 class="mt-0">Přehled zboží v košíku</h2>
+				<table class="basket-review">
+					<tbody>
+						<tr class="basket-review__row">
+							<td class="basket-review__cell">
+								<strong>2 x</strong> minisukně
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								1 354 Denárů
+							</td>
+						</tr>
+						<tr class="basket-review__row">
+							<td class="basket-review__cell">
+								<strong>2 x</strong> minisukně
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								1 354 Denárů
+							</td>
+						</tr>
+						<tr class="basket-review__row">
+							<td class="basket-review__cell">
+								<strong>2 x</strong> minisukně
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								1 354 Denárů
+							</td>
+						</tr>
+						<tr class="basket-review__row">
+							<td class="basket-review__cell">
+								<strong>2 x</strong> minisukně
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								1 354 Denárů
+							</td>
+						</tr>
+						<tr class="basket-review__row">
+							<td class="basket-review__cell">
+								Způsob dopravy: Popiči transport
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								zdarma
+							</td>
+						</tr>
+						<tr class="basket-review__row">
+							<td class="basket-review__cell">
+								Způsob platby: Prachy na dřevo
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								0 Denárů
+							</td>
+						</tr>
+						<tr class="basket-review__row basket-review__row--total">
+							<td class="basket-review__cell">
+								Cena celkem:
+							</td>
+
+							<td class="basket-review__cell basket-review__cell--price">
+								5 475 Koz
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 	</div>
 
