@@ -66,12 +66,5 @@ swiftmailer:
   password: "%mailer_password%"
   spool: { type: memory }
 
-apy_data_grid:
-  limits:
-    30: 30
-    100: 100
-    300: 300
-    500: 500
-
 imports:
     - { resource: wysiwyg.yml }
