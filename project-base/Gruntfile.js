@@ -31,6 +31,15 @@ module.exports = function(grunt) {
 					sourceMapURL: 'index.css.map',
 					sourceMapRootpath: '../../../'
 				}
+			},
+
+			wysiwyg: {
+				files: {
+					'web/assets/admin/styles/wysiwyg.css': 'src/SS6/ShopBundle/Resources/styles/front/wysiwyg.less'
+				},
+				options: {
+					compress: true
+				}
 			}
 		},
 
@@ -144,6 +153,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['sprite', 'less', 'legacssy']);
 
-	grunt.registerTask('frontend', ['sprite:frontend', 'less:frontend', 'legacssy:frontend']);
+	grunt.registerTask('frontend', ['sprite:frontend', 'less:frontend', 'legacssy:frontend', 'less:wysiwyg']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
 };
