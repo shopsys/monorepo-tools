@@ -18,6 +18,13 @@
   items:
     - label: 'Katalog zboží'
       route: admin_product_list
+      items:
+        - label: 'Nové zboží'
+          route: admin_product_new
+          visible: false
+        - label: 'Editace zboží'
+          route: admin_product_edit
+          visible: false
 
 - label: 'Marketing'
   route: admin_article_list

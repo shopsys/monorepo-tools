@@ -34,6 +34,9 @@ class MenuConfiguration implements ConfigurationInterface {
 				->scalarNode('type')
 					->defaultNull()
 				->end()
+				->booleanNode('visible')
+					->defaultTrue()
+				->end()
 				->variableNode('items')
 					->defaultValue(array())
 					->validate()->always(function(array $items) {

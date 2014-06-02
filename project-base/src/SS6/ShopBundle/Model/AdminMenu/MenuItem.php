@@ -33,6 +33,11 @@ class MenuItem {
 	private $routeParameters;
 
 	/**
+	 * @var boolean
+	 */
+	private $visible;
+
+	/**
 	 * @param string $label
 	 * @param string|null $type
 	 * @param string $route
@@ -40,7 +45,7 @@ class MenuItem {
 	 * @param array $items
 	 */
 	public function __construct($label, $type = null, $route = null, array $routeParameters = null,
-			array $items = null) {
+			$visible = true, array $items = null) {
 		if (isset($type)) {
 			$this->setType($type);
 		} else {
@@ -54,6 +59,12 @@ class MenuItem {
 			$this->routeParameters = $routeParameters;
 		} else {
 			$this->routeParameters = array();
+		}
+
+		if (isset($visible)) {
+			$this->visible = $visible;
+		} else {
+			$this->visible = true;
 		}
 
 		$this->items = $items;
@@ -81,7 +92,7 @@ class MenuItem {
 	}
 
 	/**
-	 * @return type
+	 * @return string|null
 	 */
 	public function getRoute() {
 		return $this->route;
@@ -92,6 +103,13 @@ class MenuItem {
 	 */
 	public function getRouteParameters() {
 		return $this->routeParameters;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isVisible() {
+		return $this->visible === true;
 	}
 
 	/**

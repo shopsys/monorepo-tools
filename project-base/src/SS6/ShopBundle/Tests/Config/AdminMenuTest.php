@@ -29,12 +29,14 @@ class AdminMenuTest extends FunctionalTestCase {
 		/* @var $router \Symfony\Bundle\FrameworkBundle\Routing\Router */
 
 		foreach ($items as $item) {
-			if ($item->getRoute() !== null) {
-				$router->generate($item->getRoute(), $item->getRouteParameters());
-			}
+			if ($item->isVisible()) {
+				if ($item->getRoute() !== null) {
+					$router->generate($item->getRoute(), $item->getRouteParameters());
+				}
 
-			if ($item->getItems() !== null) {
-				$this->resolveRoutesRecursive($item->getItems());
+				if ($item->getItems() !== null) {
+					$this->resolveRoutesRecursive($item->getItems());
+				}
 			}
 		}
 	}
