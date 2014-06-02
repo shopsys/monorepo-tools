@@ -82,5 +82,21 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse($result->getIsNew());
 		$this->assertEquals($quantity, $result->getAddedQuantity());
 	}
+
+	public function testCleanCart() {
+		$customerIdentifier = new CustomerIdentifier('randomString');
+
+		$price = 100;
+		$product = new Product('Product 1', null, null, null, null, $price);
+
+		$cartItem = new CartItem($customerIdentifier, $product, 1);
+		$cartItems = array($cartItem);
+		$cart = new Cart($cartItems);
+		
+		$cartService = new CartService();
+		$cartService->cleanCart($cart);
+		
+		$this->assertTrue($cart->isEmpty());
+	}
 	
 }

@@ -80,6 +80,17 @@ class CartFacade {
 		$this->em->flush();
 	}
 
+	public function cleanCart() {
+		$cartItemsToDelete = $this->cart->getItems();
+		$this->cartService->cleanCart($this->cart);
+
+		foreach ($cartItemsToDelete as $cartItemToDelete) {
+			$this->em->remove($cartItemToDelete);
+		}
+		
+		$this->em->flush();
+	}
+
 	/**
 	 * @param int $cartItemId
 	 * @return \SS6\ShopBundle\Model\Product\Product

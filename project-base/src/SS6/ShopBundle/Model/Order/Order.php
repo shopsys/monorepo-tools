@@ -349,6 +349,13 @@ class Order {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $status
+	 */
+	public function setStatus(OrderStatus $status) {
+		$this->status = $status;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	public function getPayment() {

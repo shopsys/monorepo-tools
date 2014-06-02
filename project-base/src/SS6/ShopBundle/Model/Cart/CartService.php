@@ -23,11 +23,13 @@ class CartService {
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getProduct() === $product) {
 				$cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
+				$cart->calcSummaryInfo();
 				return new AddProductResult($cartItem, false, $quantity);
 			}
 		}
 
 		$newCartItem = new CartItem($customerIdentifier, $product, $quantity);
+		$cart->addItem($newCartItem);
 		return new AddProductResult($newCartItem, true, $quantity);
 	}
 
@@ -41,6 +43,7 @@ class CartService {
 				$cartItem->changeQuantity($quantities[$cartItem->getId()]);
 			}
 		}
+		$cart->calcSummaryInfo();
 	}
 
 	/**
@@ -56,6 +59,13 @@ class CartService {
 		}
 		$message = 'CartItem with id = ' . $cartItemId . ' not found in cart.';
 		throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 */
+	public function cleanCart(Cart $cart) {
+		$cart->clean();
 	}
 
 }

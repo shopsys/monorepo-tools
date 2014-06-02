@@ -41,10 +41,4 @@ class AdministratorData extends AbstractFixture implements ContainerAwareInterfa
 		$manager->flush();
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getOrder() {
-		return 1;
-	}	
 }
