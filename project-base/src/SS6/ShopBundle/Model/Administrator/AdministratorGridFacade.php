@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Administrator;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridService;
+use SS6\ShopBundle\Model\PKGrid\PKGrid;
 
 class AdministratorGridFacade {
 
@@ -26,8 +27,13 @@ class AdministratorGridFacade {
 		$this->administratorGridService = $administratorGridService;
 	}
 
-	public function saveGridLimit(Administrator $administrator, $gridId, $limit) {
-		$gridLimit = $this->administratorGridService->setGridLimit($administrator, $gridId, $limit);
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \SS6\ShopBundle\Model\PKGrid\PKGrid $grid
+	 */
+	public function restoreAndRememberGridLimit(Administrator $administrator, PKGrid $grid) {
+		$this->administratorGridService->restoreGridLimit($administrator, $grid);
+		$gridLimit = $this->administratorGridService->rememberGridLimit($administrator, $grid);
 		$this->em->persist($gridLimit);
 		$this->em->flush();
 	}

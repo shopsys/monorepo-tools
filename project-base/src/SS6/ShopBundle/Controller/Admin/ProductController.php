@@ -112,6 +112,11 @@ class ProductController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
+		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
+		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
 			->select('p')
@@ -134,27 +139,7 @@ class ProductController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
-		/*
-		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		/*
-		$customLimit = $administrator->getLimitByGridId($grid->getId());
-		if ($customLimit !== null) {
-			$grid->setDefaultLimit($customLimit);
-		}
-
-		if ($grid->isReadyForRedirect()) {
-			$gridData = $request->get($grid->getHash());
-			if (!empty($gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT])) {
-				$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
-				/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
-				/*$gridLimit = $gridData[\APY\DataGridBundle\Grid\Grid::REQUEST_QUERY_LIMIT];
-				if ($gridLimit !== null) {
-					$administratorGridFacade->saveGridLimit($administrator, $grid->getId(), (int)$gridLimit);
-				}
-			}
-		}
-		*/
+		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', array(
 			'gridView' => $grid->createView(),
