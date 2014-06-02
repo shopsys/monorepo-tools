@@ -78,6 +78,11 @@ class PKGrid {
 	private $orderDirection;
 
 	/**
+	 * @var bool
+	 */
+	private $isOrderFromRequest = false;
+
+	/**
 	 * @var row
 	 */
 	private $rows = array();
@@ -188,6 +193,17 @@ class PKGrid {
 	public function setDefaultLimit($limit) {
 		if (!$this->isLimitFromRequest) {
 			$this->limit = (int)$limit;
+		}
+	}
+
+	/**
+	 * @param string $columnId
+	 * @param string $direction
+	 */
+	public function setDefaultOrder($columnId, $direction = 'asc') {
+		if (!$this->isOrderFromRequest) {
+			$prefix = $direction == 'desc' ? '-' : '';
+			$this->setOrder($prefix . $columnId);
 		}
 	}
 
@@ -309,6 +325,7 @@ class PKGrid {
 			}
 			if (array_key_exists('order', $gridData)) {
 				$this->setOrder($gridData['order']);
+				$this->isOrderFromRequest = true;
 			}
 		}
 	}

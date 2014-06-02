@@ -128,6 +128,7 @@ class ProductController extends Controller {
 			$this->get('twig')
 		);
 		$grid->allowPaging();
+		$grid->setDefaultOrder('name');
 		$grid->setQueryBuilder($queryBuilder, 'p.id');
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true);
