@@ -17,6 +17,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$product = new Product('productName');
 		$em->persist($product);
@@ -28,13 +29,13 @@ class CartFacadeTest extends DatabaseTestCase {
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier);
 		$cartFacade->addProductToCart($productId, $quantity);
 
 		$em->clear();
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		$this->assertEquals($quantity, $cart->getQuantity(), 'Add correct quantity product');
 		$cartItems = $cart->getItems();
@@ -42,7 +43,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$this->assertEquals($productId, $product->getId(), 'Add correct product');
 
 		$customerIdentifier = new CustomerIdentifier('anotherSecreetSessionHash');
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		$this->assertEquals(0, $cart->getItemsCount(), 'Add only in their own basket');
 	}
@@ -53,6 +54,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$product1 = new Product('productName');
 		$product2 = new Product('otherProductName');
@@ -64,7 +66,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier);
 		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), 1)->getCartItem();
@@ -72,7 +74,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->flush();
 		$em->clear();
 
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier);
 		$cartFacade->changeQuantities(array(
@@ -82,7 +84,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->flush();
 
 		$em->clear();
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getId() === $cartItem1->getId()) {
@@ -122,6 +124,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$product1 = new Product('productName1');
 		$product2 = new Product('productName2');
@@ -140,7 +143,7 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$em->clear();
 		
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
 		$this->assertEquals(1, $cart->getItemsCount());
 		$cartItems = $cart->getItems();
