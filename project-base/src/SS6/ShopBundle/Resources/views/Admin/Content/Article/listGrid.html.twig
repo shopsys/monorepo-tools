@@ -1,9 +1,14 @@
-{% extends '@SS6Shop/Admin/Grid/grid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
-{% block grid_column_name_cell %}
-	<a href="{{ url('admin_article_edit', { id: row.field('id') }) }}">{{ value }}</a>
+{% block pkgrid_value_cell_id_name %}
+	<a href="{{ url('admin_article_edit', { id: row.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block grid_no_data %}
+{% block pkgrid_no_data %}
 	Nebyli nalezeni žádné články. Nejprve musíte nějaký vytvořit.
+{% endblock %}
+
+{% block pkgrid_pager_totalcount %}
+	{% set entityName = 'článků' %}
+	{{ parent() }}
 {% endblock %}

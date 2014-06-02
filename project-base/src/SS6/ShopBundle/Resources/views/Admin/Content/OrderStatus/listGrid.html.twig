@@ -1,9 +1,14 @@
-{% extends '@SS6Shop/Admin/Grid/grid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
-{% block grid_column_name_cell %}
-	<a href="{{ url('admin_orderstatus_edit', { id: row.field('id') }) }}">{{ value }}</a>
+{% block pkgrid_value_cell_id_name %}
+	<a href="{{ url('admin_orderstatus_edit', { id: row.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block grid_no_data %}
-	Nebyla nalezen žádný stav objednávek.
+{% block pkgrid_no_data %}
+	Nebyl nalezen žádný stav objednávek.
+{% endblock %}
+
+{% block pkgrid_pager_totalcount %}
+	{% set entityName = 'stavů objednávek' %}
+	{{ parent() }}
 {% endblock %}

@@ -2,10 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Column\BooleanColumn;
-use APY\DataGridBundle\Grid\Row;
-use APY\DataGridBundle\Grid\Source\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
@@ -135,9 +131,9 @@ class ProductController extends Controller {
 		$grid->addColumn('name', 'p.name', 'Název', true);
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
 
-		$grid->addActionColumnClass('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
+		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);

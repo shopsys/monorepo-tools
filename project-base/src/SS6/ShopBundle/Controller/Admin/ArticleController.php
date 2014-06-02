@@ -2,11 +2,10 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Source\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\Article\Article;
+use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -65,43 +64,38 @@ class ArticleController extends Controller {
 	 * @Route("/article/list/")
 	 */
 	public function listAction() {
-		$source = new Entity(Article::class);
+		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
+		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 
-		$grid = $this->createGrid();
-		$grid->setSource($source);
+		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		$queryBuilder
+			->select('a')
+			->from(Article::class, 'a');
 
-		$grid->setVisibleColumns(array('name'));
-		$grid->setColumnsOrder(array('name'));
-		$grid->getColumn('name')->setTitle('Název');
-		$grid->setDefaultOrder('name', 'asc');
+		$grid = new PKGrid(
+			'articleList',
+			$this->get('request_stack'),
+			$this->get('router'),
+			$this->get('twig')
+		);
+		$grid->allowPaging();
+		$grid->setDefaultOrder('name');
+		$grid->setQueryBuilder($queryBuilder, 'a.id');
 
-		return $grid->getGridResponse('@SS6Shop/Admin/Content/Article/list.html.twig');
-	}
+		$grid->addColumn('name', 'a.name', 'Název', true);
 
-	/**
-	 * @return \APY\DataGridBundle\Grid\Grid
-	 */
-	private function createGrid() {
-		$grid = $this->get('grid');
-		/* @var $grid \APY\DataGridBundle\Grid\Grid */
+		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', array('id' => 'id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'id'))
+			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
 
-		$grid->hideFilters();
-		$grid->setActionsColumnTitle('Akce');
-		$grid->setLimits(array(20));
-		$grid->setDefaultLimit(20);
+		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		$detailRowAction = new RowAction('Upravit', 'admin_article_edit');
-		$detailRowAction->setRouteParameters(array('id'));
-		$detailRowAction->setAttributes(array('type' => 'edit'));
-		$grid->addRowAction($detailRowAction);
-
-		$deleteRowAction = new RowAction('Smazat', 'admin_article_delete', true);
-		$deleteRowAction->setConfirmMessage('Opravdu si přejete článek smazat?');
-		$deleteRowAction->setRouteParameters(array('id'));
-		$deleteRowAction->setAttributes(array('type' => 'delete'));
-		$grid->addRowAction($deleteRowAction);
-
-		return $grid;
+		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
 	}
 
 	/**

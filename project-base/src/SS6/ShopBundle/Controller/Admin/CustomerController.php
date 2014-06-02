@@ -2,14 +2,11 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Column\TextColumn;
-use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -118,101 +115,60 @@ class CustomerController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function listAction() {
-		$source = new Entity(User::class);
+		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
+		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 
-		$tableAlias = $source->getTableAlias();
-		$grid = $this->createGrid();
-		$grid->setSource($source);
-		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias, $grid) {
-			$queryBuilder
-				->addSelect('
-					MAX(CASE WHEN ba.companyName IS NOT NULL
+		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
+		$queryBuilder
+			->select('
+				u.id,
+				u.email,
+				MAX(ba.city) city,
+				MAX(ba.telephone) telephone,
+				MAX(CASE WHEN ba.companyName IS NOT NULL
 						THEN ba.companyName
-						ELSE CONCAT(' . $tableAlias . ".firstName, ' ', " . $tableAlias . '.lastName)
+						ELSE CONCAT(u.firstName, \' \', u.lastName)
 					END) AS name,
-					(SELECT COUNT(o1.id) FROM ' . Order::class . ' o1 WHERE o1.customer = ' . $tableAlias . '.id) AS orders_count,
-					(SELECT SUM(o2.totalPrice) FROM ' . Order::class . ' o2 WHERE o2.customer = ' . $tableAlias . '.id) AS orders_sum_price,
-					(SELECT MAX(o3.createdOn) FROM ' . Order::class . ' o3 WHERE o3.customer = ' . $tableAlias . '.id) AS last_order_on'
-				)
-				->join($tableAlias.'.billingAddress', 'ba')
-				->groupBy($tableAlias);
-			foreach ($grid->getColumns() as $column) {
-				if (!$column->isVisibleForSource() && $column->isSorted()) {
-					$queryBuilder->resetDQLPart('orderBy');
-					$queryBuilder->orderBy($column->getField(), $column->getOrder());
-				}
-			}
-		});		
+				COUNT(o.id) ordersCount,
+				SUM(o.totalPrice) ordersSumPrice,
+				MAX(o.createdOn) lastOrderOn')
+			->from(User::class, 'u')
+			->leftJoin('u.billingAddress', 'ba')
+			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
+			->groupBy('u.id');
 
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'name',
-			'field' => 'name',
-			'source' => false,
-		)));
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'city',
-			'field' => 'billingAddress.city:max',
-			'source' => true,
-		)));
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'telephone',
-			'field' => 'billingAddress.telephone:max',
-			'source' => true,
-		)));
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'orders_count',
-			'field' => 'orders_count',
-			'source' => false,
-		)));
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'orders_sum_price',
-			'field' => 'orders_sum_price',
-			'source' => false,
-		)));
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'last_order_on',
-			'field' => 'last_order_on',
-			'source' => false,
-		)));
+		$grid = new PKGrid(
+			'customerList',
+			$this->get('request_stack'),
+			$this->get('router'),
+			$this->get('twig')
+		);
+		$grid->allowPaging();
+		$grid->setDefaultOrder('name');
+		$grid->setQueryBuilder($queryBuilder, 'u.id');
 
-		$grid->setVisibleColumns(array('name', 'city', 'telephone', 'email', 'orders_count', 'orders_sum_price', 'last_order_on'));
-		$grid->setColumnsOrder(array('name', 'city', 'telephone', 'email', 'orders_count', 'orders_sum_price', 'last_order_on'));
-		$grid->getColumn('name')->setTitle('Jméno');
-		$grid->getColumn('city')->setTitle('Město');
-		$grid->getColumn('telephone')->setTitle('Telefon');
-		$grid->getColumn('email')->setTitle('Email');
-		$grid->getColumn('orders_count')->setTitle('Počet objednávek')->setClass('text-right');
-		$grid->getColumn('orders_sum_price')->setTitle('Hodnota objednávek')->setClass('text-right');
-		$grid->getColumn('last_order_on')->setTitle('Poslední objednávka')->setClass('text-right');
-		$grid->setDefaultOrder('name', 'asc');
+		$grid->addColumn('name', 'name', 'Jméno', true);
+		$grid->addColumn('city', 'city', 'Město', true);
+		$grid->addColumn('telephone', 'telephone', 'Telefon', true);
+		$grid->addColumn('email', 'u.email', 'Email', true);
+		$grid->addColumn('ordersCount', 'ordersCount', 'Počet objednávek', true)->setClass('text-right');
+		$grid->addColumn('ordersSumPrice', 'ordersSumPrice', 'Hodnota objednávek', true)->setClass('text-right');
+		$grid->addColumn('lastOrderOn', 'lastOrderOn', 'Poslední objednávka', true)->setClass('text-right');
+		
 
-		return $grid->getGridResponse('@SS6Shop/Admin/Content/Customer/list.html.twig');
-	}
+		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', array('id' => 'id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', array('id' => 'id'))
+			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
-	/**
-	 * @return \APY\DataGridBundle\Grid\Grid
-	 */
-	private function createGrid() {
-		$grid = $this->get('grid');
-		/* @var $grid \APY\DataGridBundle\Grid\Grid */
+		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		$grid->hideFilters();
-		$grid->setActionsColumnTitle('Akce');
-		$grid->setLimits(array(20));
-		$grid->setDefaultLimit(20);
-
-		$detailRowAction = new RowAction('Upravit', 'admin_customer_edit');
-		$detailRowAction->setRouteParameters(array('id'));
-		$detailRowAction->setAttributes(array('type' => 'edit'));
-		$grid->addRowAction($detailRowAction);
-
-		$deleteRowAction = new RowAction('Smazat', 'admin_customer_delete', true);
-		$deleteRowAction->setConfirmMessage('Opravdu si přejete zákazníka smazat?');
-		$deleteRowAction->setRouteParameters(array('id'));
-		$deleteRowAction->setAttributes(array('type' => 'delete'));
-		$grid->addRowAction($deleteRowAction);
-
-		return $grid;
+		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
 	}
 
 	/**

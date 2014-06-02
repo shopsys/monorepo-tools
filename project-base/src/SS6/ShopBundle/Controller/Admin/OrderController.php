@@ -2,15 +2,12 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Column\TextColumn;
-use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -114,81 +111,55 @@ class OrderController extends Controller {
 	 * @Route("/order/list/")
 	 */
 	public function listAction() {
-		$source = new Entity(Order::class);
+		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
+		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 
-		$tableAlias = $source->getTableAlias();
-		$grid = $this->createGrid();
-		$source->manipulateQuery(function (QueryBuilder $queryBuilder) use ($tableAlias, $grid) {
-			$queryBuilder
-				->addSelect(
-					'(CASE WHEN ' . $tableAlias . '.companyName IS NOT NULL
-							THEN ' . $tableAlias . '.companyName
-							ELSE CONCAT(' . $tableAlias . ".firstName, ' ', " . $tableAlias . '.lastName)
-						END) AS customerName'
-				)
-				->add('where', $tableAlias . '.deleted = :deleted')
-				->setParameter('deleted', false);
+		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
+		$queryBuilder
+			->select('
+				o.id,
+				o.number,
+				o.createdOn,
+				MAX(os.name) AS statusName,
+				o.totalPrice,
+				(CASE WHEN o.companyName IS NOT NULL
+							THEN o.companyName
+							ELSE CONCAT(o.firstName, \' \', o.lastName)
+						END) AS customerName')
+			->from(Order::class, 'o')
+			->join('o.status', 'os')
+			->groupBy('o.id');
 
-			foreach ($grid->getColumns() as $column) {
-				if (!$column->isVisibleForSource() && $column->isSorted()) {
-					$queryBuilder->resetDQLPart('orderBy');
-					$queryBuilder->orderBy($column->getField(), $column->getOrder());
-				}
-			}
-		});
+		$grid = new PKGrid(
+			'orderList',
+			$this->get('request_stack'),
+			$this->get('router'),
+			$this->get('twig')
+		);
+		$grid->allowPaging();
+		$grid->setDefaultOrder('number');
+		$grid->setQueryBuilder($queryBuilder, 'o.id');
 
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'customerName',
-			'type' => 'text',
-			'field' => 'customerName',
-			'sortable' => true,
-			'source' => false,
-		)));
-		$grid->getColumns()->addColumn(new TextColumn(array(
-			'id' => 'statusName',
-			'type' => 'text',
-			'field' => 'status.name',
-			'source' => true,
-		)));
+		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
+		$grid->addColumn('createdOn', 'o.createdOn', 'Vytvořena', true);
+		$grid->addColumn('customerName', 'customerName', 'Zákazník', true);
+		$grid->addColumn('statusName', 'statusName', 'Stav', true);
+		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClass('text-right');
 
-		$grid->setSource($source);
 
-		$grid->setVisibleColumns(array('number', 'createdOn', 'customerName', 'statusName', 'totalPrice'));
-		$grid->setColumnsOrder(array('number', 'createdOn', 'customerName', 'statusName', 'totalPrice'));
-		$grid->setDefaultOrder('createdOn', 'desc');
-		$grid->getColumn('number')->setTitle('Č. objednávky');
-		$grid->getColumn('createdOn')->setTitle('Vytvořena');
-		$grid->getColumn('customerName')->setTitle('Zákazník');
-		$grid->getColumn('statusName')->setTitle('Stav');
-		$grid->getColumn('totalPrice')->setTitle('Celková cena');
+		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', array('id' => 'id'))
+			->setConfirmMessage('Opravdu si přejete objednávku smazat?');
 
-		return $grid->getGridResponse('@SS6Shop/Admin/Content/Order/list.html.twig');
-	}
+		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-	/**
-	 * @return \APY\DataGridBundle\Grid\Grid
-	 */
-	private function createGrid() {
-		$grid = $this->get('grid');
-		/* @var $grid \APY\DataGridBundle\Grid\Grid */
-
-		$grid->hideFilters();
-		$grid->setActionsColumnTitle('Akce');
-		$grid->setLimits(array(20));
-		$grid->setDefaultLimit(20);
-
-		$detailRowAction = new RowAction('Upravit', 'admin_order_edit');
-		$detailRowAction->setRouteParameters(array('id'));
-		$detailRowAction->setAttributes(array('type' => 'edit'));
-		$grid->addRowAction($detailRowAction);
-
-		$deleteRowAction = new RowAction('Smazat', 'admin_order_delete', true);
-		$deleteRowAction->setConfirmMessage('Opravdu si přejete objednávku smazat?');
-		$deleteRowAction->setRouteParameters(array('id'));
-		$deleteRowAction->setAttributes(array('type' => 'delete'));
-		$grid->addRowAction($deleteRowAction);
-
-		return $grid;
+		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
 	}
 
 	/**

@@ -178,7 +178,7 @@ class PKGrid {
 	/**
 	 * @param string $class
 	 */
-	public function addActionColumnClass($class) {
+	public function setActionColumnClass($class) {
 		$this->actionColumnClass = $class;
 	}
 
