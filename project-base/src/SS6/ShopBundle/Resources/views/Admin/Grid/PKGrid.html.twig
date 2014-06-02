@@ -60,7 +60,7 @@
 				</th>
 			{% endfor %}
 			{% if grid.actionColumns is not empty %}
-				<th class="last-column" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
+				<th class="last-column {{ grid.actionColumnClass }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
 			{% endif  %}
 		</tr>
 	</thead>
@@ -76,7 +76,7 @@
 						{{ gridView.renderCell(column, row)|raw }}
 					</td>
 				{% endfor %}
-				<td class="grid-column-actions last-column{% if last_row %} last-row{% endif %}">
+				<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if last_row %} last-row{% endif %}">
 					<span class="grid-row-actions action-icons">
 						{% for actionColumn in grid.actionColumns %}
 							{% if actionColumn.type == 'edit' %}
@@ -87,7 +87,7 @@
 								{% set icon = actionColumn.type %}
 							{% endif %}
 							<a 
-								class="{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
+								class="table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
 								href="{{ actionColumn.targetUrl(row) }}"
 								{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
 							><i class="fa fa-{{ icon }}"></i></a>

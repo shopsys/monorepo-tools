@@ -113,6 +113,11 @@ class PKGrid {
 	private $groupBy;
 
 	/**
+	 * @var string
+	 */
+	private $actionColumnClass = '';
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\PKGrid\RequestStack $requestStack
 	 * @param \SS6\ShopBundle\Model\PKGrid\Router $router
@@ -168,6 +173,13 @@ class PKGrid {
 		$this->actionColumns[] = $actionColumn;
 
 		return $actionColumn;
+	}
+
+	/**
+	 * @param string $class
+	 */
+	public function addActionColumnClass($class) {
+		$this->actionColumnClass = $class;
 	}
 
 	/**
@@ -298,6 +310,13 @@ class PKGrid {
 	 */
 	public function getOrderDirection() {
 		return $this->orderDirection;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getActionColumnClass() {
+		return $this->actionColumnClass;
 	}
 
 	/**

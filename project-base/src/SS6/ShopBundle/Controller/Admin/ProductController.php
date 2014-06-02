@@ -131,10 +131,11 @@ class ProductController extends Controller {
 		$grid->setDefaultOrder('name');
 		$grid->setQueryBuilder($queryBuilder, 'p.id');
 
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true);
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClass('table-col table-col-10');
 		$grid->addColumn('name', 'p.name', 'Název', true);
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
 
+		$grid->addActionColumnClass('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
