@@ -109,9 +109,8 @@ class ProductController extends Controller {
 
 	/**
 	 * @Route("/product/list/")
-	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function listAction(Request $request) {
+	public function listAction() {
 		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
