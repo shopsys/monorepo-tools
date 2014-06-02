@@ -192,11 +192,11 @@ class PKGridView {
 	 */
 	private function getGridAttrs() {
 		$gridData = array();
-		if ($this->grid->getLimit() !== null) {
+		if ($this->grid->isAllowedPaging()) {
 			$gridData['limit'] = $this->grid->getLimit();
-		}
-		if ($this->grid->getPage() > 1) {
-			$gridData['page'] = $this->grid->getPage();
+			if ($this->grid->getPage() > 1) {
+				$gridData['page'] = $this->grid->getPage();
+			}
 		}
 		if ($this->grid->getOrder() !== null) {
 			$gridData['order'] = $this->grid->getOrder();

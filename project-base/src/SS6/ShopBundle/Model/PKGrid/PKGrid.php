@@ -13,11 +13,6 @@ use Twig_Environment;
 class PKGrid {
 
 	/**
-	 * @var \Symfony\Component\DependencyInjection\Container
-	 */
-	private $container;
-
-	/**
 	 * @var string
 	 */
 	private $id;
@@ -33,19 +28,34 @@ class PKGrid {
 	private $actionColumns = array();
 
 	/**
+	 * @var bool
+	 */
+	private $allowPaging = false;
+
+	/**
 	 * @var array
 	 */
 	private $limits = array(30, 100, 200, 500);
 
 	/**
-	 * @var int|null
+	 * @var int
 	 */
 	private $limit;
 
 	/**
-	 * @var int|null
+	 * @var bool
 	 */
-	private $page;
+	private $isLimitFromRequest = false;
+
+	/**
+	 * @var int
+	 */
+	private $defaultLimit = 30;
+
+	/**
+	 * @var int
+	 */
+	private $page = 1;
 
 	/**
 	 * @var int|null
@@ -56,11 +66,6 @@ class PKGrid {
 	 * @var int|null
 	 */
 	private $pageCount;
-
-	/**
-	 * @var int
-	 */
-	private $defaultLimit = 30;
 
 	/**
 	 * @var string|null
@@ -114,6 +119,9 @@ class PKGrid {
 		$this->router = $router;
 		$this->twig = $twig;
 
+		$this->limit = $this->defaultLimit;
+		$this->page = 1;
+
 		$this->loadFromRequest();
 	}
 
@@ -162,7 +170,7 @@ class PKGrid {
 	 */
 	public function createView() {
 		$this->executeQuery();
-		if ($this->getLimit() !== null) {
+		if ($this->isAllowedPaging()) {
 			$this->executeTotalQuery();
 		}
 		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
@@ -171,8 +179,16 @@ class PKGrid {
 	}
 
 	public function allowPaging() {
-		$this->limit = $this->limit ?: $this->defaultLimit;
-		$this->page = $this->page ?: 1;
+		$this->allowPaging = true;
+	}
+
+	/**
+	 * @param int $limit
+	 */
+	public function setDefaultLimit($limit) {
+		if (!$this->isLimitFromRequest) {
+			$this->limit = (int)$limit;
+		}
 	}
 
 	/**
@@ -213,7 +229,14 @@ class PKGrid {
 	}
 
 	/**
-	 * @return int|null
+	 * @return bool
+	 */
+	public function isAllowedPaging() {
+		return $this->allowPaging;
+	}
+
+	/**
+	 * @return int
 	 */
 	public function getLimit() {
 		return $this->limit;
@@ -234,14 +257,14 @@ class PKGrid {
 	}
 
 	/**
-	 * @return int|null
+	 * @return int
 	 */
 	public function getPage() {
 		return $this->page;
 	}
 
 	/**
-	 * @return int|null
+	 * @return int
 	 */
 	public function getPageCount() {
 		return $this->pageCount;
@@ -279,6 +302,7 @@ class PKGrid {
 			$gridData = $requestData[$this->id];
 			if (array_key_exists('limit', $gridData)) {
 				$this->limit = (int)$gridData['limit'];
+				$this->isLimitFromRequest = true;
 			}
 			if (array_key_exists('page', $gridData)) {
 				$this->page = (int)$gridData['page'];
@@ -290,7 +314,7 @@ class PKGrid {
 	}
 
 	private function prepareQuery() {
-		if ($this->limit > 0) {
+		if ($this->isAllowedPaging()) {
 			$this->queryBuilder
 				->setFirstResult($this->limit * ($this->page - 1))
 				->setMaxResults($this->limit);
@@ -302,7 +326,7 @@ class PKGrid {
 	}
 
 	private function prepareTotalQuery() {
-		if ($this->limit > 0) {
+		if ($this->isAllowedPaging()) {
 			$this->queryBuilder
 				->select('COUNT(' . $this->groupBy . ') AS totalCount')
 				->setFirstResult(null)

@@ -2,7 +2,7 @@
 <div class="grid">
 	{% if grid.rows is not empty %}
 		<div class="grid_header">
-		{% if grid.limit %}
+		{% if grid.allowedPaging %}
 			{{ gridView.renderBlock('pkgrid_pager') }}
 		{% endif %}
 		</div>
@@ -13,7 +13,7 @@
 		</table>
 		</div>
 		<div class="grid_footer">
-		{% if grid.limit %}
+		{% if grid.allowedPaging %}
 			{{ gridView.renderBlock('pkgrid_pager') }}
 		{% endif %}
 		</div>
