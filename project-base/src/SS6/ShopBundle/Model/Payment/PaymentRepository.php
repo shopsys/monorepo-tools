@@ -40,6 +40,14 @@ class PaymentRepository {
 	public function findAllIncludingDeleted() {
 		return $this->getPaymentRepository()->findAll();
 	}
+
+	/**
+	 * @param int $id
+	 * @return \SS6\ShopBundle\Model\Payment\Payment|null
+	 */
+	public function findById($id) {
+		return $this->getPaymentRepository()->find($id);
+	}
 	
 	/**
 	 * @param int $id
@@ -47,10 +55,9 @@ class PaymentRepository {
 	 * @throws PaymentNotFoundException
 	 */
 	public function getById($id) {
-		$criteria = array('id' => $id);
-		$payment = $this->getPaymentRepository()->findOneBy($criteria);
+		$payment = $this->findById($id);
 		if ($payment === null) {
-			throw new Exception\PaymentNotFoundException($criteria);
+			throw new Exception\PaymentNotFoundException(array('id' => $id));
 		}
 		return $payment;
 	}

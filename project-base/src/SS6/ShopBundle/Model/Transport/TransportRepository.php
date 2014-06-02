@@ -60,6 +60,14 @@ class TransportRepository {
 	public function findAllIncludingDeleted() {
 		return $this->getTransportRepository()->findAll();
 	}
+
+	/**
+	 * @param int $id
+	 * @return \SS6\ShopBundle\Model\Transport\Transport|null
+	 */
+	public function findById($id) {
+		return $this->getTransportRepository()->find($id);
+	}
 	
 	/**
 	 * @param int $id
@@ -67,10 +75,9 @@ class TransportRepository {
 	 * @throws TransportNotFoundException
 	 */
 	public function getById($id) {
-		$criteria = array('id' => $id);
-		$transport = $this->getTransportRepository()->findOneBy($criteria);
+		$transport = $this->findById($id);
 		if ($transport === null) {
-			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException(array('id' => $id));
 		}
 		return $transport;
 	}
