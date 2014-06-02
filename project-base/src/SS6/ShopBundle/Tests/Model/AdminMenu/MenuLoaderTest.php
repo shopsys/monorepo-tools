@@ -43,58 +43,6 @@ class MenuLoaderTest extends FunctionalTestCase {
 		$this->assertEquals('item_3', $menu->getRegularItems()[1]->getRoute());
 	}
 
-	public function testLoadFromArrayMissingLabel() {
-		$testMenu = array(
-			array(
-				'label' => 'Item 1',
-				'items' => array(
-					array(
-						'route' => 'item_1_1',
-					),
-					array(
-						'label' => 'Item 1.2',
-						'route' => 'item_1_2',
-					),
-				),
-			),
-			array(
-				'label' => 'Item 2',
-				'type' => MenuItem::TYPE_SETTINGS,
-			),
-			array(
-				'label' => 'Item 3',
-				'route' => 'item_3'
-			),
-		);
-
-		$menuLoader = new MenuLoader($this->getContainer()->get('filesystem'));
-
-		$this->setExpectedException(\SS6\ShopBundle\Model\AdminMenu\Exception\MissingItemLabelException::class);
-		$menuLoader->loadFromArray($testMenu);
-	}
-
-	public function testLoadFromArrayInvalidItemsFormat() {
-		$testMenu = array(
-			array(
-				'label' => 'Item 1',
-				'items' => 'Some invalid data',
-			),
-			array(
-				'label' => 'Item 2',
-				'type' => MenuItem::TYPE_SETTINGS,
-			),
-			array(
-				'label' => 'Item 3',
-				'route' => 'item_3'
-			),
-		);
-
-		$menuLoader = new MenuLoader($this->getContainer()->get('filesystem'));
-
-		$this->setExpectedException(\SS6\ShopBundle\Model\AdminMenu\Exception\InvalidItemsFormatException::class);
-		$menuLoader->loadFromArray($testMenu);
-	}
-
 	public function testLoadFromArrayMissingSettingsItem() {
 		$testMenu = array(
 			array(

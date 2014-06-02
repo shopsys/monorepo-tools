@@ -4,13 +4,15 @@
 
 <ul class="nav navbar-nav">
 	{% for item in menu.regularItems %}
-		<li {% if item in activePath %}class="active"{% endif %} >
-			{% if item.route %}
-				<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
-			{% else %}
-				<a href="#">{{ item.label }}</a>
-			{% endif %}
-		</li>
+		{% if (item.visible) %}
+			<li {% if item in activePath %}class="active"{% endif %} >
+				{% if item.route %}
+					<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
+				{% else %}
+					<a href="#">{{ item.label }}</a>
+				{% endif %}
+			</li>
+		{% endif %}
 	{% endfor %}
 </ul>
 
@@ -19,13 +21,15 @@
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nastavení <b class="caret"></b></a>
 		<ul class="dropdown-menu">
 			{% for item in menu.settingsItem.items %}
-				<li {% if item in activePath %}class="active"{% endif %} >
-					{% if item.route %}
-						<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
-					{% else %}
-						<a href="#">{{ item.label }}</a>
-					{% endif %}
-				</li>
+				{% if (item.visible) %}
+					<li {% if item in activePath %}class="active"{% endif %} >
+						{% if item.route %}
+							<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
+						{% else %}
+							<a href="#">{{ item.label }}</a>
+						{% endif %}
+					</li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 	</li>

@@ -33,6 +33,11 @@ class MenuItem {
 	private $routeParameters;
 
 	/**
+	 * @var boolean
+	 */
+	private $visible;
+
+	/**
 	 * @param string $label
 	 * @param string|null $type
 	 * @param string $route
@@ -40,7 +45,7 @@ class MenuItem {
 	 * @param array $items
 	 */
 	public function __construct($label, $type = null, $route = null, array $routeParameters = null,
-			array $items = null) {
+			$visible = true, array $items = null) {
 		if (isset($type)) {
 			$this->setType($type);
 		} else {
@@ -54,6 +59,12 @@ class MenuItem {
 			$this->routeParameters = $routeParameters;
 		} else {
 			$this->routeParameters = array();
+		}
+
+		if (isset($visible)) {
+			$this->visible = $visible;
+		} else {
+			$this->visible = true;
 		}
 
 		$this->items = $items;
@@ -81,7 +92,7 @@ class MenuItem {
 	}
 
 	/**
-	 * @return type
+	 * @return string|null
 	 */
 	public function getRoute() {
 		return $this->route;
@@ -95,41 +106,16 @@ class MenuItem {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem $item
+	 * @return boolean
 	 */
-	public function addItem(MenuItem $item) {
-		if (!isset($this->items)) {
-			$this->items = array();
-		}
-
-		$this->items[] = $item;
-	}
-
-	/**
-	 * @param string $route
-	 */
-	public function setRoute($route) {
-		$this->route = $route;
-	}
-
-	/**
-	 * @param string $route
-	 */
-	public function setRouteParameters(array $routeParameters) {
-		$this->routeParameters = $routeParameters;
-	}
-
-	/**
-	 * @param array $items
-	 */
-	public function setItems(array $items) {
-		$this->items = $items;
+	public function isVisible() {
+		return $this->visible === true;
 	}
 
 	/**
 	 * @param string $type
 	 */
-	public function setType($type) {
+	private function setType($type) {
 		if (!in_array($type, $this->getTypes())) {
 			throw new \SS6\ShopBundle\Model\AdminMenu\Exception\InvalidItemTypeException(
 				$type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'
