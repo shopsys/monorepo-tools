@@ -95,41 +95,9 @@ class MenuItem {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem $item
-	 */
-	public function addItem(MenuItem $item) {
-		if (!isset($this->items)) {
-			$this->items = array();
-		}
-
-		$this->items[] = $item;
-	}
-
-	/**
-	 * @param string $route
-	 */
-	public function setRoute($route) {
-		$this->route = $route;
-	}
-
-	/**
-	 * @param string $route
-	 */
-	public function setRouteParameters(array $routeParameters) {
-		$this->routeParameters = $routeParameters;
-	}
-
-	/**
-	 * @param array $items
-	 */
-	public function setItems(array $items) {
-		$this->items = $items;
-	}
-
-	/**
 	 * @param string $type
 	 */
-	public function setType($type) {
+	private function setType($type) {
 		if (!in_array($type, $this->getTypes())) {
 			throw new \SS6\ShopBundle\Model\AdminMenu\Exception\InvalidItemTypeException(
 				$type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'

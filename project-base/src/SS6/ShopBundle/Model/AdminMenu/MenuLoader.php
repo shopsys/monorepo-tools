@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\AdminMenu;
 
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
 
@@ -21,7 +22,7 @@ class MenuLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Model\AdminMenu\Menu Description
+	 * @return \SS6\ShopBundle\Model\AdminMenu\Menu
 	 */
 	public function loadFromYaml($filename) {
 		$yamlParser = new Parser();
@@ -32,15 +33,20 @@ class MenuLoader {
 			);
 		}
 
-		$array = $yamlParser->parse(file_get_contents($filename));
-		$menu = $this->loadFromArray($array);
+		$menuConfiguration = new MenuConfiguration();
+		$processor = new Processor();
+
+		$inputConfig = $yamlParser->parse(file_get_contents($filename));
+		$outputConfig = $processor->processConfiguration($menuConfiguration, array($inputConfig));
+		
+		$menu = $this->loadFromArray($outputConfig);
 
 		return $menu;
 	}
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminMenu\Menu Description
+	 * @return \SS6\ShopBundle\Model\AdminMenu\Menu
 	 */
 	public function loadFromArray(array $array) {
 		$items = $this->loadItems($array);
@@ -66,39 +72,22 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem;
+	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem
 	 */
 	private function loadItem(array $array) {
-		if (!isset($array['label'])) {
-			throw new \SS6\ShopBundle\Model\AdminMenu\Exception\MissingItemLabelException(
-				'Item has no label which is mandatory'
-			);
-		}
-
-		$item = new MenuItem($array['label']);
-
-		if (isset($array['type'])) {
-			$item->setType($array['type']);
-		}
-
-		if (isset($array['route'])) {
-			$item->setRoute($array['route']);
-		}
-
-		if (isset($array['route_parameters'])) {
-			$item->setRouteParameters($array['route_parameters']);
-		}
-
 		if (isset($array['items'])) {
-			if (!is_array($array['items'])) {
-				throw new \SS6\ShopBundle\Model\AdminMenu\Exception\InvalidItemsFormatException(
-					'Items configuration is not an array'
-				);
-			}
-
-			$subitems = $this->loadItems($array['items']);
-			$item->setItems($subitems);
+			$items = $this->loadItems($array['items']);
+		} else {
+			$items = null;
 		}
+
+		$item = new MenuItem(
+			$array['label'],
+			isset($array['type']) ? $array['type'] : null,
+			isset($array['route']) ? $array['route'] : null,
+			isset($array['route_parameters']) ? $array['route_parameters'] : null,
+			$items
+		);
 
 		return $item;
 	}
