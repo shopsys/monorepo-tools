@@ -61,8 +61,7 @@ class OrderController extends Controller {
 
 		$flow->bind($formData);
 
-		// validate all constraints (not only step specific group)
-		$form = $flow->createForm(array('validation_groups' => array('Default')));
+		$form = $flow->createForm();
 
 		$transportAndPaymentWatcherService = $this->get('ss6.shop.order.order_transport_and_payment_watcher_service');
 		/* @var $transportAndPaymentWatcherService \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService */

@@ -88,12 +88,34 @@ class OrderService {
 		$orderFormData->setLastName($order->getLastName());
 		$orderFormData->setEmail($order->getEmail());
 		$orderFormData->setTelephone($order->getTelephone());
+
+		if ($orderFormData->getCompanyName() !== null
+				|| $orderFormData->getCompanyNumber() !== null
+				|| $orderFormData->getCompanyTaxNumber() !== null) {
+			$orderFormData->setCompanyCustomer(true);
+		} else {
+			$orderFormData->setCompanyCustomer(false);
+		}
+
 		$orderFormData->setCompanyName($order->getCompanyName());
 		$orderFormData->setCompanyNumber($order->getCompanyNumber());
 		$orderFormData->setCompanyTaxNumber($order->getCompanyTaxNumber());
 		$orderFormData->setStreet($order->getStreet());
 		$orderFormData->setCity($order->getCity());
 		$orderFormData->setPostcode($order->getPostcode());
+
+		if ($orderFormData->getDeliveryFirstName() !== null
+				|| $orderFormData->getDeliveryLastName() !== null
+				|| $orderFormData->getDeliveryCompanyName() !== null
+				|| $orderFormData->getDeliveryTelephone() !== null
+				|| $orderFormData->getDeliveryStreet() !== null
+				|| $orderFormData->getDeliveryCity() !== null
+				|| $orderFormData->getDeliveryPostcode() !== null) {
+			$orderFormData->setDeliveryAddressFilled(true);
+		} else {
+			$orderFormData->setDeliveryAddressFilled(false);
+		}
+
 		$orderFormData->setDeliveryFirstName($order->getDeliveryFirstName());
 		$orderFormData->setDeliveryLastName($order->getDeliveryLastName());
 		$orderFormData->setDeliveryCompanyName($order->getDeliveryCompanyName());
@@ -112,18 +134,24 @@ class OrderService {
 		$orderFormData->setLastName($user->getLastName());
 		$orderFormData->setEmail($user->getEmail());
 		$orderFormData->setTelephone($user->getBillingAddress()->getTelephone());
+		$orderFormData->setCompanyCustomer($user->getBillingAddress()->isCompanyCustomer());
 		$orderFormData->setCompanyName($user->getBillingAddress()->getCompanyName());
 		$orderFormData->setCompanyNumber($user->getBillingAddress()->getCompanyNumber());
 		$orderFormData->setCompanyTaxNumber($user->getBillingAddress()->getCompanyTaxNumber());
 		$orderFormData->setStreet($user->getBillingAddress()->getStreet());
 		$orderFormData->setCity($user->getBillingAddress()->getCity());
 		$orderFormData->setPostcode($user->getBillingAddress()->getPostcode());
-		// firstName + lastName ?
-		$orderFormData->setDeliveryCompanyName($user->getDeliveryAddress()->getCompanyName());
-		$orderFormData->setDeliveryTelephone($user->getDeliveryAddress()->getTelephone());
-		$orderFormData->setDeliveryStreet($user->getDeliveryAddress()->getStreet());
-		$orderFormData->setDeliveryCity($user->getDeliveryAddress()->getCity());
-		$orderFormData->setDeliveryPostcode($user->getDeliveryAddress()->getPostcode());
+		if ($user->getDeliveryAddress() !== null) {
+			$orderFormData->setDeliveryAddressFilled(true);
+			// firstName + lastName ?
+			$orderFormData->setDeliveryCompanyName($user->getDeliveryAddress()->getCompanyName());
+			$orderFormData->setDeliveryTelephone($user->getDeliveryAddress()->getTelephone());
+			$orderFormData->setDeliveryStreet($user->getDeliveryAddress()->getStreet());
+			$orderFormData->setDeliveryCity($user->getDeliveryAddress()->getCity());
+			$orderFormData->setDeliveryPostcode($user->getDeliveryAddress()->getPostcode());
+		} else {
+			$orderFormData->setDeliveryAddressFilled(false);
+		}
 	}
 
 }

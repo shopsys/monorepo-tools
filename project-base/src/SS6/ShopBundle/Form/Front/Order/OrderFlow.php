@@ -55,6 +55,18 @@ class OrderFlow extends FormFlow {
 		);
 	}
 
+	public function getFormOptions($step, array $options = array()) {
+		$options = parent::getFormOptions($step, $options);
+
+		// Remove default validation_groups by step.
+		// Otherwise FormFactory uses is instead of FormType's callback.
+		if (isset($options['validation_groups'])) {
+			unset($options['validation_groups']);
+		}
+
+		return $options;
+	}
+
 	public function saveSentStepData() {
 		$stepData = $this->retrieveStepData();
 
