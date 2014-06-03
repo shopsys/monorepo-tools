@@ -27,6 +27,14 @@ class CartItem {
 	 * @ORM\Column(type="string", length=127)
 	 */
 	private $sessionId;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\User
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\User")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true)
+	 */
+	private $user;
 	
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product
@@ -57,6 +65,7 @@ class CartItem {
 	 */
 	public function __construct(CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
 		$this->sessionId = $customerIdentifier->getSessionId();
+		$this->user = $customerIdentifier->getUser();
 		$this->product = $product;
 		$this->watchedPrice = $product->getPrice();
 		$this->changeQuantity($quantity);

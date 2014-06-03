@@ -32,7 +32,13 @@ class CartItemRepository {
 	 * @return array
 	 */
 	public function findAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
-		$criteria = array('sessionId' => $customerIdentifier->getSessionId());
+		$criteria = array();
+		if ($customerIdentifier->getUser() !== null) {
+			$criteria['user'] = $customerIdentifier->getUser()->getId();
+		} else {
+			$criteria['sessionId'] = $customerIdentifier->getSessionId();
+		}
+		
 		return $this->getCartItemRepository()->findBy($criteria, array('id' => 'desc'));
 	}
 	
