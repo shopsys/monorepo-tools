@@ -57,11 +57,12 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\BillingAddress
 	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\BillingAddress")
+	 * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
 	 */
 	protected $billingAddress;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\DeliveryAddress")
 	 */
 	protected $deliveryAddress;
@@ -200,7 +201,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
 	public function getDeliveryAddress() {
 		return $this->deliveryAddress;
