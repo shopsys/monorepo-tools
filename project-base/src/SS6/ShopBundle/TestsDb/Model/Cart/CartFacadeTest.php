@@ -142,6 +142,11 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartFacade->deleteCartItem($cartItem1->getId());
 
 		$em->clear();
+
+		// new products not have calc visibility
+		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
 		
 		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);

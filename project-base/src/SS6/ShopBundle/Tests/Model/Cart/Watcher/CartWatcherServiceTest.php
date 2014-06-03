@@ -23,7 +23,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.front');
 		/* @var $flashMessageFront \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
-		// clear..
+		// clear...
 		$flashMessageFront->getErrorMessages();
 		$flashMessageFront->getInfoMessages();
 		$flashMessageFront->getSuccessMessages();
