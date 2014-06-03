@@ -150,6 +150,11 @@ services:
 
   ss6.shop.order.order_number_sequence_repository:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
+    
+  ss6.shop.order.order_transport_and_payment_watcher_service:
+    class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
+    arguments:
+      - @ss6.shop.flash_message.front
 
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
