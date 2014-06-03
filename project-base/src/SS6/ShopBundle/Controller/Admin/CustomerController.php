@@ -30,7 +30,7 @@ class CustomerController extends Controller {
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 		
 		$user = $userRepository->getUserById($id);
-		$form = $this->createForm(new CustomerFormType());
+		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT));
 
 		try {
 			$customerData = array();
@@ -41,6 +41,7 @@ class CustomerController extends Controller {
 				$customerData['lastName'] = $user->getLastName();
 				$customerData['telephone'] = $user->getBillingAddress()->getTelephone();
 				$customerData['email'] = $user->getEmail();
+				$customerData['companyCustomer'] = $user->getBillingAddress()->isCompanyCustomer();
 				$customerData['companyName'] = $user->getBillingAddress()->getCompanyName();
 				$customerData['companyNumber'] = $user->getBillingAddress()->getCompanyNumber();
 				$customerData['companyTaxNumber'] = $user->getBillingAddress()->getCompanyTaxNumber();
@@ -48,13 +49,18 @@ class CustomerController extends Controller {
 				$customerData['city'] = $user->getBillingAddress()->getCity();
 				$customerData['postcode'] = $user->getBillingAddress()->getPostcode();
 				$customerData['country'] = $user->getBillingAddress()->getCountry();
-				$customerData['deliveryCompanyName'] = $user->getDeliveryAddress()->getCompanyName();
-				$customerData['deliveryContactPerson'] = $user->getDeliveryAddress()->getContactPerson();
-				$customerData['deliveryTelephone'] = $user->getDeliveryAddress()->getTelephone();
-				$customerData['deliveryStreet'] = $user->getDeliveryAddress()->getStreet();
-				$customerData['deliveryCity'] = $user->getDeliveryAddress()->getCity();
-				$customerData['deliveryPostcode'] = $user->getDeliveryAddress()->getPostcode();
-				$customerData['deliveryCountry'] = $user->getDeliveryAddress()->getCountry();
+				if ($user->getDeliveryAddress() !== null) {
+					$customerData['deliveryAddressFilled'] = true;
+					$customerData['deliveryCompanyName'] = $user->getDeliveryAddress()->getCompanyName();
+					$customerData['deliveryContactPerson'] = $user->getDeliveryAddress()->getContactPerson();
+					$customerData['deliveryTelephone'] = $user->getDeliveryAddress()->getTelephone();
+					$customerData['deliveryStreet'] = $user->getDeliveryAddress()->getStreet();
+					$customerData['deliveryCity'] = $user->getDeliveryAddress()->getCity();
+					$customerData['deliveryPostcode'] = $user->getDeliveryAddress()->getPostcode();
+					$customerData['deliveryCountry'] = $user->getDeliveryAddress()->getCountry();
+				} else {
+					$customerData['deliveryAddressFilled'] = false;
+				}
 			}
 
 			$form->setData($customerData);
@@ -65,13 +71,14 @@ class CustomerController extends Controller {
 
 				$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-				$user = $customerEditFacade->edit(
+				$user = $customerEditFacade->editByAdmin(
 					$id,
 					$customerData['firstName'],
 					$customerData['lastName'],
 					$customerData['email'],
 					$customerData['password'],
 					$customerData['telephone'],
+					$customerData['companyCustomer'],
 					$customerData['companyName'],
 					$customerData['companyNumber'],
 					$customerData['companyTaxNumber'],
@@ -79,6 +86,7 @@ class CustomerController extends Controller {
 					$customerData['city'],
 					$customerData['postcode'],
 					$customerData['country'],
+					$customerData['deliveryAddressFilled'],
 					$customerData['deliveryCompanyName'],
 					$customerData['deliveryContactPerson'],
 					$customerData['deliveryTelephone'],
@@ -215,7 +223,7 @@ class CustomerController extends Controller {
 		$flashMessage = $this->get('ss6.shop.flash_message.admin');
 		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 
-		$form = $this->createForm(new CustomerFormType(), null, array(
+		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE), null, array(
 			'validation_groups' => array('Default', 'create'),
 		));
 
@@ -236,6 +244,7 @@ class CustomerController extends Controller {
 					$customerData['email'],
 					$customerData['password'],
 					$customerData['telephone'],
+					$customerData['companyCustomer'],
 					$customerData['companyName'],
 					$customerData['companyNumber'],
 					$customerData['companyTaxNumber'],
@@ -243,6 +252,7 @@ class CustomerController extends Controller {
 					$customerData['city'],
 					$customerData['postcode'],
 					$customerData['country'],
+					$customerData['deliveryAddressFilled'],
 					$customerData['deliveryCompanyName'],
 					$customerData['deliveryContactPerson'],
 					$customerData['deliveryTelephone'],

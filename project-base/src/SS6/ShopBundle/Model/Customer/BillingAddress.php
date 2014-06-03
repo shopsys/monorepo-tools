@@ -20,6 +20,13 @@ class BillingAddress {
 	private $id;
 
 	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean", nullable=false)
+	 */
+	private $companyCustomer;
+
+	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=100, nullable=true)
@@ -80,18 +87,20 @@ class BillingAddress {
 	 * @param string|null $city
 	 * @param string|null $postcode
 	 * @param string|null $country
+	 * @param boolean|null $companyCustomer
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber
 	 * @param string|null $telephone
 	 */
 	public function __construct($street = null, $city = null, $postcode = null, $country = null,
-			$companyName = null, $companyNumber = null, $companyTaxNumber = null,
+			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
 			$telephone = null) {
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;
 		$this->country = $country;
+		$this->companyCustomer = $companyCustomer;
 		$this->companyName = $companyName;
 		$this->companyNumber = $companyNumber;
 		$this->companyTaxNumber = $companyTaxNumber;
@@ -99,16 +108,24 @@ class BillingAddress {
 	}
 
 	public function edit($street = null, $city = null, $postcode = null, $country = null,
-			$companyName = null, $companyNumber = null, $companyTaxNumber = null,
+			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
 			$telephone = null) {
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;
 		$this->country = $country;
+		$this->companyCustomer = $companyCustomer;
 		$this->companyName = $companyName;
 		$this->companyNumber = $companyNumber;
 		$this->companyTaxNumber = $companyTaxNumber;
 		$this->telephone = $telephone;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isCompanyCustomer() {
+		return $this->companyCustomer;
 	}
 
 	/**
