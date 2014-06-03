@@ -60,6 +60,8 @@ services:
 
   ss6.shop.cart.cart_watcher_facade:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
+    arguments:
+      - @ss6.shop.flash_message.front
 
   ss6.shop.cart.cart_watcher_service:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
