@@ -14,10 +14,10 @@ class OrderService {
 	 *
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderFormData $orderData
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 */
-	public function editOrder(Order $order, AdminOrderFormData $orderData, $user, OrderStatus $orderStatus) {
+	public function editOrder(Order $order, AdminOrderFormData $orderData, OrderStatus $orderStatus, User $user = null) {
 		$order->edit(
 			$orderStatus,
 			$orderData->getFirstName(),

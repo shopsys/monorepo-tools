@@ -78,7 +78,7 @@ class OrderRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @return type
+	 * @return int
 	 */
 	public function getOrdersCountByStatus(OrderStatus $orderStatus) {
 		$query = $this->em->createQuery('

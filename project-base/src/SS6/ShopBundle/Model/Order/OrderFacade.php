@@ -167,7 +167,7 @@ class OrderFacade {
 			$user = $this->userRepository->getUserById($orderData->getCustomerId());
 		}
 
-		$this->orderService->editOrder($order, $orderData, $user, $orderStatus);
+		$this->orderService->editOrder($order, $orderData, $orderStatus, $user);
 
 		$this->em->flush();
 		return $order;
