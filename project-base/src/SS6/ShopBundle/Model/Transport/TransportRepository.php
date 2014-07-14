@@ -87,7 +87,7 @@ class TransportRepository {
 			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 			$visible = false;
 			if (!$transport->isHidden()) {
-				$visible = $this->existVisiblePaymentWithTransport($allPayments, $transport);
+				$visible = $this->existsVisiblePaymentWithTransport($allPayments, $transport);
 			}
 			$transportsData[] = array(
 				'entity' => $transport,
@@ -103,7 +103,7 @@ class TransportRepository {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return boolean
 	 */
-	private function existVisiblePaymentWithTransport(array $allPayments, Transport $transport) {
+	private function existsVisiblePaymentWithTransport(array $allPayments, Transport $transport) {
 		foreach ($allPayments as $payment) {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			if ($payment->isVisible() && $payment->getTransports()->contains($transport)) {
