@@ -63,7 +63,7 @@ class TransportAndPaymentWatcherService {
 			$transportPrice = $transportPrices[$transport->getId()];
 			if ($transportPrice !== $transport->getPrice()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena dopravy ' . $transport->getName() .
-					', prosím, překontrolujte si objednávku.';
+					'. Prosím, překontrolujte si objednávku.';
 				$this->flashMessage->addInfo($message);
 			}
 		}
@@ -79,7 +79,7 @@ class TransportAndPaymentWatcherService {
 			$paymentPrice = $paymentPrices[$payment->getId()];
 			if ($paymentPrice !== $payment->getPrice()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena platby ' . $payment->getName() .
-					', prosím, překontrolujte si objednávku.';
+					'. Prosím, překontrolujte si objednávku.';
 				$this->flashMessage->addInfo($message);
 			}
 		}

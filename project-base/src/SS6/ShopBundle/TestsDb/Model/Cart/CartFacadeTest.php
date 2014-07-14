@@ -143,7 +143,7 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$em->clear();
 
-		// new products not have calc visibility
+		// new products do not have calculated visibility
 		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
