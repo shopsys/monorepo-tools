@@ -7,20 +7,19 @@
 		{% endif %}
 		</div>
 		<div class="grid_body table-responsive">
-		<table class="table table-striped table-hover">
-			{{ gridView.renderBlock('pkgrid_titles') }}
-			{{ gridView.renderBlock('pkgrid_rows') }}
-		</table>
+			<table class="table table-striped table-hover">
+				{{ gridView.renderBlock('pkgrid_titles') }}
+				{{ gridView.renderBlock('pkgrid_rows') }}
+			</table>
 		</div>
 		<div class="grid_footer">
-		{% if grid.allowedPaging %}
-			{{ gridView.renderBlock('pkgrid_pager') }}
-		{% endif %}
+			{% if grid.allowedPaging %}
+				{{ gridView.renderBlock('pkgrid_pager') }}
+			{% endif %}
 		</div>
-	</form>
-{% else %}
-	{{ gridView.renderBlock('pkgrid_no_data') }}
-{% endif %}
+	{% else %}
+		{{ gridView.renderBlock('pkgrid_no_data') }}
+	{% endif %}
 </div>
 {% endblock %}
 

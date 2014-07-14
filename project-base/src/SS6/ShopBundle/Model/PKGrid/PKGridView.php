@@ -110,11 +110,6 @@ class PKGridView {
 	}
 
 	/**
-	 * @param array $attrs
-	 * @return string
-	 */
-	/**
-	 *
 	 * @param array $params
 	 * @param array|string|null $removeParams
 	 * @return string
