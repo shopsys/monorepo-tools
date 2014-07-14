@@ -1,0 +1,40 @@
+<div class="col-sm-12 col-md-4">
+	<div class="info-box">
+		<h2 class="mt-0">Přehled zboží v košíku</h2>
+		<table class="basket-review">
+			<tbody>
+				
+				{% for item in orderReview.items %}
+					<tr class="basket-review__row">
+						<td class="basket-review__cell">
+							{% if item.type == constant('SS6\\ShopBundle\\Model\\Order\\Review\\OrderReviewItem::TYPE_PAYMENT') %}
+								Způsob platby: {{ item.name }}
+							{% elseif item.type == constant('SS6\\ShopBundle\\Model\\Order\\Review\\OrderReviewItem::TYPE_TRANSPORT') %}
+								Způsob dopravy: {{ item.name }}
+							{% else %}
+								<strong>{{ item.quantity }} x</strong> {{ item.name }}
+							{% endif %}
+						</td>
+						<td class="basket-review__cell basket-review__cell--price">
+							{% if item.type == constant('SS6\\ShopBundle\\Model\\Order\\Review\\OrderReviewItem::TYPE_PRODUCT') %}
+								{{ item.price|price }}
+							{% else %}
+								{{ item.price|priceText }}
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+				
+				<tr class="basket-review__row basket-review__row--total">
+					<td class="basket-review__cell">
+						Cena celkem:
+					</td>
+					<td class="basket-review__cell basket-review__cell--price">
+						{{ orderReview.totalPrice|price }}
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+</div>

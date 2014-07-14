@@ -117,6 +117,9 @@ services:
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
     
+  ss6.shop.order.order_review_service:
+    class: SS6\ShopBundle\Model\Order\Review\OrderReviewService
+    
   ss6.shop.order.order_service:
     class: SS6\ShopBundle\Model\Order\OrderService
   

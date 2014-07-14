@@ -30,6 +30,9 @@ class OrderController extends Controller {
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 
+		$orderReviewService = $this->get('ss6.shop.order.order_review_service');
+		/* @var $orderReviewService \SS6\ShopBundle\Model\Order\Review\OrderReviewService  */
+
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
@@ -89,9 +92,14 @@ class OrderController extends Controller {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
+		$payment = $formData->getPayment();
+		$transport = $formData->getTransport();
+		$orderReview = $orderReviewService->getOrderReview($payment, $transport);
+
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', array(
 			'form' => $form->createView(),
 			'flow' => $flow,
+			'orderReview' => $orderReview,
 			'payments' => $payments,
 		));
 	}

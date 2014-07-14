@@ -13,6 +13,7 @@ class PriceExtension extends Twig_Extension {
 	public function getFilters() {
 		return array(
 			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
+			new Twig_SimpleFilter('priceText', array($this, 'priceTextFilter'), array('is_safe' => array('html'))),
 		);
 	}
 
@@ -25,6 +26,18 @@ class PriceExtension extends Twig_Extension {
 		$price = number_format($price, 2, ',', ' ');
 		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;Kč';
 		return $price;
+	}
+
+	/**
+	 * @param string $price
+	 * @return string
+	 */
+	public function priceTextFilter($price) {
+		if ($price == 0) {
+			return 'Zdarma';
+		} else {
+			return $this->priceFilter($price);
+		}
 	}
 
 	/**
