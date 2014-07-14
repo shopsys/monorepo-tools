@@ -35,6 +35,21 @@ class Cart {
 		$this->calcSummaryInfo();
 	}
 
+	/**
+	 * @param int $cartItemId
+	 */
+	public function removeItem($cartItemId) {
+		foreach ($this->cartItems as $key => $cartItem) {
+			if ($cartItem->getId() === $cartItemId) {
+				unset($this->cartItems[$key]);
+				$this->calcSummaryInfo();
+				return;
+			}
+		}
+		$message = 'Cart item with ID = ' . $cartItemId . ' is not in cart for remove.';
+		throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
+	}
+
 	public function clean() {
 		$this->cartItems = array();
 		$this->calcSummaryInfo();

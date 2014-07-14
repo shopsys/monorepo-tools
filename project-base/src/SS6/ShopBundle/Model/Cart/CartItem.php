@@ -42,6 +42,13 @@ class CartItem {
 	 * @ORM\Column(type="integer")
 	 */
 	private $quantity;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+	 */
+	private $watchedPrice;
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
@@ -51,6 +58,7 @@ class CartItem {
 	public function __construct(CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
 		$this->sessionId = $customerIdentifier->getSessionId();
 		$this->product = $product;
+		$this->watchedPrice = $product->getPrice();
 		$this->changeQuantity($quantity);
 	}
 
@@ -91,6 +99,20 @@ class CartItem {
 	 */
 	public function getQuantity() {
 		return $this->quantity;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getWatchedPrice() {
+		return $this->watchedPrice;
+	}
+
+	/**
+	 * @param string|null $watchedPrice
+	 */
+	public function setWatchedPrice($watchedPrice) {
+		$this->watchedPrice = $watchedPrice;
 	}
 
 	/**

@@ -58,6 +58,16 @@ services:
   ss6.shop.cart.cart_service:
     class: SS6\ShopBundle\Model\Cart\CartService
 
+  ss6.shop.cart.cart_watcher_facade:
+    class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
+    arguments:
+      - @ss6.shop.flash_message.front
+
+  ss6.shop.cart.cart_watcher_service:
+    class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
+    arguments:
+      - @ss6.shop.flash_message.front
+
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
@@ -140,6 +150,11 @@ services:
 
   ss6.shop.order.order_number_sequence_repository:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
+    
+  ss6.shop.order.order_transport_and_payment_watcher_service:
+    class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
+    arguments:
+      - @ss6.shop.flash_message.front
 
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade

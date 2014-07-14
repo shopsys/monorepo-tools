@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Security;
+namespace SS6\ShopBundle\Tests\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Cart\Cart;

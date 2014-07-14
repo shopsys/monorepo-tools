@@ -33,6 +33,9 @@ class OrderController extends Controller {
 		$orderReviewService = $this->get('ss6.shop.order.order_review_service');
 		/* @var $orderReviewService \SS6\ShopBundle\Model\Order\Review\OrderReviewService  */
 
+		$flashMessage = $this->get('ss6.shop.flash_message.front');
+		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
@@ -61,10 +64,14 @@ class OrderController extends Controller {
 		// validate all constraints (not only step specific group)
 		$form = $flow->createForm(array('validation_groups' => array('Default')));
 
+		$transportAndPaymentWatcherService = $this->get('ss6.shop.order.order_transport_and_payment_watcher_service');
+		/* @var $transportAndPaymentWatcherService \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService */
+		$transportAndPaymentWatcherService->checkTransportAndPayment($formData, $transports, $payments);
+
 		if ($flow->isValid($form)) {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
-			} else {
+			} elseif ($flashMessage->isEmpty()) {
 				$order = $orderFacade->createOrder($formData, $this->getUser());
 				$cartFacade->cleanCart();
 
@@ -75,8 +82,6 @@ class OrderController extends Controller {
 					/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
 					$orderMailFacade->sendEmail($order);
 				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
-					$flashMessage = $this->get('ss6.shop.flash_message.front');
-					/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 					$flashMessage->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
 				
