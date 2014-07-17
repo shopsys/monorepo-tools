@@ -2,14 +2,25 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: @font-title;
 }
 
+.heading {
+	display: block;
+}
+
+.heading--visible {
+	margin: 60px 0;
+
+	font-size: 20px;
+	line-height: 34px;
+}
+
 a {
 	&:link, &:visited, &:active {
 		color: @color-link;
 		text-decoration: underline;
-		
+
 		.set-transition();
 		.transition(~"background, color");
-		
+
 		&:hover {
 			color: @color-link-hover;
 			text-decoration: underline;
