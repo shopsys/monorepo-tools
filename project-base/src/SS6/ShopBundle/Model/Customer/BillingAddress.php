@@ -87,7 +87,7 @@ class BillingAddress {
 	 * @param string|null $city
 	 * @param string|null $postcode
 	 * @param string|null $country
-	 * @param boolean|null $companyCustomer
+	 * @param boolean $companyCustomer
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber
@@ -101,9 +101,11 @@ class BillingAddress {
 		$this->postcode = $postcode;
 		$this->country = $country;
 		$this->companyCustomer = $companyCustomer;
-		$this->companyName = $companyName;
-		$this->companyNumber = $companyNumber;
-		$this->companyTaxNumber = $companyTaxNumber;
+		if ($this->companyCustomer) {
+			$this->companyName = $companyName;
+			$this->companyNumber = $companyNumber;
+			$this->companyTaxNumber = $companyTaxNumber;
+		}
 		$this->telephone = $telephone;
 	}
 
@@ -115,9 +117,15 @@ class BillingAddress {
 		$this->postcode = $postcode;
 		$this->country = $country;
 		$this->companyCustomer = $companyCustomer;
-		$this->companyName = $companyName;
-		$this->companyNumber = $companyNumber;
-		$this->companyTaxNumber = $companyTaxNumber;
+		if ($this->companyCustomer) {
+			$this->companyName = $companyName;
+			$this->companyNumber = $companyNumber;
+			$this->companyTaxNumber = $companyTaxNumber;
+		} else {
+			$this->companyName = null;
+			$this->companyNumber = null;
+			$this->companyTaxNumber = null;
+		}
 		$this->telephone = $telephone;
 	}
 
