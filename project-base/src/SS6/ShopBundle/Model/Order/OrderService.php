@@ -11,6 +11,58 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 class OrderService {
 
 	/**
+	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
+	 * @param string $orderNumber
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 */
+	public function createOrder(
+		FrontOrderFormData $orderFormData,
+		$orderNumber,
+		OrderStatus $orderStatus,
+		User $user = null
+	) {
+		$order = new Order(
+			$orderNumber,
+			$orderFormData->getTransport(),
+			$orderFormData->getPayment(),
+			$orderStatus,
+			$orderFormData->getFirstName(),
+			$orderFormData->getLastName(),
+			$orderFormData->getEmail(),
+			$orderFormData->getTelephone(),
+			$orderFormData->getStreet(),
+			$orderFormData->getCity(),
+			$orderFormData->getPostcode(),
+			$user,
+			$orderFormData->getNote()
+		);
+
+		if ($orderFormData->isCompanyCustomer()) {
+			$order->setCompanyInfo(
+				$orderFormData->getCompanyName(),
+				$orderFormData->getCompanyNumber(),
+				$orderFormData->getCompanyTaxNumber()
+			);
+		}
+
+		if ($orderFormData->isDeliveryAddressFilled()) {
+			$order->setDeliveryAddress(
+				$orderFormData->getDeliveryFirstName(),
+				$orderFormData->getDeliveryLastName(),
+				$orderFormData->getDeliveryCompanyName(),
+				$orderFormData->getDeliveryTelephone(),
+				$orderFormData->getDeliveryStreet(),
+				$orderFormData->getDeliveryCity(),
+				$orderFormData->getDeliveryPostcode()
+			);
+		}
+
+		return $order;
+	}
+
+	/**
 	 *
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderFormData $orderData

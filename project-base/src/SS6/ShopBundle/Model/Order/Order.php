@@ -237,23 +237,23 @@ class Order {
 	 * @param string $city
 	 * @param string $postcode
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $deliveryFirstName
-	 * @param string|null $deliveryLastName
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
 	 * @param string|null $note
 	 */
-	public function __construct($number, Transport $transport, Payment $payment, OrderStatus $orderStatus, 
-			$firstName, $lastName, $email, $telephone, $street, $city, $postcode, User $user = null, $companyName = null,
-			$companyNumber = null, $companyTaxNumber = null, $deliveryFirstName = null, $deliveryLastName = null,
-			$deliveryCompanyName = null, $deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null,
-			$deliveryPostcode = null, $note = null) {
+	public function __construct(
+		$number,
+		Transport $transport,
+		Payment $payment,
+		OrderStatus $orderStatus,
+		$firstName,
+		$lastName,
+		$email,
+		$telephone,
+		$street,
+		$city,
+		$postcode,
+		User $user = null,
+		$note = null
+	) {
 		$this->number = $number;
 		$this->customer = $user;
 		$this->items = new ArrayCollection();
@@ -265,19 +265,9 @@ class Order {
 		$this->lastName = $lastName;
 		$this->email = $email;
 		$this->telephone = $telephone;
-		$this->companyName = $companyName;
-		$this->companyNumber = $companyNumber;
-		$this->companyTaxNumber = $companyTaxNumber;
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;
-		$this->deliveryFirstName = $deliveryFirstName;
-		$this->deliveryLastName = $deliveryLastName;
-		$this->deliveryCompanyName = $deliveryCompanyName;
-		$this->deliveryTelephone = $deliveryTelephone;
-		$this->deliveryStreet = $deliveryStreet;
-		$this->deliveryCity = $deliveryCity;
-		$this->deliveryPostcode = $deliveryPostcode;
 		$this->note = $note;
 		$this->deleted = false;
 	}
@@ -353,6 +343,44 @@ class Order {
 	 */
 	public function setStatus(OrderStatus $status) {
 		$this->status = $status;
+	}
+
+	/**
+	 * @param string|null $companyName
+	 * @param string|null $companyNumber
+	 * @param string|null $companyTaxNumber
+	 */
+	public function setCompanyInfo($companyName = null, $companyNumber = null, $companyTaxNumber = null) {
+		$this->companyName = $companyName;
+		$this->companyNumber = $companyNumber;
+		$this->companyTaxNumber = $companyTaxNumber;
+	}
+
+	/**
+	 * @param string|null $deliveryFirstName
+	 * @param string|null $deliveryLastName
+	 * @param string|null $deliveryCompanyName
+	 * @param string|null $deliveryTelephone
+	 * @param string|null $deliveryStreet
+	 * @param string|null $deliveryCity
+	 * @param string|null $deliveryPostcode
+	 */
+	public function setDeliveryAddress(
+		$deliveryFirstName = null,
+		$deliveryLastName = null,
+		$deliveryCompanyName = null,
+		$deliveryTelephone = null,
+		$deliveryStreet = null,
+		$deliveryCity = null,
+		$deliveryPostcode = null
+	) {
+		$this->deliveryFirstName = $deliveryFirstName;
+		$this->deliveryLastName = $deliveryLastName;
+		$this->deliveryCompanyName = $deliveryCompanyName;
+		$this->deliveryTelephone = $deliveryTelephone;
+		$this->deliveryStreet = $deliveryStreet;
+		$this->deliveryCity = $deliveryCity;
+		$this->deliveryPostcode = $deliveryPostcode;
 	}
 
 	/**

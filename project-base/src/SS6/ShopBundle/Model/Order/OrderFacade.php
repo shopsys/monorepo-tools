@@ -79,31 +79,13 @@ class OrderFacade {
 	 */
 	public function createOrder(FrontOrderFormData $orderFormData, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
+		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 
-		$order = new Order(
-			$this->orderNumberSequenceRepository->getNextNumber(),
-			$orderFormData->getTransport(),
-			$orderFormData->getPayment(),
+		$order = $this->orderService->createOrder(
+			$orderFormData,
+			$orderNumber,
 			$orderStatus,
-			$orderFormData->getFirstName(),
-			$orderFormData->getLastName(),
-			$orderFormData->getEmail(),
-			$orderFormData->getTelephone(),
-			$orderFormData->getStreet(),
-			$orderFormData->getCity(),
-			$orderFormData->getPostcode(),
-			$user,
-			$orderFormData->getCompanyName(),
-			$orderFormData->getCompanyNumber(),
-			$orderFormData->getCompanyTaxNumber(),
-			$orderFormData->getDeliveryFirstName(),
-			$orderFormData->getDeliveryLastName(),
-			$orderFormData->getDeliveryCompanyName(),
-			$orderFormData->getDeliveryTelephone(),
-			$orderFormData->getDeliveryStreet(),
-			$orderFormData->getDeliveryCity(),
-			$orderFormData->getDeliveryPostcode(),
-			$orderFormData->getNote()
+			$user
 		);
 
 		$this->fillOrderItems($order, $this->cart);
