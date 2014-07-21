@@ -25,7 +25,7 @@
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
-	<target name="db-demo" depends="db-rebuild,db-fixtures-demo"/>
+	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	
 	<target name="composer">
 		<exec
@@ -149,6 +149,7 @@
 		<exec executable="php" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
