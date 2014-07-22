@@ -1,0 +1,18 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %} - Chybové stránky{% endblock %}
+{% block h1 %}Chybové stránky{% endblock %}
+
+{% block main_content %}
+	{% set codes = [403, 404, 500] %}
+	{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
+	
+	<ul>
+		{% for format in formats %}
+			{% for code in codes %}
+				<li><a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a></li>
+			{% endfor %}
+		{% endfor %}
+	</ul>
+	
+{% endblock %}

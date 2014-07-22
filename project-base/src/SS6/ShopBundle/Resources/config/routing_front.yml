@@ -25,13 +25,6 @@ front_cart_delete:
 front_customer_edit:
   pattern: /customer/edit/
   defaults: { _controller: SS6ShopBundle:Front\Customer:edit }
-    
-front_error_page_format:
-  pattern: /_error/{code}/{_format}/
-  defaults: { _controller: SS6ShopBundle:Front\Error:errorPage}
-  requirements:
-    code: \d+
-    _format: css|html|js|json|txt|xml
 
 front_homepage:
   pattern: /
