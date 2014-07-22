@@ -40,3 +40,15 @@
       route: admin_orderstatus_list
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
+    - label: 'Superadmin'
+      route: admin_superadmin_index
+      items:
+        - label: 'Ikonky'
+          route: admin_superadmin_icons
+          items:
+            - label: 'Detail ikony'
+              route: admin_superadmin_icondetail
+              visible: false
+        - label: 'Chybové stránky'
+          route: admin_superadmin_errors
+
