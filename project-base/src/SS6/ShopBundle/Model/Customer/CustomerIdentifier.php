@@ -9,7 +9,7 @@ class CustomerIdentifier {
 	/**
 	 * @var string 
 	 */
-	private $sessionId;
+	private $sessionId = '';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\User|null
@@ -18,10 +18,13 @@ class CustomerIdentifier {
 	
 	/**
 	 * @param string $sessionId
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 */
 	public function __construct($sessionId, User $user = null) {
-		$this->sessionId = $sessionId;
 		$this->user = $user;
+		if ($this->user === null) {
+			$this->sessionId = $sessionId;
+		}
 	}
 
 	/**
@@ -36,6 +39,18 @@ class CustomerIdentifier {
 	 */
 	public function getUser() {
 		return $this->user;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getObjectHash() {
+		if ($this->user instanceof User) {
+			$userId = $this->user->getId();
+		} else {
+			$userId = 'NULL';
+		}
+		return 'session:' . $this->sessionId . ';userId:' . $userId . ';';
 	}
 
 }
