@@ -8,7 +8,7 @@
 		<div class="col-sm-12 col-md-10 col-lg-8">
 			<a href="{{ url('admin_orderstatus_new') }}" class="btn btn-primary mb-1">Vytvořit nový stav objednávek</a>
 			
-			{{ grid(grid, '@SS6Shop/Admin/Content/OrderStatus/listGrid.html.twig') }}
+			{{ gridView.render('@SS6Shop/Admin/Content/OrderStatus/listGrid.html.twig') }}
 		</div>
 	</div>
 {% endblock %}

@@ -3,8 +3,10 @@
 namespace SS6\ShopBundle\Model\Administrator;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use SS6\ShopBundle\Model\Administrator\AdministratorGridLimit;
 use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
@@ -53,9 +55,61 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @var DateTime 
 	 */
 	protected $lastActivity;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit[]
+	 * @ORM\OneToMany(
+	 *	targetEntity="SS6\ShopBundle\Model\Administrator\AdministratorGridLimit",
+	 *	mappedBy="administrator",
+	 *	orphanRemoval=true
+	 * )
+	 */
+	protected $gridLimits;
 	
 	public function __construct() {
 		$this->lastActivity = new DateTime();
+		$this->gridLimits = new ArrayCollection();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit
+	 */
+	public function addGridLimit(AdministratorGridLimit $gridLimit) {
+		if (!$this->gridLimits->contains($gridLimit)) {
+			$this->gridLimits->add($gridLimit);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit $gridLimit
+	 */
+	public function removeGridLimit(AdministratorGridLimit $gridLimit) {
+		$this->gridLimits->removeElement($gridLimit);
+	}
+
+	/**
+	 * @param string $gridId
+	 * @return \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit
+	 */
+	public function getGridLimit($gridId) {
+		foreach ($this->gridLimits as $gridLimit) {
+			if ($gridLimit->getGridId() === $gridId) {
+				return $gridLimit;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @param string $gridId
+	 * @return int|null
+	 */
+	public function getLimitByGridId($gridId) {
+		$gridLimit = $this->getGridLimit($gridId);
+		if ($gridLimit !== null) {
+			return $gridLimit->getLimit();
+		}
+		return null;
 	}
 	
 	/**

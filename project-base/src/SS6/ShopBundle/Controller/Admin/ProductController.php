@@ -2,12 +2,9 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Column\BooleanColumn;
-use APY\DataGridBundle\Grid\Row;
-use APY\DataGridBundle\Grid\Source\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
+use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,55 +102,45 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 		));
 	}
-	
+
 	/**
 	 * @Route("/product/list/")
 	 */
 	public function listAction() {
-		$source = new Entity(Product::class);
-				
-		$grid = $this->get('grid');
-		/* @var $grid \APY\DataGridBundle\Grid\Grid */
-		$grid->setSource($source);
+		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
+		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		
-		$grid->getColumns()->addColumn(new BooleanColumn(array(
-			'id' => 'visible',
-			'filterable' => false,
-			'sortable' => false,
-		)));
-		
-		$grid->setVisibleColumns(array('visible', 'name', 'price'));
-		$grid->setColumnsOrder(array('visible', 'name', 'price'));
-		$grid->getColumns()->getColumnById('visible')->setTitle('Viditelné')->setClass('table-col-10');
-		$grid->getColumns()->getColumnById('name')->setTitle('Název')->setClass('table-col-60');
-		$grid->getColumns()->getColumnById('price')->setTitle('Cena')->setClass('table-col-15');
-		
-		$grid->hideFilters();
-		$grid->setActionsColumnTitle('Akce');
-		$grid->setDefaultOrder('name', 'asc');
-		$grid->setLimits(array(2, 20));
-		$grid->setDefaultLimit(20);
-		
-		$detailRowAction = new RowAction('Upravit', 'admin_product_edit');
-		$detailRowAction->setRouteParameters(array('id'));
-		$detailRowAction->setAttributes(array('type' => 'edit'));
-		$grid->addRowAction($detailRowAction);
-		
-		$deleteRowAction = new RowAction('Smazat', 'admin_product_delete', true);
-		$deleteRowAction->setConfirmMessage('Opravdu si přejete zboží smazat?');
-		$deleteRowAction->setAttributes(array('type' => 'delete'));
-		$deleteRowAction->setRouteParameters(array('id'));
-		$grid->addRowAction($deleteRowAction);
-		
-		$repository = $this->getDoctrine()->getRepository(Product::class);
-		$source->manipulateRow(function (Row $row) use ($repository) {
-			$product = $repository->find($row->getField('id'));
-			$row->setField('visible', $product->isVisible());
-			
-			return $row;
-		});
-		
-		return $grid->getGridResponse('@SS6Shop/Admin/Content/Product/list.html.twig');
+		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		$queryBuilder
+			->select('p')
+			->from(Product::class, 'p');
+
+		$grid = new PKGrid(
+			'productList',
+			$this->get('request_stack'),
+			$this->get('router'),
+			$this->get('twig')
+		);
+		$grid->allowPaging();
+		$grid->setDefaultOrder('name');
+		$grid->setQueryBuilder($queryBuilder, 'p.id');
+
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClass('table-col table-col-10');
+		$grid->addColumn('name', 'p.name', 'Název', true);
+		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
+
+		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'id'))
+			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
+
+		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
+
+		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
 	}
 	
 	/**

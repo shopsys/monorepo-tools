@@ -9,7 +9,6 @@ class AppKernel extends Kernel {
 
 	public function registerBundles() {
 		$bundles = array(
-			new APY\DataGridBundle\APYDataGridBundle(),
 			new Craue\FormFlowBundle\CraueFormFlowBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),

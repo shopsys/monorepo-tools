@@ -1,13 +1,18 @@
-{% extends '@SS6Shop/Admin/Grid/grid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
-{% block grid_column_name_cell %}
-	<a href="{{ url('admin_product_edit', { id: row.field('id') }) }}">{{ value }}</a>
+{% block pkgrid_no_data %}
+	Nebylo nalezeno žádné zboží. Nejdřív musíte nějaké vytvořit.
 {% endblock %}
 
-{% block grid_column_price_cell %}
+{% block pkgrid_value_cell_id_name %}
+	<a href="{{ url('admin_product_edit', { id: row.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block pkgrid_value_cell_id_price %}
 	{{ value|price }}
 {% endblock %}
 
-{% block grid_no_data %}
-	Nebylo nalezeno žádné zboží. Nejdřív musíte nějaké vytvořit.
+{% block pkgrid_pager_totalcount %}
+	{% set entityName = 'zboží' %}
+	{{ parent() }}
 {% endblock %}

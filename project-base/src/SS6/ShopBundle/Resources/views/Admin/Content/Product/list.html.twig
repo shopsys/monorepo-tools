@@ -9,7 +9,7 @@
 		
 			<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
 			
-			{{ grid(grid, '@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
+			{{ gridView.render('@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
 		</div>
 	</div>
 {% endblock %}

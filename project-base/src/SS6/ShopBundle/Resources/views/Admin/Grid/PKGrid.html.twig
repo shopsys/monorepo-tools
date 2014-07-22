@@ -1,0 +1,194 @@
+{% block pkgrid %}
+<div class="grid">
+	{% if grid.rows is not empty %}
+		<div class="grid_header">
+		{% if grid.allowedPaging %}
+			{{ gridView.renderBlock('pkgrid_pager') }}
+		{% endif %}
+		</div>
+		<div class="grid_body table-responsive">
+			<table class="table table-striped table-hover">
+				{{ gridView.renderBlock('pkgrid_titles') }}
+				{{ gridView.renderBlock('pkgrid_rows') }}
+			</table>
+		</div>
+		<div class="grid_footer">
+			{% if grid.allowedPaging %}
+				{{ gridView.renderBlock('pkgrid_pager') }}
+			{% endif %}
+		</div>
+	{% else %}
+		{{ gridView.renderBlock('pkgrid_no_data') }}
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block pkgrid_no_data %}
+	Nebyly nalezeny žádné záznamy.
+{% endblock %}
+
+
+{% block pkgrid_value_cell %}
+	{{ value }}
+{% endblock%}
+
+{% block pkgrid_titles %}
+	<thead>
+		<tr class="grid-row-titles">
+			{% for column in grid.columns %}
+				<th class="{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}">
+					{% if (column.sortable) %}
+						{% if grid.order == column.id and grid.orderDirection == 'asc' %}
+							{% set orderBy = '-' ~ column.id %}
+						{% else %}
+							{% set orderBy = column.id %}
+						{% endif %}
+						<a class="order" href="{{ gridView.url({'order': orderBy}) }}">
+							{{ column.title }}
+							{% if grid.order == column.id %}
+								{% if grid.orderDirection == 'desc' %}
+									<span class="sort_down sort-arrows sort-arrows--down"></span>
+								{% else %}
+									<span class="sort_up sort-arrows sort-arrows--up"></span>
+								{% endif %}
+							{% endif %}
+						</a>
+					{% else %}
+						{{ column.title }}
+					{% endif %}
+				</th>
+			{% endfor %}
+			{% if grid.actionColumns is not empty %}
+				<th class="last-column {{ grid.actionColumnClass }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
+			{% endif  %}
+		</tr>
+	</thead>
+{% endblock %}
+
+{% block pkgrid_rows %}
+	<tbody>
+		{% for row in grid.rows %}
+			{% set lastRow = loop.last %}
+			<tr class="grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}">
+				{% for column in grid.columns %}
+					<td class="grid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
+						{{ gridView.renderCell(column, row)|raw }}
+					</td>
+				{% endfor %}
+				{% if grid.actionColumns|length > 0 %}
+					<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
+						<span class="grid-row-actions action-icons">
+							{% for actionColumn in grid.actionColumns %}
+								{{ gridView.renderActionCell(actionColumn, row)|raw }}
+							{% endfor %}
+						</span>
+					</td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+	</tbody>
+{% endblock %}
+
+{% block pkgrid_action_cell %}
+	{% if actionColumn.type == 'edit' %}
+		{% set icon = 'pencil' %}
+	{% elseif actionColumn.type == 'delete' %}
+		{% set icon = 'times' %}
+	{% else %}
+		{% set icon = actionColumn.type %}
+	{% endif %}
+	<a
+		class="table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
+		href="{{ actionColumn.targetUrl(row) }}"
+		{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
+	><i class="fa fa-{{ icon }}"></i></a>
+{% endblock %}
+
+{% block pkgrid_pager_totalcount %}
+	<strong class="display-ib mr-1">
+		{{ ('%count% ' ~ entityName|default('záznamů')|trim ~ '. ') | transchoice(grid.totalCount, {'%count%': grid.totalCount}) }}
+	</strong>
+{% endblock %}
+
+{% block pkgrid_pager_selectpage %}
+	{{ 'Stránka'|trans }}
+	{% spaceless %}
+		<span class="form-inline">
+			
+			{% if grid.page > 1 %}
+				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': 1}) }}">1</a>&nbsp;
+			{% endif %}
+
+			{% set pagerExpand = 2 %}
+
+			{% if grid.page > pagerExpand + 2 %}
+				...
+			{% endif %}
+
+			{% for page in (grid.page - pagerExpand)..(grid.page) if page > 1 and page < grid.page %}
+				<a class="btn btn-default" href="{{ gridView.url({'page': page}) }}">{{ page }}</a>&nbsp;
+			{% endfor %}
+
+			<a class="btn btn-default disabled" href="#" onclick="return false;">{{ grid.page }}</a>&nbsp;
+
+			{% for page in (grid.page + 1)..(grid.page + pagerExpand) if page > grid.page and page < grid.pageCount %}
+				<a class="btn btn-default" href="{{ gridView.url({'page': page}) }}">{{ page }}</a>&nbsp;
+			{% endfor %}
+
+			{% if grid.page < (grid.pageCount - 1) - pagerExpand - 1 %}
+				...
+			{% endif %}
+
+			{% if grid.page < grid.pageCount %}
+				<a class="btn btn-default" href="{{ gridView.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>&nbsp;
+				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
+			{% endif %}
+
+			<span class="js-pkgrid-go-to">
+				Přejít na:
+				<input 
+					type="number" 
+					min="1" 
+					max="{{ grid.pageCount }}" 
+					value="{{ grid.page }}"
+					class="current form-control text-center js-pkgrid-go-to-input" 
+					size="2"
+				/>&nbsp;
+				<a class="btn btn-default js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
+			</span>
+
+		</span>
+	{% endspaceless %}
+{% endblock %}
+
+{% block pkgrid_pager_results_perpage %}
+	<div class="right">
+		{{ ' Zobrazit'|trans }}
+		<span class="form-inline">
+			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="form-control">
+				{% for value in grid.limits %}
+					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
+				{% endfor %}
+			</select> {{ 'položek na stránku'|trans }}
+		</span>
+	</div>
+{% endblock %}
+
+{% block pkgrid_pager %}
+	<div class="text-left clearfix well well-sm">
+		{{ gridView.renderBlock('pkgrid_pager_totalcount') }}
+		{% if grid.pageCount > 1 %}
+			{{ gridView.renderBlock('pkgrid_pager_selectpage') }}
+		{% endif %}
+		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
+	</div>
+{% endblock %}
+
+{% block pkgrid_value_cell_type_boolean %}
+	<span class="grid_boolean_{{ value ? 'true' : 'false' }} semaphore semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano' : 'Ne' }}"></span>
+{% endblock %}
+
+{% block pkgrid_value_cell_type_DateTime %}
+	{{ value.format('j. n. Y G:i') }}
+{% endblock %}

@@ -9,7 +9,6 @@
 	},
 	"require": {
 		"php": ">=5.4",
-		"apy/datagrid-bundle": "~2.2",
 		"craue/formflow-bundle": "~2.0",
 		"doctrine/orm": "~2.2,>=2.2.3",
 		"doctrine/doctrine-bundle": "~1.2",

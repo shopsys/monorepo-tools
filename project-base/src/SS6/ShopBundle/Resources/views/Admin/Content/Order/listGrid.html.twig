@@ -1,13 +1,18 @@
-{% extends '@SS6Shop/Admin/Grid/grid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
-{% block grid_column_number_cell %}
-	<a href="{{ url('admin_order_edit', { id: row.field('id') }) }}">{{ value }}</a>
+{% block pkgrid_value_cell_id_number %}
+	<a href="{{ url('admin_order_edit', { id: row.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block grid_column_totalPrice_cell %}
+{% block pkgrid_value_cell_id_totalPrice %}
 	{{ value|price }}
 {% endblock %}
 
-{% block grid_no_data %}
+{% block pkgrid_no_data %}
 	Nebyla nalezena žádná objednávka.
+{% endblock %}
+
+{% block pkgrid_pager_totalcount %}
+	{% set entityName = 'objednávek' %}
+	{{ parent() }}
 {% endblock %}
