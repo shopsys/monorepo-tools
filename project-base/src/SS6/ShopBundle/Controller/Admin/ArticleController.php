@@ -82,7 +82,7 @@ class ArticleController extends Controller {
 		);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder, 'a.id');
+		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('name', 'a.name', 'Název', true);
 

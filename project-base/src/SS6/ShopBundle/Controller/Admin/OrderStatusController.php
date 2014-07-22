@@ -107,7 +107,7 @@ class OrderStatusController extends Controller {
 			$this->get('twig')
 		);
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder, 'os.id');
+		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('name', 'os.name', 'Název', true);
 

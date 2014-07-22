@@ -148,7 +148,7 @@ class CustomerController extends Controller {
 		);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder, 'u.id');
+		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('name', 'name', 'Jméno', true);
 		$grid->addColumn('city', 'city', 'Město', true);

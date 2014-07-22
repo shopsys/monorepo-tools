@@ -108,14 +108,9 @@ class PKGrid {
 	private $queryBuilder;
 
 	/**
-	 * @var \Doctrine\ORM\QueryBuilder
+	 * @var \Doctrine\ORM\NativeQuery
 	 */
-	private $totalQueryBuilder;
-
-	/**
-	 * @var string
-	 */
-	private $groupBy;
+	private $totalNativeQuery;
 
 	/**
 	 * @var string
@@ -226,11 +221,9 @@ class PKGrid {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $groupBy
 	 */
-	public function setQueryBuilder(QueryBuilder $queryBuilder, $groupBy = null) {
+	public function setQueryBuilder(QueryBuilder $queryBuilder) {
 		$this->queryBuilder = $queryBuilder;
-		$this->groupBy = $groupBy;
 	}
 
 	/**
@@ -367,15 +360,18 @@ class PKGrid {
 	}
 
 	private function prepareTotalQuery() {
-		if ($this->isAllowedPaging()) {
-			$this->totalQueryBuilder = clone $this->queryBuilder;
-			$this->totalQueryBuilder
-				->select('COUNT(' . $this->groupBy . ') AS totalCount')
-				->setFirstResult(null)
-				->setMaxResults(null)
-				->resetDQLPart('orderBy')
-				->resetDQLPart('groupBy');
-		}
+		$em = $this->queryBuilder->getEntityManager();
+
+		$totalQueryBuilder = clone $this->queryBuilder;
+		$totalQueryBuilder
+			->setFirstResult(null)
+			->setMaxResults(null)
+			->resetDQLPart('orderBy');
+
+		$subquery = $totalQueryBuilder->getQuery()->getSQL();
+		$sql = 'SELECT COUNT(*) AS totalCount FROM (' . $subquery . ') ORIGIN_QUERY';
+
+		$this->totalNativeQuery = $em->createNativeQuery($sql, new \Doctrine\ORM\Query\ResultSetMapping());
 	}
 
 	private function executeQuery() {
@@ -385,7 +381,7 @@ class PKGrid {
 
 	private function executeTotalQuery() {
 		$this->prepareTotalQuery();
-		$this->totalCount = $this->totalQueryBuilder->getQuery()->getSingleScalarResult();
+		$this->totalCount = $this->totalNativeQuery->getSingleScalarResult();
 		$this->pageCount = ceil($this->totalCount / $this->limit);
 		$this->page = min($this->page, $this->pageCount);
 	}

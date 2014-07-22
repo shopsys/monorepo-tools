@@ -141,7 +141,7 @@ class OrderController extends Controller {
 		);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('number');
-		$grid->setQueryBuilder($queryBuilder, 'o.id');
+		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('createdAt', 'o.createdAt', 'Vytvořena', true);

@@ -125,7 +125,7 @@ class ProductController extends Controller {
 		);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder, 'p.id');
+		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClass('table-col table-col-10');
 		$grid->addColumn('name', 'p.name', 'Název', true);
