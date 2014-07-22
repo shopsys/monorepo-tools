@@ -28,7 +28,7 @@
 		"sensio/framework-extra-bundle": "~3.0",
 		"sensio/generator-bundle": "~2.3",
 		"squizlabs/php_codesniffer": "2.0.*@dev",
-		"stnw/date-picker-bundle": "dev-master",
+		"stnw/date-picker-bundle": "dev-master#c00bf5904e1738371ea5c8be1e907ea50063351e",
 		"symfony/assetic-bundle": "~2.3",
 		"symfony/dependency-injection": "~2.4",
 		"symfony/monolog-bundle": "~2.4",
