@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Cart\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 
 class CartSingletonFactoryTest extends PHPUnit_Framework_TestCase {
 	
@@ -16,7 +17,13 @@ class CartSingletonFactoryTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$cartItemRepository->expects($this->once())->method('findAllByCustomerIdentifier')->will($this->returnValue(array()));
 
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
+			->setMethods(array('__construct', 'checkCartModifications'))
+			->disableOriginalConstructor()
+			->getMock();
+		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
+
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 
 		$sessionId = 'abc123';
 		$customerIdentifier1 = new CustomerIdentifier($sessionId);
@@ -35,7 +42,13 @@ class CartSingletonFactoryTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$cartItemRepository->expects($this->exactly(2))->method('findAllByCustomerIdentifier')->will($this->returnValue(array()));
 
-		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository);
+		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
+			->setMethods(array('__construct', 'checkCartModifications'))
+			->disableOriginalConstructor()
+			->getMock();
+		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
+
+		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 
 		$sessionId1 = 'abc123';
 		$sessionId2 = 'def456';
