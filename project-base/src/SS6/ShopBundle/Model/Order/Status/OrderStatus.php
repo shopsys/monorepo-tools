@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrderStatus {
 
+	const TYPE_NEW = 1;
+	const TYPE_IN_PROGRESS = 2;
+	const TYPE_DONE = 3;
+	const TYPE_CANCELED = 4;
+
 	/**
 	 * @var integer
 	 *
@@ -27,11 +32,20 @@ class OrderStatus {
 	private $name;
 
 	/**
-	 * @param string $name
-	 * @param int $id
+	 * @var integer
+	 *
+	 * @ORM\Column(type="integer")
 	 */
-	public function __construct($name, $id = null) {
+	private $type;
+
+	/**
+	 * @param string $name
+	 * @param int $type
+	 * @param int|null $id
+	 */
+	public function __construct($name, $type, $id = null) {
 		$this->name = $name;
+		$this->setType($type);
 		$this->id = $id;
 	}
 
@@ -47,6 +61,29 @@ class OrderStatus {
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getType() {
+		return $this->type;
+	}
+
+	/**
+	 * @param int $type
+	 */
+	public function setType($type) {
+		if (in_array($type, array(
+			self::TYPE_NEW,
+			self::TYPE_IN_PROGRESS,
+			self::TYPE_DONE,
+			self::TYPE_CANCELED,
+		))) {
+			$this->type = $type;
+		} else {
+			throw new Exception\InvalidOrderStatusTypeException($type);
+		}
 	}
 
 	/**

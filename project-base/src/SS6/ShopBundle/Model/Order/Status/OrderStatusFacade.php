@@ -51,7 +51,10 @@ class OrderStatusFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function create(OrderStatusFormData $orderStatusFormData) {
-		$orderStatus = $this->orderStatusService->create($orderStatusFormData->getName());
+		$orderStatus = $this->orderStatusService->create(
+			$orderStatusFormData->getName(),
+			OrderStatus::TYPE_IN_PROGRESS
+		);
 		$this->em->persist($orderStatus);
 		$this->em->flush();
 

@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use Swift_Message;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 
@@ -61,7 +60,7 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getTemplateByStatus(OrderStatus $status) {
-		if ($status->getId() == OrderStatusRepository::STATUS_NEW) {
+		if ($status->getType() == OrderStatus::TYPE_NEW) {
 			return self::MAIL_TEMPLATE_NEW;
 		} else {
 			return self::MAIL_TEMPLATE_OTHER;

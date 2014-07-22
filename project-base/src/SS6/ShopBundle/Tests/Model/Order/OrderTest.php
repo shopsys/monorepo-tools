@@ -18,7 +18,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$number = '123456';
 		$transport = new Transport('TransportName', 199.95);
 		$payment = new Payment('PaymentName', 99.95);
-		$orderStatus = new OrderStatus('StatusName');
+		$orderStatus = new OrderStatus('StatusName', OrderStatus::TYPE_NEW);
 		$firstName = 'FirstName';
 		$lastName = 'LastName';
 		$email = 'email@example.com';

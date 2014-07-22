@@ -13,14 +13,18 @@ class OrderStatusData extends AbstractFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$this->createOrderStatus($manager, 'order_status_new', 'Nová', OrderStatusRepository::STATUS_NEW);
-		$this->createOrderStatus($manager, 'order_status_in_progress', 'Rozpracovaná', OrderStatusRepository::STATUS_IN_PROGRESS);
-		$this->createOrderStatus($manager, 'order_status_done', 'Vyřízená', OrderStatusRepository::STATUS_DONE);
+		// @codingStandardsIgnoreStart
+		$this->createOrderStatus($manager, 'order_status_new', 'Nová', OrderStatus::TYPE_NEW, OrderStatusRepository::STATUS_NEW);
+		$this->createOrderStatus($manager, 'order_status_in_progress', 'Vyřizuje se', OrderStatus::TYPE_IN_PROGRESS);
+		$this->createOrderStatus($manager, 'order_status_done', 'Vyřízena', OrderStatus::TYPE_DONE);
+		$this->createOrderStatus($manager, 'order_status_canceled', 'Stornována', OrderStatus::TYPE_CANCELED);
+		// @codingStandardsIgnoreStop
+
 		$manager->flush();
 	}
 
-	public function createOrderStatus(ObjectManager $manager, $referenceName, $name, $orderStatusId) {
-		$orderStatus = new OrderStatus($name, $orderStatusId);
+	public function createOrderStatus(ObjectManager $manager, $referenceName, $name, $type, $orderStatusId = null) {
+		$orderStatus = new OrderStatus($name, $type, $orderStatusId);
 		$manager->persist($orderStatus);
 		$this->addReference($referenceName, $orderStatus);
 	}
