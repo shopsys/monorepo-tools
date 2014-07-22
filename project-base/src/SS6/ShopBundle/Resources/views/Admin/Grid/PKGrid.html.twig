@@ -145,8 +145,18 @@
 				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
 			{% endif %}
 
-			Přejít na:
-				<input type="number" min="1" max="{{ grid.pageCount }}" value="{{ grid.page}}" class="current form-control text-center" value="" size="2" onkeypress="return false;"/>&nbsp;
+			<span class="js-pkgrid-go-to">
+				Přejít na:
+				<input 
+					type="number" 
+					min="1" 
+					max="{{ grid.pageCount }}" 
+					value="{{ grid.page }}"
+					class="current form-control text-center js-pkgrid-go-to-input" 
+					size="2"
+				/>&nbsp;
+				<a class="btn btn-default js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
+			</span>
 
 		</span>
 	{% endspaceless %}
