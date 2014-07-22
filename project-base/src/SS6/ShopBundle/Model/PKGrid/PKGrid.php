@@ -336,14 +336,14 @@ class PKGrid {
 		if (array_key_exists($this->id, $requestData)) {
 			$gridData = $requestData[$this->id];
 			if (array_key_exists('limit', $gridData)) {
-				$this->limit = (int)$gridData['limit'];
+				$this->limit = max((int)trim($gridData['limit']), 1);
 				$this->isLimitFromRequest = true;
 			}
 			if (array_key_exists('page', $gridData)) {
-				$this->page = (int)$gridData['page'];
+				$this->page = max((int)trim($gridData['page']), 1);
 			}
 			if (array_key_exists('order', $gridData)) {
-				$this->setOrder($gridData['order']);
+				$this->setOrder(trim($gridData['order']));
 				$this->isOrderFromRequest = true;
 			}
 		}
