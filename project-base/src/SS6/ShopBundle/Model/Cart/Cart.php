@@ -99,4 +99,18 @@ class Cart {
 		return $this->getItemsCount() === 0;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\CartItem $cartItem
+	 * @return \SS6\ShopBundle\Model\Cart\CartItem|null
+	 */
+	public function findSimilarCartItemByCartItem(CartItem $cartItem) {
+		foreach ($this->getItems() as $similarCartItem) {
+			if ($similarCartItem->isSimilarItemAs($cartItem)) {
+				return $similarCartItem;
+			}
+		}
+
+		return null;
+	}
+
 }

@@ -137,4 +137,19 @@ class CartItem {
 	public function getTotalPrice() {
 		return $this->product->getPrice() * $this->quantity;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\CartItem $cartItem
+	 * @return bool
+	 */
+	public function isSimilarItemAs(CartItem $cartItem) {
+		return $this->product->getId() === $cartItem->getProduct()->getId();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSessionId() {
+		return $this->sessionId;
+	}
 }
