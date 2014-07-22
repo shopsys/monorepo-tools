@@ -45,6 +45,10 @@
       items:
         - label: 'Ikonky'
           route: admin_superadmin_icons
+          items:
+            - label: 'Detail ikony'
+              route: admin_superadmin_icondetail
+              visible: false
         - label: 'Chybové stránky'
           route: admin_superadmin_errors
 

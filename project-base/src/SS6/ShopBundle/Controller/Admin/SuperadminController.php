@@ -22,6 +22,17 @@ class SuperadminController extends Controller {
 	}
 
 	/**
+	 * @Route("/superadmin/icons/{icon}/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $id
+	 */
+	public function iconDetailAction($icon) {
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/iconDetail.html.twig', array(
+			'icon' => $icon
+		));
+	}
+
+	/**
 	 * @Route("/superadmin/errors/")
 	 */
 	public function errorsAction() {
