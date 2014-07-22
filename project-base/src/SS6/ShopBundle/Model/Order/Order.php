@@ -47,7 +47,7 @@ class Order {
 	 *
 	 * @ORM\Column(type="datetime")
 	 */
-	private $createdOn;
+	private $createdAt;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
@@ -257,7 +257,7 @@ class Order {
 		$this->number = $number;
 		$this->customer = $user;
 		$this->items = new ArrayCollection();
-		$this->createdOn = new DateTime();
+		$this->createdAt = new DateTime();
 		$this->transport = $transport;
 		$this->payment = $payment;
 		$this->status = $orderStatus;
@@ -477,8 +477,8 @@ class Order {
 	/**
 	 * @return \DateTime
 	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
+	public function getCreatedAt() {
+		return $this->createdAt;
 	}
 
 	/**

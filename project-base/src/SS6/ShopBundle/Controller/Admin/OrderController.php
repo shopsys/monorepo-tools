@@ -122,7 +122,7 @@ class OrderController extends Controller {
 			->select('
 				o.id,
 				o.number,
-				o.createdOn,
+				o.createdAt,
 				MAX(os.name) AS statusName,
 				o.totalPrice,
 				(CASE WHEN o.companyName IS NOT NULL
@@ -144,7 +144,7 @@ class OrderController extends Controller {
 		$grid->setQueryBuilder($queryBuilder, 'o.id');
 
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
-		$grid->addColumn('createdOn', 'o.createdOn', 'Vytvořena', true);
+		$grid->addColumn('createdAt', 'o.createdAt', 'Vytvořena', true);
 		$grid->addColumn('customerName', 'customerName', 'Zákazník', true);
 		$grid->addColumn('statusName', 'statusName', 'Stav', true);
 		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClass('text-right');

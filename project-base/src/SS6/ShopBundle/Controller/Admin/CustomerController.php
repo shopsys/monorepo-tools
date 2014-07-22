@@ -134,7 +134,7 @@ class CustomerController extends Controller {
 					END) AS name,
 				COUNT(o.id) ordersCount,
 				SUM(o.totalPrice) ordersSumPrice,
-				MAX(o.createdOn) lastOrderOn')
+				MAX(o.createdAt) lastOrderAt')
 			->from(User::class, 'u')
 			->leftJoin('u.billingAddress', 'ba')
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
@@ -156,7 +156,7 @@ class CustomerController extends Controller {
 		$grid->addColumn('email', 'u.email', 'Email', true);
 		$grid->addColumn('ordersCount', 'ordersCount', 'Počet objednávek', true)->setClass('text-right');
 		$grid->addColumn('ordersSumPrice', 'ordersSumPrice', 'Hodnota objednávek', true)->setClass('text-right');
-		$grid->addColumn('lastOrderOn', 'lastOrderOn', 'Poslední objednávka', true)->setClass('text-right');
+		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)->setClass('text-right');
 		
 
 		$grid->setActionColumnClass('table-col table-col-10');
