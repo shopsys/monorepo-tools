@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
@@ -68,17 +69,19 @@ class ProductFormType extends AbstractType {
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
 			))
-			->add('sellingFrom', 'datePicker', array(
+			->add('sellingFrom', new DatePickerType(), array(
 				'required' => false,
 				'constraints' => array(
-					new Constraints\Date(array('message' => 'Datum zadávejte ve formátu YYYY-MM-DD')),
+					new Constraints\Date(array('message' => 'Datum zadávejte ve formátu dd.mm.rrrr')),
 				),
+				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			))
-			->add('sellingTo', 'datePicker', array(
+			->add('sellingTo', new DatePickerType(), array(
 				'required' => false,
 				'constraints' => array(
-					new Constraints\Date(array('message' => 'Datum zadávejte ve formátu YYYY-MM-DD')),
+					new Constraints\Date(array('message' => 'Datum zadávejte ve formátu dd.mm.rrrr')),
 				),
+				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			))
 			->add('stockQuantity', 'integer', array(
 				'required' => false,

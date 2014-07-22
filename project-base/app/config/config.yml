@@ -24,7 +24,7 @@ twig:
     resources:
       - '@SS6Shop/Common/Form/fileuploadFields.html.twig'
       - '@SS6Shop/Common/Form/theme.html.twig'
-      - '@SS6Shop/Admin/Form/datepicker_fields.html.twig'
+      - '@SS6Shop/Admin/Form/datepickerFields.html.twig'
   strict_variables: "%kernel.debug%"
 
 # Assetic Configuration

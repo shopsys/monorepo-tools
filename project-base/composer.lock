@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a4698959cae674ef2584544be469eab",
+    "hash": "1b783226a9233c42e91f7b7d27561f33",
     "packages": [
         {
             "name": "craue/formflow-bundle",
@@ -2554,48 +2554,6 @@
             "time": "2014-07-16 04:56:04"
         },
         {
-            "name": "stnw/date-picker-bundle",
-            "version": "dev-master",
-            "target-dir": "Stnw/DatePickerBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stnw/StnwDatePickerBundle.git",
-                "reference": "c00bf5904e1738371ea5c8be1e907ea50063351e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stnw/StnwDatePickerBundle/zipball/78807ef11d9c367839c590086d18d435f46f20b2",
-                "reference": "c00bf5904e1738371ea5c8be1e907ea50063351e",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/framework-bundle": ">=v2.3.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Stnw\\DatePickerBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Sergey Studenikin",
-                    "email": "studenikin.s@gmail.com"
-                }
-            ],
-            "description": "DatePicker and DateTimePicker field type for Symfony2 and SonataAdminBundle.",
-            "keywords": [
-                "DatePickerType",
-                "DateTimePicker",
-                "DateTymePickerType",
-                "FormType",
-                "datepicker",
-                "picker"
-            ],
-            "time": "2014-03-28 11:44:06"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.2.1",
             "source": {
@@ -3108,8 +3066,7 @@
         "egeloen/ckeditor-bundle": 20,
         "pdepend/pdepend": 20,
         "phpmd/phpmd": 20,
-        "squizlabs/php_codesniffer": 20,
-        "stnw/date-picker-bundle": 20
+        "squizlabs/php_codesniffer": 20
     },
     "platform": {
         "php": ">=5.4"
