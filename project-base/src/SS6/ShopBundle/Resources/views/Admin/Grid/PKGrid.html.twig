@@ -68,15 +68,15 @@
 {% block pkgrid_rows %}
 	<tbody>
 		{% for row in grid.rows %}
-			{% set last_row = loop.last %}
+			{% set lastRow = loop.last %}
 			<tr class="grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}">
 				{% for column in grid.columns %}
-					<td class="grid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}{% if last_row %} last-row{% endif %}">
+					<td class="grid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
 						{{ gridView.renderCell(column, row)|raw }}
 					</td>
 				{% endfor %}
 				{% if grid.actionColumns|length > 0 %}
-					<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if last_row %} last-row{% endif %}">
+					<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
 						<span class="grid-row-actions action-icons">
 							{% for actionColumn in grid.actionColumns %}
 								{{ gridView.renderActionCell(actionColumn, row)|raw }}

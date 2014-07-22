@@ -108,6 +108,11 @@ class PKGrid {
 	private $queryBuilder;
 
 	/**
+	 * @var \Doctrine\ORM\QueryBuilder
+	 */
+	private $totalQueryBuilder;
+
+	/**
 	 * @var string
 	 */
 	private $groupBy;
@@ -320,15 +325,15 @@ class PKGrid {
 	}
 
 	/**
-	 * @param string $order
+	 * @param string $orderString
 	 */
-	private function setOrder($order) {
-		if (substr($order, 0, 1) === '-') {
+	private function setOrder($orderString) {
+		if (substr($orderString, 0, 1) === '-') {
 			$this->orderDirection = 'desc';
 		} else {
 			$this->orderDirection = 'asc';
 		}
-		$this->order = trim($order, '-');
+		$this->order = trim($orderString, '-');
 	}
 
 	private function loadFromRequest() {
@@ -363,7 +368,8 @@ class PKGrid {
 
 	private function prepareTotalQuery() {
 		if ($this->isAllowedPaging()) {
-			$this->queryBuilder
+			$this->totalQueryBuilder = clone $this->queryBuilder;
+			$this->totalQueryBuilder
 				->select('COUNT(' . $this->groupBy . ') AS totalCount')
 				->setFirstResult(null)
 				->setMaxResults(null)
@@ -379,7 +385,7 @@ class PKGrid {
 
 	private function executeTotalQuery() {
 		$this->prepareTotalQuery();
-		$this->totalCount = $this->queryBuilder->getQuery()->getSingleScalarResult();
+		$this->totalCount = $this->totalQueryBuilder->getQuery()->getSingleScalarResult();
 		$this->pageCount = ceil($this->totalCount / $this->limit);
 		$this->page = min($this->page, $this->pageCount);
 	}
