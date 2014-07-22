@@ -5,7 +5,8 @@
 	"version": "6.0.0-dev",
 	"autoload": {
 		"classmap": ["src/"],
-		"psr-0": {"": "src/"}
+		"psr-0": {"SS6\\": "src/"},
+		"psr-4": {"SS6\\": "app/"}
 	},
 	"require": {
 		"php": ">=5.4",
@@ -39,7 +40,7 @@
 	"scripts": {
 		"post-install-cmd": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"SS6\\ShopBundle\\Component\\Environment::checkEnvironment",
+			"SS6\\Environment::checkEnvironment",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",

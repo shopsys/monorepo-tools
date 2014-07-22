@@ -1,14 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace SS6;
 
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
-use SS6\Bootstrap;
-
-require_once __DIR__ . '/../../../../app/Bootstrap.php';
 
 class Environment {
+	const ENVIRONMENT_PRODUCTION = 'prod';
+	const ENVIRONMENT_DEVELOPMENT = 'dev';
+	const ENVIRONMENT_TEST = 'test';
+
 	const FILE_DEVELOPMENT = 'DEVELOPMENT';
 	const FILE_PRODUCTION = 'PRODUCTION';
 
@@ -33,7 +34,7 @@ class Environment {
 	 */
 	public static function getEnvironment() {
 		$environmentSetting = self::getEnvironmentSetting();
-		return $environmentSetting ?: Bootstrap::ENVIRONMENT_PRODUCTION;
+		return $environmentSetting ?: self::ENVIRONMENT_PRODUCTION;
 	}
 
 	/**
@@ -55,7 +56,7 @@ class Environment {
 	 * @return string
 	 */
 	private static function getRootDir() {
-		return __DIR__ . '/../../../..';
+		return __DIR__ . '/..';
 	}
 
 	/**
@@ -63,9 +64,9 @@ class Environment {
 	 */
 	private static function getEnvironmentSetting() {
 		if (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
-			return Bootstrap::ENVIRONMENT_DEVELOPMENT;
+			return self::ENVIRONMENT_DEVELOPMENT;
 		} elseif (is_file(self::getRootDir() . '/' . self::FILE_PRODUCTION)) {
-			return Bootstrap::ENVIRONMENT_PRODUCTION;
+			return self::ENVIRONMENT_PRODUCTION;
 		}
 		return null;
 	}

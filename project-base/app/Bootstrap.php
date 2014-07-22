@@ -2,7 +2,7 @@
 
 namespace SS6;
 
-use SS6\ShopBundle\Component\Environment;
+use SS6\Environment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -11,12 +11,9 @@ use Symfony\Component\Debug\Debug;
 require_once __DIR__ . '/../app/bootstrap.php.cache';
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/AppKernel.php';
+require_once __DIR__ . '/../app/Environment.php';
 
 class Bootstrap {
-	const ENVIRONMENT_PRODUCTION = 'prod';
-	const ENVIRONMENT_DEVELOPMENT = 'dev';
-	const ENVIRONMENT_TEST = 'test';
-	
 	private $environment;
 	private $console;
 	
@@ -43,7 +40,7 @@ class Bootstrap {
 			$application = new Application($kernel);
 			$application->run($input);
 		} else {
-			if ($this->environment === self::ENVIRONMENT_TEST) {
+			if ($this->environment === Environment::ENVIRONMENT_TEST) {
 				$kernel->boot();
 			} else {
 				$this->initDoctrine();
@@ -57,11 +54,11 @@ class Bootstrap {
 	}
 
 	private function isDebug() {
-		return in_array($this->environment, array(self::ENVIRONMENT_DEVELOPMENT, self::ENVIRONMENT_TEST));
+		return in_array($this->environment, array(Environment::ENVIRONMENT_DEVELOPMENT, Environment::ENVIRONMENT_TEST));
 	}
 	
 	private function initDoctrine() {
-		if ($this->environment === self::ENVIRONMENT_DEVELOPMENT) {
+		if ($this->environment === Environment::ENVIRONMENT_DEVELOPMENT) {
 			$dirs = array(__DIR__ . '/../vendor/doctrine/orm/lib/');
 			\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('Doctrine\ORM', $dirs);
 		}
@@ -75,13 +72,13 @@ class Bootstrap {
 			__DIR__ . '/config/security.yml',
 		);
 		switch ($this->environment) {
-			case self::ENVIRONMENT_DEVELOPMENT:
+			case Environment::ENVIRONMENT_DEVELOPMENT:
 				$configs[] = __DIR__ . '/config/config_dev.yml';
 				break;
-			case self::ENVIRONMENT_PRODUCTION:
+			case Environment::ENVIRONMENT_PRODUCTION:
 				$configs[] = __DIR__ . '/config/config_prod.yml';
 				break;
-			case self::ENVIRONMENT_TEST:
+			case Environment::ENVIRONMENT_TEST:
 				$configs[] = __DIR__ . '/config/parameters_test.yml';
 				$configs[] = __DIR__ . '/config/config_dev.yml';
 				$configs[] = __DIR__ . '/config/config_test.yml';
