@@ -35,8 +35,6 @@ class OrderController extends Controller {
 			$orderData = new OrderFormData();
 
 			if (!$form->isSubmitted()) {
-				
-
 				$customer = $order->getCustomer();
 				$customerId = null;
 				if ($order->getCustomer() !== null) {
