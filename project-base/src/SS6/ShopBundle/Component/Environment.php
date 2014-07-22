@@ -8,39 +8,39 @@ use SS6\Bootstrap;
 
 require_once __DIR__ . '/../../../../app/Bootstrap.php';
 
-class Enviroment {
+class Environment {
 	const FILE_DEVELOPMENT = 'DEVELOPMENT';
 	const FILE_PRODUCTION = 'PRODUCTION';
 
 	/**
 	 * @param \Composer\Script\Event $event
 	 */
-	public static function checkEnviroment(Event $event) {
+	public static function checkEnvironment(Event $event) {
 		$io = $event->getIO();
 		/* @var $io \Composer\IO\IOInterface */
-		if ($io->isInteractive() && self::getEnviromentSetting() === null) {
-			if ($io->askConfirmation('Build in production enviroment? (Y/n): ', true)) {
+		if ($io->isInteractive() && self::getEnvironmentSetting() === null) {
+			if ($io->askConfirmation('Build in production environment? (Y/n): ', true)) {
 				self::createFile(self::getRootDir() . '/' . self::FILE_PRODUCTION);
 			} else {
 				self::createFile(self::getRootDir() . '/' . self::FILE_DEVELOPMENT);
 			}
 		}
-		self::printEnviromentInfo($io);
+		self::printEnvironmentInfo($io);
 	}
 
 	/**
 	 * @return string
 	 */
-	public static function getEnviroment() {
-		$enviromentSetting = self::getEnviromentSetting();
-		return $enviromentSetting ?: Bootstrap::ENVIROMENT_PRODUCTION;
+	public static function getEnvironment() {
+		$environmentSetting = self::getEnvironmentSetting();
+		return $environmentSetting ?: Bootstrap::ENVIRONMENT_PRODUCTION;
 	}
 
 	/**
 	 * @param \Composer\IO\IOInterface $io
 	 */
-	public static function printEnviromentInfo(IOInterface $io) {
-		$io->write("\nEnviroment is <info>" . self::getEnviroment() . "</info>\n");
+	public static function printEnvironmentInfo(IOInterface $io) {
+		$io->write("\nEnvironment is <info>" . self::getEnvironment() . "</info>\n");
 	}
 
 	/**
@@ -61,11 +61,11 @@ class Enviroment {
 	/**
 	 * @return string|null
 	 */
-	private static function getEnviromentSetting() {
+	private static function getEnvironmentSetting() {
 		if (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
-			return Bootstrap::ENVIROMENT_DEVELOPMENT;
+			return Bootstrap::ENVIRONMENT_DEVELOPMENT;
 		} elseif (is_file(self::getRootDir() . '/' . self::FILE_PRODUCTION)) {
-			return Bootstrap::ENVIROMENT_PRODUCTION;
+			return Bootstrap::ENVIRONMENT_PRODUCTION;
 		}
 		return null;
 	}

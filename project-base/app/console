@@ -13,7 +13,7 @@ use SS6\Bootstrap;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $input = new ArgvInput();
-$enviroment = $input->getParameterOption(array('--env', '-e'), null);
+$environment = $input->getParameterOption(array('--env', '-e'), null);
 
-$bootstrap = new Bootstrap(true, $enviroment);
+$bootstrap = new Bootstrap(true, $environment);
 $bootstrap->run();
