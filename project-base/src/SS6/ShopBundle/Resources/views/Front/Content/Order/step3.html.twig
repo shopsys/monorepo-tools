@@ -81,10 +81,10 @@
 	</div>
 
 	<div class="buttons-control">
+		{{ form_widget(form.save, { label: 'Dokončit objednávku', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
+
 		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter buttons-control__left">
 			Zpět na výběr dopravy a platby
 		</button>
-
-		{{ form_widget(form.save, { label: 'Dokončit objednávku', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
 	</div>
 {% endblock %}

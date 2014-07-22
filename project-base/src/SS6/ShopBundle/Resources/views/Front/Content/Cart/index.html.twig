@@ -89,13 +89,13 @@
 			</table>
 
 			<div class="buttons-control">
-				<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
-					Zpět k nákupu
-				</a>
-
 				{% if cart.itemsCount > 0 %}
 					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary buttons-control__right'}}) }}
 				{% endif %}
+
+				<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+					Zpět k nákupu
+				</a>
 			</div>
 		{{ form_end(form) }}
 	{% else %}
