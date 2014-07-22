@@ -32,6 +32,7 @@ class CustomerController extends Controller {
 			$customerData['lastName'] = $user->getLastName();
 			$customerData['telephone'] = $user->getBillingAddress()->getTelephone();
 			$customerData['email'] = $user->getEmail();
+			$customerData['companyCustomer'] = $user->getBillingAddress()->isCompanyCustomer();
 			$customerData['companyName'] = $user->getBillingAddress()->getCompanyName();
 			$customerData['companyNumber'] = $user->getBillingAddress()->getCompanyNumber();
 			$customerData['companyTaxNumber'] = $user->getBillingAddress()->getCompanyTaxNumber();
@@ -39,13 +40,18 @@ class CustomerController extends Controller {
 			$customerData['city'] = $user->getBillingAddress()->getCity();
 			$customerData['postcode'] = $user->getBillingAddress()->getPostcode();
 			$customerData['country'] = $user->getBillingAddress()->getCountry();
-			$customerData['deliveryCompanyName'] = $user->getDeliveryAddress()->getCompanyName();
-			$customerData['deliveryContactPerson'] = $user->getDeliveryAddress()->getContactPerson();
-			$customerData['deliveryTelephone'] = $user->getDeliveryAddress()->getTelephone();
-			$customerData['deliveryStreet'] = $user->getDeliveryAddress()->getStreet();
-			$customerData['deliveryCity'] = $user->getDeliveryAddress()->getCity();
-			$customerData['deliveryPostcode'] = $user->getDeliveryAddress()->getPostcode();
-			$customerData['deliveryCountry'] = $user->getDeliveryAddress()->getCountry();
+			if ($user->getDeliveryAddress() !== null) {
+				$customerData['deliveryAddressFilled'] = true;
+				$customerData['deliveryCompanyName'] = $user->getDeliveryAddress()->getCompanyName();
+				$customerData['deliveryContactPerson'] = $user->getDeliveryAddress()->getContactPerson();
+				$customerData['deliveryTelephone'] = $user->getDeliveryAddress()->getTelephone();
+				$customerData['deliveryStreet'] = $user->getDeliveryAddress()->getStreet();
+				$customerData['deliveryCity'] = $user->getDeliveryAddress()->getCity();
+				$customerData['deliveryPostcode'] = $user->getDeliveryAddress()->getPostcode();
+				$customerData['deliveryCountry'] = $user->getDeliveryAddress()->getCountry();
+			} else {
+				$customerData['deliveryAddressFilled'] = false;
+			}
 		}
 
 		$form->setData($customerData);
@@ -62,6 +68,7 @@ class CustomerController extends Controller {
 				$customerData['lastName'],
 				$customerData['password'],
 				$customerData['telephone'],
+				$customerData['companyCustomer'],
 				$customerData['companyName'],
 				$customerData['companyNumber'],
 				$customerData['companyTaxNumber'],
@@ -69,6 +76,7 @@ class CustomerController extends Controller {
 				$customerData['city'],
 				$customerData['postcode'],
 				$customerData['country'],
+				$customerData['deliveryAddressFilled'],
 				$customerData['deliveryCompanyName'],
 				$customerData['deliveryContactPerson'],
 				$customerData['deliveryTelephone'],

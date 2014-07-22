@@ -26,6 +26,8 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 *
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function load(ObjectManager $manager) {
 		$registrationService = $this->container->get('ss6.shop.customer.registration_service');
@@ -36,21 +38,26 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 			'Watson',
 			'no-reply@netdevelo.cz',
 			'user123',
-			'Hlubinská 36',
-			'Ostrava',
-			'70200',
-			'Czech Republic',
-			'netdevelo s.r.o.',
-			'123456789',
-			'987654321',
-			'+420123456789',
-			'Slévárenská 18/408',
-			'Ostrava',
-			'70900',
-			'Czech Republic',
-			'netdevelo s.r.o.',
-			'John Doe',
-			'+420987654321'
+			new BillingAddress(
+				'Hlubinská 36',
+				'Ostrava',
+				'70200',
+				'Czech Republic',
+				true,
+				'netdevelo s.r.o.',
+				'123456789',
+				'987654321',
+				'+420123456789'
+			),
+			new DeliveryAddress(
+				'Slévárenská 18/408',
+				'Ostrava',
+				'70900',
+				'Czech Republic',
+				'netdevelo s.r.o.',
+				'John Doe',
+				'+420987654321'
+			)
 		);
 
 		$this->createCustomer($manager, $registrationService,
@@ -58,21 +65,26 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 			'Bill',
 			'Carole@maida.biz',
 			'asdfasdf',
-			'65597 Candido Cape',
-			'Larkinside',
-			'72984-3630',
-			'Taiwan',
-			null,
-			null,
-			null,
-			'1-478-693-5236 x8701',
-			'91147 Reinger Via',
-			'Blandaville',
-			'60081',
-			'Syria',
-			null,
-			'Sporer Leda',
-			'576-124-5478 x1457'
+			new BillingAddress(
+				'65597 Candido Cape',
+				'Larkinside',
+				'72984-3630',
+				'Taiwan',
+				false,
+				null,
+				null,
+				null,
+				'1-478-693-5236 x8701'
+			),
+			new DeliveryAddress(
+				'91147 Reinger Via',
+				'Blandaville',
+				'60081',
+				'Syria',
+				null,
+				'Sporer Leda',
+				'576-124-5478 x1457'
+			)
 		);
 
 		$manager->flush();
@@ -80,31 +92,7 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 
 	public function createCustomer(ObjectManager $manager, RegistrationService $registrationService,
 			$firstName, $lastName, $email, $password,
-			$billingStreet = null, $billingCity = null, $billingPostcode = null, $billingCountry = null,
-			$billingCompanyName = null, $billingCompanyNumber = null, $billingCompanyTaxNumber = null,
-			$billingTelephone = null,
-			$deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null, $deliveryCountry = null,
-			$deliveryCompanyName = null, $deliveryContactPerson = null, $deliveryTelephone = null) {
-
-		$billingAddress = new BillingAddress(
-			$billingStreet,
-			$billingCity,
-			$billingPostcode,
-			$billingCountry,
-			$billingCompanyName,
-			$billingCompanyNumber,
-			$billingCompanyTaxNumber,
-			$billingTelephone
-		);
-		$deliveryAddress = new DeliveryAddress(
-			$deliveryStreet,
-			$deliveryCity,
-			$deliveryPostcode,
-			$deliveryCountry,
-			$deliveryCompanyName,
-			$deliveryContactPerson,
-			$deliveryTelephone
-		);
+			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null) {
 
 		$user = $registrationService->create(
 			$firstName,

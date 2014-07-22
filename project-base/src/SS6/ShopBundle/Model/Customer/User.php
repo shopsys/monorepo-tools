@@ -57,11 +57,12 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\BillingAddress
 	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\BillingAddress")
+	 * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
 	 */
 	protected $billingAddress;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\DeliveryAddress")
 	 */
 	protected $deliveryAddress;
@@ -83,10 +84,10 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @param string $lastName
 	 * @param string $email
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 */
 	public function __construct($firstName, $lastName, $email,
-			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress) {
+			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = strtolower($email);
@@ -116,6 +117,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function changePassword($password) {
 		$this->password = $password;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+	 */
+	public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
+		$this->deliveryAddress = $deliveryAddress;
 	}
 	
 	/**
@@ -193,7 +201,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
 	public function getDeliveryAddress() {
 		return $this->deliveryAddress;

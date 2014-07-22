@@ -41,6 +41,11 @@ class OrderFormData {
 	private $telephone;
 
 	/**
+	 * @var boolean
+	 */
+	private $companyCustomer;
+
+	/**
 	 * @var string|null
 	 */
 	private $companyName;
@@ -69,6 +74,11 @@ class OrderFormData {
 	 * @var string
 	 */
 	private $postcode;
+
+	/**
+	 * @var boolean
+	 */
+	private $deliveryAddressFilled;
 
 	/**
 	 * @var string|null
@@ -153,6 +163,13 @@ class OrderFormData {
 	}
 
 	/**
+	 * @return boolean
+	 */
+	public function isCompanyCustomer() {
+		return $this->companyCustomer;
+	}
+
+	/**
 	 * @return string|null
 	 */
 	public function getCompanyName() {
@@ -192,6 +209,13 @@ class OrderFormData {
 	 */
 	public function getPostcode() {
 		return $this->postcode;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isDeliveryAddressFilled() {
+		return $this->deliveryAddressFilled;
 	}
 
 	/**
@@ -293,6 +317,13 @@ class OrderFormData {
 	}
 
 	/**
+	 * @param boolean $companyCustomer
+	 */
+	public function setCompanyCustomer($companyCustomer) {
+		$this->companyCustomer = $companyCustomer;
+	}
+
+	/**
 	 * @param string|null $companyName
 	 */
 	public function setCompanyName($companyName) {
@@ -332,6 +363,13 @@ class OrderFormData {
 	 */
 	public function setPostcode($postcode) {
 		$this->postcode = $postcode;
+	}
+
+	/**
+	 * @param boolean $deliveryAddressFilled
+	 */
+	public function setDeliveryAddressFilled($deliveryAddressFilled) {
+		$this->deliveryAddressFilled = $deliveryAddressFilled;
 	}
 
 	/**

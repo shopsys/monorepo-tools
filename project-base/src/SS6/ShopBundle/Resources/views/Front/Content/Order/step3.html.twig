@@ -22,13 +22,17 @@
 
 			<div class="info-box">
 				<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
-
 				<fieldset>
-					{{ form_row(form.companyName, { label: 'Název firmy', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.companyNumber, { label: 'IČ', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.companyTaxNumber, { label: 'DIČ', label_attr: { class: 'form-place__title' } }) }}
+					{{ form_row(form.companyCustomer, {
+						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
+						label: 'Nakupuji na firmu'})
+					}}
+					<div id="js-company-fields">
+						{{ form_row(form.companyName, { label: 'Název firmy', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.companyNumber, { label: 'IČ', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.companyTaxNumber, { label: 'DIČ', label_attr: { class: 'form-place__title' } }) }}
+					</div>
 				</fieldset>
-
 			</div>
 
 			<div class="info-box">
@@ -44,17 +48,21 @@
 
 			<div class="info-box">
 				<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
-
 				<fieldset>
-					{{ form_row(form.deliveryFirstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.deliveryLastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.deliveryCompanyName, { label: 'Firma', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.deliveryTelephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
-					{{ form_row(form.deliveryStreet, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.deliveryCity, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
-					{{ form_row(form.deliveryPostcode, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+					{{ form_row(form.deliveryAddressFilled, {
+						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+						label: 'Zboží chci doručit na jinou adresu než fakturační'})
+					}}
+					<div id="js-delivery-address-fields">
+						{{ form_row(form.deliveryFirstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.deliveryLastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.deliveryCompanyName, { label: 'Firma', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.deliveryTelephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+						{{ form_row(form.deliveryStreet, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.deliveryCity, { label: 'Město', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.deliveryPostcode, { label: 'PSČ', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
+					<div>
 				</fieldset>
-
 			</div>
 
 			<div class="info-box">
