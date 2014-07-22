@@ -110,6 +110,23 @@ class PKGridView {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\PKGrid\Column $actionColumn
+	 * @param array $row
+	 */
+	public function renderActionCell(ActionColumn $actionColumn, array $row) {
+		$posibleBlocks = array(
+			'pkgrid_action_cell_type_' . $actionColumn->getType(),
+			'pkgrid_action_cell',
+		);
+		foreach ($posibleBlocks as $blockName) {
+			if ($this->blockExists($blockName)) {
+				$this->renderBlock($blockName, array('actionColumn' => $actionColumn, 'row' => $row));
+				break;
+			}
+		}
+	}
+
+	/**
 	 * @param array $params
 	 * @param array|string|null $removeParams
 	 * @return string
