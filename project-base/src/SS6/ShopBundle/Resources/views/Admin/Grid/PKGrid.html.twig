@@ -75,24 +75,26 @@
 						{{ gridView.renderCell(column, row)|raw }}
 					</td>
 				{% endfor %}
-				<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if last_row %} last-row{% endif %}">
-					<span class="grid-row-actions action-icons">
-						{% for actionColumn in grid.actionColumns %}
-							{% if actionColumn.type == 'edit' %}
-								{% set icon = 'pencil' %}
-							{% elseif actionColumn.type == 'delete' %}
-								{% set icon = 'times' %}
-							{% else %}
-								{% set icon = actionColumn.type %}
-							{% endif %}
-							<a 
-								class="table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
-								href="{{ actionColumn.targetUrl(row) }}"
-								{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
-							><i class="fa fa-{{ icon }}"></i></a>
-						{% endfor %}
-					</span>
-				</td>
+				{% if grid.actionColumns|length > 0 %}
+					<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if last_row %} last-row{% endif %}">
+						<span class="grid-row-actions action-icons">
+							{% for actionColumn in grid.actionColumns %}
+								{% if actionColumn.type == 'edit' %}
+									{% set icon = 'pencil' %}
+								{% elseif actionColumn.type == 'delete' %}
+									{% set icon = 'times' %}
+								{% else %}
+									{% set icon = actionColumn.type %}
+								{% endif %}
+								<a
+									class="table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
+									href="{{ actionColumn.targetUrl(row) }}"
+									{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
+								><i class="fa fa-{{ icon }}"></i></a>
+							{% endfor %}
+						</span>
+					</td>
+				{% endif %}
 			</tr>
 		{% endfor %}
 	</tbody>
