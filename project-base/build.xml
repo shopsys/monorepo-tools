@@ -7,7 +7,6 @@
 	<property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
 	<property name="path.composer.executable" value="composer"/>
 	<property name="path.npm.executable" value="npm"/>
-	<property name="path.root" value="."/>
 	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
 	<property name="path.phpcs.ruleset" value="${path.build}/rulesetCS.xml"/>
 	<property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
@@ -15,6 +14,7 @@
 	<property name="path.phpmd.ruleset" value="${path.build}/rulesetMD.xml"/>
 	<property name="path.phpunit.configuration" value="${path.app}/phpunit.xml"/>
 	<property name="path.phpunit.executable" value="${path.bin}/phpunit"/>
+	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	
@@ -22,10 +22,18 @@
  
 	<target name="build" depends="composer,npm,clean,phplint,phpcs,phpmd,assetic,grunt,tests,db-rebuild"/>
 	<target name="build-demo" depends="composer,npm,clean,phplint,phpcs,phpmd,assetic,grunt,tests,db-demo"/>
-	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
-	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
-	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
+	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
+	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
+	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
+	
+	<target name="assetic">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="assetic:dump" />
+			<arg value="-q" />
+		</exec>
+	</target>
 	
 	<target name="clean">
 		<mkdir dir="${path.app}/cache" mode="0660"/>
@@ -58,6 +66,49 @@
 		>
 			<arg value="install"/>
 		</exec>
+	</target>
+	
+	<target name="db-create">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:schema:create" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="db-drop">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:schema:drop" />
+			<arg value="--force" />
+			<arg value="--full-database" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="db-fixtures-base-settings">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="db-fixtures-demo">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="grunt">
+		<exec executable="grunt" passthru="true" checkreturn="true" />
 	</target>
 	
 	<target name="npm">
@@ -139,41 +190,11 @@
 		</exec>
 	</target>
 	
-	<target name="db-drop">
+	<target name="test-db-create">
 		<exec executable="php" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="doctrine:schema:drop" />
-			<arg value="--force" />
-			<arg value="--full-database" />
-			<arg value="--no-interaction" />
-		</exec>
-	</target>
-		
-	<target name="db-create">
-		<exec executable="php" passthru="true" checkreturn="true">
-			<arg value="app/console" />
+			<arg value="--env=test" />
 			<arg value="doctrine:schema:create" />
-			<arg value="--no-interaction" />
-		</exec>
-	</target>
-	
-	<target name="db-fixtures-base-settings">
-		<exec executable="php" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
-			<arg value="--append" />
-			<arg value="--no-interaction" />
-		</exec>
-	</target>
-	
-	<target name="db-fixtures-demo">
-		<exec executable="php" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
-			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
@@ -185,15 +206,6 @@
 			<arg value="doctrine:schema:drop" />
 			<arg value="--force" />
 			<arg value="--full-database" />
-			<arg value="--no-interaction" />
-		</exec>
-	</target>
-		
-	<target name="test-db-create">
-		<exec executable="php" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="--env=test" />
-			<arg value="doctrine:schema:create" />
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
@@ -217,18 +229,6 @@
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
-		</exec>
-	</target>
-	
-	<target name="grunt">
-		<exec executable="grunt" passthru="true" checkreturn="true" />
-	</target>
-	
-	<target name="assetic">
-		<exec executable="php" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="assetic:dump" />
-			<arg value="-q" />
 		</exec>
 	</target>
 	
