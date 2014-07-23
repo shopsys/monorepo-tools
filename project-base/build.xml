@@ -20,12 +20,25 @@
 	
 	<property file="${path.build.properties.local}" override="true"/>
  
-	<target name="build" depends="composer,npm,phplint,phpcs,phpmd,assetic,grunt,tests,db-rebuild"/>
-	<target name="build-demo" depends="composer,npm,phplint,phpcs,phpmd,assetic,grunt,tests,db-demo"/>
+	<target name="build" depends="composer,npm,clean,phplint,phpcs,phpmd,assetic,grunt,tests,db-rebuild"/>
+	<target name="build-demo" depends="composer,npm,clean,phplint,phpcs,phpmd,assetic,grunt,tests,db-demo"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
+	
+	<target name="clean">
+		<mkdir dir="${path.app}/cache" />
+		<mkdir dir="${path.app}/logs" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${path.app}/cache/">
+				<exclude name="/" />
+			</fileset>
+			<fileset dir="${path.app}/logs/">
+				<exclude name="/" />
+			</fileset>
+		</delete>
+	</target>
 	
 	<target name="composer">
 		<exec

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b783226a9233c42e91f7b7d27561f33",
+    "hash": "b4dcc4ebc75ba70be642533200ba2ec7",
     "packages": [
         {
             "name": "craue/formflow-bundle",
@@ -2486,12 +2486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "937b2d0e4d38684f442703d3f5d462e0f2d4acde"
+                "reference": "87cf8e056b04edde10dfffcd1c2524eb5e0d8cb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/937b2d0e4d38684f442703d3f5d462e0f2d4acde",
-                "reference": "937b2d0e4d38684f442703d3f5d462e0f2d4acde",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/87cf8e056b04edde10dfffcd1c2524eb5e0d8cb5",
+                "reference": "87cf8e056b04edde10dfffcd1c2524eb5e0d8cb5",
                 "shasum": ""
             },
             "require": {
@@ -2551,7 +2551,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2014-07-16 04:56:04"
+            "time": "2014-05-22 01:56:51"
         },
         {
             "name": "swiftmailer/swiftmailer",
