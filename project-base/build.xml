@@ -38,6 +38,15 @@
 				<exclude name="/" />
 			</fileset>
 		</delete>
+		<if>
+			<available file="${path.root}/PRODUCTION"/>
+			<then>
+				<exec executable="php" passthru="true" checkreturn="true">
+					<arg value="app/console" />
+					<arg value="cache:warmup" />
+				</exec>
+			</then>
+		</if>
 	</target>
 	
 	<target name="composer">
