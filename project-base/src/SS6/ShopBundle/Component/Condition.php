@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Component;
 
-
 class Condition {
 
 	/**
