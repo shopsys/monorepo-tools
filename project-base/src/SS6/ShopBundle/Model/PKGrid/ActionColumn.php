@@ -58,13 +58,23 @@ class ActionColumn {
 
 	public function getTargetUrl($row) {
 		$parameters = $this->additionalRouteParams;
-		
-		foreach ($this->bindingRouteParams as $key => $value) {
-			$queryIdParts = explode('.', $value);
-			$columnIndex = array_pop($queryIdParts);
-			if (array_key_exists($columnIndex, $row)) {
-				$parameters[$key] = $row[$columnIndex];
+
+		foreach ($this->bindingRouteParams as $key => $queryId) {
+			$queryIdParts = explode('.', $queryId);
+
+			if (count($queryIdParts) === 1) {
+				$value = $row[$queryIdParts[0]];
+			} elseif (count($queryIdParts) === 2) {
+				if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
+					$value = $row[$queryIdParts[0]][$queryIdParts[1]];
+				} elseif (array_key_exists($queryIdParts[1], $row)) {
+					$value = $row[$queryIdParts[1]];
+				} else {
+					$value = $row[$column->getQueryId()];
+				}
 			}
+
+			$parameters[$key] = $value;
 		}
 		
 		return $this->router->generate($this->route, $parameters, true);

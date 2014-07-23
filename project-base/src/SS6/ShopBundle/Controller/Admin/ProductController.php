@@ -143,8 +143,8 @@ class ProductController extends Controller {
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
 
 		$grid->setActionColumnClass('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);

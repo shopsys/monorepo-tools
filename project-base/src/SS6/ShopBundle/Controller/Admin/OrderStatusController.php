@@ -125,8 +125,8 @@ class OrderStatusController extends Controller {
 		$grid->addColumn('name', 'os.name', 'Název', true);
 
 		$grid->setActionColumnClass('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_orderstatus_edit', array('id' => 'id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_orderstatus_delete', array('id' => 'id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_orderstatus_edit', array('id' => 'os.id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_orderstatus_delete', array('id' => 'os.id'))
 			->setConfirmMessage('Opravdu si přejete stav objednávky smazat?');
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/list.html.twig', array(

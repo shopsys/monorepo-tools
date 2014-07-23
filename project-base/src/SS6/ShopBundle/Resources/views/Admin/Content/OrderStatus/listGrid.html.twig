@@ -1,15 +1,15 @@
 {% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
 {% block pkgrid_value_cell_id_name %}
-	<a href="{{ url('admin_orderstatus_edit', { id: row.id }) }}">{{ value }}</a>
+	<a href="{{ url('admin_orderstatus_edit', { id: row.os.id }) }}">{{ value }}</a>
 {% endblock %}
 
 {% block pkgrid_action_cell_type_delete %}
-	{% if row.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
+	{% if row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
 		<i title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám." class="fa fa-info"></i>
-	{% elseif row.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_DONE') %}
+	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_DONE') %}
 		<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny." class="fa fa-info"></i>
-	{% elseif row.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_CANCELED') %}
+	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_CANCELED') %}
 		<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny." class="fa fa-info"></i>
 	{% else %}
 		<a
