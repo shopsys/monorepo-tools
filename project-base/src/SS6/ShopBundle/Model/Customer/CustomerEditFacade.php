@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
 
@@ -371,5 +373,87 @@ class CustomerEditFacade {
 		$this->em->remove($user);
 		$this->em->flush();
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
+	public function amendCustomerDataFromOrder(User $user, Order $order) {
+		$billingAddress = $user->getBillingAddress();
+		$deliveryAddress = $user->getDeliveryAddress();
+
+		if ($billingAddress->getStreet() === null) {
+			$companyCustomer = true;
+			$companyName = $order->getCompanyName();
+			$companyNumber = $order->getCompanyNumber();
+			$companyTaxNumber = $order->getCompanyTaxNumber();
+			$street = $order->getStreet();
+			$city = $order->getCity();
+			$postcode = $order->getPostcode();
+		} else {
+			$companyCustomer = $billingAddress->isCompanyCustomer();
+			$companyName = $billingAddress->getCompanyName();
+			$companyNumber = $billingAddress->getCompanyNumber();
+			$companyTaxNumber = $billingAddress->getCompanyTaxNumber();
+			$street = Condition::ifNull($billingAddress->getStreet(), $order->getStreet());
+			$city = Condition::ifNull($billingAddress->getCity(), $order->getCity());
+			$postcode = Condition::ifNull($billingAddress->getPostcode(), $order->getPostcode());
+		}
+
+		if ($billingAddress == null || $billingAddress->getTelephone() === null) {
+			$telephone = $order->getTelephone();
+		} else {
+			$telephone = $billingAddress->getTelephone();
+		}
+
+		if ($deliveryAddress === null) {
+			$deliveryAddressFilled = $order->getDeliveryStreet() !== null;
+			$deliveryCompanyName = $order->getDeliveryCompanyName();
+			$deliveryContactPersonString = trim($order->getDeliveryFirstName() . ' ' . $order->getDeliveryLastName());
+			$deliveryContactPerson = $deliveryContactPersonString ?: null;
+			$deliveryTelephone = $order->getDeliveryTelephone();
+			$deliveryStreet = $order->getDeliveryStreet();
+			$deliveryCity = $order->getDeliveryCity();
+			$deliveryPostcode = $order->getDeliveryPostcode();
+			$deliveryCountry = null;
+		} else {
+			$deliveryAddressFilled = true;
+			$deliveryCompanyName = $deliveryAddress->getCompanyName();
+			$deliveryContactPerson = $deliveryAddress->getContactPerson();
+			$deliveryTelephone = $deliveryAddress->getTelephone();
+			$deliveryStreet = $deliveryAddress->getStreet();
+			$deliveryCity = $deliveryAddress->getCity();
+			$deliveryPostcode = $deliveryAddress->getPostcode();
+			$deliveryCountry = $deliveryAddress->getCountry();
+		}
+
+		$user = $this->edit(
+			$user->getId(),
+			Condition::ifNull($user->getFirstName(), $order->getFirstName()),
+			Condition::ifNull($user->getLastName(), $order->getLastName()),
+			null,
+			$telephone,
+			$companyCustomer,
+			$companyName,
+			$companyNumber,
+			$companyTaxNumber,
+			$street,
+			$city,
+			$postcode,
+			$billingAddress->getCountry(),
+			$deliveryAddressFilled,
+			$deliveryCompanyName,
+			$deliveryContactPerson,
+			$deliveryTelephone,
+			$deliveryStreet,
+			$deliveryCity,
+			$deliveryPostcode,
+			$deliveryCountry
+		);
+
+		$this->em->flush();
+	}
+
 
 }
