@@ -20,8 +20,10 @@
 	
 	<property file="${path.build.properties.local}" override="true"/>
  
-	<target name="build" depends="composer,npm,clean,phplint,phpcs,phpmd,assetic,grunt,tests,db-rebuild"/>
-	<target name="build-demo" depends="composer,npm,clean,phplint,phpcs,phpmd,assetic,grunt,tests,db-demo"/>
+	<target name="build" depends="composer,npm,clean,assetic,grunt,db-rebuild"/>
+	<target name="build-demo" depends="composer,npm,clean,assetic,grunt,db-demo"/>
+	<target name="build-demo-dev" depends="build-demo,standards"/>
+	<target name="build-dev" depends="build,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
