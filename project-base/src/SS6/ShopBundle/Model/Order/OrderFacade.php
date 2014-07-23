@@ -160,8 +160,7 @@ class OrderFacade {
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function prefillOrderFormData(FrontOrderFormData $orderFormData, User $user) {
-		$lastOrder = $this->orderRepository->findLastByUserId($user->getId());
-		$this->orderService->prefillFrontFormData($orderFormData, $user, $lastOrder);
+		$this->orderService->prefillFrontFormData($orderFormData, $user);
 	}
 
 	/**
