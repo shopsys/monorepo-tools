@@ -29,14 +29,14 @@ class OrderStatusService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param int $orderCountByStatus
+	 * @param int $ordersCountByStatus
 	 * @throws Exception\OrderStatusDeletionForbiddenException
 	 */
-	public function delete(OrderStatus $orderStatus, $orderCountByStatus) {
+	public function delete(OrderStatus $orderStatus, $ordersCountByStatus) {
 		if ($orderStatus->getType() !== OrderStatus::TYPE_IN_PROGRESS) {
 			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException($orderStatus);
 		}
-		if ($orderCountByStatus > 0) {
+		if ($ordersCountByStatus > 0) {
 			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException($orderStatus);
 		}
 	}
