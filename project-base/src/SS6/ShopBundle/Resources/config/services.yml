@@ -8,6 +8,7 @@ parameters:
   ss6.file_url_prefix: /assets/content/files/
   ss6.image_dir: %kernel.root_dir%/../web/assets/content/images
   ss6.image_url_prefix: /assets/content/images/
+  ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
 
 services:
@@ -126,6 +127,16 @@ services:
   ss6.shop.flash_message.bag.front:
     class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['front']
+    
+  ss6.shop.image.image_config:
+    class: SS6\ShopBundle\Model\Image\Config\ImageConfig
+    factory_service: ss6.shop.image.image_config_loader
+    factory_method: loadFromYaml
+    arguments:
+      - %ss6.image_config_filepath%
+
+  ss6.shop.image.image_config_loader:
+    class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
 
   ss6.shop.flash_message.text_sender.admin:
     class: SS6\ShopBundle\Model\FlashMessage\TextSender
