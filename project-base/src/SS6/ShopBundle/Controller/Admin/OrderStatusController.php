@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Order\Status\DeleteFormType;
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -126,8 +127,7 @@ class OrderStatusController extends Controller {
 
 		$grid->setActionColumnClass('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_orderstatus_edit', array('id' => 'os.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_orderstatus_delete', array('id' => 'os.id'))
-			->setConfirmMessage('Opravdu si přejete stav objednávky smazat?');
+		$grid->addActionColumn('delete', 'Smazat', 'admin_orderstatus_delete', array('id' => 'os.id'));
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/list.html.twig', array(
 			'gridView' => $grid->createView(),
@@ -136,23 +136,41 @@ class OrderStatusController extends Controller {
 
 	/**
 	 * @Route("/order_status/delete/{id}", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
-	public function deleteAction($id) {
+	public function deleteAction(Request $request, $id) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
+		$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
+		/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
 
 		try {
-			$statusName = $orderStatusRepository->getById($id)->getName();
-			$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
-			/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
-			$orderStatusFacade->deleteById($id);
+			$orderStatus = $orderStatusRepository->getById($id);
 
-			$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
-				'name' => $statusName,
-			));
+			$form = $this->getDeleteForm($id);
+			$form->handleRequest($request);
+
+			if ($form->isValid()) {
+				$formData = $form->getData();
+				$newOrderStatus = $formData['newStatus'];
+				/* @var $newOrderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
+
+				$orderStatusFacade->deleteById($id, $formData['newStatus']->getId());
+
+				$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem ' . $newOrderStatus->getName() . ' a byl smazán.', array(
+					'name' => $orderStatus->getName(),
+					'newName' => $newOrderStatus->getName(),
+				));
+			} else {
+				$orderStatusFacade->deleteById($id);
+
+				$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
+					'name' => $orderStatus->getName(),
+				));
+			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
 			$flashMessageTwig->addError('Stav objednávek <strong>{{ name }}</strong>'
 					. ' je rezervovaný a nelze jej smazat', array(
@@ -167,4 +185,67 @@ class OrderStatusController extends Controller {
 
 		return $this->redirect($this->generateUrl('admin_orderstatus_list'));
 	}
+
+	/**
+	 * @Route("/order_status/delete_ajax_dialog/{id}", requirements={"id" = "\d+"})
+	 * @param int $id
+	 */
+	public function deleteAjaxDialogAction($id) {
+		$engine = $this->container->get('templating');
+
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
+		$orderRepository = $this->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+
+		$orderStatus = $orderStatusRepository->getById($id);
+		$ordersCount = $orderRepository->getOrdersCountByStatus($orderStatus);
+
+		$form = $this->getDeleteForm($id);
+
+		$windowId = 'orderStatusDelete';
+
+		if ($ordersCount == 0) {
+			return $this->render('@SS6Shop/Front/Inline/jsWindow.html.twig', array(
+				'id' => $windowId,
+				'text' => 'Opravdu si přejete stav objednávky smazat?',
+				'continueButton' => true,
+				'continueButtonText' => 'Ano',
+				'continueUrl' => $this->generateUrl('admin_orderstatus_delete', array('id' => $id)),
+				'closeButton' => true,
+			));
+		} else {
+			$windowHtml = $engine->render('@SS6Shop/Admin/Content/OrderStatus/deleteForm.html.twig', array(
+				'orderStatus' => $orderStatus,
+				'ordersCount' => $ordersCount,
+				'windowId' => $windowId,
+				'form' => $form->createView(),
+			));
+
+			return $this->render('@SS6Shop/Front/Inline/jsWindow.html.twig', array(
+				'id' => $windowId,
+				'text' => $windowHtml,
+				'noEscape' => true,
+			));
+		}
+	}
+
+	/**
+	 * @param int $id
+	 * @return \Symfony\Component\Form\Form
+	 */
+	private function getDeleteForm($id) {
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
+
+		$orderStatus = $orderStatusRepository->getById($id);
+
+		$orderStatusesToDelete = $orderStatusRepository->findAllExceptId($orderStatus->getId());
+
+		return $this->createForm(new DeleteFormType($orderStatusesToDelete), null, array(
+			'action' => $this->generateUrl('admin_orderstatus_delete', array('id' => $id)),
+			'method' => 'GET',
+		));
+	}
+
 }

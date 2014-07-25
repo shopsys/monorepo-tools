@@ -100,5 +100,15 @@ class OrderRepository {
 			->where('o.deleted = :deleted')
 			->setParameter('deleted', false);
 	}
+
+	/*
+	 * @param int $orderStatusId
+	 * @return \SS6\ShopBundle\Model\Order\Order[]
+	 */
+	public function findByStatusId($orderStatusId) {
+		return $this->getOrderRepository()->findBy(array(
+			'status' => $orderStatusId,
+		));
+	}
 	
 }

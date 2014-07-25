@@ -164,4 +164,14 @@ class OrderService {
 		}
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order[] $orders
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
+	 */
+	public function changeOrdersStatus(array $orders, OrderStatus $newOrderStatus) {
+		foreach ($orders as $order) {
+			$order->setStatus($newOrderStatus);
+		}
+	}
+
 }

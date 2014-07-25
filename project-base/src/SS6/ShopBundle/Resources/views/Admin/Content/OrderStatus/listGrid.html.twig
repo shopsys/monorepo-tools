@@ -6,16 +6,16 @@
 
 {% block pkgrid_action_cell_type_delete %}
 	{% if row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
-		<i title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám." class="fa fa-info"></i>
+		<i title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám." class="js-order-status-list-no-delete cursor-help fa fa-info" data-toggle="tooltip" data-placement="right"></i>
 	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_DONE') %}
-		<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny." class="fa fa-info"></i>
+		<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny." class="js-order-status-list-no-delete cursor-help fa fa-info" data-toggle="tooltip" data-placement="right"></i>
 	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_CANCELED') %}
-		<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny." class="fa fa-info"></i>
+		<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny." class="js-order-status-list-no-delete cursor-help fa fa-info" data-toggle="tooltip" data-placement="right"></i>
 	{% else %}
 		<a
-			class="table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
+			class="js-order-status-delete-button table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
 			href="{{ actionColumn.targetUrl(row) }}"
-			{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
+			data-ajax-action="{{ url('admin_orderstatus_deleteajaxdialog', { id: row.os.id }) }}"
 		><i class="fa fa-times"></i></a>
 	{% endif %}
 {% endblock %}
