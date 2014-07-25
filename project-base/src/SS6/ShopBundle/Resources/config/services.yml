@@ -60,6 +60,11 @@ services:
 
   ss6.shop.cart.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\CartItemRepository
+    
+  ss6.shop.cart.cart_migration_facade:
+    class: SS6\ShopBundle\Model\Cart\CartMigrationFacade
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
   ss6.shop.cart.cart_service:
     class: SS6\ShopBundle\Model\Cart\CartService

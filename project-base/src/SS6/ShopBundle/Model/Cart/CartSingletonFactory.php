@@ -9,9 +9,9 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 class CartSingletonFactory {
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 * @var \SS6\ShopBundle\Model\Cart\Cart[]
 	 */
-	private $cart;
+	private $carts = array();
 	
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartItemRepository $cartItemRepository
@@ -37,11 +37,15 @@ class CartSingletonFactory {
 	 * @return \SS6\ShopBundle\Model\Cart\Cart
 	 */
 	public function get(CustomerIdentifier $customerIdentifier) {
-		if ($this->cart === null) {
-			$this->cart = $this->createNewCart($customerIdentifier);
-			$this->cartWatcherFacade->checkCartModifications($this->cart);
+		$customerIdentifierHash = $customerIdentifier->getObjectHash();
+		if (!array_key_exists($customerIdentifierHash, $this->carts)) {
+			$this->carts[$customerIdentifierHash] = $this->createNewCart($customerIdentifier);
 		}
-		return $this->cart;
+
+		$cart = $this->carts[$customerIdentifierHash];
+		$this->cartWatcherFacade->checkCartModifications($cart);
+
+		return $cart;
 	}
 	
 	/**

@@ -68,4 +68,23 @@ class CartService {
 		$cart->clean();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $resultingCart
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $mergedCart
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 */
+	public function mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier) {
+		foreach ($mergedCart->getItems() as $cartItem) {
+			$similarCartItem = $resultingCart->findSimilarCartItemByCartItem($cartItem);
+			if ($similarCartItem instanceof CartItem) {
+				$similarCartItem->changeQuantity($cartItem->getQuantity());
+			} else {
+				$newCartItem = new CartItem($customerIdentifier, $cartItem->getProduct(), $cartItem->getQuantity());
+				$resultingCart->addItem($newCartItem);
+			}
+		}
+
+		$resultingCart->calcSummaryInfo();
+	}
+
 }

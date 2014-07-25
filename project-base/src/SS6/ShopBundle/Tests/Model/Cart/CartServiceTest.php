@@ -98,5 +98,39 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		
 		$this->assertTrue($cart->isEmpty());
 	}
+
+	public function testMergeCarts() {
+		$cartService = new CartService();
+
+		$price = 100;
+		$product1 = new Product('Product 1', null, null, null, null, $price);
+		$product2 = new Product('Product 2', null, null, null, null, $price);
+
+		$sessionId1 = 'abc123';
+		$sessionId2 = 'def456';
+		$customerIdentifier1 = new CustomerIdentifier($sessionId1);
+		$customerIdentifier2 = new CustomerIdentifier($sessionId2);
+
+		$cartItem = new CartItem($customerIdentifier1, $product1, 2);
+		$cartItems = array($cartItem);
+		$mainCart = new Cart($cartItems);
+
+		$cartItem1 = new CartItem($customerIdentifier2, $product1, 3);
+		$cartItem2 = new CartItem($customerIdentifier2, $product2, 1);
+		$cartItems = array($cartItem1, $cartItem2);
+		$mergingCart = new Cart($cartItems);
+
+		$cartService->mergeCarts($mainCart, $mergingCart, $customerIdentifier1);
+
+		foreach ($mainCart->getItems() as $item) {
+			if ($item->getSessionId() !== $customerIdentifier1->getSessionId()) {
+				$this->fail('Merged cart contain cartItem with wrong sessionId');
+			}
+		}
+
+		$this->assertEquals(2, $mergingCart->getItemsCount());
+		$this->assertEquals(4, $mergingCart->getQuantity());
+		$this->assertSame(4 * $price, $mergingCart->getPrice());
+	}
 	
 }

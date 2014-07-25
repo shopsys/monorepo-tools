@@ -38,8 +38,9 @@ class CartFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 */
-	public function __construct(EntityManager $em, CartService $cartService, Cart $cart, ProductRepository $productRepository, 
+	public function __construct(EntityManager $em, CartService $cartService, Cart $cart, ProductRepository $productRepository,
 			CustomerIdentifier $customerIdentifier) {
 		$this->em = $em;
 		$this->cartService = $cartService;
@@ -96,7 +97,7 @@ class CartFacade {
 	 * @param int $cartItemId
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function getProductByIdCartItem($cartItemId) {
+	public function getProductByCartItemId($cartItemId) {
 		return $this->cartService->getCartItemById($this->cart, $cartItemId)->getProduct();
 	}
 }
