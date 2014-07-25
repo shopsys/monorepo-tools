@@ -29,6 +29,14 @@ services:
   ss6.shop.administrator.administrator_grid_service:
     class: SS6\ShopBundle\Model\Administrator\AdministratorGridService
 
+  ss6.shop.admin_navigation.breadcrumb:
+    class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+    factory_service: ss6.shop.admin_navigation.breadcrumb_singleton_factory
+    factory_method: get
+
+  ss6.shop.admin_navigation.breadcrumb_singleton_factory:
+    class: SS6\ShopBundle\Model\AdminNavigation\BreadcrumbSingletonFactory
+
   ss6.shop.admin_navigation.menu:
     class: SS6\ShopBundle\Model\AdminNavigation\Menu
     factory_service: ss6.shop.admin_navigation.menu_loader

@@ -76,7 +76,7 @@ class Menu {
 	 * @param array|null $parameters
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
-	public function getItemMatchingRoute($route, array $parameters = null) {
+	private function getItemMatchingRoute($route, array $parameters = null) {
 		$item = $this->getItemMatchingRouteRecursive($this->getItems(), $route, $parameters);
 		
 		return $item;
@@ -137,7 +137,7 @@ class Menu {
 	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $item
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
 	 */
-	public function getItemPath(MenuItem $item) {
+	private function getItemPath(MenuItem $item) {
 		return $this->getItemPathRecursive($this->getItems(), $item);
 	}
 
@@ -163,6 +163,21 @@ class Menu {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param string $route
+	 * @param array|null $parameters
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 */
+	public function getMenuPath($route, $parameters) {
+		$menuPath = array();
+		$matchingItem = $this->getItemMatchingRoute($route, $parameters);
+		if ($matchingItem !== null) {
+			$menuPath = $this->getItemPath($matchingItem);
+		}
+
+		return $menuPath;
 	}
 
 }
