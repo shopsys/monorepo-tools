@@ -3,26 +3,26 @@
 namespace SS6\ShopBundle\Tests\Config;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
-use SS6\ShopBundle\Model\AdminMenu\MenuItem;
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 
-class AdminMenuTest extends FunctionalTestCase {
+class AdminNavigationTest extends FunctionalTestCase {
 
 	public function testHasSettingsItem() {
-		$menu = $this->getContainer()->get('ss6.shop.admin_menu.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
+		$menu = $this->getContainer()->get('ss6.shop.admin_navigation.menu');
+		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
 
 		$this->assertInstanceOf(MenuItem::class, $menu->getSettingsItem());
 	}
 
 	public function testResolveRoutes() {
-		$menu = $this->getContainer()->get('ss6.shop.admin_menu.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
+		$menu = $this->getContainer()->get('ss6.shop.admin_navigation.menu');
+		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
 
 		$this->resolveRoutesRecursive($menu->getItems());
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem[] $items
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem[] $items
 	 */
 	private function resolveRoutesRecursive(array $items) {
 		$router = $this->getContainer()->get('router');

@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MenuController extends Controller {
 
 	public function menuAction($route, array $parameters = null) {
-		$menu = $this->get('ss6.shop.admin_menu.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
+		$menu = $this->get('ss6.shop.admin_navigation.menu');
+		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
 
 		$activePath = array();
 		$matchingItem = $menu->getItemMatchingRoute($route, $parameters);
@@ -23,8 +23,8 @@ class MenuController extends Controller {
 	}
 
 	public function panelAction($route, array $parameters = null) {
-		$menu = $this->get('ss6.shop.admin_menu.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminMenu\Menu */
+		$menu = $this->get('ss6.shop.admin_navigation.menu');
+		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
 
 		$items = array();
 		$activePath = array();

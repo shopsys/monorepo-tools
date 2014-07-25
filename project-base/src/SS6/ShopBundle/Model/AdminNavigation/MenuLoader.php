@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdminMenu;
+namespace SS6\ShopBundle\Model\AdminNavigation;
 
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
@@ -22,7 +22,7 @@ class MenuLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Model\AdminMenu\Menu
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\Menu
 	 */
 	public function loadFromYaml($filename) {
 		$yamlParser = new Parser();
@@ -46,7 +46,7 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminMenu\Menu
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\Menu
 	 */
 	public function loadFromArray(array $array) {
 		$items = $this->loadItems($array);
@@ -57,7 +57,7 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem[]
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private function loadItems(array $array) {
 		$items = array();
@@ -72,7 +72,7 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem
 	 */
 	private function loadItem(array $array) {
 		if (isset($array['items'])) {
