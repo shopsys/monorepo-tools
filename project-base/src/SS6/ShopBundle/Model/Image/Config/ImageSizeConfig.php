@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Image\Config;
 
-class ImageTypeInfo {
+class ImageSizeConfig {
 
 	/**
 	 * @var string|null
@@ -36,7 +36,7 @@ class ImageTypeInfo {
 		$this->height = $height;
 		$this->crop = $crop;
 	}
-	
+
 	public function getName() {
 		return $this->name;
 	}

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Image\Config;
 
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -15,7 +16,7 @@ class ImageConfigLoader {
 	private $filesystem;
 
 	/**
-	 * @var array
+	 * @var SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
 	 */
 	private $entityConfigsCache;
 
@@ -69,7 +70,10 @@ class ImageConfigLoader {
 			try {
 				$this->prepareEntityToEntityConfigsCache($entityConfig);
 			} catch (\SS6\ShopBundle\Model\Image\Config\Exception\ImageConfigException $e) {
-				throw new \SS6\ShopBundle\Model\Image\Config\Exception\EntityParseException($entityConfig['class'], $e);
+				throw new \SS6\ShopBundle\Model\Image\Config\Exception\EntityParseException(
+					$entityConfig[ImageConfigDefinition::CONFIG_CLASS],
+					$e
+				);
 			}
 		}
 
@@ -77,42 +81,45 @@ class ImageConfigLoader {
 	}
 
 	/**
-	 * @param type $entityConfig
-	 * @return type
+	 * @param array $entityConfig
+	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException
 	 */
 	private function prepareEntityToEntityConfigsCache($entityConfig) {
+		$entityClass = $entityConfig[ImageConfigDefinition::CONFIG_CLASS];
+		$entityName = $entityConfig[ImageConfigDefinition::CONFIG_ENTITY_NAME];
+
 		if (
-			!array_key_exists($entityConfig['class'], $this->entityConfigsCache) &&
-			!array_key_exists($entityConfig['name'], $this->entityNamesCache)
+			!array_key_exists($entityClass, $this->entityConfigsCache) &&
+			!array_key_exists($entityName, $this->entityNamesCache)
 		) {
-			$this->entityNamesCache[$entityConfig['name']] = $entityConfig['name'];
-			$this->entityConfigsCache[$entityConfig['class']] = array(
-				'name' => $entityConfig['name'],
-				'types' => $this->prepareTypes($entityConfig['types']),
-				'sizes' => $this->prepareSizes($entityConfig['sizes']),
-			);
+			$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
+			$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
+			
+			$this->entityNamesCache[$entityName] = $entityName;
+			$this->entityConfigsCache[$entityClass] = new ImageEntityConfig($entityName, $entityClass, $types, $sizes);
 		} else {
-			throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException($entityConfig['name']);
+			throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException($entityName);
 		}
 	}
 
 	/**
 	 * @param array $sizes
-	 * @return \SS6\ShopBundle\Model\Image\Config\ImageTypeInfo[]
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[]
 	 */
 	private function prepareSizes($sizes) {
 		$result = array();
 		foreach ($sizes as $size) {
-			$key = $size['name'] !== null ? $size['name'] : ImageConfig::WITHOUT_NAME_KEY;
+			$sizeName = $size[ImageConfigDefinition::CONFIG_SIZE_NAME];
+			$key = $sizeName !== null ? $sizeName : ImageEntityConfig::WITHOUT_NAME_KEY;
 			if (!array_key_exists($key, $result)) {
-				$result[$key] = new ImageTypeInfo(
-					$size['name'],
-					$size['width'],
-					$size['height'],
-					$size['crop']
+				$result[$key] = new ImageSizeConfig(
+					$sizeName,
+					$size[ImageConfigDefinition::CONFIG_SIZE_WIDTH],
+					$size[ImageConfigDefinition::CONFIG_SIZE_HEIGHT],
+					$size[ImageConfigDefinition::CONFIG_SIZE_CROP]
 				);
 			} else {
-				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateSizeNameException($size['name']);
+				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateSizeNameException($sizeName);
 			}
 		}
 
@@ -126,14 +133,11 @@ class ImageConfigLoader {
 	private function prepareTypes($types) {
 		$result = array();
 		foreach ($types as $type) {
-			$key = $type['name'] !== null ? $type['name'] : ImageConfig::WITHOUT_NAME_KEY;
-			if (!array_key_exists($key, $result)) {
-				$result[$key] = array(
-					'name' => $type['name'],
-					'sizes' => $this->prepareSizes($type['sizes']),
-				);
+			$typeName = $type[ImageConfigDefinition::CONFIG_TYPE_NAME];
+			if (!array_key_exists($typeName, $result)) {
+				$result[$typeName] = $this->prepareSizes($type[ImageConfigDefinition::CONFIG_SIZES]);
 			} else {
-				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException($type['name']);
+				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException($typeName);
 			}
 		}
 
