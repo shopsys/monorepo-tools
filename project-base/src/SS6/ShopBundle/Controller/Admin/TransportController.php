@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,6 +86,9 @@ class TransportController extends Controller {
 		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
+
+		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		$breadcrumb->replaceLastItem(new MenuItem('Editace dopravy - ' . $transport->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(
 			'form' => $form->createView(),

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
@@ -102,6 +103,9 @@ class CustomerController extends Controller {
 		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
+
+		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		$breadcrumb->replaceLastItem(new MenuItem('Editace zákazníka - ' . $user->getFullName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', array(
 			'form' => $form->createView(),
