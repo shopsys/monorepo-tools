@@ -126,20 +126,7 @@ class CustomerEditFacade {
 		);
 		$this->em->persist($billingAddress);
 
-		$userByEmail = $this->userRepository->findUserByEmail($email);
-
-		$user = $this->registrationService->create($firstName,
-			$lastName,
-			$email,
-			$password,
-			$billingAddress,
-			$userByEmail
-		);
-		$this->em->persist($user);
-
-		$deliveryAddress = $this->registrationService->editDeliveryAddress(
-			$user,
-			null,
+		$deliveryAddress = $this->registrationService->createDeliveryAddress(
 			$deliveryAddressFilled,
 			$deliveryCompanyName,
 			$deliveryContactPerson,
@@ -152,6 +139,18 @@ class CustomerEditFacade {
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 		}
+
+		$userByEmail = $this->userRepository->findUserByEmail($email);
+
+		$user = $this->registrationService->create($firstName,
+			$lastName,
+			$email,
+			$password,
+			$billingAddress,
+			$deliveryAddress,
+			$userByEmail
+		);
+		$this->em->persist($user);
 		
 		$this->em->flush();
 

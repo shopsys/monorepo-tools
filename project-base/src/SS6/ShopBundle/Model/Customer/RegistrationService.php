@@ -92,6 +92,30 @@ class RegistrationService {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+	 * @param boolean $addressFilled
+	 * @param string|null $companyName
+	 * @param string|null $contactPerson
+	 * @param string|null $street
+	 * @param string|null $city
+	 * @param string|null $postcode
+	 * @param string|null $country
+	 * @param string|null $telephone
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
+	 */
+	public function createDeliveryAddress($addressFilled = false, $companyName = null, $contactPerson = null,
+			$street = null, $city = null, $postcode = null, $country = null, $telephone = null) {
+
+		if ($addressFilled) {
+			$deliveryAddress = new DeliveryAddress($street, $city, $postcode, $country, $companyName, $contactPerson, $telephone);
+		} else {
+			$deliveryAddress = null;
+		}
+
+		return $deliveryAddress;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @param boolean $addressFilled
