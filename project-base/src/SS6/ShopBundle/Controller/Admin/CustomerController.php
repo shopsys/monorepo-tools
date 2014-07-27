@@ -22,8 +22,8 @@ class CustomerController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 		
@@ -93,7 +93,7 @@ class CustomerController extends Controller {
 					$customerData['deliveryPostcode'],
 					$customerData['deliveryCountry']);
 
-				$flashMessage->addSuccess('Byl upraven zákazník ' . $user->getFullName());
+				$flashMessageText->addSuccess('Byl upraven zákazník ' . $user->getFullName());
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -101,7 +101,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -181,8 +181,8 @@ class CustomerController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE), null, array(
 			'validation_groups' => array('Default', 'create'),
@@ -222,7 +222,7 @@ class CustomerController extends Controller {
 					$customerData['deliveryPostcode'],
 					$customerData['deliveryCountry']);
 
-				$flashMessage->addSuccess('Byl vytvořen zákazník ' . $user->getFullName());
+				$flashMessageText->addSuccess('Byl vytvořen zákazník ' . $user->getFullName());
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -230,7 +230,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', array(
@@ -243,15 +243,15 @@ class CustomerController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
 		$fullName = $userRepository->getUserById($id)->getFullName();
 		$this->get('ss6.shop.customer.customer_edit_facade')->delete($id);
-		$flashMessage->addSuccess('Zákazník ' . $fullName . ' byl smazán');
+		$flashMessageText->addSuccess('Zákazník ' . $fullName . ' byl smazán');
 
 		return $this->redirect($this->generateUrl('admin_customer_list'));
 	}

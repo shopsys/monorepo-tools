@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Watcher;
 
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessage;
+use SS6\ShopBundle\Model\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -15,9 +15,9 @@ class TransportAndPaymentWatcherService {
 	const SESSION_PAYMENT_PRICES = 'payment_prices';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessage
+	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
 	 */
-	private $flashMessage;
+	private $flashMessageBag;
 
 	/**
 	 * @var Symfony\Component\HttpFoundation\Session\Session
@@ -25,10 +25,10 @@ class TransportAndPaymentWatcherService {
 	private $session;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessage $flashMessage
+	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
 	 */
-	public function __construct(FlashMessage $flashMessage, Session $session) {
-		$this->flashMessage = $flashMessage;
+	public function __construct(Bag $flashMessageBag, Session $session) {
+		$this->flashMessageBag = $flashMessageBag;
 		$this->session = $session;
 	}
 
@@ -64,7 +64,7 @@ class TransportAndPaymentWatcherService {
 			if ($transportPrice !== $transport->getPrice()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena dopravy ' . $transport->getName() .
 					'. Prosím, překontrolujte si objednávku.';
-				$this->flashMessage->addInfo($message);
+				$this->flashMessageBag->addInfo($message);
 			}
 		}
 	}
@@ -80,7 +80,7 @@ class TransportAndPaymentWatcherService {
 			if ($paymentPrice !== $payment->getPrice()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena platby ' . $payment->getName() .
 					'. Prosím, překontrolujte si objednávku.';
-				$this->flashMessage->addInfo($message);
+				$this->flashMessageBag->addInfo($message);
 			}
 		}
 	}

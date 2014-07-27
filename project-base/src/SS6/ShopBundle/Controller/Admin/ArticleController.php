@@ -18,8 +18,8 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$articleRepository = $this->get('ss6.shop.article.article_repository');
 		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
@@ -47,12 +47,12 @@ class ArticleController extends Controller {
 				$articleData['text']
 			);
 
-			$flashMessage->addSuccess('Byl upraven článek ' . $article->getName());
+			$flashMessageText->addSuccess('Byl upraven článek ' . $article->getName());
 			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -108,8 +108,8 @@ class ArticleController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$form = $this->createForm(new ArticleFormType());
 
@@ -128,12 +128,12 @@ class ArticleController extends Controller {
 				$articleData['text']
 			);
 
-			$flashMessage->addSuccess('Byl vytvořen článek ' . $article->getName());
+			$flashMessageText->addSuccess('Byl vytvořen článek ' . $article->getName());
 			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', array(
@@ -146,15 +146,15 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$articleRepository = $this->get('ss6.shop.article.article_repository');
 		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
 		$fullName = $articleRepository->getById($id)->getName();
 		$this->get('ss6.shop.article.article_edit_facade')->delete($id);
-		$flashMessage->addSuccess('Článek ' . $fullName . ' byl smazán');
+		$flashMessageText->addSuccess('Článek ' . $fullName . ' byl smazán');
 
 		return $this->redirect($this->generateUrl('admin_article_list'));
 	}

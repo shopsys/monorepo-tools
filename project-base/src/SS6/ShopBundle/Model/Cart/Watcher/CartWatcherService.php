@@ -3,20 +3,20 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessage;
+use SS6\ShopBundle\Model\FlashMessage\Bag;
 
 class CartWatcherService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessage
+	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
 	 */
-	private $flashMessage;
+	private $flashMessageBag;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessage $flashMessage
+	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
 	 */
-	public function __construct(FlashMessage $flashMessage) {
-		$this->flashMessage = $flashMessage;
+	public function __construct(Bag $flashMessageBag) {
+		$this->flashMessageBag = $flashMessageBag;
 	}
 
 	/**
@@ -25,7 +25,7 @@ class CartWatcherService {
 	public function showErrorOnModifiedItems(Cart $cart) {
 		foreach ($this->getModifiedPriceItems($cart) as $item) {
 			/* @var $item \SS6\ShopBundle\Model\Cart\CartItem */
-			$this->flashMessage->addInfo('Byla změněna cena zboží ' . $item->getName() .
+			$this->flashMessageBag->addInfo('Byla změněna cena zboží ' . $item->getName() .
 				', které máte v košíku. Prosím, překontrolujte si objednávku.');
 			$item->setWatchedPrice($item->getPrice());
 		}

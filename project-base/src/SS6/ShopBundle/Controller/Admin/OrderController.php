@@ -21,8 +21,8 @@ class OrderController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
@@ -86,17 +86,17 @@ class OrderController extends Controller {
 
 				$order = $orderFacade->edit($id, $orderData);
 
-				$flashMessage->addSuccess('Byla upravena objednávka ' . $order->getNumber());
+				$flashMessageText->addSuccess('Byla upravena objednávka ' . $order->getNumber());
 				return $this->redirect($this->generateUrl('admin_order_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			$flashMessage->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
+			$flashMessageText->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$flashMessage->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+			$flashMessageText->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -169,8 +169,8 @@ class OrderController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
@@ -178,7 +178,7 @@ class OrderController extends Controller {
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$orderFacade->deleteById($id);
-		$flashMessage->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
+		$flashMessageText->addSuccess('Objednávka číslo ' . $orderNumber . ' byl smazána');
 
 		return $this->redirect($this->generateUrl('admin_order_list'));
 	}

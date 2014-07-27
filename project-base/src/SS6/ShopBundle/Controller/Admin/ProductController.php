@@ -18,8 +18,8 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
@@ -51,12 +51,12 @@ class ProductController extends Controller {
 			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 			$product = $productEditFacade->edit($id, $form->getData());
 
-			$flashMessage->addSuccess('Bylo upraveno zboží ' . $product->getName());
+			$flashMessageText->addSuccess('Bylo upraveno zboží ' . $product->getName());
 			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -74,8 +74,8 @@ class ProductController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 
@@ -95,12 +95,12 @@ class ProductController extends Controller {
 			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 			$product = $productEditFacade->create($form->getData());
 
-			$flashMessage->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
+			$flashMessageText->addSuccess('Bylo vytvořeno zboží ' . $product->getName());
 			return $this->redirect($this->generateUrl('admin_product_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
@@ -153,15 +153,15 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 
 		$productName = $productRepository->getById($id)->getName();
 		$this->get('ss6.shop.product.product_edit_facade')->delete($id);
-		$flashMessage->addSuccess('Produkt ' . $productName . ' byl smazán');
+		$flashMessageText->addSuccess('Produkt ' . $productName . ' byl smazán');
 		
 		return $this->redirect($this->generateUrl('admin_product_list'));
 	}

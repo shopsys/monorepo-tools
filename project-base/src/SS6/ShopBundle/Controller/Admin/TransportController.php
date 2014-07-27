@@ -19,8 +19,8 @@ class TransportController extends Controller {
 	public function newAction(Request $request) {
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$transportData = new TransportFormData();
 		$form = $this->createForm(new TransportFormType($fileUpload), $transportData);
@@ -38,12 +38,12 @@ class TransportController extends Controller {
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transportEditFacade->create($transport);
-			$flashMessage->addSuccess('Byla vytvořena doprava ' . $transport->getName());
+			$flashMessageText->addSuccess('Byla vytvořena doprava ' . $transport->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
@@ -61,8 +61,8 @@ class TransportController extends Controller {
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
@@ -79,12 +79,12 @@ class TransportController extends Controller {
 
 		if ($form->isValid()) {
 			$transportEditFacade->edit($transport, $formData);
-			$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
+			$flashMessageText->addSuccess('Byla upravena doprava ' . $transport->getName());
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -104,12 +104,12 @@ class TransportController extends Controller {
 	public function deleteAction($id) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		
 		$transportName = $transportEditFacade->getById($id)->getName();
 		$transportEditFacade->deleteById($id);
-		$flashMessage->addSuccess('Doprava ' . $transportName . ' byla odstraněna');
+		$flashMessageText->addSuccess('Doprava ' . $transportName . ' byla odstraněna');
 		
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
