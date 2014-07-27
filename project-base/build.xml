@@ -38,8 +38,8 @@
 	</target>
 	
 	<target name="clean">
-		<mkdir dir="${path.app}/cache" mode="0660"/>
-		<mkdir dir="${path.app}/logs" mode="0660"/>
+		<mkdir dir="${path.app}/cache" mode="0770"/>
+		<mkdir dir="${path.app}/logs" mode="0770"/>
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.app}/cache/">
 				<exclude name="/" />
