@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\TestsDb\Model\FlashMessage;
+namespace SS6\ShopBundle\Tests\Model\FlashMessage;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 

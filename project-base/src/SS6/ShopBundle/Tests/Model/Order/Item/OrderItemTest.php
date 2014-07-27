@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\TestsDb\Model\Order\Item;
+namespace SS6\ShopBundle\Tests\Model\Order\Item;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Order;

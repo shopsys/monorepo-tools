@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\TestsDb\Model\Payment;
+namespace SS6\ShopBundle\Tests\Model\Payment;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Payment\Payment;
