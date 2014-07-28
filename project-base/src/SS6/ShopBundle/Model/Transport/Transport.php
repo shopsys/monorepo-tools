@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Image\EntityImageInterface;
 use SS6\ShopBundle\Model\Image\ImageFileCollection;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
@@ -13,7 +12,7 @@ use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport implements EntityFileUploadInterface, EntityImageInterface {
+class Transport implements EntityFileUploadInterface {
 
 	/**
 	 * @var integer
@@ -123,12 +122,10 @@ class Transport implements EntityFileUploadInterface, EntityImageInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Image\ImageFileCollection
+	 * @return string
 	 */
-	public function getImageFileCollection() {
-		$imageFileCollection = new ImageFileCollection('transport');
-		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName());
-		return $imageFileCollection;
+	public function getImageFilename() {
+		return $this->getId() . '.' . $this->image;
 	}
 
 	/**

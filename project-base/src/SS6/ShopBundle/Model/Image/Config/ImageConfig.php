@@ -21,8 +21,8 @@ class ImageConfig {
 	 * @return string
 	 */
 	public function getEntityName($entity) {
-		$entityConfig = $this->getEntityConfigByEntity($entity);
-		return $entityConfig['name'];
+		$entityConfig = $this->getImageEntityConfig($entity);
+		return $entityConfig->getEntityName();
 	}
 
 	/**
@@ -31,8 +31,8 @@ class ImageConfig {
 	 * @param string|null $sizeName
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig
 	 */
-	public function getImageSizeConfigByEntity($entity, $type = null, $sizeName = null) {
-		$entityConfig = $this->getEntityConfigByEntity($entity);
+	public function getImageSizeConfigByEntity($entity, $type, $sizeName) {
+		$entityConfig = $this->getImageEntityConfig($entity);
 		return $entityConfig->getTypeSize($type, $sizeName);
 	}
 
@@ -42,7 +42,7 @@ class ImageConfig {
 	 * @param string|null $sizeName
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig
 	 */
-	public function getImageSizeConfigByEntityName($entityName, $type = null, $sizeName = null) {
+	public function getImageSizeConfigByEntityName($entityName, $type, $sizeName) {
 		$entityConfig = $this->getEntityConfigByEntityName($entityName);
 		return $entityConfig->getTypeSize($type, $sizeName);
 	}
@@ -52,7 +52,7 @@ class ImageConfig {
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException
 	 */
-	private function getEntityConfigByEntity($entity) {
+	public function getImageEntityConfig($entity) {
 		$className = get_class($entity);
 		if (array_key_exists($className, $this->imageEntityConfigsByClass)) {
 			return $this->imageEntityConfigsByClass[$className];
@@ -75,13 +75,6 @@ class ImageConfig {
 		}
 		
 		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($entityName);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
-	 */
-	public function geEntityConfigsByClass() {
-		return $this->imageEntityConfigsByClass;
 	}
 
 }

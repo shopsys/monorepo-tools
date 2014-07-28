@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Image\EntityImageInterface;
+use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\ImagesEntity;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Extension;
@@ -11,11 +13,6 @@ use Twig_SimpleFunction;
 class ImageExtension extends Twig_Extension {
 
 	const NOIMAGE_FILENAME = 'noimage.gif';
-
-	/**
-	 * @var string
-	 */
-	private $imageDir;
 
 	/**
 	 * @var string
@@ -33,16 +30,34 @@ class ImageExtension extends Twig_Extension {
 	private $request;
 
 	/**
-	 * @param string $imageDir
+	 * @var \SS6\ShopBundle\Model\Image\ImagesEntity
+	 */
+	private $imagesEntity;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
+	 */
+	private $imageConfig;
+
+	/**
 	 * @param string $imageUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+	 * @param \SS6\ShopBundle\Model\Image\ImagesEntity $imagesEntity
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageConfig $imageConfig
 	 */
-	public function __construct($imageDir, $imageUrlPrefix, ContainerInterface $container, RequestStack $requestStack) {
-		$this->imageDir = $imageDir;
+	public function __construct(
+		$imageUrlPrefix,
+		ContainerInterface $container,
+		RequestStack $requestStack,
+		ImagesEntity $imagesEntity,
+		ImageConfig $imageConfig
+	) {
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
 		$this->request = $requestStack->getMasterRequest();
+		$this->imagesEntity = $imagesEntity;
+		$this->imageConfig = $imageConfig;
 	}
 
 	/**
@@ -66,46 +81,69 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\EntityImageInterface $entity
+	 * @param Object $entity
+	 * @param string|null $sizeName
 	 * @param string|null $type
 	 * @return string
 	 */
-	public function getImageUrl(EntityImageInterface $entity, $type = null) {
-		$imageFileCollection = $entity->getImageFileCollection();
-		if ($this->imageExists($entity, $type)) {
-			return $this->request->getBaseUrl() . $this->imageUrlPrefix . $imageFileCollection->getRelativeImageUrl($type);
-		} else {
-			return $this->request->getBaseUrl() . $this->imageUrlPrefix . self::NOIMAGE_FILENAME;
-		}
+	public function imageExists($entity, $sizeName = null, $type = null) {
+		return $this->imagesEntity->imageExists($entity, $type, $sizeName);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\EntityImageInterface $entity
+	 * @param Object $entity
+	 * @param string|null $sizeName
 	 * @param string|null $type
-	 * @param array $attr
 	 * @return string
 	 */
-	public function getImageHtml(EntityImageInterface $entity, $type = null, $attr = array()) {
-		$imageFileCollection = $entity->getImageFileCollection();
-		$imageFile = $imageFileCollection->getImageFile($type);
-		/* @var $imageFile \SS6\ShopBundle\Model\Image\ImageFile */ // NetBeans Intellisense Bug
-		$attr['src'] = $this->getImageUrl($entity, $type);
+	public function getImageUrl($entity, $sizeName = null, $type = null) {
+		if ($this->imagesEntity->imageExists($entity, $type, $sizeName)) {
+			$relativeFilepath = $this->imagesEntity->getRelativeImageFilepath($entity, $type, $sizeName);
+		} else {
+			$relativeFilepath = self::NOIMAGE_FILENAME;
+		}
+		return $this->request->getBaseUrl() . $this->imageUrlPrefix . $relativeFilepath;
+	}
+
+	/**
+	 * @param Object $entity
+	 * @param array $attributtes
+	 * @return string
+	 */
+	public function getImageHtml($entity, $attributtes = array()) {
+		Condition::setArrayDefaultValue($attributtes, 'type');
+		Condition::setArrayDefaultValue($attributtes, 'size');
+		Condition::setArrayDefaultValue($attributtes, 'alt', '');
+		Condition::setArrayDefaultValue($attributtes, 'title', $attributtes['alt']);
+
+		$attributtes['src'] = $this->getImageUrl($entity, $attributtes['size'], $attributtes['type']);
+
+		$htmlAttributes = $attributtes;
+		unset($htmlAttributes['type'], $htmlAttributes['size']);
+		
 		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', array(
-			'attr' => $attr,
-			'category' => $imageFileCollection->getCategory(),
-			'type' => $type,
-			'title' => $imageFile->getTitle(),
+			'attr' => $htmlAttributes,
+			'imageCssClass' => $this->getImageEntityCssClass($entity, $attributtes['type'], $attributtes['size']),
 		));
 	}
 
+
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\EntityImageInterface $entity
+	 * @param Object $entity
 	 * @param string|null $type
+	 * @param string|null $sizeName
+	 * @return string
 	 */
-	public function imageExists(EntityImageInterface $entity, $type = null) {
-		$imageFileCollection = $entity->getImageFileCollection();
-		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $imageFileCollection->getRelativeImageFilepath($type);
-		return is_file($imageFilepath) && is_readable($imageFilepath);
+	private function getImageEntityCssClass($entity, $type, $sizeName) {
+		$allClassParts = array(
+			'image',
+			$imageEntityConfig = $this->imageConfig->getEntityName($entity),
+			$type,
+			$sizeName
+		);
+		$classParts = array_filter($allClassParts);
+
+		return implode('-', $classParts);
 	}
 
 	/**

@@ -1,8 +1,6 @@
 {% block image_html %}
 	{% spaceless %}
-		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' image-' ~ category ~ '-' ~ type|default('default'))|trim}) %}
-		{% set attr = attr|merge({'title': (attr.title|default(title))}) %}
-		{% set attr = attr|merge({'alt': (attr.alt|default(attr.title))}) %}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ imageCssClass)|trim}) %}
 		<img {% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %} />
 	{% endspaceless %}
 {% endblock %}

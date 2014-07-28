@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Image\EntityImageInterface;
 use SS6\ShopBundle\Model\Image\ImageFileCollection;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
@@ -16,7 +15,7 @@ use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
  * @ORM\Table(name="products")
  * @ORM\Entity
  */
-class Product implements EntityFileUploadInterface, EntityImageInterface {
+class Product implements EntityFileUploadInterface {
 
 	/**
 	 * @var integer
@@ -201,6 +200,13 @@ class Product implements EntityFileUploadInterface, EntityImageInterface {
 		$imageFileCollection = new ImageFileCollection('product');
 		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName(), 'default');
 		return $imageFileCollection;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getImageFilename() {
+		return $this->getId() . '.' . $this->image;
 	}
 
 	/**

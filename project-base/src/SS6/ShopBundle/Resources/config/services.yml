@@ -137,6 +137,10 @@ services:
 
   ss6.shop.image.image_config_loader:
     class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
+    
+  ss6.shop.image.images_entity:
+    class: SS6\ShopBundle\Model\Image\ImagesEntity
+    arguments: [%ss6.image_dir%]
 
   ss6.shop.flash_message.text_sender.admin:
     class: SS6\ShopBundle\Model\FlashMessage\TextSender

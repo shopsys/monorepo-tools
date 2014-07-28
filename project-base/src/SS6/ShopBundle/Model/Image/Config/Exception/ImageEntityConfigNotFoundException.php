@@ -18,7 +18,7 @@ class ImageEntityConfigNotFoundException extends Exception implements ImageConfi
 	public function __construct($entityClassOrName, Exception $previous = null) {
 		$this->entityClassOrName = $entityClassOrName;
 
-		$message = sprintf('Not found image config for entity "%s".', get_class($this->entityClassOrName));
+		$message = sprintf('Not found image config for entity "%s".', $this->entityClassOrName);
 		parent::__construct($message, 0, $previous);
 	}
 

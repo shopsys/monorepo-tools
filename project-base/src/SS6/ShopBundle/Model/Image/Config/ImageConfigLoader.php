@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Image\Config;
 
+use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use Symfony\Component\Config\Definition\Processor;
@@ -24,6 +25,11 @@ class ImageConfigLoader {
 	 * @var array
 	 */
 	private $entityNamesCache;
+
+	/**
+	 * @var array
+	 */
+	private $filenameMethodsByType;
 
 	/**
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
@@ -87,6 +93,7 @@ class ImageConfigLoader {
 	private function prepareEntityToEntityConfigsCache($entityConfig) {
 		$entityClass = $entityConfig[ImageConfigDefinition::CONFIG_CLASS];
 		$entityName = $entityConfig[ImageConfigDefinition::CONFIG_ENTITY_NAME];
+		$this->filenameMethodsByType = array();
 
 		if (
 			!array_key_exists($entityClass, $this->entityConfigsCache) &&
@@ -94,9 +101,14 @@ class ImageConfigLoader {
 		) {
 			$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
 			$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
+			if (count($sizes) > 0) {
+				$this->filenameMethodsByType[ImageEntityConfig::WITHOUT_NAME_KEY] =
+					$entityConfig[ImageConfigDefinition::CONFIG_FILENAME_METHOD];
+			}
+			$imageEntityConfig = new ImageEntityConfig($entityName, $entityClass, $this->filenameMethodsByType, $types, $sizes);
 			
 			$this->entityNamesCache[$entityName] = $entityName;
-			$this->entityConfigsCache[$entityClass] = new ImageEntityConfig($entityName, $entityClass, $types, $sizes);
+			$this->entityConfigsCache[$entityClass] = $imageEntityConfig;
 		} else {
 			throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException($entityName);
 		}
@@ -110,7 +122,7 @@ class ImageConfigLoader {
 		$result = array();
 		foreach ($sizes as $size) {
 			$sizeName = $size[ImageConfigDefinition::CONFIG_SIZE_NAME];
-			$key = $sizeName !== null ? $sizeName : ImageEntityConfig::WITHOUT_NAME_KEY;
+			$key = Condition::ifNull($sizeName, ImageEntityConfig::WITHOUT_NAME_KEY);
 			if (!array_key_exists($key, $result)) {
 				$result[$key] = new ImageSizeConfig(
 					$sizeName,
@@ -135,6 +147,7 @@ class ImageConfigLoader {
 		foreach ($types as $type) {
 			$typeName = $type[ImageConfigDefinition::CONFIG_TYPE_NAME];
 			if (!array_key_exists($typeName, $result)) {
+				$this->filenameMethodsByType[$typeName] = $type[ImageConfigDefinition::CONFIG_FILENAME_METHOD];
 				$result[$typeName] = $this->prepareSizes($type[ImageConfigDefinition::CONFIG_SIZES]);
 			} else {
 				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException($typeName);
