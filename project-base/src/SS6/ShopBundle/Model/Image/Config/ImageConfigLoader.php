@@ -57,7 +57,7 @@ class ImageConfigLoader {
 		$inputConfig = $yamlParser->parse(file_get_contents($filename));
 		$outputConfig = $processor->processConfiguration($menuConfiguration, array($inputConfig));
 
-		$preparedConfig = $this->prepareConfig($outputConfig);
+		$preparedConfig = $this->loadFromArray($outputConfig);
 
 		$imageConfig = new ImageConfig($preparedConfig);
 		
@@ -66,9 +66,9 @@ class ImageConfigLoader {
 
 	/**
 	 * @param array $outputConfig
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
 	 */
-	private function prepareConfig($outputConfig) {
+	public function loadFromArray($outputConfig) {
 		$this->entityConfigsCache = array();
 		$this->entityNamesCache = array();
 

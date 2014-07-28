@@ -133,7 +133,7 @@ class ImageEntityConfig {
 	private function getSizeFromSizes($sizes, $sizeName) {
 		$key = Condition::ifNull($sizeName, self::WITHOUT_NAME_KEY);
 		if (array_key_exists($key, $sizes)) {
-			return $sizes[$sizeName];
+			return $sizes[$key];
 		} else {
 			throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageSizeNotFoundException($this->entityClass, $sizeName);
 		}

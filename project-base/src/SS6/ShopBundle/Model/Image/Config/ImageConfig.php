@@ -10,10 +10,10 @@ class ImageConfig {
 	private $imageEntityConfigsByClass;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[] $imageEntityInfoByClass
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[] $imageEntityConfigByClass
 	 */
-	public function __construct(array $imageEntityInfoByClass) {
-		$this->imageEntityConfigsByClass = $imageEntityInfoByClass;
+	public function __construct(array $imageEntityConfigByClass) {
+		$this->imageEntityConfigsByClass = $imageEntityConfigByClass;
 	}
 
 	/**
