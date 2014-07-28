@@ -89,5 +89,16 @@ class OrderRepository {
 		$result = $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
 		return $result;
 	}
+
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getOrdersListQueryBuilder() {
+		return $this->em->createQueryBuilder()
+			->select('o')
+			->from(Order::class, 'o')
+			->where('o.deleted = :deleted')
+			->setParameter('deleted', false);
+	}
 	
 }

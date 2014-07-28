@@ -7,7 +7,6 @@ use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -121,9 +120,10 @@ class OrderController extends Controller {
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$orderRepository = $this->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
-		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
+		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder
 			->select('
 				o.id,
@@ -135,7 +135,6 @@ class OrderController extends Controller {
 							THEN o.companyName
 							ELSE CONCAT(o.firstName, \' \', o.lastName)
 						END) AS customerName')
-			->from(Order::class, 'o')
 			->join('o.status', 'os')
 			->groupBy('o.id');
 
