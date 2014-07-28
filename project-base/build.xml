@@ -27,7 +27,7 @@
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
-	<target name="test-db-rebuild" depends="test-db-drop,test-db-create,test-db-fixtures-base-settings"/>
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo"/>
 	
 	<target name="assetic">
 		<exec executable="php" passthru="true" checkreturn="true">
@@ -178,7 +178,7 @@
 		</exec>
 	</target>
 	
-	<target name="tests-db" depends="test-db-rebuild">
+	<target name="tests-db" depends="test-db-demo">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
@@ -228,6 +228,7 @@
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
