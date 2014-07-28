@@ -56,22 +56,16 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string $password
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function register($firstName, $lastName, $email, $password) {
-		$userByEmail = $this->userRepository->findUserByEmail($email);
+	public function register(CustomerFormData $customerFormData) {
+		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getEmail());
 
 		$billingAddress = new BillingAddress();
 
 		$user = $this->registrationService->create(
-			$firstName,
-			$lastName,
-			$email,
-			$password,
+			$customerFormData,
 			$billingAddress,
 			null,
 			$userByEmail
@@ -85,69 +79,33 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string $password
-	 * @param string|null $telephone
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $deliveryAddressFilled
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryContactPerson
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
-	 * @param string|null $deliveryCountry
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function create($firstName, $lastName, $email, $password,
-			$telephone = null, $companyCustomer = false, $companyName = null, $companyNumber = null,
-			$companyTaxNumber = null, $street = null, $city = null, $postcode = null, $country = null,
-			$deliveryAddressFilled = false, $deliveryCompanyName = null, $deliveryContactPerson = null,
-			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
-			$deliveryCountry = null) {
+	public function create(CustomerFormData $customerFormData) {
 
 		$billingAddress = new BillingAddress(
-			$street,
-			$city,
-			$postcode,
-			$country,
-			$companyCustomer,
-			$companyName,
-			$companyNumber,
-			$companyTaxNumber,
-			$telephone
+			$customerFormData->getStreet(),
+			$customerFormData->getCity(),
+			$customerFormData->getPostcode(),
+			$customerFormData->getCountry(),
+			$customerFormData->getCompanyCustomer(),
+			$customerFormData->getCompanyName(),
+			$customerFormData->getCompanyNumber(),
+			$customerFormData->getCompanyTaxNumber(),
+			$customerFormData->getTelephone()
 		);
 		$this->em->persist($billingAddress);
 
-		$deliveryAddress = $this->registrationService->createDeliveryAddress(
-			$deliveryAddressFilled,
-			$deliveryCompanyName,
-			$deliveryContactPerson,
-			$deliveryStreet,
-			$deliveryCity,
-			$deliveryPostcode,
-			$deliveryCountry,
-			$deliveryTelephone
-		);
+		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerFormData);
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 		}
 
-		$userByEmail = $this->userRepository->findUserByEmail($email);
+		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getEmail());
 
-		$user = $this->registrationService->create($firstName,
-			$lastName,
-			$email,
-			$password,
+		$user = $this->registrationService->create(
+			$customerFormData,
 			$billingAddress,
 			$deliveryAddress,
 			$userByEmail
@@ -161,69 +119,22 @@ class CustomerEditFacade {
 
 	/**
 	 * @param int $userId
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string|null $password
-	 * @param string|null $telephone
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $deliveryAddressFilled
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryContactPerson
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
-	 * @param string|null $deliveryCountry
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	private function edit($userId, $firstName, $lastName, $password = null,
-			$telephone = null, $companyCustomer = false, $companyName = null, $companyNumber = null,
-			$companyTaxNumber = null, $street = null, $city = null, $postcode = null, $country = null,
-			$deliveryAddressFilled = false, $deliveryCompanyName = null, $deliveryContactPerson = null,
-			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
-			$deliveryCountry = null) {
+	private function edit($userId, CustomerFormData $customerFormData) {
 
 		$user = $this->userRepository->getUserById($userId);
 
-		$this->registrationService->edit(
-			$user,
-			$firstName,
-			$lastName,
-			$password
-		);
+		$this->registrationService->edit($user, $customerFormData);
 
-		$this->registrationService->editBillingAddress(
-			$user->getBillingAddress(),
-			$street,
-			$city,
-			$postcode,
-			$country,
-			$companyCustomer,
-			$companyName,
-			$companyNumber,
-			$companyTaxNumber,
-			$telephone
-		);
+		$this->registrationService->editBillingAddress($user->getBillingAddress(), $customerFormData);
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
 		$deliveryAddress = $this->registrationService->editDeliveryAddress(
 			$user,
-			$oldDeliveryAddress,
-			$deliveryAddressFilled,
-			$deliveryCompanyName,
-			$deliveryContactPerson,
-			$deliveryStreet,
-			$deliveryCity,
-			$deliveryPostcode,
-			$deliveryCountry,
-			$deliveryTelephone
+			$customerFormData,
+			$oldDeliveryAddress
 		);
 
 		if ($deliveryAddress !== null) {
@@ -238,63 +149,15 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param int $userId
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string|null $password
-	 * @param string|null $telephone
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $deliveryAddressFilled
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryContactPerson
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
-	 * @param string|null $deliveryCountry
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function editByAdmin($userId, $firstName, $lastName, $email, $password = null,
-			$telephone = null, $companyCustomer = false, $companyName = null, $companyNumber = null,
-			$companyTaxNumber = null, $street = null, $city = null, $postcode = null, $country = null,
-			$deliveryAddressFilled = false, $deliveryCompanyName = null, $deliveryContactPerson = null,
-			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
-			$deliveryCountry = null) {
+	public function editByAdmin($userId, CustomerFormData $customerFormData) {
 
-		$user = $this->edit(
-			$userId,
-			$firstName,
-			$lastName,
-			$password,
-			$telephone,
-			$companyCustomer,
-			$companyName,
-			$companyNumber,
-			$companyTaxNumber,
-			$street,
-			$city,
-			$postcode,
-			$country,
-			$deliveryAddressFilled,
-			$deliveryCompanyName,
-			$deliveryContactPerson,
-			$deliveryTelephone,
-			$deliveryStreet,
-			$deliveryCity,
-			$deliveryPostcode,
-			$deliveryCountry
-		);
+		$user = $this->edit($userId, $customerFormData);
 
-		$userByEmail = $this->userRepository->findUserByEmail($email);
-		$this->registrationService->changeEmail($user, $email, $userByEmail);
+		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getEmail());
+		$this->registrationService->changeEmail($user, $customerFormData->getEmail(), $userByEmail);
 
 		$this->em->flush();
 
@@ -303,57 +166,14 @@ class CustomerEditFacade {
 
 	/**
 	 * @param int $userId
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string|null $password
-	 * @param string|null $telephone
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $deliveryAddressFilled
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryContactPerson
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
-	 * @param string|null $deliveryCountry
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function editByCustomer($userId, $firstName, $lastName, $password = null,
-			$telephone = null, $companyCustomer = false, $companyName = null, $companyNumber = null,
-			$companyTaxNumber = null, $street = null, $city = null, $postcode = null, $country = null,
-			$deliveryAddressFilled = false, $deliveryCompanyName = null, $deliveryContactPerson = null,
-			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null,
-			$deliveryPostcode = null, $deliveryCountry = null) {
+	public function editByCustomer($userId, CustomerFormData $customerFormData) {
 
 		$user = $this->edit(
 			$userId,
-			$firstName,
-			$lastName,
-			$password,
-			$telephone,
-			$companyCustomer,
-			$companyName,
-			$companyNumber,
-			$companyTaxNumber,
-			$street,
-			$city,
-			$postcode,
-			$country,
-			$deliveryAddressFilled,
-			$deliveryCompanyName,
-			$deliveryContactPerson,
-			$deliveryTelephone,
-			$deliveryStreet,
-			$deliveryCity,
-			$deliveryPostcode,
-			$deliveryCountry
+			$customerFormData
 		);
 		
 		$this->em->flush();

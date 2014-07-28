@@ -109,24 +109,25 @@ class BillingAddress {
 		$this->telephone = $telephone;
 	}
 
-	public function edit($street = null, $city = null, $postcode = null, $country = null,
-			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$telephone = null) {
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->country = $country;
-		$this->companyCustomer = $companyCustomer;
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 */
+	public function edit(CustomerFormData $customerFormData) {
+		$this->street = $customerFormData->getStreet();
+		$this->city = $customerFormData->getCity();
+		$this->postcode = $customerFormData->getPostcode();
+		$this->country = $customerFormData->getCountry();
+		$this->companyCustomer = $customerFormData->getCompanyCustomer();
 		if ($this->companyCustomer) {
-			$this->companyName = $companyName;
-			$this->companyNumber = $companyNumber;
-			$this->companyTaxNumber = $companyTaxNumber;
+			$this->companyName = $customerFormData->getCompanyName();
+			$this->companyNumber = $customerFormData->getCompanyNumber();
+			$this->companyTaxNumber = $customerFormData->getCompanyTaxNumber();
 		} else {
 			$this->companyName = null;
 			$this->companyNumber = null;
 			$this->companyTaxNumber = null;
 		}
-		$this->telephone = $telephone;
+		$this->telephone = $customerFormData->getTelephone();
 	}
 
 	/**

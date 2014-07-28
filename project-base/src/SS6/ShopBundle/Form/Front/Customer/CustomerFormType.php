@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
+use SS6\ShopBundle\Model\Customer\CustomerFormData;
+use SS6\ShopBundle\Form\Front\Customer\UserFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -117,16 +119,18 @@ class CustomerFormType extends AbstractType {
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
+			'data_class' => CustomerFormData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 			'validation_groups' => function(FormInterface $form) {
 				$validationGroups = array('Default');
 
-				$data = $form->getData();
+				$customerFormData = $form->getData();
+				/* @var $customerFormData \SS6\ShopBundle\Model\Customer\CustomerFormData */
 
-				if ($data['companyCustomer']) {
+				if ($customerFormData->getCompanyCustomer()) {
 					$validationGroups[] = 'companyCustomer';
 				}
-				if ($data['deliveryAddressFilled']) {
+				if ($customerFormData->getDeliveryAddressFilled()) {
 					$validationGroups[] = 'differentDeliveryAddress';
 				}
 				

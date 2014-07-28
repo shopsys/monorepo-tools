@@ -19,95 +19,76 @@ class RegistrationService {
 	}
 
 	/**
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string $password
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
-	public function create($firstName, $lastName, $email, $password,
-			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
-			User $userByEmail = null) {
+	public function create(
+		CustomerFormData $customerFormData,
+		BillingAddress $billingAddress,
+		DeliveryAddress $deliveryAddress = null,
+		User $userByEmail = null
+	) {
 		if ($userByEmail instanceof User) {
-			if ($userByEmail->getEmail() === $email) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
+			if ($userByEmail->getEmail() === $customerFormData->getEmail()) {
+				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($customerFormData->getEmail());
 			}
 		}
 
-		$user = new User($firstName, $lastName, $email, $billingAddress, $deliveryAddress);
-		$this->changePassword($user, $password);
+		$user = new User(
+			$customerFormData->getFirstName(),
+			$customerFormData->getLastName(),
+			$customerFormData->getEmail(),
+			$billingAddress,
+			$deliveryAddress
+		);
+		$this->changePassword($user, $customerFormData->getPassword());
 
 		return $user;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string|null $password
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData
 	 */
-	public function edit(User $user, $firstName, $lastName, $password = null) {
-		$user->edit($firstName, $lastName);
+	public function edit(User $user, CustomerFormData $customerFormData) {
+		$user->edit($customerFormData);
 
-		if ($password !== null) {
-			$this->changePassword($user, $password);
+		if ($customerFormData->getPassword() !== null) {
+			$this->changePassword($user, $customerFormData->getPassword());
 		}
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
 	 */
-	public function editBillingAddress(BillingAddress $billingAddress,
-			$street = null, $city = null, $postcode = null, $country = null,
-			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$telephone = null) {
-
-		$billingAddress->edit(
-			$street,
-			$city,
-			$postcode,
-			$country,
-			$companyCustomer,
-			$companyName,
-			$companyNumber,
-			$companyTaxNumber,
-			$telephone
-		);
+	public function editBillingAddress(BillingAddress $billingAddress, CustomerFormData $customerFormData) {
+		$billingAddress->edit($customerFormData);
 
 		return $billingAddress;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 * @param boolean $addressFilled
-	 * @param string|null $companyName
-	 * @param string|null $contactPerson
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData
 	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
-	public function createDeliveryAddress($addressFilled = false, $companyName = null, $contactPerson = null,
-			$street = null, $city = null, $postcode = null, $country = null, $telephone = null) {
+	public function createDeliveryAddress(CustomerFormData $customerFormData) {
 
-		if ($addressFilled) {
-			$deliveryAddress = new DeliveryAddress($street, $city, $postcode, $country, $companyName, $contactPerson, $telephone);
+		if ($customerFormData->getDeliveryAddressFilled()) {
+			$deliveryAddress = new DeliveryAddress(
+				$customerFormData->getDeliveryStreet(),
+				$customerFormData->getDeliveryCity(),
+				$customerFormData->getDeliveryPostcode(),
+				$customerFormData->getDeliveryCountry(),
+				$customerFormData->getDeliveryCompanyName(),
+				$customerFormData->getDeliveryContactPerson(),
+				$customerFormData->getDeliveryTelephone()
+			);
 		} else {
 			$deliveryAddress = null;
 		}
@@ -117,26 +98,26 @@ class RegistrationService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 * @param boolean $addressFilled
-	 * @param string|null $companyName
-	 * @param string|null $contactPerson
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param string|null $telephone
 	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
-	public function editDeliveryAddress(User $user, DeliveryAddress $deliveryAddress = null,
-			$addressFilled = false, $companyName = null, $contactPerson = null, $street = null,
-			$city = null, $postcode = null, $country = null, $telephone = null) {
+	public function editDeliveryAddress(User $user, CustomerFormData $customerFormData,
+		DeliveryAddress $deliveryAddress = null) {
 
-		if ($addressFilled) {
+		if ($customerFormData->getDeliveryAddressFilled()) {
 			if ($deliveryAddress instanceof DeliveryAddress) {
-				$deliveryAddress->edit($street, $city, $postcode, $country, $companyName, $contactPerson, $telephone);
+				$deliveryAddress->edit($customerFormData);
 			} else {
-				$deliveryAddress = new DeliveryAddress($street, $city, $postcode, $country, $companyName, $contactPerson, $telephone);
+				$deliveryAddress = new DeliveryAddress(
+					$customerFormData->getDeliveryStreet(),
+					$customerFormData->getDeliveryCity(),
+					$customerFormData->getDeliveryPostcode(),
+					$customerFormData->getDeliveryCountry(),
+					$customerFormData->getDeliveryCompanyName(),
+					$customerFormData->getDeliveryContactPerson(),
+					$customerFormData->getDeliveryTelephone()
+				);
 				$user->setDeliveryAddress($deliveryAddress);
 			}
 		} else {

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Registration;
 
+use SS6\ShopBundle\Model\Customer\CustomerFormData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -55,6 +56,7 @@ class RegistrationFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
+			'data_class' => CustomerFormData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}
