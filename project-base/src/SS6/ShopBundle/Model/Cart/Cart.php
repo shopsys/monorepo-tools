@@ -38,7 +38,7 @@ class Cart {
 	/**
 	 * @param int $cartItemId
 	 */
-	public function removeItem($cartItemId) {
+	public function removeItemById($cartItemId) {
 		foreach ($this->cartItems as $key => $cartItem) {
 			if ($cartItem->getId() === $cartItemId) {
 				unset($this->cartItems[$key]);

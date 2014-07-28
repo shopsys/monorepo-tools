@@ -77,7 +77,7 @@ class CartFacade {
 	 */
 	public function deleteCartItem($cartItemId) {
 		$cartItemToDelete = $this->cartService->getCartItemById($this->cart, $cartItemId);
-		$this->cart->removeItem($cartItemId);
+		$this->cart->removeItemById($cartItemId);
 		$this->em->remove($cartItemToDelete);
 		$this->em->flush();
 	}

@@ -46,7 +46,7 @@ class CartWatcherFacade {
 		foreach ($notVisibleItems as $cartItem) {
 			$this->flashMessage->addError('Zboží ' . $cartItem->getName() .
 				', které jste měl v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.');
-			$cart->removeItem($cartItem);
+			$cart->removeItemById($cartItem->getId());
 			$this->em->remove($cartItem);
 		}
 

@@ -32,7 +32,7 @@ class CartTest extends DatabaseTestCase {
 		$em->persist($cartItem2);
 		$em->flush();
 
-		$cart->removeItem($cartItem1->getId());
+		$cart->removeItemById($cartItem1->getId());
 		$this->assertEquals(1, $cart->getItemsCount());
 	}
 
