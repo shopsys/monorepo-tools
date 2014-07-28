@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Customer;
 
+use SS6\ShopBundle\Model\Customer\CustomerFormData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -37,38 +38,8 @@ class CustomerFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('id', 'integer', array('read_only' => true, 'required' => false))
-			->add('firstName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				),
-			))
-			->add('lastName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				),
-			))
+			->add('user', new UserFormType($this->scenario))
 			->add('telephone', 'text', array('required' => false))
-			->add('email', 'email', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				)
-			))
-			->add('password', 'repeated', array(
-				'type' => 'password',
-				'required' => $this->scenario === self::SCENARIO_CREATE,
-				'first_options' => array(
-					'constraints' => array(
-						new Constraints\NotBlank(array(
-							'message' => 'Vyplňte prosím heslo',
-							'groups' => array('create'),
-						)),
-						new Constraints\Length(array('min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					)
-				),
-				'invalid_message' => 'Hesla se neshodují',
-			))
 			->add('companyCustomer', 'checkbox', array('required' => false))
 			->add('companyName', 'text', array(
 				'required' => true,

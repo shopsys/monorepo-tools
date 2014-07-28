@@ -56,16 +56,16 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserFormData $userFormData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function register(CustomerFormData $customerFormData) {
-		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getEmail());
+	public function register(UserFormData $userFormData) {
+		$userByEmail = $this->userRepository->findUserByEmail($userFormData->getEmail());
 
 		$billingAddress = new BillingAddress();
 
 		$user = $this->registrationService->create(
-			$customerFormData,
+			$userFormData,
 			$billingAddress,
 			null,
 			$userByEmail
@@ -102,10 +102,10 @@ class CustomerEditFacade {
 			$this->em->persist($deliveryAddress);
 		}
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getEmail());
+		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getUser()->getEmail());
 
 		$user = $this->registrationService->create(
-			$customerFormData,
+			$customerFormData->getUser(),
 			$billingAddress,
 			$deliveryAddress,
 			$userByEmail
@@ -126,7 +126,7 @@ class CustomerEditFacade {
 
 		$user = $this->userRepository->getUserById($userId);
 
-		$this->registrationService->edit($user, $customerFormData);
+		$this->registrationService->edit($user, $customerFormData->getUser());
 
 		$this->registrationService->editBillingAddress($user->getBillingAddress(), $customerFormData);
 
@@ -156,8 +156,8 @@ class CustomerEditFacade {
 
 		$user = $this->edit($userId, $customerFormData);
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getEmail());
-		$this->registrationService->changeEmail($user, $customerFormData->getEmail(), $userByEmail);
+		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getUser()->getEmail());
+		$this->registrationService->changeEmail($user, $customerFormData->getUser()->getEmail(), $userByEmail);
 
 		$this->em->flush();
 

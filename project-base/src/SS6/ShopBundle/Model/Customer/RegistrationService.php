@@ -19,46 +19,43 @@ class RegistrationService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserFormData $userFormData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
-	public function create(
-		CustomerFormData $customerFormData,
-		BillingAddress $billingAddress,
-		DeliveryAddress $deliveryAddress = null,
-		User $userByEmail = null
-	) {
+	public function create(UserFormData $userFormData,
+			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
+			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
-			if ($userByEmail->getEmail() === $customerFormData->getEmail()) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($customerFormData->getEmail());
+			if ($userByEmail->getEmail() === $userFormData->getEmail()) {
+				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userFormData->getEmail());
 			}
 		}
 
 		$user = new User(
-			$customerFormData->getFirstName(),
-			$customerFormData->getLastName(),
-			$customerFormData->getEmail(),
+			$userFormData->getFirstName(),
+			$userFormData->getLastName(),
+			$userFormData->getEmail(),
 			$billingAddress,
 			$deliveryAddress
 		);
-		$this->changePassword($user, $customerFormData->getPassword());
+		$this->changePassword($user, $userFormData->getPassword());
 
 		return $user;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserFormData
 	 */
-	public function edit(User $user, CustomerFormData $customerFormData) {
-		$user->edit($customerFormData);
+	public function edit(User $user, UserFormData $userFormData) {
+		$user->edit($userFormData);
 
-		if ($customerFormData->getPassword() !== null) {
-			$this->changePassword($user, $customerFormData->getPassword());
+		if ($userFormData->getPassword() !== null) {
+			$this->changePassword($user, $userFormData->getPassword());
 		}
 	}
 

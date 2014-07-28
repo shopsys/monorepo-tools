@@ -97,11 +97,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserFormData $userFormData
 	 */
-	public function edit($customerFormData) {
-		$this->firstName = $customerFormData->getFirstName();
-		$this->lastName = $customerFormData->getLastName();
+	public function edit($userFormData) {
+		$this->firstName = $userFormData->getFirstName();
+		$this->lastName = $userFormData->getLastName();
 	}
 
 	/**

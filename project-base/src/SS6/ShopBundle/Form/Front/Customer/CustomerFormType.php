@@ -22,34 +22,13 @@ class CustomerFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
-	 * 
+	 *
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				),
-			))
-			->add('lastName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				),
-			))
+			->add('user', new UserFormType())
 			->add('telephone', 'text', array('required' => false))
-			->add('email', 'email', array('read_only' => true, 'required' => false))
-			->add('password', 'repeated', array(
-				'type' => 'password',
-				'required' => false,
-				'first_options' => array(
-					'constraints' => array(
-						new Constraints\Length(array('min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					),
-					'attr' => array('autocomplete' => 'off'),
-				),
-				'invalid_message' => 'Hesla se neshodují',
-			))
 			->add('companyCustomer', 'checkbox', array('required' => false))
 			->add('companyName', 'text', array(
 				'required' => true,
@@ -133,7 +112,7 @@ class CustomerFormType extends AbstractType {
 				if ($customerFormData->getDeliveryAddressFilled()) {
 					$validationGroups[] = 'differentDeliveryAddress';
 				}
-				
+
 				return $validationGroups;
 			},
 		));

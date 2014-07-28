@@ -4,7 +4,7 @@
 {% block h1 %}Editace zákazníka - {{ user.fullName }}{% endblock %}
 
 {% block customer_id %}
-	{{ form_row(form.id, { label: 'ID'}) }}
+	{{ form_row(form.user.id, { label: 'ID'}) }}
 {% endblock %}
 
 {% block customer_created_at %}

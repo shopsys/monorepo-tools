@@ -13,19 +13,19 @@
 
 				<h2>Systémové údaje</h2>
 				{% block customer_id %}
-					{{ form_widget(form.id, { type: 'hidden' }) }}
+					{{ form_widget(form.user.id, { type: 'hidden' }) }}
 				{% endblock %}
 				{% block customer_created_at %}{% endblock %}
 
 				<h2>Osobní údaje</h2>
-				{{ form_row(form.firstName, { label: 'Jméno'}) }}
-				{{ form_row(form.lastName, { label: 'Příjmení'}) }}
+				{{ form_row(form.user.firstName, { label: 'Jméno'}) }}
+				{{ form_row(form.user.lastName, { label: 'Příjmení'}) }}
 				{{ form_row(form.telephone, { label: 'Telefon'}) }}
-				{{ form_row(form.email, { label: 'Email'}) }}
+				{{ form_row(form.user.email, { label: 'Email'}) }}
 				
 				<h2>Registrovaní zák.</h2>
-				{{ form_row(form.password.first, { label: 'Heslo'}) }}
-				{{ form_row(form.password.second, { label: 'Heslo znovu'}) }}
+				{{ form_row(form.user.password.first, { label: 'Heslo'}) }}
+				{{ form_row(form.user.password.second, { label: 'Heslo znovu'}) }}
 				{% block customer_last_login %}{% endblock %}
 
 				<h2>Firemní údaje</h2>

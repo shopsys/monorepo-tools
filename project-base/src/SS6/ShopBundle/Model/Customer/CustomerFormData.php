@@ -8,29 +8,9 @@ namespace SS6\ShopBundle\Model\Customer;
 class CustomerFormData {
 
 	/**
-	 * @var int
+	 * @var \SS6\ShopBundle\Model\Customer\UserFormData
 	 */
-	private $id;
-
-	/**
-	 * @var string
-	 */
-	private $firstName;
-
-	/**
-	 * @var string
-	 */
-	private $lastName;
-
-	/**
-	 * @var string
-	 */
-	private $email;
-
-	/**
-	 * @var string
-	 */
-	private $password;
+	private $user;
 
 	/**
 	 * @var string
@@ -117,24 +97,12 @@ class CustomerFormData {
 	 */
 	private $deliveryCountry;
 
-	public function getId() {
-		return $this->id;
+	public function __construct() {
+		$this->user = new UserFormData();
 	}
 
-	public function getFirstName() {
-		return $this->firstName;
-	}
-
-	public function getLastName() {
-		return $this->lastName;
-	}
-
-	public function getEmail() {
-		return $this->email;
-	}
-
-	public function getPassword() {
-		return $this->password;
+	public function getUser() {
+		return $this->user;
 	}
 
 	public function getTelephone() {
@@ -205,24 +173,8 @@ class CustomerFormData {
 		return $this->deliveryCountry;
 	}
 
-	public function setId($id) {
-		$this->id = $id;
-	}
-
-	public function setFirstName($firstName) {
-		$this->firstName = $firstName;
-	}
-
-	public function setLastName($lastName) {
-		$this->lastName = $lastName;
-	}
-
-	public function setEmail($email) {
-		$this->email = $email;
-	}
-
-	public function setPassword($password) {
-		$this->password = $password;
+	public function setUser(UserFormData $userFormData) {
+		$this->user = $userFormData;
 	}
 
 	public function setTelephone($telephone) {
@@ -294,11 +246,8 @@ class CustomerFormData {
 	}
 
 	public function setFromEntity(User $user) {
-		$this->id = $user->getId();
-		$this->firstName = $user->getFirstName();
-		$this->lastName = $user->getLastName();
+		$this->user->setFromEntity($user);
 		$this->telephone = $user->getBillingAddress()->getTelephone();
-		$this->email = $user->getEmail();
 		$this->companyCustomer = $user->getBillingAddress()->isCompanyCustomer();
 		$this->companyName = $user->getBillingAddress()->getCompanyName();
 		$this->companyNumber = $user->getBillingAddress()->getCompanyNumber();

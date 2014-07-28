@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\CustomerFormData;
+use SS6\ShopBundle\Model\Customer\UserFormData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -95,14 +95,14 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 			$firstName, $lastName, $email, $password,
 			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null) {
 
-		$customerFormData = new CustomerFormData();
-		$customerFormData->setFirstName($firstName);
-		$customerFormData->setLastName($lastName);
-		$customerFormData->setEmail($email);
-		$customerFormData->setPassword($password);
+		$userFormData = new UserFormData();
+		$userFormData->setFirstName($firstName);
+		$userFormData->setLastName($lastName);
+		$userFormData->setEmail($email);
+		$userFormData->setPassword($password);
 
 		$user = $registrationService->create(
-			$customerFormData,
+			$userFormData,
 			$billingAddress,
 			$deliveryAddress
 		);
