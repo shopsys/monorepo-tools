@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Image\ImageFileCollection;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
@@ -191,15 +190,6 @@ class Product implements EntityFileUploadInterface {
 		} else {
 			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
 		}
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Image\ImageFileCollection
-	 */
-	public function getImageFileCollection() {
-		$imageFileCollection = new ImageFileCollection('product');
-		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName(), 'default');
-		return $imageFileCollection;
 	}
 
 	/**

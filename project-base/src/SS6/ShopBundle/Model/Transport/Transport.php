@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Image\ImageFileCollection;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
