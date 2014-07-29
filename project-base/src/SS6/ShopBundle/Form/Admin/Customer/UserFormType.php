@@ -34,7 +34,6 @@ class UserFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('firstName', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),

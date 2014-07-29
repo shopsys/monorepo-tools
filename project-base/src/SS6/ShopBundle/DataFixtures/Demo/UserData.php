@@ -5,8 +5,10 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
+use SS6\ShopBundle\Model\Customer\BillingAddressFormData;
 use SS6\ShopBundle\Model\Customer\UserFormData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
+use SS6\ShopBundle\Model\Customer\DeliveryAddressFormData;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -39,7 +41,7 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 			'Watson',
 			'no-reply@netdevelo.cz',
 			'user123',
-			new BillingAddress(
+			new BillingAddress(new BillingAddressFormData(
 				'Hlubinská 36',
 				'Ostrava',
 				'70200',
@@ -49,8 +51,8 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 				'123456789',
 				'987654321',
 				'+420123456789'
-			),
-			new DeliveryAddress(
+			)),
+			new DeliveryAddress(new DeliveryAddressFormData(
 				'Slévárenská 18/408',
 				'Ostrava',
 				'70900',
@@ -58,7 +60,7 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 				'netdevelo s.r.o.',
 				'John Doe',
 				'+420987654321'
-			)
+			))
 		);
 
 		$this->createCustomer($manager, $registrationService,
@@ -66,7 +68,7 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 			'Bill',
 			'Carole@maida.biz',
 			'asdfasdf',
-			new BillingAddress(
+			new BillingAddress(new BillingAddressFormData(
 				'65597 Candido Cape',
 				'Larkinside',
 				'72984-3630',
@@ -76,8 +78,8 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 				null,
 				null,
 				'1-478-693-5236 x8701'
-			),
-			new DeliveryAddress(
+			)),
+			new DeliveryAddress(new DeliveryAddressFormData(
 				'91147 Reinger Via',
 				'Blandaville',
 				'60081',
@@ -85,7 +87,7 @@ class UserData extends AbstractFixture implements ContainerAwareInterface {
 				null,
 				'Sporer Leda',
 				'576-124-5478 x1457'
-			)
+			))
 		);
 
 		$manager->flush();

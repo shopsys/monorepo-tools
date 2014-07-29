@@ -5,11 +5,6 @@ namespace SS6\ShopBundle\Model\Customer;
 class UserFormData {
 
 	/**
-	 * @var int
-	 */
-	private $id;
-
-	/**
 	 * @var string
 	 */
 	private $firstName;
@@ -29,8 +24,17 @@ class UserFormData {
 	 */
 	private $password;
 
-	public function getId() {
-		return $this->id;
+	/**
+	 * @param string $firstName
+	 * @param string $lastName
+	 * @param string $email
+	 * @param string $password
+	 */
+	public function __construct($firstName = null, $lastName = null, $email = null, $password = null) {
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
+		$this->email = $email;
+		$this->password = $password;
 	}
 
 	public function getFirstName() {
@@ -47,10 +51,6 @@ class UserFormData {
 
 	public function getPassword() {
 		return $this->password;
-	}
-
-	public function setId($id) {
-		$this->id = $id;
 	}
 
 	public function setFirstName($firstName) {
@@ -70,7 +70,6 @@ class UserFormData {
 	}
 
 	public function setFromEntity(User $user) {
-		$this->id = $user->getId();
 		$this->firstName = $user->getFirstName();
 		$this->lastName = $user->getLastName();
 		$this->email = $user->getEmail();

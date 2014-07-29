@@ -93,20 +93,18 @@ class BillingAddress {
 	 * @param string|null $companyTaxNumber
 	 * @param string|null $telephone
 	 */
-	public function __construct($street = null, $city = null, $postcode = null, $country = null,
-			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$telephone = null) {
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->country = $country;
-		$this->companyCustomer = $companyCustomer;
+	public function __construct(BillingAddressFormData $billingAddressFormData) {
+		$this->street = $billingAddressFormData->getStreet();
+		$this->city = $billingAddressFormData->getCity();
+		$this->postcode = $billingAddressFormData->getPostcode();
+		$this->country = $billingAddressFormData->getCountry();
+		$this->companyCustomer = $billingAddressFormData->getCompanyCustomer();
 		if ($this->companyCustomer) {
-			$this->companyName = $companyName;
-			$this->companyNumber = $companyNumber;
-			$this->companyTaxNumber = $companyTaxNumber;
+			$this->companyName = $billingAddressFormData->getCompanyName();
+			$this->companyNumber = $billingAddressFormData->getCompanyNumber();
+			$this->companyTaxNumber = $billingAddressFormData->getCompanyTaxNumber();
 		}
-		$this->telephone = $telephone;
+		$this->telephone = $billingAddressFormData->getTelephone();
 	}
 
 	/**

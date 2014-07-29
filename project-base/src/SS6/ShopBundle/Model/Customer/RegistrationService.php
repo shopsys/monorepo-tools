@@ -36,9 +36,7 @@ class RegistrationService {
 		}
 
 		$user = new User(
-			$userFormData->getFirstName(),
-			$userFormData->getLastName(),
-			$userFormData->getEmail(),
+			$userFormData,
 			$billingAddress,
 			$deliveryAddress
 		);
@@ -60,32 +58,13 @@ class RegistrationService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressFormData $billingAddressFormData
-	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
-	 */
-	public function editBillingAddress(BillingAddress $billingAddress, BillingAddressFormData $billingAddressFormData) {
-		$billingAddress->edit($billingAddressFormData);
-
-		return $billingAddress;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressFormData
 	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
 	public function createDeliveryAddress(DeliveryAddressFormData $deliveryAddressFormData) {
 
 		if ($deliveryAddressFormData->getAddressFilled()) {
-			$deliveryAddress = new DeliveryAddress(
-				$deliveryAddressFormData->getStreet(),
-				$deliveryAddressFormData->getCity(),
-				$deliveryAddressFormData->getPostcode(),
-				$deliveryAddressFormData->getCountry(),
-				$deliveryAddressFormData->getCompanyName(),
-				$deliveryAddressFormData->getContactPerson(),
-				$deliveryAddressFormData->getTelephone()
-			);
+			$deliveryAddress = new DeliveryAddress($deliveryAddressFormData);
 		} else {
 			$deliveryAddress = null;
 		}
@@ -106,15 +85,7 @@ class RegistrationService {
 			if ($deliveryAddress instanceof DeliveryAddress) {
 				$deliveryAddress->edit($deliveryAddressFormData);
 			} else {
-				$deliveryAddress = new DeliveryAddress(
-					$deliveryAddressFormData->getStreet(),
-					$deliveryAddressFormData->getCity(),
-					$deliveryAddressFormData->getPostcode(),
-					$deliveryAddressFormData->getCountry(),
-					$deliveryAddressFormData->getCompanyName(),
-					$deliveryAddressFormData->getContactPerson(),
-					$deliveryAddressFormData->getTelephone()
-				);
+				$deliveryAddress = new DeliveryAddress($deliveryAddressFormData);
 				$user->setDeliveryAddress($deliveryAddress);
 			}
 		} else {

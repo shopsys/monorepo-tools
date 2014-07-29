@@ -12,9 +12,7 @@
 				{{ form_errors(form) }}
 
 				<h2>Systémové údaje</h2>
-				{% block customer_id %}
-					{{ form_widget(form.user.id, { type: 'hidden' }) }}
-				{% endblock %}
+				{% block customer_id %}{% endblock %}
 				{% block customer_created_at %}{% endblock %}
 
 				<h2>Osobní údaje</h2>

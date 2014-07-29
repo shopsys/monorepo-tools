@@ -44,6 +44,24 @@ class DeliveryAddressFormData {
 	 */
 	private $country;
 
+	public function __construct(
+		$street = null,
+		$city = null,
+		$postcode = null,
+		$country = null,
+		$companyName = null,
+		$contactPerson = null,
+		$telephone = null
+	) {
+		$this->street = $street;
+		$this->city = $city;
+		$this->postcode = $postcode;
+		$this->country = $country;
+		$this->companyName = $companyName;
+		$this->contactPerson = $contactPerson;
+		$this->telephone = $telephone;
+	}
+
 	public function getAddressFilled() {
 		return $this->addressFilled;
 	}

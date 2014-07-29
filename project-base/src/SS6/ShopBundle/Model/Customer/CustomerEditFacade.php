@@ -62,7 +62,7 @@ class CustomerEditFacade {
 	public function register(UserFormData $userFormData) {
 		$userByEmail = $this->userRepository->findUserByEmail($userFormData->getEmail());
 
-		$billingAddress = new BillingAddress();
+		$billingAddress = new BillingAddress(new BillingAddressFormData());
 
 		$user = $this->registrationService->create(
 			$userFormData,
@@ -83,18 +83,7 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function create(CustomerFormData $customerFormData) {
-
-		$billingAddress = new BillingAddress(
-			$customerFormData->getBillingAddress()->getStreet(),
-			$customerFormData->getBillingAddress()->getCity(),
-			$customerFormData->getBillingAddress()->getPostcode(),
-			$customerFormData->getBillingAddress()->getCountry(),
-			$customerFormData->getBillingAddress()->getCompanyCustomer(),
-			$customerFormData->getBillingAddress()->getCompanyName(),
-			$customerFormData->getBillingAddress()->getCompanyNumber(),
-			$customerFormData->getBillingAddress()->getCompanyTaxNumber(),
-			$customerFormData->getBillingAddress()->getTelephone()
-		);
+		$billingAddress = new BillingAddress($customerFormData->getBillingAddress());
 		$this->em->persist($billingAddress);
 
 		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerFormData->getDeliveryAddress());
@@ -123,15 +112,11 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	private function edit($userId, CustomerFormData $customerFormData) {
-
 		$user = $this->userRepository->getUserById($userId);
 
 		$this->registrationService->edit($user, $customerFormData->getUser());
 
-		$this->registrationService->editBillingAddress(
-			$user->getBillingAddress(),
-			$customerFormData->getBillingAddress()
-		);
+		$user->getBillingAddress()->edit($customerFormData->getBillingAddress());
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
 		$deliveryAddress = $this->registrationService->editDeliveryAddress(
@@ -156,7 +141,6 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function editByAdmin($userId, CustomerFormData $customerFormData) {
-
 		$user = $this->edit($userId, $customerFormData);
 
 		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getUser()->getEmail());
@@ -173,11 +157,7 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function editByCustomer($userId, CustomerFormData $customerFormData) {
-
-		$user = $this->edit(
-			$userId,
-			$customerFormData
-		);
+		$user = $this->edit($userId, $customerFormData);
 		
 		$this->em->flush();
 
