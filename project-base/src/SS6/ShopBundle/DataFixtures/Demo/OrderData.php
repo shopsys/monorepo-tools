@@ -231,7 +231,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			ProductData::class,
 			TransportData::class,
 			PaymentData::class,
-			UserData::class,
+			UserDataFixture::class,
 			OrderStatusData::class,
 		);
 	}

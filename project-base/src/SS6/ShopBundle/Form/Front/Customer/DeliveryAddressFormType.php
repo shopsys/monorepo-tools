@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
-use SS6\ShopBundle\Model\Customer\DeliveryAddressFormData;
+use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -68,15 +68,15 @@ class DeliveryAddressFormType extends AbstractType {
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => DeliveryAddressFormData::class,
+			'data_class' => DeliveryAddressData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 			'validation_groups' => function(FormInterface $form) {
 				$validationGroups = array('Default');
 
-				$deliveryAddressFormData = $form->getData();
-				/* @var $customerFormData \SS6\ShopBundle\Model\Customer\DeliveryAddressFormData */
+				$deliveryAddressData = $form->getData();
+				/* @var $customerData \SS6\ShopBundle\Model\Customer\DeliveryAddressData */
 
-				if ($deliveryAddressFormData->getAddressFilled()) {
+				if ($deliveryAddressData->getAddressFilled()) {
 					$validationGroups[] = 'differentDeliveryAddress';
 				}
 

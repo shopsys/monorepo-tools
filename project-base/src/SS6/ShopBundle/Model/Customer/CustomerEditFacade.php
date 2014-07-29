@@ -56,16 +56,16 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\UserFormData $userFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function register(UserFormData $userFormData) {
-		$userByEmail = $this->userRepository->findUserByEmail($userFormData->getEmail());
+	public function register(UserData $userData) {
+		$userByEmail = $this->userRepository->findUserByEmail($userData->getEmail());
 
-		$billingAddress = new BillingAddress(new BillingAddressFormData());
+		$billingAddress = new BillingAddress(new BillingAddressData());
 
 		$user = $this->registrationService->create(
-			$userFormData,
+			$userData,
 			$billingAddress,
 			null,
 			$userByEmail
@@ -79,22 +79,22 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function create(CustomerFormData $customerFormData) {
-		$billingAddress = new BillingAddress($customerFormData->getBillingAddress());
+	public function create(CustomerData $customerData) {
+		$billingAddress = new BillingAddress($customerData->getBillingAddress());
 		$this->em->persist($billingAddress);
 
-		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerFormData->getDeliveryAddress());
+		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->getDeliveryAddress());
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 		}
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getUser()->getEmail());
+		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUser()->getEmail());
 
 		$user = $this->registrationService->create(
-			$customerFormData->getUser(),
+			$customerData->getUser(),
 			$billingAddress,
 			$deliveryAddress,
 			$userByEmail
@@ -108,20 +108,20 @@ class CustomerEditFacade {
 
 	/**
 	 * @param int $userId
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	private function edit($userId, CustomerFormData $customerFormData) {
+	private function edit($userId, CustomerData $customerData) {
 		$user = $this->userRepository->getUserById($userId);
 
-		$this->registrationService->edit($user, $customerFormData->getUser());
+		$this->registrationService->edit($user, $customerData->getUser());
 
-		$user->getBillingAddress()->edit($customerFormData->getBillingAddress());
+		$user->getBillingAddress()->edit($customerData->getBillingAddress());
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
 		$deliveryAddress = $this->registrationService->editDeliveryAddress(
 			$user,
-			$customerFormData->getDeliveryAddress(),
+			$customerData->getDeliveryAddress(),
 			$oldDeliveryAddress
 		);
 
@@ -137,14 +137,14 @@ class CustomerEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function editByAdmin($userId, CustomerFormData $customerFormData) {
-		$user = $this->edit($userId, $customerFormData);
+	public function editByAdmin($userId, CustomerData $customerData) {
+		$user = $this->edit($userId, $customerData);
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerFormData->getUser()->getEmail());
-		$this->registrationService->changeEmail($user, $customerFormData->getUser()->getEmail(), $userByEmail);
+		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUser()->getEmail());
+		$this->registrationService->changeEmail($user, $customerData->getUser()->getEmail(), $userByEmail);
 
 		$this->em->flush();
 
@@ -153,11 +153,11 @@ class CustomerEditFacade {
 
 	/**
 	 * @param int $userId
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function editByCustomer($userId, CustomerFormData $customerFormData) {
-		$user = $this->edit($userId, $customerFormData);
+	public function editByCustomer($userId, CustomerData $customerData) {
+		$user = $this->edit($userId, $customerData);
 		
 		$this->em->flush();
 

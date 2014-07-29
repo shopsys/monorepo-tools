@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Customer\CustomerFormType;
-use SS6\ShopBundle\Model\Customer\CustomerFormData;
+use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,23 +26,23 @@ class CustomerController extends Controller {
 
 		$form = $this->createForm(new CustomerFormType());
 
-		$customerFormData = new CustomerFormData();
+		$customerData = new CustomerData();
 
 		if (!$form->isSubmitted()) {
-			$customerFormData->setFromEntity($user);
+			$customerData->setFromEntity($user);
 		}
 
-		$form->setData($customerFormData);
+		$form->setData($customerData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 			/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-			$customerFormData = $form->getData();
+			$customerData = $form->getData();
 			$user = $customerEditFacade->editByCustomer(
 				$user->getId(),
-				$customerFormData
+				$customerData
 			);
 
 			$flashMessageText->addSuccess('Vaše údaje byly úspěšně zaktualizovány');

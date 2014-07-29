@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Customer\CustomerFormData;
+use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
@@ -32,21 +32,21 @@ class CustomerController extends Controller {
 		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT));
 
 		try {
-			$customerFormData = new CustomerFormData();
+			$customerData = new CustomerData();
 
 			if (!$form->isSubmitted()) {
-				$customerFormData->setFromEntity($user);
+				$customerData->setFromEntity($user);
 			}
 
-			$form->setData($customerFormData);
+			$form->setData($customerData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$customerFormData = $form->getData();
+				$customerData = $form->getData();
 
 				$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-				$user = $customerEditFacade->editByAdmin($id, $customerFormData);
+				$user = $customerEditFacade->editByAdmin($id, $customerData);
 
 				$flashMessageTwig->addSuccess('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),
@@ -147,17 +147,17 @@ class CustomerController extends Controller {
 		));
 
 		try {
-			$customerFormData = new CustomerFormData();
+			$customerData = new CustomerData();
 
-			$form->setData($customerFormData);
+			$form->setData($customerData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$customerFormData = $form->getData();
+				$customerData = $form->getData();
 				$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-				$user = $customerEditFacade->create($customerFormData);
+				$user = $customerEditFacade->create($customerData);
 
 				$flashMessageTwig->addSuccess('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),

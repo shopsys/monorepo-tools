@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
-class BillingAddressFormData {
+class BillingAddressData {
 
 	/**
 	 * @var string

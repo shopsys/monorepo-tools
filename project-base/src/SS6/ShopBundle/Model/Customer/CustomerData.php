@@ -2,27 +2,27 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
-class CustomerFormData {
+class CustomerData {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserFormData
+	 * @var \SS6\ShopBundle\Model\Customer\UserData
 	 */
 	private $user;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\BillingAddressFormData
+	 * @var \SS6\ShopBundle\Model\Customer\BillingAddressData
 	 */
 	private $billingAddress;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddressFormData
+	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddressData
 	 */
 	private $deliveryAddress;
 
 	public function __construct() {
-		$this->user = new UserFormData();
-		$this->billingAddress = new BillingAddressFormData();
-		$this->deliveryAddress = new DeliveryAddressFormData();
+		$this->user = new UserData();
+		$this->billingAddress = new BillingAddressData();
+		$this->deliveryAddress = new DeliveryAddressData();
 	}
 
 	public function getUser() {
@@ -37,15 +37,15 @@ class CustomerFormData {
 		return $this->deliveryAddress;
 	}
 
-	public function setUser(UserFormData $userFormData) {
-		$this->user = $userFormData;
+	public function setUser(UserData $userData) {
+		$this->user = $userData;
 	}
 
-	public function setBillingAddress(BillingAddressFormData $billingAddressFormData) {
-		$this->billingAddress = $billingAddressFormData;
+	public function setBillingAddress(BillingAddressData $billingAddressData) {
+		$this->billingAddress = $billingAddressData;
 	}
 
-	public function setDeliveryAddress(DeliveryAddressFormData $deliveryAddress) {
+	public function setDeliveryAddress(DeliveryAddressData $deliveryAddress) {
 		$this->deliveryAddress = $deliveryAddress;
 	}
 

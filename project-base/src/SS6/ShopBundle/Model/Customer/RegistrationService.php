@@ -19,52 +19,52 @@ class RegistrationService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\UserFormData $userFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
-	public function create(UserFormData $userFormData,
+	public function create(UserData $userData,
 			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
 			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
-			if ($userByEmail->getEmail() === $userFormData->getEmail()) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userFormData->getEmail());
+			if ($userByEmail->getEmail() === $userData->getEmail()) {
+				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->getEmail());
 			}
 		}
 
 		$user = new User(
-			$userFormData,
+			$userData,
 			$billingAddress,
 			$deliveryAddress
 		);
-		$this->changePassword($user, $userFormData->getPassword());
+		$this->changePassword($user, $userData->getPassword());
 
 		return $user;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param \SS6\ShopBundle\Model\Customer\UserFormData
+	 * @param \SS6\ShopBundle\Model\Customer\UserData
 	 */
-	public function edit(User $user, UserFormData $userFormData) {
-		$user->edit($userFormData);
+	public function edit(User $user, UserData $userData) {
+		$user->edit($userData);
 
-		if ($userFormData->getPassword() !== null) {
-			$this->changePassword($user, $userFormData->getPassword());
+		if ($userData->getPassword() !== null) {
+			$this->changePassword($user, $userData->getPassword());
 		}
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressFormData
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData
 	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
-	public function createDeliveryAddress(DeliveryAddressFormData $deliveryAddressFormData) {
+	public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData) {
 
-		if ($deliveryAddressFormData->getAddressFilled()) {
-			$deliveryAddress = new DeliveryAddress($deliveryAddressFormData);
+		if ($deliveryAddressData->getAddressFilled()) {
+			$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 		} else {
 			$deliveryAddress = null;
 		}
@@ -74,18 +74,18 @@ class RegistrationService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressFormData $deliveryAddressFormData
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
-	public function editDeliveryAddress(User $user, DeliveryAddressFormData $deliveryAddressFormData,
+	public function editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData,
 		DeliveryAddress $deliveryAddress = null) {
 
-		if ($deliveryAddressFormData->getAddressFilled()) {
+		if ($deliveryAddressData->getAddressFilled()) {
 			if ($deliveryAddress instanceof DeliveryAddress) {
-				$deliveryAddress->edit($deliveryAddressFormData);
+				$deliveryAddress->edit($deliveryAddressData);
 			} else {
-				$deliveryAddress = new DeliveryAddress($deliveryAddressFormData);
+				$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 				$user->setDeliveryAddress($deliveryAddress);
 			}
 		} else {

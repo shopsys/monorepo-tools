@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Customer;
 
-use SS6\ShopBundle\Model\Customer\CustomerFormData;
+use SS6\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -42,7 +42,7 @@ class CustomerFormType extends AbstractType {
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => CustomerFormData::class,
+			'data_class' => CustomerData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}
