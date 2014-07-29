@@ -89,16 +89,16 @@ class DeliveryAddress {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressFormData $deliveryAddressFormData
 	 */
-	public function edit(CustomerFormData $customerFormData) {
-		$this->street = $customerFormData->getDeliveryStreet();
-		$this->city = $customerFormData->getDeliveryCity();
-		$this->postcode = $customerFormData->getDeliveryPostcode();
-		$this->country = $customerFormData->getDeliveryCountry();
-		$this->companyName = $customerFormData->getDeliveryCompanyName();
-		$this->contactPerson = $customerFormData->getDeliveryContactPerson();
-		$this->telephone = $customerFormData->getDeliveryTelephone();
+	public function edit(DeliveryAddressFormData $deliveryAddressFormData) {
+		$this->street = $deliveryAddressFormData->getStreet();
+		$this->city = $deliveryAddressFormData->getCity();
+		$this->postcode = $deliveryAddressFormData->getPostcode();
+		$this->country = $deliveryAddressFormData->getCountry();
+		$this->companyName = $deliveryAddressFormData->getCompanyName();
+		$this->contactPerson = $deliveryAddressFormData->getContactPerson();
+		$this->telephone = $deliveryAddressFormData->getTelephone();
 	}
 
 	/**

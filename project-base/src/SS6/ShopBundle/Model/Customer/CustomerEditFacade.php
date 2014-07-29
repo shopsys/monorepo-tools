@@ -85,19 +85,19 @@ class CustomerEditFacade {
 	public function create(CustomerFormData $customerFormData) {
 
 		$billingAddress = new BillingAddress(
-			$customerFormData->getStreet(),
-			$customerFormData->getCity(),
-			$customerFormData->getPostcode(),
-			$customerFormData->getCountry(),
-			$customerFormData->getCompanyCustomer(),
-			$customerFormData->getCompanyName(),
-			$customerFormData->getCompanyNumber(),
-			$customerFormData->getCompanyTaxNumber(),
-			$customerFormData->getTelephone()
+			$customerFormData->getBillingAddress()->getStreet(),
+			$customerFormData->getBillingAddress()->getCity(),
+			$customerFormData->getBillingAddress()->getPostcode(),
+			$customerFormData->getBillingAddress()->getCountry(),
+			$customerFormData->getBillingAddress()->getCompanyCustomer(),
+			$customerFormData->getBillingAddress()->getCompanyName(),
+			$customerFormData->getBillingAddress()->getCompanyNumber(),
+			$customerFormData->getBillingAddress()->getCompanyTaxNumber(),
+			$customerFormData->getBillingAddress()->getTelephone()
 		);
 		$this->em->persist($billingAddress);
 
-		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerFormData);
+		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerFormData->getDeliveryAddress());
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 		}
@@ -128,12 +128,15 @@ class CustomerEditFacade {
 
 		$this->registrationService->edit($user, $customerFormData->getUser());
 
-		$this->registrationService->editBillingAddress($user->getBillingAddress(), $customerFormData);
+		$this->registrationService->editBillingAddress(
+			$user->getBillingAddress(),
+			$customerFormData->getBillingAddress()
+		);
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
 		$deliveryAddress = $this->registrationService->editDeliveryAddress(
 			$user,
-			$customerFormData,
+			$customerFormData->getDeliveryAddress(),
 			$oldDeliveryAddress
 		);
 

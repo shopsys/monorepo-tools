@@ -110,24 +110,24 @@ class BillingAddress {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $customerFormData
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerFormData $billingAddressFormData
 	 */
-	public function edit(CustomerFormData $customerFormData) {
-		$this->street = $customerFormData->getStreet();
-		$this->city = $customerFormData->getCity();
-		$this->postcode = $customerFormData->getPostcode();
-		$this->country = $customerFormData->getCountry();
-		$this->companyCustomer = $customerFormData->getCompanyCustomer();
+	public function edit(BillingAddressFormData $billingAddressFormData) {
+		$this->street = $billingAddressFormData->getStreet();
+		$this->city = $billingAddressFormData->getCity();
+		$this->postcode = $billingAddressFormData->getPostcode();
+		$this->country = $billingAddressFormData->getCountry();
+		$this->companyCustomer = $billingAddressFormData->getCompanyCustomer();
 		if ($this->companyCustomer) {
-			$this->companyName = $customerFormData->getCompanyName();
-			$this->companyNumber = $customerFormData->getCompanyNumber();
-			$this->companyTaxNumber = $customerFormData->getCompanyTaxNumber();
+			$this->companyName = $billingAddressFormData->getCompanyName();
+			$this->companyNumber = $billingAddressFormData->getCompanyNumber();
+			$this->companyTaxNumber = $billingAddressFormData->getCompanyTaxNumber();
 		} else {
 			$this->companyName = null;
 			$this->companyNumber = null;
 			$this->companyTaxNumber = null;
 		}
-		$this->telephone = $customerFormData->getTelephone();
+		$this->telephone = $billingAddressFormData->getTelephone();
 	}
 
 	/**

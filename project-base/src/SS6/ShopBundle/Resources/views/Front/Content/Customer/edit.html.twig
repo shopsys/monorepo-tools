@@ -14,7 +14,7 @@
 					<h2>Osobní údaje</h2>
 					{{ form_row(form.user.firstName, { label: 'Jméno'}) }}
 					{{ form_row(form.user.lastName, { label: 'Příjmení'}) }}
-					{{ form_row(form.telephone, { label: 'Telefon'}) }}
+					{{ form_row(form.billingAddress.telephone, { label: 'Telefon'}) }}
 					{{ form_row(form.user.email, { label: 'Email'}) }}
 					<p>
 						Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
@@ -30,41 +30,41 @@
 
 				<div class="info-box">
 					<h2>Firemní údaje</h2>
-					{{ form_row(form.companyCustomer, {
+					{{ form_row(form.billingAddress.companyCustomer, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
 						label: 'Nakupuji na firmu'})
 					}}
 					<div id="js-company-fields">
-						{{ form_row(form.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.companyNumber, { label: 'IČ'}) }}
-						{{ form_row(form.companyTaxNumber, { label: 'DIČ'}) }}
+						{{ form_row(form.billingAddress.companyName, { label: 'Firma'}) }}
+						{{ form_row(form.billingAddress.companyNumber, { label: 'IČ'}) }}
+						{{ form_row(form.billingAddress.companyTaxNumber, { label: 'DIČ'}) }}
 					</div>
 				</div>
 
 
 				<div class="info-box">
 					<h2>Adresa</h2>
-					{{ form_row(form.street, { label: 'Ulice'}) }}
-					{{ form_row(form.city, { label: 'Město'}) }}
-					{{ form_row(form.postcode, { label: 'PSČ'}) }}
-					{{ form_row(form.country, { label: 'Stát'}) }}
+					{{ form_row(form.billingAddress.street, { label: 'Ulice'}) }}
+					{{ form_row(form.billingAddress.city, { label: 'Město'}) }}
+					{{ form_row(form.billingAddress.postcode, { label: 'PSČ'}) }}
+					{{ form_row(form.billingAddress.country, { label: 'Stát'}) }}
 				</div>
 
 
 				<div class="info-box">
 					<h2>Doručovací adresa</h2>
-					{{ form_row(form.deliveryAddressFilled, {
+					{{ form_row(form.deliveryAddress.addressFilled, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
 						label: 'Zboží chci doručit na jinou adresu než fakturační'})
 					}}
 					<div id="js-delivery-address-fields">
-						{{ form_row(form.deliveryCompanyName, { label: 'Firma'}) }}
-						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'}) }}
-						{{ form_row(form.deliveryTelephone, { label: 'Telefon'}) }}
-						{{ form_row(form.deliveryStreet, { label: 'Ulice'}) }}
-						{{ form_row(form.deliveryCity, { label: 'Město'}) }}
-						{{ form_row(form.deliveryPostcode, { label: 'PSČ'}) }}
-						{{ form_row(form.deliveryCountry, { label: 'Stát'}) }}
+						{{ form_row(form.deliveryAddress.companyName, { label: 'Firma'}) }}
+						{{ form_row(form.deliveryAddress.contactPerson, { label: 'Kontaktní osoba'}) }}
+						{{ form_row(form.deliveryAddress.telephone, { label: 'Telefon'}) }}
+						{{ form_row(form.deliveryAddress.street, { label: 'Ulice'}) }}
+						{{ form_row(form.deliveryAddress.city, { label: 'Město'}) }}
+						{{ form_row(form.deliveryAddress.postcode, { label: 'PSČ'}) }}
+						{{ form_row(form.deliveryAddress.country, { label: 'Stát'}) }}
 					</div>
 				</div>
 
