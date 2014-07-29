@@ -91,8 +91,7 @@ class OrderFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím PSČ')),
 				)
 			))
-			->add('deliveryFirstName', 'text', array('required' => false))
-			->add('deliveryLastName', 'text', array('required' => false))
+			->add('deliveryContactPerson', 'text', array('required' => false))
 			->add('deliveryCompanyName', 'text', array('required' => false))
 			->add('deliveryTelephone', 'text', array('required' => false))
 			->add('deliveryStreet', 'text', array('required' => false))

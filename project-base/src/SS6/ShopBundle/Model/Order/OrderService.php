@@ -49,8 +49,7 @@ class OrderService {
 
 		if ($orderFormData->isDeliveryAddressFilled()) {
 			$order->setDeliveryAddress(
-				$orderFormData->getDeliveryFirstName(),
-				$orderFormData->getDeliveryLastName(),
+				$orderFormData->getDeliveryContactPerson(),
 				$orderFormData->getDeliveryCompanyName(),
 				$orderFormData->getDeliveryTelephone(),
 				$orderFormData->getDeliveryStreet(),
@@ -83,8 +82,7 @@ class OrderService {
 			$orderData->getCompanyName(),
 			$orderData->getCompanyNumber(),
 			$orderData->getCompanyTaxNumber(),
-			$orderData->getDeliveryFirstName(),
-			$orderData->getDeliveryLastName(),
+			$orderData->getDeliveryContactPerson(),
 			$orderData->getDeliveryCompanyName(),
 			$orderData->getDeliveryTelephone(),
 			$orderData->getDeliveryStreet(),
@@ -156,8 +154,7 @@ class OrderService {
 		$orderFormData->setCity($order->getCity());
 		$orderFormData->setPostcode($order->getPostcode());
 
-		if ($orderFormData->getDeliveryFirstName() !== null
-				|| $orderFormData->getDeliveryLastName() !== null
+		if ($orderFormData->getDeliveryContactPerson() !== null
 				|| $orderFormData->getDeliveryCompanyName() !== null
 				|| $orderFormData->getDeliveryTelephone() !== null
 				|| $orderFormData->getDeliveryStreet() !== null
@@ -168,8 +165,7 @@ class OrderService {
 			$orderFormData->setDeliveryAddressFilled(false);
 		}
 
-		$orderFormData->setDeliveryFirstName($order->getDeliveryFirstName());
-		$orderFormData->setDeliveryLastName($order->getDeliveryLastName());
+		$orderFormData->setDeliveryContactPerson($order->getDeliveryContactPerson());
 		$orderFormData->setDeliveryCompanyName($order->getDeliveryCompanyName());
 		$orderFormData->setDeliveryTelephone($order->getDeliveryTelephone());
 		$orderFormData->setDeliveryStreet($order->getDeliveryStreet());
@@ -195,7 +191,7 @@ class OrderService {
 		$orderFormData->setPostcode($user->getBillingAddress()->getPostcode());
 		if ($user->getDeliveryAddress() !== null) {
 			$orderFormData->setDeliveryAddressFilled(true);
-			// firstName + lastName ?
+			$orderFormData->setDeliveryContactPerson($user->getDeliveryAddress()->getContactPerson());
 			$orderFormData->setDeliveryCompanyName($user->getDeliveryAddress()->getCompanyName());
 			$orderFormData->setDeliveryTelephone($user->getDeliveryAddress()->getTelephone());
 			$orderFormData->setDeliveryStreet($user->getDeliveryAddress()->getStreet());

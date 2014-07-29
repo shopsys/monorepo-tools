@@ -80,12 +80,7 @@ class OrderFormData {
 	/**
 	 * @var string
 	 */
-	private $deliveryFirstName;
-
-	/**
-	 * @var string
-	 */
-	private $deliveryLastName;
+	private $deliveryContactPerson;
 
 	/**
 	 * @var string
@@ -223,15 +218,8 @@ class OrderFormData {
 	/**
 	 * @return string
 	 */
-	public function getDeliveryFirstName() {
-		return $this->deliveryFirstName;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getDeliveryLastName() {
-		return $this->deliveryLastName;
+	public function getDeliveryContactPerson() {
+		return $this->deliveryContactPerson;
 	}
 
 	/**
@@ -382,17 +370,10 @@ class OrderFormData {
 	}
 
 	/**
-	 * @param string $deliveryFirstName
+	 * @param string $deliveryContactPerson
 	 */
-	public function setDeliveryFirstName($deliveryFirstName) {
-		$this->deliveryFirstName = $deliveryFirstName;
-	}
-
-	/**
-	 * @param string $deliveryLastName
-	 */
-	public function setDeliveryLastName($deliveryLastName) {
-		$this->deliveryLastName = $deliveryLastName;
+	public function setDeliveryContactPerson($deliveryContactPerson) {
+		$this->deliveryContactPerson = $deliveryContactPerson;
 	}
 
 	/**

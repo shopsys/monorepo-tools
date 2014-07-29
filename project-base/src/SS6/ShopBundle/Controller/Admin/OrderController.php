@@ -56,8 +56,7 @@ class OrderController extends Controller {
 				$orderData->setStreet($order->getStreet());
 				$orderData->setCity($order->getCity());
 				$orderData->setPostcode($order->getPostcode());
-				$orderData->setDeliveryFirstName($order->getDeliveryFirstName());
-				$orderData->setDeliveryLastName($order->getDeliveryLastName());
+				$orderData->setDeliveryContactPerson($order->getDeliveryContactPerson());
 				$orderData->setDeliveryCompanyName($order->getDeliveryCompanyName());
 				$orderData->setDeliveryTelephone($order->getDeliveryTelephone());
 				$orderData->setDeliveryStreet($order->getDeliveryStreet());

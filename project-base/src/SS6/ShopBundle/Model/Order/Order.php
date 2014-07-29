@@ -164,16 +164,9 @@ class Order {
 	/**
 	 * @var string|null
 	 *
-	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=200, nullable=true)
 	 */
-	private $deliveryFirstName;
-
-	/**
-	 * @var string|null
-	 *
-	 * @ORM\Column(type="string", length=100, nullable=true)
-	 */
-	private $deliveryLastName;
+	private $deliveryContactPerson;
 
 	/**
 	 * @var string|null
@@ -285,8 +278,7 @@ class Order {
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber
-	 * @param string|null $deliveryFirstName
-	 * @param string|null $deliveryLastName
+	 * @param string|null $deliveryContactPerson
 	 * @param string|null $deliveryCompanyName
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
@@ -296,7 +288,7 @@ class Order {
 	 */
 	public function edit(OrderStatus $orderStatus, $firstName, $lastName, $email, $telephone, $street, $city, 
 			$postcode, $user, $companyName, $companyNumber, $companyTaxNumber,
-			$deliveryFirstName, $deliveryLastName, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
+			$deliveryContactPerson, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
 			$deliveryCity, $deliveryPostcode, $note) {
 		$this->status = $orderStatus;
 		$this->customer = $user;
@@ -310,8 +302,7 @@ class Order {
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;
-		$this->deliveryFirstName = $deliveryFirstName;
-		$this->deliveryLastName = $deliveryLastName;
+		$this->deliveryContactPerson = $deliveryContactPerson;
 		$this->deliveryCompanyName = $deliveryCompanyName;
 		$this->deliveryTelephone = $deliveryTelephone;
 		$this->deliveryStreet = $deliveryStreet;
@@ -357,8 +348,7 @@ class Order {
 	}
 
 	/**
-	 * @param string|null $deliveryFirstName
-	 * @param string|null $deliveryLastName
+	 * @param string|null $deliveryContactPerson
 	 * @param string|null $deliveryCompanyName
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
@@ -366,16 +356,14 @@ class Order {
 	 * @param string|null $deliveryPostcode
 	 */
 	public function setDeliveryAddress(
-		$deliveryFirstName = null,
-		$deliveryLastName = null,
+		$deliveryContactPerson = null,
 		$deliveryCompanyName = null,
 		$deliveryTelephone = null,
 		$deliveryStreet = null,
 		$deliveryCity = null,
 		$deliveryPostcode = null
 	) {
-		$this->deliveryFirstName = $deliveryFirstName;
-		$this->deliveryLastName = $deliveryLastName;
+		$this->deliveryContactPerson = $deliveryContactPerson;
 		$this->deliveryCompanyName = $deliveryCompanyName;
 		$this->deliveryTelephone = $deliveryTelephone;
 		$this->deliveryStreet = $deliveryStreet;
@@ -576,15 +564,8 @@ class Order {
 	/**
 	 * @return string
 	 */
-	public function getDeliveryFirstName() {
-		return $this->deliveryFirstName;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getDeliveryLastName() {
-		return $this->deliveryLastName;
+	public function getDeliveryContactPerson() {
+		return $this->deliveryContactPerson;
 	}
 
 	/**

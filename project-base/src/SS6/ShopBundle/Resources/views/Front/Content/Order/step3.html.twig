@@ -54,8 +54,7 @@
 						label: 'Zboží chci doručit na jinou adresu než fakturační'})
 					}}
 					<div id="js-delivery-address-fields">
-						{{ form_row(form.deliveryFirstName, { label: 'Jméno', label_attr: { class: 'form-place__title' } }) }}
-						{{ form_row(form.deliveryLastName, { label: 'Příjmení', label_attr: { class: 'form-place__title' } }) }}
+						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba', label_attr: { class: 'form-place__title' } }) }}
 						{{ form_row(form.deliveryCompanyName, { label: 'Firma', label_attr: { class: 'form-place__title' } }) }}
 						{{ form_row(form.deliveryTelephone, { label: 'Telefon', label_attr: { class: 'form-place__title' }, attr: { class: 'input-little' } }) }}
 						{{ form_row(form.deliveryStreet, { label: 'Ulice', label_attr: { class: 'form-place__title' } }) }}

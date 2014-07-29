@@ -160,8 +160,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber
-	 * @param string|null $deliveryFirstName
-	 * @param string|null $deliveryLastName
+	 * @param string|null $deliveryContactPerson
 	 * @param string|null $deliveryCompanyName
 	 * @param string|null $deliveryTelephone
 	 * @param string|null $deliveryStreet
@@ -173,7 +172,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			Transport $transport, Payment $payment,	OrderStatus $orderStatus,
 			$firstName, $lastName, $email, $telephone, $street, $city, $postcode,
 			User $user = null, $companyName = null,	$companyNumber = null, $companyTaxNumber = null,
-			$deliveryFirstName = null, $deliveryLastName = null, $deliveryCompanyName = null,
+			$deliveryContactPerson = null, $deliveryCompanyName = null,
 			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
 			$note = null) {
 
@@ -205,8 +204,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 		$orderFormData->setCompanyName($companyName);
 		$orderFormData->setCompanyNumber($companyNumber);
 		$orderFormData->setCompanyTaxNumber($companyTaxNumber);
-		$orderFormData->setDeliveryFirstName($deliveryFirstName);
-		$orderFormData->setDeliveryLastName($deliveryLastName);
+		$orderFormData->setDeliveryContactPerson($deliveryContactPerson);
 		$orderFormData->setDeliveryCompanyName($deliveryCompanyName);
 		$orderFormData->setDeliveryTelephone($deliveryTelephone);
 		$orderFormData->setDeliveryStreet($deliveryStreet);
