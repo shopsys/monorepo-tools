@@ -41,8 +41,6 @@ class TransportRepositoryTest extends DatabaseTestCase {
 				$this->assertFalse($row['visible']);
 			} elseif ($row['entity']->getId() === $transport3->getId()) {
 				$this->assertFalse($row['visible']);
-			} else {
-				$this->fail('Unexpected transport');
 			}
 		}
 	}

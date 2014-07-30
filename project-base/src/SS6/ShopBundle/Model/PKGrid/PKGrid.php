@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Model\PKGrid;
 
+use Doctrine\DBAL\SQLParserUtils;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Model\PKGrid\ActionColumn;
 use SS6\ShopBundle\Model\PKGrid\Column;
 use SS6\ShopBundle\Model\PKGrid\PKGridView;
@@ -368,10 +370,23 @@ class PKGrid {
 			->setMaxResults(null)
 			->resetDQLPart('orderBy');
 
-		$subquery = $totalQueryBuilder->getQuery()->getSQL();
-		$sql = 'SELECT COUNT(*) AS totalCount FROM (' . $subquery . ') ORIGIN_QUERY';
+		$query = $totalQueryBuilder->getQuery();
 
-		$this->totalNativeQuery = $em->createNativeQuery($sql, new \Doctrine\ORM\Query\ResultSetMapping());
+		$parametersAssoc = array();
+		foreach ($query->getParameters() as $parameter) {
+			$parametersAssoc[$parameter->getName()] = $parameter->getValue();
+		}
+
+		list($dummyQuery, $flatenedParameters) = SQLParserUtils::expandListParameters(
+			$query->getDQL(),
+			$parametersAssoc,
+			array()
+		);
+
+		$sql = 'SELECT COUNT(*) AS totalCount FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
+
+		$this->totalNativeQuery = $em->createNativeQuery($sql, new ResultSetMapping())
+			->setParameters($flatenedParameters);
 	}
 
 	private function executeQuery() {
