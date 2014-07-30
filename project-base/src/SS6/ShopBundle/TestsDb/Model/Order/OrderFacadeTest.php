@@ -51,8 +51,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderFormData->setCity('city');
 		$orderFormData->setPostcode('postcode');
 		$orderFormData->setDeliveryAddressFilled(true);
-		$orderFormData->setDeliveryFirstName('deliveryFirstName');
-		$orderFormData->setDeliveryLastName('deliveryLastName');
+		$orderFormData->setDeliveryContactPerson('deliveryContanctPerson');
 		$orderFormData->setDeliveryCompanyName('deliveryCompanyName');
 		$orderFormData->setDeliveryTelephone('deliveryTelephone');
 		$orderFormData->setDeliveryStreet('deliveryStreet');
@@ -76,8 +75,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$this->assertEquals($orderFormData->getStreet(), $orderFromDb->getStreet());
 		$this->assertEquals($orderFormData->getCity(), $orderFromDb->getCity());
 		$this->assertEquals($orderFormData->getPostcode(), $orderFromDb->getPostcode());
-		$this->assertEquals($orderFormData->getDeliveryFirstName(), $orderFromDb->getDeliveryFirstName());
-		$this->assertEquals($orderFormData->getDeliveryLastName(), $orderFromDb->getDeliveryLastName());
+		$this->assertEquals($orderFormData->getDeliveryContactPerson(), $orderFromDb->getDeliveryContactPerson());
 		$this->assertEquals($orderFormData->getDeliveryCompanyName(), $orderFromDb->getDeliveryCompanyName());
 		$this->assertEquals($orderFormData->getDeliveryTelephone(), $orderFromDb->getDeliveryTelephone());
 		$this->assertEquals($orderFormData->getDeliveryStreet(), $orderFromDb->getDeliveryStreet());
