@@ -87,6 +87,7 @@ class OrderStatusController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace stavu objednávek - ' . $orderStatus->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/edit.html.twig', array(

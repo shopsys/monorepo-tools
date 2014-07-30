@@ -108,6 +108,7 @@ class PaymentController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace platby - ' . $payment->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', array(

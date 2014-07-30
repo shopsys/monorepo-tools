@@ -56,6 +56,7 @@ class ArticleController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace článku - ' . $article->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', array(

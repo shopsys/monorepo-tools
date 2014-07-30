@@ -105,6 +105,7 @@ class CustomerController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace zákazníka - ' . $user->getFullName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', array(

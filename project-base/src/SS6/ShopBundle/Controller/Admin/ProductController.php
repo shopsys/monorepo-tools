@@ -60,6 +60,7 @@ class ProductController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace zboží - ' . $product->getName()));
 		
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(

@@ -100,6 +100,7 @@ class OrderController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace objednávky - č. ' . $order->getNumber()));
 		
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(

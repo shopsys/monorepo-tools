@@ -88,6 +88,7 @@ class TransportController extends Controller {
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace dopravy - ' . $transport->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(
