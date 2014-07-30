@@ -121,56 +121,18 @@ class OrderService {
 	 */
 	public function prefillFrontFormData(FrontOrderFormData $orderFormData, User $user, Order $order = null) {
 		if ($order instanceof Order) {
-			$this->prefillFrontFormDataFromOrder($orderFormData, $order);
-		} else {
-			$this->prefillFrontFormDataFromCustomer($orderFormData, $user);
+			$this->prefillTransportAndPaymentFromOrder($orderFormData, $order);
 		}
+		$this->prefillFrontFormDataFromCustomer($orderFormData, $user);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
-	private function prefillFrontFormDataFromOrder(FrontOrderFormData $orderFormData, Order $order) {
+	private function prefillTransportAndPaymentFromOrder(FrontOrderFormData $orderFormData, Order $order) {
 		$orderFormData->setTransport($order->getTransport());
 		$orderFormData->setPayment($order->getPayment());
-		$orderFormData->setFirstName($order->getFirstName());
-		$orderFormData->setLastName($order->getLastName());
-		$orderFormData->setEmail($order->getEmail());
-		$orderFormData->setTelephone($order->getTelephone());
-
-		if ($orderFormData->getCompanyName() !== null
-				|| $orderFormData->getCompanyNumber() !== null
-				|| $orderFormData->getCompanyTaxNumber() !== null) {
-			$orderFormData->setCompanyCustomer(true);
-		} else {
-			$orderFormData->setCompanyCustomer(false);
-		}
-
-		$orderFormData->setCompanyName($order->getCompanyName());
-		$orderFormData->setCompanyNumber($order->getCompanyNumber());
-		$orderFormData->setCompanyTaxNumber($order->getCompanyTaxNumber());
-		$orderFormData->setStreet($order->getStreet());
-		$orderFormData->setCity($order->getCity());
-		$orderFormData->setPostcode($order->getPostcode());
-
-		if ($orderFormData->getDeliveryContactPerson() !== null
-				|| $orderFormData->getDeliveryCompanyName() !== null
-				|| $orderFormData->getDeliveryTelephone() !== null
-				|| $orderFormData->getDeliveryStreet() !== null
-				|| $orderFormData->getDeliveryCity() !== null
-				|| $orderFormData->getDeliveryPostcode() !== null) {
-			$orderFormData->setDeliveryAddressFilled(true);
-		} else {
-			$orderFormData->setDeliveryAddressFilled(false);
-		}
-
-		$orderFormData->setDeliveryContactPerson($order->getDeliveryContactPerson());
-		$orderFormData->setDeliveryCompanyName($order->getDeliveryCompanyName());
-		$orderFormData->setDeliveryTelephone($order->getDeliveryTelephone());
-		$orderFormData->setDeliveryStreet($order->getDeliveryStreet());
-		$orderFormData->setDeliveryCity($order->getDeliveryCity());
-		$orderFormData->setDeliveryPostcode($order->getDeliveryPostcode());
 	}
 
 	/**
