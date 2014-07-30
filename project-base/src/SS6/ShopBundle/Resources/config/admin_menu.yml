@@ -6,12 +6,23 @@
   items:
     - label: 'Přijaté objednávky'
       route: admin_order_list
+      items:
+        - label: 'Editace objednávky'
+          route: admin_order_edit
+          visible: false
 
 - label: 'Zákazníci'
   route: admin_customer_list
   items:
     - label: 'Registrovaní zákazníci'
       route: admin_customer_list
+      items:
+        - label: 'Nový zákazník'
+          route: admin_customer_new
+          visible: false
+        - label: 'Editace zákazníka'
+          route: admin_customer_edit
+          visible: false
 
 - label: 'Zboží'
   route: admin_product_list
@@ -31,6 +42,13 @@
   items:
     - label: 'Články'
       route: admin_article_list
+      items:
+        - label: 'Nový článek'
+          route: admin_article_new
+          visible: false
+        - label: 'Editace článku'
+          route: admin_article_edit
+          visible: false
 
 - label: 'Nastavení'
   route: admin_orderstatus_list
@@ -38,8 +56,21 @@
   items:
     - label: 'Stavy objednávek'
       route: admin_orderstatus_list
+      items:
+        - label: 'Editace stavu objednávek'
+          route: admin_orderstatus_edit
+          visible: false
+
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
+      items:
+        - label: 'Editace dopravy'
+          route: admin_transport_edit
+          visible: false
+        - label: 'Editace platby'
+          route: admin_payment_edit
+          visible: false
+
     - label: 'Superadmin'
       route: admin_superadmin_index
       items:

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdminMenu\Exception;
+namespace SS6\ShopBundle\Model\AdminNavigation\Exception;
 
 use Exception;
 
-class InvalidItemTypeException extends Exception implements MenuException {
+class MissingSettingsItemException extends Exception implements MenuException {
 	
 	/**
 	 * @param string $message

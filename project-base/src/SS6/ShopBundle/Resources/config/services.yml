@@ -3,7 +3,7 @@ imports:
 
 parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
-  ss6.admin_menu.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
+  ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
   ss6.file_dir: %kernel.root_dir%/../web/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
   ss6.image_dir: %kernel.root_dir%/../web/assets/content/images
@@ -29,15 +29,23 @@ services:
   ss6.shop.administrator.administrator_grid_service:
     class: SS6\ShopBundle\Model\Administrator\AdministratorGridService
 
-  ss6.shop.admin_menu.menu:
-    class: SS6\ShopBundle\Model\AdminMenu\Menu
-    factory_service: ss6.shop.admin_menu.menu_loader
+  ss6.shop.admin_navigation.breadcrumb:
+    class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+    factory_service: ss6.shop.admin_navigation.breadcrumb_singleton_factory
+    factory_method: get
+
+  ss6.shop.admin_navigation.breadcrumb_singleton_factory:
+    class: SS6\ShopBundle\Model\AdminNavigation\BreadcrumbSingletonFactory
+
+  ss6.shop.admin_navigation.menu:
+    class: SS6\ShopBundle\Model\AdminNavigation\Menu
+    factory_service: ss6.shop.admin_navigation.menu_loader
     factory_method: loadFromYaml
     arguments:
-      - %ss6.admin_menu.config_filepath%
+      - %ss6.admin_navigation.config_filepath%
 
-  ss6.shop.admin_menu.menu_loader:
-    class: SS6\ShopBundle\Model\AdminMenu\MenuLoader
+  ss6.shop.admin_navigation.menu_loader:
+    class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader
 
   ss6.shop.article.article_repository:
     class: SS6\ShopBundle\Model\Article\ArticleRepository

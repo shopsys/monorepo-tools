@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdminMenu;
+namespace SS6\ShopBundle\Model\AdminNavigation;
 
 class MenuItem {
 
@@ -18,7 +18,7 @@ class MenuItem {
 	private $type;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminMenu\MenuItem[]|null
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
 	 */
 	private $items;
 
@@ -39,10 +39,11 @@ class MenuItem {
 
 	/**
 	 * @param string $label
+	 * @param string|null $label
 	 * @param string|null $type
-	 * @param string $route
-	 * @param array $routeParameters
-	 * @param array $items
+	 * @param string|null $route
+	 * @param array|null $routeParameters
+	 * @param array|null $items
 	 */
 	public function __construct($label, $type = null, $route = null, array $routeParameters = null,
 			$visible = true, array $items = null) {
@@ -85,7 +86,7 @@ class MenuItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem[]|null
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
 	 */
 	public function getItems() {
 		return $this->items;
@@ -117,7 +118,7 @@ class MenuItem {
 	 */
 	private function setType($type) {
 		if (!in_array($type, $this->getTypes())) {
-			throw new \SS6\ShopBundle\Model\AdminMenu\Exception\InvalidItemTypeException(
+			throw new \SS6\ShopBundle\Model\AdminNavigation\Exception\InvalidItemTypeException(
 				$type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'
 			);
 		}

@@ -6,27 +6,27 @@
  * and open the template in the editor.
  */
 
-namespace SS6\ShopBundle\Model\AdminMenu;
+namespace SS6\ShopBundle\Model\AdminNavigation;
 
 class Menu {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminMenu\MenuItem[]
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private $items;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminMenu\MenuItem[]
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private $regularItems;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminMenu\MenuItem
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem
 	 */
 	private $settingsItem;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem[] $items
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem[] $items
 	 */
 	public function __construct(array $items) {
 		$this->items = $items;
@@ -42,28 +42,28 @@ class Menu {
 		}
 
 		if (!isset($this->settingsItem)) {
-			throw new \SS6\ShopBundle\Model\AdminMenu\Exception\MissingSettingsItemException(
+			throw new \SS6\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException(
 				'Menu item of type ' . MenuItem::TYPE_SETTINGS . ' not found in config'
 			);
 		}
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem[]
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getItems() {
 		return $this->items;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem[]
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getRegularItems() {
 		return $this->regularItems;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem
 	 */
 	public function getSettingsItem() {
 		return $this->settingsItem;
@@ -74,9 +74,9 @@ class Menu {
 	 *
 	 * @param string $route
 	 * @param array|null $parameters
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem|null
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
-	public function getItemMatchingRoute($route, array $parameters = null) {
+	private function getItemMatchingRoute($route, array $parameters = null) {
 		$item = $this->getItemMatchingRouteRecursive($this->getItems(), $route, $parameters);
 		
 		return $item;
@@ -87,7 +87,7 @@ class Menu {
 	 *
 	 * @param string $route
 	 * @param array|null $parameters
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem|null
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
 	private function getItemMatchingRouteRecursive(array $items, $route, array $parameters = null) {
 		foreach ($items as $item) {
@@ -108,10 +108,10 @@ class Menu {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem $item
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $item
 	 * @param string $route
 	 * @param array|null $parameters
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem
 	 */
 	private function isItemMatchingRoute(MenuItem $item, $route, array $parameters = null) {
 		if ($item->getRoute() !== $route) {
@@ -134,17 +134,17 @@ class Menu {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem $item
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem[]|null
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $item
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
 	 */
-	public function getItemPath(MenuItem $item) {
+	private function getItemPath(MenuItem $item) {
 		return $this->getItemPathRecursive($this->getItems(), $item);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem $items
-	 * @param \SS6\ShopBundle\Model\AdminMenu\MenuItem $item
-	 * @return \SS6\ShopBundle\Model\AdminMenu\MenuItem[]|null
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $items
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $item
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
 	 */
 	private function getItemPathRecursive(array $items, MenuItem $item) {
 		foreach ($items as $subitem) {
@@ -163,6 +163,21 @@ class Menu {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param string $route
+	 * @param array|null $parameters
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 */
+	public function getMenuPath($route, $parameters) {
+		$menuPath = array();
+		$matchingItem = $this->getItemMatchingRoute($route, $parameters);
+		if ($matchingItem !== null) {
+			$menuPath = $this->getItemPath($matchingItem);
+		}
+
+		return $menuPath;
 	}
 
 }

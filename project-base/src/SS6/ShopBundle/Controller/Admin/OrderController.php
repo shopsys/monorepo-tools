@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -97,6 +98,10 @@ class OrderController extends Controller {
 		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
+
+		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
+		$breadcrumb->replaceLastItem(new MenuItem('Editace objednávky - č. ' . $order->getNumber()));
 		
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
 			'form' => $form->createView(),

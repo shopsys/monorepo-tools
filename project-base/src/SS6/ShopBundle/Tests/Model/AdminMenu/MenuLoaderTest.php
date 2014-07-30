@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\AdminMenu;
+namespace SS6\ShopBundle\Tests\Model\AdminNavigation;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
-use SS6\ShopBundle\Model\AdminMenu\MenuItem;
-use SS6\ShopBundle\Model\AdminMenu\MenuLoader;
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
 
 class MenuLoaderTest extends FunctionalTestCase {
 
@@ -66,7 +66,7 @@ class MenuLoaderTest extends FunctionalTestCase {
 
 		$menuLoader = new MenuLoader($this->getContainer()->get('filesystem'));
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\AdminMenu\Exception\MissingSettingsItemException::class);
+		$this->setExpectedException(\SS6\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
 		$menuLoader->loadFromArray($testMenu);
 	}
 
