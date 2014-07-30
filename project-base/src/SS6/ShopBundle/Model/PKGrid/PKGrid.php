@@ -391,7 +391,7 @@ class PKGrid {
 
 	private function executeQuery() {
 		$this->prepareQuery();
-		$this->rows = $this->queryBuilder->getQuery()->getArrayResult();
+		$this->rows = $this->queryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
 	}
 
 	private function executeTotalQuery() {

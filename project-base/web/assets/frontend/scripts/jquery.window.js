@@ -66,6 +66,11 @@
 		}
 	}
 	
+	$.fn.SS6.window.close = function(id) {
+		var $window = $(windowPrefix + id);
+		$window.trigger('windowClose');
+	}
+	
 	$.fn.SS6.window.getMainContainer = function() {
 		var $mainContainer = $('#' + windowMainContainerId);
 		if ($mainContainer.size() === 0) {

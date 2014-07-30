@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Order\Status;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Model\Order\OrderRepository;
+use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 
@@ -31,18 +32,25 @@ class OrderStatusFacade {
 	private $orderRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 */
+	private $orderService;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusService $orderStatusService
 	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
 	 */
-	public function __construct(EntityManager $em, OrderStatusRepository $orderStatusRepository, 
-		OrderStatusService $orderStatusService, OrderRepository $orderRepository
+	public function __construct(EntityManager $em, OrderStatusRepository $orderStatusRepository,
+		OrderStatusService $orderStatusService, OrderRepository $orderRepository,
+		OrderService $orderService
 	) {
 		$this->em = $em;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusService = $orderStatusService;
 		$this->orderRepository = $orderRepository;
+		$this->orderService = $orderService;
 	}
 
 	/**
@@ -76,12 +84,21 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
+	 * @param int|null $newOrderStatusId
 	 */
-	public function deleteById($orderStatusId) {
+	public function deleteById($orderStatusId, $newOrderStatusId = null) {
 		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
-		$orderCountByStatus = $this->orderRepository->getOrdersCountByStatus($orderStatus);
-		$this->orderStatusService->delete($orderStatus, $orderCountByStatus);
+		$orders = $this->orderRepository->findByStatusId($orderStatusId);
+		if ($newOrderStatusId !== null) {
+			$newOrderStatus = $this->orderStatusRepository->findById($newOrderStatusId);
+		} else {
+			$newOrderStatus = null;
+		}
+		
+		$this->orderStatusService->delete($orderStatus, $orders, $newOrderStatus);
+
 		$this->em->remove($orderStatus);
 		$this->em->flush();
 	}
+
 }

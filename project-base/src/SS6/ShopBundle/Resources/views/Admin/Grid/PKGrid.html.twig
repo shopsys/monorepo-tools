@@ -59,7 +59,7 @@
 				</th>
 			{% endfor %}
 			{% if grid.actionColumns is not empty %}
-				<th class="last-column {{ grid.actionColumnClass }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
+				<th class="last-column text-right {{ grid.actionColumnClass }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
 			{% endif  %}
 		</tr>
 	</thead>
@@ -76,7 +76,7 @@
 					</td>
 				{% endfor %}
 				{% if grid.actionColumns|length > 0 %}
-					<td class="grid-column-actions last-column {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
+					<td class="grid-column-actions last-column text-right {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
 						<span class="grid-row-actions action-icons">
 							{% for actionColumn in grid.actionColumns %}
 								{{ gridView.renderActionCell(actionColumn, row)|raw }}
@@ -114,7 +114,7 @@
 	{{ 'Stránka'|trans }}
 	{% spaceless %}
 		<span class="form-inline">
-			
+
 			{% if grid.page > 1 %}
 				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>&nbsp;
 				<a class="btn btn-default" href="{{ gridView.url({'page': 1}) }}">1</a>&nbsp;
@@ -147,12 +147,12 @@
 
 			<span class="js-pkgrid-go-to">
 				Přejít na:
-				<input 
-					type="number" 
-					min="1" 
-					max="{{ grid.pageCount }}" 
+				<input
+					type="number"
+					min="1"
+					max="{{ grid.pageCount }}"
 					value="{{ grid.page }}"
-					class="current form-control text-center js-pkgrid-go-to-input" 
+					class="current form-control text-center js-pkgrid-go-to-input"
 					size="2"
 				/>&nbsp;
 				<a class="btn btn-default js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>

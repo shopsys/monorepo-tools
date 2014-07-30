@@ -95,8 +95,8 @@ class ArticleController extends Controller {
 		$grid->addColumn('name', 'a.name', 'Název', true);
 
 		$grid->setActionColumnClass('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', array('id' => 'id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', array('id' => 'a.id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);

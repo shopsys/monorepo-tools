@@ -57,6 +57,8 @@ doctrine:
         alias: SS6ShopBundle
         prefix: SS6\ShopBundle\Model
         is_bundle: false
+    hydrators:
+      GroupedScalarHydrator: \SS6\ShopBundle\Component\GroupedScalarHydrator
 
 # Swiftmailer Configuration
 swiftmailer:

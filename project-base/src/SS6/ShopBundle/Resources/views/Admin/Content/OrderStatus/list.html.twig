@@ -4,6 +4,8 @@
 {% block h1 %}Přehled stavů objednávek{% endblock %}
 
 {% block main_content %}
+	<div id="js-order-status-delete-window"></div>
+
 	<div class="row">
 		<div class="col-sm-12 col-md-10 col-lg-8">
 			<a href="{{ url('admin_orderstatus_new') }}" class="btn btn-primary mb-1">Vytvořit nový stav objednávek</a>

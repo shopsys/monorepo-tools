@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
 {% block pkgrid_value_cell_id_name %}
-	<a href="{{ url('admin_article_edit', { id: row.id }) }}">{{ value }}</a>
+	<a href="{{ url('admin_article_edit', { id: row.a.id }) }}">{{ value }}</a>
 {% endblock %}
 
 {% block pkgrid_no_data %}

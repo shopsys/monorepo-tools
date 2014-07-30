@@ -1,5 +1,13 @@
-.table a.table-action {
+.table .table-action {
+	display: inline-block;
+	width: 18px;
+
+	text-align: center;
 	color: @color-grey-dark;
+
+	.set-transition();
+	.transition(all);
+
 	&:hover {
 		color: @color-base;
 	}

@@ -222,12 +222,18 @@ class PKGridView {
 	 * @return mixed
 	 */
 	private function getCellValue(Column $column, $row) {
-		$value = null;
 		$queryIdParts = explode('.', $column->getQueryId());
-		$columnIndex = array_pop($queryIdParts);
 
-		if (array_key_exists($columnIndex, $row)) {
-			$value = $row[$columnIndex];
+		if (count($queryIdParts) === 1) {
+			$value = $row[$queryIdParts[0]];
+		} elseif (count($queryIdParts) === 2) {
+			if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
+				$value = $row[$queryIdParts[0]][$queryIdParts[1]];
+			} elseif (array_key_exists($queryIdParts[1], $row)) {
+				$value = $row[$queryIdParts[1]];
+			} else {
+				$value = $row[$column->getQueryId()];
+			}
 		}
 
 		return $value;
