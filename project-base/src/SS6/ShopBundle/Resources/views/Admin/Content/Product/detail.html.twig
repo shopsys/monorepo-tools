@@ -7,7 +7,7 @@
 	<div class="row">
 
 		<div class="col-xs-12 col-lg-8">
-			
+
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
@@ -15,16 +15,16 @@
 					{{ form_widget(form.id, { type: 'hidden' }) }}
 				{% endblock %}
 				{% block product_url %}{% endblock %}
-				
+
 				{{ form_row(form.name, { label: 'Název'}) }}
-				{{ form_row(form.catnum, { label: 'Katalogové číslo'}) }}
-				{{ form_row(form.partno, { label: 'PartNo (výrobní číslo)'}) }}
-				{{ form_row(form.ean, { label: 'EAN'}) }}
+				{{ form_row(form.catnum, { label: 'Katalogové číslo', attr: {class: 'form-control--size-3'} }) }}
+				{{ form_row(form.partno, { label: 'PartNo (výrobní číslo)', attr: {class: 'form-control--size-3'} }) }}
+				{{ form_row(form.ean, { label: 'EAN', attr: {class: 'form-control--size-3'} }) }}
 				{{ form_row(form.description, { label: 'Popis'}) }}
-				{{ form_row(form.price, { label: 'Cena'}) }}
-				{{ form_row(form.sellingFrom, { label: 'Datum vložení'}) }}
-				{{ form_row(form.sellingTo, { label: 'Datum stažení'}) }}
-				{{ form_row(form.stockQuantity, { label: 'Skladem'}) }}
+				{{ form_row(form.price, { label: 'Cena', attr: {class: 'form-control--size-1'} }) }}
+				{{ form_row(form.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-control--size-2'} }) }}
+				{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-control--size-2'} }) }}
+				{{ form_row(form.stockQuantity, { label: 'Skladem', attr: {class: 'form-control--size-1'} }) }}
 				{{ form_row(form.hidden, { label: 'Skryté'}) }}
 				{% block image %}{% endblock %}
 				{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
@@ -33,9 +33,9 @@
 				<a href="{{ url('admin_product_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>
-		
+
 	</div>
 
 
-		
+
 {% endblock %}
