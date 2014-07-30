@@ -13,6 +13,14 @@
 	</div>
 {% endblock form_row %}
 
+{% block checkbox_row %}
+	<div class="checkbox">
+		{{ form_label(form) }}
+		{{ form_errors(form) }}
+		{{ form_widget(form) }}
+	</div>
+{% endblock checkbox_row %}
+
 {% block form_label %}
 	{% spaceless %}
 		{% if label is not sameas(false) %}
@@ -26,11 +34,20 @@
 				{% set label = name|humanize %}
 			{% endif %}
 			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-				{{ label|trans({}, translation_domain) }}:{% if required %}<span class="form-input-required">*</span>{% endif %}
+				{{ label|trans({}, translation_domain) }}
+				{% if not withoutColon|default(false) %}:{% endif %}
+				{% if required %}<span class="form-input-required">*</span>{% endif %}
 			</label>
 		{% endif %}
 	{% endspaceless %}
 {% endblock form_label %}
+
+{% block checkbox_label %}
+	{% spaceless %}
+		{% set withoutColon = true %}
+		{{ block('form_label') }}
+	{% endspaceless %}
+{% endblock checkbox_label %}
 
 {% block form_errors %}
 	{% spaceless %}
