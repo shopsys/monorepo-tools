@@ -160,10 +160,12 @@ class OrderStatusController extends Controller {
 
 				$orderStatusFacade->deleteById($id, $formData['newStatus']->getId());
 
-				$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem ' . $newOrderStatus->getName() . ' a byl smazán.', array(
-					'name' => $orderStatus->getName(),
-					'newName' => $newOrderStatus->getName(),
-				));
+				$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem '
+					. $newOrderStatus->getName() . ' a byl smazán.',
+					array(
+						'name' => $orderStatus->getName(),
+						'newName' => $newOrderStatus->getName(),
+					));
 			} else {
 				$orderStatusFacade->deleteById($id);
 
