@@ -1,5 +1,8 @@
-<ul class="breadcrumb">
+<div class="breadcrumbs">
 	{% for item in items %}
-		<li>{{ item.label }}</li>
+		<span class="breadcrumbs__item">{{ item.label }}</span>
+		{% if not loop.last %}
+			<span class="breadcrumbs__separator"> > </span>
+		{% endif %}
 	{% endfor %}
-</ul>
+</div>
