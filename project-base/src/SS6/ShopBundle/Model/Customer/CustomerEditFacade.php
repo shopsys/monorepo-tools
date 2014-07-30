@@ -66,17 +66,17 @@ class CustomerEditFacade {
 		$userByEmail = $this->userRepository->findUserByEmail($email);
 
 		$billingAddress = new BillingAddress();
-		$deliveryAddress = new DeliveryAddress();
 
-		$user = $this->registrationService->create($firstName,
+		$user = $this->registrationService->create(
+			$firstName,
 			$lastName,
 			$email,
 			$password,
 			$billingAddress,
-			$deliveryAddress,
-			$userByEmail);
+			null,
+			$userByEmail
+		);
 
-		$this->em->persist($deliveryAddress);
 		$this->em->persist($billingAddress);
 		$this->em->persist($user);
 		$this->em->flush();
