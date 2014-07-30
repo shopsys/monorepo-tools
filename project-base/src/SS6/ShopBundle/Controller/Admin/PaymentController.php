@@ -17,14 +17,13 @@ class PaymentController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
+		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$allTransports = $transportRepository->findAll();
-
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 
 		$paymentData = new PaymentFormData();
 		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $paymentData);
@@ -47,12 +46,16 @@ class PaymentController extends Controller {
 			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 			$paymentEditFacade->create($payment);
 
-			$flashMessage->addSuccess('Byla vytvořena platba ' . $payment->getName());
+			$flashMessageTwig->addSuccess('Byla vytvořena platba'
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				'name' => $payment->getName(),
+				'url' => $this->generateUrl('admin_payment_edit', array('id' => $payment->getId())),
+			));
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', array(
@@ -66,12 +69,12 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
+		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
+		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		
@@ -99,12 +102,16 @@ class PaymentController extends Controller {
 		if ($form->isValid()) {
 			$paymentEditFacade->edit($payment, $formData);
 
-			$flashMessage->addSuccess('Byla upravena platba ' . $payment->getName());
+			$flashMessageTwig->addSuccess('Byla upravena platba'
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				'name' => $payment->getName(),
+				'url' => $this->generateUrl('admin_payment_edit', array('id' => $payment->getId())),
+			));
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -122,15 +129,17 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
+		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
+		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
 		$paymentName = $paymentEditFacade->getById($id)->getName();
 		$paymentEditFacade->deleteById($id);
-		$flashMessage->addSuccess('Platba ' . $paymentName . ' byla odstraněna');
-		
+
+		$flashMessageTwig->addSuccess('Platba <strong>{{ name }}</strong> byla smazána', array(
+			'name' => $paymentName,
+		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
 	

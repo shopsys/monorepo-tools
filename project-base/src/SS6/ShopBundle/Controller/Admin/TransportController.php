@@ -17,10 +17,10 @@ class TransportController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
+		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 
 		$transportData = new TransportFormData();
 		$form = $this->createForm(new TransportFormType($fileUpload), $transportData);
@@ -38,12 +38,17 @@ class TransportController extends Controller {
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transportEditFacade->create($transport);
-			$flashMessage->addSuccess('Byla vytvořena doprava ' . $transport->getName());
+			
+			$flashMessageTwig->addSuccess('Byla vytvořena doprava'
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				'name' => $transport->getName(),
+				'url' => $this->generateUrl('admin_transport_edit', array('id' => $transport->getId())),
+			));
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
@@ -57,12 +62,12 @@ class TransportController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
+		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
+		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
 		
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
@@ -79,12 +84,17 @@ class TransportController extends Controller {
 
 		if ($form->isValid()) {
 			$transportEditFacade->edit($transport, $formData);
-			$flashMessage->addSuccess('Byla upravena doprava ' . $transport->getName());
+
+			$flashMessageTwig->addSuccess('Byla upravena doprava'
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				'name' => $transport->getName(),
+				'url' => $this->generateUrl('admin_transport_edit', array('id' => $transport->getId())),
+			));
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -102,15 +112,17 @@ class TransportController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
+		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
+		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		$flashMessage = $this->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
-		
+
 		$transportName = $transportEditFacade->getById($id)->getName();
 		$transportEditFacade->deleteById($id);
-		$flashMessage->addSuccess('Doprava ' . $transportName . ' byla odstraněna');
-		
+
+		$flashMessageTwig->addSuccess('Doprava <strong>{{ name }}</strong> byla smazána', array(
+			'name' => $transportName,
+		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
 

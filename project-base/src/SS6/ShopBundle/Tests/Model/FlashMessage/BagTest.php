@@ -4,13 +4,13 @@ namespace SS6\ShopBundle\Tests\Model\FlashMessage;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 
-class PaymentTest extends FunctionalTestCase {
+class BagTest extends FunctionalTestCase {
 	
 	public function testAddFrontVsAdmin() {
-		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
-		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.front');
-		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
+		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
+		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.bag.front');
+		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 
 		$errorMessageAdmin = 'Error message admin';
 		$errorMessageFront = 'Error message front';
@@ -29,8 +29,8 @@ class PaymentTest extends FunctionalTestCase {
 	}
 
 	public function testAddArrayOfMessages() {
-		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
+		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 
 		$errorMessagesAdmin = array('First error message admin', 'Second error message admin');
 
@@ -40,8 +40,8 @@ class PaymentTest extends FunctionalTestCase {
 	}
 
 	public function testGetUniqMessage() {
-		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
+		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 
 		$errorMessageAdmin = 'Error message admin';
 
@@ -52,8 +52,8 @@ class PaymentTest extends FunctionalTestCase {
 	}
 
 	public function testGetAndClearBag() {
-		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
+		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 
 		$errorMessageAdmin = 'Error message admin';
 
@@ -64,8 +64,8 @@ class PaymentTest extends FunctionalTestCase {
 	}
 
 	public function testIsEmpty() {
-		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.admin');
-		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
+		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 
 		// clearing after previous tests
 		$flashMessageAdmin->getErrorMessages();

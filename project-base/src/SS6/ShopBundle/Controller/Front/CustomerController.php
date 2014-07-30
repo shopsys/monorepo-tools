@@ -13,11 +13,11 @@ class CustomerController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request) {
-		$flashMessage = $this->get('ss6.shop.flash_message.front');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		
 		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
-			$flashMessage->addError('Pro přístup na tuto stránku musíte být přihlášeni');
+			$flashMessageText->addError('Pro přístup na tuto stránku musíte být přihlášeni');
 			return $this->redirect($this->generateUrl('front_login'));
 		}
 
@@ -86,12 +86,12 @@ class CustomerController extends Controller {
 				$customerData['deliveryCountry']
 			);
 
-			$flashMessage->addSuccess('Vaše údaje byly úspěšně zaktualizovány');
+			$flashMessageText->addSuccess('Vaše údaje byly úspěšně zaktualizovány');
 			return $this->redirect($this->generateUrl('front_customer_edit'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Customer/edit.html.twig', array(

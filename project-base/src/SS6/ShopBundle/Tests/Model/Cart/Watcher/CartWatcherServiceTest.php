@@ -20,8 +20,8 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
 
-		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.front');
-		/* @var $flashMessageFront \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.bag.front');
+		/* @var $flashMessageFront \SS6\ShopBundle\Model\FlashMessage\Bag */
 		
 		// clear...
 		$flashMessageFront->getErrorMessages();

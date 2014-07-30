@@ -13,8 +13,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class RegistrationController extends Controller {
 
 	public function registerAction(Request $request) {
-		$flashMessage = $this->get('ss6.shop.flash_message.front');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$form = $this->createForm(new RegistrationFormType());
 
@@ -37,7 +37,7 @@ class RegistrationController extends Controller {
 
 				$this->login($user);
 
-				$flashMessage->addSuccess('Byli jste úspěšně zaregistrováni');
+				$flashMessageText->addSuccess('Byli jste úspěšně zaregistrováni');
 				return $this->redirect($this->generateUrl('front_homepage'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -45,7 +45,7 @@ class RegistrationController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessage->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageText->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', array(

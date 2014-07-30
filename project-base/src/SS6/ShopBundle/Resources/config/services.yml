@@ -80,12 +80,12 @@ services:
   ss6.shop.cart.cart_watcher_facade:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
     arguments:
-      - @ss6.shop.flash_message.front
+      - @ss6.shop.flash_message.bag.front
 
   ss6.shop.cart.cart_watcher_service:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
     arguments:
-      - @ss6.shop.flash_message.front
+      - @ss6.shop.flash_message.bag.front
 
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
@@ -118,14 +118,34 @@ services:
 
   ss6.shop.customer.user_repository:
     class: SS6\ShopBundle\Model\Customer\UserRepository
-    
-  ss6.shop.flash_message.admin:
-    class: SS6\ShopBundle\Model\FlashMessage\FlashMessage
+
+  ss6.shop.flash_message.bag.admin:
+    class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['admin']
-    
-  ss6.shop.flash_message.front:
-    class: SS6\ShopBundle\Model\FlashMessage\FlashMessage
+
+  ss6.shop.flash_message.bag.front:
+    class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['front']
+
+  ss6.shop.flash_message.text_sender.admin:
+    class: SS6\ShopBundle\Model\FlashMessage\TextSender
+    arguments:
+      - @ss6.shop.flash_message.bag.admin
+
+  ss6.shop.flash_message.text_sender.front:
+    class: SS6\ShopBundle\Model\FlashMessage\TextSender
+    arguments:
+      - @ss6.shop.flash_message.bag.front
+
+  ss6.shop.flash_message.twig_sender.admin:
+    class: SS6\ShopBundle\Model\FlashMessage\TwigSender
+    arguments:
+      - @ss6.shop.flash_message.bag.admin
+
+  ss6.shop.flash_message.twig_sender.front:
+    class: SS6\ShopBundle\Model\FlashMessage\TwigSender
+    arguments:
+      - @ss6.shop.flash_message.bag.front
 
   ss6.shop.order.flow:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
@@ -173,7 +193,7 @@ services:
   ss6.shop.order.order_transport_and_payment_watcher_service:
     class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
     arguments:
-      - @ss6.shop.flash_message.front
+      - @ss6.shop.flash_message.bag.front
 
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
@@ -208,3 +228,8 @@ services:
 
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository
+
+  twig.stringloader:
+    class: Twig_Loader_String
+    tags:
+      - { name: twig.loader }

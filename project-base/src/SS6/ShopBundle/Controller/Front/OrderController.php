@@ -33,8 +33,8 @@ class OrderController extends Controller {
 		$orderReviewService = $this->get('ss6.shop.order.order_review_service');
 		/* @var $orderReviewService \SS6\ShopBundle\Model\Order\Review\OrderReviewService  */
 
-		$flashMessage = $this->get('ss6.shop.flash_message.front');
-		/* @var $flashMessage \SS6\ShopBundle\Model\FlashMessage\FlashMessage */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
@@ -73,7 +73,7 @@ class OrderController extends Controller {
 		if ($flow->isValid($form)) {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
-			} elseif ($flashMessage->isEmpty()) {
+			} elseif ($flashMessageText->isEmpty()) {
 				$order = $orderFacade->createOrder($formData, $this->getUser());
 				$cartFacade->cleanCart();
 				if ($user instanceof User) {
@@ -87,7 +87,7 @@ class OrderController extends Controller {
 					/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
 					$orderMailFacade->sendEmail($order);
 				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
-					$flashMessage->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
+					$flashMessageText->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
 				
 				$session = $this->get('session');

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\FlashMessage;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class FlashMessage {
+class Bag {
 
 	const MAIN_KEY = 'messages';
 
@@ -40,22 +40,22 @@ class FlashMessage {
 	/**
 	 * @param string|array $message
 	 */
-	public function addError($message) {
-		$this->addMessage($message, self::KEY_ERROR);
+	public function addError($message, $isRaw = false) {
+		$this->addMessage($message, $isRaw, self::KEY_ERROR);
 	}
 
 	/**
 	 * @param string|array $message
 	 */
-	public function addInfo($message) {
-		$this->addMessage($message, self::KEY_INFO);
+	public function addInfo($message, $isRaw = false) {
+		$this->addMessage($message, $isRaw, self::KEY_INFO);
 	}
 
 	/**
 	 * @param string|array $message
 	 */
-	public function addSuccess($message) {
-		$this->addMessage($message, self::KEY_SUCCESS);
+	public function addSuccess($message, $isRaw = false) {
+		$this->addMessage($message, $isRaw, self::KEY_SUCCESS);
 	}
 
 	/**
@@ -109,14 +109,19 @@ class FlashMessage {
 
 	/**
 	 * @param string|array $message
+	 * @param boolean $isRaw
 	 * @param string $key
 	 */
-	private function addMessage($message, $key) {
+	private function addMessage($message, $isRaw, $key) {
 		if (is_array($message)) {
 			foreach ($message as $item) {
-				$this->addMessage($item, $key);
+				$this->addMessage($item, $isRaw, $key);
 			}
 		} else {
+			if (!$isRaw) {
+				$message = htmlspecialchars($message);
+			}
+
 			$this->session->getFlashBag()->add($this->getFullbagName($key), $message);
 		}
 	}

@@ -2,7 +2,7 @@
 	<div class="message message-{{ type }} js-flash-message">
 		<a href="#" class="message__close js-flash-message-close" title="Zavřít">X</a>
 		{% for message in messages %}
-			{{ message }}
+			{{ message|raw }}
 		{% endfor %}
 	</div>
 {% endif %}
