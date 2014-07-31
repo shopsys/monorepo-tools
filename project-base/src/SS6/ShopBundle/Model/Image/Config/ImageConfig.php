@@ -53,12 +53,13 @@ class ImageConfig {
 	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException
 	 */
 	public function getImageEntityConfig($entity) {
-		$className = get_class($entity);
-		if (array_key_exists($className, $this->imageEntityConfigsByClass)) {
-			return $this->imageEntityConfigsByClass[$className];
-		} else {
-			throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($className);
+		foreach ($this->imageEntityConfigsByClass as $className => $entityConfig) {
+			if ($entity instanceof $className) {
+				return $entityConfig;
+			}
 		}
+
+		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($className);
 	}
 
 	/**
