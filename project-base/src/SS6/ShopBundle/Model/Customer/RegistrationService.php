@@ -30,7 +30,7 @@ class RegistrationService {
 			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
 			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
-			if ($userByEmail->getEmail() === $userData->getEmail()) {
+			if (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->getEmail())) {
 				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->getEmail());
 			}
 		}
@@ -104,11 +104,11 @@ class RegistrationService {
 	 */
 	public function changeEmail(User $user, $email, User $userByEmail = null) {
 		if ($email !== null) {
-			$email = strtolower($email);
+			$email = mb_strtolower($email);
 		}
 
 		if ($userByEmail instanceof User) {
-			if (strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
+			if (mb_strtolower($userByEmail->getEmail()) === $email && $user !== $userByEmail) {
 				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($email);
 			}
 		}

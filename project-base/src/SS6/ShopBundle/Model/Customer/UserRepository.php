@@ -31,7 +31,7 @@ class UserRepository {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function findUserByEmail($email) {
-		return $this->getUserRepository()->findOneBy(array('email' => strtolower($email)));
+		return $this->getUserRepository()->findOneBy(array('email' => mb_strtolower($email)));
 	}
 
 	/**

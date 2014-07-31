@@ -91,7 +91,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	) {
 		$this->firstName = $userData->getFirstName();
 		$this->lastName = $userData->getLastName();
-		$this->email = strtolower($userData->getEmail());
+		$this->email = mb_strtolower($userData->getEmail());
 		$this->billingAddress = $billingAddress;
 		$this->deliveryAddress = $deliveryAddress;
 		$this->createdAt = new DateTime();

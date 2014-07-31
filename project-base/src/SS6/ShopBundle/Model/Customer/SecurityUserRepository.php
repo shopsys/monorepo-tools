@@ -26,7 +26,7 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($email) {
-		$user = $this->findOneBy(array('email' => strtolower($email)));
+		$user = $this->findOneBy(array('email' => mb_strtolower($email)));
 
 		if ($user === null) {
 			$message = sprintf(
