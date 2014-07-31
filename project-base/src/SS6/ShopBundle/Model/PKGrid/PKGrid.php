@@ -383,9 +383,11 @@ class PKGrid {
 			array()
 		);
 
-		$sql = 'SELECT COUNT(*) AS totalCount FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
+		$sql = 'SELECT COUNT(*) AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
 
-		$this->totalNativeQuery = $em->createNativeQuery($sql, new ResultSetMapping())
+		$rsm = new ResultSetMapping();
+		$rsm->addScalarResult('total_count', 'totalCount');
+		$this->totalNativeQuery = $em->createNativeQuery($sql, $rsm)
 			->setParameters($flatenedParameters);
 	}
 
