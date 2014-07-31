@@ -31,7 +31,8 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$userData,
 			$billingAddress,
 			$deliveryAddress,
-			$userByEmail);
+			$userByEmail
+		);
 
 		$this->assertInstanceOf(User::class, $user);
 	}
@@ -46,7 +47,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 		$userByEmail = null;
 		$userData1 = new UserData();
 		$userData1->setFirstName('firstName1');
-		$userData1->setLastName('lastName2');
+		$userData1->setLastName('lastName1');
 		$userData1->setEmail('no-reply@netdevelo.cz');
 		$userData1->setPassword('pa55w0rd');
 
@@ -54,13 +55,14 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$userData1,
 			$billingAddress1,
 			$deliveryAddress1,
-			$userByEmail);
+			$userByEmail
+		);
 		$this->assertInstanceOf(User::class, $user1);
 
 		$billingAddress2 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
 		$userData2 = new UserData();
-		$userData2->setFirstName('firstName1');
+		$userData2->setFirstName('firstName2');
 		$userData2->setLastName('lastName2');
 		$userData2->setEmail('no-reply2@netdevelo.cz');
 		$userData2->setPassword('pa55w0rd');
@@ -69,7 +71,8 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$userData2,
 			$billingAddress2,
 			$deliveryAddress2,
-			$user1);
+			$user1
+		);
 		$this->assertInstanceOf(User::class, $user2);
 	}
 
@@ -83,7 +86,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 		$userByEmail = null;
 		$userData1 = new UserData();
 		$userData1->setFirstName('firstName1');
-		$userData1->setLastName('lastName2');
+		$userData1->setLastName('lastName1');
 		$userData1->setEmail('no-reply@netdevelo.cz');
 		$userData1->setPassword('pa55w0rd');
 
@@ -91,7 +94,8 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$userData1,
 			$billingAddress1,
 			$deliveryAddress1,
-			$userByEmail);
+			$userByEmail
+		);
 
 		$billingAddress2 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
@@ -106,7 +110,8 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$userData2,
 			$billingAddress2,
 			$deliveryAddress2,
-			$user1);
+			$user1
+		);
 	}
 
 	public function testCreateDuplicateEmailCaseInsentitive() {
