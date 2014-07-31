@@ -53,6 +53,7 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 				'+420123456789'
 			)),
 			new DeliveryAddress(new DeliveryAddressData(
+				true,
 				'Slévárenská 18/408',
 				'Ostrava',
 				'70900',
@@ -80,6 +81,7 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 				'1-478-693-5236 x8701'
 			)),
 			new DeliveryAddress(new DeliveryAddressData(
+				true,
 				'91147 Reinger Via',
 				'Blandaville',
 				'60081',

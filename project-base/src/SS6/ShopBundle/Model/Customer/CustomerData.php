@@ -19,10 +19,26 @@ class CustomerData {
 	 */
 	private $deliveryAddressData;
 
-	public function __construct() {
-		$this->userData = new UserData();
-		$this->billingAddressData = new BillingAddressData();
-		$this->deliveryAddressData = new DeliveryAddressData();
+	public function __construct(
+		UserData $userData = null,
+		BillingAddressData $billingAddressData = null,
+		DeliveryAddressData $deliveryAddressData = null
+	) {
+		if ($userData !== null) {
+			$this->userData = $userData;
+		} else {
+			$this->userData = new UserData();
+		}
+		if ($billingAddressData !== null) {
+			$this->billingAddressData = $billingAddressData;
+		} else {
+			$this->billingAddressData = new BillingAddressData();
+		}
+		if ($deliveryAddressData !== null) {
+			$this->deliveryAddressData = $deliveryAddressData;
+		} else {
+			$this->deliveryAddressData = new DeliveryAddressData();
+		}
 	}
 
 	/**

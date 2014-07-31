@@ -45,6 +45,7 @@ class DeliveryAddressData {
 	private $country;
 
 	/**
+	 * @param boolean $addressFilled
 	 * @param string|null $street
 	 * @param string|null $city
 	 * @param string|null $postcode
@@ -54,6 +55,7 @@ class DeliveryAddressData {
 	 * @param string|null $telephone
 	 */
 	public function __construct(
+		$addressFilled = false,
 		$street = null,
 		$city = null,
 		$postcode = null,
@@ -62,6 +64,7 @@ class DeliveryAddressData {
 		$contactPerson = null,
 		$telephone = null
 	) {
+		$this->addressFilled = $addressFilled;
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;

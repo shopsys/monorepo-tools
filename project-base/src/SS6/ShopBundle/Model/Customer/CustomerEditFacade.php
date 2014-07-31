@@ -232,26 +232,33 @@ class CustomerEditFacade {
 
 		$user = $this->edit(
 			$user->getId(),
-			Condition::ifNull($user->getFirstName(), $order->getFirstName()),
-			Condition::ifNull($user->getLastName(), $order->getLastName()),
-			null,
-			$telephone,
-			$companyCustomer,
-			$companyName,
-			$companyNumber,
-			$companyTaxNumber,
-			$street,
-			$city,
-			$postcode,
-			$billingAddress->getCountry(),
-			$deliveryAddressFilled,
-			$deliveryCompanyName,
-			$deliveryContactPerson,
-			$deliveryTelephone,
-			$deliveryStreet,
-			$deliveryCity,
-			$deliveryPostcode,
-			$deliveryCountry
+			new CustomerData(
+				new UserData(
+					Condition::ifNull($user->getFirstName(), $order->getFirstName()),
+					Condition::ifNull($user->getLastName(), $order->getLastName())
+				),
+				new BillingAddressData(
+					$street,
+					$city,
+					$postcode,
+					$billingAddress->getCountry(),
+					$companyCustomer,
+					$companyName,
+					$companyNumber,
+					$companyTaxNumber,
+					$telephone
+				),
+				new DeliveryAddressData(
+					$deliveryAddressFilled,
+					$deliveryStreet,
+					$deliveryCity,
+					$deliveryPostcode,
+					$deliveryCountry,
+					$deliveryCompanyName,
+					$deliveryContactPerson,
+					$deliveryTelephone
+				)
+			)
 		);
 
 		$this->em->flush();
