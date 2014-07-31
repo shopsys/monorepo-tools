@@ -11,7 +11,7 @@
 				<span>
 					{% if imageExists(product, 'default') %}
 						<a href="{{ imageUrl(product, 'default') }}" class="js-gallery">
-							{{ image(product, 'default', {width: '336px'}) }}
+							{{ image(product, { size: 'default', width: '336px' }) }}
 						</a>
 					{% else %}
 						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="336px" height="200px">

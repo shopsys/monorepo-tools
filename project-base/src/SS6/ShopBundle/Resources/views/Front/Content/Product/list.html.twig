@@ -14,7 +14,7 @@
 					<div class="product-list__image">
 						<span>
 							{% if imageExists(product, 'default') %}
-								{{ image(product, 'default', {height: '200px'}) }}
+								{{ image(product, { size: 'default', height: '200px' }) }}
 							{% else %}
 								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="336px" height="200px">
 							{% endif %}

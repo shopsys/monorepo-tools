@@ -1,0 +1,46 @@
+<?php
+
+namespace SS6\ShopBundle\Model\Image\Config\Exception;
+
+use Exception;
+
+class ImageTypeNotFoundException extends Exception implements ImageConfigException {
+
+	/**
+	 * @var string
+	 */
+	private $entityClass;
+
+	/**
+	 * @var string
+	 */
+	private $imageType;
+
+	/**
+	 * @param string $entityClass
+	 * @param string $imageType
+	 * @param \Exception $previous
+	 */
+	public function __construct($entityClass, $imageType, Exception $previous = null) {
+		$this->entityClass = $entityClass;
+		$this->imageType = $imageType;
+
+		$message = sprintf('Image type "%s" not found for entity "%s".', $this->imageType, $this->entityClass);
+		parent::__construct($message, 0, $previous);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEntityClass() {
+		return $this->entityClass;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getImageType() {
+		return $this->imageType;
+	}
+
+}

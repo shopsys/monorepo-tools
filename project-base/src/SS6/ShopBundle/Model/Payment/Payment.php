@@ -5,8 +5,6 @@ namespace SS6\ShopBundle\Model\Payment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Image\EntityImageInterface;
-use SS6\ShopBundle\Model\Image\ImageFileCollection;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
@@ -16,7 +14,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment implements EntityFileUploadInterface, EntityImageInterface {
+class Payment implements EntityFileUploadInterface {
 
 	/**
 	 * @var integer
@@ -162,12 +160,10 @@ class Payment implements EntityFileUploadInterface, EntityImageInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Image\ImageFileCollection
+	 * @return string
 	 */
-	public function getImageFileCollection() {
-		$imageFileCollection = new ImageFileCollection('payment');
-		$imageFileCollection->addImageFile($this->getId() . '.' . $this->image, $this->getName());
-		return $imageFileCollection;
+	public function getImageFilename() {
+		return $this->getId() . '.' . $this->image;
 	}
 
 	/**
