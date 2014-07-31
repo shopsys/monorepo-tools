@@ -410,8 +410,7 @@ class CustomerEditFacade {
 		if ($deliveryAddress === null) {
 			$deliveryAddressFilled = $order->getDeliveryStreet() !== null;
 			$deliveryCompanyName = $order->getDeliveryCompanyName();
-			$deliveryContactPersonString = trim($order->getDeliveryFirstName() . ' ' . $order->getDeliveryLastName());
-			$deliveryContactPerson = $deliveryContactPersonString ?: null;
+			$deliveryContactPerson = $order->getDeliveryContactPerson();
 			$deliveryTelephone = $order->getDeliveryTelephone();
 			$deliveryStreet = $order->getDeliveryStreet();
 			$deliveryCity = $order->getDeliveryCity();

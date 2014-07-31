@@ -36,6 +36,9 @@ class OrderController extends Controller {
 		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
 		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
+		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
+		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
+
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
@@ -73,7 +76,7 @@ class OrderController extends Controller {
 		if ($flow->isValid($form)) {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
-			} elseif ($flashMessageText->isEmpty()) {
+			} elseif ($flashMessageBag->isEmpty()) {
 				$order = $orderFacade->createOrder($formData, $this->getUser());
 				$cartFacade->cleanCart();
 				if ($user instanceof User) {
