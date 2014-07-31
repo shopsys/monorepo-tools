@@ -39,7 +39,7 @@ class BagTest extends FunctionalTestCase {
 		$this->assertEquals($errorMessagesAdmin, $flashMessageAdmin->getErrorMessages());
 	}
 
-	public function testGetUniqMessage() {
+	public function testGetUniqueMessage() {
 		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
 		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 

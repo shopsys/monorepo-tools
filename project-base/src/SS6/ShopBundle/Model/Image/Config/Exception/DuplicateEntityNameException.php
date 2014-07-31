@@ -18,7 +18,7 @@ class DuplicateEntityNameException extends Exception implements ImageConfigExcep
 	public function __construct($entityName, Exception $previous = null) {
 		$this->entityName = $entityName;
 
-		$message = sprintf('Image entity name "%s" is not uniq.', $this->entityName);
+		$message = sprintf('Image entity name "%s" is not unique.', $this->entityName);
 		parent::__construct($message, 0, $previous);
 	}
 

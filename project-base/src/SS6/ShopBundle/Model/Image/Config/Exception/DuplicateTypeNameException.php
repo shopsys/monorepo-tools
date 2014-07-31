@@ -19,9 +19,9 @@ class DuplicateTypeNameException extends Exception implements ImageConfigExcepti
 		$this->typeName = $typeName;
 
 		if ($this->typeName === null) {
-			$message = 'Image type NULL is not uniq.';
+			$message = 'Image type NULL is not unique.';
 		} else {
-			$message = sprintf('Image type "%s" is not uniq.', $this->typeName);
+			$message = sprintf('Image type "%s" is not unique.', $this->typeName);
 		}
 		parent::__construct($message, 0, $previous);
 	}

@@ -19,9 +19,9 @@ class DuplicateSizeNameException extends Exception implements ImageConfigExcepti
 		$this->sizeName = $sizeName;
 
 		if ($this->sizeName === null) {
-			$message = 'Image size NULL is not uniq.';
+			$message = 'Image size NULL is not unique.';
 		} else {
-			$message = sprintf('Image size "%s" is not uniq.', $this->sizeName);
+			$message = sprintf('Image size "%s" is not unique.', $this->sizeName);
 		}
 		parent::__construct($message, 0, $previous);
 	}
