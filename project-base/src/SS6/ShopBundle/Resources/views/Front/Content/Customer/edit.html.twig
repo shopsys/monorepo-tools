@@ -12,10 +12,10 @@
 				{{ form_errors(form) }}
 				<div class="info-box">
 					<h2>Osobní údaje</h2>
-					{{ form_row(form.user.firstName, { label: 'Jméno'}) }}
-					{{ form_row(form.user.lastName, { label: 'Příjmení'}) }}
-					{{ form_row(form.billingAddress.telephone, { label: 'Telefon'}) }}
-					{{ form_row(form.user.email, { label: 'Email'}) }}
+					{{ form_row(form.userData.firstName, { label: 'Jméno'}) }}
+					{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
+					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'}) }}
+					{{ form_row(form.userData.email, { label: 'Email'}) }}
 					<p>
 						Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
 						Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte.
@@ -24,47 +24,47 @@
 
 				<div class="info-box">
 					<h2>Registrovaní zák.</h2>
-					{{ form_row(form.user.password.first, { label: 'Heslo'}) }}
-					{{ form_row(form.user.password.second, { label: 'Heslo znovu'}) }}
+					{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
+					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
 				</div>
 
 				<div class="info-box">
 					<h2>Firemní údaje</h2>
-					{{ form_row(form.billingAddress.companyCustomer, {
+					{{ form_row(form.billingAddressData.companyCustomer, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
 						label: 'Nakupuji na firmu'})
 					}}
 					<div id="js-company-fields">
-						{{ form_row(form.billingAddress.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.billingAddress.companyNumber, { label: 'IČ'}) }}
-						{{ form_row(form.billingAddress.companyTaxNumber, { label: 'DIČ'}) }}
+						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'}) }}
+						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'}) }}
+						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'}) }}
 					</div>
 				</div>
 
 
 				<div class="info-box">
 					<h2>Adresa</h2>
-					{{ form_row(form.billingAddress.street, { label: 'Ulice'}) }}
-					{{ form_row(form.billingAddress.city, { label: 'Město'}) }}
-					{{ form_row(form.billingAddress.postcode, { label: 'PSČ'}) }}
-					{{ form_row(form.billingAddress.country, { label: 'Stát'}) }}
+					{{ form_row(form.billingAddressData.street, { label: 'Ulice'}) }}
+					{{ form_row(form.billingAddressData.city, { label: 'Město'}) }}
+					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'}) }}
+					{{ form_row(form.billingAddressData.country, { label: 'Stát'}) }}
 				</div>
 
 
 				<div class="info-box">
 					<h2>Doručovací adresa</h2>
-					{{ form_row(form.deliveryAddress.addressFilled, {
+					{{ form_row(form.deliveryAddressData.addressFilled, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
 						label: 'Zboží chci doručit na jinou adresu než fakturační'})
 					}}
 					<div id="js-delivery-address-fields">
-						{{ form_row(form.deliveryAddress.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.deliveryAddress.contactPerson, { label: 'Kontaktní osoba'}) }}
-						{{ form_row(form.deliveryAddress.telephone, { label: 'Telefon'}) }}
-						{{ form_row(form.deliveryAddress.street, { label: 'Ulice'}) }}
-						{{ form_row(form.deliveryAddress.city, { label: 'Město'}) }}
-						{{ form_row(form.deliveryAddress.postcode, { label: 'PSČ'}) }}
-						{{ form_row(form.deliveryAddress.country, { label: 'Stát'}) }}
+						{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'}) }}
+						{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'}) }}
+						{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'}) }}
+						{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'}) }}
+						{{ form_row(form.deliveryAddressData.city, { label: 'Město'}) }}
+						{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'}) }}
+						{{ form_row(form.deliveryAddressData.country, { label: 'Stát'}) }}
 					</div>
 				</div>
 

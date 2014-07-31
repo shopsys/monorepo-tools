@@ -83,15 +83,7 @@ class BillingAddress {
 	private $telephone;
 
 	/**
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
 	 */
 	public function __construct(BillingAddressData $billingAddressData) {
 		$this->street = $billingAddressData->getStreet();

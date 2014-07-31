@@ -7,52 +7,73 @@ class CustomerData {
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\UserData
 	 */
-	private $user;
+	private $userData;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\BillingAddressData
 	 */
-	private $billingAddress;
+	private $billingAddressData;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddressData
 	 */
-	private $deliveryAddress;
+	private $deliveryAddressData;
 
 	public function __construct() {
-		$this->user = new UserData();
-		$this->billingAddress = new BillingAddressData();
-		$this->deliveryAddress = new DeliveryAddressData();
+		$this->userData = new UserData();
+		$this->billingAddressData = new BillingAddressData();
+		$this->deliveryAddressData = new DeliveryAddressData();
 	}
 
-	public function getUser() {
-		return $this->user;
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\UserData
+	 */
+	public function getUserData() {
+		return $this->userData;
 	}
 
-	public function getBillingAddress() {
-		return $this->billingAddress;
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\BillingAddressData
+	 */
+	public function getBillingAddressData() {
+		return $this->billingAddressData;
 	}
 
-	public function getDeliveryAddress() {
-		return $this->deliveryAddress;
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddressData
+	 */
+	public function getDeliveryAddressData() {
+		return $this->deliveryAddressData;
 	}
 
-	public function setUser(UserData $userData) {
-		$this->user = $userData;
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
+	 */
+	public function setUserData(UserData $userData) {
+		$this->userData = $userData;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
+	 */
 	public function setBillingAddress(BillingAddressData $billingAddressData) {
-		$this->billingAddress = $billingAddressData;
+		$this->billingAddressData = $billingAddressData;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddress
+	 */
 	public function setDeliveryAddress(DeliveryAddressData $deliveryAddress) {
-		$this->deliveryAddress = $deliveryAddress;
+		$this->deliveryAddressData = $deliveryAddress;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 */
 	public function setFromEntity(User $user) {
-		$this->user->setFromEntity($user);
-		$this->billingAddress->setFromEntity($user->getBillingAddress());
-		$this->deliveryAddress->setFromEntity($user->getDeliveryAddress());
+		$this->userData->setFromEntity($user);
+		$this->billingAddressData->setFromEntity($user->getBillingAddress());
+		$this->deliveryAddressData->setFromEntity($user->getDeliveryAddress());
 	}
 
 }

@@ -23,9 +23,9 @@ class CustomerFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('user', new UserFormType())
-			->add('billingAddress', new BillingAddressFormType())
-			->add('deliveryAddress', new DeliveryAddressFormType())
+			->add('userData', new UserFormType())
+			->add('billingAddressData', new BillingAddressFormType())
+			->add('deliveryAddressData', new DeliveryAddressFormType())
 			->add('save', 'submit');
 	}
 

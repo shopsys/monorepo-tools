@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Customer;
 class BillingAddressData {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $telephone;
 
@@ -15,37 +15,37 @@ class BillingAddressData {
 	private $companyCustomer;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $companyName;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $companyNumber;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $companyTaxNumber;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $street;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $city;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $postcode;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $country;
 
@@ -82,78 +82,135 @@ class BillingAddressData {
 		$this->telephone = $telephone;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getTelephone() {
 		return $this->telephone;
 	}
 
+	/**
+	 * @return boolean
+	 */
 	public function getCompanyCustomer() {
 		return $this->companyCustomer;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getCompanyName() {
 		return $this->companyName;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getCompanyNumber() {
 		return $this->companyNumber;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getCompanyTaxNumber() {
 		return $this->companyTaxNumber;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getStreet() {
 		return $this->street;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getCity() {
 		return $this->city;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getPostcode() {
 		return $this->postcode;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function getCountry() {
 		return $this->country;
 	}
 
+	/**
+	 * @param string|null $telephone
+	 */
 	public function setTelephone($telephone) {
 		$this->telephone = $telephone;
 	}
 
+	/**
+	 * @param bool $companyCustomer
+	 */
 	public function setCompanyCustomer($companyCustomer) {
 		$this->companyCustomer = $companyCustomer;
 	}
 
+	/**
+	 * @param string|null $companyName
+	 */
 	public function setCompanyName($companyName) {
 		$this->companyName = $companyName;
 	}
 
+	/**
+	 * @param string|null $companyNumber
+	 */
 	public function setCompanyNumber($companyNumber) {
 		$this->companyNumber = $companyNumber;
 	}
 
+	/**
+	 * @param string|null $companyTaxNumber
+	 */
 	public function setCompanyTaxNumber($companyTaxNumber) {
 		$this->companyTaxNumber = $companyTaxNumber;
 	}
 
+	/**
+	 * @param string|null $street
+	 */
 	public function setStreet($street) {
 		$this->street = $street;
 	}
 
+	/**
+	 * @param string|null $city
+	 */
 	public function setCity($city) {
 		$this->city = $city;
 	}
 
+	/**
+	 * @param string|null $postcode
+	 */
 	public function setPostcode($postcode) {
 		$this->postcode = $postcode;
 	}
 
+	/**
+	 * @param string|null $country
+	 */
 	public function setCountry($country) {
 		$this->country = $country;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
+	 */
 	public function setFromEntity(BillingAddress $billingAddress) {
 		$this->telephone = $billingAddress->getTelephone();
 		$this->companyCustomer = $billingAddress->isCompanyCustomer();

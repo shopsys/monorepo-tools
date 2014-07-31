@@ -83,18 +83,18 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function create(CustomerData $customerData) {
-		$billingAddress = new BillingAddress($customerData->getBillingAddress());
+		$billingAddress = new BillingAddress($customerData->getBillingAddressData());
 		$this->em->persist($billingAddress);
 
-		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->getDeliveryAddress());
+		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->getDeliveryAddressData());
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 		}
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUser()->getEmail());
+		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUserData()->getEmail());
 
 		$user = $this->registrationService->create(
-			$customerData->getUser(),
+			$customerData->getUserData(),
 			$billingAddress,
 			$deliveryAddress,
 			$userByEmail
@@ -114,14 +114,14 @@ class CustomerEditFacade {
 	private function edit($userId, CustomerData $customerData) {
 		$user = $this->userRepository->getUserById($userId);
 
-		$this->registrationService->edit($user, $customerData->getUser());
+		$this->registrationService->edit($user, $customerData->getUserData());
 
-		$user->getBillingAddress()->edit($customerData->getBillingAddress());
+		$user->getBillingAddress()->edit($customerData->getBillingAddressData());
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
 		$deliveryAddress = $this->registrationService->editDeliveryAddress(
 			$user,
-			$customerData->getDeliveryAddress(),
+			$customerData->getDeliveryAddressData(),
 			$oldDeliveryAddress
 		);
 
@@ -143,8 +143,8 @@ class CustomerEditFacade {
 	public function editByAdmin($userId, CustomerData $customerData) {
 		$user = $this->edit($userId, $customerData);
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUser()->getEmail());
-		$this->registrationService->changeEmail($user, $customerData->getUser()->getEmail(), $userByEmail);
+		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUserData()->getEmail());
+		$this->registrationService->changeEmail($user, $customerData->getUserData()->getEmail(), $userByEmail);
 
 		$this->em->flush();
 
