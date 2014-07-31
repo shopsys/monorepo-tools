@@ -4,7 +4,10 @@
 {% block h1 %}Editace zákazníka - {{ user.fullName }}{% endblock %}
 
 {% block customer_id %}
-	{{ form_row(form.id, { label: 'ID'}) }}
+	<div class="form-group">
+		<label>ID:</label>
+		<input type="text" value="{{ user.id }}" class="form-control" readonly="readonly">
+	</div>
 {% endblock %}
 
 {% block customer_created_at %}

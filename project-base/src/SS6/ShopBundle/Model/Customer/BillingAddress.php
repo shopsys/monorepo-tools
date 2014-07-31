@@ -83,50 +83,41 @@ class BillingAddress {
 	private $telephone;
 
 	/**
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param boolean $companyCustomer
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
 	 */
-	public function __construct($street = null, $city = null, $postcode = null, $country = null,
-			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$telephone = null) {
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->country = $country;
-		$this->companyCustomer = $companyCustomer;
+	public function __construct(BillingAddressData $billingAddressData) {
+		$this->street = $billingAddressData->getStreet();
+		$this->city = $billingAddressData->getCity();
+		$this->postcode = $billingAddressData->getPostcode();
+		$this->country = $billingAddressData->getCountry();
+		$this->companyCustomer = $billingAddressData->getCompanyCustomer();
 		if ($this->companyCustomer) {
-			$this->companyName = $companyName;
-			$this->companyNumber = $companyNumber;
-			$this->companyTaxNumber = $companyTaxNumber;
+			$this->companyName = $billingAddressData->getCompanyName();
+			$this->companyNumber = $billingAddressData->getCompanyNumber();
+			$this->companyTaxNumber = $billingAddressData->getCompanyTaxNumber();
 		}
-		$this->telephone = $telephone;
+		$this->telephone = $billingAddressData->getTelephone();
 	}
 
-	public function edit($street = null, $city = null, $postcode = null, $country = null,
-			$companyCustomer = false, $companyName = null, $companyNumber = null, $companyTaxNumber = null,
-			$telephone = null) {
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->country = $country;
-		$this->companyCustomer = $companyCustomer;
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $billingAddressData
+	 */
+	public function edit(BillingAddressData $billingAddressData) {
+		$this->street = $billingAddressData->getStreet();
+		$this->city = $billingAddressData->getCity();
+		$this->postcode = $billingAddressData->getPostcode();
+		$this->country = $billingAddressData->getCountry();
+		$this->companyCustomer = $billingAddressData->getCompanyCustomer();
 		if ($this->companyCustomer) {
-			$this->companyName = $companyName;
-			$this->companyNumber = $companyNumber;
-			$this->companyTaxNumber = $companyTaxNumber;
+			$this->companyName = $billingAddressData->getCompanyName();
+			$this->companyNumber = $billingAddressData->getCompanyNumber();
+			$this->companyTaxNumber = $billingAddressData->getCompanyTaxNumber();
 		} else {
 			$this->companyName = null;
 			$this->companyNumber = null;
 			$this->companyTaxNumber = null;
 		}
-		$this->telephone = $telephone;
+		$this->telephone = $billingAddressData->getTelephone();
 	}
 
 	/**

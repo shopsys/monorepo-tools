@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
+use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -19,7 +20,7 @@ class RegistrationController extends Controller {
 		$form = $this->createForm(new RegistrationFormType());
 
 		try {
-			$userData = array();
+			$userData = new UserData();
 
 			$form->setData($userData);
 			$form->handleRequest($request);
@@ -29,11 +30,7 @@ class RegistrationController extends Controller {
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
 				$userData = $form->getData();
-				$user = $customerEditFacade->register(
-					$userData['firstName'],
-					$userData['lastName'],
-					$userData['email'],
-					$userData['password']);
+				$user = $customerEditFacade->register($userData);
 
 				$this->login($user);
 

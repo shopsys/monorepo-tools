@@ -22,6 +22,7 @@ class CustomerIdentifierFactory {
 
 	/**
 	 * @param \Symfony\Component\Security\Core\SecurityContext $securityContext
+	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
 	 */
 	public function __construct(SecurityContext $securityContext, Session $session) {
 		$this->session = $session;
@@ -46,6 +47,7 @@ class CustomerIdentifierFactory {
 	}
 
 	/**
+	 * @param string $sessionId
 	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	public function getOnlyWithSessionId($sessionId) {

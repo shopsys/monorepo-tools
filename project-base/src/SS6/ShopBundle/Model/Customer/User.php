@@ -80,29 +80,29 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $lastLogin;
 
 	/**
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
+	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 */
-	public function __construct($firstName, $lastName, $email,
-			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null) {
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
-		$this->email = strtolower($email);
+	public function __construct(
+		UserData $userData,
+		BillingAddress $billingAddress,
+		DeliveryAddress $deliveryAddress = null
+	) {
+		$this->firstName = $userData->getFirstName();
+		$this->lastName = $userData->getLastName();
+		$this->email = strtolower($userData->getEmail());
 		$this->billingAddress = $billingAddress;
 		$this->deliveryAddress = $deliveryAddress;
 		$this->createdAt = new DateTime();
 	}
 
 	/**
-	 * @param string $firstName
-	 * @param string $lastName
+	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 */
-	public function edit($firstName, $lastName) {
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
+	public function edit($userData) {
+		$this->firstName = $userData->getFirstName();
+		$this->lastName = $userData->getLastName();
 	}
 
 	/**

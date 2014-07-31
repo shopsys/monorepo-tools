@@ -69,43 +69,29 @@ class DeliveryAddress {
 	private $telephone;
 
 	/**
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param string|null $companyName
-	 * @param string|null $contactPerson
-	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
-	public function __construct($street = null, $city = null, $postcode = null, $country = null,
-			$companyName = null, $contactPerson = null, $telephone = null) {
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->country = $country;
-		$this->companyName = $companyName;
-		$this->contactPerson = $contactPerson;
-		$this->telephone = $telephone;
+	public function __construct(DeliveryAddressData $deliveryAddressData) {
+		$this->street = $deliveryAddressData->getStreet();
+		$this->city = $deliveryAddressData->getCity();
+		$this->postcode = $deliveryAddressData->getPostcode();
+		$this->country = $deliveryAddressData->getCountry();
+		$this->companyName = $deliveryAddressData->getCompanyName();
+		$this->contactPerson = $deliveryAddressData->getContactPerson();
+		$this->telephone = $deliveryAddressData->getTelephone();
 	}
 
 	/**
-	 * @param string|null $street
-	 * @param string|null $city
-	 * @param string|null $postcode
-	 * @param string|null $country
-	 * @param string|null $companyName
-	 * @param string|null $contactPerson
-	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
-	public function edit($street = null, $city = null, $postcode = null, $country = null,
-			$companyName = null, $contactPerson = null, $telephone = null) {
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->country = $country;
-		$this->companyName = $companyName;
-		$this->contactPerson = $contactPerson;
-		$this->telephone = $telephone;
+	public function edit(DeliveryAddressData $deliveryAddressData) {
+		$this->street = $deliveryAddressData->getStreet();
+		$this->city = $deliveryAddressData->getCity();
+		$this->postcode = $deliveryAddressData->getPostcode();
+		$this->country = $deliveryAddressData->getCountry();
+		$this->companyName = $deliveryAddressData->getCompanyName();
+		$this->contactPerson = $deliveryAddressData->getContactPerson();
+		$this->telephone = $deliveryAddressData->getTelephone();
 	}
 
 	/**

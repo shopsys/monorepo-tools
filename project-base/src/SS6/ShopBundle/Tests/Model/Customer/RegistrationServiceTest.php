@@ -4,7 +4,10 @@ namespace SS6\ShopBundle\Tests\Model\Customer;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
+use SS6\ShopBundle\Model\Customer\BillingAddressData;
+use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
+use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Customer\User;
 
@@ -15,14 +18,17 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 		$registrationService = new RegistrationService($encoderFactory);
 
-		$billingAddress = new BillingAddress();
-		$deliveryAddress = new DeliveryAddress();
+		$billingAddress = new BillingAddress(new BillingAddressData());
+		$deliveryAddress = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
+		$userData = new UserData();
+		$userData->setFirstName('firstName');
+		$userData->setLastName('lastName');
+		$userData->setEmail('no-reply@netdevelo.cz');
+		$userData->setPassword('pa55w0rd');
+
 		$user = $registrationService->create(
-			'firstName',
-			'lastName',
-			'no-reply@netdevelo.cz',
-			'pa55w0rd',
+			$userData,
 			$billingAddress,
 			$deliveryAddress,
 			$userByEmail);
@@ -35,25 +41,32 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 		$registrationService = new RegistrationService($encoderFactory);
 
-		$billingAddress1 = new BillingAddress();
-		$deliveryAddress1 = new DeliveryAddress();
+		$billingAddress1 = new BillingAddress(new BillingAddressData());
+		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
-		$user1 = $registrationService->create('firstName1',
-			'lastName2',
-			'no-reply@netdevelo.cz',
-			'pa55w0rd',
+		$userData1 = new UserData();
+		$userData1->setFirstName('firstName1');
+		$userData1->setLastName('lastName2');
+		$userData1->setEmail('no-reply@netdevelo.cz');
+		$userData1->setPassword('pa55w0rd');
+
+		$user1 = $registrationService->create(
+			$userData1,
 			$billingAddress1,
 			$deliveryAddress1,
 			$userByEmail);
 		$this->assertInstanceOf(User::class, $user1);
 
-		$billingAddress2 = new BillingAddress();
-		$deliveryAddress2 = new DeliveryAddress();
+		$billingAddress2 = new BillingAddress(new BillingAddressData());
+		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
+		$userData2 = new UserData();
+		$userData2->setFirstName('firstName1');
+		$userData2->setLastName('lastName2');
+		$userData2->setEmail('no-reply2@netdevelo.cz');
+		$userData2->setPassword('pa55w0rd');
+
 		$user2 = $registrationService->create(
-			'firstName1',
-			'lastName2',
-			'no-reply2@netdevelo.cz',
-			'pa55w0rd',
+			$userData2,
 			$billingAddress2,
 			$deliveryAddress2,
 			$user1);
@@ -65,27 +78,32 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 		$registrationService = new RegistrationService($encoderFactory);
 
-		$billingAddress1 = new BillingAddress();
-		$deliveryAddress1 = new DeliveryAddress();
+		$billingAddress1 = new BillingAddress(new BillingAddressData());
+		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
+		$userData1 = new UserData();
+		$userData1->setFirstName('firstName1');
+		$userData1->setLastName('lastName2');
+		$userData1->setEmail('no-reply@netdevelo.cz');
+		$userData1->setPassword('pa55w0rd');
+
 		$user1 = $registrationService->create(
-			'firstName1',
-			'lastName2',
-			'no-reply@netdevelo.cz',
-			'pa55w0rd',
+			$userData1,
 			$billingAddress1,
 			$deliveryAddress1,
 			$userByEmail);
 
-		$billingAddress2 = new BillingAddress();
-		$deliveryAddress2 = new DeliveryAddress();
+		$billingAddress2 = new BillingAddress(new BillingAddressData());
+		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
+		$userData2 = new UserData();
+		$userData2->setFirstName('firstName2');
+		$userData2->setLastName('lastName2');
+		$userData2->setEmail('no-reply@netdevelo.cz');
+		$userData2->setPassword('pa55w0rd');
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
 		$registrationService->create(
-			'firstName2',
-			'lastName2',
-			'no-reply@netdevelo.cz',
-			'pa55w0rd',
+			$userData2,
 			$billingAddress2,
 			$deliveryAddress2,
 			$user1);
