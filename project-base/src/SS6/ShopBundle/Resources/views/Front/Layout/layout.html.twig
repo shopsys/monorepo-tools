@@ -35,6 +35,11 @@
 				</ul>
 
 				<div class="header-panel">
+					<ul class="articles-menu articles-menu--reverse left">
+						<li class="articles-menu__item">
+							<a href="{{ url('front_product_list') }}">Katalog zboží</a></li>
+						</li>
+					</ul>
 					<ul class="articles-menu">
 						{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
 					</ul>

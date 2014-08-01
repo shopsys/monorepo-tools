@@ -1,7 +1,10 @@
 .articles-menu {
-	clear: both;
 	float: right;
 	.reset-ul();
+}
+
+.articles-menu--reverse {
+	float: left;
 }
 
 .articles-menu .articles-menu__item {
@@ -25,4 +28,9 @@
 			background: @bg-primary;
 		}
 	}
+}
+
+.articles-menu--reverse .articles-menu__item {
+	border-right: 1px solid @color-border;
+	border-left: 0;
 }

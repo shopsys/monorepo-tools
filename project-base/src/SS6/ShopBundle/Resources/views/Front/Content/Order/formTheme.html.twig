@@ -1,6 +1,7 @@
 {% extends '@SS6Shop/Front/Form/theme.html.twig' %}
 
 {% block form_row %}
+
 	<div class="form-place">
 		{{ form_label(form) }}
 		<div class="form-place__input-wrap">
@@ -9,6 +10,12 @@
 		{{ form_errors(form) }}
 	</div>
 {% endblock form_row %}
+
+{% block textarea_row %}
+	{{ form_label(form) }}
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+{% endblock textarea_row %}
 
 {% block form_label %}
 	{% spaceless %}
@@ -63,7 +70,7 @@
 	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
 	{{ parent('textarea_widget') }}
 {% endblock textarea_widget %}
-	
+
 {% block button_widget %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary')|trim}) %}
 	{{ parent('button_widget') }}
@@ -79,7 +86,7 @@
 						{{ child.vars.label }}
 					</label>
 				</div>
-			{% else %}		
+			{% else %}
 				{{ empty_message|default('Není z čeho vybírat.') }}
 			{% endfor %}
 			</div>
