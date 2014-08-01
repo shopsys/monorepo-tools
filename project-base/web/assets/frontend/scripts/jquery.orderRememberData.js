@@ -24,7 +24,11 @@
 	
 	$.fn.SS6.orderRememberData.saveData = function(event) {
 		clearTimeout($.fn.SS6.orderRememberData.delayedSaveDataTimer);
-		console.log('saving');
+		$.ajax({
+			type: "POST",
+			url: "/order/save-form/",
+			data: $('#js-order-form').serialize()
+		});
 	};
 	
 	$(document).ready(function () {
