@@ -105,83 +105,101 @@
 {% endblock %}
 
 {% block pkgrid_pager_totalcount %}
-	<strong class="display-ib mr-1">
+	<strong class="left mt-half form-fake">
+		Právě zobrazuji
 		{{ ('%count% ' ~ entityName|default('záznamů')|trim ~ '. ') | transchoice(grid.totalCount, {'%count%': grid.totalCount}) }}
 	</strong>
 {% endblock %}
 
 {% block pkgrid_pager_selectpage %}
-	{{ 'Stránka'|trans }}
 	{% spaceless %}
-		<span class="form-inline">
+		<ul class="pagination mb-0 mt-half">
 
 			{% if grid.page > 1 %}
-				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>&nbsp;
-				<a class="btn btn-default" href="{{ gridView.url({'page': 1}) }}">1</a>&nbsp;
+				<li>
+					<a href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>
+				</li>
+
+				<li>
+					<a href="{{ gridView.url({'page': 1}) }}">1</a>
+				</li>
 			{% endif %}
 
 			{% set pagerExpand = 2 %}
 
 			{% if grid.page > pagerExpand + 2 %}
-				...
+				<li class="disabled">
+					<a href="#" class="cursor-default">...</a>
+				</li>
+
 			{% endif %}
 
 			{% for page in (grid.page - pagerExpand)..(grid.page) if page > 1 and page < grid.page %}
-				<a class="btn btn-default" href="{{ gridView.url({'page': page}) }}">{{ page }}</a>&nbsp;
+				<li>
+					<a href="{{ gridView.url({'page': page}) }}">{{ page }}</a>
+				</li>
 			{% endfor %}
-
-			<a class="btn btn-default disabled" href="#" onclick="return false;">{{ grid.page }}</a>&nbsp;
+			<li class="active">
+				<a href="#" onclick="return false;">{{ grid.page }}</a>
+			</li>
 
 			{% for page in (grid.page + 1)..(grid.page + pagerExpand) if page > grid.page and page < grid.pageCount %}
-				<a class="btn btn-default" href="{{ gridView.url({'page': page}) }}">{{ page }}</a>&nbsp;
+				<li>
+					<a href="{{ gridView.url({'page': page}) }}">{{ page }}</a>
+				</li>
 			{% endfor %}
 
 			{% if grid.page < (grid.pageCount - 1) - pagerExpand - 1 %}
-				...
+				<li class="disabled">
+					<a href="#" class="cursor-default">...</a>
+				</li>
 			{% endif %}
 
 			{% if grid.page < grid.pageCount %}
-				<a class="btn btn-default" href="{{ gridView.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>&nbsp;
-				<a class="btn btn-default" href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
+				<li>
+					<a href="{{ gridView.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>
+				</li>
+				<li>
+					<a href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
+				</li>
 			{% endif %}
+		</ul>
 
-			<span class="js-pkgrid-go-to">
-				Přejít na:
-				<input
-					type="number"
-					min="1"
-					max="{{ grid.pageCount }}"
-					value="{{ grid.page }}"
-					class="current form-control text-center js-pkgrid-go-to-input"
-					size="2"
-				/>&nbsp;
-				<a class="btn btn-default js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
-			</span>
-
-		</span>
+		<div class="js-pkgrid-go-to form-inline right clear-r small">
+			<span>Přejít na stránku:</span>
+			<input
+				type="number"
+				min="1"
+				max="{{ grid.pageCount }}"
+				value="{{ grid.page }}"
+				class="current form-control text-center js-pkgrid-go-to-input form-control--size-0 ml-half mr-half input-xs"
+				size="2"
+			/>
+			<a class="btn btn-primary btn-xs js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
+		</div>
 	{% endspaceless %}
 {% endblock %}
 
 {% block pkgrid_pager_results_perpage %}
-	<div class="right">
-		{{ ' Zobrazit'|trans }}
+	<div class="right mb-half small">
 		<span class="form-inline">
-			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="form-control">
+			{{ 'Položek na stránku:'|trans }}
+			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="form-control ml-half input-xs">
 				{% for value in grid.limits %}
 					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
 				{% endfor %}
-			</select> {{ 'položek na stránku'|trans }}
+			</select>
 		</span>
 	</div>
 {% endblock %}
 
 {% block pkgrid_pager %}
-	<div class="text-left clearfix well well-sm">
+	<div class="text-center clearfix mb-half box-line box-line--border">
 		{{ gridView.renderBlock('pkgrid_pager_totalcount') }}
+		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
 		{% if grid.pageCount > 1 %}
 			{{ gridView.renderBlock('pkgrid_pager_selectpage') }}
 		{% endif %}
-		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
 	</div>
 {% endblock %}
 
