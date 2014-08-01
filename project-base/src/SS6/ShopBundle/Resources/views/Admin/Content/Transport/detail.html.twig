@@ -11,26 +11,26 @@
 {% block main_content %}
 	<div class="row">
 
-		<div class="col-xs-12 col-lg-8">
-			
+		<div class="col-xs-12 col-lg-10">
+
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
 				{% block transport_id %}
 					{{ form_widget(form.id, { type: 'hidden' }) }}
 				{% endblock %}
-				
+
 				{{ form_row(form.name, { label: 'Název'}) }}
 				{{ form_row(form.hidden, { label: 'Skryté'}) }}
 				{{ form_row(form.price, { label: 'Cena'}) }}
 				{{ form_row(form.description, { label: 'Popis'}) }}
 				{% block image %}{% endblock %}
 				{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
-				
+
 				{% block transport_save %}{% endblock %}
 				<a href="{{ url('admin_transportandpayment_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>
-		
+
 	</div>
 {% endblock %}

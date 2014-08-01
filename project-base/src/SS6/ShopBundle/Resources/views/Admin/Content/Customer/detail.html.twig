@@ -6,8 +6,8 @@
 {% block main_content %}
 	<div class="row">
 
-		<div class="col-xs-12 col-lg-8">
-			
+		<div class="col-xs-12 col-lg-10">
+
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
@@ -20,7 +20,7 @@
 				{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
 				{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'}) }}
 				{{ form_row(form.userData.email, { label: 'Email'}) }}
-				
+
 				<h2>Registrovaní zák.</h2>
 				{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
 				{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
@@ -62,9 +62,9 @@
 				<a href="{{ url('admin_customer_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>
-		
+
 	</div>
 
 
-		
+
 {% endblock %}
