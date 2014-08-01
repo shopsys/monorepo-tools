@@ -5,10 +5,10 @@
 
 {% block main_content %}
 	<div class="row">
-		<div class="col-xs-12 col-lg-8">
-		
+		<div class="col-xs-12 col-lg-10">
+
 			<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
-			
+
 			{{ gridView.render('@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
 		</div>
 	</div>
