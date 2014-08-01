@@ -1,15 +1,17 @@
 {{ form_start(form) }}
 	{{ form_errors(form) }}
 
-	Opravdu chce smazat stav objednávek <strong>{{ orderStatus.name }}</strong>?<br />
-	Tento stav má přiřazeno {{ ordersCount }} objednávek, vyberte stav, který jim má být nově nastaven:
+	<p>
+		Opravdu chce smazat stav objednávek <strong>{{ orderStatus.name }}</strong>?<br />
+		Tento stav má přiřazeno {{ ordersCount }} objednávek, vyberte stav, který jim má být nově nastaven:
+	</p>
 
 	{{ form_row(form.newStatus, { label: 'Nový stav', id: 'js-order-status-delete-status-select' }) }}
 
-	<span id="js-order-status-delete-submit-container" data-toggle="tooltip" data-placement="right">
+	<span id="js-order-status-delete-submit-container" data-toggle="tooltip" data-placement="right" class="right">
 		{{ form_widget(form.delete, { label: 'Smazat', id: 'js-order-status-delete-submit' }) }}
 	</span>
 
-	<a href="" onclick="$.fn.SS6.window.close({{ windowId|json_encode }}); return false;" class="btn">Zpět</a>
+	<a href="" onclick="$.fn.SS6.window.close({{ windowId|json_encode }}); return false;" class="btn btn-danger left">Zpět</a>
 
 {{ form_end(form) }}

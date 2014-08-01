@@ -4,13 +4,13 @@
 	{% else %}
 		{{ text }}
 	{% endif %}
-	
+
 	{% if closeButton|default(true) %}
 		<a href="#" class="window-button-close window__close" title="Zavřít">{{ closeButtonText|default('X') }}</a>
 	{% endif %}
 	{% if continueButton|default(false) %}
 		<div class="window__actions">
-			<a href="{{ continueUrl|default('#') }}" class="window-button-continue button">{{ continueButtonText|default('Pokračovat')}}</a>
+			<a href="{{ continueUrl|default('#') }}" class="window-button-continue btn btn-primary">{{ continueButtonText|default('Pokračovat')}}</a>
 		</div>
 	{% endif %}
 </div>
