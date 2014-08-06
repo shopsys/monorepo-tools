@@ -27,6 +27,11 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	private $constraints;
 
 	/**
+	 * @var bool
+	 */
+	private $required;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 */
 	public function __construct(FileUpload $fileUpload) {
@@ -76,6 +81,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		parent::buildForm($builder, $options);
+		$this->required = $options['required'];
 		$this->constraints = $options['file_constraints'];
 
 		$builder->addModelTransformer($this);
@@ -92,13 +98,15 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	}
 
 	/**
-	 * @param string $filenameUploaded
+	 * @param string|null $filenameUploaded
 	 * @param \Symfony\Component\Validator\ExecutionContextInterface $context
 	 */
 	public function validateUploadedFile($filenameUploaded, ExecutionContextInterface $context) {
-		$filepath = $this->fileUpload->getCacheFilepath($filenameUploaded);
-		$file = new File($filepath);
-		$context->validateValue($file, $this->constraints);
+		if ($this->required || $filenameUploaded !== null) {
+			$filepath = $this->fileUpload->getCacheFilepath($filenameUploaded);
+			$file = new File($filepath, false);
+			$context->validateValue($file, $this->constraints);
+		}
 	}
 
 	/**
