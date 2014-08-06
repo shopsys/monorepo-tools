@@ -26,7 +26,7 @@
 	<target name="build-dev" depends="build,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
-	<target name="standards" depends="phplint,phpcs,phpmd,tests"/>
+	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,tests"/>
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo"/>
 	
 	<target name="assetic">
@@ -232,6 +232,14 @@
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
+		</exec>
+	</target>
+	
+	<target name="twig-lint">
+		<exec executable="php" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="twig:lint" />
+			<arg value="@SS6ShopBundle" />
 		</exec>
 	</target>
 	
