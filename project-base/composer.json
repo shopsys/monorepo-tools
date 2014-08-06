@@ -25,7 +25,7 @@
 		"phpmd/phpmd": "2.0.0.*@dev",
 		"phpunit/phpunit": "3.7.*",
 		"raulfraile/ladybug-bundle": "~1.0",
-		"sensio/distribution-bundle": "~2.3",
+		"sensio/distribution-bundle": "~3.0",
 		"sensio/framework-extra-bundle": "~3.0",
 		"sensio/generator-bundle": "~2.3",
 		"squizlabs/php_codesniffer": "2.0.*@dev",
@@ -33,7 +33,7 @@
 		"symfony/dependency-injection": "~2.4",
 		"symfony/monolog-bundle": "~2.4",
 		"symfony/swiftmailer-bundle": "~2.3",
-		"symfony/symfony": "~2.4.4",
+		"symfony/symfony": "2.5.*",
 		"twig/extensions": "~1.0"
 	},
 	"require-dev": {},
