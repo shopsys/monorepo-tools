@@ -4,20 +4,35 @@
 {% block h1 %}Editace zákazníka - {{ user.fullName }}{% endblock %}
 
 {% block customer_id %}
-	<div class="form-group">
-		<label>ID:</label>
-		<input type="text" value="{{ user.id }}" class="form-control" readonly="readonly">
+	<div class="form-line">
+		<label class="form-line__label">ID:</label>
+		<div class="form-line__field">
+			<input type="text" value="{{ user.id }}" class="form-control" readonly="readonly">
+		</div>
 	</div>
 {% endblock %}
 
 {% block customer_created_at %}
-	<label>Datum posledního přihlášení:</label>
-	{{ user.createdAt|date('j.n.Y H:i') }}
+	<div class="form-line">
+		<span class="form-line form-line__label">
+			Posledního přihlášení :
+		</span>
+		<span class="form-line form-line__text">
+			{{ user.createdAt|date('j.n.Y H:i') }}
+		</span>
+	</div>
+
 {% endblock %}
 
 {% block customer_last_login %}
-	<label>Datum registrace:</label>
-	{{ user.lastLogin|date('j.n.Y H:i') }}
+	<div class="form-line">
+		<span class="form-line form-line__label">
+			Datum registrace :
+		</span>
+		<span class="form-line form-line__text">
+			{{ user.lastLogin|date('j.n.Y H:i') }}
+		</span>
+	</div>
 {% endblock %}
 
 {% block customer_save %}

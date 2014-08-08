@@ -10,13 +10,15 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{% block article_id %}
-					{{ form_widget(form.id, { type: 'hidden' }) }}
-				{% endblock %}
-				{% block article_url %}{% endblock %}
+				<div class="form-box">
+					{% block article_id %}
+						{{ form_widget(form.id, { type: 'hidden' }) }}
+					{% endblock %}
+					{% block article_url %}{% endblock %}
 
-				{{ form_row(form.name, { label: 'Název'}) }}
-				{{ form_row(form.text, { label: 'Text'}) }}
+					{{ form_row(form.name, { label: 'Název'}) }}
+					{{ form_row(form.text, { label: 'Text'}) }}
+				</div>
 
 				{% block article_save %}{% endblock %}
 				<a href="{{ url('admin_article_list') }}" class="btn btn-default">Zpět na přehled</a>
