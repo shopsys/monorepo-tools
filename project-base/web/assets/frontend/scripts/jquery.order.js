@@ -45,6 +45,7 @@
 					$checkbox.closest('label.chooser__item').removeClass('chooser__item--inactive');
 				} else {
 					$checkbox.prop('disabled', true);
+					$checkbox.prop('checked', false);
 					$checkbox.closest('label.chooser__item').addClass('chooser__item--inactive');
 				}
 			});
@@ -74,6 +75,7 @@
 					$checkbox.closest('label.chooser__item').removeClass('chooser__item--inactive');
 				} else {
 					$checkbox.prop('disabled', true);
+					$checkbox.prop('checked', false);
 					$checkbox.closest('label.chooser__item').addClass('chooser__item--inactive');
 				}
 			});
