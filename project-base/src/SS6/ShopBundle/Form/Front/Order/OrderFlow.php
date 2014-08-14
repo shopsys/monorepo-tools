@@ -85,4 +85,30 @@ class OrderFlow extends FormFlow {
 			&& $this->getRequestedTransition() === self::TRANSITION_BACK;
 	}
 
+	public function bind($formData) {
+		parent::bind($formData);
+		$this->jumpToPreviousFirstInvalidStep();
+		parent::bind($formData);
+	}
+
+	private function jumpToPreviousFirstInvalidStep() {
+		$stepData = $this->retrieveStepData();
+		foreach ($this->getSteps() as $step) {
+			$stepNumber = $step->getNumber();
+
+			if (array_key_exists($stepNumber, $stepData)) {
+				$stepForm = $this->createFormForStep($stepNumber);
+				$stepForm->bind($stepData[$stepNumber]); // the form is validated here
+				if ($stepNumber < $this->getCurrentStepNumber() && !$stepForm->isValid()) {
+					$request = $this->getRequest()->request;
+					$requestParameters = $request->all();
+					$requestParameters['flow_order_step'] = $stepNumber;
+					$requestParameters[$step->getType()->getName()] = $stepData[$stepNumber];
+					$request->replace($requestParameters);
+					break;
+				}
+			}
+		}
+	}
+
 }

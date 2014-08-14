@@ -4,38 +4,45 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4e7bb558c13f60ba2627da6992a23092",
+    "hash": "d4fd7397d424f5ed59681e41c6b7febd",
     "packages": [
         {
             "name": "craue/formflow-bundle",
-            "version": "2.1.5",
+            "version": "dev-master",
             "target-dir": "Craue/FormFlowBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueFormFlowBundle.git",
-                "reference": "e4899b28f975d5fa1a238e390a562775382764e6"
+                "reference": "f5f16be5033cda4a1f07d70929b3b1903945c6a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/e4899b28f975d5fa1a238e390a562775382764e6",
-                "reference": "e4899b28f975d5fa1a238e390a562775382764e6",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/f5f16be5033cda4a1f07d70929b3b1903945c6a2",
+                "reference": "f5f16be5033cda4a1f07d70929b3b1903945c6a2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "symfony/form": "~2.1",
-                "symfony/framework-bundle": "~2.1"
+                "symfony/http-kernel": "~2.1",
+                "symfony/translation": "~2.1",
+                "symfony/yaml": "~2.1"
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~3.7.10",
+                "phpunit/phpunit": "~4.1",
                 "sensio/framework-extra-bundle": ">=2.1",
                 "symfony/symfony": "~2.1"
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Craue\\FormFlowBundle": ""
+                    "Craue\\FormFlowBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -58,7 +65,7 @@
                 "Symfony2",
                 "form"
             ],
-            "time": "2014-06-13 18:13:06"
+            "time": "2014-08-06 08:46:22"
         },
         {
             "name": "doctrine/annotations",
@@ -856,25 +863,25 @@
         },
         {
             "name": "egeloen/json-builder",
-            "version": "1.0.1",
-            "target-dir": "Ivory/JsonBuilder",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/ivory-json-builder.git",
-                "reference": "e56c5c509baf7cb5cb2823ae6c987bafed67c7a4"
+                "reference": "0395f06db7bbb3c240667ab5f3152151051fb567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/e56c5c509baf7cb5cb2823ae6c987bafed67c7a4",
-                "reference": "e56c5c509baf7cb5cb2823ae6c987bafed67c7a4",
+                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/0395f06db7bbb3c240667ab5f3152151051fb567",
+                "reference": "0395f06db7bbb3c240667ab5f3152151051fb567",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": ">=5.3.0",
                 "symfony/property-access": "~2.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "~3.7",
+                "phpunit/phpunit": "~4.0",
                 "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
@@ -884,8 +891,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Ivory\\JsonBuilder": ""
+                "psr-4": {
+                    "Ivory\\JsonBuilder\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -904,7 +911,7 @@
                 "builder",
                 "json"
             ],
-            "time": "2014-06-17 13:08:16"
+            "time": "2014-08-12 00:30:56"
         },
         {
             "name": "helios-ag/fm-elfinder-bundle",
@@ -1457,16 +1464,16 @@
         },
         {
             "name": "ocramius/instantiator",
-            "version": "1.0.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/Instantiator.git",
-                "reference": "cc754c2289ffd4483c319f6ed6ee88ce21676f64"
+                "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/cc754c2289ffd4483c319f6ed6ee88ce21676f64",
-                "reference": "cc754c2289ffd4483c319f6ed6ee88ce21676f64",
+                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/a7abbb5fc9df6e7126af741dd6c140d1a7369435",
+                "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435",
                 "shasum": ""
             },
             "require": {
@@ -1475,6 +1482,7 @@
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
+                "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "2.0.*@ALPHA"
@@ -1498,8 +1506,7 @@
                 {
                     "name": "Marco Pivetta",
                     "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.com/",
-                    "role": "Developer"
+                    "homepage": "http://ocramius.github.com/"
                 }
             ],
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
@@ -1508,7 +1515,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-06-15 11:44:46"
+            "time": "2014-08-14 15:10:55"
         },
         {
             "name": "ocramius/lazy-map",
@@ -3529,11 +3536,13 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "craue/formflow-bundle": 20,
         "egeloen/ckeditor-bundle": 20,
         "pdepend/pdepend": 20,
         "phpmd/phpmd": 20,
         "squizlabs/php_codesniffer": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.4"
     },
