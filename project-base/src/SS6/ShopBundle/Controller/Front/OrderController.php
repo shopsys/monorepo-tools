@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends Controller {
 
@@ -115,6 +116,25 @@ class OrderController extends Controller {
 			'orderReview' => $orderReview,
 			'payments' => $payments,
 		));
+	}
+
+	public function saveOrderFormAction() {
+		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
+		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
+		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
+		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
+		$flow = $this->get('ss6.shop.order.flow');
+		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
+
+		$payments = $paymentRepository->getVisible();
+		$transports = $transportRepository->getVisible($payments);
+
+		$flow->setFormTypesData($transports, $payments);
+		$flow->bind(new OrderFormData());
+		$form = $flow->createForm();
+		$flow->saveCurrentStepData($form);
+
+		return new Response();
 	}
 
 	public function sentAction() {

@@ -45,6 +45,11 @@ front_logout:
 front_order_index:
   pattern: /objednavka/
   defaults: { _controller: SS6ShopBundle:Front\Order:index }
+  
+front_order_save_form:
+  pattern: /order/save-form/
+  defaults: { _controller: SS6ShopBundle:Front\Order:saveOrderForm }
+  methods: [POST]
 
 front_order_sent:
   pattern: /potvrzeni-objednavky/
