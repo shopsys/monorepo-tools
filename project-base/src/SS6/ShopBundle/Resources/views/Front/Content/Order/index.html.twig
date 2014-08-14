@@ -18,7 +18,7 @@
 {% block content %}
 	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: flow.getCurrentStepNumber()} only %}
 	
-	{{ form_start(form, { attr: { id: "js-order-form"}}) }}
+	{{ form_start(form, { attr: { id: "js-order-form", 'data-ajax-save-url': url('front_order_save_form') }}) }}
 		{% form_theme form '@SS6Shop/Front/Content/Order/formTheme.html.twig' %}
 		{{ form_errors(form) }}
 		{% include '@SS6Shop/Front/Content/Order/step' ~ flow.getCurrentStepNumber() ~ '.html.twig' %}	

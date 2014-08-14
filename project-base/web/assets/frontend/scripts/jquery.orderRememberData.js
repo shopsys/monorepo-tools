@@ -20,13 +20,13 @@
 		$.fn.SS6.orderRememberData.delayedSaveDataTimer = setTimeout(function () {
 			$this.trigger('change.orderRememberData');
 		}, $.fn.SS6.orderRememberData.delayedSaveDataDelay);
-	}
+	};
 	
 	$.fn.SS6.orderRememberData.saveData = function(event) {
 		clearTimeout($.fn.SS6.orderRememberData.delayedSaveDataTimer);
 		$.ajax({
 			type: "POST",
-			url: "/order/save-form/",
+			url: $('#js-order-form').data('ajax-save-url'),
 			data: $('#js-order-form').serialize()
 		});
 	};
