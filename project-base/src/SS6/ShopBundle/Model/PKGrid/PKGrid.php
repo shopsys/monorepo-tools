@@ -188,10 +188,10 @@ class PKGrid {
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGridView
 	 */
 	public function createView() {
-		$this->executeQuery();
 		if ($this->isAllowedPaging()) {
 			$this->executeTotalQuery();
 		}
+		$this->executeQuery();
 		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
 
 		return $gridView;
