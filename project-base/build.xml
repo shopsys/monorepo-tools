@@ -6,7 +6,9 @@
 	<property name="path.build" value="${path.root}/build"/>
 	<property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
 	<property name="path.composer.executable" value="composer"/>
+	<property name="path.grunt.executable" value="${path.root}/node_modules/.bin/grunt"/>
 	<property name="path.npm.executable" value="npm"/>
+	<property name="path.php.executable" value="php"/>
 	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
 	<property name="path.phpcs.ruleset" value="${path.build}/rulesetCS.xml"/>
 	<property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
@@ -30,7 +32,7 @@
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo"/>
 	
 	<target name="assetic">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="assetic:dump" />
 			<arg value="-q" />
@@ -51,7 +53,7 @@
 		<if>
 			<available file="${path.root}/PRODUCTION"/>
 			<then>
-				<exec executable="php" passthru="true" checkreturn="true">
+				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 					<arg value="app/console" />
 					<arg value="cache:warmup" />
 				</exec>
@@ -71,7 +73,7 @@
 	</target>
 	
 	<target name="db-create">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:schema:create" />
 			<arg value="--no-interaction" />
@@ -79,7 +81,7 @@
 	</target>
 	
 	<target name="db-drop">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:schema:drop" />
 			<arg value="--force" />
@@ -89,7 +91,7 @@
 	</target>
 	
 	<target name="db-fixtures-base-settings">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
@@ -99,7 +101,7 @@
 	</target>
 	
 	<target name="db-fixtures-demo">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
@@ -110,7 +112,7 @@
 	</target>
 	
 	<target name="grunt">
-		<exec executable="grunt" passthru="true" checkreturn="true" />
+		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
 	</target>
 	
 	<target name="npm">
@@ -193,7 +195,7 @@
 	</target>
 	
 	<target name="test-db-create">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:schema:create" />
@@ -202,7 +204,7 @@
 	</target>
 	
 	<target name="test-db-drop">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:schema:drop" />
@@ -213,7 +215,7 @@
 	</target>
 	
 	<target name="test-db-fixtures-base-settings">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:fixtures:load" />
@@ -224,7 +226,7 @@
 	</target>
 	
 	<target name="test-db-fixtures-demo">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:fixtures:load" />
@@ -236,7 +238,7 @@
 	</target>
 	
 	<target name="twig-lint">
-		<exec executable="php" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="twig:lint" />
 			<arg value="@SS6ShopBundle" />
