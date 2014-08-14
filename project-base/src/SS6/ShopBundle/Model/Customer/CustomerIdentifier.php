@@ -21,6 +21,11 @@ class CustomerIdentifier {
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 */
 	public function __construct($sessionId, User $user = null) {
+		if ($sessionId === '' && $user === null) {
+			$message = 'Can not be created empty CustomerIdentifier';
+			throw new \SS6\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException($message);
+		}
+
 		$this->user = $user;
 		if ($this->user === null) {
 			$this->sessionId = $sessionId;

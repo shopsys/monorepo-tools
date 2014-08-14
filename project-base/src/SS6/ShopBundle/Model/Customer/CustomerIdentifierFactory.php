@@ -41,6 +41,14 @@ class CustomerIdentifierFactory {
 	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	public function get() {
+		$sessionId = $this->session->getId();
+
+		// when session is not started, returning empty string is behaviour of session_id()
+		if ($sessionId === '') {
+			$this->session->start();
+			$sessionId = $this->session->getId();
+		}
+
 		$customerIdentifier = new CustomerIdentifier($this->session->getId(), $this->user);
 		
 		return $customerIdentifier;
