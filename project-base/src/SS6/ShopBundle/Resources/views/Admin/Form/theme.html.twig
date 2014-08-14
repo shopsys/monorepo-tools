@@ -6,10 +6,10 @@
 {% endblock form_start %}
 
 {% block form_row %}
-	<div class="form-group">
-		{{ form_label(form) }}
+	<div class="form-line {{ attr.class|default('') }}">
+		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
 		{{ form_errors(form) }}
-		{{ form_widget(form) }}
 	</div>
 {% endblock form_row %}
 
@@ -20,6 +20,16 @@
 		{{ form_widget(form) }}
 	</div>
 {% endblock checkbox_row %}
+
+{% block textarea_row -%}
+	<div class="form-line">
+		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+		{{- form_errors(form) -}}
+		<div class="form-line__full">
+			{{- form_widget(form) -}}
+		</div>
+	</div>
+{%- endblock textarea_row %}
 
 {% block form_label %}
 	{% spaceless %}
@@ -93,7 +103,7 @@
     {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
     {% endif %}
-    <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+    <select class="form-control form-line__field" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none -%}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
         {%- endif %}

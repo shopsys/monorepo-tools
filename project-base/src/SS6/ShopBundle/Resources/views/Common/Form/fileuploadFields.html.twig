@@ -1,6 +1,6 @@
 {% block file_upload_widget %}
 	{% spaceless %}
-		{%  set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-file-upload')|trim)}) %}
+		{%  set attr = attr|merge({'class': ' js-file-upload'}) %}
 		{%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
 		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletecachedfile')}) %}
 		<div class="upload-box">
@@ -29,9 +29,9 @@
 				</div>
 
 				<div class="js-file-upload-input">
-					<div class="js-file-upload-fallback-hide upload-box__place"><i class="fa fa-lg fa-plus-circle"></i> Zde přetáhněte soubor</div>
-					<div class="js-file-upload-fallback-hide upload-box__between">- nebo -</div>
-					<div class="upload-box__file-input">
+					<div class="js-file-upload-fallback-hide upload-box__place form-line__text"><i class="fa fa-lg fa-plus-circle"></i> Zde přetáhněte soubor</div>
+					<div class="js-file-upload-fallback-hide upload-box__between form-line__text">- nebo -</div>
+					<div class="upload-box__file-input form-line__field">
 						{{ form_widget(form.children.file) }}
 					</div>
 				</div>

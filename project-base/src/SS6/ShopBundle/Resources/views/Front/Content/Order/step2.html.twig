@@ -15,7 +15,7 @@
 				<h2 class="mt-0">Výběr dopravy</h2>
 
 				<div class="chooser chooser--smaller">
-					{{ form_errors(form.transport) }}
+					{{ form_errors(form.transport, { attr: {class: 'message-floating--on-top'} }) }}
 
 					{% for child in form.transport %}
 						{% set choice = form.transport.vars.choices[child.vars.name] %}

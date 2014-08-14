@@ -11,51 +11,63 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				<h2>Systémové údaje</h2>
-				{% block customer_id %}{% endblock %}
-				{% block customer_created_at %}{% endblock %}
-
-				<h2>Osobní údaje</h2>
-				{{ form_row(form.userData.firstName, { label: 'Jméno'}) }}
-				{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
-				{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'}) }}
-				{{ form_row(form.userData.email, { label: 'Email'}) }}
-
-				<h2>Registrovaní zák.</h2>
-				{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
-				{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
-				{% block customer_last_login %}{% endblock %}
-
-				<h2>Firemní údaje</h2>
-				{{ form_row(form.billingAddressData.companyCustomer, {
-					attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-					label: 'Nakupuji na firmu'})
-				}}
-				<div id="js-company-fields">
-					{{ form_row(form.billingAddressData.companyName, { label: 'Firma'}) }}
-					{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'}) }}
-					{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'}) }}
+				<div class="form-box">
+					<h2>Systémové údaje</h2>
+					{% block customer_id %}{% endblock %}
+					{% block customer_created_at %}{% endblock %}
 				</div>
 
-				<h2>Adresa</h2>
-				{{ form_row(form.billingAddressData.street, { label: 'Ulice'}) }}
-				{{ form_row(form.billingAddressData.city, { label: 'Město'}) }}
-				{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'}) }}
-				{{ form_row(form.billingAddressData.country, { label: 'Stát'}) }}
+				<div class="form-box">
+					<h2>Osobní údaje</h2>
+					{{ form_row(form.userData.firstName, { label: 'Jméno'}) }}
+					{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
+					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon', attr: {class: 'form-line--size-3'} }) }}
+					{{ form_row(form.userData.email, { label: 'Email', attr: {class: 'form-line--size-3'} }) }}
+				</div>
 
-				<h2>Doručovací adresa</h2>
-				{{ form_row(form.deliveryAddressData.addressFilled, {
-					attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-					label: 'Zboží chci doručit na jinou adresu než fakturační'})
-				}}
-				<div id="js-delivery-address-fields">
-					{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'}) }}
-					{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'}) }}
-					{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'}) }}
-					{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'}) }}
-					{{ form_row(form.deliveryAddressData.city, { label: 'Město'}) }}
-					{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'}) }}
-					{{ form_row(form.deliveryAddressData.country, { label: 'Stát'}) }}
+				<div class="form-box">
+					<h2>Registrovaní zák.</h2>
+					{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
+					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
+					{% block customer_last_login %}{% endblock %}
+				</div>
+
+				<div class="form-box">
+					<h2>Firemní údaje</h2>
+					{{ form_row(form.billingAddressData.companyCustomer, {
+						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
+						label: 'Nakupuji na firmu'})
+					}}
+					<div id="js-company-fields">
+						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'}) }}
+						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ', attr: {class: 'form-line--size-3'} }) }}
+						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ', attr: {class: 'form-line--size-3'} }) }}
+					</div>
+				</div>
+
+				<div class="form-box">
+					<h2>Adresa</h2>
+					{{ form_row(form.billingAddressData.street, { label: 'Ulice'}) }}
+					{{ form_row(form.billingAddressData.city, { label: 'Město'}) }}
+					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ', attr: {class: 'form-line--size-2'} }) }}
+					{{ form_row(form.billingAddressData.country, { label: 'Stát'}) }}
+				</div>
+
+				<div class="form-box">
+					<h2>Doručovací adresa</h2>
+					{{ form_row(form.deliveryAddressData.addressFilled, {
+						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+						label: 'Zboží chci doručit na jinou adresu než fakturační'})
+					}}
+					<div id="js-delivery-address-fields">
+						{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'}) }}
+						{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'}) }}
+						{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon', attr: {class: 'form-line--size-3'} }) }}
+						{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'}) }}
+						{{ form_row(form.deliveryAddressData.city, { label: 'Město'}) }}
+						{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ', attr: {class: 'form-line--size-2'} }) }}
+						{{ form_row(form.deliveryAddressData.country, { label: 'Stát'}) }}
+					</div>
 				</div>
 
 				{% block customer_save %}{% endblock %}

@@ -6,10 +6,10 @@
 {% endblock form_start %}
 
 {% block form_row %}
-	<div class="form-group">
-		{{ form_label(form) }}
+	<div class="form-line {{ attr.class|default('') }}">
+		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
 		{{ form_errors(form) }}
-		{{ form_widget(form) }}
 	</div>
 {% endblock form_row %}
 
@@ -20,6 +20,16 @@
 		{{ form_widget(form) }}
 	</div>
 {% endblock checkbox_row %}
+
+{% block textarea_row -%}
+	<div class="form-line">
+		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+		{{- form_errors(form) -}}
+		<div class="form-line__full">
+			{{- form_widget(form) -}}
+		</div>
+	</div>
+{%- endblock textarea_row %}
 
 {% block form_label %}
 	{% spaceless %}
@@ -53,7 +63,7 @@
 	{% spaceless %}
 		{% if errors|length > 0 %}
 			{% if form.parent %}
-				<div class="message message-danger message-floating">
+				<div class="message-danger message-floating {{ attr.class|default('') }}">
 					<ul class="message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>
@@ -83,11 +93,31 @@
 	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
 	{{ parent('textarea_widget') }}
 {% endblock textarea_widget %}
-	
+
 {% block button_widget %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary button')|trim}) %}
 	{{ parent('button_widget') }}
 {% endblock button_widget %}
+
+{% block choice_widget_collapsed -%}
+    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+        {% set required = false %}
+    {% endif %}
+    <select class="form-control form-line__field" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if empty_value is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {%- endif %}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('choice_widget_options') -}}
+            {% if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif %}
+        {%- endif -%}
+        {% set options = choices -%}
+        {{- block('choice_widget_options') -}}
+    </select>
+{%- endblock choice_widget_collapsed %}
 
 {% block choice_widget_expanded %}
 	{% spaceless %}
@@ -99,7 +129,7 @@
 						{{ child.vars.label }}
 					</label>
 				</div>
-			{% else %}		
+			{% else %}
 				{{ empty_message|default('Není z čeho vybírat.') }}
 			{% endfor %}
 			</div>

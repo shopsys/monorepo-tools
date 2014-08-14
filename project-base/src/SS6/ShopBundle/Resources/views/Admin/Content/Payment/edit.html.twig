@@ -8,11 +8,11 @@
 {% endblock %}
 
 {% block image %}
-	<div class="form-group">
-		<label>
+	<div class="form-line">
+		<label class="form-line__label">
 			Obrázek:
 		</label>
-		<div>
+		<div class="form-line__field mb-1">
 			{{ image(payment, { height: 100 }) }}
 		</div>
 	</div>

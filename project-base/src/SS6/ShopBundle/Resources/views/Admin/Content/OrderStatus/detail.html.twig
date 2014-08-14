@@ -11,8 +11,10 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{{ form_widget(form.id, { type: 'hidden' }) }}
-				{{ form_row(form.name, { label: 'Název' }) }}
+				<div class="form-box">
+					{{ form_widget(form.id, { type: 'hidden' }) }}
+					{{ form_row(form.name, { label: 'Název' }) }}
+				</div>
 
 				{% block order_status_save %}{% endblock %}
 				<a href="{{ url('admin_orderstatus_list') }}" class="btn btn-default">Zpět na přehled</a>

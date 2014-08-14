@@ -8,22 +8,26 @@
 {% endblock %}
 
 {% block product_url %}
-	<div class="form-group">
-		{% if (product.visible) %}
-			<a href="{{ url('front_product_detail', { id: product.id }) }}" target="_blank">{{ url('front_product_detail', { id: product.id }) }}</a>
-		{% else %}
-			{{ url('front_product_detail', { id: product.id }) }}
-		{% endif %}
+	<div class="form-line">
+		<span class="form-line__text">
+			{% if (product.visible) %}
+				<a href="{{ url('front_product_detail', { id: product.id }) }}" target="_blank">{{ url('front_product_detail', { id: product.id }) }}</a>
+			{% else %}
+				{{ url('front_product_detail', { id: product.id }) }}
+			{% endif %}
+		</span>
 	</div>
 {% endblock %}
 
 {% block image %}
-	<div class="form-group">
-		<label>
+	<div class="form-line">
+		<label class="form-line__label">
 			Obrázek:
 		</label>
-		<div>
-			{{ image(product, { size: 'default', height: 100 }) }}
+		<div class="form-line__field">
+			<div class="mb-1">
+				{{ image(product, { size: 'default', height: 100 }) }}
+			</div>
 		</div>
 	</div>
 {% endblock %}

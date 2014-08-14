@@ -6,16 +6,22 @@
 
 {% block pkgrid_action_cell_type_delete %}
 	{% if row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
-		<span class="table-action">
-			<i title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám." class="js-order-status-list-no-delete cursor-help fa fa-info" data-toggle="tooltip" data-placement="right"></i>
+		<span title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám."
+			class="js-order-status-list-no-delete table-action cursor-help" data-toggle="tooltip" data-placement="right"
+		>
+			<i class="fa fa-info"></i>
 		</span>
 	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_DONE') %}
-		<span class="table-action">
-			<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny." class="js-order-status-list-no-delete cursor-help fa fa-info" data-toggle="tooltip" data-placement="right"></i>
+		<span title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny."
+			class="js-order-status-list-no-delete table-action cursor-help" data-toggle="tooltip" data-placement="right"
+		>
+			<i class="fa fa-info"></i>
 		</span>
 	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_CANCELED') %}
-		<span class="table-action">
-			<i title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny." class="js-order-status-list-no-delete cursor-help fa fa-info" data-toggle="tooltip" data-placement="right"></i>
+		<span title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny."
+			class="js-order-status-list-no-delete table-action cursor-help" data-toggle="tooltip" data-placement="right"
+		>
+			<i class="fa fa-info"></i>
 		</span>
 	{% else %}
 		<a

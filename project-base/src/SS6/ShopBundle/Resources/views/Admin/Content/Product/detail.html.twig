@@ -11,26 +11,39 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{% block product_id %}
-					{{ form_widget(form.id, { type: 'hidden' }) }}
-				{% endblock %}
-				{% block product_url %}{% endblock %}
+				<div class="form-box">
+					{% block product_id %}
+					{{ form_widget(form.id, { type: 'hidden'}) }}
+					{% endblock %}
+					{% block product_url %}{% endblock %}
 
-				{{ form_row(form.name, { label: 'Název'}) }}
-				{{ form_row(form.catnum, { label: 'Katalogové číslo', attr: {class: 'form-control--size-3'} }) }}
-				{{ form_row(form.partno, { label: 'PartNo (výrobní číslo)', attr: {class: 'form-control--size-3'} }) }}
-				{{ form_row(form.ean, { label: 'EAN', attr: {class: 'form-control--size-3'} }) }}
-				{{ form_row(form.description, { label: 'Popis'}) }}
-				{{ form_row(form.price, { label: 'Cena', attr: {class: 'form-control--size-1'} }) }}
-				{{ form_row(form.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-control--size-2'} }) }}
-				{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-control--size-2'} }) }}
-				{{ form_row(form.stockQuantity, { label: 'Skladem', attr: {class: 'form-control--size-1'} }) }}
-				{{ form_row(form.hidden, { label: 'Skryté'}) }}
-				{% block image %}{% endblock %}
-				{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
+					{{ form_row(form.name, { label: 'Název'}) }}
+				</div>
 
-				{% block product_save %}{% endblock %}
-				<a href="{{ url('admin_product_list') }}" class="btn btn-default">Zpět na přehled</a>
+
+				<div class="form-box">
+					{{ form_row(form.catnum, { label: 'Katalogové číslo' }) }}
+					{{ form_row(form.partno, { label: 'PartNo (výrobní číslo)' }) }}
+					{{ form_row(form.ean, { label: 'EAN' }) }}
+				</div>
+
+
+				<div class="form-box">
+					{{ form_row(form.description, { label: 'Popis'}) }}
+					{{ form_row(form.price, { label: 'Cena', attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.hidden, { label: 'Skryté'}) }}
+				</div>
+
+				<div class="form-box">
+					{% block image %}{% endblock %}
+					{{ form_row(form.image, { label: 'Nahrát obrázek' }) }}
+
+					{% block product_save %}{% endblock %}
+					<a href="{{ url('admin_product_list') }}" class="btn btn-default">Zpět na přehled</a>
+				</div>
 			{{ form_end(form) }}
 		</div>
 

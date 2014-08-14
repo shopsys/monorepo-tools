@@ -8,8 +8,10 @@
 {% endblock %}
 
 {% block article_url %}
-	<div class="form-group">
-		<a href="{{ url('front_article_detail', { id: article.id }) }}" target="_blank">{{ url('front_article_detail', { id: article.id }) }}</a>
+	<div class="form-line">
+		<span class="form-line__text">
+			<a href="{{ url('front_article_detail', { id: article.id }) }}" target="_blank">{{ url('front_article_detail', { id: article.id }) }}</a>
+		</span>
 	</div>
 {% endblock %}
 
