@@ -204,7 +204,7 @@ class CustomerEditFacade {
 			$postcode = Condition::ifNull($billingAddress->getPostcode(), $order->getPostcode());
 		}
 
-		if ($billingAddress == null || $billingAddress->getTelephone() === null) {
+		if ($billingAddress === null || $billingAddress->getTelephone() === null) {
 			$telephone = $order->getTelephone();
 		} else {
 			$telephone = $billingAddress->getTelephone();
