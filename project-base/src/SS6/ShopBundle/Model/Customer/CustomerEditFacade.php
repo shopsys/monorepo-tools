@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Model\Customer\CustomerEditService;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderRepository;
@@ -37,22 +37,32 @@ class CustomerEditFacade {
 	private $registrationService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditService
+	 */
+	private $customerEditService;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
 	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
 	 * @param \SS6\ShopBundle\Model\Customer\RegistrationService $registrationService
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerEditService $customerEditService
 	 */
-	public function __construct(EntityManager $em,
-			OrderRepository $orderRepository,
-			UserRepository $userRepository,
-			OrderService $orderService,
-			RegistrationService $registrationService) {
+	public function __construct(
+		EntityManager $em,
+		OrderRepository $orderRepository,
+		UserRepository $userRepository,
+		OrderService $orderService,
+		RegistrationService $registrationService,
+		CustomerEditService $customerEditService
+	) {
 		$this->em = $em;
 		$this->orderRepository = $orderRepository;
 		$this->userRepository = $userRepository;
 		$this->orderService = $orderService;
 		$this->registrationService = $registrationService;
+		$this->customerEditService = $customerEditService;
 	}
 
 	/**
@@ -180,85 +190,11 @@ class CustomerEditFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function amendCustomerDataFromOrder(User $user, Order $order) {
-		$billingAddress = $user->getBillingAddress();
-		$deliveryAddress = $user->getDeliveryAddress();
-
-		if ($billingAddress->getStreet() === null) {
-			$companyCustomer = $order->getCompanyNumber() !== null;
-			$companyName = $order->getCompanyName();
-			$companyNumber = $order->getCompanyNumber();
-			$companyTaxNumber = $order->getCompanyTaxNumber();
-			$street = $order->getStreet();
-			$city = $order->getCity();
-			$postcode = $order->getPostcode();
-		} else {
-			$companyCustomer = $billingAddress->isCompanyCustomer();
-			$companyName = $billingAddress->getCompanyName();
-			$companyNumber = $billingAddress->getCompanyNumber();
-			$companyTaxNumber = $billingAddress->getCompanyTaxNumber();
-			$street = Condition::ifNull($billingAddress->getStreet(), $order->getStreet());
-			$city = Condition::ifNull($billingAddress->getCity(), $order->getCity());
-			$postcode = Condition::ifNull($billingAddress->getPostcode(), $order->getPostcode());
-		}
-
-		if ($billingAddress === null || $billingAddress->getTelephone() === null) {
-			$telephone = $order->getTelephone();
-		} else {
-			$telephone = $billingAddress->getTelephone();
-		}
-
-		if ($deliveryAddress === null) {
-			$deliveryAddressFilled = $order->getDeliveryStreet() !== null;
-			$deliveryCompanyName = $order->getDeliveryCompanyName();
-			$deliveryContactPerson = $order->getDeliveryContactPerson();
-			$deliveryTelephone = $order->getDeliveryTelephone();
-			$deliveryStreet = $order->getDeliveryStreet();
-			$deliveryCity = $order->getDeliveryCity();
-			$deliveryPostcode = $order->getDeliveryPostcode();
-			$deliveryCountry = null;
-		} else {
-			$deliveryAddressFilled = true;
-			$deliveryCompanyName = $deliveryAddress->getCompanyName();
-			$deliveryContactPerson = $deliveryAddress->getContactPerson();
-			$deliveryTelephone = $deliveryAddress->getTelephone();
-			$deliveryStreet = $deliveryAddress->getStreet();
-			$deliveryCity = $deliveryAddress->getCity();
-			$deliveryPostcode = $deliveryAddress->getPostcode();
-			$deliveryCountry = $deliveryAddress->getCountry();
-		}
-
-		$user = $this->edit(
+		$this->edit(
 			$user->getId(),
-			new CustomerData(
-				new UserData(
-					Condition::ifNull($user->getFirstName(), $order->getFirstName()),
-					Condition::ifNull($user->getLastName(), $order->getLastName())
-				),
-				new BillingAddressData(
-					$street,
-					$city,
-					$postcode,
-					$billingAddress->getCountry(),
-					$companyCustomer,
-					$companyName,
-					$companyNumber,
-					$companyTaxNumber,
-					$telephone
-				),
-				new DeliveryAddressData(
-					$deliveryAddressFilled,
-					$deliveryStreet,
-					$deliveryCity,
-					$deliveryPostcode,
-					$deliveryCountry,
-					$deliveryCompanyName,
-					$deliveryContactPerson,
-					$deliveryTelephone
-				)
-			)
+			$this->customerEditService->getAmendedCustomerDataByOrder($user, $order)
 		);
 
 		$this->em->flush();
