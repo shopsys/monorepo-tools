@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aebb1c500d2425aa22c63710a1a63865",
+    "hash": "3e5708cfb00ae122b6b232965d590e89",
     "packages": [
         {
             "name": "bmatzner/jquery-bundle",
@@ -1719,50 +1719,6 @@
                 "minification"
             ],
             "time": "2013-07-19 00:03:27"
-        },
-        {
-            "name": "kutny/autowiring-bundle",
-            "version": "1.0",
-            "target-dir": "Kutny/AutowiringBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kutny/autowiring-bundle.git",
-                "reference": "0ffab9bbf76dad610fc1cf6a54f52e39543a3ae6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kutny/autowiring-bundle/zipball/0ffab9bbf76dad610fc1cf6a54f52e39543a3ae6",
-                "reference": "0ffab9bbf76dad610fc1cf6a54f52e39543a3ae6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Kutny\\AutowiringBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jiri Koutny",
-                    "email": "jirkakoutny@gmail.com"
-                }
-            ],
-            "description": "A simple library that provides autowiring for the Symfony Dependency Injection (DI) container.",
-            "homepage": "https://github.com/kutny/autowiring-bundle",
-            "keywords": [
-                "Autowiring",
-                "Symfony Bundle",
-                "dependency injection",
-                "di"
-            ],
-            "time": "2014-02-24 21:02:07"
         },
         {
             "name": "monolog/monolog",

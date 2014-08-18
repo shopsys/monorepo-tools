@@ -1,0 +1,21 @@
+services:
+
+  ss6.auto_services.auto_container:
+    class: SS6\AutoServicesBundle\Compiler\AutoContainer
+    arguments:
+      - @service_container
+      - @ss6.auto_services.class_resolver
+      - @ss6.auto_services.container_class_list
+      - @ss6.auto_services.auto_services_collector
+
+  ss6.auto_services.class_resolver:
+    class: SS6\AutoServicesBundle\Compiler\ClassResolver
+
+  ss6.auto_services.container_class_list:
+    class: SS6\AutoServicesBundle\Compiler\ContainerClassList
+    arguments: [%kernel.cache_dir%]
+
+  ss6.auto_services.auto_services_collector:
+    class: SS6\AutoServicesBundle\Compiler\AutoServicesCollector
+    arguments: [%kernel.cache_dir%]
+
