@@ -187,7 +187,7 @@ class CustomerEditFacade {
 		$deliveryAddress = $user->getDeliveryAddress();
 
 		if ($billingAddress->getStreet() === null) {
-			$companyCustomer = true;
+			$companyCustomer = $order->getCompanyNumber() !== null;
 			$companyName = $order->getCompanyName();
 			$companyNumber = $order->getCompanyNumber();
 			$companyTaxNumber = $order->getCompanyTaxNumber();
