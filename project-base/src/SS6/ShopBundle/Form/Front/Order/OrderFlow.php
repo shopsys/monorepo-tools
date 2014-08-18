@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Front\Order;
 use Craue\FormFlowBundle\Form\FormFlow;
 use SS6\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
 use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
+use Craue\FormFlowBundle\Form\StepInterface;
 
 class OrderFlow extends FormFlow {
 	/**
@@ -55,6 +56,11 @@ class OrderFlow extends FormFlow {
 		);
 	}
 
+	/**
+	 * @param int $step
+	 * @param array $options
+	 * @return array
+	 */
 	public function getFormOptions($step, array $options = array()) {
 		$options = parent::getFormOptions($step, $options);
 
@@ -80,35 +86,72 @@ class OrderFlow extends FormFlow {
 		$this->saveStepData($stepData);
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isBackToCartTransition() {
 		return $this->getRequestedStepNumber() === 2
 			&& $this->getRequestedTransition() === self::TRANSITION_BACK;
 	}
 
+	/**
+	 * @param mixed $formData
+	 */
 	public function bind($formData) {
-		parent::bind($formData);
-		$this->jumpToPreviousFirstInvalidStep();
-		parent::bind($formData);
+		parent::bind($formData); // load current step number
+
+		$firstInvalidStep = $this->getFirstInvalidStep();
+		if ($firstInvalidStep !== null && $this->getCurrentStepNumber() > $firstInvalidStep->getNumber()) {
+			$this->changeRequestToStep($firstInvalidStep);
+			parent::bind($formData); // load changed step
+		}
 	}
-
-	private function jumpToPreviousFirstInvalidStep() {
-		$stepData = $this->retrieveStepData();
+	
+	/**
+	 * @return StepInterface|null
+	 */
+	private function getFirstInvalidStep() {
 		foreach ($this->getSteps() as $step) {
-			$stepNumber = $step->getNumber();
-
-			if (array_key_exists($stepNumber, $stepData)) {
-				$stepForm = $this->createFormForStep($stepNumber);
-				$stepForm->bind($stepData[$stepNumber]); // the form is validated here
-				if ($stepNumber < $this->getCurrentStepNumber() && !$stepForm->isValid()) {
-					$request = $this->getRequest()->request;
-					$requestParameters = $request->all();
-					$requestParameters['flow_order_step'] = $stepNumber;
-					$requestParameters[$step->getType()->getName()] = $stepData[$stepNumber];
-					$request->replace($requestParameters);
-					break;
-				}
+			if (!$this->isStepValid($step)) {
+				return $step;
 			}
 		}
+
+		return null;
+	}
+
+	/**
+	 * @param \Craue\FormFlowBundle\Form\StepInterface $step
+	 * @return boolean
+	 */
+	private function isStepValid(StepInterface $step) {
+		$stepNumber = $step->getNumber();
+		$stepsData = $this->retrieveStepData();
+		if (array_key_exists($stepNumber, $stepsData)) {
+			$stepForm = $this->createFormForStep($stepNumber);
+			$stepForm->bind($stepsData[$stepNumber]); // the form is validated here
+			return $stepForm->isValid();
+		}
+
+		return $step->getType() === null;
+	}
+
+	/**
+	 * @param \Craue\FormFlowBundle\Form\StepInterface $step
+	 */
+	private function changeRequestToStep(StepInterface $step) {
+		$stepsData = $this->retrieveStepData();
+		if (array_key_exists($step->getNumber(), $stepsData)) {
+			$stepData = $stepsData[$step->getNumber()];
+		} else {
+			$stepData = array();
+		}
+
+		$request = $this->getRequest()->request;
+		$requestParameters = $request->all();
+		$requestParameters['flow_order_step'] = $step->getNumber();
+		$requestParameters[$step->getType()->getName()] = $stepData;
+		$request->replace($requestParameters);
 	}
 
 }
