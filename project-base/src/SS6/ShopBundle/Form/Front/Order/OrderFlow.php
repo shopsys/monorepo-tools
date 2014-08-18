@@ -57,6 +57,20 @@ class OrderFlow extends FormFlow {
 	}
 
 	/**
+	 * @return string
+	 */
+	protected function determineInstanceId() {
+		return $this->getInstanceId();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getStepDataKey() {
+		return $this->getInstanceId();
+	}
+
+	/**
 	 * @param int $step
 	 * @param array $options
 	 * @return array
