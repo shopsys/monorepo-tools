@@ -45,4 +45,18 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($expectedArray, $array);
 	}
+
+	public function testMixedToArrayIfNull() {
+		$this->assertEquals([], Condition::mixedToArray(null));
+	}
+
+	public function testMixedToArrayIfNotArray() {
+		$value = 'I am not array';
+		$this->assertEquals([$value], Condition::mixedToArray($value));
+	}
+
+	public function testMixedToArrayIfArray() {
+		$value = ['1', 3, []];
+		$this->assertEquals($value, Condition::mixedToArray($value));
+	}
 }
