@@ -66,6 +66,7 @@ class ProductFormType extends AbstractType {
 			->add('description', 'ckeditor', array('required' => false))
 			->add('price', 'money', array(
 				'currency' => false,
+				'precision' => 6,
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
 			))
