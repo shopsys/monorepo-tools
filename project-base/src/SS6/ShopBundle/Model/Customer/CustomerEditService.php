@@ -31,8 +31,8 @@ class CustomerEditService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @return \SS6\ShopBundle\Model\Customer\BillingAddressData
 	 */
 	private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress) {
@@ -57,8 +57,8 @@ class CustomerEditService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddressData
 	 */
 	private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null) {
