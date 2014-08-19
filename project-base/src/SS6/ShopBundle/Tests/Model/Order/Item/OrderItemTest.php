@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class OrderItemTest extends PHPUnit_Framework_TestCase {
@@ -43,8 +44,8 @@ class OrderItemTest extends PHPUnit_Framework_TestCase {
 		$productQuantity1 = 1;
 		$productQuantity2 = 2;
 
-		$product1 = new Product('ProductName1', null, null, null, null, $productPrice1);
-		$product2 = new Product('ProductName2', null, null, null, null, $productPrice2);
+		$product1 = new Product(new ProductData('ProductName1', null, null, null, null, $productPrice1));
+		$product2 = new Product(new ProductData('ProductName2', null, null, null, null, $productPrice2));
 
 		$orderProduct1 = new OrderProduct($order, $product1->getName(), $product1->getPrice(), $productQuantity1, $product1);
 		$orderProduct2 = new OrderProduct($order, $product2->getName(), $product2->getPrice(), $productQuantity2, $product2);

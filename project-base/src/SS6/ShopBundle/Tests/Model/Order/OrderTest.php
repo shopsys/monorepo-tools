@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class OrderTest extends PHPUnit_Framework_TestCase {
@@ -40,8 +41,8 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 			$postcode
 		);
 
-		$product1 = new Product('ProductName1', null, null, null, null, 1000);
-		$product2 = new Product('ProductName2', null, null, null, null, 10000);
+		$product1 = new Product(new ProductData('ProductName1', null, null, null, null, 1000));
+		$product2 = new Product(new ProductData('ProductName2', null, null, null, null, 10000));
 
 		$orderProduct1 = new OrderProduct($order, $product1->getName(), $product1->getPrice(), 1, $product1);
 		$orderProduct2 = new OrderProduct($order, $product2->getName(), $product2->getPrice(), 2, $product2);

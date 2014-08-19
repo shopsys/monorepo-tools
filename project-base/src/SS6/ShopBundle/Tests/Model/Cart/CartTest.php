@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 
 class CartTest extends PHPUnit_Framework_TestCase {
 	
@@ -32,9 +33,9 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price1 = 100;
-		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price1));
 		$price2 = 200;
-		$product2 = new Product('Product 2', null, null, null, null, $price2);
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price2));
 		
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
@@ -48,9 +49,9 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		
 		$price1 = 100;
-		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price1));
 		$price2 = 200;
-		$product2 = new Product('Product 2', null, null, null, null, $price2);
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price2));
 		
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
@@ -64,9 +65,9 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		
 		$price1 = 100;
-		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price1));
 		$price2 = 200;
-		$product2 = new Product('Product 2', null, null, null, null, $price2);
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price2));
 		
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
@@ -88,7 +89,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price1 = 100;
-		$product = new Product('Product 1', null, null, null, null, $price1);
+		$product = new Product(new ProductData('Product 1', null, null, null, null, $price1));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1);
 		$cartItems = array($cartItem);
@@ -101,9 +102,9 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price1 = 100;
-		$product1 = new Product('Product 1', null, null, null, null, $price1);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price1));
 		$price2 = 200;
-		$product2 = new Product('Product 2', null, null, null, null, $price2);
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price2));
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);

@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,20 +28,10 @@ class ProductController extends Controller {
 
 		$product = $productRepository->getById($id);
 		$form = $this->createForm(new ProductFormType($fileUpload));
-		$productData = array();
+		$productData = new ProductData();
 
 		if (!$form->isSubmitted()) {
-			$productData['id'] = $product->getId();
-			$productData['name'] = $product->getName();
-			$productData['catnum'] = $product->getCatnum();
-			$productData['partno'] = $product->getPartno();
-			$productData['ean'] = $product->getEan();
-			$productData['description'] = $product->getDescription();
-			$productData['price'] = $product->getPrice();
-			$productData['sellingFrom'] = $product->getSellingFrom();
-			$productData['sellingTo'] = $product->getSellingTo();
-			$productData['stockQuantity'] = $product->getStockQuantity();
-			$productData['hidden'] = $product->isHidden();
+			$productData->setFromEntity($product);
 		}
 
 		$form->setData($productData);
@@ -83,11 +74,7 @@ class ProductController extends Controller {
 
 		$form = $this->createForm(new ProductFormType($fileUpload));
 		
-		$productData = array();
-
-		if (!$form->isSubmitted()) {
-			$productData['hidden'] = false;
-		}
+		$productData = new ProductData();
 
 		$form->setData($productData);
 		$form->handleRequest($request);

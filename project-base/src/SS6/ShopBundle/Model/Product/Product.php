@@ -115,58 +115,39 @@ class Product implements EntityFileUploadInterface {
 	private $imageForUpload;
 	
 	/**
-	 * @param string $name
-	 * @param string|null $catnum
-	 * @param string|null $partno
-	 * @param string|null $ean
-	 * @param string|null $description
-	 * @param string|null $price
-	 * @param \DateTime|null $sellingFrom
-	 * @param \DateTime|null $sellingTo
-	 * @param int|null $stockQuantity
-	 * @param boolean $hidden
+	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
-	public function __construct($name, $catnum = null, $partno = null, $ean = null,
-			$description = null, $price = null, $sellingFrom = null, $sellingTo = null,
-			$stockQuantity = null, $hidden = false) {
-		$this->name = $name;
-		$this->catnum = $catnum;
-		$this->partno = $partno;
-		$this->ean = $ean;
-		$this->description = $description;
-		$this->price = $price;
-		$this->sellingFrom = $sellingFrom;
-		$this->sellingTo = $sellingTo;
-		$this->stockQuantity = $stockQuantity;
-		$this->hidden = $hidden;
+	public function __construct(ProductData $productData) {
+		$this->name = $productData->getName();
+		$this->catnum = $productData->getCatnum();
+		$this->partno = $productData->getPartno();
+		$this->ean = $productData->getEan();
+		$this->description = $productData->getDescription();
+		$this->price = $productData->getPrice();
+		$this->sellingFrom = $productData->getSellingFrom();
+		$this->sellingTo = $productData->getSellingTo();
+		$this->stockQuantity = $productData->getStockQuantity();
+		$this->hidden = $productData->getHidden();
 		$this->visible = false;
 		$this->image = null;
+		$this->setImageForUpload($productData->getImage());
 	}
 	
 	/**
-	 * @param string $name
-	 * @param string|null $catnum
-	 * @param string|null $partno
-	 * @param string|null $ean
-	 * @param string|null $description
-	 * @param string|null $price
-	 * @param \DateTime|null $sellingFrom
-	 * @param \DateTime|null $sellingTo
-	 * @param int|null $stockQuantity
-	 * @param boolean $hidden
+	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
-	public function edit($name, $catnum, $partno, $ean, $description, $price, $sellingFrom,
-			$sellingTo, $stockQuantity, $hidden) {
-		$this->name = $name;
-		$this->catnum = $catnum;
-		$this->partno = $partno;
-		$this->ean = $ean;
-		$this->description = $description;
-		$this->price = $price;
-		$this->sellingFrom = $sellingFrom;
-		$this->sellingTo = $sellingTo;
-		$this->stockQuantity = $stockQuantity;
-		$this->hidden = $hidden;
+	public function edit(ProductData $productData) {
+		$this->name = $productData->getName();
+		$this->catnum = $productData->getCatnum();
+		$this->partno = $productData->getPartno();
+		$this->ean = $productData->getEan();
+		$this->description = $productData->getDescription();
+		$this->price = $productData->getPrice();
+		$this->sellingFrom = $productData->getSellingFrom();
+		$this->sellingTo = $productData->getSellingTo();
+		$this->stockQuantity = $productData->getStockQuantity();
+		$this->hidden = $productData->getHidden();
+		$this->setImageForUpload($productData->getImage());
 	}
 
 	/**

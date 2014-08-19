@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 
 class CartWatcherServiceTest extends FunctionalTestCase {
 
@@ -14,7 +15,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 	public function testShowErrorOnModifiedItems() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
-		$product = new Product('Product 1', null, null, null, null, 100);
+		$product = new Product(new ProductData('Product 1', null, null, null, null, 100));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1);
 		$cartItems = array($cartItem);
@@ -34,7 +35,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertTrue($flashMessageFront->isEmpty());
 
-		$product->edit('Product 1', null, null, null, null, 200, null, null, null, null);
+		$product->edit(new ProductData('Product 1', null, null, null, null, 200, null, null, null, null));
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertFalse($flashMessageFront->isEmpty());
 	}

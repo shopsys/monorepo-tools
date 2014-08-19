@@ -228,7 +228,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 	 */
 	public function getDependencies() {
 		return array(
-			ProductData::class,
+			ProductDataFixture::class,
 			TransportData::class,
 			PaymentData::class,
 			UserDataFixture::class,

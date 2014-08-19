@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -39,7 +40,6 @@ class ProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('name', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
@@ -105,6 +105,7 @@ class ProductFormType extends AbstractType {
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
+			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}

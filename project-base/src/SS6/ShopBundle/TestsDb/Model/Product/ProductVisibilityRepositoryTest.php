@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\TestsDb\Model\Product;
 use DateTime;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 	public function testIsVisibleWhenHidden() {
@@ -12,7 +13,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		
 		$hidden = true;
 		
-		$product = new Product('Name', null, null, null, null, null, null, null, null, $hidden);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, null, null, null, $hidden));
 		
 		$em->persist($product);
 		$em->flush();
@@ -36,7 +37,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingFrom = new DateTime('now');
 		$sellingFrom->modify('+1 day');
 		
-		$product = new Product('Name', null, null, null, null, null, $sellingFrom, null, null, $hidden);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, $sellingFrom, null, null, $hidden));
 		
 		$em->persist($product);
 		$em->flush();
@@ -60,7 +61,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('-1 day');
 		
-		$product = new Product('Name', null, null, null, null, null, null, $sellingTo, null, $hidden);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, null, $sellingTo, null, $hidden));
 		
 		$em->persist($product);
 		$em->flush();
@@ -86,7 +87,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('+1 day');
 		
-		$product = new Product('Name', null, null, null, null, null, $sellingFrom, $sellingTo, null, $hidden);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, $sellingFrom, $sellingTo, null, $hidden));
 		
 		$em->persist($product);
 		$em->flush();
