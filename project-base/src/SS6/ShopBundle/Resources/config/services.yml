@@ -170,6 +170,9 @@ services:
     parent: craue.form.flow
     scope: request
 
+  ss6.shop.order.order_flow_facade:
+    class: SS6\ShopBundle\Model\Order\OrderFlowFacade
+
   ss6.shop.order.order_facade:
     class: SS6\ShopBundle\Model\Order\OrderFacade
   
@@ -240,6 +243,9 @@ services:
     
   ss6.shop.security.login_service:
     class: SS6\ShopBundle\Model\Security\LoginService
+
+  ss6.shop.security.logout_handler:
+    class: SS6\ShopBundle\Model\Security\LogoutHandler
 
   ss6.shop.transport.transport_edit_facade:
     class: SS6\ShopBundle\Model\Transport\TransportEditFacade

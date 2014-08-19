@@ -47,7 +47,7 @@ security:
         csrf_parameter: "front_login[_token]"
       logout:
         path: front_logout
-        target: front_homepage
+        success_handler: ss6.shop.security.logout_handler
 
   access_control:
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

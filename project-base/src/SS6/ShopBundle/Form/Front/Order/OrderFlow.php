@@ -57,6 +57,15 @@ class OrderFlow extends FormFlow {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getStepDataKey() {
+		// Do not randomize stepDataKey for every instance.
+		// Also makes stepDataKey same be the same before and after bind().
+		return $this->getId() . '_data';
+	}
+
+	/**
 	 * @param int $step
 	 * @param array $options
 	 * @return array
