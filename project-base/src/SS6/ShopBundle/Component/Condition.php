@@ -23,4 +23,18 @@ class Condition {
 			$array[$key] = $defaultValue;
 		}
 	}
+
+	/**
+	 * @param mixed $value
+	 * @return array
+	 */
+	public static function mixedToArray($value) {
+		if ($value === null) {
+			$value = [];
+		} elseif (!is_array($value)) {
+			$value = [$value];
+		}
+
+		return $value;
+	}
 }

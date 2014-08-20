@@ -63,7 +63,7 @@ class ImageExtension extends Twig_Extension {
 	/**
 	 * Get service "templating" cannot by called in constructor - https://github.com/symfony/symfony/issues/2347
 	 *
-	 * @return \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine;
+	 * @return \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine
 	 */
 	private function getTemplatingService() {
 		return $this->container->get('templating');

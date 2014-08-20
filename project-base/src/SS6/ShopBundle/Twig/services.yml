@@ -15,6 +15,12 @@ services:
     arguments: [%ss6.image_url_prefix%, @service_container]
     tags:
       - { name: twig.extension }
+      
+  ss6.twig.javascript_extension:
+    class: SS6\ShopBundle\Twig\JavascriptExtension
+    arguments: [%ss6.web_dir%, @service_container]
+    tags:
+      - { name: twig.extension }
 
   ss6.twig.price_extension:
     class: SS6\ShopBundle\Twig\PriceExtension

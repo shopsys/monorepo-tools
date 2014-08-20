@@ -13,23 +13,19 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/styles/index-ie8.css') }}" media="screen, projection">
 	<![endif]-->
 
-	<script src="{{ asset('http://code.jquery.com/jquery-1.11.0.min.js') }}"></script>
-	<script src="{{ asset('http://code.jquery.com/ui/1.10.4/jquery-ui.min.js') }}"></script>
-	<script src="{{ asset('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/i18n/jquery.ui.datepicker-cs.js') }}"></script>
+	{# bootstrap/tooltip.js must be imported before bootstrap/popover.js #}
+	{{ importJavascripts([
+		'http://code.jquery.com/jquery-1.11.0.min.js',
+		'http://code.jquery.com/ui/1.10.4/jquery-ui.min.js',
+		'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/i18n/jquery.ui.datepicker-cs.js',
+		'assets/frontend/scripts/jquery.checkboxToggle.js',
+		'assets/frontend/scripts/jquery.window.js',
+		'assets/admin/scripts/bootstrap/tooltip.js', 
+		'assets/admin/scripts/bootstrap/*',
+		'assets/admin/scripts/plugins/*',
+		'assets/admin/scripts/*',
+	]) }}
 
-	<script src="{{ asset('assets/admin/scripts/dropdown.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/date_picker.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/tooltip.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/jquery.flashMessage.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/jquery.dmuploader.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/jquery.fileUpload.js') }}"></script>
-	<script src="{{ asset('assets/frontend/scripts/jquery.checkboxToggle.js') }}"></script>
-	<script src="{{ asset('assets/frontend/scripts/jquery.window.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/jquery.orderStatusDelete.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/jquery.orderStatusList.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/jquery.pkgrid.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/file_input.js') }}"></script>
-	<script src="{{ asset('assets/admin/scripts/init.js') }}"></script>
 	<script type="text/javascript">
 		global = {
 			locale: '{{ app.request.locale }}'
