@@ -60,12 +60,7 @@ class JavascriptExtension extends Twig_Extension {
 		$this->javascriptLinks = [];
 		
 		foreach ($javascripts as $javascript) {
-			if (
-				!$this->processJavascriptFile($javascript) &&
-				!$this->processJavascriptDirectoryMask($javascript)
-			) {
-				$this->processExternalJavascripts($javascript);
-			}
+			$this->process($javascript);
 		}
 
 		$this->javascriptLinks = array_unique($this->javascriptLinks);
@@ -80,7 +75,7 @@ class JavascriptExtension extends Twig_Extension {
 	private function getHtmlJavascriptImports(array $javascriptLinks) {
 		$html = '';
 		foreach ($javascriptLinks as $javascriptLink) {
-			$html .= "\n" . '		<script type="text/javascript" src="' . $javascriptLink . '"></script>';
+			$html .= "\n" . '<script type="text/javascript" src="' . htmlspecialchars($javascriptLink, ENT_QUOTES) . '"></script>';
 		}
 
 		return $html;
@@ -92,6 +87,20 @@ class JavascriptExtension extends Twig_Extension {
 	 */
 	private function getJavascriptFileUrl($relativeFilepath) {
 		return $this->getAssetsHelper()->getUrl($relativeFilepath);
+	}
+
+	/**
+	 * @param string $javascript
+	 */
+	private function process($javascript) {
+		if ($this->processJavascriptFile($javascript)) {
+			return;
+		}
+		if ($this->processJavascriptDirectoryMask($javascript)) {
+			return;
+		}
+
+		$this->processExternalJavascripts($javascript);
 	}
 
 	/**
@@ -115,12 +124,23 @@ class JavascriptExtension extends Twig_Extension {
 	 */
 	private function processJavascriptDirectoryMask($directoryMask) {
 		$parts = explode('/', $directoryMask);
-		$mask = array_pop($parts);
+		$filenameMask = array_pop($parts);
 		$path = implode('/', $parts);
+
+		return $this->processJavascriptByMask($path, $filenameMask);
+	}
+
+	/**
+	 * @param string $path
+	 * @param string $filenameMask
+	 * @return bool
+	 */
+	private function processJavascriptByMask($path, $filenameMask) {
 		$filesystemPath = $this->webPath . '/' . $path;
+
 		if (is_dir($filesystemPath)) {
-			$mask = $mask === '' ? '*' : $mask;
-			$filepaths = (array)glob($filesystemPath . '/' . $mask);
+			$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
+			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
 				if (is_file($filepath)) {
 					$filename = pathinfo($filepath, PATHINFO_BASENAME);
