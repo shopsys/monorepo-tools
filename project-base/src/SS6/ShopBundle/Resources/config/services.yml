@@ -223,6 +223,9 @@ services:
   ss6.shop.payment.payment_repository:
     class: SS6\ShopBundle\Model\Payment\PaymentRepository
 
+  ss6.shop.pricing.vat_repository:
+    class: SS6\ShopBundle\Model\Pricing\VatRepository
+
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
   

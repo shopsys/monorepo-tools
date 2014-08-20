@@ -25,9 +25,13 @@ class ProductController extends Controller {
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
+		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
+
+		$vats = $vatRepository->findAll();
 
 		$product = $productRepository->getById($id);
-		$form = $this->createForm(new ProductFormType($fileUpload));
+		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
 		$productData = new ProductData();
 
 		if (!$form->isSubmitted()) {
@@ -71,9 +75,13 @@ class ProductController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
+		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
 
-		$form = $this->createForm(new ProductFormType($fileUpload));
-		
+		$vats = $vatRepository->findAll();
+
+		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
+
 		$productData = new ProductData();
 
 		$form->setData($productData);
@@ -95,7 +103,7 @@ class ProductController extends Controller {
 		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
 			'form' => $form->createView(),
 		));

@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Review\OrderReview;
 use SS6\ShopBundle\Model\Order\Review\OrderReviewItem;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -18,8 +19,10 @@ class OrderReviewTest extends PHPUnit_Framework_TestCase {
 	public function testGetTotalPrice() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
-		$product1 = new Product(new ProductData('Product 1', null, null, null, null, 1000));
-		$product2 = new Product(new ProductData('Product 2', null, null, null, null, 2000));
+		$vat1 = new Vat('vat', 21);
+		$vat2 = new Vat('vat', 21);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, 1000, $vat1));
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, 2000, $vat2));
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
@@ -40,8 +43,9 @@ class OrderReviewTest extends PHPUnit_Framework_TestCase {
 	public function testGetItems() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
-		$product1 = new Product(new ProductData('Product 1', null, null, null, null, 1000));
-		$product2 = new Product(new ProductData('Product 2', null, null, null, null, 2000));
+		$vat = new Vat('vat', 21);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, 1000, $vat));
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, 2000, $vat));
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);

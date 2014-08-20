@@ -66,6 +66,13 @@ class Product implements EntityFileUploadInterface {
 	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $price;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat")
+	 */
+	private $vat;
 	
 	/**
 	 * @var \DateTime|null
@@ -124,6 +131,7 @@ class Product implements EntityFileUploadInterface {
 		$this->ean = $productData->getEan();
 		$this->description = $productData->getDescription();
 		$this->price = $productData->getPrice();
+		$this->vat = $productData->getVat();
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
 		$this->stockQuantity = $productData->getStockQuantity();
@@ -143,6 +151,7 @@ class Product implements EntityFileUploadInterface {
 		$this->ean = $productData->getEan();
 		$this->description = $productData->getDescription();
 		$this->price = $productData->getPrice();
+		$this->vat = $productData->getVat();
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
 		$this->stockQuantity = $productData->getStockQuantity();
@@ -234,6 +243,13 @@ class Product implements EntityFileUploadInterface {
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat
+	 */
+	public function getVat() {
+		return $this->vat;
 	}
 
 	/**

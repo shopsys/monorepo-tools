@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Model\Pricing\Vat;
+
 class ProductData {
 
 	/**
@@ -35,6 +37,11 @@ class ProductData {
 	private $price;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat|null
+	 */
+	private $vat;
+
+	/**
 	 * @var \DateTime|null
 	 */
 	private $sellingFrom;
@@ -66,6 +73,7 @@ class ProductData {
 	 * @param string|null $ean
 	 * @param string|null $description
 	 * @param string|null $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
@@ -79,6 +87,7 @@ class ProductData {
 		$ean = null,
 		$description = null,
 		$price = null,
+		Vat $vat = null,
 		\DateTime $sellingFrom = null,
 		\DateTime $sellingTo = null,
 		$stockQuantity = null,
@@ -91,6 +100,7 @@ class ProductData {
 		$this->ean = $ean;
 		$this->description = $description;
 		$this->price = $price;
+		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
 		$this->sellingTo = $sellingTo;
 		$this->stockQuantity = $stockQuantity;
@@ -138,6 +148,13 @@ class ProductData {
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat|null
+	 */
+	public function getVat() {
+		return $this->vat;
 	}
 
 	/**
@@ -211,6 +228,13 @@ class ProductData {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat|null $vat
+	 */
+	public function setVat(Vat $vat = null) {
+		$this->vat = $vat;
+	}
+
+	/**
 	 * @param string|null $price
 	 */
 	public function setPrice($price) {
@@ -262,6 +286,7 @@ class ProductData {
 		$this->setEan($product->getEan());
 		$this->setDescription($product->getDescription());
 		$this->setPrice($product->getPrice());
+		$this->setVat($product->getVat());
 		$this->setSellingFrom($product->getSellingFrom());
 		$this->setSellingTo($product->getSellingTo());
 		$this->setStockQuantity($product->getStockQuantity());
