@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	- {{ product.name }}
+	- {{ productDetail.product.name }}
 {% endblock %}
 
 {% block content %}
@@ -9,12 +9,12 @@
 		<div class="col-xs-12 col-md-5">
 			<div class="product-image">
 				<span>
-					{% if imageExists(product, 'default') %}
-						<a href="{{ imageUrl(product, 'default') }}" class="js-gallery">
-							{{ image(product, { size: 'default', width: '336px' }) }}
+					{% if imageExists(productDetail.product, 'default') %}
+						<a href="{{ imageUrl(productDetail.product, 'default') }}" class="js-gallery">
+							{{ image(productDetail.product, { size: 'default', width: '336px' }) }}
 						</a>
 					{% else %}
-						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="336px" height="200px">
+						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
 					{% endif %}
 				</span>
 			</div>
@@ -22,51 +22,52 @@
 		</div>
 
 		<div class="col-xs-12 col-md-7">
-			<h1>{{ product.name }}</h1>
+			<h1>{{ productDetail.product.name }}</h1>
 
-			{% if product.catnum %}
+			{% if productDetail.product.catnum %}
 				<dl class="simple-list">
 					<dt class="simple-list__title">
 						Katalogové číslo:
 					</dt>
 					<dd class="simple-list__definition">
-						{{ product.catnum }}
+						{{ productDetail.product.catnum }}
 					</dd>
 				</dl>
 			{% endif %}
 
-			{% if product.partno %}
+			{% if productDetail.product.partno %}
 				<dl class="simple-list">
 					<dt class="simple-list__title">
 						Výrobní číslo:
 					</dt>
 					<dd class="simple-list__definition">
-						{{ product.partno }}
+						{{ productDetail.product.partno }}
 					</dd>
 				</dl>
 			{% endif %}
 
-			{% if product.ean %}
+			{% if productDetail.product.ean %}
 				<dl class="simple-list">
 					<dt class="simple-list__title">
 						EAN:
 					</dt>
 					<dd class="simple-list__definition">
-						{{ product.ean }}
+						{{ productDetail.product.ean }}
 					</dd>
 				</dl>
 			{% endif %}
 
-			{% if product.description %}
-				{{ product.description|raw }}
+			{% if productDetail.product.description %}
+				{{ productDetail.product.description|raw }}
 			{% endif %}
 
-			{% if product.price %}
-				<div class="box-important mb-1">
-					<strong>Cena: <span class="price-main price-big">{{ product.price|price }}</span></strong>
-				</div>
-			{% endif %}
-			{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
+			<div class="box-important mb-1">
+				<strong>Cena bez DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithoutVat|price }}</span></strong>
+			</div>
+			<div class="box-important mb-1">
+				<strong>Cena s DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithVat|price }}</span></strong>
+			</div>
+			{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 		</div>
 	</div>
 {% endblock %}

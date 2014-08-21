@@ -8,27 +8,30 @@
 	<h1>Katalog zboží</h1>
 
 	<ul class="product-list">
-		{% for product in products %}
+		{% for productDetail in productDetails %}
 			<li class="product-list__item col-xs-12 col-sm-6 col-md-4">
-				<a href="{{ url('front_product_detail', {'id': product.id}) }}" class="product-list__block">
+				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="product-list__block">
 					<div class="product-list__image">
 						<span>
-							{% if imageExists(product, 'default') %}
-								{{ image(product, { size: 'default', height: '200px' }) }}
+							{% if imageExists(productDetail.product, 'default') %}
+								{{ image(productDetail.product, { size: 'default', height: '200px' }) }}
 							{% else %}
-								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ product.name }}" width="336px" height="200px">
+								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
 							{% endif %}
 						</span>
 					</div>
 					<h2 class="product-list__title">
-						{{ product.name }}
+						{{ productDetail.product.name }}
 					</h2>
 					<p class="product-list__price">
-						<strong>Cena: <span class="price-main price-big">{{ product.price|price }}</span></strong>
+						<strong>Cena bez DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithoutVat|price }}</span></strong>
+					</p>
+					<p class="product-list__price">
+						<strong>Cena s DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithVat|price }}</span></strong>
 					</p>
 				</a>
 				<div class="product-list__actions">
-					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: product})) }}
+					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 				</div>
 			</li>
 		{% endfor %}

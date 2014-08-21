@@ -231,7 +231,10 @@ services:
 
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
-  
+
+  ss6.shop.product.product_detail_factory:
+    class: SS6\ShopBundle\Model\Product\Detail\Factory
+
   ss6.shop.product.product_repository:
     class: SS6\ShopBundle\Model\Product\ProductRepository
     
