@@ -27,10 +27,12 @@ class ProductController extends Controller {
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
 		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
-
-		$vats = $vatRepository->findAll();
+		$priceCalculation = $this->get('ss6.shop.product.price_calculation');
+		/* @var $priceCalculation \SS6\ShopBundle\Model\Product\PriceCalculation */
 
 		$product = $productRepository->getById($id);
+
+		$vats = $vatRepository->findAll();
 		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
 		$productData = new ProductData();
 
@@ -63,6 +65,7 @@ class ProductController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(
 			'form' => $form->createView(),
 			'product' => $product,
+			'price' => $priceCalculation->calculatePrice($product),
 		));
 	}
 	

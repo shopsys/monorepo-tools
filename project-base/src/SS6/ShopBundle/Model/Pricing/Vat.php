@@ -56,4 +56,19 @@ class Vat {
 		return $this->name;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getPercent() {
+		return $this->percent;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCoefficient() {
+		$ratio = $this->percent / (100 + $this->percent);
+		return round($ratio, 4);
+	}
+
 }
