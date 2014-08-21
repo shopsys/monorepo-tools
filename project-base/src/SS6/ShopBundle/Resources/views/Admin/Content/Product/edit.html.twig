@@ -25,11 +25,11 @@
 {% block product_base_prices %}
 	<div class="form-line form-line--size-2">
 		<label class="form-line__label">Základní cena bez DPH:</label>
-		<input type="text" value="{{ price.basePriceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
+		<input type="text" value="{{ productDetail.price.basePriceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 	<div class="form-line form-line--size-2">
 		<label class="form-line__label">Základní cena s DPH:</label>
-		<input type="text" value="{{ price.basePriceWithVat }}" class="form-line__field form-control" readonly="readonly">
+		<input type="text" value="{{ productDetail.price.basePriceWithVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 {% endblock %}
 
