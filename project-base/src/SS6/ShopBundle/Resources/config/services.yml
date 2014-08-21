@@ -248,6 +248,9 @@ services:
   ss6.shop.security.login_service:
     class: SS6\ShopBundle\Model\Security\LoginService
 
+  ss6.shop.setting:
+    class: SS6\ShopBundle\Model\Setting\Setting3
+
   ss6.shop.security.logout_handler:
     class: SS6\ShopBundle\Model\Security\LogoutHandler
 
