@@ -230,6 +230,9 @@ services:
   ss6.shop.payment.price_calculation:
     class: SS6\ShopBundle\Model\Payment\PriceCalculation
 
+  ss6.shop.pkgrid.factory:
+    class: SS6\ShopBundle\Model\PKGrid\GridFactory
+
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
     

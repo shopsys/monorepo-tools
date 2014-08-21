@@ -7,7 +7,6 @@ use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -122,6 +121,8 @@ class OrderController extends Controller {
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
 
 		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder
@@ -138,12 +139,7 @@ class OrderController extends Controller {
 			->join('o.status', 'os')
 			->groupBy('o.id');
 
-		$grid = new PKGrid(
-			'orderList',
-			$this->get('request_stack'),
-			$this->get('router'),
-			$this->get('twig')
-		);
+		$grid = $gridFactory->get('orderList');
 		$grid->allowPaging();
 		$grid->setDefaultOrder('number');
 		$grid->setQueryBuilder($queryBuilder);

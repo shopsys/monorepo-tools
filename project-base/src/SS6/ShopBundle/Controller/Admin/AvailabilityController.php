@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -13,23 +12,15 @@ class AvailabilityController extends Controller {
 	 * @Route("/product/availability/list/")
 	 */
 	public function listAction() {
-		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
-		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
-		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
 			->select('a')
 			->from(Availability::class, 'a');
 
-		$grid = new PKGrid(
-			'availabilityList',
-			$this->get('request_stack'),
-			$this->get('router'),
-			$this->get('twig')
-		);
-		$grid->allowPaging();
+		$grid = $gridFactory->get('availabilityList');
 		$grid->setDefaultOrder('name');
 		$grid->setQueryBuilder($queryBuilder);
 
@@ -38,8 +29,6 @@ class AvailabilityController extends Controller {
 		$grid->setActionColumnClass('table-col table-col-10');
 		$grid->addActionColumn('delete', 'Smazat', 'admin_availability_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tuto dostupnost?');
-
-		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', array(
 			'gridView' => $grid->createView(),

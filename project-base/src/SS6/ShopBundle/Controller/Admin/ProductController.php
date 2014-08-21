@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -115,6 +114,8 @@ class ProductController extends Controller {
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
 		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
 		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
 
@@ -123,12 +124,7 @@ class ProductController extends Controller {
 		$searchData = $form->getData();
 		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($searchData);
 
-		$grid = new PKGrid(
-			'productList',
-			$this->get('request_stack'),
-			$this->get('router'),
-			$this->get('twig')
-		);
+		$grid = $gridFactory->get('productList');
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 		$grid->setQueryBuilder($queryBuilder);

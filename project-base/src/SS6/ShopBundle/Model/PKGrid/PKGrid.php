@@ -128,6 +128,11 @@ class PKGrid {
 	 * @param \SS6\ShopBundle\Model\PKGrid\Twig_Environment $twig
 	 */
 	public function __construct($id, RequestStack $requestStack, Router $router, Twig_Environment $twig) {
+		if (empty($id)) {
+			$message = 'Grid id can not be empty.';
+			throw new \SS6\ShopBundle\Model\PKGrid\Exception\EmptyGridIdException($message);
+		}
+
 		$this->id = $id;
 		$this->requestStack = $requestStack;
 		$this->router = $router;
