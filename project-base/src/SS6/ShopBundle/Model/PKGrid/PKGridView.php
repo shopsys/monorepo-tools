@@ -119,7 +119,7 @@ class PKGridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\Column $actionColumn
+	 * @param \SS6\ShopBundle\Model\PKGrid\ActionColumn $actionColumn
 	 * @param array $row
 	 */
 	public function renderActionCell(ActionColumn $actionColumn, array $row) {
@@ -200,21 +200,7 @@ class PKGridView {
 	 * @return mixed
 	 */
 	private function getCellValue(Column $column, $row) {
-		$queryIdParts = explode('.', $column->getQueryId());
-
-		if (count($queryIdParts) === 1) {
-			$value = $row[$queryIdParts[0]];
-		} elseif (count($queryIdParts) === 2) {
-			if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
-				$value = $row[$queryIdParts[0]][$queryIdParts[1]];
-			} elseif (array_key_exists($queryIdParts[1], $row)) {
-				$value = $row[$queryIdParts[1]];
-			} else {
-				$value = $row[$column->getQueryId()];
-			}
-		}
-
-		return $value;
+		return PKGrid::getValueFromRowByQueryId($row, $column->getQueryId());
 	}
 
 	/**

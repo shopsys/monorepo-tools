@@ -122,6 +122,16 @@ class PKGrid {
 	private $actionColumnClass = '';
 
 	/**
+	 * @var string|null
+	 */
+	private $inlineEditServiceName;
+
+	/**
+	 * @var string|null
+	 */
+	private $inlineEditQueryId;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\PKGrid\RequestStack $requestStack
 	 * @param \SS6\ShopBundle\Model\PKGrid\Router $router
@@ -182,6 +192,41 @@ class PKGrid {
 		$this->actionColumns[] = $actionColumn;
 
 		return $actionColumn;
+	}
+
+	/**
+	 * @param string $inlineEditServiceName
+	 * @param string $queryId
+	 */
+	public function setInlineEditService($inlineEditServiceName, $queryId) {
+		$this->inlineEditServiceName = $inlineEditServiceName;
+		$this->inlineEditQueryId = $queryId;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getInlineEditServiceName() {
+		return $this->inlineEditServiceName;
+	}
+
+	public function getInlineEditQueryId() {
+		return $this->inlineEditQueryId;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isInlineEdit() {
+		return $this->inlineEditServiceName !== null;
+	}
+
+	/**
+	 * @param array $row
+	 * @return mixed
+	 */
+	public function getInlineEditRowId($row) {
+		return PKGrid::getValueFromRowByQueryId($row, $this->getInlineEditQueryId());
 	}
 
 	/**
@@ -469,6 +514,29 @@ class PKGrid {
 		$this->totalCount = $this->totalNativeQuery->getSingleScalarResult();
 		$this->pageCount = max(ceil($this->totalCount / $this->limit), 1);
 		$this->page = min($this->page, $this->pageCount);
+	}
+
+	/**
+	 * @param array $row
+	 * @param string $queryId
+	 * @return mixed
+	 */
+	public static function getValueFromRowByQueryId(array $row, $queryId) {
+		$queryIdParts = explode('.', $queryId);
+
+		if (count($queryIdParts) === 1) {
+			$value = $row[$queryIdParts[0]];
+		} elseif (count($queryIdParts) === 2) {
+			if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
+				$value = $row[$queryIdParts[0]][$queryIdParts[1]];
+			} elseif (array_key_exists($queryIdParts[1], $row)) {
+				$value = $row[$queryIdParts[1]];
+			} else {
+				$value = $row[$queryId];
+			}
+		}
+
+		return $value;
 	}
 
 }

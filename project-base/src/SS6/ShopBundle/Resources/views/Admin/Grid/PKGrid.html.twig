@@ -1,5 +1,5 @@
 {% block pkgrid %}
-<div class="grid">
+<div class="grid js-pkgrid"{% if grid.inlineEdit %} data-inline-edit-service-name="{{ grid.inlineEditServiceName }}"{% endif %}>
 	{% if grid.rows is not empty %}
 		<div class="grid_header">
 		{% if grid.allowedPaging %}
@@ -58,7 +58,7 @@
 					{% endif %}
 				</th>
 			{% endfor %}
-			{% if grid.actionColumns is not empty %}
+			{% if grid.actionColumns is not empty or grid.inlineEdit %}
 				<th class="last-column text-right {{ grid.actionColumnClass }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
 			{% endif  %}
 		</tr>
@@ -67,26 +67,59 @@
 
 {% block pkgrid_rows %}
 	<tbody>
+		{% if grid.inlineEditServiceName is not empty %}
+			{{ gridView.renderBlock(
+				'pkgrid_row', 
+				{ 
+					loopIndex: 0,
+					lastRow: false,
+					row: {},
+					emptyRow: true
+				}
+			) }}
+		{% endif %}
 		{% for row in grid.rows %}
-			{% set lastRow = loop.last %}
-			<tr class="grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}">
-				{% for column in grid.columns %}
-					<td class="grid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
-						{{ gridView.renderCell(column, row)|raw }}
-					</td>
-				{% endfor %}
-				{% if grid.actionColumns|length > 0 %}
-					<td class="grid-column-actions last-column text-right {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
-						<span class="grid-row-actions action-icons">
-							{% for actionColumn in grid.actionColumns %}
-								{{ gridView.renderActionCell(actionColumn, row)|raw }}
-							{% endfor %}
-						</span>
-					</td>
-				{% endif %}
-			</tr>
+			{{ gridView.renderBlock(
+				'pkgrid_row', 
+				{ 
+					loopIndex: loop.index,
+					lastRow: loop.last,
+					row: row
+				}
+			) }}
 		{% endfor %}
 	</tbody>
+{% endblock %}
+
+{% block pkgrid_row %}
+	{% set emptyRow = emptyRow|default(false) %}
+	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} hidden js-pkgrid-empty-row{% else %} js-pkgrid-row{% endif %}"
+			{% if not emptyRow %} data-inline-edit-row-id="{{ grid.getInlineEditRowId(row) }}"{% endif %}>
+		{% for column in grid.columns %}
+			<td class="js-pkgrid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
+				{% if not emptyRow %}
+					{{ gridView.renderCell(column, row)|raw }}
+				{% endif %}
+			</td>
+		{% endfor %}
+		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
+			<td class="grid-column-actions last-column text-right {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
+				<span class="grid-row-actions action-icons">
+					{% if grid.inlineEdit and emptyRow %}
+						<i class="fa fa-save cursor-pointer js-pkgrid-save" title="Uložit změny"></i>
+						<i class="fa fa-delete cursor-pointer js-pkgrid-cancel" title="Zahodit změny"></i>
+					{% else %}
+						{% if grid.inlineEdit %}
+							<i class="fa fa-pencil cursor-pointer js-pkgrid-edit" title="Upravit"></i>
+						{% endif %}
+						{% for actionColumn in grid.actionColumns %}
+							{{ gridView.renderActionCell(actionColumn, row)|raw }}
+						{% endfor %}
+					{% endif %}
+				</span>
+			</td>
+		{% endif %}
+	</tr>
 {% endblock %}
 
 {% block pkgrid_action_cell %}
