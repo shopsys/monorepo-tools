@@ -6,15 +6,19 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Pricing\Vat;
 
-class VatData extends AbstractFixture {
+class VatDataFixture extends AbstractFixture {
+
+	const VAT_ZERO = 'vat_zero';
+	const VAT_LOW = 'vat_low';
+	const VAT_HIGH = 'vat_high';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$this->createVat($manager, 'vat_zero', 'Nulová sazba', '0');
-		$this->createVat($manager, 'vat_low', 'Nižší sazba', '15');
-		$this->createVat($manager, 'vat_high', 'Vyšší sazba', '21');
+		$this->createVat($manager, self::VAT_ZERO, 'Nulová sazba', '0');
+		$this->createVat($manager, self::VAT_LOW, 'Nižší sazba', '15');
+		$this->createVat($manager, self::VAT_HIGH, 'Vyšší sazba', '21');
 
 		$manager->flush();
 	}

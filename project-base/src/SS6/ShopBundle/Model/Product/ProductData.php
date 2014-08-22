@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Pricing\Vat;
+use DateTime;
 
 class ProductData {
 
@@ -88,8 +89,8 @@ class ProductData {
 		$description = null,
 		$price = null,
 		Vat $vat = null,
-		\DateTime $sellingFrom = null,
-		\DateTime $sellingTo = null,
+		DateTime $sellingFrom = null,
+		DateTime $sellingTo = null,
 		$stockQuantity = null,
 		$hidden = false,
 		$image = null
@@ -244,14 +245,14 @@ class ProductData {
 	/**
 	 * @param \DateTime|null $sellingFrom
 	 */
-	public function setSellingFrom(\DateTime $sellingFrom = null) {
+	public function setSellingFrom(DateTime $sellingFrom = null) {
 		$this->sellingFrom = $sellingFrom;
 	}
 
 	/**
 	 * @param \DateTime|null $sellingTo
 	 */
-	public function setSellingTo(\DateTime $sellingTo = null) {
+	public function setSellingTo(DateTime $sellingTo = null) {
 		$this->sellingTo = $sellingTo;
 	}
 
