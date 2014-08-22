@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints;
 class PaymentFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transpor[]
+	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $allTransports;
 

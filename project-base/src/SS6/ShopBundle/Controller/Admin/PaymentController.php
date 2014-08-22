@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
@@ -19,14 +18,13 @@ class PaymentController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$allTransports = $transportRepository->findAll();
+		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
+		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
 
 		$paymentData = new PaymentData();
-		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $paymentData);
+		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -66,17 +64,13 @@ class PaymentController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		
-		$allTransports = $transportRepository->findAll();
+		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
+		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
 
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$formData = new PaymentData();
 		$formData->setId($payment->getId());
@@ -91,7 +85,7 @@ class PaymentController extends Controller {
 		}
 		$formData->setTransports($transports);
 
-		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $formData);
+		$form = $this->createForm($paymentFormTypeFactory->create(), $formData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
