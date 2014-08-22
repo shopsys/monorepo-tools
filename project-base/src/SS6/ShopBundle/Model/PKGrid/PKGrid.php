@@ -14,6 +14,8 @@ use Twig_Environment;
 
 class PKGrid {
 
+	const GET_PARAMETER = 'g';
+
 	/**
 	 * @var string
 	 */
@@ -308,6 +310,18 @@ class PKGrid {
 	/**
 	 * @return string|null
 	 */
+	public function getOrderWithDirection() {
+		$prefix = '';
+		if ($this->getOrderDirection() === 'desc') {
+			$prefix = '-';
+		}
+		
+		return $prefix . $this->getOrder();
+	}
+
+	/**
+	 * @return string|null
+	 */
 	public function getOrderDirection() {
 		return $this->orderDirection;
 	}
@@ -332,7 +346,7 @@ class PKGrid {
 	}
 
 	private function loadFromRequest() {
-		$requestData = $this->requestStack->getMasterRequest()->get('q', array());
+		$requestData = $this->requestStack->getMasterRequest()->get(self::GET_PARAMETER, array());
 		if (array_key_exists($this->id, $requestData)) {
 			$gridData = $requestData[$this->id];
 			if (array_key_exists('limit', $gridData)) {
@@ -347,6 +361,55 @@ class PKGrid {
 				$this->isOrderFromRequest = true;
 			}
 		}
+	}
+
+	/**
+	 * @param array|string|null $removeParameters
+	 * @return array
+	 */
+	public function getGridParameters($removeParameters = null) {
+		$gridParameters = array();
+		if ($this->isAllowedPaging()) {
+			$gridParameters['limit'] = $this->getLimit();
+			if ($this->getPage() > 1) {
+				$gridParameters['page'] = $this->getPage();
+			}
+		}
+		if ($this->getOrder() !== null) {
+			$gridParameters['order'] = $this->getOrderWithDirection();
+		}
+
+		foreach ((array)$removeParameters as $parameterToRemove) {
+			// trigger notice when typo
+			unset($gridParameters[$parameterToRemove]);
+		}
+		return $gridParameters;
+	}
+
+	/**
+	 * @param array|string|null $parameters
+	 * @param array|string|null $removeParameters
+	 * @return array
+	 */
+	public function getUrlGridParameters($parameters = null, $removeParameters = null) {
+		$gridParameters = array_replace_recursive(
+			$this->getGridParameters($removeParameters),
+			(array)$parameters
+		);
+
+		return array(self::GET_PARAMETER => array($this->getId() => $gridParameters));
+	}
+
+	/**
+	 * @param array|string|null $parameters
+	 * @param array|string|null $removeParameters
+	 * @return array
+	 */
+	public function getUrlParameters($parameters = null, $removeParameters = null) {
+		return array_replace_recursive(
+			$this->requestStack->getMasterRequest()->query->all(),
+			$this->getUrlGridParameters($parameters, $removeParameters)
+		);
 	}
 
 	private function prepareQuery() {
@@ -399,7 +462,7 @@ class PKGrid {
 	private function executeTotalQuery() {
 		$this->prepareTotalQuery();
 		$this->totalCount = $this->totalNativeQuery->getSingleScalarResult();
-		$this->pageCount = ceil($this->totalCount / $this->limit);
+		$this->pageCount = max(ceil($this->totalCount / $this->limit), 1);
 		$this->page = min($this->page, $this->pageCount);
 	}
 

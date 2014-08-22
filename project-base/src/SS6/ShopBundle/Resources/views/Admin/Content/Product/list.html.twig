@@ -6,10 +6,27 @@
 {% block main_content %}
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
+			
+			{{ form_start(quickSearchForm) }}
 
-			<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
+				<div class="form-box row">
+					<div class="col-lg-6 col-md-8 col-sm-11">
+						{{ form_widget(quickSearchForm.text) }}
+					</div>
+					<i class="fa fa-info cursor-help left js-tooltip" 
+						 data-toggle="tooltip" data-placement="bottom" 
+						 title="Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu."
+					></i>
+					<div class="col-lg-2">
+						{{ form_widget(quickSearchForm.save, { label: 'Vyhledat', full_name: ''}) }}
+					</div>
+				</div>
 
-			{{ gridView.render('@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
+				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
+				{{ gridView.render('@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
+				{{ gridView.renderHiddenInputs('page') }}
+			
+			{{ form_end(quickSearchForm) }}
 		</div>
 	</div>
 {% endblock %}

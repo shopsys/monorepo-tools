@@ -74,6 +74,15 @@ class PKGridView {
 	}
 
 	/**
+	 * @param array|null $removeParameters
+	 */
+	public function renderHiddenInputs($removeParameters = null) {
+		$this->renderBlock('pkgrid_hidden_inputs', array(
+			'parameter' => $this->grid->getUrlGridParameters(null, $removeParameters)
+		));
+	}
+
+	/**
 	 * @param string $name
 	 * @param array|null $parameters
 	 */
@@ -127,28 +136,14 @@ class PKGridView {
 	}
 
 	/**
-	 * @param array $params
-	 * @param array|string|null $removeParams
+	 * @param array $parameters
+	 * @param array|string|null $removeParameters
 	 * @return string
 	 */
-	public function getUrl(array $params = null, $removeParams = null) {
-		$removeParams = (array)$removeParams;
-		$oldRouteParams = $this->request->attributes->get('_route_params');
+	public function getUrl(array $parameters = null, $removeParameters = null) {
+		$routeParameters = $this->grid->getUrlParameters($parameters, $removeParameters);
 
-		$gridParams = array_replace_recursive($this->getGridAttrs(), $params);
-		foreach ($gridParams as $key => $paramValue) {
-			if (in_array($key, $removeParams)) {
-				unset($gridParams[$key]);
-			}
-		}
-		
-		$routeParams = array_replace_recursive(
-			array('q' => array($this->grid->getId() => $gridParams)),
-			$oldRouteParams
-		);
-		$url = $this->router->generate($this->request->attributes->get('_route'), $routeParams, true);
-
-		return $url;
+		return $this->router->generate($this->request->attributes->get('_route'), $routeParameters, true);
 	}
 
 	/**
@@ -197,23 +192,6 @@ class PKGridView {
 		}
 
 		return $templates;
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getGridAttrs() {
-		$gridData = array();
-		if ($this->grid->isAllowedPaging()) {
-			$gridData['limit'] = $this->grid->getLimit();
-			if ($this->grid->getPage() > 1) {
-				$gridData['page'] = $this->grid->getPage();
-			}
-		}
-		if ($this->grid->getOrder() !== null) {
-			$gridData['order'] = $this->grid->getOrder();
-		}
-		return $gridData;
 	}
 
 	/**

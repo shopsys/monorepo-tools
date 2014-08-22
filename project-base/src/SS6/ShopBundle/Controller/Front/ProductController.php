@@ -24,14 +24,14 @@ class ProductController extends Controller {
 	}
 	
 	public function listAction() {
-		$productRepository = $this->get('ss6.shop.product.product_repository');
-		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$productFacade = $this->get('ss6.shop.product.product_facade');
+		/* @var $productFacade \SS6\ShopBundle\Model\Product\ProductFacade */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 			
-		$products = $productRepository->findAllVisible();
+		$products = $productFacade->findAllVisible();
 		$productDetails = $productDetailFactory->getDetailsForProducts($products);
-		
+
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
 			'productDetails' => $productDetails,
 		));

@@ -210,3 +210,27 @@
 {% block pkgrid_value_cell_type_DateTime %}
 	{{ value.format('j. n. Y G:i') }}
 {% endblock %}
+
+{% block pkgrid_hidden_inputs %}
+	{% spaceless %}
+		{% set name = name|default('') %}
+		{% if parameter is iterable %}
+			{% for key, value in parameter %}
+				{% set currentParameter = parameter %}
+				{% set parameter = value %}
+				{% set currentName = name %}
+				{% if name != '' %}
+					{% set name = name ~ '[' ~ key ~ ']' %}
+				{% else %}
+					{% set name = key %}
+				{% endif %}
+				
+					{{ block('pkgrid_hidden_inputs') }}
+				{% set parameter = currentParameter %}
+				{% set name = currentName %}
+			{% endfor %}
+		{% else %}
+			<input type="hidden" name="{{ name }}" value="{{ parameter }}" />
+		{% endif %}
+	{% endspaceless %}
+{% endblock %}
