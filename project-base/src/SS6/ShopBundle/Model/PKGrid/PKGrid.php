@@ -14,7 +14,7 @@ use Twig_Environment;
 
 class PKGrid {
 
-	const GET_PARAMETER = 'q';
+	const GET_PARAMETER = 'g';
 
 	/**
 	 * @var string
