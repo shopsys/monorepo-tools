@@ -17,7 +17,7 @@ class ProductCalculationTest extends PHPUnit_Framework_TestCase {
 				'inputPriceType' => Setting3::INPUT_PRICE_TYPE_WITHOUT_VAT,
 				'inputPrice' => '6999',
 				'vatPercent' => '21',
-				'basePriceWithoutVat' => '6998.7816',
+				'basePriceWithoutVat' => '6998.78',
 				'basePriceWithVat' => '8469',
 			),
 			array(

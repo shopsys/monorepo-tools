@@ -53,10 +53,10 @@ class PriceCalculation {
 
 		switch ($inputPriceType) {
 			case Setting3::INPUT_PRICE_TYPE_WITH_VAT:
-				return $this->round($this->inputPrice);
+				return $this->roundPriceWithVat($this->inputPrice);
 
 			case Setting3::INPUT_PRICE_TYPE_WITHOUT_VAT:
-				return $this->round($this->applyVatPercent($this->inputPrice));
+				return $this->roundPriceWithVat($this->applyVatPercent($this->inputPrice));
 
 			default:
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
@@ -67,15 +67,23 @@ class PriceCalculation {
 	 * @return string
 	 */
 	private function getBaseVatAmount() {
-		return $this->getBasePriceWithVat() * $this->vat->getCoefficient();
+		return $this->roundVatAmount($this->getBasePriceWithVat() * $this->vat->getCoefficient());
 	}
 
 	/**
 	 * @param string $price
 	 * @return string
 	 */
-	private function round($price) {
+	private function roundPriceWithVat($price) {
 		return round($price, 0);
+	}
+
+	/**
+	 * @param string $vatAmount
+	 * @return string
+	 */
+	private function roundVatAmount($vatAmount) {
+		return round($vatAmount, 2);
 	}
 
 	/**
