@@ -360,28 +360,28 @@ class PKGrid {
 	 * @return array
 	 */
 	public function getGridParameters($removeParameters = null) {
-		$gridData = array();
+		$gridParameters = array();
 		if ($this->isAllowedPaging()) {
-			$gridData['limit'] = $this->getLimit();
+			$gridParameters['limit'] = $this->getLimit();
 			if ($this->getPage() > 1) {
-				$gridData['page'] = $this->getPage();
+				$gridParameters['page'] = $this->getPage();
 			}
 		}
 		if ($this->getOrder() !== null) {
-			$gridData['order'] = $this->getOrder(true);
+			$gridParameters['order'] = $this->getOrder(true);
 		}
 
 		foreach ((array)$removeParameters as $parameterToRemove) {
-			// trigger notic when typo
-			unset($gridData[$parameterToRemove]);
+			// trigger notice when typo
+			unset($gridParameters[$parameterToRemove]);
 		}
-		return $gridData;
+		return $gridParameters;
 	}
 
 	/**
 	 * @param array|string|null $parameters
 	 * @param array|string|null $removeParameters
-	 * @return a
+	 * @return array
 	 */
 	public function getUrlGridParameters($parameters = null, $removeParameters = null) {
 		$gridParameters = array_replace_recursive(
@@ -395,7 +395,7 @@ class PKGrid {
 	/**
 	 * @param array|string|null $parameters
 	 * @param array|string|null $removeParameters
-	 * @return a
+	 * @return array
 	 */
 	public function getUrlParameters($parameters = null, $removeParameters = null) {
 		return array_replace_recursive(
