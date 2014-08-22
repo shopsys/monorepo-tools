@@ -12,9 +12,7 @@
 				{{ form_errors(form) }}
 
 				<div class="form-box">
-					{% block product_id %}
-					{{ form_widget(form.id, { type: 'hidden'}) }}
-					{% endblock %}
+					{% block product_id %}{% endblock %}
 					{% block product_url %}{% endblock %}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
@@ -30,7 +28,9 @@
 
 				<div class="form-box">
 					{{ form_row(form.description, { label: 'Popis'}) }}
-					{{ form_row(form.price, { label: 'Cena', attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.price, { label: inputPriceLabel(), attr: { class: 'form-line--size-2' } }) }}
+					{{ form_row(form.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
+					{% block product_base_prices %}{% endblock %}
 					{{ form_row(form.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}

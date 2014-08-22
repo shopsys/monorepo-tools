@@ -12,22 +12,28 @@ class ProductController extends Controller {
 	public function detailAction($id) {
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
+		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 			
 		$product = $productRepository->getVisibleById($id);
+		$productDetail = $productDetailFactory->getDetailForProduct($product);
 		
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(
-			'product' => $product,
+			'productDetail' => $productDetail,
 		));
 	}
 	
 	public function listAction() {
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
+		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 			
 		$products = $productRepository->findAllVisible();
+		$productDetails = $productDetailFactory->getDetailsForProducts($products);
 		
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
-			'products' => $products,
+			'productDetails' => $productDetails,
 		));
 	}
 }

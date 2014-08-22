@@ -7,7 +7,9 @@ use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
@@ -19,7 +21,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
-		$product = new Product('productName');
+		$vat = new Vat('vat', 21);
+		$product = new Product(new ProductData('productName', null, null, null, null, null, $vat));
+		$em->persist($vat);
 		$em->persist($product);
 		$em->flush();
 		$productId = $product->getId();
@@ -56,8 +60,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
-		$product1 = new Product('productName');
-		$product2 = new Product('otherProductName');
+		$vat = new Vat('vat', 21);
+		$product1 = new Product(new ProductData('productName', null, null, null, null, null, $vat));
+		$product2 = new Product(new ProductData('otherProductName', null, null, null, null, null, $vat));
+		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
 		$em->flush();
@@ -104,7 +110,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
-		$product = new Product('productName');
+		$vat = new Vat('vat', 21);
+		$em->persist($vat);
+		$product = new Product(new ProductData('productName', null, null, null, null, null, $vat));
 		$em->persist($product);
 		$cartItem = new CartItem($customerIdentifier, $product, 1);
 		$em->persist($cartItem);
@@ -126,8 +134,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
-		$product1 = new Product('productName1');
-		$product2 = new Product('productName2');
+		$vat = new Vat('vat', 21);
+		$product1 = new Product(new ProductData('productName1', null, null, null, null, null, $vat));
+		$product2 = new Product(new ProductData('productName2', null, null, null, null, null, $vat));
+		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);

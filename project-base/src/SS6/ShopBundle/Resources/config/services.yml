@@ -223,9 +223,18 @@ services:
   ss6.shop.payment.payment_repository:
     class: SS6\ShopBundle\Model\Payment\PaymentRepository
 
+  ss6.shop.pricing.vat_repository:
+    class: SS6\ShopBundle\Model\Pricing\VatRepository
+
+  ss6.shop.product.price_calculation:
+    class: SS6\ShopBundle\Model\Product\PriceCalculation
+
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
-  
+
+  ss6.shop.product.product_detail_factory:
+    class: SS6\ShopBundle\Model\Product\Detail\Factory
+
   ss6.shop.product.product_repository:
     class: SS6\ShopBundle\Model\Product\ProductRepository
     
@@ -244,6 +253,9 @@ services:
     
   ss6.shop.security.login_service:
     class: SS6\ShopBundle\Model\Security\LoginService
+
+  ss6.shop.setting:
+    class: SS6\ShopBundle\Model\Setting\Setting3
 
   ss6.shop.security.logout_handler:
     class: SS6\ShopBundle\Model\Security\LogoutHandler

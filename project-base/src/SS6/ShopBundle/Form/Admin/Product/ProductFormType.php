@@ -6,8 +6,10 @@ use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
@@ -19,10 +21,16 @@ class ProductFormType extends AbstractType {
 	private $fileUpload;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat[]
+	 */
+	private $vats;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 */
-	public function __construct(FileUpload $fileUpload) {
+	public function __construct(FileUpload $fileUpload, array $vats) {
 		$this->fileUpload = $fileUpload;
+		$this->vats = $vats;
 	}
 
 	/**
@@ -39,7 +47,6 @@ class ProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('name', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
@@ -66,8 +73,16 @@ class ProductFormType extends AbstractType {
 			->add('description', 'ckeditor', array('required' => false))
 			->add('price', 'money', array(
 				'currency' => false,
+				'precision' => 6,
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+			))
+			->add('vat', 'choice', array(
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->vats, 'name', array(), null, 'id'),
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
+				),
 			))
 			->add('sellingFrom', new DatePickerType(), array(
 				'required' => false,
@@ -104,6 +119,7 @@ class ProductFormType extends AbstractType {
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
+			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}

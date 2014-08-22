@@ -4,7 +4,9 @@ namespace SS6\ShopBundle\TestsDb\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartItemTest extends DatabaseTestCase {
@@ -16,8 +18,10 @@ class CartItemTest extends DatabaseTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price = 100;
-		$product1 = new Product('Product 1', null, null, null, null, $price);
-		$product2 = new Product('Product 2', null, null, null, null, $price);
+		$vat = new Vat('vat', 21);
+		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
+		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price, $vat));
+		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
 		$em->flush();

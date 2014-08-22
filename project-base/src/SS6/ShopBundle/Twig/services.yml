@@ -22,6 +22,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.input_price_label_extension:
+    class: SS6\ShopBundle\Twig\InputPriceLabelExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.price_extension:
     class: SS6\ShopBundle\Twig\PriceExtension
     tags:

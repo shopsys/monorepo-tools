@@ -4,7 +4,10 @@
 {% block h1 %}Editace zboží - {{ product.name }}{% endblock %}
 
 {% block product_id %}
-	{{ form_row(form.id, { label: 'ID'}) }}
+	<div class="form-group">
+		<label>ID:</label>
+		<input type="text" value="{{ product.id }}" class="form-control" readonly="readonly">
+	</div>
 {% endblock %}
 
 {% block product_url %}
@@ -16,6 +19,17 @@
 				{{ url('front_product_detail', { id: product.id }) }}
 			{% endif %}
 		</span>
+	</div>
+{% endblock %}
+
+{% block product_base_prices %}
+	<div class="form-line form-line--size-2">
+		<label class="form-line__label">Základní cena bez DPH:</label>
+		<input type="text" value="{{ productDetail.price.basePriceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
+	</div>
+	<div class="form-line form-line--size-2">
+		<label class="form-line__label">Základní cena s DPH:</label>
+		<input type="text" value="{{ productDetail.price.basePriceWithVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 {% endblock %}
 

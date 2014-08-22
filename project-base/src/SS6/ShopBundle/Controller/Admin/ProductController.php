@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,23 +25,19 @@ class ProductController extends Controller {
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
+		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
+		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
+		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 
 		$product = $productRepository->getById($id);
-		$form = $this->createForm(new ProductFormType($fileUpload));
-		$productData = array();
+
+		$vats = $vatRepository->findAll();
+		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
+		$productData = new ProductData();
 
 		if (!$form->isSubmitted()) {
-			$productData['id'] = $product->getId();
-			$productData['name'] = $product->getName();
-			$productData['catnum'] = $product->getCatnum();
-			$productData['partno'] = $product->getPartno();
-			$productData['ean'] = $product->getEan();
-			$productData['description'] = $product->getDescription();
-			$productData['price'] = $product->getPrice();
-			$productData['sellingFrom'] = $product->getSellingFrom();
-			$productData['sellingTo'] = $product->getSellingTo();
-			$productData['stockQuantity'] = $product->getStockQuantity();
-			$productData['hidden'] = $product->isHidden();
+			$productData->setFromEntity($product);
 		}
 
 		$form->setData($productData);
@@ -68,6 +65,7 @@ class ProductController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(
 			'form' => $form->createView(),
 			'product' => $product,
+			'productDetail' => $productDetailFactory->getDetailForProduct($product),
 		));
 	}
 	
@@ -80,14 +78,14 @@ class ProductController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
+		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
 
-		$form = $this->createForm(new ProductFormType($fileUpload));
-		
-		$productData = array();
+		$vats = $vatRepository->findAll();
 
-		if (!$form->isSubmitted()) {
-			$productData['hidden'] = false;
-		}
+		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
+
+		$productData = new ProductData();
 
 		$form->setData($productData);
 		$form->handleRequest($request);
@@ -108,7 +106,7 @@ class ProductController extends Controller {
 		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
 			'form' => $form->createView(),
 		));

@@ -4,16 +4,20 @@ namespace SS6\ShopBundle\TestsDb\Model\Product;
 
 use DateTime;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 	public function testIsVisibleWhenHidden() {
 		$em = $this->getEntityManager();
 		
 		$hidden = true;
-		
-		$product = new Product('Name', null, null, null, null, null, null, null, null, $hidden);
-		
+
+		$vat = new Vat('vat', 21);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, null, null, null, $hidden));
+
+		$em->persist($vat);
 		$em->persist($product);
 		$em->flush();
 		$em->clear();
@@ -35,9 +39,11 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$hidden = false;
 		$sellingFrom = new DateTime('now');
 		$sellingFrom->modify('+1 day');
-		
-		$product = new Product('Name', null, null, null, null, null, $sellingFrom, null, null, $hidden);
-		
+
+		$vat = new Vat('vat', 21);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, $sellingFrom, null, null, $hidden));
+
+		$em->persist($vat);
 		$em->persist($product);
 		$em->flush();
 		$id = $product->getId();
@@ -59,9 +65,11 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$hidden = false;
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('-1 day');
-		
-		$product = new Product('Name', null, null, null, null, null, null, $sellingTo, null, $hidden);
-		
+
+		$vat = new Vat('vat', 21);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, null, $sellingTo, null, $hidden));
+
+		$em->persist($vat);
 		$em->persist($product);
 		$em->flush();
 		$id = $product->getId();
@@ -85,9 +93,11 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingFrom->modify('-1 day');
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('+1 day');
-		
-		$product = new Product('Name', null, null, null, null, null, $sellingFrom, $sellingTo, null, $hidden);
-		
+
+		$vat = new Vat('vat', 21);
+		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, $sellingFrom, $sellingTo, null, $hidden));
+
+		$em->persist($vat);
 		$em->persist($product);
 		$em->flush();
 		$id = $product->getId();

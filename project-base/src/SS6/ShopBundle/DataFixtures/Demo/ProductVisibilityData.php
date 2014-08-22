@@ -35,7 +35,7 @@ class ProductVisibilityData extends AbstractFixture implements ContainerAwareInt
 	 */
 	public function getDependencies() {
 		return array(
-			ProductData::class,
+			ProductDataFixture::class,
 		);
 	}
 

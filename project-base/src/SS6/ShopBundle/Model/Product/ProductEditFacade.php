@@ -36,21 +36,11 @@ class ProductEditFacade {
 	}
 	
 	/**
-	 * @param array $productData
+	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function create(array $productData) {
-		$product = new Product($productData['name'],
-			$productData['catnum'],
-			$productData['partno'],
-			$productData['ean'],
-			$productData['description'],
-			$productData['price'],
-			$productData['sellingFrom'],
-			$productData['sellingTo'],
-			$productData['stockQuantity'],
-			$productData['hidden']);
-		$product->setImageForUpload($productData['image']);
+	public function create(ProductData $productData) {
+		$product = new Product($productData);
 
 		$this->em->persist($product);
 		$this->em->flush();
@@ -62,22 +52,12 @@ class ProductEditFacade {
 	
 	/**
 	 * @param int $productId
-	 * @param array $productData
+	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function edit($productId, array $productData) {
+	public function edit($productId, ProductData $productData) {
 		$product = $this->productRepository->getById($productId);
-		$product->edit($productData['name'],
-			$productData['catnum'],
-			$productData['partno'],
-			$productData['ean'],
-			$productData['description'],
-			$productData['price'],
-			$productData['sellingFrom'],
-			$productData['sellingTo'],
-			$productData['stockQuantity'],
-			$productData['hidden']);
-		$product->setImageForUpload($productData['image']);
+		$product->edit($productData);
 
 		$this->em->flush();
 		
