@@ -1,5 +1,10 @@
 {% block pkgrid %}
-<div class="grid js-pkgrid"{% if grid.inlineEdit %} data-inline-edit-service-name="{{ grid.inlineEditServiceName }}"{% endif %}>
+<div class="grid js-pkgrid" {% spaceless %}
+		{% if grid.inlineEdit %} 
+			data-inline-edit-service-name="{{ grid.inlineEditServiceName }}"
+			data-inline-edit-url-get-form="{{ url('admin_pkgrid_getform') }}"
+		{% endif %}
+	{% endspaceless %}>
 	{% if grid.rows is not empty %}
 		<div class="grid_header">
 		{% if grid.allowedPaging %}
@@ -94,7 +99,7 @@
 {% block pkgrid_row %}
 	{% set emptyRow = emptyRow|default(false) %}
 	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} hidden js-pkgrid-empty-row{% else %} js-pkgrid-row{% endif %}"
-			{% if not emptyRow %} data-inline-edit-row-id="{{ grid.getInlineEditRowId(row) }}"{% endif %}>
+			{% if grid.inlineEdit and not emptyRow %} data-inline-edit-row-id="{{ grid.getInlineEditRowId(row) }}"{% endif %}>
 		{% for column in grid.columns %}
 			<td class="js-pkgrid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
 				{% if not emptyRow %}
@@ -103,10 +108,10 @@
 			</td>
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
-			<td class="grid-column-actions last-column text-right {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
+			<td class="grid-column-actions last-column text-right js-inline-edit-other-inputs {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
 				<span class="grid-row-actions action-icons">
 					{% if grid.inlineEdit and emptyRow %}
-						<i class="fa fa-save cursor-pointer js-pkgrid-save" title="Uložit změny"></i>
+						<i class="fa fa-check cursor-pointer js-pkgrid-save" title="Uložit změny"></i>
 						<i class="fa fa-delete cursor-pointer js-pkgrid-cancel" title="Zahodit změny"></i>
 					{% else %}
 						{% if grid.inlineEdit %}
@@ -126,7 +131,7 @@
 	{% if actionColumn.type == 'edit' %}
 		{% set icon = 'pencil' %}
 	{% elseif actionColumn.type == 'delete' %}
-		{% set icon = 'times' %}
+		{% set icon = 'trash-o' %}
 	{% else %}
 		{% set icon = actionColumn.type %}
 	{% endif %}

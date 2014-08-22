@@ -28,7 +28,7 @@
 			class="js-order-status-delete-button table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
 			href="{{ actionColumn.targetUrl(row) }}"
 			data-ajax-action="{{ url('admin_orderstatus_deleteajaxdialog', { id: row.os.id }) }}"
-		><i class="fa fa-times"></i></a>
+		><i class="fa fa-trash-o"></i></a>
 	{% endif %}
 {% endblock %}
 

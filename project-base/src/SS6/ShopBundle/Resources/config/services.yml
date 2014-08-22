@@ -233,6 +233,11 @@ services:
   ss6.shop.pkgrid.factory:
     class: SS6\ShopBundle\Model\PKGrid\GridFactory
 
+  ss6.shop.pkgrid.inline_edit.inline_edit_service:
+    class: SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService
+    arguments:
+      - @service_container
+
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
     
