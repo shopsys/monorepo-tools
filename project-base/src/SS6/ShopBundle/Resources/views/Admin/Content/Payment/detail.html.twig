@@ -23,7 +23,7 @@
 
 					{{ form_row(form.name, { label: 'Název'}) }}
 					{{ form_row(form.hidden, { label: 'Skryté'}) }}
-					{{ form_row(form.price, { label: 'Cena'}) }}
+					{{ form_row(form.price, { label: inputPriceLabel()}) }}
 					{{ form_row(form.transports, { label: 'Dopravy', empty_message: 'Musíte nejdřív nějakou dopravu vytvořit.'}) }}
 					{{ form_row(form.description, { label: 'Popis'}) }}
 				</div>
