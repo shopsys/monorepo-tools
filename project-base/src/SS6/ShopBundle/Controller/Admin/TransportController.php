@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
@@ -19,11 +18,11 @@ class TransportController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
+		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
 
 		$transportData = new TransportData();
-		$form = $this->createForm(new TransportFormType($fileUpload), $transportData);
+		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -61,8 +60,8 @@ class TransportController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
+		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
 		
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
@@ -74,7 +73,7 @@ class TransportController extends Controller {
 		$formData->setDescription($transport->getDescription());
 		$formData->setHidden($transport->isHidden());
 
-		$form = $this->createForm(new TransportFormType($fileUpload), $formData);
+		$form = $this->createForm($transportFormTypeFactory->create(), $formData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
