@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Listing;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
 class ProductListAdminFacade {
 
@@ -13,10 +14,17 @@ class ProductListAdminFacade {
 	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
+	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
 	 */
-	public function __construct(EntityManager $em) {
+	private $productListAdminRepository;
+
+	/**
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
+	 */
+	public function __construct(EntityManager $em, ProductListAdminRepository $productListAdminRepository) {
 		$this->em = $em;
+		$this->productListAdminRepository = $productListAdminRepository;
 	}
 
 	/**
@@ -28,17 +36,7 @@ class ProductListAdminFacade {
 		$queryBuilder
 			->select('p')
 			->from(Product::class, 'p');
-
-		if ($searchData['text'] !== null && $searchData['text'] !== '') {
-			$queryBuilder->andWhere('
-				(
-					p.name LIKE :text OR
-					p.catnum LIKE :text OR
-					p.partno LIKE :text
-				)');
-			$querySerachText = '%' .$searchData['text'] . '%';
-			$queryBuilder->setParameter('text', $querySerachText);
-		}
+		$this->productListAdminRepository->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
 
 		return $queryBuilder;
 	}
