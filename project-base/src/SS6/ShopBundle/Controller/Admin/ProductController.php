@@ -22,19 +22,16 @@ class ProductController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
-		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
-		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
+		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
+		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
 
 		$product = $productRepository->getById($id);
 
-		$vats = $vatRepository->findAll();
-		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
+		$form = $this->createForm($productFormTypeFactory->create());
 		$productData = new ProductData();
 
 		if (!$form->isSubmitted()) {
@@ -77,14 +74,10 @@ class ProductController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		$vatRepository = $this->get('ss6.shop.pricing.vat_repository');
-		/* @var $fileUpload \SS6\ShopBundle\Model\Pricing\VatRepository */
+		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
+		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
 
-		$vats = $vatRepository->findAll();
-
-		$form = $this->createForm(new ProductFormType($fileUpload, $vats));
+		$form = $this->createForm($productFormTypeFactory->create());
 
 		$productData = new ProductData();
 

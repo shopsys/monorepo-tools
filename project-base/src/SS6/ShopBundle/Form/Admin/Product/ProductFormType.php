@@ -27,6 +27,7 @@ class ProductFormType extends AbstractType {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @param array $vats
 	 */
 	public function __construct(FileUpload $fileUpload, array $vats) {
 		$this->fileUpload = $fileUpload;

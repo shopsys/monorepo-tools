@@ -1,0 +1,4 @@
+services:
+  
+  ss6.shop.form.admin.product.product_form_type_factory:
+    class: SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory

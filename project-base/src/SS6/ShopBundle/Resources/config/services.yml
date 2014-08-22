@@ -1,4 +1,5 @@
 imports:
+  - { resource: ../../Form/services.yml }
   - { resource: ../../Twig/services.yml }
 
 parameters:
