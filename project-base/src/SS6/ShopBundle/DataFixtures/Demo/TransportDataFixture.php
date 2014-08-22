@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Transport\Transport;
 
-class TransportData extends AbstractFixture {
+class TransportDataFixture extends AbstractFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

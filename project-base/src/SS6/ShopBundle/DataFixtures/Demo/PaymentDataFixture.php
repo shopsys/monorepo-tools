@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Payment\Payment;
 
-class PaymentData extends AbstractFixture implements DependentFixtureInterface {
+class PaymentDataFixture extends AbstractFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -43,7 +43,7 @@ class PaymentData extends AbstractFixture implements DependentFixtureInterface {
 	 */
 	public function getDependencies() {
 		return array(
-			TransportData::class,
+			TransportDataFixture::class,
 		);
 	}
 
