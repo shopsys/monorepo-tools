@@ -33,7 +33,8 @@ class PriceCalculation {
 
 		return new Price(
 			$this->getBasePriceWithoutVat(),
-			$this->getBasePriceWithVat()
+			$this->getBasePriceWithVat(),
+			$this->getBasePriceVatAmount()
 		);
 	}
 
@@ -41,7 +42,7 @@ class PriceCalculation {
 	 * @return string
 	 */
 	private function getBasePriceWithoutVat() {
-		return $this->getBasePriceWithVat() - $this->getBaseVatAmount();
+		return $this->getBasePriceWithVat() - $this->getBasePriceVatAmount();
 	}
 
 	/**
@@ -66,7 +67,7 @@ class PriceCalculation {
 	/**
 	 * @return string
 	 */
-	private function getBaseVatAmount() {
+	private function getBasePriceVatAmount() {
 		return $this->roundVatAmount($this->getBasePriceWithVat() * $this->vat->getCoefficient());
 	}
 

@@ -232,6 +232,20 @@ services:
   ss6.shop.pricing.vat_repository:
     class: SS6\ShopBundle\Model\Pricing\VatRepository
 
+  ss6.shop.pricing.input_price_facade:
+    class: SS6\ShopBundle\Model\Pricing\InputPriceFacade
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+  ss6.shop.pricing.input_price_repository:
+    class: SS6\ShopBundle\Model\Pricing\InputPriceRepository
+
+  ss6.shop.pricing.pricing_setting:
+    class: SS6\ShopBundle\Model\Pricing\PricingSetting
+
+  ss6.shop.pricing.pricing_setting_facade:
+    class: SS6\ShopBundle\Model\Pricing\PricingSettingFacade
+
   ss6.shop.product.price_calculation:
     class: SS6\ShopBundle\Model\Product\PriceCalculation
 

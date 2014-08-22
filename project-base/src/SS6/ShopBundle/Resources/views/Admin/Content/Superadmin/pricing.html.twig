@@ -1,0 +1,12 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}Superadmin - cenotvorba{% endblock %}
+{% block h1 %}Superadmin - cenotvorba{% endblock %}
+
+{% block main_content %}
+	{{ form_start(form) }}
+		{{ form_row(form.type, { 'label': 'Typ vstupní ceny' }) }}
+
+		{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+	{{ form_end(form) }}
+{% endblock %}
