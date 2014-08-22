@@ -19,7 +19,7 @@ class ProductListAdminRepository {
 					p.catnum LIKE :text OR
 					p.partno LIKE :text
 				)');
-			$querySerachText = '%' . DatabaseSearching::getQuerySearchString($searchData['text']) . '%';
+			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
 			$queryBuilder->setParameter('text', $querySerachText);
 		}
 	}
