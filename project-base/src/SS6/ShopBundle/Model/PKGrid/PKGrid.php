@@ -301,14 +301,22 @@ class PKGrid {
 	}
 
 	/**
-	 * @param bool $withDirection
 	 * @return string|null
 	 */
-	public function getOrder($withDirection = false) {
-		if ($withDirection && $this->orderDirection === 'desc') {
-			return '-' . $this->order;
-		}
+	public function getOrder() {
 		return $this->order;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getOrderWithDirection() {
+		$prefix = '';
+		if ($this->getOrderDirection() === 'desc') {
+			$prefix = '-';
+		}
+		
+		return $prefix . $this->getOrder();
 	}
 
 	/**
@@ -368,7 +376,7 @@ class PKGrid {
 			}
 		}
 		if ($this->getOrder() !== null) {
-			$gridParameters['order'] = $this->getOrder(true);
+			$gridParameters['order'] = $this->getOrderWithDirection();
 		}
 
 		foreach ((array)$removeParameters as $parameterToRemove) {
