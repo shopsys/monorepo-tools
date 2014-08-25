@@ -218,6 +218,9 @@ services:
     arguments:
       - @ss6.shop.flash_message.bag.front
 
+  ss6.shop.payment.payment_detail_factory:
+    class: SS6\ShopBundle\Model\Payment\Detail\Factory
+
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
 
