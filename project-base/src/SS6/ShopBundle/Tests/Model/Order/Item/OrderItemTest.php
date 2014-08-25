@@ -7,17 +7,19 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class OrderItemTest extends PHPUnit_Framework_TestCase {
 	
 	public function testTotalPrice() {
 		$number = '123456';
-		$transport = new Transport('TransportName', 0);
-		$payment = new Payment('PaymentName', 0);
+		$transport = new Transport(new TransportData('TransportName', 0));
+		$payment = new Payment(new PaymentData('PaymentName', 0));
 		$orderStatus = new OrderStatus('StatusName', OrderStatus::TYPE_NEW);
 		$firstName = 'FirstName';
 		$lastName = 'LastName';

@@ -31,12 +31,7 @@ class PaymentController extends Controller {
 
 		if ($form->isValid()) {
 			$transportRepository->findAll();
-			$payment = new Payment(
-				$paymentData->getName(),
-				$paymentData->getPrice(),
-				$paymentData->getDescription(),
-				$paymentData->isHidden()
-			);
+			$payment = new Payment($paymentData);
 			$payment->setImageForUpload($paymentData->getImage());
 
 			$transports = $transportRepository->findAllByIds($paymentData->getTransports());

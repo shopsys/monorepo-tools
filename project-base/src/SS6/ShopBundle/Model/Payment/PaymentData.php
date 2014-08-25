@@ -29,7 +29,7 @@ class PaymentData {
 	/**
 	 * @var integer
 	 */
-	private $hidden = false;
+	private $hidden;
 
 	/**
 	 * @var string
@@ -39,7 +39,21 @@ class PaymentData {
 	/**
 	 * @var \Doctrine\Common\Collections\Collection 
 	 */
-	private $transports = array();
+	private $transports;
+
+	/**
+	 * @param string|null $name
+	 * @param string|null $price
+	 * @param string|null $description
+	 * @param boolean $hidden
+	 */
+	public function __construct($name = null, $price = null, $description = null, $hidden = false) {
+		$this->name = $name;
+		$this->price = $price;
+		$this->description = $description;
+		$this->hidden = $hidden;
+		$this->transports = array();
+	}
 	
 	/**
 	 * @return int

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class TransportDataFixture extends AbstractFixture {
 
@@ -27,7 +28,7 @@ class TransportDataFixture extends AbstractFixture {
 	 * @param boolean $hide
 	 */
 	private function createTransport(ObjectManager $manager, $referenceName, $name, $price, $description, $hide = false) {
-		$transport = new Transport($name, $price, $description, $hide);
+		$transport = new Transport(new TransportData($name, $price, $description, $hide));
 		$manager->persist($transport);
 		$this->addReference($referenceName, $transport);
 	}

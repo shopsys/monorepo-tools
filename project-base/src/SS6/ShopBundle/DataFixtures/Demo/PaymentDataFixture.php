@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 
 class PaymentDataFixture extends AbstractFixture implements DependentFixtureInterface {
 
@@ -30,7 +31,7 @@ class PaymentDataFixture extends AbstractFixture implements DependentFixtureInte
 	 */
 	private function createPayment(ObjectManager $manager, $referenceName, $name, $price,
 			array $transportsReferenceNames, $description, $hide = false) {
-		$payment = new Payment($name, $price, $description, $hide);
+		$payment = new Payment(new PaymentData($name, $price, $description, $hide));
 		foreach ($transportsReferenceNames as $transportsReferenceName) {
 			$payment->addTransport($this->getReference($transportsReferenceName));
 		}

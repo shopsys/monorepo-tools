@@ -27,12 +27,25 @@ class TransportData {
 	/**
 	 * @var integer
 	 */
-	private $hidden = false;
+	private $hidden;
 
 	/**
 	 * @var string
 	 */
 	private $image;
+
+	/**
+	 * @param string|null $name
+	 * @param string|null $price
+	 * @param string|null $description
+	 * @param boolean $hidden
+	 */
+	public function __construct($name = null, $price = null, $description = null, $hidden = false) {
+		$this->name = $name;
+		$this->price = $price;
+		$this->description = $description;
+		$this->hidden = $hidden;
+	}
 	
 	/**
 	 * @return int

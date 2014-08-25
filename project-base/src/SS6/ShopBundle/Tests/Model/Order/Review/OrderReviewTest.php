@@ -9,10 +9,12 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Review\OrderReview;
 use SS6\ShopBundle\Model\Order\Review\OrderReviewItem;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class OrderReviewTest extends PHPUnit_Framework_TestCase {
 
@@ -30,8 +32,8 @@ class OrderReviewTest extends PHPUnit_Framework_TestCase {
 
 		$cart = new Cart($cartItems);
 
-		$transport = new Transport('Transport', 100);
-		$payment = new Payment('Payment', 50);
+		$transport = new Transport(new TransportData('Transport', 100));
+		$payment = new Payment(new PaymentData('Payment', 50));
 
 		$orderReviewPartial = new OrderReview($cart, null, null);
 		$orderReview = new OrderReview($cart, $payment, $transport);
@@ -53,8 +55,8 @@ class OrderReviewTest extends PHPUnit_Framework_TestCase {
 
 		$cart = new Cart($cartItems);
 
-		$transport = new Transport('Transport', 100);
-		$payment = new Payment('Payment', 50);
+		$transport = new Transport(new TransportData('Transport', 100));
+		$payment = new Payment(new PaymentData('Payment', 50));
 
 		$orderReview = new OrderReview($cart, $payment, $transport);
 

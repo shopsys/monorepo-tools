@@ -13,7 +13,9 @@ use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -50,8 +52,8 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 		$user = new User($userData, $billingAddress, $deliveryAddress);
 
-		$transport = new Transport('transportName', '0');
-		$payment = new Payment('paymentName', '0');
+		$transport = new Transport(new TransportData('transportName', '0'));
+		$payment = new Payment(new PaymentData('paymentName', '0'));
 		$orderStatus = new OrderStatus('orderStatusName', OrderStatus::TYPE_NEW);
 		$order = new Order(
 			'123456',
@@ -99,8 +101,8 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$billingAddress = new BillingAddress($billingAddressData);
 		$user = new User($userData, $billingAddress, null);
 
-		$transport = new Transport('transportName', '0');
-		$payment = new Payment('paymentName', '0');
+		$transport = new Transport(new TransportData('transportName', '0'));
+		$payment = new Payment(new PaymentData('paymentName', '0'));
 		$orderStatus = new OrderStatus('orderStatusName', OrderStatus::TYPE_NEW);
 		$order = new Order(
 			'123456',

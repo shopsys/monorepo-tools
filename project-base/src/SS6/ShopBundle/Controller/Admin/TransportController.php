@@ -27,12 +27,7 @@ class TransportController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = new Transport(
-				$transportData->getName(),
-				$transportData->getPrice(),
-				$transportData->getDescription(),
-				$transportData->isHidden()
-			);
+			$transport = new Transport($transportData);
 			$transport->setImageForUpload($transportData->getImage());
 			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');

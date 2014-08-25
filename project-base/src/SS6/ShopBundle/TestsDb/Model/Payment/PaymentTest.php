@@ -4,15 +4,17 @@ namespace SS6\ShopBundle\TestsDb\Model\Payment;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentTest extends DatabaseTestCase {
 	
 	public function testIsVisibleAfterDeleteTransport() {
 		$em = $this->getEntityManager();
 
-		$transport = new Transport('name', 0, 'description', false);
-		$payment = new Payment('name', 0, 'description', false);
+		$transport = new Transport(new TransportData('name', 0, 'description', false));
+		$payment = new Payment(new PaymentData('name', 0, 'description', false));
 		$payment->addTransport($transport);
 
 		$em->persist($transport);

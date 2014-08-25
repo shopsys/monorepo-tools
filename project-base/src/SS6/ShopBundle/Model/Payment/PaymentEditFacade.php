@@ -48,12 +48,7 @@ class PaymentEditFacade {
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function edit(Payment $payment, PaymentData $paymentData) {
-		$payment->setEdit(
-			$paymentData->getName(),
-			$paymentData->getPrice(),
-			$paymentData->getDescription(),
-			$paymentData->isHidden()
-		);
+		$payment->edit($paymentData);
 		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
 		$payment->setTransports($transports);
 		$payment->setImageForUpload($paymentData->getImage());

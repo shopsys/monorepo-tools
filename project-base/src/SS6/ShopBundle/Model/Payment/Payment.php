@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Payment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
@@ -79,19 +80,16 @@ class Payment implements EntityFileUploadInterface {
 	 * @var string|null
 	 */
 	private $imageForUpload;
-	
+
 	/**
-	 * @param string $name
-	 * @param string $price
-	 * @param string|null $description
-	 * @param boolean $hidden
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
-	public function __construct($name, $price, $description = null, $hidden = false) {
-		$this->name = $name;
-		$this->price = $price;
-		$this->description = $description;
+	public function __construct(PaymentData $paymentData) {
+		$this->name = $paymentData->getName();
+		$this->price = $paymentData->getPrice();
+		$this->description = $paymentData->getDescription();
 		$this->transports = new ArrayCollection();
-		$this->hidden = $hidden;
+		$this->hidden = $paymentData->isHidden();
 		$this->deleted = false;
 		$this->image = null;
 	}
@@ -122,18 +120,15 @@ class Payment implements EntityFileUploadInterface {
 	public function getTransports() {
 		return $this->transports;
 	}
-	
+
 	/**
-	 * @param string $name
-	 * @param string $price
-	 * @param string|boolean $description
-	 * @param boolean $hidden
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
-	public function setEdit($name, $price, $description, $hidden) {
-		$this->name = $name;
-		$this->price = $price;
-		$this->description = $description;
-		$this->hidden = $hidden;
+	public function edit(PaymentData $paymentData) {
+		$this->name = $paymentData->getName();
+		$this->price = $paymentData->getPrice();
+		$this->description = $paymentData->getDescription();
+		$this->hidden = $paymentData->isHidden();
 	}
 
 	/**
