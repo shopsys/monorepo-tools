@@ -12,28 +12,11 @@ class AvailabilityController extends Controller {
 	 * @Route("/product/availability/list/")
 	 */
 	public function listAction() {
-		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
+		$gridFactory = $this->get('ss6.shop.product.availability.availability_grid_factory');
+		/* @var $gridFactory \SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityGridFactory */
 
-		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-		$queryBuilder
-			->select('a')
-			->from(Availability::class, 'a');
-
-		$grid = $gridFactory->get('availabilityList');
-		$grid->setInlineEditService(
-			'ss6.shop.product.availability.inline_edit',
-			'a.id'
-		);
-		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
-
-		$grid->addColumn('name', 'a.name', 'Název', true);
-
-		$grid->setActionColumnClass('table-col table-col-10');
-		$grid->addActionColumn('delete', 'Smazat', 'admin_availability_delete', array('id' => 'a.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto dostupnost?');
-
+		$grid = $gridFactory->get();
+		
 		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));
