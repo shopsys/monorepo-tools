@@ -44,9 +44,28 @@ class InlineEdit implements GridInlineEditInterface {
 		return $this->formFactory->create(new AvailabilityFormType(), $availabilityData);
 	}
 
-	public function saveForm(Request $request, $rowId) {
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param mixed $availabilityId
+	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
+	 */
+	public function saveForm(Request $request, $availabilityId) {
+		$availabilityId = (int)$availabilityId;
 
+		$form = $this->getForm($availabilityId);
+		$form->handleRequest($request);
+		
+		if ($form->isValid()) {
+			$availabilityData = $form->getData();
+			$this->availabilityFacade->edit($availabilityId, $availabilityData);
+		} else {
+			$formErrors = [];
+			foreach ($form->getErrors(true) as $error) {
+				/* @var $error \Symfony\Component\Form\FormError */
+				$formErrors[] = $error->getMessage();
+			}
+			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
+		}
 	}
 
-	
 }
