@@ -19,6 +19,13 @@
 			}
 		});
 		
+		$grid.on('click', '.js-pkgrid-cancel', function() {
+			var $formRow = $(this).closest('.js-pkgrid-editing-row');
+			if (confirm('Opravdu chcete zahodit všechny změny?')) {
+				SS6.pkgrid.inlineEdit.cancelEdit($formRow);
+			}
+		});
+		
 	}
 	
 	SS6.pkgrid.inlineEdit.startEditRow = function ($row, $grid) {
@@ -39,12 +46,19 @@
 		});
 	}
 	
+	SS6.pkgrid.inlineEdit.cancelEdit = function ($formRow) {
+		var $originRow = $formRow.data('$originRow');
+		$originRow.show();
+		SS6.pkgrid.inlineEdit.enableRow($originRow);
+		$formRow.remove();
+	}
+	
 	SS6.pkgrid.inlineEdit.disableRow = function ($row) {
 		return $row.addClass('js-inactive');
 	}
 	
 	SS6.pkgrid.inlineEdit.enableRow = function ($row) {
-		return $row.addClass('js-inactive');
+		return $row.removeClass('js-inactive');
 	}
 	
 	SS6.pkgrid.inlineEdit.isEnableRow = function ($row) {
