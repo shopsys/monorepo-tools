@@ -230,6 +230,9 @@ services:
   ss6.shop.product.list.product_list_admin_repository:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
 
+  ss6.shop.pricing.delayed_pricing_setting:
+    class: SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
+
   ss6.shop.pricing.vat_repository:
     class: SS6\ShopBundle\Model\Pricing\VatRepository
 
@@ -240,6 +243,9 @@ services:
 
   ss6.shop.pricing.input_price_repository:
     class: SS6\ShopBundle\Model\Pricing\InputPriceRepository
+
+  ss6.shop.pricing.price_calculation:
+    class: SS6\ShopBundle\Model\Pricing\PriceCalculation
 
   ss6.shop.pricing.pricing_setting:
     class: SS6\ShopBundle\Model\Pricing\PricingSetting

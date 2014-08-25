@@ -3,25 +3,26 @@
 namespace SS6\ShopBundle\Tests\Model\Product;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\PriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Setting\Setting3;
 
 class ProductCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
 		return array(
 			array(
-				'inputPriceType' => Setting3::INPUT_PRICE_TYPE_WITHOUT_VAT,
+				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
 				'inputPrice' => '6999',
 				'vatPercent' => '21',
 				'basePriceWithoutVat' => '6998.78',
 				'basePriceWithVat' => '8469',
 			),
 			array(
-				'inputPriceType' => Setting3::INPUT_PRICE_TYPE_WITH_VAT,
+				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
 				'inputPrice' => '6999.99',
 				'vatPercent' => '21',
 				'basePriceWithoutVat' => '5784.8',
@@ -40,12 +41,16 @@ class ProductCalculationTest extends PHPUnit_Framework_TestCase {
 		$basePriceWithoutVat,
 		$basePriceWithVat
 	) {
-		$settingMock = $this->getMockBuilder(Setting3::class)
-			->setMethods(array('get'))
+		$pricingCalculation = new GenericPriceCalculation();
+
+		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+			->setMethods(array('getInputPriceType'))
 			->disableOriginalConstructor()
 			->getMock();
-		$settingMock->expects($this->any())->method('get')->will($this->returnValue($inputPriceType));
-		$priceCalculation = new PriceCalculation($settingMock);
+		$pricingSettingMock
+			->expects($this->any())->method('getInputPriceType')
+				->will($this->returnValue($inputPriceType));
+		$priceCalculation = new PriceCalculation($pricingCalculation, $pricingSettingMock);
 
 		$vat = new Vat('vat', $vatPercent);
 

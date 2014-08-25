@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
 use SS6\ShopBundle\Model\Setting\Setting3;
 
 class PricingSetting {
@@ -18,41 +17,10 @@ class PricingSetting {
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceFacade
-	 */
-	private $inputPriceFacade;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Setting\Setting3 $setting
-	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceFacade $inputPriceFacade
 	 */
-	public function __construct(Setting3 $setting, InputPriceFacade $inputPriceFacade) {
+	public function __construct(Setting3 $setting) {
 		$this->setting = $setting;
-		$this->inputPriceFacade = $inputPriceFacade;
-	}
-
-	/**
-	 * @param int $inputPriceType
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
-	 */
-	public function scheduleSetInputPriceType($inputPriceType) {
-		if (!in_array($inputPriceType, array_keys($this->getInputPriceTypes()))) {
-			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
-		}
-
-		$currentInputPriceType = $this->setting->get(Setting3::INPUT_PRICE_TYPE);
-
-		if ($currentInputPriceType != $inputPriceType) {
-			switch ($inputPriceType) {
-				case self::INPUT_PRICE_TYPE_WITHOUT_VAT:
-					$this->inputPriceFacade->scheduleSetInputPricesWithoutVat();
-					break;
-
-				case self::INPUT_PRICE_TYPE_WITH_VAT:
-					$this->inputPriceFacade->scheduleSetInputPricesWithVat();
-					break;
-			}
-		}
 	}
 
 	/**
