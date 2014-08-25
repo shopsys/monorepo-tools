@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,18 +25,13 @@ class PaymentController extends Controller {
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$allTransports = $transportRepository->findAll();
 
-		$paymentData = new PaymentFormData();
+		$paymentData = new PaymentData();
 		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $paymentData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$transportRepository->findAll();
-			$payment = new Payment(
-				$paymentData->getName(),
-				$paymentData->getPrice(),
-				$paymentData->getDescription(),
-				$paymentData->isHidden()
-			);
+			$payment = new Payment($paymentData);
 			$payment->setImageForUpload($paymentData->getImage());
 
 			$transports = $transportRepository->findAllByIds($paymentData->getTransports());
@@ -83,7 +78,7 @@ class PaymentController extends Controller {
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
 
-		$formData = new PaymentFormData();
+		$formData = new PaymentData();
 		$formData->setId($payment->getId());
 		$formData->setName($payment->getName());
 		$formData->setPrice($payment->getPrice());

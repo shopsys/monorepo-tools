@@ -4,12 +4,14 @@ namespace SS6\ShopBundle\Tests\Model\Payment;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentTest extends PHPUnit_Framework_TestCase {
 	
 	public function testIsVisibleWithoutTransports() {
-		$payment = new Payment('name', 0, 'description', false);
+		$payment = new Payment(new PaymentData('name', 0, 'description', false));
 		$this->assertFalse($payment->isVisible());
 	}
 
@@ -26,8 +28,8 @@ class PaymentTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider transportAndPaymentHiddenProvider
 	 */
 	public function testIsVisible($paymentHidden, $transportHidden, $resultVisibility) {
-		$transport = new Transport('name', 0, 'description', $transportHidden);
-		$payment = new Payment('name', 0, 'description', $paymentHidden);
+		$transport = new Transport(new TransportData('name', 0, 'description', $transportHidden));
+		$payment = new Payment(new PaymentData('name', 0, 'description', $paymentHidden));
 		$payment->addTransport($transport);
 		$this->assertEquals($resultVisibility, $payment->isVisible());
 	}

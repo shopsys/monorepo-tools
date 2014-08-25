@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
@@ -68,33 +69,27 @@ class Transport implements EntityFileUploadInterface {
 	 * @var string|null
 	 */
 	private $imageForUpload;
-	
+
 	/**
-	 * @param string $name
-	 * @param string $price
-	 * @param string|null $description
-	 * @param boolean $hidden
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
-	public function __construct($name, $price, $description = null, $hidden = false) {
-		$this->name = $name;
-		$this->price = $price;
-		$this->description = $description;
-		$this->hidden = $hidden;
+	public function __construct(TransportData $transportData) {
+		$this->name = $transportData->getName();
+		$this->price = $transportData->getPrice();
+		$this->description = $transportData->getDescription();
+		$this->hidden = $transportData->isHidden();
 		$this->deleted = false;
 		$this->image = null;
 	}
-	
+
 	/**
-	 * @param string $name
-	 * @param string $price
-	 * @param string|null $description
-	 * @param boolean $hidden
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
-	public function setEdit($name, $price, $description, $hidden) {
-		$this->name = $name;
-		$this->price = $price;
-		$this->description = $description;
-		$this->hidden = $hidden;
+	public function edit(TransportData $transportData) {
+		$this->name = $transportData->getName();
+		$this->price = $transportData->getPrice();
+		$this->description = $transportData->getDescription();
+		$this->hidden = $transportData->isHidden();
 	}
 
 	/**

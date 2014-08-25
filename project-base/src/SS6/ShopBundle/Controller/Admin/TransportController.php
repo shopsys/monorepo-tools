@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Form\Admin\Transport\TransportFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,17 +22,12 @@ class TransportController extends Controller {
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 
-		$transportData = new TransportFormData();
+		$transportData = new TransportData();
 		$form = $this->createForm(new TransportFormType($fileUpload), $transportData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = new Transport(
-				$transportData->getName(),
-				$transportData->getPrice(),
-				$transportData->getDescription(),
-				$transportData->isHidden()
-			);
+			$transport = new Transport($transportData);
 			$transport->setImageForUpload($transportData->getImage());
 			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
@@ -72,7 +67,7 @@ class TransportController extends Controller {
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 
-		$formData = new TransportFormData();
+		$formData = new TransportData();
 		$formData->setId($transport->getId());
 		$formData->setName($transport->getName());
 		$formData->setPrice($transport->getPrice());

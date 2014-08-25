@@ -1,10 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Payment;
+namespace SS6\ShopBundle\Model\Transport;
 
-use Doctrine\Common\Collections\Collection;
-
-class PaymentFormData {
+class TransportData {
 	
 	/**
 	 * @var integer
@@ -29,17 +27,25 @@ class PaymentFormData {
 	/**
 	 * @var integer
 	 */
-	private $hidden = false;
+	private $hidden;
 
 	/**
 	 * @var string
 	 */
 	private $image;
-	
+
 	/**
-	 * @var \Doctrine\Common\Collections\Collection 
+	 * @param string|null $name
+	 * @param string|null $price
+	 * @param string|null $description
+	 * @param boolean $hidden
 	 */
-	private $transports = array();
+	public function __construct($name = null, $price = null, $description = null, $hidden = false) {
+		$this->name = $name;
+		$this->price = $price;
+		$this->description = $description;
+		$this->hidden = $hidden;
+	}
 	
 	/**
 	 * @return int
@@ -67,13 +73,6 @@ class PaymentFormData {
 	 */
 	public function getDescription() {
 		return $this->description;
-	}
-	
-	/**
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-	public function getTransports() {
-		return $this->transports;
 	}
 
 	/**
@@ -117,14 +116,7 @@ class PaymentFormData {
 	public function setDescription($description) {
 		$this->description = $description;
 	}
-	
-	/**
-	 * @param Collection $transports
-	 */
-	public function setTransports($transports) {
-		$this->transports = $transports;
-	}
-	
+
 	/**
 	 * @param boolean $hidden
 	 */

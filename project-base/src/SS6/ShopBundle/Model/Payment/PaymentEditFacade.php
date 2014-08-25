@@ -3,18 +3,18 @@
 namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Form\Admin\Payment\PaymentFormData;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentEditFacade {
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
@@ -34,7 +34,7 @@ class PaymentEditFacade {
 		$this->paymentRepository = $paymentRepository;
 		$this->transportRepository = $transportRepository;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
@@ -42,24 +42,19 @@ class PaymentEditFacade {
 		$this->em->persist($payment);
 		$this->em->flush();
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Form\Admin\Payment\PaymentFormData $paymentData
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
-	public function edit(Payment $payment, PaymentFormData $paymentData) {
-		$payment->setEdit(
-			$paymentData->getName(),
-			$paymentData->getPrice(),
-			$paymentData->getDescription(),
-			$paymentData->isHidden()
-		);
+	public function edit(Payment $payment, PaymentData $paymentData) {
+		$payment->edit($paymentData);
 		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
 		$payment->setTransports($transports);
 		$payment->setImageForUpload($paymentData->getImage());
 		$this->em->flush();
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
@@ -67,7 +62,7 @@ class PaymentEditFacade {
 	public function getById($id) {
 		return $this->paymentRepository->getById($id);
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
@@ -75,7 +70,7 @@ class PaymentEditFacade {
 	public function getByIdWithTransports($id) {
 		return $this->paymentRepository->getByIdWithTransports($id);
 	}
-	
+
 	/**
 	 * @param int $id
 	 */

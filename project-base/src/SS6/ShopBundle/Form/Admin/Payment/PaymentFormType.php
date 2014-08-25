@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Admin\Payment;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -91,7 +92,7 @@ class PaymentFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => PaymentFormData::class,
+			'data_class' => PaymentData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}

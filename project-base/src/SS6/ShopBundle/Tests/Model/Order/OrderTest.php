@@ -9,17 +9,19 @@ use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class OrderTest extends PHPUnit_Framework_TestCase {
 	
 	public function testTotalPrice() {
 		$number = '123456';
-		$transport = new Transport('TransportName', 199.95);
-		$payment = new Payment('PaymentName', 99.95);
+		$transport = new Transport(new TransportData('TransportName', 199.95));
+		$payment = new Payment(new PaymentData('PaymentName', 99.95));
 		$orderStatus = new OrderStatus('StatusName', OrderStatus::TYPE_NEW);
 		$firstName = 'FirstName';
 		$lastName = 'LastName';
