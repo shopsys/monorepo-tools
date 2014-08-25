@@ -68,6 +68,8 @@ class PaymentController extends Controller {
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
 		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
+		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
+		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
 
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
@@ -110,7 +112,7 @@ class PaymentController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', array(
 			'form' => $form->createView(),
-			'payment' => $payment,
+			'paymentDetail' => $paymentDetailFactory->createDetailForPayment($payment),
 		));
 	}
 	
@@ -136,10 +138,14 @@ class PaymentController extends Controller {
 	public function listAction() {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
+		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
+		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
+
 		$payments = $paymentRepository->findAll();
+		$paymentDetails = $paymentDetailFactory->createDetailsForPayments($payments);
 		
 		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
-			'payments' => $payments,
+			'paymentDetails' => $paymentDetailFactory->createDetailsForPayments($payments),
 		));
 	}
 
