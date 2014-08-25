@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\Request;
 
 class InlineEdit implements GridInlineEditInterface {
 
@@ -42,5 +43,10 @@ class InlineEdit implements GridInlineEditInterface {
 
 		return $this->formFactory->create(new AvailabilityFormType(), $availabilityData);
 	}
+
+	public function saveForm(Request $request, $rowId) {
+
+	}
+
 	
 }

@@ -26,6 +26,31 @@
 			}
 		});
 		
+		$grid.on('click', '.js-pkgrid-save', function() {
+			SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
+		});
+		
+	}
+	
+	SS6.pkgrid.inlineEdit.saveRow = function ($formRow, $grid) {
+		var $originRow = $formRow.data('$originRow');
+		var data = $('<form>')
+				.append($formRow.clone())
+				.append('<input type="hidden" name="rowId" value="' + $originRow.data('inline-edit-row-id') + '" />')
+				.append('<input type="hidden" name="serviceName" value="' + $grid.data('inline-edit-service-name') + '" />')
+			.serialize();
+		$.ajax({
+			url: $grid.data('inline-edit-url-save-form'),
+			type: 'POST',
+			data: data,
+			dataType: 'json',
+			success: function (formData) {
+				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
+				$formRow.insertAfter($row);
+				$formRow.data('$originRow', $row);
+				$row.hide();
+			}
+		});
 	}
 	
 	SS6.pkgrid.inlineEdit.startEditRow = function ($row, $grid) {

@@ -3,6 +3,7 @@
 		{% if grid.inlineEdit %} 
 			data-inline-edit-service-name="{{ grid.inlineEditServiceName }}"
 			data-inline-edit-url-get-form="{{ url('admin_pkgrid_getform') }}"
+			data-inline-edit-url-save-form="{{ url('admin_pkgrid_saveform') }}"
 		{% endif %}
 	{% endspaceless %}>
 	{% if grid.rows is not empty %}

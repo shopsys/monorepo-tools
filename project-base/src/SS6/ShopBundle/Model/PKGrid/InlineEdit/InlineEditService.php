@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\PKGrid\InlineEdit;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Twig_Environment;
 
 class InlineEditService {
@@ -27,10 +28,11 @@ class InlineEditService {
 		$this->twigEnvironment = $twigEnvironment;
 	}
 
-		/**
+	/**
 	 * @param string $serviceName
 	 * @param mixed $rowId
 	 * @return array
+	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
 	 */
 	public function getFormData($serviceName, $rowId) {
 		$gridInlineEdit = $this->container->get($serviceName, Container::NULL_ON_INVALID_REFERENCE);
@@ -38,6 +40,24 @@ class InlineEditService {
 		if ($gridInlineEdit instanceof GridInlineEditInterface) {
 			$form = $gridInlineEdit->getForm($rowId);
 			return $this->renderFormToArray($form);
+		} else {
+			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException($serviceName);
+		}
+	}
+
+	/**
+	 * @param string $serviceName
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param type $rowid
+	 * @return string
+	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
+	 */
+	public function saveFormData($serviceName, Request $request, $rowid) {
+		$gridInlineEdit = $this->container->get($serviceName, Container::NULL_ON_INVALID_REFERENCE);
+
+		if ($gridInlineEdit instanceof GridInlineEditInterface) {
+			$gridInlineEdit->saveForm($request, $rowid);
+			return 'saved';
 		} else {
 			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException($serviceName);
 		}

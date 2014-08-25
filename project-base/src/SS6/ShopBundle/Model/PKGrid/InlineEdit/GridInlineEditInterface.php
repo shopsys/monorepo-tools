@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\PKGrid\InlineEdit;
 
+use Symfony\Component\HttpFoundation\Request;
+
 interface GridInlineEditInterface {
 
 	/**
@@ -9,5 +11,11 @@ interface GridInlineEditInterface {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function getForm($rowId);
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param mixed $rowId
+	 */
+	public function saveForm(Request $request, $rowId);
 	
 }

@@ -24,5 +24,22 @@ class PKGridController extends Controller {
 
 		return new JsonResponse($formData);
 	}
+
+	/**
+	 * @Route("/_pkgrid/save_form/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function saveFormAction(Request $request) {
+		$inlineEditService = $this->get('ss6.shop.pkgrid.inline_edit.inline_edit_service');
+		/* @var $inlineEditService \SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService */
+
+		$formData = $inlineEditService->saveFormData(
+			$request->get('serviceName'),
+			$request,
+			$request->get('rowId')
+		);
+
+		return new JsonResponse($formData);
+	}
 	
 }
