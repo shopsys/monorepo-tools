@@ -223,7 +223,10 @@ services:
 
   ss6.shop.payment.payment_repository:
     class: SS6\ShopBundle\Model\Payment\PaymentRepository
-    
+
+  ss6.shop.payment.price_calculation:
+    class: SS6\ShopBundle\Model\Payment\PriceCalculation
+
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
     
