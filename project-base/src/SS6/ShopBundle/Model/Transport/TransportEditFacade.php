@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Form\Admin\Transport\TransportFormData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class TransportEditFacade {
@@ -46,9 +46,9 @@ class TransportEditFacade {
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Form\Admin\Transport\TransportFormData $transportData
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
-	public function edit(Transport $transport, TransportFormData $transportData) {
+	public function edit(Transport $transport, TransportData $transportData) {
 		$transport->setEdit(
 			$transportData->getName(),
 			$transportData->getPrice(),

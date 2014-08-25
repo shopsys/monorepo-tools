@@ -1,8 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Transport;
+namespace SS6\ShopBundle\Model\Payment;
 
-class TransportFormData {
+use Doctrine\Common\Collections\Collection;
+
+class PaymentData {
 	
 	/**
 	 * @var integer
@@ -35,6 +37,11 @@ class TransportFormData {
 	private $image;
 	
 	/**
+	 * @var \Doctrine\Common\Collections\Collection 
+	 */
+	private $transports = array();
+	
+	/**
 	 * @return int
 	 */
 	public function getId() {
@@ -60,6 +67,13 @@ class TransportFormData {
 	 */
 	public function getDescription() {
 		return $this->description;
+	}
+	
+	/**
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getTransports() {
+		return $this->transports;
 	}
 
 	/**
@@ -103,7 +117,14 @@ class TransportFormData {
 	public function setDescription($description) {
 		$this->description = $description;
 	}
-
+	
+	/**
+	 * @param Collection $transports
+	 */
+	public function setTransports($transports) {
+		$this->transports = $transports;
+	}
+	
 	/**
 	 * @param boolean $hidden
 	 */
