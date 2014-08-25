@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace SS6\ShopBundle\Model\Pricing;
 
 class Price {
 

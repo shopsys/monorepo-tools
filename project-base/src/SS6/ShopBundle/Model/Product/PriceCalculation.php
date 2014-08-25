@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Setting\Setting3;
 
 class PriceCalculation {
@@ -25,7 +26,7 @@ class PriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice(Product $product) {
 		$this->inputPrice = $product->getPrice();
