@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -24,12 +25,19 @@ class PaymentFormType extends AbstractType {
 	private $fileUpload;
 
 	/**
-	 * @param array $allTransports
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat[]
 	 */
-	public function __construct(array $allTransports, FileUpload $fileUpload) {
+	private $vats;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $allTransports
+	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat[] $vats
+	 */
+	public function __construct(array $allTransports, FileUpload $fileUpload, array $vats) {
 		$this->allTransports = $allTransports;
 		$this->fileUpload = $fileUpload;
+		$this->vats = $vats;
 	}
 
 	/**
@@ -71,6 +79,13 @@ class PaymentFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
 				),
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+			))
+			->add('vat', 'choice', array(
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->vats, 'name', array(), null, 'id'),
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
+				),
 			))
 			->add('description', 'textarea', array('required' => false))
 			->add('image', new FileUploadType($this->fileUpload), array(

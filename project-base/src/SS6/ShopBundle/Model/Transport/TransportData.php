@@ -2,8 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Transport;
 
+use SS6\ShopBundle\Model\Pricing\Vat;
+
 class TransportData {
-	
+
 	/**
 	 * @var integer
 	 */
@@ -18,6 +20,11 @@ class TransportData {
 	 * @var string
 	 */
 	private $price;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat
+	 */
+	private $vat;
 
 	/**
 	 * @var string
@@ -37,12 +44,20 @@ class TransportData {
 	/**
 	 * @param string|null $name
 	 * @param string|null $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat|null $vat
 	 * @param string|null $description
 	 * @param boolean $hidden
 	 */
-	public function __construct($name = null, $price = null, $description = null, $hidden = false) {
+	public function __construct(
+		$name = null,
+		$price = null,
+		Vat $vat = null,
+		$description = null,
+		$hidden = false
+	) {
 		$this->name = $name;
 		$this->price = $price;
+		$this->vat = $vat;
 		$this->description = $description;
 		$this->hidden = $hidden;
 	}
@@ -66,6 +81,13 @@ class TransportData {
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat
+	 */
+	public function getVat() {
+		return $this->vat;
 	}
 
 	/**
@@ -108,6 +130,13 @@ class TransportData {
 	 */
 	public function setPrice($price) {
 		$this->price = $price;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat $vat
+	 */
+	public function setVat(Vat $vat = null) {
+		$this->vat = $vat;
 	}
 
 	/**

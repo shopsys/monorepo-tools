@@ -38,6 +38,13 @@ class Transport implements EntityFileUploadInterface {
 	private $price;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat")
+	 */
+	private $vat;
+	
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="text", nullable=true)
@@ -76,6 +83,7 @@ class Transport implements EntityFileUploadInterface {
 	public function __construct(TransportData $transportData) {
 		$this->name = $transportData->getName();
 		$this->price = $transportData->getPrice();
+		$this->vat = $transportData->getVat();
 		$this->description = $transportData->getDescription();
 		$this->hidden = $transportData->isHidden();
 		$this->deleted = false;
@@ -88,6 +96,7 @@ class Transport implements EntityFileUploadInterface {
 	public function edit(TransportData $transportData) {
 		$this->name = $transportData->getName();
 		$this->price = $transportData->getPrice();
+		$this->vat = $transportData->getVat();
 		$this->description = $transportData->getDescription();
 		$this->hidden = $transportData->isHidden();
 	}
@@ -143,12 +152,18 @@ class Transport implements EntityFileUploadInterface {
 		return $this->name;
 	}
 
-
 	/**
 	 * @return string 
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat
+	 */
+	public function getVat() {
+		return $this->vat;
 	}
 
 	/**

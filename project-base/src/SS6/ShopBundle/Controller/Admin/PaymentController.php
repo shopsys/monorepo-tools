@@ -76,6 +76,7 @@ class PaymentController extends Controller {
 		$formData->setId($payment->getId());
 		$formData->setName($payment->getName());
 		$formData->setPrice($payment->getPrice());
+		$formData->setVat($payment->getVat());
 		$formData->setDescription($payment->getDescription());
 		$formData->setHidden($payment->isHidden());
 

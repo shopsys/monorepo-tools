@@ -70,6 +70,7 @@ class TransportController extends Controller {
 		$formData->setId($transport->getId());
 		$formData->setName($transport->getName());
 		$formData->setPrice($transport->getPrice());
+		$formData->setVat($transport->getVat());
 		$formData->setDescription($transport->getDescription());
 		$formData->setHidden($transport->isHidden());
 
