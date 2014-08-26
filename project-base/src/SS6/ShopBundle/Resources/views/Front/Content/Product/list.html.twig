@@ -23,12 +23,24 @@
 					<h2 class="product-list__title">
 						{{ productDetail.product.name }}
 					</h2>
-					<p class="product-list__price">
-						<strong>Cena bez DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithoutVat|price }}</span></strong>
-					</p>
-					<p class="product-list__price">
-						<strong>Cena s DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithVat|price }}</span></strong>
-					</p>
+					<div class="product-list__price">
+						<dl class="simple-side-list">
+							<dt class="simple-side-list__title">
+								Cena s DPH:
+							</dt>
+							<dd class="simple-side-list__definition price-main price-big">
+								{{ productDetail.price.basePriceWithVat|price }}
+							</dd>
+						</dl>
+						<dl class="simple-side-list">
+							<dt class="simple-side-list__title">
+								Cena bez DPH:
+							</dt>
+							<dd class="simple-side-list__definition">
+								{{ productDetail.price.basePriceWithoutVat|price }}
+							</dd>
+						</dl>
+					</div>
 				</a>
 				<div class="product-list__actions">
 					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}

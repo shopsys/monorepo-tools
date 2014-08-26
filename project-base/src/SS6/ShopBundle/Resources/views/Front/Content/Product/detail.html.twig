@@ -18,7 +18,7 @@
 					{% endif %}
 				</span>
 			</div>
-			
+
 		</div>
 
 		<div class="col-xs-12 col-md-7">
@@ -61,13 +61,33 @@
 				{{ productDetail.product.description|raw }}
 			{% endif %}
 
-			<div class="box-important mb-1">
-				<strong>Cena bez DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithoutVat|price }}</span></strong>
+			<div class="info-box mb-1 mt-1">
+				<dl class="simple-side-list">
+					<dt class="simple-side-list__title">
+						<strong>
+							Cena s DPH:
+						</strong>
+					</dt>
+					<dd class="simple-side-list__definition">
+						<strong class="price-main price-big">
+							{{ productDetail.price.basePriceWithVat|price }}
+						</strong>
+					</dd>
+				</dl>
+				<dl class="simple-side-list mb-1">
+					<dt class="simple-side-list__title">
+						<strong>
+							Cena bez DPH:
+						</strong>
+					</dt>
+					<dd class="simple-side-list__definition">
+						<strong>
+							{{ productDetail.price.basePriceWithoutVat|price }}
+						</strong>
+					</dd>
+				</dl>
+				{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 			</div>
-			<div class="box-important mb-1">
-				<strong>Cena s DPH: <span class="price-main price-big">{{ productDetail.price.basePriceWithVat|price }}</span></strong>
-			</div>
-			{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 		</div>
 	</div>
 {% endblock %}
