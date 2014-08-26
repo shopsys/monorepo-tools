@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType;
 use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,12 +23,23 @@ class InlineEdit implements GridInlineEditInterface {
 	private $availabilityFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory
+	 */
+	private $availabilityGridFactory;
+
+	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
 	 */
-	public function __construct(FormFactory $formFactory, AvailabilityFacade $availabilityFacade) {
+	public function __construct(
+		FormFactory $formFactory,
+		AvailabilityFacade $availabilityFacade,
+		AvailabilityGridFactory $availabilityGridFactory
+	) {
 		$this->formFactory = $formFactory;
 		$this->availabilityFacade = $availabilityFacade;
+		$this->availabilityGridFactory = $availabilityGridFactory;
 	}
 
 	/**
@@ -66,6 +78,13 @@ class InlineEdit implements GridInlineEditInterface {
 			}
 			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
+	 */
+	public function getGrid() {
+		return $this->availabilityGridFactory->get();
 	}
 
 }

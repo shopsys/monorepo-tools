@@ -36,19 +36,22 @@
 		var $originRow = $formRow.data('$originRow');
 		var data = $('<form>')
 				.append($formRow.clone())
-				.append('<input type="hidden" name="rowId" value="' + $originRow.data('inline-edit-row-id') + '" />')
-				.append('<input type="hidden" name="serviceName" value="' + $grid.data('inline-edit-service-name') + '" />')
+				.append($('<input type="hidden" name="rowId" />').val($originRow.data('inline-edit-row-id')))
+				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')))
+				.append($('<input type="hidden "name="themeJson" />').val($grid.data('inline-edit-theme-json')))
 			.serialize();
 		$.ajax({
 			url: $grid.data('inline-edit-url-save-form'),
 			type: 'POST',
 			data: data,
 			dataType: 'json',
-			success: function (formData) {
-				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
-				$formRow.insertAfter($row);
-				$formRow.data('$originRow', $row);
-				$row.hide();
+			success: function (saveResult) {
+				if (saveResult.success) {
+					$formRow.data('$originRow').replaceWith($($(saveResult.rowHtml)));
+					$formRow.remove();
+				} else {
+					alert('Prosím překontrolujte následující informace:\n\n• ' + saveResult.errors.join('\n• '));
+				}
 			}
 		});
 	}

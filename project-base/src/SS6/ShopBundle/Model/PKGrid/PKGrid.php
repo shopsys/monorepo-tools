@@ -115,6 +115,11 @@ class PKGrid {
 	private $queryBuilder;
 
 	/**
+	 * @var \Doctrine\ORM\QueryBuilder
+	 */
+	private $queryBuilderWithOneRow;
+
+	/**
 	 * @var \Doctrine\ORM\NativeQuery
 	 */
 	private $totalNativeQuery;
@@ -247,6 +252,18 @@ class PKGrid {
 			$this->executeTotalQuery();
 		}
 		$this->executeQuery();
+		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
+
+		return $gridView;
+	}
+
+	/**
+	 * @param string $queryId
+	 * @param int $rowId
+	 * @return \SS6\ShopBundle\Model\PKGrid\PKGridView
+	 */
+	public function createViewWithOneRow($queryId, $rowId) {
+		$this->executeQueryWithOneRow($queryId, $rowId);
 		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
 
 		return $gridView;
@@ -477,6 +494,20 @@ class PKGrid {
 		}
 	}
 
+	/**
+	 * @param string $queryId
+	 * @param int $rowId
+	 */
+	private function prepareQueryWithOneRow($queryId, $rowId) {
+		$this->queryBuilderWithOneRow = clone $this->queryBuilder;
+		$this->queryBuilderWithOneRow
+			->andWhere($queryId . ' = :rowId')
+			->setParameter('rowId', $rowId)
+			->setFirstResult(null)
+			->setMaxResults(null)
+			->resetDQLPart('orderBy');
+	}
+
 	private function prepareTotalQuery() {
 		$em = $this->queryBuilder->getEntityManager();
 
@@ -510,6 +541,15 @@ class PKGrid {
 	private function executeQuery() {
 		$this->prepareQuery();
 		$this->rows = $this->queryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
+	}
+
+	/**
+	 * @param string $queryId
+	 * @param int $rowId
+	 */
+	private function executeQueryWithOneRow($queryId, $rowId) {
+		$this->prepareQueryWithOneRow($queryId, $rowId);
+		$this->rows = $this->queryBuilderWithOneRow->getQuery()->execute(null, 'GroupedScalarHydrator');
 	}
 
 	private function executeTotalQuery() {

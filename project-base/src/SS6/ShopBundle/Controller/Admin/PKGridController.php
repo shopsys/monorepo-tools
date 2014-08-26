@@ -33,13 +33,23 @@ class PKGridController extends Controller {
 		$inlineEditService = $this->get('ss6.shop.pkgrid.inline_edit.inline_edit_service');
 		/* @var $inlineEditService \SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService */
 
-		$formData = $inlineEditService->saveFormData(
-			$request->get('serviceName'),
-			$request,
-			$request->get('rowId')
-		);
+		$responseData = [];
+		$rowId = $request->get('rowId');
 
-		return new JsonResponse($formData);
+		try {
+			$inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+			$responseData['success'] = true;
+			$responseData['rowHtml'] = $inlineEditService->getRenderedRowHtml(
+				json_decode($request->get('themeJson'), true),
+				$request->get('serviceName'),
+				$rowId
+			);
+		} catch (\SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException $e) {
+			$responseData['success'] = false;
+			$responseData['errors'] = $e->getFormErrors();
+		}
+
+		return new JsonResponse($responseData);
 	}
 	
 }

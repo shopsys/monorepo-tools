@@ -21,7 +21,7 @@ class AvailabilityGridFactory {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\PKGrid\GridFactory $gridFactory
 	 */
-	function __construct(EntityManager $em, GridFactory $gridFactory) {
+	public function __construct(EntityManager $em, GridFactory $gridFactory) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 	}

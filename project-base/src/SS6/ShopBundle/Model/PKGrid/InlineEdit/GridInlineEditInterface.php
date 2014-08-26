@@ -15,7 +15,13 @@ interface GridInlineEditInterface {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $rowId
+	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $rowId);
+
+	/**
+	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
+	 */
+	public function getGrid();
 	
 }

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AvailabilityController extends Controller {

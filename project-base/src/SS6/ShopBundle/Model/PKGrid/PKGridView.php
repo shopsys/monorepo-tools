@@ -55,6 +55,11 @@ class PKGridView {
 		$this->request = $requestStack->getMasterRequest();
 		$this->router = $router;
 		$this->twig = $twig;
+
+		$this->templateParameters = array(
+			'gridView' => $this,
+			'grid' => $this->grid,
+		);
 	}
 
 	/**
@@ -62,13 +67,10 @@ class PKGridView {
 	 * @param array|null $parameters
 	 */
 	public function render($theme, array $parameters = null) {
-		$this->theme = $theme;
+		$this->setTheme($theme);
 		$this->templateParameters = array_merge(
 			(array)$parameters,
-			array(
-				'gridView' => $this,
-				'grid' => $this->grid,
-			)
+			$this->templateParameters
 		);
 		$this->renderBlock('pkgrid');
 	}
@@ -85,13 +87,18 @@ class PKGridView {
 	/**
 	 * @param string $name
 	 * @param array|null $parameters
+	 * @param bool $echo
 	 */
-	public function renderBlock($name, $parameters = null) {
+	public function renderBlock($name, $parameters = null, $echo = true) {
 		foreach ($this->getTemplates() as $template) {
 			if ($template->hasBlock($name)) {
 				$templateParameters = array_merge($this->twig->getGlobals(), (array)$parameters, $this->templateParameters);
-				echo $template->renderBlock($name, $templateParameters);
-				return;
+				if ($echo) {
+					echo $template->renderBlock($name, $templateParameters);
+					return;
+				} else {
+					return $template->renderBlock($name, $templateParameters);
+				}
 			}
 		}
 
@@ -158,6 +165,20 @@ class PKGridView {
 		}
 		
 		return false;
+	}
+
+	/**
+	 * @return string|array
+	 */
+	public function getTheme() {
+		return $this->theme;
+	}
+
+	/**
+	 * @param string|array $theme
+	 */
+	public function setTheme($theme) {
+		$this->theme = $theme;
 	}
 
 	/**
