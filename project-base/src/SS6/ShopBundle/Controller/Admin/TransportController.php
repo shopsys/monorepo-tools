@@ -62,6 +62,8 @@ class TransportController extends Controller {
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
 		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
+		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
+		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\Factory */
 		
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
@@ -98,7 +100,7 @@ class TransportController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(
 			'form' => $form->createView(),
-			'transport' => $transport,
+			'transportDetail' => $transportDetailFactory->createDetailForTransport($transport),
 		));
 	}
 	
