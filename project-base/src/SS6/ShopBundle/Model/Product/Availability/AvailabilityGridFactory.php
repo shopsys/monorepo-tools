@@ -38,7 +38,7 @@ class AvailabilityGridFactory {
 
 		$grid = $this->gridFactory->get('availabilityList');
 		$grid->setInlineEditService(
-			'ss6.shop.product.availability.inline_edit',
+			'ss6.shop.product.availability.availability_inline_edit',
 			'a.id'
 		);
 		$grid->setDefaultOrder('name');

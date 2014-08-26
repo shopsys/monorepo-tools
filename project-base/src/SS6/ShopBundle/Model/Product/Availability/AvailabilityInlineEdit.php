@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
-class InlineEdit implements GridInlineEditInterface {
+class AvailabilityInlineEdit implements GridInlineEditInterface {
 
 	/**
 	 * @var \Symfony\Component\Form\FormFactory
