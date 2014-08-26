@@ -33,6 +33,13 @@
 			return false;
 		});
 		
+		$grid.on('keyup', '.js-pkgrid-editing-row input', function(event) {
+			if (event.keyCode  == 13) {
+				SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
+			}
+			return false;
+		});
+		
 	}
 	
 	SS6.pkgrid.inlineEdit.saveRow = function ($formRow, $grid) {
