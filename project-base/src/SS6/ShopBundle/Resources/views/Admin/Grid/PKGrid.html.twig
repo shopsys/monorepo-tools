@@ -113,11 +113,17 @@
 			<td class="grid-column-actions last-column text-right js-inline-edit-other-inputs {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
 				<span class="grid-row-actions action-icons">
 					{% if grid.inlineEdit and emptyRow %}
-						<i class="fa fa-check cursor-pointer js-pkgrid-save" title="Uložit změny"></i>
-						<i class="fa fa-delete cursor-pointer js-pkgrid-cancel" title="Zahodit změny"></i>
+						<a href="#" class="table-action js-inline-edit-save">
+							<i class="fa fa-check" title="Uložit změny"></i>
+						</a>
+						<a href="#" class="table-action js-inline-edit-cancel">
+							<i class="fa fa-delete" title="Zahodit změny"></i>
+						</a>
 					{% else %}
 						{% if grid.inlineEdit %}
-							<i class="fa fa-pencil cursor-pointer js-pkgrid-edit" title="Upravit"></i>
+							<a href="#" class="table-action js-inline-edit-edit">
+								<i class="fa fa-pencil" title="Upravit"></i>
+							</a>
 						{% endif %}
 						{% for actionColumn in grid.actionColumns %}
 							{{ gridView.renderActionCell(actionColumn, row)|raw }}

@@ -11,23 +11,26 @@
 	SS6.pkgrid.inlineEdit.bind = function () {
 		var $grid = $(this);
 		
-		$grid.on('click', '.js-pkgrid-edit', function() {
+		$grid.on('click', '.js-inline-edit-edit', function() {
 			var $row = $(this).closest('.js-pkgrid-row');
 			if (SS6.pkgrid.inlineEdit.isEnableRow($row)) {
 				SS6.pkgrid.inlineEdit.disableRow($row);
 				SS6.pkgrid.inlineEdit.startEditRow($row, $grid);
 			}
+			return false;
 		});
 		
-		$grid.on('click', '.js-pkgrid-cancel', function() {
+		$grid.on('click', '.js-inline-edit-cancel', function() {
 			var $formRow = $(this).closest('.js-pkgrid-editing-row');
 			if (confirm('Opravdu chcete zahodit všechny změny?')) {
 				SS6.pkgrid.inlineEdit.cancelEdit($formRow);
 			}
+			return false;
 		});
 		
-		$grid.on('click', '.js-pkgrid-save', function() {
+		$grid.on('click', '.js-inline-edit-save', function() {
 			SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
+			return false;
 		});
 		
 	}
