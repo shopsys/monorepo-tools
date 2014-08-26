@@ -60,6 +60,7 @@
 			success: function (saveResult) {
 				if (saveResult.success) {
 					$formRow.data('$originRow').replaceWith($(saveResult.rowHtml));
+					$formRow.data('$invisibleRow').remove();
 					$formRow.remove();
 				} else {
 					$buttons.show();
@@ -81,9 +82,12 @@
 			dataType: 'json',
 			success: function (formData) {
 				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
+				var $invisibleRow = $('<tr />').hide(); // to preserve highlight even/odd
 				$formRow.find('.js-inline-edit-saving').hide();
 				$formRow.insertAfter($row);
+				$invisibleRow.insertAfter($row);
 				$formRow.data('$originRow', $row);
+				$formRow.data('$invisibleRow', $invisibleRow);
 				$row.hide();
 			}
 		});
@@ -91,6 +95,7 @@
 	
 	SS6.pkgrid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originRow = $formRow.data('$originRow');
+		$formRow.data('$invisibleRow').remove();
 		$originRow.show();
 		SS6.pkgrid.inlineEdit.enableRow($originRow);
 		$formRow.remove();
