@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
+use \SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\PKGrid\GridFactory;
 
 class AvailabilityGridFactory {
@@ -30,18 +31,15 @@ class AvailabilityGridFactory {
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
 	public function get() {
-
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
 			->select('a')
 			->from(Availability::class, 'a');
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $this->gridFactory->get('availabilityList');
+		$grid = $this->gridFactory->get('availabilityList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
-
 		$grid->addColumn('name', 'a.name', 'Název', true);
-
 		$grid->setActionColumnClass('table-col table-col-10');
 		$grid->addActionColumn('delete', 'Smazat', 'admin_availability_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tuto dostupnost?');

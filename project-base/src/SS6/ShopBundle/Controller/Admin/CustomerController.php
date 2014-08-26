@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,11 +104,11 @@ class CustomerController extends Controller {
 			->leftJoin('u.billingAddress', 'ba')
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
 			->groupBy('u.id');
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('customerList');
+		$grid = $gridFactory->get('customerList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('name', 'name', 'Jméno', true);
 		$grid->addColumn('city', 'city', 'Město', true);

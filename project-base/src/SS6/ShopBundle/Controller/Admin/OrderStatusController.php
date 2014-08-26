@@ -8,6 +8,7 @@ use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -115,10 +116,10 @@ class OrderStatusController extends Controller {
 		$queryBuilder
 			->select('os')
 			->from(OrderStatus::class, 'os');
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('orderStatusList');
+		$grid = $gridFactory->get('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('name', 'os.name', 'Název', true);
 

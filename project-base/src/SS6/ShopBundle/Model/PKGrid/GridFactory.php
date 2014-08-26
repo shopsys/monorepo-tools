@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\PKGrid;
 
+use SS6\ShopBundle\Model\PKGrid\DataSourceInterface;
 use SS6\ShopBundle\Model\PKGrid\PKGrid;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -37,9 +38,10 @@ class GridFactory {
 
 	/**
 	 * @param string $gridId
+	 * @param \SS6\ShopBundle\Model\PKGrid\DataSourceInterface $dataSource
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
-	public function get($gridId) {
-		return new PKGrid($gridId, $this->requestStack, $this->router, $this->twig);
+	public function get($gridId, DataSourceInterface $dataSource) {
+		return new PKGrid($gridId, $dataSource, $this->requestStack, $this->router, $this->twig);
 	}
 }

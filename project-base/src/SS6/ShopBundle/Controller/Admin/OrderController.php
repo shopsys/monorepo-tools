@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -138,11 +139,11 @@ class OrderController extends Controller {
 						END) AS customerName')
 			->join('o.status', 'os')
 			->groupBy('o.id');
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('orderList');
+		$grid = $gridFactory->get('orderList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('number');
-		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('createdAt', 'o.createdAt', 'Vytvořena', true);
