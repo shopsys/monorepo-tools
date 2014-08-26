@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Model\PKGrid\ActionColumn;
 use SS6\ShopBundle\Model\PKGrid\Column;
+use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\PKGrid\PKGridView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -130,14 +131,9 @@ class PKGrid {
 	private $actionColumnClass = '';
 
 	/**
-	 * @var string|null
+	 * @var \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
 	 */
-	private $inlineEditServiceName;
-
-	/**
-	 * @var string|null
-	 */
-	private $inlineEditQueryId;
+	private $inlineEditService;
 
 	/**
 	 * @param string $id
@@ -203,30 +199,24 @@ class PKGrid {
 	}
 
 	/**
-	 * @param string $inlineEditServiceName
-	 * @param string $queryId
+	 * @param \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface $inlineEditService
 	 */
-	public function setInlineEditService($inlineEditServiceName, $queryId) {
-		$this->inlineEditServiceName = $inlineEditServiceName;
-		$this->inlineEditQueryId = $queryId;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getInlineEditServiceName() {
-		return $this->inlineEditServiceName;
-	}
-
-	public function getInlineEditQueryId() {
-		return $this->inlineEditQueryId;
+	public function setInlineEditService(GridInlineEditInterface $inlineEditService) {
+		$this->inlineEditService = $inlineEditService;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isInlineEdit() {
-		return $this->inlineEditServiceName !== null;
+		return $this->inlineEditService !== null;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
+	 */
+	public function getInlineEditService() {
+		return $this->inlineEditService;
 	}
 
 	/**
@@ -234,7 +224,7 @@ class PKGrid {
 	 * @return mixed
 	 */
 	public function getInlineEditRowId($row) {
-		return PKGrid::getValueFromRowByQueryId($row, $this->getInlineEditQueryId());
+		return PKGrid::getValueFromRowByQueryId($row, $this->getInlineEditService()->getQueryId());
 	}
 
 	/**

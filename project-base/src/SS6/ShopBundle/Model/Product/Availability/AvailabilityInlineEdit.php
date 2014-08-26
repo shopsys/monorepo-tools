@@ -28,6 +28,16 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 	private $availabilityGridFactory;
 
 	/**
+	 * @var string
+	 */
+	private $serviceName;
+
+	/**
+	 * @var string
+	 */
+	private $queryId;
+
+	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
@@ -40,6 +50,9 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 		$this->formFactory = $formFactory;
 		$this->availabilityFacade = $availabilityFacade;
 		$this->availabilityGridFactory = $availabilityGridFactory;
+
+		$this->serviceName = 'ss6.shop.product.availability.availability_inline_edit';
+		$this->queryId = 'a.id';
 	}
 
 	/**
@@ -84,7 +97,24 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
 	public function getGrid() {
-		return $this->availabilityGridFactory->get();
+		$grid = $this->availabilityGridFactory->get();
+		$grid->setInlineEditService($this);
+
+		return $grid;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getServiceName() {
+		return $this->serviceName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getQueryId() {
+		return $this->queryId;
 	}
 
 }

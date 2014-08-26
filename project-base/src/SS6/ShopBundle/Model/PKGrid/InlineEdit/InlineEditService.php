@@ -64,7 +64,7 @@ class InlineEditService {
 		$grid = $gridInlineEdit->getGrid();
 		/* @var $grid \SS6\ShopBundle\Model\PKGrid\PKGrid */
 
-		$gridView = $grid->createViewWithOneRow($grid->getInlineEditQueryId(), $rowId);
+		$gridView = $grid->createViewWithOneRow($gridInlineEdit->getQueryId(), $rowId);
 		$rows = $grid->getRows();
 		$rowData = array_pop($rows);
 		$gridView->setTheme($theme);

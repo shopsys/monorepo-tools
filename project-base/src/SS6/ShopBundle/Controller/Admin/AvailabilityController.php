@@ -11,10 +11,10 @@ class AvailabilityController extends Controller {
 	 * @Route("/product/availability/list/")
 	 */
 	public function listAction() {
-		$gridFactory = $this->get('ss6.shop.product.availability.availability_grid_factory');
-		/* @var $gridFactory \SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityGridFactory */
+		$availabilityInlineEdit = $this->get('ss6.shop.product.availability.availability_inline_edit');
+		/* @var $availabilityInlineEdit \SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit */
 
-		$grid = $gridFactory->get();
+		$grid = $availabilityInlineEdit->getGrid();
 		
 		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', array(
 			'gridView' => $grid->createView(),

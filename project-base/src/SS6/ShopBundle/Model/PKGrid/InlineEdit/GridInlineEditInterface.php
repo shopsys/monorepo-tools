@@ -23,5 +23,15 @@ interface GridInlineEditInterface {
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
 	public function getGrid();
+
+	/**
+	 * @return string
+	 */
+	public function getServiceName();
+
+	/**
+	 * @return string
+	 */
+	public function getQueryId();
 	
 }
