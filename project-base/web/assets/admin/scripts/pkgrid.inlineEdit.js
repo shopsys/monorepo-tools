@@ -43,6 +43,8 @@
 	}
 	
 	SS6.pkgrid.inlineEdit.saveRow = function ($formRow, $grid) {
+		var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
+		var $saving = $formRow.find('.js-inline-edit-saving').show();
 		var $originRow = $formRow.data('$originRow');
 		var data = $('<form>')
 				.append($formRow.clone())
@@ -57,9 +59,11 @@
 			dataType: 'json',
 			success: function (saveResult) {
 				if (saveResult.success) {
-					$formRow.data('$originRow').replaceWith($($(saveResult.rowHtml)));
+					$formRow.data('$originRow').replaceWith($(saveResult.rowHtml));
 					$formRow.remove();
 				} else {
+					$buttons.show();
+					$saving.hide();
 					alert('Prosím překontrolujte následující informace:\n\n• ' + saveResult.errors.join('\n• '));
 				}
 			}
@@ -77,6 +81,7 @@
 			dataType: 'json',
 			success: function (formData) {
 				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
+				$formRow.find('.js-inline-edit-saving').hide();
 				$formRow.insertAfter($row);
 				$formRow.data('$originRow', $row);
 				$row.hide();
