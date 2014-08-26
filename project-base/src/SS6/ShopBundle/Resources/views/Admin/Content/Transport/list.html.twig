@@ -1,6 +1,6 @@
 <h2>Dopravy</h2>
 
-{% if transports|length %}
+{% if transportDetails|length %}
 
 	<table class="table table-striped table-responsive">
 		<thead>
@@ -12,20 +12,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for transport in transports %}
+			{% for transportDetail in transportDetails %}
 				<tr>
-					<td><a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}">{{ transport.entity.name }}</a></td>
+					<td><a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}">{{ transportDetail.transport.name }}</a></td>
 					<td class="text-center">
-						{% if transport.visible %}
+						{% if transportDetail.visible %}
 							<span class="semaphore semaphore--true"></span>
 						{% else %}
 							<span class="semaphore semaphore--false"></span>
 						{% endif %}
 					</td>
-					<td class="text-right">{{ transport.entity.price|price }}</td>
+					<td class="text-right">{{ transportDetail.transport.price|price }}</td>
 					<td class="text-right">
-						<a href="{{ url('admin_transport_edit', {id: transport.entity.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
-						<a href="{{ url('admin_transport_delete', {id: transport.entity.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')" class="table-action"><i class="fa fa-times"></i></a>
+						<a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
+						<a href="{{ url('admin_transport_delete', {id: transportDetail.transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')" class="table-action"><i class="fa fa-times"></i></a>
 					</td>
 				</tr>
 			{% endfor %}

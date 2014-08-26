@@ -126,14 +126,14 @@ class TransportController extends Controller {
 	public function listAction() {
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
+		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
+		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\Factory */
 		
-		$allPayments = $paymentRepository->findAllWithTransports();
-		$transports = $transportRepository->findAllDataWithVisibility($allPayments);
+		$transports = $transportRepository->findAll();
+		$transportDetails = $transportDetailFactory->createDetailsForTransports($transports);
 		
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
-			'transports' => $transports,
+			'transportDetails' => $transportDetails,
 		));
 	}
 

@@ -308,6 +308,9 @@ services:
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository
 
+  ss6.shop.transport.visibility_calculation:
+    class: SS6\ShopBundle\Model\Transport\VisibilityCalculation
+
   twig.stringloader:
     class: Twig_Loader_String
     tags:

@@ -18,12 +18,23 @@ class Detail {
 	private $price;
 
 	/**
+	 * @var boolean
+	 */
+	private $visible;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param boolean $visible
 	 */
-	public function __construct(Transport $transport, Price $price) {
+	public function __construct(
+		Transport $transport,
+		Price $price,
+		$visible
+	) {
 		$this->transport = $transport;
 		$this->price = $price;
+		$this->visible = $visible;
 	}
 
 	/**
@@ -38,6 +49,13 @@ class Detail {
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isVisible() {
+		return $this->visible;
 	}
 
 }

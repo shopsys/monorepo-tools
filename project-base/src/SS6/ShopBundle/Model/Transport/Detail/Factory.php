@@ -2,8 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Transport\Detail;
 
+use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Transport\PriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
 
 class Factory {
 
@@ -13,10 +15,28 @@ class Factory {
 	private $priceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $priceCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
-	public function __construct(PriceCalculation $priceCalculation) {
+	private $paymentRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\VisibilityCalculation
+	 */
+	private $visibilityCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $priceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
+	 * @param \SS6\ShopBundle\Model\Transport\VisibilityCalculation $visibilityCalculation
+	 */
+	public function __construct(
+		PriceCalculation $priceCalculation,
+		PaymentRepository $paymentRepository,
+		VisibilityCalculation $visibilityCalculation
+	) {
 		$this->priceCalculation = $priceCalculation;
+		$this->paymentRepository = $paymentRepository;
+		$this->visibilityCalculation = $visibilityCalculation;
 	}
 
 	/**
@@ -24,9 +44,12 @@ class Factory {
 	 * @return \SS6\ShopBundle\Model\Transport\Detail\Detail
 	 */
 	public function createDetailForTransport(Transport $transport) {
+		$allPayments = $this->paymentRepository->findAll();
+
 		return new Detail(
 			$transport,
-			$this->getPrice($transport)
+			$this->getPrice($transport),
+			$this->isVisible($transport, $allPayments)
 		);
 	}
 
@@ -37,8 +60,14 @@ class Factory {
 	public function createDetailsForTransports(array $transports) {
 		$details = array();
 
+		$allPayments = $this->paymentRepository->findAll();
+
 		foreach ($transports as $transport) {
-			$details[] = $this->createDetailForTransport($transport);
+			$details[] = new Detail(
+				$transport,
+				$this->getPrice($transport),
+				$this->isVisible($transport, $allPayments)
+			);
 		}
 
 		return $details;
@@ -50,6 +79,15 @@ class Factory {
 	 */
 	private function getPrice(Transport $transport) {
 		return $this->priceCalculation->calculatePrice($transport);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $allPayments
+	 * @return boolean
+	 */
+	private function isVisible(Transport $transport, array $allPayments) {
+		return $this->visibilityCalculation->isVisible($transport, $allPayments);
 	}
 
 }
