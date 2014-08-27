@@ -57,6 +57,9 @@
     - label: 'Dostupnost'
       route: admin_availability_list
 
+    - label: 'Parametry'
+      route: admin_parameter_list
+
     - label: 'Stavy objednávek'
       route: admin_orderstatus_list
       items:

@@ -1,10 +1,10 @@
 {% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
 
 {% block pkgrid_no_data %}
-	Nebyly nalezeny žádné dostupnosti. Nejprve musíte nějaké vytvořit.
+	Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit.
 {% endblock %}
 
 {% block pkgrid_pager_totalcount %}
-	{% set entityName = 'dostupností' %}
+	{% set entityName = 'parametry' %}
 	{{ parent() }}
 {% endblock %}
