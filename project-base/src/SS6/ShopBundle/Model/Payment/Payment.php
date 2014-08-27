@@ -41,6 +41,13 @@ class Payment implements EntityFileUploadInterface {
 	private $price;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat")
+	 */
+	private $vat;
+	
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="text", nullable=true)
@@ -87,6 +94,7 @@ class Payment implements EntityFileUploadInterface {
 	public function __construct(PaymentData $paymentData) {
 		$this->name = $paymentData->getName();
 		$this->price = $paymentData->getPrice();
+		$this->vat = $paymentData->getVat();
 		$this->description = $paymentData->getDescription();
 		$this->transports = new ArrayCollection();
 		$this->hidden = $paymentData->isHidden();
@@ -127,6 +135,7 @@ class Payment implements EntityFileUploadInterface {
 	public function edit(PaymentData $paymentData) {
 		$this->name = $paymentData->getName();
 		$this->price = $paymentData->getPrice();
+		$this->vat = $paymentData->getVat();
 		$this->description = $paymentData->getDescription();
 		$this->hidden = $paymentData->isHidden();
 	}
@@ -169,6 +178,13 @@ class Payment implements EntityFileUploadInterface {
 	}
 
 	/**
+	 * @param string $price
+	 */
+	public function setPrice($price) {
+		$this->price = $price;
+	}
+
+	/**
 	 * @return integer 
 	 */
 	public function getId() {
@@ -182,12 +198,18 @@ class Payment implements EntityFileUploadInterface {
 		return $this->name;
 	}
 
-
 	/**
 	 * @return string 
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat
+	 */
+	public function getVat() {
+		return $this->vat;
 	}
 
 	/**

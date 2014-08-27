@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace SS6\ShopBundle\Model\Pricing;
 
 class Price {
 
@@ -15,12 +15,19 @@ class Price {
 	private $basePriceWithVat;
 
 	/**
+	 * @var string
+	 */
+	private $basePriceVatAmount;
+
+	/**
 	 * @param string $basePriceWithoutVat
 	 * @param string $basePriceWithVat
+	 * @param string $basePriceVatAmount
 	 */
-	public function __construct($basePriceWithoutVat, $basePriceWithVat) {
+	public function __construct($basePriceWithoutVat, $basePriceWithVat, $basePriceVatAmount) {
 		$this->basePriceWithoutVat = $basePriceWithoutVat;
 		$this->basePriceWithVat = $basePriceWithVat;
+		$this->basePriceVatAmount = $basePriceVatAmount;
 	}
 
 	/**
@@ -35,6 +42,13 @@ class Price {
 	 */
 	public function getBasePriceWithVat() {
 		return $this->basePriceWithVat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getBasePriceVatAmount() {
+		return $this->basePriceVatAmount;
 	}
 
 }

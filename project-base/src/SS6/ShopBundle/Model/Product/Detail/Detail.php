@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Detail;
 
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\Price;
 
 class Detail {
 
@@ -13,13 +13,13 @@ class Detail {
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private $price;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Price $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
 	 */
 	public function __construct(Product $product, Price $price) {
 		$this->product = $product;
@@ -34,7 +34,7 @@ class Detail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function getPrice() {
 		return $this->price;

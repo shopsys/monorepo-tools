@@ -23,7 +23,9 @@
 
 					{{ form_row(form.name, { label: 'Název'}) }}
 					{{ form_row(form.hidden, { label: 'Skryté'}) }}
-					{{ form_row(form.price, { label: 'Cena'}) }}
+					{{ form_row(form.price, { label: inputPriceLabel()}) }}
+					{% block transport_base_prices %}{% endblock %}
+					{{ form_row(form.vat, { label: 'DPH'}) }}
 					{{ form_row(form.description, { label: 'Popis'}) }}
 				</div>
 

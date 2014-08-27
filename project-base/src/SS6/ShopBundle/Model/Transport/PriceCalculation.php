@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace SS6\ShopBundle\Model\Transport;
 
 use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -30,14 +30,14 @@ class PriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePrice(Product $product) {
+	public function calculatePrice(Transport $transport) {
 		return $this->genericPriceCalculation->calculatePrice(
-			$product->getPrice(),
+			$transport->getPrice(),
 			$this->pricingSetting->getInputPriceType(),
-			$product->getVat()
+			$transport->getVat()
 		);
 	}
 

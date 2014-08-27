@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Payment\PaymentFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
@@ -19,14 +18,13 @@ class PaymentController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$allTransports = $transportRepository->findAll();
+		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
+		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
 
 		$paymentData = new PaymentData();
-		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $paymentData);
+		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -66,22 +64,21 @@ class PaymentController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
-		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-		
-		$allTransports = $transportRepository->findAll();
+		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
+		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
+		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
+		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
 
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$formData = new PaymentData();
 		$formData->setId($payment->getId());
 		$formData->setName($payment->getName());
 		$formData->setPrice($payment->getPrice());
+		$formData->setVat($payment->getVat());
 		$formData->setDescription($payment->getDescription());
 		$formData->setHidden($payment->isHidden());
 
@@ -91,7 +88,7 @@ class PaymentController extends Controller {
 		}
 		$formData->setTransports($transports);
 
-		$form = $this->createForm(new PaymentFormType($allTransports, $fileUpload), $formData);
+		$form = $this->createForm($paymentFormTypeFactory->create(), $formData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -115,7 +112,7 @@ class PaymentController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', array(
 			'form' => $form->createView(),
-			'payment' => $payment,
+			'paymentDetail' => $paymentDetailFactory->createDetailForPayment($payment),
 		));
 	}
 	
@@ -141,10 +138,14 @@ class PaymentController extends Controller {
 	public function listAction() {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
+		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
+		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
+
 		$payments = $paymentRepository->findAll();
+		$paymentDetails = $paymentDetailFactory->createDetailsForPayments($payments);
 		
 		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
-			'payments' => $payments,
+			'paymentDetails' => $paymentDetailFactory->createDetailsForPayments($payments),
 		));
 	}
 

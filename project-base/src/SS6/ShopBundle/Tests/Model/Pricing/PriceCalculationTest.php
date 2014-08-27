@@ -1,16 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Product;
+namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat;
-use SS6\ShopBundle\Model\Product\PriceCalculation;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
 
-class ProductCalculationTest extends PHPUnit_Framework_TestCase {
+class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
 		return array(
@@ -41,22 +38,11 @@ class ProductCalculationTest extends PHPUnit_Framework_TestCase {
 		$basePriceWithoutVat,
 		$basePriceWithVat
 	) {
-		$pricingCalculation = new GenericPriceCalculation();
-
-		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getInputPriceType'))
-			->disableOriginalConstructor()
-			->getMock();
-		$pricingSettingMock
-			->expects($this->any())->method('getInputPriceType')
-				->will($this->returnValue($inputPriceType));
-		$priceCalculation = new PriceCalculation($pricingCalculation, $pricingSettingMock);
+		$priceCalculation = new PriceCalculation();
 
 		$vat = new Vat('vat', $vatPercent);
 
-		$product = new Product(new ProductData(null, null, null, null, null, $inputPrice, $vat));
-
-		$price = $priceCalculation->calculatePrice($product);
+		$price = $priceCalculation->calculatePrice($inputPrice, $inputPriceType, $vat);
 
 		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getBasePriceWithoutVat(), 6));
 		$this->assertEquals(round($basePriceWithVat, 6), round($price->getBasePriceWithVat(), 6));

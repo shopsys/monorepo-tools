@@ -49,7 +49,7 @@ class Factory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function getPrice(Product $product) {
 		return $this->priceCalculation->calculatePrice($product);

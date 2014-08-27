@@ -1,4 +1,5 @@
 imports:
+  - { resource: ../../Form/services.yml }
   - { resource: ../../Twig/services.yml }
 
 parameters:
@@ -217,20 +218,46 @@ services:
     arguments:
       - @ss6.shop.flash_message.bag.front
 
+  ss6.shop.payment.payment_detail_factory:
+    class: SS6\ShopBundle\Model\Payment\Detail\Factory
+
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
 
   ss6.shop.payment.payment_repository:
     class: SS6\ShopBundle\Model\Payment\PaymentRepository
-    
+
+  ss6.shop.payment.price_calculation:
+    class: SS6\ShopBundle\Model\Payment\PriceCalculation
+
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
     
   ss6.shop.product.list.product_list_admin_repository:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
 
+  ss6.shop.pricing.delayed_pricing_setting:
+    class: SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
+
   ss6.shop.pricing.vat_repository:
     class: SS6\ShopBundle\Model\Pricing\VatRepository
+
+  ss6.shop.pricing.input_price_facade:
+    class: SS6\ShopBundle\Model\Pricing\InputPriceFacade
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+  ss6.shop.pricing.input_price_repository:
+    class: SS6\ShopBundle\Model\Pricing\InputPriceRepository
+
+  ss6.shop.pricing.price_calculation:
+    class: SS6\ShopBundle\Model\Pricing\PriceCalculation
+
+  ss6.shop.pricing.pricing_setting:
+    class: SS6\ShopBundle\Model\Pricing\PricingSetting
+
+  ss6.shop.pricing.pricing_setting_facade:
+    class: SS6\ShopBundle\Model\Pricing\PricingSettingFacade
 
   ss6.shop.product.price_calculation:
     class: SS6\ShopBundle\Model\Product\PriceCalculation
@@ -269,11 +296,20 @@ services:
   ss6.shop.security.logout_handler:
     class: SS6\ShopBundle\Model\Security\LogoutHandler
 
+  ss6.shop.transport.price_calculation:
+    class: SS6\ShopBundle\Model\Transport\PriceCalculation
+
+  ss6.shop.transport.transport_detail_factory:
+    class: SS6\ShopBundle\Model\Transport\Detail\Factory
+
   ss6.shop.transport.transport_edit_facade:
     class: SS6\ShopBundle\Model\Transport\TransportEditFacade
 
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository
+
+  ss6.shop.transport.visibility_calculation:
+    class: SS6\ShopBundle\Model\Transport\VisibilityCalculation
 
   twig.stringloader:
     class: Twig_Loader_String

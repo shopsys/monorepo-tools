@@ -82,4 +82,5 @@
               visible: false
         - label: 'Chybové stránky'
           route: admin_superadmin_errors
-
+        - label: 'Cenotvorba'
+          route: admin_superadmin_pricing
