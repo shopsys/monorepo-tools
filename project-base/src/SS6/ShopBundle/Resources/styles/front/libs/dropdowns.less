@@ -1,3 +1,22 @@
+/* Css dropdown menu
+
+	<div class="dropdown">
+		<ul class="dropdown__menu">
+			<li class="dropdown__menu__item">
+				<a href="#" class="button button--alter buttons-control__left">Dropdown menu item</a>
+			</li>
+
+			<li class="dropdown__menu__item">
+				<a href="#" class="button button--alter buttons-control__left">Dropdown menu item</a>
+			</li>
+
+			<li class="dropdown__menu__item">
+				<a href="#" class="button button--alter buttons-control__left">Dropdown menu item</a>
+			</li>
+		</ul>
+	</div>
+*/
+
 .dropdown {
 	position: relative;
 
@@ -6,7 +25,7 @@
 	}
 }
 
-.dropdown .dropdown__menu {
+.dropdown__menu {
 	.reset-ul();
 	position: absolute;
 	top: 20px;
@@ -19,7 +38,7 @@
 	border: 1px solid @color-border;
 }
 
-.dropdown .dropdown__menu__item {
+.dropdown__menu__item {
 	margin-bottom: 5px;
 
 	border-top: 1px solid @color-border;

@@ -1,8 +1,36 @@
+/*
+Upload box
+============
+Component for uploading files with drag & drop function.
+
+	<div class="upload-box">
+		<div class="upload-box__result">
+			<div class="upload-box__bar" style="display: block;">
+				<div class="upload-box__bar__inner" style="width: 75%">&nbsp;</div>
+			</div>
+		</div>
+
+		<div class="upload-box__place">
+			<i class="fa fa-lg fa-plus-circle"></i>
+			Place for dropping - with icon
+		</div>
+
+		<div class="upload-box__between">
+			or you can use input file
+		</div>
+
+		<div>
+			<input type="file" class="form-control">
+		</div>
+	</div>
+
+*/
+
 .upload-box {
 	margin-bottom: 15px;
 }
 
-.upload-box .upload-box__place {
+.upload-box__place {
 	padding: 6px 12px;
 	min-height: 80px;
 	margin-bottom: 15px;
@@ -19,17 +47,15 @@
 	.border-radius(@border-radius-base);
 }
 
-.upload-box .upload-box__between {
+.upload-box__between {
 	margin-bottom: 15px;
 }
 
-.upload-box .upload-box__result {
+.upload-box__result {
 	margin-bottom: 15px;
 }
 
-
-
-.upload-box .upload-box__bar {
+.upload-box__bar {
 	width: 100%;
 	display: none;
 	.box-sizing(border-box);
@@ -37,7 +63,7 @@
 	border: 1px solid @color-border;
 }
 
-.upload-box .upload-box__bar__inner {
+.upload-box__bar__inner {
 	width: 0%;
 	max-width: 100%;
 	padding: 0;

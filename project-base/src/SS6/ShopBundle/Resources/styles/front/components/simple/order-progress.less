@@ -1,3 +1,30 @@
+/*
+Order progress
+===============
+Progress bar with 3 steps
+
+	<ul class="order-progress">
+		<li class="order-progress__item">
+			<a href="#" class="order-progress__item__inner">
+				1. item
+			</a>
+			<span class="order-progress__item__arrow"></span>
+		</li>
+		<li class="order-progress__item order-progress__item--active">
+			<span class="order-progress__item__inner">
+				2. item
+			</span>
+			<span class="order-progress__item__arrow"></span>
+		</li>
+		<li class="order-progress__item">
+			<a href="#" class="order-progress__item__inner">
+				3. item
+			</a>
+		</li>
+	</ul>
+
+*/
+
 .order-progress {
 	.reset-ul();
 	.cfx();
@@ -6,7 +33,7 @@
 	border: 1px solid @color-border;
 }
 
-.order-progress .order-progress__item {
+.order-progress__item {
 	float: left;
 	width: 100% / 3;
 	height: 40px;
@@ -22,7 +49,7 @@
 	}
 }
 
-.order-progress .order-progress__item__arrow {
+.order-progress__item__arrow {
 	display: block;
 	position: absolute;
 	width: 16px;
@@ -38,18 +65,18 @@
 
 	.rotate(45deg);
 }
-.order-progress .order-progress__item--active .order-progress__item__inner {
+.order-progress__item--active .order-progress__item__inner {
 	color: @color-f;
 	background: @bg-primary;
 }
 
 
-.order-progress .order-progress__item--active .order-progress__item__arrow {
+.order-progress__item--active .order-progress__item__arrow {
 	color: @color-f;
 	background: @bg-primary;
 }
 
-.order-progress .order-progress__item__inner {
+.order-progress__item__inner {
 	display: block;
 	padding: 0 10px 0 20px;
 	line-height: 40px;

@@ -1,3 +1,18 @@
+/*
+Breadcrumbs
+=======
+Classic breadcrumbs, it should be used with DIV element, not UL or OL (copy paste problem)
+
+	<div class="breadcrumbs">
+		<a href="#" class="breadcrumbs__item">Main page</a>
+		<span class="breadcrumbs__separator">-</span>
+		<a href="#" class="breadcrumbs__item">Category</a>
+		<span class="breadcrumbs__separator">-</span>
+		<span class="breadcrumbs__item">This page</span>
+	</div>
+
+*/
+
 .breadcrumbs {
 	padding: @breadcrumb-padding-vertical @breadcrumb-padding-horizontal @breadcrumb-padding-vertical - 1;
 	margin: 0 -15px @line-height-computed;
