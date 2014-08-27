@@ -126,6 +126,22 @@ module.exports = function(grunt) {
 			}
 		},
 
+		styledocco: {
+			dist: {
+				options: {
+					name: 'Shopsys 6',
+					include: [
+						'web/assets/frontend/styles/index.css',
+						'web/assets/admin/styles/index.css'
+					]
+				},
+				files: {
+					'docs/frontend': 'src/SS6/ShopBundle/Resources/styles/front/components/',
+					'docs/admin': 'src/SS6/ShopBundle/Resources/styles/admin/components/'
+				}
+			}
+		},
+
 		watch: {
 			admin: {
 				files: ['src/SS6/ShopBundle/Resources/styles/admin/**/*.less', 'web/assets/admin/images/icons/**/*.png'],
@@ -150,9 +166,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-legacssy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-spritesmith');
+	grunt.loadNpmTasks('grunt-styledocco');
 
-	grunt.registerTask('default', ['sprite', 'less', 'legacssy']);
+	grunt.registerTask('default', ['sprite', 'less', 'legacssy', 'styledocco']);
 
 	grunt.registerTask('frontend', ['sprite:frontend', 'less:frontend', 'legacssy:frontend', 'less:wysiwyg']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
+
+	grunt.registerTask('docs', ['styledocco' ]);
 };
