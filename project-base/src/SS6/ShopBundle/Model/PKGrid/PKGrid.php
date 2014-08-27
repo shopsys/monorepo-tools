@@ -116,7 +116,7 @@ class PKGrid {
 	/**
 	 * @var string
 	 */
-	private $actionColumnClass = '';
+	private $actionColumnClassAttribute = '';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
@@ -138,7 +138,7 @@ class PKGrid {
 		Twig_Environment $twig
 	) {
 		if (empty($id)) {
-			$message = 'Grid id can not be empty.';
+			$message = 'Grid id cannot be empty.';
 			throw new \SS6\ShopBundle\Model\PKGrid\Exception\EmptyGridIdException($message);
 		}
 
@@ -224,10 +224,10 @@ class PKGrid {
 	}
 
 	/**
-	 * @param string $class
+	 * @param string $classAttribute
 	 */
-	public function setActionColumnClass($class) {
-		$this->actionColumnClass = $class;
+	public function setActionColumnClassAttribute($classAttribute) {
+		$this->actionColumnClassAttribute = $classAttribute;
 	}
 
 	/**
@@ -378,8 +378,8 @@ class PKGrid {
 	/**
 	 * @return string
 	 */
-	public function getActionColumnClass() {
-		return $this->actionColumnClass;
+	public function getActionColumnClassAttribute() {
+		return $this->actionColumnClassAttribute;
 	}
 
 	/**
@@ -481,7 +481,7 @@ class PKGrid {
 	 * @param int $rowId
 	 */
 	private function loadRowsWithOneRow($queryId, $rowId) {
-		$this->rows = $this->dataSource->getRowsWithOneRow($queryId, $rowId);
+		$this->rows = array($this->dataSource->getOneRow($queryId, $rowId));
 	}
 
 	private function executeTotalQuery() {

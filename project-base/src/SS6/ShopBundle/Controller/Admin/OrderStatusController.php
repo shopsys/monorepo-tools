@@ -118,12 +118,12 @@ class OrderStatusController extends Controller {
 			->from(OrderStatus::class, 'os');
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('orderStatusList', $dataSource);
+		$grid = $gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('name', 'os.name', 'Název', true);
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_orderstatus_edit', array('id' => 'os.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_orderstatus_delete', array('id' => 'os.id'));
 

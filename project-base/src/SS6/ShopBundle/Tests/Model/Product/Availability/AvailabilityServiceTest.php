@@ -12,13 +12,13 @@ class AvailabilityServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreate() {
 		$availabilityService = new AvailabilityService();
 
-		$availabilityDataOrigin = new AvailabilityData('availabilityName');
-		$availability = $availabilityService->create($availabilityDataOrigin);
+		$availabilityDataOriginal = new AvailabilityData('availabilityName');
+		$availability = $availabilityService->create($availabilityDataOriginal);
 
 		$availabilityDataNew = new AvailabilityData();
 		$availabilityDataNew->setFromEntity($availability);
 
-		$this->assertEquals($availabilityDataOrigin, $availabilityDataNew);
+		$this->assertEquals($availabilityDataOriginal, $availabilityDataNew);
 	}
 
 	public function testEdit() {

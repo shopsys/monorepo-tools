@@ -106,7 +106,7 @@ class CustomerController extends Controller {
 			->groupBy('u.id');
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('customerList', $dataSource);
+		$grid = $gridFactory->create('customerList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
@@ -114,12 +114,12 @@ class CustomerController extends Controller {
 		$grid->addColumn('city', 'city', 'Město', true);
 		$grid->addColumn('telephone', 'telephone', 'Telefon', true);
 		$grid->addColumn('email', 'u.email', 'Email', true);
-		$grid->addColumn('ordersCount', 'ordersCount', 'Počet objednávek', true)->setClass('text-right');
-		$grid->addColumn('ordersSumPrice', 'ordersSumPrice', 'Hodnota objednávek', true)->setClass('text-right');
-		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)->setClass('text-right');
+		$grid->addColumn('ordersCount', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
+		$grid->addColumn('ordersSumPrice', 'ordersSumPrice', 'Hodnota objednávek', true)->setClassAttribute('text-right');
+		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)->setClassAttribute('text-right');
 		
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', array('id' => 'id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', array('id' => 'id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');

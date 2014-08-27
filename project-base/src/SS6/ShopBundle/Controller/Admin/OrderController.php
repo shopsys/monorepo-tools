@@ -141,7 +141,7 @@ class OrderController extends Controller {
 			->groupBy('o.id');
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('orderList', $dataSource);
+		$grid = $gridFactory->create('orderList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('number');
 
@@ -149,10 +149,10 @@ class OrderController extends Controller {
 		$grid->addColumn('createdAt', 'o.createdAt', 'Vytvořena', true);
 		$grid->addColumn('customerName', 'customerName', 'Zákazník', true);
 		$grid->addColumn('statusName', 'statusName', 'Stav', true);
-		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClass('text-right');
+		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
 
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', array('id' => 'id'))
 			->setConfirmMessage('Opravdu si přejete objednávku smazat?');

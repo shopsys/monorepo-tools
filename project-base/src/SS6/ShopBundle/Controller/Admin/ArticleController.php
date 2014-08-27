@@ -85,13 +85,13 @@ class ArticleController extends Controller {
 			->from(Article::class, 'a');
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('articleList', $dataSource);
+		$grid = $gridFactory->create('articleList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('name', 'a.name', 'Název', true);
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', array('id' => 'a.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');

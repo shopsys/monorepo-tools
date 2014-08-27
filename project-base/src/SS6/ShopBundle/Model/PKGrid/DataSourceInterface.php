@@ -24,8 +24,9 @@ interface DataSourceInterface {
 	/**
 	 * @param string $queryId
 	 * @param int $rowId
+	 * @return array
 	 */
-	public function getRowsWithOneRow($queryId, $rowId);
+	public function getOneRow($queryId, $rowId);
 
 	/**
 	 * @return int

@@ -13,7 +13,7 @@
 		
 		$grid.on('click', '.js-inline-edit-edit', function() {
 			var $row = $(this).closest('.js-pkgrid-row');
-			if (SS6.pkgrid.inlineEdit.isEnableRow($row)) {
+			if (SS6.pkgrid.inlineEdit.isRowEnabled($row)) {
 				SS6.pkgrid.inlineEdit.disableRow($row);
 				SS6.pkgrid.inlineEdit.startEditRow($row, $grid);
 			}
@@ -34,7 +34,8 @@
 		});
 		
 		$grid.on('keyup', '.js-pkgrid-editing-row input', function(event) {
-			if (event.keyCode  == 13) {
+			// enter
+			if (event.keyCode == 13) {
 				SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
 			}
 			return false;
@@ -45,10 +46,10 @@
 	SS6.pkgrid.inlineEdit.saveRow = function ($formRow, $grid) {
 		var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
 		var $saving = $formRow.find('.js-inline-edit-saving').show();
-		var $originRow = $formRow.data('$originRow');
+		var $originalRow = $formRow.data('$originalRow');
 		var data = $('<form>')
 				.append($formRow.clone())
-				.append($('<input type="hidden" name="rowId" />').val($originRow.data('inline-edit-row-id')))
+				.append($('<input type="hidden" name="rowId" />').val($originalRow.data('inline-edit-row-id')))
 				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')))
 				.append($('<input type="hidden "name="themeJson" />').val($grid.data('inline-edit-theme-json')))
 			.serialize();
@@ -59,9 +60,7 @@
 			dataType: 'json',
 			success: function (saveResult) {
 				if (saveResult.success) {
-					$formRow.data('$originRow').replaceWith($(saveResult.rowHtml));
-					$formRow.data('$invisibleRow').remove();
-					$formRow.remove();
+					$formRow.replaceWith($(saveResult.rowHtml)).remove();
 				} else {
 					$buttons.show();
 					$saving.hide();
@@ -82,23 +81,17 @@
 			dataType: 'json',
 			success: function (formData) {
 				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
-				var $invisibleRow = $('<tr />').hide(); // to preserve highlight even/odd
 				$formRow.find('.js-inline-edit-saving').hide();
-				$formRow.insertAfter($row);
-				$invisibleRow.insertAfter($row);
-				$formRow.data('$originRow', $row);
-				$formRow.data('$invisibleRow', $invisibleRow);
-				$row.hide();
+				$row.replaceWith($formRow);
+				$formRow.data('$originalRow', $row);
 			}
 		});
 	}
 	
 	SS6.pkgrid.inlineEdit.cancelEdit = function ($formRow) {
-		var $originRow = $formRow.data('$originRow');
-		$formRow.data('$invisibleRow').remove();
-		$originRow.show();
-		SS6.pkgrid.inlineEdit.enableRow($originRow);
-		$formRow.remove();
+		var $originalRow = $formRow.data('$originalRow');
+		$formRow.replaceWith($originalRow).remove();
+		SS6.pkgrid.inlineEdit.enableRow($originalRow);
 	}
 	
 	SS6.pkgrid.inlineEdit.disableRow = function ($row) {
@@ -109,7 +102,7 @@
 		return $row.removeClass('js-inactive');
 	}
 	
-	SS6.pkgrid.inlineEdit.isEnableRow = function ($row) {
+	SS6.pkgrid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
 	}
 	

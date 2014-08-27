@@ -124,15 +124,15 @@ class ProductController extends Controller {
 		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($searchData);
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('productList', $dataSource);
+		$grid = $gridFactory->create('productList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClass('table-col table-col-10');
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
 		$grid->addColumn('name', 'p.name', 'Název', true);
-		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
+		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');

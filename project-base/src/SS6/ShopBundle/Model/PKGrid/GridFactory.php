@@ -41,7 +41,7 @@ class GridFactory {
 	 * @param \SS6\ShopBundle\Model\PKGrid\DataSourceInterface $dataSource
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
-	public function get($gridId, DataSourceInterface $dataSource) {
+	public function create($gridId, DataSourceInterface $dataSource) {
 		return new PKGrid($gridId, $dataSource, $this->requestStack, $this->router, $this->twig);
 	}
 }

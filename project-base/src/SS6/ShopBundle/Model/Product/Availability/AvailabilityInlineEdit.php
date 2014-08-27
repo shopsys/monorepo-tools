@@ -97,7 +97,7 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
 	public function getGrid() {
-		$grid = $this->availabilityGridFactory->get();
+		$grid = $this->availabilityGridFactory->create();
 		$grid->setInlineEditService($this);
 
 		return $grid;

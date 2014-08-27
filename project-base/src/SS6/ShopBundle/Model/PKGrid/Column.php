@@ -3,12 +3,38 @@
 namespace SS6\ShopBundle\Model\PKGrid;
 
 class Column {
-	private $id;
-	private $queryId;
-	private $title;
-	private $sortable;
-	private $class;
 
+	/**
+	 * @var string
+	 */
+	private $id;
+
+	/**
+	 * @var string
+	 */
+	private $queryId;
+
+	/**
+	 * @var string
+	 */
+	private $title;
+
+	/**
+	 * @var bool
+	 */
+	private $sortable;
+
+	/**
+	 * @var string
+	 */
+	private $classAttribute;
+
+	/**
+	 * @param string $id
+	 * @param string $queryId
+	 * @param string $title
+	 * @param bool $sortable
+	 */
 	public function __construct($id, $queryId, $title, $sortable) {
 		$this->id = $id;
 		$this->queryId = $queryId;
@@ -16,28 +42,47 @@ class Column {
 		$this->sortable = $sortable;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getId() {
 		return $this->id;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getQueryId() {
 		return $this->queryId;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getTitle() {
 		return $this->title;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function getSortable() {
 		return $this->sortable;
 	}
 
-	public function getClass() {
-		return $this->class;
+	/**
+	 * @return string
+	 */
+	public function getClassAttribute() {
+		return $this->classAttribute;
 	}
 
-	public function setClass($class) {
-		$this->class = $class;
+	/**
+	 * @param string $class
+	 * @return \SS6\ShopBundle\Model\PKGrid\Column
+	 */
+	public function setClassAttribute($class) {
+		$this->classAttribute = $class;
 
 		return $this;
 	}

@@ -43,7 +43,7 @@ class ActionColumn {
 	/**
 	 * @var string|null
 	 */
-	private $class;
+	private $classAttributte;
 
 	/**
 	 * @var string|null
@@ -85,8 +85,8 @@ class ActionColumn {
 	/**
 	 * @return string|null
 	 */
-	public function getClass() {
-		return $this->class;
+	public function getClassAttribute() {
+		return $this->classAttributte;
 	}
 
 	/**
@@ -97,11 +97,11 @@ class ActionColumn {
 	}
 
 	/**
-	 * @param string $class
+	 * @param string $classAttribute
 	 * @return \SS6\ShopBundle\Model\PKGrid\ActionColumn
 	 */
-	public function setClass($class) {
-		$this->class = $class;
+	public function setClassAttribute($classAttribute) {
+		$this->classAttributte = $classAttribute;
 
 		return $this;
 	}

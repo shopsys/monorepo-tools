@@ -34,7 +34,7 @@ class InlineEditService {
 	 * @return array
 	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
 	 */
-	public function getFormData($serviceName, $rowId) {
+	public function getRenderedFormWidgets($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$form = $gridInlineEdit->getForm($rowId);
 		

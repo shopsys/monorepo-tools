@@ -30,17 +30,17 @@ class AvailabilityGridFactory {
 	/**
 	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
 	 */
-	public function get() {
+	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
 			->select('a')
 			->from(Availability::class, 'a');
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $this->gridFactory->get('availabilityList', $dataSource);
+		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('name', 'a.name', 'Název', true);
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('delete', 'Smazat', 'admin_availability_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tuto dostupnost?');
 

@@ -43,7 +43,7 @@
 	<thead>
 		<tr class="grid-row-titles">
 			{% for column in grid.columns %}
-				<th class="{% if column.class %} {{ column.class }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}">
+				<th class="{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}">
 					{% if (column.sortable) %}
 						{% if grid.order == column.id and grid.orderDirection == 'asc' %}
 							{% set orderBy = '-' ~ column.id %}
@@ -66,7 +66,7 @@
 				</th>
 			{% endfor %}
 			{% if grid.actionColumns is not empty or grid.inlineEdit %}
-				<th class="last-column text-right {{ grid.actionColumnClass }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
+				<th class="last-column text-right {{ grid.actionColumnClassAttribute }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
 			{% endif  %}
 		</tr>
 	</thead>
@@ -103,14 +103,14 @@
 	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} hidden js-pkgrid-empty-row{% else %} js-pkgrid-row{% endif %}"
 			{% if grid.inlineEdit and not emptyRow %} data-inline-edit-row-id="{{ grid.getInlineEditRowId(row) }}"{% endif %}>
 		{% for column in grid.columns %}
-			<td class="js-pkgrid-column-{{ column.id }}{% if column.class %} {{ column.class }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
+			<td class="js-pkgrid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
 				{% if not emptyRow %}
 					{{ gridView.renderCell(column, row)|raw }}
 				{% endif %}
 			</td>
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
-			<td class="grid-column-actions last-column text-right js-inline-edit-other-inputs {{ grid.actionColumnClass }}{% if lastRow %} last-row{% endif %}">
+			<td class="grid-column-actions last-column text-right js-inline-edit-other-inputs {{ grid.actionColumnClassAttribute }}{% if lastRow %} last-row{% endif %}">
 				<span class="grid-row-actions action-icons">
 					{% if grid.inlineEdit and emptyRow %}
 						<span class="js-inline-edit-buttons">
@@ -149,7 +149,7 @@
 		{% set icon = actionColumn.type %}
 	{% endif %}
 	<a
-		class="table-action{% if actionColumn.class %} {{ actionColumn.class }}{% endif %}"
+		class="table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
 		href="{{ actionColumn.targetUrl(row) }}"
 		{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
 	><i class="fa fa-{{ icon }}"></i></a>

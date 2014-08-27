@@ -44,11 +44,11 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	 * @param string $queryId
 	 * @param int $rowId
 	 */
-	public function getRowsWithOneRow($queryId, $rowId) {
+	public function getOneRow($queryId, $rowId) {
 		$queryBuilder = clone $this->queryBuilder;
 		$this->prepareQueryWithOneRow($queryBuilder, $queryId, $rowId);
 
-		return $queryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
+		return $queryBuilder->getQuery()->getSingleResult('GroupedScalarHydrator');
 	}
 
 	/**

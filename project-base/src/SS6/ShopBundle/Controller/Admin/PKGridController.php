@@ -17,12 +17,12 @@ class PKGridController extends Controller {
 		$inlineEditService = $this->get('ss6.shop.pkgrid.inline_edit.inline_edit_service');
 		/* @var $inlineEditService \SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService */
 
-		$formData = $inlineEditService->getFormData(
+		$renderedFormWidgets = $inlineEditService->getRenderedFormWidgets(
 			$request->get('serviceName'),
 			$request->get('rowId')
 		);
 
-		return new JsonResponse($formData);
+		return new JsonResponse($renderedFormWidgets);
 	}
 
 	/**
