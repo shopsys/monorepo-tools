@@ -168,10 +168,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-spritesmith');
 	grunt.loadNpmTasks('grunt-styledocco');
 
-	grunt.registerTask('default', ['sprite', 'less', 'legacssy', 'styledocco']);
+	grunt.registerTask('default', ['sprite', 'less', 'legacssy']);
 
 	grunt.registerTask('frontend', ['sprite:frontend', 'less:frontend', 'legacssy:frontend', 'less:wysiwyg']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
 
-	grunt.registerTask('docs', ['styledocco' ]);
+	grunt.registerTask('docs', ['styledocco']);
 };
