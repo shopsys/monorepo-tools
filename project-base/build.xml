@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys6" default="build">
-	
+
 	<property name="path.app" value="${path.root}/app"/>
 	<property name="path.bin" value="${path.root}/bin"/>
 	<property name="path.build" value="${path.root}/build"/>
@@ -19,9 +19,9 @@
 	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
-	
+
 	<property file="${path.build.properties.local}" override="true"/>
- 
+
 	<target name="build" depends="composer,npm,clean,assetic,grunt,db-rebuild"/>
 	<target name="build-demo" depends="composer,npm,clean,assetic,grunt,db-demo"/>
 	<target name="build-demo-dev" depends="build-demo,standards"/>
@@ -30,7 +30,7 @@
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,tests"/>
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo"/>
-	
+
 	<target name="assetic">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -38,7 +38,7 @@
 			<arg value="-q" />
 		</exec>
 	</target>
-	
+
 	<target name="clean">
 		<mkdir dir="${path.app}/cache" mode="0770"/>
 		<mkdir dir="${path.app}/logs" mode="0770"/>
@@ -60,7 +60,7 @@
 			</then>
 		</if>
 	</target>
-	
+
 	<target name="composer">
 		<exec
 			executable="${path.composer.executable}"
@@ -71,7 +71,7 @@
 			<arg value="install"/>
 		</exec>
 	</target>
-	
+
 	<target name="db-create">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -79,7 +79,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="db-drop">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -89,7 +89,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="db-fixtures-base-settings">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -99,7 +99,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="db-fixtures-demo">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -111,10 +111,16 @@
 		</exec>
 	</target>
 	
+	<target name="docs">
+		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true">
+			<arg value="docs" />
+		</exec>
+	</target>
+
 	<target name="grunt">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
 	</target>
-	
+
 	<target name="npm">
 		<exec
 			executable="${path.npm.executable}"
@@ -125,7 +131,7 @@
 			<arg value="install"/>
 		</exec>
 	</target>
- 
+
 	<target name="phpcs">
 		<exec
 			executable="${path.phpcs.executable}"
@@ -140,7 +146,7 @@
 			<arg path="${path.src}"/>
 		</exec>
 	</target>
- 
+
 	<target name="phplint">
 		<exec
 			executable="${path.phplint.executable}"
@@ -151,7 +157,7 @@
 			<arg path="${path.src}"/>
 		</exec>
 	</target>
-	
+
 	<target name="phpmd">
 		<exec
 			executable="${path.phpmd.executable}"
@@ -165,7 +171,7 @@
 			<arg value="--extensions=php"/>
 		</exec>
 	</target>
- 
+
 	<target name="tests">
 		<exec
 			executable="${path.phpunit.executable}"
@@ -179,7 +185,7 @@
 			<arg value="Tests"/>
 		</exec>
 	</target>
-	
+
 	<target name="tests-db" depends="test-db-demo">
 		<exec
 			executable="${path.phpunit.executable}"
@@ -193,7 +199,7 @@
 			<arg value="TestsDb"/>
 		</exec>
 	</target>
-	
+
 	<target name="test-db-create">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -202,7 +208,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="test-db-drop">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -213,7 +219,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="test-db-fixtures-base-settings">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -224,7 +230,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="test-db-fixtures-demo">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -236,7 +242,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="twig-lint">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -244,5 +250,5 @@
 			<arg value="@SS6ShopBundle" />
 		</exec>
 	</target>
-	
+
 </project>

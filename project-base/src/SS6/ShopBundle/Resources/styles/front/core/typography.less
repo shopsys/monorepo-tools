@@ -3,16 +3,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-	&:link, &:visited, &:active {
-		color: @color-link;
+	color: @color-link;
+	text-decoration: underline;
+
+	.set-transition();
+	.transition(~"background, color");
+
+	&:hover {
+		color: @color-link-hover;
 		text-decoration: underline;
-
-		.set-transition();
-		.transition(~"background, color");
-
-		&:hover {
-			color: @color-link-hover;
-			text-decoration: underline;
-		}
 	}
+}
+
+label {
+	cursor: pointer;
 }

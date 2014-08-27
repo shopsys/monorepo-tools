@@ -1,3 +1,46 @@
+/*
+Checkbox chooser
+===============
+Checkboxes With image and text on right - typical for payments, shipping
+
+    <div class="chooser">
+    	<label class="chooser__item">
+			<span class="chooser__ceck">
+				<input type="checkbox">
+			</span>
+
+			<span class="chooser__image">
+				img
+			</span>
+
+			<span class="chooser__title">
+				Label text
+			</span>
+
+			<span class="chooser__price">
+				for Free
+			</span>
+    	</label>
+    	<label class="chooser__item chooser__item--active">
+			<span class="chooser__ceck">
+				<input type="checkbox">
+			</span>
+
+			<span class="chooser__image">
+				img
+			</span>
+
+			<span class="chooser__title">
+				Label text
+			</span>
+
+			<span class="chooser__price">
+				for Free
+			</span>
+    	</label>
+    </div>
+*/
+
 .chooser {
 	position: relative;
 }
@@ -21,12 +64,12 @@
 }
 
 .chooser .chooser__check {
-	width: 2%;
+	width: 3%;
 	.center-it(left);
 }
 
 .chooser .chooser__image {
-	width: 5%;
+	width: 7%;
 	.center-it(left);
 
 	img {
@@ -35,7 +78,7 @@
 }
 
 .chooser .chooser__title {
-	width: 78%;
+	width: 75%;
 	.center-it(left);
 }
 
@@ -45,21 +88,4 @@
 
 	font-weight: bold;
 	font-size: 14px;
-}
-
-
-.chooser--smaller {
-
-}
-
-.chooser--smaller .chooser__check {
-	width: 3%;
-}
-
-.chooser--smaller .chooser__image {
-	width: 7%;
-}
-
-.chooser--smaller .chooser__title {
-	width: 75%;
 }

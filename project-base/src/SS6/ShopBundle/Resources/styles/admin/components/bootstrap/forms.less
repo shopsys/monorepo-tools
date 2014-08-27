@@ -26,3 +26,9 @@ input[type='number'] {
 .input-xs {
 	.input-size(@input-height-xsmall; @padding-xsmall-vertical; @padding-xsmall-horizontal; @font-size-xsmall; @line-height-xsmall; @border-radius-xsmall);
 }
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+	cursor: default;
+}

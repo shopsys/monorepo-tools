@@ -1,13 +1,38 @@
+/*
+Sorting arrows
+=========
+Arrows for sorting ascendent/descendent in grid
+
+	<table class="table">
+		<tr>
+			<td>ID <span class="sort-arrows sort-arrows--down"></span></td>
+			<td>Name <span class="sort-arrows sort-arrows--up"></span></td>
+			<td>Type</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Name</td>
+			<td>Person</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Name</td>
+			<td>Person</td>
+		</tr>
+	</table>
+
+*/
+
 .sort-arrows {
 	position: relative;
 	display: inline-block;
 	width: 10px;
 }
 
-.sort-arrows.sort-arrows--up {
+.sort-arrows--up {
 	.draw-arrow-top(5px, @link-color, 5px, -8px);
 }
 
-.sort-arrows.sort-arrows--down {
+.sort-arrows--down {
 	.draw-arrow-bottom(5px, @link-color, 5px, -6px);
 }

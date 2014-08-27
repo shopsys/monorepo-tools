@@ -1,3 +1,48 @@
+/*
+Flash messages
+========
+Many types of messagess
+
+	<div class="message">
+		Simple message
+	</div>
+
+	<div class="message message-success">
+		Success message
+	</div>
+
+	<div class="message message-info">
+		Info message
+	</div>
+
+	<div class="message message-warning">
+		Warning message
+	</div>
+
+	<div class="message message-danger">
+		Danger message with close button
+
+		<span class="message__close">X</span>
+	</div>
+
+	<div class="message message-danger">
+		<ul class="message__list">
+			<li>Error list in message</li>
+			<li>Error list in message</li>
+			<li>Error list in message</li>
+		</ul>
+	</div>
+
+	<div class="form-line">
+		<label class="form-line__label">
+			Label
+		</label>
+		<input type="text" class="form-line__field form-control">
+		<div class="message message-danger message-floating">
+			Danger floating message
+		</div>
+	</div>
+*/
 .message {
 	margin: 20px 0;
 	padding: 20px;
@@ -33,7 +78,7 @@
 	.reset-ul();
 }
 
-.message .message__close {
+.message__close {
 	float: right;
 	margin-left: 20px;
 	height: 20px;
@@ -44,6 +89,7 @@
 	font-weight: bold;
 	color: @color-f;
 	background: @color-5;
+	cursor: pointer;
 
 	.border-radius(@border-radius-base);
 	.set-transition();
@@ -51,13 +97,14 @@
 
 	&:hover {
 		background: @color-3;
+		color: @color-f;
 		text-decoration: none;
 	}
 }
 
 .message-floating {
 	position: absolute;
-	top: 6px;
+	top: 5px;
 	left: 530px;
 	margin: 0;
 	padding: 2px 10px;
