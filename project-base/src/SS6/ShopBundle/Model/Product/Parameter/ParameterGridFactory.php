@@ -3,8 +3,9 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
-use \SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\PKGrid\ActionColumn;
 use SS6\ShopBundle\Model\PKGrid\GridFactory;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 
 class ParameterGridFactory {
 
@@ -41,7 +42,7 @@ class ParameterGridFactory {
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('name', 'a.name', 'Název', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('delete', 'Smazat', 'admin_parameter_delete', array('id' => 'a.id'))
+		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_parameter_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tento parametr?');
 
 		return $grid;
