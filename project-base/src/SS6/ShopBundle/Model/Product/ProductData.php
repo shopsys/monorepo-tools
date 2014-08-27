@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 use DateTime;
 
 class ProductData {
@@ -68,6 +69,12 @@ class ProductData {
 	private $image;
 
 	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
+	 */
+	private $availability;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -78,8 +85,9 @@ class ProductData {
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
-	 * @param string|null $hidden
+	 * @param bool|null $hidden
 	 * @param string|null $image
+	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 */
 	public function __construct(
 		$name = null,
@@ -93,7 +101,8 @@ class ProductData {
 		DateTime $sellingTo = null,
 		$stockQuantity = null,
 		$hidden = false,
-		$image = null
+		$image = null,
+		$availability = null
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -107,6 +116,7 @@ class ProductData {
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
 		$this->image = $image;
+		$this->availability = $availability;
 	}
 
 	/**
@@ -194,6 +204,13 @@ class ProductData {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Availability\Availability|null
+	 */
+	public function getAvailability() {
+		return $this->availability;
+	}
+
+	/**
 	 * @param string|null $name
 	 */
 	public function setName($name) {
@@ -278,6 +295,13 @@ class ProductData {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
+	 */
+	public function setAvailability(Availability $availability = null) {
+		$this->availability = $availability;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
 	public function setFromEntity(Product $product) {
@@ -292,6 +316,7 @@ class ProductData {
 		$this->setSellingTo($product->getSellingTo());
 		$this->setStockQuantity($product->getStockQuantity());
 		$this->setHidden($product->isHidden());
+		$this->setAvailability($product->getAvailability());
 	}
 
 }

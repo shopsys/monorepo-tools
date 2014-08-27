@@ -3,10 +3,9 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -123,11 +122,11 @@ class ProductController extends Controller {
 		$form->handleRequest($request);
 		$searchData = $form->getData();
 		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($searchData);
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $gridFactory->get('productList');
+		$grid = $gridFactory->get('productList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClass('table-col table-col-10');
 		$grid->addColumn('name', 'p.name', 'Název', true);
