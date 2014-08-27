@@ -1,0 +1,10 @@
+{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
+
+{% block pkgrid_no_data %}
+	Nebyly nalezeni žádné parametry. Nejprve musíte nějaké vytvořit.
+{% endblock %}
+
+{% block pkgrid_pager_totalcount %}
+	{% set entityName = 'parametry' %}
+	{{ parent() }}
+{% endblock %}

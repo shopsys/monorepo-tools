@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
-Use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\AbstractQuery;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
