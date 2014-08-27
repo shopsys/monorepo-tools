@@ -139,6 +139,13 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
+	 * @param string $price
+	 */
+	public function setPrice($price) {
+		$this->price = $price;
+	}
+
+	/**
 	 * @return integer 
 	 */
 	public function getId() {
