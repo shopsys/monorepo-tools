@@ -35,6 +35,17 @@
 				</dl>
 			{% endif %}
 
+			{% if productDetail.product.availability %}
+				<dl class="simple-list">
+					<dt class="simple-list__title">
+						Dostupnost:
+					</dt>
+					<dd class="simple-list__definition">
+						{{ productDetail.product.availability.name }}
+					</dd>
+				</dl>
+			{% endif %}
+
 			{% if productDetail.product.partno %}
 				<dl class="simple-list">
 					<dt class="simple-list__title">

@@ -25,7 +25,7 @@
 					<td class="text-right">{{ transportDetail.transport.price|price }}</td>
 					<td class="text-right">
 						<a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
-						<a href="{{ url('admin_transport_delete', {id: transportDetail.transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')" class="table-action"><i class="fa fa-times"></i></a>
+						<a href="{{ url('admin_transport_delete', {id: transportDetail.transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')" class="table-action"><i class="fa fa-trash-o"></i></a>
 					</td>
 				</tr>
 			{% endfor %}

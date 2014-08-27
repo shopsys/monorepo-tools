@@ -120,6 +120,13 @@ class Product implements EntityFileUploadInterface {
 	 * @var string|null
 	 */
 	private $imageForUpload;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
+	 */
+	private $availability;
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
@@ -139,6 +146,7 @@ class Product implements EntityFileUploadInterface {
 		$this->visible = false;
 		$this->image = null;
 		$this->setImageForUpload($productData->getImage());
+		$this->availability = $productData->getAvailability();
 	}
 	
 	/**
@@ -157,6 +165,7 @@ class Product implements EntityFileUploadInterface {
 		$this->stockQuantity = $productData->getStockQuantity();
 		$this->hidden = $productData->getHidden();
 		$this->setImageForUpload($productData->getImage());
+		$this->availability = $productData->getAvailability();
 	}
 
 	/**
@@ -292,6 +301,14 @@ class Product implements EntityFileUploadInterface {
 	 */
 	public function isVisible() {
 		return $this->visible;
+	}
+
+	/**
+	 *
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 */
+	public function getAvailability() {
+		return $this->availability;
 	}
 
 }

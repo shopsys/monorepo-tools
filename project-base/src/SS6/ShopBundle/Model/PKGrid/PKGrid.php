@@ -2,16 +2,18 @@
 
 namespace SS6\ShopBundle\Model\PKGrid;
 
-use Doctrine\DBAL\SQLParserUtils;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Model\PKGrid\ActionColumn;
 use SS6\ShopBundle\Model\PKGrid\Column;
+use SS6\ShopBundle\Model\PKGrid\DataSourceInterface;
+use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\PKGrid\PKGridView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ */
 class PKGrid {
 
 	const GET_PARAMETER = 'g';
@@ -107,28 +109,41 @@ class PKGrid {
 	private $twig;
 
 	/**
-	 * @var \Doctrine\ORM\QueryBuilder
+	 * @var \SS6\ShopBundle\Model\PKGrid\DataSourceInterface
 	 */
-	private $queryBuilder;
-
-	/**
-	 * @var \Doctrine\ORM\NativeQuery
-	 */
-	private $totalNativeQuery;
+	private $dataSource;
 
 	/**
 	 * @var string
 	 */
-	private $actionColumnClass = '';
+	private $actionColumnClassAttribute = '';
+
+	/**
+	 * @var \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
+	 */
+	private $inlineEditService;
 
 	/**
 	 * @param string $id
+	 * @param \SS6\ShopBundle\Model\PKGrid\DataSourceInterface $dataSource
 	 * @param \SS6\ShopBundle\Model\PKGrid\RequestStack $requestStack
 	 * @param \SS6\ShopBundle\Model\PKGrid\Router $router
 	 * @param \SS6\ShopBundle\Model\PKGrid\Twig_Environment $twig
 	 */
-	public function __construct($id, RequestStack $requestStack, Router $router, Twig_Environment $twig) {
+	public function __construct(
+		$id,
+		DataSourceInterface $dataSource,
+		RequestStack $requestStack,
+		Router $router,
+		Twig_Environment $twig
+	) {
+		if (empty($id)) {
+			$message = 'Grid id cannot be empty.';
+			throw new \SS6\ShopBundle\Model\PKGrid\Exception\EmptyGridIdException($message);
+		}
+
 		$this->id = $id;
+		$this->dataSource = $dataSource;
 		$this->requestStack = $requestStack;
 		$this->router = $router;
 		$this->twig = $twig;
@@ -180,10 +195,39 @@ class PKGrid {
 	}
 
 	/**
-	 * @param string $class
+	 * @param \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface $inlineEditService
 	 */
-	public function setActionColumnClass($class) {
-		$this->actionColumnClass = $class;
+	public function setInlineEditService(GridInlineEditInterface $inlineEditService) {
+		$this->inlineEditService = $inlineEditService;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isInlineEdit() {
+		return $this->inlineEditService !== null;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
+	 */
+	public function getInlineEditService() {
+		return $this->inlineEditService;
+	}
+
+	/**
+	 * @param array $row
+	 * @return mixed
+	 */
+	public function getInlineEditRowId($row) {
+		return PKGrid::getValueFromRowByQueryId($row, $this->getInlineEditService()->getQueryId());
+	}
+
+	/**
+	 * @param string $classAttribute
+	 */
+	public function setActionColumnClassAttribute($classAttribute) {
+		$this->actionColumnClassAttribute = $classAttribute;
 	}
 
 	/**
@@ -193,7 +237,19 @@ class PKGrid {
 		if ($this->isAllowedPaging()) {
 			$this->executeTotalQuery();
 		}
-		$this->executeQuery();
+		$this->loadRows();
+		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
+
+		return $gridView;
+	}
+
+	/**
+	 * @param string $queryId
+	 * @param int $rowId
+	 * @return \SS6\ShopBundle\Model\PKGrid\PKGridView
+	 */
+	public function createViewWithOneRow($queryId, $rowId) {
+		$this->loadRowsWithOneRow($queryId, $rowId);
 		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
 
 		return $gridView;
@@ -216,18 +272,11 @@ class PKGrid {
 	 * @param string $columnId
 	 * @param string $direction
 	 */
-	public function setDefaultOrder($columnId, $direction = 'asc') {
+	public function setDefaultOrder($columnId, $direction = DataSourceInterface::ORDER_ASC) {
 		if (!$this->isOrderFromRequest) {
-			$prefix = $direction == 'desc' ? '-' : '';
+			$prefix = $direction == DataSourceInterface::ORDER_DESC ? '-' : '';
 			$this->setOrder($prefix . $columnId);
 		}
-	}
-
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 */
-	public function setQueryBuilder(QueryBuilder $queryBuilder) {
-		$this->queryBuilder = $queryBuilder;
 	}
 
 	/**
@@ -312,7 +361,7 @@ class PKGrid {
 	 */
 	public function getOrderWithDirection() {
 		$prefix = '';
-		if ($this->getOrderDirection() === 'desc') {
+		if ($this->getOrderDirection() === DataSourceInterface::ORDER_DESC) {
 			$prefix = '-';
 		}
 		
@@ -329,8 +378,8 @@ class PKGrid {
 	/**
 	 * @return string
 	 */
-	public function getActionColumnClass() {
-		return $this->actionColumnClass;
+	public function getActionColumnClassAttribute() {
+		return $this->actionColumnClassAttribute;
 	}
 
 	/**
@@ -338,9 +387,9 @@ class PKGrid {
 	 */
 	private function setOrder($orderString) {
 		if (substr($orderString, 0, 1) === '-') {
-			$this->orderDirection = 'desc';
+			$this->orderDirection = DataSourceInterface::ORDER_DESC;
 		} else {
-			$this->orderDirection = 'asc';
+			$this->orderDirection = DataSourceInterface::ORDER_ASC;
 		}
 		$this->order = trim($orderString, '-');
 	}
@@ -412,58 +461,56 @@ class PKGrid {
 		);
 	}
 
-	private function prepareQuery() {
-		if ($this->isAllowedPaging()) {
-			$this->queryBuilder
-				->setFirstResult($this->limit * ($this->page - 1))
-				->setMaxResults($this->limit);
-		}
-		if ($this->order) {
-			$this->queryBuilder
-				->orderBy($this->columns[$this->order]->getQueryId(), $this->orderDirection);
-		}
-	}
-
-	private function prepareTotalQuery() {
-		$em = $this->queryBuilder->getEntityManager();
-
-		$totalQueryBuilder = clone $this->queryBuilder;
-		$totalQueryBuilder
-			->setFirstResult(null)
-			->setMaxResults(null)
-			->resetDQLPart('orderBy');
-
-		$query = $totalQueryBuilder->getQuery();
-
-		$parametersAssoc = array();
-		foreach ($query->getParameters() as $parameter) {
-			$parametersAssoc[$parameter->getName()] = $parameter->getValue();
+	private function loadRows() {
+		if (array_key_exists($this->order, $this->getColumns())) {
+			$orderQueryId = $this->getColumns()[$this->order]->getQueryId();
+		} else {
+			$orderQueryId = null;
 		}
 
-		list($dummyQuery, $flatenedParameters) = SQLParserUtils::expandListParameters(
-			$query->getDQL(),
-			$parametersAssoc,
-			array()
+		$this->rows = $this->dataSource->getRows(
+			$this->allowPaging ? $this->limit : null,
+			$this->page,
+			$orderQueryId,
+			$this->orderDirection
 		);
-
-		$sql = 'SELECT COUNT(*) AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
-
-		$rsm = new ResultSetMapping();
-		$rsm->addScalarResult('total_count', 'totalCount');
-		$this->totalNativeQuery = $em->createNativeQuery($sql, $rsm)
-			->setParameters($flatenedParameters);
 	}
 
-	private function executeQuery() {
-		$this->prepareQuery();
-		$this->rows = $this->queryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
+	/**
+	 * @param string $queryId
+	 * @param int $rowId
+	 */
+	private function loadRowsWithOneRow($queryId, $rowId) {
+		$this->rows = array($this->dataSource->getOneRow($queryId, $rowId));
 	}
 
 	private function executeTotalQuery() {
-		$this->prepareTotalQuery();
-		$this->totalCount = $this->totalNativeQuery->getSingleScalarResult();
+		$this->totalCount = $this->dataSource->getTotalRowsCount();
 		$this->pageCount = max(ceil($this->totalCount / $this->limit), 1);
 		$this->page = min($this->page, $this->pageCount);
+	}
+
+	/**
+	 * @param array $row
+	 * @param string $queryId
+	 * @return mixed
+	 */
+	public static function getValueFromRowByQueryId(array $row, $queryId) {
+		$queryIdParts = explode('.', $queryId);
+
+		if (count($queryIdParts) === 1) {
+			$value = $row[$queryIdParts[0]];
+		} elseif (count($queryIdParts) === 2) {
+			if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
+				$value = $row[$queryIdParts[0]][$queryIdParts[1]];
+			} elseif (array_key_exists($queryIdParts[1], $row)) {
+				$value = $row[$queryIdParts[1]];
+			} else {
+				$value = $row[$queryId];
+			}
+		}
+
+		return $value;
 	}
 
 }

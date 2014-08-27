@@ -55,6 +55,11 @@ class PKGridView {
 		$this->request = $requestStack->getMasterRequest();
 		$this->router = $router;
 		$this->twig = $twig;
+
+		$this->templateParameters = array(
+			'gridView' => $this,
+			'grid' => $this->grid,
+		);
 	}
 
 	/**
@@ -62,13 +67,10 @@ class PKGridView {
 	 * @param array|null $parameters
 	 */
 	public function render($theme, array $parameters = null) {
-		$this->theme = $theme;
+		$this->setTheme($theme);
 		$this->templateParameters = array_merge(
 			(array)$parameters,
-			array(
-				'gridView' => $this,
-				'grid' => $this->grid,
-			)
+			$this->templateParameters
 		);
 		$this->renderBlock('pkgrid');
 	}
@@ -85,13 +87,18 @@ class PKGridView {
 	/**
 	 * @param string $name
 	 * @param array|null $parameters
+	 * @param bool $echo
 	 */
-	public function renderBlock($name, $parameters = null) {
+	public function renderBlock($name, $parameters = null, $echo = true) {
 		foreach ($this->getTemplates() as $template) {
 			if ($template->hasBlock($name)) {
 				$templateParameters = array_merge($this->twig->getGlobals(), (array)$parameters, $this->templateParameters);
-				echo $template->renderBlock($name, $templateParameters);
-				return;
+				if ($echo) {
+					echo $template->renderBlock($name, $templateParameters);
+					return;
+				} else {
+					return $template->renderBlock($name, $templateParameters);
+				}
 			}
 		}
 
@@ -119,7 +126,7 @@ class PKGridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\Column $actionColumn
+	 * @param \SS6\ShopBundle\Model\PKGrid\ActionColumn $actionColumn
 	 * @param array $row
 	 */
 	public function renderActionCell(ActionColumn $actionColumn, array $row) {
@@ -158,6 +165,20 @@ class PKGridView {
 		}
 		
 		return false;
+	}
+
+	/**
+	 * @return string|array
+	 */
+	public function getTheme() {
+		return $this->theme;
+	}
+
+	/**
+	 * @param string|array $theme
+	 */
+	public function setTheme($theme) {
+		$this->theme = $theme;
 	}
 
 	/**
@@ -200,21 +221,7 @@ class PKGridView {
 	 * @return mixed
 	 */
 	private function getCellValue(Column $column, $row) {
-		$queryIdParts = explode('.', $column->getQueryId());
-
-		if (count($queryIdParts) === 1) {
-			$value = $row[$queryIdParts[0]];
-		} elseif (count($queryIdParts) === 2) {
-			if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
-				$value = $row[$queryIdParts[0]][$queryIdParts[1]];
-			} elseif (array_key_exists($queryIdParts[1], $row)) {
-				$value = $row[$queryIdParts[1]];
-			} else {
-				$value = $row[$column->getQueryId()];
-			}
-		}
-
-		return $value;
+		return PKGrid::getValueFromRowByQueryId($row, $column->getQueryId());
 	}
 
 	/**

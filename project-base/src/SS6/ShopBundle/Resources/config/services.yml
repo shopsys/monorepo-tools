@@ -230,6 +230,14 @@ services:
   ss6.shop.payment.price_calculation:
     class: SS6\ShopBundle\Model\Payment\PriceCalculation
 
+  ss6.shop.pkgrid.factory:
+    class: SS6\ShopBundle\Model\PKGrid\GridFactory
+
+  ss6.shop.pkgrid.inline_edit.inline_edit_service:
+    class: SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService
+    arguments:
+      - @service_container
+
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
     
@@ -241,6 +249,21 @@ services:
 
   ss6.shop.pricing.vat_repository:
     class: SS6\ShopBundle\Model\Pricing\VatRepository
+    
+  ss6.shop.product.availability.availability_inline_edit:
+    class: SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit
+    
+  ss6.shop.product.availability.availability_facade:
+    class: SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade
+
+  ss6.shop.product.availability.availability_grid_factory:
+    class: SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory
+
+  ss6.shop.product.availability.availability_repository:
+    class: SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository
+
+  ss6.shop.product.availability.availability_service:
+    class: SS6\ShopBundle\Model\Product\Availability\AvailabilityService
 
   ss6.shop.pricing.input_price_facade:
     class: SS6\ShopBundle\Model\Pricing\InputPriceFacade
@@ -258,6 +281,15 @@ services:
 
   ss6.shop.pricing.pricing_setting_facade:
     class: SS6\ShopBundle\Model\Pricing\PricingSettingFacade
+
+  ss6.shop.product.list.product_list_admin_facade:
+    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+    
+  ss6.shop.product.list.product_list_admin_repository:
+    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
+
+  ss6.shop.pricing.vat_repository:
+    class: SS6\ShopBundle\Model\Pricing\VatRepository
 
   ss6.shop.product.price_calculation:
     class: SS6\ShopBundle\Model\Product\PriceCalculation

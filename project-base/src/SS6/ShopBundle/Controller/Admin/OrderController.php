@@ -7,7 +7,7 @@ use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -122,6 +122,8 @@ class OrderController extends Controller {
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
 
 		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder
@@ -137,25 +139,20 @@ class OrderController extends Controller {
 						END) AS customerName')
 			->join('o.status', 'os')
 			->groupBy('o.id');
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = new PKGrid(
-			'orderList',
-			$this->get('request_stack'),
-			$this->get('router'),
-			$this->get('twig')
-		);
+		$grid = $gridFactory->create('orderList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('number');
-		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('createdAt', 'o.createdAt', 'Vytvořena', true);
 		$grid->addColumn('customerName', 'customerName', 'Zákazník', true);
 		$grid->addColumn('statusName', 'statusName', 'Stav', true);
-		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClass('text-right');
+		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
 
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', array('id' => 'id'))
 			->setConfirmMessage('Opravdu si přejete objednávku smazat?');

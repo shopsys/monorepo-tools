@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -76,25 +76,22 @@ class ArticleController extends Controller {
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
 			->select('a')
 			->from(Article::class, 'a');
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = new PKGrid(
-			'articleList',
-			$this->get('request_stack'),
-			$this->get('router'),
-			$this->get('twig')
-		);
+		$grid = $gridFactory->create('articleList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
 
 		$grid->addColumn('name', 'a.name', 'Název', true);
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', array('id' => 'a.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');

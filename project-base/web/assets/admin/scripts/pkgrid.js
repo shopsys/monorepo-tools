@@ -6,7 +6,7 @@
 		$('.js-pkgrid-go-to').each($.fn.SS6.pkgrid.bindGoTo);
 	}
 	
-	$.fn.SS6.pkgrid.bindGoTo = function (event) {
+	$.fn.SS6.pkgrid.bindGoTo = function () {
 		var $button = $(this).find('.js-pkgrid-go-to-button');
 		var $input = $(this).find('.js-pkgrid-go-to-input');
 		

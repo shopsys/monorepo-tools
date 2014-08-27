@@ -26,12 +26,19 @@ class ProductFormType extends AbstractType {
 	private $vats;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
-	 * @param array $vats
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availabilit
 	 */
-	public function __construct(FileUpload $fileUpload, array $vats) {
+	private $availabilities;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat[] $vats
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 */
+	public function __construct(FileUpload $fileUpload, array $vats, array $availabilities) {
 		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
+		$this->availabilities = $availabilities;
 	}
 
 	/**
@@ -114,6 +121,10 @@ class ProductFormType extends AbstractType {
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
 					)),
 				),
+			))
+			->add('availability', 'choice', array(
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', array(), null, 'id'),
 			))
 			->add('save', 'submit');
 	}

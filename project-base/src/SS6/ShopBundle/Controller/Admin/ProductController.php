@@ -3,11 +3,9 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Product\ProductFormType;
 use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
-use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -115,6 +113,8 @@ class ProductController extends Controller {
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
 		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
 		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
 
@@ -122,22 +122,17 @@ class ProductController extends Controller {
 		$form->handleRequest($request);
 		$searchData = $form->getData();
 		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($searchData);
+		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = new PKGrid(
-			'productList',
-			$this->get('request_stack'),
-			$this->get('router'),
-			$this->get('twig')
-		);
+		$grid = $gridFactory->create('productList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
-		$grid->setQueryBuilder($queryBuilder);
 
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClass('table-col table-col-10');
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
 		$grid->addColumn('name', 'p.name', 'Název', true);
-		$grid->addColumn('price', 'p.price', 'Cena', true)->setClass('text-right');
+		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
 
-		$grid->setActionColumnClass('table-col table-col-10');
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
