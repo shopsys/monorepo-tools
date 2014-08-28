@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
@@ -13,7 +14,7 @@ use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
 class VisibilityCalculationTest extends PHPUnit_Framework_TestCase {
 	
 	public function testIsVisible() {
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 
 		$transport1 = new Transport(new TransportData('name', 0, $vat, 'description', false));
 		$transport2 = new Transport(new TransportData('name', 0, $vat, 'description', false));

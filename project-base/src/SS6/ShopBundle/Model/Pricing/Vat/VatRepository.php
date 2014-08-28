@@ -33,4 +33,27 @@ class VatRepository {
 		return $this->getVatRepository()->findAll();
 	}
 
+	/**
+	 * @param int $vatId
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 */
+	public function findById($vatId) {
+		return $this->getVatRepository()->find($vatId);
+	}
+
+	/**
+	 * @param int $vatId
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @throws \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException
+	 */
+	public function getById($vatId) {
+		$vat = $this->findById($vatId);
+
+		if ($vat === null) {
+			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException($vatId);
+		}
+
+		return $vat;
+	}
+
 }

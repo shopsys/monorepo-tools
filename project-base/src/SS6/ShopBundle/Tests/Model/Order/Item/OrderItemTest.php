@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -44,8 +45,8 @@ class OrderItemTest extends PHPUnit_Framework_TestCase {
 
 		$productPrice1 = 1000;
 		$productPrice2 = 10000;
-		$productVat1 = new Vat('vat', 21);
-		$productVat2 = new Vat('vat', 21);
+		$productVat1 = new Vat(new VatData('vat', 21));
+		$productVat2 = new Vat(new VatData('vat', 21));
 		$productQuantity1 = 1;
 		$productQuantity2 = 2;
 

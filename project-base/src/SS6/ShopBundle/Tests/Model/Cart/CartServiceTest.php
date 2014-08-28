@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
@@ -19,7 +20,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$cart = new Cart($cartItems);
 
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 		
 		$cartService = new CartService();
@@ -33,7 +34,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$cart = new Cart($cartItems);
 
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 		
 		$cartService = new CartService();
@@ -47,7 +48,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$cart = new Cart($cartItems);
 
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 		
 		$cartService = new CartService();
@@ -61,7 +62,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$cart = new Cart($cartItems);
 		
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 
 		$quantity = 2;
@@ -76,7 +77,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1);
@@ -94,7 +95,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1);
@@ -111,7 +112,7 @@ class CartServiceTest extends PHPUnit_Framework_TestCase {
 		$cartService = new CartService();
 
 		$price = 100;
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price, $vat));
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\PKGrid\ActionColumn;
 use SS6\ShopBundle\Model\PKGrid\GridFactory;
 use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 
-class ParameterGridFactory {
+class VatGridFactory {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -34,16 +34,18 @@ class ParameterGridFactory {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('p')
-			->from(Parameter::class, 'p');
+			->select('v')
+			->from(Vat::class, 'v');
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
-		$grid = $this->gridFactory->create('parameterList', $dataSource);
+		$grid = $this->gridFactory->create('vatList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'p.name', 'Název', true);
+		$grid->addColumn('name', 'v.name', 'Název', true);
+		$grid->addColumn('percent', 'v.percent', 'Procent', true);
+		$grid->addColumn('coefficient', 'v.percent', 'Koeficient', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_parameter_delete', array('id' => 'p.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tento parametr?');
+		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_vat_delete', array('id' => 'v.id'))
+			->setConfirmMessage('Opravdu chcete odstranit toto DPH?');
 
 		return $grid;
 	}

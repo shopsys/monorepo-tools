@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -44,8 +45,8 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 			$postcode
 		);
 
-		$vat1 = new Vat('vat', 21);
-		$vat2 = new Vat('vat', 21);
+		$vat1 = new Vat(new VatData('vat', 21));
+		$vat2 = new Vat(new VatData('vat', 21));
 		$product1 = new Product(new ProductData('ProductName1', null, null, null, null, 1000, $vat1));
 		$product2 = new Product(new ProductData('ProductName2', null, null, null, null, 10000, $vat2));
 

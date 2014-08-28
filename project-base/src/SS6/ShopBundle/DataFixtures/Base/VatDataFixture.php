@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class VatDataFixture extends AbstractFixture {
 
@@ -16,15 +17,25 @@ class VatDataFixture extends AbstractFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$this->createVat($manager, self::VAT_ZERO, 'Nulová sazba', '0');
-		$this->createVat($manager, self::VAT_LOW, 'Nižší sazba', '15');
-		$this->createVat($manager, self::VAT_HIGH, 'Vyšší sazba', '21');
+		$vatData = new VatData();
+
+		$vatData->setName('Nulová sazba');
+		$vatData->setPercent('0');
+		$this->createVat($manager, self::VAT_ZERO, $vatData);
+
+		$vatData->setName('Nižší sazba');
+		$vatData->setPercent('15');
+		$this->createVat($manager, self::VAT_LOW, $vatData);
+
+		$vatData->setName('Vyšší sazba');
+		$vatData->setPercent('21');
+		$this->createVat($manager, self::VAT_HIGH, $vatData);
 
 		$manager->flush();
 	}
 
-	private function createVat(ObjectManager $manager, $referenceName, $name, $percent) {
-		$vat = new Vat($name, $percent);
+	private function createVat(ObjectManager $manager, $referenceName, VatData $vatData) {
+		$vat = new Vat($vatData);
 		$manager->persist($vat);
 		$this->addReference($referenceName, $vat);
 	}

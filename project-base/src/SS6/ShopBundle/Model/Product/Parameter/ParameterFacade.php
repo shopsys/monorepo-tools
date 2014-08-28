@@ -17,7 +17,7 @@ class ParameterFacade {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
 	 */
-	private $availabiityRepository;
+	private $parameterRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterService
@@ -26,16 +26,16 @@ class ParameterFacade {
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $availabiityRepository
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterService $parameterService
 	 */
 	public function __construct(
 		EntityManager $em,
-		ParameterRepository $availabiityRepository,
+		ParameterRepository $parameterRepository,
 		ParameterService $parameterService
 	) {
 		$this->em = $em;
-		$this->availabiityRepository = $availabiityRepository;
+		$this->parameterRepository = $parameterRepository;
 		$this->parameterService = $parameterService;
 	}
 
@@ -44,7 +44,7 @@ class ParameterFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\
 	 */
 	public function getById($parameterId) {
-		return $this->availabiityRepository->getById($parameterId);
+		return $this->parameterRepository->getById($parameterId);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class ParameterFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	public function edit($parameterId, ParameterData $parameterData) {
-		$parameter = $this->availabiityRepository->getById($parameterId);
+		$parameter = $this->parameterRepository->getById($parameterId);
 		$this->parameterService->edit($parameter, $parameterData);
 		$this->em->flush();
 
@@ -76,7 +76,7 @@ class ParameterFacade {
 	 * @param int $parameterId
 	 */
 	public function deleteById($parameterId) {
-		$parameter = $this->availabiityRepository->getById($parameterId);
+		$parameter = $this->parameterRepository->getById($parameterId);
 		
 		$this->em->remove($parameter);
 		$this->em->flush();
