@@ -17,7 +17,7 @@ class AvailabilityFacade {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository
 	 */
-	private $availabiityRepository;
+	private $availabilityRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityService
@@ -26,16 +26,16 @@ class AvailabilityFacade {
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository $availabiityRepository
+	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository $availabilityRepository
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityService $availabilityService
 	 */
 	public function __construct(
 		EntityManager $em,
-		AvailabilityRepository $availabiityRepository,
+		AvailabilityRepository $availabilityRepository,
 		AvailabilityService $availabilityService
 	) {
 		$this->em = $em;
-		$this->availabiityRepository = $availabiityRepository;
+		$this->availabilityRepository = $availabilityRepository;
 		$this->availabilityService = $availabilityService;
 	}
 
@@ -44,7 +44,7 @@ class AvailabilityFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Availability\
 	 */
 	public function getById($availabilityId) {
-		return $this->availabiityRepository->getById($availabilityId);
+		return $this->availabilityRepository->getById($availabilityId);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class AvailabilityFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function edit($availabilityId, AvailabilityData $availabilityData) {
-		$availability = $this->availabiityRepository->getById($availabilityId);
+		$availability = $this->availabilityRepository->getById($availabilityId);
 		$this->availabilityService->edit($availability, $availabilityData);
 		$this->em->flush();
 
@@ -76,7 +76,7 @@ class AvailabilityFacade {
 	 * @param int $availabilityId
 	 */
 	public function deleteById($availabilityId) {
-		$availability = $this->availabiityRepository->getById($availabilityId);
+		$availability = $this->availabilityRepository->getById($availabilityId);
 		
 		$this->em->remove($availability);
 		$this->em->flush();
