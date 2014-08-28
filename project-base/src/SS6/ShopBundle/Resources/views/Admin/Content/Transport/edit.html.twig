@@ -7,7 +7,7 @@
 	{{ form_row(form.id, { label: 'ID'}) }}
 {% endblock %}
 
-{% block payment_base_prices %}
+{% block transport_base_prices %}
 	<div class="form-line form-line--size-2">
 		<label class="form-line__label">Základní cena bez DPH:</label>
 		<input type="text" value="{{ transportDetail.price.basePriceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
