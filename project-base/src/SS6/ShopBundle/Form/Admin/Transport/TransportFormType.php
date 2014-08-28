@@ -20,13 +20,13 @@ class TransportFormType extends AbstractType {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat[]
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat[] $vats
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 */
 	public function __construct(FileUpload $fileUpload, array $vats) {
 		$this->fileUpload = $fileUpload;

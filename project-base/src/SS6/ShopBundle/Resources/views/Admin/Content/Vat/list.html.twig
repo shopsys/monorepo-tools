@@ -1,0 +1,12 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Sazby DPH{% endblock %}
+{% block h1 %}Sazby DPH{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-5">
+			{{ gridView.render('@SS6Shop/Admin/Content/Vat/listGrid.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +29,7 @@ class Vat {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 * @ORM\Column(type="decimal", precision=20, scale=4)
 	 */
 	private $percent;
 	
@@ -37,9 +37,9 @@ class Vat {
 	 * @param string $name
 	 * @param string $percent
 	 */
-	public function __construct($name, $percent) {
-		$this->name = $name;
-		$this->percent = $percent;
+	public function __construct(VatData $vatData) {
+		$this->name = $vatData->getName();
+		$this->percent = $vatData->getPercent();
 	}
 
 	/**
@@ -69,6 +69,11 @@ class Vat {
 	public function getCoefficient() {
 		$ratio = $this->percent / (100 + $this->percent);
 		return round($ratio, 4);
+	}
+
+	public function edit(VatData $vatData) {
+		$this->name = $vatData->getName();
+		$this->percent = $vatData->getPercent();
 	}
 
 }

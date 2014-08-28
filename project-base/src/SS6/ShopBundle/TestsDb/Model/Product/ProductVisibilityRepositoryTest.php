@@ -4,7 +4,8 @@ namespace SS6\ShopBundle\TestsDb\Model\Product;
 
 use DateTime;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
@@ -14,7 +15,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		
 		$hidden = true;
 
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, null, null, null, $hidden));
 
 		$em->persist($vat);
@@ -40,7 +41,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingFrom = new DateTime('now');
 		$sellingFrom->modify('+1 day');
 
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, $sellingFrom, null, null, $hidden));
 
 		$em->persist($vat);
@@ -66,7 +67,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('-1 day');
 
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, null, $sellingTo, null, $hidden));
 
 		$em->persist($vat);
@@ -94,7 +95,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('+1 day');
 
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, $sellingFrom, $sellingTo, null, $hidden));
 
 		$em->persist($vat);

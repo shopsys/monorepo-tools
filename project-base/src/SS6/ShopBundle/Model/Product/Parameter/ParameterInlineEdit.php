@@ -52,7 +52,7 @@ class ParameterInlineEdit implements GridInlineEditInterface {
 		$this->parameterGridFactory = $parameterGridFactory;
 
 		$this->serviceName = 'ss6.shop.product.parameter.parameter_inline_edit';
-		$this->queryId = 'a.id';
+		$this->queryId = 'p.id';
 	}
 
 	/**

@@ -5,7 +5,8 @@ namespace SS6\ShopBundle\Tests\Model\Pricing;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
@@ -40,7 +41,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 	) {
 		$priceCalculation = new PriceCalculation();
 
-		$vat = new Vat('vat', $vatPercent);
+		$vat = new Vat(new VatData('vat', $vatPercent));
 
 		$price = $priceCalculation->calculatePrice($inputPrice, $inputPriceType, $vat);
 

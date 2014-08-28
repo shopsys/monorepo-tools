@@ -6,7 +6,8 @@ use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
@@ -35,7 +36,7 @@ class InputPriceRepositoryTest extends DatabaseTestCase {
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 
 		$productData = new ProductData();
@@ -93,7 +94,7 @@ class InputPriceRepositoryTest extends DatabaseTestCase {
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
-		$vat = new Vat('vat', 21);
+		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 
 		$productData = new ProductData();

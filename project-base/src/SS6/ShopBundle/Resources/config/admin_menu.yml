@@ -76,6 +76,9 @@
         - label: 'Editace platby'
           route: admin_payment_edit
           visible: false
+          
+    - label: 'Sazby DPH'
+      route: admin_vat_list
 
     - label: 'Superadmin'
       route: admin_superadmin_index

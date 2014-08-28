@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use DateTime;
 
@@ -39,7 +39,7 @@ class ProductData {
 	private $price;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat|null
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
 	 */
 	private $vat;
 
@@ -81,7 +81,7 @@ class ProductData {
 	 * @param string|null $ean
 	 * @param string|null $description
 	 * @param string|null $price
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat|null $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
@@ -162,7 +162,7 @@ class ProductData {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
 	 */
 	public function getVat() {
 		return $this->vat;
@@ -246,7 +246,7 @@ class ProductData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat|null $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 */
 	public function setVat(Vat $vat = null) {
 		$this->vat = $vat;

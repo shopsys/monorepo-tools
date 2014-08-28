@@ -1,0 +1,20 @@
+{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
+
+{% block pkgrid_value_cell_id_percent %}
+	{{ value }}%
+{% endblock %}
+
+{% block pkgrid_value_cell_id_coefficient %}
+	{# @TODO Hotfix - get coefficient from entity #}
+	{% set coefficient = value / (100 + value) %}
+	{{ coefficient|round(4) }}
+{% endblock %}
+
+{% block pkgrid_no_data %}
+	Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit.
+{% endblock %}
+
+{% block pkgrid_pager_totalcount %}
+	{% set entityName = 'sazby DPH' %}
+	{{ parent() }}
+{% endblock %}

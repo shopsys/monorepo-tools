@@ -38,9 +38,9 @@ class Transport implements EntityFileUploadInterface {
 	private $price;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat")
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
 	 */
 	private $vat;
 	
@@ -167,7 +167,7 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getVat() {
 		return $this->vat;
