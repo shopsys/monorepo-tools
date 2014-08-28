@@ -49,7 +49,7 @@ class VatFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\VatData
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function create(VatData $vatData) {
 		$vat = $this->vatService->create($vatData);

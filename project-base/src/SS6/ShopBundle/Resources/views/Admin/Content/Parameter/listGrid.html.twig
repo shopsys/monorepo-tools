@@ -8,3 +8,8 @@
 	{% set entityName = 'parametry' %}
 	{{ parent() }}
 {% endblock %}
+
+{% block pkgrid_inline_edit_add_button %}
+	{% set addEntity = 'Vytvořit parametr' %}
+	{{ parent() }}
+{% endblock %}

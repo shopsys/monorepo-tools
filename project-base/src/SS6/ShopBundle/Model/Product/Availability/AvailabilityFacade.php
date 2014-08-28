@@ -49,7 +49,7 @@ class AvailabilityFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-	 * @return \SS6\ShopBundle\Model\Product\Availability\AvailabilityData
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function create(AvailabilityData $availabilityData) {
 		$availability = $this->availabilityService->create($availabilityData);

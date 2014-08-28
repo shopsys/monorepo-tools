@@ -44,13 +44,13 @@ class InlineEditService {
 	/**
 	 * @param string $serviceName
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param type $rowid
-	 * @return string
+	 * @param mixed $rowid
+	 * @return mixed
 	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
 	 */
 	public function saveFormData($serviceName, Request $request, $rowid) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
-		$gridInlineEdit->saveForm($request, $rowid);
+		return $gridInlineEdit->saveForm($request, $rowid);
 	}
 
 	/**

@@ -37,7 +37,7 @@ class PKGridController extends Controller {
 		$rowId = $request->get('rowId');
 
 		try {
-			$inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+			$rowId = $inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
 			$responseData['success'] = true;
 			$responseData['rowHtml'] = $inlineEditService->getRenderedRowHtml(
 				json_decode($request->get('themeJson'), true),

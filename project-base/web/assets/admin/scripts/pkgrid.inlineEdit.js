@@ -20,6 +20,12 @@
 			return false;
 		});
 		
+		$grid.on('click', '.js-inline-edit-add', function() {
+			$grid.find('.js-inline-edit-no-data').remove();
+			$grid.find('.js-inline-edit-data-container').removeClass('hidden');
+			SS6.pkgrid.inlineEdit.addNewRow($grid);
+		});
+		
 		$grid.on('click', '.js-inline-edit-cancel', function() {
 			var $formRow = $(this).closest('.js-pkgrid-editing-row');
 			if (confirm('Opravdu chcete zahodit všechny změny?')) {
@@ -34,8 +40,7 @@
 		});
 		
 		$grid.on('keyup', '.js-pkgrid-editing-row input', function(event) {
-			// enter
-			if (event.keyCode == 13) {
+			if (event.keyCode == 13) { // enter
 				SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
 			}
 			return false;
@@ -46,17 +51,21 @@
 	SS6.pkgrid.inlineEdit.saveRow = function ($formRow, $grid) {
 		var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
 		var $saving = $formRow.find('.js-inline-edit-saving').show();
-		var $originalRow = $formRow.data('$originalRow');
-		var data = $('<form>')
+		var $virtualForm = $('<form>')
 				.append($formRow.clone())
-				.append($('<input type="hidden" name="rowId" />').val($originalRow.data('inline-edit-row-id')))
 				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')))
 				.append($('<input type="hidden "name="themeJson" />').val($grid.data('inline-edit-theme-json')))
-			.serialize();
+
+		var $originalRow = $formRow.data('$originalRow');
+		if ($originalRow) {
+			$virtualForm.append($('<input type="hidden" name="rowId" />').val($originalRow.data('inline-edit-row-id')))
+			$originalRow.data('inline-edit-row-id');
+		}
+
 		$.ajax({
 			url: $grid.data('inline-edit-url-save-form'),
 			type: 'POST',
-			data: data,
+			data: $virtualForm.serialize(),
 			dataType: 'json',
 			success: function (saveResult) {
 				if (saveResult.success) {
@@ -88,10 +97,29 @@
 		});
 	}
 	
+	SS6.pkgrid.inlineEdit.addNewRow = function ($grid) {
+		$.ajax({
+			url: $grid.data('inline-edit-url-get-form'),
+			type: 'POST',
+			data: {
+				serviceName: $grid.data('inline-edit-service-name')
+			},
+			dataType: 'json',
+			success: function (formData) {
+				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
+				$formRow.find('.js-inline-edit-saving').hide();
+				$grid.find('.js-inline-edit-rows').prepend($formRow);
+			}
+		});
+	}
+	
 	SS6.pkgrid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
-		$formRow.replaceWith($originalRow).remove();
-		SS6.pkgrid.inlineEdit.enableRow($originalRow);
+		if ($originalRow) {
+			$formRow.remove();
+			SS6.pkgrid.inlineEdit.enableRow($originalRow);
+		}
+		$formRow.remove();
 	}
 	
 	SS6.pkgrid.inlineEdit.disableRow = function ($row) {

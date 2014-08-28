@@ -60,11 +60,13 @@ class ParameterInlineEdit implements GridInlineEditInterface {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function getForm($parameterId) {
-		$parameterId = (int)$parameterId;
-		$parameter = $this->parameterFacade->getById($parameterId);
-		
 		$parameterData = new ParameterData();
-		$parameterData->setFromEntity($parameter);
+
+		if ($parameterId !== null) {
+			$parameterId = (int)$parameterId;
+			$parameter = $this->parameterFacade->getById($parameterId);
+			$parameterData->setFromEntity($parameter);
+		}
 
 		return $this->formFactory->create(new ParameterFormType(), $parameterData);
 	}
@@ -72,18 +74,14 @@ class ParameterInlineEdit implements GridInlineEditInterface {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $parameterId
+	 * @return int
 	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $parameterId) {
-		$parameterId = (int)$parameterId;
-
 		$form = $this->getForm($parameterId);
 		$form->handleRequest($request);
 		
-		if ($form->isValid()) {
-			$parameterData = $form->getData();
-			$this->parameterFacade->edit($parameterId, $parameterData);
-		} else {
+		if (!$form->isValid()) {
 			$formErrors = [];
 			foreach ($form->getErrors(true) as $error) {
 				/* @var $error \Symfony\Component\Form\FormError */
@@ -91,6 +89,17 @@ class ParameterInlineEdit implements GridInlineEditInterface {
 			}
 			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
+		
+		$parameterData = $form->getData();
+		if ($parameterId !== null) {
+			$parameterId = (int)$parameterId;
+			$this->parameterFacade->edit($parameterId, $parameterData);
+		} else {
+			$parameter = $this->parameterFacade->create($parameterData);
+			$parameterId = $parameter->getId();
+		}
+
+		return $parameterId;
 	}
 
 	/**
