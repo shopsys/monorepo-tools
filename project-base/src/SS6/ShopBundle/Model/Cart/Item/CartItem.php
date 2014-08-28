@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace SS6\ShopBundle\Model\Cart\Item;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
@@ -139,7 +139,7 @@ class CartItem {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem $cartItem
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
 	 * @return bool
 	 */
 	public function isSimilarItemAs(CartItem $cartItem) {

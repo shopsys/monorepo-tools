@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
-use SS6\ShopBundle\Model\Cart\CartItemRepository;
+use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
@@ -14,7 +14,7 @@ class CartSingletonFactory {
 	private $carts = array();
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartItemRepository $cartItemRepository
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
 	 */
 	private $cartItemRepository;
 
@@ -24,7 +24,7 @@ class CartSingletonFactory {
 	private $cartWatcherFacade;
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItemRepository $cartItemRepository
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
 	 * @param \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
 	 */
 	public function __construct(CartItemRepository $cartItemRepository, CartWatcherFacade $cartWatcherFacade) {

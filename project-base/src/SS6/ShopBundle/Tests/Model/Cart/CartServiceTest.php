@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Tests\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Cart\CartService;
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;

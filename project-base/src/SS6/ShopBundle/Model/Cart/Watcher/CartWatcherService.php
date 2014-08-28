@@ -24,7 +24,7 @@ class CartWatcherService {
 	 */
 	public function showErrorOnModifiedItems(Cart $cart) {
 		foreach ($this->getModifiedPriceItems($cart) as $item) {
-			/* @var $item \SS6\ShopBundle\Model\Cart\CartItem */
+			/* @var $item \SS6\ShopBundle\Model\Cart\Item\CartItem */
 			$this->flashMessageBag->addInfo('Byla změněna cena zboží ' . $item->getName() .
 				', které máte v košíku. Prosím, překontrolujte si objednávku.');
 			$item->setWatchedPrice($item->getPrice());
@@ -33,7 +33,7 @@ class CartWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem[]
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	private function getModifiedPriceItems(Cart $cart) {
 		$modifiedItems = array();
@@ -47,7 +47,7 @@ class CartWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem[]
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	public function getNotVisibleItems(Cart $cart) {
 		$notVisibleItems = array();

@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\TestsDb\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -19,7 +19,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -58,7 +58,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -132,7 +132,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));

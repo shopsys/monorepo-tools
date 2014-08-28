@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
+
 class Cart {
 	
 	/**
@@ -15,12 +17,12 @@ class Cart {
 	private $quantity;
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartItem[]
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	private $cartItems;
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem[] $cartItems
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
 	 */
 	public function __construct(array $cartItems) {
 		$this->cartItems = $cartItems;
@@ -28,7 +30,7 @@ class Cart {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem $item
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $item
 	 */
 	public function addItem(CartItem $item) {
 		$this->cartItems[] = $item;
@@ -65,7 +67,7 @@ class Cart {
 	}
 	
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem[]
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	public function getItems() {
 		return $this->cartItems;
@@ -100,8 +102,8 @@ class Cart {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem $cartItem
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem|null
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem|null
 	 */
 	public function findSimilarCartItemByCartItem(CartItem $cartItem) {
 		foreach ($this->getItems() as $similarCartItem) {

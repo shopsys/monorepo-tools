@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -49,7 +50,7 @@ class CartService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param int $cartItemId
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem
 	 */
 	public function getCartItemById(Cart $cart, $cartItemId) {
 		foreach ($cart->getItems() as $cartItem) {

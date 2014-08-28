@@ -103,7 +103,7 @@ class OrderFacade {
 	private function fillOrderItems(Order $order, Cart $cart) {
 		$cartItems = $cart->getItems();
 		foreach ($cartItems as $cartItem) {
-			/* @var $cartItem \SS6\ShopBundle\Model\Cart\CartItem */
+			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
 			$orderItem = new OrderProduct($order,
 				$cartItem->getProduct()->getName(),
 				$cartItem->getProduct()->getPrice(),

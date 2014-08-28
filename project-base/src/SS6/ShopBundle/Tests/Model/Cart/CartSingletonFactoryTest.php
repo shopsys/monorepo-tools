@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Tests\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Cart\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
+use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartSingletonFactoryTest extends PHPUnit_Framework_TestCase {
 	
