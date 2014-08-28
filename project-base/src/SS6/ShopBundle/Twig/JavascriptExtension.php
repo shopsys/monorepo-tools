@@ -136,6 +136,11 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return bool
 	 */
 	private function processJavascriptByMask($path, $filenameMask) {
+		if ($filenameMask !== '' && strpos($filenameMask, '*') === false) {
+			// non existing file still imports URL to generate 404
+			return false;
+		}
+
 		$filesystemPath = $this->webPath . '/' . $path;
 
 		if (is_dir($filesystemPath)) {
