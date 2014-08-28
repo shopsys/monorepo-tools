@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\TestsDb\Model\Product;
 
 use DateTime;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 

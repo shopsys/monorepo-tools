@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+
 class PriceCalculation {
 
 	/**
@@ -15,14 +17,14 @@ class PriceCalculation {
 	private $inputPriceType;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	private $vat;
 
 	/**
 	 * @param string $inputPrice
 	 * @param int $inputPriceType
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice($inputPrice, $inputPriceType, Vat $vat) {

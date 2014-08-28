@@ -21,7 +21,7 @@ class ProductFormType extends AbstractType {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat[]
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
@@ -32,7 +32,7 @@ class ProductFormType extends AbstractType {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat[] $vats
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 */
 	public function __construct(FileUpload $fileUpload, array $vats, array $availabilities) {

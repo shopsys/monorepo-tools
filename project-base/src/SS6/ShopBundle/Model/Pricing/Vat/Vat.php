@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\Mapping as ORM;
 

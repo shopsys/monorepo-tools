@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class VatDataFixture extends AbstractFixture {
 

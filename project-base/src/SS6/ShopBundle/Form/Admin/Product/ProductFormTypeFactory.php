@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Pricing\VatRepository;
+use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 
 class ProductFormTypeFactory {
@@ -14,7 +14,7 @@ class ProductFormTypeFactory {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\VatRepository
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatRepository
 	 */
 	private $vatRepository;
 
@@ -25,7 +25,7 @@ class ProductFormTypeFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
-	 * @param \SS6\ShopBundle\Model\Pricing\VatRepository $vatRepository
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository $availabilityRepository
 	 */
 	public function __construct(

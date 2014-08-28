@@ -1,8 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class VatRepository {
 	
@@ -26,7 +27,7 @@ class VatRepository {
 	}
 	
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function findAll() {
 		return $this->getVatRepository()->findAll();

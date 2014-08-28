@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Model\Pricing;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 

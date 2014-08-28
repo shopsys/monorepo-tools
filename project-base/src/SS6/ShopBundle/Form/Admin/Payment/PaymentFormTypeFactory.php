@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Payment;
 
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Pricing\VatRepository;
+use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentFormTypeFactory {

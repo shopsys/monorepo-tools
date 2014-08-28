@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Model\Product;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\PriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
