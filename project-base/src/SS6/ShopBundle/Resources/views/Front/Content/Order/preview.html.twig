@@ -1,0 +1,71 @@
+<div class="col-sm-12 col-md-4">
+	<div class="info-box">
+		<h2 class="mt-0">Přehled zboží v košíku</h2>
+		<table class="basket-preview">
+			<tbody>
+
+				{% for cartItemKey, cartItem in orderPreview.cartItems %}
+					{% set cartItemPrice = orderPreview.cartItemsPrices[cartItemKey] %}
+					<tr class="basket-preview__row">
+						<td class="basket-preview__cell">
+							<strong>{{ cartItem.quantity }} x</strong> {{ cartItem.name }}
+						</td>
+						<td class="basket-preview__cell basket-preview__cell--price">
+							{{ cartItemPrice.totalPriceWithVat|price }}
+						</td>
+					</tr>
+				{% endfor %}
+
+				{% if orderPreview.transport is not empty %}
+					<tr class="basket-preview__row">
+						<td class="basket-preview__cell">
+							Způsob dopravy: {{ orderPreview.transport.name }}
+						</td>
+						<td class="basket-preview__cell basket-preview__cell--price">
+							{{ orderPreview.transportPrice.basePriceWithVat|priceText }}
+						</td>
+					</tr>
+				{% endif %}
+
+				{% if orderPreview.payment is not empty %}
+					<tr class="basket-preview__row">
+						<td class="basket-preview__cell">
+							Způsob platby: {{ orderPreview.payment.name }}
+						</td>
+						<td class="basket-preview__cell basket-preview__cell--price">
+							{{ orderPreview.paymentPrice.basePriceWithVat|priceText }}
+						</td>
+					</tr>
+				{% endif %}
+
+				<tr class="basket-preview__row basket-preview__row--total basket-preview__row--important">
+					<td class="basket-preview__cell">
+						Cena celkem s DPH:
+					</td>
+					<td class="basket-preview__cell basket-preview__cell--price">
+						{{ orderPreview.totalPriceWithVat|price }}
+					</td>
+				</tr>
+
+				<tr class="basket-preview__row basket-preview__row--total">
+					<td class="basket-preview__cell">
+						Cena celkem bez DPH:
+					</td>
+					<td class="basket-preview__cell basket-preview__cell--price">
+						{{ orderPreview.totalPriceWithoutVat|price }}
+					</td>
+				</tr>
+
+				<tr class="basket-preview__row basket-preview__row--total">
+					<td class="basket-preview__cell">
+						Celková výše DPH:
+					</td>
+					<td class="basket-preview__cell basket-preview__cell--price">
+						{{ orderPreview.totalPriceVatAmount|price }}
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>

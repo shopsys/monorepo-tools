@@ -178,8 +178,8 @@ services:
     parent: craue.form.flow
     scope: request
 
-  ss6.shop.order.review.order_review_calculation:
-    class: SS6\ShopBundle\Model\Order\Review\OrderReviewCalculation
+  ss6.shop.order.preview.order_preview_calculation:
+    class: SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
 
   ss6.shop.order.order_flow_facade:
     class: SS6\ShopBundle\Model\Order\OrderFlowFacade

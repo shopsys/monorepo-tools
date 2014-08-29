@@ -26,8 +26,8 @@ class OrderController extends Controller {
 		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-		$orderReviewCalculation = $this->get('ss6.shop.order.review.order_review_calculation');
-		/* @var $orderReviewCalculation \SS6\ShopBundle\Model\Order\Review\OrderReviewCalculation */
+		$orderPreviewCalculation = $this->get('ss6.shop.order.preview.order_preview_calculation');
+		/* @var $orderPreviewCalculation \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation */
 		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
 		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
@@ -107,7 +107,7 @@ class OrderController extends Controller {
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', array(
 			'form' => $form->createView(),
 			'flow' => $flow,
-			'orderReview' => $orderReviewCalculation->calculateReview($cart, $transport, $payment),
+			'orderPreview' => $orderPreviewCalculation->calculatePreview($cart, $transport, $payment),
 			'payments' => $payments,
 			'transportsPrices' => $transportPriceCalculation->calculatePricesById($transports),
 			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments),

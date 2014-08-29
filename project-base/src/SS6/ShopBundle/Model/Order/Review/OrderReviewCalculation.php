@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Review;
+namespace SS6\ShopBundle\Model\Order\Preview;
 
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Cart\Item\PriceCalculation as CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
 use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
 
-class OrderReviewCalculation {
+class OrderPreviewCalculation {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Item\PriceCalculation
@@ -44,12 +44,12 @@ class OrderReviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Review\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Order\Preview\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
-	 * @return \SS6\ShopBundle\Model\Order\Review\OrderReview
+	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
-	public function calculateReview(
+	public function calculatePreview(
 		Cart $cart,
 		Transport $transport = null,
 		Payment $payment = null
@@ -75,7 +75,7 @@ class OrderReviewCalculation {
 			$paymentPrice
 		);
 
-		return new OrderReview(
+		return new OrderPreview(
 			$cartItems,
 			$cartItemsPrices,
 			$totalPrice->getBasePriceWithoutVat(),

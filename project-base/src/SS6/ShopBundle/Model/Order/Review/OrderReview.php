@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Review;
+namespace SS6\ShopBundle\Model\Order\Preview;
 
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 
-class OrderReview {
+class OrderPreview {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[]
