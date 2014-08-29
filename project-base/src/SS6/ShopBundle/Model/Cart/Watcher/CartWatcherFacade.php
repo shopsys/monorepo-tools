@@ -28,9 +28,12 @@ class CartWatcherFacade {
 	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartWatcherService
-	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
-	public function __construct(Bag $flashMessageBag, EntityManager $em, CartWatcherService $cartWatcherService) {
+	public function __construct(
+		Bag $flashMessageBag,
+		EntityManager $em,
+		CartWatcherService $cartWatcherService
+	) {
 		$this->flashMessageBag = $flashMessageBag;
 		$this->em = $em;
 		$this->cartWatcherService = $cartWatcherService;

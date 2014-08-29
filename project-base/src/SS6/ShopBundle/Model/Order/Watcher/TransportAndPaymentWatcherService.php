@@ -5,7 +5,9 @@ namespace SS6\ShopBundle\Model\Order\Watcher;
 use SS6\ShopBundle\Form\Front\Order\OrderFormData;
 use SS6\ShopBundle\Model\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class TransportAndPaymentWatcherService {
@@ -20,16 +22,36 @@ class TransportAndPaymentWatcherService {
 	private $flashMessageBag;
 
 	/**
-	 * @var Symfony\Component\HttpFoundation\Session\Session
+	 * @var \Symfony\Component\HttpFoundation\Session\Session
 	 */
 	private $session;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @var \SS6\ShopBundle\Model\Payment\PriceCalculation
 	 */
-	public function __construct(Bag $flashMessageBag, Session $session) {
+	private $paymentPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\PriceCalculation
+	 */
+	private $transportPriceCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
+	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
+	 */
+	public function __construct(
+		Bag $flashMessageBag,
+		Session $session,
+		PaymentPriceCalculation $paymentPriceCalculation,
+		TransportPriceCalculation $transportPriceCalculation
+	) {
 		$this->flashMessageBag = $flashMessageBag;
 		$this->session = $session;
+		$this->paymentPriceCalculation = $paymentPriceCalculation;
+		$this->transportPriceCalculation = $transportPriceCalculation;
 	}
 
 	/**
@@ -60,8 +82,10 @@ class TransportAndPaymentWatcherService {
 		$transportPrices = $this->getRememberedTransportPrices();
 
 		if (array_key_exists($transport->getId(), $transportPrices)) {
-			$transportPrice = $transportPrices[$transport->getId()];
-			if ($transportPrice !== $transport->getPrice()) {
+			$rememberedTransportPriceValue = $transportPrices[$transport->getId()];
+			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+
+			if ($rememberedTransportPriceValue != $transportPrice->getBasePriceWithVat()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena dopravy ' . $transport->getName() .
 					'. Prosím, překontrolujte si objednávku.';
 				$this->flashMessageBag->addInfo($message);
@@ -76,8 +100,10 @@ class TransportAndPaymentWatcherService {
 		$paymentPrices = $this->getRememberedPaymentPrices();
 
 		if (array_key_exists($payment->getId(), $paymentPrices)) {
-			$paymentPrice = $paymentPrices[$payment->getId()];
-			if ($paymentPrice !== $payment->getPrice()) {
+			$rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+
+			if ($rememberedPaymentPriceValue !== $paymentPrice->getBasePriceWithVat()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena platby ' . $payment->getName() .
 					'. Prosím, překontrolujte si objednávku.';
 				$this->flashMessageBag->addInfo($message);
@@ -90,25 +116,27 @@ class TransportAndPaymentWatcherService {
 	 * @return array
 	 */
 	private function getTransportPrices($transports) {
-		$transportPriceChoices = array();
+		$transportPriceValues = array();
 		foreach ($transports as $transport) {
-			$transportPriceChoices[$transport->getId()] = $transport->getPrice();
+			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+			$transportPriceValues[$transport->getId()] = $transportPrice->getBasePriceWithVat();
 		}
 
-		return $transportPriceChoices;
+		return $transportPriceValues;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $transports
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @return array
 	 */
-	private function getPaymentPrices($transports) {
-		$transportPriceChoices = array();
-		foreach ($transports as $transport) {
-			$transportPriceChoices[$transport->getId()] = $transport->getPrice();
+	private function getPaymentPrices($payments) {
+		$paymentPriceValues = array();
+		foreach ($payments as $payment) {
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+			$paymentPriceValues[$payment->getId()] = $paymentPrice->getBasePriceWithVat();
 		}
 
-		return $transportPriceChoices;
+		return $paymentPriceValues;
 	}
 
 	/**
