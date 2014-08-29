@@ -18,30 +18,26 @@ class OrderController extends Controller {
 	public function indexAction() {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-
 		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-
 		$cartFacade = $this->get('ss6.shop.cart.cart_facade');
 		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
-
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-
 		$orderReviewService = $this->get('ss6.shop.order.order_review_service');
 		/* @var $orderReviewService \SS6\ShopBundle\Model\Order\Review\OrderReviewService  */
-
 		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
 		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
-
 		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
 		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
-
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
+		$transportPriceCalculation = $this->get('ss6.shop.transport.price_calculation');
+		/* @var $transportPriceCalculation \SS6\ShopBundle\Model\Transport\PriceCalculation */
+		$paymentPriceCalculation = $this->get('ss6.shop.payment.price_calculation');
+		/* @var $paymentPriceCalculation \SS6\ShopBundle\Model\Payment\PriceCalculation */
 
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
@@ -114,6 +110,8 @@ class OrderController extends Controller {
 			'flow' => $flow,
 			'orderReview' => $orderReview,
 			'payments' => $payments,
+			'transportsPrices' => $transportPriceCalculation->calculatePricesById($transports),
+			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments),
 		));
 	}
 

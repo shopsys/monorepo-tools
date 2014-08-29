@@ -56,7 +56,7 @@ class PriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[] array indices are preserved
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
 	 */
 	public function calculatePricesById(array $transports) {
 		$transportsPrices = array();
