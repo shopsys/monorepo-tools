@@ -61,7 +61,7 @@
 				<h2 class="mt-0">Výběr platby</h2>
 
 				<div class="chooser chooser--smaller">
-					{{ form_errors(form.payment) }}
+					{{ form_errors(form.payment, { attr: {class: 'message-floating--on-top'} }) }}
 
 					{% for child in form.payment %}
 						{% set choice = form.payment.vars.choices[child.vars.name] %}
