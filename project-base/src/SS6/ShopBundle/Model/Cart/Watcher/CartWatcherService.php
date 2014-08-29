@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\Item\PriceCalculation;
 use SS6\ShopBundle\Model\FlashMessage\Bag;
 
 class CartWatcherService {
@@ -13,21 +14,32 @@ class CartWatcherService {
 	private $flashMessageBag;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @var \SS6\ShopBundle\Model\Cart\Item\PriceCalculation
 	 */
-	public function __construct(Bag $flashMessageBag) {
+	private $cartItemPriceCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @param \SS6\ShopBundle\Model\Cart\Item\PriceCalculation $cartItemPriceCalculation
+	 */
+	public function __construct(
+		Bag $flashMessageBag,
+		PriceCalculation $cartItemPriceCalculation
+	) {
 		$this->flashMessageBag = $flashMessageBag;
+		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
 	public function showErrorOnModifiedItems(Cart $cart) {
-		foreach ($this->getModifiedPriceItems($cart) as $item) {
-			/* @var $item \SS6\ShopBundle\Model\Cart\Item\CartItem */
-			$this->flashMessageBag->addInfo('Byla změněna cena zboží ' . $item->getName() .
+		foreach ($this->getModifiedPriceItems($cart) as $cartItem) {
+			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
+			$this->flashMessageBag->addInfo('Byla změněna cena zboží ' . $cartItem->getName() .
 				', které máte v košíku. Prosím, překontrolujte si objednávku.');
-			$item->setWatchedPrice($item->getPrice());
+			$cartItemPrice = $this->cartItemPriceCalculation->calculatePrice($cartItem);
+			$cartItem->setWatchedPrice($cartItemPrice->getUnitPriceWithVat());
 		}
 	}
 
@@ -37,9 +49,10 @@ class CartWatcherService {
 	 */
 	private function getModifiedPriceItems(Cart $cart) {
 		$modifiedItems = array();
-		foreach ($cart->getItems() as $item) {
-			if ($item->getWatchedPrice() !== $item->getPrice()) {
-				$modifiedItems[] = $item;
+		foreach ($cart->getItems() as $cartItem) {
+			$cartItemPrice = $this->cartItemPriceCalculation->calculatePrice($cartItem);
+			if ($cartItem->getWatchedPrice() != $cartItemPrice->getUnitPriceWithVat()) {
+				$modifiedItems[] = $cartItem;
 			}
 		}
 		return $modifiedItems;

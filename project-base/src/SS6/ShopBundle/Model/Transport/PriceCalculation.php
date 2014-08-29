@@ -41,4 +41,30 @@ class PriceCalculation {
 		);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[] array indices are preserved
+	 */
+	public function calculatePrices(array $transports) {
+		$transportsPrices = array();
+		foreach ($transports as $key => $transport) {
+			$transportsPrices[$key] = $this->calculatePrice($transport);
+		}
+
+		return $transportsPrices;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[] array indices are preserved
+	 */
+	public function calculatePricesById(array $transports) {
+		$transportsPrices = array();
+		foreach ($transports as $transport) {
+			$transportsPrices[$transport->getId()] = $this->calculatePrice($transport);
+		}
+
+		return $transportsPrices;
+	}
+
 }

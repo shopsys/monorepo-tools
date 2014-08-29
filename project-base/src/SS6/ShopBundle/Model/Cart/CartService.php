@@ -24,7 +24,6 @@ class CartService {
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getProduct() === $product) {
 				$cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
-				$cart->calcSummaryInfo();
 				return new AddProductResult($cartItem, false, $quantity);
 			}
 		}
@@ -44,7 +43,6 @@ class CartService {
 				$cartItem->changeQuantity($quantities[$cartItem->getId()]);
 			}
 		}
-		$cart->calcSummaryInfo();
 	}
 
 	/**
@@ -84,8 +82,6 @@ class CartService {
 				$resultingCart->addItem($newCartItem);
 			}
 		}
-
-		$resultingCart->calcSummaryInfo();
 	}
 
 }

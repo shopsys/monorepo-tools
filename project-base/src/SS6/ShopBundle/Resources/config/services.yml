@@ -77,6 +77,9 @@ services:
   ss6.shop.cart.cart_service:
     class: SS6\ShopBundle\Model\Cart\CartService
 
+  ss6.shop.cart.cart_summary_calculation:
+    class: SS6\ShopBundle\Model\Cart\CartSummaryCalculation
+
   ss6.shop.cart.cart_watcher_facade:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
     arguments:
@@ -89,6 +92,9 @@ services:
 
   ss6.shop.cart.item.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\Item\CartItemRepository
+
+  ss6.shop.cart.item.price_calculation:
+    class: SS6\ShopBundle\Model\Cart\Item\PriceCalculation
 
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier

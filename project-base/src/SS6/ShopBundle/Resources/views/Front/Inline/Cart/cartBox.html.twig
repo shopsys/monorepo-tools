@@ -5,7 +5,7 @@
 			{% if cart.itemsCount == 0 %}
 				Váš nákupní košík je prázdný
 			{% else %}
-				<strong class="cart-box__state">{{ cart.itemsCount }}</strong> položek za <strong class="cart-box__state">{{ cart.price|price }}</strong>
+				<strong class="cart-box__state">{{ cart.itemsCount }}</strong> položek za <strong class="cart-box__state">{{ cartSummary.priceWithVat|price }}</strong>
 			{% endif %}
 		</div>
 		

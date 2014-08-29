@@ -21,6 +21,10 @@ class CartController extends Controller {
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
 		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$cartItemPriceCalculation = $this->get('ss6.shop.cart.item.price_calculation');
+		/* @var $cartItemPriceCalculation \SS6\ShopBundle\Model\Cart\Item\PriceCalculation */
+		$cartSummaryCalculation = $this->get('ss6.shop.cart.cart_summary_calculation');
+		/* @var $cartSummaryCalculation \SS6\ShopBundle\Model\Cart\CartSummaryCalculation */
 
 		$cartFormData = array(
 			'quantities' => array(),
@@ -59,10 +63,16 @@ class CartController extends Controller {
 			$flashMessageText->addError('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.');
 		}
 
+		$cartItems = $cart->getItems();
+		$cartItemPrices = $cartItemPriceCalculation->calculatePrices($cartItems);
+		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
+
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
 			'backUrl' => $this->getBackUrl($request),
 			'cart' => $cart,
-			'cartItems' => $cart->getItems(),
+			'cartItems' => $cartItems,
+			'cartItemPrices' => $cartItemPrices,
+			'cartSummary' => $cartSummary,
 			'form' => $form->createView(),
 		));
 	}
@@ -84,9 +94,14 @@ class CartController extends Controller {
 	public function boxAction() {
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
+		$cartSummaryCalculation = $this->get('ss6.shop.cart.cart_summary_calculation');
+		/* @var $cartSummaryCalculation \SS6\ShopBundle\Model\Cart\CartSummaryCalculation */
+
+		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
 		
 		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', array(
 			'cart' => $cart,
+			'cartSummary' => $cartSummary,
 		));
 	}
 	

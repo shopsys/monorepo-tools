@@ -12,7 +12,7 @@ class OrderReview {
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Review\OrderReviewItem[]
 	 */
-	private $items;
+	private $orderReviewItems;
 
 	/**
 	 * @var string
@@ -25,24 +25,36 @@ class OrderReview {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function __construct(Cart $cart, Payment $payment = null, Transport $transport = null) {
-		foreach ($cart->getItems() as $item) {
+		foreach ($cart->getItems() as $cartItem) {
+			$cartItemTotalPrice = $cartItem->getProduct()->getPrice() * $cartItem->getQuantity();
+
 			$orderReviewItem = new OrderReviewItem(
-				$item->getName(),
+				$cartItem->getName(),
 				OrderReviewItem::TYPE_PRODUCT,
-				$item->getQuantity(),
-				$item->getTotalPrice()
+				$cartItem->getQuantity(),
+				$cartItemTotalPrice
 			);
-			$this->items[] = $orderReviewItem;
-			$this->totalPrice += $item->getTotalPrice();
+			$this->orderReviewItems[] = $orderReviewItem;
+			$this->totalPrice += $cartItemTotalPrice;
 		}
 
 		if ($transport !== null) {
-			$this->items[] = new OrderReviewItem($transport->getName(), OrderReviewItem::TYPE_TRANSPORT, 1, $transport->getPrice());
+			$this->orderReviewItems[] = new OrderReviewItem(
+				$transport->getName(),
+				OrderReviewItem::TYPE_TRANSPORT,
+				1,
+				$transport->getPrice()
+			);
 			$this->totalPrice += $transport->getPrice();
 		}
 
 		if ($payment !== null) {
-			$this->items[] = new OrderReviewItem($payment->getName(), OrderReviewItem::TYPE_PAYMENT, 1, $payment->getPrice());
+			$this->orderReviewItems[] = new OrderReviewItem(
+				$payment->getName(),
+				OrderReviewItem::TYPE_PAYMENT,
+				1,
+				$payment->getPrice()
+			);
 			$this->totalPrice += $payment->getPrice();
 		}
 	}
@@ -51,7 +63,7 @@ class OrderReview {
 	 * @return \SS6\ShopBundle\Model\Order\Review\OrderReviewItem[]
 	 */
 	public function getItems() {
-		return $this->items;
+		return $this->orderReviewItems;
 	}
 
 	/**

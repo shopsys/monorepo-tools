@@ -125,20 +125,6 @@ class CartItem {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getPrice() {
-		return $this->product->getPrice();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPrice() {
-		return $this->product->getPrice() * $this->quantity;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
 	 * @return bool
 	 */
