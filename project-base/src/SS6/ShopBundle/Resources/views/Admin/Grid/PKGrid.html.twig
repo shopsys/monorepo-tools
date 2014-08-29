@@ -1,17 +1,17 @@
 {% block pkgrid %}
 <div class="grid js-pkgrid" {% spaceless %}
-		{% if grid.inlineEdit %} 
+		{% if grid.inlineEdit %}
 			data-inline-edit-service-name="{{ grid.inlineEditService.serviceName }}"
 			data-inline-edit-theme-json="{{ gridView.theme|json_encode() }}"
 			data-inline-edit-url-get-form="{{ url('admin_pkgrid_getform') }}"
 			data-inline-edit-url-save-form="{{ url('admin_pkgrid_saveform') }}"
 		{% endif %}
 	{% endspaceless %}>
-		
-	{% if grid.inlineEdit %} 
+
+	{% if grid.inlineEdit %}
 		{{ gridView.renderBlock('pkgrid_inline_edit_add_button') }}
 	{% endif %}
-	
+
 	{% if grid.rows is not empty or grid.inlineEdit %}
 		<div class="js-inline-edit-data-container{% if grid.rows is empty and grid.inlineEdit %} hidden{% endif %}">
 			<div class="grid_header">
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 	{% endif %}
-	
+
 	{% if grid.rows is empty %}
 		<div class="message message-info js-inline-edit-no-data">
 			{{ gridView.renderBlock('pkgrid_no_data') }}
@@ -87,8 +87,8 @@
 	<tbody class="js-inline-edit-rows">
 		{% for row in grid.rows %}
 			{{ gridView.renderBlock(
-				'pkgrid_row', 
-				{ 
+				'pkgrid_row',
+				{
 					loopIndex: loop.index,
 					lastRow: loop.last,
 					row: row
@@ -97,8 +97,8 @@
 		{% endfor %}
 		{% if grid.inlineEdit %}
 			{{ gridView.renderBlock(
-				'pkgrid_row', 
-				{ 
+				'pkgrid_row',
+				{
 					loopIndex: 0,
 					lastRow: false,
 					row: {},
@@ -125,10 +125,10 @@
 				<span class="grid-row-actions action-icons">
 					{% if grid.inlineEdit and emptyRow %}
 						<span class="js-inline-edit-buttons">
-							<a href="#" class="table-action js-inline-edit-save">
+							<a href="#" class="table-action js-inline-edit-save action-icons__item">
 								<i class="fa fa-check" title="Uložit změny"></i>
 							</a>
-							<a href="#" class="table-action js-inline-edit-cancel">
+							<a href="#" class="table-action js-inline-edit-cancel action-icons__item">
 								<i class="fa fa-delete" title="Zahodit změny"></i>
 							</a>
 						</span>
@@ -137,7 +137,7 @@
 						</div>
 					{% else %}
 						{% if grid.inlineEdit %}
-							<a href="#" class="table-action js-inline-edit-edit">
+							<a href="#" class="table-action js-inline-edit-edit action-icons__item">
 								<i class="fa fa-pencil" title="Upravit"></i>
 							</a>
 						{% endif %}
@@ -160,7 +160,7 @@
 		{% set icon = actionColumn.type %}
 	{% endif %}
 	<a
-		class="table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
+		class="action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
 		href="{{ actionColumn.targetUrl(row) }}"
 		{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
 	><i class="fa fa-{{ icon }}"></i></a>
@@ -227,14 +227,14 @@
 			{% endif %}
 		</ul>
 
-		<div class="js-pkgrid-go-to form-inline right clear-r small">
+		<div class="js-pkgrid-go-to grid-actions__to-page clear-r small">
 			<span>Přejít na stránku:</span>
 			<input
 				type="number"
 				min="1"
 				max="{{ grid.pageCount }}"
 				value="{{ grid.page }}"
-				class="current form-control text-center js-pkgrid-go-to-input form-control--size-0 ml-half mr-half input-xs"
+				class="current form-control text-center js-pkgrid-go-to-input ml-half mr-half input-xs grid-actions__input"
 				size="2"
 			/>
 			<a class="btn btn-primary btn-xs js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
@@ -256,7 +256,7 @@
 {% endblock %}
 
 {% block pkgrid_pager %}
-	<div class="text-center clearfix mb-half box-line box-line--border">
+	<div class="text-center mb-half box-line box-line--border grid-actions">
 		{{ gridView.renderBlock('pkgrid_pager_totalcount') }}
 		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
 		{% if grid.pageCount > 1 %}
@@ -286,7 +286,7 @@
 				{% else %}
 					{% set name = key %}
 				{% endif %}
-				
+
 					{{ block('pkgrid_hidden_inputs') }}
 				{% set parameter = currentParameter %}
 				{% set name = currentName %}

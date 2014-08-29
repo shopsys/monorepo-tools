@@ -6,12 +6,14 @@
 		Tento stav má přiřazeno {{ ordersCount }} objednávek, vyberte stav, který jim má být nově nastaven:
 	</p>
 
-	{{ form_row(form.newStatus, { label: 'Nový stav', id: 'js-order-status-delete-status-select' }) }}
+	{{ form_row(form.newStatus, { label: 'Nový stav', id: 'js-order-status-delete-status-select', attr: {class: 'form-line--size-window'} }) }}
 
-	<span id="js-order-status-delete-submit-container" data-toggle="tooltip" data-placement="right" class="right">
-		{{ form_widget(form.delete, { label: 'Smazat', id: 'js-order-status-delete-submit' }) }}
-	</span>
+	<div class="mt-1">
+		<div id="js-order-status-delete-submit-container" data-toggle="tooltip" data-placement="right" class="right">
+			{{ form_widget(form.delete, { label: 'Smazat', id: 'js-order-status-delete-submit', attr: {class: 'btn-danger'} }) }}
+		</div>
 
-	<a href="" onclick="$.fn.SS6.window.close({{ windowId|json_encode }}); return false;" class="btn btn-danger left">Zpět</a>
+		<a href="" onclick="$.fn.SS6.window.close({{ windowId|json_encode }}); return false;" class="btn btn-primary left">Zpět</a>
+	</div>
 
 {{ form_end(form) }}

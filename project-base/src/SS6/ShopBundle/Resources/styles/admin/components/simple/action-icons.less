@@ -2,7 +2,7 @@
 Action icons
 ======
 This classs should be used in table for adjacent icons eg. for actions delete, edit etc.
-It makes gaps between icons.
+It makes gaps between icons. Modifier --active makes icons more visible.
 
 	<table class="table">
 		<tr>
@@ -13,15 +13,37 @@ It makes gaps between icons.
 				<span class="action-icons__item semaphore semaphore--false"></span>
 			</td>
 		</tr>
+		<tr>
+			<td>Id</td>
+			<td>Content content content content content</td>
+			<td class="action-icons--active">
+				<span class="action-icons__item semaphore semaphore--true"></span>
+				<span class="action-icons__item semaphore semaphore--false"></span>
+			</td>
+		</tr>
 	</table>
 
 */
 
 .action-icons {
+	padding: 3px;
+}
 
+.action-icons--active {
+	background: @color-3;
+
+	.border-radius(@border-radius-large);
 }
 
 .action-icons__item {
 	display: inline-block;
 	margin: 0 8px 0 0;
+}
+
+.action-icons--active .action-icons__item {
+	color: @color-f;
+
+	&:hover {
+		color: @color-f;
+	}
 }

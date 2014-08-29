@@ -74,6 +74,33 @@ Form field constructions, with many variants and uses
 			<input class="form-control" type="text">
 		</span>
 	</div>
+
+	<div class="form-line form-line--size-window">
+		<label class="form-line__label">
+			Size for window
+		</label>
+		<span class="form-line__field">
+			<input class="form-control" type="text">
+		</span>
+	</div>
+
+	<div class="form-line form-line--between">
+		<span class="form-line__label">
+			2 Radios
+		</span>
+		<div class="form-line__field">
+			<div class="radio">
+				<label>
+					<input type="radio"> Ano
+				</labek>
+			</div>
+			<div class="radio">
+				<label>
+					<input type="radio"> Ne
+				</labek>
+			</div>
+		</div>
+	</div>
 */
 .form-line {
 	position: relative;
@@ -138,4 +165,14 @@ Form field constructions, with many variants and uses
 .form-line--size-4 .form-line__field,
 .form-line--size-4 .form-line__text {
 	max-width: 280px;
+}
+
+.form-line--size-window .form-line__field,
+.form-line--size-window .form-line__text {
+	width: 158px;
+}
+
+.form-line--between .radio {
+	display: inline-block;
+	margin-right: 20px;
 }

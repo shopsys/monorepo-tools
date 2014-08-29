@@ -4,9 +4,9 @@
 {% block h1 %}Editace zboží - {{ product.name }}{% endblock %}
 
 {% block product_id %}
-	<div class="form-group">
-		<label>ID:</label>
-		<input type="text" value="{{ product.id }}" class="form-control" readonly="readonly">
+	<div class="form-line">
+		<label class="form-line__label">ID:</label>
+		<input type="text" value="{{ product.id }}" class="form-control form-line__field" readonly="readonly">
 	</div>
 {% endblock %}
 

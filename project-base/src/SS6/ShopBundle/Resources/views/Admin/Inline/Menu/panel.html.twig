@@ -7,7 +7,7 @@
 					<ul class="nav-panel__submenu">
 						{% for subitem in item.items %}
 							{% if (subitem.visible) %}
-								<li class="nav-panel__submenu__item{% if subitem in activePath %}nav-panel__submenu__item--active{% endif %}" >
+								<li class="nav-panel__submenu__item {% if subitem in activePath %}nav-panel__submenu__item--active{% endif %}" >
 									<a href="{{ url(subitem.route, subitem.routeParameters) }}">{{ subitem.label }}</a>
 								</li>
 							{% endif %}

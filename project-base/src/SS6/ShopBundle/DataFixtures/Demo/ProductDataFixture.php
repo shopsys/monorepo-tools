@@ -79,7 +79,7 @@ class ProductDataFixture extends AbstractFixture implements DependentFixtureInte
 
 		$manager->flush();
 	}
-	
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
