@@ -27,9 +27,9 @@ class CartItemTest extends DatabaseTestCase {
 		$em->persist($product2);
 		$em->flush();
 		
-		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
-		$cartItem2 = new CartItem($customerIdentifier, $product1, 3);
-		$cartItem3 = new CartItem($customerIdentifier, $product2, 1);
+		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
+		$cartItem2 = new CartItem($customerIdentifier, $product1, 3, '0.0');
+		$cartItem3 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 
 		$this->assertTrue($cartItem1->isSimilarItemAs($cartItem2));
 		$this->assertFalse($cartItem1->isSimilarItemAs($cartItem3));

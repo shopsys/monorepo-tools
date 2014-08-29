@@ -43,7 +43,6 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->clear();
 		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
-		$this->assertEquals($quantity, $cart->getQuantity(), 'Add correct quantity product');
 		$cartItems = $cart->getItems();
 		$product = array_pop($cartItems)->getProduct();
 		$this->assertEquals($productId, $product->getId(), 'Add correct product');
@@ -116,7 +115,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 		$product = new Product(new ProductData('productName', null, null, null, null, null, $vat));
 		$em->persist($product);
-		$cartItem = new CartItem($customerIdentifier, $product, 1);
+		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
@@ -142,8 +141,8 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
-		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
-		$cartItem2 = new CartItem($customerIdentifier, $product2, 1);
+		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
+		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
 		$em->persist($cartItem2);
 		$cartItems = array($cartItem1, $cartItem2);
