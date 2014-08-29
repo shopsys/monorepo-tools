@@ -25,12 +25,14 @@ class VatFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('name', 'text', array(
+				'required' => false,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název dph')),
 					new Constraints\Length(array('max' => 50, 'maxMessage' => 'Název DPH nesmí být delší než {{ limit }} znaků')),
 				))
 			)
 			->add('percent', 'number', array(
+				'required' => false,
 				'precision' => 4,
 				'invalid_message' => 'Prosím zadejte DPH v platném formátu',
 				'constraints' => array(

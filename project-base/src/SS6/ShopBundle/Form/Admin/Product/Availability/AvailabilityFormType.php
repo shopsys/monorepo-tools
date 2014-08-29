@@ -25,6 +25,7 @@ class AvailabilityFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('name', 'text', array(
+				'required' => false,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název dostupnosti')),
 					new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název dostupnosti nesmí být delší než {{ limit }} znaků')),
