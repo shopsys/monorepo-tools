@@ -40,10 +40,28 @@
 				
 				<tr class="basket-review__row basket-review__row--total">
 					<td class="basket-review__cell">
-						Cena celkem:
+						Cena celkem bez DPH:
+					</td>
+					<td class="basket-review__cell basket-review__cell--price">
+						{{ orderReview.totalPriceWithoutVat|price }}
+					</td>
+				</tr>
+
+				<tr class="basket-review__row basket-review__row--total">
+					<td class="basket-review__cell">
+						Cena celkem s DPH:
 					</td>
 					<td class="basket-review__cell basket-review__cell--price">
 						{{ orderReview.totalPriceWithVat|price }}
+					</td>
+				</tr>
+
+				<tr class="basket-review__row basket-review__row--total">
+					<td class="basket-review__cell">
+						Celková výše DPH:
+					</td>
+					<td class="basket-review__cell basket-review__cell--price">
+						{{ orderReview.totalPriceVatAmount|price }}
 					</td>
 				</tr>
 				
