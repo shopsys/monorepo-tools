@@ -43,7 +43,21 @@ abstract class OrderItem {
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
-	private $price;
+	private $priceWithoutVat;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 */
+	private $priceWithVat;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 */
+	private $vatPercent;
 
 	/**
 	 * @var int
@@ -55,13 +69,24 @@ abstract class OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $price
+	 * @param string $priceWithoutVat
+	 * @param string $priceWithVat
+	 * @param string $vatPercent
 	 * @param int $quantity
 	 */
-	public function __construct(Order $order, $name, $price, $quantity) {
+	public function __construct(
+		Order $order,
+		$name,
+		$priceWithoutVat,
+		$priceWithVat,
+		$vatPercent,
+		$quantity
+	) {
 		$this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
 		$this->name = $name;
-		$this->price = $price;
+		$this->priceWithoutVat = $priceWithoutVat;
+		$this->priceWithVat = $priceWithVat;
+		$this->vatPercent = $vatPercent;
 		$this->quantity = $quantity;
 		$this->order->addItem($this); // call after setting attrs for recalc total price
 	}
@@ -83,8 +108,22 @@ abstract class OrderItem {
 	/**
 	 * @return string
 	 */
-	public function getPrice() {
-		return $this->price;
+	public function getPriceWithoutVat() {
+		return $this->priceWithoutVat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPriceWithVat() {
+		return $this->priceWithVat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getVatPercent() {
+		return $this->vatPercent;
 	}
 
 	/**
@@ -98,17 +137,27 @@ abstract class OrderItem {
 	 * @return string
 	 */
 	public function getTotalPrice() {
-		return $this->price * $this->quantity;
+		return $this->priceWithVat * $this->quantity;
 	}
 
 	/**
 	 * @param string $name
-	 * @param string $price
+	 * @param string $priceWithoutVat
+	 * @param string $priceWithVat
+	 * @param string $vatPercent
 	 * @param int $quantity
 	 */
-	public function edit($name, $price, $quantity) {
+	public function edit(
+		$name,
+		$priceWithoutVat,
+		$priceWithVat,
+		$vatPercent,
+		$quantity
+	) {
 		$this->name = $name;
-		$this->price = $price;
+		$this->priceWithoutVat = $priceWithoutVat;
+		$this->priceWithVat = $priceWithVat;
+		$this->vatPercent = $vatPercent;
 		$this->quantity = $quantity;
 	}
 	

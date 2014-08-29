@@ -22,12 +22,29 @@ class OrderTransport extends OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $price
+	 * @param string $priceWithoutVat
+	 * @param string $priceWithVat
+	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
-	public function __construct(Order $order, $name, $price, $quantity, Transport $transport) {
-		parent::__construct($order, $name, $price, $quantity);
+	public function __construct(
+		Order $order,
+		$name,
+		$priceWithoutVat,
+		$priceWithVat,
+		$vatPercent,
+		$quantity,
+		Transport $transport
+	) {
+		parent::__construct(
+			$order,
+			$name,
+			$priceWithoutVat,
+			$priceWithVat,
+			$vatPercent,
+			$quantity
+		);
 		$this->transport = $transport;
 	}
 

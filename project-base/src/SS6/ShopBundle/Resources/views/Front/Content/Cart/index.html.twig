@@ -18,15 +18,17 @@
 					<tr>
 						<th class="table-col-10">Obrázek</th>
 						<th class="table-col-45">Název</th>
-						<th class="table-col-10 text-center">Cena za kus</th>
+						<th class="table-col-10 text-center">Cena za kus s DPH</th>
+						<th class="table-col-10 text-center">Sazba DPH</th>
 						<th class="table-col-20 text-center">Počet kusů</th>
-						<th class="table-col-10 text-center">Cena</th>
+						<th class="table-col-10 text-center">Cena s DPH</th>
 						<th class="table-col-15 text-right">&nbsp;</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					{% for cartItem in cartItems  %}
+					{% for cartItemKey, cartItem in cartItems %}
+						{% set cartItemPrice = cartItemPrices[cartItemKey] %}
 						<tr class="basket-list__item">
 							<td class="basket-list__image basket-list__cell-left">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}">
@@ -45,7 +47,11 @@
 							</td>
 
 							<td class="basket-list__price-piece">
-								{{ cartItem.price|price }}
+								{{ cartItemPrice.unitPriceWithVat|price }}
+							</td>
+
+							<td>
+								{{ cartItem.product.vat.percent }}%
 							</td>
 
 							<td class="basket-list__ammount">
@@ -57,7 +63,7 @@
 							</td>
 
 							<td class="basket-list__price-final">
-								{{ cartItem.totalPrice|price }}
+								{{ cartItemPrice.totalPriceWithVat|price }}
 							</td>
 
 							<td class="basket-list__remove">
@@ -78,9 +84,9 @@
 							{{ form_widget(form.recalc, { label: 'Přepočítat'}) }}
 						</td>
 						<td colspan="3">
-							Celková cena:
+							Celková cena s DPH:
 							<span class="basket-list__price-total">
-								<span class="price-main price-big">{{ cart.price|price }}</span>
+								<span class="price-main price-big">{{ cartSummary.priceWithVat|price }}</span>
 							</span>
 						</td>
 					</tr>

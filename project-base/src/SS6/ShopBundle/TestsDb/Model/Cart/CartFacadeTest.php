@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\TestsDb\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Cart\CartItem;
 use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -14,12 +14,13 @@ use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
+
 	public function testAddProductToCart() {
 		$em = $this->getEntityManager();
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -42,7 +43,6 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->clear();
 		$cartSingletonFactory = new CartSingletonFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartSingletonFactory->get($customerIdentifier);
-		$this->assertEquals($quantity, $cart->getQuantity(), 'Add correct quantity product');
 		$cartItems = $cart->getItems();
 		$product = array_pop($cartItems)->getProduct();
 		$this->assertEquals($productId, $product->getId(), 'Add correct product');
@@ -58,7 +58,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -115,7 +115,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 		$product = new Product(new ProductData('productName', null, null, null, null, null, $vat));
 		$em->persist($product);
-		$cartItem = new CartItem($customerIdentifier, $product, 1);
+		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
@@ -132,7 +132,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.cart_item_repository');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -141,8 +141,8 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
-		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
-		$cartItem2 = new CartItem($customerIdentifier, $product2, 1);
+		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
+		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
 		$em->persist($cartItem2);
 		$cartItems = array($cartItem1, $cartItem2);

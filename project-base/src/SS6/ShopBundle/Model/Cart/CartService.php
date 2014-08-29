@@ -2,10 +2,24 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Product\PriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 
 class CartService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 */
+	private $productPriceCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $priceCalculation
+	 */
+	public function __construct(PriceCalculation $priceCalculation) {
+		$this->productPriceCalculation = $priceCalculation;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
@@ -23,12 +37,12 @@ class CartService {
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getProduct() === $product) {
 				$cartItem->changeQuantity($cartItem->getQuantity() + $quantity);
-				$cart->calcSummaryInfo();
 				return new AddProductResult($cartItem, false, $quantity);
 			}
 		}
 
-		$newCartItem = new CartItem($customerIdentifier, $product, $quantity);
+		$productPrice = $this->productPriceCalculation->calculatePrice($product);
+		$newCartItem = new CartItem($customerIdentifier, $product, $quantity, $productPrice->getBasePriceWithVat());
 		$cart->addItem($newCartItem);
 		return new AddProductResult($newCartItem, true, $quantity);
 	}
@@ -43,13 +57,12 @@ class CartService {
 				$cartItem->changeQuantity($quantities[$cartItem->getId()]);
 			}
 		}
-		$cart->calcSummaryInfo();
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param int $cartItemId
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem
 	 */
 	public function getCartItemById(Cart $cart, $cartItemId) {
 		foreach ($cart->getItems() as $cartItem) {
@@ -79,12 +92,15 @@ class CartService {
 			if ($similarCartItem instanceof CartItem) {
 				$similarCartItem->changeQuantity($cartItem->getQuantity());
 			} else {
-				$newCartItem = new CartItem($customerIdentifier, $cartItem->getProduct(), $cartItem->getQuantity());
+				$newCartItem = new CartItem(
+					$customerIdentifier,
+					$cartItem->getProduct(),
+					$cartItem->getQuantity(),
+					$cartItem->getWatchedPrice()
+				);
 				$resultingCart->addItem($newCartItem);
 			}
 		}
-
-		$resultingCart->calcSummaryInfo();
 	}
 
 }

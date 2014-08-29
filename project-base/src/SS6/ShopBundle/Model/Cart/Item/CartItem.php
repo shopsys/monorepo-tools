@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace SS6\ShopBundle\Model\Cart\Item;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
@@ -62,12 +62,18 @@ class CartItem {
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $quantity
+	 * @param string $watchedPrice
 	 */
-	public function __construct(CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
+	public function __construct(
+		CustomerIdentifier $customerIdentifier,
+		Product $product,
+		$quantity,
+		$watchedPrice
+	) {
 		$this->sessionId = $customerIdentifier->getSessionId();
 		$this->user = $customerIdentifier->getUser();
 		$this->product = $product;
-		$this->watchedPrice = $product->getPrice();
+		$this->watchedPrice = $watchedPrice;
 		$this->changeQuantity($quantity);
 	}
 
@@ -125,21 +131,7 @@ class CartItem {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getPrice() {
-		return $this->product->getPrice();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPrice() {
-		return $this->product->getPrice() * $this->quantity;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem $cartItem
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
 	 * @return bool
 	 */
 	public function isSimilarItemAs(CartItem $cartItem) {

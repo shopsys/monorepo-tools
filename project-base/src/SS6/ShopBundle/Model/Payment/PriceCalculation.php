@@ -41,4 +41,17 @@ class PriceCalculation {
 		);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
+	 */
+	public function calculatePricesById(array $payments) {
+		$paymentsPrices = array();
+		foreach ($payments as $payment) {
+			$paymentsPrices[$payment->getId()] = $this->calculatePrice($payment);
+		}
+
+		return $paymentsPrices;
+	}
+
 }

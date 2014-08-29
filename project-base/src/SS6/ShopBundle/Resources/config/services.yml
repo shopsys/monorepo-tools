@@ -69,9 +69,6 @@ services:
   ss6.shop.cart.cart_facade:
     class: SS6\ShopBundle\Model\Cart\CartFacade
 
-  ss6.shop.cart.cart_item_repository:
-    class: SS6\ShopBundle\Model\Cart\CartItemRepository
-    
   ss6.shop.cart.cart_migration_facade:
     class: SS6\ShopBundle\Model\Cart\CartMigrationFacade
     tags:
@@ -79,6 +76,9 @@ services:
 
   ss6.shop.cart.cart_service:
     class: SS6\ShopBundle\Model\Cart\CartService
+
+  ss6.shop.cart.cart_summary_calculation:
+    class: SS6\ShopBundle\Model\Cart\CartSummaryCalculation
 
   ss6.shop.cart.cart_watcher_facade:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
@@ -89,6 +89,12 @@ services:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
     arguments:
       - @ss6.shop.flash_message.bag.front
+
+  ss6.shop.cart.item.cart_item_repository:
+    class: SS6\ShopBundle\Model\Cart\Item\CartItemRepository
+
+  ss6.shop.cart.item.price_calculation:
+    class: SS6\ShopBundle\Model\Cart\Item\PriceCalculation
 
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
@@ -172,6 +178,9 @@ services:
     parent: craue.form.flow
     scope: request
 
+  ss6.shop.order.review.order_review_calculation:
+    class: SS6\ShopBundle\Model\Order\Review\OrderReviewCalculation
+
   ss6.shop.order.order_flow_facade:
     class: SS6\ShopBundle\Model\Order\OrderFlowFacade
 
@@ -188,9 +197,6 @@ services:
     
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
-    
-  ss6.shop.order.order_review_service:
-    class: SS6\ShopBundle\Model\Order\Review\OrderReviewService
     
   ss6.shop.order.order_service:
     class: SS6\ShopBundle\Model\Order\OrderService

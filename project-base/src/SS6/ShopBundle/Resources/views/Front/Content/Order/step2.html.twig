@@ -19,6 +19,7 @@
 
 					{% for child in form.transport %}
 						{% set choice = form.transport.vars.choices[child.vars.name] %}
+						{% set transportPrice = transportsPrices[choice.data.id] %}
 						<label class="chooser__item">
 							<span class="chooser__check">
 								{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
@@ -44,7 +45,7 @@
 							</span>
 
 							<span class="chooser__price price-main">
-								{{ choice.data.price|price }}
+								{{ transportPrice.basePriceWithVat|price }}
 							</span>
 						</label>
 					{% else %}
@@ -64,6 +65,7 @@
 
 					{% for child in form.payment %}
 						{% set choice = form.payment.vars.choices[child.vars.name] %}
+						{% set paymentPrice = paymentsPrices[choice.data.id] %}
 						<label class="chooser__item">
 							<span class="chooser__check">
 								{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
@@ -89,7 +91,7 @@
 							</span>
 
 							<span class="chooser__price price-main">
-								{{ choice.data.price|price }}
+								{{ paymentPrice.basePriceWithVat|price }}
 							</span>
 						</label>
 					{% else %}

@@ -96,7 +96,9 @@ class OrderService {
 			$orderItem = $order->getItemById($orderItemData->getId());
 			$orderItem->edit(
 				$orderItemData->getName(),
+				$orderItem->getPriceWithoutVat(),
 				$orderItemData->getPrice(),
+				$orderItem->getVatPercent(),
 				$orderItemData->getQuantity()
 			);
 		}

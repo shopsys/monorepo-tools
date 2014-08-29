@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\TestsDb\Model\Cart;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\CartItem;
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -25,8 +25,8 @@ class CartTest extends DatabaseTestCase {
 		$vat2 = new Vat(new VatData('vat', 21));
 		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price2, $vat2));
 
-		$cartItem1 = new CartItem($customerIdentifier, $product1, 1);
-		$cartItem2 = new CartItem($customerIdentifier, $product2, 3);
+		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
+		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
 		$cartItems = array($cartItem1, $cartItem2);
 
 		$cart = new Cart($cartItems);

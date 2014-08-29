@@ -2,37 +2,27 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
+
 class Cart {
 	
 	/**
-	 * @var string
-	 */
-	private $price;
-	
-	/**
-	 * @var int
-	 */
-	private $quantity;
-	
-	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartItem[]
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	private $cartItems;
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem[] $cartItems
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
 	 */
 	public function __construct(array $cartItems) {
 		$this->cartItems = $cartItems;
-		$this->calcSummaryInfo();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem $item
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $item
 	 */
 	public function addItem(CartItem $item) {
 		$this->cartItems[] = $item;
-		$this->calcSummaryInfo();
 	}
 
 	/**
@@ -42,7 +32,6 @@ class Cart {
 		foreach ($this->cartItems as $key => $cartItem) {
 			if ($cartItem->getId() === $cartItemId) {
 				unset($this->cartItems[$key]);
-				$this->calcSummaryInfo();
 				return;
 			}
 		}
@@ -52,20 +41,10 @@ class Cart {
 
 	public function clean() {
 		$this->cartItems = array();
-		$this->calcSummaryInfo();
 	}
 
-	public function calcSummaryInfo() {
-		$this->quantity = 0;
-		$this->price = 0;
-		foreach ($this->cartItems as $cartItem) {
-			$this->quantity += $cartItem->getQuantity();
-			$this->price += $cartItem->getTotalPrice();
-		}
-	}
-	
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem[]
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	public function getItems() {
 		return $this->cartItems;
@@ -77,20 +56,6 @@ class Cart {
 	public function getItemsCount() {
 		return count($this->getItems());
 	}
-	
-	/**
-	 * @return int
-	 */
-	public function getQuantity() {
-		return $this->quantity;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getPrice() {
-		return $this->price;
-	}
 
 	/**
 	 * @return bool
@@ -100,8 +65,8 @@ class Cart {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\CartItem $cartItem
-	 * @return \SS6\ShopBundle\Model\Cart\CartItem|null
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem|null
 	 */
 	public function findSimilarCartItemByCartItem(CartItem $cartItem) {
 		foreach ($this->getItems() as $similarCartItem) {

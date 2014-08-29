@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace SS6\ShopBundle\Model\Cart\Item;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Cart\CartItem;
+use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartItemRepository {
