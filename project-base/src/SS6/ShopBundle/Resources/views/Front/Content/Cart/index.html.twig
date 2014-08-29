@@ -17,12 +17,12 @@
 				<thead class="basket-list__heading">
 					<tr>
 						<th class="table-col-10">Obrázek</th>
-						<th class="table-col-45">Název</th>
-						<th class="table-col-10 text-center">Cena za kus s DPH</th>
-						<th class="table-col-10 text-center">Sazba DPH</th>
-						<th class="table-col-20 text-center">Počet kusů</th>
+						<th class="table-col-35">Název</th>
+						<th class="table-col-15">Cena za kus s DPH</th>
+						<th class="table-col-10">Sazba DPH</th>
+						<th class="table-col-15 text-center">Počet kusů</th>
 						<th class="table-col-10 text-center">Cena s DPH</th>
-						<th class="table-col-15 text-right">&nbsp;</th>
+						<th class="table-col-5 text-right">&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -80,10 +80,10 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td class="text-center">
+						<td>
 							{{ form_widget(form.recalc, { label: 'Přepočítat'}) }}
 						</td>
-						<td colspan="3">
+						<td colspan="4" class="basket-list__foot__total text-right">
 							Celková cena s DPH:
 							<span class="basket-list__price-total">
 								<span class="price-main price-big">{{ cartSummary.priceWithVat|price }}</span>
