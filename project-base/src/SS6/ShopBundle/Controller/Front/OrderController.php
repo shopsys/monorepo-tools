@@ -59,13 +59,13 @@ class OrderController extends Controller {
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
 
-		$flow->setFormTypesData($transports, $payments);
-		$flow->bind($formData);
-		$flow->saveSentStepData();
-
 		if ($flow->isBackToCartTransition()) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
+
+		$flow->setFormTypesData($transports, $payments);
+		$flow->bind($formData);
+		$flow->saveSentStepData();
 
 		$form = $flow->createForm();
 
