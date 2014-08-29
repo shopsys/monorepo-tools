@@ -4,33 +4,42 @@
 		<table class="basket-review">
 			<tbody>
 				
-				{% for item in orderReview.items %}
+				{% for cartItemKey, cartItem in orderReview.cartItems %}
+					{% set cartItemPrice = orderReview.cartItemsPrices[cartItemKey] %}
 					<tr class="basket-review__row">
 						<td class="basket-review__cell">
-							{% if item.type == constant('SS6\\ShopBundle\\Model\\Order\\Review\\OrderReviewItem::TYPE_PAYMENT') %}
-								Způsob platby: {{ item.name }}
-							{% elseif item.type == constant('SS6\\ShopBundle\\Model\\Order\\Review\\OrderReviewItem::TYPE_TRANSPORT') %}
-								Způsob dopravy: {{ item.name }}
-							{% else %}
-								<strong>{{ item.quantity }} x</strong> {{ item.name }}
-							{% endif %}
+							<strong>{{ cartItem.quantity }} x</strong> {{ cartItem.name }}
 						</td>
 						<td class="basket-review__cell basket-review__cell--price">
-							{% if item.type == constant('SS6\\ShopBundle\\Model\\Order\\Review\\OrderReviewItem::TYPE_PRODUCT') %}
-								{{ item.price|price }}
-							{% else %}
-								{{ item.price|priceText }}
-							{% endif %}
+							{{ cartItemPrice.totalPriceWithVat|price }}
 						</td>
 					</tr>
 				{% endfor %}
+
+				<tr class="basket-review__row">
+					<td class="basket-review__cell">
+						Způsob dopravy: {{ orderReview.transport.name }}
+					</td>
+					<td class="basket-review__cell basket-review__cell--price">
+						{{ orderReview.transportPrice.basePriceWithVat|priceText }}
+					</td>
+				</tr>
+
+				<tr class="basket-review__row">
+					<td class="basket-review__cell">
+						Způsob platby: {{ orderReview.payment.name }}
+					</td>
+					<td class="basket-review__cell basket-review__cell--price">
+						{{ orderReview.paymentPrice.basePriceWithVat|priceText }}
+					</td>
+				</tr>
 				
 				<tr class="basket-review__row basket-review__row--total">
 					<td class="basket-review__cell">
 						Cena celkem:
 					</td>
 					<td class="basket-review__cell basket-review__cell--price">
-						{{ orderReview.totalPrice|price }}
+						{{ orderReview.totalPriceWithVat|price }}
 					</td>
 				</tr>
 				
