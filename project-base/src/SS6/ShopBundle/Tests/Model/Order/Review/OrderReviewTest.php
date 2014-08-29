@@ -19,6 +19,10 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 
 class OrderReviewTest extends PHPUnit_Framework_TestCase {
 
+	protected function setUp() {
+		$this->markTestSkipped();
+	}
+
 	public function testGetTotalPrice() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 

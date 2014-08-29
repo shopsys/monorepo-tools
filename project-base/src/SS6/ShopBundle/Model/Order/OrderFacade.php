@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormData as AdminOrderFormData;
 use SS6\ShopBundle\Form\Front\Order\OrderFormData as FrontOrderFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\Item\PriceCalculation as CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
@@ -15,6 +16,8 @@ use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
 
 class OrderFacade {
 
@@ -54,14 +57,43 @@ class OrderFacade {
 	private $orderStatusRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Cart\Item\PriceCalculation
+	 */
+	private $cartItemPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PriceCalculation
+	 */
+	private $paymentPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\PriceCalculation
+	 */
+	private $transportPriceCalculation;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
+	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
+	 * @param \SS6\ShopBundle\Model\Cart\Item\PriceCalculation $cartItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
 	 */
-	public function __construct(EntityManager $em, OrderNumberSequenceRepository $orderNumberSequenceRepository,
-		Cart $cart, OrderRepository $orderRepository, OrderService $orderService, UserRepository $userRepository,
-		OrderStatusRepository $orderStatusRepository
+	public function __construct(
+		EntityManager $em,
+		OrderNumberSequenceRepository $orderNumberSequenceRepository,
+		Cart $cart,
+		OrderRepository $orderRepository,
+		OrderService $orderService,
+		UserRepository $userRepository,
+		OrderStatusRepository $orderStatusRepository,
+		CartItemPriceCalculation $cartItemPriceCalculation,
+		PaymentPriceCalculation $paymentPriceCalculation,
+		TransportPriceCalculation $transportPriceCalculation
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -70,6 +102,9 @@ class OrderFacade {
 		$this->orderService = $orderService;
 		$this->userRepository = $userRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
+		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
+		$this->paymentPriceCalculation = $paymentPriceCalculation;
+		$this->transportPriceCalculation = $transportPriceCalculation;
 	}
 
 	/**
@@ -104,9 +139,14 @@ class OrderFacade {
 		$cartItems = $cart->getItems();
 		foreach ($cartItems as $cartItem) {
 			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
-			$orderItem = new OrderProduct($order,
+			$cartItemPrice = $this->cartItemPriceCalculation->calculatePrice($cartItem);
+
+			$orderItem = new OrderProduct(
+				$order,
 				$cartItem->getProduct()->getName(),
-				$cartItem->getProduct()->getPrice(),
+				$cartItemPrice->getUnitPriceWithoutVat(),
+				$cartItemPrice->getUnitPriceWithVat(),
+				$cartItem->getProduct()->getVat()->getPercent(),
 				$cartItem->getQuantity(),
 				$cartItem->getProduct()
 			);
@@ -115,9 +155,13 @@ class OrderFacade {
 		}
 
 		$payment = $order->getPayment();
-		$orderPayment = new OrderPayment($order,
+		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+		$orderPayment = new OrderPayment(
+			$order,
 			$payment->getName(),
-			$payment->getPrice(),
+			$paymentPrice->getBasePriceWithoutVat(),
+			$paymentPrice->getBasePriceWithVat(),
+			$payment->getVat()->getPercent(),
 			1,
 			$payment
 		);
@@ -125,9 +169,13 @@ class OrderFacade {
 		$this->em->persist($orderPayment);
 
 		$transport = $order->getTransport();
-		$orderTransport = new OrderTransport($order,
+		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+		$orderTransport = new OrderTransport(
+			$order,
 			$transport->getName(),
-			$transport->getPrice(),
+			$transportPrice->getBasePriceWithoutVat(),
+			$transportPrice->getBasePriceWithVat(),
+			$transport->getVat()->getPercent(),
 			1,
 			$transport
 		);

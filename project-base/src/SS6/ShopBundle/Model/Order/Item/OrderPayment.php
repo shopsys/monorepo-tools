@@ -22,12 +22,29 @@ class OrderPayment extends OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $price
+	 * @param string $priceWithoutVat
+	 * @param string $priceWithVat
+	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
-	public function __construct(Order $order, $name, $price, $quantity, Payment $payment) {
-		parent::__construct($order, $name, $price, $quantity);
+	public function __construct(
+		Order $order,
+		$name,
+		$priceWithoutVat,
+		$priceWithVat,
+		$vatPercent,
+		$quantity,
+		Payment $payment
+	) {
+		parent::__construct(
+			$order,
+			$name,
+			$priceWithoutVat,
+			$priceWithVat,
+			$vatPercent,
+			$quantity
+		);
 		$this->payment = $payment;
 	}
 

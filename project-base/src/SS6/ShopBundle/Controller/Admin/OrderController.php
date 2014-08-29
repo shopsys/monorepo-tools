@@ -69,7 +69,7 @@ class OrderController extends Controller {
 					$orderItemFormData = new OrderItemFormData();
 					$orderItemFormData->setId($orderItem->getId());
 					$orderItemFormData->setName($orderItem->getName());
-					$orderItemFormData->setPrice($orderItem->getPrice());
+					$orderItemFormData->setPrice($orderItem->getPriceWithVat());
 					$orderItemFormData->setQuantity($orderItem->getQuantity());
 					$orderItemsData[] = $orderItemFormData;
 				}
