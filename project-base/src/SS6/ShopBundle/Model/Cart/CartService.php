@@ -4,9 +4,22 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Product\PriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 
 class CartService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 */
+	private $productPriceCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $priceCalculation
+	 */
+	public function __construct(PriceCalculation $priceCalculation) {
+		$this->productPriceCalculation = $priceCalculation;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
@@ -28,7 +41,8 @@ class CartService {
 			}
 		}
 
-		$newCartItem = new CartItem($customerIdentifier, $product, $quantity);
+		$productPrice = $this->productPriceCalculation->calculatePrice($product);
+		$newCartItem = new CartItem($customerIdentifier, $product, $quantity, $productPrice->getBasePriceWithVat());
 		$cart->addItem($newCartItem);
 		return new AddProductResult($newCartItem, true, $quantity);
 	}

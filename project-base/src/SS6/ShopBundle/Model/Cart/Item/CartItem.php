@@ -62,12 +62,18 @@ class CartItem {
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $quantity
+	 * @param string $watchedPrice
 	 */
-	public function __construct(CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
+	public function __construct(
+		CustomerIdentifier $customerIdentifier,
+		Product $product,
+		$quantity,
+		$watchedPrice
+	) {
 		$this->sessionId = $customerIdentifier->getSessionId();
 		$this->user = $customerIdentifier->getUser();
 		$this->product = $product;
-		$this->watchedPrice = $product->getPrice();
+		$this->watchedPrice = $watchedPrice;
 		$this->changeQuantity($quantity);
 	}
 
