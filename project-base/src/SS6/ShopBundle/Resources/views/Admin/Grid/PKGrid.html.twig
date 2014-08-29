@@ -7,25 +7,36 @@
 			data-inline-edit-url-save-form="{{ url('admin_pkgrid_saveform') }}"
 		{% endif %}
 	{% endspaceless %}>
-	{% if grid.rows is not empty %}
-		<div class="grid_header">
-		{% if grid.allowedPaging %}
-			{{ gridView.renderBlock('pkgrid_pager') }}
-		{% endif %}
-		</div>
-		<div class="grid_body table-responsive">
-			<table class="table table-striped table-hover">
-				{{ gridView.renderBlock('pkgrid_titles') }}
-				{{ gridView.renderBlock('pkgrid_rows') }}
-			</table>
-		</div>
-		<div class="grid_footer">
+		
+	{% if grid.inlineEdit %} 
+		{{ gridView.renderBlock('pkgrid_inline_edit_add_button') }}
+	{% endif %}
+	
+	{% if grid.rows is not empty or grid.inlineEdit %}
+		<div class="js-inline-edit-data-container{% if grid.rows is empty and grid.inlineEdit %} hidden{% endif %}">
+			<div class="grid_header">
 			{% if grid.allowedPaging %}
 				{{ gridView.renderBlock('pkgrid_pager') }}
 			{% endif %}
+			</div>
+			<div class="grid_body table-responsive">
+				<table class="table table-striped table-hover">
+					{{ gridView.renderBlock('pkgrid_titles') }}
+					{{ gridView.renderBlock('pkgrid_rows') }}
+				</table>
+			</div>
+			<div class="grid_footer">
+				{% if grid.allowedPaging %}
+					{{ gridView.renderBlock('pkgrid_pager') }}
+				{% endif %}
+			</div>
 		</div>
-	{% else %}
-		{{ gridView.renderBlock('pkgrid_no_data') }}
+	{% endif %}
+	
+	{% if grid.rows is empty %}
+		<div class="message message-info js-inline-edit-no-data">
+			{{ gridView.renderBlock('pkgrid_no_data') }}
+		</div>
 	{% endif %}
 </div>
 {% endblock %}
@@ -73,7 +84,17 @@
 {% endblock %}
 
 {% block pkgrid_rows %}
-	<tbody>
+	<tbody class="js-inline-edit-rows">
+		{% for row in grid.rows %}
+			{{ gridView.renderBlock(
+				'pkgrid_row', 
+				{ 
+					loopIndex: loop.index,
+					lastRow: loop.last,
+					row: row
+				}
+			) }}
+		{% endfor %}
 		{% if grid.inlineEdit %}
 			{{ gridView.renderBlock(
 				'pkgrid_row', 
@@ -85,16 +106,6 @@
 				}
 			) }}
 		{% endif %}
-		{% for row in grid.rows %}
-			{{ gridView.renderBlock(
-				'pkgrid_row', 
-				{ 
-					loopIndex: loop.index,
-					lastRow: loop.last,
-					row: row
-				}
-			) }}
-		{% endfor %}
 	</tbody>
 {% endblock %}
 
@@ -284,4 +295,10 @@
 			<input type="hidden" name="{{ name }}" value="{{ parameter }}" />
 		{% endif %}
 	{% endspaceless %}
+{% endblock %}
+
+{% block pkgrid_inline_edit_add_button %}
+	<a href="#" class="btn btn-primary mb-1 js-inline-edit-add">
+		{{ addEntity|default('Vytvořit záznam') }}
+	</a>
 {% endblock %}

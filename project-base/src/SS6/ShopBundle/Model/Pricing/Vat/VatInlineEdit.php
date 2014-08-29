@@ -60,11 +60,13 @@ class VatInlineEdit implements GridInlineEditInterface {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function getForm($vatId) {
-		$vatId = (int)$vatId;
-		$vat = $this->vatFacade->getById($vatId);
-		
 		$vatData = new VatData();
-		$vatData->setFromEntity($vat);
+
+		if ($vatId !== null) {
+			$vatId = (int)$vatId;
+			$vat = $this->vatFacade->getById($vatId);
+			$vatData->setFromEntity($vat);
+		}
 
 		return $this->formFactory->create(new VatFormType(), $vatData);
 	}
@@ -72,18 +74,14 @@ class VatInlineEdit implements GridInlineEditInterface {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $vatId
+	 * @return int
 	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $vatId) {
-		$vatId = (int)$vatId;
-
 		$form = $this->getForm($vatId);
 		$form->handleRequest($request);
 		
-		if ($form->isValid()) {
-			$vatData = $form->getData();
-			$this->vatFacade->edit($vatId, $vatData);
-		} else {
+		if (!$form->isValid()) {
 			$formErrors = [];
 			foreach ($form->getErrors(true) as $error) {
 				/* @var $error \Symfony\Component\Form\FormError */
@@ -91,6 +89,17 @@ class VatInlineEdit implements GridInlineEditInterface {
 			}
 			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
+
+		$vatData = $form->getData();
+		if ($vatId !== null) {
+			$vatId = (int)$vatId;
+			$this->vatFacade->edit($vatId, $vatData);
+		} else {
+			$vat = $this->vatFacade->create($vatData);
+			$vatId = $vat->getId();
+		}
+
+		return $vatId;
 	}
 
 	/**

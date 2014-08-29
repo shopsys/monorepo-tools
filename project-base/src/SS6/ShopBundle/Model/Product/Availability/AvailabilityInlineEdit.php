@@ -60,11 +60,13 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function getForm($availabilityId) {
-		$availabilityId = (int)$availabilityId;
-		$availability = $this->availabilityFacade->getById($availabilityId);
-		
 		$availabilityData = new AvailabilityData();
-		$availabilityData->setFromEntity($availability);
+
+		if ($availabilityId !== null) {
+			$availabilityId = (int)$availabilityId;
+			$availability = $this->availabilityFacade->getById($availabilityId);
+			$availabilityData->setFromEntity($availability);
+		}
 
 		return $this->formFactory->create(new AvailabilityFormType(), $availabilityData);
 	}
@@ -72,18 +74,14 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $availabilityId
+	 * @return int
 	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $availabilityId) {
-		$availabilityId = (int)$availabilityId;
-
 		$form = $this->getForm($availabilityId);
 		$form->handleRequest($request);
 		
-		if ($form->isValid()) {
-			$availabilityData = $form->getData();
-			$this->availabilityFacade->edit($availabilityId, $availabilityData);
-		} else {
+		if (!$form->isValid()) {
 			$formErrors = [];
 			foreach ($form->getErrors(true) as $error) {
 				/* @var $error \Symfony\Component\Form\FormError */
@@ -91,6 +89,17 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 			}
 			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
+
+		$availabilityData = $form->getData();
+		if ($availabilityId !== null) {
+			$availabilityId = (int)$availabilityId;
+			$this->availabilityFacade->edit($availabilityId, $availabilityData);
+		} else {
+			$availability = $this->availabilityFacade->create($availabilityData);
+			$availabilityId = $availability->getId();
+		}
+
+		return $availabilityId;
 	}
 
 	/**

@@ -49,7 +49,7 @@ class ParameterFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterData
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	public function create(ParameterData $parameterData) {
 		$parameter = $this->parameterService->create($parameterData);
