@@ -116,7 +116,7 @@
 	SS6.pkgrid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
-			$formRow.remove();
+			$formRow.replaceWith($originalRow).remove();
 			SS6.pkgrid.inlineEdit.enableRow($originalRow);
 		}
 		$formRow.remove();
