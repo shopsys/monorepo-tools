@@ -28,6 +28,11 @@ class OrderReviewCalculation {
 	 */
 	private $paymentPriceCalculation;
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Item\PriceCalculation $cartItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
+	 */
 	public function __construct(
 		CartItemPriceCalculation $cartItemPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
@@ -38,21 +43,32 @@ class OrderReviewCalculation {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 	}
 
-		/**
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Review\Cart $cart
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @return \SS6\ShopBundle\Model\Order\Review\OrderReview
 	 */
 	public function calculateReview(
 		Cart $cart,
-		Transport $transport,
-		Payment $payment
+		Transport $transport = null,
+		Payment $payment = null
 	) {
 		$cartItems = $cart->getItems();
 		$cartItemsPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
-		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
-		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+		
+		if ($transport !== null) {
+			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+		} else {
+			$transportPrice = null;
+		}
+
+		if ($payment !== null) {
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+		} else {
+			$paymentPrice = null;
+		}
+
 		$totalPrice = $this->calculateTotalPrice(
 			$cartItemsPrices,
 			$transportPrice,
@@ -62,20 +78,26 @@ class OrderReviewCalculation {
 		return new OrderReview(
 			$cartItems,
 			$cartItemsPrices,
+			$totalPrice->getBasePriceWithoutVat(),
+			$totalPrice->getBasePriceWithVat(),
+			$totalPrice->getBasePriceVatAmount(),
 			$transport,
 			$transportPrice,
 			$payment,
-			$paymentPrice,
-			$totalPrice->getBasePriceWithoutVat(),
-			$totalPrice->getBasePriceWithVat(),
-			$totalPrice->getBasePriceVatAmount()
+			$paymentPrice
 		);
 	}
 
+	/**
+	 * @param array $cartItemsPrices
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
 	private function calculateTotalPrice(
 		array $cartItemsPrices,
-		Price $transportPrice,
-		Price $paymentPrice
+		Price $transportPrice = null,
+		Price $paymentPrice = null
 	) {
 		$totalPriceWithoutVat = 0;
 		$totalPriceWithVat = 0;
@@ -88,13 +110,17 @@ class OrderReviewCalculation {
 			$totalPriceVatAmount += $cartItemsPrice->getTotalPriceVatAmount();
 		}
 
-		$totalPriceWithoutVat += $transportPrice->getBasePriceWithoutVat();
-		$totalPriceWithVat += $transportPrice->getBasePriceWithVat();
-		$totalPriceVatAmount += $transportPrice->getBasePriceVatAmount();
+		if ($transportPrice !== null) {
+			$totalPriceWithoutVat += $transportPrice->getBasePriceWithoutVat();
+			$totalPriceWithVat += $transportPrice->getBasePriceWithVat();
+			$totalPriceVatAmount += $transportPrice->getBasePriceVatAmount();
+		}
 
-		$totalPriceWithoutVat += $paymentPrice->getBasePriceWithoutVat();
-		$totalPriceWithVat += $paymentPrice->getBasePriceWithVat();
-		$totalPriceVatAmount += $paymentPrice->getBasePriceVatAmount();
+		if ($paymentPrice !== null) {
+			$totalPriceWithoutVat += $paymentPrice->getBasePriceWithoutVat();
+			$totalPriceWithVat += $paymentPrice->getBasePriceWithVat();
+			$totalPriceVatAmount += $paymentPrice->getBasePriceVatAmount();
+		}
 
 		return new Price(
 			$totalPriceWithoutVat,

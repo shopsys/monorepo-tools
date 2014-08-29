@@ -19,22 +19,22 @@ class OrderReview {
 	private $cartItemsPrices;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport
+	 * @var \SS6\ShopBundle\Model\Transport\Transport|null
 	 */
 	private $transport;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $transportPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment
+	 * @var \SS6\ShopBundle\Model\Payment\Payment|null
 	 */
 	private $payment;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $paymentPrice;
 
@@ -56,24 +56,24 @@ class OrderReview {
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
 	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[] $cartItemsPrices
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $transportPrice
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $paymentPrice
 	 * @param string $totalPriceWithoutVat
 	 * @param string $totalPriceWithVat
 	 * @param string $totalPriceVatAmount
+	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
+	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 */
 	public function __construct(
 		array $cartItems,
 		array $cartItemsPrices,
-		Transport $transport,
-		Price $transportPrice,
-		Payment $payment,
-		Price $paymentPrice,
 		$totalPriceWithoutVat,
 		$totalPriceWithVat,
-		$totalPriceVatAmount
+		$totalPriceVatAmount,
+		Transport $transport = null,
+		Price $transportPrice = null,
+		Payment $payment = null,
+		Price $paymentPrice = null
 	) {
 		$this->cartItems = $cartItems;
 		$this->cartItemsPrices = $cartItemsPrices;
@@ -101,28 +101,28 @@ class OrderReview {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport
+	 * @return \SS6\ShopBundle\Model\Transport\Transport|null
 	 */
 	public function getTransport() {
 		return $this->transport;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function getTransportPrice() {
 		return $this->transportPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \SS6\ShopBundle\Model\Payment\Payment|null
 	 */
 	public function getPayment() {
 		return $this->payment;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function getPaymentPrice() {
 		return $this->paymentPrice;

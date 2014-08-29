@@ -105,14 +105,23 @@ abstract class OrderItem {
 		return $this->name;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getPriceWithoutVat() {
 		return $this->priceWithoutVat;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getPriceWithVat() {
 		return $this->priceWithVat;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getVatPercent() {
 		return $this->vatPercent;
 	}
