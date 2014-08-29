@@ -15,10 +15,6 @@ use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
 
-	protected function setUp() {
-		$this->markTestSkipped();
-	}
-
 	public function testAddProductToCart() {
 		$em = $this->getEntityManager();
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
