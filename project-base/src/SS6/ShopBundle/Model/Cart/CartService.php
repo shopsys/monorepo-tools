@@ -92,7 +92,12 @@ class CartService {
 			if ($similarCartItem instanceof CartItem) {
 				$similarCartItem->changeQuantity($cartItem->getQuantity());
 			} else {
-				$newCartItem = new CartItem($customerIdentifier, $cartItem->getProduct(), $cartItem->getQuantity());
+				$newCartItem = new CartItem(
+					$customerIdentifier,
+					$cartItem->getProduct(),
+					$cartItem->getQuantity(),
+					$cartItem->getWatchedPrice()
+				);
 				$resultingCart->addItem($newCartItem);
 			}
 		}
