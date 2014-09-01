@@ -38,12 +38,18 @@ It makes gaps between icons. Modifier --active makes icons more visible.
 .action-icons__item {
 	display: inline-block;
 	margin: 0 8px 0 0;
-}
 
-.action-icons--active .action-icons__item {
-	color: @color-f;
+	color: @color-primary;
 
 	&:hover {
-		color: @color-f;
+		color: @color-base;
 	}
+}
+
+.action-icons__item--confirm {
+	color: @color-green;
+}
+
+.action-icons__item--discard {
+	color: @color-red;
 }

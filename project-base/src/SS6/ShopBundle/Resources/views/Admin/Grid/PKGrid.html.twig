@@ -125,10 +125,10 @@
 				<span class="grid-row-actions action-icons">
 					{% if grid.inlineEdit and emptyRow %}
 						<span class="js-inline-edit-buttons">
-							<a href="#" class="table-action js-inline-edit-save action-icons__item">
+							<a href="#" class="table-action js-inline-edit-save action-icons__item action-icons__item--confirm">
 								<i class="fa fa-check" title="Uložit změny"></i>
 							</a>
-							<a href="#" class="table-action js-inline-edit-cancel action-icons__item">
+							<a href="#" class="table-action js-inline-edit-cancel action-icons__item action-icons__item--discard">
 								<i class="fa fa-delete" title="Zahodit změny"></i>
 							</a>
 						</span>
@@ -137,7 +137,7 @@
 						</span>
 					{% else %}
 						{% if grid.inlineEdit %}
-							<a href="#" class="table-action js-inline-edit-edit action-icons__item">
+							<a href="#" class="table-action js-inline-edit-edit action-icons__item action-icons__item--edit">
 								<i class="fa fa-pencil" title="Upravit"></i>
 							</a>
 						{% endif %}
