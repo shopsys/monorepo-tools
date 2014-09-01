@@ -4,9 +4,15 @@
 {% block h1 %}Superadmin - cenotvorba{% endblock %}
 
 {% block main_content %}
-	{{ form_start(form) }}
-		{{ form_row(form.type, { 'label': 'Typ vstupní ceny' }) }}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				<div class="info-box">
+					{{ form_row(form.type, { 'label': 'Typ vstupní ceny' }) }}
+				</div>
 
-		{{ form_widget(form.save, { label: 'Uložit změny'}) }}
-	{{ form_end(form) }}
+				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+			{{ form_end(form) }}
+		</div>
+	</div>
 {% endblock %}
