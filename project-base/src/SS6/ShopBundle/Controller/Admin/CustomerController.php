@@ -114,8 +114,8 @@ class CustomerController extends Controller {
 		$grid->addColumn('city', 'city', 'Město', true);
 		$grid->addColumn('telephone', 'telephone', 'Telefon', true);
 		$grid->addColumn('email', 'u.email', 'Email', true);
-		$grid->addColumn('ordersCount', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
-		$grid->addColumn('ordersSumPrice', 'ordersSumPrice', 'Hodnota objednávek', true)->setClassAttribute('text-right');
+		$grid->addColumn('orders_count', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
+		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', true)->setClassAttribute('text-right');
 		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)->setClassAttribute('text-right');
 		
 

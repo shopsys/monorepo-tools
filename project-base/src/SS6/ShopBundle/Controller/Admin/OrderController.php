@@ -146,10 +146,10 @@ class OrderController extends Controller {
 		$grid->setDefaultOrder('number');
 
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
-		$grid->addColumn('createdAt', 'o.createdAt', 'Vytvořena', true);
-		$grid->addColumn('customerName', 'customerName', 'Zákazník', true);
-		$grid->addColumn('statusName', 'statusName', 'Stav', true);
-		$grid->addColumn('totalPrice', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
+		$grid->addColumn('created_at', 'o.createdAt', 'Vytvořena', true);
+		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
+		$grid->addColumn('status_name', 'statusName', 'Stav', true);
+		$grid->addColumn('total_price', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
 
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
