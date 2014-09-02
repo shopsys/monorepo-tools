@@ -163,7 +163,7 @@ class CustomerController extends Controller {
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
+			$form->get('userData')->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
