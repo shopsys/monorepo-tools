@@ -45,15 +45,9 @@ class BillingAddressData {
 	private $postcode;
 
 	/**
-	 * @var string|null
-	 */
-	private $country;
-
-	/**
 	 * @param string|null $street
 	 * @param string|null $city
 	 * @param string|null $postcode
-	 * @param string|null $country
 	 * @param boolean $companyCustomer
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
@@ -64,7 +58,6 @@ class BillingAddressData {
 		$street = null,
 		$city = null,
 		$postcode = null,
-		$country = null,
 		$companyCustomer = false,
 		$companyName = null,
 		$companyNumber = null,
@@ -74,7 +67,6 @@ class BillingAddressData {
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;
-		$this->country = $country;
 		$this->companyCustomer = $companyCustomer;
 		$this->companyName = $companyName;
 		$this->companyNumber = $companyNumber;
@@ -139,13 +131,6 @@ class BillingAddressData {
 	}
 
 	/**
-	 * @return string|null
-	 */
-	public function getCountry() {
-		return $this->country;
-	}
-
-	/**
 	 * @param string|null $telephone
 	 */
 	public function setTelephone($telephone) {
@@ -202,13 +187,6 @@ class BillingAddressData {
 	}
 
 	/**
-	 * @param string|null $country
-	 */
-	public function setCountry($country) {
-		$this->country = $country;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 */
 	public function setFromEntity(BillingAddress $billingAddress) {
@@ -220,7 +198,6 @@ class BillingAddressData {
 		$this->street = $billingAddress->getStreet();
 		$this->city = $billingAddress->getCity();
 		$this->postcode = $billingAddress->getPostcode();
-		$this->country = $billingAddress->getCountry();
 	}
 
 }

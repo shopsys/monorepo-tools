@@ -40,16 +40,10 @@ class DeliveryAddressData {
 	private $postcode;
 
 	/**
-	 * @var string|null
-	 */
-	private $country;
-
-	/**
 	 * @param boolean $addressFilled
 	 * @param string|null $street
 	 * @param string|null $city
 	 * @param string|null $postcode
-	 * @param string|null $country
 	 * @param string|null $companyName
 	 * @param string|null $contactPerson
 	 * @param string|null $telephone
@@ -59,7 +53,6 @@ class DeliveryAddressData {
 		$street = null,
 		$city = null,
 		$postcode = null,
-		$country = null,
 		$companyName = null,
 		$contactPerson = null,
 		$telephone = null
@@ -68,7 +61,6 @@ class DeliveryAddressData {
 		$this->street = $street;
 		$this->city = $city;
 		$this->postcode = $postcode;
-		$this->country = $country;
 		$this->companyName = $companyName;
 		$this->contactPerson = $contactPerson;
 		$this->telephone = $telephone;
@@ -124,13 +116,6 @@ class DeliveryAddressData {
 	}
 
 	/**
-	 * @return string|null
-	 */
-	public function getCountry() {
-		return $this->country;
-	}
-
-	/**
 	 * @param bool $addressFilled
 	 */
 	public function setAddressFilled($addressFilled) {
@@ -180,13 +165,6 @@ class DeliveryAddressData {
 	}
 
 	/**
-	 * @param string|null $country
-	 */
-	public function setCountry($country) {
-		$this->country = $country;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 */
 	public function setFromEntity(DeliveryAddress $deliveryAddress = null) {
@@ -198,7 +176,6 @@ class DeliveryAddressData {
 			$this->street = $deliveryAddress->getStreet();
 			$this->city = $deliveryAddress->getCity();
 			$this->postcode = $deliveryAddress->getPostcode();
-			$this->country = $deliveryAddress->getCountry();
 		} else {
 			$this->addressFilled = false;
 		}

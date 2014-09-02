@@ -47,8 +47,7 @@ class BillingAddressFormType extends AbstractType {
 			->add('companyTaxNumber', 'text', array('required' => false))
 			->add('street', 'text', array('required' => false))
 			->add('city', 'text', array('required' => false))
-			->add('postcode', 'text', array('required' => false))
-			->add('country', 'text', array('required' => false));
+			->add('postcode', 'text', array('required' => false));
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

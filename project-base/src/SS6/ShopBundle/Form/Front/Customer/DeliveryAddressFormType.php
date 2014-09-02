@@ -54,15 +54,6 @@ class DeliveryAddressFormType extends AbstractType {
 						'groups' => array('differentDeliveryAddress'),
 					)),
 				),
-			))
-			->add('country', 'text', array(
-				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
-						'message' => 'Vyplňte prosím stát',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
 			));
 	}
 

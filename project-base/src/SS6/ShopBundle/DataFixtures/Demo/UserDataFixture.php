@@ -45,7 +45,6 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 				'Hlubinská 36',
 				'Ostrava',
 				'70200',
-				'Czech Republic',
 				true,
 				'netdevelo s.r.o.',
 				'123456789',
@@ -57,7 +56,6 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 				'Slévárenská 18/408',
 				'Ostrava',
 				'70900',
-				'Czech Republic',
 				'netdevelo s.r.o.',
 				'John Doe',
 				'+420987654321'
@@ -73,7 +71,6 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 				'65597 Candido Cape',
 				'Larkinside',
 				'72984-3630',
-				'Taiwan',
 				false,
 				null,
 				null,
@@ -85,7 +82,6 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 				'91147 Reinger Via',
 				'Blandaville',
 				'60081',
-				'Syria',
 				null,
 				'Sporer Leda',
 				'576-124-5478 x1457'

@@ -71,13 +71,6 @@ class BillingAddress {
 	/**
 	 * @var string|null
 	 *
-	 * @ORM\Column(type="string", length=100, nullable=true)
-	 */
-	private $country;
-
-	/**
-	 * @var string|null
-	 *
 	 * @ORM\Column(type="string", length=30, nullable=true)
 	 */
 	private $telephone;
@@ -89,7 +82,6 @@ class BillingAddress {
 		$this->street = $billingAddressData->getStreet();
 		$this->city = $billingAddressData->getCity();
 		$this->postcode = $billingAddressData->getPostcode();
-		$this->country = $billingAddressData->getCountry();
 		$this->companyCustomer = $billingAddressData->getCompanyCustomer();
 		if ($this->companyCustomer) {
 			$this->companyName = $billingAddressData->getCompanyName();
@@ -106,7 +98,6 @@ class BillingAddress {
 		$this->street = $billingAddressData->getStreet();
 		$this->city = $billingAddressData->getCity();
 		$this->postcode = $billingAddressData->getPostcode();
-		$this->country = $billingAddressData->getCountry();
 		$this->companyCustomer = $billingAddressData->getCompanyCustomer();
 		if ($this->companyCustomer) {
 			$this->companyName = $billingAddressData->getCompanyName();
@@ -167,13 +158,6 @@ class BillingAddress {
 	 */
 	public function getPostcode() {
 		return $this->postcode;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCountry() {
-		return $this->country;
 	}
 
 	/**

@@ -30,7 +30,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			'street',
 			'city',
 			'postcode',
-			'country',
 			true,
 			'companyName',
 			'companyNumber',
@@ -42,7 +41,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			'deliveryStreet',
 			'deliveryCity',
 			'deliveryPostcode',
-			'deliveryCountry',
 			'deliveryCompanyName',
 			'deliveryContactPerson',
 			'deliveryTelephone'
@@ -136,7 +134,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			$order->getDeliveryStreet(),
 			$order->getDeliveryCity(),
 			$order->getDeliveryPostcode(),
-			null,
 			$order->getDeliveryCompanyName(),
 			$order->getDeliveryContactPerson(),
 			$order->getDeliveryTelephone()
@@ -153,7 +150,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($order->getStreet(), $customerData->getBillingAddressData()->getStreet());
 		$this->assertEquals($order->getCity(), $customerData->getBillingAddressData()->getCity());
 		$this->assertEquals($order->getPostcode(), $customerData->getBillingAddressData()->getPostcode());
-		$this->assertEquals(null, $customerData->getBillingAddressData()->getCountry());
 		$this->assertEquals($order->getTelephone(), $customerData->getBillingAddressData()->getTelephone());
 	}
 

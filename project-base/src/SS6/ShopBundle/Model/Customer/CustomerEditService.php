@@ -69,7 +69,6 @@ class CustomerEditService {
 			$deliveryAddressData->setStreet($order->getDeliveryStreet());
 			$deliveryAddressData->setCity($order->getDeliveryCity());
 			$deliveryAddressData->setPostcode($order->getDeliveryPostcode());
-			$deliveryAddressData->setCountry(null);
 			$deliveryAddressData->setCompanyName($order->getDeliveryCompanyName());
 			$deliveryAddressData->setContactPerson($order->getDeliveryContactPerson());
 			$deliveryAddressData->setTelephone($order->getDeliveryTelephone());
