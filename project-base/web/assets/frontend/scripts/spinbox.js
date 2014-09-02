@@ -1,20 +1,20 @@
 (function ($) {
 
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.spinbox = $.fn.SS6.spinbox || {};
+	SS6 = window.SS6 || {};
+	SS6.spinbox = SS6.spinbox || {};
 	
-	$.fn.SS6.spinbox.init = function (formElement) {
-		$('.js-spinbox').each($.fn.SS6.spinbox.bindSpinbox);
+	SS6.spinbox.init = function (formElement) {
+		$('.js-spinbox').each(SS6.spinbox.bindSpinbox);
 	}
 	
-	$.fn.SS6.spinbox.bindSpinbox = function () {
+	SS6.spinbox.bindSpinbox = function () {
 		var $input = $(this).find('input.js-spinbox-input');
 		var $plus = $(this).find('.js-spinbox-plus');
 		var $minus = $(this).find('.js-spinbox-minus');
 		
 		$input
-			.bind('spinbox.plus', $.fn.SS6.spinbox.plus)
-			.bind('spinbox.minus', $.fn.SS6.spinbox.minus);
+			.bind('spinbox.plus', SS6.spinbox.plus)
+			.bind('spinbox.minus', SS6.spinbox.minus);
 		
 		$plus
 			.bind("mousedown.spinbox",function(e){
@@ -34,7 +34,7 @@
 		
 	}
 	
-	$.fn.SS6.spinbox.plus = function() {
+	SS6.spinbox.plus = function() {
 		var value = $.trim($(this).val())
 		var max = $(this).data('spinbox-max');
 		
@@ -48,7 +48,7 @@
 		}
 	}
 	
-	$.fn.SS6.spinbox.minus = function() {
+	SS6.spinbox.minus = function() {
 		var value = $.trim($(this).val())
 		var min = $(this).data('spinbox-min');
 		
@@ -84,7 +84,7 @@
 	};
 	
 	$(document).ready(function () {
-		$.fn.SS6.spinbox.init();
+		SS6.spinbox.init();
 	});
 	
 })(jQuery);

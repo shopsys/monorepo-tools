@@ -1,29 +1,29 @@
 (function ($) {
 
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.addProduct = $.fn.SS6.addProduct || {};
+	SS6 = window.SS6 || {};
+	SS6.addProduct = SS6.addProduct || {};
 	
-	$.fn.SS6.addProduct.init = function (formElement) {
-		$('form.add-product').bind('submit.addProductAjaxSubmit', $.fn.SS6.addProduct.ajaxSubmit);
+	SS6.addProduct.init = function (formElement) {
+		$('form.add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 	}
 	
-	$.fn.SS6.addProduct.ajaxSubmit = function (event) {
+	SS6.addProduct.ajaxSubmit = function (event) {
 		$.ajax({
 			url: $(this).attr('action'),
 			type: 'POST',
 			data: $(this).serialize(),
 			dataType: 'json',
-			success: $.fn.SS6.addProduct.processResponse
+			success: SS6.addProduct.processResponse
 		});
 		
 		event.preventDefault();
 	}
 	
-	$.fn.SS6.addProduct.processResponse = function (data) {
+	SS6.addProduct.processResponse = function (data) {
 		var jsWindowId = $(data.jsWindow).filter('.window:first').attr('id');
 		$('#' + jsWindowId).remove();
 		$('body').append(data.jsWindow);
-		$.fn.SS6.window.open(data.jsWindowId);
+		SS6.window.open(data.jsWindowId);
 		if (data.cartBoxReloadUrl) {
 			$.ajax({
 				url: data.cartBoxReloadUrl,
@@ -36,7 +36,7 @@
 	}
 	
 	$(document).ready(function () {
-		$.fn.SS6.addProduct.init();
+		SS6.addProduct.init();
 	});
 	
 })(jQuery);

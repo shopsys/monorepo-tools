@@ -4,8 +4,8 @@
 
 (function ($) {
 
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.window = $.fn.SS6.Window || {};
+	SS6 = window.SS6 || {};
+	SS6.window = SS6.window || {};
 	
 	var windowPrefix = '#window-container-';
 	var windowButtonCloseSelector = '.window__close';
@@ -17,7 +17,7 @@
 	 * eventCloseButton (function) - button Close callback
 	 * eventContinueButton (function) - button Yes callback
 	 */
-	$.fn.SS6.window.create = function (options) {
+	SS6.window.create = function (options) {
 		var defaults = {
 			eventOnClose: function () {},
 			eventCloseButton: function () {},
@@ -47,7 +47,7 @@
 			
 	}
 	
-	$.fn.SS6.window.open = function(id) {
+	SS6.window.open = function(id) {
 		var $window = $(windowPrefix + id);
 		var windowId = $window.attr('id');
 		var $mainContainer = this.getMainContainer();
@@ -66,12 +66,12 @@
 		}
 	}
 	
-	$.fn.SS6.window.close = function(id) {
+	SS6.window.close = function(id) {
 		var $window = $(windowPrefix + id);
 		$window.trigger('windowClose');
 	}
 	
-	$.fn.SS6.window.getMainContainer = function() {
+	SS6.window.getMainContainer = function() {
 		var $mainContainer = $('#' + windowMainContainerId);
 		if ($mainContainer.size() === 0) {
 			$('body').append('<div id="' + windowMainContainerId + '"></div>');

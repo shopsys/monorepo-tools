@@ -13,7 +13,7 @@
 			{{ form_widget(form.delete, { label: 'Smazat', id: 'js-order-status-delete-submit', attr: {class: 'btn-danger'} }) }}
 		</div>
 
-		<a href="" onclick="$.fn.SS6.window.close({{ windowId|json_encode }}); return false;" class="btn btn-primary left">Zpět</a>
+		<a href="" onclick="SS6.window.close({{ windowId|json_encode }}); return false;" class="btn btn-primary left">Zpět</a>
 	</div>
 
 {{ form_end(form) }}

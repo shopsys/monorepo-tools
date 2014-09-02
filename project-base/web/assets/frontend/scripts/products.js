@@ -1,16 +1,16 @@
 (function ($) {
 
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.productDetail = $.fn.SS6.productDetail || {};
+	SS6 = window.SS6 || {};
+	SS6.productDetail = SS6.productDetail || {};
 	
-	$.fn.SS6.productDetail.init = function () {
+	SS6.productDetail.init = function () {
 		$('.js-gallery').magnificPopup({
 			type: 'image'
 		});
 	};
 	
 	$(document).ready(function () {
-		$.fn.SS6.productDetail.init();
+		SS6.productDetail.init();
 	});
 	
 })(jQuery);

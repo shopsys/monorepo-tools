@@ -15,7 +15,7 @@
 	{% endif %}
 </div>
 <script type="text/javascript">
-	jQuery.fn.SS6.window.create({
+	SS6.window.create({
 		{% if jsEventOnClose|default(false) %}eventOnClose: {{ jsEventOnClose }},{% endif %}
 		{% if jsEventCloseButton|default(false) %}eventCloseButton: {{ jsEventCloseButton }},{% endif %}
 		{% if jsEventContinueButton|default(false) %}eventContinueButton: {{ jsEventContinueButton }},{% endif %}

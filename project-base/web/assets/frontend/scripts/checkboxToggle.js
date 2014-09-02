@@ -1,12 +1,12 @@
 (function ($) {
 
-	var containerIdDataAttribute = 'checkbox-toggle-container-id';
-
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.checkboxToggle = $.fn.SS6.checkboxToggle || {};
+	SS6 = window.SS6 || {};
+	SS6.checkboxToggle = SS6.checkboxToggle || {};
 	
-	$.fn.SS6.checkboxToggle.init = function () {
-		$('.checkbox-toggle').on('change', $.fn.SS6.checkboxToggle.onChange);
+	var containerIdDataAttribute = 'checkbox-toggle-container-id';
+	
+	SS6.checkboxToggle.init = function () {
+		$('.checkbox-toggle').on('change', SS6.checkboxToggle.onChange);
 		
 		$('.checkbox-toggle').each(function () {
 			var containerId = $(this).data(containerIdDataAttribute);
@@ -19,7 +19,7 @@
 		});
 	};
 	
-	$.fn.SS6.checkboxToggle.onChange = function (event) {
+	SS6.checkboxToggle.onChange = function (event) {
 		var containerId = $(this).data(containerIdDataAttribute);
 		
 		if ($(this).is(':checked')) {
@@ -30,7 +30,7 @@
 	};
 	
 	$(document).ready(function () {
-		$.fn.SS6.checkboxToggle.init();
+		SS6.checkboxToggle.init();
 	});
 	
 })(jQuery);

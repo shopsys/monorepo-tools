@@ -1,46 +1,46 @@
 (function ($) {
 
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.order = $.fn.SS6.order || {};
+	SS6 = window.SS6 || {};
+	SS6.order = SS6.order || {};
 	
-	$.fn.SS6.order.paymentTransportRelations = [];
+	SS6.order.paymentTransportRelations = [];
 	
-	$.fn.SS6.order.init = function () {
-		$('input.transport').change($.fn.SS6.order.onTransportChange);
-		$('input.payment').change($.fn.SS6.order.onPaymentChange);
-		$.fn.SS6.order.updateTransports();
-		$.fn.SS6.order.updatePayments();
+	SS6.order.init = function () {
+		$('input.transport').change(SS6.order.onTransportChange);
+		$('input.payment').change(SS6.order.onPaymentChange);
+		SS6.order.updateTransports();
+		SS6.order.updatePayments();
 		
-		$('input.transport').change($.fn.SS6.order.updateContinueButton);
-		$('input.payment').change($.fn.SS6.order.updateContinueButton);
-		$.fn.SS6.order.updateContinueButton();
+		$('input.transport').change(SS6.order.updateContinueButton);
+		$('input.payment').change(SS6.order.updateContinueButton);
+		SS6.order.updateContinueButton();
 	};
 	
-	$.fn.SS6.order.addPaymentTransportRelation = function(paymentId, transportId) {
-		if ($.fn.SS6.order.paymentTransportRelations[paymentId] === undefined) {
-			$.fn.SS6.order.paymentTransportRelations[paymentId] = [];
+	SS6.order.addPaymentTransportRelation = function(paymentId, transportId) {
+		if (SS6.order.paymentTransportRelations[paymentId] === undefined) {
+			SS6.order.paymentTransportRelations[paymentId] = [];
 		}
-		$.fn.SS6.order.paymentTransportRelations[paymentId][transportId] = true;
+		SS6.order.paymentTransportRelations[paymentId][transportId] = true;
 	};
 	
-	$.fn.SS6.order.paymentTransportRelationExists = function(paymentId, transportId) {
-		if ($.fn.SS6.order.paymentTransportRelations[paymentId] !== undefined) {
-			if ($.fn.SS6.order.paymentTransportRelations[paymentId][transportId] !== undefined) {
-				return $.fn.SS6.order.paymentTransportRelations[paymentId][transportId];
+	SS6.order.paymentTransportRelationExists = function(paymentId, transportId) {
+		if (SS6.order.paymentTransportRelations[paymentId] !== undefined) {
+			if (SS6.order.paymentTransportRelations[paymentId][transportId] !== undefined) {
+				return SS6.order.paymentTransportRelations[paymentId][transportId];
 			}
 		}
 		
 		return false;
 	};
 	
-	$.fn.SS6.order.updateTransports = function () {
+	SS6.order.updateTransports = function () {
 		var $checkedPayment = $('input.payment:checked');
 		if ($checkedPayment.size()) {
 			var checkedPaymentId = $checkedPayment.data('id');
 			$('input.transport').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
-				if ($.fn.SS6.order.paymentTransportRelationExists(checkedPaymentId, id)) {
+				if (SS6.order.paymentTransportRelationExists(checkedPaymentId, id)) {
 					$checkbox.prop('disabled', false);
 					$checkbox.closest('label.chooser__item').removeClass('chooser__item--inactive');
 				} else {
@@ -63,14 +63,14 @@
 		}
 	};
 	
-	$.fn.SS6.order.updatePayments = function () {
+	SS6.order.updatePayments = function () {
 		var $checkedTransport = $('input.transport:checked');
 		if ($checkedTransport.size()) {
 			var checkedTransportId = $checkedTransport.data('id');
 			$('input.payment').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
-				if ($.fn.SS6.order.paymentTransportRelationExists(id, checkedTransportId)) {
+				if (SS6.order.paymentTransportRelationExists(id, checkedTransportId)) {
 					$checkbox.prop('disabled', false);
 					$checkbox.closest('label.chooser__item').removeClass('chooser__item--inactive');
 				} else {
@@ -93,7 +93,7 @@
 		}
 	};
 	
-	$.fn.SS6.order.onTransportChange = function () {
+	SS6.order.onTransportChange = function () {
 		var checked = $(this).prop('checked');
 		var checkedId = $(this).data('id');
 		
@@ -113,10 +113,10 @@
 			$(this).closest('label.chooser__item').removeClass('chooser__item--active');
 		}
 		
-		$.fn.SS6.order.updatePayments();
+		SS6.order.updatePayments();
 	};
 	
-	$.fn.SS6.order.onPaymentChange = function () {
+	SS6.order.onPaymentChange = function () {
 		var checked = $(this).prop('checked');
 		var checkedId = $(this).data('id');
 		
@@ -136,10 +136,10 @@
 			$(this).closest('label.chooser__item').removeClass('chooser__item--active');
 		}
 		
-		$.fn.SS6.order.updateTransports();
+		SS6.order.updateTransports();
 	};
 	
-	$.fn.SS6.order.updateContinueButton = function () {
+	SS6.order.updateContinueButton = function () {
 		var checkedTransport = $('input.transport:checked');
 		var checkedPayment = $('input.payment:checked');
 		
@@ -151,7 +151,7 @@
 	};
 	
 	$(document).ready(function () {
-		$.fn.SS6.order.init();
+		SS6.order.init();
 	});
 	
 })(jQuery);

@@ -1,15 +1,15 @@
 (function ($) {
 
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.fileUpload = $.fn.SS6.fileUpload || {};
+	SS6 = window.SS6 || {};
+	SS6.fileUpload = SS6.fileUpload || {};
 
-	$.fn.SS6.fileUpload.init = function () {
+	SS6.fileUpload.init = function () {
 		$('.js-file-upload').each(function() {
-			new $.fn.SS6.fileUpload.uploader($(this));
+			new SS6.fileUpload.uploader($(this));
 		});
 	}
 
-	$.fn.SS6.fileUpload.tryDeleteCachedFile = function (uploader) {
+	SS6.fileUpload.tryDeleteCachedFile = function (uploader) {
 		var filename = uploader.$hiddenInput.val();
 		if (filename) {
 			$.ajax({
@@ -21,7 +21,7 @@
 		}
 	}
 
-	$.fn.SS6.fileUpload.uploader = function ($uploader) {
+	SS6.fileUpload.uploader = function ($uploader) {
 		var uploader = this;
 		this.$uploader = $uploader;
 		this.$item = $uploader.find('.js-file-upload-item');
@@ -47,7 +47,7 @@
 		}
 
 		this.removeUploadedFile = function() {
-			$.fn.SS6.fileUpload.tryDeleteCachedFile(uploader);
+			SS6.fileUpload.tryDeleteCachedFile(uploader);
 			uploader.$hiddenInput.val('');
 			uploader.$item.hide();
 		}
@@ -81,7 +81,7 @@
 			onUploadSuccess: function(id, data){
 				uploader.$progress.hide();
 				if (data.status === 'success') {
-					$.fn.SS6.fileUpload.tryDeleteCachedFile(uploader);
+					SS6.fileUpload.tryDeleteCachedFile(uploader);
 					uploader.$hiddenInput.val(data.filename);
 					updateFileStatus('success', 'Úspěšně nahráno');
 				} else {
@@ -107,7 +107,7 @@
 	}
 
 	$(document).ready(function () {
-		$.fn.SS6.fileUpload.init();
+		SS6.fileUpload.init();
 	});
 
 })(jQuery);

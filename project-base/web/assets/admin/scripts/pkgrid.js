@@ -1,12 +1,13 @@
 (function ($){
-	$.fn.SS6 = $.fn.SS6 || {};
-	$.fn.SS6.pkgrid = $.fn.SS6.pkgrid || {};
+
+	SS6 = SS6 || {};
+	SS6.pkgrid = SS6.pkgrid || {};
 	
-	$.fn.SS6.pkgrid.init = function (formElement) {
-		$('.js-pkgrid-go-to').each($.fn.SS6.pkgrid.bindGoTo);
+	SS6.pkgrid.init = function (formElement) {
+		$('.js-pkgrid-go-to').each(SS6.pkgrid.bindGoTo);
 	}
 	
-	$.fn.SS6.pkgrid.bindGoTo = function () {
+	SS6.pkgrid.bindGoTo = function () {
 		var $button = $(this).find('.js-pkgrid-go-to-button');
 		var $input = $(this).find('.js-pkgrid-go-to-input');
 		
@@ -23,7 +24,7 @@
 	}
 	
 	$(document).ready(function () {
-		$.fn.SS6.pkgrid.init();
+		SS6.pkgrid.init();
 	});
 	
 })(jQuery);
