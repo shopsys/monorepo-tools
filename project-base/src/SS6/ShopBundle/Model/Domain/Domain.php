@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 class Domain {
 
 	/**
-	 * @var int
+	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig|null
 	 */
-	private $id;
+	private $currentDomainConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
@@ -27,34 +27,7 @@ class Domain {
 	 * @return int
 	 */
 	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * @param int $domainId
-	 */
-	public function switchDomain($domainId) {
-		if ($domainId === null || !array_key_exists($domainId, $this->domainConfigs)) {
-			throw new \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException();
-		}
-
-		$this->id = $domainId;
-	}
-
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 */
-	public function switchDomainByRequest(Request $request) {
-		$host = $request->getHost();
-
-		foreach ($this->domainConfigs as $domainConfig) {
-			if ($domainConfig->getDomain() === $host) {
-				$this->id = $domainConfig->getId();
-				return;
-			}
-		}
-
-		throw new \SS6\ShopBundle\Model\Domain\Exception\UnableToResolveDomainException();
+		return $this->getCurrentConfig()->getId();
 	}
 
 	/**
@@ -65,14 +38,44 @@ class Domain {
 	}
 
 	/**
+	 * @param int $domainId
+	 */
+	public function switchDomain($domainId) {
+		foreach ($this->domainConfigs as $domainConfig) {
+			if ($domainId === $domainConfig->getId()) {
+				$this->currentDomainConfig = $domainConfig;
+				return;
+			}
+		}
+	
+		throw new \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException();
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function switchDomainByRequest(Request $request) {
+		$host = $request->getHost();
+
+		foreach ($this->domainConfigs as $domainConfig) {
+			if ($domainConfig->getDomain() === $host) {
+				$this->currentDomainConfig = $domainConfig;
+				return;
+			}
+		}
+
+		throw new \SS6\ShopBundle\Model\Domain\Exception\UnableToResolveDomainException();
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
 	 */
 	private function getCurrentConfig() {
-		if ($this->id === null) {
+		if ($this->currentDomainConfig === null) {
 			throw new \SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException();
 		}
 
-		return $this->domainConfigs[$this->id];
+		return $this->currentDomainConfig;
 	}
 
 }
