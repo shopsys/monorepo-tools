@@ -5,7 +5,7 @@ imports:
 parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
-  ss6.domain_config_filepath: %kernel.root_dir%/domains.yml
+  ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.web_dir: %kernel.root_dir%/../web
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
