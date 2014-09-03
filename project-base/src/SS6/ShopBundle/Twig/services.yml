@@ -1,5 +1,11 @@
 services:
-  
+
+  ss6.twig.domain_extension:
+    class: SS6\ShopBundle\Twig\DomainExtension
+    arguments: [@service_container]
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.file_upload_extension:
     class: SS6\ShopBundle\Twig\FileUploadExtension
     tags:
