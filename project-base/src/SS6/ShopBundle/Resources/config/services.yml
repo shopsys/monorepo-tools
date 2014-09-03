@@ -5,6 +5,7 @@ imports:
 parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
+  ss6.domain_config_filepath: %kernel.root_dir%/domains.yml
   ss6.web_dir: %kernel.root_dir%/../web
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
@@ -130,6 +131,19 @@ services:
 
   ss6.shop.customer.user_repository:
     class: SS6\ShopBundle\Model\Customer\UserRepository
+
+  ss6.shop.domain:
+    class: SS6\ShopBundle\Model\Domain\Domain
+    factory_service: ss6.shop.domain.domain_factory
+    factory_method: create
+    arguments:
+      - %ss6.domain_config_filepath%
+
+  ss6.shop.domain.config.domains_config_loader:
+    class: SS6\ShopBundle\Model\Domain\Config\DomainsConfigLoader
+
+  ss6.shop.domain.domain_factory:
+    class: SS6\ShopBundle\Model\Domain\DomainFactory
 
   ss6.shop.flash_message.bag.admin:
     class: SS6\ShopBundle\Model\FlashMessage\Bag
