@@ -38,12 +38,9 @@ class DomainFactory {
 			$domain->switchDomainByRequest($this->requestStack->getMasterRequest());
 		} else {
 			$domainId = getenv('DOMAIN');
-			if ($domainId === false) {
-				throw new \SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException(
-					'Use DOMAIN environment variable to set proper domain ID'
-				);
+			if ($domainId !== false) {
+				$domain->switchDomainById($domainId);
 			}
-			$domain->switchDomain($domainId);
 		}
 
 		return $domain;

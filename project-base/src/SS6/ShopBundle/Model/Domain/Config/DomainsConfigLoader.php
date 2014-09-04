@@ -59,8 +59,9 @@ class DomainsConfigLoader {
 
 	/**
 	 * @param array $domainConfig
+	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
 	 */
-	private function processDomainConfigArray($domainConfig) {
+	private function processDomainConfigArray(array $domainConfig) {
 		return new DomainConfig(
 			$domainConfig[DomainsConfigDefinition::CONFIG_ID],
 			$domainConfig[DomainsConfigDefinition::CONFIG_DOMAIN],
