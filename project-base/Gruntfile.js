@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/admin/main.less'
+					'web/assets/admin/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/common/admin/main.less'
 				},
 				options: {
 					compress: true,
@@ -19,23 +19,37 @@ module.exports = function(grunt) {
 				}
 			},
 
-			frontend: {
+			frontend1: {
 				files: {
-					'web/assets/frontend/styles/index.css': 'src/SS6/ShopBundle/Resources/styles/front/main.less'
+					'web/assets/frontend/styles/index1.css': 'src/SS6/ShopBundle/Resources/styles/common/front/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
-					sourceMapFilename: 'web/assets/frontend/styles/index.css.map',
+					sourceMapFilename: 'web/assets/frontend/styles/index1.css.map',
 					sourceMapBasepath: 'web',
-					sourceMapURL: 'index.css.map',
+					sourceMapURL: 'index1.css.map',
+					sourceMapRootpath: '../../../'
+				}
+			},
+
+			frontend2: {
+				files: {
+					'web/assets/frontend/styles/index2.css': 'src/SS6/ShopBundle/Resources/styles/domain2/front/main.less'
+				},
+				options: {
+					compress: true,
+					sourceMap: true,
+					sourceMapFilename: 'web/assets/frontend/styles/index2.css.map',
+					sourceMapBasepath: 'web',
+					sourceMapURL: 'index2.css.map',
 					sourceMapRootpath: '../../../'
 				}
 			},
 
 			wysiwyg: {
 				files: {
-					'web/assets/admin/styles/wysiwyg.css': 'src/SS6/ShopBundle/Resources/styles/front/wysiwyg.less'
+					'web/assets/admin/styles/wysiwyg.css': 'src/SS6/ShopBundle/Resources/styles/common/front/wysiwyg.less'
 				},
 				options: {
 					compress: true
@@ -55,14 +69,25 @@ module.exports = function(grunt) {
 						'web/assets/admin/styles/index-ie8.css': 'web/assets/admin/styles/index.css'
 				}
 			},
-			frontend: {
+			
+			frontend1: {
 				options: {
 					legacyWidth: 1200,
 					matchingOnly: false,
 					overridesOnly: false
 				},
 				files: {
-					'web/assets/frontend/styles/index-ie8.css': 'web/assets/frontend/styles/index.css'
+					'web/assets/frontend/styles/index1-ie8.css': 'web/assets/frontend/styles/index1.css'
+				}
+			},
+			frontend2: {
+				options: {
+					legacyWidth: 1200,
+					matchingOnly: false,
+					overridesOnly: false
+				},
+				files: {
+					'web/assets/frontend/styles/index2-ie8.css': 'web/assets/frontend/styles/index2.css'
 				}
 			}
 		},
@@ -72,7 +97,7 @@ module.exports = function(grunt) {
 				src: 'web/assets/admin/images/icons/*.png',
 				dest: 'web/assets/admin/images/icons/*.png',
 				destImg: 'web/assets/admin/images/sprites/sprite.png',
-				destCSS: 'src/SS6/ShopBundle/Resources/styles/admin/libs/sprites.less',
+				destCSS: 'src/SS6/ShopBundle/Resources/styles/common/admin/libs/sprites.less',
 				imgPath: '../images/sprites/sprite.png',
 				algorithm: 'binary-tree',
 				padding: 50,
@@ -100,7 +125,7 @@ module.exports = function(grunt) {
 				src: 'web/assets/frontend/images/icons/*.png',
 				dest: 'web/assets/frontend/images/icons/*.png',
 				destImg: 'web/assets/frontend/images/sprites/sprite.png',
-				destCSS: 'src/SS6/ShopBundle/Resources/styles/front/libs/sprites.less',
+				destCSS: 'src/SS6/ShopBundle/Resources/styles/common/front/libs/sprites.less',
 				imgPath: '../images/sprites/sprite.png',
 				algorithm: 'binary-tree',
 				padding: 50,
@@ -151,7 +176,7 @@ module.exports = function(grunt) {
 				}
 			},
 			frontend: {
-				files: ['src/SS6/ShopBundle/Resources/styles/front/**/*.less', 'web/assets/frontend/images/icons/**/*.png'],
+				files: ['src/SS6/ShopBundle/Resources/styles/*/front/**/*.less', 'web/assets/frontend/images/icons/**/*.png'],
 				tasks: ['frontend'],
 				options: {
 					livereload: true,
