@@ -2,9 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order;
 
-/**
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- */
 class OrderItemFormData {
 
 	/**

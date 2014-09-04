@@ -19,8 +19,6 @@ class CustomerController extends Controller {
 	 * @Route("/customer/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
-	 *
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
@@ -74,8 +72,6 @@ class CustomerController extends Controller {
 
 	/**
 	 * @Route("/customer/list/")
-	 *
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function listAction() {
 		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');

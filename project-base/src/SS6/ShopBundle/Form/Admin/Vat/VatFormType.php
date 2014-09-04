@@ -20,7 +20,6 @@ class VatFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
-	 * @SuppressWarnings(PHPMD)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder

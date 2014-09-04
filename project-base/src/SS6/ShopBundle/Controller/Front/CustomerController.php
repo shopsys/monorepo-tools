@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends Controller {
 
-	/**
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-	 */
 	public function editAction(Request $request) {
 		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
 		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
