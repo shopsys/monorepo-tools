@@ -4,10 +4,11 @@ namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\PKGrid\ActionColumn;
-use SS6\ShopBundle\Model\PKGrid\GridFactory;
+use SS6\ShopBundle\Model\PKGrid\GridFactoryInterface;
+use SS6\ShopBundle\Model\PKGrid\PKGridFactory;
 use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 
-class VatGridFactory {
+class VatGridFactory implements GridFactoryInterface {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -15,15 +16,15 @@ class VatGridFactory {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\GridFactory
+	 * @var \SS6\ShopBundle\Model\PKGrid\PKGridFactory
 	 */
 	private $gridFactory;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\PKGrid\GridFactory $gridFactory
+	 * @param \SS6\ShopBundle\Model\PKGrid\PKGridFactory $gridFactory
 	 */
-	public function __construct(EntityManager $em, GridFactory $gridFactory) {
+	public function __construct(EntityManager $em, PKGridFactory $gridFactory) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 	}

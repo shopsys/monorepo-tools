@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
-class GridFactory {
+class PKGridFactory {
 
 	/**
 	 * @var \Symfony\Component\HttpFoundation\RequestStack
