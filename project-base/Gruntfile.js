@@ -47,9 +47,17 @@ module.exports = function(grunt) {
 				}
 			},
 
-			wysiwyg: {
+			wysiwyg1: {
 				files: {
 					'web/assets/admin/styles/wysiwyg.css': 'src/SS6/ShopBundle/Resources/styles/common/front/wysiwyg.less'
+				},
+				options: {
+					compress: true
+				}
+			},
+			wysiwyg2: {
+				files: {
+					'web/assets/admin/styles/wysiwyg.css': 'src/SS6/ShopBundle/Resources/styles/domain2/front/wysiwyg.less'
 				},
 				options: {
 					compress: true
@@ -69,7 +77,7 @@ module.exports = function(grunt) {
 						'web/assets/admin/styles/index-ie8.css': 'web/assets/admin/styles/index.css'
 				}
 			},
-			
+
 			frontend1: {
 				options: {
 					legacyWidth: 1200,
@@ -156,12 +164,14 @@ module.exports = function(grunt) {
 				options: {
 					name: 'Shopsys 6',
 					include: [
-						'web/assets/frontend/styles/index.css',
+						'web/assets/frontend/styles/index1.css',
+						'web/assets/frontend/styles/index2.css',
 						'web/assets/admin/styles/index.css'
 					]
 				},
 				files: {
-					'docs/frontend': 'src/SS6/ShopBundle/Resources/styles/front/components/',
+					'docs/frontend/common': 'src/SS6/ShopBundle/Resources/styles/common/front/components/',
+					'docs/frontend/domain2': 'src/SS6/ShopBundle/Resources/styles/domain2/front/components/',
 					'docs/admin': 'src/SS6/ShopBundle/Resources/styles/admin/components/'
 				}
 			}
@@ -169,15 +179,29 @@ module.exports = function(grunt) {
 
 		watch: {
 			admin: {
-				files: ['src/SS6/ShopBundle/Resources/styles/admin/**/*.less', 'web/assets/admin/images/icons/**/*.png'],
+				files: ['src/SS6/ShopBundle/Resources/styles/common/admin/**/*.less', 'web/assets/admin/images/icons/**/*.png'],
 				tasks: ['admin'],
 				options: {
 					livereload: true,
 				}
 			},
-			frontend: {
-				files: ['src/SS6/ShopBundle/Resources/styles/*/front/**/*.less', 'web/assets/frontend/images/icons/**/*.png'],
-				tasks: ['frontend'],
+			frontendSprite: {
+				files: ['web/assets/frontend/images/icons/**/*.png'],
+				tasks: ['frontendSprite'],
+				options: {
+					livereload: true,
+				}
+			},
+			frontend1: {
+				files: ['src/SS6/ShopBundle/Resources/styles/common/front/**/*.less'],
+				tasks: ['frontend1'],
+				options: {
+					livereload: true,
+				}
+			},
+			frontend2: {
+				files: ['src/SS6/ShopBundle/Resources/styles/domain2/front/**/*.less'],
+				tasks: ['frontend2'],
 				options: {
 					livereload: true,
 				}
@@ -195,7 +219,9 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['sprite', 'less', 'legacssy']);
 
-	grunt.registerTask('frontend', ['sprite:frontend', 'less:frontend', 'legacssy:frontend', 'less:wysiwyg']);
+	grunt.registerTask('frontend1', ['less:frontend1', 'legacssy:frontend1', 'less:wysiwyg1']);
+	grunt.registerTask('frontend2', ['less:frontend2', 'legacssy:frontend2', 'less:wysiwyg2']);
+	grunt.registerTask('frontendSprite', ['sprite:frontend']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
 
 	grunt.registerTask('docs', ['styledocco']);
