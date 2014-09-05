@@ -3,19 +3,13 @@
 namespace SS6\ShopBundle\Model\Product\Availability;
 
 use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType;
-use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
+use SS6\ShopBundle\Model\PKGrid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Request;
 
-class AvailabilityInlineEdit implements GridInlineEditInterface {
-
-	/**
-	 * @var \Symfony\Component\Form\FormFactory
-	 */
-	private $formFactory;
+class AvailabilityInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade
@@ -23,43 +17,57 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 	private $availabilityFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory
-	 */
-	private $availabilityGridFactory;
-
-	/**
-	 * @var string
-	 */
-	private $serviceName;
-
-	/**
-	 * @var string
-	 */
-	private $queryId;
-
-	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
+	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
 	 */
 	public function __construct(
 		FormFactory $formFactory,
-		AvailabilityFacade $availabilityFacade,
-		AvailabilityGridFactory $availabilityGridFactory
+		AvailabilityGridFactory $availabilityGridFactory,
+		AvailabilityFacade $availabilityFacade
 	) {
-		$this->formFactory = $formFactory;
 		$this->availabilityFacade = $availabilityFacade;
-		$this->availabilityGridFactory = $availabilityGridFactory;
 
-		$this->serviceName = 'ss6.shop.product.availability.availability_inline_edit';
-		$this->queryId = 'a.id';
+		parent::__construct($formFactory, $availabilityGridFactory);
 	}
 
 	/**
-	 * @param mixed $availabilityId
-	 * @return \Symfony\Component\Form\Form
+	 * @return string
 	 */
-	public function getForm($availabilityId) {
+	public function getServiceName() {
+		return 'ss6.shop.product.availability.availability_inline_edit';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getQueryId() {
+		return 'a.id';
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+	 * @return int
+	 */
+	protected function createEntityAndGetId($availabilityData) {
+		$availability = $this->availabilityFacade->create($availabilityData);
+
+		return $availability->getId();
+	}
+
+	/**
+	 * @param int $availabilityId
+	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+	 */
+	protected function editEntity($availabilityId, $availabilityData) {
+		$this->availabilityFacade->edit($availabilityId, $availabilityData);
+	}
+
+	/**
+	 * @param int|null $availabilityId
+	 * @return \SS6\ShopBundle\Model\Product\Availability\AvailabilityData
+	 */
+	protected function getFormDataObject($availabilityId = null) {
 		$availabilityData = new AvailabilityData();
 
 		if ($availabilityId !== null) {
@@ -68,62 +76,14 @@ class AvailabilityInlineEdit implements GridInlineEditInterface {
 			$availabilityData->setFromEntity($availability);
 		}
 
-		return $this->formFactory->create(new AvailabilityFormType(), $availabilityData);
+		return $availabilityData;
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param mixed $availabilityId
-	 * @return int
-	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
+	 * @return \SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType
 	 */
-	public function saveForm(Request $request, $availabilityId) {
-		$form = $this->getForm($availabilityId);
-		$form->handleRequest($request);
-		
-		if (!$form->isValid()) {
-			$formErrors = [];
-			foreach ($form->getErrors(true) as $error) {
-				/* @var $error \Symfony\Component\Form\FormError */
-				$formErrors[] = $error->getMessage();
-			}
-			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
-		}
-
-		$availabilityData = $form->getData();
-		if ($availabilityId !== null) {
-			$availabilityId = (int)$availabilityId;
-			$this->availabilityFacade->edit($availabilityId, $availabilityData);
-		} else {
-			$availability = $this->availabilityFacade->create($availabilityData);
-			$availabilityId = $availability->getId();
-		}
-
-		return $availabilityId;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
-	 */
-	public function getGrid() {
-		$grid = $this->availabilityGridFactory->create();
-		$grid->setInlineEditService($this);
-
-		return $grid;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return $this->serviceName;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getQueryId() {
-		return $this->queryId;
+	protected function getFormType() {
+		return new AvailabilityFormType();
 	}
 
 }
