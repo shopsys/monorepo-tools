@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use \SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\PKGrid\GridFactoryInterface;
 use SS6\ShopBundle\Model\PKGrid\PKGridFactory;
 
