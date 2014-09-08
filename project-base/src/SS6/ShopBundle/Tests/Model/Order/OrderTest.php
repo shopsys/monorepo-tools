@@ -19,10 +19,9 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 
 class OrderTest extends PHPUnit_Framework_TestCase {
 
-	protected function setUp() {
-		$this->markTestSkipped();
-	}
-
+	/**
+	 * @SuppressWarnings(PMD.ExcessiveMethodLength)
+	 */
 	public function testTotalPrice() {
 		$number = '123456';
 		$transport = new Transport(new TransportData('TransportName', 199.95));
@@ -54,12 +53,44 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$product1 = new Product(new ProductData('ProductName1', null, null, null, null, 1000, $vat1));
 		$product2 = new Product(new ProductData('ProductName2', null, null, null, null, 10000, $vat2));
 
-		$orderProduct1 = new OrderProduct($order, $product1->getName(), $product1->getPrice(), 1, $product1);
-		$orderProduct2 = new OrderProduct($order, $product2->getName(), $product2->getPrice(), 2, $product2);
-		$orderPayment = new OrderPayment($order, $payment->getName(), $payment->getPrice(), 1, $payment);
-		$orderTransport = new OrderTransport($order, $transport->getName(), $transport->getPrice(), 1, $transport);
+		$orderProduct1 = new OrderProduct(
+			$order,
+			$product1->getName(),
+			$product1->getPrice(),
+			$product1->getPrice() * 1.2,
+			20,
+			1,
+			$product1
+		);
+		$orderProduct2 = new OrderProduct(
+			$order,
+			$product2->getName(),
+			$product2->getPrice(),
+			$product2->getPrice() * 1.2,
+			20,
+			2,
+			$product2
+		);
+		$orderPayment = new OrderPayment(
+			$order,
+			$payment->getName(),
+			$payment->getPrice(),
+			$payment->getPrice() * 1.2,
+			20,
+			1,
+			$payment
+		);
+		$orderTransport = new OrderTransport(
+			$order,
+			$transport->getName(),
+			$transport->getPrice(),
+			$transport->getPrice() * 1.2,
+			20,
+			1,
+			$transport
+		);
 
-		$this->assertEquals(199.95 + 99.95 + 1000 + 2 * 10000, $order->getTotalPrice());
-		$this->assertEquals(1000 + 2 * 10000, $order->getTotalProductPrice());
+		$this->assertEquals(199.95 * 1.2 + 99.95 * 1.2 + 1200 + 2 * 12000, $order->getTotalPrice());
+		$this->assertEquals(1200 + 2 * 12000, $order->getTotalProductPrice());
 	}
 }
