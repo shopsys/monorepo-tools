@@ -9,6 +9,8 @@ class AppKernel extends Kernel {
 
 	public function registerBundles() {
 		$bundles = array(
+			new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
+			new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
 			new Craue\FormFlowBundle\CraueFormFlowBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),

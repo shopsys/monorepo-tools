@@ -8,16 +8,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/styles/index.css') }}" media="screen, projection">
-	<link rel="stylesheet" type="text/css" href="{{ asset('http://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/flick/jquery-ui.css') }}">
 	<!--[if IE 8 ]>
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/styles/index-ie8.css') }}" media="screen, projection">
 	<![endif]-->
 
 	{# bootstrap/tooltip.js must be imported before bootstrap/popover.js #}
 	{{ importJavascripts([
-		'http://code.jquery.com/jquery-1.11.0.min.js',
-		'http://code.jquery.com/ui/1.10.4/jquery-ui.min.js',
-		'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/i18n/jquery.ui.datepicker-cs.js',
+		'bundles/bmatznerjquery/js/jquery.min.js',
+		'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js',
 		'assets/frontend/scripts/checkboxToggle.js',
 		'assets/frontend/scripts/window.js',
 		'assets/admin/scripts/bootstrap/tooltip.js', 
