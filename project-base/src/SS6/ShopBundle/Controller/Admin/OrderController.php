@@ -123,7 +123,7 @@ class OrderController extends Controller {
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
 
 		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder

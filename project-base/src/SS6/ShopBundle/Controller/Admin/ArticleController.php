@@ -77,7 +77,7 @@ class ArticleController extends Controller {
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder

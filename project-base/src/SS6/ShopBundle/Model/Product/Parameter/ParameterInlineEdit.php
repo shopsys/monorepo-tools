@@ -3,19 +3,13 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
-use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
+use SS6\ShopBundle\Model\PKGrid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterGridFactory;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Request;
 
-class ParameterInlineEdit implements GridInlineEditInterface {
-
-	/**
-	 * @var \Symfony\Component\Form\FormFactory
-	 */
-	private $formFactory;
+class ParameterInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
@@ -23,43 +17,57 @@ class ParameterInlineEdit implements GridInlineEditInterface {
 	private $parameterFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterGridFactory
-	 */
-	private $parameterGridFactory;
-
-	/**
-	 * @var string
-	 */
-	private $serviceName;
-
-	/**
-	 * @var string
-	 */
-	private $queryId;
-
-	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterGridFactory $parameterGridFactory
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
 	 */
 	public function __construct(
 		FormFactory $formFactory,
-		ParameterFacade $parameterFacade,
-		ParameterGridFactory $parameterGridFactory
+		ParameterGridFactory $parameterGridFactory,
+		ParameterFacade $parameterFacade
 	) {
-		$this->formFactory = $formFactory;
 		$this->parameterFacade = $parameterFacade;
-		$this->parameterGridFactory = $parameterGridFactory;
 
-		$this->serviceName = 'ss6.shop.product.parameter.parameter_inline_edit';
-		$this->queryId = 'p.id';
+		parent::__construct($formFactory, $parameterGridFactory);
 	}
 
 	/**
-	 * @param mixed $parameterId
-	 * @return \Symfony\Component\Form\Form
+	 * @return string
 	 */
-	public function getForm($parameterId) {
+	public function getServiceName() {
+		return 'ss6.shop.product.parameter.parameter_inline_edit';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getQueryId() {
+		return 'p.id';
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+	 * @return int
+	 */
+	protected function createEntityAndGetId($parameterData) {
+		$parameter = $this->parameterFacade->create($parameterData);
+
+		return $parameter->getId();
+	}
+
+	/**
+	 * @param int $parameterId
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+	 */
+	protected function editEntity($parameterId, $parameterData) {
+		$this->parameterFacade->edit($parameterId, $parameterData);
+	}
+
+	/**
+	 * @param int|null $parameterId
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterData
+	 */
+	protected function getFormDataObject($parameterId = null) {
 		$parameterData = new ParameterData();
 
 		if ($parameterId !== null) {
@@ -68,62 +76,14 @@ class ParameterInlineEdit implements GridInlineEditInterface {
 			$parameterData->setFromEntity($parameter);
 		}
 
-		return $this->formFactory->create(new ParameterFormType(), $parameterData);
+		return $parameterData;
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param mixed $parameterId
-	 * @return int
-	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
+	 * @return \SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType
 	 */
-	public function saveForm(Request $request, $parameterId) {
-		$form = $this->getForm($parameterId);
-		$form->handleRequest($request);
-		
-		if (!$form->isValid()) {
-			$formErrors = [];
-			foreach ($form->getErrors(true) as $error) {
-				/* @var $error \Symfony\Component\Form\FormError */
-				$formErrors[] = $error->getMessage();
-			}
-			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
-		}
-		
-		$parameterData = $form->getData();
-		if ($parameterId !== null) {
-			$parameterId = (int)$parameterId;
-			$this->parameterFacade->edit($parameterId, $parameterData);
-		} else {
-			$parameter = $this->parameterFacade->create($parameterData);
-			$parameterId = $parameter->getId();
-		}
-
-		return $parameterId;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
-	 */
-	public function getGrid() {
-		$grid = $this->parameterGridFactory->create();
-		$grid->setInlineEditService($this);
-
-		return $grid;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return $this->serviceName;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getQueryId() {
-		return $this->queryId;
+	protected function getFormType() {
+		return new ParameterFormType();
 	}
 
 }

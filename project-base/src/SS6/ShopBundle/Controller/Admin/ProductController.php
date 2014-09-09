@@ -114,7 +114,7 @@ class ProductController extends Controller {
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\GridFactory */
+		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
 		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
 		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
 

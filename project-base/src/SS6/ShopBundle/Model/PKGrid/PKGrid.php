@@ -163,7 +163,9 @@ class PKGrid {
 	 */
 	public function addColumn($id, $queryId, $title, $sortable = false) {
 		if (array_key_exists($id, $this->columns)) {
-			throw new \Exception('Duplicate column id "' . $id . '" in grid "' . $this->id .  '"');
+			throw new \SS6\ShopBundle\Model\PKGrid\Exception\DuplicateColumnIdException(
+				'Duplicate column id "' . $id . '" in grid "' . $this->id .  '"'
+			);
 		}
 		$column = new Column($id, $queryId, $title, $sortable);
 		$this->columns[$id] = $column;
