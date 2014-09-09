@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd4dc19ffe5e98ce334dc22fe04e4154",
+    "hash": "376527b6b7936a5159688873eec72ffe",
     "packages": [
         {
             "name": "bmatzner/jquery-bundle",
@@ -50,6 +50,53 @@
                 "symfony"
             ],
             "time": "2014-05-05 16:19:00"
+        },
+        {
+            "name": "bmatzner/jquery-ui-bundle",
+            "version": "1.10.3",
+            "target-dir": "Bmatzner/JQueryUIBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bmatzner/BmatznerJQueryUIBundle.git",
+                "reference": "43d66b83d0b1a8e080134a6f73fab380ee20d978"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryUIBundle/zipball/43d66b83d0b1a8e080134a6f73fab380ee20d978",
+                "reference": "43d66b83d0b1a8e080134a6f73fab380ee20d978",
+                "shasum": ""
+            },
+            "require": {
+                "bmatzner/jquery-bundle": "*",
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Bmatzner\\JQueryUIBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Bernd Matzner",
+                    "email": "bernd@matznermatzner.de",
+                    "homepage": "http://berndmatzner.de"
+                }
+            ],
+            "description": "jQuery UI Bundle for Symfony2",
+            "homepage": "http://jqueryui.com/",
+            "keywords": [
+                "javascript",
+                "jquery",
+                "symfony",
+                "ui"
+            ],
+            "time": "2013-05-19 14:33:38"
         },
         {
             "name": "craue/formflow-bundle",
