@@ -18,4 +18,8 @@ class TransformString {
 
 		return $string;
 	}
+
+	public static function emptyStringsToNulls($value) {
+		return $value === '' ? null : $value;
+	}
 }

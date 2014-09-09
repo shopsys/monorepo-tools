@@ -36,7 +36,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 		$userRepository = $this->container->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
-		$user = $userRepository->findUserByEmail('no-reply@netdevelo.cz');
+		$user = $userRepository->findUserByEmail('test9@test.cz');
 
 		$this->createOrder(
 			array(
@@ -67,6 +67,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			'Prosím o dodání do pátku. Děkuji.'
 		);
 
+		$user = $userRepository->findUserByEmail('test20@test.cz');
 		$this->createOrder(
 			array(
 				'product_2' => 2,
@@ -75,13 +76,13 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('transport_cp'),
 			$this->referenceRepository->getReference('payment_cod'),
 			$this->referenceRepository->getReference('order_status_new'),
-			'Jan',
-			'Novák',
+			'Jidřich',
+			'Němec',
 			'no-reply@netdevelo.cz',
-			'+420123456789',
-			'Pouliční 11',
-			'Městník',
-			'12345',
+			'+420725651245',
+			'Sídlištní 3259',
+			'Orlová',
+			'65432',
 			$user
 		);
 
@@ -137,6 +138,107 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			'Lednice',
 			'69144',
 			null
+		);
+		
+		$this->createOrder(
+			array(
+				'product_10' => 1,
+				'product_20' => 4,
+			),
+			$this->referenceRepository->getReference('transport_cp'),
+			$this->referenceRepository->getReference('payment_cod'),
+			$this->referenceRepository->getReference('order_status_new'),
+			'Pavel',
+			'Novák',
+			'novak@test.cz',
+			'+420605123654',
+			'Adresní 6',
+			'Opava',
+			'72589'
+		);
+
+		$this->createOrder(
+			array(
+				'product_15' => 1,
+				'product_18' => 1,
+				'product_29' => 1,
+				'product_30' => 1,
+			),
+			$this->referenceRepository->getReference('transport_ppl'),
+			$this->referenceRepository->getReference('payment_card'),
+			$this->referenceRepository->getReference('order_status_done'),
+			'Pavla',
+			'Adámková',
+			'adamkova@test.cz',
+			'+4206051836459',
+			'Výpočetni 16',
+			'Praha',
+			'30015'
+		);
+
+		$this->createOrder(
+			array(
+				'product_9' => 1,
+				'product_19' => 1,
+				'product_26' => 1,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_cash'),
+			$this->referenceRepository->getReference('order_status_in_progress'),
+			'Adam',
+			'Žitný',
+			'zitny@test.cz',
+			'+4206051836459',
+			'Přímá 1',
+			'Plzeň',
+			'30010'
+		);
+
+		$this->createOrder(
+			array(
+				'product_7' => 1,
+				'product_17' => 6,
+				'product_27' => 1,
+				'product_37' => 1,
+				'product_47' => 2,
+			),
+			$this->referenceRepository->getReference('transport_ppl'),
+			$this->referenceRepository->getReference('payment_card'),
+			$this->referenceRepository->getReference('order_status_new'),
+			'Radim',
+			'Svátek',
+			'svatek@test.cz',
+			'+420733598748',
+			'Křivá 11',
+			'Jablonec',
+			'78952',
+			null,
+			'BestCompanyEver, s.r.o.',
+			'555555',
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			'Doufám, že vše dorazí v pořádku a co nejdříve :)'
+		);
+
+		$this->createOrder(
+			array(
+				'product_33' => 10,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_cash'),
+			$this->referenceRepository->getReference('order_status_canceled'),
+			'Viktor',
+			'Pátek',
+			'patek@test.cz',
+			'+420888777',
+			'Vyhlídková 88',
+			'Ostrava',
+			'71201'
 		);
 
 		$manager->flush();
