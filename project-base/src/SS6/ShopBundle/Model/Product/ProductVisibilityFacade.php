@@ -24,8 +24,12 @@ class ProductVisibilityFacade {
 		$this->productVisibilityRepository = $productVisibilityRepository;
 	}
 
-	public function refreshProductsVisibility() {
+	public function refreshProductsVisibilityDelayed() {
 		$this->recalcVisibility = true;
+	}
+
+	public function refreshProductsVisibilityNow() {
+		$this->productVisibilityRepository->refreshProductsVisibility();
 	}
 
 	/**
@@ -33,7 +37,7 @@ class ProductVisibilityFacade {
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
 		if ($this->recalcVisibility) {
-			$this->productVisibilityRepository->refreshProductsVisibility();
+			$this->refreshProductsVisibilityNow();
 		}
 	}
 }

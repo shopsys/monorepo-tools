@@ -45,7 +45,7 @@ class ProductEditFacade {
 		$this->em->persist($product);
 		$this->em->flush();
 		
-		$this->productVisibilityFacade->refreshProductsVisibility();
+		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 		
 		return $product;
 	}
@@ -61,7 +61,7 @@ class ProductEditFacade {
 
 		$this->em->flush();
 		
-		$this->productVisibilityFacade->refreshProductsVisibility();
+		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 		
 		return $product;
 	}

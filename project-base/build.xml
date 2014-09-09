@@ -26,10 +26,10 @@
 	<target name="build-demo" depends="composer,npm,clean,assetic,grunt,db-demo"/>
 	<target name="build-demo-dev" depends="build-demo,standards"/>
 	<target name="build-dev" depends="build,standards"/>
-	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
+	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,tests"/>
-	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo"/>
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo,products-visibility"/>
 
 	<target name="assetic">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
@@ -169,6 +169,13 @@
 			<arg value="text"/>
 			<arg value="${path.phpmd.ruleset}"/>
 			<arg value="--extensions=php"/>
+		</exec>
+	</target>
+	
+	<target name="products-visibility">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:product:visibility" />
 		</exec>
 	</target>
 
