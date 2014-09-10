@@ -13,8 +13,8 @@
 	{% if cart.itemsCount > 0 %}
 		{{ form_start(form) }}
 			{{ form_errors(form) }}
-			<table class="basket-list">
-				<thead class="basket-list__heading">
+			<table class="table-cart">
+				<thead class="table-cart__heading">
 					<tr>
 						<th class="table-col-10">Obrázek</th>
 						<th class="table-col-35">Název</th>
@@ -29,8 +29,8 @@
 				<tbody>
 					{% for cartItemKey, cartItem in cartItems %}
 						{% set cartItemPrice = cartItemPrices[cartItemKey] %}
-						<tr class="basket-list__item">
-							<td class="basket-list__image basket-list__cell-left">
+						<tr class="table-cart__item">
+							<td class="table-cart__image table-cart__cell-left">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}">
 									{% if imageExists(cartItem.product, 'default') %}
 										{{ image(cartItem.product, { size: 'default', height: '40px' }) }}
@@ -40,13 +40,13 @@
 								</a>
 							</td>
 
-							<td class="basket-list__title basket-list__cell-left">
+							<td class="table-cart__title table-cart__cell-left">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
 									{{ cartItem.name }}
 								</a>
 							</td>
 
-							<td class="basket-list__price-piece">
+							<td class="table-cart__price-piece">
 								{{ cartItemPrice.unitPriceWithVat|price }}
 							</td>
 
@@ -54,19 +54,19 @@
 								{{ cartItem.product.vat.percent }}%
 							</td>
 
-							<td class="basket-list__ammount">
-								<span class="input-spinbox js-spinbox">
-									<input type="button" class="button input-spinbox__button js-spinbox-minus" value="-" />
-									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
-									<input type="button" class="button input-spinbox__button js-spinbox-plus" value="+" />
+							<td class="table-cart__ammount">
+								<span class="form-input-spinbox js-spinbox">
+									<input type="button" class="button form-input-spinbox__button js-spinbox-minus" value="-" />
+									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
+									<input type="button" class="button form-input-spinbox__button js-spinbox-plus" value="+" />
 								</span>
 							</td>
 
-							<td class="basket-list__price-final">
+							<td class="table-cart__price-final">
 								{{ cartItemPrice.totalPriceWithVat|price }}
 							</td>
 
-							<td class="basket-list__remove">
+							<td class="table-cart__remove">
 								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
 									<img src="{{ asset('assets/frontend/images/icons/trash.png') }}" alt="Odstranit">
 								</a>
@@ -76,16 +76,16 @@
 				</tbody>
 
 
-				<tfoot class="basket-list__foot">
+				<tfoot class="table-cart__foot">
 					<tr>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>
 							{{ form_widget(form.recalc, { label: 'Přepočítat'}) }}
 						</td>
-						<td colspan="4" class="basket-list__foot__total text-right">
+						<td colspan="4" class="table-cart__foot__total text-right">
 							Celková cena s DPH:
-							<span class="basket-list__price-total">
+							<span class="table-cart__price-total">
 								<span class="price-main price-big">{{ cartSummary.priceWithVat|price }}</span>
 							</span>
 						</td>
@@ -94,12 +94,12 @@
 
 			</table>
 
-			<div class="buttons-control">
+			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary buttons-control__right'}}) }}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
 				{% endif %}
 
-				<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+				<a href="{{ backUrl }}" class="button button--alter box-buttons__left">
 					Zpět k nákupu
 				</a>
 			</div>
@@ -116,8 +116,8 @@
 			</div>
 		</div>
 
-		<div class="buttons-control">
-			<a href="{{ backUrl }}" class="button button--alter buttons-control__left">
+		<div class="box-buttons">
+			<a href="{{ backUrl }}" class="button button--alter box-buttons__left">
 				Zpět k nákupu
 			</a>
 		</div>

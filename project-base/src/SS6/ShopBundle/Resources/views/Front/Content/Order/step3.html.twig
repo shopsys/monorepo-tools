@@ -8,7 +8,7 @@
 	<div class="row">
 
 		<div class="col-sm-12 col-md-8">
-			<div class="info-box">
+			<div class="wrap-box">
 				<h2 class="mt-0">Osobní údaje</h2>
 
 				<fieldset>
@@ -20,7 +20,7 @@
 
 			</div>
 
-			<div class="info-box">
+			<div class="wrap-box">
 				<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
 				<fieldset>
 					{{ form_row(form.companyCustomer, {
@@ -35,7 +35,7 @@
 				</fieldset>
 			</div>
 
-			<div class="info-box">
+			<div class="wrap-box">
 				<h2 class="mt-0">Fakturační údaje <span class="heading-addition">(Tato adresa bude na daňovém dokladu)</span></h2>
 
 				<fieldset>
@@ -46,7 +46,7 @@
 
 			</div>
 
-			<div class="info-box">
+			<div class="wrap-box">
 				<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
 				<fieldset>
 					{{ form_row(form.deliveryAddressFilled, {
@@ -64,7 +64,7 @@
 				</fieldset>
 			</div>
 
-			<div class="info-box">
+			<div class="wrap-box">
 				<h2 class="mt-0">Poznámka</h2>
 
 				<fieldset>
@@ -79,10 +79,10 @@
 
 	</div>
 
-	<div class="buttons-control">
-		{{ form_widget(form.save, { label: 'Dokončit objednávku', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
+	<div class="box-buttons">
+		{{ form_widget(form.save, { label: 'Dokončit objednávku', attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
 
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter buttons-control__left">
+		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left">
 			Zpět na výběr dopravy a platby
 		</button>
 	</div>

@@ -25,44 +25,44 @@
 			<h1>{{ productDetail.product.name }}</h1>
 
 			{% if productDetail.product.catnum %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
+				<dl class="list-params">
+					<dt class="list-params__title">
 						Katalogové číslo:
 					</dt>
-					<dd class="simple-list__definition">
+					<dd class="list-params__definition">
 						{{ productDetail.product.catnum }}
 					</dd>
 				</dl>
 			{% endif %}
 
 			{% if productDetail.product.availability %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
+				<dl class="list-params">
+					<dt class="list-params__title">
 						Dostupnost:
 					</dt>
-					<dd class="simple-list__definition">
+					<dd class="list-params__definition">
 						{{ productDetail.product.availability.name }}
 					</dd>
 				</dl>
 			{% endif %}
 
 			{% if productDetail.product.partno %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
+				<dl class="list-params">
+					<dt class="list-params__title">
 						Výrobní číslo:
 					</dt>
-					<dd class="simple-list__definition">
+					<dd class="list-params__definition">
 						{{ productDetail.product.partno }}
 					</dd>
 				</dl>
 			{% endif %}
 
 			{% if productDetail.product.ean %}
-				<dl class="simple-list">
-					<dt class="simple-list__title">
+				<dl class="list-params">
+					<dt class="list-params__title">
 						EAN:
 					</dt>
-					<dd class="simple-list__definition">
+					<dd class="list-params__definition">
 						{{ productDetail.product.ean }}
 					</dd>
 				</dl>
@@ -72,26 +72,26 @@
 				{{ productDetail.product.description|raw }}
 			{% endif %}
 
-			<div class="info-box mb-1 mt-1">
-				<dl class="simple-side-list">
-					<dt class="simple-side-list__title">
+			<div class="wrap-box mb-1 mt-1">
+				<dl class="list-params-side">
+					<dt class="list-params-side__title">
 						<strong>
 							Cena s DPH:
 						</strong>
 					</dt>
-					<dd class="simple-side-list__definition">
+					<dd class="list-params-side__definition">
 						<strong class="price-main price-big">
 							{{ productDetail.price.basePriceWithVat|price }}
 						</strong>
 					</dd>
 				</dl>
-				<dl class="simple-side-list mb-1">
-					<dt class="simple-side-list__title">
+				<dl class="list-params-side mb-1">
+					<dt class="list-params-side__title">
 						<strong>
 							Cena bez DPH:
 						</strong>
 					</dt>
-					<dd class="simple-side-list__definition">
+					<dd class="list-params-side__definition">
 						<strong>
 							{{ productDetail.price.basePriceWithoutVat|price }}
 						</strong>

@@ -10,22 +10,22 @@
 
 		<div class="col-sm-12 col-md-8">
 
-			<div class="info-box">
+			<div class="wrap-box">
 
 				<h2 class="mt-0">Výběr dopravy</h2>
 
-				<div class="chooser">
-					{{ form_errors(form.transport, { attr: {class: 'message-floating--on-top'} }) }}
+				<div class="box-chooser">
+					{{ form_errors(form.transport, { attr: {class: 'in-message-floating--on-top'} }) }}
 
 					{% for child in form.transport %}
 						{% set choice = form.transport.vars.choices[child.vars.name] %}
 						{% set transportPrice = transportsPrices[choice.data.id] %}
-						<label class="chooser__item">
-							<span class="chooser__check">
+						<label class="box-chooser__item">
+							<span class="box-chooser__check">
 								{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
 							</span>
 
-							<span class="chooser__image">
+							<span class="box-chooser__image">
 								{% if imageExists(choice.data) %}
 									{{ image(choice.data, { height: '20px' }) }}
 								{% else %}
@@ -33,18 +33,18 @@
 								{% endif %}
 							</span>
 
-							<span class="chooser__title">
+							<span class="box-chooser__title">
 								<strong>
 									{{ choice.data.name }}
 								</strong>
 								{% if choice.data.description %}
-									<span class="chooser__description">
+									<span class="box-chooser__description">
 										- {{ choice.data.description }}
 									</span>
 								{% endif %}
 							</span>
 
-							<span class="chooser__price price-main">
+							<span class="box-chooser__price price-main">
 								{{ transportPrice.basePriceWithVat|price }}
 							</span>
 						</label>
@@ -56,22 +56,22 @@
 
 			</div>
 
-			<div class="info-box">
+			<div class="wrap-box">
 
 				<h2 class="mt-0">Výběr platby</h2>
 
-				<div class="chooser chooser--smaller">
-					{{ form_errors(form.payment, { attr: {class: 'message-floating--on-top'} }) }}
+				<div class="box-chooser box-chooser--smaller">
+					{{ form_errors(form.payment, { attr: {class: 'in-message-floating--on-top'} }) }}
 
 					{% for child in form.payment %}
 						{% set choice = form.payment.vars.choices[child.vars.name] %}
 						{% set paymentPrice = paymentsPrices[choice.data.id] %}
-						<label class="chooser__item">
-							<span class="chooser__check">
+						<label class="box-chooser__item">
+							<span class="box-chooser__check">
 								{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
 							</span>
 
-							<span class="chooser__image">
+							<span class="box-chooser__image">
 								{% if imageExists(choice.data) %}
 									{{ image(choice.data, { height: '20px' }) }}
 								{% else %}
@@ -79,18 +79,18 @@
 								{% endif %}
 							</span>
 
-							<span class="chooser__title">
+							<span class="box-chooser__title">
 								<strong>
 									{{ choice.data.name }}
 								</strong>
 								{% if choice.data.description %}
-									<span class="chooser__description">
+									<span class="box-chooser__description">
 										- {{ choice.data.description }}
 									</span>
 								{% endif %}
 							</span>
 
-							<span class="chooser__price price-main">
+							<span class="box-chooser__price price-main">
 								{{ paymentPrice.basePriceWithVat|price }}
 							</span>
 						</label>
@@ -109,10 +109,10 @@
 
 
 
-	<div class="buttons-control">
-		{{ form_widget(form.save, { label: 'Pokračovat v objednávce', attr: { class: 'button button--large button-primary buttons-control__right' } }) }}
+	<div class="box-buttons">
+		{{ form_widget(form.save, { label: 'Pokračovat v objednávce', attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
 
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter buttons-control__left">
+		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left">
 			Zpět do košíku
 		</button>
 	</div>
