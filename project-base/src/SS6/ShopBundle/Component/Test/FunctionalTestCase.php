@@ -27,4 +27,15 @@ abstract class FunctionalTestCase extends WebTestCase {
 	protected function getContainer() {
 		return $this->getClient()->getContainer();
 	}
+
+	/**
+	 * @param string $referenceName
+	 * @return object
+	 */
+	protected function getReference($referenceName) {
+		$persistentReferenceService = $this->getContainer()->get('ss6.shop.data_fixture.persistent_reference_service');
+		/* @var $persistentReferenceService \SS6\ShopBundle\Model\DataFixture\PersistentReferenceService */
+
+		return $persistentReferenceService->getReference($referenceName);
+	}
 }
