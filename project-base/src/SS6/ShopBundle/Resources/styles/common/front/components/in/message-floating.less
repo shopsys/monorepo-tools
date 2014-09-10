@@ -1,48 +1,20 @@
 /*
-Flash messages
+Flash messages for form fields
 ========
-Many types of messagess
-
-	<div class="message">
-		Simple message
-	</div>
-
-	<div class="message message-success">
-		Success message
-	</div>
-
-	<div class="message message-info">
-		Info message
-	</div>
-
-	<div class="message message-warning">
-		Warning message
-	</div>
-
-	<div class="message message-danger">
-		Danger message
-	</div>
-
-	<div class="message message-danger">
-		<ul class="message__list">
-			<li>Error list in message</li>
-			<li>Error list in message</li>
-			<li>Error list in message</li>
-		</ul>
-	</div>
+Messages for form fields (form-line), it stands next to input
 
 	<div class="form-line">
 		<label class="form-line__label">
 			Label
 		</label>
 		<input type="text" class="form-line__field form-control">
-		<div class="message message-danger message-floating">
+		<div class="in-message in-message-danger in-message-floating">
 			Danger floating message
 		</div>
 	</div>
 */
 
-.message {
+.in-message {
 	margin: 20px 0;
 	padding: 20px;
 
@@ -51,32 +23,32 @@ Many types of messagess
 
 	.border-radius(@border-radius-base);
 }
-.message-success {
+.in-message-success {
 	border-color: darken(@bg-success, 10%);
 
 	.bg-variant(@bg-success);
 }
-.message-info {
+.in-message-info {
 	border-color: darken(@bg-info, 10%);
 
 	.bg-variant(@bg-info);
 }
-.message-warning {
+.in-message-warning {
 	border-color: darken(@bg-warning, 10%);
 
 	.bg-variant(@bg-warning);
 }
-.message-danger {
+.in-message-danger {
 	border-color: darken(@bg-alert, 10%);
 
 	.bg-variant(@bg-alert);
 }
 
-.message__list {
+.in-message__list {
 	.reset-ul();
 }
 
-.message-floating {
+.in-message-floating {
 	position: absolute;
 	top: 6px;
 	left: 530px;
@@ -90,7 +62,7 @@ Many types of messagess
 	.border-radius(@border-radius-base);
 }
 
-.message-floating--on-top {
+.in-message-floating--on-top {
 	top: -36px;
 	left: auto;
 	right: 0;

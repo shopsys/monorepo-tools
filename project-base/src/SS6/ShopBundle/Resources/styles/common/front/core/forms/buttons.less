@@ -1,4 +1,4 @@
-a.button, .button {
+.button {
 	display: inline-block;
 	padding: @button-padding;
 	height: @button-height;
@@ -22,13 +22,11 @@ a.button, .button {
 	}
 }
 
-// alter
-a.button--alter, .button--alter {
+.button--alter {
 	background: @button-bg-alter;
 }
 
-// large
-a.button--large, .button--large {
+.button--large {
 	height: @button-height-large;
 	line-height: @button-height-large;
 	padding: @button-padding-large;
@@ -37,11 +35,31 @@ a.button--large, .button--large {
 	font-weight: bold;
 }
 
-
-// with cart icon
-a.button--cart, .button--cart {
+.button--cart {
 	position: relative;
 	padding-left: 30px;
 
 	.after(15px, 15px, 'icons/cart-mini.png', 9px, 2px);
 }
+
+/*
+Button styles
+===========
+
+	<a href="#" class="button">
+		Basic button
+	</a>
+
+	<a href="#" class="button button--alter">
+		Alternative button
+	</a>
+
+	<a href="#" class="button button--large">
+		Large button
+	</a>
+
+	<a href="#" class="button button--cart">
+		Button with cart icon
+	</a>
+
+*/

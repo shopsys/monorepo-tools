@@ -1,0 +1,154 @@
+/*
+Main item list
+========
+item list with image, prices and adding to cart
+
+	<ul class="list-items">
+		<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
+			<a href="#" class="list-items__block">
+				<div class="list-items__image">
+					<span>
+						<img src="image" alt="" width="336px" height="200px">
+					</span>
+				</div>
+				<h2 class="list-items__title">
+					Product name
+				</h2>
+				<div class="list-items__price">
+					<dl class="list-params-side">
+						<dt class="list-params-side__title">
+							Price with tax:
+						</dt>
+						<dd class="list-params-side__definition price-main price-big">
+							1 454 $
+						</dd>
+					</dl>
+					<dl class="list-params-side">
+						<dt class="list-params-side__title">
+							Price without tax:
+						</dt>
+						<dd class="list-params-side__definition">
+							1 454 $
+						</dd>
+					</dl>
+				</div>
+			</a>
+			<div class="list-items__actions">
+				<div class="box-cart-adding">
+					<span class="box-cart-adding__input">
+						<input class="text-center form-control" type="text"> times
+					</span>
+					<a href="#" class="button">Add to cart</a>
+				</div>
+			</div>
+		</li>
+		<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
+			<a href="#" class="list-items__block">
+				<div class="list-items__image">
+					<span>
+						<img src="image" alt="" width="336px" height="200px">
+					</span>
+				</div>
+				<h2 class="list-items__title">
+					Product name
+				</h2>
+				<div class="list-items__price">
+					<dl class="list-params-side">
+						<dt class="list-params-side__title">
+							Price with tax:
+						</dt>
+						<dd class="list-params-side__definition price-main price-big">
+							1 454 $
+						</dd>
+					</dl>
+					<dl class="list-params-side">
+						<dt class="list-params-side__title">
+							Price without tax:
+						</dt>
+						<dd class="list-params-side__definition">
+							1 454 $
+						</dd>
+					</dl>
+				</div>
+			</a>
+			<div class="list-items__actions">
+				<div class="box-cart-adding">
+					<span class="box-cart-adding__input">
+						<input class="text-center form-control" type="text"> times
+					</span>
+					<a href="#" class="button">Add to cart</a>
+				</div>
+			</div>
+		</li>
+	</ul>
+*/
+
+.list-items {
+	.reset-ul();
+	.cfx();
+	width: 100%;
+
+	text-align: center;
+}
+
+.list-items__item {
+	float: left;
+	height: 420px;
+	position: relative;
+	margin-bottom: 40px;
+
+	border-left: 1px solid @color-border;
+
+	&:nth-child(3n+1) {
+		border-left: 0;
+	}
+}
+
+.list-items__title {
+	line-height: 20px;
+	height: 40px;
+	overflow: hidden;
+
+	.set-transition();
+	.transition(color);
+}
+
+.list-items__image {
+	.center-it-all();
+	width: 100%;
+}
+
+.list-items__block {
+	display: block;
+	padding: 20px 0 15px;
+
+	text-decoration: none;
+	color: @color-base;
+
+	&:hover {
+		text-decoration: none;
+
+		.list-items__title {
+			color: @color-primary;
+		}
+	}
+}
+
+.list-items__price {
+	margin-bottom: 10px;
+}
+
+.list-items__actions {
+	.cfx();
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+
+	text-align: center;
+}
+
+.list-items__button {
+	margin-bottom: 5px;
+}

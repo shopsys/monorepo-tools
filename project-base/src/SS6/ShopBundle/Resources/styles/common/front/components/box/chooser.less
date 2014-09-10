@@ -1,51 +1,51 @@
 /*
-Checkbox chooser
+Checkbox box-chooser
 ===============
 Checkboxes With image and text on right - typical for payments, shipping
 
-    <div class="chooser">
-    	<label class="chooser__item">
-			<span class="chooser__ceck">
+	<div class="box-chooser">
+		<label class="box-chooser__item">
+			<span class="box-chooser__check">
 				<input type="checkbox">
 			</span>
 
-			<span class="chooser__image">
+			<span class="box-chooser__image">
 				img
 			</span>
 
-			<span class="chooser__title">
+			<span class="box-chooser__title">
 				Label text
 			</span>
 
-			<span class="chooser__price">
+			<span class="box-chooser__price">
 				for Free
 			</span>
-    	</label>
-    	<label class="chooser__item chooser__item--active">
-			<span class="chooser__ceck">
+		</label>
+		<label class="box-chooser__item box-chooser__item--active">
+			<span class="box-chooser__check">
 				<input type="checkbox">
 			</span>
 
-			<span class="chooser__image">
+			<span class="box-chooser__image">
 				img
 			</span>
 
-			<span class="chooser__title">
+			<span class="box-chooser__title">
 				Label text
 			</span>
 
-			<span class="chooser__price">
+			<span class="box-chooser__price">
 				for Free
 			</span>
-    	</label>
-    </div>
+		</label>
+	</div>
 */
 
-.chooser {
+.box-chooser {
 	position: relative;
 }
 
-.chooser .chooser__item {
+.box-chooser__item {
 	width: 100%;
 	margin: 5px 0;
 	display: table;
@@ -55,20 +55,20 @@ Checkboxes With image and text on right - typical for payments, shipping
 	font-weight: normal;
 }
 
-.chooser .chooser__item--active span {
+.box-chooser__item--active span {
 	color: @color-primary;
 }
 
-.chooser .chooser__item--inactive span {
+.box-chooser__item--inactive span {
 	color: @color-inactive;
 }
 
-.chooser .chooser__check {
+.box-chooser__check {
 	width: 3%;
 	.center-it(left);
 }
 
-.chooser .chooser__image {
+.box-chooser__image {
 	width: 7%;
 	.center-it(left);
 
@@ -77,12 +77,12 @@ Checkboxes With image and text on right - typical for payments, shipping
 	}
 }
 
-.chooser .chooser__title {
+.box-chooser__title {
 	width: 75%;
 	.center-it(left);
 }
 
-.chooser .chooser__price {
+.box-chooser__price {
 	width: 15%;
 	.center-it(right);
 
