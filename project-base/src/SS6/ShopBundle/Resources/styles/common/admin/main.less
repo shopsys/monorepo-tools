@@ -40,6 +40,7 @@
 @import "bootstrap/responsive-utilities.less";
 
 
+
 // Core
 @import "core/variables.less";
 
@@ -48,51 +49,66 @@
 
 @import "core/helpers.less";
 @import "core/typography.less";
-@import "core/font/font-awesome.less";
 
-@import "core/layout.less";
+//// Forms
+
+//// Typo
+
+
+
+// Layout
+@import "layout/layout.less";
+
 
 
 // Libs
 @import "libs/sprites.less";
 @import "libs/sprites-set.less";
 
+//// Bootsrap extend
+@import "libs/bootstrap/forms.less";
+@import "libs/bootstrap/navbar.less";
+@import "libs/bootstrap/tooltip.less";
+
+//// Font
+@import "libs/font/font-awesome.less";
+
+
 
 // Components
-//// bootstrap extend
-@import "components/bootstrap/forms.less";
-@import "components/bootstrap/navbar.less";
-@import "components/bootstrap/tooltip.less";
+//// box
+@import "components/box/grid-actions.less";
+@import "components/box/nav-panel.less";
+@import "components/box/signin.less";
+@import "components/box/upload-box.less";
+@import "components/box/breadcrumbs.less";
 
-//// boxes
-@import "components/boxes/box-line.less";
-@import "components/boxes/info-box.less";
-@import "components/boxes/window.less";
+//// form
+@import "components/form/form-group.less";
+@import "components/form/form-line.less";
+@import "components/form/validation.less";
 
-//// forms
-@import "components/forms/form-box.less";
-@import "components/forms/form-group.less";
-@import "components/forms/form-line.less";
-@import "components/forms/grid-actions.less";
-@import "components/forms/signin.less";
-@import "components/forms/semaphore.less";
-@import "components/forms/upload-box.less";
-@import "components/forms/validation.less";
+//// in
+@import "components/in/action-icons.less";
+@import "components/in/messages.less";
+@import "components/in/semaphore.less";
+@import "components/in/sort-arrows.less";
 
-//// nav
-@import "components/nav/breadcrumbs.less";
-@import "components/nav/nav-panel.less";
+//// list
 
-//// simple
-@import "components/simple/action-icons.less";
-@import "components/simple/messages.less";
-@import "components/simple/sort-arrows.less";
+//// table
+@import "components/table/inline-edit.less";
+@import "components/table/table-action.less";
+@import "components/table/table-col.less";
 
-//// tables
-@import "components/tables/inline-edit.less";
-@import "components/tables/table-action.less";
-@import "components/tables/table-col.less";
+//// window
+@import "components/window/window.less";
+
+//// wrap
+@import "components/wrap/box-line.less";
+@import "components/wrap/info-box.less";
+@import "components/wrap/form-box.less";
 
 
-// not in
+// programmer place for style
 @import "todo.less";
