@@ -18,4 +18,12 @@ class TransformString {
 
 		return $string;
 	}
+
+	/**
+	 * @param string $value
+	 * @return string|null
+	 */
+	public static function emptyToNull($value) {
+		return $value === '' ? null : $value;
+	}
 }
