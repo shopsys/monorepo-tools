@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Article\Article;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
-class ArticleData extends AbstractFixture {
+class ArticleData extends AbstractReferenceFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

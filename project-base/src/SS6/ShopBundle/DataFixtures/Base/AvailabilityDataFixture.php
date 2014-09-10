@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Base;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 
-class AvailabilityDataFixture extends AbstractFixture {
+class AvailabilityDataFixture extends AbstractReferenceFixture {
 
 	const IN_STOCK = 'availability_in_stock';
 	const ON_REQUEST = 'availability_on_request';

@@ -2,14 +2,14 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 
-class PaymentDataFixture extends AbstractFixture implements DependentFixtureInterface {
+class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

@@ -2,37 +2,23 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Customer\UserData;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
-class UserDataFixture extends AbstractFixture implements ContainerAwareInterface {
+class UserDataFixture extends AbstractReferenceFixture {
 	
-	/**
-	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
-	 */
-	private $container;
-	
-	/**
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 */
-	public function setContainer(ContainerInterface $container = null) {
-		$this->container = $container;
-	}
-
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$registrationService = $this->container->get('ss6.shop.customer.registration_service');
+		$registrationService = $this->get('ss6.shop.customer.registration_service');
 		/* @var $registrationService \SS6\ShopBundle\Model\Customer\RegistrationService */
 
-		$loaderService = $this->container->get('ss6.shop.data_fixtures.user_data_fixture_loader');
+		$loaderService = $this->get('ss6.shop.data_fixtures.user_data_fixture_loader');
 		/* @var $loaderService UserDataFixtureLoader */
 
 		$customersData = $loaderService->getCustomersData();

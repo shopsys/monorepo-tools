@@ -2,30 +2,16 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusData;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class OrderData extends AbstractFixture implements DependentFixtureInterface, ContainerAwareInterface {
-
-	/**
-	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
-	 */
-	private $container;
-
-	/**
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 */
-	public function setContainer(ContainerInterface $container = null) {
-		$this->container = $container;
-	}
+class OrderData extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -33,7 +19,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function load(ObjectManager $manager) {
-		$userRepository = $this->container->get('ss6.shop.customer.user_repository');
+		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
 		$user = $userRepository->findUserByEmail('no-reply.1@netdevelo.cz');
@@ -43,9 +29,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_1' => 2,
 				'product_3' => 1,
 			),
-			$this->referenceRepository->getReference('transport_personal'),
-			$this->referenceRepository->getReference('payment_cash'),
-			$this->referenceRepository->getReference('order_status_new'),
+			$this->getReference('transport_personal'),
+			$this->getReference('payment_cash'),
+			$this->getReference('order_status_new'),
 			'Jan',
 			'Novák',
 			'no-reply@netdevelo.cz',
@@ -73,9 +59,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_2' => 2,
 				'product_4' => 4,
 			),
-			$this->referenceRepository->getReference('transport_cp'),
-			$this->referenceRepository->getReference('payment_cod'),
-			$this->referenceRepository->getReference('order_status_new'),
+			$this->getReference('transport_cp'),
+			$this->getReference('payment_cod'),
+			$this->getReference('order_status_new'),
 			'Jindřich',
 			'Němec',
 			'no-reply@netdevelo.cz',
@@ -90,9 +76,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			array(
 				'product_3' => 1,
 			),
-			$this->referenceRepository->getReference('transport_ppl'),
-			$this->referenceRepository->getReference('payment_card'),
-			$this->referenceRepository->getReference('order_status_new'),
+			$this->getReference('transport_ppl'),
+			$this->getReference('payment_card'),
+			$this->getReference('order_status_new'),
 			'Adam',
 			'Bořič',
 			'no-reply@netdevelo.cz',
@@ -109,9 +95,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_2' => 1,
 				'product_3' => 1,
 			),
-			$this->referenceRepository->getReference('transport_personal'),
-			$this->referenceRepository->getReference('payment_cash'),
-			$this->referenceRepository->getReference('order_status_in_progress'),
+			$this->getReference('transport_personal'),
+			$this->getReference('payment_cash'),
+			$this->getReference('order_status_in_progress'),
 			'Evžen',
 			'Farný',
 			'no-reply@netdevelo.cz',
@@ -127,9 +113,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_4' => 2,
 				'product_3' => 1,
 			),
-			$this->referenceRepository->getReference('transport_personal'),
-			$this->referenceRepository->getReference('payment_cash'),
-			$this->referenceRepository->getReference('order_status_done'),
+			$this->getReference('transport_personal'),
+			$this->getReference('payment_cash'),
+			$this->getReference('order_status_done'),
 			'Ivana',
 			'Janečková',
 			'no-reply@netdevelo.cz',
@@ -145,9 +131,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_10' => 1,
 				'product_20' => 4,
 			),
-			$this->referenceRepository->getReference('transport_cp'),
-			$this->referenceRepository->getReference('payment_cod'),
-			$this->referenceRepository->getReference('order_status_new'),
+			$this->getReference('transport_cp'),
+			$this->getReference('payment_cod'),
+			$this->getReference('order_status_new'),
 			'Pavel',
 			'Novák',
 			'no-reply@netdevelo.cz',
@@ -164,9 +150,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_29' => 1,
 				'product_30' => 1,
 			),
-			$this->referenceRepository->getReference('transport_ppl'),
-			$this->referenceRepository->getReference('payment_card'),
-			$this->referenceRepository->getReference('order_status_done'),
+			$this->getReference('transport_ppl'),
+			$this->getReference('payment_card'),
+			$this->getReference('order_status_done'),
 			'Pavla',
 			'Adámková',
 			'no-reply@netdevelo.cz',
@@ -182,9 +168,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_19' => 1,
 				'product_26' => 1,
 			),
-			$this->referenceRepository->getReference('transport_personal'),
-			$this->referenceRepository->getReference('payment_cash'),
-			$this->referenceRepository->getReference('order_status_in_progress'),
+			$this->getReference('transport_personal'),
+			$this->getReference('payment_cash'),
+			$this->getReference('order_status_in_progress'),
 			'Adam',
 			'Žitný',
 			'no-reply@netdevelo.cz',
@@ -202,9 +188,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 				'product_37' => 1,
 				'product_47' => 2,
 			),
-			$this->referenceRepository->getReference('transport_ppl'),
-			$this->referenceRepository->getReference('payment_card'),
-			$this->referenceRepository->getReference('order_status_new'),
+			$this->getReference('transport_ppl'),
+			$this->getReference('payment_card'),
+			$this->getReference('order_status_new'),
 			'Radim',
 			'Svátek',
 			'no-reply@netdevelo.cz',
@@ -229,9 +215,9 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			array(
 				'product_33' => 10,
 			),
-			$this->referenceRepository->getReference('transport_personal'),
-			$this->referenceRepository->getReference('payment_cash'),
-			$this->referenceRepository->getReference('order_status_canceled'),
+			$this->getReference('transport_personal'),
+			$this->getReference('payment_cash'),
+			$this->getReference('order_status_canceled'),
 			'Viktor',
 			'Pátek',
 			'no-reply@netdevelo.cz',
@@ -278,19 +264,19 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
 			$note = null) {
 
-		$orderFacade = $this->container->get('ss6.shop.order.order_facade');
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 
-		$cartFacade = $this->container->get('ss6.shop.cart.cart_facade');
+		$cartFacade = $this->get('ss6.shop.cart.cart_facade');
 		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 
-		$cart = $this->container->get('ss6.shop.cart');
+		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 
-		$cartService = $this->container->get('ss6.shop.cart.cart_service');
+		$cartService = $this->get('ss6.shop.cart.cart_service');
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
-		$customerIdentifier = $this->container->get('ss6.shop.customer.customer_identifier');
+		$customerIdentifier = $this->get('ss6.shop.customer.customer_identifier');
 		/* @var $customerIdentifier \SS6\ShopBundle\Model\Customer\CustomerIdentifier */
 
 		$orderFormData = new \SS6\ShopBundle\Form\Front\Order\OrderFormData();

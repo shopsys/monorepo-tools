@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Base;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
-class VatDataFixture extends AbstractFixture {
+class VatDataFixture extends AbstractReferenceFixture {
 
 	const VAT_ZERO = 'vat_zero';
 	const VAT_LOW = 'vat_low';
@@ -17,6 +17,7 @@ class VatDataFixture extends AbstractFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
+
 		$vatData = new VatData();
 
 		$vatData->setName('Nulová sazba');
