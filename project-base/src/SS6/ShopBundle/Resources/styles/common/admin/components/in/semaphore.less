@@ -2,27 +2,27 @@
 Semaphore icons
 ============
 Simple points, which shows 3 states (green - true, orange - maybe, red - false).
-Semaphore without modifier is blank. So it could be 4th state.
+semaphore without modifier is blank. So it could be 4th state.
 
 	<p>
-		<span class="semaphore"></span> - blank
+		<span class="in-semaphore"></span> - blank
 	</p>
 
 	<p>
-		<span class="semaphore semaphore--true"></span> - true
+		<span class="in-semaphore in-semaphore--true"></span> - true
 	</p>
 
 	<p>
-		<span class="semaphore semaphore--maybe"></span> - maybe
+		<span class="in-semaphore in-semaphore--maybe"></span> - maybe
 	</p>
 
 	<p>
-		<span class="semaphore semaphore--false"></span> - false
+		<span class="in-semaphore in-semaphore--false"></span> - false
 	</p>
 
 */
 
-.semaphore {
+.in-semaphore {
 	width: 12px;
 	height: 12px;
 	display: inline-block;
@@ -36,12 +36,12 @@ Semaphore without modifier is blank. So it could be 4th state.
 	.border-radius(@border-radius-large);
 }
 
-.semaphore--true {
+.in-semaphore--true {
 	background: @color-info;
 }
-.semaphore--maybe {
+.in-semaphore--maybe {
 	background: @color-warning;
 }
-.semaphore--false {
+.in-semaphore--false {
 	background: @color-alert;
 }

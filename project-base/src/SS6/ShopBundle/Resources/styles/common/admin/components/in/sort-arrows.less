@@ -5,8 +5,8 @@ Arrows for sorting ascendent/descendent in grid
 
 	<table class="table">
 		<tr>
-			<td>ID <span class="sort-arrows sort-arrows--down"></span></td>
-			<td>Name <span class="sort-arrows sort-arrows--up"></span></td>
+			<td>ID <span class="in-sort-arrows in-sort-arrows--down"></span></td>
+			<td>Name <span class="in-sort-arrows in-sort-arrows--up"></span></td>
 			<td>Type</td>
 		</tr>
 		<tr>
@@ -23,16 +23,16 @@ Arrows for sorting ascendent/descendent in grid
 
 */
 
-.sort-arrows {
+.in-sort-arrows {
 	position: relative;
 	display: inline-block;
 	width: 10px;
 }
 
-.sort-arrows--up {
+.in-sort-arrows--up {
 	.draw-arrow-top(5px, @link-color, 5px, -8px);
 }
 
-.sort-arrows--down {
+.in-sort-arrows--down {
 	.draw-arrow-bottom(5px, @link-color, 5px, -6px);
 }

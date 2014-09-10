@@ -3,7 +3,7 @@
 		{%  set attr = attr|merge({'class': ' js-file-upload'}) %}
 		{%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
 		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletecachedfile')}) %}
-		<div class="upload-box">
+		<div class="box-upload">
 			<div {{ block('widget_attributes') }}>
 				<span class="js-file-upload-hidden" style="display: none;">
 					{{ form_row(form.children.file_uploaded) }}
@@ -13,7 +13,7 @@
 				{% else %}
 					{% set itemStyle = '' %}
 				{% endif %}
-				<div class="js-file-upload-item upload-box__result" style="{{ itemStyle }}">
+				<div class="js-file-upload-item box-upload__result" style="{{ itemStyle }}">
 					<div class="info">
 						<div>
 							<span class="js-file-upload-label">{{ getLabelByCachedFilename(form.children.file_uploaded.vars.value) }}</span>
@@ -23,16 +23,20 @@
 							Stav: <span class="js-file-upload-status">Úspěšně nahráno</span>
 						</div>
 					</div>
-					<div class="js-file-upload-progress upload-box__bar">
-						<div class="js-file-upload-progress-bar upload-box__bar__inner">0%</div>
+					<div class="js-file-upload-progress box-upload__bar">
+						<div class="js-file-upload-progress-bar box-upload__bar__inner">0%</div>
 					</div>
 				</div>
 
 				<div class="js-file-upload-input">
-					<div class="js-file-upload-fallback-hide upload-box__place form-line__text"><i class="fa fa-lg fa-plus-circle"></i> Zde přetáhněte soubor</div>
-					<div class="js-file-upload-fallback-hide upload-box__between form-line__text">- nebo -</div>
-					<div class="upload-box__file-input form-line__field">
-						{{ form_widget(form.children.file) }}
+					<div class="js-file-upload-fallback-hide box-upload__place form-line__full">
+						<i class="fa fa-lg fa-plus-circle"></i> Zde přetáhněte soubor
+					</div>
+					<div class="form-line form-line--size-3">
+						<div class="js-file-upload-fallback-hide box-upload__between form-line__label">nebo:</div>
+						<div class="box-upload__file-input form-line__field">
+							{{ form_widget(form.children.file) }}
+						</div>
 					</div>
 				</div>
 			</div>

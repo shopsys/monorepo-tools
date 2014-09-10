@@ -3,19 +3,19 @@ Upload box
 ============
 Component for uploading files with drag & drop function.
 
-	<div class="upload-box">
-		<div class="upload-box__result">
-			<div class="upload-box__bar" style="display: block;">
-				<div class="upload-box__bar__inner" style="width: 75%">&nbsp;</div>
+	<div class="box-upload">
+		<div class="box-upload__result">
+			<div class="box-upload__bar" style="display: block;">
+				<div class="box-upload__bar__inner" style="width: 75%">&nbsp;</div>
 			</div>
 		</div>
 
-		<div class="upload-box__place">
+		<div class="box-upload__place">
 			<i class="fa fa-lg fa-plus-circle"></i>
 			Place for dropping - with icon
 		</div>
 
-		<div class="upload-box__between">
+		<div class="box-upload__between">
 			or you can use input file
 		</div>
 
@@ -26,11 +26,11 @@ Component for uploading files with drag & drop function.
 
 */
 
-.upload-box {
+.box-upload {
 	margin-bottom: 15px;
 }
 
-.upload-box__place {
+.box-upload__place {
 	padding: 6px 12px;
 	min-height: 80px;
 	margin-bottom: 15px;
@@ -47,15 +47,15 @@ Component for uploading files with drag & drop function.
 	.border-radius(@border-radius-base);
 }
 
-.upload-box__between {
+.box-upload__between {
 	margin-bottom: 15px;
 }
 
-.upload-box__result {
+.box-upload__result {
 	margin-bottom: 15px;
 }
 
-.upload-box__bar {
+.box-upload__bar {
 	width: 100%;
 	display: none;
 	.box-sizing(border-box);
@@ -63,7 +63,7 @@ Component for uploading files with drag & drop function.
 	border: 1px solid @color-border;
 }
 
-.upload-box__bar__inner {
+.box-upload__bar__inner {
 	width: 0%;
 	max-width: 100%;
 	padding: 0;
