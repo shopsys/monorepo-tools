@@ -2,23 +2,24 @@
 Action icons
 ======
 This classs should be used in table for adjacent icons eg. for actions delete, edit etc.
-It makes gaps between icons. Modifier --active makes icons more visible.
+It makes gaps between icons.
+Modifiers --discard and --confirm changes color of font
 
 	<table class="table">
 		<tr>
 			<td>Id</td>
 			<td>Content content content content content</td>
 			<td class="in-action-icons">
-				<span class="in-action-icons__item semaphore semaphore--true"></span>
-				<span class="in-action-icons__item semaphore semaphore--false"></span>
+				<span class="in-action-icons__item in-semaphore in-semaphore--true"></span>
+				<span class="in-action-icons__item in-semaphore in-semaphore--false"></span>
 			</td>
 		</tr>
 		<tr>
 			<td>Id</td>
 			<td>Content content content content content</td>
-			<td class="in-action-icons--active">
-				<span class="in-action-icons__item semaphore semaphore--true"></span>
-				<span class="in-action-icons__item semaphore semaphore--false"></span>
+			<td class="in-action-icons">
+				<span class="in-action-icons__item in-action-icons__item--confirm">X</span>
+				<span class="in-action-icons__item in-action-icons__item--discard">O</span>
 			</td>
 		</tr>
 	</table>
@@ -27,12 +28,6 @@ It makes gaps between icons. Modifier --active makes icons more visible.
 
 .in-action-icons {
 	padding: 3px;
-}
-
-.in-action-icons--active {
-	background: @color-3;
-
-	.border-radius(@border-radius-large);
 }
 
 .in-action-icons__item {
