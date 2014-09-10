@@ -162,17 +162,16 @@ module.exports = function(grunt) {
 		styledocco: {
 			dist: {
 				options: {
-					name: 'Shopsys 6',
+					name: 'Shopsys 6 - common',
 					include: [
 						'web/assets/frontend/styles/index1.css',
-						'web/assets/frontend/styles/index2.css',
 						'web/assets/admin/styles/index.css'
 					]
 				},
 				files: {
-					'docs/frontend/common': 'src/SS6/ShopBundle/Resources/styles/common/front/components/',
-					'docs/frontend/domain2': 'src/SS6/ShopBundle/Resources/styles/domain2/front/components/',
-					'docs/admin': 'src/SS6/ShopBundle/Resources/styles/admin/components/'
+					'docs/common/frontend/components': 'src/SS6/ShopBundle/Resources/styles/common/front/components/',
+					'docs/common/frontend/core/buttons': 'src/SS6/ShopBundle/Resources/styles/common/front/core/forms/buttons.less',
+					'docs/common/admin/components': 'src/SS6/ShopBundle/Resources/styles/common/admin/components/'
 				}
 			}
 		},
