@@ -34,7 +34,7 @@
 					{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
 				</div>
 
-				{% block transport_save %}{% endblock %}
+				{{ form_save(transportDetail|default(null), form) }}
 				<a href="{{ url('admin_transportandpayment_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>

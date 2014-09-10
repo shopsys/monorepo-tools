@@ -13,7 +13,7 @@
 
 				<div class="wrap-group">
 					<h2>Systémové údaje</h2>
-					{% block customer_id %}{% endblock %}
+					{{ form_id(user|default(null)) }}
 					{% block customer_created_at %}{% endblock %}
 				</div>
 
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 
-				{% block customer_save %}{% endblock %}
+				{{ form_save(user|default(null), form) }}
 				<a href="{{ url('admin_customer_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>

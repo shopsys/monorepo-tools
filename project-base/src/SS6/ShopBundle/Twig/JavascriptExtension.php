@@ -42,7 +42,7 @@ class JavascriptExtension extends Twig_Extension {
 		return $this->container->get('templating.helper.assets');
 	}
 
-		/**
+	/**
 	 * @return array
 	 */
 	public function getFunctions() {

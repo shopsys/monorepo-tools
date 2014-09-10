@@ -3,13 +3,6 @@
 {% block title %}- Editace zboží - {{ product.name }}{% endblock %}
 {% block h1 %}Editace zboží - {{ product.name }}{% endblock %}
 
-{% block product_id %}
-	<div class="form-line">
-		<label class="form-line__label">ID:</label>
-		<input type="text" value="{{ product.id }}" class="form-control form-line__field" readonly="readonly">
-	</div>
-{% endblock %}
-
 {% block product_url %}
 	<div class="form-line">
 		<span class="form-line__text">
@@ -44,8 +37,4 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
-
-{% block product_save %}
-	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}

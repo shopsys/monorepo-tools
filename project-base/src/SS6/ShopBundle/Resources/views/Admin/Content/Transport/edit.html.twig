@@ -3,10 +3,6 @@
 {% block title %}- Editace dopravy - {{ transportDetail.transport.name }}{% endblock %}
 {% block h1 %}Editace dopravy - {{ transportDetail.transport.name }}{% endblock %}
 
-{% block transport_id %}
-	{{ form_row(form.id, { label: 'ID'}) }}
-{% endblock %}
-
 {% block transport_base_prices %}
 	<div class="form-line form-line--size-2">
 		<label class="form-line__label">Základní cena bez DPH:</label>
@@ -27,8 +23,4 @@
 			{{ image(transportDetail.transport, { height: 100 }) }}
 		</div>
 	</div>
-{% endblock %}
-
-{% block transport_save %}
-	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}

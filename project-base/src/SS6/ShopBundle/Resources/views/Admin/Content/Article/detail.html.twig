@@ -20,7 +20,7 @@
 					{{ form_row(form.text, { label: 'Text'}) }}
 				</div>
 
-				{% block article_save %}{% endblock %}
+				{{ form_save(article|default(null), form) }}
 				<a href="{{ url('admin_article_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 		</div>

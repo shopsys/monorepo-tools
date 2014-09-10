@@ -3,10 +3,6 @@
 {% block title %}- Editace platby - {{ paymentDetail.payment.name }}{% endblock %}
 {% block h1 %}Editace platby - {{ paymentDetail.payment.name }}{% endblock %}
 
-{% block payment_id %}
-	{{ form_row(form.id, { label: 'ID'}) }}
-{% endblock %}
-
 {% block payment_base_prices %}
 	<div class="form-line form-line--size-2">
 		<label class="form-line__label">Základní cena bez DPH:</label>
@@ -27,8 +23,4 @@
 			{{ image(paymentDetail.payment, { height: 100 }) }}
 		</div>
 	</div>
-{% endblock %}
-
-{% block payment_save %}
-	{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 {% endblock %}

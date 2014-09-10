@@ -12,7 +12,7 @@
 				{{ form_errors(form) }}
 
 				<div class="wrap-group">
-					{% block product_id %}{% endblock %}
+					{{ form_id(product|default(null)) }}
 					{% block product_url %}{% endblock %}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
@@ -42,7 +42,7 @@
 					{% block image %}{% endblock %}
 					{{ form_row(form.image, { label: 'Nahrát obrázek' }) }}
 
-					{% block product_save %}{% endblock %}
+					{{ form_save(product|default(null), form) }}
 					<a href="{{ url('admin_product_list') }}" class="btn btn-default">Zpět na přehled</a>
 				</div>
 			{{ form_end(form) }}
