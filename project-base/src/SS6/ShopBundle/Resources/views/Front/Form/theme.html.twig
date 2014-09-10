@@ -63,7 +63,7 @@
 	{% spaceless %}
 		{% if errors|length > 0 %}
 			{% if form.parent %}
-				<div class="in-message-danger in-message-floating {{ attr.class|default('') }}">
+				<div class="in-message--danger in-message-floating {{ attr.class|default('') }}">
 					<ul class="in-message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>
@@ -71,7 +71,7 @@
 					</ul>
 				</div>
 			{% else %}
-				<div class="in-message in-message-danger">
+				<div class="in-message in-message--danger">
 					<ul class="in-message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>
