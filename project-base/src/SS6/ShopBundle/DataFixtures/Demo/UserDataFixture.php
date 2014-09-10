@@ -5,9 +5,9 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
+use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -35,14 +35,28 @@ class UserDataFixture extends AbstractFixture implements ContainerAwareInterface
 		$loaderService = $this->container->get('ss6.shop.data_fixtures.user_data_fixture_loader');
 		/* @var $loaderService UserDataFixtureLoader */
 
-		$array = $loaderService->getUsersData();
+		$customersData = $loaderService->getCustomersData();
+		/* @var $customersData CustomerData[] */
 
-		foreach ($array as $record) {
-			$this->createCustomer($manager, $registrationService, $record['user'], $record['billing'], $record['delivery']);
+		foreach ($customersData as $customerData) {
+			$this->createCustomer(
+				$manager,
+				$registrationService,
+				$customerData->getUserData(),
+				new BillingAddress($customerData->getBillingAddressData()),
+				new DeliveryAddress($customerData->getDeliveryAddressData())
+			);
 		}
 		$manager->flush();
 	}
 
+	/**
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @param \SS6\ShopBundle\Model\Customer\RegistrationService $registrationService
+	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
+	 */
 	public function createCustomer(
 		ObjectManager $manager,
 		RegistrationService $registrationService,

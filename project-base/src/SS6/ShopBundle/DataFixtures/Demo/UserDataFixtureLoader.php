@@ -3,13 +3,12 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use SS6\ShopBundle\Model\Csv\CsvReader;
+use SS6\ShopBundle\Model\Customer\BillingAddressData;
+use SS6\ShopBundle\Model\Customer\CustomerData;
+use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\String\TransformString;
 use SS6\ShopBundle\Model\String\EncodingConvertor;
-use SS6\ShopBundle\Model\Customer\BillingAddressData;
-use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
-use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 
 class UserDataFixtureLoader {
 
@@ -33,28 +32,29 @@ class UserDataFixtureLoader {
 	}
 
 	/**
-	 * @return array
+	 * @return  \SS6\ShopBundle\Model\Customer\CustomerData[]
 	 */
-	public function getUsersData() {
+	public function getCustomersData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
 
 		$rowId = 0;
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
-				$row = array_map(array(TransformString::class, 'emptyStringsToNulls'), $row);
+				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
 				$row = EncodingConvertor::cp1250ToUtf8($row);
-				$usersData[] = $this->getUserDataFromCsvRow($row);
+				$customersData[] = $this->getCustomerDataFromCsvRow($row);
 			}
 			$rowId++;
 		}
-		return $usersData;
+		return $customersData;
 	}
 
 	/**
 	 * @param array $row
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Customer\CustomerData
 	 */
-	private function getUserDataFromCsvRow($row) {
+	private function getCustomerDataFromCsvRow(array $row) {
+		$customerData = new CustomerData();
 		$userData = new UserData();
 		$billingAddressData = new BillingAddressData();
 		$deliveryAddressData = new DeliveryAddressData();
@@ -72,7 +72,6 @@ class UserDataFixtureLoader {
 		$billingAddressData->setCity($row[9]);
 		$billingAddressData->setPostcode($row[10]);
 		$billingAddressData->setTelephone($row[11]);
-		$billingAddress = new BillingAddress($billingAddressData);
 
 		if ($row[12] === 'true') {
 			$deliveryAddressData->setAddressFilled(true);
@@ -82,11 +81,13 @@ class UserDataFixtureLoader {
 			$deliveryAddressData->setPostcode($row[16]);
 			$deliveryAddressData->setStreet($row[17]);
 			$deliveryAddressData->setTelephone($row[18]);
-			$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 		} else {
 			$deliveryAddressData->setAddressFilled(false);
-			$deliveryAddress = null;
 		}
-		return array('user' => $userData, 'billing' => $billingAddress, 'delivery' => $deliveryAddress);
+		$customerData->setUserData($userData);
+		$customerData->setBillingAddress($billingAddressData);
+		$customerData->setDeliveryAddress($deliveryAddressData);
+
+		return $customerData;
 	}
 }

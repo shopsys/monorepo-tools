@@ -8,21 +8,25 @@ class CsvReader {
 	 * @param string $filename
 	 * @return array
 	 */
-	public function getRowsFromCsv($filename) {
+	public function getRowsFromCsv($filename, $delimiter = ';') {
 		if (!file_exists($filename) || !is_readable($filename)) {
 			throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException();
 		}
 
-		$data = array();
+		$rows = array();
 		$handle = fopen($filename, 'r');
 		if ($handle !== false) {
-			$row = fgetcsv($handle, 0, ';');
-			while ($row !== false) {
-				$data[] = $row;
-				$row = fgetcsv($handle, 0, ';');
-			}
+			do {
+				$row = fgetcsv($handle, 0, $delimiter);
+				if ($row !== false) {
+					$rows[] = $row;
+				} else {
+					break;
+				}
+			} while (true);
+
 			fclose($handle);
 		}
-		return $data;
+		return $rows;
 	}
 }

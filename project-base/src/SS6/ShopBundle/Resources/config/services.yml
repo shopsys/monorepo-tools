@@ -6,6 +6,8 @@ parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources/
+  ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
+  ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.web_dir: %kernel.root_dir%/../web
   ss6.file_dir: %ss6.web_dir%/assets/content/files
@@ -139,12 +141,12 @@ services:
   ss6.shop.data_fixtures.product_data_fixture_loader:
     class: SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
     arguments:
-      - %ss6.data_fixtures.resources_dir%/demo-data-products.csv
+      - %ss6.data_fixtures.resource_products_filepath%
 
   ss6.shop.data_fixtures.user_data_fixture_loader:
     class: SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader
     arguments:
-      - %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
+      - %ss6.data_fixtures.resource_customers_filepath%
 
   ss6.shop.domain:
     class: SS6\ShopBundle\Model\Domain\Domain

@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use SS6\ShopBundle\Model\Csv\CsvReader;
-use SS6\ShopBundle\Model\String\TransformString;
-use SS6\ShopBundle\Model\String\EncodingConvertor;
-use SS6\ShopBundle\Model\Product\ProductData;
 use DateTime;
+use SS6\ShopBundle\Model\Csv\CsvReader;
+use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\String\EncodingConvertor;
+use SS6\ShopBundle\Model\String\TransformString;
 
 class ProductDataFixtureLoader {
 
@@ -43,13 +43,13 @@ class ProductDataFixtureLoader {
 	 * @param array $vats
 	 * @param array $availabilities
 	 */
-	public function injectReferences($vats, $availabilities) {
+	public function injectReferences(array $vats, array $availabilities) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 	}
 
 	/**
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Product\ProductData[]
 	 */
 	public function getProductsData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
@@ -57,20 +57,20 @@ class ProductDataFixtureLoader {
 		$rowId = 0;
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
-				$row = array_map(array(TransformString::class, 'emptyStringsToNulls'), $row);
+				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
 				$row = EncodingConvertor::cp1250ToUtf8($row);
 				$productsData[] = $this->getProductDataFromCsvRow($row);
 			}
 			$rowId++;
 		}
-		return $productsData;		
+		return $productsData;
 	}
 
 	/**
 	 * @param array $row
 	 * @return \SS6\ShopBundle\Model\Product\ProductData
 	 */
-	private function getProductDataFromCsvRow($row) {
+	private function getProductDataFromCsvRow(array $row) {
 		$productData = new ProductData();
 		$productData->setName($row[0]);
 		$productData->setCatnum($row[1]);
@@ -79,25 +79,34 @@ class ProductDataFixtureLoader {
 		$productData->setDescription($row[4]);
 		$productData->setPrice($row[5]);
 		switch ($row[6]) {
-			case 'high': $productData->setVat($this->vats['high']);
+			case 'high':
+				$productData->setVat($this->vats['high']);
 				break;
-			case 'low': $productData->setVat($this->vats['low']);
+			case 'low':
+				$productData->setVat($this->vats['low']);
 				break;
-			case 'zero': $productData->setVat($this->vats['zero']);
+			case 'zero':
+				$productData->setVat($this->vats['zero']);
 				break;
+			default:
+				$productData->setVat(null);
 		}
 		$productData->setSellingFrom(new DateTime($row[7]));
 		$productData->setSellingTo(new DateTime($row[8]));
 		$productData->setStockQuantity($row[9]);
 		$productData->setHidden($row[10]);
 		switch ($row[11]) {
-			case 'in-stock': $productData->setAvailability($this->availabilities['in-stock']);
+			case 'in-stock':
+				$productData->setAvailability($this->availabilities['in-stock']);
 				break;
-			case 'out-of-stock': $productData->setAvailability($this->availabilities['out-of-stock']);
+			case 'out-of-stock':
+				$productData->setAvailability($this->availabilities['out-of-stock']);
 				break;
-			case 'on-request': $productData->setAvailability($this->availabilities['on-request']);
+			case 'on-request':
+				$productData->setAvailability($this->availabilities['on-request']);
 				break;
-			default : $productData->setAvailability(null);
+			default:
+				$productData->setAvailability(null);
 		}
 		return $productData;
 	}

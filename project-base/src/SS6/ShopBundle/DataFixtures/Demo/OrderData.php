@@ -7,9 +7,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusData;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -36,7 +36,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 		$userRepository = $this->container->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
-		$user = $userRepository->findUserByEmail('test9@test.cz');
+		$user = $userRepository->findUserByEmail('no-reply.1@netdevelo.cz');
 
 		$this->createOrder(
 			array(
@@ -67,7 +67,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			'Prosím o dodání do pátku. Děkuji.'
 		);
 
-		$user = $userRepository->findUserByEmail('test20@test.cz');
+		$user = $userRepository->findUserByEmail('no-reply.19@netdevelo.cz');
 		$this->createOrder(
 			array(
 				'product_2' => 2,
@@ -76,7 +76,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('transport_cp'),
 			$this->referenceRepository->getReference('payment_cod'),
 			$this->referenceRepository->getReference('order_status_new'),
-			'Jidřich',
+			'Jindřich',
 			'Němec',
 			'no-reply@netdevelo.cz',
 			'+420725651245',
@@ -95,7 +95,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_new'),
 			'Adam',
 			'Bořič',
-			'adam@netdevelo.cz',
+			'no-reply@netdevelo.cz',
 			'+420987654321',
 			'Cihelní 5',
 			'Damašek',
@@ -114,7 +114,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_in_progress'),
 			'Evžen',
 			'Farný',
-			'evzen@netdevelo.cz',
+			'no-reply@netdevelo.cz',
 			'+420456789123',
 			'Gagarinova 333',
 			'Hodonín',
@@ -132,7 +132,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_done'),
 			'Ivana',
 			'Janečková',
-			'janeckova@netdevelo.cz',
+			'no-reply@netdevelo.cz',
 			'+420369852147',
 			'Kalužní 88',
 			'Lednice',
@@ -150,7 +150,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_new'),
 			'Pavel',
 			'Novák',
-			'novak@test.cz',
+			'no-reply@netdevelo.cz',
 			'+420605123654',
 			'Adresní 6',
 			'Opava',
@@ -169,7 +169,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_done'),
 			'Pavla',
 			'Adámková',
-			'adamkova@test.cz',
+			'no-reply@netdevelo.cz',
 			'+4206051836459',
 			'Výpočetni 16',
 			'Praha',
@@ -187,7 +187,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_in_progress'),
 			'Adam',
 			'Žitný',
-			'zitny@test.cz',
+			'no-reply@netdevelo.cz',
 			'+4206051836459',
 			'Přímá 1',
 			'Plzeň',
@@ -207,7 +207,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_new'),
 			'Radim',
 			'Svátek',
-			'svatek@test.cz',
+			'no-reply@netdevelo.cz',
 			'+420733598748',
 			'Křivá 11',
 			'Jablonec',
@@ -234,7 +234,7 @@ class OrderData extends AbstractFixture implements DependentFixtureInterface, Co
 			$this->referenceRepository->getReference('order_status_canceled'),
 			'Viktor',
 			'Pátek',
-			'patek@test.cz',
+			'no-reply@netdevelo.cz',
 			'+420888777',
 			'Vyhlídková 88',
 			'Ostrava',

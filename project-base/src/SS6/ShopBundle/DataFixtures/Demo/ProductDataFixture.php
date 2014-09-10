@@ -3,15 +3,14 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
-use Symfony\Component\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ProductDataFixture extends AbstractFixture implements DependentFixtureInterface, ContainerAwareInterface {
 
@@ -31,7 +30,6 @@ class ProductDataFixture extends AbstractFixture implements DependentFixtureInte
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		// @codingStandardsIgnoreStart       
 		$loaderService = $this->container->get('ss6.shop.data_fixtures.product_data_fixture_loader');
 		/* @var $loaderService ProductDataFixtureLoader */
 
@@ -45,13 +43,15 @@ class ProductDataFixture extends AbstractFixture implements DependentFixtureInte
 			'out-of-stock' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST)
 		);
+
 		$loaderService->injectReferences($vats, $availabilities);
-		$array = $loaderService->getProductsData();
+		$productsData = $loaderService->getProductsData();
 		$productNo = 1;
-		foreach ($array as $record){
-			$this->createProduct($manager, 'product_' . ($productNo), $record);
+		foreach ($productsData as $productData) {
+			$this->createProduct($manager, 'product_' . $productNo, $productData);
 			$productNo++;
 		}
+
 		$manager->flush();
 	}
 
