@@ -179,7 +179,7 @@
 		</exec>
 	</target>
 
-	<target name="tests">
+	<target name="tests" depends="test-db-demo">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
