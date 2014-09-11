@@ -60,12 +60,11 @@ class ImagesEntity {
 	}
 
 	/**
-	 *
 	 * @param strin|null $type
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	private function getRelativeImagePath($entityName, $type, $sizeName) {
+	public function getRelativeImagePath($entityName, $type, $sizeName) {
 		$pathParts = array($entityName);
 
 		if ($type !== null) {

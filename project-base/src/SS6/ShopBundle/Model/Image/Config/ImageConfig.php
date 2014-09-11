@@ -78,4 +78,11 @@ class ImageConfig {
 		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($entityName);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
+	 */
+	public function getAllImageEntityConfigsByClass() {
+		return $this->imageEntityConfigsByClass;
+	}
+
 }
