@@ -2,35 +2,22 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use DateTime;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class ProductDataFixture extends AbstractFixture implements DependentFixtureInterface, ContainerAwareInterface {
-
-	/**
-	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
-	 */
-	private $container;
-
-	/**
-	 * @param DependencyInjection\ContainerInterface $container
-	 */
-	public function setContainer(ContainerInterface $container = null) {
-		$this->container = $container;
-	}
+class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$loaderService = $this->container->get('ss6.shop.data_fixtures.product_data_fixture_loader');
+		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
 		/* @var $loaderService ProductDataFixtureLoader */
 
 		$vats = array(

@@ -1,0 +1,18 @@
+<?php
+
+namespace SS6\ShopBundle\Model\DataFixture\Exception;
+
+use Exception;
+use SS6\ShopBundle\Model\DataFixture\Exception\DataFixtureException;
+
+class PersistentReferenceNotFoundException extends Exception implements DataFixtureException {
+	
+	/**
+	 * @param mixed $criteria
+	 * @param \Exception $previous
+	 */
+	public function __construct($criteria, Exception $previous = null) {
+		parent::__construct('Data fixture reference not found by criteria ' . var_export($criteria, true), $previous, 0);
+	}
+	
+}

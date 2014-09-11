@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Base;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Order\OrderNumberSequence;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
-class OrderNumberSequenceData extends AbstractFixture {
+class OrderNumberSequenceData extends AbstractReferenceFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

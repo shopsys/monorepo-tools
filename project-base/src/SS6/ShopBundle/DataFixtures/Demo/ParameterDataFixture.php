@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Base;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 
-class ParameterDataFixture extends AbstractFixture {
+class ParameterDataFixture extends AbstractReferenceFixture {
 
 	const HEIGHT = 'parameter_height';
 	const WIDTH = 'parameter_width';
