@@ -22,6 +22,194 @@ class OrderData extends AbstractReferenceFixture implements DependentFixtureInte
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
+		$user = $userRepository->findUserByEmail('no-reply@netdevelo.cz');
+		$this->createOrder(
+			array(
+				'product_9' => 2,
+				'product_10' => 3,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_cash'),
+			$this->referenceRepository->getReference('order_status_done'),
+			'Jiří',
+			'3evčík',
+			'no-reply@netdevelo.cz',
+			'+420369554147',
+			'První 1',
+			'Ostrava',
+			'71200',
+			$user
+		);
+
+		$this->createOrder(
+			array(
+				'product_18' => 2,
+				'product_19' => 1,
+				'product_20' => 1,
+				'product_30' => 5,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_card'),
+			$this->referenceRepository->getReference('order_status_new'),
+			'Iva',
+			'Jačková',
+			'no-reply@netdevelo.cz',
+			'+420367852147',
+			'Druhá 2',
+			'Ostrava',
+			'71300',
+			$user
+		);
+
+		$this->createOrder(
+			array(
+				'product_44' => 6,
+				'product_34' => 1,
+			),
+			$this->referenceRepository->getReference('transport_cp'),
+			$this->referenceRepository->getReference('payment_cod'),
+			$this->referenceRepository->getReference('order_status_done'),
+			'Jan',
+			'Adamovský',
+			'no-reply@netdevelo.cz',
+			'+420725852147',
+			'Třetí 3',
+			'Ostrava',
+			'71200',
+			$user
+		);
+
+		$this->createOrder(
+			array(
+				'product_41' => 1,
+			),
+			$this->referenceRepository->getReference('transport_ppl'),
+			$this->referenceRepository->getReference('payment_card'),
+			$this->referenceRepository->getReference('order_status_in_progress'),
+			'Iveta',
+			'Prvá',
+			'no-reply@netdevelo.cz',
+			'+420606952147',
+			'Čtvrtá 4',
+			'Ostrava',
+			'70030',
+			$user
+		);
+
+		$this->createOrder(
+			array(
+				'product_42' => 8,
+				'product_3' => 1,
+				'product_1' => 2,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_cash'),
+			$this->referenceRepository->getReference('order_status_done'),
+			'Jana',
+			'Janíčková',
+			'no-reply@netdevelo.cz',
+			'+420739852148',
+			'Pátá 55',
+			'Ostrava',
+			'71200',
+			$user
+		);
+
+		$this->createOrder(
+			array(
+				'product_13' => 2,
+				'product_14' => 1,
+				'product_15' => 1,
+				'product_16' => 1,
+				'product_17' => 1,
+				'product_18' => 1,
+			),
+			$this->referenceRepository->getReference('transport_ppl'),
+			$this->referenceRepository->getReference('payment_card'),
+			$this->referenceRepository->getReference('order_status_new'),
+			'Dominik',
+			'Hašek',
+			'no-reply@netdevelo.cz',
+			'+420721852152',
+			'Šestá 39',
+			'Pardubice',
+			'58941',
+			$user
+		);
+
+		$this->createOrder(
+			array(
+				'product_7' => 1,
+				'product_36' => 1,
+				'product_22' => 2,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_cash'),
+			$this->referenceRepository->getReference('order_status_canceled'),
+			'Jiří',
+			'Sovák',
+			'no-reply@netdevelo.cz',
+			'+420755872155',
+			'Sedmá 1488',
+			'Opava',
+			'85741',
+			null
+		);
+
+		$this->createOrder(
+			array(
+				'product_1' => 6,
+				'product_2' => 1,
+				'product_12' => 1,
+			),
+			$this->referenceRepository->getReference('transport_cp'),
+			$this->referenceRepository->getReference('payment_cod'),
+			$this->referenceRepository->getReference('order_status_done'),
+			'Josef',
+			'Somr',
+			'no-reply@netdevelo.cz',
+			'+420369852147',
+			'Osmá 1',
+			'Praha',
+			'30258',
+			null
+		);
+
+		$this->createOrder(
+			array(
+				'product_24' => 1,
+			),
+			$this->referenceRepository->getReference('transport_ppl'),
+			$this->referenceRepository->getReference('payment_card'),
+			$this->referenceRepository->getReference('order_status_in_progress'),
+			'Jaromír',
+			'Jágr',
+			'no-reply@netdevelo.cz',
+			'+420725711368',
+			'Devátá 68',
+			'Kladno',
+			'69174',
+			null
+		);
+
+		$this->createOrder(
+			array(
+				'product_49' => 3,
+				'product_31' => 2,
+			),
+			$this->referenceRepository->getReference('transport_personal'),
+			$this->referenceRepository->getReference('payment_cash'),
+			$this->referenceRepository->getReference('order_status_canceled'),
+			'Ivan',
+			'Horník',
+			'no-reply@netdevelo.cz',
+			'+420755496328',
+			'Desátá 10',
+			'Plzeň',
+			'30001',
+			null
+		);
+
 		$user = $userRepository->findUserByEmail('no-reply.1@netdevelo.cz');
 
 		$this->createOrder(
@@ -53,7 +241,7 @@ class OrderData extends AbstractReferenceFixture implements DependentFixtureInte
 			'Prosím o dodání do pátku. Děkuji.'
 		);
 
-		$user = $userRepository->findUserByEmail('no-reply.19@netdevelo.cz');
+		$user = $userRepository->findUserByEmail('no-reply.7@netdevelo.cz');
 		$this->createOrder(
 			array(
 				'product_2' => 2,
@@ -226,7 +414,7 @@ class OrderData extends AbstractReferenceFixture implements DependentFixtureInte
 			'Ostrava',
 			'71201'
 		);
-
+		
 		$manager->flush();
 	}
 	
