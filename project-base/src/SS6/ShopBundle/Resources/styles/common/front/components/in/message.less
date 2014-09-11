@@ -1,0 +1,67 @@
+/*
+Flash messages
+========
+Many types of messagess
+
+	<div class="in-message">
+		Simple in-message
+	</div>
+
+	<div class="in-message in-message--success">
+		Success message
+	</div>
+
+	<div class="in-message in-message--info">
+		Info imessage
+	</div>
+
+	<div class="in-message in-message--warning">
+		Warning message
+	</div>
+
+	<div class="in-message in-message--danger">
+		Danger message
+	</div>
+
+	<div class="in-message in-message--danger">
+		<ul class="in-message__list">
+			<li>Error list in message</li>
+			<li>Error list in message</li>
+			<li>Error list in message</li>
+		</ul>
+	</div>
+*/
+
+.in-message {
+	margin: 20px 0;
+	padding: 20px;
+
+	border: 1px solid @color-e;
+	background: lighten(@color-e, 10%);
+
+	.border-radius(@border-radius-base);
+}
+.in-message--success {
+	border-color: darken(@bg-success, 10%);
+
+	.bg-variant(@bg-success);
+}
+.in-message--info {
+	border-color: darken(@bg-info, 10%);
+
+	.bg-variant(@bg-info);
+}
+.in-message--warning {
+	border-color: darken(@bg-warning, 10%);
+
+	.bg-variant(@bg-warning);
+}
+.in-message--danger {
+	border-color: darken(@bg-alert, 10%);
+
+	.bg-variant(@bg-alert);
+}
+
+.in-message__list {
+	.reset-ul();
+}

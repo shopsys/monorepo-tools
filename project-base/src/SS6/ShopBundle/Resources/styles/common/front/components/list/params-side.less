@@ -1,0 +1,52 @@
+/*
+Params list with aligned text to both sides
+========
+Simple list for params
+
+	<dl class="list-params-side">
+		<dt class="list-params-side__title">
+			Parameter
+		</dt>
+		<dd class="list-params-side__definition">
+			Value
+		</dd>
+	</dl>
+	<dl class="list-params-side">
+		<dt class="list-params-side__title">
+			Parameter
+		</dt>
+		<dd class="list-params-side__definition">
+			Value
+		</dd>
+	</dl>
+*/
+
+.list-params-side {
+	.cfx();
+	margin: 0;
+	padding: 0;
+}
+
+.list-params-side__title {
+	.box-sizing(border-box);
+	float: left;
+	width: 40%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 5%;
+	margin: 0;
+	clear: both;
+
+	text-align: left;
+}
+
+.list-params-side__definition {
+	.box-sizing(border-box);
+	float: left;
+	width: 60%;
+	margin: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	text-align: right;
+}

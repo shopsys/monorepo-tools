@@ -11,7 +11,7 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				<div class="form-box">
+				<div class="wrap-group">
 					{% block product_id %}{% endblock %}
 					{% block product_url %}{% endblock %}
 
@@ -19,14 +19,14 @@
 				</div>
 
 
-				<div class="form-box">
+				<div class="wrap-group">
 					{{ form_row(form.catnum, { label: 'Katalogové číslo' }) }}
 					{{ form_row(form.partno, { label: 'PartNo (výrobní číslo)' }) }}
 					{{ form_row(form.ean, { label: 'EAN' }) }}
 				</div>
 
 
-				<div class="form-box">
+				<div class="wrap-group">
 					{{ form_row(form.description, { label: 'Popis'}) }}
 					{{ form_row(form.price, { label: inputPriceLabel(), attr: { class: 'form-line--size-2' } }) }}
 					{{ form_row(form.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
@@ -38,7 +38,7 @@
 					{{ form_row(form.hidden, { label: 'Skryté', attr: {class: 'form-line--between'} }) }}
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					{% block image %}{% endblock %}
 					{{ form_row(form.image, { label: 'Nahrát obrázek' }) }}
 

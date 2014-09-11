@@ -12,7 +12,7 @@
 
 				{{ form_widget(form.id, { type: 'hidden' }) }}
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<fieldset>
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
 						{{ form_row(form.statusId, { label: 'Stav' }) }}
@@ -20,7 +20,7 @@
 					</fieldset>
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2 class="mt-0">Osobní údaje</h2>
 					<fieldset>
 						{{ form_row(form.firstName, { label: 'Jméno' }) }}
@@ -30,7 +30,7 @@
 					</fieldset>
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2 class="mt-0">Firemní údaje</h2>
 					<fieldset>
 						{{ form_row(form.companyName, { label: 'Název firmy' }) }}
@@ -39,7 +39,7 @@
 					</fieldset>
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2 class="mt-0">Fakturační údaje</h2>
 					<fieldset>
 						{{ form_row(form.street, { label: 'Ulice' }) }}
@@ -48,7 +48,7 @@
 					</fieldset>
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2 class="mt-0">Doručovací adresa</h2>
 					<fieldset>
 						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba' }) }}
@@ -60,14 +60,14 @@
 					</fieldset>
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2 class="mt-0">Poznámka</h2>
 					<fieldset>
 						{{ form_row(form.note, { label: 'Napište nám' }) }}
 					</fieldset>
 				</div>
 
-				<div class="form-box form-group">
+				<div class="wrap-group form-group">
 					<h2 class="mt-0">Položky objednávky</h2>
 					<fieldset>
 						{% if form.items is not empty %}
@@ -102,7 +102,7 @@
 							</div>
 						{% else %}
 							{{ form_widget(form.items, { type: 'hidden' }) }}
-							<div class="message message-info">
+							<div class="in-message in-message--info">
 								Objednávka neobsahuje žádné položky.
 							</div>
 						{% endif %}

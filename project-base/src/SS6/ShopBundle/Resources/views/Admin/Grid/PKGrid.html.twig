@@ -34,7 +34,7 @@
 	{% endif %}
 
 	{% if grid.rows is empty %}
-		<div class="message message-info js-inline-edit-no-data">
+		<div class="in-message in-message--info js-inline-edit-no-data">
 			{{ gridView.renderBlock('pkgrid_no_data') }}
 		</div>
 	{% endif %}
@@ -65,9 +65,9 @@
 							{{ column.title }}
 							{% if grid.order == column.id %}
 								{% if grid.orderDirection == 'desc' %}
-									<span class="sort_down sort-arrows sort-arrows--down"></span>
+									<span class="sort_down in-sort-arrows in-sort-arrows--down"></span>
 								{% else %}
-									<span class="sort_up sort-arrows sort-arrows--up"></span>
+									<span class="sort_up in-sort-arrows in-sort-arrows--up"></span>
 								{% endif %}
 							{% endif %}
 						</a>
@@ -111,7 +111,7 @@
 
 {% block pkgrid_row %}
 	{% set emptyRow = emptyRow|default(false) %}
-	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} inline-edit hidden js-pkgrid-empty-row{% else %} js-pkgrid-row{% endif %}"
+	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} table-inline-edit hidden js-pkgrid-empty-row{% else %} js-pkgrid-row{% endif %}"
 			{% if grid.inlineEdit and not emptyRow %} data-inline-edit-row-id="{{ grid.getInlineEditRowId(row) }}"{% endif %}>
 		{% for column in grid.columns %}
 			<td class="js-pkgrid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
@@ -122,13 +122,13 @@
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
 			<td class="grid-column-actions last-column text-right js-inline-edit-other-inputs {{ grid.actionColumnClassAttribute }}{% if lastRow %} last-row{% endif %}">
-				<span class="grid-row-actions action-icons">
+				<span class="grid-row-actions in-action-icons">
 					{% if grid.inlineEdit and emptyRow %}
 						<span class="js-inline-edit-buttons">
-							<a href="#" class="table-action js-inline-edit-save action-icons__item action-icons__item--confirm">
+							<a href="#" class="table-action js-inline-edit-save in-action-icons__item in-action-icons__item--confirm">
 								<i class="fa fa-check" title="Uložit změny"></i>
 							</a>
-							<a href="#" class="table-action js-inline-edit-cancel action-icons__item action-icons__item--discard">
+							<a href="#" class="table-action js-inline-edit-cancel in-action-icons__item in-action-icons__item--discard">
 								<i class="fa fa-delete" title="Zahodit změny"></i>
 							</a>
 						</span>
@@ -137,7 +137,7 @@
 						</span>
 					{% else %}
 						{% if grid.inlineEdit %}
-							<a href="#" class="table-action js-inline-edit-edit action-icons__item action-icons__item--edit">
+							<a href="#" class="table-action js-inline-edit-edit in-action-icons__item in-action-icons__item--edit">
 								<i class="fa fa-pencil" title="Upravit"></i>
 							</a>
 						{% endif %}
@@ -160,7 +160,7 @@
 		{% set icon = actionColumn.type %}
 	{% endif %}
 	<a
-		class="action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
+		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
 		href="{{ actionColumn.targetUrl(row) }}"
 		{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
 	><i class="fa fa-{{ icon }}"></i></a>
@@ -227,14 +227,14 @@
 			{% endif %}
 		</ul>
 
-		<div class="js-pkgrid-go-to grid-actions__to-page clear-r small">
+		<div class="js-pkgrid-go-to box-grid-actions__to-page clear-r small">
 			<span>Přejít na stránku:</span>
 			<input
 				type="number"
 				min="1"
 				max="{{ grid.pageCount }}"
 				value="{{ grid.page }}"
-				class="current form-control text-center js-pkgrid-go-to-input ml-half mr-half input-xs grid-actions__input"
+				class="current form-control text-center js-pkgrid-go-to-input ml-half mr-half input-xs box-grid-actions__input"
 				size="2"
 			/>
 			<a class="btn btn-primary btn-xs js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
@@ -256,7 +256,7 @@
 {% endblock %}
 
 {% block pkgrid_pager %}
-	<div class="text-center mb-half box-line box-line--border grid-actions">
+	<div class="text-center mb-half box-grid-actions">
 		{{ gridView.renderBlock('pkgrid_pager_totalcount') }}
 		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
 		{% if grid.pageCount > 1 %}
@@ -266,7 +266,7 @@
 {% endblock %}
 
 {% block pkgrid_value_cell_type_boolean %}
-	<span class="grid_boolean_{{ value ? 'true' : 'false' }} semaphore semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano' : 'Ne' }}"></span>
+	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano' : 'Ne' }}"></span>
 {% endblock %}
 
 {% block pkgrid_value_cell_type_DateTime %}

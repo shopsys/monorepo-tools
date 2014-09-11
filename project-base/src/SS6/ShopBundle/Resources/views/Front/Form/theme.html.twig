@@ -63,16 +63,16 @@
 	{% spaceless %}
 		{% if errors|length > 0 %}
 			{% if form.parent %}
-				<div class="message-danger message-floating {{ attr.class|default('') }}">
-					<ul class="message__list">
+				<div class="in-message--danger in-message-floating {{ attr.class|default('') }}">
+					<ul class="in-message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>
 						{% endfor %}
 					</ul>
 				</div>
 			{% else %}
-				<div class="message message-danger">
-					<ul class="message__list">
+				<div class="in-message in-message--danger">
+					<ul class="in-message__list">
 						{% for error in errors %}
 							<li>{{ error.message }}</li>
 						{% endfor %}

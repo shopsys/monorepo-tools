@@ -1,0 +1,48 @@
+/*
+Login box
+=======
+Box, with input fields for loging in.
+
+	<div class="box-login">
+		<h1 class="box-login__heading">
+			Heading
+		</h1>
+		<input type="text" class="form-control" placeholder="Useranme" >
+		<input type="password" class="form-control" placeholder="Password">
+		<button class="btn-lg btn-block btn btn-primary button" type="submit">Log in</button>
+	</div>
+*/
+
+.box-login {
+	max-width: 420px;
+	padding: 40px;
+	margin: 40px auto 0;
+
+	border: 1px solid @color-border;
+	background: @color-f;
+	text-align: center;
+
+	.box-shadow(0 0 30px @color-grey);
+	.border-top-radius(@border-radius-large);
+	.border-bottom-radius(@border-radius-large);
+
+	input[type="text"] {
+		margin-bottom: -1px;
+
+		.border-bottom-radius(0);
+	}
+
+	input[type="password"] {
+		margin-bottom: 10px;
+
+		.border-top-radius(0);
+	}
+}
+
+.box-login__heading {
+	margin: 0 0 20px;
+
+	font-size: 28px;
+	text-align: left;
+	font-weight: bold;
+}

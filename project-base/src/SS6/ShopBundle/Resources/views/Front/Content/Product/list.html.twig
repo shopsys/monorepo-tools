@@ -7,11 +7,11 @@
 {% block content %}
 	<h1>Katalog zboží</h1>
 
-	<ul class="product-list">
+	<ul class="list-items">
 		{% for productDetail in productDetails %}
-			<li class="product-list__item col-xs-12 col-sm-6 col-md-4">
-				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="product-list__block">
-					<div class="product-list__image">
+			<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
+				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-items__block">
+					<div class="list-items__image">
 						<span>
 							{% if imageExists(productDetail.product, 'default') %}
 								{{ image(productDetail.product, { size: 'default', height: '200px' }) }}
@@ -20,29 +20,29 @@
 							{% endif %}
 						</span>
 					</div>
-					<h2 class="product-list__title">
+					<h2 class="list-items__title">
 						{{ productDetail.product.name }}
 					</h2>
-					<div class="product-list__price">
-						<dl class="simple-side-list">
-							<dt class="simple-side-list__title">
+					<div class="list-items__price">
+						<dl class="list-params-side">
+							<dt class="list-params-side__title">
 								Cena s DPH:
 							</dt>
-							<dd class="simple-side-list__definition price-main price-big">
+							<dd class="list-params-side__definition price-main price-big">
 								{{ productDetail.price.basePriceWithVat|price }}
 							</dd>
 						</dl>
-						<dl class="simple-side-list">
-							<dt class="simple-side-list__title">
+						<dl class="list-params-side">
+							<dt class="list-params-side__title">
 								Cena bez DPH:
 							</dt>
-							<dd class="simple-side-list__definition">
+							<dd class="list-params-side__definition">
 								{{ productDetail.price.basePriceWithoutVat|price }}
 							</dd>
 						</dl>
 					</div>
 				</a>
-				<div class="product-list__actions">
+				<div class="list-items__actions">
 					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 				</div>
 			</li>

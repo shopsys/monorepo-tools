@@ -19,9 +19,9 @@
 					<td><a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}">{{ paymentDetail.payment.name }}</a></td>
 					<td class="text-center">
 						{% if paymentDetail.payment.visible %}
-							<span class="semaphore semaphore--true"></span>
+							<span class="in-semaphore in-semaphore--true"></span>
 						{% else %}
-							<span class="semaphore semaphore--false"></span>
+							<span class="in-semaphore in-semaphore--false"></span>
 						{% endif %}
 					</td>
 					<td class="text-right">{{ paymentDetail.price.basePriceWithVat|price }}</td>

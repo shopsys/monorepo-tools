@@ -1,0 +1,90 @@
+/*
+Progress bar
+===============
+Progress bar with 3 steps
+
+	<ul class="in-progress">
+		<li class="in-progress__item">
+			<a href="#" class="in-progress__item__inner">
+				1. item
+			</a>
+			<span class="in-progress__item__arrow"></span>
+		</li>
+		<li class="in-progress__item in-progress__item--active">
+			<span class="in-progress__item__inner">
+				2. item
+			</span>
+			<span class="in-progress__item__arrow"></span>
+		</li>
+		<li class="in-progress__item">
+			<a href="#" class="in-progress__item__inner">
+				3. item
+			</a>
+		</li>
+	</ul>
+
+*/
+
+.in-progress {
+	.reset-ul();
+	.cfx();
+	margin: 20px 0;
+
+	border: 1px solid @color-border;
+}
+
+.in-progress__item {
+	float: left;
+	width: 100% / 3;
+	height: 40px;
+	position: relative;
+
+	border-left: 1px solid @color-border;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+
+	&:first-child {
+		border-left: 0;
+	}
+}
+
+.in-progress__item__arrow {
+	display: block;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 50%;
+	right: -9px;
+	margin-top: -8px;
+	z-index: 2;
+
+	background: @color-f;
+	border-top: 1px solid @color-border;
+	border-right: 1px solid @color-border;
+
+	.rotate(45deg);
+}
+.in-progress__item--active .in-progress__item__inner {
+	color: @color-f;
+	background: @bg-primary;
+}
+
+
+.in-progress__item--active .in-progress__item__arrow {
+	color: @color-f;
+	background: @bg-primary;
+}
+
+.in-progress__item__inner {
+	display: block;
+	padding: 0 10px 0 20px;
+	line-height: 40px;
+
+	text-decoration: none;
+	color: @color-primary;
+
+	&:hover {
+		text-decoration: none;
+	}
+}

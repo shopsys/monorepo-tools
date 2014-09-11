@@ -16,7 +16,7 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				<div class="form-box">
+				<div class="wrap-group">
 					{% block transport_id %}
 						{{ form_widget(form.id, { type: 'hidden' }) }}
 					{% endblock %}
@@ -29,7 +29,7 @@
 					{{ form_row(form.description, { label: 'Popis'}) }}
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					{% block image %}{% endblock %}
 					{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
 				</div>

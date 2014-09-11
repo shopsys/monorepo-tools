@@ -1,0 +1,30 @@
+/*
+Grid actions
+=======
+Special part for grid control - place for grid actions
+
+	<div class="box-grid-actions">
+		<span class="box-grid-actions__to-page">To page:
+			<select class="box-grid-actions__input"><option>5</option></select>
+		</span>
+	</div>
+*/
+
+.box-grid-actions {
+	.cfx();
+
+	height: 78px;
+	padding: 10px 0 5px;
+
+	border-top: 3px solid @color-border-light;
+	border-bottom: 3px solid @color-border-light;
+}
+
+.box-grid-actions__to-page {
+	float: right;
+}
+
+.box-grid-actions__input {
+	width: 40px;
+	display: inline-block;
+}

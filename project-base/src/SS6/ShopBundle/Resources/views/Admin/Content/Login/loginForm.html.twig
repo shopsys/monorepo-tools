@@ -6,14 +6,14 @@
 
 {% block content %}
 	{% if error %}
-		<p class="message message-danger">{{ error }}</p>
+		<p class="in-message in-message--danger">{{ error }}</p>
 	{% endif %}
 
-	{{ form_start(form, {attr: {class: 'form-signin'}}) }}
+	{{ form_start(form, {attr: {class: 'box-login'}}) }}
 		{{ form_errors(form) }}
 
-		<h1 class="form-signin-heading">Administrace</h1>
-		
+		<h1 class="box-login__heading">Administrace</h1>
+
 		{{ form_errors(form.username) }}
 		{{ form_widget(form.username, {attr: {placeholder: 'Uživatelské jméno'}}) }}
 

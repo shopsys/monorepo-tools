@@ -1,0 +1,47 @@
+/*
+Semaphore icons
+============
+Simple points, which shows 3 states (green - true, orange - maybe, red - false).
+semaphore without modifier is blank. So it could be 4th state.
+
+	<p>
+		<span class="in-semaphore"></span> - blank
+	</p>
+
+	<p>
+		<span class="in-semaphore in-semaphore--true"></span> - true
+	</p>
+
+	<p>
+		<span class="in-semaphore in-semaphore--maybe"></span> - maybe
+	</p>
+
+	<p>
+		<span class="in-semaphore in-semaphore--false"></span> - false
+	</p>
+
+*/
+
+.in-semaphore {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	margin: 0 3px;
+	position: relative;
+	top: 1px;
+
+	border: 1px solid @color-3;
+	text-indent: -9999px;
+
+	.border-radius(@border-radius-large);
+}
+
+.in-semaphore--true {
+	background: @color-info;
+}
+.in-semaphore--maybe {
+	background: @color-warning;
+}
+.in-semaphore--false {
+	background: @color-alert;
+}

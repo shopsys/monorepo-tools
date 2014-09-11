@@ -11,13 +11,13 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2>Systémové údaje</h2>
 					{% block customer_id %}{% endblock %}
 					{% block customer_created_at %}{% endblock %}
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2>Osobní údaje</h2>
 					{{ form_row(form.userData.firstName, { label: 'Jméno'}) }}
 					{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
@@ -25,14 +25,14 @@
 					{{ form_row(form.userData.email, { label: 'Email', attr: {class: 'form-line--size-3'} }) }}
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2>Registrovaní zák.</h2>
 					{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
 					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
 					{% block customer_last_login %}{% endblock %}
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2>Firemní údaje</h2>
 					{{ form_row(form.billingAddressData.companyCustomer, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
@@ -45,14 +45,14 @@
 					</div>
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2>Adresa</h2>
 					{{ form_row(form.billingAddressData.street, { label: 'Ulice'}) }}
 					{{ form_row(form.billingAddressData.city, { label: 'Město'}) }}
 					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ', attr: {class: 'form-line--size-2'} }) }}
 				</div>
 
-				<div class="form-box">
+				<div class="wrap-group">
 					<h2>Doručovací adresa</h2>
 					{{ form_row(form.deliveryAddressData.addressFilled, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
