@@ -122,7 +122,10 @@ services:
       
   ss6.shop.file_upload.file_naming_convention:
     class: SS6\ShopBundle\Model\FileUpload\FileNamingConvention
-    
+
+  ss6.shop.form.multiple_form:
+    class: SS6\ShopBundle\Model\Form\MultipleForm
+
   ss6.shop.customer.customer_identifier_factory:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
