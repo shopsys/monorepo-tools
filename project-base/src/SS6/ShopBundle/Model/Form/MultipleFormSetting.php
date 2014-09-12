@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Form;
 
-class MultipleForm {
+class MultipleFormSetting {
 
 	const DEFAULT_MULTIPLE = false;
 	

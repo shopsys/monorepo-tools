@@ -3,9 +3,9 @@
 {% block form_start %}
 	{%- if attr.multipleForm is defined -%}
 		{% if attr.multipleForm %}
-			{{ globalMultipleForm.currentFormIsMultiple() }}
+			{{ globalMultipleFormSetting.currentFormIsMultiple() }}
 		{% else %}
-			{{ globalMultipleForm.currentFormIsNotMultiple() }}
+			{{ globalMultipleFormSetting.currentFormIsNotMultiple() }}
 		{% endif %}
 	{%- endif -%}
 	{% set attr = attr|merge({'role': attr.role|default('form')}) %}
@@ -31,7 +31,7 @@
 
 {% block form_end %}
 	{{ parent('form_end') }}
-	{{ globalMultipleForm.reset() }}
+	{{ globalMultipleFormSetting.reset() }}
 {% endblock form_end %}
 
 {% block form_row %}
@@ -167,7 +167,7 @@
 {% endblock choice_widget_expanded %}
 	
 {% block widget_attributes -%}
-	{%- if globalMultipleForm.currentFormMultiple -%}
+	{%- if globalMultipleFormSetting.currentFormMultiple -%}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
 		{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
 	{%- else -%}
@@ -193,7 +193,7 @@
 {%- endblock widget_attributes %}
 
 {% block button_attributes -%}
-	{%- if globalMultipleForm.currentFormMultiple -%}
+	{%- if globalMultipleFormSetting.currentFormMultiple -%}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
 		{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
 	{%- else -%}
