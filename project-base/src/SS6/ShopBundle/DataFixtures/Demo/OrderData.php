@@ -32,7 +32,7 @@ class OrderData extends AbstractReferenceFixture implements DependentFixtureInte
 			$this->referenceRepository->getReference('payment_cash'),
 			$this->referenceRepository->getReference('order_status_done'),
 			'Jiří',
-			'3evčík',
+			'Ševčík',
 			'no-reply@netdevelo.cz',
 			'+420369554147',
 			'První 1',
