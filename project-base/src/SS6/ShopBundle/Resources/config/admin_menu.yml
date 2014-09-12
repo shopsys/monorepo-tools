@@ -66,12 +66,21 @@
         - label: 'Editace stavu objednávek'
           route: admin_orderstatus_edit
           visible: false
+        - label: 'Nový stav objednávek'
+          route: admin_orderstatus_new
+          visible: false
 
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
       items:
+        - label: 'Nová doprava'
+          route: admin_transport_new
+          visible: false
         - label: 'Editace dopravy'
           route: admin_transport_edit
+          visible: false
+        - label: 'Nová platba'
+          route: admin_payment_new
           visible: false
         - label: 'Editace platby'
           route: admin_payment_edit
