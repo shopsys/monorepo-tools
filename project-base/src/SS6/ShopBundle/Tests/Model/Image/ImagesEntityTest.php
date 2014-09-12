@@ -36,4 +36,22 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$imagesEntity->getRelativeImageFilepath(new stdClass(), 'TypeName_1', null);
 	}
 
+	public function testGetRelativeImagePathProvider() {
+		return array(
+			array('entity', 'type', 'size', 'entity/type/size/'),
+			array('entity', 'type', null, 'entity/type/'),
+			array('entity', null, 'size', 'entity/size/'),
+			array('entity', null, null, 'entity/'),
+		);
+	}
+
+	/**
+	 * @dataProvider testGetRelativeImagePathProvider
+	 */
+	public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath) {
+		$imageConfig = new ImageConfig(array());
+		$imagesEntity = new ImagesEntity('imageDir', $imageConfig);
+
+		$this->assertEquals($expectedPath, $imagesEntity->getRelativeImagePath($entityName, $type, $sizeName));
+	}
 }

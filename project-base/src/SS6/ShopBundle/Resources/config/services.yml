@@ -176,7 +176,11 @@ services:
   ss6.shop.flash_message.bag.front:
     class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['front']
-    
+
+  ss6.shop.image.directory_structure_creator:
+    class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
+    arguments: [%ss6.image_dir%]
+
   ss6.shop.image.image_config:
     class: SS6\ShopBundle\Model\Image\Config\ImageConfig
     factory_service: ss6.shop.image.image_config_loader

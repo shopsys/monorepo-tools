@@ -22,8 +22,8 @@
 
 	<property file="${path.build.properties.local}" override="true"/>
 
-	<target name="build" depends="composer,npm,clean,assetic,grunt,db-rebuild"/>
-	<target name="build-demo" depends="composer,npm,clean,assetic,grunt,db-demo"/>
+	<target name="build" depends="composer,npm,clean,img-dirs,assetic,grunt,db-rebuild"/>
+	<target name="build-demo" depends="composer,npm,clean,img-dirs,assetic,grunt,db-demo"/>
 	<target name="build-demo-dev" depends="build-demo,standards"/>
 	<target name="build-dev" depends="build,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
@@ -119,6 +119,19 @@
 
 	<target name="grunt">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
+	</target>
+
+	<target name="img-dirs">
+		<delete includeemptydirs="true">
+			<fileset dir="${path.root}/web/assets/content/images">
+				<exclude name="noimage.gif" />
+				<exclude name =".gitignore" />
+			</fileset>
+		</delete>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:image:directories" />
+		</exec>
 	</target>
 
 	<target name="npm">
