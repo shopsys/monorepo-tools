@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -67,7 +68,7 @@ class PaymentFormType extends AbstractType {
 			))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('transports', 'choice', array(
-				'choices' => $transportChoices,
+				'choice_list' => new ObjectChoiceList($this->allTransports, 'name', array(), null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 				'required' => false,

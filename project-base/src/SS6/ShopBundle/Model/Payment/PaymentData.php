@@ -180,4 +180,17 @@ class PaymentData {
 	public function setImage($image) {
 		$this->image = $image;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 */
+	public function setFromEntity(Payment $payment) {
+		$this->description = $payment->getDescription();
+		$this->hidden = $payment->isHidden();
+		$this->id = $payment->getId();
+		$this->image = $payment->getImageFilename();
+		$this->name = $payment->getPrice();
+		$this->transports = $payment->getTransports()->toArray();
+		$this->vat = $payment->getVat();
+	}
 }

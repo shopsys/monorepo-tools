@@ -74,25 +74,14 @@ class PaymentController extends Controller {
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
-		$formData = new PaymentData();
-		$formData->setId($payment->getId());
-		$formData->setName($payment->getName());
-		$formData->setPrice($payment->getPrice());
-		$formData->setVat($payment->getVat());
-		$formData->setDescription($payment->getDescription());
-		$formData->setHidden($payment->isHidden());
+		$paymentData = new PaymentData();
+		$paymentData->setFromEntity($payment);
 
-		$transports = array();
-		foreach ($payment->getTransports() as $transport) {
-			$transports[] = $transport->getId();
-		}
-		$formData->setTransports($transports);
-
-		$form = $this->createForm($paymentFormTypeFactory->create(), $formData);
+		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$paymentEditFacade->edit($payment, $formData);
+			$paymentEditFacade->edit($payment, $paymentData);
 
 			$flashMessageTwig->addSuccess('Byla upravena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
