@@ -1,9 +1,38 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {% block form_start %}
+	{%- if attr.multipleForm is defined -%}
+		{% if attr.multipleForm %}
+			{{ globalMultipleForm.currentFormIsMultiple() }}
+		{% else %}
+			{{ globalMultipleForm.currentFormIsNotMultiple() }}
+		{% endif %}
+	{%- endif -%}
 	{% set attr = attr|merge({'role': attr.role|default('form')}) %}
-	{{ parent('form_start') }}
+	{% set method = method|upper %}
+	{%- if method in ["GET", "POST"] -%}
+		{% set form_method = method %}
+	{%- else -%}
+		{% set form_method = "POST" %}
+	{%- endif -%}
+	<form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
+		{%- for attrname, attrvalue in attr -%} 
+			{{- " " -}}
+			{%- if attrname is sameas('multipleForm') -%}
+			{%- else -%}
+				{{- attrname }}="{{ attrvalue }}"
+			{%- endif -%}
+		{%- endfor -%}
+		{% if multipart %} enctype="multipart/form-data"{% endif %}>
+	{%- if form_method != method -%}
+		<input type="hidden" name="_method" value="{{ method }}" />
+	{%- endif -%}
 {% endblock form_start %}
+
+{% block form_end %}
+	{{ parent('form_end') }}
+	{{ globalMultipleForm.reset() }}
+{% endblock form_end %}
 
 {% block form_row %}
 	<div class="form-line {{ attr.class|default('') }}">
@@ -100,23 +129,24 @@
 {% endblock button_widget %}
 
 {% block choice_widget_collapsed -%}
-    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
-        {% set required = false %}
-    {% endif %}
-    <select class="form-control form-line__field" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
-        {% if empty_value is not none -%}
-            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
-        {%- endif %}
-        {%- if preferred_choices|length > 0 -%}
-            {% set options = preferred_choices %}
-            {{- block('choice_widget_options') -}}
-            {% if choices|length > 0 and separator is not none -%}
-                <option disabled="disabled">{{ separator }}</option>
-            {%- endif %}
-        {%- endif -%}
-        {% set options = choices -%}
-        {{- block('choice_widget_options') -}}
-    </select>
+	{% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+		{% set required = false %}
+	{% endif %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+		{% if empty_value is not none -%}
+			<option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+		{%- endif %}
+		{%- if preferred_choices|length > 0 -%}
+			{% set options = preferred_choices %}
+			{{- block('choice_widget_options') -}}
+			{% if choices|length > 0 and separator is not none -%}
+				<option disabled="disabled">{{ separator }}</option>
+			{%- endif %}
+		{%- endif -%}
+		{% set options = choices -%}
+		{{- block('choice_widget_options') -}}
+	</select>
 {%- endblock choice_widget_collapsed %}
 
 {% block choice_widget_expanded %}
@@ -135,3 +165,51 @@
 			</div>
 	{% endspaceless %}
 {% endblock choice_widget_expanded %}
+	
+{% block widget_attributes -%}
+	{%- if globalMultipleForm.currentFormMultiple -%}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
+		{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
+	{%- else -%}
+		{{- " " -}}
+		id="{{ id }}"
+	{%- endif -%}
+	{{- " " -}}
+	name="{{ full_name }}"
+	{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
+	{%- if read_only %} readonly="readonly"{% endif -%}
+	{%- if disabled %} disabled="disabled"{% endif -%}
+	{%- if required %} required="required"{% endif -%}
+	{%- for attrname, attrvalue in attr -%}
+		{{- " " -}}
+		{%- if attrname in ['placeholder', 'title'] -%}
+			{{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+		{%- elseif attrvalue is sameas(true) -%}
+			{{- attrname }}="{{ attrname }}"
+		{%- elseif attrvalue is not sameas(false) -%}
+			{{- attrname }}="{{ attrvalue }}"
+		{%- endif -%}
+	{%- endfor -%}
+{%- endblock widget_attributes %}
+
+{% block button_attributes -%}
+	{%- if globalMultipleForm.currentFormMultiple -%}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
+		{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
+	{%- else -%}
+		{{- " " -}}
+		id="{{ id }}"
+	{%- endif -%}
+	{{- " " -}}
+	name="{{ full_name }}"{% if disabled %} disabled="disabled"{% endif -%}
+	{%- for attrname, attrvalue in attr -%}
+		{{- " " -}}
+		{%- if attrname in ['placeholder', 'title'] -%}
+			{{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+		{%- elseif attrvalue is sameas(true) -%}
+			{{- attrname }}="{{ attrname }}"
+		{%- elseif attrvalue is not sameas(false) -%}
+			{{- attrname }}="{{ attrvalue }}"
+		{%- endif -%}
+	{%- endfor -%}
+{%- endblock button_attributes %}
