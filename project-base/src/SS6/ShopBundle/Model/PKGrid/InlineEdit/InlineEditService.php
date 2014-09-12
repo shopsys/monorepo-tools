@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\PKGrid\InlineEdit;
 
+use SS6\ShopBundle\Model\Form\MultipleFormSetting;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,23 @@ class InlineEditService {
 	private $twigEnvironment;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Form\MultipleFormSetting
+	 */
+	private $multipleFormSettings;
+
+	/**
 	 * @param \Symfony\Component\DependencyInjection\Container $container
 	 * @param \Twig_Environment $twigEnvironment
+	 * @param \SS6\ShopBundle\Model\Form\MultipleFormSetting $multipleFormSetting
 	 */
-	public function __construct(Container $container, Twig_Environment $twigEnvironment) {
+	public function __construct(
+		Container $container,
+		Twig_Environment $twigEnvironment,
+		MultipleFormSetting $multipleFormSetting
+	) {
 		$this->container = $container;
 		$this->twigEnvironment = $twigEnvironment;
+		$this->multipleFormSettings = $multipleFormSetting;
 	}
 
 	/**
@@ -99,9 +111,14 @@ class InlineEditService {
 		$formView = $form->createView();
 		$result = [];
 
+		$this->multipleFormSettings->currentFormIsMultiple();
 		foreach ($formView->children as $formName => $childrenForm) {
-			$result[$formName] = $this->twigEnvironment->render('{{ form_widget(form) }}', array('form' => $childrenForm));
+			$result[$formName] = $this->twigEnvironment->render(
+				'{% form_theme form \'@SS6Shop/Admin/Form/theme.html.twig\' %}{{ form_widget(form) }}',
+				array('form' => $childrenForm)
+			);
 		}
+		$this->multipleFormSettings->reset();
 
 		return $result;
 	}
