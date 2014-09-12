@@ -26,7 +26,7 @@ class ImageEntityConfig {
 	/**
 	 * @var array
 	 */
-	private $types;
+	private $sizesByType;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[]
@@ -38,14 +38,14 @@ class ImageEntityConfig {
 	 * @param string $entityName
 	 * @param string $entityClass
 	 * @param array $filenameMethodsByType
-	 * @param array $types
+	 * @param array $sizesByType
 	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[] $sizes
 	 */
-	public function __construct($entityName, $entityClass, array $filenameMethodsByType, array $types, array $sizes) {
+	public function __construct($entityName, $entityClass, array $filenameMethodsByType, array $sizesByType, array $sizes) {
 		$this->entityName = $entityName;
 		$this->entityClass = $entityClass;
 		$this->filenameMethodsByType = $filenameMethodsByType;
-		$this->types = $types;
+		$this->sizesByType = $sizesByType;
 		$this->sizes = $sizes;
 	}
 
@@ -79,7 +79,7 @@ class ImageEntityConfig {
 	 * @return array
 	 */
 	public function getTypes() {
-		return $this->types;
+		return array_keys($this->sizesByType);
 	}
 
 	/**
@@ -95,8 +95,8 @@ class ImageEntityConfig {
 	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException
 	 */
 	public function getTypeSizes($type) {
-		if (array_key_exists($type, $this->types)) {
-			return $this->types[$type];
+		if (array_key_exists($type, $this->sizesByType)) {
+			return $this->sizesByType[$type];
 		} else {
 			throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
 		}

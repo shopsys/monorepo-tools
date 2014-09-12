@@ -48,7 +48,7 @@ class ImagesEntity {
 
 	/**
 	 * @param Object $entity
-	 * @param strin|null $type
+	 * @param string|null $type
 	 * @param string|null $sizeName
 	 * @return bool
 	 */
@@ -60,8 +60,9 @@ class ImagesEntity {
 	}
 
 	/**
-	 * @param strin|null $type
-	 * @param string|null $sizeName
+	 * @param string $entityName
+	 * @param string|null $type
+	 * @param string|null $sizeName	 
 	 * @return string
 	 */
 	public function getRelativeImagePath($entityName, $type, $sizeName) {
