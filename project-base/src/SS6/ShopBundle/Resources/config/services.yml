@@ -405,6 +405,9 @@ services:
 
   ss6.shop.setting:
     class: SS6\ShopBundle\Model\Setting\Setting3
+    
+  ss6.shop.setting.setting_value_repository:
+    class: SS6\ShopBundle\Model\Setting\SettingValueRepository
 
   ss6.shop.security.logout_handler:
     class: SS6\ShopBundle\Model\Security\LogoutHandler
