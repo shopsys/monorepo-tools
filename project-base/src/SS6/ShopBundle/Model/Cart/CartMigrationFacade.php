@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Cart\CartSingletonFactory;
+use SS6\ShopBundle\Model\Cart\CartFactory;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -34,9 +34,9 @@ class CartMigrationFacade {
 	
 	/**
 	 * 
-	 * @var \SS6\ShopBundle\Model\Cart\CartSingletonFactory
+	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
 	 */
-	private $cartSingletonFactory;
+	private $cartFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
@@ -47,21 +47,21 @@ class CartMigrationFacade {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 * @param \SS6\ShopBundle\Model\Cart\CartSingletonFactory $cartSingletonFactory
+	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
 	 */
 	public function __construct(
 		EntityManager $em,
 		CartService $cartService,
 		Cart $cart,
 		CustomerIdentifier $customerIdentifier,
-		CartSingletonFactory $cartSingletonFactory,
+		CartFactory $cartFactory,
 		CustomerIdentifierFactory $customerIdentifierFactory
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
 		$this->cart = $cart;
 		$this->customerIdentifier = $customerIdentifier;
-		$this->cartSingletonFactory = $cartSingletonFactory;
+		$this->cartFactory = $cartFactory;
 		$this->customerIdentifierFactory = $customerIdentifierFactory;
 	}
 
@@ -91,7 +91,7 @@ class CartMigrationFacade {
 		$previousId = $session->get(self::SESSION_PREVIOUS_ID);
 		if (!empty($previousId) && $previousId !== $session->getId()) {
 			$previousCustomerIdentifier = $this->customerIdentifierFactory->getOnlyWithSessionId($previousId);
-			$cart = $this->cartSingletonFactory->get($previousCustomerIdentifier);
+			$cart = $this->cartFactory->get($previousCustomerIdentifier);
 			$this->mergeCurrentCartWithCart($cart);
 		}
 		$session->set(self::SESSION_PREVIOUS_ID, $session->getId());

@@ -6,7 +6,7 @@ use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
-class CartSingletonFactory {
+class CartFactory {
 	
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart[]

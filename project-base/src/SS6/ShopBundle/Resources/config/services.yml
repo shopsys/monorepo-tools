@@ -38,11 +38,11 @@ services:
 
   ss6.shop.admin_navigation.breadcrumb:
     class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
-    factory_service: ss6.shop.admin_navigation.breadcrumb_singleton_factory
+    factory_service: ss6.shop.admin_navigation.breadcrumb_factory
     factory_method: get
 
-  ss6.shop.admin_navigation.breadcrumb_singleton_factory:
-    class: SS6\ShopBundle\Model\AdminNavigation\BreadcrumbSingletonFactory
+  ss6.shop.admin_navigation.breadcrumb_factory:
+    class: SS6\ShopBundle\Model\AdminNavigation\BreadcrumbFactory
 
   ss6.shop.admin_navigation.menu:
     class: SS6\ShopBundle\Model\AdminNavigation\Menu
@@ -62,13 +62,13 @@ services:
 
   ss6.shop.cart:
     class: SS6\ShopBundle\Model\Cart\Cart
-    factory_service: ss6.shop.cart.cart_singleton_factory
+    factory_service: ss6.shop.cart.cart_factory
     factory_method: get
     arguments: 
       - @ss6.shop.customer.customer_identifier
     
-  ss6.shop.cart.cart_singleton_factory:
-    class: SS6\ShopBundle\Model\Cart\CartSingletonFactory
+  ss6.shop.cart.cart_factory:
+    class: SS6\ShopBundle\Model\Cart\CartFactory
     
   ss6.shop.cart.cart_facade:
     class: SS6\ShopBundle\Model\Cart\CartFacade
