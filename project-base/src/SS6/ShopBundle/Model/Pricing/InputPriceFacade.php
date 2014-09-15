@@ -48,11 +48,11 @@ class InputPriceFacade {
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
 		if ($this->recalculateInputPricesWithoutVat) {
-			$this->inputPriceRepository->recalculateToInputPricesWithoutVat();
 			$this->setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
+			$this->inputPriceRepository->recalculateToInputPricesWithoutVat();
 		} elseif ($this->recalculateInputPricesWithVat) {
-			$this->inputPriceRepository->recalculateToInputPricesWithVat();
 			$this->setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
+			$this->inputPriceRepository->recalculateToInputPricesWithVat();
 		}
 	}
 
