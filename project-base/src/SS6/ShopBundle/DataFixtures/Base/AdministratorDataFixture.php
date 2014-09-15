@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
-class AdministratorData extends AbstractReferenceFixture {
+class AdministratorDataFixture extends AbstractReferenceFixture {
 	
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

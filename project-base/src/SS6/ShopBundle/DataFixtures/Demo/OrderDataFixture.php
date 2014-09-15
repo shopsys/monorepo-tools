@@ -4,14 +4,14 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\DataFixtures\Base\OrderStatusData;
+use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 
-class OrderData extends AbstractReferenceFixture implements DependentFixtureInterface {
+class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -508,7 +508,7 @@ class OrderData extends AbstractReferenceFixture implements DependentFixtureInte
 			TransportDataFixture::class,
 			PaymentDataFixture::class,
 			UserDataFixture::class,
-			OrderStatusData::class,
+			OrderStatusDataFixture::class,
 		);
 	}
 
