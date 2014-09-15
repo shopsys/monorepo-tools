@@ -144,14 +144,15 @@ class InputPriceRepository {
 	 * @param \Closure $callback
 	 */
 	private function batchProcessQuery(Query $query, Closure $callback) {
-		$interation = 0;
+		$iteration = 0;
 
 		foreach ($query->iterate() as $row) {
+			$iteration++;
 			$object = $row[0];
 
 			$callback($object);
 
-			if (($interation % self::BATCH_SIZE) == 0) {
+			if (($iteration % self::BATCH_SIZE) == 0) {
 				$this->em->flush();
 				$this->em->clear();
 			}
