@@ -159,4 +159,17 @@ class TransportData {
 	public function setImage($image) {
 		$this->image = $image;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 */
+	public function setFromEntity(Transport $transport) {
+		$this->setDescription($transport->getDescription());
+		$this->setHidden($transport->isHidden());
+		$this->setId($transport->getId());
+		$this->setImage($transport->getImageFilename());
+		$this->setName($transport->getName());
+		$this->setPrice($transport->getPrice());
+		$this->setVat($transport->getVat());
+	}
 }
