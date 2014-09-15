@@ -404,7 +404,7 @@ services:
     class: SS6\ShopBundle\Model\Security\LoginService
 
   ss6.shop.setting:
-    class: SS6\ShopBundle\Model\Setting\Setting3
+    class: SS6\ShopBundle\Model\Setting\Setting
     
   ss6.shop.setting.setting_value_repository:
     class: SS6\ShopBundle\Model\Setting\SettingValueRepository

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Setting\Setting3;
+use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class SettingValueDataFixture extends AbstractReferenceFixture {
@@ -14,7 +14,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 
-		$manager->persist(new SettingValue(Setting3::INPUT_PRICE_TYPE, Setting3::INPUT_PRICE_TYPE_WITHOUT_VAT));
+		$manager->persist(new SettingValue(Setting::INPUT_PRICE_TYPE, Setting::INPUT_PRICE_TYPE_WITHOUT_VAT));
 
 		$manager->flush();
 	}

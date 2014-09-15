@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Setting;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Setting\SettingValueRepository;
 
-class Setting3 {
+class Setting {
 
 	const INPUT_PRICE_TYPE = 'inputPriceType';
 

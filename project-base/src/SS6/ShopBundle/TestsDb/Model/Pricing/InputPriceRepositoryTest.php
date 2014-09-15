@@ -18,7 +18,7 @@ class InputPriceRepositoryTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get('ss6.shop.setting');
-		/* @var $setting SS6\ShopBundle\Model\Setting\Setting3 */
+		/* @var $setting SS6\ShopBundle\Model\Setting\Setting */
 		$inputPriceRepository = $this->getContainer()->get('ss6.shop.pricing.input_price_repository');
 		/* @var $inputPriceRepository \SS6\ShopBundle\Model\Pricing\InputPriceRepository */
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
@@ -76,7 +76,7 @@ class InputPriceRepositoryTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get('ss6.shop.setting');
-		/* @var $setting SS6\ShopBundle\Model\Setting\Setting3 */
+		/* @var $setting SS6\ShopBundle\Model\Setting\Setting */
 		$inputPriceRepository = $this->getContainer()->get('ss6.shop.pricing.input_price_repository');
 		/* @var $inputPriceRepository \SS6\ShopBundle\Model\Pricing\InputPriceRepository */
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Setting\Setting3;
+use SS6\ShopBundle\Model\Setting\Setting;
 
 class PricingSetting {
 
@@ -12,14 +12,14 @@ class PricingSetting {
 	const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting3
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting3 $setting
+	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
 	 */
-	public function __construct(Setting3 $setting) {
+	public function __construct(Setting $setting) {
 		$this->setting = $setting;
 	}
 
@@ -27,7 +27,7 @@ class PricingSetting {
 	 * @return int
 	 */
 	public function getInputPriceType() {
-		return $this->setting->get(Setting3::INPUT_PRICE_TYPE);
+		return $this->setting->get(Setting::INPUT_PRICE_TYPE);
 	}
 
 	/**
