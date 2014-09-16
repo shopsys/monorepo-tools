@@ -42,5 +42,12 @@ class MailTemplateFacade {
 		return $this->mailTemplateRepository->findByName($templateName);
 	}
 
-	
+	/**
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
+	 */
+	public function edit(MailTemplate $mailTemplate, MailTemplateData $mailTemplateData) {
+		$mailTemplate->edit($mailTemplateData);
+		$this->em->flush();
+	}
 }

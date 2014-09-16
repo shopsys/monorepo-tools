@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Mail;
 
+use SS6\ShopBundle\Model\Mail\MailTemplate;
+
 class MailTemplateData {
 
 	/**
@@ -49,6 +51,14 @@ class MailTemplateData {
 	 */
 	public function setBody($body) {
 		$this->body = $body;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 */
+	public function setFromEntity(MailTemplate $mailTemplate) {
+		$this->subject = $mailTemplate->getSubject();
+		$this->body = $mailTemplate->getBody();
 	}
 	
 }

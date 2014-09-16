@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Order\Mail;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Mailer;
 
 class OrderMailFacade {
@@ -44,8 +45,7 @@ class OrderMailFacade {
 	 * @throws \SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException
 	 */
 	public function sendEmail(Order $order) {
-		$templateName = $this->orderMailService->getMailTemplateNameOrder($order);
-		$mailTemplate = $this->mailTemplateFacade->get($templateName);
+		$mailTemplate = $this->getMailTemplateByStatus($order->getStatus());
 		$message = $this->orderMailService->getMessageByOrder($order, $mailTemplate);
 
 		$failedRecipients = array();
@@ -53,5 +53,15 @@ class OrderMailFacade {
 		if (!$successSend && count($failedRecipients) > 0) {
 			throw new \SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException($failedRecipients);
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Mail\OrderStatus $orderStatus
+	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
+	 */
+	public function getMailTemplateByStatus(OrderStatus $orderStatus) {
+		$templateName = $this->orderMailService->getMailTemplateNameByStatus($orderStatus);
+
+		return $this->mailTemplateFacade->get($templateName);
 	}
 }

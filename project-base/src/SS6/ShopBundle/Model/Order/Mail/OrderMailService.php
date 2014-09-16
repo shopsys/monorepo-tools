@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Message;
 
 class OrderMailService {
@@ -43,12 +44,10 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @return string
 	 */
-	public function getMailTemplateNameOrder(Order $order) {
-		$orderStatus = $order->getStatus();
-		
+	public function getMailTemplateNameByStatus(OrderStatus $orderStatus) {
 		return self::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId();
 	}
 }

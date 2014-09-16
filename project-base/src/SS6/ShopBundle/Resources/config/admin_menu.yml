@@ -89,6 +89,9 @@
     - label: 'Sazby DPH'
       route: admin_vat_list
 
+    - label: 'Šablony emailů'
+      route: admin_mail_template
+
     - label: 'Superadmin'
       route: admin_superadmin_index
       items:
