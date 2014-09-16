@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
-class ArticleData extends AbstractReferenceFixture {
+class ArticleDataFixture extends AbstractReferenceFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

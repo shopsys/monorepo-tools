@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\AdminNavigation;
 
 use \Symfony\Component\HttpFoundation\RequestStack;
 
-class BreadcrumbSingletonFactory {
+class BreadcrumbFactory {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb

@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
-class ProductVisibilityData extends AbstractReferenceFixture implements DependentFixtureInterface {
+class ProductVisibilityDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 	
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager

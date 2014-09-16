@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
-class OrderStatusData extends AbstractReferenceFixture {
+class OrderStatusDataFixture extends AbstractReferenceFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
