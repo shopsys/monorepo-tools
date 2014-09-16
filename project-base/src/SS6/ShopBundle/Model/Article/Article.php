@@ -36,21 +36,19 @@ class Article {
 	private $text;
 	
 	/**
-	 * @param string $name
-	 * @param string|null $text
+	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
-	public function __construct($name, $text = null) {
-		$this->name = $name;
-		$this->text = $text;
+	public function __construct(ArticleData $articleData) {
+		$this->name = $articleData->getName();
+		$this->text = $articleData->getText();
 	}
 	
 	/**
-	 * @param string $name
-	 * @param string|null $text
+	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
-	public function edit($name, $text = null) {
-		$this->name = $name;
-		$this->text = $text;
+	public function edit(ArticleData $articleData) {
+		$this->name = $articleData->getName();
+		$this->text = $articleData->getText();
 	}
 
 	/**
