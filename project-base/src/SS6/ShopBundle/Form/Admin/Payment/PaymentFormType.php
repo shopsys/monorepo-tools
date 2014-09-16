@@ -6,7 +6,6 @@ use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -53,12 +52,7 @@ class PaymentFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$transportChoices = array();
-		foreach ($this->allTransports as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-			$transportChoices[$transport->getId()] = $transport->getName();
-		}
-
+		
 		$builder
 			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('name', 'text', array(
