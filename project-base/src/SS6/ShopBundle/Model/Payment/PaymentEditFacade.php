@@ -36,11 +36,15 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
-	public function create(Payment $payment) {
+	public function create(PaymentData $paymentData) {
+		$payment = new Payment($paymentData);
 		$this->em->persist($payment);
-		$this->em->flush();
+		$this->setAddionalDataAndFlush($payment, $paymentData);
+		
+		return $payment;
 	}
 
 	/**
@@ -49,10 +53,7 @@ class PaymentEditFacade {
 	 */
 	public function edit(Payment $payment, PaymentData $paymentData) {
 		$payment->edit($paymentData);
-		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
-		$payment->setTransports($transports);
-		$payment->setImageForUpload($paymentData->getImage());
-		$this->em->flush();
+		$this->setAddionalDataAndFlush($payment, $paymentData);
 	}
 
 	/**
@@ -77,6 +78,17 @@ class PaymentEditFacade {
 	public function deleteById($id) {
 		$payment = $this->getById($id);
 		$payment->markAsDeleted();
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 */
+	private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData) {
+		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
+		$payment->setTransports($transports);
+		$payment->setImageForUpload($paymentData->getImage());
 		$this->em->flush();
 	}
 }

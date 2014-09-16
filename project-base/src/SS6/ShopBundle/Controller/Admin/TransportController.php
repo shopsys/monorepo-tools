@@ -26,12 +26,9 @@ class TransportController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = new Transport($transportData);
-			$transport->setImageForUpload($transportData->getImage());
-			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-			$transportEditFacade->create($transport);
+			$transport = $transportEditFacade->create($transportData);
 			
 			$flashMessageTwig->addSuccess('Byla vytvořena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
