@@ -1,0 +1,24 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Nastavení šablon e-mailů{% endblock %}
+{% block h1 %}Nastavení šablon e-mailů{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+				
+				<h2>Přijatá objednávka</h2>
+				<div class="wrap-group">
+					{{ form_row(form.subject, { label: 'Předmět'}) }}
+					{{ form_row(form.body, { label: 'Text'}) }}
+				</div>
+
+				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}
