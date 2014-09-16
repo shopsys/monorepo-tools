@@ -28,7 +28,7 @@
 	<target name="build-dev" depends="build,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
-	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,tests"/>
+	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,tests,tests-db"/>
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo,products-visibility"/>
 
 	<target name="assetic">
