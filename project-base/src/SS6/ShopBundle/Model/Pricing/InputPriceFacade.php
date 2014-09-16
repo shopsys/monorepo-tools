@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Setting\Setting3;
+use SS6\ShopBundle\Model\Setting\Setting;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceFacade {
@@ -13,7 +13,7 @@ class InputPriceFacade {
 	private $inputPriceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting3
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
 	private $setting;
 
@@ -30,7 +30,7 @@ class InputPriceFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceRepository $inputPriceRepository
 	 */
-	public function __construct(InputPriceRepository $inputPriceRepository, Setting3 $setting) {
+	public function __construct(InputPriceRepository $inputPriceRepository, Setting $setting) {
 		$this->inputPriceRepository = $inputPriceRepository;
 		$this->setting = $setting;
 	}
@@ -48,11 +48,11 @@ class InputPriceFacade {
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
 		if ($this->recalculateInputPricesWithoutVat) {
-			$this->inputPriceRepository->recalculateToInputPricesWithoutVat();
 			$this->setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
+			$this->inputPriceRepository->recalculateToInputPricesWithoutVat();
 		} elseif ($this->recalculateInputPricesWithVat) {
-			$this->inputPriceRepository->recalculateToInputPricesWithVat();
 			$this->setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
+			$this->inputPriceRepository->recalculateToInputPricesWithVat();
 		}
 	}
 
