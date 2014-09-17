@@ -4,6 +4,9 @@
 {% block h1 %}Sazby DPH{% endblock %}
 
 {% block main_content %}
+	
+	{{ render(controller('SS6ShopBundle:Admin/Vat:defaultVat', { request: app.request })) }}
+	
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
 			{{ gridView.render('@SS6Shop/Admin/Content/Vat/listGrid.html.twig') }}
