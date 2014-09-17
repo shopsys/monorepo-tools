@@ -57,9 +57,7 @@ class VatController extends Controller {
 		$form = $this->createForm(new DefaultVatFormType($vats));
 
 		$defaultVatFormData = array();
-		if (!$form->isSubmitted()) {
-			$defaultVatFormData['defaultVat'] = $vatFacade->getDefaultVat();
-		}
+		$defaultVatFormData['defaultVat'] = $vatFacade->findDefaultVat();
 		
 		$form->setData($defaultVatFormData);
 		$form->handleRequest($request);

@@ -93,12 +93,12 @@ class VatFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
 	 */
-	public function getDefaultVat() {
+	public function findDefaultVat() {
 		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT);
 
-		return $this->vatRepository->getById($defaultVatId);
+		return $this->vatRepository->findById($defaultVatId);
 	}
 
 	/**

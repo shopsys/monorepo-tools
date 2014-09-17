@@ -23,7 +23,7 @@ class PaymentController extends Controller {
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$paymentData = new PaymentData();
-		$paymentData->setVat($vatFacade->getDefaultVat());
+		$paymentData->setVat($vatFacade->findDefaultVat());
 		
 		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);

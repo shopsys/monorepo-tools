@@ -24,7 +24,7 @@ class TransportController extends Controller {
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$transportData = new TransportData();
-		$transportData->setVat($vatFacade->getDefaultVat());
+		$transportData->setVat($vatFacade->findDefaultVat());
 		
 		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
 		$form->handleRequest($request);
