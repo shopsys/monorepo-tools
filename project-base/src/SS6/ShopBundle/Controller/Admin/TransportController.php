@@ -20,8 +20,12 @@ class TransportController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
 		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
+		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
+		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$transportData = new TransportData();
+		$transportData->setVat($vatFacade->getDefaultVat());
+		
 		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
 		$form->handleRequest($request);
 
