@@ -3,13 +3,11 @@
 namespace SS6\ShopBundle\TestsDb\Model\Pricing;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
-use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
 class InputPriceRepositoryTest extends DatabaseTestCase {
@@ -44,20 +42,21 @@ class InputPriceRepositoryTest extends DatabaseTestCase {
 		$productData->setPrice(121);
 		$productData->setVat($vat);
 		$product = $productEditFacade->create($productData);
+		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
 		$paymentData->setName('name');
 		$paymentData->setPrice(121);
 		$paymentData->setVat($vat);
-		$payment = new Payment($paymentData);
-		$paymentEditFacade->create($payment);
+		$payment = $paymentEditFacade->create($paymentData);
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
 		$transportData->setName('name');
 		$transportData->setPrice(121);
 		$transportData->setVat($vat);
-		$transport = new Transport($transportData);
-		$transportEditFacade->create($transport);
+		$transport = $transportEditFacade->create($transportData);
+		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 
 		$em->flush();
 
@@ -102,20 +101,21 @@ class InputPriceRepositoryTest extends DatabaseTestCase {
 		$productData->setPrice(100);
 		$productData->setVat($vat);
 		$product = $productEditFacade->create($productData);
+		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
 		$paymentData->setName('name');
 		$paymentData->setPrice(100);
 		$paymentData->setVat($vat);
-		$payment = new Payment($paymentData);
-		$paymentEditFacade->create($payment);
+		$payment = $paymentEditFacade->create($paymentData);
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
 		$transportData->setName('name');
 		$transportData->setPrice(100);
 		$transportData->setVat($vat);
-		$transport = new Transport($transportData);
-		$transportEditFacade->create($transport);
+		$transport = $transportEditFacade->create($transportData);
+		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 
 		$em->flush();
 

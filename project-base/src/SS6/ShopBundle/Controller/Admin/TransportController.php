@@ -26,12 +26,9 @@ class TransportController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = new Transport($transportData);
-			$transport->setImageForUpload($transportData->getImage());
-			
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-			$transportEditFacade->create($transport);
+			$transport = $transportEditFacade->create($transportData);
 			
 			$flashMessageTwig->addSuccess('Byla vytvořena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
@@ -68,19 +65,14 @@ class TransportController extends Controller {
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 
-		$formData = new TransportData();
-		$formData->setId($transport->getId());
-		$formData->setName($transport->getName());
-		$formData->setPrice($transport->getPrice());
-		$formData->setVat($transport->getVat());
-		$formData->setDescription($transport->getDescription());
-		$formData->setHidden($transport->isHidden());
+		$transportData = new TransportData();
+		$transportData->setFromEntity($transport);
 
-		$form = $this->createForm($transportFormTypeFactory->create(), $formData);
+		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transportEditFacade->edit($transport, $formData);
+			$transportEditFacade->edit($transport, $transportData);
 
 			$flashMessageTwig->addSuccess('Byla upravena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(

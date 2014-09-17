@@ -37,11 +37,15 @@ class TransportEditFacade {
 	}
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
+	 * @return \SS6\ShopBundle\Model\Transport\Transport
 	 */
-	public function create(Transport $transport) {
+	public function create(TransportData $transportData) {
+		$transport = new Transport($transportData);
 		$this->em->persist($transport);
-		$this->em->flush();
+		$this->setAdditionalDataAndFlush($transport, $transportData);
+		
+		return $transport;
 	}
 	
 	/**
@@ -50,8 +54,7 @@ class TransportEditFacade {
 	 */
 	public function edit(Transport $transport, TransportData $transportData) {
 		$transport->edit($transportData);
-		$transport->setImageForUpload($transportData->getImage());
-		$this->em->flush();
+		$this->setAdditionalDataAndFlush($transport, $transportData);
 	}
 	
 	/**
@@ -73,6 +76,15 @@ class TransportEditFacade {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment->getTransports()->removeElement($transport);
 		}
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
+	 */
+	private function setAdditionalDataAndFlush(Transport $transport, TransportData $transportData) {
+		$transport->setImageForUpload($transportData->getImage());
 		$this->em->flush();
 	}
 }

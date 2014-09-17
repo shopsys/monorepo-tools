@@ -52,12 +52,7 @@ class PaymentFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$transportChoices = array();
-		foreach ($this->allTransports as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-			$transportChoices[$transport->getId()] = $transport->getName();
-		}
-
+		
 		$builder
 			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('name', 'text', array(
@@ -67,7 +62,7 @@ class PaymentFormType extends AbstractType {
 			))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('transports', 'choice', array(
-				'choices' => $transportChoices,
+				'choice_list' => new ObjectChoiceList($this->allTransports, 'name', array(), null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 				'required' => false,
