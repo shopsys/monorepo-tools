@@ -9,12 +9,12 @@ parameters:
   ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
   ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
-  ss6.web_dir: %kernel.root_dir%/../web
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
   ss6.image_dir: %ss6.web_dir%/assets/content/images
   ss6.image_url_prefix: /assets/content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
+  ss6.web_dir: %kernel.root_dir%/../web
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
 
 services:
@@ -29,12 +29,6 @@ services:
   
   doctrine.orm.entity_manager.abstract:
     synthetic: true
-    
-  ss6.shop.administrator.administrator_grid_facade:
-    class: SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
-    
-  ss6.shop.administrator.administrator_grid_service:
-    class: SS6\ShopBundle\Model\Administrator\AdministratorGridService
 
   ss6.shop.admin_navigation.breadcrumb:
     class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -53,12 +47,18 @@ services:
 
   ss6.shop.admin_navigation.menu_loader:
     class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader
-
-  ss6.shop.article.article_repository:
-    class: SS6\ShopBundle\Model\Article\ArticleRepository
+    
+  ss6.shop.administrator.administrator_grid_facade:
+    class: SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+    
+  ss6.shop.administrator.administrator_grid_service:
+    class: SS6\ShopBundle\Model\Administrator\AdministratorGridService
 
   ss6.shop.article.article_edit_facade:
     class: SS6\ShopBundle\Model\Article\ArticleEditFacade
+
+  ss6.shop.article.article_repository:
+    class: SS6\ShopBundle\Model\Article\ArticleRepository
 
   ss6.shop.cart:
     class: SS6\ShopBundle\Model\Cart\Cart
@@ -66,12 +66,12 @@ services:
     factory_method: get
     arguments: 
       - @ss6.shop.customer.customer_identifier
+      
+  ss6.shop.cart.cart_facade:
+    class: SS6\ShopBundle\Model\Cart\CartFacade
     
   ss6.shop.cart.cart_factory:
     class: SS6\ShopBundle\Model\Cart\CartFactory
-    
-  ss6.shop.cart.cart_facade:
-    class: SS6\ShopBundle\Model\Cart\CartFacade
 
   ss6.shop.cart.cart_migration_facade:
     class: SS6\ShopBundle\Model\Cart\CartMigrationFacade
@@ -107,33 +107,15 @@ services:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
     factory_method: get
-    
-  ss6.shop.file_upload:
-    class: SS6\ShopBundle\Model\FileUpload\FileUpload
-    arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
-    
-  ss6.shop.file_upload.doctrine_listener:
-    class: SS6\ShopBundle\Model\FileUpload\DoctrineListener
-    tags:
-      - { name: doctrine.event_listener, event: postPersist }
-      - { name: doctrine.event_listener, event: postUpdate }
-      - { name: doctrine.event_listener, event: prePersist }
-      - { name: doctrine.event_listener, event: preUpdate }
-      
-  ss6.shop.file_upload.file_naming_convention:
-    class: SS6\ShopBundle\Model\FileUpload\FileNamingConvention
-
-  ss6.shop.form.multiple_form_setting:
-    class: SS6\ShopBundle\Model\Form\MultipleFormSetting
-
-  ss6.shop.customer.customer_identifier_factory:
-    class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
   ss6.shop.customer.customer_edit_facade:
     class: SS6\ShopBundle\Model\Customer\CustomerEditFacade
 
   ss6.shop.customer.customer_edit_service:
     class: SS6\ShopBundle\Model\Customer\CustomerEditService
+
+  ss6.shop.customer.customer_identifier_factory:
+    class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService
@@ -172,6 +154,21 @@ services:
   ss6.shop.domain.domain_factory:
     class: SS6\ShopBundle\Model\Domain\DomainFactory
 
+  ss6.shop.file_upload:
+    class: SS6\ShopBundle\Model\FileUpload\FileUpload
+    arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
+    
+  ss6.shop.file_upload.doctrine_listener:
+    class: SS6\ShopBundle\Model\FileUpload\DoctrineListener
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }
+      - { name: doctrine.event_listener, event: postUpdate }
+      - { name: doctrine.event_listener, event: prePersist }
+      - { name: doctrine.event_listener, event: preUpdate }
+      
+  ss6.shop.file_upload.file_naming_convention:
+    class: SS6\ShopBundle\Model\FileUpload\FileNamingConvention
+
   ss6.shop.flash_message.bag.admin:
     class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['admin']
@@ -179,25 +176,7 @@ services:
   ss6.shop.flash_message.bag.front:
     class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['front']
-
-  ss6.shop.image.directory_structure_creator:
-    class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
-    arguments: [%ss6.image_dir%]
-
-  ss6.shop.image.image_config:
-    class: SS6\ShopBundle\Model\Image\Config\ImageConfig
-    factory_service: ss6.shop.image.image_config_loader
-    factory_method: loadFromYaml
-    arguments:
-      - %ss6.image_config_filepath%
-
-  ss6.shop.image.image_config_loader:
-    class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
     
-  ss6.shop.image.images_entity:
-    class: SS6\ShopBundle\Model\Image\ImagesEntity
-    arguments: [%ss6.image_dir%]
-
   ss6.shop.flash_message.text_sender.admin:
     class: SS6\ShopBundle\Model\FlashMessage\TextSender
     arguments:
@@ -218,6 +197,27 @@ services:
     arguments:
       - @ss6.shop.flash_message.bag.front
 
+  ss6.shop.form.multiple_form_setting:
+    class: SS6\ShopBundle\Model\Form\MultipleFormSetting
+
+  ss6.shop.image.directory_structure_creator:
+    class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
+    arguments: [%ss6.image_dir%]
+
+  ss6.shop.image.image_config:
+    class: SS6\ShopBundle\Model\Image\Config\ImageConfig
+    factory_service: ss6.shop.image.image_config_loader
+    factory_method: loadFromYaml
+    arguments:
+      - %ss6.image_config_filepath%
+
+  ss6.shop.image.image_config_loader:
+    class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
+    
+  ss6.shop.image.images_entity:
+    class: SS6\ShopBundle\Model\Image\ImagesEntity
+    arguments: [%ss6.image_dir%]
+
   ss6.shop.mail.mail_template_facade:
     class: SS6\ShopBundle\Model\Mail\MailTemplateFacade
 
@@ -229,14 +229,11 @@ services:
     parent: craue.form.flow
     scope: request
 
-  ss6.shop.order.preview.order_preview_calculation:
-    class: SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
+  ss6.shop.order.order_facade:
+    class: SS6\ShopBundle\Model\Order\OrderFacade
 
   ss6.shop.order.order_flow_facade:
     class: SS6\ShopBundle\Model\Order\OrderFlowFacade
-
-  ss6.shop.order.order_facade:
-    class: SS6\ShopBundle\Model\Order\OrderFacade
   
   ss6.shop.order.order_mail_facade:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
@@ -245,10 +242,13 @@ services:
   ss6.shop.order.order_mail_service:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailService
     arguments: ["%main_email%"]
+
+  ss6.shop.order.order_number_sequence_repository:
+    class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
     
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
-    
+
   ss6.shop.order.order_service:
     class: SS6\ShopBundle\Model\Order\OrderService
   
@@ -260,20 +260,14 @@ services:
     
   ss6.shop.order.order_status_service:
     class: SS6\ShopBundle\Model\Order\Status\OrderStatusService
-
-  ss6.shop.order.order_repository:
-    class: SS6\ShopBundle\Model\Order\OrderRepository
-
-  ss6.shop.order.order_service:
-    class: SS6\ShopBundle\Model\Order\OrderService
-
-  ss6.shop.order.order_number_sequence_repository:
-    class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
-    
+  
   ss6.shop.order.order_transport_and_payment_watcher_service:
     class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
     arguments:
       - @ss6.shop.flash_message.bag.front
+
+  ss6.shop.order.preview.order_preview_calculation:
+    class: SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
 
   ss6.shop.payment.payment_detail_factory:
     class: SS6\ShopBundle\Model\Payment\Detail\Factory
@@ -295,12 +289,6 @@ services:
     arguments:
       - @service_container
 
-  ss6.shop.product.list.product_list_admin_facade:
-    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
-    
-  ss6.shop.product.list.product_list_admin_repository:
-    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
-
   ss6.shop.pricing.delayed_pricing_setting:
     class: SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
 
@@ -312,6 +300,12 @@ services:
   ss6.shop.pricing.input_price_repository:
     class: SS6\ShopBundle\Model\Pricing\InputPriceRepository
 
+  ss6.shop.product.list.product_list_admin_facade:
+    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+    
+  ss6.shop.product.list.product_list_admin_repository:
+    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
+
   ss6.shop.pricing.price_calculation:
     class: SS6\ShopBundle\Model\Pricing\PriceCalculation
 
@@ -321,14 +315,14 @@ services:
   ss6.shop.pricing.pricing_setting_facade:
     class: SS6\ShopBundle\Model\Pricing\PricingSettingFacade
 
-  ss6.shop.pricing.vat.vat_inline_edit:
-    class: SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit
-    
   ss6.shop.pricing.vat.vat_facade:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatFacade
 
   ss6.shop.pricing.vat.vat_grid_factory:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatGridFactory
+
+  ss6.shop.pricing.vat.vat_inline_edit:
+    class: SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit
     
   ss6.shop.pricing.vat.vat_repository:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatRepository
@@ -403,14 +397,14 @@ services:
   ss6.shop.security.login_service:
     class: SS6\ShopBundle\Model\Security\LoginService
 
+  ss6.shop.security.logout_handler:
+    class: SS6\ShopBundle\Model\Security\LogoutHandler
+
   ss6.shop.setting:
     class: SS6\ShopBundle\Model\Setting\Setting
     
   ss6.shop.setting.setting_value_repository:
     class: SS6\ShopBundle\Model\Setting\SettingValueRepository
-
-  ss6.shop.security.logout_handler:
-    class: SS6\ShopBundle\Model\Security\LogoutHandler
 
   ss6.shop.transport.price_calculation:
     class: SS6\ShopBundle\Model\Transport\PriceCalculation
