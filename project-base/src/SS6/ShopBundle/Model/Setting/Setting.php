@@ -52,7 +52,7 @@ class Setting {
 	public function set($key, $value) {
 		$settingValue = $this->getSettingValue($key);
 		$settingValue->edit($value);
-		$this->em->flush($value);
+		$this->em->flush($settingValue);
 	}
 
 	/**

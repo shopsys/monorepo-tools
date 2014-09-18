@@ -19,8 +19,12 @@ class PaymentController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */		
 		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
 		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
+		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
+		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$paymentData = new PaymentData();
+		$paymentData->setVat($vatFacade->findDefaultVat());
+		
 		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);
 

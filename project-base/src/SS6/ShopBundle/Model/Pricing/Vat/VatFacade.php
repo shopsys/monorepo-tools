@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
+use SS6\ShopBundle\Model\Setting\Setting;
 
 class VatFacade {
 
@@ -25,18 +26,27 @@ class VatFacade {
 	private $vatService;
 
 	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 */
+	private $setting;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatService $vatService
+	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
 	 */
 	public function __construct(
 		EntityManager $em,
 		VatRepository $vatRepository,
-		VatService $vatService
+		VatService $vatService,
+		Setting $setting
 	) {
 		$this->em = $em;
 		$this->vatRepository = $vatRepository;
 		$this->vatService = $vatService;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -80,6 +90,22 @@ class VatFacade {
 		
 		$this->em->remove($vat);
 		$this->em->flush();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 */
+	public function findDefaultVat() {
+		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT);
+
+		return $this->vatRepository->findById($defaultVatId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 */
+	public function setDefaultVat(Vat $vat) {
+		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId());
 	}
 
 }

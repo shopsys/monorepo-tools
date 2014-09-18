@@ -74,10 +74,13 @@ class ProductController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
 		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
+		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
+		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$form = $this->createForm($productFormTypeFactory->create());
 
 		$productData = new ProductData();
+		$productData->setVat($vatFacade->findDefaultVat());
 
 		$form->setData($productData);
 		$form->handleRequest($request);
