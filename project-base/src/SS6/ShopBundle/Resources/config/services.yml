@@ -8,6 +8,8 @@ parameters:
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources/
   ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
   ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
+  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v1.zip
+  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesDql.v1.dql
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/

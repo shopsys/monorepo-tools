@@ -133,6 +133,13 @@
 			<arg value="ss6:image:directories" />
 		</exec>
 	</target>
+	
+	<target name="img-demo">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:image:demo" />
+		</exec>
+	</target>
 
 	<target name="npm">
 		<exec
