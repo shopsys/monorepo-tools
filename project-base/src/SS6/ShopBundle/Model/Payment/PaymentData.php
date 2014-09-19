@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\Common\Collections\Collection;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentData {
 	
@@ -185,12 +186,19 @@ class PaymentData {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function setFromEntity(Payment $payment) {
-		$this->description = $payment->getDescription();
-		$this->hidden = $payment->isHidden();
-		$this->id = $payment->getId();
-		$this->image = $payment->getImageFilename();
-		$this->name = $payment->getPrice();
-		$this->transports = $payment->getTransports()->toArray();
-		$this->vat = $payment->getVat();
+		$this->setId($payment->getId());
+		$this->setName($payment->getName());
+		$this->setPrice($payment->getPrice());
+		$this->setVat($payment->getVat());
+		$this->setDescription($payment->getDescription());
+		$this->setHidden($payment->isHidden());
+
+		$transportsData = array();
+		foreach ($payment->getTransports() as $transport) {
+			$transportData = new TransportData();
+			$transportData->setFromEntity($transport);
+			$transportsData[] = $transportData->getId();
+		}
+		$this->setTransports($transportsData);
 	}
 }
