@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\Article\Article;
+use SS6\ShopBundle\Model\Article\ArticleData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,12 +26,10 @@ class ArticleController extends Controller {
 
 		$article = $articleRepository->getById($id);
 		$form = $this->createForm(new ArticleFormType());
-		$articleData = array();
+		$articleData = new ArticleData();
 
 		if (!$form->isSubmitted()) {
-			$articleData['id'] = $article->getId();
-			$articleData['name'] = $article->getName();
-			$articleData['text'] = $article->getText();
+			$articleData->setFromEntity($article);
 		}
 
 		$form->setData($articleData);
@@ -41,11 +40,7 @@ class ArticleController extends Controller {
 
 			$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
 			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
-			$article = $articleEditFacade->edit(
-				$id,
-				$articleData['name'],
-				$articleData['text']
-			);
+			$article = $articleEditFacade->edit($id, $articleData);
 
 			$flashMessageTwig->addSuccess('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),
@@ -113,7 +108,7 @@ class ArticleController extends Controller {
 
 		$form = $this->createForm(new ArticleFormType());
 
-		$articleData = array();
+		$articleData = new ArticleData();
 
 		$form->setData($articleData);
 		$form->handleRequest($request);
@@ -123,10 +118,7 @@ class ArticleController extends Controller {
 			$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
 			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
-			$article = $articleEditFacade->create(
-				$articleData['name'],
-				$articleData['text']
-			);
+			$article = $articleEditFacade->create($articleData);
 
 			$flashMessageTwig->addSuccess('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),

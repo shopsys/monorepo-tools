@@ -3,9 +3,8 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
-use SS6\ShopBundle\Form\Admin\Order\OrderItemFormData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,52 +27,14 @@ class OrderController extends Controller {
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		
 		$order = $orderRepository->getById($id);
-		$allOrderStauses = $orderStatusRepository->findAll();
-		$form = $this->createForm(new OrderFormType($allOrderStauses));
+		$allOrderStatuses = $orderStatusRepository->findAll();
+		$form = $this->createForm(new OrderFormType($allOrderStatuses));
 		
 		try {
-			$orderData = new OrderFormData();
+			$orderData = new OrderData();
 
 			if (!$form->isSubmitted()) {
-				$customer = $order->getCustomer();
-				$customerId = null;
-				if ($order->getCustomer() !== null) {
-					$customerId = $customer->getId();
-				}
-
-				/* @var $order \SS6\ShopBundle\Model\Order\Order */
-				$orderData->setId($order->getId());
-				$orderData->setOrderNumber($order->getNumber());
-				$orderData->setStatusId($order->getStatus()->getId());
-				$orderData->setCustomerId($customerId);
-				$orderData->setFirstName($order->getFirstName());
-				$orderData->setLastName($order->getLastName());
-				$orderData->setEmail($order->getEmail());
-				$orderData->setTelephone($order->getTelephone());
-				$orderData->setCompanyName($order->getCompanyName());
-				$orderData->setCompanyNumber($order->getCompanyNumber());
-				$orderData->setCompanyTaxNumber($order->getCompanyTaxNumber());
-				$orderData->setStreet($order->getStreet());
-				$orderData->setCity($order->getCity());
-				$orderData->setPostcode($order->getPostcode());
-				$orderData->setDeliveryContactPerson($order->getDeliveryContactPerson());
-				$orderData->setDeliveryCompanyName($order->getDeliveryCompanyName());
-				$orderData->setDeliveryTelephone($order->getDeliveryTelephone());
-				$orderData->setDeliveryStreet($order->getDeliveryStreet());
-				$orderData->setDeliveryCity($order->getDeliveryCity());
-				$orderData->setDeliveryPostcode($order->getDeliveryPostcode());
-				$orderData->setNote($order->getNote());
-
-				$orderItemsData = array();
-				foreach ($order->getItems() as $orderItem) {
-					$orderItemFormData = new OrderItemFormData();
-					$orderItemFormData->setId($orderItem->getId());
-					$orderItemFormData->setName($orderItem->getName());
-					$orderItemFormData->setPrice($orderItem->getPriceWithVat());
-					$orderItemFormData->setQuantity($orderItem->getQuantity());
-					$orderItemsData[] = $orderItemFormData;
-				}
-				$orderData->setItems($orderItemsData);
+				$orderData->setFromEntity($order);
 			}
 			
 			$form->setData($orderData);

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Watcher;
 
-use SS6\ShopBundle\Form\Front\Order\OrderFormData;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
@@ -56,13 +56,13 @@ class TransportAndPaymentWatcherService {
 
 	/**
 	 *
-	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 */
-	public function checkTransportAndPayment(OrderFormData $orderFormData, $transports, $payments) {
-		$transport = $orderFormData->getTransport();
-		$payment = $orderFormData->getPayment();
+	public function checkTransportAndPayment(OrderData $orderData, $transports, $payments) {
+		$transport = $orderData->getTransport();
+		$payment = $orderData->getPayment();
 
 		if ($transport !== null) {
 			$this->checkTransport($transport);

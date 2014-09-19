@@ -7,11 +7,6 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 class TransportData {
 
 	/**
-	 * @var integer
-	 */
-	private $id;
-
-	/**
 	 * @var string
 	 */
 	private $name;
@@ -61,13 +56,6 @@ class TransportData {
 		$this->description = $description;
 		$this->hidden = $hidden;
 	}
-	
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
 
 	/**
 	 * @return string
@@ -102,13 +90,6 @@ class TransportData {
 	 */
 	public function getImage() {
 		return $this->image;
-	}
-	
-	/**
-	 * @param int $id
-	 */
-	public function setId($id) {
-		$this->id = $id;
 	}
 
 	/**
@@ -166,8 +147,6 @@ class TransportData {
 	public function setFromEntity(Transport $transport) {
 		$this->setDescription($transport->getDescription());
 		$this->setHidden($transport->isHidden());
-		$this->setId($transport->getId());
-		$this->setImage($transport->getImageFilename());
 		$this->setName($transport->getName());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());

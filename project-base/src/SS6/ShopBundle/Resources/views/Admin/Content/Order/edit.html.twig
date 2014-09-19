@@ -10,10 +10,9 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{{ form_widget(form.id, { type: 'hidden' }) }}
-
 				<div class="wrap-group">
 					<fieldset>
+						{{ form_id(order) }}
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
 						{{ form_row(form.statusId, { label: 'Stav' }) }}
 						{{ form_row(form.customerId, { label: 'ID zákazníka' }) }}
@@ -83,7 +82,6 @@
 									</thead>
 									<tbody>
 										{% for orderItem in form.items %}
-											{{ form_widget(orderItem.id, { type: 'hidden' }) }}
 											<tr>
 												<td>{{ form_widget(orderItem.name) }}</td>
 												<td>{{ form_widget(orderItem.price, {attr: { class: 'text-right'}}) }}</td>
@@ -110,7 +108,7 @@
 				</div>
 
 				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
-				<a href="{{ url('admin_default_dashboard') }}" class="btn btn-default">Zpět na přehled</a>
+				<a href="{{ url('admin_order_list') }}" class="btn btn-default">Zpět na přehled</a>
 			{{ form_end(form) }}
 
 		</div>

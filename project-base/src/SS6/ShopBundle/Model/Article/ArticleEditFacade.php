@@ -28,15 +28,11 @@ class ArticleEditFacade {
 	}
 
 	/**
-	 * @param string $name
-	 * @param string|null $text
+	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
-	public function create($name, $text = null) {
-		$article = new Article(
-			$name,
-			$text
-		);
+	public function create(ArticleData $articleData) {
+		$article = new Article($articleData);
 
 		$this->em->persist($article);
 		$this->em->flush();
@@ -46,17 +42,12 @@ class ArticleEditFacade {
 
 	/**
 	 * @param int $articleId
-	 * @param string $name
-	 * @param string|null $text
+	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
-	public function edit($articleId, $name, $text = null) {
+	public function edit($articleId, ArticleData $articleData) {
 		$article = $this->articleRepository->getById($articleId);
-
-		$article->edit(
-			$name,
-			$text
-		);
+		$article->edit($articleData);
 
 		$this->em->flush();
 

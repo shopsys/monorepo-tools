@@ -17,9 +17,7 @@
 				{{ form_errors(form) }}
 
 				<div class="wrap-group">
-					{% block payment_id %}
-						{{ form_widget(form.id, { type: 'hidden' }) }}
-					{% endblock %}
+					{{ form_id(paymentDetail.payment|default(null)) }}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
 					{{ form_row(form.hidden, { label: 'Skryté', attr: {class: 'form-line--between'} }) }}

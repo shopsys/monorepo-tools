@@ -182,8 +182,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$this->referenceRepository->getReference('transport_ppl'),
 			$this->referenceRepository->getReference('payment_card'),
 			$this->referenceRepository->getReference('order_status_in_progress'),
-			'Jaromír',
-			'Jágr',
+			'Václav',
+			'Svěrkoš',
 			'no-reply@netdevelo.cz',
 			'+420725711368',
 			'Devátá 68',
@@ -445,12 +445,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 * @param string|null $note
 	 */
 	private function createOrder(array $products,
-			Transport $transport, Payment $payment,	OrderStatus $orderStatus,
-			$firstName, $lastName, $email, $telephone, $street, $city, $postcode,
-			User $user = null, $companyName = null,	$companyNumber = null, $companyTaxNumber = null,
-			$deliveryContactPerson = null, $deliveryCompanyName = null,
-			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
-			$note = null) {
+		Transport $transport, Payment $payment,	OrderStatus $orderStatus,
+		$firstName, $lastName, $email, $telephone, $street, $city, $postcode,
+		User $user = null, $companyName = null,	$companyNumber = null, $companyTaxNumber = null,
+		$deliveryContactPerson = null, $deliveryCompanyName = null,
+		$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
+		$note = null
+	) {
 
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
@@ -467,26 +468,26 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$customerIdentifier = $this->get('ss6.shop.customer.customer_identifier');
 		/* @var $customerIdentifier \SS6\ShopBundle\Model\Customer\CustomerIdentifier */
 
-		$orderFormData = new \SS6\ShopBundle\Form\Front\Order\OrderFormData();
-		$orderFormData->setTransport($transport);
-		$orderFormData->setPayment($payment);
-		$orderFormData->setFirstName($firstName);
-		$orderFormData->setLastName($lastName);
-		$orderFormData->setEmail($email);
-		$orderFormData->setTelephone($telephone);
-		$orderFormData->setStreet($street);
-		$orderFormData->setCity($city);
-		$orderFormData->setPostcode($postcode);
-		$orderFormData->setCompanyName($companyName);
-		$orderFormData->setCompanyNumber($companyNumber);
-		$orderFormData->setCompanyTaxNumber($companyTaxNumber);
-		$orderFormData->setDeliveryContactPerson($deliveryContactPerson);
-		$orderFormData->setDeliveryCompanyName($deliveryCompanyName);
-		$orderFormData->setDeliveryTelephone($deliveryTelephone);
-		$orderFormData->setDeliveryStreet($deliveryStreet);
-		$orderFormData->setDeliveryCity($deliveryCity);
-		$orderFormData->setDeliveryPostcode($deliveryPostcode);
-		$orderFormData->setNote($note);
+		$orderData = new \SS6\ShopBundle\Model\Order\OrderData();
+		$orderData->setTransport($transport);
+		$orderData->setPayment($payment);
+		$orderData->setFirstName($firstName);
+		$orderData->setLastName($lastName);
+		$orderData->setEmail($email);
+		$orderData->setTelephone($telephone);
+		$orderData->setStreet($street);
+		$orderData->setCity($city);
+		$orderData->setPostcode($postcode);
+		$orderData->setCompanyName($companyName);
+		$orderData->setCompanyNumber($companyNumber);
+		$orderData->setCompanyTaxNumber($companyTaxNumber);
+		$orderData->setDeliveryContactPerson($deliveryContactPerson);
+		$orderData->setDeliveryCompanyName($deliveryCompanyName);
+		$orderData->setDeliveryTelephone($deliveryTelephone);
+		$orderData->setDeliveryStreet($deliveryStreet);
+		$orderData->setDeliveryCity($deliveryCity);
+		$orderData->setDeliveryPostcode($deliveryPostcode);
+		$orderData->setNote($note);
 
 		$cartFacade->cleanCart();
 
@@ -495,7 +496,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		}
 
-		$order = $orderFacade->createOrder($orderFormData, $user);
+		$order = $orderFacade->createOrder($orderData, $user);
 		$order->setStatus($orderStatus);
 	}
 

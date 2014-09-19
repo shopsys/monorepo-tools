@@ -4,13 +4,9 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\Common\Collections\Collection;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentData {
-	
-	/**
-	 * @var integer
-	 */
-	private $id;
 
 	/**
 	 * @var string
@@ -68,13 +64,6 @@ class PaymentData {
 		$this->hidden = $hidden;
 		$this->transports = array();
 	}
-	
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
 
 	/**
 	 * @return string
@@ -116,13 +105,6 @@ class PaymentData {
 	 */
 	public function getImage() {
 		return $this->image;
-	}
-	
-	/**
-	 * @param int $id
-	 */
-	public function setId($id) {
-		$this->id = $id;
 	}
 
 	/**
@@ -185,12 +167,18 @@ class PaymentData {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function setFromEntity(Payment $payment) {
-		$this->description = $payment->getDescription();
-		$this->hidden = $payment->isHidden();
-		$this->id = $payment->getId();
-		$this->image = $payment->getImageFilename();
-		$this->name = $payment->getPrice();
-		$this->transports = $payment->getTransports()->toArray();
-		$this->vat = $payment->getVat();
+		$this->setName($payment->getName());
+		$this->setPrice($payment->getPrice());
+		$this->setVat($payment->getVat());
+		$this->setDescription($payment->getDescription());
+		$this->setHidden($payment->isHidden());
+
+		$transportsData = array();
+		foreach ($payment->getTransports() as $transport) {
+			$transportData = new TransportData();
+			$transportData->setFromEntity($transport);
+			$transportsData[] = $transport->getId();
+		}
+		$this->setTransports($transportsData);
 	}
 }

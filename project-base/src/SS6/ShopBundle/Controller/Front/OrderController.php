@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Form\Front\Order\OrderFormData;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -47,9 +47,9 @@ class OrderController extends Controller {
 		$transports = $transportRepository->getVisible($payments);
 		$user = $this->getUser();
 
-		$formData = new OrderFormData();
+		$orderData = new OrderData();
 		if ($user instanceof User) {
-			$orderFacade->prefillOrderFormData($formData, $user);
+			$orderFacade->prefillOrderData($orderData, $user);
 		}
 
 		$flow = $this->get('ss6.shop.order.flow');
@@ -60,20 +60,20 @@ class OrderController extends Controller {
 		}
 
 		$flow->setFormTypesData($transports, $payments);
-		$flow->bind($formData);
+		$flow->bind($orderData);
 		$flow->saveSentStepData();
 
 		$form = $flow->createForm();
 
 		$transportAndPaymentWatcherService = $this->get('ss6.shop.order.order_transport_and_payment_watcher_service');
 		/* @var $transportAndPaymentWatcherService \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService */
-		$transportAndPaymentWatcherService->checkTransportAndPayment($formData, $transports, $payments);
+		$transportAndPaymentWatcherService->checkTransportAndPayment($orderData, $transports, $payments);
 
 		if ($flow->isValid($form)) {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
-				$order = $orderFacade->createOrder($formData, $this->getUser());
+				$order = $orderFacade->createOrder($orderData, $this->getUser());
 				$cartFacade->cleanCart();
 				if ($user instanceof User) {
 					$customerEditFacade->amendCustomerDataFromOrder($user, $order);
@@ -101,8 +101,8 @@ class OrderController extends Controller {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$payment = $formData->getPayment();
-		$transport = $formData->getTransport();
+		$payment = $orderData->getPayment();
+		$transport = $orderData->getTransport();
 
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', array(
 			'form' => $form->createView(),
@@ -126,7 +126,7 @@ class OrderController extends Controller {
 		$transports = $transportRepository->getVisible($payments);
 
 		$flow->setFormTypesData($transports, $payments);
-		$flow->bind(new OrderFormData());
+		$flow->bind(new OrderData());
 		$form = $flow->createForm();
 		$flow->saveCurrentStepData($form);
 
