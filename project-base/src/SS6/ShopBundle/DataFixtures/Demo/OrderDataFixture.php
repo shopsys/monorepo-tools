@@ -46,7 +46,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				'product_18' => 2,
 				'product_19' => 1,
 				'product_20' => 1,
-				'product_30' => 5,
+				'product_15' => 5,
 			),
 			$this->referenceRepository->getReference('transport_personal'),
 			$this->referenceRepository->getReference('payment_card'),
@@ -63,8 +63,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$this->createOrder(
 			array(
-				'product_44' => 6,
-				'product_34' => 1,
+				'product_4' => 6,
+				'product_11' => 1,
 			),
 			$this->referenceRepository->getReference('transport_cp'),
 			$this->referenceRepository->getReference('payment_cod'),
@@ -81,7 +81,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$this->createOrder(
 			array(
-				'product_41' => 1,
+				'product_1' => 1,
 			),
 			$this->referenceRepository->getReference('transport_ppl'),
 			$this->referenceRepository->getReference('payment_card'),
@@ -98,7 +98,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$this->createOrder(
 			array(
-				'product_42' => 8,
+				'product_2' => 8,
 				'product_3' => 1,
 				'product_1' => 2,
 			),
@@ -140,8 +140,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			array(
 				'product_7' => 1,
-				'product_36' => 1,
-				'product_22' => 2,
+				'product_8' => 1,
+				'product_12' => 2,
 			),
 			$this->referenceRepository->getReference('transport_personal'),
 			$this->referenceRepository->getReference('payment_cash'),
@@ -177,7 +177,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$this->createOrder(
 			array(
-				'product_24' => 1,
+				'product_14' => 1,
 			),
 			$this->referenceRepository->getReference('transport_ppl'),
 			$this->referenceRepository->getReference('payment_card'),
@@ -194,8 +194,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$this->createOrder(
 			array(
-				'product_49' => 3,
-				'product_31' => 2,
+				'product_9' => 3,
+				'product_13' => 2,
 			),
 			$this->referenceRepository->getReference('transport_personal'),
 			$this->referenceRepository->getReference('payment_cash'),
@@ -335,8 +335,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			array(
 				'product_15' => 1,
 				'product_18' => 1,
-				'product_29' => 1,
-				'product_30' => 1,
+				'product_19' => 1,
+				'product_3' => 1,
 			),
 			$this->getReference('transport_ppl'),
 			$this->getReference('payment_card'),
@@ -354,7 +354,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			array(
 				'product_9' => 1,
 				'product_19' => 1,
-				'product_26' => 1,
+				'product_6' => 1,
 			),
 			$this->getReference('transport_personal'),
 			$this->getReference('payment_cash'),
@@ -372,9 +372,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			array(
 				'product_7' => 1,
 				'product_17' => 6,
-				'product_27' => 1,
-				'product_37' => 1,
-				'product_47' => 2,
+				'product_9' => 1,
+				'product_14' => 1,
+				'product_10' => 2,
 			),
 			$this->getReference('transport_ppl'),
 			$this->getReference('payment_card'),
@@ -401,7 +401,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$this->createOrder(
 			array(
-				'product_33' => 10,
+				'product_3' => 10,
 			),
 			$this->getReference('transport_personal'),
 			$this->getReference('payment_cash'),
