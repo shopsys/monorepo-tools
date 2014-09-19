@@ -50,7 +50,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$customerIdentifier = new CustomerIdentifier('anotherSecreetSessionHash');
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
-		$this->assertEquals(0, $cart->getItemsCount(), 'Add only in their own basket');
+		$this->assertEquals(0, $cart->getItemsCount(), 'Add only in their own cart');
 	}
 
 	public function testChangeQuantities() {
