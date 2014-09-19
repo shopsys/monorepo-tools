@@ -445,12 +445,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 * @param string|null $note
 	 */
 	private function createOrder(array $products,
-			Transport $transport, Payment $payment,	OrderStatus $orderStatus,
-			$firstName, $lastName, $email, $telephone, $street, $city, $postcode,
-			User $user = null, $companyName = null,	$companyNumber = null, $companyTaxNumber = null,
-			$deliveryContactPerson = null, $deliveryCompanyName = null,
-			$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
-			$note = null) {
+		Transport $transport, Payment $payment,	OrderStatus $orderStatus,
+		$firstName, $lastName, $email, $telephone, $street, $city, $postcode,
+		User $user = null, $companyName = null,	$companyNumber = null, $companyTaxNumber = null,
+		$deliveryContactPerson = null, $deliveryCompanyName = null,
+		$deliveryTelephone = null, $deliveryStreet = null, $deliveryCity = null, $deliveryPostcode = null,
+		$note = null
+	) {
 
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
@@ -495,7 +496,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		}
 
-		$order = $orderFacade->createOrder($orderData, $user);		
+		$order = $orderFacade->createOrder($orderData, $user);
 		$order->setStatus($orderStatus);
 	}
 

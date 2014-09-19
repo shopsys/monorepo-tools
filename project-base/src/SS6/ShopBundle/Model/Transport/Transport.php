@@ -125,10 +125,14 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getImageFilename() {
-		return $this->getId() . '.' . $this->image;
+		if ($this->image !== null) {
+			return $this->getId() . '.' . $this->image;
+		}
+
+		return null;
 	}
 
 	/**
@@ -178,13 +182,6 @@ class Transport implements EntityFileUploadInterface {
 	 */
 	public function getDescription() {
 		return $this->description;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getImage() {
-		return $this->image;
 	}
 
 	/**

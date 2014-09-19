@@ -7,11 +7,6 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentData {
-	
-	/**
-	 * @var integer
-	 */
-	private $id;
 
 	/**
 	 * @var string
@@ -69,13 +64,6 @@ class PaymentData {
 		$this->hidden = $hidden;
 		$this->transports = array();
 	}
-	
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
 
 	/**
 	 * @return string
@@ -117,13 +105,6 @@ class PaymentData {
 	 */
 	public function getImage() {
 		return $this->image;
-	}
-	
-	/**
-	 * @param int $id
-	 */
-	public function setId($id) {
-		$this->id = $id;
 	}
 
 	/**
@@ -186,7 +167,6 @@ class PaymentData {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function setFromEntity(Payment $payment) {
-		$this->setId($payment->getId());
 		$this->setName($payment->getName());
 		$this->setPrice($payment->getPrice());
 		$this->setVat($payment->getVat());
@@ -197,7 +177,7 @@ class PaymentData {
 		foreach ($payment->getTransports() as $transport) {
 			$transportData = new TransportData();
 			$transportData->setFromEntity($transport);
-			$transportsData[] = $transportData->getId();
+			$transportsData[] = $transport->getId();
 		}
 		$this->setTransports($transportsData);
 	}
