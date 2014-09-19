@@ -16,7 +16,7 @@
 							{% if imageExists(productDetail.product, 'default') %}
 								{{ image(productDetail.product, { size: 'default', height: '200px' }) }}
 							{% else %}
-								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
+								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
 							{% endif %}
 						</span>
 					</div>

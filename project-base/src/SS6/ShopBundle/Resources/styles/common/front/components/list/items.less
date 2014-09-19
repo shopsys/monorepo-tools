@@ -114,8 +114,20 @@ item list with image, prices and adding to cart
 }
 
 .list-items__image {
-	.center-it-all();
 	width: 100%;
+	display: table;
+	height: 205px;
+
+	span {
+		.center-it();
+	}
+
+	img {
+		height: auto;
+		width: auto;
+		max-width: 355px;
+		max-height: 205px;
+	}
 }
 
 .list-items__block {
