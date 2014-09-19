@@ -181,6 +181,13 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getImage() {
+		return $this->image;
+	}
+
+	/**
 	 * @return boolean
 	 */
 	public function isHidden() {

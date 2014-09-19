@@ -167,7 +167,9 @@ class TransportData {
 		$this->setDescription($transport->getDescription());
 		$this->setHidden($transport->isHidden());
 		$this->setId($transport->getId());
-		$this->setImage($transport->getImageFilename());
+		if ($transport->getImage() !== null) {
+			$this->setImage($transport->getImageFilename());
+		}
 		$this->setName($transport->getName());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());
