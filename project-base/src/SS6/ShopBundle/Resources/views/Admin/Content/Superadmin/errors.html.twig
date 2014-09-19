@@ -4,15 +4,23 @@
 {% block h1 %}Chybové stránky{% endblock %}
 
 {% block main_content %}
-	{% set codes = [403, 404, 500] %}
-	{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
 	
-	<ul>
-		{% for format in formats %}
-			{% for code in codes %}
-				<li><a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a></li>
+	{% if app.environment == constant('SS6\\Environment::ENVIRONMENT_DEVELOPMENT') %}
+		{% set codes = [403, 404, 500] %}
+		{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
+
+		<ul>
+			{% for format in formats %}
+				{% for code in codes %}
+					<li><a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a></li>
+				{% endfor %}
 			{% endfor %}
-		{% endfor %}
-	</ul>
+		</ul>
+	{% else %}
+		<div class="in-message in-message--info js-flash-message" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">
+			<a href="#" class="in-message__close js-flash-message-close" title="Zavřít">X</a>
+			<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu.
+		</div>
+	{% endif %}
 	
 {% endblock %}
