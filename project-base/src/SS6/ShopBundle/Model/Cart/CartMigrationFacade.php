@@ -23,11 +23,6 @@ class CartMigrationFacade {
 	private $cartService;
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
-	 */
-	private $cart;
-	
-	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	private $customerIdentifier;
@@ -46,20 +41,19 @@ class CartMigrationFacade {
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
 	public function __construct(
 		EntityManager $em,
 		CartService $cartService,
-		Cart $cart,
 		CustomerIdentifier $customerIdentifier,
 		CartFactory $cartFactory,
 		CustomerIdentifierFactory $customerIdentifierFactory
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
-		$this->cart = $cart;
 		$this->customerIdentifier = $customerIdentifier;
 		$this->cartFactory = $cartFactory;
 		$this->customerIdentifierFactory = $customerIdentifierFactory;
@@ -69,13 +63,14 @@ class CartMigrationFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
 	private function mergeCurrentCartWithCart(Cart $cart) {
-		$this->cartService->mergeCarts($this->cart, $cart, $this->customerIdentifier);
+		$currentCart = $this->cartFactory->get($this->customerIdentifier);
+		$this->cartService->mergeCarts($currentCart, $cart, $this->customerIdentifier);
 
 		foreach ($cart->getItems() as $itemToRemove) {
 			$this->em->remove($itemToRemove);
 		}
 
-		foreach ($this->cart->getItems() as $item) {
+		foreach ($currentCart->getItems() as $item) {
 			$this->em->persist($item);
 		}
 
