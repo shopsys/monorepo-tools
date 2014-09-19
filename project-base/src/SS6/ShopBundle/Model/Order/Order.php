@@ -9,8 +9,6 @@ use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="orders")
@@ -218,97 +216,90 @@ class Order {
 	private $deleted;
 
 	/**
-	 * @param string $number
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string $telephone
-	 * @param string $street
-	 * @param string $city
-	 * @param string $postcode
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @param string|null $note
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function __construct(
-		$number,
-		Transport $transport,
-		Payment $payment,
+		OrderData $orderData,
+		$orderNumber,
 		OrderStatus $orderStatus,
-		$firstName,
-		$lastName,
-		$email,
-		$telephone,
-		$street,
-		$city,
-		$postcode,
-		User $user = null,
-		$note = null
+		User $user = null
 	) {
-		$this->number = $number;
-		$this->customer = $user;
+		$this->transport = $orderData->getTransport();
+		$this->payment = $orderData->getPayment();
+		$this->firstName = $orderData->getFirstName();
+		$this->lastName = $orderData->getLastName();
+		$this->email = $orderData->getEmail();
+		$this->telephone = $orderData->getTelephone();
+		$this->street = $orderData->getStreet();
+		$this->city = $orderData->getCity();
+		$this->postcode = $orderData->getPostcode();
+		$this->note = $orderData->getNote();
 		$this->items = new ArrayCollection();
-		$this->createdAt = new DateTime();
-		$this->transport = $transport;
-		$this->payment = $payment;
+		if ($orderData->isCompanyCustomer()) {
+			$this->setCompanyInfo(
+				$orderData->getCompanyName(),
+				$orderData->getCompanyNumber(),
+				$orderData->getCompanyTaxNumber()
+			);
+		}
+		if ($orderData->isDeliveryAddressFilled()) {
+			$this->setDeliveryAddress(
+				$orderData->getDeliveryContactPerson(),
+				$orderData->getDeliveryCompanyName(),
+				$orderData->getDeliveryTelephone(),
+				$orderData->getDeliveryStreet(),
+				$orderData->getDeliveryCity(),
+				$orderData->getDeliveryPostcode());
+		}
+		$this->number = $orderNumber;
 		$this->status = $orderStatus;
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
-		$this->email = $email;
-		$this->telephone = $telephone;
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->note = $note;
+		$this->customer = $user;
 		$this->deleted = false;
+		$this->createdAt = new DateTime();
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param string $firstName
-	 * @param string $lastName
-	 * @param string $email
-	 * @param string $telephone
-	 * @param string $street
-	 * @param string $city
-	 * @param string $postcode
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @param string|null $companyName
-	 * @param string|null $companyNumber
-	 * @param string|null $companyTaxNumber
-	 * @param string|null $deliveryContactPerson
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
-	 * @param string|null $note
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
-	public function edit(OrderStatus $orderStatus, $firstName, $lastName, $email, $telephone, $street, $city, 
-			$postcode, $user, $companyName, $companyNumber, $companyTaxNumber,
-			$deliveryContactPerson, $deliveryCompanyName, $deliveryTelephone, $deliveryStreet,
-			$deliveryCity, $deliveryPostcode, $note) {
+	public function edit(
+		OrderData $orderData,
+		OrderStatus $orderStatus,
+		User $user = null
+	) {
+		$this->transport = $orderData->getTransport();
+		$this->payment = $orderData->getPayment();
+		$this->firstName = $orderData->getFirstName();
+		$this->lastName = $orderData->getLastName();
+		$this->email = $orderData->getEmail();
+		$this->telephone = $orderData->getTelephone();
+		$this->street = $orderData->getStreet();
+		$this->city = $orderData->getCity();
+		$this->postcode = $orderData->getPostcode();
+		$this->note = $orderData->getNote();
+		
+		if ($orderData->isCompanyCustomer()) {
+			$this->setCompanyInfo(
+				$orderData->getCompanyName(),
+				$orderData->getCompanyNumber(),
+				$orderData->getCompanyTaxNumber()
+			);
+		}
+		if ($orderData->isDeliveryAddressFilled()) {
+			$this->setDeliveryAddress(
+				$orderData->getDeliveryContactPerson(),
+				$orderData->getDeliveryCompanyName(),
+				$orderData->getDeliveryTelephone(),
+				$orderData->getDeliveryStreet(),
+				$orderData->getDeliveryCity(),
+				$orderData->getDeliveryPostcode());
+		}
 		$this->status = $orderStatus;
 		$this->customer = $user;
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
-		$this->email = $email;
-		$this->telephone = $telephone;
-		$this->companyName = $companyName;
-		$this->companyNumber = $companyNumber;
-		$this->companyTaxNumber = $companyTaxNumber;
-		$this->street = $street;
-		$this->city = $city;
-		$this->postcode = $postcode;
-		$this->deliveryContactPerson = $deliveryContactPerson;
-		$this->deliveryCompanyName = $deliveryCompanyName;
-		$this->deliveryTelephone = $deliveryTelephone;
-		$this->deliveryStreet = $deliveryStreet;
-		$this->deliveryCity = $deliveryCity;
-		$this->deliveryPostcode = $deliveryPostcode;
-		$this->note = $note;
 	}
 
 	/**

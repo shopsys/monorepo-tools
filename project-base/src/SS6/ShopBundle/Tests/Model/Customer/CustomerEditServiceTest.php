@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
@@ -53,18 +54,20 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$transport = new Transport(new TransportData('transportName', '0'));
 		$payment = new Payment(new PaymentData('paymentName', '0'));
 		$orderStatus = new OrderStatus('orderStatusName', OrderStatus::TYPE_NEW);
+		$orderData = new OrderData();
+		$orderData->setTransport($transport);
+		$orderData->setPayment($payment);
+		$orderData->setFirstName('orderFirstName');
+		$orderData->setLastName('orderLastName');
+		$orderData->setEmail('order@email.com');
+		$orderData->setTelephone('orderTelephone');
+		$orderData->setStreet('orderStreet');
+		$orderData->setCity('orderCity');
+		$orderData->setPostcode('orderPostcode');
 		$order = new Order(
+			$orderData,
 			'123456',
-			$transport,
-			$payment,
-			$orderStatus,
-			'orderFirstName',
-			'orderLastName',
-			'order@email.com',
-			'orderTelephone',
-			'orderStreet',
-			'orderCity',
-			'orderPostcode'
+			$orderStatus
 		);
 		$order->setCompanyInfo(
 			'companyName',
@@ -102,18 +105,20 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$transport = new Transport(new TransportData('transportName', '0'));
 		$payment = new Payment(new PaymentData('paymentName', '0'));
 		$orderStatus = new OrderStatus('orderStatusName', OrderStatus::TYPE_NEW);
+		$orderData = new OrderData();
+		$orderData->setTransport($transport);
+		$orderData->setPayment($payment);
+		$orderData->setFirstName('orderFirstName');
+		$orderData->setLastName('orderLastName');
+		$orderData->setEmail('order@email.com');
+		$orderData->setTelephone('orderTelephone');
+		$orderData->setStreet('orderStreet');
+		$orderData->setCity('orderCity');
+		$orderData->setPostcode('orderPostcode');
 		$order = new Order(
+			$orderData,
 			'123456',
-			$transport,
-			$payment,
-			$orderStatus,
-			'orderFirstName',
-			'orderLastName',
-			'order@email.com',
-			'orderTelephone',
-			'orderStreet',
-			'orderCity',
-			'orderPostcode'
+			$orderStatus
 		);
 		$order->setCompanyInfo(
 			'companyName',

@@ -3,8 +3,6 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Form\Admin\Order\OrderFormData as AdminOrderFormData;
-use SS6\ShopBundle\Form\Front\Order\OrderFormData as FrontOrderFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\PriceCalculation as CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\User;
@@ -14,6 +12,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
@@ -108,23 +107,22 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param $orderFormData \SS6\ShopBundle\Form\Front\Order\OrderFormData
+	 * @param $orderData \SS6\ShopBundle\Model\Order\OrderData
 	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function createOrder(FrontOrderFormData $orderFormData, User $user = null) {
+	public function createOrder(OrderData $orderData, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 
 		$order = $this->orderService->createOrder(
-			$orderFormData,
+			$orderData,
 			$orderNumber,
 			$orderStatus,
 			$user
 		);
 
 		$this->fillOrderItems($order, $this->cart);
-
 		$this->em->persist($order);
 		$this->em->flush();
 
@@ -186,10 +184,10 @@ class OrderFacade {
 	/**
 	 *
 	 * @param int $orderId
-	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderFormData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function edit($orderId, AdminOrderFormData $orderData) {
+	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
 		$orderStatus = $this->orderStatusRepository->getById($orderData->getStatusId());
 		$user = null;
@@ -204,12 +202,12 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $orderFormData
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
-	public function prefillOrderFormData(FrontOrderFormData $orderFormData, User $user) {
+	public function prefillOrderData(OrderData $orderData, User $user) {
 		$order = $this->orderRepository->findLastByUserId($user->getId());
-		$this->orderService->prefillFrontFormData($orderFormData, $user, $order);
+		$this->orderService->prefillFrontFormData($orderData, $user, $order);
 	}
 
 	/**

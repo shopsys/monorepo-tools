@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\TestsDb\Model\Order;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
-use SS6\ShopBundle\Form\Front\Order\OrderFormData;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class OrderFacadeTest extends DatabaseTestCase {
@@ -36,52 +36,52 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$transport = $transportRepository->getById(1);
 		$payment = $paymentRepository->getById(1);
 
-		$orderFormData = new OrderFormData();
-		$orderFormData->setTransport($transport);
-		$orderFormData->setPayment($payment);
-		$orderFormData->setFirstName('firstName');
-		$orderFormData->setLastName('lastName');
-		$orderFormData->setEmail('email');
-		$orderFormData->setTelephone('email');
-		$orderFormData->setCompanyCustomer(true);
-		$orderFormData->setCompanyName('companyName');
-		$orderFormData->setCompanyNumber('companyNumber');
-		$orderFormData->setCompanyTaxNumber('companyTaxNumber');
-		$orderFormData->setStreet('street');
-		$orderFormData->setCity('city');
-		$orderFormData->setPostcode('postcode');
-		$orderFormData->setDeliveryAddressFilled(true);
-		$orderFormData->setDeliveryContactPerson('deliveryContanctPerson');
-		$orderFormData->setDeliveryCompanyName('deliveryCompanyName');
-		$orderFormData->setDeliveryTelephone('deliveryTelephone');
-		$orderFormData->setDeliveryStreet('deliveryStreet');
-		$orderFormData->setDeliveryCity('deliveryCity');
-		$orderFormData->setDeliveryPostcode('deliveryPostcode');
-		$orderFormData->setNote('note');
+		$orderData = new OrderData();
+		$orderData->setTransport($transport);
+		$orderData->setPayment($payment);
+		$orderData->setFirstName('firstName');
+		$orderData->setLastName('lastName');
+		$orderData->setEmail('email');
+		$orderData->setTelephone('email');
+		$orderData->setCompanyCustomer(true);
+		$orderData->setCompanyName('companyName');
+		$orderData->setCompanyNumber('companyNumber');
+		$orderData->setCompanyTaxNumber('companyTaxNumber');
+		$orderData->setStreet('street');
+		$orderData->setCity('city');
+		$orderData->setPostcode('postcode');
+		$orderData->setDeliveryAddressFilled(true);
+		$orderData->setDeliveryContactPerson('deliveryContanctPerson');
+		$orderData->setDeliveryCompanyName('deliveryCompanyName');
+		$orderData->setDeliveryTelephone('deliveryTelephone');
+		$orderData->setDeliveryStreet('deliveryStreet');
+		$orderData->setDeliveryCity('deliveryCity');
+		$orderData->setDeliveryPostcode('deliveryPostcode');
+		$orderData->setNote('note');
 
-		$order = $orderFacade->createOrder($orderFormData);
+		$order = $orderFacade->createOrder($orderData);
 
 		$orderFromDb = $orderRepository->getById($order->getId());
 
-		$this->assertEquals($orderFormData->getTransport()->getId(), $orderFromDb->getTransport()->getId());
-		$this->assertEquals($orderFormData->getPayment()->getId(), $orderFromDb->getPayment()->getId());
-		$this->assertEquals($orderFormData->getFirstName(), $orderFromDb->getFirstName());
-		$this->assertEquals($orderFormData->getLastName(), $orderFromDb->getLastName());
-		$this->assertEquals($orderFormData->getEmail(), $orderFromDb->getEmail());
-		$this->assertEquals($orderFormData->getTelephone(), $orderFromDb->getTelephone());
-		$this->assertEquals($orderFormData->getCompanyName(), $orderFromDb->getCompanyName());
-		$this->assertEquals($orderFormData->getCompanyNumber(), $orderFromDb->getCompanyNumber());
-		$this->assertEquals($orderFormData->getCompanyTaxNumber(), $orderFromDb->getCompanyTaxNumber());
-		$this->assertEquals($orderFormData->getStreet(), $orderFromDb->getStreet());
-		$this->assertEquals($orderFormData->getCity(), $orderFromDb->getCity());
-		$this->assertEquals($orderFormData->getPostcode(), $orderFromDb->getPostcode());
-		$this->assertEquals($orderFormData->getDeliveryContactPerson(), $orderFromDb->getDeliveryContactPerson());
-		$this->assertEquals($orderFormData->getDeliveryCompanyName(), $orderFromDb->getDeliveryCompanyName());
-		$this->assertEquals($orderFormData->getDeliveryTelephone(), $orderFromDb->getDeliveryTelephone());
-		$this->assertEquals($orderFormData->getDeliveryStreet(), $orderFromDb->getDeliveryStreet());
-		$this->assertEquals($orderFormData->getDeliveryCity(), $orderFromDb->getDeliveryCity());
-		$this->assertEquals($orderFormData->getDeliveryPostcode(), $orderFromDb->getDeliveryPostcode());
-		$this->assertEquals($orderFormData->getNote(), $orderFromDb->getNote());
+		$this->assertEquals($orderData->getTransport()->getId(), $orderFromDb->getTransport()->getId());
+		$this->assertEquals($orderData->getPayment()->getId(), $orderFromDb->getPayment()->getId());
+		$this->assertEquals($orderData->getFirstName(), $orderFromDb->getFirstName());
+		$this->assertEquals($orderData->getLastName(), $orderFromDb->getLastName());
+		$this->assertEquals($orderData->getEmail(), $orderFromDb->getEmail());
+		$this->assertEquals($orderData->getTelephone(), $orderFromDb->getTelephone());
+		$this->assertEquals($orderData->getCompanyName(), $orderFromDb->getCompanyName());
+		$this->assertEquals($orderData->getCompanyNumber(), $orderFromDb->getCompanyNumber());
+		$this->assertEquals($orderData->getCompanyTaxNumber(), $orderFromDb->getCompanyTaxNumber());
+		$this->assertEquals($orderData->getStreet(), $orderFromDb->getStreet());
+		$this->assertEquals($orderData->getCity(), $orderFromDb->getCity());
+		$this->assertEquals($orderData->getPostcode(), $orderFromDb->getPostcode());
+		$this->assertEquals($orderData->getDeliveryContactPerson(), $orderFromDb->getDeliveryContactPerson());
+		$this->assertEquals($orderData->getDeliveryCompanyName(), $orderFromDb->getDeliveryCompanyName());
+		$this->assertEquals($orderData->getDeliveryTelephone(), $orderFromDb->getDeliveryTelephone());
+		$this->assertEquals($orderData->getDeliveryStreet(), $orderFromDb->getDeliveryStreet());
+		$this->assertEquals($orderData->getDeliveryCity(), $orderFromDb->getDeliveryCity());
+		$this->assertEquals($orderData->getDeliveryPostcode(), $orderFromDb->getDeliveryPostcode());
+		$this->assertEquals($orderData->getNote(), $orderFromDb->getNote());
 
 		$this->assertCount(3, $orderFromDb->getItems());
 	}

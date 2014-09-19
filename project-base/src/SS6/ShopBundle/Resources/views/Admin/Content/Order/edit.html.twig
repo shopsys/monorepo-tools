@@ -10,8 +10,6 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{{ form_widget(form.id, { type: 'hidden' }) }}
-
 				<div class="wrap-group">
 					<fieldset>
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
@@ -83,7 +81,6 @@
 									</thead>
 									<tbody>
 										{% for orderItem in form.items %}
-											{{ form_widget(orderItem.id, { type: 'hidden' }) }}
 											<tr>
 												<td>{{ form_widget(orderItem.name) }}</td>
 												<td>{{ form_widget(orderItem.price, {attr: { class: 'text-right'}}) }}</td>

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Order;
 
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\Form\AbstractType;
@@ -71,12 +72,12 @@ class TransportAndPaymentFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFormData $object
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \Symfony\Component\Validator\ExecutionContextInterface $context
 	 */
-	public function validateTransportPaymentRelation(OrderFormData $object, ExecutionContextInterface $context) {
-		$payment = $object->getPayment();
-		$transport = $object->getTransport();
+	public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context) {
+		$payment = $orderData->getPayment();
+		$transport = $orderData->getTransport();
 		
 		$relationExists = false;
 		if ($payment instanceof Payment && $transport instanceof Transport) {

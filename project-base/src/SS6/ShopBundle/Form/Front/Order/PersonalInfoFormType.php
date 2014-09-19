@@ -123,13 +123,13 @@ class PersonalInfoFormType extends AbstractType {
 			'validation_groups' => function(FormInterface $form) {
 				$validationGroups = array('Default');
 
-				$data = $form->getData();
-				/* @var $data \SS6\ShopBundle\Form\Front\Order\OrderFormData */
+				$orderData = $form->getData();
+				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
 				
-				if ($data->isCompanyCustomer()) {
+				if ($orderData->isCompanyCustomer()) {
 					$validationGroups[] = 'companyCustomer';
 				}
-				if ($data->isDeliveryAddressFilled()) {
+				if ($orderData->isDeliveryAddressFilled()) {
 					$validationGroups[] = 'differentDeliveryAddress';
 				}
 

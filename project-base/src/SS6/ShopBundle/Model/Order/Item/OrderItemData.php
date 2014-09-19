@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order;
+namespace SS6\ShopBundle\Model\Order\Item;
 
-class OrderItemFormData {
-
+class OrderItemData {
+	
 	/**
 	 * @var int
 	 */
@@ -79,6 +79,16 @@ class OrderItemFormData {
 	 */
 	public function setQuantity($quantity) {
 		$this->quantity = $quantity;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
+	 */
+	public function setFromEntity(OrderItem $orderItem) {
+		$this->setId($orderItem->getId());
+		$this->setName($orderItem->getName());
+		$this->setPrice($orderItem->getPriceWithVat());
+		$this->setQuantity($orderItem->getQuantity());
 	}
 
 }

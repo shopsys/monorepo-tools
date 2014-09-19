@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Model\Order;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
@@ -27,25 +28,22 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$transport = new Transport(new TransportData('TransportName', 199.95));
 		$payment = new Payment(new PaymentData('PaymentName', 99.95));
 		$orderStatus = new OrderStatus('StatusName', OrderStatus::TYPE_NEW);
-		$firstName = 'FirstName';
-		$lastName = 'LastName';
-		$email = 'email@example.com';
-		$telephone = '123456789';
-		$street = 'Street';
-		$city = 'City';
-		$postcode = '12345';
+		$orderData = new OrderData();
+		$orderData->setOrderNumber($number);
+		$orderData->setTransport($transport);
+		$orderData->setPayment($payment);
+		$orderData->setFirstName('FirstName');
+		$orderData->setLastName('LastName');
+		$orderData->setEmail('email@example.com');
+		$orderData->setTelephone('123456789');
+		$orderData->setStreet('Street');
+		$orderData->setCity('City');
+		$orderData->setPostcode('12345');
+
 		$order = new Order(
-			$number,
-			$transport,
-			$payment,
-			$orderStatus,
-			$firstName,
-			$lastName,
-			$email,
-			$telephone,
-			$street,
-			$city,
-			$postcode
+			$orderData,
+			'123456',
+			$orderStatus
 		);
 
 		$vat1 = new Vat(new VatData('vat', 21));

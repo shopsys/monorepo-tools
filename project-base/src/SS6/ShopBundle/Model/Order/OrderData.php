@@ -1,16 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order;
+namespace SS6\ShopBundle\Model\Order;
+
+use SS6\ShopBundle\Model\Order\Item\OrderItemData;
+use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class OrderFormData {
+class OrderData {
 
 	/**
-	 * @var int
+	 * @var \SS6\ShopBundle\Model\Transport\Transport
 	 */
-	private $id;
+	private $transport;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\Payment
+	 */
+	private $payment;
 
 	/**
 	 * @var int
@@ -48,6 +58,11 @@ class OrderFormData {
 	private $telephone;
 
 	/**
+	 * @var boolean
+	 */
+	private $companyCustomer;
+
+	/**
 	 * @var string
 	 */
 	private $companyName;
@@ -77,6 +92,11 @@ class OrderFormData {
 	 */
 	private $postcode;
 
+	/**
+	 * @var boolean
+	 */
+	private $deliveryAddressFilled;
+	
 	/**
 	 * @var string
 	 */
@@ -113,16 +133,9 @@ class OrderFormData {
 	private $note;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
 	 */
 	private $items;
-
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
 
 	/**
 	 * @return int
@@ -265,17 +278,38 @@ class OrderFormData {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Order\OrderItemFormData[]
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
 	 */
 	public function getItems() {
 		return $this->items;
 	}
 
 	/**
-	 * @param int $id
+	 * @return \SS6\ShopBundle\Model\Transport\Transport|null
 	 */
-	public function setId($id) {
-		$this->id = $id;
+	public function getTransport() {
+		return $this->transport;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\Payment;
+	 */
+	public function getPayment() {
+		return $this->payment;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isCompanyCustomer() {
+		return $this->companyCustomer;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isDeliveryAddressFilled() {
+		return $this->deliveryAddressFilled;
 	}
 
 	/**
@@ -419,10 +453,73 @@ class OrderFormData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Order\OrderItemFormData[] $items
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem[] $items
 	 */
 	public function setItems(array $items) {
 		$this->items = $items;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 */
+	public function setTransport(Transport $transport = null) {
+		$this->transport = $transport;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 */
+	public function setPayment(Payment $payment = null) {
+		$this->payment = $payment;
+	}
+
+	/**
+	 * @param boolean $companyCustomer
+	 */
+	public function setCompanyCustomer($companyCustomer) {
+		$this->companyCustomer = $companyCustomer;
+	}
+
+	/**
+	 * @param boolean $deliveryAddressFilled
+	 */
+	public function setDeliveryAddressFilled($deliveryAddressFilled) {
+		$this->deliveryAddressFilled = $deliveryAddressFilled;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 */
+	public function setFromEntity(Order $order) {
+		$this->setOrderNumber($order->getNumber());
+		$this->setStatusId($order->getStatus()->getId());
+		if ($order->getCustomer()) {
+			$this->setCustomerId($order->getCustomer()->getId());
+		}
+		$this->setFirstName($order->getFirstName());
+		$this->setLastName($order->getLastName());
+		$this->setEmail($order->getEmail());
+		$this->setTelephone($order->getTelephone());
+		$this->setCompanyName($order->getCompanyName());
+		$this->setCompanyNumber($order->getCompanyNumber());
+		$this->setCompanyTaxNumber($order->getCompanyTaxNumber());
+		$this->setStreet($order->getStreet());
+		$this->setCity($order->getCity());
+		$this->setPostcode($order->getPostcode());
+		$this->setDeliveryContactPerson($order->getDeliveryContactPerson());
+		$this->setDeliveryCompanyName($order->getDeliveryCompanyName());
+		$this->setDeliveryTelephone($order->getDeliveryTelephone());
+		$this->setDeliveryStreet($order->getDeliveryStreet());
+		$this->setDeliveryCity($order->getDeliveryCity());
+		$this->setDeliveryPostcode($order->getDeliveryPostcode());
+		$this->setNote($order->getNote());
+		$orderItemsData = array();
+		foreach ($order->getItems() as $orderItem) {
+			$orderItemData = new OrderItemData();
+			$orderItemData->setFromEntity($orderItem);
+			$orderItemsData[] = $orderItemData;
+		}
+		$this->setItems($orderItemsData);
 	}
 
 }

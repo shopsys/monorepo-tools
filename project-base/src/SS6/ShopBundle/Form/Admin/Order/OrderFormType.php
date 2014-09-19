@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order;
 
-use SS6\ShopBundle\Form\Admin\Order\OrderFormData;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
+use SS6\ShopBundle\Model\Order\OrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -43,7 +43,6 @@ class OrderFormType extends AbstractType {
 		}
 
 		$builder
-			->add('id', 'integer', array('read_only' => true))
 			->add('orderNumber', 'text', array('read_only' => true))
 			->add('statusId', 'choice', array(
 				'choices' => $orderStatusChoices,
@@ -110,7 +109,7 @@ class OrderFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => OrderFormData::class,
+			'data_class' => OrderData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}
