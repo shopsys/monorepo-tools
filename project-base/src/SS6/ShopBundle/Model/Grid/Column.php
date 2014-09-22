@@ -30,16 +30,26 @@ class Column {
 	private $classAttribute;
 
 	/**
+	 * @var string
+	 */
+	private $queryOrderId;
+
+	/**
 	 * @param string $id
 	 * @param string $queryId
 	 * @param string $title
-	 * @param bool $sortable
+	 * @param string|bool $sortable
 	 */
 	public function __construct($id, $queryId, $title, $sortable) {
 		$this->id = $id;
 		$this->queryId = $queryId;
 		$this->title = $title;
-		$this->sortable = $sortable;
+		$this->sortable = is_string($sortable) || $sortable;
+		if (is_string($sortable)) {
+			$this->queryOrderId = $sortable;
+		} else {
+			$this->queryOrderId = $queryId;
+		}
 	}
 
 	/**
@@ -85,6 +95,13 @@ class Column {
 		$this->classAttribute = $class;
 
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getQueryOrderId() {
+		return $this->queryOrderId;
 	}
 
 }

@@ -465,7 +465,7 @@ class Grid {
 
 	private function loadRows() {
 		if (array_key_exists($this->order, $this->getColumns())) {
-			$orderQueryId = $this->getColumns()[$this->order]->getQueryId();
+			$orderQueryId = $this->getColumns()[$this->order]->getQueryOrderId();
 		} else {
 			$orderQueryId = null;
 		}
