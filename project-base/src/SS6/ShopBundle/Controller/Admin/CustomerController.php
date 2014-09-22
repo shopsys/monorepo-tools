@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -97,13 +98,16 @@ class CustomerController extends Controller {
 					END) AS name,
 				COUNT(o.id) ordersCount,
 				SUM(o.totalPriceWithVat) ordersSumPrice,
-				MAX(o.createdAt) lastOrderAt')
+				COALESCE(SUM(o.totalPriceWithVat), 0) ordersSumPriceOrder,
+				MAX(o.createdAt) lastOrderAt,
+				COALESCE(MAX(o.createdAt), :emptyDateTime) lastOrderAtOrder')
 			->from(User::class, 'u')
 			->where('u.domainId = :selectedDomainId')
 			->setParameter('selectedDomainId', $selectedDomain->getId())
 			->leftJoin('u.billingAddress', 'ba')
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
 			->groupBy('u.id');
+		$queryBuilder->setParameter('emptyDateTime', new DateTime('@0'));
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
 		$grid = $gridFactory->create('customerList', $dataSource);
@@ -115,8 +119,10 @@ class CustomerController extends Controller {
 		$grid->addColumn('telephone', 'telephone', 'Telefon', true);
 		$grid->addColumn('email', 'u.email', 'Email', true);
 		$grid->addColumn('orders_count', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
-		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', true)->setClassAttribute('text-right');
-		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)->setClassAttribute('text-right');
+		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', 'ordersSumPriceOrder')
+			->setClassAttribute('text-right');
+		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', 'lastOrderAtOrder')
+			->setClassAttribute('text-right');
 		
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
