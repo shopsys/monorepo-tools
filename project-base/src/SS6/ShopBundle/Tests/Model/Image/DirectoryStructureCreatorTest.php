@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Image\DirectoryStructureCreator;
 use SS6\ShopBundle\Model\Image\ImagesEntity;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase{
+class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testMakeImageDirectories() {
 		$imageDir = 'imageDir';
@@ -40,8 +40,13 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase{
 			->method('mkdir')
 			->with($this->callback(function ($actual) {
 				$expected = [
-					'imageDir\entityName1\sizeName1_1\\',
-					'imageDir\entityName2\type\sizeName2_1\\'
+					'imageDir' . DIRECTORY_SEPARATOR
+						. 'entityName1' . DIRECTORY_SEPARATOR
+						. 'sizeName1_1' . DIRECTORY_SEPARATOR,
+					'imageDir' . DIRECTORY_SEPARATOR
+						. 'entityName2' . DIRECTORY_SEPARATOR
+						. 'type' . DIRECTORY_SEPARATOR
+						. 'sizeName2_1' . DIRECTORY_SEPARATOR
 				];
 				asort($expected);
 				asort($actual);
@@ -52,4 +57,5 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase{
 		$creator = new DirectoryStructureCreator($imageDir, $imageConfig, $imagesEntity, $filesystemMock);
 		$creator->makeImageDirectories();
 	}
+
 }
