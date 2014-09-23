@@ -91,6 +91,7 @@ class OrderController extends Controller {
 			->select('
 				o.id,
 				o.number,
+				o.domainId AS domainId,
 				o.createdAt,
 				MAX(os.name) AS statusName,
 				o.totalPrice,
@@ -109,6 +110,7 @@ class OrderController extends Controller {
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('created_at', 'o.createdAt', 'Vytvořena', true);
 		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
+		$grid->addColumn('domain_id', 'domainId', 'Doména', true);
 		$grid->addColumn('status_name', 'statusName', 'Stav', true);
 		$grid->addColumn('total_price', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
 
