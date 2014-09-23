@@ -13,6 +13,7 @@
 				<div class="wrap-group">
 					<fieldset>
 						{{ form_id(order) }}
+						{{ form_row(form.domainId, { label: 'Doména'}) }}
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
 						{{ form_row(form.statusId, { label: 'Stav' }) }}
 						{{ form_row(form.customerId, { label: 'ID zákazníka' }) }}

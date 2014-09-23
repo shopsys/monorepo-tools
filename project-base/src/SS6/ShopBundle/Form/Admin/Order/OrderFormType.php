@@ -43,6 +43,7 @@ class OrderFormType extends AbstractType {
 		}
 
 		$builder
+			->add('domainId', 'integer', array('read_only' => true, 'required' => false))
 			->add('orderNumber', 'text', array('read_only' => true))
 			->add('statusId', 'choice', array(
 				'choices' => $orderStatusChoices,
