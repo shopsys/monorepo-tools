@@ -36,7 +36,6 @@ class OrderController extends Controller {
 			if (!$form->isSubmitted()) {
 				$orderData->setFromEntity($order);
 			}
-			
 			$form->setData($orderData);
 			$form->handleRequest($request);
 				

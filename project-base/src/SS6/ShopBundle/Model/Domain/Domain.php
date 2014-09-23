@@ -76,6 +76,14 @@ class Domain {
 	}
 
 	/**
+	 *
+	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 */
+	public function getAll() {
+		return $this->domainConfigs;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
 	 */
 	private function getCurrentConfig() {
