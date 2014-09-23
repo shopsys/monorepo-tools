@@ -15,7 +15,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory
+	 * @var \SS6\ShopBundle\Model\PKGrid\GridFactoryInterface
 	 */
 	private $gridFactory;
 
