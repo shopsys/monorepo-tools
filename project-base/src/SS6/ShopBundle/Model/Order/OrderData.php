@@ -138,6 +138,11 @@ class OrderData {
 	private $items;
 
 	/**
+	 * @var int
+	 */
+	private $domainId;
+
+	/**
 	 * @return int
 	 */
 	public function getCustomerId() {
@@ -296,6 +301,13 @@ class OrderData {
 	 */
 	public function getPayment() {
 		return $this->payment;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
 	}
 
 	/**
@@ -488,6 +500,13 @@ class OrderData {
 	}
 
 	/**
+	 * @param int $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
 	public function setFromEntity(Order $order) {
@@ -520,6 +539,7 @@ class OrderData {
 			$orderItemsData[] = $orderItemData;
 		}
 		$this->setItems($orderItemsData);
+		$this->setDomainId($order->getDomainId());
 	}
 
 }
