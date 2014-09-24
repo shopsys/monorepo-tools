@@ -97,7 +97,7 @@ class OrderController extends Controller {
 			}
 		}
 
-		if ($form->isSubmitted() && !$form->isValid() && empty($form->getErrors())) {
+		if ($form->isSubmitted() && !$form->isValid() && $form->getErrors()->count() === 0) {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
