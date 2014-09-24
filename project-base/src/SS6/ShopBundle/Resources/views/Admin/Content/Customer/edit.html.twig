@@ -6,7 +6,7 @@
 {% block customer_created_at %}
 	<div class="form-line">
 		<span class="form-line form-line__label">
-			Posledního přihlášení :
+			Datum registrace :
 		</span>
 		<span class="form-line form-line__text">
 			{{ user.createdAt|date('j.n.Y H:i') }}
@@ -18,7 +18,7 @@
 {% block customer_last_login %}
 	<div class="form-line">
 		<span class="form-line form-line__label">
-			Datum registrace :
+			Poslední přihlášení :
 		</span>
 		<span class="form-line form-line__text">
 			{{ user.lastLogin|date('j.n.Y H:i') }}
