@@ -7,11 +7,6 @@ use SS6\ShopBundle\Model\Setting\SettingValueRepository;
 
 class Setting {
 
-	const INPUT_PRICE_TYPE = 'inputPriceType';
-
-	const INPUT_PRICE_TYPE_WITH_VAT = 1;
-	const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
-
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */

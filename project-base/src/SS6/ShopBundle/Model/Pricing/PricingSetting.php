@@ -27,7 +27,7 @@ class PricingSetting {
 	 * @return int
 	 */
 	public function getInputPriceType() {
-		return $this->setting->get(Setting::INPUT_PRICE_TYPE);
+		return $this->setting->get(self::INPUT_PRICE_TYPE);
 	}
 
 	/**
