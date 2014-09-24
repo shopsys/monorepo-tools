@@ -12,7 +12,8 @@ class RedirectFragmentHandler extends FragmentHandler {
 	 * {@inheritdoc}
 	 */
 	protected function deliver(Response $response) {
-		// Redirect response is OK, because SubResponseRedirectListener make redirect instead of master response
+		// Redirect response in fragment is OK, because SubRequestListener will do the redirection
+		// when handling the master request.
 		if (!$response->isSuccessful() && !$response->isRedirection()) {
 			$message = sprintf(
 				'Error when rendering "%s" (Status code is %s).',

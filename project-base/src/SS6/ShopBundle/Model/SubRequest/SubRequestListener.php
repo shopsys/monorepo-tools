@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\SubRequest;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -26,11 +27,18 @@ class SubRequestListener {
 		if ($event->isMasterRequest()) {
 			$this->masterRequest = $event->getRequest();
 		} else {
-			$event->getRequest()->setMethod($this->masterRequest->getMethod());
-			$request = $event->getRequest()->request;
-			$requestData = array_replace($this->masterRequest->request->all(), $request->all());
-			$request->replace($requestData);
+			$this->fillSubRequestFromMasterRequest($event->getRequest());
 		}
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $subRequest
+	 */
+	private function fillSubRequestFromMasterRequest(Request $subRequest) {
+		$subRequest->setMethod($this->masterRequest->getMethod());
+		$subRequestParameterBag = $subRequest->request;
+		$subRequestData = array_replace($this->masterRequest->request->all(), $subRequestParameterBag->all());
+		$subRequestParameterBag->replace($subRequestData);
 	}
 
 	/**
@@ -47,15 +55,15 @@ class SubRequestListener {
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Response $response
+	 * @param \Symfony\Component\HttpFoundation\Response $subResponse
 	 * @throws \SS6\ShopBundle\Model\Redirect\Exception\TooManyRedirectResponsesException
 	 */
-	private function processSubResponse(Response $response) {
-		if ($response->isRedirection()) {
+	private function processSubResponse(Response $subResponse) {
+		if ($subResponse->isRedirection()) {
 			if ($this->redirectResponse === null) {
-				$this->redirectResponse = $response;
+				$this->redirectResponse = $subResponse;
 			} else {
-				$message = 'Exists to many redirect responses while one master request.';
+				$message = 'Only one subresponse can do a redirect.';
 				throw new \SS6\ShopBundle\Model\SubRequest\Exception\TooManyRedirectResponsesException($message);
 			}
 		}
