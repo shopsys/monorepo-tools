@@ -14,19 +14,25 @@ class CsvReader {
 		}
 
 		$rows = array();
-		$handle = fopen($filename, 'r');
-		if ($handle !== false) {
-			do {
-				$row = fgetcsv($handle, 0, $delimiter);
-				if ($row !== false) {
-					$rows[] = $row;
-				} else {
-					break;
-				}
-			} while (true);
 
-			fclose($handle);
+		$handle = fopen($filename, 'r');
+		if ($handle === false) {
+			return $rows;
 		}
+
+		do {
+			$row = fgetcsv($handle, 0, $delimiter);
+
+			if ($row === false) {
+				break;
+			}
+
+			$rows[] = $row;
+		} while (true);
+
+		fclose($handle);
+		
 		return $rows;
 	}
+
 }

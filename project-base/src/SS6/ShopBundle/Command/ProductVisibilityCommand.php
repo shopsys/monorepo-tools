@@ -23,7 +23,7 @@ class ProductVisibilityCommand extends ContainerAwareCommand {
 
 		$productVisibilityFacade = $this->getContainer()->get('ss6.shop.product.product_visibility_facade');
 		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
-		$productVisibilityFacade->refreshProductsVisibilityNow();
+		$productVisibilityFacade->refreshProductsVisibility();
 
 		$output->writeln('<fg=green>Visibility of all products was successfully recalculated.</fg=green>');
 	}

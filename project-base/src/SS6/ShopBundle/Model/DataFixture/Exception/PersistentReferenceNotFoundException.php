@@ -12,7 +12,7 @@ class PersistentReferenceNotFoundException extends Exception implements DataFixt
 	 * @param \Exception $previous
 	 */
 	public function __construct($criteria, Exception $previous = null) {
-		parent::__construct('Data fixture reference not found by criteria ' . var_export($criteria, true), $previous, 0);
+		parent::__construct('Data fixture reference not found by criteria ' . var_export($criteria, true), 0, $previous);
 	}
 	
 }

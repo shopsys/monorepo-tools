@@ -75,6 +75,6 @@ class ImagesEntity {
 			$pathParts[] = $sizeName;
 		}
 
-		return implode('/', $pathParts) . '/';
+		return implode(DIRECTORY_SEPARATOR, $pathParts) . DIRECTORY_SEPARATOR;
 	}
 }

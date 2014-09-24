@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use ZipArchive;
 
-class DemoImagesCommand extends ContainerAwareCommand {
+class ImageDemoCommand extends ContainerAwareCommand {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -60,13 +60,13 @@ class DemoImagesCommand extends ContainerAwareCommand {
 		
 		$result = $zipArchive->open($localArchiveFilepath);
 		if ($result !== true) {
-			$output->writeln('<fg=red>Unpacking image archive failed</fg=red>');
+			$output->writeln('<fg=red>Unpacking of images archive failed</fg=red>');
 			return false;
 		}
 
 		$zipArchive->extractTo($imagesPath);
 		$zipArchive->close();
-		$output->writeln('<fg=green>Unpacking image archive was successfully completed</fg=green>');
+		$output->writeln('<fg=green>Unpacking of images archive was successfully completed</fg=green>');
 		
 		return true;
 	}
@@ -78,7 +78,7 @@ class DemoImagesCommand extends ContainerAwareCommand {
 	private function loadDbChanges(OutputInterface $output, $dqlUrl) {
 		$dqls = file_get_contents($dqlUrl);
 		if ($dqls === false) {
-			$output->writeln('<fg=red>Download db changes failed</fg=red>');
+			$output->writeln('<fg=red>Download of DB changes failed</fg=red>');
 			return;
 		}
 
@@ -88,7 +88,7 @@ class DemoImagesCommand extends ContainerAwareCommand {
 		foreach ($dqls as $dql) {
 			$this->em->createQuery($dql)->execute();
 		}
-		$output->writeln('<fg=green>Db changes were successfully applied (queries: ' . count($dqls) . ')</fg=green>');
+		$output->writeln('<fg=green>DB changes were successfully applied (queries: ' . count($dqls) . ')</fg=green>');
 	}
 
 	/**
@@ -103,7 +103,7 @@ class DemoImagesCommand extends ContainerAwareCommand {
 		try {
 			$this->filesystem->copy($archiveUrl, $localArchiveFilepath, true);
 		} catch (Exception $e) {
-			$output->writeln('<fg=red>Downloading demo images failed</fg=red>');
+			$output->writeln('<fg=red>Downloading of demo images failed</fg=red>');
 			$output->writeln('<fg=red>Exception: ' . $e->getMessage() . '</fg=red>');
 
 			return false;
@@ -121,7 +121,7 @@ class DemoImagesCommand extends ContainerAwareCommand {
 		try {
 			$this->filesystem->remove($localArchiveFilepath);
 		} catch (Exception $e) {
-			$output->writeln('<fg=red>Delete demo archive in cache failed</fg=red>');
+			$output->writeln('<fg=red>Deleting of demo archive in cache failed</fg=red>');
 			$output->writeln('<fg=red>Exception: ' . $e->getMessage() . '</fg=red>');
 		}
 	}

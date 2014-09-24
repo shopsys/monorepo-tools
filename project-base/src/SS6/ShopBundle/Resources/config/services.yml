@@ -130,8 +130,6 @@ services:
 
   ss6.shop.data_fixture.persistent_reference_service:
     class: SS6\ShopBundle\Model\DataFixture\PersistentReferenceService
-    arguments:
-      - @kernel
 
   ss6.shop.data_fixtures.product_data_fixture_loader:
     class: SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader

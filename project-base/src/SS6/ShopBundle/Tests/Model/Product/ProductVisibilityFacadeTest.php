@@ -30,11 +30,11 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 		$productVisibilityFacade->onKernelResponse($eventMock);
 	}
 
-	public function testRefreshProductsVisibilityNow() {
+	public function testRefreshProductsVisibility() {
 		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, array(), array(), '', false);
 		$productVisibilityRepositoryMock->expects($this->once())->method('refreshProductsVisibility');
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
-		$productVisibilityFacade->refreshProductsVisibilityNow();
+		$productVisibilityFacade->refreshProductsVisibility();
 	}
 }

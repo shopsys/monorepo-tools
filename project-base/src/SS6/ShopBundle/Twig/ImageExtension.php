@@ -102,7 +102,12 @@ class ImageExtension extends Twig_Extension {
 		} else {
 			$relativeFilepath = self::NOIMAGE_FILENAME;
 		}
-		return $this->request->getBaseUrl() . $this->imageUrlPrefix . $relativeFilepath;
+
+		$url = $this->request->getBaseUrl()
+			. $this->imageUrlPrefix
+			. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
+
+		return $url;
 	}
 
 	/**
@@ -126,7 +131,6 @@ class ImageExtension extends Twig_Extension {
 			'imageCssClass' => $this->getImageEntityCssClass($entity, $attributtes['type'], $attributtes['size']),
 		));
 	}
-
 
 	/**
 	 * @param Object $entity

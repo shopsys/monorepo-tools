@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\String\TransformString;
-use SS6\ShopBundle\Model\String\EncodingConvertor;
+use SS6\ShopBundle\Model\String\EncodingConverter;
 
 class UserDataFixtureLoader {
 
@@ -41,7 +41,7 @@ class UserDataFixtureLoader {
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
 				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
-				$row = EncodingConvertor::cp1250ToUtf8($row);
+				$row = EncodingConverter::cp1250ToUtf8($row);
 				$customersData[] = $this->getCustomerDataFromCsvRow($row);
 			}
 			$rowId++;

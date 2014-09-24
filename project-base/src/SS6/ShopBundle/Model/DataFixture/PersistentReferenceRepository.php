@@ -30,8 +30,8 @@ class PersistentReferenceRepository {
 	 * @param string $referenceName
 	 * @return \SS6\ShopBundle\Model\DataFixture\PersistentReference
 	 */
-	public function find($referenceName) {
-		return $this->getReferenceRepository()->find($referenceName);
+	public function findByReferenceName($referenceName) {
+		return $this->getReferenceRepository()->find(array('referenceName' => $referenceName));
 	}
 
 	/**
@@ -39,17 +39,12 @@ class PersistentReferenceRepository {
 	 * @return \SS6\ShopBundle\Model\DataFixture\PersistentReference
 	 * @throws \SS6\ShopBundle\Model\DataFixture\Exception\PersistentReferenceNotFoundException
 	 */
-	public function get($referenceName) {
-		$reference = $this->find($referenceName);
+	public function getByReferenceName($referenceName) {
+		$reference = $this->findByReferenceName($referenceName);
 		if ($reference === null) {
 			throw new \SS6\ShopBundle\Model\DataFixture\Exception\PersistentReferenceNotFoundException($referenceName);
 		}
 		return $reference;
-	}
-
-	public function deleteAll() {
-		$query = $this->em->createQuery('DELETE FROM ' . PersistentReference::class . ' r');
-		$query->execute();
 	}
 
 }

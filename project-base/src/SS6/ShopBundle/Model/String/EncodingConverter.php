@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\String;
 
-class EncodingConvertor {
+class EncodingConverter {
 
 	/**
 	 * @param string $stringCp1250

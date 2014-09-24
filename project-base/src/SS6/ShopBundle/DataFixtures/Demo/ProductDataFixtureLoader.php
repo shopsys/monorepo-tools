@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use DateTime;
 use SS6\ShopBundle\Model\Csv\CsvReader;
 use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\String\EncodingConvertor;
+use SS6\ShopBundle\Model\String\EncodingConverter;
 use SS6\ShopBundle\Model\String\TransformString;
 
 class ProductDataFixtureLoader {
@@ -58,7 +58,7 @@ class ProductDataFixtureLoader {
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
 				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
-				$row = EncodingConvertor::cp1250ToUtf8($row);
+				$row = EncodingConverter::cp1250ToUtf8($row);
 				$productsData[] = $this->getProductDataFromCsvRow($row);
 			}
 			$rowId++;

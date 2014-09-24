@@ -50,9 +50,9 @@ class DirectoryStructureCreator {
 			$directories = array_merge($directories, $sizesDirectories);
 
 			foreach ($imageEntityConfig->getTypes() as $type) {
-				$sizes = $imageEntityConfig->getTypeSizes($type);
-				$sizesDirectories = $this->getTargetDirectoriesFromSizes($imageEntityConfig->getEntityName(), $type, $sizes);
-				$directories = array_merge($directories, $sizesDirectories);
+				$typeSizes = $imageEntityConfig->getTypeSizes($type);
+				$typeSizesDirectories = $this->getTargetDirectoriesFromSizes($imageEntityConfig->getEntityName(), $type, $typeSizes);
+				$directories = array_merge($directories, $typeSizesDirectories);
 			}
 		}
 
@@ -69,7 +69,6 @@ class DirectoryStructureCreator {
 		$directories = [];
 		foreach ($sizes as $size) {
 			$relativePath = $this->imagesEntity->getRelativeImagePath($entityName, $type, $size->getName());
-			$relativePath = str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
 			$directories[] = $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
 		}
 

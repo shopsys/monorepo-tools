@@ -5,12 +5,21 @@ namespace SS6\ShopBundle\Component\Test;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase {
+
 	/**
 	 * @var \Symfony\Bundle\FrameworkBundle\Client
 	 */
 	private $client;
 
-	/**
+	protected function setUp() {
+		parent::setUp();
+
+		$domain = $this->getContainer()->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$domain->switchDomainById(1);
+	}
+
+		/**
 	 * @return \Symfony\Component\HttpKernel\Client
 	 */
 	protected function getClient() {

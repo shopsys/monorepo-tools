@@ -29,5 +29,4 @@ class DomainsConfigLoaderTest extends FunctionalTestCase {
 		$domainsConfigLoader->loadDomainConfigsFromYaml('nonexistentFilename');
 	}
 
-
 }

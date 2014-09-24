@@ -59,6 +59,4 @@ class FileUploadController extends Controller {
 		return new JsonResponse($actionResult);
 	}
 
-
-
 }

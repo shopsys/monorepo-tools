@@ -47,6 +47,4 @@ class MailTemplateFormType extends AbstractType {
 		));
 	}
 
-
-	
 }

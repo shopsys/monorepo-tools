@@ -2,22 +2,22 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class InputPriceLabelExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
 	 */
-	private $setting;
+	private $pricingSetting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @param \SS6\ShopBundle\Model\Setting\Setting $pricingSetting
 	 */
-	public function __construct(Setting $setting) {
-		$this->setting = $setting;
+	public function __construct(\SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting) {
+		$this->pricingSetting = $pricingSetting;
 	}
 
 	/**
@@ -34,13 +34,13 @@ class InputPriceLabelExtension extends Twig_Extension {
 	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	public function getInputPriceLabel() {
-		$inputPriceType = $this->setting->get(Setting::INPUT_PRICE_TYPE);
+		$inputPriceType = $this->pricingSetting->getInputPriceType();
 
 		switch ($inputPriceType) {
-			case Setting::INPUT_PRICE_TYPE_WITHOUT_VAT:
+			case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
 				return 'Vstupní cena bez DPH';
 
-			case Setting::INPUT_PRICE_TYPE_WITH_VAT:
+			case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
 				return 'Vstupní cena s DPH';
 
 			default:
