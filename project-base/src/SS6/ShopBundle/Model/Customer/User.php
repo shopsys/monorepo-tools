@@ -80,6 +80,12 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $lastLogin;
 
 	/**
+	 * @var int
+	 * @ORM\Column(type="integer")
+	 */
+	protected $domainId;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
@@ -95,6 +101,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		$this->billingAddress = $billingAddress;
 		$this->deliveryAddress = $deliveryAddress;
 		$this->createdAt = new DateTime();
+		$this->domainId = $userData->getDomainId();
 	}
 
 	/**
@@ -156,6 +163,20 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
 	public function onLogin() {
 		$this->lastLogin = new DateTime();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
+	}
+
+	/**
+	 * @param int $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
 	}
 
 	/**
@@ -230,6 +251,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 			$this->email,
 			$this->password,
 			time(), // lastActivity
+			$this->domainId,
 		));
 	}
 
@@ -241,7 +263,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 			$this->id,
 			$this->email,
 			$this->password,
-			$timestamp
+			$timestamp,
+			$this->domainId,
 		) = unserialize($serialized);
 		$this->lastActivity = new DateTime();
 		$this->lastActivity->setTimestamp($timestamp);

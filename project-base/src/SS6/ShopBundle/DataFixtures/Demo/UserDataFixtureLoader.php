@@ -84,6 +84,7 @@ class UserDataFixtureLoader {
 		} else {
 			$deliveryAddressData->setAddressFilled(false);
 		}
+		$userData->setDomainId($row[19]);
 		$customerData->setUserData($userData);
 		$customerData->setBillingAddress($billingAddressData);
 		$customerData->setDeliveryAddress($deliveryAddressData);
