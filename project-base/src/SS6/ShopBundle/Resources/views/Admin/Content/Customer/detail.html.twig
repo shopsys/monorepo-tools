@@ -14,7 +14,7 @@
 				<div class="wrap-group">
 					<h2>Systémové údaje</h2>
 					{{ form_id(user|default(null)) }}
-									{{ detailDomain(user|default(null), form) }}
+					{% block domain_view %}{% endblock %}
 					{% block customer_created_at %}{% endblock %}
 				</div>
 

@@ -79,18 +79,6 @@ class FormDetailExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param mixed $object
-	 * @return string
-	 */
-	public function formDetailDomain($object, FormView $form) {
-		if ($object === null) {
-			$template = '{{ form_row(form.userData.domainId, { label: label }) }}';
-			$paramters = array('form' => $form, 'label' => 'Doména');
-			return $this->getTemplatingService()->render($template, $paramters);
-		}
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getName() {
