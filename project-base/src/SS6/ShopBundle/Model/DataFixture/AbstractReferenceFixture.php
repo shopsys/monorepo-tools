@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\DataFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use SS6\Environment;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -12,6 +13,11 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	 * @var \Symfony\Component\DependencyInjection\Container
 	 */
 	protected $container;
+
+	/**
+	 * @var \Symfony\Component\HttpKernel\Kernel
+	 */
+	private $kernel;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\DataFixture\PersistentReferenceService
@@ -24,6 +30,7 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	 */
 	public function setContainer(ContainerInterface $container = null) {
 		$this->container = $container;
+		$this->kernel = $this->get('kernel');
 		$this->persistentReferenceService = $this->get('ss6.shop.data_fixture.persistent_reference_service');
 	}
 
@@ -43,7 +50,7 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	public function addReference($name, $object, $persistent = true) {
 		parent::addReference($name, $object);
 
-		if ($persistent) {
+		if ($persistent && $this->kernel->getEnvironment() === Environment::ENVIRONMENT_TEST) {
 			$this->persistentReferenceService->persistReference($name, $object);
 		}
 	}
@@ -56,7 +63,7 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	public function setReference($name, $object, $persistent = true) {
 		parent::setReference($name, $object);
 
-		if ($persistent) {
+		if ($persistent && $this->kernel->getEnvironment() === Environment::ENVIRONMENT_TEST) {
 			$this->persistentReferenceService->persistReference($name, $object);
 		}
 	}
