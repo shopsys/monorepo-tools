@@ -29,7 +29,6 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$imageConfigMock
 			->expects($this->once())->method('getImageEntityConfig')->will($this->returnValue($imageEntityConfig));
 
-
 		$imagesEntity = new ImagesEntity($imageDir, $imageConfigMock);
 
 		$this->setExpectedException(EntityFilenameMethodNotFoundException::class);

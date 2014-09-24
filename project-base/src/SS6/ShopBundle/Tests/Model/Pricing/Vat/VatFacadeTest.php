@@ -28,7 +28,6 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT))
 			->will($this->returnValue(1));
 
-
 		$vatRepositoryMock = $this->getMockBuilder(VatRepository::class)
 			->setMethods(['findById', '__construct'])
 			->disableOriginalConstructor()

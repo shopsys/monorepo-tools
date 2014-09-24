@@ -132,7 +132,6 @@ class ImageExtension extends Twig_Extension {
 		));
 	}
 
-
 	/**
 	 * @param Object $entity
 	 * @param string|null $type

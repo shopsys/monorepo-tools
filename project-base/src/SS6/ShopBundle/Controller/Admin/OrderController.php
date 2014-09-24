@@ -112,7 +112,6 @@ class OrderController extends Controller {
 		$grid->addColumn('status_name', 'statusName', 'Stav', true);
 		$grid->addColumn('total_price', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
 
-
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', array('id' => 'id'))

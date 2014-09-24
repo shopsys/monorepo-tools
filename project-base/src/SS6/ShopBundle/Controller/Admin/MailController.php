@@ -24,7 +24,6 @@ class MailController extends Controller {
 		$defaultOrderStatus = $orderStatusRepository->getDefault();
 		$mailTemplate = $orderMailFacade->getMailTemplateByStatus($defaultOrderStatus);
 
-
 		$form = $this->createForm(new MailTemplateFormType());
 
 		$mailTemplateData = new MailTemplateData();

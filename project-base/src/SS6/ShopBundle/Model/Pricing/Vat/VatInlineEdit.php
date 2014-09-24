@@ -31,7 +31,6 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 		parent::__construct($formFactory, $vatGridFactory);
 	}
 
-
 	/**
 	 * @return string
 	 */
