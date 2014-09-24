@@ -26,7 +26,9 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 	public function testGetAmendedCustomerDataByOrderWithoutChanges() {
 		$customerEditService = new CustomerEditService();
 
-		$userData = new UserData('firstName', 'lastName');
+		$userData = new UserData();
+		$userData->setFirstName('firstName');
+		$userData->setLastName('lastName');
 		$billingAddressData = new BillingAddressData(
 			'street',
 			'city',
@@ -96,7 +98,9 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 	public function testGetAmendedCustomerDataByOrder() {
 		$customerEditService = new CustomerEditService();
 
-		$userData = new UserData('firstName', 'lastName');
+		$userData = new UserData();
+		$userData->setFirstName('firstName');
+		$userData->setLastName('lastName');
 		$billingAddressData = new BillingAddressData();
 
 		$billingAddress = new BillingAddress($billingAddressData);
