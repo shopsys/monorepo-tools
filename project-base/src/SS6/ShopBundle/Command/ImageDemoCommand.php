@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use ZipArchive;
 
-class DemoImagesCommand extends ContainerAwareCommand {
+class ImageDemoCommand extends ContainerAwareCommand {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
