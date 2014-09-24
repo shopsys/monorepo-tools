@@ -28,10 +28,11 @@ class UserRepository {
 
 	/**
 	 * @param string $email
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function findUserByEmail($email) {
-		return $this->getUserRepository()->findOneBy(array('email' => mb_strtolower($email)));
+	public function findUserByEmailAndDomain($email, $domainId) {
+		return $this->getUserRepository()->findOneBy(array('email' => mb_strtolower($email), 'domainId' => ($domainId)));
 	}
 
 	/**

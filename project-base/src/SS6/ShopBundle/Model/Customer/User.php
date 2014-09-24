@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(
  *   name="users",
+ *   uniqueConstraints={
+ *		@ORM\UniqueConstraint(name="email_domain", columns={"email", "domain_id"})
+ *   },
  *   indexes={
  *     @ORM\Index(columns={"email"})
  *   }
@@ -39,7 +42,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $lastName;
 	
 	/**
-	 * @ORM\Column(type="string", length=255, unique=true)
+	 * @ORM\Column(type="string", length=255)
 	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
 	 */
 	protected $email;
