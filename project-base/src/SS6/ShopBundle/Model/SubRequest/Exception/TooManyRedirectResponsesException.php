@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Redirect\Exception;
+namespace SS6\ShopBundle\Model\SubRequest\Exception;
 
 use Exception;
 
-class TooManyRedirectResponsesException extends Exception implements RedirectException {
+class TooManyRedirectResponsesException extends Exception implements SubRequestException {
 
 	/**
 	 * @param string $message

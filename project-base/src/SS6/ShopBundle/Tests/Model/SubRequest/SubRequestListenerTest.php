@@ -3,11 +3,13 @@
 namespace SS6\ShopBundle\Tests\Model\Redirect;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Redirect\SubResponseRedirectListener;
+use SS6\ShopBundle\Model\SubRequest\SubRequestListener;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SubResponseRedirectListenerTest extends PHPUnit_Framework_TestCase {
+class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param bool $redirect
@@ -31,8 +33,8 @@ class SubResponseRedirectListenerTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
 
-		$subResponseRedirectListener = new SubResponseRedirectListener();
-		$subResponseRedirectListener->onKernelResponse($eventMock);
+		$subRequestListener = new SubRequestListener();
+		$subRequestListener->onKernelResponse($eventMock);
 	}
 
 	public function testOnKernelResponseManyRedirectResponses() {
@@ -57,12 +59,12 @@ class SubResponseRedirectListenerTest extends PHPUnit_Framework_TestCase {
 		$eventMock3->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
 		$eventMock3->expects($this->once())->method('getResponse')->will($this->returnValue($this->getResponseMock(true)));
 
-		$subResponseRedirectListener = new SubResponseRedirectListener();
-		$subResponseRedirectListener->onKernelResponse($eventMock1);
-		$subResponseRedirectListener->onKernelResponse($eventMock2);
+		$subRequestListener = new SubRequestListener();
+		$subRequestListener->onKernelResponse($eventMock1);
+		$subRequestListener->onKernelResponse($eventMock2);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Redirect\Exception\TooManyRedirectResponsesException::class);
-		$subResponseRedirectListener->onKernelResponse($eventMock3);
+		$this->setExpectedException(\SS6\ShopBundle\Model\SubRequest\Exception\TooManyRedirectResponsesException::class);
+		$subRequestListener->onKernelResponse($eventMock3);
 	}
 	
 	public function testOnKernelResponse() {
@@ -86,11 +88,55 @@ class SubResponseRedirectListenerTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$eventMock3->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
 
-		$subResponseRedirectListener = new SubResponseRedirectListener();
-		$subResponseRedirectListener->onKernelResponse($eventMock1);
-		$subResponseRedirectListener->onKernelResponse($eventMock2);
-		$subResponseRedirectListener->onKernelResponse($eventMock3);
+		$subRequestListener = new SubRequestListener();
+		$subRequestListener->onKernelResponse($eventMock1);
+		$subRequestListener->onKernelResponse($eventMock2);
+		$subRequestListener->onKernelResponse($eventMock3);
 	}
 
+	public function testOnKernelController() {
+		$masterRequestMock = $this->getMockBuilder(Request::class)
+			->setMethods(['getMethod'])
+			->getMock();
+		$masterRequestMock->expects($this->once())->method('getMethod')->will($this->returnValue('POST'));
+		$masterRequestMock->request->replace([
+			'key1' => 'value1',
+			'key2' => 'value2',
+		]);
+
+		$subRequestMock = $this->getMockBuilder(Request::class)
+			->setMethods(['setMethod'])
+			->getMock();
+		$subRequestMock->expects($this->once())->method('setMethod')->with($this->equalTo('POST'));
+		$subRequestMock->request->replace([
+			'key2' => 'value2_2',
+			'key3' => 'value3',
+		]);
+
+		$eventMock1 = $this->getMockBuilder(FilterControllerEvent::class)
+			->setMethods(['__construct', 'isMasterRequest', 'getRequest'])
+			->disableOriginalConstructor()
+			->getMock();
+		$eventMock1->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
+		$eventMock1->expects($this->atLeastOnce())->method('getRequest')->will($this->returnValue($masterRequestMock));
+
+		$eventMock2 = $this->getMockBuilder(FilterControllerEvent::class)
+			->setMethods(['__construct', 'isMasterRequest', 'getRequest'])
+			->disableOriginalConstructor()
+			->getMock();
+		$eventMock2->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
+		$eventMock2->expects($this->atLeastOnce())->method('getRequest')->will($this->returnValue($subRequestMock));
+
+		$subRequestListener = new SubRequestListener();
+		$subRequestListener->onKernelController($eventMock1);
+		$subRequestListener->onKernelController($eventMock2);
+
+		$expected = [
+			'key1' => 'value1',
+			'key2' => 'value2_2',
+			'key3' => 'value3',
+		];
+		$this->assertEquals($expected, $subRequestMock->request->all());
+	}
 
 }

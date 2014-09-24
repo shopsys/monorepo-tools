@@ -3,7 +3,7 @@ imports:
   - { resource: ../../Twig/services.yml }
 
 parameters:
-  fragment.handler.class: SS6\ShopBundle\Model\Redirect\RedirectFragmentHandler
+  fragment.handler.class: SS6\ShopBundle\Model\SubRequest\RedirectFragmentHandler
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources/
@@ -390,10 +390,11 @@ services:
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
 
-  ss6.shop.redirect.sub_response_redirect_listener:
-    class: SS6\ShopBundle\Model\Redirect\SubResponseRedirectListener
+  ss6.shop.sub_request.sub_request_listener:
+    class: SS6\ShopBundle\Model\SubRequest\SubRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
   ss6.shop.security.login_listener:
     class: SS6\ShopBundle\Model\Security\LoginListener

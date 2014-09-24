@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Redirect;
+namespace SS6\ShopBundle\Model\SubRequest;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
