@@ -472,22 +472,16 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		OrderStatus $orderStatus,
 		User $user = null
 	) {
-
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-
 		$cartFacade = $this->get('ss6.shop.cart.cart_facade');
 		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
-
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-
 		$cartService = $this->get('ss6.shop.cart.cart_service');
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
-
 		$customerIdentifier = $this->get('ss6.shop.customer.customer_identifier');
 		/* @var $customerIdentifier \SS6\ShopBundle\Model\Customer\CustomerIdentifier */
-
 		$cartFacade->cleanCart();
 
 		foreach ($products as $productReferenceName => $quantity) {

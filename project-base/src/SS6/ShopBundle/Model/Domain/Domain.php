@@ -76,7 +76,6 @@ class Domain {
 	}
 
 	/**
-	 *
 	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
 	 */
 	public function getAll() {
