@@ -13,7 +13,10 @@
 				<div class="wrap-group">
 					<fieldset>
 						{{ form_id(order) }}
-						{{ form_row(form.domainId, { label: 'Doména'}) }}
+						<div class="form-line">
+							<label class="form-line__label">Doména:</label>
+							<input type="text" value="{{ getDomainName(order.domainId) }}" class="form-control form-line__field" readonly="readonly">
+						</div>
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
 						{{ form_row(form.statusId, { label: 'Stav' }) }}
 						{{ form_row(form.customerId, { label: 'ID zákazníka' }) }}

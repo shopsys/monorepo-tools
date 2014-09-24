@@ -8,6 +8,10 @@
 	{{ value|price }}
 {% endblock %}
 
+{% block pkgrid_value_cell_id_domain_id %}
+	{{ getDomainName(value) }}
+{% endblock %}
+
 {% block pkgrid_no_data %}
 	Nebyla nalezena žádná objednávka.
 {% endblock %}
