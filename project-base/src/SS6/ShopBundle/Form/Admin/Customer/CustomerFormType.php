@@ -14,11 +14,15 @@ class CustomerFormType extends AbstractType {
 
 	private $scenario;
 
+	private $domains;
+
 	/**
 	 * @param string $scenario
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]|null $domains
 	 */
-	public function __construct($scenario) {
+	public function __construct($scenario, $domains = null) {
 		$this->scenario = $scenario;
+		$this->domains = $domains;
 	}
 
 	/**
@@ -34,7 +38,7 @@ class CustomerFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('userData', new UserFormType($this->scenario))
+			->add('userData', new UserFormType($this->scenario, $this->domains))
 			->add('billingAddressData', new BillingAddressFormType())
 			->add('deliveryAddressData', new DeliveryAddressFormType())
 			->add('save', 'submit');

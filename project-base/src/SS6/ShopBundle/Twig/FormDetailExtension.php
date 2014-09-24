@@ -37,7 +37,8 @@ class FormDetailExtension extends Twig_Extension {
 	public function getFunctions() {
 		return array(
 			new Twig_SimpleFunction('form_id', array($this, 'formId'), array('is_safe' => array('html'))),
-			new Twig_SimpleFunction('form_save', array($this, 'formSave'), array('is_safe' => array('html')))
+			new Twig_SimpleFunction('form_save', array($this, 'formSave'), array('is_safe' => array('html'))),
+			new Twig_SimpleFunction('detailDomain', array($this, 'formDetailDomain'), array('is_safe' => array('html'))),
 		);
 	}
 
@@ -62,18 +63,30 @@ class FormDetailExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param type $object
+	 * @param mixed $object
 	 * @param \Symfony\Component\Form\FormView $form
 	 * @return string
 	 */
 	public function formSave($object, FormView $form) {
-		$template = '{{ form_widget(form.save, { label: label}) }}';
+		$template = '{{ form_widget(form.save, { label: label }) }}';
 		$parameters = array('form' => $form, 'label' => 'Vytvořit');
 		if ($object === null) {
 			return $this->getTemplatingService()->render($template, $parameters);
 		} else {
 			$parameters['label'] = 'Uložit změny';
 			return $this->getTemplatingService()->render($template, $parameters);
+		}
+	}
+
+	/**
+	 * @param mixed $object
+	 * @return string
+	 */
+	public function formDetailDomain($object, FormView $form) {
+		if ($object === null) {
+			$template = '{{ form_row(form.userData.domainId, { label: label }) }}';
+			$paramters = array('form' => $form, 'label' => 'Doména');
+			return $this->getTemplatingService()->render($template, $paramters);
 		}
 	}
 

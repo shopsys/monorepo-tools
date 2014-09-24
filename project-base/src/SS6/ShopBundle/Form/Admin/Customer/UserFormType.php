@@ -12,11 +12,15 @@ class UserFormType extends AbstractType {
 
 	private $scenario;
 
+	private $domains;
+
 	/**
 	 * @param string $scenario
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]|null $domains
 	 */
-	public function __construct($scenario) {
+	public function __construct($scenario, $domains = null) {
 		$this->scenario = $scenario;
+		$this->domains = $domains;
 	}
 
 	/**
@@ -62,6 +66,17 @@ class UserFormType extends AbstractType {
 				),
 				'invalid_message' => 'Hesla se neshodují',
 			));
+
+		if ($this->domains !== null) {
+			foreach ($this->domains as $domain) {
+				$domainsChoices[$domain->getId()] = $domain->getDomain();
+			}
+			$builder
+				->add('domainId', 'choice', array(
+				'required' => true,
+				'choices' => $domainsChoices,
+				));
+		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

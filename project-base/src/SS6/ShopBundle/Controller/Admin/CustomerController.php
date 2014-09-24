@@ -134,8 +134,11 @@ class CustomerController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$domains = $domain->getDomainConfigs();
 
-		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE), null, array(
+		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains), null, array(
 			'validation_groups' => array('Default', 'create'),
 		));
 

@@ -60,6 +60,13 @@ class Domain {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 */
+	public function getDomainConfigs() {
+		return $this->domainConfigs;
+	}
+
+	/**
 	 * @param int $domainId
 	 */
 	public function switchDomainById($domainId) {
