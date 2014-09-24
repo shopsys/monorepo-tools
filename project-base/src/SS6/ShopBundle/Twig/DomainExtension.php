@@ -50,11 +50,7 @@ class DomainExtension extends \Twig_Extension {
 	 * @return string
 	 */
 	public function getDomainNameById($domainId) {
-		foreach ($this->getDomain()->getAll() as $domainConfig) {
-			if ($domainId === $domainConfig->getId()) {
-				return $domainConfig->getDomain();
-			}
-		}
+		return $this->getDomain()->getDomainConfigById($domainId)->getDomain();
 	}
 
 }

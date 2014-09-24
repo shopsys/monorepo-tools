@@ -38,17 +38,32 @@ class Domain {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 */
+	public function getAll() {
+		return $this->domainConfigs;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Domain\DomainConfig
+	 * @throws \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException
+	 */
+	public function getDomainConfigById($domainId) {
+		foreach ($this->domainConfigs as $domainConfig) {
+			if ($domainId === $domainConfig->getId()) {
+				return $domainConfig;
+			}
+		}
+
+		throw new \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException();
+	}
+
+	/**
 	 * @param int $domainId
 	 */
 	public function switchDomainById($domainId) {
-		foreach ($this->domainConfigs as $domainConfig) {
-			if ($domainId === $domainConfig->getId()) {
-				$this->currentDomainConfig = $domainConfig;
-				return;
-			}
-		}
-	
-		throw new \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException();
+		$this->currentDomainConfig = $this->getDomainConfigById($domainId);
 	}
 
 	/**
@@ -73,13 +88,6 @@ class Domain {
 		}
 
 		$this->currentDomainConfig = array_pop($this->queueDomainConfig);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
-	 */
-	public function getAll() {
-		return $this->domainConfigs;
 	}
 
 	/**
