@@ -37,10 +37,10 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRelativeImagePathProvider() {
 		return array(
-			array('entity', 'type', 'size', 'entity/type/size/'),
-			array('entity', 'type', null, 'entity/type/'),
-			array('entity', null, 'size', 'entity/size/'),
-			array('entity', null, null, 'entity/'),
+			array('entity', 'type', 'size', 'entity' . DIRECTORY_SEPARATOR . 'type' . DIRECTORY_SEPARATOR . 'size' . DIRECTORY_SEPARATOR),
+			array('entity', 'type', null, 'entity' . DIRECTORY_SEPARATOR . 'type' . DIRECTORY_SEPARATOR),
+			array('entity', null, 'size', 'entity' . DIRECTORY_SEPARATOR . 'size' . DIRECTORY_SEPARATOR),
+			array('entity', null, null, 'entity' . DIRECTORY_SEPARATOR),
 		);
 	}
 
