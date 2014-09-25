@@ -25,7 +25,7 @@ class SubRequestListener {
 	public function onKernelController(FilterControllerEvent $event) {
 		if ($event->isMasterRequest()) {
 			$this->masterRequest = $event->getRequest();
-		} else {
+		} elseif ($this->masterRequest !== null) {
 			$this->fillSubRequestFromMasterRequest($event->getRequest());
 		}
 	}
