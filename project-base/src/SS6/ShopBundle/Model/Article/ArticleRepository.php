@@ -34,10 +34,11 @@ class ArticleRepository {
 	}
 
 	/**
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForMenu() {
-		return $this->getArticleRepository()->findAll();
+	public function getArticlesForMenu($domainId) {
+		return $this->getArticleRepository()->findBy(array('domainId' => $domainId));
 	}
 
 	/**

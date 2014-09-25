@@ -22,6 +22,13 @@ class Article {
 	private $id;
 
 	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $domainId;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="text")
@@ -37,8 +44,10 @@ class Article {
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
+	 * @param int $domainId
 	 */
-	public function __construct(ArticleData $articleData) {
+	public function __construct(ArticleData $articleData, $domainId) {
+		$this->domainId = $domainId;
 		$this->name = $articleData->getName();
 		$this->text = $articleData->getText();
 	}
@@ -56,6 +65,13 @@ class Article {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function getDomainId() {
+		return $this->domainId;
 	}
 
 	/**

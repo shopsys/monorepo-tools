@@ -73,11 +73,15 @@ class ArticleController extends Controller {
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
 			->select('a')
-			->from(Article::class, 'a');
+			->from(Article::class, 'a')
+			->where('a.domainId = :selectedDomainId')
+			->setParameter('selectedDomainId', $selectedDomain->getId());
 		$dataSource = new QueryBuilderDataSource($queryBuilder);
 
 		$grid = $gridFactory->create('articleList', $dataSource);
@@ -105,6 +109,8 @@ class ArticleController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$form = $this->createForm(new ArticleFormType());
 
@@ -133,6 +139,7 @@ class ArticleController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', array(
 			'form' => $form->createView(),
+			'selectedDomainId' => $selectedDomain->getId(),
 		));
 	}
 
