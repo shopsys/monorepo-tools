@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(columns={"email"})
  *   }
  * )
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserRepository")
+ * @ORM\Entity
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable {
 

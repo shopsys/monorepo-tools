@@ -33,6 +33,9 @@ services:
   doctrine.orm.entity_manager.abstract:
     synthetic: true
 
+  security.user.provider.concrete.user_identities:
+    class: SS6\ShopBundle\Model\Customer\SecurityUserRepository
+
   ss6.shop.admin_navigation.breadcrumb:
     class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
     factory_service: ss6.shop.admin_navigation.breadcrumb_factory
