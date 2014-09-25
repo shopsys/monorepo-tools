@@ -99,16 +99,17 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 			->setMethods(['getMethod'])
 			->getMock();
 		$masterRequestMock->expects($this->once())->method('getMethod')->will($this->returnValue('POST'));
-		$masterRequestMock->request->replace([
+		$masterRequestMock->query->replace([
 			'key1' => 'value1',
 			'key2' => 'value2',
 		]);
+		$masterRequestMock->request->replace(['post' => 'value']);
 
 		$subRequestMock = $this->getMockBuilder(Request::class)
 			->setMethods(['setMethod'])
 			->getMock();
 		$subRequestMock->expects($this->once())->method('setMethod')->with($this->equalTo('POST'));
-		$subRequestMock->request->replace([
+		$subRequestMock->query->replace([
 			'key2' => 'value2_2',
 			'key3' => 'value3',
 		]);
@@ -136,7 +137,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 			'key2' => 'value2_2',
 			'key3' => 'value3',
 		];
-		$this->assertEquals($expected, $subRequestMock->request->all());
+		$this->assertEquals($expected, $subRequestMock->query->all());
+		$this->assertEquals($masterRequestMock->request, $subRequestMock->request);
 	}
 
 }

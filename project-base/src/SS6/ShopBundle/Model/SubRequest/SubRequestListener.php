@@ -19,7 +19,6 @@ class SubRequestListener {
 	 */
 	private $masterRequest;
 
-
 	/**
 	 * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event
 	 */
@@ -36,9 +35,12 @@ class SubRequestListener {
 	 */
 	private function fillSubRequestFromMasterRequest(Request $subRequest) {
 		$subRequest->setMethod($this->masterRequest->getMethod());
-		$subRequestParameterBag = $subRequest->request;
-		$subRequestData = array_replace($this->masterRequest->request->all(), $subRequestParameterBag->all());
-		$subRequestParameterBag->replace($subRequestData);
+		$subRequest->request = $this->masterRequest->request;
+		$subRequest->server = $this->masterRequest->server;
+		$subRequest->files = $this->masterRequest->files;
+
+		$subRequestQueryParameters = array_replace($this->masterRequest->query->all(), $subRequest->query->all());
+		$subRequest->query->replace($subRequestQueryParameters);
 	}
 
 	/**
