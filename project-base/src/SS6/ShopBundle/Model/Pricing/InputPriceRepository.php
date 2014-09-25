@@ -154,12 +154,14 @@ class InputPriceRepository {
 
 			if (($iteration % self::BATCH_SIZE) == 0) {
 				$this->em->flush();
-				$this->em->clear();
+				$this->em->clear(get_class($object));
 			}
 		}
 
 		$this->em->flush();
-		$this->em->clear();
+		if (isset($object)) {
+			$this->em->clear(get_class($object));
+		}
 	}
 
 }
