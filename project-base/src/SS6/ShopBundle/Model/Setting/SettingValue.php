@@ -31,7 +31,6 @@ class SettingValue {
 	 * @var string
 	 *
 	 * @ORM\Column(type="text", nullable=true)
-	 * @ORM\Id
 	 */
 	private $value;
 
@@ -39,7 +38,6 @@ class SettingValue {
 	 * @var string
 	 *
 	 * @ORM\Column(type="string", length=7)
-	 * @ORM\Id
 	 */
 	private $type;
 
