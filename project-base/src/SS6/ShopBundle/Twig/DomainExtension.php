@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig_SimpleFunction;
 
 class DomainExtension extends \Twig_Extension {
 
@@ -23,7 +24,8 @@ class DomainExtension extends \Twig_Extension {
 	 */
 	public function getFunctions() {
 		return array(
-			new \Twig_SimpleFunction('getDomain', array($this, 'getDomain')),
+			new Twig_SimpleFunction('getDomain', array($this, 'getDomain')),
+			new Twig_SimpleFunction('getDomainName', array($this, 'getDomainNameById')),
 		);
 	}
 
@@ -41,6 +43,18 @@ class DomainExtension extends \Twig_Extension {
 	 */
 	public function getName() {
 		return 'domain';
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return string
+	 */
+	public function getDomainNameById($domainId) {
+		foreach ($this->getDomain()->getAll() as $domainConfig) {
+			if ($domainId === $domainConfig->getId()) {
+				return $domainConfig->getDomain();
+			}
+		}
 	}
 
 }

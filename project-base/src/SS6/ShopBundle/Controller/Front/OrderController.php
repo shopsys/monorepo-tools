@@ -38,6 +38,8 @@ class OrderController extends Controller {
 		/* @var $transportPriceCalculation \SS6\ShopBundle\Model\Transport\PriceCalculation */
 		$paymentPriceCalculation = $this->get('ss6.shop.payment.price_calculation');
 		/* @var $paymentPriceCalculation \SS6\ShopBundle\Model\Payment\PriceCalculation */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
@@ -51,6 +53,8 @@ class OrderController extends Controller {
 		if ($user instanceof User) {
 			$orderFacade->prefillOrderData($orderData, $user);
 		}
+		$domainId = $domain->getId();
+		$orderData->setDomainId($domainId);
 
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */

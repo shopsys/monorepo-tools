@@ -58,6 +58,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->setDeliveryCity('deliveryCity');
 		$orderData->setDeliveryPostcode('deliveryPostcode');
 		$orderData->setNote('note');
+		$orderData->setDomainId(1);
 
 		$order = $orderFacade->createOrder($orderData);
 
@@ -82,6 +83,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$this->assertEquals($orderData->getDeliveryCity(), $orderFromDb->getDeliveryCity());
 		$this->assertEquals($orderData->getDeliveryPostcode(), $orderFromDb->getDeliveryPostcode());
 		$this->assertEquals($orderData->getNote(), $orderFromDb->getNote());
+		$this->assertEquals($orderData->getDomainId(), $orderFromDb->getDomainId());
 
 		$this->assertCount(3, $orderFromDb->getItems());
 	}

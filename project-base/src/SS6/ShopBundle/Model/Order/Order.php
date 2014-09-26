@@ -216,6 +216,13 @@ class Order {
 	private $deleted;
 
 	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $domainId;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
@@ -259,6 +266,7 @@ class Order {
 		$this->customer = $user;
 		$this->deleted = false;
 		$this->createdAt = new DateTime();
+		$this->domainId = $orderData->getDomainId();
 	}
 
 	/**
@@ -360,6 +368,13 @@ class Order {
 		$this->deliveryStreet = $deliveryStreet;
 		$this->deliveryCity = $deliveryCity;
 		$this->deliveryPostcode = $deliveryPostcode;
+	}
+
+	/**
+	 * @param int $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
 	}
 
 	/**
@@ -599,6 +614,13 @@ class Order {
 	 */
 	public function getNote() {
 		return $this->note;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
 	}
 
 }
