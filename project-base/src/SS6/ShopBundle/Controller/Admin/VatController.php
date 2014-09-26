@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Vat\DefaultVatFormType;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -52,6 +51,8 @@ class VatController extends Controller {
 		/* @var $vatRepository \SS6\ShopBundle\Model\Pricing\Vat\VatRepository */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
+		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
 
 		$vats = $vatRepository->findAll();
 		$form = $this->createForm(new DefaultVatFormType($vats));
@@ -65,10 +66,9 @@ class VatController extends Controller {
 		if ($form->isValid()) {
 			$defaultVatFormData = $form->getData();
 			$vatFacade->setDefaultVat($defaultVatFormData['defaultVat']);
-
-			// @codingStandardsIgnoreStart
-			// TODO: redirect && $flashMessageText->addSuccess('Nastavení výchozí sazby DPH bylo upraveno');
-			// @codingStandardsIgnoreStop
+			$flashMessageText->addSuccess('Nastavení výchozí sazby DPH bylo upraveno');
+			
+			return $this->redirect($this->generateUrl('admin_vat_list'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Vat/defaultVat.html.twig', array(
