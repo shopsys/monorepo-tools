@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class MailTemplateFacadeTest extends PHPUnit_Framework_TestCase {
 
@@ -20,7 +21,11 @@ class MailTemplateFacadeTest extends PHPUnit_Framework_TestCase {
 
 		$mailTemplateRepositoryMock = $this->getMock(MailTemplateRepository::class, [], [], '', false);
 
-		$mailTemplateFacade = new MailTemplateFacade($emMock, $mailTemplateRepositoryMock);
+		$orderStatusRepositoryMock = $this->getMockBuilder(OrderStatusRepository::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mailTemplateFacade = new MailTemplateFacade($emMock, $mailTemplateRepositoryMock, $orderStatusRepositoryMock);
 
 		$originMailTemplateData = new MailTemplateData();
 		$originMailTemplateData->setSubject('subject');
@@ -28,6 +33,7 @@ class MailTemplateFacadeTest extends PHPUnit_Framework_TestCase {
 		$mailTemplate = new MailTemplate('templateName', $originMailTemplateData);
 
 		$expectedMailTemplateData = new MailTemplateData();
+		$expectedMailTemplateData->setName('templateName');
 		$expectedMailTemplateData->setSubject('editedSubject');
 		$expectedMailTemplateData->setBody('editedBody');
 		$mailTemplateFacade->edit($mailTemplate, $expectedMailTemplateData);
