@@ -3,6 +3,9 @@ services:
   ss6.shop.form.admin.payment.payment_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
 
+  ss6.shop.form.admin.product.parameter.product_parameter_value_form_type_factory:
+    class: SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
+
   ss6.shop.form.admin.product.product_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 

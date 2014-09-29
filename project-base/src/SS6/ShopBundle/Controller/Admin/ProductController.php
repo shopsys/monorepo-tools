@@ -22,18 +22,21 @@ class ProductController extends Controller {
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$parameterRepository = $this->get('ss6.shop.product.parameter.parameter_repository');
+		/* @var $parameterRepository \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
 		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
 
 		$product = $productRepository->getById($id);
+		$productParameterValues = $parameterRepository->findParameterValuesByProduct($product);
 
 		$form = $this->createForm($productFormTypeFactory->create());
 		$productData = new ProductData();
 
 		if (!$form->isSubmitted()) {
-			$productData->setFromEntity($product);
+			$productData->setFromEntity($product, $productParameterValues);
 		}
 
 		$form->setData($productData);

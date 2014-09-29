@@ -39,6 +39,37 @@
 				</div>
 
 				<div class="wrap-group">
+					<label>Parametry:</label>
+					
+					<table class="table">
+						<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}">
+							<tr>
+								<th>Parametr</th>
+								<th>Hodnota</th>
+								<th></th>
+							</tr>
+
+							{% macro parameterRow(parameter) %}
+								<tr class="js-parameters-item">
+									<td>{{ form_widget(parameter.parameter) }}{{ form_errors(parameter.parameter) }}</td>
+									<td>{{ form_widget(parameter.value) }}{{ form_errors(parameter.value) }}</td>
+									<td>
+										<a href="#" class="js-parameters-item-remove"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+							{% endmacro %}
+
+							{% for parameter in form.parameters %}
+								{{ _self.parameterRow(parameter) }}
+							{% else %}
+								{% do form.parameters.setRendered %}
+							{% endfor %}
+						</tbody>
+					</table>
+					<a href="#" class="js-parameters-item-add"><i class="fa fa-plus"></i></a>
+				</div>
+
+				<div class="wrap-group">
 					{% block image %}{% endblock %}
 					{{ form_row(form.image, { label: 'Nahrát obrázek' }) }}
 

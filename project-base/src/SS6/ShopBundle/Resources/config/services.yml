@@ -376,6 +376,9 @@ services:
   ss6.shop.product.parameter.parameter_service:
     class: SS6\ShopBundle\Model\Product\Parameter\ParameterService
 
+  ss6.shop.product.parameter.parameter_value_to_parameter_text_transformer:
+    class: SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer
+
   ss6.shop.product.price_calculation:
     class: SS6\ShopBundle\Model\Product\PriceCalculation
 
