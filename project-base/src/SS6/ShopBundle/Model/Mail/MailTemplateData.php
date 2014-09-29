@@ -9,6 +9,11 @@ class MailTemplateData {
 	/**
 	 * @var string|null
 	 */
+	private $name;
+
+	/**
+	 * @var string|null
+	 */
 	private $subject;
 	
 	/**
@@ -17,12 +22,21 @@ class MailTemplateData {
 	private $body;
 
 	/**
+	 * @param string|null $name
 	 * @param string|null $subject
 	 * @param string|null $body
 	 */
-	public function __construct($subject = null, $body = null) {
+	public function __construct($name = null, $subject = null, $body = null) {
+		$this->name = $name;
 		$this->subject = $subject;
 		$this->body = $body;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
@@ -37,6 +51,13 @@ class MailTemplateData {
 	 */
 	public function getBody() {
 		return $this->body;
+	}
+	
+	/**
+	 * @param string|null $name
+	 */
+	public function setName($name) {
+		$this->name = $name;
 	}
 
 	/**
@@ -57,6 +78,7 @@ class MailTemplateData {
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
 	 */
 	public function setFromEntity(MailTemplate $mailTemplate) {
+		$this->name = $mailTemplate->getName();
 		$this->subject = $mailTemplate->getSubject();
 		$this->body = $mailTemplate->getBody();
 	}
