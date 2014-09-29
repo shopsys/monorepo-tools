@@ -3,11 +3,24 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\PriceCalculation
+	 */
+	private $priceCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\PriceCalculation $priceCalculation
+	 */
+	public function __construct(PriceCalculation $priceCalculation) {
+		$this->priceCalculation = $priceCalculation;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
@@ -47,6 +60,7 @@ class OrderService {
 
 		foreach ($orderData->getItems() as $orderItemData) {
 			/* @var $orderItemData \SS6\ShopBundle\Model\Order\OrderItemData */
+			$this->priceCalculation->calculatePriceWithoutVat($orderItemData);
 			$orderItem = $order->getItemById($orderItemData->getId());
 			$orderItem->edit($orderItemData);
 		}
