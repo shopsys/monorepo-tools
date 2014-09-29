@@ -48,13 +48,7 @@ class OrderService {
 		foreach ($orderData->getItems() as $orderItemData) {
 			/* @var $orderItemData \SS6\ShopBundle\Model\Order\OrderItemData */
 			$orderItem = $order->getItemById($orderItemData->getId());
-			$orderItem->edit(
-				$orderItemData->getName(),
-				$orderItem->getPriceWithoutVat(),
-				$orderItemData->getPrice(),
-				$orderItem->getVatPercent(),
-				$orderItemData->getQuantity()
-			);
+			$orderItem->edit($orderItemData);
 		}
 
 		$order->recalcTotalPrices();

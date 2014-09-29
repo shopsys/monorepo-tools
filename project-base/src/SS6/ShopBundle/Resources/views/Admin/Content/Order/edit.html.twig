@@ -80,22 +80,28 @@
 									<thead>
 										<tr>
 											<th>Název</th>
-											<th class="table-col-20 text-right">Cena</th>
+											<th class="table-col-20 text-right">Jednotková cena s DPH</th>
 											<th class="table-col-10 text-right">Množství</th>
+											<th class="table-col-10 text-right">DPH</th>
+											<th class="table-col-10 text-right">Celkem s DPH</th>
+											<th class="table-col-10 text-right">Celkem bez DPH</th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for orderItem in form.items %}
 											<tr>
 												<td>{{ form_widget(orderItem.name) }}</td>
-												<td>{{ form_widget(orderItem.price, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+												<td></td>
+												<td></td>
 											</tr>
 										{% endfor %}
 									</tbody>
 									<tfoot>
 										<tr>
-											<th>Celkem:</th>
+											<th colspan="4">Celkem:</th>
 											<th class="text-right">{{ order.totalPrice|price }}</th>
 											<th></th>
 										</tr>

@@ -536,7 +536,7 @@ class OrderData {
 		foreach ($order->getItems() as $orderItem) {
 			$orderItemData = new OrderItemData();
 			$orderItemData->setFromEntity($orderItem);
-			$orderItemsData[] = $orderItemData;
+			$orderItemsData[$orderItem->getId()] = $orderItemData;
 		}
 		$this->setItems($orderItemsData);
 		$this->setDomainId($order->getDomainId());
