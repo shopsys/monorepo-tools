@@ -91,7 +91,7 @@ class OrderMailFacade {
 	/**
 	 * @return array
 	 */
-	public function getNamesByMailTemplateName(){
+	public function getNamesByMailTemplateName() {
 		$orderStatuses = $this->orderStatusRepository->findAll();
 		foreach ($orderStatuses as $orderStatus) {
 			$orderStatusNames[$this::STATUS_NAME_PREFIX . $orderStatus->getId()] = $orderStatus->getName();

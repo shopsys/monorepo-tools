@@ -13,7 +13,7 @@ class MailTemplatesAllStatusesFormType extends AbstractType{
 	 */
 	private $mailTemplateNames;
 
-	function __construct($mailTemplateNames) {
+	public function __construct($mailTemplateNames) {
 		$this->mailTemplateNames = $mailTemplateNames;
 	}
 
