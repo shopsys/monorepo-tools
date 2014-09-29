@@ -56,6 +56,8 @@ class OrderController extends Controller {
 			$flashMessageTwig->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessageTwig->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+		} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
+			$flashMessageTwig->addError('Nepodařilo se odeslat aktualizační email');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
