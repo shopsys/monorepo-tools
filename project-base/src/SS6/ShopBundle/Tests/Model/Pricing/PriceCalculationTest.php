@@ -4,49 +4,89 @@ namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculatePriceProvider() {
+	public function testApplyVatPercentProvider() {
 		return array(
 			array(
-				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-				'inputPrice' => '6999',
+				'priceWithoutVat' => '0',
 				'vatPercent' => '21',
-				'basePriceWithoutVat' => '6998.78',
-				'basePriceWithVat' => '8469',
+				'expectedPriceWithVat' => '0',
 			),
 			array(
-				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-				'inputPrice' => '6999.99',
+				'priceWithoutVat' => '100',
+				'vatPercent' => '0',
+				'expectedPriceWithVat' => '100',
+			),
+			array(
+				'priceWithoutVat' => '100',
 				'vatPercent' => '21',
-				'basePriceWithoutVat' => '5784.8',
-				'basePriceWithVat' => '7000',
+				'expectedPriceWithVat' => '121',
+			),
+			array(
+				'priceWithoutVat' => '100.9',
+				'vatPercent' => '21.1',
+				'expectedPriceWithVat' => '122.1899',
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider testCalculatePriceProvider
+	 * @dataProvider testApplyVatPercentProvider
 	 */
-	public function testCalculatePrice(
-		$inputPriceType,
-		$inputPrice,
+	public function testApplyVatPercent(
+		$priceWithoutVat,
 		$vatPercent,
-		$basePriceWithoutVat,
-		$basePriceWithVat
+		$expectedPriceWithVat
 	) {
-		$priceCalculation = new PriceCalculation();
+		$rounding = new Rounding();
+		$priceCalculation = new PriceCalculation($rounding);
+		$vat = new Vat(new VatData('testVat', $vatPercent));
 
-		$vat = new Vat(new VatData('vat', $vatPercent));
+		$actualPriceWithVat = $priceCalculation->applyVatPercent($priceWithoutVat, $vat);
 
-		$price = $priceCalculation->calculatePrice($inputPrice, $inputPriceType, $vat);
+		$this->assertEquals(round($expectedPriceWithVat, 6), round($actualPriceWithVat, 6));
+	}
 
-		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getBasePriceWithoutVat(), 6));
-		$this->assertEquals(round($basePriceWithVat, 6), round($price->getBasePriceWithVat(), 6));
+	public function testGetVatAmountByPriceWithVatProvider() {
+		return array(
+			array(
+				'priceWithVat' => '0',
+				'vatPercent' => '10',
+				'expectedVatAmount' => '0',
+			),
+			array(
+				'priceWithoutVat' => '100',
+				'vatPercent' => '0',
+				'expectedPriceWithVat' => '0',
+			),
+			array(
+				'priceWithoutVat' => '100',
+				'vatPercent' => '21',
+				'expectedPriceWithVat' => '17.36',
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider testGetVatAmountByPriceWithVatProvider
+	 */
+	public function testGetVatAmountByPriceWithVat(
+		$priceWithVat,
+		$vatPercent,
+		$expectedVatAmount
+	) {
+		$rounding = new Rounding();
+		$priceCalculation = new PriceCalculation($rounding);
+		$vat = new Vat(new VatData('testVat', $vatPercent));
+		
+		$actualVatAmount = $priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
+
+		$this->assertEquals(round($expectedVatAmount, 6), round($actualVatAmount, 6));
 	}
 
 }

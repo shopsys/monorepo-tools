@@ -3,15 +3,17 @@
 namespace SS6\ShopBundle\Tests\Model\Product;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\PriceCalculation;
+use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
-class ProductCalculationTest extends PHPUnit_Framework_TestCase {
+class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
 		return array(
@@ -42,7 +44,9 @@ class ProductCalculationTest extends PHPUnit_Framework_TestCase {
 		$basePriceWithoutVat,
 		$basePriceWithVat
 	) {
-		$pricingCalculation = new GenericPriceCalculation();
+		$rounding = new Rounding();
+		$priceCalculation = new PriceCalculation($rounding);
+		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
 			->setMethods(array('getInputPriceType'))
@@ -51,13 +55,13 @@ class ProductCalculationTest extends PHPUnit_Framework_TestCase {
 		$pricingSettingMock
 			->expects($this->any())->method('getInputPriceType')
 				->will($this->returnValue($inputPriceType));
-		$priceCalculation = new PriceCalculation($pricingCalculation, $pricingSettingMock);
+		$productPriceCalculation = new ProductPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
 		$product = new Product(new ProductData(null, null, null, null, null, $inputPrice, $vat));
 
-		$price = $priceCalculation->calculatePrice($product);
+		$price = $productPriceCalculation->calculatePrice($product);
 
 		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getBasePriceWithoutVat(), 6));
 		$this->assertEquals(round($basePriceWithVat, 6), round($price->getBasePriceWithVat(), 6));

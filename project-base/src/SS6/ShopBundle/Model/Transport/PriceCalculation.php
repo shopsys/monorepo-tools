@@ -2,15 +2,15 @@
 
 namespace SS6\ShopBundle\Model\Transport;
 
-use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class PriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
 	 */
-	private $genericPriceCalculation;
+	private $basePriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
@@ -18,15 +18,15 @@ class PriceCalculation {
 	private $pricingSetting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $genericPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
 	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
 	 */
 	public function __construct(
-		GenericPriceCalculation $genericPriceCalculation,
+		BasePriceCalculation $basePriceCalculation,
 		PricingSetting $pricingSetting
 	) {
 		$this->pricingSetting = $pricingSetting;
-		$this->genericPriceCalculation = $genericPriceCalculation;
+		$this->basePriceCalculation = $basePriceCalculation;
 	}
 
 	/**
@@ -34,7 +34,7 @@ class PriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice(Transport $transport) {
-		return $this->genericPriceCalculation->calculatePrice(
+		return $this->basePriceCalculation->calculatePrice(
 			$transport->getPrice(),
 			$this->pricingSetting->getInputPriceType(),
 			$transport->getVat()
