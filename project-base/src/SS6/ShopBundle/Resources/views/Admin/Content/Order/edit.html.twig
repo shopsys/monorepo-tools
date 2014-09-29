@@ -88,14 +88,14 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% for orderItem in form.items %}
+										{% for orderItemId, orderItem in form.items %}
 											<tr>
 												<td>{{ form_widget(orderItem.name) }}</td>
 												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-												<td></td>
-												<td></td>
+												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].basePriceWithVat|price }}</td>
+												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].basePriceWithoutVat|price }}</td>
 											</tr>
 										{% endfor %}
 									</tbody>
