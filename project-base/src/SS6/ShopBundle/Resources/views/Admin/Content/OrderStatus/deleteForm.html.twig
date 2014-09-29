@@ -2,7 +2,7 @@
 	{{ form_errors(form) }}
 
 	<p>
-		Opravdu chce smazat stav objednávek <strong>{{ orderStatus.name }}</strong>?<br />
+		Opravdu chcete smazat stav objednávek <strong>{{ orderStatus.name }}</strong>?<br />
 		Tento stav má přiřazeno {{ ordersCount }} objednávek, vyberte stav, který jim má být nově nastaven:
 	</p>
 
@@ -15,5 +15,10 @@
 
 		<a href="" onclick="SS6.window.close({{ windowId|json_encode }}); return false;" class="btn btn-primary left">Zpět</a>
 	</div>
-
+	
+	<div class="clear">
+		<p>
+		Informace o změně stavu <strong>nebude</strong> zákazníkovi emailem zaslána.
+		</p>
+	</div>
 {{ form_end(form) }}
