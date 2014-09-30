@@ -25,12 +25,17 @@ class UserDataFixture extends AbstractReferenceFixture {
 		/* @var $customersData CustomerData[] */
 
 		foreach ($customersData as $customerData) {
+			if ($customerData->getDeliveryAddressData() !== null) {
+				$deliveryAddress = new DeliveryAddress($customerData->getDeliveryAddressData());
+			} else {
+				$deliveryAddress = null;
+			}
 			$this->createCustomer(
 				$manager,
 				$registrationService,
 				$customerData->getUserData(),
 				new BillingAddress($customerData->getBillingAddressData()),
-				new DeliveryAddress($customerData->getDeliveryAddressData())
+				$deliveryAddress
 			);
 		}
 		$manager->flush();

@@ -57,7 +57,6 @@ class UserDataFixtureLoader {
 		$customerData = new CustomerData();
 		$userData = new UserData();
 		$billingAddressData = new BillingAddressData();
-		$deliveryAddressData = new DeliveryAddressData();
 
 		$userData->setFirstName($row[0]);
 		$userData->setLastName($row[1]);
@@ -72,8 +71,9 @@ class UserDataFixtureLoader {
 		$billingAddressData->setCity($row[9]);
 		$billingAddressData->setPostcode($row[10]);
 		$billingAddressData->setTelephone($row[11]);
-
+		$customerData->setDeliveryAddress(null);
 		if ($row[12] === 'true') {
+			$deliveryAddressData = new DeliveryAddressData();
 			$deliveryAddressData->setAddressFilled(true);
 			$deliveryAddressData->setCity($row[13]);
 			$deliveryAddressData->setCompanyName($row[14]);
@@ -81,13 +81,12 @@ class UserDataFixtureLoader {
 			$deliveryAddressData->setPostcode($row[16]);
 			$deliveryAddressData->setStreet($row[17]);
 			$deliveryAddressData->setTelephone($row[18]);
-		} else {
-			$deliveryAddressData->setAddressFilled(false);
+			$customerData->setDeliveryAddress($deliveryAddressData);
 		}
 		$userData->setDomainId($row[19]);
+
 		$customerData->setUserData($userData);
 		$customerData->setBillingAddress($billingAddressData);
-		$customerData->setDeliveryAddress($deliveryAddressData);
 
 		return $customerData;
 	}

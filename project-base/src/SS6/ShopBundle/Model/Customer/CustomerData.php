@@ -56,7 +56,7 @@ class CustomerData {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddressData
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddressData|null
 	 */
 	public function getDeliveryAddressData() {
 		return $this->deliveryAddressData;
@@ -77,9 +77,9 @@ class CustomerData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddress
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData|null $deliveryAddress
 	 */
-	public function setDeliveryAddress(DeliveryAddressData $deliveryAddress) {
+	public function setDeliveryAddress(DeliveryAddressData $deliveryAddress = null) {
 		$this->deliveryAddressData = $deliveryAddress;
 	}
 
