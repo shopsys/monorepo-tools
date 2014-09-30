@@ -12,11 +12,13 @@
 			{{ form_start(form) }}
 			{{ form_errors(form) }}
 			{% for key, name in orderStatusNames %}
-				<h2>{{ orderStatusNames[key] }}</h2>
-				<div class="wrap-group">
+				<div class="toggle-container">
+				<h2 class ="cursor-pointer toggle-headline">{{ orderStatusNames[key] }}</h2>
+				<div class="wrap-group toggle-content toggle-close">
 				{{ form_row(form[key].subject, { label: 'Předmět'}) }}
 				{{ form_row(form[key].body, { label: 'Text'}) }}
 				{{ form_widget(form[key].save, { label: 'Uložit změny'}) }}
+				</div>
 				</div>
 			{% endfor %}
 			{{ form_end(form) }}
