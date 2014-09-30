@@ -40,7 +40,9 @@
 
 				<div class="wrap-group">
 					<label>Parametry:</label>
-					
+
+					{{ form_errors(form.parameters) }}
+
 					<table class="table">
 						<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}">
 							<tr>
@@ -64,6 +66,10 @@
 							{% else %}
 								{% do form.parameters.setRendered %}
 							{% endfor %}
+
+							<tr class="js-parameters-empty-item">
+								<td colspan="3">Přidejte nějaké parametry</td>
+							</tr>
 						</tbody>
 					</table>
 					<a href="#" class="js-parameters-item-add"><i class="fa fa-plus"></i></a>

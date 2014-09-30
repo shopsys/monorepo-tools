@@ -5,7 +5,11 @@
 	
 	SS6.parameters.init = function () {
 		$('.js-parameters').on('click', '.js-parameters-item-remove', function (event) {
+			var $collection = $(this).closest('.js-parameters');
+			
 			$(this).closest('.js-parameters-item').remove();
+			
+			SS6.parameters.refreshCount($collection);
 			
 			event.preventDefault();
 		});
@@ -23,8 +27,20 @@
 			
 			$collection.append(item);
 			
+			SS6.parameters.refreshCount($collection);
+			
 			event.preventDefault();
 		});
+		
+		SS6.parameters.refreshCount($('.js-parameters'));
+	};
+	
+	SS6.parameters.refreshCount = function($collection) {
+		if ($collection.find('.js-parameters-item').size() === 0) {
+			$collection.find('.js-parameters-empty-item').show();
+		} else {
+			$collection.find('.js-parameters-empty-item').hide();
+		}
 	};
 	
 	$(document).ready(function () {
