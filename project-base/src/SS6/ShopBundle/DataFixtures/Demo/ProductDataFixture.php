@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
-use DateTime;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
@@ -51,7 +51,31 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$product = new Product($productData);
 
 		$manager->persist($product);
+		$manager->flush();
+
+		$this->createParameters($manager, $product, $productData->getParameters());
+
 		$this->addReference($referenceName, $product);
+	}
+
+	/**
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
+	 */
+	private function createParameters(ObjectManager $manager, Product $product, array $productParameterValuesData) {
+		foreach ($productParameterValuesData as $productParameterValueData) {
+			$manager->persist($productParameterValueData->getParameter());
+			$manager->persist($productParameterValueData->getValue());
+
+			// Doctrine doesn't know how to resolve persisting order and fill autoincrement IDs
+			// into foreign keys of related entities. That's why explicit flush() is needed.
+			$manager->flush();
+
+			$productParameterValueData->setProduct($product);
+			$productParameterValue = new ProductParameterValue($productParameterValueData);
+			$manager->persist($productParameterValue);
+		}
 	}
 
 	/**

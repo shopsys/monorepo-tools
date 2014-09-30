@@ -4,6 +4,11 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
 use SS6\ShopBundle\Model\Csv\CsvReader;
+use SS6\ShopBundle\Model\Product\Parameter\Parameter;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\String\EncodingConverter;
 use SS6\ShopBundle\Model\String\TransformString;
@@ -29,6 +34,16 @@ class ProductDataFixtureLoader {
 	 * @var array
 	 */
 	private $availabilities;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
+	 */
+	private $parameters;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[]
+	 */
+	private $parameterValues;
 
 	/**
 	 * @param string $path
@@ -108,6 +123,41 @@ class ProductDataFixtureLoader {
 			default:
 				$productData->setAvailability(null);
 		}
+		$productData->setParameters($this->getProductParameterValuesDataFromString($row[12]));
+
 		return $productData;
+	}
+
+	/**
+	 * @param string $string
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 */
+	private function getProductParameterValuesDataFromString($string) {
+		$rows = explode(';', $string);
+
+		$productParameterValuesData = array();
+		foreach ($rows as $row) {
+			$rowData = explode('=', $row);
+			if (count($rowData) !== 2) {
+				continue;
+			}
+
+			list($parameterName, $valueText) = $rowData;
+
+			if (!isset($this->parameters[$parameterName])) {
+				$this->parameters[$parameterName] = new Parameter(new ParameterData($parameterName));
+			}
+
+			if (!isset($this->parameterValues[$valueText])) {
+				$this->parameterValues[$valueText] = new ParameterValue(new ParameterValueData($valueText));
+			}
+
+			$productParameterValueData = new ProductParameterValueData();
+			$productParameterValueData->setParameter($this->parameters[$parameterName]);
+			$productParameterValueData->setValue($this->parameterValues[$valueText]);
+			$productParameterValuesData[] = $productParameterValueData;
+		}
+
+		return $productParameterValuesData;
 	}
 }
