@@ -118,7 +118,7 @@ class CustomerController extends Controller {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', array('id' => 'id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', array('id' => 'id'))
-			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
+			->setConfirmMessage('Opravdu chcete odstranit tohoto zákazníka?');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
