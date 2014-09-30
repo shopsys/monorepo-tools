@@ -133,7 +133,7 @@ class OrderData {
 	private $note;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemData[]
 	 */
 	private $items;
 
@@ -283,7 +283,7 @@ class OrderData {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItemData[]
 	 */
 	public function getItems() {
 		return $this->items;
@@ -465,7 +465,7 @@ class OrderData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem[] $items
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData[] $items
 	 */
 	public function setItems(array $items) {
 		$this->items = $items;
