@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
+use SS6\ShopBundle\Model\Grid\Grid;
 use Symfony\Component\Routing\Router;
 
 class ActionColumn {
@@ -98,7 +98,7 @@ class ActionColumn {
 
 	/**
 	 * @param string $classAttribute
-	 * @return \SS6\ShopBundle\Model\PKGrid\ActionColumn
+	 * @return \SS6\ShopBundle\Model\Grid\ActionColumn
 	 */
 	public function setClassAttribute($classAttribute) {
 		$this->classAttributte = $classAttribute;
@@ -108,7 +108,7 @@ class ActionColumn {
 
 	/**
 	 * @param string $confirmMessage
-	 * @return \SS6\ShopBundle\Model\PKGrid\ActionColumn
+	 * @return \SS6\ShopBundle\Model\Grid\ActionColumn
 	 */
 	public function setConfirmMessage($confirmMessage) {
 		$this->confirmMessage = $confirmMessage;
@@ -125,7 +125,7 @@ class ActionColumn {
 		$parameters = $this->additionalRouteParams;
 
 		foreach ($this->bindingRouteParams as $key => $queryId) {
-			$parameters[$key] = PKGrid::getValueFromRowByQueryId($row, $queryId);
+			$parameters[$key] = Grid::getValueFromRowByQueryId($row, $queryId);
 		}
 		
 		return $this->router->generate($this->route, $parameters, true);

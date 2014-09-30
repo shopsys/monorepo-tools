@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use SS6\ShopBundle\Form\Admin\Vat\VatFormType;
-use SS6\ShopBundle\Model\PKGrid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatGridFactory;

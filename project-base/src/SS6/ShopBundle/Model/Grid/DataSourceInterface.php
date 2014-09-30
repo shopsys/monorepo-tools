@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
 interface DataSourceInterface {
 	

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid\InlineEdit;
+namespace SS6\ShopBundle\Model\Grid\InlineEdit;
 
-use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
-use SS6\ShopBundle\Model\PKGrid\GridFactoryInterface;
+use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,13 +15,13 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\GridFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactoryInterface
 	 */
 	private $gridFactory;
 
 	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\PKGrid\GridFactoryInterface $gridFactory
+	 * @param \SS6\ShopBundle\Model\Grid\GridFactoryInterface $gridFactory
 	 */
 	public function __construct(FormFactory $formFactory, GridFactoryInterface $gridFactory) {
 		$this->formFactory = $formFactory;
@@ -43,7 +43,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $rowId
 	 * @return int
-	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException
+	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $rowId) {
 		$form = $this->getForm($rowId);
@@ -55,7 +55,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 				/* @var $error \Symfony\Component\Form\FormError */
 				$formErrors[] = $error->getMessage();
 			}
-			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException($formErrors);
+			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
 
 		$formDataObject = $form->getData();
@@ -70,7 +70,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	}
 	
 	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function getGrid() {
 		$grid = $this->gridFactory->create();

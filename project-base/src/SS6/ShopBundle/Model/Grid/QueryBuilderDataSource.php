@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
 use Doctrine\DBAL\SQLParserUtils;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\ResultSetMapping;
-use SS6\ShopBundle\Model\PKGrid\DataSourceInterface;
+use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 
 class QueryBuilderDataSource implements DataSourceInterface {
 

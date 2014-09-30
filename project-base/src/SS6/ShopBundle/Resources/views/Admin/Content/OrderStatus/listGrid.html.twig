@@ -1,10 +1,10 @@
-{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
-{% block pkgrid_value_cell_id_name %}
+{% block grid_value_cell_id_name %}
 	<a href="{{ url('admin_orderstatus_edit', { id: row.os.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block pkgrid_action_cell_type_delete %}
+{% block grid_action_cell_type_delete %}
 	{% if row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
 		<span title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám."
 			class="js-order-status-list-no-delete table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
@@ -32,11 +32,11 @@
 	{% endif %}
 {% endblock %}
 
-{% block pkgrid_no_data %}
+{% block grid_no_data %}
 	Nebyl nalezen žádný stav objednávek.
 {% endblock %}
 
-{% block pkgrid_pager_totalcount %}
+{% block grid_pager_totalcount %}
 	{% set entityName = 'stavů objednávek' %}
 	{{ parent() }}
 {% endblock %}

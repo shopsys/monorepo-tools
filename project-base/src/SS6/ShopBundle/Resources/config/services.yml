@@ -288,11 +288,11 @@ services:
   ss6.shop.payment.price_calculation:
     class: SS6\ShopBundle\Model\Payment\PriceCalculation
 
-  ss6.shop.pkgrid.factory:
-    class: SS6\ShopBundle\Model\PKGrid\PKGridFactory
+  ss6.shop.grid.factory:
+    class: SS6\ShopBundle\Model\Grid\GridFactory
 
-  ss6.shop.pkgrid.inline_edit.inline_edit_service:
-    class: SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService
+  ss6.shop.grid.inline_edit.inline_edit_service:
+    class: SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
     arguments:
       - @service_container
 

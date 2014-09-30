@@ -1,33 +1,33 @@
-{% block pkgrid %}
-<div class="grid js-pkgrid" {% spaceless %}
+{% block grid %}
+<div class="grid js-grid" {% spaceless %}
 		{% if grid.inlineEdit %}
 			data-inline-edit-service-name="{{ grid.inlineEditService.serviceName }}"
 			data-inline-edit-theme-json="{{ gridView.theme|json_encode() }}"
-			data-inline-edit-url-get-form="{{ url('admin_pkgrid_getform') }}"
-			data-inline-edit-url-save-form="{{ url('admin_pkgrid_saveform') }}"
+			data-inline-edit-url-get-form="{{ url('admin_grid_getform') }}"
+			data-inline-edit-url-save-form="{{ url('admin_grid_saveform') }}"
 		{% endif %}
 	{% endspaceless %}>
 
 	{% if grid.inlineEdit %}
-		{{ gridView.renderBlock('pkgrid_inline_edit_add_button') }}
+		{{ gridView.renderBlock('grid_inline_edit_add_button') }}
 	{% endif %}
 
 	{% if grid.rows is not empty or grid.inlineEdit %}
 		<div class="js-inline-edit-data-container{% if grid.rows is empty and grid.inlineEdit %} hidden{% endif %}">
 			<div class="grid_header">
 			{% if grid.allowedPaging %}
-				{{ gridView.renderBlock('pkgrid_pager') }}
+				{{ gridView.renderBlock('grid_pager') }}
 			{% endif %}
 			</div>
 			<div class="grid_body table-responsive">
 				<table class="table table-striped table-hover">
-					{{ gridView.renderBlock('pkgrid_titles') }}
-					{{ gridView.renderBlock('pkgrid_rows') }}
+					{{ gridView.renderBlock('grid_titles') }}
+					{{ gridView.renderBlock('grid_rows') }}
 				</table>
 			</div>
 			<div class="grid_footer">
 				{% if grid.allowedPaging %}
-					{{ gridView.renderBlock('pkgrid_pager') }}
+					{{ gridView.renderBlock('grid_pager') }}
 				{% endif %}
 			</div>
 		</div>
@@ -35,22 +35,22 @@
 
 	{% if grid.rows is empty %}
 		<div class="in-message in-message--info js-inline-edit-no-data">
-			{{ gridView.renderBlock('pkgrid_no_data') }}
+			{{ gridView.renderBlock('grid_no_data') }}
 		</div>
 	{% endif %}
 </div>
 {% endblock %}
 
-{% block pkgrid_no_data %}
+{% block grid_no_data %}
 	Nebyly nalezeny žádné záznamy.
 {% endblock %}
 
 
-{% block pkgrid_value_cell %}
+{% block grid_value_cell %}
 	{{ value }}
 {% endblock%}
 
-{% block pkgrid_titles %}
+{% block grid_titles %}
 	<thead>
 		<tr class="grid-row-titles">
 			{% for column in grid.columns %}
@@ -83,11 +83,11 @@
 	</thead>
 {% endblock %}
 
-{% block pkgrid_rows %}
+{% block grid_rows %}
 	<tbody class="js-inline-edit-rows">
 		{% for row in grid.rows %}
 			{{ gridView.renderBlock(
-				'pkgrid_row',
+				'grid_row',
 				{
 					loopIndex: loop.index,
 					lastRow: loop.last,
@@ -97,7 +97,7 @@
 		{% endfor %}
 		{% if grid.inlineEdit %}
 			{{ gridView.renderBlock(
-				'pkgrid_row',
+				'grid_row',
 				{
 					loopIndex: 0,
 					lastRow: false,
@@ -109,12 +109,12 @@
 	</tbody>
 {% endblock %}
 
-{% block pkgrid_row %}
+{% block grid_row %}
 	{% set emptyRow = emptyRow|default(false) %}
-	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} table-inline-edit hidden js-pkgrid-empty-row{% else %} js-pkgrid-row{% endif %}"
+	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if emptyRow %} table-inline-edit hidden js-grid-empty-row{% else %} js-grid-row{% endif %}"
 			{% if grid.inlineEdit and not emptyRow %} data-inline-edit-row-id="{{ grid.getInlineEditRowId(row) }}"{% endif %}>
 		{% for column in grid.columns %}
-			<td class="js-pkgrid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
+			<td class="js-grid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
 				{% if not emptyRow %}
 					{{ gridView.renderCell(column, row)|raw }}
 				{% endif %}
@@ -151,7 +151,7 @@
 	</tr>
 {% endblock %}
 
-{% block pkgrid_action_cell %}
+{% block grid_action_cell %}
 	{% if actionColumn.type == 'edit' %}
 		{% set icon = 'pencil' %}
 	{% elseif actionColumn.type == 'delete' %}
@@ -166,14 +166,14 @@
 	><i class="fa fa-{{ icon }}"></i></a>
 {% endblock %}
 
-{% block pkgrid_pager_totalcount %}
+{% block grid_pager_totalcount %}
 	<strong class="left mt-half form-fake">
 		Právě zobrazuji
 		{{ ('%count% ' ~ entityName|default('záznamů')|trim ~ '. ') | transchoice(grid.totalCount, {'%count%': grid.totalCount}) }}
 	</strong>
 {% endblock %}
 
-{% block pkgrid_pager_selectpage %}
+{% block grid_pager_selectpage %}
 	{% spaceless %}
 		<ul class="pagination mb-0 mt-half">
 
@@ -227,22 +227,22 @@
 			{% endif %}
 		</ul>
 
-		<div class="js-pkgrid-go-to box-grid-actions__to-page clear-r small">
+		<div class="js-grid-go-to box-grid-actions__to-page clear-r small">
 			<span>Přejít na stránku:</span>
 			<input
 				type="number"
 				min="1"
 				max="{{ grid.pageCount }}"
 				value="{{ grid.page }}"
-				class="current form-control text-center js-pkgrid-go-to-input ml-half mr-half input-xs box-grid-actions__input"
+				class="current form-control text-center js-grid-go-to-input ml-half mr-half input-xs box-grid-actions__input"
 				size="2"
 			/>
-			<a class="btn btn-primary btn-xs js-pkgrid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
+			<a class="btn btn-primary btn-xs js-grid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
 		</div>
 	{% endspaceless %}
 {% endblock %}
 
-{% block pkgrid_pager_results_perpage %}
+{% block grid_pager_results_perpage %}
 	<div class="right mb-half small">
 		<span class="form-inline">
 			{{ 'Položek na stránku:'|trans }}
@@ -255,25 +255,25 @@
 	</div>
 {% endblock %}
 
-{% block pkgrid_pager %}
+{% block grid_pager %}
 	<div class="text-center mb-half box-grid-actions">
-		{{ gridView.renderBlock('pkgrid_pager_totalcount') }}
-		{{ gridView.renderBlock('pkgrid_pager_results_perpage') }}
+		{{ gridView.renderBlock('grid_pager_totalcount') }}
+		{{ gridView.renderBlock('grid_pager_results_perpage') }}
 		{% if grid.pageCount > 1 %}
-			{{ gridView.renderBlock('pkgrid_pager_selectpage') }}
+			{{ gridView.renderBlock('grid_pager_selectpage') }}
 		{% endif %}
 	</div>
 {% endblock %}
 
-{% block pkgrid_value_cell_type_boolean %}
+{% block grid_value_cell_type_boolean %}
 	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano' : 'Ne' }}"></span>
 {% endblock %}
 
-{% block pkgrid_value_cell_type_DateTime %}
+{% block grid_value_cell_type_DateTime %}
 	{{ value.format('j. n. Y G:i') }}
 {% endblock %}
 
-{% block pkgrid_hidden_inputs %}
+{% block grid_hidden_inputs %}
 	{% spaceless %}
 		{% set name = name|default('') %}
 		{% if parameter is iterable %}
@@ -287,7 +287,7 @@
 					{% set name = key %}
 				{% endif %}
 
-					{{ block('pkgrid_hidden_inputs') }}
+					{{ block('grid_hidden_inputs') }}
 				{% set parameter = currentParameter %}
 				{% set name = currentName %}
 			{% endfor %}
@@ -297,7 +297,7 @@
 	{% endspaceless %}
 {% endblock %}
 
-{% block pkgrid_inline_edit_add_button %}
+{% block grid_inline_edit_add_button %}
 	<a href="#" class="btn btn-primary mb-1 js-inline-edit-add">
 		{{ addEntity|default('Vytvořit záznam') }}
 	</a>

@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\PKGrid\ActionColumn;
-use SS6\ShopBundle\Model\PKGrid\GridFactoryInterface;
-use SS6\ShopBundle\Model\PKGrid\PKGridFactory;
-use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\ActionColumn;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 
 class VatGridFactory implements GridFactoryInterface {
 
@@ -16,21 +16,21 @@ class VatGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\PKGridFactory
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\PKGrid\PKGridFactory $gridFactory
+	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
 	 */
-	public function __construct(EntityManager $em, PKGridFactory $gridFactory) {
+	public function __construct(EntityManager $em, GridFactory $gridFactory) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();

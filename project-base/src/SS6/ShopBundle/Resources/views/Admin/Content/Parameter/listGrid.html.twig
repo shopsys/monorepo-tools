@@ -1,15 +1,15 @@
-{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
-{% block pkgrid_no_data %}
+{% block grid_no_data %}
 	Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit.
 {% endblock %}
 
-{% block pkgrid_pager_totalcount %}
+{% block grid_pager_totalcount %}
 	{% set entityName = 'parametry' %}
 	{{ parent() }}
 {% endblock %}
 
-{% block pkgrid_inline_edit_add_button %}
+{% block grid_inline_edit_add_button %}
 	{% set addEntity = 'Vytvořit parametr' %}
 	{{ parent() }}
 {% endblock %}

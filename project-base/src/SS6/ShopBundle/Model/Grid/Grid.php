@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
-use SS6\ShopBundle\Model\PKGrid\ActionColumn;
-use SS6\ShopBundle\Model\PKGrid\Column;
-use SS6\ShopBundle\Model\PKGrid\DataSourceInterface;
-use SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface;
-use SS6\ShopBundle\Model\PKGrid\PKGridView;
+use SS6\ShopBundle\Model\Grid\ActionColumn;
+use SS6\ShopBundle\Model\Grid\Column;
+use SS6\ShopBundle\Model\Grid\DataSourceInterface;
+use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
+use SS6\ShopBundle\Model\Grid\GridView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -14,7 +14,7 @@ use Twig_Environment;
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class PKGrid {
+class Grid {
 
 	const GET_PARAMETER = 'g';
 
@@ -24,12 +24,12 @@ class PKGrid {
 	private $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\Column[]
+	 * @var \SS6\ShopBundle\Model\Grid\Column[]
 	 */
 	private $columns = array();
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\ActionColumn[]
+	 * @var \SS6\ShopBundle\Model\Grid\ActionColumn[]
 	 */
 	private $actionColumns = array();
 
@@ -109,7 +109,7 @@ class PKGrid {
 	private $twig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\DataSourceInterface
+	 * @var \SS6\ShopBundle\Model\Grid\DataSourceInterface
 	 */
 	private $dataSource;
 
@@ -119,16 +119,16 @@ class PKGrid {
 	private $actionColumnClassAttribute = '';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
+	 * @var \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface|null
 	 */
 	private $inlineEditService;
 
 	/**
 	 * @param string $id
-	 * @param \SS6\ShopBundle\Model\PKGrid\DataSourceInterface $dataSource
-	 * @param \SS6\ShopBundle\Model\PKGrid\RequestStack $requestStack
-	 * @param \SS6\ShopBundle\Model\PKGrid\Router $router
-	 * @param \SS6\ShopBundle\Model\PKGrid\Twig_Environment $twig
+	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
+	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
+	 * @param \SS6\ShopBundle\Model\Grid\Router $router
+	 * @param \SS6\ShopBundle\Model\Grid\Twig_Environment $twig
 	 */
 	public function __construct(
 		$id,
@@ -139,7 +139,7 @@ class PKGrid {
 	) {
 		if (empty($id)) {
 			$message = 'Grid id cannot be empty.';
-			throw new \SS6\ShopBundle\Model\PKGrid\Exception\EmptyGridIdException($message);
+			throw new \SS6\ShopBundle\Model\Grid\Exception\EmptyGridIdException($message);
 		}
 
 		$this->id = $id;
@@ -159,11 +159,11 @@ class PKGrid {
 	 * @param string $queryId
 	 * @param string $title
 	 * @param boolean $sortable
-	 * @return \SS6\ShopBundle\Model\PKGrid\Column
+	 * @return \SS6\ShopBundle\Model\Grid\Column
 	 */
 	public function addColumn($id, $queryId, $title, $sortable = false) {
 		if (array_key_exists($id, $this->columns)) {
-			throw new \SS6\ShopBundle\Model\PKGrid\Exception\DuplicateColumnIdException(
+			throw new \SS6\ShopBundle\Model\Grid\Exception\DuplicateColumnIdException(
 				'Duplicate column id "' . $id . '" in grid "' . $this->id .  '"'
 			);
 		}
@@ -178,7 +178,7 @@ class PKGrid {
 	 * @param string $route
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
-	 * @return \SS6\ShopBundle\Model\PKGrid\ActionColumn
+	 * @return \SS6\ShopBundle\Model\Grid\ActionColumn
 	 */
 	public function addActionColumn($type, $name, $route, array $bindingRouteParams = null, 
 		array $additionalRouteParams = null
@@ -197,7 +197,7 @@ class PKGrid {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface $inlineEditService
+	 * @param \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface $inlineEditService
 	 */
 	public function setInlineEditService(GridInlineEditInterface $inlineEditService) {
 		$this->inlineEditService = $inlineEditService;
@@ -211,7 +211,7 @@ class PKGrid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface|null
+	 * @return \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface|null
 	 */
 	public function getInlineEditService() {
 		return $this->inlineEditService;
@@ -222,7 +222,7 @@ class PKGrid {
 	 * @return mixed
 	 */
 	public function getInlineEditRowId($row) {
-		return PKGrid::getValueFromRowByQueryId($row, $this->getInlineEditService()->getQueryId());
+		return Grid::getValueFromRowByQueryId($row, $this->getInlineEditService()->getQueryId());
 	}
 
 	/**
@@ -233,14 +233,14 @@ class PKGrid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGridView
+	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createView() {
 		if ($this->isAllowedPaging()) {
 			$this->executeTotalQuery();
 		}
 		$this->loadRows();
-		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
+		$gridView = new GridView($this, $this->requestStack, $this->router, $this->twig);
 
 		return $gridView;
 	}
@@ -248,11 +248,11 @@ class PKGrid {
 	/**
 	 * @param string $queryId
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGridView
+	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createViewWithOneRow($queryId, $rowId) {
 		$this->loadRowsWithOneRow($queryId, $rowId);
-		$gridView = new PKGridView($this, $this->requestStack, $this->router, $this->twig);
+		$gridView = new GridView($this, $this->requestStack, $this->router, $this->twig);
 
 		return $gridView;
 	}
@@ -289,14 +289,14 @@ class PKGrid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\Column[]
+	 * @return \SS6\ShopBundle\Model\Grid\Column[]
 	 */
 	public function getColumns() {
 		return $this->columns;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\PKGrid\ActionColumn[]
+	 * @return \SS6\ShopBundle\Model\Grid\ActionColumn[]
 	 */
 	public function getActionColumns() {
 		return $this->actionColumns;

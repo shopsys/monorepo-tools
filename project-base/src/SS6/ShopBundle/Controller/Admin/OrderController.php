@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -82,8 +82,8 @@ class OrderController extends Controller {
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 
 		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder

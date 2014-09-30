@@ -7,7 +7,7 @@ use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleData;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -71,8 +71,8 @@ class ArticleController extends Controller {
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 

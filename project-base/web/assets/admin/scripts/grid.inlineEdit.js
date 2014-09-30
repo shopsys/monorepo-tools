@@ -1,21 +1,21 @@
 (function ($){
 	
 	SS6 = window.SS6 || {};
-	SS6.pkgrid = SS6.pkgrid || {};
-	SS6.pkgrid.inlineEdit = SS6.pkgrid.inlineEdit || {};
+	SS6.grid = SS6.grid || {};
+	SS6.grid.inlineEdit = SS6.grid.inlineEdit || {};
 	
-	SS6.pkgrid.inlineEdit.init = function (formElement) {
-		$('.js-pkgrid[data-inline-edit-service-name]').each(SS6.pkgrid.inlineEdit.bind);
+	SS6.grid.inlineEdit.init = function (formElement) {
+		$('.js-grid[data-inline-edit-service-name]').each(SS6.grid.inlineEdit.bind);
 	}
 	
-	SS6.pkgrid.inlineEdit.bind = function () {
+	SS6.grid.inlineEdit.bind = function () {
 		var $grid = $(this);
 		
 		$grid.on('click', '.js-inline-edit-edit', function() {
-			var $row = $(this).closest('.js-pkgrid-row');
-			if (SS6.pkgrid.inlineEdit.isRowEnabled($row)) {
-				SS6.pkgrid.inlineEdit.disableRow($row);
-				SS6.pkgrid.inlineEdit.startEditRow($row, $grid);
+			var $row = $(this).closest('.js-grid-row');
+			if (SS6.grid.inlineEdit.isRowEnabled($row)) {
+				SS6.grid.inlineEdit.disableRow($row);
+				SS6.grid.inlineEdit.startEditRow($row, $grid);
 			}
 			return false;
 		});
@@ -23,32 +23,32 @@
 		$grid.on('click', '.js-inline-edit-add', function() {
 			$grid.find('.js-inline-edit-no-data').remove();
 			$grid.find('.js-inline-edit-data-container').removeClass('hidden');
-			SS6.pkgrid.inlineEdit.addNewRow($grid);
+			SS6.grid.inlineEdit.addNewRow($grid);
 		});
 		
 		$grid.on('click', '.js-inline-edit-cancel', function() {
-			var $formRow = $(this).closest('.js-pkgrid-editing-row');
+			var $formRow = $(this).closest('.js-grid-editing-row');
 			if (confirm('Opravdu chcete zahodit všechny změny?')) {
-				SS6.pkgrid.inlineEdit.cancelEdit($formRow);
+				SS6.grid.inlineEdit.cancelEdit($formRow);
 			}
 			return false;
 		});
 		
 		$grid.on('click', '.js-inline-edit-save', function() {
-			SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
+			SS6.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
 			return false;
 		});
 		
-		$grid.on('keyup', '.js-pkgrid-editing-row input', function(event) {
+		$grid.on('keyup', '.js-grid-editing-row input', function(event) {
 			if (event.keyCode == 13) { // enter
-				SS6.pkgrid.inlineEdit.saveRow($(this).closest('.js-pkgrid-editing-row'), $grid);
+				SS6.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
 			}
 			return false;
 		});
 		
 	}
 	
-	SS6.pkgrid.inlineEdit.saveRow = function ($formRow, $grid) {
+	SS6.grid.inlineEdit.saveRow = function ($formRow, $grid) {
 		var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
 		var $saving = $formRow.find('.js-inline-edit-saving').show();
 		var $virtualForm = $('<form>')
@@ -79,7 +79,7 @@
 		});
 	}
 	
-	SS6.pkgrid.inlineEdit.startEditRow = function ($row, $grid) {
+	SS6.grid.inlineEdit.startEditRow = function ($row, $grid) {
 		$.ajax({
 			url: $grid.data('inline-edit-url-get-form'),
 			type: 'POST',
@@ -89,7 +89,7 @@
 			},
 			dataType: 'json',
 			success: function (formData) {
-				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
+				var $formRow = SS6.grid.inlineEdit.createFormRow($grid, formData);
 				$formRow.find('.js-inline-edit-saving').hide();
 				$row.replaceWith($formRow);
 				$formRow.data('$originalRow', $row);
@@ -97,7 +97,7 @@
 		});
 	}
 	
-	SS6.pkgrid.inlineEdit.addNewRow = function ($grid) {
+	SS6.grid.inlineEdit.addNewRow = function ($grid) {
 		$.ajax({
 			url: $grid.data('inline-edit-url-get-form'),
 			type: 'POST',
@@ -106,41 +106,41 @@
 			},
 			dataType: 'json',
 			success: function (formData) {
-				var $formRow = SS6.pkgrid.inlineEdit.createFormRow($grid, formData);
+				var $formRow = SS6.grid.inlineEdit.createFormRow($grid, formData);
 				$formRow.find('.js-inline-edit-saving').hide();
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
 			}
 		});
 	}
 	
-	SS6.pkgrid.inlineEdit.cancelEdit = function ($formRow) {
+	SS6.grid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
 			$formRow.replaceWith($originalRow).remove();
-			SS6.pkgrid.inlineEdit.enableRow($originalRow);
+			SS6.grid.inlineEdit.enableRow($originalRow);
 		}
 		$formRow.remove();
 	}
 	
-	SS6.pkgrid.inlineEdit.disableRow = function ($row) {
+	SS6.grid.inlineEdit.disableRow = function ($row) {
 		return $row.addClass('js-inactive');
 	}
 	
-	SS6.pkgrid.inlineEdit.enableRow = function ($row) {
+	SS6.grid.inlineEdit.enableRow = function ($row) {
 		return $row.removeClass('js-inactive');
 	}
 	
-	SS6.pkgrid.inlineEdit.isRowEnabled = function ($row) {
+	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
 	}
 	
-	SS6.pkgrid.inlineEdit.createFormRow = function ($grid, formData) {
-		var $formRow = $grid.find('.js-pkgrid-empty-row').clone();
-		$formRow.removeClass('js-pkgrid-empty-row hidden').addClass('js-pkgrid-editing-row');
+	SS6.grid.inlineEdit.createFormRow = function ($grid, formData) {
+		var $formRow = $grid.find('.js-grid-empty-row').clone();
+		$formRow.removeClass('js-grid-empty-row hidden').addClass('js-grid-editing-row');
 		var $otherInputs = $formRow.find('.js-inline-edit-other-inputs');
 
 		$.each(formData, function(formName, formHtml) {
-			var $column = $formRow.find('.js-pkgrid-column-' + formName + ':first');
+			var $column = $formRow.find('.js-grid-column-' + formName + ':first');
 			if ($column.size() == 1) {
 				$column.html(formHtml);
 			} else {
@@ -152,7 +152,7 @@
 	}
 	
 	$(document).ready(function () {
-		SS6.pkgrid.inlineEdit.init();
+		SS6.grid.inlineEdit.init();
 	});
 	
 })(jQuery);

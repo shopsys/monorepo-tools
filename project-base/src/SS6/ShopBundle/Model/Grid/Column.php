@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
 class Column {
 
@@ -79,7 +79,7 @@ class Column {
 
 	/**
 	 * @param string $class
-	 * @return \SS6\ShopBundle\Model\PKGrid\Column
+	 * @return \SS6\ShopBundle\Model\Grid\Column
 	 */
 	public function setClassAttribute($class) {
 		$this->classAttribute = $class;

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
-use SS6\ShopBundle\Model\PKGrid\DataSourceInterface;
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
+use SS6\ShopBundle\Model\Grid\DataSourceInterface;
+use SS6\ShopBundle\Model\Grid\Grid;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
-class PKGridFactory {
+class GridFactory {
 
 	/**
 	 * @var \Symfony\Component\HttpFoundation\RequestStack
@@ -38,10 +38,10 @@ class PKGridFactory {
 
 	/**
 	 * @param string $gridId
-	 * @param \SS6\ShopBundle\Model\PKGrid\DataSourceInterface $dataSource
-	 * @return \SS6\ShopBundle\Model\PKGrid\PKGrid
+	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create($gridId, DataSourceInterface $dataSource) {
-		return new PKGrid($gridId, $dataSource, $this->requestStack, $this->router, $this->twig);
+		return new Grid($gridId, $dataSource, $this->requestStack, $this->router, $this->twig);
 	}
 }

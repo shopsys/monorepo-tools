@@ -8,7 +8,7 @@ use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\PKGrid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -109,8 +109,8 @@ class OrderStatusController extends Controller {
 	 * @Route("/order_status/list/")
 	 */
 	public function listAction() {
-		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder

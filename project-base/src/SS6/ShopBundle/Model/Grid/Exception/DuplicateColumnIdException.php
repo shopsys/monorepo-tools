@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid\Exception;
+namespace SS6\ShopBundle\Model\Grid\Exception;
 
 use Exception;
 

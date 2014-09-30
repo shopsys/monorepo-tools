@@ -1,14 +1,14 @@
-{% extends '@SS6Shop/Admin/Grid/PKGrid.html.twig' %}
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
-{% block pkgrid_value_cell_id_name %}
+{% block grid_value_cell_id_name %}
 	<a href="{{ url('admin_customer_edit', { id: row.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block pkgrid_value_cell_id_orders_sum_price %}
+{% block grid_value_cell_id_orders_sum_price %}
 	{{ value|price }}
 {% endblock %}
 
-{% block pkgrid_value_cell_id_last_order_at %}
+{% block grid_value_cell_id_last_order_at %}
 	{% if value is empty %}
 		-
 	{% else %}
@@ -16,11 +16,11 @@
 	{% endif %}
 {% endblock %}
 
-{% block pkgrid_no_data %}
+{% block grid_no_data %}
 	Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit.
 {% endblock %}
 
-{% block pkgrid_pager_totalcount %}
+{% block grid_pager_totalcount %}
 	{% set entityName = 'zákazníků' %}
 	{{ parent() }}
 {% endblock %}

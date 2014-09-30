@@ -7,15 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class PKGridController extends Controller {
+class GridController extends Controller {
 
 	/**
-	 * @Route("/_pkgrid/get_form/")
+	 * @Route("/_grid/get_form/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function getFormAction(Request $request) {
-		$inlineEditService = $this->get('ss6.shop.pkgrid.inline_edit.inline_edit_service');
-		/* @var $inlineEditService \SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService */
+		$inlineEditService = $this->get('ss6.shop.grid.inline_edit.inline_edit_service');
+		/* @var $inlineEditService \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService */
 
 		$renderedFormWidgets = $inlineEditService->getRenderedFormWidgets(
 			$request->get('serviceName'),
@@ -26,12 +26,12 @@ class PKGridController extends Controller {
 	}
 
 	/**
-	 * @Route("/_pkgrid/save_form/")
+	 * @Route("/_grid/save_form/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveFormAction(Request $request) {
-		$inlineEditService = $this->get('ss6.shop.pkgrid.inline_edit.inline_edit_service');
-		/* @var $inlineEditService \SS6\ShopBundle\Model\PKGrid\InlineEdit\InlineEditService */
+		$inlineEditService = $this->get('ss6.shop.grid.inline_edit.inline_edit_service');
+		/* @var $inlineEditService \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService */
 
 		$responseData = [];
 		$rowId = $request->get('rowId');
@@ -44,7 +44,7 @@ class PKGridController extends Controller {
 				$request->get('serviceName'),
 				$rowId
 			);
-		} catch (\SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidFormDataException $e) {
+		} catch (\SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
 			$responseData['errors'] = $e->getFormErrors();
 		}

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid\InlineEdit;
+namespace SS6\ShopBundle\Model\Grid\InlineEdit;
 
 use SS6\ShopBundle\Model\Form\MultipleFormSetting;
 use Symfony\Component\DependencyInjection\Container;
@@ -44,7 +44,7 @@ class InlineEditService {
 	 * @param string $serviceName
 	 * @param mixed $rowId
 	 * @return array
-	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
+	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException
 	 */
 	public function getRenderedFormWidgets($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
@@ -58,7 +58,7 @@ class InlineEditService {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $rowId
 	 * @return mixed
-	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
+	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException
 	 */
 	public function saveFormData($serviceName, Request $request, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
@@ -74,13 +74,13 @@ class InlineEditService {
 		$rowId = (int)$rowId; // $rowId is string from request - composite or string primary key not supported
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$grid = $gridInlineEdit->getGrid();
-		/* @var $grid \SS6\ShopBundle\Model\PKGrid\PKGrid */
+		/* @var $grid \SS6\ShopBundle\Model\Grid\Grid */
 
 		$gridView = $grid->createViewWithOneRow($gridInlineEdit->getQueryId(), $rowId);
 		$rows = $grid->getRows();
 		$rowData = array_pop($rows);
 		$gridView->setTheme($theme);
-		return $gridView->renderBlock('pkgrid_row', array(
+		return $gridView->renderBlock('grid_row', array(
 			'loopIndex' => 0,
 			'lastRow' => false,
 			'row' => $rowData,
@@ -90,8 +90,8 @@ class InlineEditService {
 
 	/**
 	 * @param string $serviceName
-	 * @return \SS6\ShopBundle\Model\PKGrid\InlineEdit\GridInlineEditInterface
-	 * @throws \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException
+	 * @return \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface
+	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException
 	 */
 	private function getInlineEditService($serviceName) {
 		$gridInlineEdit = $this->container->get($serviceName, Container::NULL_ON_INVALID_REFERENCE);
@@ -99,7 +99,7 @@ class InlineEditService {
 		if ($gridInlineEdit instanceof GridInlineEditInterface) {
 			return $gridInlineEdit;
 		} else {
-			throw new \SS6\ShopBundle\Model\PKGrid\InlineEdit\Exception\InvalidServiceException($serviceName);
+			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException($serviceName);
 		}
 	}
 

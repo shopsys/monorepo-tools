@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\PKGrid;
+namespace SS6\ShopBundle\Model\Grid;
 
-use SS6\ShopBundle\Model\PKGrid\PKGrid;
+use SS6\ShopBundle\Model\Grid\Grid;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
-class PKGridView {
+class GridView {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\PKGrid\PKGrid
+	 * @var \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	private $grid;
 
@@ -45,12 +45,12 @@ class PKGridView {
 	private $twig;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\PKGrid $grid
+	 * @param \SS6\ShopBundle\Model\Grid\Grid $grid
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param Twig_Environment $twig
 	 */
-	public function __construct(PKGrid $grid, RequestStack $requestStack, Router $router, Twig_Environment $twig) {
+	public function __construct(Grid $grid, RequestStack $requestStack, Router $router, Twig_Environment $twig) {
 		$this->grid = $grid;
 		$this->request = $requestStack->getMasterRequest();
 		$this->router = $router;
@@ -72,14 +72,14 @@ class PKGridView {
 			(array)$parameters,
 			$this->templateParameters
 		);
-		$this->renderBlock('pkgrid');
+		$this->renderBlock('grid');
 	}
 
 	/**
 	 * @param array|null $removeParameters
 	 */
 	public function renderHiddenInputs($removeParameters = null) {
-		$this->renderBlock('pkgrid_hidden_inputs', array(
+		$this->renderBlock('grid_hidden_inputs', array(
 			'parameter' => $this->grid->getUrlGridParameters(null, $removeParameters)
 		));
 	}
@@ -106,16 +106,16 @@ class PKGridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\Column $column
+	 * @param \SS6\ShopBundle\Model\Grid\Column $column
 	 * @param array $row
 	 */
 	public function renderCell(Column $column, array $row) {
 		$value = $this->getCellValue($column, $row);
 
 		$posibleBlocks = array(
-			'pkgrid_value_cell_id_' . $column->getId(),
-			'pkgrid_value_cell_type_' . $this->getVariableType($value),
-			'pkgrid_value_cell'
+			'grid_value_cell_id_' . $column->getId(),
+			'grid_value_cell_type_' . $this->getVariableType($value),
+			'grid_value_cell'
 		);
 		foreach ($posibleBlocks as $blockName) {
 			if ($this->blockExists($blockName)) {
@@ -126,13 +126,13 @@ class PKGridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\ActionColumn $actionColumn
+	 * @param \SS6\ShopBundle\Model\Grid\ActionColumn $actionColumn
 	 * @param array $row
 	 */
 	public function renderActionCell(ActionColumn $actionColumn, array $row) {
 		$posibleBlocks = array(
-			'pkgrid_action_cell_type_' . $actionColumn->getType(),
-			'pkgrid_action_cell',
+			'grid_action_cell_type_' . $actionColumn->getType(),
+			'grid_action_cell',
 		);
 		foreach ($posibleBlocks as $blockName) {
 			if ($this->blockExists($blockName)) {
@@ -216,12 +216,12 @@ class PKGridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\PKGrid\Column $column
+	 * @param \SS6\ShopBundle\Model\Grid\Column $column
 	 * @param array $row
 	 * @return mixed
 	 */
 	private function getCellValue(Column $column, $row) {
-		return PKGrid::getValueFromRowByQueryId($row, $column->getQueryId());
+		return Grid::getValueFromRowByQueryId($row, $column->getQueryId());
 	}
 
 	/**
