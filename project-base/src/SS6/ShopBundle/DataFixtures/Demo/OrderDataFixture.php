@@ -21,7 +21,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
-		$user = $userRepository->findUserByEmail('no-reply@netdevelo.cz');
+		$user = $userRepository->findUserByEmailAndDomain('no-reply@netdevelo.cz', 1);
 		$orderData = new OrderData();
 		$orderData->setTransport($this->getReference('transport_personal'));
 		$orderData->setPayment($this->getReference('payment_cash'));
@@ -235,7 +235,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$this->getReference('order_status_canceled')
 		);
 
-		$user = $userRepository->findUserByEmail('no-reply.1@netdevelo.cz');
+		$user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
 		$orderData = new OrderData();
 		$orderData->setTransport($this->getReference('transport_personal'));
 		$orderData->setPayment($this->getReference('payment_cash'));
@@ -267,7 +267,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$user
 		);
 
-		$user = $userRepository->findUserByEmail('no-reply.7@netdevelo.cz');
+		$user = $userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
 		$orderData = new OrderData();
 		$orderData->setTransport($this->getReference('transport_cp'));
 		$orderData->setPayment($this->getReference('payment_cod'));

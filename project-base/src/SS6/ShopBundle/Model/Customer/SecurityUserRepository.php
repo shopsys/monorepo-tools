@@ -3,14 +3,31 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use DateTime;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class SecurityUserRepository extends EntityRepository implements UserProviderInterface {
+
+	/**
+	 * @var SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 */
+	public function __construct(EntityManager $em, Domain $domain) {
+		$this->domain = $domain;
+		$userMetaData = $em->getMetadataFactory()->getMetadataFor(User::class);
+		parent::__construct($em, $userMetaData);
+	}
 
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
@@ -26,7 +43,10 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($email) {
-		$user = $this->findOneBy(array('email' => mb_strtolower($email)));
+		$user = $this->findOneBy(array(
+			'email' => mb_strtolower($email),
+			'domainId' => $this->domain->getId()
+		));
 
 		if ($user === null) {
 			$message = sprintf(

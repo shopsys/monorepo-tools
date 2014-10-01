@@ -30,7 +30,9 @@ class RegistrationService {
 			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
 			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
-			if (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->getEmail())) {
+			$isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->getEmail()));
+			$isSameDomain = ($userByEmail->getDomainId() === $userData->getDomainId());
+			if ($isSameEmail && $isSameDomain) {
 				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->getEmail());
 			}
 		}

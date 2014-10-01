@@ -2,3 +2,7 @@
 
 {% block title %}- Nový zákazník{% endblock %}
 {% block h1 %}Nový zákazník{% endblock %}
+
+{% block customer_domain %}
+	{{ form_row(form.userData.domainId, { label: 'Doména' }) }}
+{% endblock %}

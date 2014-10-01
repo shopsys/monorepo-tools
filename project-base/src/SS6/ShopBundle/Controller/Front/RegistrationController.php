@@ -16,6 +16,8 @@ class RegistrationController extends Controller {
 	public function registerAction(Request $request) {
 		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
 		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		$form = $this->createForm(new RegistrationFormType());
 
@@ -30,6 +32,7 @@ class RegistrationController extends Controller {
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
 				$userData = $form->getData();
+				$userData->setDomainId($domain->getId());
 				$user = $customerEditFacade->register($userData);
 
 				$this->login($user);

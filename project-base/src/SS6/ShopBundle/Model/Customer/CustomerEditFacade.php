@@ -70,7 +70,7 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function register(UserData $userData) {
-		$userByEmail = $this->userRepository->findUserByEmail($userData->getEmail());
+		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain($userData->getEmail(), $userData->getDomainId());
 
 		$billingAddress = new BillingAddress(new BillingAddressData());
 
@@ -78,7 +78,7 @@ class CustomerEditFacade {
 			$userData,
 			$billingAddress,
 			null,
-			$userByEmail
+			$userByEmailAndDomain
 		);
 
 		$this->em->persist($billingAddress);
@@ -101,13 +101,16 @@ class CustomerEditFacade {
 			$this->em->persist($deliveryAddress);
 		}
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUserData()->getEmail());
+		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
+			$customerData->getUserData()->getEmail(),
+			$customerData->getUserData()->getDomainId()
+		);
 
 		$user = $this->registrationService->create(
 			$customerData->getUserData(),
 			$billingAddress,
 			$deliveryAddress,
-			$userByEmail
+			$userByEmailAndDomain
 		);
 		$this->em->persist($user);
 		
@@ -153,8 +156,11 @@ class CustomerEditFacade {
 	public function editByAdmin($userId, CustomerData $customerData) {
 		$user = $this->edit($userId, $customerData);
 
-		$userByEmail = $this->userRepository->findUserByEmail($customerData->getUserData()->getEmail());
-		$this->registrationService->changeEmail($user, $customerData->getUserData()->getEmail(), $userByEmail);
+		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
+			$customerData->getUserData()->getEmail(),
+			$customerData->getUserData()->getDomainId()
+		);
+		$this->registrationService->changeEmail($user, $customerData->getUserData()->getEmail(), $userByEmailAndDomain);
 
 		$this->em->flush();
 

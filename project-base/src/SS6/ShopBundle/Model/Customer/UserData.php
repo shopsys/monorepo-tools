@@ -25,12 +25,19 @@ class UserData {
 	private $password;
 
 	/**
+	 * @var int
+	 */
+	private $domainId;
+
+	/**
+	 * @param int $domainId
 	 * @param string|null $firstName
 	 * @param string|null $lastName
 	 * @param string|null $email
 	 * @param string|null $password
 	 */
-	public function __construct($firstName = null, $lastName = null, $email = null, $password = null) {
+	public function __construct($domainId = 1, $firstName = null, $lastName = null, $email = null, $password = null) {
+		$this->domainId = $domainId;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
@@ -66,6 +73,20 @@ class UserData {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
+	}
+
+	/**
+	 * @param int $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
+	}
+
+	/**
 	 * @param string|null $firstName
 	 */
 	public function setFirstName($firstName) {
@@ -97,6 +118,7 @@ class UserData {
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function setFromEntity(User $user) {
+		$this->domainId = $user->getDomainId();
 		$this->firstName = $user->getFirstName();
 		$this->lastName = $user->getLastName();
 		$this->email = $user->getEmail();

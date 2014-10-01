@@ -37,7 +37,7 @@ class FormDetailExtension extends Twig_Extension {
 	public function getFunctions() {
 		return array(
 			new Twig_SimpleFunction('form_id', array($this, 'formId'), array('is_safe' => array('html'))),
-			new Twig_SimpleFunction('form_save', array($this, 'formSave'), array('is_safe' => array('html')))
+			new Twig_SimpleFunction('form_save', array($this, 'formSave'), array('is_safe' => array('html'))),
 		);
 	}
 
@@ -62,12 +62,12 @@ class FormDetailExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param type $object
+	 * @param mixed $object
 	 * @param \Symfony\Component\Form\FormView $form
 	 * @return string
 	 */
 	public function formSave($object, FormView $form) {
-		$template = '{{ form_widget(form.save, { label: label}) }}';
+		$template = '{{ form_widget(form.save, { label: label }) }}';
 		$parameters = array('form' => $form, 'label' => 'Vytvořit');
 		if ($object === null) {
 			return $this->getTemplatingService()->render($template, $parameters);

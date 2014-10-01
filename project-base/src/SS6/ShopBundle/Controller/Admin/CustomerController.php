@@ -80,6 +80,8 @@ class CustomerController extends Controller {
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 		$gridFactory = $this->get('ss6.shop.pkgrid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\PKGrid\PKGridFactory */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
@@ -97,6 +99,8 @@ class CustomerController extends Controller {
 				SUM(o.totalPrice) ordersSumPrice,
 				MAX(o.createdAt) lastOrderAt')
 			->from(User::class, 'u')
+			->where('u.domainId = :selectedDomainId')
+			->setParameter('selectedDomainId', $selectedDomain->getId())
 			->leftJoin('u.billingAddress', 'ba')
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
 			->groupBy('u.id');
@@ -134,8 +138,11 @@ class CustomerController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
 		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$domains = $domain->getAll();
 
-		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE), null, array(
+		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains), null, array(
 			'validation_groups' => array('Default', 'create'),
 		));
 

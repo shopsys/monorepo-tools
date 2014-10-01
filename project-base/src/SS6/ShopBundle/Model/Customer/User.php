@@ -13,11 +13,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(
  *   name="users",
+ *   uniqueConstraints={
+ *		@ORM\UniqueConstraint(name="email_domain", columns={"email", "domain_id"})
+ *   },
  *   indexes={
  *     @ORM\Index(columns={"email"})
  *   }
  * )
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Customer\SecurityUserRepository")
+ * @ORM\Entity
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
@@ -39,7 +42,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $lastName;
 	
 	/**
-	 * @ORM\Column(type="string", length=255, unique=true)
+	 * @ORM\Column(type="string", length=255)
 	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
 	 */
 	protected $email;
@@ -80,6 +83,12 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $lastLogin;
 
 	/**
+	 * @var int
+	 * @ORM\Column(type="integer")
+	 */
+	protected $domainId;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
@@ -95,6 +104,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		$this->billingAddress = $billingAddress;
 		$this->deliveryAddress = $deliveryAddress;
 		$this->createdAt = new DateTime();
+		$this->domainId = $userData->getDomainId();
 	}
 
 	/**
@@ -156,6 +166,20 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
 	public function onLogin() {
 		$this->lastLogin = new DateTime();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
+	}
+
+	/**
+	 * @param int $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
 	}
 
 	/**
@@ -230,6 +254,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 			$this->email,
 			$this->password,
 			time(), // lastActivity
+			$this->domainId,
 		));
 	}
 
@@ -241,7 +266,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 			$this->id,
 			$this->email,
 			$this->password,
-			$timestamp
+			$timestamp,
+			$this->domainId,
 		) = unserialize($serialized);
 		$this->lastActivity = new DateTime();
 		$this->lastActivity->setTimestamp($timestamp);
