@@ -2,22 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Order\Status;
 
-use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusService {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderService
-	 */
-	private $orderService;
-	
-	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
-	 */
-	public function __construct(OrderService $orderService) {
-		$this->orderService = $orderService;
-	}
 
 	/**
 	 * @param string $name
@@ -56,7 +43,17 @@ class OrderStatusService {
 				throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException($oldOrderStatus);
 			}
 
-			$this->orderService->changeOrdersStatus($ordersWithOldStatus, $newOrderStatus);
+			$this->changeOrdersStatus($ordersWithOldStatus, $newOrderStatus);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order[] $orders
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
+	 */
+	public function changeOrdersStatus(array $orders, OrderStatus $newOrderStatus) {
+		foreach ($orders as $order) {
+			$order->setStatus($newOrderStatus);
 		}
 	}
 }

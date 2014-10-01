@@ -245,7 +245,10 @@ services:
 
   ss6.shop.order.order_number_sequence_repository:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
-    
+
+  ss6.shop.order.order_price_calculation:
+    class: SS6\ShopBundle\Model\Order\PriceCalculation
+
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
 

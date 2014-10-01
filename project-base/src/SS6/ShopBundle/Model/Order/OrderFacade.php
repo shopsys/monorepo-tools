@@ -131,6 +131,7 @@ class OrderFacade {
 		);
 
 		$this->fillOrderItems($order, $this->cart);
+		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
 		$this->em->flush();
 
@@ -204,7 +205,9 @@ class OrderFacade {
 		}
 		$statusChanged = $order->getStatus()->getId() !== $orderData->getStatusId();
 		$this->orderService->editOrder($order, $orderData, $orderStatus, $user);
-		
+
+		$this->orderService->calculateTotalPrice($order);
+
 		$this->em->flush();
 		if ($statusChanged) {
 			$this->orderMailFacade->sendEmail($order);

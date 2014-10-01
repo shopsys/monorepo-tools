@@ -102,8 +102,8 @@
 									<tfoot>
 										<tr>
 											<th colspan="4">Celkem:</th>
-											<th class="text-right">{{ order.totalPrice|price }}</th>
-											<th></th>
+											<th class="text-right">{{ order.totalPriceWithVat|price }}</th>
+											<th class="text-right">{{ order.totalPriceWithoutVat|price }}</th>
 										</tr>
 									</tfoot>
 								</table>

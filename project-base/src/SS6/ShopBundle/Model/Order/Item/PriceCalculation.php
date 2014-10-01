@@ -37,7 +37,7 @@ class PriceCalculation {
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private function calculateTotalPrice(OrderItem $orderItem) {
+	public function calculateTotalPrice(OrderItem $orderItem) {
 		$vat = new Vat(new VatData('orderItemVat', $orderItem->getVatPercent()));
 
 		$totalPriceWithVat = $orderItem->getPriceWithVat() * $orderItem->getQuantity();
@@ -55,10 +55,14 @@ class PriceCalculation {
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem[] $orderItems
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
 	 */
-	public function calculateTotalPricesById($orderItems) {
+	public function calculateTotalPricesIndexedById($orderItems) {
 		$prices = array();
 
 		foreach ($orderItems as $orderItem) {
+			if ($orderItem->getId() === null) {
+				$message = 'OrderItem must be persistent and must have id';
+				throw new SS6\ShopBundle\Model\Order\Item\Exception\OrderItemHasNotIdException($message);
+			}
 			$prices[$orderItem->getId()] = $this->calculateTotalPrice($orderItem);
 		}
 
