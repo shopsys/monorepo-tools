@@ -4,14 +4,21 @@ namespace SS6\ShopBundle\Form\Admin\Customer;
 
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class UserFormType extends AbstractType {
 
+	/**
+	 * @var string
+	 */
 	private $scenario;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 */
 	private $domains;
 
 	/**
@@ -68,13 +75,10 @@ class UserFormType extends AbstractType {
 			));
 
 		if ($this->domains !== null) {
-			foreach ($this->domains as $domain) {
-				$domainsChoices[$domain->getId()] = $domain->getDomain();
-			}
 			$builder
 				->add('domainId', 'choice', array(
-				'required' => true,
-				'choices' => $domainsChoices,
+					'required' => true,
+					'choice_list' => new ObjectChoiceList($this->domains, 'domain', array(), null, 'id'),
 				));
 		}
 	}

@@ -156,11 +156,11 @@ class CustomerEditFacade {
 	public function editByAdmin($userId, CustomerData $customerData) {
 		$user = $this->edit($userId, $customerData);
 
-		$userByEmailAndDOmain = $this->userRepository->findUserByEmailAndDomain(
+		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
 			$customerData->getUserData()->getEmail(),
 			$customerData->getUserData()->getDomainId()
 		);
-		$this->registrationService->changeEmail($user, $customerData->getUserData()->getEmail(), $userByEmailAndDOmain);
+		$this->registrationService->changeEmail($user, $customerData->getUserData()->getEmail(), $userByEmailAndDomain);
 
 		$this->em->flush();
 

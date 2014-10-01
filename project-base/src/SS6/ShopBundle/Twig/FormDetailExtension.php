@@ -38,7 +38,6 @@ class FormDetailExtension extends Twig_Extension {
 		return array(
 			new Twig_SimpleFunction('form_id', array($this, 'formId'), array('is_safe' => array('html'))),
 			new Twig_SimpleFunction('form_save', array($this, 'formSave'), array('is_safe' => array('html'))),
-			new Twig_SimpleFunction('detailDomain', array($this, 'formDetailDomain'), array('is_safe' => array('html'))),
 		);
 	}
 
