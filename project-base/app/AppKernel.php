@@ -15,6 +15,7 @@ class AppKernel extends Kernel {
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 			new FM\ElfinderBundle\FMElfinderBundle(),
+			new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
 			new Kutny\AutowiringBundle\KutnyAutowiringBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),

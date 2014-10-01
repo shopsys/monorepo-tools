@@ -17,6 +17,7 @@
 		"doctrine/doctrine-bundle": "~1.2",
 		"doctrine/doctrine-fixtures-bundle": "2.2.*",
 		"egeloen/ckeditor-bundle": "2.4.*@dev",
+		"fp/jsformvalidator-bundle": "1.2.1",
 		"helios-ag/fm-elfinder-bundle": "1.x",
 		"incenteev/composer-parameter-handler": "~2.0",
 		"jakub-onderka/php-parallel-lint": "0.7",
