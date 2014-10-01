@@ -26,6 +26,12 @@ class MailTemplateRepository {
 		return $this->em->getRepository(MailTemplate::class);
 	}
 	
+	/**
+	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
+	 */
+	public function getAll() {
+		return $this->getMailTemplateRepository()->findAll();
+	}
 	
 	/**
 	 * @param string $templateName

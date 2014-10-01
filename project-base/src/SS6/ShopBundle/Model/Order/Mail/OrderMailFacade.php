@@ -11,8 +11,6 @@ use Swift_Mailer;
 
 class OrderMailFacade {
 
-	const STATUS_NAME_PREFIX = 'order_status_';
-	
 	/**
 	 * @var \Swift_Mailer
 	 */
@@ -76,27 +74,4 @@ class OrderMailFacade {
 		return $this->mailTemplateFacade->get($templateName);
 	}
 
-	/**
-	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
-	 */
-	public function getAllOrderStatusMailTemplates() {
-		$mailTemplates = array();
-		foreach ($this->orderStatusRepository->findAll() as $orderStatus) {
-			$mailTemplates[] = $this->getMailTemplateByStatus($orderStatus);
-		}
-
-		return $mailTemplates;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getNamesByMailTemplateName() {
-		$orderStatuses = $this->orderStatusRepository->findAll();
-		foreach ($orderStatuses as $orderStatus) {
-			$orderStatusNames[$this::STATUS_NAME_PREFIX . $orderStatus->getId()] = $orderStatus->getName();
-		}
-		
-		return $orderStatusNames;
-	}
 }

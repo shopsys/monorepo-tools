@@ -1,27 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Mail;
+namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
+use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MailTemplatesAllStatusesFormType extends AbstractType{
-
-	/**
-	 * @var array
-	 */
-	private $mailTemplateNames;
-
-	public function __construct($mailTemplateNames) {
-		$this->mailTemplateNames = $mailTemplateNames;
-	}
+class OrderStatusMailTemplatesFormType extends AbstractType {
 
 	/**
 	 * @return string
 	 */
 	public function getName() {
-		return 'mail_templates_all_statuses';
+		return 'order_status_mail_templates';
 	}
 
 	/**
@@ -29,9 +21,10 @@ class MailTemplatesAllStatusesFormType extends AbstractType{
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		foreach ($this->mailTemplateNames as $mailTemplateName) {
-			$builder->add($mailTemplateName, new MailTemplateFormType());
-		}
+		$builder
+			->add('templates', 'collection', array(
+				'type' => new MailTemplateFormType(),
+			));
 	}
 
 	/**
@@ -40,6 +33,7 @@ class MailTemplatesAllStatusesFormType extends AbstractType{
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
+			'data_class' => OrderStatusMailTemplatesData::class,
 		));
 	}
 

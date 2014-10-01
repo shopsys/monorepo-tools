@@ -32,7 +32,6 @@ class MailTemplateFormType extends AbstractType {
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím obsah emailu')),
 				),
-				'config_name' => 'email',
 			))
 			->add('save', 'submit');
 	}

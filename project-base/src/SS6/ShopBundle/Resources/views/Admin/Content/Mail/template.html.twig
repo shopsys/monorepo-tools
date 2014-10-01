@@ -11,16 +11,18 @@
 
 			{{ form_start(form) }}
 			{{ form_errors(form) }}
-			{% for key, name in orderStatusNames %}
-				<div class="toggle-container">
-				<h2 class ="cursor-pointer toggle-headline">{{ orderStatusNames[key] }}</h2>
-				<div class="wrap-group toggle-content toggle-close">
-				{{ form_row(form[key].subject, { label: 'Předmět'}) }}
-				{{ form_row(form[key].body, { label: 'Text'}) }}
-				{{ form_widget(form[key].save, { label: 'Uložit změny'}) }}
-				</div>
-				</div>
-			{% endfor %}
+				{% for orderStatusId, template in form.templates %}
+					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
+					
+					<div class="toggle-container">
+						<h2 class ="cursor-pointer toggle-headline">{{ orderStatus.name }}</h2>
+						<div class="wrap-group toggle-content toggle-close">
+							{{ form_row(template.subject, { label: 'Předmět'}) }}
+							{{ form_row(template.body, { label: 'Text'}) }}
+							{{ form_widget(template.save, { label: 'Uložit změny'}) }}
+						</div>
+					</div>
+				{% endfor %}
 			{{ form_end(form) }}
 
 		</div>
