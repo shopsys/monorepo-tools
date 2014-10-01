@@ -155,6 +155,9 @@ services:
   ss6.shop.domain.domain_factory:
     class: SS6\ShopBundle\Model\Domain\DomainFactory
 
+  ss6.shop.domain.selected_domain:
+    class: SS6\ShopBundle\Model\Domain\SelectedDomain
+
   ss6.shop.file_upload:
     class: SS6\ShopBundle\Model\FileUpload\FileUpload
     arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]

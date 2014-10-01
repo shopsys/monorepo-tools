@@ -1,0 +1,11 @@
+{% if domainConfigs|length > 1 %}
+	<ul class="nav nav-tabs mb-1" role="tablist">
+		{% for domainConfig in domainConfigs %}
+			<li {{ domainConfig.id == selectedDomainId ? 'class="active"' : '' }}>
+				<a href="{{ url('admin_domain_selectdomain', {id: domainConfig.id}) }}">
+					{{ domainConfig.domain }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

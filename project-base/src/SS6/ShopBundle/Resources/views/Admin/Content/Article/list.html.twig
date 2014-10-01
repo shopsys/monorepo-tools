@@ -4,6 +4,9 @@
 {% block h1 %}Přehled článků{% endblock %}
 
 {% block main_content %}
+	
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
 
