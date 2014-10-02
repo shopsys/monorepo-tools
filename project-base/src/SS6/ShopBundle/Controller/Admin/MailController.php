@@ -13,8 +13,8 @@ class MailController extends Controller {
 	 * @Route("/mail/template/")
 	 */
 	public function templateAction(Request $request) {
-		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
-		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$mailTemplateFacade = $this->get('ss6.shop.mail.mail_template_facade');
 		/* @var $mailTemplateFacade \SS6\ShopBundle\Model\Mail\MailTemplateFacade */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
@@ -31,7 +31,7 @@ class MailController extends Controller {
 		if ($form->isValid()) {
 			$mailTemplateFacade->saveMailTemplatesData($orderStatusMailTemplatesData->getTemplates());
 
-			$flashMessageText->addSuccess('Nastavení šablon e-mailů bylo upraveno');
+			$flashMessageSender->addSuccess('Nastavení šablony e-mailu bylo upraveno');
 			return $this->redirect($this->generateUrl('admin_mail_template'));
 		}
 

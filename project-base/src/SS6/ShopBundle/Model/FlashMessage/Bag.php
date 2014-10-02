@@ -39,23 +39,26 @@ class Bag {
 
 	/**
 	 * @param string|array $message
+	 * @param boolean $escape
 	 */
-	public function addError($message, $isRaw = false) {
-		$this->addMessage($message, $isRaw, self::KEY_ERROR);
+	public function addError($message, $escape = true) {
+		$this->addMessage($message, $escape, self::KEY_ERROR);
 	}
 
 	/**
 	 * @param string|array $message
+	 * @param boolean $escape
 	 */
-	public function addInfo($message, $isRaw = false) {
-		$this->addMessage($message, $isRaw, self::KEY_INFO);
+	public function addInfo($message, $escape = true) {
+		$this->addMessage($message, $escape, self::KEY_INFO);
 	}
 
 	/**
 	 * @param string|array $message
+	 * @param boolean $escape
 	 */
-	public function addSuccess($message, $isRaw = false) {
-		$this->addMessage($message, $isRaw, self::KEY_SUCCESS);
+	public function addSuccess($message, $escape = true) {
+		$this->addMessage($message, $escape, self::KEY_SUCCESS);
 	}
 
 	/**
@@ -109,16 +112,16 @@ class Bag {
 
 	/**
 	 * @param string|array $message
-	 * @param boolean $isRaw
+	 * @param boolean $escape
 	 * @param string $key
 	 */
-	private function addMessage($message, $isRaw, $key) {
+	private function addMessage($message, $escape, $key) {
 		if (is_array($message)) {
 			foreach ($message as $item) {
-				$this->addMessage($item, $isRaw, $key);
+				$this->addMessage($item, $escape, $key);
 			}
 		} else {
-			if (!$isRaw) {
+			if ($escape) {
 				$message = htmlspecialchars($message);
 			}
 

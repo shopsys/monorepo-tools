@@ -45,8 +45,8 @@ class SuperadminController extends Controller {
 	 * @Route("/superadmin/pricing/")
 	 */
 	public function pricingAction(Request $request) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
 		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
 
@@ -67,7 +67,7 @@ class SuperadminController extends Controller {
 			/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
 			$pricingSettingFacade->edit($pricingSettingData);
 
-			$flashMessageTwig->addSuccess('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', array(
+			$flashMessageSender->addSuccessTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', array(
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
 			));
 			return $this->redirect($this->generateUrl('admin_superadmin_index'));

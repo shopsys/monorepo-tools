@@ -28,8 +28,8 @@ class VatController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
@@ -37,7 +37,7 @@ class VatController extends Controller {
 		$fullName = $vatFacade->getById($id)->getName();
 		$vatFacade->deleteById($id);
 
-		$flashMessageTwig->addSuccess('DPH <strong>{{ name }}</strong> bylo smazáno', array(
+		$flashMessageSender->addSuccessTwig('DPH <strong>{{ name }}</strong> bylo smazáno', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_vat_list'));
@@ -51,8 +51,8 @@ class VatController extends Controller {
 		/* @var $vatRepository \SS6\ShopBundle\Model\Pricing\Vat\VatRepository */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
-		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.admin');
-		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$vats = $vatRepository->findAll();
 		$form = $this->createForm(new DefaultVatFormType($vats));
@@ -66,7 +66,7 @@ class VatController extends Controller {
 		if ($form->isValid()) {
 			$defaultVatFormData = $form->getData();
 			$vatFacade->setDefaultVat($defaultVatFormData['defaultVat']);
-			$flashMessageText->addSuccess('Nastavení výchozí sazby DPH bylo upraveno');
+			$flashMessageSender->addSuccess('Nastavení výchozí sazby DPH bylo upraveno');
 			
 			return $this->redirect($this->generateUrl('admin_vat_list'));
 		}

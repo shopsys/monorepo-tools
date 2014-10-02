@@ -18,8 +18,8 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$parameterRepository = $this->get('ss6.shop.product.parameter.parameter_repository');
@@ -47,14 +47,14 @@ class ProductController extends Controller {
 			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 			$product = $productEditFacade->edit($id, $form->getData());
 
-			$flashMessageTwig->addSuccess('Bylo upraveno zboží <strong>{{ name }}</strong>', array(
+			$flashMessageSender->addSuccessTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', array(
 				'name' => $product->getName(),
 			));
 			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -73,8 +73,8 @@ class ProductController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
 		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
@@ -93,7 +93,7 @@ class ProductController extends Controller {
 			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 			$product = $productEditFacade->create($form->getData());
 
-			$flashMessageTwig->addSuccess('Bylo vytvořeno zboží'
+			$flashMessageSender->addSuccessTwig('Bylo vytvořeno zboží'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $product->getName(),
 				'url' => $this->generateUrl('admin_product_edit', array('id' => $product->getId())),
@@ -102,7 +102,7 @@ class ProductController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
@@ -156,15 +156,15 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 
 		$productName = $productRepository->getById($id)->getName();
 		$this->get('ss6.shop.product.product_edit_facade')->delete($id);
 
-		$flashMessageTwig->addSuccess('Produkt <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $productName,
 		));
 		return $this->redirect($this->generateUrl('admin_product_list'));

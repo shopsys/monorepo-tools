@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\FlashMessage;
 
 use Twig_Environment;
 
-class TwigSender {
+class FlashMessageSender {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
@@ -25,26 +25,47 @@ class TwigSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addError($template, $parameters = array()) {
+	public function addErrorTwig($template, $parameters = array()) {
 		$message = $this->twigEnvironment->render($template, $parameters);
+		$this->flashMessageBag->addError($message, false);
+	}
+
+	/**
+	 * @param string $template
+	 * @param array $parameters
+	 */
+	public function addInfoTwig($template, $parameters = array()) {
+		$message = $this->twigEnvironment->render($template, $parameters);
+		$this->flashMessageBag->addInfo($message, false);
+	}
+
+	/**
+	 * @param string $template
+	 * @param array $parameters
+	 */
+	public function addSuccessTwig($template, $parameters = array()) {
+		$message = $this->twigEnvironment->render($template, $parameters);
+		$this->flashMessageBag->addSuccess($message, false);
+	}
+
+	/**
+	 * @param string|array $message
+	 */
+	public function addError($message) {
 		$this->flashMessageBag->addError($message, true);
 	}
 
 	/**
-	 * @param string $template
-	 * @param array $parameters
+	 * @param string|array $message
 	 */
-	public function addInfo($template, $parameters = array()) {
-		$message = $this->twigEnvironment->render($template, $parameters);
+	public function addInfo($message) {
 		$this->flashMessageBag->addInfo($message, true);
 	}
 
 	/**
-	 * @param string $template
-	 * @param array $parameters
+	 * @param string|array $message
 	 */
-	public function addSuccess($template, $parameters = array()) {
-		$message = $this->twigEnvironment->render($template, $parameters);
+	public function addSuccess($message) {
 		$this->flashMessageBag->addSuccess($message, true);
 	}
 
