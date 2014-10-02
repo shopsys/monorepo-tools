@@ -21,6 +21,28 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 
 		$mailTemplate = new MailTemplate('order_status_1', $mailTemplateData);
 		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('');
+		$mailTemplateData->setBody('');
+
+		$mailTemplate = new MailTemplate('order_status_2', $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('');
+		$mailTemplateData->setBody('');
+
+		$mailTemplate = new MailTemplate('order_status_3', $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('');
+		$mailTemplateData->setBody('');
+
+		$mailTemplate = new MailTemplate('order_status_4', $mailTemplateData);
+		$manager->persist($mailTemplate);
+
 		$manager->flush();
 	}
 

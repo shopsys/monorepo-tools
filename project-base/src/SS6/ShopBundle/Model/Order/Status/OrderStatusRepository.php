@@ -66,6 +66,19 @@ class OrderStatusRepository {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 */
+	public function getAllIndexedById() {
+		$orderStatusesIndexedById = array();
+
+		foreach ($this->findAll() as $orderStatus) {
+			$orderStatusesIndexedById[$orderStatus->getId()] = $orderStatus;
+		}
+
+		return $orderStatusesIndexedById;
+	}
+
+	/**
 	 * @param int $orderStatusId
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */

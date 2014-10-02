@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use Swift_Mailer;
 
 class OrderMailFacade {
@@ -26,18 +27,26 @@ class OrderMailFacade {
 	private $orderMailService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
+	 */
+	private $orderStatusRepository;
+
+	/**
 	 * @param \Swift_Mailer $mailer
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
 	 * @param \SS6\ShopBundle\Model\Order\Mail\OrderMailService $orderMailService
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
 	 */
 	public function __construct(
 		Swift_Mailer $mailer,
 		MailTemplateFacade $mailTemplateFacade,
-		OrderMailService $orderMailService
+		OrderMailService $orderMailService,
+		OrderStatusRepository $orderStatusRepository
 	) {
 		$this->mailer = $mailer;
 		$this->mailTemplateFacade = $mailTemplateFacade;
 		$this->orderMailService = $orderMailService;
+		$this->orderStatusRepository = $orderStatusRepository;
 	}
 
 	/**
@@ -64,4 +73,5 @@ class OrderMailFacade {
 
 		return $this->mailTemplateFacade->get($templateName);
 	}
+
 }

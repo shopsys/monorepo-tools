@@ -1,20 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Mail;
+namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
-use SS6\ShopBundle\Model\Mail\MailTemplateData;
+use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints;
 
-class MailTemplateFormType extends AbstractType {
-	
+class OrderStatusMailTemplatesFormType extends AbstractType {
+
 	/**
 	 * @return string
 	 */
 	public function getName() {
-		return 'mail_template';
+		return 'order_status_mail_templates';
 	}
 
 	/**
@@ -23,17 +22,9 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('subject', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím předmět')),
-				),
-			))
-			->add('body', 'ckeditor', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím obsah emailu')),
-				),
-			))
-			->add('save', 'submit');
+			->add('templates', 'collection', array(
+				'type' => new MailTemplateFormType(),
+			));
 	}
 
 	/**
@@ -41,8 +32,8 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => MailTemplateData::class,
 			'attr' => array('novalidate' => 'novalidate'),
+			'data_class' => OrderStatusMailTemplatesData::class,
 		));
 	}
 

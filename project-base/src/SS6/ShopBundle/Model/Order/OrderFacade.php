@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
+use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -71,6 +72,11 @@ class OrderFacade {
 	private $transportPriceCalculation;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
+	 */
+	private $orderMailFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
@@ -92,7 +98,8 @@ class OrderFacade {
 		OrderStatusRepository $orderStatusRepository,
 		CartItemPriceCalculation $cartItemPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
-		TransportPriceCalculation $transportPriceCalculation
+		TransportPriceCalculation $transportPriceCalculation,
+		OrderMailFacade $orderMailFacade
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -104,6 +111,7 @@ class OrderFacade {
 		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
+		$this->orderMailFacade = $orderMailFacade;
 	}
 
 	/**
@@ -194,10 +202,14 @@ class OrderFacade {
 		if ($orderData->getCustomerId() !== null) {
 			$user = $this->userRepository->getUserById($orderData->getCustomerId());
 		}
-
+		$statusChanged = $order->getStatus()->getId() !== $orderData->getStatusId();
 		$this->orderService->editOrder($order, $orderData, $orderStatus, $user);
-
+		
 		$this->em->flush();
+		if ($statusChanged) {
+			$this->orderMailFacade->sendEmail($order);
+		}
+
 		return $order;
 	}
 

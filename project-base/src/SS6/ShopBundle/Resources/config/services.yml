@@ -261,7 +261,10 @@ services:
   
   ss6.shop.order.order_status_facade:
     class: SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
-    
+
+  ss6.shop.order.order_status_mail_template_service:
+    class: SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService
+
   ss6.shop.order.order_status_repository:
     class: SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
     
