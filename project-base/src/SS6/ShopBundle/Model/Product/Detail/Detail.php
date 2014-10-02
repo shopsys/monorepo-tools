@@ -18,12 +18,23 @@ class Detail {
 	private $price;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	private $parameters;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
 	 */
-	public function __construct(Product $product, Price $price) {
+	public function __construct(
+		Product $product,
+		Price $price,
+		array $parameters
+	) {
 		$this->product = $product;
 		$this->price = $price;
+		$this->parameters = $parameters;
 	}
 
 	/**
@@ -38,6 +49,13 @@ class Detail {
 	 */
 	public function getPrice() {
 		return $this->price;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function getParameters() {
+		return $this->parameters;
 	}
 
 }
