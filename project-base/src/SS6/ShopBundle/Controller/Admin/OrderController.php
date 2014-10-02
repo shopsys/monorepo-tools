@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,7 +112,7 @@ class OrderController extends Controller {
 
 		$grid = $gridFactory->create('orderList', $dataSource);
 		$grid->allowPaging();
-		$grid->setDefaultOrder('number');
+		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('created_at', 'o.createdAt', 'Vytvořena', true);
