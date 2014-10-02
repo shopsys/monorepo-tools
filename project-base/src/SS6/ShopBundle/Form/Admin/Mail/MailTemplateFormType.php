@@ -23,16 +23,8 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('subject', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím předmět')),
-				),
-			))
-			->add('body', 'ckeditor', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím obsah emailu')),
-				),
-			))
+			->add('subject', 'text', array('required' => false))
+			->add('body', 'ckeditor', array('required' => false))
 			->add('save', 'submit');
 	}
 
