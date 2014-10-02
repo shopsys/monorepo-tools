@@ -7,6 +7,10 @@ Wrapping box with background
 		<p>Inner content, or anything</p>
 	</div>
 
+	<div class="wrap-box wrap-box--blank">
+		<p>Inner content, or anything. Modificator --blank</p>
+	</div>
+
 */
 
 .wrap-box {
@@ -15,4 +19,9 @@ Wrapping box with background
 	padding: @margin-gap;
 
 	background: @bg-box;
+}
+
+
+.wrap-box--blank {
+	padding: 0;
 }

@@ -1,0 +1,37 @@
+/*
+Expanding box
+=======
+Box, with input fields for loging in.
+
+	<div class="box-expand">
+		<h2 class="box-expand__heading">
+			Heading
+		</h2>
+		<div class="box-expand__hiddne">
+
+		</div>
+
+	</div>
+*/
+
+.box-expand {
+	margin-bottom: 20px;
+}
+
+.box-expand__heading {
+	margin: 0;
+	padding: 20px 20px 20px 40px;
+	position: relative;
+
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: bold;
+	cursor: pointer;
+	background: darken(@bg-box, 5%);
+
+	.draw-arrow-bottom(5px, @link-color, 20px, 25px);
+}
+
+.box-expand__hidden {
+	padding: 20px;
+}
