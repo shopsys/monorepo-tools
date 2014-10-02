@@ -28,7 +28,7 @@ class ProductFormType extends AbstractType {
 	private $vats;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
 
