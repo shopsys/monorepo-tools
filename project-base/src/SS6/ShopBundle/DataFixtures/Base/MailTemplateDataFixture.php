@@ -23,22 +23,25 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
-		$mailTemplateData->setSubject('');
-		$mailTemplateData->setBody('');
+		$mailTemplateData->setSubject('Změna stavu vaší objednávky');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'Vaši objednávku již vyřizujeme.');
 
 		$mailTemplate = new MailTemplate('order_status_2', $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
-		$mailTemplateData->setSubject('');
-		$mailTemplateData->setBody('');
+		$mailTemplateData->setSubject('Změna stavu vaší objednávky');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'Vaše objednávka je vyřízena.');
 
 		$mailTemplate = new MailTemplate('order_status_3', $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
-		$mailTemplateData->setSubject('');
-		$mailTemplateData->setBody('');
+		$mailTemplateData->setSubject('Změna stavu vaší objednávky');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'Vaše objednávka byla stornována.');
 
 		$mailTemplate = new MailTemplate('order_status_4', $mailTemplateData);
 		$manager->persist($mailTemplate);
