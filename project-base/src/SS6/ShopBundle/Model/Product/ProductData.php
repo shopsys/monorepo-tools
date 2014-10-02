@@ -75,6 +75,11 @@ class ProductData {
 	private $availability;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 */
+	private $parameters;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -102,7 +107,8 @@ class ProductData {
 		$stockQuantity = null,
 		$hidden = false,
 		$image = null,
-		$availability = null
+		$availability = null,
+		array $parameters = array()
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -117,6 +123,7 @@ class ProductData {
 		$this->hidden = $hidden;
 		$this->image = $image;
 		$this->availability = $availability;
+		$this->parameters = $parameters;
 	}
 
 	/**
@@ -211,6 +218,13 @@ class ProductData {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 */
+	public function getParameters() {
+		return $this->parameters;
+	}
+
+	/**
 	 * @param string|null $name
 	 */
 	public function setName($name) {
@@ -302,9 +316,16 @@ class ProductData {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
+	 */
+	public function setParameters($parameters) {
+		$this->parameters = $parameters;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
-	public function setFromEntity(Product $product) {
+	public function setFromEntity(Product $product, array $productParameterValues = null) {
 		$this->setName($product->getName());
 		$this->setCatnum($product->getCatnum());
 		$this->setPartno($product->getPartno());
@@ -317,6 +338,13 @@ class ProductData {
 		$this->setStockQuantity($product->getStockQuantity());
 		$this->setHidden($product->isHidden());
 		$this->setAvailability($product->getAvailability());
+		$productParameterValuesData = array();
+		foreach ($productParameterValues as $productParameterValue) {
+			$productParameterValueData = new Parameter\ProductParameterValueData();
+			$productParameterValueData->setFromEntity($productParameterValue);
+			$productParameterValuesData[] = $productParameterValueData;
+		}
+		$this->setParameters($productParameterValuesData);
 	}
 
 }

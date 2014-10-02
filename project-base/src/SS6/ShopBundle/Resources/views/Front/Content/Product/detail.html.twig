@@ -99,6 +99,18 @@
 				</dl>
 				{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 			</div>
+
+			{% if productDetail.parameters %}
+				<div class="wrap-box">
+					<h3>Technické parametry:</h3>
+					{% for productParameterValue in productDetail.parameters %}
+						<dl class="list-params">
+							<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
+							<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
+						</dl>
+					{% endfor %}
+				</div>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

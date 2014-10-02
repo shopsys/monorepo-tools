@@ -25,6 +25,20 @@ class ParameterRepository {
 	private function getParameterRepository() {
 		return $this->em->getRepository(Parameter::class);
 	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getParameterValueRepository() {
+		return $this->em->getRepository(ParameterValue::class);
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getProductParameterValueRepository() {
+		return $this->em->getRepository(ProductParameterValue::class);
+	}
 	
 	/**
 	 * @param int $parameterId
@@ -54,6 +68,29 @@ class ParameterRepository {
 	 */
 	public function findAll() {
 		return $this->getParameterRepository()->findBy(array(), array('name' => 'asc'));
+	}
+
+	/**
+	 * @param string $valueText
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
+	 */
+	public function findOrCreateParameterValueByValueText($valueText) {
+		$parameterValue = $this->getParameterValueRepository()->findOneBy(array(
+			'text' => $valueText,
+		));
+
+		if ($parameterValue === null) {
+			$parameterValue = new ParameterValue(new ParameterValueData($valueText));
+			$this->em->persist($parameterValue);
+		}
+
+		return $parameterValue;
+	}
+
+	public function findParameterValuesByProduct(\SS6\ShopBundle\Model\Product\Product $product) {
+		return $this->getProductParameterValueRepository()->findBy(array(
+			'product' => $product,
+		));
 	}
 
 }

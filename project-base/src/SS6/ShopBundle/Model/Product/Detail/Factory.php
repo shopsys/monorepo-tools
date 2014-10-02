@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\Detail;
 
+use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\PriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -13,10 +14,20 @@ class Factory {
 	private $priceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $priceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
 	 */
-	public function __construct(PriceCalculation $priceCalculation) {
+	private $parameterRepository;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $priceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+	 */
+	public function __construct(
+		PriceCalculation $priceCalculation,
+		ParameterRepository $parameterRepository
+	) {
 		$this->priceCalculation = $priceCalculation;
+		$this->parameterRepository = $parameterRepository;
 	}
 
 	/**
@@ -26,7 +37,8 @@ class Factory {
 	public function getDetailForProduct(Product $product) {
 		return new Detail(
 			$product,
-			$this->getPrice($product)
+			$this->getPrice($product),
+			$this->getParameters($product)
 		);
 	}
 
@@ -38,10 +50,7 @@ class Factory {
 		$details = array();
 
 		foreach ($products as $product) {
-			$details[] = new Detail(
-				$product,
-				$this->getPrice($product)
-			);
+			$details[] = $this->getDetailForProduct($product);
 		}
 
 		return $details;
@@ -53,6 +62,14 @@ class Factory {
 	 */
 	private function getPrice(Product $product) {
 		return $this->priceCalculation->calculatePrice($product);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	private function getParameters(Product $product) {
+		return $this->parameterRepository->findParameterValuesByProduct($product);
 	}
 
 }

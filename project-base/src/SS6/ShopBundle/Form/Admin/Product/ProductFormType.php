@@ -2,10 +2,12 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,19 +28,31 @@ class ProductFormType extends AbstractType {
 	private $vats;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availabilit
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
+
+	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
+	 */
+	private $productParameterValueFormTypeFactory;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 */
-	public function __construct(FileUpload $fileUpload, array $vats, array $availabilities) {
+	public function __construct(
+		FileUpload $fileUpload,
+		array $vats,
+		array $availabilities,
+		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
+	) {
 		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
+		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 	}
 
 	/**
@@ -125,6 +139,22 @@ class ProductFormType extends AbstractType {
 			->add('availability', 'choice', array(
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', array(), null, 'id'),
+			))
+			->add('parameters', 'collection', array(
+				'required' => false,
+				'allow_add' => true,
+				'allow_delete' => true,
+				'type' => $this->productParameterValueFormTypeFactory->create(),
+				'options' => array(
+					'data_class' => ProductParameterValueData::class,
+				),
+				'constraints' => array(
+					new \SS6\ShopBundle\Component\UniqueCollection(array(
+						'fields' => array('parameter'),
+						'message' => 'Každý parametr může být nastaven pouze jednou',
+					)),
+				),
+				'error_bubbling' => false,
 			))
 			->add('save', 'submit');
 	}
