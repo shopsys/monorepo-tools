@@ -15,8 +15,8 @@ class PaymentController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */		
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */		
 		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
 		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
@@ -33,7 +33,7 @@ class PaymentController extends Controller {
 			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 			$payment = $paymentEditFacade->create($paymentData);
 
-			$flashMessageTwig->addSuccess('Byla vytvořena platba'
+			$flashMessageSender->addSuccessTwig('Byla vytvořena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $payment->getName(),
 				'url' => $this->generateUrl('admin_payment_edit', array('id' => $payment->getId())),
@@ -42,7 +42,7 @@ class PaymentController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', array(
@@ -56,8 +56,8 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
@@ -77,7 +77,7 @@ class PaymentController extends Controller {
 		if ($form->isValid()) {
 			$paymentEditFacade->edit($payment, $paymentData);
 
-			$flashMessageTwig->addSuccess('Byla upravena platba'
+			$flashMessageSender->addSuccessTwig('Byla upravena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $payment->getName(),
 				'url' => $this->generateUrl('admin_payment_edit', array('id' => $payment->getId())),
@@ -86,7 +86,7 @@ class PaymentController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -104,15 +104,15 @@ class PaymentController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		
 		$paymentName = $paymentEditFacade->getById($id)->getName();
 		$paymentEditFacade->deleteById($id);
 
-		$flashMessageTwig->addSuccess('Platba <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessTwig('Platba <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $paymentName,
 		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));

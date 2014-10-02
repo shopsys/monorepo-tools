@@ -183,24 +183,14 @@ services:
   ss6.shop.flash_message.bag.front:
     class: SS6\ShopBundle\Model\FlashMessage\Bag
     arguments: ['front']
-    
-  ss6.shop.flash_message.text_sender.admin:
-    class: SS6\ShopBundle\Model\FlashMessage\TextSender
+
+  ss6.shop.flash_message.sender.admin:
+    class: SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
     arguments:
       - @ss6.shop.flash_message.bag.admin
 
-  ss6.shop.flash_message.text_sender.front:
-    class: SS6\ShopBundle\Model\FlashMessage\TextSender
-    arguments:
-      - @ss6.shop.flash_message.bag.front
-
-  ss6.shop.flash_message.twig_sender.admin:
-    class: SS6\ShopBundle\Model\FlashMessage\TwigSender
-    arguments:
-      - @ss6.shop.flash_message.bag.admin
-
-  ss6.shop.flash_message.twig_sender.front:
-    class: SS6\ShopBundle\Model\FlashMessage\TwigSender
+  ss6.shop.flash_message.sender.front:
+    class: SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
     arguments:
       - @ss6.shop.flash_message.bag.front
 

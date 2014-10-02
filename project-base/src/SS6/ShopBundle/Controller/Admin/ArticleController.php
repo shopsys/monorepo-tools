@@ -19,8 +19,8 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$articleRepository = $this->get('ss6.shop.article.article_repository');
 		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
 
@@ -42,7 +42,7 @@ class ArticleController extends Controller {
 			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 			$article = $articleEditFacade->edit($id, $articleData);
 
-			$flashMessageTwig->addSuccess('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+			$flashMessageSender->addSuccessTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),
 				'url' => $this->generateUrl('admin_article_edit', array('id' => $article->getId())),
 			));
@@ -50,7 +50,7 @@ class ArticleController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -107,8 +107,8 @@ class ArticleController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
@@ -126,7 +126,7 @@ class ArticleController extends Controller {
 
 			$article = $articleEditFacade->create($articleData);
 
-			$flashMessageTwig->addSuccess('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+			$flashMessageSender->addSuccessTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),
 				'url' => $this->generateUrl('admin_article_edit', array('id' => $article->getId())),
 			));
@@ -134,7 +134,7 @@ class ArticleController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', array(
@@ -148,8 +148,8 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$articleRepository = $this->get('ss6.shop.article.article_repository');
 		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
@@ -157,7 +157,7 @@ class ArticleController extends Controller {
 		$fullName = $articleRepository->getById($id)->getName();
 		$this->get('ss6.shop.article.article_edit_facade')->delete($id);
 
-		$flashMessageTwig->addSuccess('Článek <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_article_list'));

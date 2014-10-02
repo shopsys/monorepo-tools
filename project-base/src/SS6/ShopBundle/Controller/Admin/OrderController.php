@@ -19,8 +19,8 @@ class OrderController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
@@ -45,7 +45,7 @@ class OrderController extends Controller {
 
 				$order = $orderFacade->edit($id, $orderData);
 
-				$flashMessageTwig->addSuccess('Byla upravena objednávka č.'
+				$flashMessageSender->addSuccessTwig('Byla upravena objednávka č.'
 						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', array(
 					'number' => $order->getNumber(),
 					'url' => $this->generateUrl('admin_order_edit', array('id' => $order->getId())),
@@ -53,15 +53,15 @@ class OrderController extends Controller {
 				return $this->redirect($this->generateUrl('admin_order_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			$flashMessageTwig->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
+			$flashMessageSender->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$flashMessageTwig->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+			$flashMessageSender->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
-			$flashMessageTwig->addError('Nepodařilo se odeslat aktualizační email');
+			$flashMessageSender->addError('Nepodařilo se odeslat aktualizační email');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -132,8 +132,8 @@ class OrderController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
@@ -142,7 +142,7 @@ class OrderController extends Controller {
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$orderFacade->deleteById($id);
 
-		$flashMessageTwig->addSuccess('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
 			'number' => $orderNumber,
 		));
 		return $this->redirect($this->generateUrl('admin_order_list'));

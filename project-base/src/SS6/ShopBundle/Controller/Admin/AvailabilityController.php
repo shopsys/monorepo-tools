@@ -26,8 +26,8 @@ class AvailabilityController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
 		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
@@ -35,7 +35,7 @@ class AvailabilityController extends Controller {
 		$fullName = $availabilityFacade->getById($id)->getName();
 		$availabilityFacade->deleteById($id);
 
-		$flashMessageTwig->addSuccess('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_availability_list'));

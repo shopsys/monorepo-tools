@@ -21,8 +21,8 @@ class CustomerController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 		
@@ -46,7 +46,7 @@ class CustomerController extends Controller {
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 				$user = $customerEditFacade->editByAdmin($id, $customerData);
 
-				$flashMessageTwig->addSuccess('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				$flashMessageSender->addSuccessTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),
 					'url' => $this->generateUrl('admin_customer_edit', array('id' => $user->getId())),
 				));
@@ -57,7 +57,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -136,8 +136,8 @@ class CustomerController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$domains = $domain->getAll();
@@ -159,7 +159,7 @@ class CustomerController extends Controller {
 
 				$user = $customerEditFacade->create($customerData);
 
-				$flashMessageTwig->addSuccess('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				$flashMessageSender->addSuccessTwig('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),
 					'url' => $this->generateUrl('admin_customer_edit', array('id' => $user->getId())),
 				));
@@ -170,7 +170,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', array(
@@ -183,15 +183,15 @@ class CustomerController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
 		$fullName = $userRepository->getUserById($id)->getFullName();
 		$this->get('ss6.shop.customer.customer_edit_facade')->delete($id);
-		$flashMessageTwig->addSuccess('Zákazník <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,
 		));
 

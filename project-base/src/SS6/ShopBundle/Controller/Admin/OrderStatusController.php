@@ -19,8 +19,8 @@ class OrderStatusController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$form = $this->createForm(new OrderStatusFormType());
 
@@ -36,7 +36,7 @@ class OrderStatusController extends Controller {
 
 			$orderStatus = $orderStatusFacade->create($orderStatusData);
 
-			$flashMessageTwig->addSuccess('Byl vytvořen stav objednávek'
+			$flashMessageSender->addSuccessTwig('Byl vytvořen stav objednávek'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $orderStatus->getName(),
 				'url' => $this->generateUrl('admin_orderstatus_edit', array('id' => $orderStatus->getId())),
@@ -45,7 +45,7 @@ class OrderStatusController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/new.html.twig', array(
@@ -59,8 +59,8 @@ class OrderStatusController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 
@@ -83,7 +83,7 @@ class OrderStatusController extends Controller {
 
 			$orderStatus = $orderStatusFacade->edit($id, $orderStatusData);
 
-			$flashMessageTwig->addSuccess('Byl upraven stav objednávek'
+			$flashMessageSender->addSuccessTwig('Byl upraven stav objednávek'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $orderStatus->getName(),
 				'url' => $this->generateUrl('admin_orderstatus_edit', array('id' => $orderStatus->getId())),
@@ -92,7 +92,7 @@ class OrderStatusController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwig->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -138,8 +138,8 @@ class OrderStatusController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction(Request $request, $id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
@@ -158,7 +158,7 @@ class OrderStatusController extends Controller {
 
 				$orderStatusFacade->deleteById($id, $formData['newStatus']->getId());
 
-				$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem '
+				$flashMessageSender->addSuccessTwig('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem '
 					. $newOrderStatus->getName() . ' a byl smazán.',
 					array(
 						'name' => $orderStatus->getName(),
@@ -167,17 +167,17 @@ class OrderStatusController extends Controller {
 			} else {
 				$orderStatusFacade->deleteById($id);
 
-				$flashMessageTwig->addSuccess('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
+				$flashMessageSender->addSuccessTwig('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
 					'name' => $orderStatus->getName(),
 				));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
-			$flashMessageTwig->addError('Stav objednávek <strong>{{ name }}</strong>'
+			$flashMessageSender->addErrorTwig('Stav objednávek <strong>{{ name }}</strong>'
 					. ' je rezervovaný a nelze jej smazat', array(
 				'name' => $e->getOrderStatus()->getName(),
 			));
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
-			$flashMessageTwig->addError('Stav objednávek <strong>{{ name }}</strong>'
+			$flashMessageSender->addErrorTwig('Stav objednávek <strong>{{ name }}</strong>'
 					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav', array(
 				'name' => $e->getOrderStatus()->getName(),
 			));

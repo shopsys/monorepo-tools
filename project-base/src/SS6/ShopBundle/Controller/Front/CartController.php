@@ -19,8 +19,8 @@ class CartController extends Controller {
 	public function indexAction(Request $request) {
 		$cart = $this->get('ss6.shop.cart');
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
-		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$cartItemPriceCalculation = $this->get('ss6.shop.cart.item.price_calculation');
 		/* @var $cartItemPriceCalculation \SS6\ShopBundle\Model\Cart\Item\PriceCalculation */
 		$cartSummaryCalculation = $this->get('ss6.shop.cart.cart_summary_calculation');
@@ -51,7 +51,7 @@ class CartController extends Controller {
 				if ($form->get('recalcToOrder')->isClicked()) {
 					return $this->redirect($this->generateUrl('front_order_index'));
 				} else {
-					$flashMessageText->addSuccess('Počet kusů položek v košíku byl úspěšně přepočítán.');
+					$flashMessageSender->addSuccess('Počet kusů položek v košíku byl úspěšně přepočítán.');
 					return $this->redirect($this->generateUrl('front_cart'));
 				}
 			}
@@ -60,7 +60,7 @@ class CartController extends Controller {
 		}
 
 		if ($invalidCartRecalc) {
-			$flashMessageText->addError('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.');
+			$flashMessageSender->addError('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.');
 		}
 
 		$cartItems = $cart->getItems();
@@ -153,13 +153,13 @@ class CartController extends Controller {
 			return $this->getAjaxAddProductResponse($actionResult);
 		}
 
-		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
-		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$strippedFlashMessage = strip_tags($actionResult['message']);
 		if ($actionResult['success']) {
-			$flashMessageText->addSuccess($strippedFlashMessage);
+			$flashMessageSender->addSuccess($strippedFlashMessage);
 		} else {
-			$flashMessageText->addError($strippedFlashMessage);
+			$flashMessageSender->addError($strippedFlashMessage);
 		}
 		
 		if ($this->getRequest()->headers->get('referer')) {
@@ -213,8 +213,8 @@ class CartController extends Controller {
 	 * @param int $cartItemId
 	 */
 	public function deleteAction(Request $request, $cartItemId) {
-		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
-		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$cartItemId = (int)$cartItemId;
 		$token = $request->query->get('_token');
@@ -225,12 +225,12 @@ class CartController extends Controller {
 			try {
 				$productName = $cartFacade->getProductByCartItemId($cartItemId)->getName();
 				$cartFacade->deleteCartItem($cartItemId);
-				$flashMessageText->addSuccess('Z košíku bylo ostraněno zboží ' . $productName);
+				$flashMessageSender->addSuccess('Z košíku bylo ostraněno zboží ' . $productName);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
-				$flashMessageText->addError('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
+				$flashMessageSender->addError('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
 			}
 		} else {
-			$flashMessageText->addError('Nepodařilo se odstranit položku z košíku.
+			$flashMessageSender->addError('Nepodařilo se odstranit položku z košíku.
 					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.');
 		}
 

@@ -26,8 +26,8 @@ class ParameterController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageTwig = $this->get('ss6.shop.flash_message.twig_sender.admin');
-		/* @var $flashMessageTwig \SS6\ShopBundle\Model\FlashMessage\TwigSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$parameterFacade = $this->get('ss6.shop.product.parameter.parameter_facade');
 		/* @var $parameterFacade \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade */
@@ -35,7 +35,7 @@ class ParameterController extends Controller {
 		$fullName = $parameterFacade->getById($id)->getName();
 		$parameterFacade->deleteById($id);
 
-		$flashMessageTwig->addSuccess('Parametr <strong>{{ name }}</strong> byla smazán', array(
+		$flashMessageSender->addSuccessTwig('Parametr <strong>{{ name }}</strong> byla smazán', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_parameter_list'));

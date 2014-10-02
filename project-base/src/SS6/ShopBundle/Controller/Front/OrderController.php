@@ -28,8 +28,8 @@ class OrderController extends Controller {
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
 		$orderPreviewCalculation = $this->get('ss6.shop.order.preview.order_preview_calculation');
 		/* @var $orderPreviewCalculation \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation */
-		$flashMessageText = $this->get('ss6.shop.flash_message.text_sender.front');
-		/* @var $flashMessageText \SS6\ShopBundle\Model\FlashMessage\TextSender */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
 		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
@@ -90,7 +90,7 @@ class OrderController extends Controller {
 					/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
 					$orderMailFacade->sendEmail($order);
 				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
-					$flashMessageText->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
+					$flashMessageSender->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
 				
 				$session = $this->get('session');
