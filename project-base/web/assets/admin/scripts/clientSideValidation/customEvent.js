@@ -4,7 +4,7 @@
 	SS6.clientSideValidation = SS6.clientSideValidation || {};
 	
 	SS6.clientSideValidation.init = function () {
-		$('form').find('input, textarea, select').each(SS6.clientSideValidation.inputBind);
+		$('form :input').each(SS6.clientSideValidation.inputBind);
 	}
 	
 	SS6.clientSideValidation.inputBind = function () {

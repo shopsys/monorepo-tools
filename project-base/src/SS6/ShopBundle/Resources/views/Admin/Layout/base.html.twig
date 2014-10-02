@@ -12,22 +12,23 @@
 	<!--[if IE 8 ]>
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/styles/index-ie8.css') }}" media="screen, projection">
 	<![endif]-->
-
-	{{ include('FpJsFormValidatorBundle::javascripts.html.twig') }}
 	
 	{# bootstrap/tooltip.js must be imported before bootstrap/popover.js #}
 	{{ importJavascripts([
 		'bundles/bmatznerjquery/js/jquery.min.js',
 		'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js',
+		'bundles/fpjsformvalidator/js/fp_js_validator.js',
 		'assets/frontend/scripts/checkboxToggle.js',
 		'assets/frontend/scripts/window.js',
 		'assets/admin/scripts/bootstrap/tooltip.js', 
 		'assets/admin/scripts/bootstrap/*',
 		'assets/admin/scripts/plugins/*',
-		'bundles/fpjsformvalidator/js/jquery.fpjsformvalidator.js',
+		'assets/admin/scripts/clientSideValidation/form/*',
 		'assets/admin/scripts/clientSideValidation/*',
 		'assets/admin/scripts/*',
 	]) }}
+	{{ js_validator_config() }}
+	{{ init_js_validation() }}
 
 	<script type="text/javascript">
 		global = {
