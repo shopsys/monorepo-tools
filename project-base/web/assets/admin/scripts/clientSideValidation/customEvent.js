@@ -5,10 +5,11 @@
 	
 	SS6.clientSideValidation.init = function () {
 		$('form :input').each(SS6.clientSideValidation.inputBind);
-	}
+	};
 	
 	SS6.clientSideValidation.inputBind = function () {
-		$(this).bind('blur change', function () {
+		$(this)
+			.bind('blur change', function () {
 				$(this).jsFormValidator('validate')
 			})
 			.focus(function () {
@@ -17,13 +18,13 @@
 			.jsFormValidator({
 				'showErrors': SS6.clientSideValidation.showErrors
 			});
-	}
+	};
 	
 	SS6.clientSideValidation.showErrors = function (errors) {
 		var $formLine = $(this).closest('.form-line');
 		var $errorList = $formLine.find('.js-validation-errors-list');
 		var $errorListUl = $errorList.find('ul:first');
-		if (errors.length) {
+		if (errors.length > 0) {
 			$formLine.addClass('js-validation-error');
 			$errorListUl.html('');
 			$.each(errors, function (key, message) {
@@ -34,7 +35,7 @@
 			$formLine.removeClass('js-validation-error');
 			$errorList.hide();
 		}
-	}
+	};
 	
 	$(document).ready(function () {
 		SS6.clientSideValidation.init();
