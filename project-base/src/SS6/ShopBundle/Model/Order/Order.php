@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 /**
@@ -80,7 +79,14 @@ class Order {
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
-	private $totalPrice;
+	private $totalPriceWithVat;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 */
+	private $totalPriceWithoutVat;
 
 	/**
 	 * @var string
@@ -317,7 +323,6 @@ class Order {
 		if (!$this->items->contains($item)) {
 			$this->items->add($item);
 		}
-		$this->recalcTotalPrices();
 	}
 
 	/**
@@ -325,7 +330,6 @@ class Order {
 	 */
 	public function removeItem(OrderItem $item) {
 		$this->items->removeElement($item);
-		$this->recalcTotalPrices();
 	}
 
 	/**
@@ -405,32 +409,31 @@ class Order {
 	/**
 	 * @return string
 	 */
-	public function getTotalPrice() {
-		$this->recalcTotalPrices();
-		return $this->totalPrice;
+	public function getTotalPriceWithVat() {
+		return $this->totalPriceWithVat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTotalPriceWithoutVat() {
+		return $this->totalPriceWithoutVat;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTotalProductPrice() {
-		$this->recalcTotalPrices();
 		return $this->totalProductPrice;
 	}
 
-	public function recalcTotalPrices() {
-		$totalPrice = 0;
-		$totalProductPrice = 0;
-		foreach ($this->items as $item) {
-			/* @var $item \SS6\ShopBundle\Model\Order\Item\OrderItem */
-			$totalPrice += $item->getTotalPrice();
-
-			if ($item instanceof OrderProduct) {
-				$totalProductPrice += $item->getTotalPrice();
-			}
-		}
-		$this->totalPrice = $totalPrice;
-		$this->totalProductPrice = $totalProductPrice;
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderTotalPrice $orderTotalPrice
+	 */
+	public function setTotalPrice(OrderTotalPrice $orderTotalPrice) {
+		$this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
+		$this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
+		$this->totalProductPrice = $orderTotalPrice->getProductPrice();
 	}
 
 	/**

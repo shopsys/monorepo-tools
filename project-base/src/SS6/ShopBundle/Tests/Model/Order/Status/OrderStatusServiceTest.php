@@ -14,8 +14,7 @@ use SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusException;
 class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testDelete() {
-		$orderService = new OrderService();
-		$orderStatusService = new OrderStatusService($orderService);
+		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
 			'statusName',
 			OrderStatus::TYPE_IN_PROGRESS
@@ -36,8 +35,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider testDeleteForbiddenProvider
 	 */
 	public function testDeleteForbidden($statusType, $expectedException = null) {
-		$orderService = new OrderService();
-		$orderStatusService = new OrderStatusService($orderService);
+		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
 			'statusName',
 			$statusType
@@ -49,8 +47,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testDeleteWithOrder() {
-		$orderService = new OrderService();
-		$orderStatusService = new OrderStatusService($orderService);
+		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
 			'statusName',
 			OrderStatus::TYPE_IN_PROGRESS
@@ -66,8 +63,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testDeleteForbiddenOrWithOrder() {
-		$orderService = new OrderService();
-		$orderStatusService = new OrderStatusService($orderService);
+		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
 			'statusName',
 			OrderStatus::TYPE_NEW
@@ -83,8 +79,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testReplaceAndDelete() {
-		$orderService = new OrderService();
-		$orderStatusService = new OrderStatusService($orderService);
+		$orderStatusService = new OrderStatusService();
 		$oldOrderStatus = new OrderStatus(
 			'Old status',
 			OrderStatus::TYPE_IN_PROGRESS

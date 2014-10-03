@@ -225,6 +225,9 @@ services:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
     scope: request
+    
+  ss6.shop.order.item.price_calculation:
+    class: SS6\ShopBundle\Model\Order\Item\PriceCalculation
 
   ss6.shop.order.order_facade:
     class: SS6\ShopBundle\Model\Order\OrderFacade
@@ -242,7 +245,10 @@ services:
 
   ss6.shop.order.order_number_sequence_repository:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
-    
+
+  ss6.shop.order.order_price_calculation:
+    class: SS6\ShopBundle\Model\Order\PriceCalculation
+
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
 
@@ -300,20 +306,20 @@ services:
   ss6.shop.pricing.input_price_repository:
     class: SS6\ShopBundle\Model\Pricing\InputPriceRepository
 
-  ss6.shop.product.list.product_list_admin_facade:
-    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
-    
-  ss6.shop.product.list.product_list_admin_repository:
-    class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
-
   ss6.shop.pricing.price_calculation:
     class: SS6\ShopBundle\Model\Pricing\PriceCalculation
+
+  ss6.shop.pricing.base_price_calculation:
+    class: SS6\ShopBundle\Model\Pricing\BasePriceCalculation
 
   ss6.shop.pricing.pricing_setting:
     class: SS6\ShopBundle\Model\Pricing\PricingSetting
 
   ss6.shop.pricing.pricing_setting_facade:
     class: SS6\ShopBundle\Model\Pricing\PricingSettingFacade
+    
+  ss6.shop.pricing.rounding:
+    class: SS6\ShopBundle\Model\Pricing\Rounding
 
   ss6.shop.pricing.vat.vat_facade:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatFacade

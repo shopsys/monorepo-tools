@@ -1,11 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Payment;
+namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -13,7 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
-class PriceCalculationTest extends PHPUnit_Framework_TestCase {
+class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
 		return array(
@@ -23,6 +20,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 				'vatPercent' => '21',
 				'basePriceWithoutVat' => '6998.78',
 				'basePriceWithVat' => '8469',
+				'basePriceVatAmount' => '1470.22',
 			),
 			array(
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
@@ -30,6 +28,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 				'vatPercent' => '21',
 				'basePriceWithoutVat' => '5784.8',
 				'basePriceWithVat' => '7000',
+				'basePriceVatAmount' => '1215.2',
 			),
 		);
 	}
@@ -42,29 +41,20 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$inputPrice,
 		$vatPercent,
 		$basePriceWithoutVat,
-		$basePriceWithVat
+		$basePriceWithVat,
+		$basePriceVatAmount
 	) {
 		$rounding = new Rounding();
 		$priceCalculation = new PriceCalculation($rounding);
 		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getInputPriceType'))
-			->disableOriginalConstructor()
-			->getMock();
-		$pricingSettingMock
-			->expects($this->any())->method('getInputPriceType')
-				->will($this->returnValue($inputPriceType));
-		$paymentPriceCalculation = new PaymentPriceCalculation($basePriceCalculation, $pricingSettingMock);
-
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
-		$payment = new Payment(new PaymentData('PaymentName', $inputPrice, $vat));
-
-		$price = $paymentPriceCalculation->calculatePrice($payment);
+		$price = $basePriceCalculation->calculatePrice($inputPrice, $inputPriceType, $vat);
 
 		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getBasePriceWithoutVat(), 6));
 		$this->assertEquals(round($basePriceWithVat, 6), round($price->getBasePriceWithVat(), 6));
+		$this->assertEquals(round($basePriceVatAmount, 6), round($price->getBasePriceVatAmount(), 6));
 	}
 
 }

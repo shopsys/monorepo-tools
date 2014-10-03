@@ -29,10 +29,17 @@ class OrderItemFormType extends AbstractType {
 				),
 				'error_bubbling' => true,
 			))
-			->add('price', 'money', array(
+			->add('priceWithVat', 'money', array(
 				'currency' => false,
 				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím cenu')),
+					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jednotkovou cenu s DPH')),
+				),
+				'error_bubbling' => true,
+			))
+			->add('vatPercent', 'money', array(
+				'currency' => false,
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Vyplňte prosím sazbu DPH')),
 				),
 				'error_bubbling' => true,
 			))

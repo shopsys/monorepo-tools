@@ -134,31 +134,14 @@ abstract class OrderItem {
 	}
 
 	/**
-	 * @return string
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
 	 */
-	public function getTotalPrice() {
-		return $this->priceWithVat * $this->quantity;
-	}
-
-	/**
-	 * @param string $name
-	 * @param string $priceWithoutVat
-	 * @param string $priceWithVat
-	 * @param string $vatPercent
-	 * @param int $quantity
-	 */
-	public function edit(
-		$name,
-		$priceWithoutVat,
-		$priceWithVat,
-		$vatPercent,
-		$quantity
-	) {
-		$this->name = $name;
-		$this->priceWithoutVat = $priceWithoutVat;
-		$this->priceWithVat = $priceWithVat;
-		$this->vatPercent = $vatPercent;
-		$this->quantity = $quantity;
+	public function edit(OrderItemData $orderItemData) {
+		$this->name = $orderItemData->getName();
+		$this->priceWithoutVat = $orderItemData->getPriceWithoutVat();
+		$this->priceWithVat = $orderItemData->getPriceWithVat();
+		$this->vatPercent = $orderItemData->getVatPercent();
+		$this->quantity = $orderItemData->getQuantity();
 	}
 	
 }

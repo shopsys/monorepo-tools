@@ -3,11 +3,35 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\PriceCalculation as OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\PriceCalculation
+	 */
+	private $orderItemPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\PriceCalculation
+	 */
+	private $orderPriceCalculation;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation $orderItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Order\PriceCalculation $orderPriceCalculation
+	 */
+	public function __construct(
+		OrderItemPriceCalculation $orderItemPriceCalculation,
+		OrderPriceCalculation $orderPriceCalculation
+	) {
+		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
+		$this->orderPriceCalculation = $orderPriceCalculation;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
@@ -47,17 +71,21 @@ class OrderService {
 
 		foreach ($orderData->getItems() as $orderItemData) {
 			/* @var $orderItemData \SS6\ShopBundle\Model\Order\OrderItemData */
+			$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 			$orderItem = $order->getItemById($orderItemData->getId());
-			$orderItem->edit(
-				$orderItemData->getName(),
-				$orderItem->getPriceWithoutVat(),
-				$orderItemData->getPrice(),
-				$orderItem->getVatPercent(),
-				$orderItemData->getQuantity()
-			);
+			$orderItem->edit($orderItemData);
 		}
 
-		$order->recalcTotalPrices();
+		$orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
+		$order->setTotalPrice($orderTotalPrice);
+	}
+
+	/**
+	 * @param Order $order
+	 */
+	public function calculateTotalPrice(Order $order) {
+		$orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
+		$order->setTotalPrice($orderTotalPrice);
 	}
 
 	/**
@@ -117,16 +145,6 @@ class OrderService {
 			$orderData->setDeliveryPostcode($user->getDeliveryAddress()->getPostcode());
 		} else {
 			$orderData->setDeliveryAddressFilled(false);
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order[] $orders
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
-	 */
-	public function changeOrdersStatus(array $orders, OrderStatus $newOrderStatus) {
-		foreach ($orders as $order) {
-			$order->setStatus($newOrderStatus);
 		}
 	}
 

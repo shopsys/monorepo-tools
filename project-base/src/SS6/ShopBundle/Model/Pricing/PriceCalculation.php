@@ -2,96 +2,36 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculation {
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
 	 */
-	private $inputPrice;
+	private $rounding;
 
 	/**
-	 * @var int
+	 * @param \SS6\ShopBundle\Model\Pricing\Rounding $rounding
 	 */
-	private $inputPriceType;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
-	 */
-	private $vat;
-
-	/**
-	 * @param string $inputPrice
-	 * @param int $inputPriceType
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
-	 */
-	public function calculatePrice($inputPrice, $inputPriceType, Vat $vat) {
-		$this->inputPrice = $inputPrice;
-		$this->inputPriceType = $inputPriceType;
-		$this->vat = $vat;
-
-		return new Price(
-			$this->getBasePriceWithoutVat(),
-			$this->getBasePriceWithVat(),
-			$this->getBasePriceVatAmount()
-		);
+	public function __construct(Rounding $rounding) {
+		$this->rounding = $rounding;
 	}
 
 	/**
 	 * @return string
 	 */
-	private function getBasePriceWithoutVat() {
-		return $this->getBasePriceWithVat() - $this->getBasePriceVatAmount();
+	public function getVatAmountByPriceWithVat($priceWithoutVat, Vat $vat) {
+		return $this->rounding->roundVatAmount($priceWithoutVat * $vat->getCoefficient());
 	}
 
 	/**
-	 * @return string
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
-	 */
-	private function getBasePriceWithVat() {
-		switch ($this->inputPriceType) {
-			case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
-				return $this->roundPriceWithVat($this->inputPrice);
-
-			case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-				return $this->roundPriceWithVat($this->applyVatPercent($this->inputPrice));
-
-			default:
-				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
-		}
-	}
-
-	/**
+	 * @param string $priceWithoutVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 * @return string
 	 */
-	private function getBasePriceVatAmount() {
-		return $this->roundVatAmount($this->getBasePriceWithVat() * $this->vat->getCoefficient());
+	public function applyVatPercent($priceWithoutVat, Vat $vat) {
+		return $priceWithoutVat * (100 + $vat->getPercent()) / 100;
 	}
-
-	/**
-	 * @param string $price
-	 * @return string
-	 */
-	private function roundPriceWithVat($price) {
-		return round($price, 0);
-	}
-
-	/**
-	 * @param string $vatAmount
-	 * @return string
-	 */
-	private function roundVatAmount($vatAmount) {
-		return round($vatAmount, 2);
-	}
-
-	/**
-	 * @param string $price
-	 * @return string
-	 */
-	private function applyVatPercent($price) {
-		return $price * (100 + $this->vat->getPercent()) / 100;
-	}
-
 }

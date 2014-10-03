@@ -17,7 +17,17 @@ class OrderItemData {
 	/**
 	 * @var string
 	 */
-	private $price;
+	private $priceWithVat;
+
+	/**
+	 * @var string
+	 */
+	private $priceWithoutVat;
+
+	/**
+	 * @var string
+	 */
+	private $vatPercent;
 
 	/**
 	 * @var int
@@ -42,8 +52,22 @@ class OrderItemData {
 	/**
 	 * @return string
 	 */
-	public function getPrice() {
-		return $this->price;
+	public function getPriceWithVat() {
+		return $this->priceWithVat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPriceWithoutVat() {
+		return $this->priceWithoutVat;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getVatPercent() {
+		return $this->vatPercent;
 	}
 
 	/**
@@ -68,10 +92,24 @@ class OrderItemData {
 	}
 
 	/**
-	 * @param string $price
+	 * @param string $priceWithVat
 	 */
-	public function setPrice($price) {
-		$this->price = $price;
+	public function setPriceWithVat($priceWithVat) {
+		$this->priceWithVat = $priceWithVat;
+	}
+
+	/**
+	 * @param string $priceWithoutVat
+	 */
+	public function setPriceWithoutVat($priceWithoutVat) {
+		$this->priceWithoutVat = $priceWithoutVat;
+	}
+
+	/**
+	 * @param string $vatPercent
+	 */
+	public function setVatPercent($vatPercent) {
+		$this->vatPercent = $vatPercent;
 	}
 
 	/**
@@ -87,7 +125,9 @@ class OrderItemData {
 	public function setFromEntity(OrderItem $orderItem) {
 		$this->setId($orderItem->getId());
 		$this->setName($orderItem->getName());
-		$this->setPrice($orderItem->getPriceWithVat());
+		$this->setPriceWithVat($orderItem->getPriceWithVat());
+		$this->setPriceWithoutVat($orderItem->getPriceWithoutVat());
+		$this->setVatPercent($orderItem->getVatPercent());
 		$this->setQuantity($orderItem->getQuantity());
 	}
 

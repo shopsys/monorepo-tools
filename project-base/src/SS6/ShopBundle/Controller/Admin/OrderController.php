@@ -25,6 +25,8 @@ class OrderController extends Controller {
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
+		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */
 		
 		$order = $orderRepository->getById($id);
 		$allOrderStatuses = $orderStatusRepository->findAll();
@@ -67,10 +69,13 @@ class OrderController extends Controller {
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace objednávky - č. ' . $order->getNumber()));
+
+		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 		
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
 			'form' => $form->createView(),
 			'order' => $order,
+			'orderItemTotalPricesById' => $orderItemTotalPricesById,
 		));
 	}
 
@@ -95,7 +100,7 @@ class OrderController extends Controller {
 				o.domainId AS domainId,
 				o.createdAt,
 				MAX(os.name) AS statusName,
-				o.totalPrice,
+				o.totalPriceWithVat,
 				(CASE WHEN o.companyName IS NOT NULL
 							THEN o.companyName
 							ELSE CONCAT(o.firstName, \' \', o.lastName)
@@ -113,7 +118,7 @@ class OrderController extends Controller {
 		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
 		$grid->addColumn('domain_id', 'domainId', 'Doména', true);
 		$grid->addColumn('status_name', 'statusName', 'Stav', true);
-		$grid->addColumn('total_price', 'o.totalPrice', 'Celková cena', true)->setClassAttribute('text-right');
+		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', true)->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
