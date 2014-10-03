@@ -1,7 +1,7 @@
 /*
 Wrapping box around fieldset
 ===========
-Special box for wrapping form groups with H2 heading
+Special box for wrapping form groups with H2 heading or place with different color
 
 	<div class="wrap-group">
 		<h2>Form group title</h2>
@@ -11,12 +11,20 @@ Special box for wrapping form groups with H2 heading
 	<div class="wrap-group">
 		<h2>Form group title</h2>
 		<p>Inner content</p>
+	</div>
+
+	<div class="wrap-group">
+		<h2>Form group title</h2>
+		<div class="wrap-group__inner">
+			<p>Inner content</p>
+		</div>
 	</div>
 */
 
 .wrap-group {
 	margin-bottom: 40px;
 	padding: 20px;
+	position: relative;
 
 	background: @bg-box;
 }
@@ -27,4 +35,9 @@ Special box for wrapping form groups with H2 heading
 	font-size: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+.wrap-group__inner {
+	background: darken(@bg-box, 5%);
+	padding: 10px;
 }
