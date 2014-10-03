@@ -30,6 +30,7 @@ class CustomerFormType extends AbstractType {
 	/**
 	 * @param string $scenario
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]|null $domains
+	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
 	 */
 	public function __construct($scenario, $domains = null, $selectedDomain = null) {
 		$this->scenario = $scenario;

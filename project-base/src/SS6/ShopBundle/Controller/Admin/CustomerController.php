@@ -144,7 +144,6 @@ class CustomerController extends Controller {
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$domains = $domain->getAll();
 
-
 		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains, $selectedDomain), null, array(
 			'validation_groups' => array('Default', 'create'),
 		));
