@@ -38,34 +38,15 @@ class VisibilityCalculation {
 	 * @return array
 	 */
 	public function findAllVisible(array $transports, array $visiblePayments) {
-		$transportsData = $this->findAll($transports, $visiblePayments);
-		$visibleTransports = array();
-		foreach ($transportsData as $transportData) {
-			if ($transportData['visible']) {
-				$visibleTransports[] = $transportData['entity'];
-			}
-		}
-
-		return $visibleTransports;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePayments
-	 * @return array
-	 */
-	public function findAll(array $transports, array $visiblePayments) {
-		$transportsData = [];
+		$visibleTransports = [];
 
 		foreach ($transports as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-			$visible = $this->isVisible($transport, $visiblePayments);
-			$transportsData[] = array(
-				'entity' => $transport,
-				'visible' => $visible,
-			);
+			if ($this->isVisible($transport, $visiblePayments)) {
+				$visibleTransports[] = $transport;
+			}
 		}
-		return $transportsData;
+		
+		return $visibleTransports;
 	}
 
 }

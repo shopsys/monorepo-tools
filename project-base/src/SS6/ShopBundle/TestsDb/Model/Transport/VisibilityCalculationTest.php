@@ -43,15 +43,11 @@ class VisibilityCalculationTest extends DatabaseTestCase {
 		
 		$allPayments = $paymentRepository->findAllWithTransports();
 		$transports = $transportRepository->findAll();
-		$transportsDataWithVisibility = $visibilityCalculation->findAll($transports, $allPayments);
-		foreach ($transportsDataWithVisibility as $row) {			
-			if ($row['entity']->getId() === $transport1->getId()) {
-				$this->assertTrue($row['visible']);
-			} elseif ($row['entity']->getId() === $transport2->getId()) {
-				$this->assertFalse($row['visible']);
-			} elseif ($row['entity']->getId() === $transport3->getId()) {
-				$this->assertFalse($row['visible']);
-			}
-		}
+		$visibleTransports = $visibilityCalculation->findAllVisible($transports, $allPayments);
+
+		$this->assertContains($transport1, $visibleTransports);
+		$this->assertNotContains($transport2, $visibleTransports);
+		$this->assertNotContains($transport3, $visibleTransports);
 	}
+
 }
