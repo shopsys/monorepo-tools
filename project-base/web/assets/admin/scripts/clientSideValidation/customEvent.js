@@ -3,6 +3,15 @@
 	SS6 = window.SS6 || {};
 	SS6.clientSideValidation = SS6.clientSideValidation || {};
 	
+	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
+	FpJsFormValidator.customizeMethods.submitForm = function (event) {
+		FpJsFormValidator.customizeMethods._submitForm.call(this, event);
+		if ($(this).find('.js-validation-error:first').size() > 0) {
+			event.preventDefault();
+			alert('Překontrolujte prosím zadané hodnoty');
+		}
+	}
+	
 	SS6.clientSideValidation.init = function () {
 		$('form :input').each(SS6.clientSideValidation.inputBind);
 	};
