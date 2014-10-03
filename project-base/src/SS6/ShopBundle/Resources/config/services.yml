@@ -298,6 +298,9 @@ services:
   ss6.shop.pricing.delayed_pricing_setting:
     class: SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
 
+  ss6.shop.pricing.input_price_calculation:
+    class: SS6\ShopBundle\Model\Pricing\InputPriceCalculation
+
   ss6.shop.pricing.input_price_facade:
     class: SS6\ShopBundle\Model\Pricing\InputPriceFacade
     tags:

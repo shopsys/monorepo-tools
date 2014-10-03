@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -20,6 +21,11 @@ class InputPriceRepository {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceCalculation
+	 */
+	private $inputPriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
@@ -37,16 +43,21 @@ class InputPriceRepository {
 	private $transportPriceCalculation;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $priceCalculation
+	 * @param EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
 	 */
 	public function __construct(
 		EntityManager $em,
+		InputPriceCalculation $inputPriceCalculation,
 		ProductPriceCalculation $productPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation
 	) {
 		$this->em = $em;
+		$this->inputPriceCalculation = $inputPriceCalculation;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
@@ -84,7 +95,10 @@ class InputPriceRepository {
 			$productPrice = $this->productPriceCalculation->calculatePrice($product);
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-				$product->setPrice($productPrice->getBasePriceWithVat() - $productPrice->getBasePriceVatAmount());
+				$product->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
+					$productPrice->getBasePriceWithVat(),
+					$product->getVat()
+				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
 				$product->setPrice($productPrice->getBasePriceWithVat());
 			} else {
@@ -107,7 +121,10 @@ class InputPriceRepository {
 			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-				$payment->setPrice($paymentPrice->getBasePriceWithVat() - $paymentPrice->getBasePriceVatAmount());
+				$payment->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
+					$paymentPrice->getBasePriceWithVat(),
+					$payment->getVat()
+				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
 				$payment->setPrice($paymentPrice->getBasePriceWithVat());
 			} else {
@@ -130,7 +147,10 @@ class InputPriceRepository {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-				$transport->setPrice($transportPrice->getBasePriceWithVat() - $transportPrice->getBasePriceVatAmount());
+				$transport->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
+					$transportPrice->getBasePriceWithVat(),
+					$transport->getVat()
+				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
 				$transport->setPrice($transportPrice->getBasePriceWithVat());
 			} else {
