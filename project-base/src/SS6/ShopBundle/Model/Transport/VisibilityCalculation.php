@@ -34,11 +34,11 @@ class VisibilityCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param array $visiblePayments
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePayments
 	 * @return array
 	 */
-	public function findAllVisible(array $transports) {
-		$transportsData = $this->findAll($transports);
+	public function findAllVisible(array $transports, array $visiblePayments) {
+		$transportsData = $this->findAll($transports, $visiblePayments);
 		$visibleTransports = array();
 		foreach ($transportsData as $transportData) {
 			if ($transportData['visible']) {
