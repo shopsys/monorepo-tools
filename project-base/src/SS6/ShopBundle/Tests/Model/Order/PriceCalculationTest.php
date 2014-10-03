@@ -13,9 +13,6 @@ use SS6\ShopBundle\Model\Pricing\Price;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @SuppressWarnings(PMD.ExcessiveMethodLength)
-	 */
 	public function testGetOrderTotalPrice() {
 		$orderItems = [
 			$this->getMock(OrderProduct::class, [], [], '', false),

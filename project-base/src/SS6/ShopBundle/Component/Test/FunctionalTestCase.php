@@ -19,7 +19,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 		$domain->switchDomainById(1);
 	}
 
-		/**
+	/**
 	 * @return \Symfony\Component\HttpKernel\Client
 	 */
 	protected function getClient() {

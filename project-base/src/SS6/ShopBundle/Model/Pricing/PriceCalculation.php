@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculation {
@@ -14,7 +15,7 @@ class PriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Rounding $rounding
 	 */
-	public function __construct(\SS6\ShopBundle\Model\Pricing\Rounding $rounding) {
+	public function __construct(Rounding $rounding) {
 		$this->rounding = $rounding;
 	}
 

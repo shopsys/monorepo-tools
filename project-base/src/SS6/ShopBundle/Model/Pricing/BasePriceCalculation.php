@@ -11,7 +11,7 @@ class BasePriceCalculation {
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
 	 */
-	private $priceBaseOperation;
+	private $priceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
@@ -34,15 +34,15 @@ class BasePriceCalculation {
 	private $vat;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $priceBaseOperation
+	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
 	 * @param \SS6\ShopBundle\Model\Pricing\Rounding $rounding
 	 */
-	public function __construct(PriceCalculation $priceBaseOperation, Rounding $rounding) {
-		$this->priceBaseOperation = $priceBaseOperation;
+	public function __construct(PriceCalculation $priceCalculation, Rounding $rounding) {
+		$this->priceCalculation = $priceCalculation;
 		$this->rounding = $rounding;
 	}
 
-		/**
+	/**
 	 * @param string $inputPrice
 	 * @param int $inputPriceType
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
@@ -54,7 +54,7 @@ class BasePriceCalculation {
 		$this->vat = $vat;
 
 		$basePriceWithVat = $this->getBasePriceWithVat();
-		$vatAmount = $this->priceBaseOperation->getVatAmountByPriceWithVat($basePriceWithVat, $this->vat);
+		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $this->vat);
 		$basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);
 
 		return new Price(
@@ -74,7 +74,7 @@ class BasePriceCalculation {
 				return $this->rounding->roundPriceWithVat($this->inputPrice);
 
 			case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-				return $this->rounding->roundPriceWithVat($this->priceBaseOperation->applyVatPercent($this->inputPrice, $this->vat));
+				return $this->rounding->roundPriceWithVat($this->priceCalculation->applyVatPercent($this->inputPrice, $this->vat));
 
 			default:
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();

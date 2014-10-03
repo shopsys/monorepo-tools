@@ -60,8 +60,8 @@ class PriceCalculation {
 
 		foreach ($orderItems as $orderItem) {
 			if ($orderItem->getId() === null) {
-				$message = 'OrderItem must be persistent and must have id';
-				throw new SS6\ShopBundle\Model\Order\Item\Exception\OrderItemHasNotIdException($message);
+				$message = 'OrderItem must have ID filled';
+				throw new SS6\ShopBundle\Model\Order\Item\Exception\OrderItemHasNoIdException($message);
 			}
 			$prices[$orderItem->getId()] = $this->calculateTotalPrice($orderItem);
 		}
