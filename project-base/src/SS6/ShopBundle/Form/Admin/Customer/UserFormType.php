@@ -74,11 +74,16 @@ class UserFormType extends AbstractType {
 				'invalid_message' => 'Hesla se neshodují',
 			));
 
-		if ($this->domains !== null) {
+		if ($this->scenario === CustomerFormType::SCENARIO_CREATE) {
+			$domainsNamesById = array();
+			foreach ($this->domains as $domain) {
+				$domainsNamesById[$domain->getId()] = $domain->getDomain();
+			}
+
 			$builder
 				->add('domainId', 'choice', array(
 					'required' => true,
-					'choice_list' => new ObjectChoiceList($this->domains, 'domain', array(), null, 'id'),
+					'choices' => $domainsNamesById,
 				));
 		}
 	}
