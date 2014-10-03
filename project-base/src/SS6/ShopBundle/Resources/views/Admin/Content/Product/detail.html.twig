@@ -39,40 +39,52 @@
 				</div>
 
 				<div class="wrap-group">
-					<label>Parametry:</label>
+					<h2>Parametry:</h2>
 
 					{{ form_errors(form.parameters) }}
 
-					<table class="table">
-						<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}">
-							<tr>
-								<th>Parametr</th>
-								<th>Hodnota</th>
-								<th></th>
-							</tr>
+					<div class="wrap-group__inner">
 
-							{% macro parameterRow(parameter) %}
-								<tr class="js-parameters-item">
-									<td>{{ form_widget(parameter.parameter) }}{{ form_errors(parameter.parameter) }}</td>
-									<td>{{ form_widget(parameter.value) }}{{ form_errors(parameter.value) }}</td>
-									<td>
-										<a href="#" class="js-parameters-item-remove"><i class="fa fa-trash-o"></i></a>
-									</td>
+						<table class="table-edit mb-1">
+							<thead class="table-edit__heading">
+								<tr>
+									<th class="table-edit__heading__cell">Parametr</th>
+									<th class="table-edit__heading__cell">Hodnota</th>
+									<th class="table-edit__heading__cell"></th>
 								</tr>
-							{% endmacro %}
+							</thead>
+							<tbody class="js-parameters table-edit__body" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}">
 
-							{% for parameter in form.parameters %}
-								{{ _self.parameterRow(parameter) }}
-							{% else %}
-								{% do form.parameters.setRendered %}
-							{% endfor %}
+								{% macro parameterRow(parameter) %}
+									<tr class="js-parameters-item">
+										<td class="table-col-45 table-edit__body__cell">
+											{{ form_widget(parameter.parameter) }}
+										</td>
+										<td class="table-col-50 table-edit__body__cell">
+											<span class="table-edit__body__cell__error">
+												 {{ form_errors(parameter.value) }}
+											</span>
+											{{ form_widget(parameter.value) }}
+										</td>
+										<td class="table-col-5 table-edit__body__cell text-center">
+											<a href="#" class="js-parameters-item-remove table-action"><i class="fa fa-trash-o"></i></a>
+										</td>
+									</tr>
+								{% endmacro %}
 
-							<tr class="js-parameters-empty-item">
-								<td colspan="3">Přidejte nějaké parametry</td>
-							</tr>
-						</tbody>
-					</table>
-					<a href="#" class="js-parameters-item-add"><i class="fa fa-plus"></i></a>
+								{% for parameter in form.parameters %}
+									{{ _self.parameterRow(parameter) }}
+								{% else %}
+									{% do form.parameters.setRendered %}
+								{% endfor %}
+
+								<tr class="js-parameters-empty-item">
+									<td colspan="3">Přidejte nějaké parametry</td>
+								</tr>
+							</tbody>
+						</table>
+						<a href="#" class="js-parameters-item-add btn btn-primary"><i class="fa fa-plus fa-lg"></i> Přidat</a>
+					</div>
 				</div>
 
 				<div class="wrap-group">

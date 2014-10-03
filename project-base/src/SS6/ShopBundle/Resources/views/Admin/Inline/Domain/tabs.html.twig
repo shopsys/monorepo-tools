@@ -1,11 +1,15 @@
 {% if domainConfigs|length > 1 %}
-	<ul class="nav nav-tabs mb-1" role="tablist">
+	<div class="box-domain" role="tablist">
 		{% for domainConfig in domainConfigs %}
-			<li {{ domainConfig.id == selectedDomainId ? 'class="active"' : '' }}>
-				<a href="{{ url('admin_domain_selectdomain', {id: domainConfig.id}) }}">
+			{% if domainConfig.id == selectedDomainId %}
+				<span class="box-domain__item box-domain__item--active">
+					{{ domainConfig.domain }}
+				</span>
+			{% else %}
+				<a class="box-domain__item" href="{{ url('admin_domain_selectdomain', {id: domainConfig.id}) }}">
 					{{ domainConfig.domain }}
 				</a>
-			</li>
+			{% endif %}
 		{% endfor %}
-	</ul>
+	</div>
 {% endif %}

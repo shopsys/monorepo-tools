@@ -68,10 +68,6 @@
 				</dl>
 			{% endif %}
 
-			{% if productDetail.product.description %}
-				{{ productDetail.product.description|raw }}
-			{% endif %}
-
 			<div class="wrap-box mb-1 mt-1">
 				<dl class="list-params-side">
 					<dt class="list-params-side__title">
@@ -101,7 +97,7 @@
 			</div>
 
 			{% if productDetail.parameters %}
-				<div class="wrap-box">
+				<div class="mb-2">
 					<h3>Technické parametry:</h3>
 					{% for productParameterValue in productDetail.parameters %}
 						<dl class="list-params">
@@ -110,6 +106,10 @@
 						</dl>
 					{% endfor %}
 				</div>
+			{% endif %}
+
+			{% if productDetail.product.description %}
+				{{ productDetail.product.description|raw }}
 			{% endif %}
 		</div>
 	</div>

@@ -5,10 +5,11 @@
 
 {% block main_content %}
 
-	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
+
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 			<a href="{{ url('admin_customer_new') }}" class="btn btn-primary mb-1">Vytvořit nového zákazníka</a>
 

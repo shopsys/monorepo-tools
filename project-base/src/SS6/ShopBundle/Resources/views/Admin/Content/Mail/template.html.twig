@@ -13,10 +13,14 @@
 			{{ form_errors(form) }}
 				{% for orderStatusId, template in form.templates %}
 					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
-					
-					<div class="toggle-container">
-						<h2 class ="cursor-pointer toggle-headline">{{ orderStatus.name }}</h2>
-						<div class="wrap-group toggle-content toggle-close">
+
+					<div class="toggle-container box-expand">
+						<h2 class ="toggle-headline box-expand__heading">
+							<span class="in-arrows in-arrows--down">
+								{{ orderStatus.name }}
+							</span>
+						</h2>
+						<div class="toggle-content toggle-close box-expand__hidden">
 							{{ form_row(template.subject, { label: 'Předmět'}) }}
 							{{ form_row(template.body, { label: 'Text'}) }}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
