@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends Controller {
-	
+
 	/**
 	 * @Route("/order/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -31,7 +31,7 @@ class OrderController extends Controller {
 		$order = $orderRepository->getById($id);
 		$allOrderStatuses = $orderStatusRepository->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStatuses));
-		
+
 		try {
 			$orderData = new OrderData();
 
@@ -40,7 +40,7 @@ class OrderController extends Controller {
 			}
 			$form->setData($orderData);
 			$form->handleRequest($request);
-				
+
 			if ($form->isValid()) {
 				$orderFacade = $this->get('ss6.shop.order.order_facade');
 				/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
@@ -118,7 +118,7 @@ class OrderController extends Controller {
 		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
 		$grid->addColumn('domain_id', 'domainId', 'Doména', true);
 		$grid->addColumn('status_name', 'statusName', 'Stav', true);
-		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', true)->setClassAttribute('text-right');
+		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', true)->setClassAttribute('text-right text-nowrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
