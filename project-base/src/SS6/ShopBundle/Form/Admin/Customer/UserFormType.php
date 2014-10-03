@@ -22,12 +22,20 @@ class UserFormType extends AbstractType {
 	private $domains;
 
 	/**
-	 * @param string $scenario
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]|null $domains
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
-	public function __construct($scenario, $domains = null) {
+	private $selectedDomain;
+
+
+	/**
+	 * @param string $scenario
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
+	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 */
+	public function __construct($scenario, $domains = null, $selectedDomain = null) {
 		$this->scenario = $scenario;
 		$this->domains = $domains;
+		$this->selectedDomain = $selectedDomain;
 	}
 
 	/**
@@ -84,6 +92,7 @@ class UserFormType extends AbstractType {
 				->add('domainId', 'choice', array(
 					'required' => true,
 					'choices' => $domainsNamesById,
+					'data' => $this->selectedDomain->getId(),
 				));
 		}
 	}

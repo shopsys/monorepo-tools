@@ -138,11 +138,13 @@ class CustomerController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$domains = $domain->getAll();
 
-		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains), null, array(
+		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains, $selectedDomain), null, array(
 			'validation_groups' => array('Default', 'create'),
 		));
 
