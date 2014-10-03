@@ -96,7 +96,7 @@ class CustomerController extends Controller {
 						ELSE CONCAT(u.firstName, \' \', u.lastName)
 					END) AS name,
 				COUNT(o.id) ordersCount,
-				SUM(o.totalPrice) ordersSumPrice,
+				SUM(o.totalPriceWithVat) ordersSumPrice,
 				MAX(o.createdAt) lastOrderAt')
 			->from(User::class, 'u')
 			->where('u.domainId = :selectedDomainId')
