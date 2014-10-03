@@ -58,14 +58,13 @@
 								{% macro parameterRow(parameter) %}
 									<tr class="js-parameters-item">
 										<td class="table-col-45 table-edit__body__cell">
-											<span class="table-edit__body__cell__error">
-												{{ form_widget(parameter.parameter) }}{{ form_errors(parameter.parameter) }}
-											</span>
+											{{ form_widget(parameter.parameter) }}
 										</td>
 										<td class="table-col-50 table-edit__body__cell">
 											<span class="table-edit__body__cell__error">
-												{{ form_widget(parameter.value) }}{{ form_errors(parameter.value) }}
+												 {{ form_errors(parameter.value) }}
 											</span>
+											{{ form_widget(parameter.value) }}
 										</td>
 										<td class="table-col-5 table-edit__body__cell text-center">
 											<a href="#" class="js-parameters-item-remove table-action"><i class="fa fa-trash-o"></i></a>

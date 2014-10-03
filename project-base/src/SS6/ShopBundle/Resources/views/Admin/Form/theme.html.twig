@@ -16,7 +16,7 @@
 		{% set form_method = "POST" %}
 	{%- endif -%}
 	<form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
-		{%- for attrname, attrvalue in attr -%} 
+		{%- for attrname, attrvalue in attr -%}
 			{{- " " -}}
 			{%- if attrname is sameas('multipleForm') -%}
 			{%- else -%}
@@ -90,7 +90,7 @@
 
 {% block form_errors %}
 	{% spaceless %}
-		<div class="in-message in-message--danger js-validation-errors-list{{ form.parent ? ' in-message-floating' : ''}}{{ errors|length > 0 ? '' : ' js-hidden' }}">
+		<div class="in-message in-message--danger js-validation-errors-list{{ form.children ? '' : ' in-message-floating' }}{{ errors|length > 0 ? '' : ' js-hidden' }}">
 			<ul class="in-message__list">
 				{% if errors|length > 0 %}
 					{% for error in errors %}
@@ -155,7 +155,7 @@
 			</div>
 	{% endspaceless %}
 {% endblock choice_widget_expanded %}
-	
+
 {% block widget_attributes -%}
 	{%- if globalMultipleFormSetting.currentFormMultiple -%}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
