@@ -16,10 +16,6 @@ class OrderController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function indexAction() {
-		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$cartFacade = $this->get('ss6.shop.cart.cart_facade');
@@ -42,12 +38,14 @@ class OrderController extends Controller {
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
+		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
 
-		$payments = $paymentRepository->getVisible();
+		$payments = $paymentEditFacade->getVisible();
 		$transports = $transportEditFacade->getVisible($payments);
 		$user = $this->getUser();
 
@@ -121,16 +119,14 @@ class OrderController extends Controller {
 	}
 
 	public function saveOrderFormAction() {
-		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
+		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
-		$payments = $paymentRepository->getVisible();
+		$payments = $paymentEditFacade->getVisible();
 		$transports = $transportEditFacade->getVisible($payments);
 
 		$flow->setFormTypesData($transports, $payments);
