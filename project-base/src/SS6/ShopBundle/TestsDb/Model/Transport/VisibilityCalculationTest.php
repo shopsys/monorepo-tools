@@ -10,9 +10,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
-class TransportRepositoryTest extends DatabaseTestCase {
+class VisibilityCalculationTest extends DatabaseTestCase {
 	
-	public function testFindAllDataWithVisibility() {
+	public function testFindAllVisible() {
 		$em = $this->getEntityManager();
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -34,20 +34,20 @@ class TransportRepositoryTest extends DatabaseTestCase {
 
 		$paymentRepository = $this->getContainer()->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$allPayments = $paymentRepository->findAllWithTransports();
 
 		$transportRepository = $this->getContainer()->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$transportsDataWithVisibility = $transportRepository->findAllDataWithVisibility($allPayments);
 
-		foreach ($transportsDataWithVisibility as $row) {
-			if ($row['entity']->getId() === $transport1->getId()) {
-				$this->assertTrue($row['visible']);
-			} elseif ($row['entity']->getId() === $transport2->getId()) {
-				$this->assertFalse($row['visible']);
-			} elseif ($row['entity']->getId() === $transport3->getId()) {
-				$this->assertFalse($row['visible']);
-			}
-		}
+		$visibilityCalculation = $this->getContainer()->get('ss6.shop.transport.visibility_calculation');
+		/* @var $visibilityCalculation \SS6\ShopBundle\Model\Transport\VisibilityCalculation */
+		
+		$allPayments = $paymentRepository->findAllWithTransports();
+		$transports = $transportRepository->findAll();
+		$visibleTransports = $visibilityCalculation->findAllVisible($transports, $allPayments);
+
+		$this->assertContains($transport1, $visibleTransports);
+		$this->assertNotContains($transport2, $visibleTransports);
+		$this->assertNotContains($transport3, $visibleTransports);
 	}
+
 }

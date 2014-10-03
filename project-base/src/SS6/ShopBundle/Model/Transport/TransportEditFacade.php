@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
+use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
 
 class TransportEditFacade {
 	
@@ -26,14 +27,25 @@ class TransportEditFacade {
 	private $transportRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Transport\VisibilityCalculation
+	 */
+	private $visibilityCalculation;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
 	 */
-	public function __construct(EntityManager $em, TransportRepository $transportRepository, PaymentRepository $paymentRepository) {
+	public function __construct(
+		EntityManager $em,
+		TransportRepository $transportRepository,
+		PaymentRepository $paymentRepository,
+		VisibilityCalculation $visibilityCalculation
+	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
 		$this->paymentRepository = $paymentRepository;
+		$this->visibilityCalculation = $visibilityCalculation;
 	}
 	
 	/**
@@ -86,5 +98,11 @@ class TransportEditFacade {
 	private function setAdditionalDataAndFlush(Transport $transport, TransportData $transportData) {
 		$transport->setImageForUpload($transportData->getImage());
 		$this->em->flush();
+	}
+
+	public function getVisible(array $visiblePayments) {
+		$transports = $this->transportRepository->findAll();
+
+		return $this->visibilityCalculation->findAllVisible($transports, $visiblePayments);
 	}
 }

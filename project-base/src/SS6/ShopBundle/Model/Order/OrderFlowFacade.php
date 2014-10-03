@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
-use SS6\ShopBundle\Model\Payment\PaymentRepository;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
+use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
+use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class OrderFlowFacade {
 
@@ -13,34 +13,35 @@ class OrderFlowFacade {
 	 */
 	private $orderFlow;
 
+	
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
+	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
 	 */
-	private $paymentRepository;
+	private $transportEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
 	 */
-	private $transportRepository;
+	private $paymentEditFacade;
 
 	/**
 	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFlow $orderFlow
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
-	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
+	 * @param \SS6\ShopBundle\Model\Order\PaymentEditFacade $paymentEditFacade
+	 * @param \SS6\ShopBundle\Model\Transport\TransportEditFacade $transportEditFacade
 	 */
 	public function __construct(
 		OrderFlow $orderFlow,
-		PaymentRepository $paymentRepository,
-		TransportRepository $transportRepository
+		PaymentEditFacade $paymentEditFacade,
+		TransportEditFacade $transportEditFacade
 	) {
 		$this->orderFlow = $orderFlow;
-		$this->paymentRepository = $paymentRepository;
-		$this->transportRepository = $transportRepository;
+		$this->paymentEditFacade = $paymentEditFacade;
+		$this->transportEditFacade = $transportEditFacade;
 	}
 
 	public function resetOrderForm() {
-		$payments = $this->paymentRepository->getVisible();
-		$transports = $this->transportRepository->getVisible($payments);
+		$payments = $this->paymentEditFacade->getVisible();
+		$transports = $this->transportEditFacade->getVisible($payments);
 		$this->orderFlow->setFormTypesData($transports, $payments);
 		$this->orderFlow->reset();
 	}

@@ -295,6 +295,9 @@ services:
     arguments:
       - @service_container
 
+  ss6.shop.payment.visibility_calculation:
+    class: SS6\ShopBundle\Model\Payment\VisibilityCalculation
+
   ss6.shop.pricing.delayed_pricing_setting:
     class: SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
 

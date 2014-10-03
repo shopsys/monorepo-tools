@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Payment\VisibilityCalculation;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentEditFacade {
@@ -29,10 +30,21 @@ class PaymentEditFacade {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
 	 */
-	public function __construct(EntityManager $em, PaymentRepository $paymentRepository, TransportRepository $transportRepository) {
+
+	/**
+	 * @var SS6\ShopBundle\Model\Payment\VisibilityCalculation
+	 */
+	private $visibilityCalculation;
+
+	public function __construct(
+		EntityManager $em,
+		PaymentRepository $paymentRepository,
+		TransportRepository $transportRepository,
+		VisibilityCalculation $visibilityCalculation) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
 		$this->transportRepository = $transportRepository;
+		$this->visibilityCalculation = $visibilityCalculation;
 	}
 
 	/**
@@ -90,5 +102,11 @@ class PaymentEditFacade {
 		$payment->setTransports($transports);
 		$payment->setImageForUpload($paymentData->getImage());
 		$this->em->flush();
+	}
+
+	public function getVisible() {
+		$allPayments = $this->paymentRepository->findAllWithTransports();
+
+		return $this->visibilityCalculation->findAllVisible($allPayments);
 	}
 }
