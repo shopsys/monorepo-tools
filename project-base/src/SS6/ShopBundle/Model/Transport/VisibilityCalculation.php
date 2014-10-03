@@ -32,4 +32,30 @@ class VisibilityCalculation {
 		return false;
 	}
 
+	/**
+	 * @param array $transports
+	 * @param array $visiblePayments
+	 * @return array
+	 */
+	public function findAllVisible(array $transports, array $visiblePayments) {
+		$transportsData = [];
+
+		foreach ($transports as $transport) {
+			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+			$visible = $this->isVisible($transport, $visiblePayments);
+			$transportsData[] = array(
+				'entity' => $transport,
+				'visible' => $visible,
+			);
+		}
+		$visibleTransports = array();
+		foreach ($transportsData as $transportData) {
+			if ($transportData['visible']) {
+				$visibleTransports[] = $transportData['entity'];
+			}
+		}
+
+		return $visibleTransports;
+	}
+
 }

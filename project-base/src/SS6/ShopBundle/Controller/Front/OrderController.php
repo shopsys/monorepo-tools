@@ -40,13 +40,15 @@ class OrderController extends Controller {
 		/* @var $paymentPriceCalculation \SS6\ShopBundle\Model\Payment\PriceCalculation */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
+		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
 
 		$payments = $paymentRepository->getVisible();
-		$transports = $transportRepository->getVisible($payments);
+		$transports = $transportEditFacade->getVisible($payments);
 		$user = $this->getUser();
 
 		$orderData = new OrderData();
@@ -125,9 +127,11 @@ class OrderController extends Controller {
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
+		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
+		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 
 		$payments = $paymentRepository->getVisible();
-		$transports = $transportRepository->getVisible($payments);
+		$transports = $transportEditFacade->getVisible($payments);
 
 		$flow->setFormTypesData($transports, $payments);
 		$flow->bind(new OrderData());
