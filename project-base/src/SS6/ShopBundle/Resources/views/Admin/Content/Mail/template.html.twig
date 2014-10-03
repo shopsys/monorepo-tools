@@ -14,7 +14,7 @@
 				{% for orderStatusId, template in form.templates %}
 					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
 
-					<div class="toggle-container box-expand wrap-box wrap-box--blank">
+					<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
 								{{ orderStatus.name }}
