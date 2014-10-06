@@ -77,7 +77,7 @@ class TransportController extends Controller {
 		if ($form->isValid()) {
 			$transportEditFacade->edit($transport, $transportData);
 
-			$flashMessageTwaddSuccessTwigcess('Byla upravena doprava'
+			$flashMessageSender->addSuccessTwig('Byla upravena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $transport->getName(),
 				'url' => $this->generateUrl('admin_transport_edit', array('id' => $transport->getId())),
@@ -86,7 +86,7 @@ class TransportController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageTwaddErrorTwigrror('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -112,7 +112,7 @@ class TransportController extends Controller {
 		$transportName = $transportEditFacade->getById($id)->getName();
 		$transportEditFacade->deleteById($id);
 
-		$flashMessaaddSuccessTwigdSuccess('Doprava <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSucces('Doprava <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $transportName,
 		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
