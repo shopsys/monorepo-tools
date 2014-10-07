@@ -14,9 +14,14 @@
 
 	{{ importJavascripts([
 		'bundles/bmatznerjquery/js/jquery.min.js',
-		'assets/frontend/scripts/plugins/*',
-		'assets/frontend/scripts/*',
+		'bundles/fpjsformvalidator/js/fp_js_validator.js',
+		'assets/frontend/scripts/plugins/*.js',
+		'assets/frontend/scripts/clientSideValidation/form/*.js',
+		'assets/frontend/scripts/clientSideValidation/*.js',
+		'assets/frontend/scripts/*.js',
 	]) }}
+	{{ js_validator_config() }}
+	{{ init_js_validation() }}
 
 	{% block javascripts %}{% endblock %}
 

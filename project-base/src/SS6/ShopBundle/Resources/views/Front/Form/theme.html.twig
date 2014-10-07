@@ -90,25 +90,15 @@
 
 {% block form_errors %}
 	{% spaceless %}
-		{% if errors|length > 0 %}
-			{% if form.parent %}
-				<div class="in-message--danger in-message-floating {{ attr.class|default('') }}">
-					<ul class="in-message__list">
-						{% for error in errors %}
-							<li>{{ error.message }}</li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% else %}
-				<div class="in-message in-message--danger">
-					<ul class="in-message__list">
-						{% for error in errors %}
-							<li>{{ error.message }}</li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% endif %}
-		{% endif %}
+		<div class="in-message--danger in-message-floating js-validation-errors-list {{ attr.class|default('') }}{{ form.parent ? ' in-message-floating' : ' in-message' }}{{ errors|length > 0 ? '' : ' js-hidden' }}">
+			<ul class="in-message__list">
+				{% if errors|length > 0 %}
+					{% for error in errors %}
+						<li>{{ error.message }}</li>
+					{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
 	{% endspaceless %}
 {% endblock form_errors %}
 
