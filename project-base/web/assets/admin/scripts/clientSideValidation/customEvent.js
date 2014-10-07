@@ -12,8 +12,16 @@
 		}
 	}
 	
+	// stop error bubbling
+	FpJsFormValidator._getErrorPathElement = FpJsFormValidator.getErrorPathElement;
+	FpJsFormValidator.getErrorPathElement = function (element) {
+		return element;
+	}
+	
 	SS6.clientSideValidation.init = function () {
-		$('form :input').each(SS6.clientSideValidation.inputBind);
+		$('form :input:not([type="button"]):not([type="submit"]):not(.js-validation-loaded)')
+			.each(SS6.clientSideValidation.inputBind)
+			.addClass('js-validation-loaded');
 	};
 	
 	SS6.clientSideValidation.inputBind = function () {
@@ -29,20 +37,32 @@
 			});
 	};
 	
-	SS6.clientSideValidation.showErrors = function (errors) {
-		var $formLine = $(this).closest('.form-line');
-		var $errorList = $formLine.find('.js-validation-errors-list');
+	SS6.clientSideValidation.showErrors = function (errors, elementName) {
+		console.log('asd');
+		
+		var $formConatiner = $(this).closest('.form-line');
+		if ($formConatiner.size() > 0) {
+			var $errorHighlight = $formConatiner;
+		} else {
+			$formConatiner = $(this).closest('.form-group, .js-form-group');
+			var $errorHighlight = $(this);
+		}
+		var $errorList = $formConatiner.find('.js-validation-errors-list');
 		var $errorListUl = $errorList.find('ul:first');
+		var errorClass = 'js-' + elementName;
+		$errorListUl.find('li:not([class]), li.' + errorClass).remove();
+		
 		if (errors.length > 0) {
-			$formLine.addClass('js-validation-error');
-			$errorListUl.html('');
+			$errorHighlight.addClass('js-validation-error');
 			$.each(errors, function (key, message) {
-				$errorListUl.append($('<li/>').text(message));
+				$errorListUl.append($('<li/>').addClass(errorClass).text(message));
 			});
 			$errorList.show();
 		} else {
-			$formLine.removeClass('js-validation-error');
-			$errorList.hide();
+			if ($errorListUl.find('li').size() === 0) {
+				$errorHighlight.removeClass('js-validation-error');
+				$errorList.hide();
+			}
 		}
 	};
 	

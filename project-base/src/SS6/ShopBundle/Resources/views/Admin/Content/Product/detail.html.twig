@@ -45,7 +45,7 @@
 
 					<div class="wrap-group__inner">
 
-						<table class="table-edit mb-1">
+						<table class="table-edit mb-1" id="product_parameters">
 							<thead class="table-edit__heading">
 								<tr>
 									<th class="table-edit__heading__cell">Parametr</th>
@@ -53,10 +53,10 @@
 									<th class="table-edit__heading__cell"></th>
 								</tr>
 							</thead>
-							<tbody class="js-parameters table-edit__body" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}">
+							<tbody class="js-parameters table-edit__body" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
 
 								{% macro parameterRow(parameter) %}
-									<tr class="js-parameters-item">
+									<tr class="js-parameters-item js-form-group">
 										<td class="table-col-45 table-edit__body__cell">
 											{{ form_widget(parameter.parameter) }}
 										</td>

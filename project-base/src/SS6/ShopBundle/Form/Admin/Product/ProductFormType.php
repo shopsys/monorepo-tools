@@ -148,12 +148,12 @@ class ProductFormType extends AbstractType {
 				'options' => array(
 					'data_class' => ProductParameterValueData::class,
 				),
-				'constraints' => array(
+				/*'constraints' => array(
 					new \SS6\ShopBundle\Component\UniqueCollection(array(
 						'fields' => array('parameter'),
 						'message' => 'Každý parametr může být nastaven pouze jednou',
 					)),
-				),
+				),*/
 				'error_bubbling' => false,
 			))
 			->add('save', 'submit');
