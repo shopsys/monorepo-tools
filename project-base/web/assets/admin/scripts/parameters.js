@@ -37,7 +37,6 @@
 			event.preventDefault();
 
 			$($('#product_parameters')).jsFormValidator('addPrototype', index);
-			SS6.clientSideValidation.init();
 		});
 		
 		SS6.parameters.refreshCount($('.js-parameters'));

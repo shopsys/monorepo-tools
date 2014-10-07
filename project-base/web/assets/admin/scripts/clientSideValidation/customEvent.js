@@ -10,18 +10,21 @@
 			event.preventDefault();
 			alert('Překontrolujte prosím zadané hodnoty');
 		}
-	}
+	};
 	
 	// stop error bubbling
 	FpJsFormValidator._getErrorPathElement = FpJsFormValidator.getErrorPathElement;
 	FpJsFormValidator.getErrorPathElement = function (element) {
 		return element;
-	}
+	};
 	
-	SS6.clientSideValidation.init = function () {
-		$('form :input:not([type="button"]):not([type="submit"]):not(.js-validation-loaded)')
-			.each(SS6.clientSideValidation.inputBind)
-			.addClass('js-validation-loaded');
+	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
+	FpJsFormValidator.attachElement = function (element) {
+		FpJsFormValidator._attachElement(element)
+		if (!element.domNode) {
+			return;
+		}
+		$(element.domNode).each(SS6.clientSideValidation.inputBind);
 	};
 	
 	SS6.clientSideValidation.inputBind = function () {
@@ -38,8 +41,6 @@
 	};
 	
 	SS6.clientSideValidation.showErrors = function (errors, elementName) {
-		console.log('asd');
-		
 		var $formConatiner = $(this).closest('.form-line');
 		if ($formConatiner.size() > 0) {
 			var $errorHighlight = $formConatiner;
@@ -66,7 +67,4 @@
 		}
 	};
 	
-	$(document).ready(function () {
-		SS6.clientSideValidation.init();
-	});
 })(jQuery);
