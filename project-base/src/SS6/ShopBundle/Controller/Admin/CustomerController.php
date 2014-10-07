@@ -123,7 +123,6 @@ class CustomerController extends Controller {
 			->setClassAttribute('text-right');
 		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', 'lastOrderAtOrder')
 			->setClassAttribute('text-right');
-		
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', array('id' => 'id'));

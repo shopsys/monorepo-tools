@@ -158,7 +158,7 @@ class Grid {
 	 * @param string $id
 	 * @param string $queryId
 	 * @param string $title
-	 * @param boolean $sortable
+	 * @param boolean|string $sortable
 	 * @return \SS6\ShopBundle\Model\Grid\Column
 	 */
 	public function addColumn($id, $queryId, $title, $sortable = false) {
