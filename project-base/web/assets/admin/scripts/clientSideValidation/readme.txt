@@ -4,4 +4,4 @@ Client-side validation requires:
 * when dynamically adding new collection item, this code must be added:
 	$($('#{form_name}_{collection_name}')).jsFormValidator('addPrototype', index);
 * when dynamically removing new collection item, this code must be added:
-  $($('#product_parameters')).jsFormValidator('delPrototype', index);
+  $($('#{form_name}_{collection_name}')).jsFormValidator('delPrototype', index);

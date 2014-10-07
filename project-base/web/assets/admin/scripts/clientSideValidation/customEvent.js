@@ -5,19 +5,16 @@
 	
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
 	FpJsFormValidator.customizeMethods.submitForm = function (event) {
-		FpJsFormValidator.customizeMethods._submitForm.call(this, event);
-		if ($(this).find('.js-validation-error:first').size() > 0) {
-			event.preventDefault();
-			alert('Překontrolujte prosím zadané hodnoty');
+		if (!$(this).hasClass('js-no-validate')) {
+			FpJsFormValidator.customizeMethods._submitForm.call(this, event);
+			if ($(this).find('.js-validation-error:first').size() > 0) {
+				event.preventDefault();
+				alert('Překontrolujte prosím zadané hodnoty');
+			}
 		}
 	};
 	
-	// stop error bubbling
-	FpJsFormValidator._getErrorPathElement = FpJsFormValidator.getErrorPathElement;
-	FpJsFormValidator.getErrorPathElement = function (element) {
-		return element;
-	};
-	
+	// some bug https://github.com/formapro/JsFormValidatorBundle/issues/61
 	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
 	FpJsFormValidator.attachElement = function (element) {
 		FpJsFormValidator._attachElement(element)
@@ -26,6 +23,34 @@
 		}
 		$(element.domNode).each(SS6.clientSideValidation.inputBind);
 	};
+	
+	// stop error bubbling (problem in collections)
+	FpJsFormValidator._getErrorPathElement = FpJsFormValidator.getErrorPathElement;
+	FpJsFormValidator.getErrorPathElement = function (element) {
+		return element;
+	};
+	
+	FpJsFormValidator._initModel = FpJsFormValidator.initModel;
+	FpJsFormValidator.initModel = function (model) {
+		var element = this.createElement(model);
+		if (!element) {
+			return null;
+		}
+		var form = this.findFormElement(element);
+		element.domNode = form;
+		this.attachElement(element);
+		if (form) {
+			this.attachDefaultEvent(element, form);
+		}
+
+		return element;
+	};
+	
+	$(document).ready(function () {
+		$('.js-no-validate-button').click(function () {
+			$(this).closest('form').addClass('js-no-validate');
+		});
+	});
 	
 	SS6.clientSideValidation.inputBind = function () {
 		$(this)
