@@ -82,4 +82,16 @@ class ParameterFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param int $parameterId
+	 */
+	public function removeDeletedById($parameterId) {
+		$productParameterValues = $this->parameterRepository->findProductParameterValuesByParameterId($parameterId);
+
+		foreach ($productParameterValues as $productParameterValue) {
+			$this->em->remove($productParameterValue);
+		}
+		$this->em->flush();
+	}
+
 }

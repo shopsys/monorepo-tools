@@ -87,10 +87,24 @@ class ParameterRepository {
 		return $parameterValue;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
 	public function findParameterValuesByProduct(\SS6\ShopBundle\Model\Product\Product $product) {
 		return $this->getProductParameterValueRepository()->findBy(array(
 			'product' => $product,
 		));
 	}
 
+	/**
+	 * @param int $parameterId
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function findProductParameterValuesByParameterId($parameterId) {
+		return $this->getProductParameterValueRepository()->findBy(array(
+			'parameter' => $parameterId,
+		));
+		
+	}
 }
