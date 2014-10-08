@@ -85,7 +85,7 @@ class TransportAndPaymentWatcherService {
 			$rememberedTransportPriceValue = $transportPrices[$transport->getId()];
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
 
-			if ($rememberedTransportPriceValue != $transportPrice->getBasePriceWithVat()) {
+			if ($rememberedTransportPriceValue != $transportPrice->getPriceWithVat()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena dopravy ' . $transport->getName() .
 					'. Prosím, překontrolujte si objednávku.';
 				$this->flashMessageBag->addInfo($message);
@@ -103,7 +103,7 @@ class TransportAndPaymentWatcherService {
 			$rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
 			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
 
-			if ($rememberedPaymentPriceValue !== $paymentPrice->getBasePriceWithVat()) {
+			if ($rememberedPaymentPriceValue !== $paymentPrice->getPriceWithVat()) {
 				$message = 'V průběhu objednávkového procesu byla změněna cena platby ' . $payment->getName() .
 					'. Prosím, překontrolujte si objednávku.';
 				$this->flashMessageBag->addInfo($message);
@@ -119,7 +119,7 @@ class TransportAndPaymentWatcherService {
 		$transportPriceValues = array();
 		foreach ($transports as $transport) {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
-			$transportPriceValues[$transport->getId()] = $transportPrice->getBasePriceWithVat();
+			$transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat();
 		}
 
 		return $transportPriceValues;
@@ -133,7 +133,7 @@ class TransportAndPaymentWatcherService {
 		$paymentPriceValues = array();
 		foreach ($payments as $payment) {
 			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
-			$paymentPriceValues[$payment->getId()] = $paymentPrice->getBasePriceWithVat();
+			$paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat();
 		}
 
 		return $paymentPriceValues;

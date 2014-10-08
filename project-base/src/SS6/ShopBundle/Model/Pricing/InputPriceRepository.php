@@ -96,11 +96,11 @@ class InputPriceRepository {
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$product->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
-					$productPrice->getBasePriceWithVat(),
+					$productPrice->getPriceWithVat(),
 					$product->getVat()
 				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-				$product->setPrice($productPrice->getBasePriceWithVat());
+				$product->setPrice($productPrice->getPriceWithVat());
 			} else {
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
 			}
@@ -122,11 +122,11 @@ class InputPriceRepository {
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$payment->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
-					$paymentPrice->getBasePriceWithVat(),
+					$paymentPrice->getPriceWithVat(),
 					$payment->getVat()
 				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-				$payment->setPrice($paymentPrice->getBasePriceWithVat());
+				$payment->setPrice($paymentPrice->getPriceWithVat());
 			} else {
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
 			}
@@ -148,11 +148,11 @@ class InputPriceRepository {
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$transport->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
-					$transportPrice->getBasePriceWithVat(),
+					$transportPrice->getPriceWithVat(),
 					$transport->getVat()
 				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-				$transport->setPrice($transportPrice->getBasePriceWithVat());
+				$transport->setPrice($transportPrice->getPriceWithVat());
 			} else {
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
 			}

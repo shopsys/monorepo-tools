@@ -78,9 +78,9 @@ class OrderPreviewCalculation {
 		return new OrderPreview(
 			$cartItems,
 			$cartItemsPrices,
-			$totalPrice->getBasePriceWithoutVat(),
-			$totalPrice->getBasePriceWithVat(),
-			$totalPrice->getBasePriceVatAmount(),
+			$totalPrice->getPriceWithoutVat(),
+			$totalPrice->getPriceWithVat(),
+			$totalPrice->getVatAmount(),
 			$transport,
 			$transportPrice,
 			$payment,
@@ -111,15 +111,15 @@ class OrderPreviewCalculation {
 		}
 
 		if ($transportPrice !== null) {
-			$totalPriceWithoutVat += $transportPrice->getBasePriceWithoutVat();
-			$totalPriceWithVat += $transportPrice->getBasePriceWithVat();
-			$totalPriceVatAmount += $transportPrice->getBasePriceVatAmount();
+			$totalPriceWithoutVat += $transportPrice->getPriceWithoutVat();
+			$totalPriceWithVat += $transportPrice->getPriceWithVat();
+			$totalPriceVatAmount += $transportPrice->getVatAmount();
 		}
 
 		if ($paymentPrice !== null) {
-			$totalPriceWithoutVat += $paymentPrice->getBasePriceWithoutVat();
-			$totalPriceWithVat += $paymentPrice->getBasePriceWithVat();
-			$totalPriceVatAmount += $paymentPrice->getBasePriceVatAmount();
+			$totalPriceWithoutVat += $paymentPrice->getPriceWithoutVat();
+			$totalPriceWithVat += $paymentPrice->getPriceWithVat();
+			$totalPriceVatAmount += $paymentPrice->getVatAmount();
 		}
 
 		return new Price(

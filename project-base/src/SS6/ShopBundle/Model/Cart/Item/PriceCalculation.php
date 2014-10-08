@@ -47,9 +47,9 @@ class PriceCalculation {
 		$this->productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
 
 		$cartItemPrice = new CartItemPrice(
-			$this->productPrice->getBasePriceWithoutVat(),
-			$this->productPrice->getBasePriceWithVat(),
-			$this->productPrice->getBasePriceVatAmount(),
+			$this->productPrice->getPriceWithoutVat(),
+			$this->productPrice->getPriceWithVat(),
+			$this->productPrice->getVatAmount(),
 			$this->getTotalPriceWithoutVat(),
 			$this->getTotalPriceWithVat(),
 			$this->getTotalPriceVatAmount()
@@ -69,7 +69,7 @@ class PriceCalculation {
 	 * @return string
 	 */
 	private function getTotalPriceWithVat() {
-		return $this->productPrice->getBasePriceWithVat() * $this->cartItem->getQuantity();
+		return $this->productPrice->getPriceWithVat() * $this->cartItem->getQuantity();
 	}
 
 	/**

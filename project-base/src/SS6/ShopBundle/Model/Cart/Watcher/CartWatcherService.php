@@ -40,7 +40,7 @@ class CartWatcherService {
 				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
 				array('name' => $cartItem->getName()));
 			$productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
-			$cartItem->setWatchedPrice($productPrice->getBasePriceWithVat());
+			$cartItem->setWatchedPrice($productPrice->getPriceWithVat());
 		}
 	}
 
@@ -52,7 +52,7 @@ class CartWatcherService {
 		$modifiedItems = array();
 		foreach ($cart->getItems() as $cartItem) {
 			$productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
-			if ($cartItem->getWatchedPrice() != $productPrice->getBasePriceWithVat()) {
+			if ($cartItem->getWatchedPrice() != $productPrice->getPriceWithVat()) {
 				$modifiedItems[] = $cartItem;
 			}
 		}
