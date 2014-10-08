@@ -9,6 +9,22 @@
 				}
 			}
 		});
-		
+
+		var $orderPersonalInfoForm = $('form[name="orderPersonalInfo"]');
+		$orderPersonalInfoForm.jsFormValidator({
+			'groups': function () {
+
+				var groups = ['Default'];
+				if ($orderPersonalInfoForm.find('#orderPersonalInfo_deliveryAddressFilled').is(':checked')) {
+					groups.push('differentDeliveryAddress');
+				}
+				if ($orderPersonalInfoForm.find('#orderPersonalInfo_companyCustomer').is(':checked')) {
+					groups.push('companyCustomer');
+				}
+
+				return groups;
+			}
+		});
+				
 	});
 })(jQuery);
