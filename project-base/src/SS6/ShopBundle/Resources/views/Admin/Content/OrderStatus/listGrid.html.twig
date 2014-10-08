@@ -1,9 +1,5 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
-{% block grid_value_cell_id_name %}
-	<a href="{{ url('admin_orderstatus_edit', { id: row.os.id }) }}">{{ value }}</a>
-{% endblock %}
-
 {% block grid_action_cell_type_delete %}
 	{% if row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
 		<span title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám."
@@ -38,5 +34,10 @@
 
 {% block grid_pager_totalcount %}
 	{% set entityName = 'stavů objednávek' %}
+	{{ parent() }}
+{% endblock %}
+
+{% block grid_inline_edit_add_button %}
+	{% set addEntity = 'Vytvořit nový stav objednávek' %}
 	{{ parent() }}
 {% endblock %}
