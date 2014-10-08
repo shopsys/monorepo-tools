@@ -101,4 +101,12 @@ class OrderStatusFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param int $orderStatusId
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 */
+	public function getById($orderStatusId) {
+		return $this->orderStatusRepository->getById($orderStatusId);
+	}
+
 }

@@ -4,128 +4,19 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Order\Status\DeleteFormType;
-use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
-use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderStatusController extends Controller {
 
 	/**
-	 * @Route("/order_status/new/")
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 */
-	public function newAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
-		$form = $this->createForm(new OrderStatusFormType());
-
-		$orderStatusData = new OrderStatusFormData();
-
-		$form->setData($orderStatusData);
-		$form->handleRequest($request);
-
-		if ($form->isValid()) {
-			$orderStatusData = $form->getData();
-			$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
-			/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
-
-			$orderStatus = $orderStatusFacade->create($orderStatusData);
-
-			$flashMessageSender->addSuccessTwig('Byl vytvořen stav objednávek'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
-				'name' => $orderStatus->getName(),
-				'url' => $this->generateUrl('admin_orderstatus_edit', array('id' => $orderStatus->getId())),
-			));
-			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
-		}
-
-		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
-		}
-
-		return $this->render('@SS6Shop/Admin/Content/OrderStatus/new.html.twig', array(
-			'form' => $form->createView(),
-		));
-	}
-
-	/**
-	 * @Route("/order_status/edit/{id}", requirements={"id" = "\d+"})
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $id
-	 */
-	public function editAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
-		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
-
-		$orderStatus = $orderStatusRepository->getById($id);
-		/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
-		$form = $this->createForm(new OrderStatusFormType());
-		$orderStatusData = new OrderStatusFormData();
-
-		if (!$form->isSubmitted()) {
-			$orderStatusData->setId($orderStatus->getId());
-			$orderStatusData->setName($orderStatus->getName());
-		}
-
-		$form->setData($orderStatusData);
-		$form->handleRequest($request);
-
-		if ($form->isValid()) {
-			$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
-			/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
-
-			$orderStatus = $orderStatusFacade->edit($id, $orderStatusData);
-
-			$flashMessageSender->addSuccessTwig('Byl upraven stav objednávek'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
-				'name' => $orderStatus->getName(),
-				'url' => $this->generateUrl('admin_orderstatus_edit', array('id' => $orderStatus->getId())),
-			));
-			return $this->redirect($this->generateUrl('admin_orderstatus_list'));
-		}
-
-		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
-		}
-
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace stavu objednávek - ' . $orderStatus->getName()));
-
-		return $this->render('@SS6Shop/Admin/Content/OrderStatus/edit.html.twig', array(
-			'form' => $form->createView(),
-			'orderStatus' => $orderStatus,
-		));
-	}
-
-	/**
 	 * @Route("/order_status/list/")
 	 */
 	public function listAction() {
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$orderStatusInlineEdit = $this->get('ss6.shop.order.status.grid.order_status_inline_edit');
+		/* @var $orderStatusInlineEdit \SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit */
 
-		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-		$queryBuilder
-			->select('os')
-			->from(OrderStatus::class, 'os');
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
-
-		$grid = $gridFactory->create('orderStatusList', $dataSource);
-		$grid->setDefaultOrder('name');
-
-		$grid->addColumn('name', 'os.name', 'Název', true);
-
-		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_orderstatus_edit', array('id' => 'os.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_orderstatus_delete', array('id' => 'os.id'));
+		$grid = $orderStatusInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/OrderStatus/list.html.twig', array(
 			'gridView' => $grid->createView(),
