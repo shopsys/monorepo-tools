@@ -33,7 +33,7 @@
 					{% block customer_last_login %}{% endblock %}
 				</div>
 
-				<div class="wrap-group">
+				<div class="wrap-group" id="customer_billingAddressData">
 					<h2>Firemní údaje</h2>
 					{{ form_row(form.billingAddressData.companyCustomer, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
