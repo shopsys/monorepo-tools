@@ -28,7 +28,7 @@
 					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
 				</div>
 
-				<div class="wrap-box">
+				<div class="wrap-box" id="customer_billingAddressData">
 					<h2>Firemní údaje</h2>
 					{{ form_row(form.billingAddressData.companyCustomer, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
@@ -50,7 +50,7 @@
 				</div>
 
 
-				<div class="wrap-box">
+				<div class="wrap-box" id="customer_deliveryAddressData">
 					<h2>Doručovací adresa</h2>
 					{{ form_row(form.deliveryAddressData.addressFilled, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
