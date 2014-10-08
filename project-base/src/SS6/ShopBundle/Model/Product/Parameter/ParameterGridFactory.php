@@ -44,7 +44,9 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$grid->addColumn('name', 'p.name', 'Název', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_parameter_delete', array('id' => 'p.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tento parametr?');
+			->setConfirmMessage('Opravdu chcete odstranit tento parametr? '
+				. 'Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. '
+				. 'Tento krok je nevratný!');
 
 		return $grid;
 	}

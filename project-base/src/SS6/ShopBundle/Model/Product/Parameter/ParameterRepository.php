@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ParameterRepository {
 
@@ -87,10 +88,23 @@ class ParameterRepository {
 		return $parameterValue;
 	}
 
-	public function findParameterValuesByProduct(\SS6\ShopBundle\Model\Product\Product $product) {
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function findParameterValuesByProduct(Product $product) {
 		return $this->getProductParameterValueRepository()->findBy(array(
 			'product' => $product,
 		));
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function getProductParameterValuesByParameter(Parameter $parameter) {
+		return $this->getProductParameterValueRepository()->findBy(array(
+			'parameter' => $parameter,
+		));
+	}
 }
