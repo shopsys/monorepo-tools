@@ -33,7 +33,6 @@ class ParameterController extends Controller {
 		/* @var $parameterFacade \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade */
 
 		$fullName = $parameterFacade->getById($id)->getName();
-		$parameterFacade->removeDeletedById($id);
 		$parameterFacade->deleteById($id);
 
 		$flashMessageSender->addSuccessTwig('Parametr <strong>{{ name }}</strong> byla smazán', array(
