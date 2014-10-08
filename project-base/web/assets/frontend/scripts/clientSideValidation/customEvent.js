@@ -66,6 +66,7 @@
 	};
 	
 	SS6.clientSideValidation.showErrors = function (errors, elementName) {
+		var $submitButtons = $(this).closest('form').find('.button-primary');
 		var $formConatiner = $(this).closest('.form-line');
 		if ($formConatiner.size() > 0) {
 			var $errorHighlight = $formConatiner;
@@ -84,10 +85,16 @@
 				$errorListUl.append($('<li/>').addClass(errorClass).text(message));
 			});
 			$errorList.show();
+			$submitButtons.addClass('button--alter');
 		} else {
 			if ($errorListUl.find('li').size() === 0) {
 				$errorHighlight.removeClass('js-validation-error');
 				$errorList.hide();
+			}
+			if ($(this).closest('form').find('.js-validation-error:first').size() > 0) {
+				$submitButtons.addClass('button--alter');
+			} else {
+				$submitButtons.removeClass('button--alter');
 			}
 		}
 	};
