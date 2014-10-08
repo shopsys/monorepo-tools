@@ -20,11 +20,14 @@
 	}
 	
 	SS6.addProduct.processResponse = function (data) {
-		var jsWindowId = $(data.jsWindow).filter('.window:first').attr('id');
-		$('#' + jsWindowId).remove();
-		$('body').append(data.jsWindow);
-		SS6.window.open(data.jsWindowId);
-		if (data.cartBoxReloadUrl) {
+		var options = {
+			content: data.message,
+			buttonContinue: data.success,
+			textContinue: 'Přejít do košíku',
+			urlContinue: data.continueUrl
+		}
+		SS6.window(options);
+		if (data.success && data.cartBoxReloadUrl) {
 			$.ajax({
 				url: data.cartBoxReloadUrl,
 				type: 'get',

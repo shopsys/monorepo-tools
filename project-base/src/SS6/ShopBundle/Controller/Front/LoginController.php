@@ -31,13 +31,9 @@ class LoginController extends Controller {
 		));
 	}
 	
-	/**
-	 * @param string $windowName
-	 */
-	public function windowInitAction($windowName) {
-		return $this->render('@SS6Shop/Front/Inline/Login/windowInit.html.twig', array(
+	public function windowFormAction() {
+		return $this->render('@SS6Shop/Front/Content/Login/windowForm.html.twig', array(
 			'form' => $this->getLoginForm()->createView(),
-			'windowName' => $windowName,
 		));
 	}
 	
