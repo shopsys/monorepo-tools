@@ -17,7 +17,7 @@
 	// some bug https://github.com/formapro/JsFormValidatorBundle/issues/61
 	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
 	FpJsFormValidator.attachElement = function (element) {
-		FpJsFormValidator._attachElement(element)
+		FpJsFormValidator._attachElement(element);
 		if (!element.domNode) {
 			return;
 		}

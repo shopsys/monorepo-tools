@@ -16,12 +16,12 @@
 		$customerBillingAddressForm.jsFormValidator({
 			'groups': function () {
 
-			var groups = ['Default'];
-			if ($customerBillingAddressForm.find('#customer_billingAddressData_companyCustomer').is(':checked')) {
-				groups.push('companyCustomer');
-			}
+				var groups = ['Default'];
+				if ($customerBillingAddressForm.find('#customer_billingAddressData_companyCustomer').is(':checked')) {
+					groups.push('companyCustomer');
+				}
 
-			return groups;
+				return groups;
 			}
 		});
 		

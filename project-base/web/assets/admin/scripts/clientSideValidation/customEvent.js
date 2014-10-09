@@ -17,7 +17,7 @@
 	// some bug https://github.com/formapro/JsFormValidatorBundle/issues/61
 	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
 	FpJsFormValidator.attachElement = function (element) {
-		FpJsFormValidator._attachElement(element)
+		FpJsFormValidator._attachElement(element);
 		if (!element.domNode) {
 			return;
 		}
@@ -67,7 +67,6 @@
 
 	SS6.clientSideValidation.showErrors = function (errors, elementName) {
 		var $submitButtons = $(this).closest('form').find('.btn-primary');
-		console.log($submitButtons.size());
 		var $formConatiner = $(this).closest('.form-line');
 		if ($formConatiner.size() > 0) {
 			var $errorHighlight = $formConatiner;

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Component\UniqueCollection;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\FileUploadType;
@@ -148,12 +149,12 @@ class ProductFormType extends AbstractType {
 				'options' => array(
 					'data_class' => ProductParameterValueData::class,
 				),
-				/*'constraints' => array(
-					new \SS6\ShopBundle\Component\UniqueCollection(array(
+				'constraints' => array(
+					new UniqueCollection(array(
 						'fields' => array('parameter'),
 						'message' => 'Každý parametr může být nastaven pouze jednou',
 					)),
-				),*/
+				),
 				'error_bubbling' => false,
 			))
 			->add('save', 'submit');
