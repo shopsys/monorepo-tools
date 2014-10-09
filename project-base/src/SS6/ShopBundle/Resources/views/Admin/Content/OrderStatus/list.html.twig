@@ -7,9 +7,7 @@
 	<div id="js-order-status-delete-window"></div>
 
 	<div class="row">
-		<div class="col-sm-12 col-md-10 col-lg-10">
-			<a href="{{ url('admin_orderstatus_new') }}" class="btn btn-primary mb-1">Vytvořit nový stav objednávek</a>
-
+		<div class="col-sm-12 col-md-10 col-lg-10" id="js-order-status-grid">
 			{{ gridView.render('@SS6Shop/Admin/Content/OrderStatus/listGrid.html.twig') }}
 		</div>
 	</div>

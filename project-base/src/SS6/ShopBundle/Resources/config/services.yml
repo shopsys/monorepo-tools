@@ -275,6 +275,12 @@ services:
   ss6.shop.order.preview.order_preview_calculation:
     class: SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
 
+  ss6.shop.order.status.grid.order_status_inline_edit:
+    class: SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit
+
+  ss6.shop.order.status.grid.order_status_grid_factory:
+    class: SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory
+
   ss6.shop.payment.payment_detail_factory:
     class: SS6\ShopBundle\Model\Payment\Detail\Factory
 

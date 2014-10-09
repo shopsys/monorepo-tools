@@ -23,14 +23,12 @@ class OrderStatusFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('id', 'integer', array('read_only' => true, 'required' => false))
 			->add('name', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název stavu')),
 					new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název stavu nesmí být delší než {{ limit }} znaků')),
 				)
-			))
-			->add('save', 'submit');
+			));
 	}
 
 	/**

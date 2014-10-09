@@ -4,7 +4,7 @@
 	SS6.orderStatusDelete = SS6.orderStatusDelete || {};
 	
 	SS6.orderStatusDelete.init = function () {
-		$('.js-order-status-delete-button').click(SS6.orderStatusDelete.onDelete);
+		$('#js-order-status-grid').on('click', '.js-order-status-delete-button', SS6.orderStatusDelete.onDelete);
 		
 		$(document).on('change', '#js-order-status-delete-status-select', function() {
 			if ($(this).val() !== '') {
