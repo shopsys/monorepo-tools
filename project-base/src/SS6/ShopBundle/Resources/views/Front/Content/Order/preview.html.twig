@@ -22,7 +22,7 @@
 							Způsob dopravy: {{ orderPreview.transport.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ orderPreview.transportPrice.basePriceWithVat|priceText }}
+							{{ orderPreview.transportPrice.priceWithVat|priceText }}
 						</td>
 					</tr>
 				{% endif %}
@@ -33,7 +33,7 @@
 							Způsob platby: {{ orderPreview.payment.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ orderPreview.paymentPrice.basePriceWithVat|priceText }}
+							{{ orderPreview.paymentPrice.priceWithVat|priceText }}
 						</td>
 					</tr>
 				{% endif %}
