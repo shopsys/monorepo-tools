@@ -22,6 +22,10 @@
 			<directory>../src/*/*Bundle/TestsDb</directory>
 			<directory>../src/*/Bundle/*Bundle/TestsDb</directory>
 		</testsuite>
+		<testsuite name="TestsCrawler">
+			<directory>../src/*/*Bundle/TestsCrawler</directory>
+			<directory>../src/*/Bundle/*Bundle/TestsCrawler</directory>
+		</testsuite>
 	</testsuites>
 
 	<filter>
@@ -31,9 +35,11 @@
 				<directory>../src/*/*Bundle/Resources</directory>
 				<directory>../src/*/*Bundle/Tests</directory>
 				<directory>../src/*/*Bundle/TestsDb</directory>
+				<directory>../src/*/*Bundle/TestsCrawler</directory>
 				<directory>../src/*/Bundle/*Bundle/Resources</directory>
 				<directory>../src/*/Bundle/*Bundle/Tests</directory>
 				<directory>../src/*/Bundle/*Bundle/TestsDb</directory>
+				<directory>../src/*/Bundle/*Bundle/TestsCrawler</directory>
 			</exclude>
 		</whitelist>
 	</filter>
