@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Cart\Watcher;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
-use SS6\ShopBundle\Model\FlashMessage\Bag;
+use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 
 class CartWatcherFacade {
 	
@@ -20,21 +20,21 @@ class CartWatcherFacade {
 	private $cartWatcherService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
+	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
 	 */
-	private $flashMessageBag;
+	private $flashMessageSender;
 	
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartWatcherService
 	 */
 	public function __construct(
-		Bag $flashMessageBag,
+		FlashMessageSender $flashMessageSender,
 		EntityManager $em,
 		CartWatcherService $cartWatcherService
 	) {
-		$this->flashMessageBag = $flashMessageBag;
+		$this->flashMessageSender = $flashMessageSender;
 		$this->em = $em;
 		$this->cartWatcherService = $cartWatcherService;
 	}
@@ -47,8 +47,9 @@ class CartWatcherFacade {
 
 		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart);
 		foreach ($notVisibleItems as $cartItem) {
-			$this->flashMessageBag->addError('Zboží ' . $cartItem->getName() .
-				', které jste měl v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.');
+			$this->flashMessageSender->addErrorTwig('Zboží <strong>{{ name }}</strong>'
+				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
+				array('name' => $cartItem->getName()));
 			$cart->removeItemById($cartItem->getId());
 			$this->em->remove($cartItem);
 		}

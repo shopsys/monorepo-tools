@@ -3,15 +3,15 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\FlashMessage\Bag;
+use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Product\PriceCalculation;
 
 class CartWatcherService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
+	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
 	 */
-	private $flashMessageBag;
+	private $flashMessageSender;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
@@ -19,14 +19,14 @@ class CartWatcherService {
 	private $productPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $productPriceCalculation
 	 */
 	public function __construct(
-		Bag $flashMessageBag,
+		FlashMessageSender $flashMessageSender,
 		PriceCalculation $productPriceCalculation
 	) {
-		$this->flashMessageBag = $flashMessageBag;
+		$this->flashMessageSender = $flashMessageSender;
 		$this->productPriceCalculation = $productPriceCalculation;
 	}
 
@@ -36,8 +36,9 @@ class CartWatcherService {
 	public function showErrorOnModifiedItems(Cart $cart) {
 		foreach ($this->getModifiedPriceItems($cart) as $cartItem) {
 			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
-			$this->flashMessageBag->addInfo('Byla změněna cena zboží ' . $cartItem->getName() .
-				', které máte v košíku. Prosím, překontrolujte si objednávku.');
+			$this->flashMessageSender->addInfoTwig('Byla změněna cena zboží <strong>{{ name }}</strong>'
+				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
+				array('name' => $cartItem->getName()));
 			$productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
 			$cartItem->setWatchedPrice($productPrice->getBasePriceWithVat());
 		}

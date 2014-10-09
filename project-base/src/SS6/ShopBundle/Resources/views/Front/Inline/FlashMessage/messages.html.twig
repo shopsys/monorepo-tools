@@ -1,7 +1,7 @@
 {% if messages %}
 	<div class="in-message in-message--{{ type }} js-flash-message">
 		{% for message in messages %}
-			<div>{{ message }}</div>
+			<div>{{ message|raw }}</div>
 		{% endfor %}
 	</div>
 {% endif %}
