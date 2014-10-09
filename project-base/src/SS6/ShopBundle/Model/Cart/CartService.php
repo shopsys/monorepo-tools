@@ -24,7 +24,7 @@ class CartService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @param \SS6\ShopBundle\Model\Product\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $quantity
 	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
 	 * @throws \SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException

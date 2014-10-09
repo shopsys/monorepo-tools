@@ -57,6 +57,7 @@ class ProductEditFacade {
 
 		$this->em->persist($product);
 		$this->saveParameters($product, $productData->getParameters());
+		$this->saveHidden($product, $productData->getHidden());
 
 		$this->em->flush();
 		
@@ -75,6 +76,7 @@ class ProductEditFacade {
 
 		$product->edit($productData);
 		$this->saveParameters($product, $productData->getParameters());
+		$this->saveHidden($product, $productData->getHidden());
 
 		$this->em->flush();
 		
@@ -126,4 +128,23 @@ class ProductEditFacade {
 		}
 		$this->em->flush();
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param array $hiddenData
+	 */
+	private function saveHidden(Product $product, array $hiddenData) {
+		foreach ($hiddenData as $domainId => $hidden) {
+			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainId);
+			if ($productDomain !== null) {
+				$productDomain->setHidden($hidden);
+			} else {
+				$productDomain = new ProductDomain($product, $domainId, $hidden);
+				$this->em->persist($productDomain);
+			}
+		}
+		
+		$this->em->flush();
+	}
+
 }

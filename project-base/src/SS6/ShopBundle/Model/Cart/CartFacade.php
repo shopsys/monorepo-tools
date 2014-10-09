@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade {
@@ -32,6 +33,11 @@ class CartFacade {
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	private $customerIdentifier;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 	
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
@@ -39,14 +45,22 @@ class CartFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
 	 */
-	public function __construct(EntityManager $em, CartService $cartService, Cart $cart, ProductRepository $productRepository,
-			CustomerIdentifier $customerIdentifier) {
+	public function __construct(
+		EntityManager $em,
+		CartService $cartService,
+		Cart $cart,
+		ProductRepository $productRepository,
+		CustomerIdentifier $customerIdentifier,
+		Domain $domain
+	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
 		$this->cart = $cart;
 		$this->productRepository = $productRepository;
 		$this->customerIdentifier = $customerIdentifier;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -54,7 +68,7 @@ class CartFacade {
 	 * @param int $quantity
 	 */
 	public function addProductToCart($productId, $quantity) {
-		$product = $this->productRepository->getVisibleById($productId);
+		$product = $this->productRepository->getVisibleByIdAndDomainId($productId, $this->domain->getId());
 		$result = $this->cartService->addProductToCart($this->cart, $this->customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
 		

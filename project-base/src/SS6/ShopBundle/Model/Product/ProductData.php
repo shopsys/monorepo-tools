@@ -60,7 +60,7 @@ class ProductData {
 	private $stockQuantity;
 
 	/**
-	 * @var boolean
+	 * @var array
 	 */
 	private $hidden;
 
@@ -91,7 +91,7 @@ class ProductData {
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
-	 * @param bool|null $hidden
+	 * @param array $hidden
 	 * @param string|null $image
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 */
@@ -106,7 +106,7 @@ class ProductData {
 		DateTime $sellingFrom = null,
 		DateTime $sellingTo = null,
 		$stockQuantity = null,
-		$hidden = false,
+		array $hidden = array(),
 		$image = null,
 		$availability = null,
 		array $parameters = array()
@@ -198,7 +198,7 @@ class ProductData {
 	}
 
 	/**
-	 * @return boolean
+	 * @return array
 	 */
 	public function getHidden() {
 		return $this->hidden;
@@ -296,7 +296,7 @@ class ProductData {
 	}
 
 	/**
-	 * @param boolean $hidden
+	 * @param array $hidden
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
@@ -326,7 +326,7 @@ class ProductData {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
-	public function setFromEntity(Product $product, array $productParameterValues = null) {
+	public function setFromEntity(Product $product) {
 		$this->setName($product->getName());
 		$this->setCatnum($product->getCatnum());
 		$this->setPartno($product->getPartno());
@@ -337,15 +337,7 @@ class ProductData {
 		$this->setSellingFrom($product->getSellingFrom());
 		$this->setSellingTo($product->getSellingTo());
 		$this->setStockQuantity($product->getStockQuantity());
-		$this->setHidden($product->isHidden());
 		$this->setAvailability($product->getAvailability());
-		$productParameterValuesData = array();
-		foreach ($productParameterValues as $productParameterValue) {
-			$productParameterValueData = new Parameter\ProductParameterValueData();
-			$productParameterValueData->setFromEntity($productParameterValue);
-			$productParameterValuesData[] = $productParameterValueData;
-		}
-		$this->setParameters($productParameterValuesData);
 	}
 
 }

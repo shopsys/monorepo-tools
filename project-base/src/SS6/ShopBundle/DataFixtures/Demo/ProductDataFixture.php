@@ -7,8 +7,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
-use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -48,34 +46,29 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 */
 	private function createProduct(ObjectManager $manager, $referenceName, ProductData $productData) {
-		$product = new Product($productData);
+		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$manager->persist($product);
-		$manager->flush();
+		$this->persistParemetersAndValues($manager, $productData->getParameters());
 
-		$this->createParameters($manager, $product, $productData->getParameters());
+		$product = $productEditFacade->create($productData);
 
 		$this->addReference($referenceName, $product);
 	}
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
 	 */
-	private function createParameters(ObjectManager $manager, Product $product, array $productParameterValuesData) {
+	private function persistParemetersAndValues(ObjectManager $manager, array $productParameterValuesData) {
 		foreach ($productParameterValuesData as $productParameterValueData) {
 			$manager->persist($productParameterValueData->getParameter());
 			$manager->persist($productParameterValueData->getValue());
-
-			// Doctrine doesn't know how to resolve persisting order and fill autoincrement IDs
-			// into foreign keys of related entities. That's why explicit flush() is needed.
-			$manager->flush();
-
-			$productParameterValueData->setProduct($product);
-			$productParameterValue = new ProductParameterValue($productParameterValueData);
-			$manager->persist($productParameterValue);
 		}
+
+		// Doctrine doesn't know how to resolve persisting order and fill autoincrement IDs
+		// into foreign keys of related entities. That's why explicit flush() is needed.
+		$manager->flush();
 	}
 
 	/**

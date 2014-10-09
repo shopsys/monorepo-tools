@@ -3,8 +3,10 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Product\PriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartWatcherService {
 
@@ -19,15 +21,31 @@ class CartWatcherService {
 	private $productPriceCalculation;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	public function __construct(
 		FlashMessageSender $flashMessageSender,
-		PriceCalculation $productPriceCalculation
+		PriceCalculation $productPriceCalculation,
+		ProductRepository $productRepository,
+		Domain $domain
 	) {
 		$this->flashMessageSender = $flashMessageSender;
 		$this->productPriceCalculation = $productPriceCalculation;
+		$this->productRepository = $productRepository;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -66,7 +84,8 @@ class CartWatcherService {
 	public function getNotVisibleItems(Cart $cart) {
 		$notVisibleItems = array();
 		foreach ($cart->getItems() as $item) {
-			if (!$item->getProduct()->isVisible()) {
+			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($item->getProduct(), $this->domain->getId());
+			if ($productDomain === null || !$productDomain->isVisible()) {
 				$notVisibleItems[] = $item;
 			}
 		}

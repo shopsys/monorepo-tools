@@ -96,14 +96,7 @@ class Product implements EntityFileUploadInterface {
 	 * @ORM\Column(type="integer", nullable=true)
 	 */
 	private $stockQuantity;
-	
-	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(type="boolean")
-	 */
-	private $hidden;
-	
+
 	/**
 	 * @var boolean
 	 *
@@ -129,7 +122,7 @@ class Product implements EntityFileUploadInterface {
 	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $availability;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
@@ -144,7 +137,6 @@ class Product implements EntityFileUploadInterface {
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
 		$this->stockQuantity = $productData->getStockQuantity();
-		$this->hidden = $productData->getHidden();
 		$this->visible = false;
 		$this->image = null;
 		$this->setImageForUpload($productData->getImage());
@@ -165,7 +157,6 @@ class Product implements EntityFileUploadInterface {
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
 		$this->stockQuantity = $productData->getStockQuantity();
-		$this->hidden = $productData->getHidden();
 		$this->setImageForUpload($productData->getImage());
 		$this->availability = $productData->getAvailability();
 	}
@@ -305,14 +296,7 @@ class Product implements EntityFileUploadInterface {
 	/**
 	 * @return boolean
 	 */
-	public function isHidden() {
-		return $this->hidden;
-	}
-	
-	/**
-	 * @return boolean
-	 */
-	public function isVisible() {
+	public function isVisibleOnAnyDomain() {
 		return $this->visible;
 	}
 

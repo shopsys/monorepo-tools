@@ -4,9 +4,11 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class ProductVisibilityRepository {
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
@@ -19,22 +21,39 @@ class ProductVisibilityRepository {
 	}
 
 	public function refreshProductsVisibility() {
+		$this->refreshProductDomainsVisibility();
+
+		$query = $this->em->createNativeQuery('UPDATE products AS p
+				SET visible = EXISTS(
+						SELECT 1
+						FROM product_domains AS pd
+						WHERE pd.product_id = p.id
+							AND pd.visible = TRUE
+					)', new ResultSetMapping());
+		$query->execute();
+	}
+
+	private function refreshProductDomainsVisibility() {
 		$now = new DateTime();
-		
-		$query = $this->em->createQuery(sprintf('UPDATE %s p
-				SET p.visible = CASE
+
+		$query = $this->em->createNativeQuery('UPDATE product_domains AS pd
+				SET visible = CASE
 						WHEN (
-							p.hidden = FALSE
+							pd.hidden = FALSE
 							AND
-							(p.sellingFrom IS NULL OR p.sellingFrom <= :now)
+							(p.selling_from IS NULL OR p.selling_from <= :now)
 							AND
-							(p.sellingTo IS NULL OR p.sellingTo >= :now)
+							(p.selling_to IS NULL OR p.selling_to >= :now)
 							AND
 							p.price > 0
 						)
 						THEN TRUE
 						ELSE FALSE
-					END', Product::class));
+					END
+
+			FROM products AS p
+			WHERE p.id = pd.product_id', new ResultSetMapping());
 		$query->execute(array('now' => $now));
 	}
+
 }

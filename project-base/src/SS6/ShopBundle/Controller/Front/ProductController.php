@@ -14,8 +14,10 @@ class ProductController extends Controller {
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
-			
-		$product = $productRepository->getVisibleById($id);
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+
+		$product = $productRepository->getVisibleByIdAndDomainId($id, $domain->getId());
 		$productDetail = $productDetailFactory->getDetailForProduct($product);
 		
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(
@@ -28,8 +30,10 @@ class ProductController extends Controller {
 		/* @var $productFacade \SS6\ShopBundle\Model\Product\ProductFacade */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 			
-		$products = $productFacade->findAllVisible();
+		$products = $productFacade->getAllVisibleByDomainId($domain->getId());
 		$productDetails = $productDetailFactory->getDetailsForProducts($products);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(

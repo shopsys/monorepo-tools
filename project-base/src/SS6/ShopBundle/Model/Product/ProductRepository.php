@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -26,7 +27,14 @@ class ProductRepository {
 	private function getProductRepository() {
 		return $this->em->getRepository(Product::class);
 	}
-	
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getProductDomainRepository() {
+		return $this->em->getRepository(ProductDomain::class);
+	}
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Product\Product|null
@@ -34,28 +42,32 @@ class ProductRepository {
 	public function findById($id) {
 		return $this->getProductRepository()->find($id);
 	}
-	
+
 	/**
-	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Product\Product|null
+	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function findVisibleById($id) {
-		$product = $this->findById($id);
-		
-		if ($product instanceof Product) {
-			if (!$product->isVisible()) {
-				$product = null;
-			}
-		}
-		
-		return $product;
+	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
+		$qb = $this->em->createQueryBuilder()
+			->select('p')
+			->from(Product::class, 'p')
+			->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id')
+			->where('pd.domainId = :domainId')
+				->andWhere('pd.visible = TRUE');
+
+		$qb->setParameter('domainId', $domainId);
+
+		return $qb;
 	}
 	
 	/**
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function findAllVisible() {
-		return $this->getProductRepository()->findBy(array('visible' => true));
+	public function getAllVisibleByDomainId($domainId) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+
+		return $qb->getQuery()->getResult();
 	}
 	
 	/**
@@ -75,14 +87,18 @@ class ProductRepository {
 	
 	/**
 	 * @param int $id
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function getVisibleById($id) {
-		$criteria = array('id' => $id, 'visible' => true);
-		$product = $this->getProductRepository()->findOneBy($criteria);
+	public function getVisibleByIdAndDomainId($id, $domainId) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$qb->andWhere('p.id = :productId');
+		$qb->setParameter('productId', $id);
+
+		$product = $qb->getQuery()->getOneOrNullResult();
 		
 		if ($product === null) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException($qb->getDQL());
 		}
 		
 		return $product;
@@ -95,4 +111,27 @@ class ProductRepository {
 	public function getAllByVat(Vat $vat) {
 		return $this->getProductRepository()->findBy(array('vat' => $vat));
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 */
+	public function getProductDomainsByProduct(Product $product) {
+		return $this->getProductDomainRepository()->findBy(array(
+			'product' => $product,
+		));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain|null
+	 */
+	public function findProductDomainByProductAndDomainId(Product $product, $domainId) {
+		return $this->getProductDomainRepository()->findOneBy(array(
+			'product' => $product,
+			'domainId' => $domainId,
+		));
+	}
+
 }

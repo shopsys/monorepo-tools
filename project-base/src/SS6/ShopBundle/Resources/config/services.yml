@@ -393,6 +393,9 @@ services:
   ss6.shop.product.price_calculation:
     class: SS6\ShopBundle\Model\Product\PriceCalculation
 
+  ss6.shop.product.product_data_factory:
+    class: SS6\ShopBundle\Model\Product\ProductDataFactory
+
   ss6.shop.product.product_detail_factory:
     class: SS6\ShopBundle\Model\Product\Detail\Factory
 

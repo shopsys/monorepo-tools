@@ -6,12 +6,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
-	
+
 	/**
 	 * @Route("/product/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -22,22 +21,19 @@ class ProductController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productRepository = $this->get('ss6.shop.product.product_repository');
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
-		$parameterRepository = $this->get('ss6.shop.product.parameter.parameter_repository');
-		/* @var $parameterRepository \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
 		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$productDataFactory = $this->get('ss6.shop.product.product_data_factory');
+		/* @var $productDataFactory \SS6\ShopBundle\Model\Product\ProductDataFactory */
 
 		$product = $productRepository->getById($id);
-		$productParameterValues = $parameterRepository->findParameterValuesByProduct($product);
 
 		$form = $this->createForm($productFormTypeFactory->create());
-		$productData = new ProductData();
-
-		if (!$form->isSubmitted()) {
-			$productData->setFromEntity($product, $productParameterValues);
-		}
+		$productData = $productDataFactory->createFromProduct($product);
 
 		$form->setData($productData);
 		$form->handleRequest($request);
@@ -65,6 +61,7 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 			'product' => $product,
 			'productDetail' => $productDetailFactory->getDetailForProduct($product),
+			'domainService' => $domain,
 		));
 	}
 	
@@ -77,13 +74,14 @@ class ProductController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
 		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
-		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
-		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$productDataFactory = $this->get('ss6.shop.product.product_data_factory');
+		/* @var $productDataFactory \SS6\ShopBundle\Model\Product\ProductDataFactory */
 
 		$form = $this->createForm($productFormTypeFactory->create());
 
-		$productData = new ProductData();
-		$productData->setVat($vatFacade->getDefaultVat());
+		$productData = $productDataFactory->createDefault();
 
 		$form->setData($productData);
 		$form->handleRequest($request);
@@ -107,6 +105,7 @@ class ProductController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
 			'form' => $form->createView(),
+			'domainService' => $domain,
 		));
 	}
 

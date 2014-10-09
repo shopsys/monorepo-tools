@@ -19,10 +19,11 @@ class ProductFacade {
 	}
 
 	/**
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function findAllVisible() {
-		return $this->productRepository->findAllVisible();
+	public function getAllVisibleByDomainId($domainId) {
+		return $this->productRepository->getAllVisibleByDomainId($domainId);
 	}
 	
 }

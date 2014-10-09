@@ -40,7 +40,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertTrue($flashMessageFront->isEmpty());
 
-		$product->edit(new ProductData('Product 1', null, null, null, null, 200, $vat, null, null, null, null));
+		$product->edit(new ProductData('Product 1', null, null, null, null, 200, $vat));
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertFalse($flashMessageFront->isEmpty());
 	}

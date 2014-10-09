@@ -109,8 +109,8 @@ class ProductDataFixtureLoader {
 		$productData->setSellingFrom(new DateTime($row[7]));
 		$productData->setSellingTo(new DateTime($row[8]));
 		$productData->setStockQuantity($row[9]);
-		$productData->setHidden($row[10]);
-		switch ($row[11]) {
+		$productData->setHidden(array(1 => $row[10], 2 => $row[11]));
+		switch ($row[12]) {
 			case 'in-stock':
 				$productData->setAvailability($this->availabilities['in-stock']);
 				break;
@@ -123,7 +123,7 @@ class ProductDataFixtureLoader {
 			default:
 				$productData->setAvailability(null);
 		}
-		$productData->setParameters($this->getProductParameterValuesDataFromString($row[12]));
+		$productData->setParameters($this->getProductParameterValuesDataFromString($row[13]));
 
 		return $productData;
 	}
