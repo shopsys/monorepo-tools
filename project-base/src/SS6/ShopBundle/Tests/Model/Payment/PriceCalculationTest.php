@@ -21,15 +21,15 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
 				'inputPrice' => '6999',
 				'vatPercent' => '21',
-				'basePriceWithoutVat' => '6998.78',
-				'basePriceWithVat' => '8469',
+				'priceWithoutVat' => '6998.78',
+				'priceWithVat' => '8469',
 			),
 			array(
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
 				'inputPrice' => '6999.99',
 				'vatPercent' => '21',
-				'basePriceWithoutVat' => '5784.8',
-				'basePriceWithVat' => '7000',
+				'priceWithoutVat' => '5784.8',
+				'priceWithVat' => '7000',
 			),
 		);
 	}
@@ -41,8 +41,8 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$inputPriceType,
 		$inputPrice,
 		$vatPercent,
-		$basePriceWithoutVat,
-		$basePriceWithVat
+		$priceWithoutVat,
+		$priceWithVat
 	) {
 		$rounding = new Rounding();
 		$priceCalculation = new PriceCalculation($rounding);
@@ -63,8 +63,8 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$price = $paymentPriceCalculation->calculatePrice($payment);
 
-		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getBasePriceWithoutVat(), 6));
-		$this->assertEquals(round($basePriceWithVat, 6), round($price->getBasePriceWithVat(), 6));
+		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
+		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
 	}
 
 }

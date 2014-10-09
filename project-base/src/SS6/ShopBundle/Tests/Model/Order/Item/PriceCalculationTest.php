@@ -40,8 +40,8 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$totalPrice = $orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-		$this->assertEquals(round(200, 6), round($totalPrice->getBasePriceWithVat(), 6));
-		$this->assertEquals(round(190, 6), round($totalPrice->getBasePriceWithoutVat(), 6));
-		$this->assertEquals(round(10, 6), round($totalPrice->getBasePriceVatAmount(), 6));
+		$this->assertEquals(round(200, 6), round($totalPrice->getPriceWithVat(), 6));
+		$this->assertEquals(round(190, 6), round($totalPrice->getPriceWithoutVat(), 6));
+		$this->assertEquals(round(10, 6), round($totalPrice->getVatAmount(), 6));
 	}
 }

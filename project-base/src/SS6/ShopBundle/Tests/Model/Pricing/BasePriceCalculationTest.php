@@ -52,9 +52,9 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$price = $basePriceCalculation->calculatePrice($inputPrice, $inputPriceType, $vat);
 
-		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getBasePriceWithoutVat(), 6));
-		$this->assertEquals(round($basePriceWithVat, 6), round($price->getBasePriceWithVat(), 6));
-		$this->assertEquals(round($basePriceVatAmount, 6), round($price->getBasePriceVatAmount(), 6));
+		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
+		$this->assertEquals(round($basePriceWithVat, 6), round($price->getPriceWithVat(), 6));
+		$this->assertEquals(round($basePriceVatAmount, 6), round($price->getVatAmount(), 6));
 	}
 
 }
