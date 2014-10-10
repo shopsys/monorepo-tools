@@ -113,4 +113,33 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		
 		$this->assertTrue($productAgain->isVisible());
 	}
+
+	public function testIsNotVisibleWhenZeroOrNullPrice() {
+		$em = $this->getEntityManager();
+
+		$hidden = false;
+		$vat = new Vat(new VatData('vat', 21));
+		$product1 = new Product(new ProductData('Name', null, null, null, null, null, $vat, null, null, null, $hidden));
+		$product2 = new Product(new ProductData('Name', null, null, null, null, 0, $vat, null, null, null, $hidden));
+
+		$em->persist($vat);
+		$em->persist($product1);
+		$em->persist($product2);
+		$em->flush();
+		$product1Id = $product1->getId();
+		$product2Id = $product2->getId();
+		$em->clear();
+
+		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
+
+		$product1Again = $em->getRepository(Product::class)->find($product1Id);
+		/* @var $product1Again \SS6\ShopBundle\Model\Product\Product */
+		$product2Again = $em->getRepository(Product::class)->find($product2Id);
+		/* @var $product2Again \SS6\ShopBundle\Model\Product\Product */
+
+		$this->assertFalse($product1Again->isVisible());
+		$this->assertFalse($product2Again->isVisible());
+	}
 }
