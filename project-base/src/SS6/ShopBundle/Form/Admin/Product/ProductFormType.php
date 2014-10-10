@@ -97,8 +97,19 @@ class ProductFormType extends AbstractType {
 			->add('price', 'money', array(
 				'currency' => false,
 				'precision' => 6,
-				'required' => false,
+				'required' => true,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
+					new Constraints\GreaterThanOrEqual(array(
+						'value' => 0,
+						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}'
+					)),
+					new Constraints\Regex(array(
+						'pattern' => '/^[-+]?[0-9]*(\.|,)?[0-9]+$/',
+						'message' => 'Cena musí být zadána číslem'
+					))
+				),
 			))
 			->add('vat', 'choice', array(
 				'required' => true,
