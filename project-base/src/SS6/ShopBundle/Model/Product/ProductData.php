@@ -34,7 +34,7 @@ class ProductData {
 	private $description;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
 	private $price;
 
@@ -85,7 +85,7 @@ class ProductData {
 	 * @param string|null $partno
 	 * @param string|null $ean
 	 * @param string|null $description
-	 * @param string|null $price
+	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
@@ -115,7 +115,11 @@ class ProductData {
 		$this->partno = $partno;
 		$this->ean = $ean;
 		$this->description = $description;
-		$this->price = $price;
+		if ($price === null) {
+			$this->price = '0';
+		} else {
+			$this->price = $price;
+		}
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
 		$this->sellingTo = $sellingTo;
@@ -162,7 +166,7 @@ class ProductData {
 	}
 
 	/**
-	 * @return string|null
+	 * @return string
 	 */
 	public function getPrice() {
 		return $this->price;
@@ -270,7 +274,11 @@ class ProductData {
 	 * @param string|null $price
 	 */
 	public function setPrice($price) {
-		$this->price = $price;
+		if ($price === null) {
+			$this->price = '0';
+		} else {
+			$this->price = $price;
+		}
 	}
 
 	/**

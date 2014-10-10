@@ -62,9 +62,9 @@ class Product implements EntityFileUploadInterface {
 	private $description;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
 	private $price;
 
@@ -218,10 +218,14 @@ class Product implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @param string $price
+	 * @param string|null $price
 	 */
 	public function setPrice($price) {
-		$this->price = $price;
+		if ($price === null) {
+			$this->price = '0';
+		} else {
+			$this->price = $price;
+		}
 	}
 
 	/**
@@ -267,7 +271,7 @@ class Product implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return string|null
+	 * @return string
 	 */
 	public function getPrice() {
 		return $this->price;
