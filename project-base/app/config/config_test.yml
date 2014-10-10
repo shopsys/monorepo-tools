@@ -25,3 +25,10 @@ web_profiler:
 
 swiftmailer:
   disable_delivery: true
+
+security:
+  firewalls:
+    administration:
+      http_basic: ~
+    frontend:
+      http_basic: ~

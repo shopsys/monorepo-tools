@@ -47,4 +47,16 @@ abstract class FunctionalTestCase extends WebTestCase {
 
 		return $persistentReferenceService->getReference($referenceName);
 	}
+
+	/**
+	 * @param string $username
+	 * @param string $password
+	 */
+	protected function authenticateUser($username, $password) {
+		$this->getClient()->setServerParameters(array(
+			'PHP_AUTH_USER' => $username,
+			'PHP_AUTH_PW' => $password,
+		));
+	}
+	
 }
