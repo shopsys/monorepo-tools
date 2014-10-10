@@ -4,7 +4,7 @@
 	SS6.grid = SS6.grid || {};
 	SS6.grid.inlineEdit = SS6.grid.inlineEdit || {};
 	
-	SS6.grid.inlineEdit.init = function (formElement) {
+	SS6.grid.inlineEdit.init = function () {
 		$('.js-grid[data-inline-edit-service-name]').each(SS6.grid.inlineEdit.bind);
 	}
 	
@@ -70,6 +70,7 @@
 			success: function (saveResult) {
 				if (saveResult.success) {
 					$formRow.replaceWith($(saveResult.rowHtml)).remove();
+					SS6.ajaxConfirm.init();
 				} else {
 					$buttons.show();
 					$saving.hide();

@@ -8,23 +8,25 @@
 	}
 	
 	SS6.ajaxConfirm.bind = function () {
-		$(this).bind('click', function () {
-			$.ajax({
-				url: $(this).attr('href'),
-				context: this,
-				success: function(data) {
-					SS6.window({
-						content: data
-					});
-					var onOpen = $(this).data('ajax-confirm-on-open');
-					if (onOpen) {
-						eval(onOpen);
+		$(this)
+			.unbind('click.ajaxConfirm')
+			.bind('click.ajaxConfirm', function () {
+				$.ajax({
+					url: $(this).attr('href'),
+					context: this,
+					success: function(data) {
+						SS6.window({
+							content: data
+						});
+						var onOpen = $(this).data('ajax-confirm-on-open');
+						if (onOpen) {
+							eval(onOpen);
+						}
 					}
-				}
-			});
+				});
 			
-			return false;
-		})
+				return false;
+			});
 	};
 	
 	$(document).ready(function () {
