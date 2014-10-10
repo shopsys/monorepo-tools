@@ -9,7 +9,7 @@
 		
 			var $item = $(this).closest('.js-parameters-item');
 			var index = $item.data('index');
-			$($('#product_parameters')).jsFormValidator('delPrototype', index);
+			SS6.clientSideValidation.removeItemFromCollection('#product_parameters', index);
 			$item.remove();
 			
 			SS6.parameters.refreshCount($collection);
@@ -36,7 +36,7 @@
 			
 			event.preventDefault();
 
-			$($('#product_parameters')).jsFormValidator('addPrototype', index);
+			SS6.clientSideValidation.addNewItemToCollection('#product_parameters', index);
 		});
 		
 		SS6.parameters.refreshCount($('.js-parameters'));
