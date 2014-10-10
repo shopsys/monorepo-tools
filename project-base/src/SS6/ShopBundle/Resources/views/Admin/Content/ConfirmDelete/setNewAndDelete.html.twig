@@ -1,0 +1,22 @@
+{% if listOfNews|length > 0 %}
+	{{ message }}
+	
+	<form id="js-confirm-delete-form" class="mt-1">
+		<select id="js-confirm-delete-select">
+			<option value="">-- Zvolte novou hodnotu --</option>
+			{% for newId, name in listOfNews %}
+				<option value="{{ url(route, {id: entityId, newId: newId}) }}">{{ name }}</option>
+			{% endfor %}
+		</select>
+
+		<div class="window__actions">
+			<input type="submit" class="btn btn-primary" value="Smazat a nastavit" />
+		</div>
+	</form>
+{% else %}
+	<p>
+		Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. 
+		Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou.
+	</p>
+{% endif %}
+

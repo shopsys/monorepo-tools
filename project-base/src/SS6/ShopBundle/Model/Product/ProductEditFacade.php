@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Product;
@@ -114,4 +115,15 @@ class ProductEditFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
+		$products = $this->productRepository->getAllByVat($oldVat);
+		foreach ($products as $product) {
+			$product->changeVat($newVat);
+		}
+		$this->em->flush();
+	}
 }

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -100,9 +101,25 @@ class TransportEditFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePayments
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
 	public function getVisible(array $visiblePayments) {
 		$transports = $this->transportRepository->findAll();
 
 		return $this->visibilityCalculation->findAllVisible($transports, $visiblePayments);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
+		$transports = $this->transportRepository->getAllIncludingDeletedByVat($oldVat);
+		foreach ($transports as $transport) {
+			$transport->changeVat($newVat);
+		}
+		$this->em->flush();
 	}
 }

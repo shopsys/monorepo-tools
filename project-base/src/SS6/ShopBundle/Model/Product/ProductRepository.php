@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductRepository {
@@ -85,5 +86,13 @@ class ProductRepository {
 		}
 		
 		return $product;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getAllByVat(Vat $vat) {
+		return $this->getProductRepository()->findBy(array('vat' => $vat));
 	}
 }

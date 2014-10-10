@@ -83,7 +83,7 @@ class ProductController extends Controller {
 		$form = $this->createForm($productFormTypeFactory->create());
 
 		$productData = new ProductData();
-		$productData->setVat($vatFacade->findDefaultVat());
+		$productData->setVat($vatFacade->getDefaultVat());
 
 		$form->setData($productData);
 		$form->handleRequest($request);

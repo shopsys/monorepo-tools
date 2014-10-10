@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
@@ -99,6 +100,13 @@ class Transport implements EntityFileUploadInterface {
 		$this->vat = $transportData->getVat();
 		$this->description = $transportData->getDescription();
 		$this->hidden = $transportData->isHidden();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 */
+	public function changeVat(Vat $vat) {
+		$this->vat = $vat;
 	}
 
 	/**
