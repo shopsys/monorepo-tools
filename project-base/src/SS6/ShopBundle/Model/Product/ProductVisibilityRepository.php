@@ -29,6 +29,8 @@ class ProductVisibilityRepository {
 							(p.sellingFrom IS NULL OR p.sellingFrom <= :now)
 							AND
 							(p.sellingTo IS NULL OR p.sellingTo >= :now)
+							AND
+							p.price > 0
 						)
 						THEN TRUE
 						ELSE FALSE
