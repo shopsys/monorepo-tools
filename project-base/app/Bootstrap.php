@@ -80,7 +80,6 @@ class Bootstrap {
 				break;
 			case Environment::ENVIRONMENT_TEST:
 				$configs[] = __DIR__ . '/config/parameters_test.yml';
-				$configs[] = __DIR__ . '/config/config_dev.yml';
 				$configs[] = __DIR__ . '/config/config_test.yml';
 				break;
 		}
