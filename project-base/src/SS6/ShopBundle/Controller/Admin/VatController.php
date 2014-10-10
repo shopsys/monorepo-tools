@@ -41,10 +41,10 @@ class VatController extends Controller {
 			foreach ($vatFacade->getAllExceptId($id) as $newVat) {
 				$vatNamesById[$newVat->getId()] = $newVat->getName();
 			}
-			return $confirmDeleteResponseFactory->getSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
+			return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
 		} else {
 			$message = 'Opravdu si přejete trvale odstranit sazbu "' . $vat->getName() . '"? Nikde není použita.';
-			return $confirmDeleteResponseFactory->getDirectDeleteResponse($message, 'admin_vat_delete', $id);
+			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 		}
 	}
 

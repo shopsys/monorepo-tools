@@ -1,11 +1,11 @@
-{% if listOfNews|length > 0 %}
+{% if listOfNewEntities|length > 0 %}
 	{{ message }}
 	
 	<form id="js-confirm-delete-form" class="mt-1">
 		<select id="js-confirm-delete-select">
 			<option value="">-- Zvolte novou hodnotu --</option>
-			{% for newId, name in listOfNews %}
-				<option value="{{ url(route, {id: entityId, newId: newId}) }}">{{ name }}</option>
+			{% for newEntityId, name in listOfNewEntities %}
+				<option value="{{ url(route, {id: entityId, newId: newEntityId}) }}">{{ name }}</option>
 			{% endfor %}
 		</select>
 

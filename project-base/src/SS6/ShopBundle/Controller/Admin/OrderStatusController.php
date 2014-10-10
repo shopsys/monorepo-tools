@@ -3,9 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Order\Status\DeleteFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class OrderStatusController extends Controller {
 
@@ -86,7 +84,7 @@ class OrderStatusController extends Controller {
 			foreach ($orderStatusFacade->getAllExceptId($id) as $newOrderStatus) {
 				$ordersStatusNamesById[$newOrderStatus->getId()] = $newOrderStatus->getName();
 			}
-			return $confirmDeleteResponseFactory->getSetNewAndDeleteResponse(
+			return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
 				$message,
 				'admin_orderstatus_delete',
 				$id,
@@ -94,7 +92,7 @@ class OrderStatusController extends Controller {
 			);
 		} else {
 			$message = 'Opravdu si přejete trvale odstranit stav objednávek "' . $orderStatus->getName() . '"? Nikde není použitý.';
-			return $confirmDeleteResponseFactory->getDirectDeleteResponse($message, 'admin_orderstatus_delete', $id);
+			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 		}
 	}
 
