@@ -7,48 +7,48 @@ class Price {
 	/**
 	 * @var string
 	 */
-	private $basePriceWithoutVat;
+	private $priceWithoutVat;
 
 	/**
 	 * @var string
 	 */
-	private $basePriceWithVat;
+	private $priceWithVat;
 
 	/**
 	 * @var string
 	 */
-	private $basePriceVatAmount;
+	private $vatAmount;
 
 	/**
-	 * @param string $basePriceWithoutVat
-	 * @param string $basePriceWithVat
-	 * @param string $basePriceVatAmount
+	 * @param string $priceWithoutVat
+	 * @param string $priceWithVat
+	 * @param string $vatAmount
 	 */
-	public function __construct($basePriceWithoutVat, $basePriceWithVat, $basePriceVatAmount) {
-		$this->basePriceWithoutVat = $basePriceWithoutVat;
-		$this->basePriceWithVat = $basePriceWithVat;
-		$this->basePriceVatAmount = $basePriceVatAmount;
+	public function __construct($priceWithoutVat, $priceWithVat, $vatAmount) {
+		$this->priceWithoutVat = $priceWithoutVat;
+		$this->priceWithVat = $priceWithVat;
+		$this->vatAmount = $vatAmount;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getBasePriceWithoutVat() {
-		return $this->basePriceWithoutVat;
+	public function getPriceWithoutVat() {
+		return $this->priceWithoutVat;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getBasePriceWithVat() {
-		return $this->basePriceWithVat;
+	public function getPriceWithVat() {
+		return $this->priceWithVat;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getBasePriceVatAmount() {
-		return $this->basePriceVatAmount;
+	public function getVatAmount() {
+		return $this->vatAmount;
 	}
 
 }

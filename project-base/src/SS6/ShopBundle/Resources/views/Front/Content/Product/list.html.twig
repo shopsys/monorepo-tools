@@ -29,7 +29,7 @@
 								Cena s DPH:
 							</dt>
 							<dd class="list-params-side__definition price-main price-big">
-								{{ productDetail.price.basePriceWithVat|price }}
+								{{ productDetail.price.priceWithVat|price }}
 							</dd>
 						</dl>
 						<dl class="list-params-side">
@@ -37,7 +37,7 @@
 								Cena bez DPH:
 							</dt>
 							<dd class="list-params-side__definition">
-								{{ productDetail.price.basePriceWithoutVat|price }}
+								{{ productDetail.price.priceWithoutVat|price }}
 							</dd>
 						</dl>
 					</div>

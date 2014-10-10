@@ -24,7 +24,7 @@
 							<span class="in-semaphore in-semaphore--false"></span>
 						{% endif %}
 					</td>
-					<td class="text-right">{{ paymentDetail.price.basePriceWithVat|price }}</td>
+					<td class="text-right">{{ paymentDetail.price.priceWithVat|price }}</td>
 					<td class="text-right">
 						<a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
 						<a href="{{ url('admin_payment_delete', {id: paymentDetail.payment.id}) }}" onclick="return confirm('Opravdu chcete tuto platbu smazat?')" class="table-action"><i class="fa fa-trash-o"></i></a>

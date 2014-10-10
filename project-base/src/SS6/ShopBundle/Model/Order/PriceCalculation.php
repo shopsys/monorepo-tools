@@ -33,11 +33,11 @@ class PriceCalculation {
 		foreach ($order->getItems() as $orderItem) {
 			$itemTotalPrice = $this->orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-			$priceWithVat += $itemTotalPrice->getBasePriceWithVat();
-			$priceWithoutVat += $itemTotalPrice->getBasePriceWithoutVat();
+			$priceWithVat += $itemTotalPrice->getPriceWithVat();
+			$priceWithoutVat += $itemTotalPrice->getPriceWithoutVat();
 
 			if ($orderItem instanceof OrderProduct) {
-				$productPrice += $itemTotalPrice->getBasePriceWithVat();
+				$productPrice += $itemTotalPrice->getPriceWithVat();
 			}
 		}
 

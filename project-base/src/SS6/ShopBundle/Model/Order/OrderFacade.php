@@ -166,8 +166,8 @@ class OrderFacade {
 		$orderPayment = new OrderPayment(
 			$order,
 			$payment->getName(),
-			$paymentPrice->getBasePriceWithoutVat(),
-			$paymentPrice->getBasePriceWithVat(),
+			$paymentPrice->getPriceWithoutVat(),
+			$paymentPrice->getPriceWithVat(),
 			$payment->getVat()->getPercent(),
 			1,
 			$payment
@@ -180,8 +180,8 @@ class OrderFacade {
 		$orderTransport = new OrderTransport(
 			$order,
 			$transport->getName(),
-			$transportPrice->getBasePriceWithoutVat(),
-			$transportPrice->getBasePriceWithVat(),
+			$transportPrice->getPriceWithoutVat(),
+			$transportPrice->getPriceWithVat(),
 			$transport->getVat()->getPercent(),
 			1,
 			$transport

@@ -43,7 +43,7 @@
 							</span>
 
 							<span class="box-chooser__price price-main">
-								{{ transportPrice.basePriceWithVat|price }}
+								{{ transportPrice.priceWithVat|price }}
 							</span>
 						</label>
 					{% else %}
@@ -87,7 +87,7 @@
 							</span>
 
 							<span class="box-chooser__price price-main">
-								{{ paymentPrice.basePriceWithVat|price }}
+								{{ paymentPrice.priceWithVat|price }}
 							</span>
 						</label>
 					{% else %}

@@ -94,8 +94,8 @@
 												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].basePriceWithVat|price }}</td>
-												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].basePriceWithoutVat|price }}</td>
+												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].priceWithVat|price }}</td>
+												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|price }}</td>
 											</tr>
 										{% endfor %}
 									</tbody>
