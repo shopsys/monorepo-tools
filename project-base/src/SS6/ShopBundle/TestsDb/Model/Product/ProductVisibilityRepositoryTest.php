@@ -96,7 +96,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo->modify('+1 day');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData('Name', null, null, null, null, null, $vat, $sellingFrom, $sellingTo, null, $hidden));
+		$product = new Product(new ProductData('Name', null, null, null, null, 250, $vat, $sellingFrom, $sellingTo, null, $hidden));
 
 		$em->persist($vat);
 		$em->persist($product);

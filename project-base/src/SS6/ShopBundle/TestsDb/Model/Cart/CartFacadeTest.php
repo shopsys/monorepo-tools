@@ -24,7 +24,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData('productName', null, null, null, null, null, $vat));
+		$product = new Product(new ProductData('productName', null, null, null, null, 250, $vat));
 		$em->persist($vat);
 		$em->persist($product);
 		$em->flush();
@@ -62,8 +62,8 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData('productName', null, null, null, null, null, $vat));
-		$product2 = new Product(new ProductData('otherProductName', null, null, null, null, null, $vat));
+		$product1 = new Product(new ProductData('productName', null, null, null, null, 250, $vat));
+		$product2 = new Product(new ProductData('otherProductName', null, null, null, null, 250, $vat));
 		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
@@ -113,7 +113,7 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
-		$product = new Product(new ProductData('productName', null, null, null, null, null, $vat));
+		$product = new Product(new ProductData('productName', null, null, null, null, 250, $vat));
 		$em->persist($product);
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
@@ -136,8 +136,8 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData('productName1', null, null, null, null, null, $vat));
-		$product2 = new Product(new ProductData('productName2', null, null, null, null, null, $vat));
+		$product1 = new Product(new ProductData('productName1', null, null, null, null, 250, $vat));
+		$product2 = new Product(new ProductData('productName2', null, null, null, null, 250, $vat));
 		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);
