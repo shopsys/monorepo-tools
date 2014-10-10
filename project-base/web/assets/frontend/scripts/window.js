@@ -39,7 +39,7 @@
 		var options = $.extend(defaults, options);
 		
 		if ($activeWindow !== null) {
-			$activeWindow.trigger('windowRemove');
+			$activeWindow.trigger('windowFastClose');
 		}
 		
 		var $window = $('<div class="window window--active"></div>');
@@ -47,8 +47,12 @@
 		
 		$activeWindow = $window;
 		
-		$window.bind('windowRemove', function () {
-			$(this).fadeOut('fast', function () {$(this).remove();});
+		$window.bind('windowClose', function () {
+			$(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
+		});
+		
+		$window.bind('windowFastClose', function () {
+			$(this).remove();
 			$activeWindow = null;
 		});
 		
@@ -58,7 +62,7 @@
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
-					$window.trigger('windowRemove');
+					$window.trigger('windowClose');
 					return false;
 				});
 			$window.append($windowButtonClose);
@@ -72,7 +76,7 @@
 				.attr('href', options.urlContinue)
 				.bind('click.window', options.eventContinue)
 				.bind('click.windowContinue', function () {
-					$window.trigger('windowRemove');
+					$window.trigger('windowClose');
 					if ($(this).attr('href') === '#') {
 						return false;
 					}
