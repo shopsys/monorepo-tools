@@ -6,8 +6,11 @@
 	SS6.parameters.init = function () {
 		$('.js-parameters').on('click', '.js-parameters-item-remove', function (event) {
 			var $collection = $(this).closest('.js-parameters');
-			
-			$(this).closest('.js-parameters-item').remove();
+		
+			var $item = $(this).closest('.js-parameters-item');
+			var index = $item.data('index');
+			SS6.clientSideValidation.removeItemFromCollection('#product_parameters', index);
+			$item.remove();
 			
 			SS6.parameters.refreshCount($collection);
 			
@@ -22,14 +25,18 @@
 			var item = prototype
 				.replace(/__name__label__/g, index)
 				.replace(/__name__/g, index);
+			var $item = $(item);
+			$item.data('index', index);
 			
 			$collection.data('index', index + 1);
 			
-			$collection.append(item);
+			$collection.append($item);
 			
 			SS6.parameters.refreshCount($collection);
 			
 			event.preventDefault();
+
+			SS6.clientSideValidation.addNewItemToCollection('#product_parameters', index);
 		});
 		
 		SS6.parameters.refreshCount($('.js-parameters'));

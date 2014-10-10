@@ -3,7 +3,7 @@
 		var $customerDeliveryAddressForm = $('#customer_deliveryAddressData');
 		$customerDeliveryAddressForm.jsFormValidator({
 			'groups': function () {
-
+				
 				var groups = ['Default'];
 				if ($customerDeliveryAddressForm.find('#customer_deliveryAddressData_addressFilled').is(':checked')) {
 					groups.push('differentDeliveryAddress');

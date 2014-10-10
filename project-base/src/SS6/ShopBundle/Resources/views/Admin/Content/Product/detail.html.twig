@@ -38,14 +38,14 @@
 					{{ form_row(form.hidden, { label: 'Skryté', attr: {class: 'form-line--between'} }) }}
 				</div>
 
-				<div class="wrap-group">
+				<div class="wrap-group js-form-group">
 					<h2>Parametry:</h2>
 
 					{{ form_errors(form.parameters) }}
 
 					<div class="wrap-group__inner">
 
-						<table class="table-edit mb-1">
+						<table class="table-edit mb-1" id="product_parameters">
 							<thead class="table-edit__heading">
 								<tr>
 									<th class="table-edit__heading__cell">Parametr</th>
@@ -53,10 +53,10 @@
 									<th class="table-edit__heading__cell"></th>
 								</tr>
 							</thead>
-							<tbody class="js-parameters table-edit__body" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}">
+							<tbody class="js-parameters table-edit__body" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
 
-								{% macro parameterRow(parameter) %}
-									<tr class="js-parameters-item">
+								{% macro parameterRow(parameter, index) %}
+									<tr class="js-parameters-item js-form-group" data-index="{{ index }}">
 										<td class="table-col-45 table-edit__body__cell">
 											{{ form_widget(parameter.parameter) }}
 										</td>
@@ -72,8 +72,8 @@
 									</tr>
 								{% endmacro %}
 
-								{% for parameter in form.parameters %}
-									{{ _self.parameterRow(parameter) }}
+								{% for key, parameter in form.parameters %}
+									{{ _self.parameterRow(parameter, key) }}
 								{% else %}
 									{% do form.parameters.setRendered %}
 								{% endfor %}
