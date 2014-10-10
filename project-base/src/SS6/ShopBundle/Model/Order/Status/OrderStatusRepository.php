@@ -82,7 +82,7 @@ class OrderStatusRepository {
 	 * @param int $orderStatusId
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
-	public function findAllExceptId($orderStatusId) {
+	public function getAllExceptId($orderStatusId) {
 		$qb = $this->getOrderStatusRepository()->createQueryBuilder('os')
 			->where('os.id != :id')
 			->setParameter('id', $orderStatusId);

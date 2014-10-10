@@ -46,7 +46,8 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 		$grid->addColumn('name', 'os.name', 'Název', true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_orderstatus_delete', array('id' => 'os.id'));
+		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_orderstatus_deleteconfirm', array('id' => 'os.id'))
+			->setAjaxConfirm();
 
 		return $grid;
 	}
