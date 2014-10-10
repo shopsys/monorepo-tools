@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Status;
 
-use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusMailTemplatesData;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 
@@ -38,7 +38,7 @@ class OrderStatusMailTemplateService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus[] $orderStatuses
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate[] $mailTemplates
-	 * @return \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusMailTemplatesData
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplatesData
 	 */
 	public function getOrderStatusMailTemplatesData(array $orderStatuses, array $mailTemplates) {
 		$mailTemplatesData = array();
