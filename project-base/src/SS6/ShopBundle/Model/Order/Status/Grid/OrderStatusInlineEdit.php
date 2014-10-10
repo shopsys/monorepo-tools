@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Order\Status\Grid;
 
-use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory;
 use Symfony\Component\Form\FormFactory;
@@ -32,7 +32,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData $orderStatusData
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @return int
 	 */
 	protected function createEntityAndGetId($orderStatusData) {
@@ -43,7 +43,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $orderStatusId
-	 * @param SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData $orderStatusData
+	 * @param SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
 	protected function editEntity($orderStatusId, $orderStatusData) {
 		$this->orderStatusFacade->edit($orderStatusId, $orderStatusData);
@@ -51,10 +51,10 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatusData
 	 */
 	protected function getFormDataObject($orderStatusId = null) {
-		$orderStatusData = new OrderStatusFormData();
+		$orderStatusData = new OrderStatusData();
 		
 		if ($orderStatusId !== null) {
 			$orderStatusId = (int)$orderStatusId;

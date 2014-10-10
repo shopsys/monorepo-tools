@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 
@@ -55,10 +55,10 @@ class OrderStatusFacade {
 
 	/**
 	 *
-	 * @param \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData $orderStatusFormData
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
-	public function create(OrderStatusFormData $orderStatusFormData) {
+	public function create(OrderStatusData $orderStatusFormData) {
 		$orderStatus = $this->orderStatusService->create(
 			$orderStatusFormData->getName(),
 			OrderStatus::TYPE_IN_PROGRESS
@@ -71,10 +71,10 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
-	 * @param \SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData $orderStatusFormData
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
-	public function edit($orderStatusId, OrderStatusFormData $orderStatusFormData) {
+	public function edit($orderStatusId, OrderStatusData $orderStatusFormData) {
 		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
 		$this->orderStatusService->edit($orderStatus, $orderStatusFormData->getName());
 		$this->em->flush();

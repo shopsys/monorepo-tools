@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order\Status;
+namespace SS6\ShopBundle\Model\Order\Status;
 
-class OrderStatusFormData {
+class OrderStatusData {
 
 	/**
 	 * @var int

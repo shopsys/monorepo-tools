@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
-use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormData;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -36,7 +36,7 @@ class OrderStatusFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => OrderStatusFormData::class,
+			'data_class' => OrderStatusData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}
