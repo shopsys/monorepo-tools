@@ -2,11 +2,11 @@ SymfonyComponentValidatorConstraintsGreaterThanOrEqual = function() {
 	this.message = '';
 	this.value = null;
 
-    this.validate = function(value) {
+	this.validate = function(value) {
 
 	var f = FpJsFormValidator;
 	var compareValue = value.toString().replace(',', '.');
-	var regexpNumber = /^[-+]?[0-9]*(\.|,)?[0-9]+$/;
+	var regexpNumber = /^[-+]?[0-9]+((\.|,)?[0-9]+)?$/;
 	var isNumber = regexpNumber.test(compareValue);
 	if (f.isValueEmty(compareValue) || compareValue >= this.value || !isNumber) {
 		return [];

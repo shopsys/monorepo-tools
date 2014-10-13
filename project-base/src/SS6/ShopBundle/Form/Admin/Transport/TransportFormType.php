@@ -63,10 +63,6 @@ class TransportFormType extends AbstractType {
 						'value' => 0,
 						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}'
 					)),
-					new Constraints\Regex(array(
-						'pattern' => '/^[-+]?[0-9]*(\.|,)?[0-9]+$/',
-						'message' => 'Cena musí být zadána číslem'
-					))
 				),
 			))
 			->add('vat', 'choice', array(

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use DateTime;
@@ -115,11 +116,7 @@ class ProductData {
 		$this->partno = $partno;
 		$this->ean = $ean;
 		$this->description = $description;
-		if ($price === null) {
-			$this->price = '0';
-		} else {
-			$this->price = $price;
-		}
+		$this->price = Condition::ifNull($price, 0);
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
 		$this->sellingTo = $sellingTo;
@@ -274,11 +271,7 @@ class ProductData {
 	 * @param string|null $price
 	 */
 	public function setPrice($price) {
-		if ($price === null) {
-			$this->price = '0';
-		} else {
-			$this->price = $price;
-		}
+		$this->price = $price;
 	}
 
 	/**
