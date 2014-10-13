@@ -45,8 +45,8 @@ class VatGridFactory implements GridFactoryInterface {
 		$grid->addColumn('percent', 'v.percent', 'Procent', true);
 		$grid->addColumn('coefficient', 'v.percent', 'Koeficient', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_vat_delete', array('id' => 'v.id'))
-			->setConfirmMessage('Opravdu chcete odstranit toto DPH?');
+		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_vat_deleteconfirm', array('id' => 'v.id'))
+			->setAjaxConfirm();
 
 		return $grid;
 	}

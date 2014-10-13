@@ -1,85 +1,93 @@
 /**
  * Custom plugin window
  */
-
 (function ($) {
-
+	
 	SS6 = window.SS6 || {};
 	SS6.window = SS6.window || {};
 	
-	var windowPrefix = '#window-container-';
-	var windowButtonCloseSelector = '.window__close';
-	var windowButtonContinueSelector = '.window__continue';
-	var windowMainContainerId = 'window-main-container';
+	var $activeWindow = null;
+	
+	var getMainContainer = function() {
+		var $mainContainer = $('#window-main-container');
+		if ($mainContainer.size() === 0) {
+			$mainContainer = $('<div id="window-main-container"></div>');
+			$('body').append($mainContainer);
+		}
+		return $mainContainer;
+	};
 	
 	/**
-	 * eventOnClose (function) - on close callback
-	 * eventCloseButton (function) - button Close callback
-	 * eventContinueButton (function) - button Yes callback
+	 * content (string)
+	 * buttonClose (bool)
+	 * buttonContinue (bool)
+	 * textContinue (string)
+	 * eventClose (function)
+	 * eventContinue (function)
+	 * urlContinue (string)
 	 */
-	SS6.window.create = function (options) {
+	SS6.window = function (options) {
 		var defaults = {
-			eventOnClose: function () {},
-			eventCloseButton: function () {},
-			eventContinueButton: function () {},
+			content: '',
+			buttonClose: true,
+			buttonContinue: false,
+			textContinue: 'Ano',
+			eventClose: function () {},
+			eventContinue: function () {},
+			urlContinue: ''
 		};
 		var options = $.extend(defaults, options);
 		
-		var $window = $(windowPrefix + options.id);
+		if ($activeWindow !== null) {
+			$activeWindow.trigger('windowFastClose');
+		}
 		
-		$window
-			.bind('windowClose', function (event) {
-				options.eventOnClose.apply($window, [event]);
-				$window.fadeOut('fast', function () { $(this).appendTo('body') });
-			})
-			.on('click.windowClose', windowButtonCloseSelector, function (event) {
-				options.eventCloseButton.apply($window, [event]);
-				$window.trigger('windowClose');
-				event.preventDefault();
-			})
-			.on('click.windowContinue', windowButtonContinueSelector, function (event) {
-				options.eventContinueButton.apply($window, [event]);
-				$window.trigger('windowClose');
-				if ($(this).attr('href') === '#') {
-					event.preventDefault();
-				}
-			});
-			
-	}
-	
-	SS6.window.open = function(id) {
-		var $window = $(windowPrefix + id);
-		var windowId = $window.attr('id');
-		var $mainContainer = this.getMainContainer();
+		var $window = $('<div class="window window--active"></div>');
+		var $windowContent = $('<div></div>').html(options.content);
 		
-		var isOpenned = false;
-		$mainContainer.children().each(function() {
-			if ($(this).attr('id') === windowId) {
-				isOpenned = true;
-			} else {
-				$(this).trigger('windowClose');
-			}
+		$activeWindow = $window;
+		
+		$window.bind('windowClose', function () {
+			$(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
 		});
 		
-		if (!isOpenned) {
-			$window.hide().appendTo($mainContainer).fadeIn('fast').addClass('window--active');
+		$window.bind('windowFastClose', function () {
+			$(this).remove();
+			$activeWindow = null;
+		});
+		
+		$window.append($windowContent);
+		if (options.buttonClose) {
+			var $windowButtonClose = $('<a href="#" class="window-button-close window__close" title="Zavřít">X</a>');
+			$windowButtonClose
+				.bind('click.window', options.eventClose)
+				.bind('click.windowClose', function () {
+					$window.trigger('windowClose');
+					return false;
+				});
+			$window.append($windowButtonClose);
 		}
-	}
-	
-	SS6.window.close = function(id) {
-		var $window = $(windowPrefix + id);
-		$window.trigger('windowClose');
-	}
-	
-	SS6.window.getMainContainer = function() {
-		var $mainContainer = $('#' + windowMainContainerId);
-		if ($mainContainer.size() === 0) {
-			$('body').append('<div id="' + windowMainContainerId + '"></div>');
-			$mainContainer = $('#' + windowMainContainerId);
+		
+		if (options.buttonContinue) {
+			var $windowActions = $('<div class="window__actions"></div>');
+			var $windowButtonContinue = $('<a href="" class="window-button-continue button btn btn-primary"></a>');
+			$windowButtonContinue
+				.text(options.textContinue)
+				.attr('href', options.urlContinue)
+				.bind('click.window', options.eventContinue)
+				.bind('click.windowContinue', function () {
+					$window.trigger('windowClose');
+					if ($(this).attr('href') === '#') {
+						return false;
+					}
+				});
+			$windowActions.append($windowButtonContinue);
+			$window.append($windowActions);
 		}
-		return $mainContainer;
-	}
+
+		$window.hide().appendTo(getMainContainer()).fadeIn('fast');
+		
+		return $window;
+	};
 	
 })(jQuery);
-
-

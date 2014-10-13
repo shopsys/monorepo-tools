@@ -109,4 +109,20 @@ class OrderStatusFacade {
 		return $this->orderStatusRepository->getById($orderStatusId);
 	}
 
+	/**
+	 * @param int $orderStatusId
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 */
+	public function getAllExceptId($orderStatusId) {
+		return $this->orderStatusRepository->getAllExceptId($orderStatusId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @return bool
+	 */
+	public function isOrderStatusUsed(OrderStatus $orderStatus) {
+		return $this->orderRepository->getOrdersCountByStatus($orderStatus);
+	}
+
 }

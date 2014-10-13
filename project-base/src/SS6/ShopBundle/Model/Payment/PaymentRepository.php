@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository {
@@ -92,5 +93,13 @@ class PaymentRepository {
 	public function findAllByTransport(Transport $transport) {
 		$dql = sprintf('SELECT p, t FROM %s p JOIN p.transports t WHERE t.id = :transportId', Payment::class);
 		return $this->em->createQuery($dql)->setParameter('transportId', $transport->getId())->getResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getAllIncludingDeletedByVat(Vat $vat) {
+		return $this->getPaymentRepository()->findBy(array('vat' => $vat));
 	}
 }

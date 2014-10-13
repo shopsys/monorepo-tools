@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Payment\VisibilityCalculation;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentEditFacade {
@@ -108,5 +109,17 @@ class PaymentEditFacade {
 		$allPayments = $this->paymentRepository->findAllWithTransports();
 
 		return $this->visibilityCalculation->findAllVisible($allPayments);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
+		$payments = $this->paymentRepository->getAllIncludingDeletedByVat($oldVat);
+		foreach ($payments as $payment) {
+			$payment->changeVat($newVat);
+		}
+		$this->em->flush();
 	}
 }

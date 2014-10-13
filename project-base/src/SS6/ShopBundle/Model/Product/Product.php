@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 /**
  * Product
@@ -166,6 +167,13 @@ class Product implements EntityFileUploadInterface {
 		$this->hidden = $productData->getHidden();
 		$this->setImageForUpload($productData->getImage());
 		$this->availability = $productData->getAvailability();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 */
+	public function changeVat(Vat $vat) {
+		$this->vat = $vat;
 	}
 
 	/**

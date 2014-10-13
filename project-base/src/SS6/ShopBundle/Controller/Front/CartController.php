@@ -176,17 +176,9 @@ class CartController extends Controller {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	private function getAjaxAddProductResponse(array $actionResult) {
-		$engine = $this->container->get('templating');
-		$actionResult['jsWindowId'] = 'productAddResponse';
-		$actionResult['jsWindow'] = $engine->render('@SS6Shop/Front/Inline/jsWindow.html.twig', array(
-			'id' => $actionResult['jsWindowId'],
-			'text' => $actionResult['message'],
-			'noEscape' => true,
-			'continueButton' => $actionResult['success'],
-			'continueButtonText' => 'Pokračovat do košíku',
-			'continueUrl' => $this->generateUrl('front_cart'),
-		));
+		$actionResult['continueUrl'] = $this->generateUrl('front_cart');
 		$actionResult['cartBoxReloadUrl'] = $this->generateUrl('front_cart_box');
+		
 		return new JsonResponse($actionResult);
 	}
 	

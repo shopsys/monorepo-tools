@@ -129,6 +129,9 @@ services:
   ss6.shop.customer.user_repository:
     class: SS6\ShopBundle\Model\Customer\UserRepository
 
+  ss6.shop.confirm_delete.confirm_delete_response_factory:
+    class: SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
+
   ss6.shop.data_fixture.persistent_reference_repository:
     class: SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository
 

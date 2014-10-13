@@ -160,9 +160,12 @@
 		{% set icon = actionColumn.type %}
 	{% endif %}
 	<a
-		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}"
+		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
+		data-ajax-confirm-on-open="SS6.confirmDelete.onSelectChange();"
 		href="{{ actionColumn.targetUrl(row) }}"
-		{% if actionColumn.confirmMessage is not empty %}onclick="return confirm('{{ actionColumn.confirmMessage }}');"{% endif %}
+		{% if actionColumn.confirmMessage is not empty -%}
+			onclick="return confirm('{{ actionColumn.confirmMessage }}');"
+		{%- endif %}
 	><i class="fa fa-{{ icon }}"></i></a>
 {% endblock %}
 

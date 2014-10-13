@@ -51,6 +51,11 @@ class ActionColumn {
 	private $confirmMessage;
 
 	/**
+	 * @var bool
+	 */
+	private $isAjaxConfirm;
+
+	/**
 	 *
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param string $type
@@ -66,6 +71,7 @@ class ActionColumn {
 		$this->route = $route;
 		$this->bindingRouteParams = $bindingRouteParams;
 		$this->additionalRouteParams = $additionalRouteParams;
+		$this->isAjaxConfirm = false;
 	}
 
 	/**
@@ -117,8 +123,23 @@ class ActionColumn {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Grid\ActionColumn
+	 */
+	public function setAjaxConfirm() {
+		$this->isAjaxConfirm = true;
+
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isAjaxConfirm() {
+		return $this->isAjaxConfirm;
+	}
+
+	/**
 	 * @param array $row
-	 * @param string|null $value
 	 * @return string
 	 */
 	public function getTargetUrl(array $row) {
@@ -127,8 +148,8 @@ class ActionColumn {
 		foreach ($this->bindingRouteParams as $key => $queryId) {
 			$parameters[$key] = Grid::getValueFromRowByQueryId($row, $queryId);
 		}
-		
-		return $this->router->generate($this->route, $parameters, true);
+
+		return $this->router->generate($this->route, $parameters, Router::ABSOLUTE_URL);
 	}
 
 }

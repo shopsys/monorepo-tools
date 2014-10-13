@@ -24,22 +24,58 @@ class VatController extends Controller {
 	}
 
 	/**
-	 * @Route("/vat/delete/{id}", requirements={"id" = "\d+"})
+	 * @Route("/vat/delete_confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
-	public function deleteAction($id) {
+	public function deleteConfirmAction($id) {
+		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
+		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
+		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */;
+
+		$vat = $vatFacade->getById($id);
+		if ($vatFacade->isVatUsed($vat)) {
+			$message = 'Pro odstranění sazby "' . $vat->getName() . '" musíte zvolit, která se má všude, '
+				. 'kde je aktuálně používaná nastavit. Jakou sazbu místo ní chcete nastavit?';
+			$vatNamesById = array();
+			foreach ($vatFacade->getAllExceptId($id) as $newVat) {
+				$vatNamesById[$newVat->getId()] = $newVat->getName();
+			}
+			return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
+		} else {
+			$message = 'Opravdu si přejete trvale odstranit sazbu "' . $vat->getName() . '"? Nikde není použita.';
+			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
+		}
+	}
+
+	/**
+	 * @Route("/vat/delete/{id}/{newId}", requirements={"id" = "\d+", "newId" = "\d+"})
+	 * @param int $id
+	 * @param int|null $newId
+	 */
+	public function deleteAction($id, $newId = null) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$fullName = $vatFacade->getById($id)->getName();
-		$vatFacade->deleteById($id);
+		
+		$vatFacade->deleteById($id, $newId);
 
-		$flashMessageSender->addSuccessTwig('DPH <strong>{{ name }}</strong> bylo smazáno', array(
-			'name' => $fullName,
-		));
+		if ($newId === null) {
+			$flashMessageSender->addSuccessTwig('DPH <strong>{{ name }}</strong> bylo smazáno', array(
+				'name' => $fullName,
+			));
+		} else {
+			$newVat = $vatFacade->getById($newId);
+			$flashMessageSender->addSuccessTwig(
+				'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.',
+				array(
+					'name' => $fullName,
+					'newName' => $newVat->getName(),
+				));
+		}
 		return $this->redirect($this->generateUrl('admin_vat_list'));
 	}
 
@@ -58,7 +94,7 @@ class VatController extends Controller {
 		$form = $this->createForm(new DefaultVatFormType($vats));
 
 		$defaultVatFormData = array();
-		$defaultVatFormData['defaultVat'] = $vatFacade->findDefaultVat();
+		$defaultVatFormData['defaultVat'] = $vatFacade->getDefaultVat();
 		
 		$form->setData($defaultVatFormData);
 		$form->handleRequest($request);
