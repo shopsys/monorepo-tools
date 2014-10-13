@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
 use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplatesData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
