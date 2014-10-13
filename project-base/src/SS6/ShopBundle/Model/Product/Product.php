@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
@@ -62,9 +63,9 @@ class Product implements EntityFileUploadInterface {
 	private $description;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
 	private $price;
 
@@ -138,7 +139,7 @@ class Product implements EntityFileUploadInterface {
 		$this->partno = $productData->getPartno();
 		$this->ean = $productData->getEan();
 		$this->description = $productData->getDescription();
-		$this->price = $productData->getPrice();
+		$this->setPrice($productData->getPrice());
 		$this->vat = $productData->getVat();
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
@@ -159,7 +160,7 @@ class Product implements EntityFileUploadInterface {
 		$this->partno = $productData->getPartno();
 		$this->ean = $productData->getEan();
 		$this->description = $productData->getDescription();
-		$this->price = $productData->getPrice();
+		$this->setPrice($productData->getPrice());
 		$this->vat = $productData->getVat();
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
@@ -218,10 +219,10 @@ class Product implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @param string $price
+	 * @param string|null $price
 	 */
 	public function setPrice($price) {
-		$this->price = $price;
+		$this->price = Condition::ifNull($price, 0);
 	}
 
 	/**
@@ -267,7 +268,7 @@ class Product implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return string|null
+	 * @return string
 	 */
 	public function getPrice() {
 		return $this->price;
