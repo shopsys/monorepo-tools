@@ -44,7 +44,15 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$basePriceWithVat,
 		$basePriceVatAmount
 	) {
-		$rounding = new Rounding();
+		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+			->setMethods(array('getRoundingType'))
+			->disableOriginalConstructor()
+			->getMock();
+		$pricingSettingMock
+			->expects($this->any())->method('getRoundingType')
+				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+
+		$rounding = new Rounding($pricingSettingMock);
 		$priceCalculation = new PriceCalculation($rounding);
 		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 

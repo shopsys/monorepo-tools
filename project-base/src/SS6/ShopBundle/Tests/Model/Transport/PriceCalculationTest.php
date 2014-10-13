@@ -44,17 +44,21 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceWithoutVat,
 		$priceWithVat
 	) {
-		$rounding = new Rounding();
-		$priceCalculation = new PriceCalculation($rounding);
-		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
-
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getInputPriceType'))
+			->setMethods(array('getInputPriceType', 'getRoundingType'))
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock
 			->expects($this->any())->method('getInputPriceType')
 				->will($this->returnValue($inputPriceType));
+		$pricingSettingMock
+			->expects($this->any())->method('getRoundingType')
+				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+
+		$rounding = new Rounding($pricingSettingMock);
+		$priceCalculation = new PriceCalculation($rounding);
+		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
+
 		$transportPriceCalculation = new TransportPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));

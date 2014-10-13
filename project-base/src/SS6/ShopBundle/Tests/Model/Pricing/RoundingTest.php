@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 
 class RoundingTest extends PHPUnit_Framework_TestCase {
@@ -57,11 +58,89 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 		$expectedAsPriceWithoutVat,
 		$expectedAsVatAmount
 	) {
-		$rounding = new Rounding();
+		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+			->setMethods(array('getRoundingType'))
+			->disableOriginalConstructor()
+			->getMock();
+		$pricingSettingMock
+			->expects($this->any())->method('getRoundingType')
+				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+
+		$rounding = new Rounding($pricingSettingMock);
 
 		$this->assertEquals(round($expectedAsPriceWithVat, 6), round($rounding->roundPriceWithVat($unroundedPrice), 6));
 		$this->assertEquals(round($expectedAsPriceWithoutVat, 6), round($rounding->roundPriceWithoutVat($unroundedPrice), 6));
 		$this->assertEquals(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
+	}
+	
+	public function testRoundingPriceWithVatProvider() {
+		return array(
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
+				'inputPrice' => 1.5,
+				'outputPrice' => 2,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
+				'inputPrice' => 1.49,
+				'outputPrice' => 1,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
+				'inputPrice' => 1.01,
+				'outputPrice' => 1.01,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
+				'inputPrice' => 1.009,
+				'outputPrice' => 1.01,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
+				'inputPrice' => 1.001,
+				'outputPrice' => 1,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
+				'inputPrice' => 1.24,
+				'outputPrice' => 1,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
+				'inputPrice' => 1.25,
+				'outputPrice' => 1.5,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
+				'inputPrice' => 1.74,
+				'outputPrice' => 1.5,
+			),
+			array(
+				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
+				'inputPrice' => 1.75,
+				'outputPrice' => 2,
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider testRoundingPriceWithVatProvider
+	 */
+	public function testRoundingPriceWithVat(
+		$roundingType,
+		$inputPrice,
+		$outputPrice
+	) {
+		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+			->setMethods(array('getRoundingType'))
+			->disableOriginalConstructor()
+			->getMock();
+		$pricingSettingMock->expects($this->any())->method('getRoundingType')->will($this->returnValue($roundingType));
+
+		$rounding = new Rounding($pricingSettingMock);
+		$roundedPrice = $rounding->roundPriceWithVat($inputPrice);
+
+		$this->assertEquals(round($outputPrice, 6), round($roundedPrice, 6));
 	}
 
 }
