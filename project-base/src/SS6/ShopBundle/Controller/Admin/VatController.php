@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Vat\DefaultVatFormType;
+use SS6\ShopBundle\Form\Admin\Vat\RoundingSettingFormType;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -108,6 +110,42 @@ class VatController extends Controller {
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Vat/defaultVat.html.twig', array(
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function roundingSettingAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
+		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
+		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
+		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
+
+		$form = $this->createForm(new RoundingSettingFormType(PricingSetting::getRoundingTypes()));
+
+		try {
+			$roundingSettingFormData = array();
+			$roundingSettingFormData['roundingType'] = $pricingSetting->getRoundingType();
+
+			$form->setData($roundingSettingFormData);
+			$form->handleRequest($request);
+
+			if ($form->isValid()) {
+				$roundingSettingFormData = $form->getData();
+				$pricingSettingFacade->setRoundingType($roundingSettingFormData['roundingType']);
+
+				$flashMessageSender->addSuccess('Nastavení zaokrouhlování bylo upraveno');
+				return $this->redirect($this->generateUrl('admin_vat_list'));
+			}
+		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
+			$flashMessageSender->addError('Neplatné nastavení zaokrouhlování');
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Vat/roundingSetting.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

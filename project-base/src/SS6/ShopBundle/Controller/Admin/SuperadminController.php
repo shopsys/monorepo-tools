@@ -49,6 +49,8 @@ class SuperadminController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
 		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
+		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
+		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
 
 		$form = $this->createForm(new InputPriceTypeFormType());
 
@@ -62,10 +64,7 @@ class SuperadminController extends Controller {
 
 		if ($form->isValid()) {
 			$pricingSettingData = $form->getData();
-
-			$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
-			/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
-			$pricingSettingFacade->edit($pricingSettingData);
+			$pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
 
 			$flashMessageSender->addSuccessTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', array(
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
