@@ -98,7 +98,7 @@ class ProductFormType extends AbstractType {
 				'currency' => false,
 				'precision' => 6,
 				'required' => true,
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
 					new Constraints\GreaterThanOrEqual(array(

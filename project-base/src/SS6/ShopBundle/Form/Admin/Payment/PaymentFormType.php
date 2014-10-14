@@ -70,7 +70,7 @@ class PaymentFormType extends AbstractType {
 			->add('price', 'money', array(
 				'currency' => false,
 				'precision' => 6,
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
+				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'required' => true,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
