@@ -25,9 +25,9 @@ class SliderItemData {
 	 * @param string $image
 	 */
 	public function __construct(
-		$name,
-		$link,
-		$image
+		$name = null,
+		$link = null,
+		$image = null
 	) {
 		$this->name = $name;
 		$this->link = $link;
