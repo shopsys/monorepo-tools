@@ -1,18 +1,18 @@
 (function ($) {
 	
 	SS6 = window.SS6 || {};
-	SS6.clientSideValidation = SS6.clientSideValidation || {};
+	SS6.validation = SS6.validation || {};
 	
-	SS6.clientSideValidation.addNewItemToCollection = function (collectionSelector, itemIndex) {
+	SS6.validation.addNewItemToCollection = function (collectionSelector, itemIndex) {
 		$($(collectionSelector)).jsFormValidator('addPrototype', itemIndex);
 	};
 	
-	SS6.clientSideValidation.removeItemFromCollection = function (collectionSelector, itemIndex) {
+	SS6.validation.removeItemFromCollection = function (collectionSelector, itemIndex) {
 		if (itemIndex === undefined) {
 			throw Error('ItemIndex is undefined while remove item from collections');
 		}
 		$($(collectionSelector)).jsFormValidator('delPrototype', itemIndex);
-		SS6.clientSideValidation.highlightSubmitButtons($(collectionSelector).closest('form'));
+		SS6.validation.highlightSubmitButtons($(collectionSelector).closest('form'));
 	};
 	
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
@@ -21,7 +21,9 @@
 			FpJsFormValidator.customizeMethods._submitForm.call(this, event);
 			if ($(this).find('.js-validation-error:first').size() > 0) {
 				event.preventDefault();
-				alert('Překontrolujte prosím zadané hodnoty');
+				SS6.window({
+					content: "Překontrolujte prosím zadané hodnoty."
+				});
 			}
 		}
 	};
@@ -33,7 +35,7 @@
 		if (!element.domNode) {
 			return;
 		}
-		$(element.domNode).each(SS6.clientSideValidation.inputBind);
+		$(element.domNode).each(SS6.validation.inputBind);
 	};
 	
 	// stop error bubbling, because errors of some collections (eg. admin order items) bubble to main form and mark all inputs as invalid
