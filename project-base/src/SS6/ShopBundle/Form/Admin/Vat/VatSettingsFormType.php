@@ -3,10 +3,17 @@
 namespace SS6\ShopBundle\Form\Admin\Vat;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
-class RoundingSettingFormType extends AbstractType {
+class VatSettingsFormType extends AbstractType {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 */
+	private $vats;
 
 	/**
 	 * @var array
@@ -14,9 +21,11 @@ class RoundingSettingFormType extends AbstractType {
 	private $roundingTypes;
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param array $roundingTypes
 	 */
-	public function __construct(array $roundingTypes) {
+	public function __construct(array $vats, array $roundingTypes) {
+		$this->vats = $vats;
 		$this->roundingTypes = $roundingTypes;
 	}
 
@@ -24,7 +33,7 @@ class RoundingSettingFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'rounding_setting';
+		return 'vat_settings';
 	}
 
 	/**
@@ -33,6 +42,13 @@ class RoundingSettingFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
+			->add('defaultVat', 'choice', array(
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->vats, 'name', array(), null, 'id'),
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím zadejte výchozí výši DPH')),
+				),
+			))
 			->add('roundingType', 'choice', array(
 				'required' => true,
 				'choices' => $this->roundingTypes,

@@ -3,8 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Vat\DefaultVatFormType;
-use SS6\ShopBundle\Form\Admin\Vat\RoundingSettingFormType;
+use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,40 +83,11 @@ class VatController extends Controller {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function defaultVatAction(Request $request) {
+	public function settingsAction(Request $request) {
 		$vatRepository = $this->get('ss6.shop.pricing.vat.vat_repository');
 		/* @var $vatRepository \SS6\ShopBundle\Model\Pricing\Vat\VatRepository */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
-		$vats = $vatRepository->findAll();
-		$form = $this->createForm(new DefaultVatFormType($vats));
-
-		$defaultVatFormData = array();
-		$defaultVatFormData['defaultVat'] = $vatFacade->getDefaultVat();
-		
-		$form->setData($defaultVatFormData);
-		$form->handleRequest($request);
-
-		if ($form->isValid()) {
-			$defaultVatFormData = $form->getData();
-			$vatFacade->setDefaultVat($defaultVatFormData['defaultVat']);
-			$flashMessageSender->addSuccess('Nastavení výchozí sazby DPH bylo upraveno');
-			
-			return $this->redirect($this->generateUrl('admin_vat_list'));
-		}
-
-		return $this->render('@SS6Shop/Admin/Content/Vat/defaultVat.html.twig', array(
-			'form' => $form->createView(),
-		));
-	}
-
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 */
-	public function roundingSettingAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
@@ -125,27 +95,30 @@ class VatController extends Controller {
 		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
 		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
 
-		$form = $this->createForm(new RoundingSettingFormType(PricingSetting::getRoundingTypes()));
+		$vats = $vatRepository->findAll();
+		$form = $this->createForm(new VatSettingsFormType($vats, PricingSetting::getRoundingTypes()));
 
 		try {
-			$roundingSettingFormData = array();
-			$roundingSettingFormData['roundingType'] = $pricingSetting->getRoundingType();
+			$vatSettingsFormData = array();
+			$vatSettingsFormData['defaultVat'] = $vatFacade->getDefaultVat();
+			$vatSettingsFormData['roundingType'] = $pricingSetting->getRoundingType();
 
-			$form->setData($roundingSettingFormData);
+			$form->setData($vatSettingsFormData);
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$roundingSettingFormData = $form->getData();
-				$pricingSettingFacade->setRoundingType($roundingSettingFormData['roundingType']);
+				$vatSettingsFormData = $form->getData();
+				$vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
+				$pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+				$flashMessageSender->addSuccess('Nastavení DPH bylo upraveno');
 
-				$flashMessageSender->addSuccess('Nastavení zaokrouhlování bylo upraveno');
 				return $this->redirect($this->generateUrl('admin_vat_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
 			$flashMessageSender->addError('Neplatné nastavení zaokrouhlování');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Vat/roundingSetting.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

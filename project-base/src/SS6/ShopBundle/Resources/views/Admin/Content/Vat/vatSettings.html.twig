@@ -3,6 +3,7 @@
 		{{ form_start(form) }}
 			<div class="wrap-box form-inline mb-1 mt-1">
 				{{ form_row(form.defaultVat, { 'label': 'Výchozí sazba DPH' }) }}
+				{{ form_row(form.roundingType, { 'label': 'Zaokrouhlení ceny s DPH' }) }}
 				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
 			</div>
 		{{ form_end(form) }}
