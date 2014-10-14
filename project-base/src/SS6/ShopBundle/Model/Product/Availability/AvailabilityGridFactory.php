@@ -36,7 +36,7 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$queryBuilder
 			->select('a')
 			->from(Availability::class, 'a');
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('name');

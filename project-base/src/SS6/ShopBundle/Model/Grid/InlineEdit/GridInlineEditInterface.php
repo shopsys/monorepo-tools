@@ -29,10 +29,5 @@ interface GridInlineEditInterface {
 	 * @return string
 	 */
 	public function getServiceName();
-
-	/**
-	 * @return string
-	 */
-	public function getQueryId();
 	
 }

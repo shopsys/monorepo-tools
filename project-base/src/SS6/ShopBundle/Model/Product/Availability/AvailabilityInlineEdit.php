@@ -39,13 +39,6 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getQueryId() {
-		return 'a.id';
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
 	 * @return int
 	 */

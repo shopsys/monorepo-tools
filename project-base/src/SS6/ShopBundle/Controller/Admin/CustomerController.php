@@ -108,7 +108,7 @@ class CustomerController extends Controller {
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
 			->groupBy('u.id');
 		$queryBuilder->setParameter('emptyDateTime', new DateTime('@0'));
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
 
 		$grid = $gridFactory->create('customerList', $dataSource);
 		$grid->allowPaging();

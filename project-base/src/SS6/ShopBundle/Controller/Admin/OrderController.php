@@ -108,7 +108,7 @@ class OrderController extends Controller {
 						END) AS customerName')
 			->join('o.status', 'os')
 			->groupBy('o.id');
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'o.id');
 
 		$grid = $gridFactory->create('orderList', $dataSource);
 		$grid->allowPaging();

@@ -37,7 +37,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$queryBuilder
 			->select('p')
 			->from(Parameter::class, 'p');
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $this->gridFactory->create('parameterList', $dataSource);
 		$grid->setDefaultOrder('name');

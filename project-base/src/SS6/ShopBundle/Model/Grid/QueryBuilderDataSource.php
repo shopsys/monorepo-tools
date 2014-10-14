@@ -15,10 +15,17 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	private $queryBuilder;
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @var string
 	 */
-	public function __construct(QueryBuilder $queryBuilder) {
+	private $queryId;
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param string $queryId
+	 */
+	public function __construct(QueryBuilder $queryBuilder, $queryId) {
 		$this->queryBuilder = $queryBuilder;
+		$this->queryId = $queryId;
 	}
 
 	/**
@@ -41,12 +48,11 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	}
 
 	/**
-	 * @param string $queryId
 	 * @param int $rowId
 	 */
-	public function getOneRow($queryId, $rowId) {
+	public function getOneRow($rowId) {
 		$queryBuilder = clone $this->queryBuilder;
-		$this->prepareQueryWithOneRow($queryBuilder, $queryId, $rowId);
+		$this->prepareQueryWithOneRow($queryBuilder, $rowId);
 
 		return $queryBuilder->getQuery()->getSingleResult('GroupedScalarHydrator');
 	}
@@ -105,12 +111,11 @@ class QueryBuilderDataSource implements DataSourceInterface {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $queryId
 	 * @param int $rowId
 	 */
-	private function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $queryId, $rowId) {
+	private function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $rowId) {
 		$queryBuilder
-			->andWhere($queryId . ' = :rowId')
+			->andWhere($this->queryId . ' = :rowId')
 			->setParameter('rowId', $rowId)
 			->setFirstResult(null)
 			->setMaxResults(null)
@@ -149,6 +154,13 @@ class QueryBuilderDataSource implements DataSourceInterface {
 		$rsm->addScalarResult('total_count', 'totalCount');
 		return $em->createNativeQuery($sql, $rsm)
 			->setParameters($flatenedParameters);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIdQueryId() {
+		return $this->queryId;
 	}
 
 }

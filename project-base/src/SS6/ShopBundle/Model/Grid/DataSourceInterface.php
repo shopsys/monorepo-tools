@@ -22,15 +22,19 @@ interface DataSourceInterface {
 	);
 
 	/**
-	 * @param string $queryId
 	 * @param int $rowId
 	 * @return array
 	 */
-	public function getOneRow($queryId, $rowId);
+	public function getOneRow($rowId);
 
 	/**
 	 * @return int
 	 */
 	public function getTotalRowsCount();
+
+	/**
+	 * @return string
+	 */
+	public function getIdQueryId();
 	
 }

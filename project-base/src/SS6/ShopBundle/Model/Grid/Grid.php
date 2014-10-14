@@ -222,7 +222,7 @@ class Grid {
 	 * @return mixed
 	 */
 	public function getInlineEditRowId($row) {
-		return Grid::getValueFromRowByQueryId($row, $this->getInlineEditService()->getQueryId());
+		return Grid::getValueFromRowByQueryId($row, $this->dataSource->getIdQueryId());
 	}
 
 	/**
@@ -246,12 +246,11 @@ class Grid {
 	}
 
 	/**
-	 * @param string $queryId
 	 * @param int $rowId
 	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
-	public function createViewWithOneRow($queryId, $rowId) {
-		$this->loadRowsWithOneRow($queryId, $rowId);
+	public function createViewWithOneRow($rowId) {
+		$this->loadRowsWithOneRow($rowId);
 		$gridView = new GridView($this, $this->requestStack, $this->router, $this->twig);
 
 		return $gridView;
@@ -482,8 +481,8 @@ class Grid {
 	 * @param string $queryId
 	 * @param int $rowId
 	 */
-	private function loadRowsWithOneRow($queryId, $rowId) {
-		$this->rows = array($this->dataSource->getOneRow($queryId, $rowId));
+	private function loadRowsWithOneRow($rowId) {
+		$this->rows = array($this->dataSource->getOneRow($rowId));
 	}
 
 	private function executeTotalQuery() {

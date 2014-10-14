@@ -75,13 +75,6 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 	/**
 	 * @return string
 	 */
-	public function getQueryId() {
-		return 'os.id';
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getServiceName() {
 		return 'ss6.shop.order.status.grid.order_status_inline_edit';
 	}

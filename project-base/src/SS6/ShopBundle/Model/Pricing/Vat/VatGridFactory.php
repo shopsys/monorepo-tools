@@ -37,7 +37,7 @@ class VatGridFactory implements GridFactoryInterface {
 		$queryBuilder
 			->select('v')
 			->from(Vat::class, 'v');
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'v.id');
 
 		$grid = $this->gridFactory->create('vatList', $dataSource);
 		$grid->setDefaultOrder('name');

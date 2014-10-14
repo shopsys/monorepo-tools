@@ -85,11 +85,6 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	abstract public function getServiceName();
 
 	/**
-	 * @return string
-	 */
-	abstract public function getQueryId();
-
-	/**
 	 * @return \Symfony\Component\Form\AbstractType
 	 */
 	abstract protected function getFormType();

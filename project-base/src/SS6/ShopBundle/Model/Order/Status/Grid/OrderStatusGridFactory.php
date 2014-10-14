@@ -38,7 +38,7 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 		$queryBuilder
 			->select('os')
 			->from(OrderStatus::class, 'os');
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'os.id');
 
 		$grid = $this->gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');

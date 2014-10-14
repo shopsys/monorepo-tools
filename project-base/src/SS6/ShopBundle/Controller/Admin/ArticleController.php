@@ -82,7 +82,7 @@ class ArticleController extends Controller {
 			->from(Article::class, 'a')
 			->where('a.domainId = :selectedDomainId')
 			->setParameter('selectedDomainId', $selectedDomain->getId());
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $gridFactory->create('articleList', $dataSource);
 		$grid->allowPaging();

@@ -39,13 +39,6 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getQueryId() {
-		return 'p.id';
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 * @return int
 	 */

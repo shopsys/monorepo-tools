@@ -127,7 +127,7 @@ class ProductController extends Controller {
 		$form->handleRequest($request);
 		$searchData = $form->getData();
 		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($searchData);
-		$dataSource = new QueryBuilderDataSource($queryBuilder);
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $gridFactory->create('productList', $dataSource);
 		$grid->allowPaging();
