@@ -9,6 +9,9 @@ services:
   ss6.shop.form.admin.product.product_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 
+  ss6.shop.form.admin.slider.slider_item_form_type_factory:
+    class: SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
+
   ss6.shop.form.admin.transport.transport_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
     
