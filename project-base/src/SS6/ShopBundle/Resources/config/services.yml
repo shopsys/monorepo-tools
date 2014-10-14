@@ -421,6 +421,12 @@ services:
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
 
+  ss6.shop.slider.slider_item_facade:
+    class: SS6\ShopBundle\Model\Slider\SliderItemFacade
+
+  ss6.shop.slider.slider_item_repository:
+    class: SS6\ShopBundle\Model\Slider\SliderItemRepository
+
   ss6.shop.sub_request.sub_request_listener:
     class: SS6\ShopBundle\Model\SubRequest\SubRequestListener
     tags:
