@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\TestsDb\Model\Payment;
+namespace SS6\ShopBundle\Tests\Model\Payment;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
