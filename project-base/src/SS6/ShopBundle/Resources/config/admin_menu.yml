@@ -51,6 +51,10 @@
           visible: false
     - label: 'Slider na titulce'
       route: admin_slider_list
+      items:
+        - label: 'Nová stránka'
+          route: admin_slider_new
+          visible: false
 
 - label: 'Nastavení'
   route: admin_orderstatus_list
