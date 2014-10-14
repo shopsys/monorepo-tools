@@ -46,6 +46,10 @@ class SliderController extends Controller {
 			return $this->redirect($this->generateUrl('admin_slider_list'));
 		}
 
+		if($form->isSubmitted() && !$form->isValid()) {
+			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+		}
+
 		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', array(
 			'form' => $form->createView(),
 		));

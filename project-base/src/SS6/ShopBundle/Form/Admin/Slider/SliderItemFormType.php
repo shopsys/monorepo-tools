@@ -36,6 +36,9 @@ class SliderItemFormType extends AbstractType {
 		$builder
 			->add('name', 'text', array(
 				'required' => true,
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
+				)
 			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => true,
@@ -50,6 +53,9 @@ class SliderItemFormType extends AbstractType {
 			))
 			->add('link', 'text', array(
 				'required' => true,
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte odkaz')),
+				)
 			))
 			->add('save', 'submit');
 	}
