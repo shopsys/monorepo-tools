@@ -4,7 +4,9 @@ namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
-use \SS6\ShopBundle\Model\Slider\SliderItemData;
+use SS6\ShopBundle\Model\FileUpload\FileForUpload;
+use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
+use SS6\ShopBundle\Model\Slider\SliderItemData;
 
 /**
  * SliderItem
@@ -20,7 +22,7 @@ class SliderItem implements EntityFileUploadInterface {
 	 *
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
-	 * @ORM\GenratedValue(strategy="IDENTTY")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	private $id;
 
