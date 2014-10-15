@@ -21,7 +21,11 @@
 			Poslední přihlášení :
 		</span>
 		<span class="form-line form-line__text">
-			{{ user.lastLogin|date('j.n.Y H:i') }}
+			{% if user.lastLogin != null %}
+				{{ user.lastLogin|date('j.n.Y H:i') }}
+			{% else %}
+				nikdy
+			{% endif %}
 		</span>
 	</div>
 {% endblock %}
