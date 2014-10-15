@@ -1,11 +1,23 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block content %}
-	Hello ShopSys6!<br />
-	<a href="{{ url('front_product_list') }}">Katalog zboží</a></li>
-	<div class="my-carousel">
-		<div><img src="{{ asset('assets/frontend/images/fry.jpg') }}"/></div>
-		<div><img src="{{ asset('assets/frontend/images/bender.jpg') }}"/></div>
-		<div>FUTURAMA:)</div>
+
+	<div id="slider-hp">
+		<div>
+			<img src="{{ asset('assets/frontend/images/pc.png') }}"/>
+		</div>
+
+		<div>
+			<img src="{{ asset('assets/frontend/images/pc2.png') }}"/>
+		</div>
+
+		<div>
+			<div class="slick-text">
+				<h2>Nadpis megaakce</h2>
+				<p>
+					Nejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a tak
+				</p>
+			</div>
+		</div>
 	</div>
 {% endblock %}

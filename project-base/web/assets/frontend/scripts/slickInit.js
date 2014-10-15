@@ -4,12 +4,12 @@
 	SS6.slickInit = SS6.slickInit || {};
 
 	SS6.slickInit.init = function () {
-		$('.my-carousel').slick({
+		$('#slider-hp').slick({
 			dots: true,
 			arrows: false,
 			autoplay: true,
-			autoplaySpeed: 1000,
-		});	
+			autoplaySpeed: 4000,
+		});
 	}
 
 

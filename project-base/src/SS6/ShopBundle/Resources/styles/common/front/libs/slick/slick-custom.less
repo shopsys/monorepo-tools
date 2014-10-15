@@ -1,1 +1,46 @@
 .font-face("slick", "slick");
+
+.slick-slider {
+	margin-bottom: 40px;
+
+	background: @color-f;
+	border: 1px solid @color-border;
+}
+
+.slick-list {
+	margin: 0px;
+}
+
+.slick-slide {
+	height: 230px;
+	overflow: hidden;
+
+	img {
+		max-width: none;
+	}
+}
+
+.slick-track {
+	height: 230px;
+}
+
+.slick-dots {
+	.reset-ul();
+	position: absolute;
+	bottom: 0;
+	height: 24px;
+	padding: 2px 0;
+
+	font-size: 0;
+	background: rgba(255,255,255, 0.7);
+
+	li {
+		margin: 0;
+
+		color: @color-f;
+	}
+}
+
+.slick-text {
+	padding: 20px;
+}
