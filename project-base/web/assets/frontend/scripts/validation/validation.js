@@ -73,7 +73,7 @@
 	};
 	
 	SS6.validation.highlightSubmitButtons = function($form){
-		var $submitButtons = $form.find('.button-primary[type="submit"]');
+		var $submitButtons = $form.find('.button[type="submit"]');
 		
 		if ($form.find('.js-validation-error:first').size() > 0) {
 			$submitButtons.addClass('button--alter');

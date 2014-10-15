@@ -19,7 +19,7 @@
 	FpJsFormValidator.customizeMethods.submitForm = function (event) {
 		if (!$(this).hasClass('js-no-validate')) {
 			FpJsFormValidator.customizeMethods._submitForm.call(this, event);
-			if ($(this).find('.js-validation-error:first').size() > 0) {
+			if ($(this).find('.js-validation-error:first, js-validation-errors-list li[class]:first').size() > 0) {
 				event.preventDefault();
 				SS6.window({
 					content: "Překontrolujte prosím zadané hodnoty."

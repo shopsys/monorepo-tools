@@ -76,9 +76,9 @@
 		var $submitButtons = $form.find('.btn-primary[type="submit"]');
 
 		if ($form.find('.js-validation-error:first').size() > 0) {
-			$submitButtons.addClass('disabled');
+			$submitButtons.addClass('btn-disabled');
 		} else {
-			$submitButtons.removeClass('disabled');
+			$submitButtons.removeClass('btn-disabled');
 		}
 	};
 
