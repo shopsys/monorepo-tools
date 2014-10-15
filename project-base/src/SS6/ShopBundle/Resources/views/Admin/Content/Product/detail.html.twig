@@ -35,7 +35,9 @@
 					{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}
 					{{ form_row(form.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
+				</div>
 
+				<div class="wrap-group">
 					<h2>Skryté:</h2>
 					{% for domainId, hidden in form.hidden %}
 						{% set domain = domainService.getDomainConfigById(domainId) %}
