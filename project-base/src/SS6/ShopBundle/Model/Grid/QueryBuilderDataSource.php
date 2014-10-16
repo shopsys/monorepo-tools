@@ -49,6 +49,7 @@ class QueryBuilderDataSource implements DataSourceInterface {
 
 	/**
 	 * @param int $rowId
+	 * @return array
 	 */
 	public function getOneRow($rowId) {
 		$queryBuilder = clone $this->queryBuilder;
