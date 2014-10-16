@@ -61,5 +61,22 @@
 
 		return element;
 	};
+
+	var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
+	SymfonyComponentValidatorConstraintsUrl = function() {
+	    this.message = '';
+
+	    this.validate = function(value, element) {
+		var regexp = /(ftp|https?):\/\/(www\.)?[\w\-\.@:%_\+~#=]+\.\w{2,3}(\/\w+)*(\?.*)?/;
+		var errors = [];
+		var f = FpJsFormValidator;
+
+		if (!f.isValueEmty(value) && !regexp.test(value)) {
+		    errors.push(this.message.replace('{{ value }}', String('http://' + value)));
+		}
+
+		return errors;
+	    };
+	};
 	
 })(jQuery);

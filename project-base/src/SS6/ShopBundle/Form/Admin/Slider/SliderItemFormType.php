@@ -55,6 +55,7 @@ class SliderItemFormType extends AbstractType {
 				'required' => true,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte odkaz')),
+					new Constraints\Url(array('message' => 'Odkaz musí být validní URL adresa'))
 				)
 			))
 			->add('save', 'submit');
