@@ -200,6 +200,11 @@ services:
   ss6.shop.form.multiple_form_setting:
     class: SS6\ShopBundle\Model\Form\MultipleFormSetting
 
+  ss6.shop.grid.drag_and_drop.grid_ordering_service:
+    class: SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingService
+    arguments:
+      - @service_container
+
   ss6.shop.image.directory_structure_creator:
     class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
     arguments: [%ss6.image_dir%]

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Grid;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\Column;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
+use SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface;
 use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\Grid\GridView;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -124,6 +125,16 @@ class Grid {
 	private $inlineEditService;
 
 	/**
+	 * @var string|null
+	 */
+	private $dragAndDropOrderQueryId;
+
+	/**
+	 * @var GridOrderingInterface|null
+	 */
+	private $dragAndDropOrderingService;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
@@ -221,7 +232,7 @@ class Grid {
 	 * @param array $row
 	 * @return mixed
 	 */
-	public function getInlineEditRowId($row) {
+	public function getRowId($row) {
 		return Grid::getValueFromRowByQueryId($row, $this->dataSource->getIdQueryId());
 	}
 
@@ -468,12 +479,19 @@ class Grid {
 		} else {
 			$orderQueryId = null;
 		}
+		
+		$orderDirection = $this->orderDirection;
+
+		if ($this->isDragAndDrop()) {
+			$orderQueryId = $this->dragAndDropOrderQueryId;
+			$orderDirection = DataSourceInterface::ORDER_ASC;
+		}
 
 		$this->rows = $this->dataSource->getRows(
 			$this->allowPaging ? $this->limit : null,
 			$this->page,
 			$orderQueryId,
-			$this->orderDirection
+			$orderDirection
 		);
 	}
 
@@ -512,6 +530,34 @@ class Grid {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * @param string $orderQueryId
+	 */
+	public function enableDragAndDrop($orderQueryId) {
+		$this->dragAndDropOrderQueryId = $orderQueryId;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isDragAndDrop() {
+		return $this->dragAndDropOrderQueryId !== null;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface|null
+	 */
+	public function getDragAndDropOrderingService() {
+		return $this->dragAndDropOrderingService;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface $dragAndDropOrderingService
+	 */
+	public function setDragAndDropOrderingService(GridOrderingInterface $dragAndDropOrderingService) {
+		$this->dragAndDropOrderingService = $dragAndDropOrderingService;
 	}
 
 }

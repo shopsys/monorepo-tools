@@ -51,5 +51,19 @@ class GridController extends Controller {
 
 		return new JsonResponse($responseData);
 	}
+
+	/**
+	 * @Route("/_grid/save_order/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function saveOrderAction(Request $request) {
+		$dragAndDropOrderingService = $this->get('ss6.shop.grid.drag_and_drop.grid_ordering_service');
+		/* @var $dragAndDropOrderingService \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingService */
+
+		$dragAndDropOrderingService->saveOrder($request->get('serviceName'), $request->get('rowIds'));
+		$responseData = array('success' => true);
+
+		return new JsonResponse($responseData);
+	}
 	
 }
