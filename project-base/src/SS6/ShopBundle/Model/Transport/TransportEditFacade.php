@@ -56,8 +56,11 @@ class TransportEditFacade {
 	public function create(TransportData $transportData) {
 		$transport = new Transport($transportData);
 		$this->em->persist($transport);
+		$this->em->beginTransaction();
 		$this->setAdditionalDataAndFlush($transport, $transportData);
-		
+		$this->createTransportDomains($transport, $transportData->getDomains());
+		$this->em->commit();
+
 		return $transport;
 	}
 	
@@ -67,7 +70,12 @@ class TransportEditFacade {
 	 */
 	public function edit(Transport $transport, TransportData $transportData) {
 		$transport->edit($transportData);
+
+		$this->em->beginTransaction();
 		$this->setAdditionalDataAndFlush($transport, $transportData);
+		$this->deleteTransportDomainsByTransport($transport);
+		$this->createTransportDomains($transport, $transportData->getDomains());
+		$this->em->commit();
 	}
 	
 	/**
@@ -88,6 +96,32 @@ class TransportEditFacade {
 		foreach ($paymentsByTransport as $payment) {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment->getTransports()->removeElement($transport);
+		}
+		$this->em->beginTransaction();
+		$this->deleteTransportDomainsByTransport($transport);
+		$this->em->flush();
+		$this->em->commit();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param array $domainIds
+	 */
+	private function createTransportDomains(Transport $transport, array $domainIds) {
+		foreach ($domainIds as $domainId) {
+			$transportDomain = new TransportDomain($transport, $domainId);
+			$this->em->persist($transportDomain);
+		}
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 */
+	private function deleteTransportDomainsByTransport(Transport $transport) {
+		$transportDomains = $this->getTransportDomainsByTransport($transport);
+		foreach ($transportDomains as $transportDomain) {
+			$this->em->remove($transportDomain);
 		}
 		$this->em->flush();
 	}
@@ -121,5 +155,13 @@ class TransportEditFacade {
 			$transport->changeVat($newVat);
 		}
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
+	 */
+	public function getTransportDomainsByTransport(Transport $transport) {
+		return $this->transportRepository->getTransportDomainByTransport($transport);
 	}
 }

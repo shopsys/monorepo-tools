@@ -67,9 +67,10 @@ class TransportController extends Controller {
 		
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+		$transportDomains = $transportEditFacade->getTransportDomainsByTransport($transport);
 
 		$transportData = new TransportData();
-		$transportData->setFromEntity($transport);
+		$transportData->setFromEntity($transport, $transportDomains);
 
 		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
 		$form->handleRequest($request);
@@ -112,7 +113,7 @@ class TransportController extends Controller {
 		$transportName = $transportEditFacade->getById($id)->getName();
 		$transportEditFacade->deleteById($id);
 
-		$flashMessageSender->addSucces('Doprava <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessTwig('Doprava <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $transportName,
 		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));

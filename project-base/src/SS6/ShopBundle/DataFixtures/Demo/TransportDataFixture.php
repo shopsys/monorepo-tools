@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -15,26 +14,37 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		// @codingStandardsIgnoreStart
-		$this->createTransport($manager, 'transport_cp', 'Česká pošta - balík do ruky', 99.95, VatDataFixture::VAT_HIGH, 'Pouze na vlastní nebezpečí');
-		$this->createTransport($manager, 'transport_ppl', 'PPL', 199.95, VatDataFixture::VAT_HIGH, null);
-		$this->createTransport($manager, 'transport_personal', 'Osobní převzetí', 0, VatDataFixture::VAT_ZERO, 'Uvítá Vás milý personál!');
-		// @codingStandardsIgnoreStop
-		$manager->flush();
+		$transportData = new TransportData();
+		$transportData->setName('Česká pošta - balík do ruky');
+		$transportData->setPrice(99.95);
+		$transportData->setDescription('Pouze na vlastní nebezpečí');
+		$transportData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
+		$transportData->setDomains(array(1));
+		$transportData->setHidden(false);
+		$this->createTransport('transport_cp', $transportData);
+
+		$transportData->setName('PPL');
+		$transportData->setPrice(199.95);
+		$transportData->setDescription(null);
+		$this->createTransport('transport_ppl', $transportData);
+
+		$transportData->setName('Osobní převzetí');
+		$transportData->setPrice(0);
+		$transportData->setDescription('Uvítá Vás milý personál!');
+		$transportData->setVat($this->getReference(VatDataFixture::VAT_ZERO));
+		$this->createTransport('transport_personal', $transportData);
 	}
 	
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
-	 * @param string $name
-	 * @param string $price
-	 * @param string|null $description
-	 * @param boolean $hide
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
-	private function createTransport(ObjectManager $manager, $referenceName, $name, $price, $vatReferenceName, $description, $hide = false) {
-		$vat = $this->getReference($vatReferenceName);
-		$transport = new Transport(new TransportData($name, $price, $vat, $description, $hide));
-		$manager->persist($transport);
+	private function createTransport($referenceName, TransportData $transportData) {
+		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
+		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		
+		$transport = $transportEditFacade->create($transportData);
 		$this->addReference($referenceName, $transport);
 	}
 

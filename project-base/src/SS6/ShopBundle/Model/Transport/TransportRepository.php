@@ -26,6 +26,13 @@ class TransportRepository {
 	private function getTransportRepository() {
 		return $this->em->getRepository(Transport::class);
 	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getTransportDomainRepository() {
+		return $this->em->getRepository(TransportDomain::class);
+	}
 	
 	/**
 	 * @return array
@@ -89,5 +96,13 @@ class TransportRepository {
 	 */
 	public function getAllIncludingDeletedByVat(Vat $vat) {
 		return $this->getTransportRepository()->findBy(array('vat' => $vat));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
+	 */
+	public function getTransportDomainByTransport(Transport $transport) {
+		return $this->getTransportDomainRepository()->findBy(array('transport' => $transport));
 	}
 }

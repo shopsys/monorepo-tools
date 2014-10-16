@@ -51,6 +51,11 @@ class TransportFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 			))
+			->add('domains', 'domains', array(
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Musíte vybrat alespoň jednu doménu')),
+				),
+			))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('price', 'money', array(
 				'currency' => false,
