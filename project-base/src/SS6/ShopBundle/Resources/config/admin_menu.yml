@@ -55,6 +55,9 @@
         - label: 'Nová stránka'
           route: admin_slider_new
           visible: false
+        - label: 'Editace stránky'
+          route: admin_slider_edit
+          visible: false
 
 - label: 'Nastavení'
   route: admin_orderstatus_list
