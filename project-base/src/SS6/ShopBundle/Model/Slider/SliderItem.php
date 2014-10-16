@@ -116,7 +116,7 @@ class SliderItem implements EntityFileUploadInterface {
 	public function getCachedFilesForUpload() {
 		$files = array();
 		if ($this->imageForUpload !== null) {
-			$files['image'] = new FileForUpload($this->imageForUpload, true, 'sliderItem', 'default', FileNamingConvention::TYPE_ID);
+			$files['image'] = new FileForUpload($this->imageForUpload, true, 'sliderItem', null, FileNamingConvention::TYPE_ID);
 		}
 		return $files;
 	}

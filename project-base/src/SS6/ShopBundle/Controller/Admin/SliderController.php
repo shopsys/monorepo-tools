@@ -18,7 +18,7 @@ class SliderController extends Controller {
 	}
 
 	/**
-	 * @Route("/slider/new/")
+	 * @Route("/slider/item/new/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
@@ -41,12 +41,12 @@ class SliderController extends Controller {
 			$flashMessageSender->addSuccessTwig('Byla vytvořena stránka slideru'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $sliderItem->getName(),
-				'url' => $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
+				'url' => $this->generateUrl('admin_slider_list', array('id' => $sliderItem->getId())), //admin_slider_edit!!!
 			));
 			return $this->redirect($this->generateUrl('admin_slider_list'));
 		}
 
-		if($form->isSubmitted() && !$form->isValid()) {
+		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
@@ -55,8 +55,5 @@ class SliderController extends Controller {
 		));
 
 	}
-
-	public function editAction(Request $request, $id) {
-
-	}
+	
 }
