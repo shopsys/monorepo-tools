@@ -30,8 +30,8 @@ class SliderController extends Controller {
 		$grid->addColumn('name', 's.name', 'Název');
 		$grid->addColumn('link', 's.link', 'Odkaz');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_slider_edit', array('id' => 's.id'));
-//		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', array('id' => 's.id'))
-//			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
+		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', array('id' => 's.id'))
+			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/list.html.twig', array(
 			'gridView' => $grid->createView(),
@@ -127,5 +127,28 @@ class SliderController extends Controller {
 			'form' => $form->createView(),
 			'sliderItem' => $sliderItem,
 		));
+	}
+
+	/**
+	 * @Route("/slider/item/delete/{id}", requirements={"id" = "\d+"})
+	 * @param int $id
+	 */
+	public function deleteAction($id) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+
+		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
+			/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
+		$sliderItemRepository = $this->get('ss6.shop.slider.slider_item_repository');
+		/* @var $sliderItemRepository SS6\ShopBundle\Model\Slider\SliderItemRepository */
+
+		$name = $sliderItemRepository->getById($id)->getName();
+		$sliderItemFacade->delete($id);
+
+		$flashMessageSender->addSuccessTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(
+			'name' => $name,
+		));
+		return $this->redirect($this->generateUrl('admin_slider_list'));
+
 	}
 }

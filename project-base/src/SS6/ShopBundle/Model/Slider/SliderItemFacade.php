@@ -55,4 +55,14 @@ class SliderItemFacade {
 
 		return $sliderItem;
 	}
+
+	/**
+	 * @param int $sliderItemId
+	 */
+	public function delete($sliderItemId) {
+		$sliderItem = $this->sliderItemRepository->getById($sliderItemId);
+
+		$this->em->remove($sliderItem);
+		$this->em->flush();
+	}
 }
