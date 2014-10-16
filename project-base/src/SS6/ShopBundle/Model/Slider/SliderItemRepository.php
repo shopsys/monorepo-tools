@@ -39,4 +39,11 @@ class SliderItemRepository {
 		}
 		return $sliderItem;
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
+	 */
+	public function findAll() {
+		return $this->getSliderItemRepository()->findAll();
+	}
 }

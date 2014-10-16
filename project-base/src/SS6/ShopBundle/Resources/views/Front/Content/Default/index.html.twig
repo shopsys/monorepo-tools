@@ -2,22 +2,15 @@
 
 {% block content %}
 
+	{% if sliderItems is not empty %}
 	<div id="slider-hp">
+	{% for item in sliderItems %}
+	
 		<div>
-			<img src="{{ asset('assets/frontend/images/pc.png') }}"/>
+		<a href = "{{ item.link }}"><img src="{{ imageUrl(item) }}"/></a>
 		</div>
-
-		<div>
-			<img src="{{ asset('assets/frontend/images/pc2.png') }}"/>
-		</div>
-
-		<div>
-			<div class="slick-text">
-				<h2>Nadpis megaakce</h2>
-				<p>
-					Nejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a takNejaky text a tak. Nejaky text a tak
-				</p>
-			</div>
-		</div>
+	
+	{% endfor %}
 	</div>
+	{% endif %}
 {% endblock %}
