@@ -72,7 +72,8 @@ class TransportRepository {
 	public function getQueryBuilderForAll() {
 		$qb = $this->getTransportRepository()->createQueryBuilder('t')
 			->where('t.deleted = :deleted')->setParameter('deleted', false)
-			->orderBy('t.position');
+			->orderBy('t.position')
+			->addOrderBy('t.id');
 		return $qb;
 	}
 
