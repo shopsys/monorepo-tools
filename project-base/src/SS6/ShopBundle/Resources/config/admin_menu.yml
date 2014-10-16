@@ -86,7 +86,7 @@
           route: admin_payment_edit
           visible: false
           
-    - label: 'Sazby DPH'
+    - label: 'Sazby DPH a zaokrouhlování'
       route: admin_vat_list
 
     - label: 'Šablony emailů'

@@ -20,6 +20,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $vat \SS6\ShopBundle\Model\Pricing\Vat\Vat */
 
 		$manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT));
+		$manager->persist(new SettingValue(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER));
 		$manager->persist(new SettingValue(Vat::SETTING_DEFAULT_VAT, $vat->getId()));
 
 		$manager->flush();

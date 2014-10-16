@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -43,7 +44,15 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$vatPercent,
 		$expectedPriceWithVat
 	) {
-		$rounding = new Rounding();
+		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+			->setMethods(array('getRoundingType'))
+			->disableOriginalConstructor()
+			->getMock();
+		$pricingSettingMock
+			->expects($this->any())->method('getRoundingType')
+				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+
+		$rounding = new Rounding($pricingSettingMock);
 		$priceCalculation = new PriceCalculation($rounding);
 		$vat = new Vat(new VatData('testVat', $vatPercent));
 
@@ -80,7 +89,15 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$vatPercent,
 		$expectedVatAmount
 	) {
-		$rounding = new Rounding();
+		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
+			->setMethods(array('getRoundingType'))
+			->disableOriginalConstructor()
+			->getMock();
+		$pricingSettingMock
+			->expects($this->any())->method('getRoundingType')
+				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+
+		$rounding = new Rounding($pricingSettingMock);
 		$priceCalculation = new PriceCalculation($rounding);
 		$vat = new Vat(new VatData('testVat', $vatPercent));
 		

@@ -3,7 +3,8 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Vat\DefaultVatFormType;
+use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -82,32 +83,42 @@ class VatController extends Controller {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function defaultVatAction(Request $request) {
+	public function settingsAction(Request $request) {
 		$vatRepository = $this->get('ss6.shop.pricing.vat.vat_repository');
 		/* @var $vatRepository \SS6\ShopBundle\Model\Pricing\Vat\VatRepository */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
+		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
+		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
+		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
 
 		$vats = $vatRepository->findAll();
-		$form = $this->createForm(new DefaultVatFormType($vats));
+		$form = $this->createForm(new VatSettingsFormType($vats, PricingSetting::getRoundingTypes()));
 
-		$defaultVatFormData = array();
-		$defaultVatFormData['defaultVat'] = $vatFacade->getDefaultVat();
-		
-		$form->setData($defaultVatFormData);
-		$form->handleRequest($request);
+		try {
+			$vatSettingsFormData = array();
+			$vatSettingsFormData['defaultVat'] = $vatFacade->getDefaultVat();
+			$vatSettingsFormData['roundingType'] = $pricingSetting->getRoundingType();
 
-		if ($form->isValid()) {
-			$defaultVatFormData = $form->getData();
-			$vatFacade->setDefaultVat($defaultVatFormData['defaultVat']);
-			$flashMessageSender->addSuccess('Nastavení výchozí sazby DPH bylo upraveno');
-			
-			return $this->redirect($this->generateUrl('admin_vat_list'));
+			$form->setData($vatSettingsFormData);
+			$form->handleRequest($request);
+
+			if ($form->isValid()) {
+				$vatSettingsFormData = $form->getData();
+				$vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
+				$pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+				$flashMessageSender->addSuccess('Nastavení DPH bylo upraveno');
+
+				return $this->redirect($this->generateUrl('admin_vat_list'));
+			}
+		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
+			$flashMessageSender->addError('Neplatné nastavení zaokrouhlování');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Vat/defaultVat.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}

@@ -30,7 +30,7 @@ class DelayedPricingSetting {
 	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	public function setInputPriceType($inputPriceType) {
-		if (!in_array($inputPriceType, array_keys($this->pricingSetting->getInputPriceTypes()))) {
+		if (array_key_exists($inputPriceType, $this->pricingSetting->getInputPriceTypes())) {
 			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
 		}
 
