@@ -444,6 +444,9 @@ services:
   ss6.shop.setting.setting_value_repository:
     class: SS6\ShopBundle\Model\Setting\SettingValueRepository
 
+  ss6.shop.transport.grid.drag_and_drop_ordering_service:
+    class: SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService
+
   ss6.shop.transport.price_calculation:
     class: SS6\ShopBundle\Model\Transport\PriceCalculation
 
