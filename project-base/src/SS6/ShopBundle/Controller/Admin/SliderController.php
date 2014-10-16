@@ -93,19 +93,15 @@ class SliderController extends Controller {
 		$sliderItem = $sliderItemRepository->getById($id);
 		$form = $this->createForm($sliderItemFormTypeFactory->create());
 		$sliderItemData = new SliderItemData();
-
-		if (!$form->isSubmitted()) {
-			$sliderItemData->setFromEntity($sliderItem);
-		}
+		$sliderItemData->setFromEntity($sliderItem);
 
 		$form->setData($sliderItemData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$sliderItemData = $form->getData();
-
 			$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
-			/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
+			/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade */
 			$sliderItem = $sliderItemFacade->edit($id, $sliderItemData);
 
 			$flashMessageSender->addSuccessTwig('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>', array(

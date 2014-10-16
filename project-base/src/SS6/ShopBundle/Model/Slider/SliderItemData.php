@@ -82,6 +82,5 @@ class SliderItemData {
 	public function setFromEntity(SliderItem $sliderItem) {
 		$this->name = $sliderItem->getName();
 		$this->link = $sliderItem->getLink();
-		$this->image = $sliderItem->getImage();
 	}
 }
