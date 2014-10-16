@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
@@ -28,24 +29,27 @@ class PaymentEditFacade {
 	private $transportRepository;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
-	 */
-
-	/**
 	 * @var SS6\ShopBundle\Model\Payment\VisibilityCalculation
 	 */
 	private $visibilityCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 
 	public function __construct(
 		EntityManager $em,
 		PaymentRepository $paymentRepository,
 		TransportRepository $transportRepository,
-		VisibilityCalculation $visibilityCalculation) {
+		VisibilityCalculation $visibilityCalculation,
+		Domain $domain
+	) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
 		$this->transportRepository = $transportRepository;
 		$this->visibilityCalculation = $visibilityCalculation;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -105,10 +109,13 @@ class PaymentEditFacade {
 		$this->em->flush();
 	}
 
-	public function getVisible() {
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getVisibleOnCurrentDomain() {
 		$allPayments = $this->paymentRepository->findAllWithTransports();
 
-		return $this->visibilityCalculation->findAllVisible($allPayments);
+		return $this->visibilityCalculation->filterVisible($allPayments, $this->domain->getId());
 	}
 
 	/**

@@ -1,36 +1,94 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Payment;
+namespace SS6\ShopBundle\Tests\Model\Transport;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Doctrine\Common\Collections\ArrayCollection;
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
+use SS6\ShopBundle\Model\Transport\TransportDomain;
+use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
 
-class VisibilityCalculationTest extends FunctionalTestCase {
+class VisibilityCalculationTest {
 	
-	public function testIsVisible() {
-		$vat = $this->getReference(VatDataFixture::VAT_HIGH);
+	public function testIsVisibleHiddentTransport() {
+		$transportRepositoryMock = $this->getMock(TransportRepository::class, [], [], '', false);
+		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
+		$transportMock->expects($this->once())->method('isHidden')->willReturn(true);
 
-		$transport1 = new Transport(new TransportData('name', 0, $vat, 'description', false));
-		$transport2 = new Transport(new TransportData('name', 0, $vat, 'description', false));
-		$transport3 = new Transport(new TransportData('name', 0, $vat, 'description', false));
-		$transport4 = new Transport(new TransportData('name', 0, $vat, 'description', true));
-		$payment1 = new Payment(new PaymentData('name', 0, $vat, 'description', false));
-		$payment2 = new Payment(new PaymentData('name', 0, $vat, 'description', true));
-		$payment1->addTransport($transport1);
-		$payment1->addTransport($transport4);
-		$payment2->addTransport($transport2);
-		$allPayments = array($payment1, $payment2);
+		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
 
-		$visibilityCalculation = new VisibilityCalculation();
+		$this->assertFalse($visibilityCalculation->isVisible($transportMock, [], 1));
+	}
 
-		$this->assertTrue($visibilityCalculation->isVisible($transport1, $allPayments));
-		$this->assertFalse($visibilityCalculation->isVisible($transport2, $allPayments));
-		$this->assertFalse($visibilityCalculation->isVisible($transport3, $allPayments));
-		$this->assertFalse($visibilityCalculation->isVisible($transport4, $allPayments));
+	public function testIsVisibleWithoutPayments() {
+		$transportRepositoryMock = $this->getMock(TransportRepository::class, [], [], '', false);
+		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
+		$transportMock->expects($this->once())->method('isHidden')->willReturn(false);
+
+		$paymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
+		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+
+		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+
+		$this->assertFalse($visibilityCalculation->isVisible($transportMock, [$paymentMock], 1));
+	}
+
+	public function testIsVisibleWithPaymentsAndWithoutDomain() {
+		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
+		$transportMock->expects($this->once())->method('isHidden')->willReturn(false);
+
+		$transportDomain = new TransportDomain($transportMock, 2);
+
+		$transportRepositoryMock = $this->getMock(TransportRepository::class, ['getTransportDomainsByTransport'], [], '', false);
+		$transportRepositoryMock
+			->expects($this->once())
+			->method('getTransportDomainsByTransport')
+			->with($this->equalTo($transportMock))
+			->willReturn([$transportDomain]);
+
+		$paymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
+		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+
+		$transportsPaymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$transportsPaymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
+		$transportsPaymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+
+		$payments = [$paymentMock, $transportsPaymentMock];
+
+		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+
+		$this->assertFalse($visibilityCalculation->isVisible($transportMock, $payments, 1));
+	}
+
+	public function testIsVisibleWithPaymentsAndWithDomain() {
+		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
+		$transportMock->expects($this->once())->method('isHidden')->willReturn(false);
+
+		$wrongTransportDomain = new TransportDomain($transportMock, 2);
+		$transportDomain = new TransportDomain($transportMock, 1);
+
+		$transportRepositoryMock = $this->getMock(TransportRepository::class, ['getTransportDomainsByTransport'], [], '', false);
+		$transportRepositoryMock
+			->expects($this->once())
+			->method('getTransportDomainsByTransport')
+			->with($this->equalTo($transportMock))
+			->willReturn([$wrongTransportDomain, $transportDomain]);
+
+		$paymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
+		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+
+		$transportsPaymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$transportsPaymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
+		$transportsPaymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+
+		$payments = [$paymentMock, $transportsPaymentMock];
+
+		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+
+		$this->assertTrue($visibilityCalculation->isVisible($transportMock, $payments, 1));
 	}
 }

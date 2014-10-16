@@ -252,22 +252,5 @@ class Payment implements EntityFileUploadInterface {
 		$this->deleted = true;
 		$this->transports->clear();
 	}
-	
-	/**
-	 * @param boolean $withoutRelations
-	 * @return boolean
-	 */
-	public function isVisible() {
-		if ($this->isHidden() || $this->getTransports()->isEmpty()) {
-			return false;
-		}
-		
-		foreach ($this->getTransports() as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-			if (!$transport->isHidden()) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 }

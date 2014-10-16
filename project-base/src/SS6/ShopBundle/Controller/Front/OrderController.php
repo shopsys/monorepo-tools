@@ -45,8 +45,8 @@ class OrderController extends Controller {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
 
-		$payments = $paymentEditFacade->getVisible();
-		$transports = $transportEditFacade->getVisible($payments);
+		$payments = $paymentEditFacade->getVisibleOnCurrentDomain();
+		$transports = $transportEditFacade->getVisibleOnCurrentDomain($payments);
 		$user = $this->getUser();
 
 		$orderData = new OrderData();
@@ -126,8 +126,8 @@ class OrderController extends Controller {
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
-		$payments = $paymentEditFacade->getVisible();
-		$transports = $transportEditFacade->getVisible($payments);
+		$payments = $paymentEditFacade->getVisibleOnCurrentDomain();
+		$transports = $transportEditFacade->getVisibleOnCurrentDomain($payments);
 
 		$flow->setFormTypesData($transports, $payments);
 		$flow->bind(new OrderData());

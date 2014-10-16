@@ -7,7 +7,6 @@
 		<thead>
 			<tr>
 				<th>Název</th>
-				<th class="table-col table-col-10 text-center">Viditelné</th>
 				<th class="table-col table-col-15 text-right">Cena</th>
 				<th class="table-col table-col-20 text-right">Akce</th>
 			</tr>
@@ -16,13 +15,6 @@
 			{% for transportDetail in transportDetails %}
 				<tr>
 					<td><a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}">{{ transportDetail.transport.name }}</a></td>
-					<td class="text-center">
-						{% if transportDetail.visible %}
-							<span class="in-semaphore in-semaphore--true"></span>
-						{% else %}
-							<span class="in-semaphore in-semaphore--false"></span>
-						{% endif %}
-					</td>
 					<td class="text-right">{{ transportDetail.price.priceWithVat|price }}</td>
 					<td class="text-right">
 						<a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>

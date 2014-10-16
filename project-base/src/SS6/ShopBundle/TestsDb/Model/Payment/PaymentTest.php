@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentTest extends DatabaseTestCase {
 	
-	public function testIsVisibleAfterDeleteTransport() {
+	public function testRemoveTransportFromPaymentAfterDelete() {
 		$em = $this->getEntityManager();
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -24,12 +24,11 @@ class PaymentTest extends DatabaseTestCase {
 		$em->persist($transport);
 		$em->persist($payment);
 		$em->flush();
-		$this->assertTrue($payment->isVisible());
 
 		$transportEditFacade = $this->getContainer()->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$transportEditFacade->deleteById($transport->getId());
 
-		$this->assertFalse($payment->isVisible());
+		$this->assertFalse($payment->getTransports()->contains($transport));
 	}
 }

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -33,20 +34,22 @@ class TransportEditFacade {
 	private $visibilityCalculation;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
+	private $domain;
+
 	public function __construct(
 		EntityManager $em,
 		TransportRepository $transportRepository,
 		PaymentRepository $paymentRepository,
-		VisibilityCalculation $visibilityCalculation
+		VisibilityCalculation $visibilityCalculation,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
 		$this->paymentRepository = $paymentRepository;
 		$this->visibilityCalculation = $visibilityCalculation;
+		$this->domain = $domain;
 	}
 	
 	/**
@@ -139,10 +142,10 @@ class TransportEditFacade {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePayments
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
-	public function getVisible(array $visiblePayments) {
-		$transports = $this->transportRepository->findAll();
+	public function getVisibleOnCurrentDomain(array $visiblePayments) {
+		$transports = $this->transportRepository->getAllByDomainId($this->domain->getId());
 
-		return $this->visibilityCalculation->findAllVisible($transports, $visiblePayments);
+		return $this->visibilityCalculation->filterVisible($transports, $visiblePayments, $this->domain->getId());
 	}
 
 	/**
@@ -162,6 +165,6 @@ class TransportEditFacade {
 	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
 	 */
 	public function getTransportDomainsByTransport(Transport $transport) {
-		return $this->transportRepository->getTransportDomainByTransport($transport);
+		return $this->transportRepository->getTransportDomainsByTransport($transport);
 	}
 }
