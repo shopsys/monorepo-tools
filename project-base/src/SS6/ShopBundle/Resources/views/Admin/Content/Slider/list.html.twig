@@ -1,8 +1,15 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Slider na titulce{% endblock %}
-{% block h1 %}Slider na titulce{% endblock %}
+{% block title %}- Stránky slideru{% endblock %}
+{% block h1 %}Stránky slideru{% endblock %}
 
 {% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
 
+			<a href="{{ url('admin_slider_new') }}" class="btn btn-primary mb-1">Vytvořit novou stránku</a>
+
+			{{ gridView.render('@SS6Shop/Admin/Content/Slider/listGrid.html.twig') }}
+		</div>
+	</div>
 {% endblock %}

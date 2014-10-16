@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Slider\SliderItem;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,7 +17,25 @@ class SliderController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
-		return $this->render('@SS6Shop/Admin/Content/Slider/list.html.twig');
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+
+		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		$queryBuilder
+			->select('s')
+			->from(SliderItem::class, 's');
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
+
+		$grid = $gridFactory->create('sliderItemList', $dataSource);
+		$grid->addColumn('name', 's.name', 'Název');
+		$grid->addColumn('link', 's.link', 'Odkaz');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_slider_edit', array('id' => 's.id'));
+//		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', array('id' => 's.id'))
+//			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
+
+		return $this->render('@SS6Shop/Admin/Content/Slider/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
 	}
 
 	/**

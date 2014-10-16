@@ -1,0 +1,9 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+	Nebyla nalezena žádná stránka.
+{% endblock %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_slider_edit', { id: row.s.id }) }}">{{ value }}</a>
+{% endblock %}
