@@ -53,7 +53,8 @@ class ProductRepository {
 			->from(Product::class, 'p')
 			->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id')
 			->where('pd.domainId = :domainId')
-				->andWhere('pd.visible = TRUE');
+				->andWhere('pd.visible = TRUE')
+			->orderBy('p.id');
 
 		$qb->setParameter('domainId', $domainId);
 
