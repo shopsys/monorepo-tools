@@ -125,11 +125,6 @@ class Grid {
 	private $inlineEditService;
 
 	/**
-	 * @var string|null
-	 */
-	private $dragAndDropOrderQueryId;
-
-	/**
 	 * @var GridOrderingInterface|null
 	 */
 	private $dragAndDropOrderingService;
@@ -483,8 +478,10 @@ class Grid {
 		$orderDirection = $this->orderDirection;
 
 		if ($this->isDragAndDrop()) {
-			$orderQueryId = $this->dragAndDropOrderQueryId;
-			$orderDirection = DataSourceInterface::ORDER_ASC;
+			$orderQueryId = null;
+			$orderDirection = null;
+		} else {
+
 		}
 
 		$this->rows = $this->dataSource->getRows(
@@ -533,17 +530,17 @@ class Grid {
 	}
 
 	/**
-	 * @param string $orderQueryId
+	 * @param \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface $dragAndDropOrderingService
 	 */
-	public function enableDragAndDrop($orderQueryId) {
-		$this->dragAndDropOrderQueryId = $orderQueryId;
+	public function enableDragAndDrop(GridOrderingInterface $dragAndDropOrderingService) {
+		$this->dragAndDropOrderingService = $dragAndDropOrderingService;
 	}
 
 	/**
 	 * @return boolean
 	 */
 	public function isDragAndDrop() {
-		return $this->dragAndDropOrderQueryId !== null;
+		return $this->dragAndDropOrderingService !== null;
 	}
 
 	/**
@@ -551,13 +548,6 @@ class Grid {
 	 */
 	public function getDragAndDropOrderingService() {
 		return $this->dragAndDropOrderingService;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface $dragAndDropOrderingService
-	 */
-	public function setDragAndDropOrderingService(GridOrderingInterface $dragAndDropOrderingService) {
-		$this->dragAndDropOrderingService = $dragAndDropOrderingService;
 	}
 
 }

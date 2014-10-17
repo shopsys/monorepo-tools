@@ -142,8 +142,7 @@ class TransportController extends Controller {
 		);
 
 		$grid = $gridFactory->create('transportList', $dataSource);
-		$grid->enableDragAndDrop('t.position');
-		$grid->setDragAndDropOrderingService($transportOrderingService);
+		$grid->enableDragAndDrop($transportOrderingService);
 
 		$grid->addColumn('name', 't.name', 'Název');
 		$grid->addColumn('price', 'transportDetail', 'Cena');
