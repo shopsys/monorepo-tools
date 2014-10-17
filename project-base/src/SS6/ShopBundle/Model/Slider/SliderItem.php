@@ -17,8 +17,7 @@ use SS6\ShopBundle\Model\Slider\SliderItemData;
 class SliderItem implements EntityFileUploadInterface {
 
 	/**
-	 * @var integer
-	 *
+	 * @var int
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -47,6 +46,13 @@ class SliderItem implements EntityFileUploadInterface {
 	private $image;
 
 	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $domainId;
+
+	/**
 	 * @var string
 	 */
 	private $imageForUpload;
@@ -54,7 +60,8 @@ class SliderItem implements EntityFileUploadInterface {
 	/**
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
 	 */
-	public function __construct(SliderItemData $sliderItemData) {
+	public function __construct(SliderItemData $sliderItemData, $domainId) {
+		$this->domainId = $domainId;
 		$this->name = $sliderItemData->getName();
 		$this->link = $sliderItemData->getLink();
 		$this->setImageForUpload($sliderItemData->getImage());
@@ -69,42 +76,58 @@ class SliderItem implements EntityFileUploadInterface {
 		$this->setImageForUpload($sliderItemData->getImage());
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getId() {
 		return $this->id;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getName() {
 		return $this->name;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getLink() {
 		return $this->link;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getImage() {
 		return $this->image;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getImageForUpload() {
 		return $this->imageForUpload;
 	}
 
-	public function setId($id) {
-		$this->id = $id;
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
 	}
 
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	public function setLink($link) {
-		$this->link = $link;
-	}
-
+	/**
+	 * @param string $image
+	 */
 	public function setImage($image) {
 		$this->image = $image;
 	}
 
+	/**
+	 * @param string $imageForUpload
+	 */
 	public function setImageForUpload($imageForUpload) {
 		$this->imageForUpload = $imageForUpload;
 	}

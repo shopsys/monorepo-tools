@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
 class SliderItemFacade {
@@ -13,20 +15,29 @@ class SliderItemFacade {
 	private $em;
 
 	/**
-	 * @var type
+	 * @var \SS6\ShopBundle\Model\Slider\SliderItemRepository
 	 */
 	private $sliderItemRepository;
 
 	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemRepository $sliderItemRepository
+	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
 	 */
 	public function __construct(
 		EntityManager $em,
-		SliderItemRepository $sliderItemRepository
+		SliderItemRepository $sliderItemRepository,
+		SelectedDomain $selectedDomain
 	) {
 		$this->em = $em;
 		$this->sliderItemRepository = $sliderItemRepository;
+		$this->selectedDomain = $selectedDomain;
 	}
 
 	/**
@@ -34,7 +45,7 @@ class SliderItemFacade {
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
 	 */
 	public function create(SliderItemData $sliderItemData) {
-		$sliderItem = new SliderItem($sliderItemData);
+		$sliderItem = new SliderItem($sliderItemData, $this->selectedDomain->getId());
 
 		$this->em->persist($sliderItem);
 		$this->em->flush();
@@ -64,5 +75,13 @@ class SliderItemFacade {
 
 		$this->em->remove($sliderItem);
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
+	 */
+	public function findAllByDomain(Domain $domain) {
+		return $this->sliderItemRepository->findAllByDomain($domain);
 	}
 }

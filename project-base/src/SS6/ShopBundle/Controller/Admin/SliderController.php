@@ -16,14 +16,18 @@ class SliderController extends Controller {
 	 * @Route("/slider/list/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function listAction(Request $request) {
+	public function listAction() {
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
 			->select('s')
-			->from(SliderItem::class, 's');
+			->from(SliderItem::class, 's')
+			->where('s.domainId = :selectedDomainId')
+			->setParameter('selectedDomainId', $selectedDomain->getId());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
 
 		$grid = $gridFactory->create('sliderItemList', $dataSource);
@@ -47,6 +51,8 @@ class SliderController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$sliderItemFormTypeFactory = $this->get('ss6.shop.form.admin.slider.slider_item_form_type_factory');
 		/* @var $sliderItemFormTypeFactory SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$form = $this->createForm($sliderItemFormTypeFactory->create());
 		$sliderItemData = new SliderItemData();
@@ -73,6 +79,7 @@ class SliderController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', array(
 			'form' => $form->createView(),
+			'selectedDomainId' => $selectedDomain->getId(),
 		));
 
 	}
@@ -86,9 +93,9 @@ class SliderController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$sliderItemRepository = $this->get('ss6.shop.slider.slider_item_repository');
-		/* @var $sliderItemRepository SS6\ShopBundle\Model\Slider\SliderItemRepository */
+		/* @var $sliderItemRepository \SS6\ShopBundle\Model\Slider\SliderItemRepository */
 		$sliderItemFormTypeFactory = $this->get('ss6.shop.form.admin.slider.slider_item_form_type_factory');
-		/* @var $sliderItemFormTypeFactory SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
+		/* @var $sliderItemFormTypeFactory \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
 
 		$sliderItem = $sliderItemRepository->getById($id);
 		$form = $this->createForm($sliderItemFormTypeFactory->create());
