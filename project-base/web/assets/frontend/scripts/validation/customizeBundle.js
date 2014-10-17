@@ -11,15 +11,21 @@
 		if (itemIndex === undefined) {
 			throw Error('ItemIndex is undefined while remove item from collections');
 		}
-		$($(collectionSelector)).jsFormValidator('delPrototype', itemIndex);
-		SS6.validation.highlightSubmitButtons($(collectionSelector).closest('form'));
+		var $collection = $(collectionSelector);
+		$($collection).jsFormValidator('delPrototype', itemIndex);
+		SS6.validation.highlightSubmitButtons($collection.closest('form'));
+		$collection.jsFormValidator('validate');
+	};
+	
+	SS6.validation.isFormValid = function (form) {
+		return $(form).find('.js-validation-error:first, .js-validation-errors-list li[class]:first').size() === 0;
 	};
 
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
 	FpJsFormValidator.customizeMethods.submitForm = function (event) {
 		if (!$(this).hasClass('js-no-validate')) {
 			FpJsFormValidator.customizeMethods._submitForm.call(this);
-			if ($(this).find('.js-validation-error:first, js-validation-errors-list li[class]:first').size() > 0) {
+			if (!SS6.validation.isFormValid(this)) {
 				event.preventDefault();
 				SS6.window({
 					content: "Překontrolujte prosím zadané hodnoty."
