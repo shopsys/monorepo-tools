@@ -134,7 +134,7 @@ class SliderController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
-			/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
+		/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
 		$sliderItemRepository = $this->get('ss6.shop.slider.slider_item_repository');
 		/* @var $sliderItemRepository SS6\ShopBundle\Model\Slider\SliderItemRepository */
 

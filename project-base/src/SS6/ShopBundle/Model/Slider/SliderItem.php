@@ -17,7 +17,6 @@ use SS6\ShopBundle\Model\Slider\SliderItemData;
 class SliderItem implements EntityFileUploadInterface {
 
 	/**
-	 *
 	 * @var integer
 	 *
 	 * @ORM\Column(name="id", type="integer")
@@ -27,22 +26,22 @@ class SliderItem implements EntityFileUploadInterface {
 	private $id;
 
 	/**
-	 *
 	 * @var string
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $name;
 
 	/**
-	 *
 	 * @var string
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $link;
 
 	/**
-	 *
 	 * @var string
+	 * 
 	 * @ORM\Column(type="text")
 	 */
 	private $image;
