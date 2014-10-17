@@ -12,7 +12,7 @@ services:
   ss6.shop.form.admin.transport.transport_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
     
-  ss.shop.form.domains:
+  ss6.shop.form.domains:
     class: SS6\ShopBundle\Form\DomainsType
     tags:
       - { name: form.type, alias: domains }

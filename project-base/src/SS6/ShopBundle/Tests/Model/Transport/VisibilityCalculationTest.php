@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
 
 class VisibilityCalculationTest {
 	
-	public function testIsVisibleHiddentTransport() {
+	public function testIsVisibleHiddenTransport() {
 		$transportRepositoryMock = $this->getMock(TransportRepository::class, [], [], '', false);
 		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
 		$transportMock->expects($this->once())->method('isHidden')->willReturn(true);
@@ -48,15 +48,15 @@ class VisibilityCalculationTest {
 			->with($this->equalTo($transportMock))
 			->willReturn([$transportDomain]);
 
-		$paymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
-		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+		$paymentMock1 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock1->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
+		$paymentMock1->expects($this->any())->method('isHidden')->willReturn(false);
 
-		$transportsPaymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$transportsPaymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
-		$transportsPaymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+		$paymentMock2 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock2->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
+		$paymentMock2->expects($this->any())->method('isHidden')->willReturn(false);
 
-		$payments = [$paymentMock, $transportsPaymentMock];
+		$payments = [$paymentMock1, $paymentMock2];
 
 		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
 
@@ -77,15 +77,15 @@ class VisibilityCalculationTest {
 			->with($this->equalTo($transportMock))
 			->willReturn([$wrongTransportDomain, $transportDomain]);
 
-		$paymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
-		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+		$paymentMock1 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock1->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
+		$paymentMock1->expects($this->any())->method('isHidden')->willReturn(false);
 
-		$transportsPaymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$transportsPaymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
-		$transportsPaymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+		$paymentMock2 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
+		$paymentMock2->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
+		$paymentMock2->expects($this->any())->method('isHidden')->willReturn(false);
 
-		$payments = [$paymentMock, $transportsPaymentMock];
+		$payments = [$paymentMock1, $paymentMock2];
 
 		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
 
