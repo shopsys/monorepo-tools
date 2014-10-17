@@ -18,17 +18,17 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 		$sliderItemData->setName('Shopsys');
 		$sliderItemData->setLink('http://www.shopsys.cz/');
 
-		$this->createSliderItem($manager, $sliderItemData);
+		$this->createSliderItem($manager, $sliderItemData, 1);
 
 		$sliderItemData->setName('Twitter');
 		$sliderItemData->setLink('https://twitter.com/netdevelo_cz');
 
-		$this->createSliderItem($manager, $sliderItemData);
+		$this->createSliderItem($manager, $sliderItemData, 1);
 
 		$sliderItemData->setName('Pojďte s námi růst');
 		$sliderItemData->setLink('http://www.pojdtesnamirust.cz/');
 
-		$this->createSliderItem($manager, $sliderItemData);
+		$this->createSliderItem($manager, $sliderItemData, 1);
 
 		$manager->flush();
 	}
@@ -36,12 +36,14 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
+	 * @param int $domainId
 	 */
 	private function createSliderItem(
 		ObjectManager $manager,
-		SliderItemData $sliderItemData
+		SliderItemData $sliderItemData,
+		$domainId
 	) {
-		$sliderItem = new SliderItem($sliderItemData);
+		$sliderItem = new SliderItem($sliderItemData, $domainId);
 		$sliderItem->setImage('jpg');
 		$manager->persist($sliderItem);
 	}
