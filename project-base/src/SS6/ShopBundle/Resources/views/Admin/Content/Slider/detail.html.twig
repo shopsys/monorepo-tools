@@ -18,6 +18,7 @@
 
 				<div class="wrap-group">
 					{{ form_id(sliderItem|default(null)) }}
+					{% block domain %}{% endblock %}
 					{{ form_row(form.name, { label: 'Název', icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
 					{{ form_row(form.link, { label: 'Odkaz'}) }}
 				</div>

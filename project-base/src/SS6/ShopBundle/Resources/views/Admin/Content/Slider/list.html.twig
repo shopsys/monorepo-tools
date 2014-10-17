@@ -7,6 +7,8 @@
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
 
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
 			<a href="{{ url('admin_slider_new') }}" class="btn btn-primary mb-1">Vytvořit novou stránku</a>
 
 			{{ gridView.render('@SS6Shop/Admin/Content/Slider/listGrid.html.twig') }}
