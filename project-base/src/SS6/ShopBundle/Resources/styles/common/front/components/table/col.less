@@ -1,7 +1,7 @@
 /*
 Table columns
 ==============
-Table column sizes in percentage
+Table column sizes in percentage, or PX
 
 	<table class="table table-bordered">
 		<tr>
@@ -30,6 +30,13 @@ Table column sizes in percentage
 		<tr>
 			<td class="table-col-20">20 perc.</td>
 			<td class="table-col-80">80 perc.</td>
+		</tr>
+	</table>
+
+	<table class="table table-bordered">
+		<tr>
+			<td class="table-col-40px">40px</td>
+			<td>Calculated</td>
 		</tr>
 	</table>
 
@@ -77,5 +84,9 @@ Table column sizes in percentage
 }
 .table-col-80 {
 	width: 80%;
+	.box-sizing('border-box');
+}
+.table-col-40px {
+	width: 40px;
 	.box-sizing('border-box');
 }
