@@ -1,32 +1,5 @@
 <h2>Dopravy</h2>
 
-{% if transportDetails|length %}
+<a href="{{ url('admin_transport_new') }}" class="btn btn-primary mb-1">Vytvořit dopravu</a>
 
-	<a href="{{ url('admin_transport_new') }}" class="btn btn-primary mb-1">Vytvořit dopravu</a>
-	<table class="table table-striped table-responsive">
-		<thead>
-			<tr>
-				<th>Název</th>
-				<th class="table-col table-col-15 text-right">Cena</th>
-				<th class="table-col table-col-20 text-right">Akce</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for transportDetail in transportDetails %}
-				<tr>
-					<td><a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}">{{ transportDetail.transport.name }}</a></td>
-					<td class="text-right">{{ transportDetail.price.priceWithVat|price }}</td>
-					<td class="text-right">
-						<a href="{{ url('admin_transport_edit', {id: transportDetail.transport.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
-						<a href="{{ url('admin_transport_delete', {id: transportDetail.transport.id}) }}" onclick="return confirm('Opravdu chcete tuto dopravu smazat?')" class="table-action"><i class="fa fa-trash-o"></i></a>
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-	
-{% else %}
-	<p>
-		Doposud nebyly vytvořeny žádné dopravy. Nejdříve nějakou <a href="{{ url('admin_transport_new') }}">vytvořte</a>.
-	</p>
-{% endif %}
+{{ gridView.render('@SS6Shop/Admin/Content/Transport/listGrid.html.twig') }}

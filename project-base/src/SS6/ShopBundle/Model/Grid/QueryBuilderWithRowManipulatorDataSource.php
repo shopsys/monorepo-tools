@@ -47,12 +47,7 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 	public function getRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
 		$rows = parent::getRows($limit, $page, $orderQueryId, $orderDirection);
 
-		$manipulatedRows = array();
-		foreach ($rows as $index => $row) {
-			$manipulatedRows[$index] = call_user_func($this->manipulateRowCallback, $row);
-		}
-
-		return $manipulatedRows;
+		return array_map($this->manipulateRowCallback, $rows);
 	}
 
 }

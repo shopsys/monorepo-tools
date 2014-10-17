@@ -39,7 +39,7 @@ class TransportRepository {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function findAll() {
-		return $this->findAllQueryBuilder()->getQuery()->getResult();
+		return $this->getQueryBuilderForAll()->getQuery()->getResult();
 	}
 
 	/**
@@ -59,7 +59,7 @@ class TransportRepository {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAllByDomainId($domainId) {
-		$qb = $this->findAllQueryBuilder()
+		$qb = $this->getQueryBuilderForAll()
 			->join(TransportDomain::class, 'td', Join::WITH, 't.id = td.transport AND td.domainId = :domainId')
 			->setParameter('domainId', $domainId);
 
@@ -69,9 +69,11 @@ class TransportRepository {
 	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function findAllQueryBuilder() {
+	public function getQueryBuilderForAll() {
 		$qb = $this->getTransportRepository()->createQueryBuilder('t')
-			->where('t.deleted = :deleted')->setParameter('deleted', false);
+			->where('t.deleted = :deleted')->setParameter('deleted', false)
+			->orderBy('t.position')
+			->addOrderBy('t.id');
 		return $qb;
 	}
 

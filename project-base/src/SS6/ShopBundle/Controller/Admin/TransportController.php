@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,12 +126,34 @@ class TransportController extends Controller {
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
 		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\Factory */
-		
-		$transports = $transportRepository->findAll();
-		$transportDetails = $transportDetailFactory->createDetailsForTransports($transports);
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$transportOrderingService = $this->get('ss6.shop.transport.grid.drag_and_drop_ordering_service');
+		/* @var $transportOrderingService \SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService */
+
+		$queryBuilder = $transportRepository->getQueryBuilderForAll();
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
+			$queryBuilder, 't.id',
+			function ($row) use ($transportRepository, $transportDetailFactory) {
+				$transport = $transportRepository->findById($row['t']['id']);
+				$row['transportDetail'] = $transportDetailFactory->createDetailForTransport($transport);
+				return $row;
+			}
+		);
+
+		$grid = $gridFactory->create('transportList', $dataSource);
+		$grid->enableDragAndDrop($transportOrderingService);
+
+		$grid->addColumn('name', 't.name', 'Název');
+		$grid->addColumn('price', 'transportDetail', 'Cena');
+
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_transport_edit', array('id' => 't.id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_transport_delete', array('id' => 't.id'))
+			->setConfirmMessage('Opravdu chcete odstranit tuto dopravu?');
 		
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
-			'transportDetails' => $transportDetails,
+			'gridView' => $grid->createView(),
 		));
 	}
 

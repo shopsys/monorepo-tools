@@ -79,6 +79,13 @@ class Transport implements EntityFileUploadInterface {
 	private $imageForUpload;
 
 	/**
+	 * @var int|null
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $position;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	public function __construct(TransportData $transportData) {
@@ -212,4 +219,19 @@ class Transport implements EntityFileUploadInterface {
 	public function markAsDeleted() {
 		$this->deleted = true;
 	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getPosition() {
+		return $this->position;
+	}
+
+	/**
+	 * @param int $position
+	 */
+	public function setPosition($position) {
+		$this->position = $position;
+	}
+
 }
