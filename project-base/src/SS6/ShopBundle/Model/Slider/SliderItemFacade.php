@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
@@ -74,5 +75,13 @@ class SliderItemFacade {
 
 		$this->em->remove($sliderItem);
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
+	 */
+	public function findAllByDomain(Domain $domain) {
+		return $this->sliderItemRepository->findAllByDomain($domain);
 	}
 }

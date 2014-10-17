@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Slider\SliderItem;
 
 class SliderItemRepository {
@@ -45,5 +46,14 @@ class SliderItemRepository {
 	 */
 	public function findAll() {
 		return $this->getSliderItemRepository()->findAll();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
+	 */
+	public function findAllByDomain(Domain $domain) {
+		$domainId = $domain->getId();
+		return $this->getSliderItemRepository()->findBy(array('domainId' => $domainId));
 	}
 }
