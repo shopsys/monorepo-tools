@@ -480,8 +480,6 @@ class Grid {
 		if ($this->isDragAndDrop()) {
 			$orderQueryId = null;
 			$orderDirection = null;
-		} else {
-
 		}
 
 		$this->rows = $this->dataSource->getRows(
