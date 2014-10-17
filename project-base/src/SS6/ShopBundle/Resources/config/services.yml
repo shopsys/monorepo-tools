@@ -421,6 +421,9 @@ services:
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
 
+  ss6.shop.slider.grid.drag_and_drop_ordering_service:
+    class: SS6\ShopBundle\Model\Slider\Grid\DragAndDropOrderingService
+
   ss6.shop.slider.slider_item_facade:
     class: SS6\ShopBundle\Model\Slider\SliderItemFacade
 

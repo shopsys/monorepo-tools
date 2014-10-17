@@ -21,6 +21,8 @@ class SliderController extends Controller {
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
+		$sliderItemOrderingService = $this->get('ss6.shop.slider.grid.drag_and_drop_ordering_service');
+		/* @var $sliderItemOrderingService \SS6\ShopBundle\Model\Slider\Grid\DragAndDropOrderingService */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
@@ -31,6 +33,8 @@ class SliderController extends Controller {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 's.id');
 
 		$grid = $gridFactory->create('sliderItemList', $dataSource);
+		$grid->enableDragAndDrop($sliderItemOrderingService);
+
 		$grid->addColumn('name', 's.name', 'Název');
 		$grid->addColumn('link', 's.link', 'Odkaz');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_slider_edit', array('id' => 's.id'));

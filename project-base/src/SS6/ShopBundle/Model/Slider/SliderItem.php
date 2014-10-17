@@ -53,6 +53,13 @@ class SliderItem implements EntityFileUploadInterface {
 	private $domainId;
 
 	/**
+	 * @var int|null
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $position;
+
+	/**
 	 * @var string
 	 */
 	private $imageForUpload;
@@ -165,5 +172,21 @@ class SliderItem implements EntityFileUploadInterface {
 
 		return null;
 	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getPosition() {
+		return $this->position;
+	}
+
+	/**
+	 * @param int $position
+	 */
+	public function setPosition($position) {
+		$this->position = $position;
+	}
+
+
 
 }

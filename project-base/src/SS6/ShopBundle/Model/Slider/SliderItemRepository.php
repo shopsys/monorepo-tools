@@ -42,6 +42,14 @@ class SliderItemRepository {
 	}
 
 	/**
+	 * @param int $id
+	 * @return \SS6\ShopBundle\Model\Slider\SliderItem|null
+	 */
+	public function findById($id) {
+		return $this->getSliderItemRepository()->find($id);
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
 	 */
 	public function findAll() {
