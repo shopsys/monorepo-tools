@@ -8,7 +8,6 @@
 		<thead>
 			<tr>
 				<th>Název</th>
-				<th class="table-col table-col-10 text-center">Viditelné</th>
 				<th class="table-col table-col-15 text-right">Cena</th>
 				<th class="table-col table-col-20 text-right">Akce</th>
 			</tr>
@@ -17,13 +16,6 @@
 			{% for paymentDetail in paymentDetails %}
 				<tr>
 					<td><a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}">{{ paymentDetail.payment.name }}</a></td>
-					<td class="text-center">
-						{% if paymentDetail.payment.visible %}
-							<span class="in-semaphore in-semaphore--true"></span>
-						{% else %}
-							<span class="in-semaphore in-semaphore--false"></span>
-						{% endif %}
-					</td>
 					<td class="text-right">{{ paymentDetail.price.priceWithVat|price }}</td>
 					<td class="text-right">
 						<a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>

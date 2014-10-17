@@ -2,9 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Payment;
 
-use Doctrine\Common\Collections\Collection;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentData {
 
@@ -39,7 +37,7 @@ class PaymentData {
 	private $image;
 	
 	/**
-	 * @var \Doctrine\Common\Collections\Collection 
+	 * @var array
 	 */
 	private $transports;
 
@@ -94,7 +92,7 @@ class PaymentData {
 	}
 	
 	/**
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return array
 	 */
 	public function getTransports() {
 		return $this->transports;
@@ -143,7 +141,7 @@ class PaymentData {
 	}
 	
 	/**
-	 * @param Collection $transports
+	 * @param array $transports
 	 */
 	public function setTransports($transports) {
 		$this->transports = $transports;
@@ -172,13 +170,6 @@ class PaymentData {
 		$this->setVat($payment->getVat());
 		$this->setDescription($payment->getDescription());
 		$this->setHidden($payment->isHidden());
-
-		$transportsData = array();
-		foreach ($payment->getTransports() as $transport) {
-			$transportData = new TransportData();
-			$transportData->setFromEntity($transport);
-			$transportsData[] = $transport->getId();
-		}
-		$this->setTransports($transportsData);
+		$this->setTransports($payment->getTransports()->toArray());
 	}
 }

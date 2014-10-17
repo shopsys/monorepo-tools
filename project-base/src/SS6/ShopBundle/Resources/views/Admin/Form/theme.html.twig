@@ -36,9 +36,9 @@
 
 {% block form_row %}
 	<div class="form-line {{ attr.class|default('') }}">
+		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
-		{{ form_errors(form) }}
 	</div>
 {% endblock form_row %}
 
@@ -90,7 +90,7 @@
 
 {% block form_errors %}
 	{% spaceless %}
-		<div class="in-message in-message--danger js-validation-errors-list{{ form.children ? '' : ' in-message-floating' }}{{ errors|length > 0 ? '' : ' js-hidden' }}">
+		<div class="in-message in-message--danger js-validation-errors-list{{ form.children and form.vars.name != 'domains' ? '' : ' in-message-floating' }}{{ errors|length > 0 ? '' : ' js-hidden' }}">
 			<ul class="in-message__list">
 				{% if errors|length > 0 %}
 					{% for error in errors %}

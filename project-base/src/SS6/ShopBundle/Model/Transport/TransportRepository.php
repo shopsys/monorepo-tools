@@ -3,40 +3,48 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class TransportRepository {
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
 	}
-	
+
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
 	private function getTransportRepository() {
 		return $this->em->getRepository(Transport::class);
 	}
-	
+
 	/**
-	 * @return array
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getTransportDomainRepository() {
+		return $this->em->getRepository(TransportDomain::class);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function findAll() {
 		return $this->findAllQueryBuilder()->getQuery()->getResult();
 	}
-	
+
 	/**
 	 * @param array $transportIds
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function findAllByIds(array $transportIds) {
 		$dql = sprintf('SELECT t FROM %s t WHERE t.deleted = :deleted AND t.id IN (:trasportIds)', Transport::class);
@@ -45,7 +53,19 @@ class TransportRepository {
 			->setParameter('trasportIds', $transportIds)
 			->getResult();
 	}
-	
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
+	public function getAllByDomainId($domainId) {
+		$qb = $this->findAllQueryBuilder()
+			->join(TransportDomain::class, 'td', Join::WITH, 't.id = td.transport AND td.domainId = :domainId')
+			->setParameter('domainId', $domainId);
+
+		return $qb->getQuery()->getResult();
+	}
+
 	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
@@ -54,9 +74,9 @@ class TransportRepository {
 			->where('t.deleted = :deleted')->setParameter('deleted', false);
 		return $qb;
 	}
-	
+
 	/**
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function findAllIncludingDeleted() {
 		return $this->getTransportRepository()->findAll();
@@ -69,7 +89,7 @@ class TransportRepository {
 	public function findById($id) {
 		return $this->getTransportRepository()->find($id);
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
@@ -89,5 +109,13 @@ class TransportRepository {
 	 */
 	public function getAllIncludingDeletedByVat(Vat $vat) {
 		return $this->getTransportRepository()->findBy(array('vat' => $vat));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
+	 */
+	public function getTransportDomainsByTransport(Transport $transport) {
+		return $this->getTransportDomainRepository()->findBy(array('transport' => $transport));
 	}
 }

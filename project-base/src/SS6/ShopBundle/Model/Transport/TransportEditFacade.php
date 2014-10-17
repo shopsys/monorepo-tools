@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -33,20 +34,22 @@ class TransportEditFacade {
 	private $visibilityCalculation;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
+	private $domain;
+
 	public function __construct(
 		EntityManager $em,
 		TransportRepository $transportRepository,
 		PaymentRepository $paymentRepository,
-		VisibilityCalculation $visibilityCalculation
+		VisibilityCalculation $visibilityCalculation,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
 		$this->paymentRepository = $paymentRepository;
 		$this->visibilityCalculation = $visibilityCalculation;
+		$this->domain = $domain;
 	}
 	
 	/**
@@ -56,8 +59,11 @@ class TransportEditFacade {
 	public function create(TransportData $transportData) {
 		$transport = new Transport($transportData);
 		$this->em->persist($transport);
+		$this->em->beginTransaction();
 		$this->setAdditionalDataAndFlush($transport, $transportData);
-		
+		$this->createTransportDomains($transport, $transportData->getDomains());
+		$this->em->commit();
+
 		return $transport;
 	}
 	
@@ -67,7 +73,12 @@ class TransportEditFacade {
 	 */
 	public function edit(Transport $transport, TransportData $transportData) {
 		$transport->edit($transportData);
+
+		$this->em->beginTransaction();
 		$this->setAdditionalDataAndFlush($transport, $transportData);
+		$this->deleteTransportDomainsByTransport($transport);
+		$this->createTransportDomains($transport, $transportData->getDomains());
+		$this->em->commit();
 	}
 	
 	/**
@@ -89,6 +100,32 @@ class TransportEditFacade {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment->getTransports()->removeElement($transport);
 		}
+		$this->em->beginTransaction();
+		$this->deleteTransportDomainsByTransport($transport);
+		$this->em->flush();
+		$this->em->commit();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param array $domainIds
+	 */
+	private function createTransportDomains(Transport $transport, array $domainIds) {
+		foreach ($domainIds as $domainId) {
+			$transportDomain = new TransportDomain($transport, $domainId);
+			$this->em->persist($transportDomain);
+		}
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 */
+	private function deleteTransportDomainsByTransport(Transport $transport) {
+		$transportDomains = $this->getTransportDomainsByTransport($transport);
+		foreach ($transportDomains as $transportDomain) {
+			$this->em->remove($transportDomain);
+		}
 		$this->em->flush();
 	}
 
@@ -105,10 +142,10 @@ class TransportEditFacade {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePayments
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
-	public function getVisible(array $visiblePayments) {
-		$transports = $this->transportRepository->findAll();
+	public function getVisibleOnCurrentDomain(array $visiblePayments) {
+		$transports = $this->transportRepository->getAllByDomainId($this->domain->getId());
 
-		return $this->visibilityCalculation->findAllVisible($transports, $visiblePayments);
+		return $this->visibilityCalculation->filterVisible($transports, $visiblePayments, $this->domain->getId());
 	}
 
 	/**
@@ -121,5 +158,13 @@ class TransportEditFacade {
 			$transport->changeVat($newVat);
 		}
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
+	 */
+	public function getTransportDomainsByTransport(Transport $transport) {
+		return $this->transportRepository->getTransportDomainsByTransport($transport);
 	}
 }

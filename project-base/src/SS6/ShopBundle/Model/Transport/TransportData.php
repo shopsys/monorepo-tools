@@ -37,24 +37,32 @@ class TransportData {
 	private $image;
 
 	/**
+	 * @var array
+	 */
+	private $domains;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string|null $description
 	 * @param boolean $hidden
+	 * @param array $domains
 	 */
 	public function __construct(
 		$name = null,
 		$price = null,
 		Vat $vat = null,
 		$description = null,
-		$hidden = false
+		$hidden = false,
+		$domains = array()
 	) {
 		$this->name = $name;
 		$this->price = $price;
 		$this->vat = $vat;
 		$this->description = $description;
 		$this->hidden = $hidden;
+		$this->domains = $domains;
 	}
 
 	/**
@@ -100,6 +108,13 @@ class TransportData {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getDomains() {
+		return $this->domains;
+	}
+
+	/**
 	 * @param string $name
 	 */
 	public function setName($name) {
@@ -141,14 +156,28 @@ class TransportData {
 		$this->image = $image;
 	}
 
+	/**	
+	 * @param array $domains
+	 */
+	public function setDomains($domains) {
+		$this->domains = $domains;
+	}
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Transport\TransportDomain[] $transportDomains
 	 */
-	public function setFromEntity(Transport $transport) {
+	public function setFromEntity(Transport $transport, array $transportDomains) {
 		$this->setDescription($transport->getDescription());
 		$this->setHidden($transport->isHidden());
 		$this->setName($transport->getName());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());
+		
+		$domains = array();
+		foreach ($transportDomains as $transportDomain) {
+			$domains[] = $transportDomain->getDomainId();
+		}
+		$this->setDomains($domains);
 	}
 }
