@@ -93,9 +93,9 @@ class SliderController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$sliderItemRepository = $this->get('ss6.shop.slider.slider_item_repository');
-		/* @var $sliderItemRepository SS6\ShopBundle\Model\Slider\SliderItemRepository */
+		/* @var $sliderItemRepository \SS6\ShopBundle\Model\Slider\SliderItemRepository */
 		$sliderItemFormTypeFactory = $this->get('ss6.shop.form.admin.slider.slider_item_form_type_factory');
-		/* @var $sliderItemFormTypeFactory SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
+		/* @var $sliderItemFormTypeFactory \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
 
 		$sliderItem = $sliderItemRepository->getById($id);
 		$form = $this->createForm($sliderItemFormTypeFactory->create());
