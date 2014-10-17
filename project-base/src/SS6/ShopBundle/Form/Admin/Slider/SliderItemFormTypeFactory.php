@@ -21,8 +21,9 @@ class SliderItemFormTypeFactory {
 
 	/**
 	 * @return \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormType
+	 * @param bool $scenarioCreate
 	 */
-	public function create() {
-		return new SliderItemFormType($this->fileUpload);
+	public function create($scenarioCreate = false) {
+		return new SliderItemFormType($this->fileUpload, $scenarioCreate);
 	}
 }

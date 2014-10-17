@@ -54,11 +54,11 @@ class SliderController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$sliderItemFormTypeFactory = $this->get('ss6.shop.form.admin.slider.slider_item_form_type_factory');
-		/* @var $sliderItemFormTypeFactory SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
+		/* @var $sliderItemFormTypeFactory \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
-		$form = $this->createForm($sliderItemFormTypeFactory->create());
+		$form = $this->createForm($sliderItemFormTypeFactory->create(true));
 		$sliderItemData = new SliderItemData();
 
 		$form->setData($sliderItemData);

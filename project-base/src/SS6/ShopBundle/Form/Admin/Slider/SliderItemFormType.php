@@ -16,12 +16,19 @@ class SliderItemFormType extends AbstractType {
 	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload 
 	 */
 	private $fileUpload;
+
+	/**
+	 * @var bool
+	 */
+	private $scenarioCreate;
 	
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @param bool $scenarioCreate
 	 */
-	public function __construct(FileUpload $fileUpload) {
+	public function __construct(FileUpload $fileUpload, $scenarioCreate = false) {
 		$this->fileUpload = $fileUpload;
+		$this->scenarioCreate = $scenarioCreate;
 	}
 
 	public function getName() {
@@ -41,7 +48,7 @@ class SliderItemFormType extends AbstractType {
 				)
 			))
 			->add('image', new FileUploadType($this->fileUpload), array(
-				'required' => true,
+				'required' => $this->scenarioCreate,
 				'file_constraints' => array(
 					new Constraints\Image(array(
 						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),
@@ -51,7 +58,7 @@ class SliderItemFormType extends AbstractType {
 					)),
 				),
 			))
-			->add('link', 'text', array(
+			->add('link', 'url', array(
 				'required' => true,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte odkaz')),
