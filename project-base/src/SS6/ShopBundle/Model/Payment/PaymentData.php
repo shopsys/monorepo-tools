@@ -170,11 +170,6 @@ class PaymentData {
 		$this->setVat($payment->getVat());
 		$this->setDescription($payment->getDescription());
 		$this->setHidden($payment->isHidden());
-
-		$transportsData = array();
-		foreach ($payment->getTransports() as $transport) {
-			$transportsData[] = $transport->getId();
-		}
-		$this->setTransports($transportsData);
+		$this->setTransports($payment->getTransports()->toArray());
 	}
 }
