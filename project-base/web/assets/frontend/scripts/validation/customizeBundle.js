@@ -1,12 +1,12 @@
 (function ($) {
-	
+
 	SS6 = window.SS6 || {};
 	SS6.validation = SS6.validation || {};
-	
+
 	SS6.validation.addNewItemToCollection = function (collectionSelector, itemIndex) {
 		$($(collectionSelector)).jsFormValidator('addPrototype', itemIndex);
 	};
-	
+
 	SS6.validation.removeItemFromCollection = function (collectionSelector, itemIndex) {
 		if (itemIndex === undefined) {
 			throw Error('ItemIndex is undefined while remove item from collections');
@@ -14,7 +14,7 @@
 		$($(collectionSelector)).jsFormValidator('delPrototype', itemIndex);
 		SS6.validation.highlightSubmitButtons($(collectionSelector).closest('form'));
 	};
-	
+
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
 	FpJsFormValidator.customizeMethods.submitForm = function (event) {
 		if (!$(this).hasClass('js-no-validate')) {
@@ -27,7 +27,7 @@
 			}
 		}
 	};
-	
+
 	// Bind custom events to each element with validator
 	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
 	FpJsFormValidator.attachElement = function (element) {
@@ -37,13 +37,13 @@
 		}
 		$(element.domNode).each(SS6.validation.inputBind);
 	};
-	
+
 	// stop error bubbling, because errors of some collections (eg. admin order items) bubble to main form and mark all inputs as invalid
 	FpJsFormValidator._getErrorPathElement = FpJsFormValidator.getErrorPathElement;
 	FpJsFormValidator.getErrorPathElement = function (element) {
 		return element;
 	};
-	
+
 	// some forms (eg. frontend order transport and payments) throws "Uncaught TypeError: Cannot read property 'domNode' of null"
 	// reported as https://github.com/formapro/JsFormValidatorBundle/issues/61
 	FpJsFormValidator._initModel = FpJsFormValidator.initModel;
@@ -63,20 +63,20 @@
 	};
 
 	var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
-	SymfonyComponentValidatorConstraintsUrl = function() {
-	    this.message = '';
+	SymfonyComponentValidatorConstraintsUrl = function () {
+		this.message = '';
 
-	    this.validate = function(value, element) {
-		var regexp = /(ftp|https?):\/\/(www\.)?[\w\-\.@:%_\+~#=]+\.\w{2,3}(\/\w+)*(\?.*)?/;
-		var errors = [];
-		var f = FpJsFormValidator;
+		this.validate = function (value, element) {
+			var regexp = /^(https?:\/\/|(?=.*\.))([0-9a-z\u00C0-\u02FF\u0370-\u1EFF](([-0-9a-z\u00C0-\u02FF\u0370-\u1EFF]{0,61}[0-9a-z\u00C0-\u02FF\u0370-\u1EFF])?\.)*[a-z\u00C0-\u02FF\u0370-\u1EFF][-0-9a-z\u00C0-\u02FF\u0370-\u1EFF]{0,17}[a-z\u00C0-\u02FF\u0370-\u1EFF]|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|\[[0-9a-f:]{3,39}\])(:\d{1,5})?(\/\S*)?$/i;
+			var errors = [];
+			var f = FpJsFormValidator;
 
-		if (!f.isValueEmty(value) && !regexp.test(value)) {
-		    errors.push(this.message.replace('{{ value }}', String('http://' + value)));
-		}
+			if (!f.isValueEmty(value) && !regexp.test(value)) {
+				errors.push(this.message.replace('{{ value }}', String('http://' + value)));
+			}
 
-		return errors;
-	    };
+			return errors;
+		};
 	};
-	
+
 })(jQuery);
