@@ -1,0 +1,42 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+	- Stránka slideru
+{% endblock %}
+
+{% block h1 %}
+	Stránka slideru
+{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="wrap-group">
+					{{ form_id(sliderItem|default(null)) }}
+					
+					{{ form_row(form.name, { label: 'Název'}) }}
+					<i class="fa fa-info cursor-help js-tooltip"
+					 data-toggle="tooltip" data-placement="right"
+					 title="Název slouží pouze pro interní použití v rámci administrace"
+					></i>
+					{{ form_row(form.link, { label: 'Odkaz'}) }}
+
+				</div>
+
+				<div class="wrap-group">
+					{% block image %}{% endblock %}
+					{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
+				</div>
+
+				{{ form_save(sliderItem|default(null), form) }}
+				<a href="{{ url('admin_slider_list') }}" class="btn btn-default">Zpět na přehled</a>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}

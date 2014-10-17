@@ -9,8 +9,8 @@ parameters:
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources/
   ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
   ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
-  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v2.zip
-  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesDql.v2.dql
+  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v3.zip
+  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesDql.v3.dql
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
@@ -420,6 +420,12 @@ services:
     
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+
+  ss6.shop.slider.slider_item_facade:
+    class: SS6\ShopBundle\Model\Slider\SliderItemFacade
+
+  ss6.shop.slider.slider_item_repository:
+    class: SS6\ShopBundle\Model\Slider\SliderItemRepository
 
   ss6.shop.sub_request.sub_request_listener:
     class: SS6\ShopBundle\Model\SubRequest\SubRequestListener
