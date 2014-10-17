@@ -18,14 +18,8 @@
 
 				<div class="wrap-group">
 					{{ form_id(sliderItem|default(null)) }}
-					
-					{{ form_row(form.name, { label: 'Název'}) }}
-					<i class="fa fa-info cursor-help js-tooltip"
-					 data-toggle="tooltip" data-placement="right"
-					 title="Název slouží pouze pro interní použití v rámci administrace"
-					></i>
+					{{ form_row(form.name, { label: 'Název', icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
 					{{ form_row(form.link, { label: 'Odkaz'}) }}
-
 				</div>
 
 				<div class="wrap-group">
