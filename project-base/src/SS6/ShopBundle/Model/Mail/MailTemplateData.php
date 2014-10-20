@@ -15,7 +15,7 @@ class MailTemplateData {
 	 * @var string|null
 	 */
 	private $subject;
-	
+
 	/**
 	 * @var string|null
 	 */
@@ -52,7 +52,7 @@ class MailTemplateData {
 	public function getBody() {
 		return $this->body;
 	}
-	
+
 	/**
 	 * @param string|null $name
 	 */
@@ -82,5 +82,5 @@ class MailTemplateData {
 		$this->subject = $mailTemplate->getSubject();
 		$this->body = $mailTemplate->getBody();
 	}
-	
+
 }

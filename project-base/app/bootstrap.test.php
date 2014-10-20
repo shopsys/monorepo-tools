@@ -8,4 +8,3 @@ use SS6\Environment;
 
 $bootstrap = new Bootstrap(false, Environment::ENVIRONMENT_TEST);
 $bootstrap->run();
- 

@@ -58,7 +58,7 @@ class JavascriptExtension extends Twig_Extension {
 	public function renderJavascripts($javascripts) {
 		$javascripts = Condition::mixedToArray($javascripts);
 		$this->javascriptLinks = [];
-		
+
 		foreach ($javascripts as $javascript) {
 			$this->process($javascript);
 		}
@@ -166,7 +166,7 @@ class JavascriptExtension extends Twig_Extension {
 		$this->javascriptLinks[] = $javascriptUrl;
 		return true;
 	}
-	
+
 	/**
 	 * @return string
 	 */

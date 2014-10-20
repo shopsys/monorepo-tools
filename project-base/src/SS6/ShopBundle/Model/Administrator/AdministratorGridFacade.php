@@ -37,5 +37,5 @@ class AdministratorGridFacade {
 		$this->em->persist($gridLimit);
 		$this->em->flush();
 	}
-	
+
 }

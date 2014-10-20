@@ -11,4 +11,3 @@ function SymfonyComponentFormExtensionCoreDataTransformerDateTimeToLocalizedStri
 		return value;
 	};
 }
-

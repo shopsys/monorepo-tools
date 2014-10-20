@@ -96,7 +96,7 @@ class OrderData {
 	 * @var boolean
 	 */
 	private $deliveryAddressFilled;
-	
+
 	/**
 	 * @var string
 	 */

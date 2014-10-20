@@ -26,7 +26,7 @@ class TransportController extends Controller {
 
 		$transportData = new TransportData();
 		$transportData->setVat($vatFacade->getDefaultVat());
-		
+
 		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
 		$form->handleRequest($request);
 
@@ -34,7 +34,7 @@ class TransportController extends Controller {
 			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 			$transport = $transportEditFacade->create($transportData);
-			
+
 			$flashMessageSender->addSuccessTwig('Byla vytvořena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $transport->getName(),
@@ -51,7 +51,7 @@ class TransportController extends Controller {
 			'form' => $form->createView(),
 		));
 	}
-	
+
 	/**
 	 * @Route("/transport/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -66,7 +66,7 @@ class TransportController extends Controller {
 		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
 		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
 		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\Factory */
-		
+
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 		$transportDomains = $transportEditFacade->getTransportDomainsByTransport($transport);
@@ -101,7 +101,7 @@ class TransportController extends Controller {
 			'transportDetail' => $transportDetailFactory->createDetailForTransport($transport),
 		));
 	}
-	
+
 	/**
 	 * @Route("/transport/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
@@ -151,7 +151,7 @@ class TransportController extends Controller {
 		$grid->addActionColumn('edit', 'Upravit', 'admin_transport_edit', array('id' => 't.id'));
 		$grid->addActionColumn('delete', 'Smazat', 'admin_transport_delete', array('id' => 't.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tuto dopravu?');
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));

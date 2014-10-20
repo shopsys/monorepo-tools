@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Form;
 class MultipleFormSetting {
 
 	const DEFAULT_MULTIPLE = false;
-	
+
 	/**
 	 * @var bool
 	 */

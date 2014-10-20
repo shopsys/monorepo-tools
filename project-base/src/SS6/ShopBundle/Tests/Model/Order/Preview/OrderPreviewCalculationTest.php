@@ -102,7 +102,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 			$cartItemMock
 		];
 		$cart = new Cart($cartItems);
-		
+
 		$orderPreview = $previewCalculation->calculatePreview($cart, null, null);
 
 		$this->assertEquals($cartItems, $orderPreview->getCartItems());

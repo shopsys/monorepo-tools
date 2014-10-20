@@ -1,16 +1,16 @@
 (function ($){
-	
+
 	SS6 = window.SS6 || {};
 	SS6.grid = SS6.grid || {};
 	SS6.grid.inlineEdit = SS6.grid.inlineEdit || {};
-	
+
 	SS6.grid.inlineEdit.init = function () {
 		$('.js-grid[data-inline-edit-service-name]').each(SS6.grid.inlineEdit.bind);
 	}
-	
+
 	SS6.grid.inlineEdit.bind = function () {
 		var $grid = $(this);
-		
+
 		$grid.on('click', '.js-inline-edit-edit', function() {
 			var $row = $(this).closest('.js-grid-row');
 			if (SS6.grid.inlineEdit.isRowEnabled($row)) {
@@ -19,13 +19,13 @@
 			}
 			return false;
 		});
-		
+
 		$grid.on('click', '.js-inline-edit-add', function() {
 			$grid.find('.js-inline-edit-no-data').remove();
 			$grid.find('.js-inline-edit-data-container').removeClass('hidden');
 			SS6.grid.inlineEdit.addNewRow($grid);
 		});
-		
+
 		$grid.on('click', '.js-inline-edit-cancel', function() {
 			var $formRow = $(this).closest('.js-grid-editing-row');
 			if (confirm('Opravdu chcete zahodit všechny změny?')) {
@@ -33,21 +33,21 @@
 			}
 			return false;
 		});
-		
+
 		$grid.on('click', '.js-inline-edit-save', function() {
 			SS6.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
 			return false;
 		});
-		
+
 		$grid.on('keyup', '.js-grid-editing-row input', function(event) {
 			if (event.keyCode == 13) { // enter
 				SS6.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
 			}
 			return false;
 		});
-		
+
 	}
-	
+
 	SS6.grid.inlineEdit.saveRow = function ($formRow, $grid) {
 		var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
 		var $saving = $formRow.find('.js-inline-edit-saving').show();
@@ -79,7 +79,7 @@
 			}
 		});
 	}
-	
+
 	SS6.grid.inlineEdit.startEditRow = function ($row, $grid) {
 		$.ajax({
 			url: $grid.data('inline-edit-url-get-form'),
@@ -97,7 +97,7 @@
 			}
 		});
 	}
-	
+
 	SS6.grid.inlineEdit.addNewRow = function ($grid) {
 		$.ajax({
 			url: $grid.data('inline-edit-url-get-form'),
@@ -113,7 +113,7 @@
 			}
 		});
 	}
-	
+
 	SS6.grid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
@@ -122,19 +122,19 @@
 		}
 		$formRow.remove();
 	}
-	
+
 	SS6.grid.inlineEdit.disableRow = function ($row) {
 		return $row.addClass('js-inactive');
 	}
-	
+
 	SS6.grid.inlineEdit.enableRow = function ($row) {
 		return $row.removeClass('js-inactive');
 	}
-	
+
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
 	}
-	
+
 	SS6.grid.inlineEdit.createFormRow = function ($grid, formData) {
 		var $formRow = $grid.find('.js-grid-empty-row').clone();
 		$formRow.removeClass('js-grid-empty-row hidden').addClass('js-grid-editing-row');
@@ -148,12 +148,12 @@
 				$(formHtml).prependTo($otherInputs);
 			}
 		});
-		
+
 		return $formRow;
 	}
-	
+
 	$(document).ready(function () {
 		SS6.grid.inlineEdit.init();
 	});
-	
+
 })(jQuery);

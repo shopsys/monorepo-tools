@@ -11,7 +11,7 @@ class PersistentReferenceService {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository
 	 */
@@ -39,7 +39,7 @@ class PersistentReferenceService {
 	public function getReference($name) {
 		$persistentReference = $this->persistentReferenceRepository->getByReferenceName($name);
 		$entity = $this->em->find($persistentReference->getEntityName(), $persistentReference->getEntityId());
-		
+
 		if ($entity === null) {
 			throw new \SS6\ShopBundle\Model\DataFixture\Exception\EntityNotFoundException($name);
 		}

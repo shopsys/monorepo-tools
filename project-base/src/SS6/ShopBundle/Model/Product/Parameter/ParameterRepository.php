@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Product\Product;
 
 class ParameterRepository {
 
-	/** 
+	/**
 	 * @var \Doctrine\ORM\EntityRepository
 	 */
 	private $em;
@@ -40,7 +40,7 @@ class ParameterRepository {
 	private function getProductParameterValueRepository() {
 		return $this->em->getRepository(ProductParameterValue::class);
 	}
-	
+
 	/**
 	 * @param int $parameterId
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter|null
@@ -48,7 +48,7 @@ class ParameterRepository {
 	public function findById($parameterId) {
 		return $this->getParameterRepository()->find($parameterId);
 	}
-	
+
 	/**
 	 * @param int $parameterId
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter

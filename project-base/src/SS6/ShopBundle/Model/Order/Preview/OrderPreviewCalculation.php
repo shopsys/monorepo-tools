@@ -56,7 +56,7 @@ class OrderPreviewCalculation {
 	) {
 		$cartItems = $cart->getItems();
 		$cartItemsPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
-		
+
 		if ($transport !== null) {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
 		} else {

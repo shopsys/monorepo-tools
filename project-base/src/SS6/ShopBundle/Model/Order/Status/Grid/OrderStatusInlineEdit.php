@@ -55,7 +55,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 	 */
 	protected function getFormDataObject($orderStatusId = null) {
 		$orderStatusData = new OrderStatusData();
-		
+
 		if ($orderStatusId !== null) {
 			$orderStatusId = (int)$orderStatusId;
 			$orderStatus = $this->orderStatusFacade->getById($orderStatusId);

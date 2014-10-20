@@ -6,8 +6,8 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 
 class MailTemplateRepository {
-	
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
@@ -25,14 +25,14 @@ class MailTemplateRepository {
 	private function getMailTemplateRepository() {
 		return $this->em->getRepository(MailTemplate::class);
 	}
-	
+
 	/**
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
 	 */
 	public function getAll() {
 		return $this->getMailTemplateRepository()->findAll();
 	}
-	
+
 	/**
 	 * @param string $templateName
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate|null
@@ -57,5 +57,5 @@ class MailTemplateRepository {
 
 		return $mailTemplate;
 	}
-	
+
 }

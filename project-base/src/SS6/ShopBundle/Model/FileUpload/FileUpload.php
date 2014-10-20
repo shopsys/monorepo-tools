@@ -124,7 +124,7 @@ class FileUpload {
 				DIRECTORY_SEPARATOR . $category .
 				($type !== null ? DIRECTORY_SEPARATOR . $type : '');
 		}
-		
+
 	}
 
 	/**
@@ -191,5 +191,5 @@ class FileUpload {
 			}
 		}
 	}
-	
+
 }

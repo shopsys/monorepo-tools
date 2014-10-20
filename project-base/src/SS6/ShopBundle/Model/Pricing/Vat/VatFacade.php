@@ -131,7 +131,7 @@ class VatFacade {
 			$this->trasnportEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
 			$this->productEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
 		}
-		
+
 		$this->em->remove($oldVat);
 		$this->em->flush();
 		$this->em->commit();

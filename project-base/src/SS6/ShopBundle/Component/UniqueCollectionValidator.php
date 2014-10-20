@@ -16,7 +16,7 @@ class UniqueCollectionValidator extends ConstraintValidator {
 		if (!$constraint instanceof UniqueCollection) {
 			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueCollection::class);
 		}
-		
+
 		if (!is_array($constraint->fields) || count($constraint->fields) === 0) {
 			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueCollection::class);
 		}

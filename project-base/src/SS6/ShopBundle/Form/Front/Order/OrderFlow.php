@@ -115,7 +115,7 @@ class OrderFlow extends FormFlow {
 			parent::bind($formData); // load changed step
 		}
 	}
-	
+
 	/**
 	 * @return StepInterface|null
 	 */

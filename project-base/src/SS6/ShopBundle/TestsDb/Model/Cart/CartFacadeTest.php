@@ -70,7 +70,7 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
-		
+
 		$productData = new ProductData();
 		$productData->setName('productName');
 		$productData->setVat($vat);
@@ -126,7 +126,7 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
-		
+
 		$productData = new ProductData();
 		$productData->setName('productName');
 		$productData->setVat($vat);
@@ -157,7 +157,7 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
-		
+
 		$productData = new ProductData();
 		$productData->setName('productName');
 		$productData->setVat($vat);
@@ -182,7 +182,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
-		
+
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
 		$this->assertEquals(1, $cart->getItemsCount());
@@ -190,5 +190,5 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItem = array_pop($cartItems);
 		$this->assertEquals($cartItem2->getId(), $cartItem->getId());
 	}
-	
+
 }

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints;
 class SliderItemFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload 
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
@@ -21,7 +21,7 @@ class SliderItemFormType extends AbstractType {
 	 * @var bool
 	 */
 	private $scenarioCreate;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param bool $scenarioCreate

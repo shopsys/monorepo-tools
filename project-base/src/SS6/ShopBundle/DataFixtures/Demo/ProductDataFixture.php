@@ -19,7 +19,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $loaderService ProductDataFixtureLoader */
 
 		$vats = array(
-			'high' => $this->getReference(VatDataFixture::VAT_HIGH), 
+			'high' => $this->getReference(VatDataFixture::VAT_HIGH),
 			'low' => $this->getReference(VatDataFixture::VAT_LOW),
 			'zero' => $this->getReference(VatDataFixture::VAT_ZERO)
 		);

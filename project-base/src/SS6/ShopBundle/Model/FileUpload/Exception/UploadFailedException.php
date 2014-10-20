@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\FileUpload\Exception;
 use Exception;
 
 class UploadFailedException extends Exception implements FileUploadException {
-	
+
 	/**
 	 * @param string $message
 	 * @param int $code

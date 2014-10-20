@@ -13,20 +13,20 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListenerTest extends PHPUnit_Framework_TestCase {
-	
+
 	public function testOnSecurityInteractiveLoginUnique() {
 		$emMock = $this->getMockBuilder(EntityManager::class)
 			->setMethods(array('__construct', 'persist', 'flush'))
 			->disableOriginalConstructor()
 			->getMock();
 		$emMock->expects($this->once())->method('flush');
-		
+
 		$userMock = $this->getMock(UniqueLoginInterface::class);
 		$userMock->expects($this->once())->method('setLoginToken');
-		
+
 		$tokenMock = $this->getMock(TokenInterface::class);
 		$tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
-		
+
 		$eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
 			->setMethods(array('__construct', 'getAuthenticationToken'))
 			->disableOriginalConstructor()
@@ -37,11 +37,11 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 			->setMethods(array('__construct'))
 			->disableOriginalConstructor()
 			->getMock();
-	
+
 		$loginListener = new LoginListener($emMock, $orderFlowFacadeMock);
 		$loginListener->onSecurityInteractiveLogin($eventMock);
 	}
-	
+
 	public function testOnSecurityInteractiveLoginTimelimit() {
 		$emMock = $this->getMockBuilder(EntityManager::class)
 			->setMethods(array('__construct', 'persist', 'flush'))

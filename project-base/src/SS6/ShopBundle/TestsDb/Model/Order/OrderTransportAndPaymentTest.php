@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportDomain;
 
 class OrderTransportAndPaymentTest extends DatabaseTestCase {
-	
+
 	public function testVisibilityOfTransportsAndPayments() {
 		$em = $this->getEntityManager();
 
@@ -47,7 +47,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		
+
 		$payments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$transports = $transportEditFacade->getVisibleOnCurrentDomain($payments);
 

@@ -143,5 +143,5 @@ abstract class OrderItem {
 		$this->vatPercent = $orderItemData->getVatPercent();
 		$this->quantity = $orderItemData->getQuantity();
 	}
-	
+
 }

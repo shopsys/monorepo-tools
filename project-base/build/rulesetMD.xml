@@ -5,7 +5,7 @@
 				 xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0	http://pmd.sf.net/ruleset_xml_schema.xsd"
 				 xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
 	<description>Shopsys 6 coding standards</description>
-	
+
 	<rule
 		name="CyclomaticComplexity"
 		message="The {0} {1}() has a Cyclomatic Complexity of {2}. The configured cyclomatic complexity threshold is {3}."
@@ -17,7 +17,7 @@
 			<property name="showMethodsComplexity" value="true"/>
 		</properties>
 	</rule>
-	
+
 	<rule name="ExcessiveMethodLength"
 				message="The {0} {1}() has {2} lines of code. Current threshold is set to {3}. Avoid really long methods."
 				class="PHP_PMD_Rule_Design_LongMethod">
@@ -37,7 +37,7 @@
 			<property name="ignore-whitespace" description="Count whitespace in reporting threshold" value="true"/>
 		</properties>
 	</rule>
-	
+
 	<rule name="ExcessivePublicCount"
 				message="The {0} {1} has {2} public methods and attributes. Consider to reduce the number of public items under {3}."
 				class="PHP_PMD_Rule_ExcessivePublicCount">
@@ -46,7 +46,7 @@
 			<property name="minimum" value="31"/>
 		</properties>
 	</rule>
-		
+
 	<rule name="CamelCaseClassName"
 					message = "The class {0} is not named in CamelCase."
 					class="PHP_PMD_Rule_Controversial_CamelCaseClassName">
@@ -76,7 +76,7 @@
 					class="PHP_PMD_Rule_Controversial_CamelCaseVariableName">
 		<priority>1</priority>
 	</rule>
-		
+
 	<rule name="ShortVariable"
 					message="Avoid variables with short names like {0}. Configured minimum length is {1}."
 					class="PHP_PMD_Rule_Naming_ShortVariable">
@@ -85,7 +85,7 @@
 			<property name="minimum" value="2"/>
 		</properties>
 	</rule>
-		
+
 	<rule name="ShortMethodName"
 					message="Avoid using short method names like {0}::{1}(). The configured minimum method name length is {2}."
 					class="PHP_PMD_Rule_Naming_ShortMethodName">

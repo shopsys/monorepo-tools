@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Order\Exception;
 use Exception;
 
 class OrderNumberSequenceNotFoundException extends Exception implements OrderException {
-	
+
 	/**
 	 * @param string $message
 	 * @param Exception $previous

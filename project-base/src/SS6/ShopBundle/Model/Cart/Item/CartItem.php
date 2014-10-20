@@ -35,10 +35,10 @@ class CartItem {
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true)
 	 */
 	private $user;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product
-	 * 
+	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
 	 */
@@ -57,7 +57,7 @@ class CartItem {
 	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $watchedPrice;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
@@ -94,7 +94,7 @@ class CartItem {
 	public function getId() {
 		return $this->id;
 	}
-	
+
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */

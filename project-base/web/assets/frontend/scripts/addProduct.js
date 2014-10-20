@@ -2,11 +2,11 @@
 
 	SS6 = window.SS6 || {};
 	SS6.addProduct = SS6.addProduct || {};
-	
+
 	SS6.addProduct.init = function (formElement) {
 		$('form.add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 	}
-	
+
 	SS6.addProduct.ajaxSubmit = function (event) {
 		$.ajax({
 			url: $(this).attr('action'),
@@ -15,10 +15,10 @@
 			dataType: 'json',
 			success: SS6.addProduct.processResponse
 		});
-		
+
 		event.preventDefault();
 	}
-	
+
 	SS6.addProduct.processResponse = function (data) {
 		var options = {
 			content: data.message,
@@ -37,9 +37,9 @@
 			});
 		}
 	}
-	
+
 	$(document).ready(function () {
 		SS6.addProduct.init();
 	});
-	
+
 })(jQuery);

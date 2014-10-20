@@ -54,5 +54,5 @@ class Parameter {
 	public function edit(ParameterData $parameterData) {
 		$this->name = $parameterData->getName();
 	}
-	
+
 }

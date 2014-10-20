@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\String\TransformString;
 
 class TransformStringTest extends PHPUnit_Framework_TestCase {
-	
+
 	public function testSafeFilename() {
 		$this->assertEquals('escrzyaie.dat', TransformString::safeFilename('ěščřžýáíé.dat'));
 		$this->assertEquals('ESCRZYAIE.DAT', TransformString::safeFilename('ĚŠČŘŽÝÁÍÉ.DAT'));
@@ -16,5 +16,5 @@ class TransformStringTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('_._Foo.dat', TransformString::safeFilename('..\\..\\Foo.dat'));
 		$this->assertEquals('foo.dat', TransformString::safeFilename('.foo.dat'));
 	}
-	
+
 }

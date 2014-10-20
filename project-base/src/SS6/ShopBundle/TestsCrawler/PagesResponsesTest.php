@@ -44,7 +44,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 		$this->authenticateUser('admin', 'admin123');
 		$this->getClient()->request('GET', $url);
 		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
-	}	
+	}
 
 	public function frontEndPagesProvider() {
 		return array(
@@ -81,5 +81,5 @@ class PagesResponsesTest extends DatabaseTestCase {
 		$this->getClient()->request('GET', $url);
 		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 	}
-	
+
 }

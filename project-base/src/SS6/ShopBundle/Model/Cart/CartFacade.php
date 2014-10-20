@@ -8,27 +8,27 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade {
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartService
 	 */
 	private $cartService;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
 	private $cart;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
@@ -38,7 +38,7 @@ class CartFacade {
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
-	
+
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
@@ -71,10 +71,10 @@ class CartFacade {
 		$product = $this->productRepository->getVisibleByIdAndDomainId($productId, $this->domain->getId());
 		$result = $this->cartService->addProductToCart($this->cart, $this->customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
-		
+
 		$this->em->persist($result->getCartItem());
 		$this->em->flush();
-		
+
 		return $result;
 	}
 
@@ -103,7 +103,7 @@ class CartFacade {
 		foreach ($cartItemsToDelete as $cartItemToDelete) {
 			$this->em->remove($cartItemToDelete);
 		}
-		
+
 		$this->em->flush();
 	}
 

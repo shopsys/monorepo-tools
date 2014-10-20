@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
 class UserDataFixture extends AbstractReferenceFixture {
-	
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
@@ -56,7 +56,7 @@ class UserDataFixture extends AbstractReferenceFixture {
 		DeliveryAddress $deliveryAddress = null
 	) {
 		$user = $registrationService->create(
-			$userData, 
+			$userData,
 			$billingAddress,
 			$deliveryAddress
 		);

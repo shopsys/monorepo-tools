@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Model\FlashMessage;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 
 class BagTest extends FunctionalTestCase {
-	
+
 	public function testAddFrontVsAdmin() {
 		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
 		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */

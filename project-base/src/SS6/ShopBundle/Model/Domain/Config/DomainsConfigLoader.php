@@ -39,7 +39,7 @@ class DomainsConfigLoader {
 		$processedConfig = $processor->processConfiguration($imageConfigDefinition, array($parsedConfig));
 
 		$domainConfigs = $this->loadDomainConfigsFromArray($processedConfig);
-		
+
 		return $domainConfigs;
 	}
 

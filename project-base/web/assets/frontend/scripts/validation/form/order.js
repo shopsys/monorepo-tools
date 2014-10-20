@@ -1,6 +1,6 @@
 (function ($){
 	$(document).ready(function () {
-		
+
 		var $transportAndPaymentForm = $('#transportAndPayment');
 		$transportAndPaymentForm.jsFormValidator({
 			callbacks: {
@@ -25,6 +25,6 @@
 				return groups;
 			}
 		});
-				
+
 	});
 })(jQuery);

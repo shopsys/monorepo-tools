@@ -163,7 +163,7 @@ class GridView {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

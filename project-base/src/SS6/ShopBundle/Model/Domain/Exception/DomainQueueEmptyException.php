@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Domain\Exception;
 use Exception;
 
 class DomainQueueEmptyException extends Exception implements DomainException {
-	
+
 	/**
 	 * @param string $message
 	 * @param Exception $previous

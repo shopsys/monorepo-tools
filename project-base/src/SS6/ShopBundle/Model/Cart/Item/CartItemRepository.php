@@ -12,21 +12,21 @@ class CartItemRepository {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
 	}
-	
+
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
 	private function getCartItemRepository() {
 		return $this->em->getRepository(CartItem::class);
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @return array
@@ -38,8 +38,8 @@ class CartItemRepository {
 		} else {
 			$criteria['sessionId'] = $customerIdentifier->getSessionId();
 		}
-		
+
 		return $this->getCartItemRepository()->findBy($criteria, array('id' => 'desc'));
 	}
-	
+
 }

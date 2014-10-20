@@ -59,7 +59,7 @@ class MenuConfiguration implements ConfigurationInterface {
 	private function getItemsNode($name) {
 		$treeBuilder = new TreeBuilder();
 		$definition = $treeBuilder->root($name);
-		
+
 		$this->buildItemsNode($definition);
 
 		return $definition->getNode(true);

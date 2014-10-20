@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
 class PaymentTest extends DatabaseTestCase {
-	
+
 	public function testRemoveTransportFromPaymentAfterDelete() {
 		$em = $this->getEntityManager();
 

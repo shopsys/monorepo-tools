@@ -25,11 +25,11 @@ class CartServiceTest extends FunctionalTestCase {
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
-		
+
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
 	}
-	
+
 	public function testAddProductToCartInvalidZeroQuantity() {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		/* @var $$cartService \SS6\ShopBundle\Model\Cart\CartService */
@@ -41,11 +41,11 @@ class CartServiceTest extends FunctionalTestCase {
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
-		
+
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
 	}
-	
+
 	public function testAddProductToCartInvalidNegativQuantity() {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		/* @var $$cartService \SS6\ShopBundle\Model\Cart\CartService */
@@ -57,11 +57,11 @@ class CartServiceTest extends FunctionalTestCase {
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
-		
+
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
 	}
-	
+
 	public function testAddProductToCartNewProduct() {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		/* @var $$cartService \SS6\ShopBundle\Model\Cart\CartService */
@@ -69,18 +69,18 @@ class CartServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = array();
 		$cart = new Cart($cartItems);
-		
+
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
 		$product = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
 
 		$quantity = 2;
-		
+
 		$result = $cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		$this->assertTrue($result->getIsNew());
 		$this->assertEquals($quantity, $result->getAddedQuantity());
 	}
-	
+
 	public function testAddProductToCartSameProduct() {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		/* @var $$cartService \SS6\ShopBundle\Model\Cart\CartService */
@@ -95,7 +95,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
 		$quantity = 2;
-		
+
 		$result = $cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		$this->assertFalse($result->getIsNew());
 		$this->assertEquals($quantity, $result->getAddedQuantity());
@@ -114,9 +114,9 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
-		
+
 		$cartService->cleanCart($cart);
-		
+
 		$this->assertTrue($cart->isEmpty());
 	}
 
@@ -153,5 +153,5 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$this->assertEquals(2, $mergingCart->getItemsCount());
 	}
-	
+
 }

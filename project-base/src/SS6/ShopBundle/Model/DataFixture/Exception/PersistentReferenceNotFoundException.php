@@ -6,7 +6,7 @@ use Exception;
 use SS6\ShopBundle\Model\DataFixture\Exception\DataFixtureException;
 
 class PersistentReferenceNotFoundException extends Exception implements DataFixtureException {
-	
+
 	/**
 	 * @param mixed $criteria
 	 * @param \Exception $previous
@@ -14,5 +14,5 @@ class PersistentReferenceNotFoundException extends Exception implements DataFixt
 	public function __construct($criteria, Exception $previous = null) {
 		parent::__construct('Data fixture reference not found by criteria ' . var_export($criteria, true), 0, $previous);
 	}
-	
+
 }

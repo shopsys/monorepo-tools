@@ -11,11 +11,11 @@ use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartItemTest extends DatabaseTestCase {
-	
-	
+
+
 	public function testIsSimilarItemAs() {
 		$em = $this->getEntityManager();
-		
+
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$price = 100;
@@ -26,7 +26,7 @@ class CartItemTest extends DatabaseTestCase {
 		$em->persist($product1);
 		$em->persist($product2);
 		$em->flush();
-		
+
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product1, 3, '0.0');
 		$cartItem3 = new CartItem($customerIdentifier, $product2, 1, '0.0');

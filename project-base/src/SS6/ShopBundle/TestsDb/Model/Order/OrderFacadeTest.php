@@ -28,7 +28,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		
+
 		$product = $productRepository->getById(1);
 
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1);

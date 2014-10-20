@@ -44,7 +44,7 @@ class FileUploadController extends Controller {
 
 		return new JsonResponse($actionResult);
 	}
-	
+
 	/**
 	 * @Route("/file_upload/delete_cached_file/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -55,7 +55,7 @@ class FileUploadController extends Controller {
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$filename = $request->get('filename');
 		$actionResult = $fileUpload->tryDeleteCachedFile($filename);
-		
+
 		return new JsonResponse($actionResult);
 	}
 

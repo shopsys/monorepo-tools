@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Model\Article;
 use SS6\ShopBundle\Model\Article\Article;
 
 class ArticleData {
-	
+
 	/**
 	 * @var string|null
 	 */
 	private $name;
-	
+
 	/**
 	 * @var string|null
 	 */

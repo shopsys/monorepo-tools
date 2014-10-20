@@ -44,7 +44,7 @@ class Transport implements EntityFileUploadInterface {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
 	 */
 	private $vat;
-	
+
 	/**
 	 * @var string
 	 *
@@ -58,7 +58,7 @@ class Transport implements EntityFileUploadInterface {
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
-	
+
 	/**
 	 * @var integer
 	 *
@@ -165,21 +165,21 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
 	}
 
 	/**
-	 * @return string 
+	 * @return string
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * @return string 
+	 * @return string
 	 */
 	public function getPrice() {
 		return $this->price;
@@ -193,7 +193,7 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return string|null 
+	 * @return string|null
 	 */
 	public function getDescription() {
 		return $this->description;
@@ -205,7 +205,7 @@ class Transport implements EntityFileUploadInterface {
 	public function isHidden() {
 		return $this->hidden;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */

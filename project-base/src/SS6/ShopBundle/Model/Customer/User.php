@@ -40,7 +40,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $lastName;
-	
+
 	/**
 	 * @ORM\Column(type="string", length=255)
 	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
@@ -51,9 +51,9 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @ORM\Column(name="password", type="string", length=100)
 	 */
 	protected $password;
-	
+
 	/**
-	 * @var DateTime 
+	 * @var DateTime
 	 */
 	protected $lastActivity;
 
@@ -121,7 +121,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	public function changeEmail($email) {
 		$this->email = $email;
 	}
-	
+
 	/**
 	 * @param string $password
 	 */
@@ -135,7 +135,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
 		$this->deliveryAddress = $deliveryAddress;
 	}
-	
+
 	/**
 	 * @return int
 	 */
@@ -149,14 +149,14 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	public function getFirstName() {
 		return $this->firstName;
 	}
-	
+
 	/**
 	 * @return DateTime
 	 */
 	public function getLastActivity() {
 		return $this->lastActivity;
 	}
-	
+
 	/**
 	 * @param DateTime $lastActivity
 	 */
@@ -188,14 +188,14 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	public function getLastName() {
 		return $this->lastName;
 	}
-	
+
 	/**
 	 * @return string
 	 */
 	public function getEmail() {
 		return $this->email;
 	}
-	
+
 	/**
 	 * @return string
 	 */
@@ -209,7 +209,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	public function getPassword() {
 		return $this->password;
 	}
-	
+
 	/**
 	 * @return string
 	 */
@@ -277,7 +277,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @inheritDoc
 	 */
 	public function eraseCredentials() {
-		
+
 	}
 
 	/**

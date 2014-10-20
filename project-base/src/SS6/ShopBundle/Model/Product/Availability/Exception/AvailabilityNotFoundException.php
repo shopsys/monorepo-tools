@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AvailabilityNotFoundException extends NotFoundHttpException implements AvailabilityException {
-	
+
 	/**
 	 * @param mixed $criteria
 	 * @param \Exception $previous
@@ -15,5 +15,5 @@ class AvailabilityNotFoundException extends NotFoundHttpException implements Ava
 	public function __construct($criteria, Exception $previous = null) {
 		parent::__construct('Product availability not found by criteria ' . var_export($criteria, true), $previous, 0);
 	}
-	
+
 }

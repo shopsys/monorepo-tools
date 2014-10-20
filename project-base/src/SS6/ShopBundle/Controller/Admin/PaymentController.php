@@ -16,7 +16,7 @@ class PaymentController extends Controller {
 	 */
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */		
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
 		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
@@ -24,7 +24,7 @@ class PaymentController extends Controller {
 
 		$paymentData = new PaymentData();
 		$paymentData->setVat($vatFacade->getDefaultVat());
-		
+
 		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);
 
@@ -49,7 +49,7 @@ class PaymentController extends Controller {
 			'form' => $form->createView(),
 		));
 	}
-	
+
 	/**
 	 * @Route("/payment/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -98,7 +98,7 @@ class PaymentController extends Controller {
 			'paymentDetail' => $paymentDetailFactory->createDetailForPayment($payment),
 		));
 	}
-	
+
 	/**
 	 * @Route("/payment/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
@@ -108,7 +108,7 @@ class PaymentController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		
+
 		$paymentName = $paymentEditFacade->getById($id)->getName();
 		$paymentEditFacade->deleteById($id);
 
@@ -117,7 +117,7 @@ class PaymentController extends Controller {
 		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
-	
+
 	public function listAction() {
 		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
@@ -126,7 +126,7 @@ class PaymentController extends Controller {
 
 		$payments = $paymentRepository->findAll();
 		$paymentDetails = $paymentDetailFactory->createDetailsForPayments($payments);
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
 			'paymentDetails' => $paymentDetails,
 		));

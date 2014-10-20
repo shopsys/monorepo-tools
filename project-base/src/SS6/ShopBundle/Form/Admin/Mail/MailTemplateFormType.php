@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class MailTemplateFormType extends AbstractType {
-	
+
 	/**
 	 * @return string
 	 */

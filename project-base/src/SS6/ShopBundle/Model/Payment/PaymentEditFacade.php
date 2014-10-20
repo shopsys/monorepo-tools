@@ -60,7 +60,7 @@ class PaymentEditFacade {
 		$payment = new Payment($paymentData);
 		$this->em->persist($payment);
 		$this->setAddionalDataAndFlush($payment, $paymentData);
-		
+
 		return $payment;
 	}
 

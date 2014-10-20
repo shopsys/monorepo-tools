@@ -22,7 +22,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		// @codingStandardsIgnoreStop
 		$manager->flush();
 	}
-	
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $name
@@ -48,7 +48,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		foreach ($transportsReferenceNames as $transportsReferenceName) {
 			$payment->addTransport($this->getReference($transportsReferenceName));
 		}
-		
+
 		$manager->persist($payment);
 		$this->addReference($referenceName, $payment);
 	}

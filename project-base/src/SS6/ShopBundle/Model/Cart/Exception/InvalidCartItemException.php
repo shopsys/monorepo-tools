@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Cart\Exception;
 use Exception;
 
 class InvalidCartItemException extends Exception implements CartException {
-	
+
 	/**
 	 * @param string $message
 	 * @param Exception $previous

@@ -66,7 +66,7 @@ class ProductDataFactory {
 			$productParameterValueData->setFromEntity($productParameterValue);
 			$productParameterValuesData[] = $productParameterValueData;
 		}
-		
+
 		$productData->setParameters($productParameterValuesData);
 
 		$hidden = $productData->getHidden();

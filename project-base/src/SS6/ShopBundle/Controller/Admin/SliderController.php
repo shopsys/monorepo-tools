@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SliderController extends Controller {
-	
+
 	/**
 	 * @Route("/slider/list/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -87,7 +87,7 @@ class SliderController extends Controller {
 		));
 
 	}
-	
+
 	/**
 	 * @Route("/slider/item/edit/{id}", requirements={"id"="\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -117,7 +117,7 @@ class SliderController extends Controller {
 
 			$flashMessageSender->addSuccessTwig('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $sliderItem->getName(),
-				'url' =>  $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),				
+				'url' =>  $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
 			));
 			return $this->redirect($this->generateUrl('admin_slider_list'));
 		}

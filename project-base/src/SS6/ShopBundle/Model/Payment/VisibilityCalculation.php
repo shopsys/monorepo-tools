@@ -15,7 +15,7 @@ class VisibilityCalculation {
 		$this->transportVisibilityCalculation = $transportVisibilityCalculation;
 	}
 
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]

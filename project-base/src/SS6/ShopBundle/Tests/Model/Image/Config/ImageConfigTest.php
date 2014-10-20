@@ -75,7 +75,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 	public function testGetEntityName() {
 		$imageConfig = $this->getBaseImageConfig();
 		$entity = new stdClass();
-		
+
 		$this->assertEquals('Name_1', $imageConfig->getEntityName($entity));
 	}
 
@@ -119,7 +119,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$imageSizeConfig3 = $imageConfig->getImageSizeConfigByEntityName($entityName, null, 'SizeName_0_1');
 		$this->assertEquals('SizeName_0_1', $imageSizeConfig3->getName());
 	}
-	
+
 	public function tesGetImageEntityConfig() {
 		$imageConfig = $this->getBaseImageConfig();
 		$entity = new stdClass();

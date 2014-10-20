@@ -41,7 +41,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$orderMock = $this->getMock(Order::class, ['__construct', 'getItems'], [], '', false);
 		$orderMock->expects($this->once())->method('getItems')->willReturn($orderItems);
-		
+
 		$orderTotalPrice = $priceCalculation->getOrderTotalPrice($orderMock);
 
 		$this->assertEquals(3220, $orderTotalPrice->getPriceWithVat());

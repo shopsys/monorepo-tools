@@ -40,7 +40,7 @@ class SliderItem implements EntityFileUploadInterface {
 
 	/**
 	 * @var string
-	 * 
+	 *
 	 * @ORM\Column(type="text")
 	 */
 	private $image;

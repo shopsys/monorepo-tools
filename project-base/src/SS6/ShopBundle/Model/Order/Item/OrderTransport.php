@@ -18,7 +18,7 @@ class OrderTransport extends OrderItem {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
 	 */
 	private $transport;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name

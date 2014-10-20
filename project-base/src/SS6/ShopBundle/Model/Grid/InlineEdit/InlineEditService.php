@@ -49,7 +49,7 @@ class InlineEditService {
 	public function getRenderedFormWidgets($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$form = $gridInlineEdit->getForm($rowId);
-		
+
 		return $this->renderFormToArray($form);
 	}
 

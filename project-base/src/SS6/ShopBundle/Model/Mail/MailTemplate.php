@@ -10,10 +10,10 @@ use SS6\ShopBundle\Model\Mail\MailTemplateData;
  * @ORM\Entity
  */
 class MailTemplate {
-	
+
 	/**
 	 * @var string
-	 * 
+	 *
 	 * @ORM\Column(type="string", length=255)
 	 * @ORM\Id
 	 */
@@ -75,5 +75,5 @@ class MailTemplate {
 	public function getBody() {
 		return $this->body;
 	}
-	
+
 }

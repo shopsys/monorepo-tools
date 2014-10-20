@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Model\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 
 class Cart {
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	private $cartItems;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
 	 */
@@ -49,7 +49,7 @@ class Cart {
 	public function getItems() {
 		return $this->cartItems;
 	}
-	
+
 	/**
 	 * @return int
 	 */

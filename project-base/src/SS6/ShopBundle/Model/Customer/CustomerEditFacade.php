@@ -113,7 +113,7 @@ class CustomerEditFacade {
 			$userByEmailAndDomain
 		);
 		$this->em->persist($user);
-		
+
 		$this->em->flush();
 
 		return $user;
@@ -174,7 +174,7 @@ class CustomerEditFacade {
 	 */
 	public function editByCustomer($userId, CustomerData $customerData) {
 		$user = $this->edit($userId, $customerData);
-		
+
 		$this->em->flush();
 
 		return $user;

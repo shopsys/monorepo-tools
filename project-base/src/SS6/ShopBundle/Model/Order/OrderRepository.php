@@ -8,8 +8,8 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderRepository {
-	
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
@@ -52,7 +52,7 @@ class OrderRepository {
 			)
 		);
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Order\Order|null
@@ -60,7 +60,7 @@ class OrderRepository {
 	public function findById($id) {
 		return $this->getOrderRepository()->find($id);
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Order\Order
@@ -110,5 +110,5 @@ class OrderRepository {
 			'status' => $orderStatusId,
 		));
 	}
-	
+
 }

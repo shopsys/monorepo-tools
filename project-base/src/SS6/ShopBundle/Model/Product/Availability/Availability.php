@@ -54,5 +54,5 @@ class Availability {
 	public function edit(AvailabilityData $availabilityData) {
 		$this->name = $availabilityData->getName();
 	}
-	
+
 }

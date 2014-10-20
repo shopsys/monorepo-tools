@@ -5,22 +5,22 @@ namespace SS6\ShopBundle\Model\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 
 class AddProductResult {
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem
 	 */
 	private $cartItem;
-	
+
 	/**
 	 * @var bool
 	 */
 	private $isNew;
-	
+
 	/**
 	 * @var int
 	 */
 	private $addedQuantity;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
 	 * @param bool $isNew
@@ -52,5 +52,5 @@ class AddProductResult {
 	public function getAddedQuantity() {
 		return $this->addedQuantity;
 	}
-	
+
 }

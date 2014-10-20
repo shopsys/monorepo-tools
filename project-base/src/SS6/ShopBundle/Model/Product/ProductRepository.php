@@ -8,8 +8,8 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductRepository {
-	
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
@@ -60,7 +60,7 @@ class ProductRepository {
 
 		return $qb;
 	}
-	
+
 	/**
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
@@ -70,7 +70,7 @@ class ProductRepository {
 
 		return $qb->getQuery()->getResult();
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Product\Product
@@ -78,14 +78,14 @@ class ProductRepository {
 	 */
 	public function getById($id) {
 		$product = $this->findById($id);
-		
+
 		if ($product === null) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException('Product with ID ' . $id . ' does not exist.');
 		}
-		
+
 		return $product;
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @param int $domainId
@@ -97,11 +97,11 @@ class ProductRepository {
 		$qb->setParameter('productId', $id);
 
 		$product = $qb->getQuery()->getOneOrNullResult();
-		
+
 		if ($product === null) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException($qb->getDQL());
 		}
-		
+
 		return $product;
 	}
 

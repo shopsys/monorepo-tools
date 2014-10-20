@@ -31,7 +31,7 @@ class CsvReader {
 		} while (true);
 
 		fclose($handle);
-		
+
 		return $rows;
 	}
 

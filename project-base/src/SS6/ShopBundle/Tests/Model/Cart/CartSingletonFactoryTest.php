@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactoryTest extends PHPUnit_Framework_TestCase {
-	
+
 	public function testGetSameCart() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
 			->setMethods(array('__construct', 'findAllByCustomerIdentifier'))
@@ -60,5 +60,5 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertFalse($cart1 === $cart2);
 	}
-	
+
 }

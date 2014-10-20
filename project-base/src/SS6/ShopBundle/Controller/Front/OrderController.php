@@ -92,7 +92,7 @@ class OrderController extends Controller {
 				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
 					$flashMessageSender->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
-				
+
 				$session = $this->get('session');
 				/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
 				$session->set(self::SESSION_CREATED_ORDER, $order->getId());

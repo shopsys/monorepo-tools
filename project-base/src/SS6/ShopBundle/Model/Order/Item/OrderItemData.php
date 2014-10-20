@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Item;
 
 class OrderItemData {
-	
+
 	/**
 	 * @var int
 	 */

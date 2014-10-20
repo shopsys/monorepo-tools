@@ -22,7 +22,7 @@ class DirectoryStructureCreator {
 	 * @var \Symfony\Component\Filesystem\Filesystem
 	 */
 	private $filesysytem;
-	
+
 	/**
 	 * @var string
 	 */

@@ -6,8 +6,8 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class SettingValueRepository {
-	
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
@@ -25,13 +25,13 @@ class SettingValueRepository {
 	private function getSettingValueRepository() {
 		return $this->em->getRepository(SettingValue::class);
 	}
-	
-	
+
+
 	/**
 	 * @return \SS6\ShopBundle\Model\Setting\SettingValue[]
 	 */
 	public function findAll() {
 		return $this->getSettingValueRepository()->findAll();
 	}
-	
+
 }

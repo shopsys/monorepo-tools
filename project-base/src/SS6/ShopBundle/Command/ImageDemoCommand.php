@@ -57,7 +57,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 	 */
 	private function unpackImages(OutputInterface $output, $imagesPath, $localArchiveFilepath) {
 		$zipArchive = new ZipArchive();
-		
+
 		$result = $zipArchive->open($localArchiveFilepath);
 		if ($result !== true) {
 			$output->writeln('<fg=red>Unpacking of images archive failed</fg=red>');
@@ -67,7 +67,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 		$zipArchive->extractTo($imagesPath);
 		$zipArchive->close();
 		$output->writeln('<fg=green>Unpacking of images archive was successfully completed</fg=green>');
-		
+
 		return true;
 	}
 
@@ -99,7 +99,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 	 */
 	private function downloadImages(OutputInterface $output, $archiveUrl, $localArchiveFilepath) {
 		$output->writeln('Start downloading demo images');
-		
+
 		try {
 			$this->filesystem->copy($archiveUrl, $localArchiveFilepath, true);
 		} catch (Exception $e) {
@@ -108,7 +108,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 
 			return false;
 		}
-		
+
 		$output->writeln('Success downloaded');
 		return true;
 	}

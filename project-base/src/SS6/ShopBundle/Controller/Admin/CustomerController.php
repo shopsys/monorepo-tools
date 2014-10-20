@@ -26,7 +26,7 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$userRepository = $this->get('ss6.shop.customer.user_repository');
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
-		
+
 		$user = $userRepository->getUserById($id);
 		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT));
 

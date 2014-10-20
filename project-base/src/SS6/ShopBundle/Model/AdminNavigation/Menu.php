@@ -78,7 +78,7 @@ class Menu {
 	 */
 	private function getItemMatchingRoute($route, array $parameters = null) {
 		$item = $this->getItemMatchingRouteRecursive($this->getItems(), $route, $parameters);
-		
+
 		return $item;
 	}
 

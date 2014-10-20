@@ -10,7 +10,7 @@ class ImagesEntity {
 	 * @var string
 	 */
 	private $imageDir;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
 	 */
@@ -42,7 +42,7 @@ class ImagesEntity {
 
 		$filename = $entity->$filenameMethodName();
 		$path = $this->getRelativeImagePath($imageEntityConfig->getEntityName(), $type, $sizeName);
-		
+
 		return $path . $filename;
 	}
 
@@ -55,14 +55,14 @@ class ImagesEntity {
 	public function imageExists($entity, $type, $sizeName) {
 		$relativeImageFilepath = $this->getRelativeImageFilepath($entity, $type, $sizeName);
 		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
-		
+
 		return is_file($imageFilepath) && is_readable($imageFilepath);
 	}
 
 	/**
 	 * @param string $entityName
 	 * @param string|null $type
-	 * @param string|null $sizeName	 
+	 * @param string|null $sizeName
 	 * @return string
 	 */
 	public function getRelativeImagePath($entityName, $type, $sizeName) {

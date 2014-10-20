@@ -29,5 +29,5 @@ interface GridInlineEditInterface {
 	 * @return string
 	 */
 	public function getServiceName();
-	
+
 }

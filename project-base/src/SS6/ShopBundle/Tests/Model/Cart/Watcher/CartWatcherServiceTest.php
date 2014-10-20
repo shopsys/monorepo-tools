@@ -28,7 +28,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 
 		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.bag.front');
 		/* @var $flashMessageFront \SS6\ShopBundle\Model\FlashMessage\Bag */
-		
+
 		// clear...
 		$flashMessageFront->getErrorMessages();
 		$flashMessageFront->getInfoMessages();
@@ -36,7 +36,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 
 		$cartWatcherService = $this->getContainer()->get('ss6.shop.cart.cart_watcher_service');
 		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
-		
+
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertTrue($flashMessageFront->isEmpty());
 

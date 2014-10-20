@@ -12,7 +12,7 @@ class ExceptionController extends BaseController {
 	public function setDebug($bool) {
 		$this->debug = $bool;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */

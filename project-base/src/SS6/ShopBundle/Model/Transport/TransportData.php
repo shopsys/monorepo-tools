@@ -156,7 +156,7 @@ class TransportData {
 		$this->image = $image;
 	}
 
-	/**	
+	/**
 	 * @param array $domains
 	 */
 	public function setDomains($domains) {
@@ -173,7 +173,7 @@ class TransportData {
 		$this->setName($transport->getName());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());
-		
+
 		$domains = array();
 		foreach ($transportDomains as $transportDomain) {
 			$domains[] = $transportDomain->getDomainId();

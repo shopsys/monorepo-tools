@@ -48,7 +48,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	public function saveForm(Request $request, $rowId) {
 		$form = $this->getForm($rowId);
 		$form->handleRequest($request);
-		
+
 		if (!$form->isValid()) {
 			$formErrors = [];
 			foreach ($form->getErrors(true) as $error) {
@@ -68,7 +68,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 
 		return $rowId;
 	}
-	
+
 	/**
 	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */

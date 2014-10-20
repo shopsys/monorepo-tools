@@ -34,7 +34,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 		$transportData->setVat($this->getReference(VatDataFixture::VAT_ZERO));
 		$this->createTransport('transport_personal', $transportData);
 	}
-	
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
@@ -43,7 +43,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	private function createTransport($referenceName, TransportData $transportData) {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		
+
 		$transport = $transportEditFacade->create($transportData);
 		$this->addReference($referenceName, $transport);
 	}

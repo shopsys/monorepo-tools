@@ -6,7 +6,7 @@ use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderStatusNotFoundException extends NotFoundHttpException implements OrderStatusException {
-	
+
 	/**
 	 * @param mixed $criteria
 	 * @param \Exception $previous
@@ -14,5 +14,5 @@ class OrderStatusNotFoundException extends NotFoundHttpException implements Orde
 	public function __construct($criteria, Exception $previous = null) {
 		parent::__construct('Order status not found by criteria ' . var_export($criteria, true), $previous, 0);
 	}
-	
+
 }

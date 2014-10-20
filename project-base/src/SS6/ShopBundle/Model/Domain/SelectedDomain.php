@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 class SelectedDomain {
 
 	const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */

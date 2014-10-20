@@ -295,7 +295,7 @@ class Order {
 		$this->city = $orderData->getCity();
 		$this->postcode = $orderData->getPostcode();
 		$this->note = $orderData->getNote();
-		
+
 		if ($orderData->isCompanyCustomer()) {
 			$this->setCompanyInfo(
 				$orderData->getCompanyName(),

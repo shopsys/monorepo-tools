@@ -77,7 +77,7 @@ class AvailabilityFacade {
 	 */
 	public function deleteById($availabilityId) {
 		$availability = $this->availabilityRepository->getById($availabilityId);
-		
+
 		$this->em->remove($availability);
 		$this->em->flush();
 	}

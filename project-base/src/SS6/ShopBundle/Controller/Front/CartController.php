@@ -98,13 +98,13 @@ class CartController extends Controller {
 		/* @var $cartSummaryCalculation \SS6\ShopBundle\Model\Cart\CartSummaryCalculation */
 
 		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
-		
+
 		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', array(
 			'cart' => $cart,
 			'cartSummary' => $cartSummary,
 		));
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
@@ -114,12 +114,12 @@ class CartController extends Controller {
 			'action' => $this->generateUrl('front_cart_add_product'),
 			'method' => 'POST',
 		));
-		
+
 		return $this->render('@SS6Shop/Front/Inline/Cart/addProduct.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
-	
+
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
@@ -128,7 +128,7 @@ class CartController extends Controller {
 			'method' => 'POST',
 		));
 		$form->handleRequest($request);
-		
+
 		$actionResult = array('success' => false, 'message' => 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
 		if ($form->isValid()) {
 			try {
@@ -161,16 +161,16 @@ class CartController extends Controller {
 		} else {
 			$flashMessageSender->addError($strippedFlashMessage);
 		}
-		
+
 		if ($this->getRequest()->headers->get('referer')) {
 			$redirectTo = $this->getRequest()->headers->get('referer');
 		} else {
 			$redirectTo = $this->generateUrl('front_homepage');
 		}
-		
+
 		return $this->redirect($redirectTo);
 	}
-	
+
 	/**
 	 * @param array $actionResult
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
@@ -178,10 +178,10 @@ class CartController extends Controller {
 	private function getAjaxAddProductResponse(array $actionResult) {
 		$actionResult['continueUrl'] = $this->generateUrl('front_cart');
 		$actionResult['cartBoxReloadUrl'] = $this->generateUrl('front_cart_box');
-		
+
 		return new JsonResponse($actionResult);
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\AddProductResult $addProductResult
 	 * @return string
@@ -189,11 +189,11 @@ class CartController extends Controller {
 	private function getAddProductResultMessage(AddProductResult $addProductResult) {
 		$productName = $addProductResult->getCartItem()->getName();
 		if ($addProductResult->getIsNew()) {
-			$message = sprintf('Do košíku bylo vloženo zboží <b>%s</b> (%d ks)', 
+			$message = sprintf('Do košíku bylo vloženo zboží <b>%s</b> (%d ks)',
 				htmlentities($productName, ENT_QUOTES),
 				$addProductResult->getAddedQuantity());
 		} else {
-			$message = sprintf('Do košíku bylo vloženo zboží <b>%s</b> (celkem již %d ks)', 
+			$message = sprintf('Do košíku bylo vloženo zboží <b>%s</b> (celkem již %d ks)',
 				htmlentities($productName, ENT_QUOTES),
 				$addProductResult->getCartItem()->getQuantity());
 		}

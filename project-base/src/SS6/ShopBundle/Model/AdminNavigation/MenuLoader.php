@@ -38,7 +38,7 @@ class MenuLoader {
 
 		$inputConfig = $yamlParser->parse(file_get_contents($filename));
 		$outputConfig = $processor->processConfiguration($menuConfiguration, array($inputConfig));
-		
+
 		$menu = $this->loadFromArray($outputConfig);
 
 		return $menu;

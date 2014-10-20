@@ -16,7 +16,7 @@
 		SS6.validation.highlightSubmitButtons($collection.closest('form'));
 		$collection.jsFormValidator('validate');
 	};
-	
+
 	SS6.validation.isFormValid = function (form) {
 		return $(form).find('.js-validation-error:first, .js-validation-errors-list li[class]:first').size() === 0;
 	};

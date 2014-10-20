@@ -11,7 +11,7 @@ class BreadcrumbController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 
 		$items = $breadcrumb->getItems();
-		
+
 		return $this->render('@SS6Shop/Admin/Inline/Breadcrumb/breadcrumb.html.twig', array(
 			'items' => $items,
 		));

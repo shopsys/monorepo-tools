@@ -75,21 +75,21 @@ class Product implements EntityFileUploadInterface {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
 	 */
 	private $vat;
-	
+
 	/**
 	 * @var \DateTime|null
-	 * 
+	 *
 	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $sellingFrom;
-	
+
 	/**
 	 * @var \DateTime|null
-	 * 
+	 *
 	 * @ORM\Column(type="date", nullable=true)
 	 */
 	private $sellingTo;
-	
+
 	/**
 	 * @var int|null
 	 *
@@ -142,7 +142,7 @@ class Product implements EntityFileUploadInterface {
 		$this->setImageForUpload($productData->getImage());
 		$this->availability = $productData->getAvailability();
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
@@ -217,7 +217,7 @@ class Product implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
@@ -285,14 +285,14 @@ class Product implements EntityFileUploadInterface {
 	public function getSellingTo() {
 		return $this->sellingTo;
 	}
-	
+
 	/**
 	 * @return int|null
 	 */
 	public function getStockQuantity() {
 		return $this->stockQuantity;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */

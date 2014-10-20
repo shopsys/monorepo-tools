@@ -58,7 +58,7 @@ class VisibilityCalculation {
 				$visibleTransports[] = $transport;
 			}
 		}
-		
+
 		return $visibleTransports;
 	}
 

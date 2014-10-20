@@ -43,5 +43,5 @@ class AdministratorGridService {
 			$grid->setDefaultLimit($customLimit);
 		}
 	}
-	
+
 }

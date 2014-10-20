@@ -45,14 +45,14 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @ORM\Column(name="password", type="string", length=100)
 	 */
 	protected $password;
-	
+
 	/**
 	 * @ORM\Column(name="login_token", type="string", length=32)
 	 */
 	protected $loginToken;
-	
+
 	/**
-	 * @var DateTime 
+	 * @var DateTime
 	 */
 	protected $lastActivity;
 
@@ -65,7 +65,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * )
 	 */
 	protected $gridLimits;
-	
+
 	public function __construct() {
 		$this->lastActivity = new DateTime();
 		$this->gridLimits = new ArrayCollection();
@@ -111,7 +111,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @return int
 	 */
@@ -139,14 +139,14 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	public function getPassword() {
 		return $this->password;
 	}
-	
+
 	/**
 	 * @return string
 	 */
 	public function getLoginToken() {
 		return $this->loginToken;
 	}
-	
+
 	/**
 	 * @return \DateTime
 	 */
@@ -174,14 +174,14 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	public function setPassword($password) {
 		$this->password = $password;
 	}
-	
+
 	/**
 	 * @param string $loginToken
 	 */
 	public function setLoginToken($loginToken) {
 		$this->loginToken = $loginToken;
 	}
-	
+
 	/**
 	 * @param DateTime $lastActivity
 	 */
@@ -223,7 +223,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function eraseCredentials() {
-		
+
 	}
 
 	/**

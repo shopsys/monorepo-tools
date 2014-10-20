@@ -8,9 +8,9 @@ use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
 class SliderItemFacade {
-	
+
 	/**
-	 * @var \Doctrine\ORM\EntityManager 
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 

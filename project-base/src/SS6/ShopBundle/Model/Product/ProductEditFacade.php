@@ -16,12 +16,12 @@ class ProductEditFacade {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
 	 */
@@ -47,7 +47,7 @@ class ProductEditFacade {
 		$this->productVisibilityFacade = $productVisibilityFacade;
 		$this->parameterRepository = $parameterRepository;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @return \SS6\ShopBundle\Model\Product\Product
@@ -60,12 +60,12 @@ class ProductEditFacade {
 		$this->saveHidden($product, $productData->getHidden());
 
 		$this->em->flush();
-		
+
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
-		
+
 		return $product;
 	}
-	
+
 	/**
 	 * @param int $productId
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
@@ -79,12 +79,12 @@ class ProductEditFacade {
 		$this->saveHidden($product, $productData->getHidden());
 
 		$this->em->flush();
-		
+
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
-		
+
 		return $product;
 	}
-	
+
 	/**
 	 * @param int $productId
 	 */
@@ -143,7 +143,7 @@ class ProductEditFacade {
 				$this->em->persist($productDomain);
 			}
 		}
-		
+
 		$this->em->flush();
 	}
 

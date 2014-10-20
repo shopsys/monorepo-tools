@@ -15,7 +15,7 @@ class AvailabilityController extends Controller {
 		/* @var $availabilityInlineEdit \SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit */
 
 		$grid = $availabilityInlineEdit->getGrid();
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));

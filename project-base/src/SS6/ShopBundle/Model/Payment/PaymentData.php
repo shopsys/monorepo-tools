@@ -35,7 +35,7 @@ class PaymentData {
 	 * @var string
 	 */
 	private $image;
-	
+
 	/**
 	 * @var array
 	 */
@@ -90,7 +90,7 @@ class PaymentData {
 	public function getDescription() {
 		return $this->description;
 	}
-	
+
 	/**
 	 * @return array
 	 */
@@ -139,14 +139,14 @@ class PaymentData {
 	public function setDescription($description) {
 		$this->description = $description;
 	}
-	
+
 	/**
 	 * @param array $transports
 	 */
 	public function setTransports($transports) {
 		$this->transports = $transports;
 	}
-	
+
 	/**
 	 * @param boolean $hidden
 	 */

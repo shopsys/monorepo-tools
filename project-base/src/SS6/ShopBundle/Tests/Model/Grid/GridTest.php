@@ -157,7 +157,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$grid->setDefaultOrder('default', DataSourceInterface::ORDER_ASC);
 		$this->assertEquals('-request', $grid->getOrderWithDirection());
 	}
-	
+
 	public function testCreateView() {
 		$request = new Request();
 		$requestStack = new RequestStack();

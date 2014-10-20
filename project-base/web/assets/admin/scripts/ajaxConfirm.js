@@ -2,11 +2,11 @@
 
 	SS6 = window.SS6 || {};
 	SS6.ajaxConfirm = SS6.ajaxConfirm || {};
-	
+
 	SS6.ajaxConfirm.init = function () {
 		$('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
 	}
-	
+
 	SS6.ajaxConfirm.bind = function () {
 		$(this)
 			.unbind('click.ajaxConfirm')
@@ -24,11 +24,11 @@
 						}
 					}
 				});
-			
+
 				return false;
 			});
 	};
-	
+
 	$(document).ready(function () {
 		SS6.ajaxConfirm.init();
 	});

@@ -13,7 +13,7 @@ class OrderFlowFacade {
 	 */
 	private $orderFlow;
 
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
 	 */

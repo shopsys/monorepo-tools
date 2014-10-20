@@ -18,10 +18,10 @@ class SettingValue {
 
 	const BOOLEAN_TRUE = 'true';
 	const BOOLEAN_FALSE = 'false';
-	
+
 	/**
 	 * @var string
-	 * 
+	 *
 	 * @ORM\Column(type="string", length=255)
 	 * @ORM\Id
 	 */

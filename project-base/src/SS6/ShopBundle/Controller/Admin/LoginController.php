@@ -20,9 +20,9 @@ class LoginController extends Controller {
 		if ($this->get('security.context')->isGranted(Roles::ROLE_ADMIN)) {
 			return $this->redirect($this->generateUrl('admin_default_dashboard'));
 		}
-		
+
 		$error = null;
-		
+
 		$form = $this->createForm(new LoginFormType(), null, array(
 			'action' => $this->generateUrl('admin_login_check'),
 			'method' => 'POST',

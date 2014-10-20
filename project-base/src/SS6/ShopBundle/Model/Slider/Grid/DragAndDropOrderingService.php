@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 class DragAndDropOrderingService implements GridOrderingInterface {
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager 
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 

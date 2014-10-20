@@ -97,5 +97,5 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 
 		$orderStatusService->delete($oldOrderStatus, array($orderMock), $newOrderStatus);
 	}
-	
+
 }

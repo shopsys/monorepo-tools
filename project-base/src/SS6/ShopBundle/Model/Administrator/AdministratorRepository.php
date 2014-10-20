@@ -40,14 +40,14 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 			$message = sprintf('Instances of "%s" are not supported.', $class);
 			throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
 		}
-		
+
 		if ($administrator instanceof TimelimitLoginInterface) {
 			if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
 				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Admin was too long unactive.');
 			}
 			$administrator->setLastActivity(new DateTime());
 		}
-		
+
 		$findParams = array(
 			'id' => $administrator->getId(),
 		);
@@ -59,7 +59,7 @@ class AdministratorRepository extends EntityRepository implements UserProviderIn
 		if ($freshAdministrator === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
 		}
-		
+
 		return $freshAdministrator;
 	}
 

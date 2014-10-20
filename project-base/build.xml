@@ -110,7 +110,7 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="docs">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true">
 			<arg value="docs" />
@@ -133,7 +133,7 @@
 			<arg value="ss6:image:directories" />
 		</exec>
 	</target>
-	
+
 	<target name="img-demo">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
@@ -191,7 +191,7 @@
 			<arg value="--extensions=php"/>
 		</exec>
 	</target>
-	
+
 	<target name="products-visibility">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />

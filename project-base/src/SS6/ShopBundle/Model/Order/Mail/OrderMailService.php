@@ -15,7 +15,7 @@ class OrderMailService {
 	 * @var string
 	 */
 	private $senderEmail;
-	
+
 	/**
 	 * @param string $senderEmail
 	 */
@@ -39,7 +39,7 @@ class OrderMailService {
 			->setContentType('text/plain; charset=UTF-8')
 			->setBody(strip_tags($body), 'text/plain')
 			->addPart($body, 'text/html');
-		
+
 		return $message;
 	}
 

@@ -8,8 +8,8 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 class OrderStatusRepository {
 
 	const STATUS_NEW = 1;
-	
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityRepository
 	 */
 	private $em;
@@ -27,7 +27,7 @@ class OrderStatusRepository {
 	private function getOrderStatusRepository() {
 		return $this->em->getRepository(OrderStatus::class);
 	}
-	
+
 	/**
 	 * @param int $orderStatusId
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus|null
@@ -35,7 +35,7 @@ class OrderStatusRepository {
 	public function findById($orderStatusId) {
 		return $this->getOrderStatusRepository()->find($orderStatusId);
 	}
-	
+
 	/**
 	 * @param int $orderStatusId
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus

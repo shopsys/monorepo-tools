@@ -61,7 +61,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				'product_19' => 1,
 				'product_20' => 1,
 				'product_15' => 5,
-			),			
+			),
 			$this->getReference('order_status_new'),
 			$user
 		);
@@ -102,7 +102,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$orderData,
 			array(
 				'product_1' => 1,
-			),			
+			),
 			$this->getReference('order_status_in_progress'),
 			$user
 		);
@@ -456,10 +456,10 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			),
 			$this->getReference('order_status_canceled')
 		);
-		
+
 		$manager->flush();
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param array $products

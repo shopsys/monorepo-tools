@@ -7,12 +7,12 @@ use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactory {
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart[]
 	 */
 	private $carts = array();
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
 	 */
@@ -22,7 +22,7 @@ class CartFactory {
 	 * @var \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
 	 */
 	private $cartWatcherFacade;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
 	 * @param \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
@@ -31,7 +31,7 @@ class CartFactory {
 		$this->cartItemRepository = $cartItemRepository;
 		$this->cartWatcherFacade = $cartWatcherFacade;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @return \SS6\ShopBundle\Model\Cart\Cart
@@ -47,7 +47,7 @@ class CartFactory {
 
 		return $cart;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @return \SS6\ShopBundle\Model\Cart\Cart

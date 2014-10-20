@@ -78,7 +78,7 @@ class TransportAndPaymentFormType extends AbstractType {
 	public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context) {
 		$payment = $orderData->getPayment();
 		$transport = $orderData->getTransport();
-		
+
 		$relationExists = false;
 		if ($payment instanceof Payment && $transport instanceof Transport) {
 			if ($payment->getTransports()->contains($transport)) {

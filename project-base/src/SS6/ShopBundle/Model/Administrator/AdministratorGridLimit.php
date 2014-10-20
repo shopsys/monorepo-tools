@@ -25,7 +25,7 @@ class AdministratorGridLimit  {
 	 * @ORM\Column(type="string", length=128)
 	 */
 	protected $gridId;
-	
+
 	/**
 	 * @var int
 	 *

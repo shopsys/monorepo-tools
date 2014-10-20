@@ -72,7 +72,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(round($expectedAsPriceWithoutVat, 6), round($rounding->roundPriceWithoutVat($unroundedPrice), 6));
 		$this->assertEquals(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
 	}
-	
+
 	public function testRoundingPriceWithVatProvider() {
 		return array(
 			array(

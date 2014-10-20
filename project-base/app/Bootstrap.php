@@ -16,7 +16,7 @@ require_once __DIR__ . '/../app/Environment.php';
 class Bootstrap {
 	private $environment;
 	private $console;
-	
+
 	public function __construct($console = false, $environment = null) {
 		if ($environment === null) {
 			$this->environment = Environment::getEnvironment();
@@ -25,9 +25,9 @@ class Bootstrap {
 		}
 		$this->console = (bool)$console;
 	}
-	
+
 	public function run() {
-		
+
 		if ($this->isDebug()) {
 			Debug::enable();
 		}
@@ -44,7 +44,7 @@ class Bootstrap {
 				$kernel->boot();
 			} else {
 				$this->initDoctrine();
-				
+
 				$request = Request::createFromGlobals();
 				$response = $kernel->handle($request);
 				$response->send();
@@ -56,7 +56,7 @@ class Bootstrap {
 	private function isDebug() {
 		return in_array($this->environment, array(Environment::ENVIRONMENT_DEVELOPMENT, Environment::ENVIRONMENT_TEST));
 	}
-	
+
 	private function initDoctrine() {
 		if ($this->environment === Environment::ENVIRONMENT_DEVELOPMENT) {
 			$dirs = array(__DIR__ . '/../vendor/doctrine/orm/lib/');
@@ -83,7 +83,7 @@ class Bootstrap {
 				$configs[] = __DIR__ . '/config/config_test.yml';
 				break;
 		}
-		
+
 		return $configs;
 	}
 }

@@ -47,17 +47,17 @@ class Payment implements EntityFileUploadInterface {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
 	 */
 	private $vat;
-	
+
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
-	
+
 	/**
 	 * @var Collection
-	 * 
+	 *
 	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
 	 * @ORM\JoinTable(name="payments_transports")
 	 */
@@ -69,7 +69,7 @@ class Payment implements EntityFileUploadInterface {
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
-	
+
 	/**
 	 * @var integer
 	 *
@@ -102,7 +102,7 @@ class Payment implements EntityFileUploadInterface {
 		$this->deleted = false;
 		$this->image = null;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 */
@@ -111,7 +111,7 @@ class Payment implements EntityFileUploadInterface {
 			$this->transports->add($transport);
 		}
 	}
-	
+
 	/**
 	 * @param array $transports
 	 */
@@ -197,21 +197,21 @@ class Payment implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;
 	}
 
 	/**
-	 * @return string 
+	 * @return string
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * @return string 
+	 * @return string
 	 */
 	public function getPrice() {
 		return $this->price;
@@ -225,7 +225,7 @@ class Payment implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return string|null 
+	 * @return string|null
 	 */
 	public function getDescription() {
 		return $this->description;
@@ -237,7 +237,7 @@ class Payment implements EntityFileUploadInterface {
 	public function isHidden() {
 		return $this->hidden;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */

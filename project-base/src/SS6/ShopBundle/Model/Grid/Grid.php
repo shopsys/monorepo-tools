@@ -186,7 +186,7 @@ class Grid {
 	 * @param array $additionalRouteParams
 	 * @return \SS6\ShopBundle\Model\Grid\ActionColumn
 	 */
-	public function addActionColumn($type, $name, $route, array $bindingRouteParams = null, 
+	public function addActionColumn($type, $name, $route, array $bindingRouteParams = null,
 		array $additionalRouteParams = null
 	) {
 		$actionColumn = new ActionColumn(
@@ -371,7 +371,7 @@ class Grid {
 		if ($this->getOrderDirection() === DataSourceInterface::ORDER_DESC) {
 			$prefix = '-';
 		}
-		
+
 		return $prefix . $this->getOrder();
 	}
 
@@ -474,7 +474,7 @@ class Grid {
 		} else {
 			$orderQueryId = null;
 		}
-		
+
 		$orderDirection = $this->orderDirection;
 
 		if ($this->isDragAndDrop()) {

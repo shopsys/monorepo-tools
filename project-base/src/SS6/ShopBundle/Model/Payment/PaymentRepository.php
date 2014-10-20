@@ -8,33 +8,33 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository {
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
 	}
-	
+
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
 	private function getPaymentRepository() {
 		return $this->em->getRepository(Payment::class);
 	}
-	
+
 	/**
 	 * @return array
 	 */
 	public function findAll() {
 		return $this->getPaymentRepository()->findBy(array('deleted' => false), array('name' => 'ASC'));
 	}
-	
+
 	/**
 	 * @return array
 	 */
@@ -49,7 +49,7 @@ class PaymentRepository {
 	public function findById($id) {
 		return $this->getPaymentRepository()->find($id);
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
@@ -62,7 +62,7 @@ class PaymentRepository {
 		}
 		return $payment;
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
@@ -77,7 +77,7 @@ class PaymentRepository {
 			throw new Exception\PaymentNotFoundException($criteria, $e);
 		}
 	}
-	
+
 	/**
 	 * @return \Doctrine\Common\Collections\Collection
 	 */
@@ -85,7 +85,7 @@ class PaymentRepository {
 		$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.deleted = :deleted', Payment::class);
 		return $this->em->createQuery($dql)->setParameter('deleted', false)->getResult();
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return array

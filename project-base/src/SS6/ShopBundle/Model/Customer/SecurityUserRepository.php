@@ -35,7 +35,6 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	protected function getUserRepository() {
 		return $this->em->getRepository(User::class);
 	}
-	
 
 	/**
 	 * @param string $email
@@ -70,14 +69,14 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 			$message = sprintf('Instances of "%s" are not supported.', $class);
 			throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
 		}
-		
+
 		if ($user instanceof TimelimitLoginInterface) {
 			if (time() - $user->getLastActivity()->getTimestamp() > 3600 * 24) {
 				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('User was too long unactive');
 			}
 			$user->setLastActivity(new DateTime());
 		}
-		
+
 		$findParams = array(
 			'id' => $user->getId(),
 		);
@@ -89,7 +88,7 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 		if ($freshUser === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
 		}
-		
+
 		return $freshUser;
 	}
 

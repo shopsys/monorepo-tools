@@ -15,7 +15,7 @@ class ParameterController extends Controller {
 		/* @var $parameterInlineEdit \SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit */
 
 		$grid = $parameterInlineEdit->getGrid();
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Parameter/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));

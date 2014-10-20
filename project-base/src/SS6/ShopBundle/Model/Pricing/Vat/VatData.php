@@ -60,5 +60,5 @@ class VatData {
 		$this->name = $vat->getName();
 		$this->percent = $vat->getPercent();
 	}
-	
+
 }

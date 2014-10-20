@@ -125,7 +125,7 @@ class PersonalInfoFormType extends AbstractType {
 
 				$orderData = $form->getData();
 				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
-				
+
 				if ($orderData->isCompanyCustomer()) {
 					$validationGroups[] = 'companyCustomer';
 				}

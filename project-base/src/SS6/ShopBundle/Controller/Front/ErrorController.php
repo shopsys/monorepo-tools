@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ErrorController extends Controller {
-	
+
 	/**
 	 * @param int $code
 	 * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -25,7 +25,7 @@ class ErrorController extends Controller {
 
 		throw new \Symfony\Component\HttpKernel\Exception\HttpException($code);
 	}
-	
+
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
@@ -48,7 +48,7 @@ class ErrorController extends Controller {
 				));
 			}
 		}
-		
+
 		return $exceptionController->showAction($request, $exception, $logger, $format);
 	}
 }

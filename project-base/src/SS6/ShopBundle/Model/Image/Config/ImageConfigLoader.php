@@ -60,7 +60,7 @@ class ImageConfigLoader {
 		$preparedConfig = $this->loadFromArray($outputConfig);
 
 		$imageConfig = new ImageConfig($preparedConfig);
-		
+
 		return $imageConfig;
 	}
 
@@ -106,7 +106,7 @@ class ImageConfigLoader {
 					$entityConfig[ImageConfigDefinition::CONFIG_FILENAME_METHOD];
 			}
 			$imageEntityConfig = new ImageEntityConfig($entityName, $entityClass, $this->filenameMethodsByType, $types, $sizes);
-			
+
 			$this->foundEntityNames[$entityName] = $entityName;
 			$this->foundEntityConfigs[$entityClass] = $imageEntityConfig;
 		} else {

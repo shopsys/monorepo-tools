@@ -8,12 +8,12 @@ use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 
 class CartWatcherFacade {
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
 	 */
@@ -23,7 +23,7 @@ class CartWatcherFacade {
 	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
 	 */
 	private $flashMessageSender;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \Doctrine\ORM\EntityManager $em

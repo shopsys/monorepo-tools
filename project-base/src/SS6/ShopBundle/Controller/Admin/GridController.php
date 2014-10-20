@@ -65,5 +65,5 @@ class GridController extends Controller {
 
 		return new JsonResponse($responseData);
 	}
-	
+
 }

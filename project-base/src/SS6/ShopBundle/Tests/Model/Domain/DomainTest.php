@@ -63,5 +63,5 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 		$this->setExpectedException(\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException::class);
 		$domain->getDomainConfigById(3);
 	}
-	
+
 }

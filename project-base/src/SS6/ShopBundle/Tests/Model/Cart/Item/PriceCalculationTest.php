@@ -34,5 +34,5 @@ class PriceCalculationTest extends FunctionalTestCase {
 		$this->assertEquals(round(42798, 6), round($cartItemPrice->getTotalPriceWithVat(), 6));
 		$this->assertEquals(round(7429.73, 6), round($cartItemPrice->getTotalPriceVatAmount(), 6));
 	}
-	
+
 }

@@ -10,8 +10,8 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class VatRepository {
-	
-	/** 
+
+	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
@@ -29,7 +29,7 @@ class VatRepository {
 	private function getVatRepository() {
 		return $this->em->getRepository(Vat::class);
 	}
-	
+
 	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */

@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Model\Cart\Exception;
 use Exception;
 
 class InvalidQuantityException extends Exception implements CartException {
-	
+
 	/**
 	 * @var mixed
 	 */
 	private $invalidValue;
-	
+
 	/**
 	 * @param mixed $invalidValue
 	 * @param string $message
@@ -20,7 +20,7 @@ class InvalidQuantityException extends Exception implements CartException {
 		$this->invalidValue = $invalidValue;
 		parent::__construct($message, 0, $previous);
 	}
-	
+
 	/**
 	 * @return mixed
 	 */

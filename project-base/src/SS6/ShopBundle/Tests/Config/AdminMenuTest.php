@@ -40,5 +40,5 @@ class AdminNavigationTest extends FunctionalTestCase {
 			}
 		}
 	}
-	
+
 }

@@ -58,5 +58,5 @@ abstract class FunctionalTestCase extends WebTestCase {
 			'PHP_AUTH_PW' => $password,
 		));
 	}
-	
+
 }

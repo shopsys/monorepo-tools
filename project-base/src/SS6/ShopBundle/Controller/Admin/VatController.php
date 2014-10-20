@@ -18,7 +18,7 @@ class VatController extends Controller {
 		/* @var $vatInlineEdit \SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit */
 
 		$grid = $vatInlineEdit->getGrid();
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Vat/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));
@@ -61,7 +61,7 @@ class VatController extends Controller {
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
 		$fullName = $vatFacade->getById($id)->getName();
-		
+
 		$vatFacade->deleteById($id, $newId);
 
 		if ($newId === null) {

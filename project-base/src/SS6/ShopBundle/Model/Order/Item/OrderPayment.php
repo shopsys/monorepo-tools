@@ -18,7 +18,7 @@ class OrderPayment extends OrderItem {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
 	 */
 	private $payment;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name

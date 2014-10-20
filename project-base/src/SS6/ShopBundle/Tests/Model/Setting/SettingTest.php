@@ -70,10 +70,10 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAll')->willReturn($settingValueArray);
 
-		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);		
+		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
 		$this->setExpectedException(SettingValueNotFoundException::class);
 		$setting->get('key2');
 	}
-	
+
 }

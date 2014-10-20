@@ -78,7 +78,7 @@ class ParameterFacade {
 	public function deleteById($parameterId) {
 		$parameter = $this->parameterRepository->getById($parameterId);
 		$this->deleteProductParameterValuesByParameterId($parameter);
-		
+
 		$this->em->remove($parameter);
 		$this->em->flush();
 	}

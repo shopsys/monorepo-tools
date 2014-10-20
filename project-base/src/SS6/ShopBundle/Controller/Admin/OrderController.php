@@ -28,7 +28,7 @@ class OrderController extends Controller {
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
 		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */
-		
+
 		$order = $orderRepository->getById($id);
 		$allOrderStatuses = $orderStatusRepository->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStatuses));
@@ -72,7 +72,7 @@ class OrderController extends Controller {
 		$breadcrumb->replaceLastItem(new MenuItem('Editace objednávky - č. ' . $order->getNumber()));
 
 		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
-		
+
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
 			'form' => $form->createView(),
 			'order' => $order,

@@ -36,7 +36,7 @@ class CustomerIdentifierFactory {
 		}
 	}
 
-	
+
 	/**
 	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
@@ -50,7 +50,7 @@ class CustomerIdentifierFactory {
 		}
 
 		$customerIdentifier = new CustomerIdentifier($this->session->getId(), $this->user);
-		
+
 		return $customerIdentifier;
 	}
 

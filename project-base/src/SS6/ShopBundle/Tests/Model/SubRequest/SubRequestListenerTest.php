@@ -66,7 +66,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 		$this->setExpectedException(\SS6\ShopBundle\Model\SubRequest\Exception\TooManyRedirectResponsesException::class);
 		$subRequestListener->onKernelResponse($eventMock3);
 	}
-	
+
 	public function testOnKernelResponse() {
 		$eventMock1 = $this->getMockBuilder(FilterResponseEvent::class)
 			->setMethods(['__construct', 'isMasterRequest', 'getResponse'])

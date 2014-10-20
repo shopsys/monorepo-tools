@@ -53,7 +53,7 @@ class PaymentFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		
+
 		$builder
 			->add('name', 'text', array(
 				'constraints' => array(

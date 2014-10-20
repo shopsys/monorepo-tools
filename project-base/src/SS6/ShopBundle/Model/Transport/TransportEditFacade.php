@@ -12,17 +12,17 @@ use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
 
 class TransportEditFacade {
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
 	 */
@@ -51,7 +51,7 @@ class TransportEditFacade {
 		$this->visibilityCalculation = $visibilityCalculation;
 		$this->domain = $domain;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
@@ -66,7 +66,7 @@ class TransportEditFacade {
 
 		return $transport;
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
@@ -80,7 +80,7 @@ class TransportEditFacade {
 		$this->createTransportDomains($transport, $transportData->getDomains());
 		$this->em->commit();
 	}
-	
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
@@ -88,7 +88,7 @@ class TransportEditFacade {
 	public function getById($id) {
 		return $this->transportRepository->getById($id);
 	}
-	
+
 	/**
 	 * @param int $id
 	 */

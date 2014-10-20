@@ -10,7 +10,7 @@ class SendMailFailedException extends Exception implements MailException {
 	 * @var array
 	 */
 	private $failedRecipients;
-	
+
 	/**
 	 * @param array $failedRecipients
 	 * @param \Exception $previous

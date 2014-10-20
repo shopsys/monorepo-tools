@@ -14,7 +14,7 @@ class LoginController extends Controller {
 		if ($this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
 			return $this->redirect($this->generateUrl('front_homepage'));
 		}
-		
+
 		$loginService = $this->container->get('ss6.shop.security.login_service');
 		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
 
@@ -30,13 +30,13 @@ class LoginController extends Controller {
 			'form' => $form->createView(),
 		));
 	}
-	
+
 	public function windowFormAction() {
 		return $this->render('@SS6Shop/Front/Content/Login/windowForm.html.twig', array(
 			'form' => $this->getLoginForm()->createView(),
 		));
 	}
-	
+
 	/**
 	 * @return \Symfony\Component\Form\Form
 	 */

@@ -100,7 +100,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$rounding = new Rounding($pricingSettingMock);
 		$priceCalculation = new PriceCalculation($rounding);
 		$vat = new Vat(new VatData('testVat', $vatPercent));
-		
+
 		$actualVatAmount = $priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
 
 		$this->assertEquals(round($expectedVatAmount, 6), round($actualVatAmount, 6));

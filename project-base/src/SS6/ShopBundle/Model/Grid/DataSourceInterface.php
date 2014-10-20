@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Grid;
 
 interface DataSourceInterface {
-	
+
 	const ORDER_ASC = 'asc';
 	const ORDER_DESC = 'desc';
 
@@ -36,5 +36,5 @@ interface DataSourceInterface {
 	 * @return string
 	 */
 	public function getIdQueryId();
-	
+
 }

@@ -36,5 +36,5 @@ class ParameterValueData {
 	public function setFromEntity(ParameterValue $parameterValue) {
 		$this->text = $parameterValue->getText();
 	}
-	
+
 }

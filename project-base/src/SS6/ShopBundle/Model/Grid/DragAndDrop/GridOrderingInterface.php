@@ -13,5 +13,5 @@ interface GridOrderingInterface {
 	 * @return string
 	 */
 	public function getServiceName();
-	
+
 }

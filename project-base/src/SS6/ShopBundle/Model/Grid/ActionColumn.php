@@ -9,7 +9,7 @@ class ActionColumn {
 
 	const TYPE_DELETE = 'delete';
 	const TYPE_EDIT = 'edit';
-	
+
 	/**
 	 * @var \Symfony\Component\Routing\Router
 	 */

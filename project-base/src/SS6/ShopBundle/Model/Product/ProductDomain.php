@@ -33,7 +33,7 @@ class ProductDomain {
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
-	
+
 	/**
 	 * @var boolean
 	 *
@@ -68,7 +68,7 @@ class ProductDomain {
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */

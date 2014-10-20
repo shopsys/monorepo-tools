@@ -12,14 +12,14 @@ class OrderNumberSequenceRepository {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
 	}
-	
+
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */

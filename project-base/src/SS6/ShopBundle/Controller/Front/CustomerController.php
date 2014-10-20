@@ -13,7 +13,7 @@ class CustomerController extends Controller {
 	public function editAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		
+
 		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
 			$flashMessageSender->addError('Pro přístup na tuto stránku musíte být přihlášeni');
 			return $this->redirect($this->generateUrl('front_login'));

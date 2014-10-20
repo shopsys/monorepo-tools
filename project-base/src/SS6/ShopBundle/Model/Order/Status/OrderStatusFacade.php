@@ -94,7 +94,7 @@ class OrderStatusFacade {
 		} else {
 			$newOrderStatus = null;
 		}
-		
+
 		$this->orderStatusService->delete($orderStatus, $orders, $newOrderStatus);
 
 		$this->em->remove($orderStatus);

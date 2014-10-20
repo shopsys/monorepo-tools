@@ -74,7 +74,7 @@ class ImageConfig {
 				return $entityConfig;
 			}
 		}
-		
+
 		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($entityName);
 	}
 

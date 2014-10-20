@@ -52,7 +52,7 @@ class MenuItem {
 		} else {
 			$this->setType(self::TYPE_REGULAR);
 		}
-		
+
 		$this->label = $label;
 		$this->route = $route;
 

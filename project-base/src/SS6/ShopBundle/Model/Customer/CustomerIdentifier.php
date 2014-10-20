@@ -5,9 +5,9 @@ namespace SS6\ShopBundle\Model\Customer;
 use SS6\ShopBundle\Model\Customer\User;
 
 class CustomerIdentifier {
-	
+
 	/**
-	 * @var string 
+	 * @var string
 	 */
 	private $sessionId = '';
 
@@ -15,7 +15,7 @@ class CustomerIdentifier {
 	 * @var \SS6\ShopBundle\Model\Customer\User|null
 	 */
 	private $user;
-	
+
 	/**
 	 * @param string $sessionId
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user

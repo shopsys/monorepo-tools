@@ -11,24 +11,24 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 class CartMigrationFacade {
 
 	const SESSION_PREVIOUS_ID = 'previous_id';
-	
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartService
 	 */
 	private $cartService;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	private $customerIdentifier;
-	
+
 	/**
-	 * 
+	 *
 	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
 	 */
 	private $cartFactory;
@@ -37,7 +37,7 @@ class CartMigrationFacade {
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
 	private $customerIdentifierFactory;
-	
+
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService

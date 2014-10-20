@@ -8,7 +8,7 @@
 				if ($customerDeliveryAddressForm.find('#customer_deliveryAddressData_addressFilled').is(':checked')) {
 					groups.push('differentDeliveryAddress');
 				}
-				
+
 				return groups;
 			}
 		});
@@ -24,6 +24,6 @@
 				return groups;
 			}
 		});
-		
+
 	});
 })(jQuery);

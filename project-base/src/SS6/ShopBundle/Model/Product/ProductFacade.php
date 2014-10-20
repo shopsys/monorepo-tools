@@ -25,5 +25,5 @@ class ProductFacade {
 	public function getAllVisibleByDomainId($domainId) {
 		return $this->productRepository->getAllVisibleByDomainId($domainId);
 	}
-	
+
 }

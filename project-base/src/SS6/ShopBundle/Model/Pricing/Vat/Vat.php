@@ -34,7 +34,7 @@ class Vat {
 	 * @ORM\Column(type="decimal", precision=20, scale=4)
 	 */
 	private $percent;
-	
+
 	/**
 	 * @param string $name
 	 * @param string $percent

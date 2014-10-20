@@ -13,7 +13,7 @@ class LoginService {
 	 */
 	public function checkLoginProcess(Request $request) {
 		$error = null;
-		
+
 		if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
 			$error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
 		} else {
@@ -25,7 +25,7 @@ class LoginService {
 		if ($error !== null) {
 			throw new Exception\LoginFailedException('Login failed.');
 		}
-		
+
 		return true;
 	}
 }

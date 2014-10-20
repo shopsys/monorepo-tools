@@ -27,5 +27,5 @@ class InvalidServiceException extends Exception implements InlineEditException {
 	public function getServiceName() {
 		return $this->serviceName;
 	}
-	
+
 }

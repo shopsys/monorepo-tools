@@ -70,7 +70,7 @@ class ArticleEditFacade {
 	 */
 	public function delete($articleId) {
 		$article = $this->articleRepository->getById($articleId);
-		
+
 		$this->em->remove($article);
 		$this->em->flush();
 	}

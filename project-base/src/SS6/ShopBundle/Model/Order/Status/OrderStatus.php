@@ -92,5 +92,5 @@ class OrderStatus {
 	public function edit($name) {
 		$this->name = $name;
 	}
-	
+
 }

@@ -41,7 +41,7 @@ class Article {
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $text;
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 * @param int $domainId
@@ -51,7 +51,7 @@ class Article {
 		$this->name = $articleData->getName();
 		$this->text = $articleData->getText();
 	}
-	
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
@@ -61,7 +61,7 @@ class Article {
 	}
 
 	/**
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId() {
 		return $this->id;

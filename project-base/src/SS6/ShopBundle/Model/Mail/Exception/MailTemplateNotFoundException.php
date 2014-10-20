@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Mail\Exception;
 use Exception;
 
 class MailTemplateNotFoundException extends Exception implements MailException {
-	
+
 	/**
 	 * @param mixed $message
 	 * @param \Exception $previous
@@ -13,5 +13,5 @@ class MailTemplateNotFoundException extends Exception implements MailException {
 	public function __construct($message, Exception $previous = null) {
 		parent::__construct($message, 0, $previous);
 	}
-	
+
 }

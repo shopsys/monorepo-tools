@@ -6,7 +6,7 @@ use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserNotFoundException extends NotFoundHttpException implements CustomerException {
-	
+
 	/**
 	 * @param mixed $criteria
 	 * @param \Exception $previous
@@ -14,5 +14,5 @@ class UserNotFoundException extends NotFoundHttpException implements CustomerExc
 	public function __construct($criteria, Exception $previous = null) {
 		parent::__construct('User not found by criteria ' . var_export($criteria, true), $previous, 0);
 	}
-	
+
 }

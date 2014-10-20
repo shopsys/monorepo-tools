@@ -36,5 +36,5 @@ class AvailabilityData {
 	public function setFromEntity(Availability $availability) {
 		$this->name = $availability->getName();
 	}
-	
+
 }

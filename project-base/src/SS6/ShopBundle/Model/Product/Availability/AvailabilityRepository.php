@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Product\Availability\Availability;
 
 class AvailabilityRepository {
 
-	/** 
+	/**
 	 * @var \Doctrine\ORM\EntityRepository
 	 */
 	private $em;
@@ -25,7 +25,7 @@ class AvailabilityRepository {
 	private function getAvailabilityRepository() {
 		return $this->em->getRepository(Availability::class);
 	}
-	
+
 	/**
 	 * @param int $availabilityId
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
@@ -33,7 +33,7 @@ class AvailabilityRepository {
 	public function findById($availabilityId) {
 		return $this->getAvailabilityRepository()->find($availabilityId);
 	}
-	
+
 	/**
 	 * @param int $availabilityId
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
