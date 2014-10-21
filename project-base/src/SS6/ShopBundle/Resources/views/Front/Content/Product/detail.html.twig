@@ -77,7 +77,7 @@
 					</dt>
 					<dd class="list-params-side__definition">
 						<strong class="price-main price-big">
-							{{ productDetail.price.priceWithVat|price }}
+							{{ productDetail.basePrice.priceWithVat|price }}
 						</strong>
 					</dd>
 				</dl>
@@ -89,7 +89,7 @@
 					</dt>
 					<dd class="list-params-side__definition">
 						<strong>
-							{{ productDetail.price.priceWithoutVat|price }}
+							{{ productDetail.basePrice.priceWithoutVat|price }}
 						</strong>
 					</dd>
 				</dl>

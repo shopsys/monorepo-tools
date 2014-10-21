@@ -16,7 +16,7 @@
 			{% for paymentDetail in paymentDetails %}
 				<tr>
 					<td><a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}">{{ paymentDetail.payment.name }}</a></td>
-					<td class="text-right">{{ paymentDetail.price.priceWithVat|price }}</td>
+					<td class="text-right">{{ paymentDetail.basePrice.priceWithVat|price }}</td>
 					<td class="text-right">
 						<a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
 						<a href="{{ url('admin_payment_delete', {id: paymentDetail.payment.id}) }}" onclick="return confirm('Opravdu chcete tuto platbu smazat?')" class="table-action"><i class="fa fa-trash-o"></i></a>
@@ -25,7 +25,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	
+
 {% else %}
 	<p>
 		Doposud nebyly vytvořeny žádné platby. Nejdříve nějakou <a href="{{ url('admin_payment_new') }}">vytvořte</a>.
