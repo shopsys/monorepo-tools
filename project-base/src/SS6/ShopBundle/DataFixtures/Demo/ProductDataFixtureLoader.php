@@ -106,8 +106,12 @@ class ProductDataFixtureLoader {
 			default:
 				$productData->setVat(null);
 		}
-		$productData->setSellingFrom(new DateTime($row[7]));
-		$productData->setSellingTo(new DateTime($row[8]));
+		if ($row[7] !== null) {
+			$productData->setSellingFrom(new DateTime($row[7]));
+		}
+		if ($row[8] !== null) {
+			$productData->setSellingTo(new DateTime($row[8]));
+		}
 		$productData->setStockQuantity($row[9]);
 		$productData->setHidden(array(1 => $row[10], 2 => $row[11]));
 		switch ($row[12]) {
