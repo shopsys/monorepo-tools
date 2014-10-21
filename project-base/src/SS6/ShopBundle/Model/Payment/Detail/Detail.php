@@ -15,15 +15,15 @@ class Detail {
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private $price;
+	private $basePrice;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 */
-	public function __construct(Payment $payment, Price $price) {
+	public function __construct(Payment $payment, Price $basePrice) {
 		$this->payment = $payment;
-		$this->price = $price;
+		$this->basePrice = $basePrice;
 	}
 
 	/**
@@ -36,8 +36,8 @@ class Detail {
 	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getPrice() {
-		return $this->price;
+	public function getBasePrice() {
+		return $this->basePrice;
 	}
 
 }
