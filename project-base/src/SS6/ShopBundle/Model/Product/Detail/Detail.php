@@ -15,7 +15,7 @@ class Detail {
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private $price;
+	private $basePrice;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
@@ -24,16 +24,16 @@ class Detail {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
 	 */
 	public function __construct(
 		Product $product,
-		Price $price,
+		Price $basePrice,
 		array $parameters
 	) {
 		$this->product = $product;
-		$this->price = $price;
+		$this->basePrice = $basePrice;
 		$this->parameters = $parameters;
 	}
 
@@ -47,8 +47,8 @@ class Detail {
 	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getPrice() {
-		return $this->price;
+	public function getBasePrice() {
+		return $this->basePrice;
 	}
 
 	/**
