@@ -416,6 +416,9 @@ services:
   ss6.shop.product.product_facade:
     class: SS6\ShopBundle\Model\Product\ProductFacade
 
+  ss6.shop.product.product_on_current_domain_facade:
+    class: SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
+
   ss6.shop.product.product_repository:
     class: SS6\ShopBundle\Model\Product\ProductRepository
 
@@ -461,6 +464,9 @@ services:
 
   ss6.shop.transport.grid.drag_and_drop_ordering_service:
     class: SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService
+
+  ss6.shop.transport.grid.transport_grid_factory:
+    class: SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory
 
   ss6.shop.transport.independent_transport_visibility_calculation:
     class: SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation

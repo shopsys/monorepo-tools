@@ -84,8 +84,6 @@ class VatController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function settingsAction(Request $request) {
-		$vatRepository = $this->get('ss6.shop.pricing.vat.vat_repository');
-		/* @var $vatRepository \SS6\ShopBundle\Model\Pricing\Vat\VatRepository */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
@@ -95,7 +93,7 @@ class VatController extends Controller {
 		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
 		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
 
-		$vats = $vatRepository->findAll();
+		$vats = $vatFacade->getAll();
 		$form = $this->createForm(new VatSettingsFormType($vats, PricingSetting::getRoundingTypes()));
 
 		try {

@@ -17,10 +17,7 @@ class MailController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$mailTemplateFacade = $this->get('ss6.shop.mail.mail_template_facade');
 		/* @var $mailTemplateFacade \SS6\ShopBundle\Model\Mail\MailTemplateFacade */
-		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
-		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 
-		$orderStatusesIndexedById = $orderStatusRepository->getAllIndexedById();
 		$orderStatusMailTemplatesData = $mailTemplateFacade->getOrderStatusMailTemplatesData();
 
 		$form = $this->createForm(new OrderStatusMailTemplatesFormType());
@@ -37,7 +34,7 @@ class MailController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', array(
 			'form' => $form->createView(),
-			'orderStatusesIndexedById' => $orderStatusesIndexedById,
+			'orderStatusesIndexedById' => $mailTemplateFacade->getAllIndexedById(),
 		));
 	}
 

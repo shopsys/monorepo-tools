@@ -96,12 +96,12 @@ class SliderController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$sliderItemRepository = $this->get('ss6.shop.slider.slider_item_repository');
-		/* @var $sliderItemRepository \SS6\ShopBundle\Model\Slider\SliderItemRepository */
+		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
+		/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade */
 		$sliderItemFormTypeFactory = $this->get('ss6.shop.form.admin.slider.slider_item_form_type_factory');
 		/* @var $sliderItemFormTypeFactory \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory */
 
-		$sliderItem = $sliderItemRepository->getById($id);
+		$sliderItem = $sliderItemFacade->getById($id);
 		$form = $this->createForm($sliderItemFormTypeFactory->create());
 		$sliderItemData = new SliderItemData();
 		$sliderItemData->setFromEntity($sliderItem);
@@ -110,10 +110,7 @@ class SliderController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$sliderItemData = $form->getData();
-			$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
-			/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade */
-			$sliderItem = $sliderItemFacade->edit($id, $sliderItemData);
+			$sliderItemFacade->edit($id, $sliderItemData);
 
 			$flashMessageSender->addSuccessTwig('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $sliderItem->getName(),
@@ -143,13 +140,10 @@ class SliderController extends Controller {
 	public function deleteAction($id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
 		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
 		/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
-		$sliderItemRepository = $this->get('ss6.shop.slider.slider_item_repository');
-		/* @var $sliderItemRepository SS6\ShopBundle\Model\Slider\SliderItemRepository */
 
-		$name = $sliderItemRepository->getById($id)->getName();
+		$name = $sliderItemFacade->getById($id)->getName();
 		$sliderItemFacade->delete($id);
 
 		$flashMessageSender->addSuccessTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(

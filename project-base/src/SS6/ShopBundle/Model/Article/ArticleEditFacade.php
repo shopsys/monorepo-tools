@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Article\ArticleRepository;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 
 class ArticleEditFacade {
@@ -24,18 +25,41 @@ class ArticleEditFacade {
 	private $selectedDomain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Article\ArticleRepository $articleRepository
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @param \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	public function __construct(
 		EntityManager $em,
 		ArticleRepository $articleRepository,
-		SelectedDomain $selectedDomain
+		SelectedDomain $selectedDomain,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->articleRepository = $articleRepository;
 		$this->selectedDomain = $selectedDomain;
+		$this->domain = $domain;
+	}
+
+	/**
+	 * @param int $articleId
+	 * @return \SS6\ShopBundle\Model\Article\Article
+	 */
+	public function getById($articleId) {
+		return $this->articleRepository->getById($articleId);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Article\Article[]
+	 */
+	public function getArticlesForMenuOnCurrentDomain() {
+		return $this->articleRepository->getArticlesForMenu($this->domain->getId());
 	}
 
 	/**

@@ -121,35 +121,10 @@ class TransportController extends Controller {
 	}
 
 	public function listAction() {
-		$transportRepository = $this->get('ss6.shop.transport.transport_repository');
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
-		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\Factory */
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-		$transportOrderingService = $this->get('ss6.shop.transport.grid.drag_and_drop_ordering_service');
-		/* @var $transportOrderingService \SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService */
+		$transportGridFactory = $this->get('ss6.shop.transport.grid.transport_grid_factory');
+		/* @var $$transportGridFactory \SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory */
 
-		$queryBuilder = $transportRepository->getQueryBuilderForAll();
-		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
-			$queryBuilder, 't.id',
-			function ($row) use ($transportRepository, $transportDetailFactory) {
-				$transport = $transportRepository->findById($row['t']['id']);
-				$row['transportDetail'] = $transportDetailFactory->createDetailForTransport($transport);
-				return $row;
-			}
-		);
-
-		$grid = $gridFactory->create('transportList', $dataSource);
-		$grid->enableDragAndDrop($transportOrderingService);
-
-		$grid->addColumn('name', 't.name', 'Název');
-		$grid->addColumn('price', 'transportDetail', 'Cena');
-
-		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_transport_edit', array('id' => 't.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_transport_delete', array('id' => 't.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto dopravu?');
+		$grid = $transportGridFactory->create();
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
 			'gridView' => $grid->createView(),

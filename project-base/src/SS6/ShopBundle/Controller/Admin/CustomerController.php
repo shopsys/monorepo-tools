@@ -24,10 +24,10 @@ class CustomerController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$userRepository = $this->get('ss6.shop.customer.user_repository');
-		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
+		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
+		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-		$user = $userRepository->getUserById($id);
+		$user = $customerEditFacade->getUserById($id);
 		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT));
 
 		try {
@@ -41,11 +41,7 @@ class CustomerController extends Controller {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$customerData = $form->getData();
-
-				$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
-				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-				$user = $customerEditFacade->editByAdmin($id, $customerData);
+				$customerEditFacade->editByAdmin($id, $customerData);
 
 				$flashMessageSender->addSuccessTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),
@@ -192,12 +188,11 @@ class CustomerController extends Controller {
 	public function deleteAction($id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
+				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-		$userRepository = $this->get('ss6.shop.customer.user_repository');
-		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
-
-		$fullName = $userRepository->getUserById($id)->getFullName();
-		$this->get('ss6.shop.customer.customer_edit_facade')->delete($id);
+		$fullName = $customerEditFacade->getUserById($id)->getFullName();
+		$customerEditFacade->delete($id);
 		$flashMessageSender->addSuccessTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,
 		));
