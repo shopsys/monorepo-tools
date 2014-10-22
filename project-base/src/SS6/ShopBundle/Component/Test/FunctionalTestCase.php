@@ -22,12 +22,20 @@ abstract class FunctionalTestCase extends WebTestCase {
 	/**
 	 * @return \Symfony\Component\HttpKernel\Client
 	 */
-	protected function getClient() {
-		if (!isset($this->client)) {
+	protected function getClient($alwaysCreate = false) {
+		if ($alwaysCreate) {
 			$this->client = $this->createClient();
+			$this->setUp();
+			return $this->client;
+
+		} else {
+			if (!isset($this->client)) {
+				$this->client = $this->createClient();
+			}
+
+			return $this->client;
 		}
 
-		return $this->client;
 	}
 
 	/**

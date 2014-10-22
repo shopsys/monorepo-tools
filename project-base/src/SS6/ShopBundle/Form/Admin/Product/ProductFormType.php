@@ -176,6 +176,7 @@ class ProductFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
+			'intention' => 'post_type',
 		));
 	}
 
