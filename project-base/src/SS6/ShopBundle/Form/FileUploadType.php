@@ -114,7 +114,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 */
 	public function onPreSubmit(FormEvent $event) {
 		$data = $event->getData();
-		if ($data['file'] instanceof UploadedFile) {
+		if (isset($data['file']) && ($data['file'] instanceof UploadedFile)) {
 			try {
 				$cachedFilename = $this->fileUpload->upload($data['file']);
 				$this->fileUpload->tryDeleteCachedFile($data['file_uploaded']);
