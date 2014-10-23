@@ -46,6 +46,14 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_4', $mailTemplateData);
 		$manager->persist($mailTemplate);
 
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('Potvrzení registrace');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'potvrzujeme Vaši registraci v eshopu.');
+
+		$mailTemplate = new MailTemplate('registration_confirm', $mailTemplateData);
+		$manager->persist($mailTemplate);
+
 		$manager->flush();
 	}
 
