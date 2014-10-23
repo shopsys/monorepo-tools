@@ -1,33 +1,5 @@
 <h2>Platby</h2>
 
-{% if paymentDetails|length %}
+<a href="{{ url('admin_payment_new') }}" class="btn btn-primary mb-1">Vytvořit platbu</a>
 
-	<a href="{{ url('admin_payment_new') }}" class="btn btn-primary mb-1">Vytvořit platbu</a>
-
-	<table class="table table-striped table-responsive">
-		<thead>
-			<tr>
-				<th>Název</th>
-				<th class="table-col table-col-15 text-right">Cena</th>
-				<th class="table-col table-col-20 text-right">Akce</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for paymentDetail in paymentDetails %}
-				<tr>
-					<td><a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}">{{ paymentDetail.payment.name }}</a></td>
-					<td class="text-right">{{ paymentDetail.basePrice.priceWithVat|price }}</td>
-					<td class="text-right">
-						<a href="{{ url('admin_payment_edit', {id: paymentDetail.payment.id}) }}" class="table-action"><i class="fa fa-pencil"></i></a>
-						<a href="{{ url('admin_payment_delete', {id: paymentDetail.payment.id}) }}" onclick="return confirm('Opravdu chcete tuto platbu smazat?')" class="table-action"><i class="fa fa-trash-o"></i></a>
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-{% else %}
-	<p>
-		Doposud nebyly vytvořeny žádné platby. Nejdříve nějakou <a href="{{ url('admin_payment_new') }}">vytvořte</a>.
-	</p>
-{% endif %}
+{{ gridView.render('@SS6Shop/Admin/Content/Payment/listGrid.html.twig') }}

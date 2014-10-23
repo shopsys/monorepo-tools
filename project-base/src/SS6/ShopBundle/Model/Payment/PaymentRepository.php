@@ -36,10 +36,21 @@ class PaymentRepository {
 	}
 
 	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getQueryBuilderForAll() {
+		$qb = $this->getPaymentRepository()->createQueryBuilder('p')
+			->where('p.deleted = :deleted')->setParameter('deleted', false)
+			->orderBy('p.position')
+			->addOrderBy('p.id');
+		return $qb;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function findAll() {
-		return $this->getPaymentRepository()->findBy(array('deleted' => false), array('name' => 'ASC'));
+		return $this->getQueryBuilderForAll()->getQuery()->getResult();
 	}
 
 	/**
@@ -89,8 +100,10 @@ class PaymentRepository {
 	 * @return \Doctrine\Common\Collections\Collection
 	 */
 	public function findAllWithTransports() {
-		$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.deleted = :deleted', Payment::class);
-		return $this->em->createQuery($dql)->setParameter('deleted', false)->getResult();
+		return $this->getQueryBuilderForAll()
+			->leftJoin(Transport::class, 't')
+			->getQuery()
+			->getResult();
 	}
 
 	/**
@@ -98,8 +111,12 @@ class PaymentRepository {
 	 * @return array
 	 */
 	public function findAllByTransport(Transport $transport) {
-		$dql = sprintf('SELECT p, t FROM %s p JOIN p.transports t WHERE t.id = :transportId', Payment::class);
-		return $this->em->createQuery($dql)->setParameter('transportId', $transport->getId())->getResult();
+		return $this->getQueryBuilderForAll()
+			->join(Transport::class, 't')
+			->andWhere('t.id = :transportId')
+			->setParameter('transportId', $transport->getId())
+			->getQuery()
+			->getResult();
 	}
 
 	/**

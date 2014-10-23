@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
