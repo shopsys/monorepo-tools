@@ -6,18 +6,36 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 
 /**
- * @ORM\Table(name="mail_templates")
+ * @ORM\Table(
+ *	name="mail_templates",
+ *	uniqueConstraints={
+ *		@ORM\UniqueConstraint(name="name_domain", columns={"name", "domain_id"})
+ *	}
+ * )
  * @ORM\Entity
  */
 class MailTemplate {
 
 	/**
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+	private $id;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="string", length=255)
-	 * @ORM\Id
 	 */
 	private $name;
+
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $domainId;
 
 	/**
 	 * @var string|null
@@ -37,8 +55,9 @@ class MailTemplate {
 	 * @param string $name
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
-	public function __construct($name, MailTemplateData $mailTemplateData = null) {
+	public function __construct($name, $domainId, MailTemplateData $mailTemplateData = null) {
 		$this->name = $name;
+		$this->domainId = $domainId;
 		$this->edit($mailTemplateData);
 	}
 
@@ -56,10 +75,24 @@ class MailTemplate {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
 	}
 
 	/**
