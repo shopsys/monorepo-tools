@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
+use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
@@ -100,11 +101,23 @@ class MailTemplateFacade {
 		return $mailTemplate;
 	}
 
-	public function getOrderStatusMailTemplatesData() {
+	/**
+	 * @return \SS6\ShopBundle\Model\Mail\AllMailTemplatesData
+	 */
+	public function getAllMailTemplatesData() {
 		$orderStatuses = $this->orderStatusRepository->findAll();
 		$mailTemplates = $this->mailTemplateRepository->getAll();
 
-		return $this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);
+		$allMailTemplatesData = new AllMailTemplatesData();
+
+		$registrationMailTemplatesData = new MailTemplateData();
+		$registrationMailTemplatesData->setFromEntity($this->mailTemplateRepository->getByName('registration_confirm'));
+		$allMailTemplatesData->setRegistrationTemplate($registrationMailTemplatesData);
+
+		$allMailTemplatesData->setOrderStatusTemplates(
+			$this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates));
+
+		return $allMailTemplatesData;
 	}
 
 }
