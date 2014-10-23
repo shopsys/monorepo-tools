@@ -66,10 +66,10 @@ class PaymentController extends Controller {
 		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
 
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+		$paymentDomains = $paymentEditFacade->getPaymentDomainsByPayment($payment);
 
 		$paymentData = new PaymentData();
-		$paymentData->setFromEntity($payment);
+		$paymentData->setFromEntity($payment, $paymentDomains);
 
 		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);

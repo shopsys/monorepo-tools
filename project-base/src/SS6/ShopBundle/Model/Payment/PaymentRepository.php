@@ -29,6 +29,13 @@ class PaymentRepository {
 	}
 
 	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getPaymentDomainRepository() {
+		return $this->em->getRepository(PaymentDomain::class);
+	}
+
+	/**
 	 * @return array
 	 */
 	public function findAll() {
@@ -102,4 +109,13 @@ class PaymentRepository {
 	public function getAllIncludingDeletedByVat(Vat $vat) {
 		return $this->getPaymentRepository()->findBy(array('vat' => $vat));
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @return \SS6\ShopBundle\Model\Payment\PaymentDomain[]
+	 */
+	public function getPaymentDomainsByPayment(Payment $payment) {
+		return $this->getPaymentDomainRepository()->findBy(array('payment' => $payment));
+	}
+
 }
