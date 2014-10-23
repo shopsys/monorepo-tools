@@ -19,7 +19,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
 			. 'O dalších stavech objednávky Vás budeme informovat.');
 
-		$mailTemplate = new MailTemplate('order_status_1', $mailTemplateData);
+		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
@@ -27,7 +27,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaši objednávku již vyřizujeme.');
 
-		$mailTemplate = new MailTemplate('order_status_2', $mailTemplateData);
+		$mailTemplate = new MailTemplate('order_status_2', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
@@ -35,7 +35,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaše objednávka je vyřízena.');
 
-		$mailTemplate = new MailTemplate('order_status_3', $mailTemplateData);
+		$mailTemplate = new MailTemplate('order_status_3', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
@@ -43,7 +43,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaše objednávka byla stornována.');
 
-		$mailTemplate = new MailTemplate('order_status_4', $mailTemplateData);
+		$mailTemplate = new MailTemplate('order_status_4', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
@@ -51,7 +51,48 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'potvrzujeme Vaši registraci v eshopu.');
 
-		$mailTemplate = new MailTemplate('registration_confirm', $mailTemplateData);
+		$mailTemplate = new MailTemplate('registration_confirm', 1, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('Děkujeme za objednávku na druhé doméně');
+		$mailTemplateData->setBody('Dobrý den,<br /><br />'
+			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
+			. 'O dalších stavech objednávky Vás budeme informovat.');
+
+		$mailTemplate = new MailTemplate('order_status_1', 2, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('Změna stavu vaší objednávky na druhé doméně');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'Vaši objednávku již vyřizujeme.');
+
+		$mailTemplate = new MailTemplate('order_status_2', 2, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('Změna stavu vaší objednávky na druhé doméně');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'Vaše objednávka je vyřízena.');
+
+		$mailTemplate = new MailTemplate('order_status_3', 2, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('Změna stavu vaší objednávky na druhé doméně');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'Vaše objednávka byla stornována.');
+
+		$mailTemplate = new MailTemplate('order_status_4', 2, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->setSubject('Potvrzení registrace na druhé doméně');
+		$mailTemplateData->setBody('Dobrý den, <br /><br />'
+			. 'potvrzujeme Vaši registraci v eshopu.');
+
+		$mailTemplate = new MailTemplate('registration_confirm', 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$manager->flush();
