@@ -18,7 +18,12 @@ class MailController extends Controller {
 		$mailTemplateFacade = $this->get('ss6.shop.mail.mail_template_facade');
 		/* @var $mailTemplateFacade \SS6\ShopBundle\Model\Mail\MailTemplateFacade */
 
-		$allMailTemplatesData = $mailTemplateFacade->getAllMailTemplatesData();
+		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
+		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
+
+		$allMailTemplatesData = $mailTemplateFacade->getAllMailTemplatesDataByDomainId($selectedDomain->getId());
 
 		$form = $this->createForm(new AllMailTemplatesFormType());
 
@@ -26,7 +31,7 @@ class MailController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$mailTemplateFacade->saveMailTemplatesData($allMailTemplatesData->getAllTemplates());
+			$mailTemplateFacade->saveMailTemplatesData($allMailTemplatesData->getAllTemplates(), $selectedDomain->getId());
 
 			$flashMessageSender->addSuccess('Nastavení šablony e-mailu bylo upraveno');
 			return $this->redirect($this->generateUrl('admin_mail_template'));

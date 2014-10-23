@@ -43,6 +43,12 @@ class MailTemplateRepository {
 		return $this->getMailTemplateRepository()->findOneBy($criteria);
 	}
 
+	public function findByNameAndDomainId($templateName, $domainId) {
+		$criteria = ['name' => $templateName, 'domainId' => $domainId];
+
+		return $this->getMailTemplateRepository()->findOneBy($criteria);
+	}
+
 	/**
 	 * @param string $templateName
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
@@ -56,6 +62,14 @@ class MailTemplateRepository {
 		}
 
 		return $mailTemplate;
+	}
+	
+	/**
+	 * @param int $domainId
+	 */
+	public function getAllByDomainId($domainId) {
+		$criteria = ['domainId' => $domainId];
+		return $this->getMailTemplateRepository()->findBy($criteria);
 	}
 
 }

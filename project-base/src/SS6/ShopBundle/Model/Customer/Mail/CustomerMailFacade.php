@@ -44,7 +44,7 @@ class CustomerMailFacade {
 	 * @throws \SS6\ShopBundle\Model\Customer\Mail\Exception\SendMailFailedException
 	 */
 	public function sendRegistrationMail(User $user) {
-		$mailTemplate = $this->mailTemplateFacade->get('registration_confirm');
+		$mailTemplate = $this->mailTemplateFacade->get('registration_confirm', $user->getDomainId());
 		$message = $this->customerMailService->getMessageByUser($user, $mailTemplate);
 
 		$failedRecipients = array();

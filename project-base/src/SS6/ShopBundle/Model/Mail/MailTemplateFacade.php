@@ -50,10 +50,11 @@ class MailTemplateFacade {
 
 	/**
 	 * @param string $templateName
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 */
-	public function get($templateName) {
-		return $this->mailTemplateRepository->getByName($templateName);
+	public function get($templateName, $domainId) {
+		return $this->mailTemplateRepository->findByNameAndDomainId($templateName, $domainId);
 	}
 
 	/**
@@ -66,14 +67,15 @@ class MailTemplateFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate[] $mailTemplatesData
+	 * @param int $domainId
 	 */
-	public function saveMailTemplatesData(array $mailTemplatesData) {
+	public function saveMailTemplatesData(array $mailTemplatesData, $domainId) {
 		foreach ($mailTemplatesData as $mailTemplateData) {
-			$mailTemplate = $this->mailTemplateRepository->findByName($mailTemplateData->getName());
+			$mailTemplate = $this->mailTemplateRepository->findByNameAndDomainId($mailTemplateData->getName(), $domainId);
 			if ($mailTemplate !== null) {
 				$mailTemplate->edit($mailTemplateData);
 			} else {
-				$mailTemplate = new MailTemplate($mailTemplateData->getName(), $mailTemplateData);
+				$mailTemplate = new MailTemplate($mailTemplateData->getName(), $domainId, $mailTemplateData);
 				$this->em->persist($mailTemplate);
 			}
 		}
@@ -102,16 +104,22 @@ class MailTemplateFacade {
 	}
 
 	/**
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\AllMailTemplatesData
 	 */
-	public function getAllMailTemplatesData() {
+	public function getAllMailTemplatesDataByDomainId($domainId) {
 		$orderStatuses = $this->orderStatusRepository->findAll();
-		$mailTemplates = $this->mailTemplateRepository->getAll();
+		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
 
 		$allMailTemplatesData = new AllMailTemplatesData();
 
 		$registrationMailTemplatesData = new MailTemplateData();
-		$registrationMailTemplatesData->setFromEntity($this->mailTemplateRepository->getByName('registration_confirm'));
+		$registrationMailTemplate = $this->mailTemplateRepository->findByNameAndDomainId('registration_confirm', $domainId);
+		if ($registrationMailTemplate !== null) {
+			$registrationMailTemplatesData->setFromEntity($registrationMailTemplate);
+		}
+		$registrationMailTemplatesData->setName('registration_confirm');
+
 		$allMailTemplatesData->setRegistrationTemplate($registrationMailTemplatesData);
 
 		$allMailTemplatesData->setOrderStatusTemplates(
