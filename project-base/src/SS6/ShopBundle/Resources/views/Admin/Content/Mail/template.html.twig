@@ -9,6 +9,8 @@
 
 		<div class="col-xs-12 col-lg-10">
 
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
 			{% macro mailTemplate(name, template) %}
 				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
