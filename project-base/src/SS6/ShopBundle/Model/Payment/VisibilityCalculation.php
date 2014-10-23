@@ -2,17 +2,26 @@
 
 namespace SS6\ShopBundle\Model\Payment;
 
-use SS6\ShopBundle\Model\Transport\VisibilityCalculation as TransportVisibilityCalculation;
+use SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 
 class VisibilityCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\VisibilityCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 	 */
-	private $transportVisibilityCalculation;
+	private $independentPaymentVisibilityCalculation;
 
-	public function __construct(TransportVisibilityCalculation $transportVisibilityCalculation) {
-		$this->transportVisibilityCalculation = $transportVisibilityCalculation;
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
+	 */
+	private $independentTransportVisibilityCalculation;
+
+	public function __construct(
+		IndependentPaymentVisibilityCalculation $independentPaymentVisibilityCalculation,
+		IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation
+	) {
+		$this->independentPaymentVisibilityCalculation = $independentPaymentVisibilityCalculation;
+		$this->independentTransportVisibilityCalculation = $independentTransportVisibilityCalculation;
 	}
 
 
@@ -37,17 +46,27 @@ class VisibilityCalculation {
 	 * @return boolean
 	 */
 	private function isVisible(Payment $payment, $domainId) {
-		if ($payment->isHidden()) {
+		if (!$this->independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId)) {
 			return false;
 		}
 
+		return $this->hasIndependentlyVisibleTransport($payment, $domainId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param int $domainId
+	 * @return boolean
+	 */
+	private function hasIndependentlyVisibleTransport(Payment $payment, $domainId) {
 		foreach ($payment->getTransports() as $transport) {
 			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-			if (!$transport->isHidden() && $this->transportVisibilityCalculation->isOnDomain($transport, $domainId)) {
+			if ($this->independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId)) {
 				return true;
 			}
 		}
 
 		return false;
 	}
+
 }

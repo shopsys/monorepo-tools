@@ -21,15 +21,15 @@ parameters:
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
 
 services:
-  
+
   doctrine.orm.default_entity_manager:
     class: %doctrine.orm.entity_manager.class%
     factory_class: %doctrine.orm.entity_manager.class%
     factory_method: create
-    arguments: 
+    arguments:
       - @doctrine.dbal.default_connection
       - @doctrine.orm.default_configuration
-  
+
   doctrine.orm.entity_manager.abstract:
     synthetic: true
 
@@ -53,10 +53,10 @@ services:
 
   ss6.shop.admin_navigation.menu_loader:
     class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader
-    
+
   ss6.shop.administrator.administrator_grid_facade:
     class: SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
-    
+
   ss6.shop.administrator.administrator_grid_service:
     class: SS6\ShopBundle\Model\Administrator\AdministratorGridService
 
@@ -70,12 +70,12 @@ services:
     class: SS6\ShopBundle\Model\Cart\Cart
     factory_service: ss6.shop.cart.cart_factory
     factory_method: get
-    arguments: 
+    arguments:
       - @ss6.shop.customer.customer_identifier
-      
+
   ss6.shop.cart.cart_facade:
     class: SS6\ShopBundle\Model\Cart\CartFacade
-    
+
   ss6.shop.cart.cart_factory:
     class: SS6\ShopBundle\Model\Cart\CartFactory
 
@@ -108,7 +108,7 @@ services:
 
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Model\Csv\CsvReader
-    
+
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
@@ -167,7 +167,7 @@ services:
   ss6.shop.file_upload:
     class: SS6\ShopBundle\Model\FileUpload\FileUpload
     arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
-    
+
   ss6.shop.file_upload.doctrine_listener:
     class: SS6\ShopBundle\Model\FileUpload\DoctrineListener
     tags:
@@ -175,7 +175,7 @@ services:
       - { name: doctrine.event_listener, event: postUpdate }
       - { name: doctrine.event_listener, event: prePersist }
       - { name: doctrine.event_listener, event: preUpdate }
-      
+
   ss6.shop.file_upload.file_naming_convention:
     class: SS6\ShopBundle\Model\FileUpload\FileNamingConvention
 
@@ -218,7 +218,7 @@ services:
 
   ss6.shop.image.image_config_loader:
     class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
-    
+
   ss6.shop.image.images_entity:
     class: SS6\ShopBundle\Model\Image\ImagesEntity
     arguments: [%ss6.image_dir%]
@@ -233,7 +233,7 @@ services:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
     scope: request
-    
+
   ss6.shop.order.item.price_calculation:
     class: SS6\ShopBundle\Model\Order\Item\PriceCalculation
 
@@ -242,11 +242,11 @@ services:
 
   ss6.shop.order.order_flow_facade:
     class: SS6\ShopBundle\Model\Order\OrderFlowFacade
-  
+
   ss6.shop.order.order_mail_facade:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
     arguments: [@mailer]
-    
+
   ss6.shop.order.order_mail_service:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailService
     arguments: ["%main_email%"]
@@ -262,7 +262,7 @@ services:
 
   ss6.shop.order.order_service:
     class: SS6\ShopBundle\Model\Order\OrderService
-  
+
   ss6.shop.order.order_status_facade:
     class: SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
 
@@ -271,10 +271,10 @@ services:
 
   ss6.shop.order.order_status_repository:
     class: SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
-    
+
   ss6.shop.order.order_status_service:
     class: SS6\ShopBundle\Model\Order\Status\OrderStatusService
-  
+
   ss6.shop.order.order_transport_and_payment_watcher_service:
     class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
     arguments:
@@ -288,6 +288,9 @@ services:
 
   ss6.shop.order.status.grid.order_status_grid_factory:
     class: SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory
+
+  ss6.shop.payment.independent_payment_visibility_calculation:
+    class: SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 
   ss6.shop.payment.payment_detail_factory:
     class: SS6\ShopBundle\Model\Payment\Detail\Factory
@@ -337,7 +340,7 @@ services:
 
   ss6.shop.pricing.pricing_setting_facade:
     class: SS6\ShopBundle\Model\Pricing\PricingSettingFacade
-    
+
   ss6.shop.pricing.rounding:
     class: SS6\ShopBundle\Model\Pricing\Rounding
 
@@ -349,16 +352,16 @@ services:
 
   ss6.shop.pricing.vat.vat_inline_edit:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit
-    
+
   ss6.shop.pricing.vat.vat_repository:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatRepository
-    
+
   ss6.shop.pricing.vat.vat_service:
     class: SS6\ShopBundle\Model\Pricing\Vat\VatService
-    
+
   ss6.shop.product.availability.availability_inline_edit:
     class: SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit
-    
+
   ss6.shop.product.availability.availability_facade:
     class: SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade
 
@@ -373,13 +376,13 @@ services:
 
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
-    
+
   ss6.shop.product.list.product_list_admin_repository:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
-    
+
   ss6.shop.product.parameter.parameter_inline_edit:
     class: SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit
-    
+
   ss6.shop.product.parameter.parameter_facade:
     class: SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
 
@@ -406,18 +409,18 @@ services:
 
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
-  
+
   ss6.shop.product.product_facade:
     class: SS6\ShopBundle\Model\Product\ProductFacade
-  
+
   ss6.shop.product.product_repository:
     class: SS6\ShopBundle\Model\Product\ProductRepository
-    
+
   ss6.shop.product.product_visibility_facade:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityFacade
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-    
+
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
 
@@ -440,7 +443,7 @@ services:
     class: SS6\ShopBundle\Model\Security\LoginListener
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
-    
+
   ss6.shop.security.login_service:
     class: SS6\ShopBundle\Model\Security\LoginService
 
@@ -449,12 +452,15 @@ services:
 
   ss6.shop.setting:
     class: SS6\ShopBundle\Model\Setting\Setting
-    
+
   ss6.shop.setting.setting_value_repository:
     class: SS6\ShopBundle\Model\Setting\SettingValueRepository
 
   ss6.shop.transport.grid.drag_and_drop_ordering_service:
     class: SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService
+
+  ss6.shop.transport.independent_transport_visibility_calculation:
+    class: SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 
   ss6.shop.transport.price_calculation:
     class: SS6\ShopBundle\Model\Transport\PriceCalculation
