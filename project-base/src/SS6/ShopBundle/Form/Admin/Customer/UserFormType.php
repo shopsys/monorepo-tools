@@ -89,6 +89,7 @@ class UserFormType extends AbstractType {
 			}
 
 			$builder
+				->add('sendRegistrationMail', 'checkbox', array('required' => false))
 				->add('domainId', 'choice', array(
 					'required' => true,
 					'choices' => $domainsNamesById,

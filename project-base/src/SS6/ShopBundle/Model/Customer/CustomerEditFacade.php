@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerEditService;
+use SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderRepository;
@@ -42,6 +43,11 @@ class CustomerEditFacade {
 	private $customerEditService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade
+	 */
+	private $customerMailFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
@@ -55,7 +61,8 @@ class CustomerEditFacade {
 		UserRepository $userRepository,
 		OrderService $orderService,
 		RegistrationService $registrationService,
-		CustomerEditService $customerEditService
+		CustomerEditService $customerEditService,
+		CustomerMailFacade $customerMailFacade
 	) {
 		$this->em = $em;
 		$this->orderRepository = $orderRepository;
@@ -63,6 +70,7 @@ class CustomerEditFacade {
 		$this->orderService = $orderService;
 		$this->registrationService = $registrationService;
 		$this->customerEditService = $customerEditService;
+		$this->customerMailFacade = $customerMailFacade;
 	}
 
 	/**
@@ -92,6 +100,8 @@ class CustomerEditFacade {
 		$this->em->persist($billingAddress);
 		$this->em->persist($user);
 		$this->em->flush();
+
+		$this->customerMailFacade->sendRegistrationMail($user);
 
 		return $user;
 	}
@@ -123,6 +133,10 @@ class CustomerEditFacade {
 		$this->em->persist($user);
 
 		$this->em->flush();
+
+		if ($customerData->getUserData()->getSendRegistrationMail()) {
+			$this->customerMailFacade->sendRegistrationMail($user);
+		}
 
 		return $user;
 	}

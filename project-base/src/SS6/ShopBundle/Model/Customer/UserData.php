@@ -30,18 +30,31 @@ class UserData {
 	private $domainId;
 
 	/**
+	 * @var bool
+	 */
+	private $sendRegistrationMail;
+
+	/**
 	 * @param int $domainId
 	 * @param string|null $firstName
 	 * @param string|null $lastName
 	 * @param string|null $email
 	 * @param string|null $password
 	 */
-	public function __construct($domainId = 1, $firstName = null, $lastName = null, $email = null, $password = null) {
+	public function __construct(
+		$domainId = 1,
+		$firstName = null,
+		$lastName = null,
+		$email = null,
+		$password = null,
+		$sendRegistrationMail = false
+	) {
 		$this->domainId = $domainId;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
 		$this->password = $password;
+		$this->sendRegistrationMail = $sendRegistrationMail;
 	}
 
 	/**
@@ -114,6 +127,15 @@ class UserData {
 		$this->password = $password;
 	}
 
+	public function getSendRegistrationMail() {
+		return $this->sendRegistrationMail;
+	}
+
+	public function setSendRegistrationMail($sendRegistrationMail) {
+		$this->sendRegistrationMail = $sendRegistrationMail;
+	}
+
+	
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
