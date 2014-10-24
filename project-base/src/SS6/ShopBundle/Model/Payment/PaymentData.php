@@ -27,6 +27,11 @@ class PaymentData {
 	private $description;
 
 	/**
+	 * @var array
+	 */
+	private $domains;
+
+	/**
 	 * @var integer
 	 */
 	private $hidden;
@@ -47,18 +52,21 @@ class PaymentData {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string|null $description
 	 * @param boolean $hidden
+	 * @param array $domains
 	 */
 	public function __construct(
 		$name = null,
 		$price = null,
 		Vat $vat = null,
 		$description = null,
-		$hidden = false
+		$hidden = false,
+		$domains = array()
 	) {
 		$this->name = $name;
 		$this->price = $price;
 		$this->vat = $vat;
 		$this->description = $description;
+		$this->domains = $domains;
 		$this->hidden = $hidden;
 		$this->transports = array();
 	}
@@ -89,6 +97,13 @@ class PaymentData {
 	 */
 	public function getDescription() {
 		return $this->description;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getDomains() {
+		return $this->domains;
 	}
 
 	/**
@@ -141,6 +156,13 @@ class PaymentData {
 	}
 
 	/**
+	 * @param array $domains
+	 */
+	public function setDomains($domains) {
+		$this->domains = $domains;
+	}
+
+	/**
 	 * @param array $transports
 	 */
 	public function setTransports($transports) {
@@ -163,13 +185,20 @@ class PaymentData {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentDomain[] $paymentDomains
 	 */
-	public function setFromEntity(Payment $payment) {
+	public function setFromEntity(Payment $payment, array $paymentDomains) {
 		$this->setName($payment->getName());
 		$this->setPrice($payment->getPrice());
 		$this->setVat($payment->getVat());
 		$this->setDescription($payment->getDescription());
 		$this->setHidden($payment->isHidden());
 		$this->setTransports($payment->getTransports()->toArray());
+
+		$domains = array();
+		foreach ($paymentDomains as $paymentDomain) {
+			$domains[] = $paymentDomain->getDomainId();
+		}
+		$this->setDomains($domains);
 	}
 }

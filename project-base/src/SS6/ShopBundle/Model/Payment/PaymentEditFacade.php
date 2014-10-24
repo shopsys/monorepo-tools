@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\Model\Payment\PaymentDomain;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Payment\VisibilityCalculation;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
@@ -59,7 +60,10 @@ class PaymentEditFacade {
 	public function create(PaymentData $paymentData) {
 		$payment = new Payment($paymentData);
 		$this->em->persist($payment);
+		$this->em->beginTransaction();
 		$this->setAddionalDataAndFlush($payment, $paymentData);
+		$this->createPaymentDomains($payment, $paymentData->getDomains());
+		$this->em->commit();
 
 		return $payment;
 	}
@@ -70,7 +74,11 @@ class PaymentEditFacade {
 	 */
 	public function edit(Payment $payment, PaymentData $paymentData) {
 		$payment->edit($paymentData);
+		$this->em->beginTransaction();
 		$this->setAddionalDataAndFlush($payment, $paymentData);
+		$this->deletePaymentDomainsByPayment($payment);
+		$this->createPaymentDomains($payment, $paymentData->getDomains());
+		$this->em->commit();
 	}
 
 	/**
@@ -90,12 +98,23 @@ class PaymentEditFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @return \SS6\ShopBundle\Model\Payment\PaymentDomain[]
+	 */
+	public function getPaymentDomainsByPayment(Payment $payment) {
+		return $this->paymentRepository->getPaymentDomainsByPayment($payment);
+	}
+
+	/**
 	 * @param int $id
 	 */
 	public function deleteById($id) {
 		$payment = $this->getById($id);
 		$payment->markAsDeleted();
+		$this->em->beginTransaction();
+		$this->deletePaymentDomainsByPayment($payment);
 		$this->em->flush();
+		$this->em->commit();
 	}
 
 	/**
@@ -129,4 +148,28 @@ class PaymentEditFacade {
 		}
 		$this->em->flush();
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param array $domainIds
+	 */
+	private function createPaymentDomains(Payment $payment, array $domainIds) {
+		foreach ($domainIds as $domainId) {
+			$paymentDomain = new PaymentDomain($payment, $domainId);
+			$this->em->persist($paymentDomain);
+		}
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 */
+	private function deletePaymentDomainsByPayment(Payment $payment) {
+		$paymentDomains = $this->getPaymentDomainsByPayment($payment);
+		foreach ($paymentDomains as $paymentDomain) {
+			$this->em->remove($paymentDomain);
+		}
+		$this->em->flush();
+	}
+
 }

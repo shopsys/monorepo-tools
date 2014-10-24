@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -15,41 +14,49 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		// @codingStandardsIgnoreStart
-		$this->createPayment($manager, 'payment_card', 'Kreditní kartou', 0, VatDataFixture::VAT_ZERO, array('transport_personal', 'transport_ppl'), 'Rychle, levně a spolehlivě!');
-		$this->createPayment($manager, 'payment_cod', 'Dobírka', 49.90, VatDataFixture::VAT_HIGH, array('transport_cp'), null);
-		$this->createPayment($manager, 'payment_cash', 'Hotově', 0, VatDataFixture::VAT_HIGH, array('transport_personal'), null);
-		// @codingStandardsIgnoreStop
+		$paymentData = new PaymentData();
+		$paymentData->setName('Kreditní kartou');
+		$paymentData->setPrice(99.95);
+		$paymentData->setDescription('Rychle, levně a spolehlivě!');
+		$paymentData->setVat($this->getReference(VatDataFixture::VAT_ZERO));
+		$paymentData->setDomains(array(1));
+		$paymentData->setHidden(false);
+		$this->createPayment('payment_card', $paymentData, array('transport_personal', 'transport_ppl'));
+
+		$paymentData->setName('Dobírka');
+		$paymentData->setPrice(49.90);
+		$paymentData->setDescription(null);
+		$paymentData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
+		$this->createPayment('payment_cod', $paymentData, array('transport_cp'));
+
+		$paymentData->setName('Hotově');
+		$paymentData->setPrice(0);
+		$paymentData->setDescription(null);
+		$paymentData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
+		$this->createPayment('payment_cash', $paymentData, array('transport_personal'));
+
 		$manager->flush();
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param string $name
-	 * @param string $price
+	 * @param string $referenceName
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 * @param array $transportsReferenceNames
-	 * @param string|null $description
-	 * @param boolean $hide
 	 */
 	private function createPayment(
-		ObjectManager $manager,
 		$referenceName,
-		$name,
-		$price,
-		$vatReferenceName,
-		array $transportsReferenceNames,
-		$description,
-		$hide = false
+		PaymentData $paymentData,
+		array $transportsReferenceNames
 	) {
-		$vat = $this->getReference($vatReferenceName);
+		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
+		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
-		$payment = new Payment(new PaymentData($name, $price, $vat, $description, $hide));
+		$payment = $paymentEditFacade->create($paymentData);
 
 		foreach ($transportsReferenceNames as $transportsReferenceName) {
 			$payment->addTransport($this->getReference($transportsReferenceName));
 		}
 
-		$manager->persist($payment);
 		$this->addReference($referenceName, $payment);
 	}
 

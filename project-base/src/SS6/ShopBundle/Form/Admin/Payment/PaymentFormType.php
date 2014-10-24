@@ -60,6 +60,11 @@ class PaymentFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 			))
+			->add('domains', 'domains', array(
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Musíte vybrat alespoň jednu doménu')),
+				),
+			))
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('transports', 'choice', array(
 				'choice_list' => new ObjectChoiceList($this->allTransports, 'name', array(), null, 'id'),

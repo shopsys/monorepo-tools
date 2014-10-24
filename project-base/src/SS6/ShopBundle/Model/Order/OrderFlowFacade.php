@@ -41,7 +41,7 @@ class OrderFlowFacade {
 
 	public function resetOrderForm() {
 		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
-		$transports = $this->transportEditFacade->getVisible($payments);
+		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
 		$this->orderFlow->setFormTypesData($transports, $payments);
 		$this->orderFlow->reset();
 	}

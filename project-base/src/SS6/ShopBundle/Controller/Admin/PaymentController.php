@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,10 +67,10 @@ class PaymentController extends Controller {
 		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
 
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+		$paymentDomains = $paymentEditFacade->getPaymentDomainsByPayment($payment);
 
 		$paymentData = new PaymentData();
-		$paymentData->setFromEntity($payment);
+		$paymentData->setFromEntity($payment, $paymentDomains);
 
 		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
 		$form->handleRequest($request);
@@ -123,12 +124,34 @@ class PaymentController extends Controller {
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
 		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$paymentOrderingService = $this->get('ss6.shop.payment.grid.drag_and_drop_ordering_service');
+		/* @var $paymentOrderingService \SS6\ShopBundle\Model\Payment\Grid\DragAndDropOrderingService */
 
-		$payments = $paymentRepository->findAll();
-		$paymentDetails = $paymentDetailFactory->createDetailsForPayments($payments);
+		$queryBuilder = $paymentRepository->getQueryBuilderForAll();
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
+			$queryBuilder, 'p.id',
+			function ($row) use ($paymentRepository, $paymentDetailFactory) {
+				$payment = $paymentRepository->findById($row['p']['id']);
+				$row['paymentDetail'] = $paymentDetailFactory->createDetailForPayment($payment);
+				return $row;
+			}
+		);
+
+		$grid = $gridFactory->create('paymentList', $dataSource);
+		$grid->enableDragAndDrop($paymentOrderingService);
+
+		$grid->addColumn('name', 'p.name', 'Název');
+		$grid->addColumn('price', 'paymentDetail', 'Cena');
+
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_payment_edit', array('id' => 'p.id'));
+		$grid->addActionColumn('delete', 'Smazat', 'admin_payment_delete', array('id' => 'p.id'))
+			->setConfirmMessage('Opravdu chcete odstranit tuto platbu?');
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
-			'paymentDetails' => $paymentDetails,
+			'gridView' => $grid->createView(),
 		));
 	}
 

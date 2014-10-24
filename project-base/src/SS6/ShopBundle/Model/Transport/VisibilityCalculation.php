@@ -2,17 +2,26 @@
 
 namespace SS6\ShopBundle\Model\Transport;
 
-use SS6\ShopBundle\Model\Transport\TransportRepository;
+use SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 
 class VisibilityCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 * @var \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 	 */
-	private $transportRepository;
+	private $independentTransportVisibilityCalculation;
 
-	public function __construct(TransportRepository $transportRepository) {
-		$this->transportRepository = $transportRepository;
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
+	 */
+	private $independentPaymentVisibilityCalculation;
+
+	public function __construct(
+		IndependentTransportVisibilityCalculation $independentTransportVisibilityCalculation,
+		IndependentPaymentVisibilityCalculation $independentPaymentVisibilityCalculation
+	) {
+		$this->independentTransportVisibilityCalculation = $independentTransportVisibilityCalculation;
+		$this->independentPaymentVisibilityCalculation = $independentPaymentVisibilityCalculation;
 	}
 
 	/**
@@ -22,25 +31,29 @@ class VisibilityCalculation {
 	 * @return boolean
 	 */
 	public function isVisible(Transport $transport, array $allPaymentsOnDomain, $domainId) {
-		if (!$transport->isHidden() && $this->existsNotHiddenPaymentWithTransport($allPaymentsOnDomain, $transport)) {
-			return $this->isOnDomain($transport, $domainId);
-		} else {
+		if (!$this->independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId)) {
 			return false;
 		}
+
+		return $this->existsIndependentlyVisiblePaymentWithTransport($allPaymentsOnDomain, $transport, $domainId);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param int $domainId
 	 * @return boolean
 	 */
-	private function existsNotHiddenPaymentWithTransport(array $payments, Transport $transport) {
+	private function existsIndependentlyVisiblePaymentWithTransport(array $payments, Transport $transport, $domainId) {
 		foreach ($payments as $payment) {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
-			if (!$payment->isHidden() && $payment->getTransports()->contains($transport)) {
-				return true;
+			if ($this->independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId)) {
+				if ($payment->getTransports()->contains($transport)) {
+					return true;
+				}
 			}
 		}
+
 		return false;
 	}
 
@@ -60,22 +73,6 @@ class VisibilityCalculation {
 		}
 
 		return $visibleTransports;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param int $domainId
-	 * @return boolean
-	 */
-	public function isOnDomain(Transport $transport, $domainId) {
-		$transportDomains = $this->transportRepository->getTransportDomainsByTransport($transport);
-		foreach ($transportDomains as $transportDomain) {
-			if ($transportDomain->getDomainId() === $domainId) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 }
