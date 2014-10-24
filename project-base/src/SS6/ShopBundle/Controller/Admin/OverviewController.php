@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class OverviewController extends Controller {
 
 	/**
-	 * @Route("/overview")
+	 * @Route("/overview/")
 	 */
 	public function listAction() {
 		$domain = $this->get('ss6.shop.domain');
