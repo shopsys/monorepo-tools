@@ -134,7 +134,7 @@ class CustomerEditFacade {
 
 		$this->em->flush();
 
-		if ($customerData->getUserData()->getSendRegistrationMail()) {
+		if ($customerData->getSendRegistrationMail()) {
 			$this->customerMailFacade->sendRegistrationMail($user);
 		}
 

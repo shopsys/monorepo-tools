@@ -19,10 +19,16 @@ class CustomerData {
 	 */
 	private $deliveryAddressData;
 
+	/**
+	 * @var bool
+	 */
+	private $sendRegistrationMail;
+
 	public function __construct(
 		UserData $userData = null,
 		BillingAddressData $billingAddressData = null,
-		DeliveryAddressData $deliveryAddressData = null
+		DeliveryAddressData $deliveryAddressData = null,
+		$sendRegistrationMail = false
 	) {
 		if ($userData !== null) {
 			$this->userData = $userData;
@@ -39,6 +45,7 @@ class CustomerData {
 		} else {
 			$this->deliveryAddressData = new DeliveryAddressData();
 		}
+		$this->sendRegistrationMail = $sendRegistrationMail;
 	}
 
 	/**
@@ -81,6 +88,20 @@ class CustomerData {
 	 */
 	public function setDeliveryAddress(DeliveryAddressData $deliveryAddress = null) {
 		$this->deliveryAddressData = $deliveryAddress;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSendRegistrationMail() {
+		return $this->sendRegistrationMail;
+	}
+
+	/**
+	 * @param bool $sendRegistrationMail
+	 */
+	public function setSendRegistrationMail($sendRegistrationMail) {
+		$this->sendRegistrationMail = $sendRegistrationMail;
 	}
 
 	/**
