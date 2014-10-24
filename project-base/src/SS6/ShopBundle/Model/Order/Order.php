@@ -285,8 +285,6 @@ class Order {
 		OrderStatus $orderStatus,
 		User $user = null
 	) {
-		$this->transport = $orderData->getTransport();
-		$this->payment = $orderData->getPayment();
 		$this->firstName = $orderData->getFirstName();
 		$this->lastName = $orderData->getLastName();
 		$this->email = $orderData->getEmail();
