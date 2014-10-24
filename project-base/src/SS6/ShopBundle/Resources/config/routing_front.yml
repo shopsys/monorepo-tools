@@ -11,11 +11,11 @@ front_cart:
 front_cart_add_product:
   pattern: /cart/addProduct/
   defaults: { _controller: SS6ShopBundle:Front\Cart:addProduct }
-  
+
 front_cart_box:
   pattern: /cart/box/
   defaults: { _controller: SS6ShopBundle:Front\Cart:box }
-  
+
 front_cart_delete:
   pattern: /cart/delete/{cartItemId}/
   defaults: { _controller: SS6ShopBundle:Front\Cart:delete }
@@ -25,6 +25,10 @@ front_cart_delete:
 front_customer_edit:
   pattern: /customer/edit/
   defaults: { _controller: SS6ShopBundle:Front\Customer:edit }
+
+front_customer_orders:
+  pattern: /customer/orders/
+  defaults: { _controller: SS6ShopBundle:Front\Customer:orders }
 
 front_homepage:
   pattern: /
@@ -40,12 +44,12 @@ front_login_check:
 
 front_logout:
   pattern: /logout/
-  # controller's action is unnecessary, because firewall processes whole request 
+  # controller's action is unnecessary, because firewall processes whole request
 
 front_order_index:
   pattern: /objednavka/
   defaults: { _controller: SS6ShopBundle:Front\Order:index }
-  
+
 front_order_save_form:
   pattern: /order/save-form/
   defaults: { _controller: SS6ShopBundle:Front\Order:saveOrderForm }
@@ -60,7 +64,7 @@ front_product_detail:
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }
   requirements:
     id: \d+
-  
+
 front_product_list:
   pattern: /product/list/
   defaults: { _controller: SS6ShopBundle:Front\Product:list }

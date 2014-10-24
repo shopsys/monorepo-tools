@@ -1,0 +1,39 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Mé objednávky{% endblock %}
+{% block h1 %}Mé objednávky{% endblock %}
+	{% block content %}
+		<div class="row">
+			<div class="col-xs-12 col-lg-10">
+				{% if orders|length == 0 %}
+					Dosud nemáte žádnou objednávku.
+				{% else %}
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<tr>
+								<th>Číslo objednávky</th>
+								<th>Datum vytvoření</th>
+								<th>Aktuální stav</th>
+								<th>Počet položek</th>
+								<th>Doprava</th>
+								<th>Platba</th>
+								<th>Celková cena s DPH</th>
+							</tr>
+								{% for order in orders %}
+									<tr>
+										<td>{{ order.number }}</td>
+										<td>{{ order.createdAt|date('d-m-Y') }}</td>
+										<td>{{ order.statusName }}</td>
+										<td>{{ order.itemsCount }}</td>
+										<td>{{ order.transportName }}</td>
+										<td>{{ order.paymentName }}</td>
+										<td class = "text-right">{{ order.totalPriceWithVat|price }}</td>
+									</tr>
+								{% endfor %}
+
+						</table>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endblock %}
