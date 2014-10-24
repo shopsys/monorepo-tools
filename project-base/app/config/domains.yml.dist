@@ -6,5 +6,5 @@ domains:
 
   - id: 2
     domain: localhostsk
-    locale: sk
-    templates_directory: sk
+    locale: en
+    templates_directory: en

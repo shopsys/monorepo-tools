@@ -27,7 +27,7 @@
 			{% if productDetail.product.catnum %}
 				<dl class="list-params">
 					<dt class="list-params__title">
-						Katalogové číslo:
+						{{ 'Katalogové číslo'|trans }}:
 					</dt>
 					<dd class="list-params__definition">
 						{{ productDetail.product.catnum }}
@@ -38,7 +38,7 @@
 			{% if productDetail.product.availability %}
 				<dl class="list-params">
 					<dt class="list-params__title">
-						Dostupnost:
+						{{ 'Dostupnost'|trans }}:
 					</dt>
 					<dd class="list-params__definition">
 						{{ productDetail.product.availability.name }}
@@ -49,7 +49,7 @@
 			{% if productDetail.product.partno %}
 				<dl class="list-params">
 					<dt class="list-params__title">
-						Výrobní číslo:
+						{{ 'Výrobní číslo'|trans }}:
 					</dt>
 					<dd class="list-params__definition">
 						{{ productDetail.product.partno }}
@@ -60,7 +60,7 @@
 			{% if productDetail.product.ean %}
 				<dl class="list-params">
 					<dt class="list-params__title">
-						EAN:
+						{{ 'EAN'|trans }}:
 					</dt>
 					<dd class="list-params__definition">
 						{{ productDetail.product.ean }}
@@ -72,7 +72,7 @@
 				<dl class="list-params-side">
 					<dt class="list-params-side__title">
 						<strong>
-							Cena s DPH:
+							{{ 'Cena s DPH'|trans }}:
 						</strong>
 					</dt>
 					<dd class="list-params-side__definition">
@@ -84,7 +84,7 @@
 				<dl class="list-params-side mb-1">
 					<dt class="list-params-side__title">
 						<strong>
-							Cena bez DPH:
+							{{ 'Cena bez DPH'|trans }}:
 						</strong>
 					</dt>
 					<dd class="list-params-side__definition">
@@ -98,7 +98,7 @@
 
 			{% if productDetail.parameters %}
 				<div class="mb-2">
-					<h3>Technické parametry:</h3>
+					<h3>{{ 'Technické parametry'|trans }}:</h3>
 					{% for productParameterValue in productDetail.parameters %}
 						<dl class="list-params">
 							<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
