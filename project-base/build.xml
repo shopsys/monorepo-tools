@@ -20,6 +20,16 @@
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 
+	<if>
+		<os family="windows" />
+		<then>
+			<property name="dev.null" value="NUL"/>
+		</then>
+		<else>
+			<property name="dev.null" value="/dev/null"/>
+		</else>
+	</if>
+
 	<property file="${path.build.properties.local}" override="true"/>
 
 	<target name="build" depends="composer,npm,clean,img-dirs,assetic,grunt,db-rebuild"/>
@@ -32,10 +42,9 @@
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo,products-visibility"/>
 
 	<target name="assetic">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
 			<arg value="app/console" />
 			<arg value="assetic:dump" />
-			<arg value="-q" />
 		</exec>
 	</target>
 
