@@ -81,6 +81,13 @@ class MailTemplateFacade {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 */
+	public function getAllIndexedById() {
+		return $this->orderStatusRepository->getAllIndexedById();
+	}
+
+	/**
 	 * @param type $name
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate

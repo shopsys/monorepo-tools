@@ -19,8 +19,8 @@ class ProductController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$productRepository = $this->get('ss6.shop.product.product_repository');
-		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
@@ -30,7 +30,7 @@ class ProductController extends Controller {
 		$productDataFactory = $this->get('ss6.shop.product.product_data_factory');
 		/* @var $productDataFactory \SS6\ShopBundle\Model\Product\ProductDataFactory */
 
-		$product = $productRepository->getById($id);
+		$product = $productEditFacade->getById($id);
 
 		$form = $this->createForm($productFormTypeFactory->create());
 		$productData = $productDataFactory->createFromProduct($product);
@@ -39,9 +39,7 @@ class ProductController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-			$product = $productEditFacade->edit($id, $form->getData());
+			$productEditFacade->edit($id, $form->getData());
 
 			$flashMessageSender->addSuccessTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', array(
 				'name' => $product->getName(),
@@ -157,11 +155,11 @@ class ProductController extends Controller {
 	public function deleteAction($id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$productRepository = $this->get('ss6.shop.product.product_repository');
-		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
+		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$productName = $productRepository->getById($id)->getName();
-		$this->get('ss6.shop.product.product_edit_facade')->delete($id);
+		$productName = $productEditFacade->getById($id)->getName();
+		$productEditFacade->delete($id);
 
 		$flashMessageSender->addSuccessTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $productName,

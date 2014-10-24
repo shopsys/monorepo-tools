@@ -41,6 +41,14 @@ class SliderItemFacade {
 	}
 
 	/**
+	 * @param int $sliderItemId
+	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
+	 */
+	public function getById($sliderItemId) {
+		return $this->sliderItemRepository->getById($sliderItemId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
 	 */

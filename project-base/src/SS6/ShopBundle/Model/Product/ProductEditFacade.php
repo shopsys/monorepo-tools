@@ -49,6 +49,14 @@ class ProductEditFacade {
 	}
 
 	/**
+	 * @param int $productId
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getById($productId) {
+		return $this->productRepository->getById($productId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */

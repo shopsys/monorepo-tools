@@ -10,15 +10,10 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function detailAction($id) {
-		$productRepository = $this->get('ss6.shop.product.product_repository');
-		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
-		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
-		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
+		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
 
-		$product = $productRepository->getVisibleByIdAndDomainId($id, $domain->getId());
-		$productDetail = $productDetailFactory->getDetailForProduct($product);
+		$productDetail = $productOnCurrentDomainFacade->getVisibleProductDetailById($id);
 
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(
 			'productDetail' => $productDetail,
@@ -26,15 +21,10 @@ class ProductController extends Controller {
 	}
 
 	public function listAction() {
-		$productFacade = $this->get('ss6.shop.product.product_facade');
-		/* @var $productFacade \SS6\ShopBundle\Model\Product\ProductFacade */
-		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
-		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
+		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
 
-		$products = $productFacade->getAllVisibleByDomainId($domain->getId());
-		$productDetails = $productDetailFactory->getDetailsForProducts($products);
+		$productDetails = $productOnCurrentDomainFacade->getAllVisibleProductDetails();
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
 			'productDetails' => $productDetails,

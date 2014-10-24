@@ -21,10 +21,10 @@ class ArticleController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$articleRepository = $this->get('ss6.shop.article.article_repository');
-		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
+		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
-		$article = $articleRepository->getById($id);
+		$article = $articleEditFacade->getById($id);
 		$form = $this->createForm(new ArticleFormType());
 		$articleData = new ArticleData();
 
@@ -36,11 +36,7 @@ class ArticleController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$articleData = $form->getData();
-
-			$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
-			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
-			$article = $articleEditFacade->edit($id, $articleData);
+			$articleEditFacade->edit($id, $articleData);
 
 			$flashMessageSender->addSuccessTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),
@@ -150,12 +146,11 @@ class ArticleController extends Controller {
 	public function deleteAction($id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
-		$articleRepository = $this->get('ss6.shop.article.article_repository');
-		/* @var $articleRepository \SS6\ShopBundle\Model\Article\ArticleRepository */
-
-		$fullName = $articleRepository->getById($id)->getName();
-		$this->get('ss6.shop.article.article_edit_facade')->delete($id);
+		$fullName = $articleEditFacade->getById($id)->getName();
+		$articleEditFacade->delete($id);
 
 		$flashMessageSender->addSuccessTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,

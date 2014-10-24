@@ -66,6 +66,14 @@ class CustomerEditFacade {
 	}
 
 	/**
+	 * @param int $userId
+	 * @return \SS6\ShopBundle\Model\Customer\User
+	 */
+	public function getUserById($userId) {
+		return $this->userRepository->getUserById($userId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
