@@ -413,9 +413,6 @@ services:
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
 
-  ss6.shop.product.product_facade:
-    class: SS6\ShopBundle\Model\Product\ProductFacade
-
   ss6.shop.product.product_on_current_domain_facade:
     class: SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
 

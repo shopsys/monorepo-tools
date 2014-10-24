@@ -20,7 +20,7 @@ class ProductController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');

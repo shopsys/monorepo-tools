@@ -189,7 +189,7 @@ class CustomerController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
-				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
+		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
 		$fullName = $customerEditFacade->getUserById($id)->getFullName();
 		$customerEditFacade->delete($id);
