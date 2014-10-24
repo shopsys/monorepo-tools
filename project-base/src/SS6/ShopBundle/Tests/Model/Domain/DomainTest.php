@@ -11,8 +11,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetIdNotSet() {
 		$domainConfigs = array(
-			new DomainConfig(1, 'example.com', 'design1'),
-			new DomainConfig(2, 'example.org', 'design2'),
+			new DomainConfig(1, 'example.com', 'cs', 'design1'),
+			new DomainConfig(2, 'example.org', 'en', 'design2'),
 		);
 
 		$domain = new Domain($domainConfigs);
@@ -22,8 +22,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testSwitchDomainByRequest() {
 		$domainConfigs = array(
-			new DomainConfig(1, 'example.com', 'design1'),
-			new DomainConfig(2, 'example.org', 'design2'),
+			new DomainConfig(1, 'example.com', 'cs', 'design1'),
+			new DomainConfig(2, 'example.org', 'en', 'design2'),
 		);
 
 		$domain = new Domain($domainConfigs);
@@ -35,13 +35,14 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 		$domain->switchDomainByRequest($requestMock);
 		$this->assertEquals(1, $domain->getId());
+		$this->assertEquals('cs', $domain->getLocale());
 		$this->assertEquals('design1', $domain->getTemplatesDirectory());
 	}
 
 	public function testGetAll() {
 		$domainConfigs = array(
-			new DomainConfig(1, 'example.com', 'design1'),
-			new DomainConfig(2, 'example.org', 'design2'),
+			new DomainConfig(1, 'example.com', 'cs', 'design1'),
+			new DomainConfig(2, 'example.org', 'en', 'design2'),
 		);
 
 		$domain = new Domain($domainConfigs);
@@ -51,8 +52,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetDomainConfigById() {
 		$domainConfigs = array(
-			new DomainConfig(1, 'example.com', 'design1'),
-			new DomainConfig(2, 'example.org', 'design2'),
+			new DomainConfig(1, 'example.com', 'cs', 'design1'),
+			new DomainConfig(2, 'example.org', 'en', 'design2'),
 		);
 
 		$domain = new Domain($domainConfigs);

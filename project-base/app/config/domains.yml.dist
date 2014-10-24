@@ -1,8 +1,10 @@
 domains:
   - id: 1
     domain: localhost
+    locale: cs
     templates_directory: cz
 
   - id: 2
     domain: localhostsk
+    locale: sk
     templates_directory: sk

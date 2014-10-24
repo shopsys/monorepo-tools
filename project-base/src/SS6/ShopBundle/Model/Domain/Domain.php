@@ -33,6 +33,13 @@ class Domain {
 	/**
 	 * @return string
 	 */
+	public function getLocale() {
+		return $this->getCurrentConfig()->getLocale();
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getTemplatesDirectory() {
 		return $this->getCurrentConfig()->getTemplatesDirectory();
 	}
