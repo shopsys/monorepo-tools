@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
@@ -114,11 +115,12 @@ class MailTemplateFacade {
 		$allMailTemplatesData = new AllMailTemplatesData();
 
 		$registrationMailTemplatesData = new MailTemplateData();
-		$registrationMailTemplate = $this->mailTemplateRepository->findByNameAndDomainId('registration_confirm', $domainId);
+		$registrationMailTemplate = $this->mailTemplateRepository
+			->findByNameAndDomainId(MailTemplate::REGISTRATION_CONFIRM_NAME, $domainId);
 		if ($registrationMailTemplate !== null) {
 			$registrationMailTemplatesData->setFromEntity($registrationMailTemplate);
 		}
-		$registrationMailTemplatesData->setName('registration_confirm');
+		$registrationMailTemplatesData->setName(MailTemplate::REGISTRATION_CONFIRM_NAME);
 
 		$allMailTemplatesData->setRegistrationTemplate($registrationMailTemplatesData);
 

@@ -52,7 +52,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'potvrzujeme Vaši registraci v eshopu.');
 
-		$mailTemplate = new MailTemplate('registration_confirm', 1, $mailTemplateData);
+		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData = new MailTemplateData();
@@ -93,7 +93,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'potvrzujeme Vaši registraci v eshopu.');
 
-		$mailTemplate = new MailTemplate('registration_confirm', 2, $mailTemplateData);
+		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$manager->flush();

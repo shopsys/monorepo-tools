@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Customer\Mail;
 
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use Swift_Mailer;
 
@@ -44,7 +45,7 @@ class CustomerMailFacade {
 	 * @throws \SS6\ShopBundle\Model\Customer\Mail\Exception\SendMailFailedException
 	 */
 	public function sendRegistrationMail(User $user) {
-		$mailTemplate = $this->mailTemplateFacade->get('registration_confirm', $user->getDomainId());
+		$mailTemplate = $this->mailTemplateFacade->get(MailTemplate::REGISTRATION_CONFIRM_NAME, $user->getDomainId());
 		$message = $this->customerMailService->getMessageByUser($user, $mailTemplate);
 
 		$failedRecipients = array();
