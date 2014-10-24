@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\AbstractQuery;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
@@ -99,6 +100,33 @@ class OrderRepository {
 			->from(Order::class, 'o')
 			->where('o.deleted = :deleted')
 			->setParameter('deleted', false);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getCustomerOrderListQueryBuilder(User $user) {
+		return $this->em->createQueryBuilder()
+			->select('
+				o.number,
+				o.createdAt,
+				MAX(os.name) AS statusName,
+				COUNT(oi.id) AS itemsCount,
+				MAX(t.name) AS transportName,
+				MAX(p.name) AS paymentName,
+				o.totalPriceWithVat
+				')
+			->from(Order::class, 'o')
+			->join('o.items', 'oi')
+			->join('o.status', 'os')
+			->join('o.transport', 't')
+			->join('o.payment', 'p')
+			->groupBy('o.id')
+			->where('o.customer = :customer AND o.deleted = :deleted AND oi INSTANCE OF :type')
+			->setParameter('customer', $user)
+			->setParameter('deleted', false)
+			->setParameter('type', 'product');
 	}
 
 	/*
