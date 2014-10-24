@@ -55,4 +55,19 @@ class CustomerController extends Controller {
 		));
 	}
 
+	public function ordersAction() {
+		$orderRepository = $this->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+		$user = $this->getUser();
+		/* @var $user \SS6\ShopBundle\Model\Customer\User */
+
+		$queryBuilder = $orderRepository->getCustomerOrderListQueryBuilder($user);
+
+		$orders = $queryBuilder->getQuery()->execute();
+
+		return $this->render('@SS6Shop/Front/Content/Customer/orders.html.twig', array(
+			'orders' => $orders,
+		));
+	}
+
 }
