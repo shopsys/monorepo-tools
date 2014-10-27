@@ -34,6 +34,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 			['admin/superadmin/errors/'],
 			['admin/superadmin/icons/'],
 			['admin/superadmin/pricing/'],
+			['admin/translation/list/'],
 			['admin/transport/edit/1'],
 			['admin/transport/new/'],
 			['admin/transport_and_payment/list/'],

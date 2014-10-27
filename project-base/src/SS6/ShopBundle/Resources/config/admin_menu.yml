@@ -104,6 +104,9 @@
     - label: 'Šablony emailů'
       route: admin_mail_template
 
+    - label: 'Překlady konstant'
+      route: admin_translation_list
+
     - label: 'Superadmin'
       route: admin_superadmin_index
       items:
