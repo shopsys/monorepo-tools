@@ -7,9 +7,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 class TransportData {
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	private $name;
+	private $names;
 
 	/**
 	 * @var string
@@ -22,9 +22,9 @@ class TransportData {
 	private $vat;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	private $description;
+	private $descriptions;
 
 	/**
 	 * @var integer
@@ -42,34 +42,34 @@ class TransportData {
 	private $domains;
 
 	/**
-	 * @param string|null $name
+	 * @param array $names
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
-	 * @param string|null $description
+	 * @param array $descriptions
 	 * @param boolean $hidden
 	 * @param array $domains
 	 */
 	public function __construct(
-		$name = null,
+		array $names = array(),
 		$price = null,
 		Vat $vat = null,
-		$description = null,
+		array $descriptions = array(),
 		$hidden = false,
 		$domains = array()
 	) {
-		$this->name = $name;
+		$this->names = $names;
 		$this->price = $price;
 		$this->vat = $vat;
-		$this->description = $description;
+		$this->descriptions = $descriptions;
 		$this->hidden = $hidden;
 		$this->domains = $domains;
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getName() {
-		return $this->name;
+	public function getNames() {
+		return $this->names;
 	}
 
 	/**
@@ -87,10 +87,10 @@ class TransportData {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getDescription() {
-		return $this->description;
+	public function getDescriptions() {
+		return $this->descriptions;
 	}
 
 	/**
@@ -115,10 +115,10 @@ class TransportData {
 	}
 
 	/**
-	 * @param string $name
+	 * @param array $names
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setNames(array $names) {
+		$this->names = $names;
 	}
 
 	/**
@@ -136,10 +136,10 @@ class TransportData {
 	}
 
 	/**
-	 * @param string $description
+	 * @param array $descriptions
 	 */
-	public function setDescription($description) {
-		$this->description = $description;
+	public function setDescriptions($descriptions) {
+		$this->descriptions = $descriptions;
 	}
 
 	/**
@@ -168,9 +168,9 @@ class TransportData {
 	 * @param \SS6\ShopBundle\Model\Transport\TransportDomain[] $transportDomains
 	 */
 	public function setFromEntity(Transport $transport, array $transportDomains) {
-		$this->setDescription($transport->getDescription());
+		$this->setDescriptions($transport->getDescriptions());
 		$this->setHidden($transport->isHidden());
-		$this->setName($transport->getName());
+		$this->setNames($transport->getNames());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());
 

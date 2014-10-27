@@ -2,7 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Transport;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use SS6\ShopBundle\Model\Localize\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
@@ -13,7 +16,7 @@ use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport implements EntityFileUploadInterface {
+class Transport extends AbstractTranslatableEntity implements EntityFileUploadInterface {
 
 	/**
 	 * @var integer
@@ -22,14 +25,14 @@ class Transport implements EntityFileUploadInterface {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $id;
+	protected $id;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Transport\TransportTranslation[]
 	 *
-	 * @ORM\Column(type="string", length=255)
+	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Transport\TransportTranslation")
 	 */
-	private $name;
+	protected $translations;
 
 	/**
 	 * @var string
@@ -44,13 +47,6 @@ class Transport implements EntityFileUploadInterface {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
 	 */
 	private $vat;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $description;
 
 	/**
 	 * @var integer
@@ -85,28 +81,70 @@ class Transport implements EntityFileUploadInterface {
 	 */
 	private $position;
 
+	private $currentTranslation;
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	public function __construct(TransportData $transportData) {
-		$this->name = $transportData->getName();
+		$this->translations = new ArrayCollection();
+
 		$this->price = $transportData->getPrice();
 		$this->vat = $transportData->getVat();
-		$this->description = $transportData->getDescription();
 		$this->hidden = $transportData->isHidden();
 		$this->deleted = false;
 		$this->image = null;
+		$this->setTranslations($transportData);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	public function edit(TransportData $transportData) {
-		$this->name = $transportData->getName();
 		$this->price = $transportData->getPrice();
 		$this->vat = $transportData->getVat();
-		$this->description = $transportData->getDescription();
 		$this->hidden = $transportData->isHidden();
+		$this->setTranslations($transportData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
+	 */
+	private function setTranslations(TransportData $transportData) {
+		foreach ($transportData->getNames() as $locale => $name) {
+			$this->translation($locale)->setName($name);
+		}
+		foreach ($transportData->getDescriptions() as $locale => $description) {
+			$this->translation($locale)->setDescription($description);
+		}
+	}
+
+	/**
+	 * @param string|null $locale
+	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
+	 */
+	private function translation($locale = null) {
+		if ($locale === null) {
+			$locale = $this->currentLocale;
+		}
+
+		if (!$locale) {
+			throw new \RuntimeException('No locale has been set and currentLocale is empty');
+		}
+
+		if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
+			return $this->currentTranslation;
+		}
+
+		$translation = $this->findTranslation($locale);
+		if ($translation === null) {
+			$translation = new TransportTranslation();
+			$translation->setLocale($locale);
+			$this->addTranslation($translation);
+		}
+
+		$this->currentTranslation = $translation;
+		return $translation;
 	}
 
 	/**
@@ -172,10 +210,43 @@ class Transport implements EntityFileUploadInterface {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string
 	 */
-	public function getName() {
-		return $this->name;
+	public function getName($locale = null) {
+		return $this->translation($locale)->getName();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNames() {
+		$names = array();
+		foreach ($this->translations as $translate) {
+			$names[$translate->getLocale()] = $translate->getName();
+		}
+
+		return $names;
+	}
+
+	/**
+	 * @param string|null $locale
+	 * @return string|null
+	 */
+	public function getDescription($locale = null) {
+		return $this->translation($locale)->getDescription();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescriptions() {
+		$descriptions = array();
+		foreach ($this->translations as $translate) {
+			$descriptions[$translate->getLocale()] = $translate->getDescription();
+		}
+
+		return $descriptions;
 	}
 
 	/**
@@ -190,13 +261,6 @@ class Transport implements EntityFileUploadInterface {
 	 */
 	public function getVat() {
 		return $this->vat;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getDescription() {
-		return $this->description;
 	}
 
 	/**
