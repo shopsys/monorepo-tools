@@ -5,6 +5,6 @@ domains:
     templates_directory: cz
 
   - id: 2
-    domain: localhostsk
+    domain: localhosten
     locale: en
     templates_directory: en

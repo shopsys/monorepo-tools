@@ -16,7 +16,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData('name', 0, $vat, 'description', false));
+		$transport = new Transport(new TransportData([], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -39,7 +39,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$domainId = 1;
 		$diffetentDomainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData('name', 0, $vat, 'description', false));
+		$transport = new Transport(new TransportData([], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -61,7 +61,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData('name', 0, $vat, 'description', true));
+		$transport = new Transport(new TransportData([], 0, $vat, [], true));
 
 		$em->persist($vat);
 		$em->persist($transport);

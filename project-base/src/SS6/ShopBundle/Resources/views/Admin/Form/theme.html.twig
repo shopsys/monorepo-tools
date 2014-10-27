@@ -34,6 +34,14 @@
 	{{ globalMultipleFormSetting.reset() }}
 {% endblock form_end %}
 
+{% block locale_text_row -%}
+	<div class="form-line {{ attr.class|default('') }}">
+		{{- form_label(form) -}}
+		{{- form_errors(form) -}}
+		{{- block('form_rows') -}}
+	</div>
+{%- endblock locale_text_row %}
+
 {% block form_row %}
 	<div class="form-line {{ attr.class|default('') }}">
 		{{ form_errors(form) }}

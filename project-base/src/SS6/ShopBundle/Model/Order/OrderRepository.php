@@ -113,13 +113,14 @@ class OrderRepository {
 				o.number,
 				o.createdAt,
 				MAX(os.name) AS statusName,
-				COUNT(oi.id) AS itemsCount,
-				MAX(t.name) AS transportName,
+				COUNT(oip.id) AS itemsCount,
+				MAX(oit.name) AS transportName,
 				MAX(p.name) AS paymentName,
 				o.totalPriceWithVat
 				')
 			->from(Order::class, 'o')
-			->join('o.items', 'oi', Join::WITH, 'oi INSTANCE OF :type')
+			->join('o.items', 'oip', Join::WITH, 'oip INSTANCE OF :typeProduct')
+			->join('o.items', 'oit', Join::WITH, 'oit INSTANCE OF :typeTransport')
 			->join('o.status', 'os')
 			->join('o.transport', 't')
 			->join('o.payment', 'p')
@@ -127,7 +128,8 @@ class OrderRepository {
 			->where('o.customer = :customer AND o.deleted = :deleted')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
-			->setParameter('type', 'product')
+			->setParameter('typeProduct', 'product')
+			->setParameter('typeTransport', 'transport')
 			->getQuery()->execute();
 	}
 

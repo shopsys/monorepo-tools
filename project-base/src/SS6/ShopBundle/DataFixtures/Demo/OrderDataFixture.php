@@ -76,7 +76,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setStreet('Třetí 3');
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71200');
-		$orderData->setDomainId(2);
+		$orderData->setDomainId(1);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -97,7 +97,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setStreet('Čtvrtá 4');
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('70030');
-		$orderData->setDomainId(2);
+		$orderData->setDomainId(1);
 		$this->createOrder(
 			$orderData,
 			array(
