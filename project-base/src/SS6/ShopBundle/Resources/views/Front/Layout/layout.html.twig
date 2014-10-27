@@ -17,6 +17,7 @@
 							<ul class="in-dropdown__menu">
 								<li class="in-dropdown__menu__item">
 									<a href="{{ url('front_customer_edit') }}">Osobní údaje</a>
+									<a href="{{ url('front_customer_orders') }}">Mé objednávky</a>
 								</li>
 							</ul>
 						</li>
@@ -28,8 +29,8 @@
 							<a href="{{ url('front_registration_register') }}">Registrace</a>
 						</li>
 						<li class="top-menu__item top-menu__item--main">
-							<a 
-								href="{{ url('front_login') }}" 
+							<a
+								href="{{ url('front_login') }}"
 								onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
 							><strong>Přihlásit se</strong></a>
 						</li>
@@ -53,6 +54,7 @@
 			<div class="content">
 				<div class="main-content">
 					{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
+					<h1>{% block h1 %}{% endblock %}</h1>
 					{% block content %}{% endblock %}
 				</div>
 			</div>

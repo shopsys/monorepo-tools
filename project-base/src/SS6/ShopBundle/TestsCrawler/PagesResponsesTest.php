@@ -74,6 +74,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 	public function frontEndPagesRegistredUserProvider() {
 		return array(
 			['customer/edit/'],
+			['customer/orders/'],
 		);
 	}
 
