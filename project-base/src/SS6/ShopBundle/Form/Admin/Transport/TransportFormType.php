@@ -46,7 +46,8 @@ class TransportFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('names', 'locale_text', array('sub_constraints' => array(
+			->add('names', 'locale_text', array(
+				'sub_constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 			))
@@ -76,7 +77,10 @@ class TransportFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
 				),
 			))
-			->add('descriptions', 'locale_text', array('required' => false, 'type' => 'textarea'))
+			->add('descriptions', 'locale_text', array(
+				'required' => false,
+				'type' => 'textarea',
+			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => false,
 				'file_constraints' => array(
