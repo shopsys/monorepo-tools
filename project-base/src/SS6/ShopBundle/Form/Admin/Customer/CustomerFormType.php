@@ -54,6 +54,7 @@ class CustomerFormType extends AbstractType {
 			->add('userData', new UserFormType($this->scenario, $this->domains, $this->selectedDomain))
 			->add('billingAddressData', new BillingAddressFormType())
 			->add('deliveryAddressData', new DeliveryAddressFormType())
+			->add('sendRegistrationMail', 'checkbox', array('required' => false))
 			->add('save', 'submit');
 	}
 

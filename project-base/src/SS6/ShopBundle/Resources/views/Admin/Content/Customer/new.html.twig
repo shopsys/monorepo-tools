@@ -6,3 +6,9 @@
 {% block customer_domain %}
 	{{ form_row(form.userData.domainId, { label: 'Doména' }) }}
 {% endblock %}
+
+{% block customer_sendMail %}
+	{{ form_row(form.sendRegistrationMail, {
+		attr: { class: 'checkbox-toggle'},
+		label: 'Odeslat mail s potvrzením registrace zákazníkovi' }) }}
+{% endblock %}

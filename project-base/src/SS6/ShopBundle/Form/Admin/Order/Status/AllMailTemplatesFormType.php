@@ -3,18 +3,18 @@
 namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
 use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplatesData;
+use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class OrderStatusMailTemplatesFormType extends AbstractType {
+class AllMailTemplatesFormType extends AbstractType {
 
 	/**
 	 * @return string
 	 */
 	public function getName() {
-		return 'order_status_mail_templates';
+		return 'all_mail_templates';
 	}
 
 	/**
@@ -23,7 +23,8 @@ class OrderStatusMailTemplatesFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('templates', 'collection', array(
+			->add('registrationTemplate', new MailTemplateFormType())
+			->add('orderStatusTemplates', 'collection', array(
 				'type' => new MailTemplateFormType(),
 			));
 	}
@@ -34,7 +35,7 @@ class OrderStatusMailTemplatesFormType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
-			'data_class' => OrderStatusMailTemplatesData::class,
+			'data_class' => AllMailTemplatesData::class,
 		));
 	}
 

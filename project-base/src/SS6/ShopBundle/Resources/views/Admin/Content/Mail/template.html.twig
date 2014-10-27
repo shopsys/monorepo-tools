@@ -9,15 +9,13 @@
 
 		<div class="col-xs-12 col-lg-10">
 
-			{{ form_start(form) }}
-			{{ form_errors(form) }}
-				{% for orderStatusId, template in form.templates %}
-					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-					<div class="toggle-container box-expand">
+			{% macro mailTemplate(name, template) %}
+				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
-								{{ orderStatus.name }}
+								{{ name }}
 							</span>
 						</h2>
 						<div class="toggle-content toggle-close box-expand__hidden">
@@ -25,8 +23,20 @@
 							{{ form_row(template.body, { label: 'Text'}) }}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
 						</div>
-					</div>
+				</div>
+			{% endmacro%}
+
+			{{ form_start(form) }}
+			{{ form_errors(form) }}
+				{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
+					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
+
+					{{ _self.mailTemplate(orderStatus.name, orderStatusTemplate) }}
+
 				{% endfor %}
+
+				{{ _self.mailTemplate('Potvrzení registrace', form.registrationTemplate) }}
+
 			{{ form_end(form) }}
 
 		</div>

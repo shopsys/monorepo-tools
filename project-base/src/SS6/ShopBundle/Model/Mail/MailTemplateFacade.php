@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
+use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
@@ -49,10 +51,11 @@ class MailTemplateFacade {
 
 	/**
 	 * @param string $templateName
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 */
-	public function get($templateName) {
-		return $this->mailTemplateRepository->getByName($templateName);
+	public function get($templateName, $domainId) {
+		return $this->mailTemplateRepository->findByNameAndDomainId($templateName, $domainId);
 	}
 
 	/**
@@ -65,14 +68,15 @@ class MailTemplateFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate[] $mailTemplatesData
+	 * @param int $domainId
 	 */
-	public function saveMailTemplatesData(array $mailTemplatesData) {
+	public function saveMailTemplatesData(array $mailTemplatesData, $domainId) {
 		foreach ($mailTemplatesData as $mailTemplateData) {
-			$mailTemplate = $this->mailTemplateRepository->findByName($mailTemplateData->getName());
+			$mailTemplate = $this->mailTemplateRepository->findByNameAndDomainId($mailTemplateData->getName(), $domainId);
 			if ($mailTemplate !== null) {
 				$mailTemplate->edit($mailTemplateData);
 			} else {
-				$mailTemplate = new MailTemplate($mailTemplateData->getName(), $mailTemplateData);
+				$mailTemplate = new MailTemplate($mailTemplateData->getName(), $domainId, $mailTemplateData);
 				$this->em->persist($mailTemplate);
 			}
 		}
@@ -100,11 +104,30 @@ class MailTemplateFacade {
 		return $mailTemplate;
 	}
 
-	public function getOrderStatusMailTemplatesData() {
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Mail\AllMailTemplatesData
+	 */
+	public function getAllMailTemplatesDataByDomainId($domainId) {
 		$orderStatuses = $this->orderStatusRepository->findAll();
-		$mailTemplates = $this->mailTemplateRepository->getAll();
+		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
 
-		return $this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);
+		$allMailTemplatesData = new AllMailTemplatesData();
+
+		$registrationMailTemplatesData = new MailTemplateData();
+		$registrationMailTemplate = $this->mailTemplateRepository
+			->findByNameAndDomainId(MailTemplate::REGISTRATION_CONFIRM_NAME, $domainId);
+		if ($registrationMailTemplate !== null) {
+			$registrationMailTemplatesData->setFromEntity($registrationMailTemplate);
+		}
+		$registrationMailTemplatesData->setName(MailTemplate::REGISTRATION_CONFIRM_NAME);
+
+		$allMailTemplatesData->setRegistrationTemplate($registrationMailTemplatesData);
+
+		$allMailTemplatesData->setOrderStatusTemplates(
+			$this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates));
+
+		return $allMailTemplatesData;
 	}
 
 }

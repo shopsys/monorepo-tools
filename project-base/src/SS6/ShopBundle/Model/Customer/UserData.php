@@ -36,7 +36,13 @@ class UserData {
 	 * @param string|null $email
 	 * @param string|null $password
 	 */
-	public function __construct($domainId = 1, $firstName = null, $lastName = null, $email = null, $password = null) {
+	public function __construct(
+		$domainId = 1,
+		$firstName = null,
+		$lastName = null,
+		$email = null,
+		$password = null
+	) {
 		$this->domainId = $domainId;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;

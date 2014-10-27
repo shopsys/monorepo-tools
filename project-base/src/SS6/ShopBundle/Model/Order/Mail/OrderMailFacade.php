@@ -54,7 +54,7 @@ class OrderMailFacade {
 	 * @throws \SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException
 	 */
 	public function sendEmail(Order $order) {
-		$mailTemplate = $this->getMailTemplateByStatus($order->getStatus());
+		$mailTemplate = $this->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
 		$message = $this->orderMailService->getMessageByOrder($order, $mailTemplate);
 
 		$failedRecipients = array();
@@ -66,12 +66,13 @@ class OrderMailFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Mail\OrderStatus $orderStatus
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 */
-	public function getMailTemplateByStatus(OrderStatus $orderStatus) {
+	public function getMailTemplateByStatusAndDomainId(OrderStatus $orderStatus, $domainId) {
 		$templateName = $this->orderMailService->getMailTemplateNameByStatus($orderStatus);
 
-		return $this->mailTemplateFacade->get($templateName);
+		return $this->mailTemplateFacade->get($templateName, $domainId);
 	}
 
 }
