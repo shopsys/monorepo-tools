@@ -19,6 +19,7 @@ parameters:
   ss6.image_url_prefix: /assets/content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
   ss6.web_dir: %kernel.root_dir%/../web
+  translator.class: SS6\ShopBundle\Component\Translator
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
 
 services:

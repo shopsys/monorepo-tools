@@ -1,0 +1,12 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- Překlady konstant{% endblock %}
+{% block h1 %}Překlady konstant{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{{ gridView.render('@SS6Shop/Admin/Content/Translation/listGrid.html.twig') }}
+		</div>
+	</div>
+{% endblock %}
