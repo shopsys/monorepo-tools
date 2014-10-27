@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\PriceCalculation as CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
@@ -77,17 +78,10 @@ class OrderFacade {
 	private $orderMailFacade;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository $orderNumberSequenceRepository
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
-	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
-	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-	 * @param \SS6\ShopBundle\Model\Cart\Item\PriceCalculation $cartItemPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
+	private $domain;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -99,7 +93,8 @@ class OrderFacade {
 		CartItemPriceCalculation $cartItemPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
-		OrderMailFacade $orderMailFacade
+		OrderMailFacade $orderMailFacade,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -112,6 +107,7 @@ class OrderFacade {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->orderMailFacade = $orderMailFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -143,6 +139,7 @@ class OrderFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
 	private function fillOrderItems(Order $order, Cart $cart) {
+		$locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 		$cartItems = $cart->getItems();
 		foreach ($cartItems as $cartItem) {
 			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
@@ -179,7 +176,7 @@ class OrderFacade {
 		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
 		$orderTransport = new OrderTransport(
 			$order,
-			$transport->getName(),
+			$transport->getName($locale),
 			$transportPrice->getPriceWithoutVat(),
 			$transportPrice->getPriceWithVat(),
 			$transport->getVat()->getPercent(),
