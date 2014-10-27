@@ -5,7 +5,7 @@
 	{% block content %}
 		<div class="row">
 			<div class="col-xs-12 col-lg-10">
-				{% if orders|length == 0 %}
+				{% if ordersData|length == 0 %}
 					Dosud nemáte žádnou objednávku.
 				{% else %}
 					<div class="table-responsive">
@@ -19,15 +19,15 @@
 								<th>Platba</th>
 								<th>Celková cena s DPH</th>
 							</tr>
-								{% for order in orders %}
+								{% for orderData in ordersData %}
 									<tr>
-										<td>{{ order.number }}</td>
-										<td>{{ order.createdAt|date('d-m-Y') }}</td>
-										<td>{{ order.statusName }}</td>
-										<td>{{ order.itemsCount }}</td>
-										<td>{{ order.transportName }}</td>
-										<td>{{ order.paymentName }}</td>
-										<td class = "text-right">{{ order.totalPriceWithVat|price }}</td>
+										<td>{{ orderData.number }}</td>
+										<td>{{ orderData.createdAt|date('d-m-Y') }}</td>
+										<td>{{ orderData.statusName }}</td>
+										<td>{{ orderData.itemsCount }}</td>
+										<td>{{ orderData.transportName }}</td>
+										<td>{{ orderData.paymentName }}</td>
+										<td class = "text-right">{{ orderData.totalPriceWithVat|price }}</td>
 									</tr>
 								{% endfor %}
 

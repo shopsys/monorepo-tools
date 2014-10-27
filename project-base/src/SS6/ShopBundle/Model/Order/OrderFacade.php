@@ -233,4 +233,12 @@ class OrderFacade {
 		$order->markAsDeleted();
 		$this->em->flush();
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\SS6\ShopBundle\Model\Customer\User $user
+	 * @return array
+	 */
+	public function getCustomerOrderListData(User $user) {
+		return $this->orderRepository->getCustomerOrderListData($user);
+	}
 }

@@ -2,8 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
@@ -104,9 +105,9 @@ class OrderRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User
-	 * @return \Doctrine\ORM\QueryBuilder
+	 * @return array
 	 */
-	public function getCustomerOrderListQueryBuilder(User $user) {
+	public function getCustomerOrderListData(User $user) {
 		return $this->em->createQueryBuilder()
 			->select('
 				o.number,
@@ -118,15 +119,16 @@ class OrderRepository {
 				o.totalPriceWithVat
 				')
 			->from(Order::class, 'o')
-			->join('o.items', 'oi')
+			->join('o.items', 'oi', Join::WITH, 'oi INSTANCE OF :type')
 			->join('o.status', 'os')
 			->join('o.transport', 't')
 			->join('o.payment', 'p')
 			->groupBy('o.id')
-			->where('o.customer = :customer AND o.deleted = :deleted AND oi INSTANCE OF :type')
+			->where('o.customer = :customer AND o.deleted = :deleted')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
-			->setParameter('type', 'product');
+			->setParameter('type', 'product')
+			->getQuery()->execute();
 	}
 
 	/*
