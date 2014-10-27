@@ -89,12 +89,12 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
-		$transportData->setName('name');
+		$transportData->setNames(array('cs' => 'name'));
+		$transportData->setDescriptions(array('cs' => 'desc'));
 		$transportData->setPrice($inputPriceWithVat);
 		$transportData->setVat($vat);
 		$transport = $transportEditFacade->create($transportData);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-
 		$em->flush();
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
@@ -160,7 +160,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
-		$transportData->setName('name');
+		$transportData->setNames(array('cs' => 'name'));
 		$transportData->setPrice($inputPriceWithoutVat);
 		$transportData->setVat($vat);
 		$transport = $transportEditFacade->create($transportData);

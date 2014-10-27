@@ -63,7 +63,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
-		$transport = new Transport(new TransportData('TransportName', $inputPrice, $vat));
+		$transport = new Transport(new TransportData(array('cs' => 'TransportName'), $inputPrice, $vat));
 
 		$price = $transportPriceCalculation->calculatePrice($transport);
 

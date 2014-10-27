@@ -16,7 +16,7 @@ class PaymentTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData('name', 0, $vat, 'description', false));
+		$transport = new Transport(new TransportData([], 0, $vat, [], false));
 		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
 		$payment->addTransport($transport);
 
