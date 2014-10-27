@@ -4,6 +4,7 @@ imports:
 
 parameters:
   fragment.handler.class: SS6\ShopBundle\Model\SubRequest\RedirectFragmentHandler
+  prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localize\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources/

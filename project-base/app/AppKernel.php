@@ -17,6 +17,7 @@ class AppKernel extends Kernel {
 			new FM\ElfinderBundle\FMElfinderBundle(),
 			new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
 			new Kutny\AutowiringBundle\KutnyAutowiringBundle(),
+			new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
