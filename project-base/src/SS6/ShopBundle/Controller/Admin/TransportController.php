@@ -122,7 +122,7 @@ class TransportController extends Controller {
 
 	public function listAction() {
 		$transportGridFactory = $this->get('ss6.shop.transport.grid.transport_grid_factory');
-		/* @var $$transportGridFactory \SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory */
+		/* @var $transportGridFactory \SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory */
 
 		$grid = $transportGridFactory->create();
 
