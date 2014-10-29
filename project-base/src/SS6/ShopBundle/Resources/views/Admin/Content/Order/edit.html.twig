@@ -85,17 +85,21 @@
 											<th class="table-col-15 text-right">Sazba DPH (%)</th>
 											<th class="table-col-15 text-right text-nowrap">Celkem s DPH</th>
 											<th class="table-col-15 text-right text-nowrap">Celkem bez DPH</th>
+											<th ></th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="js-order-items">
 										{% for orderItemId, orderItem in form.items %}
-											<tr>
-												<td>{{ form_widget(orderItem.name) }}</td>
+											<tr class="js-order-item">
+												<td>{{ form_widget(orderItem.name, {attr: { class: 'js-order-item-name'}}) }}</td>
 												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].priceWithVat|price }}</td>
 												<td class="text-right text-middle">{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|price }}</td>
+												<td class="table-col-5 table-edit__body__cell text-center">
+													<a href="#" class="js-order-item-remove table-action"><i class="fa fa-trash-o"></i></a>
+												</td>
 											</tr>
 										{% endfor %}
 									</tbody>
@@ -104,6 +108,7 @@
 											<th colspan="4">Celkem:</th>
 											<th class="text-right">{{ order.totalPriceWithVat|price }}</th>
 											<th class="text-right">{{ order.totalPriceWithoutVat|price }}</th>
+											<th></th>
 										</tr>
 									</tfoot>
 								</table>

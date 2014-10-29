@@ -34,7 +34,7 @@
 			textContinue: 'Ano',
 			eventClose: function () {},
 			eventContinue: function () {},
-			urlContinue: ''
+			urlContinue: '#'
 		};
 		var options = $.extend(defaults, options);
 
