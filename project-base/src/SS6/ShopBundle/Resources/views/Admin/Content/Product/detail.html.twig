@@ -16,7 +16,7 @@
 					{% block product_url %}{% endblock %}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
-					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách' }) }}
+					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách', errors_attr: { class: 'in-message-floating' } }) }}
 					{{ form_row(form.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
 				</div>
 
