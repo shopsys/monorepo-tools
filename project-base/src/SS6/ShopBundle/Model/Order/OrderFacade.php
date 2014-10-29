@@ -201,9 +201,11 @@ class OrderFacade {
 			$user = $this->userRepository->getUserById($orderData->getCustomerId());
 		}
 		$statusChanged = $order->getStatus()->getId() !== $orderData->getStatusId();
-		$this->orderService->editOrder($order, $orderData, $orderStatus, $user);
+		$orderEditResult = $this->orderService->editOrder($order, $orderData, $orderStatus, $user);
 
-		$this->orderService->calculateTotalPrice($order);
+		foreach ($orderEditResult->getOrderItemsToDelete() as $orderItem) {
+			$this->em->remove($orderItem);
+		}
 
 		$this->em->flush();
 		if ($statusChanged) {

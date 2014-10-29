@@ -100,6 +100,7 @@ class OrderFormType extends AbstractType {
 			->add('items', 'collection', array(
 				'type' => new OrderItemFormType(),
 				'error_bubbling' => false,
+				'allow_delete' => true,
 			))
 			->add('save', 'submit');
 	}

@@ -56,11 +56,11 @@ class OrderService {
 	}
 
 	/**
-	 *
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @return \SS6\ShopBundle\Model\Order\OrderEditResult
 	 */
 	public function editOrder(Order $order, OrderData $orderData, OrderStatus $orderStatus, User $user = null) {
 		$order->edit(
@@ -69,15 +69,24 @@ class OrderService {
 			$user
 		);
 
-		foreach ($orderData->getItems() as $orderItemData) {
-			/* @var $orderItemData \SS6\ShopBundle\Model\Order\OrderItemData */
-			$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
-			$orderItem = $order->getItemById($orderItemData->getId());
-			$orderItem->edit($orderItemData);
+		$orderItemsToDelete = array();
+		$orderItemsData = $orderData->getItems();
+		foreach ($order->getItems() as $orderItem) {
+			$orderItem->getId();
+			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
+				$orderItemData = $orderItemsData[$orderItem->getId()];
+				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+				$orderItem = $order->getItemById($orderItemData->getId());
+				$orderItem->edit($orderItemData);
+			} else {
+				$order->removeItem($orderItem);
+				$orderItemsToDelete[] = $orderItem;
+			}
 		}
 
-		$orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
-		$order->setTotalPrice($orderTotalPrice);
+		$this->calculateTotalPrice($order);
+
+		return new OrderEditResult($orderItemsToDelete);
 	}
 
 	/**
