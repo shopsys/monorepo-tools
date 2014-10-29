@@ -50,13 +50,18 @@ class LocalizationExtension extends \Twig_Extension {
 	 * @param string $locale
 	 * @return string
 	 */
-	public function getLocaleFlagHtml($locale) {
+	public function getLocaleFlagHtml($locale, $showTitle = true) {
 		$src = $this->getAssetsHelper()->getUrl('assets/admin/images/flags/' . $locale . '.png');
-		$title = $this->getTitle($locale);
 
-		$html = '<img src="' . htmlspecialchars($src, ENT_QUOTES)
-			. '" alt="' . htmlspecialchars($locale, ENT_QUOTES)
-			. '" title="' . htmlspecialchars($title, ENT_QUOTES) . '" />';
+		if ($showTitle) {
+			$title = $this->getTitle($locale);
+			$html = '<img src="' . htmlspecialchars($src, ENT_QUOTES)
+				. '" alt="' . htmlspecialchars($locale, ENT_QUOTES)
+				. '" title="' . htmlspecialchars($title, ENT_QUOTES) . '" />';
+		} else {
+			$html = '<img src="' . htmlspecialchars($src, ENT_QUOTES)
+				. '" alt="' . htmlspecialchars($locale, ENT_QUOTES) . '" />';
+		}
 
 		return $html;
 	}
