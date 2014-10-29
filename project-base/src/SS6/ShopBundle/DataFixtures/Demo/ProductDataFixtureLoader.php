@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
+use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Csv\CsvReader;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
@@ -84,6 +85,7 @@ class ProductDataFixtureLoader {
 	/**
 	 * @param array $row
 	 * @return \SS6\ShopBundle\Model\Product\ProductData
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	private function getProductDataFromCsvRow(array $row) {
 		$productData = new ProductData();
@@ -113,7 +115,14 @@ class ProductDataFixtureLoader {
 			$productData->setSellingTo(new DateTime($row[8]));
 		}
 		$productData->setStockQuantity($row[9]);
-		$productData->setHidden(array(1 => $row[10], 2 => $row[11]));
+		$showOnDomains = array();
+		if (Condition::stringToBooleanValue($row[10])) {
+			$showOnDomains[] = 1;
+		}
+		if (Condition::stringToBooleanValue($row[11])) {
+			$showOnDomains[] = 2;
+		}
+		$productData->setShowOnDomains($showOnDomains);
 		switch ($row[12]) {
 			case 'in-stock':
 				$productData->setAvailability($this->availabilities['in-stock']);
