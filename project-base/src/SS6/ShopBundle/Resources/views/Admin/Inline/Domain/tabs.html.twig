@@ -3,10 +3,12 @@
 		{% for domainConfig in domainConfigs %}
 			{% if domainConfig.id == selectedDomainId %}
 				<span class="box-domain__item box-domain__item--active">
+					{% if multipleLocales %}{{ localeFlag(domainConfig.locale, false) }}{% endif %}
 					{{ domainConfig.domain }}
 				</span>
 			{% else %}
 				<a class="box-domain__item" href="{{ url('admin_domain_selectdomain', {id: domainConfig.id}) }}">
+					{% if multipleLocales %}{{ localeFlag(domainConfig.locale, false) }}{% endif %}
 					{{ domainConfig.domain }}
 				</a>
 			{% endif %}
