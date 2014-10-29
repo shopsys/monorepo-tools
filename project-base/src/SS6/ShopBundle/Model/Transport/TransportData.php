@@ -27,7 +27,7 @@ class TransportData {
 	private $descriptions;
 
 	/**
-	 * @var integer
+	 * @var bool
 	 */
 	private $hidden;
 
