@@ -6,6 +6,15 @@ use SS6\ShopBundle\Model\Domain\Domain;
 
 class Localize {
 
+	private $languageNames = array(
+		'cs' => 'Čeština',
+		'de' => 'Deutsch',
+		'en' => 'English',
+		'hu' => 'Magyar',
+		'pl' => 'Polski',
+		'sk' => 'Slovenčina',
+	);
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
@@ -49,6 +58,14 @@ class Localize {
 		}
 
 		return $this->allLocales;
+	}
+
+	public function getLanguageName($locale) {
+		if (!array_key_exists($locale, $this->languageNames)) {
+			throw new \SS6\ShopBundle\Model\Localize\Exception\InvalidLocaleException();
+		}
+
+		return $this->languageNames[$locale];
 	}
 
 }

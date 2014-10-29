@@ -11,12 +11,14 @@
 					<thead>
 						<tr class="grid-row-titles">
 							<th>Název domény</th>
+							<th>Jazyk</th>
 						</tr>
 					</thead>
 					<tbody>
 						{% for domainConfig in domainConfigs %}
 							<tr class="grid-row-cells">
 								<td>{{ domainConfig.domain }}</td>
+								<td>{{ localeFlag(domainConfig.locale) }}</td>
 							</tr>
 						{% endfor %}
 					</tbody>
