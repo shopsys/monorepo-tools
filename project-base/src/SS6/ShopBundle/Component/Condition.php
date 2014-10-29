@@ -38,15 +38,4 @@ class Condition {
 		return $value;
 	}
 
-	/**
-	 * @param string $string
-	 * @return boolean
-	 */
-	public static function stringToBooleanValue($string) {
-		if ($string === 'true') {
-			return true;
-		} elseif ($string === 'false') {
-			return false;
-		}
-	}
 }

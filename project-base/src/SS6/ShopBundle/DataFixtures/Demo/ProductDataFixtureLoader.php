@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Model\Csv\CsvDecoder;
 use SS6\ShopBundle\Model\Csv\CsvReader;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
@@ -116,10 +116,10 @@ class ProductDataFixtureLoader {
 		}
 		$productData->setStockQuantity($row[9]);
 		$showOnDomains = array();
-		if (Condition::stringToBooleanValue($row[10])) {
+		if (CsvDecoder::decodeBoolean($row[10])) {
 			$showOnDomains[] = 1;
 		}
-		if (Condition::stringToBooleanValue($row[11])) {
+		if (CsvDecoder::decodeBoolean($row[11])) {
 			$showOnDomains[] = 2;
 		}
 		$productData->setShowOnDomains($showOnDomains);
