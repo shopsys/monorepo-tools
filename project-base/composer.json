@@ -20,7 +20,7 @@
 		"fp/jsformvalidator-bundle": "1.2.1",
 		"helios-ag/fm-elfinder-bundle": "1.x",
 		"incenteev/composer-parameter-handler": "~2.0",
-		"jakub-onderka/php-parallel-lint": "0.7",
+		"jakub-onderka/php-parallel-lint": "dev-master",
 		"jms/translation-bundle": "1.1.0",
 		"kutny/autowiring-bundle": "1.0",
 		"pdepend/pdepend": "2.0.0.*@dev",
