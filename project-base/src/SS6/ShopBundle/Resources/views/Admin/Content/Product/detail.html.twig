@@ -16,6 +16,8 @@
 					{% block product_url %}{% endblock %}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
+					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách' }) }}
+					{{ form_row(form.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
 				</div>
 
 
@@ -35,14 +37,6 @@
 					{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}
 					{{ form_row(form.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
-				</div>
-
-				<div class="wrap-group">
-					<h2>Skryté:</h2>
-					{% for domainId, hidden in form.hidden %}
-						{% set domain = domainService.getDomainConfigById(domainId) %}
-						{{ form_row(hidden, { label: domain.domain, attr: {class: 'form-line--between'} }) }}
-					{% endfor %}
 				</div>
 
 				<div class="wrap-group js-form-group">

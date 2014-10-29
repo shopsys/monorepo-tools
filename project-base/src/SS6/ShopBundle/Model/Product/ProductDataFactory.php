@@ -38,13 +38,6 @@ class ProductDataFactory {
 		$productParameterValuesData = array();
 		$productData->setParameters($productParameterValuesData);
 
-		$hiddenData = array();
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$hiddenData[$domainConfig->getId()] = false;
-		}
-
-		$productData->setHidden($hiddenData);
-
 		$productData->setVat($this->vatFacade->getDefaultVat());
 
 		return $productData;
@@ -56,8 +49,8 @@ class ProductDataFactory {
 	 */
 	public function createFromProduct(Product $product) {
 		$productData = $this->createDefault();
-		$productData->setFromEntity($product);
-
+		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
+		$productData->setFromEntity($product, $productDomains);
 		$productParameterValuesData = array();
 
 		$productParameterValues = $this->parameterRepository->findParameterValuesByProduct($product);
@@ -69,14 +62,14 @@ class ProductDataFactory {
 
 		$productData->setParameters($productParameterValuesData);
 
-		$hidden = $productData->getHidden();
+		$showOnDomains = array();
 		foreach ($this->domain->getAll() as $domainConfig) {
 			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainConfig->getId());
-			if ($productDomain !== null) {
-				$hidden[$domainConfig->getId()] = $productDomain->isHidden();
+			if ($productDomain !== null && $productDomain->isShow()) {
+				$showOnDomains[] = $productDomain->getDomainId();
 			}
 		}
-		$productData->setHidden($hidden);
+		$productData->setShowOnDomains($showOnDomains);
 
 		return $productData;
 	}

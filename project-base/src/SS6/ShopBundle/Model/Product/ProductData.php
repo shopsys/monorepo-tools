@@ -7,6 +7,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use DateTime;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ */
 class ProductData {
 
 	/**
@@ -60,7 +63,7 @@ class ProductData {
 	private $stockQuantity;
 
 	/**
-	 * @var array
+	 * @var bool
 	 */
 	private $hidden;
 
@@ -81,6 +84,11 @@ class ProductData {
 	private $parameters;
 
 	/**
+	 * @var array
+	 */
+	private $showOnDomains;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -91,9 +99,11 @@ class ProductData {
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
-	 * @param array $hidden
+	 * @param bool $hidden
 	 * @param string|null $image
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
+	 * @param array $parameters
+	 * @param array $showOnDomains
 	 */
 	public function __construct(
 		$name = null,
@@ -106,10 +116,11 @@ class ProductData {
 		DateTime $sellingFrom = null,
 		DateTime $sellingTo = null,
 		$stockQuantity = null,
-		array $hidden = array(),
+		$hidden = false,
 		$image = null,
 		$availability = null,
-		array $parameters = array()
+		array $parameters = array(),
+		array $showOnDomains = array()
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -125,6 +136,7 @@ class ProductData {
 		$this->image = $image;
 		$this->availability = $availability;
 		$this->parameters = $parameters;
+		$this->showOnDomains = $showOnDomains;
 	}
 
 	/**
@@ -197,12 +209,6 @@ class ProductData {
 		return $this->stockQuantity;
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getHidden() {
-		return $this->hidden;
-	}
 
 	/**
 	 * @return string|null
@@ -296,13 +302,6 @@ class ProductData {
 	}
 
 	/**
-	 * @param array $hidden
-	 */
-	public function setHidden($hidden) {
-		$this->hidden = $hidden;
-	}
-
-	/**
 	 * @param string|null $image
 	 */
 	public function setImage($image) {
@@ -324,9 +323,39 @@ class ProductData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return bool
 	 */
-	public function setFromEntity(Product $product) {
+	public function isHidden() {
+		return $this->hidden;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getShowOnDomains() {
+		return $this->showOnDomains;
+	}
+
+	/**
+	 * @param bool $hidden
+	 */
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @param array $domains
+	 */
+	public function setShowOnDomains($domains) {
+		$this->showOnDomains = $domains;
+	}
+
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
+	 */
+	public function setFromEntity(Product $product, array $productDomains) {
 		$this->setName($product->getName());
 		$this->setCatnum($product->getCatnum());
 		$this->setPartno($product->getPartno());
@@ -338,6 +367,14 @@ class ProductData {
 		$this->setSellingTo($product->getSellingTo());
 		$this->setStockQuantity($product->getStockQuantity());
 		$this->setAvailability($product->getAvailability());
+		$this->setHidden($product->isHidden());
+		$showOnDomains = array();
+		foreach ($productDomains as $productDomain) {
+			if ($productDomain->isShow()) {
+				$showOnDomains[] = $productDomain->getDomainId();
+			}
+		}
+		$this->setShowOnDomains($showOnDomains);
 	}
 
 }
