@@ -49,7 +49,7 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 	private $vat;
 
 	/**
-	 * @var integer
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -33,6 +34,11 @@ class ProductEditFacade {
 	private $parameterRepository;
 
 	/**
+	 * @var SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
@@ -40,12 +46,14 @@ class ProductEditFacade {
 		EntityManager $em,
 		ProductRepository $productRepository,
 		ProductVisibilityFacade $productVisibilityFacade,
-		ParameterRepository $parameterRepository
+		ParameterRepository $parameterRepository,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productVisibilityFacade = $productVisibilityFacade;
 		$this->parameterRepository = $parameterRepository;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -65,7 +73,8 @@ class ProductEditFacade {
 
 		$this->em->persist($product);
 		$this->saveParameters($product, $productData->getParameters());
-		$this->saveHidden($product, $productData->getHidden());
+		$this->createProductDomains($product, $this->domain->getAll());
+		$this->refreshProductDomains($product, $productData->getShowOnDomains());
 
 		$this->em->flush();
 
@@ -84,7 +93,7 @@ class ProductEditFacade {
 
 		$product->edit($productData);
 		$this->saveParameters($product, $productData->getParameters());
-		$this->saveHidden($product, $productData->getHidden());
+		$this->refreshProductDomains($product, $productData->getShowOnDomains());
 
 		$this->em->flush();
 
@@ -139,19 +148,30 @@ class ProductEditFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param array $hiddenData
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
 	 */
-	private function saveHidden(Product $product, array $hiddenData) {
-		foreach ($hiddenData as $domainId => $hidden) {
-			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainId);
-			if ($productDomain !== null) {
-				$productDomain->setHidden($hidden);
+	private function createProductDomains(Product $product, array $domains) {
+		foreach ($domains as $domain) {
+			$productDomain = new ProductDomain($product, $domain->getId());
+			$this->em->persist($productDomain);
+		}
+		$this->em->flush();
+
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param array $showOnDomainData
+	 */
+	private function refreshProductDomains(Product $product, array $showOnDomainData) {
+		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
+		foreach ($productDomains as $productDomain) {
+			if (in_array($productDomain->getDomainId(), $showOnDomainData)) {
+				$productDomain->setShow(true);
 			} else {
-				$productDomain = new ProductDomain($product, $domainId, $hidden);
-				$this->em->persist($productDomain);
+				$productDomain->setShow(false);
 			}
 		}
-
 		$this->em->flush();
 	}
 

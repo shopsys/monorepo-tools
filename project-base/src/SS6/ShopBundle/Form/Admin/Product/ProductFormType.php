@@ -75,6 +75,12 @@ class ProductFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 			))
+			->add('showOnDomains', 'domains', array(
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Musíte vybrat alespoň jednu doménu')),
+				),
+			))
+			->add('hidden', new YesNoType(), array('required' => false))
 			->add('catnum', 'text', array(
 				'required' => false,
 				'constraints' => array(
@@ -131,10 +137,6 @@ class ProductFormType extends AbstractType {
 			->add('stockQuantity', 'integer', array(
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte číslo',
-			))
-			->add('hidden', 'collection', array(
-				'required' => false,
-				'type' => new YesNoType(),
 			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => false,
