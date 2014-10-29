@@ -320,7 +320,7 @@ class Product implements EntityFileUploadInterface {
 	/**
 	 * @return boolean
 	 */
-	public function getVisible() {
+	public function isVisible() {
 		return $this->visible;
 	}
 

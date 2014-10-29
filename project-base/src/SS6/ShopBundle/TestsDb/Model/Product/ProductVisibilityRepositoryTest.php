@@ -21,7 +21,6 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productData = new ProductData();
 		$productData->setName('Name');
 		$productData->setVat($vat);
-		$productData->setHidden(array(1 => true));
 		$product = $productEditFacade->create($productData);
 
 		$em->flush();
@@ -35,7 +34,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$this->assertFalse($productAgain->isVisibleOnAnyDomain());
+		$this->assertFalse($productAgain->isVisible());
 	}
 
 	public function testIsVisibleOnAnyDomainWhenSellingInFuture() {
@@ -52,7 +51,6 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productData->setName('Name');
 		$productData->setVat($vat);
 		$productData->setSellingFrom($sellingFrom);
-		$productData->setHidden(array(1 => false));
 		$product = $productEditFacade->create($productData);
 
 		$em->flush();
@@ -66,7 +64,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$this->assertFalse($productAgain->isVisibleOnAnyDomain());
+		$this->assertFalse($productAgain->isVisible());
 	}
 
 	public function testIsVisibleOnAnyDomainWhenSellingInPast() {
@@ -83,7 +81,6 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productData->setName('Name');
 		$productData->setVat($vat);
 		$productData->setSellingTo($sellingTo);
-		$productData->setHidden(array(1 => false));
 		$product = $productEditFacade->create($productData);
 
 		$em->flush();
@@ -97,7 +94,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$this->assertFalse($productAgain->isVisibleOnAnyDomain());
+		$this->assertFalse($productAgain->isVisible());
 	}
 
 	public function testIsVisibleOnAnyDomainWhenSellingNow() {
@@ -118,7 +115,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productData->setSellingFrom($sellingFrom);
 		$productData->setSellingTo($sellingTo);
 		$productData->setPrice(100);
-		$productData->setHidden(array(1 => false));
+		$productData->setShowOnDomains(array(1));
 		$product = $productEditFacade->create($productData);
 
 		$em->flush();
@@ -132,7 +129,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$this->assertTrue($productAgain->isVisibleOnAnyDomain());
+		$this->assertTrue($productAgain->isVisible());
 	}
 
 	public function testIsNotVisibleWhenZeroOrNullPrice() {
@@ -146,7 +143,6 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productData->setName('Name');
 		$productData->setVat($vat);
 		$productData->setPrice(0);
-		$productData->setHidden(array(1 => false));
 		$product1 = $productEditFacade->create($productData);
 
 		$productData->setPrice(null);
@@ -165,7 +161,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$product2Again = $em->getRepository(Product::class)->find($product2Id);
 		/* @var $product2Again \SS6\ShopBundle\Model\Product\Product */
 
-		$this->assertFalse($product1Again->isVisibleOnAnyDomain());
-		$this->assertFalse($product2Again->isVisibleOnAnyDomain());
+		$this->assertFalse($product1Again->isVisible());
+		$this->assertFalse($product2Again->isVisible());
 	}
 }
