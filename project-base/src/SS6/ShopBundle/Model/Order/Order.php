@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
+use SS6\ShopBundle\Model\Order\Item\OrderPayment;
+use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 /**
@@ -327,6 +329,12 @@ class Order {
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $item
 	 */
 	public function removeItem(OrderItem $item) {
+		if ($item instanceof OrderTransport) {
+			$this->transport = null;
+		}
+		if ($item instanceof OrderPayment) {
+			$this->payment = null;
+		}
 		$this->items->removeElement($item);
 	}
 
