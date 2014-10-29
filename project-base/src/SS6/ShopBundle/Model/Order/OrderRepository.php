@@ -113,21 +113,22 @@ class OrderRepository {
 				o.number,
 				o.createdAt,
 				MAX(os.name) AS statusName,
-				COUNT(oip.id) AS itemsCount,
-				MAX(oit.name) AS transportName,
-				MAX(p.name) AS paymentName,
+				COUNT(oiProduct.id) AS itemsCount,
+				MAX(oiTransport.name) AS transportName,
+				MAX(oiPayment.name) AS paymentName,
 				o.totalPriceWithVat
 				')
 			->from(Order::class, 'o')
-			->join('o.items', 'oip', Join::WITH, 'oip INSTANCE OF :typeProduct')
-			->join('o.items', 'oit', Join::WITH, 'oit INSTANCE OF :typeTransport')
-			->join('o.status', 'os')
-			->join('o.transport', 't')
+			->leftJoin('o.items', 'oiProduct', Join::WITH, 'oiProduct INSTANCE OF :typeProduct')
+			->leftJoin('o.items', 'oiTransport', Join::WITH, 'oiTransport INSTANCE OF :typeTransport')
+			->leftJoin('o.items', 'oiPayment', Join::WITH, 'oiPayment INSTANCE OF :typePayment')
 			->join('o.payment', 'p')
+			->join('o.status', 'os')
 			->groupBy('o.id')
 			->where('o.customer = :customer AND o.deleted = :deleted')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
+			->setParameter('typePayment', 'payment')
 			->setParameter('typeProduct', 'product')
 			->setParameter('typeTransport', 'transport')
 			->getQuery()->execute();
