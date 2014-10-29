@@ -23,6 +23,11 @@ class MailController extends Controller {
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
+		$customerMailService = $this->get('ss6.shop.customer.mail.customer_mail_service');
+		/* @var $customerMailService \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService */
+		$orderMailService = $this->get('ss6.shop.order.order_mail_service');
+		/* @var $orderMailService \SS6\ShopBundle\Model\Order\Mail\OrderMailService */
+
 		$allMailTemplatesData = $mailTemplateFacade->getAllMailTemplatesDataByDomainId($selectedDomain->getId());
 
 		$form = $this->createForm(new AllMailTemplatesFormType());
@@ -37,9 +42,14 @@ class MailController extends Controller {
 			return $this->redirect($this->generateUrl('admin_mail_template'));
 		}
 
+		$orderStatusesTemplateVariables = $orderMailService->getOrderStatusesTemplateVariables();
+		$registrationTemplateVariables = $customerMailService->getRegistrationTemplateVariables();
+
 		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', array(
 			'form' => $form->createView(),
 			'orderStatusesIndexedById' => $mailTemplateFacade->getAllIndexedById(),
+			'orderStatusVariables' => $orderStatusesTemplateVariables,
+			'registrationVariables' => $registrationTemplateVariables,
 		));
 	}
 

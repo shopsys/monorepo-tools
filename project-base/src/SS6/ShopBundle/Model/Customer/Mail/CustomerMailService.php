@@ -8,6 +8,12 @@ use Swift_Message;
 
 class CustomerMailService {
 
+	const VARIABLE_FIRST_NAME = '{first_name}';
+	const VARIABLE_LAST_NAME = '{last_name}';
+	const VARIABLE_EMAIL = '{email}';
+	const VARIABLE_URL = '{url}';
+	const VARIABLE_LOGIN_PAGE = '{login_page}';
+
 	/**
 	 * @var string
 	 */
@@ -39,5 +45,18 @@ class CustomerMailService {
 			->addPart($body, 'text/html');
 
 		return $message;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getRegistrationTemplateVariables() {
+		return array(
+			self::VARIABLE_FIRST_NAME => 'Jméno',
+			self::VARIABLE_LAST_NAME => 'Příjmení',
+			self::VARIABLE_EMAIL => 'Email',
+			self::VARIABLE_URL => 'URL adresa e-shopu',
+			self::VARIABLE_LOGIN_PAGE => 'Odkaz na stránku s přihlášením',
+		);
 	}
 }
