@@ -15,7 +15,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$mailTemplateData = new MailTemplateData();
-		$mailTemplateData->setSubject('Děkujeme za objednávku');
+		$mailTemplateData->setSubject('Děkujeme za objednávku č. {number} ze dne {date}');
 		$mailTemplateData->setBody('Dobrý den,<br /><br />'
 			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
 			. 'O dalších stavech objednávky Vás budeme informovat.<br />'

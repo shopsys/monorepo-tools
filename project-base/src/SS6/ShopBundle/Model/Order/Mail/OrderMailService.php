@@ -50,9 +50,10 @@ class OrderMailService {
 	public function getMessageByOrder(Order $order, MailTemplate $mailTemplate) {
 		$toEmail = $order->getEmail();
 		$body = $this->transformVariables($mailTemplate->getBody(), $order);
+		$subject = $this->transformVariables($mailTemplate->getSubject(), $order, true);
 
 		$message = Swift_Message::newInstance()
-			->setSubject($mailTemplate->getSubject())
+			->setSubject($subject)
 			->setFrom($this->senderEmail)
 			->setTo($toEmail)
 			->setContentType('text/plain; charset=UTF-8')
@@ -75,11 +76,10 @@ class OrderMailService {
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
-	public function transformVariables($string, Order $order) {
-		$variableKeys = array_keys($this->getOrderStatusesTemplateVariables());
+	public function transformVariables($string, Order $order, $isSubject = false) {
 		$variableValues = array(
 			self::VARIABLE_NUMBER  => $order->getNumber(),
-			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y'),
+			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
 			self::VARIABLE_URL => $this->router->generate('front_homepage', array(), true),
 			self::VARIABLE_TRANSPORT => $order->getTransport()->getName(),
 			self::VARIABLE_PAYMENT => $order->getPayment()->getName(),
@@ -89,6 +89,16 @@ class OrderMailService {
 			self::VARIABLE_NOTE  => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->formatProducts($order),
 		);
+
+		if ($isSubject) {
+			$variableKeys = array(
+				self::VARIABLE_NUMBER,
+				self::VARIABLE_DATE,
+			);
+		} else {
+			$variableKeys = array_keys($this->getOrderStatusesTemplateVariables());
+		}
+
 		foreach ($variableKeys as $key) {
 			$string = str_replace($key, $variableValues[$key], $string);
 		}
