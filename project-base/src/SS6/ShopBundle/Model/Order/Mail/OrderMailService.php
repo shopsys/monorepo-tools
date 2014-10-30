@@ -3,9 +3,11 @@
 namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Mail\MailTemplate;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Message;
+use Symfony\Component\Routing\Router;
 
 class OrderMailService {
 
@@ -27,10 +29,17 @@ class OrderMailService {
 	private $senderEmail;
 
 	/**
-	 * @param string $senderEmail
+	 * @var \Symfony\Component\Routing\Router
 	 */
-	public function __construct($senderEmail) {
+	private $router;
+
+	/**
+	 * @param string $senderEmail
+	 * @param Symfony\Component\Routing\Router $router
+	 */
+	public function __construct($senderEmail, Router $router) {
 		$this->senderEmail = $senderEmail;
+		$this->router = $router;
 	}
 
 	/**
@@ -40,7 +49,7 @@ class OrderMailService {
 	 */
 	public function getMessageByOrder(Order $order, MailTemplate $mailTemplate) {
 		$toEmail = $order->getEmail();
-		$body = $mailTemplate->getBody();
+		$body = $this->transformVariables($mailTemplate->getBody(), $order);
 
 		$message = Swift_Message::newInstance()
 			->setSubject($mailTemplate->getSubject())
@@ -62,6 +71,32 @@ class OrderMailService {
 	}
 
 	/**
+	 * @param string $string
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	public function transformVariables($string, Order $order) {
+		$variableKeys = array_keys($this->getOrderStatusesTemplateVariables());
+		$variableValues = array(
+			self::VARIABLE_NUMBER  => $order->getNumber(),
+			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y'),
+			self::VARIABLE_URL => $this->router->generate('front_homepage', array(), true),
+			self::VARIABLE_TRANSPORT => $order->getTransport()->getName(),
+			self::VARIABLE_PAYMENT => $order->getPayment()->getName(),
+			self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
+			self::VARIABLE_BILLING_ADDRESS => $this->formatBillingAddress($order),
+			self::VARIABLE_DELIVERY_ADDRESS => $this->formatDeliveryAddress($order),
+			self::VARIABLE_NOTE  => $order->getNote(),
+			self::VARIABLE_PRODUCTS => $this->formatProducts($order),
+		);
+		foreach ($variableKeys as $key) {
+			$string = str_replace($key, $variableValues[$key], $string);
+		}
+
+		return $string;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getOrderStatusesTemplateVariables() {
@@ -77,5 +112,114 @@ class OrderMailService {
 			self::VARIABLE_NOTE  => 'Poznámka',
 			self::VARIABLE_PRODUCTS => 'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)',
 		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function formatBillingAddress(Order $order) {
+		$firstName = $order->getFirstName();
+		$lastName = $order->getLastName();
+		$companyName = $order->getCompanyName();
+		$companyNumber = $order->getCompanyNumber();
+		$companyTaxNumber = $order->getCompanyTaxNumber();
+		$street = $order->getStreet();
+		$city = $order->getCity();
+		$postcode = $order->getPostcode();
+
+		return '<table>'
+		. '<tr>'
+			. '<th>Jméno</th>'
+			. '<th>Příjmení</th>'
+			. '<th>Firma</th>'
+			. '<th>IČ</th>'
+			. '<th>DIČ</th>'
+			. '<th>Ulice</th>'
+			. '<th>Město</th>'
+			. '<th>PSČ</th>'
+		. '</tr>'
+		. '<tr>'
+			. '<td>' . $firstName . '</td>'
+			. '<td>' . $lastName . '</td>'
+			. '<td>' . $companyName . '</td>'
+			. '<td>' . $companyNumber . '</td>'
+			. '<td>' . $companyTaxNumber . '</td>'
+			. '<td>' . $street . '</td>'
+			. '<td>' . $city . '</td>'
+			. '<td>' . $postcode . '</td>'
+		. '</tr>'
+		. '</table>';
+
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function formatDeliveryAddress(Order $order) {
+		$deliveryContactPerson = $order->getDeliveryContactPerson();
+		$deliveryCompanyName = $order->getDeliveryCompanyName();
+		$deliveryTelephone = $order->getDeliveryTelephone();
+		$deliveryStreet = $order->getDeliveryStreet();
+		$deliveryCity = $order->getDeliveryCity();
+		$deliveryPostcode = $order->getDeliveryPostcode();
+
+		return '<table>'
+		. '<tr>'
+			. '<th>Kontaktní osoba</th>'
+			. '<th>Firma</th>'
+			. '<th>Telefon</th>'
+			. '<th>Ulice</th>'
+			. '<th>Město</th>'
+			. '<th>PSČ</th>'
+		. '</tr>'
+		. '<tr>'
+			. '<td>' . $deliveryContactPerson . '</td>'
+			. '<td>' . $deliveryCompanyName . '</td>'
+			. '<td>' . $deliveryTelephone . '</td>'
+			. '<td>' . $deliveryStreet . '</td>'
+			. '<td>' . $deliveryCity . '</td>'
+			. '<td>' . $deliveryPostcode . '</td>'
+		. '</tr>'
+		. '</table>';
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function formatProducts(Order $order) {
+		$orderItems = $order->getItems();
+		/* @var $orderItems SS6\ShopBundle\Model\Order\Item\OrderItem[] */
+		$products = array();
+		foreach ($orderItems as $itemIndex => $orderItem) {
+			if($orderItem instanceof OrderProduct) {
+				$products[$itemIndex]['name'] = $orderItem->getName();
+				$products[$itemIndex]['quantity'] = $orderItem->getQuantity();
+				$products[$itemIndex]['unit_price'] = $orderItem->getPriceWithVat();
+				$products[$itemIndex]['total_price'] = $orderItem->getQuantity()*$orderItem->getPriceWithVat();
+			}
+		}
+		$table = '<table>'
+		. '<tr>'
+			. '<th>Název</th>'
+			. '<th>Počet kusů</th>'
+			. '<th>Cena za kus s DPH</th>'
+			. '<th>Celková cena za položku s DPH</th>'
+		. '</tr>'
+		. '<tr>';
+
+		ld($products);
+		foreach ($products as $product) {
+			$table .= '<td>' . $product['name'] . '</td>'
+				. '<td>' . $product['quantity'] . '</td>'
+				. '<td>' . $product['unit_price'] . '</td>'
+				. '<td>' . $product['total_price'] . '</td></tr>';
+		}
+
+		$table .= '</table>';
+
+		return $table;
 	}
 }
