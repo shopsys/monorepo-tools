@@ -125,6 +125,7 @@ class OrderRepository {
 			->join('o.status', 'os')
 			->groupBy('o.id')
 			->where('o.customer = :customer AND o.deleted = :deleted')
+			->orderBy('o.createdAt', 'DESC')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
 			->setParameter('typePayment', 'payment')
