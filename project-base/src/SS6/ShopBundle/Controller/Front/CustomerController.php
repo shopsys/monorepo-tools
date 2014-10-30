@@ -76,4 +76,19 @@ class CustomerController extends Controller {
 		));
 	}
 
+	/**
+	 * @param int $id
+	 */
+	public function orderDetailAction($id) {
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+		$order = $orderFacade->getById($id);
+		/* @var $order \SS6\ShopBundle\Model\Order\Order */
+
+		return $this->render('@SS6Shop/Front/Content/Customer/orderDetail.html.twig', array(
+			'order' => $order,
+		));
+
+	}
+
 }

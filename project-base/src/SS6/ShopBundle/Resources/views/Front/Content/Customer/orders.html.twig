@@ -21,7 +21,7 @@
 							</tr>
 								{% for orderData in ordersData %}
 									<tr>
-										<td>{{ orderData.number }}</td>
+										<td><a href="{{ url('front_customer_orderDetail', { id: orderData.id }) }}">{{ orderData.number }}</a></td>
 										<td>{{ orderData.createdAt|date('d-m-Y') }}</td>
 										<td>{{ orderData.statusName }}</td>
 										<td>{{ orderData.itemsCount }}</td>

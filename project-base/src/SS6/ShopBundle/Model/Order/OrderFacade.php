@@ -240,4 +240,12 @@ class OrderFacade {
 	public function getCustomerOrderListData(User $user) {
 		return $this->orderRepository->getCustomerOrderListData($user);
 	}
+
+	/**
+	 * @param int $orderId
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 */
+	public function getById($orderId) {
+		return $this->orderRepository->getById($orderId);
+	}
 }
