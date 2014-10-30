@@ -122,7 +122,6 @@ class OrderRepository {
 			->leftJoin('o.items', 'oiProduct', Join::WITH, 'oiProduct INSTANCE OF :typeProduct')
 			->leftJoin('o.items', 'oiTransport', Join::WITH, 'oiTransport INSTANCE OF :typeTransport')
 			->leftJoin('o.items', 'oiPayment', Join::WITH, 'oiPayment INSTANCE OF :typePayment')
-			->join('o.payment', 'p')
 			->join('o.status', 'os')
 			->groupBy('o.id')
 			->where('o.customer = :customer AND o.deleted = :deleted')
