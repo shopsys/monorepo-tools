@@ -35,11 +35,15 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail[]
 	 */
-	public function getAllVisibleProductDetails() {
-		$products = $this->productRepository->getAllVisibleByDomainId($this->domain->getId());
-		
+	public function getProductDetailsForProductList(ProductListOrderingSetting $orderingSetting) {
+		$products = $this->productRepository->getProductsForProductList(
+			$this->domain->getId(),
+			$orderingSetting
+		);
+
 		return $this->productDetailFactory->getDetailsForProducts($products);
 	}
 

@@ -3,9 +3,11 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 
 class ProductRepository {
 
@@ -64,12 +66,36 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getAllVisibleByDomainId($domainId) {
+	public function getProductsForProductList(
+		$domainId,
+		ProductListOrderingSetting $orderingSetting
+	) {
 		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$this->applyOrdering($qb, $orderingSetting);
 
 		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 */
+	private function applyOrdering(QueryBuilder $queryBuilder, ProductListOrderingSetting $orderingSetting) {
+		switch ($orderingSetting->getOrderingMode()) {
+			case ProductListOrderingSetting::ORDER_BY_NAME_ASC:
+				$queryBuilder->orderBy('p.name', 'asc');
+				break;
+
+			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
+				$queryBuilder->orderBy('p.name', 'desc');
+				break;
+
+			default:
+				throw new Exception('TODO: UnsupportedOrderingMode');
+		}
 	}
 
 	/**
