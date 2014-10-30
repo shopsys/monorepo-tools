@@ -76,6 +76,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 		return array(
 			['customer/edit/'],
 			['customer/orders/'],
+			['customer/orders/detail/1']
 		);
 	}
 
