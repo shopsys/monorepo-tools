@@ -490,7 +490,10 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		}
 
 		$order = $orderFacade->createOrder($orderData, $user);
+		/* @var $order \SS6\ShopBundle\Model\Order\Order */
 		$order->setStatus($orderStatus);
+		$referenceName = 'order_' . $order->getId();
+		$this->addReference($referenceName, $order);
 	}
 
 	/**

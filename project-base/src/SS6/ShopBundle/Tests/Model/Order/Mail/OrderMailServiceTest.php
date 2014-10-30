@@ -2,18 +2,21 @@
 
 namespace SS6\ShopBundle\Tests\Model\Form;
 
-use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
-use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Message;
+use Symfony\Component\Routing\Router;
 
-class OrderMailServiceTest extends PHPUnit_Framework_TestCase {
+class OrderMailServiceTest extends FunctionalTestCase {
 
 	public function testGetMailTemplateNameByStatus() {
-		$orderMailService = new OrderMailService('no-reply@netdevelo.cz');
+		$routerMock = $this->getMockBuilder(Router::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock);
 		$orderStatus1 = new OrderStatus('statusName1', OrderStatus::TYPE_NEW, 1);
 		$orderStatus2 = new OrderStatus('statusName2', OrderStatus::TYPE_IN_PROGRESS, 2);
 
@@ -30,19 +33,23 @@ class OrderMailServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetMessageByOrder() {
-		$orderMailService = new OrderMailService('no-reply@netdevelo.cz');
+		$routerMock = $this->getMockBuilder(Router::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock);
 
-		$orderMock = $this->getMock(Order::class, [], [], '', false);
+		$order = $this->getReference('order_1');
 
 		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('subject');
 		$mailTemplateData->setBody('body');
 		$mailTemplate = new MailTemplate('templateName', $mailTemplateData);
 
-		$message = $orderMailService->getMessageByOrder($orderMock, $mailTemplate);
+		$message = $orderMailService->getMessageByOrder($order, $mailTemplate);
 
 		$this->assertInstanceOf(Swift_Message::class, $message);
 		$this->assertEquals($mailTemplate->getSubject(), $message->getSubject());
 		$this->assertEquals($mailTemplate->getBody(), $message->getBody());
 	}
+
 }

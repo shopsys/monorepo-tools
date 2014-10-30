@@ -194,7 +194,7 @@ class OrderMailService {
 		/* @var $orderItems SS6\ShopBundle\Model\Order\Item\OrderItem[] */
 		$products = array();
 		foreach ($orderItems as $itemIndex => $orderItem) {
-			if($orderItem instanceof OrderProduct) {
+			if ($orderItem instanceof OrderProduct) {
 				$products[$itemIndex]['name'] = $orderItem->getName();
 				$products[$itemIndex]['quantity'] = $orderItem->getQuantity();
 				$products[$itemIndex]['unit_price'] = $orderItem->getPriceWithVat();
@@ -210,7 +210,6 @@ class OrderMailService {
 		. '</tr>'
 		. '<tr>';
 
-		ld($products);
 		foreach ($products as $product) {
 			$table .= '<td>' . $product['name'] . '</td>'
 				. '<td>' . $product['quantity'] . '</td>'
