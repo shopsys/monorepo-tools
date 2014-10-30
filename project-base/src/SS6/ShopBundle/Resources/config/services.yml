@@ -35,11 +35,6 @@ services:
   doctrine.orm.entity_manager.abstract:
     synthetic: true
 
-  locale_listener:
-    class: SS6\ShopBundle\Model\Localize\LocalizeListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
   security.user.provider.concrete.user_identities:
     class: SS6\ShopBundle\Model\Customer\SecurityUserRepository
 
@@ -237,6 +232,11 @@ services:
   ss6.shop.image.images_entity:
     class: SS6\ShopBundle\Model\Image\ImagesEntity
     arguments: [%ss6.image_dir%]
+
+  ss6.shop.localize.locale_listener:
+    class: SS6\ShopBundle\Model\Localize\LocalizeListener
+    tags:
+      - { name: kernel.event_subscriber }
 
   ss6.shop.localize.localize:
     class: SS6\ShopBundle\Model\Localize\Localize
