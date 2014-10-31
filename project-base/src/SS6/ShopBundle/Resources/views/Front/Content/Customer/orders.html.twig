@@ -1,8 +1,8 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}{{ parent() }} - Mé objednávky{% endblock %}
-{% block h1 %}Mé objednávky{% endblock %}
 	{% block content %}
+		<h1>Mé objednávky</h1>
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
 				{% if ordersData|length == 0 %}

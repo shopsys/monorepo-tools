@@ -1,13 +1,13 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}{{ parent() }} - Osobní údaje{% endblock %}
-{% block h1 %}Osobní údaje{% endblock %}
+{% block h1 %}{% endblock %}
 
 {% block content %}
+	<h1>Osobní údaje</h1>
 	<div class="row">
 
 		<div class="col-xs-12 col-lg-8">
-
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 				<div class="wrap-box">

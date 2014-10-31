@@ -1,8 +1,8 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}{{ parent() }} - Mé objednávky{% endblock %}
-{% block h1 %}Objednávka č. {{order.number}}{% endblock %}
 	{% block content %}
+		<h1>Objednávka č. {{order.number}}</h1>
 		<h2>Fakturační adresa</h2>
 		<table class="spaced">
 			<tr>
