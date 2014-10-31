@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Mail\MailTemplate;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
+use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Message;
@@ -41,15 +41,26 @@ class OrderMailService {
 	private $twig;
 
 	/**
-	 *
+	 * @var \SS6\ShopBundle\Model\Order\Item\PriceCalculation
+	 */
+	private $orderItemPriceCalculation;
+
+	/**
 	 * @param type $senderEmail
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param Twig_Environment $twig
+	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation
 	 */
-	public function __construct($senderEmail, Router $router, Twig_Environment $twig) {
+	public function __construct(
+		$senderEmail,
+		Router $router,
+		Twig_Environment $twig,
+		PriceCalculation $orderItemPriceCalculation
+	) {
 		$this->senderEmail = $senderEmail;
 		$this->router = $router;
 		$this->twig = $twig;
+		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 	}
 
 	/**
@@ -91,8 +102,8 @@ class OrderMailService {
 			self::VARIABLE_NUMBER  => $order->getNumber(),
 			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
 			self::VARIABLE_URL => $this->router->generate('front_homepage', array(), true),
-			self::VARIABLE_TRANSPORT => $order->getTransport()->getName(),
-			self::VARIABLE_PAYMENT => $order->getPayment()->getName(),
+			self::VARIABLE_TRANSPORT => $order->getTransportName(),
+			self::VARIABLE_PAYMENT => $order->getPaymentName(),
 			self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
 			self::VARIABLE_BILLING_ADDRESS => $this->getBillingAddressHtmlTable($order),
 			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
@@ -140,7 +151,7 @@ class OrderMailService {
 	 */
 	private function getBillingAddressHtmlTable(Order $order) {
 
-		return $this->twig->render('@SS6Shop/Mail/billingAddress.html.twig', array(
+		return $this->twig->render('@SS6Shop/Mail/Order/billingAddress.html.twig', array(
 			'order' => $order,
 		));
 
@@ -152,7 +163,7 @@ class OrderMailService {
 	 */
 	private function getDeliveryAddressHtmlTable(Order $order) {
 
-		return $this->twig->render('@SS6Shop/Mail/deliveryAddress.html.twig', array(
+		return $this->twig->render('@SS6Shop/Mail/Order/deliveryAddress.html.twig', array(
 			'order' => $order,
 		));
 	}
@@ -162,20 +173,11 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getProductsHtmlTable(Order $order) {
-		$orderItems = $order->getItems();
-		/* @var $orderItems SS6\ShopBundle\Model\Order\Item\OrderItem[] */
-		$products = array();
-		foreach ($orderItems as $itemIndex => $orderItem) {
-			if ($orderItem instanceof OrderProduct) {
-				$products[$itemIndex]['name'] = $orderItem->getName();
-				$products[$itemIndex]['quantity'] = $orderItem->getQuantity();
-				$products[$itemIndex]['unit_price'] = $orderItem->getPriceWithVat();
-				$products[$itemIndex]['total_price'] = $orderItem->getQuantity()*$orderItem->getPriceWithVat();
-			}
-		}
+		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->twig->render('@SS6Shop/Mail/products.html.twig', array(
-			'products' => $products,
+		return $this->twig->render('@SS6Shop/Mail/Order/products.html.twig', array(
+			'order' => $order,
+			'orderItemTotalPricesById' => $orderItemTotalPricesById,
 		));
 
 	}
