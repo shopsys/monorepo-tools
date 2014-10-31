@@ -1,0 +1,117 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Mé objednávky{% endblock %}
+{% block h1 %}Objednávka č. {{order.number}}{% endblock %}
+	{% block content %}
+		<h2>Fakturační adresa</h2>
+		<table class="spaced">
+			<tr>
+				<td>Jméno: </td>
+				<td>{{ order.firstName }}</td>
+			</tr>
+			<tr>
+				<td>Příjmení: </td>
+				<td>{{ order.lastName }}</td>
+			</tr>
+			<tr>
+				<td>Email: </td>
+				<td>{{ order.email }}</td>
+			</tr>
+			<tr>
+				<td>Telefon: </td>
+				<td>{{ order.telephone }}</td>
+			</tr>
+			<tr>
+				<td>Název firmy: </td>
+				<td>{{ order.companyName }}</td>
+			</tr>
+			<tr>
+				<td>IČ: </td>
+				<td>{{ order.companyNumber }}</td>
+			</tr>
+			<tr>
+				<td>DIČ: </td>
+				<td>{{ order.companyTaxNumber }}</td>
+			</tr>
+			<tr>
+				<td>Ulice: </td>
+				<td>{{ order.street }}</td>
+			</tr>
+			<tr>
+				<td>Město: </td>
+				<td>{{ order.city }}</td>
+			</tr>
+			<tr>
+				<td>PSČ: </td>
+				<td>{{ order.postcode }}</td>
+			</tr>
+		</table>
+		{% if order.deliveryStreet is not null %}
+			<h2>Doručovací adresa</h2>
+			<table class="spaced">
+				<tr>
+					<td>Kontaktní osoba: </td>
+					<td>{{ order.deliveryContactPerson }}</td>
+				</tr>
+				<tr>
+					<td>Firma: </td>
+					<td>{{ order.deliveryCompanyName }}</td>
+				</tr>
+				<tr>
+					<td>Telefon: </td>
+					<td>{{ order.deliveryTelephone }}</td>
+				</tr>
+				<tr>
+					<td>Ulice: </td>
+					<td>{{ order.deliveryStreet }}</td>
+				</tr>
+				<tr>
+					<td>Město: </td>
+					<td>{{ order.deliveryCity }}</td>
+				</tr>
+				<tr>
+					<td>PSČ: </td>
+					<td>{{ order.deliveryPostcode }}</td>
+				</tr>
+			</table>
+		{% endif %}
+
+		<h2>Položky</h2>
+		<table class="spaced">
+			<tr>
+				<th>Název</th>
+				<th>Jednotková cena s DPH</th>
+				<th>Množství</th>
+				<th>Sazba DPH (%)</th>
+				<th>Celkem s DPH</th>
+				<th>Celkem bez DPH</th>
+			</tr>
+			{% for item in order.items %}
+				<tr>
+					<td>{{ item.name }}</td>
+					<td>{{ item.priceWithVat|price }}</td>
+					<td>{{ item.quantity }}</td>
+					<td>{{ item.vatPercent }}</td>
+					<td>{{ orderItemTotalPricesById[item.id].priceWithVat|price }}</td>
+					<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|price }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<h2>Stav</h2>
+		{{ order.status.name }}
+		<h2>Datum vytvoření</h2>
+		{{ order.createdAt|date('d-m-Y') }}
+		<h2>Celková cena</h2>
+		<table class="spaced">
+			<tr>
+				<td>S DPH: </td>
+				<td>{{ order.totalPriceWithVat|price }}</td>
+			</tr>
+			<tr>
+				<td>Bez DPH: </td>
+				<td>{{ order.totalPriceWithoutVat|price }}</td>
+			</tr>
+		</table>
+		<br />
+		<a href="{{ url('front_customer_orders') }}" class="button btn btn-primary">Zpět na přehled objednávek</a>
+	{% endblock %}

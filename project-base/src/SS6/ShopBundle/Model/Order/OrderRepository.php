@@ -110,6 +110,7 @@ class OrderRepository {
 	public function getCustomerOrderListData(User $user) {
 		return $this->em->createQueryBuilder()
 			->select('
+				o.id,
 				o.number,
 				o.createdAt,
 				MAX(os.name) AS statusName,

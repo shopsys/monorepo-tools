@@ -4,7 +4,7 @@
 {% block h1 %}Mé objednávky{% endblock %}
 	{% block content %}
 		<div class="row">
-			<div class="col-xs-12 col-lg-10">
+			<div class="col-xs-12 col-lg-12">
 				{% if ordersData|length == 0 %}
 					Dosud nemáte žádnou objednávku.
 				{% else %}
@@ -18,16 +18,18 @@
 								<th>Doprava</th>
 								<th>Platba</th>
 								<th>Celková cena s DPH</th>
+								<th>Detail</th>
 							</tr>
 								{% for orderData in ordersData %}
 									<tr>
-										<td>{{ orderData.number }}</td>
+										<td><a href="{{ url('front_customer_order_detail', { id: orderData.id }) }}">{{ orderData.number }}</a></td>
 										<td>{{ orderData.createdAt|date('d-m-Y') }}</td>
 										<td>{{ orderData.statusName }}</td>
 										<td>{{ orderData.itemsCount }}</td>
 										<td>{{ orderData.transportName }}</td>
 										<td>{{ orderData.paymentName }}</td>
-										<td class = "text-right">{{ orderData.totalPriceWithVat|price }}</td>
+										<td>{{ orderData.totalPriceWithVat|price }}</td>
+										<td><a href="{{ url('front_customer_order_detail', { id: orderData.id }) }}"><i class="fa fa-search"></i</a></td>
 									</tr>
 								{% endfor %}
 
