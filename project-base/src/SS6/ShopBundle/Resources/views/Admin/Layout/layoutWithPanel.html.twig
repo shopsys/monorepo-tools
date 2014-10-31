@@ -1,14 +1,14 @@
 {% extends '@SS6Shop/Admin/Layout/layout.html.twig' %}
 
-{% block content %}	
-	<div class="main-panel col-xs-12 col-sm-4 col-md-3 col-lg-2">
+{% block content %}
+	<div class="main-panel col-xs-12 col-sm-3 col-md-3 col-lg-2">
 		{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
 			route: app.request.get('_route'),
 			parameters: app.request.attributes.get('_route_params')
 		}	)) }}
 	</div>
 
-	<div class="main-content col-xs-12 col-sm-8 col-md-9 col-lg-10">
+	<div class="main-content col-xs-12 col-sm-9 col-md-9 col-lg-10">
 		{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index'	)) }}
 
 		{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
