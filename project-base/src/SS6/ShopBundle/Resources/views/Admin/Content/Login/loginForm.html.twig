@@ -6,7 +6,7 @@
 
 {% block content %}
 	{% if error %}
-		<p class="in-message in-message--danger">{{ error }}</p>
+		<p class="in-message in-message--danger in-message--static">{{ error }}</p>
 	{% endif %}
 
 	{{ form_start(form, {attr: {class: 'box-login'}}) }}

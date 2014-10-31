@@ -34,15 +34,25 @@ Many types of messagess
 	</div>
 */
 .in-message {
-	margin: 20px 0;
-	padding: 20px;
+	padding: 2px 10px;
+	position: absolute;
+	top: 6px;
+	left: 550px;
+	z-index: 10;
 
 	border: 1px solid @color-e;
 	background: lighten(@color-e, 10%);
+	font-size: 12px;
 
-	.border-bottom-radius(@border-radius-base);
-	.border-top-radius(@border-radius-base);
+	.border-radius(@border-radius-base);
 }
+
+.in-message--static {
+	padding: 20px;
+	margin: 20px 0;
+	position: static;
+}
+
 .in-message--success {
 	border-color: darken(@bg-success, 10%);
 
