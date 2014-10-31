@@ -86,16 +86,16 @@
 				<th>Celkem s DPH</th>
 				<th>Celkem bez DPH</th>
 			</tr>
-		{% for item in order.items %}
-			<tr>
-				<td>{{item.name}}</td>
-				<td>{{item.priceWithVat|price}}</td>
-				<td>{{item.quantity}}</td>
-				<td>{{item.vatPercent}}</td>
-				<td>{{(item.quantity*item.priceWithVat)|price}}</td>
-				<td>{{(item.quantity*item.priceWithoutVat)|price}}</td>
-			</tr>
-		{% endfor %}
+			{% for item in order.items %}
+				<tr>
+					<td>{{ item.name }}</td>
+					<td>{{ item.priceWithVat|price }}</td>
+					<td>{{ item.quantity }}</td>
+					<td>{{ item.vatPercent }}</td>
+					<td>{{ orderItemTotalPricesById[item.id].priceWithVat|price }}</td>
+					<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|price }}</td>
+				</tr>
+			{% endfor %}
 		</table>
 		<h2>Stav</h2>
 		{{ order.status.name }}
@@ -110,10 +110,6 @@
 			<tr>
 				<td>Bez DPH: </td>
 				<td>{{ order.totalPriceWithoutVat|price }}</td>
-			</tr>
-			<tr>
-				<td>Výše DPH: </td>
-				<td>{{ (order.totalPriceWithVat - order.totalPriceWithoutVat)|price }}</td>
 			</tr>
 		</table>
 		<br />

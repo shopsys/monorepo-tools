@@ -84,9 +84,14 @@ class CustomerController extends Controller {
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$order = $orderFacade->getById($id);
 		/* @var $order \SS6\ShopBundle\Model\Order\Order */
+		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
+		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */
+
+		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
 		return $this->render('@SS6Shop/Front/Content/Customer/orderDetail.html.twig', array(
 			'order' => $order,
+			'orderItemTotalPricesById' => $orderItemTotalPricesById,
 		));
 
 	}

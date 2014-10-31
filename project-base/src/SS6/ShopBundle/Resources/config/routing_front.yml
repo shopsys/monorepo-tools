@@ -30,7 +30,7 @@ front_customer_orders:
   pattern: /customer/orders/
   defaults: { _controller: SS6ShopBundle:Front\Customer:orders }
 
-front_customer_orderDetail:
+front_customer_order_detail:
   pattern: /customer/orders/detail/{id}
   defaults: { _controller: SS6ShopBundle:Front\Customer:orderDetail }
   requirements:
