@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="row">
-		<div class="col-xs-12 col-md-5">
+		<div class="col-xs-12 col-md-6">
 			<div class="product-image">
 				<span>
 					{% if imageExists(productDetail.product, 'default') %}
@@ -21,7 +21,7 @@
 
 		</div>
 
-		<div class="col-xs-12 col-md-7">
+		<div class="col-xs-12 col-md-6">
 			<h1>{{ productDetail.product.name }}</h1>
 
 			{% if productDetail.product.catnum %}
@@ -96,21 +96,35 @@
 				{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 			</div>
 
-			{% if productDetail.parameters %}
-				<div class="mb-2">
-					<h3>{{ 'Technické parametry'|trans }}:</h3>
-					{% for productParameterValue in productDetail.parameters %}
-						<dl class="list-params">
-							<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
-							<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
-						</dl>
-					{% endfor %}
-				</div>
-			{% endif %}
-
-			{% if productDetail.product.description %}
-				{{ productDetail.product.description|raw }}
-			{% endif %}
 		</div>
 	</div>
+
+
+	{% if productDetail.product.description or productDetail.parameters %}
+		<div class="wrap-border mt-2">
+			<div class="row">
+				<div class="col-xs-12 col-md-8">
+					{% if productDetail.product.description %}
+						<h2>Informace o produktu</h2>
+						{{ productDetail.product.description|raw }}
+					{% endif %}
+				</div>
+
+
+				<div class="col-xs-12 col-md-4">
+					{% if productDetail.parameters %}
+						<div class="wrap-box">
+							<h3>{{ 'Technické parametry'|trans }}:</h3>
+							{% for productParameterValue in productDetail.parameters %}
+								<dl class="list-params">
+									<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
+									<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
+								</dl>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
 {% endblock %}
