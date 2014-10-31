@@ -21,18 +21,24 @@
 				<td>Telefon: </td>
 				<td>{{ order.telephone }}</td>
 			</tr>
-			<tr>
-				<td>Název firmy: </td>
-				<td>{{ order.companyName }}</td>
-			</tr>
-			<tr>
-				<td>IČ: </td>
-				<td>{{ order.companyNumber }}</td>
-			</tr>
-			<tr>
-				<td>DIČ: </td>
-				<td>{{ order.companyTaxNumber }}</td>
-			</tr>
+			{% if order.companyName is not null %}
+				<tr>
+					<td>Název firmy: </td>
+					<td>{{ order.companyName }}</td>
+				</tr>
+			{% endif %}
+			{% if order.companyNumber is not null %}
+				<tr>
+					<td>IČ: </td>
+					<td>{{ order.companyNumber }}</td>
+				</tr>
+			{% endif %}
+			{% if order.companyTaxNumber is not null %}
+				<tr>
+					<td>DIČ: </td>
+					<td>{{ order.companyTaxNumber }}</td>
+				</tr>
+			{% endif %}
 			<tr>
 				<td>Ulice: </td>
 				<td>{{ order.street }}</td>
@@ -49,18 +55,24 @@
 		{% if order.deliveryStreet is not null %}
 			<h2>Doručovací adresa</h2>
 			<table class="spaced">
-				<tr>
-					<td>Kontaktní osoba: </td>
-					<td>{{ order.deliveryContactPerson }}</td>
-				</tr>
-				<tr>
-					<td>Firma: </td>
-					<td>{{ order.deliveryCompanyName }}</td>
-				</tr>
-				<tr>
-					<td>Telefon: </td>
-					<td>{{ order.deliveryTelephone }}</td>
-				</tr>
+				{% if order.deliveryContactPerson is not null %}
+					<tr>
+						<td>Kontaktní osoba: </td>
+						<td>{{ order.deliveryContactPerson }}</td>
+					</tr>
+				{% endif %}
+				{% if order.deliveryCompanyName is not null %}
+					<tr>
+						<td>Firma: </td>
+						<td>{{ order.deliveryCompanyName }}</td>
+					</tr>
+				{% endif %}
+				{% if order.deliveryTelephone is not null %}
+					<tr>
+						<td>Telefon: </td>
+						<td>{{ order.deliveryTelephone }}</td>
+					</tr>
+				{% endif %}
 				<tr>
 					<td>Ulice: </td>
 					<td>{{ order.deliveryStreet }}</td>
