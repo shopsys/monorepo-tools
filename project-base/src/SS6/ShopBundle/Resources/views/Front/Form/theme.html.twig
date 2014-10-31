@@ -16,7 +16,7 @@
 		{% set form_method = "POST" %}
 	{%- endif -%}
 	<form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
-		{%- for attrname, attrvalue in attr -%} 
+		{%- for attrname, attrvalue in attr -%}
 			{{- " " -}}
 			{%- if attrname is sameas('multipleForm') -%}
 			{%- else -%}
@@ -89,8 +89,9 @@
 {% endblock checkbox_label %}
 
 {% block form_errors %}
+	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
-		<div class="in-message--danger in-message-floating js-validation-errors-list {{ attr.class|default('') }}{{ form.parent ? ' in-message-floating' : ' in-message' }}{{ errors|length > 0 ? '' : ' js-hidden' }}">
+		<div class="in-message--danger js-validation-errors-list {{ form.parent ? 'in-message-floating' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'js-hidden' }}">
 			<ul class="in-message__list">
 				{% if errors|length > 0 %}
 					{% for error in errors %}
@@ -155,7 +156,7 @@
 			</div>
 	{% endspaceless %}
 {% endblock choice_widget_expanded %}
-	
+
 {% block widget_attributes -%}
 	{%- if globalMultipleFormSetting.currentFormMultiple -%}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}

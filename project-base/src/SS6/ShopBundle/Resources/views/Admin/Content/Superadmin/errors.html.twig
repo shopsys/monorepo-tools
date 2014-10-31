@@ -4,7 +4,7 @@
 {% block h1 %}Chybové stránky{% endblock %}
 
 {% block main_content %}
-	
+
 	{% if app.environment == constant('SS6\\Environment::ENVIRONMENT_DEVELOPMENT') %}
 		{% set codes = [403, 404, 500] %}
 		{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
@@ -17,10 +17,10 @@
 			{% endfor %}
 		</ul>
 	{% else %}
-		<div class="in-message in-message--info js-flash-message" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">
+		<div class="in-message in-message--info in-message--static js-flash-message" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">
 			<a href="#" class="in-message__close js-flash-message-close" title="Zavřít">X</a>
 			<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu.
 		</div>
 	{% endif %}
-	
+
 {% endblock %}

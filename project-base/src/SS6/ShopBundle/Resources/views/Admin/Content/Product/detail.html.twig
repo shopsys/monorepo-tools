@@ -16,7 +16,7 @@
 					{% block product_url %}{% endblock %}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
-					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách', errors_attr: { class: 'in-message-floating' } }) }}
+					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'}) }}
 					{{ form_row(form.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
 				</div>
 
@@ -63,9 +63,9 @@
 										</td>
 										<td class="table-col-50 table-edit__body__cell">
 											<span class="table-edit__body__cell__error">
-												 {{ form_errors(parameter.value) }}
+												 {{ form_errors(parameter.value, {errors_attr: {class: 'table-edit__body__cell__error__message'}}) }}
 											</span>
-											{{ form_widget(parameter.value) }}
+											{{ form_widget(parameter.value)}}
 										</td>
 										<td class="table-col-5 table-edit__body__cell text-center">
 											<a href="#" class="js-parameters-item-remove table-action"><i class="fa fa-trash-o"></i></a>
