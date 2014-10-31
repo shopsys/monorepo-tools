@@ -94,7 +94,8 @@ class ProductRepository {
 				break;
 
 			default:
-				throw new Exception('TODO: UnsupportedOrderingMode');
+				$message = 'Product list ordering mod "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
+				throw new \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException($message);
 		}
 	}
 
