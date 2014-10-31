@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+	<div class="form-line form-line--size-2 wrap-lines">
+		<strong class="form-line__label">Řazení:</strong>
+		<div class="form-line__field">
+			{{ form_widget(form.orderingMode, { attr: { class: 'js-productListOrderingMode', 'data-cookie-name': cookieName  } }) }}
+		</div>
+	</div>
+{{ form_end(form) }}

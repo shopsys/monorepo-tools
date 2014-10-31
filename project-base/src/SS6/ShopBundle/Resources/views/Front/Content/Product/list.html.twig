@@ -7,6 +7,10 @@
 {% block content %}
 	<h1>Katalog zboží</h1>
 
+	<div>
+		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
+	</div>
+
 	<ul class="list-items">
 		{% for productDetail in productDetails %}
 			<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
