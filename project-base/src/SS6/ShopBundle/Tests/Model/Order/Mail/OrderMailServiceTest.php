@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Message;
 use Symfony\Component\Routing\Router;
+use Twig_Environment;
 
 class OrderMailServiceTest extends FunctionalTestCase {
 
@@ -16,7 +17,10 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$routerMock = $this->getMockBuilder(Router::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock);
+		$twigMock = $this->getMockBuilder(Twig_Environment::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock, $twigMock);
 		$orderStatus1 = new OrderStatus('statusName1', OrderStatus::TYPE_NEW, 1);
 		$orderStatus2 = new OrderStatus('statusName2', OrderStatus::TYPE_IN_PROGRESS, 2);
 
@@ -36,7 +40,10 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$routerMock = $this->getMockBuilder(Router::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock);
+		$twigMock = $this->getMockBuilder(Twig_Environment::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock, $twigMock);
 
 		$order = $this->getReference('order_1');
 
