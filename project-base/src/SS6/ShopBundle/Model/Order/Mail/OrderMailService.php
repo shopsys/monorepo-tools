@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Swift_Message;
 use Symfony\Component\Routing\Router;
+use Twig_Environment;
 
 class OrderMailService {
 
@@ -34,12 +35,21 @@ class OrderMailService {
 	private $router;
 
 	/**
-	 * @param string $senderEmail
-	 * @param Symfony\Component\Routing\Router $router
+	 *
+	 * @var \Twig_Environment
 	 */
-	public function __construct($senderEmail, Router $router) {
+	private $twig;
+
+	/**
+	 *
+	 * @param type $senderEmail
+	 * @param \Symfony\Component\Routing\Router $router
+	 * @param Twig_Environment $twig
+	 */
+	public function __construct($senderEmail, Router $router, Twig_Environment $twig) {
 		$this->senderEmail = $senderEmail;
 		$this->router = $router;
+		$this->twig = $twig;
 	}
 
 	/**
@@ -84,10 +94,10 @@ class OrderMailService {
 			self::VARIABLE_TRANSPORT => $order->getTransport()->getName(),
 			self::VARIABLE_PAYMENT => $order->getPayment()->getName(),
 			self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
-			self::VARIABLE_BILLING_ADDRESS => $this->formatBillingAddress($order),
-			self::VARIABLE_DELIVERY_ADDRESS => $this->formatDeliveryAddress($order),
+			self::VARIABLE_BILLING_ADDRESS => $this->getBillingAddressHtmlTable($order),
+			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
 			self::VARIABLE_NOTE  => $order->getNote(),
-			self::VARIABLE_PRODUCTS => $this->formatProducts($order),
+			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
 		);
 
 		if ($isSubject) {
@@ -128,38 +138,11 @@ class OrderMailService {
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
-	private function formatBillingAddress(Order $order) {
-		$firstName = $order->getFirstName();
-		$lastName = $order->getLastName();
-		$companyName = $order->getCompanyName();
-		$companyNumber = $order->getCompanyNumber();
-		$companyTaxNumber = $order->getCompanyTaxNumber();
-		$street = $order->getStreet();
-		$city = $order->getCity();
-		$postcode = $order->getPostcode();
+	private function getBillingAddressHtmlTable(Order $order) {
 
-		return '<table>'
-		. '<tr>'
-			. '<th>Jméno</th>'
-			. '<th>Příjmení</th>'
-			. '<th>Firma</th>'
-			. '<th>IČ</th>'
-			. '<th>DIČ</th>'
-			. '<th>Ulice</th>'
-			. '<th>Město</th>'
-			. '<th>PSČ</th>'
-		. '</tr>'
-		. '<tr>'
-			. '<td>' . $firstName . '</td>'
-			. '<td>' . $lastName . '</td>'
-			. '<td>' . $companyName . '</td>'
-			. '<td>' . $companyNumber . '</td>'
-			. '<td>' . $companyTaxNumber . '</td>'
-			. '<td>' . $street . '</td>'
-			. '<td>' . $city . '</td>'
-			. '<td>' . $postcode . '</td>'
-		. '</tr>'
-		. '</table>';
+		return $this->twig->render('@SS6Shop/Mail/billingAddress.html.twig', array(
+			'order' => $order,
+		));
 
 	}
 
@@ -167,39 +150,18 @@ class OrderMailService {
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
-	private function formatDeliveryAddress(Order $order) {
-		$deliveryContactPerson = $order->getDeliveryContactPerson();
-		$deliveryCompanyName = $order->getDeliveryCompanyName();
-		$deliveryTelephone = $order->getDeliveryTelephone();
-		$deliveryStreet = $order->getDeliveryStreet();
-		$deliveryCity = $order->getDeliveryCity();
-		$deliveryPostcode = $order->getDeliveryPostcode();
+	private function getDeliveryAddressHtmlTable(Order $order) {
 
-		return '<table>'
-		. '<tr>'
-			. '<th>Kontaktní osoba</th>'
-			. '<th>Firma</th>'
-			. '<th>Telefon</th>'
-			. '<th>Ulice</th>'
-			. '<th>Město</th>'
-			. '<th>PSČ</th>'
-		. '</tr>'
-		. '<tr>'
-			. '<td>' . $deliveryContactPerson . '</td>'
-			. '<td>' . $deliveryCompanyName . '</td>'
-			. '<td>' . $deliveryTelephone . '</td>'
-			. '<td>' . $deliveryStreet . '</td>'
-			. '<td>' . $deliveryCity . '</td>'
-			. '<td>' . $deliveryPostcode . '</td>'
-		. '</tr>'
-		. '</table>';
+		return $this->twig->render('@SS6Shop/Mail/deliveryAddress.html.twig', array(
+			'order' => $order,
+		));
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
-	private function formatProducts(Order $order) {
+	private function getProductsHtmlTable(Order $order) {
 		$orderItems = $order->getItems();
 		/* @var $orderItems SS6\ShopBundle\Model\Order\Item\OrderItem[] */
 		$products = array();
@@ -211,24 +173,10 @@ class OrderMailService {
 				$products[$itemIndex]['total_price'] = $orderItem->getQuantity()*$orderItem->getPriceWithVat();
 			}
 		}
-		$table = '<table>'
-		. '<tr>'
-			. '<th>Název</th>'
-			. '<th>Počet kusů</th>'
-			. '<th>Cena za kus s DPH</th>'
-			. '<th>Celková cena za položku s DPH</th>'
-		. '</tr>'
-		. '<tr>';
 
-		foreach ($products as $product) {
-			$table .= '<td>' . $product['name'] . '</td>'
-				. '<td>' . $product['quantity'] . '</td>'
-				. '<td>' . $product['unit_price'] . '</td>'
-				. '<td>' . $product['total_price'] . '</td></tr>';
-		}
+		return $this->twig->render('@SS6Shop/Mail/products.html.twig', array(
+			'products' => $products,
+		));
 
-		$table .= '</table>';
-
-		return $table;
 	}
 }
