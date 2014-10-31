@@ -15,10 +15,20 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$mailTemplateData = new MailTemplateData();
-		$mailTemplateData->setSubject('Děkujeme za objednávku');
+		$mailTemplateData->setSubject('Děkujeme za objednávku č. {number} ze dne {date}');
 		$mailTemplateData->setBody('Dobrý den,<br /><br />'
 			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
-			. 'O dalších stavech objednávky Vás budeme informovat.');
+			. 'O dalších stavech objednávky Vás budeme informovat.<br />'
+			. 'Čislo objednávky: {number} <br />'
+			. 'Datum a čas vytvoření: {date} <br />'
+			. 'URL adresa eshopu: {url} <br />'
+			. 'Doprava: {transport} <br />'
+			. 'Platba: {payment} <br />'
+			. 'Celková cena s DPH: {total_price} <br />'
+			. 'Fakturační adresa:<br /> {billing_address} <br />'
+			. 'Doručovací adresa: {delivery_address} <br />'
+			. 'Poznámka: {note} <br />'
+			. 'Produkty: {products} <br />');
 
 		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
@@ -50,7 +60,11 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Potvrzení registrace');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
-			. 'potvrzujeme Vaši registraci v eshopu.');
+			. 'potvrzujeme Vaši registraci v eshopu. <br />'
+			. 'Jméno: {first_name} {last_name}<br />'
+			. 'Email: {email}<br />'
+			. 'URL adresa eshopu: {url}<br />'
+			. 'Přihlašovací stránka: {login_page}');
 
 		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
@@ -91,7 +105,11 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Potvrzení registrace na druhé doméně');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
-			. 'potvrzujeme Vaši registraci v eshopu.');
+			. 'potvrzujeme Vaši registraci v eshopu.<br />'
+			. 'Jméno: {first_name} {last_name}<br />'
+			. 'Email: {email}<br />'
+			. 'URL adresa eshopu: {url}<br />'
+			. 'Přihlašovací stránka: {login_page}');
 
 		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 2, $mailTemplateData);
 		$manager->persist($mailTemplate);

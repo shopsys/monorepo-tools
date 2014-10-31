@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{% macro mailTemplate(name, template) %}
+			{% macro mailTemplate(name, template, variables, variablesInfoText) %}
 				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
@@ -22,6 +22,33 @@
 							{{ form_row(template.subject, { label: 'Předmět'}) }}
 							{{ form_row(template.body, { label: 'Text'}) }}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
+
+							<div class="row">
+								<div class="col-xs-12 col-lg-10">
+									<div class="table-responsive grid_body">
+										<table class="table table-striped table-hover">
+											<thead>
+												<tr class="grid-row-titles">
+													<th>
+														Použitelné proměnné
+														{% if variablesInfoText is not null %}
+															<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+														{% endif %}
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for key in variables|keys %}
+													<tr class="grid-row-cells">
+														<td>{{ key }}</td>
+														<td>{{ variables[key] }}</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
 				</div>
 			{% endmacro%}
@@ -30,12 +57,15 @@
 			{{ form_errors(form) }}
 				{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
 					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
-
-					{{ _self.mailTemplate(orderStatus.name, orderStatusTemplate) }}
-
+					{{ _self.mailTemplate(
+							orderStatus.name,
+							orderStatusTemplate,
+							orderStatusVariables,
+							"V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky"
+					) }}
 				{% endfor %}
 
-				{{ _self.mailTemplate('Potvrzení registrace', form.registrationTemplate) }}
+				{{ _self.mailTemplate('Potvrzení registrace', form.registrationTemplate, registrationVariables) }}
 
 			{{ form_end(form) }}
 

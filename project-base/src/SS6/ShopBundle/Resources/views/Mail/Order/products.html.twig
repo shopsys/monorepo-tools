@@ -1,0 +1,16 @@
+<table>
+	<tr>
+		<th>Název</th>
+		<th>Počet kusů</th>
+		<th>Cena za kus s DPH</th>
+		<th>Celková cena za položku s DPH</th>
+	</tr>
+	{% for item in order.items %}
+		<tr>
+			<td style="font-weight: bold;">{{ item.name }}</td>
+			<td style="text-align: right;">{{ item.quantity }}</td>
+			<td style="text-align: right;">{{ item.priceWithVat|price }}</td>
+			<td style="text-align: right;">{{ orderItemTotalPricesById[item.id].priceWithVat|price }}</td>
+		</tr>
+	{% endfor %}
+</table>

@@ -395,10 +395,36 @@ class Order {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getPaymentName() {
+		foreach ($this->items as $item) {
+			if ($item instanceof OrderPayment) {
+				return $item->getName();
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
 	 */
 	public function getTransport() {
 		return $this->transport;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTransportName() {
+		foreach ($this->items as $item) {
+			if ($item instanceof OrderTransport) {
+				return $item->getName();
+			}
+		}
+
+		return null;
 	}
 
 	/**
