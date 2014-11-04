@@ -38,7 +38,7 @@
 	<div class="form-line {{ attr.class|default('') }}">
 		{{- form_label(form) -}}
 		{{- form_errors(form) -}}
-		{{- block('form_rows') -}}
+		{{- block('localized_form_rows') -}}
 	</div>
 {%- endblock locale_text_row %}
 
@@ -50,6 +50,12 @@
 	</div>
 {% endblock form_row %}
 
+{% block localized_form_rows -%}
+	{% for child in form %}
+		{{- form_row(child, { localized: true, locale: child.vars.name }) -}}
+	{% endfor %}
+{%- endblock localized_form_rows %}
+
 {% block checkbox_row %}
 	<div class="checkbox">
 		{{ form_label(form) }}
@@ -58,15 +64,35 @@
 	</div>
 {% endblock checkbox_row %}
 
+{% block text_row -%}
+	<div class="form-line {{ attr.class|default('') }}">
+		{{ form_errors(form) }}
+		{% if localized is not defined %}
+			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
+		{% else %}
+			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--localized form-line__field--locale-' ~ locale } }) }}
+		{% endif %}
+	</div>
+{%- endblock text_row %}
+
 {% block textarea_row -%}
 	<div class="form-line">
-		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+		{% if localized is not defined %}
+			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+		{% else %}
+			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { label_attr: {class: 'form-line__label'}, raw: true }) }}
+		{% endif %}
 		{{- form_errors(form) -}}
 		<div class="form-line__full">
 			{{- form_widget(form) -}}
 		</div>
 	</div>
 {%- endblock textarea_row %}
+
+{% block ckeditor_row -%}
+	{{ block('textarea_row') }}
+{%- endblock ckeditor_row %}
 
 {% block form_label %}
 	{% spaceless %}
@@ -81,7 +107,11 @@
 				{% set label = name|humanize %}
 			{% endif %}
 			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-				{{ label|trans({}, translation_domain) }}
+				{% if raw is not defined %}
+					{{ label|trans({}, translation_domain) }}
+				{% else %}
+					{{ label|raw }}
+				{% endif %}
 				{% if not withoutColon|default(false) %}:{% endif %}
 				{% if required %}<span class="form-input-required">*</span>{% endif %}
 			</label>
