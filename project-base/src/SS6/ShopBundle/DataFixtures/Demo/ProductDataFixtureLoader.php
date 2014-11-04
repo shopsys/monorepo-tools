@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\Model\Csv\CsvDecoder;
-use SS6\ShopBundle\Model\Csv\CsvReader;
+use SS6\ShopBundle\Component\Csv\CsvDecoder;
+use SS6\ShopBundle\Component\Csv\CsvReader;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
@@ -48,7 +48,7 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param string $path
-	 * @param \SS6\ShopBundle\Model\Csv\CsvReader $csvReader
+	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 */
 	public function __construct($path, CsvReader $csvReader) {
 		$this->path = $path;

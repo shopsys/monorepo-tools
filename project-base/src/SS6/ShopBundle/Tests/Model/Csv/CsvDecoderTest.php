@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Model\Customer;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Csv\CsvDecoder;
+use SS6\ShopBundle\Component\Csv\CsvDecoder;
 
 class CsvDecoderTest extends PHPUnit_Framework_TestCase {
 
