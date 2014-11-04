@@ -2,8 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Article;
 
+use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Article\Article;
 
+/**
+ * @Validator\Auto(entity="SS6\ShopBundle\Model\Article\Article")
+ */
 class ArticleData {
 
 	/**
