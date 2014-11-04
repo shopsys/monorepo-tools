@@ -148,10 +148,10 @@ services:
     class: SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
 
   ss6.shop.data_fixture.persistent_reference_repository:
-    class: SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository
+    class: SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository
 
   ss6.shop.data_fixture.persistent_reference_service:
-    class: SS6\ShopBundle\Model\DataFixture\PersistentReferenceService
+    class: SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
 
   ss6.shop.data_fixtures.product_data_fixture_loader:
     class: SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader

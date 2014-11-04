@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Tests\Model\DataFixture;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\DataFixture\PersistentReference;
-use SS6\ShopBundle\Model\DataFixture\PersistentReferenceService;
-use SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository;
+use SS6\ShopBundle\Component\DataFixture\PersistentReference;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 use SS6\ShopBundle\Model\Product\Product;
 use stdClass;
 
@@ -27,7 +27,7 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 		$persistentReferenceRepositoryMock->expects($this->never())->method('deleteAll');
 
 		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
-		$this->setExpectedException(\SS6\ShopBundle\Model\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
+		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
 		$persistentReferenceService->persistReference('referenceName', new stdClass);
 	}
 
@@ -96,7 +96,7 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\DataFixture\Exception\EntityNotFoundException::class);
+		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
 		$persistentReferenceService->getReference('referenceName');
 	}
 

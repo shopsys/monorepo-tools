@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\DataFixture;
+namespace SS6\ShopBundle\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 
 class PersistentReferenceService {
 
@@ -13,18 +13,18 @@ class PersistentReferenceService {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository
 	 */
 	private $persistentReferenceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\DataFixture\PersistentReference
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReference
 	 */
 	private $persistentReferencesByName = [];
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
 	 */
 	public function __construct(EntityManager $em, PersistentReferenceRepository $persistentReferenceRepository) {
 		$this->em = $em;
@@ -34,14 +34,14 @@ class PersistentReferenceService {
 	/**
 	 * @param string $name
 	 * @return object
-	 * @throws SS6\ShopBundle\Model\DataFixture\Exception\EntityNotFoundException
+	 * @throws SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException
 	 */
 	public function getReference($name) {
 		$persistentReference = $this->persistentReferenceRepository->getByReferenceName($name);
 		$entity = $this->em->find($persistentReference->getEntityName(), $persistentReference->getEntityId());
 
 		if ($entity === null) {
-			throw new \SS6\ShopBundle\Model\DataFixture\Exception\EntityNotFoundException($name);
+			throw new \SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException($name);
 		}
 
 		return $entity;
@@ -50,7 +50,7 @@ class PersistentReferenceService {
 	/**
 	 * @param string $name
 	 * @param object $object
-	 * @throws \SS6\ShopBundle\Model\DataFixture\Exception\MethodGetIdDoesNotExistException
+	 * @throws \SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException
 	 */
 	public function persistReference($name, $object) {
 		$entityName = get_class($object);
@@ -70,7 +70,7 @@ class PersistentReferenceService {
 			$this->em->flush();
 		} else {
 			$message = 'Entity "' . $entityName . '" does not have a method "getId", which is necessary for persistent references.';
-			throw new \SS6\ShopBundle\Model\DataFixture\Exception\MethodGetIdDoesNotExistException($message);
+			throw new \SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException($message);
 		}
 	}
 

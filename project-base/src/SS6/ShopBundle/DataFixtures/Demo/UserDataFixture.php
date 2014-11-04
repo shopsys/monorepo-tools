@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 
 class UserDataFixture extends AbstractReferenceFixture {
 

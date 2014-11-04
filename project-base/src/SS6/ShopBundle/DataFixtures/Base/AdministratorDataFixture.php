@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Model\Administrator\Administrator;
-use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 
 class AdministratorDataFixture extends AbstractReferenceFixture {
 
