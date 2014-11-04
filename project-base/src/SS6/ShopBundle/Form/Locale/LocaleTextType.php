@@ -26,17 +26,25 @@ class LocaleTextType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$subOptions = $options['options'];
+		$defaultLocaleOptions = $options['options'];
+		$otherLocaleOptions = $options['options'];
 
-		if (!array_key_exists('constraints', $subOptions)) {
-			$subOptions['constraints'] = array();
+		if (!array_key_exists('constraints', $defaultLocaleOptions)) {
+			$defaultLocaleOptions['constraints'] = array();
 		}
-		$subOptions['constraints'] = array_merge(
-			$subOptions['constraints'],
+		$defaultLocaleOptions['constraints'] = array_merge(
+			$defaultLocaleOptions['constraints'],
 			$options['sub_constraints']
 		);
+
+		$otherLocaleOptions['required'] = false;
+
 		foreach ($this->localize->getAllLocales() as $locale) {
-			$builder->add($locale, $options['type'], $subOptions);
+			if ($locale === $this->localize->getDefaultLocale()) {
+				$builder->add($locale, $options['type'], $defaultLocaleOptions);
+			} else {
+				$builder->add($locale, $options['type'], $otherLocaleOptions);
+			}
 		}
 	}
 
