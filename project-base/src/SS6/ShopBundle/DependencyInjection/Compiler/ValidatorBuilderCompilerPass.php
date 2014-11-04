@@ -15,7 +15,7 @@ class ValidatorBuilderCompilerPass implements CompilerPassInterface {
 		$validatorBuilderDefinition = $container->getDefinition('validator.builder');
 
 		$validatorBuilderDefinition->addMethodCall('addLoader', array(
-			new Reference('ss6.shop.component.auto_validator_annotation_loader')
+			new Reference('ss6.shop.component.validator.auto_validator_annotation_loader')
 		));
 	}
 

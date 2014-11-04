@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace SS6\ShopBundle\Component\Validator;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\EntityManager;
