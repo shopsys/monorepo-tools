@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Listing;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\String\DatabaseSearching;
+use SS6\ShopBundle\Component\String\DatabaseSearching;
 
 class ProductListAdminRepository {
 

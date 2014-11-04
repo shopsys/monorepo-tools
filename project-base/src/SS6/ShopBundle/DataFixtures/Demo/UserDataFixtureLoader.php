@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use SS6\ShopBundle\Component\Csv\CsvReader;
+use SS6\ShopBundle\Component\String\TransformString;
+use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\String\TransformString;
-use SS6\ShopBundle\Model\String\EncodingConverter;
 
 class UserDataFixtureLoader {
 

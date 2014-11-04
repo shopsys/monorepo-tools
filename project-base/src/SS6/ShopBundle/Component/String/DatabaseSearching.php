@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\String;
+namespace SS6\ShopBundle\Component\String;
 
 class DatabaseSearching {
 
