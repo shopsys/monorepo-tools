@@ -20,7 +20,7 @@ class TransportTranslation extends AbstractTranslation {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $name;
 
