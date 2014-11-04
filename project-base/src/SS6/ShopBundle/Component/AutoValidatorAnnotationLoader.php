@@ -63,7 +63,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	private function processClassAnnotation(ClassMetadata $classMetadata, Auto $annotation) {
 		$classProperties = $classMetadata->getReflectionClass()->getProperties();
 
-		$entityMetadata = $this->em->getClassMetadata($annotation->entity);
+		$entityMetadata = $this->em->getClassMetadata($annotation->getEntity());
 
 		foreach ($classProperties as $property) {
 			/* @var $property \ReflectionProperty */
