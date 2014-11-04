@@ -16,7 +16,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData([], 0, $vat, [], false));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -33,13 +33,35 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$this->assertTrue($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
 	}
 
+	public function testIsIndependentlyVisibleEmptyName() {
+		$em = $this->getEntityManager();
+
+		$domainId = 2;
+		$vat = new Vat(new VatData('vat', 21));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => ''], 0, $vat, [], false));
+
+		$em->persist($vat);
+		$em->persist($transport);
+		$em->flush();
+
+		$transportDomain = new TransportDomain($transport, $domainId);
+		$em->persist($transportDomain);
+		$em->flush();
+
+		$independentTransportVisibilityCalculation =
+			$this->getContainer()->get('ss6.shop.transport.independent_transport_visibility_calculation');
+		/* @var $independentTransportVisibilityCalculation \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
+
+		$this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
+	}
+
 	public function testIsIndependentlyVisibleNotOnDomain() {
 		$em = $this->getEntityManager();
 
 		$domainId = 1;
 		$diffetentDomainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData([], 0, $vat, [], false));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -61,7 +83,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData([], 0, $vat, [], true));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], true));
 
 		$em->persist($vat);
 		$em->persist($transport);
