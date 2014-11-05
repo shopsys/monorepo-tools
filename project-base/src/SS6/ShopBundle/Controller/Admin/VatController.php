@@ -37,7 +37,8 @@ class VatController extends Controller {
 		$vat = $vatFacade->getById($id);
 		if ($vatFacade->isVatUsed($vat)) {
 			$message = 'Pro odstranění sazby "' . $vat->getName() . '" musíte zvolit, která se má všude, '
-				. 'kde je aktuálně používaná nastavit. Jakou sazbu místo ní chcete nastavit?';
+				. 'kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží '
+				. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?';
 			$vatNamesById = array();
 			foreach ($vatFacade->getAllExceptId($id) as $newVat) {
 				$vatNamesById[$newVat->getId()] = $newVat->getName();
