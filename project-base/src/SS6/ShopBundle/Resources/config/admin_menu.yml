@@ -107,6 +107,9 @@
     - label: 'Sazby DPH a zaokrouhlování'
       route: admin_vat_list
 
+    - label: 'Nastavení emailů'
+      route: admin_mail_setting
+
     - label: 'Šablony emailů'
       route: admin_mail_template
 

@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Setting\SettingValue;
@@ -26,6 +27,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		// @codingStandardsIgnoreStart
 		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, '<p>Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování.</p>'));
 		// @codingStandardsIgnoreStop
+		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, null));
+		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, null));
 
 		$manager->flush();
 	}
