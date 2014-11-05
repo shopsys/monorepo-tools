@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Customer;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -110,7 +111,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 */
-	public function edit($userData) {
+	public function edit(UserData $userData) {
 		$this->firstName = $userData->getFirstName();
 		$this->lastName = $userData->getLastName();
 	}
