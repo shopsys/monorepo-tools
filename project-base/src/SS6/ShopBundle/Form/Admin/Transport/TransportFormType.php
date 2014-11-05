@@ -48,7 +48,7 @@ class TransportFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('names', 'localized', array(
-				'sub_constraints' => array(
+				'main_constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 				'options' => array('required' => false),

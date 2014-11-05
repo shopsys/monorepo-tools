@@ -35,9 +35,10 @@ class LocalizedType extends AbstractType {
 
 		$defaultLocaleOptions['constraints'] = array_merge(
 			$defaultLocaleOptions['constraints'],
-			$options['sub_constraints']
+			$options['main_constraints']
 		);
 
+		$defaultLocaleOptions['required'] = $options['required'];
 		$otherLocaleOptions['required'] = $options['required'] && $otherLocaleOptions['required'];
 
 		foreach ($this->localization->getAllLocales() as $locale) {
@@ -56,7 +57,7 @@ class LocalizedType extends AbstractType {
 		$resolver->setDefaults(array(
 			'compound' => true,
 			'options' => array(),
-			'sub_constraints' => array(),
+			'main_constraints' => array(),
 			'type' => 'text',
 		));
 	}
