@@ -2,9 +2,9 @@
 	<div class="col-xs-12 col-lg-10">
 		{{ form_start(form) }}
 			<div class="wrap-box mb-1 mt-1">
-				{{ form_row(form.defaultVat, { 'label': 'Výchozí sazba DPH' }) }}
-				{{ form_row(form.roundingType, { 'label': 'Zaokrouhlení ceny s DPH' }) }}
-				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+				{{ form_row(form.defaultVat, { 'label': 'Výchozí sazba DPH'|trans }) }}
+				{{ form_row(form.roundingType, { 'label': 'Zaokrouhlení ceny s DPH'|trans }) }}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
 			</div>
 		{{ form_end(form) }}
 	</div>

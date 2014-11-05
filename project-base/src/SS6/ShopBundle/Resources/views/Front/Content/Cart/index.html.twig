@@ -1,13 +1,13 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	Košík
+	{{ 'Košík'|trans }}
 {% endblock %}
 
 {% block content %}
 	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
 
-	<h1>Váš košík</h1>
+	<h1>{{ 'Váš košík'|trans }}</h1>
 
 
 	{% if cart.itemsCount > 0 %}
@@ -16,12 +16,12 @@
 			<table class="table-cart">
 				<thead class="table-cart__heading">
 					<tr>
-						<th class="table-col-10">Obrázek</th>
-						<th class="table-col-35">Název</th>
-						<th class="table-col-15">Cena za kus s DPH</th>
-						<th class="table-col-10">Sazba DPH</th>
-						<th class="table-col-15 text-center">Počet kusů</th>
-						<th class="table-col-10 text-center">Cena s DPH</th>
+						<th class="table-col-10">{{ 'Obrázek'|trans }}</th>
+						<th class="table-col-35">{{ 'Název'|trans }}</th>
+						<th class="table-col-15">{{ 'Cena za kus s DPH'|trans }}</th>
+						<th class="table-col-10">{{ 'Sazba DPH'|trans }}</th>
+						<th class="table-col-15 text-center">{{ 'Počet kusů'|trans }}</th>
+						<th class="table-col-10 text-center">{{ 'Cena s DPH'|trans }}</th>
 						<th class="table-col-5 text-right">&nbsp;</th>
 					</tr>
 				</thead>
@@ -68,7 +68,7 @@
 
 							<td class="table-cart__remove">
 								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
-									<img src="{{ asset('assets/frontend/images/icons/trash.png') }}" alt="Odstranit">
+									<img src="{{ asset('assets/frontend/images/icons/trash.png') }}" alt="{{ 'Odstranit'|trans }}">
 								</a>
 							</td>
 						</tr>
@@ -84,7 +84,7 @@
 							{{ form_widget(form.recalc, { label: 'Přepočítat'}) }}
 						</td>
 						<td colspan="4" class="table-cart__foot__total text-right">
-							Celková cena s DPH:
+							{{ 'Celková cena s DPH'|trans }}:
 							<span class="table-cart__price-total">
 								<span class="price-main price-big">{{ cartSummary.priceWithVat|price }}</span>
 							</span>
@@ -96,29 +96,29 @@
 
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
 				{% endif %}
 
 				<a href="{{ backUrl }}" class="button button--alter box-buttons__left">
-					Zpět k nákupu
+					{{ 'Zpět k nákupu'|trans }}
 				</a>
 			</div>
 		{{ form_end(form) }}
 	{% else %}
 		<div class="row">
 			<div class="col-sm-5 col-xs-12 text-center">
-				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="Prázdný nákupní košík">
+				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
 			</div>
 			<div class="col-sm-6 col-xs-12">
 				<strong class="heading heading--visible">
-					Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="{{ url('front_product_list') }}">vybrat</a>.
+					{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_product_list') })|raw }}
 				</strong>
 			</div>
 		</div>
 
 		<div class="box-buttons">
 			<a href="{{ backUrl }}" class="button button--alter box-buttons__left">
-				Zpět k nákupu
+				{{ 'Zpět k nákupu'|trans }}
 			</a>
 		</div>
 	{% endif %}

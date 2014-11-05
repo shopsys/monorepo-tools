@@ -1,19 +1,19 @@
 {{ form_start(form) }}
 	{{ form_errors(form) }}
 
-	<h3>Přihlášení</h3>
+	<h3>{{ 'Přihlášení'|trans }}</h3>
 
 
 	<div class="form-group">
 		{{ form_errors(form.email) }}
-		{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+		{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
 	</div>
 
 	<div class="form-group">
 		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
 	</div>
 
-	{{ form_widget(form.login, {label: 'Přihlásit'}) }}
+	{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
 
 {{ form_end(form) }}

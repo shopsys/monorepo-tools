@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Přehled článků{% endblock %}
-{% block h1 %}Přehled článků{% endblock %}
+{% block title %}- {{ 'Přehled článků'|trans }}{% endblock %}
+{% block h1 %}{{ 'Přehled článků'|trans }}{% endblock %}
 
 {% block main_content %}
 
@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			<a href="{{ url('admin_article_new') }}" class="btn btn-primary mb-1">Vytvořit nový článek</a>
+			<a href="{{ url('admin_article_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nový článek'|trans }}</a>
 
 			{{ gridView.render('@SS6Shop/Admin/Content/Article/listGrid.html.twig') }}
 		</div>

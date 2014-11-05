@@ -2,19 +2,19 @@
 
 {% block grid_action_cell_type_delete %}
 	{% if row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_NEW') %}
-		<span title="Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám."
+		<span title="{{ 'Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám.'|trans }}"
 			class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="fa fa-info"></i>
 		</span>
 	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_DONE') %}
-		<span title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny."
+		<span title="{{ 'Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny.'|trans }}"
 			class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="fa fa-info"></i>
 		</span>
 	{% elseif row.os.type == constant('SS6\\ShopBundle\\Model\\Order\\Status\\OrderStatus::TYPE_CANCELED') %}
-		<span title="Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny."
+		<span title="{{ 'Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny.'|trans }}"
 			class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="fa fa-info"></i>
@@ -25,15 +25,15 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	Nebyl nalezen žádný stav objednávek.
+	{{ 'Nebyl nalezen žádný stav objednávek.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'stavů objednávek' %}
+	{% set entityName = 'stavů objednávek'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit nový stav objednávek' %}
+	{% set addEntity = 'Vytvořit nový stav objednávek'|trans %}
 	{{ parent() }}
 {% endblock %}

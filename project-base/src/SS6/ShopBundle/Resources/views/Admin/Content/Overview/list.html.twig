@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Identifikace eshopu{% endblock %}
-{% block h1 %}Domény eshopu{% endblock %}
+{% block title %}- {{ 'Identifikace eshopu'|trans }}{% endblock %}
+{% block h1 %}{{ 'Domény eshopu'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="row">
@@ -10,8 +10,8 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr class="grid-row-titles">
-							<th>Název domény</th>
-							<th>Jazyk</th>
+							<th>{{ 'Název domény'|trans }}</th>
+							<th>{{ 'Jazyk'|trans }}</th>
 						</tr>
 					</thead>
 					<tbody>

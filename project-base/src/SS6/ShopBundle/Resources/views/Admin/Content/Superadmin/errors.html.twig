@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %} - Chybové stránky{% endblock %}
-{% block h1 %}Chybové stránky{% endblock %}
+{% block title %} - {{ 'Chybové stránky'|trans }}{% endblock %}
+{% block h1 %}{{ 'Chybové stránky'|trans }}{% endblock %}
 
 {% block main_content %}
 
@@ -18,8 +18,8 @@
 		</ul>
 	{% else %}
 		<div class="in-message in-message--info in-message--static js-flash-message" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown">
-			<a href="#" class="in-message__close js-flash-message-close" title="Zavřít">X</a>
-			<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu.
+			<a href="#" class="in-message__close js-flash-message-close" title="{{ 'Zavřít'|trans }}">X</a>
+			{{ '<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu.'|trans|raw }}
 		</div>
 	{% endif %}
 

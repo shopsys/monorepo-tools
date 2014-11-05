@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Seznam zboží{% endblock %}
-{% block h1 %}Seznam zboží{% endblock %}
+{% block title %}- {{ 'Seznam zboží'|trans }}{% endblock %}
+{% block h1 %}{{ 'Seznam zboží'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="row">
@@ -11,14 +11,14 @@
 
 				<div class="wrap-box form-inline mb-1 mt-1">
 					{{ form_widget(quickSearchForm.text) }}
-					{{ form_widget(quickSearchForm.save, { label: 'Vyhledat', full_name: ''}) }}
+					{{ form_widget(quickSearchForm.save, { label: 'Vyhledat'|trans, full_name: ''}) }}
 					<i class="fa fa-info cursor-help js-tooltip"
 					 data-toggle="tooltip" data-placement="right"
-					 title="Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Hledání rozlišuje velká/malá písmena a diakritiku. Je možné používat operátory * a ?."
+					 title="{{ 'Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Hledání rozlišuje velká/malá písmena a diakritiku. Je možné používat operátory * a ?.'|trans }}"
 					></i>
 				</div>
 
-				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">Vytvořit nové zboží</a>
+				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
 				{{ gridView.render('@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
 				{{ gridView.renderHiddenInputs('page') }}
 

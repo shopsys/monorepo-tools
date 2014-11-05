@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutBlank.html.twig' %}
 
 {% block title %}
-	- Přihlášení
+	- {{ 'Přihlášení'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -12,15 +12,15 @@
 	{{ form_start(form, {attr: {class: 'box-login'}}) }}
 		{{ form_errors(form) }}
 
-		<h1 class="box-login__heading">Administrace</h1>
+		<h1 class="box-login__heading">{{ 'Administrace'|trans }}</h1>
 
 		{{ form_errors(form.username) }}
-		{{ form_widget(form.username, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+		{{ form_widget(form.username, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
 
 		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
 
-		{{ form_widget(form.login, {label: 'Přihlásit', attr: {class: 'btn-lg btn-block'}}) }}
+		{{ form_widget(form.login, {label: 'Přihlásit'|trans, attr: {class: 'btn-lg btn-block'}}) }}
 
 	{{ form_end(form) }}
 

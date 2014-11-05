@@ -13,10 +13,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	Nebyla nalezena žádná objednávka.
+	{{ 'Nebyla nalezena žádná objednávka.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'objednávek' %}
+	{% set entityName = 'objednávek'|trans %}
 	{{ parent() }}
 {% endblock %}

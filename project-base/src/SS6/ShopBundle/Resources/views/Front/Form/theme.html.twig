@@ -151,7 +151,7 @@
 					</label>
 				</div>
 			{% else %}
-				{{ empty_message|default('Není z čeho vybírat.') }}
+				{{ empty_message|default('Není z čeho vybírat.'|trans) }}
 			{% endfor %}
 			</div>
 	{% endspaceless %}

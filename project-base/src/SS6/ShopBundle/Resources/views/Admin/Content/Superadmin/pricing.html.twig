@@ -1,17 +1,17 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}Superadmin - cenotvorba{% endblock %}
-{% block h1 %}Superadmin - cenotvorba{% endblock %}
+{% block title %}{{ 'Superadmin - cenotvorba'|trans }}{% endblock %}
+{% block h1 %}{{ 'Superadmin - cenotvorba'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
 			{{ form_start(form) }}
 				<div class="wrap-group">
-					{{ form_row(form.type, { 'label': 'Typ vstupní ceny' }) }}
+					{{ form_row(form.type, { 'label': 'Typ vstupní ceny'|trans }) }}
 				</div>
 
-				{{ form_widget(form.save, { label: 'Uložit změny'}) }}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
 			{{ form_end(form) }}
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 <div class="col-sm-12 col-md-4">
 	<div class="wrap-box">
-		<h2 class="mt-0">Přehled zboží v košíku</h2>
+		<h2 class="mt-0">{{ 'Přehled zboží v košíku'|trans }}</h2>
 		<table class="list-cart-preview">
 			<tbody>
 
@@ -19,7 +19,7 @@
 				{% if orderPreview.transport is not empty %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
-							Způsob dopravy: {{ orderPreview.transport.name }}
+							{{ 'Způsob dopravy'|trans }}: {{ orderPreview.transport.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
 							{{ orderPreview.transportPrice.priceWithVat|priceText }}
@@ -30,7 +30,7 @@
 				{% if orderPreview.payment is not empty %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
-							Způsob platby: {{ orderPreview.payment.name }}
+							{{ 'Způsob platby'|trans }}: {{ orderPreview.payment.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
 							{{ orderPreview.paymentPrice.priceWithVat|priceText }}
@@ -40,7 +40,7 @@
 
 				<tr class="list-cart-preview__row list-cart-preview__row--total list-cart-preview__row--important">
 					<td class="list-cart-preview__cell">
-						Cena celkem s DPH:
+						{{ 'Cena celkem s DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
 						{{ orderPreview.totalPriceWithVat|price }}
@@ -49,7 +49,7 @@
 
 				<tr class="list-cart-preview__row list-cart-preview__row--total">
 					<td class="list-cart-preview__cell">
-						Cena celkem bez DPH:
+						{{ 'Cena celkem bez DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
 						{{ orderPreview.totalPriceWithoutVat|price }}
@@ -58,7 +58,7 @@
 
 				<tr class="list-cart-preview__row list-cart-preview__row--total">
 					<td class="list-cart-preview__cell">
-						Celková výše DPH:
+						{{ 'Celková výše DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
 						{{ orderPreview.totalPriceVatAmount|price }}

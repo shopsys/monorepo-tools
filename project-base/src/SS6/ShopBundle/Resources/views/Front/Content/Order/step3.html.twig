@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
-	Objednávka - osobní údaje
+	{{ 'Objednávka - osobní údaje'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
 
 		<div class="col-sm-12 col-md-8">
 			<div class="wrap-box">
-				<h2 class="mt-0">Osobní údaje</h2>
+				<h2 class="mt-0">{{ 'Osobní údaje'|trans }}</h2>
 
 				<fieldset>
 					{{ form_row(form.firstName, { label: 'Jméno' }) }}
@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="wrap-box">
-				<h2 class="mt-0">Firemní údaje <span class="heading-addition">(Pokud nakupuji na firmu)</span></h2>
+				<h2 class="mt-0">{{ 'Firemní údaje'|trans }} <span class="heading-addition">{{ '(Pokud nakupuji na firmu)'|trans }}</span></h2>
 				<fieldset>
 					{{ form_row(form.companyCustomer, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="wrap-box">
-				<h2 class="mt-0">Fakturační údaje <span class="heading-addition">(Tato adresa bude na daňovém dokladu)</span></h2>
+				<h2 class="mt-0">{{ 'Fakturační údaje'|trans }} <span class="heading-addition">{{ '(Tato adresa bude na daňovém dokladu)'|trans }}</span></h2>
 
 				<fieldset>
 					{{ form_row(form.street, { label: 'Ulice' }) }}
@@ -47,11 +47,11 @@
 			</div>
 
 			<div class="wrap-box">
-				<h2 class="mt-0">Doručovací adresa <span class="heading-addition">(Na tuto adresu bude zboží doručeno)</span></h2>
+				<h2 class="mt-0">{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
 				<fieldset>
 					{{ form_row(form.deliveryAddressFilled, {
 						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-						label: 'Zboží chci doručit na jinou adresu než fakturační'})
+						label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
 					}}
 					<div id="js-delivery-address-fields">
 						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba' }) }}
@@ -65,7 +65,7 @@
 			</div>
 
 			<div class="wrap-box">
-				<h2 class="mt-0">Poznámka</h2>
+				<h2 class="mt-0">{{ 'Poznámka'|trans }}</h2>
 
 				<fieldset>
 					{{ form_row(form.note, { label: 'Napište nám' }) }}
@@ -80,10 +80,10 @@
 	</div>
 
 	<div class="box-buttons">
-		{{ form_widget(form.save, { label: 'Dokončit objednávku', attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
+		{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
 
 		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left js-no-validate-button">
-			Zpět na výběr dopravy a platby
+			{{ 'Zpět na výběr dopravy a platby'|trans }}
 		</button>
 	</div>
 {% endblock %}

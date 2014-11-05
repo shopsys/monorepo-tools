@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Content/Article/detail.html.twig' %}
 
-{% block title %}- Editace článku - {{ article.name }}{% endblock %}
-{% block h1 %}Editace článku - {{ article.name }}{% endblock %}
+{% block title %}- {{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
+{% block h1 %}{{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
 
 {% block domain %}
 	<div class="form-line">
-		<label class="form-line__label">Doména:</label>
+		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
 		<input type="text" value="{{ getDomainName(article.domainId) }}" class="form-control form-line__field" readonly="readonly" />
 	</div>
 {% endblock %}

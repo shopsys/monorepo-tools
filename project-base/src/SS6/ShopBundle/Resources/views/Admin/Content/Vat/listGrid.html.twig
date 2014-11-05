@@ -11,15 +11,15 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit.
+	{{ 'Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'sazby DPH' %}
+	{% set entityName = 'sazby DPH'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit sazbu DPH' %}
+	{% set addEntity = 'Vytvořit sazbu DPH'|trans %}
 	{{ parent() }}
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Článek{% endblock %}
-{% block h1 %}Článek{% endblock %}
+{% block title %}- {{ 'Článek'|trans }}{% endblock %}
+{% block h1 %}{{ 'Článek'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="row">
@@ -20,7 +20,7 @@
 				</div>
 
 				{{ form_save(article|default(null), form) }}
-				<a href="{{ url('admin_article_list') }}" class="btn btn-default">Zpět na přehled</a>
+				<a href="{{ url('admin_article_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
 			{{ form_end(form) }}
 		</div>
 

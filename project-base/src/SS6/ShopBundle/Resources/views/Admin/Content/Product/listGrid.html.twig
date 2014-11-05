@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	Nebylo nalezeno žádné zboží.
+	{{ 'Nebylo nalezeno žádné zboží.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_id_name %}
@@ -13,6 +13,6 @@
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'zboží' %}
+	{% set entityName = 'zboží'|trans %}
 	{{ parent() }}
 {% endblock %}

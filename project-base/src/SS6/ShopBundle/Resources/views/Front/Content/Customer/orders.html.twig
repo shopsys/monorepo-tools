@@ -1,24 +1,24 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Mé objednávky{% endblock %}
+{% block title %}{{ parent() }} - {{ 'Mé objednávky'|trans }}{% endblock %}
 	{% block content %}
-		<h1>Mé objednávky</h1>
+		<h1>{{ 'Mé objednávky'|trans }}</h1>
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
 				{% if ordersData|length == 0 %}
-					Dosud nemáte žádnou objednávku.
+					{{ 'Dosud nemáte žádnou objednávku.'|trans }}
 				{% else %}
 					<div class="table-responsive">
 						<table class="table table-striped">
 							<tr>
-								<th>Číslo objednávky</th>
-								<th>Datum vytvoření</th>
-								<th>Aktuální stav</th>
-								<th>Počet položek</th>
-								<th>Doprava</th>
-								<th>Platba</th>
-								<th>Celková cena s DPH</th>
-								<th>Detail</th>
+								<th>{{ 'Číslo objednávky'|trans }}</th>
+								<th>{{ 'Datum vytvoření'|trans }}</th>
+								<th>{{ 'Aktuální stav'|trans }}</th>
+								<th>{{ 'Počet položek'|trans }}</th>
+								<th>{{ 'Doprava'|trans }}</th>
+								<th>{{ 'Platba'|trans }}</th>
+								<th>{{ 'Celková cena s DPH'|trans }}</th>
+								<th>{{ 'Detail'|trans }}</th>
 							</tr>
 								{% for orderData in ordersData %}
 									<tr>
