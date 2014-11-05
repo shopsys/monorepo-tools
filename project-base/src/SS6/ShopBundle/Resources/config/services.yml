@@ -144,7 +144,6 @@ services:
 
   ss6.shop.customer.mail.customer_mail_service:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
-    arguments: ["%main_email%"]
 
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService
@@ -307,7 +306,6 @@ services:
 
   ss6.shop.order.order_mail_service:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailService
-    arguments: ["%main_email%"]
 
   ss6.shop.order.order_number_sequence_repository:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository

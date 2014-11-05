@@ -3,9 +3,11 @@
 namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Mail\MailTemplate;
+use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -25,9 +27,9 @@ class OrderMailService {
 	const VARIABLE_PRODUCTS = '{products}';
 
 	/**
-	 * @var string
+	 * @var SS6\ShopBundle\Model\Setting\Setting
 	 */
-	private $senderEmail;
+	private $setting;
 
 	/**
 	 * @var \Symfony\Component\Routing\Router
@@ -46,18 +48,18 @@ class OrderMailService {
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @param type $senderEmail
+	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param Twig_Environment $twig
 	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation
 	 */
 	public function __construct(
-		$senderEmail,
+		Setting $setting,
 		Router $router,
 		Twig_Environment $twig,
 		PriceCalculation $orderItemPriceCalculation
 	) {
-		$this->senderEmail = $senderEmail;
+		$this->setting = $setting;
 		$this->router = $router;
 		$this->twig = $twig;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
@@ -75,7 +77,9 @@ class OrderMailService {
 
 		$message = Swift_Message::newInstance()
 			->setSubject($subject)
-			->setFrom($this->senderEmail)
+			->setFrom(
+				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),
+				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId()))
 			->setTo($toEmail)
 			->setContentType('text/plain; charset=UTF-8')
 			->setBody(strip_tags($body), 'text/plain')
