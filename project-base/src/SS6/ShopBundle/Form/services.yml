@@ -23,4 +23,4 @@ services:
   ss6.shop.locale.text:
     class: SS6\ShopBundle\Form\Locale\LocalizedType
     tags:
-      - { name: form.type, alias: locale_text }
+      - { name: form.type, alias: localized }

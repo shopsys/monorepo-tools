@@ -65,7 +65,7 @@ class LocalizedType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'locale_text';
+		return 'localized';
 	}
 
 }
