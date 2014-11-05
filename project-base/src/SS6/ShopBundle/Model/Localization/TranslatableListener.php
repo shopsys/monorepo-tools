@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localize;
+namespace SS6\ShopBundle\Model\Localization;
 
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\LifecycleEventArgs;

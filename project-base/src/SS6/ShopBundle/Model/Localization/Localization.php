@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localize;
+namespace SS6\ShopBundle\Model\Localization;
 
 use SS6\ShopBundle\Model\Domain\Domain;
 
-class Localize {
+class Localization {
 
 	private $languageNames = array(
 		'cs' => 'Čeština',
@@ -62,7 +62,7 @@ class Localize {
 
 	public function getLanguageName($locale) {
 		if (!array_key_exists($locale, $this->languageNames)) {
-			throw new \SS6\ShopBundle\Model\Localize\Exception\InvalidLocaleException(
+			throw new \SS6\ShopBundle\Model\Localization\Exception\InvalidLocaleException(
 				sprintf('Locale "%s" is not valid', $locale)
 			);
 		}

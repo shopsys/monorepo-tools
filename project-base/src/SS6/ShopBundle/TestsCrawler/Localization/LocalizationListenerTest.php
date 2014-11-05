@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\TestsCrawler\Localize;
+namespace SS6\ShopBundle\TestsCrawler\Localization;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
-class LocalizeListenerTest extends DatabaseTestCase {
+class LocalizationListenerTest extends DatabaseTestCase {
 
 	public function testProductDetailLocaleCs() {
 		$crawler = $this->getClient()->request('GET', 'product/detail/3');

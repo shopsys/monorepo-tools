@@ -3,23 +3,23 @@
 namespace SS6\ShopBundle\Form\Locale;
 
 use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Model\Localize\Localize;
+use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class LocaleTextType extends AbstractType {
+class LocalizedType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localize\Localize
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
 	 */
-	private $localize;
+	private $localization;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Localize\Localize $localize
+	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
 	 */
-	public function __construct(Localize $localize) {
-		$this->localize = $localize;
+	public function __construct(Localization $localization) {
+		$this->localization = $localization;
 	}
 
 	/**
@@ -40,8 +40,8 @@ class LocaleTextType extends AbstractType {
 
 		$otherLocaleOptions['required'] = $options['required'] && $otherLocaleOptions['required'];
 
-		foreach ($this->localize->getAllLocales() as $locale) {
-			if ($locale === $this->localize->getDefaultLocale()) {
+		foreach ($this->localization->getAllLocales() as $locale) {
+			if ($locale === $this->localization->getDefaultLocale()) {
 				$builder->add($locale, $options['type'], $defaultLocaleOptions);
 			} else {
 				$builder->add($locale, $options['type'], $otherLocaleOptions);

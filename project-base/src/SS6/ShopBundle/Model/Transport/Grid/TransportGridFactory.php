@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Model\Localize\Localize;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Transport\Detail\Factory;
 use SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -42,9 +42,9 @@ class TransportGridFactory implements GridFactoryInterface {
 	private $dragAndDropOrderingService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localize\Localize
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
 	 */
-	private $localize;
+	private $localization;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager\EntityManager $em
@@ -52,7 +52,7 @@ class TransportGridFactory implements GridFactoryInterface {
 	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
 	 * @param \SS6\ShopBundle\Model\Transport\Detail\Factory $transportDetailFactory
 	 * @param \SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService $dragAndDropOrderingService
-	 * @param \SS6\ShopBundle\Model\Localize\Localize $localize
+	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -60,14 +60,14 @@ class TransportGridFactory implements GridFactoryInterface {
 		TransportRepository $transportRepository,
 		Factory $transportDetailFactory,
 		DragAndDropOrderingService $dragAndDropOrderingService,
-		Localize $localize
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->transportRepository = $transportRepository;
 		$this->transportDetailFactory = $transportDetailFactory;
 		$this->dragAndDropOrderingService = $dragAndDropOrderingService;
-		$this->localize = $localize;
+		$this->localization = $localization;
 	}
 
 		/**
@@ -77,7 +77,7 @@ class TransportGridFactory implements GridFactoryInterface {
 		$queryBuilder = $this->transportRepository->getQueryBuilderForAll()
 			->addSelect('tt')
 			->join('t.translations', 'tt', Join::WITH, 'tt.locale = :locale')
-			->setParameter('locale', $this->localize->getDefaultLocale());
+			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
 			$queryBuilder, 't.id',
 			function ($row) {

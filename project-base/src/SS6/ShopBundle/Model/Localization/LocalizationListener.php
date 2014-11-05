@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localize;
+namespace SS6\ShopBundle\Model\Localization;
 
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class LocalizeListener implements EventSubscriberInterface {
+class LocalizationListener implements EventSubscriberInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
