@@ -97,7 +97,7 @@ class InputPriceRepository {
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$product->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
 					$productPrice->getPriceWithVat(),
-					$product->getVat()
+					$product->getVat()->getPercent()
 				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
 				$product->setPrice($productPrice->getPriceWithVat());
@@ -123,7 +123,7 @@ class InputPriceRepository {
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$payment->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
 					$paymentPrice->getPriceWithVat(),
-					$payment->getVat()
+					$payment->getVat()->getPercent()
 				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
 				$payment->setPrice($paymentPrice->getPriceWithVat());
@@ -149,7 +149,7 @@ class InputPriceRepository {
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$transport->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
 					$transportPrice->getPriceWithVat(),
-					$transport->getVat()
+					$transport->getVat()->getPercent()
 				));
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
 				$transport->setPrice($transportPrice->getPriceWithVat());

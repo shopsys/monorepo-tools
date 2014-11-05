@@ -4,8 +4,6 @@ namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
@@ -20,12 +18,12 @@ class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetInputPriceWithoutVat() {
 		$priceWithVat = '100';
-		$vat = new Vat(new VatData('vatName', 20));
+		$vatPercent = 20;
 
 		$inputPriceCalculation = new InputPriceCalculation();
-		$inputPriceWithoutVat = $inputPriceCalculation->getInputPriceWithoutVat($priceWithVat, $vat);
+		$inputPriceWithoutVat = $inputPriceCalculation->getInputPriceWithoutVat($priceWithVat, $vatPercent);
 
-		$this->assertEquals(round($priceWithVat * 100 / (100 + 20), 6), round($inputPriceWithoutVat, 6));
+		$this->assertEquals(round($priceWithVat * 100 / (100 + $vatPercent), 6), round($inputPriceWithoutVat, 6));
 	}
 
 }
