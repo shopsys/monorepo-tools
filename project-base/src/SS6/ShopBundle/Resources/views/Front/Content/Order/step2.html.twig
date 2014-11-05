@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
-	Objednávka
+	{{ 'Objednávka'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 
 			<div class="wrap-box">
 
-				<h2 class="mt-0">Výběr dopravy</h2>
+				<h2 class="mt-0">{{ 'Výběr dopravy'|trans }}</h2>
 
 				<div class="box-chooser js-form-group">
 					{{ form_errors(form.transport, { errors_attr: {class: 'in-message-floating--on-top'} }) }}
@@ -49,7 +49,7 @@
 							</label>
 						{% else %}
 							{% do form.transport.setRendered %}
-							Není z čeho vybírat
+							{{ 'Není z čeho vybírat'|trans }}
 						{% endfor %}
 					</div>
 				</div>
@@ -58,7 +58,7 @@
 
 			<div class="wrap-box">
 
-				<h2 class="mt-0">Výběr platby</h2>
+				<h2 class="mt-0">{{ 'Výběr platby'|trans }}</h2>
 
 				<div class="box-chooser box-chooser--smaller js-form-group">
 					{{ form_errors(form.payment, { errors_attr: {class: 'in-message-floating--on-top'} }) }}
@@ -95,7 +95,7 @@
 							</label>
 						{% else %}
 							{% do form.payment.setRendered %}
-							Není z čeho vybírat
+							{{ 'Není z čeho vybírat'|trans }}
 						{% endfor %}
 					</div>
 				</div>
@@ -108,10 +108,10 @@
 	</div>
 
 	<div class="box-buttons">
-		{{ form_widget(form.save, { label: 'Pokračovat v objednávce', attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
+		{{ form_widget(form.save, { label: 'Pokračovat v objednávce'|trans, attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
 
 		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left">
-			Zpět do košíku
+			{{ 'Zpět do košíku'|trans }}
 		</button>
 	</div>
 {% endblock %}

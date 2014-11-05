@@ -1,9 +1,9 @@
 <table>
 	<tr>
-		<th>Název</th>
-		<th>Počet kusů</th>
-		<th>Cena za kus s DPH</th>
-		<th>Celková cena za položku s DPH</th>
+		<th>{{ 'Název'|trans }}</th>
+		<th>{{ 'Počet kusů'|trans }}</th>
+		<th>{{ 'Cena za kus s DPH'|trans }}</th>
+		<th>{{ 'Celková cena za položku s DPH'|trans }}</th>
 	</tr>
 	{% for item in order.items %}
 		<tr>

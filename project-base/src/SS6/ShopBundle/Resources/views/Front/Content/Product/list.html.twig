@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	- Katalog zboží
+	- {{ 'Katalog zboží'|trans }}
 {% endblock %}
 
 {% block content %}
-	<h1>Katalog zboží</h1>
+	<h1>{{ 'Katalog zboží'|trans }}</h1>
 
 	<div>
 		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
@@ -30,7 +30,7 @@
 					<div class="list-items__price">
 						<dl class="list-params-side">
 							<dt class="list-params-side__title">
-								Cena s DPH:
+								{{ 'Cena s DPH'|trans }}:
 							</dt>
 							<dd class="list-params-side__definition price-main price-big">
 								{{ productDetail.basePrice.priceWithVat|price }}
@@ -38,7 +38,7 @@
 						</dl>
 						<dl class="list-params-side">
 							<dt class="list-params-side__title">
-								Cena bez DPH:
+								{{ 'Cena bez DPH'|trans }}:
 							</dt>
 							<dd class="list-params-side__definition">
 								{{ productDetail.basePrice.priceWithoutVat|price }}

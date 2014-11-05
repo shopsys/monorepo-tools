@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Content/Slider/detail.html.twig' %}
 
-{% block title %}- Editace stránky slideru - {{ sliderItem.name }}{% endblock %}
-{% block h1 %}Editace stránky slideru - {{ sliderItem.name }}{% endblock %}
+{% block title %}- {{ 'Editace stránky slideru'|trans }} - {{ sliderItem.name }}{% endblock %}
+{% block h1 %}{{ 'Editace stránky slideru'|trans }} - {{ sliderItem.name }}{% endblock %}
 
 {% block domain %}
 	<div class="form-line">
-		<label class="form-line__label">Doména:</label>
+		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
 		<input type="text" value="{{ getDomainName(sliderItem.domainId) }}" class="form-control form-line__field" readonly="readonly" />
 	</div>
 {% endblock %}
@@ -13,7 +13,7 @@
 {% block image %}
 	<div class="form-line">
 		<label class="form-line__label">
-			Obrázek:
+			{{ 'Obrázek'|trans }}:
 		</label>
 		<div class="form-line__field mb-1">
 			{{ image(sliderItem, { height: 100 }) }}

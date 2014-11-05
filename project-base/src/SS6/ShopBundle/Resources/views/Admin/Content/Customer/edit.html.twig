@@ -1,12 +1,12 @@
 {% extends '@SS6Shop/Admin/Content/Customer/detail.html.twig' %}
 
-{% block title %}- Editace zákazníka - {{ user.fullName }}{% endblock %}
-{% block h1 %}Editace zákazníka - {{ user.fullName }}{% endblock %}
+{% block title %}- {{ 'Editace zákazníka'|trans }} - {{ user.fullName }}{% endblock %}
+{% block h1 %}{{ 'Editace zákazníka'|trans }} - {{ user.fullName }}{% endblock %}
 
 {% block customer_created_at %}
 	<div class="form-line">
 		<span class="form-line form-line__label">
-			Datum registrace :
+			{{ 'Datum registrace'|trans }} :
 		</span>
 		<span class="form-line form-line__text">
 			{{ user.createdAt|date('j.n.Y H:i') }}
@@ -18,13 +18,13 @@
 {% block customer_last_login %}
 	<div class="form-line">
 		<span class="form-line form-line__label">
-			Poslední přihlášení :
+			{{ 'Poslední přihlášení'|trans }} :
 		</span>
 		<span class="form-line form-line__text">
 			{% if user.lastLogin != null %}
 				{{ user.lastLogin|date('j.n.Y H:i') }}
 			{% else %}
-				nikdy
+				{{ 'nikdy'|trans }}
 			{% endif %}
 		</span>
 	</div>
@@ -32,7 +32,7 @@
 
 {% block customer_domain %}
 	<div class="form-line">
-		<label class="form-line__label">Doména: </label>
+		<label class="form-line__label">{{ 'Doména'|trans }}: </label>
 		<input
 			type="text"
 			value="{{ getDomainName(user.domainId) }}"

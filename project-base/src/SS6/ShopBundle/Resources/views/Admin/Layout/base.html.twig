@@ -12,7 +12,7 @@
 	<!--[if IE 8 ]>
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/styles/index-ie8.css') }}" media="screen, projection">
 	<![endif]-->
-	
+
 	{# bootstrap/tooltip.js must be imported before bootstrap/popover.js #}
 	{{ importJavascripts([
 		'bundles/bmatznerjquery/js/jquery.min.js',
@@ -21,7 +21,7 @@
 		'assets/frontend/scripts/validation/customizeBundle.js',
 		'assets/frontend/scripts/checkboxToggle.js',
 		'assets/frontend/scripts/window.js',
-		'assets/admin/scripts/bootstrap/tooltip.js', 
+		'assets/admin/scripts/bootstrap/tooltip.js',
 		'assets/admin/scripts/bootstrap/*.js',
 		'assets/admin/scripts/plugins/*.js',
 		'assets/admin/scripts/validation/form/*.js',
@@ -37,7 +37,7 @@
 		};
 	</script>
 
-	<title>Adminstrace {% block title %}ShopSys 6{% endblock %}</title>
+	<title>{{ 'Administrace'|trans }} {% block title %}ShopSys 6{% endblock %}</title>
 
 	<body>
 		{% block html_body %}{% endblock %}

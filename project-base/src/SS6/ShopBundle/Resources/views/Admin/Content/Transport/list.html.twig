@@ -1,5 +1,5 @@
 <h2>Dopravy</h2>
 
-<a href="{{ url('admin_transport_new') }}" class="btn btn-primary mb-1">Vytvořit dopravu</a>
+<a href="{{ url('admin_transport_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit dopravu'|trans }}</a>
 
 {{ gridView.render('@SS6Shop/Admin/Content/Transport/listGrid.html.twig') }}

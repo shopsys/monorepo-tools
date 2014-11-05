@@ -17,10 +17,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit.
+	{{ 'Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'zákazníků' %}
+	{% set entityName = 'zákazníků'|trans %}
 	{{ parent() }}
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Ikonka {{ icon }}{% endblock %}
-{% block h1 %}Ikonka {{ icon }}{% endblock %}
+{% block title %}- {{ 'Ikonka'|trans }} {{ icon }}{% endblock %}
+{% block h1 %}{{ 'Ikonka'|trans }} {{ icon }}{% endblock %}
 
 {% block main_content %}
-	
+
 	<div class="well">
 		<i class="fa fa-{{ icon }} fa-5x"></i>&nbsp;&nbsp;
 		<i class="fa fa-{{ icon }} fa-4x"></i>&nbsp;&nbsp;
@@ -18,8 +18,8 @@
 			<i class="fa fa-{{ icon }}"></i> fa-{{ icon }}
 		</div>
 	</div>
-		
+
 	<div class="highlight"><pre><code class="html"><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fa fa-{{ icon }}&quot;</span><span class="nt">&gt;&lt;/i&gt;</span> fa-{{ icon }}
 </code></pre></div>
-	
+
 {% endblock %}

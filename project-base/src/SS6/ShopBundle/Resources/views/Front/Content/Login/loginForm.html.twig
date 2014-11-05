@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	- Přihlášení
+	- {{ 'Přihlášení'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -11,19 +11,19 @@
 		<div class="col-md-4 col-sm-12">
 			{{ form_start(form) }}
 
-				<h1>Přihlášení</h1>
+				<h1>{{ 'Přihlášení'|trans }}</h1>
 
 				<div class="form-group">
 					{{ form_errors(form.email) }}
-					{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'}}) }}
+					{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
 				</div>
 
 				<div class="form-group">
 					{{ form_errors(form.password) }}
-					{{ form_widget(form.password, {attr: {placeholder: 'Heslo'}}) }}
+					{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
 				</div>
 
-				{{ form_widget(form.login, {label: 'Přihlásit'}) }}
+				{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
 
 			{{ form_end(form) }}
 

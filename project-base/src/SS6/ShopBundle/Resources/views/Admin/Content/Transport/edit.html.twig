@@ -1,15 +1,15 @@
 {% extends '@SS6Shop/Admin/Content/Transport/detail.html.twig' %}
 
-{% block title %}- Editace dopravy - {{ transportDetail.transport.name }}{% endblock %}
-{% block h1 %}Editace dopravy - {{ transportDetail.transport.name }}{% endblock %}
+{% block title %}- {{ 'Editace dopravy'|trans }} - {{ transportDetail.transport.name }}{% endblock %}
+{% block h1 %}{{ 'Editace dopravy'|trans }} - {{ transportDetail.transport.name }}{% endblock %}
 
 {% block transport_base_prices %}
 	<div class="form-line form-line--size-2">
-		<label class="form-line__label">Základní cena bez DPH:</label>
+		<label class="form-line__label">{{ 'Základní cena bez DPH'|trans }}:</label>
 		<input type="text" value="{{ transportDetail.basePrice.priceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 	<div class="form-line form-line--size-2">
-		<label class="form-line__label">Základní cena s DPH:</label>
+		<label class="form-line__label">{{ 'Základní cena s DPH'|trans }}:</label>
 		<input type="text" value="{{ transportDetail.basePrice.priceWithVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 {% endblock %}
@@ -17,7 +17,7 @@
 {% block image %}
 	<div class="form-line">
 		<label class="form-line__label">
-			Obrázek:
+			{{ 'Obrázek'|trans }}:
 		</label>
 		<div class="form-line__field mb-1">
 			{{ image(transportDetail.transport, { height: 100 }) }}

@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Karta zboží{% endblock %}
-{% block h1 %}Karta zboží{% endblock %}
+{% block title %}- {{ 'Karta zboží'|trans }}{% endblock %}
+{% block h1 %}{{ 'Karta zboží'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="row">
@@ -40,7 +40,7 @@
 				</div>
 
 				<div class="wrap-group js-form-group">
-					<h2>Parametry:</h2>
+					<h2>{{ 'Parametry'|trans }}:</h2>
 
 					{{ form_errors(form.parameters) }}
 
@@ -49,8 +49,8 @@
 						<table class="table-edit mb-1" id="product_parameters">
 							<thead class="table-edit__heading">
 								<tr>
-									<th class="table-edit__heading__cell">Parametr</th>
-									<th class="table-edit__heading__cell">Hodnota</th>
+									<th class="table-edit__heading__cell">{{ 'Parametr'|trans }}</th>
+									<th class="table-edit__heading__cell">{{ 'Hodnota'|trans }}</th>
 									<th class="table-edit__heading__cell"></th>
 								</tr>
 							</thead>
@@ -80,11 +80,11 @@
 								{% endfor %}
 
 								<tr class="js-parameters-empty-item">
-									<td colspan="3">Přidejte nějaké parametry</td>
+									<td colspan="3">{{ 'Přidejte nějaké parametry'|trans }}</td>
 								</tr>
 							</tbody>
 						</table>
-						<a href="#" class="js-parameters-item-add btn btn-primary"><i class="fa fa-plus fa-lg"></i> Přidat</a>
+						<a href="#" class="js-parameters-item-add btn btn-primary"><i class="fa fa-plus fa-lg"></i> {{ 'Přidat'|trans }}</a>
 					</div>
 				</div>
 
@@ -93,7 +93,7 @@
 					{{ form_row(form.image, { label: 'Nahrát obrázek' }) }}
 
 					{{ form_save(product|default(null), form) }}
-					<a href="{{ url('admin_product_list') }}" class="btn btn-default">Zpět na přehled</a>
+					<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
 				</div>
 			{{ form_end(form) }}
 		</div>

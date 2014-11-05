@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Content/Slider/detail.html.twig' %}
 
-{% block title %}- Nová stránka slideru{% endblock %}
-{% block h1 %}Nová stránka slideru{% endblock %}
+{% block title %}- {{ 'Nová stránka slideru'|trans }}{% endblock %}
+{% block h1 %}{{ 'Nová stránka slideru'|trans }}{% endblock %}
 
 {% block domain %}
 	<div class="form-line">
-		<label class="form-line__label">Doména:</label>
+		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
 		<input type="text" value="{{ getDomainName(selectedDomainId) }}" class="form-control form-line__field" readonly="readonly" />
 	</div>
 {% endblock %}

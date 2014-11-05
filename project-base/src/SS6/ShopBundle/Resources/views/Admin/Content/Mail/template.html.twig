@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Nastavení šablon e-mailů{% endblock %}
-{% block h1 %}Nastavení šablon e-mailů{% endblock %}
+{% block title %}- {{ 'Nastavení šablon e-mailů'|trans }}{% endblock %}
+{% block h1 %}{{ 'Nastavení šablon e-mailů'|trans }}{% endblock %}
 
 {% block main_content %}
 
@@ -19,9 +19,9 @@
 							</span>
 						</h2>
 						<div class="toggle-content toggle-close box-expand__hidden">
-							{{ form_row(template.subject, { label: 'Předmět'}) }}
-							{{ form_row(template.body, { label: 'Text'}) }}
-							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
+							{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
+							{{ form_row(template.body, { label: 'Text'|trans}) }}
+							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
 
 							<div class="row">
 								<div class="col-xs-12 col-lg-10">
@@ -30,7 +30,7 @@
 											<thead>
 												<tr class="grid-row-titles">
 													<th>
-														Použitelné proměnné
+														{{ 'Použitelné proměnné'|trans }}
 														{% if variablesInfoText is not null %}
 															<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
 														{% endif %}
@@ -61,11 +61,11 @@
 							orderStatus.name,
 							orderStatusTemplate,
 							orderStatusVariables,
-							"V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky"
+							"V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky"|trans
 					) }}
 				{% endfor %}
 
-				{{ _self.mailTemplate('Potvrzení registrace', form.registrationTemplate, registrationVariables) }}
+				{{ _self.mailTemplate('Potvrzení registrace'|trans, form.registrationTemplate, registrationVariables) }}
 
 			{{ form_end(form) }}
 

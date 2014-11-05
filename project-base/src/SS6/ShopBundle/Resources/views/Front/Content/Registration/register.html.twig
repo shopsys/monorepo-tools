@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block title %}
-	Registrace
+	{{ 'Registrace'|trans }}
 {% endblock %}
 
 {% block content %}
-	<h1>Registrace</h1>
+	<h1>{{ 'Registrace'|trans }}</h1>
 
 	{{ form_errors(form) }}
 
@@ -17,7 +17,7 @@
 		{{ form_row(form.password.first, { label: 'Heslo' }) }}
 		{{ form_row(form.password.second, { label: 'Heslo znovu' }) }}
 
-		{{ form_widget(form.save, { label: 'Registrovat' }) }}
+		{{ form_widget(form.save, { label: 'Registrovat'|trans }) }}
 
 	{{ form_end(form) }}
 

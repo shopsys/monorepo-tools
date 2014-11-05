@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- Přehled zákazníků{% endblock %}
-{% block h1 %}Přehled zákazníků{% endblock %}
+{% block title %}- {{ 'Přehled zákazníků'|trans }}{% endblock %}
+{% block h1 %}{{ 'Přehled zákazníků'|trans }}{% endblock %}
 
 {% block main_content %}
 
@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			<a href="{{ url('admin_customer_new') }}" class="btn btn-primary mb-1">Vytvořit nového zákazníka</a>
+			<a href="{{ url('admin_customer_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nového zákazníka'|trans }}</a>
 
 			{{ gridView.render('@SS6Shop/Admin/Content/Customer/listGrid.html.twig') }}
 		</div>

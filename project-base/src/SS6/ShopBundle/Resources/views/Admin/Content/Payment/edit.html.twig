@@ -1,15 +1,15 @@
 {% extends '@SS6Shop/Admin/Content/Payment/detail.html.twig' %}
 
-{% block title %}- Editace platby - {{ paymentDetail.payment.name }}{% endblock %}
-{% block h1 %}Editace platby - {{ paymentDetail.payment.name }}{% endblock %}
+{% block title %}- {{ 'Editace platby'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
+{% block h1 %}{{ 'Editace platby'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
 
 {% block payment_base_prices %}
 	<div class="form-line form-line--size-2">
-		<label class="form-line__label">Základní cena bez DPH:</label>
+		<label class="form-line__label">{{ 'Základní cena bez DPH'|trans }}:</label>
 		<input type="text" value="{{ paymentDetail.basePrice.priceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 	<div class="form-line form-line--size-2">
-		<label class="form-line__label">Základní cena s DPH:</label>
+		<label class="form-line__label">{{ 'Základní cena s DPH'|trans }}:</label>
 		<input type="text" value="{{ paymentDetail.basePrice.priceWithVat }}" class="form-line__field form-control" readonly="readonly">
 	</div>
 {% endblock %}
@@ -17,7 +17,7 @@
 {% block image %}
 	<div class="form-line">
 		<label class="form-line__label">
-			Obrázek:
+			{{ 'Obrázek'|trans }}:
 		</label>
 		<div class="form-line__field mb-1">
 			{{ image(paymentDetail.payment, { height: 100 }) }}
