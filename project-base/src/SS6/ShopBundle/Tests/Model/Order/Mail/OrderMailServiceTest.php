@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -24,8 +25,11 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$orderItemPriceCalculationMock = $this->getMockBuilder(PriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$settingMock = $this->getMockBuilder(Setting::class)
+			->disableOriginalConstructor()
+			->getMock();
 
-		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock, $twigMock, $orderItemPriceCalculationMock);
+		$orderMailService = new OrderMailService($settingMock, $routerMock, $twigMock, $orderItemPriceCalculationMock);
 		$orderStatus1 = new OrderStatus('statusName1', OrderStatus::TYPE_NEW, 1);
 		$orderStatus2 = new OrderStatus('statusName2', OrderStatus::TYPE_IN_PROGRESS, 2);
 
@@ -51,8 +55,11 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$orderItemPriceCalculationMock = $this->getMockBuilder(PriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$settingMock = $this->getMockBuilder(Setting::class)
+			->disableOriginalConstructor()
+			->getMock();
 
-		$orderMailService = new OrderMailService('no-reply@netdevelo.cz', $routerMock, $twigMock, $orderItemPriceCalculationMock);
+		$orderMailService = new OrderMailService($settingMock, $routerMock, $twigMock, $orderItemPriceCalculationMock);
 
 		$order = $this->getReference('order_1');
 
