@@ -60,6 +60,12 @@ doctrine:
         alias: SS6ShopBundle
         prefix: SS6\ShopBundle\Model
         is_bundle: false
+      SS6ShopBundleComponent:
+        type: annotation
+        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Component
+        alias: SS6ShopBundleComponent
+        prefix: SS6\ShopBundle\Component
+        is_bundle: false
       SS6ShopBundleTests:
         type: annotation
         dir: %kernel.root_dir%/../src/SS6/ShopBundle/Tests
