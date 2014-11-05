@@ -64,28 +64,28 @@ class InputPriceRepository {
 	}
 
 	public function recalculateToInputPricesWithoutVat() {
-		$this->recalculateInputPrice(PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
+		$this->recalculateInputPriceForNewType(PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 	}
 
 	public function recalculateToInputPricesWithVat() {
-		$this->recalculateInputPrice(PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
+		$this->recalculateInputPriceForNewType(PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
+	}
+
+	/**
+	 * @param string $newInputPriceType
+	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
+	 */
+	private function recalculateInputPriceForNewType($newInputPriceType) {
+		$this->recalculateProductsInputPriceForNewType($newInputPriceType);
+		$this->recalculateTransportsInputPriceForNewType($newInputPriceType);
+		$this->recalculatePaymentsInputPriceForNewType($newInputPriceType);
 	}
 
 	/**
 	 * @param string $toInputPriceType
 	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
-	private function recalculateInputPrice($toInputPriceType) {
-		$this->recalculateInputPriceForProducts($toInputPriceType);
-		$this->recalculateInputPriceForTransports($toInputPriceType);
-		$this->recalculateInputPriceForPayments($toInputPriceType);
-	}
-
-	/**
-	 * @param string $toInputPriceType
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
-	 */
-	private function recalculateInputPriceForProducts($toInputPriceType) {
+	private function recalculateProductsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')
@@ -111,7 +111,7 @@ class InputPriceRepository {
 	 * @param string $toInputPriceType
 	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
-	private function recalculateInputPriceForPayments($toInputPriceType) {
+	private function recalculateTransportsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Payment::class, 'p')
@@ -137,7 +137,7 @@ class InputPriceRepository {
 	 * @param string $toInputPriceType
 	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
-	private function recalculateInputPriceForTransports($toInputPriceType) {
+	private function recalculatePaymentsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
 			->select('t')
 			->from(Transport::class, 't')
