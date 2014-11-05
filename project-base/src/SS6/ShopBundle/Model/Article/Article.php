@@ -5,8 +5,6 @@ namespace SS6\ShopBundle\Model\Article;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Product
- *
  * @ORM\Table(name="articles")
  * @ORM\Entity
  */
