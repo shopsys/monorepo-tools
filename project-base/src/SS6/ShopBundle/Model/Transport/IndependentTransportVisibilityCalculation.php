@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Transport;
 
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class IndependentTransportVisibilityCalculation {
@@ -11,10 +12,17 @@ class IndependentTransportVisibilityCalculation {
 	 */
 	private $transportRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
-		TransportRepository $transportRepository
+		TransportRepository $transportRepository,
+		Domain $domain
 	) {
 		$this->transportRepository = $transportRepository;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -23,6 +31,12 @@ class IndependentTransportVisibilityCalculation {
 	 * @return boolean
 	 */
 	public function isIndependentlyVisible(Transport $transport, $domainId) {
+		$locale = $this->domain->getDomainConfigById($domainId)->getLocale();
+
+		if (strlen($transport->getName($locale)) === 0) {
+			return false;
+		}
+
 		if ($transport->isHidden()) {
 			return false;
 		}

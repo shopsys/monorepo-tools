@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Locale;
 
+use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Localize\Localize;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,17 +27,25 @@ class LocaleTextType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$subOptions = $options['options'];
+		Condition::setArrayDefaultValue($options['options'], 'required', false);
+		Condition::setArrayDefaultValue($options['options'], 'constraints', array());
 
-		if (!array_key_exists('constraints', $subOptions)) {
-			$subOptions['constraints'] = array();
-		}
-		$subOptions['constraints'] = array_merge(
-			$subOptions['constraints'],
+		$defaultLocaleOptions = $options['options'];
+		$otherLocaleOptions = $options['options'];
+
+		$defaultLocaleOptions['constraints'] = array_merge(
+			$defaultLocaleOptions['constraints'],
 			$options['sub_constraints']
 		);
+
+		$otherLocaleOptions['required'] = $options['required'] && $otherLocaleOptions['required'];
+
 		foreach ($this->localize->getAllLocales() as $locale) {
-			$builder->add($locale, $options['type'], $subOptions);
+			if ($locale === $this->localize->getDefaultLocale()) {
+				$builder->add($locale, $options['type'], $defaultLocaleOptions);
+			} else {
+				$builder->add($locale, $options['type'], $otherLocaleOptions);
+			}
 		}
 	}
 
