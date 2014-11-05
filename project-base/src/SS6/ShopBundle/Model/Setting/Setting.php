@@ -35,30 +35,33 @@ class Setting {
 	}
 
 	/**
-	 * @param type $key
+	 * @param string $key
+	 * @param int|null $domainId
 	 * @return string|int|float|bool|null
 	 */
-	public function get($key) {
-		return $this->getSettingValue($key)->getValue();
+	public function get($key, $domainId = null) {
+		return $this->getSettingValue($key, $domainId)->getValue();
 	}
 
 	/**
 	 * @param string $key
 	 * @param string|int|float|bool|null $value
+	 * @param int|null $domainId
 	 */
-	public function set($key, $value) {
-		$settingValue = $this->getSettingValue($key);
+	public function set($key, $value, $domainId = null) {
+		$settingValue = $this->getSettingValue($key, $domainId);
 		$settingValue->edit($value);
 		$this->em->flush($settingValue);
 	}
 
 	/**
 	 * @param string $key
+	 * @param int|nul $domainId
 	 * @return \SS6\ShopBundle\Model\Setting\SettingValue
 	 * @throws \SS6\ShopBundle\Model\Setting\Exception\SettingValueNotFoundException
 	 */
-	private function getSettingValue($key) {
-		$this->loadAllData();
+	private function getSettingValue($key, $domainId = null) {
+		$this->loadAllData($domainId);
 
 		if (array_key_exists($key, $this->data)) {
 			return $this->data[$key];
@@ -68,10 +71,18 @@ class Setting {
 		throw new \SS6\ShopBundle\Model\Setting\Exception\SettingValueNotFoundException($message);
 	}
 
-	private function loadAllData() {
+	/**
+	 * @param int|null $domainId
+	 */
+	private function loadAllData($domainId = null) {
 		if ($this->data === null) {
 			$this->data = [];
-			$settingValues = $this->settingValueRepository->findAll();
+			if (is_null($domainId)) {
+				$settingValues = $this->settingValueRepository->findAll();
+			} else {
+				$settingValues = $this->settingValueRepository->findAllByDomainId($domainId);
+			}
+
 			foreach ($settingValues as $settingValue) {
 				$this->data[$settingValue->getName()] = $settingValue;
 			}

@@ -62,24 +62,27 @@ class MailController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$mailSettingFacade = $this->get('ss6.shop.mail.setting.mail_setting_facade');
 		/* @var $mailSettingFacade \SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
+		$selectedDomainId = $selectedDomain->getId();
 
 		$form = $this->createForm(new MailSettingFormType());
 
 		$mailSettingData = array();
 
-		if(!$form->isSubmitted()) {
-			$mailSettingData['email'] = $mailSettingFacade->getMainAdminMail();
-			$mailSettingData['name'] = $mailSettingFacade->getMainAdminMailName();
+		if (!$form->isSubmitted()) {
+			$mailSettingData['email'] = $mailSettingFacade->getMainAdminMail($selectedDomainId);
+			$mailSettingData['name'] = $mailSettingFacade->getMainAdminMailName($selectedDomainId);
 		}
 
 		$form->setData($mailSettingData);
 		$form->handleRequest($request);
 
-		if($form->isValid()) {
+		if ($form->isValid()) {
 			$mailSettingData = $form->getData();
 
-			$mailSettingFacade->setMainAdminMail($mailSettingData['email']);
-			$mailSettingFacade->setMainAdminMailNAme($mailSettingData['name']);
+			$mailSettingFacade->setMainAdminMail($mailSettingData['email'], $selectedDomainId);
+			$mailSettingFacade->setMainAdminMailName($mailSettingData['name'], $selectedDomainId);
 
 			$flashMessageSender->addSuccess('Nastavení emailů bylo upraveno.');
 		}

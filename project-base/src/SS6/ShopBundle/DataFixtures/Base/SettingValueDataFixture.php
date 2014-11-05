@@ -27,8 +27,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		// @codingStandardsIgnoreStart
 		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, '<p>Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování.</p>'));
 		// @codingStandardsIgnoreStop
-		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, null));
-		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, null));
+		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 1));
+		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', 1));
+		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 2));
+		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, '2.Shopsys', 2));
 
 		$manager->flush();
 	}

@@ -34,4 +34,11 @@ class SettingValueRepository {
 		return $this->getSettingValueRepository()->findAll();
 	}
 
+	/**
+	 * @param int $domainId
+	 */
+	public function findAllByDomainId($domainId) {
+		return $this->getSettingValueRepository()->findBy(['domainId' => $domainId]);
+	}
+
 }

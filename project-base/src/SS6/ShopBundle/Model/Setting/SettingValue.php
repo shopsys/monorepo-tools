@@ -5,7 +5,12 @@ namespace SS6\ShopBundle\Model\Setting;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="settings3")
+ * @ORM\Table(
+ *	name="settings3",
+ *	uniqueConstraints={
+ *		@ORM\UniqueConstraint(name="setting_name_domain", columns={"name", "domain_id"})
+ *   },
+ * )
  * @ORM\Entity
  */
 class SettingValue {
@@ -20,10 +25,16 @@ class SettingValue {
 	const BOOLEAN_FALSE = 'false';
 
 	/**
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+	protected $id;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="string", length=255)
-	 * @ORM\Id
 	 */
 	private $name;
 
@@ -42,12 +53,20 @@ class SettingValue {
 	private $type;
 
 	/**
+	 * @var int
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $domainId;
+
+	/**
 	 * @param string $name
 	 * @param string|int|float|bool|null $value
+	 * @param int|null $domainId
 	 */
-	public function __construct($name, $value) {
+	public function __construct($name, $value, $domainId = null) {
 		$this->name = $name;
 		$this->setValue($value);
+		$this->domainId = $domainId;
 	}
 
 	/**
@@ -78,6 +97,13 @@ class SettingValue {
 			default:
 				return $this->value;
 		}
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getDomainId() {
+		return $this->domainId;
 	}
 
 	/**
