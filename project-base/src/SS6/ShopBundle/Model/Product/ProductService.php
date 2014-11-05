@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductService {
 
@@ -34,24 +35,12 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
 	 */
-	public function replaceOldVatWithNewVat(array $products, Vat $newVat) {
-		foreach ($products as $product) {
-			$this->recalculateInputPriceForNewVatPercent($product, $newVat->getPercent());
-			$product->changeVat($newVat);
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param string $newVatPercent
-	 */
-	public function recalculateInputPricesForNewVatPercent(array $products, $newVatPercent) {
-		foreach ($products as $product) {
-			$this->recalculateInputPriceForNewVatPercent($product, $newVatPercent);
-		}
+	public function replaceOldVatWithNewVat(Product $product, Vat $newVat) {
+		$this->recalculateInputPriceForNewVatPercent($product, $newVat->getPercent());
+		$product->changeVat($newVat);
 	}
 
 	/**

@@ -148,7 +148,9 @@ class ProductEditFacade {
 	 */
 	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
 		$products = $this->productRepository->getAllByVat($oldVat);
-		$this->productService->replaceOldVatWithNewVat($products, $newVat);
+		foreach ($products as $product) {
+			$this->productService->replaceOldVatWithNewVat($product, $newVat);
+		}
 		$this->em->flush();
 	}
 
@@ -158,7 +160,9 @@ class ProductEditFacade {
 	 */
 	public function recalculateInputPricesForNewVatPercent(Vat $oldVat, $newVatPercent) {
 		$products = $this->productRepository->getAllByVat($oldVat);
-		$this->productService->recalculateInputPricesForNewVatPercent($products, $newVatPercent);
+		foreach ($products as $product) {
+			$this->productService->recalculateInputPriceForNewVatPercent($product, $newVatPercent);
+		}
 		$this->em->flush();
 	}
 
