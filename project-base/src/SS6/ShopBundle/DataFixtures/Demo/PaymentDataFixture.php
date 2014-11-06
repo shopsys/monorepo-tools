@@ -19,7 +19,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		$paymentData->setPrice(99.95);
 		$paymentData->setDescription('Rychle, levně a spolehlivě!');
 		$paymentData->setVat($this->getReference(VatDataFixture::VAT_ZERO));
-		$paymentData->setDomains(array(1));
+		$paymentData->setDomains(array(1, 2));
 		$paymentData->setHidden(false);
 		$this->createPayment('payment_card', $paymentData, array('transport_personal', 'transport_ppl'));
 
