@@ -23,6 +23,11 @@ services:
     tags:
       - { name: form.type, alias: domains }
 
+  ss6.shop.form.domain:
+    class: SS6\ShopBundle\Form\DomainType
+    tags:
+      - { name: form.type, alias: domain }
+
   ss6.shop.locale.text:
     class: SS6\ShopBundle\Form\Locale\LocalizedType
     tags:
