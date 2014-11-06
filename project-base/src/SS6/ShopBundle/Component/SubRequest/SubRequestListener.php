@@ -58,7 +58,7 @@ class SubRequestListener {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Response $subResponse
-	 * @throws \SS6\ShopBundle\Model\Redirect\Exception\TooManyRedirectResponsesException
+	 * @throws \SS6\ShopBundle\Component\SubRequest\Exception\TooManyRedirectResponsesException
 	 */
 	private function processSubResponse(Response $subResponse) {
 		if ($subResponse->isRedirection()) {

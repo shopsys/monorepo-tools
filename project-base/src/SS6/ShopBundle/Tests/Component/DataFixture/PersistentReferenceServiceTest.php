@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\DataFixture;
+namespace SS6\ShopBundle\Tests\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
