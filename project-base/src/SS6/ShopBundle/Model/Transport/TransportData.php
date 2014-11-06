@@ -168,9 +168,16 @@ class TransportData {
 	 * @param \SS6\ShopBundle\Model\Transport\TransportDomain[] $transportDomains
 	 */
 	public function setFromEntity(Transport $transport, array $transportDomains) {
-		$this->setDescriptions($transport->getDescriptions());
+		$translations = $transport->getTranslations();
+		$names = array();
+		$desctiptions = array();
+		foreach ($translations as $translate) {
+			$names[$translate->getLocale()] = $translate->getName();
+			$desctiptions[$translate->getLocale()] = $translate->getDescription();
+		}
+		$this->setNames($names);
+		$this->setDescriptions($desctiptions);
 		$this->setHidden($transport->isHidden());
-		$this->setNames($transport->getNames());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());
 

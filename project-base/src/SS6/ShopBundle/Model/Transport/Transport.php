@@ -81,7 +81,6 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 	 */
 	private $position;
 
-	private $currentTranslation;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
@@ -117,34 +116,6 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 		foreach ($transportData->getDescriptions() as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
-	}
-
-	/**
-	 * @param string|null $locale
-	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
-	 */
-	private function translation($locale = null) {
-		if ($locale === null) {
-			$locale = $this->currentLocale;
-		}
-
-		if (!$locale) {
-			throw new \RuntimeException('No locale has been set and currentLocale is empty');
-		}
-
-		if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
-			return $this->currentTranslation;
-		}
-
-		$translation = $this->findTranslation($locale);
-		if ($translation === null) {
-			$translation = new TransportTranslation();
-			$translation->setLocale($locale);
-			$this->addTranslation($translation);
-		}
-
-		$this->currentTranslation = $translation;
-		return $translation;
 	}
 
 	/**
@@ -218,35 +189,11 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getNames() {
-		$names = array();
-		foreach ($this->translations as $translate) {
-			$names[$translate->getLocale()] = $translate->getName();
-		}
-
-		return $names;
-	}
-
-	/**
 	 * @param string|null $locale
 	 * @return string|null
 	 */
 	public function getDescription($locale = null) {
 		return $this->translation($locale)->getDescription();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getDescriptions() {
-		$descriptions = array();
-		foreach ($this->translations as $translate) {
-			$descriptions[$translate->getLocale()] = $translate->getDescription();
-		}
-
-		return $descriptions;
 	}
 
 	/**
@@ -298,4 +245,10 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 		$this->position = $position;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
+	 */
+	protected function createTranslation() {
+		return new TransportTranslation();
+	}
 }

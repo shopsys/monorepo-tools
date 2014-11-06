@@ -13,6 +13,11 @@ abstract class AbstractTranslatableEntity extends AbstractTranslatable {
 	protected $currentLocale;
 
 	/**
+	 * @var \Prezent\Doctrine\Translatable\TranslationInterface
+	 */
+	protected $currentTranslation;
+
+	/**
 	 * @param string $locale
 	 * @return \Prezent\Doctrine\Translatable\TranslationInterface|null
 	 */
@@ -25,4 +30,37 @@ abstract class AbstractTranslatableEntity extends AbstractTranslatable {
 
 		return null;
 	}
+
+	/**
+	 * @param string|null $locale
+	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
+	 */
+	protected function translation($locale = null) {
+		if ($locale === null) {
+			$locale = $this->currentLocale;
+		}
+
+		if (!$locale) {
+			throw new \RuntimeException('No locale has been set and currentLocale is empty');
+		}
+
+		if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
+			return $this->currentTranslation;
+		}
+
+		$translation = $this->findTranslation($locale);
+		if ($translation === null) {
+			$translation = $this->createTranslation();
+			$translation->setLocale($locale);
+			$this->addTranslation($translation);
+		}
+
+		$this->currentTranslation = $translation;
+		return $translation;
+	}
+
+	/**
+	 * return \Prezent\Doctrine\Translatable\TranslationInterface
+	 */
+	abstract protected function createTranslation();
 }
