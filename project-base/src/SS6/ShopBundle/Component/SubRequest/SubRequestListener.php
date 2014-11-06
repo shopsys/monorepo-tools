@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\SubRequest;
+namespace SS6\ShopBundle\Component\SubRequest;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,7 +58,7 @@ class SubRequestListener {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Response $subResponse
-	 * @throws \SS6\ShopBundle\Model\Redirect\Exception\TooManyRedirectResponsesException
+	 * @throws \SS6\ShopBundle\Component\SubRequest\Exception\TooManyRedirectResponsesException
 	 */
 	private function processSubResponse(Response $subResponse) {
 		if ($subResponse->isRedirection()) {
@@ -66,7 +66,7 @@ class SubRequestListener {
 				$this->redirectResponse = $subResponse;
 			} else {
 				$message = 'Only one subresponse can do a redirect.';
-				throw new \SS6\ShopBundle\Model\SubRequest\Exception\TooManyRedirectResponsesException($message);
+				throw new \SS6\ShopBundle\Component\SubRequest\Exception\TooManyRedirectResponsesException($message);
 			}
 		}
 	}

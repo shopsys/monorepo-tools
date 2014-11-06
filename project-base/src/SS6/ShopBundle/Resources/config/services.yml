@@ -3,7 +3,7 @@ imports:
   - { resource: ../../Twig/services.yml }
 
 parameters:
-  fragment.handler.class: SS6\ShopBundle\Model\SubRequest\RedirectFragmentHandler
+  fragment.handler.class: SS6\ShopBundle\Component\SubRequest\RedirectFragmentHandler
   prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localize\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
@@ -114,7 +114,7 @@ services:
     arguments: [@annotation_reader]
 
   ss6.shop.csv.csv_reader:
-    class: SS6\ShopBundle\Model\Csv\CsvReader
+    class: SS6\ShopBundle\Component\Csv\CsvReader
 
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
@@ -148,10 +148,10 @@ services:
     class: SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
 
   ss6.shop.data_fixture.persistent_reference_repository:
-    class: SS6\ShopBundle\Model\DataFixture\PersistentReferenceRepository
+    class: SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository
 
   ss6.shop.data_fixture.persistent_reference_service:
-    class: SS6\ShopBundle\Model\DataFixture\PersistentReferenceService
+    class: SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
 
   ss6.shop.data_fixtures.product_data_fixture_loader:
     class: SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
@@ -466,7 +466,7 @@ services:
     class: SS6\ShopBundle\Model\Slider\SliderItemRepository
 
   ss6.shop.sub_request.sub_request_listener:
-    class: SS6\ShopBundle\Model\SubRequest\SubRequestListener
+    class: SS6\ShopBundle\Component\SubRequest\SubRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

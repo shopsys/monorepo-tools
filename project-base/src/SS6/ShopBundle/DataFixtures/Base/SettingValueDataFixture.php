@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\Model\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Setting\SettingValue;

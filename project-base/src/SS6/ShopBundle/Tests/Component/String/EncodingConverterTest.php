@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\String;
+namespace SS6\ShopBundle\Tests\Component\String;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\String\EncodingConverter;
+use SS6\ShopBundle\Component\String\EncodingConverter;
 use stdClass;
 
 class EncodingConverterTest extends PHPUnit_Framework_TestCase {

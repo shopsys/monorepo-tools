@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\DataFixture;
+namespace SS6\ShopBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use SS6\Environment;
@@ -20,7 +20,7 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	private $kernel;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\DataFixture\PersistentReferenceService
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
 	 */
 	private $persistentReferenceService;
 

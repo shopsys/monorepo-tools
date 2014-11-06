@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\FileUpload;
 
-use SS6\ShopBundle\Model\String\TransformString;
+use SS6\ShopBundle\Component\String\TransformString;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
