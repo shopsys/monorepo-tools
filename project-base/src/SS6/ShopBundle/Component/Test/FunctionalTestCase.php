@@ -11,31 +11,39 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 */
 	private $client;
 
-	protected function setUp() {
-		parent::setUp();
-
+	protected function setUpDomain() {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$domain->switchDomainById(1);
 	}
 
+	protected function setUp() {
+		parent::setUp();
+		$this->setUpDomain();
+	}
+
 	/**
 	 * @return \Symfony\Component\HttpKernel\Client
+	 * @param string $username
+	 * @param string $password
+	 * @return \Symfony\Component\HttpKernel\Client
 	 */
-	protected function getClient($alwaysCreate = false) {
-		if ($alwaysCreate) {
+	protected function getClient($createNew = false, $username = null, $password = null) {
+		if ($createNew) {
 			$this->client = $this->createClient();
-			$this->setUp();
-			return $this->client;
-
-		} else {
-			if (!isset($this->client)) {
-				$this->client = $this->createClient();
-			}
-
-			return $this->client;
+			$this->setUpDomain();
+		} elseif (!isset($this->client)) {
+			$this->client = $this->createClient();
 		}
 
+		if ($username !== null) {
+			$this->client->setServerParameters(array(
+				'PHP_AUTH_USER' => $username,
+				'PHP_AUTH_PW' => $password,
+			));
+		}
+
+		return $this->client;
 	}
 
 	/**
@@ -54,17 +62,6 @@ abstract class FunctionalTestCase extends WebTestCase {
 		/* @var $persistentReferenceService \SS6\ShopBundle\Model\DataFixture\PersistentReferenceService */
 
 		return $persistentReferenceService->getReference($referenceName);
-	}
-
-	/**
-	 * @param string $username
-	 * @param string $password
-	 */
-	protected function authenticateUser($username, $password) {
-		$this->getClient()->setServerParameters(array(
-			'PHP_AUTH_USER' => $username,
-			'PHP_AUTH_PW' => $password,
-		));
 	}
 
 }
