@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\Grid;
 use SS6\ShopBundle\Model\Grid\GridView;
+use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -31,8 +32,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$this->assertEquals('gridId', $grid->getId());
 		$this->assertEquals(100, $grid->getLimit());
@@ -49,8 +51,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$grid->addColumn('columnId1', 'queryId1', 'title1', true)->setClassAttribute('classAttribute');
 		$grid->addColumn('columnId2', 'queryId2', 'title2', false);
 		$columns = $grid->getColumns();
@@ -82,8 +85,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$grid->addColumn('columnId1', 'queryId1', 'title1');
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Grid\Exception\DuplicateColumnIdException::class);
@@ -98,8 +102,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$grid->allowPaging();
 		$this->assertTrue($grid->isAllowedPaging());
 	}
@@ -112,8 +117,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$this->assertFalse($grid->isAllowedPaging());
 	}
 
@@ -125,8 +131,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$grid->setDefaultOrder('columnId1', DataSourceInterface::ORDER_DESC);
 		$this->assertEquals('-columnId1', $grid->getOrderWithDirection());
@@ -151,8 +158,9 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$grid->setDefaultOrder('default', DataSourceInterface::ORDER_ASC);
 		$this->assertEquals('-request', $grid->getOrderWithDirection());
@@ -165,13 +173,14 @@ class GridTest extends PHPUnit_Framework_TestCase {
 
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 		$dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
 			->setMethods(['getRows', 'getTotalRowsCount'])
 			->getMockForAbstractClass();
 		$dataSourceMock->expects($this->once())->method('getRows')->will($this->returnValue([]));
 		$dataSourceMock->expects($this->never())->method('getTotalRowsCount');
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$gridView = $grid->createView();
 
 		$this->assertInstanceOf(GridView::class, $gridView);
@@ -184,17 +193,47 @@ class GridTest extends PHPUnit_Framework_TestCase {
 
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 		$dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
 			->setMethods(['getRows', 'getTotalRowsCount'])
 			->getMockForAbstractClass();
 		$dataSourceMock->expects($this->once())->method('getRows')->will($this->returnValue([]));
 		$dataSourceMock->expects($this->once())->method('getTotalRowsCount')->will($this->returnValue(0));
 
-		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock);
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$grid->allowPaging();
 		$gridView = $grid->createView();
 
 		$this->assertInstanceOf(GridView::class, $gridView);
+	}
+
+	public function testEnableDragAndDrop() {
+		$entityClass = 'Path\To\Entity\Class';
+		$entityName = 'Entity\Name';
+
+		$request = new Request();
+		$requestStack = new RequestStack();
+		$requestStack->push($request);
+
+		$twigMock = $this->getMock(Twig_Environment::class);
+		$routerMock = $this->getMock(Router::class, [], [], '', false);
+		$dataSourceMock = $this->getMock(DataSourceInterface::class);
+		$gridOrderingServiceMock = $this->getMockBuilder(GridOrderingService::class)
+			->setMethods(['getEntityName'])
+			->getMock();
+		$gridOrderingServiceMock
+			->expects($this->once())
+			->method('getEntityName')
+			->with($this->equalTo($entityClass))
+			->will($this->returnValue($entityName));
+
+
+		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
+
+		$this->assertFalse($grid->isDragAndDrop());
+		$grid->enableDragAndDrop($entityClass);
+		$this->assertTrue($grid->isDragAndDrop());
+		$this->assertEquals($entityName, $grid->getOrderingEntityName());
 	}
 
 }

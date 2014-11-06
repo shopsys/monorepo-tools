@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Grid;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\Column;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
-use SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface;
+use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService;
 use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\Grid\GridView;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -125,9 +125,14 @@ class Grid {
 	private $inlineEditService;
 
 	/**
-	 * @var GridOrderingInterface|null
+	 * @var \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService
 	 */
-	private $dragAndDropOrderingService;
+	private $gridOrderingService;
+
+	/**
+	 * @var string|null
+	 */
+	private $orderingEntityName;
 
 	/**
 	 * @param string $id
@@ -135,13 +140,15 @@ class Grid {
 	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
 	 * @param \SS6\ShopBundle\Model\Grid\Router $router
 	 * @param \SS6\ShopBundle\Model\Grid\Twig_Environment $twig
+	 * @param \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService $gridOrderingService
 	 */
 	public function __construct(
 		$id,
 		DataSourceInterface $dataSource,
 		RequestStack $requestStack,
 		Router $router,
-		Twig_Environment $twig
+		Twig_Environment $twig,
+		GridOrderingService $gridOrderingService
 	) {
 		if (empty($id)) {
 			$message = 'Grid id cannot be empty.';
@@ -153,6 +160,7 @@ class Grid {
 		$this->requestStack = $requestStack;
 		$this->router = $router;
 		$this->twig = $twig;
+		$this->gridOrderingService = $gridOrderingService;
 
 		$this->limit = $this->defaultLimit;
 		$this->page = 1;
@@ -528,24 +536,24 @@ class Grid {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface $dragAndDropOrderingService
+	 * @param string $entityClass
 	 */
-	public function enableDragAndDrop(GridOrderingInterface $dragAndDropOrderingService) {
-		$this->dragAndDropOrderingService = $dragAndDropOrderingService;
+	public function enableDragAndDrop($entityClass) {
+		$this->orderingEntityName = $this->gridOrderingService->getEntityName($entityClass);
 	}
 
 	/**
 	 * @return boolean
 	 */
 	public function isDragAndDrop() {
-		return $this->dragAndDropOrderingService !== null;
+		return $this->orderingEntityName !== null;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingInterface|null
+	 * @return string|null
 	 */
-	public function getDragAndDropOrderingService() {
-		return $this->dragAndDropOrderingService;
+	public function getOrderingEntityName() {
+		return $this->orderingEntityName;
 	}
 
 }

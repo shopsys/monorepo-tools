@@ -7,7 +7,7 @@
 			data-inline-edit-url-save-form="{{ url('admin_grid_saveform') }}"
 		{% endif %}
 		{% if grid.dragAndDrop %}
-			data-drag-and-drop-ordering-service-name="{{ grid.dragAndDropOrderingService.serviceName }}"
+			data-drag-and-drop-ordering-entity-name="{{ grid.orderingEntityName }}"
 			data-drag-and-drop-url-save-order="{{ url('admin_grid_saveorder') }}"
 		{% endif %}
 	{% endspaceless %}>
