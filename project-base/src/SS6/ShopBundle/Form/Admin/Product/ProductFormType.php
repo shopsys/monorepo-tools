@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
 
+	const INTENTION = 'product_type';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
 	 */
@@ -176,6 +178,7 @@ class ProductFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
+			'intention' => self::INTENTION,
 		));
 	}
 
