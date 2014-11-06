@@ -79,7 +79,8 @@ class OrderMailService {
 			->setSubject($subject)
 			->setFrom(
 				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),
-				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId()))
+				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId())
+			)
 			->setTo($toEmail)
 			->setContentType('text/plain; charset=UTF-8')
 			->setBody(strip_tags($body), 'text/plain')
@@ -154,11 +155,9 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getBillingAddressHtmlTable(Order $order) {
-
 		return $this->twig->render('@SS6Shop/Mail/Order/billingAddress.html.twig', array(
 			'order' => $order,
 		));
-
 	}
 
 	/**
@@ -166,7 +165,6 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getDeliveryAddressHtmlTable(Order $order) {
-
 		return $this->twig->render('@SS6Shop/Mail/Order/deliveryAddress.html.twig', array(
 			'order' => $order,
 		));

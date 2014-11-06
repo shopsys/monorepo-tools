@@ -56,7 +56,8 @@ class CustomerMailService {
 			->setSubject($subject)
 			->setFrom(
 				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),
-				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId()))
+				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId())
+			)
 			->setTo($toEmail)
 			->setContentType('text/plain; charset=UTF-8')
 			->setBody(strip_tags($body), 'text/plain')
