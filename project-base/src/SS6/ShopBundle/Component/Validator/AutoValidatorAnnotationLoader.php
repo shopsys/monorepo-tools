@@ -92,17 +92,22 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 
 		$fieldMapping = $entityMetadata->getFieldMapping($fieldName);
 
-		switch ($fieldMapping['type']) {
-			case 'string':
-			case 'text':
-				if (!$fieldMapping['nullable']) {
-					$constraints[] = new Constraints\NotBlank();
-				}
-				if ($fieldMapping['length'] !== null) {
-					$constraints[] = new Constraints\Length(array('max' => $fieldMapping['length']));
-				}
+		if (!$fieldMapping['nullable']) {
+			$constraints[] = new Constraints\NotBlank();
+		}
 
-				break;
+		if (in_array($fieldMapping['type'], array('string', 'text'))) {
+			if ($fieldMapping['length'] !== null) {
+				$constraints[] = new Constraints\Length(array('max' => $fieldMapping['length']));
+			}
+		}
+
+		if ($fieldMapping['type'] === 'date') {
+			$constraints[] = new Constraints\Date();
+		}
+
+		if (in_array($fieldMapping['type'], array('datetime', 'datetimetz'))) {
+			$constraints[] = new Constraints\DateTime();
 		}
 
 		return $constraints;
