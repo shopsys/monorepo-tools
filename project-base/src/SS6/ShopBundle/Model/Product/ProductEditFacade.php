@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductEditFacade {
@@ -39,6 +40,11 @@ class ProductEditFacade {
 	private $domain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 */
+	private $productService;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
@@ -47,13 +53,15 @@ class ProductEditFacade {
 		ProductRepository $productRepository,
 		ProductVisibilityFacade $productVisibilityFacade,
 		ParameterRepository $parameterRepository,
-		Domain $domain
+		Domain $domain,
+		ProductService $productService
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productVisibilityFacade = $productVisibilityFacade;
 		$this->parameterRepository = $parameterRepository;
 		$this->domain = $domain;
+		$this->productService = $productService;
 	}
 
 	/**
@@ -141,7 +149,19 @@ class ProductEditFacade {
 	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
 		$products = $this->productRepository->getAllByVat($oldVat);
 		foreach ($products as $product) {
-			$product->changeVat($newVat);
+			$this->productService->replaceOldVatWithNewVat($product, $newVat);
+		}
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param string $newVatPercent
+	 */
+	public function recalculateInputPricesForNewVatPercent(Vat $oldVat, $newVatPercent) {
+		$products = $this->productRepository->getAllByVat($oldVat);
+		foreach ($products as $product) {
+			$this->productService->recalculateInputPriceForNewVatPercent($product, $newVatPercent);
 		}
 		$this->em->flush();
 	}
