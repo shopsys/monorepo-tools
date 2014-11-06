@@ -95,7 +95,7 @@ class Order {
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
-	private $totalProductPrice;
+	private $totalProductPriceWithVat;
 
 	/**
 	 * @var string
@@ -455,8 +455,8 @@ class Order {
 	/**
 	 * @return string
 	 */
-	public function getTotalProductPrice() {
-		return $this->totalProductPrice;
+	public function getTotalProductPriceWithVat() {
+		return $this->totalProductPriceWithVat;
 	}
 
 	/**
@@ -465,7 +465,7 @@ class Order {
 	public function setTotalPrice(OrderTotalPrice $orderTotalPrice) {
 		$this->totalPriceWithVat = $orderTotalPrice->getPriceWithVat();
 		$this->totalPriceWithoutVat = $orderTotalPrice->getPriceWithoutVat();
-		$this->totalProductPrice = $orderTotalPrice->getProductPrice();
+		$this->totalProductPriceWithVat = $orderTotalPrice->getProductPriceWithVat();
 	}
 
 	/**

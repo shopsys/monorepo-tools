@@ -28,7 +28,7 @@ class PriceCalculation {
 	public function getOrderTotalPrice(Order $order) {
 		$priceWithVat = 0;
 		$priceWithoutVat = 0;
-		$productPrice = 0;
+		$productPriceWithVat = 0;
 
 		foreach ($order->getItems() as $orderItem) {
 			$itemTotalPrice = $this->orderItemPriceCalculation->calculateTotalPrice($orderItem);
@@ -37,11 +37,11 @@ class PriceCalculation {
 			$priceWithoutVat += $itemTotalPrice->getPriceWithoutVat();
 
 			if ($orderItem instanceof OrderProduct) {
-				$productPrice += $itemTotalPrice->getPriceWithVat();
+				$productPriceWithVat += $itemTotalPrice->getPriceWithVat();
 			}
 		}
 
-		return new OrderTotalPrice($priceWithVat, $priceWithoutVat, $productPrice);
+		return new OrderTotalPrice($priceWithVat, $priceWithoutVat, $productPriceWithVat);
 	}
 
 }

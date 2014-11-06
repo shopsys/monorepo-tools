@@ -17,18 +17,18 @@ class OrderTotalPrice {
 	/**
 	 * @var string
 	 */
-	private $productPrice;
+	private $productPriceWithVat;
 
 	/**
 	 *
 	 * @param string $priceWithVat
 	 * @param string $priceWithoutVat
-	 * @param string $productPrice
+	 * @param string $productPriceWithVat
 	 */
-	public function __construct($priceWithVat, $priceWithoutVat, $productPrice) {
+	public function __construct($priceWithVat, $priceWithoutVat, $productPriceWithVat) {
 		$this->priceWithVat = $priceWithVat;
 		$this->priceWithoutVat = $priceWithoutVat;
-		$this->productPrice = $productPrice;
+		$this->productPriceWithVat = $productPriceWithVat;
 	}
 
 	/**
@@ -48,8 +48,8 @@ class OrderTotalPrice {
 	/**
 	 * @return string
 	 */
-	public function getProductPrice() {
-		return $this->productPrice;
+	public function getProductPriceWithVat() {
+		return $this->productPriceWithVat;
 	}
 
 }

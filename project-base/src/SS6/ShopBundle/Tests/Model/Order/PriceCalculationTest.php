@@ -46,6 +46,6 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(3220, $orderTotalPrice->getPriceWithVat());
 		$this->assertEquals(1165, $orderTotalPrice->getPriceWithoutVat());
-		$this->assertEquals(3200, $orderTotalPrice->getProductPrice());
+		$this->assertEquals(3200, $orderTotalPrice->getProductPriceWithVat());
 	}
 }
