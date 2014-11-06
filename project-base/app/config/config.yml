@@ -60,6 +60,12 @@ doctrine:
         alias: SS6ShopBundle
         prefix: SS6\ShopBundle\Model
         is_bundle: false
+      SS6ShopBundleTests:
+        type: annotation
+        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Tests
+        alias: SS6ShopBundleTests
+        prefix: SS6\ShopBundle\Tests
+        is_bundle: false
     hydrators:
       GroupedScalarHydrator: \SS6\ShopBundle\Component\GroupedScalarHydrator
 

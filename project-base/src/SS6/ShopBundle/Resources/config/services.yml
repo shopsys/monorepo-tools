@@ -21,6 +21,7 @@ parameters:
   ss6.web_dir: %kernel.root_dir%/../web
   translator.class: SS6\ShopBundle\Component\Translator
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
+  validator.builder.factory.class: SS6\ShopBundle\Component\Validator\ValidatorBuilderFactory
 
 services:
 
@@ -107,6 +108,10 @@ services:
 
   ss6.shop.cart.item.price_calculation:
     class: SS6\ShopBundle\Model\Cart\Item\PriceCalculation
+
+  ss6.shop.component.validator.auto_validator_annotation_loader:
+    class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader
+    arguments: [@annotation_reader]
 
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Model\Csv\CsvReader
