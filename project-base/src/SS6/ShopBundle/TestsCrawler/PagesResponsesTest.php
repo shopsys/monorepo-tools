@@ -46,8 +46,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 	 * @dataProvider adminPagesProvider
 	 */
 	public function testAdminPagesStatus200($url) {
-		$this->authenticateUser('admin', 'admin123');
-		$this->getClient()->request('GET', $url);
+		$this->getClient(false, 'admin', 'admin123')->request('GET', $url);
 		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 	}
 
@@ -84,8 +83,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 	 * @dataProvider frontEndPagesRegistredUserProvider
 	 */
 	public function testFrontEndPagesRegisteredUser($url) {
-		$this->authenticateUser('no-reply@netdevelo.cz', 'user123');
-		$this->getClient()->request('GET', $url);
+		$this->getClient(false, 'no-reply@netdevelo.cz', 'user123')->request('GET', $url);
 		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 	}
 
