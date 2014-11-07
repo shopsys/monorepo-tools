@@ -6,6 +6,7 @@
 
 	SS6.order.items.init = function () {
 		$('#js-order-items').on('click', '.js-order-item-remove', SS6.order.items.onRemoveItemClick);
+		$('#js-order-item-add').on('click', SS6.order.items.onAddItemClick);
 		SS6.order.items.refreshCount($('#js-order-items'));
 	};
 
@@ -25,9 +26,36 @@
 		event.preventDefault();
 	};
 
+	SS6.order.items.onAddItemClick = function(event) {
+		var $collection = $(this).closest('table').find('#js-order-items');
+
+		SS6.order.items.addItem($collection);
+		event.preventDefault();
+	};
+
 	SS6.order.items.removeItem = function($item) {
 		var $collection = $item.closest('#js-order-items');
+		var index = $item.data('index');
+
+		SS6.validation.removeItemFromCollection('#order_items', index);
 		$item.remove();
+
+		SS6.order.items.refreshCount($collection);
+	};
+
+	SS6.order.items.addItem = function($collection) {
+		var prototype = $collection.data('prototype');
+		var index = $collection.data('index');
+
+		var item = prototype.replace(/__name__/g, index);
+		var $item = $(item);
+		$item.data('index', index);
+
+		$collection.append($item);
+		SS6.validation.addNewItemToCollection('#order_items', index);
+
+		$collection.data('index', index + 1);
+
 		SS6.order.items.refreshCount($collection);
 	};
 
