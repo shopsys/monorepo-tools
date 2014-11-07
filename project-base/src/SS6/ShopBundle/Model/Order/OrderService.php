@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -72,11 +73,9 @@ class OrderService {
 		$orderItemsToDelete = array();
 		$orderItemsData = $orderData->getItems();
 		foreach ($order->getItems() as $orderItem) {
-			$orderItem->getId();
 			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
 				$orderItemData = $orderItemsData[$orderItem->getId()];
 				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
-				$orderItem = $order->getItemById($orderItemData->getId());
 				$orderItem->edit($orderItemData);
 			} else {
 				$order->removeItem($orderItem);
