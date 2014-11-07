@@ -33,7 +33,7 @@ abstract class AbstractTranslatableEntity extends AbstractTranslatable {
 
 	/**
 	 * @param string|null $locale
-	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
+	 * @return \Prezent\Doctrine\Translatable\TranslationInterface
 	 */
 	protected function translation($locale = null) {
 		if ($locale === null) {
