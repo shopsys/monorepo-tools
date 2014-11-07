@@ -203,6 +203,9 @@ class OrderFacade {
 		$statusChanged = $order->getStatus()->getId() !== $orderData->getStatusId();
 		$orderEditResult = $this->orderService->editOrder($order, $orderData, $orderStatus, $user);
 
+		foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
+			$this->em->persist($orderItem);
+		}
 		foreach ($orderEditResult->getOrderItemsToDelete() as $orderItem) {
 			$this->em->remove($orderItem);
 		}

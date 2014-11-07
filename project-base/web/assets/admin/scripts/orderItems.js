@@ -46,13 +46,14 @@
 	SS6.order.items.addItem = function($collection) {
 		var prototype = $collection.data('prototype');
 		var index = $collection.data('index');
+		var itemIndex = 'new_' + index;
 
-		var item = prototype.replace(/__name__/g, index);
+		var item = prototype.replace(/__name__/g, itemIndex);
 		var $item = $(item);
-		$item.data('index', index);
+		$item.data('index', itemIndex);
 
 		$collection.append($item);
-		SS6.validation.addNewItemToCollection('#order_items', index);
+		SS6.validation.addNewItemToCollection('#order_items', itemIndex);
 
 		$collection.data('index', index + 1);
 

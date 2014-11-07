@@ -110,7 +110,7 @@
 												</td>
 											</tr>
 										{% endmacro %}
-										
+
 										{% for orderItemId, orderItem in form.items %}
 											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById, loop.index0) }}
 										{% endfor %}

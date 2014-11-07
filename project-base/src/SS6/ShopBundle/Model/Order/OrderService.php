@@ -70,8 +70,9 @@ class OrderService {
 			$user
 		);
 
-		$orderItemsToDelete = array();
 		$orderItemsData = $orderData->getItems();
+
+		$orderItemsToDelete = array();
 		foreach ($order->getItems() as $orderItem) {
 			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
 				$orderItemData = $orderItemsData[$orderItem->getId()];
@@ -83,9 +84,25 @@ class OrderService {
 			}
 		}
 
+		$orderItemsToCreate = array();
+		foreach ($orderItemsData as $index => $orderItemData) {
+			if (strpos($index, 'new_') === 0) {
+				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+				$orderItem = new OrderProduct(
+					$order,
+					$orderItemData->getName(),
+					$orderItemData->getPriceWithoutVat(),
+					$orderItemData->getPriceWithVat(),
+					$orderItemData->getVatPercent(),
+					$orderItemData->getQuantity()
+				);
+				$orderItemsToCreate[] = $orderItem;
+			}
+		}
+
 		$this->calculateTotalPrice($order);
 
-		return new OrderEditResult($orderItemsToDelete);
+		return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete);
 	}
 
 	/**
