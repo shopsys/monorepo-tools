@@ -26,7 +26,7 @@
 				return false;
 			}
 
-			SS6.dragAndDropGrid.saveOrder($grid);
+			SS6.dragAndDropGrid.saveOrdering($grid);
 		});
 
 		$grid.data('positionsChanged', false);
@@ -44,14 +44,14 @@
 		return rowIds;
 	};
 
-	SS6.dragAndDropGrid.saveOrder = function ($grid, rowIds) {
+	SS6.dragAndDropGrid.saveOrdering = function ($grid, rowIds) {
 		var data = {
 			entityName: $grid.data('drag-and-drop-ordering-entity-name'),
 			rowIds: SS6.dragAndDropGrid.getPositions($grid)
 		};
 
 		$.ajax({
-			url: $grid.data('drag-and-drop-url-save-order'),
+			url: $grid.data('drag-and-drop-url-save-ordering'),
 			type: 'POST',
 			data: data,
 			dataType: 'json',

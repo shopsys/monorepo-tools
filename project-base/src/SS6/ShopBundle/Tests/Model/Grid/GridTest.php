@@ -227,7 +227,6 @@ class GridTest extends PHPUnit_Framework_TestCase {
 			->with($this->equalTo($entityClass))
 			->will($this->returnValue($entityName));
 
-
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$this->assertFalse($grid->isDragAndDrop());

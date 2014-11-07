@@ -53,10 +53,10 @@ class GridController extends Controller {
 	}
 
 	/**
-	 * @Route("/_grid/save_order/")
+	 * @Route("/_grid/save_ordering/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function saveOrderAction(Request $request) {
+	public function saveOrderingAction(Request $request) {
 		$gridOrderingFacade = $this->get('ss6.shop.grid.ordering.grid_ordering_facade');
 		/* @var $gridOrderingFacade \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade */
 

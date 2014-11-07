@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Grid\Ordering;
 
-interface OrderingEntityInterface {
+interface OrderableEntityInterface {
 
 	/**
 	 * @param int $position

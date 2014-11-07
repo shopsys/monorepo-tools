@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
-use SS6\ShopBundle\Model\Grid\Ordering\OrderingEntityInterface;
+use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -17,7 +17,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment implements EntityFileUploadInterface, OrderingEntityInterface {
+class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 
 	/**
 	 * @var integer

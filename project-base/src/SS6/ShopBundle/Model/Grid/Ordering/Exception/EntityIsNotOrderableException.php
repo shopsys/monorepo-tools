@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Grid\Ordering\Exception;
 
 use Exception;
 
-class OrderingEntityNotSupportException extends Exception implements OrderingException {
+class EntityIsNotOrderableException extends Exception implements OrderingException {
 
 	/**
 	 * @param string $message

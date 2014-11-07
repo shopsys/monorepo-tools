@@ -11,13 +11,13 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
-use SS6\ShopBundle\Model\Grid\Ordering\OrderingEntityInterface;
+use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 
 /**
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport extends AbstractTranslatableEntity implements EntityFileUploadInterface, OrderingEntityInterface {
+class Transport extends AbstractTranslatableEntity implements EntityFileUploadInterface, OrderableEntityInterface {
 
 	/**
 	 * @var integer

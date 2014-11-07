@@ -4,11 +4,8 @@ namespace SS6\ShopBundle\Model\Grid\Ordering;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService;
-use SS6\ShopBundle\Model\Grid\Ordering\OrderingEntityInterface;
 
 class GridOrderingFacade {
-
-	const ENTITY_NAME_PREFIX = '\SS6\ShopBundle\Model\\';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -40,5 +37,5 @@ class GridOrderingFacade {
 
 		$this->em->flush();
 	}
-	
+
 }
