@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+
 class UserData {
 
 	/**
@@ -30,24 +32,32 @@ class UserData {
 	private $domainId;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 */
+	private $pricingGroup;
+
+	/**
 	 * @param int $domainId
 	 * @param string|null $firstName
 	 * @param string|null $lastName
 	 * @param string|null $email
 	 * @param string|null $password
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
 	 */
 	public function __construct(
 		$domainId = 1,
 		$firstName = null,
 		$lastName = null,
 		$email = null,
-		$password = null
+		$password = null,
+		PricingGroup $pricingGroup = null
 	) {
 		$this->domainId = $domainId;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
 		$this->password = $password;
+		$this->pricingGroup = $pricingGroup;
 	}
 
 	/**
@@ -86,6 +96,13 @@ class UserData {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 */
+	public function getPricingGroup() {
+		return $this->pricingGroup;
+	}
+
+	/**
 	 * @param int $domainId
 	 */
 	public function setDomainId($domainId) {
@@ -121,6 +138,12 @@ class UserData {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	public function setPricingGroup(PricingGroup $pricingGroup) {
+		$this->pricingGroup = $pricingGroup;
+	}
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function setFromEntity(User $user) {
@@ -128,6 +151,7 @@ class UserData {
 		$this->firstName = $user->getFirstName();
 		$this->lastName = $user->getLastName();
 		$this->email = $user->getEmail();
+		$this->pricingGroup = $user->getPricingGroup();
 	}
 
 }

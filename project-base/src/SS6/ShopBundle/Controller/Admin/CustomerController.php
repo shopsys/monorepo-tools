@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -26,9 +27,12 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
+		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
+		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
 		$user = $customerEditFacade->getUserById($id);
-		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT));
+		$pricingGroups = $pricingGroupFacade->getPricingGroupsByDomainId($user->getDomainId());
+		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT, null, null, $pricingGroups));
 
 		try {
 			$customerData = new CustomerData();
@@ -69,6 +73,7 @@ class CustomerController extends Controller {
 
 	/**
 	 * @Route("/customer/list/")
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function listAction() {
 		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
@@ -86,6 +91,7 @@ class CustomerController extends Controller {
 			->select('
 				u.id,
 				u.email,
+				MAX(pg.name) AS pricingGroup,
 				MAX(ba.city) city,
 				MAX(ba.telephone) telephone,
 				MAX(CASE WHEN ba.companyName IS NOT NULL
@@ -102,6 +108,7 @@ class CustomerController extends Controller {
 			->setParameter('selectedDomainId', $selectedDomain->getId())
 			->leftJoin('u.billingAddress', 'ba')
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
+			->leftJoin(PricingGroup::class, 'pg', 'WITH', 'pg.id = u.pricingGroup')
 			->groupBy('u.id');
 		$queryBuilder->setParameter('emptyDateTime', new DateTime('@0'));
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
@@ -114,6 +121,7 @@ class CustomerController extends Controller {
 		$grid->addColumn('city', 'city', 'Město', true);
 		$grid->addColumn('telephone', 'telephone', 'Telefon', true);
 		$grid->addColumn('email', 'u.email', 'Email', true);
+		$grid->addColumn('pricingGroup', 'pricingGroup', 'Cenová skupina', true);
 		$grid->addColumn('orders_count', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
 		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', 'ordersSumPriceOrder')
 			->setClassAttribute('text-right');
@@ -144,10 +152,15 @@ class CustomerController extends Controller {
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$domains = $domain->getAll();
+		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
+		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+		$pricingGroups = $pricingGroupFacade->getAll();
 
-		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains, $selectedDomain), null, array(
-			'validation_groups' => array('Default', 'create'),
-		));
+		$form = $this->createForm(
+			new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains, $selectedDomain, $pricingGroups),
+			null,
+			array('validation_groups' => array('Default', 'create'))
+		);
 
 		try {
 			$customerData = new CustomerData();

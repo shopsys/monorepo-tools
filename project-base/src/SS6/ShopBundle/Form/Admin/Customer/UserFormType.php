@@ -26,16 +26,22 @@ class UserFormType extends AbstractType {
 	 */
 	private $selectedDomain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	private $pricingGroups;
 
 	/**
 	 * @param string $scenario
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
 	 */
-	public function __construct($scenario, $domains = null, $selectedDomain = null) {
+	public function __construct($scenario, $domains = null, $selectedDomain = null, $pricingGroups = null) {
 		$this->scenario = $scenario;
 		$this->domains = $domains;
 		$this->selectedDomain = $selectedDomain;
+		$this->pricingGroups = $pricingGroups;
 	}
 
 	/**
@@ -48,6 +54,7 @@ class UserFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
@@ -94,6 +101,13 @@ class UserFormType extends AbstractType {
 					'choices' => $domainsNamesById,
 					'data' => $this->selectedDomain->getId(),
 				));
+		}
+		if (!empty($this->pricingGroups)) {
+			$builder
+				->add('pricingGroup', 'choice', array(
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', array(), null, 'id'),
+			));
 		}
 	}
 

@@ -39,5 +39,20 @@ class PricingGroupRepository {
 		return $pricingGroup;
 	}
 
+	/**
+	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	public function getAll() {
+		return $this->getPricingGroupRepository()->findAll();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	public function getPricingGroupsByDomainId($domainId) {
+		return $this->getPricingGroupRepository()->findBy(['domainId' => $domainId]);
+	}
+
 
 }

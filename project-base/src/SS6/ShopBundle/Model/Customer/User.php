@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -90,6 +91,12 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	protected $domainId;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Group\PricingGroup")
+	 */
+	protected $pricingGroup;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
@@ -106,6 +113,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		$this->deliveryAddress = $deliveryAddress;
 		$this->createdAt = new DateTime();
 		$this->domainId = $userData->getDomainId();
+		$this->pricingGroup = $userData->getPricingGroup();
 	}
 
 	/**
@@ -114,6 +122,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	public function edit(UserData $userData) {
 		$this->firstName = $userData->getFirstName();
 		$this->lastName = $userData->getLastName();
+		$this->pricingGroup = $userData->getPricingGroup();
 	}
 
 	/**
@@ -135,6 +144,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
 		$this->deliveryAddress = $deliveryAddress;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
+	 */
+	public function setPricingGroup(PricingGroup $pricingGroup = null) {
+		$this->pricingGroup = $pricingGroup;
 	}
 
 	/**
@@ -244,6 +260,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function getLastLogin() {
 		return $this->lastLogin;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null
+	 */
+	public function getPricingGroup() {
+		return $this->pricingGroup;
 	}
 
 	/**
