@@ -12,45 +12,16 @@ class TranslationController extends Controller {
 	 * @Route("/translation/list/")
 	 */
 	public function listAction() {
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$translationInlineEdit = $this->get('ss6.shop.localization.translation.grid.translation_inline_edit');
+		/* @var $$translationInlineEdit \SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit */
 
-		$dataSource = new ArrayDataSource($this->loadData(), 'id');
-
-		$grid = $gridFactory->create('translationList', $dataSource);
-
-		$grid->addColumn('id', 'id', 'Konstanta');
-		$grid->addColumn('cs', 'cs', 'Česky');
-		$grid->addColumn('en', 'en', 'Anglicky');
+		$grid = $translationInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/Translation/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));
 	}
 
-	private function loadData() {
-		$translator = $this->get('translator');
-		/* @var $translator \SS6\ShopBundle\Component\Translator */
-
-		$catalogueCs = $translator->getCalatogue('cs');
-		$catalogueEn = $translator->getCalatogue('en');
-
-		$data = array();
-		foreach ($catalogueCs->all('messages') as $id => $translation) {
-			$data[$id]['id'] = $id;
-			$data[$id]['cs'] = $translation;
-			$data[$id]['en'] = null;
-		}
-
-		foreach ($catalogueEn->all('messages') as $id => $translation) {
-			$data[$id]['id'] = $id;
-			if (!isset($data[$id]['cs'])) {
-				$data[$id]['cs'] = null;
-			}
-			$data[$id]['en'] = $translation;
-		}
-
-		return $data;
-	}
+	
 
 }

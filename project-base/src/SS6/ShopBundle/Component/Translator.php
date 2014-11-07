@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Translation\Translator as BaseTranslator;
 
 class Translator extends BaseTranslator {
 
+	const DEFAULT_DOMAIN = 'messages';
+	const UNTRANSLATE_PREFIX = '##';
+
 	/**
 	 * @param string $locale
 	 * @return \Symfony\Component\Translation\MessageCatalogue

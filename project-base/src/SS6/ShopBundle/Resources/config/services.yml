@@ -263,6 +263,12 @@ services:
   ss6.shop.localization.localization:
     class: SS6\ShopBundle\Model\Localization\Localization
 
+  ss6.shop.localization.translation.grid.translation_grid_factory:
+    class: SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory
+
+  ss6.shop.localization.translation.grid.translation_inline_edit:
+    class: SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
+
   ss6.shop.mail.mail_template_facade:
     class: SS6\ShopBundle\Model\Mail\MailTemplateFacade
 
