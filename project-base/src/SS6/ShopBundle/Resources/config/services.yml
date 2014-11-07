@@ -215,10 +215,19 @@ services:
   ss6.shop.form.multiple_form_setting:
     class: SS6\ShopBundle\Model\Form\MultipleFormSetting
 
-  ss6.shop.grid.drag_and_drop.grid_ordering_service:
-    class: SS6\ShopBundle\Model\Grid\DragAndDrop\GridOrderingService
+  ss6.shop.grid.factory:
+    class: SS6\ShopBundle\Model\Grid\GridFactory
+
+  ss6.shop.grid.inline_edit.inline_edit_service:
+    class: SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
     arguments:
       - @service_container
+
+  ss6.shop.grid.ordering.grid_ordering_facade:
+    class: SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade
+
+  ss6.shop.grid.ordering.grid_ordering_service:
+    class: SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService
 
   ss6.shop.image.directory_structure_creator:
     class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
@@ -312,9 +321,6 @@ services:
   ss6.shop.order.status.grid.order_status_grid_factory:
     class: SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory
 
-  ss6.shop.payment.grid.drag_and_drop_ordering_service:
-    class: SS6\ShopBundle\Model\Payment\Grid\DragAndDropOrderingService
-
   ss6.shop.payment.independent_payment_visibility_calculation:
     class: SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 
@@ -329,14 +335,6 @@ services:
 
   ss6.shop.payment.price_calculation:
     class: SS6\ShopBundle\Model\Payment\PriceCalculation
-
-  ss6.shop.grid.factory:
-    class: SS6\ShopBundle\Model\Grid\GridFactory
-
-  ss6.shop.grid.inline_edit.inline_edit_service:
-    class: SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
-    arguments:
-      - @service_container
 
   ss6.shop.payment.visibility_calculation:
     class: SS6\ShopBundle\Model\Payment\VisibilityCalculation
@@ -456,9 +454,6 @@ services:
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
 
-  ss6.shop.slider.grid.drag_and_drop_ordering_service:
-    class: SS6\ShopBundle\Model\Slider\Grid\DragAndDropOrderingService
-
   ss6.shop.slider.slider_item_facade:
     class: SS6\ShopBundle\Model\Slider\SliderItemFacade
 
@@ -487,9 +482,6 @@ services:
 
   ss6.shop.setting.setting_value_repository:
     class: SS6\ShopBundle\Model\Setting\SettingValueRepository
-
-  ss6.shop.transport.grid.drag_and_drop_ordering_service:
-    class: SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService
 
   ss6.shop.transport.grid.transport_grid_factory:
     class: SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory

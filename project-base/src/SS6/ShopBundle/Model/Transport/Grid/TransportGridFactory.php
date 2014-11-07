@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Transport\Detail\Factory;
-use SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService;
+use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class TransportGridFactory implements GridFactoryInterface {
@@ -37,11 +37,6 @@ class TransportGridFactory implements GridFactoryInterface {
 	private $transportDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService
-	 */
-	private $dragAndDropOrderingService;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
@@ -51,7 +46,6 @@ class TransportGridFactory implements GridFactoryInterface {
 	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
 	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
 	 * @param \SS6\ShopBundle\Model\Transport\Detail\Factory $transportDetailFactory
-	 * @param \SS6\ShopBundle\Model\Transport\Grid\DragAndDropOrderingService $dragAndDropOrderingService
 	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
 	 */
 	public function __construct(
@@ -59,18 +53,16 @@ class TransportGridFactory implements GridFactoryInterface {
 		GridFactory $gridFactory,
 		TransportRepository $transportRepository,
 		Factory $transportDetailFactory,
-		DragAndDropOrderingService $dragAndDropOrderingService,
 		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->transportRepository = $transportRepository;
 		$this->transportDetailFactory = $transportDetailFactory;
-		$this->dragAndDropOrderingService = $dragAndDropOrderingService;
 		$this->localization = $localization;
 	}
 
-		/**
+	/**
 	 * @return Grid
 	 */
 	public function create() {
@@ -88,7 +80,7 @@ class TransportGridFactory implements GridFactoryInterface {
 		);
 
 		$grid = $this->gridFactory->create('transportList', $dataSource);
-		$grid->enableDragAndDrop($this->dragAndDropOrderingService);
+		$grid->enableDragAndDrop(Transport::class);
 
 		$grid->addColumn('name', 'tt.name', 'Název');
 		$grid->addColumn('price', 'transportDetail', 'Cena');

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
+use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 
 /**
@@ -14,7 +15,7 @@ use SS6\ShopBundle\Model\Slider\SliderItemData;
  * @ORM\Table(name="slider_items")
  * @ORM\Entity
  */
-class SliderItem implements EntityFileUploadInterface {
+class SliderItem implements EntityFileUploadInterface, OrderableEntityInterface {
 
 	/**
 	 * @var int

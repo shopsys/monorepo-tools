@@ -5,18 +5,19 @@ namespace SS6\ShopBundle\Model\Payment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
+use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
+use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment implements EntityFileUploadInterface {
+class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 
 	/**
 	 * @var integer

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -126,8 +127,6 @@ class PaymentController extends Controller {
 		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-		$paymentOrderingService = $this->get('ss6.shop.payment.grid.drag_and_drop_ordering_service');
-		/* @var $paymentOrderingService \SS6\ShopBundle\Model\Payment\Grid\DragAndDropOrderingService */
 
 		$queryBuilder = $paymentRepository->getQueryBuilderForAll();
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
@@ -140,7 +139,7 @@ class PaymentController extends Controller {
 		);
 
 		$grid = $gridFactory->create('paymentList', $dataSource);
-		$grid->enableDragAndDrop($paymentOrderingService);
+		$grid->enableDragAndDrop(Payment::class);
 
 		$grid->addColumn('name', 'p.name', 'Název');
 		$grid->addColumn('price', 'paymentDetail', 'Cena');
