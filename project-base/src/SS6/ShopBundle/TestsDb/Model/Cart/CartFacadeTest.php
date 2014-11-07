@@ -30,7 +30,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productData->setName('productName');
 		$productData->setVat($vat);
 		$productData->setPrice(1);
-		$productData->setShowOnDomains(array(1));
+		$productData->setHiddenOnDomains(array(2));
 		$product = $productEditFacade->create($productData);
 		$em->flush();
 		$productId = $product->getId();
@@ -75,7 +75,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productData->setName('productName');
 		$productData->setVat($vat);
 		$productData->setPrice(1);
-		$productData->setShowOnDomains(array(1));
+		$productData->setHiddenOnDomains(array(2));
 		$product1 = $productEditFacade->create($productData);
 		$product2 = $productEditFacade->create($productData);
 		$em->flush();
@@ -131,7 +131,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productData->setName('productName');
 		$productData->setVat($vat);
 		$productData->setPrice(1);
-		$productData->setShowOnDomains(array(1));
+		$productData->setHiddenOnDomains(array(2));
 		$product = $productEditFacade->create($productData);
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
@@ -162,7 +162,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productData->setName('productName');
 		$productData->setVat($vat);
 		$productData->setPrice(1);
-		$productData->setShowOnDomains(array(1));
+		$productData->setHiddenOnDomains(array(2));
 		$product1 = $productEditFacade->create($productData);
 		$product2 = $productEditFacade->create($productData);
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');

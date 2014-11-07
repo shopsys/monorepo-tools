@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Component\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\UniqueCollection;
+use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\FileUploadType;
@@ -41,21 +43,29 @@ class ProductFormType extends AbstractType {
 	private $productParameterValueFormTypeFactory;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer
+	 */
+	private $inverseArrayValuesTransformer;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
+	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
 	 */
 	public function __construct(
 		FileUpload $fileUpload,
 		array $vats,
 		array $availabilities,
-		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
+		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
+		InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	) {
 		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
+		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 	}
 
 	/**
@@ -77,11 +87,16 @@ class ProductFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 			))
-			->add('showOnDomains', 'domains', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Musíte vybrat alespoň jednu doménu')),
-				),
-			))
+			->add(
+				$builder
+					->create('showOnDomains', 'domains', array(
+						'constraints' => array(
+							new NotSelectedDomainToShow(array('message' => 'Musíte vybrat alespoň jednu doménu')),
+						),
+						'property_path' => 'hiddenOnDomains'
+					))
+					->addViewTransformer($this->inverseArrayValuesTransformer)
+			)
 			->add('hidden', new YesNoType(), array('required' => false))
 			->add('catnum', 'text', array(
 				'required' => false,

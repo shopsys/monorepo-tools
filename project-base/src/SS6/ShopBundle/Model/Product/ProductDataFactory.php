@@ -61,16 +61,6 @@ class ProductDataFactory {
 		}
 
 		$productData->setParameters($productParameterValuesData);
-
-		$showOnDomains = array();
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainConfig->getId());
-			if ($productDomain !== null && $productDomain->isShow()) {
-				$showOnDomains[] = $productDomain->getDomainId();
-			}
-		}
-		$productData->setShowOnDomains($showOnDomains);
-
 		return $productData;
 	}
 

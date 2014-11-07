@@ -86,7 +86,7 @@ class ProductData {
 	/**
 	 * @var array
 	 */
-	private $showOnDomains;
+	private $hiddenOnDomains;
 
 	/**
 	 * @param string|null $name
@@ -103,7 +103,7 @@ class ProductData {
 	 * @param string|null $image
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 * @param array $parameters
-	 * @param array $showOnDomains
+	 * @param array $hiddenOnDomains
 	 */
 	public function __construct(
 		$name = null,
@@ -120,7 +120,7 @@ class ProductData {
 		$image = null,
 		$availability = null,
 		array $parameters = array(),
-		array $showOnDomains = array()
+		array $hiddenOnDomains = array()
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -136,7 +136,7 @@ class ProductData {
 		$this->image = $image;
 		$this->availability = $availability;
 		$this->parameters = $parameters;
-		$this->showOnDomains = $showOnDomains;
+		$this->hiddenOnDomains = $hiddenOnDomains;
 	}
 
 	/**
@@ -332,8 +332,8 @@ class ProductData {
 	/**
 	 * @return array
 	 */
-	public function getShowOnDomains() {
-		return $this->showOnDomains;
+	public function getHiddenOnDomains() {
+		return $this->hiddenOnDomains;
 	}
 
 	/**
@@ -346,10 +346,9 @@ class ProductData {
 	/**
 	 * @param array $domains
 	 */
-	public function setShowOnDomains($domains) {
-		$this->showOnDomains = $domains;
+	public function setHiddenOnDomains(array $domains) {
+		$this->hiddenOnDomains = $domains;
 	}
-
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
@@ -368,13 +367,13 @@ class ProductData {
 		$this->setStockQuantity($product->getStockQuantity());
 		$this->setAvailability($product->getAvailability());
 		$this->setHidden($product->isHidden());
-		$showOnDomains = array();
+		$hiddenOnDomains = array();
 		foreach ($productDomains as $productDomain) {
-			if ($productDomain->isShow()) {
-				$showOnDomains[] = $productDomain->getDomainId();
+			if ($productDomain->isHidden()) {
+				$hiddenOnDomains[] = $productDomain->getDomainId();
 			}
 		}
-		$this->setShowOnDomains($showOnDomains);
+		$this->setHiddenOnDomains($hiddenOnDomains);
 	}
 
 }

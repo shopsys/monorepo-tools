@@ -115,7 +115,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productData->setSellingFrom($sellingFrom);
 		$productData->setSellingTo($sellingTo);
 		$productData->setPrice(100);
-		$productData->setShowOnDomains(array(1));
+		$productData->setHiddenOnDomains(array(2));
 		$product = $productEditFacade->create($productData);
 
 		$em->flush();

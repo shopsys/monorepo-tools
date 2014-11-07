@@ -32,7 +32,7 @@ class ProductDomain {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
-	private $show;
+	private $hidden;
 
 	/**
 	 * @var boolean
@@ -44,12 +44,11 @@ class ProductDomain {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @param boolean $show
 	 */
 	public function __construct(Product $product, $domainId) {
 		$this->product = $product;
 		$this->domainId = $domainId;
-		$this->show = true;
+		$this->hidden = false;
 		$this->visible = false;
 	}
 
@@ -63,15 +62,15 @@ class ProductDomain {
 	/**
 	 * @return boolean
 	 */
-	public function isShow() {
-		return $this->show;
+	public function isHidden() {
+		return $this->hidden;
 	}
 
 	/**
-	 * @param boolean $show
+	 * @param boolean $hidden
 	 */
-	public function setShow($show) {
-		$this->show = $show;
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
 	}
 
 	/**

@@ -82,7 +82,7 @@ class ProductEditFacade {
 		$this->em->persist($product);
 		$this->saveParameters($product, $productData->getParameters());
 		$this->createProductDomains($product, $this->domain->getAll());
-		$this->refreshProductDomains($product, $productData->getShowOnDomains());
+		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
 
 		$this->em->flush();
 
@@ -101,7 +101,7 @@ class ProductEditFacade {
 
 		$product->edit($productData);
 		$this->saveParameters($product, $productData->getParameters());
-		$this->refreshProductDomains($product, $productData->getShowOnDomains());
+		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
 
 		$this->em->flush();
 
@@ -181,15 +181,15 @@ class ProductEditFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param array $showOnDomainData
+	 * @param array $hiddenOnDomainData
 	 */
-	private function refreshProductDomains(Product $product, array $showOnDomainData) {
+	private function refreshProductDomains(Product $product, array $hiddenOnDomainData) {
 		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
 		foreach ($productDomains as $productDomain) {
-			if (in_array($productDomain->getDomainId(), $showOnDomainData)) {
-				$productDomain->setShow(true);
+			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
+				$productDomain->setHidden(true);
 			} else {
-				$productDomain->setShow(false);
+				$productDomain->setHidden(false);
 			}
 		}
 		$this->em->flush();

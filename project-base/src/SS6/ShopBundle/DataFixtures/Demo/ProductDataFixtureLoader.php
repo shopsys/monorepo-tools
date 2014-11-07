@@ -115,14 +115,14 @@ class ProductDataFixtureLoader {
 			$productData->setSellingTo(new DateTime($row[8]));
 		}
 		$productData->setStockQuantity($row[9]);
-		$showOnDomains = array();
-		if (CsvDecoder::decodeBoolean($row[10])) {
-			$showOnDomains[] = 1;
+		$hiddenOnDomains = array();
+		if (!CsvDecoder::decodeBoolean($row[10])) {
+			$hiddenOnDomains[] = 1;
 		}
-		if (CsvDecoder::decodeBoolean($row[11])) {
-			$showOnDomains[] = 2;
+		if (!CsvDecoder::decodeBoolean($row[11])) {
+			$hiddenOnDomains[] = 2;
 		}
-		$productData->setShowOnDomains($showOnDomains);
+		$productData->setHiddenOnDomains($hiddenOnDomains);
 		switch ($row[12]) {
 			case 'in-stock':
 				$productData->setAvailability($this->availabilities['in-stock']);

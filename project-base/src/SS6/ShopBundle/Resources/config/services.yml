@@ -113,6 +113,14 @@ services:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader
     arguments: [@annotation_reader]
 
+  ss6.shop.component.validator.not_selected_domain_to_show:
+    class: SS6\ShopBundle\Component\NotSelectedDomainToShowValidator
+    tags:
+      - { name: validator.constraint_validator, alias: SS6\ShopBundle\Component\NotSelectedDomainToShowValidator }
+
+  ss6.shop.component.transformers.inverse_array_values_transformer:
+    class: SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
+
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
