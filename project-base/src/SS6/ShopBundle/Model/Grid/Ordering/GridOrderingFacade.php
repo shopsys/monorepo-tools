@@ -23,11 +23,11 @@ class GridOrderingFacade {
 	}
 
 	/**
-	 * @param string $entityName
+	 * @param string $entityClass
 	 * @param array $rowIds
 	 */
-	public function saveOrdering($entityName, array $rowIds) {
-		$entityRepository = $this->em->getRepository($this->gridOrderingService->getEntityClass($entityName));
+	public function saveOrdering($entityClass, array $rowIds) {
+		$entityRepository = $this->em->getRepository($entityClass);
 		$position = 0;
 
 		foreach ($rowIds as $rowId) {

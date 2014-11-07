@@ -132,7 +132,7 @@ class Grid {
 	/**
 	 * @var string|null
 	 */
-	private $orderingEntityName;
+	private $orderingEntityClass;
 
 	/**
 	 * @param string $id
@@ -539,21 +539,21 @@ class Grid {
 	 * @param string $entityClass
 	 */
 	public function enableDragAndDrop($entityClass) {
-		$this->orderingEntityName = $this->gridOrderingService->getEntityName($entityClass);
+		$this->orderingEntityClass = $entityClass;
 	}
 
 	/**
 	 * @return boolean
 	 */
 	public function isDragAndDrop() {
-		return $this->orderingEntityName !== null;
+		return $this->orderingEntityClass !== null;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getOrderingEntityName() {
-		return $this->orderingEntityName;
+	public function getOrderingEntityClass() {
+		return $this->orderingEntityClass;
 	}
 
 }

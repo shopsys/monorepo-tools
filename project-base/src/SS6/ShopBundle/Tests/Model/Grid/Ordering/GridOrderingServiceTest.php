@@ -8,42 +8,6 @@ use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 
 class GridOrderingServiceTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetEntityNameNotModified() {
-		$gridOrderingService = new GridOrderingService();
-		$entityClass = 'Some\Class' . GridOrderingService::ENTITY_NAME_PREFIX . 'Entity';
-
-		$this->assertEquals($entityClass, $gridOrderingService->getEntityName($entityClass));
-	}
-
-	public function testGetEntityName() {
-		$gridOrderingService = new GridOrderingService();
-		$entityClass = GridOrderingService::ENTITY_NAME_PREFIX . 'Some\Class';
-
-		$this->assertNotEquals($entityClass, $gridOrderingService->getEntityName($entityClass));
-	}
-
-	public function testGetEntityClassNotModified() {
-		$gridOrderingService = new GridOrderingService();
-		$entityName = 'Entity' . GridOrderingService::ENTITY_NAME_PREFIX_REPLACED . 'Some\Class';
-
-		$this->assertEquals($entityName, $gridOrderingService->getEntityClass($entityName));
-	}
-
-	public function testGetEntityClass() {
-		$gridOrderingService = new GridOrderingService();
-		$entityName = GridOrderingService::ENTITY_NAME_PREFIX_REPLACED . 'Some\Class';
-
-		$this->assertNotEquals($entityName, $gridOrderingService->getEntityClass($entityName));
-	}
-
-	public function testEntityNameToEntityClassAndBack() {
-		$gridOrderingService = new GridOrderingService();
-		$entityClass = GridOrderingService::ENTITY_NAME_PREFIX . 'Some\Class';
-		$entityName = $gridOrderingService->getEntityName($entityClass);
-
-		$this->assertEquals($entityClass, $gridOrderingService->getEntityClass($entityName));
-	}
-
 	public function testSetPositionNull() {
 		$gridOrderingService = new GridOrderingService();
 		$entity = null;

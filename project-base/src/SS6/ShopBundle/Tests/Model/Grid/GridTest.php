@@ -209,7 +209,6 @@ class GridTest extends PHPUnit_Framework_TestCase {
 
 	public function testEnableDragAndDrop() {
 		$entityClass = 'Path\To\Entity\Class';
-		$entityName = 'Entity\Name';
 
 		$request = new Request();
 		$requestStack = new RequestStack();
@@ -218,21 +217,13 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$twigMock = $this->getMock(Twig_Environment::class);
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$dataSourceMock = $this->getMock(DataSourceInterface::class);
-		$gridOrderingServiceMock = $this->getMockBuilder(GridOrderingService::class)
-			->setMethods(['getEntityName'])
-			->getMock();
-		$gridOrderingServiceMock
-			->expects($this->once())
-			->method('getEntityName')
-			->with($this->equalTo($entityClass))
-			->will($this->returnValue($entityName));
+		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$this->assertFalse($grid->isDragAndDrop());
 		$grid->enableDragAndDrop($entityClass);
 		$this->assertTrue($grid->isDragAndDrop());
-		$this->assertEquals($entityName, $grid->getOrderingEntityName());
 	}
 
 }

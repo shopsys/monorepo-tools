@@ -46,7 +46,7 @@
 
 	SS6.dragAndDropGrid.saveOrdering = function ($grid, rowIds) {
 		var data = {
-			entityName: $grid.data('drag-and-drop-ordering-entity-name'),
+			entityClass: $grid.data('drag-and-drop-ordering-entity-class'),
 			rowIds: SS6.dragAndDropGrid.getPositions($grid)
 		};
 
