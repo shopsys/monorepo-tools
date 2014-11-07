@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{% macro mailTemplate(name, template, variables, variablesInfoText) %}
+			{% macro mailTemplate(name, template, variables, variablesInfoText, sendMail) %}
 				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
@@ -21,6 +21,11 @@
 						<div class="toggle-content toggle-close box-expand__hidden">
 							{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
 							{{ form_row(template.body, { label: 'Text'|trans}) }}
+							{% if sendMail is not null %}
+								{{ form_row(template.sendMail, { label: sendMail }) }}
+							{% else %}
+								{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
+							{% endif %}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
 
 							<div class="row">
@@ -57,12 +62,23 @@
 			{{ form_errors(form) }}
 				{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
 					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
-					{{ _self.mailTemplate(
-							orderStatus.name,
-							orderStatusTemplate,
-							orderStatusVariables,
-							"V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky"|trans
-					) }}
+					{% if orderStatus.type == constant('TYPE_NEW', orderStatus) %}
+						{{ _self.mailTemplate(
+								orderStatus.name,
+								orderStatusTemplate,
+								orderStatusVariables,
+								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
+								'Zasílat potvrzení o přijetí objednávky'|trans
+						) }}
+					{% else %}
+						{{ _self.mailTemplate(
+								orderStatus.name,
+								orderStatusTemplate,
+								orderStatusVariables,
+								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
+								'Zasílat e-mail o změně na tento stav'|trans
+						) }}
+					{% endif %}
 				{% endfor %}
 
 				{{ _self.mailTemplate('Potvrzení registrace'|trans, form.registrationTemplate, registrationVariables) }}
