@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localize;
+namespace SS6\ShopBundle\Model\Localization;
 
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;

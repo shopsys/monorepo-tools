@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Transport;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Localize\AbstractTranslatableEntity;
+use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;

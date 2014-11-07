@@ -13,13 +13,13 @@ class DomainController extends Controller {
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
-		$localize = $this->get('ss6.shop.localize.localize');
-		/* @var $localize \SS6\ShopBundle\Model\Localize\Localize */
+		$localization = $this->get('ss6.shop.localization.localization');
+		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
 
 		return $this->render('@SS6Shop/Admin/Inline/Domain/tabs.html.twig', array(
 			'domainConfigs' => $domain->getAll(),
 			'selectedDomainId' => $selectedDomain->getId(),
-			'multipleLocales' => count($localize->getAllLocales()) > 1,
+			'multipleLocales' => count($localization->getAllLocales()) > 1,
 		));
 	}
 

@@ -13,9 +13,9 @@ class LocalizationExtension extends \Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localize\Localize
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
 	 */
-	private $localize;
+	private $localization;
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
@@ -24,8 +24,8 @@ class LocalizationExtension extends \Twig_Extension {
 		$this->container = $container;
 
 		// Twig extensions are loaded during assetic:dump command,
-		// so they cannot be dependent on Domain service (dependency of Localize)
-		$this->localize = $container->get('ss6.shop.localize.localize');
+		// so they cannot be dependent on Domain service (dependency of Localization)
+		$this->localization = $container->get('ss6.shop.localization.localization');
 	}
 
 	/**
@@ -72,8 +72,8 @@ class LocalizationExtension extends \Twig_Extension {
 	 */
 	private function getTitle($locale) {
 		try {
-			$title = $this->localize->getLanguageName($locale);
-		} catch (\SS6\ShopBundle\Model\Localize\Exception\InvalidLocaleException $e) {
+			$title = $this->localization->getLanguageName($locale);
+		} catch (\SS6\ShopBundle\Model\Localization\Exception\InvalidLocaleException $e) {
 			$title = '';
 		}
 

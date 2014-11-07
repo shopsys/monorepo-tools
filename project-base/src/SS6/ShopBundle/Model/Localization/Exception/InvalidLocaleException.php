@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localize\Exception;
+namespace SS6\ShopBundle\Model\Localization\Exception;
 
 use Exception;
 
-class InvalidLocaleException extends Exception implements LocalizeException {
+class InvalidLocaleException extends Exception implements LocalizationException {
 
 	/**
 	 * @param string $message
