@@ -38,7 +38,7 @@
 	<target name="build-dev" depends="build,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
-	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,tests,tests-db,tests-crawler"/>
+	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,test-db-demo,tests,tests-db,tests-crawler"/>
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo,products-visibility"/>
 
 	<target name="assetic">
@@ -208,7 +208,7 @@
 		</exec>
 	</target>
 
-	<target name="tests" depends="test-db-demo">
+	<target name="tests">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
@@ -222,7 +222,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-db" depends="test-db-demo">
+	<target name="tests-db">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
@@ -236,7 +236,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-crawler" depends="test-db-demo">
+	<target name="tests-crawler">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
