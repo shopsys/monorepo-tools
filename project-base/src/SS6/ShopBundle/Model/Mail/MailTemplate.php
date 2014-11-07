@@ -57,7 +57,7 @@ class MailTemplate {
 	 * @param string $name
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
-	public function __construct($name, $domainId, MailTemplateData $mailTemplateData = null) {
+	public function __construct($name, $domainId, MailTemplateData $mailTemplateData) {
 		$this->name = $name;
 		$this->domainId = $domainId;
 		$this->edit($mailTemplateData);
@@ -66,14 +66,9 @@ class MailTemplate {
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
-	public function edit(MailTemplateData $mailTemplateData = null) {
-		if ($mailTemplateData !== null) {
-			$this->subject = $mailTemplateData->getSubject();
-			$this->body = $mailTemplateData->getBody();
-		} else {
-			$this->subject = '';
-			$this->body = '';
-		}
+	public function edit(MailTemplateData $mailTemplateData) {
+		$this->subject = $mailTemplateData->getSubject();
+		$this->body = $mailTemplateData->getBody();
 	}
 
 	/**
