@@ -54,6 +54,13 @@ class MailTemplate {
 	private $body;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $sendMail;
+
+	/**
 	 * @param string $name
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
@@ -69,6 +76,7 @@ class MailTemplate {
 	public function edit(MailTemplateData $mailTemplateData) {
 		$this->subject = $mailTemplateData->getSubject();
 		$this->body = $mailTemplateData->getBody();
+		$this->sendMail = $mailTemplateData->isSendMail();
 	}
 
 	/**
@@ -106,4 +114,10 @@ class MailTemplate {
 		return $this->body;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function isSendMail() {
+		return $this->sendMail;
+	}
 }

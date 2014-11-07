@@ -209,7 +209,12 @@ class OrderFacade {
 
 		$this->em->flush();
 		if ($statusChanged) {
-			$this->orderMailFacade->sendEmail($order);
+			$mailTemplate = $this->orderMailFacade
+				->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
+			if ($mailTemplate->isSendMail()) {
+				$this->orderMailFacade->sendEmail($order);
+			}
+
 		}
 
 		return $order;

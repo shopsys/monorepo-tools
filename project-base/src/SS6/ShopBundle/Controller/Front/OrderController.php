@@ -86,9 +86,7 @@ class OrderController extends Controller {
 				$flow->reset();
 
 				try {
-					$orderMailFacade = $this->get('ss6.shop.order.order_mail_facade');
-					/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
-					$orderMailFacade->sendEmail($order);
+					$this->sendMail($order);
 				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
 					$flashMessageSender->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
@@ -148,6 +146,18 @@ class OrderController extends Controller {
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig');
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 */
+	private function sendMail($order) {
+		$orderMailFacade = $this->get('ss6.shop.order.order_mail_facade');
+		/* @var $orderMailFacade \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade */
+		$mailTemplate = $orderMailFacade->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
+		if ($mailTemplate->isSendMail()) {
+			$orderMailFacade->sendEmail($order);
+		}
 	}
 
 }
