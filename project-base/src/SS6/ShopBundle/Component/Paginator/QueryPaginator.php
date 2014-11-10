@@ -14,10 +14,17 @@ class QueryPaginator implements PaginatorInterface{
 	private $queryBuilder;
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @var string|null
 	 */
-	public function __construct(QueryBuilder $queryBuilder) {
+	private $hydrationMode;
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param string|null $hydrationMode
+	 */
+	public function __construct(QueryBuilder $queryBuilder, $hydrationMode = null) {
 		$this->queryBuilder = $queryBuilder;
+		$this->hydrationMode = $hydrationMode;
 	}
 
 	/**
@@ -32,7 +39,7 @@ class QueryPaginator implements PaginatorInterface{
 			->setMaxResults($limit);
 		}
 
-		$results = $this->queryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
+		$results = $this->queryBuilder->getQuery()->execute(null, $this->hydrationMode);
 		$totalCount = $this->getTotalCount();
 
 		return new PaginationResult($page, $limit, $totalCount, $results);

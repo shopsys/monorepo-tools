@@ -8,6 +8,8 @@ use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 
 class QueryBuilderDataSource implements DataSourceInterface {
 
+	const HYDRATION_MODE = 'GroupedScalarHydrator';
+
 	/**
 	 * @var \Doctrine\ORM\QueryBuilder
 	 */
@@ -30,7 +32,7 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	public function __construct(QueryBuilder $queryBuilder, $queryId) {
 		$this->queryBuilder = $queryBuilder;
 		$this->queryId = $queryId;
-		$this->queryPaginator = new QueryPaginator($queryBuilder);
+		$this->queryPaginator = new QueryPaginator($queryBuilder, self::HYDRATION_MODE);
 	}
 
 	/**
