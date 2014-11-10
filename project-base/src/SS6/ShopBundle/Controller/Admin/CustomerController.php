@@ -27,12 +27,11 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
+		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
 
 		$user = $customerEditFacade->getUserById($id);
-		$pricingGroups = $pricingGroupFacade->getPricingGroupsByDomainId($user->getDomainId());
-		$form = $this->createForm(new CustomerFormType(CustomerFormType::SCENARIO_EDIT, null, null, $pricingGroups));
+		$form = $this->createForm($customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT));
 
 		try {
 			$customerData = new CustomerData();
@@ -149,15 +148,11 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$domains = $domain->getAll();
-		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
-		$pricingGroups = $pricingGroupFacade->getAll();
+		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
+		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
 
 		$form = $this->createForm(
-			new CustomerFormType(CustomerFormType::SCENARIO_CREATE, $domains, $selectedDomain, $pricingGroups),
+			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE, $selectedDomain),
 			null,
 			array('validation_groups' => array('Default', 'create'))
 		);
