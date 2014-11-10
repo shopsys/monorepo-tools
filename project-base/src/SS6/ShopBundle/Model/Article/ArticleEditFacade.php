@@ -20,11 +20,6 @@ class ArticleEditFacade {
 	private $articleRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
@@ -38,12 +33,10 @@ class ArticleEditFacade {
 	public function __construct(
 		EntityManager $em,
 		ArticleRepository $articleRepository,
-		SelectedDomain $selectedDomain,
 		Domain $domain
 	) {
 		$this->em = $em;
 		$this->articleRepository = $articleRepository;
-		$this->selectedDomain = $selectedDomain;
 		$this->domain = $domain;
 	}
 
@@ -67,7 +60,7 @@ class ArticleEditFacade {
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
 	public function create(ArticleData $articleData) {
-		$article = new Article($articleData, $this->selectedDomain->getId());
+		$article = new Article($articleData);
 
 		$this->em->persist($article);
 		$this->em->flush();

@@ -3,13 +3,6 @@
 {% block title %}- {{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
 {% block h1 %}{{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
 
-{% block domain %}
-	<div class="form-line">
-		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-		<input type="text" value="{{ getDomainName(article.domainId) }}" class="form-control form-line__field" readonly="readonly" />
-	</div>
-{% endblock %}
-
 {% block article_url %}
 	<div class="form-line">
 		<span class="form-line__text">
