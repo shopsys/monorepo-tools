@@ -58,12 +58,11 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
 
-		$formDataObject = $form->getData();
+		$formData = $form->getData();
 		if ($rowId !== null) {
-			$rowId = (int)$rowId;
-			$this->editEntity($rowId, $formDataObject);
+			$this->editEntity($rowId, $formData);
 		} else {
-			$rowId = $this->createEntityAndGetId($formDataObject);
+			$rowId = $this->createEntityAndGetId($formData);
 		}
 
 		return $rowId;
