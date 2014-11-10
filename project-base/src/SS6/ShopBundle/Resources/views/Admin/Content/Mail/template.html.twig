@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{% macro mailTemplate(name, template, variables, variablesInfoText, sendMail) %}
+			{% macro mailTemplate(name, template, variables, variablesInfoText, sendMailText) %}
 				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
@@ -21,10 +21,10 @@
 						<div class="toggle-content toggle-close box-expand__hidden">
 							{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
 							{{ form_row(template.body, { label: 'Text'|trans}) }}
-							{% if sendMail is not null %}
-								{{ form_row(template.sendMail, { label: sendMail }) }}
+							{% if sendMailText is not null %}
+								{{ form_row(template.sendMail, { label: sendMailText }) }}
 							{% else %}
-								{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
+								{% do template.setRendered() %}
 							{% endif %}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
 
