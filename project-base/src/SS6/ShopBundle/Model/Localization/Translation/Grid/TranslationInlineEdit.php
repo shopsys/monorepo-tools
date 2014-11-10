@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 use SS6\ShopBundle\Form\Admin\Localization\TranslationFormType;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory;
+use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 use SS6\ShopBundle\Component\Translator;
 use Symfony\Component\Form\FormFactory;
 
@@ -15,12 +16,19 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
+	 */
+	private $translationEditFacade;
+
 	public function __construct(
 		FormFactory $formFactory,
 		TranslationGridFactory $translationGridFactory,
-		Translator $translator
+		Translator $translator,
+		TranslationEditFacade $translationEditFacade
 	) {
 		$this->translator = $translator;
+		$this->translationEditFacade = $translationEditFacade;
 
 		parent::__construct($formFactory, $translationGridFactory);
 	}
@@ -34,15 +42,15 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param int $translationId
+	 * @param string $translationId
 	 * @param array $translationData
 	 */
 	protected function editEntity($translationId, $translationData) {
-		// TODO: implementation
+		$this->translationEditFacade->saveTranslation($translationId, $translationData);
 	}
 
 	/**
-	 * @param int $translationId
+	 * @param string $translationId
 	 * @return array
 	 */
 	protected function getFormDataObject($translationId = null) {
@@ -51,12 +59,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 			throw new \SS6\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
 		}
 
-		$translationData = array(
-			'cs' => $this->translator->getCalatogue('cs')->get($translationId),
-			'en' => $this->translator->getCalatogue('en')->get($translationId),
-		);
-		
-		return $translationData;
+		return $this->translationEditFacade->getTranslationById($translationId);
 	}
 
 	/**

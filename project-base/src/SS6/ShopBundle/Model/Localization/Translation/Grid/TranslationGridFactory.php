@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Translator;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
+use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 
 class TranslationGridFactory implements GridFactoryInterface {
 
@@ -19,19 +20,26 @@ class TranslationGridFactory implements GridFactoryInterface {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
+	 */
+	private $translationEditFacade;
+
 	public function __construct(
 		GridFactory $gridFactory,
-		Translator $translator
+		Translator $translator,
+		TranslationEditFacade $translationEditFacade
 	) {
 		$this->gridFactory = $gridFactory;
 		$this->translator = $translator;
+		$this->translationEditFacade = $translationEditFacade;
 	}
 
 	/**
 	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create() {
-		$dataSource = new ArrayDataSource($this->loadData(), 'id');
+		$dataSource = new ArrayDataSource($this->translationEditFacade->getAllTranslations(), 'id');
 
 		$grid = $this->gridFactory->create('translationList', $dataSource);
 
@@ -40,31 +48,6 @@ class TranslationGridFactory implements GridFactoryInterface {
 		$grid->addColumn('en', 'en', 'Anglicky');
 
 		return $grid;
-	}
-
-	/**
-	 * @return array
-	 */
-	private function loadData() {
-		$catalogueCs = $this->translator->getCalatogue('cs');
-		$catalogueEn = $this->translator->getCalatogue('en');
-
-		$data = array();
-		foreach ($catalogueCs->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
-			$data[$id]['id'] = $id;
-			$data[$id]['cs'] = $translation;
-			$data[$id]['en'] = null;
-		}
-
-		foreach ($catalogueEn->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
-			$data[$id]['id'] = $id;
-			if (!isset($data[$id]['cs'])) {
-				$data[$id]['cs'] = null;
-			}
-			$data[$id]['en'] = $translation;
-		}
-
-		return $data;
 	}
 
 }

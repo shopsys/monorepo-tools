@@ -13,7 +13,7 @@ class Translator extends BaseTranslator {
 	 * @param string $locale
 	 * @return \Symfony\Component\Translation\MessageCatalogue
 	 */
-	public function getCalatogue($locale) {
+	public function getCatalogue($locale) {
 		if (!isset($this->catalogues[$locale])) {
 			$this->loadCatalogue($locale);
 		}
