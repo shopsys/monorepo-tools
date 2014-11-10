@@ -1,5 +1,8 @@
 services:
 
+  ss6.shop.form.admin.customer_form_type_factory:
+    class: SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
+
   ss6.shop.form.admin.payment.payment_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
 

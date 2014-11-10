@@ -28,14 +28,21 @@ class CustomerFormType extends AbstractType {
 	private $selectedDomain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	private $pricingGroups;
+
+	/**
 	 * @param string $scenario
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]|null $domains
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
 	 */
-	public function __construct($scenario, $domains = null, $selectedDomain = null) {
+	public function __construct($scenario, $domains = null, $selectedDomain = null, $pricingGroups = null) {
 		$this->scenario = $scenario;
 		$this->domains = $domains;
 		$this->selectedDomain = $selectedDomain;
+		$this->pricingGroups = $pricingGroups;
 	}
 
 	/**
@@ -51,7 +58,7 @@ class CustomerFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('userData', new UserFormType($this->scenario, $this->domains, $this->selectedDomain))
+			->add('userData', new UserFormType($this->scenario, $this->domains, $this->selectedDomain, $this->pricingGroups))
 			->add('billingAddressData', new BillingAddressFormType())
 			->add('deliveryAddressData', new DeliveryAddressFormType())
 			->add('sendRegistrationMail', 'checkbox', array('required' => false))

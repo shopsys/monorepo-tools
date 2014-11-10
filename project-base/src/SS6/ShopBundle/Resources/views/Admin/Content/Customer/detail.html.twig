@@ -15,6 +15,7 @@
 					<h2>{{ 'Systémové údaje'|trans }}</h2>
 					{{ form_id(user|default(null)) }}
 					{% block customer_domain %}{% endblock %}
+					{{ form_row(form.userData.pricingGroup, { label: 'Cenová skupina' }) }}
 					{% block customer_created_at %}{% endblock %}
 				</div>
 

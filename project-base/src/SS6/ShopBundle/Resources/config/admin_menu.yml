@@ -66,6 +66,12 @@
     - label: 'Identifikace eshopu'
       route: admin_overview_list
 
+    - label: 'Cenotvorba'
+      route: admin_pricinggroup_list
+      items:
+        - label: 'Cenové skupiny'
+          route: admin_pricinggroup_list
+
     - label: 'Dostupnost'
       route: admin_availability_list
 
