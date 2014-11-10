@@ -2,10 +2,3 @@
 
 {% block title %}- {{ 'Nový článek'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nový článek'|trans }}{% endblock %}
-
-{% block domain %}
-	<div class="form-line">
-		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-		<input type="text" value="{{ getDomainName(selectedDomainId) }}" class="form-control form-line__field" readonly="readonly" />
-	</div>
-{% endblock %}

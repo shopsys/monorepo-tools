@@ -24,6 +24,7 @@ class ArticleFormType extends AbstractType {
 		$builder
 			->add('name', 'text')
 			->add('text', 'ckeditor', array('required' => false))
+			->add('domainId', 'domain', array('required' => true))
 			->add('save', 'submit');
 	}
 

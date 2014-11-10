@@ -21,12 +21,19 @@ class ArticleData {
 	private $text;
 
 	/**
+	 * @var int|null
+	 */
+	private $domainId;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $text
+	 * @param int|null $domainId
 	 */
-	public function __construct($name = null, $text = null) {
+	public function __construct($name = null, $text = null, $domainId = null) {
 		$this->name = $name;
 		$this->text = $text;
+		$this->domainId = $domainId;
 	}
 
 	/**
@@ -44,6 +51,13 @@ class ArticleData {
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getDomainId() {
+		return $this->domainId;
+	}
+
+	/**
 	 * @param string|null $name
 	 */
 	public function setName($name) {
@@ -58,10 +72,18 @@ class ArticleData {
 	}
 
 	/**
+	 * @param int|null $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Article\Article $article
 	 */
 	public function setFromEntity(Article $article) {
 		$this->setName($article->getName());
 		$this->setText($article->getText());
+		$this->setDomainId($article->getDomainId());
 	}
 }

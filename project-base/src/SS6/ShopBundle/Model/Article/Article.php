@@ -42,10 +42,9 @@ class Article {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
-	 * @param int $domainId
 	 */
-	public function __construct(ArticleData $articleData, $domainId) {
-		$this->domainId = $domainId;
+	public function __construct(ArticleData $articleData) {
+		$this->domainId = $articleData->getDomainId();
 		$this->name = $articleData->getName();
 		$this->text = $articleData->getText();
 	}
@@ -54,6 +53,7 @@ class Article {
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function edit(ArticleData $articleData) {
+		$this->domainId = $articleData->getDomainId();
 		$this->name = $articleData->getName();
 		$this->text = $articleData->getText();
 	}

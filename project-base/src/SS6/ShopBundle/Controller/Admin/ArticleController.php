@@ -26,6 +26,7 @@ class ArticleController extends Controller {
 
 		$article = $articleEditFacade->getById($id);
 		$form = $this->createForm(new ArticleFormType());
+
 		$articleData = new ArticleData();
 
 		if (!$form->isSubmitted()) {
@@ -111,6 +112,7 @@ class ArticleController extends Controller {
 		$form = $this->createForm(new ArticleFormType());
 
 		$articleData = new ArticleData();
+		$articleData->setDomainId($selectedDomain->getId());
 
 		$form->setData($articleData);
 		$form->handleRequest($request);
@@ -135,7 +137,6 @@ class ArticleController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', array(
 			'form' => $form->createView(),
-			'selectedDomainId' => $selectedDomain->getId(),
 		));
 	}
 
