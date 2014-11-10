@@ -92,19 +92,6 @@ class MailTemplateFacade {
 	}
 
 	/**
-	 * @param type $name
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
-	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
-	 */
-	public function create($name, MailTemplateData $mailTemplateData = null) {
-		$mailTemplate = new MailTemplate($name, $mailTemplateData);
-		$this->em->persist($mailTemplate);
-		$this->em->flush();
-
-		return $mailTemplate;
-	}
-
-	/**
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\AllMailTemplatesData
 	 */

@@ -6,7 +6,6 @@ use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints;
 
 class MailTemplateFormType extends AbstractType {
 
@@ -25,6 +24,7 @@ class MailTemplateFormType extends AbstractType {
 		$builder
 			->add('subject', 'text', array('required' => false))
 			->add('body', 'ckeditor', array('required' => false))
+			->add('sendMail', 'checkbox', array('required' => false))
 			->add('save', 'submit');
 	}
 

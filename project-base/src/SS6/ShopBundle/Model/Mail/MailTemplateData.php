@@ -22,14 +22,21 @@ class MailTemplateData {
 	private $body;
 
 	/**
+	 * @var bool
+	 */
+	private $sendMail;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $subject
 	 * @param string|null $body
+	 * @param bool $sendMail
 	 */
-	public function __construct($name = null, $subject = null, $body = null) {
+	public function __construct($name = null, $subject = null, $body = null, $sendMail = true) {
 		$this->name = $name;
 		$this->subject = $subject;
 		$this->body = $body;
+		$this->sendMail = $sendMail;
 	}
 
 	/**
@@ -54,6 +61,13 @@ class MailTemplateData {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isSendMail() {
+		return $this->sendMail;
+	}
+
+	/**
 	 * @param string|null $name
 	 */
 	public function setName($name) {
@@ -75,12 +89,21 @@ class MailTemplateData {
 	}
 
 	/**
+	 * @param bool $sendMail
+	 */
+	public function setSendMail($sendMail) {
+		$this->sendMail = $sendMail;
+	}
+
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
 	 */
 	public function setFromEntity(MailTemplate $mailTemplate) {
 		$this->name = $mailTemplate->getName();
 		$this->subject = $mailTemplate->getSubject();
 		$this->body = $mailTemplate->getBody();
+		$this->sendMail = $mailTemplate->isSendMail();
 	}
 
 }

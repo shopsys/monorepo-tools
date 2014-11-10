@@ -59,7 +59,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('subject');
 		$mailTemplateData->setBody('body');
-		$mailTemplate = new MailTemplate('templateName', $mailTemplateData);
+		$mailTemplate = new MailTemplate('templateName', 1, $mailTemplateData);
 
 		$message = $orderMailService->getMessageByOrder($order, $mailTemplate);
 
