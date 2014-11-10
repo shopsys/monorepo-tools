@@ -5,6 +5,8 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
@@ -77,6 +79,27 @@ class ProductRepository {
 		$this->applyOrdering($qb, $orderingSetting);
 
 		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param int $page
+	 * @param int $limit
+	 * @return PaginationResult
+	 */
+	public function getPaginationResultForProductList(
+		$domainId,
+		ProductListOrderingSetting $orderingSetting,
+		$page,
+		$limit
+	) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$this->applyOrdering($qb, $orderingSetting);
+
+		$queryPaginator = new QueryPaginator($qb);
+
+		return $queryPaginator->getResult($page, $limit);
 	}
 
 	/**

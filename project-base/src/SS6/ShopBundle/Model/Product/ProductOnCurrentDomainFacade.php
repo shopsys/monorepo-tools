@@ -57,4 +57,27 @@ class ProductOnCurrentDomainFacade {
 		return $this->productDetailFactory->getDetailForProduct($product);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param int $page
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail[]
+	 */
+	public function getPaginatedProductDetailsForProductList(
+		ProductListOrderingSetting $orderingSetting,
+		$page,
+		$limit
+	) {
+		$paginationResult = $this->productRepository->getPaginationResultForProductList(
+			$this->domain->getId(),
+			$orderingSetting,
+			$page,
+			$limit
+		);
+		$products = $paginationResult->getResults();
+
+		return $this->productDetailFactory->getDetailsForProducts($products);
+
+	}
+
 }

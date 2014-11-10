@@ -72,8 +72,10 @@ front_product_detail:
     id: \d+
 
 front_product_list:
-  pattern: /product/list/
-  defaults: { _controller: SS6ShopBundle:Front\Product:list }
+  pattern: /product/list/{page}
+  defaults: { _controller: SS6ShopBundle:Front\Product:list, page: 1 }
+  requirements:
+    page: \d+
 
 front_registration_register:
   pattern: /registration/
