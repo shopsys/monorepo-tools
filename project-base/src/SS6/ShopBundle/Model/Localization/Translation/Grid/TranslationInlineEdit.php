@@ -76,4 +76,11 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 		return 'ss6.shop.localization.translation.grid.translation_inline_edit';
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function canAddNewRow() {
+		return false;
+	}
+
 }

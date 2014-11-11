@@ -79,6 +79,13 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function canAddNewRow() {
+		return true;
+	}
+
+	/**
 	 * @return string
 	 */
 	abstract public function getServiceName();
