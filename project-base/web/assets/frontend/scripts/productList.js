@@ -9,7 +9,7 @@
 
 			var cookieName = $(this).data('cookie-name');
 
-			$.cookie(cookieName, $(this).val());
+			$.cookie(cookieName, $(this).val(), { path: '/' });
 
 			location.reload();
 		});
