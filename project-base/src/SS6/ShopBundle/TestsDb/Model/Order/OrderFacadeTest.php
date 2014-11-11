@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\TestsDb\Model\Order;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
@@ -86,6 +87,48 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$this->assertEquals($orderData->getDomainId(), $orderFromDb->getDomainId());
 
 		$this->assertCount(3, $orderFromDb->getItems());
+	}
+
+	public function testEdit() {
+		$orderFacade = $this->getContainer()->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+		$orderRepository = $this->getContainer()->get('ss6.shop.order.order_repository');
+		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
+
+		$order = $this->getReference('order_1');
+		/* @var $order \SS6\ShopBundle\Model\Order\Order */
+
+		$this->assertCount(4, $order->getItems());
+
+		$orderData = new OrderData();
+		$orderData->setFromEntity($order);
+
+		$orderItemsData = $orderData->getItems();
+		array_pop($orderItemsData);
+
+		$orderItemData1 = new OrderItemData();
+		$orderItemData1->setName('itemName1');
+		$orderItemData1->setPriceWithoutVat(100);
+		$orderItemData1->setPriceWithVat(121);
+		$orderItemData1->setVatPercent(21);
+		$orderItemData1->setQuantity(3);
+
+		$orderItemData2 = new OrderItemData();
+		$orderItemData2->setName('itemName2');
+		$orderItemData2->setPriceWithoutVat(333);
+		$orderItemData2->setPriceWithVat(333);
+		$orderItemData2->setVatPercent(0);
+		$orderItemData2->setQuantity(1);
+
+		$orderItemsData['new_1'] = $orderItemData1;
+		$orderItemsData['new_2'] = $orderItemData2;
+
+		$orderData->setItems($orderItemsData);
+		$orderFacade->edit($order->getId(), $orderData);
+
+		$orderFromDb = $orderRepository->getById($order->getId());
+
+		$this->assertCount(5, $orderFromDb->getItems());
 	}
 
 }

@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Product\Product;
 class OrderProduct extends OrderItem {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
 	 */
@@ -26,7 +26,7 @@ class OrderProduct extends OrderItem {
 	 * @param string $priceWithVat
 	 * @param string $vatPercent
 	 * @param int $quantity
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
 		Order $order,
@@ -35,7 +35,7 @@ class OrderProduct extends OrderItem {
 		$priceWithVat,
 		$vatPercent,
 		$quantity,
-		Product $product
+		Product $product = null
 	) {
 		parent::__construct(
 			$order,

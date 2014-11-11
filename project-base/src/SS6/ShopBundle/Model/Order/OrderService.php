@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -69,14 +70,13 @@ class OrderService {
 			$user
 		);
 
-		$orderItemsToDelete = array();
 		$orderItemsData = $orderData->getItems();
+
+		$orderItemsToDelete = array();
 		foreach ($order->getItems() as $orderItem) {
-			$orderItem->getId();
 			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
 				$orderItemData = $orderItemsData[$orderItem->getId()];
 				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
-				$orderItem = $order->getItemById($orderItemData->getId());
 				$orderItem->edit($orderItemData);
 			} else {
 				$order->removeItem($orderItem);
@@ -84,9 +84,25 @@ class OrderService {
 			}
 		}
 
+		$orderItemsToCreate = array();
+		foreach ($orderItemsData as $index => $orderItemData) {
+			if (strpos($index, 'new_') === 0) {
+				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+				$orderItem = new OrderProduct(
+					$order,
+					$orderItemData->getName(),
+					$orderItemData->getPriceWithoutVat(),
+					$orderItemData->getPriceWithVat(),
+					$orderItemData->getVatPercent(),
+					$orderItemData->getQuantity()
+				);
+				$orderItemsToCreate[] = $orderItem;
+			}
+		}
+
 		$this->calculateTotalPrice($order);
 
-		return new OrderEditResult($orderItemsToDelete);
+		return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete);
 	}
 
 	/**

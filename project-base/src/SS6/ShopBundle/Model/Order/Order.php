@@ -52,6 +52,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
 	 *
 	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Order\Item\OrderItem", mappedBy="order", orphanRemoval=true)
+	 * @ORM\OrderBy({"id" = "ASC"})
 	 */
 	private $items;
 

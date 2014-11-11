@@ -5,11 +5,6 @@ namespace SS6\ShopBundle\Model\Order\Item;
 class OrderItemData {
 
 	/**
-	 * @var int
-	 */
-	private $id;
-
-	/**
 	 * @var string
 	 */
 	private $name;
@@ -33,14 +28,6 @@ class OrderItemData {
 	 * @var int
 	 */
 	private $quantity;
-
-	/**
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
 
 	/**
 	 * @return string
@@ -75,13 +62,6 @@ class OrderItemData {
 	 */
 	public function getQuantity() {
 		return $this->quantity;
-	}
-
-	/**
-	 * @param int $id
-	 */
-	public function setId($id) {
-		$this->id = $id;
 	}
 
 	/**
@@ -123,7 +103,6 @@ class OrderItemData {
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
 	 */
 	public function setFromEntity(OrderItem $orderItem) {
-		$this->setId($orderItem->getId());
 		$this->setName($orderItem->getName());
 		$this->setPriceWithVat($orderItem->getPriceWithVat());
 		$this->setPriceWithoutVat($orderItem->getPriceWithoutVat());
