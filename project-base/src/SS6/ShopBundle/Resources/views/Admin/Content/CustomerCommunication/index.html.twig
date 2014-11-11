@@ -1,0 +1,20 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Komunikace se zákazníkem'|trans }}{% endblock %}
+{% block h1 %}{{ 'Komunikace se zákazníkem'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+
+			<ul>
+				<li><a href="{{ url('admin_customercommunication_ordersubmitted') }}">{{ 'Potvrzení objednávky'|trans }}</a></li>
+			</ul>
+
+		</div>
+
+	</div>
+
+{% endblock %}

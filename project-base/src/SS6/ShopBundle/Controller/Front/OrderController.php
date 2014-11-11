@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
+use SS6\ShopBundle\Model\Setting\Setting;
 
 class OrderController extends Controller {
 
@@ -138,14 +139,20 @@ class OrderController extends Controller {
 	public function sentAction() {
 		$session = $this->get('session');
 		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+		$setting = $this->get('ss6.shop.setting');
+		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
+
 		$orderId = $session->get(self::SESSION_CREATED_ORDER, null);
 		$session->remove(self::SESSION_CREATED_ORDER);
 
 		if ($orderId === null) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
+		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME);
 
-		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig');
+		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
+			'orderConfirmationText' => $orderConfirmationText,
+		));
 	}
 
 	/**

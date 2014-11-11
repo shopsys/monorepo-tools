@@ -113,6 +113,12 @@
     - label: 'Překlady konstant'
       route: admin_translation_list
 
+    - label: 'Komunikace se zákazníkem'
+      route: admin_customercommunication_index
+      items:
+        - label: 'Potvrzení objednávky'
+          route: admin_customercommunication_ordersubmitted
+
     - label: 'Superadmin'
       route: admin_superadmin_index
       items:

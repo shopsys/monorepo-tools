@@ -8,8 +8,12 @@
 
 	<h1>{{ 'Objednávka byla odeslána'|trans }}</h1>
 
-	<p>
-		{{ 'Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování.'|trans }}
-	</p>
+	{{ orderConfirmationText|raw }}
+
+	<div class="box-buttons">
+		<a href="{{ url('front_homepage') }} }}" class="button box-buttons__left">
+			{{ 'Zpět do obchodu'|trans }}
+		</a>
+	</div>
 
 {% endblock %}

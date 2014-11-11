@@ -7,6 +7,8 @@ use SS6\ShopBundle\Model\Setting\SettingValueRepository;
 
 class Setting {
 
+	const ORDER_SUBMITTED_SETTING_NAME = 'order_submitted_text';
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
