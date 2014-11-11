@@ -43,19 +43,32 @@
 		SS6.order.items.refreshCount($collection);
 	};
 
+	SS6.order.items.getNewIndex = function($collection) {
+		var maxIndex = 0;
+
+		$collection.find('.js-order-item').each(function () {
+			var indexStr = $(this).data('index').toString();
+			if (indexStr.indexOf('new_') === 0) {
+				var index = parseInt(indexStr.slice(4));
+				if (index > maxIndex) {
+					maxIndex = index;
+				}
+			}
+		});
+
+		return 'new_' + (maxIndex + 1);
+	};
+
 	SS6.order.items.addItem = function($collection) {
 		var prototype = $collection.data('prototype');
-		var index = $collection.data('index');
-		var itemIndex = 'new_' + index;
+		var index = SS6.order.items.getNewIndex($collection);
 
-		var item = prototype.replace(/__name__/g, itemIndex);
+		var item = prototype.replace(/__name__/g, index);
 		var $item = $(item);
-		$item.data('index', itemIndex);
+		$item.data('index', index);
 
 		$collection.append($item);
-		SS6.validation.addNewItemToCollection('#order_items', itemIndex);
-
-		$collection.data('index', index + 1);
+		SS6.validation.addNewItemToCollection('#order_items', index);
 
 		SS6.order.items.refreshCount($collection);
 	};

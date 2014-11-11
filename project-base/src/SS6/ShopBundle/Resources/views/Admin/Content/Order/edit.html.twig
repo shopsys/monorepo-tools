@@ -88,20 +88,20 @@
 											<th ></th>
 										</tr>
 									</thead>
-									<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}" data-index="{{ form.items|length }}">
-										{% macro orderItem(orderItem, orderItemId, orderItemTotalPricesById, index) %}
-											<tr class="js-order-item" data-index="{{ index }}">
+									<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
+										{% macro orderItem(orderItem, orderItemId, orderItemTotalPricesById) %}
+											<tr class="js-order-item" data-index="{{ orderItemId }}">
 												<td>{{ form_widget(orderItem.name, {attr: { class: 'js-order-item-name'}}) }}</td>
 												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
 												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 												<td class="text-right text-middle">
-													{% if orderItemId is not null and orderItemTotalPricesById is not null %}
+													{% if orderItemTotalPricesById[orderItemId] is defined %}
 														{{ orderItemTotalPricesById[orderItemId].priceWithVat|price }}
 													{% endif %}
 												</td>
 												<td class="text-right text-middle">
-													{% if orderItemId is not null and orderItemTotalPricesById is not null %}
+													{% if orderItemTotalPricesById[orderItemId] is defined %}
 														{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|price }}
 													{% endif %}
 												</td>
@@ -112,7 +112,7 @@
 										{% endmacro %}
 
 										{% for orderItemId, orderItem in form.items %}
-											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById, loop.index0) }}
+											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById) }}
 										{% endfor %}
 									</tbody>
 									<tfoot>
