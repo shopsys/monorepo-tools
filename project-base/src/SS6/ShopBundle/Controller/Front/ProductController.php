@@ -33,12 +33,11 @@ class ProductController extends Controller {
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
-		$paginationResult = $productOnCurrentDomainFacade->getPaginationResult($orderingSetting, $page, self::PRODUCTS_PER_PAGE);
-		$productDetails = $productOnCurrentDomainFacade
+		$paginationResult = $productOnCurrentDomainFacade
 			->getPaginatedProductDetailsForProductList($orderingSetting, $page, self::PRODUCTS_PER_PAGE);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
-			'productDetails' => $productDetails,
+			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
 		));

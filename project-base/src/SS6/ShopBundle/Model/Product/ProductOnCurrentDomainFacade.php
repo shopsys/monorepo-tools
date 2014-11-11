@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\Factory;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -61,18 +62,21 @@ class ProductOnCurrentDomainFacade {
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
-	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail[]
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedProductDetailsForProductList(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit
 	) {
-		$paginationResult = $this->getPaginationResult($orderingSetting, $page, $limit);
+		$paginationResult = $this->getPaginatedProductsForProductList($orderingSetting, $page, $limit);
 		$products = $paginationResult->getResults();
 
-		return $this->productDetailFactory->getDetailsForProducts($products);
-
+		return new PaginationResult(
+			$paginationResult->getPage(),
+			$paginationResult->getPageSize(),
+			$paginationResult->getTotalCount(),
+			$this->productDetailFactory->getDetailsForProducts($products));
 	}
 
 	/**
@@ -81,7 +85,7 @@ class ProductOnCurrentDomainFacade {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResult(
+	private function getPaginatedProductsForProductList(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit
