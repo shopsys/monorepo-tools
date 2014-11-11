@@ -77,8 +77,8 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
-	 * @param type $page
-	 * @param type $limit
+	 * @param int $page
+	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginationResult(
@@ -92,6 +92,13 @@ class ProductOnCurrentDomainFacade {
 			$page,
 			$limit
 		);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product[]
+	 */
+	public function getVisibleProductsOnCurrentDomain() {
+		return $this->productRepository->getVisibleProductsByDomainId($this->domain->getId());
 	}
 
 }
