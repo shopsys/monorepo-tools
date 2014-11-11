@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Payment;
 
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 
 class IndependentPaymentVisibilityCalculation {
@@ -11,10 +12,17 @@ class IndependentPaymentVisibilityCalculation {
 	 */
 	private $paymentRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
-		PaymentRepository $paymentRepository
+		PaymentRepository $paymentRepository,
+		Domain $domain
 	) {
 		$this->paymentRepository = $paymentRepository;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -23,6 +31,12 @@ class IndependentPaymentVisibilityCalculation {
 	 * @return boolean
 	 */
 	public function isIndependentlyVisible(Payment $payment, $domainId) {
+		$locale = $this->domain->getDomainConfigById($domainId)->getLocale();
+
+		if (strlen($payment->getName($locale)) === 0) {
+			return false;
+		}
+
 		if ($payment->isHidden()) {
 			return false;
 		}
