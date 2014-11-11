@@ -54,13 +54,12 @@ class PagesResponsesTest extends DatabaseTestCase {
 	public function frontEndPagesProvider() {
 		return array(
 			['/'],
-			['article/detail/1/'],
+			['clanek/1/'],
 			['kosik/'],
-			['login/'],
-			['product/list'],
-			['product/detail/1'],
-			['registration/'],
-
+			['prihlaseni/'],
+			['produkty'],
+			['produkt/1'],
+			['registrace/'],
 		);
 	}
 
@@ -74,9 +73,9 @@ class PagesResponsesTest extends DatabaseTestCase {
 
 	public function frontEndPagesRegistredUserProvider() {
 		return array(
-			['customer/edit/'],
-			['customer/orders/'],
-			['customer/orders/detail/1']
+			['zakaznik/upravit-udaje/'],
+			['zakaznik/objednavky/'],
+			['zakaznik/detail-objednavky/1']
 		);
 	}
 

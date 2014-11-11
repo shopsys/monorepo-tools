@@ -40,6 +40,13 @@ class Domain {
 	/**
 	 * @return string
 	 */
+	public function getDomain() {
+		return $this->getCurrentConfig()->getDomain();
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getTemplatesDirectory() {
 		return $this->getCurrentConfig()->getTemplatesDirectory();
 	}
