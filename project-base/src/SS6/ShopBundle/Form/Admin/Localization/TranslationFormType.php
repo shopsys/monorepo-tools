@@ -15,10 +15,10 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 	 * @return string
 	 */
 	public function transform($value) {
-		if (preg_match('/^' . preg_quote(Translator::UNTRANSLATE_PREFIX) . '/u', $value)) {
+		if (preg_match('/^' . preg_quote(Translator::NOT_TRANSLATED_PREFIX) . '/u', $value)) {
 			return '';
 		}
-		
+
 		return $value;
 	}
 
@@ -30,7 +30,7 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 		return $value;
 	}
 
-		/**
+	/**
 	 * @return string
 	 */
 	public function getName() {
