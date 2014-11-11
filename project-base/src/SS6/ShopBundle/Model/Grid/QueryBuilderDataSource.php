@@ -21,18 +21,12 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	private $queryId;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Paginator\QueryPaginator
-	 */
-	private $queryPaginator;
-
-	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string $queryId
 	 */
 	public function __construct(QueryBuilder $queryBuilder, $queryId) {
 		$this->queryBuilder = $queryBuilder;
 		$this->queryId = $queryId;
-		$this->queryPaginator = new QueryPaginator($queryBuilder, self::HYDRATION_MODE);
 	}
 
 	/**
@@ -53,7 +47,9 @@ class QueryBuilderDataSource implements DataSourceInterface {
 			$this->addQueryOrder($queryBuilder, $orderQueryId, $orderDirection);
 		}
 
-		$paginationResult = $this->queryPaginator->getResult($page, $limit);
+		$queryPaginator = new QueryPaginator($queryBuilder, self::HYDRATION_MODE);
+
+		$paginationResult = $queryPaginator->getResult($page, $limit);
 		/* @var $paginationResult \SS6\ShopBundle\Component\Paginator\PaginationResult */
 
 		return $paginationResult->getResults();
@@ -74,8 +70,8 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	 * @return int
 	 */
 	public function getTotalRowsCount() {
-
-		return $this->queryPaginator->getTotalCount();
+		$queryPaginator = new QueryPaginator($this->queryBuilder, self::HYDRATION_MODE);
+		return $queryPaginator->getTotalCount();
 	}
 
 	/**

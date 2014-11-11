@@ -33,6 +33,8 @@ class QueryPaginator implements PaginatorInterface {
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getResult($page = 1, $pageSize = null) {
+		$queryBuilder = clone $this->queryBuilder;
+
 		if ($page < 1) {
 			$page = 1;
 		}
@@ -45,12 +47,12 @@ class QueryPaginator implements PaginatorInterface {
 				$page = $maxPages;
 			}
 
-			$this->queryBuilder
+			$queryBuilder
 				->setFirstResult($pageSize * ($page - 1))
 				->setMaxResults($pageSize);
 		}
 
-		$results = $this->queryBuilder->getQuery()->execute(null, $this->hydrationMode);
+		$results = $queryBuilder->getQuery()->execute(null, $this->hydrationMode);
 
 		return new PaginationResult($page, $pageSize, $totalCount, $results);
 
