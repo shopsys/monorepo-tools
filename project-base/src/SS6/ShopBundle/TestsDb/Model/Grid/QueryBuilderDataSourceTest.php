@@ -63,4 +63,52 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase {
 		}
 	}
 
+	public function testGetRowsInAscOrder() {
+		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
+
+		$qb = $em->createQueryBuilder();
+		$qb->select('p')
+			->from(Product::class, 'p')
+			->setMaxResults(10);
+
+		$queryBuilderDataSource = new QueryBuilderDataSource($qb, 'p.id');
+
+		$rows = $queryBuilderDataSource->getRows(null, 1, 'p.id', QueryBuilderDataSource::ORDER_ASC);
+		$this->assertCount(10, $rows);
+
+		$lastId = null;
+		foreach ($rows as $row) {
+			if ($lastId === null) {
+				$lastId = $row['p']['id'];
+			} else {
+				$this->assertGreaterThan($lastId, $row['p']['id']);
+			}
+		}
+	}
+
+	public function testGetRowsInDescOrder() {
+		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
+
+		$qb = $em->createQueryBuilder();
+		$qb->select('p')
+			->from(Product::class, 'p')
+			->setMaxResults(10);
+
+		$queryBuilderDataSource = new QueryBuilderDataSource($qb, 'p.id');
+
+		$rows = $queryBuilderDataSource->getRows(null, 1, 'p.id', QueryBuilderDataSource::ORDER_DESC);
+		$this->assertCount(10, $rows);
+
+		$lastId = null;
+		foreach ($rows as $row) {
+			if ($lastId === null) {
+				$lastId = $row['p']['id'];
+			} else {
+				$this->assertLessThan($lastId, $row['p']['id']);
+			}
+		}
+	}
+
 }
