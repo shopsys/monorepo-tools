@@ -41,7 +41,9 @@
 
 		var onFormSubmit = function (event) {
 			if (!uploader.ready) {
-				alert('Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.');
+				SS6.window({
+					content: 'Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.'
+				});
 				event.preventDefault();
 			}
 		}
