@@ -19,14 +19,14 @@
 				<div class="wrap-group">
 					{{ form_id(paymentDetail.payment|default(null)) }}
 
-					{{ form_row(form.name, { label: 'Název'}) }}
+					{{ form_row(form.names, { label: 'Název'}) }}
 					{{ form_row(form.domains, { label: 'Doména', errors_attr: { class: 'in-message-floating' } }) }}
 					{{ form_row(form.hidden, { label: 'Skryté', attr: {class: 'form-line--between'} }) }}
 					{{ form_row(form.price, { label: inputPriceLabel()}) }}
 					{{ form_row(form.vat, { label: 'DPH'}) }}
 					{% block payment_base_prices %}{% endblock %}
 					{{ form_row(form.transports, { label: 'Dopravy', empty_message: 'Musíte nejdřív nějakou dopravu vytvořit.'}) }}
-					{{ form_row(form.description, { label: 'Popis'}) }}
+					{{ form_row(form.descriptions, { label: 'Popis'}) }}
 				</div>
 
 				<div class="wrap-group">

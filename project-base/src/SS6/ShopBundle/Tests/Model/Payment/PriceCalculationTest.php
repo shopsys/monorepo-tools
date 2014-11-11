@@ -64,7 +64,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
-		$payment = new Payment(new PaymentData('PaymentName', $inputPrice, $vat));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], $inputPrice, $vat));
 
 		$price = $paymentPriceCalculation->calculatePrice($payment);
 

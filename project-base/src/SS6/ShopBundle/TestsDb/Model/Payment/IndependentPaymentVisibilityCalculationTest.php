@@ -16,7 +16,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($payment);
@@ -39,7 +39,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 		$domainId = 1;
 		$diffetentDomainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($payment);
@@ -61,7 +61,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', true));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], true));
 
 		$em->persist($vat);
 		$em->persist($payment);

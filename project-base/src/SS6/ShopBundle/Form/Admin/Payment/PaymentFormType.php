@@ -55,8 +55,8 @@ class PaymentFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 
 		$builder
-			->add('name', 'text', array(
-				'constraints' => array(
+			->add('names', 'localized', array(
+				'main_constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
 			))
@@ -93,7 +93,10 @@ class PaymentFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
 				),
 			))
-			->add('description', 'textarea', array('required' => false))
+			->add('descriptions', 'localized', array(
+				'required' => false,
+				'type' => 'textarea',
+			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => false,
 				'file_constraints' => array(

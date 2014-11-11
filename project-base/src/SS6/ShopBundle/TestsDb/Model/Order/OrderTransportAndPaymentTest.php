@@ -20,7 +20,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -50,7 +50,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], true));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -80,7 +80,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', true));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], true));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -134,7 +134,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 2);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -164,7 +164,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 2);
 		$payment->addTransport($transport);
 
@@ -194,7 +194,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -221,7 +221,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], true));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -248,7 +248,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', true));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], true));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 
@@ -273,7 +273,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 
 		$em->persist($vat);
@@ -297,7 +297,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 1);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 2);
 		$payment->addTransport($transport);
 
@@ -324,7 +324,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
 		$transportDomain = new TransportDomain($transport, 2);
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => 'paymentName'], 0, $vat, [], false));
 		$paymentDomain = new PaymentDomain($payment, 1);
 		$payment->addTransport($transport);
 

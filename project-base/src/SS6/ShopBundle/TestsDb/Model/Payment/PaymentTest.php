@@ -17,7 +17,7 @@ class PaymentTest extends DatabaseTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$transport = new Transport(new TransportData([], 0, $vat, [], false));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], false));
 		$payment->addTransport($transport);
 
 		$em->persist($vat);

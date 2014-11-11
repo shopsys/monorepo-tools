@@ -7,9 +7,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 class PaymentData {
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	private $name;
+	private $names;
 
 	/**
 	 * @var string
@@ -22,9 +22,9 @@ class PaymentData {
 	private $vat;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	private $description;
+	private $descriptions;
 
 	/**
 	 * @var array
@@ -47,35 +47,35 @@ class PaymentData {
 	private $transports;
 
 	/**
-	 * @param string|null $name
+	 * @param array $names
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
-	 * @param string|null $description
+	 * @param array $descriptions
 	 * @param boolean $hidden
 	 * @param array $domains
 	 */
 	public function __construct(
-		$name = null,
+		array $names = array(),
 		$price = null,
 		Vat $vat = null,
-		$description = null,
+		array $descriptions = array(),
 		$hidden = false,
 		$domains = array()
 	) {
-		$this->name = $name;
+		$this->names = $names;
 		$this->price = $price;
 		$this->vat = $vat;
-		$this->description = $description;
+		$this->descriptions = $descriptions;
 		$this->domains = $domains;
 		$this->hidden = $hidden;
 		$this->transports = array();
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getName() {
-		return $this->name;
+	public function getNames() {
+		return $this->names;
 	}
 
 	/**
@@ -93,10 +93,10 @@ class PaymentData {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getDescription() {
-		return $this->description;
+	public function getDescriptions() {
+		return $this->descriptions;
 	}
 
 	/**
@@ -128,10 +128,10 @@ class PaymentData {
 	}
 
 	/**
-	 * @param string $name
+	 * @param array $names
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setNames(array $names) {
+		$this->names = $names;
 	}
 
 	/**
@@ -149,10 +149,10 @@ class PaymentData {
 	}
 
 	/**
-	 * @param string $description
+	 * @param array $descriptions
 	 */
-	public function setDescription($description) {
-		$this->description = $description;
+	public function setDescriptions($descriptions) {
+		$this->descriptions = $descriptions;
 	}
 
 	/**
@@ -188,12 +188,20 @@ class PaymentData {
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentDomain[] $paymentDomains
 	 */
 	public function setFromEntity(Payment $payment, array $paymentDomains) {
-		$this->setName($payment->getName());
 		$this->setPrice($payment->getPrice());
 		$this->setVat($payment->getVat());
-		$this->setDescription($payment->getDescription());
 		$this->setHidden($payment->isHidden());
 		$this->setTransports($payment->getTransports()->toArray());
+
+		$translations = $payment->getTranslations();
+		$names = array();
+		$desctiptions = array();
+		foreach ($translations as $translate) {
+			$names[$translate->getLocale()] = $translate->getName();
+			$desctiptions[$translate->getLocale()] = $translate->getDescription();
+		}
+		$this->setNames($names);
+		$this->setDescriptions($desctiptions);
 
 		$domains = array();
 		foreach ($paymentDomains as $paymentDomain) {
