@@ -83,6 +83,11 @@ swiftmailer:
   password: "%mailer_password%"
   spool: { type: memory }
 
+cmf_routing:
+  chain:
+    routers_by_id:
+      router.default: 100
+
 ss6_shop:
   router:
     locale_routers:

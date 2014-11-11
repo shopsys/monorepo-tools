@@ -26,6 +26,7 @@ class AppKernel extends Kernel {
 			new Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
+			new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 			new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
 			new SS6\ShopBundle\SS6ShopBundle(), // must be loaded as last, because translations must overwrite other bundles
 		);
