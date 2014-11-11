@@ -1,0 +1,67 @@
+{% macro paginatorNavigation(paginationResult, entityName) %}
+	<div class="row text-center mb-half">
+		{% set pageCount = paginationResult.pageCount %}
+		<strong class="mt-half col-md-3">
+			Právě zobrazuji
+			{% if pageCount > 1 %}
+				{{ paginationResult.pageSize }} z
+			{% endif %}
+			{{ ('%count% ' ~ entityName|default('záznamů')|trim ~ '. ') | transchoice(paginationResult.totalCount, {'%count%': paginationResult.totalCount}) }}
+		</strong>
+
+		<div class="col-md-6 text-center">
+			<ul class="pagination mb-0 mt-half">
+				{% if pageCount > 1 %}
+					{% if paginationResult.page > 1 %}
+						<li>
+							<a href="{{ path('front_product_list', {'page': paginationResult.page - 1}) }}">&lt;</a>
+						</li>
+
+						<li>
+							<a href="{{ path('front_product_list', {'page': 1}) }}">1</a>
+						</li>
+					{% endif %}
+
+					{% set pagerExpand = 2 %}
+
+					{% if paginationResult.page > pagerExpand + 2 %}
+						<li class="disabled">
+							<a href="#" class="cursor-default">...</a>
+						</li>
+
+					{% endif %}
+
+					{% for page in (paginationResult.page - pagerExpand)..(paginationResult.page) if page > 1 and page < paginationResult.page %}
+						<li>
+							<a href="{{ path('front_product_list', {'page': page}) }}">{{ page }}</a>
+						</li>
+					{% endfor %}
+					<li class="active">
+						<a href="#" onclick="return false;">{{ paginationResult.page }}</a>
+					</li>
+
+					{% for page in (paginationResult.page + 1)..(paginationResult.page + pagerExpand) if page > paginationResult.page and page < pageCount %}
+						<li>
+							<a href="{{ path('front_product_list', {'page': page}) }}">{{ page }}</a>
+						</li>
+					{% endfor %}
+
+					{% if paginationResult.page < (pageCount - 1) - pagerExpand - 1 %}
+						<li class="disabled">
+							<a href="#" class="cursor-default">...</a>
+						</li>
+					{% endif %}
+
+					{% if paginationResult.page < pageCount %}
+						<li>
+							<a href="{{ path('front_product_list', {'page': pageCount}) }}">{{ pageCount }}</a>
+						</li>
+						<li>
+							<a href="{{ path('front_product_list', {'page': paginationResult.page + 1}) }}">&gt;</a>
+						</li>
+					{% endif %}
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+{% endmacro %}

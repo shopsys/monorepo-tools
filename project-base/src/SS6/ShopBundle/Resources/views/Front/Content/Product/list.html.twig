@@ -1,4 +1,5 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 
 {% block title %}
 	- {{ 'Katalog zboží'|trans }}
@@ -10,6 +11,10 @@
 	<div>
 		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
 	</div>
+
+	{% set entityName = 'kusů zboží'|trans %}
+
+	{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 
 	<ul class="list-items">
 		{% for productDetail in productDetails %}
@@ -52,5 +57,7 @@
 			</li>
 		{% endfor %}
 	</ul>
+
+	{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 
 {% endblock %}

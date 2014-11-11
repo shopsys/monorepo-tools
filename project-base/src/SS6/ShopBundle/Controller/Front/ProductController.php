@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
 
+	const PRODUCTS_PER_PAGE = 12;
+
 	/**
 	 * @param int $id
 	 */
@@ -23,7 +25,7 @@ class ProductController extends Controller {
 		));
 	}
 
-	public function listAction(Request $request) {
+	public function listAction(Request $request, $page) {
 		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
 		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
 		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
@@ -31,11 +33,13 @@ class ProductController extends Controller {
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
-		$productDetails = $productOnCurrentDomainFacade->getProductDetailsForProductList($orderingSetting);
+		$paginationResult = $productOnCurrentDomainFacade
+			->getPaginatedProductDetailsForProductList($orderingSetting, $page, self::PRODUCTS_PER_PAGE);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
-			'productDetails' => $productDetails,
+			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
+			'paginationResult' => $paginationResult,
 		));
 	}
 
