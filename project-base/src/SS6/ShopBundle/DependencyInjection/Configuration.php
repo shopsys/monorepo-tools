@@ -19,9 +19,16 @@ class Configuration implements ConfigurationInterface {
 		$treeBuilder = new TreeBuilder();
 		$rootNode = $treeBuilder->root('ss6_shop');
 
-		// Here you should define the parameters that are allowed to
-		// configure your bundle. See the documentation linked above for
-		// more information on that topic.
+		$rootNode
+			->children()
+				->arrayNode('router')
+					->children()
+						->arrayNode('locale_routers')
+						->defaultValue(array())
+						->prototype('scalar')
+					->end()
+				->end()
+			->end();
 
 		return $treeBuilder;
 	}
