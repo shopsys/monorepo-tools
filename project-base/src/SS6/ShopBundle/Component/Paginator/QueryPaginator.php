@@ -6,7 +6,7 @@ use Doctrine\DBAL\SQLParserUtils;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 
-class QueryPaginator implements PaginatorInterface{
+class QueryPaginator implements PaginatorInterface {
 
 	/**
 	 * @var \Doctrine\ORM\QueryBuilder
@@ -29,20 +29,30 @@ class QueryPaginator implements PaginatorInterface{
 
 	/**
 	 * @param int $page
-	 * @param int $limit
+	 * @param int $pageSize
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getResult($page = 1, $limit = null) {
-		if ($limit !== null) {
+	public function getResult($page = 1, $pageSize = null) {
+		if ($page < 1) {
+			$page = 1;
+		}
+
+		$totalCount = $this->getTotalCount();
+
+		if ($pageSize !== null) {
+			$maxPages = (int)ceil($totalCount / $pageSize);
+			if ($page > $maxPages) {
+				$page = $maxPages;
+			}
+
 			$this->queryBuilder
-			->setFirstResult($limit * ($page - 1))
-			->setMaxResults($limit);
+				->setFirstResult($pageSize * ($page - 1))
+				->setMaxResults($pageSize);
 		}
 
 		$results = $this->queryBuilder->getQuery()->execute(null, $this->hydrationMode);
-		$totalCount = $this->getTotalCount();
 
-		return new PaginationResult($page, $limit, $totalCount, $results);
+		return new PaginationResult($page, $pageSize, $totalCount, $results);
 
 	}
 

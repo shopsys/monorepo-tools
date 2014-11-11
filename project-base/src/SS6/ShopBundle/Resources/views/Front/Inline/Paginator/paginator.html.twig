@@ -1,10 +1,10 @@
-{% macro paginator_navigation(paginationResult, entityName) %}
+{% macro paginatorNavigation(paginationResult, entityName) %}
 	<div class="row text-center mb-half">
 		{% set pageCount = paginationResult.pageCount %}
 		<strong class="mt-half col-md-3">
 			Právě zobrazuji
 			{% if pageCount > 1 %}
-				{{ paginationResult.limit }} z
+				{{ paginationResult.pageSize }} z
 			{% endif %}
 			{{ ('%count% ' ~ entityName|default('záznamů')|trim ~ '. ') | transchoice(paginationResult.totalCount, {'%count%': paginationResult.totalCount}) }}
 		</strong>

@@ -12,7 +12,7 @@ class PaginationResult {
 	/**
 	 * @var int
 	 */
-	private $limit;
+	private $pageSize;
 
 	/**
 	 * @var int
@@ -31,19 +31,19 @@ class PaginationResult {
 
 	/**
 	 * @param int $page
-	 * @param int $limit
+	 * @param int $pageSize
 	 * @param int $totalCount
 	 * @param array $results
 	 */
-	public function __construct($page, $limit, $totalCount, $results) {
+	public function __construct($page, $pageSize, $totalCount, $results) {
 		$this->page = $page;
-		$this->limit = $limit;
+		$this->pageSize = $pageSize;
 		$this->totalCount = $totalCount;
 		$this->results = $results;
-		if ($limit === null) {
+		if ($pageSize === null) {
 			$this->pageCount = 1;
 		} else {
-			$this->pageCount = round($this->totalCount/$this->limit, 0, PHP_ROUND_HALF_UP);
+			$this->pageCount = (int)ceil($this->totalCount / $this->pageSize);
 		}
 
 	}
@@ -58,8 +58,8 @@ class PaginationResult {
 	/**
 	 * @return int
 	 */
-	public function getLimit() {
-		return $this->limit;
+	public function getPageSize() {
+		return $this->pageSize;
 	}
 
 	/**

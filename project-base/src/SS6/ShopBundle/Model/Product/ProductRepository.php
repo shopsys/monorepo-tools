@@ -191,9 +191,7 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product[]
 	 */
 	public function getVisibleProductsByDomainId($domainId) {
-		$criteria = ['hidden' => false, 'visible' => true, 'domainId' => $domainId];
-
-		return $this->getProductDomainRepository()->findBy($criteria);
+		return $this->getAllVisibleByDomainIdQueryBuilder($domainId)->getQuery()->getResult();
 	}
 
 }
