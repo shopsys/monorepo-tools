@@ -12,7 +12,7 @@
 		{% endif %}
 	{% endspaceless %}>
 
-	{% if grid.inlineEdit %}
+	{% if grid.inlineEdit and grid.inlineEditService.canAddNewRow %}
 		{{ gridView.renderBlock('grid_inline_edit_add_button') }}
 	{% endif %}
 

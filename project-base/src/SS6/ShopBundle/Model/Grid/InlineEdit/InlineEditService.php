@@ -71,7 +71,6 @@ class InlineEditService {
 	 * @param mixed $rowId
 	 */
 	public function getRenderedRowHtml($theme, $serviceName, $rowId) {
-		$rowId = (int)$rowId; // $rowId is string from request - composite or string primary key not supported
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$grid = $gridInlineEdit->getGrid();
 		/* @var $grid \SS6\ShopBundle\Model\Grid\Grid */
