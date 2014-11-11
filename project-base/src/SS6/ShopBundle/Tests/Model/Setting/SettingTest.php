@@ -22,9 +22,10 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['findAll'])
+			->setMethods(['findAllForAllDomains', 'findAllDefault'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAll')->willReturn($settingValueArray);
+		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllDefault')->willReturn($settingValueArray);
+		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllForAllDomains')->willReturn($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 		$this->assertEquals('value', $setting->get('key'));
@@ -46,9 +47,10 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['findAll'])
+			->setMethods(['findAllForAllDomains', 'findAllDefault'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAll')->willReturn($settingValueArray);
+		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllDefault')->willReturn($settingValueArray);
+		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllForAllDomains')->willReturn($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
@@ -66,9 +68,10 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['findAll'])
+			->setMethods(['findAllForAllDomains', 'findAllDefault'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAll')->willReturn($settingValueArray);
+		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllDefault')->willReturn($settingValueArray);
+		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllForAllDomains')->willReturn($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
