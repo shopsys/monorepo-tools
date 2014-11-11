@@ -57,7 +57,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 			['article/detail/1/'],
 			['kosik/'],
 			['login/'],
-			['product/list/'],
+			['product/list'],
 			['product/detail/1'],
 			['registration/'],
 
