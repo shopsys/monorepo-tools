@@ -25,6 +25,11 @@ class PaginationResult {
 	private $results;
 
 	/**
+	 * @var int
+	 */
+	private $pageCount;
+
+	/**
 	 * @param int $page
 	 * @param int $limit
 	 * @param int $totalCount
@@ -35,6 +40,12 @@ class PaginationResult {
 		$this->limit = $limit;
 		$this->totalCount = $totalCount;
 		$this->results = $results;
+		if ($limit === null) {
+			$this->pageCount = 1;
+		} else {
+			$this->pageCount = round($this->totalCount/$this->limit, 0, PHP_ROUND_HALF_UP);
+		}
+
 	}
 
 	/**
@@ -65,5 +76,11 @@ class PaginationResult {
 		return $this->results;
 	}
 
+	/**
+	 * @return int
+	 */
+	public function getPageCount() {
+		return $this->pageCount;
+	}
 
 }

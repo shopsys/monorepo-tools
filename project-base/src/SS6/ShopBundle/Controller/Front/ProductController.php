@@ -32,12 +32,17 @@ class ProductController extends Controller {
 		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
+
+		$page = $this->adjustPageNumber($productOnCurrentDomainFacade, $page);
+
+		$paginationResult = $productOnCurrentDomainFacade->getPaginationResult($orderingSetting, $page, self::PRODUCTS_PER_PAGE);
 		$productDetails = $productOnCurrentDomainFacade
 			->getPaginatedProductDetailsForProductList($orderingSetting, $page, self::PRODUCTS_PER_PAGE);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
 			'productDetails' => $productDetails,
 			'orderingSetting' => $orderingSetting,
+			'paginationResult' => $paginationResult,
 		));
 	}
 
@@ -53,6 +58,25 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 			'cookieName' => ProductListOrderingService::COOKIE_NAME,
 		));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
+	 * @param int $page
+	 * @return int
+	 */
+	private function adjustPageNumber($productOnCurrentDomainFacade, $page) {
+		$productsTotalCount = sizeof($productOnCurrentDomainFacade->getVisibleProductsOnCurrentDomain());
+		if (self::PRODUCTS_PER_PAGE === null) {
+			$pageMaximum = 1;
+		} else {
+			$pageMaximum = round($productsTotalCount/self::PRODUCTS_PER_PAGE, 0, PHP_ROUND_HALF_UP);
+		}
+		if ($page > $pageMaximum && $pageMaximum != 0) {
+			$page = $pageMaximum;
+		}
+
+		return $page;
 	}
 
 }
