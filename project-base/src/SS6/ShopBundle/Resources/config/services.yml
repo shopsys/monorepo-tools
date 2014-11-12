@@ -184,6 +184,11 @@ services:
   ss6.shop.domain.domain_factory:
     class: SS6\ShopBundle\Model\Domain\DomainFactory
 
+  ss6.shop.domain.domain_listener:
+    class: SS6\ShopBundle\Model\Domain\DomainListener
+    tags:
+      - { name: kernel.event_subscriber }
+
   ss6.shop.domain.selected_domain:
     class: SS6\ShopBundle\Model\Domain\SelectedDomain
 
@@ -483,6 +488,15 @@ services:
 
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+
+  ss6.shop.router.current_domain_router:
+    class: SS6\ShopBundle\Component\Router\CurrentDomainRouter
+    tags:
+      - { name: router, priority: 70 }
+
+  ss6.shop.router.localized_router_factory:
+    class: SS6\ShopBundle\Component\Router\LocalizedRouterFactory
+    arguments: [%ss6_shop.router.locale_routers%]
 
   ss6.shop.slider.slider_item_facade:
     class: SS6\ShopBundle\Model\Slider\SliderItemFacade

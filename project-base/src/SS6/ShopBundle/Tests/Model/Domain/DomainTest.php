@@ -35,6 +35,7 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 		$domain->switchDomainByRequest($requestMock);
 		$this->assertEquals(1, $domain->getId());
+		$this->assertEquals('example.com', $domain->getDomain());
 		$this->assertEquals('cs', $domain->getLocale());
 		$this->assertEquals('design1', $domain->getTemplatesDirectory());
 	}

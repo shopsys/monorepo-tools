@@ -83,5 +83,16 @@ swiftmailer:
   password: "%mailer_password%"
   spool: { type: memory }
 
+cmf_routing:
+  chain:
+    routers_by_id:
+      router.default: 100
+
+ss6_shop:
+  router:
+    locale_routers:
+      cs: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_cs.yml
+      en: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_en.yml
+
 imports:
     - { resource: wysiwyg.yml }

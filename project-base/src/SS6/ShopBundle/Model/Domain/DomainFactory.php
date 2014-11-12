@@ -3,14 +3,8 @@
 namespace SS6\ShopBundle\Model\Domain;
 
 use SS6\ShopBundle\Model\Domain\Config\DomainsConfigLoader;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class DomainFactory {
-
-	/**
-	 * @var \Symfony\Component\HttpFoundation\RequestStack
-	 */
-	private $requestStack;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainsConfigLoader
@@ -18,11 +12,9 @@ class DomainFactory {
 	private $domainsConfigLoader;
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainsConfigLoader $domainsConfigLoader
 	 */
-	public function __construct(RequestStack $requestStack, DomainsConfigLoader $domainsConfigLoader) {
-		$this->requestStack = $requestStack;
+	public function __construct(DomainsConfigLoader $domainsConfigLoader) {
 		$this->domainsConfigLoader = $domainsConfigLoader;
 	}
 
@@ -33,14 +25,9 @@ class DomainFactory {
 	public function create($filename) {
 		$domain = new Domain($this->domainsConfigLoader->loadDomainConfigsFromYaml($filename));
 
-		$request = $this->requestStack->getMasterRequest();
-		if ($request !== null) {
-			$domain->switchDomainByRequest($this->requestStack->getMasterRequest());
-		} else {
-			$domainId = getenv('DOMAIN');
-			if ($domainId !== false) {
-				$domain->switchDomainById($domainId);
-			}
+		$domainId = getenv('DOMAIN');
+		if ($domainId !== false) {
+			$domain->switchDomainById($domainId);
 		}
 
 		return $domain;

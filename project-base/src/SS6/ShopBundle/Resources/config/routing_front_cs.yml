@@ -1,0 +1,54 @@
+front_article_detail:
+  pattern: /clanek/{id}/
+  defaults: { _controller: SS6ShopBundle:Front\Article:detail }
+  requirements:
+    id: \d+
+
+front_cart:
+  pattern: /kosik/
+  defaults: { _controller: SS6ShopBundle:Front\Cart:index }
+
+front_customer_edit:
+  pattern: /zakaznik/upravit-udaje/
+  defaults: { _controller: SS6ShopBundle:Front\Customer:edit }
+
+front_customer_orders:
+  pattern: /zakaznik/objednavky/
+  defaults: { _controller: SS6ShopBundle:Front\Customer:orders }
+
+front_customer_order_detail:
+  pattern: /zakaznik/detail-objednavky/{id}
+  defaults: { _controller: SS6ShopBundle:Front\Customer:orderDetail }
+  requirements:
+    cartItemId: \d+
+
+front_login:
+  pattern: /prihlaseni/
+  defaults: { _controller: SS6ShopBundle:Front\Login:login }
+
+front_logout:
+  pattern: /odhlasit/
+  # controller's action is unnecessary, because firewall processes whole request
+
+front_order_index:
+  pattern: /objednavka/
+  defaults: { _controller: SS6ShopBundle:Front\Order:index }
+
+front_order_sent:
+  pattern: /potvrzeni-objednavky/
+  defaults: { _controller: SS6ShopBundle:Front\Order:sent }
+
+front_product_detail:
+  pattern: /produkt/{id}
+  defaults: { _controller: SS6ShopBundle:Front\Product:detail }
+  requirements:
+    id: \d+
+
+front_product_list:
+  pattern: /produkty/{page}
+  defaults: { _controller: SS6ShopBundle:Front\Product:list, page: 1 }
+  requirements:
+    page: \d+
+front_registration_register:
+  pattern: /registrace/
+  defaults: { _controller: SS6ShopBundle:Front\Registration:register }

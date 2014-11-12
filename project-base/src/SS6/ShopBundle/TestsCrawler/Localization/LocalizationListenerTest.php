@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 class LocalizationListenerTest extends DatabaseTestCase {
 
 	public function testProductDetailLocaleCs() {
-		$crawler = $this->getClient()->request('GET', 'product/detail/3');
+		$crawler = $this->getClient()->request('GET', 'produkt/3');
 
 		$this->assertGreaterThan(
 			0,
