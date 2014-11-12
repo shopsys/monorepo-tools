@@ -14,6 +14,16 @@ Form field constructions, with many variants and uses
 
 	<div class="form-line">
 		<label class="form-line__label">
+			With image
+		</label>
+		<span class="form-line__field form-line__field--icon">
+			<input class="form-control" type="text">
+			<span class="form-line__icon form-line__icon--cs"></span>
+		</span>
+	</div>
+
+	<div class="form-line">
+		<label class="form-line__label">
 			Field's label
 		</label>
 		<span class="form-line__text">
@@ -186,4 +196,37 @@ Form field constructions, with many variants and uses
 .form-line--between .radio {
 	display: inline-block;
 	margin-right: 20px;
+}
+
+.form-line__field--icon {
+	padding-left: 33px;
+}
+
+.form-line__icon {
+	position: absolute;
+	top: 11px;
+	left: 210px;
+	display: block;
+	height: 11px;
+	width: 16px;
+	z-index: 2;
+}
+
+.form-line__icon--cs {
+	.background('flags/cs.png');
+}
+.form-line__icon--de {
+	.background('flags/de.png');
+}
+.form-line__icon--en {
+	.background('flags/en.png');
+}
+.form-line__icon--hu {
+	.background('flags/hu.png');
+}
+.form-line__icon--pl {
+	.background('flags/pl.png');
+}
+.form-line__icon--sk {
+	.background('flags/sk.png');
 }
