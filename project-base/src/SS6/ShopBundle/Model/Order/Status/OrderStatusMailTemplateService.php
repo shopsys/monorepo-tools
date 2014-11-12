@@ -48,6 +48,8 @@ class OrderStatusMailTemplateService {
 			$mailTemplate = $this->getMailTemplateByOrderStatus($mailTemplates, $orderStatus);
 			if ($mailTemplate !== null) {
 				$orderStatusMailTemplateData->setFromEntity($mailTemplate);
+			} else {
+				$orderStatusMailTemplateData->setSendMail(false);
 			}
 			$orderStatusMailTemplateData->setName($this->orderMailService->getMailTemplateNameByStatus($orderStatus));
 
