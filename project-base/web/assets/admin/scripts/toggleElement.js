@@ -9,22 +9,23 @@
 
 	SS6.toggleElement.show = function ($container) {
 		var $content = $container.find('.toggle-content');
+
 		$content.slideDown('fast', function() {
-			$content.removeClass('toggle-close');
+			$content.removeClass('display-none');
 		});
 	};
 
 	SS6.toggleElement.hide = function ($container) {
 		var $content = $container.find('.toggle-content');
 		$content.slideUp('fast', function() {
-			$content.addClass('toggle-close');
+			$content.addClass('display-none');
 		});
 	};
 
 	SS6.toggleElement.toggle = function () {
 		var $container = $(this).closest('.toggle-container');
 		var $content = $container.find('.toggle-content');
-		if ($content.hasClass('toggle-close')) {
+		if ($content.hasClass('display-none')) {
 			SS6.toggleElement.show($container);
 		} else {
 			SS6.toggleElement.hide($container);
