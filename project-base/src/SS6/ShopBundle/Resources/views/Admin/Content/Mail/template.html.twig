@@ -24,7 +24,7 @@
 							{% if sendMailText is not null %}
 								{{ form_row(template.sendMail, { label: sendMailText }) }}
 							{% else %}
-								{% do template.setRendered() %}
+								{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
 							{% endif %}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
 
