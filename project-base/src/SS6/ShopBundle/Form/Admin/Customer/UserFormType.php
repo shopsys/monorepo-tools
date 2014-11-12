@@ -102,11 +102,11 @@ class UserFormType extends AbstractType {
 					'data' => $this->selectedDomain->getId(),
 				));
 		}
-		
+
 		$builder
 			->add('pricingGroup', 'choice', array(
 			'required' => false,
-			'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', array(), null, 'id'),
+			'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', array(), 'DomainId', 'id'),
 		));
 	}
 

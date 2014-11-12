@@ -4,7 +4,7 @@
 {% block h1 %}{{ 'Nový zákazník'|trans }}{% endblock %}
 
 {% block customer_domain %}
-	{{ form_row(form.userData.domainId, { label: 'Doména'|trans }) }}
+	{{ form_row(form.userData.domainId, { label: 'Doména'|trans, attr: {class: 'js-change-price-categories'} }) }}
 {% endblock %}
 
 {% block customer_sendMail %}
