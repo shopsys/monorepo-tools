@@ -248,3 +248,13 @@
 		{%- endif -%}
 	{%- endfor -%}
 {%- endblock button_attributes %}
+
+{% block money_widget %}
+    {% set value = value|cropZeros %}
+	{{ parent('money_widget') }}
+{% endblock money_widget %}
+
+{% block number_widget %}
+    {% set value = value|cropZeros %}
+	{{ parent('number_widget') }}
+{% endblock number_widget %}
