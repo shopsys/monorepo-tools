@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserRepository {
 
@@ -47,6 +48,14 @@ class UserRepository {
 			throw new Exception\UserNotFoundException($criteria);
 		}
 		return $user;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return zSS6\ShopBundle\Model\Customer\User[]
+	 */
+	public function getAllByPricingGroup(PricingGroup $pricingGroup) {
+		return $this->getUserRepository()->findBy(['pricingGroup' => $pricingGroup]);
 	}
 
 }
