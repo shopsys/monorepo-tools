@@ -35,7 +35,8 @@
 				textContinue: 'Ano',
 				eventContinue: function () {
 					SS6.grid.inlineEdit.cancelEdit($formRow);
-				}
+				},
+				buttonCancel: true
 			});
 			return false;
 		});

@@ -20,7 +20,8 @@
 				buttonContinue: true,
 				eventContinue: function () {
 					SS6.order.items.removeItem($item);
-				}
+				},
+				buttonCancel: true
 			});
 		}
 		event.preventDefault();

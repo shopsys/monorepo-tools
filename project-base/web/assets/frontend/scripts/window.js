@@ -34,7 +34,10 @@
 			textContinue: 'Ano',
 			eventClose: function () {},
 			eventContinue: function () {},
-			urlContinue: '#'
+			urlContinue: '#',
+			buttonCancel: false,
+			textCancel: 'Ne',
+			eventCancel: function () {}
 		};
 		var options = $.extend(defaults, options);
 
@@ -68,8 +71,9 @@
 			$window.append($windowButtonClose);
 		}
 
+		var $windowActions = null;
 		if (options.buttonContinue) {
-			var $windowActions = $('<div class="window__actions"></div>');
+			$windowActions = $('<div class="window__actions"></div>');
 			var $windowButtonContinue = $('<a href="" class="window-button-continue button btn btn-primary"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
@@ -82,6 +86,24 @@
 					}
 				});
 			$windowActions.append($windowButtonContinue);
+		}
+
+		if (options.buttonCancel) {
+			if ($windowActions === null) {
+				$windowActions = $('<div class="window__actions"></div>');
+			}
+			var $windowButtonCancel = $('<a href="#" class="window-button-cancel button btn btn-primary ml-1"></a>');
+			$windowButtonCancel
+				.text(options.textCancel)
+				.bind('click.window', options.eventClose)
+				.bind('click.windowClose', function () {
+					$window.trigger('windowClose');
+					return false;
+				});
+			$windowActions.append($windowButtonCancel);
+		}
+
+		if ($windowActions !== null) {
 			$window.append($windowActions);
 		}
 
