@@ -35,7 +35,7 @@ class DomainListener implements EventSubscriberInterface {
 	 */
 	public static function getSubscribedEvents() {
 		return array(
-			// Set domain by request must be first for other services (eg.: routing, localization...)
+			// Setting domain by request must be done before loading other services (eg.: routing, localization...)
 			KernelEvents::REQUEST => array(array('onKernelRequest', 100)),
 		);
 	}

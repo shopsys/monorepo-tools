@@ -21,13 +21,12 @@ class LocalizedRouterFactory {
 	/**
 	 * @var array
 	 */
-	private $routersByLocaleAndContextHost;
+	private $routersByLocaleAndHost;
 
-	
 	public function __construct($localeRoutersConfiguration, DelegatingLoader $delegatingLoader) {
 		$this->delegatingLoader = $delegatingLoader;
 		$this->localeRoutersConfiguration = $localeRoutersConfiguration;
-		$this->routersByLocaleAndContextHost = array();
+		$this->routersByLocaleAndHost = array();
 	}
 
 	/**
@@ -42,10 +41,10 @@ class LocalizedRouterFactory {
 			throw new \SS6\ShopBundle\Component\Router\Exception\RouterNotResolvedException($message);
 		}
 
-		if (!array_key_exists($locale, $this->routersByLocaleAndContextHost) 
-			|| !array_key_exists($context->getHost(), $this->routersByLocaleAndContextHost[$locale])
+		if (!array_key_exists($locale, $this->routersByLocaleAndHost)
+			|| !array_key_exists($context->getHost(), $this->routersByLocaleAndHost[$locale])
 		) {
-			$this->routersByLocaleAndContextHost[$locale][$context->getHost()] = new Router(
+			$this->routersByLocaleAndHost[$locale][$context->getHost()] = new Router(
 				$this->delegatingLoader,
 				$this->localeRoutersConfiguration[$locale],
 				array(),
@@ -53,7 +52,7 @@ class LocalizedRouterFactory {
 			);
 		}
 
-		return $this->routersByLocaleAndContextHost[$locale][$context->getHost()];
+		return $this->routersByLocaleAndHost[$locale][$context->getHost()];
 	}
 
 }

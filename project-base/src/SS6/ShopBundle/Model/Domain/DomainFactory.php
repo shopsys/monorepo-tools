@@ -30,7 +30,6 @@ class DomainFactory {
 			$domain->switchDomainById($domainId);
 		}
 
-		// if domain is not set, set at DomainListener::onKernelRequest()
 		return $domain;
 	}
 
