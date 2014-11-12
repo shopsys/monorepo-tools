@@ -2,10 +2,13 @@
 
 namespace SS6\ShopBundle\Form\Admin\Mail;
 
+use SS6\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class MailTemplateFormType extends AbstractType {
 
@@ -22,8 +25,28 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('subject', 'text', array('required' => false))
-			->add('body', 'ckeditor', array('required' => false))
+			->add('subject', 'text', array(
+				'required' => false,
+				'constraints' => array(
+					new Constraints\NotBlank(array(
+						'message' => 'Vyplňte prosím předmět',
+						'groups' => array('sendMail', 'bodyWithoutSubject'),
+					))
+				)
+			))
+			->add(
+				$builder
+					->create('body', 'ckeditor', array(
+						'required' => false,
+						'constraints' => array(
+							new Constraints\NotBlank(array(
+								'message' => 'Vyplňte prosím text emailu',
+								'groups' => array('sendMail', 'subjectWithoutBody'),
+							))
+						)
+					))
+					->addModelTransformer(new EmptyWysiwygTransformer())
+			)
 			->add('sendMail', 'checkbox', array('required' => false))
 			->add('save', 'submit');
 	}
@@ -35,6 +58,24 @@ class MailTemplateFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => MailTemplateData::class,
 			'attr' => array('novalidate' => 'novalidate'),
+			'validation_groups' => function(FormInterface $form) {
+				$validationGroups = array('Default');
+
+				$mailTemplateData = $form->getData();
+				/* @var $mailTemplateData \SS6\ShopBundle\Model\Mail\MailTemplateData */
+
+				if ($mailTemplateData->isSendMail()) {
+					$validationGroups[] = 'sendMail';
+				}
+				if ($mailTemplateData->getSubject() === null && $mailTemplateData->getBody() !== null) {
+					$validationGroups[] = 'bodyWithoutSubject';
+				}
+				if ($mailTemplateData->getSubject() !== null && $mailTemplateData->getBody() === null) {
+					$validationGroups[] = 'subjectWithoutBody';
+				}
+
+				return $validationGroups;
+			}
 		));
 	}
 
