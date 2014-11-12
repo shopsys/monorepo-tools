@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\Debug\ErrorHandler;
 
 require_once __DIR__ . '/../app/bootstrap.php.cache';
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -30,6 +31,8 @@ class Bootstrap {
 
 		if ($this->isDebug()) {
 			Debug::enable();
+		} else {
+			ErrorHandler::register();
 		}
 
 		$kernel = new \AppKernel($this->environment, $this->isDebug());
