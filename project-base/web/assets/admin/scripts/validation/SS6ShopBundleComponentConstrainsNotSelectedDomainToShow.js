@@ -1,4 +1,4 @@
-var SS6ShopBundleComponentNotSelectedDomainToShow = function() {
+var SS6ShopBundleComponentConstrainsNotSelectedDomainToShow = function() {
 	this.message = '';
 
 	this.validate = function(value, ele) {

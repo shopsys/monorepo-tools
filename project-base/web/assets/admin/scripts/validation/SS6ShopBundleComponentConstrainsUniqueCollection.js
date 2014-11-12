@@ -1,4 +1,4 @@
-var SS6ShopBundleComponentUniqueCollection = function() {
+var SS6ShopBundleComponentConstrainsUniqueCollection = function() {
 	var self = this;
 	this.message = '';
 	this.fields = '';

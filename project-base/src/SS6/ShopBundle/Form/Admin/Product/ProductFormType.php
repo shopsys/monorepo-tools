@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\NotSelectedDomainToShow;
-use SS6\ShopBundle\Component\UniqueCollection;
+use SS6\ShopBundle\Component\Constrains\NotSelectedDomainToShow;
+use SS6\ShopBundle\Component\Constrains\UniqueCollection;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\DatePickerType;
