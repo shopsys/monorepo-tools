@@ -179,9 +179,16 @@
 	<a
 		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
 		data-ajax-confirm-on-open="SS6.confirmDelete.onSelectChange();"
-		href="{{ actionColumn.targetUrl(row) }}"
+		href="#"
 		{% if actionColumn.confirmMessage is not empty -%}
-			onclick="return confirm('{{ actionColumn.confirmMessage }}');"
+			onclick="
+				SS6.window({
+					content: '{{ actionColumn.confirmMessage }}',
+					buttonCancel: true,
+					buttonContinue: true,
+					textContinue: 'Ano',
+					urlContinue: '{{ actionColumn.targetUrl(row) }}'
+				})"
 		{%- endif %}
 	><i class="fa fa-{{ icon }}"></i></a>
 {% endblock %}

@@ -17,6 +17,7 @@
 
 			SS6.window({
 				content: 'Opravdu chcete odebrat z objednávky položku "<i>' + itemName + '</i>"?',
+				buttonCancel: true,
 				buttonContinue: true,
 				eventContinue: function () {
 					SS6.order.items.removeItem($item);

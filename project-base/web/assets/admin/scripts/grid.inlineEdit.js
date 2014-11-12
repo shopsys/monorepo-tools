@@ -28,9 +28,15 @@
 
 		$grid.on('click', '.js-inline-edit-cancel', function() {
 			var $formRow = $(this).closest('.js-grid-editing-row');
-			if (confirm('Opravdu chcete zahodit všechny změny?')) {
-				SS6.grid.inlineEdit.cancelEdit($formRow);
-			}
+			SS6.window({
+				content: 'Opravdu chcete zahodit všechny změny?',
+				buttonCancel: true,
+				buttonContinue: true,
+				textContinue: 'Ano',
+				eventContinue: function () {
+					SS6.grid.inlineEdit.cancelEdit($formRow);
+				}
+			});
 			return false;
 		});
 
@@ -74,7 +80,9 @@
 				} else {
 					$buttons.show();
 					$saving.hide();
-					alert('Prosím překontrolujte následující informace:\n\n• ' + saveResult.errors.join('\n• '));
+					SS6.window({
+						content: 'Prosím překontrolujte následující informace:\n\n• ' + saveResult.errors.join('\n• ')
+					});
 				}
 			}
 		});
