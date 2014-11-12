@@ -2,10 +2,13 @@ ivory_ck_editor:
   default_config: default
   configs:
     default:
+      enterMode: 2
+      shiftEnterMode: 1
+      shiftEnterMode:
       contentsCss:
         - assets/admin/styles/wysiwyg.css
       filebrowserBrowseRoute: elfinder
-      toolbar: 
+      toolbar:
         - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
         - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
         - ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
@@ -16,12 +19,14 @@ ivory_ck_editor:
         - ['Format']
         - ['FontSize']
         - ['TextColor']
-    
+
     email:
+      enterMode: 2
+      shiftEnterMode: 1
       contentsCss:
         - assets/admin/styles/wysiwyg.css
       filebrowserBrowseRoute: elfinder
-      toolbar: 
+      toolbar:
         - ['Bold', 'Italic', 'Underline', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat']
         - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
         - ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
