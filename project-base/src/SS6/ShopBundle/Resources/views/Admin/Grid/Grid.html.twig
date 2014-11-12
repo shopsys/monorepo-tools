@@ -179,7 +179,7 @@
 	<a
 		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
 		data-ajax-confirm-on-open="SS6.confirmDelete.onSelectChange();"
-		href="#"
+		href="{{ actionColumn.targetUrl(row) }}"
 		{% if actionColumn.confirmMessage is not empty -%}
 			onclick="
 				SS6.window({
@@ -188,7 +188,8 @@
 					buttonContinue: true,
 					textContinue: 'Ano',
 					urlContinue: '{{ actionColumn.targetUrl(row) }}'
-				})"
+				});
+				return false;"
 		{%- endif %}
 	><i class="fa fa-{{ icon }}"></i></a>
 {% endblock %}
