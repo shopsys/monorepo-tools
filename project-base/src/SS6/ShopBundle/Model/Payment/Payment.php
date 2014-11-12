@@ -5,10 +5,12 @@ namespace SS6\ShopBundle\Model\Payment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
 use SS6\ShopBundle\Model\FileUpload\FileForUpload;
 use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
+use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -17,7 +19,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
+class Payment extends AbstractTranslatableEntity implements EntityFileUploadInterface, OrderableEntityInterface {
 
 	/**
 	 * @var integer
@@ -26,14 +28,14 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $id;
+	protected $id;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentTranslation[]
 	 *
-	 * @ORM\Column(type="string", length=255)
+	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Payment\PaymentTranslation")
 	 */
-	private $name;
+	protected $translations;
 
 	/**
 	 * @var string
@@ -48,13 +50,6 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
 	 */
 	private $vat;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $description;
 
 	/**
 	 * @var Collection
@@ -101,14 +96,14 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function __construct(PaymentData $paymentData) {
-		$this->name = $paymentData->getName();
+		$this->translations = new ArrayCollection();
 		$this->price = $paymentData->getPrice();
 		$this->vat = $paymentData->getVat();
-		$this->description = $paymentData->getDescription();
 		$this->transports = new ArrayCollection();
 		$this->hidden = $paymentData->isHidden();
 		$this->deleted = false;
 		$this->image = null;
+		$this->setTranslations($paymentData);
 	}
 
 	/**
@@ -141,12 +136,23 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
+	private function setTranslations(PaymentData $paymentData) {
+		foreach ($paymentData->getNames() as $locale => $name) {
+			$this->translation($locale)->setName($name);
+		}
+		foreach ($paymentData->getDescriptions() as $locale => $description) {
+			$this->translation($locale)->setDescription($description);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 */
 	public function edit(PaymentData $paymentData) {
-		$this->name = $paymentData->getName();
 		$this->price = $paymentData->getPrice();
 		$this->vat = $paymentData->getVat();
-		$this->description = $paymentData->getDescription();
 		$this->hidden = $paymentData->isHidden();
+		$this->setTranslations($paymentData);
 	}
 
 	/**
@@ -212,10 +218,11 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string
 	 */
-	public function getName() {
-		return $this->name;
+	public function getName($locale = null) {
+		return $this->translation($locale)->getName();
 	}
 
 	/**
@@ -233,10 +240,11 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string|null
 	 */
-	public function getDescription() {
-		return $this->description;
+	public function getDescription($locale = null) {
+		return $this->translation($locale)->getDescription();
 	}
 
 	/**
@@ -273,6 +281,13 @@ class Payment implements EntityFileUploadInterface, OrderableEntityInterface {
 	 */
 	public function setPosition($position) {
 		$this->position = $position;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\PaymentTranslation
+	 */
+	protected function createTranslation() {
+		return new PaymentTranslation();
 	}
 
 }

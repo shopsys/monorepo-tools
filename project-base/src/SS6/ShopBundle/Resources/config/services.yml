@@ -344,6 +344,9 @@ services:
   ss6.shop.order.status.grid.order_status_grid_factory:
     class: SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory
 
+  ss6.shop.payment.grid.payment_grid_factory:
+    class: SS6\ShopBundle\Model\Payment\Grid\PaymentGridFactory
+
   ss6.shop.payment.independent_payment_visibility_calculation:
     class: SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 

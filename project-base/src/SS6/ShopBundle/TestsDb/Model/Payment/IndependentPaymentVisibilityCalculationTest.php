@@ -16,7 +16,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($payment);
@@ -33,13 +33,35 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 		$this->assertTrue($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
 	}
 
+	public function testIsIndependentlyVisibleEmptyName() {
+		$em = $this->getEntityManager();
+
+		$domainId = 2;
+		$vat = new Vat(new VatData('vat', 21));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => ''], 0, $vat, [], false));
+
+		$em->persist($vat);
+		$em->persist($payment);
+		$em->flush();
+
+		$paymentDomain = new PaymentDomain($payment, $domainId);
+		$em->persist($paymentDomain);
+		$em->flush();
+
+		$independentPaymentVisibilityCalculation =
+			$this->getContainer()->get('ss6.shop.payment.independent_payment_visibility_calculation');
+		/* @var $independentPaymentVisibilityCalculation \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
+
+		$this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
+	}
+
 	public function testIsIndependentlyVisibleNotOnDomain() {
 		$em = $this->getEntityManager();
 
 		$domainId = 1;
 		$diffetentDomainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', false));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], false));
 
 		$em->persist($vat);
 		$em->persist($payment);
@@ -61,7 +83,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData('name', 0, $vat, 'description', true));
+		$payment = new Payment(new PaymentData(['cs' => 'name'], 0, $vat, [], true));
 
 		$em->persist($vat);
 		$em->persist($payment);

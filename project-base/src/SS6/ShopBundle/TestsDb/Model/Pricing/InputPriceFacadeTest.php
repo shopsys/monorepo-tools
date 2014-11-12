@@ -82,7 +82,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
-		$paymentData->setName('name');
+		$paymentData->setNames(array('cs' => 'name'));
 		$paymentData->setPrice($inputPriceWithVat);
 		$paymentData->setVat($vat);
 		$payment = $paymentEditFacade->create($paymentData);
@@ -153,7 +153,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
-		$paymentData->setName('name');
+		$paymentData->setNames(array('cs' => 'name'));
 		$paymentData->setPrice($inputPriceWithoutVat);
 		$paymentData->setVat($vat);
 		$payment = $paymentEditFacade->create($paymentData);

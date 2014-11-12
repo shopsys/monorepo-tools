@@ -121,33 +121,10 @@ class PaymentController extends Controller {
 	}
 
 	public function listAction() {
-		$paymentRepository = $this->get('ss6.shop.payment.payment_repository');
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
-		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$paymentGridFactory = $this->get('ss6.shop.payment.grid.payment_grid_factory');
+		/* @var $paymentGridFactory \SS6\ShopBundle\Model\Payment\Grid\PaymentGridFactory */
 
-		$queryBuilder = $paymentRepository->getQueryBuilderForAll();
-		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
-			$queryBuilder, 'p.id',
-			function ($row) use ($paymentRepository, $paymentDetailFactory) {
-				$payment = $paymentRepository->findById($row['p']['id']);
-				$row['paymentDetail'] = $paymentDetailFactory->createDetailForPayment($payment);
-				return $row;
-			}
-		);
-
-		$grid = $gridFactory->create('paymentList', $dataSource);
-		$grid->enableDragAndDrop(Payment::class);
-
-		$grid->addColumn('name', 'p.name', 'Název');
-		$grid->addColumn('price', 'paymentDetail', 'Cena');
-
-		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_payment_edit', array('id' => 'p.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_payment_delete', array('id' => 'p.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto platbu?');
+		$grid = $paymentGridFactory->create();
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', array(
 			'gridView' => $grid->createView(),
