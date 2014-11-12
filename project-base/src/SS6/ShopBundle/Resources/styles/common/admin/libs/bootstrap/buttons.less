@@ -1,0 +1,15 @@
+.btn {
+	.set-transition();
+	.transition(~"background, color, border");
+}
+
+.btn-disabled {
+	background: @color-a;
+	border-color: @color-a;
+	cursor: default;
+
+	&:hover, &:focus {
+		background: @color-a;
+		border-color: @color-a;
+	}
+}
