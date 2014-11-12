@@ -11,7 +11,7 @@
 	};
 
 	SS6.order.items.onRemoveItemClick = function(event) {
-		if (!$(this).hasClass('link-disabled')) {
+		if (!$(this).hasClass('text-disabled')) {
 			var $item = $(this).closest('.js-order-item');
 			var itemName = $("<textarea/>").text($item.find('.js-order-item-name').val()).html();
 
@@ -78,14 +78,14 @@
 		var $items = $collection.find('.js-order-item');
 		if ($items.size() === 1) {
 			$items.find('.js-order-item-remove')
-				.addClass('link-disabled')
+				.addClass('text-disabled')
 				.tooltip({
 					title: 'Objednávka musí obsahovat alespoň jednu položku',
 					placement: 'bottom'
 				});
 		} else {
 			$items.find('.js-order-item-remove')
-				.removeClass('link-disabled')
+				.removeClass('text-disabled')
 				.tooltip('destroy');
 		}
 	};
