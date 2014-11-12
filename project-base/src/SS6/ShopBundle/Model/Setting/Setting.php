@@ -52,7 +52,7 @@ class Setting {
 	 */
 	public function set($key, $value, $domainId = self::COMMON_VALUE) {
 		if ($domainId === null) {
-			throw new \SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException("Domain id can not be null");
+			throw new \SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException('Domain id can not be null');
 		}
 
 		$settingValue = $this->getSettingValue($key, $domainId);
@@ -92,16 +92,21 @@ class Setting {
 	private function loadAllData($domainId) {
 		if ($this->data === null) {
 			$this->data = [];
+		}
+
+		if (!array_key_exists(self::COMMON_VALUE, $this->data)) {
 			$settingValuesForAllDomains = $this->settingValueRepository->findAllForAllDomains();
 			$this->fillData($settingValuesForAllDomains, self::COMMON_VALUE);
+		}
 
+		if (!array_key_exists(self::DEFAULT_VALUE, $this->data)) {
 			$settingValuesDefault = $this->settingValueRepository->findAllDefault();
 			$this->fillData($settingValuesDefault, self::DEFAULT_VALUE);
+		}
 
-			if ($domainId > 0) {
-				$settingValuesDomain = $this->settingValueRepository->findAllByDomainId($domainId);
-				$this->fillData($settingValuesDomain, $domainId);
-			}
+		if ($domainId > 0 && !array_key_exists($domainId, $this->data)) {
+			$settingValuesDomain = $this->settingValueRepository->findAllByDomainId($domainId);
+			$this->fillData($settingValuesDomain, $domainId);
 		}
 	}
 
