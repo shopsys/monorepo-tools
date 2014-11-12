@@ -184,11 +184,10 @@
 			onclick="
 				SS6.window({
 					content: '{{ actionColumn.confirmMessage }}',
-					buttonClose: true,
+					buttonCancel: true,
 					buttonContinue: true,
 					textContinue: 'Ano',
-					urlContinue: '{{ actionColumn.targetUrl(row) }}',
-					buttonCancel: true
+					urlContinue: '{{ actionColumn.targetUrl(row) }}'
 				})"
 		{%- endif %}
 	><i class="fa fa-{{ icon }}"></i></a>

@@ -30,13 +30,13 @@
 		var defaults = {
 			content: '',
 			buttonClose: true,
+			buttonCancel: false,
 			buttonContinue: false,
 			textContinue: 'Ano',
+			textCancel: 'Ne',
+			urlContinue: '#',
 			eventClose: function () {},
 			eventContinue: function () {},
-			urlContinue: '#',
-			buttonCancel: false,
-			textCancel: 'Ne',
 			eventCancel: function () {}
 		};
 		var options = $.extend(defaults, options);
@@ -71,9 +71,8 @@
 			$window.append($windowButtonClose);
 		}
 
-		var $windowActions = null;
+		var $windowActions = $('<div class="window__actions"></div>');
 		if (options.buttonContinue) {
-			$windowActions = $('<div class="window__actions"></div>');
 			var $windowButtonContinue = $('<a href="" class="window-button-continue button btn btn-primary"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
@@ -89,13 +88,11 @@
 		}
 
 		if (options.buttonCancel) {
-			if ($windowActions === null) {
-				$windowActions = $('<div class="window__actions"></div>');
-			}
 			var $windowButtonCancel = $('<a href="#" class="window-button-cancel button btn btn-primary ml-1"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
-				.bind('click.window', options.eventClose)
+				.bind('click.windowEventCancel', options.eventCancel)
+				.bind('click.windowEventClose', options.eventClose)
 				.bind('click.windowClose', function () {
 					$window.trigger('windowClose');
 					return false;
@@ -103,7 +100,7 @@
 			$windowActions.append($windowButtonCancel);
 		}
 
-		if ($windowActions !== null) {
+		if ($windowActions.children().size() > 0) {
 			$window.append($windowActions);
 		}
 

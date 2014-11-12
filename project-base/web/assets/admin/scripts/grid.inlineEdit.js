@@ -30,13 +30,12 @@
 			var $formRow = $(this).closest('.js-grid-editing-row');
 			SS6.window({
 				content: 'Opravdu chcete zahodit všechny změny?',
-				buttonClose: true,
+				buttonCancel: true,
 				buttonContinue: true,
 				textContinue: 'Ano',
 				eventContinue: function () {
 					SS6.grid.inlineEdit.cancelEdit($formRow);
-				},
-				buttonCancel: true
+				}
 			});
 			return false;
 		});

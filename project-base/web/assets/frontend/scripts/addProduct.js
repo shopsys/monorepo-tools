@@ -24,8 +24,7 @@
 			content: data.message,
 			buttonContinue: data.success,
 			textContinue: 'Přejít do košíku',
-			urlContinue: data.continueUrl,
-			buttonCancel: true
+			urlContinue: data.continueUrl
 		}
 		SS6.window(options);
 		if (data.success && data.cartBoxReloadUrl) {
