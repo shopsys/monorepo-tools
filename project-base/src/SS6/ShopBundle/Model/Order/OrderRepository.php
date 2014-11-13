@@ -113,6 +113,7 @@ class OrderRepository {
 				o.id,
 				o.number,
 				o.createdAt,
+				o.urlHash,
 				MAX(os.name) AS statusName,
 				COUNT(oiProduct.id) AS itemsCount,
 				MAX(oiTransport.name) AS transportName,
@@ -143,6 +144,21 @@ class OrderRepository {
 		return $this->getOrderRepository()->findBy(array(
 			'status' => $orderStatusId,
 		));
+	}
+
+	/**
+	 * @param string $urlHash
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @throws \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException
+	 */
+	public function getByUrlHash($urlHash) {
+		$order = $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
+
+		if ($order === null) {
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($urlHash);
+		}
+
+		return $order;
 	}
 
 }

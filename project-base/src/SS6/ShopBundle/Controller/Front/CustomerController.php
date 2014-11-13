@@ -77,12 +77,12 @@ class CustomerController extends Controller {
 	}
 
 	/**
-	 * @param int $id
+	 * @param string $urlHash
 	 */
-	public function orderDetailAction($id) {
+	public function orderDetailAction($urlHash) {
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-		$order = $orderFacade->getById($id);
+		$order = $orderFacade->getByUrlHash($urlHash);
 		/* @var $order \SS6\ShopBundle\Model\Order\Order */
 		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
 		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */

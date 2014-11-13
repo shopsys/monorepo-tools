@@ -256,4 +256,12 @@ class OrderFacade {
 	public function getById($orderId) {
 		return $this->orderRepository->getById($orderId);
 	}
+
+	/**
+	 * @param string $urlHash
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 */
+	public function getByUrlHash($urlHash) {
+		return $this->orderRepository->getByUrlHash($urlHash);
+	}
 }

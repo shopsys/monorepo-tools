@@ -17,7 +17,7 @@ front_customer_orders:
   defaults: { _controller: SS6ShopBundle:Front\Customer:orders }
 
 front_customer_order_detail:
-  pattern: /zakaznik/detail-objednavky/{id}
+  pattern: /zakaznik/detail-objednavky/{urlHash}
   defaults: { _controller: SS6ShopBundle:Front\Customer:orderDetail }
   requirements:
     cartItemId: \d+
