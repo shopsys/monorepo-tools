@@ -36,6 +36,8 @@ class ImagesEntity {
 		$imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
 		$filenameMethodName = $imageEntityConfig->getFilenameMethodByType($type);
 
+		// TODO reimplement
+		return '';
 		if (!method_exists($entity, $filenameMethodName)) {
 			throw new \SS6\ShopBundle\Model\Image\Exception\EntityFilenameMethodNotFoundException($entity, $filenameMethodName);
 		}

@@ -134,6 +134,9 @@ class ImageConfigLoader {
 				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateSizeNameException($sizeName);
 			}
 		}
+		if (!array_key_exists(ImageConfig::ORIGINAL_SIZE_NAME, $result)) {
+			$result[ImageConfig::ORIGINAL_SIZE_NAME] = new ImageSizeConfig(ImageConfig::ORIGINAL_SIZE_NAME, null, null, false);
+		}
 
 		return $result;
 	}
@@ -148,7 +151,7 @@ class ImageConfigLoader {
 			$typeName = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];
 			if (!array_key_exists($typeName, $result)) {
 				$this->filenameMethodsByType[$typeName] = $typeConfig[ImageConfigDefinition::CONFIG_FILENAME_METHOD];
-				$result[$typeName] = $this->prepareSizes($typeConfig[ImageConfigDefinition::CONFIG_SIZES]);
+				$result[$typeName] = $this->prepareSizes($typeConfig[ImageConfigDefinition::CONFIG_SIZES], true);
 			} else {
 				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException($typeName);
 			}

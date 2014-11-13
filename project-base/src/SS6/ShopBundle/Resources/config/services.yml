@@ -254,6 +254,12 @@ services:
   ss6.shop.image.image_config_loader:
     class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
 
+  ss6.shop.image.image_facade:
+    class: SS6\ShopBundle\Model\Image\ImageFacade
+
+  ss6.shop.image.image_repository:
+    class: SS6\ShopBundle\Model\Image\ImageRepository
+
   ss6.shop.image.images_entity:
     class: SS6\ShopBundle\Model\Image\ImagesEntity
     arguments: [%ss6.image_dir%]

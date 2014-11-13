@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Image\Config;
 
 class ImageConfig {
 
+	const ORIGINAL_SIZE_NAME = 'origin';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
 	 */
@@ -49,7 +51,7 @@ class ImageConfig {
 
 	/**
 	 * @param Object $entity
-	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig
 	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException
 	 */
 	public function getImageEntityConfig($entity) {
