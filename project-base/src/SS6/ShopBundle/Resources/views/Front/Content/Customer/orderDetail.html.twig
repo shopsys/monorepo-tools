@@ -125,5 +125,7 @@
 			</tr>
 		</table>
 		<br />
-		<a href="{{ url('front_customer_orders') }}" class="button btn btn-primary">{{ 'Zpět na přehled objednávek'|trans }}</a>
+		{% if order.customer is not null %}
+			<a href="{{ url('front_customer_orders') }}" class="button btn btn-primary">{{ 'Zpět na přehled objednávek'|trans }}</a>
+		{% endif %}
 	{% endblock %}
