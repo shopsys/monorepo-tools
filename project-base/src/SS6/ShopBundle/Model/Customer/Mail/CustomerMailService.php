@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Customer\Mail;
 
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
+use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
+use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
 use Symfony\Component\Routing\Router;
 
@@ -16,9 +18,9 @@ class CustomerMailService {
 	const VARIABLE_LOGIN_PAGE = '{login_page}';
 
 	/**
-	 * @var string
+	 * @var SS6\ShopBundle\Model\Setting\Setting
 	 */
-	private $senderEmail;
+	private $setting;
 
 	/**
 	 * @var \Symfony\Component\Routing\Router
@@ -26,11 +28,11 @@ class CustomerMailService {
 	private $router;
 
 	/**
-	 * @param string $senderEmail
+	 * @param SS6\ShopBundle\Model\Setting\Setting $setting
 	 * @param Symfony\Component\Routing\Router $router
 	 */
-	public function __construct($senderEmail, Router $router) {
-		$this->senderEmail = $senderEmail;
+	public function __construct(Setting $setting, Router $router) {
+		$this->setting = $setting;
 		$this->router = $router;
 	}
 
@@ -52,7 +54,10 @@ class CustomerMailService {
 
 		$message = Swift_Message::newInstance()
 			->setSubject($subject)
-			->setFrom($this->senderEmail)
+			->setFrom(
+				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),
+				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId())
+			)
 			->setTo($toEmail)
 			->setContentType('text/plain; charset=UTF-8')
 			->setBody(strip_tags($body), 'text/plain')

@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -69,7 +70,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$transportRepository = $this->getContainer()->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 
-		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
+		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT, SettingValue::DOMAIN_ID_COMMON);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
@@ -140,7 +141,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$transportRepository = $this->getContainer()->get('ss6.shop.transport.transport_repository');
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 
-		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
+		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);

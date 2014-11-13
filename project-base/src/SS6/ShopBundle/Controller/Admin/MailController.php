@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Form\Admin\Order\Status\AllMailTemplatesFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,12 +18,8 @@ class MailController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$mailTemplateFacade = $this->get('ss6.shop.mail.mail_template_facade');
 		/* @var $mailTemplateFacade \SS6\ShopBundle\Model\Mail\MailTemplateFacade */
-
-		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
-		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
-
 		$customerMailService = $this->get('ss6.shop.customer.mail.customer_mail_service');
 		/* @var $customerMailService \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService */
 		$orderMailService = $this->get('ss6.shop.order.order_mail_service');
@@ -50,6 +47,44 @@ class MailController extends Controller {
 			'orderStatusesIndexedById' => $mailTemplateFacade->getAllIndexedById(),
 			'orderStatusVariables' => $orderStatusesTemplateVariables,
 			'registrationVariables' => $registrationTemplateVariables,
+		));
+	}
+
+	/**
+	 * @Route("/mail/setting/")
+	 */
+	public function settingAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$mailSettingFacade = $this->get('ss6.shop.mail.setting.mail_setting_facade');
+		/* @var $mailSettingFacade \SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
+		$selectedDomainId = $selectedDomain->getId();
+
+		$form = $this->createForm(new MailSettingFormType());
+
+		$mailSettingData = array();
+
+		if (!$form->isSubmitted()) {
+			$mailSettingData['email'] = $mailSettingFacade->getMainAdminMail($selectedDomainId);
+			$mailSettingData['name'] = $mailSettingFacade->getMainAdminMailName($selectedDomainId);
+		}
+
+		$form->setData($mailSettingData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$mailSettingData = $form->getData();
+
+			$mailSettingFacade->setMainAdminMail($mailSettingData['email'], $selectedDomainId);
+			$mailSettingFacade->setMainAdminMailName($mailSettingData['name'], $selectedDomainId);
+
+			$flashMessageSender->addSuccess('Nastavení emailů bylo upraveno.');
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', array(
+			'form' => $form->createView(),
 		));
 	}
 

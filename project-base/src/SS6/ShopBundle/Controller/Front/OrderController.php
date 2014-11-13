@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class OrderController extends Controller {
 
@@ -148,7 +149,7 @@ class OrderController extends Controller {
 		if ($orderId === null) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
-		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME);
+		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, SettingValue::DOMAIN_ID_COMMON);
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
 			'orderConfirmationText' => $orderConfirmationText,

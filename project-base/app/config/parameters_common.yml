@@ -1,4 +1,3 @@
 parameters:
-  main_email: no-reply@netdevelo.cz
   database_driver: pdo_pgsql
   locale: cs

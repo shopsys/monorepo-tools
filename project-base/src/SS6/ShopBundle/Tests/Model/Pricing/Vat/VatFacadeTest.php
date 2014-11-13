@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use stdClass;
 
@@ -31,7 +32,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 		$settingMock
 			->expects($this->once())
 			->method('get')
-			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT))
+			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT), $this->equalTo(SettingValue::DOMAIN_ID_COMMON))
 			->will($this->returnValue(1));
 
 		$vatRepositoryMock = $this->getMockBuilder(VatRepository::class)

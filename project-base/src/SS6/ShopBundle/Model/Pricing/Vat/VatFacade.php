@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class VatFacade {
@@ -149,7 +150,7 @@ class VatFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getDefaultVat() {
-		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT);
+		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT, SettingValue::DOMAIN_ID_COMMON);
 
 		return $this->vatRepository->getById($defaultVatId);
 	}
@@ -158,7 +159,7 @@ class VatFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function setDefaultVat(Vat $vat) {
-		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId());
+		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON);
 	}
 
 	/**

@@ -144,7 +144,6 @@ services:
 
   ss6.shop.customer.mail.customer_mail_service:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
-    arguments: ["%main_email%"]
 
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService
@@ -284,6 +283,9 @@ services:
   ss6.shop.mail.mail_template_repository:
     class: SS6\ShopBundle\Model\Mail\MailTemplateRepository
 
+  ss6.shop.mail.setting.mail_setting_facade:
+    class: SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade
+
   ss6.shop.order.flow:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
@@ -304,7 +306,6 @@ services:
 
   ss6.shop.order.order_mail_service:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailService
-    arguments: ["%main_email%"]
 
   ss6.shop.order.order_number_sequence_repository:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository

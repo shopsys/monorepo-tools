@@ -26,12 +26,18 @@ class SettingValueRepository {
 		return $this->em->getRepository(SettingValue::class);
 	}
 
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Setting\SettingValue[]
+	 */
+	public function findAllByDomainId($domainId) {
+		return $this->getSettingValueRepository()->findBy(['domainId' => $domainId]);
+	}
 
 	/**
 	 * @return \SS6\ShopBundle\Model\Setting\SettingValue[]
 	 */
-	public function findAll() {
-		return $this->getSettingValueRepository()->findAll();
+	public function findAllDefault() {
+		return $this->getSettingValueRepository()->findBy(['domainId' => SettingValue::DOMAIN_ID_DEFAULT]);
 	}
-
 }

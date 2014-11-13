@@ -1,0 +1,22 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{{ '- Nastavení emailů'|trans }}{% endblock %}
+{% block h1 %}{{ 'Nastavení emailů'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
+			{{ form_start(form) }}
+				<div class="wrap-group">
+					{{ form_row(form.email, { 'label': 'Hlavní administrátorský email' }) }}
+					{{ form_row(form.name, { 'label': 'Jméno k emailu' }) }}
+				</div>
+
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

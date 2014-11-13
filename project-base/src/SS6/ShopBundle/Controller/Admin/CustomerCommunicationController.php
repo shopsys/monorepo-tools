@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SS6\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class CustomerCommunicationController extends Controller {
 
@@ -26,7 +27,7 @@ class CustomerCommunicationController extends Controller {
 		$setting = $this->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 
-		$data = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME);
+		$data = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, SettingValue::DOMAIN_ID_COMMON);
 		$form = $this->createForm(new CustomerCommunicationFormType());
 
 		$form->setData(array('content' => $data));
@@ -34,7 +35,7 @@ class CustomerCommunicationController extends Controller {
 
 		if ($form->isValid()) {
 			$formData = $form->getData();
-			$setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content']);
+			$setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], SettingValue::DOMAIN_ID_COMMON);
 
 			$flashMessageSender->addSuccess('Nastavení textu po potvrzení objednávky bylo upraveno');
 			return $this->redirect($this->generateUrl('admin_customercommunication_ordersubmitted'));
