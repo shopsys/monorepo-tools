@@ -34,7 +34,11 @@ class CustomerFormTypeFactory {
 	 */
 	public function create($scenario, SelectedDomain $selectedDomain = null) {
 		$allDomains = $this->domain->getAll();
-		$allPricingGroups = $this->pricingGroupRepository->getAll();
+		if ($selectedDomain === null) {
+			$allPricingGroups = $this->pricingGroupRepository->getAll();
+		} else {
+			$allPricingGroups = $this->pricingGroupRepository->getPricingGroupsByDomainId($selectedDomain->getId());
+		}
 
 		return new CustomerFormType($scenario, $allDomains, $selectedDomain, $allPricingGroups);
 	}
