@@ -94,9 +94,7 @@ class PricingGroupFacade {
 
 		$this->em->beginTransaction();
 
-		if ($newPricingGroup !== null) {
-			$this->customerEditFacade->replaceOldPricingGroupWithNewPricingGroup($oldPricingGroup, $newPricingGroup);
-		}
+		$this->customerEditFacade->replaceOldPricingGroupWithNewPricingGroup($oldPricingGroup, $newPricingGroup);
 
 		$this->em->remove($oldPricingGroup);
 		$this->em->flush();

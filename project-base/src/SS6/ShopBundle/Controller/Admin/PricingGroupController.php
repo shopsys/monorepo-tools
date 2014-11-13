@@ -31,9 +31,10 @@ class PricingGroupController extends Controller {
 	public function deleteAction($id, $newId = null) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
 		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+
+		$newId = (int)$newId === 0 ? null : $newId;
 
 		$name = $pricingGroupFacade->getById($id)->getName();
 		$pricingGroupFacade->delete($id, $newId);
@@ -69,7 +70,7 @@ class PricingGroupController extends Controller {
 		if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
 			$message = 'Pro odstranění cenové skupiny "' . $pricingGroup->getName() . '" musíte zvolit, která se má všude, '
 				. 'kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?';
-			$pricingGroupsNamesById = array();
+			$pricingGroupsNamesById = [0 => '-- žádná --'];
 			foreach ($pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId()) as $newPricingGroup) {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
 			}
