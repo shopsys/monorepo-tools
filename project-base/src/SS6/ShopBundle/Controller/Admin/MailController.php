@@ -39,6 +39,10 @@ class MailController extends Controller {
 			return $this->redirect($this->generateUrl('admin_mail_template'));
 		}
 
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+		}
+
 		$orderStatusesTemplateVariables = $orderMailService->getOrderStatusesTemplateVariables();
 		$registrationTemplateVariables = $customerMailService->getRegistrationTemplateVariables();
 

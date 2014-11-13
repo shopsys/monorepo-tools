@@ -29,11 +29,11 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Doručovací adresa: {delivery_address} <br />'
 			. 'Poznámka: {note} <br />'
 			. 'Produkty: {products} <br />');
+		$mailTemplateData->setSendMail(true);
 
 		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Změna stavu vaší objednávky');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaši objednávku již vyřizujeme.');
@@ -41,7 +41,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_2', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Změna stavu vaší objednávky');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaše objednávka je vyřízena.');
@@ -49,7 +48,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_3', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Změna stavu vaší objednávky');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaše objednávka byla stornována.');
@@ -57,7 +55,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_4', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Potvrzení registrace');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'potvrzujeme Vaši registraci v eshopu. <br />'
@@ -69,7 +66,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Děkujeme za objednávku na druhé doméně');
 		$mailTemplateData->setBody('Dobrý den,<br /><br />'
 			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
@@ -78,7 +74,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_1', 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Změna stavu vaší objednávky na druhé doméně');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaši objednávku již vyřizujeme.');
@@ -86,7 +81,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_2', 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Změna stavu vaší objednávky na druhé doméně');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaše objednávka je vyřízena.');
@@ -94,7 +88,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_3', 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Změna stavu vaší objednávky na druhé doméně');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'Vaše objednávka byla stornována.');
@@ -102,7 +95,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplate = new MailTemplate('order_status_4', 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
-		$mailTemplateData = new MailTemplateData();
 		$mailTemplateData->setSubject('Potvrzení registrace na druhé doméně');
 		$mailTemplateData->setBody('Dobrý den, <br /><br />'
 			. 'potvrzujeme Vaši registraci v eshopu.<br />'

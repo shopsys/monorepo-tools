@@ -7,7 +7,7 @@
 
 	<div class="row">
 
-		<div class="col-xs-12 col-lg-10">
+		<div id="js-mail-templates" class="col-xs-12 col-lg-10">
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
@@ -24,7 +24,7 @@
 							{% if sendMailText is not null %}
 								{{ form_row(template.sendMail, { label: sendMailText }) }}
 							{% else %}
-								{% do template.setRendered() %}
+								{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
 							{% endif %}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
 
