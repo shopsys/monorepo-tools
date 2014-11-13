@@ -99,7 +99,7 @@
 					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
 				{% endif %}
 
-				<a href="{{ backUrl }}" class="button button--alter box-buttons__left">
+				<a href="{{ url('front_homepage') }}" class="button button--alter box-buttons__left">
 					{{ 'Zpět k nákupu'|trans }}
 				</a>
 			</div>
@@ -117,7 +117,7 @@
 		</div>
 
 		<div class="box-buttons">
-			<a href="{{ backUrl }}" class="button button--alter box-buttons__left">
+			<a href="{{url('front_homepage') }}" class="button button--alter box-buttons__left">
 				{{ 'Zpět k nákupu'|trans }}
 			</a>
 		</div>
