@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing;
 
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class PricingSetting {
 
@@ -32,14 +33,14 @@ class PricingSetting {
 	 * @return int
 	 */
 	public function getInputPriceType() {
-		return $this->setting->get(self::INPUT_PRICE_TYPE);
+		return $this->setting->get(self::INPUT_PRICE_TYPE, SettingValue::DOMAIN_ID_COMMON);
 	}
 
 	/**
 	 * @return int
 	 */
 	public function getRoundingType() {
-		return $this->setting->get(self::ROUNDING_TYPE);
+		return $this->setting->get(self::ROUNDING_TYPE, SettingValue::DOMAIN_ID_COMMON);
 	}
 
 	/**
@@ -50,7 +51,7 @@ class PricingSetting {
 			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException();
 		}
 
-		$this->setting->set(self::ROUNDING_TYPE, $roundingType);
+		$this->setting->set(self::ROUNDING_TYPE, $roundingType, SettingValue::DOMAIN_ID_COMMON);
 	}
 
 	/**

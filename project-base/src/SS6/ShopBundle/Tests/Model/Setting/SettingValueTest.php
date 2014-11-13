@@ -31,7 +31,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider testEditProvider
 	 */
 	public function testEdit($value) {
-		$settingValue = new SettingValue('name', $value);
+		$settingValue = new SettingValue('name', $value, 1);
 		$this->assertEquals($value, $settingValue->getValue());
 	}
 
@@ -40,7 +40,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testEditException($value) {
 		$this->setExpectedException(InvalidArgumentException::class);
-		new SettingValue('name', $value);
+		new SettingValue('name', $value, 1);
 	}
 
 }

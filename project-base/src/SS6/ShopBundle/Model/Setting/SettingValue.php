@@ -24,6 +24,9 @@ class SettingValue {
 	const BOOLEAN_TRUE = 'true';
 	const BOOLEAN_FALSE = 'false';
 
+	const DOMAIN_ID_COMMON = 0;
+	const DOMAIN_ID_DEFAULT = null;
+
 	/**
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
@@ -63,7 +66,7 @@ class SettingValue {
 	 * @param string|int|float|bool|null $value
 	 * @param int|null $domainId
 	 */
-	public function __construct($name, $value, $domainId = null) {
+	public function __construct($name, $value, $domainId) {
 		$this->name = $name;
 		$this->setValue($value);
 		$this->domainId = $domainId;
