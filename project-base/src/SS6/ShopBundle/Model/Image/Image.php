@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 /**
  * Image
  *
- * @ORM\Table(name="images")
+ * @ORM\Table(name="images", indexes={@ORM\Index(name="idx_entity_id_type", columns={"entity_name", "entity_id", "type"})})
  * @ORM\Entity
  */
 class Image implements EntityFileUploadInterface {
@@ -83,41 +83,6 @@ class Image implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getEntityName() {
-		return $this->entityName;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getEntityId() {
-		return $this->entityId;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCategory() {
-		return $this->type;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getExtension() {
-		return $this->extension;
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
 	 */
 	public function getCachedFilesForUpload() {
@@ -152,6 +117,48 @@ class Image implements EntityFileUploadInterface {
 	public function setImageForUpload($cachedFilename) {
 		$this->imageForUpload = $cachedFilename;
 		$this->modifiedAt = new DateTime();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFilename() {
+		return $this->id . '.' . $this->extension;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEntityName() {
+		return $this->entityName;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getEntityId() {
+		return $this->entityId;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getType() {
+		return $this->type;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getExtension() {
+		return $this->extension;
 	}
 
 }

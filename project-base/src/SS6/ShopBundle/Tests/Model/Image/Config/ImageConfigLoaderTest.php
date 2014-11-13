@@ -183,7 +183,6 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
 		$this->assertEquals('Class_1', $imageEntityConfig->getEntityClass());
 		$this->assertEquals('Name_1', $imageEntityConfig->getEntityName());
-		$this->assertEquals('Method_1', $imageEntityConfig->getFilenameMethodByType('TypeName_1'));
 
 		$imageSize = $imageEntityConfig->getTypeSize('TypeName_1', 'SizeName_2');
 

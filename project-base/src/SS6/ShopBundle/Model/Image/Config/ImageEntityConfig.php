@@ -64,18 +64,6 @@ class ImageEntityConfig {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getFilenameMethodByType($type) {
-		$key = Condition::ifNull($type, self::WITHOUT_NAME_KEY);
-		if (array_key_exists($key, $this->filenameMethodsByType)) {
-			return $this->filenameMethodsByType[$key];
-		} else {
-			throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
-		}
-	}
-
-	/**
 	 * @return array
 	 */
 	public function getTypes() {

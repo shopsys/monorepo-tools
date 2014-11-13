@@ -9,36 +9,6 @@ use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 
 class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetFilenameMethodByType() {
-		$filenameMethodsByType = array(
-			'TypeName_1' => 'Method_1',
-			'TypeName_2' => 'Method_2',
-		);
-
-		$types = array();
-		$sizes = array();
-
-		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $filenameMethodsByType, $types, $sizes);
-
-		$filenameMethod = $imageEntityConfig->getFilenameMethodByType('TypeName_1');
-		$this->assertEquals('Method_1', $filenameMethod);
-	}
-
-	public function testGetFilenameMethodByTypeException() {
-		$filenameMethodsByType = array(
-			'TypeName_1' => 'Method_1',
-			'TypeName_2' => 'Method_2',
-		);
-
-		$types = array();
-		$sizes = array();
-
-		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $filenameMethodsByType, $types, $sizes);
-
-		$this->setExpectedException(ImageTypeNotFoundException::class);
-		$imageEntityConfig->getFilenameMethodByType('TypeName_3');
-	}
-
 	public function testGetTypeSizes() {
 		$filenameMethodsByType = array(
 			'TypeName_1' => 'Method_1',

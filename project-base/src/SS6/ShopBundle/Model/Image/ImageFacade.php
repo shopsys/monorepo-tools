@@ -45,17 +45,29 @@ class ImageFacade {
 	/**
 	 * @param object $entity
 	 * @param string|null $type
+	 * @return \SS6\ShopBundle\Model\Image\Image
+	 */
+	public function getImageByEntity($entity, $type) {
+		return $this->imageRepository->getImageByEntity(
+			$this->imageConfig->getEntityName($entity),
+			$this->getEntityId($entity),
+			$type
+		);
+	}
+
+	/**
+	 * @param object $entity
+	 * @param string|null $type
 	 * @param string $imageForUpload
 	 * @return \SS6\ShopBundle\Model\Image\Image
 	 */
 	private function getImageByEntityOrCreate($entity, $type, $imageForUpload) {
-		$entityName = $this->imageConfig->getEntityName($entity);
-		$entityId = $this->getEntityId($entity);
-
 		try {
-			$image = $this->imageRepository->getImageByEntity($entityName, $this->getEntityId($entity), $type);
+			$image = $this->getImageByEntity($entity, $type);
 			$image->setImageForUpload($imageForUpload);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+			$entityName = $this->imageConfig->getEntityName($entity);
+			$entityId = $this->getEntityId($entity);
 			$image = new Image($entityName, $entityId, $type, $imageForUpload);
 			$this->em->persist($image);
 		}

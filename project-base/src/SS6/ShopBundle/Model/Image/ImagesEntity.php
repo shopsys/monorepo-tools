@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Image;
 
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 
 class ImagesEntity {
 
@@ -17,12 +18,14 @@ class ImagesEntity {
 	private $imageConfig;
 
 	/**
-	 * @param string $imageDir
-	 * @param \SS6\ShopBundle\Model\Image\Config\ImageConfig $imageConfig
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
-	public function __construct($imageDir, ImageConfig $imageConfig) {
+	private $imageFacade;
+
+	public function __construct($imageDir, ImageConfig $imageConfig, ImageFacade $imageFacade) {
 		$this->imageDir = $imageDir;
 		$this->imageConfig = $imageConfig;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -30,22 +33,12 @@ class ImagesEntity {
 	 * @param string|null $type
 	 * @param string|null $sizeName
 	 * @return string
-	 * @throws \SS6\ShopBundle\Model\Image\Exception\EntityFilenameMethodNotFoundException
 	 */
 	public function getRelativeImageFilepath($entity, $type, $sizeName) {
-		$imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
-		$filenameMethodName = $imageEntityConfig->getFilenameMethodByType($type);
+		$image = $this->imageFacade->getImageByEntity($entity, $type);
+		$path = $this->getRelativeImagePath($image->getEntityName(), $type, $sizeName);
 
-		// TODO reimplement
-		return '';
-		if (!method_exists($entity, $filenameMethodName)) {
-			throw new \SS6\ShopBundle\Model\Image\Exception\EntityFilenameMethodNotFoundException($entity, $filenameMethodName);
-		}
-
-		$filename = $entity->$filenameMethodName();
-		$path = $this->getRelativeImagePath($imageEntityConfig->getEntityName(), $type, $sizeName);
-
-		return $path . $filename;
+		return $path . $image->getFilename();
 	}
 
 	/**
@@ -55,7 +48,11 @@ class ImagesEntity {
 	 * @return bool
 	 */
 	public function imageExists($entity, $type, $sizeName) {
-		$relativeImageFilepath = $this->getRelativeImageFilepath($entity, $type, $sizeName);
+		try {
+			$relativeImageFilepath = $this->getRelativeImageFilepath($entity, $type, $sizeName);
+		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+			return false;
+		}
 		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
 
 		return is_file($imageFilepath) && is_readable($imageFilepath);
