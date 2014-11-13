@@ -135,3 +135,5 @@
           route: admin_superadmin_errors
         - label: 'Cenotvorba'
           route: admin_superadmin_pricing
+        - label: 'URL adresy'
+          route: admin_superadmin_urls

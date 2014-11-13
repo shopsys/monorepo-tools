@@ -6,6 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use SS6\ShopBundle\Model\Grid\ArrayDataSource;
+use Symfony\Component\Routing\RequestContext;
 
 class SuperadminController extends Controller {
 
@@ -77,4 +79,50 @@ class SuperadminController extends Controller {
 		));
 	}
 
+	/**
+	 * @Route("/superadmin/urls/")
+	 */
+	public function urlsAction() {
+		$gridFactory = $this->get('ss6.shop.grid.factory');
+		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$localization = $this->get('ss6.shop.localization.localization');
+		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
+
+		$allLocales = $localization->getAllLocales();
+		$dataSource = new ArrayDataSource($this->loadDataForUrls($allLocales));
+
+		$grid = $gridFactory->create('urlsList', $dataSource);
+
+		foreach ($allLocales as $locale) {
+			$grid->addColumn($locale, $locale, $localization->getLanguageName($locale));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/urlsListGrid.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
+	}
+
+	/**
+	 * @param array $locales
+	 * @return array
+	 */
+	private function loadDataForUrls(array $locales) {
+		$localizedRouterFactory = $this->get('ss6.shop.router.localized_router_factory');
+		/* @var $localizedRouterFactory \SS6\ShopBundle\Component\Router\LocalizedRouterFactory */
+
+		$data = array();
+		$requestContext = new RequestContext();
+		foreach ($locales as $locale) {
+			$rowIndex = 0;
+			$allRoutes = $localizedRouterFactory->getRouter($locale, $requestContext)
+				->getRouteCollection()
+				->all();
+			foreach ($allRoutes as $route) {
+				$data[$rowIndex][$locale] = $route->getPath();
+				$rowIndex++;
+			}
+		}
+
+		return $data;
+	}
 }
