@@ -14,6 +14,11 @@
 					<fieldset>
 						{{ form_id(order) }}
 						<div class="form-line">
+							<span class="form-line__text">
+								<a href="{{ url('front_customer_order_detail', { urlHash: order.urlHash }) }}" target="_blank">{{ url('front_customer_order_detail', { urlHash: order.urlHash }) }}</a>
+							</span>
+						</div>
+						<div class="form-line">
 							<label class="form-line__label">{{ 'Doména'|trans }}:</label>
 							<input type="text" value="{{ getDomainName(order.domainId) }}" class="form-control form-line__field" readonly="readonly">
 						</div>
