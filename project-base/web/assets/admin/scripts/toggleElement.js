@@ -5,19 +5,29 @@
 
 	SS6.toggleElement.init = function () {
 		$('.toggle-container .toggle-headline').bind('click', SS6.toggleElement.toggle);
-	}
+	};
+
+	SS6.toggleElement.show = function ($container) {
+		var $content = $container.find('.toggle-content');
+		$content.slideDown('fast', function() {
+			$content.removeClass('toggle-close');
+		});
+	};
+
+	SS6.toggleElement.hide = function ($container) {
+		var $content = $container.find('.toggle-content');
+		$content.slideUp('fast', function() {
+			$content.addClass('toggle-close');
+		});
+	};
 
 	SS6.toggleElement.toggle = function () {
 		var $container = $(this).closest('.toggle-container');
 		var $content = $container.find('.toggle-content');
 		if ($content.hasClass('toggle-close')) {
-		$content.slideDown('fast', function() {
-			$content.removeClass('toggle-close');
-		});
+			SS6.toggleElement.show($container);
 		} else {
-		$content.slideUp('fast', function() {
-			$content.addClass('toggle-close');
-		});
+			SS6.toggleElement.hide($container);
 		}
 	};
 

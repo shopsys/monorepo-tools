@@ -30,7 +30,7 @@ class MailTemplateFormType extends AbstractType {
 				'constraints' => array(
 					new Constraints\NotBlank(array(
 						'message' => 'Vyplňte prosím předmět',
-						'groups' => array('sendMail', 'bodyWithoutSubject'),
+						'groups' => array('sendMail'),
 					))
 				)
 			))
@@ -41,7 +41,7 @@ class MailTemplateFormType extends AbstractType {
 						'constraints' => array(
 							new Constraints\NotBlank(array(
 								'message' => 'Vyplňte prosím text emailu',
-								'groups' => array('sendMail', 'subjectWithoutBody'),
+								'groups' => array('sendMail'),
 							))
 						)
 					))
@@ -66,12 +66,6 @@ class MailTemplateFormType extends AbstractType {
 
 				if ($mailTemplateData->isSendMail()) {
 					$validationGroups[] = 'sendMail';
-				}
-				if ($mailTemplateData->getSubject() === null && $mailTemplateData->getBody() !== null) {
-					$validationGroups[] = 'bodyWithoutSubject';
-				}
-				if ($mailTemplateData->getSubject() !== null && $mailTemplateData->getBody() === null) {
-					$validationGroups[] = 'subjectWithoutBody';
 				}
 
 				return $validationGroups;
