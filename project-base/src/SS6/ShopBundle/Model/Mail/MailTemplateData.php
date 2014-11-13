@@ -32,7 +32,7 @@ class MailTemplateData {
 	 * @param string|null $body
 	 * @param bool $sendMail
 	 */
-	public function __construct($name = null, $subject = null, $body = null, $sendMail = true) {
+	public function __construct($name = null, $subject = null, $body = null, $sendMail = false) {
 		$this->name = $name;
 		$this->subject = $subject;
 		$this->body = $body;
