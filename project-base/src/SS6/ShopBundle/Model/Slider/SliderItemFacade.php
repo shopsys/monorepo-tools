@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Slider;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
 class SliderItemFacade {
@@ -26,6 +27,11 @@ class SliderItemFacade {
 	private $selectedDomain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 */
+	private $imageFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemRepository $sliderItemRepository
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
@@ -33,11 +39,13 @@ class SliderItemFacade {
 	public function __construct(
 		EntityManager $em,
 		SliderItemRepository $sliderItemRepository,
-		SelectedDomain $selectedDomain
+		SelectedDomain $selectedDomain,
+		ImageFacade	$imageFacade
 	) {
 		$this->em = $em;
 		$this->sliderItemRepository = $sliderItemRepository;
 		$this->selectedDomain = $selectedDomain;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -55,8 +63,11 @@ class SliderItemFacade {
 	public function create(SliderItemData $sliderItemData) {
 		$sliderItem = new SliderItem($sliderItemData, $this->selectedDomain->getId());
 
+		$this->em->beginTransaction();
 		$this->em->persist($sliderItem);
 		$this->em->flush();
+		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->getImage(), null);
+		$this->em->commit();
 
 		return $sliderItem;
 	}
@@ -70,7 +81,10 @@ class SliderItemFacade {
 		$sliderItem = $this->sliderItemRepository->getById($sliderItemId);
 		$sliderItem->edit($sliderItemData);
 
+		$this->em->beginTransaction();
 		$this->em->flush();
+		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->getImage(), null);
+		$this->em->commit();
 
 		return $sliderItem;
 	}

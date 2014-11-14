@@ -5,9 +5,6 @@ namespace SS6\ShopBundle\Model\Product;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
-use SS6\ShopBundle\Model\FileUpload\FileForUpload;
-use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 /**
@@ -16,7 +13,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
  * @ORM\Table(name="products")
  * @ORM\Entity
  */
-class Product implements EntityFileUploadInterface {
+class Product {
 
 	/**
 	 * @var integer
@@ -105,18 +102,6 @@ class Product implements EntityFileUploadInterface {
 	private $hidden;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=4, nullable=true)
-	 */
-	private $image;
-
-	/**
-	 * @var string|null
-	 */
-	private $imageForUpload;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
 	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
@@ -145,8 +130,6 @@ class Product implements EntityFileUploadInterface {
 		$this->sellingTo = $productData->getSellingTo();
 		$this->stockQuantity = $productData->getStockQuantity();
 		$this->hidden = $productData->isHidden();
-		$this->image = null;
-		$this->setImageForUpload($productData->getImage());
 		$this->availability = $productData->getAvailability();
 		$this->visible = false;
 	}
@@ -165,7 +148,6 @@ class Product implements EntityFileUploadInterface {
 		$this->sellingFrom = $productData->getSellingFrom();
 		$this->sellingTo = $productData->getSellingTo();
 		$this->stockQuantity = $productData->getStockQuantity();
-		$this->setImageForUpload($productData->getImage());
 		$this->availability = $productData->getAvailability();
 		$this->hidden = $productData->isHidden();
 	}
@@ -175,47 +157,6 @@ class Product implements EntityFileUploadInterface {
 	 */
 	public function changeVat(Vat $vat) {
 		$this->vat = $vat;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
-	 */
-	public function getCachedFilesForUpload() {
-		$files = array();
-		if ($this->imageForUpload !== null) {
-			$files['image'] = new FileForUpload($this->imageForUpload, true, 'product', 'default', FileNamingConvention::TYPE_ID);
-		}
-		return $files;
-	}
-
-	/**
-	 * @param string $key
-	 * @param string $originalFilename
-	 */
-	public function setFileAsUploaded($key, $originalFilename) {
-		if ($key === 'image') {
-			$this->image = pathinfo($originalFilename, PATHINFO_EXTENSION);
-		} else {
-			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
-		}
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getImageFilename() {
-		if ($this->image !== null) {
-			return $this->getId() . '.' . $this->image;
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string|null $cachedFilename
-	 */
-	public function setImageForUpload($cachedFilename) {
-		$this->imageForUpload = $cachedFilename;
 	}
 
 	/**

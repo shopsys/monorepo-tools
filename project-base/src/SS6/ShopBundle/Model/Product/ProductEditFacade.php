@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -45,6 +46,11 @@ class ProductEditFacade {
 	private $productService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 */
+	private $imageFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
@@ -54,7 +60,8 @@ class ProductEditFacade {
 		ProductVisibilityFacade $productVisibilityFacade,
 		ParameterRepository $parameterRepository,
 		Domain $domain,
-		ProductService $productService
+		ProductService $productService,
+		ImageFacade	$imageFacade
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -62,6 +69,7 @@ class ProductEditFacade {
 		$this->parameterRepository = $parameterRepository;
 		$this->domain = $domain;
 		$this->productService = $productService;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -80,11 +88,13 @@ class ProductEditFacade {
 		$product = new Product($productData);
 
 		$this->em->persist($product);
+		$this->em->beginTransaction();
 		$this->saveParameters($product, $productData->getParameters());
 		$this->createProductDomains($product, $this->domain->getAll());
 		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
-
 		$this->em->flush();
+		$this->imageFacade->uploadImage($product, $productData->getImage(), null);
+		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 
@@ -100,10 +110,13 @@ class ProductEditFacade {
 		$product = $this->productRepository->getById($productId);
 
 		$product->edit($productData);
+
+		$this->em->beginTransaction();
 		$this->saveParameters($product, $productData->getParameters());
 		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
-
 		$this->em->flush();
+		$this->imageFacade->uploadImage($product, $productData->getImage(), null);
+		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 

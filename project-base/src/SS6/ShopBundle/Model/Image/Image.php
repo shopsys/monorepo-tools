@@ -116,6 +116,7 @@ class Image implements EntityFileUploadInterface {
 	 */
 	public function setImageForUpload($cachedFilename) {
 		$this->imageForUpload = $cachedFilename;
+		// Entity must be changed for call preUpdate/PostUpdate
 		$this->modifiedAt = new DateTime();
 	}
 

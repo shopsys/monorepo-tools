@@ -5,11 +5,9 @@
 	{% if sliderItems is not empty %}
 	<div id="slider-hp">
 	{% for item in sliderItems %}
-	
 		<div>
-		<a href = "{{ item.link }}"><img src="{{ imageUrl(item) }}"/></a>
+			<a href = "{{ item.link }}">{{ image(item, { size: 'origin' }) }}</a>
 		</div>
-	
 	{% endfor %}
 	</div>
 	{% endif %}

@@ -78,7 +78,6 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 		$this->vat = $transportData->getVat();
 		$this->hidden = $transportData->isHidden();
 		$this->deleted = false;
-		$this->image = null;
 		$this->setTranslations($transportData);
 	}
 
