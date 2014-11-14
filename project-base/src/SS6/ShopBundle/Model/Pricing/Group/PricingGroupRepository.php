@@ -34,7 +34,7 @@ class PricingGroupRepository {
 		$criteria = ['id' => $pricingGroupId];
 		$pricingGroup = $this->getPricingGroupRepository()->findOneBy($criteria);
 		if ($pricingGroup === null) {
-			throw new \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundExceptoin($criteria);
+			throw new \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException($criteria);
 		}
 		return $pricingGroup;
 	}
@@ -54,5 +54,21 @@ class PricingGroupRepository {
 		return $this->getPricingGroupRepository()->findBy(['domainId' => $domainId]);
 	}
 
+	/**
+	 * @param int $pricingGroupId
+	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null
+	 */
+	public function findById($pricingGroupId) {
+		return $this->getPricingGroupRepository()->find($pricingGroupId);
+	}
+
+	public function getAllExceptIdByDomainId($id, $domainId) {
+		$qb = $this->getPricingGroupRepository()->createQueryBuilder('pg')
+			->where('pg.domainId = :domainId')
+			->andWhere('pg.id != :id')
+			->setParameters(['domainId' => $domainId, 'id' => $id]);
+
+		return $qb->getQuery()->getResult();
+	}
 
 }

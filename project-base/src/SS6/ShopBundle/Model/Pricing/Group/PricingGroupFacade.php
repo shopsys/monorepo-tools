@@ -2,7 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Group;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 
@@ -24,18 +27,26 @@ class PricingGroupFacade {
 	private $selectedDomain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 */
+	private $customerEditFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerEditFacade $customerEditFacade
 	 */
 	public function __construct(
 		EntityManager $em,
 		PricingGroupRepository $pricingGroupRepository,
-		SelectedDomain $selectedDomain
+		SelectedDomain $selectedDomain,
+		CustomerEditFacade $customerEditFacade
 	) {
 		$this->em = $em;
 		$this->pricingGroupRepository = $pricingGroupRepository;
 		$this->selectedDomain = $selectedDomain;
+		$this->customerEditFacade = $customerEditFacade;
 	}
 
 	/**
@@ -74,13 +85,24 @@ class PricingGroupFacade {
 	}
 
 	/**
-	 * @param int $pricingGroupId
+	 * @param int $oldPricingGroupId
+	 * @param int|null $newPricingGroupId
 	 */
-	public function delete($pricingGroupId) {
-		$pricingGroup = $this->pricingGroupRepository->getById($pricingGroupId);
+	public function delete($oldPricingGroupId, $newPricingGroupId = null) {
+		$oldPricingGroup = $this->pricingGroupRepository->getById($oldPricingGroupId);
+		if ($newPricingGroupId !== 0 && $newPricingGroupId !== null) {
+			$newPricingGroup = $this->pricingGroupRepository->getById($newPricingGroupId);
+		} else {
+			$newPricingGroup = null;
+		}
 
-		$this->em->remove($pricingGroup);
+		$this->em->beginTransaction();
+
+		$this->customerEditFacade->replaceOldPricingGroupWithNewPricingGroup($oldPricingGroup, $newPricingGroup);
+
+		$this->em->remove($oldPricingGroup);
 		$this->em->flush();
+		$this->em->commit();
 	}
 
 	/**
@@ -96,6 +118,36 @@ class PricingGroupFacade {
 	 */
 	public function getPricingGroupsByDomainId($domainId) {
 		return $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return bool
+	 */
+	public function isPricingGroupUsed(PricingGroup $pricingGroup) {
+		return $this->existsUserWithPricingGroup($pricingGroup);
+	}
+
+	/**
+	 * @param int $id
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	public function getAllExceptIdByDomainId($id, $domainId) {
+		return $this->pricingGroupRepository->getAllExceptIdByDomainId($id, $domainId);
+	}
+
+	/**
+	 * @param PricingGroup $pricingGroup
+	 * @return bool
+	 */
+	private function existsUserWithPricingGroup(PricingGroup $pricingGroup) {
+		$query = $this->em->createQuery('
+			SELECT COUNT(u)
+			FROM ' . User::class . ' u
+			WHERE u.pricingGroup = :pricingGroup')
+			->setParameter('pricingGroup', $pricingGroup);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 }

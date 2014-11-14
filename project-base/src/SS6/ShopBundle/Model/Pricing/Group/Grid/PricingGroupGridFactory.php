@@ -58,8 +58,8 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('name', 'pg.name', 'Název', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_pricinggroup_delete', array('id' => 'pg.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto cenovou skupinu?');
+		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_pricinggroup_deleteconfirm', array('id' => 'pg.id'))
+			->setAjaxConfirm();
 
 		return $grid;
 	}

@@ -228,4 +228,16 @@ class CustomerEditFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $oldPricingGroup
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $newPricingGroup
+	 */
+	public function replaceOldPricingGroupWithNewPricingGroup($oldPricingGroup, $newPricingGroup) {
+		$users = $this->userRepository->getAllByPricingGroup($oldPricingGroup);
+		foreach ($users as $user) {
+			$user->setPricingGroup($newPricingGroup);
+		}
+		$this->em->flush();
+	}
+
 }

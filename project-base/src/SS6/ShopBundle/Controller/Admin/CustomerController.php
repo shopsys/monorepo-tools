@@ -31,7 +31,7 @@ class CustomerController extends Controller {
 		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
 
 		$user = $customerEditFacade->getUserById($id);
-		$form = $this->createForm($customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT));
+		$form = $this->createForm($customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
 
 		try {
 			$customerData = new CustomerData();
@@ -146,13 +146,11 @@ class CustomerController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
 		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
 
 		$form = $this->createForm(
-			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE, $selectedDomain),
+			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
 			null,
 			array('validation_groups' => array('Default', 'create'))
 		);
