@@ -21,11 +21,6 @@ class ImageEntityConfig {
 	/**
 	 * @var array
 	 */
-	private $filenameMethodsByType;
-
-	/**
-	 * @var array
-	 */
 	private $sizesByType;
 
 	/**
@@ -37,14 +32,12 @@ class ImageEntityConfig {
 	 *
 	 * @param string $entityName
 	 * @param string $entityClass
-	 * @param array $filenameMethodsByType
 	 * @param array $sizesByType
 	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[] $sizes
 	 */
-	public function __construct($entityName, $entityClass, array $filenameMethodsByType, array $sizesByType, array $sizes) {
+	public function __construct($entityName, $entityClass, array $sizesByType, array $sizes) {
 		$this->entityName = $entityName;
 		$this->entityClass = $entityClass;
-		$this->filenameMethodsByType = $filenameMethodsByType;
 		$this->sizesByType = $sizesByType;
 		$this->sizes = $sizes;
 	}

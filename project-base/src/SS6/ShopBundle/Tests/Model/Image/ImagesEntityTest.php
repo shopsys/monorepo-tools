@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Model\Image;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImagesEntity;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 
 class ImageConfigTest extends PHPUnit_Framework_TestCase {
 
@@ -21,8 +22,9 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider testGetRelativeImagePathProvider
 	 */
 	public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath) {
+		$imageFacadeMock = $this->getMock(ImageFacade::class, [], [], '', false);
 		$imageConfig = new ImageConfig(array());
-		$imagesEntity = new ImagesEntity('imageDir', $imageConfig);
+		$imagesEntity = new ImagesEntity('imageDir', $imageConfig, $imageFacadeMock);
 
 		$this->assertEquals($expectedPath, $imagesEntity->getRelativeImagePath($entityName, $type, $sizeName));
 	}

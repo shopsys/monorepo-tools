@@ -27,11 +27,6 @@ class ImageConfigLoader {
 	private $foundEntityNames;
 
 	/**
-	 * @var array
-	 */
-	private $filenameMethodsByType;
-
-	/**
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
 	public function __construct(Filesystem $filesystem) {
@@ -93,25 +88,19 @@ class ImageConfigLoader {
 	private function processEntityConfig($entityConfig) {
 		$entityClass = $entityConfig[ImageConfigDefinition::CONFIG_CLASS];
 		$entityName = $entityConfig[ImageConfigDefinition::CONFIG_ENTITY_NAME];
-		$this->filenameMethodsByType = array();
 
-		if (
-			!array_key_exists($entityClass, $this->foundEntityConfigs) &&
-			!array_key_exists($entityName, $this->foundEntityNames)
+		if (array_key_exists($entityClass, $this->foundEntityConfigs)
+			|| array_key_exists($entityName, $this->foundEntityNames)
 		) {
-			$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
-			$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
-			if (count($sizes) > 0) {
-				$this->filenameMethodsByType[ImageEntityConfig::WITHOUT_NAME_KEY] =
-					$entityConfig[ImageConfigDefinition::CONFIG_FILENAME_METHOD];
-			}
-			$imageEntityConfig = new ImageEntityConfig($entityName, $entityClass, $this->filenameMethodsByType, $types, $sizes);
-
-			$this->foundEntityNames[$entityName] = $entityName;
-			$this->foundEntityConfigs[$entityClass] = $imageEntityConfig;
-		} else {
 			throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException($entityName);
 		}
+		
+		$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
+		$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
+		$imageEntityConfig = new ImageEntityConfig($entityName, $entityClass, $types, $sizes);
+
+		$this->foundEntityNames[$entityName] = $entityName;
+		$this->foundEntityConfigs[$entityClass] = $imageEntityConfig;
 	}
 
 	/**
@@ -150,7 +139,6 @@ class ImageConfigLoader {
 		foreach ($typesConfig as $typeConfig) {
 			$typeName = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];
 			if (!array_key_exists($typeName, $result)) {
-				$this->filenameMethodsByType[$typeName] = $typeConfig[ImageConfigDefinition::CONFIG_FILENAME_METHOD];
 				$result[$typeName] = $this->prepareSizes($typeConfig[ImageConfigDefinition::CONFIG_SIZES], true);
 			} else {
 				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException($typeName);
