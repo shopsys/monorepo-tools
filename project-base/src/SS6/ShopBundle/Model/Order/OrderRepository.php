@@ -161,4 +161,19 @@ class OrderRepository {
 		return $order;
 	}
 
+	/**
+	 * @param string $orderNumber
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @throws \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException
+	 */
+	public function getByOrderNumber($orderNumber) {
+		$order = $this->getOrderRepository()->findOneBy(['number' => $orderNumber]);
+
+		if ($order === null) {
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($orderNumber);
+		}
+
+		return $order;
+	}
+
 }

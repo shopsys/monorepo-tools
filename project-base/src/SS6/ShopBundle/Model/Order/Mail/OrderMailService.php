@@ -109,9 +109,7 @@ class OrderMailService {
 			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
 			self::VARIABLE_NOTE  => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
-			self::VARIABLE_ORDER_DETAIL_URL => $this->router->generate(
-				'front_customer_order_detail', ['urlHash' => $order->getUrlHash()], true
-			),
+			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
 		);
 
 		if ($isSubject) {
@@ -182,4 +180,21 @@ class OrderMailService {
 		));
 
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function getOrderDetailUrl(Order $order) {
+		if ($order->getCustomer() !== null) {
+			return $this->router->generate(
+				'front_customer_order_detail_registered', ['orderNumber' => $order->getNumber()], true
+			);
+		} else {
+			return $this->router->generate(
+				'front_customer_order_detail_unregistered', ['urlHash' => $order->getUrlHash()], true
+			);
+		}
+	}
+
 }

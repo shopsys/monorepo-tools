@@ -22,14 +22,14 @@
 							</tr>
 								{% for orderData in ordersData %}
 									<tr>
-										<td><a href="{{ url('front_customer_order_detail', { urlHash: orderData.urlHash }) }}">{{ orderData.number }}</a></td>
+										<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: orderData.number }) }}">{{ orderData.number }}</a></td>
 										<td>{{ orderData.createdAt|date('d-m-Y') }}</td>
 										<td>{{ orderData.statusName }}</td>
 										<td>{{ orderData.itemsCount }}</td>
 										<td>{{ orderData.transportName }}</td>
 										<td>{{ orderData.paymentName }}</td>
 										<td>{{ orderData.totalPriceWithVat|price }}</td>
-										<td><a href="{{ url('front_customer_order_detail', { urlHash: orderData.urlHash }) }}"><i class="fa fa-search"></i</a></td>
+										<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: orderData.number }) }}"><i class="fa fa-search"></i</a></td>
 									</tr>
 								{% endfor %}
 
