@@ -32,20 +32,22 @@ class SliderItemFacade {
 	private $imageFacade;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Slider\SliderItemRepository $sliderItemRepository
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
+	private $domain;
+
 	public function __construct(
 		EntityManager $em,
 		SliderItemRepository $sliderItemRepository,
 		SelectedDomain $selectedDomain,
-		ImageFacade	$imageFacade
+		ImageFacade	$imageFacade,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->sliderItemRepository = $sliderItemRepository;
 		$this->selectedDomain = $selectedDomain;
 		$this->imageFacade = $imageFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -100,10 +102,9 @@ class SliderItemFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
 	 */
-	public function findAllByDomain(Domain $domain) {
-		return $this->sliderItemRepository->findAllByDomain($domain);
+	public function getAllOnCurrentDomain() {
+		return $this->sliderItemRepository->getAllByDomainId($this->domain->getId());
 	}
 }
