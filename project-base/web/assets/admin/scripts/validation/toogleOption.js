@@ -3,15 +3,16 @@
 	SS6 = window.SS6 || {};
 	SS6.toggleOption = SS6.toggleOption || {};
 
-	SS6.toggleOption = function(ele, show) {
-		ele.toggle(show);
-		if(show) {
-			if (ele.parent('span.js-toggleOption').length) {
-				ele.unwrap();
+	// IE compatible hiding of select's options
+	SS6.toggleOption = function(element, show) {
+		element.toggle(show);
+		if (show) {
+			if (element.parent('span.js-toggleOption').length) {
+				element.unwrap();
 			}
 		} else {
-			if (ele.parent('span.js-toggleOption').length == 0) {
-				ele.wrap('<span class="js-toggleOption" style="display: none;" />');
+			if (element.parent('span.js-toggleOption').length === 0) {
+				element.wrap('<span class="js-toggleOption" style="display: none;" />');
 			}
 		}
 	};

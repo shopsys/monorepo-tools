@@ -105,9 +105,9 @@ class UserFormType extends AbstractType {
 
 		$builder
 			->add('pricingGroup', 'choice', array(
-			'required' => false,
-			'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', array(), 'DomainId', 'id'),
-		));
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', array(), 'domainId', 'id'),
+			));
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
