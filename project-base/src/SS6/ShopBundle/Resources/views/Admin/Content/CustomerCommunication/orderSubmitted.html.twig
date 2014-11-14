@@ -9,6 +9,8 @@
 
 		<div class="col-xs-12 col-lg-10">
 
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
 			{{ form_start(form) }}
 				{{ form_row(form.content, { label: 'Text'}) }}
 				{{ form_widget(form.save, { label: 'Uložit'|trans}) }}

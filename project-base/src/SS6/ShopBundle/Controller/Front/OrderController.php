@@ -142,6 +142,8 @@ class OrderController extends Controller {
 		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
 		$setting = $this->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		$orderId = $session->get(self::SESSION_CREATED_ORDER, null);
 		$session->remove(self::SESSION_CREATED_ORDER);
@@ -149,7 +151,7 @@ class OrderController extends Controller {
 		if ($orderId === null) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
-		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, SettingValue::DOMAIN_ID_COMMON);
+		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $domain->getId());
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
 			'orderConfirmationText' => $orderConfirmationText,

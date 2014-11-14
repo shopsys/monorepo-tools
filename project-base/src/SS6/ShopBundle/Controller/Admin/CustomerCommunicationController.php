@@ -26,8 +26,10 @@ class CustomerCommunicationController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$setting = $this->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
+		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
+		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
-		$data = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, SettingValue::DOMAIN_ID_COMMON);
+		$data = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $selectedDomain->getId());
 		$form = $this->createForm(new CustomerCommunicationFormType());
 
 		$form->setData(array('content' => $data));
@@ -35,7 +37,7 @@ class CustomerCommunicationController extends Controller {
 
 		if ($form->isValid()) {
 			$formData = $form->getData();
-			$setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], SettingValue::DOMAIN_ID_COMMON);
+			$setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $selectedDomain->getId());
 
 			$flashMessageSender->addSuccess('Nastavení textu po potvrzení objednávky bylo upraveno');
 			return $this->redirect($this->generateUrl('admin_customercommunication_ordersubmitted'));
