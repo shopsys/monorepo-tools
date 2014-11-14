@@ -86,11 +86,15 @@ class PricingGroupFacade {
 
 	/**
 	 * @param int $oldPricingGroupId
-	 * @param int $newPricingGroupId
+	 * @param int|null $newPricingGroupId
 	 */
-	public function delete($oldPricingGroupId, $newPricingGroupId) {
+	public function delete($oldPricingGroupId, $newPricingGroupId = null) {
 		$oldPricingGroup = $this->pricingGroupRepository->getById($oldPricingGroupId);
-		$newPricingGroup = $newPricingGroupId ? $this->pricingGroupRepository->findById($newPricingGroupId) : null;
+		if ($newPricingGroupId !== 0 && $newPricingGroupId !== null) {
+			$newPricingGroup = $this->pricingGroupRepository->getById($newPricingGroupId);
+		} else {
+			$newPricingGroup = null;
+		}
 
 		$this->em->beginTransaction();
 
@@ -143,8 +147,7 @@ class PricingGroupFacade {
 			FROM ' . User::class . ' u
 			WHERE u.pricingGroup = :pricingGroup')
 			->setParameter('pricingGroup', $pricingGroup);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
-
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 }

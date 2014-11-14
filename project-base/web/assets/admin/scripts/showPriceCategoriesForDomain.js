@@ -13,14 +13,13 @@
 	SS6.showPriceCategoriesForDomain.init = function() {
 		if ($(applyClassSelector).length !== 0) {
 			SS6.showPriceCategoriesForDomain.changeOptgroupLabelsToClass();
-			var domainId = $(applyClassSelector + ' input.js-domain-id').data('domain-id');
 			if ($(applyClassSelector + ' select').length !== 0) {
-				domainId = $(applyClassSelector + ' select').val();
+				var domainId = $(applyClassSelector + ' select').val();
+				SS6.showPriceCategoriesForDomain.reloadPriceGroups(domainId);
+				$(applyClassSelector + ' select').change(function() {
+					SS6.showPriceCategoriesForDomain.reloadPriceGroups($(this).val());
+				});
 			}
-			SS6.showPriceCategoriesForDomain.reloadPriceGroups(domainId);
-			$(applyClassSelector + ' select').change(function() {
-				SS6.showPriceCategoriesForDomain.reloadPriceGroups($(this).val());
-			});
 		}
 	};
 

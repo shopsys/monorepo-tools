@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class PricingGroupController extends Controller {
 
@@ -34,7 +33,7 @@ class PricingGroupController extends Controller {
 		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
-		$newId = (int)$newId === 0 ? null : $newId;
+		$newId = $newId !== null ? (int)$newId : null;
 
 		$name = $pricingGroupFacade->getById($id)->getName();
 		$pricingGroupFacade->delete($id, $newId);
@@ -43,6 +42,12 @@ class PricingGroupController extends Controller {
 			$flashMessageSender->addSuccessTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', array(
 				'name' => $name,
 			));
+		} elseif ($newId === 0) {
+			$flashMessageSender->addSuccessTwig(
+				'Cenová skupina <strong>{{ name }}</strong> byla odřazena a smazána.',
+				array(
+					'name' => $name,
+				));
 		} else {
 			$newPricingGroup = $pricingGroupFacade->getById($newId);
 			$flashMessageSender->addSuccessTwig(
