@@ -10,13 +10,13 @@ use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
-use Symfony\Component\Routing\Router;
+use Symfony\Cmf\Component\Routing\ChainRouter;
 use Twig_Environment;
 
 class OrderMailServiceTest extends FunctionalTestCase {
 
 	public function testGetMailTemplateNameByStatus() {
-		$routerMock = $this->getMockBuilder(Router::class)
+		$routerMock = $this->getMockBuilder(ChainRouter::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
@@ -46,7 +46,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 	}
 
 	public function testGetMessageByOrder() {
-		$routerMock = $this->getMockBuilder(Router::class)
+		$routerMock = $this->getMockBuilder(ChainRouter::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)

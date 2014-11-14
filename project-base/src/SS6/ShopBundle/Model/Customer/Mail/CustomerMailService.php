@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
-use Symfony\Component\Routing\Router;
+use Symfony\Cmf\Component\Routing\ChainRouter;
 
 class CustomerMailService {
 
@@ -18,7 +18,7 @@ class CustomerMailService {
 	const VARIABLE_LOGIN_PAGE = '{login_page}';
 
 	/**
-	 * @var SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
 	private $setting;
 
@@ -28,10 +28,10 @@ class CustomerMailService {
 	private $router;
 
 	/**
-	 * @param SS6\ShopBundle\Model\Setting\Setting $setting
-	 * @param Symfony\Component\Routing\Router $router
+	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @param \Symfony\Cmf\Component\Routing\ChainRouter $router
 	 */
-	public function __construct(Setting $setting, Router $router) {
+	public function __construct(Setting $setting, ChainRouter $router) {
 		$this->setting = $setting;
 		$this->router = $router;
 	}

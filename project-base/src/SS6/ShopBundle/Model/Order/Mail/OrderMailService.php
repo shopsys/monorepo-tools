@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Mail;
 
+use Symfony\Cmf\Component\Routing\ChainRouter;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
@@ -9,7 +10,6 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
-use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
 class OrderMailService {
@@ -55,7 +55,7 @@ class OrderMailService {
 	 */
 	public function __construct(
 		Setting $setting,
-		Router $router,
+		ChainRouter $router,
 		Twig_Environment $twig,
 		PriceCalculation $orderItemPriceCalculation
 	) {
