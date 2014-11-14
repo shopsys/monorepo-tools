@@ -74,7 +74,7 @@ class PricingGroupController extends Controller {
 		$pricingGroup = $pricingGroupFacade->getById($id);
 		if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
 			$message = 'Pro odstranění cenové skupiny "' . $pricingGroup->getName() . '" musíte zvolit, která se má všude, '
-				. 'kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?';
+				. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?';
 			$pricingGroupsNamesById = [0 => '-- žádná --'];
 			foreach ($pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId()) as $newPricingGroup) {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
