@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\TestsCrawler;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 
 class PagesResponsesTest extends DatabaseTestCase {
 
@@ -53,9 +54,11 @@ class PagesResponsesTest extends DatabaseTestCase {
 	}
 
 	public function frontEndPagesProvider() {
+		$orderUrlHash = $this->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getUrlHash();
 		return array(
 			['/'],
 			['clanek/1/'],
+			['detail-objednavky/' . $orderUrlHash],
 			['kosik/'],
 			['prihlaseni/'],
 			['produkty'],
@@ -73,10 +76,11 @@ class PagesResponsesTest extends DatabaseTestCase {
 	}
 
 	public function frontEndPagesRegistredUserProvider() {
+		$orderNumber = $this->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getNumber();
 		return array(
 			['zakaznik/upravit-udaje/'],
 			['zakaznik/objednavky/'],
-			['zakaznik/detail-objednavky/1']
+			['zakaznik/detail-objednavky/' . $orderNumber]
 		);
 	}
 
