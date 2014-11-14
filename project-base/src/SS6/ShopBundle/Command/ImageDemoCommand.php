@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Command;
 
+use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -76,19 +77,20 @@ class ImageDemoCommand extends ContainerAwareCommand {
 	 * @param string $dqlUrl
 	 */
 	private function loadDbChanges(OutputInterface $output, $dqlUrl) {
-		$dqls = file_get_contents($dqlUrl);
-		if ($dqls === false) {
+		$sqls = file_get_contents($dqlUrl);
+		if ($sqls === false) {
 			$output->writeln('<fg=red>Download of DB changes failed</fg=red>');
 			return;
 		}
-
-		$dqls = explode(';', $dqls);
-		$dqls = array_map('trim', $dqls);
-		$dqls = array_filter($dqls);
-		foreach ($dqls as $dql) {
-			$this->em->createQuery($dql)->execute();
+		$sqls = explode(';', $sqls);
+		$sqls = array_map('trim', $sqls);
+		$sqls = array_filter($sqls);
+		
+		$rsm = new ResultSetMapping();
+		foreach ($sqls as $sql) {
+			$this->em->createNativeQuery($sql, $rsm)->execute();
 		}
-		$output->writeln('<fg=green>DB changes were successfully applied (queries: ' . count($dqls) . ')</fg=green>');
+		$output->writeln('<fg=green>DB changes were successfully applied (queries: ' . count($sqls) . ')</fg=green>');
 	}
 
 	/**
