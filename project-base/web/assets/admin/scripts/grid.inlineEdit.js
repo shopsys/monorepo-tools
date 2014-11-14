@@ -81,7 +81,7 @@
 					$buttons.show();
 					$saving.hide();
 					SS6.window({
-						content: 'Prosím překontrolujte následující informace:\n\n• ' + saveResult.errors.join('\n• ')
+						content: 'Prosím překontrolujte následující informace:<br/><br/>• ' + saveResult.errors.join('<br/>• ')
 					});
 				}
 			}
