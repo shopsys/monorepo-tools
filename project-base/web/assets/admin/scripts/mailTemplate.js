@@ -4,7 +4,7 @@
 	SS6.mailTemplate = SS6.mailTemplate || {};
 
 	SS6.mailTemplate.init = function () {
-		$('#js-mail-templates .toggle-container:has(.js-validation-errors-list:not(.js-hidden))').each(function () {
+		$('#js-mail-templates .toggle-container:has(.js-validation-errors-list:not(.display-none))').each(function () {
 			var toggleContainer = $(this);
 			SS6.toggleElement.show(toggleContainer);
 		});

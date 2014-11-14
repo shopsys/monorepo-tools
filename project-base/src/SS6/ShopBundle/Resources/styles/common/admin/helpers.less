@@ -1,6 +1,3 @@
-// helpers
-
-
 /*******************************************************************
 // FLOAT + ALIGN
 *******************************************************************/
@@ -16,6 +13,30 @@
 	.cfx();
 }
 
+
+
+/*******************************************************************
+// DISPLAY
+*******************************************************************/
+.display-block {
+	display: block;
+}
+
+.display-none {
+	display: none;
+}
+
+.display-inline-block {
+	display: inline-block;
+}
+
+.display-inline {
+	display: inline;
+}
+
+/*******************************************************************
+// TEXT
+*******************************************************************/
 .text-right {
 	text-align: right;
 }
@@ -36,8 +57,13 @@
 	white-space: nowrap;
 }
 
-.text-nowrap {
-	white-space: nowrap;
+.text-disabled {
+	color: @color-inactive;
+	cursor: help;
+
+	&:hover, &:focus {
+		color: @color-inactive;
+	}
 }
 
 .clear {
@@ -142,3 +168,8 @@
 .cursor-default {
 	cursor: default;
 }
+
+.cursor-move {
+	cursor: move;
+}
+

@@ -47,7 +47,6 @@
 @import "core/mixins.less";
 @import "core/drawing.less";
 
-@import "core/helpers.less";
 @import "core/typography.less";
 
 //// Forms
@@ -66,8 +65,10 @@
 @import "libs/sprites-set.less";
 
 //// Bootsrap extend
+@import "libs/bootstrap/buttons.less";
 @import "libs/bootstrap/forms.less";
 @import "libs/bootstrap/navbar.less";
+@import "libs/bootstrap/tables.less";
 @import "libs/bootstrap/tooltip.less";
 
 //// Font
@@ -87,6 +88,7 @@
 
 //// form
 @import "components/form/group.less";
+@import "components/form/error.less";
 @import "components/form/input-required.less";
 @import "components/form/line.less";
 
@@ -117,3 +119,6 @@
 
 // programmer place for style
 @import "todo.less";
+
+// helpers at the end
+@import "helpers.less";

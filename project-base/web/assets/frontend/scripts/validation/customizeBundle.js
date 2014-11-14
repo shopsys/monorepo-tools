@@ -18,7 +18,7 @@
 	};
 
 	SS6.validation.isFormValid = function (form) {
-		return $(form).find('.js-validation-error:first, .js-validation-errors-list li[class]:first').size() === 0;
+		return $(form).find('.form-error:first, .js-validation-errors-list li[class]:first').size() === 0;
 	};
 
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;

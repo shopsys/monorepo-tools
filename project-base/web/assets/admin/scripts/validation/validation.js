@@ -15,7 +15,7 @@
 				$(this).jsFormValidator('validate')
 			})
 			.focus(function () {
-				$(this).closest('.js-validation-error').removeClass('js-validation-error');
+				$(this).closest('.form-error').removeClass('form-error');
 			})
 			.jsFormValidator({
 				'showErrors': SS6.validation.showErrors
@@ -32,14 +32,14 @@
 		$errorListUl.find('li:not([class]), li.' + errorClass).remove();
 
 		if (errors.length > 0) {
-			$elementsToHighlight.addClass('js-validation-error');
+			$elementsToHighlight.addClass('form-error');
 			$.each(errors, function (key, message) {
 				$errorListUl.append($('<li/>').addClass(errorClass).text(message));
 			});
 			$errorList.show();
 		} else {
 			if ($errorListUl.find('li').size() === 0) {
-				$elementsToHighlight.removeClass('js-validation-error');
+				$elementsToHighlight.removeClass('form-error');
 				$errorList.hide();
 			}
 		}

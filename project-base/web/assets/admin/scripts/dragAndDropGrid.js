@@ -7,7 +7,7 @@
 		$('.js-drag-and-drop-grid-rows').sortable({
 			create: SS6.dragAndDropGrid.onCreate,
 			cursor: 'move',
-			handle: '.js-drag-and-drop-grid-handle',
+			handle: '.cursor-move',
 			items: '.js-grid-row',
 			placeholder: 'table-drop',
 			revert: 200,

@@ -18,7 +18,7 @@
 								{{ name }}
 							</span>
 						</h2>
-						<div class="toggle-content toggle-close box-expand__hidden">
+						<div class="toggle-content display-none box-expand__hidden">
 							{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
 							{{ form_row(template.body, { label: 'Text'|trans}) }}
 							{% if sendMailText is not null %}
