@@ -110,7 +110,7 @@
 	<div class="box-buttons">
 		{{ form_widget(form.save, { label: 'Pokračovat v objednávce'|trans, attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
 
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left">
+		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left js-no-validate-button">
 			{{ 'Zpět do košíku'|trans }}
 		</button>
 	</div>
