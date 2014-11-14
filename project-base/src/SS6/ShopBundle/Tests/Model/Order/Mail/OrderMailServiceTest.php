@@ -20,9 +20,6 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$routerMock = $this->getMockBuilder(ChainRouter::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$currentDomainRouterMock = $this->getMockBuilder(CurrentDomainRouter::class)
-			->disableOriginalConstructor()
-			->getMock();
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -36,11 +33,10 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$orderMailService = new OrderMailService(
 			$settingMock,
 			$routerMock,
-			$currentDomainRouterMock,
 			$twigMock,
 			$orderItemPriceCalculationMock
 		);
-		
+
 		$orderStatus1 = new OrderStatus('statusName1', OrderStatus::TYPE_NEW, 1);
 		$orderStatus2 = new OrderStatus('statusName2', OrderStatus::TYPE_IN_PROGRESS, 2);
 
@@ -60,9 +56,6 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$routerMock = $this->getMockBuilder(ChainRouter::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$currentDomainRouterMock = $this->getMockBuilder(CurrentDomainRouter::class)
-			->disableOriginalConstructor()
-			->getMock();
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -76,7 +69,6 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$orderMailService = new OrderMailService(
 			$settingMock,
 			$routerMock,
-			$currentDomainRouterMock,
 			$twigMock,
 			$orderItemPriceCalculationMock
 		);
