@@ -186,15 +186,9 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getOrderDetailUrl(Order $order) {
-		if ($order->getCustomer() !== null) {
-			return $this->router->generate(
-				'front_customer_order_detail_registered', ['orderNumber' => $order->getNumber()], true
-			);
-		} else {
-			return $this->router->generate(
-				'front_customer_order_detail_unregistered', ['urlHash' => $order->getUrlHash()], true
-			);
-		}
+		return $this->router->generate(
+			'front_customer_order_detail_unregistered', ['urlHash' => $order->getUrlHash()], true
+		);
 	}
 
 }
