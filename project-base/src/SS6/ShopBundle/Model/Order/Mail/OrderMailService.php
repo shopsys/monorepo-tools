@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Order\Mail;
 
-use Symfony\Cmf\Component\Routing\ChainRouter;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
@@ -10,6 +9,7 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
 use Swift_Message;
+use Symfony\Cmf\Component\Routing\ChainRouter;
 use Twig_Environment;
 
 class OrderMailService {
@@ -25,14 +25,15 @@ class OrderMailService {
 	const VARIABLE_DELIVERY_ADDRESS = '{delivery_address}';
 	const VARIABLE_NOTE = '{note}';
 	const VARIABLE_PRODUCTS = '{products}';
+	const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
 
 	/**
-	 * @var SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \Symfony\Component\Routing\Router
+	 * @var \Symfony\Cmf\Component\Routing\ChainRouter
 	 */
 	private $router;
 
@@ -47,12 +48,6 @@ class OrderMailService {
 	 */
 	private $orderItemPriceCalculation;
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
-	 * @param \Symfony\Component\Routing\Router $router
-	 * @param Twig_Environment $twig
-	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation
-	 */
 	public function __construct(
 		Setting $setting,
 		ChainRouter $router,
@@ -114,6 +109,7 @@ class OrderMailService {
 			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
 			self::VARIABLE_NOTE  => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
+			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
 		);
 
 		if ($isSubject) {
@@ -147,6 +143,7 @@ class OrderMailService {
 			self::VARIABLE_DELIVERY_ADDRESS => 'Dodací adresa',
 			self::VARIABLE_NOTE  => 'Poznámka',
 			self::VARIABLE_PRODUCTS => 'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)',
+			self::VARIABLE_ORDER_DETAIL_URL => 'URL adresa detailu objednávky',
 		);
 	}
 
@@ -183,4 +180,15 @@ class OrderMailService {
 		));
 
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function getOrderDetailUrl(Order $order) {
+		return $this->router->generate(
+			'front_customer_order_detail_unregistered', ['urlHash' => $order->getUrlHash()], true
+		);
+	}
+
 }

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Model\Form;
 
+use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
@@ -29,7 +30,13 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$orderMailService = new OrderMailService($settingMock, $routerMock, $twigMock, $orderItemPriceCalculationMock);
+		$orderMailService = new OrderMailService(
+			$settingMock,
+			$routerMock,
+			$twigMock,
+			$orderItemPriceCalculationMock
+		);
+
 		$orderStatus1 = new OrderStatus('statusName1', OrderStatus::TYPE_NEW, 1);
 		$orderStatus2 = new OrderStatus('statusName2', OrderStatus::TYPE_IN_PROGRESS, 2);
 
@@ -59,7 +66,12 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$orderMailService = new OrderMailService($settingMock, $routerMock, $twigMock, $orderItemPriceCalculationMock);
+		$orderMailService = new OrderMailService(
+			$settingMock,
+			$routerMock,
+			$twigMock,
+			$orderItemPriceCalculationMock
+		);
 
 		$order = $this->getReference('order_1');
 

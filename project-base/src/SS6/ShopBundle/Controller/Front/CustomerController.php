@@ -77,13 +77,42 @@ class CustomerController extends Controller {
 	}
 
 	/**
-	 * @param int $id
+	 * @param string $orderNumber
 	 */
-	public function orderDetailAction($id) {
+	public function orderDetailRegisteredAction($orderNumber) {
+		return $this->orderDetailAction(null, $orderNumber);
+	}
+
+	/**
+	 * @param string $urlHash
+	 */
+	public function orderDetailUnregisteredAction($urlHash) {
+		return $this->orderDetailAction($urlHash, null);
+	}
+
+	/**
+	 *
+	 * @param string $urlHash
+	 * @param string $orderNumber
+	 */
+	private function orderDetailAction($urlHash = null, $orderNumber = null) {
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-		$order = $orderFacade->getById($id);
-		/* @var $order \SS6\ShopBundle\Model\Order\Order */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+
+		if ($orderNumber !== null) {
+			if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
+				$flashMessageSender->addError('Pro přístup na tuto stránku musíte být přihlášeni');
+				return $this->redirect($this->generateUrl('front_login'));
+			}
+			$order = $orderFacade->getByOrderNumber($orderNumber);
+			/* @var $order \SS6\ShopBundle\Model\Order\Order */
+		} else {
+			$order = $orderFacade->getByUrlHash($urlHash);
+			/* @var $order \SS6\ShopBundle\Model\Order\Order */
+		}
+
 		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
 		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */
 

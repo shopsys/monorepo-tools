@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Order;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Component\String\HashGenerator;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
@@ -232,6 +233,13 @@ class Order {
 	private $domainId;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", unique=true)
+	 */
+	private $urlHash;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
@@ -276,6 +284,7 @@ class Order {
 		$this->deleted = false;
 		$this->createdAt = new DateTime();
 		$this->domainId = $orderData->getDomainId();
+		$this->urlHash = HashGenerator::getHash();
 	}
 
 	/**
@@ -657,6 +666,13 @@ class Order {
 	 */
 	public function getDomainId() {
 		return $this->domainId;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrlHash() {
+		return $this->urlHash;
 	}
 
 }

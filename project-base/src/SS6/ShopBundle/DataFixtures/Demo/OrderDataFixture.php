@@ -12,6 +12,8 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
+	const ORDER_PREFIX = 'order_';
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 *
@@ -492,7 +494,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$order = $orderFacade->createOrder($orderData, $user);
 		/* @var $order \SS6\ShopBundle\Model\Order\Order */
 		$order->setStatus($orderStatus);
-		$referenceName = 'order_' . $order->getId();
+		$referenceName = self::ORDER_PREFIX . $order->getId();
 		$this->addReference($referenceName, $order);
 	}
 
