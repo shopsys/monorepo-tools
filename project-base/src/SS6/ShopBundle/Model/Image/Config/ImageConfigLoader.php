@@ -139,7 +139,7 @@ class ImageConfigLoader {
 		foreach ($typesConfig as $typeConfig) {
 			$typeName = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];
 			if (!array_key_exists($typeName, $result)) {
-				$result[$typeName] = $this->prepareSizes($typeConfig[ImageConfigDefinition::CONFIG_SIZES], true);
+				$result[$typeName] = $this->prepareSizes($typeConfig[ImageConfigDefinition::CONFIG_SIZES]);
 			} else {
 				throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException($typeName);
 			}

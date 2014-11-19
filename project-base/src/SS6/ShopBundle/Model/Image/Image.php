@@ -162,4 +162,11 @@ class Image implements EntityFileUploadInterface {
 		return $this->extension;
 	}
 
+	/**
+	 * @return \DateTime
+	 */
+	public function getModifiedAt() {
+		return $this->modifiedAt;
+	}
+
 }
