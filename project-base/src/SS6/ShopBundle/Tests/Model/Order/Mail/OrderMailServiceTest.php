@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Model\Form;
 
-use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
@@ -11,15 +11,18 @@ use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
-use Symfony\Cmf\Component\Routing\ChainRouter;
+use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
 class OrderMailServiceTest extends FunctionalTestCase {
 
 	public function testGetMailTemplateNameByStatus() {
-		$routerMock = $this->getMockBuilder(ChainRouter::class)
-			->disableOriginalConstructor()
-			->getMock();
+		$routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();
+		$routerMock->expects($this->any())->method('generate')->willReturn('generatedUrl');
+
+		$domainRouterFactoryMock = $this->getMock(DomainRouterFactory::class, ['getRouter'], [], '', false);
+		$domainRouterFactoryMock->expects($this->any())->method('getRouter')->willReturn($routerMock);
+
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -32,7 +35,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 
 		$orderMailService = new OrderMailService(
 			$settingMock,
-			$routerMock,
+			$domainRouterFactoryMock,
 			$twigMock,
 			$orderItemPriceCalculationMock
 		);
@@ -53,9 +56,12 @@ class OrderMailServiceTest extends FunctionalTestCase {
 	}
 
 	public function testGetMessageByOrder() {
-		$routerMock = $this->getMockBuilder(ChainRouter::class)
-			->disableOriginalConstructor()
-			->getMock();
+		$routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();
+		$routerMock->expects($this->any())->method('generate')->willReturn('generatedUrl');
+
+		$domainRouterFactoryMock = $this->getMock(DomainRouterFactory::class, ['getRouter'], [], '', false);
+		$domainRouterFactoryMock->expects($this->any())->method('getRouter')->willReturn($routerMock);
+
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -68,7 +74,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 
 		$orderMailService = new OrderMailService(
 			$settingMock,
-			$routerMock,
+			$domainRouterFactoryMock,
 			$twigMock,
 			$orderItemPriceCalculationMock
 		);

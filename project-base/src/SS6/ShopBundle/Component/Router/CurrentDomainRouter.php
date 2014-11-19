@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Router;
 
-use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,7 +25,7 @@ class CurrentDomainRouter implements RouterInterface {
 	 */
 	private $domainRouterFactory;
 
-	public function __construct(Domain $domain, LocalizedRouterFactory $domainRouterFactory) {
+	public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory) {
 		$this->domain = $domain;
 		$this->domainRouterFactory = $domainRouterFactory;
 	}
@@ -73,10 +73,7 @@ class CurrentDomainRouter implements RouterInterface {
 	 * @return \Symfony\Bundle\FrameworkBundle\Routing\Router
 	 */
 	private function getDomainRouter() {
-		$context = clone $this->getContext();
-		$context->setHost($this->domain->getDomain());
-		
-		return $this->domainRouterFactory->getRouter($this->domain->getLocale(), $context);
+		return $this->domainRouterFactory->getRouter($this->domain->getid());
 	}
 
 }

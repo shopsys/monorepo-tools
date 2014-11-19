@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Tests\Component\Router;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
-use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -29,7 +29,7 @@ class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 		$routerMock->expects($this->once())->method('match')->with($this->equalTo($pathInfo))->willReturn($matchResult);
 		$routerMock->expects($this->once())->method('getRouteCollection')->willReturn($getRouteCollectionResult);
 
-		$domainRouterFactoryMock = $this->getMockBuilder(LocalizedRouterFactory::class)
+		$domainRouterFactoryMock = $this->getMockBuilder(DomainRouterFactory::class)
 			->setMethods(['__construct', 'getRouter'])
 			->disableOriginalConstructor()
 			->getMock();
@@ -38,7 +38,6 @@ class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 		$context = new RequestContext();
 
 		$currentDomainRouter = new CurrentDomainRouter($domain, $domainRouterFactoryMock);
-		$currentDomainRouter->setContext($context);
 
 		$this->assertEquals($generateResult, $currentDomainRouter->generate(''));
 		$this->assertEquals($matchResult, $currentDomainRouter->match($pathInfo));
