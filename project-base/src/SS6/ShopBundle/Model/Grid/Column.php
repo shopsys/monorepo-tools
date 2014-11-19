@@ -38,18 +38,14 @@ class Column {
 	 * @param string $id
 	 * @param string $queryId
 	 * @param string $title
-	 * @param string|bool $sortable
+	 * @param bool $sortable
 	 */
 	public function __construct($id, $queryId, $title, $sortable) {
 		$this->id = $id;
 		$this->queryId = $queryId;
 		$this->title = $title;
-		$this->sortable = is_string($sortable) || $sortable;
-		if (is_string($sortable)) {
-			$this->queryOrderId = $sortable;
-		} else {
-			$this->queryOrderId = $queryId;
-		}
+		$this->sortable = $sortable;
+		$this->queryOrderId = $queryId;
 	}
 
 	/**
@@ -102,6 +98,16 @@ class Column {
 	 */
 	public function getQueryOrderId() {
 		return $this->queryOrderId;
+	}
+
+	/**
+	 * @param string $queryId
+	 * @return \SS6\ShopBundle\Model\Grid\Column
+	 */
+	public function setOrderByQueryId($queryId) {
+		$this->queryOrderId = $queryId;
+
+		return $this;
 	}
 
 }

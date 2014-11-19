@@ -122,9 +122,11 @@ class CustomerController extends Controller {
 		$grid->addColumn('email', 'u.email', 'Email', true);
 		$grid->addColumn('pricingGroup', 'pricingGroup', 'Cenová skupina', true);
 		$grid->addColumn('orders_count', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
-		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', 'ordersSumPriceOrder')
+		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', true)
+			->setOrderByQueryId('ordersSumPriceOrder')
 			->setClassAttribute('text-right');
-		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', 'lastOrderAtOrder')
+		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)
+			->setOrderByQueryId('lastOrderAtOrder')
 			->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
