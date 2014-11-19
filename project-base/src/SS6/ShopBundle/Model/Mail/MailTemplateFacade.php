@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
@@ -32,21 +33,29 @@ class MailTemplateFacade {
 	private $orderStatusMailTemplateService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain;
+	 */
+	private $domain;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
+	 * @param \SS6\ShopBundle\Model\Domain\Domain;
 	 */
 	public function __construct(
 		EntityManager $em,
 		MailTemplateRepository $mailTemplateRepository,
 		OrderStatusRepository $orderStatusRepository,
-		OrderStatusMailTemplateService $orderStatusMailTemplateService
+		OrderStatusMailTemplateService $orderStatusMailTemplateService,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->mailTemplateRepository = $mailTemplateRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusMailTemplateService = $orderStatusMailTemplateService;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -67,18 +76,13 @@ class MailTemplateFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate[] $mailTemplatesData
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData[] $mailTemplatesData
 	 * @param int $domainId
 	 */
 	public function saveMailTemplatesData(array $mailTemplatesData, $domainId) {
 		foreach ($mailTemplatesData as $mailTemplateData) {
-			$mailTemplate = $this->mailTemplateRepository->findByNameAndDomainId($mailTemplateData->getName(), $domainId);
-			if ($mailTemplate !== null) {
-				$mailTemplate->edit($mailTemplateData);
-			} else {
-				$mailTemplate = new MailTemplate($mailTemplateData->getName(), $domainId, $mailTemplateData);
-				$this->em->persist($mailTemplate);
-			}
+			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->getName(), $domainId);
+			$mailTemplate->edit($mailTemplateData);
 		}
 
 		$this->em->flush();
@@ -115,6 +119,18 @@ class MailTemplateFacade {
 			$this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates));
 
 		return $allMailTemplatesData;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function createMailTemplateForAllDomains($name) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$mailTemplate = new MailTemplate($name, $domainConfig->getId(), new MailTemplateData());
+			$this->em->persist($mailTemplate);
+		}
+
+		$this->em->flush();
 	}
 
 }

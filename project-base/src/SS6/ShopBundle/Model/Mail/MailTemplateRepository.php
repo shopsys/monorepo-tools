@@ -56,13 +56,14 @@ class MailTemplateRepository {
 
 	/**
 	 * @param string $templateName
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 * @throws \SS6\ShopBundle\Model\Mail\Exception\MailTemplateNotFoundException
 	 */
-	public function getByName($templateName) {
-		$mailTemplate = $this->findByName($templateName);
+	public function getByNameAndDomainId($templateName, $domainId) {
+		$mailTemplate = $this->findByNameAndDomainId($templateName, $domainId);
 		if ($mailTemplate === null) {
-			$message = 'E-mail template with name "' . $templateName . '" was not found.';
+			$message = 'E-mail template with name "' . $templateName . '" was not found on domain with ID. ' . $domainId;
 			throw new \SS6\ShopBundle\Model\Mail\Exception\MailTemplateNotFoundException($message);
 		}
 

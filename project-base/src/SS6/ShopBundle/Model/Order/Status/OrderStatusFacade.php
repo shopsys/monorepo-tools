@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
+use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
@@ -37,20 +39,24 @@ class OrderStatusFacade {
 	private $orderService;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusService $orderStatusService
-	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
+	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateFacade
 	 */
-	public function __construct(EntityManager $em, OrderStatusRepository $orderStatusRepository,
-		OrderStatusService $orderStatusService, OrderRepository $orderRepository,
-		OrderService $orderService
+	private $mailTemplateFacade;
+
+	public function __construct(
+		EntityManager $em,
+		OrderStatusRepository $orderStatusRepository,
+		OrderStatusService $orderStatusService,
+		OrderRepository $orderRepository,
+		OrderService $orderService,
+		MailTemplateFacade $mailTemplateFacade
 	) {
 		$this->em = $em;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusService = $orderStatusService;
 		$this->orderRepository = $orderRepository;
 		$this->orderService = $orderService;
+		$this->mailTemplateFacade = $mailTemplateFacade;
 	}
 
 	/**
@@ -64,7 +70,13 @@ class OrderStatusFacade {
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 		$this->em->persist($orderStatus);
+		$this->em->beginTransaction();
 		$this->em->flush();
+
+		$this->mailTemplateFacade->createMailTemplateForAllDomains(
+			OrderMailService::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId()
+		);
+		$this->em->commit();
 
 		return $orderStatus;
 	}
