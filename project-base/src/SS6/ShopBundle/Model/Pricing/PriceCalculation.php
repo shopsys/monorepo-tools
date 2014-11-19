@@ -22,8 +22,8 @@ class PriceCalculation {
 	/**
 	 * @return string
 	 */
-	public function getVatAmountByPriceWithVat($priceWithoutVat, Vat $vat) {
-		return $this->rounding->roundVatAmount($priceWithoutVat * $vat->getCoefficient());
+	public function getVatAmountByPriceWithVat($priceWithVat, Vat $vat) {
+		return $this->rounding->roundVatAmount($priceWithVat * $vat->getCoefficient());
 	}
 
 	/**
