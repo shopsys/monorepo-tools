@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\PriceCalculation as OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Component\String\HashGenerator;
 
 class OrderService {
 
@@ -23,15 +24,22 @@ class OrderService {
 	private $orderPriceCalculation;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\String\HashGenerator
+	 */
+	private $hashGenerator;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation $orderItemPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Order\PriceCalculation $orderPriceCalculation
 	 */
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
-		OrderPriceCalculation $orderPriceCalculation
+		OrderPriceCalculation $orderPriceCalculation,
+		HashGenerator $hashGenerator
 	) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
+		$this->hashGenerator = $hashGenerator;
 	}
 
 	/**
@@ -51,6 +59,7 @@ class OrderService {
 			$orderData,
 			$orderNumber,
 			$orderStatus,
+			$this->hashGenerator->getHash(),
 			$user
 		);
 		return $order;

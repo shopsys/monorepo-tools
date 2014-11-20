@@ -10,7 +10,7 @@ class HashGenerator {
 	/**
 	 * @return string
 	 */
-	public static function getHash() {
+	public function getHash() {
 		return uniqid(mt_rand(self::MIN, self::MAX));
 	}
 }

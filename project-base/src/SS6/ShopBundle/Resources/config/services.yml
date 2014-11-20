@@ -124,6 +124,9 @@ services:
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
+  ss6.shop.component.string.hash_generator:
+    class: SS6\ShopBundle\Component\String\HashGenerator
+
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory

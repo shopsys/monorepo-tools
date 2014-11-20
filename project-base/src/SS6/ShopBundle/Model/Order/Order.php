@@ -243,12 +243,14 @@ class Order {
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param string $urlHash
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function __construct(
 		OrderData $orderData,
 		$orderNumber,
 		OrderStatus $orderStatus,
+		$urlHash,
 		User $user = null
 	) {
 		$this->transport = $orderData->getTransport();
@@ -284,7 +286,7 @@ class Order {
 		$this->deleted = false;
 		$this->createdAt = new DateTime();
 		$this->domainId = $orderData->getDomainId();
-		$this->urlHash = HashGenerator::getHash();
+		$this->urlHash = $urlHash;
 	}
 
 	/**
