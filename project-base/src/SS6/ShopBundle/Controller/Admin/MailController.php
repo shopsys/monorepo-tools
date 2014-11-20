@@ -43,8 +43,8 @@ class MailController extends Controller {
 			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$orderStatusesTemplateVariables = $orderMailService->getOrderStatusesTemplateVariables();
-		$registrationTemplateVariables = $customerMailService->getRegistrationTemplateVariables();
+		$orderStatusesTemplateVariables = $orderMailService->getTemplateVariables();
+		$registrationTemplateVariables = $customerMailService->getTemplateVariables();
 
 		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', array(
 			'form' => $form->createView(),

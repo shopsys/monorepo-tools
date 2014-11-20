@@ -6,11 +6,11 @@ use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
+use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
-use Swift_Message;
 use Symfony\Cmf\Component\Routing\ChainRouter;
 use Twig_Environment;
 
@@ -80,11 +80,11 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$mailTemplateData->setBody('body');
 		$mailTemplate = new MailTemplate('templateName', 1, $mailTemplateData);
 
-		$message = $orderMailService->getMessageByOrder($order, $mailTemplate);
+		$messageData = $orderMailService->getMessageDataByOrder($order, $mailTemplate);
 
-		$this->assertInstanceOf(Swift_Message::class, $message);
-		$this->assertEquals($mailTemplate->getSubject(), $message->getSubject());
-		$this->assertEquals($mailTemplate->getBody(), $message->getBody());
+		$this->assertInstanceOf(MessageData::class, $messageData);
+		$this->assertEquals($mailTemplate->getSubject(), $messageData->getSubject());
+		$this->assertEquals($mailTemplate->getBody(), $messageData->getBody());
 	}
 
 }
