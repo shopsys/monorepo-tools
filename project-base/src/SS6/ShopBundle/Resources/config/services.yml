@@ -121,6 +121,9 @@ services:
   ss6.shop.component.transformers.inverse_array_values_transformer:
     class: SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 
+  ss6.shop.component.transformers.product_id_to_product_transformer:
+    class: SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
+
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
@@ -447,6 +450,18 @@ services:
 
   ss6.shop.product.availability.availability_service:
     class: SS6\ShopBundle\Model\Product\Availability\AvailabilityService
+
+  ss6.shop.product.top_product.top_product_inline_edit:
+    class: SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit
+
+  ss6.shop.product.top_product.top_product_facade:
+    class: SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade
+
+  ss6.shop.product.top_product.top_product_grid_factory:
+    class: SS6\ShopBundle\Model\Product\TopProduct\TopProductGridFactory
+
+  ss6.shop.product.top_product.top_product_repository:
+    class: SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository
 
   ss6.shop.product.list.product_list_admin_facade:
     class: SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade

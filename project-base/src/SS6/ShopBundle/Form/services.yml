@@ -37,3 +37,8 @@ services:
     class: SS6\ShopBundle\Form\Locale\LocalizedType
     tags:
       - { name: form.type, alias: localized }
+
+  ss6.shop.form.product:
+    class: SS6\ShopBundle\Form\ProductType
+    tags:
+      - { name: form.type, alias: product }
