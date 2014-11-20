@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Mail\MailTemplate;
+use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
-use Swift_Message;
 use Symfony\Cmf\Component\Routing\ChainRouter;
 use Twig_Environment;
 
@@ -63,25 +63,18 @@ class OrderMailService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
-	 * @return \Swift_Message
+	 * @return \SS6\ShopBundle\Model\Mail\MessageData
 	 */
-	public function getMessageByOrder(Order $order, MailTemplate $mailTemplate) {
-		$toEmail = $order->getEmail();
-		$body = $this->transformVariables($mailTemplate->getBody(), $order);
-		$subject = $this->transformVariables($mailTemplate->getSubject(), $order, true);
-
-		$message = Swift_Message::newInstance()
-			->setSubject($subject)
-			->setFrom(
-				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),
-				$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId())
-			)
-			->setTo($toEmail)
-			->setContentType('text/plain; charset=UTF-8')
-			->setBody(strip_tags($body), 'text/plain')
-			->addPart($body, 'text/html');
-
-		return $message;
+	public function getMessageDataByOrder(Order $order, MailTemplate $mailTemplate) {
+		return new MessageData(
+			$order->getEmail(),
+			$mailTemplate->getBody(),
+			$mailTemplate->getSubject(),
+			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),
+			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId()),
+			$this->getVariablesReplacementsForBody($order),
+			$this->getVariablesReplacementsForSubject($order)
+		);
 	}
 
 	/**
@@ -93,12 +86,11 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param string $string
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @return string
+	 * @return array
 	 */
-	public function transformVariables($string, Order $order, $isSubject = false) {
-		$variableValues = array(
+	private function getVariablesReplacementsForBody(Order $order) {
+		return array(
 			self::VARIABLE_NUMBER  => $order->getNumber(),
 			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
 			self::VARIABLE_URL => $this->router->generate('front_homepage', array(), true),
@@ -112,26 +104,24 @@ class OrderMailService {
 			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
 		);
 
-		if ($isSubject) {
-			$variableKeys = array(
-				self::VARIABLE_NUMBER,
-				self::VARIABLE_DATE,
-			);
-		} else {
-			$variableKeys = array_keys($this->getOrderStatusesTemplateVariables());
-		}
+	}
 
-		foreach ($variableKeys as $key) {
-			$string = str_replace($key, $variableValues[$key], $string);
-		}
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return array
+	 */
+	private function getVariablesReplacementsForSubject(Order $order) {
+		return array(
+			self::VARIABLE_NUMBER  => $order->getNumber(),
+			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
+		);
 
-		return $string;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getOrderStatusesTemplateVariables() {
+	public function getTemplateVariables() {
 		return array(
 			self::VARIABLE_NUMBER  => 'Číslo objednávky',
 			self::VARIABLE_DATE => 'Datum a čas vytvoření objednávky',

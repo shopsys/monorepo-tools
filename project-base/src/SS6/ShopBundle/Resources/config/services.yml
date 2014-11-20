@@ -140,7 +140,6 @@ services:
 
   ss6.shop.customer.mail.customer_mail_facade:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade
-    arguments: [@mailer]
 
   ss6.shop.customer.mail.customer_mail_service:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
@@ -283,6 +282,10 @@ services:
   ss6.shop.mail.mail_template_repository:
     class: SS6\ShopBundle\Model\Mail\MailTemplateRepository
 
+  ss6.shop.mail.mailer_service:
+    class: SS6\ShopBundle\Model\Mail\MailerService
+    arguments: [@mailer]
+
   ss6.shop.mail.setting.mail_setting_facade:
     class: SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade
 
@@ -302,7 +305,6 @@ services:
 
   ss6.shop.order.order_mail_facade:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
-    arguments: [@mailer]
 
   ss6.shop.order.order_mail_service:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailService

@@ -4,14 +4,14 @@ namespace SS6\ShopBundle\Model\Customer\Mail;
 
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Mail\MailerService;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
-use Swift_Mailer;
 
 class CustomerMailFacade {
 
 	/**
-	 * @var \Swift_Mailer
+	 * @var \SS6\ShopBundle\Model\Mail\MailerService
 	 */
 	private $mailer;
 
@@ -26,12 +26,12 @@ class CustomerMailFacade {
 	private $customerMailService;
 
 	/**
-	 * @param \Swift_Mailer $mailer
+	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailer
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
 	 * @param \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService $customerMailService
 	 */
 	public function __construct(
-		Swift_Mailer $mailer,
+		MailerService $mailer,
 		MailTemplateFacade $mailTemplateFacade,
 		CustomerMailService $customerMailService
 	) {
@@ -46,12 +46,7 @@ class CustomerMailFacade {
 	 */
 	public function sendRegistrationMail(User $user) {
 		$mailTemplate = $this->mailTemplateFacade->get(MailTemplate::REGISTRATION_CONFIRM_NAME, $user->getDomainId());
-		$message = $this->customerMailService->getMessageByUser($user, $mailTemplate);
-
-		$failedRecipients = array();
-		$successSend = $this->mailer->send($message, $failedRecipients);
-		if (!$successSend && count($failedRecipients) > 0) {
-			throw new \SS6\ShopBundle\Model\Customer\Mail\Exception\SendMailFailedException($failedRecipients);
-		}
+		$messageData = $this->customerMailService->getMessageDataByUser($user, $mailTemplate);
+		$this->mailer->send($messageData);
 	}
 }
