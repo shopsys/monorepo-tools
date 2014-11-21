@@ -11,3 +11,5 @@ parameters:
   mailer_password: ~
 
   secret: ThisTokenIsNotSoSecretChangeIt
+
+  config_version: 1416573968

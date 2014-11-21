@@ -1,3 +1,4 @@
+config_version: 1416573968
 domains:
   - id: 1
     domain: localhost

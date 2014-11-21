@@ -32,8 +32,8 @@
 
 	<property file="${path.build.properties.local}" override="true"/>
 
-	<target name="build" depends="composer,npm,clean,img-dirs,assetic,grunt,db-rebuild"/>
-	<target name="build-demo" depends="composer,npm,clean,img-dirs,assetic,grunt,db-demo"/>
+	<target name="build" depends="composer,configs-check,npm,clean,img-dirs,assetic,grunt,db-rebuild"/>
+	<target name="build-demo" depends="composer,configs-check,npm,clean,img-dirs,assetic,grunt,db-demo"/>
 	<target name="build-demo-dev" depends="build-demo,standards"/>
 	<target name="build-dev" depends="build,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
@@ -78,6 +78,12 @@
 			checkreturn="true"
 		>
 			<arg value="install"/>
+		</exec>
+	</target>
+
+	<target name="configs-check">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="${path.app}/checkConfigVersions.php" />
 		</exec>
 	</target>
 

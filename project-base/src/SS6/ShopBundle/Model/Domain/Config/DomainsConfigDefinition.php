@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Domain\Config;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use SS6\ShopBundle\Command\ConfigVersionsCheckCommand;
 
 class DomainsConfigDefinition implements ConfigurationInterface {
 
@@ -31,6 +32,11 @@ class DomainsConfigDefinition implements ConfigurationInterface {
 							->scalarNode(self::CONFIG_TEMPLATES_DIRECTORY)->isRequired()->cannotBeEmpty()->end()
 						->end()
 					->end()
+				->end()
+			->end()
+			->children()
+				->scalarNode(ConfigVersionsCheckCommand::VERSION_LABEL_IN_CONFIG)
+					->cannotBeEmpty()
 				->end()
 			->end();
 
