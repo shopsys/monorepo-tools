@@ -32,12 +32,12 @@ class ImageFacade {
 
 	/**
 	 * @param object $entity
-	 * @param string|null $imageForUpload
+	 * @param string|null $temporaryFilename
 	 * @param string|null $type
 	 */
-	public function uploadImage($entity, $imageForUpload, $type) {
-		if ($imageForUpload !== null) {
-			$image = $this->getImageByEntityOrCreate($entity, $type, $imageForUpload);
+	public function uploadImage($entity, $temporaryFilename, $type) {
+		if ($temporaryFilename !== null) {
+			$image = $this->getImageByEntityOrCreate($entity, $type, $temporaryFilename);
 			$this->em->flush($image);
 		}
 	}
@@ -58,17 +58,17 @@ class ImageFacade {
 	/**
 	 * @param object $entity
 	 * @param string|null $type
-	 * @param string $imageForUpload
+	 * @param string $temporaryFilename
 	 * @return \SS6\ShopBundle\Model\Image\Image
 	 */
-	private function getImageByEntityOrCreate($entity, $type, $imageForUpload) {
+	private function getImageByEntityOrCreate($entity, $type, $temporaryFilename) {
 		try {
 			$image = $this->getImageByEntity($entity, $type);
-			$image->setImageForUpload($imageForUpload);
+			$image->setTemporaryFilename($temporaryFilename);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			$entityName = $this->imageConfig->getEntityName($entity);
 			$entityId = $this->getEntityId($entity);
-			$image = new Image($entityName, $entityId, $type, $imageForUpload);
+			$image = new Image($entityName, $entityId, $type, $temporaryFilename);
 			$this->em->persist($image);
 		}
 

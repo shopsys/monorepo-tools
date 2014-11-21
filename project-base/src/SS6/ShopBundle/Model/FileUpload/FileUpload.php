@@ -154,10 +154,10 @@ class FileUpload {
 	 * @param \SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface $entity
 	 */
 	public function preFlushEntity(EntityFileUploadInterface $entity) {
-		$filesForUpload = $entity->getCachedFilesForUpload();
+		$filesForUpload = $entity->getTemporaryFilesForUpload();
 		foreach ($filesForUpload as $key => $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
-			$originalFilename = $this->getOriginalFilenameByCached($fileForUpload->getCacheFilename());
+			$originalFilename = $this->getOriginalFilenameByCached($fileForUpload->getTemporaryFilename());
 			$entity->setFileAsUploaded($key, $originalFilename);
 		}
 	}
@@ -167,13 +167,13 @@ class FileUpload {
 	 * @throws \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException
 	 */
 	public function postFlushEntity(EntityFileUploadInterface $entity) {
-		$filesForUpload = $entity->getCachedFilesForUpload();
+		$filesForUpload = $entity->getTemporaryFilesForUpload();
 		foreach ($filesForUpload as $key => $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
-			$sourceFilepath = $this->getCacheFilepath($fileForUpload->getCacheFilename());
+			$sourceFilepath = $this->getCacheFilepath($fileForUpload->getTemporaryFilename());
 			$originalFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
 				$fileForUpload->getNameConventionType(),
-				$fileForUpload->getCacheFilename(),
+				$fileForUpload->getTemporaryFilename(),
 				$entity->getId()
 			);
 			$targetFilename = $this->getTargetFilepath(

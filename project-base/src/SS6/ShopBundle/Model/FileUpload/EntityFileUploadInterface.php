@@ -7,7 +7,7 @@ interface EntityFileUploadInterface {
 	/**
 	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
 	 */
-	public function getCachedFilesForUpload();
+	public function getTemporaryFilesForUpload();
 
 	/**
 	 * @param string $key

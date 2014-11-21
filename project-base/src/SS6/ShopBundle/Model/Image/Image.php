@@ -66,30 +66,30 @@ class Image implements EntityFileUploadInterface {
 	/**
 	 * @var string|null
 	 */
-	private $imageForUpload;
+	private $temporaryFilename;
 
 	/**
 	 *
 	 * @param string $entityName
 	 * @param int $entityId
 	 * @param string|null $type
-	 * @param string $cachedFilename
+	 * @param string $temporaryFilename
 	 */
-	public function __construct($entityName, $entityId, $type, $cachedFilename) {
+	public function __construct($entityName, $entityId, $type, $temporaryFilename) {
 		$this->entityName = $entityName;
 		$this->entityId = $entityId;
 		$this->type = $type;
-		$this->setImageForUpload($cachedFilename);
+		$this->setTemporaryFilename($temporaryFilename);
 	}
 
 	/**
 	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
 	 */
-	public function getCachedFilesForUpload() {
+	public function getTemporaryFilesForUpload() {
 		$files = array();
-		if ($this->imageForUpload !== null) {
+		if ($this->temporaryFilename !== null) {
 			$files[self::UPLOAD_KEY] = new FileForUpload(
-				$this->imageForUpload,
+				$this->temporaryFilename,
 				true,
 				$this->entityName,
 				$this->type . '/' . ImageConfig::ORIGINAL_SIZE_NAME,
@@ -112,10 +112,10 @@ class Image implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @param string|null $cachedFilename
+	 * @param string|null $temporaryFilename
 	 */
-	public function setImageForUpload($cachedFilename) {
-		$this->imageForUpload = $cachedFilename;
+	public function setTemporaryFilename($temporaryFilename) {
+		$this->temporaryFilename = $temporaryFilename;
 		// workaround: Entity must be changed so that preUpdate and postUpdate are called
 		$this->modifiedAt = new DateTime();
 	}

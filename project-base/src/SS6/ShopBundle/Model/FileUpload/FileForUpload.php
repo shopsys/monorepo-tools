@@ -7,7 +7,7 @@ class FileForUpload {
 	/**
 	 * @var string
 	 */
-	private $cacheFilename;
+	private $temporaryFilename;
 
 	/**
 	 * @var bool
@@ -30,14 +30,14 @@ class FileForUpload {
 	private $nameConventionType;
 
 	/**
-	 * @param string $cacheFilename
+	 * @param string $temporaryFilename
 	 * @param bool $isImage
 	 * @param string $category
 	 * @param string|null $type
 	 * @param int $nameConventionType
 	 */
-	public function __construct($cacheFilename, $isImage, $category, $type, $nameConventionType) {
-		$this->cacheFilename = $cacheFilename;
+	public function __construct($temporaryFilename, $isImage, $category, $type, $nameConventionType) {
+		$this->temporaryFilename = $temporaryFilename;
 		$this->isImage = $isImage;
 		$this->category = $category;
 		$this->type = $type;
@@ -47,8 +47,8 @@ class FileForUpload {
 	/**
 	 * @return string
 	 */
-	public function getCacheFilename() {
-		return $this->cacheFilename;
+	public function getTemporaryFilename() {
+		return $this->temporaryFilename;
 	}
 
 	/**
