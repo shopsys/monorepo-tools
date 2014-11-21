@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form\Front\Login;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class LoginFormType extends AbstractType {
@@ -16,14 +17,14 @@ class LoginFormType extends AbstractType {
 		$builder
 			->add('email', 'text', array(
 					'constraints' => array(
-						new Constraints\NotBlank(),
+						new Constraints\NotBlank(array('message' => 'Vyplňte prosím email')),
 						new Constraints\Email(),
 					)
 				)
 			)
 			->add('password', 'password', array(
 					'constraints' => array(
-						new Constraints\NotBlank(),
+						new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
 					)
 				)
 			)
@@ -38,11 +39,12 @@ class LoginFormType extends AbstractType {
 	}
 
 	/**
-	 * @param array $options
-	 * @return array
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
-	public function getDefaultOptions(array $options) {
-		return array();
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$resolver->setDefaults(array(
+			'attr' => array('novalidate' => 'novalidate'),
+		));
 	}
 
 }
