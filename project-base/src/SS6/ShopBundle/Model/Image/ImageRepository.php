@@ -38,7 +38,7 @@ class ImageRepository {
 		));
 
 		if ($image === null) {
-			$message = 'Image type "' . ($type ?: 'NULL') . '" not found for entity "' . $entityName . '"';
+			$message = 'Image of type "' . ($type ?: 'NULL') . '" not found for entity "' . $entityName . '" with ID ' . $entityId;
 			throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException($message);
 		}
 

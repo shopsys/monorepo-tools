@@ -30,7 +30,7 @@ class ImageFacade {
 		$this->imageRepository = $imageRepository;
 	}
 
-		/**
+	/**
 	 * @param object $entity
 	 * @param string|null $imageForUpload
 	 * @param string|null $type

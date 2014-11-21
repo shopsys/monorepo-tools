@@ -50,7 +50,7 @@ class TransportEditFacade {
 		PaymentRepository $paymentRepository,
 		VisibilityCalculation $visibilityCalculation,
 		Domain $domain,
-		ImageFacade	$imageFacade
+		ImageFacade $imageFacade
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
