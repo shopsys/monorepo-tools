@@ -45,4 +45,20 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$this->assertFalse($flashMessageFront->isEmpty());
 	}
 
+	public function testGetNotVisibleItemsWithItemWithoutProduct() {
+		$cartItemMock = $this->getMockBuilder(CartItem::class)
+			->disableOriginalConstructor()
+			->setMethods(null)
+			->getMock();
+
+		$cartItems = array($cartItemMock);
+		$cart = new Cart($cartItems);
+
+		$cartWatcherService = $this->getContainer()->get('ss6.shop.cart.cart_watcher_service');
+		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
+
+		$notVisibleItems = $cartWatcherService->getNotVisibleItems($cart);
+		$this->assertCount(1, $notVisibleItems);
+	}
+
 }

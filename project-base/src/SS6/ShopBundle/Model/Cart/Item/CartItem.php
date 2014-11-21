@@ -40,7 +40,7 @@ class CartItem {
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $product;
 
@@ -96,9 +96,14 @@ class CartItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \SS6\ShopBundle\Model\Product\Product|null
+	 * @throws \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException
 	 */
 	public function getProduct() {
+		if ($this->product === null) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+		}
+
 		return $this->product;
 	}
 
@@ -106,7 +111,7 @@ class CartItem {
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getName() {
-		return $this->product->getName();
+		return $this->getProduct()->getName();
 	}
 
 	/**
@@ -135,7 +140,7 @@ class CartItem {
 	 * @return bool
 	 */
 	public function isSimilarItemAs(CartItem $cartItem) {
-		return $this->product->getId() === $cartItem->getProduct()->getId();
+		return $this->getProduct()->getId() === $cartItem->getProduct()->getId();
 	}
 
 	/**

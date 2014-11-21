@@ -16,6 +16,7 @@ class OrderProduct extends OrderItem {
 	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $product;
 

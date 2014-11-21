@@ -11,8 +11,13 @@ class ProductNotFoundException extends NotFoundHttpException implements ProductE
 	 * @param mixed $criteria
 	 * @param \Exception $previous
 	 */
-	public function __construct($criteria, Exception $previous = null) {
-		parent::__construct('Product not found by criteria ' . var_export($criteria, true), $previous, 0);
+	public function __construct($criteria = null, Exception $previous = null) {
+		if (is_array($criteria)) {
+			$message = 'Product not found by criteria ' . var_export($criteria, true);
+		} else {
+			$message = $criteria;
+		}
+		parent::__construct($message, $previous, 0);
 	}
 
 }

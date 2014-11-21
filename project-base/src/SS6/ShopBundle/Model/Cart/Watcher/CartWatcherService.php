@@ -84,7 +84,12 @@ class CartWatcherService {
 	public function getNotVisibleItems(Cart $cart) {
 		$notVisibleItems = array();
 		foreach ($cart->getItems() as $item) {
-			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($item->getProduct(), $this->domain->getId());
+			try {
+				$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($item->getProduct(), $this->domain->getId());
+			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+				$productDomain = null;
+			}
+
 			if ($productDomain === null || !$productDomain->isVisible()) {
 				$notVisibleItems[] = $item;
 			}
