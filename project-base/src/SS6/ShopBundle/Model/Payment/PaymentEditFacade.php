@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
@@ -39,18 +40,25 @@ class PaymentEditFacade {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 */
+	private $imageFacade;
+
 	public function __construct(
 		EntityManager $em,
 		PaymentRepository $paymentRepository,
 		TransportRepository $transportRepository,
 		VisibilityCalculation $visibilityCalculation,
-		Domain $domain
+		Domain $domain,
+		ImageFacade	$imageFacade
 	) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
 		$this->transportRepository = $transportRepository;
 		$this->visibilityCalculation = $visibilityCalculation;
 		$this->domain = $domain;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -61,8 +69,9 @@ class PaymentEditFacade {
 		$payment = new Payment($paymentData);
 		$this->em->persist($payment);
 		$this->em->beginTransaction();
-		$this->setAddionalDataAndFlush($payment, $paymentData);
+		$this->em->flush();
 		$this->createPaymentDomains($payment, $paymentData->getDomains());
+		$this->setAddionalDataAndFlush($payment, $paymentData);
 		$this->em->commit();
 
 		return $payment;
@@ -75,9 +84,9 @@ class PaymentEditFacade {
 	public function edit(Payment $payment, PaymentData $paymentData) {
 		$payment->edit($paymentData);
 		$this->em->beginTransaction();
-		$this->setAddionalDataAndFlush($payment, $paymentData);
 		$this->deletePaymentDomainsByPayment($payment);
 		$this->createPaymentDomains($payment, $paymentData->getDomains());
+		$this->setAddionalDataAndFlush($payment, $paymentData);
 		$this->em->commit();
 	}
 
@@ -124,7 +133,7 @@ class PaymentEditFacade {
 	private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData) {
 		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
 		$payment->setTransports($transports);
-		$payment->setImageForUpload($paymentData->getImage());
+		$this->imageFacade->uploadImage($payment, $paymentData->getImage(), null);
 		$this->em->flush();
 	}
 

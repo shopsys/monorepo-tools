@@ -8,16 +8,13 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
-use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
-use SS6\ShopBundle\Model\FileUpload\FileForUpload;
-use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 
 /**
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport extends AbstractTranslatableEntity implements EntityFileUploadInterface, OrderableEntityInterface {
+class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface {
 
 	/**
 	 * @var integer
@@ -64,18 +61,6 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 	private $deleted;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=4, nullable=true)
-	 */
-	private $image;
-
-	/**
-	 * @var string|null
-	 */
-	private $imageForUpload;
-
-	/**
 	 * @var int|null
 	 *
 	 * @ORM\Column(type="integer", nullable=true)
@@ -93,7 +78,6 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 		$this->vat = $transportData->getVat();
 		$this->hidden = $transportData->isHidden();
 		$this->deleted = false;
-		$this->image = null;
 		$this->setTranslations($transportData);
 	}
 
@@ -124,47 +108,6 @@ class Transport extends AbstractTranslatableEntity implements EntityFileUploadIn
 	 */
 	public function changeVat(Vat $vat) {
 		$this->vat = $vat;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
-	 */
-	public function getCachedFilesForUpload() {
-		$files = array();
-		if ($this->imageForUpload !== null) {
-			$files['image'] = new FileForUpload($this->imageForUpload, true, 'transport', null, FileNamingConvention::TYPE_ID);
-		}
-		return $files;
-	}
-
-	/**
-	 * @param string $key
-	 * @param string $originalFilename
-	 */
-	public function setFileAsUploaded($key, $originalFilename) {
-		if ($key === 'image') {
-			$this->image = pathinfo($originalFilename, PATHINFO_EXTENSION);
-		} else {
-			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
-		}
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getImageFilename() {
-		if ($this->image !== null) {
-			return $this->getId() . '.' . $this->image;
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string|null $cachedFilename
-	 */
-	public function setImageForUpload($cachedFilename) {
-		$this->imageForUpload = $cachedFilename;
 	}
 
 	/**

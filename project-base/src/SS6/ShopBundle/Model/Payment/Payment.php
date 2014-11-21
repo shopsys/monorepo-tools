@@ -6,9 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface;
-use SS6\ShopBundle\Model\FileUpload\FileForUpload;
-use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Payment\PaymentData;
@@ -19,7 +16,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment extends AbstractTranslatableEntity implements EntityFileUploadInterface, OrderableEntityInterface {
+class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface {
 
 	/**
 	 * @var integer
@@ -74,18 +71,6 @@ class Payment extends AbstractTranslatableEntity implements EntityFileUploadInte
 	private $deleted;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=4, nullable=true)
-	 */
-	private $image;
-
-	/**
-	 * @var string|null
-	 */
-	private $imageForUpload;
-
-	/**
 	 * @var int|null
 	 *
 	 * @ORM\Column(type="integer", nullable=true)
@@ -102,7 +87,6 @@ class Payment extends AbstractTranslatableEntity implements EntityFileUploadInte
 		$this->transports = new ArrayCollection();
 		$this->hidden = $paymentData->isHidden();
 		$this->deleted = false;
-		$this->image = null;
 		$this->setTranslations($paymentData);
 	}
 
@@ -160,47 +144,6 @@ class Payment extends AbstractTranslatableEntity implements EntityFileUploadInte
 	 */
 	public function changeVat(Vat $vat) {
 		$this->vat = $vat;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
-	 */
-	public function getCachedFilesForUpload() {
-		$files = array();
-		if ($this->imageForUpload !== null) {
-			$files['image'] = new FileForUpload($this->imageForUpload, true, 'payment', null, FileNamingConvention::TYPE_ID);
-		}
-		return $files;
-	}
-
-	/**
-	 * @param string $key
-	 * @param string $originalFilename
-	 */
-	public function setFileAsUploaded($key, $originalFilename) {
-		if ($key === 'image') {
-			$this->image = pathinfo($originalFilename, PATHINFO_EXTENSION);
-		} else {
-			throw new \SS6\ShopBundle\Model\FileUpload\Exception\InvalidFileKeyException($key);
-		}
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getImageFilename() {
-		if ($this->image !== null) {
-			return $this->getId() . '.' . $this->image;
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string|null $cachedFilename
-	 */
-	public function setImageForUpload($cachedFilename) {
-		$this->imageForUpload = $cachedFilename;
 	}
 
 	/**

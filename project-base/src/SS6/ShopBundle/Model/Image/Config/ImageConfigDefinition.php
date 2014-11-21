@@ -10,7 +10,6 @@ class ImageConfigDefinition implements ConfigurationInterface {
 
 	const CONFIG_CLASS = 'class';
 	const CONFIG_ENTITY_NAME = 'name';
-	const CONFIG_FILENAME_METHOD = 'filename_method';
 	const CONFIG_TYPES = 'types';
 	const CONFIG_TYPE_NAME = 'name';
 	const CONFIG_SIZES = 'sizes';
@@ -41,7 +40,6 @@ class ImageConfigDefinition implements ConfigurationInterface {
 			->children()
 				->scalarNode(self::CONFIG_ENTITY_NAME)->isRequired()->cannotBeEmpty()->end()
 				->scalarNode(self::CONFIG_CLASS)->isRequired()->cannotBeEmpty()->end()
-				->scalarNode(self::CONFIG_FILENAME_METHOD)->cannotBeEmpty()->end()
 				->arrayNode(self::CONFIG_SIZES)
 					->defaultValue(array())
 					->prototype('array')
@@ -58,7 +56,6 @@ class ImageConfigDefinition implements ConfigurationInterface {
 					->prototype('array')
 					->children()
 						->scalarNode(self::CONFIG_TYPE_NAME)->isRequired()->cannotBeEmpty()->end()
-						->scalarNode(self::CONFIG_FILENAME_METHOD)->isRequired()->cannotBeEmpty()->end()
 						->arrayNode(self::CONFIG_SIZES)
 							->defaultValue(array())
 							->prototype('array')

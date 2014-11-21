@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -38,18 +39,25 @@ class TransportEditFacade {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 */
+	private $imageFacade;
+
 	public function __construct(
 		EntityManager $em,
 		TransportRepository $transportRepository,
 		PaymentRepository $paymentRepository,
 		VisibilityCalculation $visibilityCalculation,
-		Domain $domain
+		Domain $domain,
+		ImageFacade $imageFacade
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
 		$this->paymentRepository = $paymentRepository;
 		$this->visibilityCalculation = $visibilityCalculation;
 		$this->domain = $domain;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -60,8 +68,10 @@ class TransportEditFacade {
 		$transport = new Transport($transportData);
 		$this->em->persist($transport);
 		$this->em->beginTransaction();
-		$this->setAdditionalDataAndFlush($transport, $transportData);
+		$this->em->flush();
 		$this->createTransportDomains($transport, $transportData->getDomains());
+		$this->imageFacade->uploadImage($transport, $transportData->getImage(), null);
+		$this->em->flush();
 		$this->em->commit();
 
 		return $transport;
@@ -75,9 +85,10 @@ class TransportEditFacade {
 		$transport->edit($transportData);
 
 		$this->em->beginTransaction();
-		$this->setAdditionalDataAndFlush($transport, $transportData);
 		$this->deleteTransportDomainsByTransport($transport);
 		$this->createTransportDomains($transport, $transportData->getDomains());
+		$this->imageFacade->uploadImage($transport, $transportData->getImage(), null);
+		$this->em->flush();
 		$this->em->commit();
 	}
 
@@ -126,15 +137,6 @@ class TransportEditFacade {
 		foreach ($transportDomains as $transportDomain) {
 			$this->em->remove($transportDomain);
 		}
-		$this->em->flush();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
-	 */
-	private function setAdditionalDataAndFlush(Transport $transport, TransportData $transportData) {
-		$transport->setImageForUpload($transportData->getImage());
 		$this->em->flush();
 	}
 

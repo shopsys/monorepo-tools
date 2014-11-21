@@ -44,7 +44,6 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 		$domainId
 	) {
 		$sliderItem = new SliderItem($sliderItemData, $domainId);
-		$sliderItem->setImage('jpg');
 		$manager->persist($sliderItem);
 	}
 }

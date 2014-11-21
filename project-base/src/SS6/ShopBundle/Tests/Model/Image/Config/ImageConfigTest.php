@@ -21,7 +21,6 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_CLASS => stdClass::class,
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
-				ImageConfigDefinition::CONFIG_FILENAME_METHOD => 'Method_0',
 				ImageConfigDefinition::CONFIG_SIZES => array(
 					array(
 						ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_0_1',
@@ -33,7 +32,6 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 				ImageConfigDefinition::CONFIG_TYPES => array(
 					array(
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
-						ImageConfigDefinition::CONFIG_FILENAME_METHOD => 'Method_1',
 						ImageConfigDefinition::CONFIG_SIZES => array(
 							array(
 								ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_1_1',
@@ -51,14 +49,12 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 					),
 					array(
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_2',
-						ImageConfigDefinition::CONFIG_FILENAME_METHOD => 'TypeName_2',
 						ImageConfigDefinition::CONFIG_SIZES => array(),
 					),
 				),
 				array(
 					ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 					ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_2',
-					ImageConfigDefinition::CONFIG_FILENAME_METHOD => 'Method_3',
 					ImageConfigDefinition::CONFIG_SIZES => array(),
 					ImageConfigDefinition::CONFIG_TYPES => array(),
 				),

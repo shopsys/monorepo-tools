@@ -9,9 +9,9 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="product-image">
 				<span>
-					{% if imageExists(productDetail.product, 'default') %}
-						<a href="{{ imageUrl(productDetail.product, 'default') }}" class="js-gallery">
-							{{ image(productDetail.product, { size: 'default', width: '550px' }) }}
+					{% if imageExists(productDetail.product, 'original') %}
+						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-gallery">
+							{{ image(productDetail.product, { size: 'original', width: '550px' }) }}
 						</a>
 					{% else %}
 						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
