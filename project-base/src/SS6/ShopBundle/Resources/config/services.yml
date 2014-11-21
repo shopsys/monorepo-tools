@@ -500,6 +500,10 @@ services:
     tags:
       - { name: router, priority: 70 }
 
+  ss6.shop.router.domain_router_factory:
+    class: SS6\ShopBundle\Component\Router\DomainRouterFactory
+    arguments: [%router.resource%]
+
   ss6.shop.router.localized_router_factory:
     class: SS6\ShopBundle\Component\Router\LocalizedRouterFactory
     arguments: [%ss6_shop.router.locale_routers%]

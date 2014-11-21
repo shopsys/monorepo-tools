@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Customer\Mail;
 
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Setting\Setting;
-use Symfony\Cmf\Component\Routing\ChainRouter;
 
 class CustomerMailService {
 
@@ -23,17 +23,13 @@ class CustomerMailService {
 	private $setting;
 
 	/**
-	 * @var \Symfony\Component\Routing\Router
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
 	 */
-	private $router;
+	private $domainRouterFactory;
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
-	 * @param \Symfony\Cmf\Component\Routing\ChainRouter $router
-	 */
-	public function __construct(Setting $setting, ChainRouter $router) {
+	public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory) {
 		$this->setting = $setting;
-		$this->router = $router;
+		$this->domainRouterFactory = $domainRouterFactory;
 	}
 
 	/**
@@ -57,12 +53,14 @@ class CustomerMailService {
 	 * @return array
 	 */
 	private function getVariablesReplacements(User $user) {
+		$router = $this->domainRouterFactory->getRouter($user->getDomainId());
+
 		return array(
 			self::VARIABLE_FIRST_NAME => $user->getFirstName(),
 			self::VARIABLE_LAST_NAME => $user->getLastName(),
 			self::VARIABLE_EMAIL => $user->getEmail(),
-			self::VARIABLE_URL => $this->router->generate('front_homepage', array(), true),
-			self::VARIABLE_LOGIN_PAGE => $this->router->generate('front_login', array(), true),
+			self::VARIABLE_URL => $router->generate('front_homepage', array(), true),
+			self::VARIABLE_LOGIN_PAGE => $router->generate('front_login', array(), true),
 		);
 	}
 
