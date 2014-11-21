@@ -22,8 +22,8 @@
 				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-items__block">
 					<div class="list-items__image">
 						<span>
-							{% if imageExists(productDetail.product, 'origin') %}
-								{{ image(productDetail.product, { size: 'origin', height: '200px' }) }}
+							{% if imageExists(productDetail.product, 'original') %}
+								{{ image(productDetail.product, { size: 'original', height: '200px' }) }}
 							{% else %}
 								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
 							{% endif %}

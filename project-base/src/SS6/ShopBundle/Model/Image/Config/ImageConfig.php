@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Image\Config;
 
 class ImageConfig {
 
-	const ORIGINAL_SIZE_NAME = 'origin';
+	const ORIGINAL_SIZE_NAME = 'original';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
