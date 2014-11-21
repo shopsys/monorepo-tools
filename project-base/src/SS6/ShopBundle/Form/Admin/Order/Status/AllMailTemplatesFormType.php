@@ -26,7 +26,8 @@ class AllMailTemplatesFormType extends AbstractType {
 			->add('registrationTemplate', new MailTemplateFormType())
 			->add('orderStatusTemplates', 'collection', array(
 				'type' => new MailTemplateFormType(),
-			));
+			))
+			->add('domainId', 'hidden');
 	}
 
 	/**

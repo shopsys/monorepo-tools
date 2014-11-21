@@ -104,7 +104,7 @@ class MailTemplateFacade {
 		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
 
 		$allMailTemplatesData = new AllMailTemplatesData();
-
+		$allMailTemplatesData->setDomainId($domainId);
 		$registrationMailTemplatesData = new MailTemplateData();
 		$registrationMailTemplate = $this->mailTemplateRepository
 			->findByNameAndDomainId(MailTemplate::REGISTRATION_CONFIRM_NAME, $domainId);

@@ -16,6 +16,11 @@ class AllMailTemplatesData {
 	private $registrationTemplate;
 
 	/**
+	 * @var int
+	 */
+	private $domainId;
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplateData[]
 	 */
 	public function getOrderStatusTemplates() {
@@ -41,6 +46,20 @@ class AllMailTemplatesData {
 	 */
 	public function setRegistrationTemplate($registrationTemplate) {
 		$this->registrationTemplate = $registrationTemplate;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDomainId() {
+		return $this->domainId;
+	}
+
+	/**
+	 * @param int $domainId
+	 */
+	public function setDomainId($domainId) {
+		$this->domainId = $domainId;
 	}
 
 	/**

@@ -33,7 +33,7 @@ class MailController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$mailTemplateFacade->saveMailTemplatesData($allMailTemplatesData->getAllTemplates(), $selectedDomain->getId());
+			$mailTemplateFacade->saveMailTemplatesData($allMailTemplatesData->getAllTemplates(), $allMailTemplatesData->getDomainId());
 
 			$flashMessageSender->addSuccess('Nastavení šablony e-mailu bylo upraveno');
 			return $this->redirect($this->generateUrl('admin_mail_template'));
