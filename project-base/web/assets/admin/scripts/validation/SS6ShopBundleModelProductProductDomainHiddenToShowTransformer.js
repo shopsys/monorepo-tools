@@ -1,4 +1,3 @@
-
 function SS6ShopBundleComponentTransformersInverseArrayValuesTransformer() {
 	this.reverseTransform = function(value, ele) {
 		$.each(ele.children, function(){

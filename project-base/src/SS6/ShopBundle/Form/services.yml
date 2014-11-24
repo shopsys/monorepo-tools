@@ -28,6 +28,11 @@ services:
     tags:
       - { name: form.type, alias: domain }
 
+  ss6.shop.form.money:
+    class: SS6\ShopBundle\Form\MoneyType
+    tags:
+      - { name: form.type_extension, alias: money }
+
   ss6.shop.locale.text:
     class: SS6\ShopBundle\Form\Locale\LocalizedType
     tags:

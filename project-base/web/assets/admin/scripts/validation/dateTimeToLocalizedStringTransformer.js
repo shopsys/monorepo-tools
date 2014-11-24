@@ -1,4 +1,3 @@
-
 function SymfonyComponentFormExtensionCoreDataTransformerDateTimeToLocalizedStringTransformer() {
 	this.reverseTransform = function(value) {
 		if (this.pattern.toLowerCase() === 'dd.mm.yyyy') {

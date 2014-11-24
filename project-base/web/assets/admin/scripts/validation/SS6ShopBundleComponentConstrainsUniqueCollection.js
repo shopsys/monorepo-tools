@@ -41,4 +41,4 @@ var SS6ShopBundleComponentConstrainsUniqueCollection = function() {
 			return value1 === value2;
 		}
 	}
-}
+};
