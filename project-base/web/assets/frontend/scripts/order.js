@@ -144,9 +144,9 @@
 		var checkedPayment = $('input.payment:checked');
 
 		if (checkedTransport.length === 1 && checkedPayment.length === 1) {
-			$('#transportAndPayment_submit').removeClass('button--alter');
+			$('#transportAndPayment_save').removeClass('button--alter');
 		} else {
-			$('#transportAndPayment_submit').addClass('button--alter');
+			$('#transportAndPayment_save').addClass('button--alter');
 		}
 	};
 
