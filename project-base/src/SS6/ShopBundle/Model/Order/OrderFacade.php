@@ -162,7 +162,7 @@ class OrderFacade {
 		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
 		$orderPayment = new OrderPayment(
 			$order,
-			$payment->getName(),
+			$payment->getName($locale),
 			$paymentPrice->getPriceWithoutVat(),
 			$paymentPrice->getPriceWithVat(),
 			$payment->getVat()->getPercent(),
