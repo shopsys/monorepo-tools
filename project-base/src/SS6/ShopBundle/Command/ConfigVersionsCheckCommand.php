@@ -39,7 +39,6 @@ class ConfigVersionsCheckCommand {
 	 * @return int|null
 	 */
 	public function check() {
-		$this->output->writeln('Start checking configs.');
 		$this->errors = [];
 
 		$this->processConfigVersion('domains.yml', self::ROOT_SETTING_VALUE);
@@ -52,7 +51,7 @@ class ConfigVersionsCheckCommand {
 			$this->output->writeln('<fg=red>' . implode(PHP_EOL, $this->errors) . '</fg=red>');
 			return 1;
 		} else {
-			$this->output->writeln('<fg=green>All configs are actual.</fg=green>');
+			$this->output->writeln('<fg=green>All configs are up-to-date.</fg=green>');
 		}
 	}
 
@@ -65,7 +64,7 @@ class ConfigVersionsCheckCommand {
 		$distConfigVersion = $this->getConfigVersion($configFilepath. '.dist', $rootParameter);
 		$configVersion = $this->getConfigVersion($configFilepath, $rootParameter);
 		if ($configVersion != $distConfigVersion) {
-			$this->errors[] = 'Your config ' . $configFilename . ' has wrong version, please check it.';
+			$this->errors[] = 'Config file ' . $configFilename . ' has wrong version, please check it.';
 		}
 	}
 
@@ -95,7 +94,7 @@ class ConfigVersionsCheckCommand {
 		if ($root !== null && array_key_exists(self::VERSION_LABEL_IN_CONFIG, $root)) {
 			$version = $root[self::VERSION_LABEL_IN_CONFIG];
 		} else {
-			$this->errors[] = 'In config ' . $filename . ' isn\'t set config version.';
+			$this->errors[] = 'Config file ' . $filename . ' is missing version information.';
 		}
 		return $version;
 	}
