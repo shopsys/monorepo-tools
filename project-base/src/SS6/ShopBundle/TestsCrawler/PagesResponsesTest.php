@@ -19,6 +19,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 			['admin/customer/edit/1'],
 			['admin/customer/new/'],
 			['admin/dashboard/'],
+			['admin/department/list/'],
 			['admin/mail/setting/'],
 			['admin/mail/template/'],
 			['admin/order/edit/1'],
