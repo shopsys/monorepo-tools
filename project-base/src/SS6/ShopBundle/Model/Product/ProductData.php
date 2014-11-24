@@ -89,6 +89,11 @@ class ProductData {
 	private $hiddenOnDomains;
 
 	/**
+	 * @var array
+	 */
+	private $departments;
+
+	/**
 	 * @param array $names
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -104,6 +109,7 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 * @param array $parameters
 	 * @param array $hiddenOnDomains
+	 * @param array $departments
 	 */
 	public function __construct(
 		$names = array(),
@@ -120,7 +126,8 @@ class ProductData {
 		$image = null,
 		$availability = null,
 		array $parameters = array(),
-		array $hiddenOnDomains = array()
+		array $hiddenOnDomains = array(),
+		array $departments = array()
 	) {
 		$this->names = $names;
 		$this->catnum = $catnum;
@@ -137,6 +144,7 @@ class ProductData {
 		$this->availability = $availability;
 		$this->parameters = $parameters;
 		$this->hiddenOnDomains = $hiddenOnDomains;
+		$this->departments = $departments;
 	}
 
 	/**
@@ -229,6 +237,13 @@ class ProductData {
 	 */
 	public function getParameters() {
 		return $this->parameters;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getDepartments() {
+		return $this->departments;
 	}
 
 	/**
@@ -351,6 +366,13 @@ class ProductData {
 	}
 
 	/**
+	 * @param array $departments
+	 */
+	public function setDepartments(array $departments) {
+		$this->departments = $departments;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
 	 */
@@ -382,6 +404,7 @@ class ProductData {
 			}
 		}
 		$this->setHiddenOnDomains($hiddenOnDomains);
+		$this->setDepartments($product->getDepartments()->toArray());
 	}
 
 }

@@ -48,6 +48,11 @@ class ProductFormType extends AbstractType {
 	private $inverseArrayValuesTransformer;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	private $departments;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
@@ -59,13 +64,15 @@ class ProductFormType extends AbstractType {
 		array $vats,
 		array $availabilities,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
-		InverseArrayValuesTransformer $inverseArrayValuesTransformer
+		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
+		array $departments
 	) {
 		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
+		$this->departments = $departments;
 	}
 
 	/**
@@ -189,6 +196,12 @@ class ProductFormType extends AbstractType {
 					)),
 				),
 				'error_bubbling' => false,
+			))
+			->add('departments', 'choice', array(
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->departments, 'name', array(), null, 'id'),
+				'multiple' => true,
+				'expanded' => true,
 			))
 			->add('save', 'submit');
 	}
