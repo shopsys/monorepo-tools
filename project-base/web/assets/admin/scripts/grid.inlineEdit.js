@@ -118,6 +118,7 @@
 				var $formRow = SS6.grid.inlineEdit.createFormRow($grid, formData);
 				$formRow.find('.js-inline-edit-saving').hide();
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
+				$formRow.find('input[type=text]:first').focus();
 			}
 		});
 	}
