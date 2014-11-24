@@ -68,7 +68,7 @@
           route: admin_slider_edit
           visible: false
     - label: 'Zboží na titulní stránce'
-      route: admin_topproducts_index
+      route: admin_topproduct_list
 
 - label: 'Nastavení'
   route: admin_overview_list

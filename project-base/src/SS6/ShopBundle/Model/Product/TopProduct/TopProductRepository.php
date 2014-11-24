@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 use SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException;
 
@@ -40,7 +41,7 @@ class TopProductRepository {
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
 	 */
-	public function getByProductAndDomainId($product, $domainId) {
+	public function getByProductAndDomainId(Product $product, $domainId) {
 		return $this->getOneByCriteria(array('product' => $product, 'domainId' => $domainId));
 	}
 
@@ -48,12 +49,8 @@ class TopProductRepository {
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
 	 */
-	public function getAll($domainId = null) {
-		$criteria = array();
-		if ($domainId !== null) {
-			$criteria['domainId'] = (int)$domainId;
-		}
-		return $this->getTopProductRepository()->findBy($criteria);
+	public function getAll($domainId) {
+		return $this->getTopProductRepository()->findBy(array('domainId' => $domainId));
 	}
 
 	/**

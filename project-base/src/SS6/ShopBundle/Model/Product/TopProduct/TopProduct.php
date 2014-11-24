@@ -6,9 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 
 /**
- * @ORM\Table(name="products_top",
- *			uniqueConstraints={@ORM\UniqueConstraint(name="product_domain_unique",columns={"product_id", "domain_id"})},
- *			indexes={@ORM\Index(name="idx_entity_id_type", columns={"product_id", "domain_id"})})
+ * @ORM\Table(
+ *	name="products_top",
+ *	uniqueConstraints={
+ *		@ORM\UniqueConstraint(name="product_domain_unique",columns={"product_id", "domain_id"})
+ *	},
+ *	indexes={
+ *		@ORM\Index(name="idx_entity_id_type", columns={"product_id", "domain_id"})
+ *	}
+ * )
  * @ORM\Entity
  */
 class TopProduct {
@@ -41,7 +47,6 @@ class TopProduct {
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
 	 */
 	public function __construct($domainId, TopProductData $topProductData) {
-		$this->id = $topProductData->getId();
 		$this->product = $topProductData->getProduct();
 		$this->domainId = $domainId;
 	}
@@ -71,7 +76,6 @@ class TopProduct {
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
 	 */
 	public function edit(TopProductData $topProductData) {
-		$this->id = $topProductData->getId();
 		$this->product = $topProductData->getProduct();
 	}
 

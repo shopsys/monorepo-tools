@@ -76,7 +76,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param int $id
+	 * @param int|null $id
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProductData
 	 */
 	protected function getFormDataObject($id = null) {

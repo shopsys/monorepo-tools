@@ -9,17 +9,27 @@ use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 
 class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
 
-	public function testProductIdToProductTransformer() {
-
+	public function testTransform() {
+		$productId = 1;
 		$product = $this->getMockBuilder(Product::class)
 			->setMethods(['getId'])
 			->disableOriginalConstructor()
 			->getMock();
-		$product->expects($this->atLeastOnce())->method('getId')->willReturn(1);
+		$product->expects($this->atLeastOnce())->method('getId')->willReturn($productId);
+
+		$productRepository = $this->getMock(ProductRepository::class, [], [], '', false);
+		$productIdToProductTransformer = new ProductIdToProductTransformer($productRepository);
+
+		$this->assertEquals($productId, $productIdToProductTransformer->transform($product));
+		$this->assertNull($productIdToProductTransformer->transform(null));
+	}
+
+	public function testReverseTransform() {
+		$productId = 1;
+		$product = $this->getMockBuilder(Product::class, [], [], '', false);
 
 		$productsRepositoryGetByIdValues = [
-			[1, $product],
-			[99999, null]
+			[$productId, $product],
 		];
 
 		$productRepository = $this->getMockBuilder(ProductRepository::class)
@@ -30,9 +40,7 @@ class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
 
 		$productIdToProductTransformer = new ProductIdToProductTransformer($productRepository);
 
-		$this->assertEquals(1, $productIdToProductTransformer->transform($product));
-		$this->assertEquals(null, $productIdToProductTransformer->transform(null));
-		$this->assertEquals($product, $productIdToProductTransformer->reverseTransform(1));
-		$this->assertEquals(null, $productIdToProductTransformer->reverseTransform(null));
+		$this->assertEquals($product, $productIdToProductTransformer->reverseTransform($productId));
+		$this->assertNull($productIdToProductTransformer->reverseTransform(null));
 	}
 }

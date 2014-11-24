@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class TopProductsController extends Controller {
+class TopProductController extends Controller {
 
 	/**
-	 * @Route("/product/top_products_homepage/")
+	 * @Route("/product/top_product/list/")
 	 */
-	public function indexAction() {
+	public function listAction() {
 		$topProductInlineEdit = $this->get('ss6.shop.product.top_product.top_product_inline_edit');
 		/* @var $topProductInlineEdit \SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit */
 
@@ -22,7 +22,7 @@ class TopProductsController extends Controller {
 	}
 
 	/**
-	 * @Route("/product/top_products_homepage/delete/{id}", requirements={"id" = "\d+"})
+	 * @Route("/product/top_product/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteAction($id) {

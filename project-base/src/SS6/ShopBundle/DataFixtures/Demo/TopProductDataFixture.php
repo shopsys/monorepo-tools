@@ -9,9 +9,9 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 
-class TopProductsDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	private $productsData = array(
+	private $topProductsOnDomainData = array(
 		// $productReferenceName => $domainId
 		'product_7' => 1,
 		'product_17' => 1,
@@ -25,7 +25,7 @@ class TopProductsDataFixture extends AbstractReferenceFixture implements Depende
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		foreach ($this->productsData as $productReferenceName => $domainId) {
+		foreach ($this->topProductsOnDomainData as $productReferenceName => $domainId) {
 			$product = $this->getReference($productReferenceName);
 			$this->createTopProduct($manager, $product, $domainId);
 		}

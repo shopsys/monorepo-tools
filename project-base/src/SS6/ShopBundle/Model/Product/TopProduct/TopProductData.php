@@ -7,30 +7,16 @@ use SS6\ShopBundle\Model\Product\Product;
 class TopProductData {
 
 	/**
-	 * @var int
-	 */
-	private $id;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 */
 	private $product;
 
 	/**
 	 * @param int $domainId
-	 * @param int $id
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
-	public function __construct($id = null, $product = null) {
-		$this->id = $id;
+	public function __construct($product = null) {
 		$this->product = $product;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
 	}
 
 	/**
