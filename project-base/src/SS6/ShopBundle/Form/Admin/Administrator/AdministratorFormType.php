@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Administrator;
 
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
-use SS6\ShopBundle\Component\Constrains\FieldsAreNotSame;
+use SS6\ShopBundle\Component\Constrains\FieldsAreNotIdentical;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -46,6 +46,9 @@ class AdministratorFormType extends AbstractType {
 			->add('password', 'repeated', array(
 				'type' => 'password',
 				'required' => $this->scenario === self::SCENARIO_CREATE,
+				'options' => array(
+					'attr' => array('autocomplete' => 'off'),
+				),
 				'first_options' => array(
 					'constraints' => array(
 						new Constraints\NotBlank(array(
@@ -63,13 +66,14 @@ class AdministratorFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => AdministratorData::class,
 			'attr' => array('novalidate' => 'novalidate'),
-			'constraints' => array(new FieldsAreNotSame(array(
-				'field1' => 'userName',
-				'field2' => 'password',
-				'fieldToShowError' => 'password',
-				'message' => 'Heslo nesmí být stejné jako přihlašovací jméno',
-				)
-			)),
+			'constraints' => array(
+				new FieldsAreNotIdentical(array(
+					'field1' => 'userName',
+					'field2' => 'password',
+					'errorPath' => 'password',
+					'message' => 'Heslo nesmí být stejné jako přihlašovací jméno',
+				)),
+			),
 		));
 	}
 

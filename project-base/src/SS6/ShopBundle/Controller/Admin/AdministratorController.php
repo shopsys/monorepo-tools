@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends Controller {
 
-
 	/**
 	 * @Route("/administrator/list/")
 	 * @param Symfony\Component\HttpFoundation\Request $request
