@@ -36,19 +36,6 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
-	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail[]
-	 */
-	public function getProductDetailsForProductList(ProductListOrderingSetting $orderingSetting) {
-		$products = $this->productRepository->getProductsForProductList(
-			$this->domain->getId(),
-			$orderingSetting
-		);
-
-		return $this->productDetailFactory->getDetailsForProducts($products);
-	}
-
-	/**
 	 * @param int $productId
 	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail
 	 */

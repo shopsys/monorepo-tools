@@ -69,21 +69,6 @@ class ProductRepository {
 	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	public function getProductsForProductList(
-		$domainId,
-		ProductListOrderingSetting $orderingSetting
-	) {
-		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
-		$this->applyOrdering($qb, $orderingSetting);
-
-		return $qb->getQuery()->getResult();
-	}
-
-	/**
-	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
 	 * @return PaginationResult
