@@ -132,7 +132,7 @@ class ProductController extends Controller {
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
-		$grid->addColumn('name', 'p.name', 'Název', true);
+		$grid->addColumn('name', 'pt.name', 'Název', true);
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');

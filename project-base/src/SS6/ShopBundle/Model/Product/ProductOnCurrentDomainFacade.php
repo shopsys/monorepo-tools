@@ -79,6 +79,7 @@ class ProductOnCurrentDomainFacade {
 	) {
 		return $this->productRepository->getPaginationResultForProductList(
 			$this->domain->getId(),
+			$this->domain->getLocale(),
 			$orderingSetting,
 			$page,
 			$limit

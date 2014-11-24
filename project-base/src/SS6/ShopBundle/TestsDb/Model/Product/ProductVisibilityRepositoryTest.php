@@ -19,7 +19,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$product = $productEditFacade->create($productData);
 
@@ -48,7 +48,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setSellingFrom($sellingFrom);
 		$product = $productEditFacade->create($productData);
@@ -78,7 +78,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setSellingTo($sellingTo);
 		$product = $productEditFacade->create($productData);
@@ -110,7 +110,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setSellingFrom($sellingFrom);
 		$productData->setSellingTo($sellingTo);
@@ -140,7 +140,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setPrice(0);
 		$product1 = $productEditFacade->create($productData);

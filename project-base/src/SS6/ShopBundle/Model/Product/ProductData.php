@@ -13,9 +13,9 @@ use DateTime;
 class ProductData {
 
 	/**
-	 * @var string|null
+	 * @var array
 	 */
-	private $name;
+	private $names;
 
 	/**
 	 * @var string|null
@@ -33,9 +33,9 @@ class ProductData {
 	private $ean;
 
 	/**
-	 * @var string|null
+	 * @var array
 	 */
-	private $description;
+	private $descriptions;
 
 	/**
 	 * @var string
@@ -89,11 +89,11 @@ class ProductData {
 	private $hiddenOnDomains;
 
 	/**
-	 * @param string|null $name
+	 * @param array $names
 	 * @param string|null $catnum
 	 * @param string|null $partno
 	 * @param string|null $ean
-	 * @param string|null $description
+	 * @param array $descriptions
 	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
@@ -106,11 +106,11 @@ class ProductData {
 	 * @param array $hiddenOnDomains
 	 */
 	public function __construct(
-		$name = null,
+		$names = array(),
 		$catnum = null,
 		$partno = null,
 		$ean = null,
-		$description = null,
+		$descriptions = array(),
 		$price = null,
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
@@ -122,11 +122,11 @@ class ProductData {
 		array $parameters = array(),
 		array $hiddenOnDomains = array()
 	) {
-		$this->name = $name;
+		$this->names = $names;
 		$this->catnum = $catnum;
 		$this->partno = $partno;
 		$this->ean = $ean;
-		$this->description = $description;
+		$this->descriptions = $descriptions;
 		$this->price = Condition::ifNull($price, 0);
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
@@ -140,10 +140,10 @@ class ProductData {
 	}
 
 	/**
-	 * @return string|null
+	 * @return array
 	 */
-	public function getName() {
-		return $this->name;
+	public function getNames() {
+		return $this->names;
 	}
 
 	/**
@@ -168,10 +168,10 @@ class ProductData {
 	}
 
 	/**
-	 * @return string|null
+	 * @return array
 	 */
-	public function getDescription() {
-		return $this->description;
+	public function getDescriptions() {
+		return $this->descriptions;
 	}
 
 	/**
@@ -232,10 +232,10 @@ class ProductData {
 	}
 
 	/**
-	 * @param string|null $name
+	 * @param array $names
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setNames(array $names) {
+		$this->names = $names;
 	}
 
 	/**
@@ -260,10 +260,10 @@ class ProductData {
 	}
 
 	/**
-	 * @param string|null $description
+	 * @param array $descriptions
 	 */
-	public function setDescription($description) {
-		$this->description = $description;
+	public function setDescriptions(array $descriptions) {
+		$this->descriptions = $descriptions;
 	}
 
 	/**
@@ -355,11 +355,19 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
 	 */
 	public function setFromEntity(Product $product, array $productDomains) {
-		$this->setName($product->getName());
+		$translations = $product->getTranslations();
+		$names = array();
+		$desctiptions = array();
+		foreach ($translations as $translation) {
+			$names[$translation->getLocale()] = $translation->getName();
+			$desctiptions[$translation->getLocale()] = $translation->getDescription();
+		}
+		$this->setNames($names);
+		$this->setDescriptions($desctiptions);
+
 		$this->setCatnum($product->getCatnum());
 		$this->setPartno($product->getPartno());
 		$this->setEan($product->getEan());
-		$this->setDescription($product->getDescription());
 		$this->setPrice($product->getPrice());
 		$this->setVat($product->getVat());
 		$this->setSellingFrom($product->getSellingFrom());

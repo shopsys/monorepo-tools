@@ -108,10 +108,11 @@ class CartItem {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function getName() {
-		return $this->getProduct()->getName();
+	public function getName($locale = null) {
+		return $this->getProduct()->getName($locale);
 	}
 
 	/**
