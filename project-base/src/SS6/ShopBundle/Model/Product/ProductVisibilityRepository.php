@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
+use SS6\ShopBundle\Model\Domain\Domain;
 
 class ProductVisibilityRepository {
 
@@ -14,10 +15,16 @@ class ProductVisibilityRepository {
 	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
-	public function __construct(EntityManager $em) {
+	private $domain;
+
+	public function __construct(
+		EntityManager $em,
+		Domain $domain
+	) {
 		$this->em = $em;
+		$this->domain = $domain;
 	}
 
 	public function refreshProductsVisibility() {
@@ -36,24 +43,41 @@ class ProductVisibilityRepository {
 	private function refreshProductDomainsVisibility() {
 		$now = new DateTime();
 
-		$query = $this->em->createNativeQuery('UPDATE product_domains AS pd
-				SET visible = CASE
-						WHEN (
-							pd.hidden = FALSE
-							AND
-							(p.selling_from IS NULL OR p.selling_from <= :now)
-							AND
-							(p.selling_to IS NULL OR p.selling_to >= :now)
-							AND
-							p.price > 0
-						)
-						THEN TRUE
-						ELSE FALSE
-					END
+		$domains = $this->domain->getAll();
 
-			FROM products AS p
-			WHERE p.id = pd.product_id', new ResultSetMapping());
-		$query->execute(array('now' => $now));
+		foreach ($domains as $domain) {
+			$query = $this->em->createNativeQuery('UPDATE product_domains AS pd
+					SET visible = CASE
+							WHEN (
+								pd.hidden = FALSE
+								AND
+								(p.selling_from IS NULL OR p.selling_from <= :now)
+								AND
+								(p.selling_to IS NULL OR p.selling_to >= :now)
+								AND
+								p.price > 0
+								AND EXISTS (
+									SELECT 1
+									FROM product_translations AS pt
+									WHERE pt.translatable_id = pd.product_id
+										AND pt.locale = :locale
+										AND pt.name IS NOT NULL
+								)
+							)
+							THEN TRUE
+							ELSE FALSE
+						END
+
+				FROM products AS p
+				WHERE p.id = pd.product_id
+					AND pd.domain_id = :domainId', new ResultSetMapping());
+
+			$query->execute(array(
+				'now' => $now,
+				'locale' => $domain->getLocale(),
+				'domainId' => $domain->getId(),
+			));
+		}
 	}
 
 }
