@@ -4,7 +4,7 @@
 - label: 'Objednávky'
   route: admin_order_list
   items:
-    - label: 'Přijaté objednávky'
+    - label: 'Přehled objednávek'
       route: admin_order_list
       items:
         - label: 'Editace objednávky'
@@ -27,7 +27,7 @@
 - label: 'Zboží'
   route: admin_product_list
   items:
-    - label: 'Katalog zboží'
+    - label: 'Přehled zboží'
       route: admin_product_list
       items:
         - label: 'Nové zboží'
@@ -37,10 +37,19 @@
           route: admin_product_edit
           visible: false
 
+- label: 'Cenotvorba'
+  route: admin_pricinggroup_list
+  items:
+    - label: 'Cenové skupiny'
+      route: admin_pricinggroup_list
+
+    - label: 'DPH a zaokrouhlování'
+      route: admin_vat_list
+
 - label: 'Marketing'
   route: admin_article_list
   items:
-    - label: 'Články'
+    - label: 'Přehled článků'
       route: admin_article_list
       items:
         - label: 'Nový článek'
@@ -63,30 +72,8 @@
   route: admin_overview_list
   type: settings
   items:
-    - label: 'Identifikace eshopu'
+    - label: 'Identifikace e-shopu'
       route: admin_overview_list
-
-    - label: 'Cenotvorba'
-      route: admin_pricinggroup_list
-      items:
-        - label: 'Cenové skupiny'
-          route: admin_pricinggroup_list
-
-    - label: 'Dostupnost'
-      route: admin_availability_list
-
-    - label: 'Parametry'
-      route: admin_parameter_list
-
-    - label: 'Stavy objednávek'
-      route: admin_orderstatus_list
-      items:
-        - label: 'Editace stavu objednávek'
-          route: admin_orderstatus_edit
-          visible: false
-        - label: 'Nový stav objednávek'
-          route: admin_orderstatus_new
-          visible: false
 
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
@@ -104,23 +91,45 @@
           route: admin_payment_edit
           visible: false
 
-    - label: 'Sazby DPH a zaokrouhlování'
-      route: admin_vat_list
-
-    - label: 'Nastavení emailů'
-      route: admin_mail_setting
-
-    - label: 'Šablony emailů'
-      route: admin_mail_template
-
-    - label: 'Překlady konstant'
-      route: admin_translation_list
-
     - label: 'Komunikace se zákazníkem'
       route: admin_customercommunication_index
       items:
-        - label: 'Potvrzení objednávky'
+        - label: 'Nastavení emailů'
+          route: admin_mail_setting
+
+        - label: 'Šablony emailů'
+          route: admin_mail_template
+
+        - label: 'Stránka s potvrzením objednávky'
           route: admin_customercommunication_ordersubmitted
+
+    - label: 'Seznamy a číselníky'
+      route: admin_availability_list
+      items:
+        - label: 'Dostupnost'
+          route: admin_availability_list
+
+        - label: 'Parametry'
+          route: admin_parameter_list
+
+        - label: 'Stavy objednávek'
+          route: admin_orderstatus_list
+          items:
+            - label: 'Editace stavu objednávek'
+              route: admin_orderstatus_edit
+              visible: false
+            - label: 'Nový stav objednávek'
+              route: admin_orderstatus_new
+              visible: false
+
+    - label: 'Překlady'
+      route: admin_translation_list
+      items:
+        - label: 'Překlady konstant'
+          route: admin_translation_list
+
+        - label: 'URL adresy'
+          route: admin_superadmin_urls
 
     - label: 'Superadmin'
       route: admin_superadmin_index
@@ -131,9 +140,7 @@
             - label: 'Detail ikony'
               route: admin_superadmin_icondetail
               visible: false
-        - label: 'Chybové stránky'
+        - label: 'Chybové hlášky'
           route: admin_superadmin_errors
-        - label: 'Cenotvorba'
+        - label: 'Nastavení prodeje s/bez DPH'
           route: admin_superadmin_pricing
-        - label: 'URL adresy'
-          route: admin_superadmin_urls
