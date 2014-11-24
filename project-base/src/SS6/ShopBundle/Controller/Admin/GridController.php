@@ -46,7 +46,7 @@ class GridController extends Controller {
 			);
 		} catch (\SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
-			$responseData['errors'] = $e->getFormErrors();
+			$responseData['errors'] = array_unique($e->getFormErrors());
 		}
 
 		return new JsonResponse($responseData);

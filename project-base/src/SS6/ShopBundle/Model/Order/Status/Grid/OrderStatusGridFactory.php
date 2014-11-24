@@ -49,7 +49,7 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'ost.name', 'Název', true);
+		$grid->addColumn('names', 'ost.name', 'Název', true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_orderstatus_deleteconfirm', array('id' => 'os.id'))

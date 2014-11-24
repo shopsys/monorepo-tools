@@ -154,7 +154,8 @@
 			if ($column.size() == 1) {
 				$column.html(formHtml);
 			} else {
-				$(formHtml).prependTo($otherInputs);
+				// string must begin with "<" to detected HTML content
+				$('<div>' + formHtml + '</div>').prependTo($otherInputs);
 			}
 		});
 
