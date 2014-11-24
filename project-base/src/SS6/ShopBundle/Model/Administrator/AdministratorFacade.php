@@ -73,7 +73,7 @@ class AdministratorFacade {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
 		}
 		$administrator->edit($administratorData);
-		if ($administratorData->getPassword() != null) {
+		if ($administratorData->getPassword() !== null) {
 			$administrator->setPassword($this->administratorService->getPasswordHash($administrator, $administratorData->getPassword()));
 		}
 
@@ -87,7 +87,8 @@ class AdministratorFacade {
 	 */
 	public function delete($administratorId) {
 		$administrator = $this->administratorRepository->getById($administratorId);
-
+		$adminCount = $this->administratorRepository->getCount();
+		$this->administratorService->delete($administrator, $adminCount);
 		$this->em->remove($administrator);
 		$this->em->flush();
 	}
@@ -98,13 +99,6 @@ class AdministratorFacade {
 	 */
 	public function getById($administratorId) {
 		return $this->administratorRepository->getById($administratorId);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator[]
-	 */
-	public function getAll() {
-		return $this->administratorRepository->getAll();
 	}
 
 }

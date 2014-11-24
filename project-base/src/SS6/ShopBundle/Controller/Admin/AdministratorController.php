@@ -164,20 +164,17 @@ class AdministratorController extends Controller {
 		$administratorFacade = $this->get('ss6.shop.administrator.administrator_facade');
 		/* @var $administratorFacade \SS6\ShopBundle\Model\Administrator\AdministratorFacade */
 
-		$adminCount = sizeof($administratorFacade->getAll());
-		$loggedId = $this->get('security.context')->getToken()->getUser()->getId();
 		$realName = $administratorFacade->getById($id)->getRealName();
 
-		if ($adminCount === 1) {
-			$flashMessageSender->addErrorTwig('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.', array(
-				'name' => $realName,
-			));
-		}
-		if ($loggedId === (int)$id) {
-			$flashMessageSender->addError('Nemůžete smazat sami sebe.');
-		} else {
+		try {
 			$administratorFacade->delete($id);
 			$flashMessageSender->addSuccessTwig('Administrátor <strong>{{ name }}</strong> byl smazán.', array(
+				'name' => $realName,
+			));
+		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException $ex) {
+			$flashMessageSender->addError('Nemůžete smazat sami sebe.');
+		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
+			$flashMessageSender->addErrorTwig('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.', array(
 				'name' => $realName,
 			));
 		}

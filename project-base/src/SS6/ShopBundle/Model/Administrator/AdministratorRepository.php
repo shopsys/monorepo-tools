@@ -57,10 +57,18 @@ class AdministratorRepository {
 		return $this->getAdministratorRepository()->findOneBy(array('username' => $administratorUserName));
 	}
 
+	private function getAllQueryBuilder() {
+		return $this->em->createQueryBuilder()
+			->select('a')
+			->from(Administrator::class, 'a');
+	}
+
 	/**
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator[]
+	 * @return int
 	 */
-	public function getAll() {
-		return $this->getAdministratorRepository()->findAll();
+	public function getCount() {
+		return (int)($this->getAllQueryBuilder()
+			->select('COUNT(a)')
+			->getQuery()->getSingleScalarResult());
 	}
 }
