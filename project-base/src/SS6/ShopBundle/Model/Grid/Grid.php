@@ -135,6 +135,16 @@ class Grid {
 	private $orderingEntityClass;
 
 	/**
+	 * @var int
+	 */
+	private $fromItem;
+
+	/**
+	 * @var int
+	 */
+	private $toItem;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
@@ -164,6 +174,8 @@ class Grid {
 
 		$this->limit = $this->defaultLimit;
 		$this->page = 1;
+		$this->fromItem = 1;
+		$this->toItem = $this->defaultLimit;
 
 		$this->loadFromRequest();
 	}
@@ -398,6 +410,20 @@ class Grid {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getFromItem() {
+		return $this->fromItem;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getToItem() {
+		return $this->toItem;
+	}
+
+	/**
 	 * @param string $orderString
 	 */
 	private function setOrder($orderString) {
@@ -424,6 +450,8 @@ class Grid {
 				$this->setOrder(trim($gridData['order']));
 				$this->isOrderFromRequest = true;
 			}
+			$this->fromItem = (($this->page - 1) * $this->limit) + 1;
+			$this->toItem = $this->page * $this->limit;
 		}
 	}
 
@@ -510,6 +538,9 @@ class Grid {
 		$this->totalCount = $this->dataSource->getTotalRowsCount();
 		$this->pageCount = max(ceil($this->totalCount / $this->limit), 1);
 		$this->page = min($this->page, $this->pageCount);
+		if ($this->totalCount < $this->toItem) {
+			$this->toItem = (int)$this->totalCount;
+		}
 	}
 
 	/**
