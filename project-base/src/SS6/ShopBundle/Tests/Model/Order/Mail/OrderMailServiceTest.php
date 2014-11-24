@@ -40,8 +40,8 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			$orderItemPriceCalculationMock
 		);
 
-		$orderStatus1 = new OrderStatus('statusName1', OrderStatus::TYPE_NEW, 1);
-		$orderStatus2 = new OrderStatus('statusName2', OrderStatus::TYPE_IN_PROGRESS, 2);
+		$orderStatus1 = new OrderStatus(['en' => 'orderStatusName1'], OrderStatus::TYPE_NEW, 1);
+		$orderStatus2 = new OrderStatus(['en' => 'orderStatusName2'], OrderStatus::TYPE_IN_PROGRESS, 2);
 
 		$mailTempleteName1 = $orderMailService->getMailTemplateNameByStatus($orderStatus1);
 		$mailTempleteName2 = $orderMailService->getMailTemplateNameByStatus($orderStatus2);

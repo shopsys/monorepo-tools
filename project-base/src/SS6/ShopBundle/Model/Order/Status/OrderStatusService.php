@@ -7,27 +7,6 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 class OrderStatusService {
 
 	/**
-	 * @param string $name
-	 * @param int $type
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
-	 */
-	public function create($name, $type) {
-		$orderStatus = new OrderStatus($name, $type);
-
-		return $orderStatus;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param string $name
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
-	 */
-	public function edit(OrderStatus $orderStatus, $name) {
-		$orderStatus->edit($name);
-		return $orderStatus;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
 	 * @param \SS6\ShopBundle\Model\Order\Order[] $ordersWithOldStatus
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus|null $newOrderStatus

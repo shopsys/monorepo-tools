@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
@@ -92,6 +93,8 @@ class OrderController extends Controller {
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
+		$localization = $this->get('ss6.shop.localization.localization');
+		/* @var $domain \SS6\ShopBundle\Model\Localization\Localization */
 
 		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder
@@ -100,14 +103,16 @@ class OrderController extends Controller {
 				o.number,
 				o.domainId AS domainId,
 				o.createdAt,
-				MAX(os.name) AS statusName,
+				MAX(ost.name) AS statusName,
 				o.totalPriceWithVat,
 				(CASE WHEN o.companyName IS NOT NULL
 							THEN o.companyName
 							ELSE CONCAT(o.firstName, \' \', o.lastName)
 						END) AS customerName')
 			->join('o.status', 'os')
-			->groupBy('o.id');
+			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
+			->groupBy('o.id')
+			->setParameter('locale', $localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'o.id');
 
 		$grid = $gridFactory->create('orderList', $dataSource);

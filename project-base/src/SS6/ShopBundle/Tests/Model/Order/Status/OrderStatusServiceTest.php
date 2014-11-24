@@ -16,7 +16,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDelete() {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			'statusName',
+			['en' => 'orderStatusName'],
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 		$orderStatusService->delete($orderStatus, array());
@@ -37,7 +37,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDeleteForbidden($statusType, $expectedException = null) {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			'statusName',
+			['en' => 'orderStatusName'],
 			$statusType
 		);
 		if ($expectedException !== null) {
@@ -49,7 +49,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDeleteWithOrder() {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			'statusName',
+			['en' => 'orderStatusName'],
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 
@@ -65,7 +65,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDeleteForbiddenOrWithOrder() {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			'statusName',
+			['en' => 'orderStatusName'],
 			OrderStatus::TYPE_NEW
 		);
 
@@ -81,11 +81,11 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testReplaceAndDelete() {
 		$orderStatusService = new OrderStatusService();
 		$oldOrderStatus = new OrderStatus(
-			'Old status',
+			['en' => 'Old status'],
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 		$newOrderStatus = new OrderStatus(
-			'New status',
+			['en' => 'New status'],
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 
