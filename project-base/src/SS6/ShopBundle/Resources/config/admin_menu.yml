@@ -36,6 +36,8 @@
         - label: 'Editace zboží'
           route: admin_product_edit
           visible: false
+    - label: 'Oddělení'
+      route: admin_department_list
 
 - label: 'Cenotvorba'
   route: admin_pricinggroup_list
