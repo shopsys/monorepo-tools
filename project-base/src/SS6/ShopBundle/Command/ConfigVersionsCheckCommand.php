@@ -48,10 +48,10 @@ class ConfigVersionsCheckCommand {
 		}
 
 		if (count($this->errors) > 0) {
-			$this->output->writeln('<fg=red>' . implode(PHP_EOL, $this->errors) . '</fg=red>');
+			$this->output->writeln('<error>' . implode(PHP_EOL, $this->errors) . '</error>');
 			return 1;
 		} else {
-			$this->output->writeln('<fg=green>All configs are up-to-date.</fg=green>');
+			$this->output->writeln('All configs are up-to-date.');
 		}
 	}
 
