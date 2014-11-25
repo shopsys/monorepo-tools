@@ -64,22 +64,15 @@ class AdministratorFacade {
 	 * @param int $administratorId
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException
 	 */
 	public function edit($administratorId, AdministratorData $administratorData) {
 		$administrator = $this->administratorRepository->getById($administratorId);
 		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->getUsername());
-		if ($administratorByUserName !== null) {
-			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
-		}
-		$administrator->edit($administratorData);
-		if ($administratorData->getPassword() !== null) {
-			$administrator->setPassword($this->administratorService->getPasswordHash($administrator, $administratorData->getPassword()));
-		}
+		$administratorEdited = $this->administratorService->edit($administratorData, $administrator, $administratorByUserName);
 
 		$this->em->flush();
 
-		return $administrator;
+		return $administratorEdited;
 	}
 
 	/**

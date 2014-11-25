@@ -55,4 +55,30 @@ class AdministratorService {
 		}
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator|null $administratorByUserName
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException
+	 */
+	public function edit(
+		AdministratorData $administratorData,
+		Administrator $administrator,
+		Administrator $administratorByUserName = null
+	) {
+		if ($administratorByUserName !== null
+			&& $administratorByUserName !== $administrator
+			&& $administratorByUserName->getUsername() === $administratorData->getUsername()
+		) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
+		}
+		$administrator->edit($administratorData);
+		if ($administratorData->getPassword() !== null) {
+			$administrator->setPassword($this->getPasswordHash($administrator, $administratorData->getPassword()));
+		}
+
+		return $administrator;
+	}
+
 }
