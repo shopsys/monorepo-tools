@@ -45,12 +45,10 @@ class OrderStatus extends AbstractTranslatableEntity {
 	/**
 	 * @param array $names
 	 * @param int $type
-	 * @param int|null $id
 	 */
-	public function __construct(array $names, $type, $id = null) {
+	public function __construct(array $names, $type) {
 		$this->translations = new ArrayCollection();
 		$this->setType($type);
-		$this->id = $id;
 		$this->setTranslations($names);
 	}
 

@@ -33,10 +33,9 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 	 * @param string $referenceName
 	 * @param array $names
 	 * @param int $type
-	 * @param int $orderStatusId
 	 */
-	public function createOrderStatus(ObjectManager $manager, $referenceName, array $names, $type, $orderStatusId = null) {
-		$orderStatus = new OrderStatus($names, $type, $orderStatusId);
+	public function createOrderStatus(ObjectManager $manager, $referenceName, array $names, $type) {
+		$orderStatus = new OrderStatus($names, $type);
 		$manager->persist($orderStatus);
 		$this->addReference($referenceName, $orderStatus);
 	}
