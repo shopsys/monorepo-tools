@@ -89,13 +89,13 @@ class ProductDataFixtureLoader {
 	 */
 	private function getProductDataFromCsvRow(array $row) {
 		$productData = new ProductData();
-		$productData->setName($row[0]);
-		$productData->setCatnum($row[1]);
-		$productData->setPartno($row[2]);
-		$productData->setEan($row[3]);
-		$productData->setDescription($row[4]);
-		$productData->setPrice($row[5]);
-		switch ($row[6]) {
+		$productData->setNames(['cs' => $row[0], 'en' => $row[1]]);
+		$productData->setCatnum($row[2]);
+		$productData->setPartno($row[3]);
+		$productData->setEan($row[4]);
+		$productData->setDescriptions(['cs' => $row[5], 'en' => $row[6]]);
+		$productData->setPrice($row[7]);
+		switch ($row[8]) {
 			case 'high':
 				$productData->setVat($this->vats['high']);
 				break;
@@ -108,22 +108,22 @@ class ProductDataFixtureLoader {
 			default:
 				$productData->setVat(null);
 		}
-		if ($row[7] !== null) {
-			$productData->setSellingFrom(new DateTime($row[7]));
+		if ($row[9] !== null) {
+			$productData->setSellingFrom(new DateTime($row[9]));
 		}
-		if ($row[8] !== null) {
-			$productData->setSellingTo(new DateTime($row[8]));
+		if ($row[10] !== null) {
+			$productData->setSellingTo(new DateTime($row[10]));
 		}
-		$productData->setStockQuantity($row[9]);
+		$productData->setStockQuantity($row[11]);
 		$hiddenOnDomains = array();
-		if (!CsvDecoder::decodeBoolean($row[10])) {
+		if (!CsvDecoder::decodeBoolean($row[12])) {
 			$hiddenOnDomains[] = 1;
 		}
-		if (!CsvDecoder::decodeBoolean($row[11])) {
+		if (!CsvDecoder::decodeBoolean($row[13])) {
 			$hiddenOnDomains[] = 2;
 		}
 		$productData->setHiddenOnDomains($hiddenOnDomains);
-		switch ($row[12]) {
+		switch ($row[14]) {
 			case 'in-stock':
 				$productData->setAvailability($this->availabilities['in-stock']);
 				break;
@@ -136,7 +136,7 @@ class ProductDataFixtureLoader {
 			default:
 				$productData->setAvailability(null);
 		}
-		$productData->setParameters($this->getProductParameterValuesDataFromString($row[13]));
+		$productData->setParameters($this->getProductParameterValuesDataFromString($row[15]));
 
 		return $productData;
 	}

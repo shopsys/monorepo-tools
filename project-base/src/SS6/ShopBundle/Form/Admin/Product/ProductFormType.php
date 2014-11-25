@@ -82,10 +82,11 @@ class ProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
-				'constraints' => array(
+			->add('names', 'localized', array(
+				'main_constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
+				'options' => array('required' => false),
 			))
 			->add(
 				$builder
@@ -116,7 +117,10 @@ class ProductFormType extends AbstractType {
 					new Constraints\Length(array('max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků')),
 				),
 			))
-			->add('description', 'ckeditor', array('required' => false))
+			->add('descriptions', 'localized', array(
+				'type' => 'ckeditor',
+				'required' => false,
+			))
 			->add('price', 'money', array(
 				'currency' => false,
 				'precision' => 6,

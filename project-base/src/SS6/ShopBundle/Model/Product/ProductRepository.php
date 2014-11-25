@@ -68,6 +68,21 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllVisibleWithTranslationByDomainIdQueryBuilder($domainId, $locale) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
+			->addSelect('pt')
+			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale');
+
+		$qb->setParameter('locale', $locale);
+
+		return $qb;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
@@ -75,11 +90,12 @@ class ProductRepository {
 	 */
 	public function getPaginationResultForProductList(
 		$domainId,
+		$locale,
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit
 	) {
-		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$qb = $this->getAllVisibleWithTranslationByDomainIdQueryBuilder($domainId, $locale);
 		$this->applyOrdering($qb, $orderingSetting);
 
 		$queryPaginator = new QueryPaginator($qb);
@@ -94,11 +110,11 @@ class ProductRepository {
 	private function applyOrdering(QueryBuilder $queryBuilder, ProductListOrderingSetting $orderingSetting) {
 		switch ($orderingSetting->getOrderingMode()) {
 			case ProductListOrderingSetting::ORDER_BY_NAME_ASC:
-				$queryBuilder->orderBy('p.name', 'asc');
+				$queryBuilder->orderBy('pt.name', 'asc');
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
-				$queryBuilder->orderBy('p.name', 'desc');
+				$queryBuilder->orderBy('pt.name', 'desc');
 				break;
 
 			default:

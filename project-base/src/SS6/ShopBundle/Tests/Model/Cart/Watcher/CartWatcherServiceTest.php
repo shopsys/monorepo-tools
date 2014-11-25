@@ -17,12 +17,16 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData('Product 1', null, null, null, null, 100, $vat));
+		$productMock = $this->getMockBuilder(Product::class)
+			->setMethods(['getCurrentLocale'])
+			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, [], 100, $vat)])
+			->getMock();
+		$productMock->expects($this->any())->method('getCurrentLocale')->willReturn('cs');
 
 		$productPriceCalculation = $this->getContainer()->get('ss6.shop.product.price_calculation');
 		/* @var $productPriceCalculation \SS6\ShopBundle\Model\Product\PriceCalculation */
-		$productPrice = $productPriceCalculation->calculatePrice($product);
-		$cartItem = new CartItem($customerIdentifier, $product, 1, $productPrice->getPriceWithVat());
+		$productPrice = $productPriceCalculation->calculatePrice($productMock);
+		$cartItem = new CartItem($customerIdentifier, $productMock, 1, $productPrice->getPriceWithVat());
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
 
@@ -40,7 +44,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertTrue($flashMessageFront->isEmpty());
 
-		$product->edit(new ProductData('Product 1', null, null, null, null, 200, $vat));
+		$productMock->edit(new ProductData(['cs' => 'Product 1'], null, null, null, [], 200, $vat));
 		$cartWatcherService->showErrorOnModifiedItems($cart);
 		$this->assertFalse($flashMessageFront->isEmpty());
 	}

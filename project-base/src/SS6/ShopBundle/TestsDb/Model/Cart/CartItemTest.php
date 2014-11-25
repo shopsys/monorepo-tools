@@ -20,8 +20,8 @@ class CartItemTest extends DatabaseTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData('Product 1', null, null, null, null, $price, $vat));
-		$product2 = new Product(new ProductData('Product 2', null, null, null, null, $price, $vat));
+		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product2 = new Product(new ProductData(['cs' => 'Product 2'], null, null, null, [], $price, $vat));
 		$em->persist($vat);
 		$em->persist($product1);
 		$em->persist($product2);

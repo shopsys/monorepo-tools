@@ -2,16 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Product\Listing;
 
-use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
 class ProductListAdminFacade {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
@@ -22,8 +15,7 @@ class ProductListAdminFacade {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
 	 */
-	public function __construct(EntityManager $em, ProductListAdminRepository $productListAdminRepository) {
-		$this->em = $em;
+	public function __construct(ProductListAdminRepository $productListAdminRepository) {
 		$this->productListAdminRepository = $productListAdminRepository;
 	}
 
@@ -32,12 +24,7 @@ class ProductListAdminFacade {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getQueryBuilderByQuickSearchData(array $searchData = null) {
-		$queryBuilder = $this->em->createQueryBuilder();
-		$queryBuilder
-			->select('p')
-			->from(Product::class, 'p');
-		$this->productListAdminRepository->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
-
-		return $queryBuilder;
+		return $this->productListAdminRepository->getQueryBuilderByQuickSearchData($searchData);
 	}
+
 }

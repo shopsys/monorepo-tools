@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductDomain;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
@@ -19,7 +20,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$product = $productEditFacade->create($productData);
 
@@ -48,7 +49,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setSellingFrom($sellingFrom);
 		$product = $productEditFacade->create($productData);
@@ -78,7 +79,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setSellingTo($sellingTo);
 		$product = $productEditFacade->create($productData);
@@ -110,7 +111,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setSellingFrom($sellingFrom);
 		$productData->setSellingTo($sellingTo);
@@ -140,7 +141,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setName('Name');
+		$productData->setNames(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setPrice(0);
 		$product1 = $productEditFacade->create($productData);
@@ -164,4 +165,46 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$this->assertFalse($product1Again->isVisible());
 		$this->assertFalse($product2Again->isVisible());
 	}
+
+	public function testIsVisibleWithEmptyName() {
+		$em = $this->getEntityManager();
+		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+
+		$vat = new Vat(new VatData('vat', 21));
+		$em->persist($vat);
+
+		$productData = new ProductData();
+		$productData->setNames(['cs' => 'Name']);
+		$productData->setVat($vat);
+		$productData->setPrice(100);
+		$product = $productEditFacade->create($productData);
+
+		$productId = $product->getId();
+		$em->clear();
+
+		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
+
+		$productFromDb = $em->getRepository(Product::class)->find($productId);
+		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
+
+		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+			'product' => $productId,
+			'domainId' => 1,
+		));
+		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
+
+		$productDomain2 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+			'product' => $productId,
+			'domainId' => 2,
+		));
+		/* @var $productDomain2 \SS6\ShopBundle\Model\Product\ProductDomain */
+
+		$this->assertTrue($productFromDb->isVisible());
+		$this->assertTrue($productDomain1->isVisible());
+		$this->assertFalse($productDomain2->isVisible());
+	}
+
 }

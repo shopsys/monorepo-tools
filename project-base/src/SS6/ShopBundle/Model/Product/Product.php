@@ -3,8 +3,11 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 /**
@@ -13,7 +16,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
  * @ORM\Table(name="products")
  * @ORM\Entity
  */
-class Product {
+class Product extends AbstractTranslatableEntity {
 
 	/**
 	 * @var integer
@@ -22,14 +25,14 @@ class Product {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $id;
+	protected $id;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Product\ProductTranslation[]
 	 *
-	 * @ORM\Column(type="text")
+	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Product\ProductTranslation")
 	 */
-	private $name;
+	protected $translations;
 
 	/**
 	 * @var string|null
@@ -51,13 +54,6 @@ class Product {
 	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $ean;
-
-	/**
-	 * @var string|null
-	 *
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $description;
 
 	/**
 	 * @var string
@@ -119,11 +115,10 @@ class Product {
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
-		$this->name = $productData->getName();
+		$this->translations = new ArrayCollection();
 		$this->catnum = $productData->getCatnum();
 		$this->partno = $productData->getPartno();
 		$this->ean = $productData->getEan();
-		$this->description = $productData->getDescription();
 		$this->setPrice($productData->getPrice());
 		$this->vat = $productData->getVat();
 		$this->sellingFrom = $productData->getSellingFrom();
@@ -132,17 +127,16 @@ class Product {
 		$this->hidden = $productData->isHidden();
 		$this->availability = $productData->getAvailability();
 		$this->visible = false;
+		$this->setTranslations($productData);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function edit(ProductData $productData) {
-		$this->name = $productData->getName();
 		$this->catnum = $productData->getCatnum();
 		$this->partno = $productData->getPartno();
 		$this->ean = $productData->getEan();
-		$this->description = $productData->getDescription();
 		$this->setPrice($productData->getPrice());
 		$this->vat = $productData->getVat();
 		$this->sellingFrom = $productData->getSellingFrom();
@@ -150,6 +144,7 @@ class Product {
 		$this->stockQuantity = $productData->getStockQuantity();
 		$this->availability = $productData->getAvailability();
 		$this->hidden = $productData->isHidden();
+		$this->setTranslations($productData);
 	}
 
 	/**
@@ -174,10 +169,11 @@ class Product {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string|null
 	 */
-	public function getName() {
-		return $this->name;
+	public function getName($locale = null) {
+		return $this->translation($locale)->getName();
 	}
 
 	/**
@@ -202,10 +198,11 @@ class Product {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string|null
 	 */
-	public function getDescription() {
-		return $this->description;
+	public function getDescription($locale = null) {
+		return $this->translation($locale)->getDescription();
 	}
 
 	/**
@@ -263,6 +260,25 @@ class Product {
 	 */
 	public function isVisible() {
 		return $this->visible;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 */
+	private function setTranslations(ProductData $productData) {
+		foreach ($productData->getNames() as $locale => $name) {
+			$this->translation($locale)->setName($name);
+		}
+		foreach ($productData->getDescriptions() as $locale => $description) {
+			$this->translation($locale)->setDescription($description);
+		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\ProductTranslation
+	 */
+	protected function createTranslation() {
+		return new ProductTranslation();
 	}
 
 }

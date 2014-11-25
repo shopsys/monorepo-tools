@@ -45,12 +45,12 @@ class NewProductTest extends FunctionalTestCase {
 	 * @param string $csrfToken
 	 */
 	private function setFormValuesAndToken($form, $csrfToken) {
-		$form['product[name]'] = 'testProduct';
+		$form['product[names][cs]'] = 'testProduct';
 		$form['product[showOnDomains]'] = [1];
 		$form['product[catnum]'] = '123456';
 		$form['product[partno]'] = '123456';
 		$form['product[ean]'] = '123456';
-		$form['product[description]'] = 'test description';
+		$form['product[descriptions][cs]'] = 'test description';
 		$form['product[price]'] = '10000';
 		$form['product[vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
 		$form['product[sellingFrom]'] = '1.1.1990';
