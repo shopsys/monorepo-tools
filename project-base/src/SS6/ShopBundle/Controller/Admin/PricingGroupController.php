@@ -69,7 +69,7 @@ class PricingGroupController extends Controller {
 		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
-		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */;
+		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */
 
 		$pricingGroup = $pricingGroupFacade->getById($id);
 		if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
