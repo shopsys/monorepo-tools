@@ -62,7 +62,7 @@
 		if (element.type === 'ckeditor') {
 			return CKEDITOR.instances[element.id].getData();
 		}
-		return element.domNode ? element.domNode.value : undefined;
+		return FpJsFormValidator._getInputValue(element);
 	};
 
 	// stop error bubbling, because errors of some collections (eg. admin order items) bubble to main form and mark all inputs as invalid
