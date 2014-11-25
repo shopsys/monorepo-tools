@@ -53,6 +53,7 @@ class AdministratorFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\NotBlank(array(
 							'message' => 'Vyplňte prosím heslo',
+							'groups' => array('create'),
 						)),
 						new Constraints\Length(array('min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
 					)

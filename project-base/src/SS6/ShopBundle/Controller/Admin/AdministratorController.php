@@ -111,7 +111,11 @@ class AdministratorController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
-		$form = $this->createForm(new AdministratorFormType(AdministratorFormType::SCENARIO_CREATE));
+		$form = $this->createForm(
+			new AdministratorFormType(AdministratorFormType::SCENARIO_EDIT),
+			null,
+			array('validation_groups' => array('Default', 'create'))
+		);
 
 		$administratorData = new AdministratorData();
 
