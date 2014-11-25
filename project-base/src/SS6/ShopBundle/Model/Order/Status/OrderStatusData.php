@@ -18,7 +18,7 @@ class OrderStatusData {
 		$this->names = $names;
 	}
 
-		/**
+	/**
 	 * @return array
 	 */
 	public function getNames() {

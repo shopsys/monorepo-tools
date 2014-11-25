@@ -32,7 +32,7 @@ class Localization {
 		$this->domain = $domain;
 	}
 
-		/**
+	/**
 	 * @return string
 	 */
 	public function getLocale() {
