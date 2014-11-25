@@ -94,7 +94,7 @@ class OrderController extends Controller {
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 		$localization = $this->get('ss6.shop.localization.localization');
-		/* @var $domain \SS6\ShopBundle\Model\Localization\Localization */
+		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
 
 		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
 		$queryBuilder
