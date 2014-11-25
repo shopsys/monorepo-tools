@@ -21,6 +21,19 @@
 		return $(form).find('.form-error:first, .js-validation-errors-list li[class]:first').size() === 0;
 	};
 
+	SS6.validation.ckeditorValidationInit = function (element) {
+		$.each(element.children, function(index, childElement) {
+			if (childElement.type === 'ckeditor') {
+				CKEDITOR.instances[childElement.id].on('change', function() {
+					$(childElement.domNode).jsFormValidator('validate');
+				});
+			}
+			if (Object.keys(childElement.children).length > 0) {
+				SS6.validation.ckeditorValidationInit(childElement);
+			}
+		});
+	};
+
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
 	FpJsFormValidator.customizeMethods.submitForm = function (event) {
 		if (!$(this).hasClass('js-no-validate')) {
@@ -44,6 +57,14 @@
 		$(element.domNode).each(SS6.validation.inputBind);
 	};
 
+	FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
+	FpJsFormValidator.getInputValue = function (element) {
+		if (element.type === 'ckeditor') {
+			return CKEDITOR.instances[element.id].getData();
+		}
+		return FpJsFormValidator._getInputValue(element);
+	};
+
 	// stop error bubbling, because errors of some collections (eg. admin order items) bubble to main form and mark all inputs as invalid
 	FpJsFormValidator._getErrorPathElement = FpJsFormValidator.getErrorPathElement;
 	FpJsFormValidator.getErrorPathElement = function (element) {
@@ -64,6 +85,7 @@
 		if (form) {
 			this.attachDefaultEvent(element, form);
 		}
+		SS6.validation.ckeditorValidationInit(element);
 
 		return element;
 	};
