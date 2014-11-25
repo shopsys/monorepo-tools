@@ -135,6 +135,11 @@ class Grid {
 	private $orderingEntityClass;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	private $paginationResults;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
@@ -398,6 +403,13 @@ class Grid {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getPaginationResults() {
+		return $this->paginationResults;
+	}
+
+	/**
 	 * @param string $orderString
 	 */
 	private function setOrder($orderString) {
@@ -490,12 +502,14 @@ class Grid {
 			$orderDirection = null;
 		}
 
-		$this->rows = $this->dataSource->getRows(
+		$this->paginationResults = $this->dataSource->getPaginatedRows(
 			$this->allowPaging ? $this->limit : null,
 			$this->page,
 			$orderQueryId,
 			$orderDirection
 		);
+
+		$this->rows = $this->paginationResults->getResults();
 	}
 
 	/**

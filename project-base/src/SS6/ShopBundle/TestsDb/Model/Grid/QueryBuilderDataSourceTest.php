@@ -53,7 +53,7 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase {
 
 		$queryBuilderDataSource = new QueryBuilderDataSource($qb, 'p.id');
 
-		$rows = $queryBuilderDataSource->getRows();
+		$rows = $queryBuilderDataSource->getPaginatedRows()->getResults();
 		$this->assertInternalType('array', $rows);
 		$this->assertCount(5, $rows);
 
@@ -74,7 +74,7 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase {
 
 		$queryBuilderDataSource = new QueryBuilderDataSource($qb, 'p.id');
 
-		$rows = $queryBuilderDataSource->getRows(null, 1, 'p.id', QueryBuilderDataSource::ORDER_ASC);
+		$rows = $queryBuilderDataSource->getPaginatedRows(null, 1, 'p.id', QueryBuilderDataSource::ORDER_ASC)->getResults();
 		$this->assertCount(10, $rows);
 
 		$lastId = null;
@@ -98,7 +98,7 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase {
 
 		$queryBuilderDataSource = new QueryBuilderDataSource($qb, 'p.id');
 
-		$rows = $queryBuilderDataSource->getRows(null, 1, 'p.id', QueryBuilderDataSource::ORDER_DESC);
+		$rows = $queryBuilderDataSource->getPaginatedRows(null, 1, 'p.id', QueryBuilderDataSource::ORDER_DESC)->getResults();
 		$this->assertCount(10, $rows);
 
 		$lastId = null;

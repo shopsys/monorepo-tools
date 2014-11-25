@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Model\Grid;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\Grid;
 use SS6\ShopBundle\Model\Grid\GridView;
@@ -175,10 +176,11 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 		$dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
-			->setMethods(['getRows', 'getTotalRowsCount'])
+			->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
 			->getMockForAbstractClass();
-		$dataSourceMock->expects($this->once())->method('getRows')->will($this->returnValue([]));
 		$dataSourceMock->expects($this->never())->method('getTotalRowsCount');
+		$dataSourceMock->expects($this->once())->method('getPaginatedRows')
+			->will($this->returnValue(new PaginationResult(1, 1, 0, [])));
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$gridView = $grid->createView();
@@ -195,10 +197,11 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 		$dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
-			->setMethods(['getRows', 'getTotalRowsCount'])
+			->setMethods(['getTotalRowsCount', 'getPaginatedRows'])
 			->getMockForAbstractClass();
-		$dataSourceMock->expects($this->once())->method('getRows')->will($this->returnValue([]));
 		$dataSourceMock->expects($this->once())->method('getTotalRowsCount')->will($this->returnValue(0));
+		$dataSourceMock->expects($this->once())->method('getPaginatedRows')
+			->will($this->returnValue(new PaginationResult(1, 1, 0, [])));
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 		$grid->allowPaging();

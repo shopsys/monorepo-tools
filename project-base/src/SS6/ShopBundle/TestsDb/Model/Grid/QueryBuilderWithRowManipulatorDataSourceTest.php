@@ -63,7 +63,7 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 			return $row;
 		});
 
-		$rows = $dataSource->getRows();
+		$rows = $dataSource->getPaginatedRows()->getResults();
 		$this->assertInternalType('array', $rows);
 		$this->assertCount(5, $rows);
 

@@ -12,9 +12,9 @@ interface DataSourceInterface {
 	 * @param int $page
 	 * @param string|null $orderQueryId
 	 * @param string $orderDirection
-	 * @return array
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getRows(
+	public function getPaginatedRows(
 		$limit = null,
 		$page = 1,
 		$orderQueryId = null,

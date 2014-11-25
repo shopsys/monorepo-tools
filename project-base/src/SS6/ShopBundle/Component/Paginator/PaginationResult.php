@@ -30,6 +30,16 @@ class PaginationResult {
 	private $pageCount;
 
 	/**
+	 * @var int
+	 */
+	private $fromItem;
+
+	/**
+	 * @var int
+	 */
+	private $toItem;
+
+	/**
 	 * @param int $page
 	 * @param int $pageSize
 	 * @param int $totalCount
@@ -46,6 +56,11 @@ class PaginationResult {
 			$this->pageCount = (int)ceil($this->totalCount / $this->pageSize);
 		}
 
+		$this->fromItem = (($this->page - 1) * $this->pageSize) + 1;
+		$this->toItem = $this->page * $this->pageSize;
+		if ($this->toItem > $this->totalCount) {
+			$this->toItem = $this->totalCount;
+		}
 	}
 
 	/**
@@ -81,6 +96,20 @@ class PaginationResult {
 	 */
 	public function getPageCount() {
 		return $this->pageCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getFromItem() {
+		return $this->fromItem;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getToItem() {
+		return $this->toItem;
 	}
 
 }
