@@ -105,16 +105,17 @@ class OrderRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User
+	 * @param string $locale
 	 * @return array
 	 */
-	public function getCustomerOrderListData(User $user) {
+	public function getCustomerOrderListData(User $user, $locale) {
 		return $this->em->createQueryBuilder()
 			->select('
 				o.id,
 				o.number,
 				o.createdAt,
 				o.urlHash,
-				MAX(os.name) AS statusName,
+				MAX(ost.name) AS statusName,
 				COUNT(oiProduct.id) AS itemsCount,
 				MAX(oiTransport.name) AS transportName,
 				MAX(oiPayment.name) AS paymentName,
@@ -125,6 +126,7 @@ class OrderRepository {
 			->leftJoin('o.items', 'oiTransport', Join::WITH, 'oiTransport INSTANCE OF :typeTransport')
 			->leftJoin('o.items', 'oiPayment', Join::WITH, 'oiPayment INSTANCE OF :typePayment')
 			->join('o.status', 'os')
+			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
 			->groupBy('o.id')
 			->where('o.customer = :customer AND o.deleted = :deleted')
 			->orderBy('o.createdAt', 'DESC')
@@ -133,6 +135,7 @@ class OrderRepository {
 			->setParameter('typePayment', 'payment')
 			->setParameter('typeProduct', 'product')
 			->setParameter('typeTransport', 'transport')
+			->setParameter('locale', $locale)
 			->getQuery()->execute();
 	}
 

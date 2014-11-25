@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Order\Status\Grid;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
@@ -22,12 +24,14 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
 	 */
-	public function __construct(EntityManager $em, GridFactory $gridFactory) {
+	private $localization;
+
+	public function __construct(EntityManager $em, GridFactory $gridFactory, Localization $localization) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
+		$this->localization = $localization;
 	}
 
 	/**
@@ -36,14 +40,16 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('os')
-			->from(OrderStatus::class, 'os');
+			->select('os, ost')
+			->from(OrderStatus::class, 'os')
+			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
+			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'os.id');
 
 		$grid = $this->gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'os.name', 'Název', true);
+		$grid->addColumn('names', 'ost.name', 'Název', true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_orderstatus_deleteconfirm', array('id' => 'os.id'))

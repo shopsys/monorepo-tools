@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 
 class OrderStatusDataFixture extends AbstractReferenceFixture {
 
@@ -13,18 +13,30 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		// @codingStandardsIgnoreStart
-		$this->createOrderStatus($manager, 'order_status_new', 'Nová', OrderStatus::TYPE_NEW, OrderStatusRepository::STATUS_NEW);
-		$this->createOrderStatus($manager, 'order_status_in_progress', 'Vyřizuje se', OrderStatus::TYPE_IN_PROGRESS);
-		$this->createOrderStatus($manager, 'order_status_done', 'Vyřízena', OrderStatus::TYPE_DONE);
-		$this->createOrderStatus($manager, 'order_status_canceled', 'Stornována', OrderStatus::TYPE_CANCELED);
-		// @codingStandardsIgnoreStop
+		$orderStatusData = new OrderStatusData();
+		$orderStatusData->setNames(array('cs' => 'Nová', 'en' => 'New'));
+		$this->createOrderStatus($manager, 'order_status_new', $orderStatusData, OrderStatus::TYPE_NEW);
+		
+		$orderStatusData->setNames(array('cs' => 'Vyřizuje se', 'en' => 'In progress'));
+		$this->createOrderStatus($manager, 'order_status_in_progress', $orderStatusData, OrderStatus::TYPE_IN_PROGRESS);
+
+		$orderStatusData->setNames(array('cs' => 'Vyřízena', 'en' => 'Done'));
+		$this->createOrderStatus($manager, 'order_status_done', $orderStatusData, OrderStatus::TYPE_DONE);
+
+		$orderStatusData->setNames(array('cs' => 'Stornována', 'en' => 'Canceled'));
+		$this->createOrderStatus($manager, 'order_status_canceled', $orderStatusData, OrderStatus::TYPE_CANCELED);
 
 		$manager->flush();
 	}
 
-	public function createOrderStatus(ObjectManager $manager, $referenceName, $name, $type, $orderStatusId = null) {
-		$orderStatus = new OrderStatus($name, $type, $orderStatusId);
+	/**
+	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @param string $referenceName
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @param int $type
+	 */
+	public function createOrderStatus(ObjectManager $manager, $referenceName, OrderStatusData $orderStatusData, $type) {
+		$orderStatus = new OrderStatus($orderStatusData, $type);
 		$manager->persist($orderStatus);
 		$this->addReference($referenceName, $orderStatus);
 	}

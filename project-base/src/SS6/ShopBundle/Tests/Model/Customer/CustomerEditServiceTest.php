@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -57,7 +58,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 
 		$transport = new Transport(new TransportData(array('cs' => 'transportName'), '0'));
 		$payment = new Payment(new PaymentData(array('cs' => 'paymentName'), '0'));
-		$orderStatus = new OrderStatus('orderStatusName', OrderStatus::TYPE_NEW);
+		$orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
 		$orderData = new OrderData();
 		$orderData->setTransport($transport);
 		$orderData->setPayment($payment);
@@ -112,7 +113,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 
 		$transport = new Transport(new TransportData(array('cs' => 'transportName'), '0'));
 		$payment = new Payment(new PaymentData(array('cs' => 'paymentName'), '0'));
-		$orderStatus = new OrderStatus('orderStatusName', OrderStatus::TYPE_NEW);
+		$orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
 		$orderData = new OrderData();
 		$orderData->setTransport($transport);
 		$orderData->setPayment($payment);

@@ -2,13 +2,18 @@
 
 namespace SS6\ShopBundle\Model\Order\Status;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation;
 
 /**
  * @ORM\Table(name="order_statuses")
  * @ORM\Entity
  */
-class OrderStatus {
+class OrderStatus extends AbstractTranslatableEntity {
 
 	const TYPE_NEW = 1;
 	const TYPE_IN_PROGRESS = 2;
@@ -22,14 +27,14 @@ class OrderStatus {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $id;
+	protected $id;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation[]
 	 *
-	 * @ORM\Column(type="string", length=100)
+	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation")
 	 */
-	private $name;
+	protected $translations;
 
 	/**
 	 * @var integer
@@ -39,14 +44,13 @@ class OrderStatus {
 	private $type;
 
 	/**
-	 * @param string $name
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @param int $type
-	 * @param int|null $id
 	 */
-	public function __construct($name, $type, $id = null) {
-		$this->name = $name;
+	public function __construct(OrderStatusData $orderStatusData, $type) {
+		$this->translations = new ArrayCollection();
 		$this->setType($type);
-		$this->id = $id;
+		$this->setTranslations($orderStatusData->getNames());
 	}
 
 	/**
@@ -57,10 +61,27 @@ class OrderStatus {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string
 	 */
-	public function getName() {
-		return $this->name;
+	public function getName($locale = null) {
+		return $this->translation($locale)->getName();
+	}
+
+	/**
+	 * @param array $names
+	 */
+	private function setTranslations(array $names) {
+		foreach ($names as $locale => $name) {
+			$this->translation($locale)->setName($name);
+		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
+	 */
+	protected function createTranslation() {
+		return new OrderStatusTranslation();
 	}
 
 	/**
@@ -73,7 +94,7 @@ class OrderStatus {
 	/**
 	 * @param int $type
 	 */
-	public function setType($type) {
+	private function setType($type) {
 		if (in_array($type, array(
 			self::TYPE_NEW,
 			self::TYPE_IN_PROGRESS,
@@ -87,10 +108,10 @@ class OrderStatus {
 	}
 
 	/**
-	 * @param string $name
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
-	public function edit($name) {
-		$this->name = $name;
+	public function edit(OrderStatusData $orderStatusData) {
+		$this->setTranslations($orderStatusData->getNames());
 	}
 
 }

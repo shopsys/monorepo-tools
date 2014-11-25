@@ -154,7 +154,7 @@
 			if ($column.size() == 1) {
 				$column.html(formHtml);
 			} else {
-				$(formHtml).prependTo($otherInputs);
+				$otherInputs.append(formHtml);
 			}
 		});
 

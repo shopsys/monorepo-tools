@@ -2,44 +2,46 @@
 
 namespace SS6\ShopBundle\Model\Order\Status;
 
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+
 class OrderStatusData {
 
 	/**
-	 * @var int
+	 * @var array
 	 */
-	private $id;
+	private $names;
 
 	/**
-	 * @var string
+	 * @param array $names
 	 */
-	private $name;
+	public function __construct($names = array()) {
+		$this->names = $names;
+	}
 
-	/**
-	 * @return int
+		/**
+	 * @return array
 	 */
-	public function getId() {
-		return $this->id;
+	public function getNames() {
+		return $this->names;
 	}
 
 	/**
-	 * @return string
+	 * @param array $names
 	 */
-	public function getName() {
-		return $this->name;
+	public function setNames($names) {
+		$this->names = $names;
 	}
 
 	/**
-	 * @param int $id
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 */
-	public function setId($id) {
-		$this->id = $id;
-	}
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setFromEntity(OrderStatus $orderStatus) {
+		$translations = $orderStatus->getTranslations();
+		$names = array();
+		foreach ($translations as $translate) {
+			$names[$translate->getLocale()] = $translate->getName();
+		}
+		$this->setNames($names);
 	}
 
 }

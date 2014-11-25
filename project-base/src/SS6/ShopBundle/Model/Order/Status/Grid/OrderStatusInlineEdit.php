@@ -59,7 +59,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 		if ($orderStatusId !== null) {
 			$orderStatusId = (int)$orderStatusId;
 			$orderStatus = $this->orderStatusFacade->getById($orderStatusId);
-			$orderStatusData->setName($orderStatus->getName());
+			$orderStatusData->setFromEntity($orderStatus);
 		}
 
 		return $orderStatusData;

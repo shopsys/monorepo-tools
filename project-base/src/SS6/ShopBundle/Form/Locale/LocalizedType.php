@@ -27,7 +27,7 @@ class LocalizedType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		Condition::setArrayDefaultValue($options['options'], 'required', false);
+		Condition::setArrayDefaultValue($options['options'], 'required', $options['required']);
 		Condition::setArrayDefaultValue($options['options'], 'constraints', array());
 
 		$defaultLocaleOptions = $options['options'];

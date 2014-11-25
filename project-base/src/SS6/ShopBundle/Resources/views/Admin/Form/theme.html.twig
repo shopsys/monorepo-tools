@@ -42,6 +42,12 @@
 	</div>
 {%- endblock localized_row %}
 
+{% block localized_widget -%}
+	{% for child in form %}
+		{{- form_row(child, { localized: true, locale: child.vars.name, attr: { class: attr.class|default('form-line--compact')}}) -}}
+	{% endfor %}
+{%- endblock localized_widget %}
+
 {% block form_row %}
 	<div class="form-line {{ attr.class|default('') }}">
 		{{ form_errors(form) }}
