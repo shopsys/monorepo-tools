@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Article\ArticleData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class ArticleFormType extends AbstractType {
 
@@ -23,7 +24,11 @@ class ArticleFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('name', 'text')
-			->add('text', 'ckeditor', array('required' => false))
+			->add('text', 'ckeditor', array('required' => true,
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Vyplňte prosím text článku')),
+				),
+			))
 			->add('domainId', 'domain', array('required' => true))
 			->add('save', 'submit');
 	}
