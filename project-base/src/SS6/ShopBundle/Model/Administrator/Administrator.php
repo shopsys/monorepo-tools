@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -20,7 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     @ORM\Index(columns={"username"})
  *   }
  * )
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Administrator\AdministratorRepository")
+ * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Administrator\AdministratorAuthenticationRepository")
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 
@@ -32,7 +33,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	protected $id;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, unique = true)
 	 */
 	protected $username;
 
@@ -57,6 +58,12 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	protected $lastActivity;
 
 	/**
+	 * @ORM\Column(type="string", length=255)
+	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
+	 */
+	protected $email;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit[]
 	 * @ORM\OneToMany(
 	 *	targetEntity="SS6\ShopBundle\Model\Administrator\AdministratorGridLimit",
@@ -66,9 +73,25 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 */
 	protected $gridLimits;
 
-	public function __construct() {
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 */
+	public function __construct(AdministratorData $administratorData) {
+		$this->email = $administratorData->getEmail();
+		$this->realName = $administratorData->getRealName();
+		$this->username = $administratorData->getUsername();
 		$this->lastActivity = new DateTime();
 		$this->gridLimits = new ArrayCollection();
+		$this->loginToken = '';
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 */
+	public function edit(AdministratorData $administratorData) {
+		$this->email = $administratorData->getEmail();
+		$this->realName = $administratorData->getRealName();
+		$this->username = $administratorData->getUsername();
 	}
 
 	/**
@@ -136,6 +159,13 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	/**
 	 * @return string
 	 */
+	public function getEmail() {
+		return $this->email;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getPassword() {
 		return $this->password;
 	}
@@ -173,6 +203,13 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 */
 	public function setPassword($password) {
 		$this->password = $password;
+	}
+
+	/**
+	 * @param string $email
+	 */
+	public function setEmail($email) {
+		$this->email = $email;
 	}
 
 	/**

@@ -9,6 +9,9 @@ class PagesResponsesTest extends DatabaseTestCase {
 
 	public function adminPagesProvider() {
 		return array(
+			['admin/administrator/edit/1'],
+			['admin/administrator/list/'],
+			['admin/administrator/new/'],
 			['admin/article/list/'],
 			['admin/article/edit/1'],
 			['admin/article/new/'],

@@ -1,0 +1,30 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Administrátor'|trans }}{% endblock %}
+{% block h1 %}{{ 'Administrátor'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="wrap-group">
+					{{ form_id(administrator|default(null)) }}
+
+					{{ form_row(form.userName, { label: 'Přihlašovací jméno'}) }}
+					{{ form_row(form.realName, { label: 'Jméno'}) }}
+					{{ form_row(form.email, { label: 'Email'}) }}
+					{{ form_row(form.password.first, { label: 'Heslo'}) }}
+					{{ form_row(form.password.second, { label: 'Heslo znovu'}) }}
+					<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno"></i>
+				</div>
+
+				{{ form_save(administrator|default(null), form) }}
+				<a href="{{ url('admin_administrator_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}

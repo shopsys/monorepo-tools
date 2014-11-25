@@ -2,73 +2,73 @@
 
 namespace SS6\ShopBundle\Model\Administrator;
 
-use DateTime;
-use Doctrine\ORM\EntityRepository;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
-use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Administrator\Administrator;
 
-class AdministratorRepository extends EntityRepository implements UserProviderInterface {
+class AdministratorRepository {
 
 	/**
-	 * @param string $username The username
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException if the user is not found
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	public function loadUserByUsername($username) {
-		$administrator = $this->findOneBy(array('username' => $username));
+	private $em;
 
+	/**
+	 * @param \Doctrine\ORM\EntityManager $em
+	 */
+	public function __construct(EntityManager $em) {
+		$this->em = $em;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getAdministratorRepository() {
+		return $this->em->getRepository(Administrator::class);
+	}
+
+	/**
+	 * @param int $administratorId
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 */
+	public function findById($administratorId) {
+		return $this->getAdministratorRepository()->find($administratorId);
+	}
+
+	/**
+	 * @param int $administratorId
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException
+	 */
+	public function getById($administratorId) {
+		$criteria = array('id' => $administratorId);
+		$administrator = $this->getAdministratorRepository()->findOneById($administratorId);
 		if ($administrator === null) {
-			$message = sprintf(
-				'Unable to find an active admin SS6\ShopBundle\Model\Administrator\Administrator object identified by "%s".', $username
-			);
-			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException($criteria);
 		}
 
 		return $administrator;
 	}
 
 	/**
-	 * @param \Symfony\Component\Security\Core\User\UserInterface $administrator
+	 * @param type $administratorUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
 	 */
-	public function refreshUser(UserInterface $administrator) {
-		$class = get_class($administrator);
-		if (!$this->supportsClass($class)) {
-			$message = sprintf('Instances of "%s" are not supported.', $class);
-			throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
-		}
+	public function findByUserName($administratorUserName) {
+		return $this->getAdministratorRepository()->findOneBy(array('username' => $administratorUserName));
+	}
 
-		if ($administrator instanceof TimelimitLoginInterface) {
-			if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
-				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Admin was too long unactive.');
-			}
-			$administrator->setLastActivity(new DateTime());
-		}
-
-		$findParams = array(
-			'id' => $administrator->getId(),
-		);
-		if ($administrator instanceof UniqueLoginInterface) {
-			$findParams['loginToken'] = $administrator->getLoginToken();
-		}
-		$freshAdministrator = $this->findOneBy($findParams);
-
-		if ($freshAdministrator === null) {
-			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
-		}
-
-		return $freshAdministrator;
+	private function getAllQueryBuilder() {
+		return $this->em->createQueryBuilder()
+			->select('a')
+			->from(Administrator::class, 'a');
 	}
 
 	/**
-	 * @param string $class
-	 * @return bool
+	 * @return int
 	 */
-	public function supportsClass($class) {
-		return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
+	public function getCount() {
+		return (int)($this->getAllQueryBuilder()
+			->select('COUNT(a)')
+			->getQuery()->getSingleScalarResult());
 	}
-
 }

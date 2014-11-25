@@ -1,0 +1,17 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Přehled administrátorů'|trans }}{% endblock %}
+{% block h1 %}{{ 'Přehled administrátorů'|trans }}{% endblock %}
+
+{% block main_content %}
+
+
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+
+			<a href="{{ url('admin_administrator_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nového administrátora'|trans }}</a>
+
+			{{ gridView.render('@SS6Shop/Admin/Content/Administrator/listGrid.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

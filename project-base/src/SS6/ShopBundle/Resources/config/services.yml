@@ -57,11 +57,20 @@ services:
   ss6.shop.admin_navigation.menu_loader:
     class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader
 
+  ss6.shop.administrator.administrator_facade:
+    class: SS6\ShopBundle\Model\Administrator\AdministratorFacade
+
   ss6.shop.administrator.administrator_grid_facade:
     class: SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
 
   ss6.shop.administrator.administrator_grid_service:
     class: SS6\ShopBundle\Model\Administrator\AdministratorGridService
+
+  ss6.shop.administrator.administrator_repository:
+    class: SS6\ShopBundle\Model\Administrator\AdministratorRepository
+
+  ss6.shop.administrator.administrator_service:
+    class: SS6\ShopBundle\Model\Administrator\AdministratorService
 
   ss6.shop.article.article_edit_facade:
     class: SS6\ShopBundle\Model\Article\ArticleEditFacade
