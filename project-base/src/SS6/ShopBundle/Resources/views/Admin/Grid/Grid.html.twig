@@ -197,7 +197,7 @@
 {% block grid_pager_totalcount %}
 	<strong class="left mt-half form-fake">
 		{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů')|trim }}
-		{{ grid.fromItem }} - {{ grid.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
+		{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
 	</strong>
 {% endblock %}
 

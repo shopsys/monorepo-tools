@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Grid;
 
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Component\Paginator\PaginationResult;
 
 class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 
@@ -44,10 +45,10 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 	 * @param string $orderDirection
 	 * @return array
 	 */
-	public function getRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
-		$rows = parent::getRows($limit, $page, $orderQueryId, $orderDirection);
-
-		return array_map($this->manipulateRowCallback, $rows);
+	public function getPaginatedRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
+		$parentPaginatedResult = parent::getPaginatedRows($limit, $page, $orderQueryId, $orderDirection);
+		$results = array_map($this->manipulateRowCallback, $parentPaginatedResult->getResults());
+		return new PaginationResult($page, $limit, count($results), $results);
 	}
 
 }

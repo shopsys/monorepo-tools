@@ -135,14 +135,9 @@ class Grid {
 	private $orderingEntityClass;
 
 	/**
-	 * @var int
+	 * @var \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	private $fromItem;
-
-	/**
-	 * @var int
-	 */
-	private $toItem;
+	private $paginationResults;
 
 	/**
 	 * @param string $id
@@ -174,8 +169,6 @@ class Grid {
 
 		$this->limit = $this->defaultLimit;
 		$this->page = 1;
-		$this->fromItem = 1;
-		$this->toItem = $this->defaultLimit;
 
 		$this->loadFromRequest();
 	}
@@ -410,17 +403,10 @@ class Grid {
 	}
 
 	/**
-	 * @return int
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getFromItem() {
-		return $this->fromItem;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getToItem() {
-		return $this->toItem;
+	public function getPaginationResults() {
+		return $this->paginationResults;
 	}
 
 	/**
@@ -450,8 +436,6 @@ class Grid {
 				$this->setOrder(trim($gridData['order']));
 				$this->isOrderFromRequest = true;
 			}
-			$this->fromItem = (($this->page - 1) * $this->limit) + 1;
-			$this->toItem = $this->page * $this->limit;
 		}
 	}
 
@@ -518,12 +502,18 @@ class Grid {
 			$orderDirection = null;
 		}
 
-		$this->rows = $this->dataSource->getRows(
+		$this->paginationResults = $this->dataSource->getPaginatedRows(
 			$this->allowPaging ? $this->limit : null,
 			$this->page,
 			$orderQueryId,
 			$orderDirection
 		);
+
+		if ($this->paginationResults == null) {
+			$this->rows = $this->dataSource->getRows();
+		} else {
+			$this->rows = $this->paginationResults->getResults();
+		}
 	}
 
 	/**
@@ -538,9 +528,6 @@ class Grid {
 		$this->totalCount = $this->dataSource->getTotalRowsCount();
 		$this->pageCount = max(ceil($this->totalCount / $this->limit), 1);
 		$this->page = min($this->page, $this->pageCount);
-		if ($this->totalCount < $this->toItem) {
-			$this->toItem = (int)$this->totalCount;
-		}
 	}
 
 	/**

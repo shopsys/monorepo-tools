@@ -175,9 +175,8 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 		$dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
-			->setMethods(['getRows', 'getTotalRowsCount'])
+			->setMethods(['getTotalRowsCount'])
 			->getMockForAbstractClass();
-		$dataSourceMock->expects($this->once())->method('getRows')->will($this->returnValue([]));
 		$dataSourceMock->expects($this->never())->method('getTotalRowsCount');
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
@@ -195,9 +194,8 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$routerMock = $this->getMock(Router::class, [], [], '', false);
 		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 		$dataSourceMock = $this->getMockBuilder(DataSourceInterface::class)
-			->setMethods(['getRows', 'getTotalRowsCount'])
+			->setMethods(['getTotalRowsCount'])
 			->getMockForAbstractClass();
-		$dataSourceMock->expects($this->once())->method('getRows')->will($this->returnValue([]));
 		$dataSourceMock->expects($this->once())->method('getTotalRowsCount')->will($this->returnValue(0));
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);

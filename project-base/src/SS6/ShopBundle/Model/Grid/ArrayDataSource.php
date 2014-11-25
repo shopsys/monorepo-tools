@@ -51,11 +51,10 @@ class ArrayDataSource implements DataSourceInterface {
 	 * @param int $page
 	 * @param null $orderQueryId
 	 * @param string $orderDirection
-	 * @return array
 	 * @throws \SS6\ShopBundle\Model\Grid\Exception\PaginationNotSupportedException
 	 * @throws \SS6\ShopBundle\Model\Grid\Exception\OrderingNotSupportedException
 	 */
-	public function getRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
+	public function getPaginatedRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
 		if ($limit !== null) {
 			$message = 'Pagination not supported in ArrayDataSource';
 			throw new \SS6\ShopBundle\Model\Grid\Exception\PaginationNotSupportedException($message);
@@ -65,7 +64,12 @@ class ArrayDataSource implements DataSourceInterface {
 			$message = 'Ordering not supported in ArrayDataSource';
 			throw new \SS6\ShopBundle\Model\Grid\Exception\OrderingNotSupportedException($message);
 		}
+	}
 
+	/**
+	 * @return array
+	 */
+	public function getRows() {
 		return $this->data;
 	}
 

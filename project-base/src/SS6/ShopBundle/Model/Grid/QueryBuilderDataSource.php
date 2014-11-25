@@ -34,9 +34,9 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	 * @param int $page
 	 * @param string|null $orderQueryId
 	 * @param string $orderDirection
-	 * @return array
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getRows(
+	public function getPaginatedRows(
 		$limit = null,
 		$page = 1,
 		$orderQueryId = null,
@@ -52,7 +52,14 @@ class QueryBuilderDataSource implements DataSourceInterface {
 		$paginationResult = $queryPaginator->getResult($page, $limit);
 		/* @var $paginationResult \SS6\ShopBundle\Component\Paginator\PaginationResult */
 
-		return $paginationResult->getResults();
+		return $paginationResult;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getRows() {
+		return $this->getPaginatedRows()->getResults();
 	}
 
 	/**
