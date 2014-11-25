@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Grid;
 
+use SS6\ShopBundle\Component\Paginator\PaginationResult;
+
 class ArrayDataSource implements DataSourceInterface {
 
 	/**
@@ -51,6 +53,7 @@ class ArrayDataSource implements DataSourceInterface {
 	 * @param int $page
 	 * @param null $orderQueryId
 	 * @param string $orderDirection
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 * @throws \SS6\ShopBundle\Model\Grid\Exception\PaginationNotSupportedException
 	 * @throws \SS6\ShopBundle\Model\Grid\Exception\OrderingNotSupportedException
 	 */
@@ -64,13 +67,8 @@ class ArrayDataSource implements DataSourceInterface {
 			$message = 'Ordering not supported in ArrayDataSource';
 			throw new \SS6\ShopBundle\Model\Grid\Exception\OrderingNotSupportedException($message);
 		}
-	}
 
-	/**
-	 * @return array
-	 */
-	public function getRows() {
-		return $this->data;
+		return new PaginationResult(1, count($this->data), count($this->data), $this->data);
 	}
 
 	/**

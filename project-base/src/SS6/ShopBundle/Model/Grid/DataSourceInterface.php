@@ -22,11 +22,6 @@ interface DataSourceInterface {
 	);
 
 	/**
-	 * @return array
-	 */
-	public function getRows();
-
-	/**
 	 * @param int $rowId
 	 * @return array
 	 */

@@ -509,11 +509,7 @@ class Grid {
 			$orderDirection
 		);
 
-		if ($this->paginationResults == null) {
-			$this->rows = $this->dataSource->getRows();
-		} else {
-			$this->rows = $this->paginationResults->getResults();
-		}
+		$this->rows = $this->paginationResults->getResults();
 	}
 
 	/**

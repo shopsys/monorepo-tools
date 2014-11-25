@@ -56,13 +56,6 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getRows() {
-		return $this->getPaginatedRows()->getResults();
-	}
-
-	/**
 	 * @param int $rowId
 	 * @return array
 	 */
