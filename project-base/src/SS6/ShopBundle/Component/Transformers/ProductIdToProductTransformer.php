@@ -36,6 +36,11 @@ class ProductIdToProductTransformer implements DataTransformerInterface {
 		if (empty($productId)) {
 			return null;
 		}
-		return $this->productRepository->getById($productId);
+		try {
+			$product = $this->productRepository->getById($productId);
+		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+			throw new \Symfony\Component\Form\Exception\TransformationFailedException('Product not found');
+		}
+		return $product;
 	}
 }

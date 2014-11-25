@@ -27,8 +27,9 @@ class TopProductFormType extends AbstractType {
 				'product', 'product', array(
 					'required' => true,
 					'constraints' => array(
-						new Constraints\NotBlank(array('message' => 'Vyplňte prosím id produktu')),
-					)
+						new Constraints\NotBlank(array('message' => 'Vyplňte prosím ID produktu')),
+					),
+					'invalid_message' => 'Zadejte platné ID produktu',
 				)
 			);
 	}
