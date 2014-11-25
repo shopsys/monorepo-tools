@@ -1,14 +1,23 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block content %}
 
 	{% if sliderItems is not empty %}
-	<div id="slider-hp">
-	{% for item in sliderItems %}
-		<div>
-			<a href = "{{ item.link }}">{{ image(item, { size: 'original' }) }}</a>
+		<div id="slider-hp">
+		{% for item in sliderItems %}
+			<div>
+				<a href = "{{ item.link }}">{{ image(item, { size: 'original' }) }}</a>
+			</div>
+		{% endfor %}
 		</div>
-	{% endfor %}
-	</div>
 	{% endif %}
+
+	{% if topProductsDetails is not empty %}
+		<div id="top-products">
+			<h1>{{ 'Akční zboží'|trans }}</h1>
+			{{ productList.list(topProductsDetails) }}
+		</div>
+	{% endif %}
+
 {% endblock %}
