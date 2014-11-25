@@ -65,7 +65,7 @@ class OrderStatusFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function create(OrderStatusData $orderStatusFormData) {
-		$orderStatus = new OrderStatus($orderStatusFormData->getNames(), OrderStatus::TYPE_IN_PROGRESS);
+		$orderStatus = new OrderStatus($orderStatusFormData, OrderStatus::TYPE_IN_PROGRESS);
 		$this->em->persist($orderStatus);
 		$this->em->beginTransaction();
 		$this->em->flush();
@@ -80,12 +80,12 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
-	public function edit($orderStatusId, OrderStatusData $orderStatusFormData) {
+	public function edit($orderStatusId, OrderStatusData $orderStatusData) {
 		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
-		$orderStatus->edit($orderStatusFormData->getNames());
+		$orderStatus->edit($orderStatusData);
 		$this->em->flush();
 
 		return $orderStatus;

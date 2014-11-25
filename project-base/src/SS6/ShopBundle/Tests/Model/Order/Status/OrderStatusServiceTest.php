@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Tests\Model\Order\Status;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 use SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException;
 use SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException;
@@ -16,7 +16,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDelete() {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			['en' => 'orderStatusName'],
+			new OrderStatusData(['en' => 'orderStatusName']),
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 		$orderStatusService->delete($orderStatus, array());
@@ -37,7 +37,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDeleteForbidden($statusType, $expectedException = null) {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			['en' => 'orderStatusName'],
+			new OrderStatusData(['en' => 'orderStatusName']),
 			$statusType
 		);
 		if ($expectedException !== null) {
@@ -49,7 +49,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDeleteWithOrder() {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			['en' => 'orderStatusName'],
+			new OrderStatusData(['en' => 'orderStatusName']),
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 
@@ -65,7 +65,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testDeleteForbiddenOrWithOrder() {
 		$orderStatusService = new OrderStatusService();
 		$orderStatus = new OrderStatus(
-			['en' => 'orderStatusName'],
+			new OrderStatusData(['en' => 'orderStatusName']),
 			OrderStatus::TYPE_NEW
 		);
 
@@ -81,11 +81,11 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	public function testReplaceAndDelete() {
 		$orderStatusService = new OrderStatusService();
 		$oldOrderStatus = new OrderStatus(
-			['en' => 'Old status'],
+			new OrderStatusData(['en' => 'Old status']),
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 		$newOrderStatus = new OrderStatus(
-			['en' => 'New status'],
+			new OrderStatusData(['en' => 'New Status']),
 			OrderStatus::TYPE_IN_PROGRESS
 		);
 

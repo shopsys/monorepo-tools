@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation;
 
 /**
@@ -43,13 +44,13 @@ class OrderStatus extends AbstractTranslatableEntity {
 	private $type;
 
 	/**
-	 * @param array $names
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @param int $type
 	 */
-	public function __construct(array $names, $type) {
+	public function __construct(OrderStatusData $orderStatusData, $type) {
 		$this->translations = new ArrayCollection();
 		$this->setType($type);
-		$this->setTranslations($names);
+		$this->setTranslations($orderStatusData->getNames());
 	}
 
 	/**
@@ -107,10 +108,10 @@ class OrderStatus extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param array $names
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
-	public function edit(array $names) {
-		$this->setTranslations($names);
+	public function edit(OrderStatusData $orderStatusData) {
+		$this->setTranslations($orderStatusData->getNames());
 	}
 
 }

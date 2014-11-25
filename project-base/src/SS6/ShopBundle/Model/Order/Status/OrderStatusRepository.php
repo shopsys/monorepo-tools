@@ -7,8 +7,6 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository {
 
-	const STATUS_NEW = 1;
-
 	/**
 	 * @var \Doctrine\ORM\EntityRepository
 	 */
@@ -55,7 +53,13 @@ class OrderStatusRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function getDefault() {
-		return $this->getById(self::STATUS_NEW);
+		$orderStatus = $this->getOrderStatusRepository()->findOneBy(array('type' => OrderStatus::TYPE_NEW));
+
+		if ($orderStatus === null) {
+			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($orderStatusId);
+		}
+
+		return $orderStatus;
 	}
 
 	/**

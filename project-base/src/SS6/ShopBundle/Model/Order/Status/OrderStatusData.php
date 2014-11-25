@@ -7,19 +7,26 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 class OrderStatusData {
 
 	/**
-	 * @var array|null
+	 * @var array
 	 */
 	private $names;
 
 	/**
-	 * @return array|null
+	 * @param array $names
+	 */
+	public function __construct($names = array()) {
+		$this->names = $names;
+	}
+
+		/**
+	 * @return array
 	 */
 	public function getNames() {
 		return $this->names;
 	}
 
 	/**
-	 * @param array|null $names
+	 * @param array $names
 	 */
 	public function setNames($names) {
 		$this->names = $names;
