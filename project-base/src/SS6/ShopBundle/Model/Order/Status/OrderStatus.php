@@ -78,7 +78,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\TransportTranslation
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation
 	 */
 	protected function createTranslation() {
 		return new OrderStatusTranslation();

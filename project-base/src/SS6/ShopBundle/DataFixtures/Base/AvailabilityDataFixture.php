@@ -17,13 +17,14 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$availabilityData = new AvailabilityData('Skladem');
+		$availabilityData = new AvailabilityData();
+		$availabilityData->setNames(array('cs' => 'Skladem', 'en' => 'In stock'));
 		$this->createAvailability($manager, self::IN_STOCK, $availabilityData);
 
-		$availabilityData->setName('Na dotaz');
+		$availabilityData->setNames(array('cs' => 'Na dotaz', 'en' => 'On request'));
 		$this->createAvailability($manager, self::ON_REQUEST, $availabilityData);
 
-		$availabilityData->setName('Nedostupné');
+		$availabilityData->setNames(array('cs' => 'Nedostupné', 'en' => 'Out of stock'));
 		$this->createAvailability($manager, self::OUT_OF_STOCK, $availabilityData);
 
 		$manager->flush();

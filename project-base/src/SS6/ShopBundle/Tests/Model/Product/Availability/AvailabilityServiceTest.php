@@ -12,7 +12,7 @@ class AvailabilityServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreate() {
 		$availabilityService = new AvailabilityService();
 
-		$availabilityDataOriginal = new AvailabilityData('availabilityName');
+		$availabilityDataOriginal = new AvailabilityData(array('cs' => 'availabilityNameCs', 'en' => 'availabilityNameEn'));
 		$availability = $availabilityService->create($availabilityDataOriginal);
 
 		$availabilityDataNew = new AvailabilityData();
@@ -24,8 +24,8 @@ class AvailabilityServiceTest extends PHPUnit_Framework_TestCase {
 	public function testEdit() {
 		$availabilityService = new AvailabilityService();
 
-		$availabilityDataOld = new AvailabilityData('oldAvailabilityName');
-		$availabilityDataEdit = new AvailabilityData('editAvailabilityName');
+		$availabilityDataOld = new AvailabilityData(array('cs' => 'availabilityNameCs', 'en' => 'availabilityNameEn'));
+		$availabilityDataEdit = new AvailabilityData(array('cs' => 'editAvailabilityNameCs', 'en' => 'editAvailabilityNameEn'));
 		$availability = new Availability($availabilityDataOld);
 
 		$availabilityService->edit($availability, $availabilityDataEdit);

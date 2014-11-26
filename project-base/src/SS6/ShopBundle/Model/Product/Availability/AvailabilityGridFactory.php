@@ -3,9 +3,11 @@
 namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Localization\Localization;
 
 class AvailabilityGridFactory implements GridFactoryInterface {
 
@@ -20,12 +22,14 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
 	 */
-	public function __construct(EntityManager $em, GridFactory $gridFactory) {
+	private $localization;
+
+	public function __construct(EntityManager $em, GridFactory $gridFactory, Localization $localization) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
+		$this->localization = $localization;
 	}
 
 	/**
@@ -34,13 +38,17 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('a')
-			->from(Availability::class, 'a');
+			->select('a, at')
+			->from(Availability::class, 'a')
+			->join('a.translations', 'at', Join::WITH, 'at.locale = :locale')
+			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'a.name', 'Název', true);
+
+		$grid->addColumn('names', 'at.name', 'Název', true);
+
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('delete', 'Smazat', 'admin_availability_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tuto dostupnost?');

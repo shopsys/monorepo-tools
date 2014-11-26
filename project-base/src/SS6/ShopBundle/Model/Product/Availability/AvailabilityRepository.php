@@ -53,7 +53,7 @@ class AvailabilityRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	public function findAll() {
-		return $this->getAvailabilityRepository()->findBy(array(), array('name' => 'asc'));
+		return $this->getAvailabilityRepository()->findBy(array(), array('id' => 'asc'));
 	}
 
 }
