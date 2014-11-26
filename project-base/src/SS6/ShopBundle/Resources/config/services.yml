@@ -136,9 +136,6 @@ services:
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
-  ss6.shop.component.string.hash_generator:
-    class: SS6\ShopBundle\Component\String\HashGenerator
-
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
@@ -329,6 +326,9 @@ services:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
     scope: request
+
+  ss6.shop.order.hash_generator_repository:
+    class: SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository
 
   ss6.shop.order.item.price_calculation:
     class: SS6\ShopBundle\Model\Order\Item\PriceCalculation

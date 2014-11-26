@@ -18,7 +18,6 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
-use SS6\ShopBundle\Component\String\HashGenerator;
 
 class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -27,7 +26,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetAmendedCustomerDataByOrderWithoutChanges() {
 		$customerEditService = new CustomerEditService();
-		$hashGenerator = new HashGenerator();
 
 		$userData = new UserData();
 		$userData->setFirstName('firstName');
@@ -73,7 +71,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			$orderData,
 			'123456',
 			$orderStatus,
-			$hashGenerator->getHash()
+			'7ebafe9fe'
 		);
 		$order->setCompanyInfo(
 			'companyName',
@@ -101,7 +99,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetAmendedCustomerDataByOrder() {
 		$customerEditService = new CustomerEditService();
-		$hashGenerator = new HashGenerator();
 
 		$userData = new UserData();
 		$userData->setFirstName('firstName');
@@ -128,7 +125,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			$orderData,
 			'123456',
 			$orderStatus,
-			$hashGenerator->getHash()
+			'7eba123456fe9fe'
 		);
 		$order->setCompanyInfo(
 			'companyName',

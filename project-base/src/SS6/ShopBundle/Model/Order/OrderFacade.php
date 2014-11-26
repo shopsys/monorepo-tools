@@ -19,6 +19,7 @@ use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
+use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 
 class OrderFacade {
 
@@ -82,6 +83,11 @@ class OrderFacade {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository
+	 */
+	private $orderHashGeneratorRepository;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -94,7 +100,8 @@ class OrderFacade {
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
 		OrderMailFacade $orderMailFacade,
-		Domain $domain
+		Domain $domain,
+		OrderHashGeneratorRepository $orderHashGeneratorRepository
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -108,6 +115,7 @@ class OrderFacade {
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->orderMailFacade = $orderMailFacade;
 		$this->domain = $domain;
+		$this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
 	}
 
 	/**
@@ -118,11 +126,13 @@ class OrderFacade {
 	public function createOrder(OrderData $orderData, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
+		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
 
 		$order = $this->orderService->createOrder(
 			$orderData,
 			$orderNumber,
 			$orderStatus,
+			$orderUrlHash,
 			$user
 		);
 

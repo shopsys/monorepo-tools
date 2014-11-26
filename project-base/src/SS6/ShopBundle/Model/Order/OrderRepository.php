@@ -179,4 +179,11 @@ class OrderRepository {
 		return $order;
 	}
 
+	/**
+	 * @param string $urlHash
+	 * @return \SS6\ShopBundle\Model\Order\Order|null
+	 */
+	public function findByUrlHash($urlHash) {
+		return $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
+	}
 }

@@ -9,7 +9,6 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\PriceCalculation as OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Component\String\HashGenerator;
 
 class OrderService {
 
@@ -24,28 +23,22 @@ class OrderService {
 	private $orderPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\String\HashGenerator
-	 */
-	private $hashGenerator;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation $orderItemPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Order\PriceCalculation $orderPriceCalculation
 	 */
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
-		OrderPriceCalculation $orderPriceCalculation,
-		HashGenerator $hashGenerator
+		OrderPriceCalculation $orderPriceCalculation
 	) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
-		$this->hashGenerator = $hashGenerator;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param string $orderUrlHash
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
@@ -53,13 +46,14 @@ class OrderService {
 		OrderData $orderData,
 		$orderNumber,
 		OrderStatus $orderStatus,
+		$orderUrlHash,
 		User $user = null
 	) {
 		$order = new Order(
 			$orderData,
 			$orderNumber,
 			$orderStatus,
-			$this->hashGenerator->getHash(),
+			$orderUrlHash,
 			$user
 		);
 		return $order;
