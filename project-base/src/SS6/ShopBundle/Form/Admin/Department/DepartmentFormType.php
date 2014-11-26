@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Department\DepartmentData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class DepartmentFormType extends AbstractType {
 
@@ -22,7 +23,12 @@ class DepartmentFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text');
+			->add('names', 'localized', array(
+				'main_constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
+				),
+				'options' => array('required' => false),
+			));
 	}
 
 	/**
