@@ -55,8 +55,8 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 			$topProduct = $this->topProductFacade->create($topProductData);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
-					array('Tento produkt již v seznamu existuje.')
-				);
+				array('Tento produkt již v seznamu existuje.')
+			);
 		}
 		return $topProduct->getId();
 	}
@@ -70,8 +70,8 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 			$this->topProductFacade->edit($id, $topProductData);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
-					array('Tento produkt již v seznamu existuje.')
-				);
+				array('Tento produkt již v seznamu existuje.')
+			);
 		}
 	}
 

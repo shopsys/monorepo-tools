@@ -62,7 +62,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'tp.id');
 
 		$grid = $this->gridFactory->create('topProductList', $dataSource);
-		$grid->addColumn('product', 'pt.name', 'Produkt');
+		$grid->addColumn('product', 'pt.name', 'Produkt (zadávejte ID produktu)');
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('delete', 'Smazat', 'admin_topproduct_delete', array('id' => 'tp.id'))
 			->setConfirmMessage('Opravdu chcete odebrat tento produkt z akce na titulní stránce?');

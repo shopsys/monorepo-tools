@@ -13,7 +13,7 @@ class TopProductNotFoundException extends NotFoundHttpException implements TopPr
 	 * @param \Exception $previous
 	 */
 	public function __construct($criteria, Exception $previous = null) {
-		parent::__construct('Top product not found by criteria ' . var_export($criteria, true), $previous, 0);
+		parent::__construct('Top product not found', $previous, 0);
 	}
 
 }

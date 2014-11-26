@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
-use SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException;
 
 class TopProductRepository {
 
@@ -60,7 +59,7 @@ class TopProductRepository {
 	private function getOneByCriteria(array $criteria) {
 		$result = $this->getTopProductRepository()->findOneBy($criteria);
 		if ($result === null) {
-			throw new TopProductNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException($criteria);
 		}
 		return $result;
 	}
