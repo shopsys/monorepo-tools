@@ -53,6 +53,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 			'error_bubbling' => false,
 			'compound' => true,
 			'file_constraints' => array(),
+			'multiple' => false,
 		));
 	}
 
@@ -80,18 +81,21 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		parent::buildForm($builder, $options);
 		$this->required = $options['required'];
 		$this->constraints = $options['file_constraints'];
 
 		$builder->addModelTransformer($this);
 		$builder
-			->add('file_uploaded', 'hidden', array(
+			->add('uploadedFiles', 'collection', array(
+				'type' => 'hidden',
+				'allow_add' => true,
 				'constraints' => array(
-					new Constraints\Callback(array($this, 'validateUploadedFile')),
+					new Constraints\Callback(array($this, 'validateUploadedFiles')),
 				),
 			))
-			->add('file', 'file');
+			->add('file', 'file', array(
+				'multiple' => $options['multiple']
+			));
 
 		// fallback for IE9 and older
 		$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
@@ -101,7 +105,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @param string|null $filenameUploaded
 	 * @param \Symfony\Component\Validator\ExecutionContextInterface $context
 	 */
-	public function validateUploadedFile($filenameUploaded, ExecutionContextInterface $context) {
+	public function validateUploadedFiles($filenameUploaded, ExecutionContextInterface $context) {
 		if ($this->required || $filenameUploaded !== null) {
 			$filepath = $this->fileUpload->getCacheFilepath($filenameUploaded);
 			$file = new File($filepath, false);
