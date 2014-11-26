@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
@@ -45,6 +46,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			->with($this->equalTo(1))
 			->will($this->returnValue($expected));
 
+		$productServiceMock = $this->getMock(ProductService::class, [], [], '', false);
+
 		$vatFacade = new VatFacade(
 			$emMock,
 			$vatRepositoryMock,
@@ -52,7 +55,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			$settingMock,
 			$paymentEditFacadeMock,
 			$productEditFacadeMock,
-			$transportEditFacadeMock
+			$transportEditFacadeMock,
+			$productServiceMock
 		);
 
 		$this->assertEquals($expected, $vatFacade->getDefaultVat());
@@ -81,6 +85,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			->method('set')
 			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT), $this->equalTo(1));
 
+		$productServiceMock = $this->getMock(ProductService::class, [], [], '', false);
+
 		$vatFacade = new VatFacade(
 			$emMock,
 			$vatRepositoryMock,
@@ -88,7 +94,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			$settingMock,
 			$paymentEditFacadeMock,
 			$productEditFacadeMock,
-			$transportEditFacadeMock
+			$transportEditFacadeMock,
+			$productServiceMock
 		);
 		$vatFacade->setDefaultVat($vatMock);
 	}

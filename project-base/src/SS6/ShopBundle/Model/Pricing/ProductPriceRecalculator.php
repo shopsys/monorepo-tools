@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -20,6 +21,11 @@ class ProductPriceRecalculator {
 	private $recalculateAll = false;
 
 	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
@@ -35,17 +41,19 @@ class ProductPriceRecalculator {
 	private $productCalculatedPriceRepository;
 
 	public function __construct(
+		EntityManager $em,
 		ProductRepository $productRepository,
 		ProductPriceCalculation $productPriceCalculation,
 		ProductCalculatedPriceRepository $productCalculatedPriceRepository
 	) {
+		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
 	}
 
 	public function scheduleRecalculatePriceForProduct(Product $product) {
-		$this->products[] = $product;
+		$this->products[$product->getId()] = $product;
 	}
 
 	public function scheduleRecalculatePriceForAllProducts() {
@@ -61,6 +69,8 @@ class ProductPriceRecalculator {
 			$price = $this->productPriceCalculation->calculatePrice($product);
 			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $price->getPriceWithVat());
 		}
+
+		$this->em->flush();
 
 		$this->products = array();
 		$this->recalculateAll = false;
