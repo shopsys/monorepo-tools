@@ -132,14 +132,14 @@ class ProductRepository {
 				$queryBuilder->orderBy('pcp.priceWithVat', 'asc');
 				break;
 
-			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
+			case ProductListOrderingSetting::ORDER_BY_PRICE_DESC:
 				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
 				$queryBuilder->orderBy('pcp.priceWithVat', 'desc');
 				break;
 
 			default:
-				$message = 'Product list ordering mod "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
-				throw new \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException($message);
+				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
+				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 
 		$queryBuilder->addOrderBy('p.id', 'asc');

@@ -23,12 +23,12 @@ class ProductListOrderingSetting {
 
 	/**
 	 * @param string $orderingMode
-	 * @throws \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException
+	 * @throws \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException
 	 */
 	private function setOrderingMode($orderingMode) {
 		if (!in_array($orderingMode, self::getOrderingModes())) {
 			$message = 'Product list ordering mod "' . $orderingMode  .'" is not valid.';
-			throw new \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException($message);
+			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 
 		$this->orderingMode = $orderingMode;
