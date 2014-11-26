@@ -42,9 +42,13 @@ class QueryPaginator implements PaginatorInterface {
 		$totalCount = $this->getTotalCount();
 
 		if ($pageSize !== null) {
-			$maxPages = (int)ceil($totalCount / $pageSize);
-			if ($page > $maxPages) {
-				$page = $maxPages;
+			$maxPage = (int)floor($totalCount / $pageSize);
+			if ($maxPage < 1) {
+				$maxPage = 1;
+			}
+
+			if ($page > $maxPage) {
+				$page = $maxPage;
 			}
 
 			$queryBuilder
