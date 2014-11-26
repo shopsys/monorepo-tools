@@ -6,6 +6,8 @@ class ProductListOrderingSetting {
 
 	const ORDER_BY_NAME_ASC = 'name_asc';
 	const ORDER_BY_NAME_DESC = 'name_desc';
+	const ORDER_BY_PRICE_ASC = 'price_asc';
+	const ORDER_BY_PRICE_DESC = 'price_desc';
 
 	/**
 	 * @var string
@@ -46,6 +48,8 @@ class ProductListOrderingSetting {
 		return array(
 			self::ORDER_BY_NAME_ASC,
 			self::ORDER_BY_NAME_DESC,
+			self::ORDER_BY_PRICE_ASC,
+			self::ORDER_BY_PRICE_DESC,
 		);
 	}
 

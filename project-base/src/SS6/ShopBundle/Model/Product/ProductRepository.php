@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 
@@ -124,6 +125,16 @@ class ProductRepository {
 
 			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
 				$queryBuilder->orderBy('pt.name', 'desc');
+				break;
+
+			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
+				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
+				$queryBuilder->orderBy('pcp.priceWithVat', 'asc');
+				break;
+
+			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
+				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
+				$queryBuilder->orderBy('pcp.priceWithVat', 'desc');
 				break;
 
 			default:
