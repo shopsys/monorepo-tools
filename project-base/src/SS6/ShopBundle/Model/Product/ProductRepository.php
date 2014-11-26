@@ -217,4 +217,11 @@ class ProductRepository {
 		return $this->getAllVisibleByDomainIdQueryBuilder($domainId)->getQuery()->getResult();
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product[]
+	 */
+	public function getAll() {
+		return $this->getProductRepository()->findAll();
+	}
+
 }

@@ -50,4 +50,11 @@ class ProductCalculatedPrice {
 		return $this->priceWithVat;
 	}
 
+	/**
+	 * @param string $priceWithVat
+	 */
+	public function setPriceWithVat($priceWithVat) {
+		$this->priceWithVat = $priceWithVat;
+	}
+
 }

@@ -433,6 +433,14 @@ services:
   ss6.shop.pricing.price_calculation:
     class: SS6\ShopBundle\Model\Pricing\PriceCalculation
 
+  ss6.shop.pricing.product_calculated_price_repository:
+    class: SS6\ShopBundle\Model\Pricing\ProductCalculatedPriceRepository
+
+  ss6.shop.pricing.product_price_recalculator:
+    class: SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
   ss6.shop.pricing.base_price_calculation:
     class: SS6\ShopBundle\Model\Pricing\BasePriceCalculation
 
