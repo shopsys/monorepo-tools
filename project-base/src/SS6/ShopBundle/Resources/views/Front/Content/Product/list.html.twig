@@ -9,18 +9,24 @@
 {% block main_content %}
 	<h1>{{ department.name|trans }}</h1>
 
-	<div>
-		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
-	</div>
+	{% if productDetails|length > 0 %}
+		{% set entityName = 'zboží'|trans %}
+		{% set route = 'front_product_department' %}
+		{% set routeParams = {'departmentId': department.id} %}
 
-	{% set entityName = 'zboží'|trans %}
-	{% set route = 'front_product_department' %}
-	{% set routeParams = {'departmentId': department.id} %}
+		<div>
+			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
+		</div>
 
-	{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
 
-	{{ productList.list(productDetails) }}
+		{{ productList.list(productDetails) }}
 
-	{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+	{% else %}
+		<div class="in-message in-message--info js-flash-message">
+			{{ 'Toto oddělení neobsahuje žádné produkty'|trans }}
+		</div>
+	{% endif %}
 
 {% endblock %}
