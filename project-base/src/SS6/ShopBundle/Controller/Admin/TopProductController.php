@@ -40,6 +40,6 @@ class TopProductController extends Controller {
 			$flashMessageSender->addErrorTwig('Zboží se nepodařilo odstranit - zboží již není v tomto seznamu.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_topproducts_index'));
+		return $this->redirect($this->generateUrl('admin_topproduct_list'));
 	}
 }
