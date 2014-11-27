@@ -1,0 +1,51 @@
+/*
+Menu list
+========
+One level menu list
+
+	<ul class="list-menu">
+		<li class="list-menu__item">
+			<a href="./">Menu item</a>
+		</li>
+		<li class="list-menu__item">
+			<a href="./">Menu item</a>
+		</li>
+		<li class="list-menu__item">
+			<a href="./">Menu item</a>
+		</li>
+	</ul>
+
+*/
+
+.list-menu {
+	.reset-ul();
+	.cfx();
+	width: 100%;
+
+	background: @color-fa;
+}
+
+.list-menu__item {
+	display: block;
+	margin: 0;
+	padding: 0;
+
+	border-top: 1px solid @color-border;
+
+	&:first-child {
+		border-top: none;
+	}
+
+	a {
+		display: block;
+		padding: 8px 10px;
+
+		text-decoration: none;
+		color: @color-7;
+
+		&:hover {
+			background: @color-primary;
+			color: @color-f;
+		}
+	}
+}

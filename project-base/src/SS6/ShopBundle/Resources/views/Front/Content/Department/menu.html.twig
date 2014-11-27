@@ -1,5 +1,5 @@
 {% for department in departments %}
-	<li class="departments-menu__item">
+	<li class="list-menu__item">
 		<a href="{{ url('front_product_department', { departmentId: department.id }) }}">{{ department.name }}</a>
 	</li>
 {% endfor %}
