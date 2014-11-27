@@ -18,7 +18,6 @@ class DepartmentDataFixture extends AbstractReferenceFixture {
 	const BOOKS = 'department_books';
 	const TOYS = 'department_toys';
 
-
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */

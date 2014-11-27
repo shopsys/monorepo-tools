@@ -74,7 +74,7 @@ class DepartmentRepository {
 			->select('d')
 			->from(Department::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
-			->where('dt.name is not null');
+			->where('dt.name IS NOT NULL');
 		$qb->setParameter('locale', $locale);
 
 		return $qb;
