@@ -1,10 +1,10 @@
-{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block title %}
 	- {{ 'Přihlášení'|trans }}
 {% endblock %}
 
-{% block content %}
+{% block main_content %}
 	{{ form_errors(form, {errors_attr: { class: 'in-message--static'}}) }}
 
 	<div class="row">

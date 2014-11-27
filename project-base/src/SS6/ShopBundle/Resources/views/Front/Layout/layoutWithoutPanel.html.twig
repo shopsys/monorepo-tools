@@ -1,0 +1,9 @@
+{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+
+{% block content %}
+	<div class="main-content">
+		{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
+
+		{% block main_content %}{% endblock %}
+	</div>
+{% endblock %}

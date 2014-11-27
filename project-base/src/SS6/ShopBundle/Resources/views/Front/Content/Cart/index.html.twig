@@ -1,10 +1,10 @@
-{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block title %}
 	{{ 'Košík'|trans }}
 {% endblock %}
 
-{% block content %}
+{% block main_content %}
 	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
 
 	<h1>{{ 'Váš košík'|trans }}</h1>

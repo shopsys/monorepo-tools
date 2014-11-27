@@ -1,10 +1,10 @@
-{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block title %}
 	{{ 'Registrace'|trans }}
 {% endblock %}
 
-{% block content %}
+{% block main_content %}
 	<h1>{{ 'Registrace'|trans }}</h1>
 
 	{{ form_errors(form) }}

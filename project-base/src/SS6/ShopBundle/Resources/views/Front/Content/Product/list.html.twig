@@ -6,6 +6,10 @@
 	- {{ 'Katalog zboží - '~department.name|trans }}
 {% endblock %}
 
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Department:panel')) }}
+{% endblock %}
+
 {% block main_content %}
 	<h1>{{ department.name|trans }}</h1>
 
