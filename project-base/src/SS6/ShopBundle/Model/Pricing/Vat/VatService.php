@@ -2,10 +2,20 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
+use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class VatService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+	 */
+	private $productPriceRecalculationScheduler;
+
+	public function __construct(ProductPriceRecalculationScheduler $productPriceRecalculationScheduler) {
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
@@ -22,6 +32,7 @@ class VatService {
 	 */
 	public function edit(Vat $vat, VatData $vatData) {
 		$vat->edit($vatData);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForVat($vat);
 
 		return $vat;
 	}

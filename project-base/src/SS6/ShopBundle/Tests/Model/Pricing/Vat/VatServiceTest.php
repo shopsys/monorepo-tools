@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Model\Pricing\Vat;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
@@ -10,7 +11,11 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 class VatServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {
-		$vatService = new VatService();
+		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$vatService = new VatService($productPriceRecalculationSchedulerMock);
 
 		$vatDataOriginal = new VatData('vatName', '21.00');
 		$vat = $vatService->create($vatDataOriginal);
@@ -22,7 +27,11 @@ class VatServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testEdit() {
-		$vatService = new VatService();
+		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$vatService = new VatService($productPriceRecalculationSchedulerMock);
 
 		$vatDataOld = new VatData('oldVatName', '21.00');
 		$vatDataEdit = new VatData('editVatName', '15.00');
