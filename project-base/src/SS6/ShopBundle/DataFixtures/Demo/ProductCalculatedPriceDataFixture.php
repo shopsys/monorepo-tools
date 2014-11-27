@@ -14,9 +14,12 @@ class ProductCalculatedPriceDataFixture extends AbstractReferenceFixture impleme
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
+		$productPriceRecalculationScheduler = $this->get('ss6.shop.pricing.product_price_recalculation_scheduler');
+		/* @var $productPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler */
 		$productPriceRecalculator = $this->get('ss6.shop.pricing.product_price_recalculator');
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator */
-		$productPriceRecalculator->scheduleRecalculatePriceForAllProducts();
+
+		$productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 		$productPriceRecalculator->runScheduledRecalculations();
 	}
 

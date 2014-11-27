@@ -436,6 +436,9 @@ services:
   ss6.shop.pricing.product_calculated_price_repository:
     class: SS6\ShopBundle\Model\Pricing\ProductCalculatedPriceRepository
 
+  ss6.shop.pricing.product_price_recalculation_scheduler:
+    class: SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+
   ss6.shop.pricing.product_price_recalculator:
     class: SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator
     tags:

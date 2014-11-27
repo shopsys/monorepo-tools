@@ -3,22 +3,13 @@
 namespace SS6\ShopBundle\Model\Pricing;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	private $products = array();
-
-	/**
-	 * @var boolean
-	 */
-	private $recalculateAll = false;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -40,40 +31,37 @@ class ProductPriceRecalculator {
 	 */
 	private $productCalculatedPriceRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+	 */
+	private $productPriceRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
 		ProductPriceCalculation $productPriceCalculation,
-		ProductCalculatedPriceRepository $productCalculatedPriceRepository
+		ProductCalculatedPriceRepository $productCalculatedPriceRepository,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
-	}
-
-	public function scheduleRecalculatePriceForProduct(Product $product) {
-		$this->products[$product->getId()] = $product;
-	}
-
-	public function scheduleRecalculatePriceForAllProducts() {
-		$this->recalculateAll = true;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	public function runScheduledRecalculations() {
-		if ($this->recalculateAll) {
-			$this->products = $this->productRepository->getAll();
-		}
+		$products = $this->productPriceRecalculationScheduler->getProductsScheduledForRecalculation();
+		$this->recalculatePricesForProducts($products);
+		$this->productPriceRecalculationScheduler->cleanSchedule();
+	}
 
-		foreach ($this->products as $product) {
+	private function recalculatePricesForProducts(array $products) {
+		foreach ($products as $product) {
 			$price = $this->productPriceCalculation->calculatePrice($product);
 			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $price->getPriceWithVat());
 		}
-
 		$this->em->flush();
-
-		$this->products = array();
-		$this->recalculateAll = false;
 	}
 
 	/**

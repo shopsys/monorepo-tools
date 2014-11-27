@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator;
+use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -26,20 +26,20 @@ class ProductService {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
 	 */
-	private $productPriceRecalculator;
+	private $productPriceRecalculationScheduler;
 
 	public function __construct(
 		ProductPriceCalculation $productPriceCalculation,
 		InputPriceCalculation $inputPriceCalculation,
 		PricingSetting $pricingSetting,
-		ProductPriceRecalculator $productPriceRecalculator
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->inputPriceCalculation = $inputPriceCalculation;
 		$this->pricingSetting = $pricingSetting;
-		$this->productPriceRecalculator = $productPriceRecalculator;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	/**
@@ -82,7 +82,7 @@ class ProductService {
 	 */
 	public function edit(Product $product, ProductData $productData) {
 		$product->edit($productData);
-		$this->productPriceRecalculator->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 	}
 
 	/**
@@ -91,7 +91,7 @@ class ProductService {
 	 */
 	public function setInputPrice(Product $product, $inputPrice) {
 		$product->setPrice($inputPrice);
-		$this->productPriceRecalculator->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 	}
 
 	/**
@@ -100,7 +100,7 @@ class ProductService {
 	 */
 	public function changeVat(Product $product, Vat $vat) {
 		$product->changeVat($vat);
-		$this->productPriceRecalculator->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 	}
 
 }

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
-use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator;
+use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -52,9 +52,9 @@ class ProductEditFacade {
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
 	 */
-	private $productPriceRecalculator;
+	private $productPriceRecalculationScheduler;
 
 	public function __construct(
 		EntityManager $em,
@@ -64,7 +64,7 @@ class ProductEditFacade {
 		Domain $domain,
 		ProductService $productService,
 		ImageFacade	$imageFacade,
-		ProductPriceRecalculator $productPriceRecalculator
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -73,7 +73,7 @@ class ProductEditFacade {
 		$this->domain = $domain;
 		$this->productService = $productService;
 		$this->imageFacade = $imageFacade;
-		$this->productPriceRecalculator = $productPriceRecalculator;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	/**
@@ -101,7 +101,7 @@ class ProductEditFacade {
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
-		$this->productPriceRecalculator->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 
 		return $product;
 	}
