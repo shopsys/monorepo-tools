@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\DepartmentDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Product\ProductData;
 
@@ -28,8 +29,18 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			'out-of-stock' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST)
 		);
+		$departments = array(
+			'1' => $this->getReference(DepartmentDataFixture::TV),
+			'2' => $this->getReference(DepartmentDataFixture::PHOTO),
+			'3' => $this->getReference(DepartmentDataFixture::PRINTERS),
+			'4' => $this->getReference(DepartmentDataFixture::PC),
+			'5' => $this->getReference(DepartmentDataFixture::PHONES),
+			'6' => $this->getReference(DepartmentDataFixture::COFFEE),
+			'7' => $this->getReference(DepartmentDataFixture::BOOKS),
+			'8' => $this->getReference(DepartmentDataFixture::TOYS),
+		);
 
-		$loaderService->injectReferences($vats, $availabilities);
+		$loaderService->injectReferences($vats, $availabilities, $departments);
 		$productsData = $loaderService->getProductsData();
 		$productNo = 1;
 		foreach ($productsData as $productData) {

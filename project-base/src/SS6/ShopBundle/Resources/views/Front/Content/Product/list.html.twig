@@ -1,24 +1,36 @@
-{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 {% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block title %}
-	- {{ 'Katalog zboží'|trans }}
+	- {{ 'Katalog zboží - '~department.name|trans }}
 {% endblock %}
 
-{% block content %}
-	<h1>{{ 'Katalog zboží'|trans }}</h1>
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Department:panel')) }}
+{% endblock %}
 
-	<div>
-		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
-	</div>
+{% block main_content %}
+	<h1>{{ department.name|trans }}</h1>
 
-	{% set entityName = 'zboží'|trans %}
+	{% if productDetails|length > 0 %}
+		{% set entityName = 'zboží'|trans %}
+		{% set route = 'front_product_department' %}
+		{% set routeParams = {'departmentId': department.id} %}
 
-	{{ paginator.paginatorNavigation(paginationResult, entityName) }}
-	
-	{{ productList.list(productDetails) }}
+		<div>
+			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
+		</div>
 
-	{{ paginator.paginatorNavigation(paginationResult, entityName) }}
+		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+
+		{{ productList.list(productDetails) }}
+
+		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+	{% else %}
+		<div class="in-message in-message--info js-flash-message">
+			{{ 'Toto oddělení neobsahuje žádné produkty'|trans }}
+		</div>
+	{% endif %}
 
 {% endblock %}

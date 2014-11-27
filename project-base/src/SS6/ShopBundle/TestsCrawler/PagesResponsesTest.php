@@ -66,7 +66,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 			['detail-objednavky/' . $orderUrlHash],
 			['kosik/'],
 			['prihlaseni/'],
-			['produkty'],
+			['produkty/oddeleni/1'],
 			['produkt/1'],
 			['registrace/'],
 		);

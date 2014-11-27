@@ -1,7 +1,11 @@
-{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
-{% block content %}
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Department:panel')) }}
+{% endblock %}
+
+{% block main_content %}
 
 	{% if sliderItems is not empty %}
 		<div id="slider-hp">

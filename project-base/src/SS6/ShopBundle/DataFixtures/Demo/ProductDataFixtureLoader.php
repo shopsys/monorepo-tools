@@ -47,6 +47,11 @@ class ProductDataFixtureLoader {
 	private $parameterValues;
 
 	/**
+	 * @var array
+	 */
+	private $departments;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 */
@@ -59,9 +64,10 @@ class ProductDataFixtureLoader {
 	 * @param array $vats
 	 * @param array $availabilities
 	 */
-	public function injectReferences(array $vats, array $availabilities) {
+	public function injectReferences(array $vats, array $availabilities, array $departments) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
+		$this->departments = $departments;
 	}
 
 	/**
@@ -137,6 +143,7 @@ class ProductDataFixtureLoader {
 				$productData->setAvailability(null);
 		}
 		$productData->setParameters($this->getProductParameterValuesDataFromString($row[15]));
+		$productData->setDepartments($this->getProductDepartmentsFromString($row[16]));
 
 		return $productData;
 	}
@@ -172,5 +179,22 @@ class ProductDataFixtureLoader {
 		}
 
 		return $productParameterValuesData;
+	}
+
+	/**
+	 *
+	 * @param string $string
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	private function getProductDepartmentsFromString($string) {
+		$departments = array();
+		if (!empty($string)) {
+			$departmentIds = explode(';', $string);
+			foreach ($departmentIds as $departmentId) {
+				$departments[] = $this->departments[$departmentId];
+			}
+		}
+
+		return $departments;
 	}
 }

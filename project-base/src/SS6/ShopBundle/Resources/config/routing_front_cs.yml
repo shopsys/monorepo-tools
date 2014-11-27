@@ -44,17 +44,18 @@ front_order_sent:
   pattern: /potvrzeni-objednavky/
   defaults: { _controller: SS6ShopBundle:Front\Order:sent }
 
+front_product_department:
+  pattern: /produkty/oddeleni/{departmentId}/{page}
+  defaults: {_controller: SS6ShopBundle:Front\Product:listByDepartment, page: 1 }
+  requirements:
+    id: \d+
+
 front_product_detail:
   pattern: /produkt/{id}
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }
   requirements:
     id: \d+
 
-front_product_list:
-  pattern: /produkty/{page}
-  defaults: { _controller: SS6ShopBundle:Front\Product:list, page: 1 }
-  requirements:
-    page: \d+
 front_registration_register:
   pattern: /registrace/
   defaults: { _controller: SS6ShopBundle:Front\Registration:register }

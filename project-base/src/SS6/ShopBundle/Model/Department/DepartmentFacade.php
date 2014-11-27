@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Department\DepartmentData;
 use SS6\ShopBundle\Model\Department\DepartmentService;
 use SS6\ShopBundle\Model\Department\DepartmentRepository;
+use SS6\ShopBundle\Model\Domain\Domain;
 
 class DepartmentFacade {
 
@@ -24,14 +25,21 @@ class DepartmentFacade {
 	 */
 	private $departmentService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		EntityManager $em,
 		DepartmentRepository $departmentRepository,
-		DepartmentService $departmentService
+		DepartmentService $departmentService,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->departmentRepository = $departmentRepository;
 		$this->departmentService = $departmentService;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -40,13 +48,6 @@ class DepartmentFacade {
 	 */
 	public function getById($departmentId) {
 		return $this->departmentRepository->getById($departmentId);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
-	 */
-	public function getAll() {
-		return $this->departmentRepository->findAll();
 	}
 
 	/**
@@ -82,6 +83,14 @@ class DepartmentFacade {
 
 		$this->em->remove($department);
 		$this->em->flush();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	public function getAllWithTranslation() {
+		$locale = $this->domain->getLocale();
+		return $this->departmentRepository->getAllWithTranslation($locale);
 	}
 
 }

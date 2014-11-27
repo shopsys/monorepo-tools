@@ -39,11 +39,6 @@
 				</ul>
 
 				<div class="header-panel">
-					<ul class="articles-menu articles-menu--reverse left">
-						<li class="articles-menu__item">
-							<a href="{{ url('front_product_list') }}">{{ 'Katalog zboží'|trans }}</a></li>
-						</li>
-					</ul>
 					<ul class="articles-menu">
 						{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
 					</ul>
@@ -51,11 +46,8 @@
 
 			</div>
 
-			<div class="content">
-				<div class="main-content">
-					{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
-					{% block content %}{% endblock %}
-				</div>
+			<div class="content clear">
+				{% block content %}{% endblock %}
 			</div>
 
 			<div class="footer">
