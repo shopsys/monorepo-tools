@@ -3,6 +3,7 @@
 #  class: SS6\ShopBundle\Model\Product\Product
 #  types:
 #    - name: gallery
+#      multiple: true
 #      sizes:
 #        - { name: origin, width: ~, height: ~, crop: false }
 #        - { name: detail, width: 200, height: 300, crop: false }
@@ -17,6 +18,7 @@
 
 - name: product
   class: SS6\ShopBundle\Model\Product\Product
+  multiple: true
   sizes:
     - { name: origin, width: ~, height: ~, crop: false }
     - { name: default, width: 200, height: 300, crop: false }

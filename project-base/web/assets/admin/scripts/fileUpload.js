@@ -70,11 +70,11 @@
 				$input.val(filename);
 			}
 
-			this.delete = function () {
+			this.deleteItem = function () {
 				uploader.tryDeleteCachedFile($input.val());
 				$file.remove();
 			}
-			$delete.bind('click', this.delete);
+			$delete.bind('click', this.deleteItem);
 
 			this.setLabel = function (filename, filesize) {
 				var sizeInMB = Math.round(filesize / 1024 / 1024 * 100) / 100;
@@ -117,21 +117,21 @@
 			onUploadSuccess: function(id, data){
 				if (data.status === 'success') {
 					if (uploader.lastUploadItemId !== null && uploader.multiple === false) {
-						uploader.items[uploader.lastUploadItemId].delete();
+						uploader.items[uploader.lastUploadItemId].deleteItem();
 					}
 					uploader.lastUploadItemId = id;
 					uploader.items[id].setAsUploaded(data.filename);
 					updateFileStatus('success', 'Úspěšně nahráno');
 					uploader.$status.parent().fadeOut(4000);
 				} else {
-					uploader.items[id].delete();
+					uploader.items[id].deleteItem();
 					SS6.window({
 						content: 'Při nahrávání souboru došlo k chybě.'
 					});
 				}
 			},
 			onUploadError: function(id, message){
-				uploader.items[id].delete();
+				uploader.items[id].deleteItem();
 				SS6.window({
 					content: 'Při nahrávání souboru došlo k chybě: ' + message
 				});
@@ -143,9 +143,7 @@
 
 			},
 			onFallbackMode: function(message){
-				if (!uploader.$hiddenInput.val()) {
-					uploader.$fallbackHide.hide();
-				}
+				uploader.$fallbackHide.hide();
 			}
 		});
 	}

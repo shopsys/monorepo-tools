@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\ExecutionContextInterface;
@@ -62,7 +61,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @return string
 	 */
 	public function reverseTransform($value) {
-		return $value['file_uploaded'];
+		return $value['uploadedFiles'];
 	}
 
 	/**
@@ -71,7 +70,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 */
 	public function transform($value) {
 		return array(
-			'file_uploaded' => $value,
+			'uploadedFiles' => (array)$value,
 			'file' => null,
 		);
 	}
@@ -102,14 +101,16 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	}
 
 	/**
-	 * @param string|null $filenameUploaded
+	 * @param string|null $uploadedFiles
 	 * @param \Symfony\Component\Validator\ExecutionContextInterface $context
 	 */
-	public function validateUploadedFiles($filenameUploaded, ExecutionContextInterface $context) {
-		if ($this->required || $filenameUploaded !== null) {
-			$filepath = $this->fileUpload->getCacheFilepath($filenameUploaded);
-			$file = new File($filepath, false);
-			$context->validateValue($file, $this->constraints);
+	public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context) {
+		if ($this->required || count($uploadedFiles) > 0) {
+			foreach ($uploadedFiles as $uploadedFile) {
+				$filepath = $this->fileUpload->getCacheFilepath($uploadedFile);
+				$file = new File($filepath, false);
+				$context->validateValue($file, $this->constraints);
+			}
 		}
 	}
 
@@ -118,16 +119,19 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 */
 	public function onPreSubmit(FormEvent $event) {
 		$data = $event->getData();
-		if (isset($data['file']) && ($data['file'] instanceof UploadedFile)) {
-			try {
-				$cachedFilename = $this->fileUpload->upload($data['file']);
-				$this->fileUpload->tryDeleteCachedFile($data['file_uploaded']);
-				$data['file'] = null;
-				$data['file_uploaded'] = $cachedFilename;
-				$event->setData($data);
-			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUploadException $ex) {
-				$event->getForm()->addError('Nahrání souboru se nezdařilo.');
+		if (is_array($data['file'])) {
+			$fallbackFiles = $data['file'];
+			foreach ($fallbackFiles as $file) {
+				if ($file instanceof UploadFile) {
+					try {
+						$data['uploadedFiles'][] = $this->fileUpload->upload($file);
+					} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUploadException $ex) {
+						$event->getForm()->addError('Nahrání souboru se nezdařilo.');
+					}
+				}
 			}
+
+			$event->setData($data);
 		}
 	}
 

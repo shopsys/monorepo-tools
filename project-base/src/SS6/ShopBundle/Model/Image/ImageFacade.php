@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageRepository;
+use SS6\ShopBundle\Model\Image\ImageService;
 
 class ImageFacade {
 
@@ -24,21 +25,61 @@ class ImageFacade {
 	 */
 	private $imageRepository;
 
-	public function __construct(EntityManager $em, ImageConfig $imageConfig, ImageRepository $imageRepository) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageService
+	 */
+	private $imageService;
+
+	public function __construct(
+		EntityManager $em,
+		ImageConfig $imageConfig,
+		ImageRepository $imageRepository,
+		ImageService $imageService
+	) {
 		$this->em = $em;
 		$this->imageConfig = $imageConfig;
 		$this->imageRepository = $imageRepository;
+		$this->imageService = $imageService;
 	}
 
 	/**
 	 * @param object $entity
-	 * @param string|null $temporaryFilename
+	 * @param array|null $temporaryFilenames
 	 * @param string|null $type
 	 */
-	public function uploadImage($entity, $temporaryFilename, $type) {
-		if ($temporaryFilename !== null) {
-			$image = $this->getImageByEntityOrCreate($entity, $type, $temporaryFilename);
+	public function uploadImage($entity, $temporaryFilenames, $type) {
+		if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
+			$imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
+			$entityId = $this->getEntityId($entity);
+			$oldImage = $this->imageRepository->findImageByEntity($imageEntityConfig->getEntityName(), $entityId, $type);
+
+			$image = $this->imageService->editImageOrCreateNew(
+				$imageEntityConfig,
+				$entityId,
+				array_pop($temporaryFilenames),
+				$type,
+				$oldImage
+			);
+			$this->em->persist($image);
 			$this->em->flush($image);
+		}
+	}
+
+	/**
+	 * @param object $entity
+	 * @param array|null $temporaryFilenames
+	 * @param string|null $type
+	 */
+	public function uploadImages($entity, $temporaryFilenames, $type) {
+		if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
+			$imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
+			$entityId = $this->getEntityId($entity);
+
+			$images = $this->imageService->getUploadedImages($imageEntityConfig, $entityId, $temporaryFilenames, $type);
+			foreach ($images as $image) {
+				$this->em->persist($image);
+			}
+			$this->em->flush();
 		}
 	}
 
@@ -53,26 +94,6 @@ class ImageFacade {
 			$this->getEntityId($entity),
 			$type
 		);
-	}
-
-	/**
-	 * @param object $entity
-	 * @param string|null $type
-	 * @param string $temporaryFilename
-	 * @return \SS6\ShopBundle\Model\Image\Image
-	 */
-	private function getImageByEntityOrCreate($entity, $type, $temporaryFilename) {
-		try {
-			$image = $this->getImageByEntity($entity, $type);
-			$image->setTemporaryFilename($temporaryFilename);
-		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
-			$entityName = $this->imageConfig->getEntityName($entity);
-			$entityId = $this->getEntityId($entity);
-			$image = new Image($entityName, $entityId, $type, $temporaryFilename);
-			$this->em->persist($image);
-		}
-
-		return $image;
 	}
 
 	/**

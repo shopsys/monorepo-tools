@@ -27,16 +27,26 @@ class ImageRepository {
 	 * @param string $entityName
 	 * @param int $entityId
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Model\Image\Image
-	 * @throws \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException
+	 * @return \SS6\ShopBundle\Model\Image\Image|null
 	 */
-	public function getImageByEntity($entityName, $entityId, $type) {
+	public function findImageByEntity($entityName, $entityId, $type) {
 		$image = $this->getImageRepository()->findOneBy(array(
 			'entityName' => $entityName,
 			'entityId' => $entityId,
 			'type' => $type
 		));
 
+		return $image;
+	}
+
+	/**
+	 * @param string $entityName
+	 * @param int $entityId
+	 * @param string|null $type
+	 * @return \SS6\ShopBundle\Model\Image\Image
+	 */
+	public function getImageByEntity($entityName, $entityId, $type) {
+		$image = $this->findImageByEntity($entityName, $entityId, $type);
 		if ($image === null) {
 			$message = 'Image of type "' . ($type ?: 'NULL') . '" not found for entity "' . $entityName . '" with ID ' . $entityId;
 			throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException($message);
