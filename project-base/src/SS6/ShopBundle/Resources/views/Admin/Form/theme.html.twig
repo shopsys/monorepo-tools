@@ -152,7 +152,7 @@
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
 	{{ parent('form_widget_simple') }}
 	{% if icon is defined %}
-		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__icon js-tooltip"
+		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
 			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
 			title="{{ icon.title }}"
 		 ></i>
