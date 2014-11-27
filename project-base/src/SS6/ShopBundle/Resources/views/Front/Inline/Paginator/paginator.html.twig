@@ -1,4 +1,4 @@
-{% macro paginatorNavigation(paginationResult, entityName) %}
+{% macro paginatorNavigation(paginationResult, entityName, route, routeParams) %}
 	<div class="row text-center mb-half">
 		{% set pageCount = paginationResult.pageCount %}
 		<strong class="mt-half col-md-3">
@@ -11,11 +11,13 @@
 				{% if pageCount > 1 %}
 					{% if paginationResult.page > 1 %}
 						<li>
-							<a href="{{ path('front_product_list', {'page': paginationResult.page - 1}) }}">&lt;</a>
+							{% set routeParams = routeParams|merge({'page': paginationResult.page - 1}) %}
+							<a href="{{ path(route, routeParams) }}">&lt;</a>
 						</li>
 
 						<li>
-							<a href="{{ path('front_product_list', {'page': 1}) }}">1</a>
+							{% set routeParams = routeParams|merge({'page': 1}) %}
+							<a href="{{ path(route, routeParams) }}">1</a>
 						</li>
 					{% endif %}
 
@@ -30,7 +32,8 @@
 
 					{% for page in (paginationResult.page - pagerExpand)..(paginationResult.page) if page > 1 and page < paginationResult.page %}
 						<li>
-							<a href="{{ path('front_product_list', {'page': page}) }}">{{ page }}</a>
+							{% set routeParams = routeParams|merge({'page': page}) %}
+							<a href="{{ path(route, routeParams) }}">{{ page }}</a>
 						</li>
 					{% endfor %}
 					<li class="active">
@@ -39,7 +42,8 @@
 
 					{% for page in (paginationResult.page + 1)..(paginationResult.page + pagerExpand) if page > paginationResult.page and page < pageCount %}
 						<li>
-							<a href="{{ path('front_product_list', {'page': page}) }}">{{ page }}</a>
+							{% set routeParams = routeParams|merge({'page': page}) %}
+							<a href="{{ path(route, routeParams) }}">{{ page }}</a>
 						</li>
 					{% endfor %}
 
@@ -51,10 +55,12 @@
 
 					{% if paginationResult.page < pageCount %}
 						<li>
-							<a href="{{ path('front_product_list', {'page': pageCount}) }}">{{ pageCount }}</a>
+							{% set routeParams = routeParams|merge({'page': pageCount}) %}
+							<a href="{{ path(route, routeParams) }}">{{ pageCount }}</a>
 						</li>
 						<li>
-							<a href="{{ path('front_product_list', {'page': paginationResult.page + 1}) }}">&gt;</a>
+							{% set routeParams = routeParams|merge({'page': paginationResult.page + 1}) %}
+							<a href="{{ path(route, routeParams) }}">&gt;</a>
 						</li>
 					{% endif %}
 				{% endif %}

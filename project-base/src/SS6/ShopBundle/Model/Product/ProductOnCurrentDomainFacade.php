@@ -51,12 +51,13 @@ class ProductOnCurrentDomainFacade {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginatedProductDetailsForProductList(
+	public function getPaginatedProductDetailsForProductDepartmentList(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
-		$limit
+		$limit,
+		$departmentId
 	) {
-		$paginationResult = $this->getPaginatedProductsForProductList($orderingSetting, $page, $limit);
+		$paginationResult = $this->getPaginatedProductsForProductDepartmentList($orderingSetting, $page, $limit, $departmentId);
 		$products = $paginationResult->getResults();
 
 		return new PaginationResult(
@@ -72,25 +73,20 @@ class ProductOnCurrentDomainFacade {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	private function getPaginatedProductsForProductList(
+	private function getPaginatedProductsForProductDepartmentList(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
-		$limit
+		$limit,
+		$departmentId
 	) {
-		return $this->productRepository->getPaginationResultForProductList(
+		return $this->productRepository->getPaginationResultForProductDepartmentList(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$orderingSetting,
 			$page,
-			$limit
+			$limit,
+			$departmentId
 		);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Product[]
-	 */
-	public function getVisibleProductsOnCurrentDomain() {
-		return $this->productRepository->getVisibleProductsByDomainId($this->domain->getId());
 	}
 
 }

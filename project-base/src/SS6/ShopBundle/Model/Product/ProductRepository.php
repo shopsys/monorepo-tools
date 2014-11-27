@@ -68,14 +68,19 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param string $locale
+	 * @param int $departmentId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllVisibleWithTranslationByDomainIdQueryBuilder($domainId, $locale) {
+	private function getAllVisibleWithTranslationByDomainIdAndDepartmentIdQueryBuilder($domainId, $locale, $departmentId) {
 		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
 			->addSelect('pt')
-			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale');
+			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
+			->join('p.departments', 'pdp', Join::ON)
+			->andWhere('pdp.id = :departmentId');
 
 		$qb->setParameter('locale', $locale);
+		$qb->setParameter('departmentId', $departmentId);
 
 		return $qb;
 	}
@@ -86,16 +91,18 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
+	 * @param int $departmentId
 	 * @return PaginationResult
 	 */
-	public function getPaginationResultForProductList(
+	public function getPaginationResultForProductDepartmentList(
 		$domainId,
 		$locale,
 		ProductListOrderingSetting $orderingSetting,
 		$page,
-		$limit
+		$limit,
+		$departmentId
 	) {
-		$qb = $this->getAllVisibleWithTranslationByDomainIdQueryBuilder($domainId, $locale);
+		$qb = $this->getAllVisibleWithTranslationByDomainIdAndDepartmentIdQueryBuilder($domainId, $locale, $departmentId);
 		$this->applyOrdering($qb, $orderingSetting);
 
 		$queryPaginator = new QueryPaginator($qb);

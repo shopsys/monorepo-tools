@@ -25,21 +25,30 @@ class ProductController extends Controller {
 		));
 	}
 
-	public function listAction(Request $request, $page) {
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $departmentId
+	 * @param int $page
+	 */
+	public function listByDepartmentAction(Request $request, $departmentId, $page) {
 		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
 		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
 		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
 		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
+		$departmentFacade = $this->get('ss6.shop.department.department_facade');
+		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$paginationResult = $productOnCurrentDomainFacade
-			->getPaginatedProductDetailsForProductList($orderingSetting, $page, self::PRODUCTS_PER_PAGE);
+			->getPaginatedProductDetailsForProductDepartmentList($orderingSetting, $page, self::PRODUCTS_PER_PAGE, $departmentId);
+		$department = $departmentFacade->getById($departmentId);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
+			'department' => $department,
 		));
 	}
 
