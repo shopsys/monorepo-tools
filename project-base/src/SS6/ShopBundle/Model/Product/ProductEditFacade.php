@@ -141,7 +141,7 @@ class ProductEditFacade {
 		// in database, this leads in trying to insert duplicate entry.
 		// That's why it's necessary to do remove and flush first.
 
-		$oldProductParameterValues = $this->parameterRepository->findParameterValuesByProduct($product);
+		$oldProductParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
 		foreach ($oldProductParameterValues as $oldProductParameterValue) {
 			$this->em->remove($oldProductParameterValue);
 		}

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -68,7 +69,7 @@ class ParameterRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
 	public function findAll() {
-		return $this->getParameterRepository()->findBy(array(), array('name' => 'asc'));
+		return $this->getParameterRepository()->findBy(array(), array('id' => 'asc'));
 	}
 
 	/**
@@ -90,12 +91,39 @@ class ParameterRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getProductParameterValuesByProductQueryBuilder(Product $product) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('ppv')
+			->from(ProductParameterValue::class, 'ppv')
+			->where('ppv.product = :product_id')
+			->setParameter('product_id', $product->getId());
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
-	public function findParameterValuesByProduct(Product $product) {
-		return $this->getProductParameterValueRepository()->findBy(array(
-			'product' => $product,
-		));
+	public function getProductParameterValuesByProduct(Product $product) {
+		$queryBuilder = $this->getProductParameterValuesByProductQueryBuilder($product);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function getProductParameterValuesByProductEagerLoaded(Product $product) {
+		$queryBuilder = $this->getProductParameterValuesByProductQueryBuilder($product)
+			->join('ppv.parameter', 'p')
+			->join('p.translations', 'pt')
+			->join('ppv.value', 'pv');
+
+		return $queryBuilder->getQuery()->execute();
 	}
 
 	/**

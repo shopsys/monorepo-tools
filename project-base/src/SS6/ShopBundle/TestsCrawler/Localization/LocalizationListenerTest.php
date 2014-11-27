@@ -9,6 +9,7 @@ class LocalizationListenerTest extends DatabaseTestCase {
 	public function testProductDetailLocaleCs() {
 		$crawler = $this->getClient()->request('GET', 'produkt/3');
 
+		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 		$this->assertGreaterThan(
 			0,
 			$crawler->filter('html:contains("Katalogové číslo")')->count()
@@ -23,6 +24,7 @@ class LocalizationListenerTest extends DatabaseTestCase {
 
 		$crawler = $this->getClient()->request('GET', 'product/detail/3');
 
+		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 		$this->assertGreaterThan(
 			0,
 			$crawler->filter('html:contains("Catalogue number")')->count()

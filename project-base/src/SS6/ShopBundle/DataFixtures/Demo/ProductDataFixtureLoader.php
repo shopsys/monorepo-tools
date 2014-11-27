@@ -162,10 +162,12 @@ class ProductDataFixtureLoader {
 				continue;
 			}
 
-			list($parameterName, $valueText) = $rowData;
+			list($serializedParameterNames, $valueText) = $rowData;
+			$serializedParameterNames = trim($serializedParameterNames, '[]');
 
-			if (!isset($this->parameters[$parameterName])) {
-				$this->parameters[$parameterName] = new Parameter(new ParameterData($parameterName));
+			if (!isset($this->parameters[$serializedParameterNames])) {
+				$parameterNames = $this->parseParameterNames($serializedParameterNames);
+				$this->parameters[$serializedParameterNames] = new Parameter(new ParameterData($parameterNames));
 			}
 
 			if (!isset($this->parameterValues[$valueText])) {
@@ -173,7 +175,7 @@ class ProductDataFixtureLoader {
 			}
 
 			$productParameterValueData = new ProductParameterValueData();
-			$productParameterValueData->setParameter($this->parameters[$parameterName]);
+			$productParameterValueData->setParameter($this->parameters[$serializedParameterNames]);
 			$productParameterValueData->setValue($this->parameterValues[$valueText]);
 			$productParameterValuesData[] = $productParameterValueData;
 		}
@@ -182,7 +184,20 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 *
+	 * @param string $string
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	private function parseParameterNames($string) {
+		$parameterNames = array();
+		$sections = explode(',', $string);
+		foreach ($sections as $section) {
+			$row = explode(':', $section);
+			$parameterNames[$row[0]] = $row[1];
+		}
+		return $parameterNames;
+	}
+
+	/**
 	 * @param string $string
 	 * @return \SS6\ShopBundle\Model\Department\Department[]
 	 */

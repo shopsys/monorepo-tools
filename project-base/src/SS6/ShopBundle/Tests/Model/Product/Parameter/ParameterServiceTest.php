@@ -10,30 +10,30 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterService;
 class ParameterServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {
-		$availabilityService = new ParameterService();
+		$parameterService = new ParameterService();
 
-		$availabilityDataOriginal = new ParameterData('availabilityName');
-		$availability = $availabilityService->create($availabilityDataOriginal);
+		$parameterDataOriginal = new ParameterData(array('cs' => 'parameterName'));
+		$parameter = $parameterService->create($parameterDataOriginal);
 
-		$availabilityDataNew = new ParameterData();
-		$availabilityDataNew->setFromEntity($availability);
+		$parameterDataNew = new ParameterData();
+		$parameterDataNew->setFromEntity($parameter);
 
-		$this->assertEquals($availabilityDataOriginal, $availabilityDataNew);
+		$this->assertEquals($parameterDataOriginal, $parameterDataNew);
 	}
 
 	public function testEdit() {
-		$availabilityService = new ParameterService();
+		$parameterService = new ParameterService();
 
-		$availabilityDataOld = new ParameterData('oldParameterName');
-		$availabilityDataEdit = new ParameterData('editParameterName');
-		$availability = new Parameter($availabilityDataOld);
+		$parameterDataOld = new ParameterData(array('cs' => 'oldParameterName'));
+		$parameterDataEdit = new ParameterData(array('cs' => 'editParameterName'));
+		$parameter = new Parameter($parameterDataOld);
 
-		$availabilityService->edit($availability, $availabilityDataEdit);
+		$parameterService->edit($parameter, $parameterDataEdit);
 
-		$availabilityDataNew = new ParameterData();
-		$availabilityDataNew->setFromEntity($availability);
+		$parameterDataNew = new ParameterData();
+		$parameterDataNew->setFromEntity($parameter);
 
-		$this->assertEquals($availabilityDataEdit, $availabilityDataNew);
+		$this->assertEquals($parameterDataEdit, $parameterDataNew);
 	}
 
 }

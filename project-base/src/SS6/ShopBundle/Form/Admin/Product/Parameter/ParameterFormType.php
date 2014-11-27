@@ -23,12 +23,14 @@ class ParameterFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
+			->add('names', 'localized', array(
 				'required' => false,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název parametru')),
-					new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název parametru nesmí být delší než {{ limit }} znaků')),
-				)
+				'options' => array(
+					'constraints' => array(
+						new Constraints\NotBlank(array('message' => 'Vyplňte prosím název parametru')),
+						new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název parametru nesmí být delší než {{ limit }} znaků')),
+					)
+				),
 			));
 	}
 

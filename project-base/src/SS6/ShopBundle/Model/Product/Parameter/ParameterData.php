@@ -2,39 +2,46 @@
 
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
+use SS6\ShopBundle\Model\Product\Parameter\Parameter;
+
 class ParameterData {
 
 	/**
-	 * @var string|null
+	 * @var array
 	 */
-	private $name;
+	private $names;
 
 	/**
-	 * @param string|null $name
+	 * @param array $names
 	 */
-	public function __construct($name = null) {
-		$this->name = $name;
+	public function __construct($names = array()) {
+		$this->names = $names;
 	}
 
 	/**
-	 * @return string|null
+	 * @return array
 	 */
-	public function getName() {
-		return $this->name;
+	public function getNames() {
+		return $this->names;
 	}
 
 	/**
-	 * @param string $name
+	 * @param array $names
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setNames($names) {
+		$this->names = $names;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
 	 */
 	public function setFromEntity(Parameter $parameter) {
-		$this->name = $parameter->getName();
+		$translations = $parameter->getTranslations();
+		$names = array();
+		foreach ($translations as $translate) {
+			$names[$translate->getLocale()] = $translate->getName();
+		}
+		$this->setNames($names);
 	}
 
 }

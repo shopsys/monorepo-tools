@@ -2,14 +2,18 @@
 
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterTranslation;
 
 /**
  * @ORM\Table(name="parameter_titles")
  * @ORM\Entity
  */
-class Parameter {
+class Parameter extends AbstractTranslatableEntity {
 
 	/**
 	 * @var integer
@@ -18,20 +22,21 @@ class Parameter {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $id;
+	protected $id;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterTranslation[]
 	 *
-	 * @ORM\Column(type="string", length=100)
+	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Product\Parameter\ParameterTranslation")
 	 */
-	private $name;
+	protected $translations;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 */
 	public function __construct(ParameterData $parameterData) {
-		$this->name = $parameterData->getName();
+		$this->translations = new ArrayCollection();
+		$this->setTranslations($parameterData);
 	}
 
 	/**
@@ -42,17 +47,34 @@ class Parameter {
 	}
 
 	/**
+	 * @param string|null $locale
 	 * @return string
 	 */
-	public function getName() {
-		return $this->name;
+	public function getName($locale = null) {
+		return $this->translation($locale)->getName();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+	 */
+	private function setTranslations(ParameterData $parameterData) {
+		foreach ($parameterData->getNames() as $locale => $name) {
+			$this->translation($locale)->setName($name);
+		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterTranslation
+	 */
+	protected function createTranslation() {
+		return new ParameterTranslation();
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 */
 	public function edit(ParameterData $parameterData) {
-		$this->name = $parameterData->getName();
+		$this->setTranslations($parameterData);
 	}
 
 }

@@ -69,7 +69,15 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	private function getParameters(Product $product) {
-		return $this->parameterRepository->findParameterValuesByProduct($product);
-	}
+		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
+		foreach ($productParameterValues as $index => $productParameterValue) {
+			$parameter = $productParameterValue->getParameter();
 
+			if ($parameter->getName() === null) {
+				unset($productParameterValues[$index]);
+			}
+		}
+
+		return $productParameterValues;
+	}
 }

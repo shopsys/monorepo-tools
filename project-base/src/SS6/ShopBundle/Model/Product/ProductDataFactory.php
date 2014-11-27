@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class ProductDataFactory {
@@ -53,9 +54,9 @@ class ProductDataFactory {
 		$productData->setFromEntity($product, $productDomains);
 		$productParameterValuesData = array();
 
-		$productParameterValues = $this->parameterRepository->findParameterValuesByProduct($product);
+		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
 		foreach ($productParameterValues as $productParameterValue) {
-			$productParameterValueData = new \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData();
+			$productParameterValueData = new ProductParameterValueData();
 			$productParameterValueData->setFromEntity($productParameterValue);
 			$productParameterValuesData[] = $productParameterValueData;
 		}
