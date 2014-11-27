@@ -45,4 +45,19 @@ class VatServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($vatDataEdit, $vatDataNew);
 	}
 
+	public function testEditSchedulesPriceRecalculation() {
+		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleRecalculatePriceForVat');
+
+		$vatService = new VatService($productPriceRecalculationSchedulerMock);
+
+		$vatDataOld = new VatData('oldVatName', '21.00');
+		$vatDataEdit = new VatData('editVatName', '15.00');
+		$vat = new Vat($vatDataOld);
+
+		$vatService->edit($vat, $vatDataEdit);
+	}
+
 }
