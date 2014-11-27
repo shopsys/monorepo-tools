@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Department;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Department\Department;
 
 class DepartmentRepository {
@@ -54,6 +55,29 @@ class DepartmentRepository {
 		}
 
 		return $department;
+	}
+
+	/**
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	public function getAllWithTranslation($locale) {
+		return $this->getAllWithTranslationQueryBuilder($locale)->getQuery()->execute();
+	}
+
+	/**
+	 * @param string $locale
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllWithTranslationQueryBuilder($locale) {
+		$qb = $this->em->createQueryBuilder()
+			->select('d')
+			->from(Department::class, 'd')
+			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
+			->where('dt.name is not null');
+		$qb->setParameter('locale', $locale);
+
+		return $qb;
 	}
 
 }
