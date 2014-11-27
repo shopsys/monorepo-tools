@@ -10,7 +10,7 @@
 	},
 	"require": {
 		"php": ">=5.4",
-		"bmatzner/jquery-bundle": "2.1.*",
+		"bmatzner/jquery-bundle": "1.11.1",
 		"bmatzner/jquery-ui-bundle": "1.10.*",
 		"craue/formflow-bundle": "3.0.*@dev",
 		"doctrine/common": "2.4.x-dev#434c364b6a8780c16769b60fcc56e61e6bac766f",

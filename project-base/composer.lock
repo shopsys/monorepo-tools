@@ -4,21 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b2b4d744bb9d23714708af7ad334fad",
+    "hash": "687b296a57ae174825f886d78885237f",
     "packages": [
         {
             "name": "bmatzner/jquery-bundle",
-            "version": "2.1.1",
+            "version": "1.11.1",
             "target-dir": "Bmatzner/JQueryBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmatzner/BmatznerJQueryBundle.git",
-                "reference": "c47ebfd993782560d425081d6866393274537953"
+                "reference": "0987164e37b6674ae715b5b4661863987549158c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/c47ebfd993782560d425081d6866393274537953",
-                "reference": "c47ebfd993782560d425081d6866393274537953",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/0987164e37b6674ae715b5b4661863987549158c",
+                "reference": "0987164e37b6674ae715b5b4661863987549158c",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "jquery",
                 "symfony"
             ],
-            "time": "2014-05-05 16:19:00"
+            "time": "2014-05-05 16:17:29"
         },
         {
             "name": "bmatzner/jquery-ui-bundle",
@@ -3964,8 +3964,12 @@
             "time": "2014-07-05 12:19:05"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "craue/formflow-bundle": 20,
@@ -3980,5 +3984,7 @@
     "platform": {
         "php": ">=5.4"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }
