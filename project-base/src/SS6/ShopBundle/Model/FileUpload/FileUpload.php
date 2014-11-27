@@ -139,12 +139,12 @@ class FileUpload {
 	}
 
 	/**
-	 * @param string $cachedFilename
+	 * @param string $temporaryFilename
 	 * @return string
 	 */
-	public function getOriginalFilenameByCached($cachedFilename) {
+	public function getOriginalFilenameByTemporary($temporaryFilename) {
 		$matches = array();
-		if ($cachedFilename && preg_match('/^.+?__(.+)$/', $cachedFilename, $matches)) {
+		if ($temporaryFilename && preg_match('/^.+?__(.+)$/', $temporaryFilename, $matches)) {
 			return $matches[1];
 		}
 		return '';
@@ -157,7 +157,7 @@ class FileUpload {
 		$filesForUpload = $entity->getTemporaryFilesForUpload();
 		foreach ($filesForUpload as $key => $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
-			$originalFilename = $this->getOriginalFilenameByCached($fileForUpload->getTemporaryFilename());
+			$originalFilename = $this->getOriginalFilenameByTemporary($fileForUpload->getTemporaryFilename());
 			$entity->setFileAsUploaded($key, $originalFilename);
 		}
 	}

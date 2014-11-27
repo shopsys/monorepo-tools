@@ -21,7 +21,7 @@
 
 						<div class="js-file-upload-uploaded-files">
 							{% for uploadedFile in form.uploadedFiles %}
-								{{ _self.uploadedFile(getLabelByCachedFilename(uploadedFile.vars.value)) }}
+								{{ _self.uploadedFile(getLabelByTemporaryFilename(uploadedFile.vars.value)) }}
 							{% else %}
 								{% do form.children.uploadedFiles.setRendered %}
 							{% endfor %}
