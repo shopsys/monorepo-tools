@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\TopProduct\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\Debug;
 use SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -13,7 +14,7 @@ class TopProductNotFoundException extends NotFoundHttpException implements TopPr
 	 * @param \Exception $previous
 	 */
 	public function __construct($criteria, Exception $previous = null) {
-		parent::__construct('Top product not found', $previous, 0);
+		parent::__construct('Top product not found by criteria ' . Debug::export($criteria), $previous, 0);
 	}
 
 }

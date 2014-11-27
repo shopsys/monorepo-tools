@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Mail\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\Debug;
 
 class SendMailFailedException extends Exception implements MailException {
 
@@ -17,7 +18,7 @@ class SendMailFailedException extends Exception implements MailException {
 	 */
 	public function __construct($failedRecipients, Exception $previous = null) {
 		$this->failedRecipients = $failedRecipients;
-		parent::__construct('Order mail was not send to ' . var_export($failedRecipients, true), 0, $previous);
+		parent::__construct('Order mail was not send to ' . Debug::export($failedRecipients), 0, $previous);
 	}
 
 	/**

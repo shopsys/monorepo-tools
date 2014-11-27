@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\FileUpload\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\Debug;
 
 class InvalidFileKeyException extends Exception implements FileUploadException {
 
@@ -11,6 +12,6 @@ class InvalidFileKeyException extends Exception implements FileUploadException {
 	 * @param Exception $previous
 	 */
 	public function __construct($key, $previous = null) {
-		parent::__construct('Upload file key ' . var_export($key) . ' is invalid', 0, $previous);
+		parent::__construct('Upload file key ' . Debug::export($key) . ' is invalid', 0, $previous);
 	}
 }

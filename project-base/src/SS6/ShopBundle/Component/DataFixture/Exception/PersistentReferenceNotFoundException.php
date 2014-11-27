@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\DataFixture\Exception;
 
 use Exception;
 use SS6\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
+use SS6\ShopBundle\Component\Debug;
 
 class PersistentReferenceNotFoundException extends Exception implements DataFixtureException {
 
@@ -12,7 +13,7 @@ class PersistentReferenceNotFoundException extends Exception implements DataFixt
 	 * @param \Exception $previous
 	 */
 	public function __construct($criteria, Exception $previous = null) {
-		parent::__construct('Data fixture reference not found by criteria ' . var_export($criteria, true), 0, $previous);
+		parent::__construct('Data fixture reference not found by criteria ' . Debug::export($criteria), 0, $previous);
 	}
 
 }

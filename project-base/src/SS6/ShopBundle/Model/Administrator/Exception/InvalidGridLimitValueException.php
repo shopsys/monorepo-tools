@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Administrator\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\Debug;
 
 class InvalidGridLimitValueException extends Exception implements AdministratorException {
 
@@ -16,7 +17,7 @@ class InvalidGridLimitValueException extends Exception implements AdministratorE
 	 * @param Exception $previous
 	 */
 	public function __construct($limit, $previous = null) {
-		parent::__construct('Administrator grid limit value ' . var_export($limit, true) . ' is invalid', 0, $previous);
+		parent::__construct('Administrator grid limit value ' . Debug::export($limit) . ' is invalid', 0, $previous);
 	}
 
 	/**
