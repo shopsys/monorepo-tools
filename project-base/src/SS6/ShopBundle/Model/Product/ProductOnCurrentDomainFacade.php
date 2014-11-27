@@ -51,20 +51,21 @@ class ProductOnCurrentDomainFacade {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginatedProductDetailsForProductDepartmentList(
+	public function getPaginatedProductDetailsInDepartment(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
 		$departmentId
 	) {
-		$paginationResult = $this->getPaginatedProductsForProductDepartmentList($orderingSetting, $page, $limit, $departmentId);
+		$paginationResult = $this->getPaginatedProductsInDepartment($orderingSetting, $page, $limit, $departmentId);
 		$products = $paginationResult->getResults();
 
 		return new PaginationResult(
 			$paginationResult->getPage(),
 			$paginationResult->getPageSize(),
 			$paginationResult->getTotalCount(),
-			$this->productDetailFactory->getDetailsForProducts($products));
+			$this->productDetailFactory->getDetailsForProducts($products)
+		);
 	}
 
 	/**
@@ -73,13 +74,13 @@ class ProductOnCurrentDomainFacade {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	private function getPaginatedProductsForProductDepartmentList(
+	private function getPaginatedProductsInDepartment(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
 		$departmentId
 	) {
-		return $this->productRepository->getPaginationResultForProductDepartmentList(
+		return $this->productRepository->getPaginationResultInDepartment(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$orderingSetting,

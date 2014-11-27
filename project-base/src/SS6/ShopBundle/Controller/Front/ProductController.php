@@ -41,7 +41,7 @@ class ProductController extends Controller {
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$paginationResult = $productOnCurrentDomainFacade
-			->getPaginatedProductDetailsForProductDepartmentList($orderingSetting, $page, self::PRODUCTS_PER_PAGE, $departmentId);
+			->getPaginatedProductDetailsInDepartment($orderingSetting, $page, self::PRODUCTS_PER_PAGE, $departmentId);
 		$department = $departmentFacade->getById($departmentId);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(

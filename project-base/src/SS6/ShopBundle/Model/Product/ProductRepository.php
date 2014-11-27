@@ -94,7 +94,7 @@ class ProductRepository {
 	 * @param int $departmentId
 	 * @return PaginationResult
 	 */
-	public function getPaginationResultForProductDepartmentList(
+	public function getPaginationResultInDepartment(
 		$domainId,
 		$locale,
 		ProductListOrderingSetting $orderingSetting,
