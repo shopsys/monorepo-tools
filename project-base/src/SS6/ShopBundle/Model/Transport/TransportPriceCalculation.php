@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Transport;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
-class PriceCalculation {
+class TransportPriceCalculation {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation

@@ -65,7 +65,7 @@ class PaymentController extends Controller {
 		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
 		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
 		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
-		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\Factory */
+		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory */
 
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
 		$paymentDomains = $paymentEditFacade->getPaymentDomainsByPayment($payment);

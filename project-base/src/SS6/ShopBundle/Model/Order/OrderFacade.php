@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\PriceCalculation as CartItemPriceCalculation;
+use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -17,8 +17,8 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 
 class OrderFacade {
@@ -59,17 +59,17 @@ class OrderFacade {
 	private $orderStatusRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
 	 */
 	private $cartItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 

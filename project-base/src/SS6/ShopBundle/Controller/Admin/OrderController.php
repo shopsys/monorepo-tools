@@ -27,8 +27,8 @@ class OrderController extends Controller {
 		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
-		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */
+		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.order_item_price_calculation');
+		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation */
 
 		$order = $orderRepository->getById($id);
 		$allOrderStatuses = $orderStatusRepository->findAll();

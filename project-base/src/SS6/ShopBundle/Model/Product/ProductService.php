@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
@@ -25,7 +25,7 @@ class ProductService {
 	private $pricingSetting;
 
 	public function __construct(
-		PriceCalculation $productPriceCalculation,
+		ProductPriceCalculation $productPriceCalculation,
 		InputPriceCalculation $inputPriceCalculation,
 		PricingSetting $pricingSetting
 	) {

@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository;
 use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\Detail\Factory;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 
 class TopProductFacade {
 
@@ -32,21 +32,21 @@ class TopProductFacade {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Detail\Factory
+	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository $topProductRepository
-	 * @param \SS6\ShopBundle\Model\Product\Detail\Factory $productDetailFactory
+	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
 	 */
 	public function __construct(
 		EntityManager $em,
 		TopProductRepository $topProductRepository,
 		ProductRepository $productRepository,
 		SelectedDomain $selectedDomain,
-		Factory $productDetailFactory
+		ProductDetailFactory $productDetailFactory
 	) {
 		$this->em = $em;
 		$this->topProductRepository = $topProductRepository;
@@ -74,7 +74,7 @@ class TopProductFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail[]
+	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAllProductDetailsByDomainId($domainId) {
 		$topProducts = $this->topProductRepository->getAll($domainId);

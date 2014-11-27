@@ -2,19 +2,19 @@
 
 namespace SS6\ShopBundle\Model\Cart;
 
-use SS6\ShopBundle\Model\Cart\Item\PriceCalculation;
+use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 
 class CartSummaryCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
 	 */
 	private $cartItemPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\PriceCalculation $cartItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation $cartItemPriceCalculation
 	 */
-	public function __construct(PriceCalculation $cartItemPriceCalculation) {
+	public function __construct(CartItemPriceCalculation $cartItemPriceCalculation) {
 		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
 	}
 

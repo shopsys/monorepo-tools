@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportDomain;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
-use SS6\ShopBundle\Model\Transport\VisibilityCalculation;
+use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class VisibilityCalculationTest {
 
@@ -16,7 +16,7 @@ class VisibilityCalculationTest {
 		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
 		$transportMock->expects($this->once())->method('isHidden')->willReturn(true);
 
-		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
 
 		$this->assertFalse($visibilityCalculation->isVisible($transportMock, [], 1));
 	}
@@ -30,7 +30,7 @@ class VisibilityCalculationTest {
 		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
 		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
 
-		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
 
 		$this->assertFalse($visibilityCalculation->isVisible($transportMock, [$paymentMock], 1));
 	}
@@ -58,7 +58,7 @@ class VisibilityCalculationTest {
 
 		$payments = [$paymentMock1, $paymentMock2];
 
-		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
 
 		$this->assertFalse($visibilityCalculation->isVisible($transportMock, $payments, 1));
 	}
@@ -87,7 +87,7 @@ class VisibilityCalculationTest {
 
 		$payments = [$paymentMock1, $paymentMock2];
 
-		$visibilityCalculation = new VisibilityCalculation($transportRepositoryMock);
+		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
 
 		$this->assertTrue($visibilityCalculation->isVisible($transportMock, $payments, 1));
 	}

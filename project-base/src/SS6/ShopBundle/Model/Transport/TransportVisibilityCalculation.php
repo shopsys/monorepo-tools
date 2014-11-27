@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Transport;
 
 use SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 
-class VisibilityCalculation {
+class TransportVisibilityCalculation {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Model\OrderItem;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
-use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {

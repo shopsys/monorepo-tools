@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Detail;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
 
-class Detail {
+class ProductDetail {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product

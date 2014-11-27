@@ -3,19 +3,19 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderTotalPrice;
 
-class PriceCalculation {
+class OrderPriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation $orderItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
 	 */
 	public function __construct(OrderItemPriceCalculation $orderItemPriceCalculation) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;

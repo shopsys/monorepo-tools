@@ -6,12 +6,12 @@ use Closure;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class InputPriceRepository {
 
@@ -28,26 +28,26 @@ class InputPriceRepository {
 	private $inputPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
 	 * @param EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $productPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
 	 */
 	public function __construct(
 		EntityManager $em,

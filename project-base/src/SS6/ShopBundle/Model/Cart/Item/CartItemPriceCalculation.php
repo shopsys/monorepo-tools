@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Model\Cart\Item;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
 use SS6\ShopBundle\Model\Pricing\Rounding;
-use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
 
-class PriceCalculation {
+class CartItemPriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
@@ -30,7 +30,7 @@ class PriceCalculation {
 	private $productPrice;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Pricing\Rounding$rounding
 	 */
 	public function __construct(ProductPriceCalculation $productPriceCalculation, Rounding $rounding) {

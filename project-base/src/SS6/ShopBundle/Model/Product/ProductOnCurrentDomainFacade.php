@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Detail\Factory;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductOnCurrentDomainFacade {
@@ -20,16 +20,16 @@ class ProductOnCurrentDomainFacade {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Detail\Factory
+	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Product\Detail\Factory $productDetailFactory
+	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
 	 */
-	public function __construct(ProductRepository $productRepository, Domain $domain, Factory $productDetailFactory) {
+	public function __construct(ProductRepository $productRepository, Domain $domain, ProductDetailFactory $productDetailFactory) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
 		$this->productDetailFactory = $productDetailFactory;
@@ -37,7 +37,7 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param int $productId
-	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail
+	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail
 	 */
 	public function getVisibleProductDetailById($productId) {
 		$product = $this->productRepository->getVisibleByIdAndDomainId($productId, $this->domain->getId());

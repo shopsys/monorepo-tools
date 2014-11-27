@@ -7,31 +7,31 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 
-use SS6\ShopBundle\Model\Cart\Item\PriceCalculation as CartItemPriceCalculation;
-use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
-use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 
 class OrderPreviewCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
 	 */
 	private $cartItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\PriceCalculation $cartItemPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation $cartItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
 	 */
 	public function __construct(
 		CartItemPriceCalculation $cartItemPriceCalculation,

@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
-class PriceCalculation {
+class OrderItemPriceCalculation {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation

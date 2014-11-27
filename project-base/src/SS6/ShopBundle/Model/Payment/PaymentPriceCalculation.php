@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace SS6\ShopBundle\Model\Payment;
 
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
-class PriceCalculation {
+class PaymentPriceCalculation {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
@@ -30,15 +30,28 @@ class PriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePrice(Product $product) {
+	public function calculatePrice(Payment $payment) {
 		return $this->basePriceCalculation->calculatePrice(
-			$product->getPrice(),
+			$payment->getPrice(),
 			$this->pricingSetting->getInputPriceType(),
-			$product->getVat()
+			$payment->getVat()
 		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
+	 */
+	public function calculatePricesById(array $payments) {
+		$paymentsPrices = array();
+		foreach ($payments as $payment) {
+			$paymentsPrices[$payment->getId()] = $this->calculatePrice($payment);
+		}
+
+		return $paymentsPrices;
 	}
 
 }

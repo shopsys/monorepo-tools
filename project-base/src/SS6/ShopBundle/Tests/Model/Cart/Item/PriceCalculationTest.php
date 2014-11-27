@@ -13,8 +13,8 @@ use SS6\ShopBundle\Model\Product\ProductData;
 class PriceCalculationTest extends FunctionalTestCase {
 
 	public function testCalculatePrices() {
-		$cartItemPriceCalculation = $this->getContainer()->get('ss6.shop.cart.item.price_calculation');
-		/* @var $cartItemPriceCalculation \SS6\ShopBundle\Model\Cart\Item\PriceCalculation */
+		$cartItemPriceCalculation = $this->getContainer()->get('ss6.shop.cart.item.cart_item_price_calculation');
+		/* @var $cartItemPriceCalculation \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 

@@ -64,7 +64,7 @@ class TransportController extends Controller {
 		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
 		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
 		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
-		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\Factory */
+		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory */
 
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */

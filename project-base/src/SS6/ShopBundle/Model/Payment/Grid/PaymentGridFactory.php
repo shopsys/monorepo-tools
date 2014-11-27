@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Payment\Detail\Factory;
+use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 
@@ -32,7 +32,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 	private $paymentRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Detail\Factory
+	 * @var \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
 	 */
 	private $paymentDetailFactory;
 
@@ -45,14 +45,14 @@ class PaymentGridFactory implements GridFactoryInterface {
 	 * @param \Doctrine\ORM\EntityManager\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
-	 * @param \SS6\ShopBundle\Model\Payment\Detail\Factory $paymentDetailFactory
+	 * @param \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory $paymentDetailFactory
 	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
 	 */
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		PaymentRepository $paymentRepository,
-		Factory $paymentDetailFactory,
+		PaymentDetailFactory $paymentDetailFactory,
 		Localization $localization
 	) {
 		$this->em = $em;

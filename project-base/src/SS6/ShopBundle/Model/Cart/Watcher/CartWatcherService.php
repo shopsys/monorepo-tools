@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Cart\Watcher;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
-use SS6\ShopBundle\Model\Product\PriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartWatcherService {
@@ -16,7 +16,7 @@ class CartWatcherService {
 	private $flashMessageSender;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
@@ -32,13 +32,13 @@ class CartWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
-	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	public function __construct(
 		FlashMessageSender $flashMessageSender,
-		PriceCalculation $productPriceCalculation,
+		ProductPriceCalculation $productPriceCalculation,
 		ProductRepository $productRepository,
 		Domain $domain
 	) {

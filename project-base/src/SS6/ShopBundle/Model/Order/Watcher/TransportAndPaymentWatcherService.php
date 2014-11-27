@@ -5,9 +5,9 @@ namespace SS6\ShopBundle\Model\Order\Watcher;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\PriceCalculation as TransportPriceCalculation;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class TransportAndPaymentWatcherService {
@@ -27,20 +27,20 @@ class TransportAndPaymentWatcherService {
 	private $session;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
 	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
-	 * @param \SS6\ShopBundle\Model\Payment\PriceCalculation $paymentPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\PriceCalculation $transportPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
 	 */
 	public function __construct(
 		Bag $flashMessageBag,

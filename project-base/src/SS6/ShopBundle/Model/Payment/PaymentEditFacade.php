@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
-use SS6\ShopBundle\Model\Payment\VisibilityCalculation;
+use SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
@@ -31,9 +31,9 @@ class PaymentEditFacade {
 	private $transportRepository;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Payment\VisibilityCalculation
+	 * @var SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation
 	 */
-	private $visibilityCalculation;
+	private $paymentVisibilityCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -49,14 +49,14 @@ class PaymentEditFacade {
 		EntityManager $em,
 		PaymentRepository $paymentRepository,
 		TransportRepository $transportRepository,
-		VisibilityCalculation $visibilityCalculation,
+		PaymentVisibilityCalculation $paymentVisibilityCalculation,
 		Domain $domain,
 		ImageFacade	$imageFacade
 	) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
 		$this->transportRepository = $transportRepository;
-		$this->visibilityCalculation = $visibilityCalculation;
+		$this->paymentVisibilityCalculation = $paymentVisibilityCalculation;
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
 	}
@@ -143,7 +143,7 @@ class PaymentEditFacade {
 	public function getVisibleOnCurrentDomain() {
 		$allPayments = $this->paymentRepository->findAllWithTransports();
 
-		return $this->visibilityCalculation->filterVisible($allPayments, $this->domain->getId());
+		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $this->domain->getId());
 	}
 
 	/**

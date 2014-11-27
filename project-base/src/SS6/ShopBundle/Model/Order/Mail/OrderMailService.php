@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -44,7 +44,7 @@ class OrderMailService {
 	private $twig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
@@ -52,7 +52,7 @@ class OrderMailService {
 		Setting $setting,
 		DomainRouterFactory $domainRouterFactory,
 		Twig_Environment $twig,
-		PriceCalculation $orderItemPriceCalculation
+		OrderItemPriceCalculation $orderItemPriceCalculation
 	) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;

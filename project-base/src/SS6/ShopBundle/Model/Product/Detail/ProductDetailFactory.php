@@ -3,15 +3,15 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\PriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 
-class Factory {
+class ProductDetailFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
 	 */
-	private $priceCalculation;
+	private $productPriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
@@ -19,23 +19,23 @@ class Factory {
 	private $parameterRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\PriceCalculation $priceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
 	 */
 	public function __construct(
-		PriceCalculation $priceCalculation,
+		ProductPriceCalculation $productPriceCalculation,
 		ParameterRepository $parameterRepository
 	) {
-		$this->priceCalculation = $priceCalculation;
+		$this->productPriceCalculation = $productPriceCalculation;
 		$this->parameterRepository = $parameterRepository;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail
+	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail
 	 */
 	public function getDetailForProduct(Product $product) {
-		return new Detail(
+		return new ProductDetail(
 			$product,
 			$this->getPrice($product),
 			$this->getParameters($product)
@@ -44,7 +44,7 @@ class Factory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @return \SS6\ShopBundle\Model\Product\Detail\Detail[]
+	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getDetailsForProducts(array $products) {
 		$details = array();
@@ -61,7 +61,7 @@ class Factory {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function getPrice(Product $product) {
-		return $this->priceCalculation->calculatePrice($product);
+		return $this->productPriceCalculation->calculatePrice($product);
 	}
 
 	/**

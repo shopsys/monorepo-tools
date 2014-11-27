@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Model\Payment;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Payment\PriceCalculation as PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;

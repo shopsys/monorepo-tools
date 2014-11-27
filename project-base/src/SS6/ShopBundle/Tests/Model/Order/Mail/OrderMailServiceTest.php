@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Mail\MessageData;
-use SS6\ShopBundle\Model\Order\Item\PriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -26,7 +26,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$orderItemPriceCalculationMock = $this->getMockBuilder(PriceCalculation::class)
+		$orderItemPriceCalculationMock = $this->getMockBuilder(OrderItemPriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$settingMock = $this->getMockBuilder(Setting::class)
@@ -68,7 +68,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$twigMock = $this->getMockBuilder(Twig_Environment::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$orderItemPriceCalculationMock = $this->getMockBuilder(PriceCalculation::class)
+		$orderItemPriceCalculationMock = $this->getMockBuilder(OrderItemPriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$settingMock = $this->getMockBuilder(Setting::class)

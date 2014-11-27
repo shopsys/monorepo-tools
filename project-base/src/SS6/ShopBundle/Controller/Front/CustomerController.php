@@ -115,8 +115,8 @@ class CustomerController extends Controller {
 			/* @var $order \SS6\ShopBundle\Model\Order\Order */
 		}
 
-		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.price_calculation');
-		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\PriceCalculation */
+		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.order_item_price_calculation');
+		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation */
 
 		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 

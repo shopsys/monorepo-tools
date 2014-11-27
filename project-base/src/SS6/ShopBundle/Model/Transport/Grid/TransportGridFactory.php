@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Transport\Detail\Factory;
+use SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
@@ -32,7 +32,7 @@ class TransportGridFactory implements GridFactoryInterface {
 	private $transportRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Detail\Factory
+	 * @var \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory
 	 */
 	private $transportDetailFactory;
 
@@ -45,14 +45,14 @@ class TransportGridFactory implements GridFactoryInterface {
 	 * @param \Doctrine\ORM\EntityManager\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
 	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
-	 * @param \SS6\ShopBundle\Model\Transport\Detail\Factory $transportDetailFactory
+	 * @param \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory $transportDetailFactory
 	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
 	 */
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		TransportRepository $transportRepository,
-		Factory $transportDetailFactory,
+		TransportDetailFactory $transportDetailFactory,
 		Localization $localization
 	) {
 		$this->em = $em;

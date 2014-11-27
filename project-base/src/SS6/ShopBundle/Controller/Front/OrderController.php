@@ -32,10 +32,10 @@ class OrderController extends Controller {
 		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-		$transportPriceCalculation = $this->get('ss6.shop.transport.price_calculation');
-		/* @var $transportPriceCalculation \SS6\ShopBundle\Model\Transport\PriceCalculation */
-		$paymentPriceCalculation = $this->get('ss6.shop.payment.price_calculation');
-		/* @var $paymentPriceCalculation \SS6\ShopBundle\Model\Payment\PriceCalculation */
+		$transportPriceCalculation = $this->get('ss6.shop.transport.transport_price_calculation');
+		/* @var $transportPriceCalculation \SS6\ShopBundle\Model\Transport\TransportPriceCalculation */
+		$paymentPriceCalculation = $this->get('ss6.shop.payment.payment_price_calculation');
+		/* @var $paymentPriceCalculation \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');

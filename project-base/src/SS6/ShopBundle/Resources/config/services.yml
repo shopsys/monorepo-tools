@@ -112,11 +112,11 @@ services:
     arguments:
       - @ss6.shop.flash_message.sender.front
 
+  ss6.shop.cart.item.cart_item_price_calculation:
+    class: SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
+
   ss6.shop.cart.item.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\Item\CartItemRepository
-
-  ss6.shop.cart.item.price_calculation:
-    class: SS6\ShopBundle\Model\Cart\Item\PriceCalculation
 
   ss6.shop.component.validator.auto_validator_annotation_loader:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader
@@ -330,8 +330,8 @@ services:
   ss6.shop.order.hash_generator_repository:
     class: SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository
 
-  ss6.shop.order.item.price_calculation:
-    class: SS6\ShopBundle\Model\Order\Item\PriceCalculation
+  ss6.shop.order.item.order_item_price_calculation:
+    class: SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 
   ss6.shop.order.order_facade:
     class: SS6\ShopBundle\Model\Order\OrderFacade
@@ -349,7 +349,7 @@ services:
     class: SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
 
   ss6.shop.order.order_price_calculation:
-    class: SS6\ShopBundle\Model\Order\PriceCalculation
+    class: SS6\ShopBundle\Model\Order\OrderPriceCalculation
 
   ss6.shop.order.order_repository:
     class: SS6\ShopBundle\Model\Order\OrderRepository
@@ -390,7 +390,7 @@ services:
     class: SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 
   ss6.shop.payment.payment_detail_factory:
-    class: SS6\ShopBundle\Model\Payment\Detail\Factory
+    class: SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
 
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
@@ -398,11 +398,11 @@ services:
   ss6.shop.payment.payment_repository:
     class: SS6\ShopBundle\Model\Payment\PaymentRepository
 
-  ss6.shop.payment.price_calculation:
-    class: SS6\ShopBundle\Model\Payment\PriceCalculation
+  ss6.shop.payment.payment_price_calculation:
+    class: SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
 
-  ss6.shop.payment.visibility_calculation:
-    class: SS6\ShopBundle\Model\Payment\VisibilityCalculation
+  ss6.shop.payment.payment_visibility_calculation:
+    class: SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation
 
   ss6.shop.pricing.delayed_pricing_setting:
     class: SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
@@ -511,14 +511,14 @@ services:
   ss6.shop.product.parameter.parameter_value_to_parameter_text_transformer:
     class: SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer
 
-  ss6.shop.product.price_calculation:
-    class: SS6\ShopBundle\Model\Product\PriceCalculation
+  ss6.shop.product.product_price_calculation:
+    class: SS6\ShopBundle\Model\Product\ProductPriceCalculation
 
   ss6.shop.product.product_data_factory:
     class: SS6\ShopBundle\Model\Product\ProductDataFactory
 
   ss6.shop.product.product_detail_factory:
-    class: SS6\ShopBundle\Model\Product\Detail\Factory
+    class: SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
 
   ss6.shop.product.product_edit_facade:
     class: SS6\ShopBundle\Model\Product\ProductEditFacade
@@ -591,11 +591,11 @@ services:
   ss6.shop.transport.independent_transport_visibility_calculation:
     class: SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 
-  ss6.shop.transport.price_calculation:
-    class: SS6\ShopBundle\Model\Transport\PriceCalculation
+  ss6.shop.transport.transport_price_calculation:
+    class: SS6\ShopBundle\Model\Transport\TransportPriceCalculation
 
   ss6.shop.transport.transport_detail_factory:
-    class: SS6\ShopBundle\Model\Transport\Detail\Factory
+    class: SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory
 
   ss6.shop.transport.transport_edit_facade:
     class: SS6\ShopBundle\Model\Transport\TransportEditFacade
@@ -603,8 +603,8 @@ services:
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository
 
-  ss6.shop.transport.visibility_calculation:
-    class: SS6\ShopBundle\Model\Transport\VisibilityCalculation
+  ss6.shop.transport.transport_visibility_calculation:
+    class: SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation
 
   twig.stringloader:
     class: Twig_Loader_String

@@ -7,8 +7,8 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
-use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Order\PriceCalculation as OrderPriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Price;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {

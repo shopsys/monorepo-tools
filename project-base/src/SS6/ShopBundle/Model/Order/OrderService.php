@@ -4,27 +4,27 @@ namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Item\PriceCalculation as OrderItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\PriceCalculation as OrderPriceCalculation;
+use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Order\OrderPriceCalculation
 	 */
 	private $orderPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\PriceCalculation $orderItemPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Order\PriceCalculation $orderPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Order\OrderPriceCalculation $orderPriceCalculation
 	 */
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,

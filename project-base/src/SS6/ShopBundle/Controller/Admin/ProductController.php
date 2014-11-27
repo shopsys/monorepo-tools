@@ -22,7 +22,7 @@ class ProductController extends Controller {
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
-		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\Factory */
+		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory */
 		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
 		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
 		$domain = $this->get('ss6.shop.domain');

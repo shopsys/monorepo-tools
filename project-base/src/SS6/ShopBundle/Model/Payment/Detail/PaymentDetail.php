@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Payment\Detail;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Payment\Payment;
 
-class Detail {
+class PaymentDetail {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Payment\Payment
