@@ -52,37 +52,37 @@ class ProductRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
-		$qb = $this->em->createQueryBuilder()
+		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')
 			->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id')
-			->where('p.hidden = :hidden')
-				->andWhere('pd.domainId = :domainId')
+			->where('pd.domainId = :domainId')
 				->andWhere('pd.visible = TRUE')
 			->orderBy('p.id');
 
-		$qb->setParameters(array('hidden' => false, 'domainId' => $domainId));
+		$queryBuilder->setParameter('domainId', $domainId);
 
-		return $qb;
+		return $queryBuilder;
 	}
 
 	/**
-	 * @param int $domainId
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string $locale
-	 * @param int $departmentId
-	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllVisibleWithTranslationByDomainIdAndDepartmentIdQueryBuilder($domainId, $locale, $departmentId) {
-		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
-			->addSelect('pt')
-			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
-			->join('p.departments', 'pdp', Join::ON)
-			->andWhere('pdp.id = :departmentId');
+	private function addTranslation(QueryBuilder $queryBuilder, $locale) {
+		$queryBuilder->addSelect('pt')
+			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale');
 
-		$qb->setParameter('locale', $locale);
-		$qb->setParameter('departmentId', $departmentId);
+		$queryBuilder->setParameter('locale', $locale);
+	}
 
-		return $qb;
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param int $departmentId
+	 */
+	private function filterByDepartmentId(QueryBuilder $queryBuilder, $departmentId) {
+		$queryBuilder->join('p.departments', 'pdep', Join::WITH, 'pdep.id = :departmentId');
+		$queryBuilder->setParameter('departmentId', $departmentId);
 	}
 
 	/**
@@ -102,10 +102,12 @@ class ProductRepository {
 		$limit,
 		$departmentId
 	) {
-		$qb = $this->getAllVisibleWithTranslationByDomainIdAndDepartmentIdQueryBuilder($domainId, $locale, $departmentId);
-		$this->applyOrdering($qb, $orderingSetting);
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$this->addTranslation($queryBuilder, $locale);
+		$this->filterByDepartmentId($queryBuilder, $departmentId);
+		$this->applyOrdering($queryBuilder, $orderingSetting);
 
-		$queryPaginator = new QueryPaginator($qb);
+		$queryPaginator = new QueryPaginator($queryBuilder);
 
 		return $queryPaginator->getResult($page, $limit);
 	}
@@ -128,6 +130,8 @@ class ProductRepository {
 				$message = 'Product list ordering mod "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
 				throw new \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException($message);
 		}
+
+		$queryBuilder->addOrderBy('p.id', 'asc');
 	}
 
 	/**
