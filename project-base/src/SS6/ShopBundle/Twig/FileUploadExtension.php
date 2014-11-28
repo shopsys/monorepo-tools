@@ -25,17 +25,17 @@ class FileUploadExtension extends Twig_Extension {
 	 */
 	public function getFunctions() {
 		return array(
-			new Twig_SimpleFunction('getLabelByCachedFilename', array($this, 'getLabelByCachedFilename')),
+			new Twig_SimpleFunction('getLabelByTemporaryFilename', array($this, 'getLabelByTemporaryFilename')),
 		);
 	}
 
 	/**
-	 * @param string $cachedFilename
+	 * @param string $temporaryFilename
 	 * @return string
 	 */
-	public function getLabelByCachedFilename($cachedFilename) {
-		$filename = $this->fileUpload->getOriginalFilenameByCached($cachedFilename);
-		$filepath = ($this->fileUpload->getCacheDirectory() . DIRECTORY_SEPARATOR . $cachedFilename);
+	public function getLabelByTemporaryFilename($temporaryFilename) {
+		$filename = $this->fileUpload->getOriginalFilenameByTemporary($temporaryFilename);
+		$filepath = ($this->fileUpload->getCacheDirectory() . DIRECTORY_SEPARATOR . $temporaryFilename);
 		if (file_exists($filepath) && is_file($filepath) && is_writable($filepath)) {
 			$fileSize = round((int)filesize($filepath) / 1024 / 1024, 2);
 			return $filename . ' (' . $fileSize . ' MB)';

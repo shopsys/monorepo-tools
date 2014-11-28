@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImagesEntity;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 
-class ImageConfigTest extends PHPUnit_Framework_TestCase {
+class ImagesEntityTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRelativeImagePathProvider() {
 		return array(

@@ -97,8 +97,9 @@ class ImageConfigLoader {
 		
 		$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
 		$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
-		$imageEntityConfig = new ImageEntityConfig($entityName, $entityClass, $types, $sizes);
+		$multipleByType = $this->getMultipleByType($entityConfig);
 
+		$imageEntityConfig = new ImageEntityConfig($entityName, $entityClass, $types, $sizes, $multipleByType);
 		$this->foundEntityNames[$entityName] = $entityName;
 		$this->foundEntityConfigs[$entityClass] = $imageEntityConfig;
 	}
@@ -146,6 +147,22 @@ class ImageConfigLoader {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @param array $entityConfig
+	 * @return array
+	 */
+	private function getMultipleByType(array $entityConfig) {
+		$multipleByType = array();
+		$multipleByType[ImageEntityConfig::WITHOUT_NAME_KEY] = $entityConfig[ImageConfigDefinition::CONFIG_MULTIPLE];
+		foreach ($entityConfig[ImageConfigDefinition::CONFIG_TYPES] as $typeConfig) {
+			$type = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];
+			$multiple = $typeConfig[ImageConfigDefinition::CONFIG_MULTIPLE];
+			$multipleByType[$type] = $multiple;
+		}
+
+		return $multipleByType;
 	}
 
 }

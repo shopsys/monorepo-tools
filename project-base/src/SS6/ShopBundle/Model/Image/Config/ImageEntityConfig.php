@@ -29,17 +29,24 @@ class ImageEntityConfig {
 	private $sizes;
 
 	/**
+	 * @var array
+	 */
+	private $multipleByType;
+
+	/**
 	 *
 	 * @param string $entityName
 	 * @param string $entityClass
 	 * @param array $sizesByType
 	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[] $sizes
+	 * @param array $multipleByType
 	 */
-	public function __construct($entityName, $entityClass, array $sizesByType, array $sizes) {
+	public function __construct($entityName, $entityClass, array $sizesByType, array $sizes, array $multipleByType) {
 		$this->entityName = $entityName;
 		$this->entityClass = $entityClass;
 		$this->sizesByType = $sizesByType;
 		$this->sizes = $sizes;
+		$this->multipleByType = $multipleByType;
 	}
 
 	/**
@@ -103,6 +110,19 @@ class ImageEntityConfig {
 			$typeSizes = $this->getTypeSizes($type);
 		}
 		return $this->getSizeFromSizes($typeSizes, $sizeName);
+	}
+
+	/**
+	 * @param string|null $type
+	 * @return bool
+	 */
+	public function isMultiple($type) {
+		$key = Condition::ifNull($type, self::WITHOUT_NAME_KEY);
+		if (array_key_exists($key, $this->multipleByType)) {
+			return $this->multipleByType[$key];
+		} else {
+			throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
+		}
 	}
 
 	/**

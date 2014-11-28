@@ -45,6 +45,23 @@ class ImagesEntity {
 	 * @param Object $entity
 	 * @param string|null $type
 	 * @param string|null $sizeName
+	 * @return array
+	 */
+	public function getRelativeImagesFilepath($entity, $type, $sizeName) {
+		$filepaths = array();
+
+		$images = $this->imageFacade->getImagesByEntity($entity, $type);
+		foreach ($images as $image) {
+			$filepaths[] = $this->getRelativeImagePath($image->getEntityName(), $type, $sizeName) . $image->getFilename();
+		}
+
+		return $filepaths;
+	}
+
+	/**
+	 * @param Object $entity
+	 * @param string|null $type
+	 * @param string|null $sizeName
 	 * @return bool
 	 */
 	public function imageExists($entity, $type, $sizeName) {

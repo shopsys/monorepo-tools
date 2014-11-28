@@ -168,6 +168,7 @@ class ProductFormType extends AbstractType {
 			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => false,
+				'multiple' => true,
 				'file_constraints' => array(
 					new Constraints\Image(array(
 						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),

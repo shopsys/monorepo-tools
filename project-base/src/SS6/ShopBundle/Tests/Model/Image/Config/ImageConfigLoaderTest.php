@@ -19,12 +19,14 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(),
 				ImageConfigDefinition::CONFIG_TYPES => array(),
 			),
 			array(
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_2',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(),
 				ImageConfigDefinition::CONFIG_TYPES => array(),
 			),
@@ -48,12 +50,14 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(),
 				ImageConfigDefinition::CONFIG_TYPES => array(),
 			),
 			array(
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_2',
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(),
 				ImageConfigDefinition::CONFIG_TYPES => array(),
 			),
@@ -77,6 +81,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(
 					array(
 						ImageConfigDefinition::CONFIG_SIZE_NAME => null,
@@ -117,10 +122,12 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 				ImageConfigDefinition::CONFIG_TYPES => array(
 					array(
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
+						ImageConfigDefinition::CONFIG_MULTIPLE => false,
 						ImageConfigDefinition::CONFIG_SIZES => array(),
 					),
 					array(
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
+						ImageConfigDefinition::CONFIG_MULTIPLE => false,
 						ImageConfigDefinition::CONFIG_SIZES => array(),
 					),
 				),
@@ -145,10 +152,12 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(),
 				ImageConfigDefinition::CONFIG_TYPES => array(
 					array(
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
+						ImageConfigDefinition::CONFIG_MULTIPLE => true,
 						ImageConfigDefinition::CONFIG_SIZES => array(
 							array(
 								ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_1',
@@ -166,6 +175,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 					),
 					array(
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_2',
+						ImageConfigDefinition::CONFIG_MULTIPLE => false,
 						ImageConfigDefinition::CONFIG_SIZES => array(),
 					),
 				),
@@ -180,6 +190,9 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
 		$this->assertEquals('Class_1', $imageEntityConfig->getEntityClass());
 		$this->assertEquals('Name_1', $imageEntityConfig->getEntityName());
+		$this->assertFalse($imageEntityConfig->isMultiple(null));
+		$this->assertTrue($imageEntityConfig->isMultiple('TypeName_1'));
+		$this->assertFalse($imageEntityConfig->isMultiple('TypeName_2'));
 
 		$imageSize = $imageEntityConfig->getTypeSize('TypeName_1', 'SizeName_2');
 
@@ -194,6 +207,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(),
 				ImageConfigDefinition::CONFIG_TYPES => array(),
 			),
@@ -218,6 +232,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 			array(
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
+				ImageConfigDefinition::CONFIG_MULTIPLE => false,
 				ImageConfigDefinition::CONFIG_SIZES => array(
 					array(
 						ImageConfigDefinition::CONFIG_SIZE_NAME => ImageConfig::ORIGINAL_SIZE_NAME,

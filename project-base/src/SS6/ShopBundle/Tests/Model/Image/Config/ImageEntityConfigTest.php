@@ -21,7 +21,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		);
 		$sizes = array();
 
-		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes);
+		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
 		$typeSizes = $imageEntityConfig->getTypeSizes('TypeName_1');
 		$this->assertEquals($types['TypeName_1'], $typeSizes);
@@ -39,7 +39,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		);
 		$sizes = array();
 
-		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes);
+		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
 		$this->setExpectedException(ImageTypeNotFoundException::class);
 		$imageEntityConfig->getTypeSizes('TypeName_3');
@@ -59,7 +59,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 			ImageEntityConfig::WITHOUT_NAME_KEY => new ImageSizeConfig(null, null, null, false),
 		);
 
-		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes);
+		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
 		$size1 = $imageEntityConfig->getTypeSize(null, null);
 		$this->assertEquals($sizes[ImageEntityConfig::WITHOUT_NAME_KEY], $size1);
