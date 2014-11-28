@@ -77,7 +77,7 @@ class TopProductFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAllProductDetailsByDomainId($domainId) {
-		$topProducts = $this->topProductRepository->getAll($domainId);
+		$topProducts = $this->topProductRepository->getAllVisibleOnDomain($domainId);
 		$products = array();
 		foreach ($topProducts as $topProduct) {
 			$products[] = $topProduct->getProduct();

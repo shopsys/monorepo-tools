@@ -13,12 +13,12 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
 
 	private $topProductsOnDomainData = array(
 		// $productReferenceName => $domainId
-		'product_7' => 1,
+		'product_1' => 1,
 		'product_17' => 1,
 		'product_9' => 1,
 		'product_14' => 2,
 		'product_10' => 2,
-		'product_1' => 2,
+		'product_7' => 2,
 	);
 
 	/**
