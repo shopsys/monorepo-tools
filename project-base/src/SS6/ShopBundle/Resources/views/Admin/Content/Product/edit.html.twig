@@ -31,14 +31,14 @@
 		<label class="form-line__label">
 			{{ 'Obrázek'|trans }}:
 		</label>
-		<div class="form-line">
-			<div class="mb-1">
-				{% for imageUrl in imagesUrl(product, 'original') %}
-					<div class="product-edit-image">
+		<ul class="list-image">
+			{% for imageUrl in imagesUrl(product, 'original') %}
+				<li class="list-image__item">
+					<div class="list-image__item__in">
 						<img src="{{ imageUrl }}" alt="" height="100" />
 					</div>
-				{% endfor %}
-			</div>
-		</div>
+				</li>
+			{% endfor %}
+		</ul>
 	</div>
 {% endblock %}
