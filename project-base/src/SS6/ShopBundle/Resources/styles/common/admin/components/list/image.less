@@ -1,0 +1,46 @@
+/*
+List for images
+======
+Gallery list with images
+
+
+
+*/
+
+.list-image {
+	.reset-ul();
+	.cfx();
+	clear: both;
+	margin-left: -10px;
+	margin-bottom: 20px;
+
+	font-size: 0;
+}
+
+.list-image__item {
+	display: inline-block;
+	width: 100% / 6;
+	padding: 0;
+	margin: 0 0 10px;
+	vertical-align: top;
+
+	text-align: center;
+}
+
+.list-image__item__in {
+	margin-left: 10px;
+	padding: 10px;
+	height: 120px;
+
+	border: 1px solid @color-c;
+	background: @color-f;
+
+	.border-radius(@border-radius-base);
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		height: auto;
+		width: auto;
+	}
+}

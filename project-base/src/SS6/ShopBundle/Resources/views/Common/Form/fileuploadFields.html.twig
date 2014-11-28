@@ -8,14 +8,19 @@
 				<div class="js-file-upload-item box-upload__result">
 					<div class="info">
 						{% macro uploadedFile(uploadedFile, label, class) %}
-							<div class="js-file-upload-uploaded-file {{ class|default('') }}">
-								<span class="js-file-upload-label">{{ label }}</span>
-								<i class="fa fa-times cursor-pointer js-file-upload-delete"></i>
-								<div class="box-upload__container">
+							<div class="js-file-upload-uploaded-file box-upload__file {{ class|default('') }}">
+
+								<div class="box-upload__file__label">
+									<i class="box-upload__file__label__icon fa fa-times cursor-pointer js-file-upload-delete"></i>
+									<span class="js-file-upload-label">{{ label }}</span>
+								</div>
+
+								<div class="box-upload__file__bar">
 									<div class="js-file-upload-progress box-upload__bar">
 										<div class="js-file-upload-progress-bar box-upload__bar__inner">0%</div>
 									</div>
 								</div>
+
 								{{ form_widget(uploadedFile, { attr: { class: 'js-file-upload-input' }}) }}
 							</div>
 						{% endmacro %}
@@ -27,8 +32,8 @@
 								{% do form.children.uploadedFiles.setRendered %}
 							{% endfor %}
 						</div>
-						<div class="text-muted display-none">
-							{{ 'Stav'|trans }}: <span class="js-file-upload-status">{{ 'Úspěšně nahráno'|trans }}</span>
+						<div class="display-none">
+							 <span class="js-file-upload-status in-message in-message--info">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
 						</div>
 					</div>
 				</div>
