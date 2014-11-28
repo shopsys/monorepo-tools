@@ -19,11 +19,10 @@
 								{{ form_widget(uploadedFile, { attr: { class: 'js-file-upload-input' }}) }}
 							</div>
 						{% endmacro %}
-						{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', 'js-file-upload-uploaded-file-template display-none') }}
 
-						<div class="js-file-upload-uploaded-files">
+						<div class="js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', 'js-file-upload-uploaded-file-template display-none')|escape }}">
 							{% for uploadedFile in form.uploadedFiles %}
-								{{ _self.uploadedFile(getLabelByTemporaryFilename(uploadedFile.vars.value)) }}
+								{{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value)) }}
 							{% else %}
 								{% do form.children.uploadedFiles.setRendered %}
 							{% endfor %}

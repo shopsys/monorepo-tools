@@ -14,7 +14,7 @@
 		this.$uploader = $uploader;
 		this.$item = $uploader.find('.js-file-upload-item');
 		this.$uploadedFiles = $uploader.find('.js-file-upload-uploaded-files');
-		this.$uploadedFileTemplate = $uploader.find('.js-file-upload-uploaded-file-template');
+		this.$uploadedFileTemplate = $($.parseHTML(this.$uploadedFiles.data('prototype').replace(/__name__/g, '')));
 		this.$status = $uploader.find('.js-file-upload-status');
 		this.$fallbackHide = $uploader.find('.js-file-upload-fallback-hide');
 		this.multiple = $uploader.find('input[type=file]').attr('multiple') === 'multiple';
@@ -23,8 +23,7 @@
 		this.lastUploadItemId = null;
 
 		this.$uploadedFileTemplate.find('*[id]').removeAttr('id');
-		this.$uploadedFileTemplate.html(this.$uploadedFileTemplate.html().replace(/__name__/g, ''));
-		this.$uploadedFileTemplate.detach();
+		this.$uploadedFileTemplate.html(this.$uploadedFileTemplate.html());
 
 		var updateFileStatus = function (status, message) {
 			uploader.$status.parent().stop(true, true).show();
