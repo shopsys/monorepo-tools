@@ -72,7 +72,7 @@
     - label: 'Zboží na titulní stránce'
       route: admin_topproduct_list
 
-- label: 'Admninistrátoři'
+- label: 'Administrátoři'
   route: admin_administrator_list
   items:
     - label: 'Přehled administrátorů'
