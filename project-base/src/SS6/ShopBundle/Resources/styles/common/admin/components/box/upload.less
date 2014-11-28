@@ -105,14 +105,17 @@ Component for uploading files with drag & drop function.
 	color: @color-f;
 	font-size: 14px;
 	font-weight: bold;
-	background: @color-red;
+	background: @color-c;
 	text-align: center;
 
 	.border-radius(@border-radius-base);
+
+	&:hover {
+		background-color: @color-primary;
+	}
 }
 
 .box-upload__file__bar {
-	margin-right: 410px;
+	margin-left: 410px;
 	width: 100px;
-	float: left;
 }
