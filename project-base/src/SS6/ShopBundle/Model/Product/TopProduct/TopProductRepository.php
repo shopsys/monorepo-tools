@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDomain;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 
 class TopProductRepository {
@@ -16,10 +17,16 @@ class TopProductRepository {
 	private $em;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $entityManager
 	 */
-	public function __construct(EntityManager $entityManager) {
+	public function __construct(EntityManager $entityManager, ProductRepository $productRepository) {
 		$this->em = $entityManager;
+		$this->productRepository = $productRepository;
 	}
 
 	/**
@@ -68,15 +75,15 @@ class TopProductRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getAllVisibleOnDomain($domainId) {
-		$queryBuilder = $this->em->createQueryBuilder()
-			->select('tp')
-			->from(TopProduct::class, 'tp')
-			->join('tp.product', 'p')
-			->join(ProductDomain::class, 'pd', Join::WITH, 'p.id = pd.product AND tp.domainId = pd.domainId AND pd.visible = TRUE')
-			->where('tp.domainId = :domainId')
+	public function getVisibleProductsForTopProductsOnDomain($domainId) {
+		$queryBuilder = $this->productRepository->getAllVisibleByDomainIdQueryBuilder($domainId);
+
+		$queryBuilder
+			->join(TopProduct::class, 'tp', Join::WITH, 'tp.product = p')
+			->andwhere('tp.domainId = :domainId')
+			->andwhere('tp.domainId = pd.domainId')
 			->setParameter('domainId', $domainId);
 
 		return $queryBuilder->getQuery()->execute();

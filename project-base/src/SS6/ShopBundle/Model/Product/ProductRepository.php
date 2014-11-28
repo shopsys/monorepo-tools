@@ -52,7 +52,7 @@ class ProductRepository {
 	 * @param int $domainId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
+	public function getAllVisibleByDomainIdQueryBuilder($domainId) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')

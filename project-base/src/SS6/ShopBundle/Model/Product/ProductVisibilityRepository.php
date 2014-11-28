@@ -49,6 +49,8 @@ class ProductVisibilityRepository {
 			$query = $this->em->createNativeQuery('UPDATE product_domains AS pd
 					SET visible = CASE
 							WHEN (
+								p.hidden = FALSE
+								AND
 								pd.hidden = FALSE
 								AND
 								(p.selling_from IS NULL OR p.selling_from <= :now)
