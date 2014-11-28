@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class VatController extends Controller {
 
@@ -34,20 +35,36 @@ class VatController extends Controller {
 		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
 		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */;
 
-		$vat = $vatFacade->getById($id);
-		if ($vatFacade->isVatUsed($vat)) {
-			$message = 'Pro odstranění sazby "' . $vat->getName() . '" musíte zvolit, která se má všude, '
-				. 'kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží '
-				. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?';
-			$vatNamesById = array();
-			foreach ($vatFacade->getAllExceptId($id) as $newVat) {
-				$vatNamesById[$newVat->getId()] = $newVat->getName();
+		try {
+			$vat = $vatFacade->getById($id);
+			if ($vatFacade->isVatUsed($vat)) {
+				$message = 'Pro odstranění sazby "' . $vat->getName() . '" musíte zvolit, která se má všude, '
+					. 'kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží '
+					. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?';
+				$vatNamesById = $this->getVatNamesByIdExceptId($vatFacade, $id);
+				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
+			} else {
+				$message = 'Opravdu si přejete trvale odstranit sazbu "' . $vat->getName() . '"? Nikde není použita.';
+				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
-			return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
-		} else {
-			$message = 'Opravdu si přejete trvale odstranit sazbu "' . $vat->getName() . '"? Nikde není použita.';
-			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
+		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
+			return new Response('Zvolené DPH již neexistuje');
 		}
+
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatFacade $vatFacade
+	 * @param int $id
+	 * @return array
+	 */
+	private function getVatNamesByIdExceptId($vatFacade, $id) {
+		$vatNamesById = array();
+		foreach ($vatFacade->getAllExceptId($id) as $newVat) {
+			$vatNamesById[$newVat->getId()] = $newVat->getName();
+		}
+
+		return $vatNamesById;
 	}
 
 	/**
@@ -61,23 +78,29 @@ class VatController extends Controller {
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
 
-		$fullName = $vatFacade->getById($id)->getName();
+		try {
+			$fullName = $vatFacade->getById($id)->getName();
 
-		$vatFacade->deleteById($id, $newId);
+			$vatFacade->deleteById($id, $newId);
 
-		if ($newId === null) {
-			$flashMessageSender->addSuccessTwig('DPH <strong>{{ name }}</strong> bylo smazáno', array(
-				'name' => $fullName,
-			));
-		} else {
-			$newVat = $vatFacade->getById($newId);
-			$flashMessageSender->addSuccessTwig(
-				'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.',
-				array(
+			if ($newId === null) {
+				$flashMessageSender->addSuccessTwig('DPH <strong>{{ name }}</strong> bylo smazáno', array(
 					'name' => $fullName,
-					'newName' => $newVat->getName(),
 				));
+			} else {
+				$newVat = $vatFacade->getById($newId);
+				$flashMessageSender->addSuccessTwig(
+					'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.',
+					array(
+						'name' => $fullName,
+						'newName' => $newVat->getName(),
+					));
+			}
+
+		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
+			$flashMessageSender->addError('Zvolené DPH již neexistuje');
 		}
+
 		return $this->redirect($this->generateUrl('admin_vat_list'));
 	}
 

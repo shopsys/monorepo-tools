@@ -124,7 +124,7 @@ class VatFacade {
 	 */
 	public function deleteById($vatId, $newVatId) {
 		$oldVat = $this->vatRepository->getById($vatId);
-		$newVat = $newVatId ? $this->vatRepository->findById($newVatId) : null;
+		$newVat = $newVatId ? $this->vatRepository->getById($newVatId) : null;
 
 		$this->em->beginTransaction();
 
