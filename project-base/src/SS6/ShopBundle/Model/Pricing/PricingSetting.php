@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 
@@ -23,10 +24,16 @@ class PricingSetting {
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
 	 */
-	public function __construct(Setting $setting) {
+	private $productPriceRecalculationScheduler;
+
+	public function __construct(
+		Setting $setting,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+	) {
 		$this->setting = $setting;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	/**
@@ -52,6 +59,7 @@ class PricingSetting {
 		}
 
 		$this->setting->set(self::ROUNDING_TYPE, $roundingType, SettingValue::DOMAIN_ID_COMMON);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**

@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
@@ -43,6 +44,11 @@ class InputPriceRepository {
 	private $transportPriceCalculation;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 */
+	private $productService;
+
+	/**
 	 * @param EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
@@ -54,13 +60,15 @@ class InputPriceRepository {
 		InputPriceCalculation $inputPriceCalculation,
 		ProductPriceCalculation $productPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
-		TransportPriceCalculation $transportPriceCalculation
+		TransportPriceCalculation $transportPriceCalculation,
+		ProductService $productService
 	) {
 		$this->em = $em;
 		$this->inputPriceCalculation = $inputPriceCalculation;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
+		$this->productService = $productService;
 	}
 
 	public function recalculateToInputPricesWithoutVat() {
@@ -95,15 +103,17 @@ class InputPriceRepository {
 			$productPrice = $this->productPriceCalculation->calculatePrice($product);
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-				$product->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
+				$inputPrice = $this->inputPriceCalculation->getInputPriceWithoutVat(
 					$productPrice->getPriceWithVat(),
 					$product->getVat()->getPercent()
-				));
+				);
 			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-				$product->setPrice($productPrice->getPriceWithVat());
+				$inputPrice = $productPrice->getPriceWithVat();
 			} else {
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
 			}
+
+			$this->productService->setInputPrice($product, $inputPrice);
 		});
 	}
 

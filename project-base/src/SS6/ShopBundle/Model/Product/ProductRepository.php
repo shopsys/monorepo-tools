@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 
@@ -126,9 +127,19 @@ class ProductRepository {
 				$queryBuilder->orderBy('pt.name', 'desc');
 				break;
 
+			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
+				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
+				$queryBuilder->orderBy('pcp.priceWithVat', 'asc');
+				break;
+
+			case ProductListOrderingSetting::ORDER_BY_PRICE_DESC:
+				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
+				$queryBuilder->orderBy('pcp.priceWithVat', 'desc');
+				break;
+
 			default:
-				$message = 'Product list ordering mod "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
-				throw new \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException($message);
+				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
+				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 
 		$queryBuilder->addOrderBy('p.id', 'asc');
@@ -204,6 +215,13 @@ class ProductRepository {
 	 */
 	public function getVisibleProductsByDomainId($domainId) {
 		return $this->getAllVisibleByDomainIdQueryBuilder($domainId)->getQuery()->getResult();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product[]
+	 */
+	public function getAll() {
+		return $this->getProductRepository()->findAll();
 	}
 
 }

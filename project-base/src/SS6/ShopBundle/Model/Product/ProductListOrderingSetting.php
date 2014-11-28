@@ -6,6 +6,8 @@ class ProductListOrderingSetting {
 
 	const ORDER_BY_NAME_ASC = 'name_asc';
 	const ORDER_BY_NAME_DESC = 'name_desc';
+	const ORDER_BY_PRICE_ASC = 'price_asc';
+	const ORDER_BY_PRICE_DESC = 'price_desc';
 
 	/**
 	 * @var string
@@ -21,12 +23,12 @@ class ProductListOrderingSetting {
 
 	/**
 	 * @param string $orderingMode
-	 * @throws \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException
+	 * @throws \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException
 	 */
 	private function setOrderingMode($orderingMode) {
 		if (!in_array($orderingMode, self::getOrderingModes())) {
 			$message = 'Product list ordering mod "' . $orderingMode  .'" is not valid.';
-			throw new \SS6\ShopBundle\Model\ProductException\InvalidOrderingModeException($message);
+			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 
 		$this->orderingMode = $orderingMode;
@@ -46,6 +48,8 @@ class ProductListOrderingSetting {
 		return array(
 			self::ORDER_BY_NAME_ASC,
 			self::ORDER_BY_NAME_DESC,
+			self::ORDER_BY_PRICE_ASC,
+			self::ORDER_BY_PRICE_DESC,
 		);
 	}
 

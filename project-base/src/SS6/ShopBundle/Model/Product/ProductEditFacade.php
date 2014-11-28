@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -51,9 +52,10 @@ class ProductEditFacade {
 	private $imageFacade;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
 	 */
+	private $productPriceRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -61,7 +63,8 @@ class ProductEditFacade {
 		ParameterRepository $parameterRepository,
 		Domain $domain,
 		ProductService $productService,
-		ImageFacade	$imageFacade
+		ImageFacade	$imageFacade,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -70,6 +73,7 @@ class ProductEditFacade {
 		$this->domain = $domain;
 		$this->productService = $productService;
 		$this->imageFacade = $imageFacade;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	/**
@@ -97,6 +101,7 @@ class ProductEditFacade {
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 
 		return $product;
 	}
@@ -109,7 +114,7 @@ class ProductEditFacade {
 	public function edit($productId, ProductData $productData) {
 		$product = $this->productRepository->getById($productId);
 
-		$product->edit($productData);
+		$this->productService->edit($product, $productData);
 
 		$this->em->beginTransaction();
 		$this->saveParameters($product, $productData->getParameters());

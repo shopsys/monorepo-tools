@@ -17,6 +17,8 @@ class OrderingSettingFormType extends AbstractType {
 		$orderingModeNames = array(
 			ProductListOrderingSetting::ORDER_BY_NAME_ASC => 'abecedně A -> Z',
 			ProductListOrderingSetting::ORDER_BY_NAME_DESC => 'abecedně Z -> A',
+			ProductListOrderingSetting::ORDER_BY_PRICE_ASC => 'od nejlevnějšího',
+			ProductListOrderingSetting::ORDER_BY_PRICE_DESC => 'od nejdražšího',
 		);
 
 		return $orderingModeNames[$orderingMode];
