@@ -3,9 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 

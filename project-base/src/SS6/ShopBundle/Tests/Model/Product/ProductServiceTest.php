@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\PriceCalculation as ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductService;
