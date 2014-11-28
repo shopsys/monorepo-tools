@@ -11,8 +11,10 @@
 							<div class="js-file-upload-uploaded-file {{ class|default('') }}">
 								<span class="js-file-upload-label">{{ label }}</span>
 								<i class="fa fa-times cursor-pointer js-file-upload-delete"></i>
-								<div class="js-file-upload-progress box-upload__bar">
-									<div class="js-file-upload-progress-bar box-upload__bar__inner">0%</div>
+								<div class="box-upload__container">
+									<div class="js-file-upload-progress box-upload__bar">
+										<div class="js-file-upload-progress-bar box-upload__bar__inner">0%</div>
+									</div>
 								</div>
 								{{ form_widget(uploadedFile, { attr: { class: 'js-file-upload-input' }}) }}
 							</div>

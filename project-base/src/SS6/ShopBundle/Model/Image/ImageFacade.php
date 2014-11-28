@@ -98,6 +98,19 @@ class ImageFacade {
 
 	/**
 	 * @param object $entity
+	 * @param string|null $type
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	public function getImagesByEntity($entity, $type) {
+		return $this->imageRepository->getImagesByEntity(
+			$this->imageConfig->getEntityName($entity),
+			$this->getEntityId($entity),
+			$type
+		);
+	}
+
+	/**
+	 * @param object $entity
 	 * @return int
 	 */
 	private function getEntityId($entity) {

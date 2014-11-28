@@ -31,10 +31,12 @@ class ImageRepository {
 	 */
 	public function findImageByEntity($entityName, $entityId, $type) {
 		$image = $this->getImageRepository()->findOneBy(array(
-			'entityName' => $entityName,
-			'entityId' => $entityId,
-			'type' => $type
-		));
+				'entityName' => $entityName,
+				'entityId' => $entityId,
+				'type' => $type
+			),
+			array('id' => 'asc')
+		);
 
 		return $image;
 	}
@@ -53,5 +55,21 @@ class ImageRepository {
 		}
 
 		return $image;
+	}
+
+	/**
+	 * @param string $entityName
+	 * @param int $entityId
+	 * @param string|null $type
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	public function getImagesByEntity($entityName, $entityId, $type) {
+		return $this->getImageRepository()->findBy(array(
+				'entityName' => $entityName,
+				'entityId' => $entityId,
+				'type' => $type
+			),
+			array('id' => 'asc')
+		);
 	}
 }

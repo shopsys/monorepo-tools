@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Image\Exception;
 
 use Exception;
 
-class EntityHasNotMultipleImageException extends Exception implements ImageException {
+class EntityMultipleImageException extends Exception implements ImageException {
 
 	/**
 	 * @param string $message

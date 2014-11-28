@@ -76,6 +76,7 @@ class ImageExtension extends Twig_Extension {
 		return array(
 			new Twig_SimpleFunction('imageExists', array($this, 'imageExists')),
 			new Twig_SimpleFunction('imageUrl', array($this, 'getImageUrl')),
+			new Twig_SimpleFunction('imagesUrl', array($this, 'getImagesUrl')),
 			new Twig_SimpleFunction('image', array($this, 'getImageHtml'), array('is_safe' => array('html'))),
 		);
 	}
@@ -108,6 +109,26 @@ class ImageExtension extends Twig_Extension {
 			. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
 
 		return $url;
+	}
+
+	/**
+	 * @param Object $entity
+	 * @param string|null $sizeName
+	 * @param string|null $type
+	 * @return array
+	 */
+	public function getImagesUrl($entity, $sizeName = null, $type = null) {
+		$imagesUrl = array();
+
+		$relativeFilepaths = $this->imagesEntity->getRelativeImagesFilepath($entity, $type, $sizeName);
+		foreach ($relativeFilepaths as $relativeFilepath) {
+			$imagesUrl[] =
+				$this->request->getBaseUrl()
+				. $this->imageUrlPrefix
+				. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
+		}
+
+		return $imagesUrl;
 	}
 
 	/**

@@ -10,7 +10,7 @@
 			<div class="product-image">
 				<span>
 					{% if imageExists(productDetail.product, 'original') %}
-						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-gallery">
+						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-gallery-main">
 							{{ image(productDetail.product, { size: 'original', width: '550px' }) }}
 						</a>
 					{% else %}
@@ -18,7 +18,16 @@
 					{% endif %}
 				</span>
 			</div>
-
+			{% set imagesUrl = imagesUrl(productDetail.product, 'original') %}
+			{% if imagesUrl|length > 0 %}
+				<div class="product-gallery js-gallery">
+					{% for imageUrl in imagesUrl %}
+						<a href="{{ imageUrl }}" class="product-gallery__image">
+							<img src="{{ imageUrl }}" alt="" height="35"  />
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}
 		</div>
 
 		<div class="col-xs-12 col-md-6">

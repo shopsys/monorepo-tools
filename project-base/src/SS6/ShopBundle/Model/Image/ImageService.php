@@ -18,7 +18,7 @@ class ImageService {
 		if (!$imageEntityConfig->isMultiple($type)) {
 			$message = 'Entity ' . $imageEntityConfig->getEntityClass()
 				. ' has not allowed multiple images for type ' . ($type ?: 'NULL');
-			throw new \SS6\ShopBundle\Model\Image\Exception\EntityHasNotMultipleImageException($message);
+			throw new \SS6\ShopBundle\Model\Image\Exception\EntityMultipleImageException($message);
 		}
 
 		$images = array();
