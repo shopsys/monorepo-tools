@@ -27,6 +27,10 @@ class ProductCalculatedPriceRepository {
 		return $this->em->getRepository(ProductCalculatedPrice::class);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string $priceWithVat
+	 */
 	public function saveCalculatedPrice(Product $product, $priceWithVat) {
 		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->findOneBy([
 			'product' => $product

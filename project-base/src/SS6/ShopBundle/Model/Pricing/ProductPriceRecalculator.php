@@ -54,6 +54,9 @@ class ProductPriceRecalculator {
 		$this->productPriceRecalculationScheduler->cleanSchedule();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 */
 	private function recalculatePricesForProducts(array $products) {
 		foreach ($products as $product) {
 			$price = $this->productPriceCalculation->calculatePrice($product);

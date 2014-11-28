@@ -32,10 +32,16 @@ class ProductPriceRecalculationScheduler {
 		$this->productRepository = $productRepository;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 */
 	public function scheduleRecalculatePriceForProduct(Product $product) {
 		$this->products[$product->getId()] = $product;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 */
 	public function scheduleRecalculatePriceForVat(Vat $vat) {
 		$this->vats[$vat->getId()] = $vat;
 	}
