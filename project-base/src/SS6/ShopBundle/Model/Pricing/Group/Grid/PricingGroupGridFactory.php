@@ -48,7 +48,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('pg.id, pg.name')
+			->select('pg.id, pg.name, pg.coefficient')
 			->from(PricingGroup::class, 'pg')
 			->where('pg.domainId = :selectedDomainId')
 			->setParameter('selectedDomainId', $this->selectedDomain->getId());
@@ -57,6 +57,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('pricingGroupList', $dataSource);
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('name', 'pg.name', 'Název', true);
+		$grid->addColumn('coefficient', 'pg.coefficient', 'Koeficient', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_pricinggroup_deleteconfirm', array('id' => 'pg.id'))
 			->setAjaxConfirm();

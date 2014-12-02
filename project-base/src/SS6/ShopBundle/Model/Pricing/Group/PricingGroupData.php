@@ -10,10 +10,23 @@ class PricingGroupData {
 	private $name;
 
 	/**
+	 * @var string
+	 */
+	private $coefficient;
+
+	/**
 	 * @param string|null $name
 	 */
-	public function __construct($name = null) {
+	public function __construct($name = null, $coefficient = 1) {
 		$this->name = $name;
+		$this->coefficient = $coefficient;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCoefficient() {
+		return $this->coefficient;
 	}
 
 	/**
@@ -21,6 +34,13 @@ class PricingGroupData {
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * @param string $coefficient
+	 */
+	public function setCoefficient($coefficient) {
+		$this->coefficient = $coefficient;
 	}
 
 	/**
@@ -35,5 +55,6 @@ class PricingGroupData {
 	 */
 	public function setFromEntity(PricingGroup $pricingGroup) {
 		$this->setName($pricingGroup->getName());
+		$this->setCoefficient($pricingGroup->getCoefficient());
 	}
 }

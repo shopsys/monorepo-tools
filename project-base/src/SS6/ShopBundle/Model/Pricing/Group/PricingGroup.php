@@ -34,10 +34,18 @@ class PricingGroup {
 	private $domainId;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=4)
+	 */
+	private $coefficient;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 * @param int $domainId
 	 */
 	public function __construct($pricingGroupData, $domainId) {
+		$this->coefficient = $pricingGroupData->getCoefficient();
 		$this->name = $pricingGroupData->getName();
 		$this->domainId = $domainId;
 	}
@@ -64,10 +72,18 @@ class PricingGroup {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getCoefficient() {
+		return $this->coefficient;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 */
 	public function edit(PricingGroupData $pricingGroupData) {
 		$this->name = $pricingGroupData->getName();
+		$this->coefficient = $pricingGroupData->getCoefficient();
 	}
 
 }
