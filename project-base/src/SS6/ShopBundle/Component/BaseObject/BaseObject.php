@@ -7,14 +7,14 @@ class BaseObject implements \Iterator {
 	public function __get($name) {
 		$class = get_class($this);
 		throw new \SS6\ShopBundle\Component\BaseObject\Exception\PropertyNotFoundException(
-			'Cannot read property ' . $class . ' ::$' . $name
+			'Cannot read non-existent property ' . $class . ' ::$' . $name
 		);
 	}
 
 	public function __set($name, $value) {
 		$class = get_class($this);
 		throw new \SS6\ShopBundle\Component\BaseObject\Exception\PropertyNotFoundException(
-			'Cannot set non existing property ' . $class . ' ::$' . $name
+			'Cannot set non-existent property ' . $class . ' ::$' . $name
 		);
 	}
 
@@ -41,7 +41,7 @@ class BaseObject implements \Iterator {
 	private function throwIteratorAccessException() {
 		$class = get_class($this);
 		throw new \SS6\ShopBundle\Component\BaseObject\Exception\PropertyNotFoundException(
-			'Cannot iterate across class ' . $class
+			'Cannot iterate object ' . $class
 		);
 	}
 }
