@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PricingGroupController extends Controller {
 
@@ -37,27 +38,26 @@ class PricingGroupController extends Controller {
 
 		$newId = $newId !== null ? (int)$newId : null;
 
-		$name = $pricingGroupFacade->getById($id)->getName();
-		$pricingGroupFacade->delete($id, $newId);
+		try {
+			$name = $pricingGroupFacade->getById($id)->getName();
+			$pricingGroupFacade->delete($id, $newId);
 
-		if ($newId === null) {
-			$flashMessageSender->addSuccessTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', array(
-				'name' => $name,
-			));
-		} elseif ($newId === 0) {
-			$flashMessageSender->addSuccessTwig(
-				'Cenová skupina <strong>{{ name }}</strong> byla odřazena a smazána.',
-				array(
+			if ($newId === null) {
+				$flashMessageSender->addSuccessTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', array(
 					'name' => $name,
 				));
-		} else {
-			$newPricingGroup = $pricingGroupFacade->getById($newId);
-			$flashMessageSender->addSuccessTwig(
-				'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou <strong>{{ newName }}</strong>.',
-				array(
-					'name' => $name,
-					'newName' => $newPricingGroup->getName(),
-				));
+			} else {
+				$newPricingGroup = $pricingGroupFacade->getById($newId);
+				$flashMessageSender->addSuccessTwig(
+					'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou'
+					. ' <strong>{{ newName }}</strong>.',
+					array(
+						'name' => $name,
+						'newName' => $newPricingGroup->getName(),
+					));
+			}
+		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
+			$flashMessageSender->addError('Zvolená cenová skupina již neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
@@ -73,23 +73,36 @@ class PricingGroupController extends Controller {
 		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
 		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */
 
-		$pricingGroup = $pricingGroupFacade->getById($id);
-		if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
-			$message = 'Pro odstranění cenové skupiny "' . $pricingGroup->getName() . '" musíte zvolit, která se má všude, '
-				. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?';
-			$pricingGroupsNamesById = [0 => '-- žádná --'];
+		try {
+			$pricingGroup = $pricingGroupFacade->getById($id);
+			$pricingGroupsNamesById = array();
 			foreach ($pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId()) as $newPricingGroup) {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
 			}
-			return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
-				$message,
-				'admin_pricinggroup_delete',
-				$id,
-				$pricingGroupsNamesById
-			);
-		} else {
-			$message = 'Opravdu si přejete trvale odstranit cenovou skupinu "' . $pricingGroup->getName() . '"? Nikde není použita.';
-			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
+			if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
+				$message = 'Pro odstranění cenové skupiny "' . $pricingGroup->getName() . '" musíte zvolit, která se má všude, '
+					. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?';
+
+				if ($pricingGroupFacade->isPricingGroupDefault($pricingGroup)) {
+					$message = 'Cenová skupina "' . $pricingGroup->getName() . '" je nastavena jako výchozí. '
+						. 'Pro její odstranění musíte zvolit, která se má všude, '
+						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?';
+				}
+
+				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+					$message,
+					'admin_pricinggroup_delete',
+					$id,
+					$pricingGroupsNamesById
+				);
+			} else {
+				$message = 'Opravdu si přejete trvale odstranit cenovou skupinu "' . $pricingGroup->getName() . '"?'
+					. ' Nikde není použita.';
+				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
+			}
+
+		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
+			return new Response('Zvolená cenová skupina již neexistuje');
 		}
 
 	}

@@ -100,7 +100,7 @@ class PricingGroupFacade {
 	 */
 	public function delete($oldPricingGroupId, $newPricingGroupId = null) {
 		$oldPricingGroup = $this->pricingGroupRepository->getById($oldPricingGroupId);
-		if ($newPricingGroupId !== 0 && $newPricingGroupId !== null) {
+		if ($newPricingGroupId !== null) {
 			$newPricingGroup = $this->pricingGroupRepository->getById($newPricingGroupId);
 		} else {
 			$newPricingGroup = null;
@@ -108,6 +108,9 @@ class PricingGroupFacade {
 
 		$this->em->beginTransaction();
 
+		if ($newPricingGroup !== null && $this->isPricingGroupDefault($oldPricingGroup)) {
+			$this->setDefaultPricingGroup($newPricingGroup);
+		}
 		$this->customerEditFacade->replaceOldPricingGroupWithNewPricingGroup($oldPricingGroup, $newPricingGroup);
 
 		$this->em->remove($oldPricingGroup);
@@ -173,6 +176,14 @@ class PricingGroupFacade {
 	 */
 	public function setDefaultPricingGroup(PricingGroup $pricingGroup) {
 		$this->setting->set(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return bool
+	 */
+	public function isPricingGroupDefault(PricingGroup $pricingGroup) {
+		return $pricingGroup === $this->getDefaultPricingGroupBySelectedDomain();
 	}
 
 }
