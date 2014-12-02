@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class PricingGroupController extends Controller {
 
@@ -89,6 +91,39 @@ class PricingGroupController extends Controller {
 			$message = 'Opravdu si přejete trvale odstranit cenovou skupinu "' . $pricingGroup->getName() . '"? Nikde není použita.';
 			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
 		}
+
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function settingsAction(Request $request) {
+		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
+		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+
+		$pricingGroups = $pricingGroupFacade->getPricingGroupsBySelectedDomainId();
+		$form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
+
+		$pricingGorupSettingsFormData = array();
+		$pricingGorupSettingsFormData['defaultPricingGroup'] =  $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
+
+		$form->setData($pricingGorupSettingsFormData);
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$pricingGroupSettingsFormData = $form->getData();
+			$pricingGroupFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+			$flashMessageSender->addSuccess('Nastavení výchozí cenové skupiny bylo upraveno');
+
+			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', array(
+			'form' => $form->createView(),
+		));
 
 	}
 }

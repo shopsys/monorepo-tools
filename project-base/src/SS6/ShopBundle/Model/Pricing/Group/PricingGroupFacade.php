@@ -6,8 +6,9 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use SS6\ShopBundle\Model\Setting\Setting;
 
 class PricingGroupFacade {
 
@@ -32,21 +33,30 @@ class PricingGroupFacade {
 	private $customerEditFacade;
 
 	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 */
+	private $setting;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerEditFacade $customerEditFacade
+	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
 	 */
 	public function __construct(
 		EntityManager $em,
 		PricingGroupRepository $pricingGroupRepository,
 		SelectedDomain $selectedDomain,
-		CustomerEditFacade $customerEditFacade
+		CustomerEditFacade $customerEditFacade,
+		Setting $setting
 	) {
 		$this->em = $em;
 		$this->pricingGroupRepository = $pricingGroupRepository;
 		$this->selectedDomain = $selectedDomain;
 		$this->customerEditFacade = $customerEditFacade;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -113,11 +123,10 @@ class PricingGroupFacade {
 	}
 
 	/**
-	 * @param int $domainId
 	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
-	public function getPricingGroupsByDomainId($domainId) {
-		return $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
+	public function getPricingGroupsBySelectedDomainId() {
+		return $this->pricingGroupRepository->getPricingGroupsByDomainId($this->selectedDomain->getId());
 	}
 
 	/**
@@ -148,6 +157,22 @@ class PricingGroupFacade {
 			WHERE u.pricingGroup = :pricingGroup')
 			->setParameter('pricingGroup', $pricingGroup);
 		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
+	 */
+	public function getDefaultPricingGroupBySelectedDomain() {
+		$defaultPricingGroupId = $this->setting->get(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $this->selectedDomain->getId());
+
+		return $this->pricingGroupRepository->getById($defaultPricingGroupId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	public function setDefaultPricingGroup(PricingGroup $pricingGroup) {
+		$this->setting->set(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
 	}
 
 }
