@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Product;
+namespace SS6\ShopBundle\Tests\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
