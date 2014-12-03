@@ -167,7 +167,7 @@ class PricingGroupFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
 	 */
 	public function getDefaultPricingGroupByDomainId($domainId) {
-		$defaultPricingGroupId = $this->setting->get(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $domainId);
+		$defaultPricingGroupId = $this->setting->get(Setting::DEFAULT_PRICING_GROUP, $domainId);
 
 		return $this->pricingGroupRepository->getById($defaultPricingGroupId);
 	}
@@ -176,7 +176,7 @@ class PricingGroupFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
 	 */
 	public function getDefaultPricingGroupBySelectedDomain() {
-		$defaultPricingGroupId = $this->setting->get(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $this->selectedDomain->getId());
+		$defaultPricingGroupId = $this->setting->get(Setting::DEFAULT_PRICING_GROUP, $this->selectedDomain->getId());
 
 		return $this->pricingGroupRepository->getById($defaultPricingGroupId);
 	}
@@ -185,7 +185,7 @@ class PricingGroupFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
 	public function setDefaultPricingGroup(PricingGroup $pricingGroup) {
-		$this->setting->set(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
+		$this->setting->set(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
 	}
 
 	/**

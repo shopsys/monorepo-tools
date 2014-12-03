@@ -9,7 +9,6 @@ use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -22,8 +21,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	public function load(ObjectManager $manager) {
 		$vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		/* @var $vat \SS6\ShopBundle\Model\Pricing\Vat\Vat */
-		$pricingGroup1 = $this->getReference(PricingGroupDataFixture::ORDINARY_FIRST);
-		$pricingGroup2 = $this->getReference(PricingGroupDataFixture::ORDINARY_SECOND);
+		$pricingGroup1 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+		$pricingGroup2 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2);
 
 		// @codingStandardsIgnoreStart
 		$manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
@@ -34,8 +33,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', 1));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 2));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, '2.Shopsys', 2));
-		$manager->persist(new SettingValue(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), 1));
-		$manager->persist(new SettingValue(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2));
+		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), 1));
+		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();

@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PricingGroup {
 
-	const SETTING_DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
-
 	/**
 	 * @var integer
 	 *

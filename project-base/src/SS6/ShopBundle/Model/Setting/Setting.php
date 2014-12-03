@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Setting\SettingValueRepository;
 class Setting {
 
 	const ORDER_SUBMITTED_SETTING_NAME = 'order_submitted_text';
+	const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
