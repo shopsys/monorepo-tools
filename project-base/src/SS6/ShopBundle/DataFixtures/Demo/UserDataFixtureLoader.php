@@ -91,7 +91,7 @@ class UserDataFixtureLoader {
 			$deliveryAddressData->setTelephone($row[18]);
 			$customerData->setDeliveryAddress($deliveryAddressData);
 		}
-		$userData->setDomainId($row[19]);
+		$userData->setDomainId($domainId);
 
 		$customerData->setUserData($userData);
 		$customerData->setBillingAddress($billingAddressData);
