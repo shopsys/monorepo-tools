@@ -8,7 +8,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\ProductCalculatedPrice;
+use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 

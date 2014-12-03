@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetailFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
@@ -19,7 +19,7 @@ class ProductDetailFactory {
 	private $parameterRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
 	 */
 	public function __construct(

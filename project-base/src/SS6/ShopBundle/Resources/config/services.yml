@@ -436,17 +436,6 @@ services:
   ss6.shop.pricing.price_calculation:
     class: SS6\ShopBundle\Model\Pricing\PriceCalculation
 
-  ss6.shop.pricing.product_calculated_price_repository:
-    class: SS6\ShopBundle\Model\Pricing\ProductCalculatedPriceRepository
-
-  ss6.shop.pricing.product_price_recalculation_scheduler:
-    class: SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
-
-  ss6.shop.pricing.product_price_recalculator:
-    class: SS6\ShopBundle\Model\Pricing\ProductPriceRecalculator
-    tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-
   ss6.shop.pricing.base_price_calculation:
     class: SS6\ShopBundle\Model\Pricing\BasePriceCalculation
 
@@ -525,8 +514,19 @@ services:
   ss6.shop.product.parameter.parameter_value_to_parameter_text_transformer:
     class: SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer
 
-  ss6.shop.product.product_price_calculation:
-    class: SS6\ShopBundle\Model\Product\ProductPriceCalculation
+  ss6.shop.product.pricing.product_calculated_price_repository:
+    class: SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
+
+  ss6.shop.product.pricing.product_price_calculation:
+    class: SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+
+  ss6.shop.product.pricing.product_price_recalculation_scheduler:
+    class: SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+
+  ss6.shop.product.pricing.product_price_recalculator:
+    class: SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
   ss6.shop.product.product_data_factory:
     class: SS6\ShopBundle\Model\Product\ProductDataFactory

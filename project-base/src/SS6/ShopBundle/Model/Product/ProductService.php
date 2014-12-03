@@ -4,14 +4,15 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
@@ -26,7 +27,7 @@ class ProductService {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 

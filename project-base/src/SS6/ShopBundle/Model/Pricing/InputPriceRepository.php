@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
@@ -29,7 +29,7 @@ class InputPriceRepository {
 	private $inputPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
@@ -51,7 +51,7 @@ class InputPriceRepository {
 	/**
 	 * @param EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Product\ProductPriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
 	 */

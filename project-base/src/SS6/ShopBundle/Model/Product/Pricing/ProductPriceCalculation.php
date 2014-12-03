@@ -1,9 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculation {
 

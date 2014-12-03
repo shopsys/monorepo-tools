@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Product\Product;

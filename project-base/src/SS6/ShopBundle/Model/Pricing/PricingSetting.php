@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 
@@ -24,7 +24,7 @@ class PricingSetting {
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Pricing\ProductCalculatedPrice;
+use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductCalculatedPriceRepository {

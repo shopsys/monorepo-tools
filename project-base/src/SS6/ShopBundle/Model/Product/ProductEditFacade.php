@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
-use SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -52,7 +52,7 @@ class ProductEditFacade {
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 

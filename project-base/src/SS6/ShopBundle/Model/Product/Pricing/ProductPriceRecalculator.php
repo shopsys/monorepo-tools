@@ -1,9 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -20,17 +22,17 @@ class ProductPriceRecalculator {
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\PriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductCalculatedPriceRepository
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
 	 */
 	private $productCalculatedPriceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceRecalculationScheduler
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 

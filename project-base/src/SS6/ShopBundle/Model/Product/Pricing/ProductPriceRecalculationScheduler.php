@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
@@ -28,6 +28,9 @@ class ProductPriceRecalculationScheduler {
 	 */
 	private $recalculateAll = false;
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 */
 	public function __construct(ProductRepository $productRepository) {
 		$this->productRepository = $productRepository;
 	}
