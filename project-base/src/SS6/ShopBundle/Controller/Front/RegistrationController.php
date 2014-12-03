@@ -18,11 +18,13 @@ class RegistrationController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$userDataFactory = $this->get('ss6.shop.customer.user_data_factory');
+		/* @var $userDataFactory \SS6\ShopBundle\Model\Customer\UserDataFactory */
 
 		$form = $this->createForm(new RegistrationFormType());
 
 		try {
-			$userData = new UserData();
+			$userData = $userDataFactory->createDefault($domain->getId());
 
 			$form->setData($userData);
 			$form->handleRequest($request);
