@@ -93,6 +93,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Group\PricingGroup")
+	 * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
 	 */
 	protected $pricingGroup;
 
@@ -147,9 +148,9 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
-	public function setPricingGroup(PricingGroup $pricingGroup = null) {
+	public function setPricingGroup(PricingGroup $pricingGroup) {
 		$this->pricingGroup = $pricingGroup;
 	}
 
@@ -263,7 +264,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getPricingGroup() {
 		return $this->pricingGroup;
