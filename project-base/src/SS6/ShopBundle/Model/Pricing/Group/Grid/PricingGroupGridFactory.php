@@ -48,7 +48,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('pg.id, pg.name, pg.coefficient')
+			->select('pg')
 			->from(PricingGroup::class, 'pg')
 			->where('pg.domainId = :selectedDomainId')
 			->setParameter('selectedDomainId', $this->selectedDomain->getId());
