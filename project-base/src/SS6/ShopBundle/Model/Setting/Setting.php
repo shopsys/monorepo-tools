@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Setting\SettingValueRepository;
 
 class Setting {
 
-	const ORDER_SUBMITTED_SETTING_NAME = 'order_submitted_text';
+	const ORDER_SUBMITTED_SETTING_NAME = 'orderSubmittedText';
 	const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
 
 	/**
@@ -97,6 +97,9 @@ class Setting {
 		throw new \SS6\ShopBundle\Model\Setting\Exception\SettingValueNotFoundException($message);
 	}
 
+	/**
+	 * @param int|null $domainId
+	 */
 	private function loadValues($domainId) {
 		if ($domainId !== SettingValue::DOMAIN_ID_COMMON && $domainId !== SettingValue::DOMAIN_ID_DEFAULT) {
 			$this->loadDomainValues($domainId);
@@ -106,6 +109,9 @@ class Setting {
 		$this->loadDefaultValues();
 	}
 
+	/**
+	 * @param int|null $domainId
+	 */
 	private function loadDomainValues($domainId) {
 		if (!array_key_exists($domainId, $this->values)) {
 			$this->values[$domainId] = array();
