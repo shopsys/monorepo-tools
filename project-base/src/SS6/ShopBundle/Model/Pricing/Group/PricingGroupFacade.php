@@ -163,6 +163,16 @@ class PricingGroupFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
+	 */
+	public function getDefaultPricingGroupByDomainId($domainId) {
+		$defaultPricingGroupId = $this->setting->get(PricingGroup::SETTING_DEFAULT_PRICING_GROUP, $domainId);
+
+		return $this->pricingGroupRepository->getById($defaultPricingGroupId);
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
 	 */
 	public function getDefaultPricingGroupBySelectedDomain() {

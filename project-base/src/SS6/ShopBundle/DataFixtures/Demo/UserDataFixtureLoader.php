@@ -8,7 +8,7 @@ use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
-use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Model\Customer\UserDataFactory;
 
 class UserDataFixtureLoader {
 
@@ -23,12 +23,19 @@ class UserDataFixtureLoader {
 	private $path;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Customer\UserDataFactory
+	 */
+	private $userDataFactory;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
+	 * @param \SS6\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
 	 */
-	public function __construct($path, CsvReader $csvReader) {
+	public function __construct($path, CsvReader $csvReader, UserDataFactory $userDataFactory) {
 		$this->path = $path;
 		$this->csvReader = $csvReader;
+		$this->userDataFactory = $userDataFactory;
 	}
 
 	/**
@@ -55,7 +62,8 @@ class UserDataFixtureLoader {
 	 */
 	private function getCustomerDataFromCsvRow(array $row) {
 		$customerData = new CustomerData();
-		$userData = new UserData();
+		$domainId = $row[19];
+		$userData = $this->userDataFactory->createDefault($domainId);
 		$billingAddressData = new BillingAddressData();
 
 		$userData->setFirstName($row[0]);
