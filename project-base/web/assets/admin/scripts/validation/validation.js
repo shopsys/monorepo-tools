@@ -11,8 +11,19 @@
 
 	SS6.validation.inputBind = function () {
 		$(this)
-			.bind('blur change', function () {
-				$(this).jsFormValidator('validate')
+			.bind('blur change', function (event) {
+				$(this).jsFormValidator('validate');
+
+				if (this.jsFormValidator) {
+					event.preventDefault();
+
+					var parent = this.jsFormValidator.parent;
+					while (parent) {
+						parent.validate();
+
+						parent = parent.parent;
+					}
+				}
 			})
 			.focus(function () {
 				$(this).closest('.form-error').removeClass('form-error');
