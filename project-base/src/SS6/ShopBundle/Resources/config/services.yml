@@ -3,6 +3,7 @@ imports:
   - { resource: ../../Twig/services.yml }
 
 parameters:
+  fp_js_form_validator.factory.class: SS6\ShopBundle\Component\Validator\JsFormValidatorFactory
   fragment.handler.class: SS6\ShopBundle\Component\SubRequest\RedirectFragmentHandler
   prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localization\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
