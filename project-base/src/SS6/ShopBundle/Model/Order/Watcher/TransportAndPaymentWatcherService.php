@@ -55,30 +55,35 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 *
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @return \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
 	 */
 	public function checkTransportAndPayment(OrderData $orderData, $transports, $payments) {
 		$transport = $orderData->getTransport();
 		$payment = $orderData->getPayment();
 
+		$transportPriceChanged = false;
 		if ($transport !== null) {
-			$this->checkTransport($transport);
+			$transportPriceChanged = $this->checkTransportPrice($transport);
 		}
 
+		$paymentPriceChanged = false;
 		if ($payment !== null) {
-			$this->checkPayment($payment);
+			$paymentPriceChanged = $this->checkPaymentPrice($payment);
 		}
 
 		$this->rememberTransportAndPayment($transports, $payments);
+
+		return new TransportAndPaymentCheckResult($transportPriceChanged, $paymentPriceChanged);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @return boolean
 	 */
-	private function checkTransport(Transport $transport) {
+	private function checkTransportPrice(Transport $transport) {
 		$transportPrices = $this->getRememberedTransportPrices();
 
 		if (array_key_exists($transport->getId(), $transportPrices)) {
@@ -86,17 +91,18 @@ class TransportAndPaymentWatcherService {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
 
 			if ($rememberedTransportPriceValue != $transportPrice->getPriceWithVat()) {
-				$message = 'V průběhu objednávkového procesu byla změněna cena dopravy ' . $transport->getName() .
-					'. Prosím, překontrolujte si objednávku.';
-				$this->flashMessageBag->addInfo($message);
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @return boolean
 	 */
-	private function checkPayment(Payment $payment) {
+	private function checkPaymentPrice(Payment $payment) {
 		$paymentPrices = $this->getRememberedPaymentPrices();
 
 		if (array_key_exists($payment->getId(), $paymentPrices)) {
@@ -104,11 +110,11 @@ class TransportAndPaymentWatcherService {
 			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
 
 			if ($rememberedPaymentPriceValue !== $paymentPrice->getPriceWithVat()) {
-				$message = 'V průběhu objednávkového procesu byla změněna cena platby ' . $payment->getName() .
-					'. Prosím, překontrolujte si objednávku.';
-				$this->flashMessageBag->addInfo($message);
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	/**
