@@ -157,18 +157,23 @@ class ProductDataFixtureLoader {
 				continue;
 			}
 
-			list($serializedParameterNames, $valueText) = $rowData;
+			list($serializedParameterNames, $serializedValueTexts) = $rowData;
 			$serializedParameterNames = trim($serializedParameterNames, '[]');
+			$serializedValueTexts = trim($serializedValueTexts, '[]');
 
 			if (!isset($this->parameters[$serializedParameterNames])) {
-				$parameterNames = $this->parseParameterNames($serializedParameterNames);
+				$parameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
 				$this->parameters[$serializedParameterNames] = new Parameter(new ParameterData($parameterNames));
 			}
 
-			$productParameterValueData = new ProductParameterValueData();
-			$productParameterValueData->setParameter($this->parameters[$serializedParameterNames]);
-			$productParameterValueData->setValueText($valueText);
-			$productParameterValuesData[] = $productParameterValueData;
+			$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);
+			foreach ($valueTexts as $locale => $valueText) {
+				$productParameterValueData = new ProductParameterValueData();
+				$productParameterValueData->setParameter($this->parameters[$serializedParameterNames]);
+				$productParameterValueData->setLocale($locale);
+				$productParameterValueData->setValueText($valueText);
+				$productParameterValuesData[] = $productParameterValueData;
+			}
 		}
 
 		return $productParameterValuesData;
@@ -176,16 +181,16 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param string $string
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return array
 	 */
-	private function parseParameterNames($string) {
-		$parameterNames = array();
-		$sections = explode(',', $string);
-		foreach ($sections as $section) {
-			$row = explode(':', $section);
-			$parameterNames[$row[0]] = $row[1];
+	private function unserializeLocalizedValues($string) {
+		$array = array();
+		$items = explode(',', $string);
+		foreach ($items as $item) {
+			list($locale, $value) = explode(':', $item);
+			$array[$locale] = $value;
 		}
-		return $parameterNames;
+		return $array;
 	}
 
 	/**
