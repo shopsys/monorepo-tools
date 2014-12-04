@@ -43,9 +43,25 @@ class CartWatcherFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
 	public function checkCartModifications(Cart $cart) {
-		$this->cartWatcherService->showErrorOnModifiedItems($cart);
+		$this->checkModifiedPrices($cart);
+		$this->checkNotVisibleItems($cart);
 
+		$this->em->flush();
+	}
+
+	private function checkModifiedPrices(Cart $cart) {
+		$modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
+
+		foreach ($modifiedItems as $cartItem) {
+			$this->flashMessageSender->addInfoTwig('Byla změněna cena zboží <strong>{{ name }}</strong>'
+				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
+				array('name' => $cartItem->getName()));
+		}
+	}
+
+	private function checkNotVisibleItems(Cart $cart) {
 		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart);
+
 		foreach ($notVisibleItems as $cartItem) {
 			$this->flashMessageSender->addErrorTwig('Zboží <strong>{{ name }}</strong>'
 				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
@@ -56,4 +72,5 @@ class CartWatcherFacade {
 
 		$this->em->flush();
 	}
+
 }

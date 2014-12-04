@@ -4,16 +4,10 @@ namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartWatcherService {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
-	 */
-	private $flashMessageSender;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
@@ -31,18 +25,15 @@ class CartWatcherService {
 	private $domain;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	public function __construct(
-		FlashMessageSender $flashMessageSender,
 		ProductPriceCalculation $productPriceCalculation,
 		ProductRepository $productRepository,
 		Domain $domain
 	) {
-		$this->flashMessageSender = $flashMessageSender;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
@@ -50,29 +41,16 @@ class CartWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 */
-	public function showErrorOnModifiedItems(Cart $cart) {
-		foreach ($this->getModifiedPriceItems($cart) as $cartItem) {
-			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
-			$this->flashMessageSender->addInfoTwig('Byla změněna cena zboží <strong>{{ name }}</strong>'
-				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
-				array('name' => $cartItem->getName()));
-			$productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
-			$cartItem->setWatchedPrice($productPrice->getPriceWithVat());
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
-	private function getModifiedPriceItems(Cart $cart) {
+	public function getModifiedPriceItemsAndUpdatePrices(Cart $cart) {
 		$modifiedItems = array();
 		foreach ($cart->getItems() as $cartItem) {
 			$productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
 			if ($cartItem->getWatchedPrice() != $productPrice->getPriceWithVat()) {
 				$modifiedItems[] = $cartItem;
 			}
+			$cartItem->setWatchedPrice($productPrice->getPriceWithVat());
 		}
 		return $modifiedItems;
 	}

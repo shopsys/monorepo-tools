@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Product\ProductData;
 
 class CartWatcherServiceTest extends FunctionalTestCase {
 
-	public function testShowErrorOnModifiedItems() {
+	public function testGetModifiedPriceItemsAndUpdatePrices() {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$vat = new Vat(new VatData('vat', 21));
@@ -30,23 +30,18 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);
 
-		$flashMessageFront = $this->getContainer()->get('ss6.shop.flash_message.bag.front');
-		/* @var $flashMessageFront \SS6\ShopBundle\Model\FlashMessage\Bag */
-
-		// clear...
-		$flashMessageFront->getErrorMessages();
-		$flashMessageFront->getInfoMessages();
-		$flashMessageFront->getSuccessMessages();
-
 		$cartWatcherService = $this->getContainer()->get('ss6.shop.cart.cart_watcher_service');
 		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
 
-		$cartWatcherService->showErrorOnModifiedItems($cart);
-		$this->assertTrue($flashMessageFront->isEmpty());
+		$modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
+		$this->assertEmpty($modifiedItems1);
 
 		$productMock->edit(new ProductData(['cs' => 'Product 1'], null, null, null, [], 200, $vat));
-		$cartWatcherService->showErrorOnModifiedItems($cart);
-		$this->assertFalse($flashMessageFront->isEmpty());
+		$modifiedItems2 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
+		$this->assertNotEmpty($modifiedItems2);
+
+		$modifiedItems3 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
+		$this->assertEmpty($modifiedItems3);
 	}
 
 	public function testGetNotVisibleItemsWithItemWithoutProduct() {

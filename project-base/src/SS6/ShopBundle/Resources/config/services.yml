@@ -109,8 +109,6 @@ services:
 
   ss6.shop.cart.cart_watcher_service:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
-    arguments:
-      - @ss6.shop.flash_message.sender.front
 
   ss6.shop.cart.item.cart_item_price_calculation:
     class: SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
