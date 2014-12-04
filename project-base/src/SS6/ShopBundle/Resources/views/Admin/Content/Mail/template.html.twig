@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{% macro mailTemplate(name, template, variables, variablesInfoText, sendMailText) %}
+			{% macro mailTemplate(name, template, variables, variablesLabels, variablesInfoText, sendMailText) %}
 				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
@@ -43,10 +43,10 @@
 												</tr>
 											</thead>
 											<tbody>
-												{% for key in variables|keys %}
+												{% for key in variables %}
 													<tr class="grid-row-cells">
 														<td>{{ key }}</td>
-														<td>{{ variables[key] }}</td>
+														<td>{{ variablesLabels[key] }}</td>
 													</tr>
 												{% endfor %}
 											</tbody>
@@ -67,6 +67,7 @@
 								orderStatus.name,
 								orderStatusTemplate,
 								orderStatusVariables,
+								orderStatusVariablesLabels,
 								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
 								'Zasílat potvrzení o přijetí objednávky'|trans
 						) }}
@@ -75,13 +76,19 @@
 								orderStatus.name,
 								orderStatusTemplate,
 								orderStatusVariables,
+								orderStatusVariablesLabels,
 								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
 								'Zasílat e-mail o změně na tento stav'|trans
 						) }}
 					{% endif %}
 				{% endfor %}
 
-				{{ _self.mailTemplate('Potvrzení registrace'|trans, form.registrationTemplate, registrationVariables) }}
+				{{ _self.mailTemplate(
+					'Potvrzení registrace'|trans,
+					form.registrationTemplate,
+					registrationVariables,
+					registrationVariablesLabels
+				) }}
 
 			{{ form_end(form) }}
 

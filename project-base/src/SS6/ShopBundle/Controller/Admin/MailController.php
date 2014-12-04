@@ -5,10 +5,54 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Form\Admin\Order\Status\AllMailTemplatesFormType;
+use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
+use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends Controller {
+
+	/**
+	 * @return array
+	 */
+	private function getOrderStatusVariablesLabels() {
+		$translator = $this->get('translator');
+		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
+
+		return array(
+			OrderMailService::VARIABLE_NUMBER  => $translator->trans('Číslo objednávky'),
+			OrderMailService::VARIABLE_DATE => $translator->trans('Datum a čas vytvoření objednávky'),
+			OrderMailService::VARIABLE_URL => $translator->trans('URL adresa e-shopu'),
+			OrderMailService::VARIABLE_TRANSPORT => $translator->trans('Název zvolené dopravy'),
+			OrderMailService::VARIABLE_PAYMENT => $translator->trans('Název zvolené platby'),
+			OrderMailService::VARIABLE_TOTAL_PRICE => $translator->trans('Celková cena za objednávku (s DPH)'),
+			OrderMailService::VARIABLE_BILLING_ADDRESS => $translator->trans(
+				'Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa'
+			),
+			OrderMailService::VARIABLE_DELIVERY_ADDRESS => $translator->trans('Dodací adresa'),
+			OrderMailService::VARIABLE_NOTE  => $translator->trans('Poznámka'),
+			OrderMailService::VARIABLE_PRODUCTS => $translator->trans(
+				'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)'
+			),
+			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $translator->trans('URL adresa detailu objednávky'),
+		);
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getRegistrationVariablesLabels() {
+		$translator = $this->get('translator');
+		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
+
+		return array(
+			CustomerMailService::VARIABLE_FIRST_NAME => $translator->trans('Jméno'),
+			CustomerMailService::VARIABLE_LAST_NAME => $translator->trans('Příjmení'),
+			CustomerMailService::VARIABLE_EMAIL => $translator->trans('Email'),
+			CustomerMailService::VARIABLE_URL => $translator->trans('URL adresa e-shopu'),
+			CustomerMailService::VARIABLE_LOGIN_PAGE => $translator->trans('Odkaz na stránku s přihlášením'),
+		);
+	}
 
 	/**
 	 * @Route("/mail/template/")
@@ -50,7 +94,9 @@ class MailController extends Controller {
 			'form' => $form->createView(),
 			'orderStatusesIndexedById' => $mailTemplateFacade->getAllIndexedById(),
 			'orderStatusVariables' => $orderStatusesTemplateVariables,
+			'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
 			'registrationVariables' => $registrationTemplateVariables,
+			'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
 		));
 	}
 
