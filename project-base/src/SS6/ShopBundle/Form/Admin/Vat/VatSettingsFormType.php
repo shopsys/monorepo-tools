@@ -2,10 +2,12 @@
 
 namespace SS6\ShopBundle\Form\Admin\Vat;
 
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints;
 
 class VatSettingsFormType extends AbstractType {
@@ -21,12 +23,23 @@ class VatSettingsFormType extends AbstractType {
 	private $roundingTypes;
 
 	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param array $roundingTypes
+	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
-	public function __construct(array $vats, array $roundingTypes) {
+	public function __construct(
+		array $vats,
+		array $roundingTypes,
+		TranslatorInterface $translator
+	) {
 		$this->vats = $vats;
 		$this->roundingTypes = $roundingTypes;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -41,6 +54,13 @@ class VatSettingsFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		$roundingTypesLabels = $this->getRoundingTypesLabels();
+
+		$roundingTypesChoices = array();
+		foreach ($this->roundingTypes as $roundingType) {
+			$roundingTypesChoices[$roundingType] = $roundingTypesLabels[$roundingType];
+		}
+
 		$builder
 			->add('defaultVat', 'choice', array(
 				'required' => true,
@@ -51,7 +71,7 @@ class VatSettingsFormType extends AbstractType {
 			))
 			->add('roundingType', 'choice', array(
 				'required' => true,
-				'choices' => $this->roundingTypes,
+				'choices' => $roundingTypesChoices,
 			))
 			->add('save', 'submit');
 	}
@@ -60,6 +80,17 @@ class VatSettingsFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
 		));
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getRoundingTypesLabels() {
+		return array(
+			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => $this->translator->trans('Na setiny (haléře)'),
+			PricingSetting::ROUNDING_TYPE_FIFTIES => $this->translator->trans('Na padesátníky'),
+			PricingSetting::ROUNDING_TYPE_INTEGER => $this->translator->trans('Na celá čísla (koruny)'),
+		);
 	}
 
 }

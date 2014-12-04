@@ -53,8 +53,10 @@ class SuperadminController extends Controller {
 		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
 		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
 		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
+		$translator = $this->get('translator');
+		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 
-		$form = $this->createForm(new InputPriceTypeFormType());
+		$form = $this->createForm(new InputPriceTypeFormType($translator));
 
 		$pricingSettingData = array();
 		if (!$form->isSubmitted()) {

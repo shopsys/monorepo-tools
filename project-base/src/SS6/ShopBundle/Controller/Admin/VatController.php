@@ -116,9 +116,15 @@ class VatController extends Controller {
 		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
 		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
 		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
+		$translator = $this->get('translator');
+		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 
 		$vats = $vatFacade->getAll();
-		$form = $this->createForm(new VatSettingsFormType($vats, PricingSetting::getRoundingTypes()));
+		$form = $this->createForm(new VatSettingsFormType(
+			$vats,
+			PricingSetting::getRoundingTypes(),
+			$translator
+		));
 
 		try {
 			$vatSettingsFormData = array();
