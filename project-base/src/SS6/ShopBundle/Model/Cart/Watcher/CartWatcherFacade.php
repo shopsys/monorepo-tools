@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CartWatcherFacade {
 
@@ -25,6 +26,11 @@ class CartWatcherFacade {
 	private $flashMessageSender;
 
 	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartWatcherService
@@ -32,11 +38,13 @@ class CartWatcherFacade {
 	public function __construct(
 		FlashMessageSender $flashMessageSender,
 		EntityManager $em,
-		CartWatcherService $cartWatcherService
+		CartWatcherService $cartWatcherService,
+		TranslatorInterface $translator
 	) {
 		$this->flashMessageSender = $flashMessageSender;
 		$this->em = $em;
 		$this->cartWatcherService = $cartWatcherService;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -53,8 +61,8 @@ class CartWatcherFacade {
 		$modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 
 		foreach ($modifiedItems as $cartItem) {
-			$this->flashMessageSender->addInfoTwig('Byla změněna cena zboží <strong>{{ name }}</strong>'
-				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
+			$this->flashMessageSender->addInfoTwig($this->translator->trans('Byla změněna cena zboží <strong>{{ name }}</strong>'
+				. ', které máte v košíku. Prosím, překontrolujte si objednávku.'),
 				array('name' => $cartItem->getName()));
 		}
 	}
@@ -63,8 +71,8 @@ class CartWatcherFacade {
 		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart);
 
 		foreach ($notVisibleItems as $cartItem) {
-			$this->flashMessageSender->addErrorTwig('Zboží <strong>{{ name }}</strong>'
-				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
+			$this->flashMessageSender->addErrorTwig($this->translator->trans('Zboží <strong>{{ name }}</strong>'
+				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.'),
 				array('name' => $cartItem->getName()));
 			$cart->removeItemById($cartItem->getId());
 			$this->em->remove($cartItem);
