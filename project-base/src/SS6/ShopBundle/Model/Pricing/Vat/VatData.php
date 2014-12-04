@@ -18,7 +18,7 @@ class VatData {
 
 	/**
 	 * @param string|null $name
-	 * @param string|null $vat
+	 * @param string|null $percent
 	 */
 	public function __construct($name = null, $percent = null) {
 		$this->name = $name;
