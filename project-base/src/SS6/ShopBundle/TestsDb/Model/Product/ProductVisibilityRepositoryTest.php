@@ -18,7 +18,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'Name']);
+		$productData->setName(['cs' => 'Name']);
 		$productData->setVat($vat);
 		$productData->setPrice(100);
 		$productData->setHidden(false);
@@ -195,7 +195,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
 		$productData = $this->getDefaultProductData();
-		$productData->setNames(['cs' => 'Name']);
+		$productData->setName(['cs' => 'Name']);
 		$product = $productEditFacade->create($productData);
 
 		$productId = $product->getId();

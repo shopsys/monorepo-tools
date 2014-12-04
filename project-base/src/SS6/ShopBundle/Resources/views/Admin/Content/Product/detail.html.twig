@@ -15,7 +15,7 @@
 					{{ form_id(product|default(null)) }}
 					{% block product_url %}{% endblock %}
 
-					{{ form_row(form.names, { label: 'Název'}) }}
+					{{ form_row(form.name, { label: 'Název'}) }}
 					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'}) }}
 					{{ form_row(form.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
 					{{ form_row(form.departments, { label: 'Oddělení'}) }}
@@ -30,7 +30,7 @@
 
 
 				<div class="wrap-group">
-					{{ form_row(form.descriptions, { label: 'Popis'}) }}
+					{{ form_row(form.description, { label: 'Popis'}) }}
 					{{ form_row(form.price, { label: inputPriceLabel(), attr: { class: 'form-line--size-2' } }) }}
 					{{ form_row(form.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
 					{% block product_base_prices %}{% endblock %}

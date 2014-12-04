@@ -27,7 +27,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'productName']);
+		$productData->setName(['cs' => 'productName']);
 		$productData->setVat($vat);
 		$productData->setPrice(1);
 		$productData->setHiddenOnDomains(array(2));
@@ -72,7 +72,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'productName']);
+		$productData->setName(['cs' => 'productName']);
 		$productData->setVat($vat);
 		$productData->setPrice(1);
 		$productData->setHiddenOnDomains(array(2));
@@ -128,7 +128,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'productName']);
+		$productData->setName(['cs' => 'productName']);
 		$productData->setVat($vat);
 		$productData->setPrice(1);
 		$productData->setHiddenOnDomains(array(2));
@@ -159,7 +159,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'productName']);
+		$productData->setName(['cs' => 'productName']);
 		$productData->setVat($vat);
 		$productData->setPrice(1);
 		$productData->setHiddenOnDomains(array(2));

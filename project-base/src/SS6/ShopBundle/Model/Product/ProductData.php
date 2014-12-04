@@ -3,11 +3,14 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use DateTime;
 
 /**
+ * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Product")
+ *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class ProductData {
@@ -15,7 +18,7 @@ class ProductData {
 	/**
 	 * @var array
 	 */
-	private $names;
+	private $name;
 
 	/**
 	 * @var string|null
@@ -35,7 +38,7 @@ class ProductData {
 	/**
 	 * @var array
 	 */
-	private $descriptions;
+	private $description;
 
 	/**
 	 * @var string
@@ -94,11 +97,11 @@ class ProductData {
 	private $departments;
 
 	/**
-	 * @param array $names
+	 * @param array $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
 	 * @param string|null $ean
-	 * @param array $descriptions
+	 * @param array $description
 	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
@@ -112,11 +115,11 @@ class ProductData {
 	 * @param array $departments
 	 */
 	public function __construct(
-		$names = array(),
+		$name = array(),
 		$catnum = null,
 		$partno = null,
 		$ean = null,
-		$descriptions = array(),
+		$description = array(),
 		$price = null,
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
@@ -129,11 +132,11 @@ class ProductData {
 		array $hiddenOnDomains = array(),
 		array $departments = array()
 	) {
-		$this->names = $names;
+		$this->name = $name;
 		$this->catnum = $catnum;
 		$this->partno = $partno;
 		$this->ean = $ean;
-		$this->descriptions = $descriptions;
+		$this->description = $description;
 		$this->price = Condition::ifNull($price, 0);
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
@@ -150,8 +153,8 @@ class ProductData {
 	/**
 	 * @return array
 	 */
-	public function getNames() {
-		return $this->names;
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
@@ -178,8 +181,8 @@ class ProductData {
 	/**
 	 * @return array
 	 */
-	public function getDescriptions() {
-		return $this->descriptions;
+	public function getDescription() {
+		return $this->description;
 	}
 
 	/**
@@ -247,10 +250,10 @@ class ProductData {
 	}
 
 	/**
-	 * @param array $names
+	 * @param array $name
 	 */
-	public function setNames(array $names) {
-		$this->names = $names;
+	public function setName(array $name) {
+		$this->name = $name;
 	}
 
 	/**
@@ -275,10 +278,10 @@ class ProductData {
 	}
 
 	/**
-	 * @param array $descriptions
+	 * @param array $description
 	 */
-	public function setDescriptions(array $descriptions) {
-		$this->descriptions = $descriptions;
+	public function setDescription(array $description) {
+		$this->description = $description;
 	}
 
 	/**
@@ -384,8 +387,8 @@ class ProductData {
 			$names[$translation->getLocale()] = $translation->getName();
 			$desctiptions[$translation->getLocale()] = $translation->getDescription();
 		}
-		$this->setNames($names);
-		$this->setDescriptions($desctiptions);
+		$this->setName($names);
+		$this->setDescription($desctiptions);
 
 		$this->setCatnum($product->getCatnum());
 		$this->setPartno($product->getPartno());
