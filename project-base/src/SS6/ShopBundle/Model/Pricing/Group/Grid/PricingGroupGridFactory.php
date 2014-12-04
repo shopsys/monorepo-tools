@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PricingGroupGridFactory implements GridFactoryInterface {
 
@@ -28,18 +29,20 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 	private $selectedDomain;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\Grid\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\Grid\GridFactory $gridFactory
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
+	private $translator;
+
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		SelectedDomain $selectedDomain
+		SelectedDomain $selectedDomain,
+		TranslatorInterface $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -56,10 +59,15 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('pricingGroupList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'pg.name', 'Název', true);
-		$grid->addColumn('coefficient', 'pg.coefficient', 'Koeficient', true);
+		$grid->addColumn('name', 'pg.name', $this->translator->trans('Název'), true);
+		$grid->addColumn('coefficient', 'pg.coefficient', $this->translator->trans('Koeficient'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_pricinggroup_deleteconfirm', array('id' => 'pg.id'))
+		$grid->addActionColumn(
+				ActionColumn::TYPE_DELETE,
+				$this->translator->trans('Smazat'),
+				'admin_pricinggroup_deleteconfirm',
+				array('id' => 'pg.id')
+			)
 			->setAjaxConfirm();
 
 		return $grid;

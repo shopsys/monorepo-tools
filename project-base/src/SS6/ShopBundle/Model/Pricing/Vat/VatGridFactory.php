@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class VatGridFactory implements GridFactoryInterface {
 
@@ -21,12 +22,18 @@ class VatGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
-	public function __construct(EntityManager $em, GridFactory $gridFactory) {
+	private $translator;
+
+	public function __construct(
+		EntityManager $em,
+		GridFactory $gridFactory,
+		TranslatorInterface $translator
+	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -41,11 +48,16 @@ class VatGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('vatList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'v.name', 'Název', true);
-		$grid->addColumn('percent', 'v.percent', 'Procent', true);
-		$grid->addColumn('coefficient', 'v.percent', 'Koeficient', true);
+		$grid->addColumn('name', 'v.name', $this->translator->trans('Název'), true);
+		$grid->addColumn('percent', 'v.percent', $this->translator->trans('Procent'), true);
+		$grid->addColumn('coefficient', 'v.percent', $this->translator->trans('Koeficient'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_vat_deleteconfirm', array('id' => 'v.id'))
+		$grid->addActionColumn(
+				ActionColumn::TYPE_DELETE,
+				$this->translator->trans('Smazat'),
+				'admin_vat_deleteconfirm',
+				array('id' => 'v.id')
+			)
 			->setAjaxConfirm();
 
 		return $grid;

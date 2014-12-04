@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 
-use SS6\ShopBundle\Component\Translator;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationGridFactory implements GridFactoryInterface {
 
@@ -16,7 +16,7 @@ class TranslationGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translator
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
 	private $translator;
 
@@ -27,7 +27,7 @@ class TranslationGridFactory implements GridFactoryInterface {
 
 	public function __construct(
 		GridFactory $gridFactory,
-		Translator $translator,
+		TranslatorInterface $translator,
 		TranslationEditFacade $translationEditFacade
 	) {
 		$this->gridFactory = $gridFactory;
@@ -43,9 +43,9 @@ class TranslationGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('translationList', $dataSource);
 
-		$grid->addColumn('id', 'id', 'Konstanta');
-		$grid->addColumn('cs', 'cs', 'Česky');
-		$grid->addColumn('en', 'en', 'Anglicky');
+		$grid->addColumn('id', 'id', $this->translator->trans('Konstanta'));
+		$grid->addColumn('cs', 'cs', $this->translator->trans('Česky'));
+		$grid->addColumn('en', 'en', $this->translator->trans('Anglicky'));
 
 		return $grid;
 	}

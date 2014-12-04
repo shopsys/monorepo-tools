@@ -12,6 +12,7 @@ use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TransportGridFactory implements GridFactoryInterface {
 
@@ -42,24 +43,24 @@ class TransportGridFactory implements GridFactoryInterface {
 	private $localization;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
-	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
-	 * @param \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory $transportDetailFactory
-	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
+	private $translator;
+
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		TransportRepository $transportRepository,
 		TransportDetailFactory $transportDetailFactory,
-		Localization $localization
+		Localization $localization,
+		TranslatorInterface $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->transportRepository = $transportRepository;
 		$this->transportDetailFactory = $transportDetailFactory;
 		$this->localization = $localization;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -82,13 +83,23 @@ class TransportGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('transportList', $dataSource);
 		$grid->enableDragAndDrop(Transport::class);
 
-		$grid->addColumn('name', 'tt.name', 'Název');
-		$grid->addColumn('price', 'transportDetail', 'Cena');
+		$grid->addColumn('name', 'tt.name', $this->translator->trans('Název'));
+		$grid->addColumn('price', 'transportDetail', $this->translator->trans('Cena'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_EDIT, 'Upravit', 'admin_transport_edit', array('id' => 't.id'));
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_transport_delete', array('id' => 't.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto dopravu?');
+		$grid->addActionColumn(
+			ActionColumn::TYPE_EDIT,
+			$this->translator->trans('Upravit'),
+			'admin_transport_edit',
+			array('id' => 't.id')
+		);
+		$grid->addActionColumn(
+				ActionColumn::TYPE_DELETE,
+				$this->translator->trans('Smazat'),
+				'admin_transport_delete',
+				array('id' => 't.id')
+			)
+			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dopravu?'));
 
 		return $grid;
 	}

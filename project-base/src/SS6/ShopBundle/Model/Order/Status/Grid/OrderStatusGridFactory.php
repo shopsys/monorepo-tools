@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class OrderStatusGridFactory implements GridFactoryInterface {
 
@@ -28,10 +29,21 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	public function __construct(EntityManager $em, GridFactory $gridFactory, Localization $localization) {
+	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	public function __construct(
+		EntityManager $em,
+		GridFactory $gridFactory,
+		Localization $localization,
+		TranslatorInterface $translator
+	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -49,10 +61,15 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('names', 'ost.name', 'Název', true);
+		$grid->addColumn('names', 'ost.name', $this->translator->trans('Název'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_orderstatus_deleteconfirm', array('id' => 'os.id'))
+		$grid->addActionColumn(
+				ActionColumn::TYPE_DELETE,
+				$this->translator->trans('Smazat'),
+				'admin_orderstatus_deleteconfirm',
+				array('id' => 'os.id')
+			)
 			->setAjaxConfirm();
 
 		return $grid;
