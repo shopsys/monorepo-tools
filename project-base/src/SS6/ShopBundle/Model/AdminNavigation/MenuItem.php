@@ -39,14 +39,19 @@ class MenuItem {
 
 	/**
 	 * @param string $label
-	 * @param string|null $label
 	 * @param string|null $type
 	 * @param string|null $route
 	 * @param array|null $routeParameters
 	 * @param array|null $items
 	 */
-	public function __construct($label, $type = null, $route = null, array $routeParameters = null,
-			$visible = true, array $items = null) {
+	public function __construct(
+		$label,
+		$type = null,
+		$route = null,
+		array $routeParameters = null,
+		$visible = true,
+		array $items = null
+	) {
 		if (isset($type)) {
 			$this->setType($type);
 		} else {
