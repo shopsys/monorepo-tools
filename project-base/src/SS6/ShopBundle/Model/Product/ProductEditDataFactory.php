@@ -53,16 +53,16 @@ class ProductEditDataFactory {
 		$productEditData = $this->createDefault();
 		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
 		$productEditData->productData->setFromEntity($product, $productDomains);
-		$productParameterValuesData = array();
 
+		$productParameterValuesData = array();
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
 		foreach ($productParameterValues as $productParameterValue) {
 			$productParameterValueData = new ProductParameterValueData();
 			$productParameterValueData->setFromEntity($productParameterValue);
 			$productParameterValuesData[] = $productParameterValueData;
 		}
-
 		$productEditData->parameters = $productParameterValuesData;
+
 		return $productEditData;
 	}
 

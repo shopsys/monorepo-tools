@@ -7,7 +7,6 @@ use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFac
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -94,9 +93,6 @@ class ProductEditFormType extends AbstractType {
 				'allow_add' => true,
 				'allow_delete' => true,
 				'type' => $this->productParameterValueFormTypeFactory->create(),
-				'options' => array(
-					'data_class' => ProductParameterValueData::class,
-				),
 				'constraints' => array(
 					new UniqueCollection(array(
 						'fields' => array('parameter'),

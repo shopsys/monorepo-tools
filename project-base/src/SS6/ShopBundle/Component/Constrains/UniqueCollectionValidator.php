@@ -40,18 +40,34 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	 */
 	private function areValuesEqualInFields(array $fields, $value1, $value2) {
 		foreach ($fields as $field) {
-			$methodName = 'get' . ucfirst($field);
+			$fieldValue1 = $this->getFieldValue($value1, $field);
+			$fieldValue2 = $this->getFieldValue($value2, $field);
 
-			if (!is_callable(array($value1, $methodName)) || !is_callable(array($value2, $methodName))) {
-				throw new \Symfony\Component\Validator\Exception\ConstraintDefinitionException();
-			}
-
-			if ($value1->$methodName() !== $value2->$methodName()) {
+			if ($fieldValue1 !== $fieldValue2) {
 				return false;
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param type $value
+	 * @param type $field
+	 * @return type
+	 * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
+	 */
+	private function getFieldValue($value, $field) {
+		if (is_array($value)) {
+			return $value[$field];
+		} else {
+			$methodName = 'get' . ucfirst($field);
+
+			if (!is_callable(array($value, $methodName))) {
+				throw new \Symfony\Component\Validator\Exception\ConstraintDefinitionException();
+			}
+			return $value->$methodName();
+		}
 	}
 
 }
