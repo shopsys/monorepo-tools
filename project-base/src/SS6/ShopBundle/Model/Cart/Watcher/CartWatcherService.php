@@ -4,15 +4,15 @@ namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartWatcherService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
-	private $productPriceCalculation;
+	private $productPriceCalculationForUser;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -25,16 +25,16 @@ class CartWatcherService {
 	private $domain;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	public function __construct(
-		ProductPriceCalculation $productPriceCalculation,
+		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ProductRepository $productRepository,
 		Domain $domain
 	) {
-		$this->productPriceCalculation = $productPriceCalculation;
+		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
 	}
@@ -46,7 +46,7 @@ class CartWatcherService {
 	public function getModifiedPriceItemsAndUpdatePrices(Cart $cart) {
 		$modifiedItems = array();
 		foreach ($cart->getItems() as $cartItem) {
-			$productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
+			$productPrice = $this->productPriceCalculationForUser->calculatePriceByCurrentUser($cartItem->getProduct());
 			if ($cartItem->getWatchedPrice() != $productPrice->getPriceWithVat()) {
 				$modifiedItems[] = $cartItem;
 			}

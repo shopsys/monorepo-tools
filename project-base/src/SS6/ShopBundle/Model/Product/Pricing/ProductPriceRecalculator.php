@@ -52,7 +52,8 @@ class ProductPriceRecalculator {
 
 	public function runScheduledRecalculations() {
 		$products = $this->productPriceRecalculationScheduler->getProductsScheduledForRecalculation();
-		$this->recalculatePricesForProducts($products);
+		// T*O*D*O 
+		//$this->recalculatePricesForProducts($products);
 		$this->productPriceRecalculationScheduler->cleanSchedule();
 	}
 

@@ -3,15 +3,15 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetailFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
-	private $productPriceCalculation;
+	private $productPriceCalculationForUser;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
@@ -19,14 +19,14 @@ class ProductDetailFactory {
 	private $parameterRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
 	 */
 	public function __construct(
-		ProductPriceCalculation $productPriceCalculation,
+		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ParameterRepository $parameterRepository
 	) {
-		$this->productPriceCalculation = $productPriceCalculation;
+		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->parameterRepository = $parameterRepository;
 	}
 
@@ -61,7 +61,7 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function getPrice(Product $product) {
-		return $this->productPriceCalculation->calculatePrice($product);
+		return $this->productPriceCalculationForUser->calculatePriceByCurrentUser($product);
 	}
 
 	/**

@@ -76,7 +76,7 @@ class OrderController extends Controller {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
-				$order = $orderFacade->createOrder($orderData, $this->getUser());
+				$order = $orderFacade->createOrderFromCart($orderData, $this->getUser());
 				$cartFacade->cleanCart();
 				if ($user instanceof User) {
 					$customerEditFacade->amendCustomerDataFromOrder($user, $order);

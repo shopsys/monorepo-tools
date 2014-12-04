@@ -46,6 +46,24 @@ class BasePriceCalculation {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param Vat $vat
+	 * @param string $coefficient
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function applyCoefficient(Price $price, Vat $vat, $coefficient) {
+		$priceWithVat = $this->rounding->roundPriceWithVat($price->getPriceWithVat() * $coefficient);
+		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
+		$priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat - $vatAmount);
+
+		return new Price(
+			$priceWithoutVat,
+			$priceWithVat,
+			$vatAmount
+		);
+	}
+
+	/**
 	 * @param string $inputPrice
 	 * @param int $inputPriceType
 	 * @param Vat $vat
