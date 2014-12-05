@@ -70,9 +70,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 		foreach ($classProperties as $property) {
 			/* @var $property \ReflectionProperty */
 			$propertyName = $property->getName();
-
 			$constraints = $this->resolvePropertyConstraintsInEntity($propertyName, $entityMetadata);
-			//ld($propertyName, $constraints);
 
 			foreach ($constraints as $constraint) {
 				$classMetadata->addPropertyConstraint($propertyName, $constraint);
@@ -137,7 +135,8 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	private function resolveConstraintsForTranslationsEntityField(DoctrineClassMetadata $entityMetadata, $propertyName) {
 		$fieldMapping = $entityMetadata->getAssociationMapping(self::TRANSLATIONS_ASSOCIATION);
 		if (!isset($fieldMapping['targetEntity'])) {
-			throw new Exception('TODO: tTranslationsEntityNotSpecified');
+			$message = 'At entity: ' . $entityMetadata->getName();
+			throw new \SS6\ShopBundle\Component\Validator\Exception\TranslationsEntityNotSpecifiedException($message);
 		}
 
 		$translationsEntity = $fieldMapping['targetEntity'];
