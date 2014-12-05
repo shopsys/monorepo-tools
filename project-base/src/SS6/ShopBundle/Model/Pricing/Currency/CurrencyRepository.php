@@ -49,4 +49,11 @@ class CurrencyRepository {
 		return $currency;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 */
+	public function getAll() {
+		return $this->getCurrencyRepository()->findAll();
+	}
+	
 }

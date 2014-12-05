@@ -85,4 +85,25 @@ class CurrencyFacade {
 		$this->em->commit();
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 */
+	public function getAll() {
+		return $this->currencyRepository->getAll();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 */
+	public function getDefaultCurrency() {
+		return $this->getById($this->currencyService->getDefaultCurrencyId());
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 */
+	public function setDefaultCurrency(Currency $currency) {
+		$this->currencyService->setDefaultCurrency($currency);
+	}
+
 }

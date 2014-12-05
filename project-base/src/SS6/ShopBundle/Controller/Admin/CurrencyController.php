@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class CurrencyController extends Controller {
 
@@ -66,6 +68,37 @@ class CurrencyController extends Controller {
 		}
 
 		return $this->redirect($this->generateUrl('admin_currency_list'));
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function settingsAction(Request $request) {
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+
+		$currencies = $currencyFacade->getAll();
+		$form = $this->createForm(new CurrencySettingsFormType($currencies));
+
+		$currencySettingsFormData = array();
+		$currencySettingsFormData['defaultCurrency'] =  $currencyFacade->getDefaultCurrency();
+		$form->setData($currencySettingsFormData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$currencySettingsFormData = $form->getData();
+			$currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);
+			$flashMessageSender->addSuccess('Nastavení výchozí měny bylo upraveno');
+
+			return $this->redirect($this->generateUrl('admin_currency_list'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Currency/currencySettings.html.twig', array(
+			'form' => $form->createView(),
+		));
+
 	}
 
 }
