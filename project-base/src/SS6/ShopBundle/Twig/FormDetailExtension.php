@@ -43,7 +43,7 @@ class FormDetailExtension extends Twig_Extension {
 
 	/**
 	 * @param mixed $object
-	 * @retrun string
+	 * @return string
 	 */
 	public function formId($object) {
 		if ($object === null) {
