@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Twig_Extension;
 use Twig_SimpleFilter;
 
@@ -13,8 +14,14 @@ class PriceExtension extends Twig_Extension {
 	 */
 	private $translator;
 
-	public function __construct(TranslatorInterface $translator) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 */
+	private $currencyFacade;
+
+	public function __construct(TranslatorInterface $translator, CurrencyFacade $currencyFacade) {
 		$this->translator = $translator;
+		$this->currencyFacade = $currencyFacade;
 	}
 
 	/**
@@ -34,7 +41,9 @@ class PriceExtension extends Twig_Extension {
 	public function priceFilter($price) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;Kč';
+		$currencySymbol = $this->currencyFacade->getDefaultCurrency()->getSymbol();
+		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+		
 		return $price;
 	}
 
