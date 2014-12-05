@@ -21,6 +21,11 @@
 					{{ form_row(form.departments, { label: 'Oddělení'}) }}
 				</div>
 
+				<div class="wrap-group">
+					{{ form_row(form.price, { label: inputPriceLabel(), attr: { class: 'form-line--size-2' } }) }}
+					{{ form_row(form.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
+					{% block product_calculated_prices %}{% endblock %}
+				</div>
 
 				<div class="wrap-group">
 					{{ form_row(form.catnum, { label: 'Katalogové číslo' }) }}
@@ -31,9 +36,6 @@
 
 				<div class="wrap-group">
 					{{ form_row(form.description, { label: 'Popis'}) }}
-					{{ form_row(form.price, { label: inputPriceLabel(), attr: { class: 'form-line--size-2' } }) }}
-					{{ form_row(form.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
-					{% block product_base_prices %}{% endblock %}
 					{{ form_row(form.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}
