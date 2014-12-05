@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -25,13 +26,19 @@ class ProductOnCurrentDomainFacade {
 	private $productDetailFactory;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
 	 */
-	public function __construct(ProductRepository $productRepository, Domain $domain, ProductDetailFactory $productDetailFactory) {
+	private $currentCustomer;
+
+	public function __construct(
+		ProductRepository $productRepository,
+		Domain $domain,
+		ProductDetailFactory $productDetailFactory,
+		CurrentCustomer $currentCustomer
+	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
+		$this->currentCustomer = $currentCustomer;
 		$this->productDetailFactory = $productDetailFactory;
 	}
 
@@ -57,7 +64,15 @@ class ProductOnCurrentDomainFacade {
 		$limit,
 		$departmentId
 	) {
-		$paginationResult = $this->getPaginatedProductsInDepartment($orderingSetting, $page, $limit, $departmentId);
+		$paginationResult = $this->productRepository->getPaginationResultInDepartment(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$orderingSetting,
+			$page,
+			$limit,
+			$departmentId,
+			$this->currentCustomer->getPricingGroup()
+		);
 		$products = $paginationResult->getResults();
 
 		return new PaginationResult(
@@ -65,28 +80,6 @@ class ProductOnCurrentDomainFacade {
 			$paginationResult->getPageSize(),
 			$paginationResult->getTotalCount(),
 			$this->productDetailFactory->getDetailsForProducts($products)
-		);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
-	 * @param int $page
-	 * @param int $limit
-	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
-	 */
-	private function getPaginatedProductsInDepartment(
-		ProductListOrderingSetting $orderingSetting,
-		$page,
-		$limit,
-		$departmentId
-	) {
-		return $this->productRepository->getPaginationResultInDepartment(
-			$this->domain->getId(),
-			$this->domain->getLocale(),
-			$orderingSetting,
-			$page,
-			$limit,
-			$departmentId
 		);
 	}
 

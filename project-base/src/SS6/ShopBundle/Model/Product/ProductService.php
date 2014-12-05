@@ -57,7 +57,7 @@ class ProductService {
 	 * @param string $newVatPercent
 	 */
 	public function recalculateInputPriceForNewVatPercent(Product $product, $newVatPercent) {
-		$productPrice = $this->productPriceCalculation->calculatePrice($product);
+		$productPrice = $this->productPriceCalculation->calculateBasePrice($product);
 		$inputPriceType = $this->pricingSetting->getInputPriceType();
 
 		if ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {

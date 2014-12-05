@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -29,15 +30,17 @@ class ProductCalculatedPriceRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $priceWithVat
 	 */
-	public function saveCalculatedPrice(Product $product, $priceWithVat) {
+	public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
 		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->findOneBy([
-			'product' => $product
+			'product' => $product,
+			'pricingGroup' => $pricingGroup,
 		]);
 
 		if ($productCalculatedPrice === null) {
-			$productCalculatedPrice = new ProductCalculatedPrice($product, $priceWithVat);
+			$productCalculatedPrice = new ProductCalculatedPrice($product, $pricingGroup, $priceWithVat);
 			$this->em->persist($productCalculatedPrice);
 		} else {
 			$productCalculatedPrice->setPriceWithVat($priceWithVat);
