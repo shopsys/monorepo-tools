@@ -18,6 +18,11 @@ class ProductDetail {
 	private $basePrice;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	private $sellingPrice;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	private $parameters;
@@ -25,15 +30,18 @@ class ProductDetail {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
 	 */
 	public function __construct(
 		Product $product,
 		Price $basePrice,
+		Price $sellingPrice,
 		array $parameters
 	) {
 		$this->product = $product;
 		$this->basePrice = $basePrice;
+		$this->sellingPrice = $sellingPrice;
 		$this->parameters = $parameters;
 	}
 
@@ -49,6 +57,13 @@ class ProductDetail {
 	 */
 	public function getBasePrice() {
 		return $this->basePrice;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function getSellingPrice() {
+		return $this->sellingPrice;
 	}
 
 	/**
