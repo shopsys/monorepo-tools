@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Product;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class ProductPriceCalculationForUser {
 
@@ -15,9 +15,9 @@ class ProductPriceCalculationForUser {
 	private $productPriceCalculation;
 
 	/**
-	 * @var \Symfony\Component\Security\Core\SecurityContextInterface
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
 	 */
-	private $securityContext;
+	private $currentCustomer;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
@@ -26,11 +26,11 @@ class ProductPriceCalculationForUser {
 
 	public function __construct(
 		ProductPriceCalculation $productPriceCalculation,
-		SecurityContextInterface $securityContext,
+		CurrentCustomer $currentCustomer,
 		PricingGroupFacade $pricingGroupFacade
 	) {
 		$this->productPriceCalculation = $productPriceCalculation;
-		$this->securityContext = $securityContext;
+		$this->currentCustomer = $currentCustomer;
 		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
@@ -41,14 +41,10 @@ class ProductPriceCalculationForUser {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePriceByCurrentUser(Product $product) {
-		$user = $this->getCurrentUser();
-		if ($user === null) {
-			$pricingGroup = $this->pricingGroupFacade->getDefaultPricingGroupByCurrentDomain();
-		} else {
-			$pricingGroup = $user->getPricingGroup();
-		}
-
-		return $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+		return $this->productPriceCalculation->calculatePrice(
+			$product,
+			$this->currentCustomer->getPricingGroup()
+		);
 	}
 
 	/**
@@ -65,23 +61,6 @@ class ProductPriceCalculationForUser {
 		}
 
 		return $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Customer\User
-	 */
-	private function getCurrentUser() {
-		$token = $this->securityContext->getToken();
-		if ($token === null) {
-			return null;
-		}
-
-		$user = $token->getUser();
-		if (!$user instanceof User) {
-			return null;
-		}
-
-		return $user;
 	}
 
 }

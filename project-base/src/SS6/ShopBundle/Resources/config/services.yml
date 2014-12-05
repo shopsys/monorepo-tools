@@ -135,6 +135,9 @@ services:
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
+  ss6.shop.customer.current_customer:
+    class: SS6\ShopBundle\Model\Customer\CurrentCustomer
+
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
