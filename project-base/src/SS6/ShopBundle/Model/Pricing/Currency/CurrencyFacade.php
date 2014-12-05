@@ -24,7 +24,6 @@ class CurrencyFacade {
 	 */
 	private $currencyService;
 
-
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository

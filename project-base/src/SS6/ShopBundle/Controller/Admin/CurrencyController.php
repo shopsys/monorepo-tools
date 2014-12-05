@@ -58,8 +58,8 @@ class CurrencyController extends Controller {
 			$currencyFacade->deleteById($id);
 
 			$flashMessageSender->addSuccessTwig('Měna <strong>{{ name }}</strong> byla smazána', array(
-					'name' => $fullName,
-				));
+				'name' => $fullName,
+			));
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
 			$flashMessageSender->addError('Zvolená měna již neexistuje');
