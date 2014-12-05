@@ -1,5 +1,17 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% block grid_action_cell_type_delete %}
+	{% if row.c.id == defaultCurrency.id %}
+		<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí'|trans }}"
+			class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
+		>
+			<i class="fa fa-info"></i>
+		</span>
+	{% else %}
+		{{ gridView.renderBlock('grid_action_cell', {actionColumn: actionColumn, row: row}) }}
+	{% endif %}
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit.'|trans }}
 {% endblock %}

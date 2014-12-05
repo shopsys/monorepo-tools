@@ -74,10 +74,14 @@ class CurrencyFacade {
 
 	/**
 	 * @param int $currencyId
+	 * @throws SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException
 	 */
 	public function deleteById($currencyId) {
 		$currency = $this->currencyRepository->getById($currencyId);
 
+		if ($this->isDefaultCurrency($currency)) {
+			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException();
+		}
 		$this->em->beginTransaction();
 
 		$this->em->remove($currency);
@@ -104,6 +108,14 @@ class CurrencyFacade {
 	 */
 	public function setDefaultCurrency(Currency $currency) {
 		$this->currencyService->setDefaultCurrency($currency);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return bool
+	 */
+	private function isDefaultCurrency(Currency $currency) {
+		return $currency === $this->getDefaultCurrency();
 	}
 
 }

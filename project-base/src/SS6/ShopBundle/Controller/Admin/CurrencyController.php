@@ -15,11 +15,14 @@ class CurrencyController extends Controller {
 	public function listAction() {
 		$currencyInlineEdit = $this->get('ss6.shop.pricing.currency.currency_inline_edit');
 		/* @var $currencyInlineEdit \SS6\ShopBundle\Model\Pricing\Currency\CurrencyInlineEdit */
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
 		$grid = $currencyInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/Currency/list.html.twig', array(
 			'gridView' => $grid->createView(),
+			'defaultCurrency' => $currencyFacade->getDefaultCurrency()
 		));
 	}
 
@@ -62,7 +65,8 @@ class CurrencyController extends Controller {
 			$flashMessageSender->addSuccessTwig('Měna <strong>{{ name }}</strong> byla smazána', array(
 				'name' => $fullName,
 			));
-
+		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException $ex) {
+			$flashMessageSender->addError('Tuto měnu nelze smazat, je nastavena jako výchozí');
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
 			$flashMessageSender->addError('Zvolená měna již neexistuje');
 		}
