@@ -44,9 +44,10 @@
   items:
     - label: 'Cenové skupiny'
       route: admin_pricinggroup_list
-
     - label: 'DPH a zaokrouhlování'
       route: admin_vat_list
+    - label: Měny
+      route: admin_currency_list
 
 - label: 'Marketing'
   route: admin_article_list

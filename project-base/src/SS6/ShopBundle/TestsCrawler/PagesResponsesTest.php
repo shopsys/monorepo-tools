@@ -15,6 +15,7 @@ class PagesResponsesTest extends DatabaseTestCase {
 			['admin/article/list/'],
 			['admin/article/edit/1'],
 			['admin/article/new/'],
+			['admin/currency/list/'],
 			['admin/customer/list/'],
 			['admin/customer/edit/1'],
 			['admin/customer/new/'],
