@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
@@ -10,6 +11,7 @@ class PricingSetting {
 
 	const INPUT_PRICE_TYPE = 'inputPriceType';
 	const ROUNDING_TYPE = 'roundingType';
+	const DEFAULT_CURRENCY = 'defaultCurrencyId';
 
 	const INPUT_PRICE_TYPE_WITH_VAT = 1;
 	const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
@@ -48,6 +50,20 @@ class PricingSetting {
 	 */
 	public function getRoundingType() {
 		return $this->setting->get(self::ROUNDING_TYPE, SettingValue::DOMAIN_ID_COMMON);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDefaultCurrencyId() {
+		return $this->setting->get(self::DEFAULT_CURRENCY, SettingValue::DOMAIN_ID_COMMON);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 */
+	public function setDefaultCurrency(Currency $currency) {
+		$this->setting->set(PricingSetting::DEFAULT_CURRENCY, $currency->getId(), SettingValue::DOMAIN_ID_COMMON);
 	}
 
 	/**
