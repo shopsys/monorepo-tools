@@ -117,6 +117,11 @@ services:
   ss6.shop.cart.item.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\Item\CartItemRepository
 
+  ss6.shop.component.translation.po_dumper:
+    class: SS6\ShopBundle\Component\Translation\PoDumper
+    tags:
+      - { name: jms_translation.dumper, format: po }
+
   ss6.shop.component.validator.auto_validator_annotation_loader:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader
     arguments: [@annotation_reader]
