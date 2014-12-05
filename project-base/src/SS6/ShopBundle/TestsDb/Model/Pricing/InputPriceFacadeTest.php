@@ -76,7 +76,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'name']);
+		$productData->setName(['cs' => 'name']);
 		$productData->setPrice($inputPriceWithVat);
 		$productData->setVat($vat);
 		$product = $productEditFacade->create($productData);
@@ -147,7 +147,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productData = new ProductData();
-		$productData->setNames(['cs' => 'name']);
+		$productData->setName(['cs' => 'name']);
 		$productData->setPrice($inputPriceWithoutVat);
 		$productData->setVat($vat);
 		$product = $productEditFacade->create($productData);

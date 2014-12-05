@@ -283,10 +283,10 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 */
 	private function setTranslations(ProductData $productData) {
-		foreach ($productData->getNames() as $locale => $name) {
+		foreach ($productData->getName() as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
-		foreach ($productData->getDescriptions() as $locale => $description) {
+		foreach ($productData->getDescription() as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
 	}

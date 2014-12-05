@@ -95,11 +95,11 @@ class ProductDataFixtureLoader {
 	 */
 	private function getProductDataFromCsvRow(array $row) {
 		$productData = new ProductData();
-		$productData->setNames(['cs' => $row[0], 'en' => $row[1]]);
+		$productData->setName(['cs' => $row[0], 'en' => $row[1]]);
 		$productData->setCatnum($row[2]);
 		$productData->setPartno($row[3]);
 		$productData->setEan($row[4]);
-		$productData->setDescriptions(['cs' => $row[5], 'en' => $row[6]]);
+		$productData->setDescription(['cs' => $row[5], 'en' => $row[6]]);
 		$productData->setPrice($row[7]);
 		switch ($row[8]) {
 			case 'high':

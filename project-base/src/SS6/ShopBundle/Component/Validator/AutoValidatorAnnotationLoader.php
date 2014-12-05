@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Mapping\Loader\LoaderInterface;
 
 class AutoValidatorAnnotationLoader implements LoaderInterface {
 
+	const TRANSLATIONS_ASSOCIATION = 'translations';
+
 	/**
 	 * @var \Doctrine\Common\Annotations\Reader
 	 */
@@ -68,13 +70,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 		foreach ($classProperties as $property) {
 			/* @var $property \ReflectionProperty */
 			$propertyName = $property->getName();
-
-			$constraints = array();
-			if ($entityMetadata->hasField($propertyName)) {
-				$constraints = $this->resolveConstraintsForField($entityMetadata, $propertyName);
-			} elseif ($entityMetadata->hasAssociation($propertyName)) {
-				$constraints = $this->resolveConstraintsForAssociation($entityMetadata, $propertyName);
-			}
+			$constraints = $this->resolvePropertyConstraintsInEntity($propertyName, $entityMetadata);
 
 			foreach ($constraints as $constraint) {
 				$classMetadata->addPropertyConstraint($propertyName, $constraint);
@@ -83,11 +79,29 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	}
 
 	/**
+	 * @param type $propertyName
+	 * @param \Doctrine\ORM\Mapping\ClassMetadata $entityMetadata
+	 * @return \Symfony\Component\Validator\Constraint[]
+	 */
+	private function resolvePropertyConstraintsInEntity($propertyName, DoctrineClassMetadata $entityMetadata) {
+		$constraints = array();
+		if ($entityMetadata->hasField($propertyName)) {
+			$constraints = $this->resolveConstraintsForEntityField($entityMetadata, $propertyName);
+		} elseif ($entityMetadata->hasAssociation($propertyName)) {
+			$constraints = $this->resolveConstraintsForEntityAssociation($entityMetadata, $propertyName);
+		} elseif ($entityMetadata->hasAssociation(self::TRANSLATIONS_ASSOCIATION)) {
+			$constraints = $this->resolveConstraintsForTranslationsEntityField($entityMetadata, $propertyName);
+		}
+
+		return $constraints;
+	}
+
+	/**
 	 * @param \Doctrine\ORM\Mapping\ClassMetadata $entityMetadata
 	 * @param string $fieldName
 	 * @return \Symfony\Component\Validator\Constraint[]
 	 */
-	private function resolveConstraintsForField(DoctrineClassMetadata $entityMetadata, $fieldName) {
+	private function resolveConstraintsForEntityField(DoctrineClassMetadata $entityMetadata, $fieldName) {
 		$constraints = array();
 
 		$fieldMapping = $entityMetadata->getFieldMapping($fieldName);
@@ -115,10 +129,39 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 
 	/**
 	 * @param \Doctrine\ORM\Mapping\ClassMetadata $entityMetadata
+	 * @param string $propertyName
+	 * @return \Symfony\Component\Validator\Constraint[]
+	 */
+	private function resolveConstraintsForTranslationsEntityField(DoctrineClassMetadata $entityMetadata, $propertyName) {
+		$fieldMapping = $entityMetadata->getAssociationMapping(self::TRANSLATIONS_ASSOCIATION);
+		if (!isset($fieldMapping['targetEntity'])) {
+			$message = 'At entity: ' . $entityMetadata->getName();
+			throw new \SS6\ShopBundle\Component\Validator\Exception\TranslationsEntityNotSpecifiedException($message);
+		}
+
+		$translationsEntity = $fieldMapping['targetEntity'];
+		$translationsEntityMetadata = $this->em->getClassMetadata($translationsEntity);
+
+		$translationsConstraints = $this->resolvePropertyConstraintsInEntity($propertyName, $translationsEntityMetadata);
+		if (count($translationsConstraints) > 0) {
+			$constraints = array(
+				new Constraints\All(array(
+					'constraints' => $translationsConstraints,
+				))
+			);
+		} else {
+			$constraints = array();
+		}
+
+		return $constraints;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\Mapping\ClassMetadata $entityMetadata
 	 * @param string $fieldName
 	 * @return \Symfony\Component\Validator\Constraint[]
 	 */
-	private function resolveConstraintsForAssociation(DoctrineClassMetadata $entityMetadata, $fieldName) {
+	private function resolveConstraintsForEntityAssociation(DoctrineClassMetadata $entityMetadata, $fieldName) {
 		$fieldMapping = $entityMetadata->getAssociationMapping($fieldName);
 
 		return array();
