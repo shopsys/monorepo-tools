@@ -137,14 +137,20 @@ class OrderController extends Controller {
 		);
 
 		if ($transportAndPaymentCheckResult->isTransportPriceChanged()) {
-			$message = 'V průběhu objednávkového procesu byla změněna cena dopravy ' . $orderData->getTransport()->getName()
-				. '. Prosím, překontrolujte si objednávku.';
-			$flashMessageSender->addInfo($message);
+			$flashMessageSender->addInfoTwig(
+				'V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku.',
+				array(
+					'transportName' => $orderData->getTransport()->getName(),
+				)
+			);
 		}
 		if ($transportAndPaymentCheckResult->isPaymentPriceChanged()) {
-			$message = 'V průběhu objednávkového procesu byla změněna cena platby ' . $orderData->getPayment()->getName()
-				. '. Prosím, překontrolujte si objednávku.';
-			$flashMessageSender->addInfo($message);
+			$flashMessageSender->addInfoTwig(
+				'V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku.',
+				array(
+					'paymentName' => $orderData->getPayment()->getName(),
+				)
+			);
 		}
 	}
 
