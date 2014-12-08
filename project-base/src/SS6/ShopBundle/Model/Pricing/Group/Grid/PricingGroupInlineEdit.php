@@ -49,7 +49,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param int $pricingGroupId
+	 * @param int|null $pricingGroupId
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData
 	 */
 	protected function getFormDataObject($pricingGroupId = null) {

@@ -102,14 +102,14 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	abstract protected function getFormDataObject($rowId = null);
 
 	/**
-	 * @param int $rowId
+	 * @param mixed $rowId
 	 * @param object $formDataObject
 	 */
 	abstract protected function editEntity($rowId, $formDataObject);
 
 	/**
 	 * @param object $formDataObject
-	 * @return int
+	 * @return mixed
 	 */
 	abstract protected function createEntityAndGetId($formDataObject);
 

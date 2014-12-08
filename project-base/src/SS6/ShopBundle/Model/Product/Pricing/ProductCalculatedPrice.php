@@ -29,7 +29,7 @@ class ProductCalculatedPrice {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param type $priceWithVat
+	 * @param string $priceWithVat
 	 */
 	public function __construct(Product $product, $priceWithVat) {
 		$this->product = $product;

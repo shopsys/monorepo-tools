@@ -21,7 +21,7 @@ class PricingGroupRepository {
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
-	public function getPricingGroupRepository() {
+	private function getPricingGroupRepository() {
 		return $this->em->getRepository(PricingGroup::class);
 	}
 

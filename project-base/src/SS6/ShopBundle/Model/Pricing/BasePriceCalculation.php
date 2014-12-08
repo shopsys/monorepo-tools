@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Rounding;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class BasePriceCalculation {
 

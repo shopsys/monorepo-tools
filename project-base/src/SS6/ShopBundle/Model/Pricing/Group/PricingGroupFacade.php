@@ -150,7 +150,7 @@ class PricingGroupFacade {
 	}
 
 	/**
-	 * @param PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return bool
 	 */
 	private function existsUserWithPricingGroup(PricingGroup $pricingGroup) {

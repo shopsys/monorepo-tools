@@ -30,7 +30,6 @@ class VatFacade {
 	private $vatService;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
 	private $setting;
