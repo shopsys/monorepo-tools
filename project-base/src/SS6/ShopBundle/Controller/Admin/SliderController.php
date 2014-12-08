@@ -67,7 +67,7 @@ class SliderController extends Controller {
 			/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
 			$sliderItem = $sliderItemFacade->create($form->getData());
 
-			$flashMessageSender->addSuccessTwig('Byla vytvořena stránka slideru'
+			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena stránka slideru'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $sliderItem->getName(),
 				'url' => $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
@@ -76,7 +76,7 @@ class SliderController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', array(
@@ -110,15 +110,18 @@ class SliderController extends Controller {
 		if ($form->isValid()) {
 			$sliderItemFacade->edit($id, $sliderItemData);
 
-			$flashMessageSender->addSuccessTwig('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
-				'name' => $sliderItem->getName(),
-				'url' =>  $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
-			));
+			$flashMessageSender->addSuccessFlashTwig(
+				'Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				array(
+					'name' => $sliderItem->getName(),
+					'url' =>  $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
+				)
+			);
 			return $this->redirect($this->generateUrl('admin_slider_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -144,7 +147,7 @@ class SliderController extends Controller {
 		$name = $sliderItemFacade->getById($id)->getName();
 		$sliderItemFacade->delete($id);
 
-		$flashMessageSender->addSuccessTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $name,
 		));
 		return $this->redirect($this->generateUrl('admin_slider_list'));

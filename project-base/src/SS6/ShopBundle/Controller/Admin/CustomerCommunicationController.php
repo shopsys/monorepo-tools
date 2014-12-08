@@ -39,7 +39,7 @@ class CustomerCommunicationController extends Controller {
 			$formData = $form->getData();
 			$setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $selectedDomain->getId());
 
-			$flashMessageSender->addSuccess('Nastavení textu po potvrzení objednávky bylo upraveno');
+			$flashMessageSender->addSuccessFlash('Nastavení textu po potvrzení objednávky bylo upraveno');
 			return $this->redirect($this->generateUrl('admin_customercommunication_ordersubmitted'));
 		}
 

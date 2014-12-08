@@ -87,7 +87,7 @@ class OrderController extends Controller {
 				try {
 					$this->sendMail($order);
 				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
-					$flashMessageSender->addError('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
+					$flashMessageSender->addErrorFlash('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
 
 				$session = $this->get('session');

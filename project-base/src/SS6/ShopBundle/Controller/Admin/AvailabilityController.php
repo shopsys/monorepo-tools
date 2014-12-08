@@ -35,7 +35,7 @@ class AvailabilityController extends Controller {
 		$fullName = $availabilityFacade->getById($id)->getName();
 		$availabilityFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_availability_list'));

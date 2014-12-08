@@ -38,12 +38,12 @@ class OrderStatusController extends Controller {
 			$orderStatusFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessTwig('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
+				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
 					'name' => $orderStatus->getName(),
 				));
 			} else {
 				$newOrderStatus = $orderStatusFacade->getById($newId);
-				$flashMessageSender->addSuccessTwig('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem '
+				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem '
 					. '<strong>' . $newOrderStatus->getName() . '</strong> a byl smazán.',
 					array(
 						'name' => $orderStatus->getName(),
@@ -51,12 +51,12 @@ class OrderStatusController extends Controller {
 					));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
-			$flashMessageSender->addErrorTwig('Stav objednávek <strong>{{ name }}</strong>'
+			$flashMessageSender->addErrorFlashTwig('Stav objednávek <strong>{{ name }}</strong>'
 					. ' je rezervovaný a nelze jej smazat', array(
 				'name' => $e->getOrderStatus()->getName(),
 			));
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
-			$flashMessageSender->addErrorTwig('Stav objednávek <strong>{{ name }}</strong>'
+			$flashMessageSender->addErrorFlashTwig('Stav objednávek <strong>{{ name }}</strong>'
 					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav', array(
 				'name' => $e->getOrderStatus()->getName(),
 			));

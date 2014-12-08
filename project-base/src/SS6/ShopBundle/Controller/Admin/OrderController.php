@@ -49,7 +49,7 @@ class OrderController extends Controller {
 
 				$order = $orderFacade->edit($id, $orderData);
 
-				$flashMessageSender->addSuccessTwig('Byla upravena objednávka č.'
+				$flashMessageSender->addSuccessFlashTwig('Byla upravena objednávka č.'
 						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', array(
 					'number' => $order->getNumber(),
 					'url' => $this->generateUrl('admin_order_edit', array('id' => $order->getId())),
@@ -57,15 +57,15 @@ class OrderController extends Controller {
 				return $this->redirect($this->generateUrl('admin_order_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			$flashMessageSender->addError('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
+			$flashMessageSender->addErrorFlash('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$flashMessageSender->addError('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+			$flashMessageSender->addErrorFlash('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
-			$flashMessageSender->addError('Nepodařilo se odeslat aktualizační email');
+			$flashMessageSender->addErrorFlash('Nepodařilo se odeslat aktualizační email');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -153,7 +153,7 @@ class OrderController extends Controller {
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$orderFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
 			'number' => $orderNumber,
 		));
 		return $this->redirect($this->generateUrl('admin_order_list'));

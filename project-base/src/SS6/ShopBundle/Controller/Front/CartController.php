@@ -51,7 +51,7 @@ class CartController extends Controller {
 				if ($form->get('recalcToOrder')->isClicked()) {
 					return $this->redirect($this->generateUrl('front_order_index'));
 				} else {
-					$flashMessageSender->addSuccess('Počet kusů položek v košíku byl úspěšně přepočítán.');
+					$flashMessageSender->addSuccessFlash('Počet kusů položek v košíku byl úspěšně přepočítán.');
 					return $this->redirect($this->generateUrl('front_cart'));
 				}
 			}
@@ -60,7 +60,7 @@ class CartController extends Controller {
 		}
 
 		if ($invalidCartRecalc) {
-			$flashMessageSender->addError('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.');
+			$flashMessageSender->addErrorFlash('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.');
 		}
 
 		$cartItems = $cart->getItems();
@@ -142,9 +142,9 @@ class CartController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$strippedFlashMessage = strip_tags($actionResult['message']);
 		if ($actionResult['success']) {
-			$flashMessageSender->addSuccess($strippedFlashMessage);
+			$flashMessageSender->addSuccessFlash($strippedFlashMessage);
 		} else {
-			$flashMessageSender->addError($strippedFlashMessage);
+			$flashMessageSender->addErrorFlash($strippedFlashMessage);
 		}
 
 		if ($this->getRequest()->headers->get('referer')) {
@@ -202,12 +202,12 @@ class CartController extends Controller {
 			try {
 				$productName = $cartFacade->getProductByCartItemId($cartItemId)->getName();
 				$cartFacade->deleteCartItem($cartItemId);
-				$flashMessageSender->addSuccess('Z košíku bylo ostraněno zboží ' . $productName);
+				$flashMessageSender->addSuccessFlash('Z košíku bylo ostraněno zboží ' . $productName);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
-				$flashMessageSender->addError('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
+				$flashMessageSender->addErrorFlash('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
 			}
 		} else {
-			$flashMessageSender->addError('Nepodařilo se odstranit položku z košíku.
+			$flashMessageSender->addErrorFlash('Nepodařilo se odstranit položku z košíku.
 					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.');
 		}
 

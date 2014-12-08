@@ -46,7 +46,7 @@ class CustomerController extends Controller {
 			if ($form->isValid()) {
 				$customerEditFacade->editByAdmin($id, $customerData);
 
-				$flashMessageSender->addSuccessTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				$flashMessageSender->addSuccessFlashTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),
 					'url' => $this->generateUrl('admin_customer_edit', array('id' => $user->getId())),
 				));
@@ -57,7 +57,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -170,7 +170,7 @@ class CustomerController extends Controller {
 
 				$user = $customerEditFacade->create($customerData);
 
-				$flashMessageSender->addSuccessTwig('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				$flashMessageSender->addSuccessFlashTwig('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 					'name' => $user->getFullName(),
 					'url' => $this->generateUrl('admin_customer_edit', array('id' => $user->getId())),
 				));
@@ -181,7 +181,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', array(
@@ -201,7 +201,7 @@ class CustomerController extends Controller {
 
 		$fullName = $customerEditFacade->getUserById($id)->getFullName();
 		$customerEditFacade->delete($id);
-		$flashMessageSender->addSuccessTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,
 		));
 

@@ -62,13 +62,13 @@ class CurrencyController extends Controller {
 
 			$currencyFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessTwig('Měna <strong>{{ name }}</strong> byla smazána', array(
+			$flashMessageSender->addSuccessFlashTwig('Měna <strong>{{ name }}</strong> byla smazána', array(
 				'name' => $fullName,
 			));
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException $ex) {
 			$flashMessageSender->addError('Tuto měnu nelze smazat, je nastavena jako výchozí');
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			$flashMessageSender->addError('Zvolená měna již neexistuje');
+			$flashMessageSender->addErrorFlash('Zvolená měna již neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_currency_list'));

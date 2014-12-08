@@ -39,7 +39,7 @@ class RegistrationController extends Controller {
 
 				$this->login($user);
 
-				$flashMessageSender->addSuccess('Byli jste úspěšně zaregistrováni');
+				$flashMessageSender->addSuccessFlash('Byli jste úspěšně zaregistrováni');
 				return $this->redirect($this->generateUrl('front_homepage'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -47,7 +47,7 @@ class RegistrationController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', array(

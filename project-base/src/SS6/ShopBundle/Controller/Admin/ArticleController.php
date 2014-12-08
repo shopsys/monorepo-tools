@@ -39,7 +39,7 @@ class ArticleController extends Controller {
 		if ($form->isValid()) {
 			$articleEditFacade->edit($id, $articleData);
 
-			$flashMessageSender->addSuccessTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+			$flashMessageSender->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),
 				'url' => $this->generateUrl('admin_article_edit', array('id' => $article->getId())),
 			));
@@ -47,7 +47,7 @@ class ArticleController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -124,7 +124,7 @@ class ArticleController extends Controller {
 
 			$article = $articleEditFacade->create($articleData);
 
-			$flashMessageSender->addSuccessTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+			$flashMessageSender->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $article->getName(),
 				'url' => $this->generateUrl('admin_article_edit', array('id' => $article->getId())),
 			));
@@ -132,7 +132,7 @@ class ArticleController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', array(
@@ -153,7 +153,7 @@ class ArticleController extends Controller {
 		$fullName = $articleEditFacade->getById($id)->getName();
 		$articleEditFacade->delete($id);
 
-		$flashMessageSender->addSuccessTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_article_list'));

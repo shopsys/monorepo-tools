@@ -25,7 +25,7 @@ class FlashMessageSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addErrorTwig($template, $parameters = array()) {
+	public function addErrorFlashTwig($template, $parameters = array()) {
 		$message = $this->twigEnvironment->render($template, $parameters);
 		$this->flashMessageBag->addError($message, false);
 	}
@@ -34,7 +34,7 @@ class FlashMessageSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addInfoTwig($template, $parameters = array()) {
+	public function addInfoFlashTwig($template, $parameters = array()) {
 		$message = $this->twigEnvironment->render($template, $parameters);
 		$this->flashMessageBag->addInfo($message, false);
 	}
@@ -43,7 +43,7 @@ class FlashMessageSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addSuccessTwig($template, $parameters = array()) {
+	public function addSuccessFlashTwig($template, $parameters = array()) {
 		$message = $this->twigEnvironment->render($template, $parameters);
 		$this->flashMessageBag->addSuccess($message, false);
 	}
@@ -51,21 +51,21 @@ class FlashMessageSender {
 	/**
 	 * @param string|array $message
 	 */
-	public function addError($message) {
+	public function addErrorFlash($message) {
 		$this->flashMessageBag->addError($message, true);
 	}
 
 	/**
 	 * @param string|array $message
 	 */
-	public function addInfo($message) {
+	public function addInfoFlash($message) {
 		$this->flashMessageBag->addInfo($message, true);
 	}
 
 	/**
 	 * @param string|array $message
 	 */
-	public function addSuccess($message) {
+	public function addSuccessFlash($message) {
 		$this->flashMessageBag->addSuccess($message, true);
 	}
 
