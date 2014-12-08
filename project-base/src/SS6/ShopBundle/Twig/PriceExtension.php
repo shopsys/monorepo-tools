@@ -2,10 +2,20 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFilter;
 
 class PriceExtension extends Twig_Extension {
+
+	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	public function __construct(TranslatorInterface $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @return array
@@ -34,7 +44,7 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function priceTextFilter($price) {
 		if ($price == 0) {
-			return 'Zdarma';
+			return $this->translator->trans('Zdarma');
 		} else {
 			return $this->priceFilter($price);
 		}

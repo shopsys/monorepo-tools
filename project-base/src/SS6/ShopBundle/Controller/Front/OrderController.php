@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
 use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class OrderController extends Controller {
 
@@ -71,9 +70,7 @@ class OrderController extends Controller {
 
 		$form = $flow->createForm();
 
-		$transportAndPaymentWatcherService = $this->get('ss6.shop.order.order_transport_and_payment_watcher_service');
-		/* @var $transportAndPaymentWatcherService \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService */
-		$transportAndPaymentWatcherService->checkTransportAndPayment($orderData, $transports, $payments);
+		$this->checkTransportAndPaymentChanges($orderData, $transports, $payments);
 
 		if ($flow->isValid($form)) {
 			if ($flow->nextStep()) {
@@ -116,6 +113,45 @@ class OrderController extends Controller {
 			'transportsPrices' => $transportPriceCalculation->calculatePricesById($transports),
 			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments),
 		));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 */
+	private function checkTransportAndPaymentChanges(
+		OrderData $orderData,
+		array $transports,
+		array $payments
+	) {
+		$transportAndPaymentWatcherService = $this->get('ss6.shop.order.order_transport_and_payment_watcher_service');
+		/* @var $transportAndPaymentWatcherService \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+
+		$transportAndPaymentCheckResult = $transportAndPaymentWatcherService->checkTransportAndPayment(
+			$orderData,
+			$transports,
+			$payments
+		);
+
+		if ($transportAndPaymentCheckResult->isTransportPriceChanged()) {
+			$flashMessageSender->addInfoTwig(
+				'V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku.',
+				array(
+					'transportName' => $orderData->getTransport()->getName(),
+				)
+			);
+		}
+		if ($transportAndPaymentCheckResult->isPaymentPriceChanged()) {
+			$flashMessageSender->addInfoTwig(
+				'V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku.',
+				array(
+					'paymentName' => $orderData->getPayment()->getName(),
+				)
+			);
+		}
 	}
 
 	public function saveOrderFormAction() {

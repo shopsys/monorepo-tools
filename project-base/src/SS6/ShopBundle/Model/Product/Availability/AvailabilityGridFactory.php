@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Localization\Localization;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AvailabilityGridFactory implements GridFactoryInterface {
 
@@ -26,10 +27,21 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	public function __construct(EntityManager $em, GridFactory $gridFactory, Localization $localization) {
+	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	public function __construct(
+		EntityManager $em,
+		GridFactory $gridFactory,
+		Localization $localization,
+		TranslatorInterface $translator
+	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -47,11 +59,16 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('names', 'at.name', 'Název', true);
+		$grid->addColumn('names', 'at.name', $this->translator->trans('Název'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('delete', 'Smazat', 'admin_availability_delete', array('id' => 'a.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto dostupnost?');
+		$grid->addActionColumn(
+				'delete',
+				$this->translator->trans('Smazat'),
+				'admin_availability_delete',
+				array('id' => 'a.id')
+			)
+			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dostupnost?'));
 
 		return $grid;
 	}

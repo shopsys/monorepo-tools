@@ -37,7 +37,9 @@ class Rounding {
 				break;
 
 			default:
-				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException();
+				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
+					sprintf('Rounding type %s is not valid', $roundingType)
+				);
 		}
 
 		return $roundedPriceWithVat;

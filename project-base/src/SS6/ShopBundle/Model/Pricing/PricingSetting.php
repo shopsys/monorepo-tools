@@ -54,8 +54,10 @@ class PricingSetting {
 	 * @param int $roundingType
 	 */
 	public function setRoundingType($roundingType) {
-		if (!array_key_exists($roundingType, $this->getRoundingTypes())) {
-			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException();
+		if (!in_array($roundingType, $this->getRoundingTypes())) {
+			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
+				sprintf('Rounding type %s is not valid', $roundingType)
+			);
 		}
 
 		$this->setting->set(self::ROUNDING_TYPE, $roundingType, SettingValue::DOMAIN_ID_COMMON);
@@ -67,8 +69,8 @@ class PricingSetting {
 	 */
 	public static function getInputPriceTypes() {
 		return array(
-			self::INPUT_PRICE_TYPE_WITHOUT_VAT => 'Bez DPH',
-			self::INPUT_PRICE_TYPE_WITH_VAT => 'S DPH',
+			self::INPUT_PRICE_TYPE_WITHOUT_VAT,
+			self::INPUT_PRICE_TYPE_WITH_VAT,
 		);
 	}
 
@@ -77,9 +79,9 @@ class PricingSetting {
 	 */
 	public static function getRoundingTypes() {
 		return array(
-			self::ROUNDING_TYPE_HUNDREDTHS => 'Na setiny (haléře)',
-			self::ROUNDING_TYPE_FIFTIES => 'Na padesátníky',
-			self::ROUNDING_TYPE_INTEGER => 'Na celá čísla (koruny)',
+			self::ROUNDING_TYPE_HUNDREDTHS,
+			self::ROUNDING_TYPE_FIFTIES,
+			self::ROUNDING_TYPE_INTEGER,
 		);
 	}
 

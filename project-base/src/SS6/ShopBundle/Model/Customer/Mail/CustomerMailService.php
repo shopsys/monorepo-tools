@@ -69,11 +69,11 @@ class CustomerMailService {
 	 */
 	public function getTemplateVariables() {
 		return array(
-			self::VARIABLE_FIRST_NAME => 'Jméno',
-			self::VARIABLE_LAST_NAME => 'Příjmení',
-			self::VARIABLE_EMAIL => 'Email',
-			self::VARIABLE_URL => 'URL adresa e-shopu',
-			self::VARIABLE_LOGIN_PAGE => 'Odkaz na stránku s přihlášením',
+			self::VARIABLE_FIRST_NAME,
+			self::VARIABLE_LAST_NAME,
+			self::VARIABLE_EMAIL,
+			self::VARIABLE_URL,
+			self::VARIABLE_LOGIN_PAGE,
 		);
 	}
 }

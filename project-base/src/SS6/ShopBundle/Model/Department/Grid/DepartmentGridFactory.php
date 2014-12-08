@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DepartmentGridFactory implements GridFactoryInterface {
 
@@ -29,13 +30,20 @@ class DepartmentGridFactory implements GridFactoryInterface {
 	private $localization;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
-	public function __construct(EntityManager $em, GridFactory $gridFactory, Localization $localization) {
+	private $translator;
+
+	public function __construct(
+		EntityManager $em,
+		GridFactory $gridFactory,
+		Localization $localization,
+		TranslatorInterface $translator
+	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -52,10 +60,15 @@ class DepartmentGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('departmentList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('names', 'dt.name', 'Název', true);
+		$grid->addColumn('names', 'dt.name', $this->translator->trans('Název'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_department_delete', array('id' => 'd.id'))
-			->setConfirmMessage('Opravdu chcete smazat toto oddělení?');
+		$grid->addActionColumn(
+				ActionColumn::TYPE_DELETE,
+				$this->translator->trans('Smazat'),
+				'admin_department_delete',
+				array('id' => 'd.id')
+			)
+			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat toto oddělení?'));
 
 		return $grid;
 	}

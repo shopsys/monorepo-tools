@@ -125,17 +125,17 @@ class OrderMailService {
 	 */
 	public function getTemplateVariables() {
 		return array(
-			self::VARIABLE_NUMBER  => 'Číslo objednávky',
-			self::VARIABLE_DATE => 'Datum a čas vytvoření objednávky',
-			self::VARIABLE_URL => 'URL adresa e-shopu',
-			self::VARIABLE_TRANSPORT => 'Název zvolené dopravy',
-			self::VARIABLE_PAYMENT => 'Název zvolené platby',
-			self::VARIABLE_TOTAL_PRICE => 'Celková cena za objednávku (s DPH)',
-			self::VARIABLE_BILLING_ADDRESS => 'Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa',
-			self::VARIABLE_DELIVERY_ADDRESS => 'Dodací adresa',
-			self::VARIABLE_NOTE  => 'Poznámka',
-			self::VARIABLE_PRODUCTS => 'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)',
-			self::VARIABLE_ORDER_DETAIL_URL => 'URL adresa detailu objednávky',
+			self::VARIABLE_NUMBER,
+			self::VARIABLE_DATE,
+			self::VARIABLE_URL,
+			self::VARIABLE_TRANSPORT,
+			self::VARIABLE_PAYMENT,
+			self::VARIABLE_TOTAL_PRICE,
+			self::VARIABLE_BILLING_ADDRESS,
+			self::VARIABLE_DELIVERY_ADDRESS,
+			self::VARIABLE_NOTE,
+			self::VARIABLE_PRODUCTS,
+			self::VARIABLE_ORDER_DETAIL_URL,
 		);
 	}
 

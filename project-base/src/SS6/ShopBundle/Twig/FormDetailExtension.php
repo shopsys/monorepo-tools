@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Environment;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -16,10 +17,13 @@ class FormDetailExtension extends Twig_Extension {
 	private $container;
 
 	/**
-	 * @param ContainerInterface $container
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
-	public function __construct(ContainerInterface $container) {
+	private $translator;
+
+	public function __construct(ContainerInterface $container, TranslatorInterface $translator) {
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
+		$this->translator = $translator;
 	}
 
 	/**
@@ -68,11 +72,11 @@ class FormDetailExtension extends Twig_Extension {
 	 */
 	public function formSave($object, FormView $form) {
 		$template = '{{ form_widget(form.save, { label: label }) }}';
-		$parameters = array('form' => $form, 'label' => 'Vytvořit');
+		$parameters = array('form' => $form, 'label' => $this->translator->trans('Vytvořit'));
 		if ($object === null) {
 			return $this->getTemplatingService()->render($template, $parameters);
 		} else {
-			$parameters['label'] = 'Uložit změny';
+			$parameters['label'] = $this->translator->trans('Uložit změny');
 			return $this->getTemplatingService()->render($template, $parameters);
 		}
 	}

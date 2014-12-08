@@ -12,6 +12,7 @@ use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PaymentGridFactory implements GridFactoryInterface {
 
@@ -42,24 +43,24 @@ class PaymentGridFactory implements GridFactoryInterface {
 	private $localization;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentRepository $paymentRepository
-	 * @param \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory $paymentDetailFactory
-	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
+	private $translator;
+
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		PaymentRepository $paymentRepository,
 		PaymentDetailFactory $paymentDetailFactory,
-		Localization $localization
+		Localization $localization,
+		TranslatorInterface $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->paymentRepository = $paymentRepository;
 		$this->paymentDetailFactory = $paymentDetailFactory;
 		$this->localization = $localization;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -82,13 +83,23 @@ class PaymentGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('paymentList', $dataSource);
 		$grid->enableDragAndDrop(Payment::class);
 
-		$grid->addColumn('name', 'pt.name', 'Název');
-		$grid->addColumn('price', 'paymentDetail', 'Cena');
+		$grid->addColumn('name', 'pt.name', $this->translator->trans('Název'));
+		$grid->addColumn('price', 'paymentDetail', $this->translator->trans('Cena'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_EDIT, 'Upravit', 'admin_payment_edit', array('id' => 'p.id'));
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_payment_delete', array('id' => 'p.id'))
-			->setConfirmMessage('Opravdu chcete odstranit tuto platbu?');
+		$grid->addActionColumn(
+			ActionColumn::TYPE_EDIT,
+			$this->translator->trans('Upravit'),
+			'admin_payment_edit',
+			array('id' => 'p.id')
+		);
+		$grid->addActionColumn(
+				ActionColumn::TYPE_DELETE,
+				$this->translator->trans('Smazat'),
+				'admin_payment_delete',
+				array('id' => 'p.id')
+			)
+			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto platbu?'));
 
 		return $grid;
 	}
