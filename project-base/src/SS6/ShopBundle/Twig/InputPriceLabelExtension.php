@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -14,10 +15,13 @@ class InputPriceLabelExtension extends Twig_Extension {
 	private $pricingSetting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $pricingSetting
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
-	public function __construct(\SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting) {
+	private $translator;
+
+	public function __construct(PricingSetting $pricingSetting, TranslatorInterface $translator) {
 		$this->pricingSetting = $pricingSetting;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -38,14 +42,14 @@ class InputPriceLabelExtension extends Twig_Extension {
 
 		switch ($inputPriceType) {
 			case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-				return 'Vstupní cena bez DPH';
+				return $this->translator->trans('Vstupní cena bez DPH');
 
 			case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
-				return 'Vstupní cena s DPH';
+				return $this->translator->trans('Vstupní cena s DPH');
 
 			default:
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
-					'Neplatný typ vstupní ceny: ' . $inputPriceType);
+					'Invalid input price type: ' . $inputPriceType);
 		}
 	}
 
