@@ -117,6 +117,11 @@ services:
   ss6.shop.cart.item.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\Item\CartItemRepository
 
+  ss6.shop.component.translation.flash_message_php_file_extractor:
+    class: SS6\ShopBundle\Component\Translation\FlashMessagePhpFileExtractor
+    tags:
+      - { name: jms_translation.file_visitor }
+
   ss6.shop.component.translation.po_dumper:
     class: SS6\ShopBundle\Component\Translation\PoDumper
     tags:
