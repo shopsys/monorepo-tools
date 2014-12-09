@@ -1,0 +1,529 @@
+'(Na tuto adresu bude zboží doručeno)': '##(Na tuto adresu bude zboží doručeno)'
+'(Pokud nakupuji na firmu)': '##(Pokud nakupuji na firmu)'
+'(Tato adresa bude na daňovém dokladu)': '##(Tato adresa bude na daňovém dokladu)'
+'- Nastavení emailů': '##- Nastavení emailů'
+'<strong class="cart-box__state">%itemsCount%</strong> položek za <strong class="cart-box__state">%priceWithVat%</strong>': '##<strong class="cart-box__state">%itemsCount%</strong> položek za <strong class="cart-box__state">%priceWithVat%</strong>'
+'<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno': '<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno'   # FIXME
+
+'<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu':
+    '': '##<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu.'
+
+'Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní':
+    "\n\t\tBohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou":
+        '': "##Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní.\n\t\tBohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
+
+'Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně':
+    "\n\t\t\t\t\t\tPokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte":
+        '': "##Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.\n\t\t\t\t\t\tPokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
+
+Administrace: '##Administrace'
+Administrátor: '##Administrátor'
+
+'Administrátor <strong>{{ name }}</strong> byl smazán':
+    '': 'Administrátor <strong>{{ name }}</strong> byl smazán.'   # FIXME
+
+'Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán':
+    '': 'Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.'   # FIXME
+
+'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje': 'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje'   # FIXME
+Adresa: '##Adresa'
+'Aktuální stav': '##Aktuální stav'
+'Akční zboží': '##Akční zboží'
+Anglicky: Anglicky   # FIXME
+Ano: '##Ano'
+'Bez DPH': '##Bez DPH'
+'Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byla upravena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byla upravena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+
+'Byla upravena objednávka č':
+    ' <strong><a href="{{ url }}">{{ number }}</a></strong>': 'Byla upravena objednávka č. <strong><a href="{{ url }}">{{ number }}</a></strong>'   # FIXME
+
+'Byla upravena platba <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byla upravena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byla vytvořena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byla vytvořena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byla vytvořena platba <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byla vytvořena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+'Byla vytvořena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Byla vytvořena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+
+'Byla změněna cena zboží <strong>{{ name }}</strong>, které máte v košíku':
+    ' Prosím, překontrolujte si objednávku':
+        '': 'Byla změněna cena zboží <strong>{{ name }}</strong>, které máte v košíku. Prosím, překontrolujte si objednávku.'   # FIXME
+
+'Byli jste úspěšně zaregistrováni': 'Byli jste úspěšně zaregistrováni'   # FIXME
+'Bylo upraveno zboží <strong>{{ name }}</strong>': 'Bylo upraveno zboží <strong>{{ name }}</strong>'   # FIXME
+'Bylo vytvořeno zboží <strong><a href="{{ url }}">{{ name }}</a></strong>': 'Bylo vytvořeno zboží <strong><a href="{{ url }}">{{ name }}</a></strong>'   # FIXME
+Celkem: '##Celkem'
+'Celkem bez DPH': '##Celkem bez DPH'
+'Celkem s DPH': '##Celkem s DPH'
+'Celková cena': '##Celková cena'
+'Celková cena s DPH': '##Celková cena s DPH'
+'Celková cena za objednávku (s DPH)': 'Celková cena za objednávku (s DPH)'   # FIXME
+'Celková cena za položku s DPH': '##Celková cena za položku s DPH'
+'Celková výše DPH': '##Celková výše DPH'
+Cena: Cena   # FIXME
+'Cena bez DPH': 'Price without VAT'
+'Cena celkem bez DPH': '##Cena celkem bez DPH'
+'Cena celkem s DPH': '##Cena celkem s DPH'
+'Cena s DPH': 'Price with VAT'
+'Cena za kus s DPH': '##Cena za kus s DPH'
+'Cenová skupina <strong>{{ name }}</strong> byla smazána': 'Cenová skupina <strong>{{ name }}</strong> byla smazána'   # FIXME
+
+'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou <strong>{{ newName }}</strong>':
+    '': 'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou <strong>{{ newName }}</strong>.'   # FIXME
+
+'Cenové skupiny': '##Cenové skupiny'
+'Chybové hlášky': '##Chybové hlášky'
+'Chybové stránky': '##Chybové stránky'
+DIČ: '##DIČ'
+'DPH <strong>{{ name }}</strong> bylo smazáno': 'DPH <strong>{{ name }}</strong> bylo smazáno'   # FIXME
+
+'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>':
+    '': 'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.'   # FIXME
+
+'DPH a zaokrouhlování': '##DPH a zaokrouhlování'
+'Datum a čas vytvoření objednávky': 'Datum a čas vytvoření objednávky'   # FIXME
+'Datum registrace': '##Datum registrace'
+'Datum vytvoření': '##Datum vytvoření'
+Detail: '##Detail'
+'Do košíku bylo vloženo zboží <strong>{{ name }}</b> (celkem již {{ quantity }} ks)': 'Do košíku bylo vloženo zboží <strong>{{ name }}</b> (celkem již {{ quantity }} ks)'   # FIXME
+'Do košíku bylo vloženo zboží <strong>{{ name }}</b> ({{ quantity }} ks)': 'Do košíku bylo vloženo zboží <strong>{{ name }}</b> ({{ quantity }} ks)'   # FIXME
+'Dodací adresa': 'Dodací adresa'   # FIXME
+'Dodací údaje': '##Dodací údaje'
+'Dokončit objednávku': '##Dokončit objednávku'
+Doména: '##Doména'
+'Domény eshopu': '##Domény eshopu'
+
+'Doposud nebyly vytvořeny žádné dopravy':
+    '': '##Doposud nebyly vytvořeny žádné dopravy.'
+
+'Doposud nebyly vytvořeny žádné platby':
+    '': '##Doposud nebyly vytvořeny žádné platby.'
+
+'Doposud nebyly vytvořeny žádné překlady':
+    '': '##Doposud nebyly vytvořeny žádné překlady.'
+
+'Doposud nejsou žádné domény':
+    '': '##Doposud nejsou žádné domény.'
+
+'Doposud nejsou žádné url adresy':
+    '': '##Doposud nejsou žádné url adresy.'
+
+Doprava: '##Doprava'
+'Doprava <strong>{{ name }}</strong> byla smazána': 'Doprava <strong>{{ name }}</strong> byla smazána'   # FIXME
+'Doprava a platba': '##Doprava a platba'
+'Dopravy a platby': '##Dopravy a platby'
+'Doručovací adresa': '##Doručovací adresa'
+Dostupnost: Availability
+'Dostupnost <strong>{{ name }}</strong> byla smazána': 'Dostupnost <strong>{{ name }}</strong> byla smazána'   # FIXME
+
+'Dosud nemáte žádnou objednávku':
+    '': '##Dosud nemáte žádnou objednávku.'
+
+E-mail: '##E-mail'
+EAN: EAN
+'Editace administrátora': '##Editace administrátora'
+'Editace dopravy': '##Editace dopravy'
+'Editace platby': '##Editace platby'
+'Editace stavu objednávek': '##Editace stavu objednávek'
+'Editace stavu objendávek': '##Editace stavu objendávek'
+'Editace stránky slideru': '##Editace stránky slideru'
+'Editace zboží': '##Editace zboží'
+'Editace zákazníka': '##Editace zákazníka'
+'Editace článku': '##Editace článku'
+Email: '##Email'
+'Fakturační adresa': '##Fakturační adresa'
+
+'Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt':
+    ' adresa': 'Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa'   # FIXME
+
+'Fakturační údaje': '##Fakturační údaje'
+'Firemní údaje': '##Firemní údaje'
+Firma: '##Firma'
+Heslo: '##Heslo'
+Hodnota: '##Hodnota'
+'ID zákazníka': '##ID zákazníka'
+'Identifikace e-shopu': '##Identifikace e-shopu'
+'Identifikace eshopu': '##Identifikace eshopu'
+Ikonka: '##Ikonka'
+Ikonky: '##Ikonky'
+'Informace o produktu': '##Informace o produktu'
+'Internetový obchod': '##Internetový obchod'
+IČ: '##IČ'
+Jazyk: '##Jazyk'
+'Jednotková cena s DPH': '##Jednotková cena s DPH'
+
+'Jejda! Nastala chyba':
+    '': '##Jejda! Nastala chyba.'
+
+Jméno: '##Jméno'
+'Karta zboží': '##Karta zboží'
+'Karta zákazníka': '##Karta zákazníka'
+'Katalog zboží': '##Katalog zboží'
+'Katalogové číslo': 'Catalogue number'
+Koeficient: Koeficient   # FIXME
+'Komunikace se zákazníkem': '##Komunikace se zákazníkem'
+Konstanta: Konstanta   # FIXME
+'Kontaktní osoba': '##Kontaktní osoba'
+Košík: '##Košík'
+Množství: '##Množství'
+'Mé objednávky': '##Mé objednávky'
+'Měna <strong>{{ name }}</strong> byla smazána': 'Měna <strong>{{ name }}</strong> byla smazána'   # FIXME
+Měny: '##Měny'
+Město: '##Město'
+'Na celá čísla (koruny)': 'Na celá čísla (koruny)'   # FIXME
+'Na padesátníky': 'Na padesátníky'   # FIXME
+'Na setiny (haléře)': 'Na setiny (haléře)'   # FIXME
+'Napište nám': '##Napište nám'
+'Nastala chyba': '##Nastala chyba'
+'Nastavení DPH bylo upraveno': 'Nastavení DPH bylo upraveno'   # FIXME
+'Nastavení e-mailů': '##Nastavení e-mailů'
+'Nastavení emailů': '##Nastavení emailů'
+
+'Nastavení emailů bylo upraveno':
+    '': 'Nastavení emailů bylo upraveno.'   # FIXME
+
+'Nastavení prodeje s/bez DPH': '##Nastavení prodeje s/bez DPH'
+'Nastavení textu po potvrzení objednávky bylo upraveno': 'Nastavení textu po potvrzení objednávky bylo upraveno'   # FIXME
+'Nastavení výchozí cenové skupiny bylo upraveno': 'Nastavení výchozí cenové skupiny bylo upraveno'   # FIXME
+'Nastavení šablon e-mailů': '##Nastavení šablon e-mailů'
+'Nastavení šablony e-mailu bylo upraveno': 'Nastavení šablony e-mailu bylo upraveno'   # FIXME
+Ne: '##Ne'
+
+'Nebyl nalezen žádný stav objednávek':
+    '': '##Nebyl nalezen žádný stav objednávek.'
+
+'Nebyla nalezena žádná objednávka':
+    '': '##Nebyla nalezena žádná objednávka.'
+
+'Nebyla nalezena žádná oddělení':
+    ' Nejprve musíte nějaké vytvořit':
+        '': '##Nebyla nalezena žádná oddělení. Nejprve musíte nějaké vytvořit.'
+
+'Nebyla nalezena žádná stránka':
+    '': '##Nebyla nalezena žádná stránka.'
+
+'Nebyli nalezeni žádní zákazníci':
+    ' Nejprve musíte nějakého vytvořit':
+        '': '##Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit.'
+
+'Nebylo nalezeno žádné zboží':
+    '': '##Nebylo nalezeno žádné zboží.'
+
+'Nebyly nalezeny žádné cenové skupiny':
+    ' Nejprve musíte nějakou vytvořit':
+        '': '##Nebyly nalezeny žádné cenové skupiny. Nejprve musíte nějakou vytvořit.'
+
+'Nebyly nalezeny žádné dostupnosti':
+    ' Nejprve musíte nějaké vytvořit':
+        '': '##Nebyly nalezeny žádné dostupnosti. Nejprve musíte nějaké vytvořit.'
+
+'Nebyly nalezeny žádné měny':
+    ' Nejprve musíte nějakou vytvořit':
+        '': '##Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit.'
+
+'Nebyly nalezeny žádné parametry':
+    ' Nejprve musíte nějaké vytvořit':
+        '': '##Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit.'
+
+'Nebyly nalezeny žádné sazby DPH':
+    ' Nejprve musíte nějakou vytvořit':
+        '': '##Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit.'
+
+'Nebyly nalezeny žádné záznamy':
+    '': '##Nebyly nalezeny žádné záznamy.'
+
+'Nebyly nalezeny žádné články':
+    ' Nejprve musíte nějaký vytvořit':
+        '': '##Nebyly nalezeny žádné články. Nejprve musíte nějaký vytvořit.'
+
+'Nemůžete smazat sami sebe':
+    '': 'Nemůžete smazat sami sebe.'   # FIXME
+
+'Není z čeho vybírat': '##Není z čeho vybírat'
+'Není z čeho vybírat.': '##Není z čeho vybírat.'
+'Neplatné nastavení zaokrouhlování': 'Neplatné nastavení zaokrouhlování'   # FIXME
+'Nepodařilo se odeslat aktualizační email': 'Nepodařilo se odeslat aktualizační email'   # FIXME
+
+'Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte':
+    '': 'Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.'   # FIXME
+
+'Nepodařilo se odstranit položku z košíku':
+    "\n\t\t\t\t\tZřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou":
+        '': "Nepodařilo se odstranit položku z košíku.\n\t\t\t\t\tZřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."   # FIXME
+
+    ' Nejspíš je již odstraněno': 'Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno'   # FIXME
+
+'Nová doprava': '##Nová doprava'
+'Nová platba': '##Nová platba'
+'Nová stránka slideru': '##Nová stránka slideru'
+'Nové zboží': '##Nové zboží'
+'Nový administrátor': '##Nový administrátor'
+'Nový stav objednávek': '##Nový stav objednávek'
+'Nový zákazník': '##Nový zákazník'
+'Nový článek': '##Nový článek'
+Nástěnka: '##Nástěnka'
+Název: '##Název'
+'Název %locale%': 'Název %locale%'   # FIXME
+'Název domény': '##Název domény'
+'Název firmy': '##Název firmy'
+'Název zvolené dopravy': 'Název zvolené dopravy'   # FIXME
+'Název zvolené platby': 'Název zvolené platby'   # FIXME
+Objednat: '##Objednat'
+Objednávka: '##Objednávka'
+'Objednávka - osobní údaje': '##Objednávka - osobní údaje'
+'Objednávka byla odeslána': '##Objednávka byla odeslána'
+
+'Objednávka byla odeslána, děkujeme za Váš nákup':
+    ' Budeme Vás kontaktovat o dalším průběhu vyřizování':
+        '': '##Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování.'
+
+'Objednávka dokončena': '##Objednávka dokončena'
+
+'Objednávka neobsahuje žádné položky':
+    '': '##Objednávka neobsahuje žádné položky.'
+
+'Objednávka č':
+    '': '##Objednávka č.'
+    ' <strong>{{ number }}</strong> byla smazána': 'Objednávka č. <strong>{{ number }}</strong> byla smazána'   # FIXME
+
+Obrázek: '##Obrázek'
+Oddělení: '##Oddělení'
+'Oddělení <strong>{{ name }}</strong> bylo smazáno': 'Oddělení <strong>{{ name }}</strong> bylo smazáno'   # FIXME
+'Odeslat mail s potvrzením registrace zákazníkovi': '##Odeslat mail s potvrzením registrace zákazníkovi'
+Odhlásit: '##Odhlásit'
+'Odhlásit se': '##Odhlásit se'
+'Odkaz na stránku s přihlášením': 'Odkaz na stránku s přihlášením'   # FIXME
+Odstranit: '##Odstranit'
+
+'Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve':
+    ' Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789':
+        '': '##Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789.'
+
+'Opravdu chcete odebrat tento produkt z akce na titulní stránce?': 'Opravdu chcete odebrat tento produkt z akce na titulní stránce?'   # FIXME
+'Opravdu chcete odstranit tuto dopravu?': 'Opravdu chcete odstranit tuto dopravu?'   # FIXME
+'Opravdu chcete odstranit tuto dostupnost?': 'Opravdu chcete odstranit tuto dostupnost?'   # FIXME
+'Opravdu chcete odstranit tuto platbu?': 'Opravdu chcete odstranit tuto platbu?'   # FIXME
+'Opravdu chcete smazat toto oddělení?': 'Opravdu chcete smazat toto oddělení?'   # FIXME
+'Osobní údaje': '##Osobní údaje'
+PSČ: '##PSČ'
+Parametr: '##Parametr'
+'Parametr <strong>{{ name }}</strong> byl smazán': 'Parametr <strong>{{ name }}</strong> byl smazán'   # FIXME
+Parametry: '##Parametry'
+Platba: '##Platba'
+'Platba <strong>{{ name }}</strong> byla smazána': 'Platba <strong>{{ name }}</strong> byla smazána'   # FIXME
+'Pokračovat v objednávce': '##Pokračovat v objednávce'
+'Položek na stránku:': '##Položek na stránku:'
+Položky: '##Položky'
+'Položky objednávky': '##Položky objednávky'
+'Poslední přihlášení': '##Poslední přihlášení'
+'Potvrzení registrace': '##Potvrzení registrace'
+'Použitelné proměnné': '##Použitelné proměnné'
+Poznámka: '##Poznámka'
+'Počet kusů': '##Počet kusů'
+
+'Počet kusů položek v košíku byl úspěšně přepočítán':
+    '': 'Počet kusů položek v košíku byl úspěšně přepočítán.'   # FIXME
+
+'Počet položek': '##Počet položek'
+'Pro přístup na tuto stránku musíte být přihlášeni': 'Pro přístup na tuto stránku musíte být přihlášeni'   # FIXME
+Procent: Procent   # FIXME
+'Produkt (zadávejte ID produktu)': 'Produkt (zadávejte ID produktu)'   # FIXME
+'Produkt <strong>{{ name }}</strong> byl smazán': 'Produkt <strong>{{ name }}</strong> byl smazán'   # FIXME
+'Prosím zkontrolujte si správnost vyplnění všech údajů': 'Prosím zkontrolujte si správnost vyplnění všech údajů'   # FIXME
+
+'Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku':
+    '': 'Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.'   # FIXME
+
+'Prosím, pokračujte podle pokynů': '##Prosím, pokračujte podle pokynů'
+'Prázdný nákupní košík': '##Prázdný nákupní košík'
+Předmět: '##Předmět'
+'Přehled administrátorů': '##Přehled administrátorů'
+'Přehled dostupností': '##Přehled dostupností'
+'Přehled objednávek': '##Přehled objednávek'
+'Přehled parametrů': '##Přehled parametrů'
+'Přehled stavů objednávek': '##Přehled stavů objednávek'
+'Přehled zboží': '##Přehled zboží'
+'Přehled zboží v košíku': '##Přehled zboží v košíku'
+'Přehled zákazníků': '##Přehled zákazníků'
+'Přehled článků': '##Přehled článků'
+Překlad: '##Překlad'
+'Překlad ': '##Překlad '
+'Překlady konstant': '##Překlady konstant'
+Přepočítat: '##Přepočítat'
+Přidat: '##Přidat'
+'Přidat položku': '##Přidat položku'
+'Přidat produkt': '##Přidat produkt'
+'Přidejte nějaké parametry': '##Přidejte nějaké parametry'
+Přihlásit: '##Přihlásit'
+'Přihlásit se': '##Přihlásit se'
+Přihlášení: '##Přihlášení'
+Příjmení: '##Příjmení'
+Registrace: '##Registrace'
+
+'Registrovaní zák':
+    '': '##Registrovaní zák.'
+
+Registrovat: '##Registrovat'
+'S DPH': '##S DPH'
+'Sazba DPH': '##Sazba DPH'
+'Sazba DPH (%)': '##Sazba DPH (%)'
+'Sazby DPH': '##Sazby DPH'
+'Seznam zboží': '##Seznam zboží'
+'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)': 'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)'   # FIXME
+Smazat: '##Smazat'
+'Smazat a nastavit': '##Smazat a nastavit'
+Stav: '##Stav'
+'Stav objednávek': '##Stav objednávek'
+'Stav objednávek <strong>{{ name }}</strong> byl smazán': 'Stav objednávek <strong>{{ name }}</strong> byl smazán'   # FIXME
+'Stav objednávek <strong>{{ name }}</strong> je rezervovaný a nelze jej smazat': 'Stav objednávek <strong>{{ name }}</strong> je rezervovaný a nelze jej smazat'   # FIXME
+'Stav objednávek <strong>{{ name }}</strong> mají nastaveny některé objednávky, před smazáním jim prosím změňte stav': 'Stav objednávek <strong>{{ name }}</strong> mají nastaveny některé objednávky, před smazáním jim prosím změňte stav'   # FIXME
+
+'Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán':
+    '': 'Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán.'   # FIXME
+
+'Stránka <strong>{{ name }}</strong> byla smazána': 'Stránka <strong>{{ name }}</strong> byla smazána'   # FIXME
+'Stránka nenalezena!': '##Stránka nenalezena!'
+'Stránka s potvrzením objednávky': '##Stránka s potvrzením objednávky'
+'Stránka slideru': '##Stránka slideru'
+
+'Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu':
+    '': '##Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.'
+
+'Stránky slideru': '##Stránky slideru'
+'Superadmin - Nastavení prodeje s/bez DPH': '##Superadmin - Nastavení prodeje s/bez DPH'
+'Superadmin - URL adresy': '##Superadmin - URL adresy'
+'Superadmin - cenotvorba': '##Superadmin - cenotvorba'
+'Superadmin - rozcestník': '##Superadmin - rozcestník'
+'Systémové údaje': '##Systémové údaje'
+'Technické parametry': 'Technical parameters'
+Telefon: '##Telefon'
+
+'Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny':
+    '': '##Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny.'
+
+'Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny':
+    '': '##Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny.'
+
+'Tento stav není možné smazat':
+    ' Jde o stav, který je automaticky přiřazen všem novým objednávkám':
+        '': '##Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám.'
+
+Text: '##Text'
+
+'To je nemilé, to je nemilé':
+    " A zrovna\n\t\t\t\t\t\t\t\t\t<strong>\"%status_code% %status_text%\"</strong>,\n\t\t\t\t\t\t\t\t\tto je jak naschvál!": "##To je nemilé, to je nemilé. A zrovna\n\t\t\t\t\t\t\t\t\t<strong>\"%status_code% %status_text%\"</strong>,\n\t\t\t\t\t\t\t\t\tto je jak naschvál!"
+
+'Toto oddělení neobsahuje žádné produkty': '##Toto oddělení neobsahuje žádné produkty'
+'Typ vstupní ceny': '##Typ vstupní ceny'
+'URL adresa detailu objednávky': 'URL adresa detailu objednávky'   # FIXME
+'URL adresa e-shopu': 'URL adresa e-shopu'   # FIXME
+'URL adresy': '##URL adresy'
+Ulice: '##Ulice'
+Uložit: '##Uložit'
+'Uložit změny': '##Uložit změny'
+'Uložit změny ve všech šablonách': '##Uložit změny ve všech šablonách'
+Upravit: Upravit   # FIXME
+'Uživatelské jméno': '##Uživatelské jméno'
+'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky': '##V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'
+'Vaše údaje byly úspěšně zaktualizovány': 'Vaše údaje byly úspěšně zaktualizovány'   # FIXME
+'Vložit do košíku': '##Vložit do košíku'
+Vyhledat: '##Vyhledat'
+
+'Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu':
+    ' Hledání rozlišuje velká/malá písmena a diakritiku':
+        ' Je možné používat operátory * a ?':
+            '': '##Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Hledání rozlišuje velká/malá písmena a diakritiku. Je možné používat operátory * a ?.'
+
+'Vytvořit cenovou skupinu': '##Vytvořit cenovou skupinu'
+'Vytvořit dopravu': '##Vytvořit dopravu'
+'Vytvořit dostupnost': '##Vytvořit dostupnost'
+'Vytvořit měnu': '##Vytvořit měnu'
+'Vytvořit novou stránku': '##Vytvořit novou stránku'
+'Vytvořit nové zboží': '##Vytvořit nové zboží'
+'Vytvořit nového administrátora': '##Vytvořit nového administrátora'
+'Vytvořit nového zákazníka': '##Vytvořit nového zákazníka'
+'Vytvořit nový stav objednávek': '##Vytvořit nový stav objednávek'
+'Vytvořit nový článek': '##Vytvořit nový článek'
+'Vytvořit oddělení': '##Vytvořit oddělení'
+'Vytvořit parametr': '##Vytvořit parametr'
+'Vytvořit platbu': '##Vytvořit platbu'
+'Vytvořit sazbu DPH': '##Vytvořit sazbu DPH'
+'Váš košík': '##Váš košík'
+
+'Váš nákupní košík je bohužel prázdný':
+    ' Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>':
+        '': '##Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'
+
+'Váš nákupní košík je prázdný': '##Váš nákupní košík je prázdný'
+'Výběr dopravy': '##Výběr dopravy'
+'Výběr platby': '##Výběr platby'
+'Výchozí cenová skupina': '##Výchozí cenová skupina'
+'Výchozí sazba DPH': '##Výchozí sazba DPH'
+'Výrobní číslo': PartNo
+'Z košíku bylo ostraněno zboží {{ name }}': 'Z košíku bylo ostraněno zboží {{ name }}'   # FIXME
+'Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje': 'Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje'   # FIXME
+'Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje': 'Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje'   # FIXME
+
+'Zadejte prosím platné množství kusů, které chcete vložit do košíku':
+    '': 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.'   # FIXME
+
+'Zaokrouhlení ceny s DPH': '##Zaokrouhlení ceny s DPH'
+'Zasílat e-mail o změně na tento stav': '##Zasílat e-mail o změně na tento stav'
+'Zasílat potvrzení o přijetí objednávky': '##Zasílat potvrzení o přijetí objednávky'
+Zavřít: '##Zavřít'
+'Zboží bylo odstraněno': 'Zboží bylo odstraněno'   # FIXME
+'Zboží chci doručit na jinou adresu než fakturační': '##Zboží chci doručit na jinou adresu než fakturační'
+'Zboží na titulní stránce': '##Zboží na titulní stránce'
+
+'Zboží se nepodařilo odstranit - zboží již není v tomto seznamu':
+    '': 'Zboží se nepodařilo odstranit - zboží již není v tomto seznamu.'   # FIXME
+
+'Zboží se nepodařilo vložit do košíku':
+    '': 'Zboží se nepodařilo vložit do košíku.'   # FIXME
+
+'Zde přetáhněte soubor': '##Zde přetáhněte soubor'
+'Zkontrolujte správnost adresy': '##Zkontrolujte správnost adresy'
+'Zkuste použít vyhledávání na webu': '##Zkuste použít vyhledávání na webu'
+Zobrazuji: '##Zobrazuji'
+'Zpět do košíku': '##Zpět do košíku'
+'Zpět do obchodu': '##Zpět do obchodu'
+'Zpět k nákupu': '##Zpět k nákupu'
+'Zpět na přehled': '##Zpět na přehled'
+'Zpět na přehled objednávek': '##Zpět na přehled objednávek'
+'Zpět na výběr dopravy a platby': '##Zpět na výběr dopravy a platby'
+'Způsob dopravy': '##Způsob dopravy'
+'Způsob platby': '##Způsob platby'
+'Zvolená cenová skupina již neexistuje': 'Zvolená cenová skupina již neexistuje'   # FIXME
+'Zvolená měna již neexistuje': 'Zvolená měna již neexistuje'   # FIXME
+'Zvolené DPH již neexistuje': 'Zvolené DPH již neexistuje'   # FIXME
+
+'Zvolené zboží již není v nabídce nebo neexistuje':
+    '': 'Zvolené zboží již není v nabídce nebo neexistuje.'   # FIXME
+
+'Zvolte novou hodnotu': '##Zvolte novou hodnotu'
+'Zákazník <strong>{{ name }}</strong> byl smazán': 'Zákazník <strong>{{ name }}</strong> byl smazán'   # FIXME
+'Základní cena bez DPH': '##Základní cena bez DPH'
+'Základní cena s DPH': '##Základní cena s DPH'
+dostupností: '##dostupností'
+měny: '##měny'
+nebo: '##nebo'
+nikdy: '##nikdy'
+objednávek: '##objednávek'
+oddělení: '##oddělení'
+parametry: '##parametry'
+'sazby DPH': '##sazby DPH'
+'stavů objednávek': '##stavů objednávek'
+z: '##z'
+zboží: '##zboží'
+zákazníků: '##zákazníků'
+'Úspěšně nahráno': '##Úspěšně nahráno'
+Česky: Česky   # FIXME
+Článek: '##Článek'
+'Článek <strong>{{ name }}</strong> byl smazán': 'Článek <strong>{{ name }}</strong> byl smazán'   # FIXME
+'Číslo objednávky': '##Číslo objednávky'
+Řazení: '##Řazení'
+'Šablony e-mailů': '##Šablony e-mailů'
