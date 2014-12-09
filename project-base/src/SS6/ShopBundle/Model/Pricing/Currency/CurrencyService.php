@@ -4,8 +4,18 @@ namespace SS6\ShopBundle\Model\Pricing\Currency;
 
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 */
+	private $pricingSetting;
+
+	public function __construct(PricingSetting $pricingSetting) {
+		$this->pricingSetting = $pricingSetting;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData

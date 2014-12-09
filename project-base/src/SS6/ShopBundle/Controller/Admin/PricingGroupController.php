@@ -112,17 +112,17 @@ class PricingGroupController extends Controller {
 	 */
 	public function settingsAction(Request $request) {
 		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$pricingGroups = $pricingGroupFacade->getPricingGroupsBySelectedDomainId();
 		$form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
 
-		$pricingGorupSettingsFormData = array();
-		$pricingGorupSettingsFormData['defaultPricingGroup'] =  $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
+		$pricingGroupSettingsFormData = array();
+		$pricingGroupSettingsFormData['defaultPricingGroup'] =  $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
 
-		$form->setData($pricingGorupSettingsFormData);
+		$form->setData($pricingGroupSettingsFormData);
 
 		$form->handleRequest($request);
 

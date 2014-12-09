@@ -7,7 +7,10 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
-			{{ gridView.render('@SS6Shop/Admin/Content/Currency/listGrid.html.twig') }}
+
+			{{ render(controller('SS6ShopBundle:Admin/Currency:settings')) }}
+
+			{{ gridView.render('@SS6Shop/Admin/Content/Currency/listGrid.html.twig', {defaultCurrency: defaultCurrency}) }}
 		</div>
 	</div>
 {% endblock %}

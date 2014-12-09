@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
@@ -22,7 +23,11 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		/* @var $vat \SS6\ShopBundle\Model\Pricing\Vat\Vat */
 		$pricingGroup1 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+		/* @var $pricingGroup2 \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
 		$pricingGroup2 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2);
+		/* @var $pricingGroup2 \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
+		$defaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
+		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
 
 		// @codingStandardsIgnoreStart
 		$manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
@@ -35,6 +40,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, '2.Shopsys', 2));
 		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), 1));
 		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2));
+		$manager->persist(new SettingValue(PricingSetting::DEFAULT_CURRENCY, $defaultCurrency->getId(), SettingValue::DOMAIN_ID_COMMON));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
