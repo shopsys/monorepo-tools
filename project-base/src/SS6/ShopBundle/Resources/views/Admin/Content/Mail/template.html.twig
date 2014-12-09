@@ -19,14 +19,14 @@
 							</span>
 						</h2>
 						<div class="toggle-content display-none box-expand__hidden">
-							{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
-							{{ form_row(template.body, { label: 'Text'|trans}) }}
+							{{ form_row(template.subject, { label: 'Předmět'}) }}
+							{{ form_row(template.body, { label: 'Text'}) }}
 							{% if sendMailText is not null %}
 								{{ form_row(template.sendMail, { label: sendMailText }) }}
 							{% else %}
 								{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
 							{% endif %}
-							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
+							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
 
 							<div class="row">
 								<div class="col-xs-12 col-lg-10">
