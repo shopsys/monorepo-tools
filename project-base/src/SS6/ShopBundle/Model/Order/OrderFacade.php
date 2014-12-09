@@ -132,7 +132,7 @@ class OrderFacade {
 	public function createOrderFromCart(OrderData $orderData, User $user = null) {
 		return $this->createOrder(
 			$orderData,
-			$this->cart->getProductQuantifiedItems(),
+			$this->cart->getQuantifiedItems(),
 			$user
 		);
 	}

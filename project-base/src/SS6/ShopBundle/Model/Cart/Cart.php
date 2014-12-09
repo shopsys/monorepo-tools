@@ -54,7 +54,7 @@ class Cart {
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[]
 	 */
-	public function getProductQuantifiedItems() {
+	public function getQuantifiedItems() {
 		$quantifiedItems = array();
 		foreach ($this->getItems() as $cartItem) {
 			$quantifiedItems[] = new QuantifiedItem($cartItem->getProduct(), $cartItem->getQuantity());
