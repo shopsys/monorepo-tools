@@ -36,18 +36,4 @@ class CurrencyService {
 		return $currency;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getDefaultCurrencyId() {
-		return $this->pricingSetting->getDefaultCurrencyId();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 */
-	public function setDefaultCurrency(Currency $currency) {
-		$this->pricingSetting->setDefaultCurrency($currency);
-	}
-
 }

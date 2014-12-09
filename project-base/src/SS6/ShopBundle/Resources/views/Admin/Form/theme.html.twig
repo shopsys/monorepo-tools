@@ -53,6 +53,12 @@
 		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
+		{% if icon is defined %}
+			<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
+				data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+				title="{{ icon.title }}"
+			 ></i>
+		{% endif %}
 	</div>
 {% endblock form_row %}
 
@@ -151,12 +157,6 @@
 {% block form_widget_simple %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
 	{{ parent('form_widget_simple') }}
-	{% if icon is defined %}
-		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
-			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-			title="{{ icon.title }}"
-		 ></i>
-	{% endif %}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}

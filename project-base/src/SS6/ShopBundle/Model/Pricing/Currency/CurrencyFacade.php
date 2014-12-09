@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyService;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyFacade {
 
@@ -25,6 +26,11 @@ class CurrencyFacade {
 	private $currencyService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 */
+	private $pricingSetting;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyService $currencyService
@@ -32,11 +38,13 @@ class CurrencyFacade {
 	public function __construct(
 		EntityManager $em,
 		CurrencyRepository $currencyRepository,
-		CurrencyService $currencyService
+		CurrencyService $currencyService,
+		PricingSetting $pricingSetting
 	) {
 		$this->em = $em;
 		$this->currencyRepository = $currencyRepository;
 		$this->currencyService = $currencyService;
+		$this->pricingSetting = $pricingSetting;
 	}
 
 	/**
@@ -100,14 +108,14 @@ class CurrencyFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function getDefaultCurrency() {
-		return $this->getById($this->currencyService->getDefaultCurrencyId());
+		return $this->getById($this->pricingSetting->getDefaultCurrencyId());
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setDefaultCurrency(Currency $currency) {
-		$this->currencyService->setDefaultCurrency($currency);
+		$this->pricingSetting->setDefaultCurrency($currency);
 	}
 
 	/**
