@@ -43,10 +43,10 @@ class OrderStatusController extends Controller {
 				));
 			} else {
 				$newOrderStatus = $orderStatusFacade->getById($newId);
-				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ name }}</strong> byl nahrazen stavem '
-					. '<strong>' . $newOrderStatus->getName() . '</strong> a byl smazán.',
+				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem'
+					. ' <strong>{{ newName }}</strong> a byl smazán.',
 					array(
-						'name' => $orderStatus->getName(),
+						'oldName' => $orderStatus->getName(),
 						'newName' => $newOrderStatus->getName(),
 					));
 			}

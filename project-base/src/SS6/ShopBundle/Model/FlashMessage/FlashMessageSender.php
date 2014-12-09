@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\FlashMessage;
 
+use JMS\TranslationBundle\Annotation\Ignore;
+use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Environment;
 
 class FlashMessageSender {
@@ -16,9 +18,19 @@ class FlashMessageSender {
 	 */
 	private $twigEnvironment;
 
-	public function __construct(Bag $flashMessageBag, Twig_Environment $twigEnvironment) {
+	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	public function __construct(
+		Bag $flashMessageBag,
+		Twig_Environment $twigEnvironment,
+		TranslatorInterface $translator
+	) {
 		$this->flashMessageBag = $flashMessageBag;
 		$this->twigEnvironment = $twigEnvironment;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -26,7 +38,9 @@ class FlashMessageSender {
 	 * @param array $parameters
 	 */
 	public function addErrorFlashTwig($template, $parameters = array()) {
-		$message = $this->twigEnvironment->render($template, $parameters);
+		/** @Ignore */
+		$translatedTemplate = $this->translator->trans($template);
+		$message = $this->twigEnvironment->render($translatedTemplate, $parameters);
 		$this->flashMessageBag->addError($message, false);
 	}
 
@@ -35,7 +49,9 @@ class FlashMessageSender {
 	 * @param array $parameters
 	 */
 	public function addInfoFlashTwig($template, $parameters = array()) {
-		$message = $this->twigEnvironment->render($template, $parameters);
+		/** @Ignore */
+		$translatedTemplate = $this->translator->trans($template);
+		$message = $this->twigEnvironment->render($translatedTemplate, $parameters);
 		$this->flashMessageBag->addInfo($message, false);
 	}
 
@@ -44,7 +60,9 @@ class FlashMessageSender {
 	 * @param array $parameters
 	 */
 	public function addSuccessFlashTwig($template, $parameters = array()) {
-		$message = $this->twigEnvironment->render($template, $parameters);
+		/** @Ignore */
+		$translatedTemplate = $this->translator->trans($template);
+		$message = $this->twigEnvironment->render($translatedTemplate, $parameters);
 		$this->flashMessageBag->addSuccess($message, false);
 	}
 
@@ -52,21 +70,27 @@ class FlashMessageSender {
 	 * @param string|array $message
 	 */
 	public function addErrorFlash($message) {
-		$this->flashMessageBag->addError($message, true);
+		/** @Ignore */
+		$translatedMessage = $this->translator->trans($message);
+		$this->flashMessageBag->addError($translatedMessage, true);
 	}
 
 	/**
 	 * @param string|array $message
 	 */
 	public function addInfoFlash($message) {
-		$this->flashMessageBag->addInfo($message, true);
+		/** @Ignore */
+		$translatedMessage = $this->translator->trans($message);
+		$this->flashMessageBag->addInfo($translatedMessage, true);
 	}
 
 	/**
 	 * @param string|array $message
 	 */
 	public function addSuccessFlash($message) {
-		$this->flashMessageBag->addSuccess($message, true);
+		/** @Ignore */
+		$translatedMessage = $this->translator->trans($message);
+		$this->flashMessageBag->addSuccess($translatedMessage, true);
 	}
 
 }

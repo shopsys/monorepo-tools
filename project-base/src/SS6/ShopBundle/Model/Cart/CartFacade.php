@@ -66,6 +66,7 @@ class CartFacade {
 	/**
 	 * @param int $productId
 	 * @param int $quantity
+	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
 	 */
 	public function addProductToCart($productId, $quantity) {
 		$product = $this->productRepository->getVisibleByIdAndDomainId($productId, $this->domain->getId());
