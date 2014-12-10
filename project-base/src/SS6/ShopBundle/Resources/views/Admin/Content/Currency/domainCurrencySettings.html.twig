@@ -1,0 +1,12 @@
+<div class="row">
+	<div class="col-xs-12 col-lg-10">
+		{{ form_start(form) }}
+			<div class="wrap-box mb-1 mt-1">
+				{% for item in form.domainDefaultCurrencies %}
+					{{ form_row(item, { label: 'Základní měna domény '~domainNames[loop.index0]}) }}
+				{% endfor %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>

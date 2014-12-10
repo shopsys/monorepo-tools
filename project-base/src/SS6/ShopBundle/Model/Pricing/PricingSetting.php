@@ -12,6 +12,7 @@ class PricingSetting {
 	const INPUT_PRICE_TYPE = 'inputPriceType';
 	const ROUNDING_TYPE = 'roundingType';
 	const DEFAULT_CURRENCY = 'defaultCurrencyId';
+	const DEFAULT_DOMAIN_CURRENCY = 'defaultDomainCurrencyId';
 
 	const INPUT_PRICE_TYPE_WITH_VAT = 1;
 	const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
@@ -60,10 +61,26 @@ class PricingSetting {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return int
+	 */
+	public function getDomainDefaultCurrencyIdByDomainId($domainId) {
+		return $this->setting->get(self::DEFAULT_DOMAIN_CURRENCY, $domainId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setDefaultCurrency(Currency $currency) {
 		$this->setting->set(PricingSetting::DEFAULT_CURRENCY, $currency->getId(), SettingValue::DOMAIN_ID_COMMON);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param int $domainId
+	 */
+	public function setDomainDefaultCurrency(Currency $currency, $domainId) {
+		$this->setting->set(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $currency->getId(), $domainId);
 	}
 
 	/**
