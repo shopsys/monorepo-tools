@@ -35,6 +35,17 @@ class ImageLocator {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return string
+	 */
+	public function getRelativeImageFilepath(Image $image, $sizeName) {
+		$path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
+
+		return $path . $image->getFilename();
+	}
+
+	/**
 	 * @param Object $entity
 	 * @param string|null $type
 	 * @param string|null $sizeName
@@ -52,6 +63,18 @@ class ImageLocator {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return bool
+	 */
+	public function imageExists(Image $image, $sizeName) {
+		$relativeImageFilepath = $this->getRelativeImageFilepath($image, $sizeName);
+		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
+
+		return is_file($imageFilepath) && is_readable($imageFilepath);
+	}
+
+	/**
 	 * @param Object $entity
 	 * @param string|null $type
 	 * @param string|null $sizeName
@@ -59,13 +82,12 @@ class ImageLocator {
 	 */
 	public function imageExistsByEntityAndType($entity, $type, $sizeName) {
 		try {
-			$relativeImageFilepath = $this->getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName);
+			$image = $this->imageFacade->getImageByEntity($entity, $type);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
-		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
 
-		return is_file($imageFilepath) && is_readable($imageFilepath);
+		return $this->imageExists($image, $sizeName);
 	}
 
 	/**

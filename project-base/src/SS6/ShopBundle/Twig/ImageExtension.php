@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -78,6 +79,7 @@ class ImageExtension extends Twig_Extension {
 			new Twig_SimpleFunction('imageUrl', array($this, 'getImageUrl')),
 			new Twig_SimpleFunction('imagesUrl', array($this, 'getImagesUrl')),
 			new Twig_SimpleFunction('image', array($this, 'getImageHtml'), array('is_safe' => array('html'))),
+			new Twig_SimpleFunction('imageUrlByImage', array($this, 'getImageUrlByImage')),
 		);
 	}
 
@@ -100,6 +102,25 @@ class ImageExtension extends Twig_Extension {
 	public function getImageUrl($entity, $sizeName = null, $type = null) {
 		if ($this->imageLocator->imageExistsByEntityAndType($entity, $type, $sizeName)) {
 			$relativeFilepath = $this->imageLocator->getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName);
+		} else {
+			$relativeFilepath = self::NOIMAGE_FILENAME;
+		}
+
+		$url = $this->request->getBaseUrl()
+			. $this->imageUrlPrefix
+			. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
+
+		return $url;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return string
+	 */
+	public function getImageUrlByImage(Image $image, $sizeName = null) {
+		if ($this->imageLocator->imageExists($image, $sizeName)) {
+			$relativeFilepath = $this->imageLocator->getRelativeImageFilepath($image, $sizeName);
 		} else {
 			$relativeFilepath = self::NOIMAGE_FILENAME;
 		}
