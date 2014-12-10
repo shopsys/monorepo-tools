@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 
 class ImageLocator {
@@ -13,18 +12,12 @@ class ImageLocator {
 	private $imageDir;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
-	 */
-	private $imageConfig;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
 	private $imageFacade;
 
-	public function __construct($imageDir, ImageConfig $imageConfig, ImageFacade $imageFacade) {
+	public function __construct($imageDir, ImageFacade $imageFacade) {
 		$this->imageDir = $imageDir;
-		$this->imageConfig = $imageConfig;
 		$this->imageFacade = $imageFacade;
 	}
 
