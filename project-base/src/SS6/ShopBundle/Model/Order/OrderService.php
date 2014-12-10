@@ -79,7 +79,7 @@ class OrderService {
 		foreach ($order->getItems() as $orderItem) {
 			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
 				$orderItemData = $orderItemsData[$orderItem->getId()];
-				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+				$orderItemData->setPriceWithoutVat($this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData));
 				$orderItem->edit($orderItemData);
 			} else {
 				$order->removeItem($orderItem);
@@ -90,7 +90,7 @@ class OrderService {
 		$orderItemsToCreate = array();
 		foreach ($orderItemsData as $index => $orderItemData) {
 			if (strpos($index, 'new_') === 0) {
-				$this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+				$orderItemData->setPriceWithoutVat($this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData));
 				$orderItem = new OrderProduct(
 					$order,
 					$orderItemData->getName(),

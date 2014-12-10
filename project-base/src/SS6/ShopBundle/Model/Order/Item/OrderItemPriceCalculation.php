@@ -24,13 +24,13 @@ class OrderItemPriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
+	 * @return string
 	 */
 	public function calculatePriceWithoutVat(OrderItemData $orderItemData) {
 		$vat = new Vat(new VatData('orderItemVat', $orderItemData->getVatPercent()));
-
 		$vatAmount = $this->genericPriceCalculation->getVatAmountByPriceWithVat($orderItemData->getPriceWithVat(), $vat);
-		$priceWithoutVat = $orderItemData->getPriceWithVat() - $vatAmount;
-		$orderItemData->setPriceWithoutVat($priceWithoutVat);
+		
+		return $orderItemData->getPriceWithVat() - $vatAmount;
 	}
 
 	/**

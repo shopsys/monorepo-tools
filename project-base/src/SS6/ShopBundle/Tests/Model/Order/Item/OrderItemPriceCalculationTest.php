@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
 
-class PriceCalculationTest extends PHPUnit_Framework_TestCase {
+class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceWithoutVat() {
 		$genericPriceCalculationMock = $this->getMock(GenericPriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
@@ -19,9 +19,9 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemData->setVatPercent(10);
 
 		$orderItemPriceCalculation = new OrderItemPriceCalculation($genericPriceCalculationMock);
-		$orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
+		$priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
-		$this->assertEquals(round(1000 - 100, 6), round($orderItemData->getPriceWithoutVat(), 6));
+		$this->assertEquals(round(1000 - 100, 6), round($priceWithoutVat, 6));
 	}
 
 	public function testCalculateTotalPrice() {
