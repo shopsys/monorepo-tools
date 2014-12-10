@@ -54,15 +54,15 @@ class ProductPriceRecalculationScheduler {
 	}
 
 	public function getProductsScheduledForRecalculation() {
+		if ($this->recalculateAll) {
+			return $this->productRepository->getAll();
+		}
+
 		foreach ($this->vats as $vat) {
 			$products = $this->productRepository->getAllByVat($vat);
 			foreach ($products as $product) {
 				$this->products[$product->getId()] = $product;
 			}
-		}
-
-		if ($this->recalculateAll) {
-			$this->products = $this->productRepository->getAll();
 		}
 
 		return $this->products;
