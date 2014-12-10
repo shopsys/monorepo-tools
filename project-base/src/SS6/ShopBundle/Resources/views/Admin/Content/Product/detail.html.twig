@@ -92,7 +92,7 @@
 				</div>
 
 				<div class="wrap-group">
-					{% block image %}{% endblock %}
+					{% block images %}{% endblock %}
 					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek' }) }}
 
 					{{ form_save(product|default(null), form) }}
