@@ -42,6 +42,7 @@ class MenuItem {
 	 * @param string|null $type
 	 * @param string|null $route
 	 * @param array|null $routeParameters
+	 * @param boolean $visible
 	 * @param array|null $items
 	 */
 	public function __construct(
