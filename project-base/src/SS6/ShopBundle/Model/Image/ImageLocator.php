@@ -27,7 +27,7 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	public function getRelativeImageFilepath($entity, $type, $sizeName) {
+	public function getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName) {
 		$image = $this->imageFacade->getImageByEntity($entity, $type);
 		$path = $this->getRelativeImagePath($image->getEntityName(), $type, $sizeName);
 
@@ -40,7 +40,7 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return array
 	 */
-	public function getRelativeImagesFilepath($entity, $type, $sizeName) {
+	public function getRelativeImagesFilepathByEntityAndType($entity, $type, $sizeName) {
 		$filepaths = array();
 
 		$images = $this->imageFacade->getImagesByEntity($entity, $type);
@@ -57,9 +57,9 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return bool
 	 */
-	public function imageExists($entity, $type, $sizeName) {
+	public function imageExistsByEntityAndType($entity, $type, $sizeName) {
 		try {
-			$relativeImageFilepath = $this->getRelativeImageFilepath($entity, $type, $sizeName);
+			$relativeImageFilepath = $this->getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
