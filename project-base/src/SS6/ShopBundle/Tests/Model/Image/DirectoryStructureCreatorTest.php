@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 use SS6\ShopBundle\Model\Image\DirectoryStructureCreator;
-use SS6\ShopBundle\Model\Image\ImagesEntity;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -33,7 +33,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 		);
 		$imageConfig = new ImageConfig($imageEntityConfigByClass);
 		$imageFacadeMock = $this->getMock(ImageFacade::class, [], [], '', false);
-		$imagesEntity = new ImagesEntity($imageDir, $imageConfig, $imageFacadeMock);
+		$imageLocator = new ImageLocator($imageDir, $imageConfig, $imageFacadeMock);
 		$filesystemMock = $this->getMockBuilder(Filesystem::class)
 			->setMethods(['mkdir'])
 			->getMock();
@@ -56,7 +56,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 				return true;
 			}));
 
-		$creator = new DirectoryStructureCreator($imageDir, $imageConfig, $imagesEntity, $filesystemMock);
+		$creator = new DirectoryStructureCreator($imageDir, $imageConfig, $imageLocator, $filesystemMock);
 		$creator->makeImageDirectories();
 	}
 

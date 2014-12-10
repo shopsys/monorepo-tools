@@ -296,15 +296,15 @@ services:
   ss6.shop.image.image_facade:
     class: SS6\ShopBundle\Model\Image\ImageFacade
 
+  ss6.shop.image.image_locator:
+    class: SS6\ShopBundle\Model\Image\ImageLocator
+    arguments: [%ss6.image_dir%]
+
   ss6.shop.image.image_repository:
     class: SS6\ShopBundle\Model\Image\ImageRepository
 
   ss6.shop.image.image_service:
     class: SS6\ShopBundle\Model\Image\ImageService
-
-  ss6.shop.image.images_entity:
-    class: SS6\ShopBundle\Model\Image\ImagesEntity
-    arguments: [%ss6.image_dir%]
 
   ss6.shop.localization.locale_listener:
     class: SS6\ShopBundle\Model\Localization\LocalizationListener

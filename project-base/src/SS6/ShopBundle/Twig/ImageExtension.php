@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\ImagesEntity;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Extension;
@@ -30,9 +30,9 @@ class ImageExtension extends Twig_Extension {
 	private $request;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImagesEntity
+	 * @var \SS6\ShopBundle\Model\Image\ImageLocator
 	 */
-	private $imagesEntity;
+	private $imageLocator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
@@ -43,20 +43,20 @@ class ImageExtension extends Twig_Extension {
 	 * @param string $imageUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-	 * @param \SS6\ShopBundle\Model\Image\ImagesEntity $imagesEntity
+	 * @param \SS6\ShopBundle\Model\Image\ImageLocator $imageLocator
 	 * @param \SS6\ShopBundle\Model\Image\Config\ImageConfig $imageConfig
 	 */
 	public function __construct(
 		$imageUrlPrefix,
 		ContainerInterface $container,
 		RequestStack $requestStack,
-		ImagesEntity $imagesEntity,
+		ImageLocator $imageLocator,
 		ImageConfig $imageConfig
 	) {
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
 		$this->request = $requestStack->getMasterRequest();
-		$this->imagesEntity = $imagesEntity;
+		$this->imageLocator = $imageLocator;
 		$this->imageConfig = $imageConfig;
 	}
 
@@ -88,7 +88,7 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function imageExists($entity, $sizeName = null, $type = null) {
-		return $this->imagesEntity->imageExists($entity, $type, $sizeName);
+		return $this->imageLocator->imageExists($entity, $type, $sizeName);
 	}
 
 	/**
@@ -98,8 +98,8 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function getImageUrl($entity, $sizeName = null, $type = null) {
-		if ($this->imagesEntity->imageExists($entity, $type, $sizeName)) {
-			$relativeFilepath = $this->imagesEntity->getRelativeImageFilepath($entity, $type, $sizeName);
+		if ($this->imageLocator->imageExists($entity, $type, $sizeName)) {
+			$relativeFilepath = $this->imageLocator->getRelativeImageFilepath($entity, $type, $sizeName);
 		} else {
 			$relativeFilepath = self::NOIMAGE_FILENAME;
 		}
@@ -120,7 +120,7 @@ class ImageExtension extends Twig_Extension {
 	public function getImagesUrl($entity, $sizeName = null, $type = null) {
 		$imagesUrl = array();
 
-		$relativeFilepaths = $this->imagesEntity->getRelativeImagesFilepath($entity, $type, $sizeName);
+		$relativeFilepaths = $this->imageLocator->getRelativeImagesFilepath($entity, $type, $sizeName);
 		foreach ($relativeFilepaths as $relativeFilepath) {
 			$imagesUrl[] =
 				$this->request->getBaseUrl()

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Image;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 
-class ImagesEntity {
+class ImageLocator {
 
 	/**
 	 * @var string
