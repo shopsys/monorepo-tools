@@ -17,7 +17,7 @@ class ImageService {
 	public function getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type) {
 		if (!$imageEntityConfig->isMultiple($type)) {
 			$message = 'Entity ' . $imageEntityConfig->getEntityClass()
-				. ' has not allowed multiple images for type ' . ($type ?: 'NULL');
+				. ' in not allowed to have multiple images for type ' . ($type ?: 'NULL');
 			throw new \SS6\ShopBundle\Model\Image\Exception\EntityMultipleImageException($message);
 		}
 

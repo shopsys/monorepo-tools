@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Image;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageRepository;
 use SS6\ShopBundle\Model\Image\ImageService;
 
