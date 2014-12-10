@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Payment;
+namespace SS6\ShopBundle\Tests\Model\Transport;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportData;
 
-class PriceCalculationTest extends PHPUnit_Framework_TestCase {
+class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
 		return array(
@@ -56,17 +56,16 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
 
 		$rounding = new Rounding($pricingSettingMock);
-
 		$priceCalculation = new PriceCalculation($rounding);
 		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-		$paymentPriceCalculation = new PaymentPriceCalculation($basePriceCalculation, $pricingSettingMock);
+		$transportPriceCalculation = new TransportPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
-		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], $inputPrice, $vat));
+		$transport = new Transport(new TransportData(array('cs' => 'TransportName'), $inputPrice, $vat));
 
-		$price = $paymentPriceCalculation->calculatePrice($payment);
+		$price = $transportPriceCalculation->calculatePrice($transport);
 
 		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));

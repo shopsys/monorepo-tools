@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\Transport;
+namespace SS6\ShopBundle\Tests\Model\Product;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
@@ -9,11 +9,11 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 
-class PriceCalculationTest extends PHPUnit_Framework_TestCase {
+class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
 		return array(
@@ -59,13 +59,13 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceCalculation = new PriceCalculation($rounding);
 		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-		$transportPriceCalculation = new TransportPriceCalculation($basePriceCalculation, $pricingSettingMock);
+		$productPriceCalculation = new ProductPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
-		$transport = new Transport(new TransportData(array('cs' => 'TransportName'), $inputPrice, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $inputPrice, $vat));
 
-		$price = $transportPriceCalculation->calculatePrice($transport);
+		$price = $productPriceCalculation->calculatePrice($product);
 
 		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));

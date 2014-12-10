@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
-class PriceCalculationTest extends FunctionalTestCase {
+class CartItemPriceCalculationTest extends FunctionalTestCase {
 
 	public function testCalculatePrices() {
 		$cartItemPriceCalculation = $this->getContainer()->get('ss6.shop.cart.item.cart_item_price_calculation');

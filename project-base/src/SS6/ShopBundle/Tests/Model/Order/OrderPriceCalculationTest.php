@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Price;
 
-class PriceCalculationTest extends PHPUnit_Framework_TestCase {
+class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetOrderTotalPrice() {
 		$orderItems = [
