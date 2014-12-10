@@ -2,46 +2,42 @@
 
 namespace SS6\ShopBundle\Component\BaseObject;
 
-class BaseObject implements \Iterator {
+use IteratorAggregate;
 
-	public function __get($name) {
-		$class = get_class($this);
-		throw new \SS6\ShopBundle\Component\BaseObject\Exception\PropertyNotFoundException(
-			'Cannot read non-existent property ' . $class . ' ::$' . $name
-		);
+abstract class Object implements IteratorAggregate {
+
+	public function __call($name, $arguments) {
+		$message = 'Cannot call method ' . get_class($this) . '::' . $name . '()';
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
+	}
+
+	public static function __callStatic($name, $arguments) {
+		$message = 'Cannot call static method ' . get_class($this) . '::' . $name . '()';
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
+	}
+
+	public function &__get($name) {
+		$message = 'Cannot read non-existent property ' . get_class($this) . ' ::$' . $name;
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
 	}
 
 	public function __set($name, $value) {
-		$class = get_class($this);
-		throw new \SS6\ShopBundle\Component\BaseObject\Exception\PropertyNotFoundException(
-			'Cannot set non-existent property ' . $class . ' ::$' . $name
-		);
+		$message = 'Cannot set non-existent property ' . get_class($this) . ' ::$' . $name;
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
 	}
 
-	public function rewind() {
-		$this->throwIteratorAccessException();
+	public function __isset($name) {
+		$message = 'Cannot isset non-existent property ' . get_class($this) . '::$' . $name;
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
 	}
 
-	public function current() {
-		$this->throwIteratorAccessException();
+	public function __unset($name) {
+		$message = 'Cannot unset non-existent property ' . get_class($this) . '::$' . $name;
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
 	}
 
-	public function key() {
-		$this->throwIteratorAccessException();
-	}
-
-	public function next() {
-		$this->throwIteratorAccessException();
-	}
-
-	public function valid() {
-		$this->throwIteratorAccessException();
-	}
-
-	private function throwIteratorAccessException() {
-		$class = get_class($this);
-		throw new \SS6\ShopBundle\Component\BaseObject\Exception\PropertyNotFoundException(
-			'Cannot iterate object ' . $class
-		);
+	public function getIterator() {
+		$message = 'Cannot iterate object ' . get_class($this);
+		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
 	}
 }
