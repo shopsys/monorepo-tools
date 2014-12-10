@@ -88,9 +88,9 @@ class DepartmentFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Department\Department[]
 	 */
-	public function getAllWithTranslation() {
+	public function getAllInRootWithTranslation() {
 		$locale = $this->domain->getLocale();
-		return $this->departmentRepository->getAllWithTranslation($locale);
+		return $this->departmentRepository->getAllInRootWithTranslation($locale);
 	}
 
 }

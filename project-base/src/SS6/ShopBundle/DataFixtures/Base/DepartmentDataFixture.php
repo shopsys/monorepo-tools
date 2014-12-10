@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Department\DepartmentData;
 
 class DepartmentDataFixture extends AbstractReferenceFixture {
 
+	const ELECTRONICS = 'department_electronics';
 	const TV = 'department_tv';
 	const PHOTO = 'department_photo';
 	const PRINTERS = 'department_printers';
@@ -23,7 +24,12 @@ class DepartmentDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$departmentData = new DepartmentData();
+
+		$departmentData->setNames(array('cs' => 'Elektro', 'en' => 'Electronics'));
+		$electronicsDepartment = $this->createDepartment($manager, self::ELECTRONICS, $departmentData);
+
 		$departmentData->setNames(array('cs' => 'Televize, audio', 'en' => 'TV, audio'));
+		$departmentData->setParent($electronicsDepartment);
 		$this->createDepartment($manager, self::TV, $departmentData);
 
 		$departmentData->setNames(array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'));
@@ -42,6 +48,7 @@ class DepartmentDataFixture extends AbstractReferenceFixture {
 		$this->createDepartment($manager, self::COFFEE, $departmentData);
 
 		$departmentData->setNames(array('cs' => 'Knihy', 'en' => 'Books'));
+		$departmentData->setParent(null);
 		$this->createDepartment($manager, self::BOOKS, $departmentData);
 
 		$departmentData->setNames(array('cs' => 'Hračky a další', 'en' => null));
@@ -60,6 +67,8 @@ class DepartmentDataFixture extends AbstractReferenceFixture {
 		$department = new Department($departmentData);
 		$manager->persist($department);
 		$this->addReference($referenceName, $department);
+
+		return $department;
 	}
 
 }

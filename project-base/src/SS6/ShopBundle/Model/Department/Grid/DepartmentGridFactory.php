@@ -55,6 +55,7 @@ class DepartmentGridFactory implements GridFactoryInterface {
 			->select('d, dt')
 			->from(Department::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
+			->orderBy('d.root, d.lft', 'ASC')
 			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'd.id');
 

@@ -30,8 +30,8 @@ class DepartmentRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Department\Department[]
 	 */
-	public function findAll() {
-		return $this->getDepartmentRepository()->findAll();
+	public function getAll() {
+		return $this->getDepartmentRepository()->findBy(array(), array('root' => 'ASC', 'lft' => 'ASC'));
 	}
 
 	/**
@@ -60,8 +60,11 @@ class DepartmentRepository {
 	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Department\Department[]
 	 */
-	public function getAllWithTranslation($locale) {
-		return $this->getAllWithTranslationQueryBuilder($locale)->getQuery()->execute();
+	public function getAllInRootWithTranslation($locale) {
+		return $this->getAllWithTranslationQueryBuilder($locale)
+			->andWhere('d.level = 0')
+			->getQuery()
+			->execute();
 	}
 
 	/**
@@ -73,7 +76,8 @@ class DepartmentRepository {
 			->select('d')
 			->from(Department::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
-			->where('dt.name IS NOT NULL');
+			->where('dt.name IS NOT NULL')
+			->orderBy('d.root, d.lft', 'ASC');
 		$qb->setParameter('locale', $locale);
 
 		return $qb;

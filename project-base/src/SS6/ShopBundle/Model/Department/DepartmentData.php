@@ -16,10 +16,16 @@ class DepartmentData {
 	private $names;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Department\Department|null
+	 */
+	private $parent;
+
+	/**
 	 * @param array $names
 	 */
-	public function __construct($names = array()) {
+	public function __construct($names = array(), Department $parent = null) {
 		$this->names = $names;
+		$this->parent = $parent;
 	}
 
 	/**
@@ -34,6 +40,20 @@ class DepartmentData {
 	 */
 	public function setNames($names) {
 		$this->names = $names;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Department\Department
+	 */
+	public function getParent() {
+		return $this->parent;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department\null $parent
+	 */
+	public function setParent(Department $parent = null) {
+		$this->parent = $parent;
 	}
 
 	/**

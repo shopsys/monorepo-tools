@@ -71,7 +71,7 @@ class ProductFormTypeFactory {
 	public function create() {
 		$vats = $this->vatRepository->findAll();
 		$availabilities = $this->availabilityRepository->findAll();
-		$departments = $this->departmentRepository->findAll();
+		$departments = $this->departmentRepository->getAll();
 
 		return new ProductFormType(
 			$this->fileUpload,

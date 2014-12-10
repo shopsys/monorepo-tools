@@ -21,6 +21,7 @@ class AppKernel extends Kernel {
 			new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new Symfony\Bundle\MonologBundle\MonologBundle(),
