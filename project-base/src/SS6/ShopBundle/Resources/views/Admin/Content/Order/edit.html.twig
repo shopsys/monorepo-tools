@@ -102,12 +102,12 @@
 												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 												<td class="text-right text-middle">
 													{% if orderItemTotalPricesById[orderItemId] is defined %}
-														{{ orderItemTotalPricesById[orderItemId].priceWithVat|price }}
+														{{ orderItemTotalPricesById[orderItemId].priceWithVat|defaultPrice }}
 													{% endif %}
 												</td>
 												<td class="text-right text-middle">
 													{% if orderItemTotalPricesById[orderItemId] is defined %}
-														{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|price }}
+														{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|defaultPrice }}
 													{% endif %}
 												</td>
 												<td class="table-col-5 table-edit__body__cell text-center">
@@ -131,8 +131,8 @@
 										</tr>
 										<tr>
 											<th colspan="4">{{ 'Celkem'|trans }}:</th>
-											<th class="text-right">{{ order.totalPriceWithVat|price }}</th>
-											<th class="text-right">{{ order.totalPriceWithoutVat|price }}</th>
+											<th class="text-right">{{ order.totalPriceWithVat|defaultPrice }}</th>
+											<th class="text-right">{{ order.totalPriceWithoutVat|defaultPrice }}</th>
 											<th></th>
 										</tr>
 									</tfoot>

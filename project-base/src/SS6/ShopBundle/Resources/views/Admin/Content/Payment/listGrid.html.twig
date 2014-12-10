@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_price %}
-	{{ value.basePrice.priceWithVat|price }}
+	{{ value.basePrice.priceWithVat|defaultPrice }}
 {% endblock %}
 
 {% block grid_no_data %}
