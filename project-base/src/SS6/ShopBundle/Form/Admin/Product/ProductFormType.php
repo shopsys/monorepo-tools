@@ -166,7 +166,7 @@ class ProductFormType extends AbstractType {
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte číslo',
 			))
-			->add('image', new FileUploadType($this->fileUpload), array(
+			->add('imagesToUpload', new FileUploadType($this->fileUpload), array(
 				'required' => false,
 				'multiple' => true,
 				'file_constraints' => array(

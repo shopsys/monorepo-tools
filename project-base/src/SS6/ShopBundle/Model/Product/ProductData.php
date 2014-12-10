@@ -71,9 +71,9 @@ class ProductData {
 	private $hidden;
 
 	/**
-	 * @var string|null
+	 * @var array
 	 */
-	private $image;
+	private $imagesToUpload;
 
 	/**
 	 *
@@ -108,7 +108,7 @@ class ProductData {
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
 	 * @param bool $hidden
-	 * @param string|null $image
+	 * @param array $imagesToUpload
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 * @param array $parameters
 	 * @param array $hiddenOnDomains
@@ -126,7 +126,7 @@ class ProductData {
 		DateTime $sellingTo = null,
 		$stockQuantity = null,
 		$hidden = false,
-		$image = null,
+		$imagesToUpload = array(),
 		$availability = null,
 		array $parameters = array(),
 		array $hiddenOnDomains = array(),
@@ -143,7 +143,7 @@ class ProductData {
 		$this->sellingTo = $sellingTo;
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
-		$this->image = $image;
+		$this->imagesToUpload = $imagesToUpload;
 		$this->availability = $availability;
 		$this->parameters = $parameters;
 		$this->hiddenOnDomains = $hiddenOnDomains;
@@ -222,10 +222,10 @@ class ProductData {
 
 
 	/**
-	 * @return string|null
+	 * @return array
 	 */
-	public function getImage() {
-		return $this->image;
+	public function getImagesToUpload() {
+		return $this->imagesToUpload;
 	}
 
 	/**
@@ -320,10 +320,10 @@ class ProductData {
 	}
 
 	/**
-	 * @param string|null $image
+	 * @param array $imagesToUpload
 	 */
-	public function setImage($image) {
-		$this->image = $image;
+	public function setImagesToUpload(array $imagesToUpload) {
+		$this->imagesToUpload = $imagesToUpload;
 	}
 
 	/**

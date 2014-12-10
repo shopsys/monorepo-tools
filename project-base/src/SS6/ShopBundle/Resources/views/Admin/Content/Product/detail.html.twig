@@ -93,7 +93,7 @@
 
 				<div class="wrap-group">
 					{% block image %}{% endblock %}
-					{{ form_row(form.image, { label: 'Nahrát obrázek' }) }}
+					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek' }) }}
 
 					{{ form_save(product|default(null), form) }}
 					<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>

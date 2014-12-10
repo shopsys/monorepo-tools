@@ -105,7 +105,7 @@ class ProductEditFacade {
 		$this->createProductDomains($product, $this->domain->getAll());
 		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
 		$this->em->flush();
-		$this->imageFacade->uploadImages($product, $productData->getImage(), null);
+		$this->imageFacade->uploadImages($product, $productData->getImagesToUpload(), null);
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
@@ -128,7 +128,7 @@ class ProductEditFacade {
 		$this->saveParameters($product, $productData->getParameters());
 		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
 		$this->em->flush();
-		$this->imageFacade->uploadImages($product, $productData->getImage(), null);
+		$this->imageFacade->uploadImages($product, $productData->getImagesToUpload(), null);
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
