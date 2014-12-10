@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 /**
  * @ORM\Table(name="vats")
@@ -73,6 +74,9 @@ class Vat {
 		return round($ratio, 4);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 */
 	public function edit(VatData $vatData) {
 		$this->name = $vatData->getName();
 		$this->percent = $vatData->getPercent();
