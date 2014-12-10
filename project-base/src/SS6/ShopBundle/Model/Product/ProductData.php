@@ -76,6 +76,11 @@ class ProductData {
 	private $imagesToUpload;
 
 	/**
+	 * @var array
+	 */
+	private $imagesToDelete;
+
+	/**
 	 *
 	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
 	 */
@@ -109,6 +114,7 @@ class ProductData {
 	 * @param string|null $stockQuantity
 	 * @param bool $hidden
 	 * @param array $imagesToUpload
+	 * @param array $imagesToDelete
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 * @param array $parameters
 	 * @param array $hiddenOnDomains
@@ -127,6 +133,7 @@ class ProductData {
 		$stockQuantity = null,
 		$hidden = false,
 		$imagesToUpload = array(),
+		$imagesToDelete = array(),
 		$availability = null,
 		array $parameters = array(),
 		array $hiddenOnDomains = array(),
@@ -144,6 +151,7 @@ class ProductData {
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
 		$this->imagesToUpload = $imagesToUpload;
+		$this->imagesToDelete = $imagesToDelete;
 		$this->availability = $availability;
 		$this->parameters = $parameters;
 		$this->hiddenOnDomains = $hiddenOnDomains;
@@ -220,12 +228,18 @@ class ProductData {
 		return $this->stockQuantity;
 	}
 
-
 	/**
 	 * @return array
 	 */
 	public function getImagesToUpload() {
 		return $this->imagesToUpload;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getImagesToDelete() {
+		return $this->imagesToDelete;
 	}
 
 	/**
@@ -324,6 +338,13 @@ class ProductData {
 	 */
 	public function setImagesToUpload(array $imagesToUpload) {
 		$this->imagesToUpload = $imagesToUpload;
+	}
+
+	/**
+	 * @param array $imagesToDelete
+	 */
+	public function setImagesToDelete(array $imagesToDelete) {
+		$this->imagesToDelete = $imagesToDelete;
 	}
 
 	/**

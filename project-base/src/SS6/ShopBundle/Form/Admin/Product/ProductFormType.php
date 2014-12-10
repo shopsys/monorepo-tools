@@ -53,11 +53,17 @@ class ProductFormType extends AbstractType {
 	private $departments;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	private $images;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 */
 	public function __construct(
 		FileUpload $fileUpload,
@@ -65,7 +71,8 @@ class ProductFormType extends AbstractType {
 		array $availabilities,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		array $departments
+		array $departments,
+		array $images
 	) {
 		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
@@ -73,6 +80,7 @@ class ProductFormType extends AbstractType {
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->departments = $departments;
+		$this->images = $images;
 	}
 
 	/**
@@ -177,6 +185,11 @@ class ProductFormType extends AbstractType {
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
 					)),
 				),
+			))
+			->add('imagesToDelete', 'choice', array(
+				'required' => false,
+				'multiple' => true,
+				'choice_list' => new ObjectChoiceList($this->images, 'filename', array(), null, 'id'),
 			))
 			->add('availability', 'choice', array(
 				'required' => false,
