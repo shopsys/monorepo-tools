@@ -129,6 +129,7 @@ class ProductEditFacade {
 		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productData->getImagesToUpload(), null);
+		$this->imageFacade->deleteImages($product, $productData->getImagesToDelete());
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();

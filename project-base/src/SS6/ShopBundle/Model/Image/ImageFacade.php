@@ -84,6 +84,21 @@ class ImageFacade {
 
 	/**
 	 * @param object $entity
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 */
+	public function deleteImages($entity, array $images) {
+		$entityName = $this->imageConfig->getEntityName($entity);
+		$entityId = $this->getEntityId($entity);
+
+		$this->imageService->deleteImages($entityName, $entityId, $images);
+
+		foreach ($images as $image) {
+			$this->em->remove($image);
+		}
+	}
+
+	/**
+	 * @param object $entity
 	 * @param string|null $type
 	 * @return \SS6\ShopBundle\Model\Image\Image
 	 */

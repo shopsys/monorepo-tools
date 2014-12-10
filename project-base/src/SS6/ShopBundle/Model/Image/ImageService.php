@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
+use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
 
@@ -51,6 +52,37 @@ class ImageService {
 		}
 
 		return $image;
+	}
+
+	/**
+	 * @param string $entityName
+	 * @param int $entityId
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 */
+	public function deleteImages($entityName, $entityId, array $images) {
+		foreach ($images as $image) {
+			$this->deleteImage($entityName, $entityId, $image);
+		}
+	}
+
+	/**
+	 * @param string $entityName
+	 * @param int $entityId
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 */
+	private function deleteImage($entityName, $entityId, Image $image) {
+		if ($image->getEntityName() !== $entityName
+			|| $image->getEntityId() !== $entityId
+		) {
+			throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException(
+				sprintf(
+					'Entity %s with ID %s does not own image with ID',
+					$entityName,
+					$entityId,
+					$image->getId()
+				)
+			);
+		}
 	}
 
 }
