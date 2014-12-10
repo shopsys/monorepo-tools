@@ -24,7 +24,6 @@ class RegistrationService {
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
 	 * @return \SS6\ShopBundle\Model\Customer\User
-	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
 	public function create(UserData $userData,
 			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
@@ -102,7 +101,6 @@ class RegistrationService {
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @param string $email
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
-	 * @throws \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException
 	 */
 	public function changeEmail(User $user, $email, User $userByEmail = null) {
 		if ($email !== null) {

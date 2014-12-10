@@ -48,7 +48,6 @@ class VatRepository {
 	/**
 	 * @param int $vatId
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
-	 * @throws \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException
 	 */
 	public function getById($vatId) {
 		$vat = $this->findById($vatId);

@@ -74,7 +74,6 @@ class Setting {
 	 * @param string $key
 	 * @param int|null $domainId
 	 * @return \SS6\ShopBundle\Model\Setting\SettingValue
-	 * @throws \SS6\ShopBundle\Model\Setting\Exception\SettingValueNotFoundException
 	 */
 	private function getSettingValue($key, $domainId) {
 		$this->loadValues($domainId);

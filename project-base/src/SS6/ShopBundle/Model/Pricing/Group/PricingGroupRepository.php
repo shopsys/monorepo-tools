@@ -31,7 +31,6 @@ class PricingGroupRepository {
 	/**
 	 * @param int $pricingGroupId
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
-	 * @throws \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundExceptoin
 	 */
 	public function getById($pricingGroupId) {
 		$criteria = ['id' => $pricingGroupId];

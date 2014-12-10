@@ -52,7 +52,6 @@ class ImageConfig {
 	/**
 	 * @param Object $entity
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig
-	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException
 	 */
 	public function getImageEntityConfig($entity) {
 		foreach ($this->imageEntityConfigsByClass as $className => $entityConfig) {
@@ -67,7 +66,6 @@ class ImageConfig {
 	/**
 	 * @param string $entityName
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
-	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException
 	 */
 	private function getEntityConfigByEntityName($entityName) {
 

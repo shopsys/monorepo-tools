@@ -13,7 +13,6 @@ class ErrorController extends Controller {
 
 	/**
 	 * @param int $code
-	 * @throws \Symfony\Component\HttpKernel\Exception\HttpException
 	 */
 	public function errorPageAction($code) {
 		/* @var $exceptionController \SS6\ShopBundle\Component\ExceptionController */

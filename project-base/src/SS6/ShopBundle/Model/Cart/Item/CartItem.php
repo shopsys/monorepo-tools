@@ -97,7 +97,6 @@ class CartItem {
 
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Product|null
-	 * @throws \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException
 	 */
 	public function getProduct() {
 		if ($this->product === null) {

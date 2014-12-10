@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata as DoctrineClassMetadata;
 use SS6\ShopBundle\Component\Validator\Auto;
 use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\Exception\MappingException;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Mapping\Loader\LoaderInterface;
 
@@ -40,7 +39,6 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	/**
 	 * @param \Symfony\Component\Validator\Mapping\ClassMetadata $classMetadata
 	 * @return boolean
-	 * @throws MappingException
 	 */
 	public function loadClassMetadata(ClassMetadata $classMetadata) {
 		$loaded = false;

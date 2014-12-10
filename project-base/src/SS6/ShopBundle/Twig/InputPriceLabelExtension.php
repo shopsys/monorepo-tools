@@ -35,7 +35,6 @@ class InputPriceLabelExtension extends Twig_Extension {
 
 	/**
 	 * @return string
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	public function getInputPriceLabel() {
 		$inputPriceType = $this->pricingSetting->getInputPriceType();

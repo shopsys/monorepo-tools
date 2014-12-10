@@ -44,7 +44,6 @@ class InlineEditService {
 	 * @param string $serviceName
 	 * @param mixed $rowId
 	 * @return array
-	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException
 	 */
 	public function getRenderedFormWidgets($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
@@ -58,7 +57,6 @@ class InlineEditService {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $rowId
 	 * @return mixed
-	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException
 	 */
 	public function saveFormData($serviceName, Request $request, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
@@ -90,7 +88,6 @@ class InlineEditService {
 	/**
 	 * @param string $serviceName
 	 * @return \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface
-	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidServiceException
 	 */
 	private function getInlineEditService($serviceName) {
 		$gridInlineEdit = $this->container->get($serviceName, Container::NULL_ON_INVALID_REFERENCE);

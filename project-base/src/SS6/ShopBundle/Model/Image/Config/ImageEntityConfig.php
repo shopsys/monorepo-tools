@@ -80,7 +80,6 @@ class ImageEntityConfig {
 	/**
 	 * @param string $type
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[]
-	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException
 	 */
 	public function getTypeSizes($type) {
 		if (array_key_exists($type, $this->sizesByType)) {
@@ -129,7 +128,6 @@ class ImageEntityConfig {
 	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[] $sizes
 	 * @param string $sizeName
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig
-	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\ImageSizeNotFoundException
 	 */
 	private function getSizeFromSizes($sizes, $sizeName) {
 		$key = Condition::ifNull($sizeName, self::WITHOUT_NAME_KEY);

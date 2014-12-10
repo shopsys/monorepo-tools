@@ -30,7 +30,6 @@ class SliderItemRepository {
 	/**
 	 * @param int $sliderItemId
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
-	 * @throws \SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException
 	 */
 	public function getById($sliderItemId) {
 		$criteria = array('id' => $sliderItemId);

@@ -82,7 +82,6 @@ class CurrencyFacade {
 
 	/**
 	 * @param int $currencyId
-	 * @throws SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException
 	 */
 	public function deleteById($currencyId) {
 		$currency = $this->currencyRepository->getById($currencyId);

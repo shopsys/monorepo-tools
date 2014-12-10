@@ -58,7 +58,6 @@ class MailTemplateRepository {
 	 * @param string $templateName
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
-	 * @throws \SS6\ShopBundle\Model\Mail\Exception\MailTemplateNotFoundException
 	 */
 	public function getByNameAndDomainId($templateName, $domainId) {
 		$mailTemplate = $this->findByNameAndDomainId($templateName, $domainId);

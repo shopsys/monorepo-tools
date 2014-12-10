@@ -55,7 +55,6 @@ class ProductService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param string $newVatPercent
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	public function recalculateInputPriceForNewVatPercent(Product $product, $newVatPercent) {
 		$productPrice = $this->productPriceCalculation->calculatePrice($product);

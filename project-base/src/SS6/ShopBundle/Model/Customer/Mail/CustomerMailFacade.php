@@ -42,7 +42,6 @@ class CustomerMailFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @throws \SS6\ShopBundle\Model\Customer\Mail\Exception\SendMailFailedException
 	 */
 	public function sendRegistrationMail(User $user) {
 		$mailTemplate = $this->mailTemplateFacade->get(MailTemplate::REGISTRATION_CONFIRM_NAME, $user->getDomainId());

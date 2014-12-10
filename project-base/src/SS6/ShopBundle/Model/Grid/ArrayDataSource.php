@@ -54,8 +54,6 @@ class ArrayDataSource implements DataSourceInterface {
 	 * @param null $orderQueryId
 	 * @param string $orderDirection
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
-	 * @throws \SS6\ShopBundle\Model\Grid\Exception\PaginationNotSupportedException
-	 * @throws \SS6\ShopBundle\Model\Grid\Exception\OrderingNotSupportedException
 	 */
 	public function getPaginatedRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
 		if ($limit !== null) {

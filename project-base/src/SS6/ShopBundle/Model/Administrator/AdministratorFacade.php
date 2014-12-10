@@ -43,7 +43,6 @@ class AdministratorFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException
 	 */
 	public function create(AdministratorData $administratorData) {
 		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->getUsername());

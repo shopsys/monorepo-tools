@@ -39,7 +39,6 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	/**
 	 * @param string $email
 	 * @return \SS6\ShopBundle\Model\Customer\User
-	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($email) {
 		$user = $this->findOneBy(array(
@@ -60,8 +59,6 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	/**
 	 * @param UserInterface $user
 	 * @return \SS6\ShopBundle\Model\Customer\User
-	 * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
-	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
 	 */
 	public function refreshUser(UserInterface $user) {
 		$class = get_class($user);

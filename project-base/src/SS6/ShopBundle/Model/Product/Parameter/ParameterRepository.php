@@ -53,7 +53,6 @@ class ParameterRepository {
 	/**
 	 * @param int $parameterId
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
-	 * @throws \SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException
 	 */
 	public function getById($parameterId) {
 		$parameter = $this->findById($parameterId);

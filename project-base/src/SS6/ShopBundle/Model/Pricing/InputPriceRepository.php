@@ -81,7 +81,6 @@ class InputPriceRepository {
 
 	/**
 	 * @param string $newInputPriceType
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	private function recalculateInputPriceForNewType($newInputPriceType) {
 		$this->recalculateProductsInputPriceForNewType($newInputPriceType);
@@ -91,7 +90,6 @@ class InputPriceRepository {
 
 	/**
 	 * @param string $toInputPriceType
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	private function recalculateProductsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
@@ -119,7 +117,6 @@ class InputPriceRepository {
 
 	/**
 	 * @param string $toInputPriceType
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	private function recalculateTransportsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
@@ -145,7 +142,6 @@ class InputPriceRepository {
 
 	/**
 	 * @param string $toInputPriceType
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	private function recalculatePaymentsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()

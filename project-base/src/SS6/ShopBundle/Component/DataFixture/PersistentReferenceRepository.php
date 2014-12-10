@@ -37,7 +37,6 @@ class PersistentReferenceRepository {
 	/**
 	 * @param string $referenceName
 	 * @return \SS6\ShopBundle\Component\DataFixture\PersistentReference
-	 * @throws \SS6\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException
 	 */
 	public function getByReferenceName($referenceName) {
 		$reference = $this->findByReferenceName($referenceName);

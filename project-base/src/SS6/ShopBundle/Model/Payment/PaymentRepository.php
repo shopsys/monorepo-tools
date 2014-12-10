@@ -71,7 +71,6 @@ class PaymentRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
-	 * @throws PaymentNotFoundException
 	 */
 	public function getById($id) {
 		$payment = $this->findById($id);
@@ -84,7 +83,6 @@ class PaymentRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
-	 * @throws PaymentNotFoundException
 	 */
 	public function getByIdWithTransports($id) {
 		$criteria = array('id' => $id);

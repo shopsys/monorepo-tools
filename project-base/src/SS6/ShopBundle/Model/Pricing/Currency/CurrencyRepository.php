@@ -37,7 +37,6 @@ class CurrencyRepository {
 	/**
 	 * @param int $currencyId
 	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
-	 * @throws \SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException
 	 */
 	public function getById($currencyId) {
 		$currency = $this->findById($currencyId);

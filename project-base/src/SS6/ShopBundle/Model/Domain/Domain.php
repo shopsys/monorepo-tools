@@ -61,7 +61,6 @@ class Domain {
 	/**
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Domain\DomainConfig
-	 * @throws \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException
 	 */
 	public function getDomainConfigById($domainId) {
 		foreach ($this->domainConfigs as $domainConfig) {

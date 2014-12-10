@@ -126,7 +126,6 @@ class SettingValue {
 	/**
 	 * @param string|int|float|bool|null $value
 	 * @return string
-	 * @throws \SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException
 	 */
 	private function getValueType($value) {
 		if (is_int($value)) {

@@ -43,8 +43,6 @@ class AdministratorService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
 	 * @param int $adminCount
-	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException
-	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException
 	 */
 	public function delete(Administrator $administrator, $adminCount) {
 		if ($adminCount === 1) {
@@ -60,7 +58,6 @@ class AdministratorService {
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator|null $administratorByUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException
 	 */
 	public function edit(
 		AdministratorData $administratorData,

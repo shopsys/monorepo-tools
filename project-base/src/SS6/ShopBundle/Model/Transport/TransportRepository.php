@@ -95,7 +95,6 @@ class TransportRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
-	 * @throws TransportNotFoundException
 	 */
 	public function getById($id) {
 		$transport = $this->findById($id);

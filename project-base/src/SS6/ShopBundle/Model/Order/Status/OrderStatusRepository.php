@@ -37,7 +37,6 @@ class OrderStatusRepository {
 	/**
 	 * @param int $orderStatusId
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
-	 * @throws \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException
 	 */
 	public function getById($orderStatusId) {
 		$orderStatus = $this->findById($orderStatusId);

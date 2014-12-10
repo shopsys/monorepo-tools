@@ -44,7 +44,6 @@ class ArticleRepository {
 	/**
 	 * @param int $articleId
 	 * @return \SS6\ShopBundle\Model\Article\Article
-	 * @throws ArticleNotFoundException
 	 */
 	public function getById($articleId) {
 		$criteria = array('id' => $articleId);

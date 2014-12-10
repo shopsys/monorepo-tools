@@ -27,7 +27,6 @@ class CartService {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $quantity
 	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
-	 * @throws \SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException
 	 */
 	public function addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
 		if (!is_int($quantity) || $quantity <= 0) {

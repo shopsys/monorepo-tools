@@ -25,7 +25,6 @@ class Bag {
 	/**
 	 * @param string $bagName
 	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
-	 * @throws \SS6\ShopBundle\Model\Message\Exception\BagNameIsNotValidException
 	 */
 	public function __construct($bagName, Session $session) {
 		if (!is_string($bagName) || empty($bagName)) {

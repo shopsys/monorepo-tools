@@ -43,7 +43,6 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $rowId
 	 * @return int
-	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $rowId) {
 		$form = $this->getForm($rowId);

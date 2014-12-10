@@ -66,7 +66,6 @@ class BasePriceCalculation {
 
 	/**
 	 * @return string
-	 * @throws \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException
 	 */
 	private function getBasePriceWithVat() {
 		switch ($this->inputPriceType) {

@@ -10,7 +10,6 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	/**
 	 * @param array $values
 	 * @param \Symfony\Component\Validator\Constraint $constraint
-	 * @throws \Symfony\Component\Validator\Exception\UnexpectedTypeException
 	 */
 	public function validate($values, Constraint $constraint) {
 		if (!$constraint instanceof UniqueCollection) {
@@ -38,7 +37,6 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	 * @param mixed $value1
 	 * @param mixed $value2
 	 * @return boolean
-	 * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
 	 */
 	private function areValuesEqualInFields(array $fields, $value1, $value2) {
 		foreach ($fields as $field) {

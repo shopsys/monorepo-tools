@@ -45,7 +45,6 @@ class DepartmentRepository {
 	/**
 	 * @param int $departmentId
 	 * @return \SS6\ShopBundle\Model\Department\Department
-	 * @throws \SS6\ShopBundle\Model\Department\Exception\DepartmentNotFoundException
 	 */
 	public function getById($departmentId) {
 		$department = $this->findById($departmentId);

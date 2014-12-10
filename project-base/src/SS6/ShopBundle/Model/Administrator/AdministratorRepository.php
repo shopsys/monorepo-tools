@@ -37,7 +37,6 @@ class AdministratorRepository {
 	/**
 	 * @param int $administratorId
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException
 	 */
 	public function getById($administratorId) {
 		$criteria = array('id' => $administratorId);

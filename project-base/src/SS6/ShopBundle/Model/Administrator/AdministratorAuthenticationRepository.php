@@ -14,7 +14,6 @@ class AdministratorAuthenticationRepository extends EntityRepository implements 
 	/**
 	 * @param string $username The username
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException if the user is not found
 	 */
 	public function loadUserByUsername($username) {
 		$administrator = $this->findOneBy(array('username' => $username));
@@ -32,7 +31,6 @@ class AdministratorAuthenticationRepository extends EntityRepository implements 
 	/**
 	 * @param \Symfony\Component\Security\Core\User\UserInterface $administrator
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
-	 * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException
 	 */
 	public function refreshUser(UserInterface $administrator) {
 		$class = get_class($administrator);

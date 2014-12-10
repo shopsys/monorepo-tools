@@ -83,7 +83,6 @@ class ImageConfigLoader {
 
 	/**
 	 * @param array $entityConfig
-	 * @throws \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException
 	 */
 	private function processEntityConfig($entityConfig) {
 		$entityClass = $entityConfig[ImageConfigDefinition::CONFIG_CLASS];

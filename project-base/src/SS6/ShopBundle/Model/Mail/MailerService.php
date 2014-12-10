@@ -21,7 +21,6 @@ class MailerService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MessageData $messageData
-	 * @throws \SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException
 	 */
 	public function send(MessageData $messageData) {
 		$message = $this->getMessageWithReplacedVariables($messageData);

@@ -34,7 +34,6 @@ class PersistentReferenceService {
 	/**
 	 * @param string $name
 	 * @return object
-	 * @throws SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException
 	 */
 	public function getReference($name) {
 		$persistentReference = $this->persistentReferenceRepository->getByReferenceName($name);
@@ -50,7 +49,6 @@ class PersistentReferenceService {
 	/**
 	 * @param string $name
 	 * @param object $object
-	 * @throws \SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException
 	 */
 	public function persistReference($name, $object) {
 		$entityName = get_class($object);

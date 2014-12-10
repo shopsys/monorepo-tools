@@ -16,7 +16,6 @@ interface GridInlineEditInterface {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param mixed $rowId
 	 * @return mixed
-	 * @throws \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException
 	 */
 	public function saveForm(Request $request, $rowId);
 

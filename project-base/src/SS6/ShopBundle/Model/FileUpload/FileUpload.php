@@ -55,7 +55,6 @@ class FileUpload {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-	 * @throws \SS6\ShopBundle\Model\FileUpload\Exception\UploadFailedException
 	 */
 	public function upload(UploadedFile $file) {
 		if ($file->getError()) {
@@ -164,7 +163,6 @@ class FileUpload {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\EntityFileUploadInterface $entity
-	 * @throws \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException
 	 */
 	public function postFlushEntity(EntityFileUploadInterface $entity) {
 		$filesForUpload = $entity->getTemporaryFilesForUpload();

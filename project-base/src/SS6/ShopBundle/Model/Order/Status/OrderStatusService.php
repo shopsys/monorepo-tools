@@ -10,7 +10,6 @@ class OrderStatusService {
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
 	 * @param \SS6\ShopBundle\Model\Order\Order[] $ordersWithOldStatus
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus|null $newOrderStatus
-	 * @throws Exception\OrderStatusDeletionForbiddenException
 	 */
 	public function delete(OrderStatus $oldOrderStatus, array $ordersWithOldStatus, OrderStatus $newOrderStatus = null) {
 		if ($oldOrderStatus->getType() !== OrderStatus::TYPE_IN_PROGRESS) {

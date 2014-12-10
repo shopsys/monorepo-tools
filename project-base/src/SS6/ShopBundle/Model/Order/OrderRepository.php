@@ -66,7 +66,6 @@ class OrderRepository {
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Order\Order
-	 * @throws \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException
 	 */
 	public function getById($id) {
 		$order = $this->findById($id);
@@ -152,7 +151,6 @@ class OrderRepository {
 	/**
 	 * @param string $urlHash
 	 * @return \SS6\ShopBundle\Model\Order\Order
-	 * @throws \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException
 	 */
 	public function getByUrlHash($urlHash) {
 		$order = $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
@@ -167,7 +165,6 @@ class OrderRepository {
 	/**
 	 * @param string $orderNumber
 	 * @return \SS6\ShopBundle\Model\Order\Order
-	 * @throws \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException
 	 */
 	public function getByOrderNumber($orderNumber) {
 		$order = $this->getOrderRepository()->findOneBy(['number' => $orderNumber]);

@@ -37,7 +37,6 @@ class AvailabilityRepository {
 	/**
 	 * @param int $availabilityId
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
-	 * @throws \SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException
 	 */
 	public function getById($availabilityId) {
 		$availability = $this->findById($availabilityId);

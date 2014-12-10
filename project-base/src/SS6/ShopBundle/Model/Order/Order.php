@@ -532,7 +532,6 @@ class Order {
 	 *
 	 * @param int $orderItemId
 	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem
-	 * @throws \SS6\ShopBundle\Model\Order\Item\Exception\OrdetItemNotFoundException
 	 */
 	public function getItemById($orderItemId) {
 		foreach ($this->getItems() as $orderItem) {

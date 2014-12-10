@@ -29,7 +29,6 @@ class OrderNumberSequenceRepository {
 
 	/**
 	 * @return string
-	 * @throws \SS6\ShopBundle\Model\Order\Exception\OrderNumberSequenceNotFoundException
 	 */
 	public function getNextNumber() {
 		try {
