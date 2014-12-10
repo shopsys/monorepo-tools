@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Pricing\Group;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
-use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -115,13 +114,6 @@ class PricingGroupFacade {
 		$this->em->remove($oldPricingGroup);
 		$this->em->flush();
 		$this->em->commit();
-	}
-
-	/**
-	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
-	 */
-	public function getAll() {
-		return $this->pricingGroupRepository->getAll();
 	}
 
 	/**
