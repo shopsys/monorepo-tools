@@ -2,7 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Group;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class PricingGroupRepository {
 
@@ -69,6 +72,19 @@ class PricingGroupRepository {
 			->setParameters(['domainId' => $domainId, 'id' => $id]);
 
 		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return bool
+	 */
+	public function existsUserWithPricingGroup(PricingGroup $pricingGroup) {
+		$query = $this->em->createQuery('
+			SELECT COUNT(u)
+			FROM ' . User::class . ' u
+			WHERE u.pricingGroup = :pricingGroup')
+			->setParameter('pricingGroup', $pricingGroup);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 }

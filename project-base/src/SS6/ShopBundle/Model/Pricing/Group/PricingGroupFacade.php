@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Group;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\User;
@@ -137,7 +136,7 @@ class PricingGroupFacade {
 	 * @return bool
 	 */
 	public function isPricingGroupUsed(PricingGroup $pricingGroup) {
-		return $this->existsUserWithPricingGroup($pricingGroup);
+		return $this->pricingGroupRepository->existsUserWithPricingGroup($pricingGroup);
 	}
 
 	/**
@@ -147,19 +146,6 @@ class PricingGroupFacade {
 	 */
 	public function getAllExceptIdByDomainId($id, $domainId) {
 		return $this->pricingGroupRepository->getAllExceptIdByDomainId($id, $domainId);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return bool
-	 */
-	private function existsUserWithPricingGroup(PricingGroup $pricingGroup) {
-		$query = $this->em->createQuery('
-			SELECT COUNT(u)
-			FROM ' . User::class . ' u
-			WHERE u.pricingGroup = :pricingGroup')
-			->setParameter('pricingGroup', $pricingGroup);
-		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 	/**
