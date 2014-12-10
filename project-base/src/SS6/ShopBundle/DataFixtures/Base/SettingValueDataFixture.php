@@ -28,6 +28,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $pricingGroup2 \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
 		$defaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
+		$domain2DefaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
+		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
 
 		// @codingStandardsIgnoreStart
 		$manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
@@ -41,6 +43,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup1->getId(), 1));
 		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2));
 		$manager->persist(new SettingValue(PricingSetting::DEFAULT_CURRENCY, $defaultCurrency->getId(), SettingValue::DOMAIN_ID_COMMON));
+		$manager->persist(new SettingValue(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $defaultCurrency->getId(), 1));
+		$manager->persist(new SettingValue(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $domain2DefaultCurrency->getId(), 2));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
