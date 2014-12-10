@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Order\Item\Exception;
 
 use Exception;
 
-class WrongQuantifiedItemException extends Exception implements OrderItemException {
+class InvalidQuantifiedItemException extends Exception implements OrderItemException {
 
 	/**
 	 * @param string $message

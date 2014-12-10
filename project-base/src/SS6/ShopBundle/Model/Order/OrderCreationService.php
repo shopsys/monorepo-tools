@@ -163,7 +163,7 @@ class OrderCreationService {
 				);
 			} else {
 				$message = 'Object "' . get_class($item) . '" is not valid for OrderItem.';
-				throw new \SS6\ShopBundle\Model\Order\Item\Exception\WrongQuantifiedItemException($message);
+				throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidQuantifiedItemException($message);
 			}
 
 			$order->addItem($orderItem);
