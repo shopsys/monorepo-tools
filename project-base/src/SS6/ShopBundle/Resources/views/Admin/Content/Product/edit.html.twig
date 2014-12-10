@@ -56,10 +56,10 @@
 			{{ 'Obrázek'|trans }}:
 		</label>
 		<ul class="list-image">
-			{% for imageUrl in imagesUrl(product, 'original') %}
+			{% for image in productDetail.images %}
 				<li class="list-image__item">
 					<div class="list-image__item__in">
-						<img src="{{ imageUrl }}" alt="" height="100" />
+						<img src="{{ imageUrlByImage(image, 'original') }}" alt="" height="100" />
 					</div>
 				</li>
 			{% endfor %}
