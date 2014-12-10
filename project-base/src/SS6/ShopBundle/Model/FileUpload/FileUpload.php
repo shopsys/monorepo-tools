@@ -115,13 +115,13 @@ class FileUpload {
 	 */
 	public function getUploadDirectory($isImage, $category, $type) {
 		if ($isImage) {
-			return $this->imageDir .
-				DIRECTORY_SEPARATOR . $category .
-				($type !== null ? DIRECTORY_SEPARATOR . $type : '');
+			return $this->imageDir
+				. DIRECTORY_SEPARATOR . $category
+				. ($type !== null ? DIRECTORY_SEPARATOR . $type : '');
 		} else {
-			return $this->fileDir .
-				DIRECTORY_SEPARATOR . $category .
-				($type !== null ? DIRECTORY_SEPARATOR . $type : '');
+			return $this->fileDir
+				. DIRECTORY_SEPARATOR . $category
+				. ($type !== null ? DIRECTORY_SEPARATOR . $type : '');
 		}
 
 	}

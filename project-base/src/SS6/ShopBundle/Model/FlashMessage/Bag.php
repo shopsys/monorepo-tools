@@ -87,9 +87,9 @@ class Bag {
 	public function isEmpty() {
 		$flashBag = $this->session->getFlashBag();
 
-		return !$flashBag->has($this->getFullbagName(self::KEY_ERROR)) &&
-			!$flashBag->has($this->getFullbagName(self::KEY_INFO)) &&
-			!$flashBag->has($this->getFullbagName(self::KEY_SUCCESS));
+		return !$flashBag->has($this->getFullbagName(self::KEY_ERROR))
+			&& !$flashBag->has($this->getFullbagName(self::KEY_INFO))
+			&& !$flashBag->has($this->getFullbagName(self::KEY_SUCCESS));
 	}
 
 	/**

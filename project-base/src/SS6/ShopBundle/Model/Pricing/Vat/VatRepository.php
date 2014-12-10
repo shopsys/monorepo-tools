@@ -72,9 +72,9 @@ class VatRepository {
 	}
 
 	public function isVatUsed(Vat $vat) {
-		return $this->existsPaymentWithVat($vat) ||
-			$this->existsTransportWithVat($vat) ||
-			$this->existsProductWithVat($vat);
+		return $this->existsPaymentWithVat($vat)
+			|| $this->existsTransportWithVat($vat)
+			|| $this->existsProductWithVat($vat);
 	}
 
 	/**
