@@ -65,10 +65,20 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
+	 * @param int $currencyId
 	 * @return \SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType
 	 */
-	protected function getFormType() {
-		return new CurrencyFormType();
+	protected function getFormType($currencyId) {
+		if ($currencyId !== null) {
+			$currency = $this->currencyFacade->getById($currencyId);
+			if ($this->currencyFacade->isDefaultCurrency($currency)) {
+				return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
+			} else {
+				return new CurrencyFormType(!CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
+			}
+		} else {
+			return new CurrencyFormType(!CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
+		}
 	}
 
 	/**

@@ -34,7 +34,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	 */
 	public function getForm($rowId) {
 		return $this->formFactory->create(
-			$this->getFormType(),
+			$this->getFormType($rowId),
 			$this->getFormDataObject($rowId)
 		);
 	}
@@ -90,9 +90,10 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	abstract public function getServiceName();
 
 	/**
+	 * @param int $rowId
 	 * @return \Symfony\Component\Form\AbstractType
 	 */
-	abstract protected function getFormType();
+	abstract protected function getFormType($rowId);
 
 	/**
 	 * @param mixed $rowId

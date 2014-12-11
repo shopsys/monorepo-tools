@@ -9,6 +9,20 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CurrencyFormType extends AbstractType {
 
+	const EXCHANGE_RATE_IS_READ_ONLY = true;
+
+	/**
+	 * @var boolean
+	 */
+	private $isRateReadOnly;
+
+	/**
+	 * @param bool $isRateReadOnly
+	 */
+	public function __construct($isRateReadOnly) {
+		$this->isRateReadOnly = $isRateReadOnly;
+	}
+
 	/**
 	 * @return string
 	 */
@@ -33,6 +47,7 @@ class CurrencyFormType extends AbstractType {
 			))
 			->add('exchangeRate', 'number', array(
 				'required' => true,
+				'read_only' => $this->isRateReadOnly
 			));
 	}
 

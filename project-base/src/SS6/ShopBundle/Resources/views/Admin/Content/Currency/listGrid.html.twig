@@ -16,6 +16,18 @@
 	{% endif %}
 {% endblock %}
 
+{% block grid_value_cell_id_exchangeRate %}
+	{% if defaultCurrency is defined %}
+		{% if row.c.id == defaultCurrency.id %}
+			{{ '-' }}
+		{% else %}
+			{{ value }}
+		{% endif %}
+	{% else %}
+		{{ value }}
+	{% endif %}
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit.'|trans }}
 {% endblock %}
