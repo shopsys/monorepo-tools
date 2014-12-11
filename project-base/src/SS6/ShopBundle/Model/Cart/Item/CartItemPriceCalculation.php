@@ -44,7 +44,7 @@ class CartItemPriceCalculation {
 	 */
 	public function calculatePrice(CartItem $cartItem) {
 		$this->cartItem = $cartItem;
-		$this->productPrice = $this->productPriceCalculationForUser->calculatePriceByCurrentUser($cartItem->getProduct());
+		$this->productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($cartItem->getProduct());
 
 		$cartItemPrice = new CartItemPrice(
 			$this->productPrice->getPriceWithoutVat(),

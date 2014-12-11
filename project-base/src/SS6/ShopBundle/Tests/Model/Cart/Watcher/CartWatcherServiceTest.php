@@ -25,7 +25,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 
 		$productPriceCalculationForUser = $this->getContainer()->get('ss6.shop.product.pricing.product_price_calculation_for_user');
 		/* @var $productPriceCalculationForUser \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
-		$productPrice = $productPriceCalculationForUser->calculatePriceByCurrentUser($productMock);
+		$productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($productMock);
 		$cartItem = new CartItem($customerIdentifier, $productMock, 1, $productPrice->getPriceWithVat());
 		$cartItems = array($cartItem);
 		$cart = new Cart($cartItems);

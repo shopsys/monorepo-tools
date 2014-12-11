@@ -40,7 +40,7 @@ class ProductPriceCalculationForUser {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePriceByCurrentUser(Product $product) {
+	public function calculatePriceForCurrentUser(Product $product) {
 		return $this->productPriceCalculation->calculatePrice(
 			$product,
 			$this->currentCustomer->getPricingGroup()
@@ -53,7 +53,7 @@ class ProductPriceCalculationForUser {
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePriceByUserAndDomainId(Product $product, $domainId, User $user = null) {
+	public function calculatePriceForUserAndDomainId(Product $product, $domainId, User $user = null) {
 		if ($user === null) {
 			$pricingGroup = $this->pricingGroupFacade->getDefaultPricingGroupByDomainId($domainId);
 		} else {

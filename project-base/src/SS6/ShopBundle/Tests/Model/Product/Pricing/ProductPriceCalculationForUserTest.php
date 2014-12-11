@@ -38,7 +38,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 			$pricingGroupFacadeMock
 		);
 
-		$productPrice = $productPriceCalculationForUser->calculatePriceByUserAndDomainId($product, 1, $user);
+		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, 1, $user);
 		$this->assertEquals($expectedProductPrice, $productPrice);
 	}
 
@@ -66,7 +66,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 			$pricingGroupFacadeMock
 		);
 
-		$productPrice = $productPriceCalculationForUser->calculatePriceByUserAndDomainId($product, $domainId, null);
+		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, $domainId, null);
 		$this->assertEquals($expectedProductPrice, $productPrice);
 	}
 }

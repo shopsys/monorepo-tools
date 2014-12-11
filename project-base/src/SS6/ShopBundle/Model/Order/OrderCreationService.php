@@ -146,7 +146,7 @@ class OrderCreationService {
 		foreach ($quantifiedItems as $quantifiedItem) {
 			$item = $quantifiedItem->getItem();
 			if ($item instanceof Product) {
-				$productPrice = $this->productPriceCalculationForUser->calculatePriceByUserAndDomainId(
+				$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
 					$item,
 					$order->getDomainId(),
 					$order->getCustomer()

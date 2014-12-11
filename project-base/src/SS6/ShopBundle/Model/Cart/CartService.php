@@ -40,7 +40,7 @@ class CartService {
 			}
 		}
 
-		$productPrice = $this->productPriceCalculation->calculatePriceByCurrentUser($product);
+		$productPrice = $this->productPriceCalculation->calculatePriceForCurrentUser($product);
 		$newCartItem = new CartItem($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
 		$cart->addItem($newCartItem);
 		return new AddProductResult($newCartItem, true, $quantity);
