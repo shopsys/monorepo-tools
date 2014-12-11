@@ -80,6 +80,7 @@ class DepartmentFacade {
 	 */
 	public function deleteById($departmentId) {
 		$department = $this->departmentRepository->getById($departmentId);
+		$this->departmentService->setChildrensAsSiblings($department);
 
 		$this->em->remove($department);
 		$this->em->flush();

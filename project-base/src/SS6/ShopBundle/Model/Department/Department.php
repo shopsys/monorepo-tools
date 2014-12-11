@@ -36,7 +36,7 @@ class Department extends AbstractTranslatableEntity {
 	 *
 	 * @Gedmo\TreeParent
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Department\Department", inversedBy="childrens")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
 	 */
 	private $parent;
 
@@ -84,7 +84,7 @@ class Department extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
 	 */
 	public function __construct(DepartmentData $departmentData) {
-		$this->parent = $departmentData->getParent();
+		$this->setparent($departmentData->getParent());
 		$this->translations = new ArrayCollection();
 		$this->setTranslations($departmentData);
 	}
@@ -93,8 +93,15 @@ class Department extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
 	 */
 	public function edit(DepartmentData $departmentData) {
-		$this->parent = $departmentData->getParent();
+		$this->setParent($departmentData->getParent());
 		$this->setTranslations($departmentData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department|null $parent
+	 */
+	public function setParent(Department $parent = null) {
+		$this->parent = $parent;
 	}
 
 	/**

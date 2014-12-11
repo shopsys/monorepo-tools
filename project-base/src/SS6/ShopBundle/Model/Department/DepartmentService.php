@@ -26,4 +26,13 @@ class DepartmentService {
 		return $department;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department $department
+	 */
+	public function setChildrensAsSiblings(Department $department) {
+		foreach ($department->getChildrens() as $children) {
+			$children->setParent($department->getParent());
+		}
+	}
+
 }
