@@ -108,9 +108,14 @@ class GridView {
 	/**
 	 * @param \SS6\ShopBundle\Model\Grid\Column $column
 	 * @param array $row
+	 * @param bool $emptyRow
 	 */
-	public function renderCell(Column $column, array $row) {
-		$value = $this->getCellValue($column, $row);
+	public function renderCell(Column $column, array $row, $emptyRow = false) {
+		if ($emptyRow === true) {
+			$value = null;
+		} else {
+			$value = $this->getCellValue($column, $row);
+		}
 
 		$posibleBlocks = array(
 			'grid_value_cell_id_' . $column->getId(),

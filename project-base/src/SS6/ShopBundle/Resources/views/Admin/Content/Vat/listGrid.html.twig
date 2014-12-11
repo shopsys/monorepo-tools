@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_value_cell_id_percent %}
-	{{ value }}%
+	<span class="js-inline-edit-cell-value">{{ value }}</span>%
 {% endblock %}
 
 {% block grid_value_cell_id_coefficient %}

@@ -153,8 +153,13 @@
 
 		$.each(formData, function(formName, formHtml) {
 			var $column = $formRow.find('.js-grid-column-' + formName + ':first');
-			if ($column.size() == 1) {
-				$column.html(formHtml);
+			if ($column.size() === 1) {
+				var $cellValue = $column.find('.js-inline-edit-cell-value');
+				if ($cellValue.size() === 1) {
+					$cellValue.html(formHtml);
+				} else {
+					$column.html(formHtml);
+				}
 			} else {
 				$otherInputs.append(formHtml);
 			}
