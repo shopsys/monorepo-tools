@@ -57,6 +57,7 @@ class CurrencyGridFactory implements GridFactoryInterface {
 		$grid->addColumn('name', 'c.name', 'Název', true);
 		$grid->addColumn('code', 'c.code', 'Kód', true);
 		$grid->addColumn('symbol', 'c.symbol', 'Symbol', true);
+		$grid->addColumn('exchangeRate', 'c.exchangeRate', 'Kurz', true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_currency_deleteconfirm', array('id' => 'c.id'))
 			->setAjaxConfirm();

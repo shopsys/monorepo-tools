@@ -30,6 +30,9 @@ class CurrencyFormType extends AbstractType {
 			))
 			->add('symbol', 'text', array(
 				'required' => true,
+			))
+			->add('exchangeRate', 'number', array(
+				'required' => true,
 			));
 	}
 
