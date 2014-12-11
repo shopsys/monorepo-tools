@@ -76,7 +76,7 @@ class DepartmentInlineEdit extends AbstractGridInlineEdit {
 	 * @return \SS6\ShopBundle\Form\Admin\Department\DepartmentFormType
 	 */
 	protected function getFormType() {
-		return new DepartmentFormType();
+		return new DepartmentFormType($this->departmentFacade->getAll());
 	}
 
 }

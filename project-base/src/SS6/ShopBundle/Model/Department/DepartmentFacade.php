@@ -93,4 +93,8 @@ class DepartmentFacade {
 		return $this->departmentRepository->getAllInRootWithTranslation($locale);
 	}
 
+	public function getAll() {
+		return $this->departmentRepository->getAll();
+	}
+
 }

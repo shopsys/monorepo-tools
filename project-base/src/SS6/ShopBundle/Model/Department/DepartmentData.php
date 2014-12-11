@@ -66,6 +66,7 @@ class DepartmentData {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
 		$this->setNames($names);
+		$this->setParent($department->getParent());
 	}
 
 }
