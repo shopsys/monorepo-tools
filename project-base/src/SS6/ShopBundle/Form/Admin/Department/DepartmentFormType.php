@@ -45,7 +45,8 @@ class DepartmentFormType extends AbstractType {
 			->add('parent', 'choice', array(
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->departments, 'name', array(), null, 'id'),
-			));
+			))
+			->add('save', 'submit');
 	}
 
 	/**

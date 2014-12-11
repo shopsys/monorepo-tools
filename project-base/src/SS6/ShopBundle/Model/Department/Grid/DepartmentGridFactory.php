@@ -67,6 +67,12 @@ class DepartmentGridFactory implements GridFactoryInterface {
 		$grid->addColumn('parent', 'dt_parent.name', $this->translator->trans('Nadřazená kategorie'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
+				ActionColumn::TYPE_EDIT,
+				$this->translator->trans('Upravit'),
+				'admin_department_edit',
+				array('id' => 'd.id')
+			);
+		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_department_delete',

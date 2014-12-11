@@ -1,0 +1,26 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Kategorie'|trans }}{% endblock %}
+{% block h1 %}{{ 'Kategorie'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="wrap-group">
+					{{ form_id(department|default(null)) }}
+					{% block department_url %}{% endblock %}
+					{{ form_row(form.names, { label: 'Název' }) }}
+					{{ form_row(form.parent, { label: 'Nadřazená kategorie'}) }}
+				</div>
+
+				{{ form_save(department|default(null), form) }}
+				<a href="{{ url('admin_department_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}
