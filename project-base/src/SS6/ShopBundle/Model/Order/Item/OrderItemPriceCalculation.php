@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Order\Item;
 
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
@@ -13,13 +13,13 @@ class OrderItemPriceCalculation {
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
 	 */
-	private $genericPriceCalculation;
+	private $priceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $genericPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
 	 */
-	public function __construct(GenericPriceCalculation $genericPriceCalculation) {
-		$this->genericPriceCalculation = $genericPriceCalculation;
+	public function __construct(PriceCalculation $priceCalculation) {
+		$this->priceCalculation = $priceCalculation;
 	}
 
 	/**
@@ -28,7 +28,7 @@ class OrderItemPriceCalculation {
 	 */
 	public function calculatePriceWithoutVat(OrderItemData $orderItemData) {
 		$vat = new Vat(new VatData('orderItemVat', $orderItemData->getVatPercent()));
-		$vatAmount = $this->genericPriceCalculation->getVatAmountByPriceWithVat($orderItemData->getPriceWithVat(), $vat);
+		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->getPriceWithVat(), $vat);
 		
 		return $orderItemData->getPriceWithVat() - $vatAmount;
 	}
@@ -41,7 +41,7 @@ class OrderItemPriceCalculation {
 		$vat = new Vat(new VatData('orderItemVat', $orderItem->getVatPercent()));
 
 		$totalPriceWithVat = $orderItem->getPriceWithVat() * $orderItem->getQuantity();
-		$totalVatAmount = $this->genericPriceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
+		$totalVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
 		$totalPriceWithoutVat = $totalPriceWithVat - $totalVatAmount;
 
 		return new Price(

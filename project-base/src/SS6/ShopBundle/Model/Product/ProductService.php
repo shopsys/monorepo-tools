@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductService {
@@ -57,7 +58,7 @@ class ProductService {
 	 * @param string $newVatPercent
 	 */
 	public function recalculateInputPriceForNewVatPercent(Product $product, $newVatPercent) {
-		$productPrice = $this->productPriceCalculation->calculatePrice($product);
+		$productPrice = $this->productPriceCalculation->calculateBasePrice($product);
 		$inputPriceType = $this->pricingSetting->getInputPriceType();
 
 		if ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
@@ -101,6 +102,23 @@ class ProductService {
 	public function changeVat(Product $product, Vat $vat) {
 		$product->changeVat($vat);
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+	 * @return \SS6\ShopBundle\Tests\Model\Product\Pricing\ProductSellingPrice[]
+	 */
+	public function getProductSellingPricesByPricingGroups(Product $product, array $pricingGroups) {
+		$productSellingPrices = array();
+		foreach ($pricingGroups as $pricingGroup) {
+			$productSellingPrices[] = new ProductSellingPrice(
+				$pricingGroup,
+				$this->productPriceCalculation->calculatePrice($product, $pricingGroup)
+			);
+		}
+
+		return $productSellingPrices;
 	}
 
 }

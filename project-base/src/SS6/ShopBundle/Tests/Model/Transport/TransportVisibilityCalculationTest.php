@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Transport\TransportDomain;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
-class VisibilityCalculationTest {
+class TransportVisibilityCalculationTest {
 
 	public function testIsVisibleHiddenTransport() {
 		$transportRepositoryMock = $this->getMock(TransportRepository::class, [], [], '', false);

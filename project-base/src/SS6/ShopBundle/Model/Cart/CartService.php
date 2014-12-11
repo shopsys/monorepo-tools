@@ -4,21 +4,21 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
 class CartService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
 	private $productPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $priceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
 	 */
-	public function __construct(ProductPriceCalculation $priceCalculation) {
-		$this->productPriceCalculation = $priceCalculation;
+	public function __construct(ProductPriceCalculationForUser $productPriceCalculation) {
+		$this->productPriceCalculation = $productPriceCalculation;
 	}
 
 	/**
@@ -40,7 +40,7 @@ class CartService {
 			}
 		}
 
-		$productPrice = $this->productPriceCalculation->calculatePrice($product);
+		$productPrice = $this->productPriceCalculation->calculatePriceForCurrentUser($product);
 		$newCartItem = new CartItem($customerIdentifier, $product, $quantity, $productPrice->getPriceWithVat());
 		$cart->addItem($newCartItem);
 		return new AddProductResult($newCartItem, true, $quantity);

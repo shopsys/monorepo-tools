@@ -59,6 +59,7 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 			'product' => $product,
 			'productDetail' => $productDetailFactory->getDetailForProduct($product),
+			'productSellingPrices' => $productEditFacade->getAllProductSellingPrices($product),
 			'domainService' => $domain,
 		));
 	}

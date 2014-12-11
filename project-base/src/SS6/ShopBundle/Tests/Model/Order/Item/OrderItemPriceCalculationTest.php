@@ -6,29 +6,29 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation as GenericPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 
 class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceWithoutVat() {
-		$genericPriceCalculationMock = $this->getMock(GenericPriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
-		$genericPriceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
+		$priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
+		$priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
 
 		$orderItemData = new OrderItemData();
 		$orderItemData->setPriceWithVat(1000);
 		$orderItemData->setVatPercent(10);
 
-		$orderItemPriceCalculation = new OrderItemPriceCalculation($genericPriceCalculationMock);
+		$orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock);
 		$priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
 		$this->assertEquals(round(1000 - 100, 6), round($priceWithoutVat, 6));
 	}
 
 	public function testCalculateTotalPrice() {
-		$genericPriceCalculationMock = $this->getMock(GenericPriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
-		$genericPriceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
+		$priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
+		$priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
 
-		$orderItemPriceCalculation = new OrderItemPriceCalculation($genericPriceCalculationMock);
+		$orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock);
 
 		$orderItem = $this->getMockForAbstractClass(
 			OrderItem::class, [], '', false, true, true,

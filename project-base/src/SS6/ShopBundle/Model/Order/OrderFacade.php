@@ -4,21 +4,16 @@ namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Order\Item\OrderPayment;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\OrderCreationService;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+
 use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 
 class OrderFacade {
@@ -49,6 +44,11 @@ class OrderFacade {
 	private $orderService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderCreationService
+	 */
+	private $orderCreationService;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
@@ -59,29 +59,9 @@ class OrderFacade {
 	private $orderStatusRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
-	 */
-	private $cartItemPriceCalculation;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
-	 */
-	private $paymentPriceCalculation;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
-	 */
-	private $transportPriceCalculation;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
 	 */
 	private $orderMailFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
-	 */
-	private $domain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository
@@ -94,13 +74,10 @@ class OrderFacade {
 		Cart $cart,
 		OrderRepository $orderRepository,
 		OrderService $orderService,
+		OrderCreationService $orderCreationService,
 		UserRepository $userRepository,
 		OrderStatusRepository $orderStatusRepository,
-		CartItemPriceCalculation $cartItemPriceCalculation,
-		PaymentPriceCalculation $paymentPriceCalculation,
-		TransportPriceCalculation $transportPriceCalculation,
 		OrderMailFacade $orderMailFacade,
-		Domain $domain,
 		OrderHashGeneratorRepository $orderHashGeneratorRepository
 	) {
 		$this->em = $em;
@@ -108,27 +85,25 @@ class OrderFacade {
 		$this->cart = $cart;
 		$this->orderRepository = $orderRepository;
 		$this->orderService = $orderService;
+		$this->orderCreationService = $orderCreationService;
 		$this->userRepository = $userRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
-		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
-		$this->paymentPriceCalculation = $paymentPriceCalculation;
-		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->orderMailFacade = $orderMailFacade;
-		$this->domain = $domain;
 		$this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
 	}
 
 	/**
-	 * @param $orderData \SS6\ShopBundle\Model\Order\OrderData
-	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function createOrder(OrderData $orderData, User $user = null) {
+	public function createOrder(OrderData $orderData, array $quantifiedItems, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
 
-		$order = $this->orderService->createOrder(
+		$order = new Order(
 			$orderData,
 			$orderNumber,
 			$orderStatus,
@@ -136,7 +111,12 @@ class OrderFacade {
 			$user
 		);
 
-		$this->fillOrderItems($order, $this->cart);
+		$this->orderCreationService->fillOrderItems($order, $quantifiedItems);
+
+		foreach ($order->getItems() as $orderItem) {
+			$this->em->persist($orderItem);
+		}
+
 		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
 		$this->em->flush();
@@ -145,56 +125,16 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param $orderData \SS6\ShopBundle\Model\Order\OrderData
+	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	private function fillOrderItems(Order $order, Cart $cart) {
-		$locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
-		$cartItems = $cart->getItems();
-		foreach ($cartItems as $cartItem) {
-			/* @var $cartItem \SS6\ShopBundle\Model\Cart\Item\CartItem */
-			$cartItemPrice = $this->cartItemPriceCalculation->calculatePrice($cartItem);
-
-			$orderItem = new OrderProduct(
-				$order,
-				$cartItem->getProduct()->getName(),
-				$cartItemPrice->getUnitPriceWithoutVat(),
-				$cartItemPrice->getUnitPriceWithVat(),
-				$cartItem->getProduct()->getVat()->getPercent(),
-				$cartItem->getQuantity(),
-				$cartItem->getProduct()
-			);
-			$order->addItem($orderItem);
-			$this->em->persist($orderItem);
-		}
-
-		$payment = $order->getPayment();
-		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
-		$orderPayment = new OrderPayment(
-			$order,
-			$payment->getName($locale),
-			$paymentPrice->getPriceWithoutVat(),
-			$paymentPrice->getPriceWithVat(),
-			$payment->getVat()->getPercent(),
-			1,
-			$payment
+	public function createOrderFromCart(OrderData $orderData, User $user = null) {
+		return $this->createOrder(
+			$orderData,
+			$this->cart->getQuantifiedItems(),
+			$user
 		);
-		$order->addItem($orderPayment);
-		$this->em->persist($orderPayment);
-
-		$transport = $order->getTransport();
-		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
-		$orderTransport = new OrderTransport(
-			$order,
-			$transport->getName($locale),
-			$transportPrice->getPriceWithoutVat(),
-			$transportPrice->getPriceWithVat(),
-			$transport->getVat()->getPercent(),
-			1,
-			$transport
-		);
-		$order->addItem($orderTransport);
-		$this->em->persist($orderTransport);
 	}
 
 	/**
@@ -239,7 +179,7 @@ class OrderFacade {
 	 */
 	public function prefillOrderData(OrderData $orderData, User $user) {
 		$order = $this->orderRepository->findLastByUserId($user->getId());
-		$this->orderService->prefillFrontFormData($orderData, $user, $order);
+		$this->orderCreationService->prefillFrontFormData($orderData, $user, $order);
 	}
 
 	/**

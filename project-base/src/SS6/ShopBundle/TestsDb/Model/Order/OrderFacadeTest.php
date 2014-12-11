@@ -61,7 +61,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->setNote('note');
 		$orderData->setDomainId(1);
 
-		$order = $orderFacade->createOrder($orderData);
+		$order = $orderFacade->createOrderFromCart($orderData);
 
 		$orderFromDb = $orderRepository->getById($order->getId());
 

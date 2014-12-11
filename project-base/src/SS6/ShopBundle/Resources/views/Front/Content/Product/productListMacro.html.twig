@@ -21,7 +21,7 @@
 								{{ 'Cena s DPH'|trans }}:
 							</dt>
 							<dd class="list-params-side__definition price-main price-big">
-								{{ productDetail.basePrice.priceWithVat|price }}
+								{{ productDetail.sellingPrice.priceWithVat|price }}
 							</dd>
 						</dl>
 						<dl class="list-params-side">
@@ -29,7 +29,7 @@
 								{{ 'Cena bez DPH'|trans }}:
 							</dt>
 							<dd class="list-params-side__definition">
-								{{ productDetail.basePrice.priceWithoutVat|price }}
+								{{ productDetail.sellingPrice.priceWithoutVat|price }}
 							</dd>
 						</dl>
 					</div>

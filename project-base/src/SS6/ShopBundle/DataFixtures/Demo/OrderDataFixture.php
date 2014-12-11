@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
@@ -476,22 +477,14 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	) {
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-		$cartFacade = $this->get('ss6.shop.cart.cart_facade');
-		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
-		$cart = $this->get('ss6.shop.cart');
-		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-		$cartService = $this->get('ss6.shop.cart.cart_service');
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
-		$customerIdentifier = $this->get('ss6.shop.customer.customer_identifier');
-		/* @var $customerIdentifier \SS6\ShopBundle\Model\Customer\CustomerIdentifier */
-		$cartFacade->cleanCart();
 
+		$quantifiedItems = array();
 		foreach ($products as $productReferenceName => $quantity) {
 			$product = $this->getReference($productReferenceName);
-			$cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
+			$quantifiedItems[] = new QuantifiedItem($product, $quantity);
 		}
 
-		$order = $orderFacade->createOrder($orderData, $user);
+		$order = $orderFacade->createOrder($orderData, $quantifiedItems, $user);
 		/* @var $order \SS6\ShopBundle\Model\Order\Order */
 		$order->setStatus($orderStatus);
 		$referenceName = self::ORDER_PREFIX . $order->getId();

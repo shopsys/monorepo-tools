@@ -98,7 +98,7 @@ class InputPriceRepository {
 			->getQuery();
 
 		$this->batchProcessQuery($query, function (Product $product) use ($toInputPriceType) {
-			$productPrice = $this->productPriceCalculation->calculatePrice($product);
+			$productPrice = $this->productPriceCalculation->calculateBasePrice($product);
 
 			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
 				$inputPrice = $this->inputPriceCalculation->getInputPriceWithoutVat(

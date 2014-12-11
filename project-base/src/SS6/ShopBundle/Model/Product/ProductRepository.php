@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
@@ -93,7 +94,8 @@ class ProductRepository {
 	 * @param int $page
 	 * @param int $limit
 	 * @param int $departmentId
-	 * @return PaginationResult
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginationResultInDepartment(
 		$domainId,
@@ -101,12 +103,13 @@ class ProductRepository {
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
-		$departmentId
+		$departmentId,
+		PricingGroup $pricingGroup
 	) {
 		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
 		$this->addTranslation($queryBuilder, $locale);
 		$this->filterByDepartmentId($queryBuilder, $departmentId);
-		$this->applyOrdering($queryBuilder, $orderingSetting);
+		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -116,8 +119,13 @@ class ProductRepository {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
-	private function applyOrdering(QueryBuilder $queryBuilder, ProductListOrderingSetting $orderingSetting) {
+	private function applyOrdering(
+		QueryBuilder $queryBuilder,
+		ProductListOrderingSetting $orderingSetting,
+		PricingGroup $pricingGroup
+	) {
 		switch ($orderingSetting->getOrderingMode()) {
 			case ProductListOrderingSetting::ORDER_BY_NAME_ASC:
 				$queryBuilder->orderBy('pt.name', 'asc');
@@ -128,13 +136,25 @@ class ProductRepository {
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
-				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
+				$queryBuilder->leftJoin(
+					ProductCalculatedPrice::class, 
+					'pcp',
+					Join::WITH,
+					'pcp.product = p AND pcp.pricingGroup = :pricingGroup'
+				);
 				$queryBuilder->orderBy('pcp.priceWithVat', 'asc');
+				$queryBuilder->setParameter('pricingGroup', $pricingGroup);
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_PRICE_DESC:
-				$queryBuilder->leftJoin(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p');
+				$queryBuilder->leftJoin(
+					ProductCalculatedPrice::class,
+					'pcp',
+					Join::WITH,
+					'pcp.product = p AND pcp.pricingGroup = :pricingGroup'
+				);
 				$queryBuilder->orderBy('pcp.priceWithVat', 'desc');
+				$queryBuilder->setParameter('pricingGroup', $pricingGroup);
 				break;
 
 			default:

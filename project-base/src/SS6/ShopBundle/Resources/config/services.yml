@@ -135,6 +135,9 @@ services:
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
+  ss6.shop.customer.current_customer:
+    class: SS6\ShopBundle\Model\Customer\CurrentCustomer
+
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory
@@ -338,6 +341,9 @@ services:
   ss6.shop.order.item.order_item_price_calculation:
     class: SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 
+  ss6.shop.order.order_creation_service:
+    class: SS6\ShopBundle\Model\Order\OrderCreationService
+
   ss6.shop.order.order_facade:
     class: SS6\ShopBundle\Model\Order\OrderFacade
 
@@ -530,6 +536,9 @@ services:
 
   ss6.shop.product.parameter.parameter_value_to_parameter_text_transformer:
     class: SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer
+
+  ss6.shop.product.pricing.product_price_calculation_for_user:
+    class: SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 
   ss6.shop.product.pricing.product_calculated_price_repository:
     class: SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository

@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator {
@@ -36,18 +37,25 @@ class ProductPriceRecalculator {
 	 */
 	private $productPriceRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 */
+	private $pricingGroupFacade;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
 		ProductPriceCalculation $productPriceCalculation,
 		ProductCalculatedPriceRepository $productCalculatedPriceRepository,
-		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+		PricingGroupFacade $pricingGroupFacade
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
 	public function runScheduledRecalculations() {
@@ -60,9 +68,13 @@ class ProductPriceRecalculator {
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
 	 */
 	private function recalculatePricesForProducts(array $products) {
+		$allPricingGroups = $this->pricingGroupFacade->getAll();
+
 		foreach ($products as $product) {
-			$price = $this->productPriceCalculation->calculatePrice($product);
-			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $price->getPriceWithVat());
+			foreach ($allPricingGroups as $pricingGroup) {
+				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+				$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $price->getPriceWithVat());
+			}
 		}
 		$this->em->flush();
 	}

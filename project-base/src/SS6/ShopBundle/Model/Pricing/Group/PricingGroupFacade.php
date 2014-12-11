@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Pricing\Group;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -21,6 +22,11 @@ class PricingGroupFacade {
 	private $pricingGroupRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
@@ -36,22 +42,17 @@ class PricingGroupFacade {
 	 */
 	private $setting;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository $pricingGroupRepository
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerEditFacade $customerEditFacade
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
-	 */
 	public function __construct(
 		EntityManager $em,
 		PricingGroupRepository $pricingGroupRepository,
+		Domain $domain,
 		SelectedDomain $selectedDomain,
 		CustomerEditFacade $customerEditFacade,
 		Setting $setting
 	) {
 		$this->em = $em;
 		$this->pricingGroupRepository = $pricingGroupRepository;
+		$this->domain = $domain;
 		$this->selectedDomain = $selectedDomain;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->setting = $setting;
@@ -153,6 +154,13 @@ class PricingGroupFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
 	 */
+	public function getDefaultPricingGroupByCurrentDomain() {
+		return $this->getDefaultPricingGroupByDomainId($this->domain->getId());
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\PricingGroup
+	 */
 	public function getDefaultPricingGroupBySelectedDomain() {
 		return $this->getDefaultPricingGroupByDomainId($this->selectedDomain->getId());
 	}
@@ -170,6 +178,13 @@ class PricingGroupFacade {
 	 */
 	public function isPricingGroupDefault(PricingGroup $pricingGroup) {
 		return $pricingGroup === $this->getDefaultPricingGroupBySelectedDomain();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	public function getAll() {
+		return $this->pricingGroupRepository->getAll();
 	}
 
 }

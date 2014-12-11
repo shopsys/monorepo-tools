@@ -15,15 +15,34 @@
 	</div>
 {% endblock %}
 
-{% block product_base_prices %}
-	<div class="form-line form-line--size-2">
-		<label class="form-line__label">{{ 'Základní cena bez DPH'|trans }}:</label>
-		<input type="text" value="{{ productDetail.basePrice.priceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
-	</div>
-	<div class="form-line form-line--size-2">
-		<label class="form-line__label">{{ 'Základní cena s DPH'|trans }}:</label>
-		<input type="text" value="{{ productDetail.basePrice.priceWithVat }}" class="form-line__field form-control" readonly="readonly">
-	</div>
+{% block product_calculated_prices %}
+	<fieldset class="row">
+		<div class="table-responsive col-md-12 col-lg-6">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>{{ 'Cena bez DPH'|trans }}</th>
+						<th>{{ 'Cena s DPH'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="text-muted">
+						<td>{{ 'Základní cena'|trans }}</td>
+						<td>{{ productDetail.basePrice.priceWithoutVat|price }}</td>
+						<td><strong>{{ productDetail.basePrice.priceWithVat|price }}</strong></td>
+					</tr>
+					{% for productSellingPrice in productSellingPrices %}
+						<tr>
+							<td>{{ productSellingPrice.pricingGroup.name }}</td>
+							<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|price }}</td>
+							<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|price }}</strong></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
 {% endblock %}
 
 {% block image %}

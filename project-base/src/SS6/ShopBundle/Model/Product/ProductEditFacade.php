@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -56,6 +57,11 @@ class ProductEditFacade {
 	 */
 	private $productPriceRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 */
+	private $pricingGroupRepository;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -64,7 +70,8 @@ class ProductEditFacade {
 		Domain $domain,
 		ProductService $productService,
 		ImageFacade	$imageFacade,
-		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+		PricingGroupRepository $pricingGroupRepository
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -74,6 +81,7 @@ class ProductEditFacade {
 		$this->productService = $productService;
 		$this->imageFacade = $imageFacade;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+		$this->pricingGroupRepository = $pricingGroupRepository;
 	}
 
 	/**
@@ -211,6 +219,17 @@ class ProductEditFacade {
 			}
 		}
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
+	 */
+	public function getAllProductSellingPrices(Product $product) {
+		return $this->productService->getProductSellingPricesByPricingGroups(
+			$product,
+			$this->pricingGroupRepository->getAll()
+		);
 	}
 
 }

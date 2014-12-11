@@ -5,14 +5,14 @@ namespace SS6\ShopBundle\Model\Cart\Item;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
 use SS6\ShopBundle\Model\Pricing\Rounding;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 
 class CartItemPriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
-	private $productPriceCalculation;
+	private $productPriceCalculationForUser;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
@@ -30,11 +30,11 @@ class CartItemPriceCalculation {
 	private $productPrice;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Pricing\Rounding$rounding
 	 */
-	public function __construct(ProductPriceCalculation $productPriceCalculation, Rounding $rounding) {
-		$this->productPriceCalculation = $productPriceCalculation;
+	public function __construct(ProductPriceCalculationForUser $productPriceCalculationForUser, Rounding $rounding) {
+		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->rounding = $rounding;
 	}
 
@@ -44,7 +44,7 @@ class CartItemPriceCalculation {
 	 */
 	public function calculatePrice(CartItem $cartItem) {
 		$this->cartItem = $cartItem;
-		$this->productPrice = $this->productPriceCalculation->calculatePrice($cartItem->getProduct());
+		$this->productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($cartItem->getProduct());
 
 		$cartItemPrice = new CartItemPrice(
 			$this->productPrice->getPriceWithoutVat(),

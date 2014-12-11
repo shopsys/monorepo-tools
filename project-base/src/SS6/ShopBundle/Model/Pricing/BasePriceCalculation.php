@@ -19,21 +19,6 @@ class BasePriceCalculation {
 	private $rounding;
 
 	/**
-	 * @var string
-	 */
-	private $inputPrice;
-
-	/**
-	 * @var int
-	 */
-	private $inputPriceType;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
-	 */
-	private $vat;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
 	 * @param \SS6\ShopBundle\Model\Pricing\Rounding $rounding
 	 */
@@ -49,12 +34,8 @@ class BasePriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice($inputPrice, $inputPriceType, Vat $vat) {
-		$this->inputPrice = $inputPrice;
-		$this->inputPriceType = $inputPriceType;
-		$this->vat = $vat;
-
-		$basePriceWithVat = $this->getBasePriceWithVat();
-		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $this->vat);
+		$basePriceWithVat = $this->getBasePriceWithVat($inputPrice, $inputPriceType, $vat);
+		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
 		$basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);
 
 		return new Price(
@@ -65,15 +46,36 @@ class BasePriceCalculation {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param Vat $vat
+	 * @param string $coefficient
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function applyCoefficient(Price $price, Vat $vat, $coefficient) {
+		$priceWithVat = $this->rounding->roundPriceWithVat($price->getPriceWithVat() * $coefficient);
+		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
+		$priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat - $vatAmount);
+
+		return new Price(
+			$priceWithoutVat,
+			$priceWithVat,
+			$vatAmount
+		);
+	}
+
+	/**
+	 * @param string $inputPrice
+	 * @param int $inputPriceType
+	 * @param Vat $vat
 	 * @return string
 	 */
-	private function getBasePriceWithVat() {
-		switch ($this->inputPriceType) {
+	private function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat) {
+		switch ($inputPriceType) {
 			case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
-				return $this->rounding->roundPriceWithVat($this->inputPrice);
+				return $this->rounding->roundPriceWithVat($inputPrice);
 
 			case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-				return $this->rounding->roundPriceWithVat($this->priceCalculation->applyVatPercent($this->inputPrice, $this->vat));
+				return $this->rounding->roundPriceWithVat($this->priceCalculation->applyVatPercent($inputPrice, $vat));
 
 			default:
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
