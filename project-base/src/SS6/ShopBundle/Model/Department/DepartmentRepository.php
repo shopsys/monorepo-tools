@@ -35,6 +35,23 @@ class DepartmentRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department $departmentBranch
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	public function getAllWithoutBranch(Department $departmentBranch) {
+		return $this->em->createQueryBuilder()
+			->select('d')
+			->from(Department::class, 'd')
+			->where('d.root != :branchRoot OR d.lft < :branchLft OR d.rgt > :branchRgt')
+			->orderBy('d.root, d.lft', 'ASC')
+			->setParameter('branchRoot', $departmentBranch->getRoot())
+			->setParameter('branchLft', $departmentBranch->getLft())
+			->setParameter('branchRgt', $departmentBranch->getRgt())
+			->getQuery()
+			->execute();
+	}
+
+	/**
 	 * @param int $departmentId
 	 * @return \SS6\ShopBundle\Model\Department\Department|null
 	 */

@@ -134,6 +134,27 @@ class Department extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getLft() {
+		return $this->lft;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getRgt() {
+		return $this->rgt;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getRoot() {
+		return $this->root;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
 	 */
 	private function setTranslations(DepartmentData $departmentData) {

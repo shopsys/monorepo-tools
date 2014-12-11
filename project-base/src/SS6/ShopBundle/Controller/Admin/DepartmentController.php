@@ -23,7 +23,7 @@ class DepartmentController extends Controller {
 		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
 
 		$department = $departmentFacade->getById($id);
-		$form = $this->createForm(new DepartmentFormType($departmentFacade->getAll()));
+		$form = $this->createForm(new DepartmentFormType($departmentFacade->getAllWithoutBranch($department)));
 
 		$departmentData = new DepartmentData();
 

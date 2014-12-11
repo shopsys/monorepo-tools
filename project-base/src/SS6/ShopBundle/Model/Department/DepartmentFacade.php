@@ -93,8 +93,19 @@ class DepartmentFacade {
 		return $this->departmentRepository->getAllInRootWithTranslation($locale);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
 	public function getAll() {
 		return $this->departmentRepository->getAll();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department $department
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	public function getAllWithoutBranch(Department $department) {
+		return $this->departmentRepository->getAllWithoutBranch($department);
 	}
 
 }
