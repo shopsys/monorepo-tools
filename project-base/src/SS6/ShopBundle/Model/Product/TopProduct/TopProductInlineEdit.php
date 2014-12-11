@@ -91,9 +91,10 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
+	 * @param int $rowId
 	 * @return \SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductFormType
 	 */
-	protected function getFormType() {
+	protected function getFormType($rowId) {
 		return new TopProductFormType($this->productIdToProductTransformer);
 	}
 }

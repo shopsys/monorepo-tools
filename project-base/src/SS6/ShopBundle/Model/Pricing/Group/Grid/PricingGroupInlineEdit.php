@@ -65,9 +65,10 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
+	 * @param int $rowId
 	 * @return \SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType
 	 */
-	protected function getFormType() {
+	protected function getFormType($rowId) {
 		return new PricingGroupFormType();
 	}
 
