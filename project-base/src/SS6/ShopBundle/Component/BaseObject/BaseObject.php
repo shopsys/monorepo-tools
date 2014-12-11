@@ -12,7 +12,7 @@ abstract class Object implements IteratorAggregate {
 	}
 
 	public static function __callStatic($name, $arguments) {
-		$message = 'Cannot call static method ' . get_class($this) . '::' . $name . '()';
+		$message = 'Cannot call static method ' . get_called_class() . '::' . $name . '()';
 		throw new \SS6\ShopBundle\Component\BaseObject\Exception\BaseObjectException($message);
 	}
 
