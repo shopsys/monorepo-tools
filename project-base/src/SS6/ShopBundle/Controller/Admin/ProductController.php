@@ -41,14 +41,14 @@ class ProductController extends Controller {
 		if ($form->isValid()) {
 			$productEditFacade->edit($id, $form->getData());
 
-			$flashMessageSender->addSuccessTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', array(
+			$flashMessageSender->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', array(
 				'name' => $product->getName(),
 			));
 			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -90,7 +90,7 @@ class ProductController extends Controller {
 			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 			$product = $productEditFacade->create($form->getData());
 
-			$flashMessageSender->addSuccessTwig('Bylo vytvořeno zboží'
+			$flashMessageSender->addSuccessFlashTwig('Bylo vytvořeno zboží'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $product->getName(),
 				'url' => $this->generateUrl('admin_product_edit', array('id' => $product->getId())),
@@ -99,7 +99,7 @@ class ProductController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
@@ -162,7 +162,7 @@ class ProductController extends Controller {
 		$productName = $productEditFacade->getById($id)->getName();
 		$productEditFacade->delete($id);
 
-		$flashMessageSender->addSuccessTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $productName,
 		));
 		return $this->redirect($this->generateUrl('admin_product_list'));

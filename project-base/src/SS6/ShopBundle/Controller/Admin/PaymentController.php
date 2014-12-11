@@ -33,7 +33,7 @@ class PaymentController extends Controller {
 			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 			$payment = $paymentEditFacade->create($paymentData);
 
-			$flashMessageSender->addSuccessTwig('Byla vytvořena platba'
+			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $payment->getName(),
 				'url' => $this->generateUrl('admin_payment_edit', array('id' => $payment->getId())),
@@ -42,7 +42,7 @@ class PaymentController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', array(
@@ -77,7 +77,7 @@ class PaymentController extends Controller {
 		if ($form->isValid()) {
 			$paymentEditFacade->edit($payment, $paymentData);
 
-			$flashMessageSender->addSuccessTwig('Byla upravena platba'
+			$flashMessageSender->addSuccessFlashTwig('Byla upravena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
 				'name' => $payment->getName(),
 				'url' => $this->generateUrl('admin_payment_edit', array('id' => $payment->getId())),
@@ -86,7 +86,7 @@ class PaymentController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
@@ -112,7 +112,7 @@ class PaymentController extends Controller {
 		$paymentName = $paymentEditFacade->getById($id)->getName();
 		$paymentEditFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessTwig('Platba <strong>{{ name }}</strong> byla smazána', array(
+		$flashMessageSender->addSuccessFlashTwig('Platba <strong>{{ name }}</strong> byla smazána', array(
 			'name' => $paymentName,
 		));
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));

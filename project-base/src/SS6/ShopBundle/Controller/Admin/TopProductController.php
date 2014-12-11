@@ -35,9 +35,9 @@ class TopProductController extends Controller {
 			$topProductFacade->getById($id);
 			$topProductFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessTwig('Zboží bylo odstraněno');
+			$flashMessageSender->addSuccessFlashTwig('Zboží bylo odstraněno');
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException $e) {
-			$flashMessageSender->addErrorTwig('Zboží se nepodařilo odstranit - zboží již není v tomto seznamu.');
+			$flashMessageSender->addErrorFlashTwig('Zboží se nepodařilo odstranit - zboží již není v tomto seznamu.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_topproduct_list'));

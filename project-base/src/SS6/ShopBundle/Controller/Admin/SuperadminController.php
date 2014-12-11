@@ -70,7 +70,7 @@ class SuperadminController extends Controller {
 			$pricingSettingData = $form->getData();
 			$pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
 
-			$flashMessageSender->addSuccessTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', array(
+			$flashMessageSender->addSuccessFlashTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', array(
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
 			));
 			return $this->redirect($this->generateUrl('admin_superadmin_index'));

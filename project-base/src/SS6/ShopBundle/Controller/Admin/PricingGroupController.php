@@ -43,12 +43,12 @@ class PricingGroupController extends Controller {
 			$pricingGroupFacade->delete($id, $newId);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', array(
+				$flashMessageSender->addSuccessFlashTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', array(
 					'name' => $name,
 				));
 			} else {
 				$newPricingGroup = $pricingGroupFacade->getById($newId);
-				$flashMessageSender->addSuccessTwig(
+				$flashMessageSender->addSuccessFlashTwig(
 					'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou'
 					. ' <strong>{{ newName }}</strong>.',
 					array(
@@ -57,7 +57,7 @@ class PricingGroupController extends Controller {
 					));
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			$flashMessageSender->addError('Zvolená cenová skupina již neexistuje');
+			$flashMessageSender->addErrorFlash('Zvolená cenová skupina již neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
@@ -129,7 +129,7 @@ class PricingGroupController extends Controller {
 		if ($form->isValid()) {
 			$pricingGroupSettingsFormData = $form->getData();
 			$pricingGroupFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
-			$flashMessageSender->addSuccess('Nastavení výchozí cenové skupiny bylo upraveno');
+			$flashMessageSender->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
 		}

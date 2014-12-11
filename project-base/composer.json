@@ -22,7 +22,7 @@
 		"helios-ag/fm-elfinder-bundle": "1.x",
 		"incenteev/composer-parameter-handler": "~2.0",
 		"jakub-onderka/php-parallel-lint": "dev-master",
-		"jms/translation-bundle": "1.1.0",
+		"jms/translation-bundle": "dev-master",
 		"kutny/autowiring-bundle": "1.0",
 		"pdepend/pdepend": "2.0.0.*@dev",
 		"phing/phing": "2.8.2",

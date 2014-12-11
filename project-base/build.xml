@@ -132,6 +132,23 @@
 		</exec>
 	</target>
 
+	<target name="dump-translations">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="translation:extract" />
+			<arg value="--bundle=SS6ShopBundle" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
+			<arg value="--keep" />
+			<arg value="--output-format=yml" />
+
+			<arg value="cs" />
+			<arg value="en" />
+		</exec>
+	</target>
+
 	<target name="grunt">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
 	</target>

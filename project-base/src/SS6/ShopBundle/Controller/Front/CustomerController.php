@@ -15,7 +15,7 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
-			$flashMessageSender->addError('Pro přístup na tuto stránku musíte být přihlášeni');
+			$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 			return $this->redirect($this->generateUrl('front_login'));
 		}
 
@@ -42,12 +42,12 @@ class CustomerController extends Controller {
 				$customerData
 			);
 
-			$flashMessageSender->addSuccess('Vaše údaje byly úspěšně zaktualizovány');
+			$flashMessageSender->addSuccessFlash('Vaše údaje byly úspěšně zaktualizovány');
 			return $this->redirect($this->generateUrl('front_customer_edit'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addError('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Customer/edit.html.twig', array(
@@ -62,7 +62,7 @@ class CustomerController extends Controller {
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
-			$flashMessageSender->addError('Pro přístup na tuto stránku musíte být přihlášeni');
+			$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 			return $this->redirect($this->generateUrl('front_login'));
 		}
 
@@ -105,7 +105,7 @@ class CustomerController extends Controller {
 
 		if ($orderNumber !== null) {
 			if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
-				$flashMessageSender->addError('Pro přístup na tuto stránku musíte být přihlášeni');
+				$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 				return $this->redirect($this->generateUrl('front_login'));
 			}
 			$order = $orderFacade->getByOrderNumber($orderNumber);

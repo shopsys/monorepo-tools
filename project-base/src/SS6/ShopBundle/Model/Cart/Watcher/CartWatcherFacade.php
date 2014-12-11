@@ -61,9 +61,11 @@ class CartWatcherFacade {
 		$modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 
 		foreach ($modifiedItems as $cartItem) {
-			$this->flashMessageSender->addInfoTwig($this->translator->trans('Byla změněna cena zboží <strong>{{ name }}</strong>'
-				. ', které máte v košíku. Prosím, překontrolujte si objednávku.'),
-				array('name' => $cartItem->getName()));
+			$this->flashMessageSender->addInfoFlashTwig(
+				'Byla změněna cena zboží <strong>{{ name }}</strong>'
+				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
+				array('name' => $cartItem->getName())
+			);
 		}
 	}
 
@@ -71,9 +73,11 @@ class CartWatcherFacade {
 		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart);
 
 		foreach ($notVisibleItems as $cartItem) {
-			$this->flashMessageSender->addErrorTwig($this->translator->trans('Zboží <strong>{{ name }}</strong>'
-				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.'),
-				array('name' => $cartItem->getName()));
+			$this->flashMessageSender->addErrorTwig(
+				'Zboží <strong>{{ name }}</strong>'
+				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
+				array('name' => $cartItem->getName())
+			);
 			$cart->removeItemById($cartItem->getId());
 			$this->em->remove($cartItem);
 		}

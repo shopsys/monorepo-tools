@@ -35,7 +35,7 @@ class DepartmentController extends Controller {
 
 		$departmentFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessTwig('Oddělení <strong>{{ name }}</strong> bylo smazáno', array(
+		$flashMessageSender->addSuccessFlashTwig('Oddělení <strong>{{ name }}</strong> bylo smazáno', array(
 			'name' => $fullName,
 		));
 

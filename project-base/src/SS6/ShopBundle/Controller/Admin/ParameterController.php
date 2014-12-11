@@ -35,7 +35,7 @@ class ParameterController extends Controller {
 		$fullName = $parameterFacade->getById($id)->getName();
 		$parameterFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessTwig('Parametr <strong>{{ name }}</strong> byl smazán', array(
+		$flashMessageSender->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', array(
 			'name' => $fullName,
 		));
 		return $this->redirect($this->generateUrl('admin_parameter_list'));
