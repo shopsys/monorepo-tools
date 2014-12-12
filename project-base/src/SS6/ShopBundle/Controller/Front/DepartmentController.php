@@ -10,7 +10,7 @@ class DepartmentController extends Controller {
 		$departmentFacade = $this->get('ss6.shop.department.department_facade');
 		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
 
-		$departments = $departmentFacade->getAllWithTranslation();
+		$departments = $departmentFacade->getAllInRootWithTranslation();
 
 		return $this->render('@SS6Shop/Front/Content/Department/panel.html.twig', array(
 			'departments' => $departments,

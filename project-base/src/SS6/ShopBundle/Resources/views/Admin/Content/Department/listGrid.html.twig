@@ -1,15 +1,17 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% block grid_value_cell_id_names %}
+	{%- for i in 0..row.d.level if i > 0 -%}
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	{%- endfor -%}
+	{{ value }}
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Nebyla nalezena žádná oddělení. Nejprve musíte nějaké vytvořit.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
 	{% set entityName = 'oddělení'|trans %}
-	{{ parent() }}
-{% endblock %}
-
-{% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit oddělení'|trans %}
 	{{ parent() }}
 {% endblock %}

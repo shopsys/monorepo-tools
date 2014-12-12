@@ -38,6 +38,13 @@
           visible: false
     - label: 'Oddělení'
       route: admin_department_list
+      items:
+        - label: 'Nová kategorie'
+          route: admin_department_new
+          visible: false
+        - label: 'Editace kategorie'
+          route: admin_department_edit
+          visible: false
 
 - label: 'Cenotvorba'
   route: admin_pricinggroup_list

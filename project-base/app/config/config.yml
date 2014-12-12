@@ -89,5 +89,10 @@ ss6_shop:
       cs: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_cs.yml
       en: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_en.yml
 
+stof_doctrine_extensions:
+  orm:
+    default:
+      tree: true
+
 imports:
     - { resource: wysiwyg.yml }

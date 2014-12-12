@@ -16,10 +16,16 @@ class DepartmentData {
 	private $names;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Department\Department|null
+	 */
+	private $parent;
+
+	/**
 	 * @param array $names
 	 */
-	public function __construct($names = array()) {
+	public function __construct($names = array(), Department $parent = null) {
 		$this->names = $names;
+		$this->parent = $parent;
 	}
 
 	/**
@@ -37,6 +43,20 @@ class DepartmentData {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Department\Department
+	 */
+	public function getParent() {
+		return $this->parent;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department\null $parent
+	 */
+	public function setParent(Department $parent = null) {
+		$this->parent = $parent;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Department\Department $department
 	 */
 	public function setFromEntity(Department $department) {
@@ -46,6 +66,7 @@ class DepartmentData {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
 		$this->setNames($names);
+		$this->setParent($department->getParent());
 	}
 
 }

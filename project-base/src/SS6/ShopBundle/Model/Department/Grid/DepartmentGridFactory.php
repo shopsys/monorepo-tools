@@ -55,6 +55,7 @@ class DepartmentGridFactory implements GridFactoryInterface {
 			->select('d, dt')
 			->from(Department::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
+			->orderBy('d.root, d.lft', 'ASC')
 			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'd.id');
 
@@ -62,6 +63,12 @@ class DepartmentGridFactory implements GridFactoryInterface {
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('names', 'dt.name', $this->translator->trans('Název'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
+		$grid->addActionColumn(
+				ActionColumn::TYPE_EDIT,
+				$this->translator->trans('Upravit'),
+				'admin_department_edit',
+				array('id' => 'd.id')
+			);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),

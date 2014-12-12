@@ -202,9 +202,6 @@ services:
   ss6.shop.department.department_grid_factory:
     class: SS6\ShopBundle\Model\Department\Grid\DepartmentGridFactory
 
-  ss6.shop.department.department_inline_edit:
-    class: SS6\ShopBundle\Model\Department\Grid\DepartmentInlineEdit
-
   ss6.shop.department.department_repository:
     class: SS6\ShopBundle\Model\Department\DepartmentRepository
 

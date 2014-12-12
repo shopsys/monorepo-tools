@@ -80,6 +80,7 @@ class DepartmentFacade {
 	 */
 	public function deleteById($departmentId) {
 		$department = $this->departmentRepository->getById($departmentId);
+		$this->departmentService->setChildrenAsSiblings($department);
 
 		$this->em->remove($department);
 		$this->em->flush();
@@ -88,9 +89,24 @@ class DepartmentFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Department\Department[]
 	 */
-	public function getAllWithTranslation() {
+	public function getAllInRootWithTranslation() {
 		$locale = $this->domain->getLocale();
-		return $this->departmentRepository->getAllWithTranslation($locale);
+		return $this->departmentRepository->getAllInRootWithTranslation($locale);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	public function getAll() {
+		return $this->departmentRepository->getAll();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Department\Department $department
+	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 */
+	public function getAllWithoutBranch(Department $department) {
+		return $this->departmentRepository->getAllWithoutBranch($department);
 	}
 
 }
