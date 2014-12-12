@@ -90,7 +90,6 @@ ss6_shop:
       en: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_en.yml
 
 stof_doctrine_extensions:
-  default_locale: en_US
   orm:
     default:
       tree: true

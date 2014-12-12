@@ -23,7 +23,7 @@ class DepartmentFormType extends AbstractType {
 		$this->departments = $departments;
 	}
 
-		/**
+	/**
 	 * @return string
 	 */
 	public function getName() {

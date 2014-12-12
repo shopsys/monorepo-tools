@@ -75,7 +75,9 @@
 			dataType: 'json',
 			success: function (saveResult) {
 				if (saveResult.success) {
-					$formRow.replaceWith($(saveResult.rowHtml)).remove();
+					var $newRow = $(saveResult.rowHtml);
+					$newRow.find('.js-tooltip[title]').tooltip();
+					$formRow.replaceWith($newRow).remove();
 					SS6.ajaxConfirm.init();
 				} else {
 					$buttons.show();
@@ -157,6 +159,8 @@
 				$otherInputs.append(formHtml);
 			}
 		});
+
+		$formRow.find('.js-tooltip[title]').tooltip();
 
 		return $formRow;
 	}
