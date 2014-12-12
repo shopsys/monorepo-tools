@@ -24,7 +24,10 @@ class CustomerEditService {
 			new UserData(
 				1,
 				Condition::ifNull($user->getFirstName(), $order->getFirstName()),
-				Condition::ifNull($user->getLastName(), $order->getLastName())
+				Condition::ifNull($user->getLastName(), $order->getLastName()),
+				null,
+				null,
+				$user->getPricingGroup()
 			),
 			$this->getAmendedBillingAddressDataByOrder($order, $billingAddress),
 			$this->getAmendedDeliveryAddressDataByOrder($order, $deliveryAddress)
