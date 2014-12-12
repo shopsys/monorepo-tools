@@ -29,8 +29,8 @@
 				<tbody>
 					<tr class="text-muted">
 						<td>{{ 'Základní cena'|trans }}</td>
-						<td>{{ productDetail.basePrice.priceWithoutVat|price }}</td>
-						<td><strong>{{ productDetail.basePrice.priceWithVat|price }}</strong></td>
+						<td>{{ productDetail.basePrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
+						<td><strong>{{ productDetail.basePrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
 					</tr>
 					{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
 						<tr>
@@ -39,8 +39,8 @@
 						{% for productSellingPrice in productSellingPrices %}
 							<tr>
 								<td>{{ productSellingPrice.pricingGroup.name }}</td>
-								<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|price }}</td>
-								<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|price }}</strong></td>
+								<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
+								<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
 							</tr>
 						{% endfor %}
 					{% endfor %}

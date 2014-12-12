@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_orders_sum_price %}
-	{{ value|defaultPrice }}
+	{{ value|priceWithDefaultAdminCurrency }}
 {% endblock %}
 
 {% block grid_value_cell_id_last_order_at %}

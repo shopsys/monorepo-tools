@@ -36,7 +36,9 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function getFilters() {
 		return array(
-			new Twig_SimpleFilter('defaultPrice', array($this, 'defaultPriceFilter'), array('is_safe' => array('html'))),
+			new Twig_SimpleFilter('priceWithDefaultAdminCurrency', array(
+				$this, 'priceWithDefaultAdminCurrencyFilter'), array('is_safe' => array('html'))
+			),
 			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('priceText', array($this, 'priceTextFilter'), array('is_safe' => array('html'))),
 		);
@@ -59,7 +61,7 @@ class PriceExtension extends Twig_Extension {
 	 * @param string $price
 	 * @return string
 	 */
-	public function defaultPriceFilter($price) {
+	public function priceWithDefaultAdminCurrencyFilter($price) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
 		$currencySymbol = $this->currencyFacade->getDefaultCurrency()->getSymbol();
