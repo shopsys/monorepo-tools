@@ -41,6 +41,8 @@ class OrderController extends Controller {
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
@@ -56,6 +58,8 @@ class OrderController extends Controller {
 		}
 		$domainId = $domain->getId();
 		$orderData->setDomainId($domainId);
+		$currency = $currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+		$orderData->setCurrency($currency);
 
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
