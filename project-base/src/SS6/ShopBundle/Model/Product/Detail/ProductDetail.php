@@ -28,21 +28,29 @@ class ProductDetail {
 	private $parameters;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	private $images;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 */
 	public function __construct(
 		Product $product,
 		Price $basePrice,
 		Price $sellingPrice,
-		array $parameters
+		array $parameters,
+		array $images
 	) {
 		$this->product = $product;
 		$this->basePrice = $basePrice;
 		$this->sellingPrice = $sellingPrice;
 		$this->parameters = $parameters;
+		$this->images = $images;
 	}
 
 	/**
@@ -71,6 +79,13 @@ class ProductDetail {
 	 */
 	public function getParameters() {
 		return $this->parameters;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	public function getImages() {
+		return $this->images;
 	}
 
 }

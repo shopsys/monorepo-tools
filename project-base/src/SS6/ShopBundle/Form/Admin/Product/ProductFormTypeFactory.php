@@ -5,8 +5,10 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Model\Department\DepartmentRepository;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 
 class ProductFormTypeFactory {
@@ -37,25 +39,23 @@ class ProductFormTypeFactory {
 	private $inverseArrayValuesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\DepartmentRepository;
+	 * @var \SS6\ShopBundle\Model\Department\DepartmentRepository
 	 */
 	private $departmentRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository $availabilityRepository
-	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
-	 * @param \SS6\ShopBundle\Model\Product\InverseArrayValuesTransformer $inverseArrayValuesTransformer
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentRepository;
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
+	private $imageFacade;
+
 	public function __construct(
 		FileUpload $fileUpload,
 		VatRepository $vatRepository,
 		AvailabilityRepository $availabilityRepository,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		DepartmentRepository $departmentRepository
+		DepartmentRepository $departmentRepository,
+		ImageFacade $imageFacade
 	) {
 		$this->fileUpload = $fileUpload;
 		$this->vatRepository = $vatRepository;
@@ -63,15 +63,23 @@ class ProductFormTypeFactory {
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->departmentRepository = $departmentRepository;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 * @return \SS6\ShopBundle\Form\Admin\Product\ProductFormType
 	 */
-	public function create() {
+	public function create(Product $product = null) {
 		$vats = $this->vatRepository->findAll();
 		$availabilities = $this->availabilityRepository->findAll();
 		$departments = $this->departmentRepository->getAll();
+
+		if ($product !== null) {
+			$images = $this->imageFacade->getImagesByEntity($product, null);
+		} else {
+			$images = array();
+		}
 
 		return new ProductFormType(
 			$this->fileUpload,
@@ -79,7 +87,8 @@ class ProductFormTypeFactory {
 			$availabilities,
 			$this->productParameterValueFormTypeFactory,
 			$this->inverseArrayValuesTransformer,
-			$departments
+			$departments,
+			$images
 		);
 	}
 

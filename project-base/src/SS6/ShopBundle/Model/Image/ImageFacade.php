@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Image;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageRepository;
 use SS6\ShopBundle\Model\Image\ImageService;
 
@@ -80,6 +79,21 @@ class ImageFacade {
 				$this->em->persist($image);
 			}
 			$this->em->flush();
+		}
+	}
+
+	/**
+	 * @param object $entity
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 */
+	public function deleteImages($entity, array $images) {
+		$entityName = $this->imageConfig->getEntityName($entity);
+		$entityId = $this->getEntityId($entity);
+
+		$this->imageService->deleteImages($entityName, $entityId, $images);
+
+		foreach ($images as $image) {
+			$this->em->remove($image);
 		}
 	}
 

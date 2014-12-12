@@ -50,19 +50,25 @@
 	</fieldset>
 {% endblock %}
 
-{% block image %}
+{% block images %}
 	<div class="form-line">
 		<label class="form-line__label">
 			{{ 'Obrázek'|trans }}:
 		</label>
-		<ul class="list-image">
-			{% for imageUrl in imagesUrl(product, 'original') %}
-				<li class="list-image__item">
-					<div class="list-image__item__in">
-						<img src="{{ imageUrl }}" alt="" height="100" />
-					</div>
-				</li>
-			{% endfor %}
-		</ul>
+		{% if productDetail.images|length > 0 %}
+			<ul class="list-image">
+				{% for image in productDetail.images %}
+					<li class="list-image__item">
+						<div class="js-image-to-delete list-image__item__in" data-id="{{ image.id }}">
+							<img src="{{ imageUrlByImage(image, 'original') }}" alt="" height="100" />
+						</div>
+						<button onclick="SS6.productImagesDelete.deleteImage({{ image.id|escape('js') }}); return false;"><i class="fa fa-trash-o"></i>{{ 'Smazat obrázek'|trans }}</button>
+					</li>
+				{% endfor %}
+			</ul>
+			<button onclick="SS6.productImagesDelete.revert(); return false;"><i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}</button>
+		{% endif %}
+
+		{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 	</div>
 {% endblock %}

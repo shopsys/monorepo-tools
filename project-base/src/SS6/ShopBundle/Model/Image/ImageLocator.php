@@ -2,10 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 
-class ImagesEntity {
+class ImageLocator {
 
 	/**
 	 * @var string
@@ -13,18 +12,12 @@ class ImagesEntity {
 	private $imageDir;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
-	 */
-	private $imageConfig;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
 	private $imageFacade;
 
-	public function __construct($imageDir, ImageConfig $imageConfig, ImageFacade $imageFacade) {
+	public function __construct($imageDir, ImageFacade $imageFacade) {
 		$this->imageDir = $imageDir;
-		$this->imageConfig = $imageConfig;
 		$this->imageFacade = $imageFacade;
 	}
 
@@ -34,9 +27,20 @@ class ImagesEntity {
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	public function getRelativeImageFilepath($entity, $type, $sizeName) {
+	public function getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName) {
 		$image = $this->imageFacade->getImageByEntity($entity, $type);
 		$path = $this->getRelativeImagePath($image->getEntityName(), $type, $sizeName);
+
+		return $path . $image->getFilename();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return string
+	 */
+	public function getRelativeImageFilepath(Image $image, $sizeName) {
+		$path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
 
 		return $path . $image->getFilename();
 	}
@@ -47,7 +51,7 @@ class ImagesEntity {
 	 * @param string|null $sizeName
 	 * @return array
 	 */
-	public function getRelativeImagesFilepath($entity, $type, $sizeName) {
+	public function getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName) {
 		$filepaths = array();
 
 		$images = $this->imageFacade->getImagesByEntity($entity, $type);
@@ -59,20 +63,31 @@ class ImagesEntity {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return bool
+	 */
+	public function imageExists(Image $image, $sizeName) {
+		$relativeImageFilepath = $this->getRelativeImageFilepath($image, $sizeName);
+		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
+
+		return is_file($imageFilepath) && is_readable($imageFilepath);
+	}
+
+	/**
 	 * @param Object $entity
 	 * @param string|null $type
 	 * @param string|null $sizeName
 	 * @return bool
 	 */
-	public function imageExists($entity, $type, $sizeName) {
+	public function imageExistsByEntityAndType($entity, $type, $sizeName) {
 		try {
-			$relativeImageFilepath = $this->getRelativeImageFilepath($entity, $type, $sizeName);
+			$image = $this->imageFacade->getImageByEntity($entity, $type);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
-		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
 
-		return is_file($imageFilepath) && is_readable($imageFilepath);
+		return $this->imageExists($image, $sizeName);
 	}
 
 	/**

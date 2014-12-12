@@ -10,8 +10,6 @@ use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 
 /**
- * Image
- *
  * @ORM\Table(name="images", indexes={@ORM\Index(name="idx_entity_id_type", columns={"entity_name", "entity_id", "type"})})
  * @ORM\Entity
  */
@@ -69,7 +67,6 @@ class Image implements EntityFileUploadInterface {
 	private $temporaryFilename;
 
 	/**
-	 *
 	 * @param string $entityName
 	 * @param int $entityId
 	 * @param string|null $type

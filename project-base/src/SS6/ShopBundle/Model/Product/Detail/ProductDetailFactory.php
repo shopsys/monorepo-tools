@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\Detail;
 
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
@@ -25,18 +26,20 @@ class ProductDetailFactory {
 	private $parameterRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository $parameterRepository
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
+	private $imageFacade;
+
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ProductPriceCalculation $productPriceCalculation,
-		ParameterRepository $parameterRepository
+		ParameterRepository $parameterRepository,
+		ImageFacade $imageFacade
 	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->parameterRepository = $parameterRepository;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -48,7 +51,8 @@ class ProductDetailFactory {
 			$product,
 			$this->getBasePrice($product),
 			$this->getSellingPrice($product),
-			$this->getParameters($product)
+			$this->getParameters($product),
+			$this->getImages($product)
 		);
 	}
 
@@ -98,4 +102,13 @@ class ProductDetailFactory {
 
 		return $productParameterValues;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	private function getImages(Product $product) {
+		return $this->imageFacade->getImagesByEntity($product, null);
+	}
+
 }

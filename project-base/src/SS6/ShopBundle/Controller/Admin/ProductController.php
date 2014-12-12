@@ -32,7 +32,7 @@ class ProductController extends Controller {
 
 		$product = $productEditFacade->getById($id);
 
-		$form = $this->createForm($productFormTypeFactory->create());
+		$form = $this->createForm($productFormTypeFactory->create($product));
 		$productData = $productDataFactory->createFromProduct($product);
 
 		$form->setData($productData);
