@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
 
@@ -18,7 +17,7 @@ class ImageService {
 	public function getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type) {
 		if (!$imageEntityConfig->isMultiple($type)) {
 			$message = 'Entity ' . $imageEntityConfig->getEntityClass()
-				. ' in not allowed to have multiple images for type ' . ($type ?: 'NULL');
+				. ' is not allowed to have multiple images for type ' . ($type ?: 'NULL');
 			throw new \SS6\ShopBundle\Model\Image\Exception\EntityMultipleImageException($message);
 		}
 
@@ -68,7 +67,7 @@ class ImageService {
 	/**
 	 * @param string $entityName
 	 * @param int $entityId
-	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 */
 	private function deleteImage($entityName, $entityId, Image $image) {
 		if ($image->getEntityName() !== $entityName

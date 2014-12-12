@@ -51,7 +51,7 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return array
 	 */
-	public function getRelativeImagesFilepathByEntityAndType($entity, $type, $sizeName) {
+	public function getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName) {
 		$filepaths = array();
 
 		$images = $this->imageFacade->getImagesByEntity($entity, $type);

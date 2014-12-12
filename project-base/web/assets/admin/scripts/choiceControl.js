@@ -41,15 +41,13 @@
 	};
 
 	SS6.choiceControl.getSelectedValue = function (choiceListSelector) {
-		var $choiceList = $($(choiceListSelector));
-
-		var values = SS6.choiceControl.getSelectedValues($choiceList);
+		var values = SS6.choiceControl.getSelectedValues(choiceListSelector);
 
 		return (values[0] !== undefined) ? values[0] : null;
 	};
 
 	SS6.choiceControl.getSelectedValues = function (choiceListSelector) {
-		var $choiceList = $($(choiceListSelector));
+		var $choiceList = $(choiceListSelector);
 
 		var values = [];
 

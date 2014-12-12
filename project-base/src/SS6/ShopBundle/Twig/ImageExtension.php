@@ -141,7 +141,7 @@ class ImageExtension extends Twig_Extension {
 	public function getImagesUrl($entity, $sizeName = null, $type = null) {
 		$imagesUrl = array();
 
-		$relativeFilepaths = $this->imageLocator->getRelativeImagesFilepathByEntityAndType($entity, $type, $sizeName);
+		$relativeFilepaths = $this->imageLocator->getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName);
 		foreach ($relativeFilepaths as $relativeFilepath) {
 			$imagesUrl[] =
 				$this->request->getBaseUrl()
