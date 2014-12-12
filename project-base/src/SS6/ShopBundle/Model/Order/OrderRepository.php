@@ -107,33 +107,16 @@ class OrderRepository {
 	 * @param string $locale
 	 * @return array
 	 */
-	public function getCustomerOrderListData(User $user, $locale) {
+	public function getCustomerOrderList(User $user, $locale) {
 		return $this->em->createQueryBuilder()
-			->select('
-				o.id,
-				o.number,
-				o.createdAt,
-				o.urlHash,
-				MAX(ost.name) AS statusName,
-				COUNT(oiProduct.id) AS itemsCount,
-				MAX(oiTransport.name) AS transportName,
-				MAX(oiPayment.name) AS paymentName,
-				o.totalPriceWithVat
-				')
+			->select('o, os')
 			->from(Order::class, 'o')
-			->leftJoin('o.items', 'oiProduct', Join::WITH, 'oiProduct INSTANCE OF :typeProduct')
-			->leftJoin('o.items', 'oiTransport', Join::WITH, 'oiTransport INSTANCE OF :typeTransport')
-			->leftJoin('o.items', 'oiPayment', Join::WITH, 'oiPayment INSTANCE OF :typePayment')
 			->join('o.status', 'os')
 			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
-			->groupBy('o.id')
 			->where('o.customer = :customer AND o.deleted = :deleted')
 			->orderBy('o.createdAt', 'DESC')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
-			->setParameter('typePayment', 'payment')
-			->setParameter('typeProduct', 'product')
-			->setParameter('typeTransport', 'transport')
 			->setParameter('locale', $locale)
 			->getQuery()->execute();
 	}

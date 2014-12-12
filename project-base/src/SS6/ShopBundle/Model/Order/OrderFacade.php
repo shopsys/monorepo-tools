@@ -196,8 +196,8 @@ class OrderFacade {
 	 * @param string $locale
 	 * @return array
 	 */
-	public function getCustomerOrderListData(User $user, $locale) {
-		return $this->orderRepository->getCustomerOrderListData($user, $locale);
+	public function getCustomerOrderList(User $user, $locale) {
+		return $this->orderRepository->getCustomerOrderList($user, $locale);
 	}
 
 	/**

@@ -71,10 +71,9 @@ class CustomerController extends Controller {
 		$user = $this->getUser();
 		/* @var $user \SS6\ShopBundle\Model\Customer\User */
 
-		$ordersData = $orderFacade->getCustomerOrderListData($user, $domain->getLocale());
-
+		$orders = $orderFacade->getCustomerOrderList($user, $domain->getLocale());
 		return $this->render('@SS6Shop/Front/Content/Customer/orders.html.twig', array(
-			'ordersData' => $ordersData,
+			'orders' => $orders,
 		));
 	}
 
