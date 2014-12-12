@@ -1,7 +1,7 @@
 var SS6ShopBundleComponentConstrainsUniqueCollection = function() {
 	var self = this;
 	this.message = '';
-	this.fields = '';
+	this.fields = [];
 
 	/**
 	 * This method is required
@@ -12,7 +12,7 @@ var SS6ShopBundleComponentConstrainsUniqueCollection = function() {
 
 		$.each(value, function(key1, value1) {
 			$.each(value, function(key2, value2) {
-				if (key1 !== key2 && !areValuesEqualInFields(value1, value2)) {
+				if (key1 !== key2 && areValuesEqualInFields(value1, value2)) {
 					result = self.message;
 				}
 			});
@@ -24,7 +24,7 @@ var SS6ShopBundleComponentConstrainsUniqueCollection = function() {
 	function areValuesEqualInFields(value1, value2) {
 		for (var i = 0; i < self.fields.length; i++) {
 			var field = self.fields[i];
-			if (areValuesEqual(value1[field], value2[field])) {
+			if (!areValuesEqual(value1[field], value2[field])) {
 				return false;
 			}
 		}
