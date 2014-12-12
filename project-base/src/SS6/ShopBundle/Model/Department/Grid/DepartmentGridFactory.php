@@ -52,11 +52,9 @@ class DepartmentGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('d, dt, dt_parent')
+			->select('d, dt')
 			->from(Department::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
-			->leftJoin('d.parent', 'd_parent')
-			->leftJoin('d_parent.translations', 'dt_parent', Join::WITH, 'dt_parent.locale = :locale')
 			->orderBy('d.root, d.lft', 'ASC')
 			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'd.id');
@@ -64,7 +62,6 @@ class DepartmentGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('departmentList', $dataSource);
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('names', 'dt.name', $this->translator->trans('Název'), true);
-		$grid->addColumn('parent', 'dt_parent.name', $this->translator->trans('Nadřazená kategorie'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				ActionColumn::TYPE_EDIT,
