@@ -60,6 +60,8 @@ class VatGridFactory implements GridFactoryInterface {
 			)
 			->setAjaxConfirm();
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Vat/listGrid.html.twig');
+
 		return $grid;
 	}
 }

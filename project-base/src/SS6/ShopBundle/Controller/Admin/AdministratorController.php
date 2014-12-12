@@ -38,6 +38,8 @@ class AdministratorController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_administrator_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tohoto administrátora?');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Administrator/listGrid.html.twig');
+
 		return $this->render('@SS6Shop/Admin/Content/Administrator/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));

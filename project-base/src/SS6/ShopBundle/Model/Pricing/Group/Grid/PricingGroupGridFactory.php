@@ -70,6 +70,8 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 			)
 			->setAjaxConfirm();
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Pricing/Groups/listGrid.html.twig');
+
 		return $grid;
 	}
 }

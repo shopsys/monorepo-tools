@@ -136,6 +136,8 @@ class OrderController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', array('id' => 'id'))
 			->setConfirmMessage('Opravdu si přejete objednávku smazat?');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');
+
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', array(

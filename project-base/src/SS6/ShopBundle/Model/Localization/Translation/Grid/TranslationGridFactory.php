@@ -47,6 +47,8 @@ class TranslationGridFactory implements GridFactoryInterface {
 		$grid->addColumn('cs', 'cs', $this->translator->trans('Česky'));
 		$grid->addColumn('en', 'en', $this->translator->trans('Anglicky'));
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Translation/listGrid.html.twig');
+
 		return $grid;
 	}
 

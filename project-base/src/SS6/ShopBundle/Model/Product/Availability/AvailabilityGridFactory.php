@@ -70,6 +70,8 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dostupnost?'));
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Availability/listGrid.html.twig');
+
 		return $grid;
 	}
 }

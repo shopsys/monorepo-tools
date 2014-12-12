@@ -82,6 +82,8 @@ class ParameterGridFactory implements GridFactoryInterface {
 				. 'Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. '
 				. 'Tento krok je nevratný!'));
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Parameter/listGrid.html.twig');
+
 		return $grid;
 	}
 

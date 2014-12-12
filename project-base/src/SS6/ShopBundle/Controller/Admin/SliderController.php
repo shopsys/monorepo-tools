@@ -39,6 +39,8 @@ class SliderController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', array('id' => 's.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Slider/listGrid.html.twig');
+
 		return $this->render('@SS6Shop/Admin/Content/Slider/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));

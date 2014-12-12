@@ -141,6 +141,8 @@ class ProductController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig');
+
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', array(

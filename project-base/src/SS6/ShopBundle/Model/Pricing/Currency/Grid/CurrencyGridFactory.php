@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyGridFactory implements GridFactoryInterface {
 
@@ -21,6 +22,11 @@ class CurrencyGridFactory implements GridFactoryInterface {
 	 */
 	private $gridFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 */
+	private $currencyFacade;
+
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Grid\EntityManager $em
@@ -28,10 +34,12 @@ class CurrencyGridFactory implements GridFactoryInterface {
 	 */
 	public function __construct(
 		EntityManager $em,
-		GridFactory $gridFactory
+		GridFactory $gridFactory,
+		CurrencyFacade $currencyFacade
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
+		$this->currencyFacade = $currencyFacade;
 	}
 
 	/**
@@ -52,6 +60,14 @@ class CurrencyGridFactory implements GridFactoryInterface {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(ActionColumn::TYPE_DELETE, 'Smazat', 'admin_currency_deleteconfirm', array('id' => 'c.id'))
 			->setAjaxConfirm();
+
+		$grid->setTheme(
+			'@SS6Shop/Admin/Content/Currency/listGrid.html.twig',
+			[
+				'defaultCurrency' => $this->currencyFacade->getDefaultCurrency(),
+				'notAllowedToDeleteCurrencyIds' => $this->currencyFacade->getNotAllowedToDeleteCurrencyIds(),
+			]
+		);
 
 		return $grid;
 	}

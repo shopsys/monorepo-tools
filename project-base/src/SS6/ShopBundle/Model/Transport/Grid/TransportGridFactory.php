@@ -101,6 +101,8 @@ class TransportGridFactory implements GridFactoryInterface {
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dopravu?'));
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Transport/listGrid.html.twig');
+
 		return $grid;
 	}
 }
