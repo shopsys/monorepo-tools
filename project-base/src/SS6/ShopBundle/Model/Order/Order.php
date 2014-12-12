@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
@@ -689,6 +690,20 @@ class Order {
 	 */
 	public function getUrlHash() {
 		return $this->urlHash;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getItemsCount() {
+		$itemsCount = 0;
+		foreach ($this->items as $item) {
+			if ($item instanceof OrderProduct) {
+				$itemsCount++;
+			}
+		}
+
+		return $itemsCount;
 	}
 
 }
