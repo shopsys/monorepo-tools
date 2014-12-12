@@ -189,6 +189,7 @@ class ProductFormType extends AbstractType {
 			->add('imagesToDelete', 'choice', array(
 				'required' => false,
 				'multiple' => true,
+				'expanded' => true,
 				'choice_list' => new ObjectChoiceList($this->images, 'filename', array(), null, 'id'),
 			))
 			->add('availability', 'choice', array(

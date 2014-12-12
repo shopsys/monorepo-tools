@@ -58,11 +58,15 @@
 		<ul class="list-image">
 			{% for image in productDetail.images %}
 				<li class="list-image__item">
-					<div class="list-image__item__in">
+					<div class="js-image-to-delete list-image__item__in" data-id="{{ image.id }}">
 						<img src="{{ imageUrlByImage(image, 'original') }}" alt="" height="100" />
 					</div>
+					<button onclick="SS6.productImagesDelete.deleteImage({{ image.id|escape('js') }}); return false;"><i class="fa fa-trash-o"></i>Smazat obrázek</button>
 				</li>
 			{% endfor %}
 		</ul>
+		<button onclick="SS6.productImagesDelete.revert(); return false;"><i class="fa fa-undo"></i>Vrátit zpět</button>
+
+		{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 	</div>
 {% endblock %}
