@@ -3,6 +3,9 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\Parameter\Parameter;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
 
 /**
  * @ORM\Table(name="product_parameter_values")
@@ -36,22 +39,37 @@ class ProductParameterValue {
 	private $value;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData $productParameterValueData
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $value
 	 */
-	public function __construct(ProductParameterValueData $productParameterValueData) {
-		$this->product = $productParameterValueData->getProduct();
-		$this->parameter = $productParameterValueData->getParameter();
-		$this->value = $productParameterValueData->getValue();
+	public function __construct(
+		Product $product,
+		Parameter $parameter,
+		ParameterValue $value
+	) {
+		$this->product = $product;
+		$this->parameter = $parameter;
+		$this->value = $value;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 */
 	public function getParameter() {
 		return $this->parameter;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
+	 */
 	public function getValue() {
 		return $this->value;
 	}

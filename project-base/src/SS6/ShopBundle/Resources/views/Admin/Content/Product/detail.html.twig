@@ -66,9 +66,9 @@
 										</td>
 										<td class="table-col-50 table-edit__body__cell">
 											<span class="table-edit__body__cell__error">
-												 {{ form_errors(parameter.value, {errors_attr: {class: 'table-edit__body__cell__error__message'}}) }}
+												 {{ form_errors(parameter.valueText, {errors_attr: {class: 'table-edit__body__cell__error__message'}}) }}
 											</span>
-											{{ form_widget(parameter.value)}}
+											{{ form_widget(parameter.valueText)}}
 										</td>
 										<td class="table-col-5 table-edit__body__cell text-center">
 											<a href="#" class="js-parameters-item-remove table-action"><i class="fa fa-trash-o"></i></a>

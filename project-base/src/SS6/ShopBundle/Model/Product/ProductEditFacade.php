@@ -163,7 +163,11 @@ class ProductEditFacade {
 
 		foreach ($productParameterValuesData as $productParameterValueData) {
 			$productParameterValueData->setProduct($product);
-			$productParameterValue = new ProductParameterValue($productParameterValueData);
+			$productParameterValue = new ProductParameterValue(
+				$productParameterValueData->getProduct(),
+				$productParameterValueData->getParameter(),
+				$this->parameterRepository->findOrCreateParameterValueByValueText($productParameterValueData->getValueText())
+			);
 			$this->em->persist($productParameterValue);
 		}
 		$this->em->flush();

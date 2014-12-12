@@ -170,13 +170,9 @@ class ProductDataFixtureLoader {
 				$this->parameters[$serializedParameterNames] = new Parameter(new ParameterData($parameterNames));
 			}
 
-			if (!isset($this->parameterValues[$valueText])) {
-				$this->parameterValues[$valueText] = new ParameterValue(new ParameterValueData($valueText));
-			}
-
 			$productParameterValueData = new ProductParameterValueData();
 			$productParameterValueData->setParameter($this->parameters[$serializedParameterNames]);
-			$productParameterValueData->setValue($this->parameterValues[$valueText]);
+			$productParameterValueData->setValueText($valueText);
 			$productParameterValuesData[] = $productParameterValueData;
 		}
 

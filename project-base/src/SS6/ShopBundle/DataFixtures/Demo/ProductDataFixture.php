@@ -60,7 +60,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$this->persistParemetersAndValues($manager, $productData->getParameters());
+		$this->persistParemeters($manager, $productData->getParameters());
 
 		$product = $productEditFacade->create($productData);
 
@@ -71,10 +71,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
 	 */
-	private function persistParemetersAndValues(ObjectManager $manager, array $productParameterValuesData) {
+	private function persistParemeters(ObjectManager $manager, array $productParameterValuesData) {
 		foreach ($productParameterValuesData as $productParameterValueData) {
 			$manager->persist($productParameterValueData->getParameter());
-			$manager->persist($productParameterValueData->getValue());
 		}
 
 		// Doctrine doesn't know how to resolve persisting order and fill autoincrement IDs

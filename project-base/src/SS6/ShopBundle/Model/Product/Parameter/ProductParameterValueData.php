@@ -17,9 +17,9 @@ class ProductParameterValueData {
 	private $parameter;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
-	private $value;
+	private $valueText;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue $productParameterValue
@@ -27,7 +27,7 @@ class ProductParameterValueData {
 	public function setFromEntity(ProductParameterValue $productParameterValue) {
 		$this->product = $productParameterValue->getProduct();
 		$this->parameter = $productParameterValue->getParameter();
-		$this->value = $productParameterValue->getValue();
+		$this->valueText = $productParameterValue->getValue()->getText();
 	}
 
 	/**
@@ -45,10 +45,10 @@ class ProductParameterValueData {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getValue() {
-		return $this->value;
+	public function getValueText() {
+		return $this->valueText;
 	}
 
 	/**
@@ -66,10 +66,10 @@ class ProductParameterValueData {
 	}
 
 	/**
-	 * @param string $value
+	 * @param string|null $valueText
 	 */
-	public function setValue($value) {
-		$this->value = $value;
+	public function setValueText($valueText) {
+		$this->valueText = $valueText;
 	}
 
 }

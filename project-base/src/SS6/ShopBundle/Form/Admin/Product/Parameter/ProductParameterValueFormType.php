@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Parameter;
 
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -17,17 +16,8 @@ class ProductParameterValueFormType extends AbstractType {
 	 */
 	private $parameters;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer
-	 */
-	private $parameterValueToParameterTextTransformer;
-
-	public function __construct(
-		array $parameters,
-		ParameterValueToParameterTextTransformer $parameterValueToParameterTextTransformer
-	) {
+	public function __construct(array $parameters) {
 		$this->parameters = $parameters;
-		$this->parameterValueToParameterTextTransformer = $parameterValueToParameterTextTransformer;
 	}
 
 	/**
@@ -50,16 +40,12 @@ class ProductParameterValueFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyberte parametr')),
 				),
 			))
-			->add(
-				$builder
-					->create('value', 'text', array(
-						'required' => true,
-						'constraints' => array(
-							new Constraints\NotBlank(array('message' => 'Prosím vyplňte hodnotu parametru')),
-						),
-					))
-					->addModelTransformer($this->parameterValueToParameterTextTransformer)
-			);
+			->add('valueText', 'text', array(
+				'required' => true,
+				'constraints' => array(
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte hodnotu parametru')),
+				),
+			));
 	}
 
 	/**
