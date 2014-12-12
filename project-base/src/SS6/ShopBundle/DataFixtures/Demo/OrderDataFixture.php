@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Customer\User;
@@ -36,6 +37,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71200');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -57,6 +59,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71300');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -80,6 +83,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71200');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -101,6 +105,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('70030');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -121,6 +126,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71200');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -143,6 +149,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Pardubice');
 		$orderData->setPostcode('58941');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -168,6 +175,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Opava');
 		$orderData->setPostcode('85741');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -189,6 +197,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Praha');
 		$orderData->setPostcode('30258');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -210,6 +219,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71200');
 		$orderData->setDomainId(2);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_EUR));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -229,6 +239,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Plzeň');
 		$orderData->setPostcode('30010');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -260,6 +271,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setDeliveryPostcode('54321');
 		$orderData->setNote('Prosím o dodání do pátku. Děkuji.');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -282,6 +294,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Orlová');
 		$orderData->setPostcode('65421');
 		$orderData->setDomainId(2);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_EUR));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -303,6 +316,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Liberec');
 		$orderData->setPostcode('65421');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -322,6 +336,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Hodonín');
 		$orderData->setPostcode('69501');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -343,6 +358,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Lednice');
 		$orderData->setPostcode('69144');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -363,6 +379,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Opava');
 		$orderData->setPostcode('72589');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -383,6 +400,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Praha');
 		$orderData->setPostcode('30015');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -405,6 +423,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Plzeň');
 		$orderData->setPostcode('30010');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -429,6 +448,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCompanyNumber('555555');
 		$orderData->setNote('Doufám, že vše dorazí v pořádku a co nejdříve :)');
 		$orderData->setDomainId(1);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
 		$this->createOrder(
 			$orderData,
 			array(
@@ -452,6 +472,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->setCity('Ostrava');
 		$orderData->setPostcode('71201');
 		$orderData->setDomainId(2);
+		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_EUR));
 		$this->createOrder(
 			$orderData,
 			array(
