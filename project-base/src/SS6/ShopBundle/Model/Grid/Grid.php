@@ -18,6 +18,7 @@ use Twig_Environment;
 class Grid {
 
 	const GET_PARAMETER = 'g';
+	const DEFAULT_VIEW_THEME = '@SS6Shop/Admin/Grid/Grid.html.twig';
 
 	/**
 	 * @var string
@@ -140,6 +141,16 @@ class Grid {
 	private $paginationResults;
 
 	/**
+	 * @var string|string[]|null
+	 */
+	private $viewTheme;
+
+	/**
+	 * @var array
+	 */
+	private $viewTemplateParameters;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
@@ -169,6 +180,9 @@ class Grid {
 
 		$this->limit = $this->defaultLimit;
 		$this->page = 1;
+
+		$this->viewTheme = self::DEFAULT_VIEW_THEME;
+		$this->viewTemplateParameters = [];
 
 		$this->loadFromRequest();
 	}
@@ -252,6 +266,15 @@ class Grid {
 	}
 
 	/**
+	 * @param string|string[] $viewTheme
+	 * @param array $viewParameters
+	 */
+	public function setTheme($viewTheme, array $viewParameters = []) {
+		$this->viewTheme = $viewTheme;
+		$this->viewTemplateParameters = $viewParameters;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createView() {
@@ -259,7 +282,14 @@ class Grid {
 			$this->executeTotalQuery();
 		}
 		$this->loadRows();
-		$gridView = new GridView($this, $this->requestStack, $this->router, $this->twig);
+		$gridView = new GridView(
+			$this,
+			$this->requestStack,
+			$this->router,
+			$this->twig,
+			$this->viewTheme,
+			$this->viewTemplateParameters
+		);
 
 		return $gridView;
 	}
@@ -270,7 +300,14 @@ class Grid {
 	 */
 	public function createViewWithOneRow($rowId) {
 		$this->loadRowsWithOneRow($rowId);
-		$gridView = new GridView($this, $this->requestStack, $this->router, $this->twig);
+		$gridView = new GridView(
+			$this,
+			$this->requestStack,
+			$this->router,
+			$this->twig,
+			$this->viewTheme,
+			$this->viewTemplateParameters
+		);
 
 		return $gridView;
 	}

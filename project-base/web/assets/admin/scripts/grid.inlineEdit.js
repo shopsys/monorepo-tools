@@ -59,8 +59,7 @@
 		var $saving = $formRow.find('.js-inline-edit-saving').show();
 		var $virtualForm = $('<form>')
 				.append($formRow.clone())
-				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')))
-				.append($('<input type="hidden "name="themeJson" />').val($grid.data('inline-edit-theme-json')))
+				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')));
 
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {

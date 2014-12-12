@@ -2,7 +2,6 @@
 <div class="grid js-grid" {% spaceless %}
 		{% if grid.inlineEdit %}
 			data-inline-edit-service-name="{{ grid.inlineEditService.serviceName }}"
-			data-inline-edit-theme-json="{{ gridView.theme|json_encode() }}"
 			data-inline-edit-url-get-form="{{ url('admin_grid_getform') }}"
 			data-inline-edit-url-save-form="{{ url('admin_grid_saveform') }}"
 		{% endif %}
