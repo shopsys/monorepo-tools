@@ -56,4 +56,12 @@ class CurrencyService {
 		return $notAllowedToDeleteCurrencyIds;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return bool
+	 */
+	public function isCurrencyNotAllowedToDelete(Currency $currency) {
+		return in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds());
+	}
+
 }

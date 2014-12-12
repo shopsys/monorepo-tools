@@ -86,7 +86,7 @@ class CurrencyFacade {
 	public function deleteById($currencyId) {
 		$currency = $this->currencyRepository->getById($currencyId);
 
-		if ($this->isCurrencyNotAllowedToDelete($currency)) {
+		if ($this->currencyService->isCurrencyNotAllowedToDelete($currency)) {
 			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException();
 		}
 		$this->em->beginTransaction();
@@ -138,14 +138,6 @@ class CurrencyFacade {
 	 */
 	public function getNotAllowedToDeleteCurrencyIds() {
 		return $this->currencyService->getNotAllowedToDeleteCurrencyIds();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return bool
-	 */
-	private function isCurrencyNotAllowedToDelete(Currency $currency) {
-		return in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds());
 	}
 
 }

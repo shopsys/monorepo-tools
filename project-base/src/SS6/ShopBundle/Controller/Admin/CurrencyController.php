@@ -127,7 +127,7 @@ class CurrencyController extends Controller {
 		foreach ($domain->getAll() as $domainConfig) {
 			$domainId = $domainConfig->getId();
 			$defaultCurrencies[$domainId] = $currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
-			$domainNames[] = $domainConfig->getDomain();
+			$domainNames[$domainId] = $domainConfig->getDomain();
 		}
 
 		$formData['domainDefaultCurrencies'] = $defaultCurrencies;
@@ -143,7 +143,7 @@ class CurrencyController extends Controller {
 					$domainId
 				);
 			}
-			$flashMessageSender->addSuccess('Nastavení základních měn pro každou doménu bylo upraveno');
+			$flashMessageSender->addSuccessFlash('Nastavení základních měn pro každou doménu bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_currency_list'));
 		}
