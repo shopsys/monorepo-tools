@@ -109,10 +109,10 @@ class ProductService {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 * @return \SS6\ShopBundle\Tests\Model\Product\Pricing\ProductSellingPrice[]
 	 */
-	public function getProductSellingPricesByPricingGroups(Product $product, array $pricingGroups) {
-		$productSellingPrices = array();
+	public function getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups) {
+		$productSellingPrices = [];
 		foreach ($pricingGroups as $pricingGroup) {
-			$productSellingPrices[] = new ProductSellingPrice(
+			$productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
 				$pricingGroup,
 				$this->productPriceCalculation->calculatePrice($product, $pricingGroup)
 			);

@@ -59,7 +59,7 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 			'product' => $product,
 			'productDetail' => $productDetailFactory->getDetailForProduct($product),
-			'productSellingPrices' => $productEditFacade->getAllProductSellingPrices($product),
+			'productSellingPricesIndexedByDomainId' => $productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
 			'domainService' => $domain,
 		));
 	}

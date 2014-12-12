@@ -225,8 +225,8 @@ class ProductEditFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
 	 */
-	public function getAllProductSellingPrices(Product $product) {
-		return $this->productService->getProductSellingPricesByPricingGroups(
+	public function getAllProductSellingPricesIndexedByDomainId(Product $product) {
+		return $this->productService->getProductSellingPricesIndexedByDomainIdAndPricingGroupId(
 			$product,
 			$this->pricingGroupRepository->getAll()
 		);
