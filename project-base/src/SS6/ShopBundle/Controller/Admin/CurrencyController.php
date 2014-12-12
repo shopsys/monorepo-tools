@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencyDomainSettingsFormType;
 use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ class CurrencyController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Currency/list.html.twig', array(
 			'gridView' => $grid->createView(),
-			'defaultCurrency' => $currencyFacade->getDefaultCurrency()
+			'notAllowedToDeleteCurrencyIds' => $currencyFacade->getNotAllowedToDeleteCurrencyIds(),
 		));
 	}
 
@@ -103,6 +104,54 @@ class CurrencyController extends Controller {
 			'form' => $form->createView(),
 		));
 
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function domainSettingsAction(Request $request) {
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+
+		$currencies = $currencyFacade->getAll();
+		$form = $this->createForm(new CurrencyDomainSettingsFormType($currencies));
+
+		$formData = array();
+		$domainNames = array();
+		$defaultCurrencies = array();
+
+		foreach ($domain->getAll() as $domainConfig) {
+			$domainId = $domainConfig->getId();
+			$defaultCurrencies[$domainId] = $currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+			$domainNames[$domainId] = $domainConfig->getDomain();
+		}
+
+		$formData['domainDefaultCurrencies'] = $defaultCurrencies;
+		$form->setData($formData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$defaultCurrencies = $form->getData();
+			foreach ($domain->getAll() as $domainConfig) {
+				$domainId = $domainConfig->getId();
+				$currencyFacade->setDomainDefaultCurrency(
+					$defaultCurrencies['domainDefaultCurrencies'][$domainId],
+					$domainId
+				);
+			}
+			$flashMessageSender->addSuccessFlash('Nastavení základních měn pro každou doménu bylo upraveno');
+
+			return $this->redirect($this->generateUrl('admin_currency_list'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Currency/domainCurrencySettings.html.twig', array(
+			'form' => $form->createView(),
+			'domainNames' => $domainNames,
+		));
 	}
 
 }

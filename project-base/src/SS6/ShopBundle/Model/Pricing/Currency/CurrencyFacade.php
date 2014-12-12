@@ -86,7 +86,7 @@ class CurrencyFacade {
 	public function deleteById($currencyId) {
 		$currency = $this->currencyRepository->getById($currencyId);
 
-		if ($this->isDefaultCurrency($currency)) {
+		if ($this->currencyService->isCurrencyNotAllowedToDelete($currency)) {
 			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException();
 		}
 		$this->em->beginTransaction();
@@ -111,6 +111,14 @@ class CurrencyFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 */
+	public function getDomainDefaultCurrencyByDomainId($domainId) {
+		return $this->getById($this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainId));
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setDefaultCurrency(Currency $currency) {
@@ -119,10 +127,17 @@ class CurrencyFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return bool
+	 * @param int $domainId
 	 */
-	private function isDefaultCurrency(Currency $currency) {
-		return $currency === $this->getDefaultCurrency();
+	public function setDomainDefaultCurrency(Currency $currency, $domainId) {
+		$this->pricingSetting->setDomainDefaultCurrency($currency, $domainId);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getNotAllowedToDeleteCurrencyIds() {
+		return $this->currencyService->getNotAllowedToDeleteCurrencyIds();
 	}
 
 }
