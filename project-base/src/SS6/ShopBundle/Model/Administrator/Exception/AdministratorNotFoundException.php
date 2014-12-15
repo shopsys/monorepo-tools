@@ -10,9 +10,9 @@ class AdministratorNotFoundException extends NotFoundHttpException implements Ad
 
 	/**
 	 * @param mixed $criteria
-	 * @param \Exception $prevoious
+	 * @param \Exception $previous
 	 */
-	public function __construct($criteria, Exception $prevoious = null) {
+	public function __construct($criteria, Exception $previous = null) {
 		parent::__construct('Administrator not found by criteria '. Debug::export($criteria), $previous, 0);
 	}
 }
