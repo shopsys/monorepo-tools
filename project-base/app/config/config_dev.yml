@@ -20,6 +20,12 @@ monolog:
       type: console
       bubble: false
 
+#    doctrine:
+#      action_level: debug
+#      type:  stream
+#      path:  %kernel.logs_dir%/%kernel.environment%_doctrine.log
+#      channels: doctrine
+
 assetic:
   use_controller: false
 
