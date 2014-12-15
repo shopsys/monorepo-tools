@@ -193,11 +193,10 @@ class OrderFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\SS6\ShopBundle\Model\Customer\User $user
-	 * @param string $locale
 	 * @return array
 	 */
-	public function getCustomerOrderList(User $user, $locale) {
-		return $this->orderRepository->getCustomerOrderList($user, $locale);
+	public function getCustomerOrderList(User $user) {
+		return $this->orderRepository->getCustomerOrderList($user);
 	}
 
 	/**

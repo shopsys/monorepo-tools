@@ -104,20 +104,20 @@ class OrderRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User
-	 * @param string $locale
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
-	public function getCustomerOrderList(User $user, $locale) {
+	public function getCustomerOrderList(User $user) {
 		return $this->em->createQueryBuilder()
-			->select('o, os')
+			->select('o, oi, os, ost, c')
 			->from(Order::class, 'o')
+			->join('o.items', 'oi')
 			->join('o.status', 'os')
-			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
+			->join('os.translations', 'ost')
+			->join('o.currency', 'c')
 			->where('o.customer = :customer AND o.deleted = :deleted')
 			->orderBy('o.createdAt', 'DESC')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
-			->setParameter('locale', $locale)
 			->getQuery()->execute();
 	}
 

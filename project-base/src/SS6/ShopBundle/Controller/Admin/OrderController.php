@@ -143,11 +143,15 @@ class OrderController extends Controller {
 		));
 	}
 
-	private function addOrderEntityToDataSource($row) {
+	/**
+	 * @param array $row
+	 * @return array
+	 */
+	private function addOrderEntityToDataSource(array $row) {
 		$orderFacade = $this->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-		$order = $orderFacade->getById($row['id']);
-		$row['order'] = $order;
+
+		$row['order'] = $orderFacade->getById($row['id']);
 
 		return $row;
 	}
