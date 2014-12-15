@@ -13,14 +13,6 @@ class ConfigVersionsCheckCommand {
 	/**
 	 * @var array
 	 */
-	private $containerParametersConfigsFilePaths = [
-			'parameters.yml' => 'parameters',
-			'parameters_test.yml' => 'parameters',
-		];
-
-	/**
-	 * @var array
-	 */
 	private $errors;
 
 	/**
@@ -42,10 +34,6 @@ class ConfigVersionsCheckCommand {
 		$this->errors = [];
 
 		$this->processConfigVersion('domains.yml', self::ROOT_SETTING_VALUE);
-
-		foreach ($this->containerParametersConfigsFilePaths as $configFilename => $rootParameter) {
-			$this->processConfigVersion($configFilename, $rootParameter);
-		}
 
 		if (count($this->errors) > 0) {
 			$this->output->writeln('<error>' . implode(PHP_EOL, $this->errors) . '</error>');
