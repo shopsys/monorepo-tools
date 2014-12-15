@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Twig_Extension;
 use Twig_SimpleFilter;
@@ -76,7 +77,7 @@ class PriceExtension extends Twig_Extension {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return string
 	 */
-	public function priceWithCurrencyFilter($price, $currency) {
+	public function priceWithCurrencyFilter($price, Currency $currency) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
 		$currencySymbol = $currency->getSymbol();
