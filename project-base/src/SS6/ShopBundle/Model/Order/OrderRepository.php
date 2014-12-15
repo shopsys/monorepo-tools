@@ -104,37 +104,20 @@ class OrderRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User
-	 * @param string $locale
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
-	public function getCustomerOrderListData(User $user, $locale) {
+	public function getCustomerOrderList(User $user) {
 		return $this->em->createQueryBuilder()
-			->select('
-				o.id,
-				o.number,
-				o.createdAt,
-				o.urlHash,
-				MAX(ost.name) AS statusName,
-				COUNT(oiProduct.id) AS itemsCount,
-				MAX(oiTransport.name) AS transportName,
-				MAX(oiPayment.name) AS paymentName,
-				o.totalPriceWithVat
-				')
+			->select('o, oi, os, ost, c')
 			->from(Order::class, 'o')
-			->leftJoin('o.items', 'oiProduct', Join::WITH, 'oiProduct INSTANCE OF :typeProduct')
-			->leftJoin('o.items', 'oiTransport', Join::WITH, 'oiTransport INSTANCE OF :typeTransport')
-			->leftJoin('o.items', 'oiPayment', Join::WITH, 'oiPayment INSTANCE OF :typePayment')
+			->join('o.items', 'oi')
 			->join('o.status', 'os')
-			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
-			->groupBy('o.id')
+			->join('os.translations', 'ost')
+			->join('o.currency', 'c')
 			->where('o.customer = :customer AND o.deleted = :deleted')
 			->orderBy('o.createdAt', 'DESC')
 			->setParameter('customer', $user)
 			->setParameter('deleted', false)
-			->setParameter('typePayment', 'payment')
-			->setParameter('typeProduct', 'product')
-			->setParameter('typeTransport', 'transport')
-			->setParameter('locale', $locale)
 			->getQuery()->execute();
 	}
 

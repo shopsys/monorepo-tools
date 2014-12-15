@@ -94,7 +94,7 @@
 										</tr>
 									</thead>
 									<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
-										{% macro orderItem(orderItem, orderItemId, orderItemTotalPricesById) %}
+										{% macro orderItem(orderItem, orderItemId, orderItemTotalPricesById, currency) %}
 											<tr class="js-order-item" data-index="{{ orderItemId }}">
 												<td>{{ form_widget(orderItem.name, {attr: { class: 'js-order-item-name'}}) }}</td>
 												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
@@ -102,12 +102,12 @@
 												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 												<td class="text-right text-middle">
 													{% if orderItemTotalPricesById[orderItemId] is defined %}
-														{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithDefaultAdminCurrency }}
+														{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
 													{% endif %}
 												</td>
 												<td class="text-right text-middle">
 													{% if orderItemTotalPricesById[orderItemId] is defined %}
-														{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithDefaultAdminCurrency }}
+														{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
 													{% endif %}
 												</td>
 												<td class="table-col-5 table-edit__body__cell text-center">
@@ -117,7 +117,7 @@
 										{% endmacro %}
 
 										{% for orderItemId, orderItem in form.items %}
-											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById) }}
+											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById, order.currency) }}
 										{% endfor %}
 									</tbody>
 									<tfoot>
@@ -131,8 +131,8 @@
 										</tr>
 										<tr>
 											<th colspan="4">{{ 'Celkem'|trans }}:</th>
-											<th class="text-right">{{ order.totalPriceWithVat|priceWithDefaultAdminCurrency }}</th>
-											<th class="text-right">{{ order.totalPriceWithoutVat|priceWithDefaultAdminCurrency }}</th>
+											<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
+											<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
 											<th></th>
 										</tr>
 									</tfoot>

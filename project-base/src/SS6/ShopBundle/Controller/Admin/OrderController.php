@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -101,7 +101,7 @@ class OrderController extends Controller {
 			->select('
 				o.id,
 				o.number,
-				o.domainId AS domainId,
+				o.domainId,
 				o.createdAt,
 				MAX(ost.name) AS statusName,
 				o.totalPriceWithVat,
@@ -113,7 +113,12 @@ class OrderController extends Controller {
 			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
 			->groupBy('o.id')
 			->setParameter('locale', $localization->getDefaultLocale());
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'o.id');
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
+			$queryBuilder, 'o.id',
+			function ($row) {
+				return $this->addOrderEntityToDataSource($row);
+			}
+		);
 
 		$grid = $gridFactory->create('orderList', $dataSource);
 		$grid->allowPaging();
@@ -122,9 +127,9 @@ class OrderController extends Controller {
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('created_at', 'o.createdAt', 'Vytvořena', true);
 		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
-		$grid->addColumn('domain_id', 'domainId', 'Doména', true);
+		$grid->addColumn('domain_id', 'o.domainId', 'Doména', true);
 		$grid->addColumn('status_name', 'statusName', 'Stav', true);
-		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', true)->setClassAttribute('text-right text-nowrap');
+		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', false)->setClassAttribute('text-right text-nowrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
@@ -136,6 +141,19 @@ class OrderController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));
+	}
+
+	/**
+	 * @param array $row
+	 * @return array
+	 */
+	private function addOrderEntityToDataSource(array $row) {
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+
+		$row['order'] = $orderFacade->getById($row['id']);
+
+		return $row;
 	}
 
 	/**

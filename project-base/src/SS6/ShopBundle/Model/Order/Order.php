@@ -8,8 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 
 /**
  * @ORM\Table(name="orders")
@@ -239,6 +241,13 @@ class Order {
 	private $urlHash;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 *
+	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Pricing\Currency\Currency")
+	 */
+	private $currency;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
@@ -286,6 +295,7 @@ class Order {
 		$this->createdAt = new DateTime();
 		$this->domainId = $orderData->getDomainId();
 		$this->urlHash = $urlHash;
+		$this->currency = $orderData->getCurrency();
 	}
 
 	/**
@@ -468,6 +478,13 @@ class Order {
 	 */
 	public function getTotalProductPriceWithVat() {
 		return $this->totalProductPriceWithVat;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 */
+	public function getCurrency() {
+		return $this->currency;
 	}
 
 	/**
@@ -673,6 +690,20 @@ class Order {
 	 */
 	public function getUrlHash() {
 		return $this->urlHash;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getProductItemsCount() {
+		$itemsCount = 0;
+		foreach ($this->items as $item) {
+			if ($item instanceof OrderProduct) {
+				$itemsCount++;
+			}
+		}
+
+		return $itemsCount;
 	}
 
 }

@@ -58,8 +58,6 @@ class CustomerController extends Controller {
 	public function ordersAction() {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
 			$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
@@ -71,10 +69,9 @@ class CustomerController extends Controller {
 		$user = $this->getUser();
 		/* @var $user \SS6\ShopBundle\Model\Customer\User */
 
-		$ordersData = $orderFacade->getCustomerOrderListData($user, $domain->getLocale());
-
+		$orders = $orderFacade->getCustomerOrderList($user);
 		return $this->render('@SS6Shop/Front/Content/Customer/orders.html.twig', array(
-			'ordersData' => $ordersData,
+			'orders' => $orders,
 		));
 	}
 

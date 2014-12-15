@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Order;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
@@ -141,6 +142,11 @@ class OrderData {
 	 * @var int
 	 */
 	private $domainId;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 */
+	private $currency;
 
 	/**
 	 * @return int
@@ -308,6 +314,13 @@ class OrderData {
 	 */
 	public function getDomainId() {
 		return $this->domainId;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 */
+	public function getCurrency() {
+		return $this->currency;
 	}
 
 	/**
@@ -507,6 +520,13 @@ class OrderData {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 */
+	public function setCurrency(Currency $currency) {
+		$this->currency = $currency;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
 	public function setFromEntity(Order $order) {
@@ -540,6 +560,7 @@ class OrderData {
 		}
 		$this->setItems($orderItemsData);
 		$this->setDomainId($order->getDomainId());
+		$this->setCurrency($order->getCurrency());
 	}
 
 }

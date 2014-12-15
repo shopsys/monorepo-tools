@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Twig_Extension;
 use Twig_SimpleFilter;
@@ -39,6 +40,7 @@ class PriceExtension extends Twig_Extension {
 			new Twig_SimpleFilter('priceWithDefaultAdminCurrency', array(
 				$this, 'priceWithDefaultAdminCurrencyFilter'), array('is_safe' => array('html'))
 			),
+			new Twig_SimpleFilter('priceWithCurrency', array($this, 'priceWithCurrencyFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('priceText', array($this, 'priceTextFilter'), array('is_safe' => array('html'))),
 		);
@@ -65,6 +67,20 @@ class PriceExtension extends Twig_Extension {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
 		$currencySymbol = $this->currencyFacade->getDefaultCurrency()->getSymbol();
+		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+
+		return $price;
+	}
+
+	/**
+	 * @param string $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string
+	 */
+	public function priceWithCurrencyFilter($price, Currency $currency) {
+		$price = (float)$price;
+		$price = number_format($price, 2, ',', ' ');
+		$currencySymbol = $currency->getSymbol();
 		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
 
 		return $price;

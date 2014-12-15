@@ -6,7 +6,7 @@
 	<h1>{{ 'Mé objednávky'|trans }}</h1>
 	<div class="row">
 		<div class="col-xs-12 col-lg-12">
-			{% if ordersData|length == 0 %}
+			{% if orders|length == 0 %}
 				{{ 'Dosud nemáte žádnou objednávku.'|trans }}
 			{% else %}
 				<div class="table-responsive">
@@ -21,16 +21,16 @@
 							<th>{{ 'Celková cena s DPH'|trans }}</th>
 							<th>{{ 'Detail'|trans }}</th>
 						</tr>
-							{% for orderData in ordersData %}
+							{% for order in orders %}
 								<tr>
-									<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: orderData.number }) }}">{{ orderData.number }}</a></td>
-									<td>{{ orderData.createdAt|date('d-m-Y') }}</td>
-									<td>{{ orderData.statusName }}</td>
-									<td>{{ orderData.itemsCount }}</td>
-									<td>{{ orderData.transportName }}</td>
-									<td>{{ orderData.paymentName }}</td>
-									<td>{{ orderData.totalPriceWithVat|price }}</td>
-									<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: orderData.number }) }}"><i class="fa fa-search"></i</a></td>
+									<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}">{{ order.number }}</a></td>
+									<td>{{ order.createdAt|date('d-m-Y') }}</td>
+									<td>{{ order.status.name }}</td>
+									<td>{{ order.productItemsCount }}</td>
+									<td>{{ order.transportName }}</td>
+									<td>{{ order.paymentName }}</td>
+									<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+									<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}"><i class="fa fa-search"></i</a></td>
 								</tr>
 							{% endfor %}
 
