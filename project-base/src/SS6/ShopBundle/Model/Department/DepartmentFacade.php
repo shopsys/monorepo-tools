@@ -80,10 +80,15 @@ class DepartmentFacade {
 	 */
 	public function deleteById($departmentId) {
 		$department = $this->departmentRepository->getById($departmentId);
+		$this->em->beginTransaction();
 		$this->departmentService->setChildrenAsSiblings($department);
+		// Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
+		// We need to update `parent` attribute of children first.
+		$this->em->flush();
 
 		$this->em->remove($department);
 		$this->em->flush();
+		$this->em->commit();
 	}
 
 	/**
