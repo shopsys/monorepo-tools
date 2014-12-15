@@ -2,7 +2,7 @@
 
 {% block grid_action_cell_type_delete %}
 	{% if notAllowedToDeleteCurrencyIds is defined %}
-		{% if row.c.id in notAllowedToDeleteCurrencyIds %}
+		{% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
 			<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí'|trans }}"
 				class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
 			>
@@ -17,14 +17,18 @@
 {% endblock %}
 
 {% block grid_value_cell_id_exchangeRate %}
-	{% if defaultCurrency is defined %}
-		{% if row.c.id == defaultCurrency.id %}
-			{{ '-' }}
-		{% else %}
-			{{ value }}
-		{% endif %}
-	{% else %}
-		{{ value }}
+	{% if row is empty %}
+		<span class="js-inline-edit-cell-value">{{ value }}</span>
+		<span title="{{ 'Kurz se zadává jako počet jednotek hlavní měny eshopu ku nastavované měně'|trans }}"
+		class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
+		>
+			<i class="fa fa-info"></i>
+		</span>
+	{% elseif row is not empty and row.c.id == defaultCurrency.id %}
+		{{ '-' }}
+	{% elseif row is not empty and row.c.id != defaultCurrency.id %}
+		{% set exchangeRateInfo = (' ' ~ defaultCurrency.symbol ~ ' za 1 '|trans ~ row.c.symbol) %}
+		<span class="js-inline-edit-cell-value">{{ value }}</span>{{ exchangeRateInfo }}
 	{% endif %}
 {% endblock %}
 
