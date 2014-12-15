@@ -695,7 +695,7 @@ class Order {
 	/**
 	 * @return int
 	 */
-	public function getItemsCount() {
+	public function getProductItemsCount() {
 		$itemsCount = 0;
 		foreach ($this->items as $item) {
 			if ($item instanceof OrderProduct) {

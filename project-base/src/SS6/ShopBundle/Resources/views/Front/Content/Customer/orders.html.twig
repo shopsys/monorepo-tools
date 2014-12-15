@@ -26,7 +26,7 @@
 									<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}">{{ order.number }}</a></td>
 									<td>{{ order.createdAt|date('d-m-Y') }}</td>
 									<td>{{ order.status.name }}</td>
-									<td>{{ order.itemsCount }}</td>
+									<td>{{ order.productItemsCount }}</td>
 									<td>{{ order.transportName }}</td>
 									<td>{{ order.paymentName }}</td>
 									<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
