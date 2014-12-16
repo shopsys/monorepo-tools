@@ -182,7 +182,7 @@ class AdministratorController extends Controller {
 				'name' => $administratorFacade->getById($id)->getRealName(),
 			));
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolený administrátor již neexistuje.');
+			$flashMessageSender->addErrorFlash('Zvolený administrátor neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_administrator_list'));
