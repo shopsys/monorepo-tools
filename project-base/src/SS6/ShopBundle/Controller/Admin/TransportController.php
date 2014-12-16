@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,12 +110,17 @@ class TransportController extends Controller {
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 
-		$transportName = $transportEditFacade->getById($id)->getName();
-		$transportEditFacade->deleteById($id);
+		try {
+			$transportName = $transportEditFacade->getById($id)->getName();
+			$transportEditFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Doprava <strong>{{ name }}</strong> byla smazána', array(
-			'name' => $transportName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Doprava <strong>{{ name }}</strong> byla smazána', array(
+				'name' => $transportName,
+			));
+		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená doprava neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
 

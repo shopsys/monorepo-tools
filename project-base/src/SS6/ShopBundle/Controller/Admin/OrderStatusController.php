@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrderStatusController extends Controller {
 
@@ -32,9 +33,8 @@ class OrderStatusController extends Controller {
 		$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
 		/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
 
-		$orderStatus = $orderStatusFacade->getById($id);
-
 		try {
+			$orderStatus = $orderStatusFacade->getById($id);
 			$orderStatusFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
@@ -60,6 +60,8 @@ class OrderStatusController extends Controller {
 					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav', array(
 				'name' => $e->getOrderStatus()->getName(),
 			));
+		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolený stav objednávek neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_orderstatus_list'));
@@ -75,24 +77,29 @@ class OrderStatusController extends Controller {
 		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
 		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */;
 
-		$orderStatus = $orderStatusFacade->getById($id);
-		if ($orderStatusFacade->isOrderStatusUsed($orderStatus)) {
-			$message = 'Jelikož stav "' . $orderStatus->getName() . '" je používán ještě u některých objednávek, '
-				. 'musíte zvolit, jaký stav bude použít místo něj. Jaký stav chcete těmto objednávkám nastavit? '
-				. 'Při této změně stavu nebude odeslán email zákazníkům.';
-			$ordersStatusNamesById = array();
-			foreach ($orderStatusFacade->getAllExceptId($id) as $newOrderStatus) {
-				$ordersStatusNamesById[$newOrderStatus->getId()] = $newOrderStatus->getName();
+		try {
+			$orderStatus = $orderStatusFacade->getById($id);
+			if ($orderStatusFacade->isOrderStatusUsed($orderStatus)) {
+				$message = 'Jelikož stav "' . $orderStatus->getName() . '" je používán ještě u některých objednávek, '
+					. 'musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? '
+					. 'Při této změně stavu nebude odeslán email zákazníkům.';
+				$ordersStatusNamesById = array();
+				foreach ($orderStatusFacade->getAllExceptId($id) as $newOrderStatus) {
+					$ordersStatusNamesById[$newOrderStatus->getId()] = $newOrderStatus->getName();
+				}
+				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+					$message,
+					'admin_orderstatus_delete',
+					$id,
+					$ordersStatusNamesById
+				);
+			} else {
+				$message = 'Opravdu si přejete trvale odstranit stav objednávek "'
+					. $orderStatus->getName() . '"? Nikde není použitý.';
+				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 			}
-			return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
-				$message,
-				'admin_orderstatus_delete',
-				$id,
-				$ordersStatusNamesById
-			);
-		} else {
-			$message = 'Opravdu si přejete trvale odstranit stav objednávek "' . $orderStatus->getName() . '"? Nikde není použitý.';
-			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
+		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
+			return new Response('Zvolený stav objednávek neexistuje');
 		}
 	}
 

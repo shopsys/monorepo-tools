@@ -32,12 +32,17 @@ class ParameterController extends Controller {
 		$parameterFacade = $this->get('ss6.shop.product.parameter.parameter_facade');
 		/* @var $parameterFacade \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade */
 
-		$fullName = $parameterFacade->getById($id)->getName();
-		$parameterFacade->deleteById($id);
+		try {
+			$fullName = $parameterFacade->getById($id)->getName();
+			$parameterFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', array(
-			'name' => $fullName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', array(
+				'name' => $fullName,
+			));
+		} catch (\SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolený parametr neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_parameter_list'));
 	}
 

@@ -144,12 +144,17 @@ class SliderController extends Controller {
 		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
 		/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
 
-		$name = $sliderItemFacade->getById($id)->getName();
-		$sliderItemFacade->delete($id);
+		try {
+			$name = $sliderItemFacade->getById($id)->getName();
+			$sliderItemFacade->delete($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(
-			'name' => $name,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(
+				'name' => $name,
+			));
+		} catch (\SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená stránka neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_slider_list'));
 
 	}

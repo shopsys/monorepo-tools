@@ -199,11 +199,15 @@ class CustomerController extends Controller {
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-		$fullName = $customerEditFacade->getUserById($id)->getFullName();
-		$customerEditFacade->delete($id);
-		$flashMessageSender->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
-			'name' => $fullName,
-		));
+		try {
+			$fullName = $customerEditFacade->getUserById($id)->getFullName();
+			$customerEditFacade->delete($id);
+			$flashMessageSender->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
+				'name' => $fullName,
+			));
+		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolený zákazník neexistuje');
+		}
 
 		return $this->redirect($this->generateUrl('admin_customer_list'));
 	}

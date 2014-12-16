@@ -98,7 +98,7 @@ class VatController extends Controller {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolené DPH již neexistuje');
+			$flashMessageSender->addErrorFlash('Zvolené DPH neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_vat_list'));

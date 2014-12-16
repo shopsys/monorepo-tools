@@ -159,12 +159,17 @@ class ProductController extends Controller {
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$productName = $productEditFacade->getById($id)->getName();
-		$productEditFacade->delete($id);
+		try {
+			$productName = $productEditFacade->getById($id)->getName();
+			$productEditFacade->delete($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
-			'name' => $productName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
+				'name' => $productName,
+			));
+		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolený produkt neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_product_list'));
 	}
 }
