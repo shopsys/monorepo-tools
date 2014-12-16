@@ -48,7 +48,7 @@ class VatController extends Controller {
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			return new Response('Zvolené DPH již neexistuje');
+			return new Response('Zvolené DPH neexistuje');
 		}
 
 	}
@@ -98,7 +98,7 @@ class VatController extends Controller {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolené DPH již neexistuje');
+			$flashMessageSender->addErrorFlash('Zvolené DPH neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_vat_list'));

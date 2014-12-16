@@ -32,12 +32,17 @@ class AvailabilityController extends Controller {
 		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
 		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
 
-		$fullName = $availabilityFacade->getById($id)->getName();
-		$availabilityFacade->deleteById($id);
+		try {
+			$fullName = $availabilityFacade->getById($id)->getName();
+			$availabilityFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
-			'name' => $fullName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
+				'name' => $fullName,
+			));
+		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená dostupnost neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_availability_list'));
 	}
 

@@ -57,7 +57,7 @@ class PricingGroupController extends Controller {
 					));
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolená cenová skupina již neexistuje');
+			$flashMessageSender->addErrorFlash('Zvolená cenová skupina neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
@@ -102,7 +102,7 @@ class PricingGroupController extends Controller {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			return new Response('Zvolená cenová skupina již neexistuje');
+			return new Response('Zvolená cenová skupina neexistuje.');
 		}
 
 	}

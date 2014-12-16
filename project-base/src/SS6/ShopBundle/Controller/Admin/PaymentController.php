@@ -109,12 +109,17 @@ class PaymentController extends Controller {
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
-		$paymentName = $paymentEditFacade->getById($id)->getName();
-		$paymentEditFacade->deleteById($id);
+		try {
+			$paymentName = $paymentEditFacade->getById($id)->getName();
+			$paymentEditFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Platba <strong>{{ name }}</strong> byla smazána', array(
-			'name' => $paymentName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Platba <strong>{{ name }}</strong> byla smazána', array(
+				'name' => $paymentName,
+			));
+		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená platba neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 	}
 

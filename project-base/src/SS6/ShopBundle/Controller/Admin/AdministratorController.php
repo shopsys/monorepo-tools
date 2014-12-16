@@ -168,9 +168,9 @@ class AdministratorController extends Controller {
 		$administratorFacade = $this->get('ss6.shop.administrator.administrator_facade');
 		/* @var $administratorFacade \SS6\ShopBundle\Model\Administrator\AdministratorFacade */
 
-		$realName = $administratorFacade->getById($id)->getRealName();
-
 		try {
+			$realName = $administratorFacade->getById($id)->getRealName();
+
 			$administratorFacade->delete($id);
 			$flashMessageSender->addSuccessFlashTwig('Administrátor <strong>{{ name }}</strong> byl smazán.', array(
 				'name' => $realName,
@@ -179,8 +179,10 @@ class AdministratorController extends Controller {
 			$flashMessageSender->addErrorFlash('Nemůžete smazat sami sebe.');
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
 			$flashMessageSender->addErrorFlashTwig('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.', array(
-				'name' => $realName,
+				'name' => $administratorFacade->getById($id)->getRealName(),
 			));
+		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolený administrátor neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_administrator_list'));

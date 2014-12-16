@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencyDomainSettingsFormType;
 use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CurrencyController extends Controller {
 
@@ -43,7 +44,7 @@ class CurrencyController extends Controller {
 
 			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			return new Response('Zvolená měna již neexistuje');
+			return new Response('Zvolená měna neexistuje.');
 		}
 
 	}
@@ -69,7 +70,7 @@ class CurrencyController extends Controller {
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException $ex) {
 			$flashMessageSender->addErrorFlash('Tuto měnu nelze smazat, je nastavena jako výchozí');
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolená měna již neexistuje');
+			$flashMessageSender->addErrorFlash('Zvolená měna neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_currency_list'));

@@ -166,14 +166,19 @@ class OrderController extends Controller {
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
-		$orderNumber = $orderRepository->getById($id)->getNumber();
-		$orderFacade = $this->get('ss6.shop.order.order_facade');
-		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-		$orderFacade->deleteById($id);
+		try {
+			$orderNumber = $orderRepository->getById($id)->getNumber();
+			$orderFacade = $this->get('ss6.shop.order.order_facade');
+			/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+			$orderFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
-			'number' => $orderNumber,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
+				'number' => $orderNumber,
+			));
+		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená objednávka neexistuje');
+		}
+
 		return $this->redirect($this->generateUrl('admin_order_list'));
 	}
 }

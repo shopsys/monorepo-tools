@@ -120,13 +120,17 @@ class DepartmentController extends Controller {
 		$departmentFacade = $this->get('ss6.shop.department.department_facade');
 		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
 
-		$fullName = $departmentFacade->getById($id)->getName();
+		try {
+			$fullName = $departmentFacade->getById($id)->getName();
 
-		$departmentFacade->deleteById($id);
+			$departmentFacade->deleteById($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Oddělení <strong>{{ name }}</strong> bylo smazáno', array(
-			'name' => $fullName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Oddělení <strong>{{ name }}</strong> bylo smazáno', array(
+				'name' => $fullName,
+			));
+		} catch (\SS6\ShopBundle\Model\Department\Exception\DepartmentNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená kategorie neexistuje');
+		}
 
 		return $this->redirect($this->generateUrl('admin_department_list'));
 	}

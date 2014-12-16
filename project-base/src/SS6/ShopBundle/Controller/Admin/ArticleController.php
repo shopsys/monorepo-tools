@@ -150,12 +150,17 @@ class ArticleController extends Controller {
 		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
 		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
-		$fullName = $articleEditFacade->getById($id)->getName();
-		$articleEditFacade->delete($id);
+		try {
+			$fullName = $articleEditFacade->getById($id)->getName();
+			$articleEditFacade->delete($id);
 
-		$flashMessageSender->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
-			'name' => $fullName,
-		));
+			$flashMessageSender->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
+				'name' => $fullName,
+			));
+		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolený článek neexistuje.');
+		}
+
 		return $this->redirect($this->generateUrl('admin_article_list'));
 	}
 
