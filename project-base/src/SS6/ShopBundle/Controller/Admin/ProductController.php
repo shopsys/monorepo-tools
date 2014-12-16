@@ -27,15 +27,15 @@ class ProductController extends Controller {
 		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$productDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
-		/* @var $productDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
 
 		$product = $productEditFacade->getById($id);
 
 		$form = $this->createForm($productEditFormTypeFactory->create($product));
-		$productData = $productDataFactory->createFromProduct($product);
+		$productEditData = $productEditDataFactory->createFromProduct($product);
 
-		$form->setData($productData);
+		$form->setData($productEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
