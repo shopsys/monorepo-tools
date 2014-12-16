@@ -8,7 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\DepartmentDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -41,10 +41,10 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		);
 
 		$loaderService->injectReferences($vats, $availabilities, $departments);
-		$productsData = $loaderService->getProductsData();
+		$productsEditData = $loaderService->getProductsEditData();
 		$productNo = 1;
-		foreach ($productsData as $productData) {
-			$this->createProduct($manager, 'product_' . $productNo, $productData);
+		foreach ($productsEditData as $productEditData) {
+			$this->createProduct($manager, 'product_' . $productNo, $productEditData);
 			$productNo++;
 		}
 
@@ -54,15 +54,15 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
-	private function createProduct(ObjectManager $manager, $referenceName, ProductData $productData) {
+	private function createProduct(ObjectManager $manager, $referenceName, ProductEditData $productEditData) {
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$this->persistParemeters($manager, $productData->getParameters());
+		$this->persistParemeters($manager, $productEditData->parameters);
 
-		$product = $productEditFacade->create($productData);
+		$product = $productEditFacade->create($productEditData);
 
 		$this->addReference($referenceName, $product);
 	}
@@ -88,6 +88,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		return array(
 			VatDataFixture::class,
 			AvailabilityDataFixture::class,
+			DepartmentDataFixture::class,
 		);
 	}
 

@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
-class ProductDataFactory {
+class ProductEditDataFactory {
 
 	private $domain;
 
@@ -31,27 +31,28 @@ class ProductDataFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductData
+	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 */
 	public function createDefault() {
-		$productData = new ProductData();
+		$productEditData = new ProductEditData();
+		$productEditData->productData = new ProductData();
 
 		$productParameterValuesData = array();
-		$productData->setParameters($productParameterValuesData);
+		$productEditData->parameters = $productParameterValuesData;
 
-		$productData->setVat($this->vatFacade->getDefaultVat());
+		$productEditData->productData->setVat($this->vatFacade->getDefaultVat());
 
-		return $productData;
+		return $productEditData;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\ProductData
+	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 */
 	public function createFromProduct(Product $product) {
-		$productData = $this->createDefault();
+		$productEditData = $this->createDefault();
 		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
-		$productData->setFromEntity($product, $productDomains);
+		$productEditData->productData->setFromEntity($product, $productDomains);
 		$productParameterValuesData = array();
 
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
@@ -61,8 +62,8 @@ class ProductDataFactory {
 			$productParameterValuesData[] = $productParameterValueData;
 		}
 
-		$productData->setParameters($productParameterValuesData);
-		return $productData;
+		$productEditData->parameters = $productParameterValuesData;
+		return $productEditData;
 	}
 
 }

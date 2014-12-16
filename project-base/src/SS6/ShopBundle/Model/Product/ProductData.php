@@ -71,25 +71,10 @@ class ProductData {
 	private $hidden;
 
 	/**
-	 * @var array
-	 */
-	private $imagesToUpload;
-
-	/**
-	 * @var array
-	 */
-	private $imagesToDelete;
-
-	/**
 	 *
 	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
 	 */
 	private $availability;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
-	 */
-	private $parameters;
 
 	/**
 	 * @var array
@@ -113,10 +98,7 @@ class ProductData {
 	 * @param \DateTime|null $sellingTo
 	 * @param string|null $stockQuantity
 	 * @param bool $hidden
-	 * @param array $imagesToUpload
-	 * @param array $imagesToDelete
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
-	 * @param array $parameters
 	 * @param array $hiddenOnDomains
 	 * @param array $departments
 	 */
@@ -132,10 +114,7 @@ class ProductData {
 		DateTime $sellingTo = null,
 		$stockQuantity = null,
 		$hidden = false,
-		$imagesToUpload = array(),
-		$imagesToDelete = array(),
 		$availability = null,
-		array $parameters = array(),
 		array $hiddenOnDomains = array(),
 		array $departments = array()
 	) {
@@ -150,10 +129,7 @@ class ProductData {
 		$this->sellingTo = $sellingTo;
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
-		$this->imagesToUpload = $imagesToUpload;
-		$this->imagesToDelete = $imagesToDelete;
 		$this->availability = $availability;
-		$this->parameters = $parameters;
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->departments = $departments;
 	}
@@ -229,31 +205,10 @@ class ProductData {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getImagesToUpload() {
-		return $this->imagesToUpload;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getImagesToDelete() {
-		return $this->imagesToDelete;
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Model\Availability\Availability|null
 	 */
 	public function getAvailability() {
 		return $this->availability;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
-	 */
-	public function getParameters() {
-		return $this->parameters;
 	}
 
 	/**
@@ -334,31 +289,10 @@ class ProductData {
 	}
 
 	/**
-	 * @param array $imagesToUpload
-	 */
-	public function setImagesToUpload(array $imagesToUpload) {
-		$this->imagesToUpload = $imagesToUpload;
-	}
-
-	/**
-	 * @param array $imagesToDelete
-	 */
-	public function setImagesToDelete(array $imagesToDelete) {
-		$this->imagesToDelete = $imagesToDelete;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 */
 	public function setAvailability(Availability $availability = null) {
 		$this->availability = $availability;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
-	 */
-	public function setParameters($parameters) {
-		$this->parameters = $parameters;
 	}
 
 	/**

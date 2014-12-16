@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
@@ -93,19 +94,19 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function create(ProductData $productData) {
-		$product = new Product($productData);
+	public function create(ProductEditData $productEditData) {
+		$product = new Product($productEditData->productData);
 
 		$this->em->persist($product);
 		$this->em->beginTransaction();
-		$this->saveParameters($product, $productData->getParameters());
+		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
-		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
+		$this->refreshProductDomains($product, $productEditData->productData->getHiddenOnDomains());
 		$this->em->flush();
-		$this->imageFacade->uploadImages($product, $productData->getImagesToUpload(), null);
+		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
@@ -116,20 +117,20 @@ class ProductEditFacade {
 
 	/**
 	 * @param int $productId
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function edit($productId, ProductData $productData) {
+	public function edit($productId, ProductEditData $productEditData) {
 		$product = $this->productRepository->getById($productId);
 
-		$this->productService->edit($product, $productData);
+		$this->productService->edit($product, $productEditData->productData);
 
 		$this->em->beginTransaction();
-		$this->saveParameters($product, $productData->getParameters());
-		$this->refreshProductDomains($product, $productData->getHiddenOnDomains());
+		$this->saveParameters($product, $productEditData->parameters);
+		$this->refreshProductDomains($product, $productEditData->productData->getHiddenOnDomains());
 		$this->em->flush();
-		$this->imageFacade->uploadImages($product, $productData->getImagesToUpload(), null);
-		$this->imageFacade->deleteImages($product, $productData->getImagesToDelete());
+		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
+		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
 		$this->em->commit();
 
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
