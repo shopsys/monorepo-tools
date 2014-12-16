@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
@@ -26,12 +26,12 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'productName']);
-		$productData->setVat($vat);
-		$productData->setPrice(1);
-		$productData->setHiddenOnDomains(array(2));
-		$product = $productEditFacade->create($productData);
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'productName']);
+		$productEditData->productData->setVat($vat);
+		$productEditData->productData->setPrice(1);
+		$productEditData->productData->setHiddenOnDomains(array(2));
+		$product = $productEditFacade->create($productEditData);
 		$em->flush();
 		$productId = $product->getId();
 		$em->clear();
@@ -71,13 +71,13 @@ class CartFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'productName']);
-		$productData->setVat($vat);
-		$productData->setPrice(1);
-		$productData->setHiddenOnDomains(array(2));
-		$product1 = $productEditFacade->create($productData);
-		$product2 = $productEditFacade->create($productData);
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'productName']);
+		$productEditData->productData->setVat($vat);
+		$productEditData->productData->setPrice(1);
+		$productEditData->productData->setHiddenOnDomains(array(2));
+		$product1 = $productEditFacade->create($productEditData);
+		$product2 = $productEditFacade->create($productEditData);
 		$em->flush();
 		$em->clear();
 		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
@@ -127,12 +127,12 @@ class CartFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'productName']);
-		$productData->setVat($vat);
-		$productData->setPrice(1);
-		$productData->setHiddenOnDomains(array(2));
-		$product = $productEditFacade->create($productData);
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'productName']);
+		$productEditData->productData->setVat($vat);
+		$productEditData->productData->setPrice(1);
+		$productEditData->productData->setHiddenOnDomains(array(2));
+		$product = $productEditFacade->create($productEditData);
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
 		$cartItems = array($cartItem);
@@ -158,13 +158,13 @@ class CartFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'productName']);
-		$productData->setVat($vat);
-		$productData->setPrice(1);
-		$productData->setHiddenOnDomains(array(2));
-		$product1 = $productEditFacade->create($productData);
-		$product2 = $productEditFacade->create($productData);
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'productName']);
+		$productEditData->productData->setVat($vat);
+		$productEditData->productData->setPrice(1);
+		$productEditData->productData->setHiddenOnDomains(array(2));
+		$product1 = $productEditFacade->create($productEditData);
+		$product2 = $productEditFacade->create($productEditData);
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
