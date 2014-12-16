@@ -7,32 +7,35 @@ use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductDomain;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
-	private function getDefaultProductData() {
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
+	 */
+	private function getDefaultProductEditData() {
 		$em = $this->getEntityManager();
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'Name']);
-		$productData->setVat($vat);
-		$productData->setPrice(100);
-		$productData->setHidden(false);
-		$productData->setHiddenOnDomains(array());
-		return $productData;
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'Name']);
+		$productEditData->productData->setVat($vat);
+		$productEditData->productData->setPrice(100);
+		$productEditData->productData->setHidden(false);
+		$productEditData->productData->setHiddenOnDomains(array());
+		return $productEditData;
 	}
 
 	public function testIsVisibleOnAnyDomainWhenHidden() {
 		$em = $this->getEntityManager();
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 
-		$productData = $this->getDefaultProductData();
-		$productData->setHidden(true);
-		$product = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->setHidden(true);
+		$product = $productEditFacade->create($productEditData);
 
 		$em->flush();
 		$id = $product->getId();
@@ -59,8 +62,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 
-		$productData = $this->getDefaultProductData();
-		$product = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$product = $productEditFacade->create($productEditData);
 
 		$em->flush();
 		$id = $product->getId();
@@ -90,9 +93,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingFrom = new DateTime('now');
 		$sellingFrom->modify('+1 day');
 
-		$productData = $this->getDefaultProductData();
-		$productData->setSellingFrom($sellingFrom);
-		$product = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->setSellingFrom($sellingFrom);
+		$product = $productEditFacade->create($productEditData);
 
 		$em->flush();
 		$id = $product->getId();
@@ -115,9 +118,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('-1 day');
 
-		$productData = $this->getDefaultProductData();
-		$productData->setSellingTo($sellingTo);
-		$product = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->setSellingTo($sellingTo);
+		$product = $productEditFacade->create($productEditData);
 
 		$em->flush();
 		$id = $product->getId();
@@ -142,10 +145,10 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$sellingTo = new DateTime('now');
 		$sellingTo->modify('+1 day');
 
-		$productData = $this->getDefaultProductData();
-		$productData->setSellingFrom($sellingFrom);
-		$productData->setSellingTo($sellingTo);
-		$product = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->setSellingFrom($sellingFrom);
+		$productEditData->productData->setSellingTo($sellingTo);
+		$product = $productEditFacade->create($productEditData);
 
 		$em->flush();
 		$id = $product->getId();
@@ -165,12 +168,12 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 
-		$productData = $this->getDefaultProductData();
-		$productData->setPrice(0);
-		$product1 = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->setPrice(0);
+		$product1 = $productEditFacade->create($productEditData);
 
-		$productData->setPrice(null);
-		$product2 = $productEditFacade->create($productData);
+		$productEditData->productData->setPrice(null);
+		$product2 = $productEditFacade->create($productEditData);
 
 		$product1Id = $product1->getId();
 		$product2Id = $product2->getId();
@@ -194,9 +197,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$productData = $this->getDefaultProductData();
-		$productData->setName(['cs' => 'Name']);
-		$product = $productEditFacade->create($productData);
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->setName(['cs' => 'Name']);
+		$product = $productEditFacade->create($productEditData);
 
 		$productId = $product->getId();
 		$em->clear();

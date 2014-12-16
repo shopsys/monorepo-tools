@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -75,11 +75,11 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
 
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'name']);
-		$productData->setPrice($inputPriceWithVat);
-		$productData->setVat($vat);
-		$product = $productEditFacade->create($productData);
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'name']);
+		$productEditData->productData->setPrice($inputPriceWithVat);
+		$productEditData->productData->setVat($vat);
+		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
@@ -146,11 +146,11 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
 
-		$productData = new ProductData();
-		$productData->setName(['cs' => 'name']);
-		$productData->setPrice($inputPriceWithoutVat);
-		$productData->setVat($vat);
-		$product = $productEditFacade->create($productData);
+		$productEditData = new ProductEditData();
+		$productEditData->productData->setName(['cs' => 'name']);
+		$productEditData->productData->setPrice($inputPriceWithoutVat);
+		$productEditData->productData->setVat($vat);
+		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();

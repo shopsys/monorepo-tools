@@ -558,8 +558,8 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  ss6.shop.product.product_data_factory:
-    class: SS6\ShopBundle\Model\Product\ProductDataFactory
+  ss6.shop.product.product_edit_data_factory:
+    class: SS6\ShopBundle\Model\Product\ProductEditDataFactory
 
   ss6.shop.product.product_detail_factory:
     class: SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory

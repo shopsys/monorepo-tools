@@ -3,14 +3,9 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constrains\NotSelectedDomainToShow;
-use SS6\ShopBundle\Component\Constrains\UniqueCollection;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
-use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\DatePickerType;
-use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Form\YesNoType;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,13 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
-
-	const INTENTION = 'product_type';
-
-	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
-	 */
-	private $fileUpload;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
@@ -38,11 +26,6 @@ class ProductFormType extends AbstractType {
 	private $availabilities;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
-	 */
-	private $productParameterValueFormTypeFactory;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer
 	 */
 	private $inverseArrayValuesTransformer;
@@ -53,34 +36,21 @@ class ProductFormType extends AbstractType {
 	private $departments;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Image[]
-	 */
-	private $images;
-
-	/**
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
-	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 * @param \SS6\ShopBundle\Model\Department\Department[] $departments
 	 */
 	public function __construct(
-		FileUpload $fileUpload,
 		array $vats,
 		array $availabilities,
-		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		array $departments,
-		array $images
+		array $departments
 	) {
-		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
-		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->departments = $departments;
-		$this->images = $images;
 	}
 
 	/**
@@ -174,58 +144,22 @@ class ProductFormType extends AbstractType {
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte číslo',
 			))
-			->add('imagesToUpload', new FileUploadType($this->fileUpload), array(
-				'required' => false,
-				'multiple' => true,
-				'file_constraints' => array(
-					new Constraints\Image(array(
-						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png, gif nebo bmp',
-						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
-					)),
-				),
-			))
-			->add('imagesToDelete', 'choice', array(
-				'required' => false,
-				'multiple' => true,
-				'expanded' => true,
-				'choice_list' => new ObjectChoiceList($this->images, 'filename', array(), null, 'id'),
-			))
 			->add('availability', 'choice', array(
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', array(), null, 'id'),
-			))
-			->add('parameters', 'collection', array(
-				'required' => false,
-				'allow_add' => true,
-				'allow_delete' => true,
-				'type' => $this->productParameterValueFormTypeFactory->create(),
-				'options' => array(
-					'data_class' => ProductParameterValueData::class,
-				),
-				'constraints' => array(
-					new UniqueCollection(array(
-						'fields' => array('parameter'),
-						'message' => 'Každý parametr může být nastaven pouze jednou',
-					)),
-				),
-				'error_bubbling' => false,
 			))
 			->add('departments', 'choice', array(
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->departments, 'name', array(), null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
-			))
-			->add('save', 'submit');
+			));
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
-			'intention' => self::INTENTION,
 		));
 	}
 

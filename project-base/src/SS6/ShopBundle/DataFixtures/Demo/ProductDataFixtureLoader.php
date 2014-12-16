@@ -9,10 +9,9 @@ use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Component\String\TransformString;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixtureLoader {
 
@@ -42,11 +41,6 @@ class ProductDataFixtureLoader {
 	private $parameters;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[]
-	 */
-	private $parameterValues;
-
-	/**
 	 * @var array
 	 */
 	private $departments;
@@ -71,9 +65,9 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductData[]
+	 * @return \SS6\ShopBundle\Model\Product\ProductEditData[]
 	 */
-	public function getProductsData() {
+	public function getProductsEditData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
 
 		$rowId = 0;
@@ -81,46 +75,47 @@ class ProductDataFixtureLoader {
 			if ($rowId !== 0) {
 				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
 				$row = EncodingConverter::cp1250ToUtf8($row);
-				$productsData[] = $this->getProductDataFromCsvRow($row);
+				$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
 			}
 			$rowId++;
 		}
-		return $productsData;
+		return $productsEditData;
 	}
 
 	/**
 	 * @param array $row
-	 * @return \SS6\ShopBundle\Model\Product\ProductData
+	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
-	private function getProductDataFromCsvRow(array $row) {
-		$productData = new ProductData();
-		$productData->setName(['cs' => $row[0], 'en' => $row[1]]);
-		$productData->setCatnum($row[2]);
-		$productData->setPartno($row[3]);
-		$productData->setEan($row[4]);
-		$productData->setDescription(['cs' => $row[5], 'en' => $row[6]]);
-		$productData->setPrice($row[7]);
+	private function getProductEditDataFromCsvRow(array $row) {
+		$productEditData = new ProductEditData();
+		$productEditData->productData = new ProductData();
+		$productEditData->productData->setName(['cs' => $row[0], 'en' => $row[1]]);
+		$productEditData->productData->setCatnum($row[2]);
+		$productEditData->productData->setPartno($row[3]);
+		$productEditData->productData->setEan($row[4]);
+		$productEditData->productData->setDescription(['cs' => $row[5], 'en' => $row[6]]);
+		$productEditData->productData->setPrice($row[7]);
 		switch ($row[8]) {
 			case 'high':
-				$productData->setVat($this->vats['high']);
+				$productEditData->productData->setVat($this->vats['high']);
 				break;
 			case 'low':
-				$productData->setVat($this->vats['low']);
+				$productEditData->productData->setVat($this->vats['low']);
 				break;
 			case 'zero':
-				$productData->setVat($this->vats['zero']);
+				$productEditData->productData->setVat($this->vats['zero']);
 				break;
 			default:
-				$productData->setVat(null);
+				$productEditData->productData->setVat(null);
 		}
 		if ($row[9] !== null) {
-			$productData->setSellingFrom(new DateTime($row[9]));
+			$productEditData->productData->setSellingFrom(new DateTime($row[9]));
 		}
 		if ($row[10] !== null) {
-			$productData->setSellingTo(new DateTime($row[10]));
+			$productEditData->productData->setSellingTo(new DateTime($row[10]));
 		}
-		$productData->setStockQuantity($row[11]);
+		$productEditData->productData->setStockQuantity($row[11]);
 		$hiddenOnDomains = array();
 		if (!CsvDecoder::decodeBoolean($row[12])) {
 			$hiddenOnDomains[] = 1;
@@ -128,24 +123,24 @@ class ProductDataFixtureLoader {
 		if (!CsvDecoder::decodeBoolean($row[13])) {
 			$hiddenOnDomains[] = 2;
 		}
-		$productData->setHiddenOnDomains($hiddenOnDomains);
+		$productEditData->productData->setHiddenOnDomains($hiddenOnDomains);
 		switch ($row[14]) {
 			case 'in-stock':
-				$productData->setAvailability($this->availabilities['in-stock']);
+				$productEditData->productData->setAvailability($this->availabilities['in-stock']);
 				break;
 			case 'out-of-stock':
-				$productData->setAvailability($this->availabilities['out-of-stock']);
+				$productEditData->productData->setAvailability($this->availabilities['out-of-stock']);
 				break;
 			case 'on-request':
-				$productData->setAvailability($this->availabilities['on-request']);
+				$productEditData->productData->setAvailability($this->availabilities['on-request']);
 				break;
 			default:
-				$productData->setAvailability(null);
+				$productEditData->productData->setAvailability(null);
 		}
-		$productData->setParameters($this->getProductParameterValuesDataFromString($row[15]));
-		$productData->setDepartments($this->getProductDepartmentsFromString($row[16]));
+		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
+		$productEditData->productData->setDepartments($this->getProductDepartmentsFromString($row[16]));
 
-		return $productData;
+		return $productEditData;
 	}
 
 	/**

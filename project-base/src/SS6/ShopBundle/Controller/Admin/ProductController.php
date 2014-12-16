@@ -23,19 +23,19 @@ class ProductController extends Controller {
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory */
-		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
-		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
+		$productEditFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_edit_form_type_factory');
+		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$productDataFactory = $this->get('ss6.shop.product.product_data_factory');
-		/* @var $productDataFactory \SS6\ShopBundle\Model\Product\ProductDataFactory */
+		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
 
 		$product = $productEditFacade->getById($id);
 
-		$form = $this->createForm($productFormTypeFactory->create($product));
-		$productData = $productDataFactory->createFromProduct($product);
+		$form = $this->createForm($productEditFormTypeFactory->create($product));
+		$productEditData = $productEditDataFactory->createFromProduct($product);
 
-		$form->setData($productData);
+		$form->setData($productEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -71,18 +71,18 @@ class ProductController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$productFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_form_type_factory');
-		/* @var $productFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory */
+		$productEditFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_edit_form_type_factory');
+		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$productDataFactory = $this->get('ss6.shop.product.product_data_factory');
-		/* @var $productDataFactory \SS6\ShopBundle\Model\Product\ProductDataFactory */
+		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
 
-		$form = $this->createForm($productFormTypeFactory->create());
+		$form = $this->createForm($productEditFormTypeFactory->create());
 
-		$productData = $productDataFactory->createDefault();
+		$productEditData = $productEditDataFactory->createDefault();
 
-		$form->setData($productData);
+		$form->setData($productEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
