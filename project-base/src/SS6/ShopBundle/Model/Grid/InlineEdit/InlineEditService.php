@@ -79,7 +79,6 @@ class InlineEditService {
 			'loopIndex' => 0,
 			'lastRow' => false,
 			'row' => $rowData,
-			'emptyRow' => false,
 		), false);
 	}
 
