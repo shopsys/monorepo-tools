@@ -135,7 +135,7 @@
 			</td>
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
-			<td class="grid-column-actions last-column text-right js-inline-edit-other-inputs {{ grid.actionColumnClassAttribute }}{% if lastRow %} last-row{% endif %}">
+			<td class="grid-column-actions last-column text-right js-inline-edit-unmatched-inputs {{ grid.actionColumnClassAttribute }}{% if lastRow %} last-row{% endif %}">
 				<span class="grid-row-actions in-action-icons">
 					{% if grid.inlineEdit and emptyRow %}
 						<span class="js-inline-edit-buttons">

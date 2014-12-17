@@ -148,7 +148,7 @@
 	SS6.grid.inlineEdit.createFormRow = function ($grid, formData) {
 		var $formRow = $grid.find('.js-grid-empty-row').clone();
 		$formRow.removeClass('js-grid-empty-row hidden').addClass('js-grid-editing-row');
-		var $otherInputs = $formRow.find('.js-inline-edit-other-inputs');
+		var $unmatchedInputs = $formRow.find('.js-inline-edit-unmatched-inputs');
 
 		$.each(formData, function(formName, formHtml) {
 			var $column = $formRow.find('.js-grid-column-' + formName + ':first');
@@ -160,7 +160,7 @@
 					$column.html(formHtml);
 				}
 			} else {
-				$otherInputs.append(formHtml);
+				$unmatchedInputs.append(formHtml);
 			}
 		});
 
