@@ -166,4 +166,11 @@ class OrderRepository {
 	public function findByUrlHash($urlHash) {
 		return $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order[]
+	 */
+	public function getAll() {
+		return $this->getOrderRepository()->findAll();
+	}
 }

@@ -87,7 +87,7 @@ class CurrencyFacade {
 		$currency = $this->currencyRepository->getById($currencyId);
 
 		if ($this->currencyService->isCurrencyNotAllowedToDelete($currency)) {
-			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException();
+			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException();
 		}
 		$this->em->beginTransaction();
 

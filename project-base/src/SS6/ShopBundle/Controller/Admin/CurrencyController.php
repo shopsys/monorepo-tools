@@ -64,8 +64,8 @@ class CurrencyController extends Controller {
 			$flashMessageSender->addSuccessFlashTwig('Měna <strong>{{ name }}</strong> byla smazána', array(
 				'name' => $fullName,
 			));
-		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingDefaultCurrencyException $ex) {
-			$flashMessageSender->addErrorFlash('Tuto měnu nelze smazat, je nastavena jako výchozí');
+		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
+			$flashMessageSender->addErrorFlash('Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky');
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená měna neexistuje.');
 		}
