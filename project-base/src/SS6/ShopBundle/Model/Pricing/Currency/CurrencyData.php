@@ -34,6 +34,7 @@ class CurrencyData {
 	 * @param string|null $name
 	 * @param string|null $code
 	 * @param string|null $symbol
+	 * @param string $exchangeRate
 	 */
 	public function __construct($name = null, $code = null, $symbol = null, $exchangeRate = Currency::DEFAULT_EXCHANGE_RATE) {
 		$this->name = $name;

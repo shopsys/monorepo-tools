@@ -27,6 +27,7 @@ class CurrencyDataFixture extends AbstractReferenceFixture {
 		$currencyData->setName('Euro');
 		$currencyData->setCode('EUR');
 		$currencyData->setSymbol('€');
+		$currencyData->setExchangeRate(25);
 		$this->createCurrency($manager, self::CURRENCY_EUR, $currencyData);
 
 		$manager->flush();
