@@ -72,6 +72,8 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 			)
 			->setAjaxConfirm();
 
+		$grid->setTheme('@SS6Shop/Admin/Content/OrderStatus/listGrid.html.twig');
+
 		return $grid;
 	}
 

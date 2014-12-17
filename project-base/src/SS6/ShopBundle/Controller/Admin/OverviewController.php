@@ -22,6 +22,8 @@ class OverviewController extends Controller {
 		$grid->addColumn('name', 'name', 'Název domény');
 		$grid->addColumn('locale', 'locale', 'Jazyk');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Overview/listGrid.html.twig');
+
 		return $this->render('@SS6Shop/Admin/Content/Overview/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));

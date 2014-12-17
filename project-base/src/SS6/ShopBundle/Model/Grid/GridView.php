@@ -25,7 +25,7 @@ class GridView {
 	private $templates;
 
 	/**
-	 * @var string|array
+	 * @var string|string[]|null
 	 */
 	private $theme;
 
@@ -50,28 +50,23 @@ class GridView {
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param Twig_Environment $twig
 	 */
-	public function __construct(Grid $grid, RequestStack $requestStack, Router $router, Twig_Environment $twig) {
+	public function __construct(
+		Grid $grid,
+		RequestStack $requestStack,
+		Router $router,
+		Twig_Environment $twig,
+		$theme,
+		array $templateParameters = []
+	) {
 		$this->grid = $grid;
 		$this->request = $requestStack->getMasterRequest();
 		$this->router = $router;
 		$this->twig = $twig;
 
-		$this->templateParameters = array(
-			'gridView' => $this,
-			'grid' => $this->grid,
-		);
+		$this->setTheme($theme, $templateParameters);
 	}
 
-	/**
-	 * @param string|array $theme
-	 * @param array|null $parameters
-	 */
-	public function render($theme, array $parameters = null) {
-		$this->setTheme($theme);
-		$this->templateParameters = array_merge(
-			(array)$parameters,
-			$this->templateParameters
-		);
+	public function render() {
 		$this->renderBlock('grid');
 	}
 
@@ -86,13 +81,21 @@ class GridView {
 
 	/**
 	 * @param string $name
-	 * @param array|null $parameters
+	 * @param array $parameters
 	 * @param bool $echo
 	 */
-	public function renderBlock($name, $parameters = null, $echo = true) {
+	public function renderBlock($name, array $parameters = [], $echo = true) {
 		foreach ($this->getTemplates() as $template) {
 			if ($template->hasBlock($name)) {
-				$templateParameters = array_merge($this->twig->getGlobals(), (array)$parameters, $this->templateParameters);
+				$templateParameters = array_merge(
+					$this->twig->getGlobals(),
+					$parameters,
+					$this->templateParameters,
+					[
+						'gridView' => $this,
+						'grid' => $this->grid,
+					]
+				);
 				if ($echo) {
 					echo $template->renderBlock($name, $templateParameters);
 					return;
@@ -107,10 +110,14 @@ class GridView {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Grid\Column $column
-	 * @param array $row
+	 * @param array|null $row
 	 */
-	public function renderCell(Column $column, array $row) {
-		$value = $this->getCellValue($column, $row);
+	public function renderCell(Column $column, array $row = null) {
+		if ($row !== null) {
+			$value = $this->getCellValue($column, $row);
+		} else {
+			$value = null;
+		}
 
 		$posibleBlocks = array(
 			'grid_value_cell_id_' . $column->getId(),
@@ -175,10 +182,12 @@ class GridView {
 	}
 
 	/**
-	 * @param string|array $theme
+	 * @param string|string[] $theme
+	 * @param array $parameters
 	 */
-	public function setTheme($theme) {
+	private function setTheme($theme, array $parameters = []) {
 		$this->theme = $theme;
+		$this->templateParameters = $parameters;
 	}
 
 	/**

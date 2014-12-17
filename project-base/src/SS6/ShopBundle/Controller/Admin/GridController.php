@@ -39,11 +39,7 @@ class GridController extends Controller {
 		try {
 			$rowId = $inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
 			$responseData['success'] = true;
-			$responseData['rowHtml'] = $inlineEditService->getRenderedRowHtml(
-				json_decode($request->get('themeJson'), true),
-				$request->get('serviceName'),
-				$rowId
-			);
+			$responseData['rowHtml'] = $inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
 		} catch (\SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
 			$responseData['errors'] = array_unique($e->getFormErrors());

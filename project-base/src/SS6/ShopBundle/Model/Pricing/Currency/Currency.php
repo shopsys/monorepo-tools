@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Currency {
 
+	const DEFAULT_EXCHANGE_RATE = 1;
+
 	/**
 	 * @var integer
 	 *
@@ -40,6 +42,12 @@ class Currency {
 	 */
 	private $symbol;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 */
+	private $exchangeRate;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
@@ -48,6 +56,7 @@ class Currency {
 		$this->name = $currencyData->getName();
 		$this->code = $currencyData->getCode();
 		$this->symbol = $currencyData->getSymbol();
+		$this->exchangeRate = $currencyData->getExchangeRate();
 	}
 
 	/**
@@ -76,6 +85,20 @@ class Currency {
 	 */
 	public function getSymbol() {
 		return $this->symbol;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getExchangeRate() {
+		return $this->exchangeRate;
+	}
+
+	/**
+	 * @param string $exchangeRate
+	 */
+	public function setExchangeRate($exchangeRate) {
+		$this->exchangeRate = $exchangeRate;
 	}
 
 	/**

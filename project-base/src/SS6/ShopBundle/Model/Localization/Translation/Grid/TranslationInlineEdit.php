@@ -63,9 +63,10 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
+	 * @param int $rowId
 	 * @return \SS6\ShopBundle\Form\Admin\Localization\TranslationFormType
 	 */
-	protected function getFormType() {
+	protected function getFormType($rowId) {
 		return new TranslationFormType();
 	}
 

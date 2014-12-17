@@ -11,7 +11,7 @@
 
 			<a href="{{ url('admin_administrator_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nového administrátora'|trans }}</a>
 
-			{{ gridView.render('@SS6Shop/Admin/Content/Administrator/listGrid.html.twig') }}
+			{{ gridView.render() }}
 		</div>
 	</div>
 {% endblock %}

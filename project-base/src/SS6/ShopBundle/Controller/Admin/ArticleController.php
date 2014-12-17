@@ -92,6 +92,8 @@ class ArticleController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'a.id'))
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
+
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', array(

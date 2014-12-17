@@ -74,7 +74,7 @@ class CurrencyFacade {
 	 */
 	public function edit($currencyId, CurrencyData $currencyData) {
 		$currency = $this->currencyRepository->getById($currencyId);
-		$this->currencyService->edit($currency, $currencyData);
+		$this->currencyService->edit($currency, $currencyData, $this->isDefaultCurrency($currency));
 		$this->em->flush();
 
 		return $currency;
@@ -123,6 +123,7 @@ class CurrencyFacade {
 	 */
 	public function setDefaultCurrency(Currency $currency) {
 		$this->pricingSetting->setDefaultCurrency($currency);
+		$this->em->flush();
 	}
 
 	/**
@@ -138,6 +139,14 @@ class CurrencyFacade {
 	 */
 	public function getNotAllowedToDeleteCurrencyIds() {
 		return $this->currencyService->getNotAllowedToDeleteCurrencyIds();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return bool
+	 */
+	public function isDefaultCurrency(Currency $currency) {
+		return $currency === $this->getDefaultCurrency();
 	}
 
 }

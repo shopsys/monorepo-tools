@@ -35,12 +35,25 @@ class CurrencyService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @param bool $isDefaultCurrency
 	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 */
-	public function edit(Currency $currency, CurrencyData $currencyData) {
+	public function edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency) {
 		$currency->edit($currencyData);
+		if ($isDefaultCurrency) {
+			$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
+		} else {
+			$currency->setExchangeRate($currencyData->getExchangeRate());
+		}
 
 		return $currency;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 */
+	public function setExchangeRateOfDefaultCurrency(Currency $currency) {
+		$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
 	}
 
 	/**

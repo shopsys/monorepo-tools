@@ -73,9 +73,10 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
+	 * @param int $rowId
 	 * @return \SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType
 	 */
-	protected function getFormType() {
+	protected function getFormType($rowId) {
 		return new AvailabilityFormType();
 	}
 

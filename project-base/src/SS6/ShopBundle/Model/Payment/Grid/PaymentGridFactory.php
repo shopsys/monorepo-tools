@@ -101,6 +101,8 @@ class PaymentGridFactory implements GridFactoryInterface {
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto platbu?'));
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Payment/listGrid.html.twig');
+
 		return $grid;
 	}
 }

@@ -12,7 +12,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Currency:domainSettings')) }}
 
-			{{ gridView.render('@SS6Shop/Admin/Content/Currency/listGrid.html.twig', {notAllowedToDeleteCurrencyIds: notAllowedToDeleteCurrencyIds}) }}
+			{{ gridView.render() }}
 		</div>
 	</div>
 {% endblock %}

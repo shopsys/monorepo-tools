@@ -64,11 +64,10 @@ class InlineEditService {
 	}
 
 	/**
-	 * @param string|array $theme
 	 * @param string $serviceName
 	 * @param mixed $rowId
 	 */
-	public function getRenderedRowHtml($theme, $serviceName, $rowId) {
+	public function getRenderedRowHtml($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$grid = $gridInlineEdit->getGrid();
 		/* @var $grid \SS6\ShopBundle\Model\Grid\Grid */
@@ -76,12 +75,10 @@ class InlineEditService {
 		$gridView = $grid->createViewWithOneRow($rowId);
 		$rows = $grid->getRows();
 		$rowData = array_pop($rows);
-		$gridView->setTheme($theme);
 		return $gridView->renderBlock('grid_row', array(
 			'loopIndex' => 0,
 			'lastRow' => false,
 			'row' => $rowData,
-			'emptyRow' => false,
 		), false);
 	}
 

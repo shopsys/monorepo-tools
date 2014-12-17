@@ -134,6 +134,8 @@ class CustomerController extends Controller {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', array('id' => 'id'))
 			->setConfirmMessage('Opravdu chcete odstranit tohoto zákazníka?');
 
+		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');
+
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', array(

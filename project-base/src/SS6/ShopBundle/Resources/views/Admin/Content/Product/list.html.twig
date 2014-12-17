@@ -19,7 +19,7 @@
 				</div>
 
 				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
-				{{ gridView.render('@SS6Shop/Admin/Content/Product/listGrid.html.twig') }}
+				{{ gridView.render() }}
 				{{ gridView.renderHiddenInputs('page') }}
 
 			{{ form_end(quickSearchForm) }}

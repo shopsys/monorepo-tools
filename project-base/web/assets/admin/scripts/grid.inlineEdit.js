@@ -59,8 +59,7 @@
 		var $saving = $formRow.find('.js-inline-edit-saving').show();
 		var $virtualForm = $('<form>')
 				.append($formRow.clone())
-				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')))
-				.append($('<input type="hidden "name="themeJson" />').val($grid.data('inline-edit-theme-json')))
+				.append($('<input type="hidden" name="serviceName" />').val($grid.data('inline-edit-service-name')));
 
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
@@ -149,14 +148,19 @@
 	SS6.grid.inlineEdit.createFormRow = function ($grid, formData) {
 		var $formRow = $grid.find('.js-grid-empty-row').clone();
 		$formRow.removeClass('js-grid-empty-row hidden').addClass('js-grid-editing-row');
-		var $otherInputs = $formRow.find('.js-inline-edit-other-inputs');
+		var $unmatchedInputs = $formRow.find('.js-inline-edit-unmatched-inputs');
 
 		$.each(formData, function(formName, formHtml) {
 			var $column = $formRow.find('.js-grid-column-' + formName + ':first');
-			if ($column.size() == 1) {
-				$column.html(formHtml);
+			if ($column.size() === 1) {
+				var $cellValue = $column.find('.js-inline-edit-cell-value');
+				if ($cellValue.size() === 1) {
+					$cellValue.html(formHtml);
+				} else {
+					$column.html(formHtml);
+				}
 			} else {
-				$otherInputs.append(formHtml);
+				$unmatchedInputs.append(formHtml);
 			}
 		});
 

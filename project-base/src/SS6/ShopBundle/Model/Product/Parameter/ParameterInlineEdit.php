@@ -73,9 +73,10 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
+	 * @param int $rowId
 	 * @return \SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType
 	 */
-	protected function getFormType() {
+	protected function getFormType($rowId) {
 		return new ParameterFormType();
 	}
 
