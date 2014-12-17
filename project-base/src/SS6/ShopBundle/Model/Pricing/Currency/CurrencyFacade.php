@@ -141,4 +141,12 @@ class CurrencyFacade {
 		return $this->currencyService->getNotAllowedToDeleteCurrencyIds();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return bool
+	 */
+	public function isDefaultCurrency(Currency $currency) {
+		return $currency === $this->getDefaultCurrency();
+	}
+
 }
