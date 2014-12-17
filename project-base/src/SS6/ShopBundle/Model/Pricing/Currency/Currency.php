@@ -95,13 +95,19 @@ class Currency {
 	}
 
 	/**
+	 * @param string $exchangeRate
+	 */
+	public function setExchangeRate($exchangeRate) {
+		$this->exchangeRate = $exchangeRate;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 */
 	public function edit(CurrencyData $currencyData) {
 		$this->name = $currencyData->getName();
 		$this->code = $currencyData->getCode();
 		$this->symbol = $currencyData->getSymbol();
-		$this->exchangeRate = $currencyData->getExchangeRate();
 	}
 
 }

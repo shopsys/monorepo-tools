@@ -122,7 +122,7 @@ class CurrencyFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setDefaultCurrency(Currency $currency) {
-		$this->currencyService->setDefaultCurrency($currency);
+		$this->pricingSetting->setDefaultCurrency($currency);
 		$this->em->flush();
 	}
 
