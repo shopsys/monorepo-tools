@@ -23,7 +23,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 	}
 
 	/**
-	 * @return \Symfony\Component\HttpKernel\Client
+	 * @param bool $createNew
 	 * @param string $username
 	 * @param string $password
 	 * @return \Symfony\Component\HttpKernel\Client
