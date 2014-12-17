@@ -146,7 +146,7 @@
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
 			<arg value="--keep" />
-			<arg value="--output-format=yml" />
+			<arg value="--output-format=po" />
 
 			<arg value="cs" />
 			<arg value="en" />

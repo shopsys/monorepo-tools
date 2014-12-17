@@ -6,8 +6,18 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
+use SS6\ShopBundle\Model\Localization\Localization;
 
 class PoDumper implements DumperInterface {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	public function __construct(Localization $localization) {
+		$this->localization = $localization;
+	}
 
 	public function dump(MessageCatalogue $catalogue, $domain = 'messages') {
 		$output = 'msgid ""' . "\n";
@@ -21,8 +31,8 @@ class PoDumper implements DumperInterface {
 			/* @var $message \JMS\TranslationBundle\Model\Message */
 			$output .= $this->getReferences($message);
 			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getSourceString()));
-			if ($message->isNew()) {
-				$output .= sprintf('msgstr "%s"' . "\n", $this->escape('##' . $message->getSourceString()));
+			if ($message->isNew() && $catalogue->getLocale() !== $this->localization->getDefaultLocale()) {
+				$output .= 'msgstr ""' . "\n";
 			} else {
 				$output .= sprintf('msgstr "%s"' . "\n", $this->escape($message->getLocaleString()));
 			}

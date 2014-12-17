@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+#: Admin/Product/ProductFormType.php:164
+#: Admin/Product/ProductFormType.php:171
+msgid "Datum zadávejte ve formátu dd.mm.rrrr"
+msgstr ""
+
+msgid "E-mail '{{ value }}' není validní."
+msgstr ""
+
+#: Admin/Administrator/AdministratorFormType.php:61
+#: Admin/Customer/UserFormType.php:89
+#: Front/Customer/UserFormType.php:46
+#: Front/Registration/RegistrationFormType.php:42
+msgid "Hesla se neshodují"
+msgstr ""
+
+#: Admin/Vat/VatFormType.php:36
+msgid "Prosím zadejte DPH v platném formátu"
+msgstr ""
+
+#: Admin/Payment/PaymentFormType.php:87
+msgid "Prosím zadejte cenu v platném formátu"
+msgstr ""
+
+#: Admin/Payment/PaymentFormType.php:78
+#: Admin/Product/ProductFormType.php:143
+#: Admin/Transport/TransportFormType.php:65
+msgid "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
+msgstr ""
+
+#: Pricing/Group/PricingGroupFormType.php:35
+msgid "Prosím zadejte koeficient v platném formátu"
+msgstr ""
+
+#: Admin/Product/ProductFormType.php:175
+msgid "Prosím zadejte číslo"
+msgstr ""
+
+#: Front/Order/TransportAndPaymentFormType.php:44
+msgid "Vyberte prosím dopravu"
+msgstr ""
+
+#: Front/Order/TransportAndPaymentFormType.php:50
+msgid "Vyberte prosím platbu"
+msgstr ""
+
+#: Product/TopProduct/TopProductFormType.php:32
+msgid "Zadejte platné ID produktu"
+msgstr ""
+
