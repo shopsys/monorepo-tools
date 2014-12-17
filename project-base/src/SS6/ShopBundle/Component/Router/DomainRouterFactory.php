@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
@@ -96,6 +97,9 @@ class DomainRouterFactory {
 	private function getRequestContextByDomainConfig(DomainConfig $domainConfig) {
 		$requestContext = new RequestContext();
 		$masterRequest = $this->requestStack->getMasterRequest();
+		if ($masterRequest === null) {
+			$masterRequest = new Request();
+		}
 		$masterHost = $masterRequest->getHost();
 		$domainHost = $domainConfig->getDomain();
 
