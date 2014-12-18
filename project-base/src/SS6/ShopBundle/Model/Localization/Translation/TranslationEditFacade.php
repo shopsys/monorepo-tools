@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation;
 
-use SS6\ShopBundle\Component\Translator;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Component\Translation\PoDumper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
@@ -27,7 +27,7 @@ class TranslationEditFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translator
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
 	private $translator;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace SS6\ShopBundle\Component\Translation;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator as BaseTranslator;
 
@@ -8,6 +8,7 @@ class Translator extends BaseTranslator {
 
 	const DEFAULT_DOMAIN = 'messages';
 	const NOT_TRANSLATED_PREFIX = '##';
+	const TRANSLATION_ID_LOCALE = 'cs';
 
 	/**
 	 * @param string $locale
@@ -28,15 +29,11 @@ class Translator extends BaseTranslator {
 	 *
 	 * @api
 	 */
-	public function trans($id, array $parameters = array(), $domain = null, $locale = null) {
-		if (null === $locale) {
+	public function trans($id, array $parameters = array(), $domain = self::DEFAULT_DOMAIN, $locale = null) {
+		if ($locale === null) {
 			$locale = $this->getLocale();
 		} else {
 			$this->assertValidLocale($locale);
-		}
-
-		if (null === $domain) {
-			$domain = 'messages';
 		}
 
 		if (!isset($this->catalogues[$locale])) {
@@ -58,15 +55,11 @@ class Translator extends BaseTranslator {
 	 *
 	 * @api
 	 */
-	public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null) {
-		if (null === $locale) {
+	public function transChoice($id, $number, array $parameters = array(), $domain = self::DEFAULT_DOMAIN, $locale = null) {
+		if ($locale === null) {
 			$locale = $this->getLocale();
 		} else {
 			$this->assertValidLocale($locale);
-		}
-
-		if (null === $domain) {
-			$domain = 'messages';
 		}
 
 		if (!isset($this->catalogues[$locale])) {

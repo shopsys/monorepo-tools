@@ -7,6 +7,12 @@ use Symfony\Component\Translation\MessageCatalogue;
 
 class PoFileLoader extends \Symfony\Component\Translation\Loader\PoFileLoader {
 
+	/**
+	 * @param string $resource
+	 * @param string $locale
+	 * @param string $domain
+	 * @return Symfony\Component\Translation\MessageCatalogue
+	 */
 	public function load($resource, $locale, $domain = 'messages') {
 		$catalogue = parent::load($resource, $locale, $domain);
 

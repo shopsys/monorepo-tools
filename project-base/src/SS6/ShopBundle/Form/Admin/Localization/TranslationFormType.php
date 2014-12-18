@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Localization;
 
-use SS6\ShopBundle\Component\Translator;
+use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;

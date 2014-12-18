@@ -6,13 +6,13 @@ use SS6\ShopBundle\Form\Admin\Localization\TranslationFormType;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
-use SS6\ShopBundle\Component\Translator;
+use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Form\FormFactory;
 
 class TranslationInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translator
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
 	private $translator;
 
