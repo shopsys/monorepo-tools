@@ -2,11 +2,13 @@
 
 {% block grid_value_cell_id_percent %}
 	<span class="js-inline-edit-cell-value">{{ value }}</span>%
-	<span title="{{ 'Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována'|trans }}"
-		class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
-	>
-		<i class="fa fa-info"></i>
-	</span>
+	{% if row is null %}
+		<span title="{{ 'Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována'|trans }}"
+			class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
+		>
+			<i class="fa fa-info"></i>
+		</span>
+	{% endif %}
 {% endblock %}
 
 {% block grid_value_cell_id_coefficient %}
