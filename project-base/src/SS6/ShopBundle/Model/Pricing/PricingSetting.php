@@ -72,7 +72,7 @@ class PricingSetting {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setDefaultCurrency(Currency $currency) {
-		$this->currencyService->setExchangeRateOfDefaultCurrency($currency);
+		$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
 		$this->setting->set(PricingSetting::DEFAULT_CURRENCY, $currency->getId(), SettingValue::DOMAIN_ID_COMMON);
 	}
 

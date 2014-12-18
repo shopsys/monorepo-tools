@@ -50,13 +50,6 @@ class CurrencyService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 */
-	public function setExchangeRateOfDefaultCurrency(Currency $currency) {
-		$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
-	}
-
-	/**
 	 * @return array
 	 */
 	public function getNotAllowedToDeleteCurrencyIds() {
