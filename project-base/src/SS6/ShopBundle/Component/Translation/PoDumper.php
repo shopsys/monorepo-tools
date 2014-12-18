@@ -6,9 +6,25 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
+use SS6\ShopBundle\Model\Localization\Localization;
+use SS6\ShopBundle\Component\Translation\Translator;
 
 class PoDumper implements DumperInterface {
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	public function __construct(Localization $localization) {
+		$this->localization = $localization;
+	}
+
+	/**
+	 * @param JMS\TranslationBundle\Model\MessageCatalogue $catalogue
+	 * @param string $domain
+	 * @return string
+	 */
 	public function dump(MessageCatalogue $catalogue, $domain = 'messages') {
 		$output = 'msgid ""' . "\n";
 		$output .= 'msgstr ""' . "\n";
@@ -21,8 +37,8 @@ class PoDumper implements DumperInterface {
 			/* @var $message \JMS\TranslationBundle\Model\Message */
 			$output .= $this->getReferences($message);
 			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getSourceString()));
-			if ($message->isNew()) {
-				$output .= sprintf('msgstr "%s"' . "\n", $this->escape('##' . $message->getSourceString()));
+			if ($message->isNew() && $catalogue->getLocale() !== Translator::TRANSLATION_ID_LOCALE) {
+				$output .= 'msgstr ""' . "\n";
 			} else {
 				$output .= sprintf('msgstr "%s"' . "\n", $this->escape($message->getLocaleString()));
 			}
@@ -33,6 +49,11 @@ class PoDumper implements DumperInterface {
 		return $output;
 	}
 
+	/**
+
+	 * @param JMS\TranslationBundle\Model\Message $message
+	 * @return string
+	 */
 	private function getReferences(Message $message) {
 		$output = '';
 
@@ -46,6 +67,10 @@ class PoDumper implements DumperInterface {
 		return $output;
 	}
 
+	/**
+	 * @param string $str
+	 * @return string
+	 */
 	private function escape($str) {
 		return addcslashes($str, "\0..\37\42\134");
 	}

@@ -2,10 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation;
 
-use SS6\ShopBundle\Component\Translator;
+use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Component\Translation\PoDumper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Model\MessageCatalogue;
 
 class TranslationEditFacade {
 
@@ -25,15 +27,21 @@ class TranslationEditFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translator
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
 	private $translator;
 
-	public function __construct($rootDir, $cacheDir, Translator $translator, Filesystem $filesystem) {
+	/**
+	 * @var SS6\ShopBundle\Component\Translation\PoDumper
+	 */
+	private $poDumper;
+
+	public function __construct($rootDir, $cacheDir, Translator $translator, Filesystem $filesystem, PoDumper $poDumper) {
 		$this->rootDir = $rootDir;
 		$this->cacheDir = $cacheDir;
 		$this->translator = $translator;
 		$this->filesystem = $filesystem;
+		$this->poDumper = $poDumper;
 	}
 
 	/**
@@ -64,10 +72,18 @@ class TranslationEditFacade {
 	private function dumpCatalogToFile($catalogue, $domain, $locale) {
 		$filepath = $this->rootDir
 			. '/../src/SS6/ShopBundle/Resources/translations/'
-			. $domain . '.' . $locale . '.yml';
+			. $domain . '.' . $locale . '.po';
 
-		$ymlDumper = new Dumper();
-		file_put_contents($filepath, $ymlDumper->dump($catalogue, 1));
+		$messageCatalogue = new MessageCatalogue();
+		$messageCatalogue->setLocale($locale);
+		foreach ($catalogue as $key => $translation) {
+			$message = new Message($key, $domain);
+			$message->setLocaleString($translation);
+			$message->setNew(false);
+			$messageCatalogue->add($message);
+		}
+
+		file_put_contents($filepath, $this->poDumper->dump($messageCatalogue, $domain));
 	}
 
 	/**

@@ -20,7 +20,8 @@ parameters:
   ss6.image_url_prefix: /assets/content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
   ss6.web_dir: %kernel.root_dir%/../web
-  translator.class: SS6\ShopBundle\Component\Translator
+  translator.class: SS6\ShopBundle\Component\Translation\Translator
+  translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
   validator.builder.factory.class: SS6\ShopBundle\Component\Validator\ValidatorBuilderFactory
 
