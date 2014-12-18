@@ -58,18 +58,18 @@
 		{% if productDetail.images|length > 0 %}
 			<ul class="list-image">
 				{% for image in productDetail.images %}
-					<li class="list-image__item js-image-delete-button-parent">
-						<div class="js-image-to-delete list-image__item__in" data-id="{{ image.id }}">
+					<li class="list-image__item js-product-images-image" data-id="{{ image.id }}">
+						<div class="js-product-images-preview list-image__item__in">
 							<img src="{{ imageUrlByImage(image, 'original') }}" alt="" height="100" />
 						</div>
-						<div class="js-image-delete-button">
-							<button onclick="SS6.productImagesDelete.deleteImage({{ image.id|escape('js') }}); return false;">
+						<div class="js-product-images-delete-button">
+							<button>
 								<i class="fa fa-trash-o"></i>{{ 'Smazat obrázek'|trans }}
 							</button>
 						</div>
-						<div class="js-image-delete-confirmed display-none">
+						<div class="js-product-images-delete-revert-button display-none">
 							{{ 'Po uložení bude obrázek smazán'|trans }}<br/>
-							<button onclick="SS6.productImagesDelete.revert({{ image.id|escape('js') }}); return false;"><i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}</button>
+							<button><i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}</button>
 						</div>
 					</li>
 				{% endfor %}
