@@ -62,14 +62,22 @@
 						<div class="js-product-images-preview list-image__item__in">
 							<img src="{{ imageUrlByImage(image, 'original') }}" alt="" height="100" />
 						</div>
-						<div class="js-product-images-delete-button">
-							<button>
-								<i class="fa fa-trash-o"></i>{{ 'Smazat obrázek'|trans }}
-							</button>
-						</div>
-						<div class="js-product-images-delete-revert-button display-none">
-							{{ 'Po uložení bude obrázek smazán'|trans }}<br/>
-							<button><i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}</button>
+						<div class="list-image__item__button">
+							<div class="js-product-images-delete-button">
+								<button class="btn btn-iconic">
+									<i class="fa fa-trash-o"></i>{{ 'Smazat obrázek'|trans }}
+								</button>
+							</div>
+							<div class="js-product-images-delete-revert-button display-none">
+								<button class="btn btn-iconic">
+									<i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}
+								</button>
+
+								<span title="{{ 'Po uložení bude obrázek smazán'|trans }}"
+								class="js-tooltip cursor-help form-icon" data-toggle="tooltip" data-placement="bottom">
+									<i class="fa fa-info"></i>
+								</span>
+							</div>
 						</div>
 					</li>
 				{% endfor %}
