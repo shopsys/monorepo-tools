@@ -9,16 +9,20 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture {
 
-	const ORDINARY_DOMAIN_1 = 'ordinary_domain_1';
-	const ORDINARY_DOMAIN_2 = 'ordinary_domain_2';
-	const VIP_DOMAIN_1 = 'vip_domain_1';
-	const VIP_DOMAIN_2 = 'vip_domain_2';
+	const ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
+	const ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
+	const PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';
+	const VIP_DOMAIN_1 = 'pricing_group_vip_domain_1';
+	const VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
 
 	public function load(ObjectManager $manager) {
 		$pricingGroupData = new PricingGroupData();
 
 		$pricingGroupData->setName('Obyčejný zákazník');
 		$this->createPricingGroup($manager, $pricingGroupData, 1, self::ORDINARY_DOMAIN_1);
+
+		$pricingGroupData->setName('Partner');
+		$this->createPricingGroup($manager, $pricingGroupData, 1, self::PARTNER_DOMAIN_1);
 
 		$pricingGroupData->setName('VIP zákazník');
 		$this->createPricingGroup($manager, $pricingGroupData, 1, self::VIP_DOMAIN_1);

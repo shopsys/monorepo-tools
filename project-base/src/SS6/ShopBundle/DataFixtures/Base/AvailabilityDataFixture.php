@@ -12,12 +12,16 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 	const IN_STOCK = 'availability_in_stock';
 	const ON_REQUEST = 'availability_on_request';
 	const OUT_OF_STOCK = 'availability_out_of_stock';
+	const PREPARING = 'availability_preparing';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
 		$availabilityData = new AvailabilityData();
+		$availabilityData->setNames(array('cs' => 'Připravujeme', 'en' => 'Preparing'));
+		$this->createAvailability($manager, self::PREPARING, $availabilityData);
+
 		$availabilityData->setNames(array('cs' => 'Skladem', 'en' => 'In stock'));
 		$this->createAvailability($manager, self::IN_STOCK, $availabilityData);
 
