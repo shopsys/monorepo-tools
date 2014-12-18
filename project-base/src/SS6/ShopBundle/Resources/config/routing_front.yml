@@ -1,6 +1,7 @@
 front_cart_add_product:
   pattern: /cart/addProduct/
   defaults: { _controller: SS6ShopBundle:Front\Cart:addProduct }
+  methods: [POST]
 
 front_cart_box:
   pattern: /cart/box/
