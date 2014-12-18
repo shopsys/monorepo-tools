@@ -1,14 +1,17 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_value_cell_id_percent %}
-	<span class="js-inline-edit-cell-value">{{ value }}</span>%
 	{% if row is null %}
-		<span title="{{ 'Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována'|trans }}"
-			class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
+	<span class="form-edit-block">
+		%
+			<span title="{{ 'Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována'|trans }}"
+			class="js-tooltip table-action cursor-help in-action-icons__item form-edit-block__info" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="fa fa-info"></i>
 		</span>
+	</span>
 	{% endif %}
+	<span class="js-inline-edit-cell-value form-edit-block__input">{{ value }} %</span>
 {% endblock %}
 
 {% block grid_value_cell_id_coefficient %}
