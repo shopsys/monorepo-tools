@@ -63,13 +63,13 @@ class CurrencyService {
 		$notAllowedToDeleteCurrencyIds = [$this->pricingSetting->getDefaultCurrencyId()];
 		foreach ($this->domain->getAll() as $domainConfig) {
 			$domainDefaultCurrencyId = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
-			if (!in_array($domainDefaultCurrencyId, $notAllowedToDeleteCurrencyIds)) {
-				$notAllowedToDeleteCurrencyIds[] = $domainDefaultCurrencyId;
-			}
+			$notAllowedToDeleteCurrencyIds[] = $domainDefaultCurrencyId;
 		}
-		$notAllowedToDeleteCurrencyIds = $this->addCurrenciesUsedInOrdersToNotAllowedToDeleteArray($notAllowedToDeleteCurrencyIds);
-
-		return $notAllowedToDeleteCurrencyIds;
+		foreach ($this->orderRepository->getCurrenciesUsedInOrders() as $currency) {
+			$notAllowedToDeleteCurrencyIds[] = $currency->getId();
+		}
+		
+		return array_unique($notAllowedToDeleteCurrencyIds);
 	}
 
 	/**
@@ -78,21 +78,6 @@ class CurrencyService {
 	 */
 	public function isCurrencyNotAllowedToDelete(Currency $currency) {
 		return in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds());
-	}
-
-	/**
-	 * @param int[]
-	 * @return int[]
-	 */
-	private function addCurrenciesUsedInOrdersToNotAllowedToDeleteArray($notAllowedToDeleteCurrencyIds) {
-		foreach ($this->orderRepository->getAll() as $order) {
-			$currencyId = $order->getCurrency()->getId();
-			if (!in_array($currencyId, $notAllowedToDeleteCurrencyIds)) {
-				$notAllowedToDeleteCurrencyIds[] = $currencyId;
-			}
-		}
-
-		return $notAllowedToDeleteCurrencyIds;
 	}
 
 }

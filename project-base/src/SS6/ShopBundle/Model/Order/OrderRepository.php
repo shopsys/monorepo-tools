@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 
 class OrderRepository {
 
@@ -168,9 +169,14 @@ class OrderRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
 	 */
-	public function getAll() {
-		return $this->getOrderRepository()->findAll();
+	public function getCurrenciesUsedInOrders() {
+		return $this->em->createQueryBuilder()
+			->select('c')
+			->from(Currency::class, 'c')
+			->join(Order::class, 'o', Join::WITH, 'o.currency = c.id')
+			->groupBy('c')
+			->getQuery()->execute();
 	}
 }
