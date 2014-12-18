@@ -4,27 +4,35 @@
 	SS6.productImagesDelete = SS6.productImagesDelete || {};
 
 	SS6.productImagesDelete.init = function () {
-		SS6.productImagesDelete.updateCss();
-	};
 
-	SS6.productImagesDelete.deleteImage = function (imageId) {
-		SS6.choiceControl.select('#product_imagesToDelete', imageId);
-		SS6.productImagesDelete.updateCss();
-	};
+		$('.js-product-images-image').each(function () {
+			var $image = $(this);
+			var $imagePreview = $image.find('.js-product-images-preview');
+			var $delete = $image.find('.js-product-images-delete-button');
+			var $deleteButton = $delete.find('button');
+			var $revert = $image.find('.js-product-images-delete-revert-button');
+			var $revertButton = $revert.find('button');
+			var imageId = $image.data('id');
 
-	SS6.productImagesDelete.revert = function () {
-		SS6.choiceControl.deselectAll('#product_imagesToDelete');
-		SS6.productImagesDelete.updateCss();
-	};
+			$deleteButton.bind('click.deleteImage', function() {
+				SS6.choiceControl.select('#product_edit_imagesToDelete', imageId);
+				$imagePreview.addClass('list-image__item__in--removed');
+				$delete.hide();
+				$revert.show();
+				return false;
+			});
 
-	SS6.productImagesDelete.updateCss = function () {
-		var imageIds = SS6.choiceControl.getSelectedValues('#product_imagesToDelete');
-		$('.js-image-to-delete').each(function (key, element) {
-			var $element = $(element);
-			if ($.inArray($element.data('id'), imageIds) !== -1) {
-				$element.addClass('list-image__item__in--removed');
-			} else {
-				$element.removeClass('list-image__item__in--removed');
+			$revertButton.bind('click.deleteImage', function() {
+				SS6.choiceControl.deselect('#product_edit_imagesToDelete', imageId);
+				$imagePreview.removeClass('list-image__item__in--removed');
+				$delete.show();
+				$revert.hide();
+				return false;
+			});
+
+			var imageIds = SS6.choiceControl.getSelectedValues('#product_edit_imagesToDelete');
+			if ($.inArray(imageId, imageIds) !== -1) {
+				$deleteButton.trigger('click.deleteImage');
 			}
 		});
 	};
