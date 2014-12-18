@@ -123,41 +123,4 @@ class ProductService {
 		return $productSellingPrices;
 	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData|array $productParameterValuesDataItem
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
-	 */
-	public function createProductParameterValues($product, $productParameterValuesDataItem) {
-		if ($productParameterValuesDataItem instanceof ProductParameterValueData) {
-			$productParameterValuesDataItem->setProduct($product);
-			$productParameterValue = new ProductParameterValue($productParameterValuesDataItem);
-			return array($productParameterValue);
-		} else {
-			return $this->createProductParameterValuesFromArray($product, $productParameterValuesDataItem);
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param array $productParameterValuesDataItem
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue
-	 */
-	private function createProductParameterValuesFromArray(Product $product, array $productParameterValuesDataItem) {
-		$productParameterValues = array();
-		$productParameterValueData = new ProductParameterValueData();
-		$productParameterValueData->setProduct($product);
-		$productParameterValueData->setParameter($productParameterValuesDataItem['parameter']);
-		foreach ($productParameterValuesDataItem['value'] as $locale => $parameterLocalizedValue) {
-			if ($parameterLocalizedValue !== null) {
-				$productParameterValueData->setLocale($locale);
-				$productParameterValueData->setValue($parameterLocalizedValue);
-				$productParameterValue = new ProductParameterValue($productParameterValueData);
-				$productParameterValues[] = $productParameterValue;
-			}
-		}
-
-		return $productParameterValues;
-	}
-
 }

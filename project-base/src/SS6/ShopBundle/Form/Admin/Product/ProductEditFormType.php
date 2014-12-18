@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constrains\UniqueCollection;
+use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Form\FileUploadType;
@@ -88,19 +89,21 @@ class ProductEditFormType extends AbstractType {
 				'expanded' => true,
 				'choice_list' => new ObjectChoiceList($this->images, 'filename', array(), null, 'id'),
 			))
-			->add('parameters', 'collection', array(
-				'required' => false,
-				'allow_add' => true,
-				'allow_delete' => true,
-				'type' => $this->productParameterValueFormTypeFactory->create(),
-				'constraints' => array(
-					new UniqueCollection(array(
-						'fields' => array('parameter'),
-						'message' => 'Každý parametr může být nastaven pouze jednou',
-					)),
-				),
-				'error_bubbling' => false,
-			))
+			->add($builder->create('parameters', 'collection', array(
+					'required' => false,
+					'allow_add' => true,
+					'allow_delete' => true,
+					'type' => $this->productParameterValueFormTypeFactory->create(),
+					'constraints' => array(
+						new UniqueCollection(array(
+							'fields' => array('parameter', 'locale'),
+							'message' => 'Každý parametr může být nastaven pouze jednou',
+						)),
+					),
+					'error_bubbling' => false,
+				))
+				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
+			)
 			->add('save', 'submit');
 	}
 
