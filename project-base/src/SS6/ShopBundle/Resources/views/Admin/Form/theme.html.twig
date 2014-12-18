@@ -177,7 +177,7 @@
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
 	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
 		{% if empty_value is not none -%}
-			<option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+			<option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value }}</option>
 		{%- endif %}
 		{%- if preferred_choices|length > 0 -%}
 			{% set options = preferred_choices %}
@@ -190,6 +190,19 @@
 		{{- block('choice_widget_options') -}}
 	</select>
 {%- endblock choice_widget_collapsed %}
+
+{% block choice_widget_options -%}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ group_label }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock choice_widget_options %}
 
 {% block choice_widget_expanded %}
 	{% spaceless %}
