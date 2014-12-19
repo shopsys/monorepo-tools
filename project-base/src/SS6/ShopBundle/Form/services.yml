@@ -21,6 +21,11 @@ services:
   ss6.shop.form.admin.transport.transport_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
 
+  ss6.shop.form.collection:
+    class: SS6\ShopBundle\Form\CollectionType
+    tags:
+      - { name: form.type_extension, alias: collection }
+
   ss6.shop.form.domains:
     class: SS6\ShopBundle\Form\DomainsType
     tags:

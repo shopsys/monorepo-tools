@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
@@ -30,16 +31,23 @@ class ProductDetailFactory {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ProductPriceCalculation $productPriceCalculation,
 		ParameterRepository $parameterRepository,
-		ImageFacade $imageFacade
+		ImageFacade $imageFacade,
+		Localization $localization
 	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->parameterRepository = $parameterRepository;
 		$this->imageFacade = $imageFacade;
+		$this->localization = $localization;
 	}
 
 	/**
@@ -94,8 +102,7 @@ class ProductDetailFactory {
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
 		foreach ($productParameterValues as $index => $productParameterValue) {
 			$parameter = $productParameterValue->getParameter();
-
-			if ($parameter->getName() === null) {
+			if ($parameter->getName() === null || $productParameterValue->getLocale() !== $this->localization->getLocale()) {
 				unset($productParameterValues[$index]);
 			}
 		}

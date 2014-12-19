@@ -17,6 +17,11 @@ class ProductParameterValueData {
 	private $parameter;
 
 	/**
+	 * @var string
+	 */
+	private $locale;
+
+	/**
 	 * @var string|null
 	 */
 	private $valueText;
@@ -27,6 +32,7 @@ class ProductParameterValueData {
 	public function setFromEntity(ProductParameterValue $productParameterValue) {
 		$this->product = $productParameterValue->getProduct();
 		$this->parameter = $productParameterValue->getParameter();
+		$this->locale = $productParameterValue->getLocale();
 		$this->valueText = $productParameterValue->getValue()->getText();
 	}
 
@@ -42,6 +48,13 @@ class ProductParameterValueData {
 	 */
 	public function getParameter() {
 		return $this->parameter;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLocale() {
+		return $this->locale;
 	}
 
 	/**
@@ -63,6 +76,13 @@ class ProductParameterValueData {
 	 */
 	public function setParameter(Parameter $parameter) {
 		$this->parameter = $parameter;
+	}
+
+	/**
+	 * @param string $locale
+	 */
+	public function setLocale($locale) {
+		$this->locale = $locale;
 	}
 
 	/**

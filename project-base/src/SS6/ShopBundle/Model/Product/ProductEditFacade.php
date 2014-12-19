@@ -167,6 +167,7 @@ class ProductEditFacade {
 			$productParameterValue = new ProductParameterValue(
 				$productParameterValueData->getProduct(),
 				$productParameterValueData->getParameter(),
+				$productParameterValueData->getLocale(),
 				$this->parameterRepository->findOrCreateParameterValueByValueText($productParameterValueData->getValueText())
 			);
 			$this->em->persist($productParameterValue);

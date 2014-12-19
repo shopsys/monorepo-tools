@@ -143,6 +143,9 @@ services:
   ss6.shop.component.transformers.product_id_to_product_transformer:
     class: SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
 
+  ss6.shop.component.transformers.product_parameter_value_to_product_parameter_values_localized_transformer:
+    class: SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
+
   ss6.shop.csv.csv_reader:
     class: SS6\ShopBundle\Component\Csv\CsvReader
 
