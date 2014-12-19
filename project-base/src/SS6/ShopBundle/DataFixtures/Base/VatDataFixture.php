@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 class VatDataFixture extends AbstractReferenceFixture {
 
 	const VAT_ZERO = 'vat_zero';
+	const VAT_SECOND_LOW = 'vat_second_low';
 	const VAT_LOW = 'vat_low';
 	const VAT_HIGH = 'vat_high';
 
@@ -23,6 +24,10 @@ class VatDataFixture extends AbstractReferenceFixture {
 		$vatData->setName('Nulová sazba');
 		$vatData->setPercent('0');
 		$this->createVat($manager, self::VAT_ZERO, $vatData);
+
+		$vatData->setName('Druhá nižší sazba');
+		$vatData->setPercent('10');
+		$this->createVat($manager, self::VAT_SECOND_LOW, $vatData);
 
 		$vatData->setName('Nižší sazba');
 		$vatData->setPercent('15');
