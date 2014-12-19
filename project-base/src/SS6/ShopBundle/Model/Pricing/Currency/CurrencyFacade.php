@@ -3,9 +3,11 @@
 namespace SS6\ShopBundle\Model\Pricing\Currency;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyService;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyService;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyFacade {
@@ -31,6 +33,16 @@ class CurrencyFacade {
 	private $pricingSetting;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
+	 */
+	private $orderRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyService $currencyService
@@ -39,12 +51,16 @@ class CurrencyFacade {
 		EntityManager $em,
 		CurrencyRepository $currencyRepository,
 		CurrencyService $currencyService,
-		PricingSetting $pricingSetting
+		PricingSetting $pricingSetting,
+		OrderRepository $orderRepository,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->currencyRepository = $currencyRepository;
 		$this->currencyService = $currencyService;
 		$this->pricingSetting = $pricingSetting;
+		$this->orderRepository = $orderRepository;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -86,7 +102,7 @@ class CurrencyFacade {
 	public function deleteById($currencyId) {
 		$currency = $this->currencyRepository->getById($currencyId);
 
-		if ($this->currencyService->isCurrencyNotAllowedToDelete($currency)) {
+		if (in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds())) {
 			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException();
 		}
 		$this->em->beginTransaction();
@@ -135,10 +151,15 @@ class CurrencyFacade {
 	}
 
 	/**
-	 * @return array
+	 * @return int[]
 	 */
 	public function getNotAllowedToDeleteCurrencyIds() {
-		return $this->currencyService->getNotAllowedToDeleteCurrencyIds();
+		return $this->currencyService->getNotAllowedToDeleteCurrencyIds(
+			$this->getDefaultCurrency()->getId(),
+			$this->getCurrenciesUsedInOrders(),
+			$this->pricingSetting,
+			$this->domain
+		);
 	}
 
 	/**
@@ -147,6 +168,13 @@ class CurrencyFacade {
 	 */
 	public function isDefaultCurrency(Currency $currency) {
 		return $currency === $this->getDefaultCurrency();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 */
+	public function getCurrenciesUsedInOrders() {
+		return $this->orderRepository->getCurrenciesUsedInOrders();
 	}
 
 }

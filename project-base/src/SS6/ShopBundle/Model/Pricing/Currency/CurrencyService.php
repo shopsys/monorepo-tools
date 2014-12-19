@@ -3,33 +3,11 @@
 namespace SS6\ShopBundle\Model\Pricing\Currency;
 
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
-	 */
-	private $pricingSetting;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
-	 */
-	private $domain;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
-	 */
-	private $orderRepository;
-
-	public function __construct(PricingSetting $pricingSetting, Domain $domain, OrderRepository $orderRepository) {
-		$this->pricingSetting = $pricingSetting;
-		$this->domain = $domain;
-		$this->orderRepository = $orderRepository;
-	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
@@ -57,27 +35,27 @@ class CurrencyService {
 	}
 
 	/**
+	 * @param int $defaultCurrencyId
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
+	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
 	 * @return int[]
 	 */
-	public function getNotAllowedToDeleteCurrencyIds() {
-		$notAllowedToDeleteCurrencyIds = [$this->pricingSetting->getDefaultCurrencyId()];
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$domainDefaultCurrencyId = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
-			$notAllowedToDeleteCurrencyIds[] = $domainDefaultCurrencyId;
+	public function getNotAllowedToDeleteCurrencyIds(
+		$defaultCurrencyId,
+		array $currenciesUsedInOrders,
+		PricingSetting $pricingSetting,
+		Domain $domain
+	) {
+		$notAllowedToDeleteCurrencyIds = [$defaultCurrencyId];
+		foreach ($domain->getAll() as $domainConfig) {
+			$notAllowedToDeleteCurrencyIds[] = $pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
 		}
-		foreach ($this->orderRepository->getCurrenciesUsedInOrders() as $currency) {
+		foreach ($currenciesUsedInOrders as $currency) {
 			$notAllowedToDeleteCurrencyIds[] = $currency->getId();
 		}
-		
-		return array_unique($notAllowedToDeleteCurrencyIds);
-	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return bool
-	 */
-	public function isCurrencyNotAllowedToDelete(Currency $currency) {
-		return in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds());
+		return array_unique($notAllowedToDeleteCurrencyIds);
 	}
 
 }
