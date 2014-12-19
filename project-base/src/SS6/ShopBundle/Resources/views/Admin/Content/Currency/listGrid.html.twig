@@ -3,7 +3,7 @@
 {% block grid_action_cell_type_delete %}
 	{% if notAllowedToDeleteCurrencyIds is defined %}
 		{% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
-			<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí'|trans }}"
+			<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky'|trans }}"
 				class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
 			>
 				<i class="fa fa-info"></i>

@@ -10,21 +10,6 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 class CurrencyService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
-	 */
-	private $pricingSetting;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
-	 */
-	private $domain;
-
-	public function __construct(PricingSetting $pricingSetting, Domain $domain) {
-		$this->pricingSetting = $pricingSetting;
-		$this->domain = $domain;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 */
@@ -50,24 +35,27 @@ class CurrencyService {
 	}
 
 	/**
-	 * @return array
+	 * @param int $defaultCurrencyId
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
+	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @return int[]
 	 */
-	public function getNotAllowedToDeleteCurrencyIds() {
-		$notAllowedToDeleteCurrencyIds = array();
-		$notAllowedToDeleteCurrencyIds[] = $this->pricingSetting->getDefaultCurrencyId();
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$notAllowedToDeleteCurrencyIds[] = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
+	public function getNotAllowedToDeleteCurrencyIds(
+		$defaultCurrencyId,
+		array $currenciesUsedInOrders,
+		PricingSetting $pricingSetting,
+		Domain $domain
+	) {
+		$notAllowedToDeleteCurrencyIds = [$defaultCurrencyId];
+		foreach ($domain->getAll() as $domainConfig) {
+			$notAllowedToDeleteCurrencyIds[] = $pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
+		}
+		foreach ($currenciesUsedInOrders as $currency) {
+			$notAllowedToDeleteCurrencyIds[] = $currency->getId();
 		}
 
-		return $notAllowedToDeleteCurrencyIds;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return bool
-	 */
-	public function isCurrencyNotAllowedToDelete(Currency $currency) {
-		return in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds());
+		return array_unique($notAllowedToDeleteCurrencyIds);
 	}
 
 }
