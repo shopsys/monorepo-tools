@@ -8,9 +8,10 @@ use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -152,6 +153,8 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
 		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
+		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
+		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
 		$form = $this->createForm(
 			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
@@ -161,6 +164,10 @@ class CustomerController extends Controller {
 
 		try {
 			$customerData = new CustomerData();
+			$userData = new UserData();
+			$defaultPricingGroup = $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
+			$userData->setPricingGroup($defaultPricingGroup);
+			$customerData->setUserData($userData);
 
 			$form->setData($customerData);
 			$form->handleRequest($request);
