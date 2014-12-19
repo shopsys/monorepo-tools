@@ -25,7 +25,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 				$parameterId = $productParameterValueData->getParameter()->getId();
 				$locale = $productParameterValueData->getLocale();
 
-				if (isset($normValue[$parameterId])) {
+				if (array_key_exists($parameterId, $normValue)) {
 					$productParameterValuesLocalizedData = $normValue[$parameterId];
 				} else {
 					$productParameterValuesLocalizedData = new ProductParameterValuesLocalizedData();
@@ -77,7 +77,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 	 * @return array
 	 */
 	private function resetArrayIndexes($array) {
-		$newArray = array();
+		$newArray = [];
 		foreach ($array as $item) {
 			$newArray[] = $item;
 		}

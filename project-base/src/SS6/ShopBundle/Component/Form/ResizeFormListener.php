@@ -96,6 +96,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 
 	/**
 	 * Remove all form children and add them again to correspond to viewData.
+	 * (In Symfony ResizeFormListener made with modelData)
 	 *
 	 * @param \Symfony\Component\Form\FormEvent $event
 	 */
@@ -171,10 +172,11 @@ class ResizeFormListener implements EventSubscriberInterface {
 	}
 
 	/**
-	 * - Transform event's normData back to viewData
+	 * - Transform event's normData back to viewData (because viewData is not yet stored in form)
 	 * - Remove empty children form form and viewData
 	 * - Remove viewData which don't have child in form
 	 * - Transform modified viewData back to normData
+	 * (In Symfony this method works just with normData)
 	 *
 	 * @param \Symfony\Component\Form\FormEvent $event
 	 */
