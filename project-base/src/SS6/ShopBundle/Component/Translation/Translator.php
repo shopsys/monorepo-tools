@@ -23,7 +23,7 @@ class Translator extends BaseTranslator {
 	}
 
 	/**
-	 * When translation for given locale is not defined,
+	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
 	 * function returns translation id string with self::NOT_TRANSLATED_PREFIX prefix
 	 * {@inheritdoc}
 	 *
@@ -43,13 +43,15 @@ class Translator extends BaseTranslator {
 		$catalogue = $this->catalogues[$locale];
 		if ($catalogue->defines($id, $domain)) {
 			return strtr($this->catalogues[$locale]->get((string)$id, $domain), $parameters);
+		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
+			return $id;
 		} else {
 			return self::NOT_TRANSLATED_PREFIX . $id;
 		}
 	}
 
 	/**
-	 * When translation for given locale is not defined,
+	 * When translation for given locale is not defined locale is not self::TRANSLATION_ID_LOCALE,
 	 * function returns translation id string with self::NOT_TRANSLATED_PREFIX prefix
 	 * {@inheritdoc}
 	 *
@@ -81,6 +83,8 @@ class Translator extends BaseTranslator {
 
 		if ($catalogue->defines($id, $domain)) {
 			return strtr($this->selector->choose($catalogue->get($id, $domain), (int)$number, $locale), $parameters);
+		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
+			return $id;
 		} else {
 			return self::NOT_TRANSLATED_PREFIX . $id;
 		}
