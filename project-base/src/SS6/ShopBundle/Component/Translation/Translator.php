@@ -3,12 +3,25 @@
 namespace SS6\ShopBundle\Component\Translation;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator as BaseTranslator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Translation\MessageSelector;
 
 class Translator extends BaseTranslator {
 
 	const DEFAULT_DOMAIN = 'messages';
 	const NOT_TRANSLATED_PREFIX = '##';
 	const TRANSLATION_ID_LOCALE = 'cs';
+
+	/**
+	 * @var \Symfony\Component\Translation\MessageSelector
+	 */
+	private $messageSelector;
+
+	public function __construct(ContainerInterface $container, MessageSelector $selector, $loaderIds = array(), array $options = array()) {
+		parent::__construct($container, $selector, $loaderIds, $options);
+
+		$this->messageSelector = $selector ?: new MessageSelector();
+	}
 
 	/**
 	 * @param string $locale
@@ -82,7 +95,7 @@ class Translator extends BaseTranslator {
 		}
 
 		if ($catalogue->defines($id, $domain)) {
-			return strtr($this->selector->choose($catalogue->get($id, $domain), (int)$number, $locale), $parameters);
+			return strtr($this->messageSelector->choose($catalogue->get($id, $domain), (int)$number, $locale), $parameters);
 		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
 			return $id;
 		} else {
