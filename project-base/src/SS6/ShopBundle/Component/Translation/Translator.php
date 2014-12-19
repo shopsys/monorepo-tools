@@ -17,7 +17,12 @@ class Translator extends BaseTranslator {
 	 */
 	private $messageSelector;
 
-	public function __construct(ContainerInterface $container, MessageSelector $selector, $loaderIds = array(), array $options = array()) {
+	public function __construct(
+		ContainerInterface $container,
+		MessageSelector $selector,
+		$loaderIds = array(),
+		array $options = array()
+	) {
 		parent::__construct($container, $selector, $loaderIds, $options);
 
 		$this->messageSelector = $selector ?: new MessageSelector();
