@@ -127,6 +127,7 @@
 	SS6.grid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
+			$originalRow.find('.js-tooltip[title]').tooltip();
 			$formRow.replaceWith($originalRow).remove();
 			SS6.grid.inlineEdit.enableRow($originalRow);
 		}
