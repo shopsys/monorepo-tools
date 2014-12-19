@@ -24,7 +24,7 @@ class UrlsProvider {
 	/**
 	 * @var string[]
 	 */
-	private $ignoreRouteNames = [
+	private $ignoredRouteNames = [
 		'admin_domain_selectdomain',
 		'admin_login_check',
 		'front_login_check'
@@ -100,7 +100,6 @@ class UrlsProvider {
 	 * @return array
 	 */
 	public function getAdminTestableUrlsProviderData() {
-		//return [];
 		$urls = [];
 		foreach ($this->router->getRouteCollection() as $routeName => $route) {
 			if ($this->isTestableRoute($route, $routeName) && $this->isAdminRouteName($routeName)) {
@@ -167,7 +166,7 @@ class UrlsProvider {
 	 * @return bool
 	 */
 	private function isTestableRoute(Route $route, $routeName) {
-		if (in_array($routeName, $this->ignoreRouteNames)
+		if (in_array($routeName, $this->ignoredRouteNames)
 			|| count($route->getMethods()) > 0 && !in_array('GET', $route->getMethods())
 			|| strpos($route->getPath(), '/_') === 0
 			|| strpos($route->getPath(), '/admin/_') === 0

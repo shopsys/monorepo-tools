@@ -15,7 +15,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 		$persistentReferenceService = $this->getContainer()->get('ss6.shop.data_fixture.persistent_reference_service');
 		/* @var $router \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
 
-		// DataProvider is call without self::setUp() - domain is not set
+		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 
 		$urlsProvider = new UrlsProvider($persistentReferenceService, $router);
@@ -34,7 +34,6 @@ class AllPagesResponseTest extends DatabaseTestCase {
 		$this->assertEquals($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
 	}
 
-
 	public function frontTestableUrlsProvider() {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
@@ -43,10 +42,10 @@ class AllPagesResponseTest extends DatabaseTestCase {
 		$persistentReferenceService = $this->getContainer()->get('ss6.shop.data_fixture.persistent_reference_service');
 		/* @var $router \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
 
-		// DataProvider is call without self::setUp() - domain is not set
+		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 		$urlsProvider = new UrlsProvider($persistentReferenceService, $router);
-		
+
 		return $urlsProvider->getFrontTestableUrlsProviderData();
 	}
 
