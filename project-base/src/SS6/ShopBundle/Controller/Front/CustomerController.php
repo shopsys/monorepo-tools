@@ -105,8 +105,15 @@ class CustomerController extends Controller {
 				$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 				return $this->redirect($this->generateUrl('front_login'));
 			}
-			$order = $orderFacade->getByOrderNumber($orderNumber);
-			/* @var $order \SS6\ShopBundle\Model\Order\Order */
+
+			$user = $this->getUser();
+			try {
+				$order = $orderFacade->getByOrderNumberAndUser($orderNumber, $user);
+				/* @var $order \SS6\ShopBundle\Model\Order\Order */
+			} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
+				$flashMessageSender->addErrorFlash('Objednávka nebyla nalezena');
+				return $this->redirect($this->generateUrl('front_customer_orders'));
+			}
 		} else {
 			$order = $orderFacade->getByUrlHash($urlHash);
 			/* @var $order \SS6\ShopBundle\Model\Order\Order */

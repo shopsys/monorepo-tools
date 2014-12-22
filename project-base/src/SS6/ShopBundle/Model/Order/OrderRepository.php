@@ -148,13 +148,15 @@ class OrderRepository {
 
 	/**
 	 * @param string $orderNumber
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function getByOrderNumber($orderNumber) {
-		$order = $this->getOrderRepository()->findOneBy(['number' => $orderNumber]);
+	public function getByOrderNumberAndUser($orderNumber, User $user) {
+		$criteria = ['number' => $orderNumber, 'customer' => $user];
+		$order = $this->getOrderRepository()->findOneBy($criteria);
 
 		if ($order === null) {
-			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($orderNumber);
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($criteria);
 		}
 
 		return $order;

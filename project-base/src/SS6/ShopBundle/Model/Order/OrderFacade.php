@@ -217,9 +217,10 @@ class OrderFacade {
 
 	/**
 	 * @param string $orderNumber
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function getByOrderNumber($orderNumber) {
-		return $this->orderRepository->getByOrderNumber($orderNumber);
+	public function getByOrderNumberAndUser($orderNumber, User $user) {
+		return $this->orderRepository->getByOrderNumberAndUser($orderNumber, $user);
 	}
 }
