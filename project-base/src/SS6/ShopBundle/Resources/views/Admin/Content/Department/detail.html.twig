@@ -13,7 +13,7 @@
 				<div class="wrap-group">
 					{{ form_id(department|default(null)) }}
 					{% block department_url %}{% endblock %}
-					{{ form_row(form.names, { label: 'Název' }) }}
+					{{ form_row(form.name, { label: 'Název' }) }}
 					{{ form_row(form.parent, { label: 'Nadřazená kategorie'}) }}
 				</div>
 

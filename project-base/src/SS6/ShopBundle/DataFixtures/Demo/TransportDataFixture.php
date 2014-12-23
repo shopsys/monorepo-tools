@@ -15,12 +15,12 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 */
 	public function load(ObjectManager $manager) {
 		$transportData = new TransportData();
-		$transportData->setNames(array(
+		$transportData->setName(array(
 			'cs' => 'Česká pošta - balík do ruky',
 			'en' => 'Czech post',
 		));
 		$transportData->setPrice(99.95);
-		$transportData->setDescriptions(array(
+		$transportData->setDescription(array(
 			'cs' => 'Pouze na vlastní nebezpečí',
 			'en' => 'Only if you are crazy',
 		));
@@ -29,23 +29,23 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 		$transportData->setHidden(false);
 		$this->createTransport('transport_cp', $transportData);
 
-		$transportData->setNames(array(
+		$transportData->setName(array(
 			'cs' => 'PPL',
 			'en' => 'PPL',
 		));
 		$transportData->setPrice(199.95);
-		$transportData->setDescriptions(array(
+		$transportData->setDescription(array(
 			'cs' => null,
 			'en' => null,
 		));
 		$this->createTransport('transport_ppl', $transportData);
 
-		$transportData->setNames(array(
+		$transportData->setName(array(
 			'cs' => 'Osobní převzetí',
 			'en' => 'Personal takeover',
 		));
 		$transportData->setPrice(0);
-		$transportData->setDescriptions(array(
+		$transportData->setDescription(array(
 			'cs' => 'Uvítá Vás milý personál!',
 			'en' => 'You will be welcomed friendly staff!',
 		));

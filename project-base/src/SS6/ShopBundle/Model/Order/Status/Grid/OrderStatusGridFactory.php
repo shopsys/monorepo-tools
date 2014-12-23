@@ -61,7 +61,7 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('names', 'ost.name', $this->translator->trans('Název'), true);
+		$grid->addColumn('name', 'ost.name', $this->translator->trans('Název'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(

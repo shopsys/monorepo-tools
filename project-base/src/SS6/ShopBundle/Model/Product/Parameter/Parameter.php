@@ -58,7 +58,7 @@ class Parameter extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 */
 	private function setTranslations(ParameterData $parameterData) {
-		foreach ($parameterData->getNames() as $locale => $name) {
+		foreach ($parameterData->getName() as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}

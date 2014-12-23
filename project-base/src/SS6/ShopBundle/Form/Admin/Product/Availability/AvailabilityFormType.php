@@ -23,7 +23,7 @@ class AvailabilityFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('names', 'localized', array(
+			->add('name', 'localized', array(
 				'required' => true,
 				'options' => array(
 					'constraints' => array(

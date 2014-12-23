@@ -23,7 +23,7 @@ class OrderStatusFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('names', 'localized', array(
+			->add('name', 'localized', array(
 				'options' => array(
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Vyplňte prosím všechny názvy stavu')),

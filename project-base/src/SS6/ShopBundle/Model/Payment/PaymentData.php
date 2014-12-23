@@ -7,9 +7,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 class PaymentData {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $names;
+	private $name;
 
 	/**
 	 * @var string
@@ -22,12 +22,12 @@ class PaymentData {
 	private $vat;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $descriptions;
+	private $description;
 
 	/**
-	 * @var array
+	 * @var int[]
 	 */
 	private $domains;
 
@@ -42,40 +42,40 @@ class PaymentData {
 	private $image;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $transports;
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
-	 * @param array $descriptions
+	 * @param string[] $description
 	 * @param boolean $hidden
-	 * @param array $domains
+	 * @param int[] $domains
 	 */
 	public function __construct(
-		array $names = array(),
+		array $name = [],
 		$price = null,
 		Vat $vat = null,
-		array $descriptions = array(),
+		array $description = [],
 		$hidden = false,
-		$domains = array()
+		array $domains = []
 	) {
-		$this->names = $names;
+		$this->name = $name;
 		$this->price = $price;
 		$this->vat = $vat;
-		$this->descriptions = $descriptions;
+		$this->description = $description;
 		$this->domains = $domains;
 		$this->hidden = $hidden;
-		$this->transports = array();
+		$this->transports = [];
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public function getNames() {
-		return $this->names;
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
@@ -93,21 +93,21 @@ class PaymentData {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public function getDescriptions() {
-		return $this->descriptions;
+	public function getDescription() {
+		return $this->description;
 	}
 
 	/**
-	 * @return array
+	 * @return int[]
 	 */
 	public function getDomains() {
 		return $this->domains;
 	}
 
 	/**
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getTransports() {
 		return $this->transports;
@@ -128,10 +128,10 @@ class PaymentData {
 	}
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
 	 */
-	public function setNames(array $names) {
-		$this->names = $names;
+	public function setName(array $name) {
+		$this->name = $name;
 	}
 
 	/**
@@ -149,23 +149,23 @@ class PaymentData {
 	}
 
 	/**
-	 * @param array $descriptions
+	 * @param string[] $description
 	 */
-	public function setDescriptions($descriptions) {
-		$this->descriptions = $descriptions;
+	public function setDescription(array $description) {
+		$this->description = $description;
 	}
 
 	/**
-	 * @param array $domains
+	 * @param int[] $domains
 	 */
-	public function setDomains($domains) {
+	public function setDomains(array $domains) {
 		$this->domains = $domains;
 	}
 
 	/**
-	 * @param array $transports
+	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 */
-	public function setTransports($transports) {
+	public function setTransports(array $transports) {
 		$this->transports = $transports;
 	}
 
@@ -194,16 +194,16 @@ class PaymentData {
 		$this->setTransports($payment->getTransports()->toArray());
 
 		$translations = $payment->getTranslations();
-		$names = array();
-		$desctiptions = array();
+		$names = [];
+		$desctiptions = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 			$desctiptions[$translate->getLocale()] = $translate->getDescription();
 		}
-		$this->setNames($names);
-		$this->setDescriptions($desctiptions);
+		$this->setName($names);
+		$this->setDescription($desctiptions);
 
-		$domains = array();
+		$domains = [];
 		foreach ($paymentDomains as $paymentDomain) {
 			$domains[] = $paymentDomain->getDomainId();
 		}

@@ -5,29 +5,29 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 class AvailabilityData {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $names;
+	private $name;
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
 	 */
-	public function __construct($names = array()) {
-		$this->names = $names;
+	public function __construct(array $name = []) {
+		$this->name = $name;
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public function getNames() {
-		return $this->names;
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
 	 */
-	public function setNames($names) {
-		$this->names = $names;
+	public function setName(array $name) {
+		$this->name = $name;
 	}
 
 	/**
@@ -35,11 +35,11 @@ class AvailabilityData {
 	 */
 	public function setFromEntity(Availability $availability) {
 		$translations = $availability->getTranslations();
-		$names = array();
+		$names = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
-		$this->setNames($names);
+		$this->setName($names);
 	}
 
 }

@@ -50,7 +50,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	public function __construct(OrderStatusData $orderStatusData, $type) {
 		$this->translations = new ArrayCollection();
 		$this->setType($type);
-		$this->setTranslations($orderStatusData->getNames());
+		$this->setTranslations($orderStatusData->getName());
 	}
 
 	/**
@@ -111,7 +111,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
 	public function edit(OrderStatusData $orderStatusData) {
-		$this->setTranslations($orderStatusData->getNames());
+		$this->setTranslations($orderStatusData->getName());
 	}
 
 }

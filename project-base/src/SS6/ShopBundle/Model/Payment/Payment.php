@@ -121,10 +121,10 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	private function setTranslations(PaymentData $paymentData) {
-		foreach ($paymentData->getNames() as $locale => $name) {
+		foreach ($paymentData->getName() as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
-		foreach ($paymentData->getDescriptions() as $locale => $description) {
+		foreach ($paymentData->getDescription() as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
 	}

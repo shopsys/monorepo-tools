@@ -59,7 +59,7 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('names', 'at.name', $this->translator->trans('Název'), true);
+		$grid->addColumn('name', 'at.name', $this->translator->trans('Název'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(

@@ -7,9 +7,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 class TransportData {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $names;
+	private $name;
 
 	/**
 	 * @var string
@@ -22,9 +22,9 @@ class TransportData {
 	private $vat;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $descriptions;
+	private $description;
 
 	/**
 	 * @var bool
@@ -37,39 +37,39 @@ class TransportData {
 	private $image;
 
 	/**
-	 * @var array
+	 * @var int[]
 	 */
 	private $domains;
 
 	/**
-	 * @param array $names
+	 * @param string[] $names
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
-	 * @param array $descriptions
+	 * @param string[] $descriptions
 	 * @param boolean $hidden
-	 * @param array $domains
+	 * @param int[] $domains
 	 */
 	public function __construct(
-		array $names = array(),
+		array $names = [],
 		$price = null,
 		Vat $vat = null,
-		array $descriptions = array(),
+		array $descriptions = [],
 		$hidden = false,
-		$domains = array()
+		array $domains = []
 	) {
-		$this->names = $names;
+		$this->name = $names;
 		$this->price = $price;
 		$this->vat = $vat;
-		$this->descriptions = $descriptions;
+		$this->description = $descriptions;
 		$this->hidden = $hidden;
 		$this->domains = $domains;
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public function getNames() {
-		return $this->names;
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
@@ -87,10 +87,10 @@ class TransportData {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public function getDescriptions() {
-		return $this->descriptions;
+	public function getDescription() {
+		return $this->description;
 	}
 
 	/**
@@ -108,17 +108,17 @@ class TransportData {
 	}
 
 	/**
-	 * @return array
+	 * @return int[]
 	 */
 	public function getDomains() {
 		return $this->domains;
 	}
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
 	 */
-	public function setNames(array $names) {
-		$this->names = $names;
+	public function setName(array $name) {
+		$this->name = $name;
 	}
 
 	/**
@@ -136,10 +136,10 @@ class TransportData {
 	}
 
 	/**
-	 * @param array $descriptions
+	 * @param string[] $description
 	 */
-	public function setDescriptions($descriptions) {
-		$this->descriptions = $descriptions;
+	public function setDescription(array $description) {
+		$this->description = $description;
 	}
 
 	/**
@@ -157,9 +157,9 @@ class TransportData {
 	}
 
 	/**
-	 * @param array $domains
+	 * @param int[] $domains
 	 */
-	public function setDomains($domains) {
+	public function setDomains(array $domains) {
 		$this->domains = $domains;
 	}
 
@@ -169,19 +169,19 @@ class TransportData {
 	 */
 	public function setFromEntity(Transport $transport, array $transportDomains) {
 		$translations = $transport->getTranslations();
-		$names = array();
-		$desctiptions = array();
+		$names = [];
+		$desctiptions = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 			$desctiptions[$translate->getLocale()] = $translate->getDescription();
 		}
-		$this->setNames($names);
-		$this->setDescriptions($desctiptions);
+		$this->setName($names);
+		$this->setDescription($desctiptions);
 		$this->setHidden($transport->isHidden());
 		$this->setPrice($transport->getPrice());
 		$this->setVat($transport->getVat());
 
-		$domains = array();
+		$domains = [];
 		foreach ($transportDomains as $transportDomain) {
 			$domains[] = $transportDomain->getDomainId();
 		}

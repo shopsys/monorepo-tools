@@ -95,10 +95,10 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	private function setTranslations(TransportData $transportData) {
-		foreach ($transportData->getNames() as $locale => $name) {
+		foreach ($transportData->getName() as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
-		foreach ($transportData->getDescriptions() as $locale => $description) {
+		foreach ($transportData->getDescription() as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
 	}

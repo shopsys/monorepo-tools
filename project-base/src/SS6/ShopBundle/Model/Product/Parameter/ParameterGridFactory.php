@@ -55,7 +55,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$grid->setDefaultOrder('pt.name');
 
 		$grid->addColumn(
-			'names',
+			'name',
 			'pt.name',
 			$this->translator->trans('Název %locale%', array('%locale%' => $this->localization->getLanguageName($defaultLocale))),
 			true
@@ -63,7 +63,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 		foreach ($locales as $locale) {
 			if ($locale !== $defaultLocale) {
 				$grid->addColumn(
-					'names_' . $locale,
+					'name_' . $locale,
 					'pt_' . $locale . '.name',
 					$this->translator->trans('Název %locale%', array('%locale%' => $this->localization->getLanguageName($locale))),
 					true

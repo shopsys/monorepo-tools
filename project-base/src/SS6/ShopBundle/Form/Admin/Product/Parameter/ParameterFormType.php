@@ -23,7 +23,7 @@ class ParameterFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('names', 'localized', array(
+			->add('name', 'localized', array(
 				'required' => false,
 				'options' => array(
 					'constraints' => array(

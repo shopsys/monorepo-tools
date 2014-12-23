@@ -25,33 +25,33 @@ class DepartmentDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$departmentData = new DepartmentData();
 
-		$departmentData->setNames(array('cs' => 'Elektro', 'en' => 'Electronics'));
+		$departmentData->setName(array('cs' => 'Elektro', 'en' => 'Electronics'));
 		$electronicsDepartment = $this->createDepartment($manager, self::ELECTRONICS, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Televize, audio', 'en' => 'TV, audio'));
+		$departmentData->setName(array('cs' => 'Televize, audio', 'en' => 'TV, audio'));
 		$departmentData->setParent($electronicsDepartment);
 		$this->createDepartment($manager, self::TV, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'));
+		$departmentData->setName(array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'));
 		$this->createDepartment($manager, self::PHOTO, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Tiskárny', 'en' => null));
+		$departmentData->setName(array('cs' => 'Tiskárny', 'en' => null));
 		$this->createDepartment($manager, self::PRINTERS, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Počítače & příslušenství', 'en' => null));
+		$departmentData->setName(array('cs' => 'Počítače & příslušenství', 'en' => null));
 		$this->createDepartment($manager, self::PC, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Mobilní telefony', 'en' => null));
+		$departmentData->setName(array('cs' => 'Mobilní telefony', 'en' => null));
 		$this->createDepartment($manager, self::PHONES, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Kávovary', 'en' => null));
+		$departmentData->setName(array('cs' => 'Kávovary', 'en' => null));
 		$this->createDepartment($manager, self::COFFEE, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Knihy', 'en' => 'Books'));
+		$departmentData->setName(array('cs' => 'Knihy', 'en' => 'Books'));
 		$departmentData->setParent(null);
 		$this->createDepartment($manager, self::BOOKS, $departmentData);
 
-		$departmentData->setNames(array('cs' => 'Hračky a další', 'en' => null));
+		$departmentData->setName(array('cs' => 'Hračky a další', 'en' => null));
 		$this->createDepartment($manager, self::TOYS, $departmentData);
 
 

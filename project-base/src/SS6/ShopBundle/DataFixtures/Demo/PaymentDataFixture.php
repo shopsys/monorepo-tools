@@ -15,12 +15,12 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	public function load(ObjectManager $manager) {
 		$paymentData = new PaymentData();
-		$paymentData->setNames(array(
+		$paymentData->setName(array(
 			'cs' => 'Kreditní kartou',
 			'en' => 'Credit card',
 		));
 		$paymentData->setPrice(99.95);
-		$paymentData->setDescriptions(array(
+		$paymentData->setDescription(array(
 			'cs' => 'Rychle, levně a spolehlivě!',
 			'en' => 'Quick, cheap and reliable!',
 		));
@@ -29,21 +29,21 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		$paymentData->setHidden(false);
 		$this->createPayment('payment_card', $paymentData, array('transport_personal', 'transport_ppl'));
 
-		$paymentData->setNames(array(
+		$paymentData->setName(array(
 			'cs' => 'Dobírka',
 			'en' => 'Personal collection',
 		));
 		$paymentData->setPrice(49.90);
-		$paymentData->setDescriptions(array());
+		$paymentData->setDescription(array());
 		$paymentData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
 		$this->createPayment('payment_cod', $paymentData, array('transport_cp'));
 
-		$paymentData->setNames(array(
+		$paymentData->setName(array(
 			'cs' => 'Hotově',
 			'en' => 'Cash',
 		));
 		$paymentData->setPrice(0);
-		$paymentData->setDescriptions(array());
+		$paymentData->setDescription(array());
 		$paymentData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
 		$this->createPayment('payment_cash', $paymentData, array('transport_personal'));
 

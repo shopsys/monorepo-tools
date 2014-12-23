@@ -165,7 +165,7 @@ class Department extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
 	 */
 	private function setTranslations(DepartmentData $departmentData) {
-		foreach ($departmentData->getNames() as $locale => $name) {
+		foreach ($departmentData->getName() as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}

@@ -47,7 +47,7 @@ class TransportFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('names', 'localized', array(
+			->add('name', 'localized', array(
 				'main_constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
 				),
@@ -79,7 +79,7 @@ class TransportFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
 				),
 			))
-			->add('descriptions', 'localized', array(
+			->add('description', 'localized', array(
 				'required' => false,
 				'type' => 'textarea',
 			))

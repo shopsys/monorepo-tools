@@ -11,9 +11,9 @@ use SS6\ShopBundle\Model\Department\Department;
 class DepartmentData {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $names;
+	private $name;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Department\Department|null
@@ -21,25 +21,26 @@ class DepartmentData {
 	private $parent;
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
+	 * @param \SS6\ShopBundle\Model\Department\Department|null $parent
 	 */
-	public function __construct($names = array(), Department $parent = null) {
-		$this->names = $names;
+	public function __construct(array $name = [], Department $parent = null) {
+		$this->name = $name;
 		$this->parent = $parent;
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
-	public function getNames() {
-		return $this->names;
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
-	 * @param array $names
+	 * @param string[] $name
 	 */
-	public function setNames($names) {
-		$this->names = $names;
+	public function setName(array $name) {
+		$this->name = $name;
 	}
 
 	/**
@@ -61,11 +62,11 @@ class DepartmentData {
 	 */
 	public function setFromEntity(Department $department) {
 		$translations = $department->getTranslations();
-		$names = array();
+		$names = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
-		$this->setNames($names);
+		$this->setName($names);
 		$this->setParent($department->getParent());
 	}
 
