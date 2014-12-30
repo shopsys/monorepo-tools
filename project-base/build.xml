@@ -34,8 +34,8 @@
 
 	<target name="build" depends="clean,composer,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup"/>
 	<target name="build-demo" depends="clean,composer,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup"/>
-	<target name="build-demo-dev" depends="build-demo,standards"/>
-	<target name="build-dev" depends="build,standards"/>
+	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,standards"/>
+	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup,standards"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 	<target name="standards" depends="phplint,phpcs,phpmd,twig-lint,test-db-demo,tests,tests-db,tests-crawler"/>
@@ -75,6 +75,18 @@
 	</target>
 
 	<target name="composer">
+		<exec
+			executable="${path.composer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="install" />
+			<arg value="--no-dev" />
+		</exec>
+	</target>
+
+	<target name="composer-dev">
 		<exec
 			executable="${path.composer.executable}"
 			logoutput="true"
