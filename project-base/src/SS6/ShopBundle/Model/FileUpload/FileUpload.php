@@ -8,14 +8,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUpload {
 
-	const CACHE_DIRECTORY = 'fileUploads';
+	const TEMPORARY_DIRECTORY = 'fileUploads';
 	const UPLOAD_FILE_DIRECTORY = 'files';
 	const UPLOAD_IMAGE_DIRECTORY = 'images';
 
 	/**
 	 * @var string
 	 */
-	private $cacheDir;
+	private $temporaryDir;
 
 	/**
 	 * @var string
@@ -38,15 +38,15 @@ class FileUpload {
 	private $filesystem;
 
 	/**
-	 * @param string $cacheDir
+	 * @param string $temporaryDir
 	 * @param string $fileDir
 	 * @param string $imageDir
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileNamingConvention $fileNamingConvention
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
-	public function __construct($cacheDir, $fileDir, $imageDir, FileNamingConvention $fileNamingConvention,
+	public function __construct($temporaryDir, $fileDir, $imageDir, FileNamingConvention $fileNamingConvention,
 			Filesystem $filesystem) {
-		$this->cacheDir = $cacheDir;
+		$this->temporaryDir = $temporaryDir;
 		$this->fileDir = $fileDir;
 		$this->imageDir = $imageDir;
 		$this->fileNamingConvention = $fileNamingConvention;
@@ -61,17 +61,17 @@ class FileUpload {
 			throw new \SS6\ShopBundle\Model\FileUpload\Exception\UploadFailedException($file->getErrorMessage(), $file->getError());
 		}
 
-		$cacheFilename = $this->getCacheFilename($file->getClientOriginalName());
-		$file->move($this->getCacheDirectory(), $cacheFilename);
+		$temporaryFilename = $this->getCacheFilename($file->getClientOriginalName());
+		$file->move($this->getTemporaryDirectory(), $temporaryFilename);
 
-		return $cacheFilename;
+		return $temporaryFilename;
 	}
 
 	/**
 	 * @param string $filename
 	 * @return boolean
 	 */
-	public function tryDeleteCachedFile($filename) {
+	public function tryDeleteTemporaryFile($filename) {
 		if (!empty($filename)) {
 			$filepath = $this->getCacheFilepath($filename);
 			try {
@@ -96,14 +96,14 @@ class FileUpload {
 	 * @return string
 	 */
 	public function getCacheFilepath($cacheFilename) {
-		return $this->getCacheDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($cacheFilename);
+		return $this->getTemporaryDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($cacheFilename);
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getCacheDirectory() {
-		return $this->cacheDir . DIRECTORY_SEPARATOR . self::CACHE_DIRECTORY;
+	public function getTemporaryDirectory() {
+		return $this->temporaryDir . DIRECTORY_SEPARATOR . self::TEMPORARY_DIRECTORY;
 	}
 
 	/**

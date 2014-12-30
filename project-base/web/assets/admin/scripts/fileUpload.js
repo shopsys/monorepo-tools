@@ -39,7 +39,7 @@
 			}
 		}
 
-		this.tryDeleteCachedFile = function (filename) {
+		this.tryDeleteTemporaryFile = function (filename) {
 			$.ajax({
 				url: uploader.$uploader.data('fileupload-delete-url'),
 				type: 'POST',
@@ -49,7 +49,7 @@
 		}
 
 		this.removeUploadedFile = function() {
-			SS6.fileUpload.tryDeleteCachedFile(uploader);
+			SS6.fileUpload.tryDeleteTemporaryFile(uploader);
 			uploader.$hiddenInput.val('');
 			uploader.$item.hide();
 		}
@@ -70,7 +70,7 @@
 			}
 
 			this.deleteItem = function () {
-				uploader.tryDeleteCachedFile($input.val());
+				uploader.tryDeleteTemporaryFile($input.val());
 				$file.remove();
 			}
 			$delete.bind('click', this.deleteItem);

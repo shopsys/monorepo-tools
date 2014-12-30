@@ -2,7 +2,7 @@
 	{% spaceless %}
 		{%  set attr = attr|merge({'class': ' js-file-upload'}) %}
 		{%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
-		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletecachedfile')}) %}
+		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletetemporaryfile')}) %}
 		<div class="box-upload">
 			<div {{ block('widget_attributes') }}>
 				<div class="js-file-upload-item box-upload__result">

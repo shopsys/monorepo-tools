@@ -35,7 +35,7 @@ class FileUploadExtension extends Twig_Extension {
 	 */
 	public function getLabelByTemporaryFilename($temporaryFilename) {
 		$filename = $this->fileUpload->getOriginalFilenameByTemporary($temporaryFilename);
-		$filepath = ($this->fileUpload->getCacheDirectory() . DIRECTORY_SEPARATOR . $temporaryFilename);
+		$filepath = ($this->fileUpload->getTemporaryDirectory() . DIRECTORY_SEPARATOR . $temporaryFilename);
 		if (file_exists($filepath) && is_file($filepath) && is_writable($filepath)) {
 			$fileSize = round((int)filesize($filepath) / 1024 / 1024, 2);
 			return $filename . ' (' . $fileSize . ' MB)';

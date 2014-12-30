@@ -28,13 +28,13 @@ class FileUploadController extends Controller {
 			$fileUpload = $this->get('ss6.shop.file_upload');
 			/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 			try {
-				$cachedFilename = $fileUpload->upload($file);
+				$temporaryFilename = $fileUpload->upload($file);
 				$actionResult = array(
 					'status' => 'success',
-					'filename' => $cachedFilename,
+					'filename' => $temporaryFilename,
 				);
 				$actionResult['status'] = 'success';
-				$actionResult['filename'] = $cachedFilename;
+				$actionResult['filename'] = $temporaryFilename;
 			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUpload $ex) {
 				$actionResult['status'] = 'error';
 				$actionResult['code'] = $ex->getCode();
@@ -46,15 +46,15 @@ class FileUploadController extends Controller {
 	}
 
 	/**
-	 * @Route("/file_upload/delete_cached_file/")
+	 * @Route("/file_upload/delete_temporary_file/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
-	public function deleteCachedFileAction(Request $request) {
+	public function deleteTemporaryFileAction(Request $request) {
 		$fileUpload = $this->get('ss6.shop.file_upload');
 		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$filename = $request->get('filename');
-		$actionResult = $fileUpload->tryDeleteCachedFile($filename);
+		$actionResult = $fileUpload->tryDeleteTemporaryFile($filename);
 
 		return new JsonResponse($actionResult);
 	}
