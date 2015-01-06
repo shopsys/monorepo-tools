@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Grid\InlineEdit;
 
 use SS6\ShopBundle\Model\Form\MultipleFormSetting;
+use SS6\ShopBundle\Model\Grid\Grid;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,13 +44,13 @@ class InlineEditService {
 	/**
 	 * @param string $serviceName
 	 * @param mixed $rowId
-	 * @return array
+	 * @return string
 	 */
-	public function getRenderedFormWidgets($serviceName, $rowId) {
+	public function getRenderedFormRow($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$form = $gridInlineEdit->getForm($rowId);
 
-		return $this->renderFormToArray($form);
+		return $this->renderFormAsRow($gridInlineEdit, $rowId, $form);
 	}
 
 	/**
@@ -114,6 +115,52 @@ class InlineEditService {
 		$this->multipleFormSettings->reset();
 
 		return $result;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface $gridInlineEditService
+	 * @param mixed $rowId
+	 * @param \Symfony\Component\Form\Form $form
+	 * @return string
+	 */
+	private function renderFormAsRow(GridInlineEditInterface $gridInlineEditService, $rowId, Form $form) {
+		$grid = $gridInlineEditService->getGrid();
+		if ($rowId === null) {
+			$gridView = $grid->createViewWithoutRows();
+		} else {
+			$gridView = $grid->createViewWithOneRow($rowId);
+		}
+		
+		return $gridView->renderBlock('grid_row', $this->getFormRowTemplateParameters($grid, $form), false);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Grid\InlineEdit\Grid $grid
+	 * @param \Symfony\Component\Form\Form $form
+	 * @return array
+	 */
+	private function getFormRowTemplateParameters(Grid $grid, Form $form) {
+		$formHtmls = [];
+		$formAdditional = '';
+		$formInArray = $this->renderFormToArray($form);
+
+		foreach ($formInArray as $formName => $formHtml) {
+			if ($grid->existsColumn($formName)) {
+				$formHtmls[$formName] = $formHtml;
+			} else {
+				$formAdditional .= $formHtml;
+			}
+		}
+
+		$rows = $grid->getRows();
+
+		return [
+			'loopIndex' => 0,
+			'lastRow' => false,
+			'row' => array_pop($rows),
+			'formHtmls' => $formHtmls,
+			'formAdditional' => $formAdditional
+		];
 	}
 
 }

@@ -53,7 +53,11 @@
 
 
 {% block grid_value_cell %}
-	{{ value }}
+	{% if isInlineEdit %}
+		{{ formHtml|raw }}
+	{% else %}
+		{{ value }}
+	{% endif %}
 {% endblock%}
 
 {% block grid_titles %}
@@ -104,22 +108,12 @@
 				}
 			) }}
 		{% endfor %}
-		{% if grid.inlineEdit %}
-			{{ gridView.renderBlock(
-				'grid_row',
-				{
-					loopIndex: 0,
-					lastRow: false,
-					row: null
-				}
-			) }}
-		{% endif %}
 	</tbody>
 {% endblock %}
 
 {% block grid_row %}
-	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }}{% if row is null %} table-inline-edit hidden js-grid-empty-row{% else %} js-grid-row{% endif %}"
-			{% if grid.inlineEdit and row is not null %} data-inline-edit-row-id="{{ grid.getRowId(row) }}"{% endif %}
+	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }} js-grid-row"
+			{% if grid.inlineEdit and row is not null%} data-inline-edit-row-id="{{ grid.getRowId(row) }}"{% endif %}
 			{% if grid.dragAndDrop %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row) }}"{% endif %}
 	>
 		{% if grid.dragAndDrop %}
@@ -129,13 +123,13 @@
 		{% endif %}
 		{% for column in grid.columns %}
 			<td class="js-grid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
-				{{ gridView.renderCell(column, row)|raw }}
+				{{ gridView.renderCell(column, row, formHtmls|default({}))|raw }}
 			</td>
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
 			<td class="grid-column-actions last-column text-right js-inline-edit-unmatched-inputs {{ grid.actionColumnClassAttribute }}{% if lastRow %} last-row{% endif %}">
 				<span class="grid-row-actions in-action-icons">
-					{% if grid.inlineEdit and row is null %}
+					{% if grid.inlineEdit and formHtmls is defined %}
 						<span class="js-inline-edit-buttons">
 							<a href="#" class="table-action js-inline-edit-save in-action-icons__item in-action-icons__item--confirm">
 								<i class="fa fa-check" title="Uložit změny"></i>
@@ -158,6 +152,7 @@
 						{% endfor %}
 					{% endif %}
 				</span>
+				{{ formAdditional|default('')|raw }}
 			</td>
 		{% endif %}
 	</tr>

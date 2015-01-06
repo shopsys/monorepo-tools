@@ -278,18 +278,11 @@ class Grid {
 	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createView() {
+		$gridView =  $this->createViewWithoutRows();
 		if ($this->isAllowedPaging()) {
 			$this->executeTotalQuery();
 		}
 		$this->loadRows();
-		$gridView = new GridView(
-			$this,
-			$this->requestStack,
-			$this->router,
-			$this->twig,
-			$this->viewTheme,
-			$this->viewTemplateParameters
-		);
 
 		return $gridView;
 	}
@@ -299,7 +292,17 @@ class Grid {
 	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createViewWithOneRow($rowId) {
+		$gridView =  $this->createViewWithoutRows();
 		$this->loadRowsWithOneRow($rowId);
+
+		return $gridView;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Grid\GridView
+	 */
+	public function createViewWithoutRows() {
+		$this->rows = [];
 		$gridView = new GridView(
 			$this,
 			$this->requestStack,
@@ -348,6 +351,13 @@ class Grid {
 	 */
 	public function getColumns() {
 		return $this->columns;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function existsColumn($columntId) {
+		return array_key_exists($columntId, $this->columns);
 	}
 
 	/**
