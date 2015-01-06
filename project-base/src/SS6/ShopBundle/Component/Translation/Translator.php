@@ -62,9 +62,9 @@ class Translator extends BaseTranslator {
 		if ($catalogue->defines($id, $domain)) {
 			return strtr($this->catalogues[$locale]->get((string)$id, $domain), $parameters);
 		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
-			return $id;
+			return strtr($id, $parameters);
 		} else {
-			return self::NOT_TRANSLATED_PREFIX . $id;
+			return self::NOT_TRANSLATED_PREFIX . strtr($id, $parameters);
 		}
 	}
 
@@ -102,9 +102,9 @@ class Translator extends BaseTranslator {
 		if ($catalogue->defines($id, $domain)) {
 			return strtr($this->messageSelector->choose($catalogue->get($id, $domain), (int)$number, $locale), $parameters);
 		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
-			return $id;
+			return strtr($id, $parameters);
 		} else {
-			return self::NOT_TRANSLATED_PREFIX . $id;
+			return self::NOT_TRANSLATED_PREFIX . strtr($id, $parameters);
 		}
 	}
 
