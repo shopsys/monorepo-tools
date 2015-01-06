@@ -125,7 +125,7 @@ class DepartmentController extends Controller {
 
 			$departmentFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Oddělení <strong>{{ name }}</strong> bylo smazáno', array(
+			$flashMessageSender->addSuccessFlashTwig('Kategorie <strong>{{ name }}</strong> byla smazána', array(
 				'name' => $fullName,
 			));
 		} catch (\SS6\ShopBundle\Model\Department\Exception\DepartmentNotFoundException $ex) {

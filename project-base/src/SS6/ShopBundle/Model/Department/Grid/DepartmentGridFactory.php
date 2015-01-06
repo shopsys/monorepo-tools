@@ -75,7 +75,7 @@ class DepartmentGridFactory implements GridFactoryInterface {
 				'admin_department_delete',
 				array('id' => 'd.id')
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat toto oddělení?'));
+			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat tuto kategorii?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Department/listGrid.html.twig');
 
