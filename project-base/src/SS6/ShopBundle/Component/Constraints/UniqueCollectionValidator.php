@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Constraints;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -52,22 +53,18 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	}
 
 	/**
-	 * @param type $value
-	 * @param type $field
-	 * @return type
+	 * @param mixed $value
+	 * @param string $field
+	 * @return mixed
 	 * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
 	 */
 	private function getFieldValue($value, $field) {
-		if (is_array($value)) {
-			return $value[$field];
-		} else {
-			$methodName = 'get' . ucfirst($field);
-
-			if (!is_callable(array($value, $methodName))) {
-				throw new \Symfony\Component\Validator\Exception\ConstraintDefinitionException();
-			}
-			return $value->$methodName();
+		$propertyAccessor = PropertyAccess::createPropertyAccessor();
+		if (!$propertyAccessor->isReadable($value, $field)) {
+			throw new \Symfony\Component\Validator\Exception\ConstraintDefinitionException();
 		}
+
+		return $propertyAccessor->getValue($value, $field);
 	}
 
 }

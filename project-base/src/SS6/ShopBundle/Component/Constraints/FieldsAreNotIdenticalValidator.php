@@ -3,8 +3,7 @@
 namespace SS6\ShopBundle\Component\Constraints;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-
-use \Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class FieldsAreNotIdenticalValidator extends ConstraintValidator {
