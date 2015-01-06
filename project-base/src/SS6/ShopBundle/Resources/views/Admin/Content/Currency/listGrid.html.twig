@@ -17,18 +17,23 @@
 {% endblock %}
 
 {% block grid_value_cell_id_exchangeRate %}
-	{% if row is empty %}
-		<span class="js-inline-edit-cell-value">{{ value }}</span>
-		<span title="{{ 'Kurz se zadává jako počet jednotek hlavní měny eshopu ku nastavované měně'|trans }}"
-		class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="bottom"
-		>
-			<i class="fa fa-info"></i>
-		</span>
-	{% elseif row is not empty and row.c.id == defaultCurrency.id %}
-		{{ '-' }}
-	{% elseif row is not empty and row.c.id != defaultCurrency.id %}
-		{% set exchangeRateInfo = (' ' ~ defaultCurrency.symbol ~ ' za 1 '|trans ~ row.c.symbol) %}
-		<span class="js-inline-edit-cell-value">{{ value }}</span>{{ exchangeRateInfo }}
+	{% if isInlineEdit %}
+		{{ formHtml|raw }}
+	{% elseif row is not null %}
+		{% if row.c.id == defaultCurrency.id %}
+			{{ '-' }}
+		{% else %}
+			{{ value }}
+		{% endif %}
+	{% endif %}
+
+	{% if isInlineEdit and row is null %}
+		{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}
+	{% elseif row is not null and row.c.id != defaultCurrency.id %}
+		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+			'%defaultCurrency%': defaultCurrency.symbol,
+			'%currentCurrency%': row.c.symbol
+		}) }}
 	{% endif %}
 {% endblock %}
 
