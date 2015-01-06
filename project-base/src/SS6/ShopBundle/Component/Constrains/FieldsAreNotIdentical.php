@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constrains;
+namespace SS6\ShopBundle\Component\Constraints;
 
 use \Symfony\Component\Validator\Constraint;
 
@@ -13,5 +13,5 @@ class FieldsAreNotIdentical extends Constraint {
 	public $errorPath;
 
 	public $message = 'Fields must not be identical';
-	
+
 }
