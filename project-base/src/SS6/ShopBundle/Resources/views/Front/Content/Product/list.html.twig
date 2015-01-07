@@ -3,20 +3,20 @@
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block title %}
-	- {{ 'Katalog zboží - '~department.name|trans }}
+	- {{ 'Katalog zboží - '~category.name|trans }}
 {% endblock %}
 
 {% block panel_content %}
-	{{ render(controller('SS6ShopBundle:Front/Department:panel')) }}
+	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
 {% endblock %}
 
 {% block main_content %}
-	<h1>{{ department.name|trans }}</h1>
+	<h1>{{ category.name|trans }}</h1>
 
 	{% if productDetails|length > 0 %}
 		{% set entityName = 'zboží'|trans %}
-		{% set route = 'front_product_department' %}
-		{% set routeParams = {'departmentId': department.id} %}
+		{% set route = 'front_product_category' %}
+		{% set routeParams = {'categoryId': category.id} %}
 
 		<div>
 			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}

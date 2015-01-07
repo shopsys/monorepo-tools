@@ -3,45 +3,45 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Department\DepartmentFormType;
+use SS6\ShopBundle\Form\Admin\Category\CategoryFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Department\DepartmentData;
+use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DepartmentController extends Controller {
+class CategoryController extends Controller {
 
 	/**
-	 * @Route("/department/edit/{id}", requirements={"id" = "\d+"})
+	 * @Route("/category/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$departmentFacade = $this->get('ss6.shop.department.department_facade');
-		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
-		$department = $departmentFacade->getById($id);
-		$form = $this->createForm(new DepartmentFormType($departmentFacade->getAllWithoutBranch($department)));
+		$category = $categoryFacade->getById($id);
+		$form = $this->createForm(new CategoryFormType($categoryFacade->getAllWithoutBranch($category)));
 
-		$departmentData = new DepartmentData();
+		$categoryData = new CategoryData();
 
 		if (!$form->isSubmitted()) {
-			$departmentData->setFromEntity($department);
+			$categoryData->setFromEntity($category);
 		}
 
-		$form->setData($departmentData);
+		$form->setData($categoryData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$departmentFacade->edit($id, $departmentData);
+			$categoryFacade->edit($id, $categoryData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
-				'name' => $department->getName(),
-				'url' => $this->generateUrl('admin_department_edit', array('id' => $department->getId())),
+				'name' => $category->getName(),
+				'url' => $this->generateUrl('admin_category_edit', array('id' => $category->getId())),
 			));
-			return $this->redirect($this->generateUrl('admin_department_list'));
+			return $this->redirect($this->generateUrl('admin_category_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -50,89 +50,89 @@ class DepartmentController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace kategorie - ' . $department->getName()));
+		$breadcrumb->replaceLastItem(new MenuItem('Editace kategorie - ' . $category->getName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Department/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Category/edit.html.twig', array(
 			'form' => $form->createView(),
-			'department' => $department,
+			'category' => $category,
 		));
 	}
 
 	/**
-	 * @Route("/department/new/")
+	 * @Route("/category/new/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$departmentFacade = $this->get('ss6.shop.department.department_facade');
-		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
-		$form = $this->createForm(new DepartmentFormType($departmentFacade->getAll()));
+		$form = $this->createForm(new CategoryFormType($categoryFacade->getAll()));
 
-		$departmentData = new DepartmentData();
+		$categoryData = new CategoryData();
 
-		$form->setData($departmentData);
+		$form->setData($categoryData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$departmentData = $form->getData();
+			$categoryData = $form->getData();
 
-			$department = $departmentFacade->create($departmentData);
+			$category = $categoryFacade->create($categoryData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
-				'name' => $department->getName(),
-				'url' => $this->generateUrl('admin_department_edit', array('id' => $department->getId())),
+				'name' => $category->getName(),
+				'url' => $this->generateUrl('admin_category_edit', array('id' => $category->getId())),
 			));
-			return $this->redirect($this->generateUrl('admin_department_list'));
+			return $this->redirect($this->generateUrl('admin_category_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
 			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Department/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Category/new.html.twig', array(
 			'form' => $form->createView(),
 		));
 	}
 
 	/**
-	 * @Route("/department/list/")
+	 * @Route("/category/list/")
 	 */
 	public function listAction() {
-		$departmentGridFactory = $this->get('ss6.shop.department.department_grid_factory');
-		/* @var $departmentGridFactory \SS6\ShopBundle\Model\Department\Grid\DepartmentGridFactory */
+		$categoryGridFactory = $this->get('ss6.shop.category.category_grid_factory');
+		/* @var $categoryGridFactory \SS6\ShopBundle\Model\Category\Grid\CategoryGridFactory */
 
-		$grid = $departmentGridFactory->create();
+		$grid = $categoryGridFactory->create();
 
-		return $this->render('@SS6Shop/Admin/Content/Department/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', array(
 			'gridView' => $grid->createView(),
 		));
 	}
 
 	/**
-	 * @Route("/department/delete/{id}", requirements={"id" = "\d+"})
+	 * @Route("/category/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$departmentFacade = $this->get('ss6.shop.department.department_facade');
-		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		try {
-			$fullName = $departmentFacade->getById($id)->getName();
+			$fullName = $categoryFacade->getById($id)->getName();
 
-			$departmentFacade->deleteById($id);
+			$categoryFacade->deleteById($id);
 
 			$flashMessageSender->addSuccessFlashTwig('Kategorie <strong>{{ name }}</strong> byla smazána', array(
 				'name' => $fullName,
 			));
-		} catch (\SS6\ShopBundle\Model\Department\Exception\DepartmentNotFoundException $ex) {
+		} catch (\SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená kategorie neexistuje');
 		}
 
-		return $this->redirect($this->generateUrl('admin_department_list'));
+		return $this->redirect($this->generateUrl('admin_category_list'));
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department\Exception;
+namespace SS6\ShopBundle\Model\Category\Exception;
 
-interface DepartmentException {
+interface CategoryException {
 
 }

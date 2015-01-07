@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department;
+namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Department\Department;
+use SS6\ShopBundle\Model\Category\Category;
 
-class DepartmentRepository {
+class CategoryRepository {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -23,59 +23,59 @@ class DepartmentRepository {
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
-	private function getDepartmentRepository() {
-		return $this->em->getRepository(Department::class);
+	private function getCategoryRepository() {
+		return $this->em->getRepository(Category::class);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAll() {
-		return $this->getDepartmentRepository()->findBy(array(), array('root' => 'ASC', 'lft' => 'ASC'));
+		return $this->getCategoryRepository()->findBy(array(), array('root' => 'ASC', 'lft' => 'ASC'));
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department $departmentBranch
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @param \SS6\ShopBundle\Model\Category\Category $categoryBranch
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getAllWithoutBranch(Department $departmentBranch) {
+	public function getAllWithoutBranch(Category $categoryBranch) {
 		return $this->em->createQueryBuilder()
 			->select('d')
-			->from(Department::class, 'd')
+			->from(Category::class, 'd')
 			->where('d.root != :branchRoot OR d.lft < :branchLft OR d.rgt > :branchRgt')
 			->orderBy('d.root, d.lft', 'ASC')
-			->setParameter('branchRoot', $departmentBranch->getRoot())
-			->setParameter('branchLft', $departmentBranch->getLft())
-			->setParameter('branchRgt', $departmentBranch->getRgt())
+			->setParameter('branchRoot', $categoryBranch->getRoot())
+			->setParameter('branchLft', $categoryBranch->getLft())
+			->setParameter('branchRgt', $categoryBranch->getRgt())
 			->getQuery()
 			->execute();
 	}
 
 	/**
-	 * @param int $departmentId
-	 * @return \SS6\ShopBundle\Model\Department\Department|null
+	 * @param int $categoryId
+	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
-	public function findById($departmentId) {
-		return $this->getDepartmentRepository()->find($departmentId);
+	public function findById($categoryId) {
+		return $this->getCategoryRepository()->find($categoryId);
 	}
 
 	/**
-	 * @param int $departmentId
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @param int $categoryId
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function getById($departmentId) {
-		$department = $this->findById($departmentId);
+	public function getById($categoryId) {
+		$category = $this->findById($categoryId);
 
-		if ($department === null) {
-			throw new \SS6\ShopBundle\Model\Department\Exception\DepartmentNotFoundException($departmentId);
+		if ($category === null) {
+			throw new \SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException($categoryId);
 		}
 
-		return $department;
+		return $category;
 	}
 
 	/**
 	 * @param string $locale
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllInRootWithTranslation($locale) {
 		return $this->getAllWithTranslationQueryBuilder($locale)
@@ -91,7 +91,7 @@ class DepartmentRepository {
 	private function getAllWithTranslationQueryBuilder($locale) {
 		$qb = $this->em->createQueryBuilder()
 			->select('d')
-			->from(Department::class, 'd')
+			->from(Category::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
 			->where('dt.name IS NOT NULL')
 			->orderBy('d.root, d.lft', 'ASC');

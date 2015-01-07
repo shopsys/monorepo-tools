@@ -1,12 +1,12 @@
-{% extends '@SS6Shop/Admin/Content/Department/detail.html.twig' %}
+{% extends '@SS6Shop/Admin/Content/Category/detail.html.twig' %}
 
-{% block title %}- {{ 'Editace kategorie'|trans }} - {{ department.name }}{% endblock %}
-{% block h1 %}{{ 'Editace kategorie'|trans }} - {{ department.name }}{% endblock %}
+{% block title %}- {{ 'Editace kategorie'|trans }} - {{ category.name }}{% endblock %}
+{% block h1 %}{{ 'Editace kategorie'|trans }} - {{ category.name }}{% endblock %}
 
-{% block department_url %}
+{% block category_url %}
 	<div class="form-line">
 		<span class="form-line__text">
-			<a href="{{ url('front_product_department', { departmentId: department.id }) }}" target="_blank">{{ url('front_product_department', { departmentId: department.id }) }}</a>
+			<a href="{{ url('front_product_category', { categoryId: category.id }) }}" target="_blank">{{ url('front_product_category', { categoryId: category.id }) }}</a>
 		</span>
 	</div>
 {% endblock %}

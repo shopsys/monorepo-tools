@@ -1,37 +1,37 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department;
+namespace SS6\ShopBundle\Model\Category;
 
-use SS6\ShopBundle\Model\Department\Department;
-use SS6\ShopBundle\Model\Department\DepartmentData;
+use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Category\CategoryData;
 
-class DepartmentService {
+class CategoryService {
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function create(DepartmentData $departmentData) {
-		return new Department($departmentData);
+	public function create(CategoryData $categoryData) {
+		return new Category($categoryData);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department $department
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function edit(Department $department, DepartmentData $departmentData) {
-		$department->edit($departmentData);
+	public function edit(Category $category, CategoryData $categoryData) {
+		$category->edit($categoryData);
 
-		return $department;
+		return $category;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department $department
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 */
-	public function setChildrenAsSiblings(Department $department) {
-		foreach ($department->getChildren() as $child) {
-			$child->setParent($department->getParent());
+	public function setChildrenAsSiblings(Category $category) {
+		foreach ($category->getChildren() as $child) {
+			$child->setParent($category->getParent());
 		}
 	}
 

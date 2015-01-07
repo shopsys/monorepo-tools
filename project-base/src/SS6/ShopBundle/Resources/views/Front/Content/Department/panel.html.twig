@@ -1,14 +1,14 @@
-{% macro departments(departments) %}
-	{% if departments|length > 0 %}
+{% macro categories(categories) %}
+	{% if categories|length > 0 %}
 		<ul class="list-menu">
-			{% for department in departments if department.name != '' %}
+			{% for category in categories if category.name != '' %}
 				<li class="list-menu__item">
-					<a href="{{ url('front_product_department', { departmentId: department.id }) }}" class="list-menu__item__link list-menu__item__link--{{department.level}}">{{ department.name }}</a>
-					{{ _self.departments(department.children) }}
+					<a href="{{ url('front_product_category', { categoryId: category.id }) }}" class="list-menu__item__link list-menu__item__link--{{category.level}}">{{ category.name }}</a>
+					{{ _self.categories(category.children) }}
 				</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
 {% endmacro %}
 
-{{ _self.departments(departments) }}
+{{ _self.categories(categories) }}

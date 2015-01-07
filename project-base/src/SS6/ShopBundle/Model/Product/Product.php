@@ -112,12 +112,12 @@ class Product extends AbstractTranslatableEntity {
 	private $visible;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\Department[]
+	 * @var \SS6\ShopBundle\Model\Category\Category[]
 	 *
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Department\Department")
-	 * @ORM\JoinTable(name="product_departments")
+	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Category\Category")
+	 * @ORM\JoinTable(name="product_categories")
 	 */
-	private $departments;
+	private $categories;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
@@ -136,7 +136,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->availability = $productData->getAvailability();
 		$this->visible = false;
 		$this->setTranslations($productData);
-		$this->departments = $productData->getDepartments();
+		$this->categories = $productData->getCategories();
 	}
 
 	/**
@@ -154,7 +154,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->availability = $productData->getAvailability();
 		$this->hidden = $productData->isHidden();
 		$this->setTranslations($productData);
-		$this->departments = $productData->getDepartments();
+		$this->categories = $productData->getCategories();
 	}
 
 	/**
@@ -266,10 +266,10 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getDepartments() {
-		return $this->departments;
+	public function getCategories() {
+		return $this->categories;
 	}
 
 	/**

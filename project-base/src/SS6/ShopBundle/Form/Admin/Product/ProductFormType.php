@@ -31,26 +31,26 @@ class ProductFormType extends AbstractType {
 	private $inverseArrayValuesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\Department[]
+	 * @var \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	private $departments;
+	private $categories;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
-	 * @param \SS6\ShopBundle\Model\Department\Department[] $departments
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 */
 	public function __construct(
 		array $vats,
 		array $availabilities,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		array $departments
+		array $categories
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
-		$this->departments = $departments;
+		$this->categories = $categories;
 	}
 
 	/**
@@ -148,9 +148,9 @@ class ProductFormType extends AbstractType {
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', array(), null, 'id'),
 			))
-			->add('departments', 'choice', array(
+			->add('categories', 'choice', array(
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->departments, 'name', array(), null, 'id'),
+				'choice_list' => new ObjectChoiceList($this->categories, 'name', array(), null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 			));

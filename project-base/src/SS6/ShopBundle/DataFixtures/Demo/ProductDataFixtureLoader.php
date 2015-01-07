@@ -43,7 +43,7 @@ class ProductDataFixtureLoader {
 	/**
 	 * @var array
 	 */
-	private $departments;
+	private $categories;
 
 	/**
 	 * @param string $path
@@ -58,10 +58,10 @@ class ProductDataFixtureLoader {
 	 * @param array $vats
 	 * @param array $availabilities
 	 */
-	public function injectReferences(array $vats, array $availabilities, array $departments) {
+	public function injectReferences(array $vats, array $availabilities, array $categories) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
-		$this->departments = $departments;
+		$this->categories = $categories;
 	}
 
 	/**
@@ -138,7 +138,7 @@ class ProductDataFixtureLoader {
 				$productEditData->productData->setAvailability(null);
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
-		$productEditData->productData->setDepartments($this->getProductDepartmentsFromString($row[16]));
+		$productEditData->productData->setCategories($this->getProductCategoriesFromString($row[16]));
 
 		return $productEditData;
 	}
@@ -195,17 +195,17 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param string $string
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	private function getProductDepartmentsFromString($string) {
-		$departments = array();
+	private function getProductCategoriesFromString($string) {
+		$categories = array();
 		if (!empty($string)) {
-			$departmentIds = explode(';', $string);
-			foreach ($departmentIds as $departmentId) {
-				$departments[] = $this->departments[$departmentId];
+			$categoryIds = explode(';', $string);
+			foreach ($categoryIds as $categoryId) {
+				$categories[] = $this->categories[$categoryId];
 			}
 		}
 
-		return $departments;
+		return $categories;
 	}
 }

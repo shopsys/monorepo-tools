@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department;
+namespace SS6\ShopBundle\Model\Category;
 
 use SS6\ShopBundle\Component\Validator;
-use SS6\ShopBundle\Model\Department\Department;
+use SS6\ShopBundle\Model\Category\Category;
 
 /**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Department\Department")
+ * @Validator\Auto(entity="SS6\ShopBundle\Model\Category\Category")
  */
-class DepartmentData {
+class CategoryData {
 
 	/**
 	 * @var string[]
@@ -16,15 +16,15 @@ class DepartmentData {
 	private $name;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\Department|null
+	 * @var \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	private $parent;
 
 	/**
 	 * @param string[] $name
-	 * @param \SS6\ShopBundle\Model\Department\Department|null $parent
+	 * @param \SS6\ShopBundle\Model\Category\Category|null $parent
 	 */
-	public function __construct(array $name = [], Department $parent = null) {
+	public function __construct(array $name = [], Category $parent = null) {
 		$this->name = $name;
 		$this->parent = $parent;
 	}
@@ -44,30 +44,30 @@ class DepartmentData {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function getParent() {
 		return $this->parent;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department\null $parent
+	 * @param \SS6\ShopBundle\Model\Category\Category\null $parent
 	 */
-	public function setParent(Department $parent = null) {
+	public function setParent(Category $parent = null) {
 		$this->parent = $parent;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department $department
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 */
-	public function setFromEntity(Department $department) {
-		$translations = $department->getTranslations();
+	public function setFromEntity(Category $category) {
+		$translations = $category->getTranslations();
 		$names = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
 		$this->setName($names);
-		$this->setParent($department->getParent());
+		$this->setParent($category->getParent());
 	}
 
 }

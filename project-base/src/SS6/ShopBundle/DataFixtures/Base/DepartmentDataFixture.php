@@ -4,55 +4,55 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Department\Department;
-use SS6\ShopBundle\Model\Department\DepartmentData;
+use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Category\CategoryData;
 
-class DepartmentDataFixture extends AbstractReferenceFixture {
+class CategoryDataFixture extends AbstractReferenceFixture {
 
-	const ELECTRONICS = 'department_electronics';
-	const TV = 'department_tv';
-	const PHOTO = 'department_photo';
-	const PRINTERS = 'department_printers';
-	const PC = 'department_pc';
-	const PHONES = 'department_phones';
-	const COFFEE = 'department_coffee';
-	const BOOKS = 'department_books';
-	const TOYS = 'department_toys';
+	const ELECTRONICS = 'category_electronics';
+	const TV = 'category_tv';
+	const PHOTO = 'category_photo';
+	const PRINTERS = 'category_printers';
+	const PC = 'category_pc';
+	const PHONES = 'category_phones';
+	const COFFEE = 'category_coffee';
+	const BOOKS = 'category_books';
+	const TOYS = 'category_toys';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$departmentData = new DepartmentData();
+		$categoryData = new CategoryData();
 
-		$departmentData->setName(array('cs' => 'Elektro', 'en' => 'Electronics'));
-		$electronicsDepartment = $this->createDepartment($manager, self::ELECTRONICS, $departmentData);
+		$categoryData->setName(array('cs' => 'Elektro', 'en' => 'Electronics'));
+		$electronicsCategory = $this->createCategory($manager, self::ELECTRONICS, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Televize, audio', 'en' => 'TV, audio'));
-		$departmentData->setParent($electronicsDepartment);
-		$this->createDepartment($manager, self::TV, $departmentData);
+		$categoryData->setName(array('cs' => 'Televize, audio', 'en' => 'TV, audio'));
+		$categoryData->setParent($electronicsCategory);
+		$this->createCategory($manager, self::TV, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'));
-		$this->createDepartment($manager, self::PHOTO, $departmentData);
+		$categoryData->setName(array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'));
+		$this->createCategory($manager, self::PHOTO, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Tiskárny', 'en' => null));
-		$this->createDepartment($manager, self::PRINTERS, $departmentData);
+		$categoryData->setName(array('cs' => 'Tiskárny', 'en' => null));
+		$this->createCategory($manager, self::PRINTERS, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Počítače & příslušenství', 'en' => null));
-		$this->createDepartment($manager, self::PC, $departmentData);
+		$categoryData->setName(array('cs' => 'Počítače & příslušenství', 'en' => null));
+		$this->createCategory($manager, self::PC, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Mobilní telefony', 'en' => null));
-		$this->createDepartment($manager, self::PHONES, $departmentData);
+		$categoryData->setName(array('cs' => 'Mobilní telefony', 'en' => null));
+		$this->createCategory($manager, self::PHONES, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Kávovary', 'en' => null));
-		$this->createDepartment($manager, self::COFFEE, $departmentData);
+		$categoryData->setName(array('cs' => 'Kávovary', 'en' => null));
+		$this->createCategory($manager, self::COFFEE, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Knihy', 'en' => 'Books'));
-		$departmentData->setParent(null);
-		$this->createDepartment($manager, self::BOOKS, $departmentData);
+		$categoryData->setName(array('cs' => 'Knihy', 'en' => 'Books'));
+		$categoryData->setParent(null);
+		$this->createCategory($manager, self::BOOKS, $categoryData);
 
-		$departmentData->setName(array('cs' => 'Hračky a další', 'en' => null));
-		$this->createDepartment($manager, self::TOYS, $departmentData);
+		$categoryData->setName(array('cs' => 'Hračky a další', 'en' => null));
+		$this->createCategory($manager, self::TOYS, $categoryData);
 
 
 		$manager->flush();
@@ -61,14 +61,14 @@ class DepartmentDataFixture extends AbstractReferenceFixture {
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
-	public function createDepartment(ObjectManager $manager, $referenceName, DepartmentData $departmentData) {
-		$department = new Department($departmentData);
-		$manager->persist($department);
-		$this->addReference($referenceName, $department);
+	public function createCategory(ObjectManager $manager, $referenceName, CategoryData $categoryData) {
+		$category = new Category($categoryData);
+		$manager->persist($category);
+		$this->addReference($referenceName, $category);
 
-		return $department;
+		return $category;
 	}
 
 }

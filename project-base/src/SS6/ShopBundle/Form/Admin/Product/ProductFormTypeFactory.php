@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Model\Department\DepartmentRepository;
+use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
@@ -25,20 +25,20 @@ class ProductFormTypeFactory {
 	private $inverseArrayValuesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\DepartmentRepository
+	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
 	 */
-	private $departmentRepository;
+	private $categoryRepository;
 
 	public function __construct(
 		VatRepository $vatRepository,
 		AvailabilityRepository $availabilityRepository,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		DepartmentRepository $departmentRepository
+		CategoryRepository $categoryRepository
 	) {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
-		$this->departmentRepository = $departmentRepository;
+		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**
@@ -47,13 +47,13 @@ class ProductFormTypeFactory {
 	public function create() {
 		$vats = $this->vatRepository->findAll();
 		$availabilities = $this->availabilityRepository->findAll();
-		$departments = $this->departmentRepository->getAll();
+		$categories = $this->categoryRepository->getAll();
 
 		return new ProductFormType(
 			$vats,
 			$availabilities,
 			$this->inverseArrayValuesTransformer,
-			$departments
+			$categories
 		);
 	}
 

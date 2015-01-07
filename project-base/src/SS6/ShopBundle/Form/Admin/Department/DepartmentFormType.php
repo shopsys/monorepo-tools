@@ -1,33 +1,33 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Department;
+namespace SS6\ShopBundle\Form\Admin\Category;
 
-use SS6\ShopBundle\Model\Department\DepartmentData;
+use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class DepartmentFormType extends AbstractType {
+class CategoryFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\Department[]
+	 * @var \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	private $departments;
+	private $categories;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department[] $departments
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 */
-	public function __construct(array $departments) {
-		$this->departments = $departments;
+	public function __construct(array $categories) {
+		$this->categories = $categories;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getName() {
-		return 'department';
+		return 'category';
 	}
 
 	/**
@@ -44,7 +44,7 @@ class DepartmentFormType extends AbstractType {
 			))
 			->add('parent', 'choice', array(
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->departments, 'name', array(), null, 'id'),
+				'choice_list' => new ObjectChoiceList($this->categories, 'name', array(), null, 'id'),
 			))
 			->add('save', 'submit');
 	}
@@ -54,7 +54,7 @@ class DepartmentFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
-			'data_class' => DepartmentData::class,
+			'data_class' => CategoryData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 		));
 	}

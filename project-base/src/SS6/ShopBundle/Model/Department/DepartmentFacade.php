@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department;
+namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Department\DepartmentData;
-use SS6\ShopBundle\Model\Department\DepartmentService;
-use SS6\ShopBundle\Model\Department\DepartmentRepository;
+use SS6\ShopBundle\Model\Category\CategoryData;
+use SS6\ShopBundle\Model\Category\CategoryService;
+use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Domain\Domain;
 
-class DepartmentFacade {
+class CategoryFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -16,14 +16,14 @@ class DepartmentFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\DepartmentRepository
+	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
 	 */
-	private $departmentRepository;
+	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\DepartmentService
+	 * @var \SS6\ShopBundle\Model\Category\CategoryService
 	 */
-	private $departmentService;
+	private $categoryService;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -32,86 +32,86 @@ class DepartmentFacade {
 
 	public function __construct(
 		EntityManager $em,
-		DepartmentRepository $departmentRepository,
-		DepartmentService $departmentService,
+		CategoryRepository $categoryRepository,
+		CategoryService $categoryService,
 		Domain $domain
 	) {
 		$this->em = $em;
-		$this->departmentRepository = $departmentRepository;
-		$this->departmentService = $departmentService;
+		$this->categoryRepository = $categoryRepository;
+		$this->categoryService = $categoryService;
 		$this->domain = $domain;
 	}
 
 	/**
-	 * @param int $departmentId
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @param int $categoryId
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function getById($departmentId) {
-		return $this->departmentRepository->getById($departmentId);
+	public function getById($categoryId) {
+		return $this->categoryRepository->getById($categoryId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function create(DepartmentData $departmentData) {
-		$department = $this->departmentService->create($departmentData);
-		$this->em->persist($department);
+	public function create(CategoryData $categoryData) {
+		$category = $this->categoryService->create($categoryData);
+		$this->em->persist($category);
 		$this->em->flush();
 
-		return $department;
+		return $category;
 	}
 
 	/**
-	 * @param int $departmentId
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @param int $categoryId
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function edit($departmentId, DepartmentData $departmentData) {
-		$department = $this->departmentRepository->getById($departmentId);
-		$this->departmentService->edit($department, $departmentData);
+	public function edit($categoryId, CategoryData $categoryData) {
+		$category = $this->categoryRepository->getById($categoryId);
+		$this->categoryService->edit($category, $categoryData);
 		$this->em->flush();
 
-		return $department;
+		return $category;
 	}
 
 	/**
-	 * @param int $departmentId
+	 * @param int $categoryId
 	 */
-	public function deleteById($departmentId) {
-		$department = $this->departmentRepository->getById($departmentId);
+	public function deleteById($categoryId) {
+		$category = $this->categoryRepository->getById($categoryId);
 		$this->em->beginTransaction();
-		$this->departmentService->setChildrenAsSiblings($department);
+		$this->categoryService->setChildrenAsSiblings($category);
 		// Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
 		// We need to update `parent` attribute of children first.
 		$this->em->flush();
 
-		$this->em->remove($department);
+		$this->em->remove($category);
 		$this->em->flush();
 		$this->em->commit();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllInRootWithTranslation() {
 		$locale = $this->domain->getLocale();
-		return $this->departmentRepository->getAllInRootWithTranslation($locale);
+		return $this->categoryRepository->getAllInRootWithTranslation($locale);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAll() {
-		return $this->departmentRepository->getAll();
+		return $this->categoryRepository->getAll();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department $department
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getAllWithoutBranch(Department $department) {
-		return $this->departmentRepository->getAllWithoutBranch($department);
+	public function getAllWithoutBranch(Category $category) {
+		return $this->categoryRepository->getAllWithoutBranch($category);
 	}
 
 }

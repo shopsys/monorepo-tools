@@ -80,11 +80,11 @@ class ProductRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param int $departmentId
+	 * @param int $categoryId
 	 */
-	private function filterByDepartmentId(QueryBuilder $queryBuilder, $departmentId) {
-		$queryBuilder->join('p.departments', 'pdep', Join::WITH, 'pdep.id = :departmentId');
-		$queryBuilder->setParameter('departmentId', $departmentId);
+	private function filterByCategoryId(QueryBuilder $queryBuilder, $categoryId) {
+		$queryBuilder->join('p.categories', 'pdep', Join::WITH, 'pdep.id = :categoryId');
+		$queryBuilder->setParameter('categoryId', $categoryId);
 	}
 
 	/**
@@ -93,22 +93,22 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
-	 * @param int $departmentId
+	 * @param int $categoryId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultInDepartment(
+	public function getPaginationResultInCategory(
 		$domainId,
 		$locale,
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
-		$departmentId,
+		$categoryId,
 		PricingGroup $pricingGroup
 	) {
 		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
 		$this->addTranslation($queryBuilder, $locale);
-		$this->filterByDepartmentId($queryBuilder, $departmentId);
+		$this->filterByCategoryId($queryBuilder, $categoryId);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);

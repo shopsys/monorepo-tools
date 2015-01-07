@@ -4,16 +4,16 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DepartmentController extends Controller {
+class CategoryController extends Controller {
 
 	public function panelAction() {
-		$departmentFacade = $this->get('ss6.shop.department.department_facade');
-		/* @var $departmentFacade \SS6\ShopBundle\Model\Department\DepartmentFacade */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
-		$departments = $departmentFacade->getAllInRootWithTranslation();
+		$categories = $categoryFacade->getAllInRootWithTranslation();
 
-		return $this->render('@SS6Shop/Front/Content/Department/panel.html.twig', array(
-			'departments' => $departments,
+		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', array(
+			'categories' => $categories,
 		));
 	}
 
