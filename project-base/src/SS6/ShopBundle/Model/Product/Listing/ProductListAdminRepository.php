@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Localization\Localization;
+use SS6\ShopBundle\Model\Product\Pricing\ProductInputPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductListAdminRepository {
@@ -30,13 +31,17 @@ class ProductListAdminRepository {
 	 * @param array|null $searchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getQueryBuilderByQuickSearchData(array $searchData = null) {
+	public function getQueryBuilderByQuickSearchData($defaultPricingGroupId, array $searchData = null) {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('p, pt')
+			->select('p, pt, COALESCE(pip.inputPrice, p.price) AS priceForProductList')
 			->from(Product::class, 'p')
+			->leftJoin(ProductInputPrice::class, 'pip', Join::WITH, 'pip.product = p.id AND pip.pricingGroup = :pricing_group_id')
 			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
-			->setParameter('locale', $this->localization->getDefaultLocale());
+			->setParameters([
+				'locale' => $this->localization->getDefaultLocale(),
+				'pricing_group_id' => $defaultPricingGroupId]
+			);
 		$this->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
 
 		return $queryBuilder;
