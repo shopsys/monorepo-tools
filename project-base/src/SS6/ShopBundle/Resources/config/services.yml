@@ -132,6 +132,19 @@ services:
   ss6.shop.component.translation.php_file_extractor_factory:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractorFactory
 
+  ss6.shop.component.translation.js_file_extractor:
+    class: SS6\ShopBundle\Component\Translation\JsFileExtractor
+    tags:
+      - { name: jms_translation.file_visitor }
+
+  ss6.shop.component.translation.js_translator_call_parser.js_translator_call_parser:
+    class: SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser
+    factory_service: ss6.shop.component.translation.js_translator_call_parser.js_translator_call_parser_factory
+    factory_method: create
+
+  ss6.shop.component.translation.js_translator_call_parser.js_translator_call_parser_factory:
+    class: SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParserFactory
+
   ss6.shop.component.translation.po_dumper:
     class: SS6\ShopBundle\Component\Translation\PoDumper
     tags:

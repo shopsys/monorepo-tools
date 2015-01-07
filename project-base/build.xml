@@ -19,6 +19,7 @@
 	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
+	<property name="path.web" value="${path.root}/web"/>
 
 	<if>
 		<os family="windows" />
@@ -157,6 +158,8 @@
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
+			<arg value="--dir=${path.web}/assets/admin/scripts/" />
+			<arg value="--dir=${path.web}/assets/frontend/scripts/" />
 			<arg value="--keep" />
 			<arg value="--output-format=po" />
 
