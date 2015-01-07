@@ -57,7 +57,7 @@ class ProductVisibilityRepository {
 								AND
 								(p.selling_to IS NULL OR p.selling_to >= :now)
 								AND
-								p.price > 0
+								(p.price > 0 OR p.price_calculation_type = :priceCalculationType)
 								AND EXISTS (
 									SELECT 1
 									FROM product_translations AS pt
@@ -78,6 +78,7 @@ class ProductVisibilityRepository {
 				'now' => $now,
 				'locale' => $domain->getLocale(),
 				'domainId' => $domain->getId(),
+				'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
 			));
 		}
 	}
