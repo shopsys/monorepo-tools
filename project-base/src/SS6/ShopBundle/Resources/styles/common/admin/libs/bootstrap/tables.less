@@ -1,3 +1,27 @@
 .table {
 	border-collapse: separate;
 }
+
+.table-desc {
+	border-collapse: collapse;
+
+	border: 1px solid darken(@color-border, 10%);
+
+	thead > tr >{
+		td, th {
+			background: darken(@bg-table, 5%);
+			border-bottom: 1px solid darken(@color-border, 10%);
+		}
+	}
+
+	tbody > tr >{
+		td {
+			border-top: 1px solid darken(@color-border, 10%);
+		}
+
+		th {
+			background: darken(@bg-table, 2%);
+			border-top: 1px solid darken(@color-border, 10%);
+		}
+	}
+}
