@@ -204,6 +204,13 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true,
 				}
+			},
+			twig: {
+				files: ['src/SS6/ShopBundle/Resources/views/**/*.twig'],
+				tasks: ['refresh'],
+				options: {
+					livereload: true,
+				}
 			}
 		}
 
@@ -222,6 +229,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('frontend2', ['less:frontend2', 'legacssy:frontend2', 'less:wysiwyg2']);
 	grunt.registerTask('frontendSprite', ['sprite:frontend']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
+	grunt.registerTask('refresh', []);
 
 	grunt.registerTask('docs', ['styledocco']);
 };
