@@ -157,6 +157,7 @@ class ProductFormType extends AbstractType {
 			))
 			->add('priceCalculationType', 'choice', array(
 				'required' => true,
+				'expanded' => true,
 				'choices' => array(
 					Product::PRICE_CALCULATION_TYPE_AUTO => 'Automaticky',
 					Product::PRICE_CALCULATION_TYPE_MANUAL => 'Ručně'
