@@ -87,6 +87,11 @@ class ProductData {
 	public $categories;
 
 	/**
+	 * @var int
+	 */
+	public $priceCalculationType;
+
+	/**
 	 * @param array $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -101,6 +106,7 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
+	 * @param int $priceCalculationType
 	 */
 	public function __construct(
 		$name = array(),
@@ -116,7 +122,8 @@ class ProductData {
 		$hidden = false,
 		$availability = null,
 		array $hiddenOnDomains = array(),
-		array $categories = array()
+		array $categories = array(),
+		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -132,6 +139,7 @@ class ProductData {
 		$this->availability = $availability;
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $categories;
+		$this->priceCalculationType = $priceCalculationType;
 	}
 
 	/**
@@ -167,6 +175,7 @@ class ProductData {
 		}
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $product->getCategories()->toArray();
+		$this->priceCalculationType = $product->getPriceCalculationType();
 	}
 
 }

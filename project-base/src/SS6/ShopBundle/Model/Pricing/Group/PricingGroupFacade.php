@@ -187,4 +187,13 @@ class PricingGroupFacade {
 		return $this->pricingGroupRepository->getAll();
 	}
 
+	public function getAllIndexedByDomainId() {
+		foreach ($this->domain->getAll() as $domain) {
+			$domainId = $domain->getId();
+			$pricingGroupsIndexedByDomainId[$domainId] = $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
+		}
+
+		return $pricingGroupsIndexedByDomainId;
+	}
+
 }

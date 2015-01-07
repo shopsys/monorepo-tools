@@ -25,8 +25,6 @@ class ProductController extends Controller {
 		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory */
 		$productEditFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_edit_form_type_factory');
 		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
 
@@ -60,7 +58,6 @@ class ProductController extends Controller {
 			'product' => $product,
 			'productDetail' => $productDetailFactory->getDetailForProduct($product),
 			'productSellingPricesIndexedByDomainId' => $productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
-			'domainService' => $domain,
 		));
 	}
 
@@ -73,10 +70,10 @@ class ProductController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$productEditFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_edit_form_type_factory');
 		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
+		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
 		$form = $this->createForm($productEditFormTypeFactory->create());
 
@@ -104,7 +101,7 @@ class ProductController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
 			'form' => $form->createView(),
-			'domainService' => $domain,
+			'pricingGroupsIndexedByDomainId' => $pricingGroupFacade->getAllIndexedByDomainId(),
 		));
 	}
 

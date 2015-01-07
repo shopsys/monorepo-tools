@@ -67,6 +67,7 @@ class ProductEditFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
@@ -104,6 +105,22 @@ class ProductEditFormType extends AbstractType {
 				))
 				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
 			)
+			->add('productInputPrices', 'collection', array(
+				'type' => 'money',
+				'options' => array(
+					'currency' => false,
+					'precision' => 6,
+					'required' => true,
+					'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+					'constraints' => array(
+						new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
+						new Constraints\GreaterThanOrEqual(array(
+							'value' => 0,
+							'message' => 'Cena musí být větší nebo rovna {{ compared_value }}'
+						)),
+					),
+				)
+			))
 			->add('save', 'submit');
 	}
 

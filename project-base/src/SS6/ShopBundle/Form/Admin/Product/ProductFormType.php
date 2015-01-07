@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\YesNoType;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -153,6 +154,13 @@ class ProductFormType extends AbstractType {
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', array(), null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
+			))
+			->add('priceCalculationType', 'choice', array(
+				'required' => true,
+				'choices' => array(
+					Product::PRICE_CALCULATION_TYPE_AUTO => 'Automaticky',
+					Product::PRICE_CALCULATION_TYPE_MANUAL => 'Ručně'
+				)
 			));
 	}
 

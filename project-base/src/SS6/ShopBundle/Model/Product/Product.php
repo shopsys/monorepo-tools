@@ -18,6 +18,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
  */
 class Product extends AbstractTranslatableEntity {
 
+	const PRICE_CALCULATION_TYPE_AUTO = 1;
+	const PRICE_CALCULATION_TYPE_MANUAL = 2;
+
 	/**
 	 * @var integer
 	 *
@@ -120,6 +123,13 @@ class Product extends AbstractTranslatableEntity {
 	private $categories;
 
 	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $priceCalculationType;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -127,7 +137,12 @@ class Product extends AbstractTranslatableEntity {
 		$this->catnum = $productData->catnum;
 		$this->partno = $productData->partno;
 		$this->ean = $productData->ean;
-		$this->setPrice($productData->price);
+		$this->priceCalculationType = $productData->priceCalculationType;
+		if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_MANUAL) {
+			$this->setPrice(null);
+		} else {
+			$this->setPrice($productData->price);
+		}
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
@@ -146,7 +161,12 @@ class Product extends AbstractTranslatableEntity {
 		$this->catnum = $productData->catnum;
 		$this->partno = $productData->partno;
 		$this->ean = $productData->ean;
-		$this->setPrice($productData->price);
+		$this->priceCalculationType = $productData->priceCalculationType;
+		if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_MANUAL) {
+			$this->setPrice(null);
+		} else {
+			$this->setPrice($productData->price);
+		}
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
@@ -270,6 +290,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getCategories() {
 		return $this->categories;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPriceCalculationType() {
+		return $this->priceCalculationType;
 	}
 
 	/**

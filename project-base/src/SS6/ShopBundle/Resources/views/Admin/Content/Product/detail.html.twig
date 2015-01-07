@@ -22,7 +22,7 @@
 				</div>
 
 				<div class="wrap-group">
-					{{ form_row(form.productData.price, { label: inputPriceLabel(), attr: { class: 'form-line--size-2' } }) }}
+					{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen', attr: { class: 'form-line--size-2' } }) }}
 					{{ form_row(form.productData.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
 					{% block product_calculated_prices %}{% endblock %}
 				</div>

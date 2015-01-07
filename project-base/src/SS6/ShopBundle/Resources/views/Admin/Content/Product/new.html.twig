@@ -2,3 +2,31 @@
 
 {% block title %}- {{ 'Nové zboží'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nové zboží'|trans }}{% endblock %}
+{% block product_calculated_prices %}
+	<fieldset class="row">
+		<div class="table-responsive mt-1">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>{{ inputPriceLabel() }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="text-muted">
+						<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' } }) }}</td>
+					</tr>
+					{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
+						<tr>
+							<th>{{ getDomainName(domainId) }}</th>
+						</tr>
+						{% for pricingGroup in pricingGroups %}
+							<tr>
+								<td>{{ form_row(form.productInputPrices[pricingGroup.id], {label: pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
+							</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+{% endblock %}
