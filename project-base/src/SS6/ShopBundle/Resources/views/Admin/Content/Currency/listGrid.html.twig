@@ -17,15 +17,19 @@
 {% endblock %}
 
 {% block grid_value_cell_edit_id_exchangeRate %}
-	{{ formHtml|raw }}
-	{% if row is null %}
-		{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}
-	{% elseif row.c.id != defaultCurrency.id %}
-		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
-			'%defaultCurrency%': defaultCurrency.symbol,
-			'%currentCurrency%': row.c.symbol
-		}) }}
-	{% endif %}
+	<span class="form-edit-block form-edit-block--size-1">
+		{{ formHtml|raw }}
+		<span class="form-edit-block__info">
+			{% if row is null %}
+				{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}
+			{% elseif row.c.id != defaultCurrency.id %}
+				{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+					'%defaultCurrency%': defaultCurrency.symbol,
+					'%currentCurrency%': row.c.symbol
+				}) }}
+			{% endif %}
+		</span>
+	</span>
 {% endblock %}
 
 {% block grid_value_cell_id_exchangeRate %}
