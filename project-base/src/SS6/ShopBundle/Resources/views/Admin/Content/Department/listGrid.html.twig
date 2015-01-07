@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyla nalezena žádná oddělení. Nejprve musíte nějaké vytvořit.'|trans }}
+	{{ 'Nebyly nalezeny žádné kategorie. Nejprve musíte nějaké vytvořit.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'oddělení'|trans %}
+	{% set entityName = 'kategorie'|trans %}
 	{{ parent() }}
 {% endblock %}

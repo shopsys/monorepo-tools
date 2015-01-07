@@ -36,7 +36,7 @@
         - label: 'Editace zboží'
           route: admin_product_edit
           visible: false
-    - label: 'Oddělení'
+    - label: 'Kategorie'
       route: admin_department_list
       items:
         - label: 'Nová kategorie'
