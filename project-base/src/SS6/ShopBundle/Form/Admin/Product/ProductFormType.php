@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -113,10 +114,11 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu', 'groups' => 'autoPriceCalculation')),
 					new Constraints\GreaterThanOrEqual(array(
 						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}'
+						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+						'groups' => 'autoPriceCalculation'
 					)),
 				),
 			))
@@ -169,6 +171,17 @@ class ProductFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
+			'validation_groups' => function(FormInterface $form) {
+				$validationGroups = array('Default');
+				$productData = $form->getData();
+				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+
+				if ($productData->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
+					$validationGroups[] = 'autoPriceCalculation';
+				}
+
+				return $validationGroups;
+			},
 		));
 	}
 
