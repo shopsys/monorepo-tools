@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constrains;
+namespace SS6\ShopBundle\Component\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 

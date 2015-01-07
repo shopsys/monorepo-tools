@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Constrains\UniqueCollection;
+use SS6\ShopBundle\Component\Constraints\UniqueCollection;
 use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;

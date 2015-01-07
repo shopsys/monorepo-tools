@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Constrains\NotSelectedDomainToShow;
+use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\YesNoType;

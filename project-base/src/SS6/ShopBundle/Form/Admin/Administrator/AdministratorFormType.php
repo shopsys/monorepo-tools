@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Administrator;
 
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
-use SS6\ShopBundle\Component\Constrains\FieldsAreNotIdentical;
+use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
