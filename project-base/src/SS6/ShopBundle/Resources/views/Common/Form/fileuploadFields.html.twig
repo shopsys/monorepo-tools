@@ -7,10 +7,21 @@
 			<div {{ block('widget_attributes') }}>
 				<div class="js-file-upload-item box-upload__result">
 					<div class="info">
-						{% macro uploadedFile(uploadedFile, label, class) %}
+						{% macro uploadedFile(uploadedFile, label, iconType, thumbnailUri, class) %}
 							<div class="js-file-upload-uploaded-file box-upload__file {{ class|default('') }}">
 
 								<div class="box-upload__file__label">
+									{% if iconType is not null %}
+										<i class="fa fa-{{ iconType }} fa-4x js-file-upload-icon-type"></i>
+									{% endif %}
+
+									{% if thumbnailUri is same as(false)%}
+										{# While parsing html by JS, was called request to all src, but src not set, yet. #}
+										<img class="js-file-upload-image-thumbnail" />
+									{% elseif thumbnailUri is not null %}
+										<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
+									{% endif %}
+
 									<i class="box-upload__file__label__icon fa fa-times cursor-pointer js-file-upload-delete"></i>
 									<span class="js-file-upload-label">{{ label }}</span>
 								</div>
@@ -25,9 +36,10 @@
 							</div>
 						{% endmacro %}
 
-						<div class="js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', 'js-file-upload-uploaded-file-template display-none')|escape }}">
+						<div class="js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template display-none')|escape }}">
 							{% for uploadedFile in form.uploadedFiles %}
-								{{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value)) }}
+								{% set fileThumbnailInfo = getFileThumbnailInfoByTemporaryFilename(uploadedFile.vars.value) %}
+								{{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value), fileThumbnailInfo.iconType, fileThumbnailInfo.imageUri) }}
 							{% else %}
 								{% do form.children.uploadedFiles.setRendered %}
 							{% endfor %}

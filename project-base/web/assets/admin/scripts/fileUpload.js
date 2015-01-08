@@ -62,11 +62,15 @@
 			var $progress = $file.find('.js-file-upload-progress');
 			var $progressBar = $file.find('.js-file-upload-progress-bar');
 			var $input = $file.find('.js-file-upload-input');
+			var $iconType = $file.find('.js-file-upload-icon-type').hide();
+			var $imageThumbnail = $file.find('.js-file-upload-image-thumbnail').hide();
 
 			$progress.hide();
 
-			this.setAsUploaded = function (filename) {
+			this.setAsUploaded = function (filename, iconType, imageThumbnailUri) {
 				$input.val(filename);
+				setIconType(iconType);
+				setImageThumbnail(imageThumbnailUri);
 			}
 
 			this.deleteItem = function () {
@@ -88,6 +92,21 @@
 					setTimeout(function () {
 						$progress.fadeOut();
 					}, 1000);
+				}
+			}
+
+			var setImageThumbnail = function (imageThumbnailUri) {
+				if (imageThumbnailUri !== null) {
+					$imageThumbnail.attr('src', imageThumbnailUri).show();
+				}
+			}
+
+			var setIconType = function (iconType) {
+				if (iconType !== null) {
+					$iconType
+						.removeClass('fa-__icon-type__')
+						.addClass('fa-' + iconType)
+						.show();
 				}
 			}
 		}
@@ -119,7 +138,7 @@
 						uploader.items[uploader.lastUploadItemId].deleteItem();
 					}
 					uploader.lastUploadItemId = id;
-					uploader.items[id].setAsUploaded(data.filename);
+					uploader.items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
 					updateFileStatus('success', 'Úspěšně nahráno');
 					uploader.$status.parent().fadeOut(4000);
 				} else {
