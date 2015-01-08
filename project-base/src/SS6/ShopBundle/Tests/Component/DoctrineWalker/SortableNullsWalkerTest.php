@@ -9,27 +9,56 @@ use SS6\ShopBundle\Model\Product\Product;
 
 class SortableNullsWalkerTest extends FunctionalTestCase {
 
-	public function testWalkOrderByItem() {
+	public function testWalkOrderByItemAsc() {
 		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
 		/* @var $em \Doctrine\ORM\EntityManager */
-
 		$queryBuilder = $em->createQueryBuilder();
 		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
 
-		// minimal query for test
 		$queryBuilder
-			->select('p')
+			->select('p.id')
 			->from(Product::class, 'p')
 			->orderBy('p.id', 'ASC');
 
 		$query = $queryBuilder->getQuery();
-		/* @var $query \Doctrine\ORM\Query */
-
 		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
 
-		$sql = $query->getSQL();
+		$this->assertStringEndsWith('ASC NULLS FIRST', $query->getSQL());
+	}
 
-		$this->assertStringEndsWith('ASC NULLS FIRST', $sql);
+	public function testWalkOrderByItemDesc() {
+		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
+		$queryBuilder = $em->createQueryBuilder();
+		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
+
+		$queryBuilder
+			->select('p.id')
+			->from(Product::class, 'p')
+			->orderBy('p.id', 'DESC');
+
+		$query = $queryBuilder->getQuery();
+		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
+
+		$this->assertStringEndsWith('DESC NULLS LAST', $query->getSQL());
+	}
+
+	public function testWalkOrderByItemWithoutOrdering() {
+		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
+		$queryBuilder = $em->createQueryBuilder();
+		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
+
+		$queryBuilder
+			->select('p.id')
+			->from(Product::class, 'p');
+
+		$queryWithoutWalker = $queryBuilder->getQuery();
+		$queryWithoutWalker->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
+
+		$queryWithWalker = $queryBuilder->getQuery();
+
+		$this->assertEquals($queryWithoutWalker->getSQL(), $queryWithWalker->getSQL());
 	}
 
 }
