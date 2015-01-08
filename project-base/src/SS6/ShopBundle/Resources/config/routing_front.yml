@@ -17,6 +17,13 @@ front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
 
+front_javascript:
+  pattern: /assets/{dir}/scripts/{file}
+  defaults: { _controller: SS6ShopBundle:Front\Javascript:index }
+  requirements:
+    dir: ^admin|frontend$
+    file: .+
+
 front_login_check:
   pattern: /login/check/
   # controller's action is unnecessary, because firewall processes whole request

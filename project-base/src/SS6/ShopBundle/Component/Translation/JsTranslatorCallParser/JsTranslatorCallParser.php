@@ -43,10 +43,17 @@ class JsTranslatorCallParser {
 		/* @var $callExprNodes \JCallExprNode[] */
 		foreach ($callExprNodes as $callExprNode) {
 			if ($this->isTransFunctionCall($callExprNode)) {
-				$messageId = $this->getMessageId($callExprNode);
+				$messageIdArgumentNode = $this->getMessageIdArgumentNode($callExprNode);
+
+				$messageId = $this->getMessageId($messageIdArgumentNode);
 				$domain = $this->getDomain($callExprNode);
 
-				$jsTranslatorCalls[] = new JsTranslatorCall($callExprNode, $messageId, $domain);
+				$jsTranslatorCalls[] = new JsTranslatorCall(
+					$callExprNode,
+					$messageIdArgumentNode,
+					$messageId,
+					$domain
+				);
 			}
 		}
 
@@ -70,28 +77,17 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
+	 * @param \JNodeBase $callExprNode
 	 * @return string
 	 */
-	private function getMessageId(JCallExprNode $callExprNode) {
-		$functionName = $this->getFunctionName($callExprNode);
-		$messageIdArgumentIndex = $this->transMethodSpecifications[$functionName]->getMessageIdArgumentIndex();
-
-		$argumentNodes = $this->getArgumentNodes($callExprNode);
-		if (!isset($argumentNodes[$messageIdArgumentIndex])) {
-			throw new \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\ParseException(
-				'Message ID argument not specified at line ' . $callExprNode->get_line_num()
-					. ', column ' . $callExprNode->get_col_num()
-			);
-		}
-
+	private function getMessageId(\JNodeBase $messageIdArgumentNode) {
 		try {
-			$messageId = $this->getConcatenatedString($argumentNodes[$messageIdArgumentIndex]);
+			$messageId = $this->getConcatenatedString($messageIdArgumentNode);
 		} catch (\SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\UnsupportedNodeException $ex) {
 			throw new \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\ParseException(
-				'Cannot parse message ID ' . (string)$argumentNodes[$messageIdArgumentIndex]
-					. ' at line ' . $argumentNodes[$messageIdArgumentIndex]->get_line_num()
-					. ', column ' . $argumentNodes[$messageIdArgumentIndex]->get_col_num()
+				'Cannot parse message ID ' . (string)$messageIdArgumentNode
+					. ' at line ' . $messageIdArgumentNode->get_line_num()
+					. ', column ' . $messageIdArgumentNode->get_col_num()
 			);
 		}
 
@@ -155,6 +151,25 @@ class JsTranslatorCallParser {
 		}
 
 		return $argumentNodes;
+	}
+
+	/**
+	 * @param \JCallExprNode $callExprNode
+	 * @return \JNodeBase
+	 */
+	private function getMessageIdArgumentNode(JCallExprNode $callExprNode) {
+		$functionName = $this->getFunctionName($callExprNode);
+		$messageIdArgumentIndex = $this->transMethodSpecifications[$functionName]->getMessageIdArgumentIndex();
+
+		$argumentNodes = $this->getArgumentNodes($callExprNode);
+		if (!isset($argumentNodes[$messageIdArgumentIndex])) {
+			throw new \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\ParseException(
+				'Message ID argument not specified at line ' . $callExprNode->get_line_num()
+					. ', column ' . $callExprNode->get_col_num()
+			);
+		}
+
+		return $argumentNodes[$messageIdArgumentIndex];
 	}
 
 	private function getConcatenatedString(JNodeBase $node) {

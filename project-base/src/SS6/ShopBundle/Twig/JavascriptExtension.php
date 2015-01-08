@@ -20,17 +20,24 @@ class JavascriptExtension extends Twig_Extension {
 	private $webPath;
 
 	/**
+	 * @var string
+	 */
+	private $resourcesPath;
+
+	/**
 	 * @var array
 	 */
 	private $javascriptLinks;
 
 	/**
 	 * @param string $webPath
+	 * @param string $resourcesPath
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 */
-	public function __construct($webPath, ContainerInterface $container) {
+	public function __construct($webPath, $resourcesPath, ContainerInterface $container) {
 		$this->container = $container;
 		$this->webPath = $webPath;
+		$this->resourcesPath = $resourcesPath;
 	}
 
 	/**
@@ -115,6 +122,16 @@ class JavascriptExtension extends Twig_Extension {
 			return true;
 		}
 
+		$matches = [];
+		if (preg_match('@^assets/(admin|frontend)/scripts/(.*)$@', $javascript, $matches)) {
+			$filepath = $this->resourcesPath . '/scripts/' . $matches[1] . '/'. $matches[2];
+
+			if (is_file($filepath)) {
+				$this->javascriptLinks[] = $this->getJavascriptFileUrl($javascript);
+				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -141,10 +158,11 @@ class JavascriptExtension extends Twig_Extension {
 			return false;
 		}
 
+		$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
+
 		$filesystemPath = $this->webPath . '/' . $path;
 
 		if (is_dir($filesystemPath)) {
-			$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
 			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
 				if (is_file($filepath)) {
@@ -152,10 +170,24 @@ class JavascriptExtension extends Twig_Extension {
 					$this->javascriptLinks[] = $this->getJavascriptFileUrl($path . '/' . $filename);
 				}
 			}
-			return true;
 		}
 
-		return false;
+		$matches = [];
+		if (preg_match('@^assets/(admin|frontend)/scripts(?:/|$)(.*)$@', $path, $matches)) {
+			$filesystemPath = $this->resourcesPath . '/scripts/' . $matches[1] . '/' . $matches[2];
+
+			if (is_dir($filesystemPath)) {
+				$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
+				foreach ($filepaths as $filepath) {
+					if (is_file($filepath)) {
+						$filename = pathinfo($filepath, PATHINFO_BASENAME);
+						$this->javascriptLinks[] = $this->getJavascriptFileUrl($path . '/' . $filename);
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	/**

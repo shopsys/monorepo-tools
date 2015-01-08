@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\Translation\JsTranslatorCallParser;
 
 use JCallExprNode;
+use JNodeBase;
 
 class JsTranslatorCall {
 
@@ -10,6 +11,11 @@ class JsTranslatorCall {
 	 * @var \JCallExprNode
 	 */
 	private $callExprNode;
+
+	/**
+	 * @var \JNodeBase
+	 */
+	private $messageIdArgumentNode;
 
 	/**
 	 * @var string
@@ -26,8 +32,14 @@ class JsTranslatorCall {
 	 * @param string $messageId
 	 * @param string $domain
 	 */
-	public function __construct(JCallExprNode $callExprNode, $messageId, $domain) {
+	public function __construct(
+		JCallExprNode $callExprNode,
+		JNodeBase $messageIdArgumentNode,
+		$messageId,
+		$domain
+	) {
 		$this->callExprNode = $callExprNode;
+		$this->messageIdArgumentNode = $messageIdArgumentNode;
 		$this->messageId = $messageId;
 		$this->domain = $domain;
 	}
@@ -37,6 +49,13 @@ class JsTranslatorCall {
 	 */
 	public function getCallExprNode() {
 		return $this->callExprNode;
+	}
+
+	/**
+	 * @return \JNodeBase
+	 */
+	public function getMessageIdArgumentNode() {
+		return $this->messageIdArgumentNode;
 	}
 
 	/**
