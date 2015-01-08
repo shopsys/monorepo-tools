@@ -12,15 +12,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="text-muted">
+					<tr class="js-base-price-line">
 						<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' } }) }}</td>
 					</tr>
 					{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
-						<tr>
+						<tr class="js-manual-base-price display-none">
 							<th>{{ getDomainName(domainId) }}</th>
 						</tr>
 						{% for pricingGroup in pricingGroups %}
-							<tr>
+							<tr class="js-manual-base-price display-none">
 								<td>{{ form_row(form.productInputPrices[pricingGroup.id], {label: pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
 							</tr>
 						{% endfor %}
