@@ -100,14 +100,4 @@ class Column {
 		return $this->queryOrderId;
 	}
 
-	/**
-	 * @param string $queryId
-	 * @return \SS6\ShopBundle\Model\Grid\Column
-	 */
-	public function setOrderByQueryId($queryId) {
-		$this->queryOrderId = $queryId;
-
-		return $this;
-	}
-
 }
