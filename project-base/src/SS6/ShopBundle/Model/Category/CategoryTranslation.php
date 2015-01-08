@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department;
+namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 
 /**
- * @ORM\Table(name="department_translations")
+ * @ORM\Table(name="category_translations")
  * @ORM\Entity
  */
-class DepartmentTranslation extends AbstractTranslation {
+class CategoryTranslation extends AbstractTranslation {
 
 	/**
-	 * @Prezent\Translatable(targetEntity="SS6\ShopBundle\Model\Department\Department")
+	 * @Prezent\Translatable(targetEntity="SS6\ShopBundle\Model\Category\Category")
 	 */
 	protected $translatable;
 

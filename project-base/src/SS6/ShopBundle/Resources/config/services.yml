@@ -209,17 +209,17 @@ services:
     arguments:
       - %ss6.data_fixtures.resource_customers_filepath%
 
-  ss6.shop.department.department_facade:
-    class: SS6\ShopBundle\Model\Department\DepartmentFacade
+  ss6.shop.category.category_facade:
+    class: SS6\ShopBundle\Model\Category\CategoryFacade
 
-  ss6.shop.department.department_grid_factory:
-    class: SS6\ShopBundle\Model\Department\Grid\DepartmentGridFactory
+  ss6.shop.category.category_grid_factory:
+    class: SS6\ShopBundle\Model\Category\Grid\CategoryGridFactory
 
-  ss6.shop.department.department_repository:
-    class: SS6\ShopBundle\Model\Department\DepartmentRepository
+  ss6.shop.category.category_repository:
+    class: SS6\ShopBundle\Model\Category\CategoryRepository
 
-  ss6.shop.department.department_service:
-    class: SS6\ShopBundle\Model\Department\DepartmentService
+  ss6.shop.category.category_service:
+    class: SS6\ShopBundle\Model\Category\CategoryService
 
   ss6.shop.domain:
     class: SS6\ShopBundle\Model\Domain\Domain

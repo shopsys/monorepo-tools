@@ -58,19 +58,19 @@ class ProductOnCurrentDomainFacade {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginatedProductDetailsInDepartment(
+	public function getPaginatedProductDetailsInCategory(
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
-		$departmentId
+		$categoryId
 	) {
-		$paginationResult = $this->productRepository->getPaginationResultInDepartment(
+		$paginationResult = $this->productRepository->getPaginationResultInCategory(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$orderingSetting,
 			$page,
 			$limit,
-			$departmentId,
+			$categoryId,
 			$this->currentCustomer->getPricingGroup()
 		);
 		$products = $paginationResult->getResults();

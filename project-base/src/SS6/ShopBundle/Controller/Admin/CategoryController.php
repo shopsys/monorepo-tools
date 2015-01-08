@@ -1,0 +1,138 @@
+<?php
+
+namespace SS6\ShopBundle\Controller\Admin;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Category\CategoryFormType;
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\Category\CategoryData;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+class CategoryController extends Controller {
+
+	/**
+	 * @Route("/category/edit/{id}", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $id
+	 */
+	public function editAction(Request $request, $id) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+
+		$category = $categoryFacade->getById($id);
+		$form = $this->createForm(new CategoryFormType($categoryFacade->getAllWithoutBranch($category)));
+
+		$categoryData = new CategoryData();
+
+		if (!$form->isSubmitted()) {
+			$categoryData->setFromEntity($category);
+		}
+
+		$form->setData($categoryData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$categoryFacade->edit($id, $categoryData);
+
+			$flashMessageSender->addSuccessFlashTwig('Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				'name' => $category->getName(),
+				'url' => $this->generateUrl('admin_category_edit', array('id' => $category->getId())),
+			));
+			return $this->redirect($this->generateUrl('admin_category_list'));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+		}
+
+		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
+		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
+		$breadcrumb->replaceLastItem(new MenuItem('Editace kategorie - ' . $category->getName()));
+
+		return $this->render('@SS6Shop/Admin/Content/Category/edit.html.twig', array(
+			'form' => $form->createView(),
+			'category' => $category,
+		));
+	}
+
+	/**
+	 * @Route("/category/new/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function newAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+
+		$form = $this->createForm(new CategoryFormType($categoryFacade->getAll()));
+
+		$categoryData = new CategoryData();
+
+		$form->setData($categoryData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$categoryData = $form->getData();
+
+			$category = $categoryFacade->create($categoryData);
+
+			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				'name' => $category->getName(),
+				'url' => $this->generateUrl('admin_category_edit', array('id' => $category->getId())),
+			));
+			return $this->redirect($this->generateUrl('admin_category_list'));
+		}
+
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Category/new.html.twig', array(
+			'form' => $form->createView(),
+		));
+	}
+
+	/**
+	 * @Route("/category/list/")
+	 */
+	public function listAction() {
+		$categoryGridFactory = $this->get('ss6.shop.category.category_grid_factory');
+		/* @var $categoryGridFactory \SS6\ShopBundle\Model\Category\Grid\CategoryGridFactory */
+
+		$grid = $categoryGridFactory->create();
+
+		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', array(
+			'gridView' => $grid->createView(),
+		));
+	}
+
+	/**
+	 * @Route("/category/delete/{id}", requirements={"id" = "\d+"})
+	 * @param int $id
+	 */
+	public function deleteAction($id) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+
+		try {
+			$fullName = $categoryFacade->getById($id)->getName();
+
+			$categoryFacade->deleteById($id);
+
+			$flashMessageSender->addSuccessFlashTwig('Kategorie <strong>{{ name }}</strong> byla smazána', array(
+				'name' => $fullName,
+			));
+		} catch (\SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
+			$flashMessageSender->addErrorFlash('Zvolená kategorie neexistuje');
+		}
+
+		return $this->redirect($this->generateUrl('admin_category_list'));
+	}
+
+}

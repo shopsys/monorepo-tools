@@ -36,14 +36,14 @@
         - label: 'Editace zboží'
           route: admin_product_edit
           visible: false
-    - label: 'Oddělení'
-      route: admin_department_list
+    - label: 'Kategorie'
+      route: admin_category_list
       items:
         - label: 'Nová kategorie'
-          route: admin_department_new
+          route: admin_category_new
           visible: false
         - label: 'Editace kategorie'
-          route: admin_department_edit
+          route: admin_category_edit
           visible: false
 
 - label: 'Cenotvorba'

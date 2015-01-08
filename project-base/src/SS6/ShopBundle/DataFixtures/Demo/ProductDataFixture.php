@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\DepartmentDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\CategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
@@ -29,18 +29,18 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			'out-of-stock' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST)
 		);
-		$departments = array(
-			'1' => $this->getReference(DepartmentDataFixture::TV),
-			'2' => $this->getReference(DepartmentDataFixture::PHOTO),
-			'3' => $this->getReference(DepartmentDataFixture::PRINTERS),
-			'4' => $this->getReference(DepartmentDataFixture::PC),
-			'5' => $this->getReference(DepartmentDataFixture::PHONES),
-			'6' => $this->getReference(DepartmentDataFixture::COFFEE),
-			'7' => $this->getReference(DepartmentDataFixture::BOOKS),
-			'8' => $this->getReference(DepartmentDataFixture::TOYS),
+		$categories = array(
+			'1' => $this->getReference(CategoryDataFixture::TV),
+			'2' => $this->getReference(CategoryDataFixture::PHOTO),
+			'3' => $this->getReference(CategoryDataFixture::PRINTERS),
+			'4' => $this->getReference(CategoryDataFixture::PC),
+			'5' => $this->getReference(CategoryDataFixture::PHONES),
+			'6' => $this->getReference(CategoryDataFixture::COFFEE),
+			'7' => $this->getReference(CategoryDataFixture::BOOKS),
+			'8' => $this->getReference(CategoryDataFixture::TOYS),
 		);
 
-		$loaderService->injectReferences($vats, $availabilities, $departments);
+		$loaderService->injectReferences($vats, $availabilities, $categories);
 		$productsEditData = $loaderService->getProductsEditData();
 		$productNo = 1;
 		foreach ($productsEditData as $productEditData) {
@@ -88,7 +88,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		return array(
 			VatDataFixture::class,
 			AvailabilityDataFixture::class,
-			DepartmentDataFixture::class,
+			CategoryDataFixture::class,
 		);
 	}
 

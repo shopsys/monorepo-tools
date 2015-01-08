@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department\Grid;
+namespace SS6\ShopBundle\Model\Category\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Department\Department;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class DepartmentGridFactory implements GridFactoryInterface {
+class CategoryGridFactory implements GridFactoryInterface {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -53,31 +53,31 @@ class DepartmentGridFactory implements GridFactoryInterface {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
 			->select('d, dt')
-			->from(Department::class, 'd')
+			->from(Category::class, 'd')
 			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
 			->orderBy('d.root, d.lft', 'ASC')
 			->setParameter('locale', $this->localization->getDefaultLocale());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'd.id');
 
-		$grid = $this->gridFactory->create('departmentList', $dataSource);
+		$grid = $this->gridFactory->create('categoryList', $dataSource);
 		$grid->setDefaultOrder('name');
 		$grid->addColumn('names', 'dt.name', $this->translator->trans('Název'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				ActionColumn::TYPE_EDIT,
 				$this->translator->trans('Upravit'),
-				'admin_department_edit',
+				'admin_category_edit',
 				array('id' => 'd.id')
 			);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
-				'admin_department_delete',
+				'admin_category_delete',
 				array('id' => 'd.id')
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat toto oddělení?'));
+			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat tuto kategorii?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Department/listGrid.html.twig');
+		$grid->setTheme('@SS6Shop/Admin/Content/Category/listGrid.html.twig');
 
 		return $grid;
 	}

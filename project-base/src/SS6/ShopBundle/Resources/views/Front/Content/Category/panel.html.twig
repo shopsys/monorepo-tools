@@ -1,0 +1,14 @@
+{% macro categories(categories) %}
+	{% if categories|length > 0 %}
+		<ul class="list-menu">
+			{% for category in categories if category.name != '' %}
+				<li class="list-menu__item">
+					<a href="{{ url('front_product_category', { categoryId: category.id }) }}" class="list-menu__item__link list-menu__item__link--{{category.level}}">{{ category.name }}</a>
+					{{ _self.categories(category.children) }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endmacro %}
+
+{{ _self.categories(categories) }}

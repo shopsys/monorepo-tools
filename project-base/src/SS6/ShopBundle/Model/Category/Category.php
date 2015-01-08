@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Department;
+namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,10 +10,10 @@ use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 
 /**
  * @Gedmo\Tree(type="nested")
- * @ORM\Table(name="departments")
+ * @ORM\Table(name="categories")
  * @ORM\Entity
  */
-class Department extends AbstractTranslatableEntity {
+class Category extends AbstractTranslatableEntity {
 
 	/**
 	 * @var integer
@@ -25,25 +25,25 @@ class Department extends AbstractTranslatableEntity {
 	protected $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\DepartmentTranslation[]
+	 * @var \SS6\ShopBundle\Model\Category\CategoryTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Department\DepartmentTranslation")
+	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Category\CategoryTranslation")
 	 */
 	protected $translations;
 	
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\Department
+	 * @var \SS6\ShopBundle\Model\Category\Category
 	 *
 	 * @Gedmo\TreeParent
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Department\Department", inversedBy="children")
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="children")
 	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
 	 */
 	private $parent;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Department\Department[]
+	 * @var \SS6\ShopBundle\Model\Category\Category[]
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Department\Department", mappedBy="parent")
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Category\Category", mappedBy="parent")
 	 * @ORM\OrderBy({"lft" = "ASC"})
 	 */
 	private $children;
@@ -81,26 +81,26 @@ class Department extends AbstractTranslatableEntity {
 	private $root;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
-	public function __construct(DepartmentData $departmentData) {
-		$this->setParent($departmentData->getParent());
+	public function __construct(CategoryData $categoryData) {
+		$this->setParent($categoryData->getParent());
 		$this->translations = new ArrayCollection();
-		$this->setTranslations($departmentData);
+		$this->setTranslations($categoryData);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
-	public function edit(DepartmentData $departmentData) {
-		$this->setParent($departmentData->getParent());
-		$this->setTranslations($departmentData);
+	public function edit(CategoryData $categoryData) {
+		$this->setParent($categoryData->getParent());
+		$this->setTranslations($categoryData);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\Department|null $parent
+	 * @param \SS6\ShopBundle\Model\Category\Category|null $parent
 	 */
-	public function setParent(Department $parent = null) {
+	public function setParent(Category $parent = null) {
 		$this->parent = $parent;
 	}
 
@@ -120,7 +120,7 @@ class Department extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -134,7 +134,7 @@ class Department extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\Department[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getChildren() {
 		return $this->children;
@@ -162,19 +162,19 @@ class Department extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Department\DepartmentData $departmentData
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
-	private function setTranslations(DepartmentData $departmentData) {
-		foreach ($departmentData->getName() as $locale => $name) {
+	private function setTranslations(CategoryData $categoryData) {
+		foreach ($categoryData->getName() as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Department\DepartmentTranslation
+	 * @return \SS6\ShopBundle\Model\Category\CategoryTranslation
 	 */
 	protected function createTranslation() {
-		return new DepartmentTranslation();
+		return new CategoryTranslation();
 	}
 
 }
