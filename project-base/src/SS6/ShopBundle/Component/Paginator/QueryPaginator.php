@@ -5,6 +5,8 @@ namespace SS6\ShopBundle\Component\Paginator;
 use Doctrine\DBAL\SQLParserUtils;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query;
+use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface {
 
@@ -56,7 +58,10 @@ class QueryPaginator implements PaginatorInterface {
 				->setMaxResults($pageSize);
 		}
 
-		$results = $queryBuilder->getQuery()->execute(null, $this->hydrationMode);
+		$query = $queryBuilder->getQuery();
+		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
+
+		$results = $query->execute(null, $this->hydrationMode);
 
 		return new PaginationResult($page, $pageSize, $totalCount, $results);
 
