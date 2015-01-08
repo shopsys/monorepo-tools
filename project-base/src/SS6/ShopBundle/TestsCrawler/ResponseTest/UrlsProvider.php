@@ -76,6 +76,9 @@ class UrlsProvider {
 			case 'front_error_page_format':
 				return ['code' => 404, '_format' => 'html'];
 
+			case 'front_javascript':
+				return ['dir' => 'frontend', 'file' => 'translator.js'];
+
 			default:
 				$parameters = [];
 				foreach ($this->getRouteParametersNames($route) as $parameterName) {
