@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Twig_Extension;
 use Twig_SimpleFilter;
+use Twig_SimpleFunction;
 
 class PriceExtension extends Twig_Extension {
 
@@ -37,12 +38,21 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function getFilters() {
 		return array(
-			new Twig_SimpleFilter('priceWithDefaultAdminCurrency', array(
-				$this, 'priceWithDefaultAdminCurrencyFilter'), array('is_safe' => array('html'))
+			new Twig_SimpleFilter('priceWithCurrencyAdmin', array(
+				$this, 'priceWithCurrencyAdminFilter'), array('is_safe' => array('html'))
 			),
 			new Twig_SimpleFilter('priceWithCurrency', array($this, 'priceWithCurrencyFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('priceText', array($this, 'priceTextFilter'), array('is_safe' => array('html'))),
+		);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getFunctions() {
+		return array(
+			new Twig_SimpleFunction('currencySymbolByDomainId', array($this, 'getCurrencySymbol'), array('is_safe' => array('html'))),
 		);
 	}
 
@@ -61,12 +71,13 @@ class PriceExtension extends Twig_Extension {
 
 	/**
 	 * @param string $price
+	 * @param int|null $domainId
 	 * @return string
 	 */
-	public function priceWithDefaultAdminCurrencyFilter($price) {
+	public function priceWithCurrencyAdminFilter($price, $domainId = null) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $this->currencyFacade->getDefaultCurrency()->getSymbol();
+		$currencySymbol = $this->getCurrencySymbolByDomainId($domainId);
 		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
 
 		return $price;
@@ -95,6 +106,19 @@ class PriceExtension extends Twig_Extension {
 			return $this->translator->trans('Zdarma');
 		} else {
 			return $this->priceFilter($price);
+		}
+	}
+
+	/**
+	 * @param int|null $domainId
+	 * @return string
+	 */
+	public function getCurrencySymbolByDomainId($domainId = null) {
+		if ($domainId === null) {
+			return $this->currencyFacade->getDefaultCurrency()->getSymbol();
+		} else {
+			$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+			return $currency->getSymbol();
 		}
 	}
 

@@ -26,9 +26,9 @@
 		</thead>
 		<tbody>
 			<tr class="js-input-price-type-auto">
-				<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' } }) }}</td>
-				<td class="text-muted">{{ productDetail.basePrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
-				<td class="text-muted"><strong>{{ productDetail.basePrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
+				<td>{{ form_row(form.productData.price, {label: 'Základní cena', symbolAfterInput: currencySymbolByDomainId(), attr: { class: 'form-line--size-2' } }) }}</td>
+				<td class="text-muted">{{ productDetail.basePrice.priceWithoutVat|priceWithCurrencyAdmin }}</td>
+				<td class="text-muted"><strong>{{ productDetail.basePrice.priceWithVat|priceWithCurrencyAdmin }}</strong></td>
 			</tr>
 			{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
 				<tr>
@@ -38,8 +38,8 @@
 					<tr>
 						<td class="js-input-price-type-auto">{{ productSellingPrice.pricingGroup.name }}</td>
 						<td class="display-none js-input-price-type-manual">{{ form_row(form.manualInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
-						<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
-						<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
+						<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyAdmin }}</td>
+						<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyAdmin }}</strong></td>
 					</tr>
 				{% endfor %}
 			{% endfor %}
