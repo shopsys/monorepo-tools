@@ -100,9 +100,7 @@ class CustomerController extends Controller {
 					END) AS name,
 				COUNT(o.id) ordersCount,
 				SUM(o.totalPriceWithVat) ordersSumPrice,
-				COALESCE(SUM(o.totalPriceWithVat), 0) ordersSumPriceOrder,
-				MAX(o.createdAt) lastOrderAt,
-				COALESCE(MAX(o.createdAt), :emptyDateTime) lastOrderAtOrder')
+				MAX(o.createdAt) lastOrderAt')
 			->from(User::class, 'u')
 			->where('u.domainId = :selectedDomainId')
 			->setParameter('selectedDomainId', $selectedDomain->getId())
@@ -110,7 +108,6 @@ class CustomerController extends Controller {
 			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
 			->leftJoin(PricingGroup::class, 'pg', 'WITH', 'pg.id = u.pricingGroup')
 			->groupBy('u.id');
-		$queryBuilder->setParameter('emptyDateTime', new DateTime('@0'));
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
 
 		$grid = $gridFactory->create('customerList', $dataSource);
@@ -124,10 +121,8 @@ class CustomerController extends Controller {
 		$grid->addColumn('pricingGroup', 'pricingGroup', 'Cenová skupina', true);
 		$grid->addColumn('orders_count', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
 		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', true)
-			->setOrderByQueryId('ordersSumPriceOrder')
 			->setClassAttribute('text-right');
 		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)
-			->setOrderByQueryId('lastOrderAtOrder')
 			->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
