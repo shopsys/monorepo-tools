@@ -17,12 +17,12 @@ class GridController extends Controller {
 		$inlineEditService = $this->get('ss6.shop.grid.inline_edit.inline_edit_service');
 		/* @var $inlineEditService \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService */
 
-		$renderedFormWidgets = $inlineEditService->getRenderedFormWidgets(
+		$renderedFormRow = $inlineEditService->getRenderedFormRow(
 			$request->get('serviceName'),
 			$request->get('rowId')
 		);
 
-		return new JsonResponse($renderedFormWidgets);
+		return new JsonResponse($renderedFormRow);
 	}
 
 	/**

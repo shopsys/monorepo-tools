@@ -24,6 +24,7 @@
 			$grid.find('.js-inline-edit-no-data').remove();
 			$grid.find('.js-inline-edit-data-container').removeClass('hidden');
 			SS6.grid.inlineEdit.addNewRow($grid);
+			return false;
 		});
 
 		$grid.on('click', '.js-inline-edit-cancel', function() {
@@ -98,9 +99,11 @@
 				rowId: $row.data('inline-edit-row-id')
 			},
 			dataType: 'json',
-			success: function (formData) {
-				var $formRow = SS6.grid.inlineEdit.createFormRow($grid, formData);
+			success: function (formRowData) {
+				var $formRow = $($.parseHTML(formRowData));
+				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
+				$formRow.find('.js-tooltip[title]').tooltip();
 				$row.replaceWith($formRow);
 				$formRow.data('$originalRow', $row);
 			}
@@ -115,9 +118,11 @@
 				serviceName: $grid.data('inline-edit-service-name')
 			},
 			dataType: 'json',
-			success: function (formData) {
-				var $formRow = SS6.grid.inlineEdit.createFormRow($grid, formData);
+			success: function (formRowData) {
+				var $formRow = $($.parseHTML(formRowData));
+				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
+				$formRow.find('.js-tooltip[title]').tooltip();
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
 				$formRow.find('input[type=text]:first').focus();
 			}
@@ -144,30 +149,6 @@
 
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
-	}
-
-	SS6.grid.inlineEdit.createFormRow = function ($grid, formData) {
-		var $formRow = $grid.find('.js-grid-empty-row').clone();
-		$formRow.removeClass('js-grid-empty-row hidden').addClass('js-grid-editing-row');
-		var $unmatchedInputs = $formRow.find('.js-inline-edit-unmatched-inputs');
-
-		$.each(formData, function(formName, formHtml) {
-			var $column = $formRow.find('.js-grid-column-' + formName + ':first');
-			if ($column.size() === 1) {
-				var $cellValue = $column.find('.js-inline-edit-cell-value');
-				if ($cellValue.size() === 1) {
-					$cellValue.html(formHtml);
-				} else {
-					$column.html(formHtml);
-				}
-			} else {
-				$unmatchedInputs.append(formHtml);
-			}
-		});
-
-		$formRow.find('.js-tooltip[title]').tooltip();
-
-		return $formRow;
 	}
 
 	$(document).ready(function () {

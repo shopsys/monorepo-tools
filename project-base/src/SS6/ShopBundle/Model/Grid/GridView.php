@@ -48,7 +48,7 @@ class GridView {
 	 * @param \SS6\ShopBundle\Model\Grid\Grid $grid
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 * @param \Symfony\Component\Routing\Router $router
-	 * @param Twig_Environment $twig
+	 * @param \Twig_Environment $twig
 	 */
 	public function __construct(
 		Grid $grid,
@@ -111,22 +111,43 @@ class GridView {
 	/**
 	 * @param \SS6\ShopBundle\Model\Grid\Column $column
 	 * @param array|null $row
+	 * @param array $formHtmls
 	 */
-	public function renderCell(Column $column, array $row = null) {
+	public function renderCell(Column $column, array $row = null, array $formHtmls = []) {
+		if (array_key_exists($column->getId(), $formHtmls)) {
+			$formHtml = $formHtmls[$column->getId()];
+		} else {
+			$formHtml = null;
+		}
+			
 		if ($row !== null) {
 			$value = $this->getCellValue($column, $row);
 		} else {
 			$value = null;
 		}
 
-		$posibleBlocks = array(
-			'grid_value_cell_id_' . $column->getId(),
-			'grid_value_cell_type_' . $this->getVariableType($value),
-			'grid_value_cell'
-		);
+		$blockParameters = [
+			'value' => $value,
+			'row' => $row,
+		];
+
+		if ($formHtml === null) {
+			$posibleBlocks = [
+				'grid_value_cell_id_' . $column->getId(),
+				'grid_value_cell_type_' . $this->getVariableType($value),
+				'grid_value_cell'
+			];
+		} else {
+			$posibleBlocks = [
+				'grid_value_cell_edit_id_' . $column->getId(),
+				'grid_value_cell_edit_type_' . $this->getVariableType($value),
+				'grid_value_cell_edit'
+			];
+			$blockParameters['formHtml'] = $formHtml;
+		}
 		foreach ($posibleBlocks as $blockName) {
 			if ($this->blockExists($blockName)) {
-				$this->renderBlock($blockName, array('value' => $value, 'row' => $row));
+				$this->renderBlock($blockName, $blockParameters);
 				break;
 			}
 		}
