@@ -38,11 +38,16 @@ class ProductController extends Controller {
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
+		$category = $categoryFacade->getById($categoryId);
+
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
-		$paginationResult = $productOnCurrentDomainFacade
-			->getPaginatedProductDetailsInCategory($orderingSetting, $page, self::PRODUCTS_PER_PAGE, $categoryId);
-		$category = $categoryFacade->getById($categoryId);
+		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
+			$orderingSetting,
+			$page,
+			self::PRODUCTS_PER_PAGE,
+			$categoryId
+		);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
 			'productDetails' => $paginationResult->getResults(),

@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -79,12 +79,26 @@ class ProductRepository {
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param int $categoryId
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function filterByCategoryId(QueryBuilder $queryBuilder, $categoryId) {
-		$queryBuilder->join('p.categories', 'pdep', Join::WITH, 'pdep.id = :categoryId');
-		$queryBuilder->setParameter('categoryId', $categoryId);
+	public function getVisibleByDomainIdAndCategoryQueryBuilder(
+		$domainId,
+		Category $category
+	) {
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$this->filterByCategory($queryBuilder, $category);
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 */
+	private function filterByCategory(QueryBuilder $queryBuilder, $category) {
+		$queryBuilder->join('p.categories', 'c', Join::WITH, 'c = :category');
+		$queryBuilder->setParameter('category', $category);
 	}
 
 	/**
@@ -93,7 +107,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
-	 * @param int $categoryId
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
@@ -103,12 +117,11 @@ class ProductRepository {
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
-		$categoryId,
+		Category $category,
 		PricingGroup $pricingGroup
 	) {
-		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 		$this->addTranslation($queryBuilder, $locale);
-		$this->filterByCategoryId($queryBuilder, $categoryId);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
