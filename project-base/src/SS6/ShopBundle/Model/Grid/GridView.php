@@ -126,19 +126,28 @@ class GridView {
 			$value = null;
 		}
 
-		$posibleBlocks = array(
-			'grid_value_cell_id_' . $column->getId(),
-			'grid_value_cell_type_' . $this->getVariableType($value),
-			'grid_value_cell'
-		);
+		$blockParameters = [
+			'value' => $value,
+			'row' => $row,
+		];
+
+		if ($formHtml === null) {
+			$posibleBlocks = [
+				'grid_value_cell_id_' . $column->getId(),
+				'grid_value_cell_type_' . $this->getVariableType($value),
+				'grid_value_cell'
+			];
+		} else {
+			$posibleBlocks = [
+				'grid_value_cell_edit_id_' . $column->getId(),
+				'grid_value_cell_edit_type_' . $this->getVariableType($value),
+				'grid_value_cell_edit'
+			];
+			$blockParameters['formHtml'] = $formHtml;
+		}
 		foreach ($posibleBlocks as $blockName) {
 			if ($this->blockExists($blockName)) {
-				$this->renderBlock($blockName, [
-					'value' => $value,
-					'row' => $row,
-					'formHtml' => $formHtml,
-					'isInlineEdit' => $formHtml !== null,
-				]);
+				$this->renderBlock($blockName, $blockParameters);
 				break;
 			}
 		}

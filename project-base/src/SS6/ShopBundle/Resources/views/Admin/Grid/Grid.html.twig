@@ -51,14 +51,13 @@
 	{{ 'Nebyly nalezeny žádné záznamy.'|trans }}
 {% endblock %}
 
-
 {% block grid_value_cell %}
-	{% if isInlineEdit %}
-		{{ formHtml|raw }}
-	{% else %}
-		{{ value }}
-	{% endif %}
+	{{ value }}
 {% endblock%}
+
+{% block grid_value_cell_edit %}
+	{{ formHtml|raw }}
+{% endblock %}
 
 {% block grid_titles %}
 	<thead>

@@ -16,20 +16,23 @@
 	{% endif %}
 {% endblock %}
 
-{% block grid_value_cell_id_exchangeRate %}
-	{% if isInlineEdit %}
-		{{ formHtml|raw }}
-	{% elseif row is not null %}
-		{% if row.c.id == defaultCurrency.id %}
-			{{ '-' }}
-		{% else %}
-			{{ value }}
-		{% endif %}
-	{% endif %}
-
-	{% if isInlineEdit and row is null %}
+{% block grid_value_cell_edit_id_exchangeRate %}
+	{{ formHtml|raw }}
+	{% if row is null %}
 		{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}
-	{% elseif row is not null and row.c.id != defaultCurrency.id %}
+	{% elseif row.c.id != defaultCurrency.id %}
+		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+			'%defaultCurrency%': defaultCurrency.symbol,
+			'%currentCurrency%': row.c.symbol
+		}) }}
+	{% endif %}
+{% endblock %}
+
+{% block grid_value_cell_id_exchangeRate %}
+	{% if row.c.id == defaultCurrency.id %}
+		{{ '-' }}
+	{% else %}
+		{{ value }}
 		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
 			'%defaultCurrency%': defaultCurrency.symbol,
 			'%currentCurrency%': row.c.symbol
