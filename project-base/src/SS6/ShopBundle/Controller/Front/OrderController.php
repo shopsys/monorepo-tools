@@ -106,8 +106,8 @@ class OrderController extends Controller {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$payment = $orderData->getPayment();
-		$transport = $orderData->getTransport();
+		$payment = $orderData->payment;
+		$transport = $orderData->transport;
 
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', array(
 			'form' => $form->createView(),
