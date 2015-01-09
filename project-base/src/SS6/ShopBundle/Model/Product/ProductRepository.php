@@ -223,7 +223,7 @@ class ProductRepository {
 	 */
 	public function findProductDomainByProductAndDomainId(Product $product, $domainId) {
 		return $this->getProductDomainRepository()->find(array(
-			'product' => $product,
+			'product' => $product->getId(),
 			'domainId' => $domainId,
 		));
 	}

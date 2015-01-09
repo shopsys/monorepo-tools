@@ -35,8 +35,8 @@ class ProductCalculatedPriceRepository {
 	 */
 	public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
 		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
-			'product' => $product,
-			'pricingGroup' => $pricingGroup,
+			'product' => $product->getId(),
+			'pricingGroup' => $pricingGroup->getId(),
 		]);
 
 		if ($productCalculatedPrice === null) {

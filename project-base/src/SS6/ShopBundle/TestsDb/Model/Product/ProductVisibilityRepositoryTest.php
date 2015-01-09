@@ -48,7 +48,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->find(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
 			'product' => $productAgain,
 			'domainId' => 1,
 		));
@@ -76,8 +76,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->find(array(
-			'product' => $productAgain,
+		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+			'product' => $productAgain->getId(),
 			'domainId' => 1,
 		));
 		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
