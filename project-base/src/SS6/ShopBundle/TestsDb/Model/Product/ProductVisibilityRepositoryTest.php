@@ -48,7 +48,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->find(array(
 			'product' => $productAgain,
 			'domainId' => 1,
 		));
@@ -76,7 +76,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->find(array(
 			'product' => $productAgain,
 			'domainId' => 1,
 		));
@@ -211,13 +211,13 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productFromDb = $em->getRepository(Product::class)->find($productId);
 		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->find(array(
 			'product' => $productId,
 			'domainId' => 1,
 		));
 		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
 
-		$productDomain2 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+		$productDomain2 = $em->getRepository(ProductDomain::class)->find(array(
 			'product' => $productId,
 			'domainId' => 2,
 		));

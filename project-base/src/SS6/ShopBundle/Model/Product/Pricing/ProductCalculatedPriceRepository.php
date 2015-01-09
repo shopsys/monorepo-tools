@@ -34,7 +34,7 @@ class ProductCalculatedPriceRepository {
 	 * @param string $priceWithVat
 	 */
 	public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
-		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->findOneBy([
+		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
 			'product' => $product,
 			'pricingGroup' => $pricingGroup,
 		]);
