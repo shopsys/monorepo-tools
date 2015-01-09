@@ -41,10 +41,9 @@ class UserRepository {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function getUserById($id) {
-		$criteria = array('id' => $id);
-		$user = $this->getUserRepository()->findOneBy($criteria);
+		$user = $this->getUserRepository()->find($id);
 		if ($user === null) {
-			throw new Exception\UserNotFoundException($criteria);
+			throw new Exception\UserNotFoundException($id);
 		}
 		return $user;
 	}
