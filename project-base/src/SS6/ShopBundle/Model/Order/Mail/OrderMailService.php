@@ -26,6 +26,8 @@ class OrderMailService {
 	const VARIABLE_NOTE = '{note}';
 	const VARIABLE_PRODUCTS = '{products}';
 	const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
+	const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
+	const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Setting\Setting
@@ -136,6 +138,8 @@ class OrderMailService {
 			self::VARIABLE_NOTE,
 			self::VARIABLE_PRODUCTS,
 			self::VARIABLE_ORDER_DETAIL_URL,
+			self::VARIABLE_TRANSPORT_INSTRUCTIONS,
+			self::VARIABLE_PAYMENT_INSTRUCTIONS,
 		);
 	}
 
