@@ -61,7 +61,7 @@ class FileUpload {
 			throw new \SS6\ShopBundle\Model\FileUpload\Exception\UploadFailedException($file->getErrorMessage(), $file->getError());
 		}
 
-		$temporaryFilename = $this->getCacheFilename($file->getClientOriginalName());
+		$temporaryFilename = $this->getTemporaryFilename($file->getClientOriginalName());
 		$file->move($this->getTemporaryDirectory(), $temporaryFilename);
 
 		return $temporaryFilename;
@@ -73,7 +73,7 @@ class FileUpload {
 	 */
 	public function tryDeleteTemporaryFile($filename) {
 		if (!empty($filename)) {
-			$filepath = $this->getCacheFilepath($filename);
+			$filepath = $this->getTemporaryFilepath($filename);
 			try {
 				$this->filesystem->remove($filepath);
 			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
@@ -87,16 +87,16 @@ class FileUpload {
 	 * @param string $filename
 	 * @return string
 	 */
-	private function getCacheFilename($filename) {
+	private function getTemporaryFilename($filename) {
 		return TransformString::safeFilename(uniqid() . '__' . $filename);
 	}
 
 	/**
-	 * @param string $cacheFilename
+	 * @param string $temporaryFilename
 	 * @return string
 	 */
-	public function getCacheFilepath($cacheFilename) {
-		return $this->getTemporaryDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($cacheFilename);
+	public function getTemporaryFilepath($temporaryFilename) {
+		return $this->getTemporaryDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($temporaryFilename);
 	}
 
 	/**
@@ -168,7 +168,7 @@ class FileUpload {
 		$filesForUpload = $entity->getTemporaryFilesForUpload();
 		foreach ($filesForUpload as $key => $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
-			$sourceFilepath = $this->getCacheFilepath($fileForUpload->getTemporaryFilename());
+			$sourceFilepath = $this->getTemporaryFilepath($fileForUpload->getTemporaryFilename());
 			$originalFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
 				$fileForUpload->getNameConventionType(),
 				$fileForUpload->getTemporaryFilename(),
@@ -184,7 +184,7 @@ class FileUpload {
 			try {
 				$this->filesystem->rename($sourceFilepath, $targetFilename, true);
 			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
-				$message = 'Failed to rename file from cache to entity';
+				$message = 'Failed to rename file from temporary direcotory to entity';
 				throw new \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException($message, $ex);
 			}
 		}

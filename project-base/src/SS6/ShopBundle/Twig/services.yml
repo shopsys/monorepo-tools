@@ -17,6 +17,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.shop.file.file_thumbnail_extension:
+    class: SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.form_detail_extension:
     class: SS6\ShopBundle\Twig\FormDetailExtension
     arguments: [@service_container]

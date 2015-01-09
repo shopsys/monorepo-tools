@@ -107,7 +107,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context) {
 		if ($this->required || count($uploadedFiles) > 0) {
 			foreach ($uploadedFiles as $uploadedFile) {
-				$filepath = $this->fileUpload->getCacheFilepath($uploadedFile);
+				$filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
 				$file = new File($filepath, false);
 				$context->validateValue($file, $this->constraints);
 			}

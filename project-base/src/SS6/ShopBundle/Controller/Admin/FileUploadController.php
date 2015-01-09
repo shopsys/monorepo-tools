@@ -27,11 +27,18 @@ class FileUploadController extends Controller {
 		if ($file instanceof UploadedFile) {
 			$fileUpload = $this->get('ss6.shop.file_upload');
 			/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
+			$fileThumbnailExtension = $this->get('ss6.shop.file.file_thumbnail_extension');
+			/* @var $fileThumbnailExtension \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension */
+
 			try {
 				$temporaryFilename = $fileUpload->upload($file);
+				$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
+				
 				$actionResult = array(
 					'status' => 'success',
 					'filename' => $temporaryFilename,
+					'iconType' => $fileThumbnailInfo->getIconType(),
+					'imageThumbnailUri' => $fileThumbnailInfo->getImageUri(),
 				);
 				$actionResult['status'] = 'success';
 				$actionResult['filename'] = $temporaryFilename;
