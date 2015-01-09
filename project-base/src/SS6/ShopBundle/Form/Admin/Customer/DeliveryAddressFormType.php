@@ -67,7 +67,7 @@ class DeliveryAddressFormType extends AbstractType {
 				$deliveryAddressData = $form->getData();
 				/* @var $deliveryAddressData \SS6\ShopBundle\Model\Customer\DeliveryAddressData */
 
-				if ($deliveryAddressData->getAddressFilled()) {
+				if ($deliveryAddressData->addressFilled) {
 					$validationGroups[] = 'differentDeliveryAddress';
 				}
 

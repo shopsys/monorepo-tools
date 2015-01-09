@@ -110,7 +110,7 @@ class VatFacade {
 	 */
 	public function edit($vatId, VatData $vatData) {
 		$vat = $this->vatRepository->getById($vatId);
-		$this->productEditFacade->recalculateInputPricesForNewVatPercent($vat, $vatData->getPercent());
+		$this->productEditFacade->recalculateInputPricesForNewVatPercent($vat, $vatData->percent);
 		$this->vatService->edit($vat, $vatData);
 		$this->em->flush();
 

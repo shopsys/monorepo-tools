@@ -27,17 +27,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply@netdevelo.cz', 1);
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Jiří');
-		$orderData->setLastName('Ševčík');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420369554147');
-		$orderData->setStreet('První 1');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('71200');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Jiří';
+		$orderData->lastName = 'Ševčík';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420369554147';
+		$orderData->street = 'První 1';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '71200';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -49,17 +49,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_card'));
-		$orderData->setFirstName('Iva');
-		$orderData->setLastName('Jačková');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420367852147');
-		$orderData->setStreet('Druhá 2');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('71300');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_card');
+		$orderData->firstName = 'Iva';
+		$orderData->lastName = 'Jačková';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420367852147';
+		$orderData->street = 'Druhá 2';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '71300';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -73,17 +73,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_cp'));
-		$orderData->setPayment($this->getReference('payment_cod'));
-		$orderData->setFirstName('Jan');
-		$orderData->setLastName('Adamovský');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420725852147');
-		$orderData->setStreet('Třetí 3');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('71200');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_cp');
+		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->firstName = 'Jan';
+		$orderData->lastName = 'Adamovský';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420725852147';
+		$orderData->street = 'Třetí 3';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '71200';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -95,17 +95,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_ppl'));
-		$orderData->setPayment($this->getReference('payment_card'));
-		$orderData->setFirstName('Iveta');
-		$orderData->setLastName('Prvá');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420606952147');
-		$orderData->setStreet('Čtvrtá 4');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('70030');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_ppl');
+		$orderData->payment = $this->getReference('payment_card');
+		$orderData->firstName = 'Iveta';
+		$orderData->lastName = 'Prvá';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420606952147';
+		$orderData->street = 'Čtvrtá 4';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '70030';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -116,17 +116,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Jana');
-		$orderData->setLastName('Janíčková');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420739852148');
-		$orderData->setStreet('Pátá 55');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('71200');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Jana';
+		$orderData->lastName = 'Janíčková';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420739852148';
+		$orderData->street = 'Pátá 55';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '71200';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -139,17 +139,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_ppl'));
-		$orderData->setPayment($this->getReference('payment_card'));
-		$orderData->setFirstName('Dominik');
-		$orderData->setLastName('Hašek');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420721852152');
-		$orderData->setStreet('Šestá 39');
-		$orderData->setCity('Pardubice');
-		$orderData->setPostcode('58941');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_ppl');
+		$orderData->payment = $this->getReference('payment_card');
+		$orderData->firstName = 'Dominik';
+		$orderData->lastName = 'Hašek';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420721852152';
+		$orderData->street = 'Šestá 39';
+		$orderData->city = 'Pardubice';
+		$orderData->postcode = '58941';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -165,17 +165,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Jiří');
-		$orderData->setLastName('Sovák');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420755872155');
-		$orderData->setStreet('Sedmá 1488');
-		$orderData->setCity('Opava');
-		$orderData->setPostcode('85741');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Jiří';
+		$orderData->lastName = 'Sovák';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420755872155';
+		$orderData->street = 'Sedmá 1488';
+		$orderData->city = 'Opava';
+		$orderData->postcode = '85741';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -187,17 +187,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_cp'));
-		$orderData->setPayment($this->getReference('payment_cod'));
-		$orderData->setFirstName('Josef');
-		$orderData->setLastName('Somr');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420369852147');
-		$orderData->setStreet('Osmá 1');
-		$orderData->setCity('Praha');
-		$orderData->setPostcode('30258');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_cp');
+		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->firstName = 'Josef';
+		$orderData->lastName = 'Somr';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420369852147';
+		$orderData->street = 'Osmá 1';
+		$orderData->city = 'Praha';
+		$orderData->postcode = '30258';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -209,17 +209,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_cp'));
-		$orderData->setPayment($this->getReference('payment_cod'));
-		$orderData->setFirstName('Václav');
-		$orderData->setLastName('Svěrkoš');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420725711368');
-		$orderData->setStreet('Devátá 25');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('71200');
-		$orderData->setDomainId(2);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_EUR));
+		$orderData->transport = $this->getReference('transport_cp');
+		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->firstName = 'Václav';
+		$orderData->lastName = 'Svěrkoš';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420725711368';
+		$orderData->street = 'Devátá 25';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '71200';
+		$orderData->domainId = 2;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -229,17 +229,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Ivan');
-		$orderData->setLastName('Horník');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420755496328');
-		$orderData->setStreet('Desátá 10');
-		$orderData->setCity('Plzeň');
-		$orderData->setPostcode('30010');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Ivan';
+		$orderData->lastName = 'Horník';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420755496328';
+		$orderData->street = 'Desátá 10';
+		$orderData->city = 'Plzeň';
+		$orderData->postcode = '30010';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -251,27 +251,27 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Jan');
-		$orderData->setLastName('Novák');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420123456789');
-		$orderData->setStreet('Pouliční 11');
-		$orderData->setCity('Městník');
-		$orderData->setPostcode('12345');
-		$orderData->setCompanyName('netdevelo s.r.o.');
-		$orderData->setCompanyNumber('123456789');
-		$orderData->setCompanyTaxNumber('987654321');
-		$orderData->setDeliveryContactPerson('Karel Vesela');
-		$orderData->setDeliveryCompanyName('Bestcompany');
-		$orderData->setDeliveryTelephone('+420987654321');
-		$orderData->setDeliveryStreet('Zakopaná 42');
-		$orderData->setDeliveryCity('Zemín');
-		$orderData->setDeliveryPostcode('54321');
-		$orderData->setNote('Prosím o dodání do pátku. Děkuji.');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Jan';
+		$orderData->lastName = 'Novák';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420123456789';
+		$orderData->street = 'Pouliční 11';
+		$orderData->city = 'Městník';
+		$orderData->postcode = '12345';
+		$orderData->companyName = 'netdevelo s.r.o.';
+		$orderData->companyNumber = '123456789';
+		$orderData->companyTaxNumber = '987654321';
+		$orderData->deliveryContactPerson = 'Karel Vesela';
+		$orderData->deliveryCompanyName = 'Bestcompany';
+		$orderData->deliveryTelephone = '+420987654321';
+		$orderData->deliveryStreet = 'Zakopaná 42';
+		$orderData->deliveryCity = 'Zemín';
+		$orderData->deliveryPostcode = '54321';
+		$orderData->note = 'Prosím o dodání do pátku. Děkuji.';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -284,17 +284,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_cp'));
-		$orderData->setPayment($this->getReference('payment_cod'));
-		$orderData->setFirstName('Jindřich');
-		$orderData->setLastName('Němec');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420123456789');
-		$orderData->setStreet('Sídlištní 3259');
-		$orderData->setCity('Orlová');
-		$orderData->setPostcode('65421');
-		$orderData->setDomainId(2);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_EUR));
+		$orderData->transport = $this->getReference('transport_cp');
+		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->firstName = 'Jindřich';
+		$orderData->lastName = 'Němec';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420123456789';
+		$orderData->street = 'Sídlištní 3259';
+		$orderData->city = 'Orlová';
+		$orderData->postcode = '65421';
+		$orderData->domainId = 2;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -306,17 +306,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_ppl'));
-		$orderData->setPayment($this->getReference('payment_card'));
-		$orderData->setFirstName('Adam');
-		$orderData->setLastName('Bořič');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420987654321');
-		$orderData->setStreet('Cihelní 5');
-		$orderData->setCity('Liberec');
-		$orderData->setPostcode('65421');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_ppl');
+		$orderData->payment = $this->getReference('payment_card');
+		$orderData->firstName = 'Adam';
+		$orderData->lastName = 'Bořič';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420987654321';
+		$orderData->street = 'Cihelní 5';
+		$orderData->city = 'Liberec';
+		$orderData->postcode = '65421';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -326,17 +326,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Evžen');
-		$orderData->setLastName('Farný');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420456789123');
-		$orderData->setStreet('Gagarinova 333');
-		$orderData->setCity('Hodonín');
-		$orderData->setPostcode('69501');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Evžen';
+		$orderData->lastName = 'Farný';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420456789123';
+		$orderData->street = 'Gagarinova 333';
+		$orderData->city = 'Hodonín';
+		$orderData->postcode = '69501';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -348,17 +348,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Ivana');
-		$orderData->setLastName('Janečková');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420369852147');
-		$orderData->setStreet('Kalužní 88');
-		$orderData->setCity('Lednice');
-		$orderData->setPostcode('69144');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Ivana';
+		$orderData->lastName = 'Janečková';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420369852147';
+		$orderData->street = 'Kalužní 88';
+		$orderData->city = 'Lednice';
+		$orderData->postcode = '69144';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -369,17 +369,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_cp'));
-		$orderData->setPayment($this->getReference('payment_cod'));
-		$orderData->setFirstName('Pavel');
-		$orderData->setLastName('Novák');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420605123654');
-		$orderData->setStreet('Adresní 6');
-		$orderData->setCity('Opava');
-		$orderData->setPostcode('72589');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_cp');
+		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->firstName = 'Pavel';
+		$orderData->lastName = 'Novák';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420605123654';
+		$orderData->street = 'Adresní 6';
+		$orderData->city = 'Opava';
+		$orderData->postcode = '72589';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -390,17 +390,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_ppl'));
-		$orderData->setPayment($this->getReference('payment_card'));
-		$orderData->setFirstName('Pavla');
-		$orderData->setLastName('Adámková');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+4206051836459');
-		$orderData->setStreet('Výpočetni 16');
-		$orderData->setCity('Praha');
-		$orderData->setPostcode('30015');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_ppl');
+		$orderData->payment = $this->getReference('payment_card');
+		$orderData->firstName = 'Pavla';
+		$orderData->lastName = 'Adámková';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+4206051836459';
+		$orderData->street = 'Výpočetni 16';
+		$orderData->city = 'Praha';
+		$orderData->postcode = '30015';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -413,17 +413,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Adam');
-		$orderData->setLastName('Žitný');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+4206051836459');
-		$orderData->setStreet('Přímá 1');
-		$orderData->setCity('Plzeň');
-		$orderData->setPostcode('30010');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Adam';
+		$orderData->lastName = 'Žitný';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+4206051836459';
+		$orderData->street = 'Přímá 1';
+		$orderData->city = 'Plzeň';
+		$orderData->postcode = '30010';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -435,20 +435,20 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_ppl'));
-		$orderData->setPayment($this->getReference('payment_card'));
-		$orderData->setFirstName('Radim');
-		$orderData->setLastName('Svátek');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420733598748');
-		$orderData->setStreet('Křivá 11');
-		$orderData->setCity('Jablonec');
-		$orderData->setPostcode('78952');
-		$orderData->setCompanyName('BestCompanyEver, s.r.o.');
-		$orderData->setCompanyNumber('555555');
-		$orderData->setNote('Doufám, že vše dorazí v pořádku a co nejdříve :)');
-		$orderData->setDomainId(1);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_CZK));
+		$orderData->transport = $this->getReference('transport_ppl');
+		$orderData->payment = $this->getReference('payment_card');
+		$orderData->firstName = 'Radim';
+		$orderData->lastName = 'Svátek';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420733598748';
+		$orderData->street = 'Křivá 11';
+		$orderData->city = 'Jablonec';
+		$orderData->postcode = '78952';
+		$orderData->companyName = 'BestCompanyEver, s.r.o.';
+		$orderData->companyNumber = '555555';
+		$orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
+		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
 			array(
@@ -462,17 +462,17 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->setTransport($this->getReference('transport_personal'));
-		$orderData->setPayment($this->getReference('payment_cash'));
-		$orderData->setFirstName('Viktor');
-		$orderData->setLastName('Pátek');
-		$orderData->setEmail('no-reply@netdevelo.cz');
-		$orderData->setTelephone('+420888777111');
-		$orderData->setStreet('Vyhlídková 88');
-		$orderData->setCity('Ostrava');
-		$orderData->setPostcode('71201');
-		$orderData->setDomainId(2);
-		$orderData->setCurrency($this->getReference(CurrencyDataFixture::CURRENCY_EUR));
+		$orderData->transport = $this->getReference('transport_personal');
+		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->firstName = 'Viktor';
+		$orderData->lastName = 'Pátek';
+		$orderData->email = 'no-reply@netdevelo.cz';
+		$orderData->telephone = '+420888777111';
+		$orderData->street = 'Vyhlídková 88';
+		$orderData->city = 'Ostrava';
+		$orderData->postcode = '71201';
+		$orderData->domainId = 2;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 		$this->createOrder(
 			$orderData,
 			array(

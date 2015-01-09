@@ -7,37 +7,37 @@ class MessageData {
 	/**
 	 * @var string
 	 */
-	private $toEmail;
+	public $toEmail;
 
 	/**
 	 * @var string
 	 */
-	private $body;
+	public $body;
 
 	/**
 	 * @var string
 	 */
-	private $subject;
+	public $subject;
 
 	/**
 	 * @var string
 	 */
-	private $fromEmail;
+	public $fromEmail;
 
 	/**
 	 * @var string
 	 */
-	private $fromName;
+	public $fromName;
 
 	/**
 	 * @var array
 	 */
-	private $variablesReplacementsForSubject;
+	public $variablesReplacementsForSubject;
 
 	/**
 	 * @var array
 	 */
-	private $variablesReplacementsForBody;
+	public $variablesReplacementsForBody;
 
 	/**
 	 * @param string $toEmail
@@ -68,55 +68,6 @@ class MessageData {
 		} else {
 			$this->variablesReplacementsForSubject = $variablesReplacementsForBody;
 		}
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getToEmail() {
-		return $this->toEmail;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getBody() {
-		return $this->body;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSubject() {
-		return $this->subject;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getFromEmail() {
-		return $this->fromEmail;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getFromName() {
-		return $this->fromName;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getVariablesReplacementsForSubject() {
-		return $this->variablesReplacementsForSubject;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getVariablesReplacementsForBody() {
-		return $this->variablesReplacementsForBody;
 	}
 
 }

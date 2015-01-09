@@ -86,7 +86,7 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function register(UserData $userData) {
-		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain($userData->getEmail(), $userData->getDomainId());
+		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain($userData->email, $userData->domainId);
 
 		$billingAddress = new BillingAddress(new BillingAddressData());
 
@@ -111,21 +111,21 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function create(CustomerData $customerData) {
-		$billingAddress = new BillingAddress($customerData->getBillingAddressData());
+		$billingAddress = new BillingAddress($customerData->billingAddressData);
 		$this->em->persist($billingAddress);
 
-		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->getDeliveryAddressData());
+		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->deliveryAddressData);
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 		}
 
 		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
-			$customerData->getUserData()->getEmail(),
-			$customerData->getUserData()->getDomainId()
+			$customerData->userData->email,
+			$customerData->userData->domainId
 		);
 
 		$user = $this->registrationService->create(
-			$customerData->getUserData(),
+			$customerData->userData,
 			$billingAddress,
 			$deliveryAddress,
 			$userByEmailAndDomain
@@ -134,7 +134,7 @@ class CustomerEditFacade {
 
 		$this->em->flush();
 
-		if ($customerData->getSendRegistrationMail()) {
+		if ($customerData->sendRegistrationMail) {
 			$this->customerMailFacade->sendRegistrationMail($user);
 		}
 
@@ -149,14 +149,14 @@ class CustomerEditFacade {
 	private function edit($userId, CustomerData $customerData) {
 		$user = $this->userRepository->getUserById($userId);
 
-		$this->registrationService->edit($user, $customerData->getUserData());
+		$this->registrationService->edit($user, $customerData->userData);
 
-		$user->getBillingAddress()->edit($customerData->getBillingAddressData());
+		$user->getBillingAddress()->edit($customerData->billingAddressData);
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
 		$deliveryAddress = $this->registrationService->editDeliveryAddress(
 			$user,
-			$customerData->getDeliveryAddressData(),
+			$customerData->deliveryAddressData,
 			$oldDeliveryAddress
 		);
 
@@ -179,10 +179,10 @@ class CustomerEditFacade {
 		$user = $this->edit($userId, $customerData);
 
 		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
-			$customerData->getUserData()->getEmail(),
-			$customerData->getUserData()->getDomainId()
+			$customerData->userData->email,
+			$customerData->userData->domainId
 		);
-		$this->registrationService->changeEmail($user, $customerData->getUserData()->getEmail(), $userByEmailAndDomain);
+		$this->registrationService->changeEmail($user, $customerData->userData->email, $userByEmailAndDomain);
 
 		$this->em->flush();
 

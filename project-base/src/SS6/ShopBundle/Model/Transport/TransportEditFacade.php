@@ -69,8 +69,8 @@ class TransportEditFacade {
 		$this->em->persist($transport);
 		$this->em->beginTransaction();
 		$this->em->flush();
-		$this->createTransportDomains($transport, $transportData->getDomains());
-		$this->imageFacade->uploadImage($transport, $transportData->getImage(), null);
+		$this->createTransportDomains($transport, $transportData->domains);
+		$this->imageFacade->uploadImage($transport, $transportData->image, null);
 		$this->em->flush();
 		$this->em->commit();
 
@@ -86,8 +86,8 @@ class TransportEditFacade {
 
 		$this->em->beginTransaction();
 		$this->deleteTransportDomainsByTransport($transport);
-		$this->createTransportDomains($transport, $transportData->getDomains());
-		$this->imageFacade->uploadImage($transport, $transportData->getImage(), null);
+		$this->createTransportDomains($transport, $transportData->domains);
+		$this->imageFacade->uploadImage($transport, $transportData->image, null);
 		$this->em->flush();
 		$this->em->commit();
 	}

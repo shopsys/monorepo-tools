@@ -73,7 +73,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	private function persistParemeters(ObjectManager $manager, array $productParameterValuesData) {
 		foreach ($productParameterValuesData as $productParameterValueData) {
-			$manager->persist($productParameterValueData->getParameter());
+			$manager->persist($productParameterValueData->parameter);
 		}
 
 		// Doctrine doesn't know how to resolve persisting order and fill autoincrement IDs

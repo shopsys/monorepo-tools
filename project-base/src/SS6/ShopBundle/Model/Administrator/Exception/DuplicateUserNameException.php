@@ -9,15 +9,15 @@ class DuplicateUserNameException extends Exception implements AdministratorExcep
 	/**
 	 * @var string
 	 */
-	private $userName;
+	private $username;
 
 	/**
-	 * @param string $userName
+	 * @param string $username
 	 * @param Exception $previous
 	 */
-	public function __construct($userName, $previous = null) {
-		$this->userName = $userName;
+	public function __construct($username, $previous = null) {
+		$this->username = $username;
 
-		parent::__construct('Administrator with user name ' . $this->userName . ' already exists.', 0, $previous);
+		parent::__construct('Administrator with user name ' . $this->username . ' already exists.', 0, $previous);
 	}
 }

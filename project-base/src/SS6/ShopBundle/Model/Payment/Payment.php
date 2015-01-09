@@ -82,10 +82,10 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 */
 	public function __construct(PaymentData $paymentData) {
 		$this->translations = new ArrayCollection();
-		$this->price = $paymentData->getPrice();
-		$this->vat = $paymentData->getVat();
+		$this->price = $paymentData->price;
+		$this->vat = $paymentData->vat;
 		$this->transports = new ArrayCollection();
-		$this->hidden = $paymentData->isHidden();
+		$this->hidden = $paymentData->hidden;
 		$this->deleted = false;
 		$this->setTranslations($paymentData);
 	}
@@ -121,10 +121,10 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	private function setTranslations(PaymentData $paymentData) {
-		foreach ($paymentData->getName() as $locale => $name) {
+		foreach ($paymentData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
-		foreach ($paymentData->getDescription() as $locale => $description) {
+		foreach ($paymentData->description as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
 	}
@@ -133,9 +133,9 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function edit(PaymentData $paymentData) {
-		$this->price = $paymentData->getPrice();
-		$this->vat = $paymentData->getVat();
-		$this->hidden = $paymentData->isHidden();
+		$this->price = $paymentData->price;
+		$this->vat = $paymentData->vat;
+		$this->hidden = $paymentData->hidden;
 		$this->setTranslations($paymentData);
 	}
 

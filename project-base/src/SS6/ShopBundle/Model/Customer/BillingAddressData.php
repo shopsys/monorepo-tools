@@ -7,42 +7,42 @@ class BillingAddressData {
 	/**
 	 * @var string|null
 	 */
-	private $telephone;
+	public $telephone;
 
 	/**
 	 * @var boolean
 	 */
-	private $companyCustomer;
+	public $companyCustomer;
 
 	/**
 	 * @var string|null
 	 */
-	private $companyName;
+	public $companyName;
 
 	/**
 	 * @var string|null
 	 */
-	private $companyNumber;
+	public $companyNumber;
 
 	/**
 	 * @var string|null
 	 */
-	private $companyTaxNumber;
+	public $companyTaxNumber;
 
 	/**
 	 * @var string|null
 	 */
-	private $street;
+	public $street;
 
 	/**
 	 * @var string|null
 	 */
-	private $city;
+	public $city;
 
 	/**
 	 * @var string|null
 	 */
-	private $postcode;
+	public $postcode;
 
 	/**
 	 * @param string|null $street
@@ -72,118 +72,6 @@ class BillingAddressData {
 		$this->companyNumber = $companyNumber;
 		$this->companyTaxNumber = $companyTaxNumber;
 		$this->telephone = $telephone;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getTelephone() {
-		return $this->telephone;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getCompanyCustomer() {
-		return $this->companyCustomer;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCompanyName() {
-		return $this->companyName;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCompanyNumber() {
-		return $this->companyNumber;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCompanyTaxNumber() {
-		return $this->companyTaxNumber;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getStreet() {
-		return $this->street;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCity() {
-		return $this->city;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getPostcode() {
-		return $this->postcode;
-	}
-
-	/**
-	 * @param string|null $telephone
-	 */
-	public function setTelephone($telephone) {
-		$this->telephone = $telephone;
-	}
-
-	/**
-	 * @param bool $companyCustomer
-	 */
-	public function setCompanyCustomer($companyCustomer) {
-		$this->companyCustomer = $companyCustomer;
-	}
-
-	/**
-	 * @param string|null $companyName
-	 */
-	public function setCompanyName($companyName) {
-		$this->companyName = $companyName;
-	}
-
-	/**
-	 * @param string|null $companyNumber
-	 */
-	public function setCompanyNumber($companyNumber) {
-		$this->companyNumber = $companyNumber;
-	}
-
-	/**
-	 * @param string|null $companyTaxNumber
-	 */
-	public function setCompanyTaxNumber($companyTaxNumber) {
-		$this->companyTaxNumber = $companyTaxNumber;
-	}
-
-	/**
-	 * @param string|null $street
-	 */
-	public function setStreet($street) {
-		$this->street = $street;
-	}
-
-	/**
-	 * @param string|null $city
-	 */
-	public function setCity($city) {
-		$this->city = $city;
-	}
-
-	/**
-	 * @param string|null $postcode
-	 */
-	public function setPostcode($postcode) {
-		$this->postcode = $postcode;
 	}
 
 	/**

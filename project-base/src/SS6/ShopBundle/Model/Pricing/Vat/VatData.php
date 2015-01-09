@@ -9,12 +9,12 @@ class VatData {
 	/**
 	 * @var string|null
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @var string|null
 	 */
-	private $percent;
+	public $percent;
 
 	/**
 	 * @param string|null $name
@@ -22,34 +22,6 @@ class VatData {
 	 */
 	public function __construct($name = null, $percent = null) {
 		$this->name = $name;
-		$this->percent = $percent;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getPercent() {
-		return $this->percent;
-	}
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * @param string $percent
-	 */
-	public function setPercent($percent) {
 		$this->percent = $percent;
 	}
 

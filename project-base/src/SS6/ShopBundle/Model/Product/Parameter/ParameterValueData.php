@@ -7,26 +7,12 @@ class ParameterValueData {
 	/**
 	 * @var string|null
 	 */
-	private $text;
+	public $text;
 
 	/**
 	 * @param string|null $text
 	 */
 	public function __construct($text = null) {
-		$this->text = $text;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getText() {
-		return $this->text;
-	}
-
-	/**
-	 * @param string $text
-	 */
-	public function setText($text) {
 		$this->text = $text;
 	}
 

@@ -28,7 +28,7 @@ class CurrencyService {
 		if ($isDefaultCurrency) {
 			$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
 		} else {
-			$currency->setExchangeRate($currencyData->getExchangeRate());
+			$currency->setExchangeRate($currencyData->exchangeRate);
 		}
 
 		return $currency;

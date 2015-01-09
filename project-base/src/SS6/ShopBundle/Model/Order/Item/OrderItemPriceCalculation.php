@@ -27,10 +27,10 @@ class OrderItemPriceCalculation {
 	 * @return string
 	 */
 	public function calculatePriceWithoutVat(OrderItemData $orderItemData) {
-		$vat = new Vat(new VatData('orderItemVat', $orderItemData->getVatPercent()));
-		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->getPriceWithVat(), $vat);
-		
-		return $orderItemData->getPriceWithVat() - $vatAmount;
+		$vat = new Vat(new VatData('orderItemVat', $orderItemData->vatPercent));
+		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->priceWithVat, $vat);
+
+		return $orderItemData->priceWithVat - $vatAmount;
 	}
 
 	/**

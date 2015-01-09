@@ -53,10 +53,10 @@ class Currency {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 */
 	public function __construct(CurrencyData $currencyData) {
-		$this->name = $currencyData->getName();
-		$this->code = $currencyData->getCode();
-		$this->symbol = $currencyData->getSymbol();
-		$this->exchangeRate = $currencyData->getExchangeRate();
+		$this->name = $currencyData->name;
+		$this->code = $currencyData->code;
+		$this->symbol = $currencyData->symbol;
+		$this->exchangeRate = $currencyData->exchangeRate;
 	}
 
 	/**
@@ -105,9 +105,9 @@ class Currency {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 */
 	public function edit(CurrencyData $currencyData) {
-		$this->name = $currencyData->getName();
-		$this->code = $currencyData->getCode();
-		$this->symbol = $currencyData->getSymbol();
+		$this->name = $currencyData->name;
+		$this->code = $currencyData->code;
+		$this->symbol = $currencyData->symbol;
 	}
 
 }

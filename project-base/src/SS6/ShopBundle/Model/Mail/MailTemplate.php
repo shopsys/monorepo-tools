@@ -74,9 +74,9 @@ class MailTemplate {
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
 	public function edit(MailTemplateData $mailTemplateData) {
-		$this->subject = $mailTemplateData->getSubject();
-		$this->body = $mailTemplateData->getBody();
-		$this->sendMail = $mailTemplateData->isSendMail();
+		$this->subject = $mailTemplateData->subject;
+		$this->body = $mailTemplateData->body;
+		$this->sendMail = $mailTemplateData->sendMail;
 	}
 
 	/**

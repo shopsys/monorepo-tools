@@ -27,10 +27,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
 		$productEditData = new ProductEditData();
-		$productEditData->productData->setName(['cs' => 'productName']);
-		$productEditData->productData->setVat($vat);
-		$productEditData->productData->setPrice(1);
-		$productEditData->productData->setHiddenOnDomains(array(2));
+		$productEditData->productData->name = ['cs' => 'productName'];
+		$productEditData->productData->vat = $vat;
+		$productEditData->productData->price = 1;
+		$productEditData->productData->hiddenOnDomains = array(2);
 		$product = $productEditFacade->create($productEditData);
 		$em->flush();
 		$productId = $product->getId();
@@ -72,10 +72,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productEditData = new ProductEditData();
-		$productEditData->productData->setName(['cs' => 'productName']);
-		$productEditData->productData->setVat($vat);
-		$productEditData->productData->setPrice(1);
-		$productEditData->productData->setHiddenOnDomains(array(2));
+		$productEditData->productData->name = ['cs' => 'productName'];
+		$productEditData->productData->vat = $vat;
+		$productEditData->productData->price = 1;
+		$productEditData->productData->hiddenOnDomains = array(2);
 		$product1 = $productEditFacade->create($productEditData);
 		$product2 = $productEditFacade->create($productEditData);
 		$em->flush();
@@ -128,10 +128,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productEditData = new ProductEditData();
-		$productEditData->productData->setName(['cs' => 'productName']);
-		$productEditData->productData->setVat($vat);
-		$productEditData->productData->setPrice(1);
-		$productEditData->productData->setHiddenOnDomains(array(2));
+		$productEditData->productData->name = ['cs' => 'productName'];
+		$productEditData->productData->vat = $vat;
+		$productEditData->productData->price = 1;
+		$productEditData->productData->hiddenOnDomains = array(2);
 		$product = $productEditFacade->create($productEditData);
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
@@ -159,10 +159,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productEditData = new ProductEditData();
-		$productEditData->productData->setName(['cs' => 'productName']);
-		$productEditData->productData->setVat($vat);
-		$productEditData->productData->setPrice(1);
-		$productEditData->productData->setHiddenOnDomains(array(2));
+		$productEditData->productData->name = ['cs' => 'productName'];
+		$productEditData->productData->vat = $vat;
+		$productEditData->productData->price = 1;
+		$productEditData->productData->hiddenOnDomains = array(2);
 		$product1 = $productEditFacade->create($productEditData);
 		$product2 = $productEditFacade->create($productEditData);
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');

@@ -22,13 +22,13 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 		$billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
 		$userData = new UserData();
-		$userData->setPricingGroup($pricingGroup);
+		$userData->pricingGroup = $pricingGroup;
 		$user = new User($userData, $billingAddress, null);
 		$expectedProductPrice = new Price(1, 1, 1);
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
 		$pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, [], [], '', false);
-		
+
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
 		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($expectedProductPrice);
 

@@ -15,8 +15,8 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
 
 		$orderItemData = new OrderItemData();
-		$orderItemData->setPriceWithVat(1000);
-		$orderItemData->setVatPercent(10);
+		$orderItemData->priceWithVat = 1000;
+		$orderItemData->vatPercent = 10;
 
 		$orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock);
 		$priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);

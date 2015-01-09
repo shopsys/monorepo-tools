@@ -104,7 +104,7 @@ class ProductEditFacade {
 		$this->em->beginTransaction();
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
-		$this->refreshProductDomains($product, $productEditData->productData->getHiddenOnDomains());
+		$this->refreshProductDomains($product, $productEditData->productData->hiddenOnDomains);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->em->commit();
@@ -127,7 +127,7 @@ class ProductEditFacade {
 
 		$this->em->beginTransaction();
 		$this->saveParameters($product, $productEditData->parameters);
-		$this->refreshProductDomains($product, $productEditData->productData->getHiddenOnDomains());
+		$this->refreshProductDomains($product, $productEditData->productData->hiddenOnDomains);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
@@ -163,12 +163,12 @@ class ProductEditFacade {
 		$this->em->flush();
 
 		foreach ($productParameterValuesData as $productParameterValueData) {
-			$productParameterValueData->setProduct($product);
+			$productParameterValueData->product = $product;
 			$productParameterValue = new ProductParameterValue(
-				$productParameterValueData->getProduct(),
-				$productParameterValueData->getParameter(),
-				$productParameterValueData->getLocale(),
-				$this->parameterRepository->findOrCreateParameterValueByValueText($productParameterValueData->getValueText())
+				$productParameterValueData->product,
+				$productParameterValueData->parameter,
+				$productParameterValueData->locale,
+				$this->parameterRepository->findOrCreateParameterValueByValueText($productParameterValueData->valueText)
 			);
 			$this->em->persist($productParameterValue);
 		}

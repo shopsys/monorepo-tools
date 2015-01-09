@@ -28,8 +28,8 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$customerEditService = new CustomerEditService();
 
 		$userData = new UserData();
-		$userData->setFirstName('firstName');
-		$userData->setLastName('lastName');
+		$userData->firstName = 'firstName';
+		$userData->lastName = 'lastName';
 		$billingAddressData = new BillingAddressData(
 			'street',
 			'city',
@@ -58,15 +58,15 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$payment = new Payment(new PaymentData(array('cs' => 'paymentName'), '0'));
 		$orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
 		$orderData = new OrderData();
-		$orderData->setTransport($transport);
-		$orderData->setPayment($payment);
-		$orderData->setFirstName('orderFirstName');
-		$orderData->setLastName('orderLastName');
-		$orderData->setEmail('order@email.com');
-		$orderData->setTelephone('orderTelephone');
-		$orderData->setStreet('orderStreet');
-		$orderData->setCity('orderCity');
-		$orderData->setPostcode('orderPostcode');
+		$orderData->transport = $transport;
+		$orderData->payment = $payment;
+		$orderData->firstName = 'orderFirstName';
+		$orderData->lastName = 'orderLastName';
+		$orderData->email = 'order@email.com';
+		$orderData->telephone = 'orderTelephone';
+		$orderData->street = 'orderStreet';
+		$orderData->city = 'orderCity';
+		$orderData->postcode = 'orderPostcode';
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -89,9 +89,9 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 
 		$customerData = $customerEditService->getAmendedCustomerDataByOrder($user, $order);
 
-		$this->assertEquals($userData, $customerData->getUserData());
-		$this->assertEquals($billingAddressData, $customerData->getBillingAddressData());
-		$this->assertEquals($deliveryAddressData, $customerData->getDeliveryAddressData());
+		$this->assertEquals($userData, $customerData->userData);
+		$this->assertEquals($billingAddressData, $customerData->billingAddressData);
+		$this->assertEquals($deliveryAddressData, $customerData->deliveryAddressData);
 	}
 
 	/**
@@ -101,8 +101,8 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$customerEditService = new CustomerEditService();
 
 		$userData = new UserData();
-		$userData->setFirstName('firstName');
-		$userData->setLastName('lastName');
+		$userData->firstName = 'firstName';
+		$userData->lastName = 'lastName';
 		$billingAddressData = new BillingAddressData();
 
 		$billingAddress = new BillingAddress($billingAddressData);
@@ -112,15 +112,15 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$payment = new Payment(new PaymentData(array('cs' => 'paymentName'), '0'));
 		$orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
 		$orderData = new OrderData();
-		$orderData->setTransport($transport);
-		$orderData->setPayment($payment);
-		$orderData->setFirstName('orderFirstName');
-		$orderData->setLastName('orderLastName');
-		$orderData->setEmail('order@email.com');
-		$orderData->setTelephone('orderTelephone');
-		$orderData->setStreet('orderStreet');
-		$orderData->setCity('orderCity');
-		$orderData->setPostcode('orderPostcode');
+		$orderData->transport = $transport;
+		$orderData->payment = $payment;
+		$orderData->firstName = 'orderFirstName';
+		$orderData->lastName = 'orderLastName';
+		$orderData->email = 'order@email.com';
+		$orderData->telephone = 'orderTelephone';
+		$orderData->street = 'orderStreet';
+		$orderData->city = 'orderCity';
+		$orderData->postcode = 'orderPostcode';
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -153,16 +153,16 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 
 		$customerData = $customerEditService->getAmendedCustomerDataByOrder($user, $order);
 
-		$this->assertEquals($userData, $customerData->getUserData());
-		$this->assertEquals($deliveryAddressData, $customerData->getDeliveryAddressData());
-		$this->assertTrue($customerData->getBillingAddressData()->getCompanyCustomer());
-		$this->assertEquals($order->getCompanyName(), $customerData->getBillingAddressData()->getCompanyName());
-		$this->assertEquals($order->getCompanyNumber(), $customerData->getBillingAddressData()->getCompanyNumber());
-		$this->assertEquals($order->getCompanyTaxNumber(), $customerData->getBillingAddressData()->getCompanyTaxNumber());
-		$this->assertEquals($order->getStreet(), $customerData->getBillingAddressData()->getStreet());
-		$this->assertEquals($order->getCity(), $customerData->getBillingAddressData()->getCity());
-		$this->assertEquals($order->getPostcode(), $customerData->getBillingAddressData()->getPostcode());
-		$this->assertEquals($order->getTelephone(), $customerData->getBillingAddressData()->getTelephone());
+		$this->assertEquals($userData, $customerData->userData);
+		$this->assertEquals($deliveryAddressData, $customerData->deliveryAddressData);
+		$this->assertTrue($customerData->billingAddressData->companyCustomer);
+		$this->assertEquals($order->getCompanyName(), $customerData->billingAddressData->companyName);
+		$this->assertEquals($order->getCompanyNumber(), $customerData->billingAddressData->companyNumber);
+		$this->assertEquals($order->getCompanyTaxNumber(), $customerData->billingAddressData->companyTaxNumber);
+		$this->assertEquals($order->getStreet(), $customerData->billingAddressData->street);
+		$this->assertEquals($order->getCity(), $customerData->billingAddressData->city);
+		$this->assertEquals($order->getPostcode(), $customerData->billingAddressData->postcode);
+		$this->assertEquals($order->getTelephone(), $customerData->billingAddressData->telephone);
 	}
 
 }

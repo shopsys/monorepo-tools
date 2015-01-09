@@ -48,7 +48,7 @@ class TopProduct {
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
 	 */
 	public function __construct($domainId, TopProductData $topProductData) {
-		$this->product = $topProductData->getProduct();
+		$this->product = $topProductData->product;
 		$this->domainId = $domainId;
 	}
 
@@ -77,7 +77,7 @@ class TopProduct {
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
 	 */
 	public function edit(TopProductData $topProductData) {
-		$this->product = $topProductData->getProduct();
+		$this->product = $topProductData->product;
 	}
 
 }

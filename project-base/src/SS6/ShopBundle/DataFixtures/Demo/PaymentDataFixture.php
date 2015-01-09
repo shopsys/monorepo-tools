@@ -15,37 +15,37 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	public function load(ObjectManager $manager) {
 		$paymentData = new PaymentData();
-		$paymentData->setName(array(
+		$paymentData->name = [
 			'cs' => 'Kreditní kartou',
 			'en' => 'Credit card',
-		));
-		$paymentData->setPrice(99.95);
-		$paymentData->setDescription(array(
+		];
+		$paymentData->price = 99.95;
+		$paymentData->description = [
 			'cs' => 'Rychle, levně a spolehlivě!',
 			'en' => 'Quick, cheap and reliable!',
-		));
-		$paymentData->setVat($this->getReference(VatDataFixture::VAT_ZERO));
-		$paymentData->setDomains(array(1, 2));
-		$paymentData->setHidden(false);
-		$this->createPayment('payment_card', $paymentData, array('transport_personal', 'transport_ppl'));
+		];
+		$paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
+		$paymentData->domains = [1, 2];
+		$paymentData->hidden = false;
+		$this->createPayment('payment_card', $paymentData, ['transport_personal', 'transport_ppl']);
 
-		$paymentData->setName(array(
+		$paymentData->name = [
 			'cs' => 'Dobírka',
 			'en' => 'Personal collection',
-		));
-		$paymentData->setPrice(49.90);
-		$paymentData->setDescription(array());
-		$paymentData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
-		$this->createPayment('payment_cod', $paymentData, array('transport_cp'));
+		];
+		$paymentData->price = 49.90;
+		$paymentData->description = [];
+		$paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+		$this->createPayment('payment_cod', $paymentData, ['transport_cp']);
 
-		$paymentData->setName(array(
+		$paymentData->name = [
 			'cs' => 'Hotově',
 			'en' => 'Cash',
-		));
-		$paymentData->setPrice(0);
-		$paymentData->setDescription(array());
-		$paymentData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
-		$this->createPayment('payment_cash', $paymentData, array('transport_personal'));
+		];
+		$paymentData->price = 0;
+		$paymentData->description = [];
+		$paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+		$this->createPayment('payment_cash', $paymentData, ['transport_personal']);
 
 		$manager->flush();
 	}

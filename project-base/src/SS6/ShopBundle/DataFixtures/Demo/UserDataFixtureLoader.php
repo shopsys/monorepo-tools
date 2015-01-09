@@ -66,35 +66,35 @@ class UserDataFixtureLoader {
 		$userData = $this->userDataFactory->createDefault($domainId);
 		$billingAddressData = new BillingAddressData();
 
-		$userData->setFirstName($row[0]);
-		$userData->setLastName($row[1]);
-		$userData->setEmail($row[2]);
-		$userData->setPassword($row[3]);
+		$userData->firstName = $row[0];
+		$userData->lastName = $row[1];
+		$userData->email = $row[2];
+		$userData->password = $row[3];
 
-		$billingAddressData->setCompanyCustomer($row[4]);
-		$billingAddressData->setCompanyName($row[5]);
-		$billingAddressData->setCompanyNumber($row[6]);
-		$billingAddressData->setCompanyTaxNumber($row[7]);
-		$billingAddressData->setStreet($row[8]);
-		$billingAddressData->setCity($row[9]);
-		$billingAddressData->setPostcode($row[10]);
-		$billingAddressData->setTelephone($row[11]);
-		$customerData->setDeliveryAddress(null);
+		$billingAddressData->companyCustomer = $row[4];
+		$billingAddressData->companyName = $row[5];
+		$billingAddressData->companyNumber = $row[6];
+		$billingAddressData->companyTaxNumber = $row[7];
+		$billingAddressData->street = $row[8];
+		$billingAddressData->city = $row[9];
+		$billingAddressData->postcode = $row[10];
+		$billingAddressData->telephone = $row[11];
+		$customerData->deliveryAddress = null;
 		if ($row[12] === 'true') {
 			$deliveryAddressData = new DeliveryAddressData();
-			$deliveryAddressData->setAddressFilled(true);
-			$deliveryAddressData->setCity($row[13]);
-			$deliveryAddressData->setCompanyName($row[14]);
-			$deliveryAddressData->setContactPerson($row[15]);
-			$deliveryAddressData->setPostcode($row[16]);
-			$deliveryAddressData->setStreet($row[17]);
-			$deliveryAddressData->setTelephone($row[18]);
-			$customerData->setDeliveryAddress($deliveryAddressData);
+			$deliveryAddressData->addressFilled = true;
+			$deliveryAddressData->city = $row[13];
+			$deliveryAddressData->companyName = $row[14];
+			$deliveryAddressData->contactPerson = $row[15];
+			$deliveryAddressData->postcode = $row[16];
+			$deliveryAddressData->street = $row[17];
+			$deliveryAddressData->telephone = $row[18];
+			$customerData->deliveryAddress = $deliveryAddressData;
 		}
-		$userData->setDomainId($domainId);
+		$userData->domainId = $domainId;
 
-		$customerData->setUserData($userData);
-		$customerData->setBillingAddress($billingAddressData);
+		$customerData->userData = $userData;
+		$customerData->billingAddress = $billingAddressData;
 
 		return $customerData;
 	}

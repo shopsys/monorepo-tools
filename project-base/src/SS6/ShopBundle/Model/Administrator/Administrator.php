@@ -77,9 +77,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function __construct(AdministratorData $administratorData) {
-		$this->email = $administratorData->getEmail();
-		$this->realName = $administratorData->getRealName();
-		$this->username = $administratorData->getUsername();
+		$this->email = $administratorData->email;
+		$this->realName = $administratorData->realName;
+		$this->username = $administratorData->username;
 		$this->lastActivity = new DateTime();
 		$this->gridLimits = new ArrayCollection();
 		$this->loginToken = '';
@@ -89,9 +89,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function edit(AdministratorData $administratorData) {
-		$this->email = $administratorData->getEmail();
-		$this->realName = $administratorData->getRealName();
-		$this->username = $administratorData->getUsername();
+		$this->email = $administratorData->email;
+		$this->realName = $administratorData->realName;
+		$this->username = $administratorData->username;
 	}
 
 	/**

@@ -49,7 +49,7 @@ class OrderStatusMailTemplateService {
 			if ($mailTemplate !== null) {
 				$orderStatusMailTemplateData->setFromEntity($mailTemplate);
 			}
-			$orderStatusMailTemplateData->setName($this->orderMailService->getMailTemplateNameByStatus($orderStatus));
+			$orderStatusMailTemplateData->name = $this->orderMailService->getMailTemplateNameByStatus($orderStatus);
 
 			$orderStatusMailTemplatesData[$orderStatus->getId()] = $orderStatusMailTemplateData;
 		}

@@ -76,8 +76,8 @@ class TransportAndPaymentFormType extends AbstractType {
 	 * @param \Symfony\Component\Validator\ExecutionContextInterface $context
 	 */
 	public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context) {
-		$payment = $orderData->getPayment();
-		$transport = $orderData->getTransport();
+		$payment = $orderData->payment;
+		$transport = $orderData->transport;
 
 		$relationExists = false;
 		if ($payment instanceof Payment && $transport instanceof Transport) {

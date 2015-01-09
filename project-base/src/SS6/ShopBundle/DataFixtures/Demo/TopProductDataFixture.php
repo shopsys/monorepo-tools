@@ -40,7 +40,7 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
 	 */
 	private function createTopProduct(ObjectManager $manager, Product $product, $domainId) {
 		$topProductData = new TopProductData();
-		$topProductData->setProduct($product);
+		$topProductData->product = $product;
 
 		$topProduct = new TopProduct($domainId, $topProductData);
 

@@ -15,41 +15,41 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 */
 	public function load(ObjectManager $manager) {
 		$transportData = new TransportData();
-		$transportData->setName(array(
+		$transportData->name = array(
 			'cs' => 'Česká pošta - balík do ruky',
 			'en' => 'Czech post',
-		));
-		$transportData->setPrice(99.95);
-		$transportData->setDescription(array(
+		);
+		$transportData->price = 99.95;
+		$transportData->description = array(
 			'cs' => 'Pouze na vlastní nebezpečí',
 			'en' => 'Only if you are crazy',
-		));
-		$transportData->setVat($this->getReference(VatDataFixture::VAT_HIGH));
-		$transportData->setDomains(array(1, 2));
-		$transportData->setHidden(false);
+		);
+		$transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+		$transportData->domains = array(1, 2);
+		$transportData->hidden = false;
 		$this->createTransport('transport_cp', $transportData);
 
-		$transportData->setName(array(
+		$transportData->name = array(
 			'cs' => 'PPL',
 			'en' => 'PPL',
-		));
-		$transportData->setPrice(199.95);
-		$transportData->setDescription(array(
+		);
+		$transportData->price = 199.95;
+		$transportData->description = array(
 			'cs' => null,
 			'en' => null,
-		));
+		);
 		$this->createTransport('transport_ppl', $transportData);
 
-		$transportData->setName(array(
+		$transportData->name = array(
 			'cs' => 'Osobní převzetí',
 			'en' => 'Personal takeover',
-		));
-		$transportData->setPrice(0);
-		$transportData->setDescription(array(
+		);
+		$transportData->price = 0;
+		$transportData->description = array(
 			'cs' => 'Uvítá Vás milý personál!',
 			'en' => 'You will be welcomed friendly staff!',
-		));
-		$transportData->setVat($this->getReference(VatDataFixture::VAT_ZERO));
+		);
+		$transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
 		$this->createTransport('transport_personal', $transportData);
 	}
 

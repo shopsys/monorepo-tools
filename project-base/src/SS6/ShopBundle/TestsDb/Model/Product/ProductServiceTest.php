@@ -24,8 +24,8 @@ class ProductServiceTest extends DatabaseTestCase {
 		$vat = new Vat($vatData);
 
 		$productData = new ProductData();
-		$productData->setPrice(1000);
-		$productData->setVat($vat);
+		$productData->price = 1000;
+		$productData->vat = $vat;
 		$product = new Product($productData);
 
 		$productService->recalculateInputPriceForNewVatPercent($product, 15);
@@ -45,8 +45,8 @@ class ProductServiceTest extends DatabaseTestCase {
 		$vat = new Vat($vatData);
 
 		$productData = new ProductData();
-		$productData->setPrice(1000);
-		$productData->setVat($vat);
+		$productData->price = 1000;
+		$productData->vat = $vat;
 		$product = new Product($productData);
 
 		$productService->recalculateInputPriceForNewVatPercent($product, 15);

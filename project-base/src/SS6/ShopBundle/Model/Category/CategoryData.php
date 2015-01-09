@@ -13,12 +13,12 @@ class CategoryData {
 	/**
 	 * @var string[]
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category|null
 	 */
-	private $parent;
+	public $parent;
 
 	/**
 	 * @param string[] $name
@@ -26,34 +26,6 @@ class CategoryData {
 	 */
 	public function __construct(array $name = [], Category $parent = null) {
 		$this->name = $name;
-		$this->parent = $parent;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @param string[] $name
-	 */
-	public function setName(array $name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category
-	 */
-	public function getParent() {
-		return $this->parent;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category\null $parent
-	 */
-	public function setParent(Category $parent = null) {
 		$this->parent = $parent;
 	}
 
@@ -66,8 +38,8 @@ class CategoryData {
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
-		$this->setName($names);
-		$this->setParent($category->getParent());
+		$this->name = $names;
+		$this->parent = $category->getParent();
 	}
 
 }

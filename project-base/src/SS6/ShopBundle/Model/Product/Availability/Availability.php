@@ -36,7 +36,7 @@ class Availability extends AbstractTranslatableEntity {
 	 */
 	public function __construct(AvailabilityData $availabilityData) {
 		$this->translations = new ArrayCollection();
-		$this->setTranslations($availabilityData->getName());
+		$this->setTranslations($availabilityData->name);
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Availability extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
 	 */
 	public function edit(AvailabilityData $availabilityData) {
-		$this->setTranslations($availabilityData->getName());
+		$this->setTranslations($availabilityData->name);
 	}
 
 }

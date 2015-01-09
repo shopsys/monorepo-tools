@@ -107,23 +107,23 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		BillingAddress $billingAddress,
 		DeliveryAddress $deliveryAddress = null
 	) {
-		$this->firstName = $userData->getFirstName();
-		$this->lastName = $userData->getLastName();
-		$this->email = mb_strtolower($userData->getEmail());
+		$this->firstName = $userData->firstName;
+		$this->lastName = $userData->lastName;
+		$this->email = mb_strtolower($userData->email);
 		$this->billingAddress = $billingAddress;
 		$this->deliveryAddress = $deliveryAddress;
 		$this->createdAt = new DateTime();
-		$this->domainId = $userData->getDomainId();
-		$this->pricingGroup = $userData->getPricingGroup();
+		$this->domainId = $userData->domainId;
+		$this->pricingGroup = $userData->pricingGroup;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 */
 	public function edit(UserData $userData) {
-		$this->firstName = $userData->getFirstName();
-		$this->lastName = $userData->getLastName();
-		$this->pricingGroup = $userData->getPricingGroup();
+		$this->firstName = $userData->firstName;
+		$this->lastName = $userData->lastName;
+		$this->pricingGroup = $userData->pricingGroup;
 	}
 
 	/**

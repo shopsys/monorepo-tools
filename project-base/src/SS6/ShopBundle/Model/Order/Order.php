@@ -261,41 +261,41 @@ class Order {
 		$urlHash,
 		User $user = null
 	) {
-		$this->transport = $orderData->getTransport();
-		$this->payment = $orderData->getPayment();
-		$this->firstName = $orderData->getFirstName();
-		$this->lastName = $orderData->getLastName();
-		$this->email = $orderData->getEmail();
-		$this->telephone = $orderData->getTelephone();
-		$this->street = $orderData->getStreet();
-		$this->city = $orderData->getCity();
-		$this->postcode = $orderData->getPostcode();
-		$this->note = $orderData->getNote();
+		$this->transport = $orderData->transport;
+		$this->payment = $orderData->payment;
+		$this->firstName = $orderData->firstName;
+		$this->lastName = $orderData->lastName;
+		$this->email = $orderData->email;
+		$this->telephone = $orderData->telephone;
+		$this->street = $orderData->street;
+		$this->city = $orderData->city;
+		$this->postcode = $orderData->postcode;
+		$this->note = $orderData->note;
 		$this->items = new ArrayCollection();
-		if ($orderData->isCompanyCustomer()) {
+		if ($orderData->companyCustomer) {
 			$this->setCompanyInfo(
-				$orderData->getCompanyName(),
-				$orderData->getCompanyNumber(),
-				$orderData->getCompanyTaxNumber()
+				$orderData->companyName,
+				$orderData->companyNumber,
+				$orderData->companyTaxNumber
 			);
 		}
-		if ($orderData->isDeliveryAddressFilled()) {
+		if ($orderData->deliveryAddressFilled) {
 			$this->setDeliveryAddress(
-				$orderData->getDeliveryContactPerson(),
-				$orderData->getDeliveryCompanyName(),
-				$orderData->getDeliveryTelephone(),
-				$orderData->getDeliveryStreet(),
-				$orderData->getDeliveryCity(),
-				$orderData->getDeliveryPostcode());
+				$orderData->deliveryContactPerson,
+				$orderData->deliveryCompanyName,
+				$orderData->deliveryTelephone,
+				$orderData->deliveryStreet,
+				$orderData->deliveryCity,
+				$orderData->deliveryPostcode);
 		}
 		$this->number = $orderNumber;
 		$this->status = $orderStatus;
 		$this->customer = $user;
 		$this->deleted = false;
 		$this->createdAt = new DateTime();
-		$this->domainId = $orderData->getDomainId();
+		$this->domainId = $orderData->domainId;
 		$this->urlHash = $urlHash;
-		$this->currency = $orderData->getCurrency();
+		$this->currency = $orderData->currency;
 	}
 
 	/**
@@ -308,30 +308,30 @@ class Order {
 		OrderStatus $orderStatus,
 		User $user = null
 	) {
-		$this->firstName = $orderData->getFirstName();
-		$this->lastName = $orderData->getLastName();
-		$this->email = $orderData->getEmail();
-		$this->telephone = $orderData->getTelephone();
-		$this->street = $orderData->getStreet();
-		$this->city = $orderData->getCity();
-		$this->postcode = $orderData->getPostcode();
-		$this->note = $orderData->getNote();
+		$this->firstName = $orderData->firstName;
+		$this->lastName = $orderData->lastName;
+		$this->email = $orderData->email;
+		$this->telephone = $orderData->telephone;
+		$this->street = $orderData->street;
+		$this->city = $orderData->city;
+		$this->postcode = $orderData->postcode;
+		$this->note = $orderData->note;
 
-		if ($orderData->isCompanyCustomer()) {
+		if ($orderData->companyCustomer) {
 			$this->setCompanyInfo(
-				$orderData->getCompanyName(),
-				$orderData->getCompanyNumber(),
-				$orderData->getCompanyTaxNumber()
+				$orderData->companyName,
+				$orderData->companyNumber,
+				$orderData->companyTaxNumber
 			);
 		}
-		if ($orderData->isDeliveryAddressFilled()) {
+		if ($orderData->deliveryAddressFilled) {
 			$this->setDeliveryAddress(
-				$orderData->getDeliveryContactPerson(),
-				$orderData->getDeliveryCompanyName(),
-				$orderData->getDeliveryTelephone(),
-				$orderData->getDeliveryStreet(),
-				$orderData->getDeliveryCity(),
-				$orderData->getDeliveryPostcode());
+				$orderData->deliveryContactPerson,
+				$orderData->deliveryCompanyName,
+				$orderData->deliveryTelephone,
+				$orderData->deliveryStreet,
+				$orderData->deliveryCity,
+				$orderData->deliveryPostcode);
 		}
 		$this->status = $orderStatus;
 		$this->customer = $user;

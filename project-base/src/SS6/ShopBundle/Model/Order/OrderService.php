@@ -44,13 +44,13 @@ class OrderService {
 			$user
 		);
 
-		$orderItemsData = $orderData->getItems();
+		$orderItemsData = $orderData->items;
 
 		$orderItemsToDelete = array();
 		foreach ($order->getItems() as $orderItem) {
 			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
 				$orderItemData = $orderItemsData[$orderItem->getId()];
-				$orderItemData->setPriceWithoutVat($this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData));
+				$orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 				$orderItem->edit($orderItemData);
 			} else {
 				$order->removeItem($orderItem);
@@ -61,14 +61,14 @@ class OrderService {
 		$orderItemsToCreate = array();
 		foreach ($orderItemsData as $index => $orderItemData) {
 			if (strpos($index, 'new_') === 0) {
-				$orderItemData->setPriceWithoutVat($this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData));
+				$orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 				$orderItem = new OrderProduct(
 					$order,
-					$orderItemData->getName(),
-					$orderItemData->getPriceWithoutVat(),
-					$orderItemData->getPriceWithVat(),
-					$orderItemData->getVatPercent(),
-					$orderItemData->getQuantity()
+					$orderItemData->name,
+					$orderItemData->priceWithoutVat,
+					$orderItemData->priceWithVat,
+					$orderItemData->vatPercent,
+					$orderItemData->quantity
 				);
 				$orderItemsToCreate[] = $orderItem;
 			}

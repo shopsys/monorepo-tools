@@ -18,19 +18,19 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$pricingGroupData = new PricingGroupData();
 
-		$pricingGroupData->setName('Obyčejný zákazník');
+		$pricingGroupData->name = 'Obyčejný zákazník';
 		$this->createPricingGroup($manager, $pricingGroupData, 1, self::ORDINARY_DOMAIN_1);
 
-		$pricingGroupData->setName('Partner');
+		$pricingGroupData->name = 'Partner';
 		$this->createPricingGroup($manager, $pricingGroupData, 1, self::PARTNER_DOMAIN_1);
 
-		$pricingGroupData->setName('VIP zákazník');
+		$pricingGroupData->name = 'VIP zákazník';
 		$this->createPricingGroup($manager, $pricingGroupData, 1, self::VIP_DOMAIN_1);
 
-		$pricingGroupData->setName('Ordinary customer');
+		$pricingGroupData->name = 'Ordinary customer';
 		$this->createPricingGroup($manager, $pricingGroupData, 2, self::ORDINARY_DOMAIN_2);
 
-		$pricingGroupData->setName('VIP customer');
+		$pricingGroupData->name = 'VIP customer';
 		$this->createPricingGroup($manager, $pricingGroupData, 2, self::VIP_DOMAIN_2);
 
 		$manager->flush();

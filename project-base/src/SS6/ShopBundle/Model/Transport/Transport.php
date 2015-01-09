@@ -74,9 +74,9 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	public function __construct(TransportData $transportData) {
 		$this->translations = new ArrayCollection();
 
-		$this->price = $transportData->getPrice();
-		$this->vat = $transportData->getVat();
-		$this->hidden = $transportData->isHidden();
+		$this->price = $transportData->price;
+		$this->vat = $transportData->vat;
+		$this->hidden = $transportData->hidden;
 		$this->deleted = false;
 		$this->setTranslations($transportData);
 	}
@@ -85,9 +85,9 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	public function edit(TransportData $transportData) {
-		$this->price = $transportData->getPrice();
-		$this->vat = $transportData->getVat();
-		$this->hidden = $transportData->isHidden();
+		$this->price = $transportData->price;
+		$this->vat = $transportData->vat;
+		$this->hidden = $transportData->hidden;
 		$this->setTranslations($transportData);
 	}
 
@@ -95,10 +95,10 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	private function setTranslations(TransportData $transportData) {
-		foreach ($transportData->getName() as $locale => $name) {
+		foreach ($transportData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
-		foreach ($transportData->getDescription() as $locale => $description) {
+		foreach ($transportData->description as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
 	}

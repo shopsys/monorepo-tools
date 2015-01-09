@@ -44,9 +44,9 @@ class PricingGroup {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 * @param int $domainId
 	 */
-	public function __construct($pricingGroupData, $domainId) {
-		$this->coefficient = $pricingGroupData->getCoefficient();
-		$this->name = $pricingGroupData->getName();
+	public function __construct(PricingGroupData $pricingGroupData, $domainId) {
+		$this->coefficient = $pricingGroupData->coefficient;
+		$this->name = $pricingGroupData->name;
 		$this->domainId = $domainId;
 	}
 
@@ -82,8 +82,8 @@ class PricingGroup {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 */
 	public function edit(PricingGroupData $pricingGroupData) {
-		$this->name = $pricingGroupData->getName();
-		$this->coefficient = $pricingGroupData->getCoefficient();
+		$this->name = $pricingGroupData->name;
+		$this->coefficient = $pricingGroupData->coefficient;
 	}
 
 }

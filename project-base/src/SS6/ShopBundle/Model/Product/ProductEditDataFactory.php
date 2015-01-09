@@ -10,12 +10,24 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class ProductEditDataFactory {
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 */
 	private $vatFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
 	private $productRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
+	 */
 	private $parameterRepository;
 
 	public function __construct(
@@ -40,7 +52,7 @@ class ProductEditDataFactory {
 		$productParameterValuesData = array();
 		$productEditData->parameters = $productParameterValuesData;
 
-		$productEditData->productData->setVat($this->vatFacade->getDefaultVat());
+		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
 
 		return $productEditData;
 	}

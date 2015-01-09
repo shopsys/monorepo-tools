@@ -15,18 +15,18 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	public function load(ObjectManager $manager) {
 		$sliderItemData = new SliderItemData();
 
-		$sliderItemData->setName('Shopsys');
-		$sliderItemData->setLink('http://www.shopsys.cz/');
+		$sliderItemData->name = 'Shopsys';
+		$sliderItemData->link = 'http://www.shopsys.cz/';
 
 		$this->createSliderItem($manager, $sliderItemData, 1);
 
-		$sliderItemData->setName('Twitter');
-		$sliderItemData->setLink('https://twitter.com/netdevelo_cz');
+		$sliderItemData->name = 'Twitter';
+		$sliderItemData->link = 'https://twitter.com/netdevelo_cz';
 
 		$this->createSliderItem($manager, $sliderItemData, 1);
 
-		$sliderItemData->setName('Pojďte s námi růst');
-		$sliderItemData->setLink('http://www.pojdtesnamirust.cz/');
+		$sliderItemData->name = 'Pojďte s námi růst';
+		$sliderItemData->link = 'http://www.pojdtesnamirust.cz/';
 
 		$this->createSliderItem($manager, $sliderItemData, 1);
 

@@ -65,24 +65,24 @@ class DeliveryAddress {
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
 	public function __construct(DeliveryAddressData $deliveryAddressData) {
-		$this->street = $deliveryAddressData->getStreet();
-		$this->city = $deliveryAddressData->getCity();
-		$this->postcode = $deliveryAddressData->getPostcode();
-		$this->companyName = $deliveryAddressData->getCompanyName();
-		$this->contactPerson = $deliveryAddressData->getContactPerson();
-		$this->telephone = $deliveryAddressData->getTelephone();
+		$this->street = $deliveryAddressData->street;
+		$this->city = $deliveryAddressData->city;
+		$this->postcode = $deliveryAddressData->postcode;
+		$this->companyName = $deliveryAddressData->companyName;
+		$this->contactPerson = $deliveryAddressData->contactPerson;
+		$this->telephone = $deliveryAddressData->telephone;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
 	public function edit(DeliveryAddressData $deliveryAddressData) {
-		$this->street = $deliveryAddressData->getStreet();
-		$this->city = $deliveryAddressData->getCity();
-		$this->postcode = $deliveryAddressData->getPostcode();
-		$this->companyName = $deliveryAddressData->getCompanyName();
-		$this->contactPerson = $deliveryAddressData->getContactPerson();
-		$this->telephone = $deliveryAddressData->getTelephone();
+		$this->street = $deliveryAddressData->street;
+		$this->city = $deliveryAddressData->city;
+		$this->postcode = $deliveryAddressData->postcode;
+		$this->companyName = $deliveryAddressData->companyName;
+		$this->contactPerson = $deliveryAddressData->contactPerson;
+		$this->telephone = $deliveryAddressData->telephone;
 	}
 
 	/**

@@ -124,37 +124,37 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function __construct(ProductData $productData) {
 		$this->translations = new ArrayCollection();
-		$this->catnum = $productData->getCatnum();
-		$this->partno = $productData->getPartno();
-		$this->ean = $productData->getEan();
-		$this->setPrice($productData->getPrice());
-		$this->vat = $productData->getVat();
-		$this->sellingFrom = $productData->getSellingFrom();
-		$this->sellingTo = $productData->getSellingTo();
-		$this->stockQuantity = $productData->getStockQuantity();
-		$this->hidden = $productData->isHidden();
-		$this->availability = $productData->getAvailability();
+		$this->catnum = $productData->catnum;
+		$this->partno = $productData->partno;
+		$this->ean = $productData->ean;
+		$this->setPrice($productData->price);
+		$this->vat = $productData->vat;
+		$this->sellingFrom = $productData->sellingFrom;
+		$this->sellingTo = $productData->sellingTo;
+		$this->stockQuantity = $productData->stockQuantity;
+		$this->hidden = $productData->hidden;
+		$this->availability = $productData->availability;
 		$this->visible = false;
 		$this->setTranslations($productData);
-		$this->categories = $productData->getCategories();
+		$this->categories = $productData->categories;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function edit(ProductData $productData) {
-		$this->catnum = $productData->getCatnum();
-		$this->partno = $productData->getPartno();
-		$this->ean = $productData->getEan();
-		$this->setPrice($productData->getPrice());
-		$this->vat = $productData->getVat();
-		$this->sellingFrom = $productData->getSellingFrom();
-		$this->sellingTo = $productData->getSellingTo();
-		$this->stockQuantity = $productData->getStockQuantity();
-		$this->availability = $productData->getAvailability();
-		$this->hidden = $productData->isHidden();
+		$this->catnum = $productData->catnum;
+		$this->partno = $productData->partno;
+		$this->ean = $productData->ean;
+		$this->setPrice($productData->price);
+		$this->vat = $productData->vat;
+		$this->sellingFrom = $productData->sellingFrom;
+		$this->sellingTo = $productData->sellingTo;
+		$this->stockQuantity = $productData->stockQuantity;
+		$this->availability = $productData->availability;
+		$this->hidden = $productData->hidden;
 		$this->setTranslations($productData);
-		$this->categories = $productData->getCategories();
+		$this->categories = $productData->categories;
 	}
 
 	/**
@@ -283,10 +283,10 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 */
 	private function setTranslations(ProductData $productData) {
-		foreach ($productData->getName() as $locale => $name) {
+		foreach ($productData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
-		foreach ($productData->getDescription() as $locale => $description) {
+		foreach ($productData->description as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
 	}

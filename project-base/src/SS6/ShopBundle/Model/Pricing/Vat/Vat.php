@@ -36,13 +36,9 @@ class Vat {
 	 */
 	private $percent;
 
-	/**
-	 * @param string $name
-	 * @param string $percent
-	 */
 	public function __construct(VatData $vatData) {
-		$this->name = $vatData->getName();
-		$this->percent = $vatData->getPercent();
+		$this->name = $vatData->name;
+		$this->percent = $vatData->percent;
 	}
 
 	/**
@@ -78,8 +74,8 @@ class Vat {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
 	 */
 	public function edit(VatData $vatData) {
-		$this->name = $vatData->getName();
-		$this->percent = $vatData->getPercent();
+		$this->name = $vatData->name;
+		$this->percent = $vatData->percent;
 	}
 
 }

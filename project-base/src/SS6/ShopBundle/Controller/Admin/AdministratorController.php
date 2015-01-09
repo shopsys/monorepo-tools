@@ -75,7 +75,7 @@ class AdministratorController extends Controller {
 
 				$flashMessageSender->addSuccessFlashTwig(
 					'Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
-						'name' => $administratorData->getRealName(),
+						'name' => $administratorData->realName,
 						'url' => $this->generateUrl('admin_administrator_edit', array('id' => $administrator->getId())),
 					)
 				);
@@ -84,7 +84,7 @@ class AdministratorController extends Controller {
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
 					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', array(
-						'name' => $administratorData->getUsername(),
+						'name' => $administratorData->username,
 					)
 				);
 			}
@@ -144,7 +144,7 @@ class AdministratorController extends Controller {
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
 					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', array(
-						'name' => $administratorData->getUsername(),
+						'name' => $administratorData->username,
 					)
 				);
 			}

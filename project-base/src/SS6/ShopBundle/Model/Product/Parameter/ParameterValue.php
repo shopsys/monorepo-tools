@@ -31,7 +31,7 @@ class ParameterValue {
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValueData $parameterData
 	 */
 	public function __construct(ParameterValueData $parameterData) {
-		$this->text = $parameterData->getText();
+		$this->text = $parameterData->text;
 	}
 
 	/**
@@ -52,7 +52,7 @@ class ParameterValue {
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValueData $parameterData
 	 */
 	public function edit(ParameterValueData $parameterData) {
-		$this->text = $parameterData->getText();
+		$this->text = $parameterData->text;
 	}
 
 }

@@ -137,11 +137,11 @@ abstract class OrderItem {
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
 	 */
 	public function edit(OrderItemData $orderItemData) {
-		$this->name = $orderItemData->getName();
-		$this->priceWithoutVat = $orderItemData->getPriceWithoutVat();
-		$this->priceWithVat = $orderItemData->getPriceWithVat();
-		$this->vatPercent = $orderItemData->getVatPercent();
-		$this->quantity = $orderItemData->getQuantity();
+		$this->name = $orderItemData->name;
+		$this->priceWithoutVat = $orderItemData->priceWithoutVat;
+		$this->priceWithVat = $orderItemData->priceWithVat;
+		$this->vatPercent = $orderItemData->vatPercent;
+		$this->quantity = $orderItemData->quantity;
 	}
 
 }

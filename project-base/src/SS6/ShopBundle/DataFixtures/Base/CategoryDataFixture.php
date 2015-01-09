@@ -25,33 +25,33 @@ class CategoryDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$categoryData = new CategoryData();
 
-		$categoryData->setName(array('cs' => 'Elektro', 'en' => 'Electronics'));
+		$categoryData->name = array('cs' => 'Elektro', 'en' => 'Electronics');
 		$electronicsCategory = $this->createCategory($manager, self::ELECTRONICS, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Televize, audio', 'en' => 'TV, audio'));
-		$categoryData->setParent($electronicsCategory);
+		$categoryData->name = array('cs' => 'Televize, audio', 'en' => 'TV, audio');
+		$categoryData->parent = $electronicsCategory;
 		$this->createCategory($manager, self::TV, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'));
+		$categoryData->name = array('cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo');
 		$this->createCategory($manager, self::PHOTO, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Tiskárny', 'en' => null));
+		$categoryData->name = array('cs' => 'Tiskárny', 'en' => null);
 		$this->createCategory($manager, self::PRINTERS, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Počítače & příslušenství', 'en' => null));
+		$categoryData->name = array('cs' => 'Počítače & příslušenství', 'en' => null);
 		$this->createCategory($manager, self::PC, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Mobilní telefony', 'en' => null));
+		$categoryData->name = array('cs' => 'Mobilní telefony', 'en' => null);
 		$this->createCategory($manager, self::PHONES, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Kávovary', 'en' => null));
+		$categoryData->name = array('cs' => 'Kávovary', 'en' => null);
 		$this->createCategory($manager, self::COFFEE, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Knihy', 'en' => 'Books'));
-		$categoryData->setParent(null);
+		$categoryData->name = array('cs' => 'Knihy', 'en' => 'Books');
+		$categoryData->parent = null;
 		$this->createCategory($manager, self::BOOKS, $categoryData);
 
-		$categoryData->setName(array('cs' => 'Hračky a další', 'en' => null));
+		$categoryData->name = array('cs' => 'Hračky a další', 'en' => null);
 		$this->createCategory($manager, self::TOYS, $categoryData);
 
 

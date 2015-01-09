@@ -76,24 +76,24 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productEditData = new ProductEditData();
-		$productEditData->productData->setName(['cs' => 'name']);
-		$productEditData->productData->setPrice($inputPriceWithVat);
-		$productEditData->productData->setVat($vat);
+		$productEditData->productData->name = ['cs' => 'name'];
+		$productEditData->productData->price = $inputPriceWithVat;
+		$productEditData->productData->vat = $vat;
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
-		$paymentData->setName(array('cs' => 'name'));
-		$paymentData->setPrice($inputPriceWithVat);
-		$paymentData->setVat($vat);
+		$paymentData->name = array('cs' => 'name');
+		$paymentData->price = $inputPriceWithVat;
+		$paymentData->vat = $vat;
 		$payment = $paymentEditFacade->create($paymentData);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
-		$transportData->setName(array('cs' => 'name'));
-		$transportData->setDescription(array('cs' => 'desc'));
-		$transportData->setPrice($inputPriceWithVat);
-		$transportData->setVat($vat);
+		$transportData->name = array('cs' => 'name');
+		$transportData->description = array('cs' => 'desc');
+		$transportData->price = $inputPriceWithVat;
+		$transportData->vat = $vat;
 		$transport = $transportEditFacade->create($transportData);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 		$em->flush();
@@ -147,23 +147,23 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$em->persist($vat);
 
 		$productEditData = new ProductEditData();
-		$productEditData->productData->setName(['cs' => 'name']);
-		$productEditData->productData->setPrice($inputPriceWithoutVat);
-		$productEditData->productData->setVat($vat);
+		$productEditData->productData->name = ['cs' => 'name'];
+		$productEditData->productData->price = $inputPriceWithoutVat;
+		$productEditData->productData->vat = $vat;
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
-		$paymentData->setName(array('cs' => 'name'));
-		$paymentData->setPrice($inputPriceWithoutVat);
-		$paymentData->setVat($vat);
+		$paymentData->name = array('cs' => 'name');
+		$paymentData->price = $inputPriceWithoutVat;
+		$paymentData->vat = $vat;
 		$payment = $paymentEditFacade->create($paymentData);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
-		$transportData->setName(array('cs' => 'name'));
-		$transportData->setPrice($inputPriceWithoutVat);
-		$transportData->setVat($vat);
+		$transportData->name = array('cs' => 'name');
+		$transportData->price = $inputPriceWithoutVat;
+		$transportData->vat = $vat;
 		$transport = $transportEditFacade->create($transportData);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 

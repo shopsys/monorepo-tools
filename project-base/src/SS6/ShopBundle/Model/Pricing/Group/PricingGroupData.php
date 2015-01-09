@@ -7,12 +7,12 @@ class PricingGroupData {
 	/**
 	 * @var string|null
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @var string
 	 */
-	private $coefficient;
+	public $coefficient;
 
 	/**
 	 * @param string|null $name
@@ -23,38 +23,10 @@ class PricingGroupData {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getCoefficient() {
-		return $this->coefficient;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @param string $coefficient
-	 */
-	public function setCoefficient($coefficient) {
-		$this->coefficient = $coefficient;
-	}
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
 	public function setFromEntity(PricingGroup $pricingGroup) {
-		$this->setName($pricingGroup->getName());
-		$this->setCoefficient($pricingGroup->getCoefficient());
+		$this->name = $pricingGroup->getName();
+		$this->coefficient = $pricingGroup->getCoefficient();
 	}
 }

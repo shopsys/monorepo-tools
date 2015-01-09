@@ -13,22 +13,22 @@ class CurrencyData {
 	/**
 	 * @var string
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @var string
 	 */
-	private $code;
+	public $code;
 
 	/**
 	 * @var string
 	 */
-	private $symbol;
+	public $symbol;
 
 	/**
 	 * @var string
 	 */
-	private $exchangeRate;
+	public $exchangeRate;
 
 	/**
 	 * @param string|null $name
@@ -40,62 +40,6 @@ class CurrencyData {
 		$this->name = $name;
 		$this->code = $code;
 		$this->symbol = $symbol;
-		$this->exchangeRate = $exchangeRate;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCode() {
-		return $this->code;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getSymbol() {
-		return $this->symbol;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getExchangeRate() {
-		return $this->exchangeRate;
-	}
-
-	/**
-	 * @param string|null $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * @param string|null $code
-	 */
-	public function setCode($code) {
-		$this->code = $code;
-	}
-
-	/**
-	 * @param string|null $symbol
-	 */
-	public function setSymbol($symbol) {
-		$this->symbol = $symbol;
-	}
-
-	/**
-	 * @param string $exchangeRate
-	 */
-	public function setExchangeRate($exchangeRate) {
 		$this->exchangeRate = $exchangeRate;
 	}
 

@@ -36,15 +36,15 @@ class MailerService {
 	 * @return \Swift_Message
 	 */
 	private function getMessageWithReplacedVariables(MessageData $messageData) {
-		$toEmail = $messageData->getToEmail();
+		$toEmail = $messageData->toEmail;
 		$body = $this->replaceVariables(
-			$messageData->getBody(),
-			$messageData->getVariablesReplacementsForBody());
+			$messageData->body,
+			$messageData->variablesReplacementsForBody);
 		$subject = $this->replaceVariables(
-			$messageData->getSubject(),
-			$messageData->getVariablesReplacementsForSubject());
-		$fromEmail = $messageData->getFromEmail();
-		$fromName = $messageData->getFromName();
+			$messageData->subject,
+			$messageData->variablesReplacementsForSubject);
+		$fromEmail = $messageData->fromEmail;
+		$fromName = $messageData->fromName;
 
 		$message = Swift_Message::newInstance()
 			->setSubject($subject)

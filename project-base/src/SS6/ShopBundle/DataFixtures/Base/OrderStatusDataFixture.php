@@ -14,16 +14,16 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$orderStatusData = new OrderStatusData();
-		$orderStatusData->setName(array('cs' => 'Nová', 'en' => 'New'));
+		$orderStatusData->name = ['cs' => 'Nová', 'en' => 'New'];
 		$this->createOrderStatus($manager, 'order_status_new', $orderStatusData, OrderStatus::TYPE_NEW);
-		
-		$orderStatusData->setName(array('cs' => 'Vyřizuje se', 'en' => 'In progress'));
+
+		$orderStatusData->name = ['cs' => 'Vyřizuje se', 'en' => 'In progress'];
 		$this->createOrderStatus($manager, 'order_status_in_progress', $orderStatusData, OrderStatus::TYPE_IN_PROGRESS);
 
-		$orderStatusData->setName(array('cs' => 'Vyřízena', 'en' => 'Done'));
+		$orderStatusData->name = ['cs' => 'Vyřízena', 'en' => 'Done'];
 		$this->createOrderStatus($manager, 'order_status_done', $orderStatusData, OrderStatus::TYPE_DONE);
 
-		$orderStatusData->setName(array('cs' => 'Stornována', 'en' => 'Canceled'));
+		$orderStatusData->name =['cs' => 'Stornována', 'en' => 'Canceled'];
 		$this->createOrderStatus($manager, 'order_status_canceled', $orderStatusData, OrderStatus::TYPE_CANCELED);
 
 		$manager->flush();

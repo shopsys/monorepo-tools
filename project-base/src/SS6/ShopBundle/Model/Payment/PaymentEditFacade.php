@@ -70,7 +70,7 @@ class PaymentEditFacade {
 		$this->em->persist($payment);
 		$this->em->beginTransaction();
 		$this->em->flush();
-		$this->createPaymentDomains($payment, $paymentData->getDomains());
+		$this->createPaymentDomains($payment, $paymentData->domains);
 		$this->setAddionalDataAndFlush($payment, $paymentData);
 		$this->em->commit();
 
@@ -85,7 +85,7 @@ class PaymentEditFacade {
 		$payment->edit($paymentData);
 		$this->em->beginTransaction();
 		$this->deletePaymentDomainsByPayment($payment);
-		$this->createPaymentDomains($payment, $paymentData->getDomains());
+		$this->createPaymentDomains($payment, $paymentData->domains);
 		$this->setAddionalDataAndFlush($payment, $paymentData);
 		$this->em->commit();
 	}
@@ -131,9 +131,9 @@ class PaymentEditFacade {
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData) {
-		$transports = $this->transportRepository->findAllByIds($paymentData->getTransports());
+		$transports = $this->transportRepository->findAllByIds($paymentData->transports);
 		$payment->setTransports($transports);
-		$this->imageFacade->uploadImage($payment, $paymentData->getImage(), null);
+		$this->imageFacade->uploadImage($payment, $paymentData->image, null);
 		$this->em->flush();
 	}
 

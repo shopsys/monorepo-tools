@@ -114,7 +114,7 @@ class ArticleController extends Controller {
 		$form = $this->createForm(new ArticleFormType());
 
 		$articleData = new ArticleData();
-		$articleData->setDomainId($selectedDomain->getId());
+		$articleData->domainId = $selectedDomain->getId();
 
 		$form->setData($articleData);
 		$form->handleRequest($request);

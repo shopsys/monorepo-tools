@@ -66,13 +66,13 @@ class AdministratorService {
 	) {
 		if ($administratorByUserName !== null
 			&& $administratorByUserName !== $administrator
-			&& $administratorByUserName->getUsername() === $administratorData->getUsername()
+			&& $administratorByUserName->getUsername() === $administratorData->username
 		) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
 		}
 		$administrator->edit($administratorData);
-		if ($administratorData->getPassword() !== null) {
-			$administrator->setPassword($this->getPasswordHash($administrator, $administratorData->getPassword()));
+		if ($administratorData->password !== null) {
+			$administrator->setPassword($this->getPasswordHash($administrator, $administratorData->password));
 		}
 
 		return $administrator;

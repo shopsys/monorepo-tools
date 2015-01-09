@@ -85,15 +85,15 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$order = $this->getReference('order_1');
 
 		$mailTemplateData = new MailTemplateData();
-		$mailTemplateData->setSubject('subject');
-		$mailTemplateData->setBody('body');
+		$mailTemplateData->subject = 'subject';
+		$mailTemplateData->body = 'body';
 		$mailTemplate = new MailTemplate('templateName', 1, $mailTemplateData);
 
 		$messageData = $orderMailService->getMessageDataByOrder($order, $mailTemplate);
 
 		$this->assertInstanceOf(MessageData::class, $messageData);
-		$this->assertEquals($mailTemplate->getSubject(), $messageData->getSubject());
-		$this->assertEquals($mailTemplate->getBody(), $messageData->getBody());
+		$this->assertEquals($mailTemplate->getSubject(), $messageData->subject);
+		$this->assertEquals($mailTemplate->getBody(), $messageData->body);
 	}
 
 }

@@ -68,7 +68,7 @@ class SliderItemFacade {
 		$this->em->beginTransaction();
 		$this->em->persist($sliderItem);
 		$this->em->flush();
-		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->getImage(), null);
+		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->image, null);
 		$this->em->commit();
 
 		return $sliderItem;
@@ -85,7 +85,7 @@ class SliderItemFacade {
 
 		$this->em->beginTransaction();
 		$this->em->flush();
-		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->getImage(), null);
+		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->image, null);
 		$this->em->commit();
 
 		return $sliderItem;

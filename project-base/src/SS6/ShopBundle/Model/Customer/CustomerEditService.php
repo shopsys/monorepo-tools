@@ -44,17 +44,17 @@ class CustomerEditService {
 		$billingAddressData->setFromEntity($billingAddress);
 
 		if ($billingAddress->getStreet() === null) {
-			$billingAddressData->setCompanyCustomer($order->getCompanyNumber() !== null);
-			$billingAddressData->setCompanyName($order->getCompanyName());
-			$billingAddressData->setCompanyNumber($order->getCompanyNumber());
-			$billingAddressData->setCompanyTaxNumber($order->getCompanyTaxNumber());
-			$billingAddressData->setStreet($order->getStreet());
-			$billingAddressData->setCity($order->getCity());
-			$billingAddressData->setPostcode($order->getPostcode());
+			$billingAddressData->companyCustomer = $order->getCompanyNumber() !== null;
+			$billingAddressData->companyName = $order->getCompanyName();
+			$billingAddressData->companyNumber = $order->getCompanyNumber();
+			$billingAddressData->companyTaxNumber = $order->getCompanyTaxNumber();
+			$billingAddressData->street = $order->getStreet();
+			$billingAddressData->city = $order->getCity();
+			$billingAddressData->postcode = $order->getPostcode();
 		}
 
 		if ($billingAddress->getTelephone() === null) {
-			$billingAddressData->setTelephone($order->getTelephone());
+			$billingAddressData->telephone = $order->getTelephone();
 		}
 
 		return $billingAddressData;
@@ -69,19 +69,19 @@ class CustomerEditService {
 		$deliveryAddressData = new DeliveryAddressData();
 
 		if ($deliveryAddress === null) {
-			$deliveryAddressData->setAddressFilled($order->getDeliveryStreet() !== null);
-			$deliveryAddressData->setStreet($order->getDeliveryStreet());
-			$deliveryAddressData->setCity($order->getDeliveryCity());
-			$deliveryAddressData->setPostcode($order->getDeliveryPostcode());
-			$deliveryAddressData->setCompanyName($order->getDeliveryCompanyName());
-			$deliveryAddressData->setContactPerson($order->getDeliveryContactPerson());
-			$deliveryAddressData->setTelephone($order->getDeliveryTelephone());
+			$deliveryAddressData->addressFilled = $order->getDeliveryStreet() !== null;
+			$deliveryAddressData->street = $order->getDeliveryStreet();
+			$deliveryAddressData->city = $order->getDeliveryCity();
+			$deliveryAddressData->postcode = $order->getDeliveryPostcode();
+			$deliveryAddressData->companyName = $order->getDeliveryCompanyName();
+			$deliveryAddressData->contactPerson = $order->getDeliveryContactPerson();
+			$deliveryAddressData->telephone = $order->getDeliveryTelephone();
 		} else {
 			$deliveryAddressData->setFromEntity($deliveryAddress);
 		}
 
 		if ($deliveryAddress !== null && $deliveryAddress->getTelephone() === null) {
-			$deliveryAddressData->setTelephone($order->getTelephone());
+			$deliveryAddressData->telephone = $order->getTelephone();
 		}
 
 		return $deliveryAddressData;

@@ -22,8 +22,8 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
 			foreach ($normData as $productParameterValueData) {
 				/* @var $productParameterValueData \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData */
-				$parameterId = $productParameterValueData->getParameter()->getId();
-				$locale = $productParameterValueData->getLocale();
+				$parameterId = $productParameterValueData->parameter->getId();
+				$locale = $productParameterValueData->locale;
 
 				if (array_key_exists($parameterId, $normValue)) {
 					$productParameterValuesLocalizedData = $normValue[$parameterId];
@@ -31,8 +31,8 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 					$productParameterValuesLocalizedData = new ProductParameterValuesLocalizedData();
 				}
 
-				$productParameterValuesLocalizedData->parameter = $productParameterValueData->getParameter();
-				$productParameterValuesLocalizedData->valueText[$locale] = $productParameterValueData->getValueText();
+				$productParameterValuesLocalizedData->parameter = $productParameterValueData->parameter;
+				$productParameterValuesLocalizedData->valueText[$locale] = $productParameterValueData->valueText;
 
 				$normValue[$parameterId] = $productParameterValuesLocalizedData;
 			}
@@ -57,9 +57,9 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 				foreach ($productParameterValuesLocalizedData->valueText as $locale => $valueText) {
 					if ($valueText !== null) {
 						$productParameterValueData = new ProductParameterValueData();
-						$productParameterValueData->setParameter($productParameterValuesLocalizedData->parameter);
-						$productParameterValueData->setLocale($locale);
-						$productParameterValueData->setValueText($valueText);
+						$productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
+						$productParameterValueData->locale = $locale;
+						$productParameterValueData->valueText = $valueText;
 
 						$normData[] = $productParameterValueData;
 					}

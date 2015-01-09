@@ -35,7 +35,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 		$expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 		$billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
 		$userData = new UserData();
-		$userData->setPricingGroup($expectedPricingGroup);
+		$userData->pricingGroup = $expectedPricingGroup;
 		$user = new User($userData, $billingAddress, null);
 
 

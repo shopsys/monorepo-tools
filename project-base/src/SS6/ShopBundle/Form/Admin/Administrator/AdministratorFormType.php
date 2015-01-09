@@ -26,7 +26,7 @@ class AdministratorFormType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('userName', 'text', array(
+			->add('username', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím přihlašovací jméno')),
 				)
@@ -69,7 +69,7 @@ class AdministratorFormType extends AbstractType {
 			'attr' => array('novalidate' => 'novalidate'),
 			'constraints' => array(
 				new FieldsAreNotIdentical(array(
-					'field1' => 'userName',
+					'field1' => 'username',
 					'field2' => 'password',
 					'errorPath' => 'password',
 					'message' => 'Heslo nesmí být stejné jako přihlašovací jméno',

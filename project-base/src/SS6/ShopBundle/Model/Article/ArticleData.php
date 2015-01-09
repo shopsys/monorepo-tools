@@ -13,17 +13,17 @@ class ArticleData {
 	/**
 	 * @var string|null
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @var string|null
 	 */
-	private $text;
+	public $text;
 
 	/**
 	 * @var int|null
 	 */
-	private $domainId;
+	public $domainId;
 
 	/**
 	 * @param string|null $name
@@ -37,53 +37,11 @@ class ArticleData {
 	}
 
 	/**
-	 * @return string|null
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getText() {
-		return $this->text;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getDomainId() {
-		return $this->domainId;
-	}
-
-	/**
-	 * @param string|null $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * @param string|null $text
-	 */
-	public function setText($text) {
-		$this->text = $text;
-	}
-
-	/**
-	 * @param int|null $domainId
-	 */
-	public function setDomainId($domainId) {
-		$this->domainId = $domainId;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Article\Article $article
 	 */
 	public function setFromEntity(Article $article) {
-		$this->setName($article->getName());
-		$this->setText($article->getText());
-		$this->setDomainId($article->getDomainId());
+		$this->name = $article->getName();
+		$this->text = $article->getText();
+		$this->domainId = $article->getDomainId();
 	}
 }

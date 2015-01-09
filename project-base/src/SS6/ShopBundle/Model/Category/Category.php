@@ -30,7 +30,7 @@ class Category extends AbstractTranslatableEntity {
 	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Category\CategoryTranslation")
 	 */
 	protected $translations;
-	
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category
 	 *
@@ -84,7 +84,7 @@ class Category extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	public function __construct(CategoryData $categoryData) {
-		$this->setParent($categoryData->getParent());
+		$this->setParent($categoryData->parent);
 		$this->translations = new ArrayCollection();
 		$this->setTranslations($categoryData);
 	}
@@ -93,7 +93,7 @@ class Category extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	public function edit(CategoryData $categoryData) {
-		$this->setParent($categoryData->getParent());
+		$this->setParent($categoryData->parent);
 		$this->setTranslations($categoryData);
 	}
 
@@ -165,7 +165,7 @@ class Category extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	private function setTranslations(CategoryData $categoryData) {
-		foreach ($categoryData->getName() as $locale => $name) {
+		foreach ($categoryData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}

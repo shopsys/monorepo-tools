@@ -44,18 +44,18 @@ class Article {
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function __construct(ArticleData $articleData) {
-		$this->domainId = $articleData->getDomainId();
-		$this->name = $articleData->getName();
-		$this->text = $articleData->getText();
+		$this->domainId = $articleData->domainId;
+		$this->name = $articleData->name;
+		$this->text = $articleData->text;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function edit(ArticleData $articleData) {
-		$this->domainId = $articleData->getDomainId();
-		$this->name = $articleData->getName();
-		$this->text = $articleData->getText();
+		$this->domainId = $articleData->domainId;
+		$this->name = $articleData->name;
+		$this->text = $articleData->text;
 	}
 
 	/**

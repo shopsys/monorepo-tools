@@ -23,7 +23,7 @@ class UserDataFactory {
 	 */
 	public function createDefault($domainId) {
 		$userData = new UserData();
-		$userData->setPricingGroup($this->pricingGroupFacade->getDefaultPricingGroupByDomainId($domainId));
+		$userData->pricingGroup = $this->pricingGroupFacade->getDefaultPricingGroupByDomainId($domainId);
 
 		return $userData;
 	}

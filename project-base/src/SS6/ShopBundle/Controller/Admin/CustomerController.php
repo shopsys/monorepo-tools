@@ -161,8 +161,8 @@ class CustomerController extends Controller {
 			$customerData = new CustomerData();
 			$userData = new UserData();
 			$defaultPricingGroup = $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
-			$userData->setPricingGroup($defaultPricingGroup);
-			$customerData->setUserData($userData);
+			$userData->pricingGroup = $defaultPricingGroup;
+			$customerData->userData = $userData;
 
 			$form->setData($customerData);
 			$form->handleRequest($request);

@@ -104,7 +104,7 @@ class TopProductFacade {
 	public function edit($id, TopProductData $topProductData) {
 		$topProduct = $this->topProductRepository->getById($id);
 		if ($this->alreadyExists($topProductData)
-			&& $topProduct->getProduct() !== $topProductData->getProduct()
+			&& $topProduct->getProduct() !== $topProductData->product
 		) {
 			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException();
 		}
@@ -132,7 +132,7 @@ class TopProductFacade {
 		$exists = true;
 		try {
 			$this->topProductRepository->getByProductAndDomainId(
-				$topProductData->getProduct(), $this->selectedDomain->getId()
+				$topProductData->product, $this->selectedDomain->getId()
 			);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException $e) {
 			$exists = false;

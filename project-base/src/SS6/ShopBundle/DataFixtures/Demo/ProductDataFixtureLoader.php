@@ -90,32 +90,32 @@ class ProductDataFixtureLoader {
 	private function getProductEditDataFromCsvRow(array $row) {
 		$productEditData = new ProductEditData();
 		$productEditData->productData = new ProductData();
-		$productEditData->productData->setName(['cs' => $row[0], 'en' => $row[1]]);
-		$productEditData->productData->setCatnum($row[2]);
-		$productEditData->productData->setPartno($row[3]);
-		$productEditData->productData->setEan($row[4]);
-		$productEditData->productData->setDescription(['cs' => $row[5], 'en' => $row[6]]);
-		$productEditData->productData->setPrice($row[7]);
+		$productEditData->productData->name = ['cs' => $row[0], 'en' => $row[1]];
+		$productEditData->productData->catnum = $row[2];
+		$productEditData->productData->partno = $row[3];
+		$productEditData->productData->ean = $row[4];
+		$productEditData->productData->description = ['cs' => $row[5], 'en' => $row[6]];
+		$productEditData->productData->price = $row[7];
 		switch ($row[8]) {
 			case 'high':
-				$productEditData->productData->setVat($this->vats['high']);
+				$productEditData->productData->vat = $this->vats['high'];
 				break;
 			case 'low':
-				$productEditData->productData->setVat($this->vats['low']);
+				$productEditData->productData->vat = $this->vats['low'];
 				break;
 			case 'zero':
-				$productEditData->productData->setVat($this->vats['zero']);
+				$productEditData->productData->vat = $this->vats['zero'];
 				break;
 			default:
-				$productEditData->productData->setVat(null);
+				$productEditData->productData->vat = null;
 		}
 		if ($row[9] !== null) {
-			$productEditData->productData->setSellingFrom(new DateTime($row[9]));
+			$productEditData->productData->sellingFrom = new DateTime($row[9]);
 		}
 		if ($row[10] !== null) {
-			$productEditData->productData->setSellingTo(new DateTime($row[10]));
+			$productEditData->productData->sellingTo = new DateTime($row[10]);
 		}
-		$productEditData->productData->setStockQuantity($row[11]);
+		$productEditData->productData->stockQuantity = $row[11];
 		$hiddenOnDomains = array();
 		if (!CsvDecoder::decodeBoolean($row[12])) {
 			$hiddenOnDomains[] = 1;
@@ -123,22 +123,22 @@ class ProductDataFixtureLoader {
 		if (!CsvDecoder::decodeBoolean($row[13])) {
 			$hiddenOnDomains[] = 2;
 		}
-		$productEditData->productData->setHiddenOnDomains($hiddenOnDomains);
+		$productEditData->productData->hiddenOnDomains = $hiddenOnDomains;
 		switch ($row[14]) {
 			case 'in-stock':
-				$productEditData->productData->setAvailability($this->availabilities['in-stock']);
+				$productEditData->productData->availability = $this->availabilities['in-stock'];
 				break;
 			case 'out-of-stock':
-				$productEditData->productData->setAvailability($this->availabilities['out-of-stock']);
+				$productEditData->productData->availability = $this->availabilities['out-of-stock'];
 				break;
 			case 'on-request':
-				$productEditData->productData->setAvailability($this->availabilities['on-request']);
+				$productEditData->productData->availability = $this->availabilities['on-request'];
 				break;
 			default:
-				$productEditData->productData->setAvailability(null);
+				$productEditData->productData->availability = null;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
-		$productEditData->productData->setCategories($this->getProductCategoriesFromString($row[16]));
+		$productEditData->productData->categories = $this->getProductCategoriesFromString($row[16]);
 
 		return $productEditData;
 	}
@@ -169,9 +169,9 @@ class ProductDataFixtureLoader {
 			$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);
 			foreach ($valueTexts as $locale => $valueText) {
 				$productParameterValueData = new ProductParameterValueData();
-				$productParameterValueData->setParameter($this->parameters[$serializedParameterNames]);
-				$productParameterValueData->setLocale($locale);
-				$productParameterValueData->setValueText($valueText);
+				$productParameterValueData->parameter = $this->parameters[$serializedParameterNames];
+				$productParameterValueData->locale = $locale;
+				$productParameterValueData->valueText = $valueText;
 				$productParameterValuesData[] = $productParameterValueData;
 			}
 		}

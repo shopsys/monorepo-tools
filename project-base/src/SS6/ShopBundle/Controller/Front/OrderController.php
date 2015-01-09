@@ -57,9 +57,9 @@ class OrderController extends Controller {
 			$orderFacade->prefillOrderData($orderData, $user);
 		}
 		$domainId = $domain->getId();
-		$orderData->setDomainId($domainId);
+		$orderData->domainId = $domainId;
 		$currency = $currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
-		$orderData->setCurrency($currency);
+		$orderData->currency = $currency;
 
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
@@ -144,7 +144,7 @@ class OrderController extends Controller {
 			$flashMessageSender->addInfoTwig(
 				'V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku.',
 				array(
-					'transportName' => $orderData->getTransport()->getName(),
+					'transportName' => $orderData->transport->getName(),
 				)
 			);
 		}
@@ -152,7 +152,7 @@ class OrderController extends Controller {
 			$flashMessageSender->addInfoTwig(
 				'V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku.',
 				array(
-					'paymentName' => $orderData->getPayment()->getName(),
+					'paymentName' => $orderData->payment->getName(),
 				)
 			);
 		}

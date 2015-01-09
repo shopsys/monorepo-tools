@@ -64,7 +64,7 @@ class MailTemplateFormType extends AbstractType {
 				$mailTemplateData = $form->getData();
 				/* @var $mailTemplateData \SS6\ShopBundle\Model\Mail\MailTemplateData */
 
-				if ($mailTemplateData->isSendMail()) {
+				if ($mailTemplateData->sendMail) {
 					$validationGroups[] = 'sendMail';
 				}
 

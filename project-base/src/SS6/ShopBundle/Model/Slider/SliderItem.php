@@ -55,16 +55,16 @@ class SliderItem implements OrderableEntityInterface {
 	 */
 	public function __construct(SliderItemData $sliderItemData, $domainId) {
 		$this->domainId = $domainId;
-		$this->name = $sliderItemData->getName();
-		$this->link = $sliderItemData->getLink();
+		$this->name = $sliderItemData->name;
+		$this->link = $sliderItemData->link;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
 	 */
 	public function edit(SliderItemData $sliderItemData) {
-		$this->name = $sliderItemData->getName();
-		$this->link = $sliderItemData->getLink();
+		$this->name = $sliderItemData->name;
+		$this->link = $sliderItemData->link;
 	}
 
 	/**

@@ -45,12 +45,12 @@ class AdministratorFacade {
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function create(AdministratorData $administratorData) {
-		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->getUsername());
+		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
 		if ($administratorByUserName !== null) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
 		}
 		$administrator = new Administrator($administratorData);
-		$administrator->setPassword($this->administratorService->getPasswordHash($administrator, $administratorData->getPassword()));
+		$administrator->setPassword($this->administratorService->getPasswordHash($administrator, $administratorData->password));
 
 		$this->em->persist($administrator);
 		$this->em->flush();
@@ -66,7 +66,7 @@ class AdministratorFacade {
 	 */
 	public function edit($administratorId, AdministratorData $administratorData) {
 		$administrator = $this->administratorRepository->getById($administratorId);
-		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->getUsername());
+		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
 		$administratorEdited = $this->administratorService->edit($administratorData, $administrator, $administratorByUserName);
 
 		$this->em->flush();

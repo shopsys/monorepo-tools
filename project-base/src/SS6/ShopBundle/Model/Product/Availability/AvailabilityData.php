@@ -7,26 +7,12 @@ class AvailabilityData {
 	/**
 	 * @var string[]
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @param string[] $name
 	 */
 	public function __construct(array $name = []) {
-		$this->name = $name;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @param string[] $name
-	 */
-	public function setName(array $name) {
 		$this->name = $name;
 	}
 
@@ -39,7 +25,7 @@ class AvailabilityData {
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
-		$this->setName($names);
+		$this->name = $names;
 	}
 
 }

@@ -79,36 +79,36 @@ class BillingAddress {
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
 	 */
 	public function __construct(BillingAddressData $billingAddressData) {
-		$this->street = $billingAddressData->getStreet();
-		$this->city = $billingAddressData->getCity();
-		$this->postcode = $billingAddressData->getPostcode();
-		$this->companyCustomer = $billingAddressData->getCompanyCustomer();
+		$this->street = $billingAddressData->street;
+		$this->city = $billingAddressData->city;
+		$this->postcode = $billingAddressData->postcode;
+		$this->companyCustomer = $billingAddressData->companyCustomer;
 		if ($this->companyCustomer) {
-			$this->companyName = $billingAddressData->getCompanyName();
-			$this->companyNumber = $billingAddressData->getCompanyNumber();
-			$this->companyTaxNumber = $billingAddressData->getCompanyTaxNumber();
+			$this->companyName = $billingAddressData->companyName;
+			$this->companyNumber = $billingAddressData->companyNumber;
+			$this->companyTaxNumber = $billingAddressData->companyTaxNumber;
 		}
-		$this->telephone = $billingAddressData->getTelephone();
+		$this->telephone = $billingAddressData->telephone;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $billingAddressData
 	 */
 	public function edit(BillingAddressData $billingAddressData) {
-		$this->street = $billingAddressData->getStreet();
-		$this->city = $billingAddressData->getCity();
-		$this->postcode = $billingAddressData->getPostcode();
-		$this->companyCustomer = $billingAddressData->getCompanyCustomer();
+		$this->street = $billingAddressData->street;
+		$this->city = $billingAddressData->city;
+		$this->postcode = $billingAddressData->postcode;
+		$this->companyCustomer = $billingAddressData->companyCustomer;
 		if ($this->companyCustomer) {
-			$this->companyName = $billingAddressData->getCompanyName();
-			$this->companyNumber = $billingAddressData->getCompanyNumber();
-			$this->companyTaxNumber = $billingAddressData->getCompanyTaxNumber();
+			$this->companyName = $billingAddressData->companyName;
+			$this->companyNumber = $billingAddressData->companyNumber;
+			$this->companyTaxNumber = $billingAddressData->companyTaxNumber;
 		} else {
 			$this->companyName = null;
 			$this->companyNumber = null;
 			$this->companyTaxNumber = null;
 		}
-		$this->telephone = $billingAddressData->getTelephone();
+		$this->telephone = $billingAddressData->telephone;
 	}
 
 	/**

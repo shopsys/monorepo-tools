@@ -60,7 +60,7 @@ class BillingAddressFormType extends AbstractType {
 				$customerData = $form->getData();
 				/* @var $customerData \SS6\ShopBundle\Model\Customer\CustomerData */
 
-				if ($customerData->getCompanyCustomer()) {
+				if ($customerData->companyCustomer) {
 					$validationGroups[] = 'companyCustomer';
 				}
 

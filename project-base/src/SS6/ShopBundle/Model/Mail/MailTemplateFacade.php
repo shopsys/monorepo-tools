@@ -81,7 +81,7 @@ class MailTemplateFacade {
 	 */
 	public function saveMailTemplatesData(array $mailTemplatesData, $domainId) {
 		foreach ($mailTemplatesData as $mailTemplateData) {
-			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->getName(), $domainId);
+			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->name, $domainId);
 			$mailTemplate->edit($mailTemplateData);
 		}
 
@@ -104,19 +104,19 @@ class MailTemplateFacade {
 		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
 
 		$allMailTemplatesData = new AllMailTemplatesData();
-		$allMailTemplatesData->setDomainId($domainId);
+		$allMailTemplatesData->domainId = $domainId;
 		$registrationMailTemplatesData = new MailTemplateData();
 		$registrationMailTemplate = $this->mailTemplateRepository
 			->findByNameAndDomainId(MailTemplate::REGISTRATION_CONFIRM_NAME, $domainId);
 		if ($registrationMailTemplate !== null) {
 			$registrationMailTemplatesData->setFromEntity($registrationMailTemplate);
 		}
-		$registrationMailTemplatesData->setName(MailTemplate::REGISTRATION_CONFIRM_NAME);
+		$registrationMailTemplatesData->name = MailTemplate::REGISTRATION_CONFIRM_NAME;
 
-		$allMailTemplatesData->setRegistrationTemplate($registrationMailTemplatesData);
+		$allMailTemplatesData->registrationTemplate = $registrationMailTemplatesData;
 
-		$allMailTemplatesData->setOrderStatusTemplates(
-			$this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates));
+		$allMailTemplatesData->orderStatusTemplates =
+			$this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);
 
 		return $allMailTemplatesData;
 	}

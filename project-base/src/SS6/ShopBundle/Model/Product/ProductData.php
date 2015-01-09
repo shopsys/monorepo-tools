@@ -18,73 +18,73 @@ class ProductData {
 	/**
 	 * @var array
 	 */
-	private $name;
+	public $name;
 
 	/**
 	 * @var string|null
 	 */
-	private $catnum;
+	public $catnum;
 
 	/**
 	 * @var string|null
 	 */
-	private $partno;
+	public $partno;
 
 	/**
 	 * @var string|null
 	 */
-	private $ean;
+	public $ean;
 
 	/**
 	 * @var array
 	 */
-	private $description;
+	public $description;
 
 	/**
 	 * @var string
 	 */
-	private $price;
+	public $price;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
 	 */
-	private $vat;
+	public $vat;
 
 	/**
 	 * @var \DateTime|null
 	 */
-	private $sellingFrom;
+	public $sellingFrom;
 
 	/**
 	 * @var \DateTime|null
 	 */
-	private $sellingTo;
+	public $sellingTo;
 
 	/**
 	 * @var int|null
 	 */
-	private $stockQuantity;
+	public $stockQuantity;
 
 	/**
 	 * @var bool
 	 */
-	private $hidden;
+	public $hidden;
 
 	/**
 	 *
 	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
 	 */
-	private $availability;
+	public $availability;
 
 	/**
 	 * @var array
 	 */
-	private $hiddenOnDomains;
+	public $hiddenOnDomains;
 
 	/**
 	 * @var array
 	 */
-	private $categories;
+	public $categories;
 
 	/**
 	 * @param array $name
@@ -135,234 +135,38 @@ class ProductData {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCatnum() {
-		return $this->catnum;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getPartno() {
-		return $this->partno;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getEan() {
-		return $this->ean;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPrice() {
-		return $this->price;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
-	 */
-	public function getVat() {
-		return $this->vat;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getSellingFrom() {
-		return $this->sellingFrom;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getSellingTo() {
-		return $this->sellingTo;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getStockQuantity() {
-		return $this->stockQuantity;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Availability\Availability|null
-	 */
-	public function getAvailability() {
-		return $this->availability;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	/**
-	 * @param array $name
-	 */
-	public function setName(array $name) {
-		$this->name = $name;
-	}
-
-	/**
-	 * @param string|null $catnum
-	 */
-	public function setCatnum($catnum) {
-		$this->catnum = $catnum;
-	}
-
-	/**
-	 * @param string|null $partno
-	 */
-	public function setPartno($partno) {
-		$this->partno = $partno;
-	}
-
-	/**
-	 * @param string|null $ean
-	 */
-	public function setEan($ean) {
-		$this->ean = $ean;
-	}
-
-	/**
-	 * @param array $description
-	 */
-	public function setDescription(array $description) {
-		$this->description = $description;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
-	 */
-	public function setVat(Vat $vat = null) {
-		$this->vat = $vat;
-	}
-
-	/**
-	 * @param string|null $price
-	 */
-	public function setPrice($price) {
-		$this->price = $price;
-	}
-
-	/**
-	 * @param \DateTime|null $sellingFrom
-	 */
-	public function setSellingFrom(DateTime $sellingFrom = null) {
-		$this->sellingFrom = $sellingFrom;
-	}
-
-	/**
-	 * @param \DateTime|null $sellingTo
-	 */
-	public function setSellingTo(DateTime $sellingTo = null) {
-		$this->sellingTo = $sellingTo;
-	}
-
-	/**
-	 * @param string|null $stockQuantity
-	 */
-	public function setStockQuantity($stockQuantity) {
-		$this->stockQuantity = $stockQuantity;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
-	 */
-	public function setAvailability(Availability $availability = null) {
-		$this->availability = $availability;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isHidden() {
-		return $this->hidden;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getHiddenOnDomains() {
-		return $this->hiddenOnDomains;
-	}
-
-	/**
-	 * @param bool $hidden
-	 */
-	public function setHidden($hidden) {
-		$this->hidden = $hidden;
-	}
-
-	/**
-	 * @param array $domains
-	 */
-	public function setHiddenOnDomains(array $domains) {
-		$this->hiddenOnDomains = $domains;
-	}
-
-	/**
-	 * @param array $categories
-	 */
-	public function setCategories(array $categories) {
-		$this->categories = $categories;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
 	 */
 	public function setFromEntity(Product $product, array $productDomains) {
 		$translations = $product->getTranslations();
-		$names = array();
-		$desctiptions = array();
+		$names = [];
+		$descriptions = [];
 		foreach ($translations as $translation) {
 			$names[$translation->getLocale()] = $translation->getName();
-			$desctiptions[$translation->getLocale()] = $translation->getDescription();
+			$descriptions[$translation->getLocale()] = $translation->getDescription();
 		}
-		$this->setName($names);
-		$this->setDescription($desctiptions);
+		$this->name = $names;
+		$this->description = $descriptions;
 
-		$this->setCatnum($product->getCatnum());
-		$this->setPartno($product->getPartno());
-		$this->setEan($product->getEan());
-		$this->setPrice($product->getPrice());
-		$this->setVat($product->getVat());
-		$this->setSellingFrom($product->getSellingFrom());
-		$this->setSellingTo($product->getSellingTo());
-		$this->setStockQuantity($product->getStockQuantity());
-		$this->setAvailability($product->getAvailability());
-		$this->setHidden($product->isHidden());
-		$hiddenOnDomains = array();
+		$this->catnum = $product->getCatnum();
+		$this->partno = $product->getPartno();
+		$this->ean = $product->getEan();
+		$this->price = $product->getPrice();
+		$this->vat = $product->getVat();
+		$this->sellingFrom = $product->getSellingFrom();
+		$this->sellingTo = $product->getSellingTo();
+		$this->stockQuantity = $product->getStockQuantity();
+		$this->availability = $product->getAvailability();
+		$this->hidden = $product->isHidden();
+		$hiddenOnDomains = [];
 		foreach ($productDomains as $productDomain) {
 			if ($productDomain->isHidden()) {
 				$hiddenOnDomains[] = $productDomain->getDomainId();
 			}
 		}
-		$this->setHiddenOnDomains($hiddenOnDomains);
-		$this->setCategories($product->getCategories()->toArray());
+		$this->hiddenOnDomains = $hiddenOnDomains;
+		$this->categories = $product->getCategories()->toArray();
 	}
 
 }

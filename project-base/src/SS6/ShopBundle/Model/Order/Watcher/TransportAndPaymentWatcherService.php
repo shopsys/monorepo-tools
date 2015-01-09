@@ -61,8 +61,8 @@ class TransportAndPaymentWatcherService {
 	 * @return \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
 	 */
 	public function checkTransportAndPayment(OrderData $orderData, $transports, $payments) {
-		$transport = $orderData->getTransport();
-		$payment = $orderData->getPayment();
+		$transport = $orderData->transport;
+		$payment = $orderData->payment;
 
 		$transportPriceChanged = false;
 		if ($transport !== null) {

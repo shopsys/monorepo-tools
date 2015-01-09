@@ -29,10 +29,10 @@ class RegistrationService {
 			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
 			User $userByEmail = null) {
 		if ($userByEmail instanceof User) {
-			$isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->getEmail()));
-			$isSameDomain = ($userByEmail->getDomainId() === $userData->getDomainId());
+			$isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
+			$isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
 			if ($isSameEmail && $isSameDomain) {
-				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->getEmail());
+				throw new \SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException($userData->email);
 			}
 		}
 
@@ -41,7 +41,7 @@ class RegistrationService {
 			$billingAddress,
 			$deliveryAddress
 		);
-		$this->changePassword($user, $userData->getPassword());
+		$this->changePassword($user, $userData->password);
 
 		return $user;
 	}
@@ -53,8 +53,8 @@ class RegistrationService {
 	public function edit(User $user, UserData $userData) {
 		$user->edit($userData);
 
-		if ($userData->getPassword() !== null) {
-			$this->changePassword($user, $userData->getPassword());
+		if ($userData->password !== null) {
+			$this->changePassword($user, $userData->password);
 		}
 	}
 
@@ -64,7 +64,7 @@ class RegistrationService {
 	 */
 	public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData) {
 
-		if ($deliveryAddressData->getAddressFilled()) {
+		if ($deliveryAddressData->addressFilled) {
 			$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 		} else {
 			$deliveryAddress = null;
@@ -82,7 +82,7 @@ class RegistrationService {
 	public function editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData,
 		DeliveryAddress $deliveryAddress = null) {
 
-		if ($deliveryAddressData->getAddressFilled()) {
+		if ($deliveryAddressData->addressFilled) {
 			if ($deliveryAddress instanceof DeliveryAddress) {
 				$deliveryAddress->edit($deliveryAddressData);
 			} else {
