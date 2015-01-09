@@ -5,8 +5,9 @@ namespace SS6\ShopBundle\Model\Image\Processing;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Constraint;
 
-class ImageEditor {
+class ImageThumbnailFactory {
 
+	// icon-font size 4x
 	const THUMBNAIL_WIDTH = 41;
 	const THUMBNAIL_HEIGHT = 48;
 
@@ -33,7 +34,7 @@ class ImageEditor {
 	 * @return \Intervention\Image\Image
 	 */
 	public function getImageThumbnail($filepath) {
-		$image = $this->makeImage($filepath);
+		$image = $this->createImage($filepath);
 		$image->resize(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT, function (Constraint $constraint) {
 			$constraint->aspectRatio();
 		});
@@ -45,7 +46,7 @@ class ImageEditor {
 	 * @param string $filepath
 	 * @return \Intervention\Image\Image
 	 */
-	private function makeImage($filepath) {
+	private function createImage($filepath) {
 		$extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
 		if (!in_array($extension, $this->supportedImageExtensions)) {
 			throw new \SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);

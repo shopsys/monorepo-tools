@@ -319,13 +319,13 @@ services:
   ss6.shop.image.image_service:
     class: SS6\ShopBundle\Model\Image\ImageService
 
-  ss6.shop.image.processing.image_editor:
-    class: SS6\ShopBundle\Model\Image\Processing\ImageEditor
-
   ss6.shop.image.processing.image_manager:
     class: Intervention\Image\ImageManager
     arguments:
       - [driver: 'gd']
+
+  ss6.shop.image.processing.image_thumbnail_factory:
+    class: SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
 
   ss6.shop.localization.locale_listener:
     class: SS6\ShopBundle\Model\Localization\LocalizationListener

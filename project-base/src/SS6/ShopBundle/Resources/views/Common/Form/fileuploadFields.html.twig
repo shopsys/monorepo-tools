@@ -15,8 +15,8 @@
 										<i class="fa fa-{{ iconType }} fa-4x js-file-upload-icon-type"></i>
 									{% endif %}
 
-									{% if thumbnailUri is same as(false)%}
-										{# While parsing html by JS, was called request to all src, but src not set, yet. #}
+									{% if thumbnailUri is same as(false) %}
+										{# Tag cannot contain empty "url" attribute because browser loads it when parsing in JavaScript. #}
 										<img class="js-file-upload-image-thumbnail" />
 									{% elseif thumbnailUri is not null %}
 										<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Twig\FileThumbnail;
 
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Image\Processing\ImageEditor;
+use SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -24,13 +24,13 @@ class FileThumbnailExtension extends Twig_Extension {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageEditor
+	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
 	 */
-	private $imageEditor;
+	private $imageThumbnailFactory;
 
-	public function __construct(FileUpload $fileUpload, ImageEditor $imageEditor) {
+	public function __construct(FileUpload $fileUpload, ImageThumbnailFactory $imageThumbnailFactory) {
 		$this->fileUpload = $fileUpload;
-		$this->imageEditor = $imageEditor;
+		$this->imageThumbnailFactory = $imageThumbnailFactory;
 		$this->iconsByExtension = [
 			'csv' => 'file-excel-o',
 			'doc' => 'file-word-o',
@@ -78,8 +78,8 @@ class FileThumbnailExtension extends Twig_Extension {
 	 * @return FileThumbnailInfo
 	 */
 	private function getImageThumbnailInfo($temporaryFilename) {
-		$image = $this->imageEditor->getImageThumbnail($this->fileUpload->getTemporaryFilepath($temporaryFilename));
-		
+		$image = $this->imageThumbnailFactory->getImageThumbnail($this->fileUpload->getTemporaryFilepath($temporaryFilename));
+
 		return new FileThumbnailInfo(null, $image->encode('data-url', self::IMAGE_THUMBNAIL_QUALITY)->getEncoded());
 	}
 
