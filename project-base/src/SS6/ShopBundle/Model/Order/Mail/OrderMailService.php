@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
@@ -50,16 +51,23 @@ class OrderMailService {
 	 */
 	private $orderItemPriceCalculation;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		Setting $setting,
 		DomainRouterFactory $domainRouterFactory,
 		Twig_Environment $twig,
-		OrderItemPriceCalculation $orderItemPriceCalculation
+		OrderItemPriceCalculation $orderItemPriceCalculation,
+		Domain $domain
 	) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;
 		$this->twig = $twig;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -94,6 +102,18 @@ class OrderMailService {
 	private function getVariablesReplacementsForBody(Order $order) {
 		$router = $this->domainRouterFactory->getRouter($order->getDomainId());
 
+		$domainConfig = $this->domain->getDomainConfigById($order->getDomainId());
+		/* @var $domainConfig \SS6\ShopBundle\Model\Domain\Config\DomainConfig */
+
+		$transport = $order->getTransport();
+		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+
+		$payment = $order->getPayment();
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+
+		$transportInstructions = $transport->getInstructions($domainConfig->getLocale());
+		$paymentInstructions = $payment->getInstructions($domainConfig->getLocale());
+
 		return array(
 			self::VARIABLE_NUMBER  => $order->getNumber(),
 			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
@@ -106,6 +126,8 @@ class OrderMailService {
 			self::VARIABLE_NOTE  => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
 			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
+			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
+			self::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
 		);
 
 	}
