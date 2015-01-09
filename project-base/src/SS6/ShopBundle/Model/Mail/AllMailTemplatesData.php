@@ -24,8 +24,8 @@ class AllMailTemplatesData {
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplateData[]
 	 */
 	public function getAllTemplates() {
-		$allTemplates = $this->getOrderStatusTemplates();
-		$allTemplates[] = $this->getRegistrationTemplate();
+		$allTemplates = $this->orderStatusTemplates;
+		$allTemplates[] = $this->registrationTemplate;
 		return $allTemplates;
 	}
 
