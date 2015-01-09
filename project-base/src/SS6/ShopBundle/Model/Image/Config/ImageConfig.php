@@ -67,8 +67,7 @@ class ImageConfig {
 	 * @param string $entityName
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 	 */
-	private function getEntityConfigByEntityName($entityName) {
-
+	public function getEntityConfigByEntityName($entityName) {
 		foreach ($this->imageEntityConfigsByClass as $entityConfig) {
 			if ($entityConfig->getEntityName() === $entityName) {
 				return $entityConfig;
