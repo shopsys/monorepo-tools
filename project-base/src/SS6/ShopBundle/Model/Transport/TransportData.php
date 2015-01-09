@@ -27,6 +27,11 @@ class TransportData {
 	public $description;
 
 	/**
+	 * @var string[]
+	 */
+	public $instructions;
+
+	/**
 	 * @var bool
 	 */
 	public $hidden;
@@ -46,6 +51,7 @@ class TransportData {
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string[] $descriptions
+	 * @param string[] $instructions
 	 * @param boolean $hidden
 	 * @param int[] $domains
 	 */
@@ -54,6 +60,7 @@ class TransportData {
 		$price = null,
 		Vat $vat = null,
 		array $descriptions = [],
+		array $instructions = [],
 		$hidden = false,
 		array $domains = []
 	) {
@@ -61,6 +68,7 @@ class TransportData {
 		$this->price = $price;
 		$this->vat = $vat;
 		$this->description = $descriptions;
+		$this->instructions = $instructions;
 		$this->hidden = $hidden;
 		$this->domains = $domains;
 	}
@@ -73,12 +81,15 @@ class TransportData {
 		$translations = $transport->getTranslations();
 		$names = [];
 		$desctiptions = [];
+		$instructions = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 			$desctiptions[$translate->getLocale()] = $translate->getDescription();
+			$instructions[$translate->getLocale()] = $translate->getInstructions();
 		}
 		$this->name = $names;
 		$this->description = $desctiptions;
+		$this->instructions = $instructions;
 		$this->hidden = $transport->isHidden();
 		$this->price = $transport->getPrice();
 		$this->vat = $transport->getVat();

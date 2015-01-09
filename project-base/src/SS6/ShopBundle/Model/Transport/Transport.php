@@ -101,6 +101,9 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 		foreach ($transportData->description as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
+		foreach ($transportData->instructions as $locale => $instructions) {
+			$this->translation($locale)->setInstructions($instructions);
+		}
 	}
 
 	/**
@@ -138,6 +141,14 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 */
 	public function getDescription($locale = null) {
 		return $this->translation($locale)->getDescription();
+	}
+
+	/**
+	 * @param string|null $locale
+	 * @return string|null
+	 */
+	public function getInstructions($locale = null) {
+		return $this->translation($locale)->getInstructions();
 	}
 
 	/**
