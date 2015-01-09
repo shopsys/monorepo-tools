@@ -31,71 +31,71 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $firstName;
+	private $firstName;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $lastName;
+	private $lastName;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
 	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
 	 */
-	protected $email;
+	private $email;
 
 	/**
 	 * @ORM\Column(name="password", type="string", length=100)
 	 */
-	protected $password;
+	private $password;
 
 	/**
 	 * @var DateTime
 	 */
-	protected $lastActivity;
+	private $lastActivity;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\BillingAddress
 	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\BillingAddress")
 	 * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
 	 */
-	protected $billingAddress;
+	private $billingAddress;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
 	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\DeliveryAddress")
 	 */
-	protected $deliveryAddress;
+	private $deliveryAddress;
 
 	/**
 	 * @var \DateTime
 	 * @ORM\Column(type="datetime")
 	 */
-	protected $createdAt;
+	private $createdAt;
 
 	/**
 	 * @var \DateTime|null
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
-	protected $lastLogin;
+	private $lastLogin;
 
 	/**
 	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	protected $domainId;
+	private $domainId;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Group\PricingGroup")
 	 * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
 	 */
-	protected $pricingGroup;
+	private $pricingGroup;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData

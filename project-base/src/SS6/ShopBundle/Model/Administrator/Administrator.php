@@ -30,38 +30,38 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * @ORM\Column(type="string", length=100, unique = true)
 	 */
-	protected $username;
+	private $username;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $realName;
+	private $realName;
 
 	/**
 	 * @ORM\Column(name="password", type="string", length=100)
 	 */
-	protected $password;
+	private $password;
 
 	/**
 	 * @ORM\Column(name="login_token", type="string", length=32)
 	 */
-	protected $loginToken;
+	private $loginToken;
 
 	/**
 	 * @var DateTime
 	 */
-	protected $lastActivity;
+	private $lastActivity;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
 	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
 	 */
-	protected $email;
+	private $email;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit[]
@@ -71,7 +71,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 *	orphanRemoval=true
 	 * )
 	 */
-	protected $gridLimits;
+	private $gridLimits;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
