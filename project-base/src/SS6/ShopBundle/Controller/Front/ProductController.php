@@ -54,6 +54,7 @@ class ProductController extends Controller {
 		$filterForm->handleRequest($request);
 
 		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
+			$productFilterData,
 			$orderingSetting,
 			$page,
 			self::PRODUCTS_PER_PAGE,

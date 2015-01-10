@@ -1,0 +1,118 @@
+<?php
+
+namespace SS6\ShopBundle\Model\Product\Filter;
+
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Model\Product\Filter\ParameterFilterData;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+
+class ParameterFilterRepository {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	public function __construct(
+		EntityManager $em
+	) {
+		$this->em = $em;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[]
+	 */
+	public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters) {
+		$parameterIndex = 1;
+		$valueIndex = 1;
+
+		foreach ($parameters as $parameterFilterData) {
+			/* @var $parameterFilterData \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData */
+
+			if (count($parameterFilterData->values) === 0) {
+				continue;
+			}
+
+			$parameterQueryBuilder = $this->getParameterQueryBuilder(
+				$parameterFilterData,
+				$parameterIndex,
+				$valueIndex
+			);
+
+			$productsQueryBuilder->andWhere($productsQueryBuilder->expr()->exists($parameterQueryBuilder));
+			foreach ($parameterQueryBuilder->getParameters() as $parameter) {
+				$productsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
+			}
+
+			$parameterIndex++;
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
+	 * @param int $parameterIndex
+	 * @param int $valueIndex
+	 * @return \Doctrine\DBAL\Query\QueryBuilder
+	 */
+	private function getParameterQueryBuilder(
+		ParameterFilterData $parameterFilterData,
+		&$parameterIndex,
+		&$valueIndex
+	) {
+		$ppvAlias = 'ppv' . $parameterIndex;
+		$parameterPlaceholder = ':parameter' . $parameterIndex;
+
+		$parameterQueryBuilder = $this->em->createQueryBuilder();
+
+		$valuesExpr = $this->getValuesExpr(
+			$parameterFilterData->values,
+			$parameterQueryBuilder,
+			$ppvAlias,
+			$valueIndex
+		);
+
+		$parameterQueryBuilder
+			->select('1')
+			->from(ProductParameterValue::class, $ppvAlias)
+			->where($ppvAlias . '.product = p')
+				->andWhere($ppvAlias . '.parameter = ' . $parameterPlaceholder)
+				->andWhere($valuesExpr);
+
+		$parameterQueryBuilder->setParameter($parameterPlaceholder, $parameterFilterData->parameter);
+
+		return $parameterQueryBuilder;
+	}
+
+	/**
+	 * Generates:
+	 * ppv.value = :parameterValueM OR ppv.value = :parameterValueN OR ...
+	 *
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[] $parameterValues
+	 * @param \Doctrine\ORM\QueryBuilder $parameterQueryBuilder
+	 * @param string $ppvAlias
+	 * @param int $valueIndex
+	 * @return \Doctrine\ORM\Query\Expr
+	 */
+	private function getValuesExpr(
+		array $parameterValues,
+		QueryBuilder $parameterQueryBuilder,
+		$ppvAlias,
+		&$valueIndex
+	) {
+		$valuesExpr = $parameterQueryBuilder->expr()->orX();
+
+		foreach ($parameterValues as $parameterValue) {
+			$valuePlaceholder = ':parameterValue' . $valueIndex;
+
+			$valuesExpr->add($ppvAlias . '.value = ' . $valuePlaceholder);
+			$parameterQueryBuilder->setParameter($valuePlaceholder, $parameterValue);
+
+			$valueIndex++;
+		}
+
+		return $valuesExpr;
+	}
+
+}

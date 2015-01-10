@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductOnCurrentDomainFacade {
@@ -61,6 +62,7 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
@@ -68,6 +70,7 @@ class ProductOnCurrentDomainFacade {
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedProductDetailsInCategory(
+		ProductFilterData $productFilterData,
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
@@ -82,7 +85,8 @@ class ProductOnCurrentDomainFacade {
 			$page,
 			$limit,
 			$category,
-			$this->currentCustomer->getPricingGroup()
+			$this->currentCustomer->getPricingGroup(),
+			$productFilterData
 		);
 		$products = $paginationResult->getResults();
 

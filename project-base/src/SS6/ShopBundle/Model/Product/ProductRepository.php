@@ -9,6 +9,8 @@ use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
@@ -21,10 +23,16 @@ class ProductRepository {
 	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
+	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
 	 */
-	public function __construct(EntityManager $em) {
+	private $parameterFilterRepository;
+
+	public function __construct(
+		EntityManager $em,
+		ParameterFilterRepository $parameterFilterRepository
+	) {
 		$this->em = $em;
+		$this->parameterFilterRepository = $parameterFilterRepository;
 	}
 
 	/**
@@ -109,6 +117,7 @@ class ProductRepository {
 	 * @param int $limit
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginationResultInCategory(
@@ -118,10 +127,12 @@ class ProductRepository {
 		$page,
 		$limit,
 		Category $category,
-		PricingGroup $pricingGroup
+		PricingGroup $pricingGroup,
+		ProductFilterData $productFilterData
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 		$this->addTranslation($queryBuilder, $locale);
+		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);

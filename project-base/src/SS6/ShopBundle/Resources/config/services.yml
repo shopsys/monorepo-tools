@@ -532,6 +532,9 @@ services:
   ss6.shop.product.filter.parameter_filter_choice_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
 
+  ss6.shop.product.filter.parameter_filter_repository:
+    class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
+
   ss6.shop.product.top_product.top_product_inline_edit:
     class: SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit
 
