@@ -19,6 +19,17 @@
 		{% set routeParams = {'categoryId': category.id} %}
 
 		<div>
+			{{ form_start(filterForm) }}
+				{{ form_row(filterForm.minimalPrice) }}
+				{{ form_row(filterForm.maximalPrice) }}
+
+				{{ form_row(filterForm.parameters) }}
+
+				{{ form_widget(filterForm.search) }}
+			{{ form_end(filterForm) }}
+		</div>
+
+		<div>
 			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
 		</div>
 
