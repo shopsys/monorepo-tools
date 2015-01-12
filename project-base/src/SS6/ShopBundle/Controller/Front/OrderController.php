@@ -2,12 +2,14 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
+use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
-use SS6\ShopBundle\Model\Setting\Setting;
 
 class OrderController extends Controller {
 
@@ -191,11 +193,45 @@ class OrderController extends Controller {
 		if ($orderId === null) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
-		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $domain->getId());
+
+		$orderConfirmationTextBasic = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $domain->getId());
+		$orderConfirmationText = $this->replaceOrderConfirmationTextVariables($orderConfirmationTextBasic, $orderId, $domain);
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
 			'orderConfirmationText' => $orderConfirmationText,
 		));
+	}
+
+	/**
+	 * @param string $text
+	 * @param int $orderId
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @return string
+	 */
+	private function replaceOrderConfirmationTextVariables($text, $orderId, Domain $domain) {
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+
+		$order = $orderFacade->getById($orderId);
+
+		$transport = $order->getTransport();
+		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+
+		$payment = $order->getPayment();
+		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+
+		$domainConfig = $domain->getDomainConfigById($order->getDomainId());
+		/* @var $domainConfig \SS6\ShopBundle\Model\Domain\Config\DomainConfig */
+
+		$transportInstructions = $transport->getInstructions($domainConfig->getLocale());
+		$paymentInstructions = $payment->getInstructions($domainConfig->getLocale());
+
+		$variables = [
+			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
+			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
+		];
+		$finalText = strtr($text, $variables);
+		return $finalText;
 	}
 
 	/**

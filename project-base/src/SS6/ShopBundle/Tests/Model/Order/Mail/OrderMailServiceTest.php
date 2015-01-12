@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Tests\Model\Form;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Mail\MessageData;
@@ -33,11 +35,16 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
+		$domainMock = $this->getMockBuilder(Domain::class)
+			->disableOriginalConstructor()
+			->getMock();
+
 		$orderMailService = new OrderMailService(
 			$settingMock,
 			$domainRouterFactoryMock,
 			$twigMock,
-			$orderItemPriceCalculationMock
+			$orderItemPriceCalculationMock,
+			$domainMock
 		);
 
 		$orderStatus1 = $this->getMock(OrderStatus::class, ['getId'], [], '', false);
@@ -75,11 +82,15 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
+		$domainConfig = new DomainConfig(1, 1, 'cs', '');
+		$domain = new Domain([$domainConfig]);
+
 		$orderMailService = new OrderMailService(
 			$settingMock,
 			$domainRouterFactoryMock,
 			$twigMock,
-			$orderItemPriceCalculationMock
+			$orderItemPriceCalculationMock,
+			$domain
 		);
 
 		$order = $this->getReference('order_1');
