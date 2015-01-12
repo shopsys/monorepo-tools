@@ -50,6 +50,8 @@ class ProductFilterFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
 			'data_class' => ProductFilterData::class,
+			'method' => 'GET',
+			'csrf_protection' => false,
 		));
 	}
 

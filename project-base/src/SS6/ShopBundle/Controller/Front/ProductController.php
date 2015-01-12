@@ -71,6 +71,7 @@ class ProductController extends Controller {
 			'paginationResult' => $paginationResult,
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
+			'filterFormSubmited' => $filterForm->isSubmitted(),
 		));
 	}
 
