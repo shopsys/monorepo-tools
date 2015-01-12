@@ -33,22 +33,25 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
-	public function getParameterFilterChoicesByDomainIdAndVisibleProductsInCategory(
+	public function getParameterFilterChoicesInCategory(
 		$domainId,
+		$locale,
 		Category $category
 	) {
 		$productsQueryBuilder = $this->productRepository->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 
 		$productsQueryBuilder
 			->select('MIN(p), pp, pv')
-			->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p')
+			->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p AND ppv.locale = :locale')
 			->join(Parameter::class, 'pp', Join::WITH, 'pp = ppv.parameter')
 			->join(ParameterValue::class, 'pv', Join::WITH, 'pv = ppv.value')
 			->groupBy('pp, pv')
-			->resetDQLPart('orderBy');
+			->resetDQLPart('orderBy')
+			->setParameter('locale', $locale);
 
 		$rows = $productsQueryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
 

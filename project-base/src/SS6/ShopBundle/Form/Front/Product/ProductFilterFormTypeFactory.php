@@ -20,12 +20,13 @@ class ProductFilterFormTypeFactory {
 
 	/**
 	 * @param int $domainId
+	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
-	public function create($domainId, Category $category) {
+	public function create($domainId, $locale, Category $category) {
 		$parameterFilterChoices = $this->parameterFilterChoiceRepository
-			->getParameterFilterChoicesByDomainIdAndVisibleProductsInCategory($domainId, $category);
+			->getParameterFilterChoicesInCategory($domainId, $locale, $category);
 
 		return new ProductFilterFormType($parameterFilterChoices);
 	}

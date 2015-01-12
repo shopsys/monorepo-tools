@@ -49,7 +49,7 @@ class ProductController extends Controller {
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createForm($productFilterFormTypeFactory->create($domain->getId(), $category));
+		$filterForm = $this->createForm($productFilterFormTypeFactory->create($domain->getId(), $domain->getLocale(), $category));
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
