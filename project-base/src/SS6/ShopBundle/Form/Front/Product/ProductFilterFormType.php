@@ -32,7 +32,8 @@ class ProductFilterFormType extends AbstractType {
 			->add('parameters', new ParameterFilterFormType($this->parameterFilterChoices), [
 				'required' => false,
 			])
-			->add('search', 'submit');
+			->add('search', 'submit')
+			->add('reset', 'submit');
 	}
 
 	/**
