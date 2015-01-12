@@ -46,10 +46,9 @@ class ArticleRepository {
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
 	public function getById($articleId) {
-		$criteria = array('id' => $articleId);
-		$user = $this->getArticleRepository()->findOneBy($criteria);
+		$user = $this->getArticleRepository()->find($articleId);
 		if ($user === null) {
-			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($articleId);
 		}
 		return $user;
 	}

@@ -137,7 +137,7 @@ class ProductRepository {
 
 			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
 				$queryBuilder->leftJoin(
-					ProductCalculatedPrice::class, 
+					ProductCalculatedPrice::class,
 					'pcp',
 					Join::WITH,
 					'pcp.product = p AND pcp.pricingGroup = :pricingGroup'
@@ -222,8 +222,8 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain|null
 	 */
 	public function findProductDomainByProductAndDomainId(Product $product, $domainId) {
-		return $this->getProductDomainRepository()->findOneBy(array(
-			'product' => $product,
+		return $this->getProductDomainRepository()->find(array(
+			'product' => $product->getId(),
 			'domainId' => $domainId,
 		));
 	}

@@ -32,10 +32,9 @@ class SliderItemRepository {
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
 	 */
 	public function getById($sliderItemId) {
-		$criteria = array('id' => $sliderItemId);
-		$sliderItem = $this->getSliderItemRepository()->findOneBy($criteria);
+		$sliderItem = $this->getSliderItemRepository()->find($sliderItemId);
 		if ($sliderItem === null) {
-			throw new \SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException($sliderItemId);
 		}
 		return $sliderItem;
 	}

@@ -33,10 +33,9 @@ class PricingGroupRepository {
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getById($pricingGroupId) {
-		$criteria = ['id' => $pricingGroupId];
-		$pricingGroup = $this->getPricingGroupRepository()->findOneBy($criteria);
+		$pricingGroup = $this->getPricingGroupRepository()->find($pricingGroupId);
 		if ($pricingGroup === null) {
-			throw new \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException($pricingGroupId);
 		}
 		return $pricingGroup;
 	}
