@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFac
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductEditFormTypeFactory {
@@ -30,16 +31,23 @@ class ProductEditFormTypeFactory {
 	 */
 	private $productFormTypeFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 */
+	private $pricingGroupFacade;
+
 	public function __construct(
 		FileUpload $fileUpload,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		ImageFacade $imageFacade,
-		ProductFormTypeFactory $productFormTypeFactory
+		ProductFormTypeFactory $productFormTypeFactory,
+		PricingGroupFacade $pricingGroupFacade
 	) {
 		$this->fileUpload = $fileUpload;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->imageFacade = $imageFacade;
 		$this->productFormTypeFactory = $productFormTypeFactory;
+		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
 	/**
@@ -53,11 +61,14 @@ class ProductEditFormTypeFactory {
 			$images = array();
 		}
 
+		$pricingGroups = $this->pricingGroupFacade->getAll();
+
 		return new ProductEditFormType(
 			$images,
 			$this->productParameterValueFormTypeFactory,
 			$this->fileUpload,
-			$this->productFormTypeFactory
+			$this->productFormTypeFactory,
+			$pricingGroups
 		);
 	}
 

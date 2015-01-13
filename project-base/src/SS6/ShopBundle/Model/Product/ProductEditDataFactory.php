@@ -61,7 +61,7 @@ class ProductEditDataFactory {
 		$productEditData->parameters = $productParameterValuesData;
 
 		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
-		$productEditData->productInputPrices = $this->productInputPriceFacade->getDefaultIndexedByPricingGroupId();
+		$productEditData->productInputPrices = array();
 
 		return $productEditData;
 	}
@@ -84,8 +84,11 @@ class ProductEditDataFactory {
 		}
 		$productEditData->parameters = $productParameterValuesData;
 
-		$productEditData->productInputPrices =  $this->productInputPriceFacade
-			->getAllByProductIndexedByPricingGroupId($product);
+		$manualInputPrices = $this->productInputPriceFacade->getAllByProduct($product);
+		foreach ($manualInputPrices as $manualInputPrice) {
+			$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
+			$productEditData->productInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
+		}
 
 		return $productEditData;
 	}

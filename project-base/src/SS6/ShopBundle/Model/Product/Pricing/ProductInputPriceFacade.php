@@ -60,20 +60,11 @@ class ProductInputPriceFacade {
 	}
 
 	/**
-	 * @return string[]
-	 */
-	public function getDefaultIndexedByPricingGroupId() {
-		return $this->productInputPriceService->getDefaultIndexedByPricingGroupId($this->pricingGroupFacade->getAll());
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductInputPrice[]
 	 */
-	public function getAllByProductIndexedByPricingGroupId(Product $product) {
-		$inputPrices = $this->productInputPriceRepository->getByProduct($product);
-
-		return $this->productInputPriceService->getAllIndexedByPricingGroupId($inputPrices, $this->pricingGroupFacade->getAll());
+	public function getAllByProduct(Product $product) {
+		return $this->productInputPriceRepository->getByProduct($product);
 	}
 
 	/**

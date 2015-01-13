@@ -42,21 +42,29 @@ class ProductEditFormType extends AbstractType {
 	private $productFormTypeFactory;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	private $pricingGroups;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
 	public function __construct(
 		array $images,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		FileUpload $fileUpload,
-		ProductFormTypeFactory $productFormTypeFactory
+		ProductFormTypeFactory $productFormTypeFactory,
+		array $pricingGroups
 	) {
 		$this->images = $images;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->fileUpload = $fileUpload;
 		$this->productFormTypeFactory = $productFormTypeFactory;
+		$this->pricingGroups = $pricingGroups;
 	}
 
 	/**
@@ -107,27 +115,31 @@ class ProductEditFormType extends AbstractType {
 				))
 				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
 			)
-			->add('productInputPrices', 'collection', array(
-				'type' => 'money',
-				'options' => array(
+			->add('productInputPrices', 'form', [
+				'compound' => true,
+			])
+			->add('save', 'submit');
+
+		foreach ($this->pricingGroups as $pricingGroup) {
+			$builder->get('productInputPrices')
+				->add($pricingGroup->getId(), 'money', [
 					'currency' => false,
 					'precision' => 6,
 					'required' => true,
 					'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
-					'constraints' => array(
-						new Constraints\NotBlank(array(
+					'constraints' => [
+						new Constraints\NotBlank([
 							'message' => 'Prosím vyplňte cenu',
-							'groups' => array('manualPriceCalculation')
-						)),
-						new Constraints\GreaterThan(array(
+							'groups' => ['manualPriceCalculation']
+						]),
+						new Constraints\GreaterThan([
 							'value' => 0,
 							'message' => 'Cena musí být větší než 0',
-							'groups' => array('manualPriceCalculation')
-						)),
-					),
-				)
-			))
-			->add('save', 'submit');
+							'groups' => ['manualPriceCalculation']
+						]),
+					],
+				]);
+		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
