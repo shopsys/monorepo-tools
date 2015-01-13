@@ -176,7 +176,7 @@ class ProductFormType extends AbstractType {
 				$productData = $form->getData();
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 
-				if ($productData->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
+				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
 					$validationGroups[] = 'autoPriceCalculation';
 				}
 

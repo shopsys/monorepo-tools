@@ -140,7 +140,7 @@ class ProductEditFormType extends AbstractType {
 				$productData = $form->getData()->productData;
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 
-				if ($productData->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
+				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 					$validationGroups[] = 'manualPriceCalculation';
 				}
 
