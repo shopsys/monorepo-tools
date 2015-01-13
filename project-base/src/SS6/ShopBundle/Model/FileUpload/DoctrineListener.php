@@ -15,7 +15,7 @@ class DoctrineListener {
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 */
-	public function __construct(\SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload) {
+	public function __construct(FileUpload $fileUpload) {
 		$this->fileUpload = $fileUpload;
 	}
 
