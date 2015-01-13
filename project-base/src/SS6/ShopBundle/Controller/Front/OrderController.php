@@ -141,7 +141,7 @@ class OrderController extends Controller {
 		);
 
 		if ($transportAndPaymentCheckResult->isTransportPriceChanged()) {
-			$flashMessageSender->addInfoTwig(
+			$flashMessageSender->addInfoFlashTwig(
 				'V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku.',
 				array(
 					'transportName' => $orderData->transport->getName(),
@@ -149,7 +149,7 @@ class OrderController extends Controller {
 			);
 		}
 		if ($transportAndPaymentCheckResult->isPaymentPriceChanged()) {
-			$flashMessageSender->addInfoTwig(
+			$flashMessageSender->addInfoFlashTwig(
 				'V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku.',
 				array(
 					'paymentName' => $orderData->payment->getName(),

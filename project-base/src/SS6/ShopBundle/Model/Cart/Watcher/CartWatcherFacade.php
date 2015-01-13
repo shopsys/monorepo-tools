@@ -73,7 +73,7 @@ class CartWatcherFacade {
 		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart);
 
 		foreach ($notVisibleItems as $cartItem) {
-			$this->flashMessageSender->addErrorTwig(
+			$this->flashMessageSender->addErrorFlashTwig(
 				'Zboží <strong>{{ name }}</strong>'
 				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
 				array('name' => $cartItem->getName())
