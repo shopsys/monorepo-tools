@@ -77,7 +77,7 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JNodeBase $callExprNode
+	 * @param \JNodeBase $messageIdArgumentNode
 	 * @return string
 	 */
 	private function getMessageId(\JNodeBase $messageIdArgumentNode) {
@@ -87,7 +87,8 @@ class JsTranslatorCallParser {
 			throw new \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\ParseException(
 				'Cannot parse message ID ' . (string)$messageIdArgumentNode
 					. ' at line ' . $messageIdArgumentNode->get_line_num()
-					. ', column ' . $messageIdArgumentNode->get_col_num()
+					. ', column ' . $messageIdArgumentNode->get_col_num(),
+				$ex
 			);
 		}
 
@@ -110,7 +111,8 @@ class JsTranslatorCallParser {
 				throw new \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\ParseException(
 					'Cannot parse domain ' . (string)$argumentNodes[$domainArgumentIndex]
 						. ' at line ' . $argumentNodes[$domainArgumentIndex]->get_line_num()
-						. ', column ' . $argumentNodes[$domainArgumentIndex]->get_col_num()
+						. ', column ' . $argumentNodes[$domainArgumentIndex]->get_col_num(),
+					$ex
 				);
 			}
 
@@ -120,6 +122,10 @@ class JsTranslatorCallParser {
 		}
 	}
 
+	/**
+	 * @param \JCallExprNode $callExprNode
+	 * @return string|null
+	 */
 	private function getFunctionName(JCallExprNode $callExprNode) {
 		$memberExprNodes = $callExprNode->get_nodes_by_symbol(J_MEMBER_EXPR, 1);
 		/* @var $memberExprNodes \JMemberExprNode[] */
@@ -172,6 +178,10 @@ class JsTranslatorCallParser {
 		return $argumentNodes[$messageIdArgumentIndex];
 	}
 
+	/**
+	 * @param \JNodeBase $node
+	 * @return string
+	 */
 	private function getConcatenatedString(JNodeBase $node) {
 		if ($node->scalar_symbol() === J_STRING_LITERAL) {
 			return $this->parseStringLiteral((string)$node);
@@ -199,10 +209,18 @@ class JsTranslatorCallParser {
 		throw new \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\UnsupportedNodeException();
 	}
 
+	/**
+	 * @param string $stringLiteral
+	 * @return string
+	 */
 	private function parseStringLiteral($stringLiteral) {
 		return json_decode($this->normalizeStringLiteral($stringLiteral));
 	}
 
+	/**
+	 * @param string $stringLiteral
+	 * @return string
+	 */
 	private function normalizeStringLiteral($stringLiteral) {
 		$matches = [];
 		if (preg_match('/^"(.*)"$/', $stringLiteral, $matches)) {

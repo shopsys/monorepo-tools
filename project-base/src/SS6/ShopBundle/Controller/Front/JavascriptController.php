@@ -24,11 +24,11 @@ class JavascriptController extends Controller {
 		$jsTranslator = $this->get('ss6.shop.component.translation.js_translator');
 		/* @var $jsTranslator \SS6\ShopBundle\Component\Translation\JsTranslator */
 
-		$resourcesPath = realpath(__DIR__ . '/../../Resources');
+		$resourcesPath = realpath($this->container->getParameter('ss6.resources_dir'));
 		$filename = realpath($resourcesPath . '/scripts/' . $dir . '/' . $file);
 
 		if ($filename === false || !$this->isInPath($filename, $resourcesPath) || !is_file($filename)) {
-			return new Response('File not found', 404);
+			throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
 		}
 
 		$content = file_get_contents($filename);
