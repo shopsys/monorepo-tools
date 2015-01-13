@@ -378,6 +378,9 @@ services:
   ss6.shop.order.order_flow_facade:
     class: SS6\ShopBundle\Model\Order\OrderFlowFacade
 
+  ss6.shop.order.order_confirmation_text_facade:
+    class: SS6\ShopBundle\Model\Order\OrderConfirmationTextFacade
+
   ss6.shop.order.order_mail_facade:
     class: SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
 
