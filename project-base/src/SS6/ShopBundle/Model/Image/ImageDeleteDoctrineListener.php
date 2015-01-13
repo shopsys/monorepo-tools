@@ -14,22 +14,22 @@ use Symfony\Component\Filesystem\Filesystem;
 class ImageDeleteDoctrineListener {
 
 	/**
-	 * @var ContainerInterface
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	private $container;
 
 	/**
-	 * @var Filesystem
+	 * @var \Symfony\Component\Filesystem\Filesystem
 	 */
 	private $filesystem;
 
 	/**
-	 * @var ImageConfig
+	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var FileUpload
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
@@ -46,7 +46,7 @@ class ImageDeleteDoctrineListener {
 	}
 
 	/**
-	 * @param LifecycleEventArgs $args
+	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
 	 */
 	public function preRemove(LifecycleEventArgs $args) {
 		$entity = $args->getEntity();
@@ -61,7 +61,7 @@ class ImageDeleteDoctrineListener {
 
 	/**
 	 * @param mixed $entity
-	 * @param EntityManager $em
+	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	private function deleteEntityImages($entity, EntityManager $em) {
 		try {
@@ -79,7 +79,7 @@ class ImageDeleteDoctrineListener {
 	}
 
 	/**
-	 * @param Image $image
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 */
 	private function deleteImagesFromDisk(Image $image) {
 		$entityName = $image->getEntityName();
