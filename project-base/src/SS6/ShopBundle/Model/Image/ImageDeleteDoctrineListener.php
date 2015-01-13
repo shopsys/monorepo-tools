@@ -7,7 +7,6 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
-use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -46,20 +45,32 @@ class ImageDeleteDoctrineListener {
 	}
 
 	/**
+	 * Prevent ServiceCircularReferenceException
+	 *
+	 * @return \SS6\ShopBundle\Model\Image\ImageLocator
+	 */
+	private function getImageLocator() {
+		return $this->container->get('ss6.shop.image.image_locator');
+	}
+
+	/**
+	 * Prevent ServiceCircularReferenceException
+	 *
+	 * @return \SS6\ShopBundle\Model\Image\ImageFacade
+	 */
+	private function getImageFacade() {
+		return $this->container->get('ss6.shop.image.image_facade');
+	}
+
+	/**
 	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
 	 */
 	public function preRemove(LifecycleEventArgs $args) {
-		$imageFacade = $this->container->get('ss6.shop.image.image_facade');
-		/* @var $imageFacade \SS6\ShopBundle\Model\Image\ImageFacade */
-
 		$entity = $args->getEntity();
 
-		if ($imageFacade->hasImages($entity)) {
-			$em = $args->getEntityManager();
-			$this->deleteEntityImages($entity, $em, $imageFacade);
-		}
-
-		if ($entity instanceof Image) {
+		if ($this->imageConfig->hasImageConfig($entity)) {
+			$this->deleteEntityImages($entity, $args->getEntityManager());
+		} elseif ($entity instanceof Image) {
 			$this->deleteImageFiles($entity);
 		}
 	}
@@ -69,8 +80,8 @@ class ImageDeleteDoctrineListener {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
 	 */
-	private function deleteEntityImages($entity, EntityManager $em, ImageFacade $imageFacade) {
-		$images = $imageFacade->getImagesByEntity($entity, null);
+	private function deleteEntityImages($entity, EntityManager $em) {
+		$images = $this->getImageFacade()->getImagesByEntity($entity, null);
 		if (count($images) > 0) {
 			foreach ($images as $entity) {
 				$em->remove($entity);
@@ -82,13 +93,11 @@ class ImageDeleteDoctrineListener {
 	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 */
 	private function deleteImageFiles(Image $image) {
-		$imageLocator = $this->container->get('ss6.shop.image.image_locator');
-		/* @var $imageLocator \SS6\ShopBundle\Model\Image\ImageLocator */
 		$entityName = $image->getEntityName();
 		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
 		foreach ($imageConfig->getSizes() as $size) {
-			$filePath = $imageLocator->getAbsoluteImageFilePath($image, $size->getName());
-			$this->filesystem->remove($filePath);
+			$filepath = $this->getImageLocator()->getAbsoluteImageFilepath($image, $size->getName());
+			$this->filesystem->remove($filepath);
 		}
 	}
 

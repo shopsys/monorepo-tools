@@ -125,14 +125,6 @@ class ImageFacade {
 
 	/**
 	 * @param object $entity
-	 * @return boolean
-	 */
-	public function hasImages($entity) {
-		return $this->imageConfig->hasImageConfig($entity);
-	}
-
-	/**
-	 * @param object $entity
 	 * @return int
 	 */
 	private function getEntityId($entity) {

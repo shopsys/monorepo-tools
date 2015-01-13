@@ -68,8 +68,7 @@ class ImageLocator {
 	 * @return bool
 	 */
 	public function imageExists(Image $image, $sizeName) {
-		$relativeImageFilepath = $this->getRelativeImageFilepath($image, $sizeName);
-		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
+		$imageFilepath = $this->getAbsoluteImageFilepath($image, $sizeName);
 
 		return is_file($imageFilepath) && is_readable($imageFilepath);
 	}
@@ -114,7 +113,7 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	public function getAbsoluteImageFilePath(Image $image, $sizeName) {
+	public function getAbsoluteImageFilepath(Image $image, $sizeName) {
 		$relativePath = $this->getRelativeImageFilepath($image, $sizeName);
 
 		return $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
