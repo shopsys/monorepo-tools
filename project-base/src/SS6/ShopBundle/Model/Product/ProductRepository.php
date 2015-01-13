@@ -104,7 +104,7 @@ class ProductRepository {
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 */
-	private function filterByCategory(QueryBuilder $queryBuilder, $category) {
+	private function filterByCategory(QueryBuilder $queryBuilder, Category $category) {
 		$queryBuilder->join('p.categories', 'c', Join::WITH, 'c = :category');
 		$queryBuilder->setParameter('category', $category);
 	}

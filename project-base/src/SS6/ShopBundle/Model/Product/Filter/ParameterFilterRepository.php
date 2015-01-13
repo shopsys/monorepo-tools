@@ -22,7 +22,7 @@ class ParameterFilterRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[]
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters
 	 */
 	public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters) {
 		$parameterIndex = 1;
