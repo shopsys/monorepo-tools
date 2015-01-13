@@ -24,6 +24,10 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 			'cs' => 'Pouze na vlastní nebezpečí',
 			'en' => 'Only if you are crazy',
 		);
+		$transportData->instructions = array(
+			'cs' => '<b>Pozor!</b> Česká pošta pouze na vlastní nebezpečí.',
+			'en' => '<b>Warning!</b> Use Czech Post only if you are crazy.',
+		);
 		$transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		$transportData->domains = array(1, 2);
 		$transportData->hidden = false;

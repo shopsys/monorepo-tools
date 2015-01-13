@@ -24,6 +24,10 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 			'cs' => 'Rychle, levně a spolehlivě!',
 			'en' => 'Quick, cheap and reliable!',
 		];
+		$paymentData->instructions = [
+			'cs' => '<b>Zvolili jste platbu kreditní kartou. Prosím proveďte ji do dvou pracovních dnů.</b>',
+			'en' => '<b>You have chosen payment by credit card. Please finish it in two business days.</b>',
+		];
 		$paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
 		$paymentData->domains = [1, 2];
 		$paymentData->hidden = false;

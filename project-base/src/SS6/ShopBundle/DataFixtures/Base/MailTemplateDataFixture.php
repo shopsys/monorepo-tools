@@ -28,7 +28,9 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Fakturační adresa:<br /> {billing_address} <br />'
 			. 'Doručovací adresa: {delivery_address} <br />'
 			. 'Poznámka: {note} <br />'
-			. 'Produkty: {products} <br />';
+			. 'Produkty: {products} <br />'
+			. '{transport_instructions} <br />'
+			. '{payment_instructions}';
 		$mailTemplateData->setSendMail = true;
 
 		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
