@@ -87,9 +87,7 @@ class ImageDeleteDoctrineListener {
 		foreach ($imageConfig->getSizes() as $size) {
 			$basePath = $this->fileUpload->getUploadDirectory(true, $entityName, $size->getName());
 			$filePath = $basePath . DIRECTORY_SEPARATOR . $image->getId() . '.' . $image->getExtension();
-			if ($this->filesystem->exists($filePath)) {
-				$this->filesystem->remove($filePath);
-			}
+			$this->filesystem->remove($filePath);
 		}
 	}
 
