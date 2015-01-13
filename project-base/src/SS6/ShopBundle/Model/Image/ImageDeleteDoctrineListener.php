@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Model\Image;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\EntityWithImagesInterface;
 use SS6\ShopBundle\Model\Image\Image;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -52,7 +52,9 @@ class ImageDeleteDoctrineListener {
 		$entity = $args->getEntity();
 		$em = $args->getEntityManager();
 
-		$this->deleteEntityImages($entity, $em);
+		if ($entity instanceof EntityWithImagesInterface) {
+			$this->deleteEntityImages($entity, $em);
+		}
 
 		if ($entity instanceof Image) {
 			$this->deleteImageFiles($entity);
@@ -64,17 +66,14 @@ class ImageDeleteDoctrineListener {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	private function deleteEntityImages($entity, EntityManager $em) {
-		try {
-			$imageFacade = $this->container->get('ss6.shop.image.image_facade');
-			/* @var $imageFacade \SS6\ShopBundle\Model\Image\ImageFacade */
+		$imageFacade = $this->container->get('ss6.shop.image.image_facade');
+		/* @var $imageFacade \SS6\ShopBundle\Model\Image\ImageFacade */
 
-			$images = $imageFacade->getImagesByEntity($entity, null);
-			if (count($images) > 0) {
-				foreach ($images as $entity) {
-					$em->remove($entity);
-				}
+		$images = $imageFacade->getImagesByEntity($entity, null);
+		if (count($images) > 0) {
+			foreach ($images as $entity) {
+				$em->remove($entity);
 			}
-		} catch(ImageEntityConfigNotFoundException $e) {
 		}
 	}
 
