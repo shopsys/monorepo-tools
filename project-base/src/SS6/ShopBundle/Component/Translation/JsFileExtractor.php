@@ -95,8 +95,7 @@ class JsFileExtractor implements FileVisitorInterface {
 			$message = new Message($jsTranslatorCall->getMessageId(), $jsTranslatorCall->getDomain());
 			$message->addSource(new FileSource(
 				$this->file->getFilename(),
-				$jsTranslatorCall->getCallExprNode()->get_line_num(),
-				$jsTranslatorCall->getCallExprNode()->get_col_num()
+				$jsTranslatorCall->getCallExprNode()->get_line_num()
 			));
 
 			$this->catalogue->add($message);
