@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\EntityWithImagesInterface;
 use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -81,11 +82,12 @@ class ImageDeleteDoctrineListener {
 	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 */
 	private function deleteImageFiles(Image $image) {
+		$imageLocator = $this->container->get('ss6.shop.image.image_locator');
+		/* @var $imageLocator \SS6\ShopBundle\Model\Image\ImageLocator */
 		$entityName = $image->getEntityName();
 		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
 		foreach ($imageConfig->getSizes() as $size) {
-			$basePath = $this->fileUpload->getUploadDirectory(true, $entityName, $size->getName());
-			$filePath = $basePath . DIRECTORY_SEPARATOR . $image->getId() . '.' . $image->getExtension();
+			$filePath = $imageLocator->getAbsoluteImageFilePath($image, $size->getName());
 			$this->filesystem->remove($filePath);
 		}
 	}

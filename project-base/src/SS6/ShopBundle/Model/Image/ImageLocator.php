@@ -108,4 +108,15 @@ class ImageLocator {
 
 		return implode(DIRECTORY_SEPARATOR, $pathParts) . DIRECTORY_SEPARATOR;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return string
+	 */
+	public function getAbsoluteImageFilePath(Image $image, $sizeName) {
+		$relativePath = $this->getRelativeImageFilepath($image, $sizeName);
+
+		return $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
+	}
 }
