@@ -101,18 +101,13 @@ class OrderMailService {
 	 */
 	private function getVariablesReplacementsForBody(Order $order) {
 		$router = $this->domainRouterFactory->getRouter($order->getDomainId());
-
-		$domainConfig = $this->domain->getDomainConfigById($order->getDomainId());
-		/* @var $domainConfig \SS6\ShopBundle\Model\Domain\Config\DomainConfig */
+		$orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
 		$transport = $order->getTransport();
-		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-
 		$payment = $order->getPayment();
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
-		$transportInstructions = $transport->getInstructions($domainConfig->getLocale());
-		$paymentInstructions = $payment->getInstructions($domainConfig->getLocale());
+		$transportInstructions = $transport->getInstructions($orderDomainConfig->getLocale());
+		$paymentInstructions = $payment->getInstructions($orderDomainConfig->getLocale());
 
 		return array(
 			self::VARIABLE_NUMBER  => $order->getNumber(),

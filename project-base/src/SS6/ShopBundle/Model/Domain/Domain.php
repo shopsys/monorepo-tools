@@ -60,7 +60,7 @@ class Domain {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Domain\DomainConfig
+	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
 	 */
 	public function getDomainConfigById($domainId) {
 		foreach ($this->domainConfigs as $domainConfig) {
