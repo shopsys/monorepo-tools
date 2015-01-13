@@ -55,7 +55,7 @@ class ImageDeleteDoctrineListener {
 		$this->deleteEntityImages($entity, $em);
 
 		if ($entity instanceof Image) {
-			$this->deleteImagesFromDisk($entity);
+			$this->deleteImageFiles($entity);
 		}
 	}
 
@@ -81,7 +81,7 @@ class ImageDeleteDoctrineListener {
 	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 */
-	private function deleteImagesFromDisk(Image $image) {
+	private function deleteImageFiles(Image $image) {
 		$entityName = $image->getEntityName();
 		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
 		foreach ($imageConfig->getSizes() as $size) {
