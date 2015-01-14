@@ -139,6 +139,26 @@
 	{% endspaceless %}
 {% endblock checkbox_label %}
 
+{% block product_widget %}
+	<span class="js-product-picker-container">
+		<input
+			class="form-control js-product-picker-label"
+			value="{{ getProductNameOrNullById(form.vars.value)|default('Vyberte produkt'|trans) }}"
+			disabled="disabled"
+			readonly="readonly"
+		/>
+		<button
+			data-product-picker-url="{{ url('admin_productpicker_list', {parentInputId: '__input_id__'}) }}"
+			class="js-product-picker-create-picker-button"
+			title="Kliknutím přejdete k výběru produktu"
+			onclick="SS6.productPicker.makePicker(this); return false;"
+		>
+			...
+		</button>
+		{{- form_widget(form, {attr: {class: 'js-product-picker-input'}}) -}}
+	</span>
+{% endblock product_widget %}
+
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}

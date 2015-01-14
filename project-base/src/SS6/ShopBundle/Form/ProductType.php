@@ -32,7 +32,7 @@ class ProductType extends AbstractType {
 	 * @return string
 	 */
 	public function getParent() {
-		return 'number';
+		return 'hidden';
 	}
 
 	/**
