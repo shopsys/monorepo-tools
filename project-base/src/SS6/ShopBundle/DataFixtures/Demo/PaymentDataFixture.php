@@ -39,6 +39,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		];
 		$paymentData->price = 49.90;
 		$paymentData->description = [];
+		$paymentData->instructions = [];
 		$paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		$this->createPayment('payment_cod', $paymentData, ['transport_cp']);
 

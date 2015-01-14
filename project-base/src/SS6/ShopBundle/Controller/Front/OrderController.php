@@ -181,12 +181,8 @@ class OrderController extends Controller {
 	public function sentAction() {
 		$session = $this->get('session');
 		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
-		$setting = $this->get('ss6.shop.setting');
-		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$orderConfirmationTextFacade = $this->get('ss6.shop.order.order_confirmation_text_facade');
-		/* @var $orderConfirmationTextFacade \SS6\ShopBundle\Model\Order\OrderConfirmationTextFacade */
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 
 		$orderId = $session->get(self::SESSION_CREATED_ORDER, null);
 		$session->remove(self::SESSION_CREATED_ORDER);
@@ -195,11 +191,8 @@ class OrderController extends Controller {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
 
-		$orderConfirmationTextBasic = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $domain->getId());
-		$orderConfirmationText = $orderConfirmationTextFacade->replaceTextVariables($orderConfirmationTextBasic, $orderId);
-
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
-			'orderConfirmationText' => $orderConfirmationText,
+			'orderConfirmationText' => $orderFacade->getOrderConfirmText($orderId),
 		));
 	}
 

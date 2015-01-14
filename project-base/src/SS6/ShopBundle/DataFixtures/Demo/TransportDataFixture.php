@@ -42,6 +42,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 			'cs' => null,
 			'en' => null,
 		);
+		$transportData->instructions = [];
 		$this->createTransport('transport_ppl', $transportData);
 
 		$transportData->name = array(
