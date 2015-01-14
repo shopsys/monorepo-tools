@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\EntityWithImagesInterface;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -50,11 +49,14 @@ class ImageDeleteDoctrineListener {
 	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
 	 */
 	public function preRemove(LifecycleEventArgs $args) {
-		$entity = $args->getEntity();
-		$em = $args->getEntityManager();
+		$imageFacade = $this->container->get('ss6.shop.image.image_facade');
+		/* @var $imageFacade \SS6\ShopBundle\Model\Image\ImageFacade */
 
-		if ($entity instanceof EntityWithImagesInterface) {
-			$this->deleteEntityImages($entity, $em);
+		$entity = $args->getEntity();
+
+		if ($imageFacade->hasImages($entity)) {
+			$em = $args->getEntityManager();
+			$this->deleteEntityImages($entity, $em, $imageFacade);
 		}
 
 		if ($entity instanceof Image) {
@@ -63,13 +65,11 @@ class ImageDeleteDoctrineListener {
 	}
 
 	/**
-	 * @param mixed $entity
+	 * @param object $entity
 	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
 	 */
-	private function deleteEntityImages($entity, EntityManager $em) {
-		$imageFacade = $this->container->get('ss6.shop.image.image_facade');
-		/* @var $imageFacade \SS6\ShopBundle\Model\Image\ImageFacade */
-
+	private function deleteEntityImages($entity, EntityManager $em, ImageFacade $imageFacade) {
 		$images = $imageFacade->getImagesByEntity($entity, null);
 		if (count($images) > 0) {
 			foreach ($images as $entity) {

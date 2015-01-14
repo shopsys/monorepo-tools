@@ -64,6 +64,19 @@ class ImageConfig {
 	}
 
 	/**
+	 * @param object $entity
+	 * @return boolean
+	 */
+	public function hasImageConfig($entity) {
+		foreach ($this->imageEntityConfigsByClass as $className => $entityConfig) {
+			if ($entity instanceof $className) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * @param string $entityName
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 	 */

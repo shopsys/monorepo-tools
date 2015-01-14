@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
-use SS6\ShopBundle\Model\Image\EntityWithImagesInterface;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 
 /**
@@ -13,7 +12,7 @@ use SS6\ShopBundle\Model\Slider\SliderItemData;
  * @ORM\Table(name="slider_items")
  * @ORM\Entity
  */
-class SliderItem implements OrderableEntityInterface, EntityWithImagesInterface {
+class SliderItem implements OrderableEntityInterface {
 
 	/**
 	 * @var int

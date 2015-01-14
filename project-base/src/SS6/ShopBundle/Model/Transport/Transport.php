@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Transport;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Image\EntityWithImagesInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
@@ -15,7 +14,7 @@ use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface, EntityWithImagesInterface {
+class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface {
 
 	/**
 	 * @var integer
