@@ -33,7 +33,7 @@ class RegistrationController extends Controller {
 				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
 				$userData = $form->getData();
-				$userData->setDomainId($domain->getId());
+				$userData->domainId = $domain->getId();
 				$user = $customerEditFacade->register($userData);
 
 				$this->login($user);
