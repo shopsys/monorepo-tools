@@ -330,6 +330,9 @@ services:
     arguments:
       - [driver: 'gd']
 
+  ss6.shop.image.processing.image_processing_service:
+    class: SS6\ShopBundle\Model\Image\Processing\ImageProcessingService
+
   ss6.shop.image.processing.image_thumbnail_factory:
     class: SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
 

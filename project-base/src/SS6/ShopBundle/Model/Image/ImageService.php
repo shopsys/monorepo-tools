@@ -4,8 +4,21 @@ namespace SS6\ShopBundle\Model\Image;
 
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
 
 class ImageService {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageProcessingService
+	 */
+	private $imageProcessingService;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Processing\ImageProcessingService $imageProcessingService
+	 */
+	public function __construct(ImageProcessingService $imageProcessingService) {
+		$this->imageProcessingService = $imageProcessingService;
+	}
 
 	/**
 	 * @param SS6\ShopBundle\Model\Image\Config\ImageEntityConfig $imageEntityConfig
@@ -23,7 +36,12 @@ class ImageService {
 
 		$images = array();
 		foreach ($temporaryFilenames as $temporaryFilename) {
-			$images[] = new Image($imageEntityConfig->getEntityName(), $entityId, $type, $temporaryFilename);
+			$images[] = new Image(
+				$imageEntityConfig->getEntityName(),
+				$entityId,
+				$type,
+				$this->imageProcessingService->convertImageAndGetConvertedFilename($temporaryFilename)
+			);
 		}
 
 		return $images;
@@ -45,9 +63,14 @@ class ImageService {
 		Image $image = null
 	) {
 		if ($image === null) {
-			$image = new Image($imageEntityConfig->getEntityName(), $entityId, $type, $temporaryFilename);
+			$image = new Image(
+				$imageEntityConfig->getEntityName(),
+				$entityId,
+				$type,
+				$this->imageProcessingService->convertImageAndGetConvertedFilename($temporaryFilename)
+			);
 		} else {
-			$image->setTemporaryFilename($temporaryFilename);
+			$image->setTemporaryFilename($this->imageProcessingService->convertImageAndGetConvertedFilename($temporaryFilename));
 		}
 
 		return $image;
