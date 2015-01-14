@@ -22,7 +22,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 	public function __construct(array $parameterFilterChoices) {
 		$this->parameterChoicesIndexedByParameterId = [];
 		foreach ($parameterFilterChoices as $parameterChoice) {
-			$this->parameterChoicesIndexedByParameterId[$parameterChoice->parameter->getId()] = $parameterChoice;
+			$this->parameterChoicesIndexedByParameterId[$parameterChoice->getParameter()->getId()] = $parameterChoice;
 		}
 	}
 
@@ -34,11 +34,11 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 		foreach ($this->parameterChoicesIndexedByParameterId as $parameterId => $parameterFilterChoice) {
 			$builder
 				->add($parameterId, 'choice', [
-					'label' => $parameterFilterChoice->parameter->getName(),
+					'label' => $parameterFilterChoice->getParameter()->getName(),
 					'expanded' => true,
 					'multiple' => true,
 					'choice_list' => new ObjectChoiceList(
-						$parameterFilterChoice->values,
+						$parameterFilterChoice->getValues(),
 						'text',
 						[],
 						null,
@@ -82,7 +82,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 			}
 
 			$parametersFilterData[] = new ParameterFilterData(
-				$this->parameterChoicesIndexedByParameterId[$parameterId]->parameter,
+				$this->parameterChoicesIndexedByParameterId[$parameterId]->getParameter(),
 				$parameterValues
 			);
 		}

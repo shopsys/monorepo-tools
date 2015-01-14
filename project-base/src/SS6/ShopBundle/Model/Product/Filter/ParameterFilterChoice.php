@@ -9,12 +9,12 @@ class ParameterFilterChoice {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter
 	 */
-	public $parameter;
+	private $parameter;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[]
 	 */
-	public $values = [];
+	private $values = [];
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
@@ -26,6 +26,20 @@ class ParameterFilterChoice {
 	) {
 		$this->parameter = $parameter;
 		$this->values = $values;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 */
+	public function getParameter() {
+		return $this->parameter;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[]
+	 */
+	public function getValues() {
+		return $this->values;
 	}
 
 }
