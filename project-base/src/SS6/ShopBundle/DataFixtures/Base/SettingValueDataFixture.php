@@ -31,11 +31,19 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$domain2DefaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
 
+		$orderSentText = '
+			<p>
+				Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování. <br />
+				{transport_instructions} <br />
+				{payment_instructions}
+			</p>
+		';
+
 		// @codingStandardsIgnoreStart
 		$manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER, SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON));
-		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, '<p>Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování.</p>', SettingValue::DOMAIN_ID_COMMON));
+		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, $orderSentText, SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 1));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', 1));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 2));

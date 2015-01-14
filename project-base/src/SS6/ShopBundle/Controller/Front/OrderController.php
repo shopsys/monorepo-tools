@@ -2,12 +2,13 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\OrderConfirmationTextFacade;
+use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
-use SS6\ShopBundle\Model\Setting\Setting;
 
 class OrderController extends Controller {
 
@@ -180,10 +181,8 @@ class OrderController extends Controller {
 	public function sentAction() {
 		$session = $this->get('session');
 		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
-		$setting = $this->get('ss6.shop.setting');
-		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 
 		$orderId = $session->get(self::SESSION_CREATED_ORDER, null);
 		$session->remove(self::SESSION_CREATED_ORDER);
@@ -191,10 +190,9 @@ class OrderController extends Controller {
 		if ($orderId === null) {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
-		$orderConfirmationText = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $domain->getId());
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
-			'orderConfirmationText' => $orderConfirmationText,
+			'orderConfirmationText' => $orderFacade->getOrderConfirmText($orderId),
 		));
 	}
 

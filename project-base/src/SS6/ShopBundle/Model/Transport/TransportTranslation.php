@@ -32,6 +32,13 @@ class TransportTranslation extends AbstractTranslation {
 	private $description;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $instructions;
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -46,6 +53,13 @@ class TransportTranslation extends AbstractTranslation {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getInstructions() {
+		return $this->instructions;
+	}
+
+	/**
 	 * @param string $name
 	 */
 	public function setName($name) {
@@ -57,6 +71,13 @@ class TransportTranslation extends AbstractTranslation {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+	}
+
+	/**
+	 * @param string $instructions
+	 */
+	public function setInstructions($instructions) {
+		$this->instructions = $instructions;
 	}
 
 }

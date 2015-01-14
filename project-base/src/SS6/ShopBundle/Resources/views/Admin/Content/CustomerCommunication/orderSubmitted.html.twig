@@ -15,6 +15,34 @@
 				{{ form_row(form.content, { label: 'Text'}) }}
 				{{ form_widget(form.save, { label: 'Uložit'|trans}) }}
 			{{ form_end(form) }}
+			
+			<div class="table-responsive grid_body">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr class="grid-row-titles">
+							<th>
+								{{ 'Použitelné proměnné'|trans }}
+							</th>
+							<th>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr class="grid-row-cells">
+								<td>
+									{{ constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS') }}
+								</td>
+								<td>{{ 'Pokyny k dopravě'|trans }}</td>
+							</tr>
+							<tr class="grid-row-cells">
+								<td>
+									{{ constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS') }}
+								</td>
+								<td>{{ 'Pokyny k platbě'|trans }}</td>
+							</tr>
+					</tbody>
+				</table>
+			</div>
 
 		</div>
 

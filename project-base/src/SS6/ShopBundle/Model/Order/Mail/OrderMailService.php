@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
@@ -26,6 +27,8 @@ class OrderMailService {
 	const VARIABLE_NOTE = '{note}';
 	const VARIABLE_PRODUCTS = '{products}';
 	const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
+	const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
+	const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Setting\Setting
@@ -48,16 +51,23 @@ class OrderMailService {
 	 */
 	private $orderItemPriceCalculation;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		Setting $setting,
 		DomainRouterFactory $domainRouterFactory,
 		Twig_Environment $twig,
-		OrderItemPriceCalculation $orderItemPriceCalculation
+		OrderItemPriceCalculation $orderItemPriceCalculation,
+		Domain $domain
 	) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;
 		$this->twig = $twig;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -91,6 +101,13 @@ class OrderMailService {
 	 */
 	private function getVariablesReplacementsForBody(Order $order) {
 		$router = $this->domainRouterFactory->getRouter($order->getDomainId());
+		$orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
+
+		$transport = $order->getTransport();
+		$payment = $order->getPayment();
+
+		$transportInstructions = $transport->getInstructions($orderDomainConfig->getLocale());
+		$paymentInstructions = $payment->getInstructions($orderDomainConfig->getLocale());
 
 		return array(
 			self::VARIABLE_NUMBER  => $order->getNumber(),
@@ -104,6 +121,8 @@ class OrderMailService {
 			self::VARIABLE_NOTE  => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
 			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
+			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
+			self::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
 		);
 
 	}
@@ -136,6 +155,8 @@ class OrderMailService {
 			self::VARIABLE_NOTE,
 			self::VARIABLE_PRODUCTS,
 			self::VARIABLE_ORDER_DETAIL_URL,
+			self::VARIABLE_TRANSPORT_INSTRUCTIONS,
+			self::VARIABLE_PAYMENT_INSTRUCTIONS,
 		);
 	}
 

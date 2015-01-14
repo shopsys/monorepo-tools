@@ -97,6 +97,10 @@ class PaymentFormType extends AbstractType {
 				'required' => false,
 				'type' => 'textarea',
 			))
+			->add('instructions', 'localized', array(
+				'required' => false,
+				'type' => 'ckeditor',
+			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => false,
 				'file_constraints' => array(

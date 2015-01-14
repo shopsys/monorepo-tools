@@ -7,14 +7,15 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
+use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderCreationService;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-
-use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
+use SS6\ShopBundle\Model\Setting\Setting;
 
 class OrderFacade {
 
@@ -68,6 +69,11 @@ class OrderFacade {
 	 */
 	private $orderHashGeneratorRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 */
+	private $setting;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -78,7 +84,8 @@ class OrderFacade {
 		UserRepository $userRepository,
 		OrderStatusRepository $orderStatusRepository,
 		OrderMailFacade $orderMailFacade,
-		OrderHashGeneratorRepository $orderHashGeneratorRepository
+		OrderHashGeneratorRepository $orderHashGeneratorRepository,
+		Setting $setting
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -90,6 +97,7 @@ class OrderFacade {
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderMailFacade = $orderMailFacade;
 		$this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -171,6 +179,23 @@ class OrderFacade {
 		}
 
 		return $order;
+	}
+
+	/**
+	 * @param string $confirmTextTemplate
+	 * @param int $orderId
+	 * @return string
+	 */
+	public function getOrderConfirmText($orderId) {
+		$order = $this->getById($orderId);
+		$confirmTextTemplate = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
+
+		$variables = [
+			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),
+			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS =>  $order->getPayment()->getInstructions(),
+		];
+		
+		return strtr($confirmTextTemplate, $variables);
 	}
 
 	/**

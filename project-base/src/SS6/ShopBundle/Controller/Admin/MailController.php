@@ -35,6 +35,8 @@ class MailController extends Controller {
 				'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)'
 			),
 			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $translator->trans('URL adresa detailu objednávky'),
+			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $translator->trans('Pokyny k dopravě'),
+			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $translator->trans('Pokyny k platbě'),
 		);
 	}
 

@@ -16,7 +16,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -38,7 +38,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => ''], 0, $vat, [], false));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => ''], 0, $vat, [], [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -61,7 +61,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$domainId = 1;
 		$diffetentDomainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], false));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -83,7 +83,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], true));
+		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], 0, $vat, [], [], true));
 
 		$em->persist($vat);
 		$em->persist($transport);

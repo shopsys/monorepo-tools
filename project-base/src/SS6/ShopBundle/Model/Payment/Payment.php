@@ -127,6 +127,9 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 		foreach ($paymentData->description as $locale => $description) {
 			$this->translation($locale)->setDescription($description);
 		}
+		foreach ($paymentData->instructions as $locale => $instructions) {
+			$this->translation($locale)->setInstructions($instructions);
+		}
 	}
 
 	/**
@@ -188,6 +191,14 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 */
 	public function getDescription($locale = null) {
 		return $this->translation($locale)->getDescription();
+	}
+
+	/**
+	 * @param string|null $locale
+	 * @return string|null
+	 */
+	public function getInstructions($locale = null) {
+		return $this->translation($locale)->getInstructions();
 	}
 
 	/**

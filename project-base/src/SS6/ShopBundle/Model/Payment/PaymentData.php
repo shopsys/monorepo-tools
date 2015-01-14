@@ -27,6 +27,11 @@ class PaymentData {
 	public $description;
 
 	/**
+	 * @var string[]
+	 */
+	public $instructions;
+
+	/**
 	 * @var int[]
 	 */
 	public $domains;
@@ -51,6 +56,7 @@ class PaymentData {
 	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string[] $description
+	 * @param string[] $instructions
 	 * @param boolean $hidden
 	 * @param int[] $domains
 	 */
@@ -59,6 +65,7 @@ class PaymentData {
 		$price = null,
 		Vat $vat = null,
 		array $description = [],
+		array $instructions = [],
 		$hidden = false,
 		array $domains = []
 	) {
@@ -66,6 +73,7 @@ class PaymentData {
 		$this->price = $price;
 		$this->vat = $vat;
 		$this->description = $description;
+		$this->instructions = $instructions;
 		$this->domains = $domains;
 		$this->hidden = $hidden;
 		$this->transports = [];
@@ -84,12 +92,15 @@ class PaymentData {
 		$translations = $payment->getTranslations();
 		$names = [];
 		$desctiptions = [];
+		$instructions = [];
 		foreach ($translations as $translate) {
 			$names[$translate->getLocale()] = $translate->getName();
 			$desctiptions[$translate->getLocale()] = $translate->getDescription();
+			$instructions[$translate->getLocale()] = $translate->getInstructions();
 		}
 		$this->name = $names;
 		$this->description = $desctiptions;
+		$this->instructions = $instructions;
 
 		$domains = [];
 		foreach ($paymentDomains as $paymentDomain) {
