@@ -17,15 +17,23 @@
 {% endblock %}
 
 {% block grid_value_cell_edit_id_exchangeRate %}
-	{{ formHtml|raw }}
-	{% if row is null %}
-		{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}
-	{% elseif row.c.id != defaultCurrency.id %}
-		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
-			'%defaultCurrency%': defaultCurrency.symbol,
-			'%currentCurrency%': row.c.symbol
-		}) }}
-	{% endif %}
+	<span class="form-edit-block form-edit-block--size-1">
+		{{ formHtml|raw }}
+		<span class="form-edit-block__info">
+			{% if row is null %}
+				<span title="" class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}">
+					<i class="fa fa-question" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown"></i>
+				</span>
+			{% elseif row.c.id != defaultCurrency.id %}
+				<span title="" class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+					'%defaultCurrency%': defaultCurrency.symbol,
+					'%currentCurrency%': row.c.symbol
+				}) }}">
+					<i class="fa fa-question" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown"></i>
+				</span>
+			{% endif %}
+		</span>
+	</span>
 {% endblock %}
 
 {% block grid_value_cell_id_exchangeRate %}

@@ -1,7 +1,8 @@
 /*
 Form edit block
 ===========
-Block with icons and value type next to input
+Block with icons and value type next to input.
+Modifier --size-X makes input size (plus padding)
 
 	<table class="table table-bordered">
 		<tr>
@@ -10,11 +11,20 @@ Block with icons and value type next to input
 			</td>
 
 			<td>
-				<span class="form-edit-block">
-					%
+				<span class="form-edit-block form-edit-block--size-0">
+					<input type="text" class="form-control" value="input value">
+					<span class="form-edit-block__info">
+						%
+					</span>
 				</span>
-				<span class="form-edit-block__input">
-					<input type="text" class="form-control">
+			</td>
+
+			<td>
+				<span class="form-edit-block form-edit-block--size-1">
+					<input type="text" class="form-control" value="input value">
+					<span class="form-edit-block__info">
+						per km
+					</span>
 				</span>
 			</td>
 		</tr>
@@ -23,12 +33,39 @@ Block with icons and value type next to input
 */
 
 .form-edit-block {
-	width: 50px;
-	float: right;
-	line-height: 34px;
+	position: relative;
+	display: inline-block;
+	padding-right: 60px;
 }
 
-.form-edit-block__input {
-	margin-right: 60px;
-	display: block;
+.form-edit-block__info {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 60px;
+	height: 34px;
+	line-height: 34px;
+	padding-left: 5px;
+}
+
+
+// sizes
+.form-edit-block--size-0 {
+	max-width: 130px;
+}
+
+.form-edit-block--size-1 {
+	max-width: 160px;
+}
+
+.form-edit-block--size-2 {
+	max-width: 190px;
+}
+
+.form-edit-block--size-3 {
+	max-width: 220px;
+}
+
+.form-edit-block--size-4 {
+	max-width: 250px;
 }
