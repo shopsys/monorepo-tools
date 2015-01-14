@@ -19,7 +19,7 @@
 		for (var parameterName in parameters) {
 			var parameterValue = parameters[parameterName];
 
-			// replace all ocurrences
+			// replace all occurrences
 			message = message.split(parameterName).join(parameterValue);
 		}
 

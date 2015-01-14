@@ -8,15 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 class JavascriptController extends Controller {
 
 	/**
-	 * @param string $filename
-	 * @param string $path
-	 * @return boolean
-	 */
-	private function isInPath($filename, $path) {
-		return strpos($filename, $path) === 0;
-	}
-
-	/**
 	 * @param string $dir
 	 * @param string $file
 	 */
@@ -43,6 +34,15 @@ class JavascriptController extends Controller {
 		);
 
 		return $response;
+	}
+
+	/**
+	 * @param string $filename
+	 * @param string $path
+	 * @return boolean
+	 */
+	private function isInPath($filename, $path) {
+		return strpos($filename, $path) === 0;
 	}
 
 }
