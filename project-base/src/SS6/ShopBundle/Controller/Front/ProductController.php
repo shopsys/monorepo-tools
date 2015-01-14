@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,18 +38,40 @@ class ProductController extends Controller {
 		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
+		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
+
+		$category = $categoryFacade->getById($categoryId);
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
-		$paginationResult = $productOnCurrentDomainFacade
-			->getPaginatedProductDetailsInCategory($orderingSetting, $page, self::PRODUCTS_PER_PAGE, $categoryId);
-		$category = $categoryFacade->getById($categoryId);
+		$productFilterData = new ProductFilterData();
+
+		$filterForm = $this->createForm($productFilterFormTypeFactory->create($domain->getId(), $domain->getLocale(), $category));
+		$filterForm->setData($productFilterData);
+		$filterForm->handleRequest($request);
+
+		if ($filterForm->get('reset')->isClicked()) {
+			return $this->redirect($this->generateUrl('front_product_category', ['categoryId' => $categoryId]));
+		}
+
+		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
+			$productFilterData,
+			$orderingSetting,
+			$page,
+			self::PRODUCTS_PER_PAGE,
+			$categoryId
+		);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
 			'category' => $category,
+			'filterForm' => $filterForm->createView(),
+			'filterFormSubmited' => $filterForm->isSubmitted(),
 		));
 	}
 

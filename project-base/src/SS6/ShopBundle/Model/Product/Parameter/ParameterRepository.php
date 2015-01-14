@@ -3,21 +3,19 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ParameterRepository {
 
 	/**
-	 * @var \Doctrine\ORM\EntityRepository
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
-	 */
-	public function __construct(EntityManager $entityManager) {
+	public function __construct(
+		EntityManager $entityManager
+	) {
 		$this->em = $entityManager;
 	}
 
@@ -83,6 +81,9 @@ class ParameterRepository {
 		if ($parameterValue === null) {
 			$parameterValue = new ParameterValue(new ParameterValueData($valueText));
 			$this->em->persist($parameterValue);
+			// Doctrine's identity map is not cache.
+			// We have to flush now, so that next findOneBy() finds new ParameterValue.
+			$this->em->flush();
 		}
 
 		return $parameterValue;

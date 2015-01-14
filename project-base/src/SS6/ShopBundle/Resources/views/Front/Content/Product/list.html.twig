@@ -13,6 +13,21 @@
 {% block main_content %}
 	<h1>{{ category.name|trans }}</h1>
 
+	{% if productDetails|length > 0 or filterFormSubmited %}
+		<div>
+			{{ form_start(filterForm, { action: url('front_product_category', { categoryId: category.id }) }) }}
+				{{ form_row(filterForm.minimalPrice) }}
+				{{ form_row(filterForm.maximalPrice) }}
+
+				{{ form_row(filterForm.parameters) }}
+
+				{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
+
+				{{ form_widget(filterForm.reset, { label: 'Vynulovat filtr' }) }}
+			{{ form_end(filterForm) }}
+		</div>
+	{% endif %}
+
 	{% if productDetails|length > 0 %}
 		{% set entityName = 'zboží'|trans %}
 		{% set route = 'front_product_category' %}
@@ -29,7 +44,11 @@
 		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
 	{% else %}
 		<div class="in-message in-message--info js-flash-message">
-			{{ 'Tato kategorie neobsahuje žádné produkty'|trans }}
+			{% if (filterFormSubmited) %}
+				{{ 'Filtru neodpovídají žádné výsledky'|trans }}
+			{% else %}
+				{{ 'Tato kategorie neobsahuje žádné produkty'|trans }}
+			{% endif %}
 		</div>
 	{% endif %}
 

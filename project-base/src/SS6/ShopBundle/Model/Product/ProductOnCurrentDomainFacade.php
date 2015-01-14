@@ -3,9 +3,11 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductOnCurrentDomainFacade {
@@ -30,16 +32,23 @@ class ProductOnCurrentDomainFacade {
 	 */
 	private $currentCustomer;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 */
+	private $categoryRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		Domain $domain,
 		ProductDetailFactory $productDetailFactory,
-		CurrentCustomer $currentCustomer
+		CurrentCustomer $currentCustomer,
+		CategoryRepository $categoryRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
 		$this->currentCustomer = $currentCustomer;
 		$this->productDetailFactory = $productDetailFactory;
+		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**
@@ -53,25 +62,31 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
 	 * @param int $limit
+	 * @param int $categoryId
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedProductDetailsInCategory(
+		ProductFilterData $productFilterData,
 		ProductListOrderingSetting $orderingSetting,
 		$page,
 		$limit,
 		$categoryId
 	) {
+		$category = $this->categoryRepository->getById($categoryId);
+
 		$paginationResult = $this->productRepository->getPaginationResultInCategory(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$orderingSetting,
 			$page,
 			$limit,
-			$categoryId,
-			$this->currentCustomer->getPricingGroup()
+			$category,
+			$this->currentCustomer->getPricingGroup(),
+			$productFilterData
 		);
 		$products = $paginationResult->getResults();
 

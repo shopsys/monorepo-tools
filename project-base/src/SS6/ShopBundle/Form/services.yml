@@ -11,7 +11,7 @@ services:
 
   ss6.shop.form.admin.product.product_edit_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory
-    
+
   ss6.shop.form.admin.product.product_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 
@@ -35,6 +35,9 @@ services:
     class: SS6\ShopBundle\Form\DomainType
     tags:
       - { name: form.type, alias: domain }
+
+  ss6.shop.form.front.product.product_filter_form_type_factory:
+    class: SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
 
   ss6.shop.form.locale.text:
     class: SS6\ShopBundle\Form\Locale\LocalizedType
