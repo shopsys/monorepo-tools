@@ -77,7 +77,12 @@ class ProductPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculateBasePriceForPricingGroup(Product $product, PricingGroup $pricingGroup) {
-		$price = $this->productInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup)->getInputPrice();
+		$productInputPrice = $this->productInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
+		if ($productInputPrice !== null) {
+			$price = $productInputPrice->getInputPrice();
+		} else {
+			$price = 0;
+		}
 		return $this->basePriceCalculation->calculatePrice(
 			$price,
 			$this->pricingSetting->getInputPriceType(),
