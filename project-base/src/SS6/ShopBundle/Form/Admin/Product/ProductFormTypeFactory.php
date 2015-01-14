@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ProductFormTypeFactory {
 
@@ -29,16 +30,23 @@ class ProductFormTypeFactory {
 	 */
 	private $categoryRepository;
 
+	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
 	public function __construct(
 		VatRepository $vatRepository,
 		AvailabilityRepository $availabilityRepository,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		CategoryRepository $categoryRepository
+		CategoryRepository $categoryRepository,
+		TranslatorInterface $translator
 	) {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->categoryRepository = $categoryRepository;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -53,7 +61,8 @@ class ProductFormTypeFactory {
 			$vats,
 			$availabilities,
 			$this->inverseArrayValuesTransformer,
-			$categories
+			$categories,
+			$this->translator
 		);
 	}
 

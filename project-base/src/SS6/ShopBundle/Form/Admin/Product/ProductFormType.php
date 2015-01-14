@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
@@ -38,21 +39,29 @@ class ProductFormType extends AbstractType {
 	private $categories;
 
 	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
 	public function __construct(
 		array $vats,
 		array $availabilities,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		array $categories
+		array $categories,
+		TranslatorInterface $translator
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->categories = $categories;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -161,8 +170,8 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'expanded' => true,
 				'choices' => array(
-					Product::PRICE_CALCULATION_TYPE_AUTO => 'Automaticky',
-					Product::PRICE_CALCULATION_TYPE_MANUAL => 'Ručně'
+					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
+					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
 				)
 			));
 	}
