@@ -16,39 +16,35 @@
 {% endblock %}
 
 {% block product_calculated_prices %}
-	<fieldset class="row">
-		<div class="table-responsive col-md-12 col-lg-6 mt-1">
-			<table class="table table-desc">
-				<thead>
+	<table class="table table-desc mt-1">
+		<thead>
+			<tr>
+				<th>{{ inputPriceLabel() }}</th>
+				<th>{{ 'Cena bez DPH'|trans }}</th>
+				<th>{{ 'Cena s DPH'|trans }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="js-input-price-type-auto">
+				<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' } }) }}</td>
+				<td class="text-muted">{{ productDetail.basePrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
+				<td class="text-muted"><strong>{{ productDetail.basePrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
+			</tr>
+			{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
+				<tr>
+					<th colspan="3">{{ getDomainName(domainId) }}</th>
+				</tr>
+				{% for productSellingPrice in productSellingPrices %}
 					<tr>
-						<th>{{ inputPriceLabel() }}</th>
-						<th>{{ 'Cena bez DPH'|trans }}</th>
-						<th>{{ 'Cena s DPH'|trans }}</th>
+						<td class="js-input-price-type-auto">{{ productSellingPrice.pricingGroup.name }}</td>
+						<td class="display-none js-input-price-type-manual">{{ form_row(form.manualInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
+						<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
+						<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
 					</tr>
-				</thead>
-				<tbody>
-					<tr class="js-input-price-type-auto">
-						<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' } }) }}</td>
-						<td class="text-muted">{{ productDetail.basePrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
-						<td class="text-muted"><strong>{{ productDetail.basePrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
-					</tr>
-					{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
-						<tr>
-							<th colspan="3">{{ getDomainName(domainId) }}</th>
-						</tr>
-						{% for productSellingPrice in productSellingPrices %}
-							<tr>
-								<td class="js-input-price-type-auto">{{ productSellingPrice.pricingGroup.name }}</td>
-								<td class="display-none js-input-price-type-manual">{{ form_row(form.manualInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
-								<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
-								<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
-							</tr>
-						{% endfor %}
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</fieldset>
+				{% endfor %}
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}
 
 {% block images %}
