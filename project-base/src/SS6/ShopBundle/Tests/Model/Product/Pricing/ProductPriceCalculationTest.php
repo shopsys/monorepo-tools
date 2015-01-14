@@ -72,7 +72,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculation = new ProductPriceCalculation(
 			$basePriceCalculation,
 			$pricingSettingMock,
-			$productInputPriceRepositoryMock);
+			$productInputPriceRepositoryMock
+		);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
