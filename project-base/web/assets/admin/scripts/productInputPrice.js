@@ -12,9 +12,8 @@
 	};
 
 	SS6.productInputPrice.showInputByPriceCalculationType = function (isPriceCalculationTypeAuto) {
-		$('.js-base-price-line').toggle(isPriceCalculationTypeAuto);
-		$('.js-manual-base-price').toggle(!isPriceCalculationTypeAuto);
-		$('.js-pricing-group-name').toggle(isPriceCalculationTypeAuto);
+		$('.js-input-price-type-auto').toggle(isPriceCalculationTypeAuto);
+		$('.js-input-price-type-manual').toggle(!isPriceCalculationTypeAuto);
 	};
 
 	$(document).ready(function () {
