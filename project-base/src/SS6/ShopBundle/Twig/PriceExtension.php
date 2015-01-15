@@ -52,7 +52,11 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function getFunctions() {
 		return array(
-			new Twig_SimpleFunction('currencySymbolByDomainId', array($this, 'getCurrencySymbol'), array('is_safe' => array('html'))),
+			new Twig_SimpleFunction(
+				'currencySymbolByDomainId',
+				array($this, 'getCurrencySymbolByDomainId'),
+				array('is_safe' => array('html'))
+			),
 		);
 	}
 
