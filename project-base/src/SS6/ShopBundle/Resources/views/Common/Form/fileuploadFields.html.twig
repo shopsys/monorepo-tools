@@ -11,19 +11,22 @@
 							<div class="js-file-upload-uploaded-file box-upload__file {{ class|default('') }}">
 
 								<div class="box-upload__file__label">
-									{% if iconType is not null %}
-										<i class="fa fa-{{ iconType }} fa-5x js-file-upload-icon-type"></i>
-									{% endif %}
+									<span class="box-upload__file__label__thumb">
+										{% if iconType is not null %}
+											<i class="fa fa-{{ iconType }} fa-5x js-file-upload-icon-type"></i>
+										{% endif %}
 
-									{% if thumbnailUri is same as(false) %}
-										{# Tag cannot contain empty "url" attribute because browser loads it when parsing in JavaScript. #}
-										<img class="js-file-upload-image-thumbnail" />
-									{% elseif thumbnailUri is not null %}
-										<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
-									{% endif %}
-
-									<i class="box-upload__file__label__icon fa fa-times cursor-pointer js-file-upload-delete"></i>
-									<span class="js-file-upload-label">{{ label }}</span>
+										{% if thumbnailUri is same as(false) %}
+											{# Tag cannot contain empty "src" attribute because browser loads it when parsing in JavaScript. #}
+											<img class="js-file-upload-image-thumbnail" />
+										{% elseif thumbnailUri is not null %}
+											<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
+										{% endif %}
+									</span>
+									<div class="box-upload__file__label__info">
+										<i class="box-upload__file__label__icon fa fa-times cursor-pointer js-file-upload-delete"></i>
+										<span class="js-file-upload-label">{{ label }}</span>
+									</div>
 								</div>
 
 								<div class="box-upload__file__bar">

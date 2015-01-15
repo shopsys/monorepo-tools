@@ -96,6 +96,33 @@ Component for uploading files with drag & drop function.
 	font-size: 12px;
 }
 
+.box-upload__file__label__thumb {
+	float: left;
+	width: 120px;
+	padding: 5px;
+
+	border: 1px solid @color-border;
+	background: @color-f;
+	text-align: center;
+
+	.border-radius(@border-radius-base);
+
+	img {
+		width: 100%;
+		height: auto;
+		max-heigth: 200px;
+	}
+}
+
+
+.box-upload__file__label__info {
+	margin-left: 125px;
+
+	span {
+		word-wrap: break-word;
+	}
+}
+
 .box-upload__file__label__icon {
 	display: inline-block;
 	height: 16px;

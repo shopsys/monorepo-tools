@@ -7,9 +7,8 @@ use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
 
 class ImageThumbnailFactory {
 
-	// icon-font size 5x
-	const THUMBNAIL_WIDTH = 60;
-	const THUMBNAIL_HEIGHT = 70;
+	const THUMBNAIL_WIDTH = 140;
+	const THUMBNAIL_HEIGHT = 200;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageProcessingService
