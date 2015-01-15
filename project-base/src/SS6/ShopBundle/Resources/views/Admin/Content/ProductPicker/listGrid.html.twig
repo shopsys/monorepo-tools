@@ -6,9 +6,10 @@
 
 {% block grid_value_cell_id_select %}
 	<a
+		class="btn btn-default btn-xs"
 		href="#"
 		onclick="SS6.productPicker.selectProduct('{{ parentInputId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
-	>{{ 'Vybrat'|trans }}</button>
+	><i class="fa fa-check"></i> {{ 'Vybrat'|trans }}</a>
 {% endblock %}
 
 {% block grid_pager_totalcount %}
