@@ -11,7 +11,7 @@ use Twig_SimpleFunction;
 class FileThumbnailExtension extends Twig_Extension {
 
 	const DEFAULT_ICON_TYPE = 'file-o';
-	const IMAGE_THUMBNAIL_QUALITY = 50;
+	const IMAGE_THUMBNAIL_QUALITY = 80;
 
 	/**
 	 * @var string[]
@@ -38,6 +38,7 @@ class FileThumbnailExtension extends Twig_Extension {
 			'ods' => 'file-excel-o',
 			'odt' => 'file-word-o',
 			'pdf' => 'file-pdf-o',
+			'rtf' => 'file-word-o',
 			'txt' => 'file-text-o',
 			'xls' => 'file-excel-o',
 			'xlsx' => 'file-excel-o',

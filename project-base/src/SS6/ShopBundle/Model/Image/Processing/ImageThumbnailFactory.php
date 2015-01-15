@@ -7,9 +7,9 @@ use Intervention\Image\Constraint;
 
 class ImageThumbnailFactory {
 
-	// icon-font size 4x
-	const THUMBNAIL_WIDTH = 41;
-	const THUMBNAIL_HEIGHT = 48;
+	// icon-font size 5x
+	const THUMBNAIL_WIDTH = 60;
+	const THUMBNAIL_HEIGHT = 70;
 
 	/**
 	 * @var string[]
