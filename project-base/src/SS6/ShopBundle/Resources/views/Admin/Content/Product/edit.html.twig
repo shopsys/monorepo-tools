@@ -39,7 +39,7 @@
 						{% for productSellingPrice in productSellingPrices %}
 							<tr>
 								<td class="js-input-price-type-auto">{{ productSellingPrice.pricingGroup.name }}</td>
-								<td class="display-none js-input-price-type-manual">{{ form_row(form.productInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
+								<td class="display-none js-input-price-type-manual">{{ form_row(form.manualInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
 								<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
 								<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
 							</tr>

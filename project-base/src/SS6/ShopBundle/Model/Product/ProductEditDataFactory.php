@@ -6,7 +6,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
+use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class ProductEditDataFactory {
@@ -32,22 +32,22 @@ class ProductEditDataFactory {
 	private $parameterRepository;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade
+	 * @var SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
 	 */
-	private $productInputPriceFacade;
+	private $productManualInputPriceFacade;
 
 	public function __construct(
 		Domain $domain,
 		VatFacade $vatFacade,
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
-		ProductInputPriceFacade $productInputPriceFacade
+		ProductManualInputPriceFacade $productManualInputPriceFacade
 	) {
 		$this->domain = $domain;
 		$this->vatFacade = $vatFacade;
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
-		$this->productInputPriceFacade = $productInputPriceFacade;
+		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 	}
 
 	/**
@@ -61,7 +61,7 @@ class ProductEditDataFactory {
 		$productEditData->parameters = $productParameterValuesData;
 
 		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
-		$productEditData->productInputPrices = array();
+		$productEditData->manualInputPrices = array();
 
 		return $productEditData;
 	}
@@ -84,10 +84,10 @@ class ProductEditDataFactory {
 		}
 		$productEditData->parameters = $productParameterValuesData;
 
-		$manualInputPrices = $this->productInputPriceFacade->getAllByProduct($product);
+		$manualInputPrices = $this->productManualInputPriceFacade->getAllByProduct($product);
 		foreach ($manualInputPrices as $manualInputPrice) {
 			$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
-			$productEditData->productInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
+			$productEditData->manualInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
 		}
 
 		return $productEditData;

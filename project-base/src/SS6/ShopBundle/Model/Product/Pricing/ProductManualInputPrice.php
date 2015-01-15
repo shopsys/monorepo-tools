@@ -7,10 +7,10 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Product;
 
 /**
- * @ORM\Table(name="product_input_prices")
+ * @ORM\Table(name="product_manual_input_prices")
  * @ORM\Entity
  */
-class ProductInputPrice {
+class ProductManualInputPrice {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product

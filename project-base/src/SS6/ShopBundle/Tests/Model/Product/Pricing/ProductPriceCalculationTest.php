@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceRepository;
+use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
@@ -61,7 +61,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 			->expects($this->any())->method('getRoundingType')
 				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
 
-		$productInputPriceRepositoryMock = $this->getMockBuilder(ProductInputPriceRepository::class)
+		$productManualInputPriceRepositoryMock = $this->getMockBuilder(ProductManualInputPriceRepository::class)
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -72,7 +72,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculation = new ProductPriceCalculation(
 			$basePriceCalculation,
 			$pricingSettingMock,
-			$productInputPriceRepositoryMock
+			$productManualInputPriceRepositoryMock
 		);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));

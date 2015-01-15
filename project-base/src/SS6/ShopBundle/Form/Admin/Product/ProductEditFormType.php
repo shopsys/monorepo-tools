@@ -115,13 +115,13 @@ class ProductEditFormType extends AbstractType {
 				))
 				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
 			)
-			->add('productInputPrices', 'form', [
+			->add('manualInputPrices', 'form', [
 				'compound' => true,
 			])
 			->add('save', 'submit');
 
 		foreach ($this->pricingGroups as $pricingGroup) {
-			$builder->get('productInputPrices')
+			$builder->get('manualInputPrices')
 				->add($pricingGroup->getId(), 'money', [
 					'currency' => false,
 					'precision' => 6,

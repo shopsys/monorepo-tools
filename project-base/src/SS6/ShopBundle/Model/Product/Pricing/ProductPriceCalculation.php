@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceRepository;
+use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculation {
@@ -21,23 +21,23 @@ class ProductPriceCalculation {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceRepository
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository
 	 */
-	private $productInputPriceRepository;
+	private $productManualInputPriceRepository;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
 	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceRepository $productInputPriceRepository
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
 	 */
 	public function __construct(
 		BasePriceCalculation $basePriceCalculation,
 		PricingSetting $pricingSetting,
-		ProductInputPriceRepository $productInputPriceRepository
+		ProductManualInputPriceRepository $productManualInputPriceRepository
 	) {
 		$this->pricingSetting = $pricingSetting;
 		$this->basePriceCalculation = $basePriceCalculation;
-		$this->productInputPriceRepository = $productInputPriceRepository;
+		$this->productManualInputPriceRepository = $productManualInputPriceRepository;
 	}
 
 	/**
@@ -77,9 +77,9 @@ class ProductPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculateBasePriceForPricingGroup(Product $product, PricingGroup $pricingGroup) {
-		$productInputPrice = $this->productInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
-		if ($productInputPrice !== null) {
-			$price = $productInputPrice->getInputPrice();
+		$manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
+		if ($manualInputPrice !== null) {
+			$price = $manualInputPrice->getInputPrice();
 		} else {
 			$price = 0;
 		}

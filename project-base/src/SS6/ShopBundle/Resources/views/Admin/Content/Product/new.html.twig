@@ -21,7 +21,7 @@
 						</tr>
 						{% for pricingGroup in pricingGroups %}
 							<tr class="js-input-price-type-manual display-none">
-								<td>{{ form_row(form.productInputPrices[pricingGroup.id], {label: pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
+								<td>{{ form_row(form.manualInputPrices[pricingGroup.id], {label: pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
 							</tr>
 						{% endfor %}
 					{% endfor %}
