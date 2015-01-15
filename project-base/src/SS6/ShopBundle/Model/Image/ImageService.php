@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
@@ -14,10 +15,16 @@ class ImageService {
 	private $imageProcessingService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Processing\ImageProcessingService $imageProcessingService
 	 */
-	public function __construct(ImageProcessingService $imageProcessingService) {
+	public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload) {
 		$this->imageProcessingService = $imageProcessingService;
+		$this->fileUpload = $fileUpload;
 	}
 
 	/**
@@ -36,12 +43,7 @@ class ImageService {
 
 		$images = array();
 		foreach ($temporaryFilenames as $temporaryFilename) {
-			$images[] = new Image(
-				$imageEntityConfig->getEntityName(),
-				$entityId,
-				$type,
-				$this->imageProcessingService->convertImageAndGetConvertedFilename($temporaryFilename)
-			);
+			$images[] = $this->editImageOrCreateNew($imageEntityConfig, $entityId, $temporaryFilename, $type, null);
 		}
 
 		return $images;
@@ -62,15 +64,17 @@ class ImageService {
 		$type,
 		Image $image = null
 	) {
+		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
+
 		if ($image === null) {
 			$image = new Image(
 				$imageEntityConfig->getEntityName(),
 				$entityId,
 				$type,
-				$this->imageProcessingService->convertImageAndGetConvertedFilename($temporaryFilename)
+				$this->imageProcessingService->convertToShopFormatAndGetNewFilename($temporaryFilepath)
 			);
 		} else {
-			$image->setTemporaryFilename($this->imageProcessingService->convertImageAndGetConvertedFilename($temporaryFilename));
+			$image->setTemporaryFilename($this->imageProcessingService->convertToShopFormatAndGetNewFilename($temporaryFilepath));
 		}
 
 		return $image;

@@ -3,10 +3,13 @@
 namespace SS6\ShopBundle\Tests\Model\Image;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageService;
 use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ImageServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -17,7 +20,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$imageService = new ImageService($imageProcessingServiceMock);
+		$imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Image\Exception\EntityMultipleImageException::class);
 		$imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
@@ -25,24 +28,18 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetUploadedImages() {
 		$imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
-		$filenames = ['filename1.jpg', 'filename2.jpg'];
+		$filenames = ['filename1.jpg', 'filename2.png'];
 
 		$imageProcessingServiceMock = $this->getMockBuilder(ImageProcessingService::class)
 			->disableOriginalConstructor()
-			->setMethods(['convertImageAndGetConvertedFilename'])
+			->setMethods(['convertToShopFormatAndGetNewFilename'])
 			->getMock();
-		$imageProcessingServiceMock->expects($this->any())->method('convertImageAndGetConvertedFilename')
-			->willReturnCallback(function ($filepath) use ($filenames) {
-				$filename = pathinfo($filepath, PATHINFO_FILENAME) . '.' . pathinfo($filepath, PATHINFO_EXTENSION);
-				if ($filename === $filenames[0]) {
-					return $filenames[0];
-				}
-				if ($filename === $filenames[1]) {
-					return $filenames[1];
-				}
+		$imageProcessingServiceMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')
+			->willReturnCallback(function ($filepath) {
+				return pathinfo($filepath, PATHINFO_BASENAME);
 			});
 
-		$imageService = new ImageService($imageProcessingServiceMock);
+		$imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 		$images = $imageService->getUploadedImages($imageEntityConfig, 1, $filenames, 'type');
 
 		$this->assertCount(2, $images);
@@ -51,7 +48,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 			$temporaryFiles = $image->getTemporaryFilesForUpload();
 			$this->assertEquals(1, $image->getEntityId());
 			$this->assertEquals('entityName', $image->getEntityName());
-			$this->assertContains(array_pop($temporaryFiles)->getTemporaryFilename(), ['filename1.jpg', 'filename2.jpg']);
+			$this->assertContains(array_pop($temporaryFiles)->getTemporaryFilename(), $filenames);
 		}
 	}
 
@@ -62,11 +59,11 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 
 		$imageProcessingServiceMock = $this->getMockBuilder(ImageProcessingService::class)
 			->disableOriginalConstructor()
-			->setMethods(['convertImageAndGetConvertedFilename'])
+			->setMethods(['convertToShopFormatAndGetNewFilename'])
 			->getMock();
-		$imageProcessingServiceMock->expects($this->any())->method('convertImageAndGetConvertedFilename')->willReturn($filename);
+		$imageProcessingServiceMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')->willReturn($filename);
 
-		$imageService = new ImageService($imageProcessingServiceMock);
+		$imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 		$image = $imageService->editImageOrCreateNew($imageEntityConfig, 1, $filename, 'type', $oldImage);
 		$temporaryFiles = $image->getTemporaryFilesForUpload();
 
@@ -74,17 +71,17 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($filename, array_pop($temporaryFiles)->getTemporaryFilename());
 	}
 
-	public function testeditImageOrCreateNewNewt() {
+	public function testeditImageOrCreateNew() {
 		$imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
 		$filename = 'filename.jpg';
 
 		$imageProcessingServiceMock = $this->getMockBuilder(ImageProcessingService::class)
 			->disableOriginalConstructor()
-			->setMethods(['convertImageAndGetConvertedFilename'])
+			->setMethods(['convertToShopFormatAndGetNewFilename'])
 			->getMock();
-		$imageProcessingServiceMock->expects($this->any())->method('convertImageAndGetConvertedFilename')->willReturn($filename);
+		$imageProcessingServiceMock->expects($this->any())->method('convertToShopFormatAndGetNewFilename')->willReturn($filename);
 
-		$imageService = new ImageService($imageProcessingServiceMock);
+		$imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 		$image = $imageService->editImageOrCreateNew($imageEntityConfig, 1, $filename, 'type', null);
 		$temporaryFiles = $image->getTemporaryFilesForUpload();
 
@@ -92,5 +89,14 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($filename, array_pop($temporaryFiles)->getTemporaryFilename());
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private function getFileUpload() {
+		$fileNamingConvention = new FileNamingConvention();
+		$filesystem = new Filesystem();
+
+		return new FileUpload('temporaryDir', 'fileDir', 'imageDir', $fileNamingConvention, $filesystem);
+	}
 
 }
