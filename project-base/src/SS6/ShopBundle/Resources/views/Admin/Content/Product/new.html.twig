@@ -16,11 +16,11 @@
 						<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolByDomainId()}) }}</td>
 					</tr>
 					{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
-						<tr class="js-input-price-type-manual display-none">
+						<tr class="js-input-price-type-manual">
 							<th>{{ getDomainName(domainId) }}</th>
 						</tr>
 						{% for pricingGroup in pricingGroups %}
-							<tr class="js-input-price-type-manual display-none">
+							<tr class="js-input-price-type-manual">
 								<td>{{ form_row(form.manualInputPrices[pricingGroup.id], {label: pricingGroup.name, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}</td>
 							</tr>
 						{% endfor %}

@@ -38,8 +38,10 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function getFilters() {
 		return array(
-			new Twig_SimpleFilter('priceWithCurrencyAdmin', array(
-				$this, 'priceWithCurrencyAdminFilter'), array('is_safe' => array('html'))
+			new Twig_SimpleFilter(
+				'priceWithCurrencyAdmin',
+				array($this, 'priceWithCurrencyAdminFilter'),
+				array('is_safe' => array('html'))
 			),
 			new Twig_SimpleFilter('priceWithCurrency', array($this, 'priceWithCurrencyFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
