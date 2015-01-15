@@ -79,7 +79,7 @@ class UserDataFixtureLoader {
 		$billingAddressData->city = $row[9];
 		$billingAddressData->postcode = $row[10];
 		$billingAddressData->telephone = $row[11];
-		$customerData->deliveryAddress = null;
+		$customerData->deliveryAddressData = null;
 		if ($row[12] === 'true') {
 			$deliveryAddressData = new DeliveryAddressData();
 			$deliveryAddressData->addressFilled = true;
@@ -89,12 +89,12 @@ class UserDataFixtureLoader {
 			$deliveryAddressData->postcode = $row[16];
 			$deliveryAddressData->street = $row[17];
 			$deliveryAddressData->telephone = $row[18];
-			$customerData->deliveryAddress = $deliveryAddressData;
+			$customerData->deliveryAddressData = $deliveryAddressData;
 		}
 		$userData->domainId = $domainId;
 
 		$customerData->userData = $userData;
-		$customerData->billingAddress = $billingAddressData;
+		$customerData->billingAddressData = $billingAddressData;
 
 		return $customerData;
 	}
