@@ -60,8 +60,3 @@ services:
     class: SS6\ShopBundle\Twig\PriceExtension
     tags:
       - { name: twig.extension }
-
-  ss6.twig.product_extension:
-    class: SS6\ShopBundle\Twig\ProductExtension
-    tags:
-      - { name: twig.extension }

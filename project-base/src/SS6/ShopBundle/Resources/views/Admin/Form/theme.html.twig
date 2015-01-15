@@ -143,7 +143,7 @@
 	<span class="js-product-picker-container">
 		<input
 			class="form-control js-product-picker-label"
-			value="{{ getProductNameOrNullById(form.vars.value)|default('Vyberte produkt'|trans) }}"
+			value="{{ productName|default('Vyberte produkt'|trans) }}"
 			disabled="disabled"
 			readonly="readonly"
 		/>
