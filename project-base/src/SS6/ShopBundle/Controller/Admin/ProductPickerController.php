@@ -35,11 +35,11 @@ class ProductPickerController extends Controller {
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('select', 'p.id', '')->setClassAttribute('table-col table-col-10');
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
 		$grid->addColumn('catnum', 'p.catnum', 'Katalogové číslo', true);
 		$grid->addColumn('name', 'pt.name', 'Název', true);
-		
+		$grid->addColumn('select', 'p.id', '')->setClassAttribute('table-col table-col-10');
+
 		$grid->setTheme('@SS6Shop/Admin/Content/ProductPicker/listGrid.html.twig', [
 			'parentInputId' => $parentInputId,
 		]);
