@@ -31,6 +31,10 @@ class ProductListAdminFacade {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getQueryBuilderByQuickSearchData(array $searchData = null) {
+		/*
+		 * temporary solution -
+		 * when product price type calculation is set to manual, price for first domain is shown in admin product list
+		 */
 		$defaultPricingGroupId = $this->pricingGroupFacade->getDefaultPricingGroupByDomainId(1)->getId();
 		return $this->productListAdminRepository->getQueryBuilderByQuickSearchData($defaultPricingGroupId, $searchData);
 	}

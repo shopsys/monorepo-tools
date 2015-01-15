@@ -74,6 +74,10 @@ class ProductVisibilityRepository {
 				WHERE p.id = pd.product_id
 					AND pd.domain_id = :domainId', new ResultSetMapping());
 
+			/**
+			 * temporary solution -
+			 * when product price calculation type is set to manual, all input prices must be filled and greater than 0
+			 */
 			$query->execute(array(
 				'now' => $now,
 				'locale' => $domain->getLocale(),
