@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -63,6 +64,11 @@ class ProductEditFacade {
 	 */
 	private $pricingGroupRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
+	 */
+	private $productManualInputPriceFacade;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -72,7 +78,8 @@ class ProductEditFacade {
 		ProductService $productService,
 		ImageFacade	$imageFacade,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-		PricingGroupRepository $pricingGroupRepository
+		PricingGroupRepository $pricingGroupRepository,
+		ProductManualInputPriceFacade $productManualInputPriceFacade
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -83,6 +90,7 @@ class ProductEditFacade {
 		$this->imageFacade = $imageFacade;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupRepository = $pricingGroupRepository;
+		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 	}
 
 	/**
@@ -105,6 +113,7 @@ class ProductEditFacade {
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
 		$this->refreshProductDomains($product, $productEditData->productData->hiddenOnDomains);
+		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->em->commit();
@@ -128,6 +137,7 @@ class ProductEditFacade {
 		$this->em->beginTransaction();
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->refreshProductDomains($product, $productEditData->productData->hiddenOnDomains);
+		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
@@ -237,6 +247,20 @@ class ProductEditFacade {
 			$product,
 			$this->pricingGroupRepository->getAll()
 		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string[] $manualInputPrices
+	 */
+	private function refreshProductManualInputPrices(Product $product, array $manualInputPrices) {
+		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
+			$this->productManualInputPriceFacade->deleteByProduct($product);
+		} else {
+			foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
+				$this->productManualInputPriceFacade->refresh($product, $pricingGroup, $manualInputPrices[$pricingGroup->getId()]);
+			}
+		}
 	}
 
 }

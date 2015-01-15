@@ -57,7 +57,7 @@ class ProductVisibilityRepository {
 								AND
 								(p.selling_to IS NULL OR p.selling_to >= :now)
 								AND
-								p.price > 0
+								(p.price > 0 OR p.price_calculation_type = :priceCalculationType)
 								AND EXISTS (
 									SELECT 1
 									FROM product_translations AS pt
@@ -74,10 +74,15 @@ class ProductVisibilityRepository {
 				WHERE p.id = pd.product_id
 					AND pd.domain_id = :domainId', new ResultSetMapping());
 
+			/**
+			 * temporary solution -
+			 * when product price calculation type is set to manual, all input prices must be filled and greater than 0
+			 */
 			$query->execute(array(
 				'now' => $now,
 				'locale' => $domain->getLocale(),
 				'domainId' => $domain->getId(),
+				'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
 			));
 		}
 	}

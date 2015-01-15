@@ -8,9 +8,11 @@ use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFac
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Form\FileUploadType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -40,21 +42,29 @@ class ProductEditFormType extends AbstractType {
 	private $productFormTypeFactory;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	private $pricingGroups;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
 	public function __construct(
 		array $images,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		FileUpload $fileUpload,
-		ProductFormTypeFactory $productFormTypeFactory
+		ProductFormTypeFactory $productFormTypeFactory,
+		array $pricingGroups
 	) {
 		$this->images = $images;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->fileUpload = $fileUpload;
 		$this->productFormTypeFactory = $productFormTypeFactory;
+		$this->pricingGroups = $pricingGroups;
 	}
 
 	/**
@@ -67,6 +77,7 @@ class ProductEditFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
@@ -104,7 +115,31 @@ class ProductEditFormType extends AbstractType {
 				))
 				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
 			)
+			->add('manualInputPrices', 'form', [
+				'compound' => true,
+			])
 			->add('save', 'submit');
+
+		foreach ($this->pricingGroups as $pricingGroup) {
+			$builder->get('manualInputPrices')
+				->add($pricingGroup->getId(), 'money', [
+					'currency' => false,
+					'precision' => 6,
+					'required' => true,
+					'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+					'constraints' => [
+						new Constraints\NotBlank([
+							'message' => 'Prosím vyplňte cenu',
+							'groups' => ['manualPriceCalculation']
+						]),
+						new Constraints\GreaterThan([
+							'value' => 0,
+							'message' => 'Cena musí být větší než 0',
+							'groups' => ['manualPriceCalculation']
+						]),
+					],
+				]);
+		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
@@ -112,6 +147,17 @@ class ProductEditFormType extends AbstractType {
 			'data_class' => ProductEditData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 			'intention' => self::INTENTION,
+			'validation_groups' => function(FormInterface $form) {
+				$validationGroups = array('Default');
+				$productData = $form->getData()->productData;
+				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+
+				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
+					$validationGroups[] = 'manualPriceCalculation';
+				}
+
+				return $validationGroups;
+			},
 		));
 	}
 

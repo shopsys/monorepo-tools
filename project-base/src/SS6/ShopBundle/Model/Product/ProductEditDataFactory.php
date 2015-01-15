@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
+use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class ProductEditDataFactory {
@@ -30,16 +31,23 @@ class ProductEditDataFactory {
 	 */
 	private $parameterRepository;
 
+	/**
+	 * @var SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
+	 */
+	private $productManualInputPriceFacade;
+
 	public function __construct(
 		Domain $domain,
 		VatFacade $vatFacade,
 		ProductRepository $productRepository,
-		ParameterRepository $parameterRepository
+		ParameterRepository $parameterRepository,
+		ProductManualInputPriceFacade $productManualInputPriceFacade
 	) {
 		$this->domain = $domain;
 		$this->vatFacade = $vatFacade;
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
+		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 	}
 
 	/**
@@ -53,6 +61,7 @@ class ProductEditDataFactory {
 		$productEditData->parameters = $productParameterValuesData;
 
 		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
+		$productEditData->manualInputPrices = array();
 
 		return $productEditData;
 	}
@@ -74,6 +83,12 @@ class ProductEditDataFactory {
 			$productParameterValuesData[] = $productParameterValueData;
 		}
 		$productEditData->parameters = $productParameterValuesData;
+
+		$manualInputPrices = $this->productManualInputPriceFacade->getAllByProduct($product);
+		foreach ($manualInputPrices as $manualInputPrice) {
+			$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
+			$productEditData->manualInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
+		}
 
 		return $productEditData;
 	}

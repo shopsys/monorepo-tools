@@ -27,16 +27,23 @@ class ProductEditData {
 	public $imagesToDelete;
 
 	/**
+	 * @var string[]
+	 */
+	public $manualInputPrices;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesToDelete
+	 * @param string[] $manualInputPrices
 	 */
 	public function __construct(
 		ProductData $productData = null,
 		array $parameters = [],
 		array $imagesToUpload = [],
-		array $imagesToDelete = []
+		array $imagesToDelete = [],
+		array $manualInputPrices = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -46,6 +53,7 @@ class ProductEditData {
 		$this->parameters = $parameters;
 		$this->imagesToUpload = $imagesToUpload;
 		$this->imagesToDelete = $imagesToDelete;
+		$this->manualInputPrices = $manualInputPrices;
 	}
 
 

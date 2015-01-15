@@ -21,16 +21,16 @@
 			<table class="table table-desc">
 				<thead>
 					<tr>
-						<th></th>
+						<th>{{ inputPriceLabel() }}</th>
 						<th>{{ 'Cena bez DPH'|trans }}</th>
 						<th>{{ 'Cena s DPH'|trans }}</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="text-muted">
-						<td>{{ 'Základní cena'|trans }}</td>
-						<td>{{ productDetail.basePrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
-						<td><strong>{{ productDetail.basePrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
+					<tr class="js-input-price-type-auto">
+						<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' } }) }}</td>
+						<td class="text-muted">{{ productDetail.basePrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
+						<td class="text-muted"><strong>{{ productDetail.basePrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
 					</tr>
 					{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
 						<tr>
@@ -38,7 +38,8 @@
 						</tr>
 						{% for productSellingPrice in productSellingPrices %}
 							<tr>
-								<td>{{ productSellingPrice.pricingGroup.name }}</td>
+								<td class="js-input-price-type-auto">{{ productSellingPrice.pricingGroup.name }}</td>
+								<td class="display-none js-input-price-type-manual">{{ form_row(form.manualInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2' } }) }}</td>
 								<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithDefaultAdminCurrency }}</td>
 								<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithDefaultAdminCurrency }}</strong></td>
 							</tr>

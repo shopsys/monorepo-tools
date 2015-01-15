@@ -6,11 +6,14 @@ use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\DatePickerType;
 use SS6\ShopBundle\Form\YesNoType;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
@@ -36,21 +39,29 @@ class ProductFormType extends AbstractType {
 	private $categories;
 
 	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
 	public function __construct(
 		array $vats,
 		array $availabilities,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		array $categories
+		array $categories,
+		TranslatorInterface $translator
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->categories = $categories;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -112,10 +123,11 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
+					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu', 'groups' => 'autoPriceCalculation')),
 					new Constraints\GreaterThanOrEqual(array(
 						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}'
+						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+						'groups' => 'autoPriceCalculation'
 					)),
 				),
 			))
@@ -153,6 +165,14 @@ class ProductFormType extends AbstractType {
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', array(), null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
+			))
+			->add('priceCalculationType', 'choice', array(
+				'required' => true,
+				'expanded' => true,
+				'choices' => array(
+					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
+					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
+				)
 			));
 	}
 
@@ -160,6 +180,17 @@ class ProductFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
+			'validation_groups' => function(FormInterface $form) {
+				$validationGroups = array('Default');
+				$productData = $form->getData();
+				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+
+				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
+					$validationGroups[] = 'autoPriceCalculation';
+				}
+
+				return $validationGroups;
+			},
 		));
 	}
 
