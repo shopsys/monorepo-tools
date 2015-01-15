@@ -254,6 +254,12 @@ services:
       - { name: doctrine.event_listener, event: prePersist }
       - { name: doctrine.event_listener, event: preUpdate }
 
+  ss6.shop.image.image_delete_doctrine_listener:
+    class: SS6\ShopBundle\Model\Image\ImageDeleteDoctrineListener
+    arguments: [@service_container]
+    tags:
+      - { name: doctrine.event_listener, event: preRemove }
+
   ss6.shop.file_upload.file_naming_convention:
     class: SS6\ShopBundle\Model\FileUpload\FileNamingConvention
 

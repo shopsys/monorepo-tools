@@ -68,8 +68,7 @@ class ImageLocator {
 	 * @return bool
 	 */
 	public function imageExists(Image $image, $sizeName) {
-		$relativeImageFilepath = $this->getRelativeImageFilepath($image, $sizeName);
-		$imageFilepath = $this->imageDir . DIRECTORY_SEPARATOR . $relativeImageFilepath;
+		$imageFilepath = $this->getAbsoluteImageFilepath($image, $sizeName);
 
 		return is_file($imageFilepath) && is_readable($imageFilepath);
 	}
@@ -107,5 +106,16 @@ class ImageLocator {
 		}
 
 		return implode(DIRECTORY_SEPARATOR, $pathParts) . DIRECTORY_SEPARATOR;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return string
+	 */
+	public function getAbsoluteImageFilepath(Image $image, $sizeName) {
+		$relativePath = $this->getRelativeImageFilepath($image, $sizeName);
+
+		return $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
 	}
 }

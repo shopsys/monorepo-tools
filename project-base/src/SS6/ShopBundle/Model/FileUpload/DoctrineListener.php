@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\FileUpload;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 
 class DoctrineListener {
 
@@ -15,10 +16,13 @@ class DoctrineListener {
 	/**
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 */
-	public function __construct(\SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload) {
+	public function __construct(FileUpload $fileUpload) {
 		$this->fileUpload = $fileUpload;
 	}
 
+	/**
+	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
+	 */
 	public function prePersist(LifecycleEventArgs $args) {
 		$entity = $args->getEntity();
 		if ($entity instanceof EntityFileUploadInterface) {
@@ -26,6 +30,9 @@ class DoctrineListener {
 		}
 	}
 
+	/**
+	 * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args
+	 */
 	public function preUpdate(PreUpdateEventArgs $args) {
 		$entity = $args->getEntity();
 		if ($entity instanceof EntityFileUploadInterface) {
@@ -33,6 +40,9 @@ class DoctrineListener {
 		}
 	}
 
+	/**
+	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
+	 */
 	public function postPersist(LifecycleEventArgs $args) {
 		$entity = $args->getEntity();
 		if ($entity instanceof EntityFileUploadInterface) {
@@ -40,6 +50,9 @@ class DoctrineListener {
 		}
 	}
 
+	/**
+	 * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
+	 */
 	public function postUpdate(LifecycleEventArgs $args) {
 		$entity = $args->getEntity();
 		if ($entity instanceof EntityFileUploadInterface) {
