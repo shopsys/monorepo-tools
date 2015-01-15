@@ -91,8 +91,8 @@ class TransportFormType extends AbstractType {
 				'required' => false,
 				'file_constraints' => array(
 					new Constraints\Image(array(
-						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png, gif nebo bmp',
+						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/gif'),
+						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
 						'maxSize' => '2M',
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
 					)),
