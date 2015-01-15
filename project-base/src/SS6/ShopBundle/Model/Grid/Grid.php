@@ -531,6 +531,7 @@ class Grid {
 	public function getUrlParameters($parameters = null, $removeParameters = null) {
 		return array_replace_recursive(
 			$this->requestStack->getMasterRequest()->query->all(),
+			$this->requestStack->getMasterRequest()->attributes->get('_route_params'),
 			$this->getUrlGridParameters($parameters, $removeParameters)
 		);
 	}
