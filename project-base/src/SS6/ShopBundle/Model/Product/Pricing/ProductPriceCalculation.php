@@ -46,16 +46,14 @@ class ProductPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice(Product $product, PricingGroup $pricingGroup) {
-		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
-			$basePrice = $this->calculateBasePrice($product);
-
-			return $this->basePriceCalculation->applyCoefficient(
-				$basePrice,
-				$product->getVat(),
-				$pricingGroup->getCoefficient()
-			);
+		$priceCalculationType = $product->getPriceCalculationType();
+		if ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
+			return $this->calculateBasePriceForPricingGroupAuto($product, $pricingGroup);
+		} elseif ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
+			return $this->calculateBasePriceForPricingGroupManual($product, $pricingGroup);
 		} else {
-			return $this->calculateBasePriceForPricingGroup($product, $pricingGroup);
+			$message = 'Product price calculation type ' . $priceCalculationType . ' is not supported';
+			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException($message);
 		}
 	}
 
@@ -76,7 +74,7 @@ class ProductPriceCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculateBasePriceForPricingGroup(Product $product, PricingGroup $pricingGroup) {
+	private function calculateBasePriceForPricingGroupManual(Product $product, PricingGroup $pricingGroup) {
 		$manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
 		if ($manualInputPrice !== null) {
 			$price = $manualInputPrice->getInputPrice();
@@ -87,6 +85,21 @@ class ProductPriceCalculation {
 			$price,
 			$this->pricingSetting->getInputPriceType(),
 			$product->getVat()
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	private function calculateBasePriceForPricingGroupAuto(Product $product, PricingGroup $pricingGroup) {
+		$basePrice = $this->calculateBasePrice($product);
+
+		return $this->basePriceCalculation->applyCoefficient(
+			$basePrice,
+			$product->getVat(),
+			$pricingGroup->getCoefficient()
 		);
 	}
 
