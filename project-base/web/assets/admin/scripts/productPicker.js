@@ -2,7 +2,7 @@
 
 	SS6 = window.SS6 || {};
 	SS6.productPicker = SS6.productPicker || {};
-	
+
 	var generatorIdCounter = 0;
 
 	SS6.productPicker.makePicker = function (pickerButton) {
