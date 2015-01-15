@@ -3,26 +3,29 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class JavascriptExtension extends Twig_Extension {
 
+	const JS_FOLDER_SOURCE = '/src/SS6/ShopBundle/Resources/scripts/';
+	const JS_FOLDER_TARGET_FRONT = 'assets/frontend/scripts/';
+	const JS_FOLDER_TARGET_ADMIN = 'assets/admin/scripts/';
+	const WEB_PATH = 'web/';
+	const NOT_TRANSLATED_FOLDER = '/plugins/';
+
 	/**
-	 * @var ContainerInterface
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	private $container;
 
 	/**
 	 * @var string
 	 */
-	private $webPath;
-
-	/**
-	 * @var string
-	 */
-	private $resourcesPath;
+	private $rootPath;
 
 	/**
 	 * @var array
@@ -30,14 +33,20 @@ class JavascriptExtension extends Twig_Extension {
 	private $javascriptLinks;
 
 	/**
-	 * @param string $webPath
-	 * @param string $resourcesPath
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 * @var \Symfony\Component\Filesystem\Filesystem
 	 */
-	public function __construct($webPath, $resourcesPath, ContainerInterface $container) {
+	private $filesystem;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	public function __construct($rootPath, ContainerInterface $container, Filesystem $filesystem, Domain $domain) {
 		$this->container = $container;
-		$this->webPath = $webPath;
-		$this->resourcesPath = $resourcesPath;
+		$this->rootPath = $rootPath;
+		$this->filesystem = $filesystem;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -89,20 +98,13 @@ class JavascriptExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param string $relativeFilepath
-	 * @return string
-	 */
-	private function getJavascriptFileUrl($relativeFilepath) {
-		return $this->getAssetsHelper()->getUrl($relativeFilepath);
-	}
-
-	/**
 	 * @param string $javascript
 	 */
 	private function process($javascript) {
 		if ($this->processJavascriptFile($javascript)) {
 			return;
 		}
+
 		if ($this->processJavascriptDirectoryMask($javascript)) {
 			return;
 		}
@@ -115,24 +117,66 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return boolean
 	 */
 	private function processJavascriptFile($javascript) {
-		$filepath = $this->webPath . '/' . $javascript;
+		$sourcePath = $this->rootPath . self::JS_FOLDER_SOURCE . $javascript;
+		$targetPath = $this->getTargetPath($javascript);
 
-		if (is_file($filepath)) {
-			$this->javascriptLinks[] = $this->getJavascriptFileUrl($javascript);
+		if ($targetPath === null) {
+			return false;
+		}
+
+		if (is_file($sourcePath)) {
+			$this->makeCache($sourcePath, $targetPath);
+			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($targetPath);
 			return true;
 		}
 
-		$matches = [];
-		if (preg_match('@^assets/(admin|frontend)/scripts/(.*)$@', $javascript, $matches)) {
-			$filepath = $this->resourcesPath . '/scripts/' . $matches[1] . '/'. $matches[2];
+		return false;
+	}
 
-			if (is_file($filepath)) {
-				$this->javascriptLinks[] = $this->getJavascriptFileUrl($javascript);
-				return true;
-			}
+	/**
+	 * @param string $javascript
+	 * @return string
+	 */
+	private function getTargetPath($javascript) {
+		$targetPath = null;
+		if (substr($javascript, 0, 6) === 'admin/') {
+			$targetPath = self::JS_FOLDER_TARGET_ADMIN . str_replace('admin/', '', $javascript);
+		} elseif (substr($javascript, 0, 9) === 'frontend/') {
+			$targetPath = self::JS_FOLDER_TARGET_FRONT . str_replace('frontend/', '', $javascript);
+		}
+		$targetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $targetPath);
+
+		return $targetPath;
+	}
+
+	/**
+	 * @param string $filename
+	 * @param string $cachedPath
+	 */
+	private function makeCache($filename, $cachedPath) {
+		$cachedPathFull = $this->rootPath . DIRECTORY_SEPARATOR . self::WEB_PATH . $cachedPath;
+
+		if (is_file($cachedPathFull) && null === parse_url($filename, PHP_URL_HOST)) {
+			$doCopy = filemtime($filename) > filemtime($cachedPathFull);
+		} else {
+			$doCopy = true;
 		}
 
-		return false;
+		if ($doCopy) {
+			$jsTranslator = $this->container->get('ss6.shop.component.translation.js_translator');
+			/* @var $jsTranslator \SS6\ShopBundle\Component\Translation\JsTranslator */
+
+			$content = file_get_contents($filename);
+
+			if (strpos($filename, self::NOT_TRANSLATED_FOLDER) === false) {
+				$newContent = $jsTranslator->translate($content);
+			} else {
+				$newContent = $content;
+			}
+
+			$this->filesystem->mkdir(dirname($cachedPathFull));
+			$this->filesystem->dumpFile($cachedPathFull, $newContent);
+		}
 	}
 
 	/**
@@ -159,31 +203,13 @@ class JavascriptExtension extends Twig_Extension {
 		}
 
 		$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
-
-		$filesystemPath = $this->webPath . '/' . $path;
+		$filesystemPath = $this->rootPath . self::JS_FOLDER_SOURCE . $path;
 
 		if (is_dir($filesystemPath)) {
 			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
-				if (is_file($filepath)) {
-					$filename = pathinfo($filepath, PATHINFO_BASENAME);
-					$this->javascriptLinks[] = $this->getJavascriptFileUrl($path . '/' . $filename);
-				}
-			}
-		}
-
-		$matches = [];
-		if (preg_match('@^assets/(admin|frontend)/scripts(?:/|$)(.*)$@', $path, $matches)) {
-			$filesystemPath = $this->resourcesPath . '/scripts/' . $matches[1] . '/' . $matches[2];
-
-			if (is_dir($filesystemPath)) {
-				$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
-				foreach ($filepaths as $filepath) {
-					if (is_file($filepath)) {
-						$filename = pathinfo($filepath, PATHINFO_BASENAME);
-						$this->javascriptLinks[] = $this->getJavascriptFileUrl($path . '/' . $filename);
-					}
-				}
+				$javascript = str_replace($this->rootPath . self::JS_FOLDER_SOURCE, '', $filepath);
+				$this->processJavascriptFile($javascript);
 			}
 		}
 
@@ -195,7 +221,7 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return boolean
 	 */
 	private function processExternalJavascripts($javascriptUrl) {
-		$this->javascriptLinks[] = $javascriptUrl;
+		$this->javascriptLinks[] = '/' . $javascriptUrl;
 		return true;
 	}
 

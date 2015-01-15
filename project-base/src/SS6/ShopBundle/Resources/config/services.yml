@@ -21,6 +21,7 @@ parameters:
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
   ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
   ss6.web_dir: %kernel.root_dir%/../web
+  ss6.root_dir: %kernel.root_dir%/..
   translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
