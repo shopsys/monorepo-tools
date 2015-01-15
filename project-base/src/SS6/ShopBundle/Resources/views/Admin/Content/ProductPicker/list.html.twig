@@ -1,15 +1,12 @@
-{% extends '@SS6Shop/Admin/Layout/layoutBlank.html.twig' %}
+{% extends '@SS6Shop/Admin/Layout/layoutWindow.html.twig' %}
 
 {% block content %}
-	<div class="iframe-popup-content">
+	{{ form_start(quickSearchForm) }}
 
-		{{ form_start(quickSearchForm) }}
+		{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 
-			{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+		{{ gridView.render() }}
+		{{ gridView.renderHiddenInputs('page') }}
 
-			{{ gridView.render() }}
-			{{ gridView.renderHiddenInputs('page') }}
-
-		{{ form_end(quickSearchForm) }}
-	</div>
+	{{ form_end(quickSearchForm) }}
 {% endblock %}
