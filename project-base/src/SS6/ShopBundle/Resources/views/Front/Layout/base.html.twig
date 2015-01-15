@@ -14,12 +14,12 @@
 
 	{{ importJavascripts([
 		'bundles/bmatznerjquery/js/jquery.min.js',
-		'assets/frontend/scripts/plugins/jquery.migrate.js',
+		'frontend/plugins/jquery.migrate.js',
 		'bundles/fpjsformvalidator/js/fp_js_validator.js',
-		'assets/frontend/scripts/plugins/*.js',
-		'assets/frontend/scripts/validation/form/*.js',
-		'assets/frontend/scripts/validation/*.js',
-		'assets/frontend/scripts/*.js',
+		'frontend/plugins/*.js',
+		'frontend/validation/form/*.js',
+		'frontend/validation/*.js',
+		'frontend/*.js',
 	]) }}
 	{{ js_validator_config() }}
 	{{ init_js_validation() }}
