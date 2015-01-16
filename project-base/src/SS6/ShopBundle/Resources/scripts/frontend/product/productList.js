@@ -9,7 +9,7 @@
 
 			$.cookie(cookieName, $(this).val(), { path: '/' });
 
-			location.reload();
+			location.reload(true);
 		});
 	};
 
