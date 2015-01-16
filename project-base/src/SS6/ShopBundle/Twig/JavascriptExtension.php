@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Component\Translation\JsTranslator;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -12,8 +13,7 @@ use Twig_SimpleFunction;
 class JavascriptExtension extends Twig_Extension {
 
 	const JS_FOLDER_SOURCE = '/src/SS6/ShopBundle/Resources/scripts/';
-	const JS_FOLDER_TARGET_FRONT = 'assets/frontend/scripts/';
-	const JS_FOLDER_TARGET_ADMIN = 'assets/admin/scripts/';
+	const JS_FOLDER_TARGET = 'assets/scripts/';
 	const WEB_PATH = 'web/';
 	const NOT_TRANSLATED_FOLDER = '/plugins/';
 
@@ -42,11 +42,23 @@ class JavascriptExtension extends Twig_Extension {
 	 */
 	private $domain;
 
-	public function __construct($rootPath, ContainerInterface $container, Filesystem $filesystem, Domain $domain) {
+	/**
+	 * @var SS6\ShopBundle\Component\Translation\JsTranslator
+	 */
+	private $jsTranslator;
+
+	public function __construct(
+		$rootPath,
+		ContainerInterface $container,
+		Filesystem $filesystem,
+		Domain $domain,
+		JsTranslator $jsTranslator
+	) {
 		$this->container = $container;
 		$this->rootPath = $rootPath;
 		$this->filesystem = $filesystem;
 		$this->domain = $domain;
+		$this->jsTranslator = $jsTranslator;
 	}
 
 	/**
@@ -139,10 +151,8 @@ class JavascriptExtension extends Twig_Extension {
 	 */
 	private function getTargetPath($javascript) {
 		$targetPath = null;
-		if (substr($javascript, 0, 6) === 'admin/') {
-			$targetPath = self::JS_FOLDER_TARGET_ADMIN . str_replace('admin/', '', $javascript);
-		} elseif (substr($javascript, 0, 9) === 'frontend/') {
-			$targetPath = self::JS_FOLDER_TARGET_FRONT . str_replace('frontend/', '', $javascript);
+		if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
+			$targetPath = self::JS_FOLDER_TARGET . $javascript;
 		}
 		$targetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $targetPath);
 
@@ -163,13 +173,10 @@ class JavascriptExtension extends Twig_Extension {
 		}
 
 		if ($doCopy) {
-			$jsTranslator = $this->container->get('ss6.shop.component.translation.js_translator');
-			/* @var $jsTranslator \SS6\ShopBundle\Component\Translation\JsTranslator */
-
 			$content = file_get_contents($filename);
 
 			if (strpos($filename, self::NOT_TRANSLATED_FOLDER) === false) {
-				$newContent = $jsTranslator->translate($content);
+				$newContent = $this->jsTranslator->translate($content);
 			} else {
 				$newContent = $content;
 			}
