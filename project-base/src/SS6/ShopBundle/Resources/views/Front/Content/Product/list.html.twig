@@ -18,7 +18,7 @@
 			{{ form_start(filterForm, { action: url('front_product_category', { categoryId: category.id }) }) }}
 				{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
 
-				<div class="box-filter__group">
+				<div class="box-filter__group display-none">
 					<div class="box-filter__group__item">
 						{{ form_row(filterForm.minimalPrice) }}
 					</div>
