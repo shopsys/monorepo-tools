@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
@@ -51,7 +52,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceWithVat
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getInputPriceType', 'getRoundingType'))
+			->setMethods(array('getInputPriceType', 'getRoundingType', 'getDomainDefaultCurrencyIdByDomainId'))
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock
@@ -60,10 +61,31 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$pricingSettingMock
 			->expects($this->any())->method('getRoundingType')
 				->will($this->returnValue(PricingSetting::ROUNDING_TYPE_INTEGER));
+		$pricingSettingMock
+			->expects($this->any())->method('getDomainDefaultCurrencyIdByDomainId')
+				->will($this->returnValue(1));
 
 		$productManualInputPriceRepositoryMock = $this->getMockBuilder(ProductManualInputPriceRepository::class)
 			->disableOriginalConstructor()
 			->getMock();
+
+		$currencyFacadeMock = $this->getMockBuilder(CurrencyFacade::class)
+			->setMethods(['getById'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$currencyMock = $this->getMockBuilder(Currency::class)
+			->setMethods(['getReversedExchangeRate'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$currencyMock
+			->expects($this->any())->method('getReversedExchangeRate')
+				->will($this->returnValue(1));
+
+		$currencyFacadeMock
+			->expects($this->any())->method('getById')
+			->will($this->returnValue($currencyMock));
 
 		$rounding = new Rounding($pricingSettingMock);
 		$priceCalculation = new PriceCalculation($rounding);
@@ -72,7 +94,9 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculation = new ProductPriceCalculation(
 			$basePriceCalculation,
 			$pricingSettingMock,
-			$productManualInputPriceRepositoryMock
+
+			$productManualInputPriceRepositoryMock,
+			$currencyFacadeMock
 		);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));

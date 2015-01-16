@@ -95,6 +95,13 @@ class Currency {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getReversedExchangeRate() {
+		return (1/$this->exchangeRate);
+	}
+
+	/**
 	 * @param string $exchangeRate
 	 */
 	public function setExchangeRate($exchangeRate) {

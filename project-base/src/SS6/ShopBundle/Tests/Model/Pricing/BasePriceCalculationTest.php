@@ -71,7 +71,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 			array(
 				'priceWithVat' => '100',
 				'vatPercent' => '20',
-				'coefficient' => '2',
+				'coefficients' => ['2'],
 				'resultPriceWithVat' => '200',
 				'resultPriceWithoutVat' => '167',
 				'resultVatAmount' => '33',
@@ -79,7 +79,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 			array(
 				'priceWithVat' => '100',
 				'vatPercent' => '10',
-				'coefficient' => '1',
+				'coefficients' => ['1'],
 				'resultPriceWithVat' => '100',
 				'resultPriceWithoutVat' => '91',
 				'resultVatAmount' => '9',
@@ -87,7 +87,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 			array(
 				'priceWithVat' => '100',
 				'vatPercent' => '20',
-				'coefficient' => '0.6789',
+				'coefficients' => ['0.6789'],
 				'resultPriceWithVat' => '68',
 				'resultPriceWithoutVat' => '57',
 				'resultVatAmount' => '11',
@@ -101,7 +101,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 	public function testApplyCoefficient(
 		$priceWithVat,
 		$vatPercent,
-		$coefficient,
+		$coefficients,
 		$resultPriceWithVat,
 		$resultPriceWithoutVat,
 		$resultVatAmount
@@ -127,7 +127,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$price = new Price(0, $priceWithVat, 0);
 		$vat = new Vat(new VatData('vat', $vatPercent));
-		$resultPrice = $basePriceCalculation->applyCoefficient($price, $vat, $coefficient);
+		$resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
 
 		$this->assertEquals(round($resultPriceWithVat, 6), round($resultPrice->getPriceWithVat(), 6));
 		$this->assertEquals(round($resultPriceWithoutVat, 6), round($resultPrice->getPriceWithoutVat(), 6));
