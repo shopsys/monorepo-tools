@@ -228,7 +228,7 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return boolean
 	 */
 	private function processExternalJavascripts($javascriptUrl) {
-		$this->javascriptLinks[] = '/' . $javascriptUrl;
+		$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($javascriptUrl);
 		return true;
 	}
 
