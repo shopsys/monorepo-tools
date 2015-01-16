@@ -19,7 +19,9 @@ parameters:
   ss6.image_dir: %ss6.web_dir%/assets/content/images
   ss6.image_url_prefix: /assets/content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
+  ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
   ss6.web_dir: %kernel.root_dir%/../web
+  ss6.root_dir: %kernel.root_dir%/..
   translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
@@ -131,6 +133,22 @@ services:
 
   ss6.shop.component.translation.php_file_extractor_factory:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractorFactory
+
+  ss6.shop.component.translation.js_file_extractor:
+    class: SS6\ShopBundle\Component\Translation\JsFileExtractor
+    tags:
+      - { name: jms_translation.file_visitor }
+
+  ss6.shop.component.translation.js_translator:
+    class: SS6\ShopBundle\Component\Translation\JsTranslator
+
+  ss6.shop.component.translation.js_translator_call_parser.js_translator_call_parser:
+    class: SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser
+    factory_service: ss6.shop.component.translation.js_translator_call_parser.js_translator_call_parser_factory
+    factory_method: create
+
+  ss6.shop.component.translation.js_translator_call_parser.js_translator_call_parser_factory:
+    class: SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParserFactory
 
   ss6.shop.component.translation.po_dumper:
     class: SS6\ShopBundle\Component\Translation\PoDumper

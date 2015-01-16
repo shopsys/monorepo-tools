@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc0be5c590ef7a8a700862b5197e7946",
+    "hash": "942dcdbf8a43e1c76d65e486c75f7d69",
     "packages": [
         {
             "name": "bmatzner/jquery-bundle",
@@ -3792,6 +3792,37 @@
                 "framework"
             ],
             "time": "2014-08-06 07:03:01"
+        },
+        {
+            "name": "timwhitlock/jparser",
+            "version": "1.1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pscheit/jparser.git",
+                "reference": "1e6a19e4c69b3d5fe0b2513914b08af91bbe0319"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pscheit/jparser/zipball/1e6a19e4c69b3d5fe0b2513914b08af91bbe0319",
+                "reference": "1e6a19e4c69b3d5fe0b2513914b08af91bbe0319",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "conf.dist/PLUG.conf.php",
+                    "PLUG/core/PLUGTool.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Tim Whitlock",
+                    "email": "info@timwhitlock.info"
+                }
+            ],
+            "description": "A JavaScript parsing library for PHP",
+            "time": "2013-02-12 12:27:38"
         },
         {
             "name": "twig/extensions",

@@ -41,7 +41,7 @@ services:
 
   ss6.twig.javascript_extension:
     class: SS6\ShopBundle\Twig\JavascriptExtension
-    arguments: [%ss6.web_dir%, @service_container]
+    arguments: [%ss6.root_dir%, @service_container]
     tags:
       - { name: twig.extension }
 

@@ -3,21 +3,29 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Component\Translation\JsTranslator;
+use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class JavascriptExtension extends Twig_Extension {
 
+	const JS_FOLDER_SOURCE = '/src/SS6/ShopBundle/Resources/scripts/';
+	const JS_FOLDER_TARGET = 'assets/scripts/';
+	const WEB_PATH = 'web/';
+	const NOT_TRANSLATED_FOLDER = '/plugins/';
+
 	/**
-	 * @var ContainerInterface
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	private $container;
 
 	/**
 	 * @var string
 	 */
-	private $webPath;
+	private $rootPath;
 
 	/**
 	 * @var array
@@ -25,12 +33,32 @@ class JavascriptExtension extends Twig_Extension {
 	private $javascriptLinks;
 
 	/**
-	 * @param string $webPath
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 * @var \Symfony\Component\Filesystem\Filesystem
 	 */
-	public function __construct($webPath, ContainerInterface $container) {
+	private $filesystem;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @var SS6\ShopBundle\Component\Translation\JsTranslator
+	 */
+	private $jsTranslator;
+
+	public function __construct(
+		$rootPath,
+		ContainerInterface $container,
+		Filesystem $filesystem,
+		Domain $domain,
+		JsTranslator $jsTranslator
+	) {
 		$this->container = $container;
-		$this->webPath = $webPath;
+		$this->rootPath = $rootPath;
+		$this->filesystem = $filesystem;
+		$this->domain = $domain;
+		$this->jsTranslator = $jsTranslator;
 	}
 
 	/**
@@ -82,20 +110,13 @@ class JavascriptExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param string $relativeFilepath
-	 * @return string
-	 */
-	private function getJavascriptFileUrl($relativeFilepath) {
-		return $this->getAssetsHelper()->getUrl($relativeFilepath);
-	}
-
-	/**
 	 * @param string $javascript
 	 */
 	private function process($javascript) {
 		if ($this->processJavascriptFile($javascript)) {
 			return;
 		}
+
 		if ($this->processJavascriptDirectoryMask($javascript)) {
 			return;
 		}
@@ -108,14 +129,61 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return boolean
 	 */
 	private function processJavascriptFile($javascript) {
-		$filepath = $this->webPath . '/' . $javascript;
+		$sourcePath = $this->rootPath . self::JS_FOLDER_SOURCE . $javascript;
+		$targetPath = $this->getTargetPath($javascript);
 
-		if (is_file($filepath)) {
-			$this->javascriptLinks[] = $this->getJavascriptFileUrl($javascript);
+		if ($targetPath === null) {
+			return false;
+		}
+
+		if (is_file($sourcePath)) {
+			$this->makeCache($sourcePath, $targetPath);
+			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($targetPath);
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param string $javascript
+	 * @return string
+	 */
+	private function getTargetPath($javascript) {
+		$targetPath = null;
+		if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
+			$targetPath = self::JS_FOLDER_TARGET . $javascript;
+		}
+		$targetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $targetPath);
+
+		return $targetPath;
+	}
+
+	/**
+	 * @param string $filename
+	 * @param string $cachedPath
+	 */
+	private function makeCache($filename, $cachedPath) {
+		$cachedPathFull = $this->rootPath . DIRECTORY_SEPARATOR . self::WEB_PATH . $cachedPath;
+
+		if (is_file($cachedPathFull) && null === parse_url($filename, PHP_URL_HOST)) {
+			$doCopy = filemtime($filename) > filemtime($cachedPathFull);
+		} else {
+			$doCopy = true;
+		}
+
+		if ($doCopy) {
+			$content = file_get_contents($filename);
+
+			if (strpos($filename, self::NOT_TRANSLATED_FOLDER) === false) {
+				$newContent = $this->jsTranslator->translate($content);
+			} else {
+				$newContent = $content;
+			}
+
+			$this->filesystem->mkdir(dirname($cachedPathFull));
+			$this->filesystem->dumpFile($cachedPathFull, $newContent);
+		}
 	}
 
 	/**
@@ -141,21 +209,18 @@ class JavascriptExtension extends Twig_Extension {
 			return false;
 		}
 
-		$filesystemPath = $this->webPath . '/' . $path;
+		$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
+		$filesystemPath = $this->rootPath . self::JS_FOLDER_SOURCE . $path;
 
 		if (is_dir($filesystemPath)) {
-			$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
 			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
-				if (is_file($filepath)) {
-					$filename = pathinfo($filepath, PATHINFO_BASENAME);
-					$this->javascriptLinks[] = $this->getJavascriptFileUrl($path . '/' . $filename);
-				}
+				$javascript = str_replace($this->rootPath . self::JS_FOLDER_SOURCE, '', $filepath);
+				$this->processJavascriptFile($javascript);
 			}
-			return true;
 		}
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -163,7 +228,7 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return boolean
 	 */
 	private function processExternalJavascripts($javascriptUrl) {
-		$this->javascriptLinks[] = $javascriptUrl;
+		$this->javascriptLinks[] = '/' . $javascriptUrl;
 		return true;
 	}
 

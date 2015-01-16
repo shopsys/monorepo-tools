@@ -23,7 +23,7 @@
 		var options = {
 			content: data.message,
 			buttonContinue: data.success,
-			textContinue: 'Přejít do košíku',
+			textContinue: SS6.translator.trans('Přejít do košíku'),
 			urlContinue: data.continueUrl
 		}
 		SS6.window(options);

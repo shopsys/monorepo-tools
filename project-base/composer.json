@@ -38,6 +38,7 @@
 		"symfony/swiftmailer-bundle": "~2.3",
 		"symfony/symfony": "2.5.*",
 		"symfony-cmf/routing-bundle": "1.3.0",
+		"timwhitlock/jparser": "1.1.2.1",
 		"twig/extensions": "~1.0"
 	},
 	"require-dev": {
