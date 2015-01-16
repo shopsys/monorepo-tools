@@ -44,8 +44,8 @@ class PriceExtension extends Twig_Extension {
 				array('is_safe' => array('html'))
 			),
 			new Twig_SimpleFilter(
-				'priceWithCurrencyAdminByDomainId',
-				[$this, 'priceWithCurrencyAdminByDomainIdFilter'],
+				'priceWithCurrencyByDomainId',
+				[$this, 'priceWithCurrencyByDomainIdFilter'],
 				['is_safe' => array('html')]
 			),
 			new Twig_SimpleFilter('priceWithCurrency', array($this, 'priceWithCurrencyFilter'), array('is_safe' => array('html'))),
@@ -103,7 +103,7 @@ class PriceExtension extends Twig_Extension {
 	 * @param int $domainId
 	 * @return string
 	 */
-	public function priceWithCurrencyAdminByDomainIdFilter($price, $domainId) {
+	public function priceWithCurrencyByDomainIdFilter($price, $domainId) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
 		$currencySymbol = $this->getCurrencySymbolByDomainId($domainId);
