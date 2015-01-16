@@ -43,6 +43,11 @@ class PriceExtension extends Twig_Extension {
 				array($this, 'priceWithCurrencyAdminFilter'),
 				array('is_safe' => array('html'))
 			),
+			new Twig_SimpleFilter(
+				'priceWithCurrencyAdminByDomainId',
+				[$this, 'priceWithCurrencyAdminByDomainIdFilter'],
+				['is_safe' => array('html')]
+			),
 			new Twig_SimpleFilter('priceWithCurrency', array($this, 'priceWithCurrencyFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
 			new Twig_SimpleFilter('priceText', array($this, 'priceTextFilter'), array('is_safe' => array('html'))),
@@ -58,6 +63,11 @@ class PriceExtension extends Twig_Extension {
 				'currencySymbolByDomainId',
 				array($this, 'getCurrencySymbolByDomainId'),
 				array('is_safe' => array('html'))
+			),
+			new Twig_SimpleFunction(
+				'currencySymbolDefault',
+				[$this, 'getCurrencySymbolDefault'],
+				['is_safe' => ['html']]
 			),
 		);
 	}
@@ -77,10 +87,23 @@ class PriceExtension extends Twig_Extension {
 
 	/**
 	 * @param string $price
-	 * @param int|null $domainId
 	 * @return string
 	 */
-	public function priceWithCurrencyAdminFilter($price, $domainId = null) {
+	public function priceWithCurrencyAdminFilter($price) {
+		$price = (float)$price;
+		$price = number_format($price, 2, ',', ' ');
+		$currencySymbol = $this->getCurrencySymbolDefault();
+		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+
+		return $price;
+	}
+
+	/**
+	 * @param string $price
+	 * @param int $domainId
+	 * @return string
+	 */
+	public function priceWithCurrencyAdminByDomainIdFilter($price, $domainId) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
 		$currencySymbol = $this->getCurrencySymbolByDomainId($domainId);
@@ -119,13 +142,16 @@ class PriceExtension extends Twig_Extension {
 	 * @param int|null $domainId
 	 * @return string
 	 */
-	public function getCurrencySymbolByDomainId($domainId = null) {
-		if ($domainId === null) {
-			return $this->currencyFacade->getDefaultCurrency()->getSymbol();
-		} else {
-			$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
-			return $currency->getSymbol();
-		}
+	public function getCurrencySymbolByDomainId($domainId) {
+		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+		return $currency->getSymbol();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCurrencySymbolDefault() {
+		return $this->currencyFacade->getDefaultCurrency()->getSymbol();
 	}
 
 	/**
