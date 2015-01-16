@@ -4,8 +4,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 
-#: Admin/Product/ProductFormType.php:164
-#: Admin/Product/ProductFormType.php:171
+#: Admin/Product/ProductFormType.php:146
+#: Admin/Product/ProductFormType.php:153
 msgid "Datum zadávejte ve formátu dd.mm.rrrr"
 msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
 
@@ -28,7 +28,8 @@ msgid "Prosím zadejte cenu v platném formátu"
 msgstr "Prosím zadejte cenu v platném formátu"
 
 #: Admin/Payment/PaymentFormType.php:78
-#: Admin/Product/ProductFormType.php:143
+#: Admin/Product/ProductEditFormType.php:129
+#: Admin/Product/ProductFormType.php:124
 #: Admin/Transport/TransportFormType.php:65
 msgid "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
 msgstr "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
@@ -37,7 +38,7 @@ msgstr "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou �
 msgid "Prosím zadejte koeficient v platném formátu"
 msgstr "Prosím zadejte koeficient v platném formátu"
 
-#: Admin/Product/ProductFormType.php:175
+#: Admin/Product/ProductFormType.php:157
 msgid "Prosím zadejte číslo"
 msgstr "Prosím zadejte číslo"
 

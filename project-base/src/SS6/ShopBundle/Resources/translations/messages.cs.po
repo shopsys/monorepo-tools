@@ -4,6 +4,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 
+#: Content/Currency/listGrid.html.twig:28
+#: Content/Currency/listGrid.html.twig:44
+msgid "%defaultCurrency% za 1 %currentCurrency%"
+msgstr "%defaultCurrency% za 1 %currentCurrency%"
+
+#: Content/Currency/listGrid.html.twig:24
+msgid "%defaultCurrency% za 1 jednotku"
+msgstr "%defaultCurrency% za 1 jednotku"
+
 #: Content/Order/step3.html.twig:50
 msgid "(Na tuto adresu bude zboží doručeno)"
 msgstr "(Na tuto adresu bude zboží doručeno)"
@@ -41,7 +50,7 @@ msgid "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu ř
 msgstr "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.\n\t\t\t\t\t\tPokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
 
 #: Content/Login/loginForm.html.twig:15
-#: Admin/Layout/base.html.twig:42
+#: Admin/Layout/base.html.twig:46
 #: Admin/Layout/layoutWithoutPanel.html.twig:10
 #: Admin/Layout/layoutWithPanel.html.twig:16
 msgid "Administrace"
@@ -52,16 +61,16 @@ msgstr "Administrace"
 msgid "Administrátor"
 msgstr "Administrátor"
 
-#: AdministratorController.php:175
+#: AdministratorController.php:177
 msgid "Administrátor <strong>{{ name }}</strong> byl smazán."
 msgstr "Administrátor <strong>{{ name }}</strong> byl smazán."
 
-#: AdministratorController.php:181
+#: AdministratorController.php:183
 msgid "Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán."
 msgstr "Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán."
 
-#: AdministratorController.php:83
-#: AdministratorController.php:143
+#: AdministratorController.php:85
+#: AdministratorController.php:145
 msgid "Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje"
 msgstr "Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje"
 
@@ -78,7 +87,7 @@ msgstr "Aktuální stav"
 msgid "Akční zboží"
 msgstr "Akční zboží"
 
-#: Translation/Grid/TranslationGridFactory.php:48
+#: TranslationGridFactory.php:48
 msgid "Anglicky"
 msgstr "Anglicky"
 
@@ -87,16 +96,20 @@ msgstr "Anglicky"
 msgid "Ano"
 msgstr "Ano"
 
-#: Admin/Superadmin/InputPriceTypeFormType.php:63
+#: ProductFormType.php:173
+msgid "Automaticky"
+msgstr "Automaticky"
+
+#: InputPriceTypeFormType.php:63
 #: Content/Customer/orderDetail.html.twig:124
 msgid "Bez DPH"
 msgstr "Bez DPH"
 
-#: AdministratorController.php:74
+#: AdministratorController.php:76
 msgid "Byl upraven administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byl upraven administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:49
+#: CustomerController.php:50
 msgid "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -104,23 +117,23 @@ msgstr "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></str
 msgid "Byl upraven článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byl upraven článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: AdministratorController.php:134
+#: AdministratorController.php:136
 msgid "Byl vytvořen administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byl vytvořen administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: CustomerController.php:173
+#: CustomerController.php:177
 msgid "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: ArticleController.php:127
+#: ArticleController.php:129
 msgid "Byl vytvořen článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byl vytvořen článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: TransportController.php:82
+#: TransportController.php:81
 msgid "Byla upravena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla upravena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: DepartmentController.php:40
+#: CategoryController.php:40
 msgid "Byla upravena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla upravena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -132,15 +145,15 @@ msgstr "Byla upravena objednávka č. <strong><a href=\"{{ url }}\">{{ number }}
 msgid "Byla upravena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla upravena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: SliderController.php:113
+#: SliderController.php:115
 msgid "Byla upravena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla upravena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: TransportController.php:37
+#: TransportController.php:36
 msgid "Byla vytvořena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla vytvořena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: DepartmentController.php:83
+#: CategoryController.php:83
 msgid "Byla vytvořena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla vytvořena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -148,7 +161,7 @@ msgstr "Byla vytvořena kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></
 msgid "Byla vytvořena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla vytvořena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
-#: SliderController.php:70
+#: SliderController.php:72
 msgid "Byla vytvořena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Byla vytvořena stránka slideru <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -156,15 +169,15 @@ msgstr "Byla vytvořena stránka slideru <strong><a href=\"{{ url }}\">{{ name }
 msgid "Byla změněna cena zboží <strong>{{ name }}</strong>, které máte v košíku. Prosím, překontrolujte si objednávku."
 msgstr "Byla změněna cena zboží <strong>{{ name }}</strong>, které máte v košíku. Prosím, překontrolujte si objednávku."
 
-#: RegistrationController.php:42
+#: RegistrationController.php:41
 msgid "Byli jste úspěšně zaregistrováni"
 msgstr "Byli jste úspěšně zaregistrováni"
 
-#: ProductController.php:44
+#: ProductController.php:42
 msgid "Bylo upraveno zboží <strong>{{ name }}</strong>"
 msgstr "Bylo upraveno zboží <strong>{{ name }}</strong>"
 
-#: ProductController.php:93
+#: ProductController.php:90
 msgid "Bylo vytvořeno zboží <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 msgstr "Bylo vytvořeno zboží <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
@@ -191,7 +204,7 @@ msgstr "Celková cena"
 msgid "Celková cena s DPH"
 msgstr "Celková cena s DPH"
 
-#: Controller/Admin/MailController.php:28
+#: MailController.php:28
 msgid "Celková cena za objednávku (s DPH)"
 msgstr "Celková cena za objednávku (s DPH)"
 
@@ -203,8 +216,8 @@ msgstr "Celková cena za položku s DPH"
 msgid "Celková výše DPH"
 msgstr "Celková výše DPH"
 
-#: Payment/Grid/PaymentGridFactory.php:87
-#: Transport/Grid/TransportGridFactory.php:87
+#: PaymentGridFactory.php:87
+#: TransportGridFactory.php:87
 msgid "Cena"
 msgstr "Cena"
 
@@ -271,7 +284,7 @@ msgstr "DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{
 msgid "DPH a zaokrouhlování"
 msgstr "DPH a zaokrouhlování"
 
-#: Controller/Admin/MailController.php:24
+#: MailController.php:24
 msgid "Datum a čas vytvoření objednávky"
 msgstr "Datum a čas vytvoření objednávky"
 
@@ -296,7 +309,7 @@ msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</b> (celkem již {{
 msgid "Do košíku bylo vloženo zboží <strong>{{ name }}</b> ({{ quantity }} ks)"
 msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</b> ({{ quantity }} ks)"
 
-#: Controller/Admin/MailController.php:32
+#: MailController.php:32
 msgid "Dodací adresa"
 msgstr "Dodací adresa"
 
@@ -370,7 +383,7 @@ msgstr "Doručovací adresa"
 msgid "Dostupnost"
 msgstr "Dostupnost"
 
-#: AvailabilityController.php:38
+#: AvailabilityController.php:39
 msgid "Dostupnost <strong>{{ name }}</strong> byla smazána"
 msgstr "Dostupnost <strong>{{ name }}</strong> byla smazána"
 
@@ -392,8 +405,8 @@ msgstr "Editace administrátora"
 msgid "Editace dopravy"
 msgstr "Editace dopravy"
 
-#: Content/Department/edit.html.twig:3
-#: Content/Department/edit.html.twig:4
+#: Content/Category/edit.html.twig:3
+#: Content/Category/edit.html.twig:4
 msgid "Editace kategorie"
 msgstr "Editace kategorie"
 
@@ -422,7 +435,7 @@ msgstr "Editace zákazníka"
 msgid "Editace článku"
 msgstr "Editace článku"
 
-#: Controller/Admin/MailController.php:51
+#: MailController.php:53
 #: Content/Customer/orderDetail.html.twig:18
 msgid "Email"
 msgstr "Email"
@@ -431,7 +444,7 @@ msgstr "Email"
 msgid "Fakturační adresa"
 msgstr "Fakturační adresa"
 
-#: Controller/Admin/MailController.php:29
+#: MailController.php:29
 msgid "Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa"
 msgstr "Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa"
 
@@ -439,6 +452,10 @@ msgstr "Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adre
 #: Content/Order/step3.html.twig:39
 msgid "Fakturační údaje"
 msgstr "Fakturační údaje"
+
+#: Content/Product/list.html.twig:48
+msgid "Filtru neodpovídají žádné výsledky"
+msgstr "Filtru neodpovídají žádné výsledky"
 
 #: Content/Customer/detail.html.twig:38
 #: Content/Order/edit.html.twig:42
@@ -459,7 +476,7 @@ msgstr "Firma"
 msgid "Heslo"
 msgstr "Heslo"
 
-#: Content/Product/detail.html.twig:56
+#: Content/Product/detail.html.twig:57
 msgid "Hodnota"
 msgstr "Hodnota"
 
@@ -499,7 +516,7 @@ msgstr "Jednotková cena s DPH"
 msgid "Jejda! Nastala chyba."
 msgstr "Jejda! Nastala chyba."
 
-#: Controller/Admin/MailController.php:49
+#: MailController.php:51
 #: Content/Customer/orderDetail.html.twig:10
 #: Mail/Order/billingAddress.html.twig:3
 msgid "Jméno"
@@ -519,13 +536,19 @@ msgstr "Karta zákazníka"
 msgid "Katalogové číslo"
 msgstr "Katalogové číslo"
 
-#: Content/Department/detail.html.twig:3
-#: Content/Department/detail.html.twig:4
+#: Content/Category/detail.html.twig:3
+#: Content/Category/detail.html.twig:4
+#: Content/Category/list.html.twig:3
+#: Content/Category/list.html.twig:4
 msgid "Kategorie"
 msgstr "Kategorie"
 
-#: Group/Grid/PricingGroupGridFactory.php:63
-#: Pricing/Vat/VatGridFactory.php:53
+#: CategoryController.php:128
+msgid "Kategorie <strong>{{ name }}</strong> byla smazána"
+msgstr "Kategorie <strong>{{ name }}</strong> byla smazána"
+
+#: PricingGroupGridFactory.php:63
+#: VatGridFactory.php:53
 msgid "Koeficient"
 msgstr "Koeficient"
 
@@ -534,7 +557,7 @@ msgstr "Koeficient"
 msgid "Komunikace se zákazníkem"
 msgstr "Komunikace se zákazníkem"
 
-#: Translation/Grid/TranslationGridFactory.php:46
+#: TranslationGridFactory.php:46
 msgid "Konstanta"
 msgstr "Konstanta"
 
@@ -561,7 +584,7 @@ msgstr "Množství"
 msgid "Mé objednávky"
 msgstr "Mé objednávky"
 
-#: CurrencyController.php:66
+#: CurrencyController.php:64
 msgid "Měna <strong>{{ name }}</strong> byla smazána"
 msgstr "Měna <strong>{{ name }}</strong> byla smazána"
 
@@ -577,15 +600,15 @@ msgstr "Měny"
 msgid "Město"
 msgstr "Město"
 
-#: Admin/Vat/VatSettingsFormType.php:92
+#: VatSettingsFormType.php:92
 msgid "Na celá čísla (koruny)"
 msgstr "Na celá čísla (koruny)"
 
-#: Admin/Vat/VatSettingsFormType.php:91
+#: VatSettingsFormType.php:91
 msgid "Na padesátníky"
 msgstr "Na padesátníky"
 
-#: Admin/Vat/VatSettingsFormType.php:90
+#: VatSettingsFormType.php:90
 msgid "Na setiny (haléře)"
 msgstr "Na setiny (haléře)"
 
@@ -605,7 +628,7 @@ msgstr "Nastavení e-mailů"
 msgid "Nastavení emailů"
 msgstr "Nastavení emailů"
 
-#: MailController.php:133
+#: MailController.php:135
 msgid "Nastavení emailů bylo upraveno."
 msgstr "Nastavení emailů bylo upraveno."
 
@@ -621,11 +644,11 @@ msgstr "Nastavení textu po potvrzení objednávky bylo upraveno"
 msgid "Nastavení výchozí cenové skupiny bylo upraveno"
 msgstr "Nastavení výchozí cenové skupiny bylo upraveno"
 
-#: CurrencyController.php:98
+#: CurrencyController.php:96
 msgid "Nastavení výchozí měny bylo upraveno"
 msgstr "Nastavení výchozí měny bylo upraveno"
 
-#: CurrencyController.php:146
+#: CurrencyController.php:144
 msgid "Nastavení základních měn pro každou doménu bylo upraveno"
 msgstr "Nastavení základních měn pro každou doménu bylo upraveno"
 
@@ -634,7 +657,7 @@ msgstr "Nastavení základních měn pro každou doménu bylo upraveno"
 msgid "Nastavení šablon e-mailů"
 msgstr "Nastavení šablon e-mailů"
 
-#: MailController.php:82
+#: MailController.php:84
 msgid "Nastavení šablony e-mailu bylo upraveno"
 msgstr "Nastavení šablony e-mailu bylo upraveno"
 
@@ -651,7 +674,6 @@ msgstr "Nebyl nalezen žádný stav objednávek."
 msgid "Nebyla nalezena žádná objednávka."
 msgstr "Nebyla nalezena žádná objednávka."
 
-#: Content/Department/listGrid.html.twig:11
 msgid "Nebyla nalezena žádná oddělení. Nejprve musíte nějaké vytvořit."
 msgstr "Nebyla nalezena žádná oddělení. Nejprve musíte nějaké vytvořit."
 
@@ -664,6 +686,7 @@ msgid "Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvoři
 msgstr "Nebyli nalezeni žádní zákazníci. Nejprve musíte nějakého vytvořit."
 
 #: Content/Product/listGrid.html.twig:4
+#: Content/ProductPicker/listGrid.html.twig:4
 msgid "Nebylo nalezeno žádné zboží."
 msgstr "Nebylo nalezeno žádné zboží."
 
@@ -675,7 +698,11 @@ msgstr "Nebyly nalezeny žádné cenové skupiny. Nejprve musíte nějakou vytvo
 msgid "Nebyly nalezeny žádné dostupnosti. Nejprve musíte nějaké vytvořit."
 msgstr "Nebyly nalezeny žádné dostupnosti. Nejprve musíte nějaké vytvořit."
 
-#: Content/Currency/listGrid.html.twig:20
+#: Content/Category/listGrid.html.twig:11
+msgid "Nebyly nalezeny žádné kategorie. Nejprve musíte nějaké vytvořit."
+msgstr "Nebyly nalezeny žádné kategorie. Nejprve musíte nějaké vytvořit."
+
+#: Content/Currency/listGrid.html.twig:52
 msgid "Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit."
 msgstr "Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit."
 
@@ -683,12 +710,12 @@ msgstr "Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit."
 msgid "Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit."
 msgstr "Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit."
 
-#: Content/Vat/listGrid.html.twig:14
+#: Content/Vat/listGrid.html.twig:33
 msgid "Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit."
 msgstr "Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit."
 
 #: Content/TopProducts/listGrid.html.twig:4
-#: Admin/Grid/Grid.html.twig:52
+#: Admin/Grid/Grid.html.twig:51
 msgid "Nebyly nalezeny žádné záznamy."
 msgstr "Nebyly nalezeny žádné záznamy."
 
@@ -696,7 +723,7 @@ msgstr "Nebyly nalezeny žádné záznamy."
 msgid "Nebyly nalezeny žádné články. Nejprve musíte nějaký vytvořit."
 msgstr "Nebyly nalezeny žádné články. Nejprve musíte nějaký vytvořit."
 
-#: AdministratorController.php:179
+#: AdministratorController.php:181
 msgid "Nemůžete smazat sami sebe."
 msgstr "Nemůžete smazat sami sebe."
 
@@ -705,7 +732,7 @@ msgstr "Nemůžete smazat sami sebe."
 msgid "Není z čeho vybírat"
 msgstr "Není z čeho vybírat"
 
-#: Front/Form/theme.html.twig:154
+#: Front/Form/theme.html.twig:167
 msgid "Není z čeho vybírat."
 msgstr "Není z čeho vybírat."
 
@@ -717,7 +744,7 @@ msgstr "Neplatné nastavení zaokrouhlování"
 msgid "Nepodařilo se odeslat aktualizační email"
 msgstr "Nepodařilo se odeslat aktualizační email"
 
-#: OrderController.php:94
+#: OrderController.php:95
 msgid "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
 msgstr "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
 
@@ -734,8 +761,8 @@ msgstr "Nepodařilo se odstranit položku z košíku. Nejspíš je již odstran�
 msgid "Nová doprava"
 msgstr "Nová doprava"
 
-#: Content/Department/new.html.twig:3
-#: Content/Department/new.html.twig:4
+#: Content/Category/new.html.twig:3
+#: Content/Category/new.html.twig:4
 msgid "Nová kategorie"
 msgstr "Nová kategorie"
 
@@ -774,13 +801,13 @@ msgstr "Nový článek"
 msgid "Nástěnka"
 msgstr "Nástěnka"
 
-#: Department/Grid/DepartmentGridFactory.php:64
-#: Status/Grid/OrderStatusGridFactory.php:64
-#: Payment/Grid/PaymentGridFactory.php:86
-#: Group/Grid/PricingGroupGridFactory.php:62
-#: Pricing/Vat/VatGridFactory.php:51
-#: Product/Availability/AvailabilityGridFactory.php:62
-#: Transport/Grid/TransportGridFactory.php:86
+#: CategoryGridFactory.php:64
+#: OrderStatusGridFactory.php:64
+#: PaymentGridFactory.php:86
+#: PricingGroupGridFactory.php:62
+#: VatGridFactory.php:51
+#: AvailabilityGridFactory.php:62
+#: TransportGridFactory.php:86
 #: Content/Order/edit.html.twig:87
 #: Content/Cart/index.html.twig:20
 #: Content/Customer/orderDetail.html.twig:95
@@ -788,8 +815,8 @@ msgstr "Nástěnka"
 msgid "Název"
 msgstr "Název"
 
-#: Product/Parameter/ParameterGridFactory.php:60
-#: Product/Parameter/ParameterGridFactory.php:68
+#: ParameterGridFactory.php:60
+#: ParameterGridFactory.php:68
 msgid "Název %locale%"
 msgstr "Název %locale%"
 
@@ -797,11 +824,11 @@ msgstr "Název %locale%"
 msgid "Název firmy"
 msgstr "Název firmy"
 
-#: Controller/Admin/MailController.php:26
+#: MailController.php:26
 msgid "Název zvolené dopravy"
 msgstr "Název zvolené dopravy"
 
-#: Controller/Admin/MailController.php:27
+#: MailController.php:27
 msgid "Název zvolené platby"
 msgstr "Název zvolené platby"
 
@@ -823,6 +850,10 @@ msgstr "Objednávka byla odeslána"
 msgid "Objednávka dokončena"
 msgstr "Objednávka dokončena"
 
+#: CustomerController.php:114
+msgid "Objednávka nebyla nalezena"
+msgstr "Objednávka nebyla nalezena"
+
 #: Content/Order/edit.html.twig:144
 msgid "Objednávka neobsahuje žádné položky."
 msgstr "Objednávka neobsahuje žádné položky."
@@ -833,24 +864,21 @@ msgstr "Objednávka neobsahuje žádné položky."
 msgid "Objednávka č."
 msgstr "Objednávka č."
 
-#: OrderController.php:174
+#: OrderController.php:177
 msgid "Objednávka č. <strong>{{ number }}</strong> byla smazána"
 msgstr "Objednávka č. <strong>{{ number }}</strong> byla smazána"
 
 #: Content/Payment/edit.html.twig:20
-#: Content/Product/edit.html.twig:56
+#: Content/Product/edit.html.twig:57
 #: Content/Slider/edit.html.twig:16
 #: Content/Transport/edit.html.twig:20
 #: Content/Cart/index.html.twig:19
 msgid "Obrázek"
 msgstr "Obrázek"
 
-#: Content/Department/list.html.twig:3
-#: Content/Department/list.html.twig:4
 msgid "Oddělení"
 msgstr "Oddělení"
 
-#: DepartmentController.php:127
 msgid "Oddělení <strong>{{ name }}</strong> bylo smazáno"
 msgstr "Oddělení <strong>{{ name }}</strong> bylo smazáno"
 
@@ -862,7 +890,7 @@ msgstr "Odhlásit"
 msgid "Odhlásit se"
 msgstr "Odhlásit se"
 
-#: Controller/Admin/MailController.php:53
+#: MailController.php:55
 msgid "Odkaz na stránku s přihlášením"
 msgstr "Odkaz na stránku s přihlášením"
 
@@ -874,25 +902,32 @@ msgstr "Odstranit"
 msgid "Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789."
 msgstr "Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789."
 
-#: Product/TopProduct/TopProductGridFactory.php:79
+#: TopProductGridFactory.php:79
 msgid "Opravdu chcete odebrat tento produkt z akce na titulní stránce?"
 msgstr "Opravdu chcete odebrat tento produkt z akce na titulní stránce?"
 
-#: Transport/Grid/TransportGridFactory.php:102
+#: ParameterGridFactory.php:81
+msgid "Opravdu chcete odstranit tento parametr? Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. Tento krok je nevratný!"
+msgstr "Opravdu chcete odstranit tento parametr? Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. Tento krok je nevratný!"
+
+#: TransportGridFactory.php:102
 msgid "Opravdu chcete odstranit tuto dopravu?"
 msgstr "Opravdu chcete odstranit tuto dopravu?"
 
-#: Product/Availability/AvailabilityGridFactory.php:71
+#: AvailabilityGridFactory.php:71
 msgid "Opravdu chcete odstranit tuto dostupnost?"
 msgstr "Opravdu chcete odstranit tuto dostupnost?"
 
-#: Payment/Grid/PaymentGridFactory.php:102
+#: PaymentGridFactory.php:102
 msgid "Opravdu chcete odstranit tuto platbu?"
 msgstr "Opravdu chcete odstranit tuto platbu?"
 
-#: Department/Grid/DepartmentGridFactory.php:78
 msgid "Opravdu chcete smazat toto oddělení?"
 msgstr "Opravdu chcete smazat toto oddělení?"
+
+#: CategoryGridFactory.php:78
+msgid "Opravdu chcete smazat tuto kategorii?"
+msgstr "Opravdu chcete smazat tuto kategorii?"
 
 #: Content/Customer/detail.html.twig:23
 #: Content/Order/edit.html.twig:32
@@ -911,15 +946,15 @@ msgstr "Osobní údaje"
 msgid "PSČ"
 msgstr "PSČ"
 
-#: Content/Product/detail.html.twig:55
+#: Content/Product/detail.html.twig:56
 msgid "Parametr"
 msgstr "Parametr"
 
-#: ParameterController.php:38
+#: ParameterController.php:39
 msgid "Parametr <strong>{{ name }}</strong> byl smazán"
 msgstr "Parametr <strong>{{ name }}</strong> byl smazán"
 
-#: Content/Product/detail.html.twig:46
+#: Content/Product/detail.html.twig:47
 msgid "Parametry"
 msgstr "Parametry"
 
@@ -929,15 +964,33 @@ msgstr "Parametry"
 msgid "Platba"
 msgstr "Platba"
 
-#: PaymentController.php:115
+#: PaymentController.php:116
 msgid "Platba <strong>{{ name }}</strong> byla smazána"
 msgstr "Platba <strong>{{ name }}</strong> byla smazána"
+
+#: Content/Product/edit.html.twig:77
+msgid "Po uložení bude obrázek smazán"
+msgstr "Po uložení bude obrázek smazán"
+
+#: Content/Vat/listGrid.html.twig:10
+msgid "Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována"
+msgstr "Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována"
 
 #: Content/Order/step2.html.twig:111
 msgid "Pokračovat v objednávce"
 msgstr "Pokračovat v objednávce"
 
-#: Admin/Grid/Grid.html.twig:276
+#: MailController.php:38
+#: Content/CustomerCommunication/orderSubmitted.html.twig:35
+msgid "Pokyny k dopravě"
+msgstr "Pokyny k dopravě"
+
+#: MailController.php:39
+#: Content/CustomerCommunication/orderSubmitted.html.twig:41
+msgid "Pokyny k platbě"
+msgstr "Pokyny k platbě"
+
+#: Admin/Grid/Grid.html.twig:265
 msgid "Položek na stránku:"
 msgstr "Položek na stránku:"
 
@@ -957,11 +1010,12 @@ msgstr "Poslední přihlášení"
 msgid "Potvrzení registrace"
 msgstr "Potvrzení registrace"
 
+#: Content/CustomerCommunication/orderSubmitted.html.twig:24
 #: Content/Mail/template.html.twig:38
 msgid "Použitelné proměnné"
 msgstr "Použitelné proměnné"
 
-#: Controller/Admin/MailController.php:33
+#: MailController.php:33
 #: Content/Order/edit.html.twig:72
 #: Content/Order/step3.html.twig:68
 msgid "Poznámka"
@@ -986,11 +1040,14 @@ msgstr "Počet položek"
 msgid "Pro přístup na tuto stránku musíte být přihlášeni"
 msgstr "Pro přístup na tuto stránku musíte být přihlášeni"
 
-#: Pricing/Vat/VatGridFactory.php:52
+#: VatGridFactory.php:52
 msgid "Procent"
 msgstr "Procent"
 
-#: Product/TopProduct/TopProductGridFactory.php:71
+#: TopProductGridFactory.php:71
+msgid "Produkt"
+msgstr "Produkt"
+
 msgid "Produkt (zadávejte ID produktu)"
 msgstr "Produkt (zadávejte ID produktu)"
 
@@ -998,26 +1055,26 @@ msgstr "Produkt (zadávejte ID produktu)"
 msgid "Produkt <strong>{{ name }}</strong> byl smazán"
 msgstr "Produkt <strong>{{ name }}</strong> byl smazán"
 
-#: AdministratorController.php:93
-#: AdministratorController.php:153
+#: AdministratorController.php:95
+#: AdministratorController.php:155
 #: ArticleController.php:50
-#: ArticleController.php:135
-#: CustomerController.php:60
-#: CustomerController.php:184
-#: DepartmentController.php:48
-#: DepartmentController.php:91
-#: MailController.php:87
+#: ArticleController.php:137
+#: CategoryController.php:48
+#: CategoryController.php:91
+#: CustomerController.php:61
+#: CustomerController.php:188
+#: MailController.php:89
 #: OrderController.php:68
 #: PaymentController.php:45
 #: PaymentController.php:89
-#: ProductController.php:51
-#: ProductController.php:102
-#: SliderController.php:79
-#: SliderController.php:124
-#: TransportController.php:46
-#: TransportController.php:91
+#: ProductController.php:49
+#: ProductController.php:99
+#: SliderController.php:81
+#: SliderController.php:126
+#: TransportController.php:45
+#: TransportController.php:90
 #: CustomerController.php:50
-#: RegistrationController.php:50
+#: RegistrationController.php:49
 msgid "Prosím zkontrolujte si správnost vyplnění všech údajů"
 msgstr "Prosím zkontrolujte si správnost vyplnění všech údajů"
 
@@ -1077,6 +1134,10 @@ msgstr "Přehled zákazníků"
 msgid "Přehled článků"
 msgstr "Přehled článků"
 
+#: addProduct.js:26
+msgid "Přejít do košíku"
+msgstr "Přejít do košíku"
+
 #: Admin/Form/theme.html.twig:97
 msgid "Překlad "
 msgstr "Překlad "
@@ -1090,7 +1151,7 @@ msgstr "Překlady konstant"
 msgid "Přepočítat"
 msgstr "Přepočítat"
 
-#: Content/Product/detail.html.twig:90
+#: Content/Product/detail.html.twig:91
 msgid "Přidat"
 msgstr "Přidat"
 
@@ -1102,7 +1163,7 @@ msgstr "Přidat položku"
 msgid "Přidat produkt"
 msgstr "Přidat produkt"
 
-#: Content/Product/detail.html.twig:86
+#: Content/Product/detail.html.twig:87
 msgid "Přidejte nějaké parametry"
 msgstr "Přidejte nějaké parametry"
 
@@ -1122,7 +1183,7 @@ msgstr "Přihlásit se"
 msgid "Přihlášení"
 msgstr "Přihlášení"
 
-#: Controller/Admin/MailController.php:50
+#: MailController.php:52
 #: Content/Customer/orderDetail.html.twig:14
 #: Mail/Order/billingAddress.html.twig:4
 msgid "Příjmení"
@@ -1143,7 +1204,11 @@ msgstr "Registrovaní zák."
 msgid "Registrovat"
 msgstr "Registrovat"
 
-#: Admin/Superadmin/InputPriceTypeFormType.php:64
+#: ProductFormType.php:174
+msgid "Ručně"
+msgstr "Ručně"
+
+#: InputPriceTypeFormType.php:64
 #: Content/Customer/orderDetail.html.twig:120
 msgid "S DPH"
 msgstr "S DPH"
@@ -1157,19 +1222,19 @@ msgstr "Sazba DPH"
 msgid "Sazba DPH (%)"
 msgstr "Sazba DPH (%)"
 
-#: Controller/Admin/MailController.php:34
+#: MailController.php:34
 msgid "Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)"
 msgstr "Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)"
 
-#: Department/Grid/DepartmentGridFactory.php:74
-#: Status/Grid/OrderStatusGridFactory.php:69
-#: Payment/Grid/PaymentGridFactory.php:98
-#: Group/Grid/PricingGroupGridFactory.php:67
-#: Pricing/Vat/VatGridFactory.php:57
-#: Product/Availability/AvailabilityGridFactory.php:67
-#: Product/Parameter/ParameterGridFactory.php:77
-#: Product/TopProduct/TopProductGridFactory.php:75
-#: Transport/Grid/TransportGridFactory.php:98
+#: CategoryGridFactory.php:74
+#: OrderStatusGridFactory.php:69
+#: PaymentGridFactory.php:98
+#: PricingGroupGridFactory.php:67
+#: VatGridFactory.php:57
+#: AvailabilityGridFactory.php:67
+#: ParameterGridFactory.php:77
+#: TopProductGridFactory.php:75
+#: TransportGridFactory.php:98
 msgid "Smazat"
 msgstr "Smazat"
 
@@ -1177,11 +1242,11 @@ msgstr "Smazat"
 msgid "Smazat a nastavit"
 msgstr "Smazat a nastavit"
 
-#: Content/Product/edit.html.twig:65
+#: Content/Product/edit.html.twig:69
 msgid "Smazat obrázek"
 msgstr "Smazat obrázek"
 
-#: Common/Form/fileuploadFields.html.twig:36
+#: Common/Form/fileuploadFields.html.twig:51
 #: Content/Customer/orderDetail.html.twig:113
 msgid "Stav"
 msgstr "Stav"
@@ -1202,7 +1267,7 @@ msgstr "Stav objednávek <strong>{{ name }}</strong> mají nastaveny některé o
 msgid "Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán."
 msgstr "Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán."
 
-#: SliderController.php:150
+#: SliderController.php:153
 msgid "Stránka <strong>{{ name }}</strong> byla smazána"
 msgstr "Stránka <strong>{{ name }}</strong> byla smazána"
 
@@ -1249,6 +1314,10 @@ msgstr "Superadmin - rozcestník"
 msgid "Systémové údaje"
 msgstr "Systémové údaje"
 
+#: Content/Product/list.html.twig:50
+msgid "Tato kategorie neobsahuje žádné produkty"
+msgstr "Tato kategorie neobsahuje žádné produkty"
+
 #: Content/Product/detail.html.twig:126
 msgid "Technické parametry"
 msgstr "Technické parametry"
@@ -1275,25 +1344,27 @@ msgstr "Tento stav není možné smazat. Jde o stav, který je automaticky při�
 msgid "To je nemilé, to je nemilé. A zrovna\n\t\t\t\t\t\t\t\t\t<strong>\"%status_code% %status_text%\"</strong>,\n\t\t\t\t\t\t\t\t\tto je jak naschvál!"
 msgstr "To je nemilé, to je nemilé. A zrovna\n\t\t\t\t\t\t\t\t\t<strong>\"%status_code% %status_text%\"</strong>,\n\t\t\t\t\t\t\t\t\tto je jak naschvál!"
 
-#: Content/Product/list.html.twig:32
 msgid "Toto oddělení neobsahuje žádné produkty"
 msgstr "Toto oddělení neobsahuje žádné produkty"
 
-#: CurrencyController.php:70
-#: Content/Currency/listGrid.html.twig:6
 msgid "Tuto měnu nelze smazat, je nastavena jako výchozí"
 msgstr "Tuto měnu nelze smazat, je nastavena jako výchozí"
+
+#: CurrencyController.php:68
+#: Content/Currency/listGrid.html.twig:6
+msgid "Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky"
+msgstr "Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky"
 
 #: Content/Superadmin/pricing.html.twig:11
 msgid "Typ vstupní ceny"
 msgstr "Typ vstupní ceny"
 
-#: Controller/Admin/MailController.php:37
+#: MailController.php:37
 msgid "URL adresa detailu objednávky"
 msgstr "URL adresa detailu objednávky"
 
-#: Controller/Admin/MailController.php:25
-#: Controller/Admin/MailController.php:52
+#: MailController.php:25
+#: MailController.php:54
 msgid "URL adresa e-shopu"
 msgstr "URL adresa e-shopu"
 
@@ -1312,11 +1383,11 @@ msgstr "Ulice"
 msgid "Uložit"
 msgstr "Uložit"
 
-#: Content/Currency/currencySettings.html.twig:6
-#: Content/Currency/domainCurrencySettings.html.twig:8
+#: Content/Currency/currencySettings.html.twig:4
+#: Content/Currency/domainCurrencySettings.html.twig:6
 #: Content/Mail/setting.html.twig:18
 #: Content/Order/edit.html.twig:150
-#: Pricing/Groups/pricingGroupSettings.html.twig:6
+#: Pricing/Groups/pricingGroupSettings.html.twig:4
 #: Content/Superadmin/pricing.html.twig:14
 #: Content/Vat/roundingSetting.html.twig:6
 #: Content/Vat/vatSettings.html.twig:7
@@ -1324,9 +1395,9 @@ msgstr "Uložit"
 msgid "Uložit změny"
 msgstr "Uložit změny"
 
-#: Department/Grid/DepartmentGridFactory.php:68
-#: Payment/Grid/PaymentGridFactory.php:92
-#: Transport/Grid/TransportGridFactory.php:92
+#: CategoryGridFactory.php:68
+#: PaymentGridFactory.php:92
+#: TransportGridFactory.php:92
 msgid "Upravit"
 msgstr "Upravit"
 
@@ -1334,6 +1405,14 @@ msgstr "Upravit"
 #: Content/Login/windowForm.html.twig:9
 msgid "Uživatelské jméno"
 msgstr "Uživatelské jméno"
+
+#: OrderController.php:145
+msgid "V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku."
+msgstr "V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku."
+
+#: OrderController.php:153
+msgid "V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku."
+msgstr "V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku."
 
 #: Content/Mail/template.html.twig:71
 #: Content/Mail/template.html.twig:80
@@ -1344,19 +1423,26 @@ msgstr "V předmětu lze použít proměnné pouze pro číslo objednávky a dat
 msgid "Vaše údaje byly úspěšně zaktualizovány"
 msgstr "Vaše údaje byly úspěšně zaktualizovány"
 
-#: Inline/Cart/addProduct.html.twig:6
 msgid "Vložit do košíku"
 msgstr "Vložit do košíku"
 
-#: Content/Product/edit.html.twig:69
+#: Content/Product/edit.html.twig:74
 msgid "Vrátit zpět"
 msgstr "Vrátit zpět"
 
-#: Content/Product/list.html.twig:14
+#: Admin/Form/theme.html.twig:146
+msgid "Vyberte produkt"
+msgstr "Vyberte produkt"
+
+#: Content/ProductPicker/listGrid.html.twig:12
+msgid "Vybrat"
+msgstr "Vybrat"
+
+#: Content/Product/quickSearchFormContent.html.twig:3
 msgid "Vyhledat"
 msgstr "Vyhledat"
 
-#: Content/Product/list.html.twig:17
+#: Content/Product/quickSearchFormContent.html.twig:6
 msgid "Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Hledání rozlišuje velká/malá písmena a diakritiku. Je možné používat operátory * a ?."
 msgstr "Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Hledání rozlišuje velká/malá písmena a diakritiku. Je možné používat operátory * a ?."
 
@@ -1372,11 +1458,11 @@ msgstr "Vytvořit dopravu"
 msgid "Vytvořit dostupnost"
 msgstr "Vytvořit dostupnost"
 
-#: Content/Currency/listGrid.html.twig:29
+#: Content/Currency/listGrid.html.twig:61
 msgid "Vytvořit měnu"
 msgstr "Vytvořit měnu"
 
-#: Content/Department/list.html.twig:11
+#: Content/Category/list.html.twig:11
 msgid "Vytvořit novou kategorii"
 msgstr "Vytvořit novou kategorii"
 
@@ -1384,7 +1470,7 @@ msgstr "Vytvořit novou kategorii"
 msgid "Vytvořit novou stránku"
 msgstr "Vytvořit novou stránku"
 
-#: Content/Product/list.html.twig:21
+#: Content/Product/list.html.twig:13
 msgid "Vytvořit nové zboží"
 msgstr "Vytvořit nové zboží"
 
@@ -1412,7 +1498,7 @@ msgstr "Vytvořit parametr"
 msgid "Vytvořit platbu"
 msgstr "Vytvořit platbu"
 
-#: Content/Vat/listGrid.html.twig:23
+#: Content/Vat/listGrid.html.twig:42
 msgid "Vytvořit sazbu DPH"
 msgstr "Vytvořit sazbu DPH"
 
@@ -1436,7 +1522,7 @@ msgstr "Výběr dopravy"
 msgid "Výběr platby"
 msgstr "Výběr platby"
 
-#: Pricing/Groups/pricingGroupSettings.html.twig:5
+#: Pricing/Groups/pricingGroupSettings.html.twig:3
 msgid "Výchozí cenová skupina"
 msgstr "Výchozí cenová skupina"
 
@@ -1481,6 +1567,10 @@ msgstr "Zasílat potvrzení o přijetí objednávky"
 msgid "Zavřít"
 msgstr "Zavřít"
 
+#: CartWatcherFacade.php:76
+msgid "Zboží <strong>{{ name }}</strong>, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
+msgstr "Zboží <strong>{{ name }}</strong>, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
+
 #: TopProductController.php:38
 msgid "Zboží bylo odstraněno"
 msgstr "Zboží bylo odstraněno"
@@ -1495,15 +1585,18 @@ msgstr "Zboží chci doručit na jinou adresu než fakturační"
 msgid "Zboží na titulní stránce"
 msgstr "Zboží na titulní stránce"
 
-#: TopProductController.php:40
 msgid "Zboží se nepodařilo odstranit - zboží již není v tomto seznamu."
 msgstr "Zboží se nepodařilo odstranit - zboží již není v tomto seznamu."
+
+#: TopProductController.php:40
+msgid "Zboží se nepodařilo odstranit - zboží není v tomto seznamu."
+msgstr "Zboží se nepodařilo odstranit - zboží není v tomto seznamu."
 
 #: CartController.php:136
 msgid "Zboží se nepodařilo vložit do košíku."
 msgstr "Zboží se nepodařilo vložit do košíku."
 
-#: Common/Form/fileuploadFields.html.twig:43
+#: Common/Form/fileuploadFields.html.twig:58
 msgid "Zde přetáhněte soubor"
 msgstr "Zde přetáhněte soubor"
 
@@ -1515,7 +1608,7 @@ msgstr "Zkontrolujte správnost adresy"
 msgid "Zkuste použít vyhledávání na webu"
 msgstr "Zkuste použít vyhledávání na webu"
 
-#: Admin/Grid/Grid.html.twig:199
+#: Admin/Grid/Grid.html.twig:188
 #: Inline/Paginator/paginator.html.twig:5
 msgid "Zobrazuji"
 msgstr "Zobrazuji"
@@ -1535,13 +1628,13 @@ msgstr "Zpět k nákupu"
 
 #: Content/Administrator/detail.html.twig:25
 #: Content/Article/detail.html.twig:24
+#: Content/Category/detail.html.twig:21
 #: Content/Customer/detail.html.twig:75
-#: Content/Department/detail.html.twig:21
 #: Content/Order/edit.html.twig:151
-#: Content/Payment/detail.html.twig:38
-#: Content/Product/detail.html.twig:99
+#: Content/Payment/detail.html.twig:39
+#: Content/Product/detail.html.twig:101
 #: Content/Slider/detail.html.twig:32
-#: Content/Transport/detail.html.twig:37
+#: Content/Transport/detail.html.twig:38
 msgid "Zpět na přehled"
 msgstr "Zpět na přehled"
 
@@ -1561,31 +1654,87 @@ msgstr "Způsob dopravy"
 msgid "Způsob platby"
 msgstr "Způsob platby"
 
-#: PricingGroupController.php:60
 msgid "Zvolená cenová skupina již neexistuje"
 msgstr "Zvolená cenová skupina již neexistuje"
 
-#: CurrencyController.php:72
+#: PricingGroupController.php:60
+msgid "Zvolená cenová skupina neexistuje."
+msgstr "Zvolená cenová skupina neexistuje."
+
+#: TransportController.php:121
+msgid "Zvolená doprava neexistuje."
+msgstr "Zvolená doprava neexistuje."
+
+#: AvailabilityController.php:43
+msgid "Zvolená dostupnost neexistuje."
+msgstr "Zvolená dostupnost neexistuje."
+
+#: CategoryController.php:132
+msgid "Zvolená kategorie neexistuje"
+msgstr "Zvolená kategorie neexistuje"
+
 msgid "Zvolená měna již neexistuje"
 msgstr "Zvolená měna již neexistuje"
 
-#: VatController.php:101
+#: CurrencyController.php:70
+msgid "Zvolená měna neexistuje."
+msgstr "Zvolená měna neexistuje."
+
+#: OrderController.php:181
+msgid "Zvolená objednávka neexistuje"
+msgstr "Zvolená objednávka neexistuje"
+
+#: PaymentController.php:120
+msgid "Zvolená platba neexistuje."
+msgstr "Zvolená platba neexistuje."
+
+#: SliderController.php:157
+msgid "Zvolená stránka neexistuje."
+msgstr "Zvolená stránka neexistuje."
+
 msgid "Zvolené DPH již neexistuje"
 msgstr "Zvolené DPH již neexistuje"
+
+#: VatController.php:101
+msgid "Zvolené DPH neexistuje."
+msgstr "Zvolené DPH neexistuje."
 
 #: CartController.php:132
 msgid "Zvolené zboží již není v nabídce nebo neexistuje."
 msgstr "Zvolené zboží již není v nabídce nebo neexistuje."
 
+#: AdministratorController.php:187
+msgid "Zvolený administrátor neexistuje."
+msgstr "Zvolený administrátor neexistuje."
+
+#: ParameterController.php:43
+msgid "Zvolený parametr neexistuje."
+msgstr "Zvolený parametr neexistuje."
+
+#: ProductController.php:169
+msgid "Zvolený produkt neexistuje."
+msgstr "Zvolený produkt neexistuje."
+
+#: OrderStatusController.php:64
+msgid "Zvolený stav objednávek neexistuje"
+msgstr "Zvolený stav objednávek neexistuje"
+
+#: CustomerController.php:213
+msgid "Zvolený zákazník neexistuje"
+msgstr "Zvolený zákazník neexistuje"
+
+#: ArticleController.php:163
+msgid "Zvolený článek neexistuje."
+msgstr "Zvolený článek neexistuje."
+
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:6
 msgid "Zvolte novou hodnotu"
 msgstr "Zvolte novou hodnotu"
 
-#: CustomerController.php:204
+#: CustomerController.php:209
 msgid "Zákazník <strong>{{ name }}</strong> byl smazán"
 msgstr "Zákazník <strong>{{ name }}</strong> byl smazán"
 
-#: Content/Product/edit.html.twig:31
 msgid "Základní cena"
 msgstr "Základní cena"
 
@@ -1603,11 +1752,15 @@ msgstr "Základní cena s DPH"
 msgid "dostupností"
 msgstr "dostupností"
 
-#: Content/Currency/listGrid.html.twig:24
+#: Content/Category/listGrid.html.twig:15
+msgid "kategorie"
+msgstr "kategorie"
+
+#: Content/Currency/listGrid.html.twig:56
 msgid "měny"
 msgstr "měny"
 
-#: Common/Form/fileuploadFields.html.twig:46
+#: Common/Form/fileuploadFields.html.twig:61
 msgid "nebo"
 msgstr "nebo"
 
@@ -1619,7 +1772,6 @@ msgstr "nikdy"
 msgid "objednávek"
 msgstr "objednávek"
 
-#: Content/Department/listGrid.html.twig:15
 msgid "oddělení"
 msgstr "oddělení"
 
@@ -1627,7 +1779,7 @@ msgstr "oddělení"
 msgid "parametry"
 msgstr "parametry"
 
-#: Content/Vat/listGrid.html.twig:18
+#: Content/Vat/listGrid.html.twig:37
 msgid "sazby DPH"
 msgstr "sazby DPH"
 
@@ -1635,13 +1787,14 @@ msgstr "sazby DPH"
 msgid "stavů objednávek"
 msgstr "stavů objednávek"
 
-#: Admin/Grid/Grid.html.twig:200
+#: Admin/Grid/Grid.html.twig:189
 #: Inline/Paginator/paginator.html.twig:6
 msgid "z"
 msgstr "z"
 
 #: Content/Product/listGrid.html.twig:16
-#: Content/Product/list.html.twig:17
+#: Content/ProductPicker/listGrid.html.twig:16
+#: Content/Product/list.html.twig:32
 msgid "zboží"
 msgstr "zboží"
 
@@ -1649,11 +1802,11 @@ msgstr "zboží"
 msgid "zákazníků"
 msgstr "zákazníků"
 
-#: Common/Form/fileuploadFields.html.twig:36
+#: Common/Form/fileuploadFields.html.twig:51
 msgid "Úspěšně nahráno"
 msgstr "Úspěšně nahráno"
 
-#: Translation/Grid/TranslationGridFactory.php:47
+#: TranslationGridFactory.php:47
 msgid "Česky"
 msgstr "Česky"
 
@@ -1662,11 +1815,11 @@ msgstr "Česky"
 msgid "Článek"
 msgstr "Článek"
 
-#: ArticleController.php:156
+#: ArticleController.php:159
 msgid "Článek <strong>{{ name }}</strong> byl smazán"
 msgstr "Článek <strong>{{ name }}</strong> byl smazán"
 
-#: Controller/Admin/MailController.php:23
+#: MailController.php:23
 #: Content/Customer/orders.html.twig:15
 msgid "Číslo objednávky"
 msgstr "Číslo objednávky"
