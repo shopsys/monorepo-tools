@@ -14,16 +14,28 @@
 	<h1>{{ category.name|trans }}</h1>
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
-		<div>
+		<div class="box-filter">
 			{{ form_start(filterForm, { action: url('front_product_category', { categoryId: category.id }) }) }}
-				{% do filterForm.minimalPrice.setRendered %}
-				{% do filterForm.maximalPrice.setRendered %}
+				{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
+
+				<div class="box-filter__group display-none">
+					<div class="box-filter__group__item">
+						{{ form_row(filterForm.minimalPrice) }}
+					</div>
+
+					<div class="box-filter__group__item">
+						{{ form_row(filterForm.maximalPrice) }}
+					</div>
+
+				</div>
 
 				{{ form_row(filterForm.parameters, { label: 'Parametry' }) }}
 
-				{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
+				<div class="box-filter__buttons">
+					{{ form_widget(filterForm.reset, { label: 'Vynulovat filtr', attr: { class: 'button--simple mr-half'} }) }}
+					{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
+				</div>
 
-				{{ form_widget(filterForm.reset, { label: 'Vynulovat filtr' }) }}
 			{{ form_end(filterForm) }}
 		</div>
 	{% endif %}

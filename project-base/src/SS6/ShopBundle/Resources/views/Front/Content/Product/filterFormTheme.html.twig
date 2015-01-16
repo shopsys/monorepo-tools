@@ -1,0 +1,51 @@
+{% extends '@SS6Shop/Front/Form/theme.html.twig' %}
+
+{% block form_row %}
+	<div class="form-block">
+		{{ form_errors(form) }}
+		{{ form_label(form, label, { label_attr: {class: 'form-block__label'} }) }}
+		<div class="form-block__field">
+			{{ form_widget(form) }}
+		</div>
+	</div>
+{% endblock form_row %}
+
+{% block form_widget_simple %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-block__item')|trim}) %}
+	{{ parent('form_widget_simple') }}
+{% endblock form_widget_simple %}
+
+{% block choice_widget_expanded %}
+	{% spaceless %}
+			<div class="form-choice" {{ block('widget_container_attributes') }}>
+			{% for child in form %}
+				<div class="form-choice__item">
+					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+						{{ form_widget(child, { attr: {class: 'form-choice__input'} }) }}
+						<span class="form-choice__text">
+							{{ child.vars.label }}
+						</span>
+					</label>
+				</div>
+			{% else %}
+				{{ empty_message|default('Není z čeho vybírat.'|trans) }}
+			{% endfor %}
+			</div>
+	{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+
+{% block form_errors %}
+	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
+	{% spaceless %}
+		<div class="in-message in-message--danger js-validation-errors-list in-message--static-small {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
+			<ul class="in-message__list">
+				{% if errors|length > 0 %}
+					{% for error in errors %}
+						<li>{{ error.message }}</li>
+					{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
+	{% endspaceless %}
+{% endblock form_errors %}

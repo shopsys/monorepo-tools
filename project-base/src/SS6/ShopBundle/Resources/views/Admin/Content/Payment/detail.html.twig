@@ -20,7 +20,7 @@
 					{{ form_id(paymentDetail.payment|default(null)) }}
 
 					{{ form_row(form.name, { label: 'Název'}) }}
-					{{ form_row(form.domains, { label: 'Doména', errors_attr: { class: 'in-message-floating' } }) }}
+					{{ form_row(form.domains, { label: 'Doména' }) }}
 					{{ form_row(form.hidden, { label: 'Skryté', attr: {class: 'form-line--between'} }) }}
 					{{ form_row(form.price, { label: inputPriceLabel()}) }}
 					{{ form_row(form.vat, { label: 'DPH'}) }}
