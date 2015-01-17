@@ -8,6 +8,12 @@
 		"psr-0": {"SS6\\": "src/"},
 		"psr-4": {"SS6\\": "app/"}
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/sustmi/jparser.git"
+		}
+	],
 	"require": {
 		"php": ">=5.4",
 		"bmatzner/jquery-bundle": "1.11.1",
@@ -38,7 +44,7 @@
 		"symfony/swiftmailer-bundle": "~2.3",
 		"symfony/symfony": "2.5.*",
 		"symfony-cmf/routing-bundle": "1.3.0",
-		"timwhitlock/jparser": "1.1.2.1",
+		"timwhitlock/jparser": "dev-fix-imports",
 		"twig/extensions": "~1.0"
 	},
 	"require-dev": {
