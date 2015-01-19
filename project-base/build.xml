@@ -35,6 +35,8 @@
 
 	<property file="${path.build.properties.local}" override="true"/>
 
+	<import file="${path.root}/build-ext.xml" />
+
 	<target name="build" depends="clean,composer,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup"/>
 	<target name="build-demo" depends="clean,composer,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup"/>
 	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,standards"/>

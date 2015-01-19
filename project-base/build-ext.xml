@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Shopsys6">
+
+	<target name="standards-diff" depends="phplint-diff,phpcs-diff,phpmd-diff" />
+
+	<target name="diff-files">
+		<exec
+			command="git merge-base origin/master HEAD"
+			outputProperty="git.merge.base"
+		/>
+
+		<exec
+			command="git diff --name-only --diff-filter=ACMR ${git.merge.base} ${path.src}"
+			outputProperty="git.files.changed"
+		/>
+
+		<exec
+			command="git ls-files --others --exclude-standard ${path.src}"
+			outputProperty="git.files.unstaged"
+		/>
+
+		<property name="diff.files.all" value="${git.files.changed}${line.separator}${git.files.unstaged}" />
+
+		<property name="diff.files.php" value="${diff.files.all}">
+			<filterchain>
+				<linecontainsregexp>
+					<!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
+					<regexp pattern="\.php\s*$" />
+				</linecontainsregexp>
+			</filterchain>
+		</property>
+	</target>
+
+	<target name="phpcs-diff" depends="diff-files">
+		<property name="diff.files.phpcs" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
+			</filterchain>
+		</property>
+
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phpcs.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="--standard=${path.phpcs.ruleset}"/>
+					<arg value="--extensions=php"/>
+					<arg value="--encoding=utf-8"/>
+					<arg value="-sp"/>
+					<arg line="${diff.files.phpcs}"/>
+				</exec>
+			</then>
+		</if>
+	</target>
+
+	<target name="phplint-diff" depends="diff-files">
+		<property name="diff.files.phplint" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
+			</filterchain>
+		</property>
+
+		<if>
+			<not>
+				<equals arg1="${diff.files.phplint}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phplint.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg line="${diff.files.phplint}" />
+				</exec>
+			</then>
+		</if>
+	</target>
+
+	<target name="phpmd-diff" depends="diff-files">
+		<property name="diff.files.phpmd" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace="," />
+					<regexp pattern=",$" replace="" />
+				</replaceregexp>
+			</filterchain>
+		</property>
+
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpmd}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phpmd.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="${diff.files.phpmd}"/>
+					<arg value="text"/>
+					<arg value="${path.phpmd.ruleset}"/>
+					<arg value="--extensions=php"/>
+				</exec>
+			</then>
+		</if>
+	</target>
+
+</project>
