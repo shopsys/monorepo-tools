@@ -122,7 +122,7 @@ class TransportAndPaymentWatcherService {
 	 * @return array
 	 */
 	private function getTransportPrices($transports) {
-		$transportPriceValues = array();
+		$transportPriceValues = [];
 		foreach ($transports as $transport) {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
 			$transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat();
@@ -136,7 +136,7 @@ class TransportAndPaymentWatcherService {
 	 * @return array
 	 */
 	private function getPaymentPrices($payments) {
-		$paymentPriceValues = array();
+		$paymentPriceValues = [];
 		foreach ($payments as $payment) {
 			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
 			$paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat();
@@ -150,20 +150,20 @@ class TransportAndPaymentWatcherService {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 */
 	private function rememberTransportAndPayment($transports, $payments) {
-		$this->session->set(self::SESSION_ROOT, array(
+		$this->session->set(self::SESSION_ROOT, [
 			self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices($transports),
 			self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices($payments),
-		));
+		]);
 	}
 
 	/**
 	 * @return array
 	 */
 	private function getRememberedTransportAndPayment() {
-		return $this->session->get(self::SESSION_ROOT, array(
-			self::SESSION_TRANSPORT_PRICES => array(),
-			self::SESSION_PAYMENT_PRICES => array(),
-		));
+		return $this->session->get(self::SESSION_ROOT, [
+			self::SESSION_TRANSPORT_PRICES => [],
+			self::SESSION_PAYMENT_PRICES => [],
+		]);
 	}
 
 	/**

@@ -16,16 +16,16 @@ class LoginFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('username', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím login')),
-				),
-			))
-			->add('password', 'password', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
-				),
-			))
+			->add('username', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím login']),
+				],
+			])
+			->add('password', 'password', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
+				],
+			])
 			->add('login', 'submit');
 	}
 
@@ -40,10 +40,10 @@ class LoginFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => Administrator::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

@@ -55,25 +55,25 @@ class CustomerMailService {
 	private function getVariablesReplacements(User $user) {
 		$router = $this->domainRouterFactory->getRouter($user->getDomainId());
 
-		return array(
+		return [
 			self::VARIABLE_FIRST_NAME => $user->getFirstName(),
 			self::VARIABLE_LAST_NAME => $user->getLastName(),
 			self::VARIABLE_EMAIL => $user->getEmail(),
-			self::VARIABLE_URL => $router->generate('front_homepage', array(), true),
-			self::VARIABLE_LOGIN_PAGE => $router->generate('front_login', array(), true),
-		);
+			self::VARIABLE_URL => $router->generate('front_homepage', [], true),
+			self::VARIABLE_LOGIN_PAGE => $router->generate('front_login', [], true),
+		];
 	}
 
 	/**
 	 * @return array
 	 */
 	public function getTemplateVariables() {
-		return array(
+		return [
 			self::VARIABLE_FIRST_NAME,
 			self::VARIABLE_LAST_NAME,
 			self::VARIABLE_EMAIL,
 			self::VARIABLE_URL,
 			self::VARIABLE_LOGIN_PAGE,
-		);
+		];
 	}
 }

@@ -56,7 +56,7 @@ class OrderItemPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
 	 */
 	public function calculateTotalPricesIndexedById($orderItems) {
-		$prices = array();
+		$prices = [];
 
 		foreach ($orderItems as $orderItem) {
 			if ($orderItem->getId() === null) {

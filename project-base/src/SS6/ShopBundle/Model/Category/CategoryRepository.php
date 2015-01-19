@@ -31,7 +31,7 @@ class CategoryRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAll() {
-		return $this->getCategoryRepository()->findBy(array(), array('root' => 'ASC', 'lft' => 'ASC'));
+		return $this->getCategoryRepository()->findBy([], ['root' => 'ASC', 'lft' => 'ASC']);
 	}
 
 	/**

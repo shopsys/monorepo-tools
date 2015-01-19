@@ -76,11 +76,11 @@ class InlineEditService {
 		$gridView = $grid->createViewWithOneRow($rowId);
 		$rows = $grid->getRows();
 		$rowData = array_pop($rows);
-		return $gridView->renderBlock('grid_row', array(
+		return $gridView->renderBlock('grid_row', [
 			'loopIndex' => 0,
 			'lastRow' => false,
 			'row' => $rowData,
-		), false);
+		], false);
 	}
 
 	/**
@@ -109,7 +109,7 @@ class InlineEditService {
 		foreach ($formView->children as $formName => $childrenForm) {
 			$result[$formName] = $this->twigEnvironment->render(
 				'{% form_theme form \'@SS6Shop/Admin/Form/theme.html.twig\' %}{{ form_widget(form) }}',
-				array('form' => $childrenForm)
+				['form' => $childrenForm]
 			);
 		}
 		$this->multipleFormSettings->reset();

@@ -33,7 +33,7 @@ class UserRepository {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function findUserByEmailAndDomain($email, $domainId) {
-		return $this->getUserRepository()->findOneBy(array('email' => mb_strtolower($email), 'domainId' => ($domainId)));
+		return $this->getUserRepository()->findOneBy(['email' => mb_strtolower($email), 'domainId' => ($domainId)]);
 	}
 
 	/**

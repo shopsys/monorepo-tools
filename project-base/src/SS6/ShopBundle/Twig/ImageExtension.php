@@ -74,13 +74,13 @@ class ImageExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('imageExists', array($this, 'imageExists')),
-			new Twig_SimpleFunction('imageUrl', array($this, 'getImageUrl')),
-			new Twig_SimpleFunction('imagesUrl', array($this, 'getImagesUrl')),
-			new Twig_SimpleFunction('image', array($this, 'getImageHtml'), array('is_safe' => array('html'))),
-			new Twig_SimpleFunction('imageUrlByImage', array($this, 'getImageUrlByImage')),
-		);
+		return [
+			new Twig_SimpleFunction('imageExists', [$this, 'imageExists']),
+			new Twig_SimpleFunction('imageUrl', [$this, 'getImageUrl']),
+			new Twig_SimpleFunction('imagesUrl', [$this, 'getImagesUrl']),
+			new Twig_SimpleFunction('image', [$this, 'getImageHtml'], ['is_safe' => ['html']]),
+			new Twig_SimpleFunction('imageUrlByImage', [$this, 'getImageUrlByImage']),
+		];
 	}
 
 	/**
@@ -139,7 +139,7 @@ class ImageExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getImagesUrl($entity, $sizeName = null, $type = null) {
-		$imagesUrl = array();
+		$imagesUrl = [];
 
 		$relativeFilepaths = $this->imageLocator->getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName);
 		foreach ($relativeFilepaths as $relativeFilepath) {
@@ -157,7 +157,7 @@ class ImageExtension extends Twig_Extension {
 	 * @param array $attributtes
 	 * @return string
 	 */
-	public function getImageHtml($entity, $attributtes = array()) {
+	public function getImageHtml($entity, $attributtes = []) {
 		Condition::setArrayDefaultValue($attributtes, 'type');
 		Condition::setArrayDefaultValue($attributtes, 'size');
 		Condition::setArrayDefaultValue($attributtes, 'alt', '');
@@ -168,10 +168,10 @@ class ImageExtension extends Twig_Extension {
 		$htmlAttributes = $attributtes;
 		unset($htmlAttributes['type'], $htmlAttributes['size']);
 
-		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', array(
+		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
 			'attr' => $htmlAttributes,
 			'imageCssClass' => $this->getImageEntityCssClass($entity, $attributtes['type'], $attributtes['size']),
-		));
+		]);
 	}
 
 	/**
@@ -181,12 +181,12 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	private function getImageEntityCssClass($entity, $type, $sizeName) {
-		$allClassParts = array(
+		$allClassParts = [
 			'image',
 			$imageEntityConfig = $this->imageConfig->getEntityName($entity),
 			$type,
 			$sizeName,
-		);
+		];
 		$classParts = array_filter($allClassParts);
 
 		return implode('-', $classParts);

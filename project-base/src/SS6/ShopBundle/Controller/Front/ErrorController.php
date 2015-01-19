@@ -39,12 +39,12 @@ class ErrorController extends Controller {
 		if ($exceptionController instanceof ExceptionController) {
 			if (!$exceptionController->getDebug()) {
 				$code = $exception->getStatusCode();
-				return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', array(
+				return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
 					'status_code' => $code,
 					'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
 					'exception' => $exception,
 					'logger' => $logger,
-				));
+				]);
 			}
 		}
 

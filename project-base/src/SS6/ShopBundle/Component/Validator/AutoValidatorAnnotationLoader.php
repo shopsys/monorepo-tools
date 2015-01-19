@@ -82,7 +82,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	 * @return \Symfony\Component\Validator\Constraint[]
 	 */
 	private function resolvePropertyConstraintsInEntity($propertyName, DoctrineClassMetadata $entityMetadata) {
-		$constraints = array();
+		$constraints = [];
 		if ($entityMetadata->hasField($propertyName)) {
 			$constraints = $this->resolveConstraintsForEntityField($entityMetadata, $propertyName);
 		} elseif ($entityMetadata->hasAssociation($propertyName)) {
@@ -100,7 +100,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	 * @return \Symfony\Component\Validator\Constraint[]
 	 */
 	private function resolveConstraintsForEntityField(DoctrineClassMetadata $entityMetadata, $fieldName) {
-		$constraints = array();
+		$constraints = [];
 
 		$fieldMapping = $entityMetadata->getFieldMapping($fieldName);
 
@@ -108,9 +108,9 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 			$constraints[] = new Constraints\NotBlank();
 		}
 
-		if (in_array($fieldMapping['type'], array('string', 'text'))) {
+		if (in_array($fieldMapping['type'], ['string', 'text'])) {
 			if ($fieldMapping['length'] !== null) {
-				$constraints[] = new Constraints\Length(array('max' => $fieldMapping['length']));
+				$constraints[] = new Constraints\Length(['max' => $fieldMapping['length']]);
 			}
 		}
 
@@ -118,7 +118,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 			$constraints[] = new Constraints\Date();
 		}
 
-		if (in_array($fieldMapping['type'], array('datetime', 'datetimetz'))) {
+		if (in_array($fieldMapping['type'], ['datetime', 'datetimetz'])) {
 			$constraints[] = new Constraints\DateTime();
 		}
 
@@ -142,13 +142,13 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 
 		$translationsConstraints = $this->resolvePropertyConstraintsInEntity($propertyName, $translationsEntityMetadata);
 		if (count($translationsConstraints) > 0) {
-			$constraints = array(
-				new Constraints\All(array(
+			$constraints = [
+				new Constraints\All([
 					'constraints' => $translationsConstraints,
-				)),
-			);
+				]),
+			];
 		} else {
-			$constraints = array();
+			$constraints = [];
 		}
 
 		return $constraints;
@@ -162,7 +162,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	private function resolveConstraintsForEntityAssociation(DoctrineClassMetadata $entityMetadata, $fieldName) {
 		$fieldMapping = $entityMetadata->getAssociationMapping($fieldName);
 
-		return array();
+		return [];
 	}
 
 }

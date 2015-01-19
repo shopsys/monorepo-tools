@@ -24,9 +24,9 @@ class AllMailTemplatesFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('registrationTemplate', new MailTemplateFormType())
-			->add('orderStatusTemplates', 'collection', array(
+			->add('orderStatusTemplates', 'collection', [
 				'type' => new MailTemplateFormType(),
-			))
+			])
 			->add('domainId', 'hidden');
 	}
 
@@ -34,10 +34,10 @@ class AllMailTemplatesFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
 			'data_class' => AllMailTemplatesData::class,
-		));
+		]);
 	}
 
 }

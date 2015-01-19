@@ -12,13 +12,13 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetSameCart() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
-			->setMethods(array('__construct', 'findAllByCustomerIdentifier'))
+			->setMethods(['__construct', 'findAllByCustomerIdentifier'])
 			->disableOriginalConstructor()
 			->getMock();
-		$cartItemRepository->expects($this->once())->method('findAllByCustomerIdentifier')->will($this->returnValue(array()));
+		$cartItemRepository->expects($this->once())->method('findAllByCustomerIdentifier')->will($this->returnValue([]));
 
 		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
-			->setMethods(array('__construct', 'checkCartModifications'))
+			->setMethods(['__construct', 'checkCartModifications'])
 			->disableOriginalConstructor()
 			->getMock();
 		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
@@ -37,13 +37,13 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetDifferentCart() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
-			->setMethods(array('__construct', 'findAllByCustomerIdentifier'))
+			->setMethods(['__construct', 'findAllByCustomerIdentifier'])
 			->disableOriginalConstructor()
 			->getMock();
-		$cartItemRepository->expects($this->exactly(2))->method('findAllByCustomerIdentifier')->will($this->returnValue(array()));
+		$cartItemRepository->expects($this->exactly(2))->method('findAllByCustomerIdentifier')->will($this->returnValue([]));
 
 		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
-			->setMethods(array('__construct', 'checkCartModifications'))
+			->setMethods(['__construct', 'checkCartModifications'])
 			->disableOriginalConstructor()
 			->getMock();
 		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');

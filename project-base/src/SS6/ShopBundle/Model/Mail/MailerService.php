@@ -24,7 +24,7 @@ class MailerService {
 	 */
 	public function send(MessageData $messageData) {
 		$message = $this->getMessageWithReplacedVariables($messageData);
-		$failedRecipients = array();
+		$failedRecipients = [];
 		$successSend = $this->mailer->send($message, $failedRecipients);
 		if (!$successSend && count($failedRecipients) > 0) {
 			throw new \SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException($failedRecipients);

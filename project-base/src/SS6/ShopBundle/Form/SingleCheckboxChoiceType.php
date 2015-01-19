@@ -20,10 +20,10 @@ class SingleCheckboxChoiceType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'multiple' => false,
 			'expanded' => true,
-		));
+		]);
 	}
 
 	/**

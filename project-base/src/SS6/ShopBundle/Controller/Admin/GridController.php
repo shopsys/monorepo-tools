@@ -57,7 +57,7 @@ class GridController extends Controller {
 		/* @var $gridOrderingFacade \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade */
 
 		$gridOrderingFacade->saveOrdering($request->get('entityClass'), $request->get('rowIds'));
-		$responseData = array('success' => true);
+		$responseData = ['success' => true];
 
 		return new JsonResponse($responseData);
 	}

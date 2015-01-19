@@ -41,38 +41,38 @@ class SliderItemFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
+			->add('name', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
-				),
-			))
-			->add('image', new FileUploadType($this->fileUpload), array(
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+				],
+			])
+			->add('image', new FileUploadType($this->fileUpload), [
 				'required' => $this->scenarioCreate,
-				'file_constraints' => array(
-					new Constraints\Image(array(
-						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg'),
+				'file_constraints' => [
+					new Constraints\Image([
+						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
 						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg nebo png',
 						'maxSize' => '2M',
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
-					)),
-				),
-			))
-			->add('link', 'url', array(
+					]),
+				],
+			])
+			->add('link', 'url', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte odkaz')),
-					new Constraints\Url(array('message' => 'Odkaz musí být validní URL adresa')),
-				),
-			))
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte odkaz']),
+					new Constraints\Url(['message' => 'Odkaz musí být validní URL adresa']),
+				],
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => SliderItemData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

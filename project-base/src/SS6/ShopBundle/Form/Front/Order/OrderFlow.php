@@ -43,17 +43,17 @@ class OrderFlow extends FormFlow {
 	 * @return array
 	 */
 	protected function loadStepsConfig() {
-		return array(
-			array(
+		return [
+			[
 				'skip' => true, // the 1st step is the shopping cart
-			),
-			array(
+			],
+			[
 				'type' => new TransportAndPaymentFormType($this->transports, $this->payments),
-			),
-			array(
+			],
+			[
 				'type' => new PersonalInfoFormType(),
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -70,7 +70,7 @@ class OrderFlow extends FormFlow {
 	 * @param array $options
 	 * @return array
 	 */
-	public function getFormOptions($step, array $options = array()) {
+	public function getFormOptions($step, array $options = []) {
 		$options = parent::getFormOptions($step, $options);
 
 		// Remove default validation_groups by step.
@@ -153,7 +153,7 @@ class OrderFlow extends FormFlow {
 		if (array_key_exists($step->getNumber(), $stepsData)) {
 			$stepData = $stepsData[$step->getNumber()];
 		} else {
-			$stepData = array();
+			$stepData = [];
 		}
 
 		$request = $this->getRequest()->request;

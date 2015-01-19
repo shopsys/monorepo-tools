@@ -68,7 +68,7 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_orderstatus_deleteconfirm',
-				array('id' => 'os.id')
+				['id' => 'os.id']
 			)
 			->setAjaxConfirm();
 

@@ -18,7 +18,7 @@ class CartServiceTest extends FunctionalTestCase {
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItems = array();
+		$cartItems = [];
 		$cart = new Cart($cartItems);
 
 		$price = 100;
@@ -34,7 +34,7 @@ class CartServiceTest extends FunctionalTestCase {
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItems = array();
+		$cartItems = [];
 		$cart = new Cart($cartItems);
 
 		$price = 100;
@@ -50,7 +50,7 @@ class CartServiceTest extends FunctionalTestCase {
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItems = array();
+		$cartItems = [];
 		$cart = new Cart($cartItems);
 
 		$price = 100;
@@ -66,7 +66,7 @@ class CartServiceTest extends FunctionalTestCase {
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItems = array();
+		$cartItems = [];
 		$cart = new Cart($cartItems);
 
 		$price = 100;
@@ -91,7 +91,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-		$cartItems = array($cartItem);
+		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
 		$quantity = 2;
 
@@ -111,7 +111,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-		$cartItems = array($cartItem);
+		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
 
 		$cartService->cleanCart($cart);
@@ -134,12 +134,12 @@ class CartServiceTest extends FunctionalTestCase {
 		$customerIdentifier2 = new CustomerIdentifier($sessionId2);
 
 		$cartItem = new CartItem($customerIdentifier1, $product1, 2, '0.0');
-		$cartItems = array($cartItem);
+		$cartItems = [$cartItem];
 		$mainCart = new Cart($cartItems);
 
 		$cartItem1 = new CartItem($customerIdentifier2, $product1, 3, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier2, $product2, 1, '0.0');
-		$cartItems = array($cartItem1, $cartItem2);
+		$cartItems = [$cartItem1, $cartItem2];
 		$mergingCart = new Cart($cartItems);
 
 		$cartService->mergeCarts($mainCart, $mergingCart, $customerIdentifier1);

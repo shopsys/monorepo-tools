@@ -67,13 +67,13 @@ class CategoryGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_EDIT,
 				$this->translator->trans('Upravit'),
 				'admin_category_edit',
-				array('id' => 'd.id')
+				['id' => 'd.id']
 			);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_category_delete',
-				array('id' => 'd.id')
+				['id' => 'd.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat tuto kategorii?'));
 

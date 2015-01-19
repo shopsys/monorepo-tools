@@ -36,28 +36,28 @@ class CurrencyFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
+			->add('name', 'text', [
 				'required' => true,
-			))
-			->add('code', 'text', array(
+			])
+			->add('code', 'text', [
 				'required' => true,
-			))
-			->add('symbol', 'text', array(
+			])
+			->add('symbol', 'text', [
 				'required' => true,
-			))
-			->add('exchangeRate', 'number', array(
+			])
+			->add('exchangeRate', 'number', [
 				'required' => true,
 				'read_only' => $this->isRateReadOnly,
-			));
+			]);
 	}
 
 	/**
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => CurrencyData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 }

@@ -99,7 +99,7 @@ class TransportRepository {
 	public function getById($id) {
 		$transport = $this->findById($id);
 		if ($transport === null) {
-			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException(array('id' => $id));
+			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException(['id' => $id]);
 		}
 		return $transport;
 	}
@@ -109,7 +109,7 @@ class TransportRepository {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAllIncludingDeletedByVat(Vat $vat) {
-		return $this->getTransportRepository()->findBy(array('vat' => $vat));
+		return $this->getTransportRepository()->findBy(['vat' => $vat]);
 	}
 
 	/**
@@ -117,6 +117,6 @@ class TransportRepository {
 	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
 	 */
 	public function getTransportDomainsByTransport(Transport $transport) {
-		return $this->getTransportDomainRepository()->findBy(array('transport' => $transport));
+		return $this->getTransportDomainRepository()->findBy(['transport' => $transport]);
 	}
 }

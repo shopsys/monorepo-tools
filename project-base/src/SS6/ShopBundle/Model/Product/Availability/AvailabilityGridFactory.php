@@ -66,7 +66,7 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 				'delete',
 				$this->translator->trans('Smazat'),
 				'admin_availability_delete',
-				array('id' => 'a.id')
+				['id' => 'a.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dostupnost?'));
 

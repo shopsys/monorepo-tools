@@ -62,9 +62,9 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			VatDataFixture::class,
-		);
+		];
 	}
 
 }

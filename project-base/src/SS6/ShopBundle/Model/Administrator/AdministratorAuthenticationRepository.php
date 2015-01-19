@@ -16,7 +16,7 @@ class AdministratorAuthenticationRepository extends EntityRepository implements 
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function loadUserByUsername($username) {
-		$administrator = $this->findOneBy(array('username' => $username));
+		$administrator = $this->findOneBy(['username' => $username]);
 
 		if ($administrator === null) {
 			$message = sprintf(
@@ -46,9 +46,9 @@ class AdministratorAuthenticationRepository extends EntityRepository implements 
 			$administrator->setLastActivity(new DateTime());
 		}
 
-		$findParams = array(
+		$findParams = [
 			'id' => $administrator->getId(),
-		);
+		];
 		if ($administrator instanceof UniqueLoginInterface) {
 			$findParams['loginToken'] = $administrator->getLoginToken();
 		}

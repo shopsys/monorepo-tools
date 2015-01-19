@@ -41,7 +41,7 @@ class ImageService {
 			throw new \SS6\ShopBundle\Model\Image\Exception\EntityMultipleImageException($message);
 		}
 
-		$images = array();
+		$images = [];
 		foreach ($temporaryFilenames as $temporaryFilename) {
 			$images[] = $this->editImageOrCreateNew($imageEntityConfig, $entityId, $temporaryFilename, $type, null);
 		}

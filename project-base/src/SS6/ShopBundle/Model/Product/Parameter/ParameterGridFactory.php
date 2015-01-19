@@ -57,7 +57,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$grid->addColumn(
 			'name',
 			'pt.name',
-			$this->translator->trans('Název %locale%', array('%locale%' => $this->localization->getLanguageName($defaultLocale))),
+			$this->translator->trans('Název %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
 			true
 		);
 		foreach ($locales as $locale) {
@@ -65,7 +65,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 				$grid->addColumn(
 					'name_' . $locale,
 					'pt_' . $locale . '.name',
-					$this->translator->trans('Název %locale%', array('%locale%' => $this->localization->getLanguageName($locale))),
+					$this->translator->trans('Název %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
 					true
 				);
 			}
@@ -76,7 +76,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_parameter_delete',
-				array('id' => 'p.id')
+				['id' => 'p.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tento parametr? '
 				. 'Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. '

@@ -39,10 +39,10 @@ class ArticleController extends Controller {
 		if ($form->isValid()) {
 			$articleEditFacade->edit($id, $articleData);
 
-			$flashMessageSender->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+			$flashMessageSender->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $article->getName(),
-				'url' => $this->generateUrl('admin_article_edit', array('id' => $article->getId())),
-			));
+				'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+			]);
 			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
@@ -54,10 +54,10 @@ class ArticleController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace článku - ' . $article->getName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
 			'article' => $article,
-		));
+		]);
 	}
 
 	/**
@@ -88,17 +88,17 @@ class ArticleController extends Controller {
 		$grid->addColumn('name', 'a.name', 'Název', true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', array('id' => 'a.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', array('id' => 'a.id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', ['id' => 'a.id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -126,10 +126,10 @@ class ArticleController extends Controller {
 
 			$article = $articleEditFacade->create($articleData);
 
-			$flashMessageSender->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+			$flashMessageSender->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $article->getName(),
-				'url' => $this->generateUrl('admin_article_edit', array('id' => $article->getId())),
-			));
+				'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+			]);
 			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
@@ -137,9 +137,9 @@ class ArticleController extends Controller {
 			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -156,9 +156,9 @@ class ArticleController extends Controller {
 			$fullName = $articleEditFacade->getById($id)->getName();
 			$articleEditFacade->delete($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', array(
+			$flashMessageSender->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolený článek neexistuje.');
 		}

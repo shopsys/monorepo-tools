@@ -52,7 +52,7 @@ class ImageLocator {
 	 * @return array
 	 */
 	public function getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName) {
-		$filepaths = array();
+		$filepaths = [];
 
 		$images = $this->imageFacade->getImagesByEntity($entity, $type);
 		foreach ($images as $image) {
@@ -96,7 +96,7 @@ class ImageLocator {
 	 * @return string
 	 */
 	public function getRelativeImagePath($entityName, $type, $sizeName) {
-		$pathParts = array($entityName);
+		$pathParts = [$entityName];
 
 		if ($type !== null) {
 			$pathParts[] = $type;

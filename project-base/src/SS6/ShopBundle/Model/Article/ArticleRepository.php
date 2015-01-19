@@ -38,7 +38,7 @@ class ArticleRepository {
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
 	public function getArticlesForMenu($domainId) {
-		return $this->getArticleRepository()->findBy(array('domainId' => $domainId));
+		return $this->getArticleRepository()->findBy(['domainId' => $domainId]);
 	}
 
 	/**

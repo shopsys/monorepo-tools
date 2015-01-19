@@ -91,13 +91,13 @@ class TransportGridFactory implements GridFactoryInterface {
 			ActionColumn::TYPE_EDIT,
 			$this->translator->trans('Upravit'),
 			'admin_transport_edit',
-			array('id' => 't.id')
+			['id' => 't.id']
 		);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_transport_delete',
-				array('id' => 't.id')
+				['id' => 't.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dopravu?'));
 

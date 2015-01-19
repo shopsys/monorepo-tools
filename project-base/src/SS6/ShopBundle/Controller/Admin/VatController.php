@@ -20,9 +20,9 @@ class VatController extends Controller {
 
 		$grid = $vatInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Vat/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Vat/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -59,7 +59,7 @@ class VatController extends Controller {
 	 * @return array
 	 */
 	private function getVatNamesByIdExceptId($vatFacade, $id) {
-		$vatNamesById = array();
+		$vatNamesById = [];
 		foreach ($vatFacade->getAllExceptId($id) as $newVat) {
 			$vatNamesById[$newVat->getId()] = $newVat->getName();
 		}
@@ -84,17 +84,17 @@ class VatController extends Controller {
 			$vatFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessFlashTwig('DPH <strong>{{ name }}</strong> bylo smazáno', array(
+				$flashMessageSender->addSuccessFlashTwig('DPH <strong>{{ name }}</strong> bylo smazáno', [
 					'name' => $fullName,
-				));
+				]);
 			} else {
 				$newVat = $vatFacade->getById($newId);
 				$flashMessageSender->addSuccessFlashTwig(
 					'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.',
-					array(
+					[
 						'name' => $fullName,
 						'newName' => $newVat->getName(),
-					));
+					]);
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
@@ -127,7 +127,7 @@ class VatController extends Controller {
 		));
 
 		try {
-			$vatSettingsFormData = array();
+			$vatSettingsFormData = [];
 			$vatSettingsFormData['defaultVat'] = $vatFacade->getDefaultVat();
 			$vatSettingsFormData['roundingType'] = $pricingSetting->getRoundingType();
 
@@ -146,9 +146,9 @@ class VatController extends Controller {
 			$flashMessageSender->addErrorFlash('Neplatné nastavení zaokrouhlování');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 }

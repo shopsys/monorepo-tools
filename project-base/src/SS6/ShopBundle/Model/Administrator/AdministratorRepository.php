@@ -52,7 +52,7 @@ class AdministratorRepository {
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function findByUserName($administratorUserName) {
-		return $this->getAdministratorRepository()->findOneBy(array('username' => $administratorUserName));
+		return $this->getAdministratorRepository()->findOneBy(['username' => $administratorUserName]);
 	}
 
 	private function getAllQueryBuilder() {

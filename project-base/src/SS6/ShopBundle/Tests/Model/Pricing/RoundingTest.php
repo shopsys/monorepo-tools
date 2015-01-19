@@ -9,44 +9,44 @@ use SS6\ShopBundle\Model\Pricing\Rounding;
 class RoundingTest extends PHPUnit_Framework_TestCase {
 
 	public function testRoundingProvider() {
-		return array(
-			array(
+		return [
+			[
 				'unroundedPrice' => '0',
 				'expectedAsPriceWithVat' => '0',
 				'expectedAsPriceWithoutVat' => '0',
 				'expectedAsVatAmount' => '0',
-			),
-			array(
+			],
+			[
 				'unroundedPrice' => '1',
 				'expectedAsPriceWithVat' => '1',
 				'expectedAsPriceWithoutVat' => '1',
 				'expectedAsVatAmount' => '1',
-			),
-			array(
+			],
+			[
 				'unroundedPrice' => '0.999',
 				'expectedAsPriceWithVat' => '1',
 				'expectedAsPriceWithoutVat' => '1',
 				'expectedAsVatAmount' => '1',
-			),
-			array(
+			],
+			[
 				'unroundedPrice' => '0.99',
 				'expectedAsPriceWithVat' => '1',
 				'expectedAsPriceWithoutVat' => '0.99',
 				'expectedAsVatAmount' => '0.99',
-			),
-			array(
+			],
+			[
 				'unroundedPrice' => '0.5',
 				'expectedAsPriceWithVat' => '1',
 				'expectedAsPriceWithoutVat' => '0.50',
 				'expectedAsVatAmount' => '0.50',
-			),
-			array(
+			],
+			[
 				'unroundedPrice' => '0.49',
 				'expectedAsPriceWithVat' => '0',
 				'expectedAsPriceWithoutVat' => '0.49',
 				'expectedAsVatAmount' => '0.49',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -59,7 +59,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 		$expectedAsVatAmount
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getRoundingType'))
+			->setMethods(['getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock
@@ -74,53 +74,53 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRoundingPriceWithVatProvider() {
-		return array(
-			array(
+		return [
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
 				'inputPrice' => 1.5,
 				'outputPrice' => 2,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
 				'inputPrice' => 1.49,
 				'outputPrice' => 1,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
 				'inputPrice' => 1.01,
 				'outputPrice' => 1.01,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
 				'inputPrice' => 1.009,
 				'outputPrice' => 1.01,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_HUNDREDTHS,
 				'inputPrice' => 1.001,
 				'outputPrice' => 1,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
 				'inputPrice' => 1.24,
 				'outputPrice' => 1,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
 				'inputPrice' => 1.25,
 				'outputPrice' => 1.5,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
 				'inputPrice' => 1.74,
 				'outputPrice' => 1.5,
-			),
-			array(
+			],
+			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_FIFTIES,
 				'inputPrice' => 1.75,
 				'outputPrice' => 2,
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -132,7 +132,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 		$outputPrice
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getRoundingType'))
+			->setMethods(['getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock->expects($this->any())->method('getRoundingType')->will($this->returnValue($roundingType));

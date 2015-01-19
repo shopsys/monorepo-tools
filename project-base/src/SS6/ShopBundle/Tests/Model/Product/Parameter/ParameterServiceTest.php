@@ -12,7 +12,7 @@ class ParameterServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreate() {
 		$parameterService = new ParameterService();
 
-		$parameterDataOriginal = new ParameterData(array('cs' => 'parameterName'));
+		$parameterDataOriginal = new ParameterData(['cs' => 'parameterName']);
 		$parameter = $parameterService->create($parameterDataOriginal);
 
 		$parameterDataNew = new ParameterData();
@@ -24,8 +24,8 @@ class ParameterServiceTest extends PHPUnit_Framework_TestCase {
 	public function testEdit() {
 		$parameterService = new ParameterService();
 
-		$parameterDataOld = new ParameterData(array('cs' => 'oldParameterName'));
-		$parameterDataEdit = new ParameterData(array('cs' => 'editParameterName'));
+		$parameterDataOld = new ParameterData(['cs' => 'oldParameterName']);
+		$parameterDataEdit = new ParameterData(['cs' => 'editParameterName']);
 		$parameter = new Parameter($parameterDataOld);
 
 		$parameterService->edit($parameter, $parameterDataEdit);

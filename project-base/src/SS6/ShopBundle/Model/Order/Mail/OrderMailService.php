@@ -109,10 +109,10 @@ class OrderMailService {
 		$transportInstructions = $transport->getInstructions($orderDomainConfig->getLocale());
 		$paymentInstructions = $payment->getInstructions($orderDomainConfig->getLocale());
 
-		return array(
+		return [
 			self::VARIABLE_NUMBER  => $order->getNumber(),
 			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
-			self::VARIABLE_URL => $router->generate('front_homepage', array(), true),
+			self::VARIABLE_URL => $router->generate('front_homepage', [], true),
 			self::VARIABLE_TRANSPORT => $order->getTransportName(),
 			self::VARIABLE_PAYMENT => $order->getPaymentName(),
 			self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
@@ -123,7 +123,7 @@ class OrderMailService {
 			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
 			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
 			self::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
-		);
+		];
 
 	}
 
@@ -132,10 +132,10 @@ class OrderMailService {
 	 * @return array
 	 */
 	private function getVariablesReplacementsForSubject(Order $order) {
-		return array(
+		return [
 			self::VARIABLE_NUMBER  => $order->getNumber(),
 			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
-		);
+		];
 
 	}
 
@@ -143,7 +143,7 @@ class OrderMailService {
 	 * @return array
 	 */
 	public function getTemplateVariables() {
-		return array(
+		return [
 			self::VARIABLE_NUMBER,
 			self::VARIABLE_DATE,
 			self::VARIABLE_URL,
@@ -157,7 +157,7 @@ class OrderMailService {
 			self::VARIABLE_ORDER_DETAIL_URL,
 			self::VARIABLE_TRANSPORT_INSTRUCTIONS,
 			self::VARIABLE_PAYMENT_INSTRUCTIONS,
-		);
+		];
 	}
 
 	/**
@@ -165,9 +165,9 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getBillingAddressHtmlTable(Order $order) {
-		return $this->twig->render('@SS6Shop/Mail/Order/billingAddress.html.twig', array(
+		return $this->twig->render('@SS6Shop/Mail/Order/billingAddress.html.twig', [
 			'order' => $order,
-		));
+		]);
 	}
 
 	/**
@@ -175,9 +175,9 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getDeliveryAddressHtmlTable(Order $order) {
-		return $this->twig->render('@SS6Shop/Mail/Order/deliveryAddress.html.twig', array(
+		return $this->twig->render('@SS6Shop/Mail/Order/deliveryAddress.html.twig', [
 			'order' => $order,
-		));
+		]);
 	}
 
 	/**
@@ -187,10 +187,10 @@ class OrderMailService {
 	private function getProductsHtmlTable(Order $order) {
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->twig->render('@SS6Shop/Mail/Order/products.html.twig', array(
+		return $this->twig->render('@SS6Shop/Mail/Order/products.html.twig', [
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
-		));
+		]);
 
 	}
 

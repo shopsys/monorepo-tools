@@ -95,12 +95,12 @@ class OrderStatus extends AbstractTranslatableEntity {
 	 * @param int $type
 	 */
 	private function setType($type) {
-		if (in_array($type, array(
+		if (in_array($type, [
 			self::TYPE_NEW,
 			self::TYPE_IN_PROGRESS,
 			self::TYPE_DONE,
 			self::TYPE_CANCELED,
-		))) {
+		])) {
 			$this->type = $type;
 		} else {
 			throw new Exception\InvalidOrderStatusTypeException($type);

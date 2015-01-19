@@ -15,45 +15,45 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 */
 	public function load(ObjectManager $manager) {
 		$transportData = new TransportData();
-		$transportData->name = array(
+		$transportData->name = [
 			'cs' => 'Česká pošta - balík do ruky',
 			'en' => 'Czech post',
-		);
+		];
 		$transportData->price = 99.95;
-		$transportData->description = array(
+		$transportData->description = [
 			'cs' => 'Pouze na vlastní nebezpečí',
 			'en' => 'Only if you are crazy',
-		);
-		$transportData->instructions = array(
+		];
+		$transportData->instructions = [
 			'cs' => '<b>Pozor!</b> Česká pošta pouze na vlastní nebezpečí.',
 			'en' => '<b>Warning!</b> Use Czech Post only if you are crazy.',
-		);
+		];
 		$transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		$transportData->domains = array(1, 2);
+		$transportData->domains = [1, 2];
 		$transportData->hidden = false;
 		$this->createTransport('transport_cp', $transportData);
 
-		$transportData->name = array(
+		$transportData->name = [
 			'cs' => 'PPL',
 			'en' => 'PPL',
-		);
+		];
 		$transportData->price = 199.95;
-		$transportData->description = array(
+		$transportData->description = [
 			'cs' => null,
 			'en' => null,
-		);
+		];
 		$transportData->instructions = [];
 		$this->createTransport('transport_ppl', $transportData);
 
-		$transportData->name = array(
+		$transportData->name = [
 			'cs' => 'Osobní převzetí',
 			'en' => 'Personal takeover',
-		);
+		];
 		$transportData->price = 0;
-		$transportData->description = array(
+		$transportData->description = [
 			'cs' => 'Uvítá Vás milý personál!',
 			'en' => 'You will be welcomed friendly staff!',
-		);
+		];
 		$transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
 		$this->createTransport('transport_personal', $transportData);
 	}
@@ -75,9 +75,9 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			VatDataFixture::class,
-		);
+		];
 	}
 
 }

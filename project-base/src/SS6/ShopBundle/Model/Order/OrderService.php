@@ -46,7 +46,7 @@ class OrderService {
 
 		$orderItemsData = $orderData->items;
 
-		$orderItemsToDelete = array();
+		$orderItemsToDelete = [];
 		foreach ($order->getItems() as $orderItem) {
 			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
 				$orderItemData = $orderItemsData[$orderItem->getId()];
@@ -58,7 +58,7 @@ class OrderService {
 			}
 		}
 
-		$orderItemsToCreate = array();
+		$orderItemsToCreate = [];
 		foreach ($orderItemsData as $index => $orderItemData) {
 			if (strpos($index, 'new_') === 0) {
 				$orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);

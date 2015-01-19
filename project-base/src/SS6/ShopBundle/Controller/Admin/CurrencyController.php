@@ -20,9 +20,9 @@ class CurrencyController extends Controller {
 
 		$grid = $currencyInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Currency/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Currency/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -61,9 +61,9 @@ class CurrencyController extends Controller {
 
 			$currencyFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Měna <strong>{{ name }}</strong> byla smazána', array(
+			$flashMessageSender->addSuccessFlashTwig('Měna <strong>{{ name }}</strong> byla smazána', [
 				'name' => $fullName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
 			$flashMessageSender->addErrorFlash('Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky');
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
@@ -85,7 +85,7 @@ class CurrencyController extends Controller {
 		$currencies = $currencyFacade->getAll();
 		$form = $this->createForm(new CurrencySettingsFormType($currencies));
 
-		$currencySettingsFormData = array();
+		$currencySettingsFormData = [];
 		$currencySettingsFormData['defaultCurrency'] =  $currencyFacade->getDefaultCurrency();
 		$form->setData($currencySettingsFormData);
 		$form->handleRequest($request);
@@ -98,9 +98,9 @@ class CurrencyController extends Controller {
 			return $this->redirect($this->generateUrl('admin_currency_list'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Currency/currencySettings.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Currency/currencySettings.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 
 	}
 
@@ -118,9 +118,9 @@ class CurrencyController extends Controller {
 		$currencies = $currencyFacade->getAll();
 		$form = $this->createForm(new CurrencyDomainSettingsFormType($currencies));
 
-		$formData = array();
-		$domainNames = array();
-		$defaultCurrencies = array();
+		$formData = [];
+		$domainNames = [];
+		$defaultCurrencies = [];
 
 		foreach ($domain->getAll() as $domainConfig) {
 			$domainId = $domainConfig->getId();
@@ -146,10 +146,10 @@ class CurrencyController extends Controller {
 			return $this->redirect($this->generateUrl('admin_currency_list'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Currency/domainCurrencySettings.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Currency/domainCurrencySettings.html.twig', [
 			'form' => $form->createView(),
 			'domainNames' => $domainNames,
-		));
+		]);
 	}
 
 }

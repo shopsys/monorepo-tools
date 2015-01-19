@@ -31,9 +31,9 @@ class SuperadminController extends Controller {
 	 * @param int $id
 	 */
 	public function iconDetailAction($icon) {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/iconDetail.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/iconDetail.html.twig', [
 			'icon' => $icon,
-		));
+		]);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class SuperadminController extends Controller {
 
 		$form = $this->createForm(new InputPriceTypeFormType($translator));
 
-		$pricingSettingData = array();
+		$pricingSettingData = [];
 		if (!$form->isSubmitted()) {
 			$pricingSettingData['type'] = $pricingSetting->getInputPriceType();
 		}
@@ -70,15 +70,15 @@ class SuperadminController extends Controller {
 			$pricingSettingData = $form->getData();
 			$pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
 
-			$flashMessageSender->addSuccessFlashTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', array(
+			$flashMessageSender->addSuccessFlashTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', [
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
-			));
+			]);
 			return $this->redirect($this->generateUrl('admin_superadmin_index'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/pricing.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/pricing.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -99,9 +99,9 @@ class SuperadminController extends Controller {
 			$grid->addColumn($locale, $locale, $localization->getLanguageName($locale));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/urlsListGrid.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/urlsListGrid.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -112,7 +112,7 @@ class SuperadminController extends Controller {
 		$localizedRouterFactory = $this->get('ss6.shop.router.localized_router_factory');
 		/* @var $localizedRouterFactory \SS6\ShopBundle\Component\Router\LocalizedRouterFactory */
 
-		$data = array();
+		$data = [];
 		$requestContext = new RequestContext();
 		foreach ($locales as $locale) {
 			$rowIndex = 0;

@@ -74,8 +74,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			SettingValueDataFixture::class,
-		);
+		];
 	}
 }

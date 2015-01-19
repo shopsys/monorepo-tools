@@ -52,7 +52,7 @@ class OrderStatusRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function getDefault() {
-		$orderStatus = $this->getOrderStatusRepository()->findOneBy(array('type' => OrderStatus::TYPE_NEW));
+		$orderStatus = $this->getOrderStatusRepository()->findOneBy(['type' => OrderStatus::TYPE_NEW]);
 
 		if ($orderStatus === null) {
 			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($orderStatusId);
@@ -65,14 +65,14 @@ class OrderStatusRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function findAll() {
-		return $this->getOrderStatusRepository()->findBy(array(), array('id' => 'asc'));
+		return $this->getOrderStatusRepository()->findBy([], ['id' => 'asc']);
 	}
 
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAllIndexedById() {
-		$orderStatusesIndexedById = array();
+		$orderStatusesIndexedById = [];
 
 		foreach ($this->findAll() as $orderStatus) {
 			$orderStatusesIndexedById[$orderStatus->getId()] = $orderStatus;

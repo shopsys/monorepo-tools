@@ -14,9 +14,9 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetArrayDefaultValueExists() {
-		$array = array(
+		$array = [
 			'key' => 'value',
-		);
+		];
 		$expectedArray = $array;
 		Condition::setArrayDefaultValue($array, 'key', 'defaultValue');
 
@@ -24,9 +24,9 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetArrayDefaultValueExistsNull() {
-		$array = array(
+		$array = [
 			'key' => null,
-		);
+		];
 		$expectedArray = $array;
 		Condition::setArrayDefaultValue($array, 'key', 'defaultValue');
 
@@ -34,13 +34,13 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetArrayDefaultValueNotExist() {
-		$array = array(
+		$array = [
 			'key' => null,
-		);
-		$expectedArray = array(
+		];
+		$expectedArray = [
 			'key' => null,
 			0 => 'number',
-		);
+		];
 		Condition::setArrayDefaultValue($array, 0, 'number');
 
 		$this->assertEquals($expectedArray, $array);

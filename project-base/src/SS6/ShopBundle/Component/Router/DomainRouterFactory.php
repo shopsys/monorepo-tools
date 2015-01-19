@@ -41,7 +41,7 @@ class DomainRouterFactory {
 	/**
 	 * @var \Symfony\Component\Routing\Router[]
 	 */
-	private $routersByDomainId = array();
+	private $routersByDomainId = [];
 
 	public function __construct(
 		$routerConfiguration,
@@ -85,7 +85,7 @@ class DomainRouterFactory {
 		return new Router(
 			$this->delegatingLoader,
 			$this->routerConfiguration,
-			array(),
+			[],
 			$this->getRequestContextByDomainConfig($domainConfig)
 		);
 	}

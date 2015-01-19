@@ -34,15 +34,15 @@ class AdministratorController extends Controller {
 		$grid->addColumn('email', 'a.email', 'Email');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_administrator_edit', array('id' => 'a.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_administrator_delete', array('id' => 'a.id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_administrator_edit', ['id' => 'a.id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_administrator_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tohoto administrátora?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Administrator/listGrid.html.twig');
 
-		return $this->render('@SS6Shop/Admin/Content/Administrator/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Administrator/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -74,18 +74,18 @@ class AdministratorController extends Controller {
 				$administratorFacade->edit($id, $administratorData);
 
 				$flashMessageSender->addSuccessFlashTwig(
-					'Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+					'Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 						'name' => $administratorData->realName,
-						'url' => $this->generateUrl('admin_administrator_edit', array('id' => $administrator->getId())),
-					)
+						'url' => $this->generateUrl('admin_administrator_edit', ['id' => $administrator->getId()]),
+					]
 				);
 				return $this->redirect($this->generateUrl('admin_administrator_list'));
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
-					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', array(
+					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [
 						'name' => $administratorData->username,
-					)
+					]
 				);
 			}
 
@@ -99,10 +99,10 @@ class AdministratorController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace administrátora - ' . $administrator->getRealName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Administrator/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Administrator/edit.html.twig', [
 			'form' => $form->createView(),
 			'administrator' => $administrator,
-		));
+		]);
 	}
 
 	/**
@@ -116,7 +116,7 @@ class AdministratorController extends Controller {
 		$form = $this->createForm(
 			new AdministratorFormType(AdministratorFormType::SCENARIO_CREATE),
 			null,
-			array('validation_groups' => array('Default', 'create'))
+			['validation_groups' => ['Default', 'create']]
 		);
 
 		$administratorData = new AdministratorData();
@@ -134,18 +134,18 @@ class AdministratorController extends Controller {
 				/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
 
 				$flashMessageSender->addSuccessFlashTwig(
-					'Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+					'Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 						'name' => $administrator->getRealName(),
-						'url' => $this->generateUrl('admin_administrator_list', array('id' => $administrator->getId())),
-					)
+						'url' => $this->generateUrl('admin_administrator_list', ['id' => $administrator->getId()]),
+					]
 				);
 				return $this->redirect($this->generateUrl('admin_administrator_list'));
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
-					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', array(
+					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [
 						'name' => $administratorData->username,
-					)
+					]
 				);
 			}
 
@@ -155,9 +155,9 @@ class AdministratorController extends Controller {
 			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Administrator/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Administrator/new.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -174,15 +174,15 @@ class AdministratorController extends Controller {
 			$realName = $administratorFacade->getById($id)->getRealName();
 
 			$administratorFacade->delete($id);
-			$flashMessageSender->addSuccessFlashTwig('Administrátor <strong>{{ name }}</strong> byl smazán.', array(
+			$flashMessageSender->addSuccessFlashTwig('Administrátor <strong>{{ name }}</strong> byl smazán.', [
 				'name' => $realName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException $ex) {
 			$flashMessageSender->addErrorFlash('Nemůžete smazat sami sebe.');
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
-			$flashMessageSender->addErrorFlashTwig('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.', array(
+			$flashMessageSender->addErrorFlashTwig('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.', [
 				'name' => $administratorFacade->getById($id)->getRealName(),
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolený administrátor neexistuje.');
 		}

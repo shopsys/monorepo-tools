@@ -13,7 +13,7 @@ class CsvReader {
 			throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException();
 		}
 
-		$rows = array();
+		$rows = [];
 
 		$handle = fopen($filename, 'r');
 		if ($handle === false) {

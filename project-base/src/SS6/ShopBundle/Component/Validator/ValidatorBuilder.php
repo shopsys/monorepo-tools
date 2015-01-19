@@ -58,22 +58,22 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	/**
 	 * @var array
 	 */
-	private $initializers = array();
+	private $initializers = [];
 
 	/**
 	 * @var array
 	 */
-	private $xmlMappings = array();
+	private $xmlMappings = [];
 
 	/**
 	 * @var array
 	 */
-	private $yamlMappings = array();
+	private $yamlMappings = [];
 
 	/**
 	 * @var array
 	 */
-	private $methodMappings = array();
+	private $methodMappings = [];
 
 	/**
 	 * @var Reader
@@ -315,7 +315,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	 * {@inheritdoc}
 	 */
 	public function setApiVersion($apiVersion) {
-		if (!in_array($apiVersion, array(Validation::API_VERSION_2_4, Validation::API_VERSION_2_5, Validation::API_VERSION_2_5_BC))) {
+		if (!in_array($apiVersion, [Validation::API_VERSION_2_4, Validation::API_VERSION_2_5, Validation::API_VERSION_2_5_BC])) {
 			throw new InvalidArgumentException(sprintf(
 				'The requested API version is invalid: "%s"', $apiVersion
 			));
@@ -341,7 +341,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 		$metadataFactory = $this->metadataFactory;
 
 		if (!$metadataFactory) {
-			$loaders = array();
+			$loaders = [];
 
 			if (count($this->xmlMappings) > 1) {
 				$loaders[] = new XmlFilesLoader($this->xmlMappings);
@@ -408,7 +408,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	/**
 	 * @var \Symfony\Component\Validator\Mapping\Loader\LoaderInterface[]
 	 */
-	private $customLoaders = array();
+	private $customLoaders = [];
 
 	/**
 	 * @param \Symfony\Component\Validator\Mapping\Loader\LoaderInterface $loader

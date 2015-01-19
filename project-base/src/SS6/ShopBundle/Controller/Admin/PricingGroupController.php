@@ -20,9 +20,9 @@ class PricingGroupController extends Controller {
 
 		$grid = $pricingGroupInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -43,18 +43,18 @@ class PricingGroupController extends Controller {
 			$pricingGroupFacade->delete($id, $newId);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessFlashTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', array(
+				$flashMessageSender->addSuccessFlashTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', [
 					'name' => $name,
-				));
+				]);
 			} else {
 				$newPricingGroup = $pricingGroupFacade->getById($newId);
 				$flashMessageSender->addSuccessFlashTwig(
 					'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou'
 					. ' <strong>{{ newName }}</strong>.',
-					array(
+					[
 						'name' => $name,
 						'newName' => $newPricingGroup->getName(),
-					));
+					]);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená cenová skupina neexistuje.');
@@ -75,7 +75,7 @@ class PricingGroupController extends Controller {
 
 		try {
 			$pricingGroup = $pricingGroupFacade->getById($id);
-			$pricingGroupsNamesById = array();
+			$pricingGroupsNamesById = [];
 			foreach ($pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId()) as $newPricingGroup) {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
 			}
@@ -119,7 +119,7 @@ class PricingGroupController extends Controller {
 		$pricingGroups = $pricingGroupFacade->getPricingGroupsBySelectedDomainId();
 		$form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
 
-		$pricingGroupSettingsFormData = array();
+		$pricingGroupSettingsFormData = [];
 		$pricingGroupSettingsFormData['defaultPricingGroup'] =  $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
 
 		$form->setData($pricingGroupSettingsFormData);
@@ -134,9 +134,9 @@ class PricingGroupController extends Controller {
 			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 
 	}
 }

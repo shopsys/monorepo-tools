@@ -109,11 +109,11 @@ class ProductData {
 	 * @param int $priceCalculationType
 	 */
 	public function __construct(
-		$name = array(),
+		$name = [],
 		$catnum = null,
 		$partno = null,
 		$ean = null,
-		$description = array(),
+		$description = [],
 		$price = null,
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
@@ -121,8 +121,8 @@ class ProductData {
 		$stockQuantity = null,
 		$hidden = false,
 		$availability = null,
-		array $hiddenOnDomains = array(),
-		array $categories = array(),
+		array $hiddenOnDomains = [],
+		array $categories = [],
 		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
 	) {
 		$this->name = $name;

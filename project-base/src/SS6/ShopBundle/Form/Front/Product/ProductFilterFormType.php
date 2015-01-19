@@ -47,12 +47,12 @@ class ProductFilterFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
 			'data_class' => ProductFilterData::class,
 			'method' => 'GET',
 			'csrf_protection' => false,
-		));
+		]);
 	}
 
 }

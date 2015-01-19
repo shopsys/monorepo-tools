@@ -24,16 +24,16 @@ class DomainsType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$choices = array();
+		$choices = [];
 		foreach ($this->domain->getAll() as $domainConfig) {
 			$choices[$domainConfig->getId()] = $domainConfig->getDomain();
 		}
 
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'choices' => $choices,
 			'multiple' => true,
 			'expanded' => true,
-		));
+		]);
 	}
 
 	/**

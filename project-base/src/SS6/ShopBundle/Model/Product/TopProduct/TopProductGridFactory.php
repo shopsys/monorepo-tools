@@ -74,7 +74,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 				'delete',
 				$this->translator->trans('Smazat'),
 				'admin_topproduct_delete',
-				array('id' => 'tp.id')
+				['id' => 'tp.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odebrat tento produkt z akce na titulní stránce?'));
 

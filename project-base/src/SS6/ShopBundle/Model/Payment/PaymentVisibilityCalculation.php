@@ -30,7 +30,7 @@ class PaymentVisibilityCalculation {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function filterVisible(array $payments, $domainId) {
-		$visiblePayments = array();
+		$visiblePayments = [];
 		foreach ($payments as $payment) {
 			if ($this->isVisible($payment, $domainId)) {
 				$visiblePayments[] = $payment;

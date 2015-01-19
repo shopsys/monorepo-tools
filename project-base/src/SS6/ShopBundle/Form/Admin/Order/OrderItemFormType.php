@@ -23,40 +23,40 @@ class OrderItemFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název')),
-				),
+			->add('name', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
+				],
 				'error_bubbling' => true,
-			))
-			->add('priceWithVat', 'money', array(
+			])
+			->add('priceWithVat', 'money', [
 				'currency' => false,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jednotkovou cenu s DPH')),
-				),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jednotkovou cenu s DPH']),
+				],
 				'error_bubbling' => true,
-			))
-			->add('vatPercent', 'money', array(
+			])
+			->add('vatPercent', 'money', [
 				'currency' => false,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím sazbu DPH')),
-				),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím sazbu DPH']),
+				],
 				'error_bubbling' => true,
-			))
-			->add('quantity', 'integer', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím množství')),
-					new Constraints\GreaterThan(array('value' => 0, 'message' => 'Množství musí být větší než 0')),
-				),
+			])
+			->add('quantity', 'integer', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím množství']),
+					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než 0']),
+				],
 				'error_bubbling' => true,
-			));
+			]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => OrderItemData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

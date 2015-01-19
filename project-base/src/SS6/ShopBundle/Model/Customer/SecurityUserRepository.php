@@ -41,10 +41,10 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function loadUserByUsername($email) {
-		$user = $this->findOneBy(array(
+		$user = $this->findOneBy([
 			'email' => mb_strtolower($email),
 			'domainId' => $this->domain->getId(),
-		));
+		]);
 
 		if ($user === null) {
 			$message = sprintf(
@@ -74,9 +74,9 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 			$user->setLastActivity(new DateTime());
 		}
 
-		$findParams = array(
+		$findParams = [
 			'id' => $user->getId(),
-		);
+		];
 		if ($user instanceof UniqueLoginInterface) {
 			$findParams['loginToken'] = $user->getLoginToken();
 		}

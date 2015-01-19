@@ -34,10 +34,10 @@ class DomainListener implements EventSubscriberInterface {
 	 * @return array
 	 */
 	public static function getSubscribedEvents() {
-		return array(
+		return [
 			// Setting domain by request must be done before loading other services (eg.: routing, localization...)
-			KernelEvents::REQUEST => array(array('onKernelRequest', 100)),
-		);
+			KernelEvents::REQUEST => [['onKernelRequest', 100]],
+		];
 	}
 
 }

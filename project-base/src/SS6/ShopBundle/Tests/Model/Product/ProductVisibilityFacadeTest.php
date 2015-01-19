@@ -10,28 +10,28 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnKernelResponseRecalc() {
-		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, array(), array(), '', false);
+		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
 		$productVisibilityRepositoryMock->expects($this->once())->method('refreshProductsVisibility');
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
 		$productVisibilityFacade->refreshProductsVisibilityDelayed();
 
-		$eventMock = $this->getMock(FilterResponseEvent::class, array(), array(), '', false);
+		$eventMock = $this->getMock(FilterResponseEvent::class, [], [], '', false);
 		$productVisibilityFacade->onKernelResponse($eventMock);
 	}
 
 	public function testOnKernelResponseNoRecalc() {
-		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, array(), array(), '', false);
+		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
 		$productVisibilityRepositoryMock->expects($this->never())->method('refreshProductsVisibility');
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
 
-		$eventMock = $this->getMock(FilterResponseEvent::class, array(), array(), '', false);
+		$eventMock = $this->getMock(FilterResponseEvent::class, [], [], '', false);
 		$productVisibilityFacade->onKernelResponse($eventMock);
 	}
 
 	public function testRefreshProductsVisibility() {
-		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, array(), array(), '', false);
+		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
 		$productVisibilityRepositoryMock->expects($this->once())->method('refreshProductsVisibility');
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);

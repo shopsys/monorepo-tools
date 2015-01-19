@@ -37,39 +37,39 @@ class PriceExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getFilters() {
-		return array(
+		return [
 			new Twig_SimpleFilter(
 				'priceWithCurrencyAdmin',
-				array($this, 'priceWithCurrencyAdminFilter'),
-				array('is_safe' => array('html'))
+				[$this, 'priceWithCurrencyAdminFilter'],
+				['is_safe' => ['html']]
 			),
 			new Twig_SimpleFilter(
 				'priceWithCurrencyByDomainId',
 				[$this, 'priceWithCurrencyByDomainIdFilter'],
-				['is_safe' => array('html')]
+				['is_safe' => ['html']]
 			),
-			new Twig_SimpleFilter('priceWithCurrency', array($this, 'priceWithCurrencyFilter'), array('is_safe' => array('html'))),
-			new Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
-			new Twig_SimpleFilter('priceText', array($this, 'priceTextFilter'), array('is_safe' => array('html'))),
-		);
+			new Twig_SimpleFilter('priceWithCurrency', [$this, 'priceWithCurrencyFilter'], ['is_safe' => ['html']]),
+			new Twig_SimpleFilter('price', [$this, 'priceFilter'], ['is_safe' => ['html']]),
+			new Twig_SimpleFilter('priceText', [$this, 'priceTextFilter'], ['is_safe' => ['html']]),
+		];
 	}
 
 	/**
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
+		return [
 			new Twig_SimpleFunction(
 				'currencySymbolByDomainId',
-				array($this, 'getCurrencySymbolByDomainId'),
-				array('is_safe' => array('html'))
+				[$this, 'getCurrencySymbolByDomainId'],
+				['is_safe' => ['html']]
 			),
 			new Twig_SimpleFunction(
 				'currencySymbolDefault',
 				[$this, 'getCurrencySymbolDefault'],
 				['is_safe' => ['html']]
 			),
-		);
+		];
 	}
 
 	/**

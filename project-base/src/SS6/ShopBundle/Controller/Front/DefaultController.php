@@ -17,10 +17,10 @@ class DefaultController extends Controller {
 		$sliderItems = $sliderItemFacade->getAllOnCurrentDomain();
 		$topProductsDetails = $topProductsFacade->getAllProductDetailsByDomainId($domain->getId());
 
-		return $this->render('@SS6Shop/Front/Content/Default/index.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Default/index.html.twig', [
 			'sliderItems' => $sliderItems,
 			'topProductsDetails' => $topProductsDetails,
-		));
+		]);
 	}
 
 }

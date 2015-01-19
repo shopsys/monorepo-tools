@@ -8,14 +8,14 @@ use SS6\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase {
 
 	public function transformValuesProvider() {
-		return array(
-			array('value' => 'foo bar', 'expected' => 'foobar'),
-			array('value' => 'FooBar', 'expected' => 'FooBar'),
-			array('value' => '  foo  bar  ', 'expected' => 'foobar'),
-			array('value' => 'foo	', 'expected' => 'foo'),
-			array('value' => "fo\no", 'expected' => 'foo'),
-			array('value' => null, 'expected' => null),
-		);
+		return [
+			['value' => 'foo bar', 'expected' => 'foobar'],
+			['value' => 'FooBar', 'expected' => 'FooBar'],
+			['value' => '  foo  bar  ', 'expected' => 'foobar'],
+			['value' => 'foo	', 'expected' => 'foo'],
+			['value' => "fo\no", 'expected' => 'foo'],
+			['value' => null, 'expected' => null],
+		];
 	}
 
 	/**

@@ -91,13 +91,13 @@ class PaymentGridFactory implements GridFactoryInterface {
 			ActionColumn::TYPE_EDIT,
 			$this->translator->trans('Upravit'),
 			'admin_payment_edit',
-			array('id' => 'p.id')
+			['id' => 'p.id']
 		);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_payment_delete',
-				array('id' => 'p.id')
+				['id' => 'p.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto platbu?'));
 

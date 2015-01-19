@@ -16,94 +16,94 @@ class PersonalInfoFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				),
-			))
-			->add('lastName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				),
-			))
-			->add('email', 'email', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				),
-			))
-			->add('telephone', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím telefon')),
-				),
-			))
-			->add('companyCustomer', 'checkbox', array('required' => false))
-			->add('companyName', 'text', array(
+			->add('firstName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+				],
+			])
+			->add('lastName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
+				],
+			])
+			->add('email', 'email', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
+					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+				],
+			])
+			->add('telephone', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím telefon']),
+				],
+			])
+			->add('companyCustomer', 'checkbox', ['required' => false])
+			->add('companyName', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím název firmy',
-						'groups' => array('companyCustomer'),
-					)),
-				),
-			))
-			->add('companyNumber', 'text', array(
+						'groups' => ['companyCustomer'],
+					]),
+				],
+			])
+			->add('companyNumber', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím IČ',
-						'groups' => array('companyCustomer'),
-					)),
-				),
-			))
-			->add('companyTaxNumber', 'text', array('required' => false))
-			->add('street', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím ulici')),
-				),
-			))
-			->add('city', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím město')),
-				),
-			))
-			->add('postcode', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím PSČ')),
-				),
-			))
-			->add('deliveryAddressFilled', 'checkbox', array('required' => false))
-			->add('deliveryContactPerson', 'text', array('required' => false))
-			->add('deliveryCompanyName', 'text', array('required' => false))
-			->add('deliveryTelephone', 'text', array('required' => false))
-			->add('deliveryStreet', 'text', array(
+						'groups' => ['companyCustomer'],
+					]),
+				],
+			])
+			->add('companyTaxNumber', 'text', ['required' => false])
+			->add('street', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím ulici']),
+				],
+			])
+			->add('city', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím město']),
+				],
+			])
+			->add('postcode', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
+				],
+			])
+			->add('deliveryAddressFilled', 'checkbox', ['required' => false])
+			->add('deliveryContactPerson', 'text', ['required' => false])
+			->add('deliveryCompanyName', 'text', ['required' => false])
+			->add('deliveryTelephone', 'text', ['required' => false])
+			->add('deliveryStreet', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím ulici',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
-			))
-			->add('deliveryCity', 'text', array(
+						'groups' => ['differentDeliveryAddress'],
+					]),
+				],
+			])
+			->add('deliveryCity', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím město',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
-			))
-			->add('deliveryPostcode', 'text', array(
+						'groups' => ['differentDeliveryAddress'],
+					]),
+				],
+			])
+			->add('deliveryPostcode', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím PSČ',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
-			))
-			->add('note', 'textarea', array('required' => false))
+						'groups' => ['differentDeliveryAddress'],
+					]),
+				],
+			])
+			->add('note', 'textarea', ['required' => false])
 			->add('save', 'submit');
 	}
 
@@ -118,10 +118,10 @@ class PersonalInfoFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = array('Default');
+				$validationGroups = ['Default'];
 
 				$orderData = $form->getData();
 				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
@@ -135,7 +135,7 @@ class PersonalInfoFormType extends AbstractType {
 
 				return $validationGroups;
 			},
-		));
+		]);
 	}
 
 }

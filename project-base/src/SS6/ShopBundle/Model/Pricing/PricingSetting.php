@@ -102,21 +102,21 @@ class PricingSetting {
 	 * @return array
 	 */
 	public static function getInputPriceTypes() {
-		return array(
+		return [
 			self::INPUT_PRICE_TYPE_WITHOUT_VAT,
 			self::INPUT_PRICE_TYPE_WITH_VAT,
-		);
+		];
 	}
 
 	/**
 	 * @return array
 	 */
 	public static function getRoundingTypes() {
-		return array(
+		return [
 			self::ROUNDING_TYPE_HUNDREDTHS,
 			self::ROUNDING_TYPE_FIFTIES,
 			self::ROUNDING_TYPE_INTEGER,
-		);
+		];
 	}
 
 }

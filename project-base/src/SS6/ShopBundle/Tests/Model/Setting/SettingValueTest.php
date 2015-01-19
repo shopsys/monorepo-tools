@@ -10,21 +10,21 @@ use stdClass;
 class SettingValueTest extends PHPUnit_Framework_TestCase {
 
 	public function testEditProvider() {
-		return array(
+		return [
 			['string'],
 			[0],
 			[0.0],
 			[false],
 			[true],
 			[null],
-		);
+		];
 	}
 
 	public function testEditExceptionProvider() {
-		return array(
+		return [
 			[[]],
 			[new stdClass()],
-		);
+		];
 	}
 
 	/**

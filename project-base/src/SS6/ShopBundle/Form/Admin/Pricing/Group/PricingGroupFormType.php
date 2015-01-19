@@ -23,30 +23,30 @@ class PricingGroupFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
+			->add('name', 'text', [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název cenové skupiny')),
-				),
-			))
-			->add('coefficient', 'number', array(
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název cenové skupiny']),
+				],
+			])
+			->add('coefficient', 'number', [
 				'required' => true,
 				'precision' => 4,
 				'invalid_message' => 'Prosím zadejte koeficient v platném formátu',
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím koeficient cenové skupiny')),
-					new Constraints\GreaterThan(array('value' => 0, 'message' => 'Koeficient musí být větší než 0')),
-				),
-			));
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím koeficient cenové skupiny']),
+					new Constraints\GreaterThan(['value' => 0, 'message' => 'Koeficient musí být větší než 0']),
+				],
+			]);
 	}
 
 	/**
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => PricingGroupData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 }

@@ -82,37 +82,37 @@ class ProductEditFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('productData', $this->productFormTypeFactory->create())
-			->add('imagesToUpload', new FileUploadType($this->fileUpload), array(
+			->add('imagesToUpload', new FileUploadType($this->fileUpload), [
 				'required' => false,
 				'multiple' => true,
-				'file_constraints' => array(
-					new Constraints\Image(array(
-						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/gif'),
+				'file_constraints' => [
+					new Constraints\Image([
+						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
 						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
 						'maxSize' => '2M',
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
-					)),
-				),
-			))
-			->add('imagesToDelete', 'choice', array(
+					]),
+				],
+			])
+			->add('imagesToDelete', 'choice', [
 				'required' => false,
 				'multiple' => true,
 				'expanded' => true,
-				'choice_list' => new ObjectChoiceList($this->images, 'filename', array(), null, 'id'),
-			))
-			->add($builder->create('parameters', 'collection', array(
+				'choice_list' => new ObjectChoiceList($this->images, 'filename', [], null, 'id'),
+			])
+			->add($builder->create('parameters', 'collection', [
 					'required' => false,
 					'allow_add' => true,
 					'allow_delete' => true,
 					'type' => $this->productParameterValueFormTypeFactory->create(),
-					'constraints' => array(
-						new UniqueCollection(array(
-							'fields' => array('parameter', 'locale'),
+					'constraints' => [
+						new UniqueCollection([
+							'fields' => ['parameter', 'locale'],
 							'message' => 'Každý parametr může být nastaven pouze jednou',
-						)),
-					),
+						]),
+					],
 					'error_bubbling' => false,
-				))
+				])
 				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
 			)
 			->add('manualInputPrices', 'form', [
@@ -143,12 +143,12 @@ class ProductEditFormType extends AbstractType {
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => ProductEditData::class,
-			'attr' => array('novalidate' => 'novalidate'),
+			'attr' => ['novalidate' => 'novalidate'],
 			'intention' => self::INTENTION,
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = array('Default');
+				$validationGroups = ['Default'];
 				$productData = $form->getData()->productData;
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 
@@ -158,7 +158,7 @@ class ProductEditFormType extends AbstractType {
 
 				return $validationGroups;
 			},
-		));
+		]);
 	}
 
 }

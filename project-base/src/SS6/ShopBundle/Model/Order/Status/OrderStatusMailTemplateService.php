@@ -41,7 +41,7 @@ class OrderStatusMailTemplateService {
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplateData[]
 	 */
 	public function getOrderStatusMailTemplatesData(array $orderStatuses, array $mailTemplates) {
-		$orderStatusMailTemplatesData = array();
+		$orderStatusMailTemplatesData = [];
 		foreach ($orderStatuses as $orderStatus) {
 			$orderStatusMailTemplateData = new MailTemplateData();
 

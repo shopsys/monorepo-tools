@@ -19,17 +19,17 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
 		/* @var $loaderService ProductDataFixtureLoader */
 
-		$vats = array(
+		$vats = [
 			'high' => $this->getReference(VatDataFixture::VAT_HIGH),
 			'low' => $this->getReference(VatDataFixture::VAT_LOW),
 			'zero' => $this->getReference(VatDataFixture::VAT_ZERO),
-		);
-		$availabilities = array(
+		];
+		$availabilities = [
 			'in-stock' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
 			'out-of-stock' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST),
-		);
-		$categories = array(
+		];
+		$categories = [
 			'1' => $this->getReference(CategoryDataFixture::TV),
 			'2' => $this->getReference(CategoryDataFixture::PHOTO),
 			'3' => $this->getReference(CategoryDataFixture::PRINTERS),
@@ -38,7 +38,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			'6' => $this->getReference(CategoryDataFixture::COFFEE),
 			'7' => $this->getReference(CategoryDataFixture::BOOKS),
 			'8' => $this->getReference(CategoryDataFixture::TOYS),
-		);
+		];
 
 		$loaderService->injectReferences($vats, $availabilities, $categories);
 		$productsEditData = $loaderService->getProductsEditData();
@@ -85,11 +85,11 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			VatDataFixture::class,
 			AvailabilityDataFixture::class,
 			CategoryDataFixture::class,
-		);
+		];
 	}
 
 }

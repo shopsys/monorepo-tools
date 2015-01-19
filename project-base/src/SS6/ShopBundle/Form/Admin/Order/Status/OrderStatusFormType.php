@@ -23,24 +23,24 @@ class OrderStatusFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', array(
-				'options' => array(
-					'constraints' => array(
-						new Constraints\NotBlank(array('message' => 'Vyplňte prosím všechny názvy stavu')),
-						new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název stavu nesmí být delší než {{ limit }} znaků')),
-					),
-				),
-			));
+			->add('name', 'localized', [
+				'options' => [
+					'constraints' => [
+						new Constraints\NotBlank(['message' => 'Vyplňte prosím všechny názvy stavu']),
+						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název stavu nesmí být delší než {{ limit }} znaků']),
+					],
+				],
+			]);
 	}
 
 	/**
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => OrderStatusData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

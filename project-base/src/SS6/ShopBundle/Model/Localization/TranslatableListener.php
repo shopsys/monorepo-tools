@@ -10,11 +10,11 @@ use Prezent\Doctrine\Translatable\Mapping\TranslatableMetadata;
 class TranslatableListener extends PrezentTranslatableListener {
 
 	public function getSubscribedEvents() {
-		return array(
+		return [
 			Events::loadClassMetadata,
 			Events::postLoad,
 			Events::postPersist,
-		);
+		];
 	}
 
 	/**

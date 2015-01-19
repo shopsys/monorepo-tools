@@ -12,10 +12,10 @@ class MenuController extends Controller {
 
 		$activePath = $menu->getMenuPath($route, $parameters);
 
-		return $this->render('@SS6Shop/Admin/Inline/Menu/menu.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Inline/Menu/menu.html.twig', [
 			'menu' => $menu,
 			'activePath' => $activePath,
-		));
+		]);
 	}
 
 	public function panelAction($route, array $parameters = null) {
@@ -24,15 +24,15 @@ class MenuController extends Controller {
 
 		$activePath = $menu->getMenuPath($route, $parameters);
 
-		$secondLevelItems = array();
+		$secondLevelItems = [];
 		if (isset($activePath[0])) {
 			$secondLevelItems = $activePath[0]->getItems();
 		}
 
-		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', [
 			'items' => $secondLevelItems,
 			'activePath' => $activePath,
-		));
+		]);
 	}
 
 }

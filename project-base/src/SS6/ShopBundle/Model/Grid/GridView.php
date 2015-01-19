@@ -74,9 +74,9 @@ class GridView {
 	 * @param array|null $removeParameters
 	 */
 	public function renderHiddenInputs($removeParameters = null) {
-		$this->renderBlock('grid_hidden_inputs', array(
+		$this->renderBlock('grid_hidden_inputs', [
 			'parameter' => $this->grid->getUrlGridParameters(null, $removeParameters),
-		));
+		]);
 	}
 
 	/**
@@ -158,13 +158,13 @@ class GridView {
 	 * @param array $row
 	 */
 	public function renderActionCell(ActionColumn $actionColumn, array $row) {
-		$posibleBlocks = array(
+		$posibleBlocks = [
 			'grid_action_cell_type_' . $actionColumn->getType(),
 			'grid_action_cell',
-		);
+		];
 		foreach ($posibleBlocks as $blockName) {
 			if ($this->blockExists($blockName)) {
-				$this->renderBlock($blockName, array('actionColumn' => $actionColumn, 'row' => $row));
+				$this->renderBlock($blockName, ['actionColumn' => $actionColumn, 'row' => $row]);
 				break;
 			}
 		}
@@ -216,7 +216,7 @@ class GridView {
 	 */
 	private function getTemplates() {
 		if (empty($this->templates)) {
-			$this->templates = array();
+			$this->templates = [];
 			if (is_array($this->theme)) {
 				foreach ($this->theme as $theme) {
 					$this->templates += $this->getTemplatesFromString($theme);
@@ -234,12 +234,12 @@ class GridView {
 	 * @return \Twig_Template[]
 	 */
 	private function getTemplatesFromString($theme) {
-		$templates = array();
+		$templates = [];
 
 		$template = $this->twig->loadTemplate($theme);
 		while ($template != null) {
 			$templates[] = $template;
-			$template = $template->getParent(array());
+			$template = $template->getParent([]);
 		}
 
 		return $templates;

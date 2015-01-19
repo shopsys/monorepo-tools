@@ -11,8 +11,8 @@ class GroupedScalarHydrator extends AbstractHydrator {
 	 * {@inheritdoc}
 	 */
 	protected function hydrateAllData() {
-		$result = array();
-		$cache = array();
+		$result = [];
+		$cache = [];
 
 		while ($data = $this->_stmt->fetch(\PDO::FETCH_ASSOC)) {
 			$this->hydrateRowData($data, $cache, $result);
@@ -38,7 +38,7 @@ class GroupedScalarHydrator extends AbstractHydrator {
 	 * @return array
 	 */
 	private function gatherGroupedScalarRowData(&$data, &$cache) {
-		$rowData = array();
+		$rowData = [];
 
 		foreach ($data as $key => $value) {
 			// Parse each column name only once. Cache the results.

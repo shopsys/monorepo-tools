@@ -23,17 +23,17 @@ class MailSettingFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('email', 'email', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				),
-			))
-			->add('name', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				),
-			))
+			->add('email', 'email', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
+					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+				],
+			])
+			->add('name', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+				],
+			])
 			->add('save', 'submit');
 	}
 
@@ -41,9 +41,9 @@ class MailSettingFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

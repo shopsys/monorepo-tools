@@ -37,7 +37,7 @@ class MenuLoader {
 		$processor = new Processor();
 
 		$inputConfig = $yamlParser->parse(file_get_contents($filename));
-		$outputConfig = $processor->processConfiguration($menuConfiguration, array($inputConfig));
+		$outputConfig = $processor->processConfiguration($menuConfiguration, [$inputConfig]);
 
 		$menu = $this->loadFromArray($outputConfig);
 
@@ -60,7 +60,7 @@ class MenuLoader {
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private function loadItems(array $array) {
-		$items = array();
+		$items = [];
 
 		foreach ($array as $arrayItem) {
 			$item = $this->loadItem($arrayItem);

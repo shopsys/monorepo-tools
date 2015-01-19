@@ -16,9 +16,9 @@ class ParameterController extends Controller {
 
 		$grid = $parameterInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Parameter/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Parameter/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -36,9 +36,9 @@ class ParameterController extends Controller {
 			$fullName = $parameterFacade->getById($id)->getName();
 			$parameterFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', array(
+			$flashMessageSender->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolený parametr neexistuje.');
 		}

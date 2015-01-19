@@ -46,7 +46,7 @@ class PaymentPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
 	 */
 	public function calculatePricesById(array $payments) {
-		$paymentsPrices = array();
+		$paymentsPrices = [];
 		foreach ($payments as $payment) {
 			$paymentsPrices[$payment->getId()] = $this->calculatePrice($payment);
 		}

@@ -31,9 +31,9 @@ class FormThemeExtension extends \Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new \Twig_SimpleFunction('getDefaultFormTheme', array($this, 'getDefaultFormTheme')),
-		);
+		return [
+			new \Twig_SimpleFunction('getDefaultFormTheme', [$this, 'getDefaultFormTheme']),
+		];
 	}
 
 	/**

@@ -25,7 +25,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->price = 100;
 		$productEditData->productData->hidden = false;
-		$productEditData->productData->hiddenOnDomains = array();
+		$productEditData->productData->hiddenOnDomains = [];
 		return $productEditData;
 	}
 
@@ -48,10 +48,10 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy([
 			'product' => $productAgain,
 			'domainId' => 1,
-		));
+		]);
 		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
 
 		$this->assertFalse($productAgain->isVisible());
@@ -76,10 +76,10 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productAgain = $em->getRepository(Product::class)->find($id);
 		/* @var $productAgain \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->findOneBy([
 			'product' => $productAgain->getId(),
 			'domainId' => 1,
-		));
+		]);
 		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
 
 		$this->assertTrue($productAgain->isVisible());
@@ -211,16 +211,16 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productFromDb = $em->getRepository(Product::class)->find($productId);
 		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
 
-		$productDomain1 = $em->getRepository(ProductDomain::class)->find(array(
+		$productDomain1 = $em->getRepository(ProductDomain::class)->find([
 			'product' => $productId,
 			'domainId' => 1,
-		));
+		]);
 		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
 
-		$productDomain2 = $em->getRepository(ProductDomain::class)->find(array(
+		$productDomain2 = $em->getRepository(ProductDomain::class)->find([
 			'product' => $productId,
 			'domainId' => 2,
-		));
+		]);
 		/* @var $productDomain2 \SS6\ShopBundle\Model\Product\ProductDomain */
 
 		$this->assertTrue($productFromDb->isVisible());

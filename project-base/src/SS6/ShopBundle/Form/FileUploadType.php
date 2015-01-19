@@ -48,12 +48,12 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'error_bubbling' => false,
 			'compound' => true,
-			'file_constraints' => array(),
+			'file_constraints' => [],
 			'multiple' => false,
-		));
+		]);
 	}
 
 	/**
@@ -69,10 +69,10 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @return array
 	 */
 	public function transform($value) {
-		return array(
+		return [
 			'uploadedFiles' => (array)$value,
 			'file' => null,
-		);
+		];
 	}
 
 	/**
@@ -85,19 +85,19 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 
 		$builder->addModelTransformer($this);
 		$builder
-			->add('uploadedFiles', 'collection', array(
+			->add('uploadedFiles', 'collection', [
 				'type' => 'hidden',
 				'allow_add' => true,
-				'constraints' => array(
-					new Constraints\Callback(array($this, 'validateUploadedFiles')),
-				),
-			))
-			->add('file', 'file', array(
+				'constraints' => [
+					new Constraints\Callback([$this, 'validateUploadedFiles']),
+				],
+			])
+			->add('file', 'file', [
 				'multiple' => $options['multiple'],
-			));
+			]);
 
 		// fallback for IE9 and older
-		$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+		$builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
 	}
 
 	/**

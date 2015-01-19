@@ -26,9 +26,9 @@ class CartController extends Controller {
 		$cartSummaryCalculation = $this->get('ss6.shop.cart.cart_summary_calculation');
 		/* @var $cartSummaryCalculation \SS6\ShopBundle\Model\Cart\CartSummaryCalculation */
 
-		$cartFormData = array(
-			'quantities' => array(),
-		);
+		$cartFormData = [
+			'quantities' => [],
+		];
 		foreach ($cart->getItems() as $cartItem) {
 			$cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
 		}
@@ -67,13 +67,13 @@ class CartController extends Controller {
 		$cartItemPrices = $cartItemPriceCalculation->calculatePrices($cartItems);
 		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
 
-		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
 			'cart' => $cart,
 			'cartItems' => $cartItems,
 			'cartItemPrices' => $cartItemPrices,
 			'cartSummary' => $cartSummary,
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	public function boxAction() {
@@ -84,25 +84,25 @@ class CartController extends Controller {
 
 		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
 
-		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', array(
+		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', [
 			'cart' => $cart,
 			'cartSummary' => $cartSummary,
-		));
+		]);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
 	public function addProductFormAction(Product $product) {
-		$formData = array('productId' => $product->getId());
-		$form = $this->createForm(new AddProductFormType(), $formData, array(
+		$formData = ['productId' => $product->getId()];
+		$form = $this->createForm(new AddProductFormType(), $formData, [
 			'action' => $this->generateUrl('front_cart_add_product'),
 			'method' => 'POST',
-		));
+		]);
 
-		return $this->render('@SS6Shop/Front/Inline/Cart/addProduct.html.twig', array(
+		return $this->render('@SS6Shop/Front/Inline/Cart/addProduct.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -114,12 +114,12 @@ class CartController extends Controller {
 		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
 		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
 
-		$form = $this->createForm(new AddProductFormType(), null, array(
+		$form = $this->createForm(new AddProductFormType(), null, [
 			'method' => 'POST',
-		));
+		]);
 		$form->handleRequest($request);
 
-		$actionResult = array('success' => false, 'message' => 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+		$actionResult = ['success' => false, 'message' => 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.'];
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
@@ -181,18 +181,18 @@ class CartController extends Controller {
 		if ($addProductResult->getIsNew()) {
 			$flashMessageSender->addSuccessFlashTwig(
 				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity }} ks)',
-				array(
+				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getAddedQuantity(),
-				)
+				]
 			);
 		} else {
 			$flashMessageSender->addSuccessFlashTwig(
 				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity }} ks)',
-				array(
+				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getCartItem()->getQuantity(),
-				)
+				]
 			);
 		}
 	}
@@ -216,7 +216,7 @@ class CartController extends Controller {
 				$cartFacade->deleteCartItem($cartItemId);
 				$flashMessageSender->addSuccessFlashTwig(
 					'Z košíku bylo ostraněno zboží {{ name }}',
-					array('name' => $productName)
+					['name' => $productName]
 				);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
 				$flashMessageSender->addErrorFlash('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');

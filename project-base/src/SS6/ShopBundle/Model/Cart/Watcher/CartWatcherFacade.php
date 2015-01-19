@@ -64,7 +64,7 @@ class CartWatcherFacade {
 			$this->flashMessageSender->addInfoFlashTwig(
 				'Byla změněna cena zboží <strong>{{ name }}</strong>'
 				. ', které máte v košíku. Prosím, překontrolujte si objednávku.',
-				array('name' => $cartItem->getName())
+				['name' => $cartItem->getName()]
 			);
 		}
 	}
@@ -76,7 +76,7 @@ class CartWatcherFacade {
 			$this->flashMessageSender->addErrorFlashTwig(
 				'Zboží <strong>{{ name }}</strong>'
 				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
-				array('name' => $cartItem->getName())
+				['name' => $cartItem->getName()]
 			);
 			$cart->removeItemById($cartItem->getId());
 			$this->em->remove($cartItem);

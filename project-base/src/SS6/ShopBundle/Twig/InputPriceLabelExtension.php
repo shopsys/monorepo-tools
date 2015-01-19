@@ -28,9 +28,9 @@ class InputPriceLabelExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('inputPriceLabel', array($this, 'getInputPriceLabel')),
-		);
+		return [
+			new Twig_SimpleFunction('inputPriceLabel', [$this, 'getInputPriceLabel']),
+		];
 	}
 
 	/**

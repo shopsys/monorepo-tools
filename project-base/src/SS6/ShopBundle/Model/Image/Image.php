@@ -83,7 +83,7 @@ class Image implements EntityFileUploadInterface {
 	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
 	 */
 	public function getTemporaryFilesForUpload() {
-		$files = array();
+		$files = [];
 		if ($this->temporaryFilename !== null) {
 			$files[self::UPLOAD_KEY] = new FileForUpload(
 				$this->temporaryFilename,

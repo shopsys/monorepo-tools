@@ -30,12 +30,12 @@ class ImageRepository {
 	 * @return \SS6\ShopBundle\Model\Image\Image|null
 	 */
 	public function findImageByEntity($entityName, $entityId, $type) {
-		$image = $this->getImageRepository()->findOneBy(array(
+		$image = $this->getImageRepository()->findOneBy([
 				'entityName' => $entityName,
 				'entityId' => $entityId,
 				'type' => $type,
-			),
-			array('id' => 'asc')
+			],
+			['id' => 'asc']
 		);
 
 		return $image;
@@ -64,12 +64,12 @@ class ImageRepository {
 	 * @return \SS6\ShopBundle\Model\Image\Image[]
 	 */
 	public function getImagesByEntity($entityName, $entityId, $type) {
-		return $this->getImageRepository()->findBy(array(
+		return $this->getImageRepository()->findBy([
 				'entityName' => $entityName,
 				'entityId' => $entityId,
 				'type' => $type,
-			),
-			array('id' => 'asc')
+			],
+			['id' => 'asc']
 		);
 	}
 }

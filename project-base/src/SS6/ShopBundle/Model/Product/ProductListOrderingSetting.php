@@ -44,12 +44,12 @@ class ProductListOrderingSetting {
 	 * @return array
 	 */
 	public static function getOrderingModes() {
-		return array(
+		return [
 			self::ORDER_BY_NAME_ASC,
 			self::ORDER_BY_NAME_DESC,
 			self::ORDER_BY_PRICE_ASC,
 			self::ORDER_BY_PRICE_DESC,
-		);
+		];
 	}
 
 }

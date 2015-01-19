@@ -17,9 +17,9 @@ class OrderStatusController extends Controller {
 
 		$grid = $orderStatusInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/OrderStatus/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/OrderStatus/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -38,28 +38,28 @@ class OrderStatusController extends Controller {
 			$orderStatusFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ name }}</strong> byl smazán', array(
+				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ name }}</strong> byl smazán', [
 					'name' => $orderStatus->getName(),
-				));
+				]);
 			} else {
 				$newOrderStatus = $orderStatusFacade->getById($newId);
 				$flashMessageSender->addSuccessFlashTwig('Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem'
 					. ' <strong>{{ newName }}</strong> a byl smazán.',
-					array(
+					[
 						'oldName' => $orderStatus->getName(),
 						'newName' => $newOrderStatus->getName(),
-					));
+					]);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
 			$flashMessageSender->addErrorFlashTwig('Stav objednávek <strong>{{ name }}</strong>'
-					. ' je rezervovaný a nelze jej smazat', array(
+					. ' je rezervovaný a nelze jej smazat', [
 				'name' => $e->getOrderStatus()->getName(),
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
 			$flashMessageSender->addErrorFlashTwig('Stav objednávek <strong>{{ name }}</strong>'
-					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav', array(
+					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav', [
 				'name' => $e->getOrderStatus()->getName(),
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolený stav objednávek neexistuje');
 		}
@@ -83,7 +83,7 @@ class OrderStatusController extends Controller {
 				$message = 'Jelikož stav "' . $orderStatus->getName() . '" je používán ještě u některých objednávek, '
 					. 'musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? '
 					. 'Při této změně stavu nebude odeslán email zákazníkům.';
-				$ordersStatusNamesById = array();
+				$ordersStatusNamesById = [];
 				foreach ($orderStatusFacade->getAllExceptId($id) as $newOrderStatus) {
 					$ordersStatusNamesById[$newOrderStatus->getId()] = $newOrderStatus->getName();
 				}

@@ -35,7 +35,7 @@ class PaymentDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Payment\Detail\PaymentDetail[]
 	 */
 	public function createDetailsForPayments(array $payments) {
-		$details = array();
+		$details = [];
 
 		foreach ($payments as $payment) {
 			$details[] = $this->createDetailForPayment($payment);

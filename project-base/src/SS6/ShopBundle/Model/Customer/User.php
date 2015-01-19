@@ -274,13 +274,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @inheritDoc
 	 */
 	public function serialize() {
-		return serialize(array(
+		return serialize([
 			$this->id,
 			$this->email,
 			$this->password,
 			time(), // lastActivity
 			$this->domainId,
-		));
+		]);
 	}
 
 	/**
@@ -309,7 +309,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @inheritDoc
 	 */
 	public function getRoles() {
-		return array(Roles::ROLE_CUSTOMER);
+		return [Roles::ROLE_CUSTOMER];
 	}
 
 	/**

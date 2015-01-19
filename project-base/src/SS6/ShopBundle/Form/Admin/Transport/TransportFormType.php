@@ -47,57 +47,57 @@ class TransportFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', array(
-				'main_constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
-				),
-				'options' => array('required' => false),
-			))
-			->add('domains', 'domains', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Musíte vybrat alespoň jednu doménu')),
-				),
-			))
-			->add('hidden', new YesNoType(), array('required' => false))
-			->add('price', 'money', array(
+			->add('name', 'localized', [
+				'main_constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+				],
+				'options' => ['required' => false],
+			])
+			->add('domains', 'domains', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Musíte vybrat alespoň jednu doménu']),
+				],
+			])
+			->add('hidden', new YesNoType(), ['required' => false])
+			->add('price', 'money', [
 				'currency' => false,
 				'precision' => 6,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
-					new Constraints\GreaterThanOrEqual(array(
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte cenu']),
+					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
 						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
-					)),
-				),
-			))
-			->add('vat', 'choice', array(
+					]),
+				],
+			])
+			->add('vat', 'choice', [
 				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->vats, 'name', array(), null, 'id'),
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
-				),
-			))
-			->add('description', 'localized', array(
+				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte výši DPH']),
+				],
+			])
+			->add('description', 'localized', [
 				'required' => false,
 				'type' => 'textarea',
-			))
-			->add('instructions', 'localized', array(
+			])
+			->add('instructions', 'localized', [
 				'required' => false,
 				'type' => 'ckeditor',
-			))
-			->add('image', new FileUploadType($this->fileUpload), array(
+			])
+			->add('image', new FileUploadType($this->fileUpload), [
 				'required' => false,
-				'file_constraints' => array(
-					new Constraints\Image(array(
-						'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/gif'),
+				'file_constraints' => [
+					new Constraints\Image([
+						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
 						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
 						'maxSize' => '2M',
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
-					)),
-				),
-			))
+					]),
+				],
+			])
 			->add('save', 'submit');
 
 	}
@@ -106,9 +106,9 @@ class TransportFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => TransportData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 }

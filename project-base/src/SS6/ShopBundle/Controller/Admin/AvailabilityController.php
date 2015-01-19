@@ -16,9 +16,9 @@ class AvailabilityController extends Controller {
 
 		$grid = $availabilityInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -36,9 +36,9 @@ class AvailabilityController extends Controller {
 			$fullName = $availabilityFacade->getById($id)->getName();
 			$availabilityFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', array(
+			$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', [
 				'name' => $fullName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená dostupnost neexistuje.');
 		}

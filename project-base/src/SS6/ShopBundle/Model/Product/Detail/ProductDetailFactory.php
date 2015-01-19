@@ -69,7 +69,7 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getDetailsForProducts(array $products) {
-		$details = array();
+		$details = [];
 
 		foreach ($products as $product) {
 			$details[] = $this->getDetailForProduct($product);

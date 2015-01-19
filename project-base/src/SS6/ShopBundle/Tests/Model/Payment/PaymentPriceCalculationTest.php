@@ -16,22 +16,22 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
-		return array(
-			array(
+		return [
+			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
 				'inputPrice' => '6999',
 				'vatPercent' => '21',
 				'priceWithoutVat' => '6998.78',
 				'priceWithVat' => '8469',
-			),
-			array(
+			],
+			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
 				'inputPrice' => '6999.99',
 				'vatPercent' => '21',
 				'priceWithoutVat' => '5784.8',
 				'priceWithVat' => '7000',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -45,7 +45,7 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceWithVat
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getInputPriceType', 'getRoundingType'))
+			->setMethods(['getInputPriceType', 'getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock

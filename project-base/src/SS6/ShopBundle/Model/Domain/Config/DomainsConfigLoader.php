@@ -36,7 +36,7 @@ class DomainsConfigLoader {
 		$processor = new Processor();
 
 		$parsedConfig = $yamlParser->parse(file_get_contents($filename));
-		$processedConfig = $processor->processConfiguration($imageConfigDefinition, array($parsedConfig));
+		$processedConfig = $processor->processConfiguration($imageConfigDefinition, [$parsedConfig]);
 
 		$domainConfigs = $this->loadDomainConfigsFromArray($processedConfig);
 
@@ -48,7 +48,7 @@ class DomainsConfigLoader {
 	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
 	 */
 	private function loadDomainConfigsFromArray($processedConfig) {
-		$domainConfigs = array();
+		$domainConfigs = [];
 
 		foreach ($processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS] as $domainConfigArray) {
 			$domainConfigs[] = $this->processDomainConfigArray($domainConfigArray);

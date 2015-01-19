@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface {
 				->arrayNode('router')
 					->children()
 						->arrayNode('locale_routers')
-						->defaultValue(array())
+						->defaultValue([])
 						->prototype('scalar')
 					->end()
 				->end()

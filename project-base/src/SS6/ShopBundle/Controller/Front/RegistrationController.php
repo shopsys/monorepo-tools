@@ -49,9 +49,9 @@ class RegistrationController extends Controller {
 			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**

@@ -15,32 +15,32 @@ class RegistrationFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				),
-			))
-			->add('lastName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				),
-			))
-			->add('email', 'email', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				),
-			))
-			->add('password', 'repeated', array(
+			->add('firstName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+				],
+			])
+			->add('lastName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
+				],
+			])
+			->add('email', 'email', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
+					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+				],
+			])
+			->add('password', 'repeated', [
 				'type' => 'password',
-				'first_options' => array(
-					'constraints' => array(
-						new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
-						new Constraints\Length(array('min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					),
-				),
+				'first_options' => [
+					'constraints' => [
+						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
+						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+					],
+				],
 				'invalid_message' => 'Hesla se neshodují',
-			))
+			])
 			->add('save', 'submit');
 	}
 
@@ -55,10 +55,10 @@ class RegistrationFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => UserData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

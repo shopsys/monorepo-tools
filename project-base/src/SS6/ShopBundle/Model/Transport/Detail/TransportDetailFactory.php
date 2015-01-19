@@ -47,7 +47,7 @@ class TransportDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Transport\Detail\TransportDetail[]
 	 */
 	public function createDetailsForTransports(array $transports) {
-		$details = array();
+		$details = [];
 
 		foreach ($transports as $transport) {
 			$details[] = new TransportDetail(

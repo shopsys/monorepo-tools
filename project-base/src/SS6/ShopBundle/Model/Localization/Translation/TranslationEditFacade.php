@@ -51,7 +51,7 @@ class TranslationEditFacade {
 	public function saveTranslation($translationId, $translation) {
 		foreach ($translation as $locale => $translationText) {
 			$catalogue = $this->translator->getCatalogue($locale);
-			$catalogue->add(array($translationId => $translationText), Translator::DEFAULT_DOMAIN);
+			$catalogue->add([$translationId => $translationText], Translator::DEFAULT_DOMAIN);
 			$this->dumpCatalogToFile($catalogue->all(Translator::DEFAULT_DOMAIN), Translator::DEFAULT_DOMAIN, $locale);
 		}
 
@@ -91,10 +91,10 @@ class TranslationEditFacade {
 	 * @return array
 	 */
 	public function getTranslationById($translationId) {
-		$translationData = array(
+		$translationData = [
 			'cs' => $this->translator->getCatalogue('cs')->get($translationId, Translator::DEFAULT_DOMAIN),
 			'en' => $this->translator->getCatalogue('en')->get($translationId, Translator::DEFAULT_DOMAIN),
-		);
+		];
 
 		return $translationData;
 	}
@@ -106,7 +106,7 @@ class TranslationEditFacade {
 		$catalogueCs = $this->translator->getCatalogue('cs');
 		$catalogueEn = $this->translator->getCatalogue('en');
 
-		$data = array();
+		$data = [];
 		foreach ($catalogueCs->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
 			$data[$id]['id'] = $id;
 			$data[$id]['cs'] = $translation;

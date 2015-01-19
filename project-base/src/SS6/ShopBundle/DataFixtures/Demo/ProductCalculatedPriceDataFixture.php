@@ -27,11 +27,11 @@ class ProductCalculatedPriceDataFixture extends AbstractReferenceFixture impleme
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			ProductDataFixture::class,
 			SettingValueDataFixture::class,
 			VatDataFixture::class,
-		);
+		];
 	}
 
 }

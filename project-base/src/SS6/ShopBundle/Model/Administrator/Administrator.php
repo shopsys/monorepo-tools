@@ -230,14 +230,14 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function serialize() {
-		return serialize(array(
+		return serialize([
 			$this->id,
 			$this->username,
 			$this->password,
 			$this->realName,
 			$this->loginToken,
 			time(),
-		));
+		]);
 	}
 
 	/**
@@ -267,7 +267,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function getRoles() {
-		return array(Roles::ROLE_ADMIN);
+		return [Roles::ROLE_ADMIN];
 	}
 
 	/**

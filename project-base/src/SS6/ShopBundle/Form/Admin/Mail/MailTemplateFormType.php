@@ -25,29 +25,29 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('subject', 'text', array(
+			->add('subject', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím předmět',
-						'groups' => array('sendMail'),
-					)),
-				),
-			))
+						'groups' => ['sendMail'],
+					]),
+				],
+			])
 			->add(
 				$builder
-					->create('body', 'ckeditor', array(
+					->create('body', 'ckeditor', [
 						'required' => true,
-						'constraints' => array(
-							new Constraints\NotBlank(array(
+						'constraints' => [
+							new Constraints\NotBlank([
 								'message' => 'Vyplňte prosím text emailu',
-								'groups' => array('sendMail'),
-							)),
-						),
-					))
+								'groups' => ['sendMail'],
+							]),
+						],
+					])
 					->addModelTransformer(new EmptyWysiwygTransformer())
 			)
-			->add('sendMail', 'checkbox', array('required' => false))
+			->add('sendMail', 'checkbox', ['required' => false])
 			->add('save', 'submit');
 	}
 
@@ -55,11 +55,11 @@ class MailTemplateFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => MailTemplateData::class,
-			'attr' => array('novalidate' => 'novalidate'),
+			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = array('Default');
+				$validationGroups = ['Default'];
 
 				$mailTemplateData = $form->getData();
 				/* @var $mailTemplateData \SS6\ShopBundle\Model\Mail\MailTemplateData */
@@ -70,7 +70,7 @@ class MailTemplateFormType extends AbstractType {
 
 				return $validationGroups;
 			},
-		));
+		]);
 	}
 
 }

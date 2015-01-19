@@ -56,7 +56,7 @@ class VatGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_vat_deleteconfirm',
-				array('id' => 'v.id')
+				['id' => 'v.id']
 			)
 			->setAjaxConfirm();
 

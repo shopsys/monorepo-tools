@@ -78,12 +78,12 @@ class ProductVisibilityRepository {
 			 * temporary solution -
 			 * when product price calculation type is set to manual, all input prices must be filled and greater than 0
 			 */
-			$query->execute(array(
+			$query->execute([
 				'now' => $now,
 				'locale' => $domain->getLocale(),
 				'domainId' => $domain->getId(),
 				'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
-			));
+			]);
 		}
 	}
 

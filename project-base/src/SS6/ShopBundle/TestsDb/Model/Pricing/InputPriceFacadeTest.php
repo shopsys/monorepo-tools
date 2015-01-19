@@ -21,7 +21,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 
 		$inputPriceRepositoryMock = $this->getMockBuilder(InputPriceRepository::class)
-			->setMethods(array('__construct', 'recalculateToInputPricesWithoutVat', 'recalculateToInputPricesWithVat'))
+			->setMethods(['__construct', 'recalculateToInputPricesWithoutVat', 'recalculateToInputPricesWithVat'])
 			->disableOriginalConstructor()
 			->getMock();
 		$inputPriceRepositoryMock->expects($this->never())->method('recalculateToInputPricesWithoutVat');
@@ -37,10 +37,10 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 	}
 
 	public function inputPricesTestDataProvider() {
-		return array(
-			array('inputPriceWithoutVat' => '100', 'inputPriceWithVat' => '121', 'vatPercent' => '21'),
-			array('inputPriceWithoutVat' => '17261.983471', 'inputPriceWithVat' => '20887', 'vatPercent' => '21'),
-		);
+		return [
+			['inputPriceWithoutVat' => '100', 'inputPriceWithVat' => '121', 'vatPercent' => '21'],
+			['inputPriceWithoutVat' => '17261.983471', 'inputPriceWithVat' => '20887', 'vatPercent' => '21'],
+		];
 	}
 
 	/**
@@ -83,15 +83,15 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
-		$paymentData->name = array('cs' => 'name');
+		$paymentData->name = ['cs' => 'name'];
 		$paymentData->price = $inputPriceWithVat;
 		$paymentData->vat = $vat;
 		$payment = $paymentEditFacade->create($paymentData);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
-		$transportData->name = array('cs' => 'name');
-		$transportData->description = array('cs' => 'desc');
+		$transportData->name = ['cs' => 'name'];
+		$transportData->description = ['cs' => 'desc'];
 		$transportData->price = $inputPriceWithVat;
 		$transportData->vat = $vat;
 		$transport = $transportEditFacade->create($transportData);
@@ -154,14 +154,14 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$paymentData = new PaymentData();
-		$paymentData->name = array('cs' => 'name');
+		$paymentData->name = ['cs' => 'name'];
 		$paymentData->price = $inputPriceWithoutVat;
 		$paymentData->vat = $vat;
 		$payment = $paymentEditFacade->create($paymentData);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
 		$transportData = new TransportData();
-		$transportData->name = array('cs' => 'name');
+		$transportData->name = ['cs' => 'name'];
 		$transportData->price = $inputPriceWithoutVat;
 		$transportData->vat = $vat;
 		$transport = $transportEditFacade->create($transportData);

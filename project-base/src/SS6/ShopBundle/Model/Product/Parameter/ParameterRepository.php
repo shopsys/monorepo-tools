@@ -66,7 +66,7 @@ class ParameterRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
 	public function findAll() {
-		return $this->getParameterRepository()->findBy(array(), array('id' => 'asc'));
+		return $this->getParameterRepository()->findBy([], ['id' => 'asc']);
 	}
 
 	/**
@@ -74,9 +74,9 @@ class ParameterRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
 	 */
 	public function findOrCreateParameterValueByValueText($valueText) {
-		$parameterValue = $this->getParameterValueRepository()->findOneBy(array(
+		$parameterValue = $this->getParameterValueRepository()->findOneBy([
 			'text' => $valueText,
-		));
+		]);
 
 		if ($parameterValue === null) {
 			$parameterValue = new ParameterValue(new ParameterValueData($valueText));
@@ -131,8 +131,8 @@ class ParameterRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	public function getProductParameterValuesByParameter(Parameter $parameter) {
-		return $this->getProductParameterValueRepository()->findBy(array(
+		return $this->getProductParameterValueRepository()->findBy([
 			'parameter' => $parameter,
-		));
+		]);
 	}
 }

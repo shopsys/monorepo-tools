@@ -78,110 +78,110 @@ class ProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', array(
-				'main_constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
-				),
-				'options' => array('required' => false),
-			))
+			->add('name', 'localized', [
+				'main_constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+				],
+				'options' => ['required' => false],
+			])
 			->add(
 				$builder
-					->create('showOnDomains', 'domains', array(
-						'constraints' => array(
-							new NotSelectedDomainToShow(array('message' => 'Musíte vybrat alespoň jednu doménu')),
-						),
+					->create('showOnDomains', 'domains', [
+						'constraints' => [
+							new NotSelectedDomainToShow(['message' => 'Musíte vybrat alespoň jednu doménu']),
+						],
 						'property_path' => 'hiddenOnDomains',
-					))
+					])
 					->addViewTransformer($this->inverseArrayValuesTransformer)
 			)
-			->add('hidden', new YesNoType(), array('required' => false))
-			->add('catnum', 'text', array(
+			->add('hidden', new YesNoType(), ['required' => false])
+			->add('catnum', 'text', [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\Length(array('max' => 100, 'maxMessage' => 'Katalogové číslo nesmí být delší než {{ limit }} znaků')),
-				),
-			))
-			->add('partno', 'text', array(
+				'constraints' => [
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Katalogové číslo nesmí být delší než {{ limit }} znaků']),
+				],
+			])
+			->add('partno', 'text', [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\Length(array('max' => 100, 'maxMessage' => 'Výrobní číslo nesmí být delší než {{ limit }} znaků')),
-				),
-			))
-			->add('ean', 'text', array(
+				'constraints' => [
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Výrobní číslo nesmí být delší než {{ limit }} znaků']),
+				],
+			])
+			->add('ean', 'text', [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\Length(array('max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků')),
-				),
-			))
-			->add('description', 'localized', array(
+				'constraints' => [
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků']),
+				],
+			])
+			->add('description', 'localized', [
 				'type' => 'ckeditor',
 				'required' => false,
-			))
-			->add('price', 'money', array(
+			])
+			->add('price', 'money', [
 				'currency' => false,
 				'precision' => 6,
 				'required' => true,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu', 'groups' => 'autoPriceCalculation')),
-					new Constraints\GreaterThanOrEqual(array(
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte cenu', 'groups' => 'autoPriceCalculation']),
+					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
 						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
 						'groups' => 'autoPriceCalculation',
-					)),
-				),
-			))
-			->add('vat', 'choice', array(
+					]),
+				],
+			])
+			->add('vat', 'choice', [
 				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->vats, 'name', array(), null, 'id'),
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte výši DPH')),
-				),
-			))
-			->add('sellingFrom', new DatePickerType(), array(
+				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte výši DPH']),
+				],
+			])
+			->add('sellingFrom', new DatePickerType(), [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\Date(array('message' => 'Datum zadávejte ve formátu dd.mm.rrrr')),
-				),
+				'constraints' => [
+					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
+				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
-			))
-			->add('sellingTo', new DatePickerType(), array(
+			])
+			->add('sellingTo', new DatePickerType(), [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\Date(array('message' => 'Datum zadávejte ve formátu dd.mm.rrrr')),
-				),
+				'constraints' => [
+					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
+				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
-			))
-			->add('stockQuantity', 'integer', array(
+			])
+			->add('stockQuantity', 'integer', [
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte číslo',
-			))
-			->add('availability', 'choice', array(
+			])
+			->add('availability', 'choice', [
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', array(), null, 'id'),
-			))
-			->add('categories', 'choice', array(
+				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+			])
+			->add('categories', 'choice', [
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->categories, 'name', array(), null, 'id'),
+				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
-			))
-			->add('priceCalculationType', 'choice', array(
+			])
+			->add('priceCalculationType', 'choice', [
 				'required' => true,
 				'expanded' => true,
-				'choices' => array(
+				'choices' => [
 					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
 					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
-				),
-			));
+				],
+			]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => ProductData::class,
-			'attr' => array('novalidate' => 'novalidate'),
+			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = array('Default');
+				$validationGroups = ['Default'];
 				$productData = $form->getData();
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 
@@ -191,7 +191,7 @@ class ProductFormType extends AbstractType {
 
 				return $validationGroups;
 			},
-		));
+		]);
 	}
 
 }

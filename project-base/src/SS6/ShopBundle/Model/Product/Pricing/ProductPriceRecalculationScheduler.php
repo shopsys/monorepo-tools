@@ -16,12 +16,12 @@ class ProductPriceRecalculationScheduler {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	private $products = array();
+	private $products = [];
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
-	private $vats = array();
+	private $vats = [];
 
 	/**
 	 * @var boolean
@@ -69,8 +69,8 @@ class ProductPriceRecalculationScheduler {
 	}
 
 	public function cleanSchedule() {
-		$this->products = array();
-		$this->vats = array();
+		$this->products = [];
+		$this->vats = [];
 		$this->recalculateAll = false;
 	}
 

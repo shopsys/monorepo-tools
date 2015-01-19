@@ -24,13 +24,13 @@ class TopProductFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add(
-				'product', 'product', array(
+				'product', 'product', [
 					'required' => true,
-					'constraints' => array(
-						new Constraints\NotBlank(array('message' => 'Vyplňte prosím ID produktu')),
-					),
+					'constraints' => [
+						new Constraints\NotBlank(['message' => 'Vyplňte prosím ID produktu']),
+					],
 					'invalid_message' => 'Zadejte platné ID produktu',
-				)
+				]
 			);
 	}
 
@@ -38,10 +38,10 @@ class TopProductFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => TopProductData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

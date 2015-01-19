@@ -14,12 +14,12 @@ class OrderingSettingFormType extends AbstractType {
 	 * @return string
 	 */
 	private function getOrderingModeName($orderingMode) {
-		$orderingModeNames = array(
+		$orderingModeNames = [
 			ProductListOrderingSetting::ORDER_BY_NAME_ASC => 'abecedně A -> Z',
 			ProductListOrderingSetting::ORDER_BY_NAME_DESC => 'abecedně Z -> A',
 			ProductListOrderingSetting::ORDER_BY_PRICE_ASC => 'od nejlevnějšího',
 			ProductListOrderingSetting::ORDER_BY_PRICE_DESC => 'od nejdražšího',
-		);
+		];
 
 		return $orderingModeNames[$orderingMode];
 	}
@@ -31,15 +31,15 @@ class OrderingSettingFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$orderingModes = ProductListOrderingSetting::getOrderingModes();
 
-		$orderingChoices = array();
+		$orderingChoices = [];
 		foreach ($orderingModes as $orderingMode) {
 			$orderingChoices[$orderingMode] = $this->getOrderingModeName($orderingMode);
 		}
 
 		$builder
-			->add('orderingMode', 'choice', array(
+			->add('orderingMode', 'choice', [
 				'choices' => $orderingChoices,
-			));
+			]);
 	}
 
 	/**
@@ -53,9 +53,9 @@ class OrderingSettingFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

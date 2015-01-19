@@ -21,6 +21,7 @@ return Symfony\CS\Config\Config::create()
 		'php_closing_tag',
 		'psr0',
 		'remove_lines_between_uses',
+		'short_array_syntax',
 		'short_tag',
 		'single_array_no_trailing_comma',
 		'spaces_before_semicolon',

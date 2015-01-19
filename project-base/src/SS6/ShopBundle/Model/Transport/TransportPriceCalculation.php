@@ -46,7 +46,7 @@ class TransportPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[] array indices are preserved
 	 */
 	public function calculatePrices(array $transports) {
-		$transportsPrices = array();
+		$transportsPrices = [];
 		foreach ($transports as $key => $transport) {
 			$transportsPrices[$key] = $this->calculatePrice($transport);
 		}
@@ -59,7 +59,7 @@ class TransportPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
 	 */
 	public function calculatePricesById(array $transports) {
-		$transportsPrices = array();
+		$transportsPrices = [];
 		foreach ($transports as $transport) {
 			$transportsPrices[$transport->getId()] = $this->calculatePrice($transport);
 		}

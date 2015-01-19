@@ -36,9 +36,9 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
 	public function findByUserId($userId) {
-		return $this->getOrderRepository()->findBy(array(
+		return $this->getOrderRepository()->findBy([
 			'customer' => $userId,
-		));
+		]);
 	}
 
 	/**
@@ -47,12 +47,12 @@ class OrderRepository {
 	 */
 	public function findLastByUserId($userId) {
 		return $this->getOrderRepository()->findOneBy(
-			array(
+			[
 				'customer' => $userId,
-			),
-			array(
+			],
+			[
 				'createdAt' => 'DESC',
-			)
+			]
 		);
 	}
 
@@ -127,9 +127,9 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
 	public function findByStatusId($orderStatusId) {
-		return $this->getOrderRepository()->findBy(array(
+		return $this->getOrderRepository()->findBy([
 			'status' => $orderStatusId,
-		));
+		]);
 	}
 
 	/**

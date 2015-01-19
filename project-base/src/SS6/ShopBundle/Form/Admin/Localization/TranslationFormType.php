@@ -43,9 +43,9 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('cs', 'textarea', array('required' => false))
+			->add('cs', 'textarea', ['required' => false])
 			->add($builder
-				->create('en', 'textarea', array('required' => false))
+				->create('en', 'textarea', ['required' => false])
 				->addModelTransformer($this)
 			);
 	}
@@ -54,9 +54,9 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

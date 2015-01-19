@@ -15,7 +15,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testMakeImageDirectories() {
 		$imageDir = 'imageDir';
-		$imageEntityConfigByClass = array(
+		$imageEntityConfigByClass = [
 			new ImageEntityConfig(
 				'entityName1',
 				'entityClass1',
@@ -30,7 +30,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 				[],
 				[]
 				),
-		);
+		];
 		$imageConfig = new ImageConfig($imageEntityConfigByClass);
 		$imageFacadeMock = $this->getMock(ImageFacade::class, [], [], '', false);
 		$imageLocator = new ImageLocator($imageDir, $imageFacadeMock);

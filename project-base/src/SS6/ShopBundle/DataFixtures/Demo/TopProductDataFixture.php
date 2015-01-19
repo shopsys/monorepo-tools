@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 
 class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	private $topProductsOnDomainData = array(
+	private $topProductsOnDomainData = [
 		// $productReferenceName => $domainId
 		'product_1' => 1,
 		'product_17' => 1,
@@ -19,7 +19,7 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
 		'product_14' => 2,
 		'product_10' => 2,
 		'product_7' => 2,
-	);
+	];
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -51,8 +51,8 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			ProductDataFixture::class,
-		);
+		];
 	}
 }

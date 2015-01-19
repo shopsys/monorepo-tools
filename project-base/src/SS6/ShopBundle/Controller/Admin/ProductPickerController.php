@@ -46,10 +46,10 @@ class ProductPickerController extends Controller {
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/ProductPicker/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/ProductPicker/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $form->createView(),
-		));
+		]);
 	}
 
 }

@@ -47,7 +47,7 @@ class UserDataFixtureLoader {
 		$rowId = 0;
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
-				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
+				$row = array_map([TransformString::class, 'emptyToNull'], $row);
 				$row = EncodingConverter::cp1250ToUtf8($row);
 				$customersData[] = $this->getCustomerDataFromCsvRow($row);
 			}
