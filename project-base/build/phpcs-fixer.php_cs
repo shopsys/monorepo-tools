@@ -24,5 +24,6 @@ return Symfony\CS\Config\Config::create()
 		'single_array_no_trailing_comma',
 		'spaces_before_semicolon',
 		'standardize_not_equal',
+		'ternary_spaces',
 		'trailing_spaces',
 	]);
