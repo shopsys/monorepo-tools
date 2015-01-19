@@ -49,7 +49,7 @@ class ConfigVersionsCheckCommand {
 	 */
 	private function processConfigVersion($configFilename, $rootParameter) {
 		$configFilepath = __DIR__ . '/../../../../app/config/' . $configFilename;
-		$distConfigVersion = $this->getConfigVersion($configFilepath. '.dist', $rootParameter);
+		$distConfigVersion = $this->getConfigVersion($configFilepath . '.dist', $rootParameter);
 		$configVersion = $this->getConfigVersion($configFilepath, $rootParameter);
 		if ($configVersion != $distConfigVersion) {
 			$this->errors[] = 'Config file ' . $configFilename . ' has wrong version, please check it.';

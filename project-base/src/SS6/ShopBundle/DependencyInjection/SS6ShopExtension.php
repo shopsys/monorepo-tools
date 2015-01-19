@@ -18,7 +18,7 @@ class SS6ShopExtension extends ConfigurableExtension {
 	 * {@inheritDoc}
 	 */
 	protected function loadInternal(array $config, ContainerBuilder $container) {
-		$loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+		$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
 
 		$container->setParameter('ss6_shop.router.locale_routers', $config['router']['locale_routers']);

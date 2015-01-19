@@ -182,7 +182,7 @@ class ProductRepository {
 				break;
 
 			default:
-				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
+				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode() . '" is not supported.';
 				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 

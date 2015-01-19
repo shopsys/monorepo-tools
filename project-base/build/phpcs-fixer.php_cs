@@ -3,6 +3,7 @@
 return Symfony\CS\Config\Config::create()
 	->level(Symfony\CS\FixerInterface::NONE_LEVEL)
 	->fixers([
+		'concat_with_spaces',
 		'elseif',
 		'function_call_space',
 		'function_declaration',
