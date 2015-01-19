@@ -68,7 +68,7 @@ class TransportFormType extends AbstractType {
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte cenu')),
 					new Constraints\GreaterThanOrEqual(array(
 						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}'
+						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
 					)),
 				),
 			))

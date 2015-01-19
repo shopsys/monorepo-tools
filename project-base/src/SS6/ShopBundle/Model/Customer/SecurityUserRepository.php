@@ -43,7 +43,7 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	public function loadUserByUsername($email) {
 		$user = $this->findOneBy(array(
 			'email' => mb_strtolower($email),
-			'domainId' => $this->domain->getId()
+			'domainId' => $this->domain->getId(),
 		));
 
 		if ($user === null) {

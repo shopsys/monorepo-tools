@@ -21,7 +21,7 @@ class CurrencyController extends Controller {
 		$grid = $currencyInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/Currency/list.html.twig', array(
-			'gridView' => $grid->createView()
+			'gridView' => $grid->createView(),
 		));
 	}
 

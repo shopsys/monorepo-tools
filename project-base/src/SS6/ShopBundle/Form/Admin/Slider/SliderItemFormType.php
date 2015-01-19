@@ -45,7 +45,7 @@ class SliderItemFormType extends AbstractType {
 				'required' => true,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
-				)
+				),
 			))
 			->add('image', new FileUploadType($this->fileUpload), array(
 				'required' => $this->scenarioCreate,
@@ -62,8 +62,8 @@ class SliderItemFormType extends AbstractType {
 				'required' => true,
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Prosím vyplňte odkaz')),
-					new Constraints\Url(array('message' => 'Odkaz musí být validní URL adresa'))
-				)
+					new Constraints\Url(array('message' => 'Odkaz musí být validní URL adresa')),
+				),
 			))
 			->add('save', 'submit');
 	}

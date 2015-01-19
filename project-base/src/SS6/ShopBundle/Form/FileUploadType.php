@@ -93,7 +93,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 				),
 			))
 			->add('file', 'file', array(
-				'multiple' => $options['multiple']
+				'multiple' => $options['multiple'],
 			));
 
 		// fallback for IE9 and older

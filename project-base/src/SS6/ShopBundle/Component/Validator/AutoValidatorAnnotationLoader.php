@@ -145,7 +145,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 			$constraints = array(
 				new Constraints\All(array(
 					'constraints' => $translationsConstraints,
-				))
+				)),
 			);
 		} else {
 			$constraints = array();

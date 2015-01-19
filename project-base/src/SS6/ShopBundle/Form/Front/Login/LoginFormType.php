@@ -19,13 +19,13 @@ class LoginFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Vyplňte prosím email')),
 						new Constraints\Email(),
-					)
+					),
 				)
 			)
 			->add('password', 'password', array(
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
-					)
+					),
 				)
 			)
 			->add('login', 'submit');

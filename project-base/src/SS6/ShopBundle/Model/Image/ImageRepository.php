@@ -33,7 +33,7 @@ class ImageRepository {
 		$image = $this->getImageRepository()->findOneBy(array(
 				'entityName' => $entityName,
 				'entityId' => $entityId,
-				'type' => $type
+				'type' => $type,
 			),
 			array('id' => 'asc')
 		);
@@ -67,7 +67,7 @@ class ImageRepository {
 		return $this->getImageRepository()->findBy(array(
 				'entityName' => $entityName,
 				'entityId' => $entityId,
-				'type' => $type
+				'type' => $type,
 			),
 			array('id' => 'asc')
 		);

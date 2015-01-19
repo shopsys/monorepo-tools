@@ -22,12 +22,12 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$vats = array(
 			'high' => $this->getReference(VatDataFixture::VAT_HIGH),
 			'low' => $this->getReference(VatDataFixture::VAT_LOW),
-			'zero' => $this->getReference(VatDataFixture::VAT_ZERO)
+			'zero' => $this->getReference(VatDataFixture::VAT_ZERO),
 		);
 		$availabilities = array(
 			'in-stock' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
 			'out-of-stock' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST)
+			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST),
 		);
 		$categories = array(
 			'1' => $this->getReference(CategoryDataFixture::TV),

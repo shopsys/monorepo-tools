@@ -54,23 +54,23 @@ class OrderFormType extends AbstractType {
 			->add('firstName', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				)
+				),
 			))
 			->add('lastName', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				)
+				),
 			))
 			->add('email', 'email', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
 					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				)
+				),
 			))
 			->add('telephone', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím telefon')),
-				)
+				),
 			))
 			->add('companyName', 'text', array('required' => false))
 			->add('companyNumber', 'text', array('required' => false))
@@ -78,17 +78,17 @@ class OrderFormType extends AbstractType {
 			->add('street', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím ulici')),
-				)
+				),
 			))
 			->add('city', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím město')),
-				)
+				),
 			))
 			->add('postcode', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím PSČ')),
-				)
+				),
 			))
 			->add('deliveryContactPerson', 'text', array('required' => false))
 			->add('deliveryCompanyName', 'text', array('required' => false))

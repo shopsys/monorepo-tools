@@ -45,7 +45,7 @@ class ProductListAdminRepository {
 			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
 			->setParameters([
 				'locale' => $this->localization->getDefaultLocale(),
-				'pricingGroupId' => $pricingGroupId
+				'pricingGroupId' => $pricingGroupId,
 			]);
 		$this->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
 

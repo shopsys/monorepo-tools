@@ -19,7 +19,7 @@ class AddProductFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\GreaterThan(0),
 						new Constraints\Regex(array('pattern' => '/^\d+$/')),
-					)
+					),
 				)
 			)
 			->add('quantity', 'text', array(
@@ -27,7 +27,7 @@ class AddProductFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\GreaterThan(0),
 						new Constraints\Regex(array('pattern' => '/^\d+$/')),
-					)
+					),
 				)
 			)
 			->add('add', 'submit');

@@ -185,7 +185,7 @@ class ImageExtension extends Twig_Extension {
 			'image',
 			$imageEntityConfig = $this->imageConfig->getEntityName($entity),
 			$type,
-			$sizeName
+			$sizeName,
 		);
 		$classParts = array_filter($allClassParts);
 

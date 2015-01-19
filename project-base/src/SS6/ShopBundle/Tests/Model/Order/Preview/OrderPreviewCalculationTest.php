@@ -49,7 +49,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$cartItemMock = $this->getMock(CartItem::class, [], [], '', false);
 		$cartItems = [
 			$cartItemMock,
-			$cartItemMock
+			$cartItemMock,
 		];
 		$cart = new Cart($cartItems);
 		$transport = $this->getMock(Transport::class, [], [], '', false);
@@ -99,7 +99,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$cartItemMock = $this->getMock(CartItem::class, [], [], '', false);
 		$cartItems = [
 			$cartItemMock,
-			$cartItemMock
+			$cartItemMock,
 		];
 		$cart = new Cart($cartItems);
 

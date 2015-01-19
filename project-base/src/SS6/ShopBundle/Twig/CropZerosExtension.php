@@ -12,7 +12,7 @@ class CropZerosExtension extends Twig_Extension {
 	 */
 	public function getFilters() {
 		return array(
-			new Twig_SimpleFilter('cropZeros', array($this, 'cropZeros'))
+			new Twig_SimpleFilter('cropZeros', array($this, 'cropZeros')),
 		);
 	}
 

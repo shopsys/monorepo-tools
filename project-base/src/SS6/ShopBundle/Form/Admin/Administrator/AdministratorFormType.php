@@ -29,19 +29,19 @@ class AdministratorFormType extends AbstractType {
 			->add('username', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím přihlašovací jméno')),
-				)
+				),
 			))
 			->add('realName', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				)
+				),
 			))
 			->add('email', 'email', array(
 				'required' => true,
 				'constraints' => array(
 					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-				)
+				),
 			))
 			->add('password', 'repeated', array(
 				'type' => 'password',
@@ -56,7 +56,7 @@ class AdministratorFormType extends AbstractType {
 							'groups' => array('create'),
 						)),
 						new Constraints\Length(array('min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					)
+					),
 				),
 				'invalid_message' => 'Hesla se neshodují',
 			))

@@ -33,7 +33,7 @@ class CartFormType extends AbstractType {
 								new Constraints\NotBlank(array('message' => 'Musíte zadat množství kusů zboží')),
 								new Constraints\GreaterThan(array('value' => 0, 'message' => 'Musíte zadat množství kusů zboží')),
 							),
-						))
+						)),
 					),
 				))
 			->add('recalc', 'submit')

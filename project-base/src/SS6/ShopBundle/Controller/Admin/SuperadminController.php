@@ -32,7 +32,7 @@ class SuperadminController extends Controller {
 	 */
 	public function iconDetailAction($icon) {
 		return $this->render('@SS6Shop/Admin/Content/Superadmin/iconDetail.html.twig', array(
-			'icon' => $icon
+			'icon' => $icon,
 		));
 	}
 

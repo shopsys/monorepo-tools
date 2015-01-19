@@ -47,7 +47,7 @@ class CurrencyFormType extends AbstractType {
 			))
 			->add('exchangeRate', 'number', array(
 				'required' => true,
-				'read_only' => $this->isRateReadOnly
+				'read_only' => $this->isRateReadOnly,
 			));
 	}
 

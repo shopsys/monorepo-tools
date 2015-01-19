@@ -48,7 +48,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 					'imageDir' . DIRECTORY_SEPARATOR
 						. 'entityName2' . DIRECTORY_SEPARATOR
 						. 'type' . DIRECTORY_SEPARATOR
-						. 'sizeName2_1' . DIRECTORY_SEPARATOR
+						. 'sizeName2_1' . DIRECTORY_SEPARATOR,
 				];
 				asort($expected);
 				asort($actual);

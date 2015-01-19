@@ -13,7 +13,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		$types = array(
 			'TypeName_1' => array(
 				'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false)
+				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
 			),
 			'TypeName_2' => array(
 				'SizeName_2_1' => new ImageSizeConfig('SizeName_2_1', null, null, false),
@@ -31,7 +31,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		$types = array(
 			'TypeName_1' => array(
 				'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false)
+				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
 			),
 			'TypeName_2' => array(
 				'SizeName_2_1' => new ImageSizeConfig('SizeName_2_1', null, null, false),
@@ -49,7 +49,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		$types = array(
 			'TypeName_1' => array(
 				'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false)
+				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
 			),
 			'TypeName_2' => array(
 				ImageEntityConfig::WITHOUT_NAME_KEY => new ImageSizeConfig(null, null, null, false),

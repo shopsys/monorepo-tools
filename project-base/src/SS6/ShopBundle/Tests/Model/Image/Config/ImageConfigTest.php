@@ -28,7 +28,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 						ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
 						ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
 						ImageConfigDefinition::CONFIG_SIZE_CROP => false,
-					)
+					),
 				),
 				ImageConfigDefinition::CONFIG_TYPES => array(
 					array(

@@ -9,6 +9,7 @@ return Symfony\CS\Config\Config::create()
 		'lowercase_constants',
 		'lowercase_keywords',
 		'method_argument_space',
+		'multiline_array_trailing_comma',
 		'multiple_use',
 		'namespace_no_leading_whitespace',
 		'ordered_use',

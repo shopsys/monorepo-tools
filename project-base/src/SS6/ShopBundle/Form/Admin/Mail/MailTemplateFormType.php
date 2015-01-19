@@ -31,8 +31,8 @@ class MailTemplateFormType extends AbstractType {
 					new Constraints\NotBlank(array(
 						'message' => 'Vyplňte prosím předmět',
 						'groups' => array('sendMail'),
-					))
-				)
+					)),
+				),
 			))
 			->add(
 				$builder
@@ -42,8 +42,8 @@ class MailTemplateFormType extends AbstractType {
 							new Constraints\NotBlank(array(
 								'message' => 'Vyplňte prosím text emailu',
 								'groups' => array('sendMail'),
-							))
-						)
+							)),
+						),
 					))
 					->addModelTransformer(new EmptyWysiwygTransformer())
 			)
@@ -69,7 +69,7 @@ class MailTemplateFormType extends AbstractType {
 				}
 
 				return $validationGroups;
-			}
+			},
 		));
 	}
 

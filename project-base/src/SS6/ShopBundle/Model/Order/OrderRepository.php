@@ -51,7 +51,7 @@ class OrderRepository {
 				'customer' => $userId,
 			),
 			array(
-				'createdAt' => 'DESC'
+				'createdAt' => 'DESC',
 			)
 		);
 	}

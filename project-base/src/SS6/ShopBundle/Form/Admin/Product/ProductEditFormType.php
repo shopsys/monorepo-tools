@@ -130,12 +130,12 @@ class ProductEditFormType extends AbstractType {
 					'constraints' => [
 						new Constraints\NotBlank([
 							'message' => 'Prosím vyplňte cenu',
-							'groups' => ['manualPriceCalculation']
+							'groups' => ['manualPriceCalculation'],
 						]),
 						new Constraints\GreaterThan([
 							'value' => 0,
 							'message' => 'Cena musí být větší než 0',
-							'groups' => ['manualPriceCalculation']
+							'groups' => ['manualPriceCalculation'],
 						]),
 					],
 				]);

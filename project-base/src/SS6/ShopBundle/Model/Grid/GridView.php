@@ -75,7 +75,7 @@ class GridView {
 	 */
 	public function renderHiddenInputs($removeParameters = null) {
 		$this->renderBlock('grid_hidden_inputs', array(
-			'parameter' => $this->grid->getUrlGridParameters(null, $removeParameters)
+			'parameter' => $this->grid->getUrlGridParameters(null, $removeParameters),
 		));
 	}
 
@@ -135,13 +135,13 @@ class GridView {
 			$posibleBlocks = [
 				'grid_value_cell_id_' . $column->getId(),
 				'grid_value_cell_type_' . $this->getVariableType($value),
-				'grid_value_cell'
+				'grid_value_cell',
 			];
 		} else {
 			$posibleBlocks = [
 				'grid_value_cell_edit_id_' . $column->getId(),
 				'grid_value_cell_edit_type_' . $this->getVariableType($value),
-				'grid_value_cell_edit'
+				'grid_value_cell_edit',
 			];
 			$blockParameters['formHtml'] = $formHtml;
 		}

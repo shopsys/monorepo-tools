@@ -90,7 +90,7 @@ class ProductFormType extends AbstractType {
 						'constraints' => array(
 							new NotSelectedDomainToShow(array('message' => 'Musíte vybrat alespoň jednu doménu')),
 						),
-						'property_path' => 'hiddenOnDomains'
+						'property_path' => 'hiddenOnDomains',
 					))
 					->addViewTransformer($this->inverseArrayValuesTransformer)
 			)
@@ -127,7 +127,7 @@ class ProductFormType extends AbstractType {
 					new Constraints\GreaterThanOrEqual(array(
 						'value' => 0,
 						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
-						'groups' => 'autoPriceCalculation'
+						'groups' => 'autoPriceCalculation',
 					)),
 				),
 			))
@@ -172,7 +172,7 @@ class ProductFormType extends AbstractType {
 				'choices' => array(
 					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
 					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
-				)
+				),
 			));
 	}
 

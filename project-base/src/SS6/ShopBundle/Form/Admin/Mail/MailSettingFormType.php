@@ -27,7 +27,7 @@ class MailSettingFormType extends AbstractType {
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
 					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				)
+				),
 			))
 			->add('name', 'text', array(
 				'constraints' => array(

@@ -15,7 +15,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 	public function testSet() {
 		$settingValueArray = [
 			[SettingValue::DOMAIN_ID_COMMON, []],
-			[1, [new SettingValue('key', 'value', 1)]]
+			[1, [new SettingValue('key', 'value', 1)]],
 		];
 
 		$entityManagerMock = $this->getMockBuilder(EntityManager::class)
@@ -44,7 +44,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 	public function testSetNotFoundException() {
 		$settingValueArray = [
 			[SettingValue::DOMAIN_ID_COMMON, []],
-			[1, [new SettingValue('key', 'value', 1)]]
+			[1, [new SettingValue('key', 'value', 1)]],
 		];
 
 		$entityManagerMock = $this->getMockBuilder(EntityManager::class)
@@ -113,7 +113,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 		$settingValueArrayByDomainIdMap = [
 			[SettingValue::DOMAIN_ID_COMMON, [new SettingValue('key', 'valueCommon', SettingValue::DOMAIN_ID_COMMON)]],
 			[1, [new SettingValue('key', 'value', 1)]],
-			[2, []]
+			[2, []],
 		];
 
 		$entityManagerMock = $this->getMockBuilder(EntityManager::class)

@@ -45,7 +45,7 @@ class CurrencyDomainSettingsFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Prosím zadejte výchozí měnu')),
 					),
-				)
+				),
 			))
 			->add('save', 'submit');
 	}

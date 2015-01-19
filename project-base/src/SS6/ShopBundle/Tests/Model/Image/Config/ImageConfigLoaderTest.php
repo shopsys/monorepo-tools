@@ -239,7 +239,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 						ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
 						ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
 						ImageConfigDefinition::CONFIG_SIZE_CROP => true,
-					)
+					),
 				),
 				ImageConfigDefinition::CONFIG_TYPES => array(),
 			),

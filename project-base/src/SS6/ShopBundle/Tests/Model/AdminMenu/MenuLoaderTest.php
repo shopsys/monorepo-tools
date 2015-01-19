@@ -29,7 +29,7 @@ class MenuLoaderTest extends FunctionalTestCase {
 			),
 			array(
 				'label' => 'Item 3',
-				'route' => 'item_3'
+				'route' => 'item_3',
 			),
 		);
 
@@ -60,7 +60,7 @@ class MenuLoaderTest extends FunctionalTestCase {
 			),
 			array(
 				'label' => 'Item 3',
-				'route' => 'item_3'
+				'route' => 'item_3',
 			),
 		);
 

@@ -18,18 +18,18 @@ class RegistrationFormType extends AbstractType {
 			->add('firstName', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				)
+				),
 			))
 			->add('lastName', 'text', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				)
+				),
 			))
 			->add('email', 'email', array(
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
 					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				)
+				),
 			))
 			->add('password', 'repeated', array(
 				'type' => 'password',
@@ -37,7 +37,7 @@ class RegistrationFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
 						new Constraints\Length(array('min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					)
+					),
 				),
 				'invalid_message' => 'Hesla se neshodují',
 			))

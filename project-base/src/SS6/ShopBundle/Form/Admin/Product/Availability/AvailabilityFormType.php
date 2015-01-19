@@ -29,8 +29,8 @@ class AvailabilityFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Vyplňte prosím název dostupnosti ve všech jazycích')),
 						new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název dostupnosti nesmí být delší než {{ limit }} znaků')),
-					)
-				)
+					),
+				),
 			));
 	}
 

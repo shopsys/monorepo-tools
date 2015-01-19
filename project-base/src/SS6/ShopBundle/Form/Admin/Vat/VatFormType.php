@@ -28,16 +28,16 @@ class VatFormType extends AbstractType {
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název dph')),
 					new Constraints\Length(array('max' => 50, 'maxMessage' => 'Název DPH nesmí být delší než {{ limit }} znaků')),
-				))
-			)
+				),
+			))
 			->add('percent', 'number', array(
 				'required' => false,
 				'precision' => 4,
 				'invalid_message' => 'Prosím zadejte DPH v platném formátu',
 				'constraints' => array(
 					new Constraints\NotBlank(array('message' => 'Vyplňte prosím výši dph')),
-				))
-			);
+				),
+			));
 	}
 
 	/**

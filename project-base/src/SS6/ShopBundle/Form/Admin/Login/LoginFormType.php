@@ -18,13 +18,13 @@ class LoginFormType extends AbstractType {
 		$builder
 			->add('username', 'text', array(
 				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím login'))
-				)
+					new Constraints\NotBlank(array('message' => 'Vyplňte prosím login')),
+				),
 			))
 			->add('password', 'password', array(
 				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo'))
-				)
+					new Constraints\NotBlank(array('message' => 'Vyplňte prosím heslo')),
+				),
 			))
 			->add('login', 'submit');
 	}

@@ -28,8 +28,8 @@ class OrderStatusFormType extends AbstractType {
 					'constraints' => array(
 						new Constraints\NotBlank(array('message' => 'Vyplňte prosím všechny názvy stavu')),
 						new Constraints\Length(array('max' => 100, 'maxMessage' => 'Název stavu nesmí být delší než {{ limit }} znaků')),
-					)
-				)
+					),
+				),
 			));
 	}
 
