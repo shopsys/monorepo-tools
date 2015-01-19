@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\TestsDb\Model\Transport;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportDomain;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 

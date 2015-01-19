@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Form\Admin\Mail;
 use SS6\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 

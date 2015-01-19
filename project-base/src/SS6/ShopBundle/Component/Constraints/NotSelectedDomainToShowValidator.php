@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Component\Constraints;
 
+use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use SS6\ShopBundle\Model\Domain\Domain;
 
 class NotSelectedDomainToShowValidator extends ConstraintValidator {
 

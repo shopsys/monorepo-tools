@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
+use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use Symfony\Component\Routing\RequestContext;
 
 class SuperadminController extends Controller {

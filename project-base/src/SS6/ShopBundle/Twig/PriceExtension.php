@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;

@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Tests\Component\DataFixture;
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\DataFixture\PersistentReference;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Model\Product\Product;
 use stdClass;
 

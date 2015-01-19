@@ -9,9 +9,9 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 

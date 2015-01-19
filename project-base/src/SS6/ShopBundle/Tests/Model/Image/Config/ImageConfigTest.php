@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Tests\Model\Image\Config;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException;
+use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageConfigDefinition;
 use SS6\ShopBundle\Model\Image\Config\ImageConfigLoader;
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 

@@ -42,9 +42,9 @@ use Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader;
 use Symfony\Component\Validator\MetadataFactoryInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator as ValidatorV24;
 use Symfony\Component\Validator\Validator\LegacyValidator;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
-use Symfony\Component\Validator\Validator as ValidatorV24;
 use Symfony\Component\Validator\ValidatorBuilderInterface;
 
 /**

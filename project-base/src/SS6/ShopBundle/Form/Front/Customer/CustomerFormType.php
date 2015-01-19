@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
-use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Form\Front\Customer\UserFormType;
+use SS6\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

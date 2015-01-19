@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Model\Image;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Image\ImageLocator;
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 
 class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 

@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Component\Paginator;
 
 use Doctrine\DBAL\SQLParserUtils;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Query;
 use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface {

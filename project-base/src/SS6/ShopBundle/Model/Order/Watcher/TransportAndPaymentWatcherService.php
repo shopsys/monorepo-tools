@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Order\Watcher;
 
-use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\FlashMessage\Bag;
+use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;

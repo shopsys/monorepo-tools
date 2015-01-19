@@ -4,10 +4,10 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository;
-use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 
 class TopProductFacade {
 

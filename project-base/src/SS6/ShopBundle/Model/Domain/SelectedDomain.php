@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Domain;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use SS6\ShopBundle\Model\Domain\Domain;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SelectedDomain {
 

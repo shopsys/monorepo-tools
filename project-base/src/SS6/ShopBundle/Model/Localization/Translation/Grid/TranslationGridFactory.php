@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 
+use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 use Symfony\Component\Translation\TranslatorInterface;
 

@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation;
 
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Component\Translation\PoDumper;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Filesystem\Filesystem;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
+use SS6\ShopBundle\Component\Translation\PoDumper;
+use SS6\ShopBundle\Component\Translation\Translator;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class TranslationEditFacade {
 

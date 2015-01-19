@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Command;
 
-use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Yaml\Parser;
 
 class ConfigVersionsCheckCommand {
 

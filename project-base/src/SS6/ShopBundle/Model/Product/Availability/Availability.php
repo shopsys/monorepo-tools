@@ -6,8 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityTranslation;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityTranslation;
 
 /**
  * @ORM\Table(name="availabilities")

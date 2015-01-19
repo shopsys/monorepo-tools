@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Localization;
 
-use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use Prezent\Doctrine\Translatable\EventListener\TranslatableListener as PrezentTranslatableListener;
 use Prezent\Doctrine\Translatable\Mapping\TranslatableMetadata;
 

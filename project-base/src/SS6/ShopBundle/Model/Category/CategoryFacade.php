@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Category\CategoryData;
-use SS6\ShopBundle\Model\Category\CategoryService;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
+use SS6\ShopBundle\Model\Category\CategoryService;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryFacade {

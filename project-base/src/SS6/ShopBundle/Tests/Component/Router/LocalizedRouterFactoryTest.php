@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Tests\Component\Router;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 
 class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase {
 

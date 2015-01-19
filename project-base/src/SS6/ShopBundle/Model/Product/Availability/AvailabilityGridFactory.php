@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Translation\TranslatorInterface;
 

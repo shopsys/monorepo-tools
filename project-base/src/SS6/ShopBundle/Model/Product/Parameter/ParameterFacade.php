@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterService;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterFacade {
 

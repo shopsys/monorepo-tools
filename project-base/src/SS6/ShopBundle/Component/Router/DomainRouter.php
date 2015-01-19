@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Component\Router;
 
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Routing\RequestContext;
 use Symfony\Cmf\Component\Routing\ChainRouter;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouterInterface;
 
 class DomainRouter extends ChainRouter {
 

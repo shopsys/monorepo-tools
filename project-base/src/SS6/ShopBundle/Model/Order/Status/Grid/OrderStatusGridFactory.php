@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Model\Order\Status\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Localization\Localization;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class OrderStatusGridFactory implements GridFactoryInterface {

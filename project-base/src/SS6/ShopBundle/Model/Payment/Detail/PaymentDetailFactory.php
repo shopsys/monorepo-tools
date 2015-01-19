@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Payment\Detail;
 
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 
 class PaymentDetailFactory {
 

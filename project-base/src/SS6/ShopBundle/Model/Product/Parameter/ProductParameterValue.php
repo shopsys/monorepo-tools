@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
+use SS6\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_parameter_values")

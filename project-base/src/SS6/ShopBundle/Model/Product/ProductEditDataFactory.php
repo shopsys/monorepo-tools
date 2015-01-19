@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductEditDataFactory {
 

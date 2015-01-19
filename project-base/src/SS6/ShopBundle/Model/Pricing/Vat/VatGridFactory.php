@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Component\Translation\TranslatorInterface;
 

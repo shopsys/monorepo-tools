@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Admin\Slider;
 
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Form\FileUploadType;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

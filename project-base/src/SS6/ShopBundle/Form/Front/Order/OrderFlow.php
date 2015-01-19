@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Form\Front\Order;
 
 use Craue\FormFlowBundle\Form\FormFlow;
-use SS6\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
-use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
 use Craue\FormFlowBundle\Form\StepInterface;
+use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
+use SS6\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
 
 class OrderFlow extends FormFlow {
 	/**

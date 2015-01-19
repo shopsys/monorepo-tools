@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use DateTime;
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
-use DateTime;
 
 /**
  * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Product")

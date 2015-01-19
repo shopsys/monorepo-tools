@@ -11,9 +11,9 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 

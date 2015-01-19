@@ -10,8 +10,8 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouterInterface;
 
 class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 

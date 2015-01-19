@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\TestsDb\Model\Pricing;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Pricing\InputPriceRepository;
 use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
+use SS6\ShopBundle\Model\Pricing\InputPriceRepository;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;

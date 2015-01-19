@@ -6,8 +6,8 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
-use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Model\Localization\Localization;
 
 class PoDumper implements DumperInterface {
 

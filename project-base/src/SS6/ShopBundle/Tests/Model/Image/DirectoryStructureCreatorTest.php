@@ -7,8 +7,8 @@ use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 use SS6\ShopBundle\Model\Image\DirectoryStructureCreator;
-use SS6\ShopBundle\Model\Image\ImageLocator;
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
