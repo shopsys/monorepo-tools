@@ -39,7 +39,7 @@ class MenuConfiguration implements ConfigurationInterface {
 				->end()
 				->variableNode('items')
 					->defaultValue(array())
-					->validate()->always(function(array $items) {
+					->validate()->always(function (array $items) {
 						foreach ($items as $i => $item) {
 							/* @var $item \Symfony\Component\Config\Definition\NodeInterface */
 							$itemsNode = $this->getItemsNode($i);

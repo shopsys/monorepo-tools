@@ -180,7 +180,7 @@ class ProductFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => ProductData::class,
 			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
+			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = array('Default');
 				$productData = $form->getData();
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */

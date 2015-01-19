@@ -58,7 +58,7 @@ class MailTemplateFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => MailTemplateData::class,
 			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
+			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = array('Default');
 
 				$mailTemplateData = $form->getData();

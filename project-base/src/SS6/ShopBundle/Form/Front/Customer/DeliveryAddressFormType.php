@@ -61,7 +61,7 @@ class DeliveryAddressFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => DeliveryAddressData::class,
 			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
+			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = array('Default');
 
 				$deliveryAddressData = $form->getData();

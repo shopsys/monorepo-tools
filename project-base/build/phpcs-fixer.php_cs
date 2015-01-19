@@ -5,6 +5,7 @@ return Symfony\CS\Config\Config::create()
 	->fixers([
 		'elseif',
 		'function_call_space',
+		'function_declaration',
 		'ordered_use',
 		'psr0',
 		'short_tag',

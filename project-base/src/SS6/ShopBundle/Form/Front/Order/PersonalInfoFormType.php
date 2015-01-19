@@ -120,7 +120,7 @@ class PersonalInfoFormType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults(array(
 			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
+			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = array('Default');
 
 				$orderData = $form->getData();

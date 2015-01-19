@@ -147,7 +147,7 @@ class ProductEditFormType extends AbstractType {
 			'data_class' => ProductEditData::class,
 			'attr' => array('novalidate' => 'novalidate'),
 			'intention' => self::INTENTION,
-			'validation_groups' => function(FormInterface $form) {
+			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = array('Default');
 				$productData = $form->getData()->productData;
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */

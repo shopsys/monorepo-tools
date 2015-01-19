@@ -54,7 +54,7 @@ class BillingAddressFormType extends AbstractType {
 		$resolver->setDefaults(array(
 			'data_class' => BillingAddressData::class,
 			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
+			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = array('Default');
 
 				$customerData = $form->getData();
