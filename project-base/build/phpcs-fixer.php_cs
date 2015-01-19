@@ -12,6 +12,7 @@ return Symfony\CS\Config\Config::create()
 		'multiline_array_trailing_comma',
 		'multiple_use',
 		'namespace_no_leading_whitespace',
+		'new_with_braces',
 		'ordered_use',
 		'parenthesis',
 		'php_closing_tag',
