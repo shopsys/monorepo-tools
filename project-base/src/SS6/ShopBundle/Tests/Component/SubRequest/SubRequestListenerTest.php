@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Component\Subrequest;
+namespace SS6\ShopBundle\Tests\Component\SubRequest;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\SubRequest\SubRequestListener;
