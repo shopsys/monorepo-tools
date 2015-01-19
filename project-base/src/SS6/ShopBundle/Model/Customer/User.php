@@ -287,7 +287,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @inheritDoc
 	 */
 	public function unserialize($serialized) {
-		list (
+		list(
 			$this->id,
 			$this->email,
 			$this->password,

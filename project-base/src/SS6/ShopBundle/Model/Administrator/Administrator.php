@@ -244,7 +244,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function unserialize($serialized) {
-		list (
+		list(
 			$this->id,
 			$this->username,
 			$this->password,
