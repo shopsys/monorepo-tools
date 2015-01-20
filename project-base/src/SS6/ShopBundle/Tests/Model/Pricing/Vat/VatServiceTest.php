@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Tests\Model\Pricing\Vat;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class VatServiceTest extends PHPUnit_Framework_TestCase {
 

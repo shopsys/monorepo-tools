@@ -81,10 +81,10 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			TransportDataFixture::class,
 			VatDataFixture::class,
-		);
+		];
 	}
 
 }

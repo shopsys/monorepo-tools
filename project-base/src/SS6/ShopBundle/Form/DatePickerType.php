@@ -8,10 +8,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class DatePickerType extends AbstractType {
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'widget' => 'single_text',
 			'format' => 'dd.MM.yyyy',
-		));
+		]);
 	}
 
 	public function getParent() {

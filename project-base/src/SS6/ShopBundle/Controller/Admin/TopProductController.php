@@ -16,9 +16,9 @@ class TopProductController extends Controller {
 
 		$grid = $topProductInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/TopProducts/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/TopProducts/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**

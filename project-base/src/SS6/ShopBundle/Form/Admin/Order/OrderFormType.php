@@ -36,73 +36,73 @@ class OrderFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$orderStatusChoices = array();
+		$orderStatusChoices = [];
 		foreach ($this->allOrderStatuses as $orderStatus) {
 			/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
 			$orderStatusChoices[$orderStatus->getId()] = $orderStatus->getName();
 		}
 
 		$builder
-			->add('orderNumber', 'text', array('read_only' => true))
-			->add('statusId', 'choice', array(
+			->add('orderNumber', 'text', ['read_only' => true])
+			->add('statusId', 'choice', [
 				'choices' => $orderStatusChoices,
 				'multiple' => false,
 				'expanded' => false,
 				'required' => true,
-			))
-			->add('customerId', 'integer', array('required' => false))
-			->add('firstName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				)
-			))
-			->add('lastName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				)
-			))
-			->add('email', 'email', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-				)
-			))
-			->add('telephone', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím telefon')),
-				)
-			))
-			->add('companyName', 'text', array('required' => false))
-			->add('companyNumber', 'text', array('required' => false))
-			->add('companyTaxNumber', 'text', array('required' => false))
-			->add('street', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím ulici')),
-				)
-			))
-			->add('city', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím město')),
-				)
-			))
-			->add('postcode', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím PSČ')),
-				)
-			))
-			->add('deliveryContactPerson', 'text', array('required' => false))
-			->add('deliveryCompanyName', 'text', array('required' => false))
-			->add('deliveryTelephone', 'text', array('required' => false))
-			->add('deliveryStreet', 'text', array('required' => false))
-			->add('deliveryCity', 'text', array('required' => false))
-			->add('deliveryPostcode', 'text', array('required' => false))
-			->add('note', 'textarea', array('required' => false))
-			->add('items', 'collection', array(
+			])
+			->add('customerId', 'integer', ['required' => false])
+			->add('firstName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+				],
+			])
+			->add('lastName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
+				],
+			])
+			->add('email', 'email', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
+					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+				],
+			])
+			->add('telephone', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím telefon']),
+				],
+			])
+			->add('companyName', 'text', ['required' => false])
+			->add('companyNumber', 'text', ['required' => false])
+			->add('companyTaxNumber', 'text', ['required' => false])
+			->add('street', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím ulici']),
+				],
+			])
+			->add('city', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím město']),
+				],
+			])
+			->add('postcode', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
+				],
+			])
+			->add('deliveryContactPerson', 'text', ['required' => false])
+			->add('deliveryCompanyName', 'text', ['required' => false])
+			->add('deliveryTelephone', 'text', ['required' => false])
+			->add('deliveryStreet', 'text', ['required' => false])
+			->add('deliveryCity', 'text', ['required' => false])
+			->add('deliveryPostcode', 'text', ['required' => false])
+			->add('note', 'textarea', ['required' => false])
+			->add('items', 'collection', [
 				'type' => new OrderItemFormType(),
 				'error_bubbling' => false,
 				'allow_add' => true,
 				'allow_delete' => true,
-			))
+			])
 			->add('save', 'submit');
 	}
 
@@ -110,10 +110,10 @@ class OrderFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => OrderData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

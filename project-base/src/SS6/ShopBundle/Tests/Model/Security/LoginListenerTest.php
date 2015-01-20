@@ -16,7 +16,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnSecurityInteractiveLoginUnique() {
 		$emMock = $this->getMockBuilder(EntityManager::class)
-			->setMethods(array('__construct', 'persist', 'flush'))
+			->setMethods(['__construct', 'persist', 'flush'])
 			->disableOriginalConstructor()
 			->getMock();
 		$emMock->expects($this->once())->method('flush');
@@ -28,13 +28,13 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 		$tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
 
 		$eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
-			->setMethods(array('__construct', 'getAuthenticationToken'))
+			->setMethods(['__construct', 'getAuthenticationToken'])
 			->disableOriginalConstructor()
 			->getMock();
 		$eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
 
 		$orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
-			->setMethods(array('__construct'))
+			->setMethods(['__construct'])
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -44,7 +44,7 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnSecurityInteractiveLoginTimelimit() {
 		$emMock = $this->getMockBuilder(EntityManager::class)
-			->setMethods(array('__construct', 'persist', 'flush'))
+			->setMethods(['__construct', 'persist', 'flush'])
 			->disableOriginalConstructor()
 			->getMock();
 		$emMock->expects($this->any())->method('flush');
@@ -56,13 +56,13 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 		$tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
 
 		$eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
-			->setMethods(array('__construct', 'getAuthenticationToken'))
+			->setMethods(['__construct', 'getAuthenticationToken'])
 			->disableOriginalConstructor()
 			->getMock();
 		$eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
 
 		$orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
-			->setMethods(array('__construct'))
+			->setMethods(['__construct'])
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -72,13 +72,13 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnSecurityInteractiveLoginResetOrderForm() {
 		$emMock = $this->getMockBuilder(EntityManager::class)
-			->setMethods(array('__construct', 'persist', 'flush'))
+			->setMethods(['__construct', 'persist', 'flush'])
 			->disableOriginalConstructor()
 			->getMock();
 		$emMock->expects($this->any())->method('flush');
 
 		$userMock = $this->getMockBuilder(User::class)
-			->setMethods(array('__construct'))
+			->setMethods(['__construct'])
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -86,13 +86,13 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase {
 		$tokenMock->expects($this->once())->method('getUser')->will($this->returnValue($userMock));
 
 		$eventMock = $this->getMockBuilder(InteractiveLoginEvent::class)
-			->setMethods(array('__construct', 'getAuthenticationToken'))
+			->setMethods(['__construct', 'getAuthenticationToken'])
 			->disableOriginalConstructor()
 			->getMock();
 		$eventMock->expects($this->once())->method('getAuthenticationToken')->will($this->returnValue($tokenMock));
 
 		$orderFlowFacadeMock = $this->getMockBuilder(OrderFlowFacade::class)
-			->setMethods(array('__construct', 'resetOrderForm'))
+			->setMethods(['__construct', 'resetOrderForm'])
 			->disableOriginalConstructor()
 			->getMock();
 		$orderFlowFacadeMock->expects($this->once())->method('resetOrderForm');

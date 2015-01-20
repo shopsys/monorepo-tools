@@ -24,38 +24,38 @@ class BillingAddressFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('telephone', 'text', array('required' => false))
-			->add('companyCustomer', 'checkbox', array('required' => false))
-			->add('companyName', 'text', array(
+			->add('telephone', 'text', ['required' => false])
+			->add('companyCustomer', 'checkbox', ['required' => false])
+			->add('companyName', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím název firmy',
-						'groups' => array('companyCustomer'),
-					)),
-				),
-			))
-			->add('companyNumber', 'text', array(
+						'groups' => ['companyCustomer'],
+					]),
+				],
+			])
+			->add('companyNumber', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím IČ',
-						'groups' => array('companyCustomer'),
-					)),
-				),
-			))
-			->add('companyTaxNumber', 'text', array('required' => false))
-			->add('street', 'text', array('required' => false))
-			->add('city', 'text', array('required' => false))
-			->add('postcode', 'text', array('required' => false));
+						'groups' => ['companyCustomer'],
+					]),
+				],
+			])
+			->add('companyTaxNumber', 'text', ['required' => false])
+			->add('street', 'text', ['required' => false])
+			->add('city', 'text', ['required' => false])
+			->add('postcode', 'text', ['required' => false]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => BillingAddressData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
-				$validationGroups = array('Default');
+			'attr' => ['novalidate' => 'novalidate'],
+			'validation_groups' => function (FormInterface $form) {
+				$validationGroups = ['Default'];
 
 				$customerData = $form->getData();
 				/* @var $customerData \SS6\ShopBundle\Model\Customer\CustomerData */
@@ -66,7 +66,7 @@ class BillingAddressFormType extends AbstractType {
 
 				return $validationGroups;
 			},
-		));
+		]);
 	}
 
 }

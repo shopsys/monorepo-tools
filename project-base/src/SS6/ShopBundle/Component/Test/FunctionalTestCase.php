@@ -37,10 +37,10 @@ abstract class FunctionalTestCase extends WebTestCase {
 		}
 
 		if ($username !== null) {
-			$this->client->setServerParameters(array(
+			$this->client->setServerParameters([
 				'PHP_AUTH_USER' => $username,
 				'PHP_AUTH_PW' => $password,
-			));
+			]);
 		}
 
 		return $this->client;

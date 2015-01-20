@@ -12,9 +12,9 @@ class CategoryController extends Controller {
 
 		$categories = $categoryFacade->getAllInRootWithTranslation();
 
-		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
 			'categories' => $categories,
-		));
+		]);
 	}
 
 }

@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderTotalPrice;
 

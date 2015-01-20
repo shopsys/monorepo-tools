@@ -20,7 +20,7 @@ class CustomerCommunicationFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('content', 'ckeditor', array('required' => false))
+			->add('content', 'ckeditor', ['required' => false])
 			->add('save', 'submit');
 	}
 }

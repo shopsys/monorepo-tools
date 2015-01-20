@@ -24,20 +24,20 @@ class ArticleFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('name', 'text')
-			->add('text', 'ckeditor', array('required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím text článku')),
-				),
-			))
-			->add('domainId', 'domain', array('required' => true))
+			->add('text', 'ckeditor', ['required' => true,
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
+				],
+			])
+			->add('domainId', 'domain', ['required' => true])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => ArticleData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

@@ -6,7 +6,6 @@ import('PLUG.JavaScript.JParser');
 import('PLUG.JavaScript.JTokenizer');
 import('PLUG.parsing.ParseError');
 
-use Assetic\Asset\AssetInterface;
 use JParser;
 use JTokenizer;
 use SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser;

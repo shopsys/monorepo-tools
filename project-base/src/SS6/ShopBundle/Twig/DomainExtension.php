@@ -23,10 +23,10 @@ class DomainExtension extends \Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('getDomain', array($this, 'getDomain')),
-			new Twig_SimpleFunction('getDomainName', array($this, 'getDomainNameById')),
-		);
+		return [
+			new Twig_SimpleFunction('getDomain', [$this, 'getDomain']),
+			new Twig_SimpleFunction('getDomainName', [$this, 'getDomainNameById']),
+		];
 	}
 
 	/**

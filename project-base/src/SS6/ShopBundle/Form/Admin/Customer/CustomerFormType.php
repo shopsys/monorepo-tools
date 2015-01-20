@@ -64,15 +64,15 @@ class CustomerFormType extends AbstractType {
 			->add('save', 'submit');
 
 		if ($this->scenario === self::SCENARIO_CREATE) {
-			$builder->add('sendRegistrationMail', 'checkbox', array('required' => false));
+			$builder->add('sendRegistrationMail', 'checkbox', ['required' => false]);
 		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => CustomerData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Component\Paginator;
 
 use Doctrine\DBAL\SQLParserUtils;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Query;
 use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface {
@@ -91,7 +91,7 @@ class QueryPaginator implements PaginatorInterface {
 
 		$query = $totalQueryBuilder->getQuery();
 
-		$parametersAssoc = array();
+		$parametersAssoc = [];
 		foreach ($query->getParameters() as $parameter) {
 			$parametersAssoc[$parameter->getName()] = $parameter->getValue();
 		}
@@ -99,7 +99,7 @@ class QueryPaginator implements PaginatorInterface {
 		list($dummyQuery, $flatenedParameters) = SQLParserUtils::expandListParameters(
 			$query->getDQL(),
 			$parametersAssoc,
-			array()
+			[]
 		);
 
 		$sql = 'SELECT COUNT(*) AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';

@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Component\Transformers;
 
-use Symfony\Component\Form\DataTransformerInterface;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
+use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductIdToProductTransformer implements DataTransformerInterface {
 

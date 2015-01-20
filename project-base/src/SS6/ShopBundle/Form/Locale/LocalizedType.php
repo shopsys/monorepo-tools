@@ -28,7 +28,7 @@ class LocalizedType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		Condition::setArrayDefaultValue($options['options'], 'required', $options['required']);
-		Condition::setArrayDefaultValue($options['options'], 'constraints', array());
+		Condition::setArrayDefaultValue($options['options'], 'constraints', []);
 
 		$defaultLocaleOptions = $options['options'];
 		$otherLocaleOptions = $options['options'];
@@ -54,12 +54,12 @@ class LocalizedType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'compound' => true,
-			'options' => array(),
-			'main_constraints' => array(),
+			'options' => [],
+			'main_constraints' => [],
 			'type' => 'text',
-		));
+		]);
 	}
 
 	/**

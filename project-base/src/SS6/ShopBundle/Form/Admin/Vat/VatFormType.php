@@ -23,31 +23,31 @@ class VatFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', array(
+			->add('name', 'text', [
 				'required' => false,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím název dph')),
-					new Constraints\Length(array('max' => 50, 'maxMessage' => 'Název DPH nesmí být delší než {{ limit }} znaků')),
-				))
-			)
-			->add('percent', 'number', array(
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název dph']),
+					new Constraints\Length(['max' => 50, 'maxMessage' => 'Název DPH nesmí být delší než {{ limit }} znaků']),
+				],
+			])
+			->add('percent', 'number', [
 				'required' => false,
 				'precision' => 4,
 				'invalid_message' => 'Prosím zadejte DPH v platném formátu',
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím výši dph')),
-				))
-			);
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši dph']),
+				],
+			]);
 	}
 
 	/**
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => VatData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

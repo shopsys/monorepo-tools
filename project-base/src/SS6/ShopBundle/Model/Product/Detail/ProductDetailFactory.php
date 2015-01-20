@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Model\Product\Detail;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetailFactory {
@@ -69,7 +69,7 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getDetailsForProducts(array $products) {
-		$details = array();
+		$details = [];
 
 		foreach ($products as $product) {
 			$details[] = $this->getDetailForProduct($product);

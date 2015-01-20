@@ -10,7 +10,7 @@ class OrderNumberSequenceRepositoryTest extends DatabaseTestCase {
 		$orderNumberSequenceRepository = $this->getContainer()->get('ss6.shop.order.order_number_sequence_repository');
 		/* @var $orderNumberSequenceRepository \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository */
 
-		$numbers = array();
+		$numbers = [];
 		for ($i = 0; $i < 10; $i++) {
 			$numbers[] = $orderNumberSequenceRepository->getNextNumber();
 		}

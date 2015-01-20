@@ -27,7 +27,7 @@ class CartTest extends DatabaseTestCase {
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
-		$cartItems = array($cartItem1, $cartItem2);
+		$cartItems = [$cartItem1, $cartItem2];
 
 		$cart = new Cart($cartItems);
 

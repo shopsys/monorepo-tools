@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\TestsDb\Model\Order;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class OrderFacadeTest extends DatabaseTestCase {
 

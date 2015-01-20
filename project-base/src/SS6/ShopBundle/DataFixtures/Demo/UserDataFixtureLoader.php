@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use SS6\ShopBundle\Component\Csv\CsvReader;
-use SS6\ShopBundle\Component\String\TransformString;
 use SS6\ShopBundle\Component\String\EncodingConverter;
+use SS6\ShopBundle\Component\String\TransformString;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
@@ -47,7 +47,7 @@ class UserDataFixtureLoader {
 		$rowId = 0;
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
-				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
+				$row = array_map([TransformString::class, 'emptyToNull'], $row);
 				$row = EncodingConverter::cp1250ToUtf8($row);
 				$customersData[] = $this->getCustomerDataFromCsvRow($row);
 			}

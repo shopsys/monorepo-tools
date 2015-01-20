@@ -556,7 +556,7 @@ class Order {
 				return $orderItem;
 			}
 		}
-		throw new \SS6\ShopBundle\Model\Order\Item\Exception\OrdetItemNotFoundException(array('id' => $orderItemId));
+		throw new \SS6\ShopBundle\Model\Order\Item\Exception\OrdetItemNotFoundException(['id' => $orderItemId]);
 	}
 
 	/**

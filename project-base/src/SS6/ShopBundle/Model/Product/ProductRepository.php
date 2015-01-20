@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
@@ -182,7 +182,7 @@ class ProductRepository {
 				break;
 
 			default:
-				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode()  .'" is not supported.';
+				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode() . '" is not supported.';
 				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 
@@ -227,7 +227,7 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getAllByVat(Vat $vat) {
-		return $this->getProductRepository()->findBy(array('vat' => $vat));
+		return $this->getProductRepository()->findBy(['vat' => $vat]);
 	}
 
 	/**
@@ -235,9 +235,9 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
 	public function getProductDomainsByProduct(Product $product) {
-		return $this->getProductDomainRepository()->findBy(array(
+		return $this->getProductDomainRepository()->findBy([
 			'product' => $product,
-		));
+		]);
 	}
 
 	/**
@@ -246,10 +246,10 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain|null
 	 */
 	public function findProductDomainByProductAndDomainId(Product $product, $domainId) {
-		return $this->getProductDomainRepository()->find(array(
+		return $this->getProductDomainRepository()->find([
 			'product' => $product->getId(),
 			'domainId' => $domainId,
-		));
+		]);
 	}
 
 	/**

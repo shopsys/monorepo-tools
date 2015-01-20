@@ -11,8 +11,8 @@ use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -62,9 +62,9 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			VatDataFixture::class,
-		);
+		];
 	}
 
 }

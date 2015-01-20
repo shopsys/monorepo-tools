@@ -20,19 +20,19 @@ class BagTest extends FunctionalTestCase {
 		$flashMessageAdmin->addSuccess($successMessageAdmin);
 		$flashMessageFront->addError($errorMessageFront);
 
-		$this->assertEquals(array($errorMessageAdmin), $flashMessageAdmin->getErrorMessages());
-		$this->assertEquals(array(), $flashMessageAdmin->getInfoMessages());
-		$this->assertEquals(array($successMessageAdmin), $flashMessageAdmin->getSuccessMessages());
-		$this->assertEquals(array($errorMessageFront), $flashMessageFront->getErrorMessages());
-		$this->assertEquals(array(), $flashMessageFront->getInfoMessages());
-		$this->assertEquals(array(), $flashMessageFront->getSuccessMessages());
+		$this->assertEquals([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
+		$this->assertEquals([], $flashMessageAdmin->getInfoMessages());
+		$this->assertEquals([$successMessageAdmin], $flashMessageAdmin->getSuccessMessages());
+		$this->assertEquals([$errorMessageFront], $flashMessageFront->getErrorMessages());
+		$this->assertEquals([], $flashMessageFront->getInfoMessages());
+		$this->assertEquals([], $flashMessageFront->getSuccessMessages());
 	}
 
 	public function testAddArrayOfMessages() {
 		$flashMessageAdmin = $this->getContainer()->get('ss6.shop.flash_message.bag.admin');
 		/* @var $flashMessageAdmin \SS6\ShopBundle\Model\FlashMessage\Bag */
 
-		$errorMessagesAdmin = array('First error message admin', 'Second error message admin');
+		$errorMessagesAdmin = ['First error message admin', 'Second error message admin'];
 
 		$flashMessageAdmin->addError($errorMessagesAdmin);
 
@@ -48,7 +48,7 @@ class BagTest extends FunctionalTestCase {
 		$flashMessageAdmin->addError($errorMessageAdmin);
 		$flashMessageAdmin->addError($errorMessageAdmin);
 
-		$this->assertEquals(array($errorMessageAdmin), $flashMessageAdmin->getErrorMessages());
+		$this->assertEquals([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
 	}
 
 	public function testGetAndClearBag() {
@@ -59,8 +59,8 @@ class BagTest extends FunctionalTestCase {
 
 		$flashMessageAdmin->addError($errorMessageAdmin);
 
-		$this->assertEquals(array($errorMessageAdmin), $flashMessageAdmin->getErrorMessages());
-		$this->assertEquals(array(), $flashMessageAdmin->getErrorMessages());
+		$this->assertEquals([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
+		$this->assertEquals([], $flashMessageAdmin->getErrorMessages());
 	}
 
 	public function testIsEmpty() {

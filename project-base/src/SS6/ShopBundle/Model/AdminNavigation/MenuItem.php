@@ -65,7 +65,7 @@ class MenuItem {
 		if (isset($routeParameters)) {
 			$this->routeParameters = $routeParameters;
 		} else {
-			$this->routeParameters = array();
+			$this->routeParameters = [];
 		}
 
 		if (isset($visible)) {
@@ -135,10 +135,10 @@ class MenuItem {
 	 * @return array
 	 */
 	private function getTypes() {
-		return array(
+		return [
 			self::TYPE_REGULAR,
 			self::TYPE_SETTINGS,
-		);
+		];
 	}
 
 }

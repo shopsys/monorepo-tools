@@ -50,9 +50,9 @@ class FileThumbnailExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('getFileThumbnailInfoByTemporaryFilename', array($this, 'getFileThumbnailInfoByTemporaryFilename')),
-		);
+		return [
+			new Twig_SimpleFunction('getFileThumbnailInfoByTemporaryFilename', [$this, 'getFileThumbnailInfoByTemporaryFilename']),
+		];
 	}
 
 	/**

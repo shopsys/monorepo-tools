@@ -25,7 +25,7 @@ class Menu {
 	public function __construct(array $items) {
 		$this->items = $items;
 
-		$this->regularItems = array();
+		$this->regularItems = [];
 
 		foreach ($items as $item) {
 			if ($item->getType() === MenuItem::TYPE_REGULAR) {
@@ -143,7 +143,7 @@ class Menu {
 	private function getItemPathRecursive(array $items, MenuItem $item) {
 		foreach ($items as $subitem) {
 			if ($subitem === $item) {
-				return array($item);
+				return [$item];
 			}
 
 			if ($subitem->getItems() !== null) {
@@ -165,7 +165,7 @@ class Menu {
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getMenuPath($route, $parameters) {
-		$menuPath = array();
+		$menuPath = [];
 		$matchingItem = $this->getItemMatchingRoute($route, $parameters);
 		if ($matchingItem !== null) {
 			$menuPath = $this->getItemPath($matchingItem);

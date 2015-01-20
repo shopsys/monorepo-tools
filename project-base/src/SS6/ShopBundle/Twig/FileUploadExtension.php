@@ -24,9 +24,9 @@ class FileUploadExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('getLabelByTemporaryFilename', array($this, 'getLabelByTemporaryFilename')),
-		);
+		return [
+			new Twig_SimpleFunction('getLabelByTemporaryFilename', [$this, 'getLabelByTemporaryFilename']),
+		];
 	}
 
 	/**

@@ -41,9 +41,9 @@ class LocalizationExtension extends \Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('localeFlag', array($this, 'getLocaleFlagHtml'), array('is_safe' => array('html'))),
-		);
+		return [
+			new Twig_SimpleFunction('localeFlag', [$this, 'getLocaleFlagHtml'], ['is_safe' => ['html']]),
+		];
 	}
 
 	/**

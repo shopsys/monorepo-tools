@@ -26,7 +26,7 @@ class LocalizedRouterFactory {
 	public function __construct($localeRoutersConfiguration, DelegatingLoader $delegatingLoader) {
 		$this->delegatingLoader = $delegatingLoader;
 		$this->localeRoutersConfiguration = $localeRoutersConfiguration;
-		$this->routersByLocaleAndHost = array();
+		$this->routersByLocaleAndHost = [];
 	}
 
 	/**
@@ -46,7 +46,7 @@ class LocalizedRouterFactory {
 			$this->routersByLocaleAndHost[$locale][$context->getHost()] = new Router(
 				$this->delegatingLoader,
 				$this->localeRoutersConfiguration[$locale],
-				array(),
+				[],
 				$context
 			);
 		}

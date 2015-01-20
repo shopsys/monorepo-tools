@@ -14,7 +14,7 @@ use SS6\ShopBundle\Model\Product\ProductData;
 class CartTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetItemsCountZero() {
-		$cartItems = array();
+		$cartItems = [];
 		$cart = new Cart($cartItems);
 		$this->assertEquals(0, $cart->getItemsCount());
 	}
@@ -30,14 +30,14 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
-		$cartItems = array($cartItem1, $cartItem2);
+		$cartItems = [$cartItem1, $cartItem2];
 
 		$cart = new Cart($cartItems);
 		$this->assertEquals(2, $cart->getItemsCount());
 	}
 
 	public function testIsEmpty() {
-		$cartItems = array();
+		$cartItems = [];
 
 		$cart = new Cart($cartItems);
 
@@ -52,7 +52,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
-		$cartItems = array($cartItem);
+		$cartItems = [$cartItem];
 
 		$cart = new Cart($cartItems);
 		$this->assertFalse($cart->IsEmpty());
@@ -69,7 +69,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
-		$cartItems = array($cartItem1, $cartItem2);
+		$cartItems = [$cartItem1, $cartItem2];
 
 		$cart = new Cart($cartItems);
 		$cart->clean();

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig_SimpleFunction;
 
 class FormThemeExtension extends \Twig_Extension {
 
@@ -31,9 +32,9 @@ class FormThemeExtension extends \Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new \Twig_SimpleFunction('getDefaultFormTheme', array($this, 'getDefaultFormTheme')),
-		);
+		return [
+			new Twig_SimpleFunction('getDefaultFormTheme', [$this, 'getDefaultFormTheme']),
+		];
 	}
 
 	/**

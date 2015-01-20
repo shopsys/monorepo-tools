@@ -3,11 +3,10 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use SS6\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
 use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class CustomerCommunicationController extends Controller {
 
@@ -32,7 +31,7 @@ class CustomerCommunicationController extends Controller {
 		$data = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $selectedDomain->getId());
 		$form = $this->createForm(new CustomerCommunicationFormType());
 
-		$form->setData(array('content' => $data));
+		$form->setData(['content' => $data]);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -43,9 +42,9 @@ class CustomerCommunicationController extends Controller {
 			return $this->redirect($this->generateUrl('admin_customercommunication_ordersubmitted'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 }

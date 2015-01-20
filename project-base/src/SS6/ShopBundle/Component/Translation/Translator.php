@@ -20,8 +20,8 @@ class Translator extends BaseTranslator {
 	public function __construct(
 		ContainerInterface $container,
 		MessageSelector $selector,
-		$loaderIds = array(),
-		array $options = array()
+		$loaderIds = [],
+		array $options = []
 	) {
 		parent::__construct($container, $selector, $loaderIds, $options);
 
@@ -47,7 +47,7 @@ class Translator extends BaseTranslator {
 	 *
 	 * @api
 	 */
-	public function trans($id, array $parameters = array(), $domain = self::DEFAULT_DOMAIN, $locale = null) {
+	public function trans($id, array $parameters = [], $domain = self::DEFAULT_DOMAIN, $locale = null) {
 		if ($locale === null) {
 			$locale = $this->getLocale();
 		} else {
@@ -75,7 +75,7 @@ class Translator extends BaseTranslator {
 	 *
 	 * @api
 	 */
-	public function transChoice($id, $number, array $parameters = array(), $domain = self::DEFAULT_DOMAIN, $locale = null) {
+	public function transChoice($id, $number, array $parameters = [], $domain = self::DEFAULT_DOMAIN, $locale = null) {
 		if ($locale === null) {
 			$locale = $this->getLocale();
 		} else {

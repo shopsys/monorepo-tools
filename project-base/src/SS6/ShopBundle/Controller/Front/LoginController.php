@@ -26,25 +26,25 @@ class LoginController extends Controller {
 			$form->addError(new FormError('Byly zadány neplatné přihlašovací údaje'));
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Login/loginForm.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Login/loginForm.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	public function windowFormAction() {
-		return $this->render('@SS6Shop/Front/Content/Login/windowForm.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Login/windowForm.html.twig', [
 			'form' => $this->getLoginForm()->createView(),
-		));
+		]);
 	}
 
 	/**
 	 * @return \Symfony\Component\Form\Form
 	 */
 	private function getLoginForm() {
-		return $this->createForm(new LoginFormType(), null, array(
+		return $this->createForm(new LoginFormType(), null, [
 			'action' => $this->generateUrl('front_login_check'),
 			'method' => 'POST',
-		));
+		]);
 	}
 
 }

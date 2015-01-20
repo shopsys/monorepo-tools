@@ -6,8 +6,8 @@ use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -48,12 +48,12 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'error_bubbling' => false,
 			'compound' => true,
-			'file_constraints' => array(),
+			'file_constraints' => [],
 			'multiple' => false,
-		));
+		]);
 	}
 
 	/**
@@ -69,10 +69,10 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 * @return array
 	 */
 	public function transform($value) {
-		return array(
+		return [
 			'uploadedFiles' => (array)$value,
 			'file' => null,
-		);
+		];
 	}
 
 	/**
@@ -85,19 +85,19 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 
 		$builder->addModelTransformer($this);
 		$builder
-			->add('uploadedFiles', 'collection', array(
+			->add('uploadedFiles', 'collection', [
 				'type' => 'hidden',
 				'allow_add' => true,
-				'constraints' => array(
-					new Constraints\Callback(array($this, 'validateUploadedFiles')),
-				),
-			))
-			->add('file', 'file', array(
-				'multiple' => $options['multiple']
-			));
+				'constraints' => [
+					new Constraints\Callback([$this, 'validateUploadedFiles']),
+				],
+			])
+			->add('file', 'file', [
+				'multiple' => $options['multiple'],
+			]);
 
 		// fallback for IE9 and older
-		$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+		$builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
 	}
 
 	/**

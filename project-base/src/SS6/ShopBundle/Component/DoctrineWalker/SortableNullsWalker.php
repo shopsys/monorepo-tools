@@ -19,7 +19,7 @@ class SortableNullsWalker extends SqlWalker {
 	 */
 	public function walkOrderByItem($orderByItem) {
 		$sql = parent::walkOrderByItem($orderByItem);
-		
+
 		if ($orderByItem->isAsc()) {
 			$sql .= ' ' . self::NULLS_FIRST;
 		} elseif ($orderByItem->isDesc()) {

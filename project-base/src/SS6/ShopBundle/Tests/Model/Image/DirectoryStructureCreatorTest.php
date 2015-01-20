@@ -7,15 +7,15 @@ use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 use SS6\ShopBundle\Model\Image\DirectoryStructureCreator;
-use SS6\ShopBundle\Model\Image\ImageLocator;
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testMakeImageDirectories() {
 		$imageDir = 'imageDir';
-		$imageEntityConfigByClass = array(
+		$imageEntityConfigByClass = [
 			new ImageEntityConfig(
 				'entityName1',
 				'entityClass1',
@@ -30,7 +30,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 				[],
 				[]
 				),
-		);
+		];
 		$imageConfig = new ImageConfig($imageEntityConfigByClass);
 		$imageFacadeMock = $this->getMock(ImageFacade::class, [], [], '', false);
 		$imageLocator = new ImageLocator($imageDir, $imageFacadeMock);
@@ -48,7 +48,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 					'imageDir' . DIRECTORY_SEPARATOR
 						. 'entityName2' . DIRECTORY_SEPARATOR
 						. 'type' . DIRECTORY_SEPARATOR
-						. 'sizeName2_1' . DIRECTORY_SEPARATOR
+						. 'sizeName2_1' . DIRECTORY_SEPARATOR,
 				];
 				asort($expected);
 				asort($actual);

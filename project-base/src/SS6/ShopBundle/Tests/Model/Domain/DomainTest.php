@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetIdNotSet() {
-		$domainConfigs = array(
+		$domainConfigs = [
 			new DomainConfig(1, 'example.com', 'cs', 'design1'),
 			new DomainConfig(2, 'example.org', 'en', 'design2'),
-		);
+		];
 
 		$domain = new Domain($domainConfigs);
 		$this->setExpectedException(\SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException::class);
@@ -21,15 +21,15 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSwitchDomainByRequest() {
-		$domainConfigs = array(
+		$domainConfigs = [
 			new DomainConfig(1, 'example.com', 'cs', 'design1'),
 			new DomainConfig(2, 'example.org', 'en', 'design2'),
-		);
+		];
 
 		$domain = new Domain($domainConfigs);
 
 		$requestMock = $this->getMockBuilder(Request::class)
-			->setMethods(array('getHost'))
+			->setMethods(['getHost'])
 			->getMock();
 		$requestMock->expects($this->atLeastOnce())->method('getHost')->will($this->returnValue('example.com'));
 
@@ -41,10 +41,10 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetAll() {
-		$domainConfigs = array(
+		$domainConfigs = [
 			new DomainConfig(1, 'example.com', 'cs', 'design1'),
 			new DomainConfig(2, 'example.org', 'en', 'design2'),
-		);
+		];
 
 		$domain = new Domain($domainConfigs);
 
@@ -52,10 +52,10 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDomainConfigById() {
-		$domainConfigs = array(
+		$domainConfigs = [
 			new DomainConfig(1, 'example.com', 'cs', 'design1'),
 			new DomainConfig(2, 'example.org', 'en', 'design2'),
-		);
+		];
 
 		$domain = new Domain($domainConfigs);
 

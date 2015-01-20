@@ -61,7 +61,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 		$this->traverser = new PHPParser_NodeTraverser();
 		$this->traverser->addVisitor($this);
 
-		$this->transMethodSpecifications = array();
+		$this->transMethodSpecifications = [];
 		foreach ($transMethodSpecifications as $transMethodSpecification) {
 			$methodName = $this->getNormalizedMethodName($transMethodSpecification->getMethodName());
 			$this->transMethodSpecifications[$methodName] = $transMethodSpecification;

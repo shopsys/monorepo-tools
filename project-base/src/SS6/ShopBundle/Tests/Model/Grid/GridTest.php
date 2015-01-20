@@ -22,8 +22,8 @@ class GridTest extends PHPUnit_Framework_TestCase {
 					'limit' => '100',
 					'page' => '3',
 					'order' => '-name',
-				]
-			]
+				],
+			],
 		];
 
 		$request = new Request($getParameters);
@@ -148,8 +148,8 @@ class GridTest extends PHPUnit_Framework_TestCase {
 			Grid::GET_PARAMETER => [
 				'gridId' => [
 					'order' => '-request',
-				]
-			]
+				],
+			],
 		];
 
 		$request = new Request($getParameters);

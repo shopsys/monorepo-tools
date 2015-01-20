@@ -37,18 +37,18 @@ class TransportAndPaymentFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('transport', new TransportFormType($this->transports), array(
-				'constraints' => array(
-					new Constraints\NotNull(array('message' => 'Vyberte prosím dopravu')),
-				),
+			->add('transport', new TransportFormType($this->transports), [
+				'constraints' => [
+					new Constraints\NotNull(['message' => 'Vyberte prosím dopravu']),
+				],
 				'invalid_message' => 'Vyberte prosím dopravu',
-			))
-			->add('payment', new PaymentFormType($this->payments), array(
-				'constraints' => array(
-					new Constraints\NotNull(array('message' => 'Vyberte prosím platbu')),
-				),
+			])
+			->add('payment', new PaymentFormType($this->payments), [
+				'constraints' => [
+					new Constraints\NotNull(['message' => 'Vyberte prosím platbu']),
+				],
 				'invalid_message' => 'Vyberte prosím platbu',
-			))
+			])
 			->add('save', 'submit');
 	}
 
@@ -63,12 +63,12 @@ class TransportAndPaymentFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-			'constraints' => array(
-				new Constraints\Callback(array($this, 'validateTransportPaymentRelation')),
-			),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+			'constraints' => [
+				new Constraints\Callback([$this, 'validateTransportPaymentRelation']),
+			],
+		]);
 	}
 
 	/**

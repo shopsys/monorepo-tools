@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -56,7 +56,7 @@ class VatGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_vat_deleteconfirm',
-				array('id' => 'v.id')
+				['id' => 'v.id']
 			)
 			->setAjaxConfirm();
 

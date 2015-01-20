@@ -46,5 +46,4 @@ class AdministratorData {
 		$this->username = $administrator->getUsername();
 	}
 
-
 }

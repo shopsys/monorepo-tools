@@ -8,14 +8,14 @@ use SS6\ShopBundle\Component\String\DatabaseSearching;
 class DatabaseSearchingTest extends PHPUnit_Framework_TestCase {
 
 	public function searchTextProvider() {
-		return array(
-			array('searchText' => 'foo bar', 'querySearchStringQuery' => 'foo bar'),
-			array('searchText' => 'FooBar', 'querySearchStringQuery' => 'FooBar'),
-			array('searchText' => 'foo*bar', 'querySearchStringQuery' => 'foo%bar'),
-			array('searchText' => 'foo%', 'querySearchStringQuery' => 'foo\%'),
-			array('searchText' => 'fo?o%', 'querySearchStringQuery' => 'fo_o\%'),
-			array('searchText' => '_foo', 'querySearchStringQuery' => '\_foo'),
-		);
+		return [
+			['searchText' => 'foo bar', 'querySearchStringQuery' => 'foo bar'],
+			['searchText' => 'FooBar', 'querySearchStringQuery' => 'FooBar'],
+			['searchText' => 'foo*bar', 'querySearchStringQuery' => 'foo%bar'],
+			['searchText' => 'foo%', 'querySearchStringQuery' => 'foo\%'],
+			['searchText' => 'fo?o%', 'querySearchStringQuery' => 'fo_o\%'],
+			['searchText' => '_foo', 'querySearchStringQuery' => '\_foo'],
+		];
 	}
 
 	/**

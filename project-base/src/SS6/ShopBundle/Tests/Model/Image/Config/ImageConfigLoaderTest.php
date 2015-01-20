@@ -3,34 +3,34 @@
 namespace SS6\ShopBundle\Tests\Model\Image\Config;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\Config\ImageConfigDefinition;
-use SS6\ShopBundle\Model\Image\Config\ImageConfigLoader;
 use SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException;
 use SS6\ShopBundle\Model\Image\Config\Exception\DuplicateSizeNameException;
 use SS6\ShopBundle\Model\Image\Config\Exception\DuplicateTypeNameException;
+use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\Config\ImageConfigDefinition;
+use SS6\ShopBundle\Model\Image\Config\ImageConfigLoader;
 use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoadFromArrayDuplicateEntityName() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-			array(
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+			[
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_2',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-		);
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);
@@ -46,22 +46,22 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoadFromArrayDuplicateEntityClass() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-			array(
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+			[
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_2',
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-		);
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);
@@ -77,28 +77,28 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoadFromArrayDuplicateNullSizeName() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(
-					array(
+				ImageConfigDefinition::CONFIG_SIZES => [
+					[
 						ImageConfigDefinition::CONFIG_SIZE_NAME => null,
 						ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
 						ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
 						ImageConfigDefinition::CONFIG_SIZE_CROP => false,
-					),
-					array(
+					],
+					[
 						ImageConfigDefinition::CONFIG_SIZE_NAME => null,
 						ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
 						ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
 						ImageConfigDefinition::CONFIG_SIZE_CROP => false,
-					),
-				),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-		);
+					],
+				],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);
@@ -114,25 +114,25 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoadFromArrayDuplicateTypeName() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(
-					array(
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [
+					[
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
 						ImageConfigDefinition::CONFIG_MULTIPLE => false,
-						ImageConfigDefinition::CONFIG_SIZES => array(),
-					),
-					array(
+						ImageConfigDefinition::CONFIG_SIZES => [],
+					],
+					[
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
 						ImageConfigDefinition::CONFIG_MULTIPLE => false,
-						ImageConfigDefinition::CONFIG_SIZES => array(),
-					),
-				),
-			),
-		);
+						ImageConfigDefinition::CONFIG_SIZES => [],
+					],
+				],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);
@@ -148,39 +148,39 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoadFromArray() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(
-					array(
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [
+					[
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_1',
 						ImageConfigDefinition::CONFIG_MULTIPLE => true,
-						ImageConfigDefinition::CONFIG_SIZES => array(
-							array(
+						ImageConfigDefinition::CONFIG_SIZES => [
+							[
 								ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_1',
 								ImageConfigDefinition::CONFIG_SIZE_WIDTH => null,
 								ImageConfigDefinition::CONFIG_SIZE_HEIGHT => null,
 								ImageConfigDefinition::CONFIG_SIZE_CROP => false,
-							),
-							array(
+							],
+							[
 								ImageConfigDefinition::CONFIG_SIZE_NAME => 'SizeName_2',
 								ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
 								ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
 								ImageConfigDefinition::CONFIG_SIZE_CROP => true,
-							),
-						),
-					),
-					array(
+							],
+						],
+					],
+					[
 						ImageConfigDefinition::CONFIG_TYPE_NAME => 'TypeName_2',
 						ImageConfigDefinition::CONFIG_MULTIPLE => false,
-						ImageConfigDefinition::CONFIG_SIZES => array(),
-					),
-				),
-			),
-		);
+						ImageConfigDefinition::CONFIG_SIZES => [],
+					],
+				],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);
@@ -203,15 +203,15 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoadFromArrayOriginalSize() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-		);
+				ImageConfigDefinition::CONFIG_SIZES => [],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);
@@ -228,22 +228,22 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoadFromArrayExistsOriginalSize() {
-		$inputConfig = array(
-			array(
+		$inputConfig = [
+			[
 				ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
 				ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
 				ImageConfigDefinition::CONFIG_MULTIPLE => false,
-				ImageConfigDefinition::CONFIG_SIZES => array(
-					array(
+				ImageConfigDefinition::CONFIG_SIZES => [
+					[
 						ImageConfigDefinition::CONFIG_SIZE_NAME => ImageConfig::ORIGINAL_SIZE_NAME,
 						ImageConfigDefinition::CONFIG_SIZE_WIDTH => 200,
 						ImageConfigDefinition::CONFIG_SIZE_HEIGHT => 100,
 						ImageConfigDefinition::CONFIG_SIZE_CROP => true,
-					)
-				),
-				ImageConfigDefinition::CONFIG_TYPES => array(),
-			),
-		);
+					],
+				],
+				ImageConfigDefinition::CONFIG_TYPES => [],
+			],
+		];
 
 		$filesystem = new Filesystem();
 		$imageConfigLoader = new ImageConfigLoader($filesystem);

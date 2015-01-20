@@ -15,20 +15,20 @@ class AddProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('productId', 'hidden', array(
-					'constraints' => array(
+			->add('productId', 'hidden', [
+					'constraints' => [
 						new Constraints\GreaterThan(0),
-						new Constraints\Regex(array('pattern' => '/^\d+$/')),
-					)
-				)
+						new Constraints\Regex(['pattern' => '/^\d+$/']),
+					],
+				]
 			)
-			->add('quantity', 'text', array(
+			->add('quantity', 'text', [
 					'data' => 1,
-					'constraints' => array(
+					'constraints' => [
 						new Constraints\GreaterThan(0),
-						new Constraints\Regex(array('pattern' => '/^\d+$/')),
-					)
-				)
+						new Constraints\Regex(['pattern' => '/^\d+$/']),
+					],
+				]
 			)
 			->add('add', 'submit');
 	}
@@ -44,9 +44,9 @@ class AddProductFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

@@ -6,13 +6,13 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 
@@ -49,7 +49,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$cartItemMock = $this->getMock(CartItem::class, [], [], '', false);
 		$cartItems = [
 			$cartItemMock,
-			$cartItemMock
+			$cartItemMock,
 		];
 		$cart = new Cart($cartItems);
 		$transport = $this->getMock(Transport::class, [], [], '', false);
@@ -99,7 +99,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$cartItemMock = $this->getMock(CartItem::class, [], [], '', false);
 		$cartItems = [
 			$cartItemMock,
-			$cartItemMock
+			$cartItemMock,
 		];
 		$cart = new Cart($cartItems);
 

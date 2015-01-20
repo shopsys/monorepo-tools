@@ -8,14 +8,14 @@ use SS6\ShopBundle\Twig\CropZerosExtension;
 class CropZerosExtensionTest extends PHPUnit_Framework_TestCase {
 
 	public function returnValuesProvider() {
-		return array(
-			array('input' => '12', 'return' => '12'),
-			array('input' => '12.00', 'return' => '12'),
-			array('input' => '12,00', 'return' => '12'),
-			array('input' => '12.630000', 'return' => '12.63'),
-			array('input' => '12,630000', 'return' => '12,63'),
-			array('input' => '1200', 'return' => '1200'),
-		);
+		return [
+			['input' => '12', 'return' => '12'],
+			['input' => '12.00', 'return' => '12'],
+			['input' => '12,00', 'return' => '12'],
+			['input' => '12.630000', 'return' => '12.63'],
+			['input' => '12,630000', 'return' => '12,63'],
+			['input' => '1200', 'return' => '1200'],
+		];
 	}
 
 	/**

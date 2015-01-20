@@ -75,7 +75,7 @@ class PaymentRepository {
 	public function getById($id) {
 		$payment = $this->findById($id);
 		if ($payment === null) {
-			throw new Exception\PaymentNotFoundException(array('id' => $id));
+			throw new Exception\PaymentNotFoundException(['id' => $id]);
 		}
 		return $payment;
 	}
@@ -85,7 +85,7 @@ class PaymentRepository {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	public function getByIdWithTransports($id) {
-		$criteria = array('id' => $id);
+		$criteria = ['id' => $id];
 		try {
 			$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.id = :id', Payment::class);
 			return $this->em->createQuery($dql)->setParameters($criteria)->getSingleResult();
@@ -122,7 +122,7 @@ class PaymentRepository {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getAllIncludingDeletedByVat(Vat $vat) {
-		return $this->getPaymentRepository()->findBy(array('vat' => $vat));
+		return $this->getPaymentRepository()->findBy(['vat' => $vat]);
 	}
 
 	/**
@@ -130,7 +130,7 @@ class PaymentRepository {
 	 * @return \SS6\ShopBundle\Model\Payment\PaymentDomain[]
 	 */
 	public function getPaymentDomainsByPayment(Payment $payment) {
-		return $this->getPaymentDomainRepository()->findBy(array('payment' => $payment));
+		return $this->getPaymentDomainRepository()->findBy(['payment' => $payment]);
 	}
 
 }

@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Grid\InlineEdit;
 
-use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 

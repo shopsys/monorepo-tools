@@ -23,7 +23,7 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 		$orderStatusData->name = ['cs' => 'Vyřízena', 'en' => 'Done'];
 		$this->createOrderStatus($manager, 'order_status_done', $orderStatusData, OrderStatus::TYPE_DONE);
 
-		$orderStatusData->name =['cs' => 'Stornována', 'en' => 'Canceled'];
+		$orderStatusData->name = ['cs' => 'Stornována', 'en' => 'Canceled'];
 		$this->createOrderStatus($manager, 'order_status_canceled', $orderStatusData, OrderStatus::TYPE_CANCELED);
 
 		$manager->flush();

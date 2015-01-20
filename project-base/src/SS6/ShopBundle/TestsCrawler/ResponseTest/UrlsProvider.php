@@ -27,7 +27,7 @@ class UrlsProvider {
 	private $ignoredRouteNames = [
 		'admin_domain_selectdomain',
 		'admin_login_check',
-		'front_login_check'
+		'front_login_check',
 	];
 
 	/**
@@ -106,7 +106,7 @@ class UrlsProvider {
 				$urls[] = [
 					$routeName,
 					$this->router->generate($routeName, $this->getRouteParameters($route, $routeName), RouterInterface::RELATIVE_PATH),
-					$this->getExpectedStatusCode($route, $routeName)
+					$this->getExpectedStatusCode($route, $routeName),
 				];
 			}
 		}

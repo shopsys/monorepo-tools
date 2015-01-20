@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Component\Subrequest;
+namespace SS6\ShopBundle\Tests\Component\SubRequest;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\SubRequest\SubRequestListener;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 

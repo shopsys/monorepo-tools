@@ -10,7 +10,7 @@ class Breadcrumb {
 	private $menuItems;
 
 	public function __construct() {
-		$this->menuItems = array();
+		$this->menuItems = [];
 	}
 
 	/**

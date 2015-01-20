@@ -33,29 +33,29 @@ class ProductParameterValueFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('parameter', 'choice', array(
+			->add('parameter', 'choice', [
 				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->parameters, 'name', array(), null, 'id'),
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyberte parametr')),
-				),
-			))
-			->add('valueText', 'localized', array(
+				'choice_list' => new ObjectChoiceList($this->parameters, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte parametr']),
+				],
+			])
+			->add('valueText', 'localized', [
 				'required' => true,
-				'main_constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte hodnotu parametru')),
-				),
-			));
+				'main_constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte hodnotu parametru']),
+				],
+			]);
 	}
 
 	/**
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
 			'data_class' => ProductParameterValuesLocalizedData::class,
-		));
+		]);
 	}
 
 }

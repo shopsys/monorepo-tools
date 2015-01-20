@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Payment\Detail;
 
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 
 class PaymentDetailFactory {
 
@@ -35,7 +35,7 @@ class PaymentDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Payment\Detail\PaymentDetail[]
 	 */
 	public function createDetailsForPayments(array $payments) {
-		$details = array();
+		$details = [];
 
 		foreach ($payments as $payment) {
 			$details[] = $this->createDetailForPayment($payment);

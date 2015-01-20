@@ -44,7 +44,7 @@ class CartWatcherService {
 	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	public function getModifiedPriceItemsAndUpdatePrices(Cart $cart) {
-		$modifiedItems = array();
+		$modifiedItems = [];
 		foreach ($cart->getItems() as $cartItem) {
 			$productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($cartItem->getProduct());
 			if ($cartItem->getWatchedPrice() != $productPrice->getPriceWithVat()) {
@@ -60,7 +60,7 @@ class CartWatcherService {
 	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	public function getNotVisibleItems(Cart $cart) {
-		$notVisibleItems = array();
+		$notVisibleItems = [];
 		foreach ($cart->getItems() as $item) {
 			try {
 				$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($item->getProduct(), $this->domain->getId());

@@ -16,12 +16,12 @@ class FileUploadController extends Controller {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function uploadAction(Request $request) {
-		$actionResult = array(
+		$actionResult = [
 			'status' => 'error',
 			'code' => 0,
 			'filename' => '',
 			'message' => 'Došlo k neočekávané chybě, soubor nebyl nahrán.',
-		);
+		];
 		$file = $request->files->get('file');
 
 		if ($file instanceof UploadedFile) {
@@ -33,13 +33,13 @@ class FileUploadController extends Controller {
 			try {
 				$temporaryFilename = $fileUpload->upload($file);
 				$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
-				
-				$actionResult = array(
+
+				$actionResult = [
 					'status' => 'success',
 					'filename' => $temporaryFilename,
 					'iconType' => $fileThumbnailInfo->getIconType(),
 					'imageThumbnailUri' => $fileThumbnailInfo->getImageUri(),
-				);
+				];
 				$actionResult['status'] = 'success';
 				$actionResult['filename'] = $temporaryFilename;
 			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUpload $ex) {

@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Transport\Detail;
 
-use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
@@ -47,7 +46,7 @@ class TransportDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Transport\Detail\TransportDetail[]
 	 */
 	public function createDetailsForTransports(array $transports) {
-		$details = array();
+		$details = [];
 
 		foreach ($transports as $transport) {
 			$details[] = new TransportDetail(

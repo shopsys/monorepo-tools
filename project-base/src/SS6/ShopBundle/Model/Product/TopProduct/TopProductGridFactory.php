@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -74,7 +74,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 				'delete',
 				$this->translator->trans('Smazat'),
 				'admin_topproduct_delete',
-				array('id' => 'tp.id')
+				['id' => 'tp.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odebrat tento produkt z akce na titulní stránce?'));
 

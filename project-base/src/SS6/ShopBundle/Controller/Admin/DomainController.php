@@ -16,11 +16,11 @@ class DomainController extends Controller {
 		$localization = $this->get('ss6.shop.localization.localization');
 		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
 
-		return $this->render('@SS6Shop/Admin/Inline/Domain/tabs.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Inline/Domain/tabs.html.twig', [
 			'domainConfigs' => $domain->getAll(),
 			'selectedDomainId' => $selectedDomain->getId(),
 			'multipleLocales' => count($localization->getAllLocales()) > 1,
-		));
+		]);
 	}
 
 	/**

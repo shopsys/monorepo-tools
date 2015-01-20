@@ -27,7 +27,7 @@ class MenuConfiguration implements ConfigurationInterface {
 					->defaultNull()
 				->end()
 				->arrayNode('route_parameters')
-					->defaultValue(array())
+					->defaultValue([])
 					->prototype('array')
 					->end()
 				->end()
@@ -38,8 +38,8 @@ class MenuConfiguration implements ConfigurationInterface {
 					->defaultTrue()
 				->end()
 				->variableNode('items')
-					->defaultValue(array())
-					->validate()->always(function(array $items) {
+					->defaultValue([])
+					->validate()->always(function (array $items) {
 						foreach ($items as $i => $item) {
 							/* @var $item \Symfony\Component\Config\Definition\NodeInterface */
 							$itemsNode = $this->getItemsNode($i);

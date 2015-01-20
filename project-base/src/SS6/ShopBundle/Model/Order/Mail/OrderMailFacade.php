@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Model\Mail\MailerService;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
-use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 

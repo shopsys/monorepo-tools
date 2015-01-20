@@ -32,11 +32,11 @@ class LocalizationListener implements EventSubscriberInterface {
 	}
 
 	public static function getSubscribedEvents() {
-		return array(
+		return [
 			// must be registered before the default Locale listener
 			// see: http://symfony.com/doc/current/cookbook/session/locale_sticky_session.html
-			KernelEvents::REQUEST => array(array('onKernelRequest', 17)),
-		);
+			KernelEvents::REQUEST => [['onKernelRequest', 17]],
+		];
 	}
 
 }

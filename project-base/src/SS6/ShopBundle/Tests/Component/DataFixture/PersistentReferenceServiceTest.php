@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Tests\Component\DataFixture;
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\DataFixture\PersistentReference;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Model\Product\Product;
 use stdClass;
 
@@ -28,7 +28,7 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
 		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
-		$persistentReferenceService->persistReference('referenceName', new stdClass);
+		$persistentReferenceService->persistReference('referenceName', new stdClass());
 	}
 
 	public function testPersistReference() {

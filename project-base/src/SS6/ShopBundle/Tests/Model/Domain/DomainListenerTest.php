@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Tests\Model\Domain;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\DomainListener;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class DomainListenerTest extends PHPUnit_Framework_TestCase {
 

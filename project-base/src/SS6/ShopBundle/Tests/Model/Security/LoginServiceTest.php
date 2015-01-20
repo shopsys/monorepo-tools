@@ -16,7 +16,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 
 		$requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');
 		$requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(true));
-		$requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new StdClass));
+		$requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new StdClass()));
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Security\Exception\LoginFailedException');
 		$loginService->checkLoginProcess($requestMock);
@@ -26,7 +26,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$loginService = new LoginService();
 
 		$sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
-		$sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new StdClass));
+		$sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new StdClass()));
 		$sessionMock->expects($this->atLeastOnce())->method('remove');
 
 		$requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');

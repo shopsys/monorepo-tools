@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation;
 
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Component\Translation\PoDumper;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Filesystem\Filesystem;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
+use SS6\ShopBundle\Component\Translation\PoDumper;
+use SS6\ShopBundle\Component\Translation\Translator;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class TranslationEditFacade {
 
@@ -51,7 +51,7 @@ class TranslationEditFacade {
 	public function saveTranslation($translationId, $translation) {
 		foreach ($translation as $locale => $translationText) {
 			$catalogue = $this->translator->getCatalogue($locale);
-			$catalogue->add(array($translationId => $translationText), Translator::DEFAULT_DOMAIN);
+			$catalogue->add([$translationId => $translationText], Translator::DEFAULT_DOMAIN);
 			$this->dumpCatalogToFile($catalogue->all(Translator::DEFAULT_DOMAIN), Translator::DEFAULT_DOMAIN, $locale);
 		}
 
@@ -91,10 +91,10 @@ class TranslationEditFacade {
 	 * @return array
 	 */
 	public function getTranslationById($translationId) {
-		$translationData = array(
+		$translationData = [
 			'cs' => $this->translator->getCatalogue('cs')->get($translationId, Translator::DEFAULT_DOMAIN),
 			'en' => $this->translator->getCatalogue('en')->get($translationId, Translator::DEFAULT_DOMAIN),
-		);
+		];
 
 		return $translationData;
 	}
@@ -106,7 +106,7 @@ class TranslationEditFacade {
 		$catalogueCs = $this->translator->getCatalogue('cs');
 		$catalogueEn = $this->translator->getCatalogue('en');
 
-		$data = array();
+		$data = [];
 		foreach ($catalogueCs->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
 			$data[$id]['id'] = $id;
 			$data[$id]['cs'] = $translation;

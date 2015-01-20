@@ -14,24 +14,24 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
-		return array(
-			array(
+		return [
+			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
 				'inputPrice' => '6999',
 				'vatPercent' => '21',
 				'basePriceWithoutVat' => '6998.78',
 				'basePriceWithVat' => '8469',
 				'basePriceVatAmount' => '1470.22',
-			),
-			array(
+			],
+			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
 				'inputPrice' => '6999.99',
 				'vatPercent' => '21',
 				'basePriceWithoutVat' => '5784.8',
 				'basePriceWithVat' => '7000',
 				'basePriceVatAmount' => '1215.2',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -46,7 +46,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$basePriceVatAmount
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getRoundingType'))
+			->setMethods(['getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock
@@ -67,32 +67,32 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testApplyCoefficientProvider() {
-		return array(
-			array(
+		return [
+			[
 				'priceWithVat' => '100',
 				'vatPercent' => '20',
 				'coefficients' => ['2'],
 				'resultPriceWithVat' => '200',
 				'resultPriceWithoutVat' => '167',
 				'resultVatAmount' => '33',
-			),
-			array(
+			],
+			[
 				'priceWithVat' => '100',
 				'vatPercent' => '10',
 				'coefficients' => ['1'],
 				'resultPriceWithVat' => '100',
 				'resultPriceWithoutVat' => '91',
 				'resultVatAmount' => '9',
-			),
-			array(
+			],
+			[
 				'priceWithVat' => '100',
 				'vatPercent' => '20',
 				'coefficients' => ['0.6789'],
 				'resultPriceWithVat' => '68',
 				'resultPriceWithoutVat' => '57',
 				'resultVatAmount' => '11',
-			),
-		);
+			],
+		];
 	}
 
 	/**

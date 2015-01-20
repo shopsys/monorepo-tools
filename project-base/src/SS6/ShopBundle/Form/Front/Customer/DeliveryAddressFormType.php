@@ -24,45 +24,45 @@ class DeliveryAddressFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('addressFilled', 'checkbox', array('required' => false))
-			->add('companyName', 'text', array('required' => false))
-			->add('contactPerson', 'text', array('required' => false))
-			->add('telephone', 'text', array('required' => false))
-			->add('street', 'text', array(
+			->add('addressFilled', 'checkbox', ['required' => false])
+			->add('companyName', 'text', ['required' => false])
+			->add('contactPerson', 'text', ['required' => false])
+			->add('telephone', 'text', ['required' => false])
+			->add('street', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím ulici',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
-			))
-			->add('city', 'text', array(
+						'groups' => ['differentDeliveryAddress'],
+					]),
+				],
+			])
+			->add('city', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím město',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
-			))
-			->add('postcode', 'text', array(
+						'groups' => ['differentDeliveryAddress'],
+					]),
+				],
+			])
+			->add('postcode', 'text', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\NotBlank(array(
+				'constraints' => [
+					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím PSČ',
-						'groups' => array('differentDeliveryAddress'),
-					)),
-				),
-			));
+						'groups' => ['differentDeliveryAddress'],
+					]),
+				],
+			]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => DeliveryAddressData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-			'validation_groups' => function(FormInterface $form) {
-				$validationGroups = array('Default');
+			'attr' => ['novalidate' => 'novalidate'],
+			'validation_groups' => function (FormInterface $form) {
+				$validationGroups = ['Default'];
 
 				$deliveryAddressData = $form->getData();
 				/* @var $customerData \SS6\ShopBundle\Model\Customer\DeliveryAddressData */
@@ -73,7 +73,7 @@ class DeliveryAddressFormType extends AbstractType {
 
 				return $validationGroups;
 			},
-		));
+		]);
 	}
 
 }

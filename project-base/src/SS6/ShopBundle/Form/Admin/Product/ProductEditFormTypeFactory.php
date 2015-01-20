@@ -58,7 +58,7 @@ class ProductEditFormTypeFactory {
 		if ($product !== null) {
 			$images = $this->imageFacade->getImagesByEntity($product, null);
 		} else {
-			$images = array();
+			$images = [];
 		}
 
 		$pricingGroups = $this->pricingGroupFacade->getAll();

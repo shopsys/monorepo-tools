@@ -7,8 +7,8 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Slider\SliderItem;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends Controller {
 
@@ -35,15 +35,15 @@ class SliderController extends Controller {
 
 		$grid->addColumn('name', 's.name', 'Název');
 		$grid->addColumn('link', 's.link', 'Odkaz');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_slider_edit', array('id' => 's.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', array('id' => 's.id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_slider_edit', ['id' => 's.id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', ['id' => 's.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Slider/listGrid.html.twig');
 
-		return $this->render('@SS6Shop/Admin/Content/Slider/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Slider/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -70,10 +70,10 @@ class SliderController extends Controller {
 			$sliderItem = $sliderItemFacade->create($form->getData());
 
 			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena stránka slideru'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $sliderItem->getName(),
-				'url' => $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
-			));
+				'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
+			]);
 			return $this->redirect($this->generateUrl('admin_slider_list'));
 		}
 
@@ -81,10 +81,10 @@ class SliderController extends Controller {
 			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', [
 			'form' => $form->createView(),
 			'selectedDomainId' => $selectedDomain->getId(),
-		));
+		]);
 
 	}
 
@@ -114,10 +114,10 @@ class SliderController extends Controller {
 
 			$flashMessageSender->addSuccessFlashTwig(
 				'Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>',
-				array(
+				[
 					'name' => $sliderItem->getName(),
-					'url' =>  $this->generateUrl('admin_slider_edit', array('id' => $sliderItem->getId())),
-				)
+					'url' =>  $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
+				]
 			);
 			return $this->redirect($this->generateUrl('admin_slider_list'));
 		}
@@ -130,10 +130,10 @@ class SliderController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace stránky slideru - ' . $sliderItem->getName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Slider/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Slider/edit.html.twig', [
 			'form' => $form->createView(),
 			'sliderItem' => $sliderItem,
-		));
+		]);
 	}
 
 	/**
@@ -150,9 +150,9 @@ class SliderController extends Controller {
 			$name = $sliderItemFacade->getById($id)->getName();
 			$sliderItemFacade->delete($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', array(
+			$flashMessageSender->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', [
 				'name' => $name,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená stránka neexistuje.');
 		}

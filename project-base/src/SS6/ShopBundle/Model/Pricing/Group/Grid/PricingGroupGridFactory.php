@@ -66,7 +66,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_pricinggroup_deleteconfirm',
-				array('id' => 'pg.id')
+				['id' => 'pg.id']
 			)
 			->setAjaxConfirm();
 

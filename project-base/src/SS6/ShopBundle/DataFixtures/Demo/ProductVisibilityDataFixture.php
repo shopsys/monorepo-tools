@@ -21,9 +21,9 @@ class ProductVisibilityDataFixture extends AbstractReferenceFixture implements D
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return array(
+		return [
 			ProductDataFixture::class,
-		);
+		];
 	}
 
 }

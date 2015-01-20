@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\TestsDb\Model\Cart;
 
+use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
@@ -10,7 +11,6 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
 
@@ -30,7 +30,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productEditData->productData->name = ['cs' => 'productName'];
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = array(2);
+		$productEditData->productData->hiddenOnDomains = [2];
 		$product = $productEditFacade->create($productEditData);
 		$em->flush();
 		$productId = $product->getId();
@@ -75,7 +75,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productEditData->productData->name = ['cs' => 'productName'];
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = array(2);
+		$productEditData->productData->hiddenOnDomains = [2];
 		$product1 = $productEditFacade->create($productEditData);
 		$product2 = $productEditFacade->create($productEditData);
 		$em->flush();
@@ -95,10 +95,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
 		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
-		$cartFacade->changeQuantities(array(
+		$cartFacade->changeQuantities([
 			$cartItem1->getId() => 5,
 			$cartItem2->getId() => 9,
-		));
+		]);
 		$em->flush();
 
 		$em->clear();
@@ -131,11 +131,11 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productEditData->productData->name = ['cs' => 'productName'];
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = array(2);
+		$productEditData->productData->hiddenOnDomains = [2];
 		$product = $productEditFacade->create($productEditData);
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$em->persist($cartItem);
-		$cartItems = array($cartItem);
+		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
 		$em->flush();
 
@@ -162,14 +162,14 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productEditData->productData->name = ['cs' => 'productName'];
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = array(2);
+		$productEditData->productData->hiddenOnDomains = [2];
 		$product1 = $productEditFacade->create($productEditData);
 		$product2 = $productEditFacade->create($productEditData);
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
 		$em->persist($cartItem2);
-		$cartItems = array($cartItem1, $cartItem2);
+		$cartItems = [$cartItem1, $cartItem2];
 		$cart = new Cart($cartItems);
 		$em->flush();
 

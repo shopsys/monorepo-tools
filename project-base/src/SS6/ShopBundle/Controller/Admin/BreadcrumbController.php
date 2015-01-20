@@ -12,9 +12,9 @@ class BreadcrumbController extends Controller {
 
 		$items = $breadcrumb->getItems();
 
-		return $this->render('@SS6Shop/Admin/Inline/Breadcrumb/breadcrumb.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Inline/Breadcrumb/breadcrumb.html.twig', [
 			'items' => $items,
-		));
+		]);
 	}
 
 }

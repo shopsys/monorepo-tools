@@ -54,8 +54,8 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 		$user = new User($userData, $billingAddress, $deliveryAddress);
 
-		$transport = new Transport(new TransportData(array('cs' => 'transportName'), '0'));
-		$payment = new Payment(new PaymentData(array('cs' => 'paymentName'), '0'));
+		$transport = new Transport(new TransportData(['cs' => 'transportName'], '0'));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], '0'));
 		$orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
 		$orderData = new OrderData();
 		$orderData->transport = $transport;
@@ -108,8 +108,8 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$billingAddress = new BillingAddress($billingAddressData);
 		$user = new User($userData, $billingAddress, null);
 
-		$transport = new Transport(new TransportData(array('cs' => 'transportName'), '0'));
-		$payment = new Payment(new PaymentData(array('cs' => 'paymentName'), '0'));
+		$transport = new Transport(new TransportData(['cs' => 'transportName'], '0'));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], '0'));
 		$orderStatus = new OrderStatus(new OrderStatusData(['en' => 'orderStatusName']), OrderStatus::TYPE_NEW);
 		$orderData = new OrderData();
 		$orderData->transport = $transport;

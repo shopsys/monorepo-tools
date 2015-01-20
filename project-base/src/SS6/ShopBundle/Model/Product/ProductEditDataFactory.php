@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductEditDataFactory {
 
@@ -57,11 +57,11 @@ class ProductEditDataFactory {
 		$productEditData = new ProductEditData();
 		$productEditData->productData = new ProductData();
 
-		$productParameterValuesData = array();
+		$productParameterValuesData = [];
 		$productEditData->parameters = $productParameterValuesData;
 
 		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
-		$productEditData->manualInputPrices = array();
+		$productEditData->manualInputPrices = [];
 
 		return $productEditData;
 	}
@@ -75,7 +75,7 @@ class ProductEditDataFactory {
 		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
 		$productEditData->productData->setFromEntity($product, $productDomains);
 
-		$productParameterValuesData = array();
+		$productParameterValuesData = [];
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
 		foreach ($productParameterValues as $productParameterValue) {
 			$productParameterValueData = new ProductParameterValueData();

@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Model\Category\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class CategoryGridFactory implements GridFactoryInterface {
@@ -67,13 +67,13 @@ class CategoryGridFactory implements GridFactoryInterface {
 				ActionColumn::TYPE_EDIT,
 				$this->translator->trans('Upravit'),
 				'admin_category_edit',
-				array('id' => 'd.id')
+				['id' => 'd.id']
 			);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
 				'admin_category_delete',
-				array('id' => 'd.id')
+				['id' => 'd.id']
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete smazat tuto kategorii?'));
 

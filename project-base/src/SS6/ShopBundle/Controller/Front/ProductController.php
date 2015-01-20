@@ -21,9 +21,9 @@ class ProductController extends Controller {
 
 		$productDetail = $productOnCurrentDomainFacade->getVisibleProductDetailById($id);
 
-		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
-		));
+		]);
 	}
 
 	/**
@@ -65,14 +65,14 @@ class ProductController extends Controller {
 			$categoryId
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', [
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
-		));
+		]);
 	}
 
 	public function selectOrderingModeAction(Request $request) {
@@ -81,12 +81,12 @@ class ProductController extends Controller {
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 		$form = $this->createForm(new OrderingSettingFormType());
-		$form->setData(array('orderingMode' => $orderingSetting->getOrderingMode()));
+		$form->setData(['orderingMode' => $orderingSetting->getOrderingMode()]);
 
-		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
 			'form' => $form->createView(),
 			'cookieName' => ProductListOrderingService::COOKIE_NAME,
-		));
+		]);
 	}
 
 }

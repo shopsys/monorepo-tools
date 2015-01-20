@@ -19,7 +19,7 @@ class MailController extends Controller {
 		$translator = $this->get('translator');
 		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 
-		return array(
+		return [
 			OrderMailService::VARIABLE_NUMBER  => $translator->trans('Číslo objednávky'),
 			OrderMailService::VARIABLE_DATE => $translator->trans('Datum a čas vytvoření objednávky'),
 			OrderMailService::VARIABLE_URL => $translator->trans('URL adresa e-shopu'),
@@ -37,7 +37,7 @@ class MailController extends Controller {
 			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $translator->trans('URL adresa detailu objednávky'),
 			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $translator->trans('Pokyny k dopravě'),
 			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $translator->trans('Pokyny k platbě'),
-		);
+		];
 	}
 
 	/**
@@ -47,13 +47,13 @@ class MailController extends Controller {
 		$translator = $this->get('translator');
 		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 
-		return array(
+		return [
 			CustomerMailService::VARIABLE_FIRST_NAME => $translator->trans('Jméno'),
 			CustomerMailService::VARIABLE_LAST_NAME => $translator->trans('Příjmení'),
 			CustomerMailService::VARIABLE_EMAIL => $translator->trans('Email'),
 			CustomerMailService::VARIABLE_URL => $translator->trans('URL adresa e-shopu'),
 			CustomerMailService::VARIABLE_LOGIN_PAGE => $translator->trans('Odkaz na stránku s přihlášením'),
-		);
+		];
 	}
 
 	/**
@@ -92,14 +92,14 @@ class MailController extends Controller {
 		$orderStatusesTemplateVariables = $orderMailService->getTemplateVariables();
 		$registrationTemplateVariables = $customerMailService->getTemplateVariables();
 
-		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', [
 			'form' => $form->createView(),
 			'orderStatusesIndexedById' => $mailTemplateFacade->getAllIndexedById(),
 			'orderStatusVariables' => $orderStatusesTemplateVariables,
 			'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
 			'registrationVariables' => $registrationTemplateVariables,
 			'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
-		));
+		]);
 	}
 
 	/**
@@ -116,7 +116,7 @@ class MailController extends Controller {
 
 		$form = $this->createForm(new MailSettingFormType());
 
-		$mailSettingData = array();
+		$mailSettingData = [];
 
 		if (!$form->isSubmitted()) {
 			$mailSettingData['email'] = $mailSettingFacade->getMainAdminMail($selectedDomainId);
@@ -135,9 +135,9 @@ class MailController extends Controller {
 			$flashMessageSender->addSuccessFlash('Nastavení emailů bylo upraveno.');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 }

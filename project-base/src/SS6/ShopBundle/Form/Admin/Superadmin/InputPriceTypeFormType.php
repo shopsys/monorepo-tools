@@ -34,35 +34,35 @@ class InputPriceTypeFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$inputPriceTypesLabels = $this->getInputPriceTypesLabels();
 
-		$choices = array();
+		$choices = [];
 		foreach (PricingSetting::getInputPriceTypes() as $inputPriceType) {
 			$choices[$inputPriceType] = $inputPriceTypesLabels[$inputPriceType];
 		}
 
 		$builder
-			->add('type', 'choice', array(
+			->add('type', 'choice', [
 				'choices' => $choices,
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte typ vstupní ceny')),
-				),
-			))
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte typ vstupní ceny']),
+				],
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 	/**
 	 * @return array
 	 */
 	private function getInputPriceTypesLabels() {
-		return array(
+		return [
 			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => $this->translator->trans('Bez DPH'),
 			PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => $this->translator->trans('S DPH'),
-		);
+		];
 	}
 
 }

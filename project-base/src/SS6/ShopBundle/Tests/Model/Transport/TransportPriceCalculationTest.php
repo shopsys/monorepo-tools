@@ -9,29 +9,29 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceProvider() {
-		return array(
-			array(
+		return [
+			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
 				'inputPrice' => '6999',
 				'vatPercent' => '21',
 				'priceWithoutVat' => '6998.78',
 				'priceWithVat' => '8469',
-			),
-			array(
+			],
+			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
 				'inputPrice' => '6999.99',
 				'vatPercent' => '21',
 				'priceWithoutVat' => '5784.8',
 				'priceWithVat' => '7000',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -45,7 +45,7 @@ class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceWithVat
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getInputPriceType', 'getRoundingType'))
+			->setMethods(['getInputPriceType', 'getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock
@@ -63,7 +63,7 @@ class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
-		$transport = new Transport(new TransportData(array('cs' => 'TransportName'), $inputPrice, $vat));
+		$transport = new Transport(new TransportData(['cs' => 'TransportName'], $inputPrice, $vat));
 
 		$price = $transportPriceCalculation->calculatePrice($transport);
 

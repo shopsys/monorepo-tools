@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridLimit;
 use SS6\ShopBundle\Model\Security\Roles;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
+use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -230,21 +230,21 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function serialize() {
-		return serialize(array(
+		return serialize([
 			$this->id,
 			$this->username,
 			$this->password,
 			$this->realName,
 			$this->loginToken,
 			time(),
-		));
+		]);
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function unserialize($serialized) {
-		list (
+		list(
 			$this->id,
 			$this->username,
 			$this->password,
@@ -267,7 +267,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function getRoles() {
-		return array(Roles::ROLE_ADMIN);
+		return [Roles::ROLE_ADMIN];
 	}
 
 	/**

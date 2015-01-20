@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
+use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductFormType;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductGridFactory;
 use Symfony\Component\Form\FormFactory;
-use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 
 class TopProductInlineEdit extends AbstractGridInlineEdit {
 
@@ -55,7 +55,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 			$topProduct = $this->topProductFacade->create($topProductData);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
-				array('Tento produkt již v seznamu existuje.')
+				['Tento produkt již v seznamu existuje.']
 			);
 		}
 		return $topProduct->getId();
@@ -70,7 +70,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 			$this->topProductFacade->edit($id, $topProductData);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
-				array('Tento produkt již v seznamu existuje.')
+				['Tento produkt již v seznamu existuje.']
 			);
 		}
 	}

@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
 
 class AvailabilityFacade {
 

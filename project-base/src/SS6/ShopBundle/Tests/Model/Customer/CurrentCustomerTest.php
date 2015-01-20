@@ -38,7 +38,6 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 		$userData->pricingGroup = $expectedPricingGroup;
 		$user = new User($userData, $billingAddress, null);
 
-
 		$tokenMock = $this->getMockBuilder(TokenInterface::class)
 			->setMethods(['getUser'])
 			->getMockForAbstractClass();

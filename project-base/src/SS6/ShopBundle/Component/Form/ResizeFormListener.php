@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Component\Form;
 
 use ArrayAccess;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Traversable;
 
 /**
@@ -48,7 +48,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 	 */
 	public function __construct(
 		$type,
-		array $options = array(),
+		array $options = [],
 		$allowAdd = false,
 		$allowDelete = false,
 		$deleteEmpty = false
@@ -64,13 +64,13 @@ class ResizeFormListener implements EventSubscriberInterface {
 	 * @return array
 	 */
 	public static function getSubscribedEvents() {
-		return array(
+		return [
 			FormEvents::PRE_SET_DATA => 'preSetData',
 			FormEvents::POST_SET_DATA => 'postSetData',
 			FormEvents::PRE_SUBMIT => 'preSubmit',
 			// (MergeCollectionListener, MergeDoctrineCollectionListener)
-			FormEvents::SUBMIT => array('onSubmit', 50),
-		);
+			FormEvents::SUBMIT => ['onSubmit', 50],
+		];
 	}
 
 	/**
@@ -83,7 +83,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 		$data = $event->getData();
 
 		if ($data === null) {
-			$data = array();
+			$data = [];
 		}
 
 		if (!is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
@@ -105,7 +105,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 		$viewData = $form->getViewData();
 
 		if ($viewData === null) {
-			$viewData = array();
+			$viewData = [];
 		}
 
 		if (!is_array($viewData) && !($viewData instanceof Traversable && $viewData instanceof ArrayAccess)) {
@@ -139,7 +139,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 		$data = $event->getData();
 
 		if ($data === null || $data === '') {
-			$data = array();
+			$data = [];
 		}
 
 		if (!is_array($data) && !($data instanceof Traversable && $data instanceof ArrayAccess)) {
@@ -186,7 +186,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 		$previousViewData = $form->getViewData();
 
 		if ($normData === null) {
-			$normData = array();
+			$normData = [];
 		}
 		if (!is_array($normData) && !($normData instanceof Traversable && $normData instanceof ArrayAccess)) {
 			throw new \Symfony\Component\Form\Exception\UnexpectedTypeException(
@@ -196,7 +196,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 		}
 
 		if (null === $previousViewData) {
-			$previousViewData = array();
+			$previousViewData = [];
 		}
 		if (!is_array($previousViewData) && !($previousViewData instanceof Traversable && $previousViewData instanceof ArrayAccess)) {
 			throw new \Symfony\Component\Form\Exception\UnexpectedTypeException(
@@ -249,7 +249,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 	 * @return mixed
 	 */
 	private function removeDataItemsNotPresentInForm($viewData, FormInterface $form) {
-		$toDelete = array();
+		$toDelete = [];
 
 		foreach ($viewData as $name => $child) {
 			if (!$form->has($name)) {

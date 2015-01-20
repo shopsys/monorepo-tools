@@ -22,17 +22,17 @@ class QuickSearchFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->setMethod('GET')
-			->add('text', 'text', array(
+			->add('text', 'text', [
 				'required' => false,
-			))
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
 			'csrf_protection' => false,
-		));
+		]);
 	}
 
 }

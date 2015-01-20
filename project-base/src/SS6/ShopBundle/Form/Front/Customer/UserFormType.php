@@ -23,35 +23,35 @@ class UserFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				),
-			))
-			->add('lastName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím příjmení')),
-				),
-			))
-			->add('email', 'email', array('read_only' => true, 'required' => false))
-			->add('password', 'repeated', array(
+			->add('firstName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+				],
+			])
+			->add('lastName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
+				],
+			])
+			->add('email', 'email', ['read_only' => true, 'required' => false])
+			->add('password', 'repeated', [
 				'type' => 'password',
 				'required' => false,
-				'first_options' => array(
-					'constraints' => array(
-						new Constraints\Length(array('min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					),
-					'attr' => array('autocomplete' => 'off'),
-				),
+				'first_options' => [
+					'constraints' => [
+						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+					],
+					'attr' => ['autocomplete' => 'off'],
+				],
 				'invalid_message' => 'Hesla se neshodují',
-			));
+			]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => UserData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

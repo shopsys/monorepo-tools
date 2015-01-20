@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class GridController extends Controller {
 
@@ -57,7 +57,7 @@ class GridController extends Controller {
 		/* @var $gridOrderingFacade \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade */
 
 		$gridOrderingFacade->saveOrdering($request->get('entityClass'), $request->get('rowIds'));
-		$responseData = array('success' => true);
+		$responseData = ['success' => true];
 
 		return new JsonResponse($responseData);
 	}

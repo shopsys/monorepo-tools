@@ -23,10 +23,10 @@ class LoginController extends Controller {
 
 		$error = null;
 
-		$form = $this->createForm(new LoginFormType(), null, array(
+		$form = $this->createForm(new LoginFormType(), null, [
 			'action' => $this->generateUrl('admin_login_check'),
 			'method' => 'POST',
-		));
+		]);
 
 		$loginService = $this->container->get('ss6.shop.security.login_service');
 		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
@@ -36,10 +36,10 @@ class LoginController extends Controller {
 			$error = 'Přihlášení se nepodařilo.';
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Login/loginForm.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Login/loginForm.html.twig', [
 				'form' => $form->createView(),
 				'error' => $error,
-		));
+		]);
 	}
 
 }

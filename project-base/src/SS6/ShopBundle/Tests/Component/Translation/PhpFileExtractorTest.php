@@ -89,11 +89,11 @@ class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getDocParser() {
 		$docParser = new DocParser();
-		$docParser->setImports(array(
+		$docParser->setImports([
 			'desc' => 'JMS\TranslationBundle\Annotation\Desc',
 			'meaning' => 'JMS\TranslationBundle\Annotation\Meaning',
 			'ignore' => 'JMS\TranslationBundle\Annotation\Ignore',
-		));
+		]);
 		$docParser->setIgnoreNotImportedAnnotations(true);
 
 		return $docParser;

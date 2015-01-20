@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -47,10 +46,10 @@ class CustomerController extends Controller {
 			if ($form->isValid()) {
 				$customerEditFacade->editByAdmin($id, $customerData);
 
-				$flashMessageSender->addSuccessFlashTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				$flashMessageSender->addSuccessFlashTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 					'name' => $user->getFullName(),
-					'url' => $this->generateUrl('admin_customer_edit', array('id' => $user->getId())),
-				));
+					'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
+				]);
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -65,10 +64,10 @@ class CustomerController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace zákazníka - ' . $user->getFullName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', [
 			'form' => $form->createView(),
 			'user' => $user,
-		));
+		]);
 	}
 
 	/**
@@ -126,17 +125,17 @@ class CustomerController extends Controller {
 			->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', array('id' => 'id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', array('id' => 'id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', ['id' => 'id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', ['id' => 'id'])
 			->setConfirmMessage('Opravdu chcete odstranit tohoto zákazníka?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -154,7 +153,7 @@ class CustomerController extends Controller {
 		$form = $this->createForm(
 			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
 			null,
-			array('validation_groups' => array('Default', 'create'))
+			['validation_groups' => ['Default', 'create']]
 		);
 
 		try {
@@ -174,10 +173,10 @@ class CustomerController extends Controller {
 
 				$user = $customerEditFacade->create($customerData);
 
-				$flashMessageSender->addSuccessFlashTwig('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+				$flashMessageSender->addSuccessFlashTwig('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 					'name' => $user->getFullName(),
-					'url' => $this->generateUrl('admin_customer_edit', array('id' => $user->getId())),
-				));
+					'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
+				]);
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -188,9 +187,9 @@ class CustomerController extends Controller {
 			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -206,9 +205,9 @@ class CustomerController extends Controller {
 		try {
 			$fullName = $customerEditFacade->getUserById($id)->getFullName();
 			$customerEditFacade->delete($id);
-			$flashMessageSender->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', array(
+			$flashMessageSender->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolený zákazník neexistuje');
 		}

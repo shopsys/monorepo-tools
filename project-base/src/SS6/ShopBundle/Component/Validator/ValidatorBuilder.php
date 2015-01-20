@@ -42,9 +42,9 @@ use Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader;
 use Symfony\Component\Validator\MetadataFactoryInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator as ValidatorV24;
 use Symfony\Component\Validator\Validator\LegacyValidator;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
-use Symfony\Component\Validator\Validator as ValidatorV24;
 use Symfony\Component\Validator\ValidatorBuilderInterface;
 
 /**
@@ -58,22 +58,22 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	/**
 	 * @var array
 	 */
-	private $initializers = array();
+	private $initializers = [];
 
 	/**
 	 * @var array
 	 */
-	private $xmlMappings = array();
+	private $xmlMappings = [];
 
 	/**
 	 * @var array
 	 */
-	private $yamlMappings = array();
+	private $yamlMappings = [];
 
 	/**
 	 * @var array
 	 */
-	private $methodMappings = array();
+	private $methodMappings = [];
 
 	/**
 	 * @var Reader
@@ -315,7 +315,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	 * {@inheritdoc}
 	 */
 	public function setApiVersion($apiVersion) {
-		if (!in_array($apiVersion, array(Validation::API_VERSION_2_4, Validation::API_VERSION_2_5, Validation::API_VERSION_2_5_BC))) {
+		if (!in_array($apiVersion, [Validation::API_VERSION_2_4, Validation::API_VERSION_2_5, Validation::API_VERSION_2_5_BC])) {
 			throw new InvalidArgumentException(sprintf(
 				'The requested API version is invalid: "%s"', $apiVersion
 			));
@@ -341,7 +341,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 		$metadataFactory = $this->metadataFactory;
 
 		if (!$metadataFactory) {
-			$loaders = array();
+			$loaders = [];
 
 			if (count($this->xmlMappings) > 1) {
 				$loaders[] = new XmlFilesLoader($this->xmlMappings);
@@ -379,7 +379,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 		}
 
 		$validatorFactory = $this->validatorFactory;
-		$translator = $this->translator ? : new DefaultTranslator();
+		$translator = $this->translator ?: new DefaultTranslator();
 		$apiVersion = $this->apiVersion;
 
 		if (null === $apiVersion) {
@@ -387,20 +387,20 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 		}
 
 		if (Validation::API_VERSION_2_4 === $apiVersion) {
-			$validatorFactory = $validatorFactory ? : new ConstraintValidatorFactory($this->propertyAccessor);
+			$validatorFactory = $validatorFactory ?: new ConstraintValidatorFactory($this->propertyAccessor);
 
 			return new ValidatorV24($metadataFactory, $validatorFactory, $translator, $this->translationDomain, $this->initializers);
 		}
 
 		if (Validation::API_VERSION_2_5 === $apiVersion) {
 			$contextFactory = new ExecutionContextFactory($translator, $this->translationDomain);
-			$validatorFactory = $validatorFactory ? : new ConstraintValidatorFactory($this->propertyAccessor);
+			$validatorFactory = $validatorFactory ?: new ConstraintValidatorFactory($this->propertyAccessor);
 
 			return new RecursiveValidator($contextFactory, $metadataFactory, $validatorFactory, $this->initializers);
 		}
 
 		$contextFactory = new LegacyExecutionContextFactory($metadataFactory, $translator, $this->translationDomain);
-		$validatorFactory = $validatorFactory ? : new LegacyConstraintValidatorFactory($this->propertyAccessor);
+		$validatorFactory = $validatorFactory ?: new LegacyConstraintValidatorFactory($this->propertyAccessor);
 
 		return new LegacyValidator($contextFactory, $metadataFactory, $validatorFactory, $this->initializers);
 	}
@@ -408,7 +408,7 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	/**
 	 * @var \Symfony\Component\Validator\Mapping\Loader\LoaderInterface[]
 	 */
-	private $customLoaders = array();
+	private $customLoaders = [];
 
 	/**
 	 * @param \Symfony\Component\Validator\Mapping\Loader\LoaderInterface $loader

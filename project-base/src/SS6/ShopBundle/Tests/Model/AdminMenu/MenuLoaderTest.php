@@ -9,29 +9,29 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
 class MenuLoaderTest extends FunctionalTestCase {
 
 	public function testLoadFromArray() {
-		$testMenu = array(
-			array(
+		$testMenu = [
+			[
 				'label' => 'Item 1',
-				'items' => array(
-					array(
+				'items' => [
+					[
 						'label' => 'Item 1.1',
 						'route' => 'item_1_1',
-					),
-					array(
+					],
+					[
 						'label' => 'Item 1.2',
 						'route' => 'item_1_2',
-					),
-				),
-			),
-			array(
+					],
+				],
+			],
+			[
 				'label' => 'Item 2',
 				'type' => MenuItem::TYPE_SETTINGS,
-			),
-			array(
+			],
+			[
 				'label' => 'Item 3',
-				'route' => 'item_3'
-			),
-		);
+				'route' => 'item_3',
+			],
+		];
 
 		$menuLoader = new MenuLoader($this->getContainer()->get('filesystem'));
 		$menu = $menuLoader->loadFromArray($testMenu);
@@ -44,25 +44,25 @@ class MenuLoaderTest extends FunctionalTestCase {
 	}
 
 	public function testLoadFromArrayMissingSettingsItem() {
-		$testMenu = array(
-			array(
+		$testMenu = [
+			[
 				'label' => 'Item 1',
-				'items' => array(
-					array(
+				'items' => [
+					[
 						'label' => 'Item 1.1',
 						'route' => 'item_1_1',
-					),
-					array(
+					],
+					[
 						'label' => 'Item 1.2',
 						'route' => 'item_1_2',
-					),
-				),
-			),
-			array(
+					],
+				],
+			],
+			[
 				'label' => 'Item 3',
-				'route' => 'item_3'
-			),
-		);
+				'route' => 'item_3',
+			],
+		];
 
 		$menuLoader = new MenuLoader($this->getContainer()->get('filesystem'));
 

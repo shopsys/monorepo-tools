@@ -76,5 +76,4 @@ class ProductManualInputPrice {
 		$this->inputPrice = $inputPrice;
 	}
 
-
 }

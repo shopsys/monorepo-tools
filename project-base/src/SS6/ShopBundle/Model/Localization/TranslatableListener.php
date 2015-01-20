@@ -2,19 +2,19 @@
 
 namespace SS6\ShopBundle\Model\Localization;
 
-use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use Prezent\Doctrine\Translatable\EventListener\TranslatableListener as PrezentTranslatableListener;
 use Prezent\Doctrine\Translatable\Mapping\TranslatableMetadata;
 
 class TranslatableListener extends PrezentTranslatableListener {
 
 	public function getSubscribedEvents() {
-		return array(
+		return [
 			Events::loadClassMetadata,
 			Events::postLoad,
 			Events::postPersist,
-		);
+		];
 	}
 
 	/**

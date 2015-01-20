@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Domain\Config;
 
+use SS6\ShopBundle\Command\ConfigVersionsCheckCommand;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use SS6\ShopBundle\Command\ConfigVersionsCheckCommand;
 
 class DomainsConfigDefinition implements ConfigurationInterface {
 

@@ -50,9 +50,9 @@ class CustomerController extends Controller {
 			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Customer/edit.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Customer/edit.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	public function ordersAction() {
@@ -70,9 +70,9 @@ class CustomerController extends Controller {
 		/* @var $user \SS6\ShopBundle\Model\Customer\User */
 
 		$orders = $orderFacade->getCustomerOrderList($user);
-		return $this->render('@SS6Shop/Front/Content/Customer/orders.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Customer/orders.html.twig', [
 			'orders' => $orders,
-		));
+		]);
 	}
 
 	/**
@@ -124,10 +124,10 @@ class CustomerController extends Controller {
 
 		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->render('@SS6Shop/Front/Content/Customer/orderDetail.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Customer/orderDetail.html.twig', [
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
-		));
+		]);
 
 	}
 

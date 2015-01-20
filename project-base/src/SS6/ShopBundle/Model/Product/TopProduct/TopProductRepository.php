@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 
@@ -41,7 +40,7 @@ class TopProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
 	 */
 	public function getById($id) {
-		return $this->getOneByCriteria(array('id' => $id));
+		return $this->getOneByCriteria(['id' => $id]);
 	}
 
 	/**
@@ -50,7 +49,7 @@ class TopProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
 	 */
 	public function getByProductAndDomainId(Product $product, $domainId) {
-		return $this->getOneByCriteria(array('product' => $product, 'domainId' => $domainId));
+		return $this->getOneByCriteria(['product' => $product, 'domainId' => $domainId]);
 	}
 
 	/**
@@ -58,7 +57,7 @@ class TopProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
 	 */
 	public function getAll($domainId) {
-		return $this->getTopProductRepository()->findBy(array('domainId' => $domainId));
+		return $this->getTopProductRepository()->findBy(['domainId' => $domainId]);
 	}
 
 	/**

@@ -15,7 +15,6 @@ class PricingGroupSettingsFormType extends AbstractType {
 	 */
 	private $pricingGroups;
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
@@ -36,20 +35,20 @@ class PricingGroupSettingsFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('defaultPricingGroup', 'choice', array(
+			->add('defaultPricingGroup', 'choice', [
 				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', array(), null, 'id'),
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím zadejte výchozí cenovou skupinu')),
-				),
-			))
+				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí cenovou skupinu']),
+				],
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

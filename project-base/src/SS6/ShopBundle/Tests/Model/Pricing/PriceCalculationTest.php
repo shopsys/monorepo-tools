@@ -12,28 +12,28 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testApplyVatPercentProvider() {
-		return array(
-			array(
+		return [
+			[
 				'priceWithoutVat' => '0',
 				'vatPercent' => '21',
 				'expectedPriceWithVat' => '0',
-			),
-			array(
+			],
+			[
 				'priceWithoutVat' => '100',
 				'vatPercent' => '0',
 				'expectedPriceWithVat' => '100',
-			),
-			array(
+			],
+			[
 				'priceWithoutVat' => '100',
 				'vatPercent' => '21',
 				'expectedPriceWithVat' => '121',
-			),
-			array(
+			],
+			[
 				'priceWithoutVat' => '100.9',
 				'vatPercent' => '21.1',
 				'expectedPriceWithVat' => '122.1899',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -45,7 +45,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$expectedPriceWithVat
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getRoundingType'))
+			->setMethods(['getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock
@@ -62,23 +62,23 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetVatAmountByPriceWithVatProvider() {
-		return array(
-			array(
+		return [
+			[
 				'priceWithVat' => '0',
 				'vatPercent' => '10',
 				'expectedVatAmount' => '0',
-			),
-			array(
+			],
+			[
 				'priceWithoutVat' => '100',
 				'vatPercent' => '0',
 				'expectedPriceWithVat' => '0',
-			),
-			array(
+			],
+			[
 				'priceWithoutVat' => '100',
 				'vatPercent' => '21',
 				'expectedPriceWithVat' => '17.36',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -90,7 +90,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$expectedVatAmount
 	) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->setMethods(array('getRoundingType'))
+			->setMethods(['getRoundingType'])
 			->disableOriginalConstructor()
 			->getMock();
 		$pricingSettingMock

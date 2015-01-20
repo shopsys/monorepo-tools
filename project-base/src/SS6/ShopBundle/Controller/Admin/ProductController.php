@@ -39,10 +39,10 @@ class ProductController extends Controller {
 		if ($form->isValid()) {
 			$productEditFacade->edit($id, $form->getData());
 
-			$flashMessageSender->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', array(
+			$flashMessageSender->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', [
 				'name' => $product->getName(),
-			));
-			return $this->redirect($this->generateUrl('admin_product_edit', array('id' => $product->getId())));
+			]);
+			return $this->redirect($this->generateUrl('admin_product_edit', ['id' => $product->getId()]));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -53,12 +53,12 @@ class ProductController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace zboží - ' . $product->getName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', [
 			'form' => $form->createView(),
 			'product' => $product,
 			'productDetail' => $productDetailFactory->getDetailForProduct($product),
 			'productSellingPricesIndexedByDomainId' => $productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
-		));
+		]);
 	}
 
 	/**
@@ -88,10 +88,10 @@ class ProductController extends Controller {
 			$product = $productEditFacade->create($form->getData());
 
 			$flashMessageSender->addSuccessFlashTwig('Bylo vytvořeno zboží'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $product->getName(),
-				'url' => $this->generateUrl('admin_product_edit', array('id' => $product->getId())),
-			));
+				'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
+			]);
 			return $this->redirect($this->generateUrl('admin_product_list'));
 		}
 
@@ -99,10 +99,10 @@ class ProductController extends Controller {
 			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', [
 			'form' => $form->createView(),
 			'pricingGroupsIndexedByDomainId' => $pricingGroupFacade->getAllIndexedByDomainId(),
-		));
+		]);
 	}
 
 	/**
@@ -134,18 +134,18 @@ class ProductController extends Controller {
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', array('id' => 'p.id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', array('id' => 'p.id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', ['id' => 'p.id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', ['id' => 'p.id'])
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -162,9 +162,9 @@ class ProductController extends Controller {
 			$productName = $productEditFacade->getById($id)->getName();
 			$productEditFacade->delete($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', array(
+			$flashMessageSender->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', [
 				'name' => $productName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolený produkt neexistuje.');
 		}

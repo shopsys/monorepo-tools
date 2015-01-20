@@ -15,7 +15,6 @@ class CurrencyDomainSettingsFormType extends AbstractType {
 	 */
 	private $currencies;
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
 	 */
@@ -36,24 +35,24 @@ class CurrencyDomainSettingsFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('domainDefaultCurrencies', 'collection', array(
+			->add('domainDefaultCurrencies', 'collection', [
 				'required' => true,
 				'type' => 'choice',
-				'options' => array(
+				'options' => [
 					'required' => true,
-					'choice_list' => new ObjectChoiceList($this->currencies, 'name', array(), null, 'id'),
-					'constraints' => array(
-						new Constraints\NotBlank(array('message' => 'Prosím zadejte výchozí měnu')),
-					),
-				)
-			))
+					'choice_list' => new ObjectChoiceList($this->currencies, 'name', [], null, 'id'),
+					'constraints' => [
+						new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí měnu']),
+					],
+				],
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

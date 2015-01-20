@@ -4,11 +4,11 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Order\OrderData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -50,10 +50,10 @@ class OrderController extends Controller {
 				$order = $orderFacade->edit($id, $orderData);
 
 				$flashMessageSender->addSuccessFlashTwig('Byla upravena objednávka č.'
-						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', array(
+						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', [
 					'number' => $order->getNumber(),
-					'url' => $this->generateUrl('admin_order_edit', array('id' => $order->getId())),
-				));
+					'url' => $this->generateUrl('admin_order_edit', ['id' => $order->getId()]),
+				]);
 				return $this->redirect($this->generateUrl('admin_order_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
@@ -74,11 +74,11 @@ class OrderController extends Controller {
 
 		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', [
 			'form' => $form->createView(),
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
-		));
+		]);
 	}
 
 	/**
@@ -132,17 +132,17 @@ class OrderController extends Controller {
 		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', false)->setClassAttribute('text-right text-nowrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', array('id' => 'id'));
-		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', array('id' => 'id'))
+		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', ['id' => 'id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', ['id' => 'id'])
 			->setConfirmMessage('Opravdu si přejete objednávku smazat?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -174,9 +174,9 @@ class OrderController extends Controller {
 			/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 			$orderFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', array(
+			$flashMessageSender->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', [
 				'number' => $orderNumber,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená objednávka neexistuje');
 		}

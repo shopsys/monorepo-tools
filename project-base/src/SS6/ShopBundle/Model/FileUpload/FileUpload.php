@@ -142,7 +142,7 @@ class FileUpload {
 	 * @return string
 	 */
 	public function getOriginalFilenameByTemporary($temporaryFilename) {
-		$matches = array();
+		$matches = [];
 		if ($temporaryFilename && preg_match('/^.+?__(.+)$/', $temporaryFilename, $matches)) {
 			return $matches[1];
 		}

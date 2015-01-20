@@ -56,41 +56,41 @@ class VatSettingsFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$roundingTypesLabels = $this->getRoundingTypesLabels();
 
-		$roundingTypesChoices = array();
+		$roundingTypesChoices = [];
 		foreach ($this->roundingTypes as $roundingType) {
 			$roundingTypesChoices[$roundingType] = $roundingTypesLabels[$roundingType];
 		}
 
 		$builder
-			->add('defaultVat', 'choice', array(
+			->add('defaultVat', 'choice', [
 				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->vats, 'name', array(), null, 'id'),
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím zadejte výchozí výši DPH')),
-				),
-			))
-			->add('roundingType', 'choice', array(
+				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí výši DPH']),
+				],
+			])
+			->add('roundingType', 'choice', [
 				'required' => true,
 				'choices' => $roundingTypesChoices,
-			))
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 	/**
 	 * @return array
 	 */
 	private function getRoundingTypesLabels() {
-		return array(
+		return [
 			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => $this->translator->trans('Na setiny (haléře)'),
 			PricingSetting::ROUNDING_TYPE_FIFTIES => $this->translator->trans('Na padesátníky'),
 			PricingSetting::ROUNDING_TYPE_INTEGER => $this->translator->trans('Na celá čísla (koruny)'),
-		);
+		];
 	}
 
 }

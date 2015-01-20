@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
-use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 

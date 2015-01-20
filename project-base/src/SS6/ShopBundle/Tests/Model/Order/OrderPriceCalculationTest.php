@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Tests\Model\Order;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
-use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Price;
 

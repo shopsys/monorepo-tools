@@ -25,11 +25,11 @@ class ConfirmDeleteResponseFactory {
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function createDeleteResponse($message, $route, $entityId) {
-		return $this->templating->renderResponse('@SS6Shop/Admin/Content/ConfirmDelete/directDelete.html.twig', array(
+		return $this->templating->renderResponse('@SS6Shop/Admin/Content/ConfirmDelete/directDelete.html.twig', [
 			'message' => $message,
 			'route' => $route,
-			'routeParams' => array('id' => $entityId),
-		));
+			'routeParams' => ['id' => $entityId],
+		]);
 	}
 
 	/**
@@ -40,11 +40,11 @@ class ConfirmDeleteResponseFactory {
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function createSetNewAndDeleteResponse($message, $route, $entityId, array $listOfNewEntities) {
-		return $this->templating->renderResponse('@SS6Shop/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', array(
+		return $this->templating->renderResponse('@SS6Shop/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', [
 			'message' => $message,
 			'route' => $route,
 			'entityId' => $entityId,
 			'listOfNewEntities' => $listOfNewEntities,
-		));
+		]);
 	}
 }

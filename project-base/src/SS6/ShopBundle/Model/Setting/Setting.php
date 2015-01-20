@@ -23,7 +23,7 @@ class Setting {
 	/**
 	 * @var \SS6\ShopBundle\Model\Setting\SettingValue[]
 	 */
-	private $values = array();
+	private $values = [];
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Setting\SettingValue[]
@@ -113,7 +113,7 @@ class Setting {
 	 */
 	private function loadDomainValues($domainId) {
 		if (!array_key_exists($domainId, $this->values)) {
-			$this->values[$domainId] = array();
+			$this->values[$domainId] = [];
 			foreach ($this->settingValueRepository->findAllByDomainId($domainId) as $settingValue) {
 				/* @var $settingValue SettingValue */
 				$this->values[$domainId][$settingValue->getName()] = $settingValue;

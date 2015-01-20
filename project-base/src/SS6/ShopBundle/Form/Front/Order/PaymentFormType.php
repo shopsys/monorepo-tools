@@ -38,9 +38,9 @@ class PaymentFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'choice_list' => new ObjectChoiceList($this->payments, 'name', array(), null, 'id'),
-		));
+		$resolver->setDefaults([
+			'choice_list' => new ObjectChoiceList($this->payments, 'name', [], null, 'id'),
+		]);
 	}
 
 }

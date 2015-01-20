@@ -25,17 +25,17 @@ class CartFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 
 		$builder
-			->add('quantities', 'collection', array(
+			->add('quantities', 'collection', [
 				'type' => 'integer',
-				'constraints' => array(
-						new Constraints\All(array(
-							'constraints' => array(
-								new Constraints\NotBlank(array('message' => 'Musíte zadat množství kusů zboží')),
-								new Constraints\GreaterThan(array('value' => 0, 'message' => 'Musíte zadat množství kusů zboží')),
-							),
-						))
-					),
-				))
+				'constraints' => [
+						new Constraints\All([
+							'constraints' => [
+								new Constraints\NotBlank(['message' => 'Musíte zadat množství kusů zboží']),
+								new Constraints\GreaterThan(['value' => 0, 'message' => 'Musíte zadat množství kusů zboží']),
+							],
+						]),
+					],
+				])
 			->add('recalc', 'submit')
 			->add('recalcToOrder', 'submit');
 	}
@@ -51,9 +51,9 @@ class CartFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+		$resolver->setDefaults([
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

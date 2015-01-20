@@ -3,9 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\OrderConfirmationTextFacade;
 use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,14 +108,14 @@ class OrderController extends Controller {
 		$payment = $orderData->payment;
 		$transport = $orderData->transport;
 
-		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
 			'form' => $form->createView(),
 			'flow' => $flow,
 			'orderPreview' => $orderPreviewCalculation->calculatePreview($cart, $transport, $payment),
 			'payments' => $payments,
 			'transportsPrices' => $transportPriceCalculation->calculatePricesById($transports),
 			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments),
-		));
+		]);
 	}
 
 	/**
@@ -144,17 +142,17 @@ class OrderController extends Controller {
 		if ($transportAndPaymentCheckResult->isTransportPriceChanged()) {
 			$flashMessageSender->addInfoFlashTwig(
 				'V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. Prosím, překontrolujte si objednávku.',
-				array(
+				[
 					'transportName' => $orderData->transport->getName(),
-				)
+				]
 			);
 		}
 		if ($transportAndPaymentCheckResult->isPaymentPriceChanged()) {
 			$flashMessageSender->addInfoFlashTwig(
 				'V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku.',
-				array(
+				[
 					'paymentName' => $orderData->payment->getName(),
-				)
+				]
 			);
 		}
 	}
@@ -191,9 +189,9 @@ class OrderController extends Controller {
 			return $this->redirect($this->generateUrl('front_cart'));
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [
 			'orderConfirmationText' => $orderFacade->getOrderConfirmText($orderId),
-		));
+		]);
 	}
 
 	/**

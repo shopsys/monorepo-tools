@@ -22,8 +22,6 @@ class ImageProcessingService {
 	 */
 	private $imageManager;
 
-	
-
 	/**
 	 * @var \Symfony\Component\Filesystem\Filesystem
 	 */
@@ -77,7 +75,7 @@ class ImageProcessingService {
 		if (realpath($filepath) !== realpath($newFilepath)) {
 			$this->filesystem->remove($filepath);
 		}
-		
+
 		return $image->filename . '.' . $image->extension;
 	}
 

@@ -31,7 +31,7 @@ class PersistentReferenceRepository {
 	 * @return \SS6\ShopBundle\Component\DataFixture\PersistentReference
 	 */
 	public function findByReferenceName($referenceName) {
-		return $this->getReferenceRepository()->find(array('referenceName' => $referenceName));
+		return $this->getReferenceRepository()->find(['referenceName' => $referenceName]);
 	}
 
 	/**

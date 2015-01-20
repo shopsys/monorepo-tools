@@ -74,9 +74,9 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return array
 	 */
 	public function getFunctions() {
-		return array(
-			new Twig_SimpleFunction('importJavascripts', array($this, 'renderJavascripts'), array('is_safe' => array('html'))),
-		);
+		return [
+			new Twig_SimpleFunction('importJavascripts', [$this, 'renderJavascripts'], ['is_safe' => ['html']]),
+		];
 	}
 
 	/**

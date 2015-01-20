@@ -24,13 +24,12 @@ class PaymentVisibilityCalculation {
 		$this->independentTransportVisibilityCalculation = $independentTransportVisibilityCalculation;
 	}
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function filterVisible(array $payments, $domainId) {
-		$visiblePayments = array();
+		$visiblePayments = [];
 		foreach ($payments as $payment) {
 			if ($this->isVisible($payment, $domainId)) {
 				$visiblePayments[] = $payment;

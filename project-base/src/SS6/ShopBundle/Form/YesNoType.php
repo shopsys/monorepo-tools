@@ -11,14 +11,14 @@ class YesNoType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
-			'choices' => array(
+		$resolver->setDefaults([
+			'choices' => [
 				true => 'Ano',
 				false => 'Ne',
-			),
+			],
 			'expanded' => true,
 			'empty_value' => false,
-		));
+		]);
 	}
 
 	/**

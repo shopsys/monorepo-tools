@@ -10,16 +10,16 @@ use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetTypeSizes() {
-		$types = array(
-			'TypeName_1' => array(
+		$types = [
+			'TypeName_1' => [
 				'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false)
-			),
-			'TypeName_2' => array(
+				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
+			],
+			'TypeName_2' => [
 				'SizeName_2_1' => new ImageSizeConfig('SizeName_2_1', null, null, false),
-			),
-		);
-		$sizes = array();
+			],
+		];
+		$sizes = [];
 
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
@@ -28,16 +28,16 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetTypeSizesNotFound() {
-		$types = array(
-			'TypeName_1' => array(
+		$types = [
+			'TypeName_1' => [
 				'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false)
-			),
-			'TypeName_2' => array(
+				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
+			],
+			'TypeName_2' => [
 				'SizeName_2_1' => new ImageSizeConfig('SizeName_2_1', null, null, false),
-			),
-		);
-		$sizes = array();
+			],
+		];
+		$sizes = [];
 
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
@@ -46,18 +46,18 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetTypeSize() {
-		$types = array(
-			'TypeName_1' => array(
+		$types = [
+			'TypeName_1' => [
 				'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
-				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false)
-			),
-			'TypeName_2' => array(
+				'SizeName_1_2' => new ImageSizeConfig('SizeName_1_2', null, null, false),
+			],
+			'TypeName_2' => [
 				ImageEntityConfig::WITHOUT_NAME_KEY => new ImageSizeConfig(null, null, null, false),
-			),
-		);
-		$sizes = array(
+			],
+		];
+		$sizes = [
 			ImageEntityConfig::WITHOUT_NAME_KEY => new ImageSizeConfig(null, null, null, false),
-		);
+		];
 
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 

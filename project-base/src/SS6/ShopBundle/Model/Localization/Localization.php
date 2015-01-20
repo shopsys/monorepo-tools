@@ -6,14 +6,14 @@ use SS6\ShopBundle\Model\Domain\Domain;
 
 class Localization {
 
-	private $languageNames = array(
+	private $languageNames = [
 		'cs' => 'Čeština',
 		'de' => 'Deutsch',
 		'en' => 'English',
 		'hu' => 'Magyar',
 		'pl' => 'Polski',
 		'sk' => 'Slovenčina',
-	);
+	];
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -51,7 +51,7 @@ class Localization {
 	 */
 	public function getAllLocales() {
 		if ($this->allLocales === null) {
-			$this->allLocales = array();
+			$this->allLocales = [];
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$this->allLocales[$domainConfig->getLocale()] = $domainConfig->getLocale();
 			}

@@ -24,9 +24,9 @@ class OverviewController extends Controller {
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Overview/listGrid.html.twig');
 
-		return $this->render('@SS6Shop/Admin/Content/Overview/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Overview/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 	private function loadData() {
@@ -34,7 +34,7 @@ class OverviewController extends Controller {
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		$domainConfigs = $domain->getAll();
-		$data = array();
+		$data = [];
 		foreach ($domainConfigs as $id => $domainDetail) {
 			$data[$id]['id'] = $id;
 			$data[$id]['name'] = $domainDetail->getDomain();

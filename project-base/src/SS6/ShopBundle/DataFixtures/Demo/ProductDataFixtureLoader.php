@@ -73,7 +73,7 @@ class ProductDataFixtureLoader {
 		$rowId = 0;
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
-				$row = array_map(array(TransformString::class, 'emptyToNull'), $row);
+				$row = array_map([TransformString::class, 'emptyToNull'], $row);
 				$row = EncodingConverter::cp1250ToUtf8($row);
 				$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
 			}
@@ -116,7 +116,7 @@ class ProductDataFixtureLoader {
 			$productEditData->productData->sellingTo = new DateTime($row[10]);
 		}
 		$productEditData->productData->stockQuantity = $row[11];
-		$hiddenOnDomains = array();
+		$hiddenOnDomains = [];
 		if (!CsvDecoder::decodeBoolean($row[12])) {
 			$hiddenOnDomains[] = 1;
 		}
@@ -150,7 +150,7 @@ class ProductDataFixtureLoader {
 	private function getProductParameterValuesDataFromString($string) {
 		$rows = explode(';', $string);
 
-		$productParameterValuesData = array();
+		$productParameterValuesData = [];
 		foreach ($rows as $row) {
 			$rowData = explode('=', $row);
 			if (count($rowData) !== 2) {
@@ -184,7 +184,7 @@ class ProductDataFixtureLoader {
 	 * @return array
 	 */
 	private function unserializeLocalizedValues($string) {
-		$array = array();
+		$array = [];
 		$items = explode(',', $string);
 		foreach ($items as $item) {
 			list($locale, $value) = explode(':', $item);
@@ -198,7 +198,7 @@ class ProductDataFixtureLoader {
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	private function getProductCategoriesFromString($string) {
-		$categories = array();
+		$categories = [];
 		if (!empty($string)) {
 			$categoryIds = explode(';', $string);
 			foreach ($categoryIds as $categoryId) {

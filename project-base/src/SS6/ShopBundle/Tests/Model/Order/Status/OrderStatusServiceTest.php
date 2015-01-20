@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Tests\Model\Order\Status;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 use SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException;
 use SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException;
 use SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusException;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 
 class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -19,16 +19,16 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 			new OrderStatusData(['en' => 'orderStatusName']),
 			OrderStatus::TYPE_IN_PROGRESS
 		);
-		$orderStatusService->delete($orderStatus, array());
+		$orderStatusService->delete($orderStatus, []);
 	}
 
 	public function testDeleteForbiddenProvider() {
-		return array(
-			array('type' => OrderStatus::TYPE_NEW, 'expectedException' => OrderStatusDeletionForbiddenException::class),
-			array('type' => OrderStatus::TYPE_IN_PROGRESS, 'expectedException' => null),
-			array('type' => OrderStatus::TYPE_DONE, 'expectedException' => OrderStatusDeletionForbiddenException::class),
-			array('type' => OrderStatus::TYPE_CANCELED, 'expectedException' => OrderStatusDeletionForbiddenException::class),
-		);
+		return [
+			['type' => OrderStatus::TYPE_NEW, 'expectedException' => OrderStatusDeletionForbiddenException::class],
+			['type' => OrderStatus::TYPE_IN_PROGRESS, 'expectedException' => null],
+			['type' => OrderStatus::TYPE_DONE, 'expectedException' => OrderStatusDeletionForbiddenException::class],
+			['type' => OrderStatus::TYPE_CANCELED, 'expectedException' => OrderStatusDeletionForbiddenException::class],
+		];
 	}
 
 	/**
@@ -43,7 +43,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 		if ($expectedException !== null) {
 			$this->setExpectedException($expectedException);
 		}
-		$orderStatusService->delete($orderStatus, array());
+		$orderStatusService->delete($orderStatus, []);
 	}
 
 	public function testDeleteWithOrder() {
@@ -54,12 +54,12 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$orderMock = $this->getMockBuilder(Order::class)
-			->setMethods(array('__construct'))
+			->setMethods(['__construct'])
 			->disableOriginalConstructor()
 			->getMock();
 
 		$this->setExpectedException(OrderStatusDeletionWithOrdersException::class);
-		$orderStatusService->delete($orderStatus, array($orderMock));
+		$orderStatusService->delete($orderStatus, [$orderMock]);
 	}
 
 	public function testDeleteForbiddenOrWithOrder() {
@@ -70,12 +70,12 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$orderMock = $this->getMockBuilder(Order::class)
-			->setMethods(array('__construct'))
+			->setMethods(['__construct'])
 			->disableOriginalConstructor()
 			->getMock();
 
 		$this->setExpectedException(OrderStatusException::class);
-		$orderStatusService->delete($orderStatus, array($orderMock));
+		$orderStatusService->delete($orderStatus, [$orderMock]);
 	}
 
 	public function testReplaceAndDelete() {
@@ -90,12 +90,12 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$orderMock = $this->getMockBuilder(Order::class)
-			->setMethods(array('__construct', 'setStatus'))
+			->setMethods(['__construct', 'setStatus'])
 			->disableOriginalConstructor()
 			->getMock();
 		$orderMock->expects($this->once())->method('setStatus');
 
-		$orderStatusService->delete($oldOrderStatus, array($orderMock), $newOrderStatus);
+		$orderStatusService->delete($oldOrderStatus, [$orderMock], $newOrderStatus);
 	}
 
 }

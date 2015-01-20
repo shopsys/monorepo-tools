@@ -15,9 +15,9 @@ class ArticleController extends Controller {
 
 		$article = $articleEditFacade->getById($id);
 
-		return $this->render('@SS6Shop/Front/Content/Article/detail.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Article/detail.html.twig', [
 			'article' => $article,
-		));
+		]);
 	}
 
 	public function menuAction() {
@@ -26,9 +26,9 @@ class ArticleController extends Controller {
 
 		$articles = $articleEditFacade->getArticlesForMenuOnCurrentDomain();
 
-		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', array(
+		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', [
 			'articles' => $articles,
-		));
+		]);
 	}
 
 }

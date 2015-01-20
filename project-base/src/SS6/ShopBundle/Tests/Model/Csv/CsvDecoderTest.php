@@ -8,12 +8,12 @@ use SS6\ShopBundle\Component\Csv\CsvDecoder;
 class CsvDecoderTest extends PHPUnit_Framework_TestCase {
 
 	public function getTestDecodeBooleanData() {
-		return array(
-			array('input' => 'true', 'output' => true),
-			array('input' => 'false', 'output' => false),
-			array('input' => 'asdf', 'output' => false),
-			array('input' => '', 'output' => false),
-		);
+		return [
+			['input' => 'true', 'output' => true],
+			['input' => 'false', 'output' => false],
+			['input' => 'asdf', 'output' => false],
+			['input' => '', 'output' => false],
+		];
 	}
 
 	/**

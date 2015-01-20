@@ -37,7 +37,7 @@ class FlashMessageSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addErrorFlashTwig($template, $parameters = array()) {
+	public function addErrorFlashTwig($template, $parameters = []) {
 		/** @Ignore */
 		$translatedTemplate = $this->translator->trans($template);
 		$message = $this->twigEnvironment->render($translatedTemplate, $parameters);
@@ -48,7 +48,7 @@ class FlashMessageSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addInfoFlashTwig($template, $parameters = array()) {
+	public function addInfoFlashTwig($template, $parameters = []) {
 		/** @Ignore */
 		$translatedTemplate = $this->translator->trans($template);
 		$message = $this->twigEnvironment->render($translatedTemplate, $parameters);
@@ -59,7 +59,7 @@ class FlashMessageSender {
 	 * @param string $template
 	 * @param array $parameters
 	 */
-	public function addSuccessFlashTwig($template, $parameters = array()) {
+	public function addSuccessFlashTwig($template, $parameters = []) {
 		/** @Ignore */
 		$translatedTemplate = $this->translator->trans($template);
 		$message = $this->twigEnvironment->render($translatedTemplate, $parameters);

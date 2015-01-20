@@ -34,10 +34,10 @@ class TransportController extends Controller {
 			$transport = $transportEditFacade->create($transportData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena doprava'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $transport->getName(),
-				'url' => $this->generateUrl('admin_transport_edit', array('id' => $transport->getId())),
-			));
+				'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
+			]);
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
@@ -45,9 +45,9 @@ class TransportController extends Controller {
 			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 
 	/**
@@ -79,10 +79,10 @@ class TransportController extends Controller {
 			$transportEditFacade->edit($transport, $transportData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla upravena doprava'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', array(
+					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $transport->getName(),
-				'url' => $this->generateUrl('admin_transport_edit', array('id' => $transport->getId())),
-			));
+				'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
+			]);
 			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
 		}
 
@@ -94,10 +94,10 @@ class TransportController extends Controller {
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
 		$breadcrumb->replaceLastItem(new MenuItem('Editace dopravy - ' . $transport->getName()));
 
-		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),
 			'transportDetail' => $transportDetailFactory->createDetailForTransport($transport),
-		));
+		]);
 	}
 
 	/**
@@ -114,9 +114,9 @@ class TransportController extends Controller {
 			$transportName = $transportEditFacade->getById($id)->getName();
 			$transportEditFacade->deleteById($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Doprava <strong>{{ name }}</strong> byla smazána', array(
+			$flashMessageSender->addSuccessFlashTwig('Doprava <strong>{{ name }}</strong> byla smazána', [
 				'name' => $transportName,
-			));
+			]);
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
 			$flashMessageSender->addErrorFlash('Zvolená doprava neexistuje.');
 		}
@@ -130,9 +130,9 @@ class TransportController extends Controller {
 
 		$grid = $transportGridFactory->create();
 
-		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', array(
+		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', [
 			'gridView' => $grid->createView(),
-		));
+		]);
 	}
 
 }

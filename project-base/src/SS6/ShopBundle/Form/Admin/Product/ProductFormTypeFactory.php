@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
-use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProductFormTypeFactory {

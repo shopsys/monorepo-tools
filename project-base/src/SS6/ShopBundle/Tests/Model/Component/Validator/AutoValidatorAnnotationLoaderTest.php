@@ -20,9 +20,9 @@ class AutoValidatorAnnotationLoaderTest extends FunctionalTestCase {
 
 		$expected = new ClassMetadata('SS6\ShopBundle\Tests\Model\Component\Validator\DataObject');
 		$expected->addPropertyConstraint('name', new Constraints\NotBlank());
-		$expected->addPropertyConstraint('short', new Constraints\Length(array(
+		$expected->addPropertyConstraint('short', new Constraints\Length([
 			'max' => 100,
-		)));
+		]));
 
 		// load reflection class so that the comparison passes
 		$expected->getReflectionClass();

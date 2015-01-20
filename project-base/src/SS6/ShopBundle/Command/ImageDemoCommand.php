@@ -85,7 +85,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 		$sqls = explode(';', $sqls);
 		$sqls = array_map('trim', $sqls);
 		$sqls = array_filter($sqls);
-		
+
 		$rsm = new ResultSetMapping();
 		foreach ($sqls as $sql) {
 			$this->em->createNativeQuery($sql, $rsm)->execute();

@@ -36,16 +36,16 @@ class CategoryFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', array(
-				'main_constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Prosím vyplňte název')),
-				),
-				'options' => array('required' => false),
-			))
-			->add('parent', 'choice', array(
+			->add('name', 'localized', [
+				'main_constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+				],
+				'options' => ['required' => false],
+			])
+			->add('parent', 'choice', [
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->categories, 'name', array(), null, 'id'),
-			))
+				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
+			])
 			->add('save', 'submit');
 	}
 
@@ -53,10 +53,10 @@ class CategoryFormType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => CategoryData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-		));
+			'attr' => ['novalidate' => 'novalidate'],
+		]);
 	}
 
 }

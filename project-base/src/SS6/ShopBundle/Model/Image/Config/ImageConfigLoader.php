@@ -50,7 +50,7 @@ class ImageConfigLoader {
 		$processor = new Processor();
 
 		$inputConfig = $yamlParser->parse(file_get_contents($filename));
-		$outputConfig = $processor->processConfiguration($imageConfigDefinition, array($inputConfig));
+		$outputConfig = $processor->processConfiguration($imageConfigDefinition, [$inputConfig]);
 
 		$preparedConfig = $this->loadFromArray($outputConfig);
 
@@ -64,8 +64,8 @@ class ImageConfigLoader {
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
 	 */
 	public function loadFromArray($outputConfig) {
-		$this->foundEntityConfigs = array();
-		$this->foundEntityNames = array();
+		$this->foundEntityConfigs = [];
+		$this->foundEntityNames = [];
 
 		foreach ($outputConfig as $entityConfig) {
 			try {
@@ -93,7 +93,7 @@ class ImageConfigLoader {
 		) {
 			throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException($entityName);
 		}
-		
+
 		$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
 		$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
 		$multipleByType = $this->getMultipleByType($entityConfig);
@@ -108,7 +108,7 @@ class ImageConfigLoader {
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[]
 	 */
 	private function prepareSizes($sizesConfig) {
-		$result = array();
+		$result = [];
 		foreach ($sizesConfig as $sizeConfig) {
 			$sizeName = $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_NAME];
 			$key = Condition::ifNull($sizeName, ImageEntityConfig::WITHOUT_NAME_KEY);
@@ -135,7 +135,7 @@ class ImageConfigLoader {
 	 * @return array
 	 */
 	private function prepareTypes($typesConfig) {
-		$result = array();
+		$result = [];
 		foreach ($typesConfig as $typeConfig) {
 			$typeName = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];
 			if (!array_key_exists($typeName, $result)) {
@@ -153,7 +153,7 @@ class ImageConfigLoader {
 	 * @return array
 	 */
 	private function getMultipleByType(array $entityConfig) {
-		$multipleByType = array();
+		$multipleByType = [];
 		$multipleByType[ImageEntityConfig::WITHOUT_NAME_KEY] = $entityConfig[ImageConfigDefinition::CONFIG_MULTIPLE];
 		foreach ($entityConfig[ImageConfigDefinition::CONFIG_TYPES] as $typeConfig) {
 			$type = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];

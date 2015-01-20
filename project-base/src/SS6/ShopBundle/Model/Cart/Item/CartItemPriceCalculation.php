@@ -86,7 +86,7 @@ class CartItemPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[] array indices are preserved
 	 */
 	public function calculatePrices(array $cartItems) {
-		$cartItemPrices = array();
+		$cartItemPrices = [];
 		foreach ($cartItems as $key => $cartItem) {
 			$cartItemPrices[$key] = $this->calculatePrice($cartItem);
 		}

@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Admin\Administrator;
 
-use SS6\ShopBundle\Model\Administrator\AdministratorData;
 use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use SS6\ShopBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -26,56 +26,56 @@ class AdministratorFormType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('username', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím přihlašovací jméno')),
-				)
-			))
-			->add('realName', 'text', array(
-				'constraints' => array(
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím jméno')),
-				)
-			))
-			->add('email', 'email', array(
+			->add('username', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím přihlašovací jméno']),
+				],
+			])
+			->add('realName', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+				],
+			])
+			->add('email', 'email', [
 				'required' => true,
-				'constraints' => array(
-					new Constraints\Email(array('message' => 'Vyplňte prosím platný e-mail')),
-					new Constraints\NotBlank(array('message' => 'Vyplňte prosím e-mail')),
-				)
-			))
-			->add('password', 'repeated', array(
+				'constraints' => [
+					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
+				],
+			])
+			->add('password', 'repeated', [
 				'type' => 'password',
 				'required' => $this->scenario === self::SCENARIO_CREATE,
-				'options' => array(
-					'attr' => array('autocomplete' => 'off'),
-				),
-				'first_options' => array(
-					'constraints' => array(
-						new Constraints\NotBlank(array(
+				'options' => [
+					'attr' => ['autocomplete' => 'off'],
+				],
+				'first_options' => [
+					'constraints' => [
+						new Constraints\NotBlank([
 							'message' => 'Vyplňte prosím heslo',
-							'groups' => array('create'),
-						)),
-						new Constraints\Length(array('min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků')),
-					)
-				),
+							'groups' => ['create'],
+						]),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+					],
+				],
 				'invalid_message' => 'Hesla se neshodují',
-			))
+			])
 			->add('save', 'submit');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => AdministratorData::class,
-			'attr' => array('novalidate' => 'novalidate'),
-			'constraints' => array(
-				new FieldsAreNotIdentical(array(
+			'attr' => ['novalidate' => 'novalidate'],
+			'constraints' => [
+				new FieldsAreNotIdentical([
 					'field1' => 'username',
 					'field2' => 'password',
 					'errorPath' => 'password',
 					'message' => 'Heslo nesmí být stejné jako přihlašovací jméno',
-				)),
-			),
-		));
+				]),
+			],
+		]);
 	}
 
 }

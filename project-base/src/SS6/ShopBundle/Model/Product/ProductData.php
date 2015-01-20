@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use DateTime;
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
-use DateTime;
 
 /**
  * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Product")
@@ -109,11 +109,11 @@ class ProductData {
 	 * @param int $priceCalculationType
 	 */
 	public function __construct(
-		$name = array(),
+		$name = [],
 		$catnum = null,
 		$partno = null,
 		$ean = null,
-		$description = array(),
+		$description = [],
 		$price = null,
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
@@ -121,8 +121,8 @@ class ProductData {
 		$stockQuantity = null,
 		$hidden = false,
 		$availability = null,
-		array $hiddenOnDomains = array(),
-		array $categories = array(),
+		array $hiddenOnDomains = [],
+		array $categories = [],
 		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
 	) {
 		$this->name = $name;

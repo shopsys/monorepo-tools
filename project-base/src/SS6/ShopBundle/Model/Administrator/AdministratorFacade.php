@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
 use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
 use SS6\ShopBundle\Model\Administrator\AdministratorService;
-use SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException;
 
 class AdministratorFacade {
 

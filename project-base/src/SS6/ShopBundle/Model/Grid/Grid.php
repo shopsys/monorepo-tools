@@ -5,9 +5,9 @@ namespace SS6\ShopBundle\Model\Grid;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\Column;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
-use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService;
-use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Model\Grid\GridView;
+use SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface;
+use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -28,12 +28,12 @@ class Grid {
 	/**
 	 * @var \SS6\ShopBundle\Model\Grid\Column[]
 	 */
-	private $columns = array();
+	private $columns = [];
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Grid\ActionColumn[]
 	 */
-	private $actionColumns = array();
+	private $actionColumns = [];
 
 	/**
 	 * @var bool
@@ -43,7 +43,7 @@ class Grid {
 	/**
 	 * @var array
 	 */
-	private $limits = array(30, 100, 200, 500);
+	private $limits = [30, 100, 200, 500];
 
 	/**
 	 * @var int
@@ -93,7 +93,7 @@ class Grid {
 	/**
 	 * @var row
 	 */
-	private $rows = array();
+	private $rows = [];
 
 	/**
 	 * @var \Symfony\Component\HttpFoundation\RequestStack
@@ -469,7 +469,7 @@ class Grid {
 	}
 
 	private function loadFromRequest() {
-		$requestData = $this->requestStack->getMasterRequest()->get(self::GET_PARAMETER, array());
+		$requestData = $this->requestStack->getMasterRequest()->get(self::GET_PARAMETER, []);
 		if (array_key_exists($this->id, $requestData)) {
 			$gridData = $requestData[$this->id];
 			if (array_key_exists('limit', $gridData)) {
@@ -491,7 +491,7 @@ class Grid {
 	 * @return array
 	 */
 	public function getGridParameters($removeParameters = null) {
-		$gridParameters = array();
+		$gridParameters = [];
 		if ($this->isAllowedPaging()) {
 			$gridParameters['limit'] = $this->getLimit();
 			if ($this->getPage() > 1) {
@@ -520,7 +520,7 @@ class Grid {
 			(array)$parameters
 		);
 
-		return array(self::GET_PARAMETER => array($this->getId() => $gridParameters));
+		return [self::GET_PARAMETER => [$this->getId() => $gridParameters]];
 	}
 
 	/**
@@ -565,7 +565,7 @@ class Grid {
 	 * @param int $rowId
 	 */
 	private function loadRowsWithOneRow($rowId) {
-		$this->rows = array($this->dataSource->getOneRow($rowId));
+		$this->rows = [$this->dataSource->getOneRow($rowId)];
 	}
 
 	private function executeTotalQuery() {
