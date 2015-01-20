@@ -37,11 +37,6 @@ class JavascriptTranslateService {
 	private $container;
 
 	/**
-	 * @var array
-	 */
-	private $javascriptLinks = [];
-
-	/**
 	 * @var \Symfony\Component\Filesystem\Filesystem
 	 */
 	private $filesystem;
@@ -55,6 +50,11 @@ class JavascriptTranslateService {
 	 * @var SS6\ShopBundle\Component\Translation\JsTranslator
 	 */
 	private $jsTranslator;
+
+	/**
+	 * @var array
+	 */
+	private $javascriptLinks = [];
 
 	public function __construct(
 		$rootPath,
@@ -115,7 +115,7 @@ class JavascriptTranslateService {
 			return;
 		}
 
-		$this->processExternalJavascripts($javascript);
+		$this->processExternalJavascript($javascript);
 	}
 
 	/**
@@ -131,7 +131,7 @@ class JavascriptTranslateService {
 		}
 
 		if (is_file($sourcePath)) {
-			$this->makeCache($sourcePath, $targetPath);
+			$this->translateJavascriptIntoCacheFile($sourcePath, $targetPath);
 			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($targetPath);
 			return true;
 		}
@@ -147,8 +147,8 @@ class JavascriptTranslateService {
 		$targetPath = null;
 		if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
 			$targetPath = $this->jsTargetPath . $javascript;
+			$targetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $targetPath);
 		}
-		$targetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $targetPath);
 
 		return $targetPath;
 	}
@@ -157,10 +157,10 @@ class JavascriptTranslateService {
 	 * @param string $filename
 	 * @param string $cachedPath
 	 */
-	private function makeCache($filename, $cachedPath) {
+	private function translateJavascriptIntoCacheFile($filename, $cachedPath) {
 		$cachedPathFull = $this->webPath . $cachedPath;
 
-		if (is_file($cachedPathFull) && null === parse_url($filename, PHP_URL_HOST)) {
+		if (is_file($cachedPathFull) && parse_url($filename, PHP_URL_HOST) === null) {
 			$doCopy = filemtime($filename) > filemtime($cachedPathFull);
 		} else {
 			$doCopy = true;
@@ -198,16 +198,15 @@ class JavascriptTranslateService {
 	 * @return bool
 	 */
 	private function processJavascriptByMask($path, $filenameMask) {
-		if ($filenameMask !== '' && strpos($filenameMask, '*') === false) {
-			// non existing file still imports URL to generate 404
+		if (!$this->isMaskValid($filenameMask)) {
 			return false;
 		}
 
-		$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
+		$globMask = $filenameMask === '' ? '*' : $filenameMask;
 		$filesystemPath = $this->jsSourcePath . $path;
 
 		if (is_dir($filesystemPath)) {
-			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
+			$filepaths = (array)glob($filesystemPath . '/' . $globMask);
 			foreach ($filepaths as $filepath) {
 				$javascript = str_replace($this->jsSourcePath, '', $filepath);
 				$this->processJavascriptFile($javascript);
@@ -218,12 +217,18 @@ class JavascriptTranslateService {
 	}
 
 	/**
-	 * @param string $javascriptUrl
+	 * @param string $filenameMask
 	 * @return boolean
 	 */
-	private function processExternalJavascripts($javascriptUrl) {
+	private function isMaskValid($filenameMask) {
+		return $filenameMask === '' || strpos($filenameMask, '*') !== false;
+	}
+
+	/**
+	 * @param string $javascriptUrl
+	 */
+	private function processExternalJavascript($javascriptUrl) {
 		$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($javascriptUrl);
-		return true;
 	}
 
 }
