@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints;
 class ProductEditFormType extends AbstractType {
 
 	const INTENTION = 'product_edit_type';
+	const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Image[]
@@ -130,12 +131,12 @@ class ProductEditFormType extends AbstractType {
 					'constraints' => [
 						new Constraints\NotBlank([
 							'message' => 'Prosím vyplňte cenu',
-							'groups' => ['manualPriceCalculation'],
+							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
 						new Constraints\GreaterThan([
 							'value' => 0,
 							'message' => 'Cena musí být větší než 0',
-							'groups' => ['manualPriceCalculation'],
+							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
 					],
 				]);
@@ -153,7 +154,7 @@ class ProductEditFormType extends AbstractType {
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 
 				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
-					$validationGroups[] = 'manualPriceCalculation';
+					$validationGroups[] = self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION;
 				}
 
 				return $validationGroups;

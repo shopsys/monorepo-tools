@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints;
 
 class BillingAddressFormType extends AbstractType {
 
+	const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
+
 	/**
 	 * @return string
 	 */
@@ -31,7 +33,7 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím název firmy',
-						'groups' => ['companyCustomer'],
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
 			])
@@ -40,7 +42,7 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím IČ',
-						'groups' => ['companyCustomer'],
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
 			])
@@ -61,7 +63,7 @@ class BillingAddressFormType extends AbstractType {
 				/* @var $customerData \SS6\ShopBundle\Model\Customer\CustomerData */
 
 				if ($customerData->companyCustomer) {
-					$validationGroups[] = 'companyCustomer';
+					$validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
 				}
 
 				return $validationGroups;

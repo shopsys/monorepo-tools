@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
 
+	const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
@@ -127,7 +129,7 @@ class ProductFormType extends AbstractType {
 					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
 						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
-						'groups' => 'autoPriceCalculation',
+						'groups' => self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION,
 					]),
 				],
 			])
@@ -186,7 +188,7 @@ class ProductFormType extends AbstractType {
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 
 				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
-					$validationGroups[] = 'autoPriceCalculation';
+					$validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;
 				}
 
 				return $validationGroups;
