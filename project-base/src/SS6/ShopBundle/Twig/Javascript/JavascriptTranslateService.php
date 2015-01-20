@@ -204,12 +204,12 @@ class JavascriptTranslateService {
 		}
 
 		$filenameMask = $filenameMask === '' ? '*' : $filenameMask;
-		$filesystemPath = $this->rootPath . self::JS_FOLDER_SOURCE . $path;
+		$filesystemPath = $this->jsSourcePath . $path;
 
 		if (is_dir($filesystemPath)) {
 			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
-				$javascript = str_replace($this->rootPath . self::JS_FOLDER_SOURCE, '', $filepath);
+				$javascript = str_replace($this->jsSourcePath, '', $filepath);
 				$this->processJavascriptFile($javascript);
 			}
 		}
