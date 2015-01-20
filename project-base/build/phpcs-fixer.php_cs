@@ -1,6 +1,6 @@
 <?php
 
-return Symfony\CS\Config\Config::create()
+$config = Symfony\CS\Config\Config::create()
 	->level(Symfony\CS\FixerInterface::NONE_LEVEL)
 	->fixers([
 		'concat_with_spaces',
@@ -34,3 +34,14 @@ return Symfony\CS\Config\Config::create()
 		'whitespacy_lines',
 	])
 	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\UnusedUseFixer());
+
+// variable $path is available from include from FixCommand::execute()
+if (!is_dir($path) && !is_file($path)) {
+	$files = [];
+	foreach (explode(' ', trim($path)) as $filepath) {
+		$files[] = new \SplFileInfo($filepath);
+	}
+	$config->finder(new \ArrayIterator($files));
+}
+
+return $config;
