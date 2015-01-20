@@ -9,8 +9,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class JavascriptTranslateService {
 
-	const JS_FOLDER_SOURCE = '/src/SS6/ShopBundle/Resources/scripts/';
-	const JS_FOLDER_TARGET = 'assets/scripts/';
 	const NOT_TRANSLATED_FOLDER = '/plugins/';
 
 	/**
