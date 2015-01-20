@@ -15,7 +15,6 @@ class PricingGroupSettingsFormType extends AbstractType {
 	 */
 	private $pricingGroups;
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */

@@ -36,7 +36,6 @@ class CustomerIdentifierFactory {
 		}
 	}
 
-
 	/**
 	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */

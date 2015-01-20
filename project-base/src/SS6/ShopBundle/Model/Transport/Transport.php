@@ -67,7 +67,6 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 */
 	private $position;
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */

@@ -24,7 +24,6 @@ class PaymentVisibilityCalculation {
 		$this->independentTransportVisibilityCalculation = $independentTransportVisibilityCalculation;
 	}
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]

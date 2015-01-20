@@ -15,7 +15,6 @@ class CurrencyDomainSettingsFormType extends AbstractType {
 	 */
 	private $currencies;
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
 	 */

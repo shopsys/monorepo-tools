@@ -5,8 +5,11 @@ return Symfony\CS\Config\Config::create()
 	->fixers([
 		'concat_with_spaces',
 		'elseif',
+		'extra_empty_lines',
 		'function_call_space',
 		'function_declaration',
+		'line_after_namespace',
+		'linefeed',
 		'lowercase_constants',
 		'lowercase_keywords',
 		'method_argument_space',
@@ -28,4 +31,5 @@ return Symfony\CS\Config\Config::create()
 		'standardize_not_equal',
 		'ternary_spaces',
 		'trailing_spaces',
+		'whitespacy_lines',
 	]);

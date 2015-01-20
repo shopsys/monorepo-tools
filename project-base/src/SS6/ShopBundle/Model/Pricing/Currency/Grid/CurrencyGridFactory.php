@@ -27,7 +27,6 @@ class CurrencyGridFactory implements GridFactoryInterface {
 	 */
 	private $currencyFacade;
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Grid\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Grid\GridFactory $gridFactory

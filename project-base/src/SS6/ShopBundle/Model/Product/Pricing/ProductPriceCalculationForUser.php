@@ -34,7 +34,6 @@ class ProductPriceCalculationForUser {
 		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup

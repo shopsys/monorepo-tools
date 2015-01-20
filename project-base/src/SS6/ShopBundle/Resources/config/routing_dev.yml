@@ -3,7 +3,7 @@ front_error_page:
   defaults: { _controller: SS6ShopBundle:Front\Error:errorPage}
   requirements:
     code: \d+
-    
+
 front_error_page_format:
   pattern: /_error/{code}/{_format}/
   defaults: { _controller: SS6ShopBundle:Front\Error:errorPage}

@@ -33,7 +33,7 @@ class FileUploadController extends Controller {
 			try {
 				$temporaryFilename = $fileUpload->upload($file);
 				$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
-				
+
 				$actionResult = [
 					'status' => 'success',
 					'filename' => $temporaryFilename,

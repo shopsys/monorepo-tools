@@ -56,5 +56,4 @@ class ProductEditData {
 		$this->manualInputPrices = $manualInputPrices;
 	}
 
-
 }

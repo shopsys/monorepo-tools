@@ -6,7 +6,6 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;

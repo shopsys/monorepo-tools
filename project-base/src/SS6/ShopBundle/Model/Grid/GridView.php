@@ -119,7 +119,7 @@ class GridView {
 		} else {
 			$formHtml = null;
 		}
-			
+
 		if ($row !== null) {
 			$value = $this->getCellValue($column, $row);
 		} else {

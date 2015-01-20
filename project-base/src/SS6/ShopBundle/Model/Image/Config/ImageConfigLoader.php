@@ -93,7 +93,7 @@ class ImageConfigLoader {
 		) {
 			throw new \SS6\ShopBundle\Model\Image\Config\Exception\DuplicateEntityNameException($entityName);
 		}
-		
+
 		$types = $this->prepareTypes($entityConfig[ImageConfigDefinition::CONFIG_TYPES]);
 		$sizes = $this->prepareSizes($entityConfig[ImageConfigDefinition::CONFIG_SIZES]);
 		$multipleByType = $this->getMultipleByType($entityConfig);

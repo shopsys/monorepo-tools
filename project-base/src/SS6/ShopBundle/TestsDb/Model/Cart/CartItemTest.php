@@ -12,7 +12,6 @@ use SS6\ShopBundle\Model\Product\ProductData;
 
 class CartItemTest extends DatabaseTestCase {
 
-
 	public function testIsSimilarItemAs() {
 		$em = $this->getEntityManager();
 

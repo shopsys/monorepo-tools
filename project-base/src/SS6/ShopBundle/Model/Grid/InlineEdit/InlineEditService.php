@@ -130,7 +130,7 @@ class InlineEditService {
 		} else {
 			$gridView = $grid->createViewWithOneRow($rowId);
 		}
-		
+
 		return $gridView->renderBlock('grid_row', $this->getFormRowTemplateParameters($grid, $form), false);
 	}
 

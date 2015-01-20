@@ -54,7 +54,6 @@ class CategoryDataFixture extends AbstractReferenceFixture {
 		$categoryData->name = ['cs' => 'Hračky a další', 'en' => null];
 		$this->createCategory($manager, self::TOYS, $categoryData);
 
-
 		$manager->flush();
 	}
 
