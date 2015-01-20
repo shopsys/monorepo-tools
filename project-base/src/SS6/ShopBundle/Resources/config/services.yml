@@ -19,9 +19,11 @@ parameters:
   ss6.image_dir: %ss6.web_dir%/assets/content/images
   ss6.image_url_prefix: /assets/content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
+  ss6.javascript_sources_dir: %ss6.resources_dir%/scripts/
+  ss6.javascript_cache_url_prefix: /assets/scripts/
   ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
-  ss6.web_dir: %kernel.root_dir%/../web
   ss6.root_dir: %kernel.root_dir%/..
+  ss6.web_dir: %kernel.root_dir%/../web
   translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
@@ -371,6 +373,10 @@ services:
   ss6.shop.localization.translation.translation_edit_facade:
     class: SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
     arguments: [%kernel.root_dir%, %kernel.cache_dir%]
+
+  ss6.shop.twig.javascript.javascript_translate_service:
+    class: SS6\ShopBundle\Twig\Javascript\JavascriptTranslateService
+    arguments: [%ss6.root_dir%, %ss6.web_dir%, %ss6.javascript_sources_dir%, %ss6.javascript_cache_url_prefix%,  @service_container]
 
   ss6.shop.mail.mail_template_facade:
     class: SS6\ShopBundle\Model\Mail\MailTemplateFacade
