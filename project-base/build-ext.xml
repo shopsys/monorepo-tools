@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shopsys6">
 
-	<target name="standards-diff" depends="phplint-diff,phpcs-diff,phpmd-diff" />
+	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint,test-db-demo,tests,tests-db,tests-crawler" />
 
 	<target name="diff-files">
 		<exec
@@ -56,6 +56,67 @@
 					<arg value="--encoding=utf-8"/>
 					<arg value="-sp"/>
 					<arg line="${diff.files.phpcs}"/>
+				</exec>
+			</then>
+		</if>
+	</target>
+
+	<target name="phpcs-fixer-diff" depends="diff-files">
+		<property name="diff.files.phpcs-fixer" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
+			</filterchain>
+		</property>
+
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs-fixer}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phpcs-fixer.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="fix" />
+					<arg value="--config-file=${path.phpcs-fixer.configuration}" />
+					<arg value="--dry-run" />
+					<arg value="--verbose" />
+					<arg value="--diff" />
+					<arg path="${diff.files.phpcs-fixer}"/>
+				</exec>
+			</then>
+		</if>
+	</target>
+
+	<target name="phpcs-fixer-fix-diff" depends="diff-files">
+		<property name="diff.files.phpcs-fixer" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
+			</filterchain>
+		</property>
+
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs-fixer}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phpcs-fixer.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="fix" />
+					<arg value="--config-file=${path.phpcs-fixer.configuration}" />
+					<arg value="--verbose" />
+					<arg value="--diff" />
+					<arg path="${diff.files.phpcs-fixer}"/>
 				</exec>
 			</then>
 		</if>
