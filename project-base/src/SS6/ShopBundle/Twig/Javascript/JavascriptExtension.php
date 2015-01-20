@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace SS6\ShopBundle\Twig\Javascript;
 
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Component\Translation\JsTranslator;
