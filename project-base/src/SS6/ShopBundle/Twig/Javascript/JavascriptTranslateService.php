@@ -107,11 +107,11 @@ class JavascriptTranslateService {
 	 * @param string $javascript
 	 */
 	private function process($javascript) {
-		if ($this->processJavascriptFile($javascript)) {
+		if ($this->tryToProcessJavascriptFile($javascript)) {
 			return;
 		}
 
-		if ($this->processJavascriptDirectoryMask($javascript)) {
+		if ($this->tryToProcessJavascriptDirectoryMask($javascript)) {
 			return;
 		}
 
@@ -122,7 +122,7 @@ class JavascriptTranslateService {
 	 * @param string $javascript
 	 * @return boolean
 	 */
-	private function processJavascriptFile($javascript) {
+	private function tryToProcessJavascriptFile($javascript) {
 		$sourcePath = $this->jsSourcePath . $javascript;
 		$targetPath = $this->getTargetPath($javascript);
 
@@ -184,10 +184,16 @@ class JavascriptTranslateService {
 	 * @param string $directoryMask
 	 * @return boolean
 	 */
-	private function processJavascriptDirectoryMask($directoryMask) {
+	private function tryToProcessJavascriptDirectoryMask($directoryMask) {
 		$parts = explode('/', $directoryMask);
-		$filenameMask = array_pop($parts);
+		$mask = array_pop($parts);
 		$path = implode('/', $parts);
+
+		if (!$this->isMaskValid($mask)) {
+			return false;
+		}
+
+		$filenameMask = $mask === '' ? '*' : $mask;
 
 		return $this->processJavascriptByMask($path, $filenameMask);
 	}
@@ -198,18 +204,13 @@ class JavascriptTranslateService {
 	 * @return bool
 	 */
 	private function processJavascriptByMask($path, $filenameMask) {
-		if (!$this->isMaskValid($filenameMask)) {
-			return false;
-		}
-
-		$globMask = $filenameMask === '' ? '*' : $filenameMask;
 		$filesystemPath = $this->jsSourcePath . $path;
 
 		if (is_dir($filesystemPath)) {
-			$filepaths = (array)glob($filesystemPath . '/' . $globMask);
+			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
 				$javascript = str_replace($this->jsSourcePath, '', $filepath);
-				$this->processJavascriptFile($javascript);
+				$this->tryToProcessJavascriptFile($javascript);
 			}
 		}
 
