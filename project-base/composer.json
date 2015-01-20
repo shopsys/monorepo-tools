@@ -31,7 +31,7 @@
 		"intervention/image": "2.0.17",
 		"jms/translation-bundle": "dev-master",
 		"kutny/autowiring-bundle": "1.0",
-		"phing/phing": "2.8.2",
+		"phing/phing": "2.9.1",
 		"phpunit/phpunit": "4.1.*",
 		"prezent/doctrine-translatable-bundle": "dev-master",
 		"raulfraile/ladybug-bundle": "~1.0",
