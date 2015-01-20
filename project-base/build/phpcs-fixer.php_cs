@@ -32,4 +32,5 @@ return Symfony\CS\Config\Config::create()
 		'ternary_spaces',
 		'trailing_spaces',
 		'whitespacy_lines',
-	]);
+	])
+	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\UnusedUseFixer());

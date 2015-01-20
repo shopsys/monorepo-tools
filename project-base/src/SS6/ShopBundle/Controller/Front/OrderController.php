@@ -3,9 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\OrderConfirmationTextFacade;
 use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;

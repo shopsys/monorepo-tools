@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Slider\SliderItem;
 
 class SliderItemRepository {
