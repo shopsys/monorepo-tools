@@ -1,0 +1,13 @@
+{% macro list(product) %}
+	
+	{% if product.flags %}
+		{% for productFlag in product.flags %}
+			<dl>
+				<dt style="background-color: {{ productFlag.rgbColor }};">
+					{{ productFlag.name }}
+				</dt>
+			</dl>
+		{% endfor %}
+	{% endif %}
+	
+{% endmacro %}

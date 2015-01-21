@@ -1,4 +1,5 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
+{% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 
 {% block title %}
 	- {{ productDetail.product.name }}
@@ -8,6 +9,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-6">
 			<div class="product-image">
+				{{ productFlags.list(productDetail.product) }}
 				<span>
 					{% if imageExists(productDetail.product) %}
 						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-gallery-main">
