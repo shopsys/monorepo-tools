@@ -60,6 +60,7 @@ class FlagGridFactory implements GridFactoryInterface {
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('name', 'at.name', $this->translator->trans('Název'), true);
+		$grid->addColumn('rgbColor', 'a.rgbColor', $this->translator->trans('Barva'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(

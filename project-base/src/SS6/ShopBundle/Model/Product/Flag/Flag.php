@@ -32,11 +32,19 @@ class Flag extends AbstractTranslatableEntity {
 	protected $translations;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=7)
+	 */
+	private $rgbColor;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
 	public function __construct(FlagData $flagData) {
 		$this->translations = new ArrayCollection();
 		$this->setTranslations($flagData->name);
+		$this->rgbColor = $flagData->rgbColor;
 	}
 
 	/**
@@ -52,6 +60,13 @@ class Flag extends AbstractTranslatableEntity {
 	 */
 	public function getName($locale = null) {
 		return $this->translation($locale)->getName();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRgbColor() {
+		return $this->rgbColor;
 	}
 
 	/**
@@ -75,6 +90,7 @@ class Flag extends AbstractTranslatableEntity {
 	 */
 	public function edit(FlagData $flagData) {
 		$this->setTranslations($flagData->name);
+		$this->rgbColor = $flagData->rgbColor;
 	}
 
 }

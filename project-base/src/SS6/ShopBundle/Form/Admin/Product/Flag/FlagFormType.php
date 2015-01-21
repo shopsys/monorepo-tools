@@ -31,6 +31,12 @@ class FlagFormType extends AbstractType {
 						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název příznaku nesmí být delší než {{ limit }} znaků']),
 					],
 				],
+			])
+			->add('rgbColor', 'text', [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím barvu příznaku']),
+					new Constraints\Length(['max' => 7, 'maxMessage' => 'Barva příznaku nesmí být delší než {{ limit }} znaků']),
+				],
 			]);
 	}
 
