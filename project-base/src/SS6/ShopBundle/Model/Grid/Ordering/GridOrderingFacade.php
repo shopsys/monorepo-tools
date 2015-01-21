@@ -27,7 +27,7 @@ class GridOrderingFacade {
 	 * @param array $rowIds
 	 */
 	public function saveOrdering($entityClass, array $rowIds) {
-		$entityRepository = $this->em->getRepository($entityClass);
+		$entityRepository = $this->getEntityRepository($entityClass);
 		$position = 0;
 
 		foreach ($rowIds as $rowId) {
@@ -36,6 +36,19 @@ class GridOrderingFacade {
 		}
 
 		$this->em->flush();
+	}
+
+	/**
+	 * @param string $entityClass
+	 * @return mixed
+	 */
+	private function getEntityRepository($entityClass) {
+		$interfaces = class_implements($entityClass);
+		if (isset($interfaces[OrderableEntityInterface::class])) {
+			return $this->em->getRepository($entityClass);
+		} else {
+			throw new \SS6\ShopBundle\Model\Grid\Ordering\Exception\EntityIsNotOrderableException();
+		}
 	}
 
 }
