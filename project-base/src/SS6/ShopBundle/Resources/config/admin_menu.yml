@@ -134,6 +134,9 @@
         - label: 'Dostupnost'
           route: admin_availability_list
 
+        - label: 'Příznaky'
+          route: admin_flag_list
+
         - label: 'Parametry'
           route: admin_parameter_list
 
