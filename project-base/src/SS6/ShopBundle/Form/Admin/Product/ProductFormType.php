@@ -125,7 +125,10 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte cenu', 'groups' => 'autoPriceCalculation']),
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyplňte cenu',
+						'groups' => self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION,
+					]),
 					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
 						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
