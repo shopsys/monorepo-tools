@@ -79,6 +79,11 @@ class ProductData {
 	/**
 	 * @var array
 	 */
+	public $flags;
+
+	/**
+	 * @var array
+	 */
 	public $hiddenOnDomains;
 
 	/**
@@ -104,6 +109,7 @@ class ProductData {
 	 * @param string|null $stockQuantity
 	 * @param bool $hidden
 	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
+	 * @param array $flags
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
 	 * @param int $priceCalculationType
@@ -121,6 +127,7 @@ class ProductData {
 		$stockQuantity = null,
 		$hidden = false,
 		$availability = null,
+		array $flags = [],
 		array $hiddenOnDomains = [],
 		array $categories = [],
 		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
@@ -137,6 +144,7 @@ class ProductData {
 		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
 		$this->availability = $availability;
+		$this->flags = $flags;
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $categories;
 		$this->priceCalculationType = $priceCalculationType;
@@ -166,6 +174,7 @@ class ProductData {
 		$this->sellingTo = $product->getSellingTo();
 		$this->stockQuantity = $product->getStockQuantity();
 		$this->availability = $product->getAvailability();
+		$this->flags = $product->getFlags()->toArray();
 		$this->hidden = $product->isHidden();
 		$hiddenOnDomains = [];
 		foreach ($productDomains as $productDomain) {
