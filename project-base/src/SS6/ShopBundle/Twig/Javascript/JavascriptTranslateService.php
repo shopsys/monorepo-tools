@@ -24,7 +24,7 @@ class JavascriptTranslateService {
 	/**
 	 * @var string
 	 */
-	private $jsTargetPath;
+	private $jsUrlPrefix;
 
 	/**
 	 * @var string
@@ -47,7 +47,7 @@ class JavascriptTranslateService {
 	private $domain;
 
 	/**
-	 * @var SS6\ShopBundle\Component\Translation\JsTranslator
+	 * @var \SS6\ShopBundle\Component\Translation\JsTranslator
 	 */
 	private $jsTranslator;
 
@@ -60,7 +60,7 @@ class JavascriptTranslateService {
 		$rootPath,
 		$webPath,
 		$jsSourcePath,
-		$jsTargetPath,
+		$jsUrlPrefix,
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		Domain $domain,
@@ -69,7 +69,7 @@ class JavascriptTranslateService {
 		$this->rootPath = $rootPath;
 		$this->webPath = $webPath;
 		$this->jsSourcePath = $jsSourcePath;
-		$this->jsTargetPath = $jsTargetPath;
+		$this->jsUrlPrefix = $jsUrlPrefix;
 		$this->container = $container;
 		$this->filesystem = $filesystem;
 		$this->domain = $domain;
@@ -123,16 +123,16 @@ class JavascriptTranslateService {
 	 * @return boolean
 	 */
 	private function tryToProcessJavascriptFile($javascript) {
-		$sourcePath = $this->jsSourcePath . $javascript;
-		$targetPath = $this->getTargetPath($javascript);
+		$sourcePath = $this->jsSourcePath . '/' . $javascript;
+		$relativeTargetPath = $this->getRelativeTargetPath($javascript);
 
-		if ($targetPath === null) {
+		if ($relativeTargetPath === null) {
 			return false;
 		}
 
 		if (is_file($sourcePath)) {
-			$this->translateJavascriptIntoCacheFile($sourcePath, $targetPath);
-			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($targetPath);
+			$this->translateJavascriptIntoCacheFile($sourcePath, $relativeTargetPath);
+			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($relativeTargetPath);
 			return true;
 		}
 
@@ -143,24 +143,28 @@ class JavascriptTranslateService {
 	 * @param string $javascript
 	 * @return string
 	 */
-	private function getTargetPath($javascript) {
-		$targetPath = null;
+	private function getRelativeTargetPath($javascript) {
+		$relavitveTargetPath = null;
 		if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
-			$targetPath = $this->jsTargetPath . $javascript;
-			$targetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $targetPath);
+			$relavitveTargetPath = substr($this->jsUrlPrefix, 1) . $javascript;
+			if (strpos($relavitveTargetPath, '/') === 0) {
+				$relavitveTargetPath = substr($relavitveTargetPath, 1);
+			}
+
+			$relavitveTargetPath = str_replace('/scripts/', '/scripts/' . $this->domain->getLocale() . '/', $relavitveTargetPath);
 		}
 
-		return $targetPath;
+		return $relavitveTargetPath;
 	}
 
 	/**
 	 * @param string $sourceFilename
-	 * @param string $cachedPath
+	 * @param string $relativeTargetPath
 	 */
-	private function translateJavascriptIntoCacheFile($sourceFilename, $cachedPath) {
-		$cachedPathFull = $this->webPath . $cachedPath;
+	private function translateJavascriptIntoCacheFile($sourceFilename, $relativeTargetPath) {
+		$targetPathFull = $this->webPath . '/' . $relativeTargetPath;
 
-		if (!$this->isCachedFileFresh($cachedPathFull, $sourceFilename)) {
+		if (!$this->isCachedFileFresh($targetPathFull, $sourceFilename)) {
 			$content = file_get_contents($sourceFilename);
 
 			if (strpos($sourceFilename, self::NOT_TRANSLATED_FOLDER) === false) {
@@ -169,8 +173,8 @@ class JavascriptTranslateService {
 				$newContent = $content;
 			}
 
-			$this->filesystem->mkdir(dirname($cachedPathFull));
-			$this->filesystem->dumpFile($cachedPathFull, $newContent);
+			$this->filesystem->mkdir(dirname($targetPathFull));
+			$this->filesystem->dumpFile($targetPathFull, $newContent);
 		}
 	}
 
@@ -212,12 +216,12 @@ class JavascriptTranslateService {
 	 * @return bool
 	 */
 	private function processJavascriptByMask($path, $filenameMask) {
-		$filesystemPath = $this->jsSourcePath . $path;
+		$filesystemPath = $this->jsSourcePath . '/' . $path;
 
 		if (is_dir($filesystemPath)) {
 			$filepaths = (array)glob($filesystemPath . '/' . $filenameMask);
 			foreach ($filepaths as $filepath) {
-				$javascript = str_replace($this->jsSourcePath, '', $filepath);
+				$javascript = str_replace($this->jsSourcePath . '/', '', $filepath);
 				$this->tryToProcessJavascriptFile($javascript);
 			}
 		}
