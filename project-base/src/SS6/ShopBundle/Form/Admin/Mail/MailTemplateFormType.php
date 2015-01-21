@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints;
 
 class MailTemplateFormType extends AbstractType {
 
+	const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
+
 	/**
 	 * @return string
 	 */
@@ -30,7 +32,7 @@ class MailTemplateFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím předmět',
-						'groups' => ['sendMail'],
+						'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
 					]),
 				],
 			])
@@ -41,7 +43,7 @@ class MailTemplateFormType extends AbstractType {
 						'constraints' => [
 							new Constraints\NotBlank([
 								'message' => 'Vyplňte prosím text emailu',
-								'groups' => ['sendMail'],
+								'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
 							]),
 						],
 					])
@@ -65,7 +67,7 @@ class MailTemplateFormType extends AbstractType {
 				/* @var $mailTemplateData \SS6\ShopBundle\Model\Mail\MailTemplateData */
 
 				if ($mailTemplateData->sendMail) {
-					$validationGroups[] = 'sendMail';
+					$validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;
 				}
 
 				return $validationGroups;

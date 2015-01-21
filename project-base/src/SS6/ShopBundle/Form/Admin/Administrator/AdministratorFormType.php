@@ -53,7 +53,7 @@ class AdministratorFormType extends AbstractType {
 					'constraints' => [
 						new Constraints\NotBlank([
 							'message' => 'Vyplňte prosím heslo',
-							'groups' => ['create'],
+							'groups' => [self::SCENARIO_CREATE],
 						]),
 						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
 					],

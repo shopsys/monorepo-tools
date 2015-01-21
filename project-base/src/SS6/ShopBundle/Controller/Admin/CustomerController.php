@@ -153,7 +153,7 @@ class CustomerController extends Controller {
 		$form = $this->createForm(
 			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
 			null,
-			['validation_groups' => ['Default', 'create']]
+			['validation_groups' => ['Default', CustomerFormType::SCENARIO_CREATE]]
 		);
 
 		try {

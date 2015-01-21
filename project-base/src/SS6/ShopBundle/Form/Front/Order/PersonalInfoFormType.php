@@ -9,6 +9,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class PersonalInfoFormType extends AbstractType {
+
+	const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
+	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
+
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
@@ -43,7 +47,7 @@ class PersonalInfoFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím název firmy',
-						'groups' => ['companyCustomer'],
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
 			])
@@ -52,7 +56,7 @@ class PersonalInfoFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím IČ',
-						'groups' => ['companyCustomer'],
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
 			])
@@ -81,7 +85,7 @@ class PersonalInfoFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím ulici',
-						'groups' => ['differentDeliveryAddress'],
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
 			])
@@ -90,7 +94,7 @@ class PersonalInfoFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím město',
-						'groups' => ['differentDeliveryAddress'],
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
 			])
@@ -99,7 +103,7 @@ class PersonalInfoFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím PSČ',
-						'groups' => ['differentDeliveryAddress'],
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
 			])
@@ -127,10 +131,10 @@ class PersonalInfoFormType extends AbstractType {
 				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
 
 				if ($orderData->companyCustomer) {
-					$validationGroups[] = 'companyCustomer';
+					$validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
 				}
 				if ($orderData->deliveryAddressFilled) {
-					$validationGroups[] = 'differentDeliveryAddress';
+					$validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
 				}
 
 				return $validationGroups;

@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints;
 
 class DeliveryAddressFormType extends AbstractType {
 
+	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
+
 	/**
 	 * @return string
 	 */
@@ -33,7 +35,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím ulici',
-						'groups' => ['differentDeliveryAddress'],
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
 			])
@@ -42,7 +44,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím město',
-						'groups' => ['differentDeliveryAddress'],
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
 			])
@@ -51,7 +53,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím PSČ',
-						'groups' => ['differentDeliveryAddress'],
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
 			]);
@@ -68,7 +70,7 @@ class DeliveryAddressFormType extends AbstractType {
 				/* @var $deliveryAddressData \SS6\ShopBundle\Model\Customer\DeliveryAddressData */
 
 				if ($deliveryAddressData->addressFilled) {
-					$validationGroups[] = 'differentDeliveryAddress';
+					$validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
 				}
 
 				return $validationGroups;

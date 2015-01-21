@@ -81,7 +81,7 @@ class UserFormType extends AbstractType {
 					'constraints' => [
 						new Constraints\NotBlank([
 							'message' => 'Vyplňte prosím heslo',
-							'groups' => ['create'],
+							'groups' => [CustomerFormType::SCENARIO_CREATE],
 						]),
 						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
 					],
