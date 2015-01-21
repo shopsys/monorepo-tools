@@ -154,22 +154,16 @@ class JavascriptTranslateService {
 	}
 
 	/**
-	 * @param string $filename
+	 * @param string $sourceFilename
 	 * @param string $cachedPath
 	 */
-	private function translateJavascriptIntoCacheFile($filename, $cachedPath) {
+	private function translateJavascriptIntoCacheFile($sourceFilename, $cachedPath) {
 		$cachedPathFull = $this->webPath . $cachedPath;
 
-		if (is_file($cachedPathFull) && parse_url($filename, PHP_URL_HOST) === null) {
-			$doCopy = filemtime($filename) > filemtime($cachedPathFull);
-		} else {
-			$doCopy = true;
-		}
+		if (!$this->isCachedFileFresh($cachedPathFull, $sourceFilename)) {
+			$content = file_get_contents($sourceFilename);
 
-		if ($doCopy) {
-			$content = file_get_contents($filename);
-
-			if (strpos($filename, self::NOT_TRANSLATED_FOLDER) === false) {
+			if (strpos($sourceFilename, self::NOT_TRANSLATED_FOLDER) === false) {
 				$newContent = $this->jsTranslator->translate($content);
 			} else {
 				$newContent = $content;
@@ -178,6 +172,20 @@ class JavascriptTranslateService {
 			$this->filesystem->mkdir(dirname($cachedPathFull));
 			$this->filesystem->dumpFile($cachedPathFull, $newContent);
 		}
+	}
+
+	/**
+	 * @param string $cachedPathFull
+	 * @param string $sourceFilename
+	 * @return boolean
+	 */
+	private function isCachedFileFresh($cachedPathFull, $sourceFilename) {
+		if (is_file($cachedPathFull) && parse_url($sourceFilename, PHP_URL_HOST) === null) {
+			$isCachedFileFresh = filemtime($sourceFilename) < filemtime($cachedPathFull);
+		} else {
+			$isCachedFileFresh = false;
+		}
+		return $isCachedFileFresh;
 	}
 
 	/**
