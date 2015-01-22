@@ -39,3 +39,8 @@ front_order_save_form:
   pattern: /order/save-form/
   defaults: { _controller: SS6ShopBundle:Front\Order:saveOrderForm }
   methods: [POST]
+
+front_search_autocomplete:
+  pattern: /search/autocomplete/
+  defaults: { _controller: SS6ShopBundle:Front\Search:autocomplete }
+  methods: [POST]
