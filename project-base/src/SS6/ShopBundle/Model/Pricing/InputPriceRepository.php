@@ -118,7 +118,7 @@ class InputPriceRepository {
 	/**
 	 * @param string $toInputPriceType
 	 */
-	private function recalculateTransportsInputPriceForNewType($toInputPriceType) {
+	private function recalculatePaymentsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Payment::class, 'p')
@@ -143,7 +143,7 @@ class InputPriceRepository {
 	/**
 	 * @param string $toInputPriceType
 	 */
-	private function recalculatePaymentsInputPriceForNewType($toInputPriceType) {
+	private function recalculateTransportsInputPriceForNewType($toInputPriceType) {
 		$query = $this->em->createQueryBuilder()
 			->select('t')
 			->from(Transport::class, 't')
