@@ -28,31 +28,28 @@
 							{% endif %}
 							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
 
-							<div class="row">
-								<div class="col-xs-12 col-lg-10">
-									<div class="table-responsive grid_body">
-										<table class="table table-striped table-hover">
-											<thead>
-												<tr class="grid-row-titles">
-													<th>
-														{{ 'Použitelné proměnné'|trans }}
-														{% if variablesInfoText is not null %}
-															<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
-														{% endif %}
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												{% for key in variables %}
-													<tr class="grid-row-cells">
-														<td>{{ key }}</td>
-														<td>{{ variablesLabels[key] }}</td>
-													</tr>
-												{% endfor %}
-											</tbody>
-										</table>
-									</div>
-								</div>
+							<div class="table-responsive grid_body mt-1">
+								<table class="table table-desc table-hover">
+									<thead>
+										<tr class="grid-row-titles">
+											<th>
+												{{ 'Použitelné proměnné'|trans }}
+												{% if variablesInfoText is not null %}
+													<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+												{% endif %}
+											</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for key in variables %}
+											<tr class="grid-row-cells">
+												<td>{{ key }}</td>
+												<td>{{ variablesLabels[key] }}</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
 							</div>
 						</div>
 				</div>
