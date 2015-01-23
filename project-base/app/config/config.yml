@@ -26,6 +26,7 @@ twig:
       - '@SS6Shop/Common/Form/fileuploadFields.html.twig'
       - '@SS6Shop/Common/Form/theme.html.twig'
       - '@SS6Shop/Admin/Form/datepickerFields.html.twig'
+      - '@SS6Shop/Admin/Form/colorpickerFields.html.twig'
   strict_variables: "%kernel.debug%"
   globals:
     globalMultipleFormSetting: @ss6.shop.form.multiple_form_setting

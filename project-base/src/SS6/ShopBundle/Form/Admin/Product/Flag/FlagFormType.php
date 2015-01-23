@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Flag;
 
+use SS6\ShopBundle\Form\ColorPickerType;
 use SS6\ShopBundle\Model\Product\Flag\FlagData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,10 +33,13 @@ class FlagFormType extends AbstractType {
 					],
 				],
 			])
-			->add('rgbColor', 'text', [
+			->add('rgbColor', new ColorPickerType(), [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím barvu příznaku']),
-					new Constraints\Length(['max' => 7, 'maxMessage' => 'Barva příznaku nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length([
+						'max' => 7,
+						'maxMessage' => 'Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků'
+					]),
 				],
 			]);
 	}
