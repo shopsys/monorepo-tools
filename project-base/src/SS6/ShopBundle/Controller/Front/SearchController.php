@@ -29,7 +29,7 @@ class SearchController extends Controller {
 				'%totalProductCount%' => $result['totalProductCount']
 			]
 		);
-				
+
 		return new JsonResponse($result);
 	}
 

@@ -123,7 +123,7 @@ class ProductOnCurrentDomainFacade {
 			1,
 			$limit
 		);
-		
+
 		return $this->productSearchService->getSearchAutocompleteData(
 			$paginationResult->getResults(),
 			$paginationResult->getTotalCount()

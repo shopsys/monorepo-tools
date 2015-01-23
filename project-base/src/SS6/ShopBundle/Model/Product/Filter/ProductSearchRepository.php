@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 
 class ProductSearchRepository {
 
@@ -59,5 +59,4 @@ class ProductSearchRepository {
 		return $queryPaginator->getResult($page, $limit);
 	}
 
-	
 }
