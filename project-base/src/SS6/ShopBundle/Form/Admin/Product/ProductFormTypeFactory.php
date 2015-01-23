@@ -54,7 +54,7 @@ class ProductFormTypeFactory {
 	 */
 	public function create() {
 		$vats = $this->vatRepository->findAll();
-		$availabilities = $this->availabilityRepository->findAll();
+		$availabilities = $this->availabilityRepository->findAllOrderedByDeliveryTimeAsc();
 		$categories = $this->categoryRepository->getAll();
 
 		return new ProductFormType(
