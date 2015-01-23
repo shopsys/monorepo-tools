@@ -15,6 +15,7 @@
 	var $listItemTemplate = null;
 	var requestTimer = null;
 	var existResult = false;
+	var searchDataCache = {};
 
 	SS6.search.autocomplete.init = function () {
 		$input = $('#js-search-autocomplete-input');
@@ -42,8 +43,8 @@
 
 	SS6.search.autocomplete.onInputChange = function(event) {
 		clearTimeout(requestTimer);
-		// $input.val() is not modified on paste event, value.length will check in makeRequest() after delay
-		requestTimer = setTimeout(SS6.search.autocomplete.makeRequest, options.requestDelay);
+		// $input.val() is not modified on paste event, value.length will check in search() after delay
+		requestTimer = setTimeout(SS6.search.autocomplete.search, options.requestDelay);
 
 		if ($input.val().length < options.minLength) {
 			existResult = false;
@@ -54,18 +55,31 @@
 		}
 	};
 
-	SS6.search.autocomplete.makeRequest = function () {
-		if ($input.val().length >= options.minLength) {
-			$.ajax({
-				url: $input.data('autocomplete-url'),
-				type: 'post',
-				dataType: 'json',
-				data: {
-					searchText: $input.val()
-				},
-				success: SS6.search.autocomplete.showResult
-			});
+	SS6.search.autocomplete.search = function () {
+		var searchText = $input.val();
+
+		if (searchText.length >= options.minLength) {
+			if (searchDataCache[searchText] !== undefined) {
+				SS6.search.autocomplete.showResult(searchDataCache[searchText]);
+			} else {
+				SS6.search.autocomplete.searchRequest(searchText);
+			}
 		}
+	};
+
+	SS6.search.autocomplete.searchRequest = function (searchText) {
+		$.ajax({
+			url: $input.data('autocomplete-url'),
+			type: 'post',
+			dataType: 'json',
+			data: {
+				searchText: searchText
+			},
+			success: function (responseData) {
+				searchDataCache[searchText] = responseData;
+				SS6.search.autocomplete.showResult(responseData);
+			}
+		});
 	};
 
 	SS6.search.autocomplete.showResult = function(responseData) {
