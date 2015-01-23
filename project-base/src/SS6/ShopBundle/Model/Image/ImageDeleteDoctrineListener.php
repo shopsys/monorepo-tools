@@ -96,7 +96,7 @@ class ImageDeleteDoctrineListener {
 		$entityName = $image->getEntityName();
 		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
 		foreach ($imageConfig->getSizes() as $size) {
-			$filepath = $this->getImageLocator()->getAbsoluteImageFilepath($image, $size->getName());
+			$filepath = $this->getImageLocator()->getAbsoluteImageFilepathByImage($image, $size->getName());
 			$this->filesystem->remove($filepath);
 		}
 	}

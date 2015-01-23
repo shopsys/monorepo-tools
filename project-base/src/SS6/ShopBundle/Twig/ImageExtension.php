@@ -120,7 +120,7 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function getImageUrlByImage(Image $image, $sizeName = null) {
 		if ($this->imageLocator->imageExists($image, $sizeName)) {
-			$relativeFilepath = $this->imageLocator->getRelativeImageFilepath($image, $sizeName);
+			$relativeFilepath = $this->imageLocator->getRelativeImageFilepathByImage($image, $sizeName);
 		} else {
 			$relativeFilepath = self::NOIMAGE_FILENAME;
 		}
