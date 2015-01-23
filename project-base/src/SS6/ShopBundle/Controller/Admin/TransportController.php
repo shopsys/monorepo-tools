@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Transport\TransportData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,21 +16,22 @@ class TransportController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
-		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
-		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
-		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+		$transportEditFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_edit_form_type_factory');
+		/* @var $transportEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory */
+		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
+		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		$transportEditDataFactory = $this->get('ss6.shop.transport.transport_edit_data_factory');
+		/* @var $transportEditDataFactory \SS6\ShopBundle\Model\Transport\TransportEditDataFactory */
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
-		$transportData = new TransportData();
-		$transportData->vat = $vatFacade->getDefaultVat();
+		$transportEditData = $transportEditDataFactory->createDefault();
 
-		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
+		$form = $this->createForm($transportEditFormTypeFactory->create(), $transportEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
-			/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-			$transport = $transportEditFacade->create($transportData);
+			$transport = $transportEditFacade->create($form->getData());
 
 			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
@@ -47,6 +47,7 @@ class TransportController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', [
 			'form' => $form->createView(),
+			'currencies' => $currencyFacade->getAllIndexedById()
 		]);
 	}
 
@@ -60,23 +61,25 @@ class TransportController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		$transportFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_form_type_factory');
-		/* @var $transportFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory */
+		$transportEditFormTypeFactory = $this->get('ss6.shop.form.admin.transport.transport_edit_form_type_factory');
+		/* @var $transportEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory */
 		$transportDetailFactory = $this->get('ss6.shop.transport.transport_detail_factory');
 		/* @var $transportDetailFactory \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory */
+		$transportEditDataFactory = $this->get('ss6.shop.transport.transport_edit_data_factory');
+		/* @var $transportEditDataFactory \SS6\ShopBundle\Model\Transport\TransportEditDataFactory */
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
 		$transport = $transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
-		$transportDomains = $transportEditFacade->getTransportDomainsByTransport($transport);
 
-		$transportData = new TransportData();
-		$transportData->setFromEntity($transport, $transportDomains);
+		$transportEditData = $transportEditDataFactory->createFromTransport($transport);
 
-		$form = $this->createForm($transportFormTypeFactory->create(), $transportData);
+		$form = $this->createForm($transportEditFormTypeFactory->create(), $transportEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transportEditFacade->edit($transport, $transportData);
+			$transportEditFacade->edit($transport, $transportEditData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla upravena doprava'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
@@ -97,6 +100,7 @@ class TransportController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),
 			'transportDetail' => $transportDetailFactory->createDetailForTransport($transport),
+			'currencies' => $currencyFacade->getAllIndexedById()
 		]);
 	}
 

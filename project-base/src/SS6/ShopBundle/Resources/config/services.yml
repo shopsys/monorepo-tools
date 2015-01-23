@@ -478,6 +478,9 @@ services:
   ss6.shop.payment.payment_detail_factory:
     class: SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
 
+  ss6.shop.payment.payment_edit_data_factory:
+    class: SS6\ShopBundle\Model\Payment\PaymentEditDataFactory
+
   ss6.shop.payment.payment_edit_facade:
     class: SS6\ShopBundle\Model\Payment\PaymentEditFacade
 
@@ -486,6 +489,12 @@ services:
 
   ss6.shop.payment.payment_price_calculation:
     class: SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+
+  ss6.shop.payment.payment_price_edit_facade:
+    class: SS6\ShopBundle\Model\Payment\PaymentPriceEditFacade
+
+  ss6.shop.payment.payment_price_repository:
+    class: SS6\ShopBundle\Model\Payment\PaymentPriceRepository
 
   ss6.shop.payment.payment_visibility_calculation:
     class: SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation
@@ -739,8 +748,17 @@ services:
   ss6.shop.transport.transport_detail_factory:
     class: SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory
 
+  ss6.shop.transport.transport_edit_data_factory:
+    class: SS6\ShopBundle\Model\Transport\TransportEditDataFactory
+
   ss6.shop.transport.transport_edit_facade:
     class: SS6\ShopBundle\Model\Transport\TransportEditFacade
+
+  ss6.shop.transport.transport_price_edit_facade:
+    class: SS6\ShopBundle\Model\Transport\TransportPriceEditFacade
+
+  ss6.shop.transport.transport_price_repository:
+    class: SS6\ShopBundle\Model\Transport\TransportPriceRepository
 
   ss6.shop.transport.transport_repository:
     class: SS6\ShopBundle\Model\Transport\TransportRepository

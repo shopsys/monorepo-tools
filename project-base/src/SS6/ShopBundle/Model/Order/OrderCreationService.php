@@ -111,7 +111,7 @@ class OrderCreationService {
 	 */
 	private function fillOrderTransportAndPayment(Order $order, $locale) {
 		$payment = $order->getPayment();
-		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $order->getCurrency());
 		$orderPayment = new OrderPayment(
 			$order,
 			$payment->getName($locale),
@@ -124,7 +124,7 @@ class OrderCreationService {
 		$order->addItem($orderPayment);
 
 		$transport = $order->getTransport();
-		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $order->getCurrency());
 		$orderTransport = new OrderTransport(
 			$order,
 			$transport->getName($locale),

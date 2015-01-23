@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Tests\Model\Transport;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
@@ -62,10 +64,12 @@ class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$transportPriceCalculation = new TransportPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
+		$currency = new Currency(new CurrencyData());
 
-		$transport = new Transport(new TransportData(['cs' => 'TransportName'], $inputPrice, $vat));
+		$transport = new Transport(new TransportData(['cs' => 'TransportName'], $vat));
+		$transport->setPrice($currency, $inputPrice);
 
-		$price = $transportPriceCalculation->calculatePrice($transport);
+		$price = $transportPriceCalculation->calculatePrice($transport, $currency);
 
 		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));

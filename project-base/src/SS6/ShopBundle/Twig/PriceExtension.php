@@ -48,6 +48,11 @@ class PriceExtension extends Twig_Extension {
 				[$this, 'priceWithCurrencyByDomainIdFilter'],
 				['is_safe' => ['html']]
 			),
+			new Twig_SimpleFilter(
+				'priceWithCurrencyByCurrencyId',
+				[$this, 'priceWithCurrencyByCurrencyIdFilter'],
+				['is_safe' => ['html']]
+			),
 			new Twig_SimpleFilter('priceWithCurrency', [$this, 'priceWithCurrencyFilter'], ['is_safe' => ['html']]),
 			new Twig_SimpleFilter('price', [$this, 'priceFilter'], ['is_safe' => ['html']]),
 			new Twig_SimpleFilter('priceText', [$this, 'priceTextFilter'], ['is_safe' => ['html']]),
@@ -67,6 +72,11 @@ class PriceExtension extends Twig_Extension {
 			new Twig_SimpleFunction(
 				'currencySymbolDefault',
 				[$this, 'getCurrencySymbolDefault'],
+				['is_safe' => ['html']]
+			),
+			new Twig_SimpleFunction(
+				'currencySymbolByCurrencyId',
+				[$this, 'getCurrencySymbolByCurrencyId'],
 				['is_safe' => ['html']]
 			),
 		];
@@ -112,6 +122,15 @@ class PriceExtension extends Twig_Extension {
 		return $price;
 	}
 
+	public function priceWithCurrencyByCurrencyIdFilter($price, $currencyId) {
+		$price = (float)$price;
+		$price = number_format($price, 2, ',', ' ');
+		$currencySymbol = $this->currencyFacade->getById($currencyId)->getSymbol();
+		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+
+		return $price;
+	}
+
 	/**
 	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
@@ -152,6 +171,14 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function getCurrencySymbolDefault() {
 		return $this->currencyFacade->getDefaultCurrency()->getSymbol();
+	}
+
+	/**
+	 * @param int $currencyId
+	 * @return string
+	 */
+	public function getCurrencySymbolByCurrencyId($currencyId) {
+		return $this->currencyFacade->getById($currencyId)->getSymbol();
 	}
 
 	/**

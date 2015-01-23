@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
@@ -43,12 +44,14 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Preview\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
 	public function calculatePreview(
+		Currency $currency,
 		Cart $cart,
 		Transport $transport = null,
 		Payment $payment = null
@@ -57,13 +60,13 @@ class OrderPreviewCalculation {
 		$cartItemsPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
 
 		if ($transport !== null) {
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
 		} else {
 			$transportPrice = null;
 		}
 
 		if ($payment !== null) {
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
 		} else {
 			$paymentPrice = null;
 		}

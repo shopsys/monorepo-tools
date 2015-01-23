@@ -177,4 +177,16 @@ class CurrencyFacade {
 		return $this->orderRepository->getCurrenciesUsedInOrders();
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 */
+	public function getAllIndexedById() {
+		foreach ($this->getAll() as $currency) {
+			$currenciesIndexedById[$currency->getId()] = $currency;
+		}
+
+		return $currenciesIndexedById;
+
+	}
+
 }

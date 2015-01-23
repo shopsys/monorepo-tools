@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Transport;
 
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class TransportPriceCalculation {
@@ -31,11 +32,12 @@ class TransportPriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePrice(Transport $transport) {
+	public function calculatePrice(Transport $transport, Currency $currency) {
 		return $this->basePriceCalculation->calculatePrice(
-			$transport->getPrice(),
+			$transport->getPrice($currency)->getPrice(),
 			$this->pricingSetting->getInputPriceType(),
 			$transport->getVat()
 		);
@@ -43,25 +45,13 @@ class TransportPriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[] array indices are preserved
-	 */
-	public function calculatePrices(array $transports) {
-		$transportsPrices = [];
-		foreach ($transports as $key => $transport) {
-			$transportsPrices[$key] = $this->calculatePrice($transport);
-		}
-
-		return $transportsPrices;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
 	 */
-	public function calculatePricesById(array $transports) {
+	public function calculatePricesById(array $transports, Currency $currency) {
 		$transportsPrices = [];
 		foreach ($transports as $transport) {
-			$transportsPrices[$transport->getId()] = $this->calculatePrice($transport);
+			$transportsPrices[$transport->getId()] = $this->calculatePrice($transport, $currency);
 		}
 
 		return $transportsPrices;

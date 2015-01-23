@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -66,29 +67,30 @@ class TransportAndPaymentWatcherService {
 
 		$transportPriceChanged = false;
 		if ($transport !== null) {
-			$transportPriceChanged = $this->checkTransportPrice($transport);
+			$transportPriceChanged = $this->checkTransportPrice($transport, $orderData->currency);
 		}
 
 		$paymentPriceChanged = false;
 		if ($payment !== null) {
-			$paymentPriceChanged = $this->checkPaymentPrice($payment);
+			$paymentPriceChanged = $this->checkPaymentPrice($payment, $orderData->currency);
 		}
 
-		$this->rememberTransportAndPayment($transports, $payments);
+		$this->rememberTransportAndPayment($transports, $payments, $orderData->currency);
 
 		return new TransportAndPaymentCheckResult($transportPriceChanged, $paymentPriceChanged);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return boolean
 	 */
-	private function checkTransportPrice(Transport $transport) {
+	private function checkTransportPrice(Transport $transport, Currency $currency) {
 		$transportPrices = $this->getRememberedTransportPrices();
 
 		if (array_key_exists($transport->getId(), $transportPrices)) {
 			$rememberedTransportPriceValue = $transportPrices[$transport->getId()];
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
 
 			if ($rememberedTransportPriceValue != $transportPrice->getPriceWithVat()) {
 				return true;
@@ -100,14 +102,15 @@ class TransportAndPaymentWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return boolean
 	 */
-	private function checkPaymentPrice(Payment $payment) {
+	private function checkPaymentPrice(Payment $payment, Currency $currency) {
 		$paymentPrices = $this->getRememberedPaymentPrices();
 
 		if (array_key_exists($payment->getId(), $paymentPrices)) {
 			$rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
 
 			if ($rememberedPaymentPriceValue !== $paymentPrice->getPriceWithVat()) {
 				return true;
@@ -119,12 +122,13 @@ class TransportAndPaymentWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return array
 	 */
-	private function getTransportPrices($transports) {
+	private function getTransportPrices($transports, Currency $currency) {
 		$transportPriceValues = [];
 		foreach ($transports as $transport) {
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
 			$transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat();
 		}
 
@@ -133,12 +137,13 @@ class TransportAndPaymentWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return array
 	 */
-	private function getPaymentPrices($payments) {
+	private function getPaymentPrices($payments, Currency $currency) {
 		$paymentPriceValues = [];
 		foreach ($payments as $payment) {
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
 			$paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat();
 		}
 
@@ -148,11 +153,12 @@ class TransportAndPaymentWatcherService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
-	private function rememberTransportAndPayment($transports, $payments) {
+	private function rememberTransportAndPayment($transports, $payments, Currency $currency) {
 		$this->session->set(self::SESSION_ROOT, [
-			self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices($transports),
-			self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices($payments),
+			self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices($transports, $currency),
+			self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices($payments, $currency),
 		]);
 	}
 
