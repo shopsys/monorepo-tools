@@ -67,25 +67,7 @@
 			{% endif %}
 			{% for column in grid.columns %}
 				<th class="{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}">
-					{% if (column.sortable) %}
-						{% if grid.order == column.id and grid.orderDirection == 'asc' %}
-							{% set orderBy = '-' ~ column.id %}
-						{% else %}
-							{% set orderBy = column.id %}
-						{% endif %}
-						<a class="order" href="{{ gridView.url({'order': orderBy}) }}">
-							{{ column.title }}
-							{% if grid.order == column.id %}
-								{% if grid.orderDirection == 'desc' %}
-									<span class="sort_down in-sort-arrows in-sort-arrows--down"></span>
-								{% else %}
-									<span class="sort_up in-sort-arrows in-sort-arrows--up"></span>
-								{% endif %}
-							{% endif %}
-						</a>
-					{% else %}
-						{{ column.title }}
-					{% endif %}
+					{{ gridView.renderTitleCell(column) }}
 				</th>
 			{% endfor %}
 			{% if grid.actionColumns is not empty or grid.inlineEdit %}
@@ -93,6 +75,28 @@
 			{% endif  %}
 		</tr>
 	</thead>
+{% endblock %}
+
+{% block grid_title_cell %}
+	{% if (column.sortable) %}
+		{% if grid.order == column.id and grid.orderDirection == 'asc' %}
+			{% set orderBy = '-' ~ column.id %}
+		{% else %}
+			{% set orderBy = column.id %}
+		{% endif %}
+		<a class="order" href="{{ gridView.url({'order': orderBy}) }}">
+			{{ column.title }}
+			{% if grid.order == column.id %}
+				{% if grid.orderDirection == 'desc' %}
+					<span class="sort_down in-sort-arrows in-sort-arrows--down"></span>
+				{% else %}
+					<span class="sort_up in-sort-arrows in-sort-arrows--up"></span>
+				{% endif %}
+			{% endif %}
+		</a>
+	{% else %}
+		{{ column.title }}
+	{% endif %}
 {% endblock %}
 
 {% block grid_rows %}

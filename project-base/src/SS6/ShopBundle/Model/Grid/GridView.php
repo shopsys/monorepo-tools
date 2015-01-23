@@ -171,6 +171,22 @@ class GridView {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Grid\Column $column
+	 */
+	public function renderTitleCell(Column $column) {
+		$posibleBlocks = [
+			'grid_title_cell_id_' . $column->getId(),
+			'grid_title_cell',
+		];
+		foreach ($posibleBlocks as $blockName) {
+			if ($this->blockExists($blockName)) {
+				$this->renderBlock($blockName, ['column' => $column]);
+				break;
+			}
+		}
+	}
+
+	/**
 	 * @param array $parameters
 	 * @param array|string|null $removeParameters
 	 * @return string
