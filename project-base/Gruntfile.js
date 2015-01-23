@@ -178,8 +178,12 @@ module.exports = function(grunt) {
 
 		watch: {
 			admin: {
-				files: ['src/SS6/ShopBundle/Resources/styles/common/admin/**/*.less', 'web/assets/admin/images/icons/**/*.png'],
-				tasks: ['admin'],
+				files: ['src/SS6/ShopBundle/Resources/styles/common/admin/**/*.less'],
+				tasks: ['admin']
+			},
+			adminSprite: {
+				files: ['web/assets/admin/images/icons/**/*.png'],
+				tasks: ['adminSprite'],
 				options: {
 					livereload: true,
 				}
@@ -193,21 +197,21 @@ module.exports = function(grunt) {
 			},
 			frontend1: {
 				files: ['src/SS6/ShopBundle/Resources/styles/common/front/**/*.less'],
-				tasks: ['frontend1'],
-				options: {
-					livereload: true,
-				}
+				tasks: ['frontend1', 'frontend2']
 			},
 			frontend2: {
 				files: ['src/SS6/ShopBundle/Resources/styles/domain2/front/**/*.less'],
-				tasks: ['frontend2'],
+				tasks: ['frontend2']
+			},
+			livereload: {
 				options: {
-					livereload: true,
-				}
+					livereload: true
+				},
+      			files: ['web/assets/admin/styles/*.css', 'web/assets/frontent/styles/*.css']
 			},
 			twig: {
 				files: ['src/SS6/ShopBundle/Resources/views/**/*.twig'],
-				tasks: ['refresh'],
+				tasks: [],
 				options: {
 					livereload: true,
 				}
@@ -227,9 +231,9 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('frontend1', ['less:frontend1', 'legacssy:frontend1', 'less:wysiwyg1']);
 	grunt.registerTask('frontend2', ['less:frontend2', 'legacssy:frontend2', 'less:wysiwyg2']);
-	grunt.registerTask('frontendSprite', ['sprite:frontend']);
+	grunt.registerTask('frontendSprite', ['frontend1', 'frontend2']);
+	grunt.registerTask('adminSprite', ['admin']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
-	grunt.registerTask('refresh', []);
 
 	grunt.registerTask('docs', ['styledocco']);
 };
