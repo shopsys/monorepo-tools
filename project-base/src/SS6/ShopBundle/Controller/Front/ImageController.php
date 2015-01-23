@@ -11,9 +11,20 @@ class ImageController extends Controller {
 		$imageFacade = $this->get('ss6.shop.image.processing.image_generator_facade');
 		/* @var $imageFacade \SS6\ShopBundle\Model\Image\Processing\ImageGeneratorFacade */
 
-		$imageFilepath = $imageFacade->generateImageAndGetFilepath($entityName, $imageId, $type, $size);
+		try {
+			$imageFilepath = $imageFacade->generateImageAndGetFilepath($entityName, $imageId, $type, $size);
+		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageException $e) {
+			$message = 'Generate image for entity "' . $entityName
+				. '" (type=' . $type . ', size=' . $size . ', imageId=' . $imageId . ') failed.';
+			throw $this->createNotFoundException($message, $e);
+		}
 
-		return new BinaryFileResponse($imageFilepath);
+		try {
+			return new BinaryFileResponse($imageFilepath);
+		} catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+			$message = 'Response with file "' . $imageFilepath . '" failed.';
+			throw $this->createNotFoundException($message, $e);
+		}
 	}
 
 }
