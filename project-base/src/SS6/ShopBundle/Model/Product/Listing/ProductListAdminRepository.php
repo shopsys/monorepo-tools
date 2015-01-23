@@ -60,9 +60,11 @@ class ProductListAdminRepository {
 		if ($searchData['text'] !== null && $searchData['text'] !== '') {
 			$queryBuilder->andWhere('
 				(
-					pt.name LIKE :text OR
-					p.catnum LIKE :text OR
-					p.partno LIKE :text
+					NORMALIZE(pt.name) LIKE NORMALIZE(:text)
+					OR
+					NORMALIZE(p.catnum) LIKE NORMALIZE(:text)
+					OR
+					NORMALIZE(p.partno) LIKE NORMALIZE(:text)
 				)');
 			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
 			$queryBuilder->setParameter('text', $querySerachText);
