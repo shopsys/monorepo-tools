@@ -29,6 +29,10 @@
 			}
 		});
 
+		$input.closest('form').submit(function () {
+			return false;
+		});
+
 		$(document).click(function(event) {
 			if(!$(event.target).closest('#js-search-autocomplete').length) {
 				$list.hide();
