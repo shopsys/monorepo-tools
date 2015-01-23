@@ -52,6 +52,9 @@ doctrine:
 
   orm:
     auto_generate_proxy_classes: "%kernel.debug%"
+    dql:
+      numeric_functions:
+        normalize: SS6\ShopBundle\Component\Doctrine\NormalizeFunction
     naming_strategy: doctrine.orm.naming_strategy.underscore
     auto_mapping: false
     mappings:
