@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Image\Processing;
 
-use Intervention\Image\Constraint;
 use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
 
 class ImageThumbnailFactory {
@@ -28,9 +27,7 @@ class ImageThumbnailFactory {
 	 */
 	public function getImageThumbnail($filepath) {
 		$image = $this->imageProcessingService->createInterventionImage($filepath);
-		$image->resize(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT, function (Constraint $constraint) {
-			$constraint->aspectRatio();
-		});
+		$this->imageProcessingService->resize($image, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT);
 
 		return $image;
 	}
