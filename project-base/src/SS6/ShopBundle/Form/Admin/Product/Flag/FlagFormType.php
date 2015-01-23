@@ -38,7 +38,7 @@ class FlagFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím barvu příznaku']),
 					new Constraints\Length([
 						'max' => 7,
-						'maxMessage' => 'Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků'
+						'maxMessage' => 'Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků',
 					]),
 				],
 			]);
