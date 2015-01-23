@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
+use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 
 class ImageLocator {
@@ -75,11 +76,10 @@ class ImageLocator {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image $image
-	 * @param string|null $sizeName
 	 * @return bool
 	 */
-	public function imageExists(Image $image, $sizeName) {
-		$imageFilepath = $this->getAbsoluteImageFilepathByImage($image, $sizeName);
+	public function imageExists(Image $image) {
+		$imageFilepath = $this->getAbsoluteImageFilepathByImage($image, ImageConfig::ORIGINAL_SIZE_NAME);
 
 		return is_file($imageFilepath) && is_readable($imageFilepath);
 	}
@@ -87,17 +87,16 @@ class ImageLocator {
 	/**
 	 * @param Object $entity
 	 * @param string|null $type
-	 * @param string|null $sizeName
 	 * @return bool
 	 */
-	public function imageExistsByEntityAndType($entity, $type, $sizeName) {
+	public function imageExistsByEntityAndType($entity, $type) {
 		try {
 			$image = $this->imageFacade->getImageByEntity($entity, $type);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
 
-		return $this->imageExists($image, $sizeName);
+		return $this->imageExists($image);
 	}
 
 	/**

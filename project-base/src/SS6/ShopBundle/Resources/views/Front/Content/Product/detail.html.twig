@@ -9,7 +9,7 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="product-image">
 				<span>
-					{% if imageExists(productDetail.product, 'original') %}
+					{% if imageExists(productDetail.product) %}
 						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-gallery-main">
 							{{ image(productDetail.product, { size: 'original', width: '550px' }) }}
 						</a>

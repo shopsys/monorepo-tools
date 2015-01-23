@@ -27,7 +27,7 @@
 								</span>
 
 								<span class="box-chooser__image">
-									{% if imageExists(choice.data, 'original') %}
+									{% if imageExists(choice.data) %}
 										{{ image(choice.data, { size: 'original', height: '20px' }) }}
 									{% endif %}
 								</span>
@@ -73,7 +73,7 @@
 								</span>
 
 								<span class="box-chooser__image">
-									{% if imageExists(choice.data, 'original') %}
+									{% if imageExists(choice.data) %}
 										{{ image(choice.data, { size: 'original', height: '20px' }) }}
 									{% endif %}
 								</span>

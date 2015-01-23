@@ -89,8 +89,8 @@ class ImageExtension extends Twig_Extension {
 	 * @param string|null $type
 	 * @return string
 	 */
-	public function imageExists($entity, $sizeName = null, $type = null) {
-		return $this->imageLocator->imageExistsByEntityAndType($entity, $type, $sizeName);
+	public function imageExists($entity, $type = null) {
+		return $this->imageLocator->imageExistsByEntityAndType($entity, $type);
 	}
 
 	/**
@@ -100,7 +100,7 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function getImageUrl($entity, $sizeName = null, $type = null) {
-		if ($this->imageLocator->imageExistsByEntityAndType($entity, $type, $sizeName)) {
+		if ($this->imageLocator->imageExistsByEntityAndType($entity, $type)) {
 			$relativeFilepath = $this->imageLocator->getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName);
 		} else {
 			$relativeFilepath = self::NOIMAGE_FILENAME;
@@ -119,7 +119,7 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function getImageUrlByImage(Image $image, $sizeName = null) {
-		if ($this->imageLocator->imageExists($image, $sizeName)) {
+		if ($this->imageLocator->imageExists($image)) {
 			$relativeFilepath = $this->imageLocator->getRelativeImageFilepathByImage($image, $sizeName);
 		} else {
 			$relativeFilepath = self::NOIMAGE_FILENAME;
