@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Image\Config;
 
+use SS6\ShopBundle\Model\Image\Image;
+
 class ImageConfig {
 
 	const ORIGINAL_SIZE_NAME = 'original';
@@ -47,6 +49,16 @@ class ImageConfig {
 	public function getImageSizeConfigByEntityName($entityName, $type, $sizeName) {
 		$entityConfig = $this->getEntityConfigByEntityName($entityName);
 		return $entityConfig->getTypeSize($type, $sizeName);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param string|null $sizeName
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig
+	 */
+	public function getImageSizeConfigByImage(Image $image, $sizeName) {
+		$entityConfig = $this->getEntityConfigByEntityName($image->getEntityName());
+		return $entityConfig->getTypeSize($image->getType(), $sizeName);
 	}
 
 	/**

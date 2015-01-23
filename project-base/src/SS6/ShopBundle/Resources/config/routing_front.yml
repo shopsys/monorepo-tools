@@ -17,6 +17,20 @@ front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
 
+front_image:
+  pattern: /assets/content/images/{entityName}/{type}/{size}/{imageId}.{extension}
+  defaults: { _controller: SS6ShopBundle:Front\Image:getImage }
+  requirements:
+    imageId: \d+
+
+front_image_without_type:
+  pattern: /assets/content/images/{entityName}/{size}/{imageId}.{extension}
+  defaults:
+    _controller: SS6ShopBundle:Front\Image:getImage
+    type: ~
+  requirements:
+    imageId: \d+
+
 front_login_check:
   pattern: /login/check/
   # controller's action is unnecessary, because firewall processes whole request

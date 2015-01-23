@@ -353,6 +353,12 @@ services:
     arguments:
       - [driver: 'gd']
 
+  ss6.shop.image.processing.image_generator_facade:
+    class: SS6\ShopBundle\Model\Image\Processing\ImageGeneratorFacade
+
+  ss6.shop.image.processing.image_generator_service:
+    class: SS6\ShopBundle\Model\Image\Processing\ImageGeneratorService
+
   ss6.shop.image.processing.image_processing_service:
     class: SS6\ShopBundle\Model\Image\Processing\ImageProcessingService
 

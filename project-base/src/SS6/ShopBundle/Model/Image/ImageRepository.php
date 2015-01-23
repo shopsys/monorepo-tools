@@ -72,4 +72,18 @@ class ImageRepository {
 			['id' => 'asc']
 		);
 	}
+
+	/**
+	 * @param int $imageId
+	 * @return \SS6\ShopBundle\Model\Image\Image
+	 */
+	public function getById($imageId) {
+		$image = $this->getImageRepository()->find($imageId);
+
+		if ($image === null) {
+			throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException('Image with ID ' . $imageId . ' does not exist.');
+		}
+
+		return $image;
+	}
 }
