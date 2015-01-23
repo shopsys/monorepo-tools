@@ -3,32 +3,29 @@
 namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Query\ResultSetMapping;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\DataFixture\AbstractNativeFixture;
 
-class DbFunctionsDataFixture extends AbstractReferenceFixture {
+class DbFunctionsDataFixture extends AbstractNativeFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$em = $this->get('doctrine.orm.entity_manager');
-		/* @var $em \Doctrine\ORM\EntityManager */
-
-		// immutable version of unaccent() to support indexing
-		$em->createNativeQuery('CREATE FUNCTION immutable_unaccent(text)
+		$this->executeNativeQuery('DROP FUNCTION IF EXISTS immutable_unaccent(text)');
+		$this->executeNativeQuery('CREATE FUNCTION immutable_unaccent(text)
 			RETURNS text AS
 			$$
 			SELECT unaccent(\'unaccent\', $1)
 			$$
-			LANGUAGE SQL IMMUTABLE', new ResultSetMapping())->execute();
+			LANGUAGE SQL IMMUTABLE');
 
-		$em->createNativeQuery('CREATE FUNCTION normalize(text)
+		$this->executeNativeQuery('DROP FUNCTION IF EXISTS normalize(text)');
+		$this->executeNativeQuery('CREATE FUNCTION normalize(text)
 			RETURNS text AS
 			$$
 			SELECT lower(immutable_unaccent($1))
 			$$
-			LANGUAGE SQL IMMUTABLE', new ResultSetMapping())->execute();
+			LANGUAGE SQL IMMUTABLE');
 	}
 
 }
