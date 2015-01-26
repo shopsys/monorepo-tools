@@ -55,7 +55,7 @@
 
 		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
 	{% else %}
-		<div class="in-message in-message--info js-flash-message">
+		<div class="in-message in-message--static in-message--info js-flash-message">
 			{% if (filterFormSubmited) %}
 				{{ 'Filtru neodpovídají žádné výsledky'|trans }}
 			{% else %}
