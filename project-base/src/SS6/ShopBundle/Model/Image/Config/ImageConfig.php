@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Image\Image;
 class ImageConfig {
 
 	const ORIGINAL_SIZE_NAME = 'original';
+	const DEFAULT_SIZE_NAME = 'default';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
