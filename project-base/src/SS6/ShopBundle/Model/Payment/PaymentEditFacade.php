@@ -8,8 +8,10 @@ use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
+use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
@@ -45,13 +47,19 @@ class PaymentEditFacade {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 */
+	private $currencyFacade;
+
 	public function __construct(
 		EntityManager $em,
 		PaymentRepository $paymentRepository,
 		TransportRepository $transportRepository,
 		PaymentVisibilityCalculation $paymentVisibilityCalculation,
 		Domain $domain,
-		ImageFacade	$imageFacade
+		ImageFacade	$imageFacade,
+		CurrencyFacade $currencyFacade
 	) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
@@ -59,19 +67,21 @@ class PaymentEditFacade {
 		$this->paymentVisibilityCalculation = $paymentVisibilityCalculation;
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
+		$this->currencyFacade = $currencyFacade;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
-	public function create(PaymentData $paymentData) {
-		$payment = new Payment($paymentData);
+	public function create(PaymentEditData $paymentEditData) {
+		$payment = new Payment($paymentEditData->paymentData);
 		$this->em->persist($payment);
 		$this->em->beginTransaction();
 		$this->em->flush();
-		$this->createPaymentDomains($payment, $paymentData->domains);
-		$this->setAddionalDataAndFlush($payment, $paymentData);
+		$this->updatePaymentPrices($payment, $paymentEditData->prices);
+		$this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
+		$this->setAddionalDataAndFlush($payment, $paymentEditData->paymentData);
 		$this->em->commit();
 
 		return $payment;
@@ -79,14 +89,15 @@ class PaymentEditFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
 	 */
-	public function edit(Payment $payment, PaymentData $paymentData) {
-		$payment->edit($paymentData);
+	public function edit(Payment $payment, PaymentEditData $paymentEditData) {
+		$payment->edit($paymentEditData->paymentData);
 		$this->em->beginTransaction();
+		$this->updatePaymentPrices($payment, $paymentEditData->prices);
 		$this->deletePaymentDomainsByPayment($payment);
-		$this->createPaymentDomains($payment, $paymentData->domains);
-		$this->setAddionalDataAndFlush($payment, $paymentData);
+		$this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
+		$this->setAddionalDataAndFlush($payment, $paymentEditData->paymentData);
 		$this->em->commit();
 	}
 
@@ -179,6 +190,17 @@ class PaymentEditFacade {
 			$this->em->remove($paymentDomain);
 		}
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param string[currencyId] $prices
+	 */
+	private function updatePaymentPrices(Payment $payment, $prices) {
+		foreach ($this->currencyFacade->getAll() as $currency) {
+			$price = $prices[$currency->getId()];
+			$payment->setPrice($currency, $price);
+		}
 	}
 
 }

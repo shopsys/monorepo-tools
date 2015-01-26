@@ -2,3 +2,31 @@
 
 {% block title %}- {{ 'Nová platba'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nová platba'|trans }}{% endblock %}
+{% block payment_base_prices %}
+	<fieldset class="row">
+		<div class="table-responsive mt-1" id="transport_prices">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>{{ inputPriceLabel() }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for currencyId, currency in currencies %}
+						<tr>
+							<td>
+								{{ form_row(
+									form.prices[currencyId], {
+										label: 'Základní cena v ' ~ currency.code,
+										attr: { class: 'form-line--size-2' },
+										symbolAfterInput: currencySymbolByCurrencyId(currencyId)
+									}
+								) }}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+{% endblock %}

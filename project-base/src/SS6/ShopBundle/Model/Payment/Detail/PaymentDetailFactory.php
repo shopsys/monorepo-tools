@@ -26,7 +26,7 @@ class PaymentDetailFactory {
 	public function createDetailForPayment(Payment $payment) {
 		return new PaymentDetail(
 			$payment,
-			$this->getPrice($payment)
+			$this->getPrices($payment)
 		);
 	}
 
@@ -48,8 +48,13 @@ class PaymentDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private function getPrice(Payment $payment) {
-		return $this->paymentPriceCalculation->calculatePrice($payment);
+	private function getPrices(Payment $payment) {
+		$prices = [];
+		foreach ($payment->getPrices() as $paymentInputPrice) {
+			$currency = $paymentInputPrice->getCurrency();
+			$prices[$currency->getId()] = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
+		}
+		return $prices;
 	}
 
 }

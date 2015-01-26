@@ -9,6 +9,7 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -35,11 +36,11 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	protected $translations;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPrice[]
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
 	 */
-	private $price;
+	private $prices;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
@@ -82,12 +83,12 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 */
 	public function __construct(PaymentData $paymentData) {
 		$this->translations = new ArrayCollection();
-		$this->price = $paymentData->price;
 		$this->vat = $paymentData->vat;
 		$this->transports = new ArrayCollection();
 		$this->hidden = $paymentData->hidden;
 		$this->deleted = false;
 		$this->setTranslations($paymentData);
+		$this->prices = [];
 	}
 
 	/**
@@ -136,7 +137,6 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function edit(PaymentData $paymentData) {
-		$this->price = $paymentData->price;
 		$this->vat = $paymentData->vat;
 		$this->hidden = $paymentData->hidden;
 		$this->setTranslations($paymentData);
@@ -150,10 +150,18 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param string $price
 	 */
-	public function setPrice($price) {
-		$this->price = $price;
+	public function setPrice(Currency $currency, $price) {
+		foreach ($this->prices as $paymentInputPrice) {
+			if ($paymentInputPrice->getCurrency() === $currency) {
+				$paymentInputPrice->setPrice($price);
+				return;
+			}
+		}
+
+		$this->prices[] = new PaymentPrice($this, $currency, $price);
 	}
 
 	/**
@@ -171,11 +179,24 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 		return $this->translation($locale)->getName();
 	}
 
-	/**
-	 * @return string
+	/*
+	 * @return \SS6\ShopBundle\Model\Payment\PaymentPrice[]
 	 */
-	public function getPrice() {
-		return $this->price;
+	public function getPrices() {
+		return $this->prices;
+	}
+
+	/*
+	 * @return \SS6\ShopBundle\Model\Payment\PaymentPrice
+	 */
+	public function getPrice(Currency $currency) {
+		foreach ($this->prices as $price) {
+			if ($price->getCurrency() === $currency) {
+				return $price;
+			}
+		}
+
+		throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentPriceNotFoundException($currency);
 	}
 
 	/**

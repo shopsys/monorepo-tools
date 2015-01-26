@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Payment\Detail;
 
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Price;
 
 class PaymentDetail {
 
@@ -13,17 +12,17 @@ class PaymentDetail {
 	private $payment;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price[currencyId]
 	 */
-	private $basePrice;
+	private $basePrices;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
 	 */
-	public function __construct(Payment $payment, Price $basePrice) {
+	public function __construct(Payment $payment, array $basePrices) {
 		$this->payment = $payment;
-		$this->basePrice = $basePrice;
+		$this->basePrices = $basePrices;
 	}
 
 	/**
@@ -34,10 +33,10 @@ class PaymentDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[currencyId]
 	 */
-	public function getBasePrice() {
-		return $this->basePrice;
+	public function getBasePrices() {
+		return $this->basePrices;
 	}
 
 }
