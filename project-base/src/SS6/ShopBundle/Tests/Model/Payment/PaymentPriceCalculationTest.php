@@ -7,6 +7,8 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
@@ -63,10 +65,12 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$paymentPriceCalculation = new PaymentPriceCalculation($basePriceCalculation, $pricingSettingMock);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
+		$currency = new Currency(new CurrencyData());
 
-		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], $inputPrice, $vat));
+		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], $vat));
+		$payment->setPrice($currency, $inputPrice);
 
-		$price = $paymentPriceCalculation->calculatePrice($payment);
+		$price = $paymentPriceCalculation->calculatePrice($payment, $currency);
 
 		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
