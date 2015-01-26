@@ -80,7 +80,7 @@ class ImageDeleteDoctrineListener {
 	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
 	 */
 	private function deleteEntityImages($entity, EntityManager $em) {
-		$images = $this->getImageFacade()->getImagesByEntity($entity, null);
+		$images = $this->getImageFacade()->getAllImagesByEntity($entity);
 		if (count($images) > 0) {
 			foreach ($images as $entity) {
 				$em->remove($entity);

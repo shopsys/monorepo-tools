@@ -74,6 +74,19 @@ class ImageRepository {
 	}
 
 	/**
+	 * @param string $entityName
+	 * @param int $entityId
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	public function getAllImagesByEntity($entityName, $entityId) {
+		return $this->getImageRepository()->findBy([
+				'entityName' => $entityName,
+				'entityId' => $entityId,
+			]
+		);
+	}
+
+	/**
 	 * @param int $imageId
 	 * @return \SS6\ShopBundle\Model\Image\Image
 	 */

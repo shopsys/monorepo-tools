@@ -154,6 +154,17 @@ class ImageFacade {
 	}
 
 	/**
+	 * @param object $entity
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 */
+	public function getAllImagesByEntity($entity) {
+		return $this->imageRepository->getAllImagesByEntity(
+			$this->imageConfig->getEntityName($entity),
+			$this->getEntityId($entity)
+		);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 */
 	public function deleteImageFiles(Image $image) {
