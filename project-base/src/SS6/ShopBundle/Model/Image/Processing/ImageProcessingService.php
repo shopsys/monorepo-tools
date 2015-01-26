@@ -93,10 +93,12 @@ class ImageProcessingService {
 		if ($crop) {
 			$image->fit($width, $height, function (Constraint $constraint) {
 				$constraint->aspectRatio();
+				$constraint->upsize();
 			});
 		} else {
 			$image->resize($width, $height, function (Constraint $constraint) {
 				$constraint->aspectRatio();
+				$constraint->upsize();
 			});
 		}
 
