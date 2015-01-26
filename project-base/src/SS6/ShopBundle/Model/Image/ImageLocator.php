@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Image;
 
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Image\Image;
 
 class ImageLocator {
 
@@ -12,27 +12,8 @@ class ImageLocator {
 	 */
 	private $imageDir;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
-	 */
-	private $imageFacade;
-
-	public function __construct($imageDir, ImageFacade $imageFacade) {
+	public function __construct($imageDir) {
 		$this->imageDir = $imageDir;
-		$this->imageFacade = $imageFacade;
-	}
-
-	/**
-	 * @param Object $entity
-	 * @param string|null $type
-	 * @param string|null $sizeName
-	 * @return string
-	 */
-	public function getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName) {
-		$image = $this->imageFacade->getImageByEntity($entity, $type);
-		$path = $this->getRelativeImagePath($image->getEntityName(), $type, $sizeName);
-
-		return $path . $image->getFilename();
 	}
 
 	/**
@@ -40,7 +21,7 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	public function getRelativeImageFilepathByImage(Image $image, $sizeName) {
+	public function getRelativeImageFilepath(Image $image, $sizeName) {
 		$path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
 
 		return $path . $image->getFilename();
@@ -51,27 +32,10 @@ class ImageLocator {
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	public function getAbsoluteImageFilepathByImage(Image $image, $sizeName) {
-		$relativePath = $this->getRelativeImageFilepathByImage($image, $sizeName);
+	public function getAbsoluteImageFilepath(Image $image, $sizeName) {
+		$relativePath = $this->getRelativeImageFilepath($image, $sizeName);
 
 		return $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
-	}
-
-	/**
-	 * @param Object $entity
-	 * @param string|null $type
-	 * @param string|null $sizeName
-	 * @return array
-	 */
-	public function getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName) {
-		$filepaths = [];
-
-		$images = $this->imageFacade->getImagesByEntity($entity, $type);
-		foreach ($images as $image) {
-			$filepaths[] = $this->getRelativeImagePath($image->getEntityName(), $type, $sizeName) . $image->getFilename();
-		}
-
-		return $filepaths;
 	}
 
 	/**
@@ -79,24 +43,9 @@ class ImageLocator {
 	 * @return bool
 	 */
 	public function imageExists(Image $image) {
-		$imageFilepath = $this->getAbsoluteImageFilepathByImage($image, ImageConfig::ORIGINAL_SIZE_NAME);
+		$imageFilepath = $this->getAbsoluteImageFilepath($image, ImageConfig::ORIGINAL_SIZE_NAME);
 
 		return is_file($imageFilepath) && is_readable($imageFilepath);
-	}
-
-	/**
-	 * @param Object $entity
-	 * @param string|null $type
-	 * @return bool
-	 */
-	public function imageExistsByEntityAndType($entity, $type) {
-		try {
-			$image = $this->imageFacade->getImageByEntity($entity, $type);
-		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
-			return false;
-		}
-
-		return $this->imageExists($image);
 	}
 
 	/**

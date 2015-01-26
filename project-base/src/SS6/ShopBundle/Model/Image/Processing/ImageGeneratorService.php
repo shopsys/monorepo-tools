@@ -44,8 +44,8 @@ class ImageGeneratorService {
 			return;
 		}
 
-		$sourceImageFilepath = $this->imageLocator->getAbsoluteImageFilepathByImage($image, ImageConfig::ORIGINAL_SIZE_NAME);
-		$targetImageFilepath = $this->imageLocator->getAbsoluteImageFilepathByImage($image, $sizeName);
+		$sourceImageFilepath = $this->imageLocator->getAbsoluteImageFilepath($image, ImageConfig::ORIGINAL_SIZE_NAME);
+		$targetImageFilepath = $this->imageLocator->getAbsoluteImageFilepath($image, $sizeName);
 		$sizeConfig = $this->imageConfig->getImageSizeConfigByImage($image, $sizeName);
 
 		$interventionImage = $this->imageProcessingService->createInterventionImage($sourceImageFilepath);

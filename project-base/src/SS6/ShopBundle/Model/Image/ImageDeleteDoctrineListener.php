@@ -7,6 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -32,25 +33,23 @@ class ImageDeleteDoctrineListener {
 	 */
 	private $fileUpload;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageLocator
+	 */
+	private $imageLocator;
+
 	public function __construct(
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		ImageConfig $imageConfig,
-		FileUpload $fileUpload
+		FileUpload $fileUpload,
+		ImageLocator $imageLocator
 	) {
 		$this->container = $container;
 		$this->filesystem = $filesystem;
 		$this->imageConfig = $imageConfig;
 		$this->fileUpload = $fileUpload;
-	}
-
-	/**
-	 * Prevent ServiceCircularReferenceException
-	 *
-	 * @return \SS6\ShopBundle\Model\Image\ImageLocator
-	 */
-	private function getImageLocator() {
-		return $this->container->get('ss6.shop.image.image_locator');
+		$this->imageLocator = $imageLocator;
 	}
 
 	/**
@@ -96,7 +95,7 @@ class ImageDeleteDoctrineListener {
 		$entityName = $image->getEntityName();
 		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
 		foreach ($imageConfig->getSizes() as $size) {
-			$filepath = $this->getImageLocator()->getAbsoluteImageFilepathByImage($image, $size->getName());
+			$filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $size->getName());
 			$this->filesystem->remove($filepath);
 		}
 	}
