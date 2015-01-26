@@ -1,13 +1,13 @@
-{% macro list(product) %}
-	
+{% macro list(product, classAddition) %}
+
 	{% if product.flags %}
-		{% for productFlag in product.flags %}
-			<dl>
-				<dt style="background-color: {{ productFlag.rgbColor }};">
+		<ul class="list-flag {{ classAddition }}">
+			{% for productFlag in product.flags %}
+				<li class="list-flag__item" style="background-color: {{ productFlag.rgbColor }};">
 					{{ productFlag.name }}
-				</dt>
-			</dl>
-		{% endfor %}
+				</li>
+			{% endfor %}
+		</ul>
 	{% endif %}
-	
+
 {% endmacro %}
