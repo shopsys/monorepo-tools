@@ -57,7 +57,7 @@
 				{% for image in productDetail.images %}
 					<li class="list-image__item js-product-images-image" data-id="{{ image.id }}">
 						<div class="js-product-images-preview list-image__item__in">
-							<img src="{{ imageUrlByImage(image, 'original') }}" alt="" height="100" />
+							{{ image(image, {size: 'original', height: '100'}) }}
 						</div>
 						<div class="list-image__item__button">
 							<div class="js-product-images-delete-button">

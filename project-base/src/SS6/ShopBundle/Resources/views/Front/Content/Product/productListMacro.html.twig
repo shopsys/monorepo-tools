@@ -6,7 +6,7 @@
 					<div class="list-items__image">
 						<span>
 							{% if imageExists(productDetail.product) %}
-								{{ image(productDetail.product, { size: 'original', height: '200px' }) }}
+								{{ image(productDetail.product, { size: 'list' }) }}
 							{% else %}
 								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
 							{% endif %}
