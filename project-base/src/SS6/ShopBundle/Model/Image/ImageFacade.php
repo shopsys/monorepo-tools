@@ -3,9 +3,13 @@
 namespace SS6\ShopBundle\Model\Image;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
+use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use SS6\ShopBundle\Model\Image\ImageRepository;
 use SS6\ShopBundle\Model\Image\ImageService;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFacade {
 
@@ -29,16 +33,37 @@ class ImageFacade {
 	 */
 	private $imageService;
 
+	/**
+	 * @var \Symfony\Component\Filesystem\Filesystem
+	 */
+	private $filesystem;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageLocator
+	 */
+	private $imageLocator;
+
 	public function __construct(
 		EntityManager $em,
 		ImageConfig $imageConfig,
 		ImageRepository $imageRepository,
-		ImageService $imageService
+		ImageService $imageService,
+		Filesystem $filesystem,
+		FileUpload $fileUpload,
+		ImageLocator $imageLocator
 	) {
 		$this->em = $em;
 		$this->imageConfig = $imageConfig;
 		$this->imageRepository = $imageRepository;
 		$this->imageService = $imageService;
+		$this->filesystem = $filesystem;
+		$this->fileUpload = $fileUpload;
+		$this->imageLocator = $imageLocator;
 	}
 
 	/**
@@ -51,6 +76,10 @@ class ImageFacade {
 			$imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
 			$entityId = $this->getEntityId($entity);
 			$oldImage = $this->imageRepository->findImageByEntity($imageEntityConfig->getEntityName(), $entityId, $type);
+
+			if ($oldImage !== null) {
+				$this->deleteImageFiles($oldImage);
+			}
 
 			$image = $this->imageService->editImageOrCreateNew(
 				$imageEntityConfig,
@@ -90,6 +119,7 @@ class ImageFacade {
 		$entityName = $this->imageConfig->getEntityName($entity);
 		$entityId = $this->getEntityId($entity);
 
+		// files will be deleted in doctrine listener
 		$this->imageService->deleteImages($entityName, $entityId, $images);
 
 		foreach ($images as $image) {
@@ -121,6 +151,18 @@ class ImageFacade {
 			$this->getEntityId($entity),
 			$type
 		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 */
+	public function deleteImageFiles(Image $image) {
+		$entityName = $image->getEntityName();
+		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
+		foreach ($imageConfig->getSizes() as $size) {
+			$filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $size->getName());
+			$this->filesystem->remove($filepath);
+		}
 	}
 
 	/**

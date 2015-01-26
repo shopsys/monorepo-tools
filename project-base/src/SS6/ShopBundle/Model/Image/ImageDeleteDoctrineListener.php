@@ -70,7 +70,7 @@ class ImageDeleteDoctrineListener {
 		if ($this->imageConfig->hasImageConfig($entity)) {
 			$this->deleteEntityImages($entity, $args->getEntityManager());
 		} elseif ($entity instanceof Image) {
-			$this->deleteImageFiles($entity);
+			$this->getImageFacade()->deleteImageFiles($entity);
 		}
 	}
 
@@ -85,18 +85,6 @@ class ImageDeleteDoctrineListener {
 			foreach ($images as $entity) {
 				$em->remove($entity);
 			}
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image $image
-	 */
-	private function deleteImageFiles(Image $image) {
-		$entityName = $image->getEntityName();
-		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
-		foreach ($imageConfig->getSizes() as $size) {
-			$filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $size->getName());
-			$this->filesystem->remove($filepath);
 		}
 	}
 
