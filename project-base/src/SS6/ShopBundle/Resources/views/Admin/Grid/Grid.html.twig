@@ -84,8 +84,8 @@
 		{% else %}
 			{% set orderBy = column.id %}
 		{% endif %}
-		<a class="order" href="{{ gridView.url({'order': orderBy}) }}">
-			{{ column.title }}
+		<a class="in-sort-arrows__wrap" href="{{ gridView.url({'order': orderBy}) }}">
+			<span class="in-sort-arrows__link">{{ column.title }}</span>
 			{% if grid.order == column.id %}
 				{% if grid.orderDirection == 'desc' %}
 					<span class="sort_down in-sort-arrows in-sort-arrows--down"></span>
