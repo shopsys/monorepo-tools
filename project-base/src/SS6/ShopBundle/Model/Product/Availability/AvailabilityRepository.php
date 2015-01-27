@@ -53,14 +53,7 @@ class AvailabilityRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
-	public function findAll() {
-		return $this->getAvailabilityRepository()->findBy([], ['id' => 'asc']);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
-	 */
-	public function findAllOrderedByDeliveryTimeAsc() {
+	public function getAll() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
 			->select('a')
