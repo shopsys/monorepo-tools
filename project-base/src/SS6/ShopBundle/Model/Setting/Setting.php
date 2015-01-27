@@ -9,6 +9,7 @@ class Setting {
 
 	const ORDER_SUBMITTED_SETTING_NAME = 'orderSubmittedText';
 	const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
+	const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

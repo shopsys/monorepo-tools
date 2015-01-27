@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+	<div class="wrap-box mb-1 mt-1">
+		{{ form_row(form.defaultInStockAvailability, { 'label': 'Výchozí dostupnost pro zboží skladem'|trans }) }}
+		{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+	</div>
+{{ form_end(form) }}

@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class AvailabilityController extends Controller {
 
@@ -44,6 +46,39 @@ class AvailabilityController extends Controller {
 		}
 
 		return $this->redirect($this->generateUrl('admin_availability_list'));
+	}
+
+	/**
+	 * @Route("/product/availability/setting/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function settingAction(Request $request) {
+		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
+		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+
+		$availabilities = $availabilityFacade->getAll();
+		$form = $this->createForm(new AvailabilitySettingFormType($availabilities));
+
+		$availabilitySettingsFormData = [];
+		$availabilitySettingsFormData['defaultInStockAvailability'] = $availabilityFacade->getDefaultInStockAvailability();
+
+		$form->setData($availabilitySettingsFormData);
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$availabilitySettingsFormData = $form->getData();
+			$availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+			$flashMessageSender->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
+
+			return $this->redirect($this->generateUrl('admin_availability_list'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Availability/setting.html.twig', [
+			'form' => $form->createView(),
+		]);
 	}
 
 }
