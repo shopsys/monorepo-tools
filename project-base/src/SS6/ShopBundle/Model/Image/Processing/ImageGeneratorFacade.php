@@ -36,12 +36,12 @@ class ImageGeneratorFacade {
 		$image = $this->imageRepository->getById($imageId);
 
 		if ($image->getEntityName() !== $entityName) {
-			$message = 'Image (ID = ' . $imageId . ') has not entity name "' . $entityName . '"';
+			$message = 'Image (ID = ' . $imageId . ') does not have entity name "' . $entityName . '"';
 			throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException($message);
 		}
 
 		if ($image->getType() !== $type) {
-			$message = 'Image (ID = ' . $imageId . ') has not type "' . $type . '"';
+			$message = 'Image (ID = ' . $imageId . ') does not have type "' . $type . '"';
 			throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException($message);
 		}
 

@@ -62,7 +62,7 @@ class DirectoryStructureCreator {
 	/**
 	 * @param string $entityName
 	 * @param string|null $type
-	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig $sizes
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[] $sizes
 	 * @return type
 	 */
 	private function getTargetDirectoriesFromSizes($entityName, $type, array $sizes) {
