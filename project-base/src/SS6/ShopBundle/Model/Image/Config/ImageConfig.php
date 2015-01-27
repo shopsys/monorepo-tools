@@ -38,7 +38,7 @@ class ImageConfig {
 	 */
 	public function getImageSizeConfigByEntity($entity, $type, $sizeName) {
 		$entityConfig = $this->getImageEntityConfig($entity);
-		return $entityConfig->getTypeSize($type, $sizeName);
+		return $entityConfig->getSizeConfigByType($type, $sizeName);
 	}
 
 	/**
@@ -49,7 +49,7 @@ class ImageConfig {
 	 */
 	public function getImageSizeConfigByEntityName($entityName, $type, $sizeName) {
 		$entityConfig = $this->getEntityConfigByEntityName($entityName);
-		return $entityConfig->getTypeSize($type, $sizeName);
+		return $entityConfig->getSizeConfigByType($type, $sizeName);
 	}
 
 	/**
@@ -59,7 +59,7 @@ class ImageConfig {
 	 */
 	public function getImageSizeConfigByImage(Image $image, $sizeName) {
 		$entityConfig = $this->getEntityConfigByEntityName($image->getEntityName());
-		return $entityConfig->getTypeSize($image->getType(), $sizeName);
+		return $entityConfig->getSizeConfigByType($image->getType(), $sizeName);
 	}
 
 	/**

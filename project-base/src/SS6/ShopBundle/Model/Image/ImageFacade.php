@@ -170,8 +170,8 @@ class ImageFacade {
 	public function deleteImageFiles(Image $image) {
 		$entityName = $image->getEntityName();
 		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
-		foreach ($imageConfig->getSizes() as $size) {
-			$filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $size->getName());
+		foreach ($imageConfig->getSizeConfigs() as $sizeConfig) {
+			$filepath = $this->imageLocator->getAbsoluteImageFilepath($image, $sizeConfig->getName());
 			$this->filesystem->remove($filepath);
 		}
 	}

@@ -18,13 +18,13 @@ front_homepage:
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
 
 front_image:
-  pattern: /assets/content/images/{entityName}/{type}/{size}/{imageId}.{extension}
+  pattern: /assets/content/images/{entityName}/{type}/{sizeName}/{imageId}.{extension}
   defaults: { _controller: SS6ShopBundle:Front\Image:getImage }
   requirements:
     imageId: \d+
 
 front_image_without_type:
-  pattern: /assets/content/images/{entityName}/{size}/{imageId}.{extension}
+  pattern: /assets/content/images/{entityName}/{sizeName}/{imageId}.{extension}
   defaults:
     _controller: SS6ShopBundle:Front\Image:getImage
     type: ~

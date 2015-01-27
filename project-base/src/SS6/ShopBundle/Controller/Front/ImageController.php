@@ -8,19 +8,19 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImageController extends Controller {
 
-	public function getImageAction($entityName, $type, $size, $imageId) {
+	public function getImageAction($entityName, $type, $sizeName, $imageId) {
 		$imageGeneratorFacade = $this->get('ss6.shop.image.processing.image_generator_facade');
 		/* @var $imageGeneratorFacade \SS6\ShopBundle\Model\Image\Processing\ImageGeneratorFacade */
 
-		if ($size === ImageConfig::DEFAULT_SIZE_NAME) {
-			$size = null;
+		if ($sizeName === ImageConfig::DEFAULT_SIZE_NAME) {
+			$sizeName = null;
 		}
 
 		try {
-			$imageFilepath = $imageGeneratorFacade->generateImageAndGetFilepath($entityName, $imageId, $type, $size);
+			$imageFilepath = $imageGeneratorFacade->generateImageAndGetFilepath($entityName, $imageId, $type, $sizeName);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageException $e) {
 			$message = 'Generate image for entity "' . $entityName
-				. '" (type=' . $type . ', size=' . $size . ', imageId=' . $imageId . ') failed.';
+				. '" (type=' . $type . ', size=' . $sizeName . ', imageId=' . $imageId . ') failed.';
 			throw $this->createNotFoundException($message, $e);
 		}
 
