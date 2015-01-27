@@ -42,7 +42,7 @@ class Translator extends BaseTranslator {
 
 	/**
 	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
-	 * function returns translation id string with self::NOT_TRANSLATED_PREFIX prefix
+	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 *
 	 * @api
@@ -69,8 +69,8 @@ class Translator extends BaseTranslator {
 	}
 
 	/**
-	 * When translation for given locale is not defined locale is not self::TRANSLATION_ID_LOCALE,
-	 * function returns translation id string with self::NOT_TRANSLATED_PREFIX prefix
+	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
+	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 *
 	 * @api

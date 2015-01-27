@@ -14,7 +14,7 @@
 	var $list = null;
 	var $listItemTemplate = null;
 	var requestTimer = null;
-	var existResult = false;
+	var resultExists = false;
 	var searchDataCache = {};
 
 	SS6.search.autocomplete.init = function () {
@@ -25,7 +25,7 @@
 
 		$input.bind('keyup paste', SS6.search.autocomplete.onInputChange);
 		$input.bind('focus', function () {
-			if (existResult) {
+			if (resultExists) {
 				$list.show();
 			}
 		});
@@ -35,7 +35,7 @@
 		});
 
 		$(document).click(function(event) {
-			if(!$(event.target).closest('#js-search-autocomplete').length) {
+			if($(event.target).closest('#js-search-autocomplete').length === 0) {
 				$list.hide();
 			}
 		});
@@ -43,13 +43,13 @@
 
 	SS6.search.autocomplete.onInputChange = function(event) {
 		clearTimeout(requestTimer);
-		// $input.val() is not modified on paste event, value.length will check in search() after delay
+
+		// on "paste" event the $input.val() is not updated with new value yet,
+		// therefore call of search() method is scheduled for later
 		requestTimer = setTimeout(SS6.search.autocomplete.search, options.requestDelay);
 
-		if ($input.val().length < options.minLength) {
-			existResult = false;
-			$list.hide();
-		}
+		// do not propagate change events
+		// (except "paste" event that must be propagated otherwise the value is not pasted)
 		if (event.type !== 'paste') {
 			return false;
 		}
@@ -64,6 +64,9 @@
 			} else {
 				SS6.search.autocomplete.searchRequest(searchText);
 			}
+		} else {
+			resultExists = false;
+			$list.hide();
 		}
 	};
 
@@ -83,7 +86,7 @@
 	};
 
 	SS6.search.autocomplete.showResult = function(responseData) {
-		existResult = true;
+		resultExists = true;
 		$label.text(responseData.label);
 
 		$list.find('.js-search-autocomplete-item').remove();

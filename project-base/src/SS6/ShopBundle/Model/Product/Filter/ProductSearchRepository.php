@@ -39,7 +39,7 @@ class ProductSearchRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultVisibleByNameOrCatnum(
+	public function getPaginationResultForVisibleByNameOrCatnum(
 		$domainId,
 		$locale,
 		$productName,
