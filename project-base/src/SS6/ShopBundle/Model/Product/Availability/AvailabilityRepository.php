@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
+use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 
 class AvailabilityRepository {
@@ -51,8 +53,16 @@ class AvailabilityRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
-	public function findAll() {
-		return $this->getAvailabilityRepository()->findBy([], ['id' => 'asc']);
+	public function getAll() {
+		$queryBuilder = $this->em->createQueryBuilder();
+		$queryBuilder
+			->select('a')
+			->from(Availability::class, 'a')
+			->orderBy('a.deliveryTime');
+		$query = $queryBuilder->getQuery();
+		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
+
+		return $query->execute();
 	}
 
 }

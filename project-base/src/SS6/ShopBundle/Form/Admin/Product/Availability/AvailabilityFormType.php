@@ -31,6 +31,16 @@ class AvailabilityFormType extends AbstractType {
 						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název dostupnosti nesmí být delší než {{ limit }} znaků']),
 					],
 				],
+			])
+			->add('deliveryTime', 'number', [
+				'precision' => 0,
+				'required' => false,
+				'invalid_message' => 'Doba dodání musí být celé číslo',
+				'constraints' => [
+					new Constraints\GreaterThanOrEqual([
+						'value' => 0, 'message' => 'Doba dodání musí být větší nebo rovna {{ compared_value }}',
+					]),
+				],
 			]);
 	}
 

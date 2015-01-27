@@ -1,12 +1,12 @@
 /*
 Sorting arrows
 =========
-Arrows for sorting ascendent/descendent in grid
+Arrows for sorting ascendent/descendent in grid. It has fix for links in chrome!
 
 	<table class="table">
 		<tr>
-			<td>ID <span class="in-sort-arrows in-sort-arrows--down"></span></td>
-			<td>Name <span class="in-sort-arrows in-sort-arrows--up"></span></td>
+			<td><a href="./" class="in-sort-arrows__wrap"><span class="in-sort-arrows__link">ID with link</span> <span class="in-sort-arrows in-sort-arrows--down"></span></a></td>
+			<td>Name without link <span class="in-sort-arrows in-sort-arrows--up"></span></td>
 			<td>Type</td>
 		</tr>
 		<tr>
@@ -27,6 +27,14 @@ Arrows for sorting ascendent/descendent in grid
 	position: relative;
 	display: inline-block;
 	width: 10px;
+}
+
+.in-sort-arrows__wrap:hover {
+	text-decoration: none;
+
+	.in-sort-arrows__link {
+		text-decoration: underline;
+	}
 }
 
 .in-sort-arrows--up {

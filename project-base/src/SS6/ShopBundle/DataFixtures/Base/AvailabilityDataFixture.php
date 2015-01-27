@@ -20,15 +20,19 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$availabilityData = new AvailabilityData();
 		$availabilityData->name = ['cs' => 'Připravujeme', 'en' => 'Preparing'];
+		$availabilityData->deliveryTime = 14;
 		$this->createAvailability($manager, self::PREPARING, $availabilityData);
 
 		$availabilityData->name = ['cs' => 'Skladem', 'en' => 'In stock'];
+		$availabilityData->deliveryTime = 0;
 		$this->createAvailability($manager, self::IN_STOCK, $availabilityData);
 
 		$availabilityData->name = ['cs' => 'Na dotaz', 'en' => 'On request'];
+		$availabilityData->deliveryTime = 7;
 		$this->createAvailability($manager, self::ON_REQUEST, $availabilityData);
 
 		$availabilityData->name = ['cs' => 'Nedostupné', 'en' => 'Out of stock'];
+		$availabilityData->deliveryTime = null;
 		$this->createAvailability($manager, self::OUT_OF_STOCK, $availabilityData);
 
 		$manager->flush();

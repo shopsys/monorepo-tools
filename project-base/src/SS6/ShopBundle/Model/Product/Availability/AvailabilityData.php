@@ -10,9 +10,16 @@ class AvailabilityData {
 	public $name;
 
 	/**
-	 * @param string[] $name
+	 * @var int|null
 	 */
-	public function __construct(array $name = []) {
+	public $deliveryTime;
+
+	/**
+	 * @param string[] $name
+	 * @param int|null $deliveryTime
+	 */
+	public function __construct(array $name = [], $deliveryTime = null) {
+		$this->deliveryTime = $deliveryTime;
 		$this->name = $name;
 	}
 
@@ -20,6 +27,7 @@ class AvailabilityData {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
 	 */
 	public function setFromEntity(Availability $availability) {
+		$this->deliveryTime = $availability->getDeliveryTime();
 		$translations = $availability->getTranslations();
 		$names = [];
 		foreach ($translations as $translate) {
