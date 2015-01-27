@@ -18,7 +18,7 @@ class TransportPriceData {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param number $price
+	 * @param string $price
 	 */
 	public function __construct(Currency $currency, $price) {
 		$this->currency = $currency;

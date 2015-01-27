@@ -46,7 +46,7 @@ class PaymentPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[paymentId]
 	 */
 	public function calculatePricesById(array $payments, Currency $currency) {
 		$paymentsPrices = [];

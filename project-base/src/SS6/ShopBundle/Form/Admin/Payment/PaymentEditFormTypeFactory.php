@@ -17,9 +17,6 @@ class PaymentEditFormTypeFactory {
 	 */
 	private $currencyFacade;
 
-	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory $paymentFormTypeFactory
-	 */
 	public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, CurrencyFacade $currencyFacade) {
 		$this->paymentFormTypeFactory = $paymentFormTypeFactory;
 		$this->currencyFacade = $currencyFacade;

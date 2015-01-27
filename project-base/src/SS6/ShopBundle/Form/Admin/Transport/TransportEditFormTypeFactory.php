@@ -17,9 +17,6 @@ class TransportEditFormTypeFactory {
 	 */
 	private $currencyFacade;
 
-	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory $transportFormTypeFactory
-	 */
 	public function __construct(TransportFormTypeFactory $transportFormTypeFactory, CurrencyFacade $currencyFacade) {
 		$this->transportFormTypeFactory = $transportFormTypeFactory;
 		$this->currencyFacade = $currencyFacade;

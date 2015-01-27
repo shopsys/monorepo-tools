@@ -46,7 +46,7 @@ class TransportPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[transportId]
 	 */
 	public function calculatePricesById(array $transports, Currency $currency) {
 		$transportsPrices = [];

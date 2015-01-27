@@ -23,10 +23,6 @@ class PaymentEditDataFactory {
 	 */
 	private $vatFacade;
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditFacade $paymentEditFacade
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceEditFacade $paymentPriceEditFacade
-	 */
 	public function __construct(
 		PaymentEditFacade $paymentEditFacade,
 		PaymentPriceEditFacade $paymentPriceEditFacade,

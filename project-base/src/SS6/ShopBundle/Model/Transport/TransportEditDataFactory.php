@@ -23,10 +23,6 @@ class TransportEditDataFactory {
 	 */
 	private $vatFacade;
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Transport\TransportEditFacade $transportEditFacade
-	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceEditFacade $transportPriceEditFacade
-	 */
 	public function __construct(
 		TransportEditFacade $transportEditFacade,
 		TransportPriceEditFacade $transportPriceEditFacade,
