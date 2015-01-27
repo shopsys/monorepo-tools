@@ -150,9 +150,9 @@
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
 	}
-	
+
 	SS6.grid.inlineEdit.loadComponents = function ($row) {
-		$row.find('.js-tooltip[title]').tooltip();		
+		$row.find('.js-tooltip[title]').tooltip();
 		$row.find('.js-colorPicker').minicolors({
 			theme: 'bootstrap'
 		});
