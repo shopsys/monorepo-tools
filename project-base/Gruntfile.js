@@ -207,7 +207,7 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				},
-      			files: ['web/assets/admin/styles/*.css', 'web/assets/frontent/styles/*.css']
+				files: ['web/assets/admin/styles/*.css', 'web/assets/frontent/styles/*.css']
 			},
 			twig: {
 				files: ['src/SS6/ShopBundle/Resources/views/**/*.twig'],
