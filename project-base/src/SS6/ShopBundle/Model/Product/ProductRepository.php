@@ -148,6 +148,7 @@ class ProductRepository {
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 		$this->addTranslation($queryBuilder, $locale);
+		$this->productFilterRepository->filterByStock($queryBuilder, $productFilterData->inStock);
 		$this->productFilterRepository->filterByPrice(
 			$queryBuilder,
 			$pricingGroup,

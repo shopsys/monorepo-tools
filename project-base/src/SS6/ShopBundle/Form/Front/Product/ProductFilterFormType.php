@@ -56,6 +56,7 @@ class ProductFilterFormType extends AbstractType {
 			->add('parameters', new ParameterFilterFormType($this->parameterFilterChoices), [
 				'required' => false,
 			])
+			->add('inStock', FormType::CHECKBOX, ['required' => false])
 			->add('search', FormType::SUBMIT)
 			->add('reset', FormType::SUBMIT);
 	}
