@@ -61,20 +61,31 @@ class ProductData {
 	public $sellingTo;
 
 	/**
-	 * @var int|null
+	 * @var bool
 	 */
-	public $stockQuantity;
+	public $hidden;
 
 	/**
 	 * @var bool
 	 */
-	public $hidden;
+	public $usingStock;
+
+	/**
+	 * @var int|null
+	 */
+	public $stockQuantity;
 
 	/**
 	 *
 	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
 	 */
 	public $availability;
+
+	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
+	 */
+	public $outOfStockAvailability;
 
 	/**
 	 * @var array
@@ -106,10 +117,12 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
-	 * @param string|null $stockQuantity
 	 * @param bool $hidden
-	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
 	 * @param array $flags
+	 * @param bool $usingStock
+	 * @param string|null $stockQuantity
+	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
+	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $outOfStockAvailability
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
 	 * @param int $priceCalculationType
@@ -124,10 +137,12 @@ class ProductData {
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
 		DateTime $sellingTo = null,
-		$stockQuantity = null,
 		$hidden = false,
-		$availability = null,
 		array $flags = [],
+		$usingStock = false,
+		$stockQuantity = null,
+		Availability $availability = null,
+		Availability $outOfStockAvailability = null,
 		array $hiddenOnDomains = [],
 		array $categories = [],
 		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
@@ -141,10 +156,12 @@ class ProductData {
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
 		$this->sellingTo = $sellingTo;
-		$this->stockQuantity = $stockQuantity;
 		$this->hidden = $hidden;
-		$this->availability = $availability;
 		$this->flags = $flags;
+		$this->usingStock = $usingStock;
+		$this->stockQuantity = $stockQuantity;
+		$this->availability = $availability;
+		$this->outOfStockAvailability = $outOfStockAvailability;
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $categories;
 		$this->priceCalculationType = $priceCalculationType;
@@ -172,9 +189,11 @@ class ProductData {
 		$this->vat = $product->getVat();
 		$this->sellingFrom = $product->getSellingFrom();
 		$this->sellingTo = $product->getSellingTo();
+		$this->flags = $product->getFlags()->toArray();
+		$this->usingStock = $product->isUsingStock();
 		$this->stockQuantity = $product->getStockQuantity();
 		$this->availability = $product->getAvailability();
-		$this->flags = $product->getFlags()->toArray();
+		$this->outOfStockAvailability = $product->getOutOfStockAvailability();
 		$this->hidden = $product->isHidden();
 		$hiddenOnDomains = [];
 		foreach ($productDomains as $productDomain) {

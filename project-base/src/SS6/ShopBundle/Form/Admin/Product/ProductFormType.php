@@ -127,6 +127,19 @@ class ProductFormType extends AbstractType {
 				'type' => 'ckeditor',
 				'required' => false,
 			])
+			->add('usingStock', new YesNoType(), ['required' => false])
+			->add('stockQuantity', 'integer', [
+				'required' => false,
+				'invalid_message' => 'Prosím zadejte číslo',
+			])
+			->add('availability', 'choice', [
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+			])
+			->add('outOfStockAvailability', 'choice', [
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+			])
 			->add('price', 'money', [
 				'currency' => false,
 				'precision' => 6,
@@ -164,14 +177,6 @@ class ProductFormType extends AbstractType {
 					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
-			])
-			->add('stockQuantity', 'integer', [
-				'required' => false,
-				'invalid_message' => 'Prosím zadejte číslo',
-			])
-			->add('availability', 'choice', [
-				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
 			])
 			->add('categories', 'choice', [
 				'required' => false,

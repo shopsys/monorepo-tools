@@ -87,13 +87,6 @@ class Product extends AbstractTranslatableEntity {
 	private $sellingTo;
 
 	/**
-	 * @var int|null
-	 *
-	 * @ORM\Column(type="integer", nullable=true)
-	 */
-	private $stockQuantity;
-
-	/**
 	 * @var boolean
 	 *
 	 * @ORM\Column(type="boolean")
@@ -101,11 +94,32 @@ class Product extends AbstractTranslatableEntity {
 	private $hidden;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $usingStock;
+
+	/**
+	 * @var int|null
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $stockQuantity;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
 	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $availability;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @ORM\JoinColumn(name="out_of_stock_availability_id", referencedColumnName="id", nullable=true)
+	 */
+	private $outOfStockAvailability;
 
 	/**
 	 * @var boolean
@@ -154,9 +168,11 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
-		$this->stockQuantity = $productData->stockQuantity;
 		$this->hidden = $productData->hidden;
+		$this->usingStock = $productData->usingStock;
+		$this->stockQuantity = $productData->stockQuantity;
 		$this->availability = $productData->availability;
+		$this->outOfStockAvailability = $productData->outOfStockAvailability;
 		$this->visible = false;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
@@ -179,8 +195,10 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
+		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
 		$this->availability = $productData->availability;
+		$this->outOfStockAvailability = $productData->outOfStockAvailability;
 		$this->hidden = $productData->hidden;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
@@ -274,13 +292,6 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return int|null
-	 */
-	public function getStockQuantity() {
-		return $this->stockQuantity;
-	}
-
-	/**
 	 * @return boolean
 	 */
 	public function isHidden() {
@@ -288,11 +299,31 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 *
+	 * @return boolean
+	 */
+	public function isUsingStock() {
+		return $this->usingStock;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getStockQuantity() {
+		return $this->stockQuantity;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public function getAvailability() {
 		return $this->availability;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 */
+	public function getOutOfStockAvailability() {
+		return $this->outOfStockAvailability;
 	}
 
 	/**
