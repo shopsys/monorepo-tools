@@ -31,7 +31,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Produkty: {products} <br />'
 			. '{transport_instructions} <br />'
 			. '{payment_instructions}';
-		$mailTemplateData->setSendMail = true;
+		$mailTemplateData->sendMail = true;
 
 		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
