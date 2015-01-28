@@ -5,12 +5,14 @@ namespace SS6\ShopBundle\Model\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
@@ -27,12 +29,26 @@ class ProductRepository {
 	 */
 	private $parameterFilterRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository
+	 */
+	private $productFilterRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
+	 */
+	private $queryBuilderService;
+
 	public function __construct(
 		EntityManager $em,
-		ParameterFilterRepository $parameterFilterRepository
+		ParameterFilterRepository $parameterFilterRepository,
+		ProductFilterRepository $productFilterRepository,
+		QueryBuilderService $queryBuilderService
 	) {
 		$this->em = $em;
 		$this->parameterFilterRepository = $parameterFilterRepository;
+		$this->productFilterRepository = $productFilterRepository;
+		$this->queryBuilderService = $queryBuilderService;
 	}
 
 	/**
@@ -132,6 +148,12 @@ class ProductRepository {
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 		$this->addTranslation($queryBuilder, $locale);
+		$this->productFilterRepository->filterByPrice(
+			$queryBuilder,
+			$pricingGroup,
+			$productFilterData->minimalPrice,
+			$productFilterData->maximalPrice
+		);
 		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
@@ -160,10 +182,10 @@ class ProductRepository {
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
-				$queryBuilder->leftJoin(
+				$this->queryBuilderService->addOrExtendJoin(
+					$queryBuilder,
 					ProductCalculatedPrice::class,
 					'pcp',
-					Join::WITH,
 					'pcp.product = p AND pcp.pricingGroup = :pricingGroup'
 				);
 				$queryBuilder->orderBy('pcp.priceWithVat', 'asc');
@@ -171,10 +193,10 @@ class ProductRepository {
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_PRICE_DESC:
-				$queryBuilder->leftJoin(
+				$this->queryBuilderService->addOrExtendJoin(
+					$queryBuilder,
 					ProductCalculatedPrice::class,
 					'pcp',
-					Join::WITH,
 					'pcp.product = p AND pcp.pricingGroup = :pricingGroup'
 				);
 				$queryBuilder->orderBy('pcp.priceWithVat', 'desc');

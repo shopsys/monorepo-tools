@@ -50,11 +50,11 @@
 	SS6.validation.findFormContainer = function ($formInput) {
 		var $formConatiner = $formInput.closest('.form-line');
 		if ($formConatiner.size() === 0) {
-			return $formInput.closest('.form-group, .js-form-group');
+			return $formInput.closest('.form-group, .js-form-group, .box-filter__group__item');
 		}
 
 		return $formConatiner;
-	}
+	};
 
 	SS6.validation.findErrorList = function ($formInput) {
 		var $formConatiner = SS6.validation.findFormContainer($formInput);

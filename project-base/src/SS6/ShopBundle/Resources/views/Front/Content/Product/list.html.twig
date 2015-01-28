@@ -18,13 +18,13 @@
 			{{ form_start(filterForm, { action: url('front_product_category', { categoryId: category.id }) }) }}
 				{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
 
-				<div class="box-filter__group display-none">
+				<div class="box-filter__group">
 					<div class="box-filter__group__item">
-						{{ form_row(filterForm.minimalPrice) }}
+						{{ form_row(filterForm.minimalPrice, {label: 'Cena od', symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
 					</div>
 
 					<div class="box-filter__group__item">
-						{{ form_row(filterForm.maximalPrice) }}
+						{{ form_row(filterForm.maximalPrice, {label: 'Cena do', symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
 					</div>
 
 				</div>

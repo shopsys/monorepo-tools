@@ -636,6 +636,9 @@ services:
   ss6.shop.product.filter.parameter_filter_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
 
+  ss6.shop.product.filter.product_filter_repository:
+    class: SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository
+
   ss6.shop.product.filter.product_search_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository
 

@@ -72,6 +72,7 @@ class ProductController extends Controller {
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
+			'domainId' => $domain->getId(),
 		]);
 	}
 
