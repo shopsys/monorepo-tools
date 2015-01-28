@@ -12,7 +12,7 @@ class PaymentEditData {
 	public $paymentData;
 
 	/**
-	 * @var string[]
+	 * @var string[currencyId]
 	 */
 	public $prices;
 

@@ -43,13 +43,20 @@ class TransportEditFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('transportData', $this->transportFormTypeFactory->create())
-			->add('prices', 'form', [
-				'compound' => true,
-			])
+			->add($this->getPricesBuilder($builder))
 			->add('save', 'submit');
+	}
 
+	/**
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
+	 * @return \Symfony\Component\Form\FormBuilderInterface
+	 */
+	private function getPricesBuilder(FormBuilderInterface $builder) {
+		$pricesBuilder = $builder->create('prices', null, [
+			'compound' => true,
+		]);
 		foreach ($this->currencies as $currency) {
-			$builder->get('prices')
+			$pricesBuilder
 				->add($currency->getId(), 'money', [
 					'currency' => false,
 					'precision' => 6,
@@ -65,6 +72,8 @@ class TransportEditFormType extends AbstractType {
 					],
 				]);
 		}
+
+		return $pricesBuilder;
 	}
 
 	/**

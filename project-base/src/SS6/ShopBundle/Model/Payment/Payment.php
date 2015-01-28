@@ -88,7 +88,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 		$this->hidden = $paymentData->hidden;
 		$this->deleted = false;
 		$this->setTranslations($paymentData);
-		$this->prices = [];
+		$this->prices = new ArrayCollection();
 	}
 
 	/**

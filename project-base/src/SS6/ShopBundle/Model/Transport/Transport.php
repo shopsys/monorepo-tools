@@ -77,7 +77,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 		$this->hidden = $transportData->hidden;
 		$this->deleted = false;
 		$this->setTranslations($transportData);
-		$this->prices = [];
+		$this->prices = new ArrayCollection();
 	}
 
 	/**

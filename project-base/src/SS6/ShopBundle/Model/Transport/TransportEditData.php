@@ -12,7 +12,7 @@ class TransportEditData {
 	public $transportData;
 
 	/**
-	 * @var string[]
+	 * @var string[currencyId]
 	 */
 	public $prices;
 
