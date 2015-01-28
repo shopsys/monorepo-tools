@@ -40,7 +40,7 @@ class ProductSearchService {
 			$responseData['products'][] = [
 				'name' => $product->getName(),
 				'url' => $this->router->generate('front_product_detail', ['id' => $product->getId()]),
-				'imageUrl' => $this->imageExtension->getImageUrl($product, 'original', null),
+				'imageUrl' => $this->imageExtension->getImageUrl($product, 'thumbnail'),
 			];
 		}
 
