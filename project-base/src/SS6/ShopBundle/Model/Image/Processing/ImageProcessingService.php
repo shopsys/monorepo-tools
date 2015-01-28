@@ -2,7 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Image\Processing;
 
+use Intervention\Image\Constraint;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
+use SS6\ShopBundle\Model\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageProcessingService {
@@ -77,6 +80,37 @@ class ImageProcessingService {
 		}
 
 		return $image->filename . '.' . $image->extension;
+	}
+
+	/**
+	 * @param \Intervention\Image\Image $image
+	 * @param int|null $width
+	 * @param int|null $height
+	 * @param bool $crop
+	 * @return \Intervention\Image\Image
+	 */
+	public function resize(Image $image, $width, $height, $crop = false) {
+		if ($crop) {
+			$image->fit($width, $height, function (Constraint $constraint) {
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			});
+		} else {
+			$image->resize($width, $height, function (Constraint $constraint) {
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			});
+		}
+
+		return $image;
+	}
+
+	/**
+	 * @param \Intervention\Image\Image $image
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig $sizeConfig
+	 */
+	public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig) {
+		$this->resize($image, $sizeConfig->getWidth(), $sizeConfig->getHeight(), $sizeConfig->getCrop());
 	}
 
 }

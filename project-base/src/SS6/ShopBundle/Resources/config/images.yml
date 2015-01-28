@@ -5,27 +5,34 @@
 #    - name: gallery
 #      multiple: true
 #      sizes:
-#        - { name: origin, width: ~, height: ~, crop: false }
+#        - { name: original, width: ~, height: ~, crop: false }
 #        - { name: detail, width: 200, height: 300, crop: false }
 #        - { name: list, width: 100, height: 100, crop: true }
 #    - name: main
 #      sizes:
-#        - { name: origin, width: ~, height: ~, crop: false }
+#        - { name: original, width: ~, height: ~, crop: false }
 #        - { name: detail, width: 200, height: 300, crop: false }
 
 - name: payment
   class: SS6\ShopBundle\Model\Payment\Payment
+  sizes:
+    - { name: ~, width: ~, height: 20, crop: false }
 
 - name: product
   class: SS6\ShopBundle\Model\Product\Product
   multiple: true
   sizes:
-    - { name: origin, width: ~, height: ~, crop: false }
-    - { name: default, width: 200, height: 300, crop: false }
-    - { name: list, width: 100, height: 100, crop: true }
+    - { name: ~, width: 550, height: ~, crop: false }
+    - { name: galleryThubnail, width: ~, height: 35, crop: false }
+    - { name: list, width: 300, height: 200, crop: false }
+    - { name: thumbnail, width: 50, height: 40, crop: true }
 
 - name: sliderItem
   class: SS6\ShopBundle\Model\Slider\SliderItem
+  sizes:
+    - { name: ~, width: 918, height: 230, crop: true }
 
 - name: transport
   class: SS6\ShopBundle\Model\Transport\Transport
+  sizes:
+    - { name: ~, width: ~, height: 20, crop: false }

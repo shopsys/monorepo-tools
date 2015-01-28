@@ -7,6 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -32,25 +33,23 @@ class ImageDeleteDoctrineListener {
 	 */
 	private $fileUpload;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageLocator
+	 */
+	private $imageLocator;
+
 	public function __construct(
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		ImageConfig $imageConfig,
-		FileUpload $fileUpload
+		FileUpload $fileUpload,
+		ImageLocator $imageLocator
 	) {
 		$this->container = $container;
 		$this->filesystem = $filesystem;
 		$this->imageConfig = $imageConfig;
 		$this->fileUpload = $fileUpload;
-	}
-
-	/**
-	 * Prevent ServiceCircularReferenceException
-	 *
-	 * @return \SS6\ShopBundle\Model\Image\ImageLocator
-	 */
-	private function getImageLocator() {
-		return $this->container->get('ss6.shop.image.image_locator');
+		$this->imageLocator = $imageLocator;
 	}
 
 	/**
@@ -71,7 +70,7 @@ class ImageDeleteDoctrineListener {
 		if ($this->imageConfig->hasImageConfig($entity)) {
 			$this->deleteEntityImages($entity, $args->getEntityManager());
 		} elseif ($entity instanceof Image) {
-			$this->deleteImageFiles($entity);
+			$this->getImageFacade()->deleteImageFiles($entity);
 		}
 	}
 
@@ -81,23 +80,11 @@ class ImageDeleteDoctrineListener {
 	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
 	 */
 	private function deleteEntityImages($entity, EntityManager $em) {
-		$images = $this->getImageFacade()->getImagesByEntity($entity, null);
+		$images = $this->getImageFacade()->getAllImagesByEntity($entity);
 		if (count($images) > 0) {
 			foreach ($images as $entity) {
 				$em->remove($entity);
 			}
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image $image
-	 */
-	private function deleteImageFiles(Image $image) {
-		$entityName = $image->getEntityName();
-		$imageConfig = $this->imageConfig->getEntityConfigByEntityName($entityName);
-		foreach ($imageConfig->getSizes() as $size) {
-			$filepath = $this->getImageLocator()->getAbsoluteImageFilepath($image, $size->getName());
-			$this->filesystem->remove($filepath);
 		}
 	}
 

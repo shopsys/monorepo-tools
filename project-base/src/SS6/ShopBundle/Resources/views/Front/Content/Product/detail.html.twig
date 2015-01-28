@@ -9,21 +9,21 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="product-image">
 				<span>
-					{% if imageExists(productDetail.product, 'original') %}
+					{% if imageExists(productDetail.product) %}
 						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-gallery-main">
-							{{ image(productDetail.product, { size: 'original', width: '550px' }) }}
+							{{ image(productDetail.product) }}
 						</a>
 					{% else %}
 						<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
 					{% endif %}
 				</span>
 			</div>
-			{% set imagesUrl = imagesUrl(productDetail.product, 'original') %}
-			{% if imagesUrl|length > 1 %}
+			{% set galleryImages = getImages(productDetail.product) %}
+			{% if galleryImages|length > 1 %}
 				<div class="product-gallery js-gallery">
-					{% for imageUrl in imagesUrl %}
-						<a href="{{ imageUrl }}" class="product-gallery__image">
-							<img src="{{ imageUrl }}" alt="" height="35"  />
+					{% for galleryImage in galleryImages %}
+						<a href="{{ imageUrl(galleryImage, 'original') }}" class="product-gallery__image">
+							{{ image(galleryImage, {size: 'galleryThubnail'}) }}
 						</a>
 					{% endfor %}
 				</div>

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Twig;
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -41,24 +42,24 @@ class ImageExtension extends Twig_Extension {
 	private $imageConfig;
 
 	/**
-	 * @param string $imageUrlPrefix
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-	 * @param \SS6\ShopBundle\Model\Image\ImageLocator $imageLocator
-	 * @param \SS6\ShopBundle\Model\Image\Config\ImageConfig $imageConfig
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
+	private $imageFacade;
+
 	public function __construct(
 		$imageUrlPrefix,
 		ContainerInterface $container,
 		RequestStack $requestStack,
 		ImageLocator $imageLocator,
-		ImageConfig $imageConfig
+		ImageConfig $imageConfig,
+		ImageFacade $imageFacade
 	) {
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
 		$this->request = $requestStack->getMasterRequest();
 		$this->imageLocator = $imageLocator;
 		$this->imageConfig = $imageConfig;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -77,40 +78,102 @@ class ImageExtension extends Twig_Extension {
 		return [
 			new Twig_SimpleFunction('imageExists', [$this, 'imageExists']),
 			new Twig_SimpleFunction('imageUrl', [$this, 'getImageUrl']),
-			new Twig_SimpleFunction('imagesUrl', [$this, 'getImagesUrl']),
 			new Twig_SimpleFunction('image', [$this, 'getImageHtml'], ['is_safe' => ['html']]),
-			new Twig_SimpleFunction('imageUrlByImage', [$this, 'getImageUrlByImage']),
+			new Twig_SimpleFunction('getImages', [$this, 'getImages']),
 		];
 	}
 
 	/**
-	 * @param Object $entity
+	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param string|null $type
+	 * @return bool
+	 */
+	public function imageExists($imageOrEntity, $type = null) {
+		try {
+			$image = $this->getImageByObject($imageOrEntity, $type);
+		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+			return false;
+		}
+
+		return $this->imageLocator->imageExists($image);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
 	 * @param string|null $sizeName
 	 * @param string|null $type
 	 * @return string
 	 */
-	public function imageExists($entity, $sizeName = null, $type = null) {
-		return $this->imageLocator->imageExistsByEntityAndType($entity, $type, $sizeName);
+	public function getImageUrl($imageOrEntity, $sizeName = null, $type = null) {
+		try {
+			$image = $this->getImageByObject($imageOrEntity, $type);
+			if (!$this->imageLocator->imageExists($image)) {
+				return $this->getEmptyImageUrl();
+			}
+			return $this->request->getBaseUrl()
+				. $this->imageUrlPrefix
+				. str_replace(DIRECTORY_SEPARATOR, '/', $this->imageLocator->getRelativeImageFilepath($image, $sizeName));
+		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+			return $this->getEmptyImageUrl();
+		}
 	}
 
 	/**
 	 * @param Object $entity
-	 * @param string|null $sizeName
 	 * @param string|null $type
+	 * @return array
+	 */
+	public function getImages($entity, $type = null) {
+		return $this->imageFacade->getImagesByEntity($entity, $type);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param array $attributtes
 	 * @return string
 	 */
-	public function getImageUrl($entity, $sizeName = null, $type = null) {
-		if ($this->imageLocator->imageExistsByEntityAndType($entity, $type, $sizeName)) {
-			$relativeFilepath = $this->imageLocator->getRelativeImageFilepathByEntityAndType($entity, $type, $sizeName);
-		} else {
-			$relativeFilepath = self::NOIMAGE_FILENAME;
+	public function getImageHtml($imageOrEntity, array $attributtes = []) {
+		Condition::setArrayDefaultValue($attributtes, 'type');
+		Condition::setArrayDefaultValue($attributtes, 'size');
+		Condition::setArrayDefaultValue($attributtes, 'alt', '');
+		Condition::setArrayDefaultValue($attributtes, 'title', $attributtes['alt']);
+
+		try {
+			$image = $this->getImageByObject($imageOrEntity, $attributtes['type']);
+			$entityName = $image->getEntityName();
+			$attributtes['src'] = $this->getImageUrl($image, $attributtes['size'], $attributtes['type']);
+		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+			$entityName = 'noimage';
+			$attributtes['src'] = $this->getEmptyImageUrl();
 		}
 
-		$url = $this->request->getBaseUrl()
-			. $this->imageUrlPrefix
-			. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
+		$htmlAttributes = $attributtes;
+		unset($htmlAttributes['type'], $htmlAttributes['size']);
 
-		return $url;
+		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
+			'attr' => $htmlAttributes,
+			'imageCssClass' => $this->getImageCssClass($entityName, $attributtes['type'], $attributtes['size']),
+		]);
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getEmptyImageUrl() {
+		return $this->request->getBaseUrl() . $this->imageUrlPrefix . self::NOIMAGE_FILENAME;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param string|null $type
+	 * @return \SS6\ShopBundle\Model\Image\Image
+	 */
+	private function getImageByObject($imageOrEntity, $type = null) {
+		if ($type === null && $imageOrEntity instanceof Image) {
+			return $imageOrEntity;
+		} else {
+			return $this->imageFacade->getImageByEntity($imageOrEntity, $type);
+		}
 	}
 
 	/**
@@ -118,72 +181,10 @@ class ImageExtension extends Twig_Extension {
 	 * @param string|null $sizeName
 	 * @return string
 	 */
-	public function getImageUrlByImage(Image $image, $sizeName = null) {
-		if ($this->imageLocator->imageExists($image, $sizeName)) {
-			$relativeFilepath = $this->imageLocator->getRelativeImageFilepath($image, $sizeName);
-		} else {
-			$relativeFilepath = self::NOIMAGE_FILENAME;
-		}
-
-		$url = $this->request->getBaseUrl()
-			. $this->imageUrlPrefix
-			. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
-
-		return $url;
-	}
-
-	/**
-	 * @param Object $entity
-	 * @param string|null $sizeName
-	 * @param string|null $type
-	 * @return array
-	 */
-	public function getImagesUrl($entity, $sizeName = null, $type = null) {
-		$imagesUrl = [];
-
-		$relativeFilepaths = $this->imageLocator->getRelativeImagesFilepathsByEntityAndType($entity, $type, $sizeName);
-		foreach ($relativeFilepaths as $relativeFilepath) {
-			$imagesUrl[] =
-				$this->request->getBaseUrl()
-				. $this->imageUrlPrefix
-				. str_replace(DIRECTORY_SEPARATOR, '/', $relativeFilepath);
-		}
-
-		return $imagesUrl;
-	}
-
-	/**
-	 * @param Object $entity
-	 * @param array $attributtes
-	 * @return string
-	 */
-	public function getImageHtml($entity, $attributtes = []) {
-		Condition::setArrayDefaultValue($attributtes, 'type');
-		Condition::setArrayDefaultValue($attributtes, 'size');
-		Condition::setArrayDefaultValue($attributtes, 'alt', '');
-		Condition::setArrayDefaultValue($attributtes, 'title', $attributtes['alt']);
-
-		$attributtes['src'] = $this->getImageUrl($entity, $attributtes['size'], $attributtes['type']);
-
-		$htmlAttributes = $attributtes;
-		unset($htmlAttributes['type'], $htmlAttributes['size']);
-
-		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
-			'attr' => $htmlAttributes,
-			'imageCssClass' => $this->getImageEntityCssClass($entity, $attributtes['type'], $attributtes['size']),
-		]);
-	}
-
-	/**
-	 * @param Object $entity
-	 * @param string|null $type
-	 * @param string|null $sizeName
-	 * @return string
-	 */
-	private function getImageEntityCssClass($entity, $type, $sizeName) {
+	private function getImageCssClass($entityName, $type, $sizeName) {
 		$allClassParts = [
 			'image',
-			$imageEntityConfig = $this->imageConfig->getEntityName($entity),
+			$entityName,
 			$type,
 			$sizeName,
 		];

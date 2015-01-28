@@ -194,7 +194,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($imageEntityConfig->isMultiple('TypeName_1'));
 		$this->assertFalse($imageEntityConfig->isMultiple('TypeName_2'));
 
-		$imageSize = $imageEntityConfig->getTypeSize('TypeName_1', 'SizeName_2');
+		$imageSize = $imageEntityConfig->getSizeConfigByType('TypeName_1', 'SizeName_2');
 
 		$this->assertEquals('SizeName_2', $imageSize->getName());
 		$this->assertEquals(200, $imageSize->getWidth());
@@ -219,7 +219,7 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$preparedConfig = $imageConfigLoader->loadFromArray($inputConfig);
 
 		$imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
-		$imageSize = $imageEntityConfig->getTypeSize(null, ImageConfig::ORIGINAL_SIZE_NAME);
+		$imageSize = $imageEntityConfig->getSizeConfigByType(null, ImageConfig::ORIGINAL_SIZE_NAME);
 
 		$this->assertInstanceOf(ImageSizeConfig::class, $imageSize);
 		$this->assertNull($imageSize->getHeight());
@@ -251,9 +251,9 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$preparedConfig = $imageConfigLoader->loadFromArray($inputConfig);
 
 		$imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
-		$this->assertCount(1, $imageEntityConfig->getSizes());
+		$this->assertCount(1, $imageEntityConfig->getSizeConfigs());
 
-		$imageSize = $imageEntityConfig->getTypeSize(null, ImageConfig::ORIGINAL_SIZE_NAME);
+		$imageSize = $imageEntityConfig->getSizeConfigByType(null, ImageConfig::ORIGINAL_SIZE_NAME);
 
 		$this->assertInstanceOf(ImageSizeConfig::class, $imageSize);
 		$this->assertEquals(100, $imageSize->getHeight());

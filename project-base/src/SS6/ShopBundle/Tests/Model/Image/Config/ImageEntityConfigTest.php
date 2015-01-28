@@ -23,7 +23,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
-		$typeSizes = $imageEntityConfig->getTypeSizes('TypeName_1');
+		$typeSizes = $imageEntityConfig->getSizeConfigsByType('TypeName_1');
 		$this->assertEquals($types['TypeName_1'], $typeSizes);
 	}
 
@@ -42,7 +42,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
 		$this->setExpectedException(ImageTypeNotFoundException::class);
-		$imageEntityConfig->getTypeSizes('TypeName_3');
+		$imageEntityConfig->getSizeConfigsByType('TypeName_3');
 	}
 
 	public function testGetTypeSize() {
@@ -61,13 +61,13 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
-		$size1 = $imageEntityConfig->getTypeSize(null, null);
+		$size1 = $imageEntityConfig->getSizeConfigByType(null, null);
 		$this->assertEquals($sizes[ImageEntityConfig::WITHOUT_NAME_KEY], $size1);
 
-		$type1Size1 = $imageEntityConfig->getTypeSize('TypeName_1', 'SizeName_1_1');
+		$type1Size1 = $imageEntityConfig->getSizeConfigByType('TypeName_1', 'SizeName_1_1');
 		$this->assertEquals($types['TypeName_1']['SizeName_1_1'], $type1Size1);
 
-		$type2Size1 = $imageEntityConfig->getTypeSize('TypeName_2', null);
+		$type2Size1 = $imageEntityConfig->getSizeConfigByType('TypeName_2', null);
 		$this->assertEquals($types['TypeName_2'][ImageEntityConfig::WITHOUT_NAME_KEY], $type2Size1);
 	}
 

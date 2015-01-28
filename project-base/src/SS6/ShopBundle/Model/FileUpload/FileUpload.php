@@ -110,31 +110,24 @@ class FileUpload {
 	 *
 	 * @param string $isImage
 	 * @param string $category
-	 * @param string|null $type
+	 * @param string|null $targetDirectory
 	 * @return string
 	 */
-	public function getUploadDirectory($isImage, $category, $type) {
-		if ($isImage) {
-			return $this->imageDir
-				. DIRECTORY_SEPARATOR . $category
-				. ($type !== null ? DIRECTORY_SEPARATOR . $type : '');
-		} else {
-			return $this->fileDir
-				. DIRECTORY_SEPARATOR . $category
-				. ($type !== null ? DIRECTORY_SEPARATOR . $type : '');
-		}
-
+	public function getUploadDirectory($isImage, $category, $targetDirectory) {
+		return ($isImage ? $this->imageDir : $this->fileDir)
+			. DIRECTORY_SEPARATOR . $category
+			. ($targetDirectory !== null ? DIRECTORY_SEPARATOR . $targetDirectory : '');
 	}
 
 	/**
 	 * @param strinf $filename
 	 * @param bool $isImage
 	 * @param string $category
-	 * @param string|null $type
+	 * @param string|null $targetDirectory
 	 * @return string
 	 */
-	private function getTargetFilepath($filename, $isImage, $category, $type) {
-		return $this->getUploadDirectory($isImage, $category, $type) . DIRECTORY_SEPARATOR . $filename;
+	private function getTargetFilepath($filename, $isImage, $category, $targetDirectory) {
+		return $this->getUploadDirectory($isImage, $category, $targetDirectory) . DIRECTORY_SEPARATOR . $filename;
 	}
 
 	/**
@@ -166,7 +159,7 @@ class FileUpload {
 	 */
 	public function postFlushEntity(EntityFileUploadInterface $entity) {
 		$filesForUpload = $entity->getTemporaryFilesForUpload();
-		foreach ($filesForUpload as $key => $fileForUpload) {
+		foreach ($filesForUpload as $fileForUpload) {
 			/* @var $fileForUpload FileForUpload */
 			$sourceFilepath = $this->getTemporaryFilepath($fileForUpload->getTemporaryFilename());
 			$originalFilename = $this->fileNamingConvention->getFilenameByNamingConvention(
@@ -178,7 +171,7 @@ class FileUpload {
 				$originalFilename,
 				$fileForUpload->isImage(),
 				$fileForUpload->getCategory(),
-				$fileForUpload->getType()
+				$fileForUpload->getTargetDirectory()
 			);
 
 			try {

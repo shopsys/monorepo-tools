@@ -45,13 +45,21 @@ class DirectoryStructureCreator {
 		$imageEntityConfigs = $this->imageConfig->getAllImageEntityConfigsByClass();
 		$directories = [];
 		foreach ($imageEntityConfigs as $imageEntityConfig) {
-			$sizes = $imageEntityConfig->getSizes();
-			$sizesDirectories = $this->getTargetDirectoriesFromSizes($imageEntityConfig->getEntityName(), null, $sizes);
+			$sizeConfigs = $imageEntityConfig->getSizeConfigs();
+			$sizesDirectories = $this->getTargetDirectoriesFromSizeConfigs(
+				$imageEntityConfig->getEntityName(),
+				null,
+				$sizeConfigs
+			);
 			$directories = array_merge($directories, $sizesDirectories);
 
 			foreach ($imageEntityConfig->getTypes() as $type) {
-				$typeSizes = $imageEntityConfig->getTypeSizes($type);
-				$typeSizesDirectories = $this->getTargetDirectoriesFromSizes($imageEntityConfig->getEntityName(), $type, $typeSizes);
+				$typeSizes = $imageEntityConfig->getSizeConfigsByType($type);
+				$typeSizesDirectories = $this->getTargetDirectoriesFromSizeConfigs(
+					$imageEntityConfig->getEntityName(),
+					$type,
+					$typeSizes
+				);
 				$directories = array_merge($directories, $typeSizesDirectories);
 			}
 		}
@@ -62,13 +70,13 @@ class DirectoryStructureCreator {
 	/**
 	 * @param string $entityName
 	 * @param string|null $type
-	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig $sizes
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[] $sizeConfigs
 	 * @return type
 	 */
-	private function getTargetDirectoriesFromSizes($entityName, $type, array $sizes) {
+	private function getTargetDirectoriesFromSizeConfigs($entityName, $type, array $sizeConfigs) {
 		$directories = [];
-		foreach ($sizes as $size) {
-			$relativePath = $this->imageLocator->getRelativeImagePath($entityName, $type, $size->getName());
+		foreach ($sizeConfigs as $sizeConfig) {
+			$relativePath = $this->imageLocator->getRelativeImagePath($entityName, $type, $sizeConfig->getName());
 			$directories[] = $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
 		}
 

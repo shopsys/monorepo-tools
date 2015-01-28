@@ -27,6 +27,8 @@ class UrlsProvider {
 	private $ignoredRouteNames = [
 		'admin_domain_selectdomain',
 		'admin_login_check',
+		'front_image',
+		'front_image_without_type',
 		'front_login_check',
 	];
 
