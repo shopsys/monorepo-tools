@@ -1,5 +1,7 @@
-{% macro paginatorNavigation(paginationResult, entityName, route, routeParams) %}
+{% macro paginatorNavigation(paginationResult, entityName) %}
 	<div class="row text-center mb-half">
+		{% set route = getRoute() %}
+		{% set routeParams = getAllRequestParams() %}
 		{% set pageCount = paginationResult.pageCount %}
 		<strong class="mt-half col-md-3">
 			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů')|trim }}

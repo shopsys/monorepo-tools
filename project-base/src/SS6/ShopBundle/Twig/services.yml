@@ -59,3 +59,8 @@ services:
     class: SS6\ShopBundle\Twig\PriceExtension
     tags:
       - { name: twig.extension }
+
+  ss6.twig.request_extension:
+    class: SS6\ShopBundle\Twig\RequestExtension
+    tags:
+      - { name: twig.extension }

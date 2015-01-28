@@ -42,18 +42,16 @@
 
 	{% if productDetails|length > 0 %}
 		{% set entityName = 'zboží'|trans %}
-		{% set route = 'front_product_category' %}
-		{% set routeParams = {'categoryId': category.id} %}
 
 		<div>
 			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
 		</div>
 
-		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 
 		{{ productList.list(productDetails) }}
 
-		{{ paginator.paginatorNavigation(paginationResult, entityName, route, routeParams) }}
+		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 	{% else %}
 		<div class="in-message in-message--static in-message--info js-flash-message">
 			{% if (filterFormSubmited) %}
