@@ -12,7 +12,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productEditDataFactory = $this->getContainer()->get('ss6.shop.product.product_edit_data_factory');
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productAvailabilityRecalculator = $this->getContainer()->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->getContainer()
+			->get('ss6.shop.product.availability.product_availability_recalculator');
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
 		$productId = 1;
@@ -40,7 +41,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
 		$availabilityFacade = $this->getContainer()->get('ss6.shop.product.availability.availability_facade');
 		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
-		$productAvailabilityRecalculator = $this->getContainer()->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->getContainer()
+			->get('ss6.shop.product.availability.product_availability_recalculator');
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
 		$productId = 1;
@@ -68,7 +70,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productEditDataFactory = $this->getContainer()->get('ss6.shop.product.product_edit_data_factory');
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productAvailabilityRecalculator = $this->getContainer()->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->getContainer()
+			->get('ss6.shop.product.availability.product_availability_recalculator');
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
 		$productId = 1;
