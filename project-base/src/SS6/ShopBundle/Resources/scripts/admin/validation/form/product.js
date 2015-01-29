@@ -6,7 +6,7 @@
 
 				var groups = ['Default'];
 
-				if($('#product_edit_productData_priceCalculationType_1').is(':checked')) {
+				if ($('input[name="product_edit[productData][priceCalculationType]"]:checked').val() === 'manual') {
 					groups.push('manualPriceCalculation');
 				}
 
@@ -19,7 +19,7 @@
 
 				var groups = ['Default'];
 
-				if($('#product_edit_productData_priceCalculationType_0').is(':checked')) {
+				if ($('input[name="product_edit[productData][priceCalculationType]"]:checked').val() === 'auto') {
 					groups.push('autoPriceCalculation');
 				}
 

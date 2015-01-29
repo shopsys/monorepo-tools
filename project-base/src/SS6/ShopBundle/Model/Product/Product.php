@@ -18,8 +18,8 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
  */
 class Product extends AbstractTranslatableEntity {
 
-	const PRICE_CALCULATION_TYPE_AUTO = 1;
-	const PRICE_CALCULATION_TYPE_MANUAL = 2;
+	const PRICE_CALCULATION_TYPE_AUTO = 'auto';
+	const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
 
 	/**
 	 * @var integer
@@ -145,9 +145,9 @@ class Product extends AbstractTranslatableEntity {
 	private $flags;
 
 	/**
-	 * @var int
-	 *
-	 * @ORM\Column(type="integer")
+	 * @var string
+	 * 
+	 * @ORM\Column(type="string", length=32)
 	 */
 	private $priceCalculationType;
 
