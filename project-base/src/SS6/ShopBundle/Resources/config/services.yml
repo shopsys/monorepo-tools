@@ -585,6 +585,17 @@ services:
   ss6.shop.product.availability.availability_service:
     class: SS6\ShopBundle\Model\Product\Availability\AvailabilityService
 
+  ss6.shop.product.availability.product_availability_calculation:
+    class: SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation
+
+  ss6.shop.product.availability.product_availability_recalculation_scheduler:
+    class: SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+
+  ss6.shop.product.availability.product_availability_recalculator:
+    class: SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
   ss6.shop.product.flag.flag_inline_edit:
     class: SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit
 

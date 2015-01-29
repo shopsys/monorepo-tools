@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
@@ -69,6 +70,11 @@ class ProductEditFacade {
 	 */
 	private $productManualInputPriceFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 */
+	private $productAvailabilityRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -79,7 +85,8 @@ class ProductEditFacade {
 		ImageFacade	$imageFacade,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
 		PricingGroupRepository $pricingGroupRepository,
-		ProductManualInputPriceFacade $productManualInputPriceFacade
+		ProductManualInputPriceFacade $productManualInputPriceFacade,
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -91,6 +98,7 @@ class ProductEditFacade {
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupRepository = $pricingGroupRepository;
 		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
+		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 	}
 
 	/**
@@ -118,6 +126,7 @@ class ProductEditFacade {
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->em->commit();
 
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 
@@ -143,6 +152,7 @@ class ProductEditFacade {
 		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
 		$this->em->commit();
 
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 
 		return $product;

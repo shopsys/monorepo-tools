@@ -9,6 +9,7 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 
 /**
  * Product
@@ -122,6 +123,13 @@ class Product extends AbstractTranslatableEntity {
 	private $outOfStockAvailability;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=true)
+	 */
+	private $calculatedAvailability;
+
+	/**
 	 * @var boolean
 	 *
 	 * @ORM\Column(type="boolean")
@@ -146,7 +154,7 @@ class Product extends AbstractTranslatableEntity {
 
 	/**
 	 * @var string
-	 * 
+	 *
 	 * @ORM\Column(type="string", length=32)
 	 */
 	private $priceCalculationType;
@@ -324,6 +332,20 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getOutOfStockAvailability() {
 		return $this->outOfStockAvailability;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 */
+	public function getCalculatedAvailability() {
+		return $this->calculatedAvailability;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $calculatedAvailability
+	 */
+	public function setCalculatedAvailability(Availability $calculatedAvailability = null) {
+		$this->calculatedAvailability = $calculatedAvailability;
 	}
 
 	/**
