@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 
@@ -31,16 +32,23 @@ class AvailabilityFacade {
 	 */
 	private $setting;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 */
+	private $productAvailabilityRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		AvailabilityRepository $availabilityRepository,
 		AvailabilityService $availabilityService,
-		Setting $setting
+		Setting $setting,
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->availabilityService = $availabilityService;
 		$this->setting = $setting;
+		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 	}
 
 	/**
@@ -100,6 +108,7 @@ class AvailabilityFacade {
 	 */
 	public function setDefaultInStockAvailability(Availability $availability) {
 		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId(), SettingValue::DOMAIN_ID_COMMON);
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**
