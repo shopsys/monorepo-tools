@@ -46,6 +46,11 @@ class ProductDataFixtureLoader {
 	private $categories;
 
 	/**
+	 * @var array
+	 */
+	private $flags;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 */
@@ -57,11 +62,14 @@ class ProductDataFixtureLoader {
 	/**
 	 * @param array $vats
 	 * @param array $availabilities
+	 * @param array $categories
+	 * @param array $flags
 	 */
-	public function injectReferences(array $vats, array $availabilities, array $categories) {
+	public function injectReferences(array $vats, array $availabilities, array $categories, array $flags) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->categories = $categories;
+		$this->flags = $flags;
 	}
 
 	/**
@@ -138,7 +146,8 @@ class ProductDataFixtureLoader {
 				$productEditData->productData->availability = null;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
-		$productEditData->productData->categories = $this->getProductCategoriesFromString($row[16]);
+		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
+		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
 
 		return $productEditData;
 	}
@@ -195,17 +204,18 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param string $string
+	 * @param array $productData
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	private function getProductCategoriesFromString($string) {
-		$categories = [];
+	private function getProductDataFromString($string, array $productData) {
+		$data = [];
 		if (!empty($string)) {
-			$categoryIds = explode(';', $string);
-			foreach ($categoryIds as $categoryId) {
-				$categories[] = $this->categories[$categoryId];
+			$ids = explode(';', $string);
+			foreach ($ids as $id) {
+				$data[] = $productData[$id];
 			}
 		}
 
-		return $categories;
+		return $data;
 	}
 }

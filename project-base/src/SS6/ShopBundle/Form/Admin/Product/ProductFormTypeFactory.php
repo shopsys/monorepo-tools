@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
+use SS6\ShopBundle\Model\Product\Flag\FlagRepository;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProductFormTypeFactory {
@@ -31,6 +32,11 @@ class ProductFormTypeFactory {
 	private $categoryRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagRepository
+	 */
+	private $flagRepository;
+
+	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
 	private $translator;
@@ -40,12 +46,14 @@ class ProductFormTypeFactory {
 		AvailabilityRepository $availabilityRepository,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		CategoryRepository $categoryRepository,
+		FlagRepository $flagRepository,
 		TranslatorInterface $translator
 	) {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->categoryRepository = $categoryRepository;
+		$this->flagRepository = $flagRepository;
 		$this->translator = $translator;
 	}
 
@@ -56,12 +64,14 @@ class ProductFormTypeFactory {
 		$vats = $this->vatRepository->findAll();
 		$availabilities = $this->availabilityRepository->getAll();
 		$categories = $this->categoryRepository->getAll();
+		$flags = $this->flagRepository->findAll();
 
 		return new ProductFormType(
 			$vats,
 			$availabilities,
 			$this->inverseArrayValuesTransformer,
 			$categories,
+			$flags,
 			$this->translator
 		);
 	}

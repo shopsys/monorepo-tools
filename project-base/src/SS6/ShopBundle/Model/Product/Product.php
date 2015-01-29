@@ -123,6 +123,14 @@ class Product extends AbstractTranslatableEntity {
 	private $categories;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 *
+	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Product\Flag\Flag")
+	 * @ORM\JoinTable(name="product_flags")
+	 */
+	private $flags;
+
+	/**
 	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
@@ -152,6 +160,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->visible = false;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
+		$this->flags = $productData->flags;
 	}
 
 	/**
@@ -175,6 +184,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->hidden = $productData->hidden;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
+		$this->flags = $productData->flags;
 	}
 
 	/**
@@ -283,6 +293,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getAvailability() {
 		return $this->availability;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	public function getFlags() {
+		return $this->flags;
 	}
 
 	/**

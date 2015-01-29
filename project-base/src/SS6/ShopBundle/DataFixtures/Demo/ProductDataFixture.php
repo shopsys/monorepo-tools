@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\CategoryDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
@@ -40,7 +41,13 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			'8' => $this->getReference(CategoryDataFixture::TOYS),
 		];
 
-		$loaderService->injectReferences($vats, $availabilities, $categories);
+		$flags = [
+			'action' => $this->getReference(FlagDataFixture::ACTION_PRODUCT),
+			'new' => $this->getReference(FlagDataFixture::NEW_PRODUCT),
+			'top' => $this->getReference(FlagDataFixture::TOP_PRODUCT),
+		];
+
+		$loaderService->injectReferences($vats, $availabilities, $categories, $flags);
 		$productsEditData = $loaderService->getProductsEditData();
 		$productNo = 1;
 		foreach ($productsEditData as $productEditData) {

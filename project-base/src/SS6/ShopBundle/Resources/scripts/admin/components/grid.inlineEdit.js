@@ -76,8 +76,8 @@
 			success: function (saveResult) {
 				if (saveResult.success) {
 					var $newRow = $(saveResult.rowHtml);
-					$newRow.find('.js-tooltip[title]').tooltip();
 					$formRow.replaceWith($newRow).remove();
+					SS6.grid.inlineEdit.loadComponents($formRow);
 					SS6.ajaxConfirm.init();
 				} else {
 					$buttons.show();
@@ -103,8 +103,8 @@
 				var $formRow = $($.parseHTML(formRowData));
 				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
-				$formRow.find('.js-tooltip[title]').tooltip();
 				$row.replaceWith($formRow);
+				SS6.grid.inlineEdit.loadComponents($formRow);
 				$formRow.data('$originalRow', $row);
 			}
 		});
@@ -122,7 +122,7 @@
 				var $formRow = $($.parseHTML(formRowData));
 				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
-				$formRow.find('.js-tooltip[title]').tooltip();
+				SS6.grid.inlineEdit.loadComponents($formRow);
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
 				$formRow.find('input[type=text]:first').focus();
 			}
@@ -132,8 +132,8 @@
 	SS6.grid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
-			$originalRow.find('.js-tooltip[title]').tooltip();
 			$formRow.replaceWith($originalRow).remove();
+			SS6.grid.inlineEdit.loadComponents($originalRow);
 			SS6.grid.inlineEdit.enableRow($originalRow);
 		}
 		$formRow.remove();
@@ -149,6 +149,13 @@
 
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
+	}
+
+	SS6.grid.inlineEdit.loadComponents = function ($row) {
+		$row.find('.js-tooltip[title]').tooltip();
+		$row.find('.js-colorPicker').minicolors({
+			theme: 'bootstrap'
+		});
 	}
 
 	$(document).ready(function () {

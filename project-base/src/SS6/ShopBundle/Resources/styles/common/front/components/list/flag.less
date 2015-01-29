@@ -1,0 +1,39 @@
+/*
+List with flags
+========
+List with flags for products. There is very big chance, that list will be differend on item detail and items list.
+That is whz there is modifier --in-list
+Default bg if white, for different colors use inline style
+
+	<div class="pos-relative">
+		<ul class="list-flag">
+			<li class="list-flag__item">Flag name</li>
+			<li style="background: #efd6ff" class="list-flag__item">Flag name with user color</li>
+			<li class="list-flag__item">Flag name</li>
+		</ul>
+	</div>
+
+*/
+
+.list-flag {
+	.reset-ul();
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+.list-flag--in-list {
+	top: 25px;
+	left: 20px;
+}
+
+.list-flag__item {
+	float: left;
+	clear: left;
+	margin-bottom: 5px;
+	padding: 2px 5px;
+
+	background: @color-f;
+
+	.border-radius(@border-radius-base);
+}

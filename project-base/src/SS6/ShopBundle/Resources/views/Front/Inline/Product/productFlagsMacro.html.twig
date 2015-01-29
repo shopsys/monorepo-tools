@@ -1,0 +1,13 @@
+{% macro list(product, classAddition) %}
+
+	{% if product.flags %}
+		<ul class="list-flag {{ classAddition }}">
+			{% for productFlag in product.flags %}
+				<li class="list-flag__item" style="background-color: {{ productFlag.rgbColor }};">
+					{{ productFlag.name }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+{% endmacro %}

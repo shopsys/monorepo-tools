@@ -1,0 +1,6 @@
+{% block colorPicker_widget %}
+	{% spaceless %}
+		{% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-colorPicker form-control')|trim)}) %}
+		<input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+	{% endspaceless %}
+{% endblock colorPicker_widget %}

@@ -576,6 +576,21 @@ services:
   ss6.shop.product.availability.availability_service:
     class: SS6\ShopBundle\Model\Product\Availability\AvailabilityService
 
+  ss6.shop.product.flag.flag_inline_edit:
+    class: SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit
+
+  ss6.shop.product.flag.flag_facade:
+    class: SS6\ShopBundle\Model\Product\Flag\FlagFacade
+
+  ss6.shop.product.flag.flag_grid_factory:
+    class: SS6\ShopBundle\Model\Product\Flag\FlagGridFactory
+
+  ss6.shop.product.flag.flag_repository:
+    class: SS6\ShopBundle\Model\Product\Flag\FlagRepository
+
+  ss6.shop.product.flag.flag_service:
+    class: SS6\ShopBundle\Model\Product\Flag\FlagService
+
   ss6.shop.product.filter.parameter_filter_choice_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
 

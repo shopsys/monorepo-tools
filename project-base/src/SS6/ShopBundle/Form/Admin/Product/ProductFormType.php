@@ -41,6 +41,11 @@ class ProductFormType extends AbstractType {
 	private $categories;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	private $flags;
+
+	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
 	private $translator;
@@ -50,6 +55,7 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
 	public function __construct(
@@ -57,12 +63,14 @@ class ProductFormType extends AbstractType {
 		array $availabilities,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $categories,
+		array $flags,
 		TranslatorInterface $translator
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->categories = $categories;
+		$this->flags = $flags;
 		$this->translator = $translator;
 	}
 
@@ -168,6 +176,12 @@ class ProductFormType extends AbstractType {
 			->add('categories', 'choice', [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
+				'multiple' => true,
+				'expanded' => true,
+			])
+			->add('flags', 'choice', [
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->flags, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 			])
