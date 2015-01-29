@@ -135,8 +135,9 @@ class ProductFormType extends AbstractType {
 				'invalid_message' => 'Prosím zadejte číslo',
 			])
 			->add('availability', 'choice', [
-				'required' => false,
+				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+				'empty_value' => '-- Vyberte dostupnost --',
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
@@ -145,8 +146,9 @@ class ProductFormType extends AbstractType {
 				],
 			])
 			->add('outOfStockAvailability', 'choice', [
-				'required' => false,
+				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+				'empty_value' => '-- Vyberte dostupnost --',
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
