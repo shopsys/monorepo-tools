@@ -19,6 +19,12 @@
 
 				var groups = ['Default'];
 
+				if ($('input[name="product_edit[productData][usingStock]"]:checked').val() === '1') {
+					groups.push('usingStock');
+				} else {
+					groups.push('notUsingStock');
+				}
+
 				if ($('input[name="product_edit[productData][priceCalculationType]"]:checked').val() === 'auto') {
 					groups.push('autoPriceCalculation');
 				}

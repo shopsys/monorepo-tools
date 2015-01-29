@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints;
 class ProductFormType extends AbstractType {
 
 	const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
+	const VALIDATION_GROUP_USING_STOCK = 'usingStock';
+	const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
@@ -135,10 +137,22 @@ class ProductFormType extends AbstractType {
 			->add('availability', 'choice', [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte dostupnost',
+						'groups' => self::VALIDATION_GROUP_NOT_USING_STOCK,
+					]),
+				],
 			])
 			->add('outOfStockAvailability', 'choice', [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte dostupnost',
+						'groups' => self::VALIDATION_GROUP_USING_STOCK,
+					]),
+				],
 			])
 			->add('price', 'money', [
 				'currency' => false,
@@ -208,6 +222,12 @@ class ProductFormType extends AbstractType {
 				$validationGroups = ['Default'];
 				$productData = $form->getData();
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+
+				if ($productData->usingStock) {
+					$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
+				} else {
+					$validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
+				}
 
 				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
 					$validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;
