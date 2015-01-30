@@ -3,18 +3,21 @@
 namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
 
 import('PLUG.JavaScript.JLexBase'); // contains J_* constants
-import('PLUG.parsing.LR.LRParseNode'); // JNodeBase is missing import
-import('PLUG.JavaScript.JNodes.JNodeBase');
 import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
 import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
 
 use JCallExprNode;
-use JNodeBase;
 use JProgramNode;
+use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsTranslatorCallParser {
 
 	const DEFAULT_MESSAGE_DOMAIN = 'messages';
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser
+	 */
+	private $jsStringParser;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Translation\TransMethodSpecification[]
@@ -22,9 +25,15 @@ class JsTranslatorCallParser {
 	private $transMethodSpecifications;
 
 	/**
+	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
 	 * @param \SS6\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
 	 */
-	public function __construct(array $transMethodSpecifications) {
+	public function __construct(
+		JsStringParser $jsStringParser,
+		array $transMethodSpecifications
+	) {
+		$this->jsStringParser = $jsStringParser;
+
 		$this->transMethodSpecifications = [];
 		foreach ($transMethodSpecifications as $transMethodSpecification) {
 			$methodName = $transMethodSpecification->getMethodName();
@@ -82,9 +91,9 @@ class JsTranslatorCallParser {
 	 */
 	private function getMessageId(\JNodeBase $messageIdArgumentNode) {
 		try {
-			$messageId = $this->getConcatenatedString($messageIdArgumentNode);
-		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\UnsupportedNodeException $ex) {
-			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\ParseException(
+			$messageId = $this->jsStringParser->getConcatenatedString($messageIdArgumentNode);
+		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
+			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 				'Cannot parse message ID ' . (string)$messageIdArgumentNode
 					. ' at line ' . $messageIdArgumentNode->get_line_num()
 					. ', column ' . $messageIdArgumentNode->get_col_num(),
@@ -106,9 +115,9 @@ class JsTranslatorCallParser {
 		$argumentNodes = $this->getArgumentNodes($callExprNode);
 		if ($domainArgumentIndex !== null && isset($argumentNodes[$domainArgumentIndex])) {
 			try {
-				$domain = $this->getConcatenatedString($argumentNodes[$domainArgumentIndex]);
-			} catch (\SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\UnsupportedNodeException $ex) {
-				throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\ParseException(
+				$domain = $this->jsStringParser->getConcatenatedString($argumentNodes[$domainArgumentIndex]);
+			} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
+				throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 					'Cannot parse domain ' . (string)$argumentNodes[$domainArgumentIndex]
 						. ' at line ' . $argumentNodes[$domainArgumentIndex]->get_line_num()
 						. ', column ' . $argumentNodes[$domainArgumentIndex]->get_col_num(),
@@ -169,71 +178,13 @@ class JsTranslatorCallParser {
 
 		$argumentNodes = $this->getArgumentNodes($callExprNode);
 		if (!isset($argumentNodes[$messageIdArgumentIndex])) {
-			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\ParseException(
+			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 				'Message ID argument not specified at line ' . $callExprNode->get_line_num()
 					. ', column ' . $callExprNode->get_col_num()
 			);
 		}
 
 		return $argumentNodes[$messageIdArgumentIndex];
-	}
-
-	/**
-	 * @param \JNodeBase $node
-	 * @return string
-	 */
-	private function getConcatenatedString(JNodeBase $node) {
-		if ($node->scalar_symbol() === J_STRING_LITERAL) {
-			return $this->parseStringLiteral((string)$node);
-		}
-
-		if ($node->scalar_symbol() === J_ADD_EXPR) {
-			$concatenatedString = '';
-
-			$addExprNode = $node->reset();
-			do {
-				if ($addExprNode->scalar_symbol() === J_STRING_LITERAL) {
-					$concatenatedString .= $this->parseStringLiteral((string)$addExprNode);
-				} elseif ($addExprNode->scalar_symbol() === J_NUMERIC_LITERAL) {
-					$concatenatedString .= (string)$addExprNode;
-				} elseif ($addExprNode->scalar_symbol() === '+') {
-					continue;
-				} else {
-					throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\UnsupportedNodeException();
-				}
-			} while ($addExprNode = $node->next());
-
-			return $concatenatedString;
-		}
-
-		throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\UnsupportedNodeException();
-	}
-
-	/**
-	 * @param string $stringLiteral
-	 * @return string
-	 */
-	private function parseStringLiteral($stringLiteral) {
-		return json_decode($this->normalizeStringLiteral($stringLiteral));
-	}
-
-	/**
-	 * @param string $stringLiteral
-	 * @return string
-	 */
-	private function normalizeStringLiteral($stringLiteral) {
-		$matches = [];
-		if (preg_match('/^"(.*)"$/', $stringLiteral, $matches)) {
-			$doubleQuotesEscaped = $matches[1];
-		} elseif (preg_match("/^'(.*)'$/", $stringLiteral, $matches)) {
-			$singleQuotesEscaped = $matches[1];
-			$unescaped = preg_replace("/\\\\'/", "'", $singleQuotesEscaped);
-			$doubleQuotesEscaped = preg_replace('/"/', '\\"', $unescaped);
-		} else {
-			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\UnsupportedNodeException();
-		}
-
-		return '"' . $doubleQuotesEscaped . '"';
 	}
 
 }
