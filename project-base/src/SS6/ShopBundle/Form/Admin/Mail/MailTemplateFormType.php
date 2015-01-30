@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Mail;
 
 use SS6\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,7 +39,7 @@ class MailTemplateFormType extends AbstractType {
 			])
 			->add(
 				$builder
-					->create('body', 'ckeditor', [
+					->create('body', FormType::CKEDITOR, [
 						'required' => true,
 						'constraints' => [
 							new Constraints\NotBlank([

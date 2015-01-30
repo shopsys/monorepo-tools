@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Parameter;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -40,7 +41,7 @@ class ProductParameterValueFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Prosím vyberte parametr']),
 				],
 			])
-			->add('valueText', 'localized', [
+			->add('valueText', FormType::LOCALIZED, [
 				'required' => true,
 				'main_constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte hodnotu parametru']),

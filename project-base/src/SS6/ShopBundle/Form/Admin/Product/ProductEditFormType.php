@@ -6,8 +6,7 @@ use SS6\ShopBundle\Component\Constraints\UniqueCollection;
 use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
-use SS6\ShopBundle\Form\FileUploadType;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use Symfony\Component\Form\AbstractType;
@@ -33,11 +32,6 @@ class ProductEditFormType extends AbstractType {
 	private $productParameterValueFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
-	 */
-	private $fileUpload;
-
-	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 */
 	private $productFormTypeFactory;
@@ -50,20 +44,17 @@ class ProductEditFormType extends AbstractType {
 	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
 	public function __construct(
 		array $images,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
-		FileUpload $fileUpload,
 		ProductFormTypeFactory $productFormTypeFactory,
 		array $pricingGroups
 	) {
 		$this->images = $images;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
-		$this->fileUpload = $fileUpload;
 		$this->productFormTypeFactory = $productFormTypeFactory;
 		$this->pricingGroups = $pricingGroups;
 	}
@@ -83,7 +74,7 @@ class ProductEditFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('productData', $this->productFormTypeFactory->create())
-			->add('imagesToUpload', new FileUploadType($this->fileUpload), [
+			->add('imagesToUpload', FormType::FILE_UPLOAD, [
 				'required' => false,
 				'multiple' => true,
 				'file_constraints' => [
@@ -123,7 +114,7 @@ class ProductEditFormType extends AbstractType {
 
 		foreach ($this->pricingGroups as $pricingGroup) {
 			$builder->get('manualInputPrices')
-				->add($pricingGroup->getId(), 'money', [
+				->add($pricingGroup->getId(), FormType::MONEY, [
 					'currency' => false,
 					'precision' => 6,
 					'required' => true,

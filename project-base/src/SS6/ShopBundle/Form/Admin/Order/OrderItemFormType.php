@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,14 +30,14 @@ class OrderItemFormType extends AbstractType {
 				],
 				'error_bubbling' => true,
 			])
-			->add('priceWithVat', 'money', [
+			->add('priceWithVat', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jednotkovou cenu s DPH']),
 				],
 				'error_bubbling' => true,
 			])
-			->add('vatPercent', 'money', [
+			->add('vatPercent', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím sazbu DPH']),

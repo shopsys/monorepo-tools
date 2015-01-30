@@ -19,7 +19,7 @@ class DatePickerType extends AbstractType {
 	}
 
 	public function getName() {
-		return 'datePicker';
+		return 'date_picker';
 	}
 
 }

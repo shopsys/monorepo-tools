@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\CustomerCommunication;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,7 +21,7 @@ class CustomerCommunicationFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('content', 'ckeditor', ['required' => false])
+			->add('content', FormType::CKEDITOR, ['required' => false])
 			->add('save', 'submit');
 	}
 }

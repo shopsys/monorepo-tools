@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Article;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Article\ArticleData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,12 +25,12 @@ class ArticleFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('name', 'text')
-			->add('text', 'ckeditor', ['required' => true,
+			->add('text', FormType::CKEDITOR, ['required' => true,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
 				],
 			])
-			->add('domainId', 'domain', ['required' => true])
+			->add('domainId', FormType::DOMAIN, ['required' => true])
 			->add('save', 'submit');
 	}
 

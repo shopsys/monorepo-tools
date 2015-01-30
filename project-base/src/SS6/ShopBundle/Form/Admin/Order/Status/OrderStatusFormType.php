@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,7 @@ class OrderStatusFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'options' => [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím všechny názvy stavu']),

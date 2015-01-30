@@ -2,8 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Slider;
 
-use SS6\ShopBundle\Form\FileUploadType;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,21 +12,14 @@ use Symfony\Component\Validator\Constraints;
 class SliderItemFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
-	 */
-	private $fileUpload;
-
-	/**
 	 * @var bool
 	 */
 	private $scenarioCreate;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param bool $scenarioCreate
 	 */
-	public function __construct(FileUpload $fileUpload, $scenarioCreate = false) {
-		$this->fileUpload = $fileUpload;
+	public function __construct($scenarioCreate = false) {
 		$this->scenarioCreate = $scenarioCreate;
 	}
 
@@ -47,7 +39,7 @@ class SliderItemFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
 				],
 			])
-			->add('image', new FileUploadType($this->fileUpload), [
+			->add('image', FormType::FILE_UPLOAD, [
 				'required' => $this->scenarioCreate,
 				'file_constraints' => [
 					new Constraints\Image([

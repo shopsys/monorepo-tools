@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\TopProduct;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +25,7 @@ class TopProductFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add(
-				'product', 'product', [
+				'product', FormType::PRODUCT, [
 					'required' => true,
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím ID produktu']),

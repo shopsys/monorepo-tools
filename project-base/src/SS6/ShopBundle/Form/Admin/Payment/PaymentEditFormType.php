@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Payment;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -57,7 +58,7 @@ class PaymentEditFormType extends AbstractType {
 		]);
 		foreach ($this->currencies as $currency) {
 			$pricesBuilder
-				->add($currency->getId(), 'money', [
+				->add($currency->getId(), FormType::MONEY, [
 					'currency' => false,
 					'precision' => 6,
 					'required' => true,

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Flag;
 
-use SS6\ShopBundle\Form\ColorPickerType;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Flag\FlagData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +24,7 @@ class FlagFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'required' => true,
 				'options' => [
 					'constraints' => [
@@ -33,7 +33,7 @@ class FlagFormType extends AbstractType {
 					],
 				],
 			])
-			->add('rgbColor', new ColorPickerType(), [
+			->add('rgbColor', FormType::COLOR_PICKER, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím barvu příznaku']),
 					new Constraints\Length([
