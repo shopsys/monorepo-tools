@@ -2,6 +2,9 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
 
+import('PLUG.JavaScript.JNodes.JNodeBase');
+import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
+
 use JCallExprNode;
 use JNodeBase;
 
