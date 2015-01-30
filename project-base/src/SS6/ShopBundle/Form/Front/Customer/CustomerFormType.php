@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\Front\Customer\UserFormType;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
@@ -26,7 +27,7 @@ class CustomerFormType extends AbstractType {
 			->add('userData', new UserFormType())
 			->add('billingAddressData', new BillingAddressFormType())
 			->add('deliveryAddressData', new DeliveryAddressFormType())
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

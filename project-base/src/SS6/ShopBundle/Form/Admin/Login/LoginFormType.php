@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Login;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,17 +17,17 @@ class LoginFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('username', 'text', [
+			->add('username', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím login']),
 				],
 			])
-			->add('password', 'password', [
+			->add('password', FormType::PASSWORD, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
 				],
 			])
-			->add('login', 'submit');
+			->add('login', FormType::SUBMIT);
 	}
 
 	/**

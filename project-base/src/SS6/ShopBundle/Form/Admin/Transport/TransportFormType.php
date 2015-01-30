@@ -50,7 +50,7 @@ class TransportFormType extends AbstractType {
 				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
-			->add('vat', 'choice', [
+			->add('vat', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
@@ -59,11 +59,11 @@ class TransportFormType extends AbstractType {
 			])
 			->add('description', FormType::LOCALIZED, [
 				'required' => false,
-				'type' => 'textarea',
+				'type' => FormType::TEXTAREA,
 			])
 			->add('instructions', FormType::LOCALIZED, [
 				'required' => false,
-				'type' => 'ckeditor',
+				'type' => FormType::CKEDITOR,
 			])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => false,

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Cart;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,8 +26,8 @@ class CartFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 
 		$builder
-			->add('quantities', 'collection', [
-				'type' => 'integer',
+			->add('quantities', FormType::COLLECTION, [
+				'type' => FormType::INTEGER,
 				'constraints' => [
 						new Constraints\All([
 							'constraints' => [
@@ -36,8 +37,8 @@ class CartFormType extends AbstractType {
 						]),
 					],
 				])
-			->add('recalc', 'submit')
-			->add('recalcToOrder', 'submit');
+			->add('recalc', FormType::SUBMIT)
+			->add('recalcToOrder', FormType::SUBMIT);
 	}
 
 	/**

@@ -45,7 +45,7 @@ class PaymentEditFormType extends AbstractType {
 		$builder
 			->add('paymentData', $this->paymentFormTypeFactory->create())
 			->add($this->getPricesBuilder($builder))
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

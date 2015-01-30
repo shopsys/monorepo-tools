@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Superadmin;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,13 +41,13 @@ class InputPriceTypeFormType extends AbstractType {
 		}
 
 		$builder
-			->add('type', 'choice', [
+			->add('type', FormType::CHOICE, [
 				'choices' => $choices,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte typ vstupní ceny']),
 				],
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

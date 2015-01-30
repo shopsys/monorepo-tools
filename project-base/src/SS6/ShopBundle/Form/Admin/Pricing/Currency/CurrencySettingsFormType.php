@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Pricing\Currency;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,14 +36,14 @@ class CurrencySettingsFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('defaultCurrency', 'choice', [
+			->add('defaultCurrency', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->currencies, 'name', [], null, 'id'),
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí měnu']),
 				],
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

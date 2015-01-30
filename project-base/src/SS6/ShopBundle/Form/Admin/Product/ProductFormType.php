@@ -106,34 +106,34 @@ class ProductFormType extends AbstractType {
 					->addViewTransformer($this->inverseArrayValuesTransformer)
 			)
 			->add('hidden', FormType::YES_NO, ['required' => false])
-			->add('catnum', 'text', [
+			->add('catnum', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'Katalogové číslo nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('partno', 'text', [
+			->add('partno', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'Výrobní číslo nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('ean', 'text', [
+			->add('ean', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('description', FormType::LOCALIZED, [
-				'type' => 'ckeditor',
+				'type' => FormType::CKEDITOR,
 				'required' => false,
 			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])
-			->add('stockQuantity', 'integer', [
+			->add('stockQuantity', FormType::INTEGER, [
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte číslo',
 			])
-			->add('availability', 'choice', [
+			->add('availability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
 				'empty_value' => '-- Vyberte dostupnost --',
@@ -144,7 +144,7 @@ class ProductFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('outOfStockAvailability', 'choice', [
+			->add('outOfStockAvailability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
 				'empty_value' => '-- Vyberte dostupnost --',
@@ -172,7 +172,7 @@ class ProductFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('vat', 'choice', [
+			->add('vat', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
@@ -193,19 +193,19 @@ class ProductFormType extends AbstractType {
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			])
-			->add('categories', 'choice', [
+			->add('categories', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 			])
-			->add('flags', 'choice', [
+			->add('flags', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->flags, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 			])
-			->add('priceCalculationType', 'choice', [
+			->add('priceCalculationType', FormType::CHOICE, [
 				'required' => true,
 				'expanded' => true,
 				'choices' => [

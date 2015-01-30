@@ -57,13 +57,13 @@ class PaymentFormType extends AbstractType {
 				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
-			->add('transports', 'choice', [
+			->add('transports', FormType::CHOICE, [
 				'choice_list' => new ObjectChoiceList($this->allTransports, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 				'required' => false,
 			])
-			->add('vat', 'choice', [
+			->add('vat', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Order;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -49,7 +50,7 @@ class TransportAndPaymentFormType extends AbstractType {
 				],
 				'invalid_message' => 'Vyberte prosím platbu',
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Vat;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,14 +24,14 @@ class VatFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', [
+			->add('name', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím název dph']),
 					new Constraints\Length(['max' => 50, 'maxMessage' => 'Název DPH nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('percent', 'number', [
+			->add('percent', FormType::NUMBER, [
 				'required' => false,
 				'precision' => 4,
 				'invalid_message' => 'Prosím zadejte DPH v platném formátu',

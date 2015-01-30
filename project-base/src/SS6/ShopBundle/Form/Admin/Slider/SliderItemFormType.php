@@ -33,7 +33,7 @@ class SliderItemFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', [
+			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
@@ -50,14 +50,14 @@ class SliderItemFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('link', 'url', [
+			->add('link', FormType::URL, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte odkaz']),
 					new Constraints\Url(['message' => 'Odkaz musí být validní URL adresa']),
 				],
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

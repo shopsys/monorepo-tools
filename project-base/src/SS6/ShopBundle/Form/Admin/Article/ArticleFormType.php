@@ -24,14 +24,14 @@ class ArticleFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text')
+			->add('name', FormType::TEXT)
 			->add('text', FormType::CKEDITOR, ['required' => true,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
 				],
 			])
 			->add('domainId', FormType::DOMAIN, ['required' => true])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

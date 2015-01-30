@@ -45,7 +45,7 @@ class TransportEditFormType extends AbstractType {
 		$builder
 			->add('transportData', $this->transportFormTypeFactory->create())
 			->add($this->getPricesBuilder($builder))
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

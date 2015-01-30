@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Order;
 
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Order\OrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,67 +44,67 @@ class OrderFormType extends AbstractType {
 		}
 
 		$builder
-			->add('orderNumber', 'text', ['read_only' => true])
-			->add('statusId', 'choice', [
+			->add('orderNumber', FormType::TEXT, ['read_only' => true])
+			->add('statusId', FormType::CHOICE, [
 				'choices' => $orderStatusChoices,
 				'multiple' => false,
 				'expanded' => false,
 				'required' => true,
 			])
-			->add('customerId', 'integer', ['required' => false])
-			->add('firstName', 'text', [
+			->add('customerId', FormType::INTEGER, ['required' => false])
+			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('lastName', 'text', [
+			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
 				],
 			])
-			->add('email', 'email', [
+			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
-			->add('telephone', 'text', [
+			->add('telephone', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím telefon']),
 				],
 			])
-			->add('companyName', 'text', ['required' => false])
-			->add('companyNumber', 'text', ['required' => false])
-			->add('companyTaxNumber', 'text', ['required' => false])
-			->add('street', 'text', [
+			->add('companyName', FormType::TEXT, ['required' => false])
+			->add('companyNumber', FormType::TEXT, ['required' => false])
+			->add('companyTaxNumber', FormType::TEXT, ['required' => false])
+			->add('street', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím ulici']),
 				],
 			])
-			->add('city', 'text', [
+			->add('city', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím město']),
 				],
 			])
-			->add('postcode', 'text', [
+			->add('postcode', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
 				],
 			])
-			->add('deliveryContactPerson', 'text', ['required' => false])
-			->add('deliveryCompanyName', 'text', ['required' => false])
-			->add('deliveryTelephone', 'text', ['required' => false])
-			->add('deliveryStreet', 'text', ['required' => false])
-			->add('deliveryCity', 'text', ['required' => false])
-			->add('deliveryPostcode', 'text', ['required' => false])
-			->add('note', 'textarea', ['required' => false])
-			->add('items', 'collection', [
+			->add('deliveryContactPerson', FormType::TEXT, ['required' => false])
+			->add('deliveryCompanyName', FormType::TEXT, ['required' => false])
+			->add('deliveryTelephone', FormType::TEXT, ['required' => false])
+			->add('deliveryStreet', FormType::TEXT, ['required' => false])
+			->add('deliveryCity', FormType::TEXT, ['required' => false])
+			->add('deliveryPostcode', FormType::TEXT, ['required' => false])
+			->add('note', FormType::TEXTAREA, ['required' => false])
+			->add('items', FormType::COLLECTION, [
 				'type' => new OrderItemFormType(),
 				'error_bubbling' => false,
 				'allow_add' => true,
 				'allow_delete' => true,
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

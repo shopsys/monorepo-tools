@@ -22,6 +22,6 @@ class CustomerCommunicationFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('content', FormType::CKEDITOR, ['required' => false])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 }

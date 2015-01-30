@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Pricing\Group;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,13 +24,13 @@ class PricingGroupFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', [
+			->add('name', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím název cenové skupiny']),
 				],
 			])
-			->add('coefficient', 'number', [
+			->add('coefficient', FormType::NUMBER, [
 				'required' => true,
 				'precision' => 4,
 				'invalid_message' => 'Prosím zadejte koeficient v platném formátu',

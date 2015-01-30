@@ -24,7 +24,7 @@ class OrderItemFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', [
+			->add('name', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
 				],
@@ -44,7 +44,7 @@ class OrderItemFormType extends AbstractType {
 				],
 				'error_bubbling' => true,
 			])
-			->add('quantity', 'integer', [
+			->add('quantity', FormType::INTEGER, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím množství']),
 					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než 0']),

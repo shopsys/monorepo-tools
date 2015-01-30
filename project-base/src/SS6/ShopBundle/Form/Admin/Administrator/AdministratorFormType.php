@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Administrator;
 
 use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,25 +27,25 @@ class AdministratorFormType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('username', 'text', [
+			->add('username', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím přihlašovací jméno']),
 				],
 			])
-			->add('realName', 'text', [
+			->add('realName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('email', 'email', [
+			->add('email', FormType::EMAIL, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 				],
 			])
-			->add('password', 'repeated', [
-				'type' => 'password',
+			->add('password', FormType::REPEATED, [
+				'type' => FormType::PASSWORD,
 				'required' => $this->scenario === self::SCENARIO_CREATE,
 				'options' => [
 					'attr' => ['autocomplete' => 'off'],
@@ -60,7 +61,7 @@ class AdministratorFormType extends AbstractType {
 				],
 				'invalid_message' => 'Hesla se neshodují',
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

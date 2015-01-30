@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Mail;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -23,18 +24,18 @@ class MailSettingFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('email', 'email', [
+			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
-			->add('name', 'text', [
+			->add('name', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

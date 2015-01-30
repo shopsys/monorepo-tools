@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Localization;
 
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,9 +44,9 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('cs', 'textarea', ['required' => false])
+			->add('cs', FormType::TEXTAREA, ['required' => false])
 			->add($builder
-				->create('en', 'textarea', ['required' => false])
+				->create('en', FormType::TEXTAREA, ['required' => false])
 				->addModelTransformer($this)
 			);
 	}

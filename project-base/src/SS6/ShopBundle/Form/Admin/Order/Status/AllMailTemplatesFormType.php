@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Order\Status;
 
 use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,10 +25,10 @@ class AllMailTemplatesFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('registrationTemplate', new MailTemplateFormType())
-			->add('orderStatusTemplates', 'collection', [
+			->add('orderStatusTemplates', FormType::COLLECTION, [
 				'type' => new MailTemplateFormType(),
 			])
-			->add('domainId', 'hidden');
+			->add('domainId', FormType::HIDDEN);
 	}
 
 	/**

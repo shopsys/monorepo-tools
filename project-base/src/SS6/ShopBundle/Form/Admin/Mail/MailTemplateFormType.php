@@ -28,7 +28,7 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('subject', 'text', [
+			->add('subject', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -50,8 +50,8 @@ class MailTemplateFormType extends AbstractType {
 					])
 					->addModelTransformer(new EmptyWysiwygTransformer())
 			)
-			->add('sendMail', 'checkbox', ['required' => false])
-			->add('save', 'submit');
+			->add('sendMail', FormType::CHECKBOX, ['required' => false])
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

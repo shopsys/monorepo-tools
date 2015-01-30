@@ -33,7 +33,7 @@ class AvailabilityFormType extends AbstractType {
 					],
 				],
 			])
-			->add('deliveryTime', 'number', [
+			->add('deliveryTime', FormType::NUMBER, [
 				'precision' => 0,
 				'required' => false,
 				'invalid_message' => 'Doba dodání musí být celé číslo',

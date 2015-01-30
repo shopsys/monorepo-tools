@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Customer;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,10 +62,10 @@ class CustomerFormType extends AbstractType {
 			->add('userData', new UserFormType($this->scenario, $this->domains, $this->selectedDomain, $this->pricingGroups))
 			->add('billingAddressData', new BillingAddressFormType())
 			->add('deliveryAddressData', new DeliveryAddressFormType())
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 
 		if ($this->scenario === self::SCENARIO_CREATE) {
-			$builder->add('sendRegistrationMail', 'checkbox', ['required' => false]);
+			$builder->add('sendRegistrationMail', FormType::CHECKBOX, ['required' => false]);
 		}
 	}
 

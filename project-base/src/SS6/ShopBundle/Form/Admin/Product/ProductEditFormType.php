@@ -86,13 +86,13 @@ class ProductEditFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('imagesToDelete', 'choice', [
+			->add('imagesToDelete', FormType::CHOICE, [
 				'required' => false,
 				'multiple' => true,
 				'expanded' => true,
 				'choice_list' => new ObjectChoiceList($this->images, 'filename', [], null, 'id'),
 			])
-			->add($builder->create('parameters', 'collection', [
+			->add($builder->create('parameters', FormType::COLLECTION, [
 					'required' => false,
 					'allow_add' => true,
 					'allow_delete' => true,
@@ -107,10 +107,10 @@ class ProductEditFormType extends AbstractType {
 				])
 				->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
 			)
-			->add('manualInputPrices', 'form', [
+			->add('manualInputPrices', FormType::FORM, [
 				'compound' => true,
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 
 		foreach ($this->pricingGroups as $pricingGroup) {
 			$builder->get('manualInputPrices')

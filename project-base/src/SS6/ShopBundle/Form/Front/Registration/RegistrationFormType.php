@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Registration;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,24 +16,24 @@ class RegistrationFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', [
+			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('lastName', 'text', [
+			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
 				],
 			])
-			->add('email', 'email', [
+			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
-			->add('password', 'repeated', [
-				'type' => 'password',
+			->add('password', FormType::REPEATED, [
+				'type' => FormType::PASSWORD,
 				'first_options' => [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
@@ -41,7 +42,7 @@ class RegistrationFormType extends AbstractType {
 				],
 				'invalid_message' => 'Hesla se neshodují',
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

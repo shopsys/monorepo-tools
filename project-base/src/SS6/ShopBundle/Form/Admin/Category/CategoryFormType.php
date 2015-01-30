@@ -43,11 +43,11 @@ class CategoryFormType extends AbstractType {
 				],
 				'options' => ['required' => false],
 			])
-			->add('parent', 'choice', [
+			->add('parent', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

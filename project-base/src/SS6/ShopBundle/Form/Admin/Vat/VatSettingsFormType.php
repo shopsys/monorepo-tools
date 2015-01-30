@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Vat;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -62,18 +63,18 @@ class VatSettingsFormType extends AbstractType {
 		}
 
 		$builder
-			->add('defaultVat', 'choice', [
+			->add('defaultVat', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí výši DPH']),
 				],
 			])
-			->add('roundingType', 'choice', [
+			->add('roundingType', FormType::CHOICE, [
 				'required' => true,
 				'choices' => $roundingTypesChoices,
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

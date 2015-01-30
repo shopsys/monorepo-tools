@@ -43,7 +43,7 @@ class ProductParametersFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('parameter', 'choice', [
+			->add('parameter', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->parameters, 'name', [], null, 'id'),
 				'constraints' => [

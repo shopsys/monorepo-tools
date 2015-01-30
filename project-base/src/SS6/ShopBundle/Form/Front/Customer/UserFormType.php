@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,19 +24,19 @@ class UserFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', [
+			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('lastName', 'text', [
+			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
 				],
 			])
-			->add('email', 'email', ['read_only' => true, 'required' => false])
-			->add('password', 'repeated', [
-				'type' => 'password',
+			->add('email', FormType::EMAIL, ['read_only' => true, 'required' => false])
+			->add('password', FormType::REPEATED, [
+				'type' => FormType::PASSWORD,
 				'required' => false,
 				'first_options' => [
 					'constraints' => [
