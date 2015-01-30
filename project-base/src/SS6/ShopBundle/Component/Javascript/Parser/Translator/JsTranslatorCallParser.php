@@ -8,11 +8,17 @@ import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
 
 use JCallExprNode;
 use JProgramNode;
+use SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsTranslatorCallParser {
 
 	const DEFAULT_MESSAGE_DOMAIN = 'messages';
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
+	 */
+	private $jsFunctionCallParser;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser
@@ -25,13 +31,16 @@ class JsTranslatorCallParser {
 	private $transMethodSpecifications;
 
 	/**
+	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
 	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
 	 * @param \SS6\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
 	 */
 	public function __construct(
+		JsFunctionCallParser $jsFunctionCallParser,
 		JsStringParser $jsStringParser,
 		array $transMethodSpecifications
 	) {
+		$this->jsFunctionCallParser = $jsFunctionCallParser;
 		$this->jsStringParser = $jsStringParser;
 
 		$this->transMethodSpecifications = [];
@@ -74,7 +83,7 @@ class JsTranslatorCallParser {
 	 * @return boolean
 	 */
 	private function isTransFunctionCall(JCallExprNode $callExprNode) {
-		$functionName = $this->getFunctionName($callExprNode);
+		$functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 
 		if ($functionName !== null) {
 			if (array_key_exists($functionName, $this->transMethodSpecifications)) {
@@ -109,10 +118,10 @@ class JsTranslatorCallParser {
 	 * @return string
 	 */
 	private function getDomain(JCallExprNode $callExprNode) {
-		$functionName = $this->getFunctionName($callExprNode);
+		$functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 		$domainArgumentIndex = $this->transMethodSpecifications[$functionName]->getDomainArgumentIndex();
 
-		$argumentNodes = $this->getArgumentNodes($callExprNode);
+		$argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);
 		if ($domainArgumentIndex !== null && isset($argumentNodes[$domainArgumentIndex])) {
 			try {
 				$domain = $this->jsStringParser->getConcatenatedString($argumentNodes[$domainArgumentIndex]);
@@ -133,50 +142,13 @@ class JsTranslatorCallParser {
 
 	/**
 	 * @param \JCallExprNode $callExprNode
-	 * @return string|null
-	 */
-	private function getFunctionName(JCallExprNode $callExprNode) {
-		$memberExprNodes = $callExprNode->get_nodes_by_symbol(J_MEMBER_EXPR, 1);
-		/* @var $memberExprNodes \JMemberExprNode[] */
-
-		if (isset($memberExprNodes[0])) {
-			return (string)$memberExprNodes[0];
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param \JCallExprNode[] $callExprNode
-	 * @return \JNodeBase[]
-	 */
-	private function getArgumentNodes(JCallExprNode $callExprNode) {
-		$argListNodes = $callExprNode->get_nodes_by_symbol(J_ARG_LIST, 2);
-		/* @var $argListNodes \JArgListNode[] */
-
-		$argumentNodes = [];
-		if (isset($argListNodes[0])) {
-			$argsListNode = $argListNodes[0];
-			$argNode = $argsListNode->reset();
-			do {
-				if ($argNode->scalar_symbol() !== ',') {
-					$argumentNodes[] = $argNode;
-				}
-			} while ($argNode = $argsListNode->next());
-		}
-
-		return $argumentNodes;
-	}
-
-	/**
-	 * @param \JCallExprNode $callExprNode
 	 * @return \JNodeBase
 	 */
 	private function getMessageIdArgumentNode(JCallExprNode $callExprNode) {
-		$functionName = $this->getFunctionName($callExprNode);
+		$functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 		$messageIdArgumentIndex = $this->transMethodSpecifications[$functionName]->getMessageIdArgumentIndex();
 
-		$argumentNodes = $this->getArgumentNodes($callExprNode);
+		$argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);
 		if (!isset($argumentNodes[$messageIdArgumentIndex])) {
 			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 				'Message ID argument not specified at line ' . $callExprNode->get_line_num()

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Component\Translation;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
+use SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
 use SS6\ShopBundle\Component\Translation\JsFileExtractor;
@@ -56,8 +57,12 @@ class JsFileExtractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getExtractor() {
+		$jsFunctionCallParser = new JsFunctionCallParser();
 		$jsStringParser = new JsStringParser();
-		$jsTranslatorCallParserFactory = new JsTranslatorCallParserFactory($jsStringParser);
+		$jsTranslatorCallParserFactory = new JsTranslatorCallParserFactory(
+			$jsFunctionCallParser,
+			$jsStringParser
+		);
 		return new JsFileExtractor($jsTranslatorCallParserFactory->create());
 	}
 

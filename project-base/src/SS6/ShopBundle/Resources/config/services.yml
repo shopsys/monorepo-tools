@@ -132,6 +132,9 @@ services:
   ss6.shop.component.javascript.parser.js_string_parser:
     class: SS6\ShopBundle\Component\Javascript\Parser\JsStringParser
 
+  ss6.shop.component.javascript.parser.js_function_call_parser:
+    class: SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
+
   ss6.shop.component.javascript.parser.translator.js_translator_call_parser:
     class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
     factory_service: ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory
