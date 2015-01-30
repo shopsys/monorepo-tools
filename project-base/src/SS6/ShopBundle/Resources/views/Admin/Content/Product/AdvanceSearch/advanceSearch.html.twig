@@ -1,0 +1,8 @@
+<div class="mb-1">
+	<div class="mb-1" id="js-advance-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
+		{% include '@SS6Shop/Admin/Content/Product/AdvanceSearch/ruleForm.html.twig' with {rulesForm: advanceSearchForm} %}
+	</div>
+	<button class="btn btn-primary" id="js-advance-search-add-rule-button">
+		<i class="fa fa-plus fa-lg"></i> {{ 'Přidat'|trans }}
+	</button>
+</div>
