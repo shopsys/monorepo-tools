@@ -27,13 +27,11 @@ class RequestExtension extends Twig_Extension {
 		return [
 			new Twig_SimpleFunction(
 				'getAllRequestParams',
-				[$this, 'getAllRequestParams'],
-				['is_safe' => ['html']]
+				[$this, 'getAllRequestParams']
 			),
 			new Twig_SimpleFunction(
 				'getRoute',
-				[$this, 'getRoute'],
-				['is_safe' => ['html']]
+				[$this, 'getRoute']
 			),
 		];
 	}

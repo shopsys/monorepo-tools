@@ -20,11 +20,11 @@
 
 				<div class="box-filter__group">
 					<div class="box-filter__group__item">
-						{{ form_row(filterForm.minimalPrice, {label: 'Cena od', symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+						{{ form_row(filterForm.minimalPrice, {label: 'Cena od', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
 					</div>
 
 					<div class="box-filter__group__item">
-						{{ form_row(filterForm.maximalPrice, {label: 'Cena do', symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+						{{ form_row(filterForm.maximalPrice, {label: 'Cena do', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
 					</div>
 
 				</div>
@@ -33,7 +33,9 @@
 				{{ form_row(filterForm.parameters, { label: 'Parametry' }) }}
 
 				<div class="box-filter__buttons">
-					{{ form_widget(filterForm.reset, { label: 'Vynulovat filtr', attr: { class: 'button--simple mr-half'} }) }}
+
+					<a class ="button button--simple mr-half" href = "{{ url('front_product_category', {'categoryId': category.id}) }}">{{ 'Vynulovat filtr'|trans }}</a>
+
 					{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
 				</div>
 

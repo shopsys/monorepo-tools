@@ -57,8 +57,7 @@ class ProductFilterFormType extends AbstractType {
 				'required' => false,
 			])
 			->add('inStock', FormType::CHECKBOX, ['required' => false])
-			->add('search', FormType::SUBMIT)
-			->add('reset', FormType::SUBMIT);
+			->add('search', FormType::SUBMIT);
 	}
 
 	/**
