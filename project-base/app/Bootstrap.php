@@ -6,6 +6,7 @@ use SS6\Environment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Debug\ErrorHandler;
 
@@ -40,8 +41,11 @@ class Bootstrap {
 		$kernel->loadClassCache();
 		if ($this->console) {
 			$input = new ArgvInput();
+			$output = new ConsoleOutput();
+			$output->getErrorOutput()->setVerbosity(ConsoleOutput::VERBOSITY_VERBOSE);
+			
 			$application = new Application($kernel);
-			$application->run($input);
+			$application->run($input, $output);
 		} else {
 			if ($this->environment === Environment::ENVIRONMENT_TEST) {
 				$kernel->boot();
