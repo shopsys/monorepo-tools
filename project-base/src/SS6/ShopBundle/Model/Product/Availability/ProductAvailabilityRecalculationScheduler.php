@@ -32,11 +32,11 @@ class ProductAvailabilityRecalculationScheduler {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
-	public function scheduleRecalculatePriceForProduct(Product $product) {
+	public function scheduleRecalculateAvailabilityForProduct(Product $product) {
 		$this->products[$product->getId()] = $product;
 	}
 
-	public function scheduleRecalculatePriceForAllProducts() {
+	public function scheduleRecalculateAvailabilityForAllProducts() {
 		$this->recalculateAll = true;
 	}
 

@@ -126,7 +126,7 @@ class ProductEditFacade {
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->em->commit();
 
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 
@@ -152,7 +152,7 @@ class ProductEditFacade {
 		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
 		$this->em->commit();
 
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 
 		return $product;

@@ -108,7 +108,7 @@ class AvailabilityFacade {
 	 */
 	public function setDefaultInStockAvailability(Availability $availability) {
 		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId(), SettingValue::DOMAIN_ID_COMMON);
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 	}
 
 	/**

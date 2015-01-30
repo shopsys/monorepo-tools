@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Model\Product\Availability;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
 use SS6\ShopBundle\Model\Product\Product;
@@ -17,10 +18,10 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 	public function testGetCalculatedAvailability(
 		$usingStock,
 		$stockQuantity,
-		$availability,
-		$outOfStockAvailability,
-		$defaultInStockAvailability,
-		$expectedCalculatedAvailability
+		Availability $availability = null,
+		Availability $outOfStockAvailability = null,
+		Availability $defaultInStockAvailability = null,
+		Availability $expectedCalculatedAvailability = null
 	) {
 		$productData = new ProductData();
 		$productData->usingStock = $usingStock;

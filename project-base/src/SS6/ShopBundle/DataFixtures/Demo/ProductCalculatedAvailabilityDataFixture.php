@@ -21,7 +21,7 @@ class ProductCalculatedAvailabilityDataFixture extends AbstractReferenceFixture 
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 		// @codingStandardsIgnoreEnd
 
-		$productAvailabilityRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 		$productAvailabilityRecalculator->runScheduledRecalculations();
 	}
 
