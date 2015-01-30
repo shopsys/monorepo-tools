@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Transport\Detail;
 
-use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class TransportDetail {
@@ -13,20 +12,20 @@ class TransportDetail {
 	private $transport;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price[currencyId]
 	 */
-	private $basePrice;
+	private $basePrices;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
 	 */
 	public function __construct(
 		Transport $transport,
-		Price $basePrice
+		array $basePrices
 	) {
 		$this->transport = $transport;
-		$this->basePrice = $basePrice;
+		$this->basePrices = $basePrices;
 	}
 
 	/**
@@ -37,10 +36,10 @@ class TransportDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[currencyId]
 	 */
-	public function getBasePrice() {
-		return $this->basePrice;
+	public function getBasePrices() {
+		return $this->basePrices;
 	}
 
 }

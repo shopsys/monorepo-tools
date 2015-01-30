@@ -5,8 +5,9 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\Model\Payment\PaymentEditData;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -14,61 +15,70 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$paymentData = new PaymentData();
-		$paymentData->name = [
+		$paymentEditData = new PaymentEditData();
+		$paymentEditData->paymentData->name = [
 			'cs' => 'Kreditní kartou',
 			'en' => 'Credit card',
 		];
-		$paymentData->price = 99.95;
-		$paymentData->description = [
+		$paymentEditData->prices = [
+			$this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 99.95,
+			$this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 2.95,
+		];
+		$paymentEditData->paymentData->description = [
 			'cs' => 'Rychle, levně a spolehlivě!',
 			'en' => 'Quick, cheap and reliable!',
 		];
-		$paymentData->instructions = [
+		$paymentEditData->paymentData->instructions = [
 			'cs' => '<b>Zvolili jste platbu kreditní kartou. Prosím proveďte ji do dvou pracovních dnů.</b>',
 			'en' => '<b>You have chosen payment by credit card. Please finish it in two business days.</b>',
 		];
-		$paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-		$paymentData->domains = [1, 2];
-		$paymentData->hidden = false;
-		$this->createPayment('payment_card', $paymentData, ['transport_personal', 'transport_ppl']);
+		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
+		$paymentEditData->paymentData->domains = [1, 2];
+		$paymentEditData->paymentData->hidden = false;
+		$this->createPayment('payment_card', $paymentEditData, ['transport_personal', 'transport_ppl']);
 
-		$paymentData->name = [
+		$paymentEditData->paymentData->name = [
 			'cs' => 'Dobírka',
 			'en' => 'Personal collection',
 		];
-		$paymentData->price = 49.90;
-		$paymentData->description = [];
-		$paymentData->instructions = [];
-		$paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		$this->createPayment('payment_cod', $paymentData, ['transport_cp']);
+		$paymentEditData->prices = [
+			$this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 49.90,
+			$this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 1.95,
+		];
+		$paymentEditData->paymentData->description = [];
+		$paymentEditData->paymentData->instructions = [];
+		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+		$this->createPayment('payment_cod', $paymentEditData, ['transport_cp']);
 
-		$paymentData->name = [
+		$paymentEditData->paymentData->name = [
 			'cs' => 'Hotově',
 			'en' => 'Cash',
 		];
-		$paymentData->price = 0;
-		$paymentData->description = [];
-		$paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		$this->createPayment('payment_cash', $paymentData, ['transport_personal']);
+		$paymentEditData->prices = [
+			$this->getReference(CurrencyDataFixture::CURRENCY_CZK)->getId() => 0,
+			$this->getReference(CurrencyDataFixture::CURRENCY_EUR)->getId() => 0,
+		];
+		$paymentEditData->paymentData->description = [];
+		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
+		$this->createPayment('payment_cash', $paymentEditData, ['transport_personal']);
 
 		$manager->flush();
 	}
 
 	/**
 	 * @param string $referenceName
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
 	 * @param array $transportsReferenceNames
 	 */
 	private function createPayment(
 		$referenceName,
-		PaymentData $paymentData,
+		PaymentEditData $paymentEditData,
 		array $transportsReferenceNames
 	) {
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
-		$payment = $paymentEditFacade->create($paymentData);
+		$payment = $paymentEditFacade->create($paymentEditData);
 
 		foreach ($transportsReferenceNames as $transportsReferenceName) {
 			$payment->addTransport($this->getReference($transportsReferenceName));
@@ -84,6 +94,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		return [
 			TransportDataFixture::class,
 			VatDataFixture::class,
+			CurrencyDataFixture::class,
 		];
 	}
 

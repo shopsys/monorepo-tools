@@ -12,11 +12,6 @@ class TransportData {
 	public $name;
 
 	/**
-	 * @var string
-	 */
-	public $price;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public $vat;
@@ -48,7 +43,6 @@ class TransportData {
 
 	/**
 	 * @param string[] $names
-	 * @param string|null $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string[] $descriptions
 	 * @param string[] $instructions
@@ -57,7 +51,6 @@ class TransportData {
 	 */
 	public function __construct(
 		array $names = [],
-		$price = null,
 		Vat $vat = null,
 		array $descriptions = [],
 		array $instructions = [],
@@ -65,7 +58,6 @@ class TransportData {
 		array $domains = []
 	) {
 		$this->name = $names;
-		$this->price = $price;
 		$this->vat = $vat;
 		$this->description = $descriptions;
 		$this->instructions = $instructions;
@@ -91,7 +83,6 @@ class TransportData {
 		$this->description = $desctiptions;
 		$this->instructions = $instructions;
 		$this->hidden = $transport->isHidden();
-		$this->price = $transport->getPrice();
 		$this->vat = $transport->getVat();
 
 		$domains = [];

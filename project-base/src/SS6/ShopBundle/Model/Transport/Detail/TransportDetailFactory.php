@@ -37,7 +37,7 @@ class TransportDetailFactory {
 	public function createDetailForTransport(Transport $transport) {
 		return new TransportDetail(
 			$transport,
-			$this->getPrice($transport)
+			$this->getPrices($transport)
 		);
 	}
 
@@ -51,7 +51,7 @@ class TransportDetailFactory {
 		foreach ($transports as $transport) {
 			$details[] = new TransportDetail(
 				$transport,
-				$this->getPrice($transport)
+				$this->getPrices($transport)
 			);
 		}
 
@@ -62,8 +62,14 @@ class TransportDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private function getPrice(Transport $transport) {
-		return $this->transportPriceCalculation->calculatePrice($transport);
+	private function getPrices(Transport $transport) {
+		$prices = [];
+		foreach ($transport->getPrices() as $transportInputPrice) {
+			$currency = $transportInputPrice->getCurrency();
+			$prices[$currency->getId()] = $this->transportPriceCalculation->calculatePrice($transport, $currency);
+		}
+
+		return $prices;
 	}
 
 }

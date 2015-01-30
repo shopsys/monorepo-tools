@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
@@ -33,11 +34,11 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	protected $translations;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPrice[]
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6)
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Transport\TransportPrice", mappedBy="transport", cascade={"persist"})
 	 */
-	private $price;
+	private $prices;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
@@ -72,19 +73,17 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 */
 	public function __construct(TransportData $transportData) {
 		$this->translations = new ArrayCollection();
-
-		$this->price = $transportData->price;
 		$this->vat = $transportData->vat;
 		$this->hidden = $transportData->hidden;
 		$this->deleted = false;
 		$this->setTranslations($transportData);
+		$this->prices = new ArrayCollection();
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
 	 */
 	public function edit(TransportData $transportData) {
-		$this->price = $transportData->price;
 		$this->vat = $transportData->vat;
 		$this->hidden = $transportData->hidden;
 		$this->setTranslations($transportData);
@@ -110,13 +109,6 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 */
 	public function changeVat(Vat $vat) {
 		$this->vat = $vat;
-	}
-
-	/**
-	 * @param string $price
-	 */
-	public function setPrice($price) {
-		$this->price = $price;
 	}
 
 	/**
@@ -150,11 +142,39 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 		return $this->translation($locale)->getInstructions();
 	}
 
-	/**
-	 * @return string
+	/*
+	 * @return \SS6\ShopBundle\Model\Transport\TransportPrice[]
 	 */
-	public function getPrice() {
-		return $this->price;
+	public function getPrices() {
+		return $this->prices;
+	}
+
+	/*
+	 * @return \SS6\ShopBundle\Model\Transport\TransportPrice
+	 */
+	public function getPrice(Currency $currency) {
+		foreach ($this->prices as $price) {
+			if ($price->getCurrency() === $currency) {
+				return $price;
+			}
+		}
+
+		throw new \SS6\ShopBundle\Model\Transport\Exception\TransportPriceNotFoundException($currency);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param string $price
+	 */
+	public function setPrice(Currency $currency, $price) {
+		foreach ($this->prices as $transportInputPrice) {
+			if ($transportInputPrice->getCurrency() === $currency) {
+				$transportInputPrice->setPrice($price);
+				return;
+			}
+		}
+
+		$this->prices[] = new TransportPrice($this, $currency, $price);
 	}
 
 	/**

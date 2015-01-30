@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\TestsDb\Model\Order;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -60,6 +61,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->deliveryPostcode = 'deliveryPostcode';
 		$orderData->note = 'note';
 		$orderData->domainId = 1;
+		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 
 		$order = $orderFacade->createOrderFromCart($orderData);
 

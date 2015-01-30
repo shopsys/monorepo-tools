@@ -3,6 +3,9 @@ services:
   ss6.shop.form.admin.customer_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
 
+  ss6.shop.form.admin.payment.payment_edit_form_type_factory:
+    class: SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
+
   ss6.shop.form.admin.payment.payment_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
 
@@ -20,6 +23,9 @@ services:
 
   ss6.shop.form.admin.transport.transport_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
+
+  ss6.shop.form.admin.transport.transport_edit_form_type_factory:
+    class: SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
 
   ss6.shop.form.collection:
     class: SS6\ShopBundle\Form\CollectionType

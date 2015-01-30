@@ -6,9 +6,9 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
@@ -44,13 +44,19 @@ class TransportEditFacade {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 */
+	private $currencyFacade;
+
 	public function __construct(
 		EntityManager $em,
 		TransportRepository $transportRepository,
 		PaymentRepository $paymentRepository,
 		TransportVisibilityCalculation $transportVisibilityCalculation,
 		Domain $domain,
-		ImageFacade $imageFacade
+		ImageFacade $imageFacade,
+		CurrencyFacade $currencyFacade
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
@@ -58,19 +64,21 @@ class TransportEditFacade {
 		$this->transportVisibilityCalculation = $transportVisibilityCalculation;
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
+		$this->currencyFacade = $currencyFacade;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
+	 * @param \SS6\ShopBundle\Model\Transport\TransportEditData $transportEditData
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
 	 */
-	public function create(TransportData $transportData) {
-		$transport = new Transport($transportData);
+	public function create(TransportEditData $transportEditData) {
+		$transport = new Transport($transportEditData->transportData);
 		$this->em->persist($transport);
 		$this->em->beginTransaction();
 		$this->em->flush();
-		$this->createTransportDomains($transport, $transportData->domains);
-		$this->imageFacade->uploadImage($transport, $transportData->image, null);
+		$this->updateTransportPrices($transport, $transportEditData->prices);
+		$this->createTransportDomains($transport, $transportEditData->transportData->domains);
+		$this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
 		$this->em->flush();
 		$this->em->commit();
 
@@ -79,15 +87,16 @@ class TransportEditFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
+	 * @param \SS6\ShopBundle\Model\Transport\TransportEditData $transportEditData
 	 */
-	public function edit(Transport $transport, TransportData $transportData) {
-		$transport->edit($transportData);
+	public function edit(Transport $transport, TransportEditData $transportEditData) {
+		$transport->edit($transportEditData->transportData);
 
 		$this->em->beginTransaction();
+		$this->updateTransportPrices($transport, $transportEditData->prices);
 		$this->deleteTransportDomainsByTransport($transport);
-		$this->createTransportDomains($transport, $transportData->domains);
-		$this->imageFacade->uploadImage($transport, $transportData->image, null);
+		$this->createTransportDomains($transport, $transportEditData->transportData->domains);
+		$this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
 		$this->em->flush();
 		$this->em->commit();
 	}
@@ -169,4 +178,16 @@ class TransportEditFacade {
 	public function getTransportDomainsByTransport(Transport $transport) {
 		return $this->transportRepository->getTransportDomainsByTransport($transport);
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param string[currencyId] $prices
+	 */
+	private function updateTransportPrices(Transport $transport, $prices) {
+		foreach ($this->currencyFacade->getAll() as $currency) {
+			$price = $prices[$currency->getId()];
+			$transport->setPrice($currency, $price);
+		}
+	}
+
 }

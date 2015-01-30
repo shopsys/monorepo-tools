@@ -3,7 +3,8 @@
 namespace SS6\ShopBundle\TestsDb\Model\Pricing;
 
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
-use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
 use SS6\ShopBundle\Model\Pricing\InputPriceRepository;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -11,7 +12,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Setting\SettingValue;
-use SS6\ShopBundle\Model\Transport\TransportData;
+use SS6\ShopBundle\Model\Transport\TransportEditData;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceFacadeTest extends DatabaseTestCase {
@@ -75,6 +76,9 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
 
+		$currency1 = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
+		$currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
+
 		$productEditData = new ProductEditData();
 		$productEditData->productData->name = ['cs' => 'name'];
 		$productEditData->productData->price = $inputPriceWithVat;
@@ -82,19 +86,19 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
-		$paymentData = new PaymentData();
-		$paymentData->name = ['cs' => 'name'];
-		$paymentData->price = $inputPriceWithVat;
-		$paymentData->vat = $vat;
-		$payment = $paymentEditFacade->create($paymentData);
+		$paymentEditData = new PaymentEditData();
+		$paymentEditData->paymentData->name = ['cs' => 'name'];
+		$paymentEditData->prices = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
+		$paymentEditData->paymentData->vat = $vat;
+		$payment = $paymentEditFacade->create($paymentEditData);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
-		$transportData = new TransportData();
-		$transportData->name = ['cs' => 'name'];
-		$transportData->description = ['cs' => 'desc'];
-		$transportData->price = $inputPriceWithVat;
-		$transportData->vat = $vat;
-		$transport = $transportEditFacade->create($transportData);
+		$transportEditData = new \SS6\ShopBundle\Model\Transport\TransportEditData();
+		$transportEditData->transportData->name = ['cs' => 'name'];
+		$transportEditData->transportData->description = ['cs' => 'desc'];
+		$transportEditData->prices = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
+		$transportEditData->transportData->vat = $vat;
+		$transport = $transportEditFacade->create($transportEditData);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 		$em->flush();
 
@@ -110,8 +114,8 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$transport2 = $transportRepository->getById($transport->getId());
 
 		$this->assertEquals(round($inputPriceWithoutVat, 6), round($product2->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithoutVat, 6), round($payment2->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithoutVat, 6), round($transport2->getPrice(), 6));
+		$this->assertEquals(round($inputPriceWithoutVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
+		$this->assertEquals(round($inputPriceWithoutVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
 	}
 
 	/**
@@ -143,6 +147,9 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON);
 
+		$currency1 = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
+		$currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
+
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
 
@@ -153,18 +160,18 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
-		$paymentData = new PaymentData();
-		$paymentData->name = ['cs' => 'name'];
-		$paymentData->price = $inputPriceWithoutVat;
-		$paymentData->vat = $vat;
-		$payment = $paymentEditFacade->create($paymentData);
+		$paymentEditData = new PaymentEditData();
+		$paymentEditData->paymentData->name = ['cs' => 'name'];
+		$paymentEditData->prices = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
+		$paymentEditData->paymentData->vat = $vat;
+		$payment = $paymentEditFacade->create($paymentEditData);
 		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 
-		$transportData = new TransportData();
-		$transportData->name = ['cs' => 'name'];
-		$transportData->price = $inputPriceWithoutVat;
-		$transportData->vat = $vat;
-		$transport = $transportEditFacade->create($transportData);
+		$transportEditData = new TransportEditData();
+		$transportEditData->transportData->name = ['cs' => 'name'];
+		$transportEditData->prices = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
+		$transportEditData->transportData->vat = $vat;
+		$transport = $transportEditFacade->create($transportEditData);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
 
 		$em->flush();
@@ -181,8 +188,8 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$transport2 = $transportRepository->getById($transport->getId());
 
 		$this->assertEquals(round($inputPriceWithVat, 6), round($product2->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithVat, 6), round($payment2->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithVat, 6), round($transport2->getPrice(), 6));
+		$this->assertEquals(round($inputPriceWithVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
+		$this->assertEquals(round($inputPriceWithVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
 	}
 
 }

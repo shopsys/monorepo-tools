@@ -125,17 +125,24 @@ class InputPriceRepository {
 			->getQuery();
 
 		$this->batchProcessQuery($query, function (Payment $payment) use ($toInputPriceType) {
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment);
+			foreach ($payment->getPrices() as $paymentInputPrice) {
+				$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+					$payment,
+					$paymentInputPrice->getCurrency()
+				);
 
-			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-				$payment->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
-					$paymentPrice->getPriceWithVat(),
-					$payment->getVat()->getPercent()
-				));
-			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-				$payment->setPrice($paymentPrice->getPriceWithVat());
-			} else {
-				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
+				if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
+					$newInputPrice = $this->inputPriceCalculation->getInputPriceWithoutVat(
+						$paymentPrice->getPriceWithVat(),
+						$payment->getVat()->getPercent()
+					);
+
+				$paymentInputPrice->setPrice($newInputPrice);
+				} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
+					$paymentInputPrice->setPrice($paymentPrice->getPriceWithVat());
+				} else {
+					throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
+				}
 			}
 		});
 	}
@@ -150,17 +157,24 @@ class InputPriceRepository {
 			->getQuery();
 
 		$this->batchProcessQuery($query, function (Transport $transport) use ($toInputPriceType) {
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport);
+			foreach ($transport->getPrices() as $transportInputPrice) {
+				$transportPrice = $this->transportPriceCalculation->calculatePrice(
+					$transport,
+					$transportInputPrice->getCurrency()
+				);
 
-			if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-				$transport->setPrice($this->inputPriceCalculation->getInputPriceWithoutVat(
-					$transportPrice->getPriceWithVat(),
-					$transport->getVat()->getPercent()
-				));
-			} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-				$transport->setPrice($transportPrice->getPriceWithVat());
-			} else {
-				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
+				if ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
+					$newInputPrice = $this->inputPriceCalculation->getInputPriceWithoutVat(
+						$transportPrice->getPriceWithVat(),
+						$transport->getVat()->getPercent()
+					);
+
+					$transportInputPrice->setPrice($newInputPrice);
+				} elseif ($toInputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
+					$transportInputPrice->setPrice($transportPrice->getPriceWithVat());
+				} else {
+					throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
+				}
 			}
 		});
 	}

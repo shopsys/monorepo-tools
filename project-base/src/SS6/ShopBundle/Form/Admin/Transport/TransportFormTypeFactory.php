@@ -21,7 +21,10 @@ class TransportFormTypeFactory {
 	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 */
-	public function __construct(FileUpload $fileUpload, VatRepository $vatRepository) {
+	public function __construct(
+		FileUpload $fileUpload,
+		VatRepository $vatRepository
+	) {
 		$this->fileUpload = $fileUpload;
 		$this->vatRepository = $vatRepository;
 	}

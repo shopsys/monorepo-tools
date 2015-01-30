@@ -16,6 +16,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TransportGridFactory implements GridFactoryInterface {
 
+	const CURRENCY_ID_FOR_LIST = 1;
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
@@ -101,7 +103,10 @@ class TransportGridFactory implements GridFactoryInterface {
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dopravu?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Transport/listGrid.html.twig');
+		$grid->setTheme(
+			'@SS6Shop/Admin/Content/Transport/listGrid.html.twig',
+			['currencyIdForList' => self::CURRENCY_ID_FOR_LIST]
+		);
 
 		return $grid;
 	}

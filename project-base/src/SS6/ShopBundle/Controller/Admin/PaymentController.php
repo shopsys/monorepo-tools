@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,21 +16,22 @@ class PaymentController extends Controller {
 	public function newAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
-		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
-		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
-		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+		$paymentEditFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_edit_form_type_factory');
+		/* @var $paymentEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory */
+		$paymentEditDataFactory = $this->get('ss6.shop.payment.payment_edit_data_factory');
+		/* @var $paymentEditDataFactory \SS6\ShopBundle\Model\Payment\PaymentEditDataFactory */
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
-		$paymentData = new PaymentData();
-		$paymentData->vat = $vatFacade->getDefaultVat();
+		$paymentEditData = $paymentEditDataFactory->createDefault();
 
-		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
+		$form = $this->createForm($paymentEditFormTypeFactory->create(), $paymentEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 			/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-			$payment = $paymentEditFacade->create($paymentData);
+			$payment = $paymentEditFacade->create($paymentEditData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
@@ -47,6 +47,7 @@ class PaymentController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', [
 			'form' => $form->createView(),
+			'currencies' => $currencyFacade->getAllIndexedById(),
 		]);
 	}
 
@@ -60,22 +61,24 @@ class PaymentController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$paymentFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_form_type_factory');
-		/* @var $paymentFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory */
+		$paymentEditFormTypeFactory = $this->get('ss6.shop.form.admin.payment.payment_edit_form_type_factory');
+		/* @var $paymentEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory */
 		$paymentDetailFactory = $this->get('ss6.shop.payment.payment_detail_factory');
 		/* @var $paymentDetailFactory \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory */
+		$paymentEditDataFactory = $this->get('ss6.shop.payment.payment_edit_data_factory');
+		/* @var $paymentEditDataFactory \SS6\ShopBundle\Model\Payment\PaymentEditDataFactory */
+		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
 		$payment = $paymentEditFacade->getByIdWithTransports($id);
-		$paymentDomains = $paymentEditFacade->getPaymentDomainsByPayment($payment);
 
-		$paymentData = new PaymentData();
-		$paymentData->setFromEntity($payment, $paymentDomains);
+		$paymentEditData = $paymentEditDataFactory->createFromPayment($payment);
 
-		$form = $this->createForm($paymentFormTypeFactory->create(), $paymentData);
+		$form = $this->createForm($paymentEditFormTypeFactory->create(), $paymentEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$paymentEditFacade->edit($payment, $paymentData);
+			$paymentEditFacade->edit($payment, $paymentEditData);
 
 			$flashMessageSender->addSuccessFlashTwig('Byla upravena platba'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
@@ -96,6 +99,7 @@ class PaymentController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', [
 			'form' => $form->createView(),
 			'paymentDetail' => $paymentDetailFactory->createDetailForPayment($payment),
+			'currencies' => $currencyFacade->getAllIndexedById(),
 		]);
 	}
 

@@ -10,6 +10,8 @@ use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
@@ -21,6 +23,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$transportPrice = new Price(10, 12, 2);
 		$cartItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
 		$cartItemsPrices = [$cartItemPrice, $cartItemPrice];
+		$currency = new Currency(new CurrencyData());
 
 		$cartItemPriceCalculationMock = $this->getMockBuilder(CartItemPriceCalculation::class)
 			->setMethods(['calculatePrices', '__construct'])
@@ -55,7 +58,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$transport = $this->getMock(Transport::class, [], [], '', false);
 		$payment = $this->getMock(Payment::class, [], [], '', false);
 
-		$orderPreview = $previewCalculation->calculatePreview($cart, $transport, $payment);
+		$orderPreview = $previewCalculation->calculatePreview($currency, $cart, $transport, $payment);
 
 		$this->assertEquals($cartItems, $orderPreview->getCartItems());
 		$this->assertEquals($cartItemsPrices, $orderPreview->getCartItemsPrices());
@@ -71,6 +74,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 	public function testCalculatePreviewWithoutTransportAndPayment() {
 		$cartItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
 		$cartItemsPrices = [$cartItemPrice, $cartItemPrice];
+		$currency = new Currency(new CurrencyData());
 
 		$cartItemPriceCalculationMock = $this->getMockBuilder(CartItemPriceCalculation::class)
 			->setMethods(['calculatePrices', '__construct'])
@@ -103,7 +107,7 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		];
 		$cart = new Cart($cartItems);
 
-		$orderPreview = $previewCalculation->calculatePreview($cart, null, null);
+		$orderPreview = $previewCalculation->calculatePreview($currency, $cart, null, null);
 
 		$this->assertEquals($cartItems, $orderPreview->getCartItems());
 		$this->assertEquals($cartItemsPrices, $orderPreview->getCartItemsPrices());

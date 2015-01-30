@@ -4,14 +4,33 @@
 {% block h1 %}{{ 'Editace dopravy'|trans }} - {{ transportDetail.transport.name }}{% endblock %}
 
 {% block transport_base_prices %}
-	<div class="form-line form-line--size-2">
-		<label class="form-line__label">{{ 'Základní cena bez DPH'|trans }}:</label>
-		<input type="text" value="{{ transportDetail.basePrice.priceWithoutVat }}" class="form-line__field form-control" readonly="readonly">
-	</div>
-	<div class="form-line form-line--size-2">
-		<label class="form-line__label">{{ 'Základní cena s DPH'|trans }}:</label>
-		<input type="text" value="{{ transportDetail.basePrice.priceWithVat }}" class="form-line__field form-control" readonly="readonly">
-	</div>
+	<fieldset class="row">
+		<div class="table-responsive mt-1" id="transport_prices">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>{{ inputPriceLabel() }}</th>
+						<th>{{ 'Cena bez DPH'|trans }}</th>
+						<th>{{ 'Cena s DPH'|trans }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for currencyId, currency in currencies %}
+						<tr>
+							<td>
+								{{ form_row(
+									form.prices[currencyId],
+									{label: 'Základní cena v ' ~ currency.code, attr: { class: 'form-line--size-2' }, symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
+								) }}
+							</td>
+							<td>{{ transportDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
+							<td>{{ transportDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
 {% endblock %}
 
 {% block image %}

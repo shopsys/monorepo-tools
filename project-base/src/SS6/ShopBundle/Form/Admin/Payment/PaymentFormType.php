@@ -72,20 +72,6 @@ class PaymentFormType extends AbstractType {
 				'expanded' => true,
 				'required' => false,
 			])
-			->add('price', 'money', [
-				'currency' => false,
-				'precision' => 6,
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
-				'required' => true,
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte cenu']),
-					new Constraints\GreaterThanOrEqual([
-						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
-					]),
-				],
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu',
-			])
 			->add('vat', 'choice', [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
@@ -111,8 +97,7 @@ class PaymentFormType extends AbstractType {
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
 					]),
 				],
-			])
-			->add('save', 'submit');
+			]);
 	}
 
 	/**
