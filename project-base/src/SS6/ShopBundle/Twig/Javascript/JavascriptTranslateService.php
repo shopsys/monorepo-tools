@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Twig\Javascript;
 
-use SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCompiler;
+use SS6\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompiler;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;

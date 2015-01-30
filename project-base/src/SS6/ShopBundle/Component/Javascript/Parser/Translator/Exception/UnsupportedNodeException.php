@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Translator\Exception;
+namespace SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Javascript\Translator\Exception\JsTranslatorCallParserException;
+use SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException;
 
 class UnsupportedNodeException extends Exception implements JsTranslatorCallParserException {
 

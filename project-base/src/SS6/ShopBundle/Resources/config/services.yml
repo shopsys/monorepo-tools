@@ -129,16 +129,16 @@ services:
   ss6.shop.component.doctrine_walker.query_builder_service:
     class: SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
 
-  ss6.shop.component.javascript.translator.js_translator_call_parser:
-    class: SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser
-    factory_service: ss6.shop.component.javascript.translator.js_translator_call_parser_factory
+  ss6.shop.component.javascript.parser.translator.js_translator_call_parser:
+    class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
+    factory_service: ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory
     factory_method: create
 
-  ss6.shop.component.javascript.translator.js_translator_call_parser_factory:
-    class: SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParserFactory
+  ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
+    class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
 
-  ss6.shop.component.javascript.translator.js_translator_compiler:
-    class: SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCompiler
+  ss6.shop.component.javascript.compiler.translator.js_translator_compiler:
+    class: SS6\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompiler
 
   ss6.shop.component.translation.php_file_extractor:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractor

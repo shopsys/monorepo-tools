@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Component\Translation;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
-use SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParserFactory;
+use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
 use SS6\ShopBundle\Component\Translation\JsFileExtractor;
 
 class JsFileExtractorTest extends \PHPUnit_Framework_TestCase {

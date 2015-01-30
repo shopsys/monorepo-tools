@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Translator;
+namespace SS6\ShopBundle\Component\Javascript\Compiler\Translator;
 
 import('PLUG.JavaScript.JParser');
 import('PLUG.JavaScript.JTokenizer');
@@ -8,13 +8,13 @@ import('PLUG.parsing.ParseError');
 
 use JParser;
 use JTokenizer;
-use SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser;
+use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class JsTranslatorCompiler {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser
+	 * @var \SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
 	 */
 	private $jsTranslatorCallParser;
 
