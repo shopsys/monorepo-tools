@@ -13,7 +13,7 @@ use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use JParser;
 use JTokenizer;
 use SplFileInfo;
-use SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser;
+use SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser;
 use Twig_Node;
 
 class JsFileExtractor implements FileVisitorInterface {
@@ -29,7 +29,7 @@ class JsFileExtractor implements FileVisitorInterface {
 	private $catalogue;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser
+	 * @var \SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser
 	 */
 	private $jsTranslatorCallParser;
 
@@ -58,7 +58,7 @@ class JsFileExtractor implements FileVisitorInterface {
 			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException(
 				$ex->getMessage() . "\n" . 'in file ' . $this->file->getRealPath()
 			);
-		} catch (\SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\Exception\ParseException $ex) {
+		} catch (\SS6\ShopBundle\Component\Javascript\Translator\Exception\ParseException $ex) {
 			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException(
 				$ex->getMessage() . ' in file ' . $this->file->getRealPath()
 			);

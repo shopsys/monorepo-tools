@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Twig\Javascript;
 
-use SS6\ShopBundle\Component\Translation\JsTranslator;
+use SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCompiler;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -64,7 +64,7 @@ class JavascriptTranslateService {
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		Domain $domain,
-		JsTranslator $jsTranslator
+		JsTranslatorCompiler $jsTranslator
 	) {
 		$this->rootPath = $rootPath;
 		$this->webPath = $webPath;

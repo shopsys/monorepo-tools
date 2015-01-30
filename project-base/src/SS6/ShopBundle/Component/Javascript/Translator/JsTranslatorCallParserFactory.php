@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation\JsTranslatorCallParser;
+namespace SS6\ShopBundle\Component\Javascript\Translator;
 
-use SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser;
+use SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser;
 use SS6\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory {
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Translation\JsTranslatorCallParser\JsTranslatorCallParser
+	 * @return \SS6\ShopBundle\Component\Javascript\Translator\JsTranslatorCallParser
 	 */
 	public function create() {
 		$transMethodSpecifications = [

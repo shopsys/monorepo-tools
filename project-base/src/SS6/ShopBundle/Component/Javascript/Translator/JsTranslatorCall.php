@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation\JsTranslatorCallParser;
+namespace SS6\ShopBundle\Component\Javascript\Translator;
 
 use JCallExprNode;
 use JNodeBase;
