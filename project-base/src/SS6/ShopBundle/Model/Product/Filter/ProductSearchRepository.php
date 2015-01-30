@@ -50,7 +50,10 @@ class ProductSearchRepository {
 		$queryBuilder = $this->productRepository->getAllVisibleByDomainIdQueryBuilder($domainId);
 		$this->productRepository->addTranslation($queryBuilder, $locale);
 
-		$queryBuilder->andWhere('pt.name LIKE :productName OR p.catnum LIKE :productCatnum');
+		$queryBuilder->andWhere(
+			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
+			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
+		);
 		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($productName) . '%');
 		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($productCatnum) . '%');
 
