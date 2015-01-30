@@ -7,9 +7,9 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class JavascriptTranslateService {
+class JavascriptCompilerService {
 
-	const NOT_TRANSLATED_FOLDER = '/plugins/';
+	const NOT_COMPILED_FOLDER = '/plugins/';
 
 	/**
 	 * @var string
@@ -79,7 +79,7 @@ class JavascriptTranslateService {
 	/**
 	 * @param array $javascripts
 	 */
-	public function generateTranslateFiles(array $javascripts) {
+	public function generateCompiledFiles(array $javascripts) {
 		foreach ($javascripts as $javascript) {
 			$this->process($javascript);
 		}
@@ -131,7 +131,7 @@ class JavascriptTranslateService {
 		}
 
 		if (is_file($sourcePath)) {
-			$this->translateJavascriptIntoCacheFile($sourcePath, $relativeTargetPath);
+			$this->compileJavascriptFile($sourcePath, $relativeTargetPath);
 			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($relativeTargetPath);
 			return true;
 		}
@@ -161,35 +161,35 @@ class JavascriptTranslateService {
 	 * @param string $sourceFilename
 	 * @param string $relativeTargetPath
 	 */
-	private function translateJavascriptIntoCacheFile($sourceFilename, $relativeTargetPath) {
-		$targetPathFull = $this->webPath . '/' . $relativeTargetPath;
+	private function compileJavascriptFile($sourceFilename, $relativeTargetPath) {
+		$compiledFilename = $this->webPath . '/' . $relativeTargetPath;
 
-		if (!$this->isCachedFileFresh($targetPathFull, $sourceFilename)) {
+		if (!$this->isCompiledFileFresh($compiledFilename, $sourceFilename)) {
 			$content = file_get_contents($sourceFilename);
 
-			if (strpos($sourceFilename, self::NOT_TRANSLATED_FOLDER) === false) {
+			if (strpos($sourceFilename, self::NOT_COMPILED_FOLDER) === false) {
 				$newContent = $this->jsTranslator->translate($content);
 			} else {
 				$newContent = $content;
 			}
 
-			$this->filesystem->mkdir(dirname($targetPathFull));
-			$this->filesystem->dumpFile($targetPathFull, $newContent);
+			$this->filesystem->mkdir(dirname($compiledFilename));
+			$this->filesystem->dumpFile($compiledFilename, $newContent);
 		}
 	}
 
 	/**
-	 * @param string $cachedPathFull
+	 * @param string $compiledFilename
 	 * @param string $sourceFilename
 	 * @return boolean
 	 */
-	private function isCachedFileFresh($cachedPathFull, $sourceFilename) {
-		if (is_file($cachedPathFull) && parse_url($sourceFilename, PHP_URL_HOST) === null) {
-			$isCachedFileFresh = filemtime($sourceFilename) < filemtime($cachedPathFull);
+	private function isCompiledFileFresh($compiledFilename, $sourceFilename) {
+		if (is_file($compiledFilename) && parse_url($sourceFilename, PHP_URL_HOST) === null) {
+			$isCompiledFileFresh = filemtime($sourceFilename) < filemtime($compiledFilename);
 		} else {
-			$isCachedFileFresh = false;
+			$isCompiledFileFresh = false;
 		}
-		return $isCachedFileFresh;
+		return $isCompiledFileFresh;
 	}
 
 	/**

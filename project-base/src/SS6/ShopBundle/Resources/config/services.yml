@@ -389,8 +389,8 @@ services:
     class: SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
     arguments: [%kernel.root_dir%, %kernel.cache_dir%]
 
-  ss6.shop.twig.javascript.javascript_translate_service:
-    class: SS6\ShopBundle\Twig\Javascript\JavascriptTranslateService
+  ss6.shop.twig.javascript.javascript_compiler_service:
+    class: SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService
     arguments:
       - %ss6.root_dir%
       - %ss6.web_dir%
