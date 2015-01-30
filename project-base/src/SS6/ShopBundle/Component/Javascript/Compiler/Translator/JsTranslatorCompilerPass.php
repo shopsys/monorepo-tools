@@ -2,16 +2,14 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Compiler\Translator;
 
-import('PLUG.JavaScript.JParser');
-import('PLUG.JavaScript.JTokenizer');
-import('PLUG.parsing.ParseError');
+import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
 
-use JParser;
-use JTokenizer;
+use JProgramNode;
+use SS6\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class JsTranslatorCompiler {
+class JsTranslatorCompilerPass implements JsCompilerPassInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
@@ -32,24 +30,18 @@ class JsTranslatorCompiler {
 	}
 
 	/**
-	 * @param string $content
-	 * @return string
+	 * @param \JProgramNode $node
 	 */
-	public function translate($content) {
-		$node = JParser::parse_string($content, true, JParser::class, JTokenizer::class);
-
+	public function process(JProgramNode $node) {
 		$jsTranslatorsCalls = $this->jsTranslatorCallParser->parse($node);
 
 		foreach ($jsTranslatorsCalls as $jsTranslatorsCall) {
-			$callExprNode = $jsTranslatorsCall->getCallExprNode();
 			$messageIdArgumentNode = $jsTranslatorsCall->getMessageIdArgumentNode();
 
 			$translatedMessage = $this->translator->trans($jsTranslatorsCall->getMessageId());
 
 			$messageIdArgumentNode->terminate(json_encode($translatedMessage));
 		}
-
-		return $node->format();
 	}
 
 }

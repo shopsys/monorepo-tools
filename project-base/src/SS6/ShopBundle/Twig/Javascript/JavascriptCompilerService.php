@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Twig\Javascript;
 
-use SS6\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompiler;
+use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -47,9 +47,9 @@ class JavascriptCompilerService {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\JsTranslator
+	 * @var \SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler
 	 */
-	private $jsTranslator;
+	private $jsCompiler;
 
 	/**
 	 * @var array
@@ -64,7 +64,7 @@ class JavascriptCompilerService {
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		Domain $domain,
-		JsTranslatorCompiler $jsTranslator
+		JsCompiler $jsCompiler
 	) {
 		$this->rootPath = $rootPath;
 		$this->webPath = $webPath;
@@ -73,7 +73,7 @@ class JavascriptCompilerService {
 		$this->container = $container;
 		$this->filesystem = $filesystem;
 		$this->domain = $domain;
-		$this->jsTranslator = $jsTranslator;
+		$this->jsCompiler = $jsCompiler;
 	}
 
 	/**
@@ -168,7 +168,7 @@ class JavascriptCompilerService {
 			$content = file_get_contents($sourceFilename);
 
 			if (strpos($sourceFilename, self::NOT_COMPILED_FOLDER) === false) {
-				$newContent = $this->jsTranslator->translate($content);
+				$newContent = $this->jsCompiler->compile($content);
 			} else {
 				$newContent = $content;
 			}

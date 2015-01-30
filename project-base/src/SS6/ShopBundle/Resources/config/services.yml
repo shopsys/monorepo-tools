@@ -143,8 +143,14 @@ services:
   ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
 
-  ss6.shop.component.javascript.compiler.translator.js_translator_compiler:
-    class: SS6\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompiler
+  ss6.shop.component.javascript.compiler.js_compiler:
+    class: SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler
+    arguments:
+      -
+        - @ss6.shop.component.javascript.compiler.translator.js_translator_compiler_pass
+
+  ss6.shop.component.javascript.compiler.translator.js_translator_compiler_pass:
+    class: SS6\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass
 
   ss6.shop.component.translation.php_file_extractor:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractor
