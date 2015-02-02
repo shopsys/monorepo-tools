@@ -16,6 +16,7 @@ class QueryBuilderService {
 	public function addOrExtendJoin(QueryBuilder $queryBuilder, $class, $alias, $condition) {
 		$joinAlreadyUsed = false;
 		foreach ($queryBuilder->getDQLPart('join')['p'] as $join) {
+			/* @var $join \Doctrine\ORM\Query\Expr\Join */
 			if ($join->getJoin() === $class) {
 				$joinAlreadyUsed = true;
 			}
