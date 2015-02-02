@@ -94,6 +94,9 @@ services:
   ss6.shop.advance_search.advance_search_service:
     class: SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchService
 
+  ss6.shop.advance_search.advance_search_translation:
+    class: SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation
+
   ss6.shop.advance_search.filter.product_catnum_fitler:
     class: SS6\ShopBundle\Model\AdvanceSearch\Filter\ProductCatnumFilter
 

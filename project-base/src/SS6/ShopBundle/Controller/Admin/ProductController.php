@@ -128,8 +128,13 @@ class ProductController extends Controller {
 		$quickSearchForm->handleRequest($request);
 		$quickSearchData = $quickSearchForm->getData();
 
-		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
-		$queryBuilder = $advanceSearchFacade->getQueryBuilderByAdvanceSearchData($advanceSearchData);
+		$isAdvanceSearchFormSubmitted = $advanceSearchFacade->isAdvanceSearchFormSubmitted($request);
+		if ($isAdvanceSearchFormSubmitted) {
+			$queryBuilder = $advanceSearchFacade->getQueryBuilderByAdvanceSearchData($advanceSearchData);
+		} else {
+			$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
+		}
+		
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $gridFactory->create('productList', $dataSource);
@@ -153,6 +158,7 @@ class ProductController extends Controller {
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
 			'advanceSearchForm' => $advanceSearchForm->createView(),
+			'isAdvanceSearchFormSubmitted' => $advanceSearchFacade->isAdvanceSearchFormSubmitted($request),
 		]);
 	}
 

@@ -1,8 +1,9 @@
 {% form_theme rulesForm getDefaultFormTheme() %}
 {% for key, ruleForm in rulesForm %}
+	{% set isTemplate = key is same as('__template__') %}
 	<div
-		class="form-inline js-advance-search-rule"
-		{%- if key is same as('__template__') %} id="js-advance-search-rule-template"{% endif -%}
+		class="js-advance-search-rule{{ isTemplate ? ' display-none' : '' }}"
+		{{- isTemplate ? ' id="js-advance-search-rule-template"' : '' -}}
 	>
 		{{ form_widget(ruleForm.subject, { attr: { class: 'js-advance-search-rule-subject' }}) }}
 		{{ form_widget(ruleForm.operator) }}

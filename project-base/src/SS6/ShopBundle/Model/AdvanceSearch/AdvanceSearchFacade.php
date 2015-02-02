@@ -76,4 +76,14 @@ class AdvanceSearchFacade {
 		return $queryBuilder;
 	}
 
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return bool
+	 */
+	public function isAdvanceSearchFormSubmitted(Request $request) {
+		$rulesData = $request->get(self::RULES_FORM_NAME);
+
+		return $rulesData !== null;
+	}
+
 }

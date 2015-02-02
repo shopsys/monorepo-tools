@@ -4,12 +4,22 @@
 	SS6.advanceSearch = SS6.advanceSearch || {};
 
 	SS6.advanceSearch.init = function () {
+		var $quickSearch = $('#js-quick-search');
+		var $advanceSearch = $('#js-advance-search');
 		var $addRuleButton = $('#js-advance-search-add-rule-button');
+		var $enableButton = $('#js-advance-search-enable-button');
 		var $rulesContainer = $('#js-advance-search-rules-container');
 		var $ruleTemplate = $('#js-advance-search-rule-template');
-		$ruleTemplate.detach().removeAttr('id').find('*[id]').removeAttr('id');
+		$ruleTemplate.detach().show().removeAttr('id').find('*[id]').removeAttr('id');
 
 		var newRuleIndexCounter = 0;
+
+		if ($enableButton.size() > 0) {
+			$advanceSearch.detach();
+			$enableButton.click(function () {
+				$quickSearch.replaceWith($advanceSearch.show());
+			});
+		}
 
 		$addRuleButton.click(function () {
 			SS6.advanceSearch.addRule($rulesContainer, $ruleTemplate, 'new_' + newRuleIndexCounter);

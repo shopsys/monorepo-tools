@@ -8,9 +8,16 @@
 		<div class="col-xs-12 col-lg-10">
 			{{ form_start(quickSearchForm) }}
 
-				{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+				{% if not isAdvanceSearchFormSubmitted %}
+					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+				{% endif %}
 
-				{% include '@SS6Shop/Admin/Content/Product/AdvanceSearch/advanceSearch.html.twig' with {advanceSearchForm: advanceSearchForm} %}
+				{% include '@SS6Shop/Admin/Content/Product/AdvanceSearch/advanceSearch.html.twig'
+					with {
+						advanceSearchForm: advanceSearchForm,
+						isAdvanceSearchFormSubmitted: isAdvanceSearchFormSubmitted,
+					}
+				%}
 
 				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
 				{{ gridView.render() }}

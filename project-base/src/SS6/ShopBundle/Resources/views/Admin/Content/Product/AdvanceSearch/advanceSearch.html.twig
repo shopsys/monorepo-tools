@@ -1,8 +1,12 @@
-<div class="mb-1">
+<div class="mb-1 wrap-box form-inline mb-1 mt-1{{ isAdvanceSearchFormSubmitted ? '' : ' display-none'}}" id="js-advance-search">
 	<div class="mb-1" id="js-advance-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
 		{% include '@SS6Shop/Admin/Content/Product/AdvanceSearch/ruleForm.html.twig' with {rulesForm: advanceSearchForm} %}
 	</div>
-	<button class="btn btn-primary" id="js-advance-search-add-rule-button">
+	<button type="button" class="btn btn-primary mb-1" id="js-advance-search-add-rule-button">
 		<i class="fa fa-plus fa-lg"></i> {{ 'Přidat'|trans }}
 	</button>
+	<br />
+	<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zrušit filtr'|trans }}</a>
+	<input type="submit" value="{{ 'Vyhledat'|trans }}" class="btn btn-primary">
+
 </div>
