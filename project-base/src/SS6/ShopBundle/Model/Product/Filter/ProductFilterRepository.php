@@ -61,7 +61,7 @@ class ProductFilterRepository {
 				$queryBuilder,
 				\SS6\ShopBundle\Model\Product\Availability\Availability::class,
 				'a',
-				'p.availability = a AND a.deliveryTime = :deliveryTime'
+				'p.calculatedAvailability = a AND a.deliveryTime = :deliveryTime'
 			);
 			$queryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
 		}
