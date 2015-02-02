@@ -134,7 +134,7 @@ class ProductController extends Controller {
 		} else {
 			$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
 		}
-		
+
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $gridFactory->create('productList', $dataSource);

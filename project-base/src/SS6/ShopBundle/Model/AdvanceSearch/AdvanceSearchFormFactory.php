@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class AdvanceSearchFormFactory {
-	
+
 	/**
 	 * @var \Symfony\Component\Form\FormFactoryInterface
 	 */
@@ -33,14 +33,13 @@ class AdvanceSearchFormFactory {
 		$this->advanceSearchTranslation = $advanceSearchTranslation;
 	}
 
-	
 	/**
 	 * @param string $name
 	 * @param array $rulesData
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function createRulesForm($name, $rulesData) {
-		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, array('csrf_protection' => false));
+		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, ['csrf_protection' => false]);
 
 		foreach ($rulesData as $ruleKey => $ruleData) {
 			$ruleFilter = $this->advanceSearchConfig->getFilter($ruleData['subject']);
@@ -60,7 +59,7 @@ class AdvanceSearchFormFactory {
 	 */
 	private function createRuleFormBuilder($name, AdvanceSearchFilterInterface $ruleFilter) {
 		$filterFormBuilder = $this->formFactory->createNamedBuilder($name)
-			->add('subject','choice', [
+			->add('subject', 'choice', [
 					'choices' => $this->getSubjectChoices(),
 					'expanded' => false,
 					'multiple' => false,

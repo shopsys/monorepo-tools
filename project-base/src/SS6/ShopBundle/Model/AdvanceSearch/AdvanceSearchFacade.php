@@ -51,7 +51,7 @@ class AdvanceSearchFacade {
 	public function createAdvanceSearchForm(Request $request) {
 		$rulesData = (array)$request->get(self::RULES_FORM_NAME, null, true);
 		$rulesFormData = $this->advanceSearchService->getRulesFormDataByRequestData($rulesData);
-		
+
 		return $this->advanceSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
 	}
 
