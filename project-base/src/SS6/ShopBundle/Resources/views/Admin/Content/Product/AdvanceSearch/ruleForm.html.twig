@@ -6,8 +6,10 @@
 		{{- isTemplate ? ' id="js-advance-search-rule-template"' : '' -}}
 	>
 		{{ form_widget(ruleForm.subject, { attr: { class: 'js-advance-search-rule-subject' }}) }}
-		{{ form_widget(ruleForm.operator) }}
-		{{ form_widget(ruleForm.value) }}
+		{{ form_widget(ruleForm.operator, { attr: { class: 'js-advance-search-rule-operator' }}) }}
+		<span class="js-advance-search-rule-value">
+			{{ form_widget(ruleForm.value) }}
+		</span>
 		<i class="fa fa-delete cursor-pointer js-advance-search-remove-rule-button"></i>
 	</div>
 {% endfor %}

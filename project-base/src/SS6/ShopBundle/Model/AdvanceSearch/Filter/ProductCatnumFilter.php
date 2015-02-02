@@ -22,6 +22,7 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 		return [
 			self::OPERATOR_CONTAIN,
 			self::OPERATOR_NOT_CONTAIN,
+			self::OPERATOR_NOT_SET,
 		];
 	}
 
@@ -43,14 +44,18 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 	 * {@inheritdoc}
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value) {
-		if ($value === null) {
-			$value = '';
-		}
+		if ($operator === self::OPERATOR_NOT_SET) {
+			$queryBuilder->andWhere('p.catnum IS NULL');
+		} else {
+			if ($value === null) {
+				$value = '';
+			}
 
-		$dqlOperator = $this->getDqlOperator($operator);
-		$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
-		$queryBuilder->andWhere('NORMALIZE(p.catnum) ' . $dqlOperator . ' NORMALIZE(:productCatnum)');
-		$queryBuilder->setParameter('productCatnum', $searchValue);
+			$dqlOperator = $this->getDqlOperator($operator);
+			$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
+			$queryBuilder->andWhere('NORMALIZE(p.catnum) ' . $dqlOperator . ' NORMALIZE(:productCatnum)');
+			$queryBuilder->setParameter('productCatnum', $searchValue);
+		}
 	}
 
 	/**

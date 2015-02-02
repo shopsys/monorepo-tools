@@ -21,6 +21,8 @@
 			});
 		}
 
+		SS6.advanceSearch.actualizeAllValuesByOperator($rulesContainer);
+
 		$addRuleButton.click(function () {
 			SS6.advanceSearch.addRule($rulesContainer, $ruleTemplate, 'new_' + newRuleIndexCounter);
 			newRuleIndexCounter++;
@@ -35,6 +37,11 @@
 		$rulesContainer.on('change', '.js-advance-search-rule-subject', function () {
 			var $rule = $(this).closest('.js-advance-search-rule');
 			SS6.advanceSearch.actualizeRule($rulesContainer, $rule, $(this).val());
+		});
+
+		$rulesContainer.on('change', '.js-advance-search-rule-operator', function () {
+			var $rule = $(this).closest('.js-advance-search-rule');
+			SS6.advanceSearch.actualizeValueByOperator($rulesContainer, $rule, $(this).val());
 		});
 	};
 
@@ -55,6 +62,17 @@
 		var ruleHtml = $ruleTemplate.clone().wrap('<div>').parent().html().replace(/__template__/g, newIndex);
 		var $rule = $($.parseHTML(ruleHtml));
 		$rule.appendTo($rulesContainer);
+	};
+
+	SS6.advanceSearch.actualizeAllValuesByOperator = function ($rulesContainer) {
+		$rulesContainer.find('.js-advance-search-rule').each(function () {
+			var operator = $(this).find('.js-advance-search-rule-operator').val();
+			SS6.advanceSearch.actualizeValueByOperator($rulesContainer, $(this), operator);
+		});
+	};
+
+	SS6.advanceSearch.actualizeValueByOperator = function ($rulesContainer, $rule, operator) {
+		$rule.find('.js-advance-search-rule-value').toggle(operator !== 'notSet');
 	};
 
 	$(document).ready(function () {

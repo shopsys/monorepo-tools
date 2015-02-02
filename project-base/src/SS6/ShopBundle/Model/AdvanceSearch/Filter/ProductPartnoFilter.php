@@ -22,6 +22,7 @@ class ProductPartnoFilter implements AdvanceSearchFilterInterface {
 		return [
 			self::OPERATOR_CONTAIN,
 			self::OPERATOR_NOT_CONTAIN,
+			self::OPERATOR_NOT_SET,
 		];
 	}
 
@@ -43,14 +44,18 @@ class ProductPartnoFilter implements AdvanceSearchFilterInterface {
 	 * {@inheritdoc}
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value) {
-		if ($value === null) {
-			$value = '';
-		}
+		if ($operator === self::OPERATOR_NOT_SET) {
+			$queryBuilder->andWhere('p.partno IS NULL');
+		} else {
+			if ($value === null) {
+				$value = '';
+			}
 
-		$dqlOperator = $this->getDqlOperator($operator);
-		$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
-		$queryBuilder->andWhere('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:productPartno)');
-		$queryBuilder->setParameter('productPartno', $searchValue);
+			$dqlOperator = $this->getDqlOperator($operator);
+			$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
+			$queryBuilder->andWhere('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:productPartno)');
+			$queryBuilder->setParameter('productPartno', $searchValue);
+		}
 	}
 
 	/**
