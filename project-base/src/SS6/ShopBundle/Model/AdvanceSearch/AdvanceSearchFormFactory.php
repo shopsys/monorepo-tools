@@ -2,8 +2,9 @@
 
 namespace SS6\ShopBundle\Model\AdvanceSearch;
 
-use Symfony\Component\Form\FormFactoryInterface;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig;
+use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class AdvanceSearchFormFactory {
 	
@@ -17,11 +18,22 @@ class AdvanceSearchFormFactory {
 	 */
 	private $advanceSearchConfig;
 
-	public function __construct(FormFactoryInterface $formFactory, AdvanceSearchConfig $advanceSearchConfig) {
+	/**
+	 * @var \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation
+	 */
+	private $advanceSearchTranslation;
+
+	public function __construct(
+		FormFactoryInterface $formFactory,
+		AdvanceSearchConfig $advanceSearchConfig,
+		AdvanceSearchTranslation $advanceSearchTranslation
+	) {
 		$this->formFactory = $formFactory;
 		$this->advanceSearchConfig = $advanceSearchConfig;
+		$this->advanceSearchTranslation = $advanceSearchTranslation;
 	}
 
+	
 	/**
 	 * @param string $name
 	 * @param array $rulesData
@@ -70,7 +82,7 @@ class AdvanceSearchFormFactory {
 	private function getFilterOperatorChoices(AdvanceSearchFilterInterface $filter) {
 		$choices = [];
 		foreach ($filter->getAllowedOperators() as $operator) {
-			$choices[$operator] = $operator;
+			$choices[$operator] = $this->advanceSearchTranslation->translateOperator($operator);
 		}
 
 		return $choices;
@@ -82,7 +94,7 @@ class AdvanceSearchFormFactory {
 	private function getSubjectChoices() {
 		$choices = [];
 		foreach ($this->advanceSearchConfig->getAllFilters() as $filter) {
-			$choices[$filter->getName()] = $filter->getName();
+			$choices[$filter->getName()] = $this->advanceSearchTranslation->translateFilterName($filter->getName());
 		}
 
 		return $choices;
