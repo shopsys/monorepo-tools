@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup,standards-diff" />
-	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,standards-diff" />
-	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,img-demo,standards" />
+	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup,checks-diff" />
+	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,checks-diff" />
+	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,img-demo,checks" />
 
 	<target name="checks" depends="standards,tests-all" />
 	<target name="checks-diff" depends="standards-diff,tests-all" />
