@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\AdvanceSearch;
 
+use Doctrine\ORM\QueryBuilder;
+
 interface AdvanceSearchFilterInterface {
 
 	const OPERATOR_CONTAIN = 'contain';
@@ -28,5 +30,12 @@ interface AdvanceSearchFilterInterface {
 	 * @return array
 	 */
 	public function getValueFormOptions();
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param string $operator
+	 * @param mixed $value
+	 */
+	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value);
 
 }

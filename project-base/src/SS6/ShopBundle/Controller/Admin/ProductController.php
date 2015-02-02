@@ -122,12 +122,14 @@ class ProductController extends Controller {
 		/* @var $advanceSearchFacade \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFacade */
 
 		$advanceSearchForm = $advanceSearchFacade->createAdvanceSearchForm($request);
+		$advanceSearchData = $advanceSearchForm->getData();
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
 		$quickSearchForm->handleRequest($request);
-		$quicksearchData = $quickSearchForm->getData();
+		$quickSearchData = $quickSearchForm->getData();
 
-		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quicksearchData);
+		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
+		$queryBuilder = $advanceSearchFacade->getQueryBuilderByAdvanceSearchData($advanceSearchData);
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $gridFactory->create('productList', $dataSource);

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\AdvanceSearch;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFormFactory;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchService;
+use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvanceSearchFacade {
@@ -26,14 +27,21 @@ class AdvanceSearchFacade {
 	 */
 	private $advanceSearchService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+	 */
+	private $productListAdminFacade;
+
 	public function __construct(
 		AdvanceSearchConfig $advanceSearchConfig,
 		AdvanceSearchFormFactory $advanceSearchFormFactory,
-		AdvanceSearchService $advanceSearchService
+		AdvanceSearchService $advanceSearchService,
+		ProductListAdminFacade $productListAdminFacade
 	) {
 		$this->advanceSearchConfig = $advanceSearchConfig;
 		$this->advanceSearchFormFactory = $advanceSearchFormFactory;
 		$this->advanceSearchService = $advanceSearchService;
+		$this->productListAdminFacade = $productListAdminFacade;
 	}
 
 	/**
@@ -52,9 +60,20 @@ class AdvanceSearchFacade {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function createRuleForm($filterName) {
-		$rulesData = $this->advanceSearchService->createDefaultRuleFormData($filterName);
+		$rulesData = [$this->advanceSearchService->createDefaultRuleFormData($filterName)];
 
 		return $this->advanceSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);
+	}
+
+	/**
+	 * @param array $advanceSearchData
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getQueryBuilderByAdvanceSearchData($advanceSearchData) {
+		$queryBuilder = $this->productListAdminFacade->getProductListQueryBuilder();
+		$this->advanceSearchService->extendQueryBuilderByAdvanceSearchData($queryBuilder, $advanceSearchData);
+
+		return $queryBuilder;
 	}
 
 }
