@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -85,14 +86,14 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 
 		$builder->addModelTransformer($this);
 		$builder
-			->add('uploadedFiles', 'collection', [
+			->add('uploadedFiles', FormType::COLLECTION, [
 				'type' => 'hidden',
 				'allow_add' => true,
 				'constraints' => [
 					new Constraints\Callback([$this, 'validateUploadedFiles']),
 				],
 			])
-			->add('file', 'file', [
+			->add('file', FormType::FILE, [
 				'multiple' => $options['multiple'],
 			]);
 

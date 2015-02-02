@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -38,7 +39,7 @@ class SingleCheckboxChoiceType extends AbstractType {
 			$options = $child->getOptions();
 			$builder->remove($i);
 			$options['required'] = false;
-			$builder->add($i, 'checkbox', $options);
+			$builder->add($i, FormType::CHECKBOX, $options);
 		}
 	}
 
