@@ -35,6 +35,7 @@ class AdvanceSearchTranslation {
 		$this->filtersTranslations = [
 			'productCatnum' => $this->translator->trans('Katalogové číslo'),
 			'productName' => $this->translator->trans('Název produktu'),
+			'productPartno' => $this->translator->trans('Partno'),
 		];
 	}
 

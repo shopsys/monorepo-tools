@@ -22,8 +22,6 @@ class ProductNameFilter implements AdvanceSearchFilterInterface {
 		return [
 			self::OPERATOR_CONTAIN,
 			self::OPERATOR_NOT_CONTAIN,
-			self::OPERATOR_IS,
-			self::OPERATOR_IS_NOT,
 		];
 	}
 
@@ -49,8 +47,9 @@ class ProductNameFilter implements AdvanceSearchFilterInterface {
 			$value = '';
 		}
 		$dqlOperator = $this->getDqlOperator($operator);
+		$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
 		$queryBuilder->andWhere('NORMALIZE(pt.name) ' . $dqlOperator . ' NORMALIZE(:productName)');
-		$queryBuilder->setParameter('productName', $this->prepareValueByOperator($operator, $value));
+		$queryBuilder->setParameter('productName', $searchValue);
 	}
 
 	/**
@@ -60,28 +59,9 @@ class ProductNameFilter implements AdvanceSearchFilterInterface {
 	private function getDqlOperator($operator) {
 		switch ($operator) {
 			case self::OPERATOR_CONTAIN:
-			case self::OPERATOR_IS:
 				return 'LIKE';
 			case self::OPERATOR_NOT_CONTAIN:
-			case self::OPERATOR_IS_NOT:
 				return 'NOT LIKE';
-		}
-	}
-
-	/**
-	 * @param string $operator
-	 * @param string $value
-	 * @return string
-	 */
-	private function prepareValueByOperator($operator, $value) {
-		$value = DatabaseSearching::getLikeSearchString($value);
-		switch ($operator) {
-			case self::OPERATOR_CONTAIN:
-			case self::OPERATOR_NOT_CONTAIN:
-				return '%' . $value . '%';
-			case self::OPERATOR_IS:
-			case self::OPERATOR_IS_NOT:
-				return $value;
 		}
 	}
 

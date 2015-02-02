@@ -6,13 +6,13 @@ use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFilterInterface;
 
-class ProductCatnumFilter implements AdvanceSearchFilterInterface {
+class ProductPartnoFilter implements AdvanceSearchFilterInterface {
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function getName() {
-		return 'productCatnum';
+		return 'productPartno';
 	}
 
 	/**
@@ -49,8 +49,8 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 
 		$dqlOperator = $this->getDqlOperator($operator);
 		$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
-		$queryBuilder->andWhere('NORMALIZE(p.catnum) ' . $dqlOperator . ' NORMALIZE(:productCatnum)');
-		$queryBuilder->setParameter('productCatnum', $searchValue);
+		$queryBuilder->andWhere('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:productPartno)');
+		$queryBuilder->setParameter('productPartno', $searchValue);
 	}
 
 	/**

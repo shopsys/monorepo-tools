@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\AdvanceSearch;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFilterInterface;
 use SS6\ShopBundle\Model\AdvanceSearch\Filter\ProductCatnumFilter;
 use SS6\ShopBundle\Model\AdvanceSearch\Filter\ProductNameFilter;
+use SS6\ShopBundle\Model\AdvanceSearch\Filter\ProductPartnoFilter;
 
 class AdvanceSearchConfig {
 
@@ -15,12 +16,14 @@ class AdvanceSearchConfig {
 
 	public function __construct(
 		ProductCatnumFilter $productCatnumFilter,
-		ProductNameFilter $productNameFilter
+		ProductNameFilter $productNameFilter,
+		ProductPartnoFilter $productPartnoFilter
 	) {
 		$this->filters = [];
 
 		$this->registerFilter($productNameFilter);
 		$this->registerFilter($productCatnumFilter);
+		$this->registerFilter($productPartnoFilter);
 	}
 
 	/**
