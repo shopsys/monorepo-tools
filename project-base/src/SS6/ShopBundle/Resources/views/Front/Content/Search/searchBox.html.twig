@@ -1,0 +1,29 @@
+<div class="search" id="js-search-autocomplete">
+	<form action="#" method="get">
+		<input
+			type="text"
+			placeholder="{{ 'Vyhledávání'|trans }}"
+			class="form-control search__input"
+			id="js-search-autocomplete-input"
+			autocomplete="off"
+			data-autocomplete-url="{{ url('front_search_autocomplete') }}"
+		/>
+
+		<div class="search__block"></div>
+
+		{% macro autocompleteListItem() %}
+			<li class="search__hint__item js-search-autocomplete-item">
+				<a class="search__hint__item__link js-search-autocomplete-item-link">
+					<span class="search__hint__image">
+						<img alt="" title="" width="30" class="js-search-autocomplete-item-image" />
+					</span>
+					<span class="search__hint__name js-search-autocomplete-item-label"></span>
+				</a>
+			</li>
+		{% endmacro %}
+
+		<ul class="search__hint display-none" id="js-search-autocomplete-list" data-item-template="{{ _self.autocompleteListItem()|e }}">
+			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-label"></li>
+		</ul>
+	</form>
+</div>

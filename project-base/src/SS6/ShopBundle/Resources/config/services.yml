@@ -606,6 +606,12 @@ services:
   ss6.shop.product.filter.parameter_filter_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
 
+  ss6.shop.product.filter.product_search_repository:
+    class: SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository
+
+  ss6.shop.product.filter.product_search_service:
+    class: SS6\ShopBundle\Model\Product\Filter\ProductSearchService
+
   ss6.shop.product.pricing.product_manual_input_price_facade:
     class: SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
 

@@ -42,7 +42,7 @@ class Translator extends BaseTranslator {
 
 	/**
 	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
-	 * function returns translation id string with self::NOT_TRANSLATED_PREFIX prefix
+	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 *
 	 * @api
@@ -69,8 +69,8 @@ class Translator extends BaseTranslator {
 	}
 
 	/**
-	 * When translation for given locale is not defined locale is not self::TRANSLATION_ID_LOCALE,
-	 * function returns translation id string with self::NOT_TRANSLATED_PREFIX prefix
+	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
+	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 *
 	 * @api
@@ -89,23 +89,20 @@ class Translator extends BaseTranslator {
 		$id = (string)$id;
 
 		$catalogue = $this->catalogues[$locale];
-		while (!$catalogue->defines($id, $domain)) {
-			if ($catalogue->getFallbackCatalogue()) {
-				$cat = $catalogue->getFallbackCatalogue();
-				$catalogue = $cat;
-				$locale = $catalogue->getLocale();
-			} else {
-				break;
-			}
-		}
 
 		if ($catalogue->defines($id, $domain)) {
-			return strtr($this->messageSelector->choose($catalogue->get($id, $domain), (int)$number, $locale), $parameters);
-		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
-			return strtr($id, $parameters);
+			$message = $this->messageSelector->choose($catalogue->get($id, $domain), (int)$number, $locale);
 		} else {
-			return self::NOT_TRANSLATED_PREFIX . strtr($id, $parameters);
+			$message = $this->messageSelector->choose($id, (int)$number, self::TRANSLATION_ID_LOCALE);
 		}
+
+		$message = strtr($message, $parameters);
+
+		if (!$catalogue->defines($id, $domain) && $locale !== self::TRANSLATION_ID_LOCALE) {
+			$message = self::NOT_TRANSLATED_PREFIX . $message;
+		}
+
+		return $message;
 	}
 
 }

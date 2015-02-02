@@ -79,7 +79,7 @@ class ProductRepository {
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string $locale
 	 */
-	private function addTranslation(QueryBuilder $queryBuilder, $locale) {
+	public function addTranslation(QueryBuilder $queryBuilder, $locale) {
 		$queryBuilder->addSelect('pt')
 			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale');
 
