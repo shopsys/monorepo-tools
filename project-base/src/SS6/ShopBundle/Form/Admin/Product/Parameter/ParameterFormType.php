@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Parameter;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,7 @@ class ParameterFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'required' => false,
 				'options' => [
 					'constraints' => [

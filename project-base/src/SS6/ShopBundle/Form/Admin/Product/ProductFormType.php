@@ -4,8 +4,7 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
-use SS6\ShopBundle\Form\DatePickerType;
-use SS6\ShopBundle\Form\YesNoType;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
@@ -90,7 +89,7 @@ class ProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
 				],
@@ -98,7 +97,7 @@ class ProductFormType extends AbstractType {
 			])
 			->add(
 				$builder
-					->create('showOnDomains', 'domains', [
+					->create('showOnDomains', FormType::DOMAINS, [
 						'constraints' => [
 							new NotSelectedDomainToShow(['message' => 'Musíte vybrat alespoň jednu doménu']),
 						],
@@ -106,35 +105,35 @@ class ProductFormType extends AbstractType {
 					])
 					->addViewTransformer($this->inverseArrayValuesTransformer)
 			)
-			->add('hidden', new YesNoType(), ['required' => false])
-			->add('catnum', 'text', [
+			->add('hidden', FormType::YES_NO, ['required' => false])
+			->add('catnum', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'Katalogové číslo nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('partno', 'text', [
+			->add('partno', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'Výrobní číslo nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('ean', 'text', [
+			->add('ean', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('description', 'localized', [
-				'type' => 'ckeditor',
+			->add('description', FormType::LOCALIZED, [
+				'type' => FormType::CKEDITOR,
 				'required' => false,
 			])
-			->add('usingStock', new YesNoType(), ['required' => false])
-			->add('stockQuantity', 'integer', [
+			->add('usingStock', FormType::YES_NO, ['required' => false])
+			->add('stockQuantity', FormType::INTEGER, [
 				'required' => false,
 				'invalid_message' => 'Prosím zadejte číslo',
 			])
-			->add('availability', 'choice', [
+			->add('availability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
 				'empty_value' => '-- Vyberte dostupnost --',
@@ -145,7 +144,7 @@ class ProductFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('outOfStockAvailability', 'choice', [
+			->add('outOfStockAvailability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
 				'empty_value' => '-- Vyberte dostupnost --',
@@ -156,7 +155,7 @@ class ProductFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('price', 'money', [
+			->add('price', FormType::MONEY, [
 				'currency' => false,
 				'precision' => 6,
 				'required' => true,
@@ -173,40 +172,40 @@ class ProductFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('vat', 'choice', [
+			->add('vat', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte výši DPH']),
 				],
 			])
-			->add('sellingFrom', new DatePickerType(), [
+			->add('sellingFrom', FormType::DATE_PICKER, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			])
-			->add('sellingTo', new DatePickerType(), [
+			->add('sellingTo', FormType::DATE_PICKER, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			])
-			->add('categories', 'choice', [
+			->add('categories', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 			])
-			->add('flags', 'choice', [
+			->add('flags', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->flags, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 			])
-			->add('priceCalculationType', 'choice', [
+			->add('priceCalculationType', FormType::CHOICE, [
 				'required' => true,
 				'expanded' => true,
 				'choices' => [

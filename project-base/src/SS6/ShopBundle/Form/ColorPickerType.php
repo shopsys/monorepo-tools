@@ -11,7 +11,7 @@ class ColorPickerType extends AbstractType {
 	}
 
 	public function getName() {
-		return 'colorPicker';
+		return 'color_picker';
 	}
 
 }

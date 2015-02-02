@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Pricing\Currency;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,7 +36,7 @@ class CurrencyDomainSettingsFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('domainDefaultCurrencies', 'collection', [
+			->add('domainDefaultCurrencies', FormType::COLLECTION, [
 				'required' => true,
 				'type' => 'choice',
 				'options' => [
@@ -46,7 +47,7 @@ class CurrencyDomainSettingsFormType extends AbstractType {
 					],
 				],
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

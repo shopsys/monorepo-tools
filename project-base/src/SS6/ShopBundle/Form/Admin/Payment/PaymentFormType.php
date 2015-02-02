@@ -2,9 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Payment;
 
-use SS6\ShopBundle\Form\FileUploadType;
-use SS6\ShopBundle\Form\YesNoType;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -20,23 +18,16 @@ class PaymentFormType extends AbstractType {
 	private $allTransports;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
-	 */
-	private $fileUpload;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $allTransports
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 */
-	public function __construct(array $allTransports, FileUpload $fileUpload, array $vats) {
+	public function __construct(array $allTransports, array $vats) {
 		$this->allTransports = $allTransports;
-		$this->fileUpload = $fileUpload;
 		$this->vats = $vats;
 	}
 
@@ -55,39 +46,39 @@ class PaymentFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
 				],
 			])
-			->add('domains', 'domains', [
+			->add('domains', FormType::DOMAINS, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Musíte vybrat alespoň jednu doménu']),
 				],
 			])
-			->add('hidden', new YesNoType(), ['required' => false])
-			->add('transports', 'choice', [
+			->add('hidden', FormType::YES_NO, ['required' => false])
+			->add('transports', FormType::CHOICE, [
 				'choice_list' => new ObjectChoiceList($this->allTransports, 'name', [], null, 'id'),
 				'multiple' => true,
 				'expanded' => true,
 				'required' => false,
 			])
-			->add('vat', 'choice', [
+			->add('vat', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte výši DPH']),
 				],
 			])
-			->add('description', 'localized', [
+			->add('description', FormType::LOCALIZED, [
 				'required' => false,
 				'type' => 'textarea',
 			])
-			->add('instructions', 'localized', [
+			->add('instructions', FormType::LOCALIZED, [
 				'required' => false,
 				'type' => 'ckeditor',
 			])
-			->add('image', new FileUploadType($this->fileUpload), [
+			->add('image', FormType::FILE_UPLOAD, [
 				'required' => false,
 				'file_constraints' => [
 					new Constraints\Image([

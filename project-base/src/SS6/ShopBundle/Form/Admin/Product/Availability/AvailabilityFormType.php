@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Availability;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,7 @@ class AvailabilityFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'required' => true,
 				'options' => [
 					'constraints' => [
@@ -32,7 +33,7 @@ class AvailabilityFormType extends AbstractType {
 					],
 				],
 			])
-			->add('deliveryTime', 'number', [
+			->add('deliveryTime', FormType::NUMBER, [
 				'precision' => 0,
 				'required' => false,
 				'invalid_message' => 'Doba dodání musí být celé číslo',

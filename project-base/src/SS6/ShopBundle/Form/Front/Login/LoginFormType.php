@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Login;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,20 +16,20 @@ class LoginFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('email', 'text', [
+			->add('email', FormType::TEXT, [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím email']),
 						new Constraints\Email(),
 					],
 				]
 			)
-			->add('password', 'password', [
+			->add('password', FormType::PASSWORD, [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
 					],
 				]
 			)
-			->add('login', 'submit');
+			->add('login', FormType::SUBMIT);
 	}
 
 	/**

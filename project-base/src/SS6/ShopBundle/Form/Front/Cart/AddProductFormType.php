@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Cart;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,14 +16,14 @@ class AddProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('productId', 'hidden', [
+			->add('productId', FormType::HIDDEN, [
 					'constraints' => [
 						new Constraints\GreaterThan(0),
 						new Constraints\Regex(['pattern' => '/^\d+$/']),
 					],
 				]
 			)
-			->add('quantity', 'text', [
+			->add('quantity', FormType::TEXT, [
 					'data' => 1,
 					'constraints' => [
 						new Constraints\GreaterThan(0),
@@ -30,7 +31,7 @@ class AddProductFormType extends AbstractType {
 					],
 				]
 			)
-			->add('add', 'submit');
+			->add('add', FormType::SUBMIT);
 	}
 
 	/**

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Order;
 
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -20,29 +21,29 @@ class PersonalInfoFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', [
+			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('lastName', 'text', [
+			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
 				],
 			])
-			->add('email', 'email', [
+			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
-			->add('telephone', 'text', [
+			->add('telephone', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím telefon']),
 				],
 			])
-			->add('companyCustomer', 'checkbox', ['required' => false])
-			->add('companyName', 'text', [
+			->add('companyCustomer', FormType::CHECKBOX, ['required' => false])
+			->add('companyName', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -51,7 +52,7 @@ class PersonalInfoFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('companyNumber', 'text', [
+			->add('companyNumber', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -60,27 +61,27 @@ class PersonalInfoFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('companyTaxNumber', 'text', ['required' => false])
-			->add('street', 'text', [
+			->add('companyTaxNumber', FormType::TEXT, ['required' => false])
+			->add('street', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím ulici']),
 				],
 			])
-			->add('city', 'text', [
+			->add('city', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím město']),
 				],
 			])
-			->add('postcode', 'text', [
+			->add('postcode', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
 				],
 			])
-			->add('deliveryAddressFilled', 'checkbox', ['required' => false])
-			->add('deliveryContactPerson', 'text', ['required' => false])
-			->add('deliveryCompanyName', 'text', ['required' => false])
-			->add('deliveryTelephone', 'text', ['required' => false])
-			->add('deliveryStreet', 'text', [
+			->add('deliveryAddressFilled', FormType::CHECKBOX, ['required' => false])
+			->add('deliveryContactPerson', FormType::TEXT, ['required' => false])
+			->add('deliveryCompanyName', FormType::TEXT, ['required' => false])
+			->add('deliveryTelephone', FormType::TEXT, ['required' => false])
+			->add('deliveryStreet', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -89,7 +90,7 @@ class PersonalInfoFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('deliveryCity', 'text', [
+			->add('deliveryCity', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -98,7 +99,7 @@ class PersonalInfoFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('deliveryPostcode', 'text', [
+			->add('deliveryPostcode', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -107,8 +108,8 @@ class PersonalInfoFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('note', 'textarea', ['required' => false])
-			->add('save', 'submit');
+			->add('note', FormType::TEXTAREA, ['required' => false])
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

@@ -32,6 +32,16 @@ services:
     tags:
       - { name: form.type_extension, alias: collection }
 
+  ss6.shop.form.color_picker:
+    class: SS6\ShopBundle\Form\ColorPickerType
+    tags:
+      - { name: form.type, alias: color_picker }
+
+  ss6.shop.form.date_picker:
+    class: SS6\ShopBundle\Form\DatePickerType
+    tags:
+      - { name: form.type, alias: date_picker }
+
   ss6.shop.form.domains:
     class: SS6\ShopBundle\Form\DomainsType
     tags:
@@ -41,6 +51,11 @@ services:
     class: SS6\ShopBundle\Form\DomainType
     tags:
       - { name: form.type, alias: domain }
+
+  ss6.shop.form.file_upload:
+    class: SS6\ShopBundle\Form\FileUploadType
+    tags:
+      - { name: form.type, alias: file_upload }
 
   ss6.shop.form.front.product.product_filter_form_type_factory:
     class: SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
@@ -59,3 +74,13 @@ services:
     class: SS6\ShopBundle\Form\ProductType
     tags:
       - { name: form.type, alias: product }
+
+  ss6.shop.form.single_checkbox_choice_type:
+    class: SS6\ShopBundle\Form\SingleCheckboxChoiceType
+    tags:
+      - { name: form.type, alias: single_checkbox_choice }
+
+  ss6.shop.form.yes_no:
+    class: SS6\ShopBundle\Form\YesNoType
+    tags:
+      - { name: form.type, alias: yes_no }

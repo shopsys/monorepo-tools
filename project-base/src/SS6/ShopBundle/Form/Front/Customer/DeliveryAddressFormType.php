@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,11 +27,11 @@ class DeliveryAddressFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('addressFilled', 'checkbox', ['required' => false])
-			->add('companyName', 'text', ['required' => false])
-			->add('contactPerson', 'text', ['required' => false])
-			->add('telephone', 'text', ['required' => false])
-			->add('street', 'text', [
+			->add('addressFilled', FormType::CHECKBOX, ['required' => false])
+			->add('companyName', FormType::TEXT, ['required' => false])
+			->add('contactPerson', FormType::TEXT, ['required' => false])
+			->add('telephone', FormType::TEXT, ['required' => false])
+			->add('street', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -39,7 +40,7 @@ class DeliveryAddressFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('city', 'text', [
+			->add('city', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -48,7 +49,7 @@ class DeliveryAddressFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('postcode', 'text', [
+			->add('postcode', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([

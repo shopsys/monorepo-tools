@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Product;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,7 +38,7 @@ class OrderingSettingFormType extends AbstractType {
 		}
 
 		$builder
-			->add('orderingMode', 'choice', [
+			->add('orderingMode', FormType::CHOICE, [
 				'choices' => $orderingChoices,
 			]);
 	}

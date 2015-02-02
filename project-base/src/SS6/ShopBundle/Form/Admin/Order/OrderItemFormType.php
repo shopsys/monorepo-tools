@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,27 +24,27 @@ class OrderItemFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'text', [
+			->add('name', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
 				],
 				'error_bubbling' => true,
 			])
-			->add('priceWithVat', 'money', [
+			->add('priceWithVat', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jednotkovou cenu s DPH']),
 				],
 				'error_bubbling' => true,
 			])
-			->add('vatPercent', 'money', [
+			->add('vatPercent', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím sazbu DPH']),
 				],
 				'error_bubbling' => true,
 			])
-			->add('quantity', 'integer', [
+			->add('quantity', FormType::INTEGER, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím množství']),
 					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než 0']),

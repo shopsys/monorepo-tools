@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Category;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -36,17 +37,17 @@ class CategoryFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', 'localized', [
+			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
 				],
 				'options' => ['required' => false],
 			])
-			->add('parent', 'choice', [
+			->add('parent', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
 			])
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**

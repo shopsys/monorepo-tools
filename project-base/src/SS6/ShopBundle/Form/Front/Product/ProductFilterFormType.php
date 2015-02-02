@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Product;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,13 +28,13 @@ class ProductFilterFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('minimalPrice', 'money', ['required' => false])
-			->add('maximalPrice', 'money', ['required' => false])
+			->add('minimalPrice', FormType::MONEY, ['required' => false])
+			->add('maximalPrice', FormType::MONEY, ['required' => false])
 			->add('parameters', new ParameterFilterFormType($this->parameterFilterChoices), [
 				'required' => false,
 			])
-			->add('search', 'submit')
-			->add('reset', 'submit');
+			->add('search', FormType::SUBMIT)
+			->add('reset', FormType::SUBMIT);
 	}
 
 	/**

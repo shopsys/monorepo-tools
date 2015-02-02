@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Product;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -33,7 +34,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		foreach ($this->parameterChoicesIndexedByParameterId as $parameterId => $parameterFilterChoice) {
 			$builder
-				->add($parameterId, 'choice', [
+				->add($parameterId, FormType::CHOICE, [
 					'label' => $parameterFilterChoice->getParameter()->getName(),
 					'expanded' => true,
 					'multiple' => true,

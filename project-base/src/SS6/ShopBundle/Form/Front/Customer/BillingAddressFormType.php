@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,9 +27,9 @@ class BillingAddressFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('telephone', 'text', ['required' => false])
-			->add('companyCustomer', 'checkbox', ['required' => false])
-			->add('companyName', 'text', [
+			->add('telephone', FormType::TEXT, ['required' => false])
+			->add('companyCustomer', FormType::CHECKBOX, ['required' => false])
+			->add('companyName', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -37,7 +38,7 @@ class BillingAddressFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('companyNumber', 'text', [
+			->add('companyNumber', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -46,10 +47,10 @@ class BillingAddressFormType extends AbstractType {
 					]),
 				],
 			])
-			->add('companyTaxNumber', 'text', ['required' => false])
-			->add('street', 'text', ['required' => false])
-			->add('city', 'text', ['required' => false])
-			->add('postcode', 'text', ['required' => false]);
+			->add('companyTaxNumber', FormType::TEXT, ['required' => false])
+			->add('street', FormType::TEXT, ['required' => false])
+			->add('city', FormType::TEXT, ['required' => false])
+			->add('postcode', FormType::TEXT, ['required' => false]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

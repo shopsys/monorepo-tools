@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product\Parameter;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValueToParameterTextTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -42,7 +43,7 @@ class ProductParametersFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('parameter', 'choice', [
+			->add('parameter', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->parameters, 'name', [], null, 'id'),
 				'constraints' => [
@@ -51,7 +52,7 @@ class ProductParametersFormType extends AbstractType {
 			])
 			->add(
 				$builder
-					->create('value', 'localized', [
+					->create('value', FormType::LOCALIZED, [
 						'required' => true,
 						'main_constraints' => [
 							new Constraints\NotBlank(['message' => 'Prosím vyplňte hodnotu parametru']),

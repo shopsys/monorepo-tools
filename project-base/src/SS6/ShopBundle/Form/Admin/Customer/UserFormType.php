@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Customer;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -58,24 +59,24 @@ class UserFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('firstName', 'text', [
+			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
 				],
 			])
-			->add('lastName', 'text', [
+			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
 				],
 			])
-			->add('email', 'email', [
+			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
-			->add('password', 'repeated', [
-				'type' => 'password',
+			->add('password', FormType::REPEATED, [
+				'type' => FormType::PASSWORD,
 				'required' => $this->scenario === CustomerFormType::SCENARIO_CREATE,
 				'first_options' => [
 					'constraints' => [
@@ -96,7 +97,7 @@ class UserFormType extends AbstractType {
 			}
 
 			$builder
-				->add('domainId', 'choice', [
+				->add('domainId', FormType::CHOICE, [
 					'required' => true,
 					'choices' => $domainsNamesById,
 					'data' => $this->selectedDomain->getId(),
@@ -104,7 +105,7 @@ class UserFormType extends AbstractType {
 		}
 
 		$builder
-			->add('pricingGroup', 'choice', [
+			->add('pricingGroup', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', [], 'domainId', 'id'),
 			]);

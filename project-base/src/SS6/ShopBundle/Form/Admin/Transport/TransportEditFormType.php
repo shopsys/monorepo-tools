@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Transport;
 
+use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,7 +45,7 @@ class TransportEditFormType extends AbstractType {
 		$builder
 			->add('transportData', $this->transportFormTypeFactory->create())
 			->add($this->getPricesBuilder($builder))
-			->add('save', 'submit');
+			->add('save', FormType::SUBMIT);
 	}
 
 	/**
@@ -57,7 +58,7 @@ class TransportEditFormType extends AbstractType {
 		]);
 		foreach ($this->currencies as $currency) {
 			$pricesBuilder
-				->add($currency->getId(), 'money', [
+				->add($currency->getId(), FormType::MONEY, [
 					'currency' => false,
 					'precision' => 6,
 					'required' => true,
