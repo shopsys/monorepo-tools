@@ -9,6 +9,7 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 
 /**
  * Product
@@ -18,8 +19,8 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
  */
 class Product extends AbstractTranslatableEntity {
 
-	const PRICE_CALCULATION_TYPE_AUTO = 1;
-	const PRICE_CALCULATION_TYPE_MANUAL = 2;
+	const PRICE_CALCULATION_TYPE_AUTO = 'auto';
+	const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
 
 	/**
 	 * @var integer
@@ -87,13 +88,6 @@ class Product extends AbstractTranslatableEntity {
 	private $sellingTo;
 
 	/**
-	 * @var int|null
-	 *
-	 * @ORM\Column(type="integer", nullable=true)
-	 */
-	private $stockQuantity;
-
-	/**
 	 * @var boolean
 	 *
 	 * @ORM\Column(type="boolean")
@@ -101,11 +95,39 @@ class Product extends AbstractTranslatableEntity {
 	private $hidden;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $usingStock;
+
+	/**
+	 * @var int|null
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $stockQuantity;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
 	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $availability;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @ORM\JoinColumn(name="out_of_stock_availability_id", referencedColumnName="id", nullable=true)
+	 */
+	private $outOfStockAvailability;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=true)
+	 */
+	private $calculatedAvailability;
 
 	/**
 	 * @var boolean
@@ -131,9 +153,9 @@ class Product extends AbstractTranslatableEntity {
 	private $flags;
 
 	/**
-	 * @var int
+	 * @var string
 	 *
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="string", length=32)
 	 */
 	private $priceCalculationType;
 
@@ -154,9 +176,11 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
-		$this->stockQuantity = $productData->stockQuantity;
 		$this->hidden = $productData->hidden;
+		$this->usingStock = $productData->usingStock;
+		$this->stockQuantity = $productData->stockQuantity;
 		$this->availability = $productData->availability;
+		$this->outOfStockAvailability = $productData->outOfStockAvailability;
 		$this->visible = false;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
@@ -179,8 +203,10 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
+		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
 		$this->availability = $productData->availability;
+		$this->outOfStockAvailability = $productData->outOfStockAvailability;
 		$this->hidden = $productData->hidden;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
@@ -274,13 +300,6 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return int|null
-	 */
-	public function getStockQuantity() {
-		return $this->stockQuantity;
-	}
-
-	/**
 	 * @return boolean
 	 */
 	public function isHidden() {
@@ -288,11 +307,45 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 *
+	 * @return boolean
+	 */
+	public function isUsingStock() {
+		return $this->usingStock;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getStockQuantity() {
+		return $this->stockQuantity;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public function getAvailability() {
 		return $this->availability;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 */
+	public function getOutOfStockAvailability() {
+		return $this->outOfStockAvailability;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 */
+	public function getCalculatedAvailability() {
+		return $this->calculatedAvailability;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $calculatedAvailability
+	 */
+	public function setCalculatedAvailability(Availability $calculatedAvailability = null) {
+		$this->calculatedAvailability = $calculatedAvailability;
 	}
 
 	/**

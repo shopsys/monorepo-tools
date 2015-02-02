@@ -24,6 +24,17 @@
 				</div>
 
 				<div class="wrap-group">
+					{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby', attr: {class: 'form-line--between' } } ) }}
+					<div class="js-product-using-stock">
+						{{ form_row(form.productData.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
+						{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání', attr: {class: 'form-line--size-2'} }) }}
+					</div>
+					<div class="js-product-not-using-stock">
+						{{ form_row(form.productData.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}
+					</div>
+				</div>
+
+				<div class="wrap-group">
 					{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen', attr: { class: 'form-line--between' } }) }}
 					{{ form_row(form.productData.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
 					{% block product_calculated_prices %}{% endblock %}
@@ -40,8 +51,6 @@
 					{{ form_row(form.productData.description, { label: 'Popis'}) }}
 					{{ form_row(form.productData.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-line--size-1'} }) }}
 					{{ form_row(form.productData.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
-					{{ form_row(form.productData.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}
-					{{ form_row(form.productData.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
 				</div>
 
 				<div class="wrap-group js-form-group">

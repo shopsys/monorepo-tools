@@ -30,6 +30,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
 		$domain2DefaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
+		$defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+		/* @var $defaultInStockAvailability \SS6\ShopBundle\Model\Product\Availability\Availability */
 
 		$orderSentText = '
 			<p>
@@ -53,6 +55,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(PricingSetting::DEFAULT_CURRENCY, $defaultCurrency->getId(), SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $defaultCurrency->getId(), 1));
 		$manager->persist(new SettingValue(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $domain2DefaultCurrency->getId(), 2));
+		$manager->persist(new SettingValue(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $defaultInStockAvailability->getId(), SettingValue::DOMAIN_ID_COMMON));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
@@ -63,6 +66,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	 */
 	public function getDependencies() {
 		return [
+			AvailabilityDataFixture::class,
 			VatDataFixture::class,
 		];
 	}

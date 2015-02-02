@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints;
 class ProductFormType extends AbstractType {
 
 	const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
+	const VALIDATION_GROUP_USING_STOCK = 'usingStock';
+	const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
@@ -127,6 +129,33 @@ class ProductFormType extends AbstractType {
 				'type' => 'ckeditor',
 				'required' => false,
 			])
+			->add('usingStock', new YesNoType(), ['required' => false])
+			->add('stockQuantity', 'integer', [
+				'required' => false,
+				'invalid_message' => 'Prosím zadejte číslo',
+			])
+			->add('availability', 'choice', [
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+				'empty_value' => '-- Vyberte dostupnost --',
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte dostupnost',
+						'groups' => self::VALIDATION_GROUP_NOT_USING_STOCK,
+					]),
+				],
+			])
+			->add('outOfStockAvailability', 'choice', [
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+				'empty_value' => '-- Vyberte dostupnost --',
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte dostupnost',
+						'groups' => self::VALIDATION_GROUP_USING_STOCK,
+					]),
+				],
+			])
 			->add('price', 'money', [
 				'currency' => false,
 				'precision' => 6,
@@ -165,14 +194,6 @@ class ProductFormType extends AbstractType {
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			])
-			->add('stockQuantity', 'integer', [
-				'required' => false,
-				'invalid_message' => 'Prosím zadejte číslo',
-			])
-			->add('availability', 'choice', [
-				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-			])
 			->add('categories', 'choice', [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
@@ -203,6 +224,12 @@ class ProductFormType extends AbstractType {
 				$validationGroups = ['Default'];
 				$productData = $form->getData();
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+
+				if ($productData->usingStock) {
+					$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
+				} else {
+					$validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
+				}
 
 				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
 					$validationGroups[] = self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION;

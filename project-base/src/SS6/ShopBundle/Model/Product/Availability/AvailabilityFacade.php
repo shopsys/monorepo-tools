@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class AvailabilityFacade {
 
@@ -25,18 +28,27 @@ class AvailabilityFacade {
 	private $availabilityService;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository $availabilityRepository
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityService $availabilityService
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
+	private $setting;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 */
+	private $productAvailabilityRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		AvailabilityRepository $availabilityRepository,
-		AvailabilityService $availabilityService
+		AvailabilityService $availabilityService,
+		Setting $setting,
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->availabilityService = $availabilityService;
+		$this->setting = $setting;
+		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 	}
 
 	/**
@@ -80,6 +92,30 @@ class AvailabilityFacade {
 
 		$this->em->remove($availability);
 		$this->em->flush();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 */
+	public function getDefaultInStockAvailability() {
+		$availabilityId = $this->setting->get(Setting::DEFAULT_AVAILABILITY_IN_STOCK, SettingValue::DOMAIN_ID_COMMON);
+
+		return $this->getById($availabilityId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 */
+	public function setDefaultInStockAvailability(Availability $availability) {
+		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId(), SettingValue::DOMAIN_ID_COMMON);
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 */
+	public function getAll() {
+		return $this->availabilityRepository->getAll();
 	}
 
 }

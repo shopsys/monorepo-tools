@@ -46,13 +46,13 @@
 				</dl>
 			{% endif %}
 
-			{% if productDetail.product.availability %}
+			{% if productDetail.product.calculatedAvailability %}
 				<dl class="list-params">
 					<dt class="list-params__title">
 						{{ 'Dostupnost'|trans }}:
 					</dt>
 					<dd class="list-params__definition">
-						{{ productDetail.product.availability.name }}
+						{{ productDetail.product.calculatedAvailability.name }}
 					</dd>
 				</dl>
 			{% endif %}
