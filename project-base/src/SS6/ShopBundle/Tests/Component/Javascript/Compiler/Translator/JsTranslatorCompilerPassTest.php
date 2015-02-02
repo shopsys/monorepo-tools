@@ -28,8 +28,7 @@ class JsTranslatorCompilerPassTest extends FunctionalTestCase {
 var x = SS6.translator.trans ( "##foo" );
 var y = SS6.translator.trans ( "##foo2", { 'param' : 'value' }, 'asdf' );
 var z = SS6.translator.transChoice ( "##foo3" );
-EOD
-			;
+EOD;
 
 		$this->assertEquals($expectedResult, $result);
 	}

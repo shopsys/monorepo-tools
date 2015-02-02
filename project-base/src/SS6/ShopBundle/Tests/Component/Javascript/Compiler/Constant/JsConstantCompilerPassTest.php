@@ -21,8 +21,7 @@ class JsConstantCompilerPassTest extends FunctionalTestCase {
 		$expectedResult = <<<EOD
 var x = SS6.constant ( "bar" );
 var y = SS6.constant ( "bar2" );
-EOD
-			;
+EOD;
 
 		$this->assertEquals($expectedResult, $result);
 	}
