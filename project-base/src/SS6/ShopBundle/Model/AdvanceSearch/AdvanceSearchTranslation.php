@@ -50,7 +50,7 @@ class AdvanceSearchTranslation {
 		}
 
 		$message = 'Operator "' . $operator . '" translation not found.';
-		throw new \SS6\ShopBundle\Model\AdvanceSearchException\AdvanceSearchTranslationNotFoundException($message);
+		throw new \SS6\ShopBundle\Model\AdvanceSearch\Exception\AdvanceSearchTranslationNotFoundException($message);
 	}
 
 	/**
@@ -63,6 +63,6 @@ class AdvanceSearchTranslation {
 		}
 
 		$message = 'Filter "' . $filterName . '" translation not found.';
-		throw new \SS6\ShopBundle\Model\AdvanceSearchException\AdvanceSearchTranslationNotFoundException($message);
+		throw new \SS6\ShopBundle\Model\AdvanceSearch\Exception\AdvanceSearchTranslationNotFoundException($message);
 	}
 }
