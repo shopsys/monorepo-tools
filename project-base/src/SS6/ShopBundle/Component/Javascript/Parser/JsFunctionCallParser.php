@@ -25,7 +25,7 @@ class JsFunctionCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode[] $callExprNode
+	 * @param \JCallExprNode $callExprNode
 	 * @return \JNodeBase[]
 	 */
 	public function getArgumentNodes(JCallExprNode $callExprNode) {

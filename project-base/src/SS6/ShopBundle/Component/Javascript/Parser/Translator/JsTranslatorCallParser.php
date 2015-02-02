@@ -79,7 +79,7 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \PHPParser_Node $callExprNode
+	 * @param \JCallExprNode $callExprNode
 	 * @return boolean
 	 */
 	private function isTransFunctionCall(JCallExprNode $callExprNode) {

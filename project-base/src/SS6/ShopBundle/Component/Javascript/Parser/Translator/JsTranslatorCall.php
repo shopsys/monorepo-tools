@@ -32,6 +32,7 @@ class JsTranslatorCall {
 
 	/**
 	 * @param \JCallExprNode $callExprNode
+	 * @param \JNodeBase $messageIdArgumentNode
 	 * @param string $messageId
 	 * @param string $domain
 	 */

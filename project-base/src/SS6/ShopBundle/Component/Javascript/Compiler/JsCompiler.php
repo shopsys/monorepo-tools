@@ -28,6 +28,7 @@ class JsCompiler {
 	 */
 	public function compile($content) {
 		$node = JParser::parse_string($content, true, JParser::class, JTokenizer::class);
+		/* @var $node \JProgramNode */
 
 		foreach ($this->compilerPasses as $compilerPass) {
 			$compilerPass->process($node);
