@@ -1,7 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Shopsys6">
+<project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint,test-db-demo,tests,tests-db,tests-crawler" />
+	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup,standards-diff" />
+	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,standards-diff" />
+	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,img-demo,standards" />
+
+	<target name="checks" depends="standards,tests-all" />
+	<target name="checks-diff" depends="standards-diff,tests-all" />
+
+	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint" />
+	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint" />
+
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
+	<target name="tests-all" depends="test-db-demo,tests,tests-db,tests-crawler" />
+
+	<target name="composer-dev">
+		<exec
+				executable="${path.composer.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="install"/>
+		</exec>
+	</target>
+
+	<target name="docs">
+		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true">
+			<arg value="docs" />
+		</exec>
+	</target>
+
+	<target name="dump-translations">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="translation:extract" />
+			<arg value="--bundle=SS6ShopBundle" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
+			<arg value="--exclude-dir=admin/plugins" />
+			<arg value="--exclude-dir=frontend/plugins" />
+			<arg value="--keep" />
+			<arg value="--output-format=po" />
+
+			<arg value="cs" />
+			<arg value="en" />
+		</exec>
+	</target>
 
 	<target name="diff-files">
 		<exec
@@ -29,6 +77,51 @@
 				</linecontainsregexp>
 			</filterchain>
 		</property>
+	</target>
+
+	<target name="phpcs">
+		<exec
+				executable="${path.phpcs.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="--standard=${path.phpcs.ruleset}"/>
+			<arg value="--extensions=php"/>
+			<arg value="--encoding=utf-8"/>
+			<arg value="-sp"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
+	<target name="phpcs-fixer">
+		<exec
+				executable="${path.phpcs-fixer.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="fix" />
+			<arg value="--config-file=${path.phpcs-fixer.configuration}" />
+			<arg value="--dry-run" />
+			<arg value="--verbose" />
+			<arg value="--diff" />
+			<arg path="${path.src}" />
+		</exec>
+	</target>
+
+	<target name="phpcs-fixer-fix">
+		<exec
+				executable="${path.phpcs-fixer.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="false"
+				>
+			<arg value="fix" />
+			<arg value="--config-file=${path.phpcs-fixer.configuration}" />
+			<arg value="--verbose" />
+			<arg path="${path.src}" />
+		</exec>
 	</target>
 
 	<target name="phpcs-diff" depends="diff-files">
@@ -122,6 +215,17 @@
 		</if>
 	</target>
 
+	<target name="phplint">
+		<exec
+				executable="${path.phplint.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
 	<target name="phplint-diff" depends="diff-files">
 		<property name="diff.files.phplint" value="${diff.files.php}">
 			<filterchain>
@@ -146,6 +250,20 @@
 				</exec>
 			</then>
 		</if>
+	</target>
+
+	<target name="phpmd">
+		<exec
+				executable="${path.phpmd.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="${path.src}"/>
+			<arg value="text"/>
+			<arg value="${path.phpmd.ruleset}"/>
+			<arg value="--extensions=php"/>
+		</exec>
 	</target>
 
 	<target name="phpmd-diff" depends="diff-files">
@@ -176,6 +294,99 @@
 				</exec>
 			</then>
 		</if>
+	</target>
+
+	<target name="tests">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Tests"/>
+		</exec>
+	</target>
+
+	<target name="tests-db">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="TestsDb"/>
+		</exec>
+	</target>
+
+	<target name="tests-crawler">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="TestsCrawler"/>
+		</exec>
+	</target>
+
+	<target name="test-db-create">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:schema:create" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
+	<target name="test-db-drop">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:schema:drop" />
+			<arg value="--force" />
+			<arg value="--full-database" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
+	<target name="test-db-fixtures-base-settings">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
+	<target name="test-db-fixtures-demo">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
+	<target name="twig-lint">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="twig:lint" />
+			<arg value="@SS6ShopBundle" />
+		</exec>
 	</target>
 
 </project>
