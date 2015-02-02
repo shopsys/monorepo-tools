@@ -73,23 +73,26 @@ class ImageFacade {
 	 */
 	public function uploadImage($entity, $temporaryFilenames, $type) {
 		if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
+			$entitiesForFlush = [];
 			$imageEntityConfig = $this->imageConfig->getImageEntityConfig($entity);
 			$entityId = $this->getEntityId($entity);
 			$oldImage = $this->imageRepository->findImageByEntity($imageEntityConfig->getEntityName(), $entityId, $type);
 
 			if ($oldImage !== null) {
-				$this->deleteImageFiles($oldImage);
+				$this->em->remove($oldImage);
+				$entitiesForFlush[] = $oldImage;
 			}
 
-			$image = $this->imageService->editImageOrCreateNew(
+			$newImage = $this->imageService->createImage(
 				$imageEntityConfig,
 				$entityId,
 				array_pop($temporaryFilenames),
-				$type,
-				$oldImage
+				$type
 			);
-			$this->em->persist($image);
-			$this->em->flush($image);
+			$this->em->persist($newImage);
+			$entitiesForFlush[] = $newImage;
+
+			$this->em->flush($entitiesForFlush);
 		}
 	}
 

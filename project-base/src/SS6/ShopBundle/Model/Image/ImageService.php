@@ -43,7 +43,7 @@ class ImageService {
 
 		$images = [];
 		foreach ($temporaryFilenames as $temporaryFilename) {
-			$images[] = $this->editImageOrCreateNew($imageEntityConfig, $entityId, $temporaryFilename, $type, null);
+			$images[] = $this->createImage($imageEntityConfig, $entityId, $temporaryFilename, $type, null);
 		}
 
 		return $images;
@@ -54,28 +54,22 @@ class ImageService {
 	 * @param int $entityId
 	 * @param string $temporaryFilename
 	 * @param string|null $type
-	 * @param \SS6\ShopBundle\Model\Image\Image $image
 	 * @return \SS6\ShopBundle\Model\Image\Image
 	 */
-	public function editImageOrCreateNew(
+	public function createImage(
 		ImageEntityConfig $imageEntityConfig,
 		$entityId,
 		$temporaryFilename,
-		$type,
-		Image $image = null
+		$type
 	) {
 		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
 
-		if ($image === null) {
-			$image = new Image(
-				$imageEntityConfig->getEntityName(),
-				$entityId,
-				$type,
-				$this->imageProcessingService->convertToShopFormatAndGetNewFilename($temporaryFilepath)
-			);
-		} else {
-			$image->setTemporaryFilename($this->imageProcessingService->convertToShopFormatAndGetNewFilename($temporaryFilepath));
-		}
+		$image = new Image(
+			$imageEntityConfig->getEntityName(),
+			$entityId,
+			$type,
+			$this->imageProcessingService->convertToShopFormatAndGetNewFilename($temporaryFilepath)
+		);
 
 		return $image;
 	}
