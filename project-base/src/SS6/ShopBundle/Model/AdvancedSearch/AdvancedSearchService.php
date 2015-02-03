@@ -55,12 +55,17 @@ class AdvancedSearchService {
 	 * @param \SS6\ShopBundle\Model\AdvancedSearch\RuleData $advancedSearchData
 	 */
 	public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
+		$rulesDataByFilterName = [];
 		foreach ($advancedSearchData as $key => $ruleData) {
 			if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData->operator === null) {
 				continue;
 			}
-			$filter = $this->advancedSearchConfig->getFilter($ruleData->subject);
-			$filter->extendQueryBuilder($queryBuilder, $ruleData->operator, $ruleData->value);
+			$rulesDataByFilterName[$ruleData->subject][] = $ruleData;
+		}
+
+		foreach ($rulesDataByFilterName as $filterName => $rulesData) {
+			$filter = $this->advancedSearchConfig->getFilter($filterName);
+			$filter->extendQueryBuilder($queryBuilder, $rulesData);
 		}
 	}
 

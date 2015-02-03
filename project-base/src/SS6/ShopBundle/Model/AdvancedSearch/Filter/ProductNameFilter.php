@@ -42,14 +42,21 @@ class ProductNameFilter implements AdvancedSearchFilterInterface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value) {
-		if ($value === null) {
-			$value = '';
+	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+		$whereOrExpr = $queryBuilder->expr()->orX();
+		foreach ($rulesData as $index => $ruleData) {
+			if ($ruleData->value === null) {
+				$searchValue = '%';
+			} else {
+				$searchValue = '%' . DatabaseSearching::getLikeSearchString($ruleData->value) . '%';
+			}
+			$dqlOperator = $this->getDqlOperator($ruleData->operator);
+			$parameterName = 'productName_' . $index;
+			$whereOrExpr->add('NORMALIZE(pt.name) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
+			$queryBuilder->setParameter($parameterName, $searchValue);
 		}
-		$dqlOperator = $this->getDqlOperator($operator);
-		$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
-		$queryBuilder->andWhere('NORMALIZE(pt.name) ' . $dqlOperator . ' NORMALIZE(:productName)');
-		$queryBuilder->setParameter('productName', $searchValue);
+
+		$queryBuilder->andWhere($whereOrExpr);
 	}
 
 	/**

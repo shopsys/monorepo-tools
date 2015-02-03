@@ -43,19 +43,26 @@ class ProductCatnumFilter implements AdvancedSearchFilterInterface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value) {
-		if ($operator === self::OPERATOR_NOT_SET) {
-			$queryBuilder->andWhere('p.catnum IS NULL');
-		} elseif ($operator === self::OPERATOR_CONTAINS || $operator === self::OPERATOR_NOT_CONTAINS) {
-			if ($value === null) {
-				$value = '';
-			}
+	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+		$whereOrExpr = $queryBuilder->expr()->orX();
+		foreach ($rulesData as $index => $ruleData) {
+			if ($ruleData->operator === self::OPERATOR_NOT_SET) {
+				$whereOrExpr->add('p.catnum IS NULL');
+			} elseif ($ruleData->operator === self::OPERATOR_CONTAINS || $ruleData->operator === self::OPERATOR_NOT_CONTAINS) {
+				if ($ruleData->value === null) {
+					$searchValue = '%';
+				} else {
+					$searchValue = '%' . DatabaseSearching::getLikeSearchString($ruleData->value) . '%';
+				}
 
-			$dqlOperator = $this->getContainsDqlOperator($operator);
-			$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
-			$queryBuilder->andWhere('NORMALIZE(p.catnum) ' . $dqlOperator . ' NORMALIZE(:productCatnum)');
-			$queryBuilder->setParameter('productCatnum', $searchValue);
+				$dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
+				$parameterName = 'productCatnum_' . $index;
+				$whereOrExpr->add('NORMALIZE(p.catnum) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
+				$queryBuilder->setParameter($parameterName, $searchValue);
+			}
 		}
+
+		$queryBuilder->andWhere($whereOrExpr);
 	}
 
 	/**

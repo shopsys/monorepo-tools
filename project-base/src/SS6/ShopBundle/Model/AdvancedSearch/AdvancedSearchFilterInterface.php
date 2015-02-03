@@ -34,9 +34,8 @@ interface AdvancedSearchFilterInterface {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $operator
-	 * @param mixed $value
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\RuleData[] $rulesData
 	 */
-	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value);
+	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData);
 
 }

@@ -43,19 +43,26 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value) {
-		if ($operator === self::OPERATOR_NOT_SET) {
-			$queryBuilder->andWhere('p.partno IS NULL');
-		} elseif ($operator === self::OPERATOR_CONTAINS || $operator === self::OPERATOR_NOT_CONTAINS) {
-			if ($value === null) {
-				$value = '';
-			}
+	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+		$whereOrExpr = $queryBuilder->expr()->orX();
+		foreach ($rulesData as $index => $ruleData) {
+			if ($ruleData->operator === self::OPERATOR_NOT_SET) {
+				$whereOrExpr->add('p.partno IS NULL');
+			} elseif ($ruleData->operator === self::OPERATOR_CONTAINS || $ruleData->operator === self::OPERATOR_NOT_CONTAINS) {
+				if ($ruleData->value === null) {
+					$searchValue = '%';
+				} else {
+					$searchValue = '%' . DatabaseSearching::getLikeSearchString($ruleData->value) . '%';
+				}
 
-			$dqlOperator = $this->getContainsDqlOperator($operator);
-			$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
-			$queryBuilder->andWhere('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:productPartno)');
-			$queryBuilder->setParameter('productPartno', $searchValue);
+				$dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
+				$parameterName = 'productPartno_' . $index;
+				$whereOrExpr->add('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
+				$queryBuilder->setParameter($parameterName, $searchValue);
+			}
 		}
+
+		$queryBuilder->andWhere($whereOrExpr);
 	}
 
 	/**
