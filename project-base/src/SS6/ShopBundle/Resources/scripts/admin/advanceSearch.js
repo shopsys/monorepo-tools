@@ -18,6 +18,7 @@
 			$advanceSearch.detach();
 			$enableButton.click(function () {
 				$quickSearch.replaceWith($advanceSearch.show());
+				return false;
 			});
 		}
 
