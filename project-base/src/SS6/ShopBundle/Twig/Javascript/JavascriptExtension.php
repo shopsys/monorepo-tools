@@ -3,19 +3,19 @@
 namespace SS6\ShopBundle\Twig\Javascript;
 
 use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Twig\Javascript\JavascriptTranslateService;
+use SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class JavascriptExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\Javascript\JavascriptTranslateService
+	 * @var \SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService
 	 */
-	private $javascriptTranslateService;
+	private $javascriptCompilerService;
 
-	public function __construct(JavascriptTranslateService $javascriptTranslateService) {
-		$this->javascriptTranslateService = $javascriptTranslateService;
+	public function __construct(JavascriptCompilerService $javascriptCompilerService) {
+		$this->javascriptCompilerService = $javascriptCompilerService;
 	}
 
 	/**
@@ -34,8 +34,8 @@ class JavascriptExtension extends Twig_Extension {
 	public function renderJavascripts($javascripts) {
 		$javascriptsArray = Condition::mixedToArray($javascripts);
 
-		$this->javascriptTranslateService->generateTranslateFiles($javascriptsArray);
-		$javascriptLinks = $this->javascriptTranslateService->getGeneratedLinks();
+		$this->javascriptCompilerService->generateCompiledFiles($javascriptsArray);
+		$javascriptLinks = $this->javascriptCompilerService->getGeneratedLinks();
 
 		return $this->getHtmlJavascriptImports($javascriptLinks);
 	}

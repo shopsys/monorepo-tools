@@ -1,6 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation\JsTranslatorCallParser;
+namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
+
+import('PLUG.JavaScript.JNodes.JNodeBase');
+import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
 
 use JCallExprNode;
 use JNodeBase;
@@ -29,6 +32,7 @@ class JsTranslatorCall {
 
 	/**
 	 * @param \JCallExprNode $callExprNode
+	 * @param \JNodeBase $messageIdArgumentNode
 	 * @param string $messageId
 	 * @param string $domain
 	 */
