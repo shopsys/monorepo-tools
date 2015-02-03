@@ -44,10 +44,9 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface {
 	 * {@inheritdoc}
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
-		$whereOrExpr = $queryBuilder->expr()->orX();
 		foreach ($rulesData as $index => $ruleData) {
 			if ($ruleData->operator === self::OPERATOR_NOT_SET) {
-				$whereOrExpr->add('p.partno IS NULL');
+				$queryBuilder->andWhere('p.partno IS NULL');
 			} elseif ($ruleData->operator === self::OPERATOR_CONTAINS || $ruleData->operator === self::OPERATOR_NOT_CONTAINS) {
 				if ($ruleData->value === null) {
 					$searchValue = '%';
@@ -57,12 +56,10 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface {
 
 				$dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
 				$parameterName = 'productPartno_' . $index;
-				$whereOrExpr->add('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
+				$queryBuilder->andWhere('NORMALIZE(p.partno) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
 				$queryBuilder->setParameter($parameterName, $searchValue);
 			}
 		}
-
-		$queryBuilder->andWhere($whereOrExpr);
 	}
 
 	/**

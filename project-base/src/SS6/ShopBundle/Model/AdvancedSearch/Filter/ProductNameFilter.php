@@ -43,7 +43,6 @@ class ProductNameFilter implements AdvancedSearchFilterInterface {
 	 * {@inheritdoc}
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
-		$whereOrExpr = $queryBuilder->expr()->orX();
 		foreach ($rulesData as $index => $ruleData) {
 			if ($ruleData->value === null) {
 				$searchValue = '%';
@@ -52,11 +51,9 @@ class ProductNameFilter implements AdvancedSearchFilterInterface {
 			}
 			$dqlOperator = $this->getDqlOperator($ruleData->operator);
 			$parameterName = 'productName_' . $index;
-			$whereOrExpr->add('NORMALIZE(pt.name) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
+			$queryBuilder->andWhere('NORMALIZE(pt.name) ' . $dqlOperator . ' NORMALIZE(:' . $parameterName . ')');
 			$queryBuilder->setParameter($parameterName, $searchValue);
 		}
-
-		$queryBuilder->andWhere($whereOrExpr);
 	}
 
 	/**
