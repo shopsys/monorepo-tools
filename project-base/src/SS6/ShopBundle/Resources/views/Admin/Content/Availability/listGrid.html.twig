@@ -23,6 +23,7 @@
 
 {% block grid_value_cell_edit_id_deliveryTime %}
 	<span class="form-edit-block form-edit-block--size-1">
-		{{ formHtml|raw }}
+		{% form_theme formView '@SS6Shop/Admin/Form/theme.html.twig' %}
+		{{ form_widget(formView[column.id]) }}
 	</span>
 {% endblock %}

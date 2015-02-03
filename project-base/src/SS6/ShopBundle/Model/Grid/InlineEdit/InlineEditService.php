@@ -98,26 +98,6 @@ class InlineEditService {
 	}
 
 	/**
-	 * @param \Symfony\Component\Form\Form $form
-	 * @return array
-	 */
-	private function renderFormToArray(Form $form) {
-		$formView = $form->createView();
-		$result = [];
-
-		$this->multipleFormSettings->currentFormIsMultiple();
-		foreach ($formView->children as $formName => $childrenForm) {
-			$result[$formName] = $this->twigEnvironment->render(
-				'{% form_theme form \'@SS6Shop/Admin/Form/theme.html.twig\' %}{{ form_widget(form) }}',
-				['form' => $childrenForm]
-			);
-		}
-		$this->multipleFormSettings->reset();
-
-		return $result;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface $gridInlineEditService
 	 * @param mixed $rowId
 	 * @param \Symfony\Component\Form\Form $form
@@ -140,26 +120,14 @@ class InlineEditService {
 	 * @return array
 	 */
 	private function getFormRowTemplateParameters(Grid $grid, Form $form) {
-		$formHtmls = [];
-		$formAdditional = '';
-		$formInArray = $this->renderFormToArray($form);
-
-		foreach ($formInArray as $formName => $formHtml) {
-			if ($grid->existsColumn($formName)) {
-				$formHtmls[$formName] = $formHtml;
-			} else {
-				$formAdditional .= $formHtml;
-			}
-		}
-
+		$formView = $form->createView();
 		$rows = $grid->getRows();
 
 		return [
 			'loopIndex' => 0,
 			'lastRow' => false,
 			'row' => array_pop($rows),
-			'formHtmls' => $formHtmls,
-			'formAdditional' => $formAdditional
+			'formView' => $formView,
 		];
 	}
 

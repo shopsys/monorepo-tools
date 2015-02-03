@@ -2,7 +2,8 @@
 
 {% block grid_value_cell_edit_id_percent %}
 	<span class="form-edit-block form-edit-block--size-0">
-		{{ formHtml|raw }}
+		{% form_theme formView '@SS6Shop/Admin/Form/theme.html.twig' %}
+		{{ form_widget(formView[column.id]) }}
 		<span class="form-edit-block__info">
 			%
 			{% if row is not null %}
