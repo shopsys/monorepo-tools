@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvanceSearch;
+namespace SS6\ShopBundle\Form\Admin\AdvanceSearch;
 
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFilterInterface;
 use Symfony\Component\Translation\TranslatorInterface;

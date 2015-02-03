@@ -1,4 +1,6 @@
 services:
+  ss6.shop.form.admin.advance_search.advance_search_translation:
+    class: SS6\ShopBundle\Form\Admin\AdvanceSearch\AdvanceSearchTranslation
 
   ss6.shop.form.admin.customer_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory

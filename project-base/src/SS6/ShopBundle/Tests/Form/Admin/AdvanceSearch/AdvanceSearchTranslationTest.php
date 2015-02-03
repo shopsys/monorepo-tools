@@ -1,23 +1,33 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Model\AdvanceSearch;
+namespace SS6\ShopBundle\Tests\Form\Admin\AdvanceSearch;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
-use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation;
+use SS6\ShopBundle\Form\Admin\AdvanceSearch\AdvanceSearchTranslation;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class AdvanceSearchTranslationTest extends FunctionalTestCase {
 
-	public function testAllTranslations() {
+	public function testTranslateFilterName() {
 		$advanceSearchConfig = $this->getContainer()->get('ss6.shop.advance_search.advance_search_config');
 		/* @var $advanceSearchConfig \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig */
-		$advanceSearchTranslation = $this->getContainer()->get('ss6.shop.advance_search.advance_search_translation');
-		/* @var $advanceSearchTranslation \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation */
+		$advanceSearchTranslation = $this->getContainer()->get('ss6.shop.form.admin.advance_search.advance_search_translation');
+		/* @var $advanceSearchTranslation \SS6\ShopBundle\Form\Admin\AdvanceSearch\AdvanceSearchTranslation */
+
+		foreach ($advanceSearchConfig->getAllFilters() as $filter) {
+			$this->assertNotEmpty($advanceSearchTranslation->translateFilterName($filter->getName()));
+		}
+	}
+
+	public function testTranslateOperator() {
+		$advanceSearchConfig = $this->getContainer()->get('ss6.shop.advance_search.advance_search_config');
+		/* @var $advanceSearchConfig \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig */
+		$advanceSearchTranslation = $this->getContainer()->get('ss6.shop.form.admin.advance_search.advance_search_translation');
+		/* @var $advanceSearchTranslation \SS6\ShopBundle\Form\Admin\AdvanceSearch\AdvanceSearchTranslation */
 
 		$operators = [];
 		foreach ($advanceSearchConfig->getAllFilters() as $filter) {
 			$operators = array_merge($operators, $filter->getAllowedOperators());
-			$this->assertNotEmpty($advanceSearchTranslation->translateFilterName($filter->getName()));
 		}
 
 		foreach ($operators as $operator) {
@@ -30,7 +40,7 @@ class AdvanceSearchTranslationTest extends FunctionalTestCase {
 		$advanceSearchTranslator = new AdvanceSearchTranslation($translatorMock);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdvanceSearch\Exception\AdvanceSearchTranslationNotFoundException::class);
-		$advanceSearchTranslator->translateFilterName('nonExistsFilterName');
+		$advanceSearchTranslator->translateFilterName('nonexistingFilterName');
 	}
 
 	public function testTranslateOperatorNotFoundException() {
@@ -38,6 +48,6 @@ class AdvanceSearchTranslationTest extends FunctionalTestCase {
 		$advanceSearchTranslator = new AdvanceSearchTranslation($translatorMock);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdvanceSearch\Exception\AdvanceSearchTranslationNotFoundException::class);
-		$advanceSearchTranslator->translateOperator('nonExistsOperator');
+		$advanceSearchTranslator->translateOperator('nonexistingOperator');
 	}
 }

@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\AdvanceSearch;
 
+use SS6\ShopBundle\Form\Admin\AdvanceSearch\AdvanceSearchTranslation;
 use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig;
-use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class AdvanceSearchFormFactory {

@@ -23,11 +23,10 @@ class AdvanceSearchService {
 	 * @return array
 	 */
 	public function getRulesFormDataByRequestData(array $rulesData = null) {
-		$rulesData = (array)$rulesData;
-
-		$searchRulesData = [];
-		foreach ($rulesData as $ruleData) {
-			$searchRulesData[] = $ruleData;
+		if ($rulesData === null) {
+			$searchRulesData = [];
+		} else {
+			$searchRulesData = array_values($rulesData);
 		}
 
 		if (count($searchRulesData) === 0) {

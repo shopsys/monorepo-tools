@@ -14,14 +14,7 @@
 
 		var newRuleIndexCounter = 0;
 
-		if ($enableButton.size() > 0) {
-			$advanceSearch.detach();
-			$enableButton.click(function () {
-				$quickSearch.replaceWith($advanceSearch.show());
-				return false;
-			});
-		}
-
+		SS6.advanceSearch.registerEnableButton($enableButton, $quickSearch, $advanceSearch);
 		SS6.advanceSearch.actualizeAllValuesByOperator($rulesContainer);
 
 		$addRuleButton.click(function () {
@@ -45,6 +38,16 @@
 			SS6.advanceSearch.actualizeValueByOperator($rulesContainer, $rule, $(this).val());
 		});
 	};
+
+	SS6.advanceSearch.registerEnableButton = function ($enableButton, $quickSearch, $advanceSearch) {
+		if ($enableButton.size() > 0) {
+			$advanceSearch.detach();
+			$enableButton.click(function () {
+				$quickSearch.replaceWith($advanceSearch.show());
+				return false;
+			});
+		}
+	}
 
 	SS6.advanceSearch.actualizeRule = function ($rulesContainer, $rule, filterName) {
 		$rule.addClass('advance-search-rule-disabled');

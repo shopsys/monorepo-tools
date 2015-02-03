@@ -46,12 +46,12 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $operator, $value) {
 		if ($operator === self::OPERATOR_NOT_SET) {
 			$queryBuilder->andWhere('p.catnum IS NULL');
-		} else {
+		} elseif ($operator === self::OPERATOR_CONTAINS || $operator === self::OPERATOR_NOT_CONTAINS) {
 			if ($value === null) {
 				$value = '';
 			}
 
-			$dqlOperator = $this->getDqlOperator($operator);
+			$dqlOperator = $this->getContainsDqlOperator($operator);
 			$searchValue = '%' . DatabaseSearching::getLikeSearchString($value) . '%';
 			$queryBuilder->andWhere('NORMALIZE(p.catnum) ' . $dqlOperator . ' NORMALIZE(:productCatnum)');
 			$queryBuilder->setParameter('productCatnum', $searchValue);
@@ -62,7 +62,7 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 	 * @param string $operator
 	 * @return string
 	 */
-	private function getDqlOperator($operator) {
+	private function getContainsDqlOperator($operator) {
 		switch ($operator) {
 			case self::OPERATOR_CONTAINS:
 				return 'LIKE';
