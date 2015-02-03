@@ -44,12 +44,12 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		/* @var $productCalculatedPrice \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice */
 		$productPriceBeforeEdit = $productCalculatedPrice->getPriceWithVat();
 
-		$pricingGroupData = new PricingGroupData($pricingGroup->getName(), $pricingGroup->getCoefficient()*2);
+		$pricingGroupData = new PricingGroupData($pricingGroup->getName(), $pricingGroup->getCoefficient() * 2);
 		$pricingGroupFacade->edit($pricingGroup->getId(), $pricingGroupData);
 		$productPriceRecalculator->runScheduledRecalculations();
 
 		$productPriceAfterEdit = $productCalculatedPrice->getPriceWithVat();
 
-		$this->assertEquals((float)($productPriceBeforeEdit*2), (float)($productPriceAfterEdit));
+		$this->assertEquals(round($productPriceBeforeEdit * 2, 6), round($productPriceAfterEdit, 6));
 	}
 }

@@ -1,12 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DoctrineWalker;
+namespace SS6\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
 class QueryBuilderService {
 
+	const REQUIRED_ALIASES_COUNT = 1;
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string $class
@@ -15,7 +16,12 @@ class QueryBuilderService {
 	 */
 	public function addOrExtendJoin(QueryBuilder $queryBuilder, $class, $alias, $condition) {
 		$joinAlreadyUsed = false;
-		foreach ($queryBuilder->getDQLPart('join')['p'] as $join) {
+		$rootAliases = $queryBuilder->getRootAliases();
+		if (count($rootAliases) !== self::REQUIRED_ALIASES_COUNT) {
+			throw new SS6\ShopBundle\Component\Doctrine\Exception\InvalidCountOfAliasesException($rootAliases);
+		}
+		$firstAlias = reset($rootAliases);
+		foreach ($queryBuilder->getDQLPart('join')[$firstAlias] as $join) {
 			/* @var $join \Doctrine\ORM\Query\Expr\Join */
 			if ($join->getJoin() === $class) {
 				$joinAlreadyUsed = true;

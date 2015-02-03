@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService;
+use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 
@@ -61,8 +61,9 @@ class ProductFilterRepository {
 				$queryBuilder,
 				\SS6\ShopBundle\Model\Product\Availability\Availability::class,
 				'a',
-				'p.calculatedAvailability = a AND a.deliveryTime = :deliveryTime'
+				'p.calculatedAvailability = a'
 			);
+			$queryBuilder->andWhere('a.deliveryTime = :deliveryTime');
 			$queryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
 		}
 
