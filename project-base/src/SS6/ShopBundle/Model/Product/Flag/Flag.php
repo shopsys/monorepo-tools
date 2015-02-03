@@ -43,7 +43,7 @@ class Flag extends AbstractTranslatableEntity {
 	 */
 	public function __construct(FlagData $flagData) {
 		$this->translations = new ArrayCollection();
-		$this->setTranslations($flagData->name);
+		$this->setTranslations($flagData);
 		$this->rgbColor = $flagData->rgbColor;
 	}
 
@@ -70,10 +70,10 @@ class Flag extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param array $names
+	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
-	private function setTranslations(array $names) {
-		foreach ($names as $locale => $name) {
+	private function setTranslations(FlagData $flagData) {
+		foreach ($flagData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}
@@ -89,7 +89,7 @@ class Flag extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
 	public function edit(FlagData $flagData) {
-		$this->setTranslations($flagData->name);
+		$this->setTranslations($flagData);
 		$this->rgbColor = $flagData->rgbColor;
 	}
 

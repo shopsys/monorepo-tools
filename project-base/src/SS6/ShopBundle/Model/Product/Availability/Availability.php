@@ -43,7 +43,7 @@ class Availability extends AbstractTranslatableEntity {
 	 */
 	public function __construct(AvailabilityData $availabilityData) {
 		$this->translations = new ArrayCollection();
-		$this->setTranslations($availabilityData->name);
+		$this->setTranslations($availabilityData);
 		$this->deliveryTime = $availabilityData->deliveryTime;
 	}
 
@@ -63,10 +63,10 @@ class Availability extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param array $names
+	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
 	 */
-	private function setTranslations(array $names) {
-		foreach ($names as $locale => $name) {
+	private function setTranslations(AvailabilityData $availabilityData) {
+		foreach ($availabilityData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}
@@ -82,7 +82,7 @@ class Availability extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
 	 */
 	public function edit(AvailabilityData $availabilityData) {
-		$this->setTranslations($availabilityData->name);
+		$this->setTranslations($availabilityData);
 		$this->deliveryTime = $availabilityData->deliveryTime;
 	}
 

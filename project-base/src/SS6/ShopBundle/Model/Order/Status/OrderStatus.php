@@ -50,7 +50,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	public function __construct(OrderStatusData $orderStatusData, $type) {
 		$this->translations = new ArrayCollection();
 		$this->setType($type);
-		$this->setTranslations($orderStatusData->name);
+		$this->setTranslations($orderStatusData);
 	}
 
 	/**
@@ -69,10 +69,10 @@ class OrderStatus extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param array $names
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
-	private function setTranslations(array $names) {
-		foreach ($names as $locale => $name) {
+	private function setTranslations(OrderStatusData $orderStatusData) {
+		foreach ($orderStatusData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
 		}
 	}
@@ -111,7 +111,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
 	public function edit(OrderStatusData $orderStatusData) {
-		$this->setTranslations($orderStatusData->name);
+		$this->setTranslations($orderStatusData);
 	}
 
 }
