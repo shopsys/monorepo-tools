@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bca26fbe5bf4bc3748856c8b2425d5cd",
+    "hash": "aebb1c500d2425aa22c63710a1a63865",
     "packages": [
         {
             "name": "bmatzner/jquery-bundle",
@@ -1113,17 +1113,17 @@
         },
         {
             "name": "fp/jsformvalidator-bundle",
-            "version": "v1.2.1",
+            "version": "dev-translate-invalid-message",
             "target-dir": "Fp/JsFormValidatorBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/formapro/JsFormValidatorBundle.git",
-                "reference": "4fb5752961b4a95c1bea46311b63ec35cd84f2d9"
+                "url": "https://github.com/sustmi/JsFormValidatorBundle.git",
+                "reference": "bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/formapro/JsFormValidatorBundle/zipball/4fb5752961b4a95c1bea46311b63ec35cd84f2d9",
-                "reference": "4fb5752961b4a95c1bea46311b63ec35cd84f2d9",
+                "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4",
+                "reference": "bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4",
                 "shasum": ""
             },
             "require": {
@@ -1158,7 +1158,6 @@
                     "Fp\\JsFormValidatorBundle": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1175,12 +1174,15 @@
             "description": "Javascript validation for sf2 forms.",
             "homepage": "https://github.com/formapro/JsFormValidatorBundle",
             "keywords": [
-                "form",
-                "javascript",
-                "symfony",
-                "validation"
+                "Form",
+                "Javascript",
+                "Symfony",
+                "Validation"
             ],
-            "time": "2014-08-16 19:55:56"
+            "support": {
+                "source": "https://github.com/sustmi/JsFormValidatorBundle/tree/translate-invalid-message"
+            },
+            "time": "2015-01-30 09:41:02"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -4213,6 +4215,7 @@
     "stability-flags": {
         "craue/formflow-bundle": 20,
         "doctrine/common": 20,
+        "fp/jsformvalidator-bundle": 20,
         "jms/translation-bundle": 20,
         "prezent/doctrine-translatable-bundle": 20,
         "timwhitlock/jparser": 20,
