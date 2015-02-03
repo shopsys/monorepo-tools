@@ -126,8 +126,8 @@ services:
   ss6.shop.cart.item.cart_item_repository:
     class: SS6\ShopBundle\Model\Cart\Item\CartItemRepository
 
-  ss6.shop.component.doctrine_walker.query_builder_service:
-    class: SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
+  ss6.shop.component.doctrine.query_builder_service:
+    class: SS6\ShopBundle\Component\Doctrine\QueryBuilderService
 
   ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
     class: SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
@@ -635,6 +635,9 @@ services:
 
   ss6.shop.product.filter.parameter_filter_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
+
+  ss6.shop.product.filter.product_filter_repository:
+    class: SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository
 
   ss6.shop.product.filter.product_search_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository

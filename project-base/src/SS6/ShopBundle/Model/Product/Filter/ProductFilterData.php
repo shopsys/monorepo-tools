@@ -19,4 +19,9 @@ class ProductFilterData {
 	 */
 	public $parameters = [];
 
+	/**
+	 * @var bool
+	 */
+	public $inStock;
+
 }

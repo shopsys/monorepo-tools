@@ -53,10 +53,6 @@ class ProductController extends Controller {
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
-		if ($filterForm->get('reset')->isClicked()) {
-			return $this->redirect($this->generateUrl('front_product_category', ['categoryId' => $categoryId]));
-		}
-
 		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
 			$productFilterData,
 			$orderingSetting,
@@ -72,6 +68,7 @@ class ProductController extends Controller {
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
+			'domainId' => $domain->getId(),
 		]);
 	}
 

@@ -6,6 +6,9 @@
 		{{ form_label(form, label, { label_attr: {class: 'form-block__label'} }) }}
 		<div class="form-block__field">
 			{{ form_widget(form) }}
+			{% if symbolAfterInput is defined %}
+				{{symbolAfterInput}}
+			{% endif %}
 		</div>
 	</div>
 {% endblock form_row %}
