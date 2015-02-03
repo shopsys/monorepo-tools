@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
@@ -50,6 +51,11 @@ class VatFacade {
 	private $trasnportEditFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 */
+	private $productPriceRecalculationScheduler;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatService $vatService
@@ -65,7 +71,8 @@ class VatFacade {
 		Setting $setting,
 		PaymentEditFacade $paymentEditFacade,
 		ProductEditFacade $productEditFacade,
-		TransportEditFacade $trasnportEditFacade
+		TransportEditFacade $trasnportEditFacade,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->vatRepository = $vatRepository;
@@ -74,6 +81,7 @@ class VatFacade {
 		$this->paymentEditFacade = $paymentEditFacade;
 		$this->productEditFacade = $productEditFacade;
 		$this->trasnportEditFacade = $trasnportEditFacade;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	/**
@@ -114,6 +122,8 @@ class VatFacade {
 		$this->vatService->edit($vat, $vatData);
 		$this->em->flush();
 
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+
 		return $vat;
 	}
 
@@ -143,6 +153,8 @@ class VatFacade {
 		$this->em->remove($oldVat);
 		$this->em->flush();
 		$this->em->commit();
+
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**

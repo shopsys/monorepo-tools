@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyService;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class CurrencyFacade {
 
@@ -43,9 +44,15 @@ class CurrencyFacade {
 	private $domain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 */
+	private $productPriceRecalculationScheduler;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyService $currencyService
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -53,7 +60,8 @@ class CurrencyFacade {
 		CurrencyService $currencyService,
 		PricingSetting $pricingSetting,
 		OrderRepository $orderRepository,
-		Domain $domain
+		Domain $domain,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->currencyRepository = $currencyRepository;
@@ -61,6 +69,7 @@ class CurrencyFacade {
 		$this->pricingSetting = $pricingSetting;
 		$this->orderRepository = $orderRepository;
 		$this->domain = $domain;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	/**
@@ -92,6 +101,7 @@ class CurrencyFacade {
 		$currency = $this->currencyRepository->getById($currencyId);
 		$this->currencyService->edit($currency, $currencyData, $this->isDefaultCurrency($currency));
 		$this->em->flush();
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 
 		return $currency;
 	}
@@ -148,6 +158,7 @@ class CurrencyFacade {
 	 */
 	public function setDomainDefaultCurrency(Currency $currency, $domainId) {
 		$this->pricingSetting->setDomainDefaultCurrency($currency, $domainId);
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**
