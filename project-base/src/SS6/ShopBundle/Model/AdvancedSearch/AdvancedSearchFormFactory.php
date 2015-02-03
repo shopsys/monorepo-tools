@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\AdvancedSearch;
 
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class AdvancedSearchFormFactory {
@@ -35,19 +36,19 @@ class AdvancedSearchFormFactory {
 
 	/**
 	 * @param string $name
-	 * @param array $rulesData
+	 * @param array $rulesViewData
 	 * @return \Symfony\Component\Form\Form
 	 */
-	public function createRulesForm($name, $rulesData) {
+	public function createRulesForm($name, $rulesViewData) {
 		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, ['csrf_protection' => false]);
 
-		foreach ($rulesData as $ruleKey => $ruleData) {
-			$ruleFilter = $this->advancedSearchConfig->getFilter($ruleData['subject']);
+		foreach ($rulesViewData as $ruleKey => $ruleViewData) {
+			$ruleFilter = $this->advancedSearchConfig->getFilter($ruleViewData['subject']);
 			$formBuilder->add($this->createRuleFormBuilder($ruleKey, $ruleFilter));
 		}
 
 		$form = $formBuilder->getForm();
-		$form->submit($rulesData);
+		$form->submit($rulesViewData);
 
 		return $form;
 	}
@@ -58,7 +59,9 @@ class AdvancedSearchFormFactory {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter) {
-		$filterFormBuilder = $this->formFactory->createNamedBuilder($name)
+		$filterFormBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, [
+			'data_class' => RuleData::class,
+		])
 			->add('subject', 'choice', [
 					'choices' => $this->getSubjectChoices(),
 					'expanded' => false,

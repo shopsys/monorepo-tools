@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchFacade {
 
-	const RULES_FORM_NAME = 'af';
+	const RULES_FORM_NAME = 'as';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
@@ -50,7 +50,7 @@ class AdvancedSearchFacade {
 	 */
 	public function createAdvancedSearchForm(Request $request) {
 		$rulesData = (array)$request->get(self::RULES_FORM_NAME, null, true);
-		$rulesFormData = $this->advancedSearchService->getRulesFormDataByRequestData($rulesData);
+		$rulesFormData = $this->advancedSearchService->getRulesFormViewDataByRequestData($rulesData);
 
 		return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesFormData);
 	}
@@ -61,7 +61,7 @@ class AdvancedSearchFacade {
 	 */
 	public function createRuleForm($filterName, $index) {
 		$rulesData = [
-			$index => $this->advancedSearchService->createDefaultRuleFormData($filterName),
+			$index => $this->advancedSearchService->createDefaultRuleFormViewData($filterName),
 		];
 
 		return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);

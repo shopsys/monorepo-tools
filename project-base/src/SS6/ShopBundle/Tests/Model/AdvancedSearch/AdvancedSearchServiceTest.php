@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
+use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -15,7 +16,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 		$filterName = 'filterName';
 
 		$advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
-		$defaultRuleFormData = $advancedSearchService->createDefaultRuleFormData($filterName);
+		$defaultRuleFormData = $advancedSearchService->createDefaultRuleFormViewData($filterName);
 
 		$this->assertArrayHasKey('subject', $defaultRuleFormData);
 		$this->assertArrayHasKey('operator', $defaultRuleFormData);
@@ -27,11 +28,11 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 		$advancedSearchConfigMock = $this->getMock(AdvancedSearchConfig::class, null, [], '', false);
 
 		$advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
-		$rulesFormData = $advancedSearchService->getRulesFormDataByRequestData(null);
+		$rulesFormViewData = $advancedSearchService->getRulesFormViewDataByRequestData(null);
 
-		$this->assertArrayHasKey(AdvancedSearchService::TEMPLATE_RULE_FORM_KEY, $rulesFormData);
-		$this->assertCount(2, $rulesFormData);
-		foreach ($rulesFormData as $ruleFormData) {
+		$this->assertArrayHasKey(AdvancedSearchService::TEMPLATE_RULE_FORM_KEY, $rulesFormViewData);
+		$this->assertCount(2, $rulesFormViewData);
+		foreach ($rulesFormViewData as $ruleFormData) {
 			$this->assertArrayHasKey('subject', $ruleFormData);
 			$this->assertArrayHasKey('operator', $ruleFormData);
 			$this->assertArrayHasKey('value', $ruleFormData);
@@ -50,11 +51,11 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 		];
 
 		$advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
-		$rulesFormData = $advancedSearchService->getRulesFormDataByRequestData($requestData);
+		$rulesFormViewData = $advancedSearchService->getRulesFormViewDataByRequestData($requestData);
 
-		$this->assertArrayHasKey(AdvancedSearchService::TEMPLATE_RULE_FORM_KEY, $rulesFormData);
-		$this->assertCount(2, $rulesFormData);
-		foreach ($rulesFormData as $key => $ruleFormData) {
+		$this->assertArrayHasKey(AdvancedSearchService::TEMPLATE_RULE_FORM_KEY, $rulesFormViewData);
+		$this->assertCount(2, $rulesFormViewData);
+		foreach ($rulesFormViewData as $key => $ruleFormData) {
 			if ($key !== AdvancedSearchService::TEMPLATE_RULE_FORM_KEY) {
 				$this->assertEquals($requestData[0], $ruleFormData);
 			}
@@ -62,11 +63,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testExtendQueryBuilderByAdvancedSearchData() {
-		$ruleData = [
-			'subject' => 'testSubject',
-			'operator' => 'testOperator',
-			'value' => 'testValue',
-		];
+		$ruleData = new RuleData('testSubject', 'testOperator', 'testValue');
 
 		$advancedSearchData = [
 			AdvancedSearchService::TEMPLATE_RULE_FORM_KEY => null,
@@ -81,7 +78,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 		$advancedSearchConfigMock
 			->expects($this->once())
 			->method('getFilter')
-			->with($this->equalTo($ruleData['subject']))
+			->with($this->equalTo($ruleData->subject))
 			->willReturn($advancedSearchFilterMock);
 
 		$queryBuilderMock = $this->getMock(QueryBuilder::class, null, [], '', false);

@@ -19,30 +19,30 @@ class AdvancedSearchService {
 	}
 
 	/**
-	 * @param array|null $rulesData
+	 * @param array|null $requestData
 	 * @return array
 	 */
-	public function getRulesFormDataByRequestData(array $rulesData = null) {
-		if ($rulesData === null) {
-			$searchRulesData = [];
+	public function getRulesFormViewDataByRequestData(array $requestData = null) {
+		if ($requestData === null) {
+			$searchRulesViewData = [];
 		} else {
-			$searchRulesData = array_values($rulesData);
+			$searchRulesViewData = array_values($requestData);
 		}
 
-		if (count($searchRulesData) === 0) {
-			$searchRulesData[] = $this->createDefaultRuleFormData('productName');
+		if (count($searchRulesViewData) === 0) {
+			$searchRulesViewData[] = $this->createDefaultRuleFormViewData('productName');
 		}
 
-		$searchRulesData[self::TEMPLATE_RULE_FORM_KEY] = $this->createDefaultRuleFormData('productName');
+		$searchRulesViewData[self::TEMPLATE_RULE_FORM_KEY] = $this->createDefaultRuleFormViewData('productName');
 
-		return $searchRulesData;
+		return $searchRulesViewData;
 	}
 
 	/**
 	 * @param string $filterName
 	 * @return array
 	 */
-	public function createDefaultRuleFormData($filterName) {
+	public function createDefaultRuleFormViewData($filterName) {
 		return [
 			'subject' => $filterName,
 			'operator' => null,
@@ -52,15 +52,15 @@ class AdvancedSearchService {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param array $advancedSearchData
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\RuleData $advancedSearchData
 	 */
 	public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
 		foreach ($advancedSearchData as $key => $ruleData) {
-			if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData['operator'] === null) {
+			if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData->operator === null) {
 				continue;
 			}
-			$filter = $this->advancedSearchConfig->getFilter($ruleData['subject']);
-			$filter->extendQueryBuilder($queryBuilder, $ruleData['operator'], $ruleData['value']);
+			$filter = $this->advancedSearchConfig->getFilter($ruleData->subject);
+			$filter->extendQueryBuilder($queryBuilder, $ruleData->operator, $ruleData->value);
 		}
 	}
 
