@@ -127,7 +127,7 @@ class InlineEditService {
 			'loopIndex' => 0,
 			'lastRow' => false,
 			'row' => array_pop($rows),
-			'formView' => $formView,
+			'form' => $formView,
 		];
 	}
 

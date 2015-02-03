@@ -56,9 +56,9 @@
 {% endblock%}
 
 {% block grid_value_cell_edit %}
-	{% if formView[column.id] is defined %}
-		{% form_theme formView '@SS6Shop/Admin/Form/theme.html.twig' %}
-		{{ form_widget(formView[column.id]) }}
+	{% if form[column.id] is defined %}
+		{% form_theme form '@SS6Shop/Admin/Form/theme.html.twig' %}
+		{{ form_widget(form[column.id]) }}
 	{% endif -%}
 {% endblock %}
 
@@ -129,13 +129,13 @@
 		{% endif %}
 		{% for column in grid.columns %}
 			<td class="js-grid-column-{{ column.id }}{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if lastRow and grid.actionColumns is empty %} last-column{% endif %}{% if lastRow %} last-row{% endif %}">
-				{{ gridView.renderCell(column, row, formView|default(null)) }}
+				{{ gridView.renderCell(column, row, form|default(null)) }}
 			</td>
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
 			<td class="grid-column-actions last-column text-right js-inline-edit-unmatched-inputs {{ grid.actionColumnClassAttribute }}{% if lastRow %} last-row{% endif %}">
 				<span class="grid-row-actions in-action-icons">
-					{% if grid.inlineEdit and formView is defined %}
+					{% if grid.inlineEdit and form is defined %}
 						<span class="js-inline-edit-buttons">
 							<a href="#" class="table-action js-inline-edit-save in-action-icons__item in-action-icons__item--confirm">
 								<i class="fa fa-check" title="{{ 'Uložit změny'|trans }}"></i>
@@ -158,9 +158,9 @@
 						{% endfor %}
 					{% endif %}
 				</span>
-				{% if formView is defined %}
+				{% if form is defined %}
 					{% if not render_rest is defined or render_rest %}
-						{{- form_rest(formView) -}}
+						{{- form_rest(form) -}}
 					{% endif -%}
 				{% endif -%}
 			</td>

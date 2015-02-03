@@ -126,7 +126,7 @@ class GridView {
 			'value' => $value,
 			'row' => $row,
 			'column' => $column,
-			'formView' => $formView,
+			'form' => $formView,
 		];
 
 		if ($formView === null) {
