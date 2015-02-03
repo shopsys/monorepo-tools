@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -48,6 +49,10 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 
 		$productServiceMock = $this->getMock(ProductService::class, [], [], '', false);
 
+		$productPriceRecalculationSchedulerMock =  $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+			->disableOriginalConstructor()
+			->getMock();
+
 		$vatFacade = new VatFacade(
 			$emMock,
 			$vatRepositoryMock,
@@ -56,7 +61,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			$paymentEditFacadeMock,
 			$productEditFacadeMock,
 			$transportEditFacadeMock,
-			$productServiceMock
+			$productServiceMock,
+			$productPriceRecalculationSchedulerMock
 		);
 
 		$this->assertEquals($expected, $vatFacade->getDefaultVat());
@@ -87,6 +93,10 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 
 		$productServiceMock = $this->getMock(ProductService::class, [], [], '', false);
 
+		$productPriceRecalculationSchedulerMock =  $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+			->disableOriginalConstructor()
+			->getMock();
+
 		$vatFacade = new VatFacade(
 			$emMock,
 			$vatRepositoryMock,
@@ -95,7 +105,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			$paymentEditFacadeMock,
 			$productEditFacadeMock,
 			$transportEditFacadeMock,
-			$productServiceMock
+			$productServiceMock,
+			$productPriceRecalculationSchedulerMock
 		);
 		$vatFacade->setDefaultVat($vatMock);
 	}
