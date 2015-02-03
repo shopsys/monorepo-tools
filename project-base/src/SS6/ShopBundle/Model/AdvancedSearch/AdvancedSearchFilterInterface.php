@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvanceSearch;
+namespace SS6\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
 
-interface AdvanceSearchFilterInterface {
+interface AdvancedSearchFilterInterface {
 
 	const OPERATOR_CONTAINS = 'contains';
 	const OPERATOR_NOT_CONTAINS = 'notContains';

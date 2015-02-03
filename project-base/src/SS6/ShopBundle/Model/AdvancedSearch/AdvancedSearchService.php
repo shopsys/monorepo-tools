@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvanceSearch;
+namespace SS6\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 
-class AdvanceSearchService {
+class AdvancedSearchService {
 
 	const TEMPLATE_RULE_FORM_KEY = '__template__';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
 	 */
-	private $advanceSearchConfig;
+	private $advancedSearchConfig;
 
-	public function __construct(AdvanceSearchConfig $advanceSearchConfig) {
-		$this->advanceSearchConfig = $advanceSearchConfig;
+	public function __construct(AdvancedSearchConfig $advancedSearchConfig) {
+		$this->advancedSearchConfig = $advancedSearchConfig;
 	}
 
 	/**
@@ -52,14 +52,14 @@ class AdvanceSearchService {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param array $advanceSearchData
+	 * @param array $advancedSearchData
 	 */
-	public function extendQueryBuilderByAdvanceSearchData(QueryBuilder $queryBuilder, array $advanceSearchData) {
-		foreach ($advanceSearchData as $key => $ruleData) {
+	public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
+		foreach ($advancedSearchData as $key => $ruleData) {
 			if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData['operator'] === null) {
 				continue;
 			}
-			$filter = $this->advanceSearchConfig->getFilter($ruleData['subject']);
+			$filter = $this->advancedSearchConfig->getFilter($ruleData['subject']);
 			$filter->extendQueryBuilder($queryBuilder, $ruleData['operator'], $ruleData['value']);
 		}
 	}

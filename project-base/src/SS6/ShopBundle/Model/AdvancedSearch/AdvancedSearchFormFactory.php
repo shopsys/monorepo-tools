@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvanceSearch;
+namespace SS6\ShopBundle\Model\AdvancedSearch;
 
-use SS6\ShopBundle\Form\Admin\AdvanceSearch\AdvanceSearchTranslation;
-use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig;
+use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class AdvanceSearchFormFactory {
+class AdvancedSearchFormFactory {
 
 	/**
 	 * @var \Symfony\Component\Form\FormFactoryInterface
@@ -14,23 +14,23 @@ class AdvanceSearchFormFactory {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
 	 */
-	private $advanceSearchConfig;
+	private $advancedSearchConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchTranslation
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchTranslation
 	 */
-	private $advanceSearchTranslation;
+	private $advancedSearchTranslation;
 
 	public function __construct(
 		FormFactoryInterface $formFactory,
-		AdvanceSearchConfig $advanceSearchConfig,
-		AdvanceSearchTranslation $advanceSearchTranslation
+		AdvancedSearchConfig $advancedSearchConfig,
+		AdvancedSearchTranslation $advancedSearchTranslation
 	) {
 		$this->formFactory = $formFactory;
-		$this->advanceSearchConfig = $advanceSearchConfig;
-		$this->advanceSearchTranslation = $advanceSearchTranslation;
+		$this->advancedSearchConfig = $advancedSearchConfig;
+		$this->advancedSearchTranslation = $advancedSearchTranslation;
 	}
 
 	/**
@@ -42,7 +42,7 @@ class AdvanceSearchFormFactory {
 		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, ['csrf_protection' => false]);
 
 		foreach ($rulesData as $ruleKey => $ruleData) {
-			$ruleFilter = $this->advanceSearchConfig->getFilter($ruleData['subject']);
+			$ruleFilter = $this->advancedSearchConfig->getFilter($ruleData['subject']);
 			$formBuilder->add($this->createRuleFormBuilder($ruleKey, $ruleFilter));
 		}
 
@@ -54,10 +54,10 @@ class AdvanceSearchFormFactory {
 
 	/**
 	 * @param string $name
-	 * @param \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFilterInterface $ruleFilter
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
 	 * @return \Symfony\Component\Form\Form
 	 */
-	private function createRuleFormBuilder($name, AdvanceSearchFilterInterface $ruleFilter) {
+	private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter) {
 		$filterFormBuilder = $this->formFactory->createNamedBuilder($name)
 			->add('subject', 'choice', [
 					'choices' => $this->getSubjectChoices(),
@@ -75,13 +75,13 @@ class AdvanceSearchFormFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFilterInterface $filter
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
 	 * @return string[]
 	 */
-	private function getFilterOperatorChoices(AdvanceSearchFilterInterface $filter) {
+	private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter) {
 		$choices = [];
 		foreach ($filter->getAllowedOperators() as $operator) {
-			$choices[$operator] = $this->advanceSearchTranslation->translateOperator($operator);
+			$choices[$operator] = $this->advancedSearchTranslation->translateOperator($operator);
 		}
 
 		return $choices;
@@ -92,8 +92,8 @@ class AdvanceSearchFormFactory {
 	 */
 	private function getSubjectChoices() {
 		$choices = [];
-		foreach ($this->advanceSearchConfig->getAllFilters() as $filter) {
-			$choices[$filter->getName()] = $this->advanceSearchTranslation->translateFilterName($filter->getName());
+		foreach ($this->advancedSearchConfig->getAllFilters() as $filter) {
+			$choices[$filter->getName()] = $this->advancedSearchTranslation->translateFilterName($filter->getName());
 		}
 
 		return $choices;

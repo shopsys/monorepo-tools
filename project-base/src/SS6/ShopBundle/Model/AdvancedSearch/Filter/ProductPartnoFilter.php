@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvanceSearch\Filter;
+namespace SS6\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
-use SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class ProductPartnoFilter implements AdvanceSearchFilterInterface {
+class ProductPartnoFilter implements AdvancedSearchFilterInterface {
 
 	/**
 	 * {@inheritdoc}

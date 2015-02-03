@@ -1,0 +1,15 @@
+{% form_theme rulesForm getDefaultFormTheme() %}
+{% for key, ruleForm in rulesForm %}
+	{% set isTemplate = key is same as('__template__') %}
+	<div
+		class="js-advanced-search-rule{{ isTemplate ? ' display-none' : '' }}"
+		{{- isTemplate ? ' id="js-advanced-search-rule-template"' : '' -}}
+	>
+		{{ form_widget(ruleForm.subject, { attr: { class: 'js-advanced-search-rule-subject' }}) }}
+		{{ form_widget(ruleForm.operator, { attr: { class: 'js-advanced-search-rule-operator' }}) }}
+		<span class="js-advanced-search-rule-value">
+			{{ form_widget(ruleForm.value) }}
+		</span>
+		<i class="fa fa-delete cursor-pointer js-advanced-search-remove-rule-button"></i>
+	</div>
+{% endfor %}

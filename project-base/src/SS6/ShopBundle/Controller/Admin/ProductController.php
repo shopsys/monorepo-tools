@@ -118,19 +118,19 @@ class ProductController extends Controller {
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
 		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
-		$advanceSearchFacade = $this->get('ss6.shop.advance_search.advance_search_facade');
-		/* @var $advanceSearchFacade \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFacade */
+		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
+		/* @var $advancedSearchFacade \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade */
 
-		$advanceSearchForm = $advanceSearchFacade->createAdvanceSearchForm($request);
-		$advanceSearchData = $advanceSearchForm->getData();
+		$advancedSearchForm = $advancedSearchFacade->createAdvancedSearchForm($request);
+		$advancedSearchData = $advancedSearchForm->getData();
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
 		$quickSearchForm->handleRequest($request);
 		$quickSearchData = $quickSearchForm->getData();
 
-		$isAdvanceSearchFormSubmitted = $advanceSearchFacade->isAdvanceSearchFormSubmitted($request);
-		if ($isAdvanceSearchFormSubmitted) {
-			$queryBuilder = $advanceSearchFacade->getQueryBuilderByAdvanceSearchData($advanceSearchData);
+		$isAdvancedSearchFormSubmitted = $advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+		if ($isAdvancedSearchFormSubmitted) {
+			$queryBuilder = $advancedSearchFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
 		} else {
 			$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
 		}
@@ -157,8 +157,8 @@ class ProductController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
-			'advanceSearchForm' => $advanceSearchForm->createView(),
-			'isAdvanceSearchFormSubmitted' => $advanceSearchFacade->isAdvanceSearchFormSubmitted($request),
+			'advancedSearchForm' => $advancedSearchForm->createView(),
+			'isAdvancedSearchFormSubmitted' => $advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
 		]);
 	}
 
@@ -187,16 +187,16 @@ class ProductController extends Controller {
 	}
 
 	/**
-	 * @Route("/product/get-advance-search-rule-form/", methods={"post"})
+	 * @Route("/product/get-advanced-search-rule-form/", methods={"post"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function getRuleFormAction(Request $request) {
-		$advanceSearchFacade = $this->get('ss6.shop.advance_search.advance_search_facade');
-		/* @var $advanceSearchFacade \SS6\ShopBundle\Model\AdvanceSearch\AdvanceSearchFacade */
+		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
+		/* @var $advancedSearchFacade \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade */
 
-		$ruleForm = $advanceSearchFacade->createRuleForm($request->get('filterName'));
+		$ruleForm = $advancedSearchFacade->createRuleForm($request->get('filterName'));
 
-		return $this->render('@SS6Shop/Admin/Content/Product/AdvanceSearch/ruleForm.html.twig', [
+		return $this->render('@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),
 		]);
 	}
