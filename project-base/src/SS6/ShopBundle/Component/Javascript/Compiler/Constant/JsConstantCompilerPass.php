@@ -28,7 +28,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface {
 		$jsConstantCalls = $this->jsConstantCallParser->parse($node);
 
 		foreach ($jsConstantCalls as $jsConstantCall) {
-			$constantNameArgumentNode = $jsConstantCall->getConstantNameArgumentNode();
+			$callExprNode = $jsConstantCall->getCallExprNode();
 			$constantName = $jsConstantCall->getConstantName();
 
 			if (!defined($constantName)) {
@@ -46,7 +46,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface {
 				);
 			}
 
-			$constantNameArgumentNode->terminate(json_encode($constantValue));
+			$callExprNode->terminate(json_encode($constantValue));
 		}
 	}
 

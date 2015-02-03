@@ -19,8 +19,8 @@ class JsConstantCompilerPassTest extends FunctionalTestCase {
 		$result = $jsCompiler->compile($content);
 
 		$expectedResult = <<<EOD
-var x = SS6.constant ( "bar" );
-var y = SS6.constant ( "bar2" );
+var x = "bar";
+var y = "bar2";
 EOD;
 
 		$this->assertEquals($expectedResult, $result);

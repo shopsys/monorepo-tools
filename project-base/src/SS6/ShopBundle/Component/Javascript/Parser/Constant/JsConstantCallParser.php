@@ -54,7 +54,6 @@ class JsConstantCallParser {
 
 				$jsConstantCalls[] = new JsConstantCall(
 					$callExprNode,
-					$constantNameArgumentNode,
 					$constantName
 				);
 			}
