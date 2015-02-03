@@ -41,7 +41,9 @@
 	};
 
 	SS6.advancedSearch.registerEnableButton = function ($enableButton, $quickSearch, $advancedSearch) {
-		if ($enableButton.size() > 0) {
+		if ($advancedSearch.hasClass('js-advanced-search-enabled')) {
+			$quickSearch.remove();
+		} else if ($enableButton.size() > 0) {
 			$advancedSearch.detach();
 			$enableButton.click(function () {
 				$quickSearch.replaceWith($advancedSearch.show());

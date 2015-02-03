@@ -1,4 +1,4 @@
-<div class="mb-1 wrap-box form-inline mb-1 mt-1{{ isAdvancedSearchFormSubmitted ? '' : ' display-none'}}" id="js-advanced-search">
+<div class="mb-1 wrap-box form-inline mb-1 mt-1{{ isAdvancedSearchFormSubmitted ? ' js-advanced-search-enabled' : ' display-none'}}" id="js-advanced-search">
 	<div class="mb-1" id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
 		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig' with {rulesForm: advancedSearchForm} %}
 	</div>

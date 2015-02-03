@@ -8,9 +8,9 @@
 		<div class="col-xs-12 col-lg-10">
 			{{ form_start(quickSearchForm) }}
 
-				{% if not isAdvancedSearchFormSubmitted %}
+				<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
 					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
-				{% endif %}
+				</div>
 
 				{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
 					with {
