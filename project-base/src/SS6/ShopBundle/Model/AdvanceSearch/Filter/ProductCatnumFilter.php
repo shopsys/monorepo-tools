@@ -20,8 +20,8 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 	 */
 	public function getAllowedOperators() {
 		return [
-			self::OPERATOR_CONTAIN,
-			self::OPERATOR_NOT_CONTAIN,
+			self::OPERATOR_CONTAINS,
+			self::OPERATOR_NOT_CONTAINS,
 			self::OPERATOR_NOT_SET,
 		];
 	}
@@ -64,9 +64,9 @@ class ProductCatnumFilter implements AdvanceSearchFilterInterface {
 	 */
 	private function getDqlOperator($operator) {
 		switch ($operator) {
-			case self::OPERATOR_CONTAIN:
+			case self::OPERATOR_CONTAINS:
 				return 'LIKE';
-			case self::OPERATOR_NOT_CONTAIN:
+			case self::OPERATOR_NOT_CONTAINS:
 				return 'NOT LIKE';
 		}
 	}

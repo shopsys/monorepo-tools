@@ -26,8 +26,8 @@ class AdvanceSearchTranslation {
 		$this->translator = $translator;
 
 		$this->operatorsTranslations = [
-			AdvanceSearchFilterInterface::OPERATOR_CONTAIN => $this->translator->trans('obsahuje'),
-			AdvanceSearchFilterInterface::OPERATOR_NOT_CONTAIN => $this->translator->trans('neobsahuje'),
+			AdvanceSearchFilterInterface::OPERATOR_CONTAINS => $this->translator->trans('obsahuje'),
+			AdvanceSearchFilterInterface::OPERATOR_NOT_CONTAINS => $this->translator->trans('neobsahuje'),
 			AdvanceSearchFilterInterface::OPERATOR_NOT_SET => $this->translator->trans('není zadáno'),
 			AdvanceSearchFilterInterface::OPERATOR_IS => $this->translator->trans('je'),
 			AdvanceSearchFilterInterface::OPERATOR_IS_NOT => $this->translator->trans('není'),
