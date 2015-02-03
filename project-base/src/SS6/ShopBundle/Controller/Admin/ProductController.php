@@ -194,7 +194,7 @@ class ProductController extends Controller {
 		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
 		/* @var $advancedSearchFacade \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade */
 
-		$ruleForm = $advancedSearchFacade->createRuleForm($request->get('filterName'));
+		$ruleForm = $advancedSearchFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
 		return $this->render('@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),

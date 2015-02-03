@@ -59,8 +59,10 @@ class AdvancedSearchFacade {
 	 * @param string $filterName
 	 * @return \Symfony\Component\Form\Form
 	 */
-	public function createRuleForm($filterName) {
-		$rulesData = [$this->advancedSearchService->createDefaultRuleFormData($filterName)];
+	public function createRuleForm($filterName, $index) {
+		$rulesData = [
+			$index => $this->advancedSearchService->createDefaultRuleFormData($filterName),
+		];
 
 		return $this->advancedSearchFormFactory->createRulesForm(self::RULES_FORM_NAME, $rulesData);
 	}

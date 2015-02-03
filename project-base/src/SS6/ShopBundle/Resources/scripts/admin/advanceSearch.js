@@ -30,7 +30,8 @@
 
 		$rulesContainer.on('change', '.js-advanced-search-rule-subject', function () {
 			var $rule = $(this).closest('.js-advanced-search-rule');
-			SS6.advancedSearch.actualizeRule($rulesContainer, $rule, $(this).val());
+			SS6.advancedSearch.actualizeRule($rulesContainer, $rule, $(this).val(), 'new_' + newRuleIndexCounter);
+			newRuleIndexCounter++;
 		});
 
 		$rulesContainer.on('change', '.js-advanced-search-rule-operator', function () {
@@ -49,12 +50,15 @@
 		}
 	}
 
-	SS6.advancedSearch.actualizeRule = function ($rulesContainer, $rule, filterName) {
+	SS6.advancedSearch.actualizeRule = function ($rulesContainer, $rule, filterName, newIndex) {
 		$rule.addClass('advanced-search-rule-disabled');
 		$.ajax({
 			url: $rulesContainer.data('rule-form-url'),
 			type: 'post',
-			data: {filterName: filterName},
+			data: {
+				filterName: filterName,
+				newIndex: newIndex
+			},
 			success: function(data) {
 				var $newRule = $($.parseHTML(data));
 				$rule.replaceWith($newRule);
