@@ -28,10 +28,9 @@ class ProductListAdminRepository {
 	}
 
 	/**
-	 * @param array|null $searchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getQueryBuilderByQuickSearchData($pricingGroupId, array $searchData = null) {
+	public function getProductListQueryBuilder($pricingGroupId) {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
 			->select('p, pt, COALESCE(pmip.inputPrice, p.price) AS priceForProductList')
@@ -47,16 +46,15 @@ class ProductListAdminRepository {
 				'locale' => $this->localization->getDefaultLocale(),
 				'pricingGroupId' => $pricingGroupId,
 			]);
-		$this->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
 
 		return $queryBuilder;
 	}
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param type $searchData
+	 * @param array $searchData
 	 */
-	private function extendQueryBuilderByQuickSearchData(QueryBuilder $queryBuilder, $searchData) {
+	public function extendQueryBuilderByQuickSearchData(QueryBuilder $queryBuilder, $searchData) {
 		if ($searchData['text'] !== null && $searchData['text'] !== '') {
 			$queryBuilder->andWhere('
 				(

@@ -82,6 +82,27 @@ services:
   ss6.shop.administrator.administrator_service:
     class: SS6\ShopBundle\Model\Administrator\AdministratorService
 
+  ss6.shop.advanced_search.advanced_search_config:
+    class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+
+  ss6.shop.advanced_search.advanced_search_facade:
+    class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
+
+  ss6.shop.advanced_search.advanced_search_form_factory:
+    class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFormFactory
+
+  ss6.shop.advanced_search.advanced_search_service:
+    class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService
+
+  ss6.shop.advanced_search.filter.product_catnum_fitler:
+    class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter
+
+  ss6.shop.advanced_search.filter.product_name_fitler:
+    class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductNameFilter
+
+  ss6.shop.advanced_search.filter.product_partno_fitler:
+    class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter
+
   ss6.shop.article.article_edit_facade:
     class: SS6\ShopBundle\Model\Article\ArticleEditFacade
 
