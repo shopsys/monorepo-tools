@@ -7,10 +7,10 @@ use Exception;
 class InvalidCountOfAliasesException extends Exception {
 
 	/**
-	 * @param mixed $criteria
+	 * @param array|null $rootAliases
 	 * @param \Exception $previous
 	 */
-	public function __construct($criteria, Exception $previous = null) {
-		parent::__construct('Query builder has invalid count of root aliases ' . Debug::export($criteria), 0, $previous);
+	public function __construct(array $rootAliases = null, Exception $previous = null) {
+		parent::__construct('Query builder has invalid count of root aliases ' . Debug::export($rootAliases), 0, $previous);
 	}
 }
