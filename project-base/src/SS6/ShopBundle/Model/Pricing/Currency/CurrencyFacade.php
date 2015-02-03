@@ -101,6 +101,7 @@ class CurrencyFacade {
 		$currency = $this->currencyRepository->getById($currencyId);
 		$this->currencyService->edit($currency, $currencyData, $this->isDefaultCurrency($currency));
 		$this->em->flush();
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 
 		return $currency;
 	}

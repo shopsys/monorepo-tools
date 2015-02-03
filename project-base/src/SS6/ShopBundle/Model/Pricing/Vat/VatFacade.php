@@ -153,6 +153,8 @@ class VatFacade {
 		$this->em->remove($oldVat);
 		$this->em->flush();
 		$this->em->commit();
+
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**
@@ -169,7 +171,6 @@ class VatFacade {
 	 */
 	public function setDefaultVat(Vat $vat) {
 		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON);
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**
