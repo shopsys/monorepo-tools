@@ -135,6 +135,8 @@ class CartController extends Controller {
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
 				$flashMessageSender->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
 			}
+		} else {
+			$flashMessageSender->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
 		}
 
 		if ($request->isXmlHttpRequest()) {
