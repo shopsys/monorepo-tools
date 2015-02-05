@@ -244,6 +244,9 @@ services:
   ss6.shop.customer.mail.customer_mail_service:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
 
+  ss6.shop.customer.registration_facade:
+    class: SS6\ShopBundle\Model\Customer\RegistrationFacade
+
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService
 

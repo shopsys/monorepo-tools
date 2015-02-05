@@ -35,8 +35,26 @@ class UserRepository {
 	public function findUserByEmailAndDomain($email, $domainId) {
 		return $this->getUserRepository()->findOneBy([
 			'email' => mb_strtolower($email),
-			'domainId' => $domainId,	
+			'domainId' => $domainId,
 		]);
+	}
+
+	/**
+	 * @param string $email
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 */
+	public function getUserByEmailAndDomain($email, $domainId) {
+		$user = $this->findUserByEmailAndDomain($email, $domainId);
+
+		if ($user === null) {
+			throw new \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException(
+				$email,
+				$domainId
+			);
+		}
+
+		return $user;
 	}
 
 	/**
