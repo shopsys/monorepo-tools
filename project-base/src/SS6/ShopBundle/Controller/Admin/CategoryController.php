@@ -100,13 +100,11 @@ class CategoryController extends Controller {
 	 * @Route("/category/list/")
 	 */
 	public function listAction() {
-		$categoryGridFactory = $this->get('ss6.shop.category.category_grid_factory');
-		/* @var $categoryGridFactory \SS6\ShopBundle\Model\Category\Grid\CategoryGridFactory */
-
-		$grid = $categoryGridFactory->create();
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
-			'gridView' => $grid->createView(),
+			'rootCategories' => $categoryFacade->getAllInRootEagerLoaded(),
 		]);
 	}
 

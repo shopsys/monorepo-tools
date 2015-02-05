@@ -32,3 +32,35 @@
 	pointer-events: none;
 	.opacity(.45);
 }
+
+.category-tree-sorting {
+	ul {
+		width: 700px;
+		ul {
+			width: auto;
+		}
+		list-style: none;
+		margin: 0px 0px 0px 20px;
+		padding: 0px;
+		.js-category-tree-sorting-item-line {
+			border: 1px #FFFFFF dotted;
+			background-color: #FFFFFF;
+			&:hover {
+				border-color: #AAAAAA;
+			}
+		}
+		.js-category-tree-sorting-item-handle {
+			cursor: move;
+			padding: 5px;
+			display: inline-block;
+			min-width: 400px;
+		}
+		.js-category-tree-sorting-item-icons {
+			float: right;
+			padding: 5px;
+		}
+	}
+	.js-category-tree-sorting-placeholder {
+		outline: 1px dashed red;
+	}
+}

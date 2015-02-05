@@ -102,6 +102,13 @@ class CategoryFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
+	public function getAllInRootEagerLoaded() {
+		return $this->categoryRepository->getAllInRootEagerLoaded();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
 	public function getAll() {
 		return $this->categoryRepository->getAll();
 	}
