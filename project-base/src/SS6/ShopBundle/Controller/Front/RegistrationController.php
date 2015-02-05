@@ -67,4 +67,8 @@ class RegistrationController extends Controller {
 		$this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
 	}
 
+	public function resetPasswordAction(Request $request) {
+
+	}
+
 }

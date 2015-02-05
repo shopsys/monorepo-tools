@@ -59,3 +59,7 @@ front_product_detail:
 front_registration_register:
   pattern: /registration/
   defaults: { _controller: SS6ShopBundle:Front\Registration:register }
+
+front_registration_reset_password:
+  pattern: /forgotten-password/
+  defaults: { _controller: SS6ShopBundle:Front\Registration:resetPassword }
