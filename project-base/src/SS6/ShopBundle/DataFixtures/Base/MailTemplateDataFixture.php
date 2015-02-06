@@ -15,6 +15,8 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$mailTemplateData = new MailTemplateData();
+		$mailTemplateData->sendMail = true;
+
 		$mailTemplateData->subject = 'Děkujeme za objednávku č. {number} ze dne {date}';
 		$mailTemplateData->body = 'Dobrý den,<br /><br />'
 			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
@@ -31,7 +33,6 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Produkty: {products} <br />'
 			. '{transport_instructions} <br />'
 			. '{payment_instructions}';
-		$mailTemplateData->sendMail = true;
 
 		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
@@ -55,6 +56,13 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Vaše objednávka byla stornována.';
 
 		$mailTemplate = new MailTemplate('order_status_4', 1, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData->subject = 'Žádost o nové heslo';
+		$mailTemplateData->body = 'Dobrý den.<br /><br />'
+			. 'Nové heslo nastavíte zde: {new_password_url}';
+
+		$mailTemplate = new MailTemplate(MailTemplate::RESET_PASSWORD_NAME, 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$mailTemplateData->subject = 'Potvrzení registrace';
@@ -106,6 +114,13 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Přihlašovací stránka: {login_page}';
 
 		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 2, $mailTemplateData);
+		$manager->persist($mailTemplate);
+
+		$mailTemplateData->subject = 'Žádost o nové heslo';
+		$mailTemplateData->body = 'Dobrý den.<br /><br />'
+			. 'Nové heslo nastavíte zde: {new_password_url}';
+
+		$mailTemplate = new MailTemplate(MailTemplate::RESET_PASSWORD_NAME, 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
 
 		$manager->flush();

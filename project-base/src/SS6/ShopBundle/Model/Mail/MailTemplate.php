@@ -17,6 +17,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplateData;
 class MailTemplate {
 
 	const REGISTRATION_CONFIRM_NAME = 'registration_confirm';
+	const RESET_PASSWORD_NAME = 'reset_password';
 
 	/**
 	 * @ORM\Column(name="id", type="integer")

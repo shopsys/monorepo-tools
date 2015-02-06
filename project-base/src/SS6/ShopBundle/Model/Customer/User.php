@@ -98,6 +98,18 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	private $pricingGroup;
 
 	/**
+	 * @var string|null
+	 * @ORM\Column(type="string", length=50, nullable=true)
+	 */
+	private $resetPasswordHash;
+
+	/**
+	 * @var \DateTime|null
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $resetPasswordHashValidThrough;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
@@ -138,6 +150,16 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function changePassword($password) {
 		$this->password = $password;
+	}
+
+	/**
+	 * @param string $hash
+	 */
+	public function setResetPasswordHash($hash) {
+		$validThrough = new DateTime();
+		$validThrough->modify('+48 hours');
+		$this->resetPasswordHash = $hash;
+		$this->resetPasswordHashValidThrough = $validThrough;
 	}
 
 	/**
@@ -268,6 +290,13 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function getPricingGroup() {
 		return $this->pricingGroup;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getResetPasswordHash() {
+		return $this->resetPasswordHash;
 	}
 
 	/**

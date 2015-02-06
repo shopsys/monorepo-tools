@@ -63,3 +63,7 @@ front_registration_register:
 front_registration_reset_password:
   pattern: /zapomenute-heslo/
   defaults: { _controller: SS6ShopBundle:Front\Registration:resetPassword }
+
+front_registration_set_new_password:
+  pattern: /nove-heslo/
+  defaults: { _controller: SS6ShopBundle:Front\Registration:setNewPassword }

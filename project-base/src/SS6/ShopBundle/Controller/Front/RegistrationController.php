@@ -105,4 +105,8 @@ class RegistrationController extends Controller {
 		]);
 	}
 
+	public function setNewPasswordAction(Request $request) {
+
+	}
+
 }
