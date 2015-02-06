@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Model\Customer;
 
+use DateTime;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
@@ -166,6 +167,67 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$deliveryAddress2,
 			$user1
 		);
+	}
+
+	public function isResetPasswordHashValidProvider() {
+		return [
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => (new DateTime())->modify('+1 hour'),
+				'isExpectedValid' => true,
+			],
+			[
+				'resetPasswordHash' => null,
+				'resetPasswordHashValidThrough' => (new DateTime())->modify('+1 hour'),
+				'isExpectedValid' => false,
+			],
+			[
+				'resetPasswordHash' => 'invalidHash',
+				'resetPasswordHashValidThrough' => (new DateTime())->modify('+1 hour'),
+				'isExpectedValid' => false,
+			],
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => null,
+				'isExpectedValid' => false,
+			],
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => (new DateTime())->modify('-1 hour'),
+				'isExpectedValid' => false,
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider isResetPasswordHashValidProvider
+	 */
+	public function testIsResetPasswordHashValid(
+		$resetPasswordHash,
+		$resetPasswordHashValidThrough,
+		$isExpectedValid
+	) {
+		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
+
+		$userMock = $this->getMockBuilder(User::class)
+			->disableOriginalConstructor()
+			->setMethods(['getResetPasswordHash', 'getResetPasswordHashValidThrough'])
+			->getMock();
+
+		$userMock->expects($this->any())->method('getResetPasswordHash')
+			->willReturn($resetPasswordHash);
+		$userMock->expects($this->any())->method('getResetPasswordHashValidThrough')
+			->willReturn($resetPasswordHashValidThrough);
+
+		$isResetPasswordHashValid = $registrationService->isResetPasswordHashValid($userMock, 'validHash');
+
+		$this->assertEquals($isExpectedValid, $isResetPasswordHashValid);
 	}
 
 }
