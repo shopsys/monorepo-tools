@@ -62,6 +62,7 @@ class MailTemplate {
 
 	/**
 	 * @param string $name
+	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
 	public function __construct($name, $domainId, MailTemplateData $mailTemplateData) {
