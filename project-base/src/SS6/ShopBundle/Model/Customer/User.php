@@ -23,6 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   }
  * )
  * @ORM\Entity
+ *
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
@@ -150,6 +152,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 */
 	public function changePassword($password) {
 		$this->password = $password;
+		$this->resetPasswordHash = null;
+		$this->resetPasswordHashValidThrough = null;
 	}
 
 	/**
@@ -293,10 +297,17 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getResetPasswordHash() {
 		return $this->resetPasswordHash;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getResetPasswordHashValidThrough() {
+		return $this->resetPasswordHashValidThrough;
 	}
 
 	/**

@@ -50,6 +50,7 @@ class UrlsProvider {
 		'admin_login' => 302,
 		'admin_logout' => 302,
 		'front_logout' => 302,
+		'front_registration_set_new_password' => 302,
 	];
 
 	/**
@@ -79,7 +80,7 @@ class UrlsProvider {
 				return ['code' => 404, '_format' => 'html'];
 
 			case 'front_registration_set_new_password':
-				return ['email' => 'no-reply@netdevelo.cz', 'hash' => 'test'];
+				return ['email' => 'no-reply@netdevelo.cz', 'hash' => 'invalidHash'];
 
 			default:
 				$parameters = [];
