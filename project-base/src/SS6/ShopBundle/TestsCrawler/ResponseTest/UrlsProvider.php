@@ -78,6 +78,9 @@ class UrlsProvider {
 			case 'front_error_page_format':
 				return ['code' => 404, '_format' => 'html'];
 
+			case 'front_registration_set_new_password':
+				return ['email' => 'no-reply@netdevelo.cz', 'hash' => 'test'];
+
 			default:
 				$parameters = [];
 				foreach ($this->getRouteParametersNames($route) as $parameterName) {

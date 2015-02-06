@@ -15,8 +15,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreate() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress = new BillingAddress(new BillingAddressData());
 		$deliveryAddress = new DeliveryAddress(new DeliveryAddressData());
@@ -39,8 +43,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateNotDuplicateEmail() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress1 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
@@ -78,8 +86,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateDuplicateEmail() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress1 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
@@ -116,8 +128,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateDuplicateEmailCaseInsentitive() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress1 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());

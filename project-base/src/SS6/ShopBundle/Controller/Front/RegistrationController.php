@@ -106,7 +106,7 @@ class RegistrationController extends Controller {
 	}
 
 	public function setNewPasswordAction(Request $request) {
-
+		return $this->render('TODO');
 	}
 
 }
