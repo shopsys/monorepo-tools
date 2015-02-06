@@ -73,14 +73,6 @@ class Category extends AbstractTranslatableEntity {
 	private $rgt;
 
 	/**
-	 * @var int|null
-	 *
-	 * @Gedmo\TreeRoot
-	 * @ORM\Column(type="integer", nullable=true)
-	 */
-	private $root;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	public function __construct(CategoryData $categoryData) {
@@ -152,13 +144,6 @@ class Category extends AbstractTranslatableEntity {
 	 */
 	public function getRgt() {
 		return $this->rgt;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getRoot() {
-		return $this->root;
 	}
 
 	/**

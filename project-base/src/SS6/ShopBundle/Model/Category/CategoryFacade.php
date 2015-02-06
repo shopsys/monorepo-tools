@@ -55,7 +55,8 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function create(CategoryData $categoryData) {
-		$category = $this->categoryService->create($categoryData);
+		$rootCategory = $this->categoryRepository->getRootCategory();
+		$category = $this->categoryService->create($categoryData, $rootCategory);
 		$this->em->persist($category);
 		$this->em->flush();
 
@@ -68,8 +69,9 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function edit($categoryId, CategoryData $categoryData) {
+		$rootCategory = $this->categoryRepository->getRootCategory();
 		$category = $this->categoryRepository->getById($categoryId);
-		$this->categoryService->edit($category, $categoryData);
+		$this->categoryService->edit($category, $categoryData, $rootCategory);
 		$this->em->flush();
 
 		return $category;

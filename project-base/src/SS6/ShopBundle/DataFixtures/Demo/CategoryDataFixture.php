@@ -1,13 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace SS6\ShopBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 
-class CategoryDataFixture extends AbstractReferenceFixture {
+class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	const ELECTRONICS = 'category_electronics';
 	const TV = 'category_tv';
@@ -26,6 +28,7 @@ class CategoryDataFixture extends AbstractReferenceFixture {
 		$categoryData = new CategoryData();
 
 		$categoryData->name = ['cs' => 'Elektro', 'en' => 'Electronics'];
+		$categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
 		$electronicsCategory = $this->createCategory($manager, self::ELECTRONICS, $categoryData);
 
 		$categoryData->name = ['cs' => 'Televize, audio', 'en' => 'TV, audio'];
@@ -48,7 +51,7 @@ class CategoryDataFixture extends AbstractReferenceFixture {
 		$this->createCategory($manager, self::COFFEE, $categoryData);
 
 		$categoryData->name = ['cs' => 'Knihy', 'en' => 'Books'];
-		$categoryData->parent = null;
+		$categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
 		$this->createCategory($manager, self::BOOKS, $categoryData);
 
 		$categoryData->name = ['cs' => 'Hračky a další', 'en' => null];
@@ -68,6 +71,15 @@ class CategoryDataFixture extends AbstractReferenceFixture {
 		$this->addReference($referenceName, $category);
 
 		return $category;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return [
+			CategoryRootDataFixture::class,
+		];
 	}
 
 }

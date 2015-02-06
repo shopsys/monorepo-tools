@@ -28,10 +28,29 @@ class CategoryRepository {
 	}
 
 	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllQueryBuilder() {
+		return $this->getCategoryRepository()
+			->createQueryBuilder('c')
+			->where('c.parent IS NOT NULL')
+			->orderBy('c.lft');
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAll() {
-		return $this->getCategoryRepository()->findBy([], ['root' => 'ASC', 'lft' => 'ASC']);
+		return $this->getAllQueryBuilder()
+			->getQuery()
+			->getResult();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
+	public function getRootCategory() {
+		return $this->getCategoryRepository()->findOneBy(['parent' => null]);
 	}
 
 	/**
@@ -39,12 +58,8 @@ class CategoryRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllWithoutBranch(Category $categoryBranch) {
-		return $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
-			->where('c.root != :branchRoot OR c.lft < :branchLft OR c.rgt > :branchRgt')
-			->orderBy('c.root, c.lft', 'ASC')
-			->setParameter('branchRoot', $categoryBranch->getRoot())
+		return $this->getAllQueryBuilder()
+			->andWhere('c.lft < :branchLft OR c.rgt > :branchRgt')
 			->setParameter('branchLft', $categoryBranch->getLft())
 			->setParameter('branchRgt', $categoryBranch->getRgt())
 			->getQuery()
@@ -79,7 +94,7 @@ class CategoryRepository {
 	 */
 	public function getAllInRootWithTranslation($locale) {
 		return $this->getAllWithTranslationQueryBuilder($locale)
-			->andWhere('c.level = 0')
+			->andWhere('c.level = 1')
 			->getQuery()
 			->execute();
 	}
@@ -88,17 +103,14 @@ class CategoryRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllInRootEagerLoaded() {
-		$allCategories = $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
+		$allCategories = $this->getAllQueryBuilder()
 			->join('c.translations', 'ct')
-			->orderBy('c.root, c.lft', 'ASC')
 			->getQuery()
 			->execute();
 
 		$rootCategories = [];
 		foreach ($allCategories as $cateogry) {
-			if ($cateogry->getLevel() === 0) {
+			if ($cateogry->getLevel() === 1) {
 				$rootCategories[] = $cateogry;
 			}
 		}
@@ -111,12 +123,9 @@ class CategoryRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getAllWithTranslationQueryBuilder($locale) {
-		$qb = $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
+		$qb = $this->getAllQueryBuilder()
 			->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
-			->where('ct.name IS NOT NULL')
-			->orderBy('c.root, c.lft', 'ASC');
+			->andWhere('ct.name IS NOT NULL');
 		$qb->setParameter('locale', $locale);
 
 		return $qb;
