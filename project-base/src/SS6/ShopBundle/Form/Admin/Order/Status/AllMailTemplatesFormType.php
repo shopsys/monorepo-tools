@@ -25,6 +25,7 @@ class AllMailTemplatesFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('registrationTemplate', new MailTemplateFormType())
+			->add('resetPasswordTemplate', new MailTemplateFormType())
 			->add('orderStatusTemplates', FormType::COLLECTION, [
 				'type' => new MailTemplateFormType(),
 			])

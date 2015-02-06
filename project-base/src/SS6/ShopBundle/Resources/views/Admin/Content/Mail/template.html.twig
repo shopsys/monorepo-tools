@@ -87,6 +87,13 @@
 					registrationVariablesLabels
 				) }}
 
+				{{ _self.mailTemplate(
+					'Zaslání zapomenutého hesla'|trans,
+					form.resetPasswordTemplate,
+					resetPasswordVariables,
+					resetPasswordVariablesLabels
+				) }}
+
 			{{ form_end(form) }}
 
 		</div>
