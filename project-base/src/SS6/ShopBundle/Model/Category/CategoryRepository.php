@@ -4,9 +4,10 @@ namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Model\Category\Category;
 
-class CategoryRepository {
+class CategoryRepository extends NestedTreeRepository {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -18,6 +19,8 @@ class CategoryRepository {
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
+		$classMetadata = $this->em->getClassMetadata(Category::class);
+		parent::__construct($this->em, $classMetadata);
 	}
 
 	/**
