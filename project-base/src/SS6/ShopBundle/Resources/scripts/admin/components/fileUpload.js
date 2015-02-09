@@ -2,121 +2,134 @@
 
 	SS6 = window.SS6 || {};
 	SS6.fileUpload = SS6.fileUpload || {};
+	SS6.fileUpload.uploader = SS6.fileUpload.uploader || {};
 
-	SS6.fileUpload.init = function () {
+	$(document).ready(function() {
 		$('.js-file-upload').each(function() {
-			new SS6.fileUpload.uploader($(this));
+			var uploader = new SS6.fileUpload.uploader.constructor($(this));
+			uploader.init();
 		});
-	}
+	});
 
-	SS6.fileUpload.uploader = function ($uploader) {
-		var uploader = this;
-		this.$uploader = $uploader;
-		this.$item = $uploader.find('.js-file-upload-item');
-		this.$uploadedFiles = $uploader.find('.js-file-upload-uploaded-files');
-		this.$uploadedFileTemplate = $($.parseHTML(this.$uploadedFiles.data('prototype').replace(/__name__/g, '')));
-		this.$status = $uploader.find('.js-file-upload-status');
-		this.$fallbackHide = $uploader.find('.js-file-upload-fallback-hide');
-		this.multiple = $uploader.find('input[type=file]').attr('multiple') === 'multiple';
-		this.ready = true;
-		this.items = [];
-		this.lastUploadItemId = null;
+	SS6.fileUpload.uploader.constructor = function($uploader) {
+		var self = this;
+		var $uploadedFiles = $uploader.find('.js-file-upload-uploaded-files');
+		var $status = $uploader.find('.js-file-upload-status');
+		var $fallbackHide = $uploader.find('.js-file-upload-fallback-hide');
+		var multiple = $uploader.find('input[type=file]').attr('multiple') === 'multiple';
+		var deleteUrl = $uploader.data('fileupload-delete-url');
+		var ready = true;
+		var items = [];
+		var lastUploadItemId = null;
 
-		this.$uploadedFileTemplate.find('*[id]').removeAttr('id');
-		this.$uploadedFileTemplate.html(this.$uploadedFileTemplate.html());
+		self.init = function() {
+			$uploader.closest('form').submit(onFormSubmit);
+			initUploadedFiles();
+			initUploader();
+		};
 
-		this.$uploadedFiles.find('.js-file-upload-uploaded-file').each(function () {
-			new SS6.fileUpload.fileItem(uploader, $(this), true);
-		});
+		var initUploadedFiles = function() {
+			$uploadedFiles.find('.js-file-upload-uploaded-file').each(function () {
+				var fileItem = new SS6.fileUpload.fileItem.constructor(self, $(this), true);
+				fileItem.init();
+			});
+		};
 
-		var updateFileStatus = function (status, message) {
-			uploader.$status.parent().stop(true, true).show();
-			uploader.$status.text(message).removeClass('error success uploading').addClass(status);
-		}
+		var initUploader = function() {
+			$uploader.dmUploader({
+				url: $uploader.data('fileupload-url'),
+				dataType: 'json',
+				onBeforeUpload: onBeforeUpload,
+				onNewFile: onUploadNewFile,
+				onComplete: onUploadComplete,
+				onUploadProgress: onUploadProgress,
+				onUploadSuccess: onUploadSuccess,
+				onUploadError: onUploadError,
+				onFallbackMode: onFallbackMode
+			});
+		};
+
+		self.deleteTemporaryFile = function(filename) {
+			$.ajax({
+				url: deleteUrl,
+				type: 'POST',
+				data: {filename: filename},
+				dataType: 'json'
+			});
+		};
+
+		var createNewUploadedFile = function() {
+			var templateHtml = $uploadedFiles.data('prototype').replace(/__name__/g, '');
+			var $uploadedFileTemplate = $($.parseHTML(templateHtml));
+			$uploadedFileTemplate.find('*[id]').removeAttr('id');
+
+			return $uploadedFileTemplate;
+		};
+
+		var updateFileStatus = function(status, message) {
+			$status.parent().stop(true, true).show();
+			$status.text(message).removeClass('error success uploading').addClass(status);
+		};
 
 		var onFormSubmit = function (event) {
-			if (!uploader.ready) {
+			if (!ready) {
 				SS6.window({
 					content: 'Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.'
 				});
 				event.preventDefault();
 			}
-		}
+		};
 
-		this.tryDeleteTemporaryFile = function (filename) {
-			$.ajax({
-				url: uploader.$uploader.data('fileupload-delete-url'),
-				type: 'POST',
-				data: {filename: filename},
-				dataType: 'json'
-			});
-		}
+		var onBeforeUpload = function() {
+			ready = false;
+			updateFileStatus('uploading', 'Nahrávám...');
+		};
 
-		this.removeUploadedFile = function() {
-			SS6.fileUpload.tryDeleteTemporaryFile(uploader);
-			uploader.$hiddenInput.val('');
-			uploader.$item.hide();
-		}
+		var onUploadNewFile = function(id, file) {
+			var $uploadedfile = createNewUploadedFile();
+			$uploadedfile.show();
+			items[id] = new SS6.fileUpload.fileItem.constructor(self, $uploadedfile);
+			items[id].init();
+			items[id].setLabel(file.name, file.size);
+			$uploadedFiles.append($uploadedfile);
+		};
 
-		$uploader.closest('form').bind('submit.file-upload', onFormSubmit);
+		var onUploadComplete = function() {
+			ready = true;
+		};
 
-		$uploader.dmUploader({
-			url: $uploader.data('fileupload-url'),
-			dataType: 'json',
-			onBeforeUpload: function(id){
-				uploader.ready = false;
-				updateFileStatus('uploading', 'Nahrávám...');
-			},
-			onNewFile: function(id, file){
-				var $file = uploader.$uploadedFileTemplate.clone();
-				$file.show();
-				uploader.items[id] = new SS6.fileUpload.fileItem(uploader, $file);
-				uploader.items[id].setLabel(file.name, file.size);
-				uploader.$uploadedFiles.append($file);
-			},
-			onComplete: function(){
-				uploader.ready = true;
-			},
-			onUploadProgress: function(id, percent){
-				uploader.items[id].setProgress(percent);
-				updateFileStatus('uploading', 'Nahrávám...');
-			},
-			onUploadSuccess: function(id, data){
-				if (data.status === 'success') {
-					if (uploader.lastUploadItemId !== null && uploader.multiple === false) {
-						uploader.items[uploader.lastUploadItemId].deleteItem();
-					}
-					uploader.lastUploadItemId = id;
-					uploader.items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
-					updateFileStatus('success', 'Úspěšně nahráno');
-					uploader.$status.parent().fadeOut(4000);
-				} else {
-					uploader.items[id].deleteItem();
-					SS6.window({
-						content: 'Při nahrávání souboru došlo k chybě.'
-					});
+		var onUploadProgress = function(id, percent) {
+			items[id].setProgress(percent);
+			updateFileStatus('uploading', 'Nahrávám...');
+		};
+
+		var onUploadSuccess = function(id, data) {
+			if (data.status === 'success') {
+				if (lastUploadItemId !== null && multiple === false) {
+					items[lastUploadItemId].deleteItem();
 				}
-			},
-			onUploadError: function(id, message){
-				uploader.items[id].deleteItem();
+				lastUploadItemId = id;
+				items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
+				updateFileStatus('success', 'Úspěšně nahráno');
+				$status.parent().fadeOut(4000);
+			} else {
+				items[id].deleteItem();
 				SS6.window({
-					content: 'Při nahrávání souboru došlo k chybě: ' + message
+					content: SS6.translator.trans('Při nahrávání souboru došlo k chybě.')
 				});
-			},
-			onFileTypeError: function(file){
-
-			},
-			onFileSizeError: function(file){
-
-			},
-			onFallbackMode: function(message){
-				uploader.$fallbackHide.hide();
 			}
-		});
-	}
+		};
 
-	$(document).ready(function () {
-		SS6.fileUpload.init();
-	});
+		var onUploadError = function(id, message) {
+			items[id].deleteItem();
+			SS6.window({
+				content: SS6.translator.trans('Při nahrávání souboru došlo k chybě: %message%', {'%message%': message })
+			});
+		};
+
+		var onFallbackMode = function() {
+			$fallbackHide.hide();
+		};
+	};
 
 })(jQuery);
