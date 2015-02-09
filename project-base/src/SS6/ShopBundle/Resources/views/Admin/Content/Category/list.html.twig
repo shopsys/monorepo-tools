@@ -13,7 +13,7 @@
 			{% macro categoryTreeItem(categories, id) %}
 				<ul class="js-category-tree-sorting-items">
 					{% for category in categories %}
-						<li class="js-category-tree-sorting-item">
+						<li class="js-category-tree-sorting-item" id="js-category-tree-{{ category.id }}">
 							<div class="js-category-tree-sorting-item-line">
 								<span class="js-category-tree-sorting-item-handle">{{ category.name }}</span>
 								<span class="js-category-tree-sorting-item-icons">
@@ -46,7 +46,11 @@
 				{{ _self.categoryTreeItem(rootCategories) }}
 			</div>
 
-			<button class="btn btn-primary btn-disabled" id="js-category-tree-sorting-save-button">
+			<button
+				class="btn btn-primary btn-disabled"
+				id="js-category-tree-sorting-save-button"
+				data-category-save-order-url="{{ url('admin_category_saveorder') }}"
+			>
 				{{ 'Uložit změny v pořadí'|trans }}
 			</button>
 

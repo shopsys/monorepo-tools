@@ -94,6 +94,35 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param int[] $parentIdByCategoryId
+	 */
+	public function editOrdering($parentIdByCategoryId) {
+		// optimization, categories will be loaded from identity map
+		$this->categoryRepository->getAll();
+		$rootCategory = $this->categoryRepository->getRootCategory();
+
+		try {
+			$this->em->beginTransaction();
+			foreach ($parentIdByCategoryId as $categoryId => $parentId) {
+				if ($parentId === null) {
+					$parent = $rootCategory;
+				} else {
+					$parent = $this->categoryRepository->getById($parentId);
+				}
+				$category = $this->categoryRepository->getById($categoryId);
+				$category->setParent($parent);
+				$this->categoryRepository->moveDown($category, true);
+			}
+
+			$this->em->flush();
+			$this->em->commit();
+		} catch (\Exception $e) {
+			$this->em->rollback();
+			throw $e;
+		}
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllInRootWithTranslation() {

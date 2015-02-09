@@ -109,6 +109,26 @@ class CategoryController extends Controller {
 	}
 
 	/**
+	 * @Route("/category/save-order/", methods={"post"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function saveOrderAction(Request $request) {
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+
+		$categoryOrderingData = [];
+		foreach ($request->get('categoriesOrderingData') as $categoryOrderingData) {
+			$categoryId = (int)$categoryOrderingData['categoryId'];
+			$parentId = $categoryOrderingData['parentId'] === '' ? null : (int)$categoryOrderingData['parentId'];
+			$parentIdByCategoryId[$categoryId] = $parentId;
+		}
+
+		$categoryFacade->editOrdering($parentIdByCategoryId);
+
+		return $this->render('OK');
+	}
+
+	/**
 	 * @Route("/category/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
