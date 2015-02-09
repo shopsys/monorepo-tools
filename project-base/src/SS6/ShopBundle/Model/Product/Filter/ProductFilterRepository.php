@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Filter;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 
 class ProductFilterRepository {
@@ -59,7 +60,7 @@ class ProductFilterRepository {
 		if ($filterByStock) {
 			$this->queryBuilderService->addOrExtendJoin(
 				$queryBuilder,
-				\SS6\ShopBundle\Model\Product\Availability\Availability::class,
+				Availability::class,
 				'a',
 				'p.calculatedAvailability = a'
 			);
