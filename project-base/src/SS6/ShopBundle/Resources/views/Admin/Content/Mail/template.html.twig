@@ -13,50 +13,50 @@
 
 			{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
 				<div class="toggle-container box-expand">
-						<h2 class ="toggle-headline box-expand__heading">
-							<span class="in-arrows in-arrows--down">
-								{{ name }}
-							</span>
-						</h2>
-						<div class="toggle-content display-none box-expand__hidden">
-							{{ form_row(template.subject, { label: 'Předmět'}) }}
-							{{ form_row(template.body, { label: 'Text'}) }}
-							{% if sendMailText is not null %}
-								{{ form_row(template.sendMail, { label: sendMailText }) }}
-							{% else %}
-								{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
-							{% endif %}
-							{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
+					<h2 class ="toggle-headline box-expand__heading">
+						<span class="in-arrows in-arrows--down">
+							{{ name }}
+						</span>
+					</h2>
+					<div class="toggle-content display-none box-expand__hidden">
+						{{ form_row(template.subject, { label: 'Předmět'}) }}
+						{{ form_row(template.body, { label: 'Text'}) }}
+						{% if sendMailText is not null %}
+							{{ form_row(template.sendMail, { label: sendMailText }) }}
+						{% else %}
+							{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
+						{% endif %}
+						{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
 
-							<div class="table-responsive grid_body mt-1">
-								<table class="table table-dark table-hover">
-									<thead>
-										<tr class="grid-row-titles">
-											<th>
-												{{ 'Použitelné proměnné'|trans }}
-												{% if variablesInfoText is not null %}
-													<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+						<div class="table-responsive grid_body mt-1">
+							<table class="table table-dark table-hover">
+								<thead>
+									<tr class="grid-row-titles">
+										<th>
+											{{ 'Použitelné proměnné'|trans }}
+											{% if variablesInfoText is not null %}
+												<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+											{% endif %}
+										</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for key in variables %}
+										<tr class="grid-row-cells">
+											<td>
+												{{ key }}
+												{% if key in requiredVariables %}
+													<span class="form-input-required">*</span>
 												{% endif %}
-											</th>
-											<th></th>
+											</td>
+											<td>{{ variablesLabels[key] }}</td>
 										</tr>
-									</thead>
-									<tbody>
-										{% for key in variables %}
-											<tr class="grid-row-cells">
-												<td>
-													{{ key }}
-													{% if key in requiredVariables %}
-														<span class="form-input-required">*</span>
-													{% endif %}
-												</td>
-												<td>{{ variablesLabels[key] }}</td>
-											</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-							</div>
+									{% endfor %}
+								</tbody>
+							</table>
 						</div>
+					</div>
 				</div>
 			{% endmacro%}
 
