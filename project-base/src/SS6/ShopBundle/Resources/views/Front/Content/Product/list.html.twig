@@ -30,7 +30,12 @@
 				</div>
 
 				{{ form_row(filterForm.inStock, {label: 'Jen zboží skladem'}) }}
-				{{ form_row(filterForm.parameters, { label: 'Parametry' }) }}
+
+				{% if filterForm.parameters is empty %}
+					{% do filterForm.parameters.setRendered %}
+				{% else %}
+					{{ form_row(filterForm.parameters, { label: 'Parametry' }) }}
+				{% endif %}
 
 				<div class="box-filter__buttons">
 
