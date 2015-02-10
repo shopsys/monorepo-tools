@@ -24,4 +24,9 @@ class ProductFilterData {
 	 */
 	public $inStock;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	public $flags = [];
+
 }

@@ -31,6 +31,12 @@
 
 				{{ form_row(filterForm.inStock, {label: 'Jen zboží skladem'}) }}
 
+				{% if filterForm.flags is empty %}
+					{% do filterForm.flags.setRendered %}
+				{% else %}
+					{{ form_row(filterForm.flags, { label: 'Příznaky' }) }}
+				{% endif %}
+
 				{% if filterForm.parameters is empty %}
 					{% do filterForm.parameters.setRendered %}
 				{% else %}

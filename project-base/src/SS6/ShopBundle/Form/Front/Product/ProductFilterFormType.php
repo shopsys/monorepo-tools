@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Front\Product;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -17,10 +18,17 @@ class ProductFilterFormType extends AbstractType {
 	private $parameterFilterChoices;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
+	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
-	public function __construct(array $parameterFilterChoices) {
+	private $flagFilterChoices;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 */
+	public function __construct(array $parameterFilterChoices, array $flagFilterChoices) {
 		$this->parameterFilterChoices = $parameterFilterChoices;
+		$this->flagFilterChoices = $flagFilterChoices;
 	}
 
 	/**
@@ -57,6 +65,12 @@ class ProductFilterFormType extends AbstractType {
 				'required' => false,
 			])
 			->add('inStock', FormType::CHECKBOX, ['required' => false])
+			->add('flags', FormType::CHOICE, [
+				'required' => false,
+				'expanded' => true,
+				'multiple' => true,
+				'choice_list' => new ObjectChoiceList($this->flagFilterChoices, 'name')
+			])
 			->add('search', FormType::SUBMIT);
 	}
 
