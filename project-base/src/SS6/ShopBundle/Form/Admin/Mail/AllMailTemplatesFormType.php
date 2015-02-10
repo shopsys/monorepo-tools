@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order\Status;
+namespace SS6\ShopBundle\Form\Admin\Mail;
 
 use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
 use SS6\ShopBundle\Form\FormType;

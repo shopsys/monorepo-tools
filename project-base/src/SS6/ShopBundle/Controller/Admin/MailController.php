@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
-use SS6\ShopBundle\Form\Admin\Order\Status\AllMailTemplatesFormType;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
 use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
