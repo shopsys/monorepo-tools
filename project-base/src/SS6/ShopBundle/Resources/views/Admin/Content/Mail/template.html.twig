@@ -11,7 +11,7 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{% macro mailTemplate(name, template, variables, variablesLabels, variablesInfoText, sendMailText) %}
+			{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
 				<div class="toggle-container box-expand">
 						<h2 class ="toggle-headline box-expand__heading">
 							<span class="in-arrows in-arrows--down">
@@ -44,7 +44,12 @@
 									<tbody>
 										{% for key in variables %}
 											<tr class="grid-row-cells">
-												<td>{{ key }}</td>
+												<td>
+													{{ key }}
+													{% if key in requiredVariables %}
+														<span class="form-input-required">*</span>
+													{% endif %}
+												</td>
 												<td>{{ variablesLabels[key] }}</td>
 											</tr>
 										{% endfor %}
@@ -64,6 +69,7 @@
 								orderStatus.name,
 								orderStatusTemplate,
 								orderStatusVariables,
+								[],
 								orderStatusVariablesLabels,
 								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
 								'Zasílat potvrzení o přijetí objednávky'|trans
@@ -73,6 +79,7 @@
 								orderStatus.name,
 								orderStatusTemplate,
 								orderStatusVariables,
+								[],
 								orderStatusVariablesLabels,
 								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
 								'Zasílat e-mail o změně na tento stav'|trans
@@ -84,6 +91,7 @@
 					'Potvrzení registrace'|trans,
 					form.registrationTemplate,
 					registrationVariables,
+					[],
 					registrationVariablesLabels
 				) }}
 
@@ -91,6 +99,7 @@
 					'Zaslání zapomenutého hesla'|trans,
 					form.resetPasswordTemplate,
 					resetPasswordVariables,
+					resetPasswordRequiredVariables,
 					resetPasswordVariablesLabels
 				) }}
 

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
+use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
 use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
@@ -86,10 +86,12 @@ class MailController extends Controller {
 		/* @var $orderMailService \SS6\ShopBundle\Model\Order\Mail\OrderMailService */
 		$resetPasswordMail = $this->get('ss6.shop.customer.mail.reset_password_mail');
 		/* @var $resetPasswordMail \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail */
+		$allMailTemplatesFormTypeFactory = $this->get('ss6.shop.form.admin.mail.all_mail_templates_form_type_factory');
+		/* @var $allMailTemplatesFormTypeFactory \SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory */
 
 		$allMailTemplatesData = $mailTemplateFacade->getAllMailTemplatesDataByDomainId($selectedDomain->getId());
 
-		$form = $this->createForm(new AllMailTemplatesFormType());
+		$form = $this->createForm($allMailTemplatesFormTypeFactory->create());
 
 		$form->setData($allMailTemplatesData);
 		$form->handleRequest($request);
