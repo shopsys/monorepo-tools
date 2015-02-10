@@ -160,10 +160,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @param string $hash
 	 */
 	public function setResetPasswordHash($hash) {
-		$validThrough = new DateTime();
-		$validThrough->modify('+48 hours');
 		$this->resetPasswordHash = $hash;
-		$this->resetPasswordHashValidThrough = $validThrough;
+		$this->resetPasswordHashValidThrough = new DateTime('+48 hours');
 	}
 
 	/**

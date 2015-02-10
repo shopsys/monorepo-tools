@@ -173,17 +173,17 @@ class RegistrationServiceTest extends FunctionalTestCase {
 		return [
 			[
 				'resetPasswordHash' => 'validHash',
-				'resetPasswordHashValidThrough' => (new DateTime())->modify('+1 hour'),
+				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
 				'isExpectedValid' => true,
 			],
 			[
 				'resetPasswordHash' => null,
-				'resetPasswordHashValidThrough' => (new DateTime())->modify('+1 hour'),
+				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
 				'isExpectedValid' => false,
 			],
 			[
 				'resetPasswordHash' => 'invalidHash',
-				'resetPasswordHashValidThrough' => (new DateTime())->modify('+1 hour'),
+				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
 				'isExpectedValid' => false,
 			],
 			[
@@ -193,7 +193,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			],
 			[
 				'resetPasswordHash' => 'validHash',
-				'resetPasswordHashValidThrough' => (new DateTime())->modify('-1 hour'),
+				'resetPasswordHashValidThrough' => new DateTime('-1 hour'),
 				'isExpectedValid' => false,
 			],
 		];
