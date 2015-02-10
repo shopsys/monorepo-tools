@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Form\Admin\Order\Status\AllMailTemplatesFormType;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
-use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailService;
+use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,8 +65,8 @@ class MailController extends Controller {
 		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 
 		return [
-			ResetPasswordMailService::VARIABLE_EMAIL => $translator->trans('Email'),
-			ResetPasswordMailService::VARIABLE_NEW_PASSWORD_URL => $translator->trans('URL adresa pro nastavení nového hesla'),
+			ResetPasswordMail::VARIABLE_EMAIL => $translator->trans('Email'),
+			ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => $translator->trans('URL adresa pro nastavení nového hesla'),
 		];
 	}
 
@@ -84,8 +84,8 @@ class MailController extends Controller {
 		/* @var $customerMailService \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService */
 		$orderMailService = $this->get('ss6.shop.order.order_mail_service');
 		/* @var $orderMailService \SS6\ShopBundle\Model\Order\Mail\OrderMailService */
-		$resetPasswordMailService = $this->get('ss6.shop.customer.mail.reset_password_mail_service');
-		/* @var $resetPasswordMailService \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailService */
+		$resetPasswordMail = $this->get('ss6.shop.customer.mail.reset_password_mail');
+		/* @var $resetPasswordMail \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail */
 
 		$allMailTemplatesData = $mailTemplateFacade->getAllMailTemplatesDataByDomainId($selectedDomain->getId());
 
@@ -107,7 +107,14 @@ class MailController extends Controller {
 
 		$orderStatusesTemplateVariables = $orderMailService->getTemplateVariables();
 		$registrationTemplateVariables = $customerMailService->getTemplateVariables();
-		$resetPasswordTemplateVariables = $resetPasswordMailService->getTemplateVariables();
+		$resetPasswordTemplateVariables = array_unique(array_merge(
+			$resetPasswordMail->getBodyVariables(),
+			$resetPasswordMail->getSubjectVariables()
+		));
+		$resetPasswordTemplateRequiredVariables = array_unique(array_merge(
+			$resetPasswordMail->getRequiredBodyVariables(),
+			$resetPasswordMail->getRequiredSubjectVariables()
+		));
 
 		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', [
 			'form' => $form->createView(),
@@ -117,6 +124,7 @@ class MailController extends Controller {
 			'registrationVariables' => $registrationTemplateVariables,
 			'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
 			'resetPasswordVariables' => $resetPasswordTemplateVariables,
+			'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
 			'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
 		]);
 	}

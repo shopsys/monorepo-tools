@@ -5,11 +5,13 @@ namespace SS6\ShopBundle\Model\Customer\Mail;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
+use SS6\ShopBundle\Model\Mail\MailTypeInterface;
 use SS6\ShopBundle\Model\Mail\MessageData;
+use SS6\ShopBundle\Model\Mail\MessageFactoryInterface;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Setting\Setting;
 
-class ResetPasswordMailService {
+class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface {
 
 	const VARIABLE_EMAIL = '{email}';
 	const VARIABLE_NEW_PASSWORD_URL = '{new_password_url}';
@@ -24,32 +26,69 @@ class ResetPasswordMailService {
 	 */
 	private $domainRouterFactory;
 
-	public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory) {
+	public function __construct(
+		Setting $setting,
+		DomainRouterFactory $domainRouterFactory
+	) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
-	 * @return \SS6\ShopBundle\Model\Mail\MessageData
+	 * @return string[]
 	 */
-	public function getMessageData(User $user, MailTemplate $mailTemplate) {
+	public function getBodyVariables() {
+		return [
+			self::VARIABLE_EMAIL,
+			self::VARIABLE_NEW_PASSWORD_URL,
+		];
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getSubjectVariables() {
+		return $this->getBodyVariables();
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getRequiredBodyVariables() {
+		return [
+			self::VARIABLE_NEW_PASSWORD_URL,
+		];
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getRequiredSubjectVariables() {
+		return [];
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $template
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @return \SS6\ShopBundle\Model\Customer\Mail\MessageData
+	 */
+	public function createMessage(MailTemplate $template, $user) {
 		return new MessageData(
 			$user->getEmail(),
-			$mailTemplate->getBody(),
-			$mailTemplate->getSubject(),
+			$template->getBody(),
+			$template->getSubject(),
 			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),
 			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId()),
-			$this->getVariablesReplacements($user)
+			$this->getBodyVariablesValues($user),
+			$this->getSubjectVariablesValues($user)
 		);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return array
+	 * @return string[variableName]
 	 */
-	private function getVariablesReplacements(User $user) {
+	private function getBodyVariablesValues(User $user) {
 		return [
 			self::VARIABLE_EMAIL => $user->getEmail(),
 			self::VARIABLE_NEW_PASSWORD_URL => $this->getVariableNewPasswordUrl($user),
@@ -72,13 +111,11 @@ class ResetPasswordMailService {
 	}
 
 	/**
-	 * @return array
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @return string[variableName]
 	 */
-	public function getTemplateVariables() {
-		return [
-			self::VARIABLE_EMAIL,
-			self::VARIABLE_NEW_PASSWORD_URL,
-		];
+	private function getSubjectVariablesValues(User $user) {
+		return $this->getBodyVariablesValues($user);
 	}
 
 }
