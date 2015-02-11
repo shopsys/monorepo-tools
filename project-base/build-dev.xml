@@ -329,6 +329,30 @@
 		</exec>
 	</target>
 
+	<target name="tests-acceptance">
+		<exec
+			executable="${path.codeception.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="run" />
+			<arg value="--config=${path.codeception.configuration}" />
+		</exec>
+	</target>
+
+	<target name="tests-acceptance-build">
+		<exec
+			executable="${path.codeception.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="build" />
+			<arg value="--config=${path.codeception.configuration}" />
+		</exec>
+	</target>
+
 	<target name="tests-db">
 		<exec
 			executable="${path.phpunit.executable}"
