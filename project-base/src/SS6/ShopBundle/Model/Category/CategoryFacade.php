@@ -97,7 +97,7 @@ class CategoryFacade {
 	 * @param int[] $parentIdByCategoryId
 	 */
 	public function editOrdering($parentIdByCategoryId) {
-		// optimization, categories will be loaded from identity map
+		// eager-load all categories into identity map
 		$this->categoryRepository->getAll();
 		$rootCategory = $this->categoryRepository->getRootCategory();
 

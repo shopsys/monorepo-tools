@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller {
 
@@ -125,7 +126,7 @@ class CategoryController extends Controller {
 
 		$categoryFacade->editOrdering($parentIdByCategoryId);
 
-		return $this->render('OK');
+		return new Response('OK');
 	}
 
 	/**

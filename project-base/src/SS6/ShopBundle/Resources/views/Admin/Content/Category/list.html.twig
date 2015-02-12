@@ -10,7 +10,7 @@
 
 			<a href="{{ url('admin_category_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou kategorii'|trans }}</a>
 
-			{% macro categoryTreeItem(categories, id) %}
+			{% macro categoryTreeItem(categories) %}
 				<ul class="js-category-tree-sorting-items">
 					{% for category in categories %}
 						<li class="js-category-tree-sorting-item" id="js-category-tree-{{ category.id }}">
