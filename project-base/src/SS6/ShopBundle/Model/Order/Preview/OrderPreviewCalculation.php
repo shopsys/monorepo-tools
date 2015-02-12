@@ -66,6 +66,8 @@ class OrderPreviewCalculation {
 			$user
 		);
 
+		$productsPrice = $this->getProductsPrice($quantifiedItemsPrices);
+
 		if ($transport !== null) {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
 		} else {
@@ -79,7 +81,7 @@ class OrderPreviewCalculation {
 		}
 
 		$totalPrice = $this->calculateTotalPrice(
-			$quantifiedItemsPrices,
+			$productsPrice,
 			$transportPrice,
 			$paymentPrice
 		);
@@ -87,6 +89,7 @@ class OrderPreviewCalculation {
 		return new OrderPreview(
 			$quantifiedItems,
 			$quantifiedItemsPrices,
+			$productsPrice,
 			$totalPrice,
 			$transport,
 			$transportPrice,
@@ -96,13 +99,13 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
-		array $quantifiedItemsPrices,
+		Price $productsPrice,
 		Price $transportPrice = null,
 		Price $paymentPrice = null
 	) {
@@ -110,12 +113,9 @@ class OrderPreviewCalculation {
 		$totalPriceWithVat = 0;
 		$totalPriceVatAmount = 0;
 
-		foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
-			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
-			$totalPriceWithoutVat += $quantifiedItemPrice->getTotalPriceWithoutVat();
-			$totalPriceWithVat += $quantifiedItemPrice->getTotalPriceWithVat();
-			$totalPriceVatAmount += $quantifiedItemPrice->getTotalPriceVatAmount();
-		}
+		$totalPriceWithoutVat += $productsPrice->getPriceWithoutVat();
+		$totalPriceWithVat += $productsPrice->getPriceWithVat();
+		$totalPriceVatAmount += $productsPrice->getVatAmount();
 
 		if ($transportPrice !== null) {
 			$totalPriceWithoutVat += $transportPrice->getPriceWithoutVat();
@@ -133,6 +133,29 @@ class OrderPreviewCalculation {
 			$totalPriceWithoutVat,
 			$totalPriceWithVat,
 			$totalPriceVatAmount
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	private function getProductsPrice(array $quantifiedItemsPrices) {
+		$productsPriceWithoutVat = 0;
+		$productsPriceWithVat = 0;
+		$productsPriceVatAmount = 0;
+
+		foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
+			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
+			$productsPriceWithoutVat += $quantifiedItemPrice->getTotalPriceWithoutVat();
+			$productsPriceWithVat += $quantifiedItemPrice->getTotalPriceWithVat();
+			$productsPriceVatAmount += $quantifiedItemPrice->getTotalPriceVatAmount();
+		}
+
+		return new Price(
+			$productsPriceWithoutVat,
+			$productsPriceWithVat,
+			$productsPriceVatAmount
 		);
 	}
 
