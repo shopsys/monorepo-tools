@@ -43,7 +43,7 @@
 						{{ 'Cena celkem s DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPriceWithVat|price }}
+						{{ orderPreview.totalPrice.priceWithVat|price }}
 					</td>
 				</tr>
 
@@ -52,7 +52,7 @@
 						{{ 'Cena celkem bez DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPriceWithoutVat|price }}
+						{{ orderPreview.totalPrice.priceWithoutVat|price }}
 					</td>
 				</tr>
 
@@ -61,7 +61,7 @@
 						{{ 'Celková výše DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPriceVatAmount|price }}
+						{{ orderPreview.totalPrice.vatAmount|price }}
 					</td>
 				</tr>
 

@@ -18,6 +18,9 @@ use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase {
 
+	/**
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
 	public function testCalculatePreviewWithTransportAndPayment() {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
@@ -75,9 +78,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertEquals($payment, $orderPreview->getPayment());
 		$this->assertEquals($paymentPrice, $orderPreview->getPaymentPrice());
-		$this->assertEquals(2 + 20 + 400 * 2, $orderPreview->getTotalPriceVatAmount());
-		$this->assertEquals(12 + 120 + 2400 * 2, $orderPreview->getTotalPriceWithVat());
-		$this->assertEquals(10 + 100 + 2000 * 2, $orderPreview->getTotalPriceWithoutVat());
+		$this->assertEquals(2 + 20 + 400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
+		$this->assertEquals(12 + 120 + 2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
+		$this->assertEquals(10 + 100 + 2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
 		$this->assertEquals($transport, $orderPreview->getTransport());
 		$this->assertEquals($transportPrice, $orderPreview->getTransportPrice());
 	}
@@ -134,9 +137,9 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertNull($orderPreview->getPayment());
 		$this->assertNull($orderPreview->getPaymentPrice());
-		$this->assertEquals(400 * 2, $orderPreview->getTotalPriceVatAmount());
-		$this->assertEquals(2400 * 2, $orderPreview->getTotalPriceWithVat());
-		$this->assertEquals(2000 * 2, $orderPreview->getTotalPriceWithoutVat());
+		$this->assertEquals(400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
+		$this->assertEquals(2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
+		$this->assertEquals(2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
 		$this->assertNull($orderPreview->getTransport());
 		$this->assertNull($orderPreview->getTransportPrice());
 	}

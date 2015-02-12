@@ -87,9 +87,7 @@ class OrderPreviewCalculation {
 		return new OrderPreview(
 			$quantifiedItems,
 			$quantifiedItemsPrices,
-			$totalPrice->getPriceWithoutVat(),
-			$totalPrice->getPriceWithVat(),
-			$totalPrice->getVatAmount(),
+			$totalPrice,
 			$transport,
 			$transportPrice,
 			$payment,

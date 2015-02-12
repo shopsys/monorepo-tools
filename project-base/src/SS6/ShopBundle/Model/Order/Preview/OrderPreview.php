@@ -39,26 +39,14 @@ class OrderPreview {
 	private $paymentPrice;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Pricing\Price\Price
 	 */
-	private $totalPriceWithoutVat;
-
-	/**
-	 * @var string
-	 */
-	private $totalPriceWithVat;
-
-	/**
-	 * @var string
-	 */
-	private $totalPriceVatAmount;
+	private $totalPrice;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItems
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
-	 * @param string $totalPriceWithoutVat
-	 * @param string $totalPriceWithVat
-	 * @param string $totalPriceVatAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Price\Price $totalPrice,
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
@@ -67,9 +55,7 @@ class OrderPreview {
 	public function __construct(
 		array $quantifiedItems,
 		array $quantifiedItemsPrices,
-		$totalPriceWithoutVat,
-		$totalPriceWithVat,
-		$totalPriceVatAmount,
+		Price $totalPrice,
 		Transport $transport = null,
 		Price $transportPrice = null,
 		Payment $payment = null,
@@ -77,13 +63,11 @@ class OrderPreview {
 	) {
 		$this->quantifiedItems = $quantifiedItems;
 		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
+		$this->totalPrice = $totalPrice;
 		$this->transport = $transport;
 		$this->transportPrice = $transportPrice;
 		$this->payment = $payment;
 		$this->paymentPrice = $paymentPrice;
-		$this->totalPriceWithoutVat = $totalPriceWithoutVat;
-		$this->totalPriceWithVat = $totalPriceWithVat;
-		$this->totalPriceVatAmount = $totalPriceVatAmount;
 	}
 
 	/**
@@ -129,24 +113,10 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return string
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getTotalPriceWithoutVat() {
-		return $this->totalPriceWithoutVat;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPriceWithVat() {
-		return $this->totalPriceWithVat;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPriceVatAmount() {
-		return $this->totalPriceVatAmount;
+	public function getTotalPrice() {
+		return $this->totalPrice;
 	}
 
 }
