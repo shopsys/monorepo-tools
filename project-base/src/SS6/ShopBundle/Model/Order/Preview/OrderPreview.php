@@ -9,14 +9,14 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class OrderPreview {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[cartItemIndex]
+	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex]
 	 */
-	private $cartItems;
+	private $quantifiedItems;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[cartItemIndex]
+	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
 	 */
-	private $cartItemsPrices;
+	private $quantifiedItemsPrices;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\Transport|null
@@ -54,8 +54,8 @@ class OrderPreview {
 	private $totalPriceVatAmount;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[cartItemIndex] $cartItems
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[cartItemIndex] $cartItemsPrices
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
 	 * @param string $totalPriceWithoutVat
 	 * @param string $totalPriceWithVat
 	 * @param string $totalPriceVatAmount
@@ -65,8 +65,8 @@ class OrderPreview {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 */
 	public function __construct(
-		array $cartItems,
-		array $cartItemsPrices,
+		array $quantifiedItems,
+		array $quantifiedItemsPrices,
 		$totalPriceWithoutVat,
 		$totalPriceWithVat,
 		$totalPriceVatAmount,
@@ -75,8 +75,8 @@ class OrderPreview {
 		Payment $payment = null,
 		Price $paymentPrice = null
 	) {
-		$this->cartItems = $cartItems;
-		$this->cartItemsPrices = $cartItemsPrices;
+		$this->quantifiedItems = $quantifiedItems;
+		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
 		$this->transport = $transport;
 		$this->transportPrice = $transportPrice;
 		$this->payment = $payment;
@@ -87,17 +87,17 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[cartItemIndex]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex]
 	 */
-	public function getCartItems() {
-		return $this->cartItems;
+	public function getQuantifiedItems() {
+		return $this->quantifiedItems;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[cartItemIndex]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
 	 */
-	public function getCartItemsPrices() {
-		return $this->cartItemsPrices;
+	public function getQuantifiedItemsPrices() {
+		return $this->quantifiedItemsPrices;
 	}
 
 	/**

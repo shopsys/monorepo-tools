@@ -108,10 +108,17 @@ class OrderController extends Controller {
 		$payment = $orderData->payment;
 		$transport = $orderData->transport;
 
+		$orderPreview = $orderPreviewCalculation->calculatePreview(
+			$currency,
+			$cart->getQuantifiedItems(),
+			$transport,
+			$payment
+		);
+
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
 			'form' => $form->createView(),
 			'flow' => $flow,
-			'orderPreview' => $orderPreviewCalculation->calculatePreview($currency, $cart, $transport, $payment),
+			'orderPreview' => $orderPreview,
 			'payments' => $payments,
 			'transportsPrices' => $transportPriceCalculation->calculatePricesById($transports, $currency),
 			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments, $currency),
