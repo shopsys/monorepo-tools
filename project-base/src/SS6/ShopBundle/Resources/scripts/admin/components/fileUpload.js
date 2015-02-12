@@ -2,16 +2,15 @@
 
 	SS6 = window.SS6 || {};
 	SS6.fileUpload = SS6.fileUpload || {};
-	SS6.fileUpload.uploader = SS6.fileUpload.uploader || {};
 
 	$(document).ready(function() {
 		$('.js-file-upload').each(function() {
-			var uploader = new SS6.fileUpload.uploader.constructor($(this));
+			var uploader = new SS6.fileUpload.Uploader($(this));
 			uploader.init();
 		});
 	});
 
-	SS6.fileUpload.uploader.constructor = function($uploader) {
+	SS6.fileUpload.Uploader = function($uploader) {
 		var self = this;
 		var $uploadedFiles = $uploader.find('.js-file-upload-uploaded-files');
 		var $status = $uploader.find('.js-file-upload-status');
@@ -30,7 +29,7 @@
 
 		var initUploadedFiles = function() {
 			$uploadedFiles.find('.js-file-upload-uploaded-file').each(function () {
-				var fileItem = new SS6.fileUpload.fileItem.constructor(self, $(this), true);
+				var fileItem = new SS6.fileUpload.FileItem(self, $(this), true);
 				fileItem.init();
 			});
 		};
@@ -49,7 +48,7 @@
 			});
 		};
 
-		self.deleteTemporaryFile = function(filename) {
+		this.deleteTemporaryFile = function(filename) {
 			$.ajax({
 				url: deleteUrl,
 				type: 'POST',
@@ -88,7 +87,7 @@
 		var onUploadNewFile = function(id, file) {
 			var $uploadedfile = createNewUploadedFile();
 			$uploadedfile.show();
-			items[id] = new SS6.fileUpload.fileItem.constructor(self, $uploadedfile);
+			items[id] = new SS6.fileUpload.FileItem(self, $uploadedfile);
 			items[id].init();
 			items[id].setLabel(file.name, file.size);
 			$uploadedFiles.append($uploadedfile);
