@@ -110,9 +110,11 @@ class OrderController extends Controller {
 
 		$orderPreview = $orderPreviewCalculation->calculatePreview(
 			$currency,
+			$domainId,
 			$cart->getQuantifiedItems(),
 			$transport,
-			$payment
+			$payment,
+			$user
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [

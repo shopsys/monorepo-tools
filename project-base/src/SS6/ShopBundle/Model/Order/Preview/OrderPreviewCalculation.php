@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Preview;
 
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
@@ -44,18 +45,26 @@ class OrderPreviewCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[]
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
 	public function calculatePreview(
 		Currency $currency,
+		$domainId,
 		array $quantifiedItems,
 		Transport $transport = null,
-		Payment $payment = null
+		Payment $payment = null,
+		User $user = null
 	) {
-		$quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices($quantifiedItems);
+		$quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
+			$quantifiedItems,
+			$domainId,
+			$user
+		);
 
 		if ($transport !== null) {
 			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);

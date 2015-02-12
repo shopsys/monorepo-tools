@@ -14,6 +14,8 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
 
@@ -43,6 +45,11 @@ class OrderFacade {
 	 * @var \SS6\ShopBundle\Model\Order\OrderService
 	 */
 	private $orderService;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
+	 */
+	private $orderPreviewCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\OrderCreationService
@@ -80,6 +87,7 @@ class OrderFacade {
 		Cart $cart,
 		OrderRepository $orderRepository,
 		OrderService $orderService,
+		OrderPreviewCalculation $orderPreviewCalculation,
 		OrderCreationService $orderCreationService,
 		UserRepository $userRepository,
 		OrderStatusRepository $orderStatusRepository,
@@ -92,6 +100,7 @@ class OrderFacade {
 		$this->cart = $cart;
 		$this->orderRepository = $orderRepository;
 		$this->orderService = $orderService;
+		$this->orderPreviewCalculation = $orderPreviewCalculation;
 		$this->orderCreationService = $orderCreationService;
 		$this->userRepository = $userRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
@@ -107,6 +116,15 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(OrderData $orderData, array $quantifiedItems, User $user = null) {
+		$orderPreview = $this->orderPreviewCalculation->calculatePreview(
+			$orderData->currency,
+			$orderData->domainId,
+			$quantifiedItems,
+			$orderData->transport,
+			$orderData->payment,
+			$user
+		);
+
 		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
@@ -119,7 +137,7 @@ class OrderFacade {
 			$user
 		);
 
-		$this->orderCreationService->fillOrderItems($order, $quantifiedItems);
+		$this->orderCreationService->fillOrderItems($order, $orderPreview);
 
 		foreach ($order->getItems() as $orderItem) {
 			$this->em->persist($orderItem);

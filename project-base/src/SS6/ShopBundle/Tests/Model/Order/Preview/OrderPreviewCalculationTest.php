@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Model\Order;
 
-use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
@@ -16,9 +16,12 @@ use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
-class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
+class OrderPreviewCalculationTest extends FunctionalTestCase {
 
 	public function testCalculatePreviewWithTransportAndPayment() {
+		$domain = $this->getContainer()->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+
 		$paymentPrice = new Price(100, 120, 20);
 		$transportPrice = new Price(10, 12, 2);
 		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400);
@@ -59,7 +62,14 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$transport = $this->getMock(Transport::class, [], [], '', false);
 		$payment = $this->getMock(Payment::class, [], [], '', false);
 
-		$orderPreview = $previewCalculation->calculatePreview($currency, $quantifiedItems, $transport, $payment);
+		$orderPreview = $previewCalculation->calculatePreview(
+			$currency,
+			$domain->getId(),
+			$quantifiedItems,
+			$transport,
+			$payment,
+			null
+		);
 
 		$this->assertEquals($quantifiedItems, $orderPreview->getQuantifiedItems());
 		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
@@ -73,6 +83,9 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCalculatePreviewWithoutTransportAndPayment() {
+		$domain = $this->getContainer()->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+
 		$quantifiedItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
 		$currency = new Currency(new CurrencyData());
@@ -108,7 +121,14 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 			$quantifiedItemMock,
 		];
 
-		$orderPreview = $previewCalculation->calculatePreview($currency, $quantifiedItems, null, null);
+		$orderPreview = $previewCalculation->calculatePreview(
+			$currency,
+			$domain->getId(),
+			$quantifiedItems,
+			null,
+			null,
+			null
+		);
 
 		$this->assertEquals($quantifiedItems, $orderPreview->getQuantifiedItems());
 		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
