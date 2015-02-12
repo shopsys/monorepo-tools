@@ -144,7 +144,12 @@ class RegistrationService {
 		$user->setResetPasswordHash($hash);
 	}
 
-	public function isResetPasswordHashValid($user, $hash) {
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param string|null $hash
+	 * @return bool
+	 */
+	public function isResetPasswordHashValid(User $user, $hash) {
 		if ($hash === null || $user->getResetPasswordHash() !== $hash) {
 			return false;
 		}
@@ -159,10 +164,10 @@ class RegistrationService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param string $hash
+	 * @param string|null $hash
 	 * @param string $newPassword
 	 */
-	public function setNewPassword($user, $hash, $newPassword) {
+	public function setNewPassword(User $user, $hash, $newPassword) {
 		if (!$this->isResetPasswordHashValid($user, $hash)) {
 			throw new \SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
 		}

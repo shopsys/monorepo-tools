@@ -54,7 +54,7 @@ class RegistrationFacade {
 	/**
 	 * @param string $email
 	 * @param int $domainId
-	 * @param string $hash
+	 * @param string|null $hash
 	 */
 	public function isResetPasswordHashValid($email, $domainId, $hash) {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
@@ -65,7 +65,7 @@ class RegistrationFacade {
 	/**
 	 * @param string $email
 	 * @param int $domainId
-	 * @param string $hash
+	 * @param string|null $hash
 	 * @param string $newPassword
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
