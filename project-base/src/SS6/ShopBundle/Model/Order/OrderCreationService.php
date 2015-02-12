@@ -28,6 +28,26 @@ class OrderCreationService {
 	 */
 	private $orderPriceCalculation;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+	 */
+	private $productPriceCalculationForUser;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 */
+	private $paymentPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 */
+	private $transportPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		OrderPriceCalculation $orderPriceCalculation,
