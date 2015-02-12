@@ -3,16 +3,16 @@
 namespace SS6\ShopBundle\Tests\Model\Order;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
-use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
@@ -21,15 +21,16 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 	public function testCalculatePreviewWithTransportAndPayment() {
 		$paymentPrice = new Price(100, 120, 20);
 		$transportPrice = new Price(10, 12, 2);
-		$cartItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
-		$cartItemsPrices = [$cartItemPrice, $cartItemPrice];
+		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400);
+		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
 		$currency = new Currency(new CurrencyData());
 
-		$cartItemPriceCalculationMock = $this->getMockBuilder(CartItemPriceCalculation::class)
+		$quantifiedProductPriceCalculationMock = $this->getMockBuilder(QuantifiedProductPriceCalculation::class)
 			->setMethods(['calculatePrices', '__construct'])
 			->disableOriginalConstructor()
 			->getMock();
-		$cartItemPriceCalculationMock->expects($this->once())->method('calculatePrices')->will($this->returnValue($cartItemsPrices));
+		$quantifiedProductPriceCalculationMock->expects($this->once())->method('calculatePrices')
+			->will($this->returnValue($quantifiedItemsPrices));
 
 		$paymentPriceCalculationMock = $this->getMockBuilder(PaymentPriceCalculation::class)
 			->setMethods(['calculatePrice', '__construct'])
@@ -44,24 +45,24 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$transportPriceCalculationMock->expects($this->once())->method('calculatePrice')->will($this->returnValue($transportPrice));
 
 		$previewCalculation = new OrderPreviewCalculation(
-			$cartItemPriceCalculationMock,
+			$quantifiedProductPriceCalculationMock,
 			$transportPriceCalculationMock,
 			$paymentPriceCalculationMock
 		);
 
-		$cartItemMock = $this->getMock(CartItem::class, [], [], '', false);
-		$cartItems = [
-			$cartItemMock,
-			$cartItemMock,
+		$quantifiedItemMock = $this->getMock(QuantifiedItem::class, [], [], '', false);
+		$quantifiedItems = [
+			$quantifiedItemMock,
+			$quantifiedItemMock,
 		];
-		$cart = new Cart($cartItems);
+
 		$transport = $this->getMock(Transport::class, [], [], '', false);
 		$payment = $this->getMock(Payment::class, [], [], '', false);
 
-		$orderPreview = $previewCalculation->calculatePreview($currency, $cart, $transport, $payment);
+		$orderPreview = $previewCalculation->calculatePreview($currency, $quantifiedItems, $transport, $payment);
 
-		$this->assertEquals($cartItems, $orderPreview->getCartItems());
-		$this->assertEquals($cartItemsPrices, $orderPreview->getCartItemsPrices());
+		$this->assertEquals($quantifiedItems, $orderPreview->getQuantifiedItems());
+		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertEquals($payment, $orderPreview->getPayment());
 		$this->assertEquals($paymentPrice, $orderPreview->getPaymentPrice());
 		$this->assertEquals(2 + 20 + 400 * 2, $orderPreview->getTotalPriceVatAmount());
@@ -72,15 +73,16 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCalculatePreviewWithoutTransportAndPayment() {
-		$cartItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
-		$cartItemsPrices = [$cartItemPrice, $cartItemPrice];
+		$quantifiedItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
+		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
 		$currency = new Currency(new CurrencyData());
 
-		$cartItemPriceCalculationMock = $this->getMockBuilder(CartItemPriceCalculation::class)
+		$quantifiedProductPriceCalculationMock = $this->getMockBuilder(QuantifiedProductPriceCalculation::class)
 			->setMethods(['calculatePrices', '__construct'])
 			->disableOriginalConstructor()
 			->getMock();
-		$cartItemPriceCalculationMock->expects($this->once())->method('calculatePrices')->will($this->returnValue($cartItemsPrices));
+		$quantifiedProductPriceCalculationMock->expects($this->once())->method('calculatePrices')
+			->will($this->returnValue($quantifiedItemsPrices));
 
 		$paymentPriceCalculationMock = $this->getMockBuilder(PaymentPriceCalculation::class)
 			->setMethods(['calculatePrice', '__construct'])
@@ -95,22 +97,21 @@ class OrderPreviewCalculationTest extends PHPUnit_Framework_TestCase {
 		$transportPriceCalculationMock->expects($this->never())->method('calculatePrice');
 
 		$previewCalculation = new OrderPreviewCalculation(
-			$cartItemPriceCalculationMock,
+			$quantifiedProductPriceCalculationMock,
 			$transportPriceCalculationMock,
 			$paymentPriceCalculationMock
 		);
 
-		$cartItemMock = $this->getMock(CartItem::class, [], [], '', false);
-		$cartItems = [
-			$cartItemMock,
-			$cartItemMock,
+		$quantifiedItemMock = $this->getMock(QuantifiedItem::class, [], [], '', false);
+		$quantifiedItems = [
+			$quantifiedItemMock,
+			$quantifiedItemMock,
 		];
-		$cart = new Cart($cartItems);
 
-		$orderPreview = $previewCalculation->calculatePreview($currency, $cart, null, null);
+		$orderPreview = $previewCalculation->calculatePreview($currency, $quantifiedItems, null, null);
 
-		$this->assertEquals($cartItems, $orderPreview->getCartItems());
-		$this->assertEquals($cartItemsPrices, $orderPreview->getCartItemsPrices());
+		$this->assertEquals($quantifiedItems, $orderPreview->getQuantifiedItems());
+		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertNull($orderPreview->getPayment());
 		$this->assertNull($orderPreview->getPaymentPrice());
 		$this->assertEquals(400 * 2, $orderPreview->getTotalPriceVatAmount());
