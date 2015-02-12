@@ -9,12 +9,12 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class OrderPreview {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[]
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[cartItemIndex]
 	 */
 	private $cartItems;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[]
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[cartItemIndex]
 	 */
 	private $cartItemsPrices;
 
@@ -54,8 +54,8 @@ class OrderPreview {
 	private $totalPriceVatAmount;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[] $cartItemsPrices
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[cartItemIndex] $cartItems
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[cartItemIndex] $cartItemsPrices
 	 * @param string $totalPriceWithoutVat
 	 * @param string $totalPriceWithVat
 	 * @param string $totalPriceVatAmount
@@ -87,14 +87,14 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[cartItemIndex]
 	 */
 	public function getCartItems() {
 		return $this->cartItems;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[]
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[cartItemIndex]
 	 */
 	public function getCartItemsPrices() {
 		return $this->cartItemsPrices;
