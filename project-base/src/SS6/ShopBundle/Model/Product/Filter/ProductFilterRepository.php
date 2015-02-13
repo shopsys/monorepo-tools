@@ -2,23 +2,34 @@
 
 namespace SS6\ShopBundle\Model\Product\Filter;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductFilterRepository {
 
 	const DAYS_FOR_STOCK_FILTER = 0;
 
 	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
 	 */
 	private $queryBuilderService;
 
-	public function __construct(QueryBuilderService $queryBuilderService) {
+	public function __construct(
+		EntityManager $em,
+		QueryBuilderService $queryBuilderService
+	) {
+		$this->em = $em;
 		$this->queryBuilderService = $queryBuilderService;
 	}
 
@@ -78,21 +89,39 @@ class ProductFilterRepository {
 	public function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
 		$flagsCount = count($flags);
 		if ($flagsCount !== 0) {
-			$productsQueryBuilder
-				->join('p.flags', 'f', Join::ON);
-			$whereClause = 'f = :flag';
-			$counter = 1;
-			foreach ($flags as $flag) {
-				if ($counter === $flagsCount) {
-					$whereClause .= $flag->getId();
-				} else {
-					$whereClause .= $flag->getId() . ' OR f = :flag';
-				}
-				$productsQueryBuilder->setParameter('flag' . $flag->getId(), $flag);
-				$counter++;
+			$flagsQueryBuilder = $this->getFlagsQueryBuilder($flags);
+
+			$productsQueryBuilder->andWhere($productsQueryBuilder->expr()->exists($flagsQueryBuilder));
+			foreach ($flagsQueryBuilder->getParameters() as $parameter) {
+				$productsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
 			}
-			$productsQueryBuilder->andWhere($whereClause);
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getFlagsQueryBuilder(array $flags) {
+		$flagsQueryBuilder = $this->em->createQueryBuilder();
+
+		$orExpr = $flagsQueryBuilder->expr()->orX();
+
+		$index = 0;
+		foreach ($flags as $flag) {
+			$orExpr->add('f = :flag' . $index);
+			$flagsQueryBuilder->setParameter('flag' . $index, $flag);
+			$index++;
+		}
+
+		$flagsQueryBuilder
+			->select('1')
+			->from(Product::class, 'pf')
+			->join('p.flags', 'f', Join::ON)
+			->where('pf = p')
+			->andWhere($orExpr);
+
+		return $flagsQueryBuilder;
 	}
 
 }
