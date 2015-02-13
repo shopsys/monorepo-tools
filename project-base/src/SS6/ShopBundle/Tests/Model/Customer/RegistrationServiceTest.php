@@ -174,26 +174,31 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			[
 				'resetPasswordHash' => 'validHash',
 				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
+				'sentHash' => 'validHash',
 				'isExpectedValid' => true,
 			],
 			[
 				'resetPasswordHash' => null,
 				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
+				'sentHash' => 'hash',
 				'isExpectedValid' => false,
 			],
 			[
-				'resetPasswordHash' => 'invalidHash',
+				'resetPasswordHash' => 'validHash',
 				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
+				'sentHash' => 'invalidHash',
 				'isExpectedValid' => false,
 			],
 			[
 				'resetPasswordHash' => 'validHash',
 				'resetPasswordHashValidThrough' => null,
+				'sentHash' => 'validHash',
 				'isExpectedValid' => false,
 			],
 			[
 				'resetPasswordHash' => 'validHash',
 				'resetPasswordHashValidThrough' => new DateTime('-1 hour'),
+				'sentHash' => 'validHash',
 				'isExpectedValid' => false,
 			],
 		];
@@ -205,6 +210,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 	public function testIsResetPasswordHashValid(
 		$resetPasswordHash,
 		$resetPasswordHashValidThrough,
+		$sentHash,
 		$isExpectedValid
 	) {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
@@ -225,7 +231,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 		$userMock->expects($this->any())->method('getResetPasswordHashValidThrough')
 			->willReturn($resetPasswordHashValidThrough);
 
-		$isResetPasswordHashValid = $registrationService->isResetPasswordHashValid($userMock, 'validHash');
+		$isResetPasswordHashValid = $registrationService->isResetPasswordHashValid($userMock, $sentHash);
 
 		$this->assertEquals($isExpectedValid, $isResetPasswordHashValid);
 	}
