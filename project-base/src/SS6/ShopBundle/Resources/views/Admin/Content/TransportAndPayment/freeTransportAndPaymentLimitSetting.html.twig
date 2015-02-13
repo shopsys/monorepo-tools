@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
-	- {{ 'Doprava zdarma'|trans }}
+	- {{ 'Doprava a platba zdarma'|trans }}
 {% endblock %}
 
 {% block h1 %}
-	{{ 'Doprava zdarma'|trans }}
+	{{ 'Doprava a platba zdarma'|trans }}
 {% endblock %}
 
 {% block main_content %}
@@ -17,20 +17,20 @@
 				{{ form_errors(form) }}
 
 				{% for domainId, priceLimitForm in form.priceLimits %}
-					<div id="{{ priceLimitForm.vars.id }}" class="wrap-group js-free-transport-price-limit">
+					<div id="{{ priceLimitForm.vars.id }}" class="wrap-group js-free-transport-and-payment-price-limit">
 						{% set domainName = domain.getDomainConfigById(domainId).getDomain() %}
 
 						{{
 							form_row(priceLimitForm.enabled, {
-								label: 'Používat dopravu zdarma na doméně <strong>%domainName%</strong>'|trans({ '%domainName%': domainName }),
+								label: 'Používat dopravu a platbu zdarma na doméně <strong>%domainName%</strong>'|trans({ '%domainName%': domainName }),
 								raw: true,
 								attr: {
-									'class': 'js-free-transport-price-limit-enabled checkbox-toggle',
-									'data-checkbox-toggle-container-id': 'js-free-transport-price-limit-' ~ domainId
+									'class': 'js-free-transport-and-payment-price-limit-enabled checkbox-toggle',
+									'data-checkbox-toggle-container-id': 'js-free-transport-and-payment-price-limit-' ~ domainId
 								},
 							})
 						}}
-						<div id="js-free-transport-price-limit-{{ domainId }}">
+						<div id="js-free-transport-and-payment-price-limit-{{ domainId }}">
 							{{ form_row(priceLimitForm.priceLimit, { label: 'Minimální cena zboží'|trans, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
 						</div>
 					</div>

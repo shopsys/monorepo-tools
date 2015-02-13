@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Transport;
+namespace SS6\ShopBundle\Form\Admin\TransportAndPayment;
 
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class FreeTransportPriceLimitsFormType extends AbstractType {
+class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 
 	const DOMAINS_SUBFORM_NAME = 'priceLimits';
 	const FIELD_ENABLED = 'enabled';
@@ -61,8 +61,8 @@ class FreeTransportPriceLimitsFormType extends AbstractType {
 					'validation_groups' => function (FormInterface $form) {
 						$validationGroups = ['Default'];
 						$formData = $form->getData();
-						if ($formData[FreeTransportPriceLimitsFormType::FIELD_ENABLED]) {
-							$validationGroups[] = FreeTransportPriceLimitsFormType::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;
+						if ($formData[FreeTransportAndPaymentPriceLimitsFormType::FIELD_ENABLED]) {
+							$validationGroups[] = FreeTransportAndPaymentPriceLimitsFormType::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;
 						}
 
 						return $validationGroups;
