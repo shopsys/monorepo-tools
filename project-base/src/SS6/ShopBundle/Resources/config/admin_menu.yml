@@ -53,6 +53,8 @@
       route: admin_pricinggroup_list
     - label: 'DPH a zaokrouhlování'
       route: admin_vat_list
+    - label: 'Doprava zdarma'
+      route: admin_transport_freetransportlimit
     - label: Měny
       route: admin_currency_list
 

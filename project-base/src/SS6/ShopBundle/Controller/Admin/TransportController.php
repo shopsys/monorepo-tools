@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Transport\FreeTransportPriceLimitsFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -136,6 +137,62 @@ class TransportController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', [
 			'gridView' => $grid->createView(),
+		]);
+	}
+
+	/**
+	 * @Route("/transport/free_transport_limit/")
+	 *
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function freeTransportLimitAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
+		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
+
+		$form = $this->createForm(new FreeTransportPriceLimitsFormType($domain->getAll()));
+
+		$formData = [];
+
+		foreach ($domain->getAll() as $domainConfig) {
+			$domainId = $domainConfig->getId();
+			$freeTransportPriceLimit = $pricingSetting->getFreeTransportPriceLimit($domainId);
+
+			$formData[FreeTransportPriceLimitsFormType::DOMAINS_SUBFORM_NAME][$domainId] = [
+				FreeTransportPriceLimitsFormType::FIELD_ENABLED => $freeTransportPriceLimit !== null,
+				FreeTransportPriceLimitsFormType::FIELD_PRICE_LIMIT => $freeTransportPriceLimit,
+			];
+		}
+
+		$form->setData($formData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$formData = $form->getData();
+			$subformData = $formData[FreeTransportPriceLimitsFormType::DOMAINS_SUBFORM_NAME];
+
+			foreach ($domain->getAll() as $domainConfig) {
+				$domainId = $domainConfig->getId();
+
+				if ($subformData[$domainId][FreeTransportPriceLimitsFormType::FIELD_ENABLED]) {
+					$priceLimit = $subformData[$domainId][FreeTransportPriceLimitsFormType::FIELD_PRICE_LIMIT];
+				} else {
+					$priceLimit = null;
+				}
+
+				$pricingSetting->setFreeTransportPriceLimit($domainId, $priceLimit);
+			}
+
+			$flashMessageSender->addSuccessFlash('Nastavení dopravy zdarma bylo uloženo');
+			return $this->redirect($this->generateUrl('admin_transport_freetransportlimit'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Transport/freeTransportLimitSetting.html.twig', [
+			'form' => $form->createView(),
+			'domain' => $domain,
 		]);
 	}
 

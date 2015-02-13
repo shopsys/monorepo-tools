@@ -1,0 +1,33 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+	- {{ 'Doprava zdarma'|trans }}
+{% endblock %}
+
+{% block h1 %}
+	{{ 'Doprava zdarma'|trans }}
+{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				{% for domainId, priceLimitForm in form.priceLimits %}
+					<div class="wrap-group">
+						{% set domainName = domain.getDomainConfigById(domainId).getDomain() %}
+
+						{{ form_row(priceLimitForm.enabled, { label: 'Používat dopravu zdarma na doméně <strong>%domainName%</strong>'|trans({ '%domainName%': domainName }), raw: true }) }}
+						{{ form_row(priceLimitForm.priceLimit, { label: 'Minimální cena zboží'|trans, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+					</div>
+				{% endfor %}
+
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}

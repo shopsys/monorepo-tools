@@ -101,10 +101,18 @@ class PricingSetting {
 
 	/**
 	 * @param int $domainId
-	 * @return string
+	 * @return string|null
 	 */
 	public function getFreeTransportPriceLimit($domainId) {
 		return $this->setting->get(self::FREE_TRANSPORT_PRICE_LIMIT, $domainId);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string|null $priceLimit
+	 */
+	public function setFreeTransportPriceLimit($domainId, $priceLimit = null) {
+		$this->setting->set(self::FREE_TRANSPORT_PRICE_LIMIT, $priceLimit, $domainId);
 	}
 
 	/**
