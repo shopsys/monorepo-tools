@@ -99,7 +99,7 @@ class TransportController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),
-			'transportDetail' => $transportDetailFactory->createDetailForTransport($transport),
+			'transportDetail' => $transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
 			'currencies' => $currencyFacade->getAllIndexedById()
 		]);
 	}

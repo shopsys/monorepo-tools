@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,7 +74,19 @@ class OrderController extends Controller {
 
 		$form = $flow->createForm();
 
-		$this->checkTransportAndPaymentChanges($orderData, $transports, $payments);
+		$payment = $orderData->payment;
+		$transport = $orderData->transport;
+
+		$orderPreview = $orderPreviewCalculation->calculatePreview(
+			$currency,
+			$domainId,
+			$cart->getQuantifiedItems(),
+			$transport,
+			$payment,
+			$user
+		);
+
+		$this->checkTransportAndPaymentChanges($orderData, $orderPreview, $transports, $payments);
 
 		if ($flow->isValid($form)) {
 			if ($flow->nextStep()) {
@@ -105,35 +118,30 @@ class OrderController extends Controller {
 			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$payment = $orderData->payment;
-		$transport = $orderData->transport;
-
-		$orderPreview = $orderPreviewCalculation->calculatePreview(
-			$currency,
-			$domainId,
-			$cart->getQuantifiedItems(),
-			$transport,
-			$payment,
-			$user
-		);
-
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
 			'form' => $form->createView(),
 			'flow' => $flow,
 			'orderPreview' => $orderPreview,
 			'payments' => $payments,
-			'transportsPrices' => $transportPriceCalculation->calculatePricesById($transports, $currency),
+			'transportsPrices' => $transportPriceCalculation->calculatePricesById(
+				$transports,
+				$currency,
+				$orderPreview->getProductsPrice(),
+				$domainId
+			),
 			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments, $currency),
 		]);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 */
 	private function checkTransportAndPaymentChanges(
 		OrderData $orderData,
+		OrderPreview $orderPreview,
 		array $transports,
 		array $payments
 	) {
@@ -144,6 +152,7 @@ class OrderController extends Controller {
 
 		$transportAndPaymentCheckResult = $transportAndPaymentWatcherService->checkTransportAndPayment(
 			$orderData,
+			$orderPreview,
 			$transports,
 			$payments
 		);

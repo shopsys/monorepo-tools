@@ -123,14 +123,15 @@ class OrderCreationService {
 		$locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
 		$this->fillOrderProducts($order, $orderPreview, $locale);
-		$this->fillOrderTransportAndPayment($order, $locale);
+		$this->fillOrderTransportAndPayment($order, $orderPreview, $locale);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param string $locale
 	 */
-	private function fillOrderTransportAndPayment(Order $order, $locale) {
+	private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale) {
 		$payment = $order->getPayment();
 		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $order->getCurrency());
 		$orderPayment = new OrderPayment(
@@ -145,7 +146,12 @@ class OrderCreationService {
 		$order->addItem($orderPayment);
 
 		$transport = $order->getTransport();
-		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $order->getCurrency());
+		$transportPrice = $this->transportPriceCalculation->calculatePrice(
+			$transport,
+			$order->getCurrency(),
+			$orderPreview->getProductsPrice(),
+			$order->getDomainId()
+		);
 		$orderTransport = new OrderTransport(
 			$order,
 			$transport->getName($locale),

@@ -17,7 +17,7 @@ use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculatePriceProvider() {
+	public function testCalculateIndependentPriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -37,9 +37,9 @@ class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculatePriceProvider
+	 * @dataProvider testCalculateIndependentPriceProvider
 	 */
-	public function testCalculatePrice(
+	public function testCalculateIndependentPrice(
 		$inputPriceType,
 		$inputPrice,
 		$vatPercent,
@@ -69,7 +69,7 @@ class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$transport = new Transport(new TransportData(['cs' => 'TransportName'], $vat));
 		$transport->setPrice($currency, $inputPrice);
 
-		$price = $transportPriceCalculation->calculatePrice($transport, $currency);
+		$price = $transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 
 		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));

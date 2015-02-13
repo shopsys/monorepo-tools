@@ -69,7 +69,12 @@ class OrderPreviewCalculation {
 		$productsPrice = $this->getProductsPrice($quantifiedItemsPrices);
 
 		if ($transport !== null) {
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice(
+				$transport,
+				$currency,
+				$productsPrice,
+				$domainId
+			);
 		} else {
 			$transportPrice = null;
 		}

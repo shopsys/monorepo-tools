@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Order\Watcher;
 
 use SS6\ShopBundle\Model\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
@@ -57,17 +58,23 @@ class TransportAndPaymentWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @return \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
 	 */
-	public function checkTransportAndPayment(OrderData $orderData, $transports, $payments) {
+	public function checkTransportAndPayment(OrderData $orderData, OrderPreview $orderPreview, $transports, $payments) {
 		$transport = $orderData->transport;
 		$payment = $orderData->payment;
 
 		$transportPriceChanged = false;
 		if ($transport !== null) {
-			$transportPriceChanged = $this->checkTransportPrice($transport, $orderData->currency);
+			$transportPriceChanged = $this->checkTransportPrice(
+				$transport,
+				$orderData->currency,
+				$orderPreview,
+				$orderData->domainId
+			);
 		}
 
 		$paymentPriceChanged = false;
@@ -75,7 +82,13 @@ class TransportAndPaymentWatcherService {
 			$paymentPriceChanged = $this->checkPaymentPrice($payment, $orderData->currency);
 		}
 
-		$this->rememberTransportAndPayment($transports, $payments, $orderData->currency);
+		$this->rememberTransportAndPayment(
+			$transports,
+			$payments,
+			$orderData->currency,
+			$orderPreview,
+			$orderData->domainId
+		);
 
 		return new TransportAndPaymentCheckResult($transportPriceChanged, $paymentPriceChanged);
 	}
@@ -83,14 +96,26 @@ class TransportAndPaymentWatcherService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param int $domainId
 	 * @return boolean
 	 */
-	private function checkTransportPrice(Transport $transport, Currency $currency) {
+	private function checkTransportPrice(
+		Transport $transport,
+		Currency $currency,
+		OrderPreview $orderPreview,
+		$domainId
+	) {
 		$transportPrices = $this->getRememberedTransportPrices();
 
 		if (array_key_exists($transport->getId(), $transportPrices)) {
 			$rememberedTransportPriceValue = $transportPrices[$transport->getId()];
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice(
+				$transport,
+				$currency,
+				$orderPreview->getProductsPrice(),
+				$domainId
+			);
 
 			if ($rememberedTransportPriceValue != $transportPrice->getPriceWithVat()) {
 				return true;
@@ -123,12 +148,24 @@ class TransportAndPaymentWatcherService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param int $domainId
 	 * @return array
 	 */
-	private function getTransportPrices($transports, Currency $currency) {
+	private function getTransportPrices(
+		$transports,
+		Currency $currency,
+		OrderPreview $orderPreview,
+		$domainId
+	) {
 		$transportPriceValues = [];
 		foreach ($transports as $transport) {
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice(
+				$transport,
+				$currency,
+				$orderPreview->getProductsPrice(),
+				$domainId
+			);
 			$transportPriceValues[$transport->getId()] = $transportPrice->getPriceWithVat();
 		}
 
@@ -154,10 +191,23 @@ class TransportAndPaymentWatcherService {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param int $domainId
 	 */
-	private function rememberTransportAndPayment($transports, $payments, Currency $currency) {
+	private function rememberTransportAndPayment(
+		array $transports,
+		array $payments,
+		Currency $currency,
+		OrderPreview $orderPreview,
+		$domainId
+	) {
 		$this->session->set(self::SESSION_ROOT, [
-			self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices($transports, $currency),
+			self::SESSION_TRANSPORT_PRICES => $this->getTransportPrices(
+				$transports,
+				$currency,
+				$orderPreview,
+				$domainId
+			),
 			self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices($payments, $currency),
 		]);
 	}

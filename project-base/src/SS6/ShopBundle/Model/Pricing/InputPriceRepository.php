@@ -158,7 +158,7 @@ class InputPriceRepository {
 
 		$this->batchProcessQuery($query, function (Transport $transport) use ($toInputPriceType) {
 			foreach ($transport->getPrices() as $transportInputPrice) {
-				$transportPrice = $this->transportPriceCalculation->calculatePrice(
+				$transportPrice = $this->transportPriceCalculation->calculateIndependentPrice(
 					$transport,
 					$transportInputPrice->getCurrency()
 				);

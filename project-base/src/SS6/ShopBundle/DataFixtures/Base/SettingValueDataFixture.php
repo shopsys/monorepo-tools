@@ -56,6 +56,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $defaultCurrency->getId(), 1));
 		$manager->persist(new SettingValue(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $domain2DefaultCurrency->getId(), 2));
 		$manager->persist(new SettingValue(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $defaultInStockAvailability->getId(), SettingValue::DOMAIN_ID_COMMON));
+		$manager->persist(new SettingValue(PricingSetting::FREE_TRANSPORT_PRICE_LIMIT, null, 1));
+		$manager->persist(new SettingValue(PricingSetting::FREE_TRANSPORT_PRICE_LIMIT, null, 2));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
