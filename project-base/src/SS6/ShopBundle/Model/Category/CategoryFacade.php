@@ -111,7 +111,7 @@ class CategoryFacade {
 				}
 				$category = $this->categoryRepository->getById($categoryId);
 				$category->setParent($parent);
-				$this->categoryRepository->moveDown($category, true);
+				$this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
 			}
 
 			$this->em->flush();

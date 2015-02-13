@@ -9,6 +9,8 @@ use SS6\ShopBundle\Model\Category\Category;
 
 class CategoryRepository extends NestedTreeRepository {
 
+	const MOVE_DOWN_TO_BOTTOM = true;
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
