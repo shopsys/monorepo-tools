@@ -110,7 +110,6 @@ class RegistrationController extends Controller {
 			return $this->redirect($this->generateUrl('front_registration_reset_password'));
 		}
 
-
 		return $this->render('@SS6Shop/Front/Content/Registration/resetPassword.html.twig', [
 			'form' => $form->createView(),
 		]);
@@ -128,6 +127,11 @@ class RegistrationController extends Controller {
 
 		$email = $request->query->get('email');
 		$hash = $request->query->get('hash');
+
+		if (!$registrationFacade->isResetPasswordHashValid($email, $domain->getId(), $hash)) {
+			$flashMessageSender->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
+			return $this->redirect($this->generateUrl('front_homepage'));
+		}
 
 		$form = $this->createForm(new NewPasswordFormType());
 
@@ -162,11 +166,6 @@ class RegistrationController extends Controller {
 
 			$flashMessageSender->addSuccessFlash('Heslo bylo úspěšně změněno');
 			return $this->redirect($this->generateUrl('front_homepage'));
-		} else {
-			if (!$registrationFacade->isResetPasswordHashValid($email, $domain->getId(), $hash)) {
-				$flashMessageSender->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
-				return $this->redirect($this->generateUrl('front_homepage'));
-			}
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/setNewPassword.html.twig', [
