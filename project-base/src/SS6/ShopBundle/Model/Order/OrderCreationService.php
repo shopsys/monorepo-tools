@@ -133,7 +133,12 @@ class OrderCreationService {
 	 */
 	private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale) {
 		$payment = $order->getPayment();
-		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $order->getCurrency());
+		$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+			$payment,
+			$order->getCurrency(),
+			$orderPreview->getProductsPrice(),
+			$order->getDomainId()
+		);
 		$orderPayment = new OrderPayment(
 			$order,
 			$payment->getName($locale),

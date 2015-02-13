@@ -79,7 +79,12 @@ class TransportAndPaymentWatcherService {
 
 		$paymentPriceChanged = false;
 		if ($payment !== null) {
-			$paymentPriceChanged = $this->checkPaymentPrice($payment, $orderData->currency);
+			$paymentPriceChanged = $this->checkPaymentPrice(
+				$payment,
+				$orderData->currency,
+				$orderPreview,
+				$orderData->domainId
+			);
 		}
 
 		$this->rememberTransportAndPayment(
@@ -128,14 +133,26 @@ class TransportAndPaymentWatcherService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param int $domainId
 	 * @return boolean
 	 */
-	private function checkPaymentPrice(Payment $payment, Currency $currency) {
+	private function checkPaymentPrice(
+		Payment $payment,
+		Currency $currency,
+		OrderPreview $orderPreview,
+		$domainId
+	) {
 		$paymentPrices = $this->getRememberedPaymentPrices();
 
 		if (array_key_exists($payment->getId(), $paymentPrices)) {
 			$rememberedPaymentPriceValue = $paymentPrices[$payment->getId()];
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+				$payment,
+				$currency,
+				$orderPreview->getProductsPrice(),
+				$domainId
+			);
 
 			if ($rememberedPaymentPriceValue !== $paymentPrice->getPriceWithVat()) {
 				return true;
@@ -175,12 +192,24 @@ class TransportAndPaymentWatcherService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param int $domainId
 	 * @return array
 	 */
-	private function getPaymentPrices($payments, Currency $currency) {
+	private function getPaymentPrices(
+		$payments,
+		Currency $currency,
+		OrderPreview $orderPreview,
+		$domainId
+	) {
 		$paymentPriceValues = [];
 		foreach ($payments as $payment) {
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+				$payment,
+				$currency,
+				$orderPreview->getProductsPrice(),
+				$domainId
+			);
 			$paymentPriceValues[$payment->getId()] = $paymentPrice->getPriceWithVat();
 		}
 
@@ -208,7 +237,12 @@ class TransportAndPaymentWatcherService {
 				$orderPreview,
 				$domainId
 			),
-			self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices($payments, $currency),
+			self::SESSION_PAYMENT_PRICES => $this->getPaymentPrices(
+				$payments,
+				$currency,
+				$orderPreview,
+				$domainId
+			),
 		]);
 	}
 

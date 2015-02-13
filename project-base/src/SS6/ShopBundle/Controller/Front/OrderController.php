@@ -129,7 +129,12 @@ class OrderController extends Controller {
 				$orderPreview->getProductsPrice(),
 				$domainId
 			),
-			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById($payments, $currency),
+			'paymentsPrices' => $paymentPriceCalculation->calculatePricesById(
+				$payments,
+				$currency,
+				$orderPreview->getProductsPrice(),
+				$domainId
+			),
 		]);
 	}
 

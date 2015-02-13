@@ -17,7 +17,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculatePriceProvider() {
+	public function testCalculateIndependentPriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -37,9 +37,9 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculatePriceProvider
+	 * @dataProvider testCalculateIndependentPriceProvider
 	 */
-	public function testCalculatePrice(
+	public function testCalculateIndependentPrice(
 		$inputPriceType,
 		$inputPrice,
 		$vatPercent,
@@ -70,7 +70,7 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$payment = new Payment(new PaymentData(['cs' => 'paymentName'], $vat));
 		$payment->setPrice($currency, $inputPrice);
 
-		$price = $paymentPriceCalculation->calculatePrice($payment, $currency);
+		$price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
 		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));

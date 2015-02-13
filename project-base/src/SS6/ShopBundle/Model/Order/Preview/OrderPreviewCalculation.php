@@ -80,7 +80,12 @@ class OrderPreviewCalculation {
 		}
 
 		if ($payment !== null) {
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+				$payment,
+				$currency,
+				$productsPrice,
+				$domainId
+			);
 		} else {
 			$paymentPrice = null;
 		}
