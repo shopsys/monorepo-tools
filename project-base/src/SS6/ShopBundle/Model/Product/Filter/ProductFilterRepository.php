@@ -23,13 +23,13 @@ class ProductFilterRepository {
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $minimalPrice
 	 * @param string $maximalPrice
 	 */
 	public function filterByPrice(
-		QueryBuilder $queryBuilder,
+		QueryBuilder $productsQueryBuilder,
 		PricingGroup $pricingGroup,
 		$minimalPrice,
 		$maximalPrice
@@ -37,48 +37,48 @@ class ProductFilterRepository {
 		$priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
 		if ($minimalPrice !== null) {
 			$priceLimits .= ' AND pcp.priceWithVat >= :minimalPrice';
-			$queryBuilder->setParameter('minimalPrice', $minimalPrice);
+			$productsQueryBuilder->setParameter('minimalPrice', $minimalPrice);
 		}
 		if ($maximalPrice !== null) {
 			$priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
-			$queryBuilder->setParameter('maximalPrice', $maximalPrice);
+			$productsQueryBuilder->setParameter('maximalPrice', $maximalPrice);
 		}
 		$this->queryBuilderService->addOrExtendJoin(
-			$queryBuilder,
+			$productsQueryBuilder,
 			ProductCalculatedPrice::class,
 			'pcp',
 			$priceLimits
 		);
-		$queryBuilder->setParameter('pricingGroup', $pricingGroup);
+		$productsQueryBuilder->setParameter('pricingGroup', $pricingGroup);
 
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param bool $filterByStock
 	 */
-	public function filterByStock(QueryBuilder $queryBuilder, $filterByStock) {
+	public function filterByStock(QueryBuilder $productsQueryBuilder, $filterByStock) {
 		if ($filterByStock) {
 			$this->queryBuilderService->addOrExtendJoin(
-				$queryBuilder,
+				$productsQueryBuilder,
 				Availability::class,
 				'a',
 				'p.calculatedAvailability = a'
 			);
-			$queryBuilder->andWhere('a.deliveryTime = :deliveryTime');
-			$queryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
+			$productsQueryBuilder->andWhere('a.deliveryTime = :deliveryTime');
+			$productsQueryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
 		}
 
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 */
-	public function filterByFlags(QueryBuilder $queryBuilder, array $flags) {
+	public function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
 		$flagsCount = count($flags);
 		if ($flagsCount !== 0) {
-			$queryBuilder
+			$productsQueryBuilder
 				->join('p.flags', 'f', Join::ON);
 			$whereClause = 'f = :flag';
 			$counter = 1;
@@ -88,10 +88,10 @@ class ProductFilterRepository {
 				} else {
 					$whereClause .= $flag->getId() . ' OR f = :flag';
 				}
-				$queryBuilder->setParameter('flag' . $flag->getId(), $flag);
+				$productsQueryBuilder->setParameter('flag' . $flag->getId(), $flag);
 				$counter++;
 			}
-			$queryBuilder->andWhere($whereClause);
+			$productsQueryBuilder->andWhere($whereClause);
 		}
 	}
 
