@@ -1,8 +1,6 @@
 (function ($){
 	$(document).ready(function () {
 
-		SS6 = window.SS6 || {};
-
 		$('#js-mail-templates').find('.js-mail-template').each(function () {
 			var self = this;
 			var sendMailId = $(this).attr('id') + '_sendMail';
