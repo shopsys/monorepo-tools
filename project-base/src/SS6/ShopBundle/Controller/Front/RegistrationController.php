@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use Exception;
 use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use SS6\ShopBundle\Form\Front\Registration\ResetPasswordFormType;
@@ -76,6 +77,8 @@ class RegistrationController extends Controller {
 		/* @var $registrationFacade \SS6\ShopBundle\Model\Customer\RegistrationFacade */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$em = $this->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
 
 		try {
 			$form = $this->createForm(new ResetPasswordFormType());
@@ -86,7 +89,14 @@ class RegistrationController extends Controller {
 				$formData = $form->getData();
 				$email = $formData['email'];
 
-				$registrationFacade->resetPassword($email, $domain->getId());
+				try {
+					$em->beginTransaction();
+					$registrationFacade->resetPassword($email, $domain->getId());
+					$em->commit();
+				} catch (Exception $ex) {
+					$em->rollback();
+					throw $ex;
+				}
 
 				$flashMessageSender->addSuccessFlashTwig('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.', [
 					'email' => $email,
@@ -114,6 +124,8 @@ class RegistrationController extends Controller {
 		/* @var $registrationFacade \SS6\ShopBundle\Model\Customer\RegistrationFacade */
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$em = $this->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
 
 		try {
 			$email = $request->query->get('email');
@@ -128,8 +140,15 @@ class RegistrationController extends Controller {
 
 				$newPassword = $formData['newPassword'];
 
-				$user = $registrationFacade->setNewPassword($email, $domain->getId(), $hash, $newPassword);
-				$this->login($user);
+				try {
+					$em->beginTransaction();
+					$user = $registrationFacade->setNewPassword($email, $domain->getId(), $hash, $newPassword);
+					$this->login($user);
+					$em->commit();
+				} catch (Exception $ex) {
+					$em->rollback();
+					throw $ex;
+				}
 
 				$flashMessageSender->addSuccessFlash('Heslo bylo úspěšně změněno');
 				return $this->redirect($this->generateUrl('front_homepage'));
