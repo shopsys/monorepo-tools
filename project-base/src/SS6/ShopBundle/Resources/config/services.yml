@@ -103,12 +103,6 @@ services:
   ss6.shop.advanced_search.filter.product_partno_fitler:
     class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter
 
-  ss6.shop.article.article_edit_facade:
-    class: SS6\ShopBundle\Model\Article\ArticleEditFacade
-
-  ss6.shop.article.article_repository:
-    class: SS6\ShopBundle\Model\Article\ArticleRepository
-
   ss6.shop.cart:
     class: SS6\ShopBundle\Model\Cart\Cart
     factory_service: ss6.shop.cart.cart_factory
@@ -328,7 +322,6 @@ services:
 
   ss6.shop.image.image_delete_doctrine_listener:
     class: SS6\ShopBundle\Model\Image\ImageDeleteDoctrineListener
-    arguments: [@service_container]
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 
@@ -361,8 +354,6 @@ services:
 
   ss6.shop.grid.inline_edit.inline_edit_service:
     class: SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
-    arguments:
-      - @service_container
 
   ss6.shop.grid.ordering.grid_ordering_facade:
     class: SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade
@@ -439,7 +430,6 @@ services:
       - %ss6.web_dir%
       - %ss6.javascript_sources_dir%
       - %ss6.javascript_url_prefix%
-      - @service_container
 
   ss6.shop.mail.mail_template_facade:
     class: SS6\ShopBundle\Model\Mail\MailTemplateFacade
