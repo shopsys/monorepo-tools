@@ -25,7 +25,7 @@
     - { name: ~, width: 550, height: ~, crop: false }
     - { name: galleryThubnail, width: ~, height: 35, crop: false }
     - { name: list, width: 300, height: 200, crop: false }
-    - { name: thumbnail, width: 50, height: 40, crop: true }
+    - { name: thumbnail, width: 50, height: 40, crop: false }
 
 - name: sliderItem
   class: SS6\ShopBundle\Model\Slider\SliderItem
