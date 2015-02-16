@@ -60,7 +60,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 
 		$mailTemplateData->subject = 'Žádost o nové heslo';
 		$mailTemplateData->body = 'Dobrý den.<br /><br />'
-			. 'Nové heslo nastavíte zde: {new_password_url}';
+			. 'Nové heslo nastavíte zde: <a href="{new_password_url}">{new_password_url}</a>';
 
 		$mailTemplate = new MailTemplate(MailTemplate::RESET_PASSWORD_NAME, 1, $mailTemplateData);
 		$manager->persist($mailTemplate);
@@ -118,7 +118,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 
 		$mailTemplateData->subject = 'Žádost o nové heslo';
 		$mailTemplateData->body = 'Dobrý den.<br /><br />'
-			. 'Nové heslo nastavíte zde: {new_password_url}';
+			. 'Nové heslo nastavíte zde: <a href="{new_password_url}">{new_password_url}</a>';
 
 		$mailTemplate = new MailTemplate(MailTemplate::RESET_PASSWORD_NAME, 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
