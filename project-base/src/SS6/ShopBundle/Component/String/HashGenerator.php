@@ -15,7 +15,7 @@ class HashGenerator {
 
 		$hash = '';
 		for ($i = 1; $i <= $length; $i++) {
-			$randomIndex = $this->randomUnsigned32(0, $numberOfChars - 1);
+			$randomIndex = $this->getRandomUnsigned16($numberOfChars - 1);
 			$hash .= $this->characters[$randomIndex];
 		}
 
@@ -23,32 +23,57 @@ class HashGenerator {
 	}
 
 	/**
-	 * @param int $min
 	 * @param int $max
 	 * @throws \SS6\ShopBundle\Component\String\Exception\HashGenerationFailedException
 	 */
-	private function randomUnsigned32($min, $max) {
-		$iv = mcrypt_create_iv(4, MCRYPT_DEV_URANDOM);
+	private function getRandomUnsigned16($max) {
+		do {
+			$result = $this->getRandomUnsigned16PossiblyOutOfRange($max);
+		} while ($result > $max);
+
+		return $result;
+	}
+
+	/**
+	 * @param int $max
+	 * @return int
+	 */
+	private function getRandomUnsigned16PossiblyOutOfRange($max) {
+		$iv = mcrypt_create_iv(2, MCRYPT_DEV_URANDOM);
 		if ($iv === false) {
 			throw new \SS6\ShopBundle\Component\String\Exception\HashGenerationFailedException();
 		}
 
-		$unpacked32 = unpack('V', $iv);
-		$randomUnsigned32 = $unpacked32[1];
+		$unpacked16 = unpack('v', $iv);
+		$randomUnsigned16 = $unpacked16[1];
 
-		$normalizedRandom = $randomUnsigned32 / 4294967295; // [0.0 - 1.0]
+		$numberOfBits = $this->getNumberOfBits($max);
+		$bitMask = $this->getBitMask($numberOfBits);
 
-		$result = $min + ($max - $min) * $normalizedRandom;
-		$roundedResult = (int)round($result);
+		return $randomUnsigned16 & $bitMask;
+	}
 
-		// don't let rounding get number out of range
-		if ($roundedResult < $min) {
-			$roundedResult = $min;
-		} elseif ($roundedResult > $max) {
-			$roundedResult = $max;
+	/**
+	 * @param int $number
+	 * @return int
+	 */
+	private function getNumberOfBits($number) {
+		$numberOfBits = 0;
+
+		while ($number > 0) {
+			$number = $number >> 1;
+			$numberOfBits++;
 		}
 
-		return $roundedResult;
+		return $numberOfBits;
+	}
+
+	/**
+	 * @param int $numberOfOnes
+	 * @return int
+	 */
+	private function getBitMask($numberOfOnes) {
+		return (1 << $numberOfOnes) - 1;
 	}
 
 }
