@@ -17,5 +17,5 @@ services:
 
   ss6.auto_services.auto_services_collector:
     class: SS6\AutoServicesBundle\Compiler\AutoServicesCollector
-    arguments: [%kernel.cache_dir%]
+    arguments: [%kernel.cache_dir%, %kernel.container_class%, @filesystem]
 

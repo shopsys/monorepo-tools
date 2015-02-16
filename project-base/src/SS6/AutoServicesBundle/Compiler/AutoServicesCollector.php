@@ -2,6 +2,8 @@
 
 namespace SS6\AutoServicesBundle\Compiler;
 
+use Symfony\Component\Filesystem\Filesystem;
+
 class AutoServicesCollector {
 
 	const CONFIG_FILENAME = 'autoServices.json';
@@ -13,12 +15,24 @@ class AutoServicesCollector {
 	private $cacheDir;
 
 	/**
+	 * @var string
+	 */
+	private $containerClass;
+
+	/**
+	 * @var \Symfony\Component\Filesystem\Filesystem
+	 */
+	private $filesystem;
+
+	/**
 	 * @var string[]|null
 	 */
 	private $classesByServiceId;
 
-	public function __construct($cacheDir) {
+	public function __construct($cacheDir, $containerClass, Filesystem $filesystem) {
 		$this->cacheDir = $cacheDir;
+		$this->containerClass = $containerClass;
+		$this->filesystem = $filesystem;
 	}
 
 	/**
@@ -63,7 +77,8 @@ class AutoServicesCollector {
 	}
 
 	private function invalidateContainer() {
-		file_put_contents($this->getContainerInvalidatorFilepath(), time());
+		$containerClassFilepath = $this->cacheDir . DIRECTORY_SEPARATOR . $this->containerClass . '.php';
+		$this->filesystem->remove($containerClassFilepath);
 	}
 
 	private function flush() {

@@ -3,7 +3,6 @@
 namespace SS6\AutoServicesBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,14 +23,6 @@ class SS6AutoServicesExtension extends Extension {
 
 		$loader = new Loader\YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
-
-		$autoServicesCollectorDefinition = $containerBuilder->getDefinition('ss6.auto_services.auto_services_collector');
-		$autoServicesCollector = $containerBuilder->resolveServices($autoServicesCollectorDefinition);
-		/* @var $autoServicesCollector \SS6\AutoServicesBundle\Compiler\AutoServicesCollector */
-		$containerInvalidatorFilepath = $autoServicesCollector->getContainerInvalidatorFilepath();
-		if (file_exists($containerInvalidatorFilepath)) {
-			$containerBuilder->addResource(new FileResource($containerInvalidatorFilepath));
-		}
 	}
 
 }
