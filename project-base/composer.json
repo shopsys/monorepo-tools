@@ -61,6 +61,7 @@
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
 		"pdepend/pdepend": "2.0.0",
 		"phpmd/phpmd": "2.0.0",
+		"se/selenium-server-standalone": "2.45.0",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"squizlabs/php_codesniffer": "2.0.x-dev#676e90b"
 	},
