@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller {
 
@@ -100,14 +101,32 @@ class CategoryController extends Controller {
 	 * @Route("/category/list/")
 	 */
 	public function listAction() {
-		$categoryGridFactory = $this->get('ss6.shop.category.category_grid_factory');
-		/* @var $categoryGridFactory \SS6\ShopBundle\Model\Category\Grid\CategoryGridFactory */
-
-		$grid = $categoryGridFactory->create();
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
-			'gridView' => $grid->createView(),
+			'rootCategories' => $categoryFacade->getAllInRootEagerLoaded(),
 		]);
+	}
+
+	/**
+	 * @Route("/category/save-order/", methods={"post"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function saveOrderAction(Request $request) {
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+
+		$categoryOrderingData = [];
+		foreach ($request->get('categoriesOrderingData') as $categoryOrderingData) {
+			$categoryId = (int)$categoryOrderingData['categoryId'];
+			$parentId = $categoryOrderingData['parentId'] === '' ? null : (int)$categoryOrderingData['parentId'];
+			$parentIdByCategoryId[$categoryId] = $parentId;
+		}
+
+		$categoryFacade->editOrdering($parentIdByCategoryId);
+
+		return new Response('OK');
 	}
 
 	/**

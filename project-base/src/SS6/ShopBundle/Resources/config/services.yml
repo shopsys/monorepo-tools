@@ -275,9 +275,6 @@ services:
   ss6.shop.category.category_facade:
     class: SS6\ShopBundle\Model\Category\CategoryFacade
 
-  ss6.shop.category.category_grid_factory:
-    class: SS6\ShopBundle\Model\Category\Grid\CategoryGridFactory
-
   ss6.shop.category.category_repository:
     class: SS6\ShopBundle\Model\Category\CategoryRepository
 

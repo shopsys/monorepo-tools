@@ -4,9 +4,12 @@ namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Model\Category\Category;
 
-class CategoryRepository {
+class CategoryRepository extends NestedTreeRepository {
+
+	const MOVE_DOWN_TO_BOTTOM = true;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -18,6 +21,8 @@ class CategoryRepository {
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
+		$classMetadata = $this->em->getClassMetadata(Category::class);
+		parent::__construct($this->em, $classMetadata);
 	}
 
 	/**
@@ -28,10 +33,29 @@ class CategoryRepository {
 	}
 
 	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllQueryBuilder() {
+		return $this->getCategoryRepository()
+			->createQueryBuilder('c')
+			->where('c.parent IS NOT NULL')
+			->orderBy('c.lft');
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAll() {
-		return $this->getCategoryRepository()->findBy([], ['root' => 'ASC', 'lft' => 'ASC']);
+		return $this->getAllQueryBuilder()
+			->getQuery()
+			->getResult();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
+	public function getRootCategory() {
+		return $this->getCategoryRepository()->findOneBy(['parent' => null]);
 	}
 
 	/**
@@ -39,12 +63,8 @@ class CategoryRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllWithoutBranch(Category $categoryBranch) {
-		return $this->em->createQueryBuilder()
-			->select('d')
-			->from(Category::class, 'd')
-			->where('d.root != :branchRoot OR d.lft < :branchLft OR d.rgt > :branchRgt')
-			->orderBy('d.root, d.lft', 'ASC')
-			->setParameter('branchRoot', $categoryBranch->getRoot())
+		return $this->getAllQueryBuilder()
+			->andWhere('c.lft < :branchLft OR c.rgt > :branchRgt')
 			->setParameter('branchLft', $categoryBranch->getLft())
 			->setParameter('branchRgt', $categoryBranch->getRgt())
 			->getQuery()
@@ -79,9 +99,28 @@ class CategoryRepository {
 	 */
 	public function getAllInRootWithTranslation($locale) {
 		return $this->getAllWithTranslationQueryBuilder($locale)
-			->andWhere('d.level = 0')
+			->andWhere('c.level = 1')
 			->getQuery()
 			->execute();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getAllInRootEagerLoaded() {
+		$allCategories = $this->getAllQueryBuilder()
+			->join('c.translations', 'ct')
+			->getQuery()
+			->execute();
+
+		$rootCategories = [];
+		foreach ($allCategories as $cateogry) {
+			if ($cateogry->getLevel() === 1) {
+				$rootCategories[] = $cateogry;
+			}
+		}
+
+		return $rootCategories;
 	}
 
 	/**
@@ -89,12 +128,9 @@ class CategoryRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getAllWithTranslationQueryBuilder($locale) {
-		$qb = $this->em->createQueryBuilder()
-			->select('d')
-			->from(Category::class, 'd')
-			->join('d.translations', 'dt', Join::WITH, 'dt.locale = :locale')
-			->where('dt.name IS NOT NULL')
-			->orderBy('d.root, d.lft', 'ASC');
+		$qb = $this->getAllQueryBuilder()
+			->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
+			->andWhere('ct.name IS NOT NULL');
 		$qb->setParameter('locale', $locale);
 
 		return $qb;

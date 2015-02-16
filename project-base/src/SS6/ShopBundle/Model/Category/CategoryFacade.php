@@ -55,7 +55,8 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function create(CategoryData $categoryData) {
-		$category = $this->categoryService->create($categoryData);
+		$rootCategory = $this->categoryRepository->getRootCategory();
+		$category = $this->categoryService->create($categoryData, $rootCategory);
 		$this->em->persist($category);
 		$this->em->flush();
 
@@ -68,8 +69,9 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function edit($categoryId, CategoryData $categoryData) {
+		$rootCategory = $this->categoryRepository->getRootCategory();
 		$category = $this->categoryRepository->getById($categoryId);
-		$this->categoryService->edit($category, $categoryData);
+		$this->categoryService->edit($category, $categoryData, $rootCategory);
 		$this->em->flush();
 
 		return $category;
@@ -92,11 +94,47 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param int[] $parentIdByCategoryId
+	 */
+	public function editOrdering($parentIdByCategoryId) {
+		// eager-load all categories into identity map
+		$this->categoryRepository->getAll();
+		$rootCategory = $this->categoryRepository->getRootCategory();
+
+		try {
+			$this->em->beginTransaction();
+			foreach ($parentIdByCategoryId as $categoryId => $parentId) {
+				if ($parentId === null) {
+					$parent = $rootCategory;
+				} else {
+					$parent = $this->categoryRepository->getById($parentId);
+				}
+				$category = $this->categoryRepository->getById($categoryId);
+				$category->setParent($parent);
+				$this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
+			}
+
+			$this->em->flush();
+			$this->em->commit();
+		} catch (\Exception $e) {
+			$this->em->rollback();
+			throw $e;
+		}
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllInRootWithTranslation() {
 		$locale = $this->domain->getLocale();
 		return $this->categoryRepository->getAllInRootWithTranslation($locale);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getAllInRootEagerLoaded() {
+		return $this->categoryRepository->getAllInRootEagerLoaded();
 	}
 
 	/**
