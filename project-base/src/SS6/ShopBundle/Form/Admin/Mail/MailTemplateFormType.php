@@ -39,7 +39,7 @@ class MailTemplateFormType extends AbstractType {
 			])
 			->add(
 				$builder
-					->create('body', FormType::CKEDITOR, [
+					->create('body', FormType::WYSIWYG, [
 						'required' => true,
 						'constraints' => [
 							new Constraints\NotBlank([

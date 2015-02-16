@@ -125,7 +125,7 @@ class ProductFormType extends AbstractType {
 				],
 			])
 			->add('description', FormType::LOCALIZED, [
-				'type' => FormType::CKEDITOR,
+				'type' => FormType::WYSIWYG,
 				'required' => false,
 			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])

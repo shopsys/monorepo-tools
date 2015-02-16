@@ -63,7 +63,7 @@ class TransportFormType extends AbstractType {
 			])
 			->add('instructions', FormType::LOCALIZED, [
 				'required' => false,
-				'type' => FormType::CKEDITOR,
+				'type' => FormType::WYSIWYG,
 			])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => false,

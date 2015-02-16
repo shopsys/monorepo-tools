@@ -8,7 +8,6 @@ class FormType {
 	const BUTTON = 'button';
 	const CHECKBOX = 'checkbox';
 	const CHOICE = 'choice';
-	const CKEDITOR = 'ckeditor';
 	const COLLECTION = 'collection';
 	const COLOR_PICKER = 'color_picker';
 	const COUNTRY = 'country';
@@ -44,5 +43,6 @@ class FormType {
 	const TIME = 'time';
 	const TIMEZONE = 'timezone';
 	const URL = 'url';
+	const WYSIWYG = 'ckeditor';
 	const YES_NO = 'yes_no';
 }
