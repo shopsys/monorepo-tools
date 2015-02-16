@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\Flag\Flag;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class FlagFilterRepository {
+class FlagFilterChoiceRepository {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -38,16 +38,17 @@ class FlagFilterRepository {
 		$productsQueryBuilder
 			->join('p.flags', 'pf', Join::WITH, 'pf.id = f.id');
 
-		$flagQueryBuilder = $this->em->createQueryBuilder()
+		$flagsQueryBuilder = $this->em->createQueryBuilder();
+		$flagsQueryBuilder
 			->select('f')
-			->from(Flag::class, 'f');
-		$flagQueryBuilder->andWhere($flagQueryBuilder->expr()->exists($productsQueryBuilder));
+			->from(Flag::class, 'f')
+			->andWhere($flagsQueryBuilder->expr()->exists($productsQueryBuilder));
 
 		foreach ($productsQueryBuilder->getParameters() as $parameter) {
-			$flagQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
+			$flagsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
 		}
 
-		$flagsInCategory = $flagQueryBuilder->getQuery()->execute();
+		$flagsInCategory = $flagsQueryBuilder->getQuery()->execute();
 
 		return $flagsInCategory;
 	}
