@@ -14,6 +14,7 @@
 	<property name="path.composer.executable" value="composer"/>
 	<property name="path.env.test" value="${path.root}/TEST"/>
 	<property name="path.grunt.executable" value="${path.root}/node_modules/.bin/grunt"/>
+	<property name="path.java.executable" value="java"/>
 	<property name="path.npm.executable" value="npm"/>
 	<property name="path.php.executable" value="php"/>
 	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
