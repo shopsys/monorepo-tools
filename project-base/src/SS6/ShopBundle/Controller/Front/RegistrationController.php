@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use Exception;
 use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use SS6\ShopBundle\Form\Front\Registration\ResetPasswordFormType;
@@ -92,7 +91,12 @@ class RegistrationController extends Controller {
 				$em->beginTransaction();
 				$registrationFacade->resetPassword($email, $domain->getId());
 				$em->commit();
-			} catch (Exception $ex) {
+
+				$flashMessageSender->addSuccessFlashTwig('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.', [
+					'email' => $email,
+				]);
+				return $this->redirect($this->generateUrl('front_registration_reset_password'));
+			} catch (\Exception $ex) {
 				$em->rollback();
 				throw $ex;
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
@@ -103,11 +107,6 @@ class RegistrationController extends Controller {
 						'registrationLink' => $this->generateUrl('front_registration_register'),
 					]);
 			}
-
-			$flashMessageSender->addSuccessFlashTwig('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.', [
-				'email' => $email,
-			]);
-			return $this->redirect($this->generateUrl('front_registration_reset_password'));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/resetPassword.html.twig', [
@@ -147,7 +146,7 @@ class RegistrationController extends Controller {
 				$user = $registrationFacade->setNewPassword($email, $domain->getId(), $hash, $newPassword);
 				$this->login($user);
 				$em->commit();
-			} catch (Exception $ex) {
+			} catch (\Exception $ex) {
 				$em->rollback();
 				throw $ex;
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
@@ -157,11 +156,9 @@ class RegistrationController extends Controller {
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),
 					]);
-				return $this->redirect($this->generateUrl('front_homepage'));
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException $ex) {
 				$em->rollback();
 				$flashMessageSender->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
-				return $this->redirect($this->generateUrl('front_homepage'));
 			}
 
 			$flashMessageSender->addSuccessFlash('Heslo bylo úspěšně změněno');
