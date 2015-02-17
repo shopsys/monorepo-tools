@@ -8,7 +8,6 @@ use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
-use SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductSearchService;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -40,11 +39,6 @@ class ProductOnCurrentDomainFacade {
 	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository
-	 */
-	private $productSearchRepository;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductSearchService
 	 */
 	private $productSearchService;
@@ -55,7 +49,6 @@ class ProductOnCurrentDomainFacade {
 		ProductDetailFactory $productDetailFactory,
 		CurrentCustomer $currentCustomer,
 		CategoryRepository $categoryRepository,
-		ProductSearchRepository $productSearchRepository,
 		ProductSearchService $productSearchService
 	) {
 		$this->productRepository = $productRepository;
@@ -63,7 +56,6 @@ class ProductOnCurrentDomainFacade {
 		$this->currentCustomer = $currentCustomer;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->categoryRepository = $categoryRepository;
-		$this->productSearchRepository = $productSearchRepository;
 		$this->productSearchService = $productSearchService;
 	}
 
@@ -115,7 +107,7 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	public function getSearchAutocompleteData($searchText, $limit) {
-		$paginationResult = $this->productSearchRepository->getPaginationResultForVisibleBySearchText(
+		$paginationResult = $this->productRepository->getPaginationResultForVisibleBySearchText(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$searchText,
