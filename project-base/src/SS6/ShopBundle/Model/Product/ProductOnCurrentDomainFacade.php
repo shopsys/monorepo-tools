@@ -115,10 +115,9 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	public function getSearchAutocompleteData($searchText, $limit) {
-		$paginationResult = $this->productSearchRepository->getPaginationResultForVisibleByNameOrCatnum(
+		$paginationResult = $this->productSearchRepository->getPaginationResultForVisibleBySearchText(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
-			$searchText,
 			$searchText,
 			1,
 			$limit

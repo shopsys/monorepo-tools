@@ -30,8 +30,7 @@ class ProductSearchRepository {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
-	 * @param string $productName
-	 * @param string $productCatnum
+	 * @param string $searchText
 	 * @param int $page
 	 * @param int $limit
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
@@ -39,11 +38,10 @@ class ProductSearchRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultForVisibleByNameOrCatnum(
+	public function getPaginationResultForVisibleBySearchText(
 		$domainId,
 		$locale,
-		$productName,
-		$productCatnum,
+		$searchText,
 		$page,
 		$limit
 	) {
@@ -54,8 +52,8 @@ class ProductSearchRepository {
 			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
 			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
 		);
-		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($productName) . '%');
-		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($productCatnum) . '%');
+		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
+		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
