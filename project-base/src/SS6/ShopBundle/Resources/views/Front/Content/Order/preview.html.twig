@@ -4,14 +4,14 @@
 		<table class="list-cart-preview">
 			<tbody>
 
-				{% for cartItemKey, cartItem in orderPreview.cartItems %}
-					{% set cartItemPrice = orderPreview.cartItemsPrices[cartItemKey] %}
+				{% for quantifiedItemKey, quantifiedItem in orderPreview.quantifiedItems %}
+					{% set quantifiedItemPrice = orderPreview.quantifiedItemsPrices[quantifiedItemKey] %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
-							<strong>{{ cartItem.quantity }} x</strong> {{ cartItem.name }}
+							<strong>{{ quantifiedItem.quantity }} x</strong> {{ quantifiedItem.item.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ cartItemPrice.totalPriceWithVat|price }}
+							{{ quantifiedItemPrice.totalPriceWithVat|price }}
 						</td>
 					</tr>
 				{% endfor %}
@@ -43,7 +43,7 @@
 						{{ 'Cena celkem s DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPriceWithVat|price }}
+						{{ orderPreview.totalPrice.priceWithVat|price }}
 					</td>
 				</tr>
 
@@ -52,7 +52,7 @@
 						{{ 'Cena celkem bez DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPriceWithoutVat|price }}
+						{{ orderPreview.totalPrice.priceWithoutVat|price }}
 					</td>
 				</tr>
 
@@ -61,7 +61,7 @@
 						{{ 'Celková výše DPH'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPriceVatAmount|price }}
+						{{ orderPreview.totalPrice.vatAmount|price }}
 					</td>
 				</tr>
 

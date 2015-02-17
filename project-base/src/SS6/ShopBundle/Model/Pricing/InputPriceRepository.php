@@ -126,7 +126,7 @@ class InputPriceRepository {
 
 		$this->batchProcessQuery($query, function (Payment $payment) use ($toInputPriceType) {
 			foreach ($payment->getPrices() as $paymentInputPrice) {
-				$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+				$paymentPrice = $this->paymentPriceCalculation->calculateIndependentPrice(
 					$payment,
 					$paymentInputPrice->getCurrency()
 				);
@@ -158,7 +158,7 @@ class InputPriceRepository {
 
 		$this->batchProcessQuery($query, function (Transport $transport) use ($toInputPriceType) {
 			foreach ($transport->getPrices() as $transportInputPrice) {
-				$transportPrice = $this->transportPriceCalculation->calculatePrice(
+				$transportPrice = $this->transportPriceCalculation->calculateIndependentPrice(
 					$transport,
 					$transportInputPrice->getCurrency()
 				);

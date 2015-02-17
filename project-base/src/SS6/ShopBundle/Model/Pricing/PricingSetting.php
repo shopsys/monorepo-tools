@@ -13,6 +13,7 @@ class PricingSetting {
 	const ROUNDING_TYPE = 'roundingType';
 	const DEFAULT_CURRENCY = 'defaultCurrencyId';
 	const DEFAULT_DOMAIN_CURRENCY = 'defaultDomainCurrencyId';
+	const FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT = 'freeTransportAndPaymentPriceLimit';
 
 	const INPUT_PRICE_TYPE_WITH_VAT = 1;
 	const INPUT_PRICE_TYPE_WITHOUT_VAT = 2;
@@ -96,6 +97,22 @@ class PricingSetting {
 
 		$this->setting->set(self::ROUNDING_TYPE, $roundingType, SettingValue::DOMAIN_ID_COMMON);
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return string|null
+	 */
+	public function getFreeTransportAndPaymentPriceLimit($domainId) {
+		return $this->setting->get(self::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, $domainId);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string|null $priceLimit
+	 */
+	public function setFreeTransportAndPaymentPriceLimit($domainId, $priceLimit = null) {
+		$this->setting->set(self::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, $priceLimit, $domainId);
 	}
 
 	/**

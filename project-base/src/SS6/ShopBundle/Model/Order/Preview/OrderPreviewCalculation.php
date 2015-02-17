@@ -2,21 +2,21 @@
 
 namespace SS6\ShopBundle\Model\Order\Preview;
 
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class OrderPreviewCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
 	 */
-	private $cartItemPriceCalculation;
+	private $quantifiedProductPriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
@@ -29,60 +29,78 @@ class OrderPreviewCalculation {
 	private $paymentPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation $cartItemPriceCalculation
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation $quantifiedProductPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
 	 */
 	public function __construct(
-		CartItemPriceCalculation $cartItemPriceCalculation,
+		QuantifiedProductPriceCalculation $quantifiedProductPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation
 	) {
-		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
+		$this->quantifiedProductPriceCalculation = $quantifiedProductPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
 	public function calculatePreview(
 		Currency $currency,
-		Cart $cart,
+		$domainId,
+		array $quantifiedItems,
 		Transport $transport = null,
-		Payment $payment = null
+		Payment $payment = null,
+		User $user = null
 	) {
-		$cartItems = $cart->getItems();
-		$cartItemsPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
+		$quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
+			$quantifiedItems,
+			$domainId,
+			$user
+		);
+
+		$productsPrice = $this->getProductsPrice($quantifiedItemsPrices);
 
 		if ($transport !== null) {
-			$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $currency);
+			$transportPrice = $this->transportPriceCalculation->calculatePrice(
+				$transport,
+				$currency,
+				$productsPrice,
+				$domainId
+			);
 		} else {
 			$transportPrice = null;
 		}
 
 		if ($payment !== null) {
-			$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $currency);
+			$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+				$payment,
+				$currency,
+				$productsPrice,
+				$domainId
+			);
 		} else {
 			$paymentPrice = null;
 		}
 
 		$totalPrice = $this->calculateTotalPrice(
-			$cartItemsPrices,
+			$productsPrice,
 			$transportPrice,
 			$paymentPrice
 		);
 
 		return new OrderPreview(
-			$cartItems,
-			$cartItemsPrices,
-			$totalPrice->getPriceWithoutVat(),
-			$totalPrice->getPriceWithVat(),
-			$totalPrice->getVatAmount(),
+			$quantifiedItems,
+			$quantifiedItemsPrices,
+			$productsPrice,
+			$totalPrice,
 			$transport,
 			$transportPrice,
 			$payment,
@@ -91,13 +109,13 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param array $cartItemsPrices
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
-		array $cartItemsPrices,
+		Price $productsPrice,
 		Price $transportPrice = null,
 		Price $paymentPrice = null
 	) {
@@ -105,12 +123,9 @@ class OrderPreviewCalculation {
 		$totalPriceWithVat = 0;
 		$totalPriceVatAmount = 0;
 
-		foreach ($cartItemsPrices as $cartItemsPrice) {
-			/* @var $cartItemsPrice \SS6\ShopBundle\Model\Cart\Item\CartItemPrice */
-			$totalPriceWithoutVat += $cartItemsPrice->getTotalPriceWithoutVat();
-			$totalPriceWithVat += $cartItemsPrice->getTotalPriceWithVat();
-			$totalPriceVatAmount += $cartItemsPrice->getTotalPriceVatAmount();
-		}
+		$totalPriceWithoutVat += $productsPrice->getPriceWithoutVat();
+		$totalPriceWithVat += $productsPrice->getPriceWithVat();
+		$totalPriceVatAmount += $productsPrice->getVatAmount();
 
 		if ($transportPrice !== null) {
 			$totalPriceWithoutVat += $transportPrice->getPriceWithoutVat();
@@ -128,6 +143,29 @@ class OrderPreviewCalculation {
 			$totalPriceWithoutVat,
 			$totalPriceWithVat,
 			$totalPriceVatAmount
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	private function getProductsPrice(array $quantifiedItemsPrices) {
+		$productsPriceWithoutVat = 0;
+		$productsPriceWithVat = 0;
+		$productsPriceVatAmount = 0;
+
+		foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
+			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
+			$productsPriceWithoutVat += $quantifiedItemPrice->getTotalPriceWithoutVat();
+			$productsPriceWithVat += $quantifiedItemPrice->getTotalPriceWithVat();
+			$productsPriceVatAmount += $quantifiedItemPrice->getTotalPriceVatAmount();
+		}
+
+		return new Price(
+			$productsPriceWithoutVat,
+			$productsPriceWithVat,
+			$productsPriceVatAmount
 		);
 	}
 

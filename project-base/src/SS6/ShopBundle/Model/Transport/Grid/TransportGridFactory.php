@@ -77,7 +77,7 @@ class TransportGridFactory implements GridFactoryInterface {
 			$queryBuilder, 't.id',
 			function ($row) {
 				$transport = $this->transportRepository->findById($row['t']['id']);
-				$row['transportDetail'] = $this->transportDetailFactory->createDetailForTransport($transport);
+				$row['transportDetail'] = $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport);
 				return $row;
 			}
 		);

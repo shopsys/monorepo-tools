@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
@@ -27,6 +28,26 @@ class OrderCreationService {
 	 * @var \SS6\ShopBundle\Model\Order\OrderPriceCalculation
 	 */
 	private $orderPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+	 */
+	private $productPriceCalculationForUser;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 */
+	private $paymentPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 */
+	private $transportPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
@@ -96,22 +117,28 @@ class OrderCreationService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 */
-	public function fillOrderItems(Order $order, array $quantifiedItems) {
+	public function fillOrderItems(Order $order, OrderPreview $orderPreview) {
 		$locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
-		$this->fillOrderProducts($order, $quantifiedItems, $locale);
-		$this->fillOrderTransportAndPayment($order, $locale);
+		$this->fillOrderProducts($order, $orderPreview, $locale);
+		$this->fillOrderTransportAndPayment($order, $orderPreview, $locale);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param string $locale
 	 */
-	private function fillOrderTransportAndPayment(Order $order, $locale) {
+	private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale) {
 		$payment = $order->getPayment();
-		$paymentPrice = $this->paymentPriceCalculation->calculatePrice($payment, $order->getCurrency());
+		$paymentPrice = $this->paymentPriceCalculation->calculatePrice(
+			$payment,
+			$order->getCurrency(),
+			$orderPreview->getProductsPrice(),
+			$order->getDomainId()
+		);
 		$orderPayment = new OrderPayment(
 			$order,
 			$payment->getName($locale),
@@ -124,7 +151,12 @@ class OrderCreationService {
 		$order->addItem($orderPayment);
 
 		$transport = $order->getTransport();
-		$transportPrice = $this->transportPriceCalculation->calculatePrice($transport, $order->getCurrency());
+		$transportPrice = $this->transportPriceCalculation->calculatePrice(
+			$transport,
+			$order->getCurrency(),
+			$orderPreview->getProductsPrice(),
+			$order->getDomainId()
+		);
 		$orderTransport = new OrderTransport(
 			$order,
 			$transport->getName($locale),
@@ -139,32 +171,31 @@ class OrderCreationService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param string $locale
 	 */
-	private function fillOrderProducts(Order $order, array $quantifiedItems, $locale) {
-		foreach ($quantifiedItems as $quantifiedItem) {
-			$item = $quantifiedItem->getItem();
-			if ($item instanceof Product) {
-				$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
-					$item,
-					$order->getDomainId(),
-					$order->getCustomer()
-				);
+	private function fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale) {
+		$quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
 
-				$orderItem = new OrderProduct(
-					$order,
-					$item->getName($locale),
-					$productPrice->getPriceWithoutVat(),
-					$productPrice->getPriceWithVat(),
-					$item->getVat()->getPercent(),
-					$quantifiedItem->getQuantity(),
-					$item
-				);
-			} else {
-				$message = 'Object "' . get_class($item) . '" is not valid for OrderItem.';
+		foreach ($orderPreview->getQuantifiedItems() as $index => $quantifiedItem) {
+			$product = $quantifiedItem->getItem();
+			if (!$product instanceof Product) {
+				$message = 'Object "' . get_class($product) . '" is not valid for order creation.';
 				throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidQuantifiedItemException($message);
 			}
+
+			$quantifiedItemPrice = $quantifiedItemPrices[$index];
+			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
+
+			$orderItem = new OrderProduct(
+				$order,
+				$product->getName($locale),
+				$quantifiedItemPrice->getUnitPriceWithoutVat(),
+				$quantifiedItemPrice->getUnitPriceWithVat(),
+				$product->getVat()->getPercent(),
+				$quantifiedItem->getQuantity(),
+				$product
+			);
 
 			$order->addItem($orderItem);
 		}

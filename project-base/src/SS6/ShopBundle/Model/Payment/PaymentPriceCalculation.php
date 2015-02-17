@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class PaymentPriceCalculation {
@@ -33,9 +34,32 @@ class PaymentPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePrice(Payment $payment, Currency $currency) {
+	public function calculatePrice(
+		Payment $payment,
+		Currency $currency,
+		Price $productsPrice,
+		$domainId
+	) {
+		if ($this->isFree($productsPrice, $domainId)) {
+			return new Price(0, 0, 0);
+		}
+
+		return $this->calculateIndependentPrice($payment, $currency);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function calculateIndependentPrice(
+		Payment $payment,
+		Currency $currency
+	) {
 		return $this->basePriceCalculation->calculatePrice(
 			$payment->getPrice($currency)->getPrice(),
 			$this->pricingSetting->getInputPriceType(),
@@ -44,14 +68,39 @@ class PaymentPriceCalculation {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param int $domainId
+	 * @return boolean
+	 */
+	private function isFree(Price $productsPrice, $domainId) {
+		$freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
+
+		if ($freeTransportAndPaymentPriceLimit === null) {
+			return false;
+		}
+
+		return $productsPrice->getPriceWithVat() >= $freeTransportAndPaymentPriceLimit;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[paymentId]
 	 */
-	public function calculatePricesById(array $payments, Currency $currency) {
+	public function calculatePricesById(
+		array $payments,
+		Currency $currency,
+		Price $productsPrice,
+		$domainId
+	) {
 		$paymentsPrices = [];
 		foreach ($payments as $payment) {
-			$paymentsPrices[$payment->getId()] = $this->calculatePrice($payment, $currency);
+			$paymentsPrices[$payment->getId()] = $this->calculatePrice(
+				$payment,
+				$currency,
+				$productsPrice,
+				$domainId
+			);
 		}
 
 		return $paymentsPrices;

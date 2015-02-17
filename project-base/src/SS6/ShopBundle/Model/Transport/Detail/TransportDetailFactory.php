@@ -34,10 +34,10 @@ class TransportDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return \SS6\ShopBundle\Model\Transport\Detail\TransportDetail
 	 */
-	public function createDetailForTransport(Transport $transport) {
+	public function createDetailForTransportWithIndependentPrices(Transport $transport) {
 		return new TransportDetail(
 			$transport,
-			$this->getPrices($transport)
+			$this->getIndependentPrices($transport)
 		);
 	}
 
@@ -45,13 +45,13 @@ class TransportDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @return \SS6\ShopBundle\Model\Transport\Detail\TransportDetail[]
 	 */
-	public function createDetailsForTransports(array $transports) {
+	public function createDetailsForTransportsWithIndependentPrices(array $transports) {
 		$details = [];
 
 		foreach ($transports as $transport) {
 			$details[] = new TransportDetail(
 				$transport,
-				$this->getPrices($transport)
+				$this->getIndependentPrices($transport)
 			);
 		}
 
@@ -62,11 +62,11 @@ class TransportDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private function getPrices(Transport $transport) {
+	private function getIndependentPrices(Transport $transport) {
 		$prices = [];
 		foreach ($transport->getPrices() as $transportInputPrice) {
 			$currency = $transportInputPrice->getCurrency();
-			$prices[$currency->getId()] = $this->transportPriceCalculation->calculatePrice($transport, $currency);
+			$prices[$currency->getId()] = $this->transportPriceCalculation->calculateIndependentPrice($transport, $currency);
 		}
 
 		return $prices;

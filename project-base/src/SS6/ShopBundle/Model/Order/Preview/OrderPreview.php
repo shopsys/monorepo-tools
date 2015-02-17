@@ -9,14 +9,14 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class OrderPreview {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem[]
+	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex]
 	 */
-	private $cartItems;
+	private $quantifiedItems;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[]
+	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
 	 */
-	private $cartItemsPrices;
+	private $quantifiedItemsPrices;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\Transport|null
@@ -39,65 +39,57 @@ class OrderPreview {
 	private $paymentPrice;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Pricing\Price\Price
 	 */
-	private $totalPriceWithoutVat;
+	private $totalPrice;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Pricing\Price\Price
 	 */
-	private $totalPriceWithVat;
+	private $productsPrice;
 
 	/**
-	 * @var string
-	 */
-	private $totalPriceVatAmount;
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[] $cartItemsPrices
-	 * @param string $totalPriceWithoutVat
-	 * @param string $totalPriceWithVat
-	 * @param string $totalPriceVatAmount
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
+	 * @param \SS6\ShopBundle\Model\Pricing\Price\Price $productsPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price\Price $totalPrice
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 */
 	public function __construct(
-		array $cartItems,
-		array $cartItemsPrices,
-		$totalPriceWithoutVat,
-		$totalPriceWithVat,
-		$totalPriceVatAmount,
+		array $quantifiedItems,
+		array $quantifiedItemsPrices,
+		Price $productsPrice,
+		Price $totalPrice,
 		Transport $transport = null,
 		Price $transportPrice = null,
 		Payment $payment = null,
 		Price $paymentPrice = null
 	) {
-		$this->cartItems = $cartItems;
-		$this->cartItemsPrices = $cartItemsPrices;
+		$this->quantifiedItems = $quantifiedItems;
+		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
+		$this->productsPrice = $productsPrice;
+		$this->totalPrice = $totalPrice;
 		$this->transport = $transport;
 		$this->transportPrice = $transportPrice;
 		$this->payment = $payment;
 		$this->paymentPrice = $paymentPrice;
-		$this->totalPriceWithoutVat = $totalPriceWithoutVat;
-		$this->totalPriceWithVat = $totalPriceWithVat;
-		$this->totalPriceVatAmount = $totalPriceVatAmount;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex]
 	 */
-	public function getCartItems() {
-		return $this->cartItems;
+	public function getQuantifiedItems() {
+		return $this->quantifiedItems;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItemPrice[]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
 	 */
-	public function getCartItemsPrices() {
-		return $this->cartItemsPrices;
+	public function getQuantifiedItemsPrices() {
+		return $this->quantifiedItemsPrices;
 	}
 
 	/**
@@ -129,24 +121,17 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return string
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getTotalPriceWithoutVat() {
-		return $this->totalPriceWithoutVat;
+	public function getTotalPrice() {
+		return $this->totalPrice;
 	}
 
 	/**
-	 * @return string
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getTotalPriceWithVat() {
-		return $this->totalPriceWithVat;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPriceVatAmount() {
-		return $this->totalPriceVatAmount;
+	public function getProductsPrice() {
+		return $this->productsPrice;
 	}
 
 }
