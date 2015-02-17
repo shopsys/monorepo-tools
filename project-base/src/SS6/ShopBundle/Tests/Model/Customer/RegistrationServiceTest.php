@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Model\Customer;
 
+use DateTime;
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
@@ -15,8 +16,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreate() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress = new BillingAddress(new BillingAddressData());
 		$deliveryAddress = new DeliveryAddress(new DeliveryAddressData());
@@ -39,8 +44,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateNotDuplicateEmail() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress1 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
@@ -78,8 +87,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateDuplicateEmail() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress1 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
@@ -116,8 +129,12 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateDuplicateEmailCaseInsentitive() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
 
-		$registrationService = new RegistrationService($encoderFactory);
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
 
 		$billingAddress1 = new BillingAddress(new BillingAddressData());
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
@@ -150,6 +167,73 @@ class RegistrationServiceTest extends FunctionalTestCase {
 			$deliveryAddress2,
 			$user1
 		);
+	}
+
+	public function isResetPasswordHashValidProvider() {
+		return [
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
+				'sentHash' => 'validHash',
+				'isExpectedValid' => true,
+			],
+			[
+				'resetPasswordHash' => null,
+				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
+				'sentHash' => 'hash',
+				'isExpectedValid' => false,
+			],
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => new DateTime('+1 hour'),
+				'sentHash' => 'invalidHash',
+				'isExpectedValid' => false,
+			],
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => null,
+				'sentHash' => 'validHash',
+				'isExpectedValid' => false,
+			],
+			[
+				'resetPasswordHash' => 'validHash',
+				'resetPasswordHashValidThrough' => new DateTime('-1 hour'),
+				'sentHash' => 'validHash',
+				'isExpectedValid' => false,
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider isResetPasswordHashValidProvider
+	 */
+	public function testIsResetPasswordHashValid(
+		$resetPasswordHash,
+		$resetPasswordHashValidThrough,
+		$sentHash,
+		$isExpectedValid
+	) {
+		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
+		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+
+		$registrationService = new RegistrationService(
+			$encoderFactory,
+			$hashGenerator
+		);
+
+		$userMock = $this->getMockBuilder(User::class)
+			->disableOriginalConstructor()
+			->setMethods(['getResetPasswordHash', 'getResetPasswordHashValidThrough'])
+			->getMock();
+
+		$userMock->expects($this->any())->method('getResetPasswordHash')
+			->willReturn($resetPasswordHash);
+		$userMock->expects($this->any())->method('getResetPasswordHashValidThrough')
+			->willReturn($resetPasswordHashValidThrough);
+
+		$isResetPasswordHashValid = $registrationService->isResetPasswordHashValid($userMock, $sentHash);
+
+		$this->assertEquals($isExpectedValid, $isResetPasswordHashValid);
 	}
 
 }

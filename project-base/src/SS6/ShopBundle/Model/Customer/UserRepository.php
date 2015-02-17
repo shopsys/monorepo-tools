@@ -30,10 +30,31 @@ class UserRepository {
 	/**
 	 * @param string $email
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
 	 */
 	public function findUserByEmailAndDomain($email, $domainId) {
-		return $this->getUserRepository()->findOneBy(['email' => mb_strtolower($email), 'domainId' => ($domainId)]);
+		return $this->getUserRepository()->findOneBy([
+			'email' => mb_strtolower($email),
+			'domainId' => $domainId,
+		]);
+	}
+
+	/**
+	 * @param string $email
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 */
+	public function getUserByEmailAndDomain($email, $domainId) {
+		$user = $this->findUserByEmailAndDomain($email, $domainId);
+
+		if ($user === null) {
+			throw new \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException(
+				$email,
+				$domainId
+			);
+		}
+
+		return $user;
 	}
 
 	/**
@@ -43,7 +64,7 @@ class UserRepository {
 	public function getUserById($id) {
 		$user = $this->getUserRepository()->find($id);
 		if ($user === null) {
-			throw new Exception\UserNotFoundException($id);
+			throw new \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException($id);
 		}
 		return $user;
 	}

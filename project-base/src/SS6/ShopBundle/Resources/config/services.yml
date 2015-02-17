@@ -180,6 +180,9 @@ services:
   ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
 
+  ss6.shop.component.string.hash_generator:
+    class: SS6\ShopBundle\Component\String\HashGenerator
+
   ss6.shop.component.translation.php_file_extractor:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractor
     factory_service: ss6.shop.component.translation.php_file_extractor_factory
@@ -243,6 +246,15 @@ services:
 
   ss6.shop.customer.mail.customer_mail_service:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
+
+  ss6.shop.customer.mail.reset_password_mail:
+    class: SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+
+  ss6.shop.customer.mail.reset_password_mail_facade:
+    class: SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade
+
+  ss6.shop.customer.registration_facade:
+    class: SS6\ShopBundle\Model\Customer\RegistrationFacade
 
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService

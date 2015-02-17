@@ -25,6 +25,8 @@
 
 				{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
 
+				<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+
 			{{ form_end(form) }}
 
 		</div>

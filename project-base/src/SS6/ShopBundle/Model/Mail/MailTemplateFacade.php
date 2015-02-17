@@ -105,6 +105,7 @@ class MailTemplateFacade {
 
 		$allMailTemplatesData = new AllMailTemplatesData();
 		$allMailTemplatesData->domainId = $domainId;
+
 		$registrationMailTemplatesData = new MailTemplateData();
 		$registrationMailTemplate = $this->mailTemplateRepository
 			->findByNameAndDomainId(MailTemplate::REGISTRATION_CONFIRM_NAME, $domainId);
@@ -112,8 +113,16 @@ class MailTemplateFacade {
 			$registrationMailTemplatesData->setFromEntity($registrationMailTemplate);
 		}
 		$registrationMailTemplatesData->name = MailTemplate::REGISTRATION_CONFIRM_NAME;
-
 		$allMailTemplatesData->registrationTemplate = $registrationMailTemplatesData;
+
+		$resetPasswordMailTemplateData = new MailTemplateData();
+		$resetPasswordMailTemplate = $this->mailTemplateRepository
+			->findByNameAndDomainId(MailTemplate::RESET_PASSWORD_NAME, $domainId);
+		if ($resetPasswordMailTemplate !== null) {
+			$resetPasswordMailTemplateData->setFromEntity($resetPasswordMailTemplate);
+		}
+		$resetPasswordMailTemplateData->name = MailTemplate::RESET_PASSWORD_NAME;
+		$allMailTemplatesData->resetPasswordTemplate = $resetPasswordMailTemplateData;
 
 		$allMailTemplatesData->orderStatusTemplates =
 			$this->orderStatusMailTemplateService->getOrderStatusMailTemplatesData($orderStatuses, $mailTemplates);

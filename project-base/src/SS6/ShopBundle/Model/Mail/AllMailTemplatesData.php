@@ -16,6 +16,12 @@ class AllMailTemplatesData {
 	public $registrationTemplate;
 
 	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateData
+	 */
+	public $resetPasswordTemplate;
+
+	/**
 	 * @var int
 	 */
 	public $domainId;
@@ -26,6 +32,7 @@ class AllMailTemplatesData {
 	public function getAllTemplates() {
 		$allTemplates = $this->orderStatusTemplates;
 		$allTemplates[] = $this->registrationTemplate;
+		$allTemplates[] = $this->resetPasswordTemplate;
 		return $allTemplates;
 	}
 

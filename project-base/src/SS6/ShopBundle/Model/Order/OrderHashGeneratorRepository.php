@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
+use SS6\ShopBundle\Component\String\HashGenerator;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 
 class OrderHashGeneratorRepository {
@@ -14,8 +15,17 @@ class OrderHashGeneratorRepository {
 	 */
 	private $orderRepository;
 
-	public function __construct(OrderRepository $orderRepository) {
+	/**
+	 * @var \SS6\ShopBundle\Component\String\HashGenerator
+	 */
+	private $hashGenerator;
+
+	public function __construct(
+		OrderRepository $orderRepository,
+		HashGenerator $hashGenerator
+	) {
 		$this->orderRepository = $orderRepository;
+		$this->hashGenerator = $hashGenerator;
 	}
 
 	/**
@@ -24,7 +34,7 @@ class OrderHashGeneratorRepository {
 	public function getUniqueHash() {
 		$triesCount = 0;
 		do {
-			$hash = $this->generateHash();
+			$hash = $this->hashGenerator->generateHash(self::HASH_LENGTH);
 			$order = $this->orderRepository->findByUrlHash($hash);
 			$triesCount++;
 			if ($triesCount > self::MAX_GENERATE_TRIES) {
@@ -34,9 +44,4 @@ class OrderHashGeneratorRepository {
 		return $hash;
 	}
 
-	private function generateHash() {
-		$hashBytesSize = (int)floor(self::HASH_LENGTH/2);
-		$hashBytes = mcrypt_create_iv($hashBytesSize, MCRYPT_DEV_URANDOM);
-		return bin2hex($hashBytes);
-	}
 }

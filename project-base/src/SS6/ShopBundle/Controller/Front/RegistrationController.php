@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
+use SS6\ShopBundle\Form\Front\Registration\ResetPasswordFormType;
 use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -65,6 +67,107 @@ class RegistrationController extends Controller {
 		$request = $this->get('request');
 		$event = new InteractiveLoginEvent($request, $token);
 		$this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
+	}
+
+	public function resetPasswordAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$registrationFacade = $this->get('ss6.shop.customer.registration_facade');
+		/* @var $registrationFacade \SS6\ShopBundle\Model\Customer\RegistrationFacade */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$em = $this->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
+
+		$form = $this->createForm(new ResetPasswordFormType());
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$formData = $form->getData();
+			$email = $formData['email'];
+
+			try {
+				$em->beginTransaction();
+				$registrationFacade->resetPassword($email, $domain->getId());
+				$em->commit();
+
+				$flashMessageSender->addSuccessFlashTwig('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.', [
+					'email' => $email,
+				]);
+				return $this->redirect($this->generateUrl('front_registration_reset_password'));
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
+				$flashMessageSender->addErrorFlashTwig(
+					'Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
+					. ' <a href="{{ registrationLink }}">Zaregistrovat</a>', [
+						'email' => $ex->getEmail(),
+						'registrationLink' => $this->generateUrl('front_registration_register'),
+					]);
+			} catch (\Exception $ex) {
+				$em->rollback();
+				throw $ex;
+			}
+		}
+
+		return $this->render('@SS6Shop/Front/Content/Registration/resetPassword.html.twig', [
+			'form' => $form->createView(),
+		]);
+	}
+
+	public function setNewPasswordAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$registrationFacade = $this->get('ss6.shop.customer.registration_facade');
+		/* @var $registrationFacade \SS6\ShopBundle\Model\Customer\RegistrationFacade */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$em = $this->get('doctrine.orm.entity_manager');
+		/* @var $em \Doctrine\ORM\EntityManager */
+
+		$email = $request->query->get('email');
+		$hash = $request->query->get('hash');
+
+		if (!$registrationFacade->isResetPasswordHashValid($email, $domain->getId(), $hash)) {
+			$flashMessageSender->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
+			return $this->redirect($this->generateUrl('front_homepage'));
+		}
+
+		$form = $this->createForm(new NewPasswordFormType());
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$formData = $form->getData();
+
+			$newPassword = $formData['newPassword'];
+
+			try {
+				$em->beginTransaction();
+				$user = $registrationFacade->setNewPassword($email, $domain->getId(), $hash, $newPassword);
+				$this->login($user);
+				$em->commit();
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
+				$em->rollback();
+				$flashMessageSender->addErrorFlashTwig('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
+					. ' <a href="{{ registrationLink }}">Zaregistrovat</a>', [
+						'email' => $ex->getEmail(),
+						'registrationLink' => $this->generateUrl('front_registration_register'),
+					]);
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException $ex) {
+				$em->rollback();
+				$flashMessageSender->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
+			} catch (\Exception $ex) {
+				$em->rollback();
+				throw $ex;
+			}
+
+			$flashMessageSender->addSuccessFlash('Heslo bylo úspěšně změněno');
+			return $this->redirect($this->generateUrl('front_homepage'));
+		}
+
+		return $this->render('@SS6Shop/Front/Content/Registration/setNewPassword.html.twig', [
+			'form' => $form->createView(),
+		]);
 	}
 
 }
