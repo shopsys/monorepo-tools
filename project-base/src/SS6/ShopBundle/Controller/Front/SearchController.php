@@ -33,4 +33,12 @@ class SearchController extends Controller {
 		return new JsonResponse($result);
 	}
 
+	public function boxAction(Request $request) {
+		$searchText = $request->query->get('q');
+
+		return $this->render('@SS6Shop/Front/Content/Search/searchBox.html.twig', [
+			'searchText' => $searchText,
+		]);
+	}
+
 }

@@ -90,6 +90,7 @@ class ProductController extends Controller {
 		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
 
+		$searchText = $request->query->get('q');
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$productFilterData = new ProductFilterData();
@@ -97,7 +98,7 @@ class ProductController extends Controller {
 		$filterForm = $this->createForm($productFilterFormTypeFactory->createForSearch(
 			$domain->getId(),
 			$domain->getLocale(),
-			$searchText = 'kitty'
+			$searchText
 		));
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);

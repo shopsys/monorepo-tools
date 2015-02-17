@@ -1,7 +1,9 @@
 <div class="search" id="js-search-autocomplete">
-	<form action="#" method="get">
+	<form action="{{ url('front_product_search') }}" method="get">
 		<input
 			type="text"
+			name="q"
+			value="{{ searchText|escape('html_attr') }}"
 			placeholder="{{ 'Vyhledávání'|trans }}"
 			class="form-control search__input"
 			id="js-search-autocomplete-input"
