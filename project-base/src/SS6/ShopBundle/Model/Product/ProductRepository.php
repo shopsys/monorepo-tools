@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
+use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
@@ -165,36 +166,59 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param string $searchText
 	 * @param int $domainId
 	 * @param string $locale
-	 * @param string $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $page
 	 * @param int $limit
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginationResultForVisibleBySearchText(
+		$searchText,
 		$domainId,
 		$locale,
-		$searchText,
+		ProductFilterData $productFilterData,
+		ProductListOrderingSetting $orderingSetting,
+		PricingGroup $pricingGroup,
 		$page,
 		$limit
 	) {
 		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
 		$this->addTranslation($queryBuilder, $locale);
 
+		$this->filterBySearchText($queryBuilder, $searchText);
+
+		$this->productFilterRepository->filterByStock($queryBuilder, $productFilterData->inStock);
+		$this->productFilterRepository->filterByPrice(
+			$queryBuilder,
+			$pricingGroup,
+			$productFilterData->minimalPrice,
+			$productFilterData->maximalPrice
+		);
+		$this->productFilterRepository->filterByFlags($queryBuilder, $productFilterData->flags);
+		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
+
+		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
+
+		$queryPaginator = new QueryPaginator($queryBuilder);
+
+		return $queryPaginator->getResult($page, $limit);
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param string $searchText
+	 */
+	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
 		$queryBuilder->andWhere(
 			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
 			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
 		);
 		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-
-		$queryPaginator = new QueryPaginator($queryBuilder);
-
-		return $queryPaginator->getResult($page, $limit);
 	}
 
 	/**

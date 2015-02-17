@@ -107,11 +107,19 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	public function getSearchAutocompleteData($searchText, $limit) {
+		$emptyProductFilterData = new ProductFilterData();
+		$orderingSetting = new ProductListOrderingSetting(ProductListOrderingSetting::ORDER_BY_NAME_ASC);
+
+		$page = 1;
+
 		$paginationResult = $this->productRepository->getPaginationResultForVisibleBySearchText(
+			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
-			$searchText,
-			1,
+			$emptyProductFilterData,
+			$orderingSetting,
+			$this->currentCustomer->getPricingGroup(),
+			$page,
 			$limit
 		);
 
