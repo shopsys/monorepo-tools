@@ -178,16 +178,9 @@ class ProductRepository {
 		$limit
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
+
 		$this->addTranslation($queryBuilder, $locale);
-		$this->productFilterRepository->filterByStock($queryBuilder, $productFilterData->inStock);
-		$this->productFilterRepository->filterByPrice(
-			$queryBuilder,
-			$pricingGroup,
-			$productFilterData->minimalPrice,
-			$productFilterData->maximalPrice
-		);
-		$this->productFilterRepository->filterByFlags($queryBuilder, $productFilterData->flags);
-		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
+		$this->applyFiltering($queryBuilder, $productFilterData, $pricingGroup);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
@@ -218,6 +211,24 @@ class ProductRepository {
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder($domainId, $locale, $searchText);
 
+		$this->applyFiltering($queryBuilder, $productFilterData, $pricingGroup);
+		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
+
+		$queryPaginator = new QueryPaginator($queryBuilder);
+
+		return $queryPaginator->getResult($page, $limit);
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	private function applyFiltering(
+		QueryBuilder $queryBuilder,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup
+	) {
 		$this->productFilterRepository->filterByStock($queryBuilder, $productFilterData->inStock);
 		$this->productFilterRepository->filterByPrice(
 			$queryBuilder,
@@ -227,12 +238,6 @@ class ProductRepository {
 		);
 		$this->productFilterRepository->filterByFlags($queryBuilder, $productFilterData->flags);
 		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
-
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
-
-		$queryPaginator = new QueryPaginator($queryBuilder);
-
-		return $queryPaginator->getResult($page, $limit);
 	}
 
 	/**
