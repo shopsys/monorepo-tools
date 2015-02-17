@@ -5,7 +5,7 @@
 	"version": "6.0.0-dev",
 	"autoload": {
 		"classmap": ["src/"],
-		"psr-0": {"SS6\\": "src/", "PK\\": "src/"},
+		"psr-0": {"SS6\\": "src/"},
 		"psr-4": {"SS6\\": "app/"}
 	},
 	"repositories": [

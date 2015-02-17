@@ -115,7 +115,7 @@ class ParameterProcessor {
 				array_keys($this->loading)
 			);
 		}
-		if (!$this->classResolver->canBeResolved($class)) {
+		if (!$this->classResolver->canBeService($class)) {
 			throw new \SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($class);
 		}
 		$serviceId = $this->classResolver->convertClassNameToServiceId($class);

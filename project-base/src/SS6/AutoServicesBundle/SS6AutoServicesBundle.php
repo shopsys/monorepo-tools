@@ -13,16 +13,12 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class SS6AutoServicesBundle extends Bundle {
 
 	public function build(ContainerBuilder $containerBuilder) {
+		$parameterProcessor = new ParameterProcessor(new ClassResolver(),	$containerBuilder);
+		$classConstructorFiller = new ClassConstructorFiller($parameterProcessor);
 
 		$containerBuilder->addCompilerPass(
-			new AutowiringCompilerPass(
-				new ClassConstructorFiller(
-					new ParameterProcessor(
-						new ClassResolver(),
-						$containerBuilder
-					)
-				)
-			), PassConfig::TYPE_BEFORE_REMOVING
+			new AutowiringCompilerPass($classConstructorFiller),
+			PassConfig::TYPE_BEFORE_REMOVING
 		);
 	}
 

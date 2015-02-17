@@ -39,10 +39,10 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 
 		$containerClassList->clean();
 		$this->loadContainerClassList($containerBuilder, $containerClassList);
-		$this->processContainerBuilderDefinitions($containerBuilder, $containerClassList);
+		$this->autowireContainerBuilderDefinitions($containerBuilder, $containerClassList);
 		$this->processAutoServicesCollectorData($containerBuilder, $containerClassList, $autoServicesCollector);
-		$this->replaceDefaultServisContainer($containerBuilder);
-		$containerClassList->dump();
+		$this->replaceDefaultServiceContainer($containerBuilder);
+		$containerClassList->save();
 	}
 
 	/**
@@ -61,7 +61,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
-	private function processContainerBuilderDefinitions(
+	private function autowireContainerBuilderDefinitions(
 		ContainerBuilder $containerBuilder,
 		ContainerClassList $containerClassList
 	) {
@@ -75,7 +75,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 				continue;
 			}
 
-			$this->processClassDefinition($containerBuilder, $serviceId, $definition, $containerClassList);
+			$this->autowireClassDefinition($containerBuilder, $serviceId, $definition, $containerClassList);
 		}
 	}
 
@@ -94,7 +94,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 			if (!$containerClassList->hasClass($class)) {
 				$newCollectorData[$serviceId] = $class;
 				$definition = new Definition($class);
-				$this->processClassDefinition($containerBuilder, $serviceId, $definition, $containerClassList);
+				$this->autowireClassDefinition($containerBuilder, $serviceId, $definition, $containerClassList);
 				$containerBuilder->setDefinition($serviceId, $definition);
 			}
 		}
@@ -104,10 +104,10 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 */
-	private function replaceDefaultServisContainer(ContainerBuilder $containerBuilder) {
+	private function replaceDefaultServiceContainer(ContainerBuilder $containerBuilder) {
 		foreach ($containerBuilder->getDefinitions() as $serviceId => $definition) {
 			if ($serviceId !== 'ss6.auto_services.auto_container') {
-				$this->replaceDefaultServisContainerInDefinition($definition);
+				$this->replaceDefaultServiceContainerInDefinition($definition);
 			}
 		}
 	}
@@ -115,7 +115,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	/**
 	 * @param \Symfony\Component\DependencyInjection\Definition $definition
 	 */
-	private function replaceDefaultServisContainerInDefinition(Definition $definition) {
+	private function replaceDefaultServiceContainerInDefinition(Definition $definition) {
 		foreach ($definition->getArguments() as $argumentIndex => $argument) {
 			if ($argument instanceof Reference) {
 				$argumentId = (string)$argument;
@@ -137,7 +137,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	 * @param \Symfony\Component\DependencyInjection\Definition $definition
 	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
-	private function processClassDefinition(
+	private function autowireClassDefinition(
 		ContainerBuilder $containerBuilder,
 		$serviceId,
 		Definition $definition,

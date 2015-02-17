@@ -40,7 +40,7 @@ class ContainerClassList {
 		}
 	}
 
-	public function dump() {
+	public function save() {
 		if ($this->serviceIdsByClass !== null) {
 			foreach ($this->serviceIdsByClass as $class => $serviceIds) {
 				$this->serviceIdsByClass[$class] = array_unique($this->serviceIdsByClass[$class]);

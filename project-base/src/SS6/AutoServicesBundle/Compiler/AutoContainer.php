@@ -48,7 +48,7 @@ class AutoContainer implements ContainerInterface {
 		}
 
 		try {
-			return $this->findServiceByClassName($serviceId);
+			return $this->getServiceByClassName($serviceId);
 		} catch (\Exception $e) {
 			if (self::EXCEPTION_ON_INVALID_REFERENCE === $invalidBehavior) {
 				throw new \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($serviceId, null, $e);
@@ -61,29 +61,13 @@ class AutoContainer implements ContainerInterface {
 	 * @param string $className
 	 * @return object
 	 */
-	private function findServiceByClassName($className) {
+	private function getServiceByClassName($className) {
 		try {
 			$classServiceId = $this->containerClassList->getServiceIdByClass($className);
 			return $this->container->get($classServiceId);
 		} catch (\SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException $e) {
-			return $this->getServiceByClassName($className);
+			return $this->createServiceByClassName($className);
 		}
-	}
-
-	/**
-	 * @param string $className
-	 * @return mixed
-	 */
-	private function getServiceByClassName($className) {
-		$classServiceId = $this->classResolver->convertClassNameToServiceId($className);
-		try {
-			$service = $this->container->get($classServiceId, self::EXCEPTION_ON_INVALID_REFERENCE);
-		} catch (\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $exception) {
-			$service = $this->createServiceByClassName($className);
-			$this->registerServiceToContainer($classServiceId, $service, $className);
-		}
-
-		return $service;
 	}
 
 	/**
@@ -101,10 +85,11 @@ class AutoContainer implements ContainerInterface {
 	 * @return object
 	 */
 	private function createServiceByClassName($className) {
-		if (!$this->classResolver->canBeResolved($className)) {
+		if (!$this->classResolver->canBeService($className)) {
 			throw new \SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($className);
 		}
 
+		$classServiceId = $this->classResolver->convertClassNameToServiceId($className);
 		$reflectionClass = new ReflectionClass($className);
 		$constructor = $reflectionClass->getConstructor();
 
@@ -113,6 +98,8 @@ class AutoContainer implements ContainerInterface {
 		} else {
 			$service = $reflectionClass->newInstanceArgs($this->getConstructorArguments($constructor));
 		}
+
+		$this->registerServiceToContainer($classServiceId, $service, $className);
 
 		return $service;
 	}
@@ -129,7 +116,7 @@ class AutoContainer implements ContainerInterface {
 				$arguments[] = $parameter->getDefaultValue();
 			} else {
 				$argumentClassName = $parameter->getClass()->name;
-				$arguments[] = $this->findServiceByClassName($argumentClassName);
+				$arguments[] = $this->getServiceByClassName($argumentClassName);
 			}
 		}
 		return $arguments;

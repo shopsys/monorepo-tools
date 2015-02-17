@@ -7,7 +7,6 @@ use Symfony\Component\Filesystem\Filesystem;
 class AutoServicesCollector {
 
 	const CONFIG_FILENAME = 'autoServices.json';
-	const CONTAINER_INVALIDATOR_FILENAME = 'autoServicesContainerInvalidator';
 
 	/**
 	 * @var string
@@ -33,13 +32,6 @@ class AutoServicesCollector {
 		$this->cacheDir = $cacheDir;
 		$this->containerClass = $containerClass;
 		$this->filesystem = $filesystem;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getContainerInvalidatorFilepath() {
-		return $this->cacheDir . DIRECTORY_SEPARATOR . self::CONTAINER_INVALIDATOR_FILENAME;
 	}
 
 	/**

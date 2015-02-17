@@ -8,7 +8,7 @@ class ClassResolver {
 	 * @param string $className
 	 * @return bool
 	 */
-	public function canBeResolved($className) {
+	public function canBeService($className) {
 		return class_exists($className);
 	}
 
