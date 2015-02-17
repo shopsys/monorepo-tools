@@ -4,14 +4,14 @@ namespace SS6\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
 use SS6\AutoServicesBundle\Compiler\AutoServicesCollector;
-use SS6\AutoServicesBundle\Compiler\ClassResolver;
 use SS6\AutoServicesBundle\Compiler\ContainerClassList;
+use SS6\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class AutoContainer implements ContainerInterface {
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ClassResolver
+	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
 	 */
 	private $classResolver;
 
@@ -32,7 +32,7 @@ class AutoContainer implements ContainerInterface {
 
 	public function __construct(
 		ContainerInterface $container,
-		ClassResolver $classResolver,
+		ServiceHelper $classResolver,
 		ContainerClassList $containerClassList,
 		AutoServicesCollector $autoServiceCollector
 	) {

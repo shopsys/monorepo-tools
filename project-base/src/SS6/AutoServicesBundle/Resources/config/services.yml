@@ -4,12 +4,12 @@ services:
     class: SS6\AutoServicesBundle\Compiler\AutoContainer
     arguments:
       - @service_container
-      - @ss6.auto_services.class_resolver
+      - @ss6.auto_services.service_helper
       - @ss6.auto_services.container_class_list
       - @ss6.auto_services.auto_services_collector
 
-  ss6.auto_services.class_resolver:
-    class: SS6\AutoServicesBundle\Compiler\ClassResolver
+  ss6.auto_services.service_helper:
+    class: SS6\AutoServicesBundle\Compiler\ServiceHelper
 
   ss6.auto_services.container_class_list:
     class: SS6\AutoServicesBundle\Compiler\ContainerClassList

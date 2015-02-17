@@ -5,8 +5,8 @@ namespace SS6\AutoServicesBundle\Compiler;
 use ReflectionClass;
 use ReflectionParameter;
 use SS6\AutoServicesBundle\Compiler\ClassConstructorFiller;
-use SS6\AutoServicesBundle\Compiler\ClassResolver;
 use SS6\AutoServicesBundle\Compiler\ContainerClassList;
+use SS6\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class ParameterProcessor {
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ClassResolver
+	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
 	 */
 	private $classResolver;
 
@@ -35,11 +35,11 @@ class ParameterProcessor {
 	private $loading;
 
 	/**
-	 * @param \SS6\AutoServicesBundle\Compiler\ClassResolver $classResolver
+	 * @param \SS6\AutoServicesBundle\Compiler\ServiceHelper $classResolver
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 */
 	public function __construct(
-		ClassResolver $classResolver,
+		ServiceHelper $classResolver,
 		ContainerBuilder $containerBuilder
 	) {
 		$this->classResolver = $classResolver;

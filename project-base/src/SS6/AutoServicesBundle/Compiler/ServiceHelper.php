@@ -2,7 +2,7 @@
 
 namespace SS6\AutoServicesBundle\Compiler;
 
-class ClassResolver {
+class ServiceHelper {
 
 	/**
 	 * @param string $className

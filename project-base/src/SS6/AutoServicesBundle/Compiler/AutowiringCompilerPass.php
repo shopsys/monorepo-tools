@@ -38,7 +38,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 		/* @var $autoServicesCollector \SS6\AutoServicesBundle\Compiler\AutoServicesCollector */
 
 		$containerClassList->clean();
-		$this->loadContainerClassList($containerBuilder, $containerClassList);
+		$this->fillContainerClassListFromContainerBuilder($containerBuilder, $containerClassList);
 		$this->autowireContainerBuilderDefinitions($containerBuilder, $containerClassList);
 		$this->processAutoServicesCollectorData($containerBuilder, $containerClassList, $autoServicesCollector);
 		$this->replaceDefaultServiceContainer($containerBuilder);
@@ -49,7 +49,10 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
-	private function loadContainerClassList(ContainerBuilder $containerBuilder, ContainerClassList $containerClassList) {
+	private function fillContainerClassListFromContainerBuilder(
+		ContainerBuilder $containerBuilder,
+		ContainerClassList $containerClassList
+	) {
 		foreach ($containerBuilder->getDefinitions() as $serviceId => $definition) {
 			if ($definition->getClass() !== null) {
 				$containerClassList->addClass($serviceId, $definition->getClass());
