@@ -16,25 +16,34 @@
 			{{ form_start(form) }}
 				{{ form_errors(form) }}
 
-				{% for domainId, priceLimitForm in form.priceLimits %}
-					<div id="{{ priceLimitForm.vars.id }}" class="wrap-group js-free-transport-and-payment-price-limit">
-						{% set domainName = domain.getDomainConfigById(domainId).getDomain() %}
-
-						{{
-							form_row(priceLimitForm.enabled, {
-								label: 'Používat dopravu a platbu zdarma na doméně <strong>%domainName%</strong>'|trans({ '%domainName%': domainName }),
-								raw: true,
-								attr: {
-									'class': 'js-free-transport-and-payment-price-limit-enabled checkbox-toggle',
-									'data-checkbox-toggle-container-id': 'js-free-transport-and-payment-price-limit-' ~ domainId
-								},
-							})
-						}}
-						<div id="js-free-transport-and-payment-price-limit-{{ domainId }}">
-							{{ form_row(priceLimitForm.priceLimit, { label: 'Minimální cena zboží'|trans, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
-						</div>
-					</div>
-				{% endfor %}
+				<table class="table table-striped table-vertical-center">
+					<thead>
+						<th>Doména</th>
+						<th>Aktivace</th>
+						<th>Minimální cena</th>
+					</thead>
+					<tbody>
+						{% for domainId, priceLimitForm in form.priceLimits %}
+							{% set domainName = domain.getDomainConfigById(domainId).getDomain() %}
+							<tr>
+								<td>{{ domainName }}</td>
+								<td>
+									{{ form_row(priceLimitForm.enabled, {
+										label: 'povolit'|trans,
+										raw: true,
+										attr: {
+											'class': 'js-free-transport-and-payment-price-limit-enabled checkbox-toggle',
+											'data-checkbox-toggle-container-id': 'js-free-transport-and-payment-price-limit-' ~ domainId
+										},
+									}) }}
+								</td>
+								<td>
+									{{ form_row(priceLimitForm.priceLimit, { label: 'Minimální cena zboží'|trans, attr: { class: 'form-line--size-2 form-line--in-table' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 
 				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
 			{{ form_end(form) }}
