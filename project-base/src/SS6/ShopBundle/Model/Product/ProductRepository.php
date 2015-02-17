@@ -118,12 +118,42 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string $searchText
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getVisibleByDomainIdAndSearchTextQueryBuilder(
+		$domainId,
+		$locale,
+		$searchText
+	) {
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$this->addTranslation($queryBuilder, $locale);
+		$this->filterBySearchText($queryBuilder, $searchText);
+		return $queryBuilder;
+	}
+
+	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 */
 	private function filterByCategory(QueryBuilder $queryBuilder, Category $category) {
 		$queryBuilder->join('p.categories', 'c', Join::WITH, 'c = :category');
 		$queryBuilder->setParameter('category', $category);
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param string $searchText
+	 */
+	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
+		$queryBuilder->andWhere(
+			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
+			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
+		);
+		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
+		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 	}
 
 	/**
@@ -186,10 +216,7 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
-		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
-		$this->addTranslation($queryBuilder, $locale);
-
-		$this->filterBySearchText($queryBuilder, $searchText);
+		$queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder($domainId, $locale, $searchText);
 
 		$this->productFilterRepository->filterByStock($queryBuilder, $productFilterData->inStock);
 		$this->productFilterRepository->filterByPrice(
@@ -206,19 +233,6 @@ class ProductRepository {
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
 		return $queryPaginator->getResult($page, $limit);
-	}
-
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $searchText
-	 */
-	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
-		$queryBuilder->andWhere(
-			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
-			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
-		);
-		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 	}
 
 	/**
