@@ -37,7 +37,6 @@ class Bootstrap {
 		}
 
 		$kernel = new \AppKernel($this->environment, $this->isDebug());
-		$kernel->addConfig($this->getConfigs());
 		$kernel->loadClassCache();
 		if ($this->console) {
 			$input = new ArgvInput();
@@ -71,26 +70,4 @@ class Bootstrap {
 		}
 	}
 
-	private function getConfigs() {
-		$configs = array(
-			__DIR__ . '/config/parameters_common.yml',
-			__DIR__ . '/config/parameters.yml',
-			__DIR__ . '/config/config.yml',
-			__DIR__ . '/config/security.yml',
-		);
-		switch ($this->environment) {
-			case Environment::ENVIRONMENT_DEVELOPMENT:
-				$configs[] = __DIR__ . '/config/config_dev.yml';
-				break;
-			case Environment::ENVIRONMENT_PRODUCTION:
-				$configs[] = __DIR__ . '/config/config_prod.yml';
-				break;
-			case Environment::ENVIRONMENT_TEST:
-				$configs[] = __DIR__ . '/config/parameters_test.yml';
-				$configs[] = __DIR__ . '/config/config_test.yml';
-				break;
-		}
-
-		return $configs;
-	}
 }

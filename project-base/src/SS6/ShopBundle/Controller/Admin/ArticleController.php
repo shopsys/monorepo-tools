@@ -7,6 +7,7 @@ use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleData;
+use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class ArticleController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+		$articleEditFacade = $this->get(ArticleEditFacade::class);
 		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
 		$article = $articleEditFacade->getById($id);
@@ -121,7 +122,7 @@ class ArticleController extends Controller {
 
 		if ($form->isValid()) {
 			$articleData = $form->getData();
-			$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+			$articleEditFacade = $this->get(ArticleEditFacade::class);
 			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
 			$article = $articleEditFacade->create($articleData);
@@ -149,7 +150,7 @@ class ArticleController extends Controller {
 	public function deleteAction($id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+		$articleEditFacade = $this->get(ArticleEditFacade::class);
 		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
 		try {

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class AbstractNativeFixture extends AbstractFixture implements ContainerAwareInterface {
 
 	/**
-	 * @var \Symfony\Component\DependencyInjection\Container
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	private $container;
 

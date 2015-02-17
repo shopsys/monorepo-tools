@@ -2,13 +2,11 @@ services:
 
   ss6.twig.cropzeros_extension:
     class: SS6\ShopBundle\Twig\CropZerosExtension
-    arguments: [@service_container]
     tags:
       - { name: twig.extension }
 
   ss6.twig.domain_extension:
     class: SS6\ShopBundle\Twig\DomainExtension
-    arguments: [@service_container]
     tags:
       - { name: twig.extension }
 
@@ -24,7 +22,6 @@ services:
 
   ss6.twig.form_detail_extension:
     class: SS6\ShopBundle\Twig\FormDetailExtension
-    arguments: [@service_container]
     tags:
       -  { name: twig.extension }
 
@@ -35,7 +32,7 @@ services:
 
   ss6.twig.image_extension:
     class: SS6\ShopBundle\Twig\ImageExtension
-    arguments: [%ss6.image_url_prefix%, @service_container]
+    arguments: [%ss6.image_url_prefix%]
     tags:
       - { name: twig.extension }
 
@@ -46,7 +43,6 @@ services:
 
   ss6.twig.localization_extension:
     class: SS6\ShopBundle\Twig\LocalizationExtension
-    arguments: [@service_container]
     tags:
       - { name: twig.extension }
 

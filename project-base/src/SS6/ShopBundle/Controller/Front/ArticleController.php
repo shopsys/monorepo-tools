@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ArticleController extends Controller {
@@ -10,7 +11,7 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function detailAction($id) {
-		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+		$articleEditFacade = $this->get(ArticleEditFacade::class);
 		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
 		$article = $articleEditFacade->getById($id);
@@ -21,7 +22,7 @@ class ArticleController extends Controller {
 	}
 
 	public function menuAction() {
-		$articleEditFacade = $this->get('ss6.shop.article.article_edit_facade');
+		$articleEditFacade = $this->get(ArticleEditFacade::class);
 		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
 		$articles = $articleEditFacade->getArticlesForMenuOnCurrentDomain();

@@ -1,11 +1,10 @@
 <?php
 
+use SS6\Environment;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel {
-
-	private $configs = array();
 
 	public function registerBundles() {
 		$bundles = array(
@@ -17,10 +16,10 @@ class AppKernel extends Kernel {
 			new FM\ElfinderBundle\FMElfinderBundle(),
 			new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
 			new JMS\TranslationBundle\JMSTranslationBundle(),
-			new Kutny\AutowiringBundle\KutnyAutowiringBundle(),
 			new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+			new SS6\AutoServicesBundle\SS6AutoServicesBundle(),
 			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -42,19 +41,37 @@ class AppKernel extends Kernel {
 		return $bundles;
 	}
 
-	/**
-	 * @param string|array $filename
-	 */
-	public function addConfig($filename) {
-		$this->configs += (array)$filename;
-	}
-
 	public function registerContainerConfiguration(LoaderInterface $loader) {
-		foreach ($this->configs as $filename) {
+		foreach ($this->getConfigs() as $filename) {
 			if (file_exists($filename) && is_readable($filename)) {
 				$loader->load($filename);
 			}
 		}
 	}
 
+	/**
+	 * @return string[]
+	 */
+	private function getConfigs() {
+		$configs = [
+			__DIR__ . '/config/parameters_common.yml',
+			__DIR__ . '/config/parameters.yml',
+			__DIR__ . '/config/config.yml',
+			__DIR__ . '/config/security.yml',
+		];
+		switch ($this->environment) {
+			case Environment::ENVIRONMENT_DEVELOPMENT:
+				$configs[] = __DIR__ . '/config/config_dev.yml';
+				break;
+			case Environment::ENVIRONMENT_PRODUCTION:
+				$configs[] = __DIR__ . '/config/config_prod.yml';
+				break;
+			case Environment::ENVIRONMENT_TEST:
+				$configs[] = __DIR__ . '/config/parameters_test.yml';
+				$configs[] = __DIR__ . '/config/config_test.yml';
+				break;
+		}
+
+		return $configs;
+	}
 }
