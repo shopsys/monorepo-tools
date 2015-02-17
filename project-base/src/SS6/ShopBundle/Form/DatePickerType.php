@@ -7,10 +7,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DatePickerType extends AbstractType {
 
+	const FORMAT = 'dd.MM.yyyy';
+
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
 			'widget' => 'single_text',
-			'format' => 'dd.MM.yyyy',
+			'format' => self::FORMAT,
 		]);
 	}
 
