@@ -106,6 +106,41 @@ class ProductOnCurrentDomainFacade {
 		);
 	}
 
+	/**
+	 * @param string $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param int $page
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getPaginatedProductDetailsForSearch(
+		$searchText,
+		ProductFilterData $productFilterData,
+		ProductListOrderingSetting $orderingSetting,
+		$page,
+		$limit
+	) {
+		$paginationResult = $this->productRepository->getPaginationResultForVisibleBySearchText(
+			$searchText,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$productFilterData,
+			$orderingSetting,
+			$this->currentCustomer->getPricingGroup(),
+			$page,
+			$limit
+		);
+		$products = $paginationResult->getResults();
+
+		return new PaginationResult(
+			$paginationResult->getPage(),
+			$paginationResult->getPageSize(),
+			$paginationResult->getTotalCount(),
+			$this->productDetailFactory->getDetailsForProducts($products)
+		);
+	}
+
 	public function getSearchAutocompleteData($searchText, $limit) {
 		$emptyProductFilterData = new ProductFilterData();
 		$orderingSetting = new ProductListOrderingSetting(ProductListOrderingSetting::ORDER_BY_NAME_ASC);
