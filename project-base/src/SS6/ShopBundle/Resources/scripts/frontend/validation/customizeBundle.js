@@ -23,7 +23,7 @@
 
 	SS6.validation.ckeditorValidationInit = function (element) {
 		$.each(element.children, function(index, childElement) {
-			if (childElement.type === 'ckeditor') {
+			if (childElement.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 				CKEDITOR.instances[childElement.id].on('change', function() {
 					$(childElement.domNode).jsFormValidator('validate');
 				});
@@ -59,7 +59,7 @@
 
 	FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
 	FpJsFormValidator.getInputValue = function (element) {
-		if (element.type === 'ckeditor') {
+		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 			return CKEDITOR.instances[element.id].getData();
 		}
 		return FpJsFormValidator._getInputValue(element);

@@ -3,7 +3,7 @@
 $(document).ready(function() {
 	$('.js-datePicker').each(function() {
 		$(this).datepicker({
-			'dateFormat': 'dd.mm.yy'
+			'dateFormat': SS6.constant('\\SS6\\ShopBundle\\Form\\DatePickerType::FORMAT')
 		});
 	});
 });
