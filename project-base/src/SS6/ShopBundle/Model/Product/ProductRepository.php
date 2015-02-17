@@ -155,6 +155,7 @@ class ProductRepository {
 			$productFilterData->minimalPrice,
 			$productFilterData->maximalPrice
 		);
+		$this->productFilterRepository->filterByFlags($queryBuilder, $productFilterData->flags);
 		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 

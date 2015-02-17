@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Front\Product;
 
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
 
 class ProductFilterFormTypeFactory {
@@ -12,10 +13,17 @@ class ProductFilterFormTypeFactory {
 	 */
 	private $parameterFilterChoiceRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository
+	 */
+	private $flagFilterChoiceRepository;
+
 	public function __construct(
-		ParameterFilterChoiceRepository $parameterFilterChoiceRepository
+		ParameterFilterChoiceRepository $parameterFilterChoiceRepository,
+		FlagFilterChoiceRepository $flagFilterChoiceRepository
 	) {
 		$this->parameterFilterChoiceRepository = $parameterFilterChoiceRepository;
+		$this->flagFilterChoiceRepository = $flagFilterChoiceRepository;
 	}
 
 	/**
@@ -27,8 +35,10 @@ class ProductFilterFormTypeFactory {
 	public function create($domainId, $locale, Category $category) {
 		$parameterFilterChoices = $this->parameterFilterChoiceRepository
 			->getParameterFilterChoicesInCategory($domainId, $locale, $category);
+		$flagFilterChoices = $this->flagFilterChoiceRepository
+			->getFlagFilterChoicesInCategory($domainId, $category);
 
-		return new ProductFilterFormType($parameterFilterChoices);
+		return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices);
 	}
 
 }

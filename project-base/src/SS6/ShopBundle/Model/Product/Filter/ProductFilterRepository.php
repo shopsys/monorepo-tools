@@ -2,32 +2,45 @@
 
 namespace SS6\ShopBundle\Model\Product\Filter;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductFilterRepository {
 
 	const DAYS_FOR_STOCK_FILTER = 0;
 
 	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
 	 */
 	private $queryBuilderService;
 
-	public function __construct(QueryBuilderService $queryBuilderService) {
+	public function __construct(
+		EntityManager $em,
+		QueryBuilderService $queryBuilderService
+	) {
+		$this->em = $em;
 		$this->queryBuilderService = $queryBuilderService;
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $minimalPrice
 	 * @param string $maximalPrice
 	 */
 	public function filterByPrice(
-		QueryBuilder $queryBuilder,
+		QueryBuilder $productsQueryBuilder,
 		PricingGroup $pricingGroup,
 		$minimalPrice,
 		$maximalPrice
@@ -35,37 +48,80 @@ class ProductFilterRepository {
 		$priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
 		if ($minimalPrice !== null) {
 			$priceLimits .= ' AND pcp.priceWithVat >= :minimalPrice';
-			$queryBuilder->setParameter('minimalPrice', $minimalPrice);
+			$productsQueryBuilder->setParameter('minimalPrice', $minimalPrice);
 		}
 		if ($maximalPrice !== null) {
 			$priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
-			$queryBuilder->setParameter('maximalPrice', $maximalPrice);
+			$productsQueryBuilder->setParameter('maximalPrice', $maximalPrice);
 		}
 		$this->queryBuilderService->addOrExtendJoin(
-			$queryBuilder,
+			$productsQueryBuilder,
 			ProductCalculatedPrice::class,
 			'pcp',
 			$priceLimits
 		);
-		$queryBuilder->setParameter('pricingGroup', $pricingGroup);
+		$productsQueryBuilder->setParameter('pricingGroup', $pricingGroup);
 
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param bool $filterByStock
 	 */
-	public function filterByStock(QueryBuilder $queryBuilder, $filterByStock) {
+	public function filterByStock(QueryBuilder $productsQueryBuilder, $filterByStock) {
 		if ($filterByStock) {
 			$this->queryBuilderService->addOrExtendJoin(
-				$queryBuilder,
-				\SS6\ShopBundle\Model\Product\Availability\Availability::class,
+				$productsQueryBuilder,
+				Availability::class,
 				'a',
 				'p.calculatedAvailability = a'
 			);
-			$queryBuilder->andWhere('a.deliveryTime = :deliveryTime');
-			$queryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
+			$productsQueryBuilder->andWhere('a.deliveryTime = :deliveryTime');
+			$productsQueryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
 		}
 
 	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 */
+	public function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
+		$flagsCount = count($flags);
+		if ($flagsCount !== 0) {
+			$flagsQueryBuilder = $this->getFlagsQueryBuilder($flags);
+
+			$productsQueryBuilder->andWhere($productsQueryBuilder->expr()->exists($flagsQueryBuilder));
+			foreach ($flagsQueryBuilder->getParameters() as $parameter) {
+				$productsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
+			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getFlagsQueryBuilder(array $flags) {
+		$flagsQueryBuilder = $this->em->createQueryBuilder();
+
+		$orExpr = $flagsQueryBuilder->expr()->orX();
+
+		$index = 0;
+		foreach ($flags as $flag) {
+			$orExpr->add('f = :flag' . $index);
+			$flagsQueryBuilder->setParameter('flag' . $index, $flag);
+			$index++;
+		}
+
+		$flagsQueryBuilder
+			->select('1')
+			->from(Product::class, 'pf')
+			->join('p.flags', 'f', Join::ON)
+			->where('pf = p')
+			->andWhere($orExpr);
+
+		return $flagsQueryBuilder;
+	}
+
 }

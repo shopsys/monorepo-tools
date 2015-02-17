@@ -648,6 +648,9 @@ services:
   ss6.shop.product.flag.flag_service:
     class: SS6\ShopBundle\Model\Product\Flag\FlagService
 
+  ss6.shop.product.filter.flag_filter_choice_repository:
+    class: SS6\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository
+
   ss6.shop.product.filter.parameter_filter_choice_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
 
