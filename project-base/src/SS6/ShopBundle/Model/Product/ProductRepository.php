@@ -126,25 +126,25 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $page
 	 * @param int $limit
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginationResultForVisibleInCategory(
+		Category $category,
 		$domainId,
 		$locale,
+		ProductFilterData $productFilterData,
 		ProductListOrderingSetting $orderingSetting,
-		$page,
-		$limit,
-		Category $category,
 		PricingGroup $pricingGroup,
-		ProductFilterData $productFilterData
+		$page,
+		$limit
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 		$this->addTranslation($queryBuilder, $locale);

@@ -95,14 +95,14 @@ class ProductOnCurrentDomainFacade {
 		$category = $this->categoryRepository->getById($categoryId);
 
 		$paginationResult = $this->productRepository->getPaginationResultForVisibleInCategory(
+			$category,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
+			$productFilterData,
 			$orderingSetting,
-			$page,
-			$limit,
-			$category,
 			$this->currentCustomer->getPricingGroup(),
-			$productFilterData
+			$page,
+			$limit
 		);
 		$products = $paginationResult->getResults();
 
