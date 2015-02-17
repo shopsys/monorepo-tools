@@ -3,6 +3,7 @@
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block title %}
+	{{ parent() }}
 	- {{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}
 {% endblock %}
 
@@ -17,6 +18,8 @@
 		<div class="box-filter">
 			{{ form_start(filterForm, { action: url('front_product_search') }) }}
 				{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
+
+				<input type="hidden" name="q" value="{{ searchText|escape('html_attr') }}" />
 
 				<div class="box-filter__group">
 					<div class="box-filter__group__item">
@@ -39,7 +42,7 @@
 				{% do filterForm.parameters.setRendered %}
 
 				<div class="box-filter__buttons">
-					<a class ="button button--simple mr-half" href = "{{ url('front_product_search') }}">{{ 'Vynulovat filtr'|trans }}</a>
+					<a class="button button--simple mr-half" href="{{ url('front_product_search', { q: searchText }) }}">{{ 'Vynulovat filtr'|trans }}</a>
 
 					{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
 				</div>
