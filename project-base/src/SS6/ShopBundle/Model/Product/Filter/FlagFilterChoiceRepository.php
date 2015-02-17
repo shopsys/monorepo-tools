@@ -43,7 +43,7 @@ class FlagFilterChoiceRepository {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
-	 * @param string $searchText
+	 * @param string|null $searchText
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlagFilterChoicesForSearch($domainId, $locale, $searchText) {

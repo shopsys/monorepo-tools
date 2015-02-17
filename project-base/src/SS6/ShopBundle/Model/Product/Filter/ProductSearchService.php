@@ -26,7 +26,7 @@ class ProductSearchService {
 	}
 
 	/**
-	 * @param string $searchText
+	 * @param string|null $searchText
 	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetail[] $products
 	 * @param int $totalProductCount
 	 * @return array

@@ -120,7 +120,7 @@ class ProductRepository {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
-	 * @param string $searchText
+	 * @param string|null $searchText
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getVisibleByDomainIdAndSearchTextQueryBuilder(
@@ -145,7 +145,7 @@ class ProductRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $searchText
+	 * @param string|null $searchText
 	 */
 	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
 		$queryBuilder->andWhere(
@@ -190,7 +190,7 @@ class ProductRepository {
 	}
 
 	/**
-	 * @param string $searchText
+	 * @param string|null $searchText
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
@@ -200,7 +200,7 @@ class ProductRepository {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultForVisibleBySearchText(
+	public function getPaginationResultForSearchVisible(
 		$searchText,
 		$domainId,
 		$locale,

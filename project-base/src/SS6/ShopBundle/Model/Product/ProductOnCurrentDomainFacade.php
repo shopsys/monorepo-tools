@@ -107,7 +107,7 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
-	 * @param string $searchText
+	 * @param string|null $searchText
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
@@ -121,7 +121,7 @@ class ProductOnCurrentDomainFacade {
 		$page,
 		$limit
 	) {
-		$paginationResult = $this->productRepository->getPaginationResultForVisibleBySearchText(
+		$paginationResult = $this->productRepository->getPaginationResultForSearchVisible(
 			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
@@ -141,13 +141,18 @@ class ProductOnCurrentDomainFacade {
 		);
 	}
 
+	/**
+	 * @param string|null $searchText
+	 * @param int $limit
+	 * @return array
+	 */
 	public function getSearchAutocompleteData($searchText, $limit) {
 		$emptyProductFilterData = new ProductFilterData();
 		$orderingSetting = new ProductListOrderingSetting(ProductListOrderingSetting::ORDER_BY_NAME_ASC);
 
 		$page = 1;
 
-		$paginationResult = $this->productRepository->getPaginationResultForVisibleBySearchText(
+		$paginationResult = $this->productRepository->getPaginationResultForSearchVisible(
 			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
