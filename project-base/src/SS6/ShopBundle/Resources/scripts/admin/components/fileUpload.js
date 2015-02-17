@@ -119,8 +119,13 @@
 			}
 		};
 
-		var onUploadError = function(id, message) {
+		var onUploadError = function(id, message, code) {
 			items[id].deleteItem();
+			if (code === 413) {
+				message = SS6.translator.trans('Soubor je příliš velký');
+			} else if (code === 415) {
+				message = SS6.translator.trans('Soubor je v nepodporovaném formátu');
+			}
 			SS6.window({
 				content: SS6.translator.trans('Při nahrávání souboru došlo k chybě: %message%', {'%message%': message })
 			});
