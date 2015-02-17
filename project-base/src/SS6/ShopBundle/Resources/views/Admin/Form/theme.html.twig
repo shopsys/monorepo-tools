@@ -58,9 +58,6 @@
 				data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
 				title="{{ icon.title }}"
 			 ></i>
-		{% elseif symbolAfterInput is defined %}
-			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
-			<span class="form-line__appendix">{{symbolAfterInput}}</span>
 		{% endif %}
 	</div>
 {% endblock form_row %}
@@ -180,6 +177,9 @@
 {% block form_widget_simple %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
 	{{ parent('form_widget_simple') }}
+	{% if symbolAfterInput is defined %}
+		<span>{{ symbolAfterInput }}</span>
+	{% endif %}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}
