@@ -94,7 +94,7 @@ class ProductOnCurrentDomainFacade {
 	) {
 		$category = $this->categoryRepository->getById($categoryId);
 
-		$paginationResult = $this->productRepository->getPaginationResultInCategory(
+		$paginationResult = $this->productRepository->getPaginationResultForVisibleInCategory(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$orderingSetting,

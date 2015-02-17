@@ -136,7 +136,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultInCategory(
+	public function getPaginationResultForVisibleInCategory(
 		$domainId,
 		$locale,
 		ProductListOrderingSetting $orderingSetting,
