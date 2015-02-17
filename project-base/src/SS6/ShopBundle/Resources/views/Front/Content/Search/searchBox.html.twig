@@ -26,6 +26,10 @@
 
 		<ul class="search__hint display-none" id="js-search-autocomplete-list" data-item-template="{{ _self.autocompleteListItem()|e }}">
 			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-label"></li>
+			<li class="display-none" id="js-search-autocomplete-list-item-placeholder"></li>
+			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-search-link-item">
+				<a id="js-search-autocomplete-search-link">{{ 'Zobrazit všechny výsledky'|trans }}</a>
+			</li>
 		</ul>
 	</form>
 </div>

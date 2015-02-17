@@ -159,6 +159,7 @@ class ProductOnCurrentDomainFacade {
 		);
 
 		return $this->productSearchService->getSearchAutocompleteData(
+			$searchText,
 			$paginationResult->getResults(),
 			$paginationResult->getTotalCount()
 		);

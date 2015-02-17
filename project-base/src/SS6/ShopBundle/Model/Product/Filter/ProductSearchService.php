@@ -26,14 +26,20 @@ class ProductSearchService {
 	}
 
 	/**
+	 * @param string $searchText
 	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetail[] $products
 	 * @param int $totalProductCount
 	 * @return array
 	 */
-	public function getSearchAutocompleteData(array $products, $totalProductCount) {
+	public function getSearchAutocompleteData(
+		$searchText,
+		array $products,
+		$totalProductCount
+	) {
 		$responseData = [
 			'totalProductCount' => $totalProductCount,
 			'products' => [],
+			'searchUrl' => $this->router->generate('front_product_search', ['q' => $searchText]),
 		];
 
 		foreach ($products as $product) {

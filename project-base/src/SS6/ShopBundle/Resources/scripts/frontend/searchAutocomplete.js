@@ -12,7 +12,10 @@
 	var $input = null;
 	var $label = null;
 	var $list = null;
+	var $listItemPlaceholder = null;
 	var $listItemTemplate = null;
+	var $searchLink = null;
+	var $searchLinkItem = null;
 	var requestTimer = null;
 	var resultExists = false;
 	var searchDataCache = {};
@@ -21,7 +24,10 @@
 		$input = $('#js-search-autocomplete-input');
 		$label = $('#js-search-autocomplete-label');
 		$list = $('#js-search-autocomplete-list');
+		$listItemPlaceholder = $('#js-search-autocomplete-list-item-placeholder');
 		$listItemTemplate = $($.parseHTML($list.data('item-template')));
+		$searchLink = $('#js-search-autocomplete-search-link');
+		$searchLinkItem = $('#js-search-autocomplete-search-link-item');
 
 		$input.bind('keyup paste', SS6.search.autocomplete.onInputChange);
 		$input.bind('focus', function () {
@@ -92,10 +98,17 @@
 			$listItem.find('.js-search-autocomplete-item-link').attr('href', productData.url);
 			$listItem.find('.js-search-autocomplete-item-image').attr('src', productData.imageUrl);
 
-			$listItem.appendTo($list);
+			$listItemPlaceholder.before($listItem);
 		});
 
 		$list.show();
+
+		if (responseData.products.length > 0) {
+			$searchLink.attr('href', responseData.searchUrl);
+			$searchLinkItem.show();
+		} else {
+			$searchLinkItem.hide();
+		}
 	};
 
 	$(document).ready(function () {
