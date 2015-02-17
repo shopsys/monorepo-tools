@@ -1,7 +1,9 @@
 <div class="search" id="js-search-autocomplete">
-	<form action="#" method="get">
+	<form action="{{ url('front_product_search') }}" method="get">
 		<input
 			type="text"
+			name="q"
+			value="{{ searchText|escape('html_attr') }}"
 			placeholder="{{ 'Vyhledávání'|trans }}"
 			class="form-control search__input"
 			id="js-search-autocomplete-input"
@@ -24,6 +26,10 @@
 
 		<ul class="search__hint display-none" id="js-search-autocomplete-list" data-item-template="{{ _self.autocompleteListItem()|e }}">
 			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-label"></li>
+			<li class="display-none" id="js-search-autocomplete-list-item-placeholder"></li>
+			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-search-link-item">
+				<a id="js-search-autocomplete-search-link">{{ 'Zobrazit všechny výsledky'|trans }}</a>
+			</li>
 		</ul>
 	</form>
 </div>

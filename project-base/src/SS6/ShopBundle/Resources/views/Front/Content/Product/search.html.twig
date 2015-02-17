@@ -1,0 +1,72 @@
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
+{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+
+{% block title %}
+	{{ parent() }}
+	- {{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}
+{% endblock %}
+
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+{% endblock %}
+
+{% block main_content %}
+	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
+
+	{% if productDetails|length > 0 or filterFormSubmited %}
+		<div class="box-filter">
+			{{ form_start(filterForm, { action: url('front_product_search') }) }}
+				{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
+
+				<input type="hidden" name="q" value="{{ searchText|escape('html_attr') }}" />
+
+				<div class="box-filter__group">
+					<div class="box-filter__group__item">
+						{{ form_row(filterForm.minimalPrice, {label: 'Cena od', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+					</div>
+
+					<div class="box-filter__group__item">
+						{{ form_row(filterForm.maximalPrice, {label: 'Cena do', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+					</div>
+				</div>
+
+				{{ form_row(filterForm.inStock, {label: 'Jen zboží skladem'}) }}
+
+				{% if filterForm.flags is empty %}
+					{% do filterForm.flags.setRendered %}
+				{% else %}
+					{{ form_row(filterForm.flags, { label: 'Příznaky' }) }}
+				{% endif %}
+
+				{% do filterForm.parameters.setRendered %}
+
+				<div class="box-filter__buttons">
+					<a class="button button--simple mr-half" href="{{ url('front_product_search', { q: searchText }) }}">{{ 'Vynulovat filtr'|trans }}</a>
+
+					{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
+				</div>
+
+			{{ form_end(filterForm) }}
+		</div>
+	{% endif %}
+
+	{% if productDetails|length > 0 %}
+		{% set entityName = 'zboží'|trans %}
+
+		<div>
+			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
+		</div>
+
+		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
+
+		{{ productList.list(productDetails) }}
+
+		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
+	{% else %}
+		<div class="in-message in-message--static in-message--info js-flash-message">
+			{{ 'Hledání neodpovídají žádné výsledky'|trans }}
+		</div>
+	{% endif %}
+
+{% endblock %}

@@ -662,9 +662,6 @@ services:
   ss6.shop.product.filter.product_filter_repository:
     class: SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository
 
-  ss6.shop.product.filter.product_search_repository:
-    class: SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository
-
   ss6.shop.product.filter.product_search_service:
     class: SS6\ShopBundle\Model\Product\Filter\ProductSearchService
 

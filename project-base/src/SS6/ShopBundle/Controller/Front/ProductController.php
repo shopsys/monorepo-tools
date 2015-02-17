@@ -49,7 +49,11 @@ class ProductController extends Controller {
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createForm($productFilterFormTypeFactory->create($domain->getId(), $domain->getLocale(), $category));
+		$filterForm = $this->createForm($productFilterFormTypeFactory->createForCategory(
+			$domain->getId(),
+			$domain->getLocale(),
+			$category
+		));
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
@@ -66,6 +70,52 @@ class ProductController extends Controller {
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
 			'category' => $category,
+			'filterForm' => $filterForm->createView(),
+			'filterFormSubmited' => $filterForm->isSubmitted(),
+			'domainId' => $domain->getId(),
+		]);
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $page
+	 */
+	public function searchAction(Request $request, $page) {
+		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
+		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
+		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
+		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
+		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
+
+		$searchText = $request->query->get('q');
+		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
+
+		$productFilterData = new ProductFilterData();
+
+		$filterForm = $this->createForm($productFilterFormTypeFactory->createForSearch(
+			$domain->getId(),
+			$domain->getLocale(),
+			$searchText
+		));
+		$filterForm->setData($productFilterData);
+		$filterForm->handleRequest($request);
+
+		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
+			$searchText,
+			$productFilterData,
+			$orderingSetting,
+			$page,
+			self::PRODUCTS_PER_PAGE
+		);
+
+		return $this->render('@SS6Shop/Front/Content/Product/search.html.twig', [
+			'searchText' => $searchText,
+			'productDetails' => $paginationResult->getResults(),
+			'orderingSetting' => $orderingSetting,
+			'paginationResult' => $paginationResult,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'domainId' => $domain->getId(),

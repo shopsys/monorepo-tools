@@ -32,11 +32,25 @@ class ProductFilterFormTypeFactory {
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
-	public function create($domainId, $locale, Category $category) {
+	public function createForCategory($domainId, $locale, Category $category) {
 		$parameterFilterChoices = $this->parameterFilterChoiceRepository
 			->getParameterFilterChoicesInCategory($domainId, $locale, $category);
 		$flagFilterChoices = $this->flagFilterChoiceRepository
 			->getFlagFilterChoicesInCategory($domainId, $category);
+
+		return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string|null $searchText
+	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
+	 */
+	public function createForSearch($domainId, $locale, $searchText) {
+		$parameterFilterChoices = [];
+		$flagFilterChoices = $this->flagFilterChoiceRepository
+			->getFlagFilterChoicesForSearch($domainId, $locale, $searchText);
 
 		return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices);
 	}

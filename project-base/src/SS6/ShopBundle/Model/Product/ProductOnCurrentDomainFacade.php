@@ -8,7 +8,6 @@ use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
-use SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductSearchService;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -40,11 +39,6 @@ class ProductOnCurrentDomainFacade {
 	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductSearchRepository
-	 */
-	private $productSearchRepository;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductSearchService
 	 */
 	private $productSearchService;
@@ -55,7 +49,6 @@ class ProductOnCurrentDomainFacade {
 		ProductDetailFactory $productDetailFactory,
 		CurrentCustomer $currentCustomer,
 		CategoryRepository $categoryRepository,
-		ProductSearchRepository $productSearchRepository,
 		ProductSearchService $productSearchService
 	) {
 		$this->productRepository = $productRepository;
@@ -63,7 +56,6 @@ class ProductOnCurrentDomainFacade {
 		$this->currentCustomer = $currentCustomer;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->categoryRepository = $categoryRepository;
-		$this->productSearchRepository = $productSearchRepository;
 		$this->productSearchService = $productSearchService;
 	}
 
@@ -94,15 +86,15 @@ class ProductOnCurrentDomainFacade {
 	) {
 		$category = $this->categoryRepository->getById($categoryId);
 
-		$paginationResult = $this->productRepository->getPaginationResultInCategory(
+		$paginationResult = $this->productRepository->getPaginationResultForVisibleInCategory(
+			$category,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
+			$productFilterData,
 			$orderingSetting,
-			$page,
-			$limit,
-			$category,
 			$this->currentCustomer->getPricingGroup(),
-			$productFilterData
+			$page,
+			$limit
 		);
 		$products = $paginationResult->getResults();
 
@@ -114,17 +106,65 @@ class ProductOnCurrentDomainFacade {
 		);
 	}
 
-	public function getSearchAutocompleteData($searchText, $limit) {
-		$paginationResult = $this->productSearchRepository->getPaginationResultForVisibleByNameOrCatnum(
+	/**
+	 * @param string|null $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param int $page
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getPaginatedProductDetailsForSearch(
+		$searchText,
+		ProductFilterData $productFilterData,
+		ProductListOrderingSetting $orderingSetting,
+		$page,
+		$limit
+	) {
+		$paginationResult = $this->productRepository->getPaginationResultForSearchVisible(
+			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
+			$productFilterData,
+			$orderingSetting,
+			$this->currentCustomer->getPricingGroup(),
+			$page,
+			$limit
+		);
+		$products = $paginationResult->getResults();
+
+		return new PaginationResult(
+			$paginationResult->getPage(),
+			$paginationResult->getPageSize(),
+			$paginationResult->getTotalCount(),
+			$this->productDetailFactory->getDetailsForProducts($products)
+		);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @param int $limit
+	 * @return array
+	 */
+	public function getSearchAutocompleteData($searchText, $limit) {
+		$emptyProductFilterData = new ProductFilterData();
+		$orderingSetting = new ProductListOrderingSetting(ProductListOrderingSetting::ORDER_BY_NAME_ASC);
+
+		$page = 1;
+
+		$paginationResult = $this->productRepository->getPaginationResultForSearchVisible(
 			$searchText,
-			$searchText,
-			1,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$emptyProductFilterData,
+			$orderingSetting,
+			$this->currentCustomer->getPricingGroup(),
+			$page,
 			$limit
 		);
 
 		return $this->productSearchService->getSearchAutocompleteData(
+			$searchText,
 			$paginationResult->getResults(),
 			$paginationResult->getTotalCount()
 		);

@@ -56,6 +56,10 @@ front_product_detail:
   requirements:
     id: \d+
 
+front_product_search:
+  pattern: /search/{page}
+  defaults: { _controller: SS6ShopBundle:Front\Product:search, page: 1 }
+
 front_registration_register:
   pattern: /registration/
   defaults: { _controller: SS6ShopBundle:Front\Registration:register }

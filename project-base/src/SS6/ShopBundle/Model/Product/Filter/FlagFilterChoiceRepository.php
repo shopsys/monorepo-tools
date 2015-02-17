@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\Flag\Flag;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -35,22 +36,45 @@ class FlagFilterChoiceRepository {
 	 */
 	public function getFlagFilterChoicesInCategory($domainId, Category $category) {
 		$productsQueryBuilder = $this->productRepository->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
-		$productsQueryBuilder
+
+		return $this->getFlagsByProductsQueryBuilder($productsQueryBuilder);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string|null $searchText
+	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	public function getFlagFilterChoicesForSearch($domainId, $locale, $searchText) {
+		$productsQueryBuilder = $this->productRepository
+			->getVisibleByDomainIdAndSearchTextQueryBuilder($domainId, $locale, $searchText);
+
+		return $this->getFlagsByProductsQueryBuilder($productsQueryBuilder);
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	private function getFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder) {
+		$clonnedProductsQueryBuilder = clone $productsQueryBuilder;
+
+		$clonnedProductsQueryBuilder
+			->select('1')
 			->join('p.flags', 'pf', Join::WITH, 'pf.id = f.id');
 
 		$flagsQueryBuilder = $this->em->createQueryBuilder();
 		$flagsQueryBuilder
 			->select('f')
 			->from(Flag::class, 'f')
-			->andWhere($flagsQueryBuilder->expr()->exists($productsQueryBuilder));
+			->andWhere($flagsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder));
 
-		foreach ($productsQueryBuilder->getParameters() as $parameter) {
+		foreach ($clonnedProductsQueryBuilder->getParameters() as $parameter) {
 			$flagsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
 		}
 
-		$flagsInCategory = $flagsQueryBuilder->getQuery()->execute();
-
-		return $flagsInCategory;
+		return $flagsQueryBuilder->getQuery()->execute();
 	}
 
 }
