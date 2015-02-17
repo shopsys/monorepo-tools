@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
@@ -220,7 +221,7 @@ class ProductFormType extends AbstractType {
 			'data_class' => ProductData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = ['Default'];
+				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 				$productData = $form->getData();
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 

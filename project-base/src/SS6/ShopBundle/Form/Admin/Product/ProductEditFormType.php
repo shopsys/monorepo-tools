@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParamete
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use Symfony\Component\Form\AbstractType;
@@ -140,7 +141,7 @@ class ProductEditFormType extends AbstractType {
 			'attr' => ['novalidate' => 'novalidate'],
 			'intention' => self::INTENTION,
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = ['Default'];
+				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 				$productData = $form->getData()->productData;
 				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
 

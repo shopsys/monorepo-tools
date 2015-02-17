@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\TransportAndPayment;
 
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -59,7 +60,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 				[
 					'compound' => true,
 					'validation_groups' => function (FormInterface $form) {
-						$validationGroups = ['Default'];
+						$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 						$formData = $form->getData();
 						if ($formData[FreeTransportAndPaymentPriceLimitsFormType::FIELD_ENABLED]) {
 							$validationGroups[] = FreeTransportAndPaymentPriceLimitsFormType::VALIDATION_GROUP_PRICE_LIMIT_ENABLED;

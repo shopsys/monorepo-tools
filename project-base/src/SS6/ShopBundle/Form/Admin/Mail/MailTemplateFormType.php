@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Admin\Mail;
 use SS6\ShopBundle\Component\Constraints\Contains;
 use SS6\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Mail\MailTypeInterface;
 use Symfony\Component\Form\AbstractType;
@@ -103,7 +104,7 @@ class MailTemplateFormType extends AbstractType {
 			'data_class' => MailTemplateData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = ['Default'];
+				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$mailTemplateData = $form->getData();
 				/* @var $mailTemplateData \SS6\ShopBundle\Model\Mail\MailTemplateData */
