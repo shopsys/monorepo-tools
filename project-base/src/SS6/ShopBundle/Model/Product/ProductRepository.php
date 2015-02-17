@@ -180,7 +180,8 @@ class ProductRepository {
 		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
 
 		$this->addTranslation($queryBuilder, $locale);
-		$this->applyFiltering($queryBuilder, $productFilterData, $pricingGroup);
+		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
+		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
@@ -211,7 +212,7 @@ class ProductRepository {
 	) {
 		$queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder($domainId, $locale, $searchText);
 
-		$this->applyFiltering($queryBuilder, $productFilterData, $pricingGroup);
+		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
@@ -224,7 +225,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
-	private function applyFiltering(
+	private function applyBasicFiltering(
 		QueryBuilder $queryBuilder,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
@@ -237,7 +238,6 @@ class ProductRepository {
 			$productFilterData->maximalPrice
 		);
 		$this->productFilterRepository->filterByFlags($queryBuilder, $productFilterData->flags);
-		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
 	}
 
 	/**
