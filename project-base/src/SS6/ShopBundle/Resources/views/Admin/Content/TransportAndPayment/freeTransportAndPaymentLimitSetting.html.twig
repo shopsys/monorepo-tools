@@ -31,7 +31,7 @@
 									{{ form_widget(priceLimitForm.enabled, { attr: { class: 'js-free-transport-and-payment-price-limit-enabled' } } ) }}
 								</td>
 								<td class="form-inline">
-									{{ form_widget(priceLimitForm.priceLimit, { attr: { class: 'js-free-transport-and-payment-price-limit-input', symbolAfterInput: currencySymbolByDomainId(domainId) } }) }}
+									{{ form_widget(priceLimitForm.priceLimit, { symbolAfterInput: currencySymbolByDomainId(domainId), attr: { class: 'js-free-transport-and-payment-price-limit-input' } }) }}
 								</td>
 							</tr>
 						{% endfor %}
