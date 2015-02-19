@@ -42,7 +42,7 @@ class FileUploadController extends Controller {
 				];
 				$actionResult['status'] = 'success';
 				$actionResult['filename'] = $temporaryFilename;
-			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUpload $ex) {
+			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUploadException $ex) {
 				$actionResult['status'] = 'error';
 				$actionResult['code'] = $ex->getCode();
 				$actionResult['message'] = $ex->getMessage();

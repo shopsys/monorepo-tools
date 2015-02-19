@@ -1,7 +1,10 @@
 /*
+ * pull request - get server response status code in onUploadError
+ * https://github.com/danielm/uploader/pull/17
+ *
  * dmuploader.js - Jquery File Uploader - 0.1
  * http://www.daniel.com.uy/projects/jquery-file-uploader/
- * 
+ *
  * Copyright (c) 2013 Daniel Morales
  * Dual licensed under the MIT and GPL licenses.
  * http://www.daniel.com.uy/doc/license/
@@ -119,7 +122,7 @@
 
       $(this).val('');
     });
-        
+
     this.settings.onInit.call(this.element);
   };
 
@@ -249,7 +252,7 @@
         widget.settings.onUploadSuccess.call(widget.element, widget.queuePos, data);
       },
       error: function (xhr, status, errMsg){
-        widget.settings.onUploadError.call(widget.element, widget.queuePos, errMsg);
+        widget.settings.onUploadError.call(widget.element, widget.queuePos, errMsg, xhr.status);
       },
       complete: function(xhr, textStatus){
         widget.processQueue();

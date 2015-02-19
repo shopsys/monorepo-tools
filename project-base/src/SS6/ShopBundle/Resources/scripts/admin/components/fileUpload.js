@@ -73,7 +73,7 @@
 		var onFormSubmit = function (event) {
 			if (!ready) {
 				SS6.window({
-					content: 'Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.'
+					content: SS6.translator.trans('Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.')
 				});
 				event.preventDefault();
 			}
@@ -81,7 +81,7 @@
 
 		var onBeforeUpload = function() {
 			ready = false;
-			updateFileStatus('uploading', 'Nahrávám...');
+			updateFileStatus('uploading', SS6.translator.trans('Nahrávám...'));
 		};
 
 		var onUploadNewFile = function(id, file) {
@@ -99,7 +99,7 @@
 
 		var onUploadProgress = function(id, percent) {
 			items[id].setProgress(percent);
-			updateFileStatus('uploading', 'Nahrávám...');
+			updateFileStatus('uploading', SS6.translator.trans('Nahrávám...'));
 		};
 
 		var onUploadSuccess = function(id, data) {
@@ -109,7 +109,7 @@
 				}
 				lastUploadItemId = id;
 				items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
-				updateFileStatus('success', 'Úspěšně nahráno');
+				updateFileStatus('success', SS6.translator.trans('Úspěšně nahráno'));
 				$status.parent().fadeOut(4000);
 			} else {
 				items[id].deleteItem();
@@ -119,8 +119,13 @@
 			}
 		};
 
-		var onUploadError = function(id, message) {
+		var onUploadError = function(id, message, code) {
 			items[id].deleteItem();
+			if (code === 413) {
+				message = SS6.translator.trans('Soubor je příliš velký');
+			} else if (code === 415) {
+				message = SS6.translator.trans('Soubor je v nepodporovaném formátu');
+			}
 			SS6.window({
 				content: SS6.translator.trans('Při nahrávání souboru došlo k chybě: %message%', {'%message%': message })
 			});
