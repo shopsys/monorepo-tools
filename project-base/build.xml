@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6" default="build">
 
+	<property file="${project.basedir}/build/build.local.properties" />
+
 	<import file="build-dev.xml" />
 
 	<property name="path.app" value="${path.root}/app"/>
@@ -34,8 +36,6 @@
 			<property name="dev.null" value="/dev/null"/>
 		</else>
 	</if>
-
-	<property file="${path.build.properties.local}" override="true"/>
 
 	<target name="build" depends="clean,composer,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup"/>
 	<target name="build-demo" depends="clean,composer,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup"/>
