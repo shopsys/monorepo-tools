@@ -53,12 +53,7 @@
 		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
-		{% if icon is defined %}
-			<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
-				data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-				title="{{ icon.title }}"
-			 ></i>
-		{% endif %}
+		{{- block('icon_block') -}}
 	</div>
 {% endblock form_row %}
 
@@ -86,6 +81,7 @@
 			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon' } }) }}
 			<span class="form-line__icon form-line__icon--{{locale}}"></span>
 		{% endif %}
+		{{- block('icon_block') -}}
 	</div>
 {%- endblock text_row %}
 
@@ -301,3 +297,12 @@
     {% set value = value|cropZeros %}
 	{{ parent('number_widget') }}
 {% endblock number_widget %}
+
+{% block icon_block %}
+	{% if icon is defined %}
+		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
+			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+			title="{{ icon.title }}"
+		 ></i>
+	{% endif %}
+{% endblock %}
