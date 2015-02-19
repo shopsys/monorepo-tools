@@ -5,6 +5,14 @@
 	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
 {% endblock %}
 
+{% block meta_description -%}
+	{{ metaDescription }}
+{% endblock %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
 {% block main_content %}
 
 	{% if sliderItems is not empty %}
