@@ -161,6 +161,9 @@
         - label: 'URL adresy'
           route: admin_superadmin_urls
 
+    - label: 'SEO'
+      route: admin_seo_index
+
     - label: 'Superadmin'
       route: admin_superadmin_index
       items:
