@@ -89,10 +89,10 @@
 
 	SS6.search.autocomplete.showResult = function(responseData) {
 		resultExists = true;
-		$label.text(responseData.label);
+		$label.text(responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_LABEL')]);
 
 		$list.find('.js-search-autocomplete-item').remove();
-		$.each(responseData.products, function (key, productData) {
+		$.each(responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_PRODUCTS')], function (key, productData) {
 			var $listItem = $listItemTemplate.clone();
 			$listItem.find('.js-search-autocomplete-item-label').text(productData.name);
 			$listItem.find('.js-search-autocomplete-item-link').attr('href', productData.url);
@@ -103,8 +103,8 @@
 
 		$list.show();
 
-		if (responseData.products.length > 0) {
-			$searchLink.attr('href', responseData.searchUrl);
+		if (responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_PRODUCTS')].length > 0) {
+			$searchLink.attr('href', responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_SEARCH_URL')]);
 			$searchLinkItem.show();
 		} else {
 			$searchLinkItem.hide();
