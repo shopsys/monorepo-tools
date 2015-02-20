@@ -26,4 +26,20 @@ class TransformString {
 	public static function emptyToNull($value) {
 		return $value === '' ? null : $value;
 	}
+
+	/**
+	 * @param string $string
+	 * @return string
+	 * @link http://php.vrana.cz/vytvoreni-pratelskeho-url.php
+	 */
+	public static function stringToFriendlyUrl($string) {
+		$url = $string;
+		$url = preg_replace('~[^\\pL0-9_]+~u', '-', $url);
+		$url = trim($url, '-');
+		$url = iconv('utf-8', 'us-ascii//TRANSLIT', $url);
+		$url = strtolower($url);
+		$url = preg_replace('~[^-a-z0-9_]+~', '', $url);
+
+		return $url;
+	}
 }
