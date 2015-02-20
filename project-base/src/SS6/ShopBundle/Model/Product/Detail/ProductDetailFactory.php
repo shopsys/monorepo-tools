@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductDetailFactory {
 
@@ -20,6 +21,11 @@ class ProductDetailFactory {
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
@@ -39,12 +45,14 @@ class ProductDetailFactory {
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ProductPriceCalculation $productPriceCalculation,
+		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ImageFacade $imageFacade,
 		Localization $localization
 	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productPriceCalculation = $productPriceCalculation;
+		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->imageFacade = $imageFacade;
 		$this->localization = $localization;
@@ -59,6 +67,7 @@ class ProductDetailFactory {
 			$product,
 			$this->getBasePrice($product),
 			$this->getSellingPrice($product),
+			$this->getProductDomains($product),
 			$this->getParameters($product),
 			$this->getImages($product)
 		);
@@ -116,6 +125,14 @@ class ProductDetailFactory {
 	 */
 	private function getImages(Product $product) {
 		return $this->imageFacade->getImagesByEntity($product, null);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 */
+	private function getProductDomains(Product $product) {
+		return $this->productRepository->getProductDomainsByProduct($product);
 	}
 
 }
