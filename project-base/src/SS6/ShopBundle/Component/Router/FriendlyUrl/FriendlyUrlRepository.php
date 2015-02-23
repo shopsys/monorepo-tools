@@ -40,4 +40,25 @@ class FriendlyUrlRepository {
 		);
 	}
 
+	/**
+	 * @param int $domainId
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl
+	 */
+	public function getByDomainIdAndRouteNameAndEntityId($domainId, $routeName, $entityId) {
+		$criteria = [
+			'domainId' => $domainId,
+			'routeName' => $routeName,
+			'entityId' => $entityId,
+		];
+		$friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria);
+
+		if ($friendlyUrl === null) {
+			throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException($criteria);
+		}
+
+		return $friendlyUrl;
+	}
+
 }

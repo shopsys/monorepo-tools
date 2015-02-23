@@ -92,6 +92,7 @@ ss6_shop:
     locale_routers:
       cs: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_cs.yml
       en: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_en.yml
+    friendly_url_router: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_friendly_url.yml
 
 stof_doctrine_extensions:
   orm:

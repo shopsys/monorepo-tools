@@ -26,6 +26,9 @@ class Configuration implements ConfigurationInterface {
 						->arrayNode('locale_routers')
 						->defaultValue([])
 						->prototype('scalar')
+						->end()
+					->end()
+						->scalarNode('friendly_url_router')
 					->end()
 				->end()
 			->end();

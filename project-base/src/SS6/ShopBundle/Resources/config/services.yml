@@ -775,6 +775,10 @@ services:
     class: SS6\ShopBundle\Component\Router\DomainRouterFactory
     arguments: [%router.resource%]
 
+  ss6.shop.router.friendly_url.friendly_url_router_factory:
+    class: SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
+    arguments: [%ss6_shop.router.friendly_url_router%]
+
   ss6.shop.router.localized_router_factory:
     class: SS6\ShopBundle\Component\Router\LocalizedRouterFactory
     arguments: [%ss6_shop.router.locale_routers%]

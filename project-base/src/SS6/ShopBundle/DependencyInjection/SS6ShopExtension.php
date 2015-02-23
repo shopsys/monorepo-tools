@@ -22,6 +22,7 @@ class SS6ShopExtension extends ConfigurableExtension {
 		$loader->load('services.yml');
 
 		$container->setParameter('ss6_shop.router.locale_routers', $config['router']['locale_routers']);
+		$container->setParameter('ss6_shop.router.friendly_url_router', $config['router']['friendly_url_router']);
 	}
 
 }
