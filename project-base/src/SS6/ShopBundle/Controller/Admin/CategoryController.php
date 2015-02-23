@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Category\CategoryFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,9 +21,11 @@ class CategoryController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
+		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
 
 		$category = $categoryFacade->getById($id);
-		$form = $this->createForm(new CategoryFormType($categoryFacade->getAllWithoutBranch($category)));
+		$form = $this->createForm($categoryFormTypeFactory->createForCategory($category));
 
 		$categoryData = new CategoryData();
 
@@ -68,8 +69,10 @@ class CategoryController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
+		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
 
-		$form = $this->createForm(new CategoryFormType($categoryFacade->getAll()));
+		$form = $this->createForm($categoryFormTypeFactory->create());
 
 		$categoryData = new CategoryData();
 
