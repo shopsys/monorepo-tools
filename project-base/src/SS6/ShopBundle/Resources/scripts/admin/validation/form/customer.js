@@ -4,9 +4,9 @@
 		$customerDeliveryAddressForm.jsFormValidator({
 			'groups': function () {
 
-				var groups = ['Default'];
+				var groups = [SS6.constant('\\SS6\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
 				if ($customerDeliveryAddressForm.find('#customer_deliveryAddressData_addressFilled').is(':checked')) {
-					groups.push('differentDeliveryAddress');
+					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Customer\\DeliveryAddressFormType::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS'));
 				}
 
 				return groups;
@@ -16,9 +16,9 @@
 		$customerBillingAddressForm.jsFormValidator({
 			'groups': function () {
 
-				var groups = ['Default'];
+				var groups = [SS6.constant('\\SS6\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
 				if ($customerBillingAddressForm.find('#customer_billingAddressData_companyCustomer').is(':checked')) {
-					groups.push('companyCustomer');
+					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Customer\\BillingAddressFormType::VALIDATION_GROUP_COMPANY_CUSTOMER'));
 				}
 
 				return groups;

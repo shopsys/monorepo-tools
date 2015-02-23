@@ -7,6 +7,14 @@ use SS6\ShopBundle\Twig\ImageExtension;
 
 class ProductSearchService {
 
+	const RESULT_LABEL = 'label';
+	const RESULT_PRODUCT_IMAGE_URL = 'imageUrl';
+	const RESULT_PRODUCT_NAME = 'name';
+	const RESULT_PRODUCT_URL = 'url';
+	const RESULT_PRODUCTS = 'products';
+	const RESULT_SEARCH_URL = 'searchUrl';
+	const RESULT_TOTAL_PRODUCT_COUNT = 'totalProductCount';
+
 	/**
 	 * @var \SS6\ShopBundle\Twig\ImageExtension
 	 */
@@ -37,16 +45,16 @@ class ProductSearchService {
 		$totalProductCount
 	) {
 		$responseData = [
-			'totalProductCount' => $totalProductCount,
-			'products' => [],
-			'searchUrl' => $this->router->generate('front_product_search', ['q' => $searchText]),
+			self::RESULT_TOTAL_PRODUCT_COUNT => $totalProductCount,
+			self::RESULT_PRODUCTS => [],
+			self::RESULT_SEARCH_URL => $this->router->generate('front_product_search', ['q' => $searchText]),
 		];
 
 		foreach ($products as $product) {
-			$responseData['products'][] = [
-				'name' => $product->getName(),
-				'url' => $this->router->generate('front_product_detail', ['id' => $product->getId()]),
-				'imageUrl' => $this->imageExtension->getImageUrl($product, 'thumbnail'),
+			$responseData[self::RESULT_PRODUCTS][] = [
+				self::RESULT_PRODUCT_NAME => $product->getName(),
+				self::RESULT_PRODUCT_URL => $this->router->generate('front_product_detail', ['id' => $product->getId()]),
+				self::RESULT_PRODUCT_IMAGE_URL => $this->imageExtension->getImageUrl($product, 'thumbnail'),
 			];
 		}
 

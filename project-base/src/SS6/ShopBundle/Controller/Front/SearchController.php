@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Model\Product\Filter\ProductSearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,14 +20,14 @@ class SearchController extends Controller {
 		$searchText = $request->get('searchText');
 		$result = $productOnCurrentDomainFacade->getSearchAutocompleteData($searchText, self::AUTOCOMPLETE_PRODUCT_LIMIT);
 
-		$result['label'] = $translator->transChoice(
+		$result[ProductSearchService::RESULT_LABEL] = $translator->transChoice(
 			'{0} Nebyl nalezen žádný produkt'
 			. '|{1} Celkem nalezen 1 produkt'
 			. '|[2,4] Celkem nalezeny %totalProductCount% produkty'
 			. '|[5,Inf] Celkem nalezeno %totalProductCount% produktů',
-			$result['totalProductCount'],
+			$result[ProductSearchService::RESULT_TOTAL_PRODUCT_COUNT],
 			[
-				'%totalProductCount%' => $result['totalProductCount']
+				'%totalProductCount%' => $result[ProductSearchService::RESULT_TOTAL_PRODUCT_COUNT]
 			]
 		);
 

@@ -8,7 +8,7 @@
 			$(this).jsFormValidator({
 				'groups': function () {
 
-					var groups = ['Default'];
+					var groups = [SS6.constant('\\SS6\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
 					if ($(self).find('#' + sendMailId).is(':checked')) {
 						groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Mail\\MailTemplateFormType::VALIDATION_GROUP_SEND_MAIL'));
 					}

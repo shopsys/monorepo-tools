@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Customer;
 
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -58,7 +59,7 @@ class BillingAddressFormType extends AbstractType {
 			'data_class' => BillingAddressData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
-				$validationGroups = ['Default'];
+				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$customerData = $form->getData();
 				/* @var $customerData \SS6\ShopBundle\Model\Customer\CustomerData */

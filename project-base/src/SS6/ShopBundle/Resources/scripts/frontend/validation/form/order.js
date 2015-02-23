@@ -14,12 +14,12 @@
 		$orderPersonalInfoForm.jsFormValidator({
 			'groups': function () {
 
-				var groups = ['Default'];
+				var groups = [SS6.constant('\\SS6\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
 				if ($orderPersonalInfoForm.find('#orderPersonalInfo_deliveryAddressFilled').is(':checked')) {
-					groups.push('differentDeliveryAddress');
+					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Front\\Customer\\DeliveryAddressFormType::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS'));
 				}
 				if ($orderPersonalInfoForm.find('#orderPersonalInfo_companyCustomer').is(':checked')) {
-					groups.push('companyCustomer');
+					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Front\\Customer\\BillingAddressFormType::VALIDATION_GROUP_COMPANY_CUSTOMER'));
 				}
 
 				return groups;
