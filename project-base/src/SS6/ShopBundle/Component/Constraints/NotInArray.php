@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class NotInArray extends Constraint {
 
-	public $message = 'Value must not be contained in specified array';
+	public $message = 'Value must not be niether of following: {{ array }}';
 	public $array = [];
 
 	public function getRequiredOptions() {

@@ -18,9 +18,33 @@ class NotInArrayValidator extends ConstraintValidator {
 
 		if (in_array($value, $constraint->array)) {
 			$this->context->addViolation(
-				$constraint->message
+				$constraint->message, [
+					'{{ array }}' => $this->formatArray($value),
+				]
 			);
 		}
 
+	}
+
+	/**
+	 * @param mixed $values
+	 * @return string
+	 */
+	private function formatArray($values) {
+		if (!is_array($values)) {
+			return $values;
+		}
+		$output = '';
+		$count = 1;
+		foreach ($values as $value) {
+			if ($count === count($values)) {
+				$output .= $value;
+			} else {
+				$output .= $value . ', ';
+			}
+			$count++;
+		}
+
+		return $output;
 	}
 }
