@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class FriendlyUrlFacade {
@@ -16,9 +16,9 @@ class FriendlyUrlFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
 	 */
-	private $friendlyUrlRespository;
+	private $domainRouterFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
@@ -32,12 +32,12 @@ class FriendlyUrlFacade {
 
 	public function __construct(
 		EntityManager $em,
-		FriendlyUrlRepository $friendlyUrlRespository,
+		DomainRouterFactory $domainRouterFactory,
 		FriendlyUrlService $friendlyUrlService,
 		Domain $domain
 	) {
 		$this->em = $em;
-		$this->friendlyUrlRespository = $friendlyUrlRespository;
+		$this->domainRouterFactory = $domainRouterFactory;
 		$this->friendlyUrlService = $friendlyUrlService;
 		$this->domain = $domain;
 	}
@@ -69,15 +69,18 @@ class FriendlyUrlFacade {
 				);
 			}
 
-			$duplicateFriendlyUrlOnSameDomain = $this->friendlyUrlRespository->findByDomainIdAndUrl(
-				$friendlyUrl->getDomainId(),
-				$friendlyUrl->getUrl()
-			);
+			$domainRouter = $this->domainRouterFactory->getRouter($friendlyUrl->getDomainId());
+			try {
+				$matchedRouteData = $domainRouter->match('/' . $friendlyUrl->getUrl() . '/');
+			} catch (\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
+				$matchedRouteData = null;
+			}
+
 			$friendlyUrlUniqueResult = $this->friendlyUrlService->getFriendlyUrlUniqueResult(
 				$attempt,
-				$namesByLocale,
 				$friendlyUrl,
-				$duplicateFriendlyUrlOnSameDomain
+				$namesByLocale,
+				$matchedRouteData
 			);
 			$friendlyUrl = $friendlyUrlUniqueResult->getFriendlyUrlForPersist();
 		} while (!$friendlyUrlUniqueResult->isUnique());

@@ -39,23 +39,23 @@ class FriendlyUrlService {
 
 	/**
 	 * @param int $attempt
-	 * @param string[locale] $namesByLocale
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null $duplicateFriendlyUrlOnSameDomain
+	 * @param string[locale] $namesByLocale
+	 * @param array|null $matchedRouteData
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResult
 	 */
 	public function getFriendlyUrlUniqueResult(
 		$attempt,
-		array $namesByLocale,
 		FriendlyUrl $friendlyUrl,
-		FriendlyUrl $duplicateFriendlyUrlOnSameDomain = null
+		array $namesByLocale,
+		array $matchedRouteData = null
 	) {
-		if ($duplicateFriendlyUrlOnSameDomain === null) {
+		if ($matchedRouteData === null) {
 			return new FriendlyUrlUniqueResult(true, $friendlyUrl);
 		}
 
-		if ($friendlyUrl->getRouteName() === $duplicateFriendlyUrlOnSameDomain->getRouteName()
-			&& $friendlyUrl->getEntityId() === $duplicateFriendlyUrlOnSameDomain->getEntityId()
+		if ($friendlyUrl->getRouteName() === $matchedRouteData['_route']
+			&& $friendlyUrl->getEntityId() === $matchedRouteData['id']
 		) {
 			return new FriendlyUrlUniqueResult(true, null);
 		}
@@ -65,7 +65,7 @@ class FriendlyUrlService {
 			$friendlyUrl->getEntityId(),
 			$namesByLocale,
 			$this->domain->getDomainConfigById($friendlyUrl->getDomainId()),
-			$attempt + 1 // when duplicity of urls is the new url indexed from 2
+			$attempt + 1 // if URL is duplicate, try again with "url-2", "url-3" and so on
 		);
 
 		return new FriendlyUrlUniqueResult(false, $newIndexedFriendlyUrl);
@@ -74,7 +74,7 @@ class FriendlyUrlService {
 	/**
 	 * @param string $routeName
 	 * @param int $entityId
-	 * @param atring[] $namesByLocale
+	 * @param string[] $namesByLocale
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
 	 * @param int|null $indexPostfix
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
