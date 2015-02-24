@@ -16,13 +16,8 @@ var SS6ShopBundleComponentConstraintsNotInArray = function() {
 		if (!$.isArray(values)) {
 			return values;
 		}
-		var output = '';
-		for (var i = 0; i < (values.length - 1); i++) {
-			output = output.concat(values[i]).concat(', ');
-		}
-		output = output.concat(values[values.length - 1]);
 
-		return output;
+		return values.join();
 	};
 
 };

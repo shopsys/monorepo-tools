@@ -39,27 +39,20 @@ class SeoSettingFormTypeFactory {
 	 */
 	public function create() {
 		return new SeoSettingFormType(
-			$this->getTitlesOnOtherDomains($this->domain, $this->selectedDomain, $this->seoSettingFacade),
-			$this->getTitleAddOnsOnOtherDomains($this->domain, $this->selectedDomain, $this->seoSettingFacade),
-			$this->getDescriptionsOnOtherDomains($this->domain, $this->selectedDomain, $this->seoSettingFacade)
+			$this->getTitlesOnOtherDomains(),
+			$this->getTitleAddOnsOnOtherDomains(),
+			$this->getDescriptionsOnOtherDomains()
 		);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
-	 * @param \SS6\ShopBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
 	 * @return string[]
 	 */
-	private function getTitlesOnOtherDomains(
-		Domain $domain,
-		SelectedDomain $selectedDomain,
-		SeoSettingFacade $seoSettingFacade
-	) {
+	private function getTitlesOnOtherDomains() {
 		$titles = [];
-		foreach ($domain->getAll() as $domainConfig) {
-			$title = $seoSettingFacade->getTitleMainPage($domainConfig->getId());
-			if ($title !== null && $domainConfig->getId() !== $selectedDomain->getId()) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$title = $this->seoSettingFacade->getTitleMainPage($domainConfig->getId());
+			if ($title !== null && $domainConfig->getId() !== $this->selectedDomain->getId()) {
 				$titles[] = $title;
 			}
 		}
@@ -68,20 +61,13 @@ class SeoSettingFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
-	 * @param \SS6\ShopBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
 	 * @return string[]
 	 */
-	private function getTitleAddOnsOnOtherDomains(
-		Domain $domain,
-		SelectedDomain $selectedDomain,
-		SeoSettingFacade $seoSettingFacade
-	) {
+	private function getTitleAddOnsOnOtherDomains() {
 		$titlesAddOns = [];
-		foreach ($domain->getAll() as $domainConfig) {
-			$titlesAddOn = $seoSettingFacade->getTitleAddOn($domainConfig->getId());
-			if ($titlesAddOn !== null && $domainConfig->getId() !== $selectedDomain->getId()) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$titlesAddOn = $this->seoSettingFacade->getTitleAddOn($domainConfig->getId());
+			if ($titlesAddOn !== null && $domainConfig->getId() !== $this->selectedDomain->getId()) {
 				$titlesAddOns[] = $titlesAddOn;
 			}
 		}
@@ -90,20 +76,13 @@ class SeoSettingFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
-	 * @param \SS6\ShopBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
 	 * @return string[]
 	 */
-	private function getDescriptionsOnOtherDomains(
-		Domain $domain,
-		SelectedDomain $selectedDomain,
-		SeoSettingFacade $seoSettingFacade
-	) {
+	private function getDescriptionsOnOtherDomains() {
 		$descriptions = [];
-		foreach ($domain->getAll() as $domainConfig) {
-			$description = $seoSettingFacade->getDescriptionMainPage($domainConfig->getId());
-			if ($description !== null && $domainConfig->getId() !== $selectedDomain->getId()) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$description = $this->seoSettingFacade->getDescriptionMainPage($domainConfig->getId());
+			if ($description !== null && $domainConfig->getId() !== $this->selectedDomain->getId()) {
 				$descriptions[] = $description;
 			}
 		}

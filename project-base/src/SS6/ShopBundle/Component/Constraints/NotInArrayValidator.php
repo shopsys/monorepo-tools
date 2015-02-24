@@ -34,17 +34,7 @@ class NotInArrayValidator extends ConstraintValidator {
 		if (!is_array($values)) {
 			return $values;
 		}
-		$output = '';
-		$count = 1;
-		foreach ($values as $value) {
-			if ($count === count($values)) {
-				$output .= $value;
-			} else {
-				$output .= $value . ', ';
-			}
-			$count++;
-		}
 
-		return $output;
+		return implode(', ', $values);
 	}
 }
