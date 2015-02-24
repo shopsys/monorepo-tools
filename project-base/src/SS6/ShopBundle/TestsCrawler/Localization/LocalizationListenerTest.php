@@ -2,12 +2,19 @@
 
 namespace SS6\ShopBundle\TestsCrawler\Localization;
 
+use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use Symfony\Component\Routing\RouterInterface;
 
 class LocalizationListenerTest extends DatabaseTestCase {
 
 	public function testProductDetailLocaleCs() {
-		$crawler = $this->getClient()->request('GET', 'produkt/3');
+		$router = $this->getContainer()->get(CurrentDomainRouter::class);
+		/* @var $router \SS6\ShopBundle\Component\Router\CurrentDomainRouter */
+		$productUrl = $router->generate('front_product_detail', ['id' => 3], RouterInterface::RELATIVE_PATH);
+
+		$crawler = $this->getClient()->request('GET', $productUrl);
 
 		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 		$this->assertGreaterThan(
@@ -22,7 +29,10 @@ class LocalizationListenerTest extends DatabaseTestCase {
 
 		$domain->switchDomainById(2);
 
-		$crawler = $this->getClient()->request('GET', 'product/detail/3');
+		$router = $this->getContainer()->get(DomainRouterFactory::class)->getRouter(2);
+		/* @var $router \Symfony\Component\Routing\RouterInterface */
+		$productUrl = $router->generate('front_product_detail', ['id' => 3], RouterInterface::RELATIVE_PATH);
+		$crawler = $this->getClient()->request('GET', $productUrl);
 
 		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
 		$this->assertGreaterThan(

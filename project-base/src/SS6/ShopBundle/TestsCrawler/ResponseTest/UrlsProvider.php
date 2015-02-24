@@ -64,6 +64,7 @@ class UrlsProvider {
 	 * @param \Symfony\Component\Routing\Route $route
 	 * @param string $routeName
 	 * @return array
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
 	 */
 	private function getRouteParameters(Route $route, $routeName) {
 		switch ($routeName) {
@@ -85,6 +86,9 @@ class UrlsProvider {
 			case 'front_error_page':
 			case 'front_error_page_format':
 				return ['code' => 404, '_format' => 'html'];
+
+			case 'front_product_detail':
+				return ['id' => 1];
 
 			case 'front_registration_set_new_password':
 				return ['email' => 'no-reply@netdevelo.cz', 'hash' => 'invalidHash'];
