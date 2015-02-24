@@ -23,6 +23,11 @@ class ProductDetail {
 	private $sellingPrice;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 */
+	private $productDomains;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	private $parameters;
@@ -36,6 +41,7 @@ class ProductDetail {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $sellingPrice
+	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 */
@@ -43,12 +49,14 @@ class ProductDetail {
 		Product $product,
 		Price $basePrice,
 		Price $sellingPrice,
+		array $productDomains,
 		array $parameters,
 		array $images
 	) {
 		$this->product = $product;
 		$this->basePrice = $basePrice;
 		$this->sellingPrice = $sellingPrice;
+		$this->productDomains = $productDomains;
 		$this->parameters = $parameters;
 		$this->images = $images;
 	}
@@ -72,6 +80,13 @@ class ProductDetail {
 	 */
 	public function getSellingPrice() {
 		return $this->sellingPrice;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 */
+	public function getProductDomains() {
+		return $this->productDomains;
 	}
 
 	/**
