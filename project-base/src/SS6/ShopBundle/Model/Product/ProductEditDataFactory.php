@@ -74,7 +74,7 @@ class ProductEditDataFactory {
 	 */
 	public function createFromProduct(Product $product) {
 		$productEditData = $this->createDefault();
-		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
+		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 		$productEditData->productData->setFromEntity($product, $productDomains);
 
 		$productParameterValuesData = [];

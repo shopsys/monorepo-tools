@@ -132,13 +132,7 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
 	private function getProductDomainsIndexedByDomainId(Product $product) {
-		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
-		$productDomainsIndexedByDomainId = [];
-		foreach ($productDomains as $productDomain) {
-			$productDomainsIndexedByDomainId[$productDomain->getDomainId()] = $productDomain;
-		}
-
-		return $productDomainsIndexedByDomainId;
+		return $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 	}
 
 }

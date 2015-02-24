@@ -25,7 +25,7 @@ class ProductDetail {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
-	private $productDomains;
+	private $productDomainsIndexedByDomainId;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
@@ -41,7 +41,7 @@ class ProductDetail {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $sellingPrice
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
+	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 */
@@ -49,14 +49,14 @@ class ProductDetail {
 		Product $product,
 		Price $basePrice,
 		Price $sellingPrice,
-		array $productDomains,
+		array $productDomainsIndexedByDomainId,
 		array $parameters,
 		array $images
 	) {
 		$this->product = $product;
 		$this->basePrice = $basePrice;
 		$this->sellingPrice = $sellingPrice;
-		$this->productDomains = $productDomains;
+		$this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
 		$this->parameters = $parameters;
 		$this->images = $images;
 	}
@@ -85,8 +85,8 @@ class ProductDetail {
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
-	public function getProductDomains() {
-		return $this->productDomains;
+	public function getProductDomainsIndexedByDomainId() {
+		return $this->productDomainsIndexedByDomainId;
 	}
 
 	/**

@@ -239,7 +239,7 @@ class ProductEditFacade {
 	 */
 	private function refreshProductDomains(Product $product, ProductEditData $productEditData) {
 		$hiddenOnDomainData = $productEditData->productData->hiddenOnDomains;
-		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
+		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 		foreach ($productDomains as $productDomain) {
 			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
 				$productDomain->setHidden(true);
