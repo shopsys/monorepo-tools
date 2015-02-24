@@ -335,9 +335,10 @@ class ProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
 	public function getProductDomainsByProduct(Product $product) {
-		return $this->getProductDomainRepository()->findBy([
-			'product' => $product,
-		]);
+		return $this->getProductDomainRepository()->findBy(
+			['product' => $product],
+			['domainId' => 'asc']
+		);
 	}
 
 	/**
