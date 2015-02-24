@@ -103,6 +103,44 @@
 				</div>
 
 				<div class="wrap-group">
+					<h2>{{ 'SEO atributy'|trans }}:</h2>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>{{ 'Titlulek'|trans }}</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for domainId, title in form.seoTitles %}
+							<tr class="js-characters-counter">
+								{% if product is defined %}
+									<td>{{ form_row(title, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input', placeholder: product.name(getDomainLocale(domainId)) } }) }}</td>
+								{% else %}
+									<td>{{ form_row(title, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}</td>
+								{% endif %}
+								<td class="js-characters-counter-info" data-recommended-length="60"></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>{{ 'Meta description'|trans }}</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for domainId, metaDescription in form.seoMetaDescriptions %}
+							<tr class="js-characters-counter">
+								<td>{{ form_row(metaDescription, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input', placeholder: getSeoMetaDescriptionGlobal(domainId)} }) }}</td>
+								<td class="js-characters-counter-info" data-recommended-length="155"></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="wrap-group">
 					{% block images %}{% endblock %}
 					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek' }) }}
 					{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
