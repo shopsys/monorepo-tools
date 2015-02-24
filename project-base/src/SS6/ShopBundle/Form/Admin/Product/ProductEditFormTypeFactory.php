@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Product;
@@ -30,16 +31,23 @@ class ProductEditFormTypeFactory {
 	 */
 	private $pricingGroupFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		ImageFacade $imageFacade,
 		ProductFormTypeFactory $productFormTypeFactory,
-		PricingGroupFacade $pricingGroupFacade
+		PricingGroupFacade $pricingGroupFacade,
+		Domain $domain
 	) {
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->imageFacade = $imageFacade;
 		$this->productFormTypeFactory = $productFormTypeFactory;
 		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -54,12 +62,14 @@ class ProductEditFormTypeFactory {
 		}
 
 		$pricingGroups = $this->pricingGroupFacade->getAll();
+		$domains = $this->domain->getAll();
 
 		return new ProductEditFormType(
 			$images,
 			$this->productParameterValueFormTypeFactory,
 			$this->productFormTypeFactory,
-			$pricingGroups
+			$pricingGroups,
+			$domains
 		);
 	}
 

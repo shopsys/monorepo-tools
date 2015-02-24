@@ -32,18 +32,32 @@ class ProductEditData {
 	public $manualInputPrices;
 
 	/**
+	 * @var string[]
+	 */
+	public $seoTitles;
+
+	/**
+	 * @var string[]
+	 */
+	public $seoMetaDescriptions;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesToDelete
 	 * @param string[] $manualInputPrices
+	 * @param string[] $seoTitles
+	 * @param string[] $seoMetaDescriptions
 	 */
 	public function __construct(
 		ProductData $productData = null,
 		array $parameters = [],
 		array $imagesToUpload = [],
 		array $imagesToDelete = [],
-		array $manualInputPrices = []
+		array $manualInputPrices = [],
+		array $seoTitles = [],
+		array $seoMetaDescriptions = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -54,6 +68,8 @@ class ProductEditData {
 		$this->imagesToUpload = $imagesToUpload;
 		$this->imagesToDelete = $imagesToDelete;
 		$this->manualInputPrices = $manualInputPrices;
+		$this->seoTitles = $seoTitles;
+		$this->seoMetaDescriptions = $seoMetaDescriptions;
 	}
 
 }

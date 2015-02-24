@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductService;
@@ -120,7 +121,7 @@ class ProductEditFacade {
 		$this->em->beginTransaction();
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
-		$this->refreshProductDomains($product, $productEditData->productData->hiddenOnDomains);
+		$this->refreshProductDomains($product, $productEditData);
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
@@ -145,7 +146,7 @@ class ProductEditFacade {
 
 		$this->em->beginTransaction();
 		$this->saveParameters($product, $productEditData->parameters);
-		$this->refreshProductDomains($product, $productEditData->productData->hiddenOnDomains);
+		$this->refreshProductDomains($product, $productEditData);
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
@@ -234,15 +235,34 @@ class ProductEditFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param array $hiddenOnDomainData
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
-	private function refreshProductDomains(Product $product, array $hiddenOnDomainData) {
+	private function refreshProductDomains(Product $product, ProductEditData $productEditData) {
+		$hiddenOnDomainData = $productEditData->productData->hiddenOnDomains;
 		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
 		foreach ($productDomains as $productDomain) {
 			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
 				$productDomain->setHidden(true);
 			} else {
 				$productDomain->setHidden(false);
+			}
+		}
+		foreach ($productEditData->seoTitles as $domainId => $seoTitle) {
+			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainId);
+			if ($productDomain !== null) {
+				$productDomain->setSeoTitle($seoTitle);
+			} else {
+				$productDomain = new ProductDomain($product, $domainId);
+				$productDomain->setSeoTitle($seoTitle);
+			}
+		}
+		foreach ($productEditData->seoMetaDescriptions as $domainId => $seoMetaDescription) {
+			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainId);
+			if ($productDomain !== null) {
+				$productDomain->setSeoMetaDescription($seoMetaDescription);
+			} else {
+				$productDomain = new ProductDomain($product, $domainId);
+				$productDomain->setSeoMetaDescription($seoMetaDescription);
 			}
 		}
 		$this->em->flush();

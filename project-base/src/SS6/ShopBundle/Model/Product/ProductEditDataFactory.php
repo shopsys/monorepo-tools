@@ -62,6 +62,8 @@ class ProductEditDataFactory {
 
 		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
 		$productEditData->manualInputPrices = [];
+		$productEditData->seoTitles = [];
+		$productEditData->seoMetaDescriptions = [];
 
 		return $productEditData;
 	}
@@ -88,6 +90,11 @@ class ProductEditDataFactory {
 		foreach ($manualInputPrices as $manualInputPrice) {
 			$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
 			$productEditData->manualInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
+		}
+
+		foreach ($productDomains as $productDomain) {
+			$productEditData->seoTitles[$productDomain->getDomainId()] = $productDomain->getSeoTitle();
+			$productEditData->seoMetaDescriptions[$productDomain->getDomainId()] = $productDomain->getSeoMetaDescription();
 		}
 
 		return $productEditData;

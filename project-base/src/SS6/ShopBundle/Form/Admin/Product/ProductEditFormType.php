@@ -43,21 +43,29 @@ class ProductEditFormType extends AbstractType {
 	private $pricingGroups;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 */
+	private $domains;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
 	 */
 	public function __construct(
 		array $images,
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		ProductFormTypeFactory $productFormTypeFactory,
-		array $pricingGroups
+		array $pricingGroups,
+		array $domains
 	) {
 		$this->images = $images;
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->productFormTypeFactory = $productFormTypeFactory;
 		$this->pricingGroups = $pricingGroups;
+		$this->domains = $domains;
 	}
 
 	/**
@@ -111,6 +119,12 @@ class ProductEditFormType extends AbstractType {
 			->add('manualInputPrices', FormType::FORM, [
 				'compound' => true,
 			])
+			->add('seoTitles', FormType::FORM, [
+				'compound' => true,
+			])
+			->add('seoMetaDescriptions', FormType::FORM, [
+				'compound' => true,
+			])
 			->add('save', FormType::SUBMIT);
 
 		foreach ($this->pricingGroups as $pricingGroup) {
@@ -132,6 +146,13 @@ class ProductEditFormType extends AbstractType {
 						]),
 					],
 				]);
+		}
+
+		foreach ($this->domains as $domainConfig) {
+			$builder->get('seoTitles')
+				->add($domainConfig->getId(), FormType::TEXT);
+			$builder->get('seoMetaDescriptions')
+				->add($domainConfig->getId(), FormType::TEXTAREA);
 		}
 	}
 
