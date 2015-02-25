@@ -35,6 +35,7 @@ class AppKernel extends Kernel {
 		if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 			$bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 			$bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+			$bundles[] = new SS6\GeneratorBundle\SS6GeneratorBundle();
 			$bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
 		}
 
