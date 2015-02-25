@@ -43,4 +43,15 @@ class GeneratorFacade {
 		return $filepaths;
 	}
 
+	/**
+	 * @return string[]
+	 */
+	public function getGeneratorsNames() {
+		$names = [];
+		foreach ($this->generatorCollection->getGenerators() as $generator) {
+			$names[] = $generator->getName();
+		}
+		return $names;
+	}
+
 }
