@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
-use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -66,8 +65,10 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	public function createCategory(ObjectManager $manager, $referenceName, CategoryData $categoryData) {
-		$category = new Category($categoryData);
-		$manager->persist($category);
+		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+
+		$category = $categoryFacade->create($categoryData);
 		$this->addReference($referenceName, $category);
 
 		return $category;
