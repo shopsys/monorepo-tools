@@ -1,2 +1,18 @@
 services:
 
+  ss6.generator.generator_collection:
+    class: SS6\GeneratorBundle\Model\GeneratorCollection
+    arguments:
+      - [%kernel.root_dir%/../src/SS6/GeneratorBundle/Resources/skeletons/]
+
+  ss6.generator.generators_form_factory:
+    class: SS6\GeneratorBundle\Model\GeneratorsFormFactory
+    arguments:
+      - @kernel
+
+  ss6.generator.generator_facade:
+    class: SS6\GeneratorBundle\Model\GeneratorFacade
+    arguments:
+      - @kernel
+
+

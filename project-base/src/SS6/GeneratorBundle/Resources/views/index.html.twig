@@ -1,1 +1,17 @@
-SS6 Generator Bundle!
+<h1>SS6 Generator Bundle!</h1>
+
+{% if createdFiles|length > 0 %}
+	Following files were created:<br />
+	<ul>
+		{% for createdFile in createdFiles %}
+			<li>{{ createdFile }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+{% if errorMessage %}
+	<div>
+		{{ errorMessage }}
+	</div>
+{% endif %}
+
+{{ form(form) }}
