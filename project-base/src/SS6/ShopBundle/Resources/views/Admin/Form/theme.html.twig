@@ -53,12 +53,7 @@
 		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
-		{% if icon is defined %}
-			<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
-				data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-				title="{{ icon.title }}"
-			 ></i>
-		{% endif %}
+		{{- block('icon_block') -}}
 	</div>
 {% endblock form_row %}
 
@@ -86,6 +81,7 @@
 			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon' } }) }}
 			<span class="form-line__icon form-line__icon--{{locale}}"></span>
 		{% endif %}
+		{{- block('icon_block') -}}
 	</div>
 {%- endblock text_row %}
 
@@ -215,16 +211,16 @@
 {%- endblock choice_widget_collapsed %}
 
 {% block choice_widget_options -%}
-    {% for group_label, choice in options %}
-        {%- if choice is iterable -%}
-            <optgroup label="{{ group_label }}">
-                {% set options = choice %}
-                {{- block('choice_widget_options') -}}
-            </optgroup>
-        {%- else -%}
-            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
-        {%- endif -%}
-    {% endfor %}
+	{% for group_label, choice in options %}
+		{%- if choice is iterable -%}
+			<optgroup label="{{ group_label }}">
+				{% set options = choice %}
+				{{- block('choice_widget_options') -}}
+			</optgroup>
+		{%- else -%}
+			<option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
+		{%- endif -%}
+	{% endfor %}
 {%- endblock choice_widget_options %}
 
 {% block choice_widget_expanded %}
@@ -293,11 +289,20 @@
 {%- endblock button_attributes %}
 
 {% block money_widget %}
-    {% set value = value|cropZeros %}
+	{% set value = value|cropZeros %}
 	{{ parent('money_widget') }}
 {% endblock money_widget %}
 
 {% block number_widget %}
-    {% set value = value|cropZeros %}
+	{% set value = value|cropZeros %}
 	{{ parent('number_widget') }}
 {% endblock number_widget %}
+
+{% block icon_block %}
+	{% if icon is defined %}
+		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
+			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+			title="{{ icon.title }}"
+		 ></i>
+	{% endif %}
+{% endblock %}
