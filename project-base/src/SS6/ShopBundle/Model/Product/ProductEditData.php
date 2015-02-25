@@ -27,17 +27,17 @@ class ProductEditData {
 	public $imagesToDelete;
 
 	/**
-	 * @var string[]
+	 * @var string[pricingGroupId]
 	 */
 	public $manualInputPrices;
 
 	/**
-	 * @var string[]
+	 * @var string[domainId]
 	 */
 	public $seoTitles;
 
 	/**
-	 * @var string[]
+	 * @var string[domainId]
 	 */
 	public $seoMetaDescriptions;
 

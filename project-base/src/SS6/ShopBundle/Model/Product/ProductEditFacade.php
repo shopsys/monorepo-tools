@@ -240,31 +240,22 @@ class ProductEditFacade {
 	private function refreshProductDomains(Product $product, ProductEditData $productEditData) {
 		$hiddenOnDomainData = $productEditData->productData->hiddenOnDomains;
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-		foreach ($productDomains as $productDomain) {
+		$seoTitles = $productEditData->seoTitles;
+		$seoMetaDescriptions = $productEditData->seoMetaDescriptions;
+		foreach ($productDomains as $domainId => $productDomain) {
 			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
 				$productDomain->setHidden(true);
 			} else {
 				$productDomain->setHidden(false);
 			}
-		}
-		foreach ($productEditData->seoTitles as $domainId => $seoTitle) {
-			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainId);
-			if ($productDomain !== null) {
-				$productDomain->setSeoTitle($seoTitle);
-			} else {
-				$productDomain = new ProductDomain($product, $domainId);
-				$productDomain->setSeoTitle($seoTitle);
+			if (!empty($seoTitles)) {
+				$productDomain->setSeoTitle($seoTitles[$domainId]);
+			}
+			if (!empty($seoMetaDescriptions)) {
+				$productDomain->setSeoMetaDescription($seoMetaDescriptions[$domainId]);
 			}
 		}
-		foreach ($productEditData->seoMetaDescriptions as $domainId => $seoMetaDescription) {
-			$productDomain = $this->productRepository->findProductDomainByProductAndDomainId($product, $domainId);
-			if ($productDomain !== null) {
-				$productDomain->setSeoMetaDescription($seoMetaDescription);
-			} else {
-				$productDomain = new ProductDomain($product, $domainId);
-				$productDomain->setSeoMetaDescription($seoMetaDescription);
-			}
-		}
+
 		$this->em->flush();
 	}
 

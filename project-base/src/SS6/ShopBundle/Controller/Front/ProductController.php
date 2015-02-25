@@ -19,14 +19,11 @@ class ProductController extends Controller {
 	public function detailAction($id) {
 		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
 		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
-		$domain = $this->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		$productDetail = $productOnCurrentDomainFacade->getVisibleProductDetailById($id);
 
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
-			'domain' => $domain,
 		]);
 	}
 

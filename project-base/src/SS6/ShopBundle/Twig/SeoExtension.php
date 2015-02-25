@@ -2,8 +2,6 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
@@ -16,25 +14,19 @@ class SeoExtension extends \Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
-	 */
-	private $productRepository;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Seo\SeoSettingFacade
 	 */
 	private $seoSettingFacade;
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 * @param \SS6\ShopBundle\Model\Seo\SeoSettingFacade $seoSettingFacade
 	 */
 	public function __construct(
 		ContainerInterface $container,
-		ProductRepository $productRepository,
 		SeoSettingFacade $seoSettingFacade
 	) {
 		$this->container = $container;
-		$this->productRepository = $productRepository;
 		$this->seoSettingFacade = $seoSettingFacade;
 	}
 
@@ -44,8 +36,7 @@ class SeoExtension extends \Twig_Extension {
 	public function getFunctions() {
 		return [
 			new Twig_SimpleFunction('getSeoTitleAddOn', [$this, 'getSeoTitleAddOn']),
-			new Twig_SimpleFunction('getSeoMetaDescriptionGlobal', [$this, 'getSeoMetaDescriptionGlobalByDomainId']),
-			new Twig_SimpleFunction('getSeoMetaDescriptionByProduct', [$this, 'getSeoMetaDescriptionByProduct']),
+			new Twig_SimpleFunction('getSeoMetaDescription', [$this, 'getSeoMetaDescription']),
 		];
 	}
 
@@ -74,26 +65,11 @@ class SeoExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @param int $domainId
 	 * @return string
 	 */
-	public function getSeoMetaDescriptionGlobalByDomainId($domainId) {
-		return $this->seoSettingFacade->getDescriptionMainPage($domainId);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return string
-	 */
-	public function getSeoMetaDescriptionByProduct(Product $product) {
+	public function getSeoMetaDescription() {
 		$currentDomainId = $this->getDomain()->getId();
-		$productDetail = $this->productRepository->findProductDomainByProductAndDomainId($product, $currentDomainId);
-		$seoMetaDescription = $productDetail->getSeoMetaDescription();
-		if ($seoMetaDescription === null) {
-			return $this->seoSettingFacade->getDescriptionMainPage($currentDomainId);
-		} else {
-			return $seoMetaDescription;
-		}
+		return $this->seoSettingFacade->getDescriptionMainPage($currentDomainId);
 	}
 
 }

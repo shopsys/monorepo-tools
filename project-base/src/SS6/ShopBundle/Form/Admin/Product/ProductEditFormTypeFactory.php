@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class ProductEditFormTypeFactory {
 
@@ -36,18 +37,25 @@ class ProductEditFormTypeFactory {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Seo\SeoSettingFacade
+	 */
+	private $seoSettingFacade;
+
 	public function __construct(
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		ImageFacade $imageFacade,
 		ProductFormTypeFactory $productFormTypeFactory,
 		PricingGroupFacade $pricingGroupFacade,
-		Domain $domain
+		Domain $domain,
+		SeoSettingFacade $seoSettingFacade
 	) {
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->imageFacade = $imageFacade;
 		$this->productFormTypeFactory = $productFormTypeFactory;
 		$this->pricingGroupFacade = $pricingGroupFacade;
 		$this->domain = $domain;
+		$this->seoSettingFacade = $seoSettingFacade;
 	}
 
 	/**
@@ -63,13 +71,20 @@ class ProductEditFormTypeFactory {
 
 		$pricingGroups = $this->pricingGroupFacade->getAll();
 		$domains = $this->domain->getAll();
+		$metaDescriptionsIndexedByDomainId = [];
+		foreach ($domains as $domain) {
+			$domainId = $domain->getId();
+			$metaDescriptionsIndexedByDomainId[$domainId] = $this->seoSettingFacade->getDescriptionMainPage($domainId);
+		}
 
 		return new ProductEditFormType(
 			$images,
 			$this->productParameterValueFormTypeFactory,
 			$this->productFormTypeFactory,
 			$pricingGroups,
-			$domains
+			$domains,
+			$metaDescriptionsIndexedByDomainId,
+			$product
 		);
 	}
 

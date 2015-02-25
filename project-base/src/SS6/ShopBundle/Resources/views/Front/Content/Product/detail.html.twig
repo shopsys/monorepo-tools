@@ -1,12 +1,14 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
 {% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 
+{% set domain = getDomain() %}
+{% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
 {% block meta_description -%}
-	{{ getSeoMetaDescriptionByProduct(productDetail.product) }}
+	{{ productDomain.seoMetaDescription|default(getSeoMetaDescription()) }}
 {% endblock %}
 
 {% block title %}
-	{{ productDetail.productDomains[domain.id].getSeoTitleForHtml(domain) }}
+	{{ productDomain.getSeoTitleForHtml(domain) }}
 {% endblock %}
 
 {% block main_content %}
