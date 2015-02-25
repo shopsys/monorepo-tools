@@ -59,6 +59,8 @@ class CategoryFacade {
 		$category = $this->categoryService->create($categoryData, $rootCategory);
 		$this->em->persist($category);
 		$this->em->flush();
+		$this->createCategoryDomains($category, $this->domain->getAll());
+		$this->em->flush();
 
 		return $category;
 	}
@@ -72,9 +74,36 @@ class CategoryFacade {
 		$rootCategory = $this->categoryRepository->getRootCategory();
 		$category = $this->categoryRepository->getById($categoryId);
 		$this->categoryService->edit($category, $categoryData, $rootCategory);
+		$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
 		$this->em->flush();
 
 		return $category;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domainConfigs
+	 */
+	private function createCategoryDomains(Category $category, array $domainConfigs) {
+		foreach ($domainConfigs as $domainConfig) {
+			$categoryDomain = new CategoryDomain($category, $domainConfig->getId());
+			$this->em->persist($categoryDomain);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int[] $hiddenOnDomainData
+	 */
+	private function refreshCategoryDomains(Category $category, array $hiddenOnDomainData) {
+		$categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
+		foreach ($categoryDomains as $categoryDomain) {
+			if (in_array($categoryDomain->getDomainId(), $hiddenOnDomainData)) {
+				$categoryDomain->setHidden(true);
+			} else {
+				$categoryDomain->setHidden(false);
+			}
+		}
 	}
 
 	/**

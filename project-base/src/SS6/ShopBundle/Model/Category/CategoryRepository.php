@@ -33,6 +33,13 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getCategoryDomainRepository() {
+		return $this->em->getRepository(CategoryDomain::class);
+	}
+
+	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getAllQueryBuilder() {
@@ -135,6 +142,16 @@ class CategoryRepository extends NestedTreeRepository {
 		$qb->setParameter('locale', $locale);
 
 		return $qb;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \SS6\ShopBundle\Model\Category\CategoryDomain[]
+	 */
+	public function getCategoryDomainsByCategory(Category $category) {
+		return $this->getCategoryDomainRepository()->findBy([
+			'category' => $category,
+		]);
 	}
 
 }

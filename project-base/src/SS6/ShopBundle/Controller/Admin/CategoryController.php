@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Category\CategoryData;
+use SS6\ShopBundle\Model\Category\CategoryDataFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,15 +23,13 @@ class CategoryController extends Controller {
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
 		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
+		$categoryDataFactory = $this->get(CategoryDataFactory::class);
+		/* @var $categoryDataFactory \SS6\ShopBundle\Model\Category\CategoryDataFactory */
 
 		$category = $categoryFacade->getById($id);
 		$form = $this->createForm($categoryFormTypeFactory->createForCategory($category));
 
-		$categoryData = new CategoryData();
-
-		if (!$form->isSubmitted()) {
-			$categoryData->setFromEntity($category);
-		}
+		$categoryData = $categoryDataFactory->createFromCategory($category);
 
 		$form->setData($categoryData);
 		$form->handleRequest($request);
@@ -71,10 +69,12 @@ class CategoryController extends Controller {
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
 		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
+		$categoryDataFactory = $this->get(CategoryDataFactory::class);
+		/* @var $categoryDataFactory \SS6\ShopBundle\Model\Category\CategoryDataFactory */
 
 		$form = $this->createForm($categoryFormTypeFactory->create());
 
-		$categoryData = new CategoryData();
+		$categoryData = $categoryDataFactory->createDefault();
 
 		$form->setData($categoryData);
 		$form->handleRequest($request);

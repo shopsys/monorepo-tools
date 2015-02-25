@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Admin\Category;
 
+use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
+use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Component\Form\AbstractType;
@@ -18,10 +20,20 @@ class CategoryFormType extends AbstractType {
 	private $categories;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 */
-	public function __construct(array $categories) {
+	private $inverseArrayValuesTransformer;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
+	 */
+	public function __construct(
+		array $categories,
+		InverseArrayValuesTransformer $inverseArrayValuesTransformer
+	) {
 		$this->categories = $categories;
+		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 	}
 
 	/**
@@ -47,6 +59,14 @@ class CategoryFormType extends AbstractType {
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
 			])
+			->add($builder
+				->create('showOnDomains', FormType::DOMAINS, [
+					'constraints' => [
+						new NotSelectedDomainToShow(['message' => 'Musíte vybrat alespoň jednu doménu']),
+					],
+					'property_path' => 'hiddenOnDomains',
+				])
+				->addViewTransformer($this->inverseArrayValuesTransformer))
 			->add('save', FormType::SUBMIT);
 	}
 
