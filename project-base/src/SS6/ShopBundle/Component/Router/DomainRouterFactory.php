@@ -6,22 +6,21 @@ use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Config\Loader\DelegatingLoader;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
 class DomainRouterFactory {
 
+	const URL_SCHEME = 'scheme';
+	const URL_SCHEME_HTTP = 'http';
+	const URL_SCHEME_HTTPS = 'https';
+	const URL_HOST = 'host';
+	const URL_PORT = 'port';
+
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
 	private $localizedRouterFactory;
-
-	/**
-	 * @var \Symfony\Component\HttpFoundation\RequestStack
-	 */
-	private $requestStack;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -45,13 +44,11 @@ class DomainRouterFactory {
 
 	public function __construct(
 		$routerConfiguration,
-		RequestStack $requestStack,
 		DelegatingLoader $delegatingLoader,
 		LocalizedRouterFactory $localizedRouterFactory,
 		Domain $domain
 	) {
 		$this->routerConfiguration = $routerConfiguration;
-		$this->requestStack = $requestStack;
 		$this->delegatingLoader = $delegatingLoader;
 		$this->localizedRouterFactory = $localizedRouterFactory;
 		$this->domain = $domain;
@@ -95,18 +92,15 @@ class DomainRouterFactory {
 	 * @return \Symfony\Component\Routing\RequestContext
 	 */
 	private function getRequestContextByDomainConfig(DomainConfig $domainConfig) {
-		$requestContext = new RequestContext();
-		$masterRequest = $this->requestStack->getMasterRequest();
-		if ($masterRequest === null) {
-			$masterRequest = new Request();
+		$urlComponents = parse_url($domainConfig->getUrl());
+		$requestContext = new RequestContext($domainConfig->getUrl());
+		$requestContext->setScheme($urlComponents[self::URL_SCHEME]);
+		$requestContext->setHost($urlComponents[self::URL_HOST]);
+		if ($urlComponents[self::URL_SCHEME] === self::URL_SCHEME_HTTP) {
+			$requestContext->setHttpPort($urlComponents[self::URL_PORT]);
+		} elseif ($urlComponents[self::URL_SCHEME] === self::URL_SCHEME_HTTPS) {
+			$requestContext->setHttpsPort($urlComponents[self::URL_PORT]);
 		}
-		$masterHost = $masterRequest->getHost();
-		$domainHost = $domainConfig->getDomain();
-
-		$requestContext->fromRequest($masterRequest);
-		$requestContext->setHost($domainHost);
-		$requestContext->setBaseUrl(str_replace($masterHost, $domainHost, $masterRequest->getBaseUrl()));
-		$requestContext->setPathInfo(str_replace($masterHost, $domainHost, $masterRequest->getPathInfo()));
 
 		return $requestContext;
 	}
