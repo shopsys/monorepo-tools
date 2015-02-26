@@ -8,19 +8,14 @@ use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Config\Loader\DelegatingLoader;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
 class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRouter() {
-		$request = new Request();
-		$requestStack = new RequestStack();
-		$requestStack->push($request);
 
-		$domainConfig = new DomainConfig(3, 'example.com', 'en', 'templateDirectory');
+		$domainConfig = new DomainConfig(3, 'http://example.com:8080', 'example', 'en', 'templateDirectory');
 		$domain = new Domain([$domainConfig]);
 
 		$localizedRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
@@ -43,7 +38,6 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$domainRouterFactory = new DomainRouterFactory(
 			'routerConfiguration',
-			$requestStack,
 			$delegatingLoaderMock,
 			$localizedRouterFactoryMock,
 			$domain
