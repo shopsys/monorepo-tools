@@ -18,6 +18,8 @@ class CategoryRootDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$categoryVisibilityRepository = $this->get('ss6.shop.category.category_visibility_repository');
+		/* @var $categoryVisibilityRepository \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository */
 
 		$category = new Category(new CategoryData());
 		$manager->persist($category);
@@ -30,6 +32,8 @@ class CategoryRootDataFixture extends AbstractReferenceFixture {
 		}
 
 		$manager->flush();
+
+		$categoryVisibilityRepository->refreshCategoriesVisibility();
 	}
 
 }

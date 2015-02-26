@@ -24,6 +24,9 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
+		$categoryVisibilityRepository = $this->get('ss6.shop.category.category_visibility_repository');
+		/* @var $categoryVisibilityRepository \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository */
+
 		$categoryData = new CategoryData();
 
 		$categoryData->name = ['cs' => 'Elektro', 'en' => 'Electronics'];
@@ -57,6 +60,8 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 		$this->createCategory($manager, self::TOYS, $categoryData);
 
 		$manager->flush();
+
+		$categoryVisibilityRepository->refreshCategoriesVisibility();
 	}
 
 	/**
