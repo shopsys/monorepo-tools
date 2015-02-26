@@ -10,3 +10,7 @@ front_error_page_format:
   requirements:
     code: \d+
     _format: css|html|js|json|txt|xml
+
+admin_superadmin_code_generator:
+  pattern: /_generator/
+  defaults: { _controller: SS6GeneratorBundle:Generator:index}
