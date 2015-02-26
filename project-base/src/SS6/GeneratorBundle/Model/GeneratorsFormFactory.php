@@ -4,7 +4,9 @@ namespace SS6\GeneratorBundle\Model;
 
 use SS6\GeneratorBundle\Model\GeneratorCollection;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class GeneratorsFormFactory {
@@ -41,7 +43,7 @@ class GeneratorsFormFactory {
 	 */
 	public function createForm() {
 		$formBuilder = $this->formFactory->createNamedBuilder(
-			'formName',
+			'generators',
 			FormType::FORM,
 			null,
 			[
@@ -50,7 +52,21 @@ class GeneratorsFormFactory {
 		);
 
 		foreach ($this->generatorCollection->getGenerators() as $generator) {
-			$generatorFormBuilder = $this->formFactory->createNamedBuilder($generator->getName());
+			$generatorFormBuilder = $this->formFactory->createNamedBuilder(
+				$generator->getName(),
+				FormType::FORM,
+				null,
+				[
+					'validation_groups' => function (FormInterface $form) use ($generator) {
+						$generatorEnabled = $form->getParent()->getData()[$generator->getName() . self::GENERATOR_FORM_ENABLE_POSTFIX];
+						if ($generatorEnabled) {
+							return [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+						} else {
+							return [];
+						}
+					},
+				]
+			);
 			$generator->buildForm($generatorFormBuilder);
 			$formBuilder
 				->add($generator->getName() . self::GENERATOR_FORM_ENABLE_POSTFIX, FormType::CHECKBOX)

@@ -111,3 +111,12 @@ button {
 .message-success ul {
 	margin: 0;
 }
+
+.form-errors {
+	list-style-type: none;
+	display: inline-block;
+}
+
+.form-errors li {
+	color: red;
+}

@@ -3,8 +3,10 @@
 namespace SS6\GeneratorBundle\Model\Generator;
 
 use SS6\GeneratorBundle\Model\AbstractGenerator;
+use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\Validator\Constraints;
 
 class RepositoryGenerator extends AbstractGenerator {
 
@@ -13,8 +15,16 @@ class RepositoryGenerator extends AbstractGenerator {
 	 */
 	public function buildForm(FormBuilderInterface $builder) {
 		$builder
-			->add('entityNamespace', 'text')
-			->add('entityName', 'text');
+			->add('entityNamespace', FormType::TEXT, [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Please insert entity namespace']),
+				]
+			])
+			->add('entityName', FormType::TEXT, [
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Please insert entity name']),
+				]
+			]);
 	}
 
 	/**
