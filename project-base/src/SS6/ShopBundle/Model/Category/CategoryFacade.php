@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Category\CategoryService;
+use SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryFacade {
@@ -30,16 +31,23 @@ class CategoryFacade {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler
+	 */
+	private $categoryVisibilityRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		CategoryRepository $categoryRepository,
 		CategoryService $categoryService,
-		Domain $domain
+		Domain $domain,
+		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->categoryRepository = $categoryRepository;
 		$this->categoryService = $categoryService;
 		$this->domain = $domain;
+		$this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
 	}
 
 	/**
@@ -62,6 +70,8 @@ class CategoryFacade {
 		$this->createCategoryDomains($category, $this->domain->getAll());
 		$this->em->flush();
 
+		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+
 		return $category;
 	}
 
@@ -76,6 +86,8 @@ class CategoryFacade {
 		$this->categoryService->edit($category, $categoryData, $rootCategory);
 		$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
 		$this->em->flush();
+
+		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
 
 		return $category;
 	}

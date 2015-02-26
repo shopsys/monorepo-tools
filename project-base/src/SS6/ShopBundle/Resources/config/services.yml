@@ -289,6 +289,11 @@ services:
   ss6.shop.category.category_repository:
     class: SS6\ShopBundle\Model\Category\CategoryRepository
 
+  ss6.shop.category.category_visibility_repository:
+    class: SS6\ShopBundle\Model\Category\CategoryVisibilityRepository
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
   ss6.shop.category.category_service:
     class: SS6\ShopBundle\Model\Category\CategoryService
 

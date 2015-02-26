@@ -36,6 +36,13 @@ class CategoryDomain {
 	private $hidden;
 
 	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $visible;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 */
@@ -43,6 +50,7 @@ class CategoryDomain {
 		$this->category = $category;
 		$this->domainId = $domainId;
 		$this->hidden = false;
+		$this->visible = false;
 	}
 
 	/**
@@ -64,6 +72,13 @@ class CategoryDomain {
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isVisible() {
+		return $this->visible;
 	}
 
 }
