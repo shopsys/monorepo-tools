@@ -62,7 +62,7 @@ class MailTemplateRepository {
 	public function getByNameAndDomainId($templateName, $domainId) {
 		$mailTemplate = $this->findByNameAndDomainId($templateName, $domainId);
 		if ($mailTemplate === null) {
-			$message = 'E-mail template with name "' . $templateName . '" was not found on domain with ID. ' . $domainId;
+			$message = 'E-mail template with name "' . $templateName . '" was not found on domain with ID ' . $domainId . '.';
 			throw new \SS6\ShopBundle\Model\Mail\Exception\MailTemplateNotFoundException($message);
 		}
 

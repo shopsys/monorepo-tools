@@ -56,7 +56,8 @@ class ParameterRepository {
 		$parameter = $this->findById($parameterId);
 
 		if ($parameter === null) {
-			throw new \SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException($parameterId);
+			$message = 'Parameter with ID ' . $parameterId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException($message);
 		}
 
 		return $parameter;

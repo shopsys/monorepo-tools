@@ -33,7 +33,8 @@ class SliderItemRepository {
 	public function getById($sliderItemId) {
 		$sliderItem = $this->getSliderItemRepository()->find($sliderItemId);
 		if ($sliderItem === null) {
-			throw new \SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException($sliderItemId);
+			$message = 'Slider item with ID ' . $sliderItemId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException($message);
 		}
 		return $sliderItem;
 	}

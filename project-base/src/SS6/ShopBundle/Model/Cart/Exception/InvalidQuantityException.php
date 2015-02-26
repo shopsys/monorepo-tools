@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Cart\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Cart\Exception\CartException;
 
 class InvalidQuantityException extends Exception implements CartException {
 

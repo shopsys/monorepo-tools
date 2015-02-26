@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Image\Config\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Image\Config\Exception\ImageConfigException;
 
 class ImageEntityConfigNotFoundException extends Exception implements ImageConfigException {
 
@@ -18,8 +19,7 @@ class ImageEntityConfigNotFoundException extends Exception implements ImageConfi
 	public function __construct($entityClassOrName, Exception $previous = null) {
 		$this->entityClassOrName = $entityClassOrName;
 
-		$message = sprintf('Not found image config for entity "%s".', $this->entityClassOrName);
-		parent::__construct($message, 0, $previous);
+		parent::__construct('Not found image config for entity "' . $entityClassOrName . '".', 0, $previous);
 	}
 
 	/**

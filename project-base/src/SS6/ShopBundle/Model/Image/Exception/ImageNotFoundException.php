@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Image\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Image\Exception\ImageException;
 
 class ImageNotFoundException extends Exception implements ImageException {
 

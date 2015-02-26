@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Image\Config\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Image\Config\Exception\ImageConfigException;
 
 class ImageSizeNotFoundException extends Exception implements ImageConfigException {
 
@@ -25,8 +26,7 @@ class ImageSizeNotFoundException extends Exception implements ImageConfigExcepti
 		$this->entityClass = $entityClass;
 		$this->sizeName = $sizeName;
 
-		$message = sprintf('Image size "%s" not found for entity "%s".', $this->sizeName, $this->entityClass);
-		parent::__construct($message, 0, $previous);
+		parent::__construct('Image size "' . $sizeName . '" not found for entity "' . $entityClass . '".', 0, $previous);
 	}
 
 	/**

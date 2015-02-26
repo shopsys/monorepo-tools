@@ -42,7 +42,8 @@ class CurrencyRepository {
 		$currency = $this->findById($currencyId);
 
 		if ($currency === null) {
-			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException($currencyId);
+			$message = 'Currency with ID ' . $currencyId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException($message);
 		}
 
 		return $currency;
