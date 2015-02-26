@@ -67,6 +67,12 @@ class AutoContainer implements ContainerInterface {
 			return $this->container->get($classServiceId);
 		} catch (\SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException $e) {
 			return $this->createServiceByClassName($className);
+		} catch (\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
+			// In crawler test kernel boots more times (each call the method getClient()).
+			// Container can be invalidated, but file with container class is already included
+			// from first boot (require_once cannot redeclare the class).
+			// Therefore $this->container does not contain the service, but $this->containerClassList does.
+			return $this->createServiceByClassName($className);
 		}
 	}
 
