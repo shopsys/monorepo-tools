@@ -2,12 +2,16 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\ExceptionController;
+use Exception;
+use SS6\ShopBundle\Component\Error\ExceptionController;
+use SS6\ShopBundle\Component\Error\ExceptionListener;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\FlattenException;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use Tracy\BlueScreen;
+use Tracy\Debugger;
 
 class ErrorController extends Controller {
 
@@ -31,10 +35,16 @@ class ErrorController extends Controller {
 	 * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
 	 * @param string $format
 	 */
-	public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null,
-			$format = 'html') {
+	public function showAction(
+		Request $request,
+		FlattenException $exception,
+		DebugLoggerInterface $logger = null,
+		$format = 'html'
+	) {
 		$exceptionController = $this->get('twig.controller.exception');
-		/* @var $exceptionController \SS6\ShopBundle\Component\ExceptionController */
+		/* @var $exceptionController \Symfony\Bundle\TwigBundle\Controller\ExceptionController */
+		$exceptionListener = $this->get(ExceptionListener::class);
+		/* @var $exceptionListener \SS6\ShopBundle\Component\Error\ExceptionListener */
 
 		if ($exceptionController instanceof ExceptionController) {
 			if (!$exceptionController->getDebug()) {
@@ -48,6 +58,30 @@ class ErrorController extends Controller {
 			}
 		}
 
+		$lastException = $exceptionListener->getLastException();
+		if ($lastException !== null) {
+			return $this->getPrettyExceptionResponse($lastException);
+		}
+
 		return $exceptionController->showAction($request, $exception, $logger, $format);
+	}
+
+	/**
+	 * @param \Exception $exception
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function getPrettyExceptionResponse(Exception $exception) {
+		Debugger::$time = time();
+		$blueScreen = new BlueScreen();
+		$blueScreen->info = [
+			'PHP ' . PHP_VERSION,
+		];
+
+		ob_start();
+		$blueScreen->render($exception);
+		$blueScreenHtml = ob_get_clean();
+		ob_end_clean();
+
+		return new Response($blueScreenHtml);
 	}
 }

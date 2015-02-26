@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace SS6\ShopBundle\Component\Error;
 
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as BaseController;
 

@@ -26,7 +26,7 @@ parameters:
   ss6.web_dir: %kernel.root_dir%/../web
   translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
-  twig.controller.exception.class: SS6\ShopBundle\Component\ExceptionController
+  twig.controller.exception.class: SS6\ShopBundle\Component\Error\ExceptionController
   validator.builder.factory.class: SS6\ShopBundle\Component\Validator\ValidatorBuilderFactory
 
 services:
@@ -143,6 +143,11 @@ services:
 
   ss6.shop.component.doctrine.query_builder_service:
     class: SS6\ShopBundle\Component\Doctrine\QueryBuilderService
+
+  ss6.shop.component.error.exception_listener:
+    class: SS6\ShopBundle\Component\Error\ExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
   ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
     class: SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
