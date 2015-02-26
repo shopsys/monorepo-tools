@@ -164,10 +164,10 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getAllInRootWithTranslation() {
-		$locale = $this->domain->getLocale();
+	public function getAllInRootWithTranslation($locale) {
 		return $this->categoryRepository->getAllInRootWithTranslation($locale);
 	}
 
