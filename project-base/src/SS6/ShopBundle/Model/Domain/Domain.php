@@ -40,8 +40,8 @@ class Domain {
 	/**
 	 * @return string
 	 */
-	public function getDomain() {
-		return $this->getCurrentConfig()->getDomain();
+	public function getName() {
+		return $this->getCurrentConfig()->getName();
 	}
 
 	/**
@@ -83,10 +83,10 @@ class Domain {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function switchDomainByRequest(Request $request) {
-		$host = $request->getHost();
+		$url = $request->getSchemeAndHttpHost();
 
 		foreach ($this->domainConfigs as $domainConfig) {
-			if ($domainConfig->getDomain() === $host) {
+			if ($domainConfig->getUrl() === $url) {
 				$this->currentDomainConfig = $domainConfig;
 				return;
 			}

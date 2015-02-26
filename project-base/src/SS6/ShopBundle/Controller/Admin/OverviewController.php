@@ -35,10 +35,10 @@ class OverviewController extends Controller {
 
 		$domainConfigs = $domain->getAll();
 		$data = [];
-		foreach ($domainConfigs as $id => $domainDetail) {
+		foreach ($domainConfigs as $id => $domainConfig) {
 			$data[$id]['id'] = $id;
-			$data[$id]['name'] = $domainDetail->getDomain();
-			$data[$id]['locale'] =  $domainDetail->getLocale();
+			$data[$id]['name'] = $domainConfig->getName();
+			$data[$id]['locale'] =  $domainConfig->getLocale();
 		}
 
 		return $data;

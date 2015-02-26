@@ -125,7 +125,7 @@ class CurrencyController extends Controller {
 		foreach ($domain->getAll() as $domainConfig) {
 			$domainId = $domainConfig->getId();
 			$defaultCurrencies[$domainId] = $currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
-			$domainNames[$domainId] = $domainConfig->getDomain();
+			$domainNames[$domainId] = $domainConfig->getName();
 		}
 
 		$formData['domainDefaultCurrencies'] = $defaultCurrencies;

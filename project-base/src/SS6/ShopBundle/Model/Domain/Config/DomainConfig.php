@@ -12,7 +12,12 @@ class DomainConfig {
 	/**
 	 * @var string
 	 */
-	private $domain;
+	private $url;
+
+	/**
+	 * @var string
+	 */
+	private $name;
 
 	/**
 	 * @var string
@@ -26,13 +31,15 @@ class DomainConfig {
 
 	/**
 	 * @param int $id
-	 * @param string $domain
+	 * @param string $url
+	 * @param string $name
 	 * @param string $locale
 	 * @param string $templatesDirectory
 	 */
-	public function __construct($id, $domain, $locale, $templatesDirectory) {
+	public function __construct($id, $url, $name, $locale, $templatesDirectory) {
 		$this->id = $id;
-		$this->domain = $domain;
+		$this->url = $url;
+		$this->name = $name;
 		$this->locale = $locale;
 		$this->templatesDirectory = $templatesDirectory;
 	}
@@ -47,8 +54,15 @@ class DomainConfig {
 	/**
 	 * @return string
 	 */
-	public function getDomain() {
-		return $this->domain;
+	public function getUrl() {
+		return $this->url;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
 	}
 
 	/**

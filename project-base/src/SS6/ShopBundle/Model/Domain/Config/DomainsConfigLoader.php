@@ -64,7 +64,8 @@ class DomainsConfigLoader {
 	private function processDomainConfigArray(array $domainConfig) {
 		return new DomainConfig(
 			$domainConfig[DomainsConfigDefinition::CONFIG_ID],
-			$domainConfig[DomainsConfigDefinition::CONFIG_DOMAIN],
+			$domainConfig[DomainsConfigDefinition::CONFIG_URL],
+			$domainConfig[DomainsConfigDefinition::CONFIG_NAME],
 			$domainConfig[DomainsConfigDefinition::CONFIG_LOCALE],
 			$domainConfig[DomainsConfigDefinition::CONFIG_TEMPLATES_DIRECTORY]
 		);

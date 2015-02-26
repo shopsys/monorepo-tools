@@ -93,7 +93,7 @@ class UserFormType extends AbstractType {
 		if ($this->scenario === CustomerFormType::SCENARIO_CREATE) {
 			$domainsNamesById = [];
 			foreach ($this->domains as $domain) {
-				$domainsNamesById[$domain->getId()] = $domain->getDomain();
+				$domainsNamesById[$domain->getId()] = $domain->getName();
 			}
 
 			$builder
