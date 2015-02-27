@@ -53,7 +53,7 @@ class VatRepository {
 		$vat = $this->findById($vatId);
 
 		if ($vat === null) {
-			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException($vatId);
+			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException('Vat with ID ' . $vatId . ' not found.');
 		}
 
 		return $vat;

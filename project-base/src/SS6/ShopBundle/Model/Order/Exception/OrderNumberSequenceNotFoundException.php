@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Order\Exception\OrderException;
 
 class OrderNumberSequenceNotFoundException extends Exception implements OrderException {
 

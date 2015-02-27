@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Customer\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException;
 
 class UserNotFoundByEmailAndDomainException extends UserNotFoundException {
 
@@ -21,10 +22,7 @@ class UserNotFoundByEmailAndDomainException extends UserNotFoundException {
 	 * @param \Exception $previous
 	 */
 	public function __construct($email, $domainId, Exception $previous = null) {
-		parent::__construct([
-			'email' => $email,
-			'domainId' => $domainId,
-		]);
+		parent::__construct('User with email "' . $email . '" on domain "' . $domainId . '" not found.', $previous);
 
 		$this->email = $email;
 		$this->domainId = $domainId;

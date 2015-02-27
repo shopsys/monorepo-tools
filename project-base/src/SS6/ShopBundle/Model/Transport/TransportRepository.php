@@ -99,7 +99,7 @@ class TransportRepository {
 	public function getById($id) {
 		$transport = $this->findById($id);
 		if ($transport === null) {
-			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException(['id' => $id]);
+			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException('Transport with ID ' . $id . ' not found.');
 		}
 		return $transport;
 	}

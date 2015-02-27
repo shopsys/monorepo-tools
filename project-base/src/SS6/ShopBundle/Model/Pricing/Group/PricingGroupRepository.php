@@ -35,7 +35,8 @@ class PricingGroupRepository {
 	public function getById($pricingGroupId) {
 		$pricingGroup = $this->getPricingGroupRepository()->find($pricingGroupId);
 		if ($pricingGroup === null) {
-			throw new \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException($pricingGroupId);
+			$message = 'Pricing group with ID ' . $pricingGroupId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException($message);
 		}
 		return $pricingGroup;
 	}

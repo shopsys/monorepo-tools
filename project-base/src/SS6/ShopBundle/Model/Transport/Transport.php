@@ -159,7 +159,9 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 			}
 		}
 
-		throw new \SS6\ShopBundle\Model\Transport\Exception\TransportPriceNotFoundException($currency);
+		$message = 'Transport price with currency ID ' . $currency->getId()
+			. ' from transport with ID ' . $this->getId() . 'not found.';
+		throw new \SS6\ShopBundle\Model\Transport\Exception\TransportPriceNotFoundException($message);
 	}
 
 	/**

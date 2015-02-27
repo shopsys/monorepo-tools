@@ -44,7 +44,8 @@ class AvailabilityRepository {
 		$availability = $this->findById($availabilityId);
 
 		if ($availability === null) {
-			throw new \SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException($availabilityId);
+			$message = 'Availability with ID ' . $availabilityId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException($message);
 		}
 
 		return $availability;

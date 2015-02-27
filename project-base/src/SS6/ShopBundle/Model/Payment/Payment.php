@@ -196,7 +196,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 			}
 		}
 
-		throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentPriceNotFoundException($currency);
+		$message = 'Payment price with currency ID ' . $currency->getId() . ' from payment with ID ' . $this->getId() . 'not found.';
+		throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentPriceNotFoundException($message);
 	}
 
 	/**

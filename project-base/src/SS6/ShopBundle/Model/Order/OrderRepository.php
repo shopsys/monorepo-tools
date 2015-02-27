@@ -72,7 +72,7 @@ class OrderRepository {
 		$order = $this->findById($id);
 
 		if ($order === null) {
-			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($id);
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException('Order with ID ' . $id . ' not found.');
 		}
 
 		return $order;
@@ -140,7 +140,7 @@ class OrderRepository {
 		$order = $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
 
 		if ($order === null) {
-			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($urlHash);
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException('Order with urlHash "' . $urlHash . '" not found.');
 		}
 
 		return $order;
@@ -156,7 +156,8 @@ class OrderRepository {
 		$order = $this->getOrderRepository()->findOneBy($criteria);
 
 		if ($order === null) {
-			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($criteria);
+			$message = 'Order with number ' . $orderNumber . ' and urerId ' . $user->getId() . ' not found.';
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($message);
 		}
 
 		return $order;

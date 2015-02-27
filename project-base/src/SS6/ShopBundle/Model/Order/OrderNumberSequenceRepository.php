@@ -40,7 +40,8 @@ class OrderNumberSequenceRepository {
 			/* @var $orderNumberSequence \SS6\ShopBundle\Model\Order\OrderNumberSequence|null */
 			if ($orderNumberSequence === null) {
 				throw new \SS6\ShopBundle\Model\Order\Exception\OrderNumberSequenceNotFoundException(
-					'Order number sequence ID ' . self::ID . ' not found');
+					'Order number sequence ID ' . self::ID . ' not found.'
+				);
 			}
 
 			$lastNumber = $orderNumberSequence->getNumber();

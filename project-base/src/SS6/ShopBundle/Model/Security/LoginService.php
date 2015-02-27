@@ -23,7 +23,7 @@ class LoginService {
 		}
 
 		if ($error !== null) {
-			throw new Exception\LoginFailedException('Login failed.');
+			throw new \SS6\ShopBundle\Model\Security\Exception\LoginFailedException('Login failed.');
 		}
 
 		return true;

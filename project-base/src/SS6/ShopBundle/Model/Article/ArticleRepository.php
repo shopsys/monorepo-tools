@@ -48,7 +48,8 @@ class ArticleRepository {
 	public function getById($articleId) {
 		$user = $this->getArticleRepository()->find($articleId);
 		if ($user === null) {
-			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($articleId);
+			$message = 'Article with ID ' . $articleId . ' not found';
+			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
 		}
 		return $user;
 	}

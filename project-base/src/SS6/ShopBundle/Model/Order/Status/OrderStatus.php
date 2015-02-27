@@ -103,7 +103,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 		])) {
 			$this->type = $type;
 		} else {
-			throw new Exception\InvalidOrderStatusTypeException($type);
+			throw new \SS6\ShopBundle\Model\Order\Status\Exception\InvalidOrderStatusTypeException($type);
 		}
 	}
 

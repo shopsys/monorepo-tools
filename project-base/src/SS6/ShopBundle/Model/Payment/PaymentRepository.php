@@ -75,7 +75,7 @@ class PaymentRepository {
 	public function getById($id) {
 		$payment = $this->findById($id);
 		if ($payment === null) {
-			throw new Exception\PaymentNotFoundException(['id' => $id]);
+			throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.');
 		}
 		return $payment;
 	}
@@ -85,12 +85,13 @@ class PaymentRepository {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	public function getByIdWithTransports($id) {
-		$criteria = ['id' => $id];
 		try {
-			$dql = sprintf('SELECT p, t FROM %s p LEFT JOIN p.transports t WHERE p.id = :id', Payment::class);
-			return $this->em->createQuery($dql)->setParameters($criteria)->getSingleResult();
+			return $this->em
+				->createQuery('SELECT p, t FROM ' . Payment::class . ' p LEFT JOIN p.transports t WHERE p.id = :id')
+				->setParameter('id', $id)
+				->getSingleResult();
 		} catch (\Doctrine\ORM\NoResultException $e) {
-			throw new Exception\PaymentNotFoundException($criteria, $e);
+			throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.', $e);
 		}
 	}
 

@@ -66,7 +66,7 @@ class DomainRouterFactory {
 			try {
 				$domainConfig = $this->domain->getDomainConfigById($domainId);
 			} catch (\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException $exception) {
-				throw new Exception\RouterNotResolvedException('', $exception);
+				throw new \SS6\ShopBundle\Component\Router\Exception\RouterNotResolvedException('', $exception);
 			}
 			$context = $this->getRequestContextByDomainConfig($domainConfig);
 			$basicRouter = $this->getBasicRouter($domainConfig);

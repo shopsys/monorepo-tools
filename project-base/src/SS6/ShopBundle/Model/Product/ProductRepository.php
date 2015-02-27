@@ -316,7 +316,7 @@ class ProductRepository {
 		$product = $qb->getQuery()->getOneOrNullResult();
 
 		if ($product === null) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException($qb->getDQL());
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException();
 		}
 
 		return $product;

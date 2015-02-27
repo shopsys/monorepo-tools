@@ -87,7 +87,8 @@ class CategoryRepository extends NestedTreeRepository {
 		$category = $this->findById($categoryId);
 
 		if ($category === null) {
-			throw new \SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException($categoryId);
+			$message = 'Category with ID ' . $categoryId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException($message);
 		}
 
 		return $category;

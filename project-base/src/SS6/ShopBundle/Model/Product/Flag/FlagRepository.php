@@ -42,7 +42,7 @@ class FlagRepository {
 		$flag = $this->findById($flagId);
 
 		if ($flag === null) {
-			throw new \SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException($flagId);
+			throw new \SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException('Flag with ID ' . $flagId . ' not found.');
 		}
 
 		return $flag;

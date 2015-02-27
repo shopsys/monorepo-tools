@@ -42,7 +42,8 @@ class OrderStatusRepository {
 		$orderStatus = $this->findById($orderStatusId);
 
 		if ($orderStatus === null) {
-			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($orderStatusId);
+			$message = 'Order status with ID ' . $orderStatusId . ' not found.';
+			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
 		}
 
 		return $orderStatus;
@@ -55,7 +56,8 @@ class OrderStatusRepository {
 		$orderStatus = $this->getOrderStatusRepository()->findOneBy(['type' => OrderStatus::TYPE_NEW]);
 
 		if ($orderStatus === null) {
-			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($orderStatusId);
+			$message = 'Default order status not found.';
+			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
 		}
 
 		return $orderStatus;
