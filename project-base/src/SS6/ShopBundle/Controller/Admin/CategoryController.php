@@ -102,13 +102,16 @@ class CategoryController extends Controller {
 
 	/**
 	 * @Route("/category/list/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function listAction() {
+	public function listAction(Request $request) {
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
+		$categoryDetails = $categoryFacade->getAllCategoryDetails($request->getLocale());
+
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
-			'rootCategories' => $categoryFacade->getAllInRootEagerLoaded(),
+			'categoryDetails' => $categoryDetails,
 		]);
 	}
 

@@ -174,15 +174,19 @@ class CategoryFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getAllInRootEagerLoaded() {
-		return $this->categoryRepository->getAllInRootEagerLoaded();
+	public function getAll() {
+		return $this->categoryRepository->getAll();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
 	 */
-	public function getAll() {
-		return $this->categoryRepository->getAll();
+	public function getAllCategoryDetails($locale) {
+		$categories = $this->categoryRepository->getPreOrderTreeTraversalForAllCategories($locale);
+		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+
+		return $categoryDetails;
 	}
 
 	/**

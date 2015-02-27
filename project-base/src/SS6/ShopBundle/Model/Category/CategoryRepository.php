@@ -103,6 +103,21 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getPreOrderTreeTraversalForAllCategories($locale) {
+		$queryBuilder = $this->getAllQueryBuilder();
+		$this->addTranslation($queryBuilder, $locale);
+
+		$queryBuilder
+			->andWhere('c.level >= 1')
+			->orderBy('c.lft');
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
 	 * @param int $domainId
 	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
@@ -121,25 +136,6 @@ class CategoryRepository extends NestedTreeRepository {
 		$queryBuilder->setParameter('domainId', $domainId);
 
 		return $queryBuilder->getQuery()->execute();
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
-	 */
-	public function getAllInRootEagerLoaded() {
-		$allCategories = $this->getAllQueryBuilder()
-			->join('c.translations', 'ct')
-			->getQuery()
-			->execute();
-
-		$rootCategories = [];
-		foreach ($allCategories as $cateogry) {
-			if ($cateogry->getLevel() === 1) {
-				$rootCategories[] = $cateogry;
-			}
-		}
-
-		return $rootCategories;
 	}
 
 	/**

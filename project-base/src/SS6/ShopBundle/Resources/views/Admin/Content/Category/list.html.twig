@@ -7,28 +7,27 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
-
 			<a href="{{ url('admin_category_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou kategorii'|trans }}</a>
 
-			{% macro categoryTreeItem(categories) %}
+			{% macro categoryTreeItem(categoryDetails) %}
 				<ul class="js-category-tree-sorting-items">
-					{% for category in categories %}
-						<li class="js-category-tree-sorting-item" id="js-category-tree-{{ category.id }}">
+					{% for categoryDetail in categoryDetails %}
+						<li class="js-category-tree-sorting-item" id="js-category-tree-{{ categoryDetail.category.id }}">
 							<div class="js-category-tree-sorting-item-line">
-								<span class="js-category-tree-sorting-item-handle">{{ category.name }}</span>
+								<span class="js-category-tree-sorting-item-handle">{{ categoryDetail.category.name }}</span>
 								<span class="js-category-tree-sorting-item-icons">
-									<a href="{{ url('admin_category_edit', {id: category.id}) }}">
+									<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}">
 										<i class="fa fa-pencil"></i>
 									</a>
 									<a
-										href="{{ url('admin_category_delete', {id: category.id}) }}"
+										href="{{ url('admin_category_delete', {id: categoryDetail.category.id}) }}"
 										onclick="
 											SS6.window({
 												content: '{{ 'Opravdu chcete smazat tuto kategorii?'|trans|e('js') }}',
 												buttonCancel: true,
 												buttonContinue: true,
 												textContinue: '{{ 'Ano'|trans|e('js') }}',
-												urlContinue: '{{ url('admin_category_delete', {id: category.id})|e('js') }}'
+												urlContinue: '{{ url('admin_category_delete', {id: categoryDetail.category.id})|e('js') }}'
 											});
 											return false;"
 									>
@@ -36,14 +35,14 @@
 									</a>
 								</span>
 							</div>
-							{{ _self.categoryTreeItem(category.children) }}
+							{{ _self.categoryTreeItem(categoryDetail.children) }}
 						</li>
 					{% endfor %}
 				</ul>
 			{% endmacro %}
 
 			<div id="js-category-tree-sorting" class="category-tree-sorting mb-1">
-				{{ _self.categoryTreeItem(rootCategories) }}
+				{{ _self.categoryTreeItem(categoryDetails) }}
 			</div>
 
 			<button
