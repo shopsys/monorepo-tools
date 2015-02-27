@@ -7,6 +7,8 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
+			{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
+
 			<a href="{{ url('admin_category_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou kategorii'|trans }}</a>
 
 			{% macro categoryTreeItem(categoryDetails) %}
@@ -45,13 +47,15 @@
 				{{ _self.categoryTreeItem(categoryDetails) }}
 			</div>
 
-			<button
-				class="btn btn-primary btn-disabled"
-				id="js-category-tree-sorting-save-button"
-				data-category-save-order-url="{{ url('admin_category_saveorder') }}"
-			>
-				{{ 'Uložit změny v pořadí'|trans }}
-			</button>
+			{% if allDomains %}
+				<button
+					class="btn btn-primary btn-disabled"
+					id="js-category-tree-sorting-save-button"
+					data-category-save-order-url="{{ url('admin_category_saveorder') }}"
+				>
+					{{ 'Uložit změny v pořadí'|trans }}
+				</button>
+			{% endif %}
 
 		</div>
 	</div>

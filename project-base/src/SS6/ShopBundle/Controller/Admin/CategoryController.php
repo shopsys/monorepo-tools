@@ -105,13 +105,38 @@ class CategoryController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
+		$session = $this->get('session');
+		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
-		$categoryDetails = $categoryFacade->getAllCategoryDetails($request->getLocale());
+		if ($request->query->has('domain')) {
+			$domainId = (int)$request->query->get('domain');
+		} else {
+			$domainId = (int)$session->get('categories_selected_domain_id', 0);
+		}
+
+		if ($domainId !== 0) {
+			try {
+				$domain->getDomainConfigById($domainId);
+			} catch (\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException $ex) {
+				$domainId = 0;
+			}
+		}
+
+		$session->set('categories_selected_domain_id', $domainId);
+
+		if ($domainId === 0) {
+			$categoryDetails = $categoryFacade->getAllCategoryDetails($request->getLocale());
+		} else {
+			$categoryDetails = $categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
+		}
 
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
 			'categoryDetails' => $categoryDetails,
+			'allDomains' => ($domainId === 0),
 		]);
 	}
 
@@ -158,6 +183,23 @@ class CategoryController extends Controller {
 		}
 
 		return $this->redirect($this->generateUrl('admin_category_list'));
+	}
+
+	public function listDomainTabsAction() {
+		$session = $this->get('session');
+		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$localization = $this->get('ss6.shop.localization.localization');
+		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
+
+		$domainId = $session->get('categories_selected_domain_id', 0);
+
+		return $this->render('@SS6Shop/Admin/Content/Category/domainTabs.html.twig', [
+			'domainConfigs' => $domain->getAll(),
+			'selectedDomainId' => $domainId,
+			'multipleLocales' => count($localization->getAllLocales()) > 1,
+		]);
 	}
 
 }
