@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Model\Category\Category;
 
@@ -102,14 +103,24 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param int $domainId
 	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getAllInRootWithTranslation($locale) {
-		return $this->getAllWithTranslationQueryBuilder($locale)
-			->andWhere('c.level = 1')
-			->getQuery()
-			->execute();
+	public function getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale) {
+		$queryBuilder = $this->getAllQueryBuilder();
+		$this->addTranslation($queryBuilder, $locale);
+
+		$queryBuilder
+			->join(CategoryDomain::class, 'cd', Join::WITH, 'cd.category = c')
+			->andWhere('c.level >= 1')
+			->andWhere('cd.domainId = :domainId')
+			->andWhere('cd.visible = TRUE')
+			->orderBy('c.lft');
+
+		$queryBuilder->setParameter('domainId', $domainId);
+
+		return $queryBuilder->getQuery()->execute();
 	}
 
 	/**
@@ -133,15 +144,11 @@ class CategoryRepository extends NestedTreeRepository {
 
 	/**
 	 * @param string $locale
-	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllWithTranslationQueryBuilder($locale) {
-		$qb = $this->getAllQueryBuilder()
+	private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale) {
+		$categoriesQueryBuilder
 			->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
-			->andWhere('ct.name IS NOT NULL');
-		$qb->setParameter('locale', $locale);
-
-		return $qb;
+			->setParameter('locale', $locale);
 	}
 
 	/**

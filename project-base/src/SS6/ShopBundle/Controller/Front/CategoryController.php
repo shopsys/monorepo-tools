@@ -12,10 +12,13 @@ class CategoryController extends Controller {
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
-		$categories = $categoryFacade->getAllInRootWithTranslation($domain->getLocale());
+		$categoryDetails = $categoryFacade->getVisibleCategoryDetailsForDomain(
+			$domain->getId(),
+			$domain->getLocale()
+		);
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
-			'categories' => $categories,
+			'categoryDetails' => $categoryDetails,
 		]);
 	}
 

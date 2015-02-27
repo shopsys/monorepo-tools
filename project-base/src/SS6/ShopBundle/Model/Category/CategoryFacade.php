@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Category\CategoryService;
 use SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryFacade {
@@ -36,18 +37,25 @@ class CategoryFacade {
 	 */
 	private $categoryVisibilityRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory
+	 */
+	private $categoryDetailFactory;
+
 	public function __construct(
 		EntityManager $em,
 		CategoryRepository $categoryRepository,
 		CategoryService $categoryService,
 		Domain $domain,
-		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler
+		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
+		CategoryDetailFactory $categoryDetailFactory
 	) {
 		$this->em = $em;
 		$this->categoryRepository = $categoryRepository;
 		$this->categoryService = $categoryService;
 		$this->domain = $domain;
 		$this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
+		$this->categoryDetailFactory = $categoryDetailFactory;
 	}
 
 	/**
@@ -164,14 +172,6 @@ class CategoryFacade {
 	}
 
 	/**
-	 * @param string $locale
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
-	 */
-	public function getAllInRootWithTranslation($locale) {
-		return $this->categoryRepository->getAllInRootWithTranslation($locale);
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllInRootEagerLoaded() {
@@ -183,6 +183,19 @@ class CategoryFacade {
 	 */
 	public function getAll() {
 		return $this->categoryRepository->getAll();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
+	public function getVisibleCategoryDetailsForDomain($domainId, $locale) {
+		$categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale);
+
+		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+
+		return $categoryDetails;
 	}
 
 	/**

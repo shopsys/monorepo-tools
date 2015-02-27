@@ -1,14 +1,14 @@
-{% macro categories(categories) %}
-	{% if categories|length > 0 %}
+{% macro categories(categoryDetails) %}
+	{% if categoryDetails|length > 0 %}
 		<ul class="list-menu">
-			{% for category in categories if category.name != '' %}
+			{% for categoryDetail in categoryDetails %}
 				<li class="list-menu__item">
-					<a href="{{ url('front_product_category', { categoryId: category.id }) }}" class="list-menu__item__link list-menu__item__link--{{category.level}}">{{ category.name }}</a>
-					{{ _self.categories(category.children) }}
+					<a href="{{ url('front_product_category', { categoryId: categoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--{{ categoryDetail.category.level }}">{{ categoryDetail.category.name }}</a>
+					{{ _self.categories(categoryDetail.children) }}
 				</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
 {% endmacro %}
 
-{{ _self.categories(categories) }}
+{{ _self.categories(categoryDetails) }}
