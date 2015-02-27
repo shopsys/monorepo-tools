@@ -104,36 +104,21 @@
 
 				<div class="wrap-group">
 					<h2>{{ 'SEO atributy'|trans }}:</h2>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>{{ 'Titlulek'|trans }}</th>
-							</tr>
-						</thead>
-						<tbody>
-						{% for domainId, title in form.seoTitles %}
-							<tr class="js-characters-counter">
-								<td>{{ form_row(title, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}</td>
-								<td class="js-characters-counter-info" data-recommended-length="60"></td>
-							</tr>
-						{% endfor %}
-						</tbody>
-					</table>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>{{ 'Meta description'|trans }}</th>
-							</tr>
-						</thead>
-						<tbody>
-						{% for domainId, metaDescription in form.seoMetaDescriptions %}
-							<tr class="js-characters-counter">
-								<td>{{ form_row(metaDescription, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}</td>
-								<td class="js-characters-counter-info" data-recommended-length="155"></td>
-							</tr>
-						{% endfor %}
-						</tbody>
-					</table>
+					<strong>{{ 'Titlulek'|trans }}</strong>
+					{% for domainId, title in form.seoTitles %}
+						<div class="js-characters-counter">
+							{{ form_row(title, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}
+							<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
+						</div>
+					{% endfor %}
+
+					<strong>{{ 'Meta description'|trans }}</strong>
+					{% for domainId, metaDescription in form.seoMetaDescriptions %}
+						<div class="js-characters-counter">
+							{{ form_row(metaDescription, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}
+							<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
+						</div>
+					{% endfor %}
 				</div>
 
 				<div class="wrap-group">
