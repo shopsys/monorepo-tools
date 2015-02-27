@@ -11,12 +11,6 @@ use Symfony\Component\Routing\Router;
 
 class DomainRouterFactory {
 
-	const URL_SCHEME = 'scheme';
-	const URL_SCHEME_HTTP = 'http';
-	const URL_SCHEME_HTTPS = 'https';
-	const URL_HOST = 'host';
-	const URL_PORT = 'port';
-
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
@@ -94,12 +88,14 @@ class DomainRouterFactory {
 	private function getRequestContextByDomainConfig(DomainConfig $domainConfig) {
 		$urlComponents = parse_url($domainConfig->getUrl());
 		$requestContext = new RequestContext($domainConfig->getUrl());
-		$requestContext->setScheme($urlComponents[self::URL_SCHEME]);
-		$requestContext->setHost($urlComponents[self::URL_HOST]);
-		if ($urlComponents[self::URL_SCHEME] === self::URL_SCHEME_HTTP) {
-			$requestContext->setHttpPort($urlComponents[self::URL_PORT]);
-		} elseif ($urlComponents[self::URL_SCHEME] === self::URL_SCHEME_HTTPS) {
-			$requestContext->setHttpsPort($urlComponents[self::URL_PORT]);
+
+		$requestContext->setScheme($urlComponents['scheme']);
+		$requestContext->setHost($urlComponents['host']);
+
+		if ($urlComponents['scheme'] === 'http') {
+			$requestContext->setHttpPort($urlComponents['port']);
+		} elseif ($urlComponents['scheme'] === 'https') {
+			$requestContext->setHttpsPort($urlComponents['post']);
 		}
 
 		return $requestContext;
