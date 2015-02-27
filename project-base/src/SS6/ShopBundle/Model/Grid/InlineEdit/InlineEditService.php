@@ -88,7 +88,7 @@ class InlineEditService {
 	 * @return \SS6\ShopBundle\Model\Grid\InlineEdit\GridInlineEditInterface
 	 */
 	private function getInlineEditService($serviceName) {
-		$gridInlineEdit = $this->container->get($serviceName, Container::NULL_ON_INVALID_REFERENCE);
+		$gridInlineEdit = $this->container->get($serviceName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
 		if ($gridInlineEdit instanceof GridInlineEditInterface) {
 			return $gridInlineEdit;
