@@ -18,11 +18,6 @@ class UserFormType extends AbstractType {
 	private $scenario;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
-	 */
-	private $domains;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
@@ -34,13 +29,11 @@ class UserFormType extends AbstractType {
 
 	/**
 	 * @param string $scenario
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
 	 */
-	public function __construct($scenario, $domains = null, $selectedDomain = null, $pricingGroups = null) {
+	public function __construct($scenario, $selectedDomain = null, $pricingGroups = null) {
 		$this->scenario = $scenario;
-		$this->domains = $domains;
 		$this->selectedDomain = $selectedDomain;
 		$this->pricingGroups = $pricingGroups;
 	}
@@ -91,15 +84,9 @@ class UserFormType extends AbstractType {
 			]);
 
 		if ($this->scenario === CustomerFormType::SCENARIO_CREATE) {
-			$domainsNamesById = [];
-			foreach ($this->domains as $domain) {
-				$domainsNamesById[$domain->getId()] = $domain->getName();
-			}
-
 			$builder
-				->add('domainId', FormType::CHOICE, [
+				->add('domainId', FormType::DOMAIN, [
 					'required' => true,
-					'choices' => $domainsNamesById,
 					'data' => $this->selectedDomain->getId(),
 				]);
 		}
