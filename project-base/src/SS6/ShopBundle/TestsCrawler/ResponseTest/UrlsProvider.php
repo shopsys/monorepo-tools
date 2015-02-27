@@ -25,10 +25,17 @@ class UrlsProvider {
 	 * @var string[]
 	 */
 	private $ignoredRouteNames = [
+		// used only for internal setting of selected domain by tab control in admin
 		'admin_domain_selectdomain',
+		// used by firewall to catch login requests
+		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'admin_login_check',
+		// when tests are processed, there are no images in the shop
 		'front_image',
+		// when tests are processed, there are no images in the shop
 		'front_image_without_type',
+		// used by firewall to catch login requests
+		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'front_login_check',
 	];
 
