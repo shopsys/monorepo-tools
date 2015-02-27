@@ -3,12 +3,12 @@
 
 {% set domain = getDomain() %}
 {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
-{% block meta_description -%}
-	{{ productDomain.seoMetaDescription|default(getSeoMetaDescription()) }}
+{% block meta_description %}
+	{{- productDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
 {% endblock %}
 
 {% block title %}
-	{{ productDomain.getSeoTitleForHtml(domain) }}
+	{{- productDomain.getSeoTitleForHtml(domain) -}}
 {% endblock %}
 
 {% block main_content %}
