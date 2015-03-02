@@ -106,7 +106,7 @@
 					<h2>{{ 'SEO atributy'|trans }}:</h2>
 					<strong>{{ 'Titlulek'|trans }}</strong>
 					{% for domainId, title in form.seoTitles %}
-						<div class="js-characters-counter">
+						<div class="js-characters-counter form-group">
 							{{ form_row(title, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}
 							<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
 						</div>
@@ -114,7 +114,7 @@
 
 					<strong>{{ 'Meta description'|trans }}</strong>
 					{% for domainId, metaDescription in form.seoMetaDescriptions %}
-						<div class="js-characters-counter">
+						<div class="js-characters-counter form-group form-line--size-6">
 							{{ form_row(metaDescription, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}
 							<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
 						</div>

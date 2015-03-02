@@ -171,37 +171,57 @@ Form field constructions, with many variants and uses
 .form-line__appendix {
 	position: absolute;
 	top: 8px;
-	left: 365px;
+	left: 550px;
 
 	font-size: 12px;
+
+	.form-line--size-0 & { left: 270px }
+	.form-line--size-1 & { left: 310px }
+	.form-line--size-2 & { left: 370px }
+	.form-line--size-3 & { left: 430px }
+	.form-line--size-4 & { left: 490px }
 }
 
 .form-line--size-0 .form-line__field,
-.form-line--size-0 .form-line__text {
+.form-line--size-0 .form-line__text,
+.form-line--size-0 .form-line__full {
 	max-width: 60px;
 }
 .form-line--size-1 .form-line__field,
-.form-line--size-1 .form-line__text {
+.form-line--size-1 .form-line__text,
+.form-line--size-1 .form-line__full {
 	max-width: 100px;
 }
 
 .form-line--size-2 .form-line__field,
-.form-line--size-2 .form-line__text {
+.form-line--size-2 .form-line__text,
+.form-line--size-2 .form-line__full {
 	max-width: 160px;
 }
 
 .form-line--size-3 .form-line__field,
-.form-line--size-3 .form-line__text {
+.form-line--size-3 .form-line__text,
+.form-line--size-3 .form-line__full {
 	max-width: 220px;
 }
 
 .form-line--size-4 .form-line__field,
-.form-line--size-4 .form-line__text {
+.form-line--size-4 .form-line__text,
+.form-line--size-4 .form-line__full {
 	max-width: 280px;
 }
 
+.form-line--size-5 .form-line__full {
+	max-width: 380px;
+}
+
+.form-line--size-6 .form-line__full {
+	max-width: 540px;
+}
+
 .form-line--size-window .form-line__field,
-.form-line--size-window .form-line__text {
+.form-line--size-window .form-line__text,
+.form-line--size-window .form-line__full {
 	width: 148px;
 }
 
