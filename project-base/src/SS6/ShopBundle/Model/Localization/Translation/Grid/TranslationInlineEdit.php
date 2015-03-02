@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Localization\TranslationFormType;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 use Symfony\Component\Form\FormFactory;
@@ -21,14 +22,21 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	 */
 	private $translationEditFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
 	public function __construct(
 		FormFactory $formFactory,
 		TranslationGridFactory $translationGridFactory,
 		Translator $translator,
-		TranslationEditFacade $translationEditFacade
+		TranslationEditFacade $translationEditFacade,
+		Localization $localization
 	) {
 		$this->translator = $translator;
 		$this->translationEditFacade = $translationEditFacade;
+		$this->localization = $localization;
 
 		parent::__construct($formFactory, $translationGridFactory);
 	}
@@ -67,7 +75,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	 * @return \SS6\ShopBundle\Form\Admin\Localization\TranslationFormType
 	 */
 	protected function getFormType($rowId) {
-		return new TranslationFormType();
+		return new TranslationFormType($this->localization);
 	}
 
 	/**
