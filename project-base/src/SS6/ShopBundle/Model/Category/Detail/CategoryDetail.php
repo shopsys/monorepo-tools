@@ -28,10 +28,16 @@ class CategoryDetail {
 		$this->children = $children;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
 	public function getCategory() {
 		return $this->category;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
 	public function getChildren() {
 		return $this->children;
 	}
