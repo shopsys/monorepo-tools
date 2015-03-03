@@ -26,8 +26,8 @@ class RouterExtension extends Twig_Extension {
 	public function getFunctions() {
 		return [
 			new Twig_SimpleFunction(
-				'getUrlByDomainId',
-				[$this, 'getUrlByDomainId']
+				'findUrlByDomainId',
+				[$this, 'findUrlByDomainId']
 			),
 		];
 	}
@@ -37,12 +37,16 @@ class RouterExtension extends Twig_Extension {
 	 * @param array $routeParams
 	 * @param int $domainId
 	 * @param bool $absolute
-	 * @return string
+	 * @return string|null
 	 */
-	public function getUrlByDomainId($route, $routeParams, $domainId, $absolute) {
+	public function findUrlByDomainId($route, $routeParams, $domainId, $absolute) {
 		$domainRouter = $this->domainRouterFactory->getRouter($domainId);
 
-		return $domainRouter->generate($route, $routeParams, $absolute);
+		try {
+			return $domainRouter->generate($route, $routeParams, $absolute);
+		} catch (\Symfony\Component\Routing\Exception\RouteNotFoundException $e) {
+			return null;
+		}
 	}
 
 	/**

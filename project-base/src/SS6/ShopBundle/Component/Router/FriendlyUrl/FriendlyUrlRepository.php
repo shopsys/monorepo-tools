@@ -55,7 +55,7 @@ class FriendlyUrlRepository {
 		$friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria, ['url' => 'ASC']);
 
 		if ($friendlyUrl === null) {
-			throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException($criteria);
+			throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException();
 		}
 
 		return $friendlyUrl;
