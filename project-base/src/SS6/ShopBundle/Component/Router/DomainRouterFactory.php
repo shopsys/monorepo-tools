@@ -87,7 +87,7 @@ class DomainRouterFactory {
 	 */
 	private function getRequestContextByDomainConfig(DomainConfig $domainConfig) {
 		$urlComponents = parse_url($domainConfig->getUrl());
-		$requestContext = new RequestContext($domainConfig->getUrl());
+		$requestContext = new RequestContext();
 
 		$requestContext->setScheme($urlComponents['scheme']);
 		$requestContext->setHost($urlComponents['host']);
