@@ -52,8 +52,8 @@
 	<div class="form-line {{ attr.class|default('') }}">
 		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
-		{{- block('icon_block') -}}
+		{{ form_widget(form, { attr: {class: 'form-line__field'}, symbolAfterInput: null }) }}
+		{{- block('appendix_block') -}}
 	</div>
 {% endblock form_row %}
 
@@ -76,12 +76,12 @@
 		{{ form_errors(form) }}
 		{% if localized is not defined %}
 			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field', symbolAfterInput: null } }) }}
 		{% else %}
-			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon' } }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon', symbolAfterInput: null } }) }}
 			<span class="form-line__icon form-line__icon--{{locale}}"></span>
 		{% endif %}
-		{{- block('icon_block') -}}
+		{{- block('appendix_block') -}}
 	</div>
 {%- endblock text_row %}
 
@@ -94,7 +94,7 @@
 		{% endif %}
 		{{- form_errors(form) -}}
 		<div class="form-line__full">
-			{{- form_widget(form) -}}
+			{{- form_widget(form, { attr: { symbolAfterInput: null } }) -}}
 		</div>
 	</div>
 {%- endblock textarea_row %}
@@ -298,11 +298,14 @@
 	{{ parent('number_widget') }}
 {% endblock number_widget %}
 
-{% block icon_block %}
+{% block appendix_block %}
 	{% if icon is defined %}
 		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
 			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
 			title="{{ icon.title }}"
 		 ></i>
+	{% endif %}
+	{% if symbolAfterInput is defined %}
+		<span class="form-line__appendix">{{ symbolAfterInput }}</span>
 	{% endif %}
 {% endblock %}
