@@ -29,14 +29,17 @@ class ProductVisibilityRepository {
 
 	public function refreshProductsVisibility() {
 		$this->refreshProductDomainsVisibility();
+		$this->refreshGlobalProductVisibility();
+	}
 
+	private function refreshGlobalProductVisibility() {
 		$query = $this->em->createNativeQuery('UPDATE products AS p
-				SET visible = (p.hidden = FALSE) AND EXISTS(
-						SELECT 1
-						FROM product_domains AS pd
-						WHERE pd.product_id = p.id
-							AND pd.visible = TRUE
-					)', new ResultSetMapping());
+			SET visible = (p.hidden = FALSE) AND EXISTS(
+					SELECT 1
+					FROM product_domains AS pd
+					WHERE pd.product_id = p.id
+						AND pd.visible = TRUE
+				)', new ResultSetMapping());
 		$query->execute();
 	}
 
