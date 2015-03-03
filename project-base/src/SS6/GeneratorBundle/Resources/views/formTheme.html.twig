@@ -8,6 +8,14 @@
 	</div>
 {% endblock form_row %}
 
+{% block checkbox_row %}
+	<div class="form-line">
+		{{ form_widget(form) }}
+		{{ form_label(form, label) }}
+		{{ form_errors(form) }}
+	</div>
+{% endblock checkbox_row %}
+
 {% block form_errors %}
 	{% if errors|length > 0 -%}
     <ul class ="form-errors">

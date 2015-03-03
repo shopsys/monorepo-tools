@@ -67,10 +67,15 @@ button {
 .generator-title label {
 	display: block;
 	cursor: pointer;
+	margin: -7px;
+	padding: 7px;
 }
 
 .generator-title input[type=checkbox] {
-	display: none;
+	float: left;
+	margin-right: 10px;
+	position: relative;
+	top: 7px;
 }
 
 .generator-form {
