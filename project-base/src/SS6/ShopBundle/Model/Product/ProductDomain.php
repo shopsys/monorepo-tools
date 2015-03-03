@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Product;
 
 /**
@@ -43,6 +44,20 @@ class ProductDomain {
 	private $visible;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $seoTitle;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $seoMetaDescription;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 */
@@ -51,6 +66,8 @@ class ProductDomain {
 		$this->domainId = $domainId;
 		$this->hidden = false;
 		$this->visible = false;
+		$this->seoTitle = null;
+		$this->seoMetaDescription = null;
 	}
 
 	/**
@@ -79,6 +96,47 @@ class ProductDomain {
 	 */
 	public function isVisible() {
 		return $this->visible;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoTitle() {
+		return $this->seoTitle;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoMetaDescription() {
+		return $this->seoMetaDescription;
+	}
+
+	/**
+	 * @param string $seoTitle
+	 */
+	public function setSeoTitle($seoTitle) {
+		$this->seoTitle = $seoTitle;
+	}
+
+	/**
+	 * @param string $seoMetaDescription
+	 */
+	public function setSeoMetaDescription($seoMetaDescription) {
+		$this->seoMetaDescription = $seoMetaDescription;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Domain $domain
+	 * @return string
+	 */
+	public function getSeoTitleForHtml(Domain $domain) {
+		$seoTitle = $this->getSeoTitle();
+		if ($seoTitle === null) {
+			return $this->product->getName($domain->getLocale());
+		} else {
+			return $seoTitle;
+		}
 	}
 
 }

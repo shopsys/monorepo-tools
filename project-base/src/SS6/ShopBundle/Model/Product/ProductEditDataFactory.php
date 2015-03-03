@@ -62,6 +62,8 @@ class ProductEditDataFactory {
 
 		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
 		$productEditData->manualInputPrices = [];
+		$productEditData->seoTitles = [];
+		$productEditData->seoMetaDescriptions = [];
 
 		return $productEditData;
 	}
@@ -72,7 +74,7 @@ class ProductEditDataFactory {
 	 */
 	public function createFromProduct(Product $product) {
 		$productEditData = $this->createDefault();
-		$productDomains = $this->productRepository->getProductDomainsByProduct($product);
+		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 		$productEditData->productData->setFromEntity($product, $productDomains);
 
 		$productParameterValuesData = [];
@@ -88,6 +90,11 @@ class ProductEditDataFactory {
 		foreach ($manualInputPrices as $manualInputPrice) {
 			$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
 			$productEditData->manualInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
+		}
+
+		foreach ($productDomains as $productDomain) {
+			$productEditData->seoTitles[$productDomain->getDomainId()] = $productDomain->getSeoTitle();
+			$productEditData->seoMetaDescriptions[$productDomain->getDomainId()] = $productDomain->getSeoMetaDescription();
 		}
 
 		return $productEditData;

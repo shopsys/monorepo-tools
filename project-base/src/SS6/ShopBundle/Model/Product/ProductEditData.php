@@ -27,9 +27,19 @@ class ProductEditData {
 	public $imagesToDelete;
 
 	/**
-	 * @var string[]
+	 * @var string[pricingGroupId]
 	 */
 	public $manualInputPrices;
+
+	/**
+	 * @var string[domainId]
+	 */
+	public $seoTitles;
+
+	/**
+	 * @var string[domainId]
+	 */
+	public $seoMetaDescriptions;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
@@ -37,13 +47,17 @@ class ProductEditData {
 	 * @param string[] $imagesToUpload
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesToDelete
 	 * @param string[] $manualInputPrices
+	 * @param string[] $seoTitles
+	 * @param string[] $seoMetaDescriptions
 	 */
 	public function __construct(
 		ProductData $productData = null,
 		array $parameters = [],
 		array $imagesToUpload = [],
 		array $imagesToDelete = [],
-		array $manualInputPrices = []
+		array $manualInputPrices = [],
+		array $seoTitles = [],
+		array $seoMetaDescriptions = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -54,6 +68,8 @@ class ProductEditData {
 		$this->imagesToUpload = $imagesToUpload;
 		$this->imagesToDelete = $imagesToDelete;
 		$this->manualInputPrices = $manualInputPrices;
+		$this->seoTitles = $seoTitles;
+		$this->seoMetaDescriptions = $seoMetaDescriptions;
 	}
 
 }

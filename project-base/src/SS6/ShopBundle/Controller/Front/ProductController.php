@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

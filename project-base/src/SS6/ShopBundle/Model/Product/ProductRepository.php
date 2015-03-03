@@ -334,11 +334,15 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
-	public function getProductDomainsByProduct(Product $product) {
-		return $this->getProductDomainRepository()->findBy(
-			['product' => $product],
-			['domainId' => 'asc']
-		);
+	public function getProductDomainsByProductIndexedByDomainId(Product $product) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('pd')
+			->from(ProductDomain::class, 'pd', 'pd.domainId')
+			->where('pd.product = :product')
+			->orderBy('pd.domainId', 'ASC');
+		$queryBuilder->setParameter('product', $product);
+
+		return $queryBuilder->getQuery()->execute();
 	}
 
 	/**

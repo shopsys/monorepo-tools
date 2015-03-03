@@ -6,7 +6,7 @@
 {% block product_url %}
 	<div class="form-line">
 		<label>{{ 'URL adresy na doménách :' |trans }}</label>
-		{% for productDomain in productDetail.productDomains %}
+		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
 			<div class="form-line">
 				<label class="form-line__label">{{ getDomainName(productDomain.domainId) ~ ' :' }}</label>
 				<span class="form-line__text">
