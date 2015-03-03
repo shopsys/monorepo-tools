@@ -71,16 +71,25 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function create(CategoryData $categoryData) {
-		$rootCategory = $this->categoryRepository->getRootCategory();
-		$category = $this->categoryService->create($categoryData, $rootCategory);
-		$this->em->persist($category);
-		$this->em->flush();
-		$this->createCategoryDomains($category, $this->domain->getAll());
-		$this->em->flush();
+		try {
+			$this->em->beginTransaction();
 
-		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+			$rootCategory = $this->categoryRepository->getRootCategory();
+			$category = $this->categoryService->create($categoryData, $rootCategory);
+			$this->em->persist($category);
+			$this->em->flush();
+			$this->createCategoryDomains($category, $this->domain->getAll());
+			$this->em->flush();
 
-		return $category;
+			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+
+			$this->em->commit();
+
+			return $category;
+		} catch (Exception $ex) {
+			$this->em->rollback();
+			throw $ex;
+		}
 	}
 
 	/**
@@ -89,15 +98,24 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function edit($categoryId, CategoryData $categoryData) {
-		$rootCategory = $this->categoryRepository->getRootCategory();
-		$category = $this->categoryRepository->getById($categoryId);
-		$this->categoryService->edit($category, $categoryData, $rootCategory);
-		$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
-		$this->em->flush();
+		try {
+			$this->em->beginTransaction();
 
-		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+			$rootCategory = $this->categoryRepository->getRootCategory();
+			$category = $this->categoryRepository->getById($categoryId);
+			$this->categoryService->edit($category, $categoryData, $rootCategory);
+			$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
+			$this->em->flush();
 
-		return $category;
+			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+
+			$this->em->commit();
+
+			return $category;
+		} catch (Exception $ex) {
+			$this->em->rollback();
+			throw $ex;
+		}
 	}
 
 	/**
