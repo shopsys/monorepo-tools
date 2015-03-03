@@ -177,3 +177,5 @@
           route: admin_superadmin_errors
         - label: 'Nastavení prodeje s/bez DPH'
           route: admin_superadmin_pricing
+        - label: Generátor kódu
+          route: admin_superadmin_code_generator
