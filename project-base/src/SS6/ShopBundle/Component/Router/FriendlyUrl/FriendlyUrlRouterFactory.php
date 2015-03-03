@@ -27,17 +27,17 @@ class FriendlyUrlRouterFactory {
 	private $urlMatcher;
 
 	/**
-	 * @var array
+	 * @var string
 	 */
-	private $friendlyUrlRouterConfiguration;
+	private $friendlyUrlRouterResourceFilepath;
 
 	public function __construct(
-		$localeRoutersConfiguration,
+		$friendlyUrlRouterResourceFilepath,
 		DelegatingLoader $delegatingLoader,
 		FriendlyUrlGenerator $urlGenerator,
 		FriendlyUrlMatcher $urlMatcher
 	) {
-		$this->friendlyUrlRouterConfiguration = $localeRoutersConfiguration;
+		$this->friendlyUrlRouterResourceFilepath = $friendlyUrlRouterResourceFilepath;
 		$this->delegatingLoader = $delegatingLoader;
 		$this->urlGenerator = $urlGenerator;
 		$this->urlMatcher = $urlMatcher;
@@ -55,7 +55,7 @@ class FriendlyUrlRouterFactory {
 			$this->urlGenerator,
 			$this->urlMatcher,
 			$domainConfig,
-			$this->friendlyUrlRouterConfiguration
+			$this->friendlyUrlRouterResourceFilepath
 		);
 	}
 

@@ -21,8 +21,8 @@ class SS6ShopExtension extends ConfigurableExtension {
 		$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
 
-		$container->setParameter('ss6_shop.router.locale_routers', $config['router']['locale_routers']);
-		$container->setParameter('ss6_shop.router.friendly_url_router', $config['router']['friendly_url_router']);
+		$container->setParameter('ss6.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
+		$container->setParameter('ss6.router.friendly_url_router_filepath', $config['router']['friendly_url_router_filepath']);
 	}
 
 }

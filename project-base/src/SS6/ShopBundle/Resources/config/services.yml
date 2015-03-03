@@ -777,11 +777,11 @@ services:
 
   ss6.shop.router.friendly_url.friendly_url_router_factory:
     class: SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
-    arguments: [%ss6_shop.router.friendly_url_router%]
+    arguments: [%ss6.router.friendly_url_router_filepath%]
 
   ss6.shop.router.localized_router_factory:
     class: SS6\ShopBundle\Component\Router\LocalizedRouterFactory
-    arguments: [%ss6_shop.router.locale_routers%]
+    arguments: [%ss6.router.locale_router_filepaths%]
 
   ss6.shop.slider.slider_item_facade:
     class: SS6\ShopBundle\Model\Slider\SliderItemFacade

@@ -39,7 +39,7 @@ class FriendlyUrlRouter implements RouterInterface {
 	/**
 	 * @var string
 	 */
-	private $resource;
+	private $friendlyUrlRouterResourceFilepath;
 
 	/**
 	 * @var \Symfony\Component\Routing\RouteCollection
@@ -52,7 +52,7 @@ class FriendlyUrlRouter implements RouterInterface {
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
-	 * @param string $resource
+	 * @param string $friendlyUrlRouterResourceFilepath
 	 */
 	public function __construct(
 		RequestContext $context,
@@ -60,14 +60,14 @@ class FriendlyUrlRouter implements RouterInterface {
 		FriendlyUrlGenerator $friendlyUrlGenerator,
 		FriendlyUrlMatcher $friendlyUrlMatcher,
 		DomainConfig $domainConfig,
-		$resource
+		$friendlyUrlRouterResourceFilepath
 	) {
 		$this->context = $context;
 		$this->delegatingLoader = $delegatingLoader;
 		$this->friendlyUrlGenerator = $friendlyUrlGenerator;
 		$this->friendlyUrlMatcher = $friendlyUrlMatcher;
 		$this->domainConfig = $domainConfig;
-		$this->resource = $resource;
+		$this->friendlyUrlRouterResourceFilepath = $friendlyUrlRouterResourceFilepath;
 	}
 
 	/**
@@ -89,7 +89,7 @@ class FriendlyUrlRouter implements RouterInterface {
 	 */
 	public function getRouteCollection() {
 		if ($this->collection === null) {
-			$this->collection = $this->delegatingLoader->load($this->resource);
+			$this->collection = $this->delegatingLoader->load($this->friendlyUrlRouterResourceFilepath);
 		}
 
 		return $this->collection;
