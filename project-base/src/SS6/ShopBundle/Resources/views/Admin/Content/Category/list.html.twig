@@ -7,28 +7,29 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
+			{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
 
 			<a href="{{ url('admin_category_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou kategorii'|trans }}</a>
 
-			{% macro categoryTreeItem(categories) %}
-				<ul class="js-category-tree-sorting-items">
-					{% for category in categories %}
-						<li class="js-category-tree-sorting-item" id="js-category-tree-{{ category.id }}">
-							<div class="js-category-tree-sorting-item-line">
-								<span class="js-category-tree-sorting-item-handle">{{ category.name }}</span>
-								<span class="js-category-tree-sorting-item-icons">
-									<a href="{{ url('admin_category_edit', {id: category.id}) }}">
+			{% macro categoryTreeItem(categoryDetails) %}
+				<ul class="js-category-tree-items">
+					{% for categoryDetail in categoryDetails %}
+						<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
+							<div class="js-category-tree-item-line">
+								<span class="js-category-tree-item-handle">{{ categoryDetail.category.name }}</span>
+								<span class="js-category-tree-item-icons">
+									<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}">
 										<i class="fa fa-pencil"></i>
 									</a>
 									<a
-										href="{{ url('admin_category_delete', {id: category.id}) }}"
+										href="{{ url('admin_category_delete', {id: categoryDetail.category.id}) }}"
 										onclick="
 											SS6.window({
 												content: '{{ 'Opravdu chcete smazat tuto kategorii?'|trans|e('js') }}',
 												buttonCancel: true,
 												buttonContinue: true,
 												textContinue: '{{ 'Ano'|trans|e('js') }}',
-												urlContinue: '{{ url('admin_category_delete', {id: category.id})|e('js') }}'
+												urlContinue: '{{ url('admin_category_delete', {id: categoryDetail.category.id})|e('js') }}'
 											});
 											return false;"
 									>
@@ -36,23 +37,32 @@
 									</a>
 								</span>
 							</div>
-							{{ _self.categoryTreeItem(category.children) }}
+							{{ _self.categoryTreeItem(categoryDetail.children) }}
 						</li>
 					{% endfor %}
 				</ul>
 			{% endmacro %}
 
-			<div id="js-category-tree-sorting" class="category-tree-sorting mb-1">
-				{{ _self.categoryTreeItem(rootCategories) }}
-			</div>
+			{% if isForAllDomains %}
+				<div id="js-category-tree-sorting" class="category-tree category-tree--sorting mb-1">
+					{{ _self.categoryTreeItem(categoryDetails) }}
+				</div>
 
-			<button
-				class="btn btn-primary btn-disabled"
-				id="js-category-tree-sorting-save-button"
-				data-category-save-order-url="{{ url('admin_category_saveorder') }}"
-			>
-				{{ 'Uložit změny v pořadí'|trans }}
-			</button>
+				<button
+					class="btn btn-primary btn-disabled"
+					id="js-category-tree-sorting-save-button"
+					data-category-save-order-url="{{ url('admin_category_saveorder') }}"
+				>
+					{{ 'Uložit změny v pořadí'|trans }}
+				</button>
+			{% else %}
+				<div class="category-tree mb-1">
+					{{ _self.categoryTreeItem(categoryDetails) }}
+				</div>
+				<div>
+					{{ 'Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén.'|trans }}
+				</div>
+			{% endif %}
 
 		</div>
 	</div>

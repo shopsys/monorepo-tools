@@ -3,9 +3,8 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Form\Admin\Category\CategoryFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Category\CategoryData;
+use SS6\ShopBundle\Model\Category\CategoryDataFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,15 +21,15 @@ class CategoryController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
+		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
+		$categoryDataFactory = $this->get(CategoryDataFactory::class);
+		/* @var $categoryDataFactory \SS6\ShopBundle\Model\Category\CategoryDataFactory */
 
 		$category = $categoryFacade->getById($id);
-		$form = $this->createForm(new CategoryFormType($categoryFacade->getAllWithoutBranch($category)));
+		$form = $this->createForm($categoryFormTypeFactory->createForCategory($category));
 
-		$categoryData = new CategoryData();
-
-		if (!$form->isSubmitted()) {
-			$categoryData->setFromEntity($category);
-		}
+		$categoryData = $categoryDataFactory->createFromCategory($category);
 
 		$form->setData($categoryData);
 		$form->handleRequest($request);
@@ -68,10 +67,14 @@ class CategoryController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
+		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
+		$categoryDataFactory = $this->get(CategoryDataFactory::class);
+		/* @var $categoryDataFactory \SS6\ShopBundle\Model\Category\CategoryDataFactory */
 
-		$form = $this->createForm(new CategoryFormType($categoryFacade->getAll()));
+		$form = $this->createForm($categoryFormTypeFactory->create());
 
-		$categoryData = new CategoryData();
+		$categoryData = $categoryDataFactory->createDefault();
 
 		$form->setData($categoryData);
 		$form->handleRequest($request);
@@ -99,13 +102,41 @@ class CategoryController extends Controller {
 
 	/**
 	 * @Route("/category/list/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function listAction() {
+	public function listAction(Request $request) {
+		$session = $this->get('session');
+		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
+		if ($request->query->has('domain')) {
+			$domainId = (int)$request->query->get('domain');
+		} else {
+			$domainId = (int)$session->get('categories_selected_domain_id', 0);
+		}
+
+		if ($domainId !== 0) {
+			try {
+				$domain->getDomainConfigById($domainId);
+			} catch (\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException $ex) {
+				$domainId = 0;
+			}
+		}
+
+		$session->set('categories_selected_domain_id', $domainId);
+
+		if ($domainId === 0) {
+			$categoryDetails = $categoryFacade->getAllCategoryDetails($request->getLocale());
+		} else {
+			$categoryDetails = $categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
+		}
+
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
-			'rootCategories' => $categoryFacade->getAllInRootEagerLoaded(),
+			'categoryDetails' => $categoryDetails,
+			'isForAllDomains' => ($domainId === 0),
 		]);
 	}
 
@@ -152,6 +183,23 @@ class CategoryController extends Controller {
 		}
 
 		return $this->redirect($this->generateUrl('admin_category_list'));
+	}
+
+	public function listDomainTabsAction() {
+		$session = $this->get('session');
+		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+		$domain = $this->get('ss6.shop.domain');
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$localization = $this->get('ss6.shop.localization.localization');
+		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
+
+		$domainId = $session->get('categories_selected_domain_id', 0);
+
+		return $this->render('@SS6Shop/Admin/Content/Category/domainTabs.html.twig', [
+			'domainConfigs' => $domain->getAll(),
+			'selectedDomainId' => $domainId,
+			'multipleLocales' => count($localization->getAllLocales()) > 1,
+		]);
 	}
 
 }

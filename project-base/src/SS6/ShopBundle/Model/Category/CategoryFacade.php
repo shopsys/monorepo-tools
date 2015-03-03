@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Category\CategoryService;
+use SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryFacade {
@@ -30,16 +32,30 @@ class CategoryFacade {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler
+	 */
+	private $categoryVisibilityRecalculationScheduler;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory
+	 */
+	private $categoryDetailFactory;
+
 	public function __construct(
 		EntityManager $em,
 		CategoryRepository $categoryRepository,
 		CategoryService $categoryService,
-		Domain $domain
+		Domain $domain,
+		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
+		CategoryDetailFactory $categoryDetailFactory
 	) {
 		$this->em = $em;
 		$this->categoryRepository = $categoryRepository;
 		$this->categoryService = $categoryService;
 		$this->domain = $domain;
+		$this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
+		$this->categoryDetailFactory = $categoryDetailFactory;
 	}
 
 	/**
@@ -55,12 +71,25 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function create(CategoryData $categoryData) {
-		$rootCategory = $this->categoryRepository->getRootCategory();
-		$category = $this->categoryService->create($categoryData, $rootCategory);
-		$this->em->persist($category);
-		$this->em->flush();
+		try {
+			$this->em->beginTransaction();
 
-		return $category;
+			$rootCategory = $this->categoryRepository->getRootCategory();
+			$category = $this->categoryService->create($categoryData, $rootCategory);
+			$this->em->persist($category);
+			$this->em->flush();
+			$this->createCategoryDomains($category, $this->domain->getAll());
+			$this->em->flush();
+
+			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+
+			$this->em->commit();
+
+			return $category;
+		} catch (Exception $ex) {
+			$this->em->rollback();
+			throw $ex;
+		}
 	}
 
 	/**
@@ -69,12 +98,50 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function edit($categoryId, CategoryData $categoryData) {
-		$rootCategory = $this->categoryRepository->getRootCategory();
-		$category = $this->categoryRepository->getById($categoryId);
-		$this->categoryService->edit($category, $categoryData, $rootCategory);
-		$this->em->flush();
+		try {
+			$this->em->beginTransaction();
 
-		return $category;
+			$rootCategory = $this->categoryRepository->getRootCategory();
+			$category = $this->categoryRepository->getById($categoryId);
+			$this->categoryService->edit($category, $categoryData, $rootCategory);
+			$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
+			$this->em->flush();
+
+			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+
+			$this->em->commit();
+
+			return $category;
+		} catch (Exception $ex) {
+			$this->em->rollback();
+			throw $ex;
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domainConfigs
+	 */
+	private function createCategoryDomains(Category $category, array $domainConfigs) {
+		foreach ($domainConfigs as $domainConfig) {
+			$categoryDomain = new CategoryDomain($category, $domainConfig->getId());
+			$this->em->persist($categoryDomain);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int[] $hiddenOnDomainData
+	 */
+	private function refreshCategoryDomains(Category $category, array $hiddenOnDomainData) {
+		$categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
+		foreach ($categoryDomains as $categoryDomain) {
+			if (in_array($categoryDomain->getDomainId(), $hiddenOnDomainData)) {
+				$categoryDomain->setHidden(true);
+			} else {
+				$categoryDomain->setHidden(false);
+			}
+		}
 	}
 
 	/**
@@ -125,23 +192,32 @@ class CategoryFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getAllInRootWithTranslation() {
-		$locale = $this->domain->getLocale();
-		return $this->categoryRepository->getAllInRootWithTranslation($locale);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
-	 */
-	public function getAllInRootEagerLoaded() {
-		return $this->categoryRepository->getAllInRootEagerLoaded();
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
-	 */
 	public function getAll() {
 		return $this->categoryRepository->getAll();
+	}
+
+	/**
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
+	public function getAllCategoryDetails($locale) {
+		$categories = $this->categoryRepository->getPreOrderTreeTraversalForAllCategories($locale);
+		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+
+		return $categoryDetails;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
+	public function getVisibleCategoryDetailsForDomain($domainId, $locale) {
+		$categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale);
+
+		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+
+		return $categoryDetails;
 	}
 
 	/**
