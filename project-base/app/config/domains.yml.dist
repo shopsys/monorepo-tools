@@ -1,11 +1,13 @@
-config_version: 1416573968
+config_version: 1425041547
 domains:
   - id: 1
-    domain: localhost
+    url: http://localhost:8080
+    name: localhost
     locale: cs
     templates_directory: cz
 
   - id: 2
-    domain: localhosten
+    url: http://2.localhost:8080
+    name: localhosten
     locale: en
     templates_directory: en

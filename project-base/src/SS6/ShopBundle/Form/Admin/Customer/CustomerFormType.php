@@ -19,11 +19,6 @@ class CustomerFormType extends AbstractType {
 	private $scenario;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
-	 */
-	private $domains;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
@@ -35,13 +30,11 @@ class CustomerFormType extends AbstractType {
 
 	/**
 	 * @param string $scenario
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]|null $domains
 	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
 	 */
-	public function __construct($scenario, $domains = null, $selectedDomain = null, $pricingGroups = null) {
+	public function __construct($scenario, $selectedDomain = null, $pricingGroups = null) {
 		$this->scenario = $scenario;
-		$this->domains = $domains;
 		$this->selectedDomain = $selectedDomain;
 		$this->pricingGroups = $pricingGroups;
 	}
@@ -59,7 +52,7 @@ class CustomerFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('userData', new UserFormType($this->scenario, $this->domains, $this->selectedDomain, $this->pricingGroups))
+			->add('userData', new UserFormType($this->scenario, $this->selectedDomain, $this->pricingGroups))
 			->add('billingAddressData', new BillingAddressFormType())
 			->add('deliveryAddressData', new DeliveryAddressFormType())
 			->add('save', FormType::SUBMIT);

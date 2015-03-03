@@ -33,12 +33,13 @@ class OverviewController extends Controller {
 		$domain = $this->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
-		$domainConfigs = $domain->getAll();
 		$data = [];
-		foreach ($domainConfigs as $id => $domainDetail) {
-			$data[$id]['id'] = $id;
-			$data[$id]['name'] = $domainDetail->getDomain();
-			$data[$id]['locale'] =  $domainDetail->getLocale();
+		foreach ($domain->getAll() as $domainConfig) {
+			$data[] = [
+				'id' => $domainConfig->getId(),
+				'name' => $domainConfig->getName(),
+				'locale' =>  $domainConfig->getLocale(),
+			];
 		}
 
 		return $data;

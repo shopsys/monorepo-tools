@@ -8,12 +8,11 @@ use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Routing\RequestContext;
 
 class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 
 	public function testDelegateRouter() {
-		$domainConfigs = new DomainConfig(1, 'example.com', 'en', 'en');
+		$domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en', 'en');
 		$domain = new Domain([$domainConfigs]);
 		$domain->switchDomainById(1);
 
@@ -34,8 +33,6 @@ class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$domainRouterFactoryMock->expects($this->exactly(3))->method('getRouter')->willReturn($routerMock);
-
-		$context = new RequestContext();
 
 		$currentDomainRouter = new CurrentDomainRouter($domain, $domainRouterFactoryMock);
 

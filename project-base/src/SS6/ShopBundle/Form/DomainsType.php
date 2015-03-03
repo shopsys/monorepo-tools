@@ -26,7 +26,7 @@ class DomainsType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$choices = [];
 		foreach ($this->domain->getAll() as $domainConfig) {
-			$choices[$domainConfig->getId()] = $domainConfig->getDomain();
+			$choices[$domainConfig->getId()] = $domainConfig->getName();
 		}
 
 		$resolver->setDefaults([

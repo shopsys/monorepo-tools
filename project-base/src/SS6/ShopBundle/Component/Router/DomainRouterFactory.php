@@ -6,8 +6,6 @@ use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Config\Loader\DelegatingLoader;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
@@ -17,11 +15,6 @@ class DomainRouterFactory {
 	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
 	private $localizedRouterFactory;
-
-	/**
-	 * @var \Symfony\Component\HttpFoundation\RequestStack
-	 */
-	private $requestStack;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -45,13 +38,11 @@ class DomainRouterFactory {
 
 	public function __construct(
 		$routerConfiguration,
-		RequestStack $requestStack,
 		DelegatingLoader $delegatingLoader,
 		LocalizedRouterFactory $localizedRouterFactory,
 		Domain $domain
 	) {
 		$this->routerConfiguration = $routerConfiguration;
-		$this->requestStack = $requestStack;
 		$this->delegatingLoader = $delegatingLoader;
 		$this->localizedRouterFactory = $localizedRouterFactory;
 		$this->domain = $domain;
@@ -95,18 +86,19 @@ class DomainRouterFactory {
 	 * @return \Symfony\Component\Routing\RequestContext
 	 */
 	private function getRequestContextByDomainConfig(DomainConfig $domainConfig) {
-		$requestContext = new RequestContext();
-		$masterRequest = $this->requestStack->getMasterRequest();
-		if ($masterRequest === null) {
-			$masterRequest = new Request();
-		}
-		$masterHost = $masterRequest->getHost();
-		$domainHost = $domainConfig->getDomain();
+		$urlComponents = parse_url($domainConfig->getUrl());
+		$requestContext = new RequestContext($domainConfig->getUrl());
 
-		$requestContext->fromRequest($masterRequest);
-		$requestContext->setHost($domainHost);
-		$requestContext->setBaseUrl(str_replace($masterHost, $domainHost, $masterRequest->getBaseUrl()));
-		$requestContext->setPathInfo(str_replace($masterHost, $domainHost, $masterRequest->getPathInfo()));
+		$requestContext->setScheme($urlComponents['scheme']);
+		$requestContext->setHost($urlComponents['host']);
+
+		if (array_key_exists('port', $urlComponents)) {
+			if ($urlComponents['scheme'] === 'http') {
+			$requestContext->setHttpPort($urlComponents['port']);
+			} elseif ($urlComponents['scheme'] === 'https') {
+				$requestContext->setHttpsPort($urlComponents['post']);
+			}
+		}
 
 		return $requestContext;
 	}
