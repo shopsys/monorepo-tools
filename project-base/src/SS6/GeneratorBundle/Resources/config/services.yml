@@ -1,7 +1,7 @@
 services:
 
-  ss6.generator.generator_collection:
-    class: SS6\GeneratorBundle\Model\GeneratorCollection
+  ss6.generator.generator_collection_factory:
+    class: SS6\GeneratorBundle\Model\GeneratorCollectionFactory
     arguments:
       - [%kernel.root_dir%/../src/SS6/GeneratorBundle/Resources/skeletons/]
 

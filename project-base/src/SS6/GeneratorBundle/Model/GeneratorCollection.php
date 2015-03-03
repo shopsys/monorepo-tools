@@ -3,7 +3,6 @@
 namespace SS6\GeneratorBundle\Model;
 
 use SS6\GeneratorBundle\Model\AbstractGenerator;
-use SS6\GeneratorBundle\Model\Generator\RepositoryGenerator;
 use SS6\GeneratorBundle\Model\GeneratorInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -21,15 +20,16 @@ class GeneratorCollection {
 	private $twig;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $skeletonDirs;
 
-	public function __construct(array $skeletonDirs, RepositoryGenerator $repositoryGenerator) {
+	/**
+	 * @param string[] $skeletonDirs
+	 */
+	public function __construct(array $skeletonDirs) {
 		$this->generatorsByName = [];
 		$this->skeletonDirs = $skeletonDirs;
-
-		$this->addGenerator($repositoryGenerator);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace SS6\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\GeneratorCollection;
+use SS6\GeneratorBundle\Model\GeneratorCollectionFactory;
 use SS6\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -20,10 +20,10 @@ class GeneratorFacade {
 
 	public function __construct(
 		KernelInterface $kernel,
-		GeneratorCollection $generatorCollection
+		GeneratorCollectionFactory $generatorCollectionFactory
 	) {
 		$this->kernel = $kernel;
-		$this->generatorCollection = $generatorCollection;
+		$this->generatorCollection = $generatorCollectionFactory->create();
 	}
 
 	/**

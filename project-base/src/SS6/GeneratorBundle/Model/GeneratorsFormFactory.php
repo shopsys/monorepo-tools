@@ -2,7 +2,7 @@
 
 namespace SS6\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\GeneratorCollection;
+use SS6\GeneratorBundle\Model\GeneratorCollectionFactory;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,11 +30,11 @@ class GeneratorsFormFactory {
 
 	public function __construct(
 		KernelInterface $kernel,
-		GeneratorCollection $generatorCollection,
+		GeneratorCollectionFactory $generatorCollectionFactory,
 		FormFactoryInterface $formFactory
 	) {
 		$this->kernel = $kernel;
-		$this->generatorCollection = $generatorCollection;
+		$this->generatorCollection = $generatorCollectionFactory->create();
 		$this->formFactory = $formFactory;
 	}
 
