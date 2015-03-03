@@ -12,12 +12,12 @@
 			<a href="{{ url('admin_category_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou kategorii'|trans }}</a>
 
 			{% macro categoryTreeItem(categoryDetails) %}
-				<ul class="js-category-tree-sorting-items">
+				<ul class="js-category-tree-items">
 					{% for categoryDetail in categoryDetails %}
-						<li class="js-category-tree-sorting-item" id="js-category-tree-{{ categoryDetail.category.id }}">
-							<div class="js-category-tree-sorting-item-line">
-								<span class="js-category-tree-sorting-item-handle">{{ categoryDetail.category.name }}</span>
-								<span class="js-category-tree-sorting-item-icons">
+						<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
+							<div class="js-category-tree-item-line">
+								<span class="js-category-tree-item-handle">{{ categoryDetail.category.name }}</span>
+								<span class="js-category-tree-item-icons">
 									<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}">
 										<i class="fa fa-pencil"></i>
 									</a>
@@ -43,11 +43,11 @@
 				</ul>
 			{% endmacro %}
 
-			<div id="js-category-tree-sorting" class="category-tree-sorting mb-1">
-				{{ _self.categoryTreeItem(categoryDetails) }}
-			</div>
+			{% if isForAllDomains %}
+				<div id="js-category-tree-sorting" class="category-tree category-tree--sorting mb-1">
+					{{ _self.categoryTreeItem(categoryDetails) }}
+				</div>
 
-			{% if allDomains %}
 				<button
 					class="btn btn-primary btn-disabled"
 					id="js-category-tree-sorting-save-button"
@@ -55,6 +55,10 @@
 				>
 					{{ 'Uložit změny v pořadí'|trans }}
 				</button>
+			{% else %}
+				<div class="category-tree mb-1">
+					{{ _self.categoryTreeItem(categoryDetails) }}
+				</div>
 			{% endif %}
 
 		</div>

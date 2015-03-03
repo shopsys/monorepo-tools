@@ -6,7 +6,7 @@
 
 	$(document).ready(function () {
 		var sorting = new SS6.categoryTree.sorting.constructor(
-			$('#js-category-tree-sorting > .js-category-tree-sorting-items'),
+			$('#js-category-tree-sorting > .js-category-tree-items'),
 			$('#js-category-tree-sorting-save-button')
 		);
 		sorting.init();
@@ -20,10 +20,10 @@
 		self.init = function () {
 			self.$rootTree.nestedSortable({
 				listType: 'ul',
-				handle: '.js-category-tree-sorting-item-handle',
-				items: '.js-category-tree-sorting-item',
-				placeholder: 'js-category-tree-sorting-placeholder',
-				toleranceElement: '> .js-category-tree-sorting-item-line',
+				handle: '.js-category-tree-item-handle',
+				items: '.js-category-tree-item',
+				placeholder: 'js-category-tree-placeholder',
+				toleranceElement: '> .js-category-tree-item-line',
 				forcePlaceholderSize: true,
 				helper:	'clone',
 				opacity: 0.6,

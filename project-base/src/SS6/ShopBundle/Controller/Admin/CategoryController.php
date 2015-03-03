@@ -136,7 +136,7 @@ class CategoryController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
 			'categoryDetails' => $categoryDetails,
-			'allDomains' => ($domainId === 0),
+			'isForAllDomains' => ($domainId === 0),
 		]);
 	}
 
