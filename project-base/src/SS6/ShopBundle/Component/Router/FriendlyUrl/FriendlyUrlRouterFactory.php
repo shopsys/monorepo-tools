@@ -4,10 +4,12 @@ namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCompiler;
 
 class FriendlyUrlRouterFactory {
 
@@ -17,14 +19,14 @@ class FriendlyUrlRouterFactory {
 	private $delegatingLoader;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
+	 * @var \Symfony\Component\Routing\RouteCompiler
 	 */
-	private $urlGenerator;
+	private $routeCompiler;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
 	 */
-	private $urlMatcher;
+	private $friendlyUrlRepository;
 
 	/**
 	 * @var string
@@ -34,13 +36,13 @@ class FriendlyUrlRouterFactory {
 	public function __construct(
 		$friendlyUrlRouterResourceFilepath,
 		DelegatingLoader $delegatingLoader,
-		FriendlyUrlGenerator $urlGenerator,
-		FriendlyUrlMatcher $urlMatcher
+		RouteCompiler $routeCompiler,
+		FriendlyUrlRepository $friendlyUrlRepository
 	) {
 		$this->friendlyUrlRouterResourceFilepath = $friendlyUrlRouterResourceFilepath;
 		$this->delegatingLoader = $delegatingLoader;
-		$this->urlGenerator = $urlGenerator;
-		$this->urlMatcher = $urlMatcher;
+		$this->routeCompiler = $routeCompiler;
+		$this->friendlyUrlRepository = $friendlyUrlRepository;
 	}
 
 	/**
@@ -52,8 +54,8 @@ class FriendlyUrlRouterFactory {
 		return new FriendlyUrlRouter(
 			$context,
 			$this->delegatingLoader,
-			$this->urlGenerator,
-			$this->urlMatcher,
+			new FriendlyUrlGenerator($context, $this->routeCompiler, $this->friendlyUrlRepository),
+			new FriendlyUrlMatcher($this->friendlyUrlRepository),
 			$domainConfig,
 			$this->friendlyUrlRouterResourceFilepath
 		);
