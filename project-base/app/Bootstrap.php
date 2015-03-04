@@ -15,6 +15,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/AppKernel.php';
 require_once __DIR__ . '/../app/Environment.php';
 
+setlocale(LC_CTYPE, 'en_US.utf8');
+
 class Bootstrap {
 	private $environment;
 	private $console;
