@@ -44,7 +44,7 @@ front_order_sent:
   pattern: /potvrzeni-objednavky/
   defaults: { _controller: SS6ShopBundle:Front\Order:sent }
 
-front_product_category:
+front_product_list:
   pattern: /produkty/kategorie/{categoryId}/{page}
   defaults: {_controller: SS6ShopBundle:Front\Product:listByCategory, page: 1 }
   requirements:
