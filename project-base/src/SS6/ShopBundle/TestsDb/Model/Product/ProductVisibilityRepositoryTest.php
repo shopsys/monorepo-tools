@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\TestsDb\Model\Product;
 
 use DateTime;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
@@ -16,6 +17,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 */
 	private function getDefaultProductEditData() {
+		$category = $this->getReference(CategoryDataFixture::ELECTRONICS);
+
 		$em = $this->getEntityManager();
 		$vat = new Vat(new VatData('vat', 21));
 		$em->persist($vat);
@@ -26,6 +29,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->price = 100;
 		$productEditData->productData->hidden = false;
 		$productEditData->productData->hiddenOnDomains = [];
+		$productEditData->productData->categories = [$category];
+
 		return $productEditData;
 	}
 
@@ -199,6 +204,44 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->name = ['cs' => 'Name'];
+		$product = $productEditFacade->create($productEditData);
+
+		$productId = $product->getId();
+		$em->clear();
+
+		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
+
+		$productFromDb = $em->getRepository(Product::class)->find($productId);
+		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
+
+		$productDomain1 = $em->getRepository(ProductDomain::class)->find([
+			'product' => $productId,
+			'domainId' => 1,
+		]);
+		/* @var $productDomain1 \SS6\ShopBundle\Model\Product\ProductDomain */
+
+		$productDomain2 = $em->getRepository(ProductDomain::class)->find([
+			'product' => $productId,
+			'domainId' => 2,
+		]);
+		/* @var $productDomain2 \SS6\ShopBundle\Model\Product\ProductDomain */
+
+		$this->assertTrue($productFromDb->isVisible());
+		$this->assertTrue($productDomain1->isVisible());
+		$this->assertFalse($productDomain2->isVisible());
+	}
+
+	public function testIsVisibleAccordingToVisibilityOfCategory() {
+		$em = $this->getEntityManager();
+		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+
+		$category = $this->getReference(CategoryDataFixture::TOYS);
+
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->categories = [$category];
 		$product = $productEditFacade->create($productEditData);
 
 		$productId = $product->getId();

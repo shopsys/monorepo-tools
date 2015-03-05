@@ -298,7 +298,7 @@ services:
   ss6.shop.category.category_visibility_repository:
     class: SS6\ShopBundle\Model\Category\CategoryVisibilityRepository
     tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
   ss6.shop.category.category_service:
     class: SS6\ShopBundle\Model\Category\CategoryService
@@ -767,7 +767,7 @@ services:
   ss6.shop.product.product_visibility_facade:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityFacade
     tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
 
   ss6.shop.product.product_visibility_repository:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityRepository

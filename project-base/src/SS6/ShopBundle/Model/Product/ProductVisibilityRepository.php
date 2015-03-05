@@ -68,6 +68,14 @@ class ProductVisibilityRepository {
 										AND pt.locale = :locale
 										AND pt.name IS NOT NULL
 								)
+								AND EXISTS (
+									SELECT 1
+									FROM product_categories AS pc
+									JOIN category_domains AS cd ON cd.category_id = pc.category_id
+										AND cd.domain_id = pd.domain_id
+									WHERE pc.product_id = p.id
+										AND cd.visible = TRUE
+								)
 							)
 							THEN TRUE
 							ELSE FALSE
