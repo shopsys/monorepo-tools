@@ -7,6 +7,7 @@ use ReflectionParameter;
 use SS6\AutoServicesBundle\Compiler\ClassConstructorFiller;
 use SS6\AutoServicesBundle\Compiler\ContainerClassList;
 use SS6\AutoServicesBundle\Compiler\ServiceHelper;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -127,10 +128,20 @@ class ParameterProcessor {
 		$constructor = $reflection->getConstructor();
 		$this->classConstructorFilter->autowireParams($constructor, $serviceId, $definition, $containerClassList);
 		$this->containerBuilder->setDefinition($serviceId, $definition);
+		$this->watchServiceClassForChanges($reflection);
 		$containerClassList->addClass($serviceId, $class);
 		unset($this->loading[$class]);
 
 		return $serviceId;
+	}
+
+	/**
+	 * @param \ReflectionClass $reflectionClass
+	 */
+	private function watchServiceClassForChanges(ReflectionClass $reflectionClass) {
+		do {
+			$this->containerBuilder->addResource(new FileResource($reflectionClass->getFileName()));
+		} while ($reflectionClass = $reflectionClass->getParentClass());
 	}
 
 }

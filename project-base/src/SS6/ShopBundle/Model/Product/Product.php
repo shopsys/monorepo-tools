@@ -243,6 +243,18 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return string[locale]
+	 */
+	public function getNames() {
+		$names = [];
+		foreach ($this->translations as $translation) {
+			$names[$translation->getLocale()] = $translation->getName();
+		}
+
+		return $names;
+	}
+
+	/**
 	 * @return string|null
 	 */
 	public function getCatnum() {

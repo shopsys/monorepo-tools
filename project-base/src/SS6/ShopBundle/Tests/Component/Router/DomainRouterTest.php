@@ -13,8 +13,9 @@ class DomainRouterTest extends PHPUnit_Framework_TestCase {
 		$context = new RequestContext();
 		$basicRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
 		$localizedRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
+		$friendlyUrlRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
 
-		$domainRouter = new DomainRouter($context, $basicRouterMock, $localizedRouterMock);
+		$domainRouter = new DomainRouter($context, $basicRouterMock, $localizedRouterMock, $friendlyUrlRouterMock);
 		$this->setExpectedException(\SS6\ShopBundle\Component\Router\Exception\NotSupportedException::class);
 		$domainRouter->setContext($context);
 	}

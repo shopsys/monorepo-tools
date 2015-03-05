@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Router;
 
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
 use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -15,6 +16,11 @@ class DomainRouterFactory {
 	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
 	private $localizedRouterFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
+	 */
+	private $friendlyUrlRouterFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -40,12 +46,14 @@ class DomainRouterFactory {
 		$routerConfiguration,
 		DelegatingLoader $delegatingLoader,
 		LocalizedRouterFactory $localizedRouterFactory,
+		FriendlyUrlRouterFactory $friendlyUrlRouterFactory,
 		Domain $domain
 	) {
 		$this->routerConfiguration = $routerConfiguration;
 		$this->delegatingLoader = $delegatingLoader;
 		$this->localizedRouterFactory = $localizedRouterFactory;
 		$this->domain = $domain;
+		$this->friendlyUrlRouterFactory = $friendlyUrlRouterFactory;
 	}
 
 	/**
@@ -62,7 +70,13 @@ class DomainRouterFactory {
 			$context = $this->getRequestContextByDomainConfig($domainConfig);
 			$basicRouter = $this->getBasicRouter($domainConfig);
 			$localizedRouter = $this->localizedRouterFactory->getRouter($domainConfig->getLocale(), $context);
-			$this->routersByDomainId[$domainId] = new DomainRouter($context, $basicRouter, $localizedRouter);
+			$friendlyUrlRouterFactory = $this->friendlyUrlRouterFactory->createRouter($domainConfig, $context);
+			$this->routersByDomainId[$domainId] = new DomainRouter(
+				$context,
+				$basicRouter,
+				$localizedRouter,
+				$friendlyUrlRouterFactory
+			);
 		}
 
 		return $this->routersByDomainId[$domainId];

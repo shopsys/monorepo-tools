@@ -14,18 +14,18 @@ class LocalizedRouterFactory {
 	private $delegatingLoader;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	private $localeRoutersConfiguration;
+	private $localeRoutersResourcesFilepaths;
 
 	/**
-	 * @var array
+	 * @var \Symfony\Component\Routing\Router[locale][host]
 	 */
 	private $routersByLocaleAndHost;
 
-	public function __construct($localeRoutersConfiguration, DelegatingLoader $delegatingLoader) {
+	public function __construct($localeRoutersResourcesFilepaths, DelegatingLoader $delegatingLoader) {
 		$this->delegatingLoader = $delegatingLoader;
-		$this->localeRoutersConfiguration = $localeRoutersConfiguration;
+		$this->localeRoutersResourcesFilepaths = $localeRoutersResourcesFilepaths;
 		$this->routersByLocaleAndHost = [];
 	}
 
@@ -35,7 +35,7 @@ class LocalizedRouterFactory {
 	 * @return \Symfony\Component\Routing\Router
 	 */
 	public function getRouter($locale, RequestContext $context) {
-		if (!array_key_exists($locale, $this->localeRoutersConfiguration)) {
+		if (!array_key_exists($locale, $this->localeRoutersResourcesFilepaths)) {
 			$message = 'Router with locale "' . $locale . '" does not have localized data.';
 			throw new \SS6\ShopBundle\Component\Router\Exception\RouterNotResolvedException($message);
 		}
@@ -45,7 +45,7 @@ class LocalizedRouterFactory {
 		) {
 			$this->routersByLocaleAndHost[$locale][$context->getHost()] = new Router(
 				$this->delegatingLoader,
-				$this->localeRoutersConfiguration[$locale],
+				$this->localeRoutersResourcesFilepaths[$locale],
 				[],
 				$context
 			);

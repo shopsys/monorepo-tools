@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
@@ -76,6 +77,11 @@ class ProductEditFacade {
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -87,7 +93,8 @@ class ProductEditFacade {
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
 		PricingGroupRepository $pricingGroupRepository,
 		ProductManualInputPriceFacade $productManualInputPriceFacade,
-		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -100,6 +107,7 @@ class ProductEditFacade {
 		$this->pricingGroupRepository = $pricingGroupRepository;
 		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -125,6 +133,7 @@ class ProductEditFacade {
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
+		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 		$this->em->commit();
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
@@ -151,6 +160,7 @@ class ProductEditFacade {
 		$this->em->flush();
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
+		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 		$this->em->commit();
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);

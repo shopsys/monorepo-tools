@@ -18,6 +18,7 @@ class DomainRouter extends ChainRouter {
 		RequestContext $context,
 		RouterInterface $basicRouter,
 		RouterInterface $localizedRouter,
+		RouterInterface $friendlyUrlRouter,
 		LoggerInterface $logger = null
 	) {
 		parent::__construct($logger);
@@ -26,6 +27,7 @@ class DomainRouter extends ChainRouter {
 
 		$this->add($basicRouter, 10);
 		$this->add($localizedRouter, 20);
+		$this->add($friendlyUrlRouter, 30);
 	}
 
 	public function setContext(RequestContext $context) {
