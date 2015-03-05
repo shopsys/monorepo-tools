@@ -3,16 +3,59 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
+use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleData;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class ArticleController extends Controller {
+class ArticleController extends BaseController {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 */
+	private $articleEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 */
+	private $administratorGridFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	public function __construct(
+		ArticleEditFacade $articleEditFacade,
+		AdministratorGridFacade $administratorGridFacade,
+		GridFactory $gridFactory,
+		SelectedDomain $selectedDomain,
+		Breadcrumb $breadcrumb
+	) {
+		$this->articleEditFacade = $articleEditFacade;
+		$this->administratorGridFacade = $administratorGridFacade;
+		$this->gridFactory = $gridFactory;
+		$this->selectedDomain = $selectedDomain;
+		$this->breadcrumb = $breadcrumb;
+	}
 
 	/**
 	 * @Route("/article/edit/{id}", requirements={"id" = "\d+"})
@@ -20,12 +63,7 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$articleEditFacade = $this->get(ArticleEditFacade::class);
-		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
-
-		$article = $articleEditFacade->getById($id);
+		$article = $this->articleEditFacade->getById($id);
 		$form = $this->createForm(new ArticleFormType());
 
 		$articleData = new ArticleData();
@@ -38,22 +76,21 @@ class ArticleController extends Controller {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$articleEditFacade->edit($id, $articleData);
+			$this->articleEditFacade->edit($id, $articleData);
 
-			$flashMessageSender->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $article->getName(),
-				'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
-			]);
+			$this->getFlashMessageSender()
+				->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
+					'name' => $article->getName(),
+					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+				]);
 			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace článku - ' . $article->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem('Editace článku - ' . $article->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
@@ -65,24 +102,18 @@ class ArticleController extends Controller {
 	 * @Route("/article/list/")
 	 */
 	public function listAction() {
-		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
-		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
 			->select('a')
 			->from(Article::class, 'a')
 			->where('a.domainId = :selectedDomainId')
-			->setParameter('selectedDomainId', $selectedDomain->getId());
+			->setParameter('selectedDomainId', $this->selectedDomain->getId());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
-		$grid = $gridFactory->create('articleList', $dataSource);
+		$grid = $this->gridFactory->create('articleList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
@@ -95,7 +126,7 @@ class ArticleController extends Controller {
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
 
-		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
+		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -107,35 +138,29 @@ class ArticleController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
-
 		$form = $this->createForm(new ArticleFormType());
 
 		$articleData = new ArticleData();
-		$articleData->domainId = $selectedDomain->getId();
+		$articleData->domainId = $this->selectedDomain->getId();
 
 		$form->setData($articleData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
 			$articleData = $form->getData();
-			$articleEditFacade = $this->get(ArticleEditFacade::class);
-			/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
 
-			$article = $articleEditFacade->create($articleData);
+			$article = $this->articleEditFacade->create($articleData);
 
-			$flashMessageSender->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $article->getName(),
-				'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
-			]);
+			$this->getFlashMessageSender()
+				->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
+					'name' => $article->getName(),
+					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+				]);
 			return $this->redirect($this->generateUrl('admin_article_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', [
@@ -148,20 +173,15 @@ class ArticleController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$articleEditFacade = $this->get(ArticleEditFacade::class);
-		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
-
 		try {
-			$fullName = $articleEditFacade->getById($id)->getName();
-			$articleEditFacade->delete($id);
+			$fullName = $this->articleEditFacade->getById($id)->getName();
+			$this->articleEditFacade->delete($id);
 
-			$flashMessageSender->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
 			]);
 		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolený článek neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolený článek neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_article_list'));
