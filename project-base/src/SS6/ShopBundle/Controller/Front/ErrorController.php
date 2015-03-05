@@ -79,7 +79,7 @@ class ErrorController extends Controller {
 
 		ob_start();
 		$blueScreen->render($exception);
-		$blueScreenHtml = ob_get_clean();
+		$blueScreenHtml = ob_get_contents();
 		ob_end_clean();
 
 		return new Response($blueScreenHtml);
