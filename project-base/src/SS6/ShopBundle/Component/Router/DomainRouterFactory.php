@@ -103,12 +103,16 @@ class DomainRouterFactory {
 		$urlComponents = parse_url($domainConfig->getUrl());
 		$requestContext = new RequestContext();
 
+		if (array_key_exists('path', $urlComponents)) {
+			$requestContext->setBaseUrl($urlComponents['path']);
+		}
+
 		$requestContext->setScheme($urlComponents['scheme']);
 		$requestContext->setHost($urlComponents['host']);
 
 		if (array_key_exists('port', $urlComponents)) {
 			if ($urlComponents['scheme'] === 'http') {
-			$requestContext->setHttpPort($urlComponents['port']);
+				$requestContext->setHttpPort($urlComponents['port']);
 			} elseif ($urlComponents['scheme'] === 'https') {
 				$requestContext->setHttpsPort($urlComponents['post']);
 			}

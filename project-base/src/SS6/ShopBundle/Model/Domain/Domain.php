@@ -83,7 +83,7 @@ class Domain {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function switchDomainByRequest(Request $request) {
-		$url = $request->getSchemeAndHttpHost();
+		$url = $request->getUriForPath('');
 
 		foreach ($this->domainConfigs as $domainConfig) {
 			if ($domainConfig->getUrl() === $url) {
