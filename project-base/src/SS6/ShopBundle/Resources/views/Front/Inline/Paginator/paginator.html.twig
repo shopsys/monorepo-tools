@@ -14,12 +14,16 @@
 					{% if paginationResult.page > 1 %}
 						<li>
 							{% set routeParams = routeParams|merge({'page': paginationResult.page - 1}) %}
-							<a href="{{ path(route, routeParams) }}">&lt;</a>
+							<a href="{{ path(route, routeParams) }}" rel ="prev">&lt;</a>
 						</li>
 
 						<li>
 							{% set routeParams = routeParams|merge({'page': 1}) %}
-							<a href="{{ path(route, routeParams) }}">1</a>
+							{% if paginationResult.page == 2 %}
+								<a href="{{ path(route, routeParams) }}" rel="prev">1</a>
+							{% else %}
+								<a href="{{ path(route, routeParams) }}">1</a>
+							{% endif %}
 						</li>
 					{% endif %}
 
@@ -35,7 +39,11 @@
 					{% for page in (paginationResult.page - pagerExpand)..(paginationResult.page) if page > 1 and page < paginationResult.page %}
 						<li>
 							{% set routeParams = routeParams|merge({'page': page}) %}
-							<a href="{{ path(route, routeParams) }}">{{ page }}</a>
+							{% if page == (paginationResult.page - 1) %}
+								<a href="{{ path(route, routeParams) }}" rel="prev">{{ page }}</a>
+							{% else %}
+								<a href="{{ path(route, routeParams) }}">{{ page }}</a>
+							{% endif %}
 						</li>
 					{% endfor %}
 					<li class="active">
@@ -45,7 +53,11 @@
 					{% for page in (paginationResult.page + 1)..(paginationResult.page + pagerExpand) if page > paginationResult.page and page < pageCount %}
 						<li>
 							{% set routeParams = routeParams|merge({'page': page}) %}
-							<a href="{{ path(route, routeParams) }}">{{ page }}</a>
+							{% if page == (paginationResult.page + 1) %}
+								<a href="{{ path(route, routeParams) }}" rel="next">{{ page }}</a>
+							{% else %}
+								<a href="{{ path(route, routeParams) }}">{{ page }}</a>
+							{% endif %}
 						</li>
 					{% endfor %}
 
@@ -58,15 +70,25 @@
 					{% if paginationResult.page < pageCount %}
 						<li>
 							{% set routeParams = routeParams|merge({'page': pageCount}) %}
-							<a href="{{ path(route, routeParams) }}">{{ pageCount }}</a>
+							{% if paginationResult.page == (pageCount - 1) %}
+								<a href="{{ path(route, routeParams) }}" rel="next">{{ pageCount }}</a>
+							{% else %}
+								<a href="{{ path(route, routeParams) }}">{{ pageCount }}</a>
+							{% endif %}
 						</li>
 						<li>
 							{% set routeParams = routeParams|merge({'page': paginationResult.page + 1}) %}
-							<a href="{{ path(route, routeParams) }}">&gt;</a>
+							<a href="{{ path(route, routeParams) }}" rel="next">&gt;</a>
 						</li>
 					{% endif %}
 				{% endif %}
 			</ul>
 		</div>
 	</div>
+{% endmacro %}
+
+{% macro metaRobots(paginationResult) %}
+	{% if paginationResult.page != 1 %}
+		<meta name="robots" content="noindex, follow">
+	{% endif %}
 {% endmacro %}
