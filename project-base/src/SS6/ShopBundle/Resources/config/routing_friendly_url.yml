@@ -1,3 +1,7 @@
 front_product_detail:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Product:detail }
+
+front_product_list:
+  pattern: /
+  defaults: { _controller: SS6ShopBundle:Front\Product:listByCategory }

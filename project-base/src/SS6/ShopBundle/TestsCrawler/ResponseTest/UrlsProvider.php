@@ -68,6 +68,10 @@ class UrlsProvider {
 	 */
 	private function getRouteParameters(Route $route, $routeName) {
 		switch ($routeName) {
+			case 'admin_category_edit':
+				// cateogory ID 1 is special root category, therefore we use ID 2
+				return ['id' => 2];
+
 			case 'admin_superadmin_icondetail':
 				return ['icon' => 'delete'];
 
@@ -89,6 +93,9 @@ class UrlsProvider {
 
 			case 'front_product_detail':
 				return ['id' => 1];
+
+			case 'front_product_list':
+				return ['id' => 2];
 
 			case 'front_registration_set_new_password':
 				return ['email' => 'no-reply@netdevelo.cz', 'hash' => 'invalidHash'];

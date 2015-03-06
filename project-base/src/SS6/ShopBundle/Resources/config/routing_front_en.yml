@@ -44,12 +44,6 @@ front_order_sent:
   pattern: /order-confirm/
   defaults: { _controller: SS6ShopBundle:Front\Order:sent }
 
-front_product_list:
-  pattern: /products/category/{categoryId}/{page}
-  defaults: {_controller: SS6ShopBundle:Front\Product:listByCategory, page: 1 }
-  requirements:
-    id: \d+
-
 front_product_search:
   pattern: /search/{page}
   defaults: { _controller: SS6ShopBundle:Front\Product:search, page: 1 }

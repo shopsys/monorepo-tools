@@ -6,7 +6,7 @@
 {% block category_url %}
 	<div class="form-line">
 		<span class="form-line__text">
-			<a href="{{ url('front_product_list', { categoryId: category.id }) }}" target="_blank">{{ url('front_product_list', { categoryId: category.id }) }}</a>
+			<a href="{{ url('front_product_list', { id: category.id }) }}" target="_blank">{{ url('front_product_list', { id: category.id }) }}</a>
 		</span>
 	</div>
 {% endblock %}

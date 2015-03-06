@@ -19,7 +19,7 @@
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
 		<div class="box-filter">
-			{{ form_start(filterForm, { action: url('front_product_list', { categoryId: category.id }) }) }}
+			{{ form_start(filterForm, { action: url('front_product_list', { id: category.id }) }) }}
 				{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
 
 				<div class="box-filter__group">
@@ -49,7 +49,7 @@
 
 				<div class="box-filter__buttons">
 
-					<a class ="button button--simple mr-half" href = "{{ url('front_product_list', {'categoryId': category.id}) }}">{{ 'Vynulovat filtr'|trans }}</a>
+					<a class ="button button--simple mr-half" href = "{{ url('front_product_list', {id: category.id}) }}">{{ 'Vynulovat filtr'|trans }}</a>
 
 					{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
 				</div>

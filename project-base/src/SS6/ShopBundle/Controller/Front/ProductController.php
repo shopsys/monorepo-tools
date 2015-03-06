@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
 
+	const PAGE_QUERY_PARAMETER = 'page';
 	const PRODUCTS_PER_PAGE = 12;
 
 	/**
@@ -29,10 +29,9 @@ class ProductController extends Controller {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $categoryId
-	 * @param int $page
+	 * @param int $id
 	 */
-	public function listByCategoryAction(Request $request, $categoryId, $page) {
+	public function listByCategoryAction(Request $request, $id) {
 		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
 		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
 		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
@@ -44,7 +43,8 @@ class ProductController extends Controller {
 		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
 
-		$category = $categoryFacade->getById($categoryId);
+		$category = $categoryFacade->getById($id);
+		$page = $request->get(self::PAGE_QUERY_PARAMETER, 1);
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
@@ -63,7 +63,7 @@ class ProductController extends Controller {
 			$orderingSetting,
 			$page,
 			self::PRODUCTS_PER_PAGE,
-			$categoryId
+			$id
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', [
