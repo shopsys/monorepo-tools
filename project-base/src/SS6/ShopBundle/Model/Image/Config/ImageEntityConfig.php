@@ -78,6 +78,13 @@ class ImageEntityConfig {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[]
+	 */
+	public function getSizeConfigsByTypes() {
+		return $this->sizeConfigsByType;
+	}
+
+	/**
 	 * @param string $type
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageSizeConfig[]
 	 */
