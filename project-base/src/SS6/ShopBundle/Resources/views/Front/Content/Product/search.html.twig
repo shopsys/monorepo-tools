@@ -7,6 +7,10 @@
 	- {{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}
 {% endblock %}
 
+{% block meta_robots %}
+	{{ paginator.metaRobots(paginationResult) }}
+{% endblock %}
+
 {% block panel_content %}
 	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
 {% endblock %}

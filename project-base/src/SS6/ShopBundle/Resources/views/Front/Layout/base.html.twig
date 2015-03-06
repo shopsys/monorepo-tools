@@ -7,6 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="{% block meta_description %}{% endblock %}">
+	{% block meta_robots %}{% endblock %}
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/styles/index' ~ getDomain().id ~ '.css') }}" media="screen, projection">
 	<!--[if lte IE 8 ]>
