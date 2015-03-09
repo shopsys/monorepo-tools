@@ -31,6 +31,9 @@ parameters:
 
 services:
 
+  controller_resolver:
+    alias: ss6.shop.component.controller.controller_resolver
+
   doctrine.orm.default_entity_manager:
     class: %doctrine.orm.entity_manager.class%
     factory_class: %doctrine.orm.entity_manager.class%
@@ -148,6 +151,9 @@ services:
     class: SS6\ShopBundle\Component\Error\ExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+  ss6.shop.component.controller.controller_resolver:
+    class: SS6\ShopBundle\Component\Controller\ControllerResolver
 
   ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
     class: SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
