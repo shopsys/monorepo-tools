@@ -298,6 +298,7 @@ services:
   ss6.shop.category.category_visibility_repository:
     class: SS6\ShopBundle\Model\Category\CategoryVisibilityRepository
     tags:
+      # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
   ss6.shop.category.category_service:
@@ -767,6 +768,7 @@ services:
   ss6.shop.product.product_visibility_facade:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityFacade
     tags:
+      # must be ran after CategoryVisibilityRepository
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
 
   ss6.shop.product.product_visibility_repository:
