@@ -9,7 +9,7 @@
 
 	<div class="row">
 		<div class="col-md-4 col-sm-12">
-			{{ form_start(form) }}
+			{{ form_start(form, {attr: {'multipleForm': true}}) }}
 
 				<h1>{{ 'Přihlášení'|trans }}</h1>
 
@@ -21,6 +21,17 @@
 				<div class="form-group">
 					{{ form_errors(form.password) }}
 					{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+				</div>
+
+				<div class="form-group">
+					<label>
+						{{ form_widget(form.rememberMe) }}
+						{{ 'Zapamatuj si mé přihlášení'|trans }}
+						<i class="fa fa-info-circle cursor-help form-line__info js-tooltip"
+							data-toggle="tooltip" data-placement="right"
+							title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
+						 ></i>
+					</label>
 				</div>
 
 				{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
