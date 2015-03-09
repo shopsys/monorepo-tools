@@ -6,6 +6,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use SS6\ShopBundle\Component\Translation\PoDumper;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
@@ -36,12 +37,25 @@ class TranslationEditFacade {
 	 */
 	private $poDumper;
 
-	public function __construct($rootDir, $cacheDir, Translator $translator, Filesystem $filesystem, PoDumper $poDumper) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	public function __construct(
+		$rootDir,
+		$cacheDir,
+		Translator $translator,
+		Filesystem $filesystem,
+		PoDumper $poDumper,
+		Localization $localization
+	) {
 		$this->rootDir = $rootDir;
 		$this->cacheDir = $cacheDir;
 		$this->translator = $translator;
 		$this->filesystem = $filesystem;
 		$this->poDumper = $poDumper;
+		$this->localization = $localization;
 	}
 
 	/**
@@ -88,37 +102,48 @@ class TranslationEditFacade {
 
 	/**
 	 * @param string $translationId
-	 * @return array
+	 * @return string[locale]
 	 */
 	public function getTranslationById($translationId) {
-		$translationData = [
-			'cs' => $this->translator->getCatalogue('cs')->get($translationId, Translator::DEFAULT_DOMAIN),
-			'en' => $this->translator->getCatalogue('en')->get($translationId, Translator::DEFAULT_DOMAIN),
-		];
+		$translationData = [];
+		foreach ($this->localization->getAllLocales() as $locale) {
+			$translationData[$locale] = $this->translator->getCatalogue($locale)->get($translationId, Translator::DEFAULT_DOMAIN);
+		}
 
 		return $translationData;
 	}
 
 	/**
-	 * @return array
+	 * @return string[translationId][locale]
 	 */
 	public function getAllTranslations() {
-		$catalogueCs = $this->translator->getCatalogue('cs');
-		$catalogueEn = $this->translator->getCatalogue('en');
-
-		$data = [];
-		foreach ($catalogueCs->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
-			$data[$id]['id'] = $id;
-			$data[$id]['cs'] = $translation;
-			$data[$id]['en'] = null;
+		$catalogues = [];
+		foreach ($this->localization->getAllLocales() as $locale) {
+			$catalogues[$locale] = $this->translator->getCatalogue($locale);
 		}
 
-		foreach ($catalogueEn->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
+		$data = [];
+
+		foreach ($catalogues[Translator::SOURCE_LOCALE]->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
 			$data[$id]['id'] = $id;
-			if (!isset($data[$id]['cs'])) {
-				$data[$id]['cs'] = null;
+			$data[$id][Translator::SOURCE_LOCALE] = $translation;
+			foreach ($catalogues as $locale => $catalogue) {
+				if ($locale !== Translator::SOURCE_LOCALE) {
+					$data[$id][$locale] = null;
+				}
 			}
-			$data[$id]['en'] = $translation;
+		}
+
+		foreach ($catalogues as $locale => $catalogue) {
+			if ($locale !== Translator::SOURCE_LOCALE) {
+				foreach ($catalogue->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
+					$data[$id]['id'] = $id;
+					if (!isset($data[$id][Translator::SOURCE_LOCALE])) {
+						$data[$id][Translator::SOURCE_LOCALE] = null;
+					}
+					$data[$id][$locale] = $translation;
+				}
+			}
 		}
 
 		return $data;

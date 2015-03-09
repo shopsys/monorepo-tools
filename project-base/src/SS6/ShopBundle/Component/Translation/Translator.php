@@ -10,7 +10,7 @@ class Translator extends BaseTranslator {
 
 	const DEFAULT_DOMAIN = 'messages';
 	const NOT_TRANSLATED_PREFIX = '##';
-	const TRANSLATION_ID_LOCALE = 'cs';
+	const SOURCE_LOCALE = 'cs';
 
 	/**
 	 * @var \Symfony\Component\Translation\MessageSelector
@@ -41,7 +41,7 @@ class Translator extends BaseTranslator {
 	}
 
 	/**
-	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
+	 * When translation for given locale is not defined and locale is not self::SOURCE_LOCALE,
 	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 *
@@ -61,7 +61,7 @@ class Translator extends BaseTranslator {
 		$catalogue = $this->catalogues[$locale];
 		if ($catalogue->defines($id, $domain)) {
 			return strtr($this->catalogues[$locale]->get((string)$id, $domain), $parameters);
-		} elseif ($locale === self::TRANSLATION_ID_LOCALE) {
+		} elseif ($locale === self::SOURCE_LOCALE) {
 			return strtr($id, $parameters);
 		} else {
 			return self::NOT_TRANSLATED_PREFIX . strtr($id, $parameters);
@@ -69,7 +69,7 @@ class Translator extends BaseTranslator {
 	}
 
 	/**
-	 * When translation for given locale is not defined and locale is not self::TRANSLATION_ID_LOCALE,
+	 * When translation for given locale is not defined and locale is not self::SOURCE_LOCALE,
 	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 *
@@ -93,12 +93,12 @@ class Translator extends BaseTranslator {
 		if ($catalogue->defines($id, $domain)) {
 			$message = $this->messageSelector->choose($catalogue->get($id, $domain), (int)$number, $locale);
 		} else {
-			$message = $this->messageSelector->choose($id, (int)$number, self::TRANSLATION_ID_LOCALE);
+			$message = $this->messageSelector->choose($id, (int)$number, self::SOURCE_LOCALE);
 		}
 
 		$message = strtr($message, $parameters);
 
-		if (!$catalogue->defines($id, $domain) && $locale !== self::TRANSLATION_ID_LOCALE) {
+		if (!$catalogue->defines($id, $domain) && $locale !== self::SOURCE_LOCALE) {
 			$message = self::NOT_TRANSLATED_PREFIX . $message;
 		}
 
