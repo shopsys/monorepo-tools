@@ -1,0 +1,58 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Rozměry obrázků'|trans }}{% endblock %}
+{% block h1 %}{{ 'Rozměry obrázků'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{% for imageEntityConfig in imageEntityConfigs %}
+				{% set entityName = imageEntityConfig.entityName %}
+				{% if imageEntityConfig.sizeConfigs is not empty %}
+					{{ _self.entitySizes(entityNames[entityName], imageEntityConfig.sizeConfigs, usagesByEntityAndSizeName[entityName]) }}
+				{% endif %}
+				{% if imageEntityConfig.sizeConfigsByTypes is not empty %}
+					{% for typeName, sizeConfigs in imageEntityConfig.sizeConfigsByTypes %}
+						{{ _self.entitySizes(entityNames[entityName] ~ ' - ' ~ typeName, sizeConfigs, usagesByEntityAndTypeAndSizeName[entityName][typeName]) }}
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+
+{% macro entitySizes(name, sizeConfigs, usages) %}
+	<h2>{{ name }}</h2>
+	<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="table-col-20">{{ 'Název rozměru'|trans }}</th>
+				<th class="table-col-10">{{ 'Šířka [px]'|trans }}</th>
+				<th class="table-col-10">{{ 'Výška [px]'|trans }}</th>
+				<th class="table-col-50">{{ 'Výskyt'|trans }}</th>
+				<th class="table-col-10 text-right">{{ 'Ořezávání'|trans }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for sizeConfig in sizeConfigs %}
+				{% if sizeConfig.name != 'original' %}
+					<tr>
+						<td>{{ sizeConfig.name|default('default'|trans)|humanize }}</td>
+						<td>{{ sizeConfig.width|default('-')}}</td>
+						<td>{{ sizeConfig.height|default('-') }}</td>
+						<td>{{ usages[sizeConfig.name|default('default')] }}</td>
+						<td class ="text-right">
+							{% if sizeConfig.crop == true %}
+								{{ 'Ano'|trans }}
+							{% else %}
+								{{ 'Ne'|trans }}
+							{% endif %}
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
+	</div>
+{% endmacro %}

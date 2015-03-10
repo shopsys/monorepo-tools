@@ -193,4 +193,11 @@ class ImageFacade {
 		$message = 'Entity "' . get_class($entity) . '" has not set primary key or primary key is compound."';
 		throw new \SS6\ShopBundle\Model\Image\Exception\EntityIdentifierException($message);
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
+	 */
+	public function getAllImageEntityConfigsByClass() {
+		return $this->imageConfig->getAllImageEntityConfigsByClass();
+	}
 }
