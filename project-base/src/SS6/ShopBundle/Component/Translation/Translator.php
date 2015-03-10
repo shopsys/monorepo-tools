@@ -29,18 +29,6 @@ class Translator extends BaseTranslator {
 	}
 
 	/**
-	 * @param string $locale
-	 * @return \Symfony\Component\Translation\MessageCatalogue
-	 */
-	public function getCatalogue($locale) {
-		if (!isset($this->catalogues[$locale])) {
-			$this->loadCatalogue($locale);
-		}
-
-		return $this->catalogues[$locale];
-	}
-
-	/**
 	 * When translation for given locale is not defined and locale is not self::SOURCE_LOCALE,
 	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
@@ -103,15 +91,6 @@ class Translator extends BaseTranslator {
 		}
 
 		return $message;
-	}
-
-	/**
-	 * @param string $locale
-	 */
-	private function assertValidLocale($locale) {
-		if (1 !== preg_match('/^[a-z0-9@_\\.\\-]*$/i', $locale)) {
-			throw new \InvalidArgumentException(sprintf('Invalid "%s" locale.', $locale));
-		}
 	}
 
 }
