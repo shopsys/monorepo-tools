@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Transport\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
@@ -12,7 +13,6 @@ use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class TransportGridFactory implements GridFactoryInterface {
 
@@ -55,7 +55,7 @@ class TransportGridFactory implements GridFactoryInterface {
 		TransportRepository $transportRepository,
 		TransportDetailFactory $transportDetailFactory,
 		Localization $localization,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;

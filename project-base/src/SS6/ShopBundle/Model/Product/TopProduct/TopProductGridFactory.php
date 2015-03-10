@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class TopProductGridFactory implements GridFactoryInterface {
 
@@ -43,7 +43,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		Localization $localization,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;

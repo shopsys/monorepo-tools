@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationGridFactory implements GridFactoryInterface {
 
@@ -33,7 +33,7 @@ class TranslationGridFactory implements GridFactoryInterface {
 
 	public function __construct(
 		GridFactory $gridFactory,
-		TranslatorInterface $translator,
+		Translator $translator,
 		TranslationEditFacade $translationEditFacade,
 		Localization $localization
 	) {

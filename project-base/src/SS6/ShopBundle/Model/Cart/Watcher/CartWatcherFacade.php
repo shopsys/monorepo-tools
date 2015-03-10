@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class CartWatcherFacade {
 
@@ -39,7 +39,7 @@ class CartWatcherFacade {
 		FlashMessageSender $flashMessageSender,
 		EntityManager $em,
 		CartWatcherService $cartWatcherService,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->flashMessageSender = $flashMessageSender;
 		$this->em = $em;

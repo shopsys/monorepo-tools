@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Model\Pricing\Group\Grid;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class PricingGroupGridFactory implements GridFactoryInterface {
 
@@ -37,7 +37,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 		EntityManager $em,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;

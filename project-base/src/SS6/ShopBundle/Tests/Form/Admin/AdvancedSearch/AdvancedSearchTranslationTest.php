@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Form\Admin\AdvancedSearch;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class AdvancedSearchTranslationTest extends FunctionalTestCase {
 
@@ -36,7 +36,9 @@ class AdvancedSearchTranslationTest extends FunctionalTestCase {
 	}
 
 	public function testTranslateFilterNameNotFoundException() {
-		$translatorMock = $this->getMockBuilder(TranslatorInterface::class)->getMockForAbstractClass();
+		$translatorMock = $this->getMockBuilder(Translator::class)
+			->disableOriginalConstructor()
+			->getMock();
 		$advancedSearchTranslator = new AdvancedSearchTranslation($translatorMock);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
@@ -44,7 +46,9 @@ class AdvancedSearchTranslationTest extends FunctionalTestCase {
 	}
 
 	public function testTranslateOperatorNotFoundException() {
-		$translatorMock = $this->getMockBuilder(TranslatorInterface::class)->getMockForAbstractClass();
+		$translatorMock = $this->getMockBuilder(Translator::class)
+			->disableOriginalConstructor()
+			->getMock();
 		$advancedSearchTranslator = new AdvancedSearchTranslation($translatorMock);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);

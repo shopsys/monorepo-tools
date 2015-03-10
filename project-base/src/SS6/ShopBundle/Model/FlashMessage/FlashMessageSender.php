@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\FlashMessage;
 
 use JMS\TranslationBundle\Annotation\Ignore;
-use Symfony\Component\Translation\TranslatorInterface;
+use SS6\ShopBundle\Component\Translation\Translator;
 use Twig_Environment;
 
 class FlashMessageSender {
@@ -26,7 +26,7 @@ class FlashMessageSender {
 	public function __construct(
 		Bag $flashMessageBag,
 		Twig_Environment $twigEnvironment,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->flashMessageBag = $flashMessageBag;
 		$this->twigEnvironment = $twigEnvironment;
