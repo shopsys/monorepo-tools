@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0fdc9f16991da5aa9501bdd81b1ce3c1",
+    "hash": "7778c18693e81a9d59af51dc24bd3669",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3511,16 +3511,16 @@
         },
         {
             "name": "symfony-cmf/routing-bundle",
-            "version": "1.3.0",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/RoutingBundle.git",
-                "reference": "da561a50944f930f13349eaf4201cb383b5d5df5"
+                "reference": "330c3ac0d11ba0257a41647bb413aa727f3d4a65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/da561a50944f930f13349eaf4201cb383b5d5df5",
-                "reference": "da561a50944f930f13349eaf4201cb383b5d5df5",
+                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/330c3ac0d11ba0257a41647bb413aa727f3d4a65",
+                "reference": "330c3ac0d11ba0257a41647bb413aa727f3d4a65",
                 "shasum": ""
             },
             "require": {
@@ -3572,7 +3572,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2014-10-21 08:17:02"
+            "time": "2014-11-24 15:20:32"
         },
         {
             "name": "symfony/assetic-bundle",
