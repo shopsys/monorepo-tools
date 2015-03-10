@@ -42,7 +42,7 @@
 		"sensio/framework-extra-bundle": "~3.0",
 		"sensio/generator-bundle": "~2.3",
 		"stof/doctrine-extensions-bundle": "1.1.0",
-		"symfony/assetic-bundle": "~2.3",
+		"symfony/assetic-bundle": "~2.6",
 		"symfony/dependency-injection": "~2.4",
 		"symfony/monolog-bundle": "~2.4",
 		"symfony/swiftmailer-bundle": "~2.3",
