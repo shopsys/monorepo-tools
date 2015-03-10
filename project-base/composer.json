@@ -23,7 +23,7 @@
 		"bmatzner/jquery-bundle": "1.11.1",
 		"bmatzner/jquery-ui-bundle": "1.10.*",
 		"craue/formflow-bundle": "3.0.*@dev",
-		"doctrine/common": "2.4.x-dev#434c364b6a8780c16769b60fcc56e61e6bac766f",
+		"doctrine/common": "2.4.x-dev#434c364b6a8780c1",
 		"doctrine/doctrine-bundle": "~1.2",
 		"doctrine/doctrine-fixtures-bundle": "2.2.*",
 		"doctrine/orm": "~2.4,>=2.4.6",

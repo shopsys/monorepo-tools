@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7778c18693e81a9d59af51dc24bd3669",
+    "hash": "f2608d468715f25d3b09a562db75e791",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -411,12 +411,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "434c364b6a8780c16769b60fcc56e61e6bac766f"
+                "reference": "434c364b6a8780c1"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/common/zipball/ae92d076442e27b6910dd86a1292a8867cf5cfe4",
-                "reference": "434c364b6a8780c16769b60fcc56e61e6bac766f",
+                "reference": "434c364b6a8780c1",
                 "shasum": ""
             },
             "require": {
