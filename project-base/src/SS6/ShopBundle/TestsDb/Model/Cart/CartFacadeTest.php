@@ -8,9 +8,6 @@ use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class CartFacadeTest extends DatabaseTestCase {
 
@@ -21,36 +18,22 @@ class CartFacadeTest extends DatabaseTestCase {
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 
-		$vat = new Vat(new VatData('vat', 21));
-		$em->persist($vat);
-		$productEditData = new ProductEditData();
-		$productEditData->productData->name = ['cs' => 'productName'];
-		$productEditData->productData->vat = $vat;
-		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = [2];
-		$product = $productEditFacade->create($productEditData);
-		$em->flush();
-		$productId = $product->getId();
-		$em->clear();
+		$product1 = $this->getReference('product_1');
+		$productId = $product1->getId();
 		$quantity = 10;
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
-		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
-		$productVisibilityRepository->refreshProductsVisibility();
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
 		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
 		$cartFacade->addProductToCart($productId, $quantity);
 
-		$em->clear();
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
 		$cartItems = $cart->getItems();
-		$product = array_pop($cartItems)->getProduct();
-		$this->assertEquals($productId, $product->getId(), 'Add correct product');
+		$product1 = array_pop($cartItems)->getProduct();
+		$this->assertEquals($productId, $product1->getId(), 'Add correct product');
 
 		$customerIdentifier = new CustomerIdentifier('anotherSecreetSessionHash');
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
@@ -65,24 +48,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 
-		$vat = new Vat(new VatData('vat', 21));
-		$em->persist($vat);
-
-		$productEditData = new ProductEditData();
-		$productEditData->productData->name = ['cs' => 'productName'];
-		$productEditData->productData->vat = $vat;
-		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = [2];
-		$product1 = $productEditFacade->create($productEditData);
-		$product2 = $productEditFacade->create($productEditData);
-		$em->flush();
-		$em->clear();
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
-		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
-		$productVisibilityRepository->refreshProductsVisibility();
+		$product1 = $this->getReference('product_1');
+		$product2 = $this->getReference('product_3');
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
@@ -90,7 +59,6 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), 1)->getCartItem();
 		$cartItem2 = $cartFacade->addProductToCart($product2->getId(), 2)->getCartItem();
 		$em->flush();
-		$em->clear();
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
@@ -101,7 +69,6 @@ class CartFacadeTest extends DatabaseTestCase {
 		]);
 		$em->flush();
 
-		$em->clear();
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
 		foreach ($cart->getItems() as $cartItem) {
@@ -121,19 +88,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 
-		$vat = new Vat(new VatData('vat', 21));
-		$em->persist($vat);
-
-		$productEditData = new ProductEditData();
-		$productEditData->productData->name = ['cs' => 'productName'];
-		$productEditData->productData->vat = $vat;
-		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = [2];
-		$product = $productEditFacade->create($productEditData);
-		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
+		$product1 = $this->getReference('product_1');
+		$cartItem = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$em->persist($cartItem);
 		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
@@ -152,19 +110,10 @@ class CartFacadeTest extends DatabaseTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 
-		$vat = new Vat(new VatData('vat', 21));
-		$em->persist($vat);
-
-		$productEditData = new ProductEditData();
-		$productEditData->productData->name = ['cs' => 'productName'];
-		$productEditData->productData->vat = $vat;
-		$productEditData->productData->price = 1;
-		$productEditData->productData->hiddenOnDomains = [2];
-		$product1 = $productEditFacade->create($productEditData);
-		$product2 = $productEditFacade->create($productEditData);
+		$product1 = $this->getReference('product_1');
+		$product2 = $this->getReference('product_3');
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
@@ -175,13 +124,6 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
 		$cartFacade->deleteCartItem($cartItem1->getId());
-
-		$em->clear();
-
-		// new products do not have calculated visibility
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
-		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
-		$productVisibilityRepository->refreshProductsVisibility();
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
