@@ -6,6 +6,7 @@ class FormType {
 
 	const BIRTHDAY = 'birthday';
 	const BUTTON = 'button';
+	const CATEGORIES = 'categories';
 	const CHECKBOX = 'checkbox';
 	const CHOICE = 'choice';
 	const COLLECTION = 'collection';

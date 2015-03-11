@@ -35,6 +35,11 @@ services:
   ss6.shop.form.admin.transport.transport_edit_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
 
+  ss6.shop.form.categories:
+    class: SS6\ShopBundle\Form\CategoriesType
+    tags:
+      - { name: form.type, alias: categories }
+
   ss6.shop.form.collection:
     class: SS6\ShopBundle\Form\CollectionType
     tags:
