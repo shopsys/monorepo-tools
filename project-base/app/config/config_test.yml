@@ -13,6 +13,16 @@ framework:
   session:
     storage_id: session.storage.mock_file
 
+# disable logging in tests
+monolog:
+  handlers:
+    main:
+      type: "null"
+    nested:
+      type: "null"
+    console:
+      type: "null"
+
 # simple login for crawler tests
 security:
   firewalls:
