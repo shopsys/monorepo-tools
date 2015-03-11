@@ -78,7 +78,7 @@ class Grid {
 	/**
 	 * @var string|null
 	 */
-	private $order;
+	private $orderSourceColumnName;
 
 	/**
 	 * @var string|null
@@ -189,18 +189,18 @@ class Grid {
 
 	/**
 	 * @param string $id
-	 * @param string $queryId
+	 * @param string $sourceColumnName
 	 * @param string $title
 	 * @param boolean $sortable
 	 * @return \SS6\ShopBundle\Model\Grid\Column
 	 */
-	public function addColumn($id, $queryId, $title, $sortable = false) {
+	public function addColumn($id, $sourceColumnName, $title, $sortable = false) {
 		if (array_key_exists($id, $this->columns)) {
 			throw new \SS6\ShopBundle\Model\Grid\Exception\DuplicateColumnIdException(
 				'Duplicate column id "' . $id . '" in grid "' . $this->id .  '"'
 			);
 		}
-		$column = new Column($id, $queryId, $title, $sortable);
+		$column = new Column($id, $sourceColumnName, $title, $sortable);
 		$this->columns[$id] = $column;
 		return $column;
 	}
@@ -255,7 +255,7 @@ class Grid {
 	 * @return mixed
 	 */
 	public function getRowId($row) {
-		return Grid::getValueFromRowByQueryId($row, $this->dataSource->getIdQueryId());
+		return Grid::getValueFromRowBySourceColumnName($row, $this->dataSource->getRowIdSourceColumnName());
 	}
 
 	/**
@@ -335,7 +335,7 @@ class Grid {
 	public function setDefaultOrder($columnId, $direction = DataSourceInterface::ORDER_ASC) {
 		if (!$this->isOrderFromRequest) {
 			$prefix = $direction == DataSourceInterface::ORDER_DESC ? '-' : '';
-			$this->setOrder($prefix . $columnId);
+			$this->setOrderingByOrderString($prefix . $columnId);
 		}
 	}
 
@@ -419,20 +419,20 @@ class Grid {
 	/**
 	 * @return string|null
 	 */
-	public function getOrder() {
-		return $this->order;
+	public function getOrderSourceColumnName() {
+		return $this->orderSourceColumnName;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getOrderWithDirection() {
+	public function getOrderSourceColumnNameWithDirection() {
 		$prefix = '';
 		if ($this->getOrderDirection() === DataSourceInterface::ORDER_DESC) {
 			$prefix = '-';
 		}
 
-		return $prefix . $this->getOrder();
+		return $prefix . $this->getOrderSourceColumnName();
 	}
 
 	/**
@@ -459,13 +459,13 @@ class Grid {
 	/**
 	 * @param string $orderString
 	 */
-	private function setOrder($orderString) {
+	private function setOrderingByOrderString($orderString) {
 		if (substr($orderString, 0, 1) === '-') {
 			$this->orderDirection = DataSourceInterface::ORDER_DESC;
 		} else {
 			$this->orderDirection = DataSourceInterface::ORDER_ASC;
 		}
-		$this->order = trim($orderString, '-');
+		$this->orderSourceColumnName = trim($orderString, '-');
 	}
 
 	private function loadFromRequest() {
@@ -480,7 +480,7 @@ class Grid {
 				$this->page = max((int)trim($gridData['page']), 1);
 			}
 			if (array_key_exists('order', $gridData)) {
-				$this->setOrder(trim($gridData['order']));
+				$this->setOrderingByOrderString(trim($gridData['order']));
 				$this->isOrderFromRequest = true;
 			}
 		}
@@ -498,8 +498,8 @@ class Grid {
 				$gridParameters['page'] = $this->getPage();
 			}
 		}
-		if ($this->getOrder() !== null) {
-			$gridParameters['order'] = $this->getOrderWithDirection();
+		if ($this->getOrderSourceColumnName() !== null) {
+			$gridParameters['order'] = $this->getOrderSourceColumnNameWithDirection();
 		}
 
 		foreach ((array)$removeParameters as $parameterToRemove) {
@@ -537,23 +537,23 @@ class Grid {
 	}
 
 	private function loadRows() {
-		if (array_key_exists($this->order, $this->getColumns())) {
-			$orderQueryId = $this->getColumns()[$this->order]->getQueryOrderId();
+		if (array_key_exists($this->orderSourceColumnName, $this->getColumns())) {
+			$orderSourceColumnName = $this->getColumns()[$this->orderSourceColumnName]->getOrderSourceColumnName();
 		} else {
-			$orderQueryId = null;
+			$orderSourceColumnName = null;
 		}
 
 		$orderDirection = $this->orderDirection;
 
 		if ($this->isDragAndDrop()) {
-			$orderQueryId = null;
+			$orderSourceColumnName = null;
 			$orderDirection = null;
 		}
 
 		$this->paginationResults = $this->dataSource->getPaginatedRows(
 			$this->allowPaging ? $this->limit : null,
 			$this->page,
-			$orderQueryId,
+			$orderSourceColumnName,
 			$orderDirection
 		);
 
@@ -561,7 +561,6 @@ class Grid {
 	}
 
 	/**
-	 * @param string $queryId
 	 * @param int $rowId
 	 */
 	private function loadRowsWithOneRow($rowId) {
@@ -576,21 +575,23 @@ class Grid {
 
 	/**
 	 * @param array $row
-	 * @param string $queryId
+	 * @param string $sourceColumnName
 	 * @return mixed
 	 */
-	public static function getValueFromRowByQueryId(array $row, $queryId) {
-		$queryIdParts = explode('.', $queryId);
+	public static function getValueFromRowBySourceColumnName(array $row, $sourceColumnName) {
+		$sourceColumnNameParts = explode('.', $sourceColumnName);
 
-		if (count($queryIdParts) === 1) {
-			$value = $row[$queryIdParts[0]];
-		} elseif (count($queryIdParts) === 2) {
-			if (array_key_exists($queryIdParts[0], $row) && array_key_exists($queryIdParts[1], $row[$queryIdParts[0]])) {
-				$value = $row[$queryIdParts[0]][$queryIdParts[1]];
-			} elseif (array_key_exists($queryIdParts[1], $row)) {
-				$value = $row[$queryIdParts[1]];
+		if (count($sourceColumnNameParts) === 1) {
+			$value = $row[$sourceColumnNameParts[0]];
+		} elseif (count($sourceColumnNameParts) === 2) {
+			if (array_key_exists($sourceColumnNameParts[0], $row)
+				&& array_key_exists($sourceColumnNameParts[1], $row[$sourceColumnNameParts[0]])
+			) {
+				$value = $row[$sourceColumnNameParts[0]][$sourceColumnNameParts[1]];
+			} elseif (array_key_exists($sourceColumnNameParts[1], $row)) {
+				$value = $row[$sourceColumnNameParts[1]];
 			} else {
-				$value = $row[$queryId];
+				$value = $row[$sourceColumnName];
 			}
 		}
 

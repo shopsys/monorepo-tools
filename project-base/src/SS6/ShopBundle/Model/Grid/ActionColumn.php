@@ -145,8 +145,8 @@ class ActionColumn {
 	public function getTargetUrl(array $row) {
 		$parameters = $this->additionalRouteParams;
 
-		foreach ($this->bindingRouteParams as $key => $queryId) {
-			$parameters[$key] = Grid::getValueFromRowByQueryId($row, $queryId);
+		foreach ($this->bindingRouteParams as $key => $sourceColumnName) {
+			$parameters[$key] = Grid::getValueFromRowBySourceColumnName($row, $sourceColumnName);
 		}
 
 		return $this->router->generate($this->route, $parameters, Router::ABSOLUTE_URL);

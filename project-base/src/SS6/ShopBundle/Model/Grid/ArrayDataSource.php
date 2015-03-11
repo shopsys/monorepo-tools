@@ -14,22 +14,22 @@ class ArrayDataSource implements DataSourceInterface {
 	/**
 	 * @var string
 	 */
-	private $queryId;
+	private $rowIdSourceColumnName;
 
 	/**
 	 * @param array $data
-	 * @param string $queryId
+	 * @param string $rowIdSourceColumnName
 	 */
-	public function __construct(array $data, $queryId = null) {
+	public function __construct(array $data, $rowIdSourceColumnName = null) {
 		$this->data = $data;
-		$this->queryId = $queryId;
+		$this->rowIdSourceColumnName = $rowIdSourceColumnName;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getIdQueryId() {
-		return $this->queryId;
+	public function getRowIdSourceColumnName() {
+		return $this->rowIdSourceColumnName;
 	}
 
 	/**
@@ -37,11 +37,11 @@ class ArrayDataSource implements DataSourceInterface {
 	 * @return mixed
 	 */
 	public function getOneRow($rowId) {
-		if ($this->queryId === null) {
+		if ($this->rowIdSourceColumnName === null) {
 			return $this->data[$rowId];
 		} else {
 			foreach ($this->data as $item) {
-				if ($item[$this->queryId] === $rowId) {
+				if ($item[$this->rowIdSourceColumnName] === $rowId) {
 					return $item;
 				}
 			}
@@ -51,17 +51,17 @@ class ArrayDataSource implements DataSourceInterface {
 	/**
 	 * @param null $limit
 	 * @param int $page
-	 * @param null $orderQueryId
+	 * @param null $orderSourceColumnName
 	 * @param string $orderDirection
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginatedRows($limit = null, $page = 1, $orderQueryId = null, $orderDirection = self::ORDER_ASC) {
+	public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC) {
 		if ($limit !== null) {
 			$message = 'Pagination not supported in ArrayDataSource';
 			throw new \SS6\ShopBundle\Model\Grid\Exception\PaginationNotSupportedException($message);
 		}
 
-		if ($orderQueryId !== null) {
+		if ($orderSourceColumnName !== null) {
 			$message = 'Ordering not supported in ArrayDataSource';
 			throw new \SS6\ShopBundle\Model\Grid\Exception\OrderingNotSupportedException($message);
 		}

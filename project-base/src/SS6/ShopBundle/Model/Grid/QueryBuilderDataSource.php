@@ -18,33 +18,33 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	/**
 	 * @var string
 	 */
-	private $queryId;
+	private $rowIdSourceColumnName;
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $queryId
+	 * @param string $rowIdSourceColumnName
 	 */
-	public function __construct(QueryBuilder $queryBuilder, $queryId) {
+	public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName) {
 		$this->queryBuilder = $queryBuilder;
-		$this->queryId = $queryId;
+		$this->rowIdSourceColumnName = $rowIdSourceColumnName;
 	}
 
 	/**
 	 * @param int|null $limit
 	 * @param int $page
-	 * @param string|null $orderQueryId
+	 * @param string|null $orderSourceColumnName
 	 * @param string $orderDirection
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedRows(
 		$limit = null,
 		$page = 1,
-		$orderQueryId = null,
+		$orderSourceColumnName = null,
 		$orderDirection = self::ORDER_ASC
 	) {
 		$queryBuilder = clone $this->queryBuilder;
-		if ($orderQueryId !== null) {
-			$this->addQueryOrder($queryBuilder, $orderQueryId, $orderDirection);
+		if ($orderSourceColumnName !== null) {
+			$this->addQueryOrder($queryBuilder, $orderSourceColumnName, $orderDirection);
 		}
 
 		$queryPaginator = new QueryPaginator($queryBuilder, self::HYDRATION_MODE);
@@ -76,11 +76,11 @@ class QueryBuilderDataSource implements DataSourceInterface {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string $orderQueryId
+	 * @param string $orderSourceColumnName
 	 * @param string $orderDirection
 	 */
-	private function addQueryOrder(QueryBuilder $queryBuilder, $orderQueryId, $orderDirection) {
-		$queryBuilder->orderBy($orderQueryId, $orderDirection);
+	private function addQueryOrder(QueryBuilder $queryBuilder, $orderSourceColumnName, $orderDirection) {
+		$queryBuilder->orderBy($orderSourceColumnName, $orderDirection);
 	}
 
 	/**
@@ -89,7 +89,7 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	 */
 	private function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $rowId) {
 		$queryBuilder
-			->andWhere($this->queryId . ' = :rowId')
+			->andWhere($this->rowIdSourceColumnName . ' = :rowId')
 			->setParameter('rowId', $rowId)
 			->setFirstResult(null)
 			->setMaxResults(null)
@@ -99,8 +99,8 @@ class QueryBuilderDataSource implements DataSourceInterface {
 	/**
 	 * @return string
 	 */
-	public function getIdQueryId() {
-		return $this->queryId;
+	public function getRowIdSourceColumnName() {
+		return $this->rowIdSourceColumnName;
 	}
 
 }

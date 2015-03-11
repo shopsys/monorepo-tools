@@ -40,7 +40,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('gridId', $grid->getId());
 		$this->assertEquals(100, $grid->getLimit());
 		$this->assertEquals(3, $grid->getPage());
-		$this->assertEquals('name', $grid->getOrder());
+		$this->assertEquals('name', $grid->getOrderSourceColumnName());
 		$this->assertEquals('desc', $grid->getOrderDirection());
 	}
 
@@ -55,8 +55,8 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
-		$grid->addColumn('columnId1', 'queryId1', 'title1', true)->setClassAttribute('classAttribute');
-		$grid->addColumn('columnId2', 'queryId2', 'title2', false);
+		$grid->addColumn('columnId1', 'sourceColumnName1', 'title1', true)->setClassAttribute('classAttribute');
+		$grid->addColumn('columnId2', 'sourceColumnName2', 'title2', false);
 		$columns = $grid->getColumns();
 
 		$this->assertCount(2, $columns);
@@ -66,13 +66,13 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		/* @var $column1 \SS6\ShopBundle\Model\Grid\Column */
 
 		$this->assertEquals('columnId1', $column1->getId());
-		$this->assertEquals('queryId1', $column1->getQueryId());
+		$this->assertEquals('sourceColumnName1', $column1->getSourceColumnName());
 		$this->assertEquals('title1', $column1->getTitle());
 		$this->assertEquals(true, $column1->getSortable());
 		$this->assertEquals('classAttribute', $column1->getClassAttribute());
 
 		$this->assertEquals('columnId2', $column2->getId());
-		$this->assertEquals('queryId2', $column2->getQueryId());
+		$this->assertEquals('sourceColumnName2', $column2->getSourceColumnName());
 		$this->assertEquals('title2', $column2->getTitle());
 		$this->assertEquals(false, $column2->getSortable());
 		$this->assertEquals('', $column2->getClassAttribute());
@@ -89,10 +89,10 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$gridOrderingServiceMock = $this->getMock(GridOrderingService::class);
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
-		$grid->addColumn('columnId1', 'queryId1', 'title1');
+		$grid->addColumn('columnId1', 'sourceColumnName1', 'title1');
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Grid\Exception\DuplicateColumnIdException::class);
-		$grid->addColumn('columnId1', 'queryId2', 'title2');
+		$grid->addColumn('columnId1', 'sourceColumnName2', 'title2');
 	}
 
 	public function testAllowPaging() {
@@ -137,10 +137,10 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$grid->setDefaultOrder('columnId1', DataSourceInterface::ORDER_DESC);
-		$this->assertEquals('-columnId1', $grid->getOrderWithDirection());
+		$this->assertEquals('-columnId1', $grid->getOrderSourceColumnNameWithDirection());
 
 		$grid->setDefaultOrder('columnId2', DataSourceInterface::ORDER_ASC);
-		$this->assertEquals('columnId2', $grid->getOrderWithDirection());
+		$this->assertEquals('columnId2', $grid->getOrderSourceColumnNameWithDirection());
 	}
 
 	public function testSetDefaultOrderWithRequest() {
@@ -164,7 +164,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$grid->setDefaultOrder('default', DataSourceInterface::ORDER_ASC);
-		$this->assertEquals('-request', $grid->getOrderWithDirection());
+		$this->assertEquals('-request', $grid->getOrderSourceColumnNameWithDirection());
 	}
 
 	public function testCreateView() {

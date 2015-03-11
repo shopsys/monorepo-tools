@@ -264,7 +264,7 @@ class GridView {
 	 * @return mixed
 	 */
 	private function getCellValue(Column $column, $row) {
-		return Grid::getValueFromRowByQueryId($row, $column->getQueryId());
+		return Grid::getValueFromRowBySourceColumnName($row, $column->getSourceColumnName());
 	}
 
 	/**

@@ -12,7 +12,7 @@ class Column {
 	/**
 	 * @var string
 	 */
-	private $queryId;
+	private $sourceColumnName;
 
 	/**
 	 * @var string
@@ -32,20 +32,20 @@ class Column {
 	/**
 	 * @var string
 	 */
-	private $queryOrderId;
+	private $orderSourceColmunName;
 
 	/**
 	 * @param string $id
-	 * @param string $queryId
+	 * @param string $sourceColumnName
 	 * @param string $title
 	 * @param bool $sortable
 	 */
-	public function __construct($id, $queryId, $title, $sortable) {
+	public function __construct($id, $sourceColumnName, $title, $sortable) {
 		$this->id = $id;
-		$this->queryId = $queryId;
+		$this->sourceColumnName = $sourceColumnName;
 		$this->title = $title;
 		$this->sortable = $sortable;
-		$this->queryOrderId = $queryId;
+		$this->orderSourceColmunName = $sourceColumnName;
 	}
 
 	/**
@@ -58,8 +58,8 @@ class Column {
 	/**
 	 * @return string
 	 */
-	public function getQueryId() {
-		return $this->queryId;
+	public function getSourceColumnName() {
+		return $this->sourceColumnName;
 	}
 
 	/**
@@ -96,8 +96,8 @@ class Column {
 	/**
 	 * @return string
 	 */
-	public function getQueryOrderId() {
-		return $this->queryOrderId;
+	public function getOrderSourceColumnName() {
+		return $this->orderSourceColmunName;
 	}
 
 }

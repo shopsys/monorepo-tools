@@ -10,14 +10,14 @@ interface DataSourceInterface {
 	/**
 	 * @param int|null $limit
 	 * @param int $page
-	 * @param string|null $orderQueryId
+	 * @param string|null $orderSourceColumnName
 	 * @param string $orderDirection
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedRows(
 		$limit = null,
 		$page = 1,
-		$orderQueryId = null,
+		$orderSourceColumnName = null,
 		$orderDirection = self::ORDER_ASC
 	);
 
@@ -35,6 +35,6 @@ interface DataSourceInterface {
 	/**
 	 * @return string
 	 */
-	public function getIdQueryId();
+	public function getRowIdSourceColumnName();
 
 }

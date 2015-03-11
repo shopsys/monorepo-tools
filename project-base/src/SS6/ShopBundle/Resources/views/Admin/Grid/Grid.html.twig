@@ -82,14 +82,14 @@
 
 {% block grid_title_cell %}
 	{% if (column.sortable) %}
-		{% if grid.order == column.id and grid.orderDirection == 'asc' %}
+		{% if grid.orderSourceColumnName == column.id and grid.orderDirection == 'asc' %}
 			{% set orderBy = '-' ~ column.id %}
 		{% else %}
 			{% set orderBy = column.id %}
 		{% endif %}
 		<a class="in-sort-arrows__wrap" href="{{ gridView.url({'order': orderBy}) }}">
 			<span class="in-sort-arrows__link">{{ column.title }}</span>
-			{% if grid.order == column.id %}
+			{% if grid.orderSourceColumnName == column.id %}
 				{% if grid.orderDirection == 'desc' %}
 					<span class="sort_down in-sort-arrows in-sort-arrows--down"></span>
 				{% else %}
