@@ -1,8 +1,9 @@
-{{ form_start(form, {attr: {'multipleForm': true}}) }}
+{{ form_start(form, {attr: {class: 'js-front-login-window', 'multipleForm': true}}) }}
 	{{ form_errors(form) }}
 
 	<h3>{{ 'Přihlášení'|trans }}</h3>
 
+	<div class="js-front-login-window-message in-message--static-small"></div>
 
 	<div class="form-group">
 		{{ form_errors(form.email) }}
