@@ -51,7 +51,7 @@ doctrine:
     charset: UTF8
 
   orm:
-    auto_generate_proxy_classes: "%kernel.debug%"
+    auto_generate_proxy_classes: false
     dql:
       numeric_functions:
         normalize: SS6\ShopBundle\Component\Doctrine\NormalizeFunction

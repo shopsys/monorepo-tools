@@ -32,7 +32,7 @@ class AppKernel extends Kernel {
 			new SS6\ShopBundle\SS6ShopBundle(), // must be loaded as last, because translations must overwrite other bundles
 		);
 
-		if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+		if (in_array($this->getEnvironment(), array(Environment::ENVIRONMENT_DEVELOPMENT))) {
 			$bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 			$bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
 			$bundles[] = new SS6\GeneratorBundle\SS6GeneratorBundle();
@@ -60,7 +60,7 @@ class AppKernel extends Kernel {
 			__DIR__ . '/config/config.yml',
 			__DIR__ . '/config/security.yml',
 		];
-		switch ($this->environment) {
+		switch ($this->getEnvironment()) {
 			case Environment::ENVIRONMENT_DEVELOPMENT:
 				$configs[] = __DIR__ . '/config/config_dev.yml';
 				break;
