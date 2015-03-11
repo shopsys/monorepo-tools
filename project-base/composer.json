@@ -49,7 +49,7 @@
 		"symfony-cmf/routing-bundle": "~1.3",
 		"timwhitlock/jparser": "dev-fix-imports",
 		"tracy/tracy": "2.2.6",
-		"twig/extensions": "~1.0"
+		"twig/extensions": "~1.2"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "dev-master",
