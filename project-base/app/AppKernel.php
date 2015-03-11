@@ -64,9 +64,6 @@ class AppKernel extends Kernel {
 			case Environment::ENVIRONMENT_DEVELOPMENT:
 				$configs[] = __DIR__ . '/config/config_dev.yml';
 				break;
-			case Environment::ENVIRONMENT_PRODUCTION:
-				$configs[] = __DIR__ . '/config/config_prod.yml';
-				break;
 			case Environment::ENVIRONMENT_TEST:
 				$configs[] = __DIR__ . '/config/parameters_test.yml';
 				$configs[] = __DIR__ . '/config/config_test.yml';

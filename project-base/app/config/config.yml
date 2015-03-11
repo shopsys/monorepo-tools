@@ -48,7 +48,7 @@ framework:
   secret: "%secret%"
   router:
     resource: "%kernel.root_dir%/config/routing.yml"
-    strict_requirements: ~
+    strict_requirements: true
   form: ~
   csrf_protection: ~
   validation: { enable_annotations: true }
@@ -62,6 +62,21 @@ framework:
   fragments: ~
   http_method_override: true
   translator: ~
+  profiler:
+    collect: false
+
+monolog:
+  handlers:
+    main:
+      type: fingers_crossed
+      action_level: error
+      handler: nested
+    nested:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      level: debug
+    console:
+      type: console
 
 ss6_shop:
   router:

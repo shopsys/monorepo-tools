@@ -1,3 +1,5 @@
+# specific development configuration
+
 assetic:
   use_controller: false
 
@@ -7,6 +9,9 @@ monolog:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: debug
+    # configuration is merged (not overriden) so "nested" handler must be disabled explicitly
+    nested:
+      type: "null"
     console:
       type: console
       bubble: false
@@ -21,6 +26,8 @@ framework:
     resource: "%kernel.root_dir%/config/routing_dev.yml"
     strict_requirements: true
   profiler:
+    enabled: true
+    collect: true
     only_exceptions: false
     only_master_requests: true
 

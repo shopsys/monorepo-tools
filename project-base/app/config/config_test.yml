@@ -1,5 +1,4 @@
-assetic:
-  use_controller: false
+# should be as same with production as it is possible
 
 doctrine:
   dbal:
@@ -10,18 +9,11 @@ doctrine:
     password: "%test_database_password%"
 
 framework:
-  router:
-    resource: "%kernel.root_dir%/config/routing.yml"
-    strict_requirements: true
-  profiler:
-    only_exceptions: false
-    only_master_requests: true
   test: ~
   session:
     storage_id: session.storage.mock_file
-  profiler:
-    collect: false
 
+# simple login for crawler tests
 security:
   firewalls:
     administration:
