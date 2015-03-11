@@ -1,14 +1,5 @@
-framework:
-  router:
-    resource: "%kernel.root_dir%/config/routing_dev.yml"
-    strict_requirements: true
-  profiler:
-    only_exceptions: false
-    only_master_requests: true
-
-web_profiler:
-  toolbar: true
-  intercept_redirects: false
+assetic:
+  use_controller: false
 
 monolog:
   handlers:
@@ -19,15 +10,23 @@ monolog:
     console:
       type: console
       bubble: false
-
 #    doctrine:
 #      action_level: debug
 #      type:  stream
 #      path:  %kernel.logs_dir%/%kernel.environment%_doctrine.log
 #      channels: doctrine
 
-assetic:
-  use_controller: false
+framework:
+  router:
+    resource: "%kernel.root_dir%/config/routing_dev.yml"
+    strict_requirements: true
+  profiler:
+    only_exceptions: false
+    only_master_requests: true
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+web_profiler:
+  toolbar: true
+  intercept_redirects: false
