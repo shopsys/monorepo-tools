@@ -8,6 +8,7 @@
 		var self = this;
 		var status = null;
 		var $statusIcon = $item.find('.js-category-tree-form-item-icon:first');
+		var $checkbox = $item.find('.js-category-tree-form-item-checkbox:first');
 		self.parent = parent;
 		self.children = [];
 
@@ -30,10 +31,19 @@
 		};
 
 		var initStatus = function () {
-			if (self.children.length > 0) {
-				status = 'close';
-			} else {
-				status = 'none';
+			// status could be set to "open" by children
+			if (status === null) {
+				if (self.children.length > 0) {
+					self.close(true);
+				} else {
+					status = 'none';
+				}
+
+				if ($checkbox.is(':checked')) {
+					if (self.parent instanceof SS6.categoryTree.FormItem) {
+						self.parent.openForceWithParentCascade();
+					}
+				}
 			}
 		};
 
@@ -54,8 +64,20 @@
 			}
 		};
 
-		this.close = function () {
-			if (status === 'open') {
+		this.openForceWithParentCascade = function () {
+			$childrenContainer.show();
+			status = 'open';
+			updateStatusIcon();
+			if (self.parent instanceof SS6.categoryTree.FormItem) {
+				self.parent.openForceWithParentCascade();
+			}
+		};
+
+		this.close = function (force) {
+			if (force === true) {
+				$childrenContainer.hide();
+				status = 'close';
+			} else if (status === 'open') {
 				$childrenContainer.slideUp(function () {
 					status = 'close';
 					updateStatusIcon();
