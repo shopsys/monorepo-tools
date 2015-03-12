@@ -3,7 +3,7 @@
 		<ul class="list-menu">
 			{% for categoryDetail in categoryDetails %}
 				<li class="list-menu__item">
-					<a href="{{ url('front_product_category', { categoryId: categoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--{{ categoryDetail.category.level }}">{{ categoryDetail.category.name }}</a>
+					<a href="{{ url('front_product_list', { id: categoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--{{ categoryDetail.category.level }}">{{ categoryDetail.category.name }}</a>
 					{{ _self.categories(categoryDetail.children) }}
 				</li>
 			{% endfor %}

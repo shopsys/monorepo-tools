@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Category\CategoryService;
@@ -42,13 +43,19 @@ class CategoryFacade {
 	 */
 	private $categoryDetailFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
 	public function __construct(
 		EntityManager $em,
 		CategoryRepository $categoryRepository,
 		CategoryService $categoryService,
 		Domain $domain,
 		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
-		CategoryDetailFactory $categoryDetailFactory
+		CategoryDetailFactory $categoryDetailFactory,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->em = $em;
 		$this->categoryRepository = $categoryRepository;
@@ -56,6 +63,7 @@ class CategoryFacade {
 		$this->domain = $domain;
 		$this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
 		$this->categoryDetailFactory = $categoryDetailFactory;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -79,6 +87,7 @@ class CategoryFacade {
 			$this->em->persist($category);
 			$this->em->flush();
 			$this->createCategoryDomains($category, $this->domain->getAll());
+			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 			$this->em->flush();
 
 			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
@@ -105,6 +114,7 @@ class CategoryFacade {
 			$category = $this->categoryRepository->getById($categoryId);
 			$this->categoryService->edit($category, $categoryData, $rootCategory);
 			$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
+			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 			$this->em->flush();
 
 			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();

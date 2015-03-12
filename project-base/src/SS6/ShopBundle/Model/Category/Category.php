@@ -112,6 +112,18 @@ class Category extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return string[locale]
+	 */
+	public function getNames() {
+		$names = [];
+		foreach ($this->translations as $translation) {
+			$names[$translation->getLocale()] = $translation->getName();
+		}
+
+		return $names;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function getParent() {
