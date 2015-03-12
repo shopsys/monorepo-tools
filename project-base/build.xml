@@ -97,6 +97,13 @@
 		</exec>
 	</target>
 
+	<target name="cron">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:cron" />
+		</exec>
+	</target>
+
 	<target name="db-create">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
