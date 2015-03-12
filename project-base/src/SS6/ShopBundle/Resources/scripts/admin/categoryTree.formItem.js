@@ -37,14 +37,14 @@
 			// status could be set to "opened" by children
 			if (status === null) {
 				if (self.children.length > 0) {
-					self.close(true);
+					self.close(false);
 				} else {
 					setStatus(self.STATUS_NONE);
 				}
 
 				if ($checkbox.is(':checked')) {
 					if (self.parent instanceof SS6.categoryTree.FormItem) {
-						self.parent.openForceWithParentCascade();
+						self.parent.open(false);
 					}
 				}
 			}
@@ -52,36 +52,26 @@
 
 		this.statusToggle = function () {
 			if (status === self.STATUS_CLOSED) {
-				self.open();
+				self.open(true);
 			} else if (status === self.STATUS_OPENED) {
-				self.close();
+				self.close(true);
 			}
 		};
 
-		this.open = function () {
-			if (status === self.STATUS_CLOSED) {
-				$childrenContainer.slideDown(function () {
-					setStatus(self.STATUS_OPENED);
-				});
+		this.open = function (animate) {
+			if (!$childrenContainer.is(':animated')) {
+				$childrenContainer.slideDown(animate === true ? 'normal' : 0);
+				setStatus(self.STATUS_OPENED);
+				if (self.parent instanceof SS6.categoryTree.FormItem) {
+					self.parent.open(animate);
+				}
 			}
 		};
 
-		this.openForceWithParentCascade = function () {
-			$childrenContainer.show();
-			setStatus(self.STATUS_OPENED);
-			if (self.parent instanceof SS6.categoryTree.FormItem) {
-				self.parent.openForceWithParentCascade();
-			}
-		};
-
-		this.close = function (force) {
-			if (force === true) {
-				$childrenContainer.hide();
+		this.close = function (animate) {
+			if (!$childrenContainer.is(':animated')) {
+				$childrenContainer.slideUp(animate === true ? 'normal' : 0);
 				setStatus(self.STATUS_CLOSED);
-			} else if (status === self.STATUS_OPENED) {
-				$childrenContainer.slideUp(function () {
-					setStatus(self.STATUS_CLOSED);
-				});
 			}
 		};
 
