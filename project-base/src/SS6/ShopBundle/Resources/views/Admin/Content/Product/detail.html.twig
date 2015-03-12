@@ -125,10 +125,32 @@
 					{% block images %}{% endblock %}
 					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek' }) }}
 					{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
-
-					{{ form_save(product|default(null), form) }}
-					<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
 				</div>
+
+				<div class="wrap-group">
+					<div class="js-accessories" data-prototype="{{ _self.accessoryItem(form.productData.accessories.vars.prototype)|escape('html_attr') }}">
+						{% macro accessoryItem(accessory) %}
+							<div class="js-accessory">
+								{{ form_widget(accessory) }}
+								<a href="#" class="js-accessory-remove"><i class="fa fa-trash-o"></i></a>
+							</div>
+						{% endmacro %}
+
+						{{ form_label(form.productData.accessories, 'Příslušenství') }}
+						{% for accessory in form.productData.accessories %}
+							{{ _self.accessoryItem(accessory) }}
+						{% else %}
+							{% do form.productData.accessories.setRendered() %}
+						{% endfor %}
+					</div>
+					<a id="js-accessory-add" href="#" class="btn btn-primary">
+						<i class="fa fa-plus fa-lg"></i>
+						{{ 'Přidat položku'|trans }}
+					</a>
+				</div>
+
+				{{ form_save(product|default(null), form) }}
+				<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
 			{{ form_end(form) }}
 		</div>
 

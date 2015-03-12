@@ -202,6 +202,13 @@ class ProductFormType extends AbstractType {
 					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
 					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
 				],
+			])
+			->add('accessories', FormType::COLLECTION, [
+				'required' => false,
+				'type' => FormType::PRODUCT,
+				'allow_add' => true,
+				'allow_delete' => true,
+				'delete_empty' => true,
 			]);
 	}
 

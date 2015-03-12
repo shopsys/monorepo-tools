@@ -108,6 +108,11 @@ class ProductData {
 	public $priceCalculationType;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public $accessories;
+
+	/**
 	 * @param array $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -145,7 +150,8 @@ class ProductData {
 		Availability $outOfStockAvailability = null,
 		array $hiddenOnDomains = [],
 		array $categories = [],
-		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
+		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO,
+		array $accessories = []
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -165,6 +171,7 @@ class ProductData {
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $categories;
 		$this->priceCalculationType = $priceCalculationType;
+		$this->accessories = $accessories;
 	}
 
 	/**
@@ -204,6 +211,7 @@ class ProductData {
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $product->getCategories()->toArray();
 		$this->priceCalculationType = $product->getPriceCalculationType();
+		$this->accessories = $product->getAccessories();
 	}
 
 }
