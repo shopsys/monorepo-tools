@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "00f7fa7dd518f8a3267b07db6570b4f6",
+    "hash": "88113ca02a1360dab8b08ed3a7db16db",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -4293,6 +4293,38 @@
             ],
             "description": "Official version of PHPMD handled with Composer.",
             "time": "2014-05-21 12:45:23"
+        },
+        {
+            "name": "shopsys/phpstorm-inspect",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git",
+                "reference": "008b8471a160ab2ad4a70fd195fce92f00e381b5"
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "bin": [
+                "bin/phpstorm-inspect"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ShopSys\\": "src/ShopSys"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miroslav Sustek",
+                    "email": "miroslav.sustek@shopsys.cz"
+                }
+            ],
+            "description": "Run PhpStorm's inspections from CLI and show results",
+            "time": "2015-03-16 12:39:04"
         },
         {
             "name": "squizlabs/php_codesniffer",
