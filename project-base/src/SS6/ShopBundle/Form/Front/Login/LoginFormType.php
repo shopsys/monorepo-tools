@@ -29,6 +29,9 @@ class LoginFormType extends AbstractType {
 					],
 				]
 			)
+			->add('rememberMe', FormType::CHECKBOX, [
+				'required' => false,
+			])
 			->add('login', FormType::SUBMIT);
 	}
 

@@ -9,11 +9,11 @@ security:
 
   providers:
     administrators:
-      entity: 
+      entity:
         class: SS6ShopBundle:Administrator\Administrator
-        
+
     user_identities:
-      entity: 
+      entity:
         class: SS6ShopBundle:Customer\User
 
   firewalls:
@@ -32,7 +32,7 @@ security:
       logout:
         path: admin_logout
         target: admin_login
-        
+
     frontend:
       pattern: ^/
       anonymous: ~
@@ -45,6 +45,13 @@ security:
         username_parameter: "front_login[email]"
         password_parameter: "front_login[password]"
         csrf_parameter: "front_login[_token]"
+        remember_me: true
+      remember_me:
+        key: "%secret%"
+        lifetime: 2592000 # 30 days
+        path: /
+        domain: ~
+        remember_me_parameter: "front_login[rememberMe]"
       logout:
         path: front_logout
         success_handler: ss6.shop.security.logout_handler

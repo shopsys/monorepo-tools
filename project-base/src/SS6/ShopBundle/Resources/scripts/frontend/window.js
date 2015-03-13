@@ -104,6 +104,7 @@
 			$window.append($windowActions);
 		}
 
+		$window.find('.js-tooltip[title]').tooltip();
 		$window.hide().appendTo(getMainContainer()).fadeIn('fast');
 
 		return $window;
