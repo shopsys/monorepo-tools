@@ -803,6 +803,9 @@ services:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
+  ss6.shop.security.customer_login_handler:
+    class: SS6\ShopBundle\Model\Security\CustomerLoginHandler
+
   ss6.shop.security.login_listener:
     class: SS6\ShopBundle\Model\Security\LoginListener
     tags:

@@ -40,11 +40,11 @@ security:
       form_login:
         check_path: front_login_check
         login_path: front_login
-        default_target_path: front_homepage
-        use_referer: true
         username_parameter: "front_login[email]"
         password_parameter: "front_login[password]"
         csrf_parameter: "front_login[_token]"
+        success_handler: ss6.shop.security.customer_login_handler
+        failure_handler: ss6.shop.security.customer_login_handler
         remember_me: true
       remember_me:
         key: "%secret%"
