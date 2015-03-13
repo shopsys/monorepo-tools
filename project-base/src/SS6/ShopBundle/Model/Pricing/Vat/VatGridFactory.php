@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class VatGridFactory implements GridFactoryInterface {
 
@@ -29,7 +29,7 @@ class VatGridFactory implements GridFactoryInterface {
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;

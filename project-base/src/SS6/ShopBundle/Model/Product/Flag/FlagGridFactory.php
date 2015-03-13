@@ -4,11 +4,11 @@ namespace SS6\ShopBundle\Model\Product\Flag;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class FlagGridFactory implements GridFactoryInterface {
 
@@ -36,7 +36,7 @@ class FlagGridFactory implements GridFactoryInterface {
 		EntityManager $em,
 		GridFactory $gridFactory,
 		Localization $localization,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;

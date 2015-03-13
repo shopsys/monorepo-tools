@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(
  *   name="friendly_urls",
  *   indexes={
- *		@ORM\Index(name="route_name_entity_id", columns={"route_name", "entity_id"})
+ *		@ORM\Index(columns={"route_name", "entity_id"})
  *   }
  * )
  * @ORM\Entity

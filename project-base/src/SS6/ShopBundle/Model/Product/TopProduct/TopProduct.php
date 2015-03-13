@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
  *		@ORM\UniqueConstraint(name="product_domain_unique",columns={"product_id", "domain_id"})
  *	},
  *	indexes={
- *		@ORM\Index(name="idx_entity_id_type", columns={"product_id", "domain_id"})
+ *		@ORM\Index(columns={"product_id", "domain_id"})
  *	}
  * )
  * @ORM\Entity

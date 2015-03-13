@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Payment\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
@@ -12,7 +13,6 @@ use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class PaymentGridFactory implements GridFactoryInterface {
 
@@ -55,7 +55,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 		PaymentRepository $paymentRepository,
 		PaymentDetailFactory $paymentDetailFactory,
 		Localization $localization,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;

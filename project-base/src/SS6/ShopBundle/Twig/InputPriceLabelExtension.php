@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -19,7 +19,10 @@ class InputPriceLabelExtension extends Twig_Extension {
 	 */
 	private $translator;
 
-	public function __construct(PricingSetting $pricingSetting, TranslatorInterface $translator) {
+	public function __construct(
+		PricingSetting $pricingSetting,
+		Translator $translator
+	) {
 		$this->pricingSetting = $pricingSetting;
 		$this->translator = $translator;
 	}

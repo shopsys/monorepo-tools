@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Admin\AdvancedSearch;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class AdvancedSearchTranslation {
 
@@ -22,7 +22,7 @@ class AdvancedSearchTranslation {
 	 */
 	private $filtersTranslations;
 
-	public function __construct(TranslatorInterface $translator) {
+	public function __construct(Translator $translator) {
 		$this->translator = $translator;
 
 		$this->operatorsTranslations = [

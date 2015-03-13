@@ -7,7 +7,7 @@ import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
 use JProgramNode;
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
-use Symfony\Component\Translation\TranslatorInterface;
+use SS6\ShopBundle\Component\Translation\Translator;
 
 class JsTranslatorCompilerPass implements JsCompilerPassInterface {
 
@@ -23,7 +23,7 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface {
 
 	public function __construct(
 		JsTranslatorCallParser $jsTranslatorCallParser,
-		TranslatorInterface $translator
+		Translator $translator
 	) {
 		$this->jsTranslatorCallParser = $jsTranslatorCallParser;
 		$this->translator = $translator;

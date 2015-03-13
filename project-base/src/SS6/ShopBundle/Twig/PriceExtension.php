@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
@@ -27,7 +27,11 @@ class PriceExtension extends Twig_Extension {
 	 */
 	private $domain;
 
-	public function __construct(TranslatorInterface $translator, CurrencyFacade $currencyFacade, Domain $domain) {
+	public function __construct(
+		Translator $translator,
+		CurrencyFacade $currencyFacade,
+		Domain $domain
+	) {
 		$this->translator = $translator;
 		$this->currencyFacade = $currencyFacade;
 		$this->domain = $domain;

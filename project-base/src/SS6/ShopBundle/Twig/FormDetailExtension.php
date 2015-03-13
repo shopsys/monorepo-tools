@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Translation\TranslatorInterface;
 use Twig_Environment;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -21,7 +21,10 @@ class FormDetailExtension extends Twig_Extension {
 	 */
 	private $translator;
 
-	public function __construct(ContainerInterface $container, TranslatorInterface $translator) {
+	public function __construct(
+		ContainerInterface $container,
+		Translator $translator
+	) {
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
 		$this->translator = $translator;
 	}
