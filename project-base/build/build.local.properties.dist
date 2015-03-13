@@ -1,1 +1,2 @@
 path.composer.executable=composer
+path.phpstorm.inspect.sh=/opt/phpstorm/bin/inspect.sh
