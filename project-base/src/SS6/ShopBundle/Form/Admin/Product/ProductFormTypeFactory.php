@@ -21,7 +21,7 @@ class ProductFormTypeFactory {
 	private $availabilityRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\InverseArrayValuesTransformer
+	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 */
 	private $inverseArrayValuesTransformer;
 

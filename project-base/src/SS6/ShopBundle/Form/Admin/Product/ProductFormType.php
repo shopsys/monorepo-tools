@@ -33,7 +33,7 @@ class ProductFormType extends AbstractType {
 	private $availabilities;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer
+	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 */
 	private $inverseArrayValuesTransformer;
 
@@ -50,7 +50,7 @@ class ProductFormType extends AbstractType {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
+	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
