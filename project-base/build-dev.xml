@@ -16,11 +16,11 @@
 
 	<target name="composer-dev">
 		<exec
-				executable="${path.composer.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.composer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="install"/>
 		</exec>
 	</target>
@@ -81,11 +81,11 @@
 
 	<target name="phpcs">
 		<exec
-				executable="${path.phpcs.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phpcs.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="--standard=${path.phpcs.ruleset}"/>
 			<arg value="--extensions=php"/>
 			<arg value="--encoding=utf-8"/>
@@ -96,11 +96,11 @@
 
 	<target name="phpcs-fixer">
 		<exec
-				executable="${path.phpcs-fixer.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phpcs-fixer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="fix" />
 			<arg value="--config-file=${path.phpcs-fixer.configuration}" />
 			<arg value="--dry-run" />
@@ -112,11 +112,11 @@
 
 	<target name="phpcs-fixer-fix">
 		<exec
-				executable="${path.phpcs-fixer.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="false"
-				>
+			executable="${path.phpcs-fixer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="false"
+		>
 			<arg value="fix" />
 			<arg value="--config-file=${path.phpcs-fixer.configuration}" />
 			<arg value="--verbose" />
@@ -217,11 +217,11 @@
 
 	<target name="phplint">
 		<exec
-				executable="${path.phplint.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phplint.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg path="${path.src}"/>
 		</exec>
 	</target>
@@ -254,11 +254,11 @@
 
 	<target name="phpmd">
 		<exec
-				executable="${path.phpmd.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phpmd.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="${path.src}"/>
 			<arg value="text"/>
 			<arg value="${path.phpmd.ruleset}"/>
@@ -298,11 +298,11 @@
 
 	<target name="tests">
 		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
@@ -312,11 +312,11 @@
 
 	<target name="tests-db">
 		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
@@ -326,11 +326,11 @@
 
 	<target name="tests-crawler">
 		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
