@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Constraints;
 
+use SS6\ShopBundle\Component\Constraints\UniqueCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -18,7 +19,10 @@ class UniqueCollectionValidator extends ConstraintValidator {
 		}
 
 		if (!is_array($constraint->fields) || count($constraint->fields) === 0) {
-			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueCollection::class);
+			throw new \Symfony\Component\Validator\Exception\MissingOptionsException(
+				'Option "fileds" is either missing or is not an array',
+				['fields']
+			);
 		}
 
 		foreach ($values as $index1 => $value1) {
