@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "88113ca02a1360dab8b08ed3a7db16db",
+    "hash": "a924e4b3d35af30acccdfc5590c240b3",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -145,12 +145,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueFormFlowBundle.git",
-                "reference": "55da5011b857c8901d516b3cb45c6474383dc04d"
+                "reference": "55da501"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/55da5011b857c8901d516b3cb45c6474383dc04d",
-                "reference": "55da5011b857c8901d516b3cb45c6474383dc04d",
+                "reference": "55da501",
                 "shasum": ""
             },
             "require": {
@@ -1248,12 +1248,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sustmi/JsFormValidatorBundle.git",
-                "reference": "bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4"
+                "reference": "bb2be7e"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4",
-                "reference": "bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4",
+                "reference": "bb2be7e",
                 "shasum": ""
             },
             "require": {
@@ -1712,12 +1712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "8eff56746b73762dfe06414faf0fb609bfe51754"
+                "reference": "8eff567"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/8eff56746b73762dfe06414faf0fb609bfe51754",
-                "reference": "8eff56746b73762dfe06414faf0fb609bfe51754",
+                "reference": "8eff567",
                 "shasum": ""
             },
             "require": {
@@ -2488,12 +2488,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Prezent/doctrine-translatable-bundle.git",
-                "reference": "adfc8496d909f483f946cfdb0fe2820e617251d8"
+                "reference": "adfc849"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Prezent/doctrine-translatable-bundle/zipball/adfc8496d909f483f946cfdb0fe2820e617251d8",
-                "reference": "adfc8496d909f483f946cfdb0fe2820e617251d8",
+                "reference": "adfc849",
                 "shasum": ""
             },
             "require": {
@@ -3974,12 +3974,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sustmi/jparser.git",
-                "reference": "e996c9c6596c36300a36a456f1cf24012833ae4e"
+                "reference": "e996c9c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sustmi/jparser/zipball/e996c9c6596c36300a36a456f1cf24012833ae4e",
-                "reference": "e996c9c6596c36300a36a456f1cf24012833ae4e",
+                "reference": "e996c9c",
                 "shasum": ""
             },
             "type": "library",
@@ -4172,12 +4172,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JakubOnderka/PHP-Parallel-Lint.git",
-                "reference": "41365ce7af6be4b55a3507965dd39ea743637080"
+                "reference": "41365ce"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/41365ce7af6be4b55a3507965dd39ea743637080",
-                "reference": "41365ce7af6be4b55a3507965dd39ea743637080",
+                "reference": "41365ce",
                 "shasum": ""
             },
             "require": {
@@ -4332,12 +4332,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "676e90b8ccfddf89b9bf72e9b01072c4b3342b94"
+                "reference": "676e90b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/676e90b8ccfddf89b9bf72e9b01072c4b3342b94",
-                "reference": "676e90b8ccfddf89b9bf72e9b01072c4b3342b94",
+                "reference": "676e90b",
                 "shasum": ""
             },
             "require": {
@@ -4459,14 +4459,12 @@
         "prezent/doctrine-translatable-bundle": 20,
         "timwhitlock/jparser": 20,
         "jakub-onderka/php-parallel-lint": 20,
-        "pdepend/pdepend": 20,
-        "phpmd/phpmd": 20,
         "squizlabs/php_codesniffer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6"
+        "php": "5.6.6"
     },
     "platform-dev": []
 }
