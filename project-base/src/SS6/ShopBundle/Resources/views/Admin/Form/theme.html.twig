@@ -160,7 +160,7 @@
 		{% for categoryDetail in categoryDetails %}
 			{% set categoryForm = form[categoryDetail.category.id] %}
 			<li class="checkbox js-category-tree-form-item">
-				<i class="fa fa-plus-square-o js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' cursor-pointer' : ''}}"></i>
+				<i class="fa fa-square-o js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' cursor-pointer' : ''}}"></i>
 				<label>
 					{{ form_widget(categoryForm, { attr: { class: 'js-category-tree-form-item-checkbox' } }) }}
 					{{ categoryForm.vars.label }}
