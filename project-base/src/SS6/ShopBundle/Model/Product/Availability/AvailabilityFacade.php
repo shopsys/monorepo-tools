@@ -7,6 +7,8 @@ use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 
@@ -37,18 +39,32 @@ class AvailabilityFacade {
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 */
+	private $productEditFacade;
+
 	public function __construct(
 		EntityManager $em,
 		AvailabilityRepository $availabilityRepository,
 		AvailabilityService $availabilityService,
 		Setting $setting,
-		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
+		ProductRepository $productRepository,
+		ProductEditFacade $productEditFacade
 	) {
 		$this->em = $em;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->availabilityService = $availabilityService;
 		$this->setting = $setting;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
+		$this->productRepository = $productRepository;
+		$this->productEditFacade = $productEditFacade;
 	}
 
 	/**
@@ -86,12 +102,23 @@ class AvailabilityFacade {
 
 	/**
 	 * @param int $availabilityId
+	 * @param int|null $newAvailabilityId
 	 */
-	public function deleteById($availabilityId) {
+	public function deleteById($availabilityId, $newAvailabilityId = null) {
 		$availability = $this->availabilityRepository->getById($availabilityId);
+
+		if ($newAvailabilityId !== null) {
+			$products = $this->productRepository->findByAvailabilityId($availabilityId);
+			$newAvailability = $this->availabilityRepository->getById($newAvailabilityId);
+			$this->availabilityService->delete($products, $availability, $newAvailability);
+			if ($this->isAvailabilityDefault($availability)) {
+				$this->setDefaultInStockAvailability($newAvailability);
+			}
+		}
 
 		$this->em->remove($availability);
 		$this->em->flush();
+		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 	}
 
 	/**
@@ -116,6 +143,30 @@ class AvailabilityFacade {
 	 */
 	public function getAll() {
 		return $this->availabilityRepository->getAll();
+	}
+
+	/**
+	 * @param int $availabilityId
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 */
+	public function getAllExceptId($availabilityId) {
+		return $this->availabilityRepository->getAllExceptId($availabilityId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @return bool
+	 */
+	public function isAvailabilityUsed(Availability $availability) {
+		return $this->availabilityRepository->getProductsCountByAvailabilty($availability);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @return bool
+	 */
+	public function isAvailabilityDefault(Availability $availability) {
+		return ($this->getDefaultInStockAvailability() === $availability);
 	}
 
 }

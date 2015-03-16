@@ -386,4 +386,15 @@ class ProductRepository {
 		return $this->getProductRepository()->findAll();
 	}
 
+	/**
+	 * @param int $availabilityId
+	 * @return \SS6\ShopBundle\Model\Product[]
+	 */
+	public function findByAvailabilityId($availabilityId) {
+		$productsWithAvailability = $this->getProductRepository()->findBy(['availability' => $availabilityId]);
+		$productsWithOutOfStockAvailability = $this->getProductRepository()->findBy(['outOfStockAvailability' => $availabilityId]);
+
+		return array_merge($productsWithAvailability, $productsWithOutOfStockAvailability);
+	}
+
 }

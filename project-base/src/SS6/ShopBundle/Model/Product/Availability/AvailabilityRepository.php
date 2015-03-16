@@ -2,10 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Product\Availability;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
+use SS6\ShopBundle\Model\Product\Product;
 
 class AvailabilityRepository {
 
@@ -64,6 +66,32 @@ class AvailabilityRepository {
 		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
 
 		return $query->execute();
+	}
+
+	/**
+	 * @param int $availabilityId
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 */
+	public function getAllExceptId($availabilityId) {
+		$qb = $this->getAvailabilityRepository()->createQueryBuilder('a')
+			->where('a.id != :id')
+			->setParameter('id', $availabilityId);
+
+		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @return int
+	 */
+	public function getProductsCountByAvailabilty(Availability $availability) {
+		$query = $this->em->createQuery('
+			SELECT COUNT(p)
+			FROM ' . Product::class . ' p
+			WHERE p.availability = :availability OR p.outOfStockAvailability = :availability')
+			->setParameter('availability', $availability->getId());
+
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
 	}
 
 }
