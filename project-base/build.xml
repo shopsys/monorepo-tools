@@ -20,7 +20,7 @@
 	<property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
 	<property name="path.phpmd.executable" value="${path.bin}/phpmd"/>
 	<property name="path.phpmd.ruleset" value="${path.build}/rulesetMD.xml"/>
-	<property name="path.phpstorm.inspect.sh" value="/opt/phpstorm8/bin/inspect.sh"/>
+	<property name="path.phpstorm.inspect.sh" value="/home/jenkins/phpstorm-inspect-queue.sh"/>
 	<property name="path.phpstorm.project" value="${path.build}/phpstorm/ShopSys6/"/>
 	<property name="path.phpstorm.project.inspection-profile" value="${path.build}/phpstorm/ShopSys6/.idea/inspectionProfiles/Project_Default.xml"/>
 	<property name="path.phpstorm-inspect.executable" value="${path.bin}/phpstorm-inspect"/>
