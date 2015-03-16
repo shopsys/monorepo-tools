@@ -9,7 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class DirectoryStructureCreator {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ImageConfig\ImageConfig
+	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 

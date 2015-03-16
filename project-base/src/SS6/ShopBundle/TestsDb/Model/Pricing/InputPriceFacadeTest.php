@@ -55,7 +55,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get('ss6.shop.setting');
-		/* @var $setting SS6\ShopBundle\Model\Setting\Setting */
+		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 		$inputPriceFacade = $this->getContainer()->get('ss6.shop.pricing.input_price_facade');
 		/* @var $inputPriceFacade \SS6\ShopBundle\Model\Pricing\InputPriceFacade */
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
@@ -129,7 +129,7 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get('ss6.shop.setting');
-		/* @var $setting SS6\ShopBundle\Model\Setting\Setting */
+		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 		$inputPriceFacade = $this->getContainer()->get('ss6.shop.pricing.input_price_facade');
 		/* @var $inputPriceFacade \SS6\ShopBundle\Model\Pricing\InputPriceFacade */
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');

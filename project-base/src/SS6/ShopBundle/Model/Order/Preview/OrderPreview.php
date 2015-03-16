@@ -39,20 +39,20 @@ class OrderPreview {
 	private $paymentPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private $totalPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private $productsPrice;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItems
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
-	 * @param \SS6\ShopBundle\Model\Pricing\Price\Price $productsPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price\Price $totalPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment

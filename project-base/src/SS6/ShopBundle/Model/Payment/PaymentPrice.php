@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 class PaymentPrice {
 
 	/**
-	 * @var SS6\ShopBundle\Model\Payment\Payment
+	 * @var \SS6\ShopBundle\Model\Payment\Payment
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment", inversedBy="prices")
@@ -21,7 +21,7 @@ class PaymentPrice {
 	private $payment;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Currency\Currency")

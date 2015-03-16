@@ -18,7 +18,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	private $topProductFacade;
 
 	/**
-	 * @var SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
+	 * @var \SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
 	 */
 	private $productIdToProductTransformer;
 

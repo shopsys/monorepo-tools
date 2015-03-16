@@ -28,7 +28,7 @@ class ImageService {
 	}
 
 	/**
-	 * @param SS6\ShopBundle\Model\Image\Config\ImageEntityConfig $imageEntityConfig
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig $imageEntityConfig
 	 * @param int $entityId
 	 * @param array $temporaryFilenames
 	 * @param string|null $type
@@ -50,7 +50,7 @@ class ImageService {
 	}
 
 	/**
-	 * @param SS6\ShopBundle\Model\Image\Config\ImageEntityConfig $imageEntityConfig
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig $imageEntityConfig
 	 * @param int $entityId
 	 * @param string $temporaryFilename
 	 * @param string|null $type

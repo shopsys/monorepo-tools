@@ -43,7 +43,7 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $orderStatusId
-	 * @param SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
 	protected function editEntity($orderStatusId, $orderStatusData) {
 		$this->orderStatusFacade->edit($orderStatusId, $orderStatusData);

@@ -235,7 +235,7 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\SS6\ShopBundle\Model\Customer\User $user
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @return array
 	 */
 	public function getCustomerOrderList(User $user) {

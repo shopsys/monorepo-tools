@@ -42,7 +42,7 @@ class PricingGroupRepository {
 	}
 
 	/**
-	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	public function getAll() {
 		return $this->getPricingGroupRepository()->findAll();
@@ -50,7 +50,7 @@ class PricingGroupRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	public function getPricingGroupsByDomainId($domainId) {
 		return $this->getPricingGroupRepository()->findBy(['domainId' => $domainId]);
@@ -58,7 +58,7 @@ class PricingGroupRepository {
 
 	/**
 	 * @param int $pricingGroupId
-	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null
 	 */
 	public function findById($pricingGroupId) {
 		return $this->getPricingGroupRepository()->find($pricingGroupId);

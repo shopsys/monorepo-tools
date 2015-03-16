@@ -29,7 +29,7 @@ class Bag {
 	public function __construct($bagName, Session $session) {
 		if (!is_string($bagName) || empty($bagName)) {
 			$message = 'Bag name for messages must be non-empty string.';
-			throw new \SS6\ShopBundle\Model\Message\Exception\BagNameIsNotValidException($message);
+			throw new \SS6\ShopBundle\Model\FlashMessage\Exception\BagNameIsNotValidException($message);
 		}
 
 		$this->session = $session;

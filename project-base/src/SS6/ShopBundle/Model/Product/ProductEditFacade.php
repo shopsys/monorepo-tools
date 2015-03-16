@@ -43,7 +43,7 @@ class ProductEditFacade {
 	private $parameterRepository;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
 

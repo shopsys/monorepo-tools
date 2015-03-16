@@ -66,7 +66,7 @@ class SliderController extends Controller {
 
 		if ($form->isValid()) {
 			$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
-			/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
+			/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade */
 			$sliderItem = $sliderItemFacade->create($form->getData());
 
 			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena stránka slideru'
@@ -144,7 +144,7 @@ class SliderController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
-		/* @var $sliderItemFacade SS6\ShopBundle\Model\Slider\SliderItemFacade */
+		/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade */
 
 		try {
 			$name = $sliderItemFacade->getById($id)->getName();

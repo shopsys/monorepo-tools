@@ -21,7 +21,7 @@ class PoDumper implements DumperInterface {
 	}
 
 	/**
-	 * @param JMS\TranslationBundle\Model\MessageCatalogue $catalogue
+	 * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
 	 * @param string $domain
 	 * @return string
 	 */
@@ -51,7 +51,7 @@ class PoDumper implements DumperInterface {
 
 	/**
 
-	 * @param JMS\TranslationBundle\Model\Message $message
+	 * @param \JMS\TranslationBundle\Model\Message $message
 	 * @return string
 	 */
 	private function getReferences(Message $message) {

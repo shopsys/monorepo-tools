@@ -359,14 +359,14 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product[]
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getVisibleProductsByDomainId($domainId) {
 		return $this->getAllVisibleByDomainIdQueryBuilder($domainId)->getQuery()->getResult();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product[]
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getAll() {
 		return $this->getProductRepository()->findAll();
