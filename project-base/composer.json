@@ -16,6 +16,10 @@
 		{
 			"type": "vcs",
 			"url": "https://github.com/sustmi/JsFormValidatorBundle.git"
+		},
+		{
+			"type": "vcs",
+			"url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git"
 		}
 	],
 	"require": {
@@ -55,6 +59,7 @@
 		"jakub-onderka/php-parallel-lint": "dev-master",
 		"pdepend/pdepend": "2.0.0.*@dev",
 		"phpmd/phpmd": "2.0.0.*@dev",
+		"shopsys/phpstorm-inspect": "1.0.0",
 		"squizlabs/php_codesniffer": "2.0.*@dev"
 	},
 	"scripts": {

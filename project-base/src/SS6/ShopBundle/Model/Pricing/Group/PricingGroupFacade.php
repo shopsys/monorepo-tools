@@ -130,7 +130,7 @@ class PricingGroupFacade {
 	}
 
 	/**
-	 * @return SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	public function getPricingGroupsBySelectedDomainId() {
 		return $this->pricingGroupRepository->getPricingGroupsByDomainId($this->selectedDomain->getId());

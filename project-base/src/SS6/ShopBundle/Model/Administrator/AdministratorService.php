@@ -8,12 +8,12 @@ use Symfony\Component\Security\Core\SecurityContext;
 class AdministratorService {
 
 	/**
-	 * @var Symfony\Component\Security\Core\Encoder\EncoderFactory
+	 * @var \Symfony\Component\Security\Core\Encoder\EncoderFactory
 	 */
 	private $encoderFactory;
 
 	/**
-	 * @var Symfony\Component\Security\Core\SecurityContext
+	 * @var \Symfony\Component\Security\Core\SecurityContext
 	 */
 	private $securityContext;
 

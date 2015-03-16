@@ -71,7 +71,7 @@ class UserRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return zSS6\ShopBundle\Model\Customer\User[]
+	 * @return \SS6\ShopBundle\Model\Customer\User[]
 	 */
 	public function getAllByPricingGroup(PricingGroup $pricingGroup) {
 		return $this->getUserRepository()->findBy(['pricingGroup' => $pricingGroup]);

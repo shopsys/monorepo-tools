@@ -77,13 +77,13 @@ class ProductData {
 
 	/**
 	 *
-	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public $availability;
 
 	/**
 	 *
-	 * @var \SS6\ShopBundle\Model\Availability\Availability|null
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public $outOfStockAvailability;
 
@@ -121,8 +121,8 @@ class ProductData {
 	 * @param array $flags
 	 * @param bool $usingStock
 	 * @param string|null $stockQuantity
-	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $availability
-	 * @param \SS6\ShopBundle\Model\Availability\Availability|null $outOfStockAvailability
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $availability
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
 	 * @param int $priceCalculationType

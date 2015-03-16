@@ -35,7 +35,7 @@ class SeoSettingFormTypeFactory {
 	}
 
 	/**
-	 * @return SS6\ShopBundle\Form\Admin\Seo\SeoSettingFormType
+	 * @return \SS6\ShopBundle\Form\Admin\Seo\SeoSettingFormType
 	 */
 	public function create() {
 		return new SeoSettingFormType(

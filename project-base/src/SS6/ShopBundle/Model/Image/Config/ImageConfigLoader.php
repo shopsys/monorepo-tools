@@ -17,7 +17,7 @@ class ImageConfigLoader {
 	private $filesystem;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
+	 * @var \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
 	 */
 	private $foundEntityConfigs;
 

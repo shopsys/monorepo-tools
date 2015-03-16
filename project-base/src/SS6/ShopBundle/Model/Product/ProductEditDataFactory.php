@@ -32,7 +32,7 @@ class ProductEditDataFactory {
 	private $parameterRepository;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
 	 */
 	private $productManualInputPriceFacade;
 

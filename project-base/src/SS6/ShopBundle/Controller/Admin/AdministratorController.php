@@ -15,7 +15,7 @@ class AdministratorController extends Controller {
 
 	/**
 	 * @Route("/administrator/list/")
-	 * @param Symfony\Component\HttpFoundation\Request $request
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction() {
 		$gridFactory = $this->get('ss6.shop.grid.factory');

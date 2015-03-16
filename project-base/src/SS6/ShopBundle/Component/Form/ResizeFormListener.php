@@ -291,7 +291,7 @@ class ResizeFormListener implements EventSubscriberInterface {
 	/**
 	 * Copy-pasted from Form::viewToNorm()
 	 *
-	 * @param Symfony\Component\Form\FormInterface $form
+	 * @param \Symfony\Component\Form\FormInterface $form
 	 * @param string $value
 	 * @return mixed
 	 */

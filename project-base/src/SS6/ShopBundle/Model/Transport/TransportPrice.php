@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class TransportPrice {
 
 	/**
-	 * @var SS6\ShopBundle\Model\Transport\Transport
+	 * @var \SS6\ShopBundle\Model\Transport\Transport
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport", inversedBy="prices")
@@ -21,7 +21,7 @@ class TransportPrice {
 	private $transport;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Currency\Currency")

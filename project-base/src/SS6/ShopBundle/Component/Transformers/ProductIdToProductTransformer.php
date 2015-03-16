@@ -9,7 +9,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 class ProductIdToProductTransformer implements DataTransformerInterface {
 
 	/**
-	 * @var SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -18,7 +18,7 @@ class ProductIdToProductTransformer implements DataTransformerInterface {
 	}
 
 	/**
-	 * @param SS6\ShopBundle\Model\Product\Product|null $product
+	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 * @return int|null
 	 */
 	public function transform($product) {
@@ -30,7 +30,7 @@ class ProductIdToProductTransformer implements DataTransformerInterface {
 
 	/**
 	 * @param int $productId
-	 * @return SS6\ShopBundle\Model\Product\Product|null
+	 * @return \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function reverseTransform($productId) {
 		if (empty($productId)) {

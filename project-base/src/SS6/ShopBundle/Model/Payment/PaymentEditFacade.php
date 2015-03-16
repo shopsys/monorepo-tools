@@ -33,7 +33,7 @@ class PaymentEditFacade {
 	private $transportRepository;
 
 	/**
-	 * @var SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation
 	 */
 	private $paymentVisibilityCalculation;
 

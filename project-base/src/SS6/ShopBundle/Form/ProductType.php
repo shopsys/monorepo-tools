@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormView;
 class ProductType extends AbstractType {
 
 	/**
-	 * @var SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
+	 * @var \SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
 	 */
 	private $productIdToProductTransformer;
 

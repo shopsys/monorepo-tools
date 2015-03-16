@@ -33,7 +33,7 @@ class TranslationEditFacade {
 	private $translator;
 
 	/**
-	 * @var SS6\ShopBundle\Component\Translation\PoDumper
+	 * @var \SS6\ShopBundle\Component\Translation\PoDumper
 	 */
 	private $poDumper;
 

@@ -3,12 +3,14 @@
 
 	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-rebuild,warmup,checks-diff" />
 	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,checks-diff" />
-	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,img-demo,checks" />
+	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,img-dirs,assetic,assets,grunt,db-demo,warmup,img-demo,checks-ci" />
 
 	<target name="checks" depends="standards,tests-all" />
+	<target name="checks-ci" depends="standards-ci,tests-all" />
 	<target name="checks-diff" depends="standards-diff,tests-all" />
 
 	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint" />
+	<target name="standards-ci" depends="standards,phpstorm-inspect" />
 	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint" />
 
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
@@ -294,6 +296,20 @@
 				</exec>
 			</then>
 		</if>
+	</target>
+
+	<target name="phpstorm-inspect">
+		<exec
+			executable="${path.phpstorm-inspect.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg path="${path.phpstorm.inspect.sh}"/>
+			<arg path="${path.phpstorm.project}"/>
+			<arg path="${path.phpstorm.project.inspection-profile}"/>
+			<arg path="${path.src}"/>
+		</exec>
 	</target>
 
 	<target name="tests">

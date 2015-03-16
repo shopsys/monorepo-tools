@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class SecurityUserRepository extends EntityRepository implements UserProviderInterface {
 
 	/**
-	 * @var SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
 
