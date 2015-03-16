@@ -24,11 +24,23 @@ class ProductPickerController extends Controller {
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
 		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
+		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
+		/* @var $advancedSearchFacade \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade */
 
-		$form = $this->createForm(new QuickSearchFormType());
-		$form->handleRequest($request);
-		$searchData = $form->getData();
-		$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($searchData);
+		$advancedSearchForm = $advancedSearchFacade->createAdvancedSearchForm($request);
+		$advancedSearchData = $advancedSearchForm->getData();
+
+		$quickSearchForm = $this->createForm(new QuickSearchFormType());
+		$quickSearchForm->handleRequest($request);
+		$quickSearchData = $quickSearchForm->getData();
+
+		$isAdvancedSearchFormSubmitted = $advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+		if ($isAdvancedSearchFormSubmitted) {
+			$queryBuilder = $advancedSearchFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
+		} else {
+			$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
+		}
+
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $gridFactory->create('productPicker', $dataSource);
@@ -48,7 +60,9 @@ class ProductPickerController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/ProductPicker/list.html.twig', [
 			'gridView' => $grid->createView(),
-			'quickSearchForm' => $form->createView(),
+			'quickSearchForm' => $quickSearchForm->createView(),
+			'advancedSearchForm' => $advancedSearchForm->createView(),
+			'isAdvancedSearchFormSubmitted' => $advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
 		]);
 	}
 

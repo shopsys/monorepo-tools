@@ -3,7 +3,16 @@
 {% block content %}
 	{{ form_start(quickSearchForm) }}
 
-		{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+		<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
+			{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+		</div>
+
+		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+			with {
+				advancedSearchForm: advancedSearchForm,
+				isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
+			}
+		%}
 
 		{{ gridView.render() }}
 		{{ gridView.renderHiddenInputs('page') }}
