@@ -127,11 +127,12 @@ class ProductEditFacade {
 
 		$this->em->persist($product);
 		$this->em->beginTransaction();
+		$this->em->flush($product);
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
 		$this->refreshProductDomains($product, $productEditData);
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
-		$this->em->flush();
+
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 		$this->em->commit();
@@ -191,8 +192,9 @@ class ProductEditFacade {
 		foreach ($oldProductParameterValues as $oldProductParameterValue) {
 			$this->em->remove($oldProductParameterValue);
 		}
-		$this->em->flush();
+		$this->em->flush($oldProductParameterValues);
 
+		$toFlush = [];
 		foreach ($productParameterValuesData as $productParameterValueData) {
 			$productParameterValueData->product = $product;
 			$productParameterValue = new ProductParameterValue(
@@ -202,8 +204,9 @@ class ProductEditFacade {
 				$this->parameterRepository->findOrCreateParameterValueByValueText($productParameterValueData->valueText)
 			);
 			$this->em->persist($productParameterValue);
+			$toFlush[] = $productParameterValue;
 		}
-		$this->em->flush();
+		$this->em->flush($toFlush);
 	}
 
 	/**
@@ -235,11 +238,13 @@ class ProductEditFacade {
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
 	 */
 	private function createProductDomains(Product $product, array $domains) {
+		$toFlush = [];
 		foreach ($domains as $domain) {
 			$productDomain = new ProductDomain($product, $domain->getId());
 			$this->em->persist($productDomain);
+			$toFlush[] = $productDomain;
 		}
-		$this->em->flush();
+		$this->em->flush($toFlush);
 
 	}
 
@@ -266,7 +271,7 @@ class ProductEditFacade {
 			}
 		}
 
-		$this->em->flush();
+		$this->em->flush($productDomains);
 	}
 
 	/**

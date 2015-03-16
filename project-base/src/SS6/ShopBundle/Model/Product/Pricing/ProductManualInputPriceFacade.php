@@ -56,7 +56,7 @@ class ProductManualInputPriceFacade {
 			$inputPrice,
 			$manualInputPrice);
 		$this->em->persist($refreshedProductManualInputPrice);
-		$this->em->flush();
+		$this->em->flush($refreshedProductManualInputPrice);
 	}
 
 	/**
@@ -75,6 +75,7 @@ class ProductManualInputPriceFacade {
 		foreach ($manualInputPrices as $manualInputPrice) {
 			$this->em->remove($manualInputPrice);
 		}
+		$this->em->flush($manualInputPrices);
 	}
 
 }

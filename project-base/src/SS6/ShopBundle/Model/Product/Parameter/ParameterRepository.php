@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -135,5 +136,32 @@ class ParameterRepository {
 		return $this->getProductParameterValueRepository()->findBy([
 			'parameter' => $parameter,
 		]);
+	}
+
+	/**
+	 * @param string[locale] $namesByLocale
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter|null
+	 */
+	public function findParameterByNames(array $namesByLocale) {
+		$queryBuilder = $this->getParameterRepository()->createQueryBuilder('p');
+		$index = 0;
+		foreach ($namesByLocale as $locale => $name) {
+			$alias = 'pt' . $index;
+			$localeParameterName = 'locale' . $index;
+			$nameParameterName = 'name' . $index;
+			$queryBuilder->join(
+				'p.translations',
+				$alias,
+				Join::WITH,
+				'p = ' . $alias . '.translatable
+					AND ' . $alias . '.locale = :' . $localeParameterName . '
+					AND ' . $alias . '.name = :' . $nameParameterName
+			);
+			$queryBuilder->setParameter($localeParameterName, $locale);
+			$queryBuilder->setParameter($nameParameterName, $name);
+			$index++;
+		}
+
+		return $queryBuilder->getQuery()->getOneOrNullResult();
 	}
 }

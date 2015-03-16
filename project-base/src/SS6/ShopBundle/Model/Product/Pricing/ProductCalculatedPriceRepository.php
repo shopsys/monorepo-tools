@@ -32,6 +32,7 @@ class ProductCalculatedPriceRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $priceWithVat
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice
 	 */
 	public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
 		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
@@ -45,6 +46,8 @@ class ProductCalculatedPriceRepository {
 		} else {
 			$productCalculatedPrice->setPriceWithVat($priceWithVat);
 		}
+
+		$this->em->flush($productCalculatedPrice);
 	}
 
 }

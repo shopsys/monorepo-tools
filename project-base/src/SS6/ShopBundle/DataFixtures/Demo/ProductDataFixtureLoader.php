@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Component\String\TransformString;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
@@ -19,6 +20,11 @@ class ProductDataFixtureLoader {
 	 * @var CsvReader
 	 */
 	private $csvReader;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
+	 */
+	private $parameterFacade;
 
 	/**
 	 * @var string
@@ -53,10 +59,12 @@ class ProductDataFixtureLoader {
 	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
 	 */
-	public function __construct($path, CsvReader $csvReader) {
+	public function __construct($path, CsvReader $csvReader, ParameterFacade $parameterFacade) {
 		$this->path = $path;
 		$this->csvReader = $csvReader;
+		$this->parameterFacade = $parameterFacade;
 	}
 
 	/**
@@ -70,6 +78,7 @@ class ProductDataFixtureLoader {
 		$this->availabilities = $availabilities;
 		$this->categories = $categories;
 		$this->flags = $flags;
+		$this->parameters = [];
 	}
 
 	/**
@@ -172,7 +181,11 @@ class ProductDataFixtureLoader {
 
 			if (!isset($this->parameters[$serializedParameterNames])) {
 				$parameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
-				$this->parameters[$serializedParameterNames] = new Parameter(new ParameterData($parameterNames));
+				$parameter = $this->parameterFacade->findParameterByNames($parameterNames);
+				if ($parameter === null) {
+					$parameter = $this->parameterFacade->create(new ParameterData($parameterNames));
+				}
+				$this->parameters[$serializedParameterNames] = $parameter;
 			}
 
 			$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);

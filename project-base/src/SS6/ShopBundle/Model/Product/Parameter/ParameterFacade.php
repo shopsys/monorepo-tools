@@ -54,9 +54,17 @@ class ParameterFacade {
 	public function create(ParameterData $parameterData) {
 		$parameter = $this->parameterService->create($parameterData);
 		$this->em->persist($parameter);
-		$this->em->flush();
+		$this->em->flush($parameter);
 
 		return $parameter;
+	}
+
+	/**
+	 * @param string[locale] $namesByLocale
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter|null
+	 */
+	public function findParameterByNames(array $namesByLocale) {
+		return $this->parameterRepository->findParameterByNames($namesByLocale);
 	}
 
 	/**
