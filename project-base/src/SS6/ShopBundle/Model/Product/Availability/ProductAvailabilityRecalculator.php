@@ -48,7 +48,7 @@ class ProductAvailabilityRecalculator {
 			$calculatedAvailability = $this->productAvailabilityCalculation->getCalculatedAvailability($product);
 			$product->setCalculatedAvailability($calculatedAvailability);
 		}
-		$this->em->flush();
+		$this->em->flush($products);
 	}
 
 	/**

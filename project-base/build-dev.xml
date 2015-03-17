@@ -397,6 +397,17 @@
 		</exec>
 	</target>
 
+	<target name="test-db-fixtures-performance">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Performance" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
 	<target name="twig-lint">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />

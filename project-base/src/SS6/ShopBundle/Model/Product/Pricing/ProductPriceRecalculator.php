@@ -76,7 +76,6 @@ class ProductPriceRecalculator {
 				$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $price->getPriceWithVat());
 			}
 		}
-		$this->em->flush();
 	}
 
 	/**

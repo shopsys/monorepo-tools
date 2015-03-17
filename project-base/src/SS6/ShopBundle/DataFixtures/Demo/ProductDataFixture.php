@@ -18,7 +18,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	public function load(ObjectManager $manager) {
 		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
-		/* @var $loaderService ProductDataFixtureLoader */
+		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
 		$vats = [
 			'high' => $this->getReference(VatDataFixture::VAT_HIGH),
@@ -51,7 +51,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$productsEditData = $loaderService->getProductsEditData();
 		$productNo = 1;
 		foreach ($productsEditData as $productEditData) {
-			$this->createProduct($manager, 'product_' . $productNo, $productEditData);
+			$this->createProduct('product_' . $productNo, $productEditData);
 			$productNo++;
 		}
 
@@ -59,33 +59,16 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
-	private function createProduct(ObjectManager $manager, $referenceName, ProductEditData $productEditData) {
+	private function createProduct($referenceName, ProductEditData $productEditData) {
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-
-		$this->persistParemeters($manager, $productEditData->parameters);
 
 		$product = $productEditFacade->create($productEditData);
 
 		$this->addReference($referenceName, $product);
-	}
-
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
-	 */
-	private function persistParemeters(ObjectManager $manager, array $productParameterValuesData) {
-		foreach ($productParameterValuesData as $productParameterValueData) {
-			$manager->persist($productParameterValueData->parameter);
-		}
-
-		// Doctrine doesn't know how to resolve persisting order and fill autoincrement IDs
-		// into foreign keys of related entities. That's why explicit flush() is needed.
-		$manager->flush();
 	}
 
 	/**
