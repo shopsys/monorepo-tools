@@ -157,7 +157,7 @@
 	</target>
 
 	<target name="phpcs-fixer-diff" depends="diff-files">
-		<property name="diff.files.phpcs-fixer" value="${diff.files.php}">
+		<property name="diff.files.phpcs-fixer" value="${diff.files.all}">
 			<filterchain>
 				<replaceregexp>
 					<regexp pattern="[\r\n]+" replace=" " />
@@ -188,7 +188,7 @@
 	</target>
 
 	<target name="phpcs-fixer-fix-diff" depends="diff-files">
-		<property name="diff.files.phpcs-fixer" value="${diff.files.php}">
+		<property name="diff.files.phpcs-fixer" value="${diff.files.all}">
 			<filterchain>
 				<replaceregexp>
 					<regexp pattern="[\r\n]+" replace=" " />
