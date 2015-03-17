@@ -38,11 +38,6 @@ class ProductFormType extends AbstractType {
 	private $inverseArrayValuesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category[]
-	 */
-	private $categories;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private $flags;
@@ -56,7 +51,6 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomainHiddenToShowTransformer $inverseArrayValuesTransformer
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
@@ -64,14 +58,12 @@ class ProductFormType extends AbstractType {
 		array $vats,
 		array $availabilities,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		array $categories,
 		array $flags,
 		TranslatorInterface $translator
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
-		$this->categories = $categories;
 		$this->flags = $flags;
 		$this->translator = $translator;
 	}
@@ -194,11 +186,8 @@ class ProductFormType extends AbstractType {
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			])
-			->add('categories', FormType::CHOICE, [
+			->add('categories', FormType::CATEGORIES, [
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->categories, 'name', [], null, 'id'),
-				'multiple' => true,
-				'expanded' => true,
 			])
 			->add('flags', FormType::CHOICE, [
 				'required' => false,

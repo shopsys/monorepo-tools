@@ -155,6 +155,28 @@
 	</span>
 {% endblock product_widget %}
 
+{% macro categoriesWidgetItem(categoryDetails, form) %}
+	<ul class="js-category-tree-form-children-container">
+		{% for categoryDetail in categoryDetails %}
+			{% set categoryForm = form[categoryDetail.category.id] %}
+			<li class="checkbox js-category-tree-form-item">
+				<i class="fa fa-square-o js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' cursor-pointer' : ''}}"></i>
+				<label>
+					{{ form_widget(categoryForm, { attr: { class: 'js-category-tree-form-item-checkbox' } }) }}
+					{{ categoryForm.vars.label }}
+				</label>
+				{{ _self.categoriesWidgetItem(categoryDetail.children, form) }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
+
+{% block categories_widget %}
+	<div class="form-line__field category-tree category-tree--form js-category-tree-form">
+		{{ _self.categoriesWidgetItem(form.vars.categoryDetails, form) }}
+	</div>
+{% endblock categories_widget %}
+
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
