@@ -160,6 +160,18 @@ class Product extends AbstractTranslatableEntity {
 	private $priceCalculationType;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 *
+	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @ORM\JoinTable(
+	 *   name="product_accessories",
+	 *   joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+	 *   inverseJoinColumns={@ORM\JoinColumn(name="accessory_product_id", referencedColumnName="id")}
+	 * )
+	 */
+	private $accessories;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -185,6 +197,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
+		$this->accessories = $productData->accessories;
 	}
 
 	/**
@@ -211,6 +224,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
+		$this->accessories = $productData->accessories;
 	}
 
 	/**
@@ -386,6 +400,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function isVisible() {
 		return $this->visible;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getAccessories() {
+		return $this->accessories;
 	}
 
 	/**

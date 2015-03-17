@@ -1,5 +1,6 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
 {% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
+{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% set domain = getDomain() %}
 {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
@@ -116,7 +117,6 @@
 		</div>
 	</div>
 
-
 	{% if productDetail.product.description or productDetail.parameters %}
 		<div class="wrap-border mt-2">
 			<div class="row">
@@ -142,6 +142,13 @@
 					{% endif %}
 				</div>
 			</div>
+		</div>
+	{% endif %}
+
+	{% if accesoriesDetails|length > 0 %}
+		<h2>{{ 'Příslušenství'|trans }}</h2>
+		<div>
+			{{ productList.list(accesoriesDetails) }}
 		</div>
 	{% endif %}
 {% endblock %}

@@ -22,8 +22,12 @@ class ProductController extends Controller {
 
 		$productDetail = $productOnCurrentDomainFacade->getVisibleProductDetailById($id);
 
+		$accessoriesDetails = $productOnCurrentDomainFacade
+			->getAccessoriesProductDetailsForProduct($productDetail->getProduct());
+
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
+			'accesoriesDetails' => $accessoriesDetails,
 		]);
 	}
 

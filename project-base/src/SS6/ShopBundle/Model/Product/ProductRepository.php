@@ -358,6 +358,20 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain|null
+	 */
+	public function getProductDomainByProductAndDomainId(Product $product, $domainId) {
+		$productDomain = $this->findProductDomainByProductAndDomainId($product, $domainId);
+		if ($productDomain === null) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductDomainNotFoundException();
+		}
+
+		return $productDomain;
+	}
+
+	/**
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */

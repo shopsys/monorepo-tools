@@ -70,6 +70,24 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
+	 */
+	public function getAccessoriesProductDetailsForProduct(Product $product) {
+		$accessories = $product->getAccessories();
+		$accessoriesVisibleOnDomain = [];
+
+		foreach ($accessories as $accessory) {
+			$accessoryDomain = $this->productRepository->getProductDomainByProductAndDomainId($accessory, $this->domain->getId());
+			if ($accessoryDomain->isVisible()) {
+				$accessoriesVisibleOnDomain[] = $accessory;
+			}
+		}
+
+		return $this->productDetailFactory->getDetailsForProducts($accessoriesVisibleOnDomain);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page
