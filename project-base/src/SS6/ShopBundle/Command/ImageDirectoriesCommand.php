@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Command;
 
+use SS6\ShopBundle\Model\Image\DirectoryStructureCreator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +22,7 @@ class ImageDirectoriesCommand extends ContainerAwareCommand {
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$output->writeln('Start of creating directories for images.');
 
-		$imageDirectoryStructureCreator = $this->getContainer()->get('ss6.shop.image.directory_structure_creator');
+		$imageDirectoryStructureCreator = $this->getContainer()->get(DirectoryStructureCreator::class);
 		/* @var $imageDirectoryStructureCreator \SS6\ShopBundle\Model\Image\DirectoryStructureCreator */
 		$imageDirectoryStructureCreator->makeImageDirectories();
 

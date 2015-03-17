@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Command;
 
+use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +22,7 @@ class ProductVisibilityCommand extends ContainerAwareCommand {
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$output->writeln('Start recalculating visibility of all products.');
 
-		$productVisibilityFacade = $this->getContainer()->get('ss6.shop.product.product_visibility_facade');
+		$productVisibilityFacade = $this->getContainer()->get(ProductVisibilityFacade::class);
 		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
 		$productVisibilityFacade->refreshProductsVisibility();
 
