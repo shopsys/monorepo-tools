@@ -306,6 +306,7 @@
 			checkreturn="true"
 		>
 			<arg path="${path.phpstorm.inspect.sh}"/>
+			<arg path="${path.phpstorm.system}"/>
 			<arg path="${path.phpstorm.project}"/>
 			<arg path="${path.phpstorm.project.inspection-profile}"/>
 			<arg path="${path.src}"/>

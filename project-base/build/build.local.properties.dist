@@ -1,2 +1,3 @@
 path.composer.executable=composer
+path.phpstorm.system=/home/jenkins/.WebIde80/system
 path.phpstorm.inspect.sh=/opt/phpstorm/bin/inspect.sh

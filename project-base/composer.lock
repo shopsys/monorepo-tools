@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a924e4b3d35af30acccdfc5590c240b3",
+    "hash": "b7d283716cbf23e3c0f5c03fdb4c9aa4",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -4296,14 +4296,15 @@
         },
         {
             "name": "shopsys/phpstorm-inspect",
-            "version": "1.0.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git",
-                "reference": "008b8471a160ab2ad4a70fd195fce92f00e381b5"
+                "reference": "6e7aa645d1cdf8459fc9ca6bda5ecdb66cfaa5c1"
             },
             "require": {
-                "php": ">=5.4"
+                "php": ">=5.4",
+                "symfony/filesystem": "@stable"
             },
             "bin": [
                 "bin/phpstorm-inspect"
@@ -4324,7 +4325,7 @@
                 }
             ],
             "description": "Run PhpStorm's inspections from CLI and show results",
-            "time": "2015-03-16 12:39:04"
+            "time": "2015-03-17 17:31:18"
         },
         {
             "name": "squizlabs/php_codesniffer",
