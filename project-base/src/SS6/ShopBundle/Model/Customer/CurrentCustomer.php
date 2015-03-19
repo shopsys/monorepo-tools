@@ -29,7 +29,7 @@ class CurrentCustomer {
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getPricingGroup() {
-		$user = $this->getCurrentUser();
+		$user = $this->findCurrentUser();
 		if ($user === null) {
 			return $this->pricingGroupFacade->getDefaultPricingGroupByCurrentDomain();
 		} else {
@@ -38,9 +38,9 @@ class CurrentCustomer {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
 	 */
-	private function getCurrentUser() {
+	public function findCurrentUser() {
 		$token = $this->securityContext->getToken();
 		if ($token === null) {
 			return null;

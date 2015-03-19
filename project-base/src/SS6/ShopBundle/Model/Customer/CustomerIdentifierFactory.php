@@ -2,17 +2,16 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Customer\User;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class CustomerIdentifierFactory {
 
 	/**
-	 * @var \Symfony\Component\Security\Core\SecurityContext
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
 	 */
-	private $user;
+	private $currentCustomer;
 
 	/**
 	 *
@@ -20,20 +19,9 @@ class CustomerIdentifierFactory {
 	 */
 	private $session;
 
-	/**
-	 * @param \Symfony\Component\Security\Core\SecurityContext $securityContext
-	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
-	 */
-	public function __construct(SecurityContext $securityContext, Session $session) {
+	public function __construct(CurrentCustomer $currentCustomer, Session $session) {
+		$this->currentCustomer = $currentCustomer;
 		$this->session = $session;
-
-		$token = $securityContext->getToken();
-		if ($token !== null) {
-			$user = $token->getUser();
-			if ($user instanceof User) {
-				$this->user = $user;
-			}
-		}
 	}
 
 	/**
@@ -48,7 +36,7 @@ class CustomerIdentifierFactory {
 			$sessionId = $this->session->getId();
 		}
 
-		$customerIdentifier = new CustomerIdentifier($this->session->getId(), $this->user);
+		$customerIdentifier = new CustomerIdentifier($this->session->getId(), $this->currentCustomer->findCurrentUser());
 
 		return $customerIdentifier;
 	}
