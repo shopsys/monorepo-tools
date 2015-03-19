@@ -1,40 +1,74 @@
 (function ($) {
 
 	SS6 = window.SS6 || {};
-	SS6.confirmDelete = SS6.confirmDelete || {};
 
-	SS6.confirmDelete.init = function () {
-		$(document).on('change', '#js-confirm-delete-select', SS6.confirmDelete.onSelectChange);
-		$(document).on('submit', '#js-confirm-delete-form', SS6.confirmDelete.onFormSubmit);
+	SS6.createConfirmDelete = function (confirmLink) {
+		var ConfirmDelete = new SS6.ConfirmDelete(confirmLink, '#window-main-container .window');
+		ConfirmDelete.init();
 	};
 
-	SS6.confirmDelete.onSelectChange = function () {
-		var $submitButton = $('#js-confirm-delete-form').find('.btn-primary');
-		if ($('#js-confirm-delete-select').val() !== '') {
-			$submitButton
-				.removeClass('disabled cursor-help')
-				.tooltip('destroy');
-		} else {
-			$submitButton
-				.addClass('disabled cursor-help')
-				.tooltip({
-					title: 'Nejprve vybrete novou hodnotu',
-					placement: 'right'
-				});
-		}
+	SS6.ConfirmDelete = function (confirmLink, messageContainerSelector) {
+		var self = this;
+		var $confirmLink = $(confirmLink);
+		var $messageContainer = $(messageContainerSelector);
+		var $confirmDeleteForm = $messageContainer.find('.js-confirm-delete-form');
+		var $confirmDeleteFormSelect = $confirmDeleteForm.find('.js-confirm-delete-select');
+		var $confirmDeleteFormButton = $confirmDeleteForm.find('.btn-primary');
+		var $directDeleteLink = $messageContainer.find('.js-confirm-delete-direct-link');
+
+		this.init = function () {
+			if ($directDeleteLink.size() !== 0) {
+				$directDeleteLink.click(canDeleteDirectly);
+			} else {
+				$confirmDeleteForm.submit(onConfirmDeleteFormSubmit);
+				$confirmDeleteFormSelect.change(refreshSubmitButton);
+				refreshSubmitButton();
+			}
+		};
+
+		var canDeleteDirectly = function () {
+			$.ajax({
+				url: $confirmLink.attr('href'),
+				success: function(data) {
+					if ($($.parseHTML(data)).find('.js-confirm-delete-direct-link').size() > 0) {
+						document.location = $directDeleteLink.attr('href');
+					} else {
+						$messageContainer.html(data);
+						var ConfirmDelete = new SS6.ConfirmDelete(confirmLink, messageContainerSelector);
+						ConfirmDelete.init();
+					}
+				}
+			});
+
+			return false;
+		};
+
+		var isSelectedNewValue = function () {
+			return $confirmDeleteFormSelect.val() !== '';
+		};
+
+		var refreshSubmitButton = function () {
+			if (isSelectedNewValue()) {
+				$confirmDeleteFormButton
+					.removeClass('btn-disabled cursor-help')
+					.tooltip('destroy');
+			} else {
+				$confirmDeleteFormButton
+					.addClass('btn-disabled cursor-help')
+					.tooltip({
+						title: SS6.translator.trans('Nejprve vybrete novou hodnotu'),
+						placement: 'right'
+					});
+			}
+		};
+
+		var onConfirmDeleteFormSubmit = function() {
+			if (isSelectedNewValue()) {
+				document.location = $confirmDeleteFormSelect.val();
+			}
+
+			return false;
+		};
 	};
-
-	SS6.confirmDelete.onFormSubmit = function() {
-		var targetUrl = $('#js-confirm-delete-select').val();
-		if (targetUrl !== '') {
-			document.location = targetUrl;
-		}
-
-		return false;
-	};
-
-	$(document).ready(function () {
-		SS6.confirmDelete.init();
-	});
 
 })(jQuery);

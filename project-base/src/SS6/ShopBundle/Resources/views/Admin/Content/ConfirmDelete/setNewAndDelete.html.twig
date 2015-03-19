@@ -1,8 +1,8 @@
 {% if listOfNewEntities|length > 0 %}
 	{{ message|nl2br }}
 
-	<form id="js-confirm-delete-form" class="mt-1">
-		<select id="js-confirm-delete-select">
+	<form class="mt-1 js-confirm-delete-form">
+		<select class="js-confirm-delete-select">
 			<option value="">-- {{ 'Zvolte novou hodnotu'|trans }} --</option>
 			{% for newEntityId, name in listOfNewEntities %}
 				<option value="{{ url(route, {id: entityId, newId: newEntityId}) }}">{{ name }}</option>

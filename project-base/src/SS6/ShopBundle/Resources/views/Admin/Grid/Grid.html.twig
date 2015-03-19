@@ -178,7 +178,7 @@
 	{% endif %}
 	<a
 		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
-		data-ajax-confirm-on-open="SS6.confirmDelete.onSelectChange();"
+		data-ajax-confirm-on-open="SS6.createConfirmDelete(this);"
 		href="{{ actionColumn.targetUrl(row) }}"
 		{% if actionColumn.confirmMessage is not empty -%}
 			onclick="
