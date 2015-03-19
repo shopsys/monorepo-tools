@@ -61,7 +61,7 @@ class RegistrationController extends Controller {
 	 */
 	private function login(User $user) {
 		$token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
-		$this->get('security.context')->setToken($token);
+		$this->get('security.token_storage')->setToken($token);
 
 		// dispatch the login event
 		$request = $this->get('request');

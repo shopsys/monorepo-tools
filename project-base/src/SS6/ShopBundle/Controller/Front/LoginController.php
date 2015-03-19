@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends Controller {
 
 	public function loginAction(Request $request) {
-		if ($this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
+		if ($this->isGranted(Roles::ROLE_CUSTOMER)) {
 			return $this->redirect($this->generateUrl('front_homepage'));
 		}
 

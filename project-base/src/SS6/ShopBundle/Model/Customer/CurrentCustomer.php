@@ -3,14 +3,14 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class CurrentCustomer {
 
 	/**
-	 * @var \Symfony\Component\Security\Core\SecurityContextInterface
+	 * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
 	 */
-	private $securityContext;
+	private $tokenStorage;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
@@ -18,10 +18,10 @@ class CurrentCustomer {
 	private $pricingGroupFacade;
 
 	public function __construct(
-		SecurityContextInterface $securityContext,
+		TokenStorage $tokenStorage,
 		PricingGroupFacade $pricingGroupFacade
 	) {
-		$this->securityContext = $securityContext;
+		$this->tokenStorage = $tokenStorage;
 		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
@@ -41,7 +41,7 @@ class CurrentCustomer {
 	 * @return \SS6\ShopBundle\Model\Customer\User|null
 	 */
 	public function findCurrentUser() {
-		$token = $this->securityContext->getToken();
+		$token = $this->tokenStorage->getToken();
 		if ($token === null) {
 			return null;
 		}

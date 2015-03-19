@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Administrator;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class AdministratorService {
 
@@ -13,19 +13,16 @@ class AdministratorService {
 	private $encoderFactory;
 
 	/**
-	 * @var \Symfony\Component\Security\Core\SecurityContext
+	 * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
 	 */
-	private $securityContext;
+	private $tokenStorage;
 
-	/**
-	 * @param \Symfony\Component\Security\Core\Encoder\EncoderFactory $encoderFactory
-	 */
 	public function __construct(
 		EncoderFactory $encoderFactory,
-		SecurityContext $securityContext
+		TokenStorage $tokenStorage
 	) {
 		$this->encoderFactory = $encoderFactory;
-		$this->securityContext = $securityContext;
+		$this->tokenStorage = $tokenStorage;
 	}
 
 	/**
@@ -48,7 +45,7 @@ class AdministratorService {
 		if ($adminCount === 1) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
 		}
-		if ($this->securityContext->getToken()->getUser() === $administrator) {
+		if ($this->tokenStorage->getToken()->getUser() === $administrator) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException();
 		}
 	}
