@@ -17,7 +17,7 @@ class YesNoType extends AbstractType {
 				false => 'Ne',
 			],
 			'expanded' => true,
-			'empty_value' => false,
+			'placeholder' => false,
 		]);
 	}
 
