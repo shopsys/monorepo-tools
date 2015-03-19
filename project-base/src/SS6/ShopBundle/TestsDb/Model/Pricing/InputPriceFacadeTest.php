@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
-use SS6\ShopBundle\Model\Pricing\InputPriceRepository;
+use SS6\ShopBundle\Model\Pricing\InputPriceRecalculator;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -21,18 +21,18 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 		$setting = $this->getContainer()->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 
-		$inputPriceRepositoryMock = $this->getMockBuilder(InputPriceRepository::class)
+		$inputPriceRecalculatorMock = $this->getMockBuilder(InputPriceRecalculator::class)
 			->setMethods(['__construct', 'recalculateToInputPricesWithoutVat', 'recalculateToInputPricesWithVat'])
 			->disableOriginalConstructor()
 			->getMock();
-		$inputPriceRepositoryMock->expects($this->never())->method('recalculateToInputPricesWithoutVat');
-		$inputPriceRepositoryMock->expects($this->never())->method('recalculateToInputPricesWithVat');
+		$inputPriceRecalculatorMock->expects($this->never())->method('recalculateToInputPricesWithoutVat');
+		$inputPriceRecalculatorMock->expects($this->never())->method('recalculateToInputPricesWithVat');
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
 			->disableOriginalConstructor()
 			->getMock();
 
-		$inputPriceFacade = new InputPriceFacade($inputPriceRepositoryMock, $setting);
+		$inputPriceFacade = new InputPriceFacade($inputPriceRecalculatorMock, $setting);
 
 		$inputPriceFacade->onKernelResponse($filterResponseEventMock);
 	}

@@ -14,7 +14,7 @@ use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
-class InputPriceRepository {
+class InputPriceRecalculator {
 
 	const BATCH_SIZE = 500;
 
