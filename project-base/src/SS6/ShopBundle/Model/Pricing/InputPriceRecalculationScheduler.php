@@ -6,7 +6,7 @@ use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class InputPriceFacade {
+class InputPriceRecalculationScheduler {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceRecalculator
