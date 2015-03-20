@@ -12,7 +12,7 @@ class ImageController extends Controller {
 	const ENTITY_NAME_PRODUCT = 'product';
 	const ENTITY_NAME_SLIDER_ITEM = 'sliderItem';
 	const ENTITY_NAME_TRANSPORT = 'transport';
-	const SIZE_NAME_GALLERY_THUMBNAIL = 'galleryThubnail';
+	const SIZE_NAME_GALLERY_THUMBNAIL = 'galleryThumbnail';
 	const SIZE_NAME_LIST = 'list';
 	const SIZE_NAME_THUMBNAIL = 'thumbnail';
 
