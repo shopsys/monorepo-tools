@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
@@ -64,12 +65,12 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
-				'delete',
+				ActionColumn::TYPE_DELETE,
 				$this->translator->trans('Smazat'),
-				'admin_availability_delete',
+				'admin_availability_deleteconfirm',
 				['id' => 'a.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto dostupnost?'));
+			->setAjaxConfirm();
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Availability/listGrid.html.twig');
 

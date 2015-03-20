@@ -368,6 +368,20 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 */
+	public function setAvailability(Availability $availability) {
+		$this->availability = $availability;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $outOfStockAvailability
+	 */
+	public function setOutOfStockAvailability(Availability $outOfStockAvailability) {
+		$this->outOfStockAvailability = $outOfStockAvailability;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $calculatedAvailability
 	 */
 	public function setCalculatedAvailability(Availability $calculatedAvailability = null) {
