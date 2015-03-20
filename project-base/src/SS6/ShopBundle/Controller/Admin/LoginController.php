@@ -17,7 +17,7 @@ class LoginController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAction(Request $request) {
-		if ($this->get('security.context')->isGranted(Roles::ROLE_ADMIN)) {
+		if ($this->isGranted(Roles::ROLE_ADMIN)) {
 			return $this->redirect($this->generateUrl('admin_default_dashboard'));
 		}
 

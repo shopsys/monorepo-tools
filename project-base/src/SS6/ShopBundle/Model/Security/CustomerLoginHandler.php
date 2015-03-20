@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 
@@ -68,7 +68,7 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
 
 			return $response;
 		} else {
-			$request->getSession()->set(SecurityContextInterface::AUTHENTICATION_ERROR, $exception);
+			$request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
 
 			return new RedirectResponse($this->router->generate('front_login'));
 		}

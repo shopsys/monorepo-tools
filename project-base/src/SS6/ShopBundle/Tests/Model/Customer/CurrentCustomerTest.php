@@ -10,22 +10,22 @@ use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetPricingGroupNotLogged() {
 		$expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 
-		$securityContextMock = $this->getMock(SecurityContext::class, [], [], '', false);
+		$tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
 		$pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, ['getDefaultPricingGroupByCurrentDomain'], [], '', false);
 		$pricingGroupFacadeMock
 			->expects($this->once())
 			->method('getDefaultPricingGroupByCurrentDomain')
 			->willReturn($expectedPricingGroup);
 
-		$currentCustomer = new CurrentCustomer($securityContextMock, $pricingGroupFacadeMock);
+		$currentCustomer = new CurrentCustomer($tokenStorageMock, $pricingGroupFacadeMock);
 
 		$pricingGroup = $currentCustomer->getPricingGroup();
 		$this->assertEquals($expectedPricingGroup, $pricingGroup);
@@ -43,12 +43,12 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 			->getMockForAbstractClass();
 		$tokenMock->expects($this->once())->method('getUser')->willReturn($user);
 
-		$securityContextMock = $this->getMock(SecurityContext::class, ['getToken'], [], '', false);
-		$securityContextMock->expects($this->once())->method('getToken')->willReturn($tokenMock);
+		$tokenStorageMock = $this->getMock(TokenStorage::class, ['getToken'], [], '', false);
+		$tokenStorageMock->expects($this->once())->method('getToken')->willReturn($tokenMock);
 
 		$pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, [], [], '', false);
 
-		$currentCustomer = new CurrentCustomer($securityContextMock, $pricingGroupFacadeMock);
+		$currentCustomer = new CurrentCustomer($tokenStorageMock, $pricingGroupFacadeMock);
 
 		$pricingGroup = $currentCustomer->getPricingGroup();
 		$this->assertEquals($expectedPricingGroup, $pricingGroup);

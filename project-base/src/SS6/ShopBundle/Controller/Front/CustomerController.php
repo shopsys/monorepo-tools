@@ -14,7 +14,7 @@ class CustomerController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
-		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
+		if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
 			$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 			return $this->redirect($this->generateUrl('front_login'));
 		}
@@ -59,7 +59,7 @@ class CustomerController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
-		if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
+		if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
 			$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 			return $this->redirect($this->generateUrl('front_login'));
 		}
@@ -101,7 +101,7 @@ class CustomerController extends Controller {
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		if ($orderNumber !== null) {
-			if (!$this->get('security.context')->isGranted(Roles::ROLE_CUSTOMER)) {
+			if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
 				$flashMessageSender->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
 				return $this->redirect($this->generateUrl('front_login'));
 			}
