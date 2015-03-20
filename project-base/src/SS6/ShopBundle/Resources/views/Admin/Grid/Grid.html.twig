@@ -230,7 +230,7 @@
 				</li>
 			{% endfor %}
 			<li class="active">
-				<a href="#" onclick="return false;">{{ grid.page }}</a>
+				<span>{{ grid.page }}</span>
 			</li>
 
 			{% for page in (grid.page + 1)..(grid.page + pagerExpand) if page > grid.page and page < grid.pageCount %}

@@ -47,7 +47,7 @@
 						</li>
 					{% endfor %}
 					<li class="active">
-						<a href="#" onclick="return false;">{{ paginationResult.page }}</a>
+						<span>{{ paginationResult.page }}</span>
 					</li>
 
 					{% for page in (paginationResult.page + 1)..(paginationResult.page + pagerExpand) if page > paginationResult.page and page < pageCount %}
