@@ -19,6 +19,7 @@ class Grid {
 
 	const GET_PARAMETER = 'g';
 	const DEFAULT_VIEW_THEME = '@SS6Shop/Admin/Grid/Grid.html.twig';
+	const DEFAULT_LIMIT = 30;
 
 	/**
 	 * @var string
@@ -43,7 +44,7 @@ class Grid {
 	/**
 	 * @var array
 	 */
-	private $limits = [30, 100, 200, 500];
+	private $allowedLimits = [30, 100, 200, 500];
 
 	/**
 	 * @var int
@@ -54,11 +55,6 @@ class Grid {
 	 * @var bool
 	 */
 	private $isLimitFromRequest = false;
-
-	/**
-	 * @var int
-	 */
-	private $defaultLimit = 30;
 
 	/**
 	 * @var int
@@ -178,7 +174,7 @@ class Grid {
 		$this->twig = $twig;
 		$this->gridOrderingService = $gridOrderingService;
 
-		$this->limit = $this->defaultLimit;
+		$this->limit = self::DEFAULT_LIMIT;
 		$this->page = 1;
 
 		$this->viewTheme = self::DEFAULT_VIEW_THEME;
@@ -324,7 +320,7 @@ class Grid {
 	 */
 	public function setDefaultLimit($limit) {
 		if (!$this->isLimitFromRequest) {
-			$this->limit = (int)$limit;
+			$this->setLimit((int)$limit);
 		}
 	}
 
@@ -389,10 +385,19 @@ class Grid {
 	}
 
 	/**
+	 * @param int $limit
+	 */
+	private function setLimit($limit) {
+		if (in_array($limit, $this->allowedLimits)) {
+			$this->limit = $limit;
+		}
+	}
+
+	/**
 	 * @return array
 	 */
-	public function getLimits() {
-		return $this->limits;
+	public function getAllowedLimits() {
+		return $this->allowedLimits;
 	}
 
 	/**
@@ -473,7 +478,7 @@ class Grid {
 		if (array_key_exists($this->id, $requestData)) {
 			$gridData = $requestData[$this->id];
 			if (array_key_exists('limit', $gridData)) {
-				$this->limit = max((int)trim($gridData['limit']), 1);
+				$this->setLimit((int)trim($gridData['limit']));
 				$this->isLimitFromRequest = true;
 			}
 			if (array_key_exists('page', $gridData)) {
