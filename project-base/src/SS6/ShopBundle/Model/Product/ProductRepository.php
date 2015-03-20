@@ -11,6 +11,7 @@ use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
@@ -387,14 +388,18 @@ class ProductRepository {
 	}
 
 	/**
-	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product[]
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function findByAvailabilityId($availabilityId) {
-		$productsWithAvailability = $this->getProductRepository()->findBy(['availability' => $availabilityId]);
-		$productsWithOutOfStockAvailability = $this->getProductRepository()->findBy(['outOfStockAvailability' => $availabilityId]);
+	public function getProductsByAvailability(Availability $availability) {
+		$queryBuilder = $this->em->createQueryBuilder();
+		$queryBuilder
+			->select('p')
+			->from(Product::class, 'p')
+			->where('p.availability = :availability OR p.outOfStockAvailability = :availability')
+			->setParameter('availability', $availability->getId());
 
-		return array_merge($productsWithAvailability, $productsWithOutOfStockAvailability);
+		return $queryBuilder->getQuery()->execute();
 	}
 
 }

@@ -82,16 +82,18 @@ class AvailabilityRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
-	 * @return int
+	 * @return bool
 	 */
-	public function getProductsCountByAvailabilty(Availability $availability) {
-		$query = $this->em->createQuery('
-			SELECT COUNT(p)
-			FROM ' . Product::class . ' p
-			WHERE p.availability = :availability OR p.outOfStockAvailability = :availability')
+	public function isAvailabilityUsed(Availability $availability) {
+		$queryBuilder = $this->em->createQueryBuilder();
+		$queryBuilder
+			->select('p.id')
+			->from(Product::class, 'p')
+			->setMaxResults(1)
+			->where('p.availability = :availability OR p.outOfStockAvailability = :availability')
 			->setParameter('availability', $availability->getId());
 
-		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $queryBuilder->getQuery()->getOneOrNullResult(AbstractQuery::HYDRATE_SCALAR) !== null;
 	}
 
 }

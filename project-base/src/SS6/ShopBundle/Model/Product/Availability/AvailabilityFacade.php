@@ -108,7 +108,7 @@ class AvailabilityFacade {
 		$availability = $this->availabilityRepository->getById($availabilityId);
 
 		if ($newAvailabilityId !== null) {
-			$products = $this->productRepository->findByAvailabilityId($availabilityId);
+			$products = $this->productRepository->getProductsByAvailability($availability);
 			$newAvailability = $this->availabilityRepository->getById($newAvailabilityId);
 			$this->availabilityService->delete($products, $availability, $newAvailability);
 			if ($this->isAvailabilityDefault($availability)) {
@@ -158,7 +158,7 @@ class AvailabilityFacade {
 	 * @return bool
 	 */
 	public function isAvailabilityUsed(Availability $availability) {
-		return $this->availabilityRepository->getProductsCountByAvailabilty($availability);
+		return $this->availabilityRepository->isAvailabilityUsed($availability);
 	}
 
 	/**
@@ -166,7 +166,7 @@ class AvailabilityFacade {
 	 * @return bool
 	 */
 	public function isAvailabilityDefault(Availability $availability) {
-		return ($this->getDefaultInStockAvailability() === $availability);
+		return $this->getDefaultInStockAvailability() === $availability;
 	}
 
 }

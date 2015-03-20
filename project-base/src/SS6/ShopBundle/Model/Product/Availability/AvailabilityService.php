@@ -36,22 +36,7 @@ class AvailabilityService {
 		Availability $oldAvailability,
 		Availability $newAvailability
 	) {
-		if (count($productsWithOldAvailability) > 0) {
-			$this->changeProductsAvailabilities($productsWithOldAvailability, $oldAvailability, $newAvailability);
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $oldAvailability
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $newAvailability
-	 */
-	private function changeProductsAvailabilities(
-		array $products,
-		Availability $oldAvailability,
-		Availability $newAvailability
-	) {
-		foreach ($products as $product) {
+		foreach ($productsWithOldAvailability as $product) {
 			/* @var $product \SS6\ShopBundle\Model\Product\Product */
 			if ($product->getAvailability() === $oldAvailability) {
 				$product->setAvailability($newAvailability);
@@ -59,7 +44,9 @@ class AvailabilityService {
 			if ($product->getOutOfStockAvailability() === $oldAvailability) {
 				$product->setOutOfStockAvailability($newAvailability);
 			}
-			$product->setCalculatedAvailability($newAvailability);
+			if ($product->getCalculatedAvailability() === $oldAvailability) {
+				$product->setCalculatedAvailability($newAvailability);
+			}
 		}
 	}
 
