@@ -542,7 +542,10 @@ class Grid {
 	}
 
 	private function loadRows() {
-		if (array_key_exists($this->orderSourceColumnName, $this->getColumns())) {
+		if (
+			array_key_exists($this->orderSourceColumnName, $this->getColumns())
+			&& $this->columns[$this->orderSourceColumnName]->isSortable()
+		) {
 			$orderSourceColumnName = $this->getColumns()[$this->orderSourceColumnName]->getOrderSourceColumnName();
 		} else {
 			$orderSourceColumnName = null;

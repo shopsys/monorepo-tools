@@ -68,13 +68,13 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('columnId1', $column1->getId());
 		$this->assertEquals('sourceColumnName1', $column1->getSourceColumnName());
 		$this->assertEquals('title1', $column1->getTitle());
-		$this->assertEquals(true, $column1->getSortable());
+		$this->assertEquals(true, $column1->isSortable());
 		$this->assertEquals('classAttribute', $column1->getClassAttribute());
 
 		$this->assertEquals('columnId2', $column2->getId());
 		$this->assertEquals('sourceColumnName2', $column2->getSourceColumnName());
 		$this->assertEquals('title2', $column2->getTitle());
-		$this->assertEquals(false, $column2->getSortable());
+		$this->assertEquals(false, $column2->isSortable());
 		$this->assertEquals('', $column2->getClassAttribute());
 	}
 
