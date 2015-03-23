@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
@@ -36,18 +37,25 @@ class ProductEditDataFactory {
 	 */
 	private $productManualInputPriceFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 */
+	private $pricingGroupFacade;
+
 	public function __construct(
 		Domain $domain,
 		VatFacade $vatFacade,
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
-		ProductManualInputPriceFacade $productManualInputPriceFacade
+		ProductManualInputPriceFacade $productManualInputPriceFacade,
+		PricingGroupFacade $pricingGroupFacade
 	) {
 		$this->domain = $domain;
 		$this->vatFacade = $vatFacade;
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
+		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
 	/**
@@ -86,11 +94,7 @@ class ProductEditDataFactory {
 		}
 		$productEditData->parameters = $productParameterValuesData;
 
-		$manualInputPrices = $this->productManualInputPriceFacade->getAllByProduct($product);
-		foreach ($manualInputPrices as $manualInputPrice) {
-			$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
-			$productEditData->manualInputPrices[$pricingGroupId] = $manualInputPrice->getInputPrice();
-		}
+		$productEditData->manualInputPrices = $this->getManualInputPricesData($product);
 
 		foreach ($productDomains as $productDomain) {
 			$productEditData->seoTitles[$productDomain->getDomainId()] = $productDomain->getSeoTitle();
@@ -98,6 +102,29 @@ class ProductEditDataFactory {
 		}
 
 		return $productEditData;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return string[pricingGroupId]
+	 */
+	private function getManualInputPricesData(Product $product) {
+		$manualInputPricesData = [];
+
+		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
+			foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
+				$pricingGroupId = $pricingGroup->getId();
+				$manualInputPricesData[$pricingGroupId] = null;
+			}
+		} elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
+			$manualInputPrices = $this->productManualInputPriceFacade->getAllByProduct($product);
+			foreach ($manualInputPrices as $manualInputPrice) {
+				$pricingGroupId = $manualInputPrice->getPricingGroup()->getId();
+				$manualInputPricesData[$pricingGroupId] = $manualInputPrice->getInputPrice();
+			}
+		}
+
+		return $manualInputPricesData;
 	}
 
 }
