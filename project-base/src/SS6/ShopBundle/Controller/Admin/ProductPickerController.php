@@ -11,11 +11,47 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductPickerController extends Controller {
 
 	/**
+	 * @Route("/_products-picker/{jsInstanceId}/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param string $jsInstanceId
+	 */
+	public function productsPickerAction(Request $request, $jsInstanceId) {
+		return $this->getPickerResponse(
+			$request,
+			[
+				'isMultiple' => true,
+			],
+			[
+				'isMultiple' => true,
+				'jsInstanceId' => $jsInstanceId,
+			]
+		);
+	}
+
+	/**
 	 * @Route("/_product-picker/{parentInputId}/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param string $parentInputId
 	 */
-	public function listAction(Request $request, $parentInputId) {
+	public function productPickerAction(Request $request, $parentInputId) {
+		return $this->getPickerResponse(
+			$request,
+			[
+				'isMultiple' => false,
+			],
+			[
+				'isMultiple' => false,
+				'parentInputId' => $parentInputId,
+			]
+		);
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param array $viewParameters
+	 * @param array $gridViewParameters
+	 */
+	private function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters) {
 		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
@@ -52,18 +88,16 @@ class ProductPickerController extends Controller {
 		$grid->addColumn('name', 'pt.name', 'Název', true);
 		$grid->addColumn('select', 'p.id', '')->setClassAttribute('table-col table-col-10');
 
-		$grid->setTheme('@SS6Shop/Admin/Content/ProductPicker/listGrid.html.twig', [
-			'parentInputId' => $parentInputId,
-		]);
+		$grid->setTheme('@SS6Shop/Admin/Content/ProductPicker/listGrid.html.twig', $gridViewParameters);
 
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/ProductPicker/list.html.twig', [
-			'gridView' => $grid->createView(),
-			'quickSearchForm' => $quickSearchForm->createView(),
-			'advancedSearchForm' => $advancedSearchForm->createView(),
-			'isAdvancedSearchFormSubmitted' => $advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
-		]);
+		$viewParameters['gridView'] = $grid->createView();
+		$viewParameters['quickSearchForm'] = $quickSearchForm->createView();
+		$viewParameters['advancedSearchForm'] = $advancedSearchForm->createView();
+		$viewParameters['isAdvancedSearchFormSubmitted'] = $advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+
+		return $this->render('@SS6Shop/Admin/Content/ProductPicker/list.html.twig', $viewParameters);
 	}
 
 }

@@ -18,4 +18,8 @@
 		{{ gridView.renderHiddenInputs('page') }}
 
 	{{ form_end(quickSearchForm) }}
+
+	{% if isMultiple %}
+		<a href="#" class="btn btn-primary right" onclick="SS6.productsPicker.close(); return false;">{{ 'Dokončit přiřazování'|trans }}</a>
+	{% endif %}
 {% endblock %}

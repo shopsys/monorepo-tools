@@ -88,6 +88,11 @@ services:
     tags:
       - { name: form.type, alias: product }
 
+  ss6.shop.form.products:
+    class: SS6\ShopBundle\Form\ProductsType
+    tags:
+      - { name: form.type, alias: products }
+
   ss6.shop.form.single_checkbox_choice_type:
     class: SS6\ShopBundle\Form\SingleCheckboxChoiceType
     tags:

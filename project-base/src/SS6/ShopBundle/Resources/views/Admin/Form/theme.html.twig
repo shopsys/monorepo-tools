@@ -145,7 +145,7 @@
 		/>
 		<button
 			type="button"
-			data-product-picker-url="{{ url('admin_productpicker_list', {parentInputId: '__input_id__'}) }}"
+			data-product-picker-url="{{ url('admin_productpicker_productpicker', {parentInputId: '__input_id__'}) }}"
 			class="js-product-picker-create-picker-button"
 			title="Kliknutím přejdete k výběru produktu"
 			onclick="SS6.productPicker.makePicker(this); return false;"
@@ -156,6 +156,42 @@
 		{{- form_widget(form, {attr: {class: 'js-product-picker-input'}}) -}}
 	</span>
 {% endblock product_widget %}
+
+{% block products_row -%}
+	<div class="form-line">
+		{{- form_label(form) -}}
+		{{- form_errors(form) -}}
+		<div class="form-line__full">
+			{{- form_widget(form) -}}
+		</div>
+	</div>
+{%- endblock %}
+
+{% macro productsWidgetItem(productName, form) %}
+	<div class="js-products-picker-item">
+		{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
+		<span class="js-products-picker-item-product-name">{{ productName }}</span>
+		<i class="fa fa-trash-o js-products-picker-item-button-delete"></i>
+	</div>
+{% endmacro %}
+
+{% block products_widget %}
+	<div
+		class="js-products-picker"
+		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype)|e }}"
+		data-products-picker-url="{{ url('admin_productpicker_productspicker', {jsInstanceId: '__js_instance_id__'}) }}"
+	>
+		<div class="js-products-picker-items">
+			{% for key, productForm in form %}
+				{{ _self.productsWidgetItem(form.vars.products[key].name, productForm) }}
+			{% endfor %}
+		</div>
+		<a href="#" class="btn btn-primary js-products-picker-button-add">
+			<i class="fa fa-plus fa-lg"></i>
+			{{ 'Přidat zboží'|trans }}
+		</a>
+	</div>
+{% endblock products_widget %}
 
 {% macro categoriesWidgetItem(categoryDetails, form) %}
 	<ul class="js-category-tree-form-children-container">
