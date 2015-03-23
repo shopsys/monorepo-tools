@@ -72,7 +72,7 @@ class Column {
 	/**
 	 * @return bool
 	 */
-	public function getSortable() {
+	public function isSortable() {
 		return $this->sortable;
 	}
 
