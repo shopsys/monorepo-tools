@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderStatusController extends Controller {
@@ -23,15 +24,17 @@ class OrderStatusController extends Controller {
 	}
 
 	/**
-	 * @Route("/order_status/delete/{id}/{newId}", requirements={"id" = "\d+", "newId" = "\d+"})
+	 * @Route("/order_status/delete/{id}", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
-	 * @param int|null $newId
 	 */
-	public function deleteAction($id, $newId = null) {
+	public function deleteAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$orderStatusFacade = $this->get('ss6.shop.order.order_status_facade');
 		/* @var $orderStatusFacade \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade */
+
+		$newId = $request->get('newId');
 
 		try {
 			$orderStatus = $orderStatusFacade->getById($id);

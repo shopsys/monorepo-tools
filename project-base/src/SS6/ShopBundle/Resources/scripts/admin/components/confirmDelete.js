@@ -63,11 +63,7 @@
 		};
 
 		var onConfirmDeleteFormSubmit = function() {
-			if (isSelectedNewValue()) {
-				document.location = $confirmDeleteFormSelect.val();
-			}
-
-			return false;
+			return isSelectedNewValue();
 		};
 	};
 

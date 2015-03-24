@@ -68,15 +68,17 @@ class VatController extends Controller {
 	}
 
 	/**
-	 * @Route("/vat/delete/{id}/{newId}", requirements={"id" = "\d+", "newId" = "\d+"})
+	 * @Route("/vat/delete/{id}", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
-	 * @param int|null $newId
 	 */
-	public function deleteAction($id, $newId = null) {
+	public function deleteAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$vatFacade = $this->get('ss6.shop.pricing.vat.vat_facade');
 		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+
+		$newId = $request->get('newId');
 
 		try {
 			$fullName = $vatFacade->getById($id)->getName();
