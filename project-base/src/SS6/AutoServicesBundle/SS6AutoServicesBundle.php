@@ -14,7 +14,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class SS6AutoServicesBundle extends Bundle {
 
 	public function build(ContainerBuilder $containerBuilder) {
-		$parameterProcessor = new ParameterProcessor(new ServiceHelper(),	$containerBuilder);
+		$serviceHelper = new ServiceHelper();
+		$parameterProcessor = new ParameterProcessor($serviceHelper,	$containerBuilder);
 		$classConstructorFiller = new ClassConstructorFiller($parameterProcessor);
 
 		/**
@@ -22,7 +23,7 @@ class SS6AutoServicesBundle extends Bundle {
 		 * because of controllers autowired dependencies
 		 */
 		$containerBuilder->addCompilerPass(
-			new ControllerCompilerPass(new ServiceHelper()),
+			new ControllerCompilerPass($serviceHelper),
 			PassConfig::TYPE_BEFORE_REMOVING
 		);
 

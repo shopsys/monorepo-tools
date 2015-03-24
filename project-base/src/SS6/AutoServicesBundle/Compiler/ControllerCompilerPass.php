@@ -7,11 +7,13 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class ControllerCompilerPass implements CompilerPassInterface {
 
-	const CONTROLLERS_FOLDER_PATH = 'SS6/ShopBundle/Controller/*/';
-
+	/**
+	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
+	 */
 	private $serviceHelper;
 
 	/**
@@ -25,37 +27,40 @@ class ControllerCompilerPass implements CompilerPassInterface {
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 */
 	public function process(ContainerBuilder $containerBuilder) {
-		$this->processAutoServicesCollectorData($containerBuilder);
-	}
+		$srcRealpath = realpath($containerBuilder->getParameter('kernel.root_dir') . '/../src');
 
-	/**
-	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-	 */
-	private function processAutoServicesCollectorData(ContainerBuilder $containerBuilder) {
-		$srcPath = $containerBuilder->getParameter('kernel.root_dir') . '/../src/';
-		$srcPathLength = strlen($srcPath);
-		foreach ($this->getAllControllers($srcPath) as $controller) {
-			$controllerClass = substr($controller->getPath(), $srcPathLength) . '\\' . substr($controller->getFilename(), 0, -4);
-			$controllerClassWithBackSlashes = strtr($controllerClass, '/', '\\');
-			if ($this->serviceHelper->canBeService($controllerClassWithBackSlashes)) {
-				$definition = new Definition($controllerClassWithBackSlashes);
-				$controllerId = $this->serviceHelper->convertClassNameToServiceId($controllerClassWithBackSlashes);
-				$containerBuilder->setDefinition($controllerId, $definition);
+		foreach ($this->getAllControllerFiles($srcRealpath) as $controllerFile) {
+			$controllerClassName = $this->getControllerClassName($srcRealpath, $controllerFile);
+			if ($this->serviceHelper->canBeService($controllerClassName)) {
+				$definition = new Definition($controllerClassName);
+				$serviceId = $this->serviceHelper->convertClassNameToServiceId($controllerClassName);
+				$containerBuilder->setDefinition($serviceId, $definition);
 			}
 		}
 	}
 
 	/**
 	 * @param string $srcPath
-	 * @return \SplFileInfo
+	 * @return \Symfony\Component\Finder\SplFileInfo[]
 	 */
-	private function getAllControllers($srcPath) {
+	private function getAllControllerFiles($srcPath) {
 		$finder = new Finder();
-		$controllers = $finder
-			->in($srcPath . self::CONTROLLERS_FOLDER_PATH)
-			->name('*Controller.php');
 
-		return $controllers;
+		return $finder
+			->in($srcPath . '/*/*/Controller/')
+			->name('*Controller.php');
+	}
+
+	/**
+	 * @param string $srcRealPath
+	 * @param \Symfony\Component\Finder\SplFileInfo $controllerFile
+	 * @return string
+	 */
+	private function getControllerClassName($srcRealPath, SplFileInfo $controllerFile) {
+		$controllerRelativePathFromSrc = substr(realpath($controllerFile->getPath()), strlen($srcRealPath) + 1);
+		$controllerNamespace = str_replace('/', '\\', $controllerRelativePathFromSrc);
+
+		return $controllerNamespace . '\\' . $controllerFile->getBasename('.php');
 	}
 
 }
