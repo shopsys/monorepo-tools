@@ -61,18 +61,11 @@ class ProductService {
 		$productPrice = $this->productPriceCalculation->calculateBasePrice($product);
 		$inputPriceType = $this->pricingSetting->getInputPriceType();
 
-		if ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT) {
-			$inputPrice = $this->inputPriceCalculation->getInputPriceWithoutVat(
-				$productPrice->getPriceWithVat(),
-				$newVatPercent
-			);
-		} elseif ($inputPriceType === PricingSetting::INPUT_PRICE_TYPE_WITH_VAT) {
-			$inputPrice = $productPrice->getPriceWithVat();
-		} else {
-			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
-				sprintf('Input price type "%s" is not valid', $inputPriceType)
-			);
-		}
+		$inputPrice = $this->inputPriceCalculation->getInputPrice(
+			$inputPriceType,
+			$productPrice->getPriceWithVat(),
+			$newVatPercent
+		);
 
 		$this->setInputPrice($product, $inputPrice);
 	}
