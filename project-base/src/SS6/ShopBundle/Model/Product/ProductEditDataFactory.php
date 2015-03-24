@@ -4,9 +4,12 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDataFactory;
 
@@ -42,13 +45,31 @@ class ProductEditDataFactory {
 	 */
 	private $productDataFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\ProductPriceCalculation
+	 */
+	private $productPriceCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 */
+	private $pricingSetting;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceCalculation
+	 */
+	private $inputPriceCalculation;
+
 	public function __construct(
 		Domain $domain,
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductManualInputPriceFacade $productManualInputPriceFacade,
 		PricingGroupFacade $pricingGroupFacade,
-		ProductDataFactory $productDataFactory
+		ProductDataFactory $productDataFactory,
+		ProductPriceCalculation $productPriceCalculation,
+		PricingSetting $pricingSetting,
+		InputPriceCalculation $inputPriceCalculation
 	) {
 		$this->domain = $domain;
 		$this->productRepository = $productRepository;
@@ -56,6 +77,9 @@ class ProductEditDataFactory {
 		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 		$this->pricingGroupFacade = $pricingGroupFacade;
 		$this->productDataFactory = $productDataFactory;
+		$this->productPriceCalculation = $productPriceCalculation;
+		$this->pricingSetting = $pricingSetting;
+		$this->inputPriceCalculation = $inputPriceCalculation;
 	}
 
 	/**
@@ -111,9 +135,18 @@ class ProductEditDataFactory {
 		$manualInputPricesData = [];
 
 		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
+			$inputPriceType = $this->pricingSetting->getInputPriceType();
+
 			foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
 				$pricingGroupId = $pricingGroup->getId();
-				$manualInputPricesData[$pricingGroupId] = null;
+
+				$productPrice = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+
+				$manualInputPricesData[$pricingGroupId] = $this->inputPriceCalculation->getInputPrice(
+					$inputPriceType,
+					$productPrice->getPriceWithVat(),
+					$product->getVat()->getPercent()
+				);
 			}
 		} elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 			$manualInputPrices = $this->productManualInputPriceFacade->getAllByProduct($product);
