@@ -26,16 +26,17 @@ class PricingGroupController extends Controller {
 	}
 
 	/**
-	 * @Route("/pricing/group/delete/{id}/{newId}", requirements={"id" = "\d+", "newId" = "\d+"})
+	 * @Route("/pricing/group/delete/{id}", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
-	 * @param int|null $newId
 	 */
-	public function deleteAction($id, $newId = null) {
+	public function deleteAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
+		$newId = $request->get('newId');
 		$newId = $newId !== null ? (int)$newId : null;
 
 		try {

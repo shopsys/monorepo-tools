@@ -25,16 +25,18 @@ class AvailabilityController extends Controller {
 	}
 
 	/**
-	 * @Route("/product/availability/delete/{id}/{newId}", requirements={"id" = "\d+", "newId" = "\d+"})
+	 * @Route("/product/availability/delete/{id}", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
-	 * @param int|null $newId
 	 */
-	public function deleteAction($id, $newId = null) {
+	public function deleteAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
 		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
 		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
+
+		$newId = $request->get('newId');
 
 		try {
 			$fullName = $availabilityFacade->getById($id)->getName();
