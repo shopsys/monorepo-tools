@@ -4,11 +4,11 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductDataFactory;
 
 class ProductEditDataFactory {
 
@@ -16,11 +16,6 @@ class ProductEditDataFactory {
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
-	 */
-	private $vatFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -42,20 +37,25 @@ class ProductEditDataFactory {
 	 */
 	private $pricingGroupFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductDataFactory
+	 */
+	private $productDataFactory;
+
 	public function __construct(
 		Domain $domain,
-		VatFacade $vatFacade,
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductManualInputPriceFacade $productManualInputPriceFacade,
-		PricingGroupFacade $pricingGroupFacade
+		PricingGroupFacade $pricingGroupFacade,
+		ProductDataFactory $productDataFactory
 	) {
 		$this->domain = $domain;
-		$this->vatFacade = $vatFacade;
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->productDataFactory = $productDataFactory;
 	}
 
 	/**
@@ -63,12 +63,11 @@ class ProductEditDataFactory {
 	 */
 	public function createDefault() {
 		$productEditData = new ProductEditData();
-		$productEditData->productData = new ProductData();
+		$productEditData->productData = $this->productDataFactory->createDefault();
 
 		$productParameterValuesData = [];
 		$productEditData->parameters = $productParameterValuesData;
 
-		$productEditData->productData->vat = $this->vatFacade->getDefaultVat();
 		$productEditData->manualInputPrices = [];
 		$productEditData->seoTitles = [];
 		$productEditData->seoMetaDescriptions = [];
@@ -83,7 +82,7 @@ class ProductEditDataFactory {
 	public function createFromProduct(Product $product) {
 		$productEditData = $this->createDefault();
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-		$productEditData->productData->setFromEntity($product, $productDomains);
+		$productEditData->productData = $this->productDataFactory->createFromProduct($product, $productDomains);
 
 		$productParameterValuesData = [];
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
