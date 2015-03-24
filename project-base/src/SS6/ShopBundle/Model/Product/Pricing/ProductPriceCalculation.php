@@ -111,7 +111,7 @@ class ProductPriceCalculation {
 		);
 	}
 
-	/*
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return string
 	 */
