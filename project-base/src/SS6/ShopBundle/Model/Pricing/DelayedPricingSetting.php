@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
+use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
 
 class DelayedPricingSetting {
 
@@ -12,17 +12,16 @@ class DelayedPricingSetting {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
 	 */
-	private $inputPriceFacade;
+	private $inputPriceRecalculationScheduler;
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
-	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceFacade $inputPriceFacade
-	 */
-	public function __construct(PricingSetting $pricingSetting, InputPriceFacade $inputPriceFacade) {
+	public function __construct(
+		PricingSetting $pricingSetting,
+		InputPriceRecalculationScheduler $inputPriceRecalculationScheduler
+	) {
 		$this->pricingSetting = $pricingSetting;
-		$this->inputPriceFacade = $inputPriceFacade;
+		$this->inputPriceRecalculationScheduler = $inputPriceRecalculationScheduler;
 	}
 
 	/**
@@ -38,11 +37,11 @@ class DelayedPricingSetting {
 		if ($currentInputPriceType != $inputPriceType) {
 			switch ($inputPriceType) {
 				case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-					$this->inputPriceFacade->scheduleSetInputPricesWithoutVat();
+					$this->inputPriceRecalculationScheduler->scheduleSetInputPricesWithoutVat();
 					break;
 
 				case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
-					$this->inputPriceFacade->scheduleSetInputPricesWithVat();
+					$this->inputPriceRecalculationScheduler->scheduleSetInputPricesWithVat();
 					break;
 			}
 		}

@@ -588,13 +588,10 @@ services:
   ss6.shop.pricing.input_price_calculation:
     class: SS6\ShopBundle\Model\Pricing\InputPriceCalculation
 
-  ss6.shop.pricing.input_price_facade:
-    class: SS6\ShopBundle\Model\Pricing\InputPriceFacade
+  ss6.shop.pricing.input_price_recalculation_scheduler:
+    class: SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-
-  ss6.shop.pricing.input_price_repository:
-    class: SS6\ShopBundle\Model\Pricing\InputPriceRepository
 
   ss6.shop.pricing.price_calculation:
     class: SS6\ShopBundle\Model\Pricing\PriceCalculation

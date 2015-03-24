@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\TestsDb\Model\Pricing;
 use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
-use SS6\ShopBundle\Model\Pricing\InputPriceFacade;
-use SS6\ShopBundle\Model\Pricing\InputPriceRepository;
+use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Pricing\InputPriceRecalculator;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -15,26 +15,26 @@ use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class InputPriceFacadeTest extends DatabaseTestCase {
+class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 	public function testOnKernelResponseNoAction() {
 		$setting = $this->getContainer()->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 
-		$inputPriceRepositoryMock = $this->getMockBuilder(InputPriceRepository::class)
+		$inputPriceRecalculatorMock = $this->getMockBuilder(InputPriceRecalculator::class)
 			->setMethods(['__construct', 'recalculateToInputPricesWithoutVat', 'recalculateToInputPricesWithVat'])
 			->disableOriginalConstructor()
 			->getMock();
-		$inputPriceRepositoryMock->expects($this->never())->method('recalculateToInputPricesWithoutVat');
-		$inputPriceRepositoryMock->expects($this->never())->method('recalculateToInputPricesWithVat');
+		$inputPriceRecalculatorMock->expects($this->never())->method('recalculateToInputPricesWithoutVat');
+		$inputPriceRecalculatorMock->expects($this->never())->method('recalculateToInputPricesWithVat');
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
 			->disableOriginalConstructor()
 			->getMock();
 
-		$inputPriceFacade = new InputPriceFacade($inputPriceRepositoryMock, $setting);
+		$inputPriceRecalculationScheduler = new InputPriceRecalculationScheduler($inputPriceRecalculatorMock, $setting);
 
-		$inputPriceFacade->onKernelResponse($filterResponseEventMock);
+		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
 	}
 
 	public function inputPricesTestDataProvider() {
@@ -56,8 +56,8 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 
 		$setting = $this->getContainer()->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
-		$inputPriceFacade = $this->getContainer()->get('ss6.shop.pricing.input_price_facade');
-		/* @var $inputPriceFacade \SS6\ShopBundle\Model\Pricing\InputPriceFacade */
+		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
+		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
@@ -106,8 +106,8 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$inputPriceFacade->scheduleSetInputPricesWithoutVat();
-		$inputPriceFacade->onKernelResponse($filterResponseEventMock);
+		$inputPriceRecalculationScheduler->scheduleSetInputPricesWithoutVat();
+		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
 
 		$product2 = $productRepository->getById($product->getId());
 		$payment2 = $paymentRepository->getById($payment->getId());
@@ -130,8 +130,8 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 
 		$setting = $this->getContainer()->get('ss6.shop.setting');
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
-		$inputPriceFacade = $this->getContainer()->get('ss6.shop.pricing.input_price_facade');
-		/* @var $inputPriceFacade \SS6\ShopBundle\Model\Pricing\InputPriceFacade */
+		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
+		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
@@ -180,8 +180,8 @@ class InputPriceFacadeTest extends DatabaseTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$inputPriceFacade->scheduleSetInputPricesWithVat();
-		$inputPriceFacade->onKernelResponse($filterResponseEventMock);
+		$inputPriceRecalculationScheduler->scheduleSetInputPricesWithVat();
+		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
 
 		$product2 = $productRepository->getById($product->getId());
 		$payment2 = $paymentRepository->getById($payment->getId());
