@@ -12,7 +12,7 @@ class DefaultControllerTest extends FunctionalTestCase {
 		$client->request('GET', '/');
 		$code = $client->getResponse()->getStatusCode();
 
-		$this->assertEquals(200, $code);
+		$this->assertSame(200, $code);
 	}
 
 	public function testHomepageHasBodyEnd() {

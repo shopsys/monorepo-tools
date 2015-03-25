@@ -23,7 +23,7 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase {
 		$fileThumbnailExtension = new FileThumbnailExtension($fileUploadMock, $imageThumbnailFactoryMock);
 		$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
 
-		$this->assertEquals(FileThumbnailExtension::DEFAULT_ICON_TYPE, $fileThumbnailInfo->getIconType());
+		$this->assertSame(FileThumbnailExtension::DEFAULT_ICON_TYPE, $fileThumbnailInfo->getIconType());
 		$this->assertNull($fileThumbnailInfo->getImageUri());
 	}
 
@@ -45,7 +45,7 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase {
 		$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
 
 		$this->assertNull($fileThumbnailInfo->getIconType());
-		$this->assertEquals($encodedData, $fileThumbnailInfo->getImageUri());
+		$this->assertSame($encodedData, $fileThumbnailInfo->getImageUri());
 	}
 
 	public function testGetFileThumbnailInfoByTemporaryFilenameImageDocument() {
@@ -61,7 +61,7 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase {
 		$fileThumbnailExtension = new FileThumbnailExtension($fileUploadMock, $imageThumbnailFactoryMock);
 		$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
 
-		$this->assertEquals('file-word-o', $fileThumbnailInfo->getIconType());
+		$this->assertSame('file-word-o', $fileThumbnailInfo->getIconType());
 		$this->assertNull($fileThumbnailInfo->getImageUri());
 	}
 }

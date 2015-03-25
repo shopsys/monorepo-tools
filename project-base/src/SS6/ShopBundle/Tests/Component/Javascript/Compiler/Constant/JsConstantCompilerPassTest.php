@@ -23,7 +23,7 @@ var x = "bar";
 var y = "bar2";
 EOD;
 
-		$this->assertEquals($expectedResult, $result);
+		$this->assertSame($expectedResult, $result);
 	}
 
 	public function testProcessConstantNotFoundException() {

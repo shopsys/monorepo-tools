@@ -106,8 +106,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$price = $productPriceCalculation->calculatePrice($product, $pricingGroup);
 
-		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+		$this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
+		$this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
 	}
 
 }

@@ -31,7 +31,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 
 		$productFromDb = $productEditFacade->getById($productId);
 
-		$this->assertEquals($this->getReference(AvailabilityDataFixture::ON_REQUEST), $productFromDb->getCalculatedAvailability());
+		$this->assertSame($this->getReference(AvailabilityDataFixture::ON_REQUEST), $productFromDb->getCalculatedAvailability());
 	}
 
 	public function testRecalculateOnProductEditUsingStockInStock() {
@@ -62,7 +62,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 
 		$productFromDb = $productEditFacade->getById($productId);
 
-		$this->assertEquals($availabilityFacade->getDefaultInStockAvailability(), $productFromDb->getCalculatedAvailability());
+		$this->assertSame($availabilityFacade->getDefaultInStockAvailability(), $productFromDb->getCalculatedAvailability());
 	}
 
 	public function testRecalculateOnProductEditUsingStockOutOfStock() {
@@ -91,7 +91,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 
 		$productFromDb = $productEditFacade->getById($productId);
 
-		$this->assertEquals($this->getReference(AvailabilityDataFixture::OUT_OF_STOCK), $productFromDb->getCalculatedAvailability());
+		$this->assertSame($this->getReference(AvailabilityDataFixture::OUT_OF_STOCK), $productFromDb->getCalculatedAvailability());
 	}
 
 }

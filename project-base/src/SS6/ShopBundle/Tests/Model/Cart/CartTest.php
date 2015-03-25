@@ -16,7 +16,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	public function testGetItemsCountZero() {
 		$cartItems = [];
 		$cart = new Cart($cartItems);
-		$this->assertEquals(0, $cart->getItemsCount());
+		$this->assertSame(0, $cart->getItemsCount());
 	}
 
 	public function testGetItemsCount() {
@@ -33,7 +33,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$cartItems = [$cartItem1, $cartItem2];
 
 		$cart = new Cart($cartItems);
-		$this->assertEquals(2, $cart->getItemsCount());
+		$this->assertSame(2, $cart->getItemsCount());
 	}
 
 	public function testIsEmpty() {

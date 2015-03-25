@@ -37,11 +37,11 @@ class GridTest extends PHPUnit_Framework_TestCase {
 
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
-		$this->assertEquals('gridId', $grid->getId());
-		$this->assertEquals(100, $grid->getLimit());
-		$this->assertEquals(3, $grid->getPage());
-		$this->assertEquals('name', $grid->getOrderSourceColumnName());
-		$this->assertEquals('desc', $grid->getOrderDirection());
+		$this->assertSame('gridId', $grid->getId());
+		$this->assertSame(100, $grid->getLimit());
+		$this->assertSame(3, $grid->getPage());
+		$this->assertSame('name', $grid->getOrderSourceColumnName());
+		$this->assertSame('desc', $grid->getOrderDirection());
 	}
 
 	public function testAddColumn() {
@@ -65,17 +65,17 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$column1 = array_pop($columns);
 		/* @var $column1 \SS6\ShopBundle\Model\Grid\Column */
 
-		$this->assertEquals('columnId1', $column1->getId());
-		$this->assertEquals('sourceColumnName1', $column1->getSourceColumnName());
-		$this->assertEquals('title1', $column1->getTitle());
-		$this->assertEquals(true, $column1->isSortable());
-		$this->assertEquals('classAttribute', $column1->getClassAttribute());
+		$this->assertSame('columnId1', $column1->getId());
+		$this->assertSame('sourceColumnName1', $column1->getSourceColumnName());
+		$this->assertSame('title1', $column1->getTitle());
+		$this->assertSame(true, $column1->isSortable());
+		$this->assertSame('classAttribute', $column1->getClassAttribute());
 
-		$this->assertEquals('columnId2', $column2->getId());
-		$this->assertEquals('sourceColumnName2', $column2->getSourceColumnName());
-		$this->assertEquals('title2', $column2->getTitle());
-		$this->assertEquals(false, $column2->isSortable());
-		$this->assertEquals('', $column2->getClassAttribute());
+		$this->assertSame('columnId2', $column2->getId());
+		$this->assertSame('sourceColumnName2', $column2->getSourceColumnName());
+		$this->assertSame('title2', $column2->getTitle());
+		$this->assertSame(false, $column2->isSortable());
+		$this->assertSame('', $column2->getClassAttribute());
 	}
 
 	public function testAddColumnDuplicateId() {
@@ -137,10 +137,10 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$grid->setDefaultOrder('columnId1', DataSourceInterface::ORDER_DESC);
-		$this->assertEquals('-columnId1', $grid->getOrderSourceColumnNameWithDirection());
+		$this->assertSame('-columnId1', $grid->getOrderSourceColumnNameWithDirection());
 
 		$grid->setDefaultOrder('columnId2', DataSourceInterface::ORDER_ASC);
-		$this->assertEquals('columnId2', $grid->getOrderSourceColumnNameWithDirection());
+		$this->assertSame('columnId2', $grid->getOrderSourceColumnNameWithDirection());
 	}
 
 	public function testSetDefaultOrderWithRequest() {
@@ -164,7 +164,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$grid = new Grid('gridId', $dataSourceMock, $requestStack, $routerMock, $twigMock, $gridOrderingServiceMock);
 
 		$grid->setDefaultOrder('default', DataSourceInterface::ORDER_ASC);
-		$this->assertEquals('-request', $grid->getOrderSourceColumnNameWithDirection());
+		$this->assertSame('-request', $grid->getOrderSourceColumnNameWithDirection());
 	}
 
 	public function testCreateView() {

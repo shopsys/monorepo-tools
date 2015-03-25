@@ -68,9 +68,9 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 
 		$rounding = new Rounding($pricingSettingMock);
 
-		$this->assertEquals(round($expectedAsPriceWithVat, 6), round($rounding->roundPriceWithVat($unroundedPrice), 6));
-		$this->assertEquals(round($expectedAsPriceWithoutVat, 6), round($rounding->roundPriceWithoutVat($unroundedPrice), 6));
-		$this->assertEquals(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
+		$this->assertSame(round($expectedAsPriceWithVat, 6), round($rounding->roundPriceWithVat($unroundedPrice), 6));
+		$this->assertSame(round($expectedAsPriceWithoutVat, 6), round($rounding->roundPriceWithoutVat($unroundedPrice), 6));
+		$this->assertSame(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
 	}
 
 	public function testRoundingPriceWithVatProvider() {
@@ -140,7 +140,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 		$rounding = new Rounding($pricingSettingMock);
 		$roundedPrice = $rounding->roundPriceWithVat($inputPrice);
 
-		$this->assertEquals(round($outputPrice, 6), round($roundedPrice, 6));
+		$this->assertSame(round($outputPrice, 6), round($roundedPrice, 6));
 	}
 
 }

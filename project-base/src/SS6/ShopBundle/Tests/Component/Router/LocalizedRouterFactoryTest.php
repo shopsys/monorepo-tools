@@ -40,9 +40,9 @@ class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf(RouterInterface::class, $router3);
 		$this->assertInstanceOf(RouterInterface::class, $router4);
 
-		$this->assertEquals($router1, $router3);
-		$this->assertNotEquals($router1, $router2);
-		$this->assertNotEquals($router1, $router4);
+		$this->assertSame($router1, $router3);
+		$this->assertNotSame($router1, $router2);
+		$this->assertNotSame($router1, $router4);
 	}
 
 }

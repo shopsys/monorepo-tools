@@ -43,6 +43,6 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 	public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath) {
 		$imageLocator = new ImageLocator('imageDir');
 
-		$this->assertEquals($expectedPath, $imageLocator->getRelativeImagePath($entityName, $type, $sizeName));
+		$this->assertSame($expectedPath, $imageLocator->getRelativeImagePath($entityName, $type, $sizeName));
 	}
 }

@@ -31,7 +31,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 */
 	public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
 		$this->getClient(false, 'admin', 'admin123')->request('GET', $url);
-		$this->assertEquals($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
+		$this->assertSame($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
 	}
 
 	public function frontTestableUrlsProvider() {
@@ -62,7 +62,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 		} else {
 			$this->getClient()->request('GET', $url);
 		}
-		$this->assertEquals($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
+		$this->assertSame($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
 	}
 
 }

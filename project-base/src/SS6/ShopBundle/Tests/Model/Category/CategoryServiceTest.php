@@ -16,7 +16,7 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase {
 		$categoryService = new CategoryService();
 		$category = $categoryService->create($categoryData, $rootCategory);
 
-		$this->assertEquals($rootCategory, $category->getParent());
+		$this->assertSame($rootCategory, $category->getParent());
 	}
 
 	public function testCreate() {
@@ -28,7 +28,7 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase {
 		$categoryService = new CategoryService();
 		$category = $categoryService->create($categoryData, $rootCategory);
 
-		$this->assertEquals($parentCategory, $category->getParent());
+		$this->assertSame($parentCategory, $category->getParent());
 	}
 
 	public function testEditSetRoot() {
@@ -39,7 +39,7 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase {
 		$categoryService = new CategoryService();
 		$categoryService->edit($category, $categoryData, $rootCategory);
 
-		$this->assertEquals($rootCategory, $category->getParent());
+		$this->assertSame($rootCategory, $category->getParent());
 	}
 
 	public function testEdit() {
@@ -52,7 +52,7 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase {
 		$categoryService = new CategoryService();
 		$categoryService->edit($category, $categoryData, $rootCategory);
 
-		$this->assertEquals($parentCategory, $category->getParent());
+		$this->assertSame($parentCategory, $category->getParent());
 	}
 
 }

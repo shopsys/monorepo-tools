@@ -67,26 +67,26 @@ class OrderFacadeTest extends DatabaseTestCase {
 
 		$orderFromDb = $orderRepository->getById($order->getId());
 
-		$this->assertEquals($orderData->transport->getId(), $orderFromDb->getTransport()->getId());
-		$this->assertEquals($orderData->payment->getId(), $orderFromDb->getPayment()->getId());
-		$this->assertEquals($orderData->firstName, $orderFromDb->getFirstName());
-		$this->assertEquals($orderData->lastName, $orderFromDb->getLastName());
-		$this->assertEquals($orderData->email, $orderFromDb->getEmail());
-		$this->assertEquals($orderData->telephone, $orderFromDb->getTelephone());
-		$this->assertEquals($orderData->companyName, $orderFromDb->getCompanyName());
-		$this->assertEquals($orderData->companyNumber, $orderFromDb->getCompanyNumber());
-		$this->assertEquals($orderData->companyTaxNumber, $orderFromDb->getCompanyTaxNumber());
-		$this->assertEquals($orderData->street, $orderFromDb->getStreet());
-		$this->assertEquals($orderData->city, $orderFromDb->getCity());
-		$this->assertEquals($orderData->postcode, $orderFromDb->getPostcode());
-		$this->assertEquals($orderData->deliveryContactPerson, $orderFromDb->getDeliveryContactPerson());
-		$this->assertEquals($orderData->deliveryCompanyName, $orderFromDb->getDeliveryCompanyName());
-		$this->assertEquals($orderData->deliveryTelephone, $orderFromDb->getDeliveryTelephone());
-		$this->assertEquals($orderData->deliveryStreet, $orderFromDb->getDeliveryStreet());
-		$this->assertEquals($orderData->deliveryCity, $orderFromDb->getDeliveryCity());
-		$this->assertEquals($orderData->deliveryPostcode, $orderFromDb->getDeliveryPostcode());
-		$this->assertEquals($orderData->note, $orderFromDb->getNote());
-		$this->assertEquals($orderData->domainId, $orderFromDb->getDomainId());
+		$this->assertSame($orderData->transport->getId(), $orderFromDb->getTransport()->getId());
+		$this->assertSame($orderData->payment->getId(), $orderFromDb->getPayment()->getId());
+		$this->assertSame($orderData->firstName, $orderFromDb->getFirstName());
+		$this->assertSame($orderData->lastName, $orderFromDb->getLastName());
+		$this->assertSame($orderData->email, $orderFromDb->getEmail());
+		$this->assertSame($orderData->telephone, $orderFromDb->getTelephone());
+		$this->assertSame($orderData->companyName, $orderFromDb->getCompanyName());
+		$this->assertSame($orderData->companyNumber, $orderFromDb->getCompanyNumber());
+		$this->assertSame($orderData->companyTaxNumber, $orderFromDb->getCompanyTaxNumber());
+		$this->assertSame($orderData->street, $orderFromDb->getStreet());
+		$this->assertSame($orderData->city, $orderFromDb->getCity());
+		$this->assertSame($orderData->postcode, $orderFromDb->getPostcode());
+		$this->assertSame($orderData->deliveryContactPerson, $orderFromDb->getDeliveryContactPerson());
+		$this->assertSame($orderData->deliveryCompanyName, $orderFromDb->getDeliveryCompanyName());
+		$this->assertSame($orderData->deliveryTelephone, $orderFromDb->getDeliveryTelephone());
+		$this->assertSame($orderData->deliveryStreet, $orderFromDb->getDeliveryStreet());
+		$this->assertSame($orderData->deliveryCity, $orderFromDb->getDeliveryCity());
+		$this->assertSame($orderData->deliveryPostcode, $orderFromDb->getDeliveryPostcode());
+		$this->assertSame($orderData->note, $orderFromDb->getNote());
+		$this->assertSame($orderData->domainId, $orderFromDb->getDomainId());
 
 		$this->assertCount(3, $orderFromDb->getItems());
 	}

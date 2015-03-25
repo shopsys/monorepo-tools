@@ -30,7 +30,7 @@ var y = SS6.translator.trans ( "##foo2", { 'param' : 'value' }, 'asdf' );
 var z = SS6.translator.transChoice ( "##foo3" );
 EOD;
 
-		$this->assertEquals($expectedResult, $result);
+		$this->assertSame($expectedResult, $result);
 	}
 
 }

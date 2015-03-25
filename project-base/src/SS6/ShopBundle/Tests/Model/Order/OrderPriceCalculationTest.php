@@ -44,8 +44,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$orderTotalPrice = $priceCalculation->getOrderTotalPrice($orderMock);
 
-		$this->assertEquals(3220, $orderTotalPrice->getPriceWithVat());
-		$this->assertEquals(1165, $orderTotalPrice->getPriceWithoutVat());
-		$this->assertEquals(3200, $orderTotalPrice->getProductPriceWithVat());
+		$this->assertSame(3220, $orderTotalPrice->getPriceWithVat());
+		$this->assertSame(1165, $orderTotalPrice->getPriceWithoutVat());
+		$this->assertSame(3200, $orderTotalPrice->getProductPriceWithVat());
 	}
 }

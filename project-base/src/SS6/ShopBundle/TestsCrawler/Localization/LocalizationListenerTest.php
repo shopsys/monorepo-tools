@@ -16,7 +16,7 @@ class LocalizationListenerTest extends DatabaseTestCase {
 
 		$crawler = $this->getClient()->request('GET', $productUrl);
 
-		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
+		$this->assertSame(200, $this->getClient()->getResponse()->getStatusCode());
 		$this->assertGreaterThan(
 			0,
 			$crawler->filter('html:contains("Katalogové číslo")')->count()
@@ -34,7 +34,7 @@ class LocalizationListenerTest extends DatabaseTestCase {
 		$productUrl = $router->generate('front_product_detail', ['id' => 3], RouterInterface::RELATIVE_PATH);
 		$crawler = $this->getClient()->request('GET', $productUrl);
 
-		$this->assertEquals(200, $this->getClient()->getResponse()->getStatusCode());
+		$this->assertSame(200, $this->getClient()->getResponse()->getStatusCode());
 		$this->assertGreaterThan(
 			0,
 			$crawler->filter('html:contains("Catalogue number")')->count()

@@ -37,10 +37,10 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 			->will($this->returnValue('http://example.com:8080'));
 
 		$domain->switchDomainByRequest($requestMock);
-		$this->assertEquals(1, $domain->getId());
-		$this->assertEquals('example.com', $domain->getName());
-		$this->assertEquals('cs', $domain->getLocale());
-		$this->assertEquals('design1', $domain->getTemplatesDirectory());
+		$this->assertSame(1, $domain->getId());
+		$this->assertSame('example.com', $domain->getName());
+		$this->assertSame('cs', $domain->getLocale());
+		$this->assertSame('design1', $domain->getTemplatesDirectory());
 	}
 
 	public function testGetAll() {
@@ -51,7 +51,7 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 		$domain = new Domain($domainConfigs);
 
-		$this->assertEquals($domainConfigs, $domain->getAll());
+		$this->assertSame($domainConfigs, $domain->getAll());
 	}
 
 	public function testGetDomainConfigById() {
@@ -62,8 +62,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 		$domain = new Domain($domainConfigs);
 
-		$this->assertEquals($domainConfigs[0], $domain->getDomainConfigById(1));
-		$this->assertEquals($domainConfigs[1], $domain->getDomainConfigById(2));
+		$this->assertSame($domainConfigs[0], $domain->getDomainConfigById(1));
+		$this->assertSame($domainConfigs[1], $domain->getDomainConfigById(2));
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException::class);
 		$domain->getDomainConfigById(3);

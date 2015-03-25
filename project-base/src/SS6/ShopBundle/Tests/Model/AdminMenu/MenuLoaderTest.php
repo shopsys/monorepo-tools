@@ -39,8 +39,8 @@ class MenuLoaderTest extends FunctionalTestCase {
 		$this->assertCount(2, $menu->getRegularItems());
 		$this->assertCount(2, $menu->getRegularItems()[0]->getItems());
 		$this->assertInstanceOf(MenuItem::class, $menu->getSettingsItem());
-		$this->assertEquals(MenuItem::TYPE_REGULAR, $menu->getRegularItems()[0]->getType());
-		$this->assertEquals('item_3', $menu->getRegularItems()[1]->getRoute());
+		$this->assertSame(MenuItem::TYPE_REGULAR, $menu->getRegularItems()[0]->getType());
+		$this->assertSame('item_3', $menu->getRegularItems()[1]->getRoute());
 	}
 
 	public function testLoadFromArrayMissingSettingsItem() {

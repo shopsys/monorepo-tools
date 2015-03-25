@@ -52,7 +52,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 				];
 				asort($expected);
 				asort($actual);
-				$this->assertEquals($expected, $actual);
+				$this->assertSame($expected, $actual);
 				return true;
 			}));
 

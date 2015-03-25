@@ -30,7 +30,7 @@ class ProductServiceTest extends DatabaseTestCase {
 
 		$productService->recalculateInputPriceForNewVatPercent($product, 15);
 
-		$this->assertEquals('1052.173913', round($product->getPrice(), 6));
+		$this->assertSame('1052.173913', (string)$product->getPrice());
 	}
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat() {
@@ -51,7 +51,7 @@ class ProductServiceTest extends DatabaseTestCase {
 
 		$productService->recalculateInputPriceForNewVatPercent($product, 15);
 
-		$this->assertEquals('1000', round($product->getPrice(), 6));
+		$this->assertSame('1000', (string)$product->getPrice());
 	}
 
 }

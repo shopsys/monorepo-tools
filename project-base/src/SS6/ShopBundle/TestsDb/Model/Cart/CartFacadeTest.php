@@ -33,12 +33,12 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cart = $cartFactory->get($customerIdentifier);
 		$cartItems = $cart->getItems();
 		$product1 = array_pop($cartItems)->getProduct();
-		$this->assertEquals($productId, $product1->getId(), 'Add correct product');
+		$this->assertSame($productId, $product1->getId(), 'Add correct product');
 
 		$customerIdentifier = new CustomerIdentifier('anotherSecreetSessionHash');
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
-		$this->assertEquals(0, $cart->getItemsCount(), 'Add only in their own cart');
+		$this->assertSame(0, $cart->getItemsCount(), 'Add only in their own cart');
 	}
 
 	public function testChangeQuantities() {
@@ -73,9 +73,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cart = $cartFactory->get($customerIdentifier);
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getId() === $cartItem1->getId()) {
-				$this->assertEquals(5, $cartItem->getQuantity(), 'Correct change quantity product');
+				$this->assertSame(5, $cartItem->getQuantity(), 'Correct change quantity product');
 			} elseif ($cartItem->getId() === $cartItem2->getId()) {
-				$this->assertEquals(9, $cartItem->getQuantity(), 'Correct change quantity product');
+				$this->assertSame(9, $cartItem->getQuantity(), 'Correct change quantity product');
 			} else {
 				$this->fail('Unexpected product in cart');
 			}
@@ -127,10 +127,10 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
-		$this->assertEquals(1, $cart->getItemsCount());
+		$this->assertSame(1, $cart->getItemsCount());
 		$cartItems = $cart->getItems();
 		$cartItem = array_pop($cartItems);
-		$this->assertEquals($cartItem2->getId(), $cartItem->getId());
+		$this->assertSame($cartItem2->getId(), $cartItem->getId());
 	}
 
 }

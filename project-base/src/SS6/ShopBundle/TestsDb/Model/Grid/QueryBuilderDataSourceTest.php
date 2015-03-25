@@ -39,7 +39,7 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase {
 
 		$count = $queryBuilderDataSource->getTotalRowsCount();
 
-		$this->assertEquals(10, $count);
+		$this->assertSame(10, $count);
 	}
 
 	public function testGetRows() {

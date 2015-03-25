@@ -13,7 +13,7 @@ class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$inputPriceCalculation = new InputPriceCalculation();
 		$inputPriceWithVat = $inputPriceCalculation->getInputPriceWithVat($priceWithVat);
 
-		$this->assertEquals($priceWithVat, $inputPriceWithVat);
+		$this->assertSame($priceWithVat, $inputPriceWithVat);
 	}
 
 	public function testGetInputPriceWithoutVat() {
@@ -23,7 +23,7 @@ class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$inputPriceCalculation = new InputPriceCalculation();
 		$inputPriceWithoutVat = $inputPriceCalculation->getInputPriceWithoutVat($priceWithVat, $vatPercent);
 
-		$this->assertEquals(round($priceWithVat * 100 / (100 + $vatPercent), 6), round($inputPriceWithoutVat, 6));
+		$this->assertSame(round($priceWithVat * 100 / (100 + $vatPercent), 6), round($inputPriceWithoutVat, 6));
 	}
 
 }

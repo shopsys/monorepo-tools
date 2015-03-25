@@ -39,7 +39,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, 1, $user);
-		$this->assertEquals($expectedProductPrice, $productPrice);
+		$this->assertSame($expectedProductPrice, $productPrice);
 	}
 
 	public function testCalculatePriceByUserAndDomainIdWithoutUser() {
@@ -67,6 +67,6 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, $domainId, null);
-		$this->assertEquals($expectedProductPrice, $productPrice);
+		$this->assertSame($expectedProductPrice, $productPrice);
 	}
 }

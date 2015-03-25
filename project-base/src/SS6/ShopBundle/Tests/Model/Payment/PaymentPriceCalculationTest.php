@@ -94,8 +94,8 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$price = $paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
 
-		$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-		$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+		$this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
+		$this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
 	}
 
 	/**
@@ -140,11 +140,11 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$price = $paymentPriceCalculation->calculatePrice($payment, $currency, $productsPrice, 1);
 
 		if ($productsPrice->getPriceWithVat() > $priceLimit) {
-			$this->assertEquals(round(0, 6), round($price->getPriceWithoutVat(), 6));
-			$this->assertEquals(round(0, 6), round($price->getPriceWithVat(), 6));
+			$this->assertSame(round(0, 6), round($price->getPriceWithoutVat(), 6));
+			$this->assertSame(round(0, 6), round($price->getPriceWithVat(), 6));
 		} else {
-			$this->assertEquals(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-			$this->assertEquals(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
+			$this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
+			$this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
 		}
 
 	}

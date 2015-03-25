@@ -25,7 +25,7 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 
 		$this->assertInternalType('array', $row);
 		$this->assertArrayHasKey('newField', $row);
-		$this->assertEquals('newValue', $row['newField']);
+		$this->assertSame('newValue', $row['newField']);
 	}
 
 	public function testGetTotalRowsCount() {
@@ -46,7 +46,7 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 
 		$count = $dataSource->getTotalRowsCount();
 
-		$this->assertEquals(10, $count);
+		$this->assertSame(10, $count);
 	}
 
 	public function testGetRows() {
@@ -70,7 +70,7 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 		foreach ($rows as $row) {
 			$this->assertInternalType('array', $row);
 			$this->assertArrayHasKey('newField', $row);
-			$this->assertEquals('newValue' . $row['p']['id'], $row['newField']);
+			$this->assertSame('newValue' . $row['p']['id'], $row['newField']);
 		}
 	}
 

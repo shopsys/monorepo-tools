@@ -156,13 +156,13 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($userData, $customerData->userData);
 		$this->assertEquals($deliveryAddressData, $customerData->deliveryAddressData);
 		$this->assertTrue($customerData->billingAddressData->companyCustomer);
-		$this->assertEquals($order->getCompanyName(), $customerData->billingAddressData->companyName);
-		$this->assertEquals($order->getCompanyNumber(), $customerData->billingAddressData->companyNumber);
-		$this->assertEquals($order->getCompanyTaxNumber(), $customerData->billingAddressData->companyTaxNumber);
-		$this->assertEquals($order->getStreet(), $customerData->billingAddressData->street);
-		$this->assertEquals($order->getCity(), $customerData->billingAddressData->city);
-		$this->assertEquals($order->getPostcode(), $customerData->billingAddressData->postcode);
-		$this->assertEquals($order->getTelephone(), $customerData->billingAddressData->telephone);
+		$this->assertSame($order->getCompanyName(), $customerData->billingAddressData->companyName);
+		$this->assertSame($order->getCompanyNumber(), $customerData->billingAddressData->companyNumber);
+		$this->assertSame($order->getCompanyTaxNumber(), $customerData->billingAddressData->companyTaxNumber);
+		$this->assertSame($order->getStreet(), $customerData->billingAddressData->street);
+		$this->assertSame($order->getCity(), $customerData->billingAddressData->city);
+		$this->assertSame($order->getPostcode(), $customerData->billingAddressData->postcode);
+		$this->assertSame($order->getTelephone(), $customerData->billingAddressData->telephone);
 	}
 
 }

@@ -50,6 +50,6 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 
 		$productPriceAfterEdit = $productCalculatedPrice->getPriceWithVat();
 
-		$this->assertEquals(round($productPriceBeforeEdit * 2, 6), round($productPriceAfterEdit, 6));
+		$this->assertSame(round($productPriceBeforeEdit * 2, 6), round($productPriceAfterEdit, 6));
 	}
 }

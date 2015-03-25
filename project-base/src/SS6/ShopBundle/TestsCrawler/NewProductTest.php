@@ -37,7 +37,7 @@ class NewProductTest extends FunctionalTestCase {
 
 		$this->assertNotEmpty($flashMessageBag->getSuccessMessages());
 		$this->assertEmpty($flashMessageBag->getErrorMessages());
-		$this->assertEquals(302, $client2->getResponse()->getStatusCode());
+		$this->assertSame(302, $client2->getResponse()->getStatusCode());
 	}
 
 	/**

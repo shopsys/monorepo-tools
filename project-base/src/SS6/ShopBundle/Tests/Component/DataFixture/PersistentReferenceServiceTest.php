@@ -73,7 +73,7 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
 
-		$this->assertEquals($expectedObject, $persistentReferenceService->getReference('referenceName'));
+		$this->assertSame($expectedObject, $persistentReferenceService->getReference('referenceName'));
 	}
 
 	public function testGetReferenceNotFound() {

@@ -22,7 +22,7 @@ class CsvDecoderTest extends PHPUnit_Framework_TestCase {
 	public function testDecodeBoolean($input, $output) {
 		$boolean = CsvDecoder::decodeBoolean($input);
 
-		$this->assertEquals($output, $boolean);
+		$this->assertSame($output, $boolean);
 	}
 
 }

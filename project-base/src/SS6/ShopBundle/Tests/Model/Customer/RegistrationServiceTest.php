@@ -233,7 +233,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 		$isResetPasswordHashValid = $registrationService->isResetPasswordHashValid($userMock, $sentHash);
 
-		$this->assertEquals($isExpectedValid, $isResetPasswordHashValid);
+		$this->assertSame($isExpectedValid, $isResetPasswordHashValid);
 	}
 
 }

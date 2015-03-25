@@ -42,7 +42,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 
 		$calculatedAvailability = $productAvailabilityCalculation->getCalculatedAvailability($product);
 
-		$this->assertEquals($expectedCalculatedAvailability, $calculatedAvailability);
+		$this->assertSame($expectedCalculatedAvailability, $calculatedAvailability);
 	}
 
 	public function getTestGetCalculatedAvailabilityData() {

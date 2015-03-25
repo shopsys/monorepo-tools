@@ -58,7 +58,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$actualPriceWithVat = $priceCalculation->applyVatPercent($priceWithoutVat, $vat);
 
-		$this->assertEquals(round($expectedPriceWithVat, 6), round($actualPriceWithVat, 6));
+		$this->assertSame(round($expectedPriceWithVat, 6), round($actualPriceWithVat, 6));
 	}
 
 	public function testGetVatAmountByPriceWithVatProvider() {
@@ -103,7 +103,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$actualVatAmount = $priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
 
-		$this->assertEquals(round($expectedVatAmount, 6), round($actualVatAmount, 6));
+		$this->assertSame(round($expectedVatAmount, 6), round($actualVatAmount, 6));
 	}
 
 }

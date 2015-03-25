@@ -137,8 +137,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 			'key2' => 'value2_2',
 			'key3' => 'value3',
 		];
-		$this->assertEquals($expected, $subRequestMock->query->all());
-		$this->assertEquals($masterRequestMock->request, $subRequestMock->request);
+		$this->assertSame($expected, $subRequestMock->query->all());
+		$this->assertSame($masterRequestMock->request, $subRequestMock->request);
 	}
 
 }

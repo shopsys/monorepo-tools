@@ -113,9 +113,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$payment2 = $paymentRepository->getById($payment->getId());
 		$transport2 = $transportRepository->getById($transport->getId());
 
-		$this->assertEquals(round($inputPriceWithoutVat, 6), round($product2->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithoutVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithoutVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithoutVat, 6), round($product2->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithoutVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithoutVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
 	}
 
 	/**
@@ -187,9 +187,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$payment2 = $paymentRepository->getById($payment->getId());
 		$transport2 = $transportRepository->getById($transport->getId());
 
-		$this->assertEquals(round($inputPriceWithVat, 6), round($product2->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
-		$this->assertEquals(round($inputPriceWithVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithVat, 6), round($product2->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
 	}
 
 }

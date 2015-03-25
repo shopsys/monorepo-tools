@@ -28,7 +28,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 		$currentCustomer = new CurrentCustomer($tokenStorageMock, $pricingGroupFacadeMock);
 
 		$pricingGroup = $currentCustomer->getPricingGroup();
-		$this->assertEquals($expectedPricingGroup, $pricingGroup);
+		$this->assertSame($expectedPricingGroup, $pricingGroup);
 	}
 
 	public function testGetPricingGroup() {
@@ -51,7 +51,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 		$currentCustomer = new CurrentCustomer($tokenStorageMock, $pricingGroupFacadeMock);
 
 		$pricingGroup = $currentCustomer->getPricingGroup();
-		$this->assertEquals($expectedPricingGroup, $pricingGroup);
+		$this->assertSame($expectedPricingGroup, $pricingGroup);
 	}
 
 }

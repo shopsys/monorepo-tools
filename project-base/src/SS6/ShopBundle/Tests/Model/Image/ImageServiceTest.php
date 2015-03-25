@@ -46,8 +46,8 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 		foreach ($images as $image) {
 			/* @var $image \SS6\ShopBundle\Model\Image\Image */
 			$temporaryFiles = $image->getTemporaryFilesForUpload();
-			$this->assertEquals(1, $image->getEntityId());
-			$this->assertEquals('entityName', $image->getEntityName());
+			$this->assertSame(1, $image->getEntityId());
+			$this->assertSame('entityName', $image->getEntityName());
 			$this->assertContains(array_pop($temporaryFiles)->getTemporaryFilename(), $filenames);
 		}
 	}
@@ -67,7 +67,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 		$temporaryFiles = $image->getTemporaryFilesForUpload();
 
 		$this->assertInstanceOf(Image::class, $image);
-		$this->assertEquals($filename, array_pop($temporaryFiles)->getTemporaryFilename());
+		$this->assertSame($filename, array_pop($temporaryFiles)->getTemporaryFilename());
 	}
 
 	/**

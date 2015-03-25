@@ -61,9 +61,9 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$price = $basePriceCalculation->calculatePrice($inputPrice, $inputPriceType, $vat);
 
-		$this->assertEquals(round($basePriceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
-		$this->assertEquals(round($basePriceWithVat, 6), round($price->getPriceWithVat(), 6));
-		$this->assertEquals(round($basePriceVatAmount, 6), round($price->getVatAmount(), 6));
+		$this->assertSame(round($basePriceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
+		$this->assertSame(round($basePriceWithVat, 6), round($price->getPriceWithVat(), 6));
+		$this->assertSame(round($basePriceVatAmount, 6), round($price->getVatAmount(), 6));
 	}
 
 	public function testApplyCoefficientProvider() {
@@ -129,9 +129,9 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
 
-		$this->assertEquals(round($resultPriceWithVat, 6), round($resultPrice->getPriceWithVat(), 6));
-		$this->assertEquals(round($resultPriceWithoutVat, 6), round($resultPrice->getPriceWithoutVat(), 6));
-		$this->assertEquals(round($resultVatAmount, 6), round($resultPrice->getVatAmount(), 6));
+		$this->assertSame(round($resultPriceWithVat, 6), round($resultPrice->getPriceWithVat(), 6));
+		$this->assertSame(round($resultPriceWithoutVat, 6), round($resultPrice->getPriceWithoutVat(), 6));
+		$this->assertSame(round($resultVatAmount, 6), round($resultPrice->getVatAmount(), 6));
 	}
 
 }
