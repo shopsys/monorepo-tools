@@ -13,12 +13,4 @@ class InputPriceCalculation {
 		return round(100 * $basePriceWithVat / (100 + $vatPercent), 6);
 	}
 
-	/**
-	 * @param string $basePriceWithVat
-	 * @return string
-	 */
-	public function getInputPriceWithVat($basePriceWithVat) {
-		return $basePriceWithVat;
-	}
-
 }

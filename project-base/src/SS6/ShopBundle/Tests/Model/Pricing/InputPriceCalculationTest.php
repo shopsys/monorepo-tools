@@ -7,15 +7,6 @@ use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 
 class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetInputPriceWithVat() {
-		$priceWithVat = '100';
-
-		$inputPriceCalculation = new InputPriceCalculation();
-		$inputPriceWithVat = $inputPriceCalculation->getInputPriceWithVat($priceWithVat);
-
-		$this->assertSame($priceWithVat, $inputPriceWithVat);
-	}
-
 	public function testGetInputPriceWithoutVat() {
 		$priceWithVat = '100';
 		$vatPercent = 20;
