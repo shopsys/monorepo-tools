@@ -62,7 +62,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$this->assertNotEmpty($mailTempleteName2);
 		$this->assertInternalType('string', $mailTempleteName2);
 
-		$this->assertNotEquals($mailTempleteName1, $mailTempleteName2);
+		$this->assertNotSame($mailTempleteName1, $mailTempleteName2);
 	}
 
 	public function testGetMessageByOrder() {
@@ -103,8 +103,8 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$messageData = $orderMailService->getMessageDataByOrder($order, $mailTemplate);
 
 		$this->assertInstanceOf(MessageData::class, $messageData);
-		$this->assertEquals($mailTemplate->getSubject(), $messageData->subject);
-		$this->assertEquals($mailTemplate->getBody(), $messageData->body);
+		$this->assertSame($mailTemplate->getSubject(), $messageData->subject);
+		$this->assertSame($mailTemplate->getBody(), $messageData->body);
 	}
 
 }

@@ -20,7 +20,7 @@ class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
 		$productRepository = $this->getMock(ProductRepository::class, [], [], '', false);
 		$productIdToProductTransformer = new ProductIdToProductTransformer($productRepository);
 
-		$this->assertEquals($productId, $productIdToProductTransformer->transform($product));
+		$this->assertSame($productId, $productIdToProductTransformer->transform($product));
 		$this->assertNull($productIdToProductTransformer->transform(null));
 	}
 
@@ -40,7 +40,7 @@ class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
 
 		$productIdToProductTransformer = new ProductIdToProductTransformer($productRepository);
 
-		$this->assertEquals($product, $productIdToProductTransformer->reverseTransform($productId));
+		$this->assertSame($product, $productIdToProductTransformer->reverseTransform($productId));
 		$this->assertNull($productIdToProductTransformer->reverseTransform(null));
 	}
 }

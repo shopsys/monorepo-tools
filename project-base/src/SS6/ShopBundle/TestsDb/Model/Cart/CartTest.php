@@ -40,7 +40,7 @@ class CartTest extends DatabaseTestCase {
 		$em->flush();
 
 		$cart->removeItemById($cartItem1->getId());
-		$this->assertEquals(1, $cart->getItemsCount());
+		$this->assertSame(1, $cart->getItemsCount());
 	}
 
 }

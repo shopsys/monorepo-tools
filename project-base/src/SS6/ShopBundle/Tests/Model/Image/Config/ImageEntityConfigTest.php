@@ -24,7 +24,7 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
 		$typeSizes = $imageEntityConfig->getSizeConfigsByType('TypeName_1');
-		$this->assertEquals($types['TypeName_1'], $typeSizes);
+		$this->assertSame($types['TypeName_1'], $typeSizes);
 	}
 
 	public function testGetTypeSizesNotFound() {
@@ -62,13 +62,13 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 		$imageEntityConfig = new ImageEntityConfig('EntityName', 'EntityClass', $types, $sizes, []);
 
 		$size1 = $imageEntityConfig->getSizeConfigByType(null, null);
-		$this->assertEquals($sizes[ImageEntityConfig::WITHOUT_NAME_KEY], $size1);
+		$this->assertSame($sizes[ImageEntityConfig::WITHOUT_NAME_KEY], $size1);
 
 		$type1Size1 = $imageEntityConfig->getSizeConfigByType('TypeName_1', 'SizeName_1_1');
-		$this->assertEquals($types['TypeName_1']['SizeName_1_1'], $type1Size1);
+		$this->assertSame($types['TypeName_1']['SizeName_1_1'], $type1Size1);
 
 		$type2Size1 = $imageEntityConfig->getSizeConfigByType('TypeName_2', null);
-		$this->assertEquals($types['TypeName_2'][ImageEntityConfig::WITHOUT_NAME_KEY], $type2Size1);
+		$this->assertSame($types['TypeName_2'][ImageEntityConfig::WITHOUT_NAME_KEY], $type2Size1);
 	}
 
 }

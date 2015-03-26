@@ -36,9 +36,9 @@ class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 
 		$currentDomainRouter = new CurrentDomainRouter($domain, $domainRouterFactoryMock);
 
-		$this->assertEquals($generateResult, $currentDomainRouter->generate(''));
-		$this->assertEquals($matchResult, $currentDomainRouter->match($pathInfo));
-		$this->assertEquals($getRouteCollectionResult, $currentDomainRouter->getRouteCollection());
+		$this->assertSame($generateResult, $currentDomainRouter->generate(''));
+		$this->assertSame($matchResult, $currentDomainRouter->match($pathInfo));
+		$this->assertSame($getRouteCollectionResult, $currentDomainRouter->getRouteCollection());
 	}
 
 }

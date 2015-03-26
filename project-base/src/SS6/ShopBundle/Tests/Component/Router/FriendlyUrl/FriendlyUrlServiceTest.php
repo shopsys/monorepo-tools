@@ -29,12 +29,12 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$friendlyUrls = $friendlyUrlService->createFriendlyUrls($routeName, $entityId, $namesByLocale);
 		$this->assertCount(2, $friendlyUrls);
 		foreach ($friendlyUrls as $friendlyUrl) {
-			$this->assertEquals($entityId, $friendlyUrl->getEntityId());
-			$this->assertEquals($routeName, $friendlyUrl->getRouteName());
+			$this->assertSame($entityId, $friendlyUrl->getEntityId());
+			$this->assertSame($routeName, $friendlyUrl->getRouteName());
 			if ($friendlyUrl->getDomainId() === 1) {
-				$this->assertEquals($namesByLocale['cs'], $friendlyUrl->getUrl());
+				$this->assertSame($namesByLocale['cs'], $friendlyUrl->getUrl());
 			} elseif ($friendlyUrl->getDomainId() === 2) {
-				$this->assertEquals($namesByLocale['en'], $friendlyUrl->getUrl());
+				$this->assertSame($namesByLocale['en'], $friendlyUrl->getUrl());
 			}
 		}
 	}
@@ -61,7 +61,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertTrue($friendlyUrlUniqueResult->isUnique());
-		$this->assertEquals($friendlyUrl, $friendlyUrlUniqueResult->getFriendlyUrlForPersist());
+		$this->assertSame($friendlyUrl, $friendlyUrlUniqueResult->getFriendlyUrlForPersist());
 	}
 
 	public function testGetFriendlyUrlUniqueResultOldUnique() {
@@ -118,10 +118,10 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 		$friendlyUrlForPersist = $friendlyUrlUniqueResult->getFriendlyUrlForPersist();
 		$this->assertFalse($friendlyUrlUniqueResult->isUnique());
-		$this->assertEquals($friendlyUrl->getRouteName(), $friendlyUrlForPersist->getRouteName());
-		$this->assertEquals($friendlyUrl->getEntityId(), $friendlyUrlForPersist->getEntityId());
-		$this->assertEquals($friendlyUrl->getDomainId(), $friendlyUrlForPersist->getDomainId());
-		$this->assertEquals('name-4', $friendlyUrlForPersist->getUrl());
+		$this->assertSame($friendlyUrl->getRouteName(), $friendlyUrlForPersist->getRouteName());
+		$this->assertSame($friendlyUrl->getEntityId(), $friendlyUrlForPersist->getEntityId());
+		$this->assertSame($friendlyUrl->getDomainId(), $friendlyUrlForPersist->getDomainId());
+		$this->assertSame('name-4', $friendlyUrlForPersist->getUrl());
 	}
 
 }

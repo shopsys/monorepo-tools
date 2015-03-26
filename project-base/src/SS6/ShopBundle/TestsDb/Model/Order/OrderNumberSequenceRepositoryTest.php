@@ -17,7 +17,7 @@ class OrderNumberSequenceRepositoryTest extends DatabaseTestCase {
 
 		$uniqueNumbers = array_unique($numbers);
 
-		$this->assertEquals(count($numbers), count($uniqueNumbers));
+		$this->assertSame(count($numbers), count($uniqueNumbers));
 	}
 
 }

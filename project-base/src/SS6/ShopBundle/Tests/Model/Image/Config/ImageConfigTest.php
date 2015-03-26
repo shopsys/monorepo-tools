@@ -75,7 +75,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$imageConfig = $this->getBaseImageConfig();
 		$entity = new stdClass();
 
-		$this->assertEquals('Name_1', $imageConfig->getEntityName($entity));
+		$this->assertSame('Name_1', $imageConfig->getEntityName($entity));
 	}
 
 	public function testGetEntityNameNotFound() {
@@ -90,16 +90,16 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$entity = new stdClass();
 
 		$imageSizeConfig1 = $imageConfig->getImageSizeConfigByEntity($entity, 'TypeName_1', 'SizeName_1_1');
-		$this->assertEquals('SizeName_1_1', $imageSizeConfig1->getName());
+		$this->assertSame('SizeName_1_1', $imageSizeConfig1->getName());
 
 		$imageSizeConfig2 = $imageConfig->getImageSizeConfigByEntity($entity, 'TypeName_1', null);
 		$this->assertNull($imageSizeConfig2->getName());
-		$this->assertEquals(200, $imageSizeConfig2->getWidth());
-		$this->assertEquals(100, $imageSizeConfig2->getHeight());
+		$this->assertSame(200, $imageSizeConfig2->getWidth());
+		$this->assertSame(100, $imageSizeConfig2->getHeight());
 		$this->assertTrue($imageSizeConfig2->getCrop());
 
 		$imageSizeConfig3 = $imageConfig->getImageSizeConfigByEntity($entity, null, 'SizeName_0_1');
-		$this->assertEquals('SizeName_0_1', $imageSizeConfig3->getName());
+		$this->assertSame('SizeName_0_1', $imageSizeConfig3->getName());
 	}
 
 	public function testGetImageSizeConfigByEntityName() {
@@ -107,16 +107,16 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$entityName = 'Name_1';
 
 		$imageSizeConfig1 = $imageConfig->getImageSizeConfigByEntityName($entityName, 'TypeName_1', 'SizeName_1_1');
-		$this->assertEquals('SizeName_1_1', $imageSizeConfig1->getName());
+		$this->assertSame('SizeName_1_1', $imageSizeConfig1->getName());
 
 		$imageSizeConfig2 = $imageConfig->getImageSizeConfigByEntityName($entityName, 'TypeName_1', null);
 		$this->assertNull($imageSizeConfig2->getName());
-		$this->assertEquals(200, $imageSizeConfig2->getWidth());
-		$this->assertEquals(100, $imageSizeConfig2->getHeight());
+		$this->assertSame(200, $imageSizeConfig2->getWidth());
+		$this->assertSame(100, $imageSizeConfig2->getHeight());
 		$this->assertTrue($imageSizeConfig2->getCrop());
 
 		$imageSizeConfig3 = $imageConfig->getImageSizeConfigByEntityName($entityName, null, 'SizeName_0_1');
-		$this->assertEquals('SizeName_0_1', $imageSizeConfig3->getName());
+		$this->assertSame('SizeName_0_1', $imageSizeConfig3->getName());
 	}
 
 	public function tesGetImageEntityConfig() {
@@ -124,7 +124,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 		$entity = new stdClass();
 
 		$imageEntityConfig = $imageConfig->getImageEntityConfig($entity);
-		$this->assertEquals('Name_1', $imageEntityConfig->getEntityName());
+		$this->assertSame('Name_1', $imageEntityConfig->getEntityName());
 	}
 
 	public function tesGetImageEntityConfigNotFound() {

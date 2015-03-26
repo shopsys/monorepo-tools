@@ -102,7 +102,7 @@ class QueryPaginator implements PaginatorInterface {
 			[]
 		);
 
-		$sql = 'SELECT COUNT(*) AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
+		$sql = 'SELECT COUNT(*)::INTEGER AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
 
 		$rsm = new ResultSetMapping();
 		$rsm->addScalarResult('total_count', 'totalCount');

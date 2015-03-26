@@ -32,7 +32,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testEdit($value) {
 		$settingValue = new SettingValue('name', $value, 1);
-		$this->assertEquals($value, $settingValue->getValue());
+		$this->assertSame($value, $settingValue->getValue());
 	}
 
 	/**

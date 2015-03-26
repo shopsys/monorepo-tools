@@ -20,7 +20,7 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 		$expectedArray = $array;
 		Condition::setArrayDefaultValue($array, 'key', 'defaultValue');
 
-		$this->assertEquals($expectedArray, $array);
+		$this->assertSame($expectedArray, $array);
 	}
 
 	public function testSetArrayDefaultValueExistsNull() {
@@ -30,7 +30,7 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 		$expectedArray = $array;
 		Condition::setArrayDefaultValue($array, 'key', 'defaultValue');
 
-		$this->assertEquals($expectedArray, $array);
+		$this->assertSame($expectedArray, $array);
 	}
 
 	public function testSetArrayDefaultValueNotExist() {
@@ -43,20 +43,20 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 		];
 		Condition::setArrayDefaultValue($array, 0, 'number');
 
-		$this->assertEquals($expectedArray, $array);
+		$this->assertSame($expectedArray, $array);
 	}
 
 	public function testMixedToArrayIfNull() {
-		$this->assertEquals([], Condition::mixedToArray(null));
+		$this->assertSame([], Condition::mixedToArray(null));
 	}
 
 	public function testMixedToArrayIfNotArray() {
 		$value = 'I am not array';
-		$this->assertEquals([$value], Condition::mixedToArray($value));
+		$this->assertSame([$value], Condition::mixedToArray($value));
 	}
 
 	public function testMixedToArrayIfArray() {
 		$value = ['1', 3, []];
-		$this->assertEquals($value, Condition::mixedToArray($value));
+		$this->assertSame($value, Condition::mixedToArray($value));
 	}
 }

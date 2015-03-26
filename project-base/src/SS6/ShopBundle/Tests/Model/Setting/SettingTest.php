@@ -33,9 +33,9 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('findAllByDomainId')->willReturnMap($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
-		$this->assertEquals('value', $setting->get('key', 1));
+		$this->assertSame('value', $setting->get('key', 1));
 		$setting->set('key', 'newValue', 1);
-		$this->assertEquals('newValue', $setting->get('key', 1));
+		$this->assertSame('newValue', $setting->get('key', 1));
 
 		$this->setExpectedException(SettingValueNotFoundException::class);
 		$setting->set('key2', 'value', 1);
@@ -133,14 +133,14 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 				->method('findAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
-		$this->assertEquals('valueCommon', $setting->get('key', SettingValue::DOMAIN_ID_COMMON));
-		$this->assertEquals('value', $setting->get('key', 1));
+		$this->assertSame('valueCommon', $setting->get('key', SettingValue::DOMAIN_ID_COMMON));
+		$this->assertSame('value', $setting->get('key', 1));
 		$setting->set('key', 'newValue', 1);
-		$this->assertEquals('newValue', $setting->get('key', 1));
+		$this->assertSame('newValue', $setting->get('key', 1));
 		$setting->set('key', 'newValueCommon', SettingValue::DOMAIN_ID_COMMON);
-		$this->assertEquals('newValue', $setting->get('key', 1));
-		$this->assertEquals('newValueCommon', $setting->get('key', SettingValue::DOMAIN_ID_COMMON));
-		$this->assertEquals('newValueCommon', $setting->get('key', 2));
+		$this->assertSame('newValue', $setting->get('key', 1));
+		$this->assertSame('newValueCommon', $setting->get('key', SettingValue::DOMAIN_ID_COMMON));
+		$this->assertSame('newValueCommon', $setting->get('key', 2));
 	}
 
 	public function testSetValueNewDomain() {
@@ -169,11 +169,11 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 				->method('findAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
-		$this->assertEquals('valueCommon', $setting->get('key', 2));
+		$this->assertSame('valueCommon', $setting->get('key', 2));
 		$setting->set('key', 'newValue', 2);
-		$this->assertEquals('value', $setting->get('key', 1));
-		$this->assertEquals('newValue', $setting->get('key', 2));
-		$this->assertEquals('valueCommon', $setting->get('key', 3));
+		$this->assertSame('value', $setting->get('key', 1));
+		$this->assertSame('newValue', $setting->get('key', 2));
+		$this->assertSame('valueCommon', $setting->get('key', 3));
 	}
 
 }

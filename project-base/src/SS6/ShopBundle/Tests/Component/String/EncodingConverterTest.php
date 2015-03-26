@@ -19,7 +19,7 @@ class EncodingConverterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCp1250ToUtf8() {
-		$this->assertEquals($this->getUtf8String(), EncodingConverter::cp1250ToUtf8($this->getCp1250String()));
+		$this->assertSame($this->getUtf8String(), EncodingConverter::cp1250ToUtf8($this->getCp1250String()));
 	}
 
 	public function testCp1250ToUtf8Array() {
@@ -27,7 +27,7 @@ class EncodingConverterTest extends PHPUnit_Framework_TestCase {
 		$actual = EncodingConverter::cp1250ToUtf8([
 			'key' => $this->getCp1250String(),
 		]);
-		$this->assertEquals($array, $actual);
+		$this->assertSame($array, $actual);
 	}
 
 	public function testCp1250ToUtf8ArrayOfArrays() {
@@ -36,13 +36,13 @@ class EncodingConverterTest extends PHPUnit_Framework_TestCase {
 		$actual = EncodingConverter::cp1250ToUtf8([
 			'array' => ['key' => $this->getCp1250String()],
 		]);
-		$this->assertEquals($arrayOfArrays, $actual);
+		$this->assertSame($arrayOfArrays, $actual);
 	}
 
 	public function testCp1250ToUtf8Object() {
 		$object = new stdClass();
 		$actual = EncodingConverter::cp1250ToUtf8($object);
-		$this->assertEquals($object, $actual);
+		$this->assertSame($object, $actual);
 	}
 
 	public function testCp1250ToUtf8ArrayOfMixed() {
@@ -54,6 +54,6 @@ class EncodingConverterTest extends PHPUnit_Framework_TestCase {
 			'array' => ['key' => $this->getCp1250String()],
 			'object' => $object,
 		]);
-		$this->assertEquals($arrayOfMixed, $actual);
+		$this->assertSame($arrayOfMixed, $actual);
 	}
 }

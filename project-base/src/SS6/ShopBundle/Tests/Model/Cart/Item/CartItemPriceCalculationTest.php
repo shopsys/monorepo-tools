@@ -27,12 +27,12 @@ class CartItemPriceCalculationTest extends FunctionalTestCase {
 
 		$cartItemPrice = $cartItemPriceCalculation->calculatePrice($cartItem);
 
-		$this->assertEquals(round(11789.42, 6), round($cartItemPrice->getUnitPriceWithoutVat(), 6));
-		$this->assertEquals(round(14266, 6), round($cartItemPrice->getUnitPriceWithVat(), 6));
-		$this->assertEquals(round(2476.58, 6), round($cartItemPrice->getUnitPriceVatAmount(), 6));
-		$this->assertEquals(round(35368.27, 6), round($cartItemPrice->getTotalPriceWithoutVat(), 6));
-		$this->assertEquals(round(42798, 6), round($cartItemPrice->getTotalPriceWithVat(), 6));
-		$this->assertEquals(round(7429.73, 6), round($cartItemPrice->getTotalPriceVatAmount(), 6));
+		$this->assertSame(round(11789.42, 6), round($cartItemPrice->getUnitPriceWithoutVat(), 6));
+		$this->assertSame(round(14266, 6), round($cartItemPrice->getUnitPriceWithVat(), 6));
+		$this->assertSame(round(2476.58, 6), round($cartItemPrice->getUnitPriceVatAmount(), 6));
+		$this->assertSame(round(35368.27, 6), round($cartItemPrice->getTotalPriceWithoutVat(), 6));
+		$this->assertSame(round(42798, 6), round($cartItemPrice->getTotalPriceWithVat(), 6));
+		$this->assertSame(round(7429.73, 6), round($cartItemPrice->getTotalPriceVatAmount(), 6));
 	}
 
 }

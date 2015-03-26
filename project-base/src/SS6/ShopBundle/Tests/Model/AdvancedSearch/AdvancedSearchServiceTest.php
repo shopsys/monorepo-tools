@@ -21,7 +21,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertArrayHasKey('subject', $defaultRuleFormData);
 		$this->assertArrayHasKey('operator', $defaultRuleFormData);
 		$this->assertArrayHasKey('value', $defaultRuleFormData);
-		$this->assertEquals($filterName, $defaultRuleFormData['subject']);
+		$this->assertSame($filterName, $defaultRuleFormData['subject']);
 	}
 
 	public function testGetRulesFormDataByRequestDataDefault() {
@@ -57,7 +57,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertCount(2, $rulesFormViewData);
 		foreach ($rulesFormViewData as $key => $ruleFormData) {
 			if ($key !== AdvancedSearchService::TEMPLATE_RULE_FORM_KEY) {
-				$this->assertEquals($requestData[0], $ruleFormData);
+				$this->assertSame($requestData[0], $ruleFormData);
 			}
 		}
 	}

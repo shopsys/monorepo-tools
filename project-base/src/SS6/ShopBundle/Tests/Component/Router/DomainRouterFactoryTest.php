@@ -30,8 +30,8 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 			->expects($this->once())
 			->method('getRouter')
 			->willReturnCallback(function ($locale, RequestContext $context) use ($localizedRouterMock) {
-				$this->assertEquals('en', $locale);
-				$this->assertEquals('example.com', $context->getHost());
+				$this->assertSame('en', $locale);
+				$this->assertSame('example.com', $context->getHost());
 
 				return $localizedRouterMock;
 			});
@@ -45,8 +45,8 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 			->method('createRouter')
 			->willReturnCallback(
 				function (DomainConfig $actualDomainConfig, RequestContext $context) use ($domainConfig, $friendlyUrlRouterMock) {
-					$this->assertEquals($domainConfig, $actualDomainConfig);
-					$this->assertEquals('example.com', $context->getHost());
+					$this->assertSame($domainConfig, $actualDomainConfig);
+					$this->assertSame('example.com', $context->getHost());
 					return $friendlyUrlRouterMock;
 				}
 			);

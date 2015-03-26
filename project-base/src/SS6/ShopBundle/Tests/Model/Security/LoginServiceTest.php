@@ -54,6 +54,6 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(false));
 		$requestMock->attributes->expects($this->never())->method('get');
 
-		$this->assertEquals(true, $loginService->checkLoginProcess($requestMock));
+		$this->assertSame(true, $loginService->checkLoginProcess($requestMock));
 	}
 }

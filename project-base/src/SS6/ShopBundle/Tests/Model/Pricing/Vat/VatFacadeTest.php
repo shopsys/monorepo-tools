@@ -61,7 +61,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			$productPriceRecalculationSchedulerMock
 		);
 
-		$this->assertEquals($expected, $vatFacade->getDefaultVat());
+		$this->assertSame($expected, $vatFacade->getDefaultVat());
 	}
 
 	public function testSetDefaultVat() {

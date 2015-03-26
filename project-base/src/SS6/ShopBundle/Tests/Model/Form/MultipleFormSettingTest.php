@@ -24,21 +24,21 @@ class MultipleFormSettingTest extends PHPUnit_Framework_TestCase {
 	public function testDefaultValue() {
 		$multipleFormSetting = new MultipleFormSetting();
 
-		$this->assertEquals(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
+		$this->assertSame(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
 	}
 
 	public function testReset() {
 		$multipleFormSetting = new MultipleFormSetting();
 
 		$multipleFormSetting->reset();
-		$this->assertEquals(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
+		$this->assertSame(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
 
 		$multipleFormSetting->currentFormIsMultiple();
 		$multipleFormSetting->reset();
-		$this->assertEquals(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
+		$this->assertSame(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
 
 		$multipleFormSetting->currentFormIsNotMultiple();
 		$multipleFormSetting->reset();
-		$this->assertEquals(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
+		$this->assertSame(MultipleFormSetting::DEFAULT_MULTIPLE, $multipleFormSetting->isCurrentFormMultiple());
 	}
 }

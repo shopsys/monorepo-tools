@@ -77,7 +77,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$result = $cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		$this->assertTrue($result->getIsNew());
-		$this->assertEquals($quantity, $result->getAddedQuantity());
+		$this->assertSame($quantity, $result->getAddedQuantity());
 	}
 
 	public function testAddProductToCartSameProduct() {
@@ -97,7 +97,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$result = $cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		$this->assertFalse($result->getIsNew());
-		$this->assertEquals($quantity, $result->getAddedQuantity());
+		$this->assertSame($quantity, $result->getAddedQuantity());
 	}
 
 	public function testCleanCart() {
@@ -150,7 +150,7 @@ class CartServiceTest extends FunctionalTestCase {
 			}
 		}
 
-		$this->assertEquals(2, $mergingCart->getItemsCount());
+		$this->assertSame(2, $mergingCart->getItemsCount());
 	}
 
 }

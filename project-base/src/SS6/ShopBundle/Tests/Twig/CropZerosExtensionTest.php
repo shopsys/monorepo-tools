@@ -22,6 +22,6 @@ class CropZerosExtensionTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider returnValuesProvider
 	 */
 	public function testReturnValues($input, $return) {
-		$this->assertEquals($return, (new CropZerosExtension())->cropZeros($input));
+		$this->assertSame($return, (new CropZerosExtension())->cropZeros($input));
 	}
 }

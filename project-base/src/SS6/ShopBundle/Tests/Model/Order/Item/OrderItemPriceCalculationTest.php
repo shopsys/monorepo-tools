@@ -21,7 +21,7 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock);
 		$priceWithoutVat = $orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 
-		$this->assertEquals(round(1000 - 100, 6), round($priceWithoutVat, 6));
+		$this->assertSame(round(1000 - 100, 6), round($priceWithoutVat, 6));
 	}
 
 	public function testCalculateTotalPrice() {
@@ -40,8 +40,8 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$totalPrice = $orderItemPriceCalculation->calculateTotalPrice($orderItem);
 
-		$this->assertEquals(round(200, 6), round($totalPrice->getPriceWithVat(), 6));
-		$this->assertEquals(round(190, 6), round($totalPrice->getPriceWithoutVat(), 6));
-		$this->assertEquals(round(10, 6), round($totalPrice->getVatAmount(), 6));
+		$this->assertSame(round(200, 6), round($totalPrice->getPriceWithVat(), 6));
+		$this->assertSame(round(190, 6), round($totalPrice->getPriceWithoutVat(), 6));
+		$this->assertSame(round(10, 6), round($totalPrice->getVatAmount(), 6));
 	}
 }

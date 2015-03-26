@@ -74,15 +74,15 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			null
 		);
 
-		$this->assertEquals($quantifiedItems, $orderPreview->getQuantifiedItems());
-		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
-		$this->assertEquals($payment, $orderPreview->getPayment());
-		$this->assertEquals($paymentPrice, $orderPreview->getPaymentPrice());
-		$this->assertEquals(2 + 20 + 400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
-		$this->assertEquals(12 + 120 + 2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
-		$this->assertEquals(10 + 100 + 2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
-		$this->assertEquals($transport, $orderPreview->getTransport());
-		$this->assertEquals($transportPrice, $orderPreview->getTransportPrice());
+		$this->assertSame($quantifiedItems, $orderPreview->getQuantifiedItems());
+		$this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
+		$this->assertSame($payment, $orderPreview->getPayment());
+		$this->assertSame($paymentPrice, $orderPreview->getPaymentPrice());
+		$this->assertSame(2 + 20 + 400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
+		$this->assertSame(12 + 120 + 2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
+		$this->assertSame(10 + 100 + 2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
+		$this->assertSame($transport, $orderPreview->getTransport());
+		$this->assertSame($transportPrice, $orderPreview->getTransportPrice());
 	}
 
 	public function testCalculatePreviewWithoutTransportAndPayment() {
@@ -133,13 +133,13 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			null
 		);
 
-		$this->assertEquals($quantifiedItems, $orderPreview->getQuantifiedItems());
-		$this->assertEquals($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
+		$this->assertSame($quantifiedItems, $orderPreview->getQuantifiedItems());
+		$this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertNull($orderPreview->getPayment());
 		$this->assertNull($orderPreview->getPaymentPrice());
-		$this->assertEquals(400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
-		$this->assertEquals(2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
-		$this->assertEquals(2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
+		$this->assertSame(400 * 2, $orderPreview->getTotalPrice()->getVatAmount());
+		$this->assertSame(2400 * 2, $orderPreview->getTotalPrice()->getPriceWithVat());
+		$this->assertSame(2000 * 2, $orderPreview->getTotalPrice()->getPriceWithoutVat());
 		$this->assertNull($orderPreview->getTransport());
 		$this->assertNull($orderPreview->getTransportPrice());
 	}

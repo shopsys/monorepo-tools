@@ -188,18 +188,18 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$preparedConfig = $imageConfigLoader->loadFromArray($inputConfig);
 
 		$imageEntityConfig = $preparedConfig[$inputConfig[0][ImageConfigDefinition::CONFIG_CLASS]];
-		$this->assertEquals('Class_1', $imageEntityConfig->getEntityClass());
-		$this->assertEquals('Name_1', $imageEntityConfig->getEntityName());
+		$this->assertSame('Class_1', $imageEntityConfig->getEntityClass());
+		$this->assertSame('Name_1', $imageEntityConfig->getEntityName());
 		$this->assertFalse($imageEntityConfig->isMultiple(null));
 		$this->assertTrue($imageEntityConfig->isMultiple('TypeName_1'));
 		$this->assertFalse($imageEntityConfig->isMultiple('TypeName_2'));
 
 		$imageSize = $imageEntityConfig->getSizeConfigByType('TypeName_1', 'SizeName_2');
 
-		$this->assertEquals('SizeName_2', $imageSize->getName());
-		$this->assertEquals(200, $imageSize->getWidth());
-		$this->assertEquals(100, $imageSize->getHeight());
-		$this->assertEquals(true, $imageSize->getCrop());
+		$this->assertSame('SizeName_2', $imageSize->getName());
+		$this->assertSame(200, $imageSize->getWidth());
+		$this->assertSame(100, $imageSize->getHeight());
+		$this->assertSame(true, $imageSize->getCrop());
 	}
 
 	public function testLoadFromArrayOriginalSize() {
@@ -256,8 +256,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 		$imageSize = $imageEntityConfig->getSizeConfigByType(null, ImageConfig::ORIGINAL_SIZE_NAME);
 
 		$this->assertInstanceOf(ImageSizeConfig::class, $imageSize);
-		$this->assertEquals(100, $imageSize->getHeight());
-		$this->assertEquals(200, $imageSize->getWidth());
+		$this->assertSame(100, $imageSize->getHeight());
+		$this->assertSame(200, $imageSize->getWidth());
 		$this->assertTrue($imageSize->getCrop());
 	}
 

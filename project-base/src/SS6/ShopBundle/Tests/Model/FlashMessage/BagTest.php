@@ -20,12 +20,12 @@ class BagTest extends FunctionalTestCase {
 		$flashMessageAdmin->addSuccess($successMessageAdmin);
 		$flashMessageFront->addError($errorMessageFront);
 
-		$this->assertEquals([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
-		$this->assertEquals([], $flashMessageAdmin->getInfoMessages());
-		$this->assertEquals([$successMessageAdmin], $flashMessageAdmin->getSuccessMessages());
-		$this->assertEquals([$errorMessageFront], $flashMessageFront->getErrorMessages());
-		$this->assertEquals([], $flashMessageFront->getInfoMessages());
-		$this->assertEquals([], $flashMessageFront->getSuccessMessages());
+		$this->assertSame([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
+		$this->assertSame([], $flashMessageAdmin->getInfoMessages());
+		$this->assertSame([$successMessageAdmin], $flashMessageAdmin->getSuccessMessages());
+		$this->assertSame([$errorMessageFront], $flashMessageFront->getErrorMessages());
+		$this->assertSame([], $flashMessageFront->getInfoMessages());
+		$this->assertSame([], $flashMessageFront->getSuccessMessages());
 	}
 
 	public function testAddArrayOfMessages() {
@@ -36,7 +36,7 @@ class BagTest extends FunctionalTestCase {
 
 		$flashMessageAdmin->addError($errorMessagesAdmin);
 
-		$this->assertEquals($errorMessagesAdmin, $flashMessageAdmin->getErrorMessages());
+		$this->assertSame($errorMessagesAdmin, $flashMessageAdmin->getErrorMessages());
 	}
 
 	public function testGetUniqueMessage() {
@@ -48,7 +48,7 @@ class BagTest extends FunctionalTestCase {
 		$flashMessageAdmin->addError($errorMessageAdmin);
 		$flashMessageAdmin->addError($errorMessageAdmin);
 
-		$this->assertEquals([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
+		$this->assertSame([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
 	}
 
 	public function testGetAndClearBag() {
@@ -59,8 +59,8 @@ class BagTest extends FunctionalTestCase {
 
 		$flashMessageAdmin->addError($errorMessageAdmin);
 
-		$this->assertEquals([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
-		$this->assertEquals([], $flashMessageAdmin->getErrorMessages());
+		$this->assertSame([$errorMessageAdmin], $flashMessageAdmin->getErrorMessages());
+		$this->assertSame([], $flashMessageAdmin->getErrorMessages());
 	}
 
 	public function testIsEmpty() {

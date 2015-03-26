@@ -45,6 +45,7 @@ class Column {
 		$this->sourceColumnName = $sourceColumnName;
 		$this->title = $title;
 		$this->sortable = $sortable;
+		$this->classAttribute = '';
 		$this->orderSourceColmunName = $sourceColumnName;
 	}
 

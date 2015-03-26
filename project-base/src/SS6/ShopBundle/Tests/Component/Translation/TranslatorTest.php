@@ -28,10 +28,10 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase {
 		$reflectionProperty->setValue($translator, $catalogues);
 
 		$translation = $translator->trans('Foo %%bar%%', ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertEquals('Foo baz', $translation);
+		$this->assertSame('Foo baz', $translation);
 
 		$notTranslated = $translator->trans('FooBar %%bar%%', ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertEquals(Translator::NOT_TRANSLATED_PREFIX . 'FooBar baz', $notTranslated);
+		$this->assertSame(Translator::NOT_TRANSLATED_PREFIX . 'FooBar baz', $notTranslated);
 
 		$notTranslatedInSourceLanguage = $translator->trans(
 			'FooBar %%bar%%',
@@ -39,7 +39,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase {
 			Translator::DEFAULT_DOMAIN,
 			Translator::SOURCE_LOCALE
 		);
-		$this->assertEquals('FooBar baz', $notTranslatedInSourceLanguage);
+		$this->assertSame('FooBar baz', $notTranslatedInSourceLanguage);
 	}
 
 	public function testTransChoiceWithParameters() {
@@ -60,10 +60,10 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase {
 		$reflectionProperty->setValue($translator, $catalogues);
 
 		$translation = $translator->transChoice('Foo %%bar%%', 0, ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertEquals('Foo baz', $translation);
+		$this->assertSame('Foo baz', $translation);
 
 		$notTranslated = $translator->transChoice('FooBar %%bar%%', 0, ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertEquals(Translator::NOT_TRANSLATED_PREFIX . 'FooBar baz', $notTranslated);
+		$this->assertSame(Translator::NOT_TRANSLATED_PREFIX . 'FooBar baz', $notTranslated);
 
 		$notTranslatedInSourceLanguage = $translator->transChoice(
 			'FooBar %%bar%%',
@@ -72,7 +72,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase {
 			Translator::DEFAULT_DOMAIN,
 			Translator::SOURCE_LOCALE
 		);
-		$this->assertEquals('FooBar baz', $notTranslatedInSourceLanguage);
+		$this->assertSame('FooBar baz', $notTranslatedInSourceLanguage);
 	}
 
 	public function testTransChoice() {
@@ -90,13 +90,13 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase {
 		$message = '{0}none|[1,5]1 to 5|[6,Inf]too much';
 
 		$translationZero = $translator->transChoice($message, 0, [], Translator::DEFAULT_DOMAIN, Translator::SOURCE_LOCALE);
-		$this->assertEquals('none', $translationZero);
+		$this->assertSame('none', $translationZero);
 
 		$translation1to5 = $translator->transChoice($message, 5, [], Translator::DEFAULT_DOMAIN, Translator::SOURCE_LOCALE);
-		$this->assertEquals('1 to 5', $translation1to5);
+		$this->assertSame('1 to 5', $translation1to5);
 
 		$translationTooMuch = $translator->transChoice($message, 6, [], Translator::DEFAULT_DOMAIN, Translator::SOURCE_LOCALE);
-		$this->assertEquals('too much', $translationTooMuch);
+		$this->assertSame('too much', $translationTooMuch);
 	}
 
 }
