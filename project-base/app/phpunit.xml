@@ -26,6 +26,10 @@
 			<directory>../src/*/*Bundle/TestsCrawler</directory>
 			<directory>../src/*/Bundle/*Bundle/TestsCrawler</directory>
 		</testsuite>
+		<testsuite name="TestsPerformance">
+			<directory>../src/*/*Bundle/TestsPerformance</directory>
+			<directory>../src/*/Bundle/*Bundle/TestsPerformance</directory>
+		</testsuite>
 	</testsuites>
 
 	<filter>
@@ -40,6 +44,7 @@
 				<directory>../src/*/Bundle/*Bundle/Tests</directory>
 				<directory>../src/*/Bundle/*Bundle/TestsDb</directory>
 				<directory>../src/*/Bundle/*Bundle/TestsCrawler</directory>
+				<directory>../src/*/Bundle/*Bundle/TestsPerformance</directory>
 			</exclude>
 		</whitelist>
 	</filter>
