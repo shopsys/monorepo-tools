@@ -2,12 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDataFactory {
 
@@ -17,44 +14,16 @@ class ProductDataFactory {
 	private $vatFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade
 	 */
-	private $productManualInputPriceFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
-	 */
-	private $currencyFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
-	 */
-	private $productPriceCalculation;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
-	 */
-	private $pricingSetting;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceCalculation
-	 */
-	private $inputPriceCalculation;
+	private $productInputPriceFacade;
 
 	public function __construct(
 		VatFacade $vatFacade,
-		ProductManualInputPriceFacade $productManualInputPriceFacade,
-		CurrencyFacade $currencyFacade,
-		ProductPriceCalculation $productPriceCalculation,
-		PricingSetting $pricingSetting,
-		InputPriceCalculation $inputPriceCalculation
+		ProductInputPriceFacade $productInputPriceFacade
 	) {
 		$this->vatFacade = $vatFacade;
-		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
-		$this->currencyFacade = $currencyFacade;
-		$this->productPriceCalculation = $productPriceCalculation;
-		$this->pricingSetting = $pricingSetting;
-		$this->inputPriceCalculation = $inputPriceCalculation;
+		$this->productInputPriceFacade = $productInputPriceFacade;
 	}
 
 	/**
@@ -89,7 +58,7 @@ class ProductDataFactory {
 		$productData->catnum = $product->getCatnum();
 		$productData->partno = $product->getPartno();
 		$productData->ean = $product->getEan();
-		$productData->price = $this->getInputPrice($product);
+		$productData->price = $this->productInputPriceFacade->getInputPrice($product);
 		$productData->vat = $product->getVat();
 		$productData->sellingFrom = $product->getSellingFrom();
 		$productData->sellingTo = $product->getSellingTo();
@@ -113,57 +82,6 @@ class ProductDataFactory {
 		$productData->accessories = $product->getAccessories();
 
 		return $productData;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return string|null
-	 */
-	private function getInputPrice(Product $product) {
-		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
-			return $product->getPrice();
-		} elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
-			$inputPriceType = $this->pricingSetting->getInputPriceType();
-
-			$maxSellingPriceWithVatInDefaultCurrency = $this->getMaxSellingPriceWithVatInDefaultCurrency($product);
-
-			if ($maxSellingPriceWithVatInDefaultCurrency === null) {
-				return null;
-			}
-
-			return $this->inputPriceCalculation->getInputPrice(
-				$inputPriceType,
-				$maxSellingPriceWithVatInDefaultCurrency,
-				$product->getVat()->getPercent()
-			);
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return string|null
-	 */
-	private function getMaxSellingPriceWithVatInDefaultCurrency(Product $product) {
-		$defaultCurrency = $this->currencyFacade->getDefaultCurrency();
-		$manualInputPrices = $this->productManualInputPriceFacade->getAllByProduct($product);
-
-		$maxSellingPriceWithVatInDefaultCurrency = null;
-		foreach ($manualInputPrices as $manualInputPrice) {
-			$manualPriceDomainId = $manualInputPrice->getPricingGroup()->getDomainId();
-			$manualPriceCurrency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($manualPriceDomainId);
-
-			if ($manualPriceCurrency === $defaultCurrency) {
-				$productPrice = $this->productPriceCalculation->calculatePrice($product, $manualInputPrice->getPricingGroup());
-
-				if ($maxSellingPriceWithVatInDefaultCurrency === null
-					|| $productPrice->getPriceWithVat() > $maxSellingPriceWithVatInDefaultCurrency
-				) {
-					$maxSellingPriceWithVatInDefaultCurrency = $productPrice->getPriceWithVat();
-				}
-			}
-		}
-
-		return $maxSellingPriceWithVatInDefaultCurrency;
 	}
 
 }
