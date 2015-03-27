@@ -168,10 +168,14 @@
 {%- endblock %}
 
 {% macro productsWidgetItem(productName, form) %}
-	<div class="js-products-picker-item">
-		{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
-		<span class="js-products-picker-item-product-name">{{ productName }}</span>
-		<i class="fa fa-trash-o js-products-picker-item-button-delete"></i>
+	<div class="js-products-picker-item in-simple-item">
+		<span class="in-simple-item__icon">
+			{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
+			<i class="fa fa-trash-o js-products-picker-item-button-delete cursor-pointer"></i>
+		</span>
+		<span class="in-simple-item__desc">
+			<span class="js-products-picker-item-product-name">{{ productName }}</span>
+		</span>
 	</div>
 {% endmacro %}
 
@@ -181,7 +185,7 @@
 		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype)|e }}"
 		data-products-picker-url="{{ url('admin_productpicker_productspicker', {jsInstanceId: '__js_instance_id__'}) }}"
 	>
-		<div class="js-products-picker-items">
+		<div class="js-products-picker-items mb-1">
 			{% for key, productForm in form %}
 				{{ _self.productsWidgetItem(form.vars.products[key].name, productForm) }}
 			{% endfor %}
