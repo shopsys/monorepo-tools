@@ -24,7 +24,11 @@ class AllPagesTest extends FunctionalTestCase {
 	}
 
 	public function testFrontPages() {
-		$this->doTestPagesWithProgress($this->createUrlProvider()->getFrontTestableUrlsProviderData(), 'no-reply@netdevelo.cz', 'user123');
+		$this->doTestPagesWithProgress(
+			$this->createUrlProvider()->getFrontTestableUrlsProviderData(),
+			'no-reply@netdevelo.cz',
+			'user123'
+		);
 	}
 
 	/**
@@ -62,7 +66,7 @@ class AllPagesTest extends FunctionalTestCase {
 				list($routeName, $url, $dummyExpectedStatusCode, $asLogged) = $testUrlData;
 
 				$progressLine = sprintf(
-					"%s: %3d%% (%s)",
+					'%s: %3d%% (%s)',
 					$pass === 0 ? 'Warmup' : 'Pass ' . $pass . '/' . self::PASSES,
 					round($pageIndex / $countTestedUrls * 100),
 					$routeName
