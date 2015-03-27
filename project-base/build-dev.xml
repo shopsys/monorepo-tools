@@ -16,6 +16,8 @@
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
 	<target name="tests-all" depends="test-db-demo,tests,tests-db,tests-crawler" />
 
+	<target name="tests-performance-run" depends="clean,test-db-demo,test-db-fixtures-performance,tests-performance" />
+
 	<target name="composer-dev">
 		<exec
 			executable="${path.composer.executable}"
@@ -406,6 +408,20 @@
 			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Performance" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
+	<target name="tests-performance">
+		<exec
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="TestsPerformance"/>
 		</exec>
 	</target>
 

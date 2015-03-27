@@ -131,6 +131,7 @@ class UrlsProvider {
 					$routeName,
 					$this->router->generate($routeName, $this->getRouteParameters($route, $routeName), RouterInterface::RELATIVE_PATH),
 					$this->getExpectedStatusCode($route, $routeName),
+					true,
 				];
 			}
 		}
