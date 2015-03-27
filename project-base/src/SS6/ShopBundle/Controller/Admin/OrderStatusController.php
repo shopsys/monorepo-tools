@@ -3,11 +3,21 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderStatusController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/order_status/list/")
@@ -83,9 +93,12 @@ class OrderStatusController extends Controller {
 		try {
 			$orderStatus = $orderStatusFacade->getById($id);
 			if ($orderStatusFacade->isOrderStatusUsed($orderStatus)) {
-				$message = 'Jelikož stav "' . $orderStatus->getName() . '" je používán ještě u některých objednávek, '
+				$message = $this->translator->trans(
+					'Jelikož stav "%name%" je používán ještě u některých objednávek, '
 					. 'musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? '
-					. 'Při této změně stavu nebude odeslán email zákazníkům.';
+					. 'Při této změně stavu nebude odeslán email zákazníkům.',
+					['%name%' => $orderStatus->getName()]
+				);
 				$ordersStatusNamesById = [];
 				foreach ($orderStatusFacade->getAllExceptId($id) as $newOrderStatus) {
 					$ordersStatusNamesById[$newOrderStatus->getId()] = $newOrderStatus->getName();
@@ -97,8 +110,10 @@ class OrderStatusController extends Controller {
 					$ordersStatusNamesById
 				);
 			} else {
-				$message = 'Opravdu si přejete trvale odstranit stav objednávek "'
-					. $orderStatus->getName() . '"? Nikde není použitý.';
+				$message = $this->translator->trans(
+					'Opravdu si přejete trvale odstranit stav objednávek "%name%"? Nikde není použitý.',
+					['%name%' => $orderStatus->getName()]
+				);
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {

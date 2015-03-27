@@ -3,12 +3,22 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PricingGroupController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/pricing/group/list/")
@@ -81,13 +91,19 @@ class PricingGroupController extends Controller {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
 			}
 			if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
-				$message = 'Pro odstranění cenové skupiny "' . $pricingGroup->getName() . '" musíte zvolit, která se má všude, '
-					. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?';
+				$message = $this->translator->trans(
+					'Pro odstranění cenové skupiny "%name%" musíte zvolit, která se má všude, '
+					. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?',
+					['%name%' => $pricingGroup->getName()]
+				);
 
 				if ($pricingGroupFacade->isPricingGroupDefault($pricingGroup)) {
-					$message = 'Cenová skupina "' . $pricingGroup->getName() . '" je nastavena jako výchozí. '
+					$message = $this->translator->trans(
+						'Cenová skupina "%name%" je nastavena jako výchozí. '
 						. 'Pro její odstranění musíte zvolit, která se má všude, '
-						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?';
+						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?',
+						['%name%' => $pricingGroup->getName()]
+					);
 				}
 
 				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
@@ -97,8 +113,10 @@ class PricingGroupController extends Controller {
 					$pricingGroupsNamesById
 				);
 			} else {
-				$message = 'Opravdu si přejete trvale odstranit cenovou skupinu "' . $pricingGroup->getName() . '"?'
-					. ' Nikde není použita.';
+				$message = $this->translator->trans(
+					'Opravdu si přejete trvale odstranit cenovou skupinu "%name%"? Nikde není použita.',
+					['%name%' => $pricingGroup->getName()]
+				);
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
 			}
 
