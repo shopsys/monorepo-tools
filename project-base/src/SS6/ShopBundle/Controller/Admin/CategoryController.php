@@ -157,7 +157,7 @@ class CategoryController extends Controller {
 
 		$categoryFacade->editOrdering($parentIdByCategoryId);
 
-		return new Response('OK');
+		return new Response('OK - dummy');
 	}
 
 	/**
