@@ -174,44 +174,4 @@ class ProductData {
 		$this->accessories = $accessories;
 	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
-	 */
-	public function setFromEntity(Product $product, array $productDomains) {
-		$translations = $product->getTranslations();
-		$names = [];
-		$descriptions = [];
-		foreach ($translations as $translation) {
-			$names[$translation->getLocale()] = $translation->getName();
-			$descriptions[$translation->getLocale()] = $translation->getDescription();
-		}
-		$this->name = $names;
-		$this->description = $descriptions;
-
-		$this->catnum = $product->getCatnum();
-		$this->partno = $product->getPartno();
-		$this->ean = $product->getEan();
-		$this->price = $product->getPrice();
-		$this->vat = $product->getVat();
-		$this->sellingFrom = $product->getSellingFrom();
-		$this->sellingTo = $product->getSellingTo();
-		$this->flags = $product->getFlags()->toArray();
-		$this->usingStock = $product->isUsingStock();
-		$this->stockQuantity = $product->getStockQuantity();
-		$this->availability = $product->getAvailability();
-		$this->outOfStockAvailability = $product->getOutOfStockAvailability();
-		$this->hidden = $product->isHidden();
-		$hiddenOnDomains = [];
-		foreach ($productDomains as $productDomain) {
-			if ($productDomain->isHidden()) {
-				$hiddenOnDomains[] = $productDomain->getDomainId();
-			}
-		}
-		$this->hiddenOnDomains = $hiddenOnDomains;
-		$this->categories = $product->getCategories()->toArray();
-		$this->priceCalculationType = $product->getPriceCalculationType();
-		$this->accessories = $product->getAccessories();
-	}
-
 }

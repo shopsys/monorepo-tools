@@ -11,8 +11,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetIdNotSet() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http:/example.com:8080', 'example', 'cs', 'design1'),
-			new DomainConfig(2, 'http:/example.org:8080', 'example.org', 'en', 'design2'),
+			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2'),
 		];
 
 		$domain = new Domain($domainConfigs);

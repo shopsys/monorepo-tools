@@ -4,17 +4,47 @@ namespace SS6\ShopBundle\Tests\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
 class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetInputPriceWithoutVat() {
-		$priceWithVat = '100';
-		$vatPercent = 20;
-
+	/**
+	 * @dataProvider getInputPriceDataProvider
+	 */
+	public function testGetInputPrice($inputPriceType, $priceWithVat, $vatPercent, $expectedResult) {
 		$inputPriceCalculation = new InputPriceCalculation();
-		$inputPriceWithoutVat = $inputPriceCalculation->getInputPriceWithoutVat($priceWithVat, $vatPercent);
+		$actualInputPrice = $inputPriceCalculation->getInputPrice($inputPriceType, $priceWithVat, $vatPercent);
 
-		$this->assertSame(round($priceWithVat * 100 / (100 + $vatPercent), 6), round($inputPriceWithoutVat, 6));
+		$this->assertEquals(round($expectedResult, 6), round($actualInputPrice, 6));
+	}
+
+	public function getInputPriceDataProvider() {
+		return [
+			[
+				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+				'priceWithVat' => 121,
+				'vatPercent' => 21,
+				'expectedResult' => 100,
+			],
+			[
+				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
+				'priceWithVat' => 121,
+				'vatPercent' => 21,
+				'expectedResult' => 121,
+			],
+			[
+				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+				'priceWithVat' => 100,
+				'vatPercent' => 0,
+				'expectedResult' => 100,
+			],
+			[
+				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+				'priceWithVat' => 100,
+				'vatPercent' => 21,
+				'expectedResult' => '82.644628',
+			],
+		];
 	}
 
 }
