@@ -5,7 +5,10 @@ namespace SS6\ShopBundle\Model\Order;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
@@ -93,14 +96,57 @@ class OrderRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Localization\Localization $localization
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getOrdersListQueryBuilder() {
-		return $this->em->createQueryBuilder()
-			->select('o')
+	public function getOrdersListQueryBuilder(Localization $localization) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('
+				o.id,
+				o.number,
+				o.domainId,
+				o.createdAt,
+				MAX(ost.name) AS statusName,
+				o.totalPriceWithVat,
+				(CASE WHEN o.companyName IS NOT NULL
+							THEN o.companyName
+							ELSE CONCAT(o.firstName, \' \', o.lastName)
+						END) AS customerName')
 			->from(Order::class, 'o')
 			->where('o.deleted = :deleted')
-			->setParameter('deleted', false);
+			->join('o.status', 'os')
+			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
+			->groupBy('o.id')
+			->setParameter('deleted', false)
+			->setParameter('locale', $localization->getDefaultLocale());
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param array $searchData
+	 */
+	public function extendQueryBuilderByQuickSearchData(QueryBuilder $queryBuilder, $searchData) {
+		if ($searchData['text'] !== null && $searchData['text'] !== '') {
+			$queryBuilder
+				->leftJoin(User::class, 'u', Join::WITH, 'o.customer = u.id')
+				->andWhere('
+					(
+						NORMALIZE(o.number) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(o.email) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(o.lastName) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(o.companyName) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(u.email) LIKE NORMALIZE(:text)
+					)'
+				);
+			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
+			$queryBuilder->setParameter('text', $querySerachText);
+		}
 	}
 
 	/**
