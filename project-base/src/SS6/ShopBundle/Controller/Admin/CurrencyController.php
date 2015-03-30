@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencyDomainSettingsFormType;
 use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CurrencyController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/currency/list/")
@@ -37,11 +47,14 @@ class CurrencyController extends Controller {
 
 		try {
 			$currency = $currencyFacade->getById($id);
-			$message = 'Opravdu si přejete trvale odstranit měnu "' . $currency->getName() . '"?';
+			$message = $this->translator->trans(
+				'Opravdu si přejete trvale odstranit měnu "%name%"?',
+				['%name%' => $currency->getName()]
+			);
 
 			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			return new Response('Zvolená měna neexistuje.');
+			return new Response($this->translator->trans('Zvolená měna neexistuje.'));
 		}
 
 	}

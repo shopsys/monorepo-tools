@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class VatController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/vat/list/")
@@ -38,17 +48,24 @@ class VatController extends Controller {
 		try {
 			$vat = $vatFacade->getById($id);
 			if ($vatFacade->isVatUsed($vat)) {
-				$message = 'Pro odstranění sazby "' . $vat->getName() . '" musíte zvolit, která se má všude, '
+				$message = $this->translator->trans(
+					'Pro odstranění sazby "%name% musíte zvolit, která se má všude, '
 					. 'kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží '
-					. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?';
+					. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?',
+					['%name%' => $vat->getName()]
+				);
 				$vatNamesById = $this->getVatNamesByIdExceptId($vatFacade, $id);
 				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
 			} else {
-				$message = 'Opravdu si přejete trvale odstranit sazbu "' . $vat->getName() . '"? Nikde není použita.';
+				$message = $this->translator->trans(
+					'Opravdu si přejete trvale odstranit sazbu "%name%"? Nikde není použita.',
+					['%name%' => $vat->getName()]
+				);
+
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			return new Response('Zvolené DPH neexistuje');
+			return new Response($this->translator->trans('Zvolené DPH neexistuje'));
 		}
 
 	}
