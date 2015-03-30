@@ -56,10 +56,11 @@ class AdministratorRepository {
 		return $this->getAdministratorRepository()->findOneBy(['username' => $administratorUserName]);
 	}
 
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
 	private function getAllQueryBuilder() {
-		return $this->em->createQueryBuilder()
-			->select('a')
-			->from(Administrator::class, 'a');
+		return $this->getAdministratorRepository()->createQueryBuilder('a');
 	}
 
 	/**
