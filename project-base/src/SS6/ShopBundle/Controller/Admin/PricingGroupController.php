@@ -121,7 +121,7 @@ class PricingGroupController extends Controller {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			return new Response('Zvolená cenová skupina neexistuje.');
+			return new Response($this->translator->trans('Zvolená cenová skupina neexistuje.'));
 		}
 
 	}

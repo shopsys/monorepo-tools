@@ -120,7 +120,7 @@ class AvailabilityController extends Controller {
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			return new Response('Zvolená dostupnost neexistuje');
+			return new Response($this->translator->trans('Zvolená dostupnost neexistuje'));
 		}
 	}
 

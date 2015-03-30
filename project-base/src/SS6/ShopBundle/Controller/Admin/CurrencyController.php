@@ -54,7 +54,7 @@ class CurrencyController extends Controller {
 
 			return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			return new Response('Zvolená měna neexistuje.');
+			return new Response($this->translator->trans('Zvolená měna neexistuje.'));
 		}
 
 	}

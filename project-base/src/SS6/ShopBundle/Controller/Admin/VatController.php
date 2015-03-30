@@ -65,7 +65,7 @@ class VatController extends Controller {
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			return new Response('Zvolené DPH neexistuje');
+			return new Response($this->translator->trans('Zvolené DPH neexistuje'));
 		}
 
 	}

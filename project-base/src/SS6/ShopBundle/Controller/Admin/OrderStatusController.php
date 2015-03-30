@@ -117,7 +117,7 @@ class OrderStatusController extends Controller {
 				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
-			return new Response('Zvolený stav objednávek neexistuje');
+			return new Response($this->translator->trans('Zvolený stav objednávek neexistuje'));
 		}
 	}
 
