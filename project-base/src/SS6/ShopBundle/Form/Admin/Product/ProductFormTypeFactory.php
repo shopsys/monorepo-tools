@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromCollectionTransformer;
+use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
@@ -37,9 +37,9 @@ class ProductFormTypeFactory {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromCollectionTransformer
+	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
-	private $removeDuplicatesFromCollectionTransformer;
+	private $removeDuplicatesFromArrayTransformer;
 
 	public function __construct(
 		VatRepository $vatRepository,
@@ -47,14 +47,14 @@ class ProductFormTypeFactory {
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		FlagRepository $flagRepository,
 		Translator $translator,
-		RemoveDuplicatesFromCollectionTransformer $removeDuplicatesFromCollectionTransformer
+		RemoveDuplicatesFromArrayTransformer $removeDuplicatesFromArrayTransformer
 	) {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flagRepository = $flagRepository;
 		$this->translator = $translator;
-		$this->removeDuplicatesFromCollectionTransformer = $removeDuplicatesFromCollectionTransformer;
+		$this->removeDuplicatesFromArrayTransformer = $removeDuplicatesFromArrayTransformer;
 	}
 
 	/**
@@ -71,7 +71,7 @@ class ProductFormTypeFactory {
 			$this->inverseArrayValuesTransformer,
 			$flags,
 			$this->translator,
-			$this->removeDuplicatesFromCollectionTransformer
+			$this->removeDuplicatesFromArrayTransformer
 		);
 	}
 

@@ -33,6 +33,7 @@ class FormType {
 	const PASSWORD = 'password';
 	const PERCENT = 'percent';
 	const PRODUCT = 'product';
+	const PRODUCTS = 'products';
 	const RADIO = 'radio';
 	const REPEATED = 'repeated';
 	const RESET = 'reset';

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromCollectionTransformer;
+use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Product\Product;
@@ -49,9 +49,9 @@ class ProductFormType extends AbstractType {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromCollectionTransformer
+	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
-	private $removeDuplicatesFromCollectionTransformer;
+	private $removeDuplicatesTransformer;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
@@ -59,7 +59,7 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
-	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromCollectionTransformer $removeDuplicatesTransformer
+	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	 */
 	public function __construct(
 		array $vats,
@@ -67,14 +67,14 @@ class ProductFormType extends AbstractType {
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $flags,
 		TranslatorInterface $translator,
-		RemoveDuplicatesFromCollectionTransformer $removeDuplicatesTransformer
+		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flags = $flags;
 		$this->translator = $translator;
-		$this->removeDuplicatesFromCollectionTransformer = $removeDuplicatesTransformer;
+		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
 	}
 
 	/**
@@ -214,16 +214,8 @@ class ProductFormType extends AbstractType {
 			])
 			->add(
 				$builder
-					->create(
-						'accessories', FormType::COLLECTION, [
-							'required' => false,
-							'type' => FormType::PRODUCT,
-							'allow_add' => true,
-							'allow_delete' => true,
-							'delete_empty' => true,
-						]
-					)
-					->addViewTransformer($this->removeDuplicatesFromCollectionTransformer)
+					->create('accessories', FormType::PRODUCTS, ['required' => false])
+					->addViewTransformer($this->removeDuplicatesTransformer)
 			);
 	}
 

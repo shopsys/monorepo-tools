@@ -1,0 +1,32 @@
+/*
+
+
+*/
+.in-simple-item {
+	width: 100%;
+	margin-bottom: 3px;
+	.cfx();
+
+	&__icon {
+		width: 40px;
+		float: left;
+		padding: 5px 0;
+
+		background: @color-f;
+		text-align: center;
+
+		.border-radius(5px 0 0 5px);
+	}
+
+	&__desc {
+		padding: 5px;
+		display: block;
+		margin-left: 40px;
+
+		background: @color-d;
+		border-left: 1px solid @color-border;
+		text-align: left;
+
+		.border-radius(0 5px 5px 0);
+	}
+}
