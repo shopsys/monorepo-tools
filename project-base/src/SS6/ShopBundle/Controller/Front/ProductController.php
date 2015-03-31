@@ -48,7 +48,11 @@ class ProductController extends Controller {
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
 
 		$category = $categoryFacade->getById($id);
-		$page = $request->get(self::PAGE_QUERY_PARAMETER, 1);
+
+		$page = $request->get(self::PAGE_QUERY_PARAMETER);
+		if ($page === '1') {
+			return $this->redirect($this->generateUrl('front_product_list', ['id' => $id]));
+		}
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
@@ -96,6 +100,12 @@ class ProductController extends Controller {
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
 
 		$searchText = $request->query->get('q');
+
+		$page = $request->get(self::PAGE_QUERY_PARAMETER);
+		if ($page === '1') {
+			return $this->redirect($this->generateUrl('front_product_search', ['q' => $searchText]));
+		}
+
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$productFilterData = new ProductFilterData();
