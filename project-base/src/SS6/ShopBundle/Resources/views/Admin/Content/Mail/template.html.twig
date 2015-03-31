@@ -26,7 +26,6 @@
 						{% else %}
 							{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
 						{% endif %}
-						{{ form_widget(template.save, { label: 'Uložit změny ve všech šablonách'}) }}
 
 						<div class="table-responsive grid_body mt-1">
 							<table class="table table-dark table-hover">
@@ -103,6 +102,11 @@
 					resetPasswordVariablesLabels
 				) }}
 
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, { label: 'Uložit změny ve všech šablonách'}) }}
+					</div>
+				</div>
 			{{ form_end(form) }}
 
 		</div>
