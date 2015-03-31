@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
+use SS6\ShopBundle\Twig\RequestExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,6 +13,15 @@ class ProductController extends Controller {
 
 	const PAGE_QUERY_PARAMETER = 'page';
 	const PRODUCTS_PER_PAGE = 12;
+
+	/**
+	 * @var \SS6\ShopBundle\Twig\RequestExtension
+	 */
+	private $requestExtension;
+
+	public function __construct(RequestExtension $requestExtension) {
+		$this->requestExtension = $requestExtension;
+	}
 
 	/**
 	 * @param int $id
@@ -48,7 +58,16 @@ class ProductController extends Controller {
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
 
 		$category = $categoryFacade->getById($id);
-		$page = $request->get(self::PAGE_QUERY_PARAMETER, 1);
+
+		$page = $request->get(self::PAGE_QUERY_PARAMETER);
+		if ($page === '1') {
+			$params = $this->requestExtension->getAllRequestParams();
+			unset($params['page']);
+			return $this->redirect($this->generateUrl(
+				'front_product_list',
+				$params
+			));
+		}
 
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
@@ -96,6 +115,12 @@ class ProductController extends Controller {
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
 
 		$searchText = $request->query->get('q');
+
+		$page = $request->get(self::PAGE_QUERY_PARAMETER);
+		if ($page === '1') {
+			return $this->redirect($this->generateUrl('front_product_search', $request->query->all()));
+		}
+
 		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$productFilterData = new ProductFilterData();
