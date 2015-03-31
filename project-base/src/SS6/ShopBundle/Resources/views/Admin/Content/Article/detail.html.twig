@@ -20,8 +20,12 @@
 					{{ form_row(form.text, { label: 'Text'}) }}
 				</div>
 
-				{{ form_save(article|default(null), form) }}
-				<a href="{{ url('admin_article_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						<a href="{{ url('admin_article_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+						{{ form_save(article|default(null), form) }}
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 

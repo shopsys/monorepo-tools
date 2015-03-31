@@ -38,7 +38,11 @@
 					</tbody>
 				</table>
 
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 

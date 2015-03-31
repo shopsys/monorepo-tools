@@ -70,18 +70,25 @@ class FormDetailExtension extends Twig_Extension {
 
 	/**
 	 * @param mixed $object
-	 * @param \Symfony\Component\Form\FormView $form
+	 * @param \Symfony\Component\Form\FormView $formView
+	 * @param array $vars
 	 * @return string
 	 */
-	public function formSave($object, FormView $form) {
-		$template = '{{ form_widget(form.save, { label: label }) }}';
-		$parameters = ['form' => $form, 'label' => $this->translator->trans('Vytvořit')];
-		if ($object === null) {
-			return $this->getTemplatingService()->render($template, $parameters);
-		} else {
-			$parameters['label'] = $this->translator->trans('Uložit změny');
-			return $this->getTemplatingService()->render($template, $parameters);
+	public function formSave($object, FormView $formView, array $vars = []) {
+		$template = '{{ form_widget(form.save, vars) }}';
+
+		if (!array_keys($vars, 'label', true)) {
+			if ($object === null) {
+				$vars['label'] = $this->translator->trans('Vytvořit');
+			} else {
+				$vars['label'] = $this->translator->trans('Uložit změny');
+			}
 		}
+
+		$parameters['form'] = $formView;
+		$parameters['vars'] = $vars;
+
+		return $this->getTemplatingService()->render($template, $parameters);
 	}
 
 	/**

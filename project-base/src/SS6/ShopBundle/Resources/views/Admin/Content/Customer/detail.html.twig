@@ -71,8 +71,13 @@
 				</div>
 
 				{% block customer_sendMail %}{% endblock %}
-				{{ form_save(user|default(null), form) }}
-				<a href="{{ url('admin_customer_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_save(user|default(null), form) }}
+						<a href="{{ url('admin_customer_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 

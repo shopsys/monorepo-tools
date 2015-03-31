@@ -21,8 +21,12 @@
 					<i class="fa fa-info-circle cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno"></i>
 				</div>
 
-				{{ form_save(administrator|default(null), form) }}
-				<a href="{{ url('admin_administrator_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						{{ form_save(administrator|default(null), form) }}
+						<a href="{{ url('admin_administrator_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 

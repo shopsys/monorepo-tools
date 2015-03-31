@@ -1,8 +1,0 @@
-{{ form_start(form) }}
-	<div class="wrap-box mb-1 mt-1">
-		{% for item in form.domainDefaultCurrencies %}
-			{{ form_row(item, { label: 'Základní měna domény ' ~ domainNames[item.vars.name]}) }}
-		{% endfor %}
-		{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
-	</div>
-{{ form_end(form) }}

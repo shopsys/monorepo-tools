@@ -147,8 +147,12 @@
 					</fieldset>
 				</div>
 
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
-				<a href="{{ url('admin_order_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+						<a href="{{ url('admin_order_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
 			{{ form_end(form) }}
 
 		</div>

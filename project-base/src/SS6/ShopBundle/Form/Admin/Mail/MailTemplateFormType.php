@@ -48,8 +48,7 @@ class MailTemplateFormType extends AbstractType {
 					])
 					->addModelTransformer(new EmptyWysiwygTransformer())
 			)
-			->add('sendMail', FormType::CHECKBOX, ['required' => false])
-			->add('save', FormType::SUBMIT);
+			->add('sendMail', FormType::CHECKBOX, ['required' => false]);
 	}
 
 	/**

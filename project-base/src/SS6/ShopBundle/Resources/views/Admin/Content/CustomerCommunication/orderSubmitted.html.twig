@@ -13,7 +13,12 @@
 
 			{{ form_start(form) }}
 				{{ form_row(form.content, { label: 'Text'}) }}
-				{{ form_widget(form.save, { label: 'Uložit'|trans}) }}
+
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, { label: 'Uložit'|trans}) }}
+					</div>
+				</div>
 			{{ form_end(form) }}
 
 			<div class="table-responsive grid_body">

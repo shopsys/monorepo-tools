@@ -28,8 +28,12 @@
 					{{ form_row(form.image, { label: 'Nahrát obrázek'}) }}
 				</div>
 
-				{{ form_save(sliderItem|default(null), form) }}
-				<a href="{{ url('admin_slider_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_save(sliderItem|default(null), form) }}
+						<a href="{{ url('admin_slider_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 
