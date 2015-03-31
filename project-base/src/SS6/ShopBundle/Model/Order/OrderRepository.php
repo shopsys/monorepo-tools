@@ -127,7 +127,7 @@ class OrderRepository {
 				->leftJoin(User::class, 'u', Join::WITH, 'o.customer = u.id')
 				->andWhere('
 					(
-						o.number LIKE :number
+						o.number LIKE :text
 						OR
 						NORMALIZE(o.email) LIKE NORMALIZE(:text)
 						OR
@@ -140,8 +140,6 @@ class OrderRepository {
 				);
 			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
 			$queryBuilder->setParameter('text', $querySerachText);
-			$queryBuilder->setParameter('number', DatabaseSearching::getLikeSearchString($searchData['text']));
-
 		}
 
 		return $queryBuilder;
