@@ -18,8 +18,12 @@
 					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'}) }}
 				</div>
 
-				{{ form_save(category|default(null), form) }}
-				<a href="{{ url('admin_category_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_save(category|default(null), form) }}
+						<a href="{{ url('admin_category_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 

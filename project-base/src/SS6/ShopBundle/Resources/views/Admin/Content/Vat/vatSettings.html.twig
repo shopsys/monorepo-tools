@@ -4,7 +4,12 @@
 			<div class="wrap-box mb-1 mt-1">
 				{{ form_row(form.defaultVat, { 'label': 'Výchozí sazba DPH'|trans }) }}
 				{{ form_row(form.roundingType, { 'label': 'Zaokrouhlení ceny s DPH'|trans }) }}
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+					</div>
+				</div>
 			</div>
 		{{ form_end(form) }}
 	</div>

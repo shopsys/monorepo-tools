@@ -50,14 +50,18 @@
 					</div>
 				</div>
 
-				<button
-					class="btn btn-primary btn-disabled"
-					id="js-category-tree-sorting-save-button"
-					data-category-save-order-url="{{ url('admin_category_saveorder') }}"
-					type="button"
-				>
-					{{ 'Uložit změny v pořadí'|trans }}
-				</button>
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						<button
+							class="btn btn-primary btn-disabled"
+							id="js-category-tree-sorting-save-button"
+							data-category-save-order-url="{{ url('admin_category_saveorder') }}"
+							type="button"
+						>
+							{{ 'Uložit změny v pořadí'|trans }}
+						</button>
+					</div>
+				</div>
 			{% else %}
 				<div class="category-tree mb-1">
 					{{ _self.categoryTreeItem(categoryDetails) }}

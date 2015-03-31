@@ -33,8 +33,12 @@
 					{{ form_row(form.transportData.image, { label: 'Nahrát obrázek' }) }}
 				</div>
 
-				{{ form_save(transportDetail|default(null), form) }}
-				<a href="{{ url('admin_transportandpayment_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_save(transportDetail|default(null), form) }}
+						<a href="{{ url('admin_transportandpayment_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
 			{{ form_end(form) }}
 		</div>
 
