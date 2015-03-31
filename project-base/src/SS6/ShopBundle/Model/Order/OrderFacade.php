@@ -275,20 +275,13 @@ class OrderFacade {
 	}
 
 	/**
-	 * @return \Doctrine\ORM\QueryBuilder
-	 */
-	public function getOrdersListQueryBuilder() {
-		return $this->orderRepository->getOrdersListQueryBuilder($this->localization);
-	}
-
-	/**
 	 * @param array|null $searchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getOrderListQueryBuilderByQuickSearchData(array $searchData = null) {
-		$queryBuilder = $this->getOrdersListQueryBuilder();
-		$this->orderRepository->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
-
-		return $queryBuilder;
+		return $this->orderRepository->getOrderListQueryBuilderByQuickSearchData(
+			$this->localization->getDefaultLocale(),
+			$searchData
+		);
 	}
 }

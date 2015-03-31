@@ -107,11 +107,7 @@ class OrderController extends Controller {
 		$quickSearchForm->handleRequest($request);
 		$quickSearchData = $quickSearchForm->getData();
 
-		if ($quickSearchForm->isSubmitted()) {
-			$queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchData);
-		} else {
-			$queryBuilder = $this->orderFacade->getOrdersListQueryBuilder();
-		}
+		$queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchData);
 
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
 			$queryBuilder, 'o.id',
