@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Order;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
@@ -93,14 +94,55 @@ class OrderRepository {
 	}
 
 	/**
+	 * @param string $locale
+	 * @param array|null $searchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getOrdersListQueryBuilder() {
-		return $this->em->createQueryBuilder()
-			->select('o')
+	public function getOrderListQueryBuilderByQuickSearchData(
+		$locale,
+		array $searchData = null
+	) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('
+				o.id,
+				o.number,
+				o.domainId,
+				o.createdAt,
+				MAX(ost.name) AS statusName,
+				o.totalPriceWithVat,
+				(CASE WHEN o.companyName IS NOT NULL
+							THEN o.companyName
+							ELSE CONCAT(o.firstName, \' \', o.lastName)
+						END) AS customerName')
 			->from(Order::class, 'o')
 			->where('o.deleted = :deleted')
-			->setParameter('deleted', false);
+			->join('o.status', 'os')
+			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
+			->groupBy('o.id')
+			->setParameter('deleted', false)
+			->setParameter('locale', $locale);
+
+		if ($searchData['text'] !== null && $searchData['text'] !== '') {
+			$queryBuilder
+				->leftJoin(User::class, 'u', Join::WITH, 'o.customer = u.id')
+				->andWhere('
+					(
+						o.number LIKE :text
+						OR
+						NORMALIZE(o.email) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(o.lastName) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(o.companyName) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(u.email) LIKE NORMALIZE(:text)
+					)'
+				);
+			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
+			$queryBuilder->setParameter('text', $querySerachText);
+		}
+
+		return $queryBuilder;
 	}
 
 	/**

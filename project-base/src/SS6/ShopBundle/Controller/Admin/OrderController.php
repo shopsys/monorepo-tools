@@ -2,17 +2,27 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\Query\Expr\Join;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
+use SS6\ShopBundle\Form\Admin\Order\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\OrderFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends Controller {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
+	 */
+	private $orderFacade;
+
+	public function __construct(OrderFacade $orderFacade) {
+		$this->orderFacade = $orderFacade;
+	}
 
 	/**
 	 * @Route("/order/edit/{id}", requirements={"id" = "\d+"})
@@ -83,36 +93,22 @@ class OrderController extends Controller {
 
 	/**
 	 * @Route("/order/list/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	public function listAction() {
+	public function listAction(Request $request) {
 		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$orderRepository = $this->get('ss6.shop.order.order_repository');
-		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-		$localization = $this->get('ss6.shop.localization.localization');
-		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
 
-		$queryBuilder = $orderRepository->getOrdersListQueryBuilder();
-		$queryBuilder
-			->select('
-				o.id,
-				o.number,
-				o.domainId,
-				o.createdAt,
-				MAX(ost.name) AS statusName,
-				o.totalPriceWithVat,
-				(CASE WHEN o.companyName IS NOT NULL
-							THEN o.companyName
-							ELSE CONCAT(o.firstName, \' \', o.lastName)
-						END) AS customerName')
-			->join('o.status', 'os')
-			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
-			->groupBy('o.id')
-			->setParameter('locale', $localization->getDefaultLocale());
+		$quickSearchForm = $this->createForm(new QuickSearchFormType());
+		$quickSearchForm->handleRequest($request);
+		$quickSearchData = $quickSearchForm->getData();
+
+		$queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchData);
+
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
 			$queryBuilder, 'o.id',
 			function ($row) {
@@ -142,6 +138,7 @@ class OrderController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', [
 			'gridView' => $grid->createView(),
+			'quickSearchForm' => $quickSearchForm->createView(),
 		]);
 	}
 

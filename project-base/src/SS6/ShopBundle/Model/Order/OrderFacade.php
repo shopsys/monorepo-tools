@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Order;
@@ -14,7 +15,6 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -81,6 +81,11 @@ class OrderFacade {
 	 */
 	private $setting;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -93,7 +98,8 @@ class OrderFacade {
 		OrderStatusRepository $orderStatusRepository,
 		OrderMailFacade $orderMailFacade,
 		OrderHashGeneratorRepository $orderHashGeneratorRepository,
-		Setting $setting
+		Setting $setting,
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -107,6 +113,7 @@ class OrderFacade {
 		$this->orderMailFacade = $orderMailFacade;
 		$this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
 		$this->setting = $setting;
+		$this->localization = $localization;
 	}
 
 	/**
@@ -265,5 +272,16 @@ class OrderFacade {
 	 */
 	public function getByOrderNumberAndUser($orderNumber, User $user) {
 		return $this->orderRepository->getByOrderNumberAndUser($orderNumber, $user);
+	}
+
+	/**
+	 * @param array|null $searchData
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getOrderListQueryBuilderByQuickSearchData(array $searchData = null) {
+		return $this->orderRepository->getOrderListQueryBuilderByQuickSearchData(
+			$this->localization->getDefaultLocale(),
+			$searchData
+		);
 	}
 }

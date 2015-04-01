@@ -18,6 +18,14 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
 			ON products (NORMALIZE(catnum))');
 		$this->executeNativeQuery('CREATE INDEX product_partno_normalize_idx
 			ON products (NORMALIZE(partno))');
+		$this->executeNativeQuery('CREATE INDEX order_email_normalize_idx
+			ON orders (NORMALIZE(email))');
+		$this->executeNativeQuery('CREATE INDEX order_last_name_normalize_idx
+			ON orders (NORMALIZE(last_name))');
+		$this->executeNativeQuery('CREATE INDEX order_company_name_normalize_idx
+			ON orders (NORMALIZE(company_name))');
+		$this->executeNativeQuery('CREATE INDEX user_email_normalize_idx
+			ON users (NORMALIZE(email))');
 	}
 
 	public function getDependencies() {
