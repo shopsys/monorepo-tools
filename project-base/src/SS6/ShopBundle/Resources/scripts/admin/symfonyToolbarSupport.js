@@ -38,7 +38,7 @@
 		});
 
 		// condition copied from: vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/toolbar_js.html.twig
-		if (Sfjs && Sfjs.getPreference('toolbar/displayState') !== 'none') {
+		if (typeof Sfjs !== 'undefined' && Sfjs.getPreference('toolbar/displayState') !== 'none') {
 			SS6.symfonyToolbarSupport.notifyOnToolbarShow();
 		}
 	});
