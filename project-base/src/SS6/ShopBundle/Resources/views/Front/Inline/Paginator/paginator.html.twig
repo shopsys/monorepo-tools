@@ -13,12 +13,16 @@
 				{% if pageCount > 1 %}
 					{% if paginationResult.page > 1 %}
 						<li>
-							{% set routeParams = routeParams|merge({'page': paginationResult.page - 1}) %}
+							{% set page = paginationResult.page - 1 %}
+							{% if page == 1 %}
+								{% set page = null %}
+							{% endif %}
+							{% set routeParams = routeParams|merge({'page': page}) %}
 							<a href="{{ path(route, routeParams) }}" rel ="prev">&lt;</a>
 						</li>
 
 						<li>
-							{% set routeParams = routeParams|merge({'page': 1}) %}
+							{% set routeParams = routeParams|merge({'page': null}) %}
 							{% if paginationResult.page == 2 %}
 								<a href="{{ path(route, routeParams) }}" rel="prev">1</a>
 							{% else %}
