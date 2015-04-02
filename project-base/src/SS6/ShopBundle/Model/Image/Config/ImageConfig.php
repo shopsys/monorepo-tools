@@ -15,10 +15,10 @@ class ImageConfig {
 	private $imageEntityConfigsByClass;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[] $imageEntityConfigByClass
+	 * @param \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[] $imageEntityConfigsByClass
 	 */
-	public function __construct(array $imageEntityConfigByClass) {
-		$this->imageEntityConfigsByClass = $imageEntityConfigByClass;
+	public function __construct(array $imageEntityConfigsByClass) {
+		$this->imageEntityConfigsByClass = $imageEntityConfigsByClass;
 	}
 
 	/**
@@ -50,6 +50,15 @@ class ImageConfig {
 	public function getImageSizeConfigByEntityName($entityName, $type, $sizeName) {
 		$entityConfig = $this->getEntityConfigByEntityName($entityName);
 		return $entityConfig->getSizeConfigByType($type, $sizeName);
+	}
+
+	/**
+	 * @param string $entityName
+	 * @param string|null $type
+	 * @param string|null $sizeName
+	 */
+	public function assertImageSizeConfigByEntityNameExists($entityName, $type, $sizeName) {
+		$this->getImageSizeConfigByEntityName($entityName, $type, $sizeName);
 	}
 
 	/**

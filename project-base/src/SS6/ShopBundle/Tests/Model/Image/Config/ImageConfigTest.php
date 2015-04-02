@@ -16,7 +16,7 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase {
 	 * @return \SS6\ShopBundle\Model\Image\Config\ImageConfig
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
-	public function getBaseImageConfig() {
+	private function getBaseImageConfig() {
 		$inputConfig = [
 			[
 				ImageConfigDefinition::CONFIG_CLASS => stdClass::class,
