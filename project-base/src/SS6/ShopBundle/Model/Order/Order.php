@@ -272,13 +272,11 @@ class Order {
 		$this->postcode = $orderData->postcode;
 		$this->note = $orderData->note;
 		$this->items = new ArrayCollection();
-		if ($orderData->companyCustomer) {
-			$this->setCompanyInfo(
-				$orderData->companyName,
-				$orderData->companyNumber,
-				$orderData->companyTaxNumber
-			);
-		}
+		$this->setCompanyInfo(
+			$orderData->companyName,
+			$orderData->companyNumber,
+			$orderData->companyTaxNumber
+		);
 		if ($orderData->deliveryAddressFilled) {
 			$this->setDeliveryAddress(
 				$orderData->deliveryContactPerson,
@@ -317,13 +315,11 @@ class Order {
 		$this->postcode = $orderData->postcode;
 		$this->note = $orderData->note;
 
-		if ($orderData->companyCustomer) {
-			$this->setCompanyInfo(
-				$orderData->companyName,
-				$orderData->companyNumber,
-				$orderData->companyTaxNumber
-			);
-		}
+		$this->setCompanyInfo(
+			$orderData->companyName,
+			$orderData->companyNumber,
+			$orderData->companyTaxNumber
+		);
 		if ($orderData->deliveryAddressFilled) {
 			$this->setDeliveryAddress(
 				$orderData->deliveryContactPerson,

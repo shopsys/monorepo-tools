@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\OrderDataMapper;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -43,6 +45,8 @@ class OrderController extends Controller {
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		$currencyFacade = $this->get('ss6.shop.pricing.currency.currency_facade');
 		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
+		$orderDataMapper = $this->get(OrderDataMapper::class);
+		/* @var $orderDataMapper \SS6\ShopBundle\Model\Order\OrderDataMapper */
 
 		if ($cart->isEmpty()) {
 			return $this->redirect($this->generateUrl('front_cart'));
@@ -52,14 +56,14 @@ class OrderController extends Controller {
 		$transports = $transportEditFacade->getVisibleOnCurrentDomain($payments);
 		$user = $this->getUser();
 
-		$orderData = new OrderData();
+		$frontOrderFormData = new FrontOrderData();
 		if ($user instanceof User) {
-			$orderFacade->prefillOrderData($orderData, $user);
+			$orderFacade->prefillFrontOrderData($frontOrderFormData, $user);
 		}
 		$domainId = $domain->getId();
-		$orderData->domainId = $domainId;
+		$frontOrderFormData->domainId = $domainId;
 		$currency = $currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
-		$orderData->currency = $currency;
+		$frontOrderFormData->currency = $currency;
 
 		$flow = $this->get('ss6.shop.order.flow');
 		/* @var $flow \SS6\ShopBundle\Form\Front\Order\OrderFlow */
@@ -69,13 +73,13 @@ class OrderController extends Controller {
 		}
 
 		$flow->setFormTypesData($transports, $payments);
-		$flow->bind($orderData);
+		$flow->bind($frontOrderFormData);
 		$flow->saveSentStepData();
 
 		$form = $flow->createForm();
 
-		$payment = $orderData->payment;
-		$transport = $orderData->transport;
+		$payment = $frontOrderFormData->payment;
+		$transport = $frontOrderFormData->transport;
 
 		$orderPreview = $orderPreviewCalculation->calculatePreview(
 			$currency,
@@ -86,9 +90,13 @@ class OrderController extends Controller {
 			$user
 		);
 
+		$isValid = $flow->isValid($form);
+		// FormData are filled during isValid() call
+		$orderData = $orderDataMapper->getOrderDataFromFrontOrderData($frontOrderFormData);
+
 		$this->checkTransportAndPaymentChanges($orderData, $orderPreview, $transports, $payments);
 
-		if ($flow->isValid($form)) {
+		if ($isValid) {
 			if ($flow->nextStep()) {
 				$form = $flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {

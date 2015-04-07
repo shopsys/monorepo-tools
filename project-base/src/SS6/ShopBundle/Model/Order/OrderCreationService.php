@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
@@ -66,52 +66,52 @@ class OrderCreationService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\FrontOrderData $frontOrderData
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
-	public function prefillFrontFormData(OrderData $orderData, User $user, Order $order = null) {
+	public function prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null) {
 		if ($order instanceof Order) {
-			$this->prefillTransportAndPaymentFromOrder($orderData, $order);
+			$this->prefillTransportAndPaymentFromOrder($frontOrderData, $order);
 		}
-		$this->prefillFrontFormDataFromCustomer($orderData, $user);
+		$this->prefillFrontFormDataFromCustomer($frontOrderData, $user);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\FrontOrderData $frontOrderData
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
-	private function prefillTransportAndPaymentFromOrder(OrderData $orderData, Order $order) {
-		$orderData->transport = $order->getTransport();
-		$orderData->payment = $order->getPayment();
+	private function prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order) {
+		$frontOrderData->transport = $order->getTransport();
+		$frontOrderData->payment = $order->getPayment();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\FrontOrderData $frontOrderData
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
-	private function prefillFrontFormDataFromCustomer(OrderData $orderData, User $user) {
-		$orderData->firstName = $user->getFirstName();
-		$orderData->lastName = $user->getLastName();
-		$orderData->email = $user->getEmail();
-		$orderData->telephone = $user->getBillingAddress()->getTelephone();
-		$orderData->companyCustomer = $user->getBillingAddress()->isCompanyCustomer();
-		$orderData->companyName = $user->getBillingAddress()->getCompanyName();
-		$orderData->companyNumber = $user->getBillingAddress()->getCompanyNumber();
-		$orderData->companyTaxNumber = $user->getBillingAddress()->getCompanyTaxNumber();
-		$orderData->street = $user->getBillingAddress()->getStreet();
-		$orderData->city = $user->getBillingAddress()->getCity();
-		$orderData->postcode = $user->getBillingAddress()->getPostcode();
+	private function prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user) {
+		$frontOrderData->firstName = $user->getFirstName();
+		$frontOrderData->lastName = $user->getLastName();
+		$frontOrderData->email = $user->getEmail();
+		$frontOrderData->telephone = $user->getBillingAddress()->getTelephone();
+		$frontOrderData->companyCustomer = $user->getBillingAddress()->isCompanyCustomer();
+		$frontOrderData->companyName = $user->getBillingAddress()->getCompanyName();
+		$frontOrderData->companyNumber = $user->getBillingAddress()->getCompanyNumber();
+		$frontOrderData->companyTaxNumber = $user->getBillingAddress()->getCompanyTaxNumber();
+		$frontOrderData->street = $user->getBillingAddress()->getStreet();
+		$frontOrderData->city = $user->getBillingAddress()->getCity();
+		$frontOrderData->postcode = $user->getBillingAddress()->getPostcode();
 		if ($user->getDeliveryAddress() !== null) {
-			$orderData->deliveryAddressFilled = true;
-			$orderData->deliveryContactPerson = $user->getDeliveryAddress()->getContactPerson();
-			$orderData->deliveryCompanyName = $user->getDeliveryAddress()->getCompanyName();
-			$orderData->deliveryTelephone = $user->getDeliveryAddress()->getTelephone();
-			$orderData->deliveryStreet = $user->getDeliveryAddress()->getStreet();
-			$orderData->deliveryCity = $user->getDeliveryAddress()->getCity();
-			$orderData->deliveryPostcode = $user->getDeliveryAddress()->getPostcode();
+			$frontOrderData->deliveryAddressFilled = true;
+			$frontOrderData->deliveryContactPerson = $user->getDeliveryAddress()->getContactPerson();
+			$frontOrderData->deliveryCompanyName = $user->getDeliveryAddress()->getCompanyName();
+			$frontOrderData->deliveryTelephone = $user->getDeliveryAddress()->getTelephone();
+			$frontOrderData->deliveryStreet = $user->getDeliveryAddress()->getStreet();
+			$frontOrderData->deliveryCity = $user->getDeliveryAddress()->getCity();
+			$frontOrderData->deliveryPostcode = $user->getDeliveryAddress()->getPostcode();
 		} else {
-			$orderData->deliveryAddressFilled = false;
+			$frontOrderData->deliveryAddressFilled = false;
 		}
 	}
 

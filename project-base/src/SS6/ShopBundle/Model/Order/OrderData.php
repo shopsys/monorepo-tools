@@ -59,11 +59,6 @@ class OrderData {
 	public $telephone;
 
 	/**
-	 * @var boolean
-	 */
-	public $companyCustomer;
-
-	/**
 	 * @var string
 	 */
 	public $companyName;

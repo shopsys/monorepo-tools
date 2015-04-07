@@ -224,10 +224,10 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \SS6\ShopBundle\Model\Order\FrontOrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
-	public function prefillOrderData(OrderData $orderData, User $user) {
+	public function prefillFrontOrderData(FrontOrderData $orderData, User $user) {
 		$order = $this->orderRepository->findLastByUserId($user->getId());
 		$this->orderCreationService->prefillFrontFormData($orderData, $user, $order);
 	}

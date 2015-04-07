@@ -260,7 +260,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Pouliční 11';
 		$orderData->city = 'Městník';
 		$orderData->postcode = '12345';
-		$orderData->companyCustomer = true;
 		$orderData->companyName = 'netdevelo s.r.o.';
 		$orderData->companyNumber = '123456789';
 		$orderData->companyTaxNumber = '987654321';
@@ -446,7 +445,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Křivá 11';
 		$orderData->city = 'Jablonec';
 		$orderData->postcode = '78952';
-		$orderData->companyCustomer = true;
 		$orderData->companyName = 'BestCompanyEver, s.r.o.';
 		$orderData->companyNumber = '555555';
 		$orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
