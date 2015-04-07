@@ -43,6 +43,21 @@ class PriceExtension extends Twig_Extension {
 	public function getFilters() {
 		return [
 			new Twig_SimpleFilter(
+				'price',
+				[$this, 'priceFilter'],
+				['is_safe' => ['html']]
+			),
+			new Twig_SimpleFilter(
+				'priceText',
+				[$this, 'priceTextFilter'],
+				['is_safe' => ['html']]
+			),
+			new Twig_SimpleFilter(
+				'priceWithCurrency',
+				[$this, 'priceWithCurrencyFilter'],
+				['is_safe' => ['html']]
+			),
+			new Twig_SimpleFilter(
 				'priceWithCurrencyAdmin',
 				[$this, 'priceWithCurrencyAdminFilter'],
 				['is_safe' => ['html']]
@@ -57,9 +72,6 @@ class PriceExtension extends Twig_Extension {
 				[$this, 'priceWithCurrencyByCurrencyIdFilter'],
 				['is_safe' => ['html']]
 			),
-			new Twig_SimpleFilter('priceWithCurrency', [$this, 'priceWithCurrencyFilter'], ['is_safe' => ['html']]),
-			new Twig_SimpleFilter('price', [$this, 'priceFilter'], ['is_safe' => ['html']]),
-			new Twig_SimpleFilter('priceText', [$this, 'priceTextFilter'], ['is_safe' => ['html']]),
 		];
 	}
 
@@ -103,6 +115,32 @@ class PriceExtension extends Twig_Extension {
 	 * @param string $price
 	 * @return string
 	 */
+	public function priceTextFilter($price) {
+		if ($price == 0) {
+			return $this->translator->trans('Zdarma');
+		} else {
+			return $this->priceFilter($price);
+		}
+	}
+	
+	/**
+	 * @param string $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string
+	 */
+	public function priceWithCurrencyFilter($price, Currency $currency) {
+		$price = (float)$price;
+		$price = number_format($price, 2, ',', ' ');
+		$currencySymbol = $currency->getSymbol();
+		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+
+		return $price;
+	}
+
+	/**
+	 * @param string $price
+	 * @return string
+	 */
 	public function priceWithCurrencyAdminFilter($price) {
 		$price = (float)$price;
 		$price = number_format($price, 2, ',', ' ');
@@ -133,32 +171,6 @@ class PriceExtension extends Twig_Extension {
 		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
 
 		return $price;
-	}
-
-	/**
-	 * @param string $price
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return string
-	 */
-	public function priceWithCurrencyFilter($price, Currency $currency) {
-		$price = (float)$price;
-		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $currency->getSymbol();
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
-
-		return $price;
-	}
-
-	/**
-	 * @param string $price
-	 * @return string
-	 */
-	public function priceTextFilter($price) {
-		if ($price == 0) {
-			return $this->translator->trans('Zdarma');
-		} else {
-			return $this->priceFilter($price);
-		}
 	}
 
 	/**
