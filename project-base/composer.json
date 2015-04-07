@@ -23,7 +23,7 @@
 		}
 	],
 	"require": {
-		"php": "5.6.6",
+		"php": "5.6.*",
 		"bmatzner/jquery-bundle": "1.11.1",
 		"bmatzner/jquery-ui-bundle": "1.10.3",
 		"craue/formflow-bundle": "dev-master#55da501",

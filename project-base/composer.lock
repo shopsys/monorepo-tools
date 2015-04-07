@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f435da6ce99a3e607bf11e691847c060",
+    "hash": "f7aa335b49c3cb6a39423f31b0825eb9",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -392,7 +392,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -4578,7 +4578,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "5.6.6"
+        "php": "5.6.*"
     },
     "platform-dev": []
 }
