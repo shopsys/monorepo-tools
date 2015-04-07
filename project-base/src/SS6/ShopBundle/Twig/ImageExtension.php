@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -27,9 +27,9 @@ class ImageExtension extends Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \Symfony\Component\HttpFoundation\Request
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
-	private $request;
+	private $domain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\ImageLocator
@@ -49,14 +49,14 @@ class ImageExtension extends Twig_Extension {
 	public function __construct(
 		$imageUrlPrefix,
 		ContainerInterface $container,
-		RequestStack $requestStack,
+		Domain $domain,
 		ImageLocator $imageLocator,
 		ImageConfig $imageConfig,
 		ImageFacade $imageFacade
 	) {
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
-		$this->request = $requestStack->getMasterRequest();
+		$this->domain = $domain;
 		$this->imageLocator = $imageLocator;
 		$this->imageConfig = $imageConfig;
 		$this->imageFacade = $imageFacade;
@@ -90,7 +90,7 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function imageExists($imageOrEntity, $type = null) {
 		try {
-			$image = $this->getImageByObject($imageOrEntity, $type);
+			$image = $this->imageFacade->getImageByObject($imageOrEntity, $type);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
@@ -106,13 +106,7 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function getImageUrl($imageOrEntity, $sizeName = null, $type = null) {
 		try {
-			$image = $this->getImageByObject($imageOrEntity, $type);
-			if (!$this->imageLocator->imageExists($image)) {
-				return $this->getEmptyImageUrl();
-			}
-			return $this->request->getBaseUrl()
-				. $this->imageUrlPrefix
-				. str_replace(DIRECTORY_SEPARATOR, '/', $this->imageLocator->getRelativeImageFilepath($image, $sizeName));
+			return $this->imageFacade->getImageUrl($this->domain->getCurrentDomainConfig(), $imageOrEntity, $sizeName, $type);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
 			return $this->getEmptyImageUrl();
 		}
@@ -139,7 +133,7 @@ class ImageExtension extends Twig_Extension {
 		Condition::setArrayDefaultValue($attributtes, 'title', $attributtes['alt']);
 
 		try {
-			$image = $this->getImageByObject($imageOrEntity, $attributtes['type']);
+			$image = $this->imageFacade->getImageByObject($imageOrEntity, $attributtes['type']);
 			$entityName = $image->getEntityName();
 			$attributtes['src'] = $this->getImageUrl($image, $attributtes['size'], $attributtes['type']);
 		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
@@ -160,20 +154,7 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	private function getEmptyImageUrl() {
-		return $this->request->getBaseUrl() . $this->imageUrlPrefix . self::NOIMAGE_FILENAME;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
-	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Model\Image\Image
-	 */
-	private function getImageByObject($imageOrEntity, $type = null) {
-		if ($type === null && $imageOrEntity instanceof Image) {
-			return $imageOrEntity;
-		} else {
-			return $this->imageFacade->getImageByEntity($imageOrEntity, $type);
-		}
+		return $this->domain->getUrl() . $this->imageUrlPrefix . self::NOIMAGE_FILENAME;
 	}
 
 	/**

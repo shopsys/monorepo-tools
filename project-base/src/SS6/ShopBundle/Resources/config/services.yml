@@ -413,6 +413,7 @@ services:
 
   ss6.shop.image.image_facade:
     class: SS6\ShopBundle\Model\Image\ImageFacade
+    arguments: [%ss6.image_url_prefix%]
 
   ss6.shop.image.image_locator:
     class: SS6\ShopBundle\Model\Image\ImageLocator
