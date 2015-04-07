@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
+use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
 use SS6\ShopBundle\Twig\RequestExtension;
@@ -113,6 +114,8 @@ class ProductController extends Controller {
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
 		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
+		$categoryFacade = $this->get(CategoryFacade::class);
+		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		$searchText = $request->query->get('q');
 
@@ -133,6 +136,12 @@ class ProductController extends Controller {
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
+		$foundCategories = $categoryFacade->getVisibleByDomainAndSearchText(
+			$domain->getId(),
+			$domain->getLocale(),
+			$searchText
+		);
+
 		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
 			$searchText,
 			$productFilterData,
@@ -143,6 +152,7 @@ class ProductController extends Controller {
 
 		return $this->render('@SS6Shop/Front/Content/Product/search.html.twig', [
 			'searchText' => $searchText,
+			'foundCategories' => $foundCategories,
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,

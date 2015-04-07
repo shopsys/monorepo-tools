@@ -18,6 +18,20 @@
 {% block main_content %}
 	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
+	{% if foundCategories|length > 0 %}
+		<div>
+			<ul>
+				{% for foundCategory in foundCategories %}
+					<li>
+						<a href="{{ url('front_product_list', { id: foundCategory.id }) }}">
+							{{ foundCategory.name }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
 	{% if productDetails|length > 0 or filterFormSubmited %}
 		<div class="box-filter">
 			{{ form_start(filterForm, { action: url('front_product_search') }) }}
@@ -69,7 +83,7 @@
 		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 	{% else %}
 		<div class="in-message in-message--static in-message--info js-flash-message">
-			{{ 'Hledání neodpovídají žádné výsledky'|trans }}
+			{{ 'Hledání neodpovídají žádné produkty'|trans }}
 		</div>
 	{% endif %}
 

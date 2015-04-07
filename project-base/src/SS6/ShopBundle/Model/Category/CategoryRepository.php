@@ -186,6 +186,22 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param string|null $searchText
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getVisibleByDomainIdAndSearchText($domainId, $locale, $searchText) {
+		$queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder(
+			$domainId,
+			$locale,
+			$searchText
+		);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string|null $searchText
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getVisibleByDomainIdAndSearchTextQueryBuilder(

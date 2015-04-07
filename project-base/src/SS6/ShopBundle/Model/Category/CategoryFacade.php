@@ -231,6 +231,22 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string $searchText
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
+	public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText) {
+		$categories = $this->categoryRepository->getVisibleByDomainIdAndSearchText(
+			$domainId,
+			$locale,
+			$searchText
+		);
+
+		return $categories;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
