@@ -441,6 +441,9 @@ services:
   ss6.shop.localization.localization:
     class: SS6\ShopBundle\Model\Localization\Localization
 
+  ss6.shop.localization.number_format_repository:
+    class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
+
   ss6.shop.localization.translation.grid.translation_grid_factory:
     class: SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory
 

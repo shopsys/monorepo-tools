@@ -46,6 +46,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.number_formatter_extension:
+    class: SS6\ShopBundle\Twig\NumberFormatterExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.input_price_label_extension:
     class: SS6\ShopBundle\Twig\InputPriceLabelExtension
     tags:
