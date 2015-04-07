@@ -18,6 +18,7 @@ use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductService;
+use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductEditFacade {
@@ -130,6 +131,7 @@ class ProductEditFacade {
 		$this->em->flush($product);
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
+		$this->createProductVisibilities($product);
 		$this->refreshProductDomains($product, $productEditData);
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 
@@ -297,6 +299,22 @@ class ProductEditFacade {
 				$this->productManualInputPriceFacade->refresh($product, $pricingGroup, $manualInputPrices[$pricingGroup->getId()]);
 			}
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 */
+	private function createProductVisibilities(Product $product) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$domainId = $domainConfig->getId();
+			$toFlush = [];
+			foreach ($this->pricingGroupRepository->getPricingGroupsByDomainId($domainId) as $pricingGroup) {
+				$productVisibility = new ProductVisibility($product, $pricingGroup, $domainId);
+				$this->em->persist($productVisibility);
+				$toFlush[] = $productVisibility;
+			}
+		}
+		$this->em->flush($toFlush);
 	}
 
 }
