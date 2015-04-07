@@ -1,4 +1,15 @@
 <ul class="search__hint" id="js-search-autocomplete-list">
+	{% for category in categoriesPaginationResult.results %}
+		<li class="search__hint__item">
+			<a href="{{ url('front_product_list', { id: category.id }) }}" class="search__hint__item__link">
+				<span class="search__hint__image">
+					<i class="fa fa-folder-open-o"></i>
+				</span>
+				<span class="search__hint__name js-search-autocomplete-item-label">{{ category.name }}</span>
+			</a>
+		</li>
+	{% endfor %}
+
 	{% for product in productsPaginationResult.results %}
 		<li class="search__hint__item">
 			<a href="{{ url('front_product_detail', { id: product.id }) }}" class="search__hint__item__link">
@@ -22,7 +33,9 @@
 				[5,Inf] Celkem nalezeno %totalProductCount% produktů
 			{% endtranschoice %}
 		</li>
+	{% endif %}
 
+	{% if categoriesPaginationResult.totalCount > 0 or productsPaginationResult.totalCount > 0 %}
 		<li class="search__hint__item search__hint__item--info">
 			<a href="{{ url('front_product_search', { q: searchText }) }}">
 				{{ 'Zobrazit všechny výsledky'|trans }}

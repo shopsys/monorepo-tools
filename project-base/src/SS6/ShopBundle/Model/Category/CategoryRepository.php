@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use SS6\ShopBundle\Component\Paginator\QueryPaginator;
+use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 
 class CategoryRepository extends NestedTreeRepository {
@@ -155,6 +157,76 @@ class CategoryRepository extends NestedTreeRepository {
 		return $this->getCategoryDomainRepository()->findBy([
 			'category' => $category,
 		]);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param int $page
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getPaginationResultForSearchVisible(
+		$searchText,
+		$domainId,
+		$locale,
+		$page,
+		$limit
+	) {
+		$queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder($domainId, $locale, $searchText);
+		$queryBuilder->orderBy('ct.name');
+
+		$queryPaginator = new QueryPaginator($queryBuilder);
+
+		return $queryPaginator->getResult($page, $limit);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string|null $searchText
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getVisibleByDomainIdAndSearchTextQueryBuilder(
+		$domainId,
+		$locale,
+		$searchText
+	) {
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$this->addTranslation($queryBuilder, $locale);
+		$this->filterBySearchText($queryBuilder, $searchText);
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('c')
+			->from(Category::class, 'c')
+			->join(CategoryDomain::class, 'cd', Join::WITH, 'cd.category = c.id')
+			->where('cd.domainId = :domainId')
+				->andWhere('cd.visible = TRUE')
+			->orderBy('c.id');
+
+		$queryBuilder->setParameter('domainId', $domainId);
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param string|null $searchText
+	 */
+	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
+		$queryBuilder->andWhere(
+			'NORMALIZE(ct.name) LIKE NORMALIZE(:searchText)'
+		);
+		$queryBuilder->setParameter('searchText', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 	}
 
 }

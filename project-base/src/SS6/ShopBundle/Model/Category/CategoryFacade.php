@@ -238,4 +238,23 @@ class CategoryFacade {
 		return $this->categoryRepository->getAllWithoutBranch($category);
 	}
 
+	/**
+	 * @param string|null $searchText
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getSearchAutocompleteCategories($searchText, $limit) {
+		$page = 1;
+
+		$paginationResult = $this->categoryRepository->getPaginationResultForSearchVisible(
+			$searchText,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$page,
+			$limit
+		);
+
+		return $paginationResult;
+	}
+
 }
