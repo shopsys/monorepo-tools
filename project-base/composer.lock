@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a6bb8b3b9fc0982e5f955a58894ee6d3",
+    "hash": "382fe851293da2159919a103e406f3d5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -137,6 +137,46 @@
                 "ui"
             ],
             "time": "2013-05-19 14:33:38"
+        },
+        {
+            "name": "commerceguys/intl",
+            "version": "v0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/commerceguys/intl.git",
+                "reference": "f78f9854f3ebfe9b2ccbbd57e3824f5a689252b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/commerceguys/intl/zipball/f78f9854f3ebfe9b2ccbbd57e3824f5a689252b8",
+                "reference": "f78f9854f3ebfe9b2ccbbd57e3824f5a689252b8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CommerceGuys\\Intl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bojan Zivanovic"
+                }
+            ],
+            "description": "Internationalization library powered by CLDR data.",
+            "time": "2015-02-23 01:02:33"
         },
         {
             "name": "craue/formflow-bundle",
