@@ -441,6 +441,14 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
+  ss6.shop.localization.custom_date_time_formatter:
+    class: SS6\ShopBundle\Component\Localization\DateTimeFormatter
+    factory_service: ss6.shop.localization.custom_date_time_formatter_factory
+    factory_method: create
+
+  ss6.shop.localization.custom_date_time_formatter_factory:
+    class: SS6\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
+
   ss6.shop.localization.localization:
     class: SS6\ShopBundle\Model\Localization\Localization
 
