@@ -433,6 +433,9 @@ services:
   ss6.shop.image.processing.image_thumbnail_factory:
     class: SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
 
+  ss6.shop.localization.intl_currency_repository:
+    class: SS6\ShopBundle\Model\Localization\IntlCurrencyRepository
+
   ss6.shop.localization.locale_listener:
     class: SS6\ShopBundle\Model\Localization\LocalizationListener
     tags:

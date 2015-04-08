@@ -2,8 +2,12 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
+use CommerceGuys\Intl\Formatter\NumberFormatter;
+use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Twig_Extension;
@@ -11,6 +15,9 @@ use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
 class PriceExtension extends Twig_Extension {
+
+	const MINIMUM_FRACTION_DIGITS = 2;
+	const MAXIMUM_FRACTION_DIGITS = 10;
 
 	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
@@ -27,14 +34,35 @@ class PriceExtension extends Twig_Extension {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	/**
+	 * @var \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface
+	 */
+	private $numberFormatRepository;
+
+	/**
+	 * @var \CommerceGuys\Intl\Currency\CurrencyRepositoryInterface
+	 */
+	private $intlCurrencyRepository;
+
 	public function __construct(
 		Translator $translator,
 		CurrencyFacade $currencyFacade,
-		Domain $domain
+		Domain $domain,
+		Localization $localization,
+		NumberFormatRepositoryInterface $numberFormatRepository,
+		CurrencyRepositoryInterface $intlCurrencyRepository
 	) {
 		$this->translator = $translator;
 		$this->currencyFacade = $currencyFacade;
 		$this->domain = $domain;
+		$this->localization = $localization;
+		$this->numberFormatRepository = $numberFormatRepository;
+		$this->intlCurrencyRepository = $intlCurrencyRepository;
 	}
 
 	/**
@@ -44,8 +72,7 @@ class PriceExtension extends Twig_Extension {
 		return [
 			new Twig_SimpleFilter(
 				'price',
-				[$this, 'priceFilter'],
-				['is_safe' => ['html']]
+				[$this, 'priceFilter']
 			),
 			new Twig_SimpleFilter(
 				'priceText',
@@ -103,12 +130,9 @@ class PriceExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function priceFilter($price) {
-		$price = (float)$price;
-		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($this->domain->getId())->getSymbol();
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($this->domain->getId());
 
-		return $price;
+		return $this->formatCurrency($price, $currency);
 	}
 
 	/**
@@ -122,19 +146,14 @@ class PriceExtension extends Twig_Extension {
 			return $this->priceFilter($price);
 		}
 	}
-	
+
 	/**
 	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return string
 	 */
 	public function priceWithCurrencyFilter($price, Currency $currency) {
-		$price = (float)$price;
-		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $currency->getSymbol();
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
-
-		return $price;
+		return $this->formatCurrency($price, $currency);
 	}
 
 	/**
@@ -142,12 +161,9 @@ class PriceExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function priceWithCurrencyAdminFilter($price) {
-		$price = (float)$price;
-		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $this->getCurrencySymbolDefault();
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+		$currency = $this->currencyFacade->getDefaultCurrency();
 
-		return $price;
+		return $this->formatCurrency($price, $currency);
 	}
 
 	/**
@@ -156,21 +172,48 @@ class PriceExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function priceWithCurrencyByDomainIdFilter($price, $domainId) {
-		$price = (float)$price;
-		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $this->getCurrencySymbolByDomainId($domainId);
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
 
-		return $price;
+		return $this->formatCurrency($price, $currency);
 	}
 
 	public function priceWithCurrencyByCurrencyIdFilter($price, $currencyId) {
-		$price = (float)$price;
-		$price = number_format($price, 2, ',', ' ');
-		$currencySymbol = $this->currencyFacade->getById($currencyId)->getSymbol();
-		$price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8') . '&nbsp;' . $currencySymbol;
+		$currency = $this->currencyFacade->getById($currencyId);
 
-		return $price;
+		return $this->formatCurrency($price, $currency);
+	}
+
+	/**
+	 * @param string $price
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string
+	 */
+	private function formatCurrency($price, Currency $currency) {
+		if (!is_numeric($price)) {
+			return $price;
+		}
+
+		$numberFormatter = $this->getNumberFormatter();
+		$intlCurrency = $this->intlCurrencyRepository->get(
+			$currency->getCode(),
+			$this->localization->getLocale()
+		);
+
+		return $numberFormatter->formatCurrency($price, $intlCurrency);
+	}
+
+	/**
+	 * @return \CommerceGuys\Intl\Formatter\NumberFormatter
+	 */
+	private function getNumberFormatter() {
+		$locale = $this->localization->getLocale();
+
+		$numberFormat = $this->numberFormatRepository->get($locale);
+		$numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::CURRENCY);
+		$numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
+		$numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
+
+		return $numberFormatter;
 	}
 
 	/**
