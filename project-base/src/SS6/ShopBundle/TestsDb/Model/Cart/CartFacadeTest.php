@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFacadeTest extends DatabaseTestCase {
@@ -19,6 +20,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference('product_1');
 		$productId = $product1->getId();
@@ -26,7 +28,15 @@ class CartFacadeTest extends DatabaseTestCase {
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
+		$cartFacade = new CartFacade(
+			$this->getEntityManager(),
+			$cartService,
+			$cart,
+			$productRepository,
+			$customerIdentifier,
+			$domain,
+			$currentCustomer
+		);
 		$cartFacade->addProductToCart($productId, $quantity);
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
@@ -41,6 +51,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		$this->assertSame(0, $cart->getItemsCount(), 'Add only in their own cart');
 	}
 
+	/**
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
 	public function testChangeQuantities() {
 		$em = $this->getEntityManager();
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
@@ -49,20 +62,37 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference('product_1');
 		$product2 = $this->getReference('product_3');
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
+		$cartFacade = new CartFacade(
+			$this->getEntityManager(),
+			$cartService,
+			$cart,
+			$productRepository,
+			$customerIdentifier,
+			$domain,
+			$currentCustomer
+		);
 		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), 1)->getCartItem();
 		$cartItem2 = $cartFacade->addProductToCart($product2->getId(), 2)->getCartItem();
 		$em->flush();
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
+		$cartFacade = new CartFacade(
+			$this->getEntityManager(),
+			$cartService,
+			$cart,
+			$productRepository,
+			$customerIdentifier,
+			$domain,
+			$currentCustomer
+		);
 		$cartFacade->changeQuantities([
 			$cartItem1->getId() => 5,
 			$cartItem2->getId() => 9,
@@ -89,6 +119,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference('product_1');
 		$cartItem = new CartItem($customerIdentifier, $product1, 1, '0.0');
@@ -97,7 +128,15 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cart = new Cart($cartItems);
 		$em->flush();
 
-		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
+		$cartFacade = new CartFacade(
+			$this->getEntityManager(),
+			$cartService,
+			$cart,
+			$productRepository,
+			$customerIdentifier,
+			$domain,
+			$currentCustomer
+		);
 		$this->setExpectedException('\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
 		$cartFacade->deleteCartItem($cartItem->getId() + 1);
 	}
@@ -111,6 +150,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
 		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
 		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference('product_1');
 		$product2 = $this->getReference('product_3');
@@ -122,7 +162,15 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cart = new Cart($cartItems);
 		$em->flush();
 
-		$cartFacade = new CartFacade($this->getEntityManager(), $cartService, $cart, $productRepository, $customerIdentifier, $domain);
+		$cartFacade = new CartFacade(
+			$this->getEntityManager(),
+			$cartService,
+			$cart,
+			$productRepository,
+			$customerIdentifier,
+			$domain,
+			$currentCustomer
+		);
 		$cartFacade->deleteCartItem($cartItem1->getId());
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);

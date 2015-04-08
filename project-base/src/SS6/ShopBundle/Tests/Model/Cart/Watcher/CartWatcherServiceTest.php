@@ -3,8 +3,10 @@
 namespace SS6\ShopBundle\Tests\Model\Cart\Watcher;
 
 use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -50,13 +52,23 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 			->setMethods(null)
 			->getMock();
 
+		$expectedPricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+		$currentCustomerMock = $this->getMockBuilder(CurrentCustomer::class)
+			->disableOriginalConstructor()
+			->setMethods(['getPricingGroup'])
+			->getMock();
+		$currentCustomerMock
+			->expects($this->any())
+			->method('getPricingGroup')
+			->willReturn($expectedPricingGroup);
+
 		$cartItems = [$cartItemMock];
 		$cart = new Cart($cartItems);
 
 		$cartWatcherService = $this->getContainer()->get('ss6.shop.cart.cart_watcher_service');
 		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
 
-		$notVisibleItems = $cartWatcherService->getNotVisibleItems($cart);
+		$notVisibleItems = $cartWatcherService->getNotVisibleItems($cart, $currentCustomerMock);
 		$this->assertCount(1, $notVisibleItems);
 	}
 
