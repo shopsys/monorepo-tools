@@ -37,13 +37,6 @@ class ProductDomain {
 	private $hidden;
 
 	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(type="boolean")
-	 */
-	private $visible;
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="text", nullable=true)
@@ -65,7 +58,6 @@ class ProductDomain {
 		$this->product = $product;
 		$this->domainId = $domainId;
 		$this->hidden = false;
-		$this->visible = false;
 		$this->seoTitle = null;
 		$this->seoMetaDescription = null;
 	}
@@ -89,13 +81,6 @@ class ProductDomain {
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function isVisible() {
-		return $this->visible;
 	}
 
 	/**
