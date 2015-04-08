@@ -56,7 +56,11 @@ class ProductOnCurrentDomainFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail
 	 */
 	public function getVisibleProductDetailById($productId) {
-		$product = $this->productRepository->getVisibleByIdAndDomainId($productId, $this->domain->getId());
+		$product = $this->productRepository->getVisible(
+			$productId,
+			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup()
+		);
 
 		return $this->productDetailFactory->getDetailForProduct($product);
 	}
@@ -70,8 +74,12 @@ class ProductOnCurrentDomainFacade {
 		$accessoriesVisibleOnDomain = [];
 
 		foreach ($accessories as $accessory) {
-			$accessoryDomain = $this->productRepository->getProductDomainByProductAndDomainId($accessory, $this->domain->getId());
-			if ($accessoryDomain->isVisible()) {
+			$accessoryVisibility = $this->productRepository->findProductVisibility(
+				$product,
+				$this->currentCustomer->getPricingGroup(),
+				$this->domain->getId()
+			);
+			if ($accessoryVisibility !== null && $accessoryVisibility->isVisible()) {
 				$accessoriesVisibleOnDomain[] = $accessory;
 			}
 		}

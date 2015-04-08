@@ -2,10 +2,20 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
+
+	public function __construct(CurrentCustomer $currentCustomer) {
+		$this->currentCustomer = $currentCustomer;
+	}
 
 	public function indexAction() {
 		$sliderItemFacade = $this->get('ss6.shop.slider.slider_item_facade');
@@ -18,7 +28,10 @@ class DefaultController extends Controller {
 		/* @var $seoSettingFacade \SS6\ShopBundle\Model\Seo\SeoSettingFacade */
 
 		$sliderItems = $sliderItemFacade->getAllOnCurrentDomain();
-		$topProductsDetails = $topProductsFacade->getAllProductDetailsByDomainId($domain->getId());
+		$topProductsDetails = $topProductsFacade->getAllVisibleProductDetails(
+			$domain->getId(),
+			$this->currentCustomer->getPricingGroup()
+		);
 
 		return $this->render('@SS6Shop/Front/Content/Default/index.html.twig', [
 			'sliderItems' => $sliderItems,

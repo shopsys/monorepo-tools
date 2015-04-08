@@ -76,15 +76,16 @@ class TopProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricigGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getVisibleProductsForTopProductsOnDomain($domainId) {
-		$queryBuilder = $this->productRepository->getAllVisibleByDomainIdQueryBuilder($domainId);
+	public function getVisibleProductsForTopProductsOnDomain($domainId, $pricigGroup) {
+		$queryBuilder = $this->productRepository->getAllVisibleQueryBuilder($domainId, $pricigGroup);
 
 		$queryBuilder
 			->join(TopProduct::class, 'tp', Join::WITH, 'tp.product = p')
 			->andwhere('tp.domainId = :domainId')
-			->andwhere('tp.domainId = pd.domainId')
+			->andwhere('tp.domainId = prv.domainId')
 			->setParameter('domainId', $domainId);
 
 		return $queryBuilder->getQuery()->execute();

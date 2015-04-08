@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -40,12 +41,18 @@ class CartFacade {
 	private $domain;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
 	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -53,7 +60,8 @@ class CartFacade {
 		Cart $cart,
 		ProductRepository $productRepository,
 		CustomerIdentifier $customerIdentifier,
-		Domain $domain
+		Domain $domain,
+		CurrentCustomer $currentCustomer
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
@@ -61,6 +69,7 @@ class CartFacade {
 		$this->productRepository = $productRepository;
 		$this->customerIdentifier = $customerIdentifier;
 		$this->domain = $domain;
+		$this->currentCustomer = $currentCustomer;
 	}
 
 	/**
@@ -69,7 +78,11 @@ class CartFacade {
 	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
 	 */
 	public function addProductToCart($productId, $quantity) {
-		$product = $this->productRepository->getVisibleByIdAndDomainId($productId, $this->domain->getId());
+		$product = $this->productRepository->getVisible(
+			$productId,
+			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup()
+		);
 		$result = $this->cartService->addProductToCart($this->cart, $this->customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
 

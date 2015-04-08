@@ -18,6 +18,7 @@ use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
+use SS6\ShopBundle\Model\Product\ProductVisibility;
 
 class ProductRepository {
 
@@ -67,6 +68,10 @@ class ProductRepository {
 		return $this->em->getRepository(ProductDomain::class);
 	}
 
+	private function getProductVisibilityRepository() {
+		return $this->em->getRepository(ProductVisibility::class);
+	}
+
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Product\Product|null
@@ -77,18 +82,21 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllVisibleByDomainIdQueryBuilder($domainId) {
+	public function getAllVisibleQueryBuilder($domainId, $pricingGroup) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')
-			->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id')
-			->where('pd.domainId = :domainId')
-				->andWhere('pd.visible = TRUE')
+			->join(ProductVisibility::class, 'prv', Join::WITH, 'prv.product = p.id')
+			->where('prv.domainId = :domainId')
+				->andWhere('prv.pricingGroup = :pricingGroup')
+				->andWhere('prv.visible = TRUE')
 			->orderBy('p.id');
 
 		$queryBuilder->setParameter('domainId', $domainId);
+		$queryBuilder->setParameter('pricingGroup', $pricingGroup);
 
 		return $queryBuilder;
 	}
@@ -106,14 +114,16 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getVisibleByDomainIdAndCategoryQueryBuilder(
+	public function getVisibleInCategoryQueryBuilder(
 		$domainId,
+		PricingGroup $pricingGroup,
 		Category $category
 	) {
-		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
 		$this->filterByCategory($queryBuilder, $category);
 		return $queryBuilder;
 	}
@@ -124,12 +134,13 @@ class ProductRepository {
 	 * @param string|null $searchText
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getVisibleByDomainIdAndSearchTextQueryBuilder(
+	public function getVisibleBySearchTextQueryBuilder(
 		$domainId,
+		PricingGroup $pricingGroup,
 		$locale,
 		$searchText
 	) {
-		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
 		$this->addTranslation($queryBuilder, $locale);
 		$this->filterBySearchText($queryBuilder, $searchText);
 		return $queryBuilder;
@@ -178,7 +189,11 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
-		$queryBuilder = $this->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
+		$queryBuilder = $this->getVisibleInCategoryQueryBuilder(
+			$domainId,
+			$pricingGroup,
+			$category
+		);
 
 		$this->addTranslation($queryBuilder, $locale);
 		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
@@ -211,7 +226,7 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
-		$queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder($domainId, $locale, $searchText);
+		$queryBuilder = $this->getVisibleBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
 		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
@@ -307,10 +322,11 @@ class ProductRepository {
 	/**
 	 * @param int $id
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function getVisibleByIdAndDomainId($id, $domainId) {
-		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+	public function getVisible($id, $domainId, PricingGroup $pricingGroup) {
+		$qb = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
 		$qb->andWhere('p.id = :productId');
 		$qb->setParameter('productId', $id);
 
@@ -373,14 +389,6 @@ class ProductRepository {
 	}
 
 	/**
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	public function getVisibleProductsByDomainId($domainId) {
-		return $this->getAllVisibleByDomainIdQueryBuilder($domainId)->getQuery()->getResult();
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getAll() {
@@ -400,6 +408,24 @@ class ProductRepository {
 			->setParameter('availability', $availability->getId());
 
 		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility|null
+	 */
+	public function findProductVisibility(
+		Product $product,
+		PricingGroup $pricingGroup,
+		$domainId
+	) {
+		return $this->getProductVisibilityRepository()->find([
+			'product' => $product->getId(),
+			'pricingGroup' => $pricingGroup->getId(),
+			'domainId' => $domainId,
+		]);
 	}
 
 }

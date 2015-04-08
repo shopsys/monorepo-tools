@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 
 class CartWatcherFacade {
@@ -31,6 +32,11 @@ class CartWatcherFacade {
 	private $translator;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartWatcherService
@@ -39,12 +45,14 @@ class CartWatcherFacade {
 		FlashMessageSender $flashMessageSender,
 		EntityManager $em,
 		CartWatcherService $cartWatcherService,
-		Translator $translator
+		Translator $translator,
+		CurrentCustomer $currentCustomer
 	) {
 		$this->flashMessageSender = $flashMessageSender;
 		$this->em = $em;
 		$this->cartWatcherService = $cartWatcherService;
 		$this->translator = $translator;
+		$this->currentCustomer = $currentCustomer;
 	}
 
 	/**
@@ -70,7 +78,7 @@ class CartWatcherFacade {
 	}
 
 	private function checkNotVisibleItems(Cart $cart) {
-		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart);
+		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart, $this->currentCustomer);
 
 		foreach ($notVisibleItems as $cartItem) {
 			$this->flashMessageSender->addErrorFlashTwig(

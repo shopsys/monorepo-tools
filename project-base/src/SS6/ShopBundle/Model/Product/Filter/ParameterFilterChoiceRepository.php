@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Filter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
@@ -33,16 +34,22 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
 	public function getParameterFilterChoicesInCategory(
 		$domainId,
+		PricingGroup $pricingGroup,
 		$locale,
 		Category $category
 	) {
-		$productsQueryBuilder = $this->productRepository->getVisibleByDomainIdAndCategoryQueryBuilder($domainId, $category);
+		$productsQueryBuilder = $this->productRepository->getVisibleInCategoryQueryBuilder(
+			$domainId,
+			$pricingGroup,
+			$category
+		);
 
 		$productsQueryBuilder
 			->select('MIN(p), pp, pv')
