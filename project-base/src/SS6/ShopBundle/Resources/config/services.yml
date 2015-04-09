@@ -736,7 +736,8 @@ services:
   ss6.shop.product.pricing.product_price_recalculator:
     class: SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
     tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+      # must be run before ProductVisibilityFacade
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
   ss6.shop.product.product_edit_data_factory:
     class: SS6\ShopBundle\Model\Product\ProductEditDataFactory
@@ -762,7 +763,7 @@ services:
   ss6.shop.product.product_visibility_facade:
     class: SS6\ShopBundle\Model\Product\ProductVisibilityFacade
     tags:
-      # must be ran after CategoryVisibilityRepository
+      # must be ran after CategoryVisibilityRepository and ProductPriceRecalculator
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
 
   ss6.shop.product.product_visibility_repository:
