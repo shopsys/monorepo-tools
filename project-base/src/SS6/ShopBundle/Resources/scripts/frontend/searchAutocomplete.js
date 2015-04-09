@@ -10,35 +10,19 @@
 	};
 
 	var $input = null;
-	var $label = null;
-	var $list = null;
-	var $listItemPlaceholder = null;
-	var $listItemTemplate = null;
-	var $searchLink = null;
-	var $searchLinkItem = null;
+	var $searchAutocompleteResults = null;
 	var requestTimer = null;
 	var resultExists = false;
 	var searchDataCache = {};
 
 	SS6.search.autocomplete.init = function () {
 		$input = $('#js-search-autocomplete-input');
-		$label = $('#js-search-autocomplete-label');
-		$list = $('#js-search-autocomplete-list');
-		$listItemPlaceholder = $('#js-search-autocomplete-list-item-placeholder');
-		$listItemTemplate = $($.parseHTML($list.data('item-template')));
-		$searchLink = $('#js-search-autocomplete-search-link');
-		$searchLinkItem = $('#js-search-autocomplete-search-link-item');
+		$searchAutocompleteResults = $('#js-search-autocomplete-results');
 
 		$input.bind('keyup paste', SS6.search.autocomplete.onInputChange);
 		$input.bind('focus', function () {
 			if (resultExists) {
-				$list.show();
-			}
-		});
-
-		$(document).click(function(event) {
-			if($(event.target).closest('#js-search-autocomplete').length === 0) {
-				$list.hide();
+				$searchAutocompleteResults.show();
 			}
 		});
 	};
@@ -68,7 +52,7 @@
 			}
 		} else {
 			resultExists = false;
-			$list.hide();
+			$searchAutocompleteResults.hide();
 		}
 	};
 
@@ -76,39 +60,29 @@
 		$.ajax({
 			url: $input.data('autocomplete-url'),
 			type: 'post',
-			dataType: 'json',
+			dataType: 'html',
 			data: {
 				searchText: searchText
 			},
-			success: function (responseData) {
-				searchDataCache[searchText] = responseData;
-				SS6.search.autocomplete.showResult(responseData);
+			success: function (responseHtml) {
+				searchDataCache[searchText] = responseHtml;
+				SS6.search.autocomplete.showResult(responseHtml);
 			}
 		});
 	};
 
-	SS6.search.autocomplete.showResult = function(responseData) {
-		resultExists = true;
-		$label.text(responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_LABEL')]);
+	SS6.search.autocomplete.showResult = function(responseHtml) {
+		var $response = $($.parseHTML(responseHtml));
 
-		$list.find('.js-search-autocomplete-item').remove();
-		$.each(responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_PRODUCTS')], function (key, productData) {
-			var $listItem = $listItemTemplate.clone();
-			$listItem.find('.js-search-autocomplete-item-label').text(productData.name);
-			$listItem.find('.js-search-autocomplete-item-link').attr('href', productData.url);
-			$listItem.find('.js-search-autocomplete-item-image').attr('src', productData.imageUrl);
+		resultExists = $response.find('li').length > 0;
 
-			$listItemPlaceholder.before($listItem);
-		});
-
-		$list.show();
-
-		if (responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_PRODUCTS')].length > 0) {
-			$searchLink.attr('href', responseData[SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Filter\\ProductSearchService::RESULT_SEARCH_URL')]);
-			$searchLinkItem.show();
+		if (resultExists) {
+			$searchAutocompleteResults.show();
 		} else {
-			$searchLinkItem.hide();
+			$searchAutocompleteResults.hide();
 		}
+
+		$searchAutocompleteResults.html(responseHtml);
 	};
 
 	$(document).ready(function () {

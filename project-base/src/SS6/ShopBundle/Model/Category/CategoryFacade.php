@@ -231,11 +231,46 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param string $searchText
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
+	public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText) {
+		$categories = $this->categoryRepository->getVisibleByDomainIdAndSearchText(
+			$domainId,
+			$locale,
+			$searchText
+		);
+
+		return $categories;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllWithoutBranch(Category $category) {
 		return $this->categoryRepository->getAllWithoutBranch($category);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getSearchAutocompleteCategories($searchText, $limit) {
+		$page = 1;
+
+		$paginationResult = $this->categoryRepository->getPaginationResultForSearchVisible(
+			$searchText,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$page,
+			$limit
+		);
+
+		return $paginationResult;
 	}
 
 }

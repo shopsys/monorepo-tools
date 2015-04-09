@@ -13,23 +13,6 @@
 
 		<div class="search__block"></div>
 
-		{% macro autocompleteListItem() %}
-			<li class="search__hint__item js-search-autocomplete-item">
-				<a class="search__hint__item__link js-search-autocomplete-item-link">
-					<span class="search__hint__image">
-						<img alt="" title="" width="30" class="js-search-autocomplete-item-image" />
-					</span>
-					<span class="search__hint__name js-search-autocomplete-item-label"></span>
-				</a>
-			</li>
-		{% endmacro %}
-
-		<ul class="search__hint display-none" id="js-search-autocomplete-list" data-item-template="{{ _self.autocompleteListItem()|e }}">
-			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-label"></li>
-			<li class="display-none" id="js-search-autocomplete-list-item-placeholder"></li>
-			<li class="search__hint__item search__hint__item--info" id="js-search-autocomplete-search-link-item">
-				<a id="js-search-autocomplete-search-link">{{ 'Zobrazit všechny výsledky'|trans }}</a>
-			</li>
-		</ul>
+		<div id="js-search-autocomplete-results"></div>
 	</form>
 </div>
