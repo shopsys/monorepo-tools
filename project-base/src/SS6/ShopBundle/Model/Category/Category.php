@@ -73,6 +73,20 @@ class Category extends AbstractTranslatableEntity {
 	private $rgt;
 
 	/**
+	 * @internal
+	 *
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Category\CategoryDomain", mappedBy="category", fetch="EXTRA_LAZY")
+	 */
+	private $domains;
+
+	/**
+	 * @internal
+	 *
+	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="categories", fetch="EXTRA_LAZY")
+	 */
+	private $products;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	public function __construct(CategoryData $categoryData) {

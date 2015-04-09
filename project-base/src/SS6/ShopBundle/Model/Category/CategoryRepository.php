@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
@@ -254,32 +253,23 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public function findProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
-		$rsm = new ResultSetMapping();
-		$rsm->addScalarResult('id', 'id');
+		$qb = $this->em->createQueryBuilder()
+			->select('c')
+			->from(Category::class, 'c')
+			->join('c.domains', 'cd')
+			->join('c.products', 'cp')
+			->where('cd.visible = TRUE')
+				->andWhere('cd.domainId = :domainId')
+				->andWhere('cp = :product')
+			->orderBy('c.level DESC, c.lft')
+			->setMaxResults(1);
 
-		$query = $this->em->createNativeQuery('SELECT c.id
-			FROM categories AS c
-			JOIN product_categories AS pc ON pc.category_id = c.id
-			JOIN category_domains AS cd ON cd.category_id = c.id
-			WHERE cd.visible = TRUE
-				AND cd.domain_id = :domainId
-				AND pc.product_id = :productId
-			ORDER BY c.level DESC, c.lft
-			LIMIT 1', $rsm
-		);
-
-		$query->setParameters([
+		$qb->setParameters([
 			'domainId' => $domainConfig->getId(),
-			'productId' => $product->getId(),
+			'product' => $product,
 		]);
 
-		$categoryId = $query->getOneOrNullResult();
-
-		if ($categoryId === null) {
-			return null;
-		}
-
-		return $this->getById($categoryId);
+		return $qb->getQuery()->getOneOrNullResult();
 	}
 
 }

@@ -139,7 +139,7 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category[]
 	 *
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Category\Category")
+	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="products")
 	 * @ORM\JoinTable(name="product_categories")
 	 */
 	private $categories;
