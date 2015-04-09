@@ -5,11 +5,21 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
+
+	public function __construct(CategoryFacade $categoryFacade) {
+		$this->categoryFacade = $categoryFacade;
+	}
 
 	/**
 	 * @Route("/product/edit/{id}", requirements={"id" = "\d+"})
@@ -58,6 +68,7 @@ class ProductController extends Controller {
 			'product' => $product,
 			'productDetail' => $productDetailFactory->getDetailForProduct($product),
 			'productSellingPricesIndexedByDomainId' => $productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
+			'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
 		]);
 	}
 

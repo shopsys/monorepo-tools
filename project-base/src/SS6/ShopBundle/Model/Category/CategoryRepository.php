@@ -4,11 +4,14 @@ namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Model\Product\Product;
 
 class CategoryRepository extends NestedTreeRepository {
 
@@ -243,6 +246,40 @@ class CategoryRepository extends NestedTreeRepository {
 			'NORMALIZE(ct.name) LIKE NORMALIZE(:searchText)'
 		);
 		$queryBuilder->setParameter('searchText', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
+	}
+
+	/*
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Category\Category|null
+	 */
+	public function findProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
+		$rsm = new ResultSetMapping();
+		$rsm->addScalarResult('id', 'id');
+
+		$query = $this->em->createNativeQuery('SELECT c.id
+			FROM categories AS c
+			JOIN product_categories AS pc ON pc.category_id = c.id
+			JOIN category_domains AS cd ON cd.category_id = c.id
+			WHERE cd.visible = TRUE
+				AND cd.domain_id = :domainId
+				AND pc.product_id = :productId
+			ORDER BY c.level DESC, c.lft
+			LIMIT 1', $rsm
+		);
+
+		$query->setParameters([
+			'domainId' => $domainConfig->getId(),
+			'productId' => $product->getId(),
+		]);
+
+		$categoryId = $query->getOneOrNullResult();
+
+		if ($categoryId === null) {
+			return null;
+		}
+
+		return $this->getById($categoryId);
 	}
 
 }
