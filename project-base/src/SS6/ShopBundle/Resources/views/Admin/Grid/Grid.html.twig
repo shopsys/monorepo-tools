@@ -298,7 +298,7 @@
 {% endblock %}
 
 {% block grid_value_cell_type_DateTime %}
-	{{ value.format('j. n. Y G:i') }}
+	{{ value|formatDateTime }}
 {% endblock %}
 
 {% block grid_hidden_inputs %}

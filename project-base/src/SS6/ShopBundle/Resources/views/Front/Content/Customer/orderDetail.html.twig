@@ -113,7 +113,7 @@
 	<h2>{{ 'Stav'|trans }}</h2>
 	{{ order.status.name }}
 	<h2>{{ 'Datum vytvoření'|trans }}</h2>
-	{{ order.createdAt|date('d-m-Y') }}
+	{{ order.createdAt|formatDate }}
 	<h2>{{ 'Celková cena'|trans }}</h2>
 	<table class="spaced">
 		<tr>
