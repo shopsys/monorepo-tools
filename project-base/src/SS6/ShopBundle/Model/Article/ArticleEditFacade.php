@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Article\ArticleRepository;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 
 class ArticleEditFacade {
 
@@ -25,19 +25,26 @@ class ArticleEditFacade {
 	private $domain;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Article\ArticleRepository $articleRepository
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 * @param \SS6\ShopBundle\Model\Domain\Domain
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	public function __construct(
 		EntityManager $em,
 		ArticleRepository $articleRepository,
-		Domain $domain
+		Domain $domain,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->em = $em;
 		$this->articleRepository = $articleRepository;
 		$this->domain = $domain;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -64,6 +71,13 @@ class ArticleEditFacade {
 
 		$this->em->persist($article);
 		$this->em->flush();
+		$this->friendlyUrlFacade->createFriendlyUrlForDomain(
+			'front_article_detail',
+			$article->getId(),
+			$article->getName(),
+			$article->getDomainId()
+		);
+		$this->em->flush();
 
 		return $article;
 	}
@@ -76,7 +90,12 @@ class ArticleEditFacade {
 	public function edit($articleId, ArticleData $articleData) {
 		$article = $this->articleRepository->getById($articleId);
 		$article->edit($articleData);
-
+		$this->friendlyUrlFacade->createFriendlyUrlForDomain(
+			'front_article_detail',
+			$article->getId(),
+			$article->getName(),
+			$article->getDomainId()
+		);
 		$this->em->flush();
 
 		return $article;
