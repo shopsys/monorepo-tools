@@ -31,7 +31,6 @@ class Bootstrap {
 	}
 
 	public function run() {
-
 		if ($this->isDebug()) {
 			Debug::enable();
 		} else {
@@ -44,20 +43,16 @@ class Bootstrap {
 			$input = new ArgvInput();
 			$output = new ConsoleOutput();
 			$output->getErrorOutput()->setVerbosity(ConsoleOutput::VERBOSITY_VERBOSE);
-			
+
 			$application = new Application($kernel);
 			$application->run($input, $output);
 		} else {
-			if ($this->environment === Environment::ENVIRONMENT_TEST) {
-				$kernel->boot();
-			} else {
-				$this->initDoctrine();
+			$this->initDoctrine();
 
-				$request = Request::createFromGlobals();
-				$response = $kernel->handle($request);
-				$response->send();
-				$kernel->terminate($request, $response);
-			}
+			$request = Request::createFromGlobals();
+			$response = $kernel->handle($request);
+			$response->send();
+			$kernel->terminate($request, $response);
 		}
 	}
 
