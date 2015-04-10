@@ -20,19 +20,33 @@ class FriendlyUrlService {
 	/**
 	 * @param string $routeName
 	 * @param int $entityId
-	 * @param string $entityName
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+	 * @param string[locale] $namesByLocale
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
 	 */
-	public function createFriendlyUrl($routeName, $entityId, $entityName, $domainId) {
-		return $this->createFriendlyUrlIfValid($routeName, $entityId, $entityName, $domainId);
+	public function createFriendlyUrls($routeName, $entityId, $namesByLocale) {
+		$friendlyUrls = [];
+		foreach ($this->domain->getAll() as $domainConfig) {
+			if (array_key_exists($domainConfig->getLocale(), $namesByLocale)) {
+				$friendlyUrl = $this->createFriendlyUrlIfValid(
+					$routeName,
+					$entityId,
+					$namesByLocale[$domainConfig->getLocale()],
+					$domainConfig->getId()
+				);
+
+				if ($friendlyUrl !== null) {
+					$friendlyUrls[] = $friendlyUrl;
+				}
+			}
+		}
+
+		return $friendlyUrls;
 	}
 
 	/**
 	 * @param int $attempt
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param string $entityName
-	 * @param int $domainId
 	 * @param array|null $matchedRouteData
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResult
 	 */
@@ -40,7 +54,6 @@ class FriendlyUrlService {
 		$attempt,
 		FriendlyUrl $friendlyUrl,
 		$entityName,
-		$domainId,
 		array $matchedRouteData = null
 	) {
 		if ($matchedRouteData === null) {
@@ -57,7 +70,7 @@ class FriendlyUrlService {
 			$friendlyUrl->getRouteName(),
 			$friendlyUrl->getEntityId(),
 			$entityName,
-			$domainId,
+			$friendlyUrl->getDomainId(),
 			$attempt + 1 // if URL is duplicate, try again with "url-2", "url-3" and so on
 		);
 
@@ -72,7 +85,7 @@ class FriendlyUrlService {
 	 * @param int|null $indexPostfix
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
 	 */
-	private function createFriendlyUrlIfValid(
+	public function createFriendlyUrlIfValid(
 		$routeName,
 		$entityId,
 		$entityName,

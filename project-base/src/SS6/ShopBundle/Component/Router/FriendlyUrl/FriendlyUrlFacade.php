@@ -48,15 +48,10 @@ class FriendlyUrlFacade {
 	 * @param string[locale] $namesByLocale
 	 */
 	public function createFriendlyUrls($routeName, $entityId, array $namesByLocale) {
-		foreach ($this->domain->getAll() as $domainConfig) {
-			if (key_exists($domainConfig->getLocale(), $namesByLocale)) {
-				$this->createFriendlyUrlForDomain(
-					$routeName,
-					$entityId,
-					$namesByLocale[$domainConfig->getLocale()],
-					$domainConfig->getId()
-				);
-			}
+		$friendlyUrls = $this->friendlyUrlService->createFriendlyUrls($routeName, $entityId, $namesByLocale);
+		foreach ($friendlyUrls as $friendlyUrl) {
+			$locale = $this->domain->getDomainConfigById($friendlyUrl->getDomainId())->getLocale();
+			$this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $namesByLocale[$locale]);
 		}
 	}
 
@@ -67,18 +62,17 @@ class FriendlyUrlFacade {
 	 * @param int $domainId
 	 */
 	public function createFriendlyUrlForDomain($routeName, $entityId, $entityName, $domainId) {
-		$friendlyUrl = $this->friendlyUrlService->createFriendlyUrl($routeName, $entityId, $entityName, $domainId);
+		$friendlyUrl = $this->friendlyUrlService->createFriendlyUrlIfValid($routeName, $entityId, $entityName, $domainId);
 		if ($friendlyUrl !== null) {
-			$this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $entityName, $domainId);
+			$this->resolveUniquenessOfFriendlyUrlAndFlush($friendlyUrl, $entityName);
 		}
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param string $entityName
-	 * @param int $domainId
 	 */
-	private function resolveUniquenessOfFriendlyUrlAndFlush(FriendlyUrl $friendlyUrl, $entityName, $domainId) {
+	private function resolveUniquenessOfFriendlyUrlAndFlush(FriendlyUrl $friendlyUrl, $entityName) {
 		$attempt = 0;
 		do {
 			$attempt++;
@@ -100,7 +94,6 @@ class FriendlyUrlFacade {
 				$attempt,
 				$friendlyUrl,
 				$entityName,
-				$domainId,
 				$matchedRouteData
 			);
 			$friendlyUrl = $friendlyUrlUniqueResult->getFriendlyUrlForPersist();
