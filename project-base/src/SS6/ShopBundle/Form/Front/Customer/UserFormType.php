@@ -38,6 +38,9 @@ class UserFormType extends AbstractType {
 			->add('password', FormType::REPEATED, [
 				'type' => FormType::PASSWORD,
 				'required' => false,
+				'options' => [
+					'attr' => ['autocomplete' => 'off'],
+				],
 				'first_options' => [
 					'constraints' => [
 						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),

@@ -71,6 +71,9 @@ class UserFormType extends AbstractType {
 			->add('password', FormType::REPEATED, [
 				'type' => FormType::PASSWORD,
 				'required' => $this->scenario === CustomerFormType::SCENARIO_CREATE,
+				'options' => [
+					'attr' => ['autocomplete' => 'off'],
+				],
 				'first_options' => [
 					'constraints' => [
 						new Constraints\NotBlank([

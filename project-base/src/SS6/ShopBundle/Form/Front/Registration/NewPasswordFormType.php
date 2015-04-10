@@ -18,6 +18,9 @@ class NewPasswordFormType extends AbstractType {
 		$builder
 			->add('newPassword', FormType::REPEATED, [
 				'type' => FormType::PASSWORD,
+				'options' => [
+					'attr' => ['autocomplete' => 'off'],
+				],
 				'first_options' => [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
