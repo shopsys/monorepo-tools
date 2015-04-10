@@ -330,15 +330,39 @@
 	</target>
 
 	<target name="tests-acceptance">
-		<exec
-			executable="${path.codeception.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
-		>
-			<arg value="run" />
-			<arg value="--config=${path.codeception.configuration}" />
-		</exec>
+		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
+		<if>
+			<not>
+				<equals arg1="${path.env.test.existed}" arg2="true" />
+			</not>
+			<then>
+				<touch file="${path.root}/TEST" />
+			</then>
+		</if>
+
+		<trycatch>
+			<try>
+				<exec
+				executable="${path.codeception.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+					<arg value="run" />
+					<arg value="--config=${path.codeception.configuration}" />
+				</exec>
+			</try>
+			<finally>
+				<if>
+					<not>
+						<equals arg1="${path.env.test.existed}" arg2="true" />
+					</not>
+					<then>
+						<delete file="${path.root}/TEST" />
+					</then>
+				</if>
+			</finally>
+		</trycatch>
 	</target>
 
 	<target name="tests-acceptance-build">
