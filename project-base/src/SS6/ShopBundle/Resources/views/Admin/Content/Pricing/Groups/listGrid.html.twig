@@ -1,5 +1,9 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% block grid_value_cell_id_coefficient %}
+	{{ value|formatDecimalNumber(4) }}
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Nebyly nalezeny žádné cenové skupiny. Nejprve musíte nějakou vytvořit.'|trans }}
 {% endblock %}
