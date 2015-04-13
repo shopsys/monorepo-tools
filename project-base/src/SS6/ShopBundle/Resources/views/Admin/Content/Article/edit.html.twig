@@ -6,7 +6,8 @@
 {% block article_url %}
 	<div class="form-line">
 		<span class="form-line__text">
-			<a href="{{ url('front_article_detail', { id: article.id }) }}" target="_blank">{{ url('front_article_detail', { id: article.id }) }}</a>
+			{% set url = findUrlByDomainId('front_article_detail', { id: article.id }, article.domainId, true) %}
+			<a href="{{ url }}" target="_blank">{{ url }}</a>
 		</span>
 	</div>
 {% endblock %}
