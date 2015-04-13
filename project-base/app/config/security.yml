@@ -9,12 +9,10 @@ security:
 
   providers:
     administrators:
-      entity:
-        class: SS6ShopBundle:Administrator\Administrator
+      id: ss6.shop.administrator.administrator_authentication_repository
 
     user_identities:
-      entity:
-        class: SS6ShopBundle:Customer\User
+      id: ss6.shop.customer.security_user_repository
 
   firewalls:
     administration:
