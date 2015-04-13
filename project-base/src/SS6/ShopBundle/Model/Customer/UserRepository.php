@@ -77,4 +77,12 @@ class UserRepository {
 		return $this->getUserRepository()->findBy(['pricingGroup' => $pricingGroup]);
 	}
 
+	/**
+	 * @param array $findParams
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 */
+	public function findOne(array $findParams) {
+		return $this->getUserRepository()->findOneBy($findParams);
+	}
+
 }

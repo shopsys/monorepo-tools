@@ -71,4 +71,12 @@ class AdministratorRepository {
 			->select('COUNT(a)')
 			->getQuery()->getSingleScalarResult());
 	}
+
+	/**
+	 * @param array $findParams
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 */
+	public function findOne(array $findParams) {
+		return $this->getAdministratorRepository()->findOneBy($findParams);
+	}
 }

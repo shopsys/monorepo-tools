@@ -3,20 +3,30 @@
 namespace SS6\ShopBundle\Model\Administrator;
 
 use DateTime;
-use Doctrine\ORM\EntityRepository;
+use SS6\ShopBundle\Model\Administrator\Administrator;
+use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class AdministratorAuthenticationRepository extends EntityRepository implements UserProviderInterface {
+class AdministratorAuthenticationRepository implements UserProviderInterface {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorRepository
+	 */
+	private $administratorRepository;
+
+	public function __construct(AdministratorRepository $administratorRepository) {
+		$this->administratorRepository = $administratorRepository;
+	}
 
 	/**
 	 * @param string $username The username
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function loadUserByUsername($username) {
-		$administrator = $this->findOneBy(['username' => $username]);
+		$administrator = $this->administratorRepository->findByUserName($username);
 
 		if ($administrator === null) {
 			$message = sprintf(
@@ -52,7 +62,7 @@ class AdministratorAuthenticationRepository extends EntityRepository implements 
 		if ($administrator instanceof UniqueLoginInterface) {
 			$findParams['loginToken'] = $administrator->getLoginToken();
 		}
-		$freshAdministrator = $this->findOneBy($findParams);
+		$freshAdministrator = $this->administratorRepository->findOne($findParams);
 
 		if ($freshAdministrator === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
@@ -67,6 +77,13 @@ class AdministratorAuthenticationRepository extends EntityRepository implements 
 	 */
 	public function supportsClass($class) {
 		return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getEntityName() {
+		return Administrator::class;
 	}
 
 }
