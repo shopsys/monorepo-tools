@@ -21,7 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(columns={"username"})
  *   }
  * )
- * @ORM\Entity(repositoryClass="SS6\ShopBundle\Model\Administrator\AdministratorAuthenticationRepository")
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 
