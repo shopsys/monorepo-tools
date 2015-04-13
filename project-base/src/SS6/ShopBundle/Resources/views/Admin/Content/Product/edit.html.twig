@@ -5,14 +5,24 @@
 
 {% block product_url %}
 	<div class="form-line">
-		<label>{{ 'URL adresy na doménách :' |trans }}</label>
+		<label>
+			{{ 'URL adresy na doménách :' |trans }}
+			<i class="fa fa-info-circle cursor-help js-tooltip"
+				data-toggle="tooltip" data-placement="right"
+				title="{{ 'Pokud je produkt viditelný pro výchozí cenovou skupinu na dané doméně, je URL adresa odkazem, v opačném případě se zobrazuje pouze jako text'|trans }}"
+			 ></i>
+		</label>
 		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
 			<div class="form-line">
 				<span class="form-line__label">{{ getDomainName(productDomain.domainId) ~ ' :' }}</span>
 				<span class="form-line__text">
 					{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId) %}
 					{% if url %}
-						<a href="{{ url }}" target="_blank">{{ url }}</a>
+						{% if isVisibileForDefaultPricingGroup(product, productDomain.domainId) %}
+							<a href="{{ url }}" target="_blank">{{ url }}</a>
+						{% else %}
+							{{ url }}
+						{% endif %}
 					{% else %}
 						-
 					{% endif %}

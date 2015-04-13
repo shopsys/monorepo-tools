@@ -56,6 +56,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.product_visibility_extension:
+    class: SS6\ShopBundle\Twig\ProductVisibilityExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.request_extension:
     class: SS6\ShopBundle\Twig\RequestExtension
     tags:
