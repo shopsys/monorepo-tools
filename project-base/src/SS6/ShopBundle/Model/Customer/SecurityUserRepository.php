@@ -83,7 +83,7 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 		$freshUser = $this->findOneBy($findParams);
 
 		if ($freshUser === null) {
-			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
+			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active user');
 		}
 
 		return $freshUser;
