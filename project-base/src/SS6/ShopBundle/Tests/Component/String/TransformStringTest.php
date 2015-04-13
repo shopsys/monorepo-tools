@@ -47,7 +47,7 @@ class TransformStringTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expected, TransformString::safeFilename($actual));
 	}
 
-	public function stringToFriendlyUrlProvider() {
+	public function stringToFriendlyUrlSlugProvider() {
 		return [
 			[
 				'actual' => 'ěščřžýáíé foo',
@@ -77,10 +77,10 @@ class TransformStringTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider stringToFriendlyUrlProvider
+	 * @dataProvider stringToFriendlyUrlSlugProvider
 	 */
-	public function testStringToFriendlyUrl($actual, $expected) {
-		$this->assertSame($expected, TransformString::stringToFriendlyUrl($actual));
+	public function testStringToFriendlyUrlSlug($actual, $expected) {
+		$this->assertSame($expected, TransformString::stringToFriendlyUrlSlug($actual));
 	}
 
 }
