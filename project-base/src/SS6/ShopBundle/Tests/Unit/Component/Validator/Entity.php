@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Component\Validator;
+namespace SS6\ShopBundle\Tests\Unit\Component\Validator;
 
 use Doctrine\ORM\Mapping as ORM;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Component\Validator;
+namespace SS6\ShopBundle\Tests\Unit\Component\Validator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader;
@@ -14,11 +14,11 @@ class AutoValidatorAnnotationLoaderTest extends FunctionalTestCase {
 		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
 		$loader = new AutoValidatorAnnotationLoader(new AnnotationReader(), $em);
-		$metadata = new ClassMetadata('SS6\ShopBundle\Tests\Unit\Model\Component\Validator\DataObject');
+		$metadata = new ClassMetadata('SS6\ShopBundle\Tests\Unit\Component\Validator\DataObject');
 
 		$loader->loadClassMetadata($metadata);
 
-		$expected = new ClassMetadata('SS6\ShopBundle\Tests\Unit\Model\Component\Validator\DataObject');
+		$expected = new ClassMetadata('SS6\ShopBundle\Tests\Unit\Component\Validator\DataObject');
 		$expected->addPropertyConstraint('name', new Constraints\NotBlank());
 		$expected->addPropertyConstraint('short', new Constraints\Length([
 			'max' => 100,
