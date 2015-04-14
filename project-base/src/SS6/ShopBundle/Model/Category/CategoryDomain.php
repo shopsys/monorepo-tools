@@ -15,7 +15,7 @@ class CategoryDomain {
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category")
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="domains")
 	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $category;

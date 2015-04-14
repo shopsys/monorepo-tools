@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Category\CategoryService;
 use SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Product\Product;
 
 class CategoryFacade {
 
@@ -271,6 +272,20 @@ class CategoryFacade {
 		);
 
 		return $paginationResult;
+	}
+
+	/*
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Category\Category[domainId]
+	 */
+	public function getProductMainCategoriesIndexedByDomainId(Product $product) {
+		$mainCategoriesIndexedByDomainId = [];
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->categoryRepository
+				->findProductMainCategoryOnDomain($product, $domainConfig);
+		}
+
+		return $mainCategoriesIndexedByDomainId;
 	}
 
 }

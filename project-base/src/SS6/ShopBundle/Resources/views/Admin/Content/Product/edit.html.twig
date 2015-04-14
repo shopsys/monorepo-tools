@@ -26,6 +26,26 @@
 	</div>
 {% endblock %}
 
+{% block product_main_categories %}
+	<label>{{ 'Hlavní kategorie na doménách :' |trans }}</label>
+	{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}
+		{% if mainCategory is null %}
+			{% set mainCategoryName = '-' %}
+		{% else %}
+			{% set mainCategoryName = mainCategory.name %}
+		{% endif %}
+		<div class="form-line">
+			<label class="form-line__label">{{ getDomainName(domainId) ~ ' :' }}</label>
+			<input
+				type="text"
+				value="{{ mainCategoryName }}"
+				class="form-control form-line__field"
+				readonly="readonly"
+			>
+		</div>
+	{% endfor %}
+{% endblock %}
+
 {% block product_calculated_prices %}
 	<table class="table table-dark mt-1">
 		<thead>

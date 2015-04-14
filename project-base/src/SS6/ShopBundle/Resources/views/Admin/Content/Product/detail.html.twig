@@ -19,6 +19,7 @@
 					{{ form_row(form.productData.name, { label: 'Název'}) }}
 					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'}) }}
 					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
+					{% block product_main_categories %}{% endblock %}
 					{{ form_row(form.productData.categories, { label: 'Kategorie'}) }}
 					{{ form_row(form.productData.flags, { label: 'Příznaky'}) }}
 				</div>
