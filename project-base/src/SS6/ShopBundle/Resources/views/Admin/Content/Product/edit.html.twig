@@ -11,14 +11,10 @@
 				<span class="form-line__label">{{ getDomainName(productDomain.domainId) ~ ' :' }}</span>
 				<span class="form-line__text">
 					{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId, true) %}
-					{% if productDomain.visible %}
+					{% if url %}
 						<a href="{{ url }}" target="_blank">{{ url }}</a>
 					{% else %}
-						{% if url %}
-							{{ url }}
-						{% else %}
-							-
-						{% endif %}
+						-
 					{% endif %}
 				</span>
 			</div>

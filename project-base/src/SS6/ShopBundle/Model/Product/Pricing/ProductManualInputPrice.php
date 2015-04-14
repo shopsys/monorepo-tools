@@ -33,7 +33,7 @@ class ProductManualInputPrice {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=false)
+	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $inputPrice;
 

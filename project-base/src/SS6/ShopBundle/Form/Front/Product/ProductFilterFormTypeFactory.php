@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Front\Product;
 
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
 
@@ -18,12 +19,19 @@ class ProductFilterFormTypeFactory {
 	 */
 	private $flagFilterChoiceRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
+
 	public function __construct(
 		ParameterFilterChoiceRepository $parameterFilterChoiceRepository,
-		FlagFilterChoiceRepository $flagFilterChoiceRepository
+		FlagFilterChoiceRepository $flagFilterChoiceRepository,
+		CurrentCustomer $currentCustomer
 	) {
 		$this->parameterFilterChoiceRepository = $parameterFilterChoiceRepository;
 		$this->flagFilterChoiceRepository = $flagFilterChoiceRepository;
+		$this->currentCustomer = $currentCustomer;
 	}
 
 	/**
@@ -33,10 +41,11 @@ class ProductFilterFormTypeFactory {
 	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
 	public function createForCategory($domainId, $locale, Category $category) {
+		$pricingGroup = $this->currentCustomer->getPricingGroup();
 		$parameterFilterChoices = $this->parameterFilterChoiceRepository
-			->getParameterFilterChoicesInCategory($domainId, $locale, $category);
+			->getParameterFilterChoicesInCategory($domainId, $pricingGroup, $locale, $category);
 		$flagFilterChoices = $this->flagFilterChoiceRepository
-			->getFlagFilterChoicesInCategory($domainId, $category);
+			->getFlagFilterChoicesInCategory($domainId, $pricingGroup, $category);
 
 		return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices);
 	}
@@ -49,8 +58,9 @@ class ProductFilterFormTypeFactory {
 	 */
 	public function createForSearch($domainId, $locale, $searchText) {
 		$parameterFilterChoices = [];
+		$pricingGroup = $this->currentCustomer->getPricingGroup();
 		$flagFilterChoices = $this->flagFilterChoiceRepository
-			->getFlagFilterChoicesForSearch($domainId, $locale, $searchText);
+			->getFlagFilterChoicesForSearch($domainId, $pricingGroup, $locale, $searchText);
 
 		return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices);
 	}

@@ -156,9 +156,9 @@ class ProductEditFormType extends AbstractType {
 							'message' => 'Prosím vyplňte cenu',
 							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
-						new Constraints\GreaterThan([
+						new Constraints\GreaterThanOrEqual([
 							'value' => 0,
-							'message' => 'Cena musí být větší než 0',
+							'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
 							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
 					],
