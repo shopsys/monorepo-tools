@@ -5,8 +5,10 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +16,23 @@ use Symfony\Component\HttpFoundation\Request;
 class CartController extends Controller {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
+	 */
+	private $freeTransportAndPaymentFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	public function __construct(FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade, Domain $domain) {
+		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
+		$this->domain = $domain;
+	}
+
+	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function indexAction(Request $request) {
 		$cart = $this->get('ss6.shop.cart');
@@ -66,6 +84,9 @@ class CartController extends Controller {
 		$cartItems = $cart->getItems();
 		$cartItemPrices = $cartItemPriceCalculation->calculatePrices($cartItems);
 		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
+		/* @var $cartSummary \SS6\ShopBundle\Model\Cart\CartSummary */
+		$productsPriceWithVat = $cartSummary->getPriceWithVat();
+		$domainId = $this->domain->getId();
 
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
 			'cart' => $cart,
@@ -73,6 +94,9 @@ class CartController extends Controller {
 			'cartItemPrices' => $cartItemPrices,
 			'cartSummary' => $cartSummary,
 			'form' => $form->createView(),
+			'isFreeTransportAndPaymentActive' => $this->freeTransportAndPaymentFacade->isActive($domainId),
+			'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree($productsPriceWithVat, $domainId),
+			'remainingPriceWithVat' => $this->freeTransportAndPaymentFacade->getRemainingPriceWithVat($productsPriceWithVat, $domainId),
 		]);
 	}
 

@@ -94,6 +94,14 @@
 
 			</table>
 
+			{% if isFreeTransportAndPaymentActive %}
+				{% if isPaymentAndTransportFree %}
+					<strong>{{ 'Dopravu i platbu máte zdarma!'|trans }}</strong>
+				{% else %}
+					<strong>{{ 'Musíte ještě nakoupit zboží za %remaining%, abyste měli dopravu i platbu zdarma.'|trans({'%remaining%': remainingPriceWithVat|price })|raw }}</strong>
+				{% endif %}
+			{% endif %}
+
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
 					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
