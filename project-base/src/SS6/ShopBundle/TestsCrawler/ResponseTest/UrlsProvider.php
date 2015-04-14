@@ -81,6 +81,9 @@ class UrlsProvider {
 			case 'admin_vat_delete':
 				return ['id' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_SECOND_LOW)->getId()];
 
+			case 'front_article_detail':
+				return ['id' => 1];
+
 			case 'front_customer_order_detail_unregistered':
 				return ['urlHash' => $this->persistentReferenceService->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getUrlHash()];
 

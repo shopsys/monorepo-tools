@@ -49,14 +49,11 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 		$attempt = 1;
 		$friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
-		$namesByLocale = [
-			'en' => 'name',
-		];
 		$matchedRouteData = null;
 		$friendlyUrlUniqueResult = $friendlyUrlService->getFriendlyUrlUniqueResult(
 			$attempt,
 			$friendlyUrl,
-			$namesByLocale,
+			'name',
 			$matchedRouteData
 		);
 
@@ -74,9 +71,6 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 		$attempt = 1;
 		$friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
-		$namesByLocale = [
-			'en' => 'name',
-		];
 		$matchedRouteData = [
 			'_route' => $friendlyUrl->getRouteName(),
 			'id' => $friendlyUrl->getEntityId(),
@@ -84,7 +78,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$friendlyUrlUniqueResult = $friendlyUrlService->getFriendlyUrlUniqueResult(
 			$attempt,
 			$friendlyUrl,
-			$namesByLocale,
+			'name',
 			$matchedRouteData
 		);
 
@@ -102,9 +96,6 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 		$attempt = 3;
 		$friendlyUrl = new FriendlyUrl('route_name', 7, 1, 'name');
-		$namesByLocale = [
-			'en' => 'name',
-		];
 		$matchedRouteData = [
 			'_route' => 'another_route_name',
 			'id' => 7,
@@ -112,7 +103,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$friendlyUrlUniqueResult = $friendlyUrlService->getFriendlyUrlUniqueResult(
 			$attempt,
 			$friendlyUrl,
-			$namesByLocale,
+			'name',
 			$matchedRouteData
 		);
 
