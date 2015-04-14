@@ -14,7 +14,7 @@
 	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint" />
 
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
-	<target name="tests-all" depends="test-db-demo,tests,tests-db,tests-crawler" />
+	<target name="tests-all" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
 
 	<target name="tests-performance-run" depends="clean,test-db-demo,test-db-fixtures-performance,tests-performance" />
 
@@ -315,7 +315,7 @@
 		</exec>
 	</target>
 
-	<target name="tests">
+	<target name="tests-unit">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
@@ -325,7 +325,7 @@
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
-			<arg value="Tests"/>
+			<arg value="Unit"/>
 		</exec>
 	</target>
 
@@ -339,7 +339,7 @@
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
-			<arg value="TestsDb"/>
+			<arg value="Database"/>
 		</exec>
 	</target>
 
@@ -353,7 +353,7 @@
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
-			<arg value="TestsCrawler"/>
+			<arg value="Crawler"/>
 		</exec>
 	</target>
 
@@ -421,7 +421,7 @@
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
-			<arg value="TestsPerformance"/>
+			<arg value="Performance"/>
 		</exec>
 	</target>
 

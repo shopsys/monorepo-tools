@@ -14,19 +14,19 @@
 >
 
 	<testsuites>
-		<testsuite name="Tests">
+		<testsuite name="Unit">
 			<directory>../src/*/*Bundle/Tests/Unit</directory>
 			<directory>../src/*/Bundle/*Bundle/Tests/Unit</directory>
 		</testsuite>
-		<testsuite name="TestsDb">
+		<testsuite name="Database">
 			<directory>../src/*/*Bundle/Tests/Database</directory>
 			<directory>../src/*/Bundle/*Bundle/Tests/Database</directory>
 		</testsuite>
-		<testsuite name="TestsCrawler">
+		<testsuite name="Crawler">
 			<directory>../src/*/*Bundle/Tests/Crawler</directory>
 			<directory>../src/*/Bundle/*Bundle/Tests/Crawler</directory>
 		</testsuite>
-		<testsuite name="TestsPerformance">
+		<testsuite name="Performance">
 			<directory>../src/*/*Bundle/Tests/Performance</directory>
 			<directory>../src/*/Bundle/*Bundle/Tests/Performance</directory>
 		</testsuite>
