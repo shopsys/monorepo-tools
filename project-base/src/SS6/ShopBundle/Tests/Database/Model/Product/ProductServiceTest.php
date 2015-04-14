@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Setting\SettingValue;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductServiceTest extends DatabaseTestCase {
 

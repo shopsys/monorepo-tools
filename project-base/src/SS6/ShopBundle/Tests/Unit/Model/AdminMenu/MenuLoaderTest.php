@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\AdminNavigation;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class MenuLoaderTest extends FunctionalTestCase {
 

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
 use DateTime;
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -13,6 +12,7 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 

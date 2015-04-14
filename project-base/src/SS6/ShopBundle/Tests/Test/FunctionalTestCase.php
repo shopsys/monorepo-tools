@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Test;
+namespace SS6\ShopBundle\Tests\Test;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\FlashMessage;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class BagTest extends FunctionalTestCase {
 

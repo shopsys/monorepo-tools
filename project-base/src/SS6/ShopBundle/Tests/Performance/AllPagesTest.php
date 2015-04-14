@@ -4,11 +4,11 @@ namespace SS6\ShopBundle\Tests\Performance;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection;
 use SS6\ShopBundle\Tests\Performance\ThresholdService;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AllPagesTest extends FunctionalTestCase {

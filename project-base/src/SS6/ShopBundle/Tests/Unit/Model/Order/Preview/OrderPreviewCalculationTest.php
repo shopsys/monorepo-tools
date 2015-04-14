@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
@@ -15,6 +14,7 @@ use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase {
 

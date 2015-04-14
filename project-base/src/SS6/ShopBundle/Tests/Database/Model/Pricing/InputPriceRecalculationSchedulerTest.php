@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Pricing;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
@@ -13,6 +12,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {

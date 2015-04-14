@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Controller\DefaultController;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class DefaultControllerTest extends FunctionalTestCase {
 

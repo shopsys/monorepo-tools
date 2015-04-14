@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Domain\Config;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class DomainsConfigLoaderTest extends FunctionalTestCase {
 

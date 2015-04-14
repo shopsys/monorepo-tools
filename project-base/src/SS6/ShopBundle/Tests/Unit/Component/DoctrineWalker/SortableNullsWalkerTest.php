@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Tests\Unit\Component\DoctrineWalker;
 
 use Doctrine\ORM\Query;
 use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class SortableNullsWalkerTest extends FunctionalTestCase {
 

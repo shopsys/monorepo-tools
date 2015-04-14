@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Cart\Watcher;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
@@ -12,6 +11,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartWatcherServiceTest extends FunctionalTestCase {
 

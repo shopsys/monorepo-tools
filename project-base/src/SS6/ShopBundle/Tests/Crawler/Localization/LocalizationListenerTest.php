@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Tests\Crawler\Localization;
 
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Routing\RouterInterface;
 
 class LocalizationListenerTest extends DatabaseTestCase {

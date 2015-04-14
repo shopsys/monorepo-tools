@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Order;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
@@ -11,6 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportDomain;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderTransportAndPaymentTest extends DatabaseTestCase {
 

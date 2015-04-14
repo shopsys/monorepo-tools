@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Order;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase {
 

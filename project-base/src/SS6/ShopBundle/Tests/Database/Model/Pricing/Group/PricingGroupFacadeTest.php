@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Pricing\Group;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PricingGroupFacadeTest extends DatabaseTestCase {
 

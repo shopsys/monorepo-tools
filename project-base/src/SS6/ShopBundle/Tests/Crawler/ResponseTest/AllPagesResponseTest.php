@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AllPagesResponseTest extends DatabaseTestCase {
 

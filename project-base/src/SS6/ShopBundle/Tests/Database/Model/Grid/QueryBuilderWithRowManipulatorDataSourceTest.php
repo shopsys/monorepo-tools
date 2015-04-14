@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Grid;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 

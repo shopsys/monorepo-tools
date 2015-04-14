@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Form\Admin\AdvancedSearch;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdvancedSearchTranslationTest extends FunctionalTestCase {
 

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
 
 use DateTime;
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
@@ -11,6 +10,7 @@ use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class RegistrationServiceTest extends FunctionalTestCase {
 

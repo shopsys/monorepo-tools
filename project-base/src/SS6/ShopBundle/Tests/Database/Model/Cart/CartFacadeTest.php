@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Cart;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
 

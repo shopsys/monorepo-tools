@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Order;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderNumberSequenceRepositoryTest extends DatabaseTestCase {
 

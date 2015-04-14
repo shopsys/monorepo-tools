@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Unit\Javascript\Compiler\Constant;
 
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase {
 

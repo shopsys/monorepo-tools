@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Test;
+namespace SS6\ShopBundle\Tests\Test;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 abstract class DatabaseTestCase extends FunctionalTestCase {
 	/**

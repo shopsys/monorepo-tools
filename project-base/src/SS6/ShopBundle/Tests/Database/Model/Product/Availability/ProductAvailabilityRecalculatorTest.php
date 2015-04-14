@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Product\Availability;
 
-use SS6\ShopBundle\Component\Test\DatabaseTestCase;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 

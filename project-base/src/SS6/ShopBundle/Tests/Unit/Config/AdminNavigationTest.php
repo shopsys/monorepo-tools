@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Config;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdminNavigationTest extends FunctionalTestCase {
 

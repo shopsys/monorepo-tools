@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Cart\Item;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartItemPriceCalculationTest extends FunctionalTestCase {
 

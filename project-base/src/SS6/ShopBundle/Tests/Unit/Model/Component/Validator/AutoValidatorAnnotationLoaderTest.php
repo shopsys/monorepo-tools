@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Component\Validator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 

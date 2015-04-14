@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Product\Availability;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 

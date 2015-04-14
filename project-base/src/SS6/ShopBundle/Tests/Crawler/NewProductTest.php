@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Tests\Crawler;
 
-use SS6\ShopBundle\Component\Test\FunctionalTestCase;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormType;
+use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class NewProductTest extends FunctionalTestCase {
 
