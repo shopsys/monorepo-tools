@@ -44,6 +44,8 @@ class SeoController extends Controller {
 			$seoSettingFacade->setTitleAddOn($seoSettingData['titleAddOn'], $selectedDomainId);
 
 			$flashMessageSender->addSuccessFlash('Natavení SEO atributů bylo upraveno');
+
+			return $this->redirect($this->generateUrl('admin_seo_index'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
