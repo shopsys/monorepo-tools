@@ -2,10 +2,9 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
-use SS6\ShopBundle\Model\Setting\Setting;
 use Twig_SimpleFunction;
 
 class ProductVisibilityExtension extends \Twig_Extension {
@@ -16,28 +15,20 @@ class ProductVisibilityExtension extends \Twig_Extension {
 	private $productVisibilityRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
-	private $pricingGroupRepository;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
-	 */
-	private $setting;
+	private $pricingGroupSettingFacade;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupRepository
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
 	 */
 	public function __construct(
 		ProductVisibilityRepository $productVisibilityRepository,
-		PricingGroupRepository $pricingGroupRepository,
-		Setting $setting
+		PricingGroupSettingFacade $pricingGroupSettingFacade
 	) {
 		$this->productVisibilityRepository = $productVisibilityRepository;
-		$this->pricingGroupRepository = $pricingGroupRepository;
-		$this->setting = $setting;
+		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 	}
 
 	/**
@@ -63,7 +54,7 @@ class ProductVisibilityExtension extends \Twig_Extension {
 	 * @return bool
 	 */
 	public function isVisibileForDefaultPricingGroupOnDomain(Product $product, $domainId) {
-		$pricingGroup = $this->pricingGroupRepository->getById($this->setting->get(Setting::DEFAULT_PRICING_GROUP, $domainId));
+		$pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
 		$productVisibility = $this->productVisibilityRepository->findProductVisibility($product, $pricingGroup, $domainId);
 
 		if ($productVisibility !== null) {
