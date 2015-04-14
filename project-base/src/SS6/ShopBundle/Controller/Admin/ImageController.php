@@ -133,7 +133,10 @@ class ImageController extends Controller {
 		if (array_key_exists($sizeName, $imageSizeUsagesTranslations[$entityName])) {
 			return $imageSizeUsagesTranslations[$entityName][$sizeName];
 		} else {
-			return $translator->trans('Není zadáno pro entitu ' . $entityName . ' a rozměr ' . $sizeName);
+			return $translator->trans('Není zadáno pro entitu %entityName% a rozměr %sizeName%', [
+				'%entityName%' => $entityName,
+				'%sizeName%' => $sizeName,
+			]);
 		}
 	}
 
@@ -176,6 +179,10 @@ class ImageController extends Controller {
 		$translator = $this->get('translator');
 		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 
-		return $translator->trans('Není zadáno pro entitu ' . $entityName . ', typ ' . $typeName . ' a rozměr ' . $sizeName);
+		return $translator->trans('Není zadáno pro entitu %entityName%, typ %typeName% a rozměr %sizeName%', [
+			'%entityName%' => $entityName,
+			'%typeName%' => $typeName,
+			'%sizeName%' => $sizeName,
+		]);
 	}
 }
