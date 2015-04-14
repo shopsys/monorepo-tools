@@ -89,7 +89,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 		$tokens = $compiledRoute->getTokens();
 		$tokens[] = [
 				0 => 'text',
-				1 => '/' . $friendlyUrl->getUrl(),
+				1 => '/' . $friendlyUrl->getSlug(),
 			];
 
 		return $this->doGenerate(

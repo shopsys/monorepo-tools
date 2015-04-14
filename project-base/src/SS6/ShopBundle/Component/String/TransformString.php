@@ -32,14 +32,14 @@ class TransformString {
 	 * @return string
 	 * @link http://php.vrana.cz/vytvoreni-pratelskeho-url.php
 	 */
-	public static function stringToFriendlyUrl($string) {
-		$url = $string;
-		$url = preg_replace('~[^\\pL0-9_]+~u', '-', $url);
-		$url = trim($url, '-');
-		$url = iconv('utf-8', 'us-ascii//TRANSLIT', $url);
-		$url = strtolower($url);
-		$url = preg_replace('~[^-a-z0-9_]+~', '', $url);
+	public static function stringToFriendlyUrlSlug($string) {
+		$slug = $string;
+		$slug = preg_replace('~[^\\pL0-9_]+~u', '-', $slug);
+		$slug = trim($slug, '-');
+		$slug = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
+		$slug = strtolower($slug);
+		$slug = preg_replace('~[^-a-z0-9_]+~', '', $slug);
 
-		return $url;
+		return $slug;
 	}
 }

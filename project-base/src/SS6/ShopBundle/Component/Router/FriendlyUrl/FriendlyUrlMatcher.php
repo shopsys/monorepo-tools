@@ -24,7 +24,7 @@ class FriendlyUrlMatcher {
 	 * @return array
 	 */
 	public function match($pathinfo, RouteCollection $routeCollection, DomainConfig $domainConfig) {
-		$friendlyUrl = $this->friendlyUrlRepository->findByDomainIdAndUrl($domainConfig->getId(), trim($pathinfo, '/'));
+		$friendlyUrl = $this->friendlyUrlRepository->findByDomainIdAndSlug($domainConfig->getId(), trim($pathinfo, '/'));
 
 		if ($friendlyUrl === null) {
 			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();

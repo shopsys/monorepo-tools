@@ -92,9 +92,9 @@ class FriendlyUrlService {
 				&& $domainConfig->getLocale() === $locale
 			) {
 				$nameForUrl = $name . ($name === null ? '' : '-' . $indexPostfix);
-				$url = TransformString::stringToFriendlyUrl($nameForUrl);
+				$slug = TransformString::stringToFriendlyUrlSlug($nameForUrl);
 
-				return new FriendlyUrl($routeName, $entityId, $domainConfig->getId(), $url);
+				return new FriendlyUrl($routeName, $entityId, $domainConfig->getId(), $slug);
 			}
 		}
 

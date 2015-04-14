@@ -43,19 +43,19 @@ class FriendlyUrl {
 	 * @ORM\Column(type="text")
 	 * @ORM\Id
 	 */
-	private $url;
+	private $slug;
 
 	/**
 	 * @param string $routeName
 	 * @param int $entityId
 	 * @param int $domainId
-	 * @param string $url
+	 * @param string $slug
 	 */
-	public function __construct($routeName, $entityId, $domainId, $url) {
+	public function __construct($routeName, $entityId, $domainId, $slug) {
 		$this->routeName = $routeName;
 		$this->entityId = $entityId;
 		$this->domainId = $domainId;
-		$this->url = $url;
+		$this->slug = $slug;
 	}
 
 	/**
@@ -82,8 +82,8 @@ class FriendlyUrl {
 	/**
 	 * @return string
 	 */
-	public function getUrl() {
-		return $this->url;
+	public function getSlug() {
+		return $this->slug;
 	}
 
 }

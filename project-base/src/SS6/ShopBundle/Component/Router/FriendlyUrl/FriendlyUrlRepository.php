@@ -28,14 +28,14 @@ class FriendlyUrlRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param string $url
+	 * @param string $slug
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
 	 */
-	public function findByDomainIdAndUrl($domainId, $url) {
+	public function findByDomainIdAndSlug($domainId, $slug) {
 		return $this->getFriendlyUrlRepository()->findOneBy(
 			[
 				'domainId' => $domainId,
-				'url' => $url,
+				'slug' => $slug,
 			]
 		);
 	}
@@ -52,7 +52,7 @@ class FriendlyUrlRepository {
 			'routeName' => $routeName,
 			'entityId' => $entityId,
 		];
-		$friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria, ['url' => 'ASC']);
+		$friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria, ['slug' => 'ASC']);
 
 		if ($friendlyUrl === null) {
 			throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException();
