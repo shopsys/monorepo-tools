@@ -1,0 +1,44 @@
+{% macro renderFilterForm(filterForm, actionRoute, actionRouteParams, resetRoute, resetRouteParams, searchText) %}
+	{{ form_start(filterForm, { action: url(actionRoute, actionRouteParams) }) }}
+		{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
+
+		{% set isSearch = searchText is not null %}
+
+		{% if isSearch %}
+			<input type="hidden" name="q" value="{{ searchText|escape('html_attr') }}" />
+		{% endif %}
+
+		<div class="box-filter__group">
+			<div class="box-filter__group__item">
+				{{ form_row(filterForm.minimalPrice, {label: 'Cena od', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+			</div>
+
+			<div class="box-filter__group__item">
+				{{ form_row(filterForm.maximalPrice, {label: 'Cena do', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+			</div>
+
+		</div>
+
+		{{ form_row(filterForm.inStock, {label: 'Jen zboží skladem'}) }}
+
+		{% if filterForm.flags is empty %}
+			{% do filterForm.flags.setRendered %}
+		{% else %}
+			{{ form_row(filterForm.flags, { label: 'Příznaky' }) }}
+		{% endif %}
+
+		{% if isSearch or filterForm.parameters is empty %}
+			{% do filterForm.parameters.setRendered %}
+		{% else %}
+			{{ form_row(filterForm.parameters, { label: 'Parametry' }) }}
+		{% endif %}
+
+		<div class="box-filter__buttons">
+
+			<a class="button button--simple mr-half" href="{{ url(resetRoute, resetRouteParams) }}">{{ 'Vynulovat filtr'|trans }}</a>
+
+			{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
+		</div>
+
+	{{ form_end(filterForm) }}
+{% endmacro %}
