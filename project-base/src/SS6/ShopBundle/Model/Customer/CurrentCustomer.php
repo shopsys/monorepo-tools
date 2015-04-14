@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class CurrentCustomer {
@@ -13,16 +13,16 @@ class CurrentCustomer {
 	private $tokenStorage;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
-	private $pricingGroupFacade;
+	private $pricingGroupSettingFacade;
 
 	public function __construct(
 		TokenStorage $tokenStorage,
-		PricingGroupFacade $pricingGroupFacade
+		PricingGroupSettingFacade $ricingGroupSettingFacade
 	) {
 		$this->tokenStorage = $tokenStorage;
-		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->pricingGroupSettingFacade = $ricingGroupSettingFacade;
 	}
 
 	/**
@@ -31,7 +31,7 @@ class CurrentCustomer {
 	public function getPricingGroup() {
 		$user = $this->findCurrentUser();
 		if ($user === null) {
-			return $this->pricingGroupFacade->getDefaultPricingGroupByCurrentDomain();
+			return $this->pricingGroupSettingFacade->getDefaultPricingGroupByCurrentDomain();
 		} else {
 			return $user->getPricingGroup();
 		}

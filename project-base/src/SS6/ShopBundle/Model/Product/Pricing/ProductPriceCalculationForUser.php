@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculationForUser {
@@ -20,18 +20,18 @@ class ProductPriceCalculationForUser {
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
-	private $pricingGroupFacade;
+	private $pricingGroupSettingFacade;
 
 	public function __construct(
 		ProductPriceCalculation $productPriceCalculation,
 		CurrentCustomer $currentCustomer,
-		PricingGroupFacade $pricingGroupFacade
+		PricingGroupSettingFacade $pricingGroupSettingFacade
 	) {
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->currentCustomer = $currentCustomer;
-		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 	}
 
 	/**
@@ -54,7 +54,7 @@ class ProductPriceCalculationForUser {
 	 */
 	public function calculatePriceForUserAndDomainId(Product $product, $domainId, User $user = null) {
 		if ($user === null) {
-			$pricingGroup = $this->pricingGroupFacade->getDefaultPricingGroupByDomainId($domainId);
+			$pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
 		} else {
 			$pricingGroup = $user->getPricingGroup();
 		}
