@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class ProductOnCurrentDomainFacade {
 
@@ -37,18 +38,25 @@ class ProductOnCurrentDomainFacade {
 	 */
 	private $categoryRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+	 */
+	private $productVisibilityRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		Domain $domain,
 		ProductDetailFactory $productDetailFactory,
 		CurrentCustomer $currentCustomer,
-		CategoryRepository $categoryRepository
+		CategoryRepository $categoryRepository,
+		ProductVisibilityRepository $productVisibilityRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
 		$this->currentCustomer = $currentCustomer;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->categoryRepository = $categoryRepository;
+		$this->productVisibilityRepository = $productVisibilityRepository;
 	}
 
 	/**
@@ -74,7 +82,7 @@ class ProductOnCurrentDomainFacade {
 		$accessoriesVisibleOnDomain = [];
 
 		foreach ($accessories as $accessory) {
-			$accessoryVisibility = $this->productRepository->findProductVisibility(
+			$accessoryVisibility = $this->productVisibilityRepository->findProductVisibility(
 				$product,
 				$this->currentCustomer->getPricingGroup(),
 				$this->domain->getId()

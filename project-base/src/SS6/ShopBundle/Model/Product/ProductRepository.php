@@ -68,10 +68,6 @@ class ProductRepository {
 		return $this->em->getRepository(ProductDomain::class);
 	}
 
-	private function getProductVisibilityRepository() {
-		return $this->em->getRepository(ProductVisibility::class);
-	}
-
 	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Product\Product|null
@@ -408,24 +404,6 @@ class ProductRepository {
 			->setParameter('availability', $availability->getId());
 
 		return $queryBuilder->getQuery()->execute();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility|null
-	 */
-	public function findProductVisibility(
-		Product $product,
-		PricingGroup $pricingGroup,
-		$domainId
-	) {
-		return $this->getProductVisibilityRepository()->find([
-			'product' => $product->getId(),
-			'pricingGroup' => $pricingGroup->getId(),
-			'domainId' => $domainId,
-		]);
 	}
 
 }
