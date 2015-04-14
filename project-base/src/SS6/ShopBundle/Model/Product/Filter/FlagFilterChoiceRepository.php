@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Product\Filter;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Model\Category\Category;
@@ -12,20 +11,13 @@ use SS6\ShopBundle\Model\Product\ProductRepository;
 class FlagFilterChoiceRepository {
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	public function __construct(
-		EntityManager $em,
 		ProductRepository $productRepository
 	) {
-		$this->em = $em;
 		$this->productRepository = $productRepository;
 	}
 
@@ -64,7 +56,7 @@ class FlagFilterChoiceRepository {
 			->select('1')
 			->join('p.flags', 'pf', Join::WITH, 'pf.id = f.id');
 
-		$flagsQueryBuilder = $this->em->createQueryBuilder();
+		$flagsQueryBuilder = $productsQueryBuilder->getEntityManager()->createQueryBuilder();
 		$flagsQueryBuilder
 			->select('f')
 			->from(Flag::class, 'f')

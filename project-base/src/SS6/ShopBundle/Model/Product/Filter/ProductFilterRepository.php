@@ -16,20 +16,13 @@ class ProductFilterRepository {
 	const DAYS_FOR_STOCK_FILTER = 0;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
 	 */
 	private $queryBuilderService;
 
 	public function __construct(
-		EntityManager $em,
 		QueryBuilderService $queryBuilderService
 	) {
-		$this->em = $em;
 		$this->queryBuilderService = $queryBuilderService;
 	}
 
@@ -89,7 +82,7 @@ class ProductFilterRepository {
 	public function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
 		$flagsCount = count($flags);
 		if ($flagsCount !== 0) {
-			$flagsQueryBuilder = $this->getFlagsQueryBuilder($flags);
+			$flagsQueryBuilder = $this->getFlagsQueryBuilder($flags, $productsQueryBuilder->getEntityManager());
 
 			$productsQueryBuilder->andWhere($productsQueryBuilder->expr()->exists($flagsQueryBuilder));
 			foreach ($flagsQueryBuilder->getParameters() as $parameter) {
@@ -100,10 +93,11 @@ class ProductFilterRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @param \Doctrine\ORM\EntityManager $em
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getFlagsQueryBuilder(array $flags) {
-		$flagsQueryBuilder = $this->em->createQueryBuilder();
+	private function getFlagsQueryBuilder(array $flags, EntityManager $em) {
+		$flagsQueryBuilder = $em->createQueryBuilder();
 
 		$orExpr = $flagsQueryBuilder->expr()->orX();
 

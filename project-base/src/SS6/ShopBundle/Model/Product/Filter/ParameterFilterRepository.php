@@ -10,17 +10,6 @@ use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 class ParameterFilterRepository {
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
-
-	public function __construct(
-		EntityManager $em
-	) {
-		$this->em = $em;
-	}
-
-	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters
 	 */
@@ -37,6 +26,7 @@ class ParameterFilterRepository {
 
 			$parameterQueryBuilder = $this->getParameterQueryBuilder(
 				$parameterFilterData,
+				$productsQueryBuilder->getEntityManager(),
 				$parameterIndex,
 				$valueIndex
 			);
@@ -52,19 +42,21 @@ class ParameterFilterRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
+	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param int $parameterIndex
 	 * @param int $valueIndex
 	 * @return \Doctrine\DBAL\Query\QueryBuilder
 	 */
 	private function getParameterQueryBuilder(
 		ParameterFilterData $parameterFilterData,
+		EntityManager $em,
 		&$parameterIndex,
 		&$valueIndex
 	) {
 		$ppvAlias = 'ppv' . $parameterIndex;
 		$parameterPlaceholder = ':parameter' . $parameterIndex;
 
-		$parameterQueryBuilder = $this->em->createQueryBuilder();
+		$parameterQueryBuilder = $em->createQueryBuilder();
 
 		$valuesExpr = $this->getValuesExpr(
 			$parameterFilterData->values,
