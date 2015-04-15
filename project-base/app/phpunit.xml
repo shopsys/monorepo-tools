@@ -14,21 +14,21 @@
 >
 
 	<testsuites>
-		<testsuite name="Tests">
-			<directory>../src/*/*Bundle/Tests</directory>
-			<directory>../src/*/Bundle/*Bundle/Tests</directory>
+		<testsuite name="Unit">
+			<directory>../src/*/*Bundle/Tests/Unit</directory>
+			<directory>../src/*/Bundle/*Bundle/Tests/Unit</directory>
 		</testsuite>
-		<testsuite name="TestsDb">
-			<directory>../src/*/*Bundle/TestsDb</directory>
-			<directory>../src/*/Bundle/*Bundle/TestsDb</directory>
+		<testsuite name="Database">
+			<directory>../src/*/*Bundle/Tests/Database</directory>
+			<directory>../src/*/Bundle/*Bundle/Tests/Database</directory>
 		</testsuite>
-		<testsuite name="TestsCrawler">
-			<directory>../src/*/*Bundle/TestsCrawler</directory>
-			<directory>../src/*/Bundle/*Bundle/TestsCrawler</directory>
+		<testsuite name="Crawler">
+			<directory>../src/*/*Bundle/Tests/Crawler</directory>
+			<directory>../src/*/Bundle/*Bundle/Tests/Crawler</directory>
 		</testsuite>
-		<testsuite name="TestsPerformance">
-			<directory>../src/*/*Bundle/TestsPerformance</directory>
-			<directory>../src/*/Bundle/*Bundle/TestsPerformance</directory>
+		<testsuite name="Performance">
+			<directory>../src/*/*Bundle/Tests/Performance</directory>
+			<directory>../src/*/Bundle/*Bundle/Tests/Performance</directory>
 		</testsuite>
 	</testsuites>
 
@@ -37,14 +37,15 @@
 			<directory>../src</directory>
 			<exclude>
 				<directory>../src/*/*Bundle/Resources</directory>
-				<directory>../src/*/*Bundle/Tests</directory>
-				<directory>../src/*/*Bundle/TestsDb</directory>
-				<directory>../src/*/*Bundle/TestsCrawler</directory>
+				<directory>../src/*/*Bundle/Tests/Unit</directory>
+				<directory>../src/*/*Bundle/Tests/Database</directory>
+				<directory>../src/*/*Bundle/Tests/Crawler</directory>
+				<directory>../src/*/*Bundle/Tests/Performance</directory>
 				<directory>../src/*/Bundle/*Bundle/Resources</directory>
-				<directory>../src/*/Bundle/*Bundle/Tests</directory>
-				<directory>../src/*/Bundle/*Bundle/TestsDb</directory>
-				<directory>../src/*/Bundle/*Bundle/TestsCrawler</directory>
-				<directory>../src/*/Bundle/*Bundle/TestsPerformance</directory>
+				<directory>../src/*/Bundle/*Bundle/Tests/Unit</directory>
+				<directory>../src/*/Bundle/*Bundle/Tests/Database</directory>
+				<directory>../src/*/Bundle/*Bundle/Tests/Crawler</directory>
+				<directory>../src/*/Bundle/*Bundle/Tests/Performance</directory>
 			</exclude>
 		</whitelist>
 	</filter>
