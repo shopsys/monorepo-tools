@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\Listing;
 
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
 class ProductListAdminFacade {
@@ -13,17 +13,20 @@ class ProductListAdminFacade {
 	private $productListAdminRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
-	private $pricingGroupFacade;
+	private $pricingGroupSettingFacade;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
 	 */
-	public function __construct(ProductListAdminRepository $productListAdminRepository, PricingGroupFacade $pricingGroupFacade) {
+	public function __construct(
+		ProductListAdminRepository $productListAdminRepository,
+		PricingGroupSettingFacade $pricingGroupSettingFacade
+	) {
 		$this->productListAdminRepository = $productListAdminRepository;
-		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 	}
 
 	/**
@@ -34,7 +37,7 @@ class ProductListAdminFacade {
 		 * temporary solution -
 		 * when product price type calculation is set to manual, price for first domain is shown in admin product list
 		 */
-		$defaultPricingGroupId = $this->pricingGroupFacade->getDefaultPricingGroupByDomainId(1)->getId();
+		$defaultPricingGroupId = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId(1)->getId();
 
 		return $this->productListAdminRepository->getProductListQueryBuilder($defaultPricingGroupId);
 	}

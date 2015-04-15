@@ -2,20 +2,20 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class UserDataFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
-	private $pricingGroupFacade;
+	private $pricingGroupSettingFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
 	 */
-	public function __construct(PricingGroupFacade $pricingGroupFacade) {
-		$this->pricingGroupFacade = $pricingGroupFacade;
+	public function __construct(PricingGroupSettingFacade $pricingGroupSettingFacade) {
+		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 	}
 
 	/**
@@ -23,7 +23,7 @@ class UserDataFactory {
 	 */
 	public function createDefault($domainId) {
 		$userData = new UserData();
-		$userData->pricingGroup = $this->pricingGroupFacade->getDefaultPricingGroupByDomainId($domainId);
+		$userData->pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
 
 		return $userData;
 	}

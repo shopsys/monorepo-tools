@@ -6,7 +6,10 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductVisibility;
 
 class ProductVisibilityRepository {
 
@@ -21,18 +24,18 @@ class ProductVisibilityRepository {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
 	 */
-	private $pricingGroupFacade;
+	private $pricingGroupRepository;
 
 	public function __construct(
 		EntityManager $em,
 		Domain $domain,
-		PricingGroupFacade $pricingGroupFacade
+		PricingGroupRepository $pricingGroupRepository
 	) {
 		$this->em = $em;
 		$this->domain = $domain;
-		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->pricingGroupRepository = $pricingGroupRepository;
 	}
 
 	public function refreshProductsVisibility() {
@@ -57,7 +60,7 @@ class ProductVisibilityRepository {
 	private function refreshProductVisibility() {
 		$now = new DateTime();
 
-		foreach ($this->pricingGroupFacade->getAll() as $pricingGroup) {
+		foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
 			$domain = $this->domain->getDomainConfigById($pricingGroup->getDomainId());
 			$query = $this->em->createNativeQuery('UPDATE product_visibilities AS pv
 					SET visible = CASE
@@ -111,6 +114,31 @@ class ProductVisibilityRepository {
 					'pricingGroupId' => $pricingGroup->getId(),
 				]);
 		}
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
+	private function getProductVisibilityRepository() {
+		return $this->em->getRepository(ProductVisibility::class);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility|null
+	 */
+	public function findProductVisibility(
+		Product $product,
+		PricingGroup $pricingGroup,
+		$domainId
+	) {
+		return $this->getProductVisibilityRepository()->find([
+			'product' => $product->getId(),
+			'pricingGroup' => $pricingGroup->getId(),
+			'domainId' => $domainId,
+		]);
 	}
 
 }

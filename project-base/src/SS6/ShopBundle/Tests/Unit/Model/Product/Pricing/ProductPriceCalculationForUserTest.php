@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -27,7 +27,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$expectedProductPrice = new Price(1, 1, 1);
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
-		$pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, [], [], '', false);
+		$pricingGroupSettingFacadeMock = $this->getMock(PricingGroupSettingFacade::class, [], [], '', false);
 
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
 		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($expectedProductPrice);
@@ -35,7 +35,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculationForUser = new ProductPriceCalculationForUser(
 			$productPriceCalculationMock,
 			$currentCustomerMock,
-			$pricingGroupFacadeMock
+			$pricingGroupSettingFacadeMock
 		);
 
 		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, 1, $user);
@@ -50,7 +50,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
 
-		$pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, ['getDefaultPricingGroupByDomainId'], [], '', false);
+		$pricingGroupFacadeMock = $this->getMock(PricingGroupSettingFacade::class, ['getDefaultPricingGroupByDomainId'], [], '', false);
 		$pricingGroupFacadeMock
 			->expects($this->once())
 			->method('getDefaultPricingGroupByDomainId')

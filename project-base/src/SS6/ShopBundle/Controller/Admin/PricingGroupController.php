@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,8 +17,14 @@ class PricingGroupController extends Controller {
 	 */
 	private $translator;
 
-	public function __construct(Translator $translator) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 */
+	private $pricingGroupSettingFacade;
+
+	public function __construct(Translator $translator, PricingGroupSettingFacade $pricingGroupSettingFacade) {
 		$this->translator = $translator;
+		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 	}
 
 	/**
@@ -87,17 +94,18 @@ class PricingGroupController extends Controller {
 		try {
 			$pricingGroup = $pricingGroupFacade->getById($id);
 			$pricingGroupsNamesById = [];
-			foreach ($pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId()) as $newPricingGroup) {
+			$pricingGroups = $pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
+			foreach ($pricingGroups as $newPricingGroup) {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
 			}
-			if ($pricingGroupFacade->isPricingGroupUsed($pricingGroup)) {
+			if ($this->pricingGroupSettingFacade->isPricingGroupUsed($pricingGroup)) {
 				$message = $this->translator->trans(
 					'Pro odstranění cenové skupiny "%name%" musíte zvolit, která se má všude, '
 					. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?',
 					['%name%' => $pricingGroup->getName()]
 				);
 
-				if ($pricingGroupFacade->isPricingGroupDefault($pricingGroup)) {
+				if ($this->pricingGroupSettingFacade->isPricingGroupDefault($pricingGroup)) {
 					$message = $this->translator->trans(
 						'Cenová skupina "%name%" je nastavena jako výchozí. '
 						. 'Pro její odstranění musíte zvolit, která se má všude, '
@@ -130,16 +138,15 @@ class PricingGroupController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function settingsAction(Request $request) {
-		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 
-		$pricingGroups = $pricingGroupFacade->getPricingGroupsBySelectedDomainId();
+		$pricingGroups = $this->pricingGroupSettingFacade->getPricingGroupsBySelectedDomainId();
 		$form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
 
 		$pricingGroupSettingsFormData = [];
-		$pricingGroupSettingsFormData['defaultPricingGroup'] =  $pricingGroupFacade->getDefaultPricingGroupBySelectedDomain();
+		$pricingGroupSettingsFormData['defaultPricingGroup'] = $this->pricingGroupSettingFacade
+			->getDefaultPricingGroupBySelectedDomain();
 
 		$form->setData($pricingGroupSettingsFormData);
 
@@ -147,7 +154,7 @@ class PricingGroupController extends Controller {
 
 		if ($form->isValid()) {
 			$pricingGroupSettingsFormData = $form->getData();
-			$pricingGroupFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+			$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
 			$flashMessageSender->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));

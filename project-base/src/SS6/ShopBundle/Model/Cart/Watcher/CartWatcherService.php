@@ -6,7 +6,7 @@ use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class CartWatcherService {
 
@@ -16,9 +16,9 @@ class CartWatcherService {
 	private $productPriceCalculationForUser;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
 	 */
-	private $productRepository;
+	private $productVisibilityRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -27,16 +27,16 @@ class CartWatcherService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
 	 * @param \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ProductRepository $productRepository,
+		ProductVisibilityRepository $productVisibilityRepository,
 		Domain $domain
 	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
-		$this->productRepository = $productRepository;
+		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->domain = $domain;
 	}
 
@@ -65,7 +65,7 @@ class CartWatcherService {
 		$notVisibleItems = [];
 		foreach ($cart->getItems() as $item) {
 			try {
-				$productVisibility = $this->productRepository
+				$productVisibility = $this->productVisibilityRepository
 					->findProductVisibility(
 						$item->getProduct(),
 						$currentCustomer->getPricingGroup(),
