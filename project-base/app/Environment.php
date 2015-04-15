@@ -12,6 +12,7 @@ class Environment {
 
 	const FILE_DEVELOPMENT = 'DEVELOPMENT';
 	const FILE_PRODUCTION = 'PRODUCTION';
+	const FILE_TEST = 'TEST';
 
 	/**
 	 * @param \Composer\Script\Event $event
@@ -63,7 +64,9 @@ class Environment {
 	 * @return string|null
 	 */
 	private static function getEnvironmentSetting() {
-		if (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
+		if (is_file(self::getRootDir() . '/' . self::FILE_TEST)) {
+			return self::ENVIRONMENT_TEST;
+		}	elseif (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
 			return self::ENVIRONMENT_DEVELOPMENT;
 		} elseif (is_file(self::getRootDir() . '/' . self::FILE_PRODUCTION)) {
 			return self::ENVIRONMENT_PRODUCTION;

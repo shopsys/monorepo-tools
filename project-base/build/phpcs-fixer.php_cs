@@ -39,10 +39,19 @@ $config = Symfony\CS\Config\Config::create()
 // variable $path is available from include from FixCommand::execute()
 if (!is_dir($path) && !is_file($path)) {
 	$files = [];
+
 	foreach (explode(' ', trim($path)) as $filepath) {
+		if (strpos($filepath, '_generated') !== false) {
+			continue;
+		}
+
 		$files[] = new \SplFileInfo($filepath);
 	}
+
 	$config->finder(new \ArrayIterator($files));
+} else {
+	$config->getFinder()
+		->exclude('_generated');
 }
 
 return $config;

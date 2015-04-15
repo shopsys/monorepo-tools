@@ -79,6 +79,11 @@
 					<!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
 					<regexp pattern="\.php\s*$" />
 				</linecontainsregexp>
+
+				<!-- ignore Codeception generated class for running acceptance tests -->
+				<linecontainsregexp>
+					<regexp pattern="^(?!src/SS6/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+				</linecontainsregexp>
 			</filterchain>
 		</property>
 	</target>
@@ -94,6 +99,7 @@
 			<arg value="--extensions=php"/>
 			<arg value="--encoding=utf-8"/>
 			<arg value="-sp"/>
+			<arg value="--ignore=${path.phpcs.ignored}"/>
 			<arg path="${path.src}"/>
 		</exec>
 	</target>
@@ -152,6 +158,7 @@
 					<arg value="--extensions=php"/>
 					<arg value="--encoding=utf-8"/>
 					<arg value="-sp"/>
+					<arg value="--ignore=${path.phpcs.ignored}"/>
 					<arg line="${diff.files.phpcs}"/>
 				</exec>
 			</then>
@@ -227,6 +234,8 @@
 			checkreturn="true"
 		>
 			<arg path="${path.src}"/>
+			<arg value="--exclude"/>
+			<arg value="${path.phplint.ignored}"/>
 		</exec>
 	</target>
 
@@ -267,6 +276,8 @@
 			<arg value="text"/>
 			<arg value="${path.phpmd.ruleset}"/>
 			<arg value="--extensions=php"/>
+			<arg value="--exclude"/>
+			<arg value="${path.phpmd.ignored}"/>
 		</exec>
 	</target>
 
@@ -295,6 +306,8 @@
 					<arg value="text"/>
 					<arg value="${path.phpmd.ruleset}"/>
 					<arg value="--extensions=php"/>
+					<arg value="--exclude"/>
+					<arg value="${path.phpmd.ignored}"/>
 				</exec>
 			</then>
 		</if>
@@ -315,6 +328,18 @@
 		</exec>
 	</target>
 
+	<target name="selenium-start">
+		<exec
+				executable="${path.java.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="-jar" />
+			<arg path="vendor/se/selenium-server-standalone/composer/bin/selenium-server-standalone.jar" />
+		</exec>
+	</target>
+
 	<target name="tests-unit">
 		<exec
 			executable="${path.phpunit.executable}"
@@ -326,6 +351,54 @@
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
 			<arg value="Unit"/>
+		</exec>
+	</target>
+
+	<target name="tests-acceptance" depends="tests-acceptance-build">
+		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
+		<if>
+			<not>
+				<equals arg1="${path.env.test.existed}" arg2="true" />
+			</not>
+			<then>
+				<touch file="${path.root}/TEST" />
+			</then>
+		</if>
+
+		<trycatch>
+			<try>
+				<exec
+				executable="${path.codeception.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+					<arg value="run" />
+					<arg value="--config=${path.codeception.configuration}" />
+				</exec>
+			</try>
+			<finally>
+				<if>
+					<not>
+						<equals arg1="${path.env.test.existed}" arg2="true" />
+					</not>
+					<then>
+						<delete file="${path.root}/TEST" />
+					</then>
+				</if>
+			</finally>
+		</trycatch>
+	</target>
+
+	<target name="tests-acceptance-build">
+		<exec
+			executable="${path.codeception.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="build" />
+			<arg value="--config=${path.codeception.configuration}" />
 		</exec>
 	</target>
 

@@ -1,0 +1,18 @@
+namespace: SS6\ShopBundle\Tests\Test\Codeception
+actor: Tester
+paths:
+  tests: ../src/SS6/ShopBundle/Tests/Acceptance
+  log: ../app/logs/codeception
+  data: ../src/SS6/ShopBundle/Tests/Acceptance/data
+  support: ../src/SS6/ShopBundle/Tests/Test/Codeception
+settings:
+  bootstrap: _bootstrap.php
+  colors: true
+  memory_limit: 1024M
+modules:
+  config:
+    Db:
+      dsn: ''
+      user: ''
+      password: ''
+      dump: ../src/SS6/ShopBundle/Tests/Acceptance/data/dump.sql
