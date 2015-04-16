@@ -15,7 +15,9 @@
 						{{ form_id(order) }}
 						<div class="form-line">
 							<span class="form-line__text">
-								<a href="{{ url('front_customer_order_detail_unregistered', { urlHash: order.urlHash }) }}" target="_blank">{{ url('front_customer_order_detail_unregistered', { urlHash: order.urlHash }) }}</a>
+								<a href="{{ findUrlByDomainId('front_customer_order_detail_unregistered', { urlHash: order.urlHash }, order.domainId) }}" target="_blank">
+									{{ findUrlByDomainId('front_customer_order_detail_unregistered', { urlHash: order.urlHash }, order.domainId) }}
+								</a>
 							</span>
 						</div>
 						<div class="form-line">
