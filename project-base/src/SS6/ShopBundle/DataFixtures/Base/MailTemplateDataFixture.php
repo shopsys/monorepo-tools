@@ -24,6 +24,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'Čislo objednávky: {number} <br />'
 			. 'Datum a čas vytvoření: {date} <br />'
 			. 'URL adresa eshopu: {url} <br />'
+			. 'URL adresa na detail objednávky: {order_detail_url} <br />'
 			. 'Doprava: {transport} <br />'
 			. 'Platba: {payment} <br />'
 			. 'Celková cena s DPH: {total_price} <br />'
