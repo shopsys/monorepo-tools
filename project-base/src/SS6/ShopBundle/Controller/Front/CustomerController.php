@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\Customer\CustomerData;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,6 +100,8 @@ class CustomerController extends Controller {
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$domain = $this->get(Domain::class);
+		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 
 		if ($orderNumber !== null) {
 			if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
@@ -115,7 +118,7 @@ class CustomerController extends Controller {
 				return $this->redirect($this->generateUrl('front_customer_orders'));
 			}
 		} else {
-			$order = $orderFacade->getByUrlHash($urlHash);
+			$order = $orderFacade->getByUrlHashAndDomain($urlHash, $domain->getId());
 			/* @var $order \SS6\ShopBundle\Model\Order\Order */
 		}
 
