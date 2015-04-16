@@ -223,13 +223,10 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
-		$queryBuilder = $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
+		$queryBuilder = $this->getAllQueryBuilder()
 			->join(CategoryDomain::class, 'cd', Join::WITH, 'cd.category = c.id')
-			->where('cd.domainId = :domainId')
-				->andWhere('cd.visible = TRUE')
-			->orderBy('c.id');
+			->andWhere('cd.domainId = :domainId')
+			->andWhere('cd.visible = TRUE');
 
 		$queryBuilder->setParameter('domainId', $domainId);
 
@@ -253,14 +250,9 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public function findProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
-		$qb = $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
-			->join('c.domains', 'cd')
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId())
 			->join('c.products', 'cp')
-			->where('cd.visible = TRUE')
-				->andWhere('cd.domainId = :domainId')
-				->andWhere('cp = :product')
+			->andWhere('cp = :product')
 			->orderBy('c.level DESC, c.lft')
 			->setMaxResults(1);
 
