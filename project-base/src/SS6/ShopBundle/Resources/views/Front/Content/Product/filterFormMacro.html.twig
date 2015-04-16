@@ -1,8 +1,8 @@
-{% macro renderFilterForm(filterForm, actionRoute, actionRouteParams, resetRoute, resetRouteParams, searchText) %}
-	{{ form_start(filterForm, { action: url(actionRoute, actionRouteParams) }) }}
+{% macro filterForm(filterForm, actionUrl, resetUrl, searchText, page) %}
+	{{ form_start(filterForm, { action: actionUrl }) }}
 		{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
 
-		{% set isSearch = searchText is not null %}
+		{% set isSearch = page == 'search' %}
 
 		{% if isSearch %}
 			<input type="hidden" name="q" value="{{ searchText|escape('html_attr') }}" />
@@ -35,7 +35,7 @@
 
 		<div class="box-filter__buttons">
 
-			<a class="button button--simple mr-half" href="{{ url(resetRoute, resetRouteParams) }}">{{ 'Vynulovat filtr'|trans }}</a>
+			<a class="button button--simple mr-half" href="{{ resetUrl }}">{{ 'Vynulovat filtr'|trans }}</a>
 
 			{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
 		</div>

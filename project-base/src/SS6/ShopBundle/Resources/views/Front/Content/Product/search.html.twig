@@ -1,6 +1,6 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 {% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
-{% import '@SS6Shop/Front/Content/Product/filterFormMacro.html.twig' as filterFormMacro %}
+{% import '@SS6Shop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block title %}
@@ -35,7 +35,7 @@
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
 		<div class="box-filter">
-			{{ filterFormMacro.renderFilterForm(filterForm, 'front_product_search', {}, 'front_product_search', { q: searchText }, searchText) }}
+			{{ productFilterForm.filterForm(filterForm, url('front_product_search'), url('front_product_search', { q: searchText }), searchText, 'search') }}
 		</div>
 	{% endif %}
 
