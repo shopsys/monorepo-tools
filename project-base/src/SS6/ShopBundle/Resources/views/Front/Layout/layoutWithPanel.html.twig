@@ -10,6 +10,7 @@
 	<div class="main-content">
 		<div class="web-content">
 			<div class="web-content__clear">
+				{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
 				{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
 				{% block main_content %}{% endblock %}
 			</div>

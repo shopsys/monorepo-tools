@@ -1,0 +1,15 @@
+{% if breadcrumbItems is not null %}
+	<a href="{{ url('front_homepage') }}"><i class="fa fa-home"></i></a>
+
+	{% for breadcrumbItem in breadcrumbItems %}
+		<span> > </span>
+
+		{% if breadcrumbItem.routeName is not null %}
+			<a href="{{ url(breadcrumbItem.routeName, breadcrumbItem.routeParameters) }}">
+				{{ breadcrumbItem.name }}
+			</a>
+		{% else %}
+			{{ breadcrumbItem.name }}
+		{% endif %}
+	{% endfor %}
+{% endif %}
