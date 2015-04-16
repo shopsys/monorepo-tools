@@ -27,6 +27,8 @@ class CartFormType extends AbstractType {
 
 		$builder
 			->add('quantities', FormType::COLLECTION, [
+				'allow_add' => true,
+				'allow_delete' => true,
 				'type' => FormType::INTEGER,
 				'constraints' => [
 						new Constraints\All([
