@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class SecurityUserRepository implements UserProviderInterface {
+class FrontendUserProvider implements UserProviderInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
@@ -66,13 +66,11 @@ class SecurityUserRepository implements UserProviderInterface {
 			$user->setLastActivity(new DateTime());
 		}
 
-		$findParams = [
-			'id' => $user->getId(),
-		];
 		if ($user instanceof UniqueLoginInterface) {
-			$findParams['loginToken'] = $user->getLoginToken();
+			$freshUser = $this->userRepository->findByIdAndLoginToken($user->getId(), $user->getLoginToken());
+		} else {
+			$freshUser = $this->userRepository->findById($user->getId());
 		}
-		$freshUser = $this->userRepository->findOne($findParams);
 
 		if ($freshUser === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active user');
@@ -86,14 +84,7 @@ class SecurityUserRepository implements UserProviderInterface {
 	 * @return bool
 	 */
 	public function supportsClass($class) {
-		return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
-	}
-
-	/**
-	 * @return string
-	 */
-	private function getEntityName() {
-		return User::class;
+		return User::class === $class || is_subclass_of($class, User::class);
 	}
 
 }

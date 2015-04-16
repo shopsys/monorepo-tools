@@ -73,10 +73,14 @@ class AdministratorRepository {
 	}
 
 	/**
-	 * @param array $findParams
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @param int $id
+	 * @param string $loginToken
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
 	 */
-	public function findOne(array $findParams) {
-		return $this->getAdministratorRepository()->findOneBy($findParams);
+	public function findByIdAndLoginToken($id, $loginToken) {
+		return $this->getUserRepository()->findOneBy([
+			'id' => $id,
+			'loginToken' => $loginToken,
+		]);
 	}
 }

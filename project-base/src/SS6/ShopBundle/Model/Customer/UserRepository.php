@@ -62,7 +62,7 @@ class UserRepository {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function getUserById($id) {
-		$user = $this->getUserRepository()->find($id);
+		$user = $this->findById($id);
 		if ($user === null) {
 			throw new \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException($id);
 		}
@@ -78,11 +78,23 @@ class UserRepository {
 	}
 
 	/**
-	 * @param array $findParams
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @param int $id
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
 	 */
-	public function findOne(array $findParams) {
-		return $this->getUserRepository()->findOneBy($findParams);
+	public function findById($id) {
+		return $this->getUserRepository()->find($id);
+	}
+
+	/**
+	 * @param int $id
+	 * @param string $loginToken
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 */
+	public function findByIdAndLoginToken($id, $loginToken) {
+		return $this->getUserRepository()->findOneBy([
+			'id' => $id,
+			'loginToken' => $loginToken,
+		]);
 	}
 
 }

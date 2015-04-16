@@ -67,8 +67,8 @@ services:
   ss6.shop.admin_navigation.menu_loader:
     class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader
 
-  ss6.shop.administrator.administrator_authentication_repository:
-    class: SS6\ShopBundle\Model\Administrator\AdministratorAuthenticationRepository
+  ss6.shop.administrator.admin_user_provider:
+    class: SS6\ShopBundle\Model\Administrator\AdminUserProvider
 
   ss6.shop.administrator.administrator_facade:
     class: SS6\ShopBundle\Model\Administrator\AdministratorFacade
@@ -246,6 +246,9 @@ services:
   ss6.shop.customer.customer_identifier_factory:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
+  ss6.shop.customer.frontend_user_provider:
+    class: SS6\ShopBundle\Model\Customer\FrontendUserProvider
+
   ss6.shop.customer.mail.customer_mail_facade:
     class: SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade
 
@@ -263,9 +266,6 @@ services:
 
   ss6.shop.customer.registration_service:
     class: SS6\ShopBundle\Model\Customer\RegistrationService
-
-  ss6.shop.customer.security_user_repository:
-    class: SS6\ShopBundle\Model\Customer\SecurityUserRepository
 
   ss6.shop.customer.user_data_factory:
     class: SS6\ShopBundle\Model\Customer\UserDataFactory

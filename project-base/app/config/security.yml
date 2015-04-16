@@ -9,10 +9,10 @@ security:
 
   providers:
     administrators:
-      id: ss6.shop.administrator.administrator_authentication_repository
+      id: ss6.shop.administrator.admin_user_provider
 
     user_identities:
-      id: ss6.shop.customer.security_user_repository
+      id: ss6.shop.customer.frontend_user_provider
 
   firewalls:
     administration:

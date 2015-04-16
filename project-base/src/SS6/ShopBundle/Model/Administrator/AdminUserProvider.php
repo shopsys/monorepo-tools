@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class AdministratorAuthenticationRepository implements UserProviderInterface {
+class AdminUserProvider implements UserProviderInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorRepository
@@ -56,13 +56,14 @@ class AdministratorAuthenticationRepository implements UserProviderInterface {
 			$administrator->setLastActivity(new DateTime());
 		}
 
-		$findParams = [
-			'id' => $administrator->getId(),
-		];
 		if ($administrator instanceof UniqueLoginInterface) {
-			$findParams['loginToken'] = $administrator->getLoginToken();
+			$freshAdministrator = $this->administratorRepository->findByIdAndLoginToken(
+				$administrator->getId(),
+				$administrator->getLoginToken()
+			);
+		} else {
+			$freshAdministrator = $this->administratorRepository->findById($administrator->getId());
 		}
-		$freshAdministrator = $this->administratorRepository->findOne($findParams);
 
 		if ($freshAdministrator === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
@@ -76,14 +77,7 @@ class AdministratorAuthenticationRepository implements UserProviderInterface {
 	 * @return bool
 	 */
 	public function supportsClass($class) {
-		return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
-	}
-
-	/**
-	 * @return string
-	 */
-	private function getEntityName() {
-		return Administrator::class;
+		return Administrator::class === $class || is_subclass_of($class, Administrator::class);
 	}
 
 }
