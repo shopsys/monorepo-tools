@@ -14,7 +14,12 @@ class CustomDateTimeFormatterFactory {
 	 */
 	public function create() {
 		$customDateTimeFormatPatternRepository = new DateTimeFormatPatternRepository();
-		$customDateTimeFormatPatternRepository->add(new DateTimeFormatPattern('y-MM-dd', 'en', IntlDateFormatter::MEDIUM));
+		$customDateTimeFormatPatternRepository->add(
+			new DateTimeFormatPattern('y-MM-dd', 'en', IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE)
+		);
+		$customDateTimeFormatPatternRepository->add(
+			new DateTimeFormatPattern('y-MM-dd, h:mm:ss a', 'en', IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM)
+		);
 
 		$dateTimeFormatter = new DateTimeFormatter($customDateTimeFormatPatternRepository);
 
