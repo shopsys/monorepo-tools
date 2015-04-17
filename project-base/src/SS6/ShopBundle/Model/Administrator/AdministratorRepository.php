@@ -71,4 +71,16 @@ class AdministratorRepository {
 			->select('COUNT(a)')
 			->getQuery()->getSingleScalarResult());
 	}
+
+	/**
+	 * @param int $id
+	 * @param string $loginToken
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 */
+	public function findByIdAndLoginToken($id, $loginToken) {
+		return $this->getUserRepository()->findOneBy([
+			'id' => $id,
+			'loginToken' => $loginToken,
+		]);
+	}
 }

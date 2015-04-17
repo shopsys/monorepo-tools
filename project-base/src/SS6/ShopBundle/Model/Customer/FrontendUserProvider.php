@@ -3,8 +3,6 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use DateTime;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
@@ -12,7 +10,12 @@ use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class SecurityUserRepository extends EntityRepository implements UserProviderInterface {
+class FrontendUserProvider implements UserProviderInterface {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 */
+	private $userRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -20,20 +23,12 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	private $domain;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
 	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
 	 */
-	public function __construct(EntityManager $em, Domain $domain) {
+	public function __construct(UserRepository $userRepository, Domain $domain) {
+		$this->userRepository = $userRepository;
 		$this->domain = $domain;
-		$userMetaData = $em->getMetadataFactory()->getMetadataFor(User::class);
-		parent::__construct($em, $userMetaData);
-	}
-
-	/**
-	 * @return \Doctrine\ORM\EntityRepository
-	 */
-	protected function getUserRepository() {
-		return $this->em->getRepository(User::class);
 	}
 
 	/**
@@ -41,10 +36,7 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function loadUserByUsername($email) {
-		$user = $this->findOneBy([
-			'email' => mb_strtolower($email),
-			'domainId' => $this->domain->getId(),
-		]);
+		$user = $this->userRepository->findUserByEmailAndDomain(mb_strtolower($email), $this->domain->getId());
 
 		if ($user === null) {
 			$message = sprintf(
@@ -74,16 +66,14 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 			$user->setLastActivity(new DateTime());
 		}
 
-		$findParams = [
-			'id' => $user->getId(),
-		];
 		if ($user instanceof UniqueLoginInterface) {
-			$findParams['loginToken'] = $user->getLoginToken();
+			$freshUser = $this->userRepository->findByIdAndLoginToken($user->getId(), $user->getLoginToken());
+		} else {
+			$freshUser = $this->userRepository->findById($user->getId());
 		}
-		$freshUser = $this->findOneBy($findParams);
 
 		if ($freshUser === null) {
-			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
+			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active user');
 		}
 
 		return $freshUser;
@@ -94,7 +84,7 @@ class SecurityUserRepository extends EntityRepository implements UserProviderInt
 	 * @return bool
 	 */
 	public function supportsClass($class) {
-		return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
+		return User::class === $class || is_subclass_of($class, User::class);
 	}
 
 }
