@@ -6,10 +6,10 @@
 
 		{% if breadcrumbItem.routeName is not null %}
 			<a href="{{ url(breadcrumbItem.routeName, breadcrumbItem.routeParameters) }}">
-				{{ breadcrumbItem.name }}
+				{{- breadcrumbItem.name -}}
 			</a>
 		{% else %}
-			{{ breadcrumbItem.name }}
+			{{- breadcrumbItem.name -}}
 		{% endif %}
 	{% endfor %}
 {% endif %}
