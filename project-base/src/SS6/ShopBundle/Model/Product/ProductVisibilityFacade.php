@@ -36,6 +36,10 @@ class ProductVisibilityFacade {
 	 * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
+		if (!$event->isMasterRequest()) {
+			return;
+		}
+
 		if ($this->recalcVisibility) {
 			$this->refreshProductsVisibility();
 		}

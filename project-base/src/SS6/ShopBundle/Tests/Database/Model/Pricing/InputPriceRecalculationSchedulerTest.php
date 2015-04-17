@@ -30,7 +30,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
 			->disableOriginalConstructor()
+			->setMethods(['isMasterRequest'])
 			->getMock();
+		$filterResponseEventMock->expects($this->any())->method('isMasterRequest')
+			->willReturn(true);
 
 		$inputPriceRecalculationScheduler = new InputPriceRecalculationScheduler($inputPriceRecalculatorMock, $setting);
 
@@ -104,7 +107,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
 			->disableOriginalConstructor()
+			->setMethods(['isMasterRequest'])
 			->getMock();
+		$filterResponseEventMock->expects($this->any())->method('isMasterRequest')
+			->willReturn(true);
 
 		$inputPriceRecalculationScheduler->scheduleSetInputPricesWithoutVat();
 		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
@@ -178,7 +184,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
 			->disableOriginalConstructor()
+			->setMethods(['isMasterRequest'])
 			->getMock();
+		$filterResponseEventMock->expects($this->any())->method('isMasterRequest')
+			->willReturn(true);
 
 		$inputPriceRecalculationScheduler->scheduleSetInputPricesWithVat();
 		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);

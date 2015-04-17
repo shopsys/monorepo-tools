@@ -45,6 +45,10 @@ class InputPriceRecalculationScheduler {
 	 * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
+		if (!$event->isMasterRequest()) {
+			return;
+		}
+
 		if ($this->recalculateInputPricesWithoutVat) {
 			$this->inputPriceRecalculator->recalculateToInputPricesWithoutVat();
 			$this->setting->set(

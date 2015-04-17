@@ -55,6 +55,10 @@ class ProductAvailabilityRecalculator {
 	 * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
+		if (!$event->isMasterRequest()) {
+			return;
+		}
+
 		$this->runScheduledRecalculations();
 	}
 

@@ -16,7 +16,13 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
 		$productVisibilityFacade->refreshProductsVisibilityDelayed();
 
-		$eventMock = $this->getMock(FilterResponseEvent::class, [], [], '', false);
+		$eventMock = $this->getMockBuilder(FilterResponseEvent::class)
+			->disableOriginalConstructor()
+			->setMethods(['isMasterRequest'])
+			->getMock();
+		$eventMock->expects($this->any())->method('isMasterRequest')
+			->willReturn(true);
+
 		$productVisibilityFacade->onKernelResponse($eventMock);
 	}
 
@@ -26,7 +32,13 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
 
-		$eventMock = $this->getMock(FilterResponseEvent::class, [], [], '', false);
+		$eventMock = $this->getMockBuilder(FilterResponseEvent::class)
+			->disableOriginalConstructor()
+			->setMethods(['isMasterRequest'])
+			->getMock();
+		$eventMock->expects($this->any())->method('isMasterRequest')
+			->willReturn(true);
+
 		$productVisibilityFacade->onKernelResponse($eventMock);
 	}
 
