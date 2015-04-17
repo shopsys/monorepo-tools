@@ -354,7 +354,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-acceptance" depends="tests-acceptance-build">
+	<target name="tests-acceptance">
 		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
 		<if>
 			<not>
