@@ -24,6 +24,7 @@ class FormType {
 	const FILE = 'file';
 	const FILE_UPLOAD = 'file_upload';
 	const HIDDEN = 'hidden';
+	const HONEY_POT = 'honey_pot';
 	const INTEGER = 'integer';
 	const LANGUAGE = 'language';
 	const LOCALE = 'locale';
