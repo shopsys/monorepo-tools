@@ -100,7 +100,7 @@ class ProductService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-	 * @return \SS6\ShopBundle\Tests\Model\Product\Pricing\ProductSellingPrice[]
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
 	 */
 	public function getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups) {
 		$productSellingPrices = [];
