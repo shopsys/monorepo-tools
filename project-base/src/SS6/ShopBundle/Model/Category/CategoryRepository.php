@@ -264,4 +264,18 @@ class CategoryRepository extends NestedTreeRepository {
 		return $qb->getQuery()->getOneOrNullResult();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getVisibleCategoryPathFromRootOnDomain(Category $category, $domainId) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
+			->andWhere('c.lft <= :lft')->setParameter('lft', $category->getLft())
+			->andWhere('c.rgt >= :rgt')->setParameter('rgt', $category->getRgt())
+			->orderBy('c.lft');
+
+		return $qb->getQuery()->getResult();
+	}
+
 }
