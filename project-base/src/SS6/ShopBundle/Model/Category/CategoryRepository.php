@@ -9,7 +9,6 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Product\Product;
 
 class CategoryRepository extends NestedTreeRepository {
@@ -244,20 +243,20 @@ class CategoryRepository extends NestedTreeRepository {
 		$queryBuilder->setParameter('searchText', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 	}
 
-	/*
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
-	public function findProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
-		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId())
+	public function findProductMainCategoryOnDomain(Product $product, $domainId) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
 			->join('c.products', 'cp')
 			->andWhere('cp = :product')
 			->orderBy('c.level DESC, c.lft')
 			->setMaxResults(1);
 
 		$qb->setParameters([
-			'domainId' => $domainConfig->getId(),
+			'domainId' => $domainId,
 			'product' => $product,
 		]);
 

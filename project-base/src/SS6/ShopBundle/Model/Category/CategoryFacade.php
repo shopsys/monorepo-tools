@@ -282,7 +282,7 @@ class CategoryFacade {
 		$mainCategoriesIndexedByDomainId = [];
 		foreach ($this->domain->getAll() as $domainConfig) {
 			$mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->categoryRepository
-				->findProductMainCategoryOnDomain($product, $domainConfig);
+				->findProductMainCategoryOnDomain($product, $domainConfig->getId());
 		}
 
 		return $mainCategoriesIndexedByDomainId;
