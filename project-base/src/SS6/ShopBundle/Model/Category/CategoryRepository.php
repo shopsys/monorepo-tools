@@ -264,11 +264,25 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
+	public function getProductMainCategoryOnDomain(Product $product, $domainId) {
+		$productMainCategory = $this->findProductMainCategoryOnDomain($product, $domainId);
+		if ($productMainCategory === null) {
+			throw new \SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException();
+		}
+
+		return $productMainCategory;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getVisibleCategoryPathFromRootOnDomain(Category $category, $domainId) {
+	public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
 		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
 			->andWhere('c.lft <= :lft')->setParameter('lft', $category->getLft())
 			->andWhere('c.rgt >= :rgt')->setParameter('rgt', $category->getRgt())
