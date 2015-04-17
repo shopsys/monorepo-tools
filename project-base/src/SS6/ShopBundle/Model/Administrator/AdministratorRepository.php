@@ -78,7 +78,7 @@ class AdministratorRepository {
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
 	 */
 	public function findByIdAndLoginToken($id, $loginToken) {
-		return $this->getUserRepository()->findOneBy([
+		return $this->getAdministratorRepository()->findOneBy([
 			'id' => $id,
 			'loginToken' => $loginToken,
 		]);
