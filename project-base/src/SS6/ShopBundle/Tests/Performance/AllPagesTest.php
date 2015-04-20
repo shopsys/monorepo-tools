@@ -63,7 +63,7 @@ class AllPagesTest extends FunctionalTestCase {
 			$pageIndex = 0;
 			foreach ($testableUrlsDataProviderData as $testUrlData) {
 				$pageIndex++;
-				list($routeName, $url, $dummyExpectedStatusCode, $asLogged) = $testUrlData;
+				list($routeName, $url, , $asLogged) = $testUrlData;
 
 				$progressLine = sprintf(
 					'%s: %3d%% (%s)',

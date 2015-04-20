@@ -36,7 +36,7 @@ class CustomerIdentifierFactory {
 			$sessionId = $this->session->getId();
 		}
 
-		$customerIdentifier = new CustomerIdentifier($this->session->getId(), $this->currentCustomer->findCurrentUser());
+		$customerIdentifier = new CustomerIdentifier($sessionId, $this->currentCustomer->findCurrentUser());
 
 		return $customerIdentifier;
 	}

@@ -96,7 +96,7 @@ class QueryPaginator implements PaginatorInterface {
 			$parametersAssoc[$parameter->getName()] = $parameter->getValue();
 		}
 
-		list($dummyQuery, $flatenedParameters) = SQLParserUtils::expandListParameters(
+		list(, $flatenedParameters) = SQLParserUtils::expandListParameters(
 			$query->getDQL(),
 			$parametersAssoc,
 			[]
