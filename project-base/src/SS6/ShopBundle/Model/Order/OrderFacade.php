@@ -259,10 +259,11 @@ class OrderFacade {
 
 	/**
 	 * @param string $urlHash
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function getByUrlHash($urlHash) {
-		return $this->orderRepository->getByUrlHash($urlHash);
+	public function getByUrlHashAndDomain($urlHash, $domainId) {
+		return $this->orderRepository->getByUrlHashAndDomain($urlHash, $domainId);
 	}
 
 	/**

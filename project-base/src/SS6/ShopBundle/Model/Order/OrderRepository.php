@@ -176,13 +176,17 @@ class OrderRepository {
 
 	/**
 	 * @param string $urlHash
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function getByUrlHash($urlHash) {
-		$order = $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
+	public function getByUrlHashAndDomain($urlHash, $domainId) {
+		$order = $this->getOrderRepository()->findOneBy([
+			'urlHash' => $urlHash,
+			'domainId' => $domainId,
+		]);
 
 		if ($order === null) {
-			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException('Order with urlHash "' . $urlHash . '" not found.');
+			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException();
 		}
 
 		return $order;
