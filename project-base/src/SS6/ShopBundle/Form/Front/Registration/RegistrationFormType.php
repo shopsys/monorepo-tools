@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType {
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
+			->add('email2', FormType::HONEY_POT)
 			->add('password', FormType::REPEATED, [
 				'type' => FormType::PASSWORD,
 				'options' => [
