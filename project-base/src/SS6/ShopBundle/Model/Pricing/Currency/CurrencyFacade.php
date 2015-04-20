@@ -5,11 +5,15 @@ namespace SS6\ShopBundle\Model\Pricing\Currency;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\OrderRepository;
+use SS6\ShopBundle\Model\Payment\PaymentPrice;
+use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyService;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Transport\TransportPrice;
+use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class CurrencyFacade {
 
@@ -49,11 +53,15 @@ class CurrencyFacade {
 	private $productPriceRecalculationScheduler;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyRepository $currencyRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyService $currencyService
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
+	private $paymentRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 */
+	private $transportRepository;
+
 	public function __construct(
 		EntityManager $em,
 		CurrencyRepository $currencyRepository,
@@ -61,7 +69,9 @@ class CurrencyFacade {
 		PricingSetting $pricingSetting,
 		OrderRepository $orderRepository,
 		Domain $domain,
-		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+		PaymentRepository $paymentRepository,
+		TransportRepository $transportRepository
 	) {
 		$this->em = $em;
 		$this->currencyRepository = $currencyRepository;
@@ -70,6 +80,8 @@ class CurrencyFacade {
 		$this->orderRepository = $orderRepository;
 		$this->domain = $domain;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+		$this->paymentRepository = $paymentRepository;
+		$this->transportRepository = $transportRepository;
 	}
 
 	/**
@@ -87,7 +99,8 @@ class CurrencyFacade {
 	public function create(CurrencyData $currencyData) {
 		$currency = $this->currencyService->create($currencyData);
 		$this->em->persist($currency);
-		$this->em->flush();
+		$this->em->flush($currency);
+		$this->createTransportAndPaymentPrices($currency);
 
 		return $currency;
 	}
@@ -198,6 +211,25 @@ class CurrencyFacade {
 
 		return $currenciesIndexedById;
 
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 */
+	private function createTransportAndPaymentPrices(Currency $currency) {
+		$toFlush = [];
+		foreach ($this->paymentRepository->findAll() as $payment) {
+			$paymentPrice = new PaymentPrice($payment, $currency, 0);
+			$this->em->persist($paymentPrice);
+			$toFlush[] = $paymentPrice;
+		}
+		foreach ($this->transportRepository->findAll() as $transport) {
+			$transportPrice = new TransportPrice($transport, $currency, 0);
+			$this->em->persist($transportPrice);
+			$toFlush[] = $transportPrice;
+		}
+
+		$this->em->flush($toFlush);
 	}
 
 }
