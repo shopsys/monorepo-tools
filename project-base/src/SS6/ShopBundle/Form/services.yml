@@ -50,6 +50,11 @@ services:
     tags:
       - { name: form.type, alias: color_picker }
 
+  ss6.shop.form.currency:
+    class: SS6\ShopBundle\Form\CurrencyType
+    tags:
+      - { name: form.type, alias: currency }
+
   ss6.shop.form.date_picker:
     class: SS6\ShopBundle\Form\DatePickerType
     tags:

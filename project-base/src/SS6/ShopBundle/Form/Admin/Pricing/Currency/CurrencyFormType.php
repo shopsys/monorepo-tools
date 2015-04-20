@@ -40,7 +40,7 @@ class CurrencyFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 			])
-			->add('code', FormType::TEXT, [
+			->add('code', FormType::CURRENCY, [
 				'required' => true,
 			])
 			->add('symbol', FormType::TEXT, [

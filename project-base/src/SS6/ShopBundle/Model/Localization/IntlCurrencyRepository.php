@@ -40,6 +40,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository {
 
 	/**
 	 * {@inheritDoc}
+	 * @return \CommerceGuys\Intl\Currency\CurrencyInterface[]
 	 */
 	public function getAll($locale = null, $fallbackLocale = null) {
 		$intlCurrencies = parent::getAll($locale, $fallbackLocale);
