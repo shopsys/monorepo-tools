@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Front\Registration;
 
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,6 +64,7 @@ class RegistrationFormType extends AbstractType {
 		$resolver->setDefaults([
 			'data_class' => UserData::class,
 			'attr' => ['novalidate' => 'novalidate'],
+			TimedFormTypeExtension::OPTION_ENABLED => true,
 		]);
 	}
 
