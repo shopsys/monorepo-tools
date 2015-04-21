@@ -57,7 +57,7 @@ class Bootstrap {
 	}
 
 	private function isDebug() {
-		return in_array($this->environment, array(Environment::ENVIRONMENT_DEVELOPMENT, Environment::ENVIRONMENT_TEST));
+		return in_array($this->environment, array(Environment::ENVIRONMENT_DEVELOPMENT));
 	}
 
 	private function initDoctrine() {
