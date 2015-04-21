@@ -108,6 +108,11 @@ services:
     tags:
       - { name: form.type, alias: single_checkbox_choice }
 
+  ss6.shop.form.timed_form:
+    class: SS6\ShopBundle\Form\TimedFormTypeExtension
+    tags:
+      - { name: form.type_extension, alias: form }
+
   ss6.shop.form.yes_no:
     class: SS6\ShopBundle\Form\YesNoType
     tags:
