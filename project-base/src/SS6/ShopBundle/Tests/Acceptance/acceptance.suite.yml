@@ -21,10 +21,12 @@ modules:
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\DomainHelper
   config:
     SS6\ShopBundle\Tests\Test\Codeception\Module\Db:
-      dsn: ''
-      user: ''
-      password: ''
+      dsn: ~
+      user: ~
+      password: ~
       dump: ../app/cache/test-db-dump.sql
+      populate: false
+      cleanup: true
     WebDriver:
       url: ~
       browser: firefox
