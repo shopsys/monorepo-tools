@@ -119,7 +119,6 @@ class ProductController extends Controller {
 
 		$searchText = $request->query->get('q');
 
-		$page = $request->get(self::PAGE_QUERY_PARAMETER);
 		if ($page === '1') {
 			return $this->redirect($this->generateUrl('front_product_search', $request->query->all()));
 		}
