@@ -15,4 +15,4 @@ modules:
       dsn: ''
       user: ''
       password: ''
-      dump: ../src/SS6/ShopBundle/Tests/Acceptance/data/dump.sql
+      dump: ../app/cache/test-db-dump.sql
