@@ -48,7 +48,9 @@ class TimedSpamValidationListener implements EventSubscriberInterface {
 			!$this->formTimeProvider->isFormTimeValid($form->getName(), $this->options)
 		) {
 			$message = $this->translator->transChoice(
-				$this->options[TimedFormTypeExtension::OPTION_MESSAGE],
+				'{1} Před odesláním formuláře musíte počkat %seconds% vteřinu.
+				|[2,4] Před odesláním formuláře musíte počkat %seconds% vteřiny.
+				|[5,Inf] Před odesláním formuláře musíte počkat %seconds% vteřin.',
 				$this->options[TimedFormTypeExtension::OPTION_MINIMUM_SECONDS],
 				[
 					'%seconds%' => $this->options[TimedFormTypeExtension::OPTION_MINIMUM_SECONDS],

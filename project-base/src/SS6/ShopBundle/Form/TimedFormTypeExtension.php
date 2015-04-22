@@ -16,7 +16,6 @@ class TimedFormTypeExtension extends AbstractTypeExtension {
 	const MINIMUM_FORM_FILLING_SECONDS = 5;
 	const OPTION_ENABLED = 'timed_spam_enabled';
 	const OPTION_MINIMUM_SECONDS = 'timed_spam_minimum_seconds';
-	const OPTION_MESSAGE = 'timed_spam_message';
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Translation\Translator
@@ -68,9 +67,6 @@ class TimedFormTypeExtension extends AbstractTypeExtension {
 		$resolver->setDefaults([
 			self::OPTION_ENABLED => false,
 			self::OPTION_MINIMUM_SECONDS => self::MINIMUM_FORM_FILLING_SECONDS,
-			self::OPTION_MESSAGE => '{1} Před odesláním formuláře musíte počkat %seconds% vteřinu.
-				|[2,4] Před odesláním formuláře musíte počkat %seconds% vteřiny.
-				|[5,Inf] Před odesláním formuláře musíte počkat %seconds% vteřin.',
 		]);
 	}
 

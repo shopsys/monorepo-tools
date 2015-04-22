@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Component\Form;
 
-use DateInterval;
 use DateTime;
 use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -23,7 +22,7 @@ class FormTimeProvider {
 
 	/**
 	 * @param string $name
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function generateFormTime($name) {
 		$startTime = new DateTime();
@@ -38,22 +37,17 @@ class FormTimeProvider {
 	 * @return bool
 	 */
 	public function isFormTimeValid($name, array $options) {
-		$isValid = true;
-		$startTime = $this->getFormTime($name);
+		$startTime = $this->findFormTime($name);
 
-		if ($startTime === false) {
+		if ($startTime === null) {
 			return false;
 		}
 
 		if ($options[TimedFormTypeExtension::OPTION_MINIMUM_SECONDS] !== null) {
-			$currentTime = new DateTime();
-			$validTime = $startTime->add(
-				DateInterval::createFromDateString($options[TimedFormTypeExtension::OPTION_MINIMUM_SECONDS] . 'seconds')
-			);
-			$isValid = $validTime < $currentTime;
+			return new DateTime('-' . $options[TimedFormTypeExtension::OPTION_MINIMUM_SECONDS] . ' second') > $startTime;
 		}
 
-		return $isValid;
+		return true;
 	}
 
 	/**
@@ -67,14 +61,14 @@ class FormTimeProvider {
 
 	/**
 	 * @param string $name
-	 * @return bool
+	 * @return \DateTime|null
 	 */
-	public function getFormTime($name) {
+	public function findFormTime($name) {
 		$key = $this->getSessionKey($name);
 		if ($this->hasFormTime($name)) {
 			return $this->session->get($key);
 		}
-		return false;
+		return null;
 	}
 
 	/**
