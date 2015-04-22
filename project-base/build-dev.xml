@@ -354,7 +354,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-acceptance">
+	<target name="tests-acceptance" depends="test-db-dump">
 		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
 		<if>
 			<not>
