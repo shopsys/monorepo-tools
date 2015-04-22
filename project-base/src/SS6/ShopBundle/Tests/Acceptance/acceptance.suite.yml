@@ -7,10 +7,24 @@
 class_name: AcceptanceTester
 modules:
   enabled:
-    - SS6\ShopBundle\Tests\Test\Codeception\Helper\DomainHelper
+    # SymfonyHelper enables using Symfony DI container.
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper
+    # DatabaseHelper sets the configuration of Db module in _initialize().
+    # Db module reads this configuration in its own _initialize(),
+    # therefore DatabaseHelper must be included before Db.
+    - SS6\ShopBundle\Tests\Test\Codeception\Helper\DatabaseHelper
+    - Db
     - WebDriver
+    # DomainHelper sets WebDriver's URL in _before().
+    # The setting is reset before _before() of WebDriver is called,
+    # so DomainHelper must be included after WebDriver.
+    - SS6\ShopBundle\Tests\Test\Codeception\Helper\DomainHelper
   config:
+    Db:
+      dsn: ''
+      user: ''
+      password: ''
+      dump: ../app/cache/test-db-dump.sql
     WebDriver:
       url: ~
       browser: firefox
