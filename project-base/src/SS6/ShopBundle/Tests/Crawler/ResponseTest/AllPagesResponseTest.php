@@ -31,7 +31,19 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 */
 	public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
 		$this->getClient(false, 'admin', 'admin123')->request('GET', $url);
-		$this->assertSame($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
+
+		$statusCode = $this->getClient()->getResponse()->getStatusCode();
+
+		$this->assertSame(
+			$expectedStatusCode,
+			$statusCode,
+			sprintf(
+				'Failed asserting that status code %d for route "%s" is identical to expected %d',
+				$testedRouteName,
+				$statusCode,
+				$expectedStatusCode
+			)
+		);
 	}
 
 	public function frontTestableUrlsProvider() {
@@ -62,7 +74,19 @@ class AllPagesResponseTest extends DatabaseTestCase {
 		} else {
 			$this->getClient()->request('GET', $url);
 		}
-		$this->assertSame($expectedStatusCode, $this->getClient()->getResponse()->getStatusCode());
+
+		$statusCode = $this->getClient()->getResponse()->getStatusCode();
+
+		$this->assertSame(
+			$expectedStatusCode,
+			$statusCode,
+			sprintf(
+				'Failed asserting that status code %d for route "%s" is identical to expected %d',
+				$testedRouteName,
+				$statusCode,
+				$expectedStatusCode
+			)
+		);
 	}
 
 }

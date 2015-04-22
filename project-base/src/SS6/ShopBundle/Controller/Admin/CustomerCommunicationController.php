@@ -13,7 +13,7 @@ class CustomerCommunicationController extends Controller {
 	/**
 	 * @Route("/customer_communication/")
 	 */
-	public function indexAction(Request $request) {
+	public function indexAction() {
 		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/index.html.twig');
 	}
 
