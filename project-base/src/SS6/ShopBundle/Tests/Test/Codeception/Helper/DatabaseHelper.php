@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
 use Codeception\Module;
 use Doctrine\DBAL\Connection;
 use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
+use SS6\ShopBundle\Tests\Test\Codeception\Module\Db;
 
 class DatabaseHelper extends Module {
 
@@ -15,8 +16,8 @@ class DatabaseHelper extends Module {
 	// @codingStandardsIgnoreStart
 	public function _initialize() {
 	// @codingStandardsIgnoreEnd
-		$dbModule = $this->getModule('Db');
-		/* @var $dbModule \Codeception\Module\Db */
+		$dbModule = $this->getModule(Db::class);
+		/* @var $dbModule \SS6\ShopBundle\Tests\Test\Codeception\Module\Db */
 		$symfonyHelper = $this->getModule(SymfonyHelper::class);
 		/* @var $symfonyHelper \SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
 		$connection = $symfonyHelper->grabServiceFromContainer('doctrine.dbal.default_connection');

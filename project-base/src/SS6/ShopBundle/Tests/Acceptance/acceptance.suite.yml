@@ -13,14 +13,14 @@ modules:
     # Db module reads this configuration in its own _initialize(),
     # therefore DatabaseHelper must be included before Db.
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\DatabaseHelper
-    - Db
+    - SS6\ShopBundle\Tests\Test\Codeception\Module\Db
     - WebDriver
     # DomainHelper sets WebDriver's URL in _before().
     # The setting is reset before _before() of WebDriver is called,
     # so DomainHelper must be included after WebDriver.
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\DomainHelper
   config:
-    Db:
+    SS6\ShopBundle\Tests\Test\Codeception\Module\Db:
       dsn: ''
       user: ''
       password: ''
