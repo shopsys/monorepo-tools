@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_value_cell_id_coefficient %}
-	{{ value|formatDecimalNumber(4) }}
+	{{ value|formatNumber }}
 {% endblock %}
 
 {% block grid_no_data %}
