@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf0a5c01bc90a7028f24ca1c61638cb2",
+    "hash": "29c4350a4895463389491d1ce80cc9ad",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -189,7 +189,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/55da5011b857c8901d516b3cb45c6474383dc04d",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/36d1e3c4519c709faa2cf6bb785852d1c090da2c",
                 "reference": "55da501",
                 "shasum": ""
             },
@@ -1434,34 +1434,39 @@
         },
         {
             "name": "helios-ag/fm-elfinder-bundle",
-            "version": "1.5",
-            "target-dir": "FM/ElfinderBundle",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helios-ag/FMElfinderBundle.git",
-                "reference": "57de87e1bf72f9a87fa1d7cd508e7857a3d03860"
+                "reference": "7e575d4b69f8cdfa8926c8474803d38585aeecfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/FMElfinderBundle/zipball/57de87e1bf72f9a87fa1d7cd508e7857a3d03860",
-                "reference": "57de87e1bf72f9a87fa1d7cd508e7857a3d03860",
+                "url": "https://api.github.com/repos/helios-ag/FMElfinderBundle/zipball/7e575d4b69f8cdfa8926c8474803d38585aeecfe",
+                "reference": "7e575d4b69f8cdfa8926c8474803d38585aeecfe",
                 "shasum": ""
             },
             "require": {
-                "helios-ag/fm-elfinder-php-connector": "1.1.1",
+                "helios-ag/fm-elfinder-php-connector": "~2.0",
                 "php": ">=5.3.3",
-                "sensio/framework-extra-bundle": "*@dev",
-                "symfony/symfony": "*@stable",
-                "symfony/twig-bundle": "~2.0"
+                "symfony/framework-bundle": "~2.4",
+                "symfony/twig-bundle": "~2.4"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.0",
+                "matthiasnoback/symfony-config-test": "0.*",
+                "matthiasnoback/symfony-dependency-injection-test": "0.*",
+                "symfony/form": "~2.1"
             },
             "suggest": {
-                "Trsteel/ckeditor-bundle": "CKEditor WYSIWYG Editor Bundlefor Symfony2 Project by Trsteel",
-                "stfalcon/tinymce-bundle": "TinyMCE WYSIWYG Editor Bundle by Stfalcon"
+                "egeloen/ckeditor-bundle": "CKEditor Bundle by Egeloen",
+                "stfalcon/tinymce-bundle": "TinyMCE Bundle by Stfalcon",
+                "trsteel/ckeditor-bundle": "CKEditor Bundle by trsteel"
             },
             "type": "symfony-bundle",
             "autoload": {
-                "psr-0": {
-                    "FM\\ElfinderBundle": ""
+                "psr-4": {
+                    "FM\\ElfinderBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1478,35 +1483,39 @@
                     "homepage": "https://github.com/helios-ag/FMElfinderBundle/contributors"
                 }
             ],
-            "description": "ElFinder bundle, add ElFinder file manager to your Symfony2 project",
+            "description": "ElFinder bundle, adds ElFinder file manager to your Symfony2 project",
             "homepage": "https://github.com/helios-ag/FMElfinderBundle",
             "keywords": [
                 "elfinder",
                 "file manager"
             ],
-            "time": "2014-05-09 12:02:28"
+            "time": "2015-03-20 10:24:18"
         },
         {
             "name": "helios-ag/fm-elfinder-php-connector",
-            "version": "1.1.1",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helios-ag/ElFinderPHP.git",
-                "reference": "fa24c5ce710ec2c9eab899786c93dfac1a232386"
+                "reference": "a0352962c134ec572d52cd2836477abd4c9dc0ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/ElFinderPHP/zipball/fa24c5ce710ec2c9eab899786c93dfac1a232386",
-                "reference": "fa24c5ce710ec2c9eab899786c93dfac1a232386",
+                "url": "https://api.github.com/repos/helios-ag/ElFinderPHP/zipball/a0352962c134ec572d52cd2836477abd4c9dc0ba",
+                "reference": "a0352962c134ec572d52cd2836477abd4c9dc0ba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allows you to use AWS S3 storage",
+                "dropbox-php/dropbox-php": "Allows you to use Dropbox storage"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "FM\\ElFinderPHP": "src/"
+                "psr-4": {
+                    "FM\\ElFinderPHP\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1533,7 +1542,7 @@
                 "elfinder",
                 "filemanager"
             ],
-            "time": "2013-08-06 17:02:04"
+            "time": "2015-03-14 15:22:56"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -4488,7 +4497,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/f9f3db44b9f4686c6dc98720d3f5163a6f61d1c6",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ba2c7174b9f15ca1a3812874fae5280c1422030e",
                 "reference": "3234289",
                 "shasum": ""
             },
@@ -4768,7 +4777,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/41365ce7af6be4b55a3507965dd39ea743637080",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/07940eada3d2c33a2fb30dc148629644f3fd8097",
                 "reference": "41365ce",
                 "shasum": ""
             },

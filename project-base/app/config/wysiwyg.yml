@@ -39,9 +39,12 @@ ivory_ck_editor:
         - ['TextColor']
 
 fm_elfinder:
-  editor: ckeditor
-  connector:
-    roots:
-      uploads:
-        driver: LocalFileSystem
-        path: assets/uploads
+  instances:
+    default:
+      editor: ckeditor
+      relative_path: false
+      connector:
+        roots:
+          uploads:
+            driver: LocalFileSystem
+            path: assets/uploads
