@@ -106,6 +106,14 @@ services:
   ss6.shop.advanced_search.filter.product_partno_fitler:
     class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter
 
+  ss6.shop.breadcrumb.front_breadcrumb_resolver:
+    class: SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
+    factory_service: ss6.shop.breadcrumb.front_breadcrumb_resolver_factory
+    factory_method: create
+
+  ss6.shop.breadcrumb.front_breadcrumb_resolver_factory:
+    class: SS6\ShopBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory
+
   ss6.shop.cart:
     class: SS6\ShopBundle\Model\Cart\Cart
     factory_service: ss6.shop.cart.cart_factory

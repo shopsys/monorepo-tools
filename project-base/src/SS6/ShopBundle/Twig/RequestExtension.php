@@ -33,6 +33,10 @@ class RequestExtension extends Twig_Extension {
 				'getRoute',
 				[$this, 'getRoute']
 			),
+			new Twig_SimpleFunction(
+				'getRouteParams',
+				[$this, 'getRouteParams']
+			),
 		];
 	}
 
@@ -63,7 +67,7 @@ class RequestExtension extends Twig_Extension {
 	/**
 	 * @return array
 	 */
-	private function getRouteParams() {
+	public function getRouteParams() {
 		return $this->requestStack->getMasterRequest()->attributes->get('_route_params');
 	}
 

@@ -9,7 +9,6 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Product\Product;
 
 class CategoryRepository extends NestedTreeRepository {
@@ -223,13 +222,10 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
-		$queryBuilder = $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
+		$queryBuilder = $this->getAllQueryBuilder()
 			->join(CategoryDomain::class, 'cd', Join::WITH, 'cd.category = c.id')
-			->where('cd.domainId = :domainId')
-				->andWhere('cd.visible = TRUE')
-			->orderBy('c.id');
+			->andWhere('cd.domainId = :domainId')
+			->andWhere('cd.visible = TRUE');
 
 		$queryBuilder->setParameter('domainId', $domainId);
 
@@ -247,29 +243,52 @@ class CategoryRepository extends NestedTreeRepository {
 		$queryBuilder->setParameter('searchText', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 	}
 
-	/*
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
-	public function findProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
-		$qb = $this->em->createQueryBuilder()
-			->select('c')
-			->from(Category::class, 'c')
-			->join('c.domains', 'cd')
+	public function findProductMainCategoryOnDomain(Product $product, $domainId) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
 			->join('c.products', 'cp')
-			->where('cd.visible = TRUE')
-				->andWhere('cd.domainId = :domainId')
-				->andWhere('cp = :product')
+			->andWhere('cp = :product')
 			->orderBy('c.level DESC, c.lft')
 			->setMaxResults(1);
 
 		$qb->setParameters([
-			'domainId' => $domainConfig->getId(),
+			'domainId' => $domainId,
 			'product' => $product,
 		]);
 
 		return $qb->getQuery()->getOneOrNullResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
+	public function getProductMainCategoryOnDomain(Product $product, $domainId) {
+		$productMainCategory = $this->findProductMainCategoryOnDomain($product, $domainId);
+		if ($productMainCategory === null) {
+			throw new \SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException();
+		}
+
+		return $productMainCategory;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
+		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
+			->andWhere('c.lft <= :lft')->setParameter('lft', $category->getLft())
+			->andWhere('c.rgt >= :rgt')->setParameter('rgt', $category->getRgt())
+			->orderBy('c.lft');
+
+		return $qb->getQuery()->getResult();
 	}
 
 }

@@ -2,6 +2,7 @@
 
 {% block content %}
 	<div class="main-content">
+		{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
 		{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
 
 		{% block main_content %}{% endblock %}
