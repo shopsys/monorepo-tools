@@ -40,13 +40,13 @@ class DatabaseDumpCommand extends ContainerAwareCommand {
 			escapeshellarg($input->getArgument(self::ARG_OUTPUT_FILE))
 		);
 
+		putenv('PGPASSWORD=' . $connection->getPassword());
+
 		$pipes = [];
 		$process = proc_open(
 			$command,
 			$this->getDescriptorSpec(),
-			$pipes,
-			null,
-			$this->buildEnv($connection->getPassword())
+			$pipes
 		);
 
 		list($stdin, $stdout, $stderr) = $pipes;
@@ -86,17 +86,6 @@ class DatabaseDumpCommand extends ContainerAwareCommand {
 			0 => ['pipe', 'r'], // stdin
 			1 => ['pipe', 'w'], // stdout
 			2 => ['pipe', 'w'], // stderr
-		];
-	}
-
-	/**
-	 * @param string $connectionPassword
-	 * @return array
-	 */
-	private function buildEnv($connectionPassword) {
-		return [
-			'PATH' => getenv('PATH'),
-			'PGPASSWORD' => $connectionPassword,
 		];
 	}
 
