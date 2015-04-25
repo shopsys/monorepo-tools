@@ -45,13 +45,13 @@
 						{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
 					</ul>
 				</div>
-
+				{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : 'header'})) }}
 			</div>
 
 			<div class="content clear">
 				{% block content %}{% endblock %}
 			</div>
-
+			{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : 'footer'})) }}
 			<div class="footer">
 				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
 			</div>

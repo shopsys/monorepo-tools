@@ -1,0 +1,14 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_advert_edit', { id: row.a.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_no_data %}
+	{{ 'Nebyla nalezena žádná reklama. Nejprve musíte nějakou vytvořit.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+	{% set entityName = 'reklam' %}
+	{{ parent() }}
+{% endblock %}

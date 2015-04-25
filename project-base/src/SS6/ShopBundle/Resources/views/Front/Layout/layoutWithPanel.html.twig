@@ -4,6 +4,7 @@
 	<div class="web-panel">
 		<div class="wrap-panel mb20">
 			{% block panel_content %}{% endblock %}
+			{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : 'left_sidebar'})) }}
 		</div>
 	</div>
 

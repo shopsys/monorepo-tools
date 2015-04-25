@@ -12,6 +12,7 @@ class ImageController extends Controller {
 	const ENTITY_NAME_PRODUCT = 'product';
 	const ENTITY_NAME_SLIDER_ITEM = 'sliderItem';
 	const ENTITY_NAME_TRANSPORT = 'transport';
+	const ENTITY_NAME_ADVERT = 'advert';
 	const SIZE_NAME_GALLERY_THUMBNAIL = 'galleryThumbnail';
 	const SIZE_NAME_LIST = 'list';
 	const SIZE_NAME_THUMBNAIL = 'thumbnail';
@@ -59,6 +60,7 @@ class ImageController extends Controller {
 			self::ENTITY_NAME_PRODUCT => $translator->trans('Produkt'),
 			self::ENTITY_NAME_SLIDER_ITEM => $translator->trans('Stránka slideru'),
 			self::ENTITY_NAME_TRANSPORT => $translator->trans('Doprava'),
+			self::ENTITY_NAME_ADVERT => $translator->trans('Reklama'),
 		];
 
 		if (array_key_exists($entityName, $entityNamesTranslations)) {
@@ -126,6 +128,11 @@ class ImageController extends Controller {
 			self::ENTITY_NAME_TRANSPORT => [
 				ImageConfig::DEFAULT_SIZE_NAME => $translator->trans(
 					'Front-end: Objednávkový proces'
+				),
+			],
+			self::ENTITY_NAME_ADVERT => [
+				ImageConfig::DEFAULT_SIZE_NAME => $translator->trans(
+					'Front-end: Reklamní systém'
 				),
 			],
 		];

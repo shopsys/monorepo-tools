@@ -1,0 +1,14 @@
+{% extends '@SS6Shop/Admin/Content/Advert/detail.html.twig' %}
+
+{% block title %}- {{ 'Editace reklamy'|trans }} - {{ advert.name }}{% endblock %}
+{% block h1 %}{{ 'Editace reklamy'|trans }} - {{ advert.name }}{% endblock %}
+{% block image %}
+	<div class="form-line">
+		<label class="form-line__label">
+			{{ 'Nahraný obrázek'|trans }}:
+		</label>
+		<div class="form-line__field mb-1">
+			{{ image(advert, { size: 'original', height: 100 }) }}
+		</div>
+	</div>
+{% endblock %}

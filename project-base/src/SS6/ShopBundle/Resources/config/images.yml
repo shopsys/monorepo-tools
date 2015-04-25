@@ -36,3 +36,8 @@
   class: SS6\ShopBundle\Model\Transport\Transport
   sizes:
     - { name: ~, width: ~, height: 20, crop: false }
+
+- name: advert
+  class: SS6\ShopBundle\Model\Advert\Advert
+  sizes:
+    - { name: ~, width: ~, height: ~, crop: false }
