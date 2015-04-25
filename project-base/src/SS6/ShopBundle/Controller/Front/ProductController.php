@@ -20,8 +20,14 @@ class ProductController extends Controller {
 	 */
 	private $requestExtension;
 
-	public function __construct(RequestExtension $requestExtension) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
+
+	public function __construct(RequestExtension $requestExtension, CategoryFacade $categoryFacade) {
 		$this->requestExtension = $requestExtension;
+		$this->categoryFacade = $categoryFacade;
 	}
 
 	/**
@@ -39,6 +45,7 @@ class ProductController extends Controller {
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
 			'accesoriesDetails' => $accessoriesDetails,
+			'productMainCategory' => $this->categoryFacade->getProductMainCategoryByDomain($productDetail->getProduct(), 1),
 		]);
 	}
 

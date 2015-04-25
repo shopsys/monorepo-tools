@@ -80,7 +80,7 @@ class TopProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getVisibleProductsForTopProductsOnDomain($domainId, $pricigGroup) {
-		$queryBuilder = $this->productRepository->getAllVisibleQueryBuilder($domainId, $pricigGroup);
+		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricigGroup);
 
 		$queryBuilder
 			->join(TopProduct::class, 'tp', Join::WITH, 'tp.product = p')

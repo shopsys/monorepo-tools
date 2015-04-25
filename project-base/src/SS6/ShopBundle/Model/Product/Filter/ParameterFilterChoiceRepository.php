@@ -45,7 +45,7 @@ class ParameterFilterChoiceRepository {
 		$locale,
 		Category $category
 	) {
-		$productsQueryBuilder = $this->productRepository->getVisibleInCategoryQueryBuilder(
+		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
 			$domainId,
 			$pricingGroup,
 			$category

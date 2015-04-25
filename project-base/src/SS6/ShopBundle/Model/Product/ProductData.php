@@ -61,6 +61,11 @@ class ProductData {
 	public $sellingTo;
 
 	/**
+	 * @var bool|null
+	 */
+	public $sellable;
+
+	/**
 	 * @var bool
 	 */
 	public $hidden;
@@ -122,6 +127,7 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
 	 * @param \DateTime|null $sellingTo
+	 * @param bool $sellable
 	 * @param bool $hidden
 	 * @param array $flags
 	 * @param bool $usingStock
@@ -142,6 +148,7 @@ class ProductData {
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
 		DateTime $sellingTo = null,
+		$sellable = true,
 		$hidden = false,
 		array $flags = [],
 		$usingStock = false,
@@ -162,6 +169,7 @@ class ProductData {
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;
 		$this->sellingTo = $sellingTo;
+		$this->sellable = $sellable;
 		$this->hidden = $hidden;
 		$this->flags = $flags;
 		$this->usingStock = $usingStock;

@@ -60,7 +60,7 @@ class CartWatcherFacade {
 	 */
 	public function checkCartModifications(Cart $cart) {
 		$this->checkModifiedPrices($cart);
-		$this->checkNotVisibleItems($cart);
+		$this->checkNotListableItems($cart);
 
 		$this->em->flush();
 	}
@@ -77,8 +77,8 @@ class CartWatcherFacade {
 		}
 	}
 
-	private function checkNotVisibleItems(Cart $cart) {
-		$notVisibleItems = $this->cartWatcherService->getNotVisibleItems($cart, $this->currentCustomer);
+	private function checkNotListableItems(Cart $cart) {
+		$notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
 
 		foreach ($notVisibleItems as $cartItem) {
 			$this->flashMessageSender->addErrorFlashTwig(

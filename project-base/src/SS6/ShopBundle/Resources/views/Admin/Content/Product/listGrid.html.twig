@@ -8,6 +8,11 @@
 	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}">{{ value }}</a>
 {% endblock %}
 
+{% block grid_value_cell_id_visible %}
+	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano' : 'Ne' }}"></span>
+	<span class="grid_boolean_{{ row.p.sellable ? 'true' : 'false' }} in-semaphore in-semaphore--{{ row.p.sellable ? 'true' : 'false' }}" title="{{ row.p.sellable ? 'Prodej povolen' : 'Prodej zakázán' }}"></span>
+{% endblock %}
+
 {% block grid_value_cell_id_price %}
 	{{ row.priceForProductList|priceWithCurrencyAdmin }}
 {% endblock %}

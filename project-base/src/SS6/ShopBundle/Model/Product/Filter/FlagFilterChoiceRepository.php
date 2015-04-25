@@ -29,7 +29,7 @@ class FlagFilterChoiceRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlagFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, Category $category) {
-		$productsQueryBuilder = $this->productRepository->getVisibleInCategoryQueryBuilder(
+		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
 			$domainId,
 			$pricingGroup,
 			$category
@@ -47,7 +47,7 @@ class FlagFilterChoiceRepository {
 	 */
 	public function getFlagFilterChoicesForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText) {
 		$productsQueryBuilder = $this->productRepository
-			->getVisibleBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
+			->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
 		return $this->getFlagsByProductsQueryBuilder($productsQueryBuilder);
 	}

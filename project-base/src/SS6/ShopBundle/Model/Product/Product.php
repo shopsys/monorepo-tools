@@ -92,6 +92,13 @@ class Product extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
+	private $sellable;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
 	private $hidden;
 
 	/**
@@ -188,6 +195,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
+		$this->sellable = $productData->sellable;
 		$this->hidden = $productData->hidden;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
@@ -216,6 +224,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
+		$this->sellable = $productData->sellable;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
 		$this->availability = $productData->availability;
@@ -330,6 +339,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function isHidden() {
 		return $this->hidden;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isSellable() {
+		return $this->sellable;
 	}
 
 	/**

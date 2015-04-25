@@ -157,6 +157,7 @@ class ProductDataFixtureLoader {
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
 		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
 		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
+		$productEditData->productData->sellable = $row[18];
 
 		return $productEditData;
 	}

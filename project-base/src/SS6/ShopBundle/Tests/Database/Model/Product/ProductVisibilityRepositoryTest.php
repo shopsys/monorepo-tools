@@ -32,6 +32,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->price = 100;
 		$productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
 		$productEditData->productData->hidden = false;
+		$productEditData->productData->sellable = true;
 		$productEditData->productData->hiddenOnDomains = [];
 		$productEditData->productData->categories = [$category];
 

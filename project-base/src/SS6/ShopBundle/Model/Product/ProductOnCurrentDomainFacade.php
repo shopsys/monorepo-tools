@@ -87,7 +87,7 @@ class ProductOnCurrentDomainFacade {
 				$this->currentCustomer->getPricingGroup(),
 				$this->domain->getId()
 			);
-			if ($accessoryVisibility->isVisible()) {
+			if ($accessoryVisibility->isVisible() && $accessory->isSellable()) {
 				$accessoriesVisibleOnDomain[] = $accessory;
 			}
 		}
@@ -112,7 +112,7 @@ class ProductOnCurrentDomainFacade {
 	) {
 		$category = $this->categoryRepository->getById($categoryId);
 
-		$paginationResult = $this->productRepository->getPaginationResultForVisibleInCategory(
+		$paginationResult = $this->productRepository->getPaginationResultForListableInCategory(
 			$category,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
@@ -147,7 +147,7 @@ class ProductOnCurrentDomainFacade {
 		$page,
 		$limit
 	) {
-		$paginationResult = $this->productRepository->getPaginationResultForSearchVisible(
+		$paginationResult = $this->productRepository->getPaginationResultForSearchListable(
 			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
@@ -178,7 +178,7 @@ class ProductOnCurrentDomainFacade {
 
 		$page = 1;
 
-		$paginationResult = $this->productRepository->getPaginationResultForSearchVisible(
+		$paginationResult = $this->productRepository->getPaginationResultForSearchListable(
 			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
