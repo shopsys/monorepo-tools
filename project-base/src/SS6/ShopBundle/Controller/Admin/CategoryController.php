@@ -148,8 +148,8 @@ class CategoryController extends Controller {
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
-		$categoryOrderingData = [];
-		foreach ($request->get('categoriesOrderingData') as $categoryOrderingData) {
+		$categoriesOrderingData = $request->get('categoriesOrderingData');
+		foreach ($categoriesOrderingData as $categoryOrderingData) {
 			$categoryId = (int)$categoryOrderingData['categoryId'];
 			$parentId = $categoryOrderingData['parentId'] === '' ? null : (int)$categoryOrderingData['parentId'];
 			$parentIdByCategoryId[$categoryId] = $parentId;

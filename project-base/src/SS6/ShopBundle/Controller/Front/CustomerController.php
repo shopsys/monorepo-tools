@@ -38,7 +38,7 @@ class CustomerController extends Controller {
 			/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
 			$customerData = $form->getData();
-			$user = $customerEditFacade->editByCustomer(
+			$customerEditFacade->editByCustomer(
 				$user->getId(),
 				$customerData
 			);

@@ -13,7 +13,6 @@ use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 class CartFacadeTest extends DatabaseTestCase {
 
 	public function testAddProductToCart() {
-		$em = $this->getEntityManager();
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
@@ -55,7 +54,6 @@ class CartFacadeTest extends DatabaseTestCase {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function testChangeQuantities() {
-		$em = $this->getEntityManager();
 		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
@@ -80,7 +78,6 @@ class CartFacadeTest extends DatabaseTestCase {
 		);
 		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), 1)->getCartItem();
 		$cartItem2 = $cartFacade->addProductToCart($product2->getId(), 2)->getCartItem();
-		$em->flush();
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
@@ -97,7 +94,6 @@ class CartFacadeTest extends DatabaseTestCase {
 			$cartItem1->getId() => 5,
 			$cartItem2->getId() => 9,
 		]);
-		$em->flush();
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
@@ -124,9 +120,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		$product1 = $this->getReference('product_1');
 		$cartItem = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$em->persist($cartItem);
+		$em->flush();
 		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
-		$em->flush();
 
 		$cartFacade = new CartFacade(
 			$this->getEntityManager(),
@@ -158,9 +154,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
 		$em->persist($cartItem2);
+		$em->flush();
 		$cartItems = [$cartItem1, $cartItem2];
 		$cart = new Cart($cartItems);
-		$em->flush();
 
 		$cartFacade = new CartFacade(
 			$this->getEntityManager(),

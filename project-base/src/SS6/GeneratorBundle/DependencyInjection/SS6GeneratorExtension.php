@@ -18,9 +18,6 @@ class SS6GeneratorExtension extends Extension {
 	 * {@inheritDoc}
 	 */
 	public function load(array $configs, ContainerBuilder $containerBuilder) {
-		$configuration = new Configuration();
-		$config = $this->processConfiguration($configuration, $configs);
-
 		$loader = new Loader\YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
 	}

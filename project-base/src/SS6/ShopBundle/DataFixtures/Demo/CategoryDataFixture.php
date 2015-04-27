@@ -31,33 +31,33 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 
 		$categoryData->name = ['cs' => 'Elektro', 'en' => 'Electronics'];
 		$categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
-		$electronicsCategory = $this->createCategory($manager, self::ELECTRONICS, $categoryData);
+		$electronicsCategory = $this->createCategory(self::ELECTRONICS, $categoryData);
 
 		$categoryData->name = ['cs' => 'Televize, audio', 'en' => 'TV, audio'];
 		$categoryData->parent = $electronicsCategory;
-		$this->createCategory($manager, self::TV, $categoryData);
+		$this->createCategory(self::TV, $categoryData);
 
 		$categoryData->name = ['cs' => 'Fotoaparáty', 'en' => 'Cameras & Photo'];
-		$this->createCategory($manager, self::PHOTO, $categoryData);
+		$this->createCategory(self::PHOTO, $categoryData);
 
 		$categoryData->name = ['cs' => 'Tiskárny', 'en' => null];
-		$this->createCategory($manager, self::PRINTERS, $categoryData);
+		$this->createCategory(self::PRINTERS, $categoryData);
 
 		$categoryData->name = ['cs' => 'Počítače & příslušenství', 'en' => null];
-		$this->createCategory($manager, self::PC, $categoryData);
+		$this->createCategory(self::PC, $categoryData);
 
 		$categoryData->name = ['cs' => 'Mobilní telefony', 'en' => null];
-		$this->createCategory($manager, self::PHONES, $categoryData);
+		$this->createCategory(self::PHONES, $categoryData);
 
 		$categoryData->name = ['cs' => 'Kávovary', 'en' => null];
-		$this->createCategory($manager, self::COFFEE, $categoryData);
+		$this->createCategory(self::COFFEE, $categoryData);
 
 		$categoryData->name = ['cs' => 'Knihy', 'en' => 'Books'];
 		$categoryData->parent = $this->getReference(CategoryRootDataFixture::ROOT);
-		$this->createCategory($manager, self::BOOKS, $categoryData);
+		$this->createCategory(self::BOOKS, $categoryData);
 
 		$categoryData->name = ['cs' => 'Hračky a další', 'en' => null];
-		$this->createCategory($manager, self::TOYS, $categoryData);
+		$this->createCategory(self::TOYS, $categoryData);
 
 		$manager->flush();
 
@@ -65,11 +65,14 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @throws \Exception
+	 * @throws \SS6\ShopBundle\Model\Category\Exception
+	 * @internal param ObjectManager $manager
 	 */
-	public function createCategory(ObjectManager $manager, $referenceName, CategoryData $categoryData) {
+	private function createCategory($referenceName, CategoryData $categoryData) {
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 

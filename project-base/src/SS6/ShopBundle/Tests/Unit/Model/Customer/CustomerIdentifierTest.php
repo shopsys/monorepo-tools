@@ -13,7 +13,7 @@ class CustomerIdentifierTest extends PHPUnit_Framework_TestCase {
 		$user = null;
 
 		$this->setExpectedException(EmptyCustomerIdentifierException::class);
-		$customerIdentifier = new CustomerIdentifier($sessionId, $user);
+		new CustomerIdentifier($sessionId, $user);
 	}
 
 }

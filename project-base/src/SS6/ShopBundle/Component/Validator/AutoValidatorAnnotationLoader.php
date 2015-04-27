@@ -85,8 +85,6 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 		$constraints = [];
 		if ($entityMetadata->hasField($propertyName)) {
 			$constraints = $this->resolveConstraintsForEntityField($entityMetadata, $propertyName);
-		} elseif ($entityMetadata->hasAssociation($propertyName)) {
-			$constraints = $this->resolveConstraintsForEntityAssociation($entityMetadata, $propertyName);
 		} elseif ($entityMetadata->hasAssociation(self::TRANSLATIONS_ASSOCIATION)) {
 			$constraints = $this->resolveConstraintsForTranslationsEntityField($entityMetadata, $propertyName);
 		}
@@ -152,17 +150,6 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 		}
 
 		return $constraints;
-	}
-
-	/**
-	 * @param \Doctrine\ORM\Mapping\ClassMetadata $entityMetadata
-	 * @param string $fieldName
-	 * @return \Symfony\Component\Validator\Constraint[]
-	 */
-	private function resolveConstraintsForEntityAssociation(DoctrineClassMetadata $entityMetadata, $fieldName) {
-		$fieldMapping = $entityMetadata->getAssociationMapping($fieldName);
-
-		return [];
 	}
 
 }
