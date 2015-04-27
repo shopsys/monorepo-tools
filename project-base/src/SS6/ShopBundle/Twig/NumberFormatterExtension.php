@@ -43,6 +43,10 @@ class NumberFormatterExtension extends Twig_Extension {
 				'formatDecimalNumber',
 				[$this, 'formatDecimalNumber']
 			),
+			new \Twig_SimpleFilter(
+				'formatPercent',
+				[$this, 'formatPercent']
+			),
 		];
 	}
 
@@ -69,6 +73,20 @@ class NumberFormatterExtension extends Twig_Extension {
 		$numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
 		$numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
 		$numberFormatter->setMinimumFractionDigits($minimumFractionDigits);
+		$numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
+
+		return $numberFormatter->format($number);
+	}
+
+	/**
+	 * @param mixed $number
+	 * @param string|null $locale
+	 * @return string
+	 */
+	public function formatPercent($number, $locale = null) {
+		$numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
+		$numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::PERCENT);
+		$numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
 		$numberFormatter->setMaximumFractionDigits(self::MAXIMUM_FRACTION_DIGITS);
 
 		return $numberFormatter->format($number);

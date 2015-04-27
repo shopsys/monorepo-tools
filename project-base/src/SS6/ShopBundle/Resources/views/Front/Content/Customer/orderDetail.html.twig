@@ -104,7 +104,7 @@
 				<td>{{ item.name }}</td>
 				<td>{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
 				<td>{{ item.quantity|formatNumber }}</td>
-				<td>{{ item.vatPercent|formatNumber }}</td>
+				<td>{{ item.vatPercent|formatPercent }}</td>
 				<td>{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
 				<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
 			</tr>
