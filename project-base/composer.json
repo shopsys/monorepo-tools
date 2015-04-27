@@ -26,6 +26,7 @@
 		"php": "5.6.*",
 		"bmatzner/jquery-bundle": "1.11.1",
 		"bmatzner/jquery-ui-bundle": "1.10.3",
+		"commerceguys/intl": "0.5",
 		"craue/formflow-bundle": "dev-master#55da501",
 		"doctrine/common": "2.4.x-dev#434c364b6a8780c1",
 		"doctrine/doctrine-bundle": "1.4.0",

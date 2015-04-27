@@ -12,6 +12,10 @@
 	{{ getDomainName(value) }}
 {% endblock %}
 
+{% block grid_value_cell_id_created_at %}
+	{{ value|formatDateTime }}
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Nebyla nalezena žádná objednávka.'|trans }}
 {% endblock %}

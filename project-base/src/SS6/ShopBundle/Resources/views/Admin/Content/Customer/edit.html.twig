@@ -9,7 +9,7 @@
 			{{ 'Datum registrace'|trans }} :
 		</span>
 		<span class="form-line form-line__text">
-			{{ user.createdAt|date('j.n.Y H:i') }}
+			{{ user.createdAt|formatDateTime }}
 		</span>
 	</div>
 
@@ -22,7 +22,7 @@
 		</span>
 		<span class="form-line form-line__text">
 			{% if user.lastLogin != null %}
-				{{ user.lastLogin|date('j.n.Y H:i') }}
+				{{ user.lastLogin|formatDateTime }}
 			{% else %}
 				{{ 'nikdy'|trans }}
 			{% endif %}

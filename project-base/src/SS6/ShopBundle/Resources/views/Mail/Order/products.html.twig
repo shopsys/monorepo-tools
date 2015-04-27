@@ -8,7 +8,7 @@
 	{% for item in order.items %}
 		<tr>
 			<td style="font-weight: bold;">{{ item.name }}</td>
-			<td style="text-align: right;">{{ item.quantity }}</td>
+			<td style="text-align: right;">{{ item.quantity|formatNumber }}</td>
 			<td style="text-align: right;">{{ item.priceWithVat|priceText }}</td>
 			<td style="text-align: right;">{{ orderItemTotalPricesById[item.id].priceWithVat|priceText }}</td>
 		</tr>

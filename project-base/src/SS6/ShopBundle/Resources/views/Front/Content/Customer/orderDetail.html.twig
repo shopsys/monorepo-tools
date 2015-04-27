@@ -103,8 +103,8 @@
 			<tr>
 				<td>{{ item.name }}</td>
 				<td>{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
-				<td>{{ item.quantity }}</td>
-				<td>{{ item.vatPercent }}</td>
+				<td>{{ item.quantity|formatNumber }}</td>
+				<td>{{ item.vatPercent|formatPercent }}</td>
 				<td>{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
 				<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
 			</tr>
@@ -113,7 +113,7 @@
 	<h2>{{ 'Stav'|trans }}</h2>
 	{{ order.status.name }}
 	<h2>{{ 'Datum vytvoření'|trans }}</h2>
-	{{ order.createdAt|date('d-m-Y') }}
+	{{ order.createdAt|formatDate }}
 	<h2>{{ 'Celková cena'|trans }}</h2>
 	<table class="spaced">
 		<tr>

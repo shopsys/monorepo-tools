@@ -5,6 +5,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.date_time_formatter_extension:
+    class: SS6\ShopBundle\Twig\DateTimeFormatterExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.domain_extension:
     class: SS6\ShopBundle\Twig\DomainExtension
     tags:
@@ -43,6 +48,11 @@ services:
 
   ss6.twig.localization_extension:
     class: SS6\ShopBundle\Twig\LocalizationExtension
+    tags:
+      - { name: twig.extension }
+
+  ss6.twig.number_formatter_extension:
+    class: SS6\ShopBundle\Twig\NumberFormatterExtension
     tags:
       - { name: twig.extension }
 

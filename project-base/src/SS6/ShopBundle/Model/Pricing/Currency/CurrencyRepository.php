@@ -35,6 +35,16 @@ class CurrencyRepository {
 	}
 
 	/**
+	 * @param string $code
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency|null
+	 */
+	public function findByCode($code) {
+		return $this->getCurrencyRepository()->findOneBy([
+			'code' => $code,
+		]);
+	}
+
+	/**
 	 * @param int $currencyId
 	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 */

@@ -41,7 +41,7 @@
 	{% if row.c.id == defaultCurrency.id %}
 		{{ '-' }}
 	{% else %}
-		{{ value }}
+		{{ value|formatNumber }}
 		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
 			'%defaultCurrency%': defaultCurrency.symbol,
 			'%currentCurrency%': row.c.symbol

@@ -206,7 +206,7 @@ class CartController extends Controller {
 	) {
 		if ($addProductResult->getIsNew()) {
 			$flashMessageSender->addSuccessFlashTwig(
-				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity }} ks)',
+				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} ks)',
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getAddedQuantity(),
@@ -214,7 +214,7 @@ class CartController extends Controller {
 			);
 		} else {
 			$flashMessageSender->addSuccessFlashTwig(
-				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity }} ks)',
+				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} ks)',
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getCartItem()->getQuantity(),

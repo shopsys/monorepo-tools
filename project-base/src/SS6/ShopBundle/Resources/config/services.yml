@@ -433,13 +433,27 @@ services:
   ss6.shop.image.processing.image_thumbnail_factory:
     class: SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
 
+  ss6.shop.localization.intl_currency_repository:
+    class: SS6\ShopBundle\Model\Localization\IntlCurrencyRepository
+
   ss6.shop.localization.locale_listener:
     class: SS6\ShopBundle\Model\Localization\LocalizationListener
     tags:
       - { name: kernel.event_subscriber }
 
+  ss6.shop.localization.custom_date_time_formatter:
+    class: SS6\ShopBundle\Component\Localization\DateTimeFormatter
+    factory_service: ss6.shop.localization.custom_date_time_formatter_factory
+    factory_method: create
+
+  ss6.shop.localization.custom_date_time_formatter_factory:
+    class: SS6\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
+
   ss6.shop.localization.localization:
     class: SS6\ShopBundle\Model\Localization\Localization
+
+  ss6.shop.localization.number_format_repository:
+    class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
 
   ss6.shop.localization.translation.grid.translation_grid_factory:
     class: SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory

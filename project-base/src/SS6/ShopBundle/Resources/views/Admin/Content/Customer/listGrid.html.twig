@@ -12,7 +12,7 @@
 	{% if value is empty %}
 		-
 	{% else %}
-		{{ value|date('j.n.Y') }}
+		{{ value|formatDate }}
 	{% endif %}
 {% endblock %}
 
