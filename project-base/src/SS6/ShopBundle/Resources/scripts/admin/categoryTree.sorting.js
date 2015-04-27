@@ -81,6 +81,7 @@
 
 		self.onChange = function () {
 			self.$saveButton.removeClass('btn-disabled');
+			SS6.formChangeInfo.showInfo();
 		};
 	};
 
