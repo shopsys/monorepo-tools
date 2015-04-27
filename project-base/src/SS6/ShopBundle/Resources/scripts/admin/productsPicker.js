@@ -53,11 +53,13 @@
 			$item.find('.js-products-picker-item-input').val(productId);
 			$itemsContainer.append($item);
 			initItem($item);
+			SS6.formChangeInfo.showInfo();
 		};
 
 		var initItem = function ($item) {
 			$item.find('.js-products-picker-item-button-delete').click(function () {
 				$item.remove();
+				SS6.formChangeInfo.showInfo();
 			});
 		};
 
