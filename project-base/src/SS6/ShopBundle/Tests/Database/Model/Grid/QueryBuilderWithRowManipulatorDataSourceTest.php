@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Grid;
 
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -21,7 +22,7 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 			return $row;
 		});
 
-		$row = $dataSource->getOneRow($this->getReference('product_1'));
+		$row = $dataSource->getOneRow($this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1'));
 
 		$this->assertInternalType('array', $row);
 		$this->assertArrayHasKey('newField', $row);

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Cart;
 
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
@@ -21,7 +22,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
-		$product1 = $this->getReference('product_1');
+		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$productId = $product1->getId();
 		$quantity = 10;
 
@@ -62,8 +63,8 @@ class CartFacadeTest extends DatabaseTestCase {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
-		$product1 = $this->getReference('product_1');
-		$product2 = $this->getReference('product_3');
+		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
 
 		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
 		$cart = $cartFactory->get($customerIdentifier);
@@ -117,7 +118,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
-		$product1 = $this->getReference('product_1');
+		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$cartItem = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$em->persist($cartItem);
 		$em->flush();
@@ -148,8 +149,8 @@ class CartFacadeTest extends DatabaseTestCase {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
-		$product1 = $this->getReference('product_1');
-		$product2 = $this->getReference('product_3');
+		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
 		$em->persist($cartItem1);
