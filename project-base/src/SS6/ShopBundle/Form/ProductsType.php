@@ -36,6 +36,7 @@ class ProductsType extends AbstractType {
 	 */
 	public function buildView(FormView $view, FormInterface $form, array $options) {
 		$view->vars['products'] = $form->getData();
+		$view->vars['main_product'] = $options['main_product'];
 	}
 
 	/**
@@ -47,6 +48,7 @@ class ProductsType extends AbstractType {
 			'allow_add' => true,
 			'allow_delete' => true,
 			'delete_empty' => true,
+			'main_product' => null,
 		]);
 	}
 

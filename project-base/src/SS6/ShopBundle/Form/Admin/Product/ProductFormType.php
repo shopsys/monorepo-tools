@@ -54,12 +54,18 @@ class ProductFormType extends AbstractType {
 	private $removeDuplicatesTransformer;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product|null
+	 */
+	private $product;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
 		array $vats,
@@ -67,7 +73,8 @@ class ProductFormType extends AbstractType {
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $flags,
 		TranslatorInterface $translator,
-		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
+		Product $product = null
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
@@ -75,6 +82,7 @@ class ProductFormType extends AbstractType {
 		$this->flags = $flags;
 		$this->translator = $translator;
 		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
+		$this->product = $product;
 	}
 
 	/**
@@ -214,7 +222,10 @@ class ProductFormType extends AbstractType {
 			])
 			->add(
 				$builder
-					->create('accessories', FormType::PRODUCTS, ['required' => false])
+					->create('accessories', FormType::PRODUCTS, [
+						'required' => false,
+						'main_product' => $this->product,
+					])
 					->addViewTransformer($this->removeDuplicatesTransformer)
 			);
 	}

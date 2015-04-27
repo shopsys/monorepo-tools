@@ -25,6 +25,7 @@
 		var $itemsContainer = $productsPicker.find('.js-products-picker-items');
 		var productItems = [];
 		var nextIndex = 0;
+		var mainProductId = $productsPicker.data('products-picker-main-product-id');
 
 		this.init = function () {
 			$addButton.click(openProductsPickerWindow);
@@ -52,6 +53,10 @@
 			}
 
 			return false;
+		};
+
+		this.isMainProduct = function (productId) {
+			return mainProductId !== '' && mainProductId === productId;
 		};
 
 		var initItem = function ($item) {

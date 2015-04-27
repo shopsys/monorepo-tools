@@ -184,6 +184,7 @@
 		class="js-products-picker"
 		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype)|e }}"
 		data-products-picker-url="{{ url('admin_productpicker_productspicker', {jsInstanceId: '__js_instance_id__'}) }}"
+		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
 		<div class="js-products-picker-items mb-1">
 			{% for key, productForm in form %}

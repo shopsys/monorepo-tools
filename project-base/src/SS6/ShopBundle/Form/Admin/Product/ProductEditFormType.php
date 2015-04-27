@@ -99,7 +99,7 @@ class ProductEditFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('productData', $this->productFormTypeFactory->create())
+			->add('productData', $this->productFormTypeFactory->create($this->product))
 			->add('imagesToUpload', FormType::FILE_UPLOAD, [
 				'required' => false,
 				'multiple' => true,
