@@ -9,18 +9,15 @@
 				SS6.formChangeInfo.showInfo();
 			})
 			.each(function() {
-				if (!($(this).find('.form-error:first, .js-validation-errors-list li:first').size() === 0)) {
+				if ($(this).find('.form-error:first, .js-validation-errors-list li:first').size() > 0) {
 					SS6.formChangeInfo.showInfo();
 				}
 			});
 
 		if (typeof CKEDITOR !== 'undefined') {
 			for (var i in CKEDITOR.instances) {
-				var instance = CKEDITOR.instances[i];
-				instance.on('blur', function (e) {
-					if(e.editor.checkDirty()) {
-						SS6.formChangeInfo.showInfo();
-					}
+				CKEDITOR.instances[i].on('change', function () {
+					SS6.formChangeInfo.showInfo();
 				});
 			}
 		}
@@ -28,10 +25,10 @@
 
 	SS6.formChangeInfo.showInfo = function () {
 		var textToShow = SS6.translator.trans('Provedli jste změny, nezapomeňte je uložit!');
-		var $fixedBar = $('.main-content').find('.window-fixed-bar');
-		var $infoDiv = $fixedBar.find('#form-change-info');
+		var $fixedBar = $('.main-content .window-fixed-bar');
+		var $infoDiv = $fixedBar.find('#js-form-change-info');
 		if ($infoDiv.length === 0) {
-			$fixedBar.append('<div id="form-change-info"><strong>' + textToShow + '</strong></div>');
+			$fixedBar.append('<div id="js-form-change-info"><strong>' + textToShow + '</strong></div>');
 		} else {
 			$infoDiv.text = textToShow;
 		}
