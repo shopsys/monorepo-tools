@@ -354,7 +354,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-acceptance">
+	<target name="tests-acceptance" depends="test-db-dump">
 		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
 		<if>
 			<not>
@@ -447,6 +447,16 @@
 			<arg value="--force" />
 			<arg value="--full-database" />
 			<arg value="--no-interaction" />
+		</exec>
+	</target>
+
+	<target name="test-db-dump">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="ss6:database:dump" />
+			<arg value="--pgdump-bin=${path.pg_dump.executable}" />
+			<arg value="${path.test.database.dump}" />
 		</exec>
 	</target>
 

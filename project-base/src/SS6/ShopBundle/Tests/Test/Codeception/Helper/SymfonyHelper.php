@@ -30,6 +30,7 @@ class SymfonyHelper extends Module {
 		require_once $projectDir . '/../app/Environment.php';
 
 		$this->kernel = new AppKernel(Environment::ENVIRONMENT_TEST, true);
+		$this->kernel->boot();
 	}
 
 	/**

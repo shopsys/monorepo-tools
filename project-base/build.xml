@@ -16,6 +16,7 @@
 	<property name="path.grunt.executable" value="${path.root}/node_modules/.bin/grunt"/>
 	<property name="path.java.executable" value="java"/>
 	<property name="path.npm.executable" value="npm"/>
+	<property name="path.pg_dump.executable" value="pg_dump"/>
 	<property name="path.php.executable" value="php"/>
 	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
 	<property name="path.phpcs.ruleset" value="${path.build}/rulesetCS.xml"/>
@@ -36,6 +37,7 @@
 	<property name="path.phpunit.executable" value="${path.bin}/phpunit"/>
 	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
+	<property name="path.test.database.dump" value="${path.app}/cache/test-db-dump.sql"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	<property name="path.web" value="${path.root}/web"/>
 
