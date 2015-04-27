@@ -9,19 +9,6 @@
 		$.magnificPopup.close();
 	};
 
-	SS6.productsPicker.addProduct = function (addButton, instanceId, productId, productName) {
-		var $addButton = $(addButton);
-		if (!$addButton.data('already-selected')) {
-			var productsPicker = window.parent.SS6.productsPicker.instances[instanceId];
-			productsPicker.addProduct(productId, productName);
-			$addButton
-				.data('already-selected', true)
-				.addClass('cursor-default btn-success')
-				.find('.js-products-picker-icon').removeClass('fa-plus').addClass('fa-check').end()
-				.find('.js-products-picker-label').text(SS6.translator.trans('Přidáno'));
-		}
-	};
-
 	SS6.productsPicker.init = function () {
 		$('.js-products-picker').each(function () {
 			var productsPicker = new SS6.productsPicker.ProductsPicker($(this));
@@ -36,10 +23,11 @@
 
 		var $addButton = $productsPicker.find('.js-products-picker-button-add');
 		var $itemsContainer = $productsPicker.find('.js-products-picker-items');
+		var productItems = [];
 		var nextIndex = 0;
 
 		this.init = function () {
-			$addButton.click(openProductsPicker);
+			$addButton.click(openProductsPickerWindow);
 			$itemsContainer.find('.js-products-picker-item').each(function () {
 				initItem($(this));
 			});
@@ -56,14 +44,28 @@
 			SS6.formChangeInfo.showInfo();
 		};
 
+		this.hasProduct = function (productId) {
+			for (var key in productItems) {
+				if (productItems[key].find('.js-products-picker-item-input:first').val() === productId.toString()) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
 		var initItem = function ($item) {
+			var index = productItems.length;
+			productItems[index] = $item;
+
 			$item.find('.js-products-picker-item-button-delete').click(function () {
+				delete productItems[index];
 				$item.remove();
 				SS6.formChangeInfo.showInfo();
 			});
 		};
 
-		var openProductsPicker = function () {
+		var openProductsPickerWindow = function () {
 			$.magnificPopup.open({
 				items: {src: $productsPicker.data('products-picker-url').replace('__js_instance_id__', instanceId)},
 				type: 'iframe',

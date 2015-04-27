@@ -169,9 +169,9 @@
 
 {% macro productsWidgetItem(productName, form) %}
 	<div class="js-products-picker-item in-simple-item">
-		<span class="in-simple-item__icon">
+		<span class="in-simple-item__icon js-products-picker-item-button-delete cursor-pointer">
 			{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
-			<i class="fa fa-trash-o js-products-picker-item-button-delete cursor-pointer"></i>
+			<i class="fa fa-trash-o"></i>
 		</span>
 		<span class="in-simple-item__desc">
 			<span class="js-products-picker-item-product-name">{{ productName }}</span>
