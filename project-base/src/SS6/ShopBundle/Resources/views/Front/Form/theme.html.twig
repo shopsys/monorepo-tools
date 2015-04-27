@@ -217,3 +217,8 @@
 		{%- endif -%}
 	{%- endfor -%}
 {%- endblock button_attributes %}
+
+{% block honey_pot_row %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' js-honey')|trim}) %}
+	{{ form_row(form, {attr: attr}) }}
+{% endblock honey_pot_row %}

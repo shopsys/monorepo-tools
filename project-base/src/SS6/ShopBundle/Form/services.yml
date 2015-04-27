@@ -78,6 +78,11 @@ services:
   ss6.shop.form.front.product.product_filter_form_type_factory:
     class: SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
 
+  ss6.shop.form.honey_pot:
+    class: SS6\ShopBundle\Form\HoneyPotType
+    tags:
+      - { name: form.type, alias: honey_pot }
+
   ss6.shop.form.locale.text:
     class: SS6\ShopBundle\Form\Locale\LocalizedType
     tags:
@@ -102,6 +107,11 @@ services:
     class: SS6\ShopBundle\Form\SingleCheckboxChoiceType
     tags:
       - { name: form.type, alias: single_checkbox_choice }
+
+  ss6.shop.form.timed_form:
+    class: SS6\ShopBundle\Form\TimedFormTypeExtension
+    tags:
+      - { name: form.type_extension, alias: form }
 
   ss6.shop.form.yes_no:
     class: SS6\ShopBundle\Form\YesNoType
