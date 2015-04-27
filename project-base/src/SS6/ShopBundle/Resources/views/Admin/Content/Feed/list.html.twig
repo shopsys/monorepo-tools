@@ -1,0 +1,14 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Feedy - '|trans }}{% endblock %}
+{% block h1 %}{{ 'Feedy'|trans }}{% endblock %}
+
+{% block main_content %}
+	<a href="{{ url('admin_feed_generate') }}" class="btn btn-primary">Vygenerovat feedy</a>
+
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{{ gridView.render() }}
+		</div>
+	</div>
+{% endblock%}

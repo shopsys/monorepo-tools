@@ -1,0 +1,5 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ row.url }}">{{ row.name }}</a>
+{% endblock %}
