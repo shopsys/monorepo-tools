@@ -80,7 +80,20 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 		$mailTemplateData->subject = 'Děkujeme za objednávku na druhé doméně';
 		$mailTemplateData->body = 'Dobrý den,<br /><br />'
 			. 'Vaše objednávka byla úspěšně vytvořena.<br /><br />'
-			. 'O dalších stavech objednávky Vás budeme informovat.';
+			. 'O dalších stavech objednávky Vás budeme informovat.<br />'
+			. 'Čislo objednávky: {number} <br />'
+			. 'Datum a čas vytvoření: {date} <br />'
+			. 'URL adresa eshopu: {url} <br />'
+			. 'URL adresa na detail objednávky: {order_detail_url} <br />'
+			. 'Doprava: {transport} <br />'
+			. 'Platba: {payment} <br />'
+			. 'Celková cena s DPH: {total_price} <br />'
+			. 'Fakturační adresa:<br /> {billing_address} <br />'
+			. 'Doručovací adresa: {delivery_address} <br />'
+			. 'Poznámka: {note} <br />'
+			. 'Produkty: {products} <br />'
+			. '{transport_instructions} <br />'
+			. '{payment_instructions}';
 
 		$mailTemplate = new MailTemplate('order_status_1', 2, $mailTemplateData);
 		$manager->persist($mailTemplate);
