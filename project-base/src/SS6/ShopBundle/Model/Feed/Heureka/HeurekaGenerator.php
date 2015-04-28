@@ -33,7 +33,6 @@ class HeurekaGenerator implements FeedGeneratorInterface {
 	public function __construct(FeedDataSourceInterface $heurekaDataSource, Twig_Environment $twig, EntityManager $em) {
 		$this->heurekaDataSource = $heurekaDataSource;
 		$this->twig = $twig;
-		$this->twigTemplate = $this->twig->loadTemplate('@SS6Shop/Feed/heureka.xml.twig');
 		$this->em = $em;
 	}
 
@@ -43,19 +42,25 @@ class HeurekaGenerator implements FeedGeneratorInterface {
 	 */
 	public function generate(DomainConfig $domainConfig, $targetFilepath) {
 		set_time_limit(0);
+		$this->twigTemplate = $this->twig->loadTemplate('@SS6Shop/Feed/heureka.xml.twig');
 		file_put_contents($targetFilepath, $this->getRenderedBlock('begin'));
 
-		$xmlItems = '';
+		$buffer = '';
 		$counter = 0;
 		foreach ($this->heurekaDataSource->getIterator($domainConfig) as $feedItem) {
 			$counter++;
-			$xmlItems .= $this->getRenderedBlock('item', ['item' => $feedItem]);
+			$buffer .= $this->getRenderedBlock('item', ['item' => $feedItem]);
 			if ($counter >= 100) {
-				file_put_contents($targetFilepath, $xmlItems, FILE_APPEND);
-				$xmlItems = '';
+				file_put_contents($targetFilepath, $buffer, FILE_APPEND);
+				$buffer = '';
 				$counter = 0;
 				$this->em->clear();
 			}
+		}
+
+		if ($counter > 0) {
+			file_put_contents($targetFilepath, $buffer, FILE_APPEND);
+			$this->em->clear();
 		}
 
 		file_put_contents($targetFilepath, $this->getRenderedBlock('end'), FILE_APPEND);
@@ -66,7 +71,7 @@ class HeurekaGenerator implements FeedGeneratorInterface {
 	 * @param array $parameters
 	 * @param bool $echo
 	 */
-	public function getRenderedBlock($name, array $parameters = []) {
+	private function getRenderedBlock($name, array $parameters = []) {
 		if ($this->twigTemplate->hasBlock($name)) {
 			$templateParameters = array_merge(
 				$this->twig->getGlobals(),

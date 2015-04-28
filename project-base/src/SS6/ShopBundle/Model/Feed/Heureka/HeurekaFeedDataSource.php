@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class HeurekaDataSource implements FeedDataSourceInterface {
+class HeurekaFeedDataSource implements FeedDataSourceInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -51,10 +51,12 @@ class HeurekaDataSource implements FeedDataSourceInterface {
 		$this->imageFacade = $imageFacade;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getIterator(DomainConfig $domainConfig) {
 		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
 		$queryBuilder = $this->productRepository->getAllVisibleQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
-		$this->productRepository;
 
 		return new HeurekaDataIterator(
 			$queryBuilder->getQuery()->iterate(),

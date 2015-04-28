@@ -352,13 +352,13 @@ services:
       - %ss6.feed_dir%
       - @ss6.shop.feed.heureka.heureka_generator
 
-  ss6.shop.feed.heureka.heureka_data_source:
-    class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaDataSource
+  ss6.shop.feed.heureka.heureka_feed_data_source:
+    class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaFeedDataSource
 
   ss6.shop.feed.heureka.heureka_generator:
     class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaGenerator
     arguments:
-      - @ss6.shop.feed.heureka.heureka_data_source
+      - @ss6.shop.feed.heureka.heureka_feed_data_source
 
   ss6.shop.file_upload:
     class: SS6\ShopBundle\Model\FileUpload\FileUpload

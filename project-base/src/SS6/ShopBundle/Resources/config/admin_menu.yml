@@ -90,6 +90,8 @@
         - label: 'Editace reklamy'
           route: admin_advert_edit
           visible: false
+    - label: 'XML Feedy'
+      route: admin_feed_list
 
 - label: 'Administrátoři'
   route: admin_administrator_list
@@ -179,8 +181,6 @@
     - label: 'Superadmin'
       route: admin_superadmin_index
       items:
-        - label: 'Feedy'
-          route: admin_feed_list
         - label: 'Ikonky'
           route: admin_superadmin_icons
           items:
