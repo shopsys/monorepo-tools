@@ -83,7 +83,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 	 * @param string $referenceType
 	 * @return string
 	 */
-	private function getGeneratedUrl($routeName, Route $route, FriendlyUrl $friendlyUrl, array $parameters, $referenceType) {
+	public function getGeneratedUrl($routeName, Route $route, FriendlyUrl $friendlyUrl, array $parameters, $referenceType) {
 		$compiledRoute = $this->routeCompiler->compile($route);
 
 		$tokens = $compiledRoute->getTokens();
