@@ -80,6 +80,11 @@ class PriceExtension extends Twig_Extension {
 				['is_safe' => ['html']]
 			),
 			new Twig_SimpleFilter(
+				'priceTextWithCurrencyByCurrencyIdAndLocale',
+				[$this, 'priceTextWithCurrencyByCurrencyIdAndLocaleFilter'],
+				['is_safe' => ['html']]
+			),
+			new Twig_SimpleFilter(
 				'priceWithCurrency',
 				[$this, 'priceWithCurrencyFilter'],
 				['is_safe' => ['html']]
@@ -149,6 +154,21 @@ class PriceExtension extends Twig_Extension {
 
 	/**
 	 * @param string $price
+	 * @param int $currencyId
+	 * @param string $locale
+	 * @return string
+	 */
+	public function priceTextWithCurrencyByCurrencyIdAndLocaleFilter($price, $currencyId, $locale) {
+		if ($price == 0) {
+			return $this->translator->trans('Zdarma');
+		} else {
+			$currency = $this->currencyFacade->getById($currencyId);
+			return $this->formatCurrency($price, $currency, $locale);
+		}
+	}
+
+	/**
+	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return string
 	 */
@@ -186,17 +206,21 @@ class PriceExtension extends Twig_Extension {
 	/**
 	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param string|null $locale
 	 * @return string
 	 */
-	private function formatCurrency($price, Currency $currency) {
+	private function formatCurrency($price, Currency $currency, $locale = null) {
 		if (!is_numeric($price)) {
 			return $price;
 		}
+		if ($locale === null) {
+			$locale = $this->localization->getLocale();
+		}
 
-		$numberFormatter = $this->getNumberFormatter();
+		$numberFormatter = $this->getNumberFormatter($locale);
 		$intlCurrency = $this->intlCurrencyRepository->get(
 			$currency->getCode(),
-			$this->localization->getLocale()
+			$locale
 		);
 
 		return $numberFormatter->formatCurrency($price, $intlCurrency);
@@ -204,10 +228,9 @@ class PriceExtension extends Twig_Extension {
 
 	/**
 	 * @return \CommerceGuys\Intl\Formatter\NumberFormatter
+	 * @param string $locale
 	 */
-	private function getNumberFormatter() {
-		$locale = $this->localization->getLocale();
-
+	private function getNumberFormatter($locale) {
 		$numberFormat = $this->numberFormatRepository->get($locale);
 		$numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::CURRENCY);
 		$numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);

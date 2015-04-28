@@ -11,6 +11,8 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
+use SS6\ShopBundle\Twig\PriceExtension;
 use Twig_Environment;
 
 class OrderMailService {
@@ -56,18 +58,32 @@ class OrderMailService {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Twig\PriceExtension
+	 */
+	private $priceExtension;
+
+	/**
+	 * @var \SS6\ShopBundle\Twig\DateTimeFormatterExtension
+	 */
+	private $dateTimeFormatterExtension;
+
 	public function __construct(
 		Setting $setting,
 		DomainRouterFactory $domainRouterFactory,
 		Twig_Environment $twig,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
-		Domain $domain
+		Domain $domain,
+		PriceExtension $priceExtension,
+		DateTimeFormatterExtension $dateTimeFormatterExtension
 	) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;
 		$this->twig = $twig;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->domain = $domain;
+		$this->priceExtension = $priceExtension;
+		$this->dateTimeFormatterExtension = $dateTimeFormatterExtension;
 	}
 
 	/**
@@ -111,11 +127,11 @@ class OrderMailService {
 
 		return [
 			self::VARIABLE_NUMBER  => $order->getNumber(),
-			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
+			self::VARIABLE_DATE => $this->getFormattedDateTime($order),
 			self::VARIABLE_URL => $router->generate('front_homepage', [], true),
 			self::VARIABLE_TRANSPORT => $order->getTransportName(),
 			self::VARIABLE_PAYMENT => $order->getPaymentName(),
-			self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
+			self::VARIABLE_TOTAL_PRICE => $this->getFormattedPrice($order),
 			self::VARIABLE_BILLING_ADDRESS => $this->getBillingAddressHtmlTable($order),
 			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
 			self::VARIABLE_NOTE  => $order->getNote(),
@@ -134,7 +150,7 @@ class OrderMailService {
 	private function getVariablesReplacementsForSubject(Order $order) {
 		return [
 			self::VARIABLE_NUMBER  => $order->getNumber(),
-			self::VARIABLE_DATE => $order->getCreatedAt()->format('d-m-Y H:i'),
+			self::VARIABLE_DATE => $this->getFormattedDateTime($order),
 		];
 
 	}
@@ -158,6 +174,29 @@ class OrderMailService {
 			self::VARIABLE_TRANSPORT_INSTRUCTIONS,
 			self::VARIABLE_PAYMENT_INSTRUCTIONS,
 		];
+	}
+
+	/**
+	 * @param  \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function getFormattedPrice(Order $order) {
+		return $this->priceExtension->priceTextWithCurrencyByCurrencyIdAndLocaleFilter(
+			$order->getTotalPriceWithVat(),
+			$order->getCurrency()->getId(),
+			$this->getDomainLocaleByOrder($order)
+		);
+	}
+
+	/**
+	 * @param  \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function getFormattedDateTime(Order $order) {
+		return $this->dateTimeFormatterExtension->formatDateTime(
+			$order->getCreatedAt(),
+			$this->getDomainLocaleByOrder($order)
+		);
 	}
 
 	/**
@@ -190,6 +229,7 @@ class OrderMailService {
 		return $this->twig->render('@SS6Shop/Mail/Order/products.html.twig', [
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
+			'orderLocale' => $this->getDomainLocaleByOrder($order),
 		]);
 
 	}
@@ -202,6 +242,15 @@ class OrderMailService {
 		return $this->domainRouterFactory->getRouter($order->getDomainId())->generate(
 			'front_customer_order_detail_unregistered', ['urlHash' => $order->getUrlHash()], true
 		);
+	}
+
+	/**
+	 *
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function getDomainLocaleByOrder($order) {
+		return $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 	}
 
 }
