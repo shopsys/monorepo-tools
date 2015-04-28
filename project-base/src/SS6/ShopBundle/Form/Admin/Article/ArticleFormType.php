@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Article;
 
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +11,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ArticleFormType extends AbstractType {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\Article|null
+	 */
+	private $article;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Article\Article|null $article
+	 */
+	public function __construct(Article $article = null) {
+		$this->article = $article;
+	}
 
 	/**
 	 * @return string
@@ -31,6 +44,10 @@ class ArticleFormType extends AbstractType {
 				],
 			])
 			->add('domainId', FormType::DOMAIN, ['required' => true])
+			->add('urls', FormType::URL_LIST, [
+				'route_name' => 'front_article_detail',
+				'entity_id' => $this->article === null ? null : $this->article->getId(),
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

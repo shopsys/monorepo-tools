@@ -2,3 +2,7 @@
 
 {% block title %}- {{ 'Nový článek'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nový článek'|trans }}{% endblock %}
+
+{% block article_urls %}
+	{% do form.urls.setRendered %}
+{% endblock %}

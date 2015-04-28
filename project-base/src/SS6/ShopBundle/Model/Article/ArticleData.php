@@ -26,6 +26,11 @@ class ArticleData {
 	public $domainId;
 
 	/**
+	 * @var array
+	 */
+	public $urls;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $text
 	 * @param int|null $domainId
