@@ -13,6 +13,8 @@ use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
+	const PRODUCT_PREFIX = 'product_';
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
@@ -51,7 +53,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$productsEditData = $loaderService->getProductsEditData();
 		$productNo = 1;
 		foreach ($productsEditData as $productEditData) {
-			$this->createProduct('product_' . $productNo, $productEditData);
+			$this->createProduct(self::PRODUCT_PREFIX . $productNo, $productEditData);
 			$productNo++;
 		}
 

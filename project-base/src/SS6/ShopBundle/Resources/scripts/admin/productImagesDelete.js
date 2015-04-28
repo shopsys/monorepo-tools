@@ -19,6 +19,7 @@
 				$imagePreview.addClass('list-image__item__in--removed');
 				$delete.hide();
 				$revert.show();
+				SS6.formChangeInfo.showInfo();
 				return false;
 			});
 

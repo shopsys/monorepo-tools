@@ -5,6 +5,7 @@
 
 	SS6.validation.addNewItemToCollection = function (collectionSelector, itemIndex) {
 		$($(collectionSelector)).jsFormValidator('addPrototype', itemIndex);
+		SS6.formChangeInfo.showInfo();
 	};
 
 	SS6.validation.removeItemFromCollection = function (collectionSelector, itemIndex) {
@@ -15,6 +16,7 @@
 		$($collection).jsFormValidator('delPrototype', itemIndex);
 		SS6.validation.highlightSubmitButtons($collection.closest('form'));
 		$collection.jsFormValidator('validate');
+		SS6.formChangeInfo.showInfo();
 	};
 
 	SS6.validation.isFormValid = function (form) {

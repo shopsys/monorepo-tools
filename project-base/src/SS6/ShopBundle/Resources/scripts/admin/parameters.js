@@ -12,6 +12,8 @@
 			SS6.validation.removeItemFromCollection('#product_edit_parameters', index);
 			$item.remove();
 
+			SS6.formChangeInfo.showInfo();
+
 			SS6.parameters.refreshCount($collection);
 
 			event.preventDefault();
@@ -31,6 +33,8 @@
 			$collection.data('index', index + 1);
 
 			$collection.append($item);
+
+			SS6.formChangeInfo.showInfo();
 
 			SS6.parameters.refreshCount($collection);
 

@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -41,8 +42,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_9' => 2,
-				'product_10' => 3,
+				ProductDataFixture::PRODUCT_PREFIX . '9' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '10' => 3,
 			],
 			$this->getReference('order_status_done'),
 			$user
@@ -63,10 +64,10 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_18' => 2,
-				'product_19' => 1,
-				'product_20' => 1,
-				'product_15' => 5,
+				ProductDataFixture::PRODUCT_PREFIX . '18' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '19' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '20' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '15' => 5,
 			],
 			$this->getReference('order_status_new'),
 			$user
@@ -87,8 +88,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_4' => 6,
-				'product_11' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '4' => 6,
+				ProductDataFixture::PRODUCT_PREFIX . '11' => 1,
 			],
 			$this->getReference('order_status_done'),
 			$user
@@ -109,7 +110,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_1' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '1' => 1,
 			],
 			$this->getReference('order_status_in_progress'),
 			$user
@@ -130,9 +131,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_2' => 8,
-				'product_3' => 1,
-				'product_1' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '2' => 8,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '1' => 2,
 			],
 			$this->getReference('order_status_done'),
 			$user
@@ -153,12 +154,12 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_13' => 2,
-				'product_14' => 1,
-				'product_15' => 1,
-				'product_16' => 1,
-				'product_17' => 1,
-				'product_18' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '13' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '15' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '16' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '17' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '18' => 1,
 			],
 			$this->getReference('order_status_new'),
 			$user
@@ -179,9 +180,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_7' => 1,
-				'product_8' => 1,
-				'product_12' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '7' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '8' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '12' => 2,
 			],
 			$this->getReference('order_status_canceled')
 		);
@@ -201,9 +202,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_1' => 6,
-				'product_2' => 1,
-				'product_12' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '1' => 6,
+				ProductDataFixture::PRODUCT_PREFIX . '2' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '12' => 1,
 			],
 			$this->getReference('order_status_done')
 		);
@@ -223,7 +224,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_14' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
 			],
 			$this->getReference('order_status_in_progress')
 		);
@@ -243,8 +244,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_9' => 3,
-				'product_13' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '9' => 3,
+				ProductDataFixture::PRODUCT_PREFIX . '13' => 2,
 			],
 			$this->getReference('order_status_canceled')
 		);
@@ -276,8 +277,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_1' => 2,
-				'product_3' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '1' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
 			$this->getReference('order_status_new'),
 			$user
@@ -299,8 +300,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_2' => 2,
-				'product_4' => 4,
+				ProductDataFixture::PRODUCT_PREFIX . '2' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '4' => 4,
 			],
 			$this->getReference('order_status_new'),
 			$user
@@ -321,7 +322,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_3' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
 			$this->getReference('order_status_new')
 		);
@@ -341,9 +342,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_1' => 1,
-				'product_2' => 1,
-				'product_3' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '1' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '2' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
 			$this->getReference('order_status_in_progress')
 		);
@@ -363,8 +364,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_4' => 2,
-				'product_3' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '4' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
 			$this->getReference('order_status_done')
 		);
@@ -384,8 +385,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_10' => 1,
-				'product_20' => 4,
+				ProductDataFixture::PRODUCT_PREFIX . '10' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '20' => 4,
 			],
 			$this->getReference('order_status_new')
 		);
@@ -405,10 +406,10 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_15' => 1,
-				'product_18' => 1,
-				'product_19' => 1,
-				'product_3' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '15' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '18' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '19' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
 			$this->getReference('order_status_done')
 		);
@@ -428,9 +429,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_9' => 1,
-				'product_19' => 1,
-				'product_6' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '19' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '6' => 1,
 			],
 			$this->getReference('order_status_in_progress')
 		);
@@ -453,11 +454,11 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_7' => 1,
-				'product_17' => 6,
-				'product_9' => 1,
-				'product_14' => 1,
-				'product_10' => 2,
+				ProductDataFixture::PRODUCT_PREFIX . '7' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '17' => 6,
+				ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
+				ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
 			],
 			$this->getReference('order_status_new')
 		);
@@ -477,7 +478,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				'product_3' => 10,
+				ProductDataFixture::PRODUCT_PREFIX . '3' => 10,
 			],
 			$this->getReference('order_status_canceled')
 		);

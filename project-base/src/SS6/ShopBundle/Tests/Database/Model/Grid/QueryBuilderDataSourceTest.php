@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Grid;
 
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -18,7 +19,7 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase {
 
 		$queryBuilderDataSource = new QueryBuilderDataSource($qb, 'p.id');
 
-		$row = $queryBuilderDataSource->getOneRow($this->getReference('product_1'));
+		$row = $queryBuilderDataSource->getOneRow($this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1'));
 
 		$this->assertInternalType('array', $row);
 		$this->assertArrayHasKey('p', $row);

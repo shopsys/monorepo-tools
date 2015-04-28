@@ -5,27 +5,27 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 
 class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	private $topProductsOnDomainData = [
-		// $productReferenceName => $domainId
-		'product_1' => 1,
-		'product_17' => 1,
-		'product_9' => 1,
-		'product_14' => 2,
-		'product_10' => 2,
-		'product_7' => 2,
-	];
-
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		foreach ($this->topProductsOnDomainData as $productReferenceName => $domainId) {
+		$topProductsOnDomainData = [
+			// $productReferenceName => $domainId
+			ProductDataFixture::PRODUCT_PREFIX . '1' => 1,
+			ProductDataFixture::PRODUCT_PREFIX . '17' => 1,
+			ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
+			ProductDataFixture::PRODUCT_PREFIX . '14' => 2,
+			ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
+			ProductDataFixture::PRODUCT_PREFIX . '7' => 2,
+		];
+		foreach ($topProductsOnDomainData as $productReferenceName => $domainId) {
 			$product = $this->getReference($productReferenceName);
 			$this->createTopProduct($manager, $product, $domainId);
 		}

@@ -42,6 +42,7 @@
 		$item.remove();
 
 		SS6.order.items.refreshCount($collection);
+		SS6.formChangeInfo.showInfo();
 	};
 
 	SS6.order.items.getNewIndex = function($collection) {
@@ -72,6 +73,7 @@
 		SS6.validation.addNewItemToCollection('#order_items', index);
 
 		SS6.order.items.refreshCount($collection);
+		SS6.formChangeInfo.showInfo();
 	};
 
 	SS6.order.items.refreshCount = function($collection) {

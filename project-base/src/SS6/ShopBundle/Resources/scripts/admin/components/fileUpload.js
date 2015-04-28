@@ -111,6 +111,7 @@
 				items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
 				updateFileStatus('success', SS6.translator.trans('Úspěšně nahráno'));
 				$status.parent().fadeOut(4000);
+				SS6.formChangeInfo.showInfo();
 			} else {
 				items[id].deleteItem();
 				SS6.window({
