@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Admin\Category;
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -25,15 +26,23 @@ class CategoryFormType extends AbstractType {
 	private $inverseArrayValuesTransformer;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Category\Category|null
+	 */
+	private $category;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
+	 * @param \SS6\ShopBundle\Model\Category\Category|null $category
 	 */
 	public function __construct(
 		array $categories,
-		InverseArrayValuesTransformer $inverseArrayValuesTransformer
+		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
+		Category $category = null
 	) {
 		$this->categories = $categories;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
+		$this->category = $category;
 	}
 
 	/**
@@ -67,6 +76,10 @@ class CategoryFormType extends AbstractType {
 					'property_path' => 'hiddenOnDomains',
 				])
 				->addViewTransformer($this->inverseArrayValuesTransformer))
+			->add('urls', FormType::URL_LIST, [
+				'route_name' => 'front_product_list',
+				'entity_id' => $this->category === null ? null : $this->category->getId(),
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

@@ -26,6 +26,11 @@ class CategoryData {
 	public $hiddenOnDomains;
 
 	/**
+	 * @var array
+	 */
+	public $urls;
+
+	/**
 	 * @param string[] $name
 	 * @param \SS6\ShopBundle\Model\Category\Category|null $parent
 	 */
