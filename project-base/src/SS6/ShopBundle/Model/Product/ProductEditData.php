@@ -42,6 +42,11 @@ class ProductEditData {
 	public $seoMetaDescriptions;
 
 	/**
+	 * @var array
+	 */
+	public $urls;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload

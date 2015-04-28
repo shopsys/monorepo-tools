@@ -30,3 +30,7 @@
 		</div>
 	</fieldset>
 {% endblock %}
+
+{% block product_urls %}
+	{% do form.urls.setRendered %}
+{% endblock %}
