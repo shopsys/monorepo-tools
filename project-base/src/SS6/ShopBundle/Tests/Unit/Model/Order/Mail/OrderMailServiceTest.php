@@ -13,6 +13,8 @@ use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
+use SS6\ShopBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
@@ -38,13 +40,21 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$domainMock = $this->getMockBuilder(Domain::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$priceExtensionMock = $this->getMockBuilder(PriceExtension::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$dateTimeFormatterExtensionMock = $this->getMockBuilder(DateTimeFormatterExtension::class)
+			->disableOriginalConstructor()
+			->getMock();
 
 		$orderMailService = new OrderMailService(
 			$settingMock,
 			$domainRouterFactoryMock,
 			$twigMock,
 			$orderItemPriceCalculationMock,
-			$domainMock
+			$domainMock,
+			$priceExtensionMock,
+			$dateTimeFormatterExtensionMock
 		);
 
 		$orderStatus1 = $this->getMock(OrderStatus::class, ['getId'], [], '', false);
@@ -81,6 +91,13 @@ class OrderMailServiceTest extends FunctionalTestCase {
 		$settingMock = $this->getMockBuilder(Setting::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$priceExtensionMock = $this->getMockBuilder(PriceExtension::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dateTimeFormatterExtensionMock = $this->getMockBuilder(DateTimeFormatterExtension::class)
+			->disableOriginalConstructor()
+			->getMock();
 
 		$domainConfig = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', '');
 		$domain = new Domain([$domainConfig]);
@@ -90,7 +107,9 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			$domainRouterFactoryMock,
 			$twigMock,
 			$orderItemPriceCalculationMock,
-			$domain
+			$domain,
+			$priceExtensionMock,
+			$dateTimeFormatterExtensionMock
 		);
 
 		$order = $this->getReference('order_1');
