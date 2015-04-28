@@ -46,6 +46,7 @@ class FormType {
 	const TIME = 'time';
 	const TIMEZONE = 'timezone';
 	const URL = 'url';
+	const URL_LIST = 'url_list';
 	const WYSIWYG = 'ckeditor';
 	const YES_NO = 'yes_no';
 }

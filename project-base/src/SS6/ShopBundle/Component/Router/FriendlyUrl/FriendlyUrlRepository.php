@@ -61,4 +61,19 @@ class FriendlyUrlRepository {
 		return $friendlyUrl;
 	}
 
+	/**
+	 *
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+	 */
+	public function getAllByRouteNameAndEntityId($routeName, $entityId) {
+		$criteria = [
+			'routeName' => $routeName,
+			'entityId' => $entityId,
+		];
+
+		return $this->getFriendlyUrlRepository()->findBy($criteria);
+	}
+
 }

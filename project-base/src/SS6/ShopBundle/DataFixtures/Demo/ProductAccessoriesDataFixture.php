@@ -27,6 +27,7 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24'),
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
 		];
+		$productEditData->urls['toDelete'] = [];
 		$productEditFacade->edit($product->getId(), $productEditData);
 		$manager->flush($product);
 	}
