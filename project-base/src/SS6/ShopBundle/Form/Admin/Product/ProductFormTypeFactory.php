@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Flag\FlagRepository;
+use SS6\ShopBundle\Model\Product\Product;
 
 class ProductFormTypeFactory {
 
@@ -58,9 +59,10 @@ class ProductFormTypeFactory {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 * @return \SS6\ShopBundle\Form\Admin\Product\ProductFormType
 	 */
-	public function create() {
+	public function create(Product $product = null) {
 		$vats = $this->vatRepository->findAll();
 		$availabilities = $this->availabilityRepository->getAll();
 		$flags = $this->flagRepository->findAll();
@@ -71,7 +73,8 @@ class ProductFormTypeFactory {
 			$this->inverseArrayValuesTransformer,
 			$flags,
 			$this->translator,
-			$this->removeDuplicatesFromArrayTransformer
+			$this->removeDuplicatesFromArrayTransformer,
+			$product
 		);
 	}
 
