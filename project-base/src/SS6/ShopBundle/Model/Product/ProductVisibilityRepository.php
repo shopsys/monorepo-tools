@@ -28,14 +28,21 @@ class ProductVisibilityRepository {
 	 */
 	private $pricingGroupRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
+
 	public function __construct(
 		EntityManager $em,
 		Domain $domain,
-		PricingGroupRepository $pricingGroupRepository
+		PricingGroupRepository $pricingGroupRepository,
+		ProductRepository $productRepository
 	) {
 		$this->em = $em;
 		$this->domain = $domain;
 		$this->pricingGroupRepository = $pricingGroupRepository;
+		$this->productRepository = $productRepository;
 	}
 
 	public function refreshProductsVisibility() {
@@ -114,6 +121,26 @@ class ProductVisibilityRepository {
 					'pricingGroupId' => $pricingGroup->getId(),
 				]);
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	public function refreshProductVisibilitiesForNewPricingGroup(PricingGroup $pricingGroup) {
+		foreach ($this->productRepository->getAll() as $product) {
+			$query = $this->em->createNativeQuery('INSERT INTO product_visibilities VALUES (
+				:product_id,
+				:pricing_group_id,
+				:domain_id,
+				:visible)', new ResultSetMapping());
+			$query->execute([
+				'product_id' => $product->getId(),
+				'pricing_group_id' => $pricingGroup->getId(),
+				'domain_id' => $pricingGroup->getDomainId(),
+				'visible' => false,
+			]);
+		}
+		$this->refreshProductsVisibility();
 	}
 
 	/**
