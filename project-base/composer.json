@@ -58,7 +58,7 @@
 		"twig/extensions": "1.2.0"
 	},
 	"require-dev": {
-		"codeception/codeception": "dev-master#f9f3db4",
+		"codeception/codeception": "dev-master#3234289",
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
 		"pdepend/pdepend": "2.0.0",
 		"phpmd/phpmd": "2.0.0",
