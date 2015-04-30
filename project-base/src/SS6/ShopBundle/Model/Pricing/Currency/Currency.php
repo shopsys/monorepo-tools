@@ -38,13 +38,6 @@ class Currency {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=10)
-	 */
-	private $symbol;
-
-	/**
-	 * @var string
-	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
 	private $exchangeRate;
@@ -55,7 +48,6 @@ class Currency {
 	public function __construct(CurrencyData $currencyData) {
 		$this->name = $currencyData->name;
 		$this->code = $currencyData->code;
-		$this->symbol = $currencyData->symbol;
 		$this->exchangeRate = $currencyData->exchangeRate;
 	}
 
@@ -78,13 +70,6 @@ class Currency {
 	 */
 	public function getCode() {
 		return $this->code;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSymbol() {
-		return $this->symbol;
 	}
 
 	/**
@@ -114,7 +99,6 @@ class Currency {
 	public function edit(CurrencyData $currencyData) {
 		$this->name = $currencyData->name;
 		$this->code = $currencyData->code;
-		$this->symbol = $currencyData->symbol;
 	}
 
 }

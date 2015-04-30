@@ -30,11 +30,6 @@ class IntlCurrencyRepository extends BaseCurrencyRepository {
 	public function get($currencyCode, $locale = null, $fallbackLocale = null) {
 		$intlCurrency = parent::get($currencyCode, $locale, $fallbackLocale);
 
-		$currency = $this->findCurrencyByCode($intlCurrency->getCurrencyCode());
-		if ($currency !== null) {
-			$intlCurrency->setSymbol($currency->getSymbol());
-		}
-
 		return $intlCurrency;
 	}
 
@@ -45,26 +40,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository {
 	public function getAll($locale = null, $fallbackLocale = null) {
 		$intlCurrencies = parent::getAll($locale, $fallbackLocale);
 
-		foreach ($intlCurrencies as $intlCurrency) {
-			$currency = $this->findCurrencyByCode($intlCurrency->getCurrencyCode());
-			if ($currency !== null) {
-				$intlCurrency->setSymbol($currency->getSymbol());
-			}
-		}
-
 		return $intlCurrencies;
-	}
-
-	/**
-	 * @param string $code
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
-	 */
-	private function findCurrencyByCode($code) {
-		if (!array_key_exists($code, $this->currencyByCodeCache)) {
-			$this->currencyByCodeCache[$code] = $this->currencyRepository->findByCode($code);
-		}
-
-		return $this->currencyByCodeCache[$code];
 	}
 
 }
