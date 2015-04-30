@@ -40,7 +40,7 @@
 		"intervention/image": "2.0.17",
 		"jms/translation-bundle": "dev-master#8eff567",
 		"phing/phing": "2.9.1",
-		"phpunit/phpunit": "4.5.1",
+		"phpunit/phpunit": "4.6.6",
 		"prezent/doctrine-translatable-bundle": "dev-master#adfc849",
 		"raulfraile/ladybug-bundle": "1.0.6",
 		"sensio/distribution-bundle": "3.0.4",
