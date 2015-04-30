@@ -55,13 +55,9 @@ class ProductVisibilityExtension extends \Twig_Extension {
 	 */
 	public function isVisibileForDefaultPricingGroupOnDomain(Product $product, $domainId) {
 		$pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
-		$productVisibility = $this->productVisibilityRepository->findProductVisibility($product, $pricingGroup, $domainId);
+		$productVisibility = $this->productVisibilityRepository->getProductVisibility($product, $pricingGroup, $domainId);
 
-		if ($productVisibility !== null) {
-			return $productVisibility->isVisible();
-		}
-
-		return false;
+		return $productVisibility->isVisible();
 	}
 
 }

@@ -82,12 +82,12 @@ class ProductOnCurrentDomainFacade {
 		$accessoriesVisibleOnDomain = [];
 
 		foreach ($accessories as $accessory) {
-			$accessoryVisibility = $this->productVisibilityRepository->findProductVisibility(
+			$accessoryVisibility = $this->productVisibilityRepository->getProductVisibility(
 				$product,
 				$this->currentCustomer->getPricingGroup(),
 				$this->domain->getId()
 			);
-			if ($accessoryVisibility !== null && $accessoryVisibility->isVisible()) {
+			if ($accessoryVisibility->isVisible()) {
 				$accessoriesVisibleOnDomain[] = $accessory;
 			}
 		}

@@ -141,4 +141,23 @@ class ProductVisibilityRepository {
 		]);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility
+	 */
+	public function getProductVisibility(
+		Product $product,
+		PricingGroup $pricingGroup,
+		$domainId
+	) {
+		$productVisibility = $this->findProductVisibility($product, $pricingGroup, $domainId);
+		if ($productVisibility === null) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProducVisibilitytNotFoundException();
+		}
+
+		return $productVisibility;
+	}
+
 }
