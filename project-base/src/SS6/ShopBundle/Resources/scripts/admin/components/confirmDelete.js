@@ -3,7 +3,7 @@
 	SS6 = window.SS6 || {};
 
 	SS6.createConfirmDelete = function (confirmLink) {
-		var ConfirmDelete = new SS6.ConfirmDelete(confirmLink, '#window-main-container .window');
+		var ConfirmDelete = new SS6.ConfirmDelete(confirmLink, '#window-main-container .window .js-window-content');
 		ConfirmDelete.init();
 	};
 

@@ -46,7 +46,7 @@
 		}
 
 		var $window = $('<div class="window window--active"></div>');
-		var $windowContent = $('<div></div>').html(options.content);
+		var $windowContent = $('<div class="js-window-content"></div>').html(options.content);
 
 		$activeWindow = $window;
 
