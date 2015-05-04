@@ -25,9 +25,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_coefficient %}
-	{# @TODO Hotfix - get coefficient from entity #}
-	{% set coefficient = value / (100 + value) %}
-	{{ coefficient|round(4)|formatNumber }}
+	{{ row.vat.coefficient|formatNumber }}
 {% endblock %}
 
 {% block grid_no_data %}

@@ -7,7 +7,8 @@ use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatGridFactory implements GridFactoryInterface {
 
@@ -26,14 +27,21 @@ class VatGridFactory implements GridFactoryInterface {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 */
+	private $vatFacade;
+
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		Translator $translator
+		Translator $translator,
+		VatFacade $vatFacade
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->translator = $translator;
+		$this->vatFacade = $vatFacade;
 	}
 
 	/**
@@ -44,7 +52,11 @@ class VatGridFactory implements GridFactoryInterface {
 		$queryBuilder
 			->select('v')
 			->from(Vat::class, 'v');
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'v.id');
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource($queryBuilder, 'v.id', function ($row) {
+			$row['vat'] = $this->vatFacade->getById($row['v']['id']);
+
+			return $row;
+		});
 
 		$grid = $this->gridFactory->create('vatList', $dataSource);
 		$grid->setDefaultOrder('name');
