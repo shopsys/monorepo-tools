@@ -347,6 +347,7 @@
 			passthru="true"
 			checkreturn="true"
 		>
+			<arg value="--colors=always"/>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
@@ -409,6 +410,7 @@
 			passthru="true"
 			checkreturn="true"
 		>
+			<arg value="--colors=always"/>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
@@ -423,6 +425,7 @@
 			passthru="true"
 			checkreturn="true"
 		>
+			<arg value="--colors=always"/>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
@@ -501,6 +504,7 @@
 			passthru="true"
 			checkreturn="true"
 		>
+			<arg value="--colors=always"/>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
