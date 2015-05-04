@@ -23,13 +23,6 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 	}
 
 	/**
-	 * @param callable $manipulateRowCallback
-	 */
-	public function setManipulateRowCallback(callable $manipulateRowCallback) {
-		$this->manipulateRowCallback = $manipulateRowCallback;
-	}
-
-	/**
 	 * @param int $rowId
 	 * @return array
 	 */
