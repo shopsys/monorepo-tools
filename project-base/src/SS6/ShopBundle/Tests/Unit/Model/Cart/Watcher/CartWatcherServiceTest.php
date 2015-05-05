@@ -14,6 +14,8 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductVisibility;
+use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartWatcherServiceTest extends FunctionalTestCase {
@@ -76,7 +78,6 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 	}
 
 	public function testGetNotListableItemsWithVisibleButNotSellableProduct() {
-		$this->markTestSkipped('Není dořešeno předávání závislosti ProductVisibilityRepository');
 		$vat = new Vat(new VatData('vat', 21));
 		$productMock = $this->getMockBuilder(Product::class)
 			->setMethods(['getCurrentLocale'])
@@ -102,26 +103,33 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 			->method('getPricingGroup')
 			->willReturn($expectedPricingGroup);
 
+		$productVisibilityMock = $this->getMockBuilder(ProductVisibility::class)
+			->disableOriginalConstructor()
+			->setMethods(['isVisible'])
+			->getMock();
+		$productVisibilityMock
+			->expects($this->any())
+			->method('isVisible')
+			->willReturn(true);
+
 		$productVisibilityRepositoryMock = $this->getMockBuilder(ProductVisibilityRepository::class)
-			->setMethods(['findProductVisibility'])
+			->disableOriginalConstructor()
+			->setMethods(['getProductVisibility'])
 			->getMock();
 		$productVisibilityRepositoryMock
 			->expects($this->any())
-			->method('findProductVisibility')
-			->willReturn(true);
+			->method('getProductVisibility')
+			->willReturn($productVisibilityMock);
 
 		$productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
 		$domain = $this->getContainer()->get(Domain::class);
 
-		$cartWatcherServiceMock = $this->getMockBuilder(CartWatcherService::class)
-			->setConstructorArgs([$productPriceCalculationForUser, $productVisibilityRepositoryMock, $domain])
-			->getMock();
+		$cartWatcherService = new CartWatcherService($productPriceCalculationForUser, $productVisibilityRepositoryMock, $domain);
 
 		$cartItems = [$cartItemMock];
 		$cart = new Cart($cartItems);
 
-		/* @var $cartWatcherServiceMock \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
-		$notListableItems = $cartWatcherServiceMock->getNotListableItems($cart, $currentCustomerMock);
+		$notListableItems = $cartWatcherService->getNotListableItems($cart, $currentCustomerMock);
 		$this->assertCount(1, $notListableItems);
 	}
 }
