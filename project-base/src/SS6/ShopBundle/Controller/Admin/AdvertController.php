@@ -11,9 +11,10 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Advert\Advert;
 use SS6\ShopBundle\Model\Advert\AdvertData;
 use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
+use SS6\ShopBundle\Model\Advert\AdvertPositionRepository;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends BaseController {
@@ -48,13 +49,19 @@ class AdvertController extends BaseController {
 	 */
 	private $advertFormTypeFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionRepository
+	 */
+	private $advertPositionRepository;
+
 	public function __construct(
 		AdvertEditFacade $advertEditFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
-		AdvertFormTypeFactory $advertFormTypeFactory
+		AdvertFormTypeFactory $advertFormTypeFactory,
+		AdvertPositionRepository $advertPositionRepository
 	) {
 		$this->advertEditFacade = $advertEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -62,6 +69,7 @@ class AdvertController extends BaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->advertFormTypeFactory = $advertFormTypeFactory;
+		$this->advertPositionRepository = $advertPositionRepository;
 	}
 
 	/**
@@ -117,14 +125,23 @@ class AdvertController extends BaseController {
 			->from(Advert::class, 'a')
 			->where('a.domainId = :selectedDomainId')
 			->setParameter('selectedDomainId', $this->selectedDomain->getId());
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
+			$queryBuilder,
+			'a.id',
+			function ($row) {
+				$advert = $this->advertEditFacade->getById($row['a']['id']);
+				$row['advert'] = $advert;
+				return $row;
+			}
+		);
 
 		$grid = $this->gridFactory->create('advertList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
+		$grid->addColumn('visible', 'a.hidden', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
 		$grid->addColumn('name', 'a.name', 'Název', true);
-		$grid->addColumn('type', 'a.type', 'Typ', true);
+		$grid->addColumn('preview', 'a.id', 'Náhled', false);
 		$grid->addColumn('positionName', 'a.positionName', 'Plocha', true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
@@ -132,7 +149,9 @@ class AdvertController extends BaseController {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_advert_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tuto reklamu?');
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig');
+		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [
+			'advertPositionsByName' => $this->advertPositionRepository->getPositionsByName(),
+		]);
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
