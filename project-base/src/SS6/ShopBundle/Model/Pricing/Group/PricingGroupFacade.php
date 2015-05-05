@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class PricingGroupFacade {
 
@@ -47,6 +48,11 @@ class PricingGroupFacade {
 	 */
 	private $pricingGroupSettingFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+	 */
+	private $productVisibilityRepository;
+
 	public function __construct(
 		EntityManager $em,
 		PricingGroupRepository $pricingGroupRepository,
@@ -54,7 +60,8 @@ class PricingGroupFacade {
 		SelectedDomain $selectedDomain,
 		CustomerEditFacade $customerEditFacade,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-		PricingGroupSettingFacade $pricingGroupSettingFacade
+		PricingGroupSettingFacade $pricingGroupSettingFacade,
+		ProductVisibilityRepository $productVisibilityRepository
 	) {
 		$this->em = $em;
 		$this->pricingGroupRepository = $pricingGroupRepository;
@@ -63,6 +70,7 @@ class PricingGroupFacade {
 		$this->customerEditFacade = $customerEditFacade;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
+		$this->productVisibilityRepository = $productVisibilityRepository;
 	}
 
 	/**
@@ -84,6 +92,7 @@ class PricingGroupFacade {
 		$this->em->flush();
 
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productVisibilityRepository->refreshProductVisibilitiesForPricingGroup($pricingGroup);
 
 		return $pricingGroup;
 	}

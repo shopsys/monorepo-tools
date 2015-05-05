@@ -66,7 +66,7 @@ class CartWatcherService {
 		foreach ($cart->getItems() as $item) {
 			try {
 				$productVisibility = $this->productVisibilityRepository
-					->findProductVisibility(
+					->getProductVisibility(
 						$item->getProduct(),
 						$currentCustomer->getPricingGroup(),
 						$this->domain->getId()

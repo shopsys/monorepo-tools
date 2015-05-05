@@ -28,14 +28,21 @@ class ProductVisibilityRepository {
 	 */
 	private $pricingGroupRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
+
 	public function __construct(
 		EntityManager $em,
 		Domain $domain,
-		PricingGroupRepository $pricingGroupRepository
+		PricingGroupRepository $pricingGroupRepository,
+		ProductRepository $productRepository
 	) {
 		$this->em = $em;
 		$this->domain = $domain;
 		$this->pricingGroupRepository = $pricingGroupRepository;
+		$this->productRepository = $productRepository;
 	}
 
 	public function refreshProductsVisibility() {
@@ -117,6 +124,20 @@ class ProductVisibilityRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	public function refreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup) {
+		$query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
+			SELECT id, :pricing_group_id, :domain_id, :visible FROM products', new ResultSetMapping());
+		$query->execute([
+			'pricing_group_id' => $pricingGroup->getId(),
+			'domain_id' => $pricingGroup->getDomainId(),
+			'visible' => false,
+		]);
+		$this->refreshProductsVisibility();
+	}
+
+	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
 	private function getProductVisibilityRepository() {
@@ -127,18 +148,23 @@ class ProductVisibilityRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility|null
+	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility
 	 */
-	public function findProductVisibility(
+	public function getProductVisibility(
 		Product $product,
 		PricingGroup $pricingGroup,
 		$domainId
 	) {
-		return $this->getProductVisibilityRepository()->find([
+		$productVisibility = $this->getProductVisibilityRepository()->find([
 			'product' => $product->getId(),
 			'pricingGroup' => $pricingGroup->getId(),
 			'domainId' => $domainId,
 		]);
+		if ($productVisibility === null) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProducVisibilitytNotFoundException();
+		}
+
+		return $productVisibility;
 	}
 
 }
