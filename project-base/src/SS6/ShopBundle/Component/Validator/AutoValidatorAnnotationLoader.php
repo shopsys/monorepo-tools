@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Component\Validator;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata as DoctrineClassMetadata;
+use SS6\ShopBundle\Component\Constraints\ConstraintValue;
 use SS6\ShopBundle\Component\Validator\Auto;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -118,6 +119,12 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 
 		if (in_array($fieldMapping['type'], ['datetime', 'datetimetz'])) {
 			$constraints[] = new Constraints\DateTime();
+		}
+
+		if ($fieldMapping['type'] === 'integer') {
+			$constraints[] = new Constraints\LessThanOrEqual([
+				'value' => ConstraintValue::INTEGER_MAX_VALUE,
+			]);
 		}
 
 		return $constraints;

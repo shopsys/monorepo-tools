@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Cart;
 
+use SS6\ShopBundle\Component\Constraints\ConstraintValue;
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,10 @@ class CartFormType extends AbstractType {
 							'constraints' => [
 								new Constraints\NotBlank(['message' => 'Musíte zadat množství kusů zboží']),
 								new Constraints\GreaterThan(['value' => 0, 'message' => 'Musíte zadat množství kusů zboží']),
+								new Constraints\LessThanOrEqual([
+									'value' => ConstraintValue::INTEGER_MAX_VALUE,
+									'message' => 'Zadejte prosím platné množství kusů zboží',
+								]),
 							],
 						]),
 					],
