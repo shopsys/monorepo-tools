@@ -126,20 +126,14 @@ class ProductVisibilityRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
-	public function refreshProductVisibilitiesForNewPricingGroup(PricingGroup $pricingGroup) {
-		foreach ($this->productRepository->getAll() as $product) {
-			$query = $this->em->createNativeQuery('INSERT INTO product_visibilities VALUES (
-				:product_id,
-				:pricing_group_id,
-				:domain_id,
-				:visible)', new ResultSetMapping());
-			$query->execute([
-				'product_id' => $product->getId(),
-				'pricing_group_id' => $pricingGroup->getId(),
-				'domain_id' => $pricingGroup->getDomainId(),
-				'visible' => false,
-			]);
-		}
+	public function refreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup) {
+		$query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
+			SELECT id, :pricing_group_id, :domain_id, :visible FROM products', new ResultSetMapping());
+		$query->execute([
+			'pricing_group_id' => $pricingGroup->getId(),
+			'domain_id' => $pricingGroup->getDomainId(),
+			'visible' => false,
+		]);
 		$this->refreshProductsVisibility();
 	}
 
@@ -154,24 +148,6 @@ class ProductVisibilityRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility|null
-	 */
-	public function findProductVisibility(
-		Product $product,
-		PricingGroup $pricingGroup,
-		$domainId
-	) {
-		return $this->getProductVisibilityRepository()->find([
-			'product' => $product->getId(),
-			'pricingGroup' => $pricingGroup->getId(),
-			'domainId' => $domainId,
-		]);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility
 	 */
 	public function getProductVisibility(
@@ -179,7 +155,11 @@ class ProductVisibilityRepository {
 		PricingGroup $pricingGroup,
 		$domainId
 	) {
-		$productVisibility = $this->findProductVisibility($product, $pricingGroup, $domainId);
+		$productVisibility = $this->getProductVisibilityRepository()->find([
+			'product' => $product->getId(),
+			'pricingGroup' => $pricingGroup->getId(),
+			'domainId' => $domainId,
+		]);
 		if ($productVisibility === null) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\ProducVisibilitytNotFoundException();
 		}

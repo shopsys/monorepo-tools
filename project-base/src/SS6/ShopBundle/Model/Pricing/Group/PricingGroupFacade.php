@@ -92,7 +92,7 @@ class PricingGroupFacade {
 		$this->em->flush();
 
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
-		$this->productVisibilityRepository->refreshProductVisibilitiesForNewPricingGroup($pricingGroup);
+		$this->productVisibilityRepository->refreshProductVisibilitiesForPricingGroup($pricingGroup);
 
 		return $pricingGroup;
 	}
