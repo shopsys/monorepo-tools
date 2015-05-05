@@ -21,7 +21,7 @@
 					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
 					{{ form_row(form.productData.sellable, { label: 'Zakázat prodej',
 						icon: {
-							title: 'Produkt se zakázaným prodejem se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto produktu je dostupný přímým přístupem z URL ale nelze vložit do košíku.'
+							title: 'Produkt se zakázaným prodejem se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto produktu je dostupný přímým přístupem z URL ale nelze vložit do košíku.'|trans
 						}
 						, attr: {class: 'form-line--between'} }) }}
 					{% block product_main_categories %}{% endblock %}

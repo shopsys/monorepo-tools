@@ -281,8 +281,10 @@ class CategoryFacade {
 	public function getProductMainCategoriesIndexedByDomainId(Product $product) {
 		$mainCategoriesIndexedByDomainId = [];
 		foreach ($this->domain->getAll() as $domainConfig) {
-			$mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->
-				getProductMainCategoryByDomain($product, $domainConfig->getId());
+			$mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->categoryRepository->findProductMainCategoryOnDomain(
+				$product,
+				$domainConfig->getId()
+			);
 		}
 
 		return $mainCategoriesIndexedByDomainId;
@@ -293,7 +295,7 @@ class CategoryFacade {
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function getProductMainCategoryByDomain(Product $product, $domainId) {
-		return $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainId);
+	public function getProductMainCategoryByDomainId(Product $product, $domainId) {
+		return $this->categoryRepository->getProductMainCategoryOnDomain($product, $domainId);
 	}
 }
