@@ -7,20 +7,17 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator {
+
+	const BATCH_SIZE = 100;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
-	 */
-	private $productRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
@@ -42,40 +39,77 @@ class ProductPriceRecalculator {
 	 */
 	private $pricingGroupFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null
+	 */
+	private $allPricingGroups;
+
 	public function __construct(
 		EntityManager $em,
-		ProductRepository $productRepository,
 		ProductPriceCalculation $productPriceCalculation,
 		ProductCalculatedPriceRepository $productCalculatedPriceRepository,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
 		PricingGroupFacade $pricingGroupFacade
 	) {
 		$this->em = $em;
-		$this->productRepository = $productRepository;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupFacade = $pricingGroupFacade;
 	}
 
-	public function runScheduledRecalculations() {
-		$products = $this->productPriceRecalculationScheduler->getProductsScheduledForRecalculation();
-		$this->recalculatePricesForProducts($products);
-		$this->productPriceRecalculationScheduler->cleanSchedule();
+	/**
+	 * @param callable $canRunCallback
+	 * @return int
+	 */
+	public function runScheduledRecalculations(callable $canRunCallback) {
+		$productRows = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
+		$count = 0;
+
+		foreach ($productRows as $row) {
+			if (!$canRunCallback()) {
+				return $count;
+			}
+			$this->recalculateProductPrices($row[0]);
+			$count++;
+			if ($count % self::BATCH_SIZE === 0) {
+				$this->em->clear();
+			}
+		}
+		$this->em->clear();
+
+		return $count;
+	}
+
+	public function runImmediatelyRecalculations() {
+		$products = $this->productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		foreach ($products as $product) {
+			$this->recalculateProductPrices($product);
+		}
+		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
-	private function recalculatePricesForProducts(array $products) {
-		$allPricingGroups = $this->pricingGroupFacade->getAll();
-
-		foreach ($products as $product) {
-			foreach ($allPricingGroups as $pricingGroup) {
-				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
-				$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $price->getPriceWithVat());
-			}
+	private function getAllPricingGroups() {
+		if ($this->allPricingGroups === null) {
+			$this->allPricingGroups = $this->pricingGroupFacade->getAll();
 		}
+
+		return $this->allPricingGroups;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 */
+	private function recalculateProductPrices(Product $product) {
+		foreach ($this->getAllPricingGroups() as $pricingGroup) {
+			$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $price->getPriceWithVat());
+		}
+		$product->markPriceAsRecalculated();
+		$this->em->flush($product);
 	}
 
 	/**
@@ -83,10 +117,8 @@ class ProductPriceRecalculator {
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
 		if (!$event->isMasterRequest()) {
-			return;
+			$this->runImmediatelyRecalculations();
 		}
-
-		$this->runScheduledRecalculations();
 	}
 
 }

@@ -19,7 +19,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 		$pricingGroupData = new PricingGroupData('pricing_group_name', 1);
 		$pricingGroup = $pricingGroupFacade->create($pricingGroupData);
-		$productPriceRecalculator->runScheduledRecalculations();
+		$productPriceRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 		$productCalculatedPrice = $em->getRepository(ProductCalculatedPrice::class)->findOneBy([
 			'product' => $product,
 			'pricingGroup' => $pricingGroup,
@@ -47,7 +49,9 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 
 		$pricingGroupData = new PricingGroupData($pricingGroup->getName(), $pricingGroup->getCoefficient() * 2);
 		$pricingGroupFacade->edit($pricingGroup->getId(), $pricingGroupData);
-		$productPriceRecalculator->runScheduledRecalculations();
+		$productPriceRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 
 		$productPriceAfterEdit = $productCalculatedPrice->getPriceWithVat();
 

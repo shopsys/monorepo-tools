@@ -19,16 +19,6 @@ class ProductPriceRecalculationScheduler {
 	private $products = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
-	 */
-	private $vats = [];
-
-	/**
-	 * @var boolean
-	 */
-	private $recalculateAll = false;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
 	public function __construct(ProductRepository $productRepository) {
@@ -46,32 +36,29 @@ class ProductPriceRecalculationScheduler {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function scheduleRecalculatePriceForVat(Vat $vat) {
-		$this->vats[$vat->getId()] = $vat;
+		$this->productRepository->markProductsForPriceRecalculationByVat($vat);
 	}
 
 	public function scheduleRecalculatePriceForAllProducts() {
-		$this->recalculateAll = true;
+		$this->productRepository->markAllProductForPriceRecalculation();
 	}
 
-	public function getProductsScheduledForRecalculation() {
-		if ($this->recalculateAll) {
-			return $this->productRepository->getAll();
-		}
-
-		foreach ($this->vats as $vat) {
-			$products = $this->productRepository->getAllByVat($vat);
-			foreach ($products as $product) {
-				$this->products[$product->getId()] = $product;
-			}
-		}
-
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getProductsForImmediatelyRecalculation() {
 		return $this->products;
 	}
 
-	public function cleanSchedule() {
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[][0]
+	 */
+	public function getProductsIteratorForRecalculation() {
+		return $this->productRepository->getProductsForPriceRecalculationIterator();
+	}
+
+	public function cleanImmediatelyRecalculationSchedule() {
 		$this->products = [];
-		$this->vats = [];
-		$this->recalculateAll = false;
 	}
 
 }

@@ -438,4 +438,26 @@ class ProductRepository {
 		return $queryBuilder->getQuery()->execute();
 	}
 
+	public function markAllProductForPriceRecalculation() {
+		$this->em
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE')
+			->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 */
+	public function markProductsForPriceRecalculationByVat(Vat $vat) {
+		$this->em
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE WHERE p.vat = :vat')
+			->execute(['vat' => $vat]);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getProductsForPriceRecalculationIterator() {
+		return $this->getProductRepository()->createQueryBuilder('p')->where('p.recalculatePrice = TRUE')->getQuery()->iterate();
+	}
+
 }

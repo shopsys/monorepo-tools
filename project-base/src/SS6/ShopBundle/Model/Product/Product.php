@@ -179,6 +179,13 @@ class Product extends AbstractTranslatableEntity {
 	private $accessories;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", options={"default" = true})
+	 */
+	private $recalculatePrice;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -206,6 +213,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
+		$this->recalculatePrice = true;
 	}
 
 	/**
@@ -437,6 +445,10 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getAccessories() {
 		return $this->accessories;
+	}
+
+	public function markPriceAsRecalculated() {
+		$this->recalculatePrice = false;
 	}
 
 	/**
