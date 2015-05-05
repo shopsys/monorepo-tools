@@ -13,7 +13,7 @@
 				<div class="wrap-group">
 					{{ form_id(advert|default(null)) }}
 					{{ form_row(form.domainId, { label: 'Doména' }) }}
-					{{ form_row(form.name, { label: 'Název'}) }}
+					{{ form_row(form.name, { label: 'Název', icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
 					{{ form_row(form.type, { label: 'Typ'}) }}
 					{{ form_row(form.positionName, { label: 'Plocha'}) }}
 				</div>

@@ -1,9 +1,7 @@
 {% if advert %}
-	<div class="row">
 	{% if advert.type == 'image' %}
 		<a href="{{ advert.link }}">{{ image(advert, { size: 'original' }) }}</a>
 	{% elseif advert.type == 'code' %}
 		{{ advert.code | raw }}
 	{% endif %}
-	</div>
 {% endif %}

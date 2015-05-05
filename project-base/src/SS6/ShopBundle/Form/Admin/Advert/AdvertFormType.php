@@ -54,14 +54,19 @@ class AdvertFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$imageConstraints = [
-					new Constraints\NotBlank([
-						'message' => 'Vyberte obrázek',
-						'groups' => [self::VALIDATION_GROUP_TYPE_IMAGE],
-					]),
-				];
+			new Constraints\NotBlank([
+				'message' => 'Vyberte obrázek',
+				'groups' => [self::VALIDATION_GROUP_TYPE_IMAGE],
+			]),
+		];
 		$builder
 			->add('domainId', FormType::DOMAIN, ['required' => true])
-			->add('name', FormType::TEXT)
+			->add('name', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Zadejte prosím název reklamní plochy']),
+				],
+			])
 			->add('type', FormType::CHOICE, [
 				'required' => true,
 				'choices' => $this->getTypeChoices(),
@@ -79,17 +84,18 @@ class AdvertFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Prosím vyberte reklamní plochu']),
 				],
 			])
-			->add('code', FormType::TEXTAREA, ['required' => true,
+			->add('code', FormType::TEXTAREA, [
+				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím text článku',
+						'message' => 'Vyplňte prosím HTML kód pro reklamní plochu',
 						'groups' => [self::VALIDATION_GROUP_TYPE_CODE],
 					]),
 				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('link', FormType::TEXT, [
-				'required' => false,
+				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím odkaz reklamy',
@@ -107,7 +113,7 @@ class AdvertFormType extends AbstractType {
 						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
 					]),
 				],
-				/*constraints' => ($this->imageUploaded ? [] : $imageConstraints),*/
+				'constraints' => ($this->imageUploaded ? [] : $imageConstraints),
 			])
 			->add('save', FormType::SUBMIT);
 	}
@@ -140,7 +146,7 @@ class AdvertFormType extends AbstractType {
 	 */
 	private function getTypeChoices() {
 		return [
-			Advert::TYPE_CODE => $this->translator->trans('Kód'),
+			Advert::TYPE_CODE => $this->translator->trans('HTML kód'),
 			Advert::TYPE_IMAGE =>  $this->translator->trans('Obrázek s odkazem')
 		];
 	}

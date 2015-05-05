@@ -24,23 +24,23 @@ class AdvertPositionRepositoryFactory {
 		$advertPositions = [];
 
 		$advertPositions[] = new AdvertPosition(
-			'header',
-			$this->translator->trans('pod Hlavičkou')
+			AdvertPosition::POSITION_HEADER,
+			$this->translator->trans('pod hlavičkou')
 		);
 
 		$advertPositions[] = new AdvertPosition(
-			'footer',
-			$this->translator->trans('nad Patičkou')
+			AdvertPosition::POSITION_FOOTER,
+			$this->translator->trans('nad patičkou')
 		);
 
 		$advertPositions[] = new AdvertPosition(
-			'product_list',
-			$this->translator->trans('Seznam produktu')
+			AdvertPosition::POSITION_PRODUCT_LIST,
+			$this->translator->trans('v kategorii (nad názvem kategorie)')
 		);
 
 		$advertPositions[] = new AdvertPosition(
-			'left_sidebar',
-			$this->translator->trans('Levé menu')
+			AdvertPosition::POSITION_LEFT_SIDEBAR,
+			$this->translator->trans('v levém panelu (pod stromem kategorií)')
 		);
 
 		return new AdvertPositionRepository($advertPositions);

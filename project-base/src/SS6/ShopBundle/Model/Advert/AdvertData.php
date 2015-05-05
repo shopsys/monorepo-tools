@@ -2,12 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Advert;
 
-use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Advert\Advert;
 
-/**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Advert\Advert")
- */
 class AdvertData {
 
 	/**
@@ -59,8 +55,15 @@ class AdvertData {
 	 * @param bool $hidden
 	 * @param int|null $domainId
 	 */
-	public function __construct($name = null, $type = null, $code = null,
-			$link = null, $positionName = null, $hidden = false, $domainId = null) {
+	public function __construct(
+		$name = null,
+		$type = null,
+		$code = null,
+		$link = null,
+		$positionName = null,
+		$hidden = false,
+		$domainId = null
+	) {
 		$this->name = $name;
 		$this->type = $type;
 		$this->code = $code;

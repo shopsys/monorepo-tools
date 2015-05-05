@@ -52,7 +52,7 @@ class AdvertRepository {
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Advert\Advert[]
 	 */
-	public function getAdvertByPosition($positionName, $domainId) {
+	public function getRandomAdvertByPosition($positionName, $domainId) {
 		$countQb = $this->getAdvertByPositionQueryBuider($positionName, $domainId);
 
 		$count = $countQb

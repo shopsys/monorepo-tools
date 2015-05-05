@@ -20,7 +20,7 @@ class AdvertController extends BaseController {
 	 * @param string $positionName
 	 */
 	public function boxAction($positionName) {
-		$advert = $this->advertEditFacade->getAdvertByPositionOnCurrenctDomain($positionName);
+		$advert = $this->advertEditFacade->getRandomAdvertByPositionOnCurrenctDomain($positionName);
 
 		return $this->render('@SS6Shop/Front/Content/Advert/box.html.twig', [
 			'advert' => $advert,

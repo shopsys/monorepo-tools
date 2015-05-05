@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Advert;
 class AdvertPositionRepository {
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Advert\AdvertPosition[]
 	 */
 	private $advertPositions;
 
@@ -14,17 +14,22 @@ class AdvertPositionRepository {
 	}
 
 	/**
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Advert\AdvertPosition[]
 	 */
 	public function getAll() {
 		return $this->advertPositions;
 	}
 
 	/**
-	 * @param string $nama
+	 * @param string $name
+	 * @return \SS6\ShopBundle\Model\Advert\AdvertPosition[positionName]
 	 */
-	public function getByName($name) {
-		$this->advertPositions[$name];
+	public function getPositionsByName() {
+		$advertPositionsByName = [];
+		foreach ($this->advertPositions as $advertPosition) {
+			$advertPositionsByName[$advertPosition->getName()] = $advertPosition;
+		}
+		return $advertPositionsByName;
 	}
 
 }
