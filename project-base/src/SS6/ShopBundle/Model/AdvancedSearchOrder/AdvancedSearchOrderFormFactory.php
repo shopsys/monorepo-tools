@@ -22,7 +22,7 @@ class AdvancedSearchOrderFormFactory {
 	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderTranslation
 	 */
-	private $AdvancedSearchOrderTranslation;
+	private $advancedSearchOrderTranslation;
 
 	public function __construct(
 		FormFactoryInterface $formFactory,
@@ -31,7 +31,7 @@ class AdvancedSearchOrderFormFactory {
 	) {
 		$this->formFactory = $formFactory;
 		$this->advancedSearchOrderConfig = $advancedSearchOrderConfig;
-		$this->AdvancedSearchOrderTranslation = $advancedSearchOrderTranslation;
+		$this->advancedSearchOrderTranslation = $advancedSearchOrderTranslation;
 	}
 
 	/**
@@ -84,7 +84,7 @@ class AdvancedSearchOrderFormFactory {
 	private function getFilterOperatorChoices(AdvancedSearchOrderFilterInterface $filter) {
 		$choices = [];
 		foreach ($filter->getAllowedOperators() as $operator) {
-			$choices[$operator] = $this->AdvancedSearchOrderTranslation->translateOperator($operator);
+			$choices[$operator] = $this->advancedSearchOrderTranslation->translateOperator($operator);
 		}
 
 		return $choices;
@@ -96,7 +96,7 @@ class AdvancedSearchOrderFormFactory {
 	private function getSubjectChoices() {
 		$choices = [];
 		foreach ($this->advancedSearchOrderConfig->getAllFilters() as $filter) {
-			$choices[$filter->getName()] = $this->AdvancedSearchOrderTranslation->translateFilterName($filter->getName());
+			$choices[$filter->getName()] = $this->advancedSearchOrderTranslation->translateFilterName($filter->getName());
 		}
 
 		return $choices;
