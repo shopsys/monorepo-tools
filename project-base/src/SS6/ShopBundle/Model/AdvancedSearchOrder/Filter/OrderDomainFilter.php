@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class OrderDomainFilter implements AdvancedSearchOrderFilterInterface {
+class OrderDomainFilter implements AdvancedSearchFilterInterface {
 	/**
 	 * {@inheritdoc}
 	 */
@@ -18,8 +18,9 @@ class OrderDomainFilter implements AdvancedSearchOrderFilterInterface {
 	 * {@inheritdoc}
 	 */
 	public function getAllowedOperators() {
-		return [AdvancedSearchOrderFilterInterface::OPERATOR_IS,
-			AdvancedSearchOrderFilterInterface::OPERATOR_IS_NOT,
+		return [
+			self::OPERATOR_IS,
+			self::OPERATOR_IS_NOT,
 		];
 	}
 

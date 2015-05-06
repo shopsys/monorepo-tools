@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class OrderNumberFilter implements AdvancedSearchOrderFilterInterface {
+class OrderNumberFilter implements AdvancedSearchFilterInterface {
 
 	/**
 	 * {@inheritdoc}

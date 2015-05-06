@@ -4,11 +4,10 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Product\Product;
 
-class OrderProductFilter implements AdvancedSearchOrderFilterInterface {
+class OrderProductFilter implements AdvancedSearchFilterInterface {
 
 	/**
 	 * {@inheritdoc}

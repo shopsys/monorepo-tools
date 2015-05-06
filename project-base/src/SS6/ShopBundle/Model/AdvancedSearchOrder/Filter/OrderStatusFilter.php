@@ -4,10 +4,10 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
-class OrderStatusFilter implements AdvancedSearchOrderFilterInterface {
+class OrderStatusFilter implements AdvancedSearchFilterInterface {
 
 	private $orderStatusRepository;
 

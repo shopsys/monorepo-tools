@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
 use SS6\ShopBundle\Form\Admin\AdvancedSearchOrder\AdvancedSearchOrderTranslation;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\RuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -55,10 +56,10 @@ class AdvancedSearchOrderFormFactory {
 
 	/**
 	 * @param string $name
-	 * @param \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface $ruleFilter
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
 	 * @return \Symfony\Component\Form\Form
 	 */
-	private function createRuleFormBuilder($name, AdvancedSearchOrderFilterInterface $ruleFilter) {
+	private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter) {
 		$filterFormBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, [
 			'data_class' => RuleData::class,
 		])
@@ -78,10 +79,10 @@ class AdvancedSearchOrderFormFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface $filter
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
 	 * @return string[]
 	 */
-	private function getFilterOperatorChoices(AdvancedSearchOrderFilterInterface $filter) {
+	private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter) {
 		$choices = [];
 		foreach ($filter->getAllowedOperators() as $operator) {
 			$choices[$operator] = $this->advancedSearchOrderTranslation->translateOperator($operator);

@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class OrderPriceFilterWithVatFilter implements AdvancedSearchOrderFilterInterface {
+class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface {
 
 	/**
 	 * {@inheritdoc}
