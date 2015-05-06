@@ -19,9 +19,9 @@
 					{{ form_row(form.productData.name, { label: 'Název'}) }}
 					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'}) }}
 					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
-					{{ form_row(form.productData.sellable, { label: 'Zakázat prodej',
+					{{ form_row(form.productData.sellable, { label: 'Vyřadit z prodeje',
 						icon: {
-							title: 'Produkt se zakázaným prodejem se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto produktu je dostupný přímým přístupem z URL ale nelze vložit do košíku.'|trans
+							title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
 						}
 						, attr: {class: 'form-line--between'} }) }}
 					{% block product_main_categories %}{% endblock %}
