@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
 use SS6\ShopBundle\Form\Admin\AdvancedSearchOrder\AdvancedSearchOrderTranslation;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\RuleData;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -11,14 +11,14 @@ use Symfony\Component\Form\FormFactoryInterface;
 class AdvancedSearchOrderFormFactory {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+	 */
+	private $advancedSearchConfig;
+
+	/**
 	 * @var \Symfony\Component\Form\FormFactoryInterface
 	 */
 	private $formFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig
-	 */
-	private $advancedSearchOrderConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderTranslation
@@ -26,12 +26,12 @@ class AdvancedSearchOrderFormFactory {
 	private $advancedSearchOrderTranslation;
 
 	public function __construct(
+		AdvancedSearchConfig $advancedSearchConfig,
 		FormFactoryInterface $formFactory,
-		AdvancedSearchOrderConfig $advancedSearchOrderConfig,
 		AdvancedSearchOrderTranslation $advancedSearchOrderTranslation
 	) {
+		$this->advancedSearchConfig = $advancedSearchConfig;
 		$this->formFactory = $formFactory;
-		$this->advancedSearchOrderConfig = $advancedSearchOrderConfig;
 		$this->advancedSearchOrderTranslation = $advancedSearchOrderTranslation;
 	}
 
@@ -44,7 +44,7 @@ class AdvancedSearchOrderFormFactory {
 		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, ['csrf_protection' => false]);
 
 		foreach ($rulesViewData as $ruleKey => $ruleViewData) {
-			$ruleFilter = $this->advancedSearchOrderConfig->getFilter($ruleViewData['subject']);
+			$ruleFilter = $this->advancedSearchConfig->getFilter($ruleViewData['subject']);
 			$formBuilder->add($this->createRuleFormBuilder($ruleKey, $ruleFilter));
 		}
 
@@ -96,7 +96,7 @@ class AdvancedSearchOrderFormFactory {
 	 */
 	private function getSubjectChoices() {
 		$choices = [];
-		foreach ($this->advancedSearchOrderConfig->getAllFilters() as $filter) {
+		foreach ($this->advancedSearchConfig->getAllFilters() as $filter) {
 			$choices[$filter->getName()] = $this->advancedSearchOrderTranslation->translateFilterName($filter->getName());
 		}
 

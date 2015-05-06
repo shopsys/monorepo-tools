@@ -3,19 +3,19 @@
 namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
 
 class AdvancedSearchOrderService {
 
 	const TEMPLATE_RULE_FORM_KEY = '__template__';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig
 	 */
-	private $AdvancedSearchOrderConfig;
+	private $orderAdvancedSearchConfig;
 
-	public function __construct(AdvancedSearchOrderConfig $advancedSearchOrderConfig) {
-		$this->AdvancedSearchOrderConfig = $advancedSearchOrderConfig;
+	public function __construct(OrderAdvancedSearchConfig $orderAdvancedSearchConfig) {
+		$this->orderAdvancedSearchConfig = $orderAdvancedSearchConfig;
 	}
 
 	/**
@@ -64,7 +64,7 @@ class AdvancedSearchOrderService {
 		}
 
 		foreach ($rulesDataByFilterName as $filterName => $rulesData) {
-			$filter = $this->AdvancedSearchOrderConfig->getFilter($filterName);
+			$filter = $this->orderAdvancedSearchConfig->getFilter($filterName);
 			$filter->extendQueryBuilder($queryBuilder, $rulesData);
 		}
 	}

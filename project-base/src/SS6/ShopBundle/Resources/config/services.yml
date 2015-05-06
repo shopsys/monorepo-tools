@@ -107,6 +107,14 @@ services:
   ss6.shop.advanced_search.filter.product_partno_fitler:
     class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter
 
+  ss6.shop.advanced_search.order_advanced_search_config:
+    class: SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig
+
+  ss6.shop.advanced_search_order.advanced_search_order_form_factory:
+    class: SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFormFactory
+    arguments:
+      - @ss6.shop.advanced_search.order_advanced_search_config
+
   ss6.shop.advanced_search.product_advanced_search_config:
     class: SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 
