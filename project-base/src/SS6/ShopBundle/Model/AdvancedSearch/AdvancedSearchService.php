@@ -3,18 +3,18 @@
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchService {
 
 	const TEMPLATE_RULE_FORM_KEY = '__template__';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 	 */
 	private $advancedSearchConfig;
 
-	public function __construct(AdvancedSearchConfig $advancedSearchConfig) {
+	public function __construct(ProductAdvancedSearchConfig $advancedSearchConfig) {
 		$this->advancedSearchConfig = $advancedSearchConfig;
 	}
 

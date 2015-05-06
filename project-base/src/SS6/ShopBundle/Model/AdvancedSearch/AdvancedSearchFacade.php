@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFormFactory;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
+use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,7 +13,7 @@ class AdvancedSearchFacade {
 	const RULES_FORM_NAME = 'as';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 	 */
 	private $advancedSearchConfig;
 
@@ -33,7 +33,7 @@ class AdvancedSearchFacade {
 	private $productListAdminFacade;
 
 	public function __construct(
-		AdvancedSearchConfig $advancedSearchConfig,
+		ProductAdvancedSearchConfig $advancedSearchConfig,
 		AdvancedSearchFormFactory $advancedSearchFormFactory,
 		AdvancedSearchService $advancedSearchService,
 		ProductListAdminFacade $productListAdminFacade

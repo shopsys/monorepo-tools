@@ -4,15 +4,15 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
+use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateDefaultRuleFormData() {
-		$advancedSearchConfigMock = $this->getMock(AdvancedSearchConfig::class, null, [], '', false);
+		$advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
 		$filterName = 'filterName';
 
 		$advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
@@ -25,7 +25,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetRulesFormDataByRequestDataDefault() {
-		$advancedSearchConfigMock = $this->getMock(AdvancedSearchConfig::class, null, [], '', false);
+		$advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
 
 		$advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
 		$rulesFormViewData = $advancedSearchService->getRulesFormViewDataByRequestData(null);
@@ -40,7 +40,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetRulesFormDataByRequestData() {
-		$advancedSearchConfigMock = $this->getMock(AdvancedSearchConfig::class, null, [], '', false);
+		$advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
 
 		$requestData = [
 			[
@@ -74,7 +74,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 			->setMethods(['extendQueryBuilder'])
 			->getMockForAbstractClass();
 
-		$advancedSearchConfigMock = $this->getMock(AdvancedSearchConfig::class, ['getFilter'], [], '', false);
+		$advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, ['getFilter'], [], '', false);
 		$advancedSearchConfigMock
 			->expects($this->once())
 			->method('getFilter')

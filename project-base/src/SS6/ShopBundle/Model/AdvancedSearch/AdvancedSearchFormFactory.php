@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -15,7 +15,7 @@ class AdvancedSearchFormFactory {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 	 */
 	private $advancedSearchConfig;
 
@@ -26,7 +26,7 @@ class AdvancedSearchFormFactory {
 
 	public function __construct(
 		FormFactoryInterface $formFactory,
-		AdvancedSearchConfig $advancedSearchConfig,
+		ProductAdvancedSearchConfig $advancedSearchConfig,
 		AdvancedSearchTranslation $advancedSearchTranslation
 	) {
 		$this->formFactory = $formFactory;

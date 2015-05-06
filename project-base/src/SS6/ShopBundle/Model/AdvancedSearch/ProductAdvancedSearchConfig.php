@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter;
 use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
 use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter;
 
-class AdvancedSearchConfig {
+class ProductAdvancedSearchConfig {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]

@@ -87,9 +87,6 @@ services:
   ss6.shop.administrator.administrator_service:
     class: SS6\ShopBundle\Model\Administrator\AdministratorService
 
-  ss6.shop.advanced_search.advanced_search_config:
-    class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
-
   ss6.shop.advanced_search.advanced_search_facade:
     class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
 
