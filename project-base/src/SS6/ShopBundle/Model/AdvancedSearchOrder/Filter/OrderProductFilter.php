@@ -49,14 +49,14 @@ class OrderProductFilter implements AdvancedSearchOrderFilterInterface {
 			if ($ruleData->operator === self::OPERATOR_CONTAINS || $ruleData->operator === self::OPERATOR_NOT_CONTAINS) {
 				$searchValue = $ruleData->value;
 				/** @var $searchValue Product */
-				if($searchValue === null){
+				if ($searchValue === null) {
 					continue;
 				}
 				$dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
 				$parameterName = 'orderProduct_' . $index;
 				$tableAlias = 'oi_' . $index;
 				$queryBuilder->andWhere($dqlOperator . ' (SELECT 1 FROM ' . OrderProduct::class . ' ' . $tableAlias . ' ' .
-				'WHERE ' . $tableAlias . '.order = o AND ' . $tableAlias . '.product = :' . $parameterName . ')');
+					'WHERE ' . $tableAlias . '.order = o AND ' . $tableAlias . '.product = :' . $parameterName . ')');
 				$queryBuilder->setParameter($parameterName, $searchValue);
 			}
 		}

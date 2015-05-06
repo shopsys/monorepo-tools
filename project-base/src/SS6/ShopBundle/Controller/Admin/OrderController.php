@@ -32,9 +32,10 @@ class OrderController extends Controller {
 	 */
 	private $orderStatusRepository;
 
-	public function __construct(OrderFacade $orderFacade,
-	AdvancedSearchOrderFacade $advancedSearchOrderFacade,
-	OrderStatusRepository $orderStatusRepository
+	public function __construct(
+		OrderFacade $orderFacade,
+		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
+		OrderStatusRepository $orderStatusRepository
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;

@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFilterInterface;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 
 class OrderPriceFilterWithVatFilter implements AdvancedSearchOrderFilterInterface {
 
