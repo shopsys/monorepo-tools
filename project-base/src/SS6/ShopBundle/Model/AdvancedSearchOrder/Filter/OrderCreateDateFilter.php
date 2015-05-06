@@ -1,9 +1,4 @@
 <?php
-/**
- * Author: Jakub Dolba
- * Date: 25. 4. 2015
- * Description:
- */
 
 namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 

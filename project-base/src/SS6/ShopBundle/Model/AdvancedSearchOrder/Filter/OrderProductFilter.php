@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luki
- * Date: 25.4.15
- * Time: 16:52
- */
 
 namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 
