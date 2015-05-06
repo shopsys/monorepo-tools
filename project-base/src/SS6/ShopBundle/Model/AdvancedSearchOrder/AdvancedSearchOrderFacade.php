@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
 use SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService;
-use SS6\ShopBundle\Model\Order\Listing\OrderListAdminFasade;
+use SS6\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,7 +28,7 @@ class AdvancedSearchOrderFacade {
 	private $productListAdminFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Listing\OrderListAdminFasade
+	 * @var \SS6\ShopBundle\Model\Order\Listing\OrderListAdminFacade
 	 */
 	private $orderListAdminFacade;
 
@@ -36,12 +36,12 @@ class AdvancedSearchOrderFacade {
 		OrderAdvancedSearchFormFactory $orderAdvancedSearchFormFactory,
 		AdvancedSearchOrderService $advancedSearchOrderService,
 		ProductListAdminFacade $productListAdminFacade,
-		OrderListAdminFasade $orderListAdminFasade
+		OrderListAdminFacade $orderListAdminFacade
 	) {
 		$this->orderAdvancedSearchFormFactory = $orderAdvancedSearchFormFactory;
 		$this->advancedSearchOrderService = $advancedSearchOrderService;
 		$this->productListAdminFacade = $productListAdminFacade;
-		$this->orderListAdminFacade = $orderListAdminFasade;
+		$this->orderListAdminFacade = $orderListAdminFacade;
 	}
 
 	/**

@@ -10,14 +10,14 @@ use Symfony\Component\Form\FormFactoryInterface;
 class OrderAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory {
 
 	public function __construct(
-		OrderAdvancedSearchConfig $productAdvancedSearchConfig,
-		AdvancedSearchOrderFilterTranslation $advancedSearchProductFilterTranslation,
+		OrderAdvancedSearchConfig $orderAdvancedSearchConfig,
+		AdvancedSearchOrderFilterTranslation $advancedSearchOrderFilterTranslation,
 		FormFactoryInterface $formFactory,
 		AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation
 	) {
 		parent::__construct(
-			$productAdvancedSearchConfig,
-			$advancedSearchProductFilterTranslation,
+			$orderAdvancedSearchConfig,
+			$advancedSearchOrderFilterTranslation,
 			$formFactory,
 			$advancedSearchOperatorTranslation
 		);

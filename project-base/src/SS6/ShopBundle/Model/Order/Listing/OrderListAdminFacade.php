@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Listing;
 
-class OrderListAdminFasade {
+class OrderListAdminFacade {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
