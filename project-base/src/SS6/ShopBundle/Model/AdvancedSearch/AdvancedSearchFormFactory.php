@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
+use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
-use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,6 +16,11 @@ class AdvancedSearchFormFactory {
 	private $advancedSearchConfig;
 
 	/**
+	 * @var \SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation
+	 */
+	private $advancedSearchFilterTranslation;
+
+	/**
 	 * @var \Symfony\Component\Form\FormFactoryInterface
 	 */
 	private $formFactory;
@@ -25,21 +30,16 @@ class AdvancedSearchFormFactory {
 	 */
 	private $advancedSearchOperatorTranslation;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchTranslation
-	 */
-	private $advancedSearchTranslation;
-
 	public function __construct(
 		AdvancedSearchConfig $advancedSearchConfig,
+		AdvancedSearchFilterTranslation $advancedFilterTranslation,
 		FormFactoryInterface $formFactory,
-		AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation,
-		AdvancedSearchTranslation $advancedSearchTranslation
+		AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation
 	) {
 		$this->advancedSearchConfig = $advancedSearchConfig;
+		$this->advancedSearchFilterTranslation = $advancedFilterTranslation;
 		$this->formFactory = $formFactory;
 		$this->advancedSearchOperatorTranslation = $advancedSearchOperatorTranslation;
-		$this->advancedSearchTranslation = $advancedSearchTranslation;
 	}
 
 	/**
@@ -104,7 +104,7 @@ class AdvancedSearchFormFactory {
 	private function getSubjectChoices() {
 		$choices = [];
 		foreach ($this->advancedSearchConfig->getAllFilters() as $filter) {
-			$choices[$filter->getName()] = $this->advancedSearchTranslation->translateFilterName($filter->getName());
+			$choices[$filter->getName()] = $this->advancedSearchFilterTranslation->translateFilterName($filter->getName());
 		}
 
 		return $choices;

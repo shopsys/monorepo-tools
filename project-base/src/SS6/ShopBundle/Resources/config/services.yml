@@ -94,6 +94,7 @@ services:
     class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFormFactory
     arguments:
       - @ss6.shop.advanced_search.product_advanced_search_config
+      - @ss6.shop.form.admin.advanced_search.advanced_search_product_filter_translation
 
   ss6.shop.advanced_search.advanced_search_service:
     class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService
@@ -114,6 +115,7 @@ services:
     class: SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFormFactory
     arguments:
       - @ss6.shop.advanced_search.order_advanced_search_config
+      - @ss6.shop.form.admin.advanced_search.advanced_search_order_filter_translation
 
   ss6.shop.advanced_search.product_advanced_search_config:
     class: SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig

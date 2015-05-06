@@ -1,6 +1,9 @@
 services:
-  ss6.shop.form.admin.advanced_search.advanced_search_translation:
-    class: SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchTranslation
+  ss6.shop.form.admin.advanced_search.advanced_search_order_filter_translation:
+    class: SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation
+
+  ss6.shop.form.admin.advanced_search.advanced_search_product_filter_translation:
+    class: SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation
 
   ss6.shop.form.admin.category_form_type_factory:
     class: SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory
