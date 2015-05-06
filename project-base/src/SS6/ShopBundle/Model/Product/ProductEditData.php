@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Product\ProductData;
 
 class ProductEditData {
@@ -42,7 +43,7 @@ class ProductEditData {
 	public $seoMetaDescriptions;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
 	 */
 	public $urls;
 
@@ -75,6 +76,7 @@ class ProductEditData {
 		$this->manualInputPrices = $manualInputPrices;
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
+		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
 }

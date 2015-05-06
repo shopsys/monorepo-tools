@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use SS6\ShopBundle\Component\Validator;
+use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Category\Category;
 
 /**
@@ -26,7 +27,7 @@ class CategoryData {
 	public $hiddenOnDomains;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
 	 */
 	public $urls;
 
@@ -42,6 +43,7 @@ class CategoryData {
 		$this->name = $name;
 		$this->parent = $parent;
 		$this->hiddenOnDomains = $hiddenOnDomains;
+		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
 	/**

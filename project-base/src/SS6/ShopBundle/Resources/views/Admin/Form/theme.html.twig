@@ -115,7 +115,7 @@
 			{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
 			{% for friendlyUrlForm in friendlyUrlForms %}
 				<tr class="js-entity-urls-friendly-url">
-					<td class="table-col-30 js-entity-urls-row-label">
+					<td class="table-col-50 js-entity-urls-row-label">
 						{% set absoluteUrl = form.vars.absoluteUrlsByDomainIdAndSlug[domainId][friendlyUrlForm.vars.value] %}
 						{% if mainUrl == absoluteUrl %}
 							<strong>{{ absoluteUrl }}</strong>
@@ -124,7 +124,7 @@
 						{% endif %}
 						{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-urls-row-checkbox display-none'}}) }}
 					</td>
-					<td class="table-col-60">
+					<td class="table-col-40">
 						{% if mainUrl != absoluteUrl %}
 							<div class="js-entity-urls-row-delete-block">
 								<button class="btn btn-iconic js-entity-urls-row-delete-block-button" type="button">

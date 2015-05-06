@@ -14,6 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UrlListType extends AbstractType {
 
+	const TO_DELETE = 'toDelete';
+
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
@@ -41,12 +43,12 @@ class UrlListType extends AbstractType {
 			throw new \SS6\ShopBundle\Form\Exception\MissingRouteNameException();
 		}
 
-		$builder->add('toDelete', FormType::FORM);
+		$builder->add(self::TO_DELETE, FormType::FORM);
 
 		$friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
 		foreach ($friendlyUrlsByDomain as $domainId => $friendlyUrls) {
-			$builder->get('toDelete')->add($domainId, FormType::CHOICE, [
+			$builder->get(self::TO_DELETE)->add($domainId, FormType::CHOICE, [
 				'required' => false,
 				'multiple' => true,
 				'expanded' => true,

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use SS6\ShopBundle\Component\Validator;
+use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Article\Article;
 
 /**
@@ -26,7 +27,7 @@ class ArticleData {
 	public $domainId;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
 	 */
 	public $urls;
 
@@ -39,6 +40,7 @@ class ArticleData {
 		$this->name = $name;
 		$this->text = $text;
 		$this->domainId = $domainId;
+		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
 	/**

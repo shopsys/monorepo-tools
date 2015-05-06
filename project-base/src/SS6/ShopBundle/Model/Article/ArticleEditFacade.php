@@ -99,7 +99,7 @@ class ArticleEditFacade {
 				$article->getName(),
 				$article->getDomainId()
 			);
-			$this->friendlyUrlFacade->processUrlListFormData($articleData->urls);
+			$this->friendlyUrlFacade->saveUrlListFormData($articleData->urls);
 			$this->em->flush();
 			$this->em->commit();
 		} catch (\Exception $exception) {

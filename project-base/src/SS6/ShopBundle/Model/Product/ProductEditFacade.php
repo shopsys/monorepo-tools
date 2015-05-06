@@ -165,7 +165,7 @@ class ProductEditFacade {
 			$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 			$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
 			$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
-			$this->friendlyUrlFacade->processUrlListFormData($productEditData->urls);
+			$this->friendlyUrlFacade->saveUrlListFormData($productEditData->urls);
 			$this->em->commit();
 		} catch (\Exception $exception) {
 			$this->em->rollback();

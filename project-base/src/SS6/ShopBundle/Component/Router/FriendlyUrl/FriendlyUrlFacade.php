@@ -123,9 +123,9 @@ class FriendlyUrlFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[] $urlListFormData
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][] $urlListFormData
 	 */
-	public function processUrlListFormData(array $urlListFormData) {
+	public function saveUrlListFormData(array $urlListFormData) {
 		foreach ($urlListFormData['toDelete'] as $friendlyUrls) {
 			foreach ($friendlyUrls as $friendlyUrl) {
 				$this->em->remove($friendlyUrl);
