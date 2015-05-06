@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\AdvancedSearch;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
-use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class AbstractAdvancedSearchFormFactory {
@@ -68,7 +68,7 @@ abstract class AbstractAdvancedSearchFormFactory {
 	 */
 	private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter) {
 		$filterFormBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, [
-			'data_class' => RuleData::class,
+			'data_class' => AdvancedSearchRuleData::class,
 		])
 			->add('subject', 'choice', [
 					'choices' => $this->getSubjectChoices(),

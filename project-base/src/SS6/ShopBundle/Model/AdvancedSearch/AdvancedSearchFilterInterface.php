@@ -43,7 +43,7 @@ interface AdvancedSearchFilterInterface {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\RuleData[] $rulesData
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $rulesData
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData);
 

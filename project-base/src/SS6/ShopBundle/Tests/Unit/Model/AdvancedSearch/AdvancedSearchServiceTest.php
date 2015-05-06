@@ -5,9 +5,9 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
 use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
-use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -63,7 +63,7 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testExtendQueryBuilderByAdvancedSearchData() {
-		$ruleData = new RuleData('testSubject', 'testOperator', 'testValue');
+		$ruleData = new AdvancedSearchRuleData('testSubject', 'testOperator', 'testValue');
 
 		$advancedSearchData = [
 			AdvancedSearchService::TEMPLATE_RULE_FORM_KEY => null,

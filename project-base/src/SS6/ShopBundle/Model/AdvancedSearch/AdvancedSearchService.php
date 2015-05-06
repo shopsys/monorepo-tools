@@ -52,7 +52,7 @@ class AdvancedSearchService {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\RuleData $advancedSearchData
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData $advancedSearchData
 	 */
 	public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
 		$rulesDataByFilterName = [];

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
-class RuleData {
+class AdvancedSearchRuleData {
 
 	/**
 	 * @var string|null
