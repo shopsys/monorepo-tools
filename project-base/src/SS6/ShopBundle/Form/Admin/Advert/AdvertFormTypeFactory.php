@@ -40,8 +40,8 @@ class AdvertFormTypeFactory {
 	 */
 	public function create(Advert $advert = null) {
 		$advertPositionsLocalizedNamesByName = [];
-		foreach ($this->advertPositionRepository->getAll() as $advertPosition) {
-			$advertPositionsLocalizedNamesByName[$advertPosition->getName()] = $advertPosition->getLocalizedName();
+		foreach ($this->advertPositionRepository->getPositionsIndexedByName() as $positionName => $advertPosition) {
+			$advertPositionsLocalizedNamesByName[$positionName] = $advertPosition->getLocalizedName();
 		}
 		$imageExists = false;
 		if ($advert !== null) {

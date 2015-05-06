@@ -11,7 +11,6 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Advert\Advert;
 use SS6\ShopBundle\Model\Advert\AdvertData;
 use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
-use SS6\ShopBundle\Model\Advert\AdvertPositionRepository;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
@@ -49,19 +48,13 @@ class AdvertController extends BaseController {
 	 */
 	private $advertFormTypeFactory;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionRepository
-	 */
-	private $advertPositionRepository;
-
 	public function __construct(
 		AdvertEditFacade $advertEditFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
-		AdvertFormTypeFactory $advertFormTypeFactory,
-		AdvertPositionRepository $advertPositionRepository
+		AdvertFormTypeFactory $advertFormTypeFactory
 	) {
 		$this->advertEditFacade = $advertEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -69,7 +62,6 @@ class AdvertController extends BaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->advertFormTypeFactory = $advertFormTypeFactory;
-		$this->advertPositionRepository = $advertPositionRepository;
 	}
 
 	/**
@@ -150,7 +142,7 @@ class AdvertController extends BaseController {
 			->setConfirmMessage('Opravdu chcete odstranit tuto reklamu?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [
-			'advertPositionsByName' => $this->advertPositionRepository->getPositionsByName(),
+			'advertPositionsByName' => $this->advertEditFacade->getAdvertPositionsIndexedByName(),
 		]);
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
