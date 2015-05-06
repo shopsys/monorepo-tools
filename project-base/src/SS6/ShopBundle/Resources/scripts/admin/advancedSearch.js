@@ -50,7 +50,7 @@
 				return false;
 			});
 		}
-	}
+	};
 
 	SS6.advancedSearch.actualizeRule = function ($rulesContainer, $rule, filterName, newIndex) {
 		$rule.addClass('advanced-search-rule-disabled');
@@ -64,6 +64,8 @@
 			success: function(data) {
 				var $newRule = $($.parseHTML(data));
 				$rule.replaceWith($newRule);
+
+				$newRule.find('.js-datePicker').datepicker();
 			}
 		});
 	};
@@ -72,6 +74,8 @@
 		var ruleHtml = $ruleTemplate.clone().wrap('<div>').parent().html().replace(/__template__/g, newIndex);
 		var $rule = $($.parseHTML(ruleHtml));
 		$rule.appendTo($rulesContainer);
+
+		$rule.find('.js-datePicker').datepicker();
 	};
 
 	SS6.advancedSearch.actualizeAllValuesByOperator = function ($rulesContainer) {
