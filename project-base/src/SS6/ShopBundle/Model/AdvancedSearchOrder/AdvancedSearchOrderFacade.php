@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFormFactory;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService;
 use SS6\ShopBundle\Model\Order\Listing\OrderListAdminFasade;
@@ -12,11 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 class AdvancedSearchOrderFacade {
 
 	const RULES_FORM_NAME = 'as';
-
-	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderConfig
-	 */
-	private $advancedSearchOrderConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFormFactory
@@ -33,16 +27,17 @@ class AdvancedSearchOrderFacade {
 	 */
 	private $productListAdminFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Listing\OrderListAdminFasade
+	 */
 	private $orderListAdminFacade;
 
 	public function __construct(
-		AdvancedSearchOrderConfig $advancedSearchOrderConfig,
 		AdvancedSearchOrderFormFactory $advancedSearchOrderFormFactory,
 		AdvancedSearchOrderService $advancedSearchOrderService,
 		ProductListAdminFacade $productListAdminFacade,
 		OrderListAdminFasade $orderListAdminFasade
 	) {
-		$this->advancedSearchOrderConfig = $advancedSearchOrderConfig;
 		$this->advancedSearchOrderFormFactory = $advancedSearchOrderFormFactory;
 		$this->advancedSearchOrderService = $advancedSearchOrderService;
 		$this->productListAdminFacade = $productListAdminFacade;
