@@ -92,6 +92,8 @@ services:
 
   ss6.shop.advanced_search.advanced_search_form_factory:
     class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFormFactory
+    arguments:
+      - @ss6.shop.advanced_search.product_advanced_search_config
 
   ss6.shop.advanced_search.advanced_search_service:
     class: SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService
@@ -104,6 +106,9 @@ services:
 
   ss6.shop.advanced_search.filter.product_partno_fitler:
     class: SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter
+
+  ss6.shop.advanced_search.product_advanced_search_config:
+    class: SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 
   ss6.shop.advert.advert_position_repository:
     class: SS6\ShopBundle\Model\Advert\AdvertPositionRepository
