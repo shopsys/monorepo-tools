@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
+use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use SS6\ShopBundle\Form\Admin\AdvancedSearchOrder\AdvancedSearchOrderTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
@@ -21,6 +22,11 @@ class AdvancedSearchOrderFormFactory {
 	private $formFactory;
 
 	/**
+	 * @var \SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation
+	 */
+	private $advancedSearchOperatorTranslation;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderTranslation
 	 */
 	private $advancedSearchOrderTranslation;
@@ -28,10 +34,12 @@ class AdvancedSearchOrderFormFactory {
 	public function __construct(
 		AdvancedSearchConfig $advancedSearchConfig,
 		FormFactoryInterface $formFactory,
+		AdvancedSearchOperatorTranslation $advancedSearchOperatorTranslation,
 		AdvancedSearchOrderTranslation $advancedSearchOrderTranslation
 	) {
 		$this->advancedSearchConfig = $advancedSearchConfig;
 		$this->formFactory = $formFactory;
+		$this->advancedSearchOperatorTranslation = $advancedSearchOperatorTranslation;
 		$this->advancedSearchOrderTranslation = $advancedSearchOrderTranslation;
 	}
 
@@ -85,7 +93,7 @@ class AdvancedSearchOrderFormFactory {
 	private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter) {
 		$choices = [];
 		foreach ($filter->getAllowedOperators() as $operator) {
-			$choices[$operator] = $this->advancedSearchOrderTranslation->translateOperator($operator);
+			$choices[$operator] = $this->advancedSearchOperatorTranslation->translateOperator($operator);
 		}
 
 		return $choices;
