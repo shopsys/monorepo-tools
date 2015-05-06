@@ -3,20 +3,14 @@
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
 use Doctrine\ORM\Internal\Hydration\IterableResult;
-use Iterator;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Component\Routing\RouterInterface;
 
-class HeurekaDataIterator implements Iterator {
-
-	/**
-	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult
-	 */
-	private $iterableResult;
+class HeurekaDataIterator extends AbstractDataIterator {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig
@@ -52,60 +46,21 @@ class HeurekaDataIterator implements Iterator {
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ImageFacade $imageFacade
 	) {
-		$this->iterableResult = $iterableResult;
 		$this->domainConfig = $domainConfig;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->router = $domainRouterFactory->getRouter($domainConfig->getId());
 		$this->imageFacade = $imageFacade;
-	}
 
-	public function rewind() {
-		$this->iterableResult->rewind();
+		parent::__construct($iterableResult);
 	}
 
 	/**
+	 * @param array $row
 	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
 	 */
-	public function next() {
-		$current = $this->iterableResult->next();
-		if ($current === false) {
-			return false;
-		}
-
-		return $this->createHeurekaItem($current[0]);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
-	 */
-	public function current() {
-		$current = $this->iterableResult->current();
-		if ($current === false) {
-			return false;
-		}
-
-		return $this->createHeurekaItem($current[0]);
-	}
-
-	/**
-	 * @return int
-	 */
-	public function key() {
-		return $this->iterableResult->key();
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function valid() {
-		return $this->iterableResult->valid();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
-	 */
-	private function createHeurekaItem(Product $product) {
+	protected function createItem(array $row) {
+		$product = $row[0];
+		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 		$calculatedAvailability = $product->getCalculatedAvailability();
 		if ($calculatedAvailability === null) {
 			$deliveryDate = null;
