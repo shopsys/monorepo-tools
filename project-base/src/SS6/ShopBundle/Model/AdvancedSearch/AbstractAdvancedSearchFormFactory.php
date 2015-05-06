@@ -1,15 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
+namespace SS6\ShopBundle\Model\AdvancedSearch;
 
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\RuleData;
+use SS6\ShopBundle\Model\AdvancedSearch\RuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class AdvancedSearchOrderFormFactory {
+abstract class AbstractAdvancedSearchFormFactory {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
