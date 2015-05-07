@@ -1,6 +1,10 @@
 {% if advert %}
 	{% if advert.type == 'image' %}
-		<a href="{{ advert.link }}">{{ image(advert, { size: 'original' }) }}</a>
+		{% if advert.link == null %}
+			{{ image(advert, { size: 'original' }) }}
+		{% else %}
+			<a href="{{ advert.link }}">{{ image(advert, { size: 'original' }) }}</a>
+		{% endif %}
 	{% elseif advert.type == 'code' %}
 		{{ advert.code | raw }}
 	{% endif %}

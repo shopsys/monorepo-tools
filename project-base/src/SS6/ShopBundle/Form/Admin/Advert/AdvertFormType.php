@@ -95,13 +95,7 @@ class AdvertFormType extends AbstractType {
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('link', FormType::TEXT, [
-				'required' => true,
-				'constraints' => [
-					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím odkaz reklamy',
-						'groups' => [self::VALIDATION_GROUP_TYPE_IMAGE],
-					]),
-				],
+				'required' => false,
 			])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => false,
