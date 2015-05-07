@@ -40,7 +40,7 @@
 - name: advert
   class: SS6\ShopBundle\Model\Advert\Advert
   sizes:
-    - { name: header, width: ~, height: ~, crop: false }
-    - { name: footer, width: ~, height: ~, crop: false }
-    - { name: productList, width: ~, height: ~, crop: false }
+    - { name: header, width: 1160, height: ~, crop: false }
+    - { name: footer, width: 1160, height: ~, crop: false }
+    - { name: productList, width: 920, height: ~, crop: false }
     - { name: leftSidebar, width: 220, height: ~, crop: false }
