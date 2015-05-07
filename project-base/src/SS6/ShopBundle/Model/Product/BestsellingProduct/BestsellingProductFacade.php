@@ -133,12 +133,4 @@ class BestsellingProductFacade {
 		return $this->productDetailFactory->getDetailsForProducts($combinedBestsellingProducts);
 	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $bestsellingProducts
-	 * @return boolean
-	 */
-	public function areProductsDuplicate(array $bestsellingProducts) {
-		return $this->bestsellingProductService->areProductsDuplicate($bestsellingProducts);
-	}
-
 }

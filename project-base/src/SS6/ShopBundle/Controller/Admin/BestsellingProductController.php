@@ -115,35 +115,25 @@ class BestsellingProductController extends BaseController {
 
 		if ($form->isValid()) {
 			$formBestsellingProducts = $form->getData()['bestsellingProducts'];
-			//$areProductsDuplicate = $this->bestsellingProductFacade->areProductsDuplicate($formBestsellingProducts);
 
-			/*if ($areProductsDuplicate) {
-				$this->getFlashMessageSender()->addErrorFlashTwig(
-					'Zadali jste duplicitní zboží. V seznamu nejprodávanějšího zboží musí být každé zboží jen jedenkrát.
-					Prosím chybu opravte a poté znovu uložte.'
-				);
-			} else*/ {
-				$this->bestsellingProductFacade->edit(
-					$category,
-					$domainId,
-					$formBestsellingProducts
-				);
+			$this->bestsellingProductFacade->edit(
+				$category,
+				$domainId,
+				$formBestsellingProducts
+			);
 
-				$this->getFlashMessageSender()
-					->addSuccessFlashTwig(
-						'Bylo nastaveno nejprodávanější zboží kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
-						[
-							'name' => $category->getName(),
-							'url' => $this->generateUrl(
-								'admin_bestsellingproduct_detail',
-								['domainId' => $domainId, 'categoryId' => $category->getId()]
-							),
-						]
-					);
-				return $this->redirect($this->generateUrl('admin_bestsellingproduct_list'));
-			}
-		} else {
-			$this->getFlashMessageSender()->addErrorFlash($form->getErrors()->current()->getMessage());
+			$this->getFlashMessageSender()
+				->addSuccessFlashTwig(
+					'Bylo nastaveno nejprodávanější zboží kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
+					[
+						'name' => $category->getName(),
+						'url' => $this->generateUrl(
+							'admin_bestsellingproduct_detail',
+							['domainId' => $domainId, 'categoryId' => $category->getId()]
+						),
+					]
+				);
+			return $this->redirect($this->generateUrl('admin_bestsellingproduct_list'));
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem('Kategorie ' . $category->getName()));

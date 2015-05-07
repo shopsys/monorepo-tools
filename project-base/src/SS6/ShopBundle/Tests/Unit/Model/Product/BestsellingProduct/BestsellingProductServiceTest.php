@@ -11,23 +11,6 @@ use SS6\ShopBundle\Model\Product\ProductData;
 
 class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
 
-	public function testAreProductsDuplicate() {
-		$bestsellingProductService = new BestsellingProductService();
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
-		$product2 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
-
-		$nonDuplicateBestsellingProducts = [0 => $product1, 1 => $product2, 2 => null, 3 => null];
-		$this->assertFalse($bestsellingProductService->areProductsDuplicate($nonDuplicateBestsellingProducts));
-
-		$duplicateBestsellingProducts = [0 => $product1, 1 => $product1, 2 => null, 3 => null];
-		$this->assertTrue($bestsellingProductService->areProductsDuplicate($duplicateBestsellingProducts));
-
-		$this->assertFalse($bestsellingProductService->areProductsDuplicate([]));
-	}
-
 	public function testCombineManualAndAutomaticBestsellingProducts() {
 		$bestsellingProductService = new BestsellingProductService();
 

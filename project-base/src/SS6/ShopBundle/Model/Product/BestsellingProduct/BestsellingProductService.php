@@ -64,29 +64,4 @@ class BestsellingProductService {
 		return $combinedBestsellingProducts;
 	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $bestsellingProducts
-	 * @return boolean
-	 */
-	public function areProductsDuplicate(array $bestsellingProducts) {
-		$areProductsDuplicate = false;
-		foreach ($bestsellingProducts as $key1 => $product1) {
-			if ($product1 === null) {
-				continue;
-			}
-			$numberOfBestsellingProducts = count($bestsellingProducts);
-			for ($key2 = $key1 + 1; $key2 < $numberOfBestsellingProducts; $key2++) {
-				$product2 = $bestsellingProducts[$key2];
-				if ($product2 === null) {
-					continue;
-				}
-				if ($product1 === $product2) {
-					$areProductsDuplicate = true;
-					break 2;
-				}
-			}
-		}
-		return $areProductsDuplicate;
-	}
-
 }
