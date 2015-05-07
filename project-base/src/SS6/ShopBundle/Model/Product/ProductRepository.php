@@ -438,6 +438,12 @@ class ProductRepository {
 		return $queryBuilder->getQuery()->execute();
 	}
 
+	public function markAllProductForAvailabilityRecalculation() {
+		$this->em
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculateAvailability = TRUE')
+			->execute();
+	}
+
 	public function markAllProductForPriceRecalculation() {
 		$this->em
 			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE')
@@ -458,6 +464,17 @@ class ProductRepository {
 	 */
 	public function getProductsForPriceRecalculationIterator() {
 		return $this->getProductRepository()->createQueryBuilder('p')->where('p.recalculatePrice = TRUE')->getQuery()->iterate();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getProductsForAvailabilityRecalculationIterator() {
+		return $this->getProductRepository()
+			->createQueryBuilder('p')
+			->where('p.recalculateAvailability = TRUE')
+			->getQuery()
+			->iterate();
 	}
 
 }

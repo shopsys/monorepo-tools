@@ -18,11 +18,6 @@ class ProductAvailabilityRecalculationScheduler {
 	private $products = [];
 
 	/**
-	 * @var boolean
-	 */
-	private $recalculateAll = false;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 */
 	public function __construct(ProductRepository $productRepository) {
@@ -37,21 +32,24 @@ class ProductAvailabilityRecalculationScheduler {
 	}
 
 	public function scheduleRecalculateAvailabilityForAllProducts() {
-		$this->recalculateAll = true;
+		$this->productRepository->markAllProductForAvailabilityRecalculation();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getProductsScheduledForRecalculation() {
-		if ($this->recalculateAll) {
-			return $this->productRepository->getAll();
-		}
-
+	public function getProductsForImmediatelyRecalculation() {
 		return $this->products;
 	}
 
-	public function cleanSchedule() {
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[][0]
+	 */
+	public function getProductsIteratorForRecalculation() {
+		return $this->productRepository->getProductsForAvailabilityRecalculationIterator();
+	}
+
+	public function cleanImmediatelyRecalculationSchedule() {
 		$this->products = [];
 		$this->recalculateAll = false;
 	}

@@ -16,6 +16,7 @@ use SS6\ShopBundle\Model\Product\Availability\Availability;
  *
  * @ORM\Table(name="products")
  * @ORM\Entity
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Product extends AbstractTranslatableEntity {
 
@@ -186,6 +187,13 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculatePrice;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", options={"default" = true})
+	 */
+	private $recalculateAvailability;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -214,6 +222,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
 		$this->recalculatePrice = true;
+		$this->recalculateAvailability = true;
 	}
 
 	/**
@@ -242,6 +251,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
+		$this->recalculateAvailability = true;
 	}
 
 	/**
@@ -396,6 +406,7 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function setAvailability(Availability $availability) {
 		$this->availability = $availability;
+		$this->recalculateAvailability = true;
 	}
 
 	/**
@@ -403,6 +414,7 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function setOutOfStockAvailability(Availability $outOfStockAvailability) {
 		$this->outOfStockAvailability = $outOfStockAvailability;
+		$this->recalculateAvailability = true;
 	}
 
 	/**
@@ -410,6 +422,7 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function setCalculatedAvailability(Availability $calculatedAvailability = null) {
 		$this->calculatedAvailability = $calculatedAvailability;
+		$this->recalculateAvailability = false;
 	}
 
 	/**
