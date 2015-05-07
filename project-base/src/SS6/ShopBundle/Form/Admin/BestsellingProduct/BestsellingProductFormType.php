@@ -24,9 +24,10 @@ class BestsellingProductFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('bestsellingProducts', FormType::FORM, [
+				'error_bubbling' => true,
 				'constraints' => [
 					new Constraints\UniqueCollection([
-						'fields' => ['id'],
+						'allowEmpty' => true,
 						'message' => 'Zadali jste duplicitní zboží. '
 							. 'V seznamu nejprodávanějšího zboží musí být každé zboží jen jedenkrát. '
 							. 'Prosím chybu opravte a poté znovu uložte.',

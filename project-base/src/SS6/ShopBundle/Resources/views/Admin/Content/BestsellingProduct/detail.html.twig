@@ -6,18 +6,25 @@
 {% block main_content %}
 	<div class="row">
 		<div class="col-xs-12 col-lg-10">
-
 			{{ form_start(form) }}
-				{% form_theme form '@SS6Shop/Admin/Content/BestsellingProduct/formTheme.html.twig' %}
-				{% for productForm in form.bestsellingProducts %}
-					<div class="form-line js-bestsellingProductContainer">
-						<label class="col-xs-1">{{ loop.index }}</label>
-						{{ form_widget(productForm) }}
-						<a href="#" class="js-bestsellingProductUnassignButton">
-							<i class="fa fa-trash-o"></i>
-						</a>
+				{{ form_errors(form) }}
+
+				<div class="js-form-group">
+					{{ form_errors(form.bestsellingProducts) }}
+
+					<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
+						{% form_theme form '@SS6Shop/Admin/Content/BestsellingProduct/formTheme.html.twig' %}
+						{% for productForm in form.bestsellingProducts %}
+							<div class="form-line js-bestsellingProductContainer">
+								<label class="col-xs-1">{{ loop.index }}</label>
+								{{ form_widget(productForm) }}
+								<a href="#" class="js-bestsellingProductUnassignButton">
+									<i class="fa fa-trash-o"></i>
+								</a>
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
+				</div>
 
 				<div class="window-fixed-bar">
 					<div class="window-fixed-bar__buttons">
