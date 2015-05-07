@@ -111,6 +111,12 @@ class ProductController extends Controller {
 			$id
 		);
 
+		if ($request->isXmlHttpRequest()) {
+			return $this->render('@SS6Shop/Front/Content/Product/productsWithLoader.html.twig', [
+				'paginationResult' => $paginationResult,
+			]);
+		}
+
 		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', [
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
@@ -139,6 +145,10 @@ class ProductController extends Controller {
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		$searchText = $request->query->get('q');
+
+		if ($request->request->get('page')) {
+			$page = $request->request->get('page');
+		}
 
 		if ($page === '1') {
 			return $this->redirect($this->generateUrl('front_product_search', $request->query->all()));
@@ -169,6 +179,12 @@ class ProductController extends Controller {
 			$page,
 			self::PRODUCTS_PER_PAGE
 		);
+
+		if ($request->isXmlHttpRequest()) {
+			return $this->render('@SS6Shop/Front/Content/Product/productsWithLoader.html.twig', [
+				'paginationResult' => $paginationResult,
+			]);
+		}
 
 		return $this->render('@SS6Shop/Front/Content/Product/search.html.twig', [
 			'searchText' => $searchText,
