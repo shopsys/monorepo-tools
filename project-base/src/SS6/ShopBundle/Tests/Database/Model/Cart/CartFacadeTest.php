@@ -51,6 +51,46 @@ class CartFacadeTest extends DatabaseTestCase {
 		$this->assertSame(0, $cart->getItemsCount(), 'Add only in their own cart');
 	}
 
+	public function testAddUnsellableProductToCart() {
+		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
+		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
+		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
+		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+
+		$product = $this->getReference('product_6');
+		$productId = $product->getId();
+		$quantity = 1;
+
+		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
+		$cart = $cartFactory->get($customerIdentifier);
+		$cartFacade = new CartFacade(
+			$this->getEntityManager(),
+			$cartService,
+			$cart,
+			$productRepository,
+			$customerIdentifier,
+			$domain,
+			$currentCustomer
+		);
+
+		// @codingStandardsIgnoreStart
+		try {
+			$cartFacade->addProductToCart($productId, $quantity);
+		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+
+		}
+		// @codingStandardsIgnoreEnd
+
+		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
+		$cart = $cartFactory->get($customerIdentifier);
+		$cartItems = $cart->getItems();
+
+		$this->assertEmpty($cartItems, 'Product add not suppressed');
+	}
+
 	/**
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */

@@ -111,7 +111,13 @@
 						</strong>
 					</dd>
 				</dl>
-				{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
+				{% if productDetail.product.sellable %}
+					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
+				{% else %}
+					<div>
+						{{ 'Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href="%url%">zde</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
+					</div>
+				{% endif %}
 			</div>
 
 		</div>

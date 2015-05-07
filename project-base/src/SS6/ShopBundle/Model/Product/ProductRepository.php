@@ -81,6 +81,18 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
+	public function getAllListableQueryBuilder($domainId, $pricingGroup) {
+		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder->andWhere('p.sellable = TRUE');
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
 	public function getAllVisibleQueryBuilder($domainId, $pricingGroup) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
@@ -114,12 +126,12 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getVisibleInCategoryQueryBuilder(
+	public function getListableInCategoryQueryBuilder(
 		$domainId,
 		PricingGroup $pricingGroup,
 		Category $category
 	) {
-		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
 		$this->filterByCategory($queryBuilder, $category);
 		return $queryBuilder;
 	}
@@ -130,13 +142,13 @@ class ProductRepository {
 	 * @param string|null $searchText
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getVisibleBySearchTextQueryBuilder(
+	public function getListableBySearchTextQueryBuilder(
 		$domainId,
 		PricingGroup $pricingGroup,
 		$locale,
 		$searchText
 	) {
-		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
 		$this->addTranslation($queryBuilder, $locale);
 		$this->filterBySearchText($queryBuilder, $searchText);
 		return $queryBuilder;
@@ -175,7 +187,7 @@ class ProductRepository {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultForVisibleInCategory(
+	public function getPaginationResultForListableInCategory(
 		Category $category,
 		$domainId,
 		$locale,
@@ -185,7 +197,7 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
-		$queryBuilder = $this->getVisibleInCategoryQueryBuilder(
+		$queryBuilder = $this->getListableInCategoryQueryBuilder(
 			$domainId,
 			$pricingGroup,
 			$category
@@ -212,7 +224,7 @@ class ProductRepository {
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
 	 */
-	public function getPaginationResultForSearchVisible(
+	public function getPaginationResultForSearchListable(
 		$searchText,
 		$domainId,
 		$locale,
@@ -222,7 +234,7 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
-		$queryBuilder = $this->getVisibleBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
+		$queryBuilder = $this->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
 		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
@@ -323,6 +335,26 @@ class ProductRepository {
 	 */
 	public function getVisible($id, $domainId, PricingGroup $pricingGroup) {
 		$qb = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
+		$qb->andWhere('p.id = :productId');
+		$qb->setParameter('productId', $id);
+
+		$product = $qb->getQuery()->getOneOrNullResult();
+
+		if ($product === null) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+		}
+
+		return $product;
+	}
+
+	/**
+	 * @param int $id
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getVisibleAndSellable($id, $domainId, PricingGroup $pricingGroup) {
+		$qb = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
 		$qb->andWhere('p.id = :productId');
 		$qb->setParameter('productId', $id);
 

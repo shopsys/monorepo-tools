@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
+use SS6\ShopBundle\Component\Transformers\InverseTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
@@ -116,6 +117,14 @@ class ProductFormType extends AbstractType {
 					->addViewTransformer($this->inverseArrayValuesTransformer)
 			)
 			->add('hidden', FormType::YES_NO, ['required' => false])
+			->add(
+				$builder
+					->create('sellable', FormType::YES_NO, [
+						'required' => false
+					])
+					->addModelTransformer(new InverseTransformer())
+			)
+
 			->add('catnum', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [

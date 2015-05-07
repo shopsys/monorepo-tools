@@ -61,25 +61,27 @@ class CartWatcherService {
 	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
 	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
-	public function getNotVisibleItems(Cart $cart, CurrentCustomer $currentCustomer) {
-		$notVisibleItems = [];
+	public function getNotListableItems(Cart $cart, CurrentCustomer $currentCustomer) {
+		$notListableItems = [];
 		foreach ($cart->getItems() as $item) {
 			try {
+				$product = $item->getProduct();
 				$productVisibility = $this->productVisibilityRepository
 					->getProductVisibility(
-						$item->getProduct(),
+						$product,
 						$currentCustomer->getPricingGroup(),
 						$this->domain->getId()
 					);
-			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
-				$productVisibility = null;
-			}
 
-			if ($productVisibility === null || !$productVisibility->isVisible()) {
-				$notVisibleItems[] = $item;
+				if (!$productVisibility->isVisible() || !$product->isSellable()) {
+					$notListableItems[] = $item;
+				}
+			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+				$notListableItems[] = $item;
 			}
 		}
-		return $notVisibleItems;
+
+		return $notListableItems;
 	}
 
 }

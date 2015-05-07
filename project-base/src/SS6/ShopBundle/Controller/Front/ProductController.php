@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
 use SS6\ShopBundle\Twig\RequestExtension;
@@ -20,8 +21,24 @@ class ProductController extends Controller {
 	 */
 	private $requestExtension;
 
-	public function __construct(RequestExtension $requestExtension) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	public function __construct(
+		RequestExtension $requestExtension,
+		CategoryFacade $categoryFacade,
+		Domain $domain
+	) {
 		$this->requestExtension = $requestExtension;
+		$this->categoryFacade = $categoryFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -39,6 +56,10 @@ class ProductController extends Controller {
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
 			'accesoriesDetails' => $accessoriesDetails,
+			'productMainCategory' => $this->categoryFacade->getProductMainCategoryByDomainId(
+				$productDetail->getProduct(),
+				$this->domain->getId()
+			),
 		]);
 	}
 
