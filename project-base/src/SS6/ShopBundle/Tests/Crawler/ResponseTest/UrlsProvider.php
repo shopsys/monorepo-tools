@@ -71,8 +71,12 @@ class UrlsProvider {
 	private function getRouteParameters(Route $route, $routeName) {
 		switch ($routeName) {
 			case 'admin_category_edit':
-				// cateogory ID 1 is special root category, therefore we use ID 2
+				// category ID 1 is special root category, therefore we use ID 2
 				return ['id' => 2];
+
+			case 'admin_bestsellingproduct_detail':
+				// category ID 1 is special root category, therefore we use ID 2
+				return ['categoryId' => 2, 'domainId' => 1];
 
 			case 'admin_superadmin_icondetail':
 				return ['icon' => 'delete'];

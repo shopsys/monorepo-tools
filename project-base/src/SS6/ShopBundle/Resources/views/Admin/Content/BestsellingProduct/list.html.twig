@@ -1,0 +1,36 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Neprodávanější zboží'|trans }}{% endblock %}
+{% block h1 %}{{ 'Neprodávanější zboží'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
+			{% macro categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) %}
+				<ul class="js-category-tree-items">
+					{% for categoryDetail in categoryDetails %}
+						<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
+							<div class="js-category-tree-item-line">
+								<span class="js-category-tree-item-handle">
+									<a href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryDetail.category.id, domainId: selectedDomainId}) }}">
+										{{ categoryDetail.category.name }}
+									</a>
+									({{ bestsellingProductsInCategories[categoryDetail.category.id] }})
+								</span>
+							</div>
+							{{ _self.categoryTreeItem(categoryDetail.children, selectedDomainId, bestsellingProductsInCategories) }}
+						</li>
+					{% endfor %}
+				</ul>
+			{% endmacro %}
+
+			<div class="category-tree mb-1">
+				{{ _self.categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) }}
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

@@ -19,6 +19,8 @@
 	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPosition::POSITION_PRODUCT_LIST')})) }}
 	<h1>{{ category.name|trans }}</h1>
 
+	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
+
 	{% if productDetails|length > 0 or filterFormSubmited %}
 		<div class="box-filter">
 			{{ productFilterForm.filterForm(filterForm, url('front_product_list', { id: category.id }), url('front_product_list', { id: category.id }), null, 'product_list') }}
