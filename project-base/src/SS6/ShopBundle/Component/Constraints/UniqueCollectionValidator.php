@@ -18,22 +18,49 @@ class UniqueCollectionValidator extends ConstraintValidator {
 			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueCollection::class);
 		}
 
-		if (!is_array($constraint->fields) || count($constraint->fields) === 0) {
-			throw new \Symfony\Component\Validator\Exception\MissingOptionsException(
-				'Option "fileds" is either missing or is not an array',
+		if ($constraint->fields !== null && !is_array($constraint->fields)) {
+			throw new \Symfony\Component\Validator\Exception\InvalidOptionsException(
+				'Option "fields" must be array or null',
 				['fields']
+			);
+		}
+
+		if (!is_bool($constraint->allowEmpty)) {
+			throw new \Symfony\Component\Validator\Exception\InvalidOptionsException(
+				'Option "allowEmpty" must be boolean',
+				['allowEmpty']
 			);
 		}
 
 		foreach ($values as $index1 => $value1) {
 			foreach ($values as $index2 => $value2) {
 				if ($index1 !== $index2) {
-					if ($this->areValuesEqualInFields($constraint->fields, $value1, $value2)) {
+					if ($this->areValuesEqual($constraint, $value1, $value2)) {
 						$this->context->addViolation($constraint->message);
 						return;
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Constraints\UniqueCollection $constraint
+	 * @param mixed $value1
+	 * @param mixed $value2
+	 * @return boolean
+	 */
+	private function areValuesEqual(UniqueCollection $constraint, $value1, $value2) {
+		if ($constraint->allowEmpty) {
+			if ($value1 === null || $value2 === null) {
+				return false;
+			}
+		}
+
+		if ($constraint->fields === null) {
+			return $value1 === $value2;
+		} else {
+			return $this->areValuesEqualInFields($constraint->fields, $value1, $value2);
 		}
 	}
 
@@ -64,9 +91,6 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	 */
 	private function getFieldValue($value, $field) {
 		$propertyAccessor = PropertyAccess::createPropertyAccessor();
-		if (!$propertyAccessor->isReadable($value, $field)) {
-			throw new \Symfony\Component\Validator\Exception\ConstraintDefinitionException();
-		}
 
 		return $propertyAccessor->getValue($value, $field);
 	}
