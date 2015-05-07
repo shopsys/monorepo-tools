@@ -59,6 +59,29 @@
 		$(element.domNode).each(SS6.validation.inputBind);
 	};
 
+	FpJsFormValidator._getElementValue = FpJsFormValidator.getElementValue;
+	FpJsFormValidator.getElementValue = function (element) {
+		var i = element.transformers.length;
+		var value = this.getInputValue(element);
+
+		if (i && undefined === value) {
+			value = this.getMappedValue(element);
+		} else if ('collection' == element.type || Object.keys(element.children).length > 0) {
+			value = {};
+			for (var childName in element.children) {
+				value[childName] = this.getMappedValue(element.children[childName]);
+			}
+		} else {
+			value = this.getSpecifiedElementTypeValue(element);
+		}
+
+		while (i--) {
+			value = element.transformers[i].reverseTransform(value, element);
+		}
+
+		return value;
+	};
+
 	FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
 	FpJsFormValidator.getInputValue = function (element) {
 		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
