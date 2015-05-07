@@ -81,6 +81,15 @@
           visible: false
     - label: 'Zboží na titulní stránce'
       route: admin_topproduct_list
+    - label: 'Reklamní systém'
+      route: admin_advert_list
+      items:
+        - label: 'Nová reklama'
+          route: admin_advert_new
+          visible: false
+        - label: 'Editace reklamy'
+          route: admin_advert_edit
+          visible: false
 
 - label: 'Administrátoři'
   route: admin_administrator_list

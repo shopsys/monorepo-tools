@@ -64,6 +64,9 @@
 		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 			return CKEDITOR.instances[element.id].getData();
 		}
+		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
+			return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
+		}
 		return FpJsFormValidator._getInputValue(element);
 	};
 

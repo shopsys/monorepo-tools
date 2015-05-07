@@ -1,0 +1,41 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Reklama'|trans }}{% endblock %}
+{% block h1 %}{{ 'Reklama'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="wrap-group">
+					{{ form_id(advert|default(null)) }}
+					{{ form_row(form.domainId, { label: 'Doména' }) }}
+					{{ form_row(form.name, { label: 'Název', icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
+					{{ form_row(form.type, { label: 'Typ'}) }}
+					{{ form_row(form.positionName, { label: 'Plocha'}) }}
+				</div>
+				<div class="wrap-group js-advert-type-content" data-type="code">
+					{{ form_row(form.code, { label: 'Kód'}) }}
+				</div>
+				<div class="wrap-group js-advert-type-content" data-type="image">
+					{{ form_row(form.link, { label: 'Odkaz'}) }}
+					{% block image %}{% endblock %}
+					{{ form_row(form.image, { label: 'Nahrát nový obrázek'}) }}
+				</div>
+				<div class="wrap-group">
+					{{ form_row(form.hidden, { label: 'Skrýt reklamu'}) }}
+				</div>
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						<a href="{{ url('admin_advert_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+						{{ form_save(advert|default(null), form) }}
+					</div>
+				</div>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}

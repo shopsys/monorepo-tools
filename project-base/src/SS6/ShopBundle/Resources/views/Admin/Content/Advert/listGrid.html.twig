@@ -1,0 +1,31 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_advert_edit', { id: row.a.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_no_data %}
+	{{ 'Nebyla nalezena žádná reklama. Nejprve musíte nějakou vytvořit.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+	{% set entityName = 'reklam' %}
+	{{ parent() }}
+{% endblock %}
+
+{% block grid_value_cell_id_visible %}
+	{% set value = not value %}
+	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
+{% endblock %}
+
+{% block grid_value_cell_id_positionName %}
+	{{ advertPositionsByName[value].localizedName }}
+{% endblock %}
+
+{% block grid_value_cell_id_preview %}
+	{% if row.advert.type == constant('SS6\\ShopBundle\\Model\\Advert\\Advert::TYPE_IMAGE') %}
+		{{ image(row.advert, {size: 'original', height: 30}) }}
+	{% else %}
+		{{ '-' }}
+	{% endif %}
+{% endblock %}

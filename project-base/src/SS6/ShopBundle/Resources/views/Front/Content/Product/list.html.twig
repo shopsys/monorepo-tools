@@ -16,6 +16,7 @@
 {% endblock %}
 
 {% block main_content %}
+	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPosition::POSITION_PRODUCT_LIST')})) }}
 	<h1>{{ category.name|trans }}</h1>
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
