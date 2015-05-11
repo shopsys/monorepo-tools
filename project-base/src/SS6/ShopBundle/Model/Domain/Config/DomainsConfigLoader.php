@@ -32,11 +32,11 @@ class DomainsConfigLoader {
 			);
 		}
 
-		$imageConfigDefinition = new DomainsConfigDefinition();
+		$domainConfigDefinition = new DomainsConfigDefinition();
 		$processor = new Processor();
 
 		$parsedConfig = $yamlParser->parse(file_get_contents($filename));
-		$processedConfig = $processor->processConfiguration($imageConfigDefinition, [$parsedConfig]);
+		$processedConfig = $processor->processConfiguration($domainConfigDefinition, [$parsedConfig]);
 
 		$domainConfigs = $this->loadDomainConfigsFromArray($processedConfig);
 
