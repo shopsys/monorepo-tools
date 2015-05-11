@@ -22,13 +22,13 @@
 		{{ form_widget(form['exchangeRate']) }}
 		<span class="form-edit-block__info">
 			{% if row is null %}
-				<span title="" class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': defaultCurrency.symbol}) }}">
+				<span title="" class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
 					<i class="fa fa-question" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown"></i>
 				</span>
 			{% elseif row.c.id != defaultCurrency.id %}
 				<span title="" class="js-tooltip table-action cursor-help in-action-icons__item" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
-					'%defaultCurrency%': defaultCurrency.symbol,
-					'%currentCurrency%': row.c.symbol
+					'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
+					'%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
 				}) }}">
 					<i class="fa fa-question" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown"></i>
 				</span>
@@ -43,8 +43,8 @@
 	{% else %}
 		{{ value|formatNumber }}
 		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
-			'%defaultCurrency%': defaultCurrency.symbol,
-			'%currentCurrency%': row.c.symbol
+			'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
+			'%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
 		}) }}
 	{% endif %}
 {% endblock %}

@@ -43,9 +43,6 @@ class CurrencyFormType extends AbstractType {
 			->add('code', FormType::CURRENCY, [
 				'required' => true,
 			])
-			->add('symbol', FormType::TEXT, [
-				'required' => true,
-			])
 			->add('exchangeRate', FormType::NUMBER, [
 				'required' => true,
 				'read_only' => $this->isRateReadOnly,
