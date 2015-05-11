@@ -39,12 +39,12 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 		$productsIterator = [$productMock];
 		$productRepositoryMock = $this->getMock(
 			ProductRepository::class,
-			['markAllProductForPriceRecalculation', 'getProductsForPriceRecalculationIterator'],
+			['markAllProductsForPriceRecalculation', 'getProductsForPriceRecalculationIterator'],
 			[],
 			'',
 			false
 		);
-		$productRepositoryMock->expects($this->once())->method('markAllProductForPriceRecalculation');
+		$productRepositoryMock->expects($this->once())->method('markAllProductsForPriceRecalculation');
 		$productRepositoryMock
 			->expects($this->once())
 			->method('getProductsForPriceRecalculationIterator')

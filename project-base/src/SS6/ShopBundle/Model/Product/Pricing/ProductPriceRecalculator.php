@@ -81,7 +81,7 @@ class ProductPriceRecalculator {
 		return $count;
 	}
 
-	public function runImmediatelyRecalculations() {
+	public function runImmediateRecalculations() {
 		$products = $this->productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
 		foreach ($products as $product) {
 			$this->recalculateProductPrices($product);
@@ -116,8 +116,8 @@ class ProductPriceRecalculator {
 	 * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
-		if (!$event->isMasterRequest()) {
-			$this->runImmediatelyRecalculations();
+		if ($event->isMasterRequest()) {
+			$this->runImmediateRecalculations();
 		}
 	}
 

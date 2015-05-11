@@ -38,7 +38,7 @@ class CronCommand extends ContainerAwareCommand {
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 		$timeStart = time();
 		$recalculatedCount = $productPriceRecalculator->runScheduledRecalculations(function () use ($timeStart) {
-			return time() - $timeStart  < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
+			return time() - $timeStart < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
 		});
 
 		$output->writeln('Recalculated: ' . $recalculatedCount);
@@ -54,7 +54,7 @@ class CronCommand extends ContainerAwareCommand {
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 		$timeStart = time();
 		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculations(function () use ($timeStart) {
-			return time() - $timeStart  < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
+			return time() - $timeStart < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
 		});
 
 		$output->writeln('Recalculated: ' . $recalculatedCount);

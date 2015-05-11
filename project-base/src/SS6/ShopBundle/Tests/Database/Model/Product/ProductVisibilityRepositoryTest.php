@@ -48,7 +48,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->hidden = true;
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$em->flush();
 		$id = $product->getId();
@@ -80,7 +80,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productEditData = $this->getDefaultProductEditData();
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$em->flush();
 		$id = $product->getId();
@@ -116,7 +116,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->sellingFrom = $sellingFrom;
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$em->flush();
 		$id = $product->getId();
@@ -144,7 +144,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->sellingTo = $sellingTo;
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$em->flush();
 		$id = $product->getId();
@@ -175,7 +175,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->sellingFrom = $sellingFrom;
 		$productEditData->productData->sellingTo = $sellingTo;
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$em->flush();
 		$id = $product->getId();
@@ -203,7 +203,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productEditData->productData->price = null;
 		$product2 = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$product1Id = $product1->getId();
 		$product2Id = $product2->getId();
@@ -232,7 +232,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->name = ['cs' => 'Name'];
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$productId = $product->getId();
 		$em->clear();
@@ -275,7 +275,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->categories = [$category];
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$productId = $product->getId();
 		$em->clear();
@@ -330,7 +330,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->manualInputPrices[$pricingGroupWithNullPriceId] = null;
 
 		$product = $productEditFacade->create($productEditData);
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 
 		$productId = $product->getId();
 		$em->clear();

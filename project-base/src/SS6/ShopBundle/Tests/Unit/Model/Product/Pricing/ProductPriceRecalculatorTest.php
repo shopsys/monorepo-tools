@@ -42,7 +42,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 			$pricingGroupFacadeMock
 		);
 
-		$productPriceRecalculator->runImmediatelyRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 	}
 
 	public function testRunScheduledRecalculations() {

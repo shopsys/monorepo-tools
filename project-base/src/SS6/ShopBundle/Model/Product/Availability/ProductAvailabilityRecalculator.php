@@ -60,7 +60,7 @@ class ProductAvailabilityRecalculator {
 		return $count;
 	}
 
-	public function runImmediatelyRecalculations() {
+	public function runImmediateRecalculations() {
 		$products = $this->productAvailabilityRecalculationScheduler->getProductsForImmediatelyRecalculation();
 		foreach ($products as $product) {
 			$this->recalculateAvailabilityForProduct($product);
@@ -82,7 +82,7 @@ class ProductAvailabilityRecalculator {
 	 */
 	public function onKernelResponse(FilterResponseEvent $event) {
 		if ($event->isMasterRequest()) {
-			$this->runImmediatelyRecalculations();
+			$this->runImmediateRecalculations();
 		}
 	}
 

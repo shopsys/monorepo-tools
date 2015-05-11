@@ -40,7 +40,7 @@ class ProductPriceRecalculationScheduler {
 	}
 
 	public function scheduleRecalculatePriceForAllProducts() {
-		$this->productRepository->markAllProductForPriceRecalculation();
+		$this->productRepository->markAllProductsForPriceRecalculation();
 	}
 
 	/**

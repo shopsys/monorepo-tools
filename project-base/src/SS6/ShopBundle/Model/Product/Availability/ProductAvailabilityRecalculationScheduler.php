@@ -32,7 +32,7 @@ class ProductAvailabilityRecalculationScheduler {
 	}
 
 	public function scheduleRecalculateAvailabilityForAllProducts() {
-		$this->productRepository->markAllProductForAvailabilityRecalculation();
+		$this->productRepository->markAllProductsForAvailabilityRecalculation();
 	}
 
 	/**

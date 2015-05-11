@@ -38,12 +38,12 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 		$productsIterator = [$productMock];
 		$productRepositoryMock = $this->getMock(
 			ProductRepository::class,
-			['markAllProductForAvailabilityRecalculation', 'getProductsForAvailabilityRecalculationIterator'],
+			['markAllProductsForAvailabilityRecalculation', 'getProductsForAvailabilityRecalculationIterator'],
 			[],
 			'',
 			false
 		);
-		$productRepositoryMock->expects($this->once())->method('markAllProductForAvailabilityRecalculation');
+		$productRepositoryMock->expects($this->once())->method('markAllProductsForAvailabilityRecalculation');
 		$productRepositoryMock
 			->expects($this->once())
 			->method('getProductsForAvailabilityRecalculationIterator')

@@ -417,13 +417,6 @@ class ProductRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	public function getAll() {
-		return $this->getProductRepository()->findAll();
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
@@ -438,13 +431,13 @@ class ProductRepository {
 		return $queryBuilder->getQuery()->execute();
 	}
 
-	public function markAllProductForAvailabilityRecalculation() {
+	public function markAllProductsForAvailabilityRecalculation() {
 		$this->em
 			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculateAvailability = TRUE')
 			->execute();
 	}
 
-	public function markAllProductForPriceRecalculation() {
+	public function markAllProductsForPriceRecalculation() {
 		$this->em
 			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE')
 			->execute();
