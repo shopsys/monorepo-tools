@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Image;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
@@ -48,7 +49,13 @@ class ImageFacade {
 	 */
 	private $imageLocator;
 
+	/**
+	 * @var string
+	 */
+	private $imageUrlPrefix;
+
 	public function __construct(
+		$imageUrlPrefix,
 		EntityManager $em,
 		ImageConfig $imageConfig,
 		ImageRepository $imageRepository,
@@ -57,6 +64,7 @@ class ImageFacade {
 		FileUpload $fileUpload,
 		ImageLocator $imageLocator
 	) {
+		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->em = $em;
 		$this->imageConfig = $imageConfig;
 		$this->imageRepository = $imageRepository;
@@ -199,5 +207,36 @@ class ImageFacade {
 	 */
 	public function getAllImageEntityConfigsByClass() {
 		return $this->imageConfig->getAllImageEntityConfigsByClass();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param string|null $sizeName
+	 * @param string|null $type
+	 * @return string
+	 */
+	public function getImageUrl(DomainConfig $domainConfig, $imageOrEntity, $sizeName = null, $type = null) {
+		$image = $this->getImageByObject($imageOrEntity, $type);
+		if ($this->imageLocator->imageExists($image)) {
+			return $domainConfig->getUrl()
+				. $this->imageUrlPrefix
+				. str_replace(DIRECTORY_SEPARATOR, '/', $this->imageLocator->getRelativeImageFilepath($image, $sizeName));
+		}
+
+		throw new \SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param string|null $type
+	 * @return \SS6\ShopBundle\Model\Image\Image
+	 */
+	public function getImageByObject($imageOrEntity, $type = null) {
+		if ($type === null && $imageOrEntity instanceof Image) {
+			return $imageOrEntity;
+		} else {
+			return $this->getImageByEntity($imageOrEntity, $type);
+		}
 	}
 }

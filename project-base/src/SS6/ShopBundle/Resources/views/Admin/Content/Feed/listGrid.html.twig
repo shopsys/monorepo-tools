@@ -1,0 +1,9 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	{% if row.created %}
+		<a href="{{ row.url }}" target="_blank">{{ row.name }}</a>
+	{% else %}
+		{{ row.name }}
+	{% endif %}
+{% endblock %}

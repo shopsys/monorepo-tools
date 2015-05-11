@@ -14,6 +14,8 @@ parameters:
   ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v5.zip
   ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v5.sql
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
+  ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
+  ss6.feed_url_prefix: /assets/content/feeds/
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
   ss6.image_dir: %ss6.web_dir%/assets/content/images
@@ -344,6 +346,15 @@ services:
   ss6.shop.domain.selected_domain:
     class: SS6\ShopBundle\Model\Domain\SelectedDomain
 
+  ss6.shop.feed.feed_facade:
+    class: SS6\ShopBundle\Model\Feed\FeedFacade
+    arguments:
+      - %ss6.feed_dir%
+      - @ss6.shop.feed.heureka.heureka_feed_data_source
+
+  ss6.shop.feed.heureka.heureka_feed_data_source:
+    class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaFeedDataSource
+
   ss6.shop.file_upload:
     class: SS6\ShopBundle\Model\FileUpload\FileUpload
     arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
@@ -413,6 +424,7 @@ services:
 
   ss6.shop.image.image_facade:
     class: SS6\ShopBundle\Model\Image\ImageFacade
+    arguments: [%ss6.image_url_prefix%]
 
   ss6.shop.image.image_locator:
     class: SS6\ShopBundle\Model\Image\ImageLocator

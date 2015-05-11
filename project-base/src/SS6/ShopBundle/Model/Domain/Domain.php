@@ -27,28 +27,35 @@ class Domain {
 	 * @return int
 	 */
 	public function getId() {
-		return $this->getCurrentConfig()->getId();
+		return $this->getCurrentDomainConfig()->getId();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getLocale() {
-		return $this->getCurrentConfig()->getLocale();
+		return $this->getCurrentDomainConfig()->getLocale();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getName() {
-		return $this->getCurrentConfig()->getName();
+		return $this->getCurrentDomainConfig()->getName();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->getCurrentDomainConfig()->getUrl();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTemplatesDirectory() {
-		return $this->getCurrentConfig()->getTemplatesDirectory();
+		return $this->getCurrentDomainConfig()->getTemplatesDirectory();
 	}
 
 	/**
@@ -106,7 +113,7 @@ class Domain {
 	/**
 	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
 	 */
-	private function getCurrentConfig() {
+	public function getCurrentDomainConfig() {
 		if ($this->currentDomainConfig === null) {
 			throw new \SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException();
 		}
