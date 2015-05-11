@@ -128,7 +128,9 @@ class FriendlyUrlFacade {
 	public function saveUrlListFormData(array $urlListFormData) {
 		foreach ($urlListFormData['toDelete'] as $friendlyUrls) {
 			foreach ($friendlyUrls as $friendlyUrl) {
-				$this->em->remove($friendlyUrl);
+				if (!$this->friendlyUrlRepository->isMainFriendlyUrl($friendlyUrl)) {
+					$this->em->remove($friendlyUrl);
+				}
 			}
 		}
 

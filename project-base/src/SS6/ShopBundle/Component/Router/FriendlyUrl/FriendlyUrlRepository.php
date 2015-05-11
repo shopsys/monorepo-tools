@@ -73,7 +73,26 @@ class FriendlyUrlRepository {
 			'entityId' => $entityId,
 		];
 
-		return $this->getFriendlyUrlRepository()->findBy($criteria);
+		return $this->getFriendlyUrlRepository()->findBy(
+			$criteria, [
+				'domainId' => 'ASC',
+				'slug' => 'ASC',
+			]
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @return bool
+	 */
+	public function isMainFriendlyUrl(FriendlyUrl $friendlyUrl) {
+		$mainFriendlyUrl = $this->getByDomainIdAndRouteNameAndEntityId(
+			$friendlyUrl->getDomainId(),
+			$friendlyUrl->getRouteName(),
+			$friendlyUrl->getEntityId()
+		);
+
+		return $mainFriendlyUrl === $friendlyUrl;
 	}
 
 }
