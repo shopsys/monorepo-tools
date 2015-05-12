@@ -22,7 +22,9 @@ class ProductCalculatedAvailabilityDataFixture extends AbstractReferenceFixture 
 		// @codingStandardsIgnoreEnd
 
 		$productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
-		$productAvailabilityRecalculator->runScheduledRecalculations();
+		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 	}
 
 	/**

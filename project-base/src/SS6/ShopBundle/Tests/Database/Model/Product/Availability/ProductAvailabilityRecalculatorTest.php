@@ -25,7 +25,9 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
 
 		$productEditFacade->edit($productId, $productEditData);
-		$productAvailabilityRecalculator->runScheduledRecalculations();
+		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 		$this->getEntityManager()->flush();
 		$this->getEntityManager()->clear();
 
@@ -56,7 +58,9 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->availability = null;
 
 		$productEditFacade->edit($productId, $productEditData);
-		$productAvailabilityRecalculator->runScheduledRecalculations();
+		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 		$this->getEntityManager()->flush();
 		$this->getEntityManager()->clear();
 
@@ -85,7 +89,9 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->availability = null;
 
 		$productEditFacade->edit($productId, $productEditData);
-		$productAvailabilityRecalculator->runScheduledRecalculations();
+		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 		$this->getEntityManager()->flush();
 		$this->getEntityManager()->clear();
 

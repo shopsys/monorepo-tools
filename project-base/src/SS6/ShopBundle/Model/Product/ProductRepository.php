@@ -417,13 +417,6 @@ class ProductRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	public function getAll() {
-		return $this->getProductRepository()->findAll();
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
@@ -436,6 +429,45 @@ class ProductRepository {
 			->setParameter('availability', $availability->getId());
 
 		return $queryBuilder->getQuery()->execute();
+	}
+
+	public function markAllProductsForAvailabilityRecalculation() {
+		$this->em
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculateAvailability = TRUE')
+			->execute();
+	}
+
+	public function markAllProductsForPriceRecalculation() {
+		$this->em
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE')
+			->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 */
+	public function markProductsForPriceRecalculationByVat(Vat $vat) {
+		$this->em
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE WHERE p.vat = :vat')
+			->execute(['vat' => $vat]);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getProductsForPriceRecalculationIterator() {
+		return $this->getProductRepository()->createQueryBuilder('p')->where('p.recalculatePrice = TRUE')->getQuery()->iterate();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getProductsForAvailabilityRecalculationIterator() {
+		return $this->getProductRepository()
+			->createQueryBuilder('p')
+			->where('p.recalculateAvailability = TRUE')
+			->getQuery()
+			->iterate();
 	}
 
 }

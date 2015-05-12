@@ -132,8 +132,12 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		$productPriceRecalculator = $this->get('ss6.shop.product.pricing.product_price_recalculator');
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-		$productAvailabilityRecalculator->runScheduledRecalculations();
-		$productPriceRecalculator->runScheduledRecalculations();
+		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
+		$productPriceRecalculator->runScheduledRecalculations(function () {
+			return true;
+		});
 		if ($runGlobalRecalculators) {
 			$productVisibilityFacade->refreshProductsVisibility();
 		}

@@ -114,11 +114,11 @@ class AvailabilityFacade {
 			if ($this->isAvailabilityDefault($availability)) {
 				$this->setDefaultInStockAvailability($newAvailability);
 			}
+			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 		}
 
 		$this->em->remove($availability);
 		$this->em->flush();
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 	}
 
 	/**
