@@ -13,19 +13,22 @@
 		});
 	};
 
-	SS6.productList.ajaxLoadMore = function () {
-		$loadMoreButton = $('.js-load-more-button');
-		$paginationResultData = $('.js-pagination-result-data');
-		$loadMoreSpinner = $('.js-load-more-spinner');
+	SS6.productList.AjaxLoading = function () {
+		var $loadMoreButton = $('.js-load-more-button');
+		var $loadMoreSpinner = $('.js-load-more-spinner');
+		var $currentProductList = $('.js-product-list');
 
-		totalCount = $paginationResultData.data('total-count');
-		pageSize = $paginationResultData.data('page-size');
-		page = $paginationResultData.data('page');
-		isXmlHttpRequest = false;
+		var totalCount = $loadMoreButton.data('total-count');
+		var pageSize = $loadMoreButton.data('page-size');
+		var page = $loadMoreButton.data('page');
+		var nextPage = page + 1;
 
-		SS6.productList.updateAjaxPaginationStatus();
+		this.init = function () {
+			updateAjaxPaginationStatus();
+			$loadMoreButton.on('click', onClickLoadMoreButton);
+		};
 
-		$loadMoreButton.on('click', function () {
+		var onClickLoadMoreButton = function () {
 			$(this).hide();
 			$loadMoreSpinner.show();
 			$.ajax({
@@ -34,39 +37,34 @@
 				data: {page: nextPage},
 				success: function (data) {
 					var $response = $($.parseHTML(data));
-					var $currentProductList = $('.js-product-list');
 					var nextProducts = $response.find('>li');
 					$currentProductList.append(nextProducts);
 					$loadMoreSpinner.hide();
-					isXmlHttpRequest = true;
-					SS6.productList.updateAjaxPaginationStatus();
+					page = nextPage;
+					nextPage++;
+					updateAjaxPaginationStatus();
 				}
 			});
-		});
-	};
+		};
 
-	SS6.productList.updateAjaxPaginationStatus = function () {
-		if (!isXmlHttpRequest) {
-			nextPage = page + 1;
-		} else {
-			page = nextPage;
-			nextPage++;
-		}
-		remaining = totalCount - page * pageSize;
-		if (remaining > 0 && remaining < pageSize) {
-			$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': remaining})).show();
-		}
-		if (remaining > pageSize) {
-			$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': pageSize})).show();
-		}
-		if (remaining <= 0) {
-			$loadMoreButton.hide();
-		}
+		var updateAjaxPaginationStatus = function () {
+			var remaining = totalCount - page * pageSize;
+			if (remaining > 0 && remaining < pageSize) {
+				$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': remaining})).show();
+			}
+			if (remaining > pageSize) {
+				$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': pageSize})).show();
+			}
+			if (remaining <= 0) {
+				$loadMoreButton.hide();
+			}
+		};
 	};
 
 	$(document).ready(function () {
 		SS6.productList.init();
-		SS6.productList.ajaxLoadMore();
+		var ajaxLoading = new SS6.productList.AjaxLoading();
+		ajaxLoading.init();
 	});
 
 })(jQuery);
