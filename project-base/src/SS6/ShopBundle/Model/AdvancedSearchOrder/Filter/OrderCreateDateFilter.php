@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\AdvancedSearchOrder\Filter;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 
@@ -46,49 +45,32 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
 		foreach ($rulesData as $index => $ruleData) {
-			if ($ruleData->operator === self::OPERATOR_AFTER || $ruleData->operator === self::OPERATOR_BEFORE ||
-				$ruleData->operator === self::OPERATOR_IS) {
-				if ($ruleData->value === null || empty($ruleData->value)) {
-					$searchValue = new \DateTime();
-				} else {
-					$searchValue = $ruleData->value;
-				}
+			if ($ruleData->value === null) {
+				continue;
+			}
 
-				$dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
-				$parameterName = 'orderCreatedAt_' . $index;
-				$parameterName2 = 'orderCreatedAt_' . $index . '_2';
+			$dateMidnight = clone $ruleData->value;
+			/* @var $dateMidnight \DateTime */
+			$dateMidnight->modify('midnight');
 
-				$where = 'o.createdAt ' . $dqlOperator . ' :' . $parameterName;
+			$parameterName = 'orderCreatedAt_' . $index;
+			$parameterName2 = 'orderCreatedAt_' . $index . '_2';
 
-				if ($ruleData->operator === self::OPERATOR_IS) {
-					/** @var $searchValue \DateTime */
-					$searchValue2 = clone $searchValue;
-					$searchValue2 = $searchValue2->modify('+1 day')->format('Y-m-d');
-					$searchValue = $searchValue->format('Y-m-d');
-					$where = 'o.createdAt ' . $dqlOperator . ' :' . $parameterName . ' AND :' . $parameterName2;
-				}
+			if ($ruleData->operator === self::OPERATOR_BEFORE) {
+				$queryBuilder->andWhere('o.createdAt < :' . $parameterName)
+					->setParameter($parameterName, $dateMidnight);
+			} elseif ($ruleData->operator === self::OPERATOR_AFTER) {
+				$queryBuilder->andWhere('o.createdAt >= :' . $parameterName)
+					->setParameter($parameterName, $dateMidnight);
+			} elseif ($ruleData->operator === self::OPERATOR_IS) {
+				$dateTomorrow = clone $dateMidnight;
+				$dateTomorrow->modify('tomorrow');
 
-				$queryBuilder->andWhere($where);
-				$queryBuilder->setParameter($parameterName, $searchValue);
-				if ($ruleData->operator === self::OPERATOR_IS) {
-					$queryBuilder->setParameter($parameterName2, $searchValue2);
-				}
+				$queryBuilder->andWhere('o.createdAt BETWEEN :' . $parameterName . ' AND :' . $parameterName2)
+					->setParameter($parameterName, $dateMidnight)
+					->setParameter($parameterName2, $dateTomorrow);
 			}
 		}
 	}
 
-	/**
-	 * @param string $operator
-	 * @return string
-	 */
-	private function getContainsDqlOperator($operator) {
-		switch ($operator) {
-			case self::OPERATOR_AFTER:
-				return '>=';
-			case self::OPERATOR_BEFORE:
-				return '<';
-			case self::OPERATOR_IS:
-				return 'BETWEEN';
-		}
-	}
 }
