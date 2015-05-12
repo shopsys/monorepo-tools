@@ -13,7 +13,6 @@
 					{{ form_errors(form.bestsellingProducts) }}
 
 					<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
-						{% form_theme form '@SS6Shop/Admin/Content/BestsellingProduct/formTheme.html.twig' %}
 						{% for productForm in form.bestsellingProducts %}
 							<div class="form-line js-bestsellingProductContainer">
 								<label class="col-xs-1">{{ loop.index }}</label>

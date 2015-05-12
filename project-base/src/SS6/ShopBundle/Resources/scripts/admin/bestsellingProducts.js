@@ -7,7 +7,7 @@
 		$('.js-bestsellingProductUnassignButton').click(function () {
 			var $bestsellingProductContainer = $(this).closest('.js-bestsellingProductContainer');
 			var $input = $bestsellingProductContainer.find('.js-product-picker-input');
-			SS6.productPicker.selectProduct($input.attr('id'), 0, $input.data('valueUnassigned'));
+			SS6.productPicker.selectProduct($input.attr('id'), '', null);
 		});
 	};
 

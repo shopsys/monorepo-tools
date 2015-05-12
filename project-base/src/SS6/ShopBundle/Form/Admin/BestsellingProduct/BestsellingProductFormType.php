@@ -40,6 +40,7 @@ class BestsellingProductFormType extends AbstractType {
 			$builder->get('bestsellingProducts')
 				->add($i, FormType::PRODUCT, [
 					'required' => false,
+					'placeholder' => null,
 				]);
 		}
 	}
