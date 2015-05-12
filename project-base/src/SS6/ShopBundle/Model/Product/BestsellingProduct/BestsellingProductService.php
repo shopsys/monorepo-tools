@@ -15,25 +15,28 @@ class BestsellingProductService {
 		array $automaticBestsellingProducts,
 		$maxResults
 	) {
-		$automaticBestsellingProductsWithoutDuplicates = $this->getAutomaticBestsellingProductsWithoutDuplicates(
-			$manualBestsellingProductsIndexedByPosition, $automaticBestsellingProducts
+		$automaticBestsellingProductsWithoutDuplicates = $this->getAutomaticBestsellingProductsExcludingManual(
+			$automaticBestsellingProducts,
+			$manualBestsellingProductsIndexedByPosition
 		);
 		$combinedBestsellingProducts = $this->getCombinedBestsellingProducts(
-			$manualBestsellingProductsIndexedByPosition, $automaticBestsellingProductsWithoutDuplicates, $maxResults
+			$manualBestsellingProductsIndexedByPosition,
+			$automaticBestsellingProductsWithoutDuplicates,
+			$maxResults
 		);
 		return $combinedBestsellingProducts;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $manualBestsellingProductsIndexedByPosition
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $automaticBestsellingProducts
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $manualBestsellingProducts
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	private function getAutomaticBestsellingProductsWithoutDuplicates(
-		array $manualBestsellingProductsIndexedByPosition,
-		array $automaticBestsellingProducts
+	private function getAutomaticBestsellingProductsExcludingManual(
+		array $automaticBestsellingProducts,
+		array $manualBestsellingProducts
 	) {
-		foreach ($manualBestsellingProductsIndexedByPosition as $manualBestsellingProduct) {
+		foreach ($manualBestsellingProducts as $manualBestsellingProduct) {
 			$automaticBestsellingProductIndex = array_search($manualBestsellingProduct, $automaticBestsellingProducts, true);
 			if ($automaticBestsellingProductIndex !== false) {
 				unset($automaticBestsellingProducts[$automaticBestsellingProductIndex]);
