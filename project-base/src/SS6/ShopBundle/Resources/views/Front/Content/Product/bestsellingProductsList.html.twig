@@ -1,14 +1,12 @@
 {% if productDetails|length > 0 %}
 	<h2>{{ 'Nejprodávanější zboží'|trans }}</h2>
 	<ul class="list-items-line js-bestsellingProducts">
-		{% set position = 1 %}
 		{% for productDetail in productDetails %}
-			<li class="list-items-line__item js-bestsellingProduct{% if (position > maxShownProducts )%} display-none{% endif %}">
+			<li class="list-items-line__item js-bestsellingProduct{% if (loop.index > maxShownProducts )%} display-none{% endif %}">
 				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-items-line__block">
 					<div class="list-items-line__position">
 						<span>
-							{{ position }}.
-							{% set position = position + 1 %}
+							{{ loop.index }}.
 						</span>
 					</div>
 					<div class="list-items-line__image">
