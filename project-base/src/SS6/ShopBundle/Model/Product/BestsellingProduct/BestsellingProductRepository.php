@@ -91,13 +91,13 @@ class BestsellingProductRepository {
 		$queryBuilder = $this->productRepository->getListableInCategoryQueryBuilder($domainId, $pricingGroup, $category);
 
 		$queryBuilder
-			->addSelect('COUNT(op.id) AS HIDDEN orderCount')
+			->addSelect('COUNT(op) AS HIDDEN orderCount')
 			->join(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p')
 			->leftJoin(OrderProduct::class, 'op', Join::WITH, 'op.product = p')
 			->andWhere('pcp.pricingGroup = prv.pricingGroup')
 			->orderBy('orderCount', 'DESC')
 			->addOrderBy('pcp.priceWithVat', 'DESC')
-			->groupBy('p.id, pcp')
+			->groupBy('p, pcp')
 			->setMaxResults($maxResults);
 
 		return $queryBuilder->getQuery()->execute();
