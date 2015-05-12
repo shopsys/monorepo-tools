@@ -37,6 +37,7 @@ class BestsellingProductController extends BaseController {
 	 * @var CategoryFacade
 	 */
 	private $categoryFacade;
+
 	/**
 	 * @var Domain
 	 */
@@ -136,7 +137,7 @@ class BestsellingProductController extends BaseController {
 			return $this->redirect($this->generateUrl('admin_bestsellingproduct_list'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem('Kategorie ' . $category->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($category->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/BestsellingProduct/detail.html.twig', [
 			'form' => $form->createView(),
