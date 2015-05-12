@@ -13,9 +13,6 @@ interface AdvancedSearchFilterInterface {
 	const OPERATOR_IS_NOT = 'isNot';
 	const OPERATOR_BEFORE = 'before';
 	const OPERATOR_AFTER = 'after';
-	const OPERATOR_AT = 'at';
-	const OPERATOR_EQ = 'eq';
-	const OPERATOR_NEQ = 'neq';
 	const OPERATOR_GT = 'gt';
 	const OPERATOR_GTE = 'gte';
 	const OPERATOR_LT = 'lt';

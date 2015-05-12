@@ -27,8 +27,8 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface {
 	 */
 	public function getAllowedOperators() {
 		return [
-			self::OPERATOR_EQ,
-			self::OPERATOR_NEQ,
+			self::OPERATOR_IS,
+			self::OPERATOR_IS_NOT,
 		];
 	}
 
@@ -75,10 +75,10 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface {
 	 */
 	private function getContainsDqlOperator($operator) {
 		switch ($operator) {
-			case self::OPERATOR_EQ:
+			case self::OPERATOR_IS:
 				return '=';
-			case self::OPERATOR_NEQ:
-				return '<>';
+			case self::OPERATOR_IS_NOT:
+				return '!=';
 		}
 	}
 

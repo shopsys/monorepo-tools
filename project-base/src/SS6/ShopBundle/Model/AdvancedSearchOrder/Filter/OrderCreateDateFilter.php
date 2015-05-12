@@ -23,7 +23,7 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 		return [
 			self::OPERATOR_AFTER,
 			self::OPERATOR_BEFORE,
-			self::OPERATOR_AT,
+			self::OPERATOR_IS,
 		];
 	}
 
@@ -47,7 +47,7 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
 		foreach ($rulesData as $index => $ruleData) {
 			if ($ruleData->operator === self::OPERATOR_AFTER || $ruleData->operator === self::OPERATOR_BEFORE ||
-				$ruleData->operator === self::OPERATOR_AT) {
+				$ruleData->operator === self::OPERATOR_IS) {
 				if ($ruleData->value === null || empty($ruleData->value)) {
 					$searchValue = new \DateTime();
 				} else {
@@ -60,7 +60,7 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 
 				$where = 'o.createdAt ' . $dqlOperator . ' :' . $parameterName;
 
-				if ($ruleData->operator === self::OPERATOR_AT) {
+				if ($ruleData->operator === self::OPERATOR_IS) {
 					/** @var $searchValue \DateTime */
 					$searchValue2 = clone $searchValue;
 					$searchValue2 = $searchValue2->modify('+1 day')->format('Y-m-d');
@@ -70,7 +70,7 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 
 				$queryBuilder->andWhere($where);
 				$queryBuilder->setParameter($parameterName, $searchValue);
-				if ($ruleData->operator === self::OPERATOR_AT) {
+				if ($ruleData->operator === self::OPERATOR_IS) {
 					$queryBuilder->setParameter($parameterName2, $searchValue2);
 				}
 			}
@@ -87,8 +87,8 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface {
 				return '>=';
 			case self::OPERATOR_BEFORE:
 				return '<';
-			case self::OPERATOR_AT:
-			return 'BETWEEN';
+			case self::OPERATOR_IS:
+				return 'BETWEEN';
 		}
 	}
 }

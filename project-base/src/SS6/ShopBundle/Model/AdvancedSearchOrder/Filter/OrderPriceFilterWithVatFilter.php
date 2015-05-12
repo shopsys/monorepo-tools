@@ -24,7 +24,7 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface {
 			self::OPERATOR_LT,
 			self::OPERATOR_GTE,
 			self::OPERATOR_LTE,
-			self::OPERATOR_EQ,
+			self::OPERATOR_IS,
 		];
 	}
 
@@ -72,7 +72,7 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface {
 				return '>=';
 			case self::OPERATOR_LTE:
 				return '<=';
-			case self::OPERATOR_EQ:
+			case self::OPERATOR_IS:
 				return '=';
 		}
 		return null;
