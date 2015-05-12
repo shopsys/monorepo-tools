@@ -32,19 +32,11 @@ class BestsellingProductRepository {
 	}
 
 	/**
-	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct|null
-	 */
-	public function getById($id) {
-		return $this->getOneByCriteria(['id' => $id]);
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\BestsellingProduct\Category $category
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct|null
 	 */
-	public function getByCategoryAndDomainId(Category $category, $domainId) {
+	public function getManualBestsellingProductsByCategoryAndDomainId(Category $category, $domainId) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('bp')
 			->from(ManualBestsellingProduct::class, 'bp', 'bp.position')
