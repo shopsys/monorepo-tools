@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class FriendlyUrlFacade {
@@ -26,6 +27,11 @@ class FriendlyUrlFacade {
 	private $friendlyUrlService;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+	 */
+	private $friendlyUrlRepository;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
@@ -34,11 +40,13 @@ class FriendlyUrlFacade {
 		EntityManager $em,
 		DomainRouterFactory $domainRouterFactory,
 		FriendlyUrlService $friendlyUrlService,
+		FriendlyUrlRepository $friendlyUrlRepository,
 		Domain $domain
 	) {
 		$this->em = $em;
 		$this->domainRouterFactory = $domainRouterFactory;
 		$this->friendlyUrlService = $friendlyUrlService;
+		$this->friendlyUrlRepository = $friendlyUrlRepository;
 		$this->domain = $domain;
 	}
 
@@ -103,6 +111,30 @@ class FriendlyUrlFacade {
 			$this->em->persist($friendlyUrl);
 			$this->em->flush($friendlyUrl);
 		}
+	}
+
+	/**
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+	 */
+	public function getAllByRouteNameAndEntityId($routeName, $entityId) {
+		return $this->friendlyUrlRepository->getAllByRouteNameAndEntityId($routeName, $entityId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][] $urlListFormData
+	 */
+	public function saveUrlListFormData(array $urlListFormData) {
+		foreach ($urlListFormData['toDelete'] as $friendlyUrls) {
+			foreach ($friendlyUrls as $friendlyUrl) {
+				if (!$this->friendlyUrlRepository->isMainFriendlyUrl($friendlyUrl)) {
+					$this->em->remove($friendlyUrl);
+				}
+			}
+		}
+
+		$this->em->flush();
 	}
 
 }

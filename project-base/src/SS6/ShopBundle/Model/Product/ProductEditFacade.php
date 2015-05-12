@@ -157,14 +157,20 @@ class ProductEditFacade {
 		$this->productService->edit($product, $productEditData->productData);
 
 		$this->em->beginTransaction();
-		$this->saveParameters($product, $productEditData->parameters);
-		$this->refreshProductDomains($product, $productEditData);
-		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
-		$this->em->flush();
-		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
-		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
-		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
-		$this->em->commit();
+		try {
+			$this->saveParameters($product, $productEditData->parameters);
+			$this->refreshProductDomains($product, $productEditData);
+			$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+			$this->em->flush();
+			$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
+			$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
+			$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
+			$this->friendlyUrlFacade->saveUrlListFormData($productEditData->urls);
+			$this->em->commit();
+		} catch (\Exception $exception) {
+			$this->em->rollback();
+			throw $exception;
+		}
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();

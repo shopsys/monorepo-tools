@@ -16,6 +16,7 @@
 					{{ form_row(form.name, { label: 'Název' }) }}
 					{{ form_row(form.parent, { label: 'Nadřazená kategorie'}) }}
 					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'}) }}
+					{% block category_urls %}{% endblock %}
 				</div>
 
 				<div class="window-fixed-bar">

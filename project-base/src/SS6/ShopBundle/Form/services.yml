@@ -113,6 +113,11 @@ services:
     tags:
       - { name: form.type_extension, alias: form }
 
+  ss6.shop.form.url_list:
+    class: SS6\ShopBundle\Form\UrlListType
+    tags:
+      - { name: form.type, alias: url_list }
+
   ss6.shop.form.yes_no:
     class: SS6\ShopBundle\Form\YesNoType
     tags:

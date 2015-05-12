@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
@@ -103,6 +104,22 @@ class FriendlyUrlRouter implements RouterInterface {
 			$this->getRouteCollection(),
 			$this->domainConfig,
 			$routeName,
+			$parameters,
+			$referenceType
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param array $parameters
+	 * @param string $referenceType
+	 * @return string
+	 */
+	public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
+		return $this->friendlyUrlGenerator->getGeneratedUrl(
+			$friendlyUrl->getRouteName(),
+			$this->getRouteCollection()->get($friendlyUrl->getRouteName()),
+			$friendlyUrl,
 			$parameters,
 			$referenceType
 		);

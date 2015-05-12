@@ -58,7 +58,7 @@ class DomainRouterFactory {
 
 	/**
 	 * @param int $domainId
-	 * @return \Symfony\Component\Routing\Router
+	 * @return \SS6\ShopBundle\Component\Router\DomainRouter
 	 */
 	public function getRouter($domainId) {
 		if (!array_key_exists($domainId, $this->routersByDomainId)) {
@@ -70,12 +70,12 @@ class DomainRouterFactory {
 			$context = $this->getRequestContextByDomainConfig($domainConfig);
 			$basicRouter = $this->getBasicRouter($domainConfig);
 			$localizedRouter = $this->localizedRouterFactory->getRouter($domainConfig->getLocale(), $context);
-			$friendlyUrlRouterFactory = $this->friendlyUrlRouterFactory->createRouter($domainConfig, $context);
+			$friendlyUrlRouter = $this->friendlyUrlRouterFactory->createRouter($domainConfig, $context);
 			$this->routersByDomainId[$domainId] = new DomainRouter(
 				$context,
 				$basicRouter,
 				$localizedRouter,
-				$friendlyUrlRouterFactory
+				$friendlyUrlRouter
 			);
 		}
 

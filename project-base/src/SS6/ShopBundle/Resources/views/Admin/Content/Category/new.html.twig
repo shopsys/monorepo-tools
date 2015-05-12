@@ -2,3 +2,7 @@
 
 {% block title %}- {{ 'Nová kategorie'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nová kategorie'|trans }}{% endblock %}
+
+{% block category_urls %}
+	{% do form.urls.setRendered %}
+{% endblock %}

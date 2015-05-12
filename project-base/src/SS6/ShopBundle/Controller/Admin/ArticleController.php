@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -43,18 +44,25 @@ class ArticleController extends BaseController {
 	 */
 	private $breadcrumb;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
-		Breadcrumb $breadcrumb
+		Breadcrumb $breadcrumb,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -64,7 +72,7 @@ class ArticleController extends BaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$article = $this->articleEditFacade->getById($id);
-		$form = $this->createForm(new ArticleFormType());
+		$form = $this->createForm(new ArticleFormType($article));
 
 		$articleData = new ArticleData();
 

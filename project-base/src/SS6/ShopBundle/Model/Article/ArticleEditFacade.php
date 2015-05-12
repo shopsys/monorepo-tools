@@ -90,13 +90,22 @@ class ArticleEditFacade {
 	public function edit($articleId, ArticleData $articleData) {
 		$article = $this->articleRepository->getById($articleId);
 		$article->edit($articleData);
-		$this->friendlyUrlFacade->createFriendlyUrlForDomain(
-			'front_article_detail',
-			$article->getId(),
-			$article->getName(),
-			$article->getDomainId()
-		);
-		$this->em->flush();
+
+		$this->em->beginTransaction();
+		try {
+			$this->friendlyUrlFacade->createFriendlyUrlForDomain(
+				'front_article_detail',
+				$article->getId(),
+				$article->getName(),
+				$article->getDomainId()
+			);
+			$this->friendlyUrlFacade->saveUrlListFormData($articleData->urls);
+			$this->em->flush();
+			$this->em->commit();
+		} catch (\Exception $exception) {
+			$this->em->rollback();
+			throw $exception;
+		}
 
 		return $article;
 	}

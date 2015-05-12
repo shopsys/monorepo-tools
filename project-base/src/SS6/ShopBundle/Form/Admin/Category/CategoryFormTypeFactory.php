@@ -48,7 +48,8 @@ class CategoryFormTypeFactory {
 
 		return new CategoryFormType(
 			$categories,
-			$this->inverseArrayValuesTransformer
+			$this->inverseArrayValuesTransformer,
+			$category
 		);
 	}
 
