@@ -14,6 +14,7 @@ modules:
     # therefore DatabaseHelper must be included before Db.
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\DatabaseHelper
     - SS6\ShopBundle\Tests\Test\Codeception\Module\Db
+    - SS6\ShopBundle\Tests\Test\Codeception\Helper\JenkinsHelper
     - WebDriver
     # DomainHelper sets WebDriver's URL in _before().
     # The setting is reset before _before() of WebDriver is called,
