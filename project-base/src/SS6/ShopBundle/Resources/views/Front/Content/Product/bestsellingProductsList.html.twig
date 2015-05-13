@@ -1,0 +1,43 @@
+{% if productDetails|length > 0 %}
+	<h2>{{ 'Nejprodávanější zboží'|trans }}</h2>
+	<ul class="list-items-line js-bestsellingProducts">
+		{% for productDetail in productDetails %}
+			<li class="list-items-line__item js-bestsellingProduct{% if (loop.index > maxShownProducts )%} display-none{% endif %}">
+				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-items-line__block">
+					<div class="list-items-line__position">
+						<span>
+							{{ loop.index }}.
+						</span>
+					</div>
+					<div class="list-items-line__image">
+						<span>
+							{% if imageExists(productDetail.product) %}
+								{{ image(productDetail.product, { size: 'thumbnail' }) }}
+							{% else %}
+								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
+							{% endif %}
+						</span>
+					</div>
+					<h3 class="list-items-line__title">
+						{{ productDetail.product.name }}
+					</h3>
+					<div class="list-items-line__price">
+						<div class="price price-main">
+							{{ productDetail.sellingPrice.priceWithVat|price }}
+						</div>
+						<div class="price price-side">
+							{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
+						</div>
+					</div>
+				</a>
+			</li>
+		{% endfor %}
+		{% if productDetails|length > maxShownProducts %}
+			<li class="list-items-line__item js-bestsellingProductsLoadMoreContainer">
+				<div class="list-items-line__load-more js-bestsellingProductsLoadMore">
+					▼ {{ 'Další nejprodávanější'|trans }}
+				</div>
+			</li>
+		{% endif %}
+	</ul>
+{% endif %}

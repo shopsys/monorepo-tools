@@ -1,0 +1,38 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Nejprodávanější zboží kategorie'|trans }} {{ categoryName }}{% endblock %}
+{% block h1 %}{{ 'Nejprodávanější zboží kategorie'|trans }} {{ categoryName }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="js-form-group">
+					{{ form_errors(form.bestsellingProducts) }}
+
+					<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
+						{% for productForm in form.bestsellingProducts %}
+							<div class="form-line js-bestsellingProductContainer">
+								<label class="col-xs-1">{{ loop.index }}</label>
+								{{ form_widget(productForm) }}
+								<a href="#" class="js-bestsellingProductUnassignButton">
+									<i class="fa fa-trash-o"></i>
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, {label : 'Uložit'}) }}
+						<a href="{{ url('admin_bestsellingproduct_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+					</div>
+				</div>
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+{% endblock %}

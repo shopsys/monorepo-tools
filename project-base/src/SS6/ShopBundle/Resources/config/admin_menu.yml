@@ -92,6 +92,12 @@
           visible: false
     - label: 'XML Feedy'
       route: admin_feed_list
+    - label: 'Nejprodávanější zboží'
+      route: admin_bestsellingproduct_list
+      items:
+        - label: 'Editace nejprodávanějšího zboží'
+          route: admin_bestsellingproduct_detail
+          visible: false
 
 - label: 'Administrátoři'
   route: admin_administrator_list

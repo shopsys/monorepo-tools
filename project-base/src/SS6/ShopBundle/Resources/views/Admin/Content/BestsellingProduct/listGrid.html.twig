@@ -1,0 +1,17 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_names %}
+	{%- for i in 0..row.d.level if i > 0 -%}
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	{%- endfor -%}
+	{{ value }}
+{% endblock %}
+
+{% block grid_no_data %}
+	{{ 'Nebyly nalezeny žádné kategorie. Nejprve musíte nějaké vytvořit.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+	{% set entityName = 'kategorie'|trans %}
+	{{ parent() }}
+{% endblock %}
