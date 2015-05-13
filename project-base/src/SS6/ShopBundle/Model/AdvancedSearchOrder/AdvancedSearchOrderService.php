@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
 
-class AdvancedSearchService {
+class AdvancedSearchOrderService {
 
 	const TEMPLATE_RULE_FORM_KEY = '__template__';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig
 	 */
-	private $advancedSearchConfig;
+	private $orderAdvancedSearchConfig;
 
-	public function __construct(ProductAdvancedSearchConfig $advancedSearchConfig) {
-		$this->advancedSearchConfig = $advancedSearchConfig;
+	public function __construct(OrderAdvancedSearchConfig $orderAdvancedSearchConfig) {
+		$this->orderAdvancedSearchConfig = $orderAdvancedSearchConfig;
 	}
 
 	/**
@@ -30,10 +30,10 @@ class AdvancedSearchService {
 		}
 
 		if (count($searchRulesViewData) === 0) {
-			$searchRulesViewData[] = $this->createDefaultRuleFormViewData('productName');
+			$searchRulesViewData[] = $this->createDefaultRuleFormViewData('orderTotalPriceWithVat');
 		}
 
-		$searchRulesViewData[self::TEMPLATE_RULE_FORM_KEY] = $this->createDefaultRuleFormViewData('productName');
+		$searchRulesViewData[self::TEMPLATE_RULE_FORM_KEY] = $this->createDefaultRuleFormViewData('orderTotalPriceWithVat');
 
 		return $searchRulesViewData;
 	}
@@ -52,11 +52,11 @@ class AdvancedSearchService {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData $advancedSearchData
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData $advancedSearchOrderData
 	 */
-	public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
+	public function extendQueryBuilderByAdvancedSearchOrderData(QueryBuilder $queryBuilder, array $advancedSearchOrderData) {
 		$rulesDataByFilterName = [];
-		foreach ($advancedSearchData as $key => $ruleData) {
+		foreach ($advancedSearchOrderData as $key => $ruleData) {
 			if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData->operator === null) {
 				continue;
 			}
@@ -64,7 +64,7 @@ class AdvancedSearchService {
 		}
 
 		foreach ($rulesDataByFilterName as $filterName => $rulesData) {
-			$filter = $this->advancedSearchConfig->getFilter($filterName);
+			$filter = $this->orderAdvancedSearchConfig->getFilter($filterName);
 			$filter->extendQueryBuilder($queryBuilder, $rulesData);
 		}
 	}

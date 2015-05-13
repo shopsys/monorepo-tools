@@ -6,10 +6,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,8 +22,24 @@ class OrderController extends Controller {
 	 */
 	private $orderFacade;
 
-	public function __construct(OrderFacade $orderFacade) {
+	/**
+	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
+	 */
+	private $advancedSearchOrderFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
+	 */
+	private $orderStatusRepository;
+
+	public function __construct(
+		OrderFacade $orderFacade,
+		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
+		OrderStatusRepository $orderStatusRepository
+	) {
 		$this->orderFacade = $orderFacade;
+		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
+		$this->orderStatusRepository = $orderStatusRepository;
 	}
 
 	/**
@@ -33,15 +51,13 @@ class OrderController extends Controller {
 	public function editAction(Request $request, $id) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$orderStatusRepository = $this->get('ss6.shop.order.order_status_repository');
-		/* @var $orderStatusRepository \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository */
 		$orderRepository = $this->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.order_item_price_calculation');
 		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation */
 
 		$order = $orderRepository->getById($id);
-		$allOrderStatuses = $orderStatusRepository->findAll();
+		$allOrderStatuses = $this->orderStatusRepository->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStatuses));
 
 		try {
@@ -54,10 +70,7 @@ class OrderController extends Controller {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$orderFacade = $this->get('ss6.shop.order.order_facade');
-				/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-
-				$order = $orderFacade->edit($id, $orderData);
+				$order = $this->orderFacade->edit($id, $orderData);
 
 				$flashMessageSender->addSuccessFlashTwig('Byla upravena objednávka č.'
 						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', [
@@ -103,11 +116,19 @@ class OrderController extends Controller {
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 
+		$advancedSearchForm = $this->advancedSearchOrderFacade->createAdvancedSearchOrderForm($request);
+		$advancedSearchData = $advancedSearchForm->getData();
+
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
 		$quickSearchForm->handleRequest($request);
 		$quickSearchData = $quickSearchForm->getData();
 
-		$queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchData);
+		$isAdvancedSearchFormSubmitted = $this->advancedSearchOrderFacade->isAdvancedSearchOrderFormSubmitted($request);
+		if ($isAdvancedSearchFormSubmitted) {
+			$queryBuilder = $this->advancedSearchOrderFacade->getQueryBuilderByAdvancedSearchOrderData($advancedSearchData);
+		} else {
+			$queryBuilder = $this->orderFacade->getOrderListQueryBuilderByQuickSearchData($quickSearchData);
+		}
 
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
 			$queryBuilder, 'o.id',
@@ -139,6 +160,8 @@ class OrderController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
+			'advancedSearchForm' => $advancedSearchForm->createView(),
+			'isAdvancedSearchFormSubmitted' => $this->advancedSearchOrderFacade->isAdvancedSearchOrderFormSubmitted($request),
 		]);
 	}
 
@@ -147,10 +170,7 @@ class OrderController extends Controller {
 	 * @return array
 	 */
 	private function addOrderEntityToDataSource(array $row) {
-		$orderFacade = $this->get('ss6.shop.order.order_facade');
-		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-
-		$row['order'] = $orderFacade->getById($row['id']);
+		$row['order'] = $this->orderFacade->getById($row['id']);
 
 		return $row;
 	}
@@ -179,5 +199,18 @@ class OrderController extends Controller {
 		}
 
 		return $this->redirect($this->generateUrl('admin_order_list'));
+	}
+
+	/**
+	 * @Route("/order/get-advanced-search-rule-form/", methods={"post"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getRuleFormAction(Request $request) {
+		$ruleForm = $this->advancedSearchOrderFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
+
+		return $this->render('@SS6Shop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
+			'rulesForm' => $ruleForm->createView(),
+		]);
 	}
 }

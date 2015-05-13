@@ -11,6 +11,12 @@ interface AdvancedSearchFilterInterface {
 	const OPERATOR_NOT_SET = 'notSet';
 	const OPERATOR_IS = 'is';
 	const OPERATOR_IS_NOT = 'isNot';
+	const OPERATOR_BEFORE = 'before';
+	const OPERATOR_AFTER = 'after';
+	const OPERATOR_GT = 'gt';
+	const OPERATOR_GTE = 'gte';
+	const OPERATOR_LT = 'lt';
+	const OPERATOR_LTE = 'lte';
 
 	/**
 	 * @return string
@@ -34,7 +40,7 @@ interface AdvancedSearchFilterInterface {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\RuleData[] $rulesData
+	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $rulesData
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData);
 

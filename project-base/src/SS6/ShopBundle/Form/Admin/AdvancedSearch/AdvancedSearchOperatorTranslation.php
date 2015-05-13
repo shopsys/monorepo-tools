@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Form\Admin\AdvancedSearch;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class AdvancedSearchTranslation {
+class AdvancedSearchOperatorTranslation {
 
 	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
@@ -17,11 +17,6 @@ class AdvancedSearchTranslation {
 	 */
 	private $operatorsTranslations;
 
-	/**
-	 * @var string[filterName]
-	 */
-	private $filtersTranslations;
-
 	public function __construct(Translator $translator) {
 		$this->translator = $translator;
 
@@ -31,12 +26,12 @@ class AdvancedSearchTranslation {
 			AdvancedSearchFilterInterface::OPERATOR_NOT_SET => $this->translator->trans('není zadáno'),
 			AdvancedSearchFilterInterface::OPERATOR_IS => $this->translator->trans('je'),
 			AdvancedSearchFilterInterface::OPERATOR_IS_NOT => $this->translator->trans('není'),
-		];
-
-		$this->filtersTranslations = [
-			'productCatnum' => $this->translator->trans('Katalogové číslo'),
-			'productName' => $this->translator->trans('Název produktu'),
-			'productPartno' => $this->translator->trans('Partno'),
+			AdvancedSearchFilterInterface::OPERATOR_BEFORE => $this->translator->trans('před'),
+			AdvancedSearchFilterInterface::OPERATOR_AFTER => $this->translator->trans('po'),
+			AdvancedSearchFilterInterface::OPERATOR_GT => $this->translator->trans('větší než'),
+			AdvancedSearchFilterInterface::OPERATOR_LT => $this->translator->trans('menší než'),
+			AdvancedSearchFilterInterface::OPERATOR_GTE => $this->translator->trans('větší nebo rovno'),
+			AdvancedSearchFilterInterface::OPERATOR_LTE => $this->translator->trans('menší nebo rovno'),
 		];
 	}
 
@@ -53,16 +48,4 @@ class AdvancedSearchTranslation {
 		throw new \SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
 	}
 
-	/**
-	 * @param string $filterName
-	 * @return string
-	 */
-	public function translateFilterName($filterName) {
-		if (array_key_exists($filterName, $this->filtersTranslations)) {
-			return $this->filtersTranslations[$filterName];
-		}
-
-		$message = 'Filter "' . $filterName . '" translation not found.';
-		throw new \SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
-	}
 }
