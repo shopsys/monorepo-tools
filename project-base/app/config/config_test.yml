@@ -1,4 +1,5 @@
-# should be as same with production as it is possible
+# This configuration is cached in the container (delete cache after changes).
+# Should be as same with production as it is possible.
 
 doctrine:
   dbal:
