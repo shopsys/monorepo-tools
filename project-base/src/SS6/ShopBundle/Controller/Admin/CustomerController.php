@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
@@ -23,8 +24,17 @@ class CustomerController extends Controller {
 	 */
 	private $pricingGroupSettingFacade;
 
-	public function __construct(PricingGroupSettingFacade $pricingGroupSettingFacade) {
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(
+		PricingGroupSettingFacade $pricingGroupSettingFacade,
+		Translator $translator
+	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -72,7 +82,7 @@ class CustomerController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace zákazníka - ' . $user->getFullName()));
+		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zákazníka - ') . $user->getFullName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', [
 			'form' => $form->createView(),

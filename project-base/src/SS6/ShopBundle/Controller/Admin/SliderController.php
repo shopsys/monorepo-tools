@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Slider\SliderItem;
@@ -11,6 +12,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/slider/list/")
@@ -128,7 +138,7 @@ class SliderController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace stránky slideru - ' . $sliderItem->getName()));
+		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace stránky slideru - ') . $sliderItem->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/edit.html.twig', [
 			'form' => $form->createView(),

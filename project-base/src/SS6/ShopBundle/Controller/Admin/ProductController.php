@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
@@ -17,8 +18,17 @@ class ProductController extends Controller {
 	 */
 	private $categoryFacade;
 
-	public function __construct(CategoryFacade $categoryFacade) {
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(
+		CategoryFacade $categoryFacade,
+		Translator $translator
+	) {
 		$this->categoryFacade = $categoryFacade;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -61,7 +71,7 @@ class ProductController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace zboží - ' . $product->getName()));
+		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zboží - ') . $product->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', [
 			'form' => $form->createView(),

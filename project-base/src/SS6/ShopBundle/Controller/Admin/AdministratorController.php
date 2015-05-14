@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
@@ -12,6 +13,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/administrator/list/")
@@ -97,7 +107,9 @@ class AdministratorController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace administrátora - ' . $administrator->getRealName()));
+		$breadcrumb->replaceLastItem(
+			new MenuItem($this->translator->trans('Editace administrátora - ') . $administrator->getRealName())
+		);
 
 		return $this->render('@SS6Shop/Admin/Content/Administrator/edit.html.twig', [
 			'form' => $form->createView(),

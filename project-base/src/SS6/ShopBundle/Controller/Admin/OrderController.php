@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\Order\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -32,14 +33,21 @@ class OrderController extends Controller {
 	 */
 	private $orderStatusRepository;
 
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
-		OrderStatusRepository $orderStatusRepository
+		OrderStatusRepository $orderStatusRepository,
+		Translator $translator
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
 		$this->orderStatusRepository = $orderStatusRepository;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -93,7 +101,7 @@ class OrderController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace objednávky - č. ' . $order->getNumber()));
+		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace objednávky - č. ') . $order->getNumber()));
 
 		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 

@@ -3,11 +3,21 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends Controller {
+
+	/**
+	 * @var \Symfony\Component\Translation\Translator
+	 */
+	private $translator;
+
+	public function __construct(Translator $translator) {
+		$this->translator = $translator;
+	}
 
 	/**
 	 * @Route("/transport/new/")
@@ -95,7 +105,7 @@ class TransportController extends Controller {
 
 		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
 		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem('Editace dopravy - ' . $transport->getName()));
+		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace dopravy - ') . $transport->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),

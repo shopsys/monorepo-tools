@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -48,13 +49,19 @@ class AdvertController extends BaseController {
 	 */
 	private $advertFormTypeFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
+	 */
+	private $translator;
+
 	public function __construct(
 		AdvertEditFacade $advertEditFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
-		AdvertFormTypeFactory $advertFormTypeFactory
+		AdvertFormTypeFactory $advertFormTypeFactory,
+		Translator $translator
 	) {
 		$this->advertEditFacade = $advertEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -62,6 +69,7 @@ class AdvertController extends BaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->advertFormTypeFactory = $advertFormTypeFactory;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -96,7 +104,7 @@ class AdvertController extends BaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem('Editace reklamy - ' . $advert->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace reklamy - ') . $advert->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Advert/edit.html.twig', [
 			'form' => $form->createView(),

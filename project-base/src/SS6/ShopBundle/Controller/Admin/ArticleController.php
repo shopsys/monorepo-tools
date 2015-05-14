@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -49,13 +50,19 @@ class ArticleController extends BaseController {
 	 */
 	private $friendlyUrlFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
+	 */
+	private $translator;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
-		FriendlyUrlFacade $friendlyUrlFacade
+		FriendlyUrlFacade $friendlyUrlFacade,
+		Translator $translator
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -63,6 +70,7 @@ class ArticleController extends BaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -98,7 +106,7 @@ class ArticleController extends BaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem('Editace článku - ' . $article->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace článku - ') . $article->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
