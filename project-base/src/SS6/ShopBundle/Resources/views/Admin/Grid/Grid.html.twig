@@ -239,7 +239,7 @@
 				</li>
 			{% endfor %}
 
-			{% if grid.page < (grid.pageCount - 1) - pagerExpand - 1 %}
+			{% if grid.page <= grid.pageCount - pagerExpand - 2 %}
 				<li class="disabled">
 					<a href="#" class="cursor-default">...</a>
 				</li>

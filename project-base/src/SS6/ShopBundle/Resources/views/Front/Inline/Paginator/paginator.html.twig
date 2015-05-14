@@ -65,7 +65,7 @@
 						</li>
 					{% endfor %}
 
-					{% if paginationResult.page < (pageCount - 1) - pagerExpand - 1 %}
+					{% if paginationResult.page <= pageCount - pagerExpand - 2 %}
 						<li class="disabled">
 							<a href="#" class="cursor-default">...</a>
 						</li>
