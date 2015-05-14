@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
@@ -30,16 +32,23 @@ class ProductEditDataFactory {
 	 */
 	private $productInputPriceFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductDataFactory $productDataFactory,
-		ProductInputPriceFacade $productInputPriceFacade
+		ProductInputPriceFacade $productInputPriceFacade,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productDataFactory = $productDataFactory;
 		$this->productInputPriceFacade = $productInputPriceFacade;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -80,8 +89,13 @@ class ProductEditDataFactory {
 		$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
 
 		foreach ($productDomains as $productDomain) {
-			$productEditData->seoTitles[$productDomain->getDomainId()] = $productDomain->getSeoTitle();
-			$productEditData->seoMetaDescriptions[$productDomain->getDomainId()] = $productDomain->getSeoMetaDescription();
+			$domainId = $productDomain->getDomainId();
+
+			$productEditData->seoTitles[$domainId] = $productDomain->getSeoTitle();
+			$productEditData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
+
+			$productEditData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
+				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 		}
 
 		return $productEditData;

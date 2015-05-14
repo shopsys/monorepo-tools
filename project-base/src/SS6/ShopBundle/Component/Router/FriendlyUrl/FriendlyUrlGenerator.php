@@ -62,7 +62,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 		unset($parameters['id']);
 
 		try {
-			$friendlyUrl = $this->friendlyUrlRepository->getByDomainIdAndRouteNameAndEntityId(
+			$friendlyUrl = $this->friendlyUrlRepository->getMainFriendlyUrl(
 				$domainConfig->getId(),
 				$routeName,
 				$entityId

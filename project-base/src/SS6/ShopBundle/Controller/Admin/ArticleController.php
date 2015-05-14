@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\Article;
-use SS6\ShopBundle\Model\Article\ArticleData;
+use SS6\ShopBundle\Model\Article\ArticleDataFactory;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
@@ -24,6 +24,11 @@ class ArticleController extends BaseController {
 	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\ArticleDataFactory
+	 */
+	private $articleDataFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
@@ -57,6 +62,7 @@ class ArticleController extends BaseController {
 
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
+		ArticleDataFactory $articleDataFactory,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
@@ -65,6 +71,7 @@ class ArticleController extends BaseController {
 		Translator $translator
 	) {
 		$this->articleEditFacade = $articleEditFacade;
+		$this->articleDataFactory = $articleDataFactory;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
@@ -82,11 +89,7 @@ class ArticleController extends BaseController {
 		$article = $this->articleEditFacade->getById($id);
 		$form = $this->createForm(new ArticleFormType($article));
 
-		$articleData = new ArticleData();
-
-		if (!$form->isSubmitted()) {
-			$articleData->setFromEntity($article);
-		}
+		$articleData = $this->articleDataFactory->createFromArticle($article);
 
 		$form->setData($articleData);
 		$form->handleRequest($request);
@@ -156,8 +159,7 @@ class ArticleController extends BaseController {
 	public function newAction(Request $request) {
 		$form = $this->createForm(new ArticleFormType());
 
-		$articleData = new ArticleData();
-		$articleData->domainId = $this->selectedDomain->getId();
+		$articleData = $this->articleDataFactory->createDefault();
 
 		$form->setData($articleData);
 		$form->handleRequest($request);

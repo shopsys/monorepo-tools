@@ -115,8 +115,8 @@ class CategoryFacade {
 			$category = $this->categoryRepository->getById($categoryId);
 			$this->categoryService->edit($category, $categoryData, $rootCategory);
 			$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
-			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 			$this->friendlyUrlFacade->saveUrlListFormData($categoryData->urls);
+			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 			$this->em->flush();
 
 			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
