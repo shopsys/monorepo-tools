@@ -33,7 +33,7 @@
 					{{ gridView.renderBlock('grid_pager') }}
 				{% endif %}
 				{% if grid.dragAndDrop %}
-					<button class="js-drag-and-drop-grid-submit btn btn-primary btn-disabled" type="button">Uložit změny v pořadí</button>
+					<button class="js-drag-and-drop-grid-submit btn btn-primary btn-disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
 				{% endif %}
 			</div>
 		</div>
@@ -74,7 +74,7 @@
 				</th>
 			{% endfor %}
 			{% if grid.actionColumns is not empty or grid.inlineEdit %}
-				<th class="last-column text-right {{ grid.actionColumnClassAttribute }}" colspan="{{ grid.actionColumns|length }}">Úpravy</ht>
+				<th class="last-column text-right {{ grid.actionColumnClassAttribute }}" colspan="{{ grid.actionColumns|length }}">{{ 'Úpravy'|trans }}</ht>
 			{% endif  %}
 		</tr>
 	</thead>
@@ -196,7 +196,7 @@
 
 {% block grid_pager_totalcount %}
 	<strong class="left mt-half form-fake">
-		{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů')|trim }}
+		{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
 		{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
 	</strong>
 {% endblock %}
@@ -256,7 +256,7 @@
 		</ul>
 
 		<div class="js-grid-go-to box-grid-actions__to-page clear-r small">
-			<span>Přejít na stránku:</span>
+			<span>{{ 'Přejít na stránku:'|trans }}</span>
 			<input
 				type="number"
 				min="1"
@@ -294,7 +294,7 @@
 {% endblock %}
 
 {% block grid_value_cell_type_boolean %}
-	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano' : 'Ne' }}"></span>
+	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
 {% endblock %}
 
 {% block grid_value_cell_type_DateTime %}
@@ -327,6 +327,6 @@
 
 {% block grid_inline_edit_add_button %}
 	<a href="#" class="btn btn-primary mb-1 js-inline-edit-add">
-		{{ addEntity|default('Vytvořit záznam') }}
+		{{ addEntity|default('Vytvořit záznam'|trans) }}
 	</a>
 {% endblock %}
