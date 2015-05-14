@@ -33,7 +33,8 @@ class PricingGroupSettingFacade {
 	 * @return bool
 	 */
 	public function isPricingGroupUsed(PricingGroup $pricingGroup) {
-		return $this->pricingGroupRepository->existsUserWithPricingGroup($pricingGroup);
+		return $this->pricingGroupRepository->existsUserWithPricingGroup($pricingGroup)
+			|| $this->isPricingGroupDefault($pricingGroup);
 	}
 
 	/**
