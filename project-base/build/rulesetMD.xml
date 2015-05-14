@@ -58,7 +58,15 @@
 
 	<rule ref="rulesets/controversial.xml/Superglobals" />
 	<rule ref="rulesets/controversial.xml/CamelCaseClassName" />
-	<rule ref="rulesets/controversial.xml/CamelCasePropertyName" />
+
+	<rule
+		name="CamelCasePropertyName"
+		class="SS6\ShopBundle\Component\MessDetectorRule\CamelCasePropertyName"
+		message="The property {0} is not named in camelCase."
+	>
+		<priority>1</priority>
+	</rule>
+
 	<rule ref="rulesets/controversial.xml/CamelCaseMethodName" />
 	<rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
 	<rule ref="rulesets/controversial.xml/CamelCaseVariableName" />
