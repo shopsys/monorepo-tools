@@ -440,7 +440,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getPriceCalculationType() {
 		return $this->priceCalculationType;

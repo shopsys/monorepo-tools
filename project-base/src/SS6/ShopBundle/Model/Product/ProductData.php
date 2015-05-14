@@ -108,7 +108,7 @@ class ProductData {
 	public $categories;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
 	public $priceCalculationType;
 
@@ -136,7 +136,7 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
-	 * @param int $priceCalculationType
+	 * @param string $priceCalculationType
 	 */
 	public function __construct(
 		$name = [],
