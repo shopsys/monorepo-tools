@@ -22,6 +22,9 @@ class Product extends AbstractTranslatableEntity {
 
 	const PRICE_CALCULATION_TYPE_AUTO = 'auto';
 	const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
+	const OUT_OF_STOCK_ACTION_SET_ALTERNATE = 'setAlternate';
+	const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
+	const OUT_OF_STOCK_ACTION_HIDE = 'hide';
 
 	/**
 	 * @var integer
@@ -100,7 +103,21 @@ class Product extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
+	private $calculatedSellable;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
 	private $hidden;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $calculatedHidden;
 
 	/**
 	 * @var bool
@@ -122,6 +139,13 @@ class Product extends AbstractTranslatableEntity {
 	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $availability;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="string", nullable=true)
+	 */
+	private $outOfStockAction;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
@@ -223,6 +247,8 @@ class Product extends AbstractTranslatableEntity {
 		$this->accessories = $productData->accessories;
 		$this->recalculatePrice = true;
 		$this->recalculateAvailability = true;
+		$this->outOfStockAction = $productData->outOfStockAction;
+		$this->handleOutOfStockState($this->outOfStockAction);
 	}
 
 	/**
@@ -252,6 +278,26 @@ class Product extends AbstractTranslatableEntity {
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
 		$this->recalculateAvailability = true;
+		$this->outOfStockAction = $productData->outOfStockAction;
+		$this->handleOutOfStockState($this->outOfStockAction);
+	}
+
+	/**
+	 * @param string $outOfStockAction
+	 */
+	private function handleOutOfStockState($outOfStockAction) {
+		$this->calculatedSellable = $this->sellable;
+		$this->calculatedHidden = $this->hidden;
+		if ($this->isUsingStock() && $this->getStockQuantity() <= 0) {
+			switch ($outOfStockAction) {
+				case self::OUT_OF_STOCK_ACTION_HIDE:
+					$this->calculatedHidden = true;
+					break;
+				case self::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE:
+					$this->calculatedSellable = false;
+					break;
+			}
+		}
 	}
 
 	/**
@@ -360,10 +406,24 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function getCalculatedHidden() {
+		return $this->calculatedHidden;
+	}
+
+	/**
 	 * @return boolean
 	 */
 	public function isSellable() {
 		return $this->sellable;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCalculatedSellable() {
+		return $this->calculatedSellable;
 	}
 
 	/**
@@ -378,6 +438,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getStockQuantity() {
 		return $this->stockQuantity;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOutOfStockAction() {
+		return $this->outOfStockAction;
 	}
 
 	/**

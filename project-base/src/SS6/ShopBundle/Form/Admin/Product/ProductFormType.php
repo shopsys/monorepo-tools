@@ -90,7 +90,7 @@ class ProductFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'product';
+		return 'product_form';
 	}
 
 	/**
@@ -160,6 +160,21 @@ class ProductFormType extends AbstractType {
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
 						'groups' => self::VALIDATION_GROUP_NOT_USING_STOCK,
+					]),
+				],
+			])
+			->add('outOfStockAction', FormType::CHOICE, [
+				'required' => true,
+				'expanded' => false,
+				'choices' => [
+					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE => $this->translator->trans('Nastavit alternativní dostupnost'),
+					Product::OUT_OF_STOCK_ACTION_HIDE => $this->translator->trans('Skrýt zboží'),
+					Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => $this->translator->trans('Vyřadit z prodeje'),
+				],
+				'placeholder' => '-- Vyberte akci --',
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte akci',
 					]),
 				],
 			])
