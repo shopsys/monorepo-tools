@@ -152,8 +152,9 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="dirs-structure" depends="img-dirs">
+		<mkdir dir="${path.app}/lock" mode="0770"/>
 		<mkdir dir="${path.web}/assets/content/feeds" mode="0770"/>
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.web}/assets/content/feeds/">
