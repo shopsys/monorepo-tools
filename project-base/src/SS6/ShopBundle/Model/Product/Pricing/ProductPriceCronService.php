@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use SS6\ShopBundle\Component\Cron\CronServiceInterface;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use Symfony\Bridge\Monolog\Logger;
 
 class ProductPriceCronService implements CronServiceInterface {
 
@@ -18,11 +19,16 @@ class ProductPriceCronService implements CronServiceInterface {
 		$this->productPriceRecalculator = $productPriceRecalculator;
 	}
 
-	public function run() {
+	/**
+	 * @inheritdoc
+	 */
+	public function run(Logger $logger) {
 		$timeStart = time();
-		$this->productPriceRecalculator->runScheduledRecalculations(function () use ($timeStart) {
+		$recalculated = $this->productPriceRecalculator->runScheduledRecalculations(function () use ($timeStart) {
 			return time() - $timeStart < self::PRODUCT_PRICE_RECALCULATIONS_TIMELIMIT;
 		});
+
+		$logger->debug('Recalculated: ' . $recalculated);
 	}
 
 }

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 
 use SS6\ShopBundle\Component\Cron\CronServiceInterface;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
+use Symfony\Bridge\Monolog\Logger;
 
 class ProductAvailabilityCronService implements CronServiceInterface {
 
@@ -18,11 +19,15 @@ class ProductAvailabilityCronService implements CronServiceInterface {
 		$this->productAvailabilityRecalculator = $productAvailabilityRecalculator;
 	}
 
-	public function run() {
+	/**
+	 * @inheritdoc
+	 */
+	public function run(Logger $logger) {
 		$timeStart = time();
-		$this->productAvailabilityRecalculator->runScheduledRecalculations(function () use ($timeStart) {
+		$recalculated = $this->productAvailabilityRecalculator->runScheduledRecalculations(function () use ($timeStart) {
 			return time() - $timeStart < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
 		});
+		$logger->debug('Recalculated: ' . $recalculated);
 	}
 
 }

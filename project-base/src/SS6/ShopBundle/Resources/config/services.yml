@@ -189,6 +189,11 @@ services:
   ss6.shop.component.cron.config.cron_config_factory:
     class: SS6\ShopBundle\Component\Cron\Config\CronConfigFactory
 
+  ss6.shop.component.cron.cron_facade:
+    class: SS6\ShopBundle\Component\Cron\CronFacade
+    arguments:
+      - @monolog.logger.cron
+
   ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
     class: SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
 
