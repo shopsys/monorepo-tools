@@ -52,7 +52,7 @@ class ProductVisibilityRepository {
 
 	private function refreshGlobalProductVisibility() {
 		$query = $this->em->createNativeQuery('UPDATE products AS p
-			SET visible = (p.hidden = FALSE) AND EXISTS(
+			SET visible = (p.calculated_hidden = FALSE) AND EXISTS(
 					SELECT 1
 					FROM product_visibilities AS pv
 					WHERE pv.product_id = p.id
@@ -72,7 +72,7 @@ class ProductVisibilityRepository {
 			$query = $this->em->createNativeQuery('UPDATE product_visibilities AS pv
 					SET visible = CASE
 							WHEN (
-								p.hidden = FALSE
+								p.calculated_hidden = FALSE
 								AND
 								pd.hidden = FALSE
 								AND

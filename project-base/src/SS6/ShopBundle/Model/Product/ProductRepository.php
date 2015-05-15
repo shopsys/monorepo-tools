@@ -83,7 +83,7 @@ class ProductRepository {
 	 */
 	public function getAllListableQueryBuilder($domainId, $pricingGroup) {
 		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
-		$queryBuilder->andWhere('p.sellable = TRUE');
+		$queryBuilder->andWhere('p.calculatedSellable = TRUE');
 
 		return $queryBuilder;
 	}

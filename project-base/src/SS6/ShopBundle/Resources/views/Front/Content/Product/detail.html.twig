@@ -111,7 +111,7 @@
 						</strong>
 					</dd>
 				</dl>
-				{% if productDetail.product.sellable %}
+				{% if productDetail.product.calculatedSellable %}
 					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 				{% else %}
 					<div>

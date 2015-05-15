@@ -87,7 +87,7 @@ class ProductOnCurrentDomainFacade {
 				$this->currentCustomer->getPricingGroup(),
 				$this->domain->getId()
 			);
-			if ($accessoryVisibility->isVisible() && $accessory->isSellable()) {
+			if ($accessoryVisibility->isVisible() && $accessory->getCalculatedSellable()) {
 				$accessoriesVisibleOnDomain[] = $accessory;
 			}
 		}
