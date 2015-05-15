@@ -22,6 +22,7 @@ class ProductFormType extends AbstractType {
 
 	const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
 	const VALIDATION_GROUP_USING_STOCK = 'usingStock';
+	const VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY = 'usingStockAndAlternateAvaiability';
 	const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
 	/**
@@ -175,6 +176,7 @@ class ProductFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte akci',
+						'groups' => self::VALIDATION_GROUP_USING_STOCK,
 					]),
 				],
 			])
@@ -185,7 +187,9 @@ class ProductFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
-						'groups' => self::VALIDATION_GROUP_USING_STOCK,
+						'groups' => [
+							self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY,
+						],
 					]),
 				],
 			])
@@ -265,6 +269,9 @@ class ProductFormType extends AbstractType {
 
 				if ($productData->usingStock) {
 					$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
+					if ($productData->outOfStockAction === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE) {
+						$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY;
+					}
 				} else {
 					$validationGroups[] = self::VALIDATION_GROUP_NOT_USING_STOCK;
 				}

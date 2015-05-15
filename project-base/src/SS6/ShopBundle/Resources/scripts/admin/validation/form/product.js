@@ -21,6 +21,9 @@
 
 				if ($('input[name="product_edit[productData][usingStock]"]:checked').val() === '1') {
 					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Product\\ProductFormType::VALIDATION_GROUP_USING_STOCK'));
+					if($('select[name="product_edit[productData][outOfStockAction]"]').val() === SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE')) {
+						groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Product\\ProductFormType::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY'));
+					}
 				} else {
 					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Product\\ProductFormType::VALIDATION_GROUP_NOT_USING_STOCK'));
 				}
