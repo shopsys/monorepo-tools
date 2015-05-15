@@ -3,6 +3,11 @@
     minutes: '*'
     hours: '*'
 
+- service: SS6\ShopBundle\Model\Product\ProductVisibilityCronService
+  time:
+    minutes: '0'
+    hours: '0'
+
 - service: SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCronService
   time:
     minutes: '*'

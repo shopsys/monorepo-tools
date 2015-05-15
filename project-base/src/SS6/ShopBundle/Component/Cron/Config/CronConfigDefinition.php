@@ -36,8 +36,8 @@ class CronConfigDefinition implements ConfigurationInterface {
 				->scalarNode(self::CONFIG_SERVICE)->isRequired()->cannotBeEmpty()->end()
 				->arrayNode(self::CONFIG_TIME)
 					->children()
-						->scalarNode(self::CONFIG_TIME_MINUTES)->cannotBeEmpty()->defaultValue('*')->end()
-						->scalarNode(self::CONFIG_TIME_HOURS)->cannotBeEmpty()->defaultValue('*')->end()
+						->scalarNode(self::CONFIG_TIME_MINUTES)->defaultValue('*')->end()
+						->scalarNode(self::CONFIG_TIME_HOURS)->defaultValue('*')->end()
 					->end()
 				->end()
 			->end();
