@@ -43,7 +43,7 @@
 			if (!SS6.validation.isFormValid(this)) {
 				event.preventDefault();
 				SS6.window({
-					content: "Překontrolujte prosím zadané hodnoty."
+					content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
 				});
 			}
 		}
@@ -53,10 +53,7 @@
 	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
 	FpJsFormValidator.attachElement = function (element) {
 		FpJsFormValidator._attachElement(element);
-		if (!element.domNode) {
-			return;
-		}
-		$(element.domNode).each(SS6.validation.inputBind);
+		SS6.validation.elementBind(element);
 	};
 
 	FpJsFormValidator._getElementValue = FpJsFormValidator.getElementValue;
@@ -66,7 +63,10 @@
 
 		if (i && undefined === value) {
 			value = this.getMappedValue(element);
-		} else if ('collection' == element.type || Object.keys(element.children).length > 0) {
+		} else if (
+			element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::COLLECTION')
+			|| (Object.keys(element.children).length > 0 && element.type !== SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::FILE_UPLOAD'))
+		) {
 			value = {};
 			for (var childName in element.children) {
 				value[childName] = this.getMappedValue(element.children[childName]);

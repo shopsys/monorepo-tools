@@ -20,6 +20,7 @@
 		var ready = true;
 		var items = [];
 		var lastUploadItemId = null;
+		this.$uploader = $uploader;
 
 		self.init = function() {
 			$uploader.closest('form').submit(onFormSubmit);
@@ -95,6 +96,7 @@
 
 		var onUploadComplete = function() {
 			ready = true;
+			SS6.validation.forceValidateElement($uploader);
 		};
 
 		var onUploadProgress = function(id, percent) {

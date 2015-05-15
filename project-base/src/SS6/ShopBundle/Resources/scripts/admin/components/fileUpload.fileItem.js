@@ -31,6 +31,7 @@
 		this.deleteItem = function () {
 			uploader.deleteTemporaryFile($input.val());
 			$file.remove();
+			SS6.validation.forceValidateElement(uploader.$uploader);
 		};
 
 		this.setLabel = function (filename, filesize) {

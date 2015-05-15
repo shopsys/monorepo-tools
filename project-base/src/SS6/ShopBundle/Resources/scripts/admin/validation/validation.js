@@ -9,19 +9,29 @@
 		});
 	});
 
-	SS6.validation.inputBind = function () {
-		$(this)
+	SS6.validation.elementBind = function (element) {
+		if (!element.domNode) {
+			return;
+		}
+
+		var isJsFileUpload = $(element.domNode).closest('.js-file-upload').size() > 0;
+
+		$(element.domNode)
 			.bind('blur change', function (event) {
-				$(this).jsFormValidator('validate');
-
-				if (this.jsFormValidator) {
+				if (this.jsFormValidator && isJsFileUpload === true) {
 					event.preventDefault();
+				} else {
+					$(this).jsFormValidator('validate');
 
-					var parent = this.jsFormValidator.parent;
-					while (parent) {
-						parent.validate();
+					if (this.jsFormValidator) {
+						event.preventDefault();
 
-						parent = parent.parent;
+						var parent = this.jsFormValidator.parent;
+						while (parent) {
+							parent.validate();
+
+							parent = parent.parent;
+						}
 					}
 				}
 			})
@@ -31,6 +41,19 @@
 			.jsFormValidator({
 				'showErrors': SS6.validation.showErrors
 			});
+	};
+
+	SS6.validation.forceValidateElement = function ($element) {
+		$element.jsFormValidator('validate');
+
+		if ($element.jsFormValidator) {
+			var parent = $element.jsFormValidator.parent;
+			while (parent) {
+				parent.validate();
+
+				parent = parent.parent;
+			}
+		}
 	};
 
 	SS6.validation.showErrors = function (errors, elementName) {
