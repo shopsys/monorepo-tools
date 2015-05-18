@@ -66,9 +66,11 @@ class AdministratorRepository {
 	/**
 	 * @return int
 	 */
-	public function getCount() {
+	public function getCountExcludingSuperadmin() {
 		return (int)($this->getAllQueryBuilder()
 			->select('COUNT(a)')
+			->where('a.superadmin = :isSuperadmin')
+			->setParameter('isSuperadmin', false)
 			->getQuery()->getSingleScalarResult());
 	}
 

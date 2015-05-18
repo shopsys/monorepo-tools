@@ -32,9 +32,12 @@ class AdministratorController extends Controller {
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
 		$queryBuilder
 			->select('a')
-			->from(Administrator::class, 'a');
+			->from(Administrator::class, 'a')
+			->where('a.superadmin = :isSuperadmin')
+			->setParameter('isSuperadmin', false);
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $gridFactory->create('administratorList', $dataSource);

@@ -78,8 +78,8 @@ class AdministratorFacade {
 	 */
 	public function delete($administratorId) {
 		$administrator = $this->administratorRepository->getById($administratorId);
-		$adminCount = $this->administratorRepository->getCount();
-		$this->administratorService->delete($administrator, $adminCount);
+		$adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
+		$this->administratorService->delete($administrator, $adminCountExcludingSuperadmin);
 		$this->em->remove($administrator);
 		$this->em->flush();
 	}

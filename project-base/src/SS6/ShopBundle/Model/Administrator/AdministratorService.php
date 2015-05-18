@@ -39,14 +39,17 @@ class AdministratorService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param int $adminCount
+	 * @param int $adminCountExcludingSuperadmin
 	 */
-	public function delete(Administrator $administrator, $adminCount) {
-		if ($adminCount === 1) {
+	public function delete(Administrator $administrator, $adminCountExcludingSuperadmin) {
+		if ($adminCountExcludingSuperadmin === 1) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
 		}
 		if ($this->tokenStorage->getToken()->getUser() === $administrator) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException();
+		}
+		if ($administrator->isSuperadmin()) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingSuperadminException();
 		}
 	}
 
@@ -66,6 +69,9 @@ class AdministratorService {
 			&& $administratorByUserName->getUsername() === $administratorData->username
 		) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
+		}
+		if ($administrator->isSuperadmin()) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\EditingSuperadminException();
 		}
 		$administrator->edit($administratorData);
 		if ($administratorData->password !== null) {
