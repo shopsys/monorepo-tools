@@ -1,13 +1,13 @@
 <ul class="box-panel">
 	{% for item in items %}
 		{% if (item.visible) %}
-			<li class="box-panel__item {% if item in activePath %}box-panel__item--active{% endif %}" >
+			<li class="box-panel__item {% if item in activePath %}box-panel__item--active {% endif %}{% if item.superadmin %} box-panel__item--superadmin{% endif %}" >
 				<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
 				{% if item.items is not empty %}
 					<ul class="box-panel__submenu">
 						{% for subitem in item.items %}
 							{% if (subitem.visible) %}
-								<li class="box-panel__submenu__item {% if subitem in activePath %}box-panel__submenu__item--active{% endif %}" >
+								<li class="box-panel__submenu__item {% if subitem in activePath %}box-panel__submenu__item--active{% endif %}{% if item.superadmin %} box-panel__submenu__item--superadmin{% endif %}" >
 									<a href="{{ url(subitem.route, subitem.routeParameters) }}">{{ subitem.label }}</a>
 								</li>
 							{% endif %}
