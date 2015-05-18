@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MenuController extends Controller {
@@ -26,13 +27,31 @@ class MenuController extends Controller {
 
 		$secondLevelItems = [];
 		if (isset($activePath[0])) {
-			$secondLevelItems = $activePath[0]->getItems();
+			if (!$this->isGranted(Roles::ROLE_SUPER_ADMIN)) {
+				$secondLevelItems = $this->excludeSuperadminItems($activePath[0]->getItems());
+			} else {
+				$secondLevelItems = $activePath[0]->getItems();
+			}
 		}
 
 		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', [
 			'items' => $secondLevelItems,
 			'activePath' => $activePath,
 		]);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem[] $items
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 */
+	private function excludeSuperadminItems($items) {
+		foreach ($items as $key => $item) {
+			if ($item->isSuperadmin()) {
+				unset($items[$key]);
+			}
+		}
+
+		return $items;
 	}
 
 }

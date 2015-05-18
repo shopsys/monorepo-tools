@@ -186,6 +186,7 @@
 
     - label: 'Superadmin'
       route: admin_superadmin_index
+      superadmin: true
       items:
         - label: 'Ikonky'
           route: admin_superadmin_icons

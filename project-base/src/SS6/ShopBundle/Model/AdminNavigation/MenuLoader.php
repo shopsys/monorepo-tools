@@ -87,6 +87,7 @@ class MenuLoader {
 			isset($array['route']) ? $array['route'] : null,
 			isset($array['route_parameters']) ? $array['route_parameters'] : null,
 			isset($array['visible']) ? $array['visible'] : null,
+			isset($array['superadmin']) ? $array['superadmin'] : null,
 			$items
 		);
 

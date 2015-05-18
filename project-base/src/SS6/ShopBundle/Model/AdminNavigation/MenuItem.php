@@ -38,11 +38,17 @@ class MenuItem {
 	private $visible;
 
 	/**
+	 * @var boolean
+	 */
+	private $superadmin;
+
+	/**
 	 * @param string $label
 	 * @param string|null $type
 	 * @param string|null $route
 	 * @param array|null $routeParameters
 	 * @param boolean $visible
+	 * @param boolean $superadmin
 	 * @param array|null $items
 	 */
 	public function __construct(
@@ -51,6 +57,7 @@ class MenuItem {
 		$route = null,
 		array $routeParameters = null,
 		$visible = true,
+		$superadmin = false,
 		array $items = null
 	) {
 		if (isset($type)) {
@@ -72,6 +79,12 @@ class MenuItem {
 			$this->visible = $visible;
 		} else {
 			$this->visible = true;
+		}
+
+		if (isset($superadmin)) {
+			$this->superadmin = $superadmin;
+		} else {
+			$this->superadmin = false;
 		}
 
 		$this->items = $items;
@@ -117,6 +130,13 @@ class MenuItem {
 	 */
 	public function isVisible() {
 		return $this->visible === true;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isSuperadmin() {
+		return $this->superadmin === true;
 	}
 
 	/**
