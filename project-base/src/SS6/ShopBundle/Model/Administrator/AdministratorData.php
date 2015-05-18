@@ -5,6 +5,11 @@ namespace SS6\ShopBundle\Model\Administrator;
 class AdministratorData {
 
 	/**
+	 * @var bool
+	 */
+	public $superadmin;
+
+	/**
 	 * @var string|null
 	 */
 	public $username;
@@ -30,11 +35,12 @@ class AdministratorData {
 	 * @param string|null $password
 	 * @param string|null $email
 	 */
-	public function __construct($username = null, $realName = null, $password = null, $email = null) {
+	public function __construct($superadmin = false, $username = null, $realName = null, $password = null, $email = null) {
 		$this->username = $username;
 		$this->realName = $realName;
 		$this->password = $password;
 		$this->email = $email;
+		$this->superadmin = $superadmin;
 	}
 
 	/**
@@ -44,6 +50,7 @@ class AdministratorData {
 		$this->email = $administrator->getEmail();
 		$this->realName = $administrator->getRealName();
 		$this->username = $administrator->getUsername();
+		$this->superadmin = $administrator->isSuperadmin();
 	}
 
 }
