@@ -5,7 +5,7 @@
 		{% set pageCount = paginationResult.pageCount %}
 		<strong class="mt-half col-md-3">
 			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů')|trim }}
-			{{ paginationResult.fromItem }} - {{ paginationResult.toItem }} {{ 'z'|trans }} {{ paginationResult.totalCount }}
+			{{ paginationResult.fromItem }} - <span class="js-pagination-to-item">{{ paginationResult.toItem }}</span> {{ 'z'|trans }} {{ paginationResult.totalCount }}
 		</strong>
 
 		<div class="col-md-6 text-center">
