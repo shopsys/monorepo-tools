@@ -23,7 +23,7 @@ class ProductAvailabilityCalculation {
 	public function getCalculatedAvailability(Product $product) {
 		if ($product->isUsingStock()) {
 			if ($product->getStockQuantity() <= 0
-				&& $product->getOutOfStockAction() === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE
+				&& $product->getOutOfStockAction() === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY
 			) {
 				return $product->getOutOfStockAvailability();
 			} else {

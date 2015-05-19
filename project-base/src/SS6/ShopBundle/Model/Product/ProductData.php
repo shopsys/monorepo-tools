@@ -81,6 +81,11 @@ class ProductData {
 	public $stockQuantity;
 
 	/**
+	 * @var string
+	 */
+	public $outOfStockAction;
+
+	/**
 	 *
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
@@ -118,11 +123,6 @@ class ProductData {
 	public $accessories;
 
 	/**
-	 * @var string
-	 */
-	public $outOfStockAction;
-
-	/**
 	 * @param array $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -137,13 +137,13 @@ class ProductData {
 	 * @param array $flags
 	 * @param bool $usingStock
 	 * @param string|null $stockQuantity
+	 * @param string $outOfStockAction
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $availability
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
 	 * @param string $priceCalculationType
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
-	 * @param string $outOfStockAction
 	 */
 	public function __construct(
 		$name = [],
@@ -160,13 +160,13 @@ class ProductData {
 		array $flags = [],
 		$usingStock = false,
 		$stockQuantity = null,
+		$outOfStockAction = null,
 		Availability $availability = null,
 		Availability $outOfStockAvailability = null,
 		array $hiddenOnDomains = [],
 		array $categories = [],
 		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO,
-		array $accessories = [],
-		$outOfStockAction = null
+		array $accessories = []
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -182,13 +182,13 @@ class ProductData {
 		$this->flags = $flags;
 		$this->usingStock = $usingStock;
 		$this->stockQuantity = $stockQuantity;
+		$this->outOfStockAction = $outOfStockAction;
 		$this->availability = $availability;
 		$this->outOfStockAvailability = $outOfStockAvailability;
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $categories;
 		$this->priceCalculationType = $priceCalculationType;
 		$this->accessories = $accessories;
-		$this->outOfStockAction = $outOfStockAction;
 	}
 
 }

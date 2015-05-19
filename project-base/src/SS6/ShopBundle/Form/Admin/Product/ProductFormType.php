@@ -150,13 +150,19 @@ class ProductFormType extends AbstractType {
 			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])
 			->add('stockQuantity', FormType::INTEGER, [
-				'required' => false,
+				'required' => true,
 				'invalid_message' => 'Prosím zadejte číslo',
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím zadejte počet kusů skladem',
+						'groups' => self::VALIDATION_GROUP_USING_STOCK,
+					]),
+				],
 			])
 			->add('availability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'placeholder' => '-- Vyberte dostupnost --',
+				'placeholder' => $this->translator->trans('-- Vyberte dostupnost --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
@@ -168,11 +174,11 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'expanded' => false,
 				'choices' => [
-					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE => $this->translator->trans('Nastavit alternativní dostupnost'),
+					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => $this->translator->trans('Nastavit alternativní dostupnost'),
 					Product::OUT_OF_STOCK_ACTION_HIDE => $this->translator->trans('Skrýt zboží'),
 					Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => $this->translator->trans('Vyřadit z prodeje'),
 				],
-				'placeholder' => '-- Vyberte akci --',
+				'placeholder' => $this->translator->trans('-- Vyberte akci --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte akci',
@@ -183,13 +189,11 @@ class ProductFormType extends AbstractType {
 			->add('outOfStockAvailability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'placeholder' => '-- Vyberte dostupnost --',
+				'placeholder' => $this->translator->trans('-- Vyberte dostupnost --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
-						'groups' => [
-							self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY,
-						],
+						'groups' => self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY,
 					]),
 				],
 			])
@@ -269,7 +273,7 @@ class ProductFormType extends AbstractType {
 
 				if ($productData->usingStock) {
 					$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
-					if ($productData->outOfStockAction === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE) {
+					if ($productData->outOfStockAction === Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY) {
 						$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY;
 					}
 				} else {

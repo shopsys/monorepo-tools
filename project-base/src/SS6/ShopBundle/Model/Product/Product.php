@@ -22,7 +22,7 @@ class Product extends AbstractTranslatableEntity {
 
 	const PRICE_CALCULATION_TYPE_AUTO = 'auto';
 	const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
-	const OUT_OF_STOCK_ACTION_SET_ALTERNATE = 'setAlternate';
+	const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
 	const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
 	const OUT_OF_STOCK_ACTION_HIDE = 'hide';
 
@@ -134,18 +134,18 @@ class Product extends AbstractTranslatableEntity {
 	private $stockQuantity;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
-	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
-	 */
-	private $availability;
-
-	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	private $outOfStockAction;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
+	 */
+	private $availability;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
@@ -160,6 +160,13 @@ class Product extends AbstractTranslatableEntity {
 	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $calculatedAvailability;
+
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", options={"default" = true})
+	 */
+	private $recalculateAvailability;
 
 	/**
 	 * @var boolean
@@ -211,13 +218,6 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculatePrice;
 
 	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(type="boolean", options={"default" = true})
-	 */
-	private $recalculateAvailability;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -238,17 +238,17 @@ class Product extends AbstractTranslatableEntity {
 		$this->hidden = $productData->hidden;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
+		$this->outOfStockAction = $productData->outOfStockAction;
 		$this->availability = $productData->availability;
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
+		$this->recalculateAvailability = true;
 		$this->visible = false;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
 		$this->recalculatePrice = true;
-		$this->recalculateAvailability = true;
-		$this->outOfStockAction = $productData->outOfStockAction;
-		$this->handleOutOfStockState($this->outOfStockAction);
+		$this->calculateSellableAndHidden();
 	}
 
 	/**
@@ -270,26 +270,23 @@ class Product extends AbstractTranslatableEntity {
 		$this->sellable = $productData->sellable;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
+		$this->outOfStockAction = $productData->outOfStockAction;
 		$this->availability = $productData->availability;
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
+		$this->recalculateAvailability = true;
 		$this->hidden = $productData->hidden;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
-		$this->recalculateAvailability = true;
-		$this->outOfStockAction = $productData->outOfStockAction;
-		$this->handleOutOfStockState($this->outOfStockAction);
+		$this->calculateSellableAndHidden();
 	}
 
-	/**
-	 * @param string $outOfStockAction
-	 */
-	private function handleOutOfStockState($outOfStockAction) {
+	private function calculateSellableAndHidden() {
 		$this->calculatedSellable = $this->sellable;
 		$this->calculatedHidden = $this->hidden;
 		if ($this->isUsingStock() && $this->getStockQuantity() <= 0) {
-			switch ($outOfStockAction) {
+			switch ($this->outOfStockAction) {
 				case self::OUT_OF_STOCK_ACTION_HIDE:
 					$this->calculatedHidden = true;
 					break;

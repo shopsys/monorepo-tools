@@ -88,7 +88,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->usingStock = true;
 		$productEditData->productData->stockQuantity = 0;
-		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE;
+		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY;
 		$productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
 		$productEditData->productData->availability = null;
 		$productEditData->urls['toDelete'] = [];

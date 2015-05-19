@@ -70,7 +70,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => true,
 				'stockQuantity' => 5,
-				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'availability' => null,
 				'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
@@ -79,7 +79,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => true,
 				'stockQuantity' => 0,
-				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'availability' => null,
 				'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
@@ -88,7 +88,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => true,
 				'stockQuantity' => -1,
-				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'availability' => null,
 				'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
