@@ -13,24 +13,24 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$administrator = new Administrator(new AdministratorData());
-		$superadmin = new Administrator(new AdministratorData(true));
-
 		$administratorService = $this->get('ss6.shop.administrator.administrator_service');
 		/* @var $administratorService \SS6\ShopBundle\Model\Administrator\AdministratorService */
-		$administrator->setUsername('admin');
-		$administrator->setRealname('netdevelo s.r.o.');
-		$administrator->setPassword($administratorService->getPasswordHash($administrator, 'admin123'));
-		$administrator->setEmail('no-reply@netdevelo.cz');
 
-		$manager->persist($administrator);
-
+		$superadmin = new Administrator(new AdministratorData(true));
 		$superadmin->setUsername('superadmin');
 		$superadmin->setRealname('netdevelo s.r.o. - superadmin');
 		$superadmin->setPassword($administratorService->getPasswordHash($superadmin, 'admin123'));
 		$superadmin->setEmail('no-reply@netdevelo.cz');
 
 		$manager->persist($superadmin);
+
+		$administrator = new Administrator(new AdministratorData());
+		$administrator->setUsername('admin');
+		$administrator->setRealname('netdevelo s.r.o.');
+		$administrator->setPassword($administratorService->getPasswordHash($administrator, 'admin123'));
+		$administrator->setEmail('no-reply@netdevelo.cz');
+
+		$manager->persist($administrator);
 
 		$manager->flush();
 	}

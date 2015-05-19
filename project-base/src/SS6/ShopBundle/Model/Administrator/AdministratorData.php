@@ -30,6 +30,7 @@ class AdministratorData {
 	public $email;
 
 	/**
+	 * @param bool $superadmin
 	 * @param string|null $username
 	 * @param string|null $realName
 	 * @param string|null $password

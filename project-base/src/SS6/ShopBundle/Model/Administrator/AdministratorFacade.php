@@ -92,4 +92,11 @@ class AdministratorFacade {
 		return $this->administratorRepository->getById($administratorId);
 	}
 
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllListableQueryBuilder() {
+		return $this->administratorRepository->getAllListableQueryBuilder();
+	}
+
 }

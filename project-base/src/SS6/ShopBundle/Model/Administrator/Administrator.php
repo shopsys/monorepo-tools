@@ -73,7 +73,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $gridLimits;
 
 	/**
-	 *  @ORM\Column(type="boolean")
+	 * @ORM\Column(type="boolean")
 	 *
 	 * @var bool
 	 */
