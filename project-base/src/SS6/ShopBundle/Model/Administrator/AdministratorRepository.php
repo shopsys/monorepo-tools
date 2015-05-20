@@ -86,4 +86,11 @@ class AdministratorRepository {
 			'loginToken' => $loginToken,
 		]);
 	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator[]
+	 */
+	public function getAllSuperadmins() {
+		return $this->getAdministratorRepository()->findBy(['superadmin' => true]);
+	}
 }

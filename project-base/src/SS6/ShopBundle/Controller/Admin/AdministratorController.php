@@ -98,6 +98,12 @@ class AdministratorController extends Controller {
 				);
 				return $this->redirect($this->generateUrl('admin_administrator_list'));
 
+			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
+				$flashMessageSender->addErrorFlashTwig(
+					'Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné', [
+						'name' => $administratorData->username,
+					]
+				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
 					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [
@@ -160,6 +166,12 @@ class AdministratorController extends Controller {
 				);
 				return $this->redirect($this->generateUrl('admin_administrator_list'));
 
+			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
+				$flashMessageSender->addErrorFlashTwig(
+					'Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné', [
+						'name' => $administratorData->username,
+					]
+				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
 					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [

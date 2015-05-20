@@ -44,6 +44,9 @@ class AdministratorFacade {
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function create(AdministratorData $administratorData) {
+		if (in_array($administratorData->username, $this->getSuperadminUsernames())) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
+		}
 		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
 		if ($administratorByUserName !== null) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
@@ -66,7 +69,13 @@ class AdministratorFacade {
 	public function edit($administratorId, AdministratorData $administratorData) {
 		$administrator = $this->administratorRepository->getById($administratorId);
 		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
-		$administratorEdited = $this->administratorService->edit($administratorData, $administrator, $administratorByUserName);
+		$superadminUsernames = $this->getSuperadminUsernames();
+		$administratorEdited = $this->administratorService->edit(
+			$administratorData,
+			$administrator,
+			$superadminUsernames,
+			$administratorByUserName
+		);
 
 		$this->em->flush();
 
@@ -97,6 +106,19 @@ class AdministratorFacade {
 	 */
 	public function getAllListableQueryBuilder() {
 		return $this->administratorRepository->getAllListableQueryBuilder();
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getSuperadminUsernames() {
+		$superadmins = $this->administratorRepository->getAllSuperadmins();
+		$superadminUsernames = [];
+		foreach ($superadmins as $superadmin) {
+			$superadminUsernames[] = $superadmin->getUsername();
+		}
+
+		return $superadminUsernames;
 	}
 
 }

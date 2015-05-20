@@ -56,14 +56,19 @@ class AdministratorService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param string[] $superadminUsernames
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator|null $administratorByUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function edit(
 		AdministratorData $administratorData,
 		Administrator $administrator,
+		array $superadminUsernames,
 		Administrator $administratorByUserName = null
 	) {
+		if (in_array($administratorData->username, $superadminUsernames)) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
+		}
 		if ($administratorByUserName !== null
 			&& $administratorByUserName !== $administrator
 			&& $administratorByUserName->getUsername() === $administratorData->username
