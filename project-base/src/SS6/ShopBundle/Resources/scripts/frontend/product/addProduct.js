@@ -9,10 +9,10 @@
 
 	SS6.addProduct.ajaxSubmit = function (event) {
 		$.ajax({
-			url: $(this).attr('action'),
+			url: $(this).data('ajax-url'),
 			type: 'POST',
 			data: $(this).serialize(),
-			dataType: 'json',
+			dataType: 'html',
 			success: SS6.addProduct.processResponse
 		});
 
@@ -20,22 +20,11 @@
 	};
 
 	SS6.addProduct.processResponse = function (data) {
-		var options = {
-			content: data.message,
-			buttonContinue: data.success,
-			textContinue: SS6.translator.trans('Přejít do košíku'),
-			urlContinue: data.continueUrl
-		};
-		SS6.window(options);
-		if (data.success && data.cartBoxReloadUrl) {
-			$.ajax({
-				url: data.cartBoxReloadUrl,
-				type: 'get',
-				success: function (data) {
-					$('#cart-box').replaceWith(data);
-				}
-			});
-		}
+		SS6.window({
+			content: data
+		});
+
+		$('#cart-box').trigger('reload');
 	};
 
 	$(document).ready(function () {

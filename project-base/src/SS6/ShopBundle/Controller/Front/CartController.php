@@ -2,18 +2,28 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
+use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class CartController extends Controller {
+class CartController extends BaseController {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
+	 */
+	private $cartFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
@@ -21,13 +31,20 @@ class CartController extends Controller {
 	private $freeTransportAndPaymentFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
-	private $domain;
+	private $productDetailFactory;
 
-	public function __construct(FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade, Domain $domain) {
-		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
+	public function __construct(
+		CartFacade $cartFacade,
+		Domain $domain,
+		FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
+		ProductDetailFactory $productDetailFactory
+	) {
+		$this->cartFacade = $cartFacade;
 		$this->domain = $domain;
+		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
+		$this->productDetailFactory = $productDetailFactory;
 	}
 
 	/**
@@ -135,15 +152,12 @@ class CartController extends Controller {
 	public function addProductAction(Request $request) {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
-		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
 
 		$form = $this->createForm(new AddProductFormType(), null, [
 			'method' => 'POST',
 		]);
 		$form->handleRequest($request);
 
-		$actionResult = ['success' => false, 'message' => 'Zadejte prosím platné množství kusů, které chcete vložit do košíku.'];
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
@@ -151,7 +165,7 @@ class CartController extends Controller {
 				/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 				$addProductResult = $cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
 
-				$this->sendAddProductResultFlashMessage($flashMessageSender, $addProductResult);
+				$this->sendAddProductResultFlashMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$flashMessageSender->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
@@ -161,19 +175,6 @@ class CartController extends Controller {
 			}
 		} else {
 			$flashMessageSender->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
-		}
-
-		if ($request->isXmlHttpRequest()) {
-			$errorMessages = $flashMessageBag->getErrorMessages();
-			if (count($errorMessages) === 0) {
-				$actionResult['success'] = true;
-				$actionResult['message'] = $flashMessageBag->getSuccessMessages();
-			} else {
-				$actionResult['success'] = false;
-				$actionResult['message'] = $errorMessages;
-			}
-
-			return $this->getAjaxAddProductResponse($actionResult);
 		}
 
 		if ($this->getRequest()->headers->get('referer')) {
@@ -186,26 +187,49 @@ class CartController extends Controller {
 	}
 
 	/**
-	 * @param array $actionResult
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
-	private function getAjaxAddProductResponse(array $actionResult) {
-		$actionResult['continueUrl'] = $this->generateUrl('front_cart');
-		$actionResult['cartBoxReloadUrl'] = $this->generateUrl('front_cart_box');
+	public function addProductAjaxAction(Request $request) {
+		$form = $this->createForm(new AddProductFormType(), null, [
+			'method' => 'POST',
+		]);
+		$form->handleRequest($request);
 
-		return new JsonResponse($actionResult);
+		if ($form->isValid()) {
+			try {
+				$formData = $form->getData();
+				$addProductResult = $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
+
+				$this->sendAddProductResultFlashMessage($addProductResult);
+
+				$accessories = $addProductResult->getCartItem()->getProduct()->getAccessories()->toArray();
+				$accessoryDetails = $this->productDetailFactory->getDetailsForProducts($accessories);
+
+				return $this->render('@SS6Shop/Front/Inline/Cart/afterAddWindow.html.twig', [
+					'accessoryDetails' => $accessoryDetails,
+				]);
+			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
+			}
+		} else {
+			$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+		}
+
+		return $this->forward('SS6ShopBundle:Front/FlashMessage:index');
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
 	 * @param \SS6\ShopBundle\Model\Cart\AddProductResult $addProductResult
 	 */
 	private function sendAddProductResultFlashMessage(
-		FlashMessageSender $flashMessageSender,
 		AddProductResult $addProductResult
 	) {
 		if ($addProductResult->getIsNew()) {
-			$flashMessageSender->addSuccessFlashTwig(
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} ks)',
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
@@ -213,7 +237,7 @@ class CartController extends Controller {
 				]
 			);
 		} else {
-			$flashMessageSender->addSuccessFlashTwig(
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} ks)',
 				[
 					'name' => $addProductResult->getCartItem()->getName(),

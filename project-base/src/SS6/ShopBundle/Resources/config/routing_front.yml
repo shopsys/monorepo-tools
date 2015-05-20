@@ -3,6 +3,11 @@ front_cart_add_product:
   defaults: { _controller: SS6ShopBundle:Front\Cart:addProduct }
   methods: [POST]
 
+front_cart_add_product_ajax:
+  pattern: /cart/addProductAjax/
+  defaults: { _controller: SS6ShopBundle:Front\Cart:addProductAjax }
+  methods: [POST]
+
 front_cart_box:
   pattern: /cart/box/
   defaults: { _controller: SS6ShopBundle:Front\Cart:box }
