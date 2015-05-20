@@ -3,9 +3,9 @@
 	SS6 = window.SS6 || {};
 	SS6.addProduct = SS6.addProduct || {};
 
-	SS6.addProduct.init = function (formElement) {
-		$('form.add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
-	}
+	SS6.addProduct.init = function () {
+		$('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
+	};
 
 	SS6.addProduct.ajaxSubmit = function (event) {
 		$.ajax({
@@ -17,7 +17,7 @@
 		});
 
 		event.preventDefault();
-	}
+	};
 
 	SS6.addProduct.processResponse = function (data) {
 		var options = {
@@ -25,7 +25,7 @@
 			buttonContinue: data.success,
 			textContinue: SS6.translator.trans('Přejít do košíku'),
 			urlContinue: data.continueUrl
-		}
+		};
 		SS6.window(options);
 		if (data.success && data.cartBoxReloadUrl) {
 			$.ajax({
@@ -36,7 +36,7 @@
 				}
 			});
 		}
-	}
+	};
 
 	$(document).ready(function () {
 		SS6.addProduct.init();
