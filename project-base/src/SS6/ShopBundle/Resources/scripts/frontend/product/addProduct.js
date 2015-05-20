@@ -13,18 +13,25 @@
 			type: 'POST',
 			data: $(this).serialize(),
 			dataType: 'html',
-			success: SS6.addProduct.processResponse
+			success: SS6.addProduct.onSuccess,
+			error: SS6.addProduct.onError
 		});
 
 		event.preventDefault();
 	};
 
-	SS6.addProduct.processResponse = function (data) {
+	SS6.addProduct.onSuccess = function (data) {
 		SS6.window({
 			content: data
 		});
 
 		$('#cart-box').trigger('reload');
+	};
+
+	SS6.addProduct.onError = function () {
+		SS6.window({
+			content: SS6.translator.trans('Operace se nezdařila')
+		});
 	};
 
 	$(document).ready(function () {
