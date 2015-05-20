@@ -1,0 +1,35 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{{ 'Superadmin - Zapínací moduly'|trans }}{% endblock %}
+{% block h1 %}{{ 'Superadmin - Zapínací moduly'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				<div class="wrap-group">
+					<table class="table">
+						<tr>
+							<th class="table-col-80">Název modulu</th>
+							<th class="table-col-10">Aktivní</th>
+							<th class="table-col-10">Neaktivní</th>
+						</tr>
+						{% for moduleName, moduleForm in form.modules %}
+							<tr>
+								<td class="table-col-80">{{ moduleName }}</td>
+								<td class="table-col-10">{{ form_widget(moduleForm['yes']) }}</td>
+								<td class="table-col-10">{{ form_widget(moduleForm['no']) }}</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+
+				<div class="window-fixed-bar">
+ 					<div class="window-fixed-bar__buttons">
+						{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+					</div>
+				</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

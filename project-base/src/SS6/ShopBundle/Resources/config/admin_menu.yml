@@ -185,9 +185,11 @@
       route: admin_seo_index
 
     - label: 'Superadmin'
-      route: admin_superadmin_icons
+      route: admin_superadmin_modules
       superadmin: true
       items:
+        - label: 'Zapínací moduly'
+          route: admin_superadmin_modules
         - label: 'Ikonky'
           route: admin_superadmin_icons
           items:
