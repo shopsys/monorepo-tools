@@ -73,7 +73,7 @@ class CartWatcherService {
 						$this->domain->getId()
 					);
 
-				if (!$productVisibility->isVisible() || !$product->isSellable()) {
+				if (!$productVisibility->isVisible() || !$product->getCalculatedSellable()) {
 					$notListableItems[] = $item;
 				}
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {

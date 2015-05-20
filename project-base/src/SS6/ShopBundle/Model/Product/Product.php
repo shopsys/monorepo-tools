@@ -22,6 +22,9 @@ class Product extends AbstractTranslatableEntity {
 
 	const PRICE_CALCULATION_TYPE_AUTO = 'auto';
 	const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
+	const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
+	const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
+	const OUT_OF_STOCK_ACTION_HIDE = 'hide';
 
 	/**
 	 * @var integer
@@ -100,7 +103,21 @@ class Product extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
+	private $calculatedSellable;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
 	private $hidden;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $calculatedHidden;
 
 	/**
 	 * @var bool
@@ -115,6 +132,13 @@ class Product extends AbstractTranslatableEntity {
 	 * @ORM\Column(type="integer", nullable=true)
 	 */
 	private $stockQuantity;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="string", nullable=true)
+	 */
+	private $outOfStockAction;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
@@ -136,6 +160,13 @@ class Product extends AbstractTranslatableEntity {
 	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $calculatedAvailability;
+
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", options={"default" = true})
+	 */
+	private $recalculateAvailability;
 
 	/**
 	 * @var boolean
@@ -187,13 +218,6 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculatePrice;
 
 	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(type="boolean", options={"default" = true})
-	 */
-	private $recalculateAvailability;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -214,15 +238,17 @@ class Product extends AbstractTranslatableEntity {
 		$this->hidden = $productData->hidden;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
+		$this->outOfStockAction = $productData->outOfStockAction;
 		$this->availability = $productData->availability;
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
+		$this->recalculateAvailability = true;
 		$this->visible = false;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
 		$this->recalculatePrice = true;
-		$this->recalculateAvailability = true;
+		$this->calculateSellableAndHidden();
 	}
 
 	/**
@@ -244,14 +270,31 @@ class Product extends AbstractTranslatableEntity {
 		$this->sellable = $productData->sellable;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
+		$this->outOfStockAction = $productData->outOfStockAction;
 		$this->availability = $productData->availability;
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
+		$this->recalculateAvailability = true;
 		$this->hidden = $productData->hidden;
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
-		$this->recalculateAvailability = true;
+		$this->calculateSellableAndHidden();
+	}
+
+	private function calculateSellableAndHidden() {
+		$this->calculatedSellable = $this->sellable;
+		$this->calculatedHidden = $this->hidden;
+		if ($this->isUsingStock() && $this->getStockQuantity() <= 0) {
+			switch ($this->outOfStockAction) {
+				case self::OUT_OF_STOCK_ACTION_HIDE:
+					$this->calculatedHidden = true;
+					break;
+				case self::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE:
+					$this->calculatedSellable = false;
+					break;
+			}
+		}
 	}
 
 	/**
@@ -360,10 +403,24 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function getCalculatedHidden() {
+		return $this->calculatedHidden;
+	}
+
+	/**
 	 * @return boolean
 	 */
 	public function isSellable() {
 		return $this->sellable;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCalculatedSellable() {
+		return $this->calculatedSellable;
 	}
 
 	/**
@@ -378,6 +435,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getStockQuantity() {
 		return $this->stockQuantity;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOutOfStockAction() {
+		return $this->outOfStockAction;
 	}
 
 	/**
@@ -440,7 +504,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getPriceCalculationType() {
 		return $this->priceCalculationType;

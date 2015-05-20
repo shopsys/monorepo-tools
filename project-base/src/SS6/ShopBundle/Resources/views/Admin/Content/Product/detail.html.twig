@@ -19,11 +19,13 @@
 					{{ form_row(form.productData.name, { label: 'Název'}) }}
 					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'}) }}
 					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
+					{% block product_calculated_hidden_info %}{% endblock %}
 					{{ form_row(form.productData.sellable, { label: 'Vyřadit z prodeje',
 						icon: {
 							title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
 						}
 						, attr: {class: 'form-line--between'} }) }}
+					{% block product_calculated_sellable_info %}{% endblock %}
 					{% block product_main_categories %}{% endblock %}
 					{{ form_row(form.productData.categories, { label: 'Kategorie'}) }}
 					{{ form_row(form.productData.flags, { label: 'Příznaky'}) }}
@@ -33,7 +35,10 @@
 					{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby', attr: {class: 'form-line--between' } } ) }}
 					<div class="js-product-using-stock">
 						{{ form_row(form.productData.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
-						{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání', attr: {class: 'form-line--size-2'} }) }}
+						{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání', attr: {class: 'form-line--size-3'} }) }}
+						<div class="js-product-using-stock-and-alternate-availability">
+							{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání', attr: {class: 'form-line--size-3'} }) }}
+						</div>
 					</div>
 					<div class="js-product-not-using-stock">
 						{{ form_row(form.productData.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}

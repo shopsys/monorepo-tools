@@ -32,6 +32,18 @@
 	</div>
 {% endblock %}
 
+{% block product_calculated_hidden_info %}
+	{% if product.calculatedHidden %}
+		<div class="form-line form-line__text text-red">{{ 'Produkt je skrytý z důvodu vyprodání'|trans }}</div>
+	{% endif %}
+{% endblock %}
+
+{% block product_calculated_sellable_info %}
+	{% if not product.calculatedSellable %}
+		<div class="form-line form-line__text text-red">{{ 'Produkt je vyřazen z prodeje z důvodu vyprodání'|trans }}</div>
+	{% endif %}
+{% endblock %}
+
 {% block product_main_categories %}
 	<label>{{ 'Hlavní kategorie na doménách :' |trans }}</label>
 	{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}

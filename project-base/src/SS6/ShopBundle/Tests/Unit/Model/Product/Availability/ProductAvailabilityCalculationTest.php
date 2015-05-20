@@ -18,6 +18,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 	public function testGetCalculatedAvailability(
 		$usingStock,
 		$stockQuantity,
+		$outOfStockAction,
 		Availability $availability = null,
 		Availability $outOfStockAvailability = null,
 		Availability $defaultInStockAvailability = null,
@@ -27,6 +28,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 		$productData->usingStock = $usingStock;
 		$productData->stockQuantity = $stockQuantity;
 		$productData->availability = $availability;
+		$productData->outOfStockAction = $outOfStockAction;
 		$productData->outOfStockAvailability = $outOfStockAvailability;
 
 		$product = new Product($productData);
@@ -50,6 +52,16 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => false,
 				'stockQuantity' => null,
+				'outOfStockAction' => null,
+				'availability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+				'outOfStockAvailability' => null,
+				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+				'calculatedAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
+			],
+			[
+				'usingStock' => true,
+				'stockQuantity' => null,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_HIDE,
 				'availability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
 				'outOfStockAvailability' => null,
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
@@ -58,6 +70,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => true,
 				'stockQuantity' => 5,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'availability' => null,
 				'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
@@ -66,6 +79,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => true,
 				'stockQuantity' => 0,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'availability' => null,
 				'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
@@ -74,6 +88,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			[
 				'usingStock' => true,
 				'stockQuantity' => -1,
+				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'availability' => null,
 				'outOfStockAvailability' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 				'defaultInStockAvailability' => $this->getReference(AvailabilityDataFixture::IN_STOCK),

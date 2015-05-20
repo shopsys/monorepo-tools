@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Product\Availability;
 
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
@@ -87,6 +88,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->usingStock = true;
 		$productEditData->productData->stockQuantity = 0;
+		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY;
 		$productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
 		$productEditData->productData->availability = null;
 		$productEditData->urls['toDelete'] = [];

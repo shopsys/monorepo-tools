@@ -81,6 +81,11 @@ class ProductData {
 	public $stockQuantity;
 
 	/**
+	 * @var string
+	 */
+	public $outOfStockAction;
+
+	/**
 	 *
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
@@ -108,7 +113,7 @@ class ProductData {
 	public $categories;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
 	public $priceCalculationType;
 
@@ -132,11 +137,13 @@ class ProductData {
 	 * @param array $flags
 	 * @param bool $usingStock
 	 * @param string|null $stockQuantity
+	 * @param string $outOfStockAction
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $availability
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
-	 * @param int $priceCalculationType
+	 * @param string $priceCalculationType
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
 	 */
 	public function __construct(
 		$name = [],
@@ -153,6 +160,7 @@ class ProductData {
 		array $flags = [],
 		$usingStock = false,
 		$stockQuantity = null,
+		$outOfStockAction = null,
 		Availability $availability = null,
 		Availability $outOfStockAvailability = null,
 		array $hiddenOnDomains = [],
@@ -174,6 +182,7 @@ class ProductData {
 		$this->flags = $flags;
 		$this->usingStock = $usingStock;
 		$this->stockQuantity = $stockQuantity;
+		$this->outOfStockAction = $outOfStockAction;
 		$this->availability = $availability;
 		$this->outOfStockAvailability = $outOfStockAvailability;
 		$this->hiddenOnDomains = $hiddenOnDomains;

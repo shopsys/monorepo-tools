@@ -68,6 +68,7 @@ class ProductDataFactory {
 		$productData->stockQuantity = $product->getStockQuantity();
 		$productData->availability = $product->getAvailability();
 		$productData->outOfStockAvailability = $product->getOutOfStockAvailability();
+		$productData->outOfStockAction = $product->getOutOfStockAction();
 
 		$productData->hidden = $product->isHidden();
 		$hiddenOnDomains = [];
