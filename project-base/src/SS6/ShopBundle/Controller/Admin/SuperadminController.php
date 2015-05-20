@@ -12,13 +12,6 @@ use Symfony\Component\Routing\RequestContext;
 class SuperadminController extends Controller {
 
 	/**
-	 * @Route("/superadmin/")
-	 */
-	public function indexAction() {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/index.html.twig');
-	}
-
-	/**
 	 * @Route("/superadmin/icons/")
 	 */
 	public function iconsAction() {
@@ -73,7 +66,7 @@ class SuperadminController extends Controller {
 			$flashMessageSender->addSuccessFlashTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', [
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
 			]);
-			return $this->redirect($this->generateUrl('admin_superadmin_index'));
+			return $this->redirect($this->generateUrl('admin_superadmin_pricing'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Superadmin/pricing.html.twig', [
