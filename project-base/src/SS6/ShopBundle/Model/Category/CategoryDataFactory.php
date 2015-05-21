@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Category;
 
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 
@@ -12,10 +14,17 @@ class CategoryDataFactory {
 	 */
 	private $categoryRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
 	public function __construct(
-		CategoryRepository $categoryRepository
+		CategoryRepository $categoryRepository,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->categoryRepository = $categoryRepository;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -27,6 +36,13 @@ class CategoryDataFactory {
 
 		$categoryData = new CategoryData();
 		$categoryData->setFromEntity($category, $categoryDomains);
+
+		foreach ($categoryDomains as $categoryDomain) {
+			$domainId = $categoryDomain->getDomainId();
+
+			$categoryData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
+				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_list', $category->getId());
+		}
 
 		return $categoryData;
 	}

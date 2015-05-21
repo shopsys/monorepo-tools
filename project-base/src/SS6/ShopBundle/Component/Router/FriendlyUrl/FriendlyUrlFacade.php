@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class FriendlyUrlFacade {
@@ -110,6 +111,7 @@ class FriendlyUrlFacade {
 		if ($friendlyUrl !== null) {
 			$this->em->persist($friendlyUrl);
 			$this->em->flush($friendlyUrl);
+			$this->refreshMainUrl($friendlyUrl);
 		}
 	}
 
@@ -123,10 +125,20 @@ class FriendlyUrlFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+	 */
+	public function findMainFriendlyUrl($domainId, $routeName, $entityId) {
+		return $this->friendlyUrlRepository->findMainFriendlyUrl($domainId, $routeName, $entityId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][] $urlListFormData
 	 */
 	public function saveUrlListFormData(array $urlListFormData) {
-		foreach ($urlListFormData['toDelete'] as $friendlyUrls) {
+		foreach ($urlListFormData[UrlListType::TO_DELETE] as $friendlyUrls) {
 			foreach ($friendlyUrls as $friendlyUrl) {
 				if (!$this->friendlyUrlRepository->isMainFriendlyUrl($friendlyUrl)) {
 					$this->em->remove($friendlyUrl);
@@ -134,6 +146,28 @@ class FriendlyUrlFacade {
 			}
 		}
 
+		foreach ($urlListFormData[UrlListType::MAIN_ON_DOMAINS] as $friendlyUrl) {
+			if ($friendlyUrl !== null) {
+				$this->refreshMainUrl($friendlyUrl);
+			}
+		}
+
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $mainFriendlyUrl
+	 */
+	public function refreshMainUrl(FriendlyUrl $mainFriendlyUrl) {
+		$friendlyUrls = $this->friendlyUrlRepository->getAllByRouteNameAndEntityIdAndDomainId(
+			$mainFriendlyUrl->getRouteName(),
+			$mainFriendlyUrl->getEntityId(),
+			$mainFriendlyUrl->getDomainId()
+		);
+		foreach ($friendlyUrls as $friendlyUrl) {
+			$friendlyUrl->setMain(false);
+		}
+		$mainFriendlyUrl->setMain(true);
 		$this->em->flush();
 	}
 

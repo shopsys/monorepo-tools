@@ -77,6 +77,7 @@ class ProductEditData {
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
 		$this->urls[UrlListType::TO_DELETE] = [];
+		$this->urls[UrlListType::MAIN_ON_DOMAINS] = [];
 	}
 
 }

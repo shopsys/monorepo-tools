@@ -46,6 +46,13 @@ class FriendlyUrl {
 	private $slug;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $main;
+
+	/**
 	 * @param string $routeName
 	 * @param int $entityId
 	 * @param int $domainId
@@ -56,6 +63,7 @@ class FriendlyUrl {
 		$this->entityId = $entityId;
 		$this->domainId = $domainId;
 		$this->slug = $slug;
+		$this->main = true;
 	}
 
 	/**
@@ -86,4 +94,10 @@ class FriendlyUrl {
 		return $this->slug;
 	}
 
+	/**
+	 * @param bool $main
+	 */
+	public function setMain($main) {
+		$this->main = $main;
+	}
 }

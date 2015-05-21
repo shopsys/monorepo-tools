@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -15,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UrlListType extends AbstractType {
 
 	const TO_DELETE = 'toDelete';
+	const MAIN_ON_DOMAINS = 'mainOnDomains';
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
@@ -26,12 +28,19 @@ class UrlListType extends AbstractType {
 	 */
 	private $domainRouterFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		FriendlyUrlFacade $friendlyUrlFacade,
-		DomainRouterFactory $domainRouterFactory
+		DomainRouterFactory $domainRouterFactory,
+		Domain $domain
 	) {
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->domainRouterFactory = $domainRouterFactory;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -44,6 +53,7 @@ class UrlListType extends AbstractType {
 		}
 
 		$builder->add(self::TO_DELETE, FormType::FORM);
+		$builder->add(self::MAIN_ON_DOMAINS, FormType::FORM);
 
 		$friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
@@ -53,6 +63,13 @@ class UrlListType extends AbstractType {
 				'multiple' => true,
 				'expanded' => true,
 				'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+			]);
+			$builder->get(self::MAIN_ON_DOMAINS)->add($domainId, FormType::CHOICE, [
+				'required' => true,
+				'multiple' => false,
+				'expanded' => true,
+				'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+				'invalid_message' => 'Původně vybraná hlavní URL již neexistuje',
 			]);
 		}
 	}
@@ -67,10 +84,15 @@ class UrlListType extends AbstractType {
 			$options['route_name'],
 			$options['entity_id']
 		);
+		$mainUrlsSlugsOnDomains = $this->getMainFriendlyUrlSlugsByDomainId(
+			$options['route_name'],
+			$options['entity_id']
+		);
 
 		$view->vars['absoluteUrlsByDomainIdAndSlug'] = $absoluteUrlsByDomainIdAndSlug;
 		$view->vars['routeName'] = $options['route_name'];
 		$view->vars['entityId'] = $options['entity_id'];
+		$view->vars['mainUrlsSlugsOnDomains'] = $mainUrlsSlugsOnDomains;
 	}
 
 	/**
@@ -137,6 +159,30 @@ class UrlListType extends AbstractType {
 		}
 
 		return $absoluteUrlsByDomainIdAndSlug;
+	}
+
+	/**
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @return string[domainId]
+	 */
+	private function getMainFriendlyUrlSlugsByDomainId($routeName, $entityId) {
+		$mainFriendlyUrlsSlugsOnDomains = [];
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$domainId = $domainConfig->getId();
+			$mainFriendlyUrl = $this->friendlyUrlFacade->findMainFriendlyUrl(
+				$domainId,
+				$routeName,
+				$entityId
+			);
+			if ($mainFriendlyUrl !== null) {
+				$mainFriendlyUrlsSlugsOnDomains[$domainId] = $mainFriendlyUrl->getSlug();
+			} else {
+				$mainFriendlyUrlsSlugsOnDomains[$domainId] = null;
+			}
+		}
+
+		return $mainFriendlyUrlsSlugsOnDomains;
 	}
 
 }

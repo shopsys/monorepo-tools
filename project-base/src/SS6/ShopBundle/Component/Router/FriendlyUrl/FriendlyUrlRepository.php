@@ -46,19 +46,37 @@ class FriendlyUrlRepository {
 	 * @param int $entityId
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl
 	 */
-	public function getByDomainIdAndRouteNameAndEntityId($domainId, $routeName, $entityId) {
+	public function getMainFriendlyUrl($domainId, $routeName, $entityId) {
 		$criteria = [
 			'domainId' => $domainId,
 			'routeName' => $routeName,
 			'entityId' => $entityId,
+			'main' => true,
 		];
-		$friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria, ['slug' => 'ASC']);
+		$friendlyUrl = $this->getFriendlyUrlRepository()->findOneBy($criteria);
 
 		if ($friendlyUrl === null) {
 			throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException();
 		}
 
 		return $friendlyUrl;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+	 */
+	public function findMainFriendlyUrl($domainId, $routeName, $entityId) {
+		$criteria = [
+			'domainId' => $domainId,
+			'routeName' => $routeName,
+			'entityId' => $entityId,
+			'main' => true,
+		];
+
+		return $this->getFriendlyUrlRepository()->findOneBy($criteria);
 	}
 
 	/**
@@ -82,11 +100,28 @@ class FriendlyUrlRepository {
 	}
 
 	/**
+	 *
+	 * @param string $routeName
+	 * @param int $entityId
+	 * @param int domainId
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+	 */
+	public function getAllByRouteNameAndEntityIdAndDomainId($routeName, $entityId, $domainId) {
+		$criteria = [
+			'routeName' => $routeName,
+			'entityId' => $entityId,
+			'domainId' => $domainId,
+		];
+
+		return $this->getFriendlyUrlRepository()->findBy($criteria);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @return bool
 	 */
 	public function isMainFriendlyUrl(FriendlyUrl $friendlyUrl) {
-		$mainFriendlyUrl = $this->getByDomainIdAndRouteNameAndEntityId(
+		$mainFriendlyUrl = $this->getMainFriendlyUrl(
 			$friendlyUrl->getDomainId(),
 			$friendlyUrl->getRouteName(),
 			$friendlyUrl->getEntityId()
@@ -94,5 +129,4 @@ class FriendlyUrlRepository {
 
 		return $mainFriendlyUrl === $friendlyUrl;
 	}
-
 }

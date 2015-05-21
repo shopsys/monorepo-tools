@@ -43,12 +43,15 @@ class ArticleFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
 				],
 			])
-			->add('domainId', FormType::DOMAIN, ['required' => true])
 			->add('urls', FormType::URL_LIST, [
 				'route_name' => 'front_article_detail',
 				'entity_id' => $this->article === null ? null : $this->article->getId(),
 			])
 			->add('save', FormType::SUBMIT);
+
+		if ($this->article === null) {
+			$builder->add('domainId', FormType::DOMAIN, ['required' => true]);
+		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
