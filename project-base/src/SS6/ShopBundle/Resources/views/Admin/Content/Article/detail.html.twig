@@ -13,7 +13,7 @@
 				<div class="wrap-group">
 					{{ form_id(article|default(null)) }}
 
-					{{ form_row(form.domainId, { label: 'Doména' }) }}
+					{% block article_domain %}{% endblock %}
 					{% block article_url %}{% endblock %}
 
 					{{ form_row(form.name, { label: 'Název'}) }}

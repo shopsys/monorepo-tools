@@ -53,7 +53,6 @@ class Article {
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function edit(ArticleData $articleData) {
-		$this->domainId = $articleData->domainId;
 		$this->name = $articleData->name;
 		$this->text = $articleData->text;
 	}
