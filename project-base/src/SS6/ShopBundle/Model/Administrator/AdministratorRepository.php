@@ -59,15 +59,18 @@ class AdministratorRepository {
 	/**
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllQueryBuilder() {
-		return $this->getAdministratorRepository()->createQueryBuilder('a');
+	public function getAllListableQueryBuilder() {
+		return $this->getAdministratorRepository()
+			->createQueryBuilder('a')
+			->where('a.superadmin = :isSuperadmin')
+			->setParameter('isSuperadmin', false);
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getCount() {
-		return (int)($this->getAllQueryBuilder()
+	public function getCountExcludingSuperadmin() {
+		return (int)($this->getAllListableQueryBuilder()
 			->select('COUNT(a)')
 			->getQuery()->getSingleScalarResult());
 	}
@@ -82,5 +85,12 @@ class AdministratorRepository {
 			'id' => $id,
 			'loginToken' => $loginToken,
 		]);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator[]
+	 */
+	public function getAllSuperadmins() {
+		return $this->getAdministratorRepository()->findBy(['superadmin' => true]);
 	}
 }

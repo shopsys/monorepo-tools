@@ -39,33 +39,44 @@ class AdministratorService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param int $adminCount
+	 * @param int $adminCountExcludingSuperadmin
 	 */
-	public function delete(Administrator $administrator, $adminCount) {
-		if ($adminCount === 1) {
+	public function delete(Administrator $administrator, $adminCountExcludingSuperadmin) {
+		if ($adminCountExcludingSuperadmin === 1) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
 		}
 		if ($this->tokenStorage->getToken()->getUser() === $administrator) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException();
+		}
+		if ($administrator->isSuperadmin()) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\DeletingSuperadminException();
 		}
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param string[] $superadminUsernames
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator|null $administratorByUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function edit(
 		AdministratorData $administratorData,
 		Administrator $administrator,
+		array $superadminUsernames,
 		Administrator $administratorByUserName = null
 	) {
+		if (in_array($administratorData->username, $superadminUsernames)) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
+		}
 		if ($administratorByUserName !== null
 			&& $administratorByUserName !== $administrator
 			&& $administratorByUserName->getUsername() === $administratorData->username
 		) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administrator->getUsername());
+		}
+		if ($administrator->isSuperadmin()) {
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\EditingSuperadminException();
 		}
 		$administrator->edit($administratorData);
 		if ($administratorData->password !== null) {

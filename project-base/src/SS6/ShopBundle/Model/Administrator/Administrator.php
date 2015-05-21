@@ -73,6 +73,13 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $gridLimits;
 
 	/**
+	 * @ORM\Column(type="boolean")
+	 *
+	 * @var bool
+	 */
+	private $superadmin;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function __construct(AdministratorData $administratorData) {
@@ -82,6 +89,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 		$this->lastActivity = new DateTime();
 		$this->gridLimits = new ArrayCollection();
 		$this->loginToken = '';
+		$this->superadmin = $administratorData->superadmin;
 	}
 
 	/**
@@ -184,6 +192,20 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isSuperadmin() {
+		return $this->superadmin;
+	}
+
+	/**
+	 * @param bool $superadmin
+	 */
+	public function setSuperadmin($superadmin) {
+		$this->superadmin = $superadmin;
+	}
+
+	/**
 	 * @param string $username
 	 */
 	public function setUsername($username) {
@@ -266,6 +288,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 * @inheritDoc
 	 */
 	public function getRoles() {
+		if ($this->superadmin) {
+			return [Roles::ROLE_SUPER_ADMIN];
+		}
 		return [Roles::ROLE_ADMIN];
 	}
 

@@ -34,5 +34,4 @@ class MenuController extends Controller {
 			'activePath' => $activePath,
 		]);
 	}
-
 }

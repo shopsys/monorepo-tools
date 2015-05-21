@@ -55,6 +55,7 @@ security:
         success_handler: ss6.shop.security.logout_handler
 
   access_control:
+    - { path: ^/admin/superadmin/, roles: ROLE_SUPER_ADMIN }
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/, roles: ROLE_ADMIN }
     - { path: ^/efconnect, roles: ROLE_ADMIN }

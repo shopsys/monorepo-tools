@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
-use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
+use SS6\ShopBundle\Model\Administrator\AdministratorFacade;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,11 +15,21 @@ use Symfony\Component\HttpFoundation\Request;
 class AdministratorController extends Controller {
 
 	/**
+	 *
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorFacade
+	 */
+	private $administratorFacade;
+
+	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
 
-	public function __construct(Translator $translator) {
+	public function __construct(
+		AdministratorFacade $administratorFacade,
+		Translator $translator
+	) {
+		$this->administratorFacade = $administratorFacade;
 		$this->translator = $translator;
 	}
 
@@ -31,10 +41,7 @@ class AdministratorController extends Controller {
 		$gridFactory = $this->get('ss6.shop.grid.factory');
 		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 
-		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-		$queryBuilder
-			->select('a')
-			->from(Administrator::class, 'a');
+		$queryBuilder = $this->administratorFacade->getAllListableQueryBuilder();
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $gridFactory->create('administratorList', $dataSource);
@@ -91,6 +98,12 @@ class AdministratorController extends Controller {
 				);
 				return $this->redirect($this->generateUrl('admin_administrator_list'));
 
+			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
+				$flashMessageSender->addErrorFlashTwig(
+					'Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné', [
+						'name' => $administratorData->username,
+					]
+				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
 					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [
@@ -153,6 +166,12 @@ class AdministratorController extends Controller {
 				);
 				return $this->redirect($this->generateUrl('admin_administrator_list'));
 
+			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
+				$flashMessageSender->addErrorFlashTwig(
+					'Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné', [
+						'name' => $administratorData->username,
+					]
+				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$flashMessageSender->addErrorFlashTwig(
 					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [

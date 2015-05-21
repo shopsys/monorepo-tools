@@ -30,7 +30,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 * @dataProvider adminTestableUrlsProvider
 	 */
 	public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
-		$this->getClient(false, 'admin', 'admin123')->request('GET', $url);
+		$this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
 
 		$statusCode = $this->getClient()->getResponse()->getStatusCode();
 

@@ -70,6 +70,16 @@ Navigatoin panel with active states and subnavigation
 		background: @bg-info;
 		color: @color-0;
 	}
+
+	&.box-panel__item--superadmin > a {
+		background: lighten(@color-red, 10%);
+		color: @color-f;
+	}
+}
+
+.box-panel__item--superadmin a {
+	background: lighten(@color-red, 30%);
+	color: @color-0;
 }
 
 .box-panel__submenu {
@@ -102,4 +112,13 @@ Navigatoin panel with active states and subnavigation
 		background: @bg-info;
 		color: @color-0;
 	}
+
+	&.box-panel__submenu__item--superadmin > a {
+		background: lighten(@color-red, 10%);
+		color: @color-f;
+	}
+}
+.box-panel__submenu__item--superadmin a {
+	background: lighten(@color-red, 40%);
+	color: @color-0;
 }
