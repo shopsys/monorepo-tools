@@ -21,9 +21,14 @@
 	};
 
 	SS6.addProduct.onSuccess = function (data) {
+		var $data = $(data);
+
 		SS6.window({
-			content: data
+			content: $data
 		});
+
+		// TODO: temporal solution, US-537 should fix this
+		$data.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 
 		$('#cart-box').trigger('reload');
 	};
