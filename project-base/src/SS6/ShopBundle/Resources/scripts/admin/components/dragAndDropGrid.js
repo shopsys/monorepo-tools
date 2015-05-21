@@ -65,6 +65,7 @@
 				SS6.window({content: 'Pořadí se nepodařilo uložit'});
 			}
 		});
+		$grid.trigger('save');
 	};
 
 	SS6.dragAndDropGrid.onUpdate = function (event, ui) {
@@ -72,6 +73,7 @@
 
 		$grid.data('positionsChanged', true);
 		SS6.dragAndDropGrid.highlightChanges($grid, true);
+		$grid.trigger('update');
 	};
 
 	SS6.dragAndDropGrid.highlightChanges = function ($grid, highlight) {

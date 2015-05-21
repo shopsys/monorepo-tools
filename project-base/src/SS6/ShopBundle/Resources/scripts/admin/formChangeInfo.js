@@ -34,6 +34,14 @@
 		}
 	};
 
+	SS6.formChangeInfo.removeInfo = function () {
+		var $fixedBar = $('.main-content .window-fixed-bar');
+		var $infoDiv = $fixedBar.find('#js-form-change-info');
+		if (!($infoDiv.length === 0)) {
+			$infoDiv.remove();
+		}
+	};
+
 	$(document).ready(function () {
 		SS6.formChangeInfo.init();
 	});
