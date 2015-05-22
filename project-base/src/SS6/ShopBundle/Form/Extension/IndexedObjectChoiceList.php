@@ -20,7 +20,7 @@ class IndexedObjectChoiceList extends ObjectChoiceList {
 
 	/**
 	 * @param array|\Traversable $choices
-	 * #param string $indexPath
+	 * @param string $indexPath
 	 * @param string|null $labelPath
 	 * @param array $preferredChoices
 	 * @param string|null $groupPath
