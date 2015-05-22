@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Component\Translation;
 
 use Symfony\Component\Config\Resource\FileResource;
-use Symfony\Component\Translation\Loader\PoFileLoader;
+use Symfony\Component\Translation\Loader\PoFileLoader as BasePoFileLoader;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class PoFileLoader extends PoFileLoader {
+class PoFileLoader extends BasePoFileLoader {
 
 	/**
 	 * @param string $resource
