@@ -38,13 +38,16 @@
 				data: {page: page + 1},
 				success: function (data) {
 					var $response = $($.parseHTML(data));
-					var nextProducts = $response.find('>li');
-					$currentProductList.append(nextProducts);
+					var $nextProducts = $response.find('>li');
+					$currentProductList.append($nextProducts);
 					$loadMoreSpinner.hide();
 					page++;
 					paginationToItem += nextProducts.length;
 					$paginationToItemSpan.text(paginationToItem);
 					updateLoadMoreButton();
+
+					// TODO: temporal solution, US-537 should fix this
+					$nextProducts.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 				}
 			});
 		};
