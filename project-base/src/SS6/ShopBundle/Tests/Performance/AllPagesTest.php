@@ -18,7 +18,7 @@ class AllPagesTest extends FunctionalTestCase {
 	public function testAdminPages() {
 		$this->doTestPagesWithProgress(
 			$this->createUrlProvider()->getAdminTestableUrlsProviderData(),
-			'admin',
+			'superadmin',
 			'admin123',
 			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-admin.csv'
 		);
