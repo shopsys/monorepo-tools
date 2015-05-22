@@ -44,6 +44,7 @@ class MailTemplateFormType extends AbstractType {
 				$builder
 					->create('body', FormType::WYSIWYG, [
 						'required' => true,
+						'config_name' => 'email',
 						'constraints' => $this->getBodyConstraints(),
 					])
 					->addModelTransformer(new EmptyWysiwygTransformer())
