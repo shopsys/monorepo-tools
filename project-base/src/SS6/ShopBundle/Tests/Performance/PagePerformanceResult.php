@@ -72,4 +72,11 @@ class PagePerformanceResult {
 		return max($this->queryCounts);
 	}
 
+	/**
+	 * @return int
+	 */
+	public function getMeasurementsCount() {
+		return count($this->durations);
+	}
+
 }
