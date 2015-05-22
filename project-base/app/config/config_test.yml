@@ -21,6 +21,10 @@ monolog:
       type: "null"
     nested:
       type: "null"
+    cron:
+      type: "null"
+    cron_console:
+      type: "null"
     console:
       type: "null"
 

@@ -2,16 +2,13 @@
 
 namespace SS6\ShopBundle\Command;
 
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use SS6\ShopBundle\Component\Cron\CronFacade;
+use SS6\ShopBundle\Component\Mutex\MutexFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CronCommand extends ContainerAwareCommand {
-
-	const PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT = 20;
-	const PRODUCTS_AVAILABILITY_RECALCULATIONS_TIMELIMIT = 20;
 
 	protected function configure() {
 		$this
@@ -24,40 +21,30 @@ class CronCommand extends ContainerAwareCommand {
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		$this->recalculateProductsPrices($output);
-		$this->recalculateProductsAvailability($output);
+		$cronFacade = $this->getContainer()->get(CronFacade::class);
+		/* @var $cronFacade \SS6\ShopBundle\Component\Cron\CronFacade */
+		$mutexFactory = $this->getContainer()->get(MutexFactory::class);
+		/* @var $mutexFactory \SS6\ShopBundle\Component\Mutex\MutexFactory */
+
+		$mutex = $mutexFactory->getCronMutex();
+		if ($mutex->acquireLock(0)) {
+			$cronFacade->runServicesForTime($this->getActualRoundedTime());
+			$mutex->releaseLock();
+		} else {
+			throw new \SS6\ShopBundle\Command\Exception\CronCommandException('Cron can run only one at this time');
+		}
+
 	}
 
 	/**
-	 * @param \Symfony\Component\Console\Output\OutputInterface $output
+	 * @return \DateTime
 	 */
-	private function recalculateProductsPrices(OutputInterface $output) {
-		$output->writeln('Product price recalculation');
+	private function getActualRoundedTime() {
+		$time = new \DateTime(null);
+		$time->modify('-' . $time->format('s') . ' sec');
+		$time->modify('-' . ($time->format('i') % 5) . ' min');
 
-		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
-		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
-		$timeStart = time();
-		$recalculatedCount = $productPriceRecalculator->runScheduledRecalculations(function () use ($timeStart) {
-			return time() - $timeStart < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
-		});
-
-		$output->writeln('Recalculated: ' . $recalculatedCount);
-	}
-
-	/**
-	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 */
-	private function recalculateProductsAvailability(OutputInterface $output) {
-		$output->writeln('Product availability recalculation');
-
-		$productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
-		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
-		$timeStart = time();
-		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculations(function () use ($timeStart) {
-			return time() - $timeStart < self::PRODUCTS_PRICES_RECALCULATIONS_TIMELIMIT;
-		});
-
-		$output->writeln('Recalculated: ' . $recalculatedCount);
+		return $time;
 	}
 
 }

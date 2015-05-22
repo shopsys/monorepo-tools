@@ -53,7 +53,7 @@
 
 	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,grunt,db-rebuild,dirs-structure,warmup"/>
 	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,warmup"/>
-	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo,products-visibility"/>
+	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 
 	<target name="assetic">
@@ -152,8 +152,9 @@
 			<arg value="--no-interaction" />
 		</exec>
 	</target>
-	
+
 	<target name="dirs-structure" depends="img-dirs">
+		<mkdir dir="${path.app}/lock" mode="0770"/>
 		<mkdir dir="${path.web}/assets/content/feeds" mode="0770"/>
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.web}/assets/content/feeds/">
@@ -194,13 +195,6 @@
 			checkreturn="true"
 		>
 			<arg value="install"/>
-		</exec>
-	</target>
-
-	<target name="products-visibility">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:product:visibility" />
 		</exec>
 	</target>
 

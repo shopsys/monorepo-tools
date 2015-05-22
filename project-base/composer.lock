@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "29c4350a4895463389491d1ce80cc9ad",
+    "hash": "d500383688b758d6f992ac764a834b0a",
     "packages": [
+        {
+            "name": "arvenil/ninja-mutex",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arvenil/ninja-mutex.git",
+                "reference": "b5be60f8798bdaa07b0bcf9d0a5bc431c3a2de7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arvenil/ninja-mutex/zipball/b5be60f8798bdaa07b0bcf9d0a5bc431c3a2de7b",
+                "reference": "b5be60f8798bdaa07b0bcf9d0a5bc431c3a2de7b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "v0.1.2",
+                "ext-memcache": "*",
+                "ext-memcached": "*",
+                "ext-pdo_mysql": "*",
+                "mikey179/vfsstream": "v1.4.0",
+                "predis/predis": "v1.0.0",
+                "scrutinizer/ocular": "1.1.1"
+            },
+            "suggest": {
+                "ext-memcache": "Create mutex using memcache extension",
+                "ext-memcached": "Create mutex using memcached extension",
+                "ext-pdo_mysql": "Create mutex using MySql",
+                "predis/predis": "Create mutex using Predis (client library for Redis)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "NinjaMutex": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Dziedzic",
+                    "email": "arvenil@klecza.pl"
+                }
+            ],
+            "description": "Simple to use mutex implementation that can use flock, memcache, memcached, mysql or redis for locking",
+            "homepage": "https://github.com/arvenil/ninja-mutex",
+            "keywords": [
+                "flock",
+                "lock",
+                "locking",
+                "memcache",
+                "memcached",
+                "mutex",
+                "mysql",
+                "redis"
+            ],
+            "time": "2014-10-01 01:23:11"
+        },
         {
             "name": "behat/transliterator",
             "version": "v1.0.1",
@@ -432,7 +494,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1292,7 +1354,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4",
+                "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/88ba9696c77da536fba0719f871963d61ec1d2bf",
                 "reference": "bb2be7e",
                 "shasum": ""
             },
@@ -4426,68 +4488,6 @@
     ],
     "packages-dev": [
         {
-            "name": "arvenil/ninja-mutex",
-            "version": "0.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/arvenil/ninja-mutex.git",
-                "reference": "b5be60f8798bdaa07b0bcf9d0a5bc431c3a2de7b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/arvenil/ninja-mutex/zipball/b5be60f8798bdaa07b0bcf9d0a5bc431c3a2de7b",
-                "reference": "b5be60f8798bdaa07b0bcf9d0a5bc431c3a2de7b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "v0.1.2",
-                "ext-memcache": "*",
-                "ext-memcached": "*",
-                "ext-pdo_mysql": "*",
-                "mikey179/vfsstream": "v1.4.0",
-                "predis/predis": "v1.0.0",
-                "scrutinizer/ocular": "1.1.1"
-            },
-            "suggest": {
-                "ext-memcache": "Create mutex using memcache extension",
-                "ext-memcached": "Create mutex using memcached extension",
-                "ext-pdo_mysql": "Create mutex using MySql",
-                "predis/predis": "Create mutex using Predis (client library for Redis)"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "NinjaMutex": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kamil Dziedzic",
-                    "email": "arvenil@klecza.pl"
-                }
-            ],
-            "description": "Simple to use mutex implementation that can use flock, memcache, memcached, mysql or redis for locking",
-            "homepage": "https://github.com/arvenil/ninja-mutex",
-            "keywords": [
-                "flock",
-                "lock",
-                "locking",
-                "memcache",
-                "memcached",
-                "mutex",
-                "mysql",
-                "redis"
-            ],
-            "time": "2014-10-01 01:23:11"
-        },
-        {
             "name": "codeception/codeception",
             "version": "dev-master",
             "source": {
@@ -4497,7 +4497,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ba2c7174b9f15ca1a3812874fae5280c1422030e",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ee85c33afd0afda9debee2d4b35421d930913598",
                 "reference": "3234289",
                 "shasum": ""
             },

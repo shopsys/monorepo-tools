@@ -1,0 +1,14 @@
+- service: SS6\ShopBundle\Model\Product\Pricing\ProductPriceCronService
+  time:
+    minutes: '*'
+    hours: '*'
+
+- service: SS6\ShopBundle\Model\Product\ProductVisibilityCronService
+  time:
+    minutes: '0'
+    hours: '0'
+
+- service: SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCronService
+  time:
+    minutes: '*'
+    hours: '*'
