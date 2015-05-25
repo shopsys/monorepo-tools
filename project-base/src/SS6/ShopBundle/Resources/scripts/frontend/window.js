@@ -45,7 +45,7 @@
 			$activeWindow.trigger('windowFastClose');
 		}
 
-		var $window = $('<div class="window window--active"></div>');
+		var $window = $('<div class="window window--wide window--active"></div>');
 		var $windowContent = $('<div class="js-window-content"></div>').html(options.content);
 
 		$activeWindow = $window;

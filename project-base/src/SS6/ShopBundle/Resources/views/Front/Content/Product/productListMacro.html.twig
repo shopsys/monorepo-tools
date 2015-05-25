@@ -2,7 +2,7 @@
 	{% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 	<ul class="list-items js-product-list">
 		{% for productDetail in productDetails %}
-			<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
+			<li class="list-items__item">
 				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-items__block">
 					<div class="list-items__image">
 						{{ productFlags.list(productDetail.product, 'list-flag--in-list') }}

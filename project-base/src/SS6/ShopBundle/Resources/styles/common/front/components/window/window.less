@@ -2,9 +2,19 @@
 Floating window
 ============
 Floating fixed window for actions or messages, --active modifier shows window,
-default is hidden
+default is hidden, --wide is modifier for bigger and absolute positioned window
 
 	<div class="window window--active">
+		<a href="#" class="window__close">X</a>
+		<p>
+			Content of window
+		</p>
+		<div class="window__actions">
+			<a href="#" class="button">Button or something</a>
+		</div>
+	</div>
+
+	<div class="window window--wide window--active">
 		<a href="#" class="window__close">X</a>
 		<p>
 			Content of window
@@ -31,6 +41,14 @@ default is hidden
 	background: @bg-window;
 
 	.box-shadow(0 0 20px rgba(0,0,0, 0.3));
+
+	&--wide {
+		position: absolute;
+		top: 200px;
+		width: @window-wide-width;
+		height: @window-wide-height;
+		margin: 0 0 0 -@window-wide-width/2;
+	}
 }
 
 .window--active {

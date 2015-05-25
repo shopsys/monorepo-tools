@@ -4,7 +4,7 @@ Main item list
 item list with image, prices and adding to cart
 
 	<ul class="list-items">
-		<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
+		<li class="list-items__item">
 			<a href="#" class="list-items__block">
 				<div class="list-items__image">
 					<span>
@@ -42,7 +42,7 @@ item list with image, prices and adding to cart
 				</div>
 			</div>
 		</li>
-		<li class="list-items__item col-xs-12 col-sm-6 col-md-4">
+		<li class="list-items__item">
 			<a href="#" class="list-items__block">
 				<div class="list-items__image">
 					<span>
@@ -88,19 +88,35 @@ item list with image, prices and adding to cart
 	.cfx();
 	width: 100%;
 
-	text-align: center;
+	font-size: 0;
+	text-align: left;
 }
 
 .list-items__item {
-	float: left;
+	display: inline-block;
 	height: 420px;
 	position: relative;
 	margin-bottom: 40px;
+	width: 100% / 3;
+	padding: 0 15px;
 
+	font-size: 14px;
 	border-left: 1px solid @color-border;
 
 	&:nth-child(3n+1) {
 		border-left: 0;
+	}
+
+	.list-items--small & {
+		width: 100% / 2;
+
+		&:nth-child(3n+1) {
+			border-left: 1px solid @color-border;
+		}
+
+		&:nth-child(2n+1) {
+			border-left: 0;
+		}
 	}
 }
 
