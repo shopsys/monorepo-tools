@@ -1,5 +1,13 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% block grid_value_cell_id_preview %}
+	<div class="js-order-preview" data-preview-url="{{ url('admin_order_preview', {id: value}) }}">
+		<i class="fa fa-shopping-cart js-order-preview-icon"></i>
+		<div class="js-order-preview-box">
+		</div>
+	</div>
+{% endblock %}
+
 {% block grid_value_cell_id_number %}
 	<a href="{{ url('admin_order_edit', { id: row.id }) }}">{{ value }}</a>
 {% endblock %}

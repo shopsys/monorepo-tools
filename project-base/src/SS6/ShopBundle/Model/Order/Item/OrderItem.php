@@ -134,6 +134,13 @@ abstract class OrderItem {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getTotalPriceWithVat() {
+		return $this->priceWithVat * $this->quantity;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
 	 */
 	public function edit(OrderItemData $orderItemData) {
