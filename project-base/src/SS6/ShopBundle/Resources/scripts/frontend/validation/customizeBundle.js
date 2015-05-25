@@ -23,6 +23,10 @@
 		return $(form).find('.form-error:first, .js-validation-errors-list li[class]:first').size() === 0;
 	};
 
+	SS6.validation.getErrorListClass = function (elementName) {
+		return elementName.replace(/-/g, '_').replace('form_error_', 'js-validation-error-list-');
+	};
+
 	SS6.validation.ckeditorValidationInit = function (element) {
 		$.each(element.children, function(index, childElement) {
 			if (childElement.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
@@ -161,6 +165,74 @@
 		return FpJsFormValidator._checkValidationGroups(needle, haystack);
 	};
 
+	// determine domElement as the closest ancestor of all children
+	FpJsFormValidator._findDomElement = FpJsFormValidator.findDomElement;
+	FpJsFormValidator.findDomElement = function (model) {
+		return SS6.validation.findDomElementRecursive(model);
+	};
+
+	SS6.validation.findDomElementRecursive = function (model) {
+		var domElement = FpJsFormValidator._findDomElement(model);
+
+		if (domElement !== null) {
+			return domElement;
+		}
+
+		var childDomElements = [];
+		for (var i in model.children) {
+			var child = model.children[i];
+			var childDomElement = SS6.validation.findDomElementRecursive(child);
+
+			if (childDomElement !== null) {
+				childDomElements.push(childDomElement);
+			}
+		}
+
+		return SS6.validation.findClosestCommonAncestor(childDomElements);
+	};
+
+	SS6.validation.findClosestCommonAncestor = function (domElements) {
+		if (domElements.length === 0) {
+			return null;
+		}
+
+		var domElementsAncestors = [];
+
+		for (var i in domElements) {
+			var domElement = domElements[i];
+			var $domElementParents = $(domElement).parents();
+
+			var domElementAncestors = SS6.validation.reverseCollectionToArray($domElementParents);
+
+			domElementsAncestors.push(domElementAncestors);
+		}
+
+		var firstDomElementAncestors = domElementsAncestors[0];
+
+		var closestCommonAncestor = null;
+		for (var ancestorLevel = 0; ancestorLevel < firstDomElementAncestors.length; ancestorLevel++) {
+			for (var i = 1; i < domElementsAncestors.length; i++) {
+				if (domElementsAncestors[i][ancestorLevel] !== firstDomElementAncestors[ancestorLevel]) {
+					return closestCommonAncestor;
+				}
+			}
+
+			closestCommonAncestor = firstDomElementAncestors[ancestorLevel];
+		}
+
+		return closestCommonAncestor;
+	};
+
+	SS6.validation.reverseCollectionToArray = function ($collection) {
+		var result = [];
+
+		for (var i = $collection.size() - 1; i >= 0; i--) {
+			result.push($collection[i]);
+		}
+
+		return result;
+	};
+
 	var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
 	SymfonyComponentValidatorConstraintsUrl = function () {
 		this.message = '';
@@ -168,9 +240,7 @@
 		this.validate = function (value, element) {
 			var regexp = /^(https?:\/\/|(?=.*\.))([0-9a-z\u00C0-\u02FF\u0370-\u1EFF](([-0-9a-z\u00C0-\u02FF\u0370-\u1EFF]{0,61}[0-9a-z\u00C0-\u02FF\u0370-\u1EFF])?\.)*[a-z\u00C0-\u02FF\u0370-\u1EFF][-0-9a-z\u00C0-\u02FF\u0370-\u1EFF]{0,17}[a-z\u00C0-\u02FF\u0370-\u1EFF]|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|\[[0-9a-f:]{3,39}\])(:\d{1,5})?(\/\S*)?$/i;
 			var errors = [];
-			var f = FpJsFormValidator;
-
-			if (!f.isValueEmty(value) && !regexp.test(value)) {
+			if (!FpJsFormValidator.isValueEmty(value) && !regexp.test(value)) {
 				errors.push(this.message.replace('{{ value }}', String('http://' + value)));
 			}
 

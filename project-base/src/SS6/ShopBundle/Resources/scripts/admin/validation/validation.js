@@ -23,53 +23,44 @@
 	};
 
 	SS6.validation.showErrors = function (errors, elementName) {
-
-		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this));
-		var $errorList = SS6.validation.findErrorList($(this));
+		var $errorList = SS6.validation.findOrCreateErrorList($(this), elementName);
 		var $errorListUl = $errorList.find('ul:first');
+		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this), elementName);
 
-		var errorClass = 'js-' + elementName;
-		$errorListUl.find('li:not([class]), li.' + errorClass).remove();
+		var elementErrorClass = 'js-' + elementName;
+		$errorListUl.find('li:not([class]), li.' + elementErrorClass).remove();
 
 		if (errors.length > 0) {
 			$elementsToHighlight.addClass('form-error');
 			$.each(errors, function (key, message) {
-				$errorListUl.append($('<li/>').addClass(errorClass).text(message));
+				$errorListUl.append($('<li/>').addClass(elementErrorClass).text(message));
 			});
 			$errorList.show();
-		} else {
-			if ($errorListUl.find('li').size() === 0) {
-				$elementsToHighlight.removeClass('form-error');
-				$errorList.hide();
-			}
+		} else if ($errorListUl.find('li').size() === 0) {
+			$elementsToHighlight.removeClass('form-error');
+			$errorList.hide();
 		}
 
 		SS6.validation.highlightSubmitButtons($(this).closest('form'));
 	};
 
-	SS6.validation.findFormContainer = function ($formInput) {
-		var $formConatiner = $formInput.closest('.form-line');
-		if ($formConatiner.size() === 0) {
-			return $formInput.closest('.form-group, .js-form-group');
+	SS6.validation.findOrCreateErrorList = function ($formInput, elementName) {
+		var errorListClass = SS6.validation.getErrorListClass(elementName);
+		var $errorList = $('.' + errorListClass);
+		if ($errorList.size() === 0) {
+			$errorList = $($.parseHTML(
+				'<div class="in-message in-message--danger js-validation-errors-list ' + errorListClass + '">\
+					<ul class="in-message__list"></ul>\
+				</div>'
+			));
+			$errorList.insertBefore($formInput);
 		}
 
-		return $formConatiner;
-	}
-
-	SS6.validation.findErrorList = function ($formInput) {
-		var $formConatiner = SS6.validation.findFormContainer($formInput);
-		return $formConatiner.find('.js-validation-errors-list:first');
+		return $errorList;
 	};
 
 	SS6.validation.findElementsToHighlight = function ($formInput) {
-		var $formConatiner = SS6.validation.findFormContainer($formInput);
-		if ($formConatiner.hasClass('form-line')) {
-			var $elementsToHighlight = $formConatiner;
-		} else {
-			var $elementsToHighlight =  $formInput;
-		}
-
-		return $elementsToHighlight.filter('input, select, textarea, .form-line');
+		return $formInput.filter('input, select, textarea, .form-line');
 	};
 
 	SS6.validation.highlightSubmitButtons = function($form){
