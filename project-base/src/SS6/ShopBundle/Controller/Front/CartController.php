@@ -7,7 +7,9 @@ use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Cart\CartFacade;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
@@ -16,9 +18,19 @@ use Symfony\Component\HttpFoundation\Request;
 class CartController extends BaseController {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade
+	 */
+	private $accessoryFacade;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -36,12 +48,16 @@ class CartController extends BaseController {
 	private $productDetailFactory;
 
 	public function __construct(
+		AccessoryFacade $accessoryFacade,
 		CartFacade $cartFacade,
+		CurrentCustomer $currentCustomer,
 		Domain $domain,
 		FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
 		ProductDetailFactory $productDetailFactory
 	) {
+		$this->accessoryFacade = $accessoryFacade;
 		$this->cartFacade = $cartFacade;
+		$this->currentCustomer = $currentCustomer;
 		$this->domain = $domain;
 		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
 		$this->productDetailFactory = $productDetailFactory;
@@ -202,7 +218,11 @@ class CartController extends BaseController {
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 
-				$accessories = $addProductResult->getCartItem()->getProduct()->getAccessories()->toArray();
+				$accessories = $this->accessoryFacade->getTop3ListableAccessories(
+					$addProductResult->getCartItem()->getProduct(),
+					$this->domain->getId(),
+					$this->currentCustomer->getPricingGroup()
+				);
 				$accessoryDetails = $this->productDetailFactory->getDetailsForProducts($accessories);
 
 				return $this->render('@SS6Shop/Front/Inline/Cart/afterAddWindow.html.twig', [
