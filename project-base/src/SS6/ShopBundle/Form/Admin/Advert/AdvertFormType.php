@@ -79,7 +79,7 @@ class AdvertFormType extends AbstractType {
 			->add('positionName', FormType::CHOICE, [
 				'required' => true,
 				'choices' => $this->advertPositionsLocalizedNamesByName,
-				'placeholder' => '-- Vyberte plochu --',
+				'placeholder' => $this->translator->trans('-- Vyberte plochu --'),
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyberte reklamní plochu']),
 				],
