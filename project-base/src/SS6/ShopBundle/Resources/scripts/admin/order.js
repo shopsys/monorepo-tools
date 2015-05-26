@@ -6,6 +6,7 @@
 	SS6.order.OrderPreview = function ($orderPreview) {
 		var $previewIcon = $orderPreview.find('.js-order-preview-icon');
 		var $previewBox = $orderPreview.find('.js-order-preview-box');
+		var $previewBoxWindow = $previewBox.find('.js-order-preview-box-window');
 
 		var url = $orderPreview.data('preview-url');
 		var isLoading = false;
@@ -44,7 +45,7 @@
 
 		var showInWindow = function () {
 			SS6.window({
-				content: $previewBox.html(),
+				content: $previewBoxWindow.html(),
 				wide: true
 			});
 		};
@@ -52,7 +53,8 @@
 		var onLoadPreview = function (responseHtml) {
 			isLoading = false;
 			isLoaded = true;
-			$previewBox.html(responseHtml);
+			$previewBoxWindow.html(responseHtml);
+			$previewBoxWindow.show();
 			if (showInWindowAfterLoad) {
 				showInWindow();
 			}
