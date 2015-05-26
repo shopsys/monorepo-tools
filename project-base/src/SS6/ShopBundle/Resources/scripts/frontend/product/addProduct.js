@@ -21,7 +21,7 @@
 	};
 
 	SS6.addProduct.onSuccess = function (data) {
-		var $data = $(data);
+		var $data = $($.parseHTML(data));
 
 		SS6.window({
 			content: $data,
