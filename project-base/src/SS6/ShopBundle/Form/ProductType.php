@@ -47,6 +47,7 @@ class ProductType extends AbstractType {
 		parent::buildView($view, $form, $options);
 
 		$view->vars['placeholder'] = $options['placeholder'];
+		$view->vars['enableRemove'] = $options['enableRemove'];
 
 		$product = $form->getData();
 		if ($product !== null) {
@@ -75,6 +76,7 @@ class ProductType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
 			'placeholder' => $this->translator->trans('Vyberte produkt'),
+			'enableRemove' => false,
 		]);
 	}
 

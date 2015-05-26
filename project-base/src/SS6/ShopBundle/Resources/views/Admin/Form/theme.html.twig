@@ -199,7 +199,7 @@
 {% endblock checkbox_label %}
 
 {% block product_widget %}
-	<span class="js-product-picker-container">
+	<span class="js-product-picker-container" data-placeholder="{{ placeholder }}">
 		<input
 			class="form-control js-product-picker-label"
 			value="{{ productName|default(placeholder) }}"
@@ -216,6 +216,11 @@
 		>
 			...
 		</button>
+		{% if enableRemove %}
+			<a href="#" class="js-product-picker-remove-button display-none">
+				<i class="fa fa-trash-o" title="{{ 'Odebrat'|trans }}"></i>
+			</a>
+		{% endif %}
 		{{- form_widget(form, {attr: {class: 'js-product-picker-input'}}) -}}
 	</span>
 {% endblock product_widget %}
