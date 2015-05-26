@@ -317,7 +317,7 @@
     <inspection_tool class="PhpExpressionResultUnusedInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpForeachArrayIsUsedAsValueInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpForeachNestedOuterKeyValueVariablesConflictInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PhpHierarchyChecksInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="PhpHierarchyChecksInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PhpIllegalArrayKeyTypeInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpIllegalPsrClassPathInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpIncludeInspection" enabled="false" level="WARNING" enabled_by_default="false" />
