@@ -73,9 +73,11 @@ class ProductPriceRecalculator {
 			$this->recalculateProductPrices($row[0]);
 			$count++;
 			if ($count % self::BATCH_SIZE === 0) {
+				$this->clearCache();
 				$this->em->clear();
 			}
 		}
+		$this->clearCache();
 		$this->em->clear();
 
 		return $count;
@@ -87,6 +89,10 @@ class ProductPriceRecalculator {
 			$this->recalculateProductPrices($product);
 		}
 		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+	}
+
+	private function clearCache() {
+		$this->allPricingGroups = null;
 	}
 
 	/**

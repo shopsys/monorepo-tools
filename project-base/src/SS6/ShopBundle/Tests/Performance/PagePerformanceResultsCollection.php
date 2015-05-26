@@ -19,12 +19,14 @@ class PagePerformanceResultsCollection {
 	 * @param string $url
 	 * @param float $duration
 	 * @param int $queryCount
+	 * @param int $statusCode
+	 * @param boolean $isSuccessful
 	 */
-	public function addMeasurement($routeName, $url, $duration, $queryCount) {
+	public function addMeasurement($routeName, $url, $duration, $queryCount, $statusCode, $isSuccessful) {
 		if (!array_key_exists($routeName, $this->results)) {
 			$this->results[$routeName] = new PagePerformanceResult($routeName, $url);
 		}
-		$this->results[$routeName]->addMeasurement($duration, $queryCount);
+		$this->results[$routeName]->addMeasurement($duration, $queryCount, $statusCode, $isSuccessful);
 	}
 
 	/**

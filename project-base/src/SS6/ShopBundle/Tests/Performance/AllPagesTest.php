@@ -18,8 +18,9 @@ class AllPagesTest extends FunctionalTestCase {
 	public function testAdminPages() {
 		$this->doTestPagesWithProgress(
 			$this->createUrlProvider()->getAdminTestableUrlsProviderData(),
-			'admin',
-			'admin123'
+			'superadmin',
+			'admin123',
+			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-admin.csv'
 		);
 	}
 
@@ -27,7 +28,8 @@ class AllPagesTest extends FunctionalTestCase {
 		$this->doTestPagesWithProgress(
 			$this->createUrlProvider()->getFrontTestableUrlsProviderData(),
 			'no-reply@netdevelo.cz',
-			'user123'
+			'user123',
+			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-front.csv'
 		);
 	}
 
@@ -51,8 +53,14 @@ class AllPagesTest extends FunctionalTestCase {
 	 * @param array $testableUrlsDataProviderData
 	 * @param string $username
 	 * @param string $password
+	 * @param string $jmeterOutputFilename
 	 */
-	private function doTestPagesWithProgress(array $testableUrlsDataProviderData, $username, $password) {
+	private function doTestPagesWithProgress(
+		array $testableUrlsDataProviderData,
+		$username,
+		$password,
+		$jmeterOutputFilename
+	) {
 		$consoleOutput = new ConsoleOutput();
 		$thresholdService = new ThresholdService();
 		$pagePerformanceResultsCollection = new PagePerformanceResultsCollection();
@@ -63,7 +71,7 @@ class AllPagesTest extends FunctionalTestCase {
 			$pageIndex = 0;
 			foreach ($testableUrlsDataProviderData as $testUrlData) {
 				$pageIndex++;
-				list($routeName, $url, , $asLogged) = $testUrlData;
+				list($routeName, $url, $expectedStatusCode, $asLogged) = $testUrlData;
 
 				$progressLine = sprintf(
 					'%s: %3d%% (%s)',
@@ -73,7 +81,15 @@ class AllPagesTest extends FunctionalTestCase {
 				);
 				$consoleOutput->write(str_pad($progressLine, 80) . "\r");
 
-				$this->doTestUrl($pagePerformanceResultsCollection, $routeName, $url, $asLogged, $username, $password);
+				$this->doTestUrl(
+					$pagePerformanceResultsCollection,
+					$routeName,
+					$url,
+					$expectedStatusCode,
+					$asLogged,
+					$username,
+					$password
+				);
 			}
 
 			if ($pass === 0) {
@@ -82,6 +98,8 @@ class AllPagesTest extends FunctionalTestCase {
 		}
 
 		$this->printSummary($pagePerformanceResultsCollection, $thresholdService, $consoleOutput);
+		$this->saveJmeterCsvReport($pagePerformanceResultsCollection, $jmeterOutputFilename);
+
 		$this->doAssert($pagePerformanceResultsCollection, $thresholdService);
 	}
 
@@ -89,6 +107,7 @@ class AllPagesTest extends FunctionalTestCase {
 	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
 	 * @param string $routeName
 	 * @param string $url
+	 * @param int $expectedStatusCode
 	 * @param bool $asLogged
 	 * @param string $username
 	 * @param string $password
@@ -97,6 +116,7 @@ class AllPagesTest extends FunctionalTestCase {
 		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
 		$routeName,
 		$url,
+		$expectedStatusCode,
 		$asLogged,
 		$username,
 		$password
@@ -121,11 +141,15 @@ class AllPagesTest extends FunctionalTestCase {
 		$dbCollector = $profile->getCollector('db');
 		/* @var	$dbCollector \Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector */
 
+		$statusCode = $client->getResponse()->getStatusCode();
+
 		$pagePerformanceResultsCollection->addMeasurement(
 			$routeName,
 			$url,
 			$timeCollector->getDuration(),
-			$dbCollector->getQueryCount()
+			$dbCollector->getQueryCount(),
+			$statusCode,
+			$statusCode === $expectedStatusCode
 		);
 	}
 
@@ -166,6 +190,45 @@ class AllPagesTest extends FunctionalTestCase {
 				$consoleOutput->write('<' . $resultTag . '>Test failed</' . $resultTag . '>');
 				return;
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
+	 * @param string $outputFilename
+	 */
+	private function saveJmeterCsvReport(
+		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
+		$outputFilename
+	) {
+		$handle = fopen($outputFilename, 'w');
+
+		fputcsv($handle, [
+			'timestamp',
+			'elapsed',
+			'label',
+			'responseCode',
+			'success',
+			'URL',
+			'SampleCount',
+			'ErrorCount',
+			'Variables',
+		]);
+
+		foreach ($pagePerformanceResultsCollection->getAll() as $pagePerformanceResult) {
+			fputcsv($handle, [
+				time(),
+				$pagePerformanceResult->getAvgDuration(),
+				$pagePerformanceResult->getRouteName(),
+				$pagePerformanceResult->getMostImportantStatusCode(),
+				($pagePerformanceResult->getErrorsCount() === 0) ? 'true' : 'false',
+				'/' . $pagePerformanceResult->getUrl(),
+				$pagePerformanceResult->getMeasurementsCount(),
+				$pagePerformanceResult->getErrorsCount(),
+				$pagePerformanceResult->getMaxQueryCount(),
+			]);
+		}
+
+		fclose($handle);
 	}
 
 	/**
