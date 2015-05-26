@@ -24,7 +24,8 @@
 		var $data = $(data);
 
 		SS6.window({
-			content: $data
+			content: $data,
+			wide: true
 		});
 
 		// TODO: temporal solution, US-537 should fix this
