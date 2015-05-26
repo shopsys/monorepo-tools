@@ -200,7 +200,7 @@ class OrderController extends Controller {
 		$transports = $transportEditFacade->getVisibleOnCurrentDomain($payments);
 
 		$flow->setFormTypesData($transports, $payments);
-		$flow->bind(new OrderData());
+		$flow->bind(new FrontOrderData());
 		$form = $flow->createForm();
 		$flow->saveCurrentStepData($form);
 
