@@ -1,0 +1,15 @@
+{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
+{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+
+{% if isModuleEnabled(constant('SS6\\ShopBundle\\Model\\Module\\ModuleList::ACCESSORIES_ON_BUY')) %}
+	{% if accessoryDetails|length > 0 %}
+
+		<h3>Naši zákaznící k tomuto produktu nejčastěji nakupují</h3>
+
+		{{ productList.list(accessoryDetails) }}
+	{% endif %}
+{% endif %}
+
+<a href="{{ url('front_cart') }}" class="button btn btn-primary">
+	{{ 'Přejít do košíku'|trans }}
+</a>

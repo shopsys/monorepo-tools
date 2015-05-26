@@ -3,8 +3,11 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\Module\ModulesFormType;
 use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
+use SS6\ShopBundle\Model\Module\ModuleFacade;
+use SS6\ShopBundle\Model\Module\ModuleList;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
@@ -12,10 +15,21 @@ use Symfony\Component\Routing\RequestContext;
 class SuperadminController extends Controller {
 
 	/**
-	 * @Route("/superadmin/")
+	 * @var \SS6\ShopBundle\Model\Module\ModuleList
 	 */
-	public function indexAction() {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/index.html.twig');
+	private $moduleList;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 */
+	private $moduleFacade;
+
+	public function __construct(
+		ModuleList $moduleList,
+		ModuleFacade $moduleFacade
+	) {
+		$this->moduleList = $moduleList;
+		$this->moduleFacade = $moduleFacade;
 	}
 
 	/**
@@ -73,7 +87,7 @@ class SuperadminController extends Controller {
 			$flashMessageSender->addSuccessFlashTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', [
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
 			]);
-			return $this->redirect($this->generateUrl('admin_superadmin_index'));
+			return $this->redirect($this->generateUrl('admin_superadmin_pricing'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Superadmin/pricing.html.twig', [
@@ -127,4 +141,38 @@ class SuperadminController extends Controller {
 
 		return $data;
 	}
+
+	/**
+	 * @Route("/superadmin/modules/")
+	 */
+	public function modulesAction(Request $request) {
+		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$form = $this->createForm(new ModulesFormType($this->moduleList));
+
+		$formData = [];
+		foreach ($this->moduleList->getAll() as $moduleName) {
+			$formData['modules'][$moduleName] = $this->moduleFacade->isEnabled($moduleName);
+		}
+
+		$form->setData($formData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$formData = $form->getData();
+			foreach ($formData[ModulesFormType::MODULES_SUBFORM_NAME] as $moduleName => $isEnabled) {
+				$this->moduleFacade->setEnabled($moduleName, $isEnabled);
+			}
+
+			$flashMessageSender->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
+				'url' => $this->generateUrl('admin_superadmin_pricing'),
+			]);
+			return $this->redirect($this->generateUrl('admin_superadmin_modules'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/modules.html.twig', [
+			'form' => $form->createView(),
+		]);
+	}
+
 }

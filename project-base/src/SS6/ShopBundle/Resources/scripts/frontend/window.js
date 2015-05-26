@@ -35,6 +35,7 @@
 			textContinue: 'Ano',
 			textCancel: 'Ne',
 			urlContinue: '#',
+			wide: false,
 			eventClose: function () {},
 			eventContinue: function () {},
 			eventCancel: function () {}
@@ -46,6 +47,10 @@
 		}
 
 		var $window = $('<div class="window window--active"></div>');
+		if (options.wide) {
+			$window.addClass('window--wide');
+		}
+
 		var $windowContent = $('<div class="js-window-content"></div>').html(options.content);
 
 		$activeWindow = $window;
@@ -105,9 +110,29 @@
 		}
 
 		$window.find('.js-tooltip[title]').tooltip();
-		$window.hide().appendTo(getMainContainer()).fadeIn('fast');
+
+		show();
 
 		return $window;
+
+		function show() {
+			$window.hide().appendTo(getMainContainer());
+			moveToCenter();
+			$window.fadeIn('fast');
+		}
+
+		function moveToCenter() {
+			var relativeY = $(window).height() / 2 - $window.height() / 2;
+			var minRelativeY = $(window).height() * 0.1;
+
+			if (relativeY < minRelativeY) {
+				relativeY = minRelativeY;
+			}
+
+			var top = Math.round($(window).scrollTop() + relativeY);
+
+			$window.css({ top: top + 'px' });
+		}
 	};
 
 })(jQuery);

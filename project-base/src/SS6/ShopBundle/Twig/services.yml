@@ -51,6 +51,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.module_extension:
+    class: SS6\ShopBundle\Twig\ModuleExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.number_formatter_extension:
     class: SS6\ShopBundle\Twig\NumberFormatterExtension
     tags:

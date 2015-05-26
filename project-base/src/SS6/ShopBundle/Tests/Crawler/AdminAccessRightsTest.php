@@ -8,7 +8,7 @@ class AdminAccessRightsTest extends FunctionalTestCase {
 
 	public function testAdminAccessDeniedProvider() {
 		return [
-			['admin/superadmin/'],
+			['admin/superadmin/modules/'],
 			['admin/superadmin/icons/'],
 			['admin/superadmin/errors/'],
 			['admin/superadmin/pricing/'],
