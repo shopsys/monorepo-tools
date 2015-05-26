@@ -34,6 +34,10 @@
 		}
 	};
 
+	SS6.formChangeInfo.removeInfo = function () {
+		$('#js-form-change-info').remove();
+	};
+
 	$(document).ready(function () {
 		SS6.formChangeInfo.init();
 	});
