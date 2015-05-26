@@ -9,19 +9,6 @@
 		});
 	});
 
-	SS6.validation.inputBind = function () {
-		$(this)
-			.bind('blur change', function () {
-				$(this).jsFormValidator('validate')
-			})
-			.focus(function () {
-				$(this).closest('.form-error').removeClass('form-error');
-			})
-			.jsFormValidator({
-				'showErrors': SS6.validation.showErrors
-			});
-	};
-
 	SS6.validation.showErrors = function (errors, elementName) {
 
 		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this));
