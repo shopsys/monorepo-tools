@@ -70,7 +70,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface {
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $template
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return \SS6\ShopBundle\Model\Customer\Mail\MessageData
+	 * @return \SS6\ShopBundle\Model\Mail\MessageData
 	 */
 	public function createMessage(MailTemplate $template, $user) {
 		return new MessageData(

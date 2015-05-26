@@ -66,7 +66,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return Grid
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->paymentRepository->getQueryBuilderForAll()

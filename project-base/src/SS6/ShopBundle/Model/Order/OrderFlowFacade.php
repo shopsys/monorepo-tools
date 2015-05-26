@@ -25,7 +25,7 @@ class OrderFlowFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFlow $orderFlow
-	 * @param \SS6\ShopBundle\Model\Order\PaymentEditFacade $paymentEditFacade
+	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditFacade $paymentEditFacade
 	 * @param \SS6\ShopBundle\Model\Transport\TransportEditFacade $transportEditFacade
 	 */
 	public function __construct(

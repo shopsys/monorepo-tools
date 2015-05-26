@@ -21,10 +21,10 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 		/* @var $registrationService \SS6\ShopBundle\Model\Customer\RegistrationService */
 
 		$loaderService = $this->get('ss6.shop.data_fixtures.user_data_fixture_loader');
-		/* @var $loaderService UserDataFixtureLoader */
+		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
 
 		$customersData = $loaderService->getCustomersData();
-		/* @var $customersData CustomerData[] */
+		/* @var $customersData \SS6\ShopBundle\Model\Customer\CustomerData[] */
 
 		foreach ($customersData as $customerData) {
 			if ($customerData->deliveryAddressData !== null) {

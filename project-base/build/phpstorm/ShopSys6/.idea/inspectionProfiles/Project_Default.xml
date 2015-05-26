@@ -337,7 +337,9 @@
     <inspection_tool class="PhpTraditionalSyntaxArrayLiteralInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedCallbackInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedClassConstantInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="PhpUndefinedClassInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpUndefinedClassInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="DONT_REPORT_MULTI_RESOLVE" value="true" />
+    </inspection_tool>
     <inspection_tool class="PhpUndefinedConstantInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedFieldInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedFunctionInspection" enabled="false" level="WARNING" enabled_by_default="false" />

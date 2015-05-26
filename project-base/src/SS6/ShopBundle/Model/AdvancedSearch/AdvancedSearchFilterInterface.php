@@ -29,7 +29,7 @@ interface AdvancedSearchFilterInterface {
 	public function getAllowedOperators();
 
 	/**
-	 * @return string|FormTypeInterface
+	 * @return string|\Symfony\Component\Form\FormTypeInterface
 	 */
 	public function getValueFormType();
 

@@ -50,8 +50,8 @@ class TimedFormTypeExtension extends AbstractTypeExtension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\FormView $view
-	 * @param \SS6\ShopBundle\Form\FormInterface $form
+	 * @param \Symfony\Component\Form\FormView $view
+	 * @param \Symfony\Component\Form\FormInterface $form
 	 * @param array $options
 	 */
 	public function finishView(FormView $view, FormInterface $form, array $options) {

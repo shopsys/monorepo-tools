@@ -98,7 +98,7 @@ class PricingGroupFacade {
 	}
 
 	/**
-	 * @param type $pricingGroupId
+	 * @param int $pricingGroupId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */

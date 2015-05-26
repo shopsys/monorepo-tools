@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\ExecutionContextInterface;
@@ -123,7 +124,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 		if (is_array($data['file'])) {
 			$fallbackFiles = $data['file'];
 			foreach ($fallbackFiles as $file) {
-				if ($file instanceof UploadFile) {
+				if ($file instanceof UploadedFile) {
 					try {
 						$data['uploadedFiles'][] = $this->fileUpload->upload($file);
 					} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUploadException $ex) {

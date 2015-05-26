@@ -36,7 +36,7 @@ class ActionColumn {
 	private $bindingRouteParams;
 
 	/**
-	 * @var arraty
+	 * @var array
 	 */
 	private $additionalRouteParams;
 

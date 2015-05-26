@@ -78,7 +78,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 	}
 
 	/**
-	 * @param type $propertyName
+	 * @param string $propertyName
 	 * @param \Doctrine\ORM\Mapping\ClassMetadata $entityMetadata
 	 * @return \Symfony\Component\Validator\Constraint[]
 	 */

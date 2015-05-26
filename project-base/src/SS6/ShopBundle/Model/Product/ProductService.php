@@ -90,7 +90,7 @@ class ProductService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function changeVat(Product $product, Vat $vat) {
 		$product->changeVat($vat);

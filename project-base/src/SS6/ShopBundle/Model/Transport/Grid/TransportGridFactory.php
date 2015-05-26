@@ -66,7 +66,7 @@ class TransportGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return Grid
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->transportRepository->getQueryBuilderForAll()

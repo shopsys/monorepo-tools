@@ -35,7 +35,7 @@ class ImageConfigLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Model\Image\ImageConfig
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageConfig
 	 */
 	public function loadFromYaml($filename) {
 		$yamlParser = new Parser();

@@ -96,7 +96,7 @@ class CategoryFacade {
 			$this->em->commit();
 
 			return $category;
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$this->em->rollback();
 			throw $ex;
 		}
@@ -124,7 +124,7 @@ class CategoryFacade {
 			$this->em->commit();
 
 			return $category;
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$this->em->rollback();
 			throw $ex;
 		}

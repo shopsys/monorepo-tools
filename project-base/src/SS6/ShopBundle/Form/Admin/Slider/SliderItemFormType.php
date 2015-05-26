@@ -28,7 +28,7 @@ class SliderItemFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Slider\FormBuilderInterface $builder
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {

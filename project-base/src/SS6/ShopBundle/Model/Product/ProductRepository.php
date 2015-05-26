@@ -38,7 +38,7 @@ class ProductRepository {
 	private $productFilterRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
+	 * @var \SS6\ShopBundle\Component\Doctrine\QueryBuilderService
 	 */
 	private $queryBuilderService;
 

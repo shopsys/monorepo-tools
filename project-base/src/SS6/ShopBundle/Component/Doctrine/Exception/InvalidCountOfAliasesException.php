@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\Doctrine\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\Debug;
 
 class InvalidCountOfAliasesException extends Exception {
 

@@ -19,7 +19,7 @@ class ErrorController extends Controller {
 	 * @param int $code
 	 */
 	public function errorPageAction($code) {
-		/* @var $exceptionController \SS6\ShopBundle\Component\ExceptionController */
+		/* @var $exceptionController \SS6\ShopBundle\Component\Error\ExceptionController */
 		$exceptionController = $this->get('twig.controller.exception');
 
 		if ($exceptionController instanceof ExceptionController) {

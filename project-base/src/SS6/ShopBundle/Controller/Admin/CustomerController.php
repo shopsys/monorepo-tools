@@ -48,7 +48,7 @@ class CustomerController extends Controller {
 		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
-		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
+		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory */
 
 		$user = $customerEditFacade->getUserById($id);
 		$form = $this->createForm($customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
@@ -166,7 +166,7 @@ class CustomerController extends Controller {
 		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
-		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Payment\CustomerFormTypeFactory */
+		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory */
 
 		$form = $this->createForm(
 			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),

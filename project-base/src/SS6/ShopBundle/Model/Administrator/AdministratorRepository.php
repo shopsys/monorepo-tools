@@ -49,7 +49,7 @@ class AdministratorRepository {
 	}
 
 	/**
-	 * @param type $administratorUserName
+	 * @param string $administratorUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function findByUserName($administratorUserName) {

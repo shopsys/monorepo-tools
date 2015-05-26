@@ -25,7 +25,7 @@ class CurrencyController extends Controller {
 	 */
 	public function listAction() {
 		$currencyInlineEdit = $this->get('ss6.shop.pricing.currency.currency_inline_edit');
-		/* @var $currencyInlineEdit \SS6\ShopBundle\Model\Pricing\Currency\CurrencyInlineEdit */
+		/* @var $currencyInlineEdit \SS6\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit */
 
 		$grid = $currencyInlineEdit->getGrid();
 

@@ -68,9 +68,6 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 * @return \SS6\ShopBundle\Model\Category\Category
-	 * @throws \Exception
-	 * @throws \SS6\ShopBundle\Model\Category\Exception
-	 * @internal param ObjectManager $manager
 	 */
 	private function createCategory($referenceName, CategoryData $categoryData) {
 		$categoryFacade = $this->get('ss6.shop.category.category_facade');
