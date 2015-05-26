@@ -125,6 +125,7 @@
 				SS6.grid.inlineEdit.loadComponents($formRow);
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
 				$formRow.find('input[type=text]:first').focus();
+				SS6.productPicker.init($formRow);
 			}
 		});
 	}

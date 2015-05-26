@@ -5,16 +5,21 @@
 
 	var generatorIdCounter = 0;
 
-	SS6.productPicker.init = function () {
-		$('.js-product-picker-container').each(function () {
+	SS6.productPicker.init = function ($container) {
+		$container.find('.js-product-picker-container').each(function () {
 			var $removeButton = $(this).find('.js-product-picker-remove-button');
 			$removeButton.toggle($(this).find('.js-product-picker-label').val() !== $(this).data('placeholder'));
 		});
-		$('.js-product-picker-remove-button').click(function () {
+		$container.find('.js-product-picker-remove-button').click(function () {
 			var $productPickerContainer = $(this).closest('.js-product-picker-container');
 			var $input = $productPickerContainer.find('.js-product-picker-input');
 			var placeholder = $productPickerContainer.data('placeholder');
 			SS6.productPicker.selectProduct($input.attr('id'), '', placeholder);
+
+			return false;
+		});
+		$container.find('.js-product-picker-create-picker-button').click(function () {
+			SS6.productPicker.makePicker(this);
 
 			return false;
 		});
@@ -57,7 +62,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.productPicker.init();
+		SS6.productPicker.init($('body'));
 	});
 
 })(jQuery);
