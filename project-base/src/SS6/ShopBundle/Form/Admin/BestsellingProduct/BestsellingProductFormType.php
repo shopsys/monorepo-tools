@@ -41,6 +41,7 @@ class BestsellingProductFormType extends AbstractType {
 				->add($i, FormType::PRODUCT, [
 					'required' => false,
 					'placeholder' => null,
+					'enableRemove' => true,
 				]);
 		}
 	}
