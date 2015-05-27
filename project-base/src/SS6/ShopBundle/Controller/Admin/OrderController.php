@@ -149,6 +149,7 @@ class OrderController extends Controller {
 		$grid->allowPaging();
 		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
+		$grid->addColumn('preview', 'o.id', 'Náhled', false);
 		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
 		$grid->addColumn('created_at', 'o.createdAt', 'Vytvořena', true);
 		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
@@ -219,6 +220,18 @@ class OrderController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),
+		]);
+	}
+
+	/**
+	 * @Route("/order/preview/{id}", requirements={"id" = "\d+"})
+	 * @param int $id
+	 */
+	public function previewAction($id) {
+		$order = $this->orderFacade->getById($id);
+
+		return $this->render('@SS6Shop/Admin/Content/Order/preview.html.twig', [
+			'order' => $order,
 		]);
 	}
 }

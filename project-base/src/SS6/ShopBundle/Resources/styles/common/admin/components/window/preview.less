@@ -1,0 +1,28 @@
+/*
+Preview window
+============
+Floating window as look to detail of something. Its positioned by JS close to hovered element
+
+	<div class="window-preview">
+		<p>
+			Content of window
+		</p>
+	</div>
+
+*/
+
+.window-preview {
+	width: @window-preview-width;
+	min-height: @window-preview-height;
+	position: absolute;
+	padding: 25px 30px 30px;
+	z-index: 10000;
+	top: 18px;
+	left: 20px;
+
+	text-align: left;
+	border: 1px solid @color-border;
+	background: @bg-window;
+
+	.box-shadow(0 0 20px rgba(0,0,0, 0.3));
+}
