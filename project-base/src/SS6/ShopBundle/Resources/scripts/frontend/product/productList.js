@@ -42,7 +42,7 @@
 					$currentProductList.append($nextProducts);
 					$loadMoreSpinner.hide();
 					page++;
-					paginationToItem += nextProducts.length;
+					paginationToItem += $nextProducts.length;
 					$paginationToItemSpan.text(paginationToItem);
 					updateLoadMoreButton();
 
