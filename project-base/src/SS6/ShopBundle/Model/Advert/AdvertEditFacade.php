@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Advert;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Advert\AdvertPositionRepository;
 use SS6\ShopBundle\Model\Advert\AdvertRepository;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
@@ -31,11 +30,6 @@ class AdvertEditFacade {
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionRepository
-	 */
-	private $advertPositionRepository;
-
-	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Advert\AdvertRepository $advertRepository
 	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
@@ -45,14 +39,12 @@ class AdvertEditFacade {
 		EntityManager $em,
 		AdvertRepository $advertRepository,
 		ImageFacade $imageFacade,
-		Domain $domain,
-		AdvertPositionRepository $advertPositionRepository
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->advertRepository = $advertRepository;
 		$this->imageFacade = $imageFacade;
 		$this->domain = $domain;
-		$this->advertPositionRepository = $advertPositionRepository;
 	}
 
 	/**
@@ -113,13 +105,6 @@ class AdvertEditFacade {
 		$advert = $this->advertRepository->getById($advertId);
 		$this->em->remove($advert);
 		$this->em->flush();
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Advert\AdvertPosition[positionName]
-	 */
-	public function getAdvertPositionsIndexedByName() {
-		return $this->advertPositionRepository->getPositionsIndexedByName();
 	}
 
 }

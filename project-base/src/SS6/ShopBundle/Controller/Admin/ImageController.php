@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Model\Advert\AdvertPosition;
+use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -133,16 +133,16 @@ class ImageController extends Controller {
 				),
 			],
 			self::ENTITY_NAME_ADVERT => [
-				AdvertPosition::POSITION_HEADER => $translator->trans(
+				AdvertPositionList::POSITION_HEADER => $translator->trans(
 					'Front-end: Reklama pod hlavičkou'
 				),
-				AdvertPosition::POSITION_FOOTER => $translator->trans(
+				AdvertPositionList::POSITION_FOOTER => $translator->trans(
 					'Front-end: Reklama nad patičkou'
 				),
-				AdvertPosition::POSITION_PRODUCT_LIST => $translator->trans(
+				AdvertPositionList::POSITION_PRODUCT_LIST => $translator->trans(
 					'Front-end: Reklama v kategorii (nad názvem kategorie)'
 				),
-				AdvertPosition::POSITION_LEFT_SIDEBAR => $translator->trans(
+				AdvertPositionList::POSITION_LEFT_SIDEBAR => $translator->trans(
 					'Front-end: Reklama v levém panelu pod stromem kategorií'
 				),
 			],
