@@ -37,7 +37,7 @@ class EnabledModuleRepository {
 	 * @return \SS6\ShopBundle\Model\Module\EnabledModule|null
 	 */
 	public function findByName($moduleName) {
-		if (!in_array($moduleName, $this->moduleList->getAll(), true)) {
+		if (!in_array($moduleName, $this->moduleList->getValues(), true)) {
 			throw new \SS6\ShopBundle\Model\Module\Exception\UnsupportedModuleException($moduleName);
 		}
 

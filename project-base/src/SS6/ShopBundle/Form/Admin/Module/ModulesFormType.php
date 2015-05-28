@@ -33,15 +33,15 @@ class ModulesFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$supportedModules = $this->moduleList->getAll();
-
 		$builder
 			->add(self::MODULES_SUBFORM_NAME, FormType::FORM)
 			->add('save', FormType::SUBMIT);
 
-		foreach ($supportedModules as $moduleName) {
+		foreach ($this->moduleList->getTranslationsIndexedByValue() as $moduleName => $moduleTranslation) {
 			$builder->get(self::MODULES_SUBFORM_NAME)
-				->add($moduleName, FormType::YES_NO);
+				->add($moduleName, FormType::YES_NO, [
+					'label' => $moduleTranslation,
+				]);
 		}
 	}
 
