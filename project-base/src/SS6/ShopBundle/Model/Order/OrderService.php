@@ -80,7 +80,7 @@ class OrderService {
 	}
 
 	/**
-	 * @param Order $order
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
 	public function calculateTotalPrice(Order $order) {
 		$orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
@@ -88,7 +88,7 @@ class OrderService {
 	}
 
 	/**
-	 * @param array \SS6\ShopBundle\Model\Order\Order[]
+	 * @param \SS6\ShopBundle\Model\Order\Order[]
 	 */
 	public function detachCustomer(array $orders) {
 		foreach ($orders as $order) {
