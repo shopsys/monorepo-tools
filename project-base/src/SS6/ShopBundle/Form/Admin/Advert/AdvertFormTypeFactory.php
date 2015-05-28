@@ -4,33 +4,33 @@ namespace SS6\ShopBundle\Form\Admin\Advert;
 
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Advert\Advert;
-use SS6\ShopBundle\Model\Advert\AdvertPositionRepository;
+use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use SS6\ShopBundle\Twig\ImageExtension;
 
 class AdvertFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionRepository  $advertPositionRepository
+	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionList
 	 */
-	private $advertPositionRepository;
+	private $advertPositionList;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator $translator
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\ImageExtension $imageExtension
+	 * @var \SS6\ShopBundle\Twig\ImageExtension
 	 */
 	private $imageExtension;
 
 	public function __construct(
 		ImageExtension $imageExtension,
-		AdvertPositionRepository $advertPositionRepository,
+		AdvertPositionList $advertPositionList,
 		Translator $translator
 	) {
 		$this->imageExtension = $imageExtension;
-		$this->advertPositionRepository = $advertPositionRepository;
+		$this->advertPositionList = $advertPositionList;
 		$this->translator = $translator;
 	}
 
@@ -39,10 +39,6 @@ class AdvertFormTypeFactory {
 	 * @return \SS6\ShopBundle\Form\Admin\Advert\AdvertFormType
 	 */
 	public function create(Advert $advert = null) {
-		$advertPositionsLocalizedNamesByName = [];
-		foreach ($this->advertPositionRepository->getPositionsIndexedByName() as $positionName => $advertPosition) {
-			$advertPositionsLocalizedNamesByName[$positionName] = $advertPosition->getLocalizedName();
-		}
 		$imageExists = false;
 		if ($advert !== null) {
 			$imageExists = $this->imageExtension->imageExists($advert);
@@ -51,7 +47,7 @@ class AdvertFormTypeFactory {
 		return new AdvertFormType(
 			$imageExists,
 			$this->translator,
-			$advertPositionsLocalizedNamesByName
+			$this->advertPositionList->getTranslationsIndexedByValue()
 		);
 	}
 

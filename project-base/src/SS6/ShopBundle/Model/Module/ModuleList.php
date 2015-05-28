@@ -2,16 +2,18 @@
 
 namespace SS6\ShopBundle\Model\Module;
 
-class ModuleList {
+use SS6\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
+
+class ModuleList extends AbstractTranslatedConstantList {
 
 	const ACCESSORIES_ON_BUY = 'accessoriesOnBuy';
 
 	/**
-	 * @return string
+	 * {@inheritDoc}
 	 */
-	public function getAll() {
+	public function getTranslationsIndexedByValue() {
 		return [
-			self::ACCESSORIES_ON_BUY,
+			self::ACCESSORIES_ON_BUY => $this->translator->trans('Příslušenství v mezikošíku'),
 		];
 	}
 

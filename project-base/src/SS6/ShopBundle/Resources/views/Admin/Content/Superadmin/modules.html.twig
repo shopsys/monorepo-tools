@@ -16,7 +16,7 @@
 						</tr>
 						{% for moduleName, moduleForm in form.modules %}
 							<tr>
-								<td class="table-col-80">{{ moduleName }}</td>
+								<td class="table-col-80">{{ moduleForm.vars.label }}</td>
 								<td class="table-col-10">{{ form_widget(moduleForm['yes']) }}</td>
 								<td class="table-col-10">{{ form_widget(moduleForm['no']) }}</td>
 							</tr>

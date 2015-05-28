@@ -114,14 +114,6 @@ services:
   ss6.shop.advanced_search.product_advanced_search_config:
     class: SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 
-  ss6.shop.advert.advert_position_repository:
-    class: SS6\ShopBundle\Model\Advert\AdvertPositionRepository
-    factory_service: ss6.shop.advert.advert_position_repository_factory
-    factory_method: create
-
-  ss6.shop.advert.advert_position_repository_factory:
-    class: SS6\ShopBundle\Model\Advert\AdvertPositionRepositoryFactory
-
   ss6.shop.breadcrumb.front_breadcrumb_resolver:
     class: SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
     factory_service: ss6.shop.breadcrumb.front_breadcrumb_resolver_factory

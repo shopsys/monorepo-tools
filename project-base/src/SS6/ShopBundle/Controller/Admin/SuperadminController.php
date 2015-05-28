@@ -151,7 +151,7 @@ class SuperadminController extends Controller {
 		$form = $this->createForm(new ModulesFormType($this->moduleList));
 
 		$formData = [];
-		foreach ($this->moduleList->getAll() as $moduleName) {
+		foreach ($this->moduleList->getValues() as $moduleName) {
 			$formData['modules'][$moduleName] = $this->moduleFacade->isEnabled($moduleName);
 		}
 
