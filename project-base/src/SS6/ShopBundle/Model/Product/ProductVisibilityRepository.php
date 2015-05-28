@@ -45,9 +45,13 @@ class ProductVisibilityRepository {
 		$this->productRepository = $productRepository;
 	}
 
-	public function refreshProductsVisibility() {
-		$this->refreshProductVisibility();
+	/**
+	 * @param bool $refreshOnlyMarkedProducts
+	 */
+	public function refreshProductsVisibility($refreshOnlyMarkedProducts = false) {
+		$this->refreshProductVisibility($refreshOnlyMarkedProducts);
 		$this->refreshGlobalProductVisibility();
+		$this->markAllProductsVisibilityAsRecalculated();
 	}
 
 	private function refreshGlobalProductVisibility() {
@@ -62,13 +66,21 @@ class ProductVisibilityRepository {
 	}
 
 	/**
+	 * @param bool $refreshOnlyMarkedProducts
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
-	private function refreshProductVisibility() {
+	private function refreshProductVisibility($refreshOnlyMarkedProducts) {
 		$now = new DateTime();
 
 		foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
 			$domain = $this->domain->getDomainConfigById($pricingGroup->getDomainId());
+
+			if ($refreshOnlyMarkedProducts) {
+				$onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
+			} else {
+				$onlyMarkedProductsCondition = '';
+			}
+
 			$query = $this->em->createNativeQuery('UPDATE product_visibilities AS pv
 					SET visible = CASE
 							WHEN (
@@ -111,22 +123,23 @@ class ProductVisibilityRepository {
 					WHERE p.id = pv.product_id
 						AND pv.domain_id = :domainId
 						AND pv.domain_id = pd.domain_id
-						AND pv.pricing_group_id = :pricingGroupId', new ResultSetMapping());
+						AND pv.pricing_group_id = :pricingGroupId'
+						. $onlyMarkedProductsCondition, new ResultSetMapping());
 
-				$query->execute([
-					'now' => $now,
-					'locale' => $domain->getLocale(),
-					'domainId' => $domain->getId(),
-					'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
-					'pricingGroupId' => $pricingGroup->getId(),
-				]);
+			$query->execute([
+				'now' => $now,
+				'locale' => $domain->getLocale(),
+				'domainId' => $domain->getId(),
+				'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
+				'pricingGroupId' => $pricingGroup->getId(),
+			]);
 		}
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
-	public function refreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup) {
+	public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup) {
 		$query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
 			SELECT id, :pricing_group_id, :domain_id, :visible FROM products', new ResultSetMapping());
 		$query->execute([
@@ -165,6 +178,11 @@ class ProductVisibilityRepository {
 		}
 
 		return $productVisibility;
+	}
+
+	private function markAllProductsVisibilityAsRecalculated() {
+		$this->em->createNativeQuery('UPDATE products SET recalculate_visibility = FALSE', new ResultSetMapping())
+			->execute();
 	}
 
 }

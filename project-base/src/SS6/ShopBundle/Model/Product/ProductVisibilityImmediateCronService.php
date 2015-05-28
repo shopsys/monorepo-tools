@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Cron\CronServiceInterface;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductVisibilityCronService implements CronServiceInterface {
+class ProductVisibilityImmediateCronService implements CronServiceInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
@@ -21,7 +21,7 @@ class ProductVisibilityCronService implements CronServiceInterface {
 	 * @inheritdoc
 	 */
 	public function run(Logger $logger) {
-		$this->productVisibilityFacade->refreshProductsVisibility();
+		$this->productVisibilityFacade->refreshProductsVisibilityForMarked();
 	}
 
 }

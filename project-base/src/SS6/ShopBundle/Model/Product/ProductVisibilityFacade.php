@@ -32,6 +32,10 @@ class ProductVisibilityFacade {
 		$this->productVisibilityRepository->refreshProductsVisibility();
 	}
 
+	public function refreshProductsVisibilityForMarked() {
+		$this->productVisibilityRepository->refreshProductsVisibility(true);
+	}
+
 	/**
 	 * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
 	 */
