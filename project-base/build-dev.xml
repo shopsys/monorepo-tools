@@ -9,9 +9,9 @@
 	<target name="checks-ci" depends="standards-ci,tests,tests-acceptance" />
 	<target name="checks-diff" depends="standards-diff,tests" />
 
-	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint" />
+	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" />
 	<target name="standards-ci" depends="standards,phpstorm-inspect" />
-	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint" />
+	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint,yaml-lint" />
 
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
@@ -516,6 +516,14 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="twig:lint" />
+			<arg value="@SS6ShopBundle" />
+		</exec>
+	</target>
+
+	<target name="yaml-lint">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="yaml:lint" />
 			<arg value="@SS6ShopBundle" />
 		</exec>
 	</target>
