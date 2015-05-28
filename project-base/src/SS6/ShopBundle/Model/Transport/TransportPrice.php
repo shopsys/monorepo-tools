@@ -37,7 +37,7 @@ class TransportPrice {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param string $price
 	 */
 	public function __construct(Transport $transport, Currency $currency, $price) {
@@ -47,7 +47,7 @@ class TransportPrice {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function getCurrency() {
 		return $this->currency;

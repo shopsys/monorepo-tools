@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;

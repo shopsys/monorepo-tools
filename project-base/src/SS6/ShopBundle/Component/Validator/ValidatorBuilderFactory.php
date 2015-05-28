@@ -24,14 +24,14 @@ namespace SS6\ShopBundle\Component\Validator;
 class ValidatorBuilderFactory {
 
 	/**
-	 * @return ValidatorInterface The new validator.
+	 * @return \Symfony\Component\Validator\ValidatorInterface The new validator.
 	 */
 	public static function createValidator() {
 		return self::createValidatorBuilder()->getValidator();
 	}
 
 	/**
-	 * @return ValidatorBuilderInterface The new builder.
+	 * @return \Symfony\Component\Validator\ValidatorBuilderInterface The new builder.
 	 */
 	public static function createValidatorBuilder() {
 		return new ValidatorBuilder();

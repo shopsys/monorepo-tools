@@ -112,7 +112,7 @@ class ProductDomain {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Domain $domain
+	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
 	 * @return string
 	 */
 	public function getSeoTitleForHtml(Domain $domain) {

@@ -47,7 +47,7 @@ class ProductParameterValue {
 	private $value;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $value

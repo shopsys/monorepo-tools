@@ -54,7 +54,7 @@ class OrderNumberSequenceRepository {
 
 			$this->em->flush($orderNumberSequence);
 			$this->em->commit();
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$this->em->rollback();
 			throw $e;
 		}

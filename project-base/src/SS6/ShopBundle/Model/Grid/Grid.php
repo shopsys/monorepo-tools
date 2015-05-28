@@ -87,7 +87,7 @@ class Grid {
 	private $isOrderFromRequest = false;
 
 	/**
-	 * @var row
+	 * @var array
 	 */
 	private $rows = [];
 
@@ -149,9 +149,9 @@ class Grid {
 	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
-	 * @param \SS6\ShopBundle\Model\Grid\RequestStack $requestStack
-	 * @param \SS6\ShopBundle\Model\Grid\Router $router
-	 * @param \SS6\ShopBundle\Model\Grid\Twig_Environment $twig
+	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+	 * @param \Symfony\Component\Routing\Router $router
+	 * @param \Twig_Environment $twig
 	 * @param \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService $gridOrderingService
 	 */
 	public function __construct(

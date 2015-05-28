@@ -58,7 +58,7 @@ class OrderMailFacade {
 		$this->mailer->send($messageData);
 	}
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Mail\OrderStatus $orderStatus
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 */

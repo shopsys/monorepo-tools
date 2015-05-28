@@ -120,7 +120,7 @@ class FileUpload {
 	}
 
 	/**
-	 * @param strinf $filename
+	 * @param string $filename
 	 * @param bool $isImage
 	 * @param string $category
 	 * @param string|null $targetDirectory

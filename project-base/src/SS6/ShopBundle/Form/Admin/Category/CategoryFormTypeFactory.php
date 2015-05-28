@@ -40,7 +40,7 @@ class CategoryFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Product\Category $category
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Form\Admin\Category\CategoryFormType
 	 */
 	public function createForCategory(Category $category) {

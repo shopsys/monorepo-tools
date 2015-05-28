@@ -46,7 +46,7 @@ class AdvertController extends BaseController {
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertFormTypeFactory
+	 * @var \SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
 	 */
 	private $advertFormTypeFactory;
 

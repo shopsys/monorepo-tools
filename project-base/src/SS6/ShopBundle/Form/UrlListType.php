@@ -44,7 +44,7 @@ class UrlListType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\FormBuilderInterface $builder
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {

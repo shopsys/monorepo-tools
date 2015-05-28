@@ -37,7 +37,7 @@ class PaymentPrice {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param string $price
 	 */
 	public function __construct(Payment $payment, Currency $currency, $price) {
@@ -47,7 +47,7 @@ class PaymentPrice {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency
+	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function getCurrency() {
 		return $this->currency;

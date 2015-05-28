@@ -115,7 +115,7 @@ class InlineEditService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Grid\InlineEdit\Grid $grid
+	 * @param \SS6\ShopBundle\Model\Grid\Grid $grid
 	 * @param \Symfony\Component\Form\Form $form
 	 * @return array
 	 */

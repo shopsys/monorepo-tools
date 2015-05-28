@@ -64,7 +64,7 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Category $category
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
 	 */
 	private function getCategoryBreadcrumbItems(Category $category) {

@@ -47,7 +47,7 @@ class OrderProductFilter implements AdvancedSearchFilterInterface {
 		foreach ($rulesData as $index => $ruleData) {
 			if ($ruleData->operator === self::OPERATOR_CONTAINS || $ruleData->operator === self::OPERATOR_NOT_CONTAINS) {
 				$searchValue = $ruleData->value;
-				/** @var $searchValue Product */
+				/* @var $searchValue \SS6\ShopBundle\Model\Product\Product */
 				if ($searchValue === null) {
 					continue;
 				}

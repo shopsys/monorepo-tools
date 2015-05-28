@@ -28,8 +28,8 @@ class CurrencyGridFactory implements GridFactoryInterface {
 	private $currencyFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Grid\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Grid\GridFactory $gridFactory
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
 	 */
 	public function __construct(
 		EntityManager $em,

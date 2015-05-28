@@ -84,7 +84,7 @@ class DomainRouterFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Component\Router\Router
+	 * @return \Symfony\Component\Routing\Router
 	 */
 	private function getBasicRouter(DomainConfig $domainConfig) {
 		return new Router(

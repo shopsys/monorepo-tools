@@ -16,7 +16,7 @@ class ProductFilterRepository {
 	const DAYS_FOR_STOCK_FILTER = 0;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DoctrineWalker\QueryBuilderService
+	 * @var \SS6\ShopBundle\Component\Doctrine\QueryBuilderService
 	 */
 	private $queryBuilderService;
 

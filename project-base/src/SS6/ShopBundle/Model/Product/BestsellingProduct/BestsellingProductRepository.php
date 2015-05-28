@@ -32,7 +32,7 @@ class BestsellingProductRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\BestsellingProduct\Category $category
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct|null
 	 */

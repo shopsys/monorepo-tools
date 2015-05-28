@@ -15,7 +15,7 @@ class ImageThumbnailFactory {
 	private $imageProcessingService;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Processing\ImageService $imageProcessingService
+	 * @param \SS6\ShopBundle\Model\Image\Processing\ImageProcessingService $imageProcessingService
 	 */
 	public function __construct(ImageProcessingService $imageProcessingService) {
 		$this->imageProcessingService = $imageProcessingService;

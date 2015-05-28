@@ -45,7 +45,7 @@ class CategoryVisibilityRepository {
 			}
 
 			$this->em->commit();
-		} catch (Exception $ex) {
+		} catch (\Exception $ex) {
 			$this->em->rollback();
 			throw $ex;
 		}

@@ -103,7 +103,7 @@ class FriendlyUrlRepository {
 	 *
 	 * @param string $routeName
 	 * @param int $entityId
-	 * @param int domainId
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
 	 */
 	public function getAllByRouteNameAndEntityIdAndDomainId($routeName, $entityId, $domainId) {

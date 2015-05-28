@@ -61,7 +61,7 @@ class VatRepository {
 
 	/**
 	 * @param int $vatId
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat[]
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAllExceptId($vatId) {
 		$qb = $this->getVatRepository()->createQueryBuilder('v')

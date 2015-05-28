@@ -46,7 +46,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	 */
 	protected function createEntityAndGetId($translationData) {
 		$message = 'Method "createEntityAndGetId" is not supported in translations.';
-		throw new \SS6\ShopBundle\Model\Localization\Translation\Grid\Exception\NotImplementedException($message);
+		throw new \SS6\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
 	}
 
 	/**

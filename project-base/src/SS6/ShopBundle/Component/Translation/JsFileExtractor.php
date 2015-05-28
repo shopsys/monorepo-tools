@@ -58,7 +58,7 @@ class JsFileExtractor implements FileVisitorInterface {
 			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException(
 				$ex->getMessage() . "\n" . 'in file ' . $this->file->getRealPath()
 			);
-		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\ParseException $ex) {
+		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\JsParserException $ex) {
 			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException(
 				$ex->getMessage() . ' in file ' . $this->file->getRealPath()
 			);

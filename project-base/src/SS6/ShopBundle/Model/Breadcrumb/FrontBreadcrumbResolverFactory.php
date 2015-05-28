@@ -15,7 +15,7 @@ class FrontBreadcrumbResolverFactory {
 	private $articleBreadcrumbGenerator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\CategoryBreadcrumbGenerator;
+	 * @var \SS6\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
 	 */
 	private $categoryBreadcrumbGenerator;
 
@@ -35,7 +35,7 @@ class FrontBreadcrumbResolverFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Breadcrumb\BreadcrumbResolver
+	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
 	 */
 	public function create() {
 		$frontBreadcrumbResolver = new BreadcrumbResolver();

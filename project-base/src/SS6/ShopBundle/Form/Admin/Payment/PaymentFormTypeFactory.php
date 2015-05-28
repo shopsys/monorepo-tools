@@ -13,13 +13,13 @@ class PaymentFormTypeFactory {
 	private $transportRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\VatRepository
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatRepository
 	 */
 	private $vatRepository;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\VatRepository $vatRepository
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 */
 	public function __construct(
 		TransportRepository $transportRepository,

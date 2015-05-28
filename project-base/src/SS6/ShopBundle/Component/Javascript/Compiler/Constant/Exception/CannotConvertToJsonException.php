@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\Javascript\Compiler\Constant\Exception;
 use Exception;
 use SS6\ShopBundle\Component\Javascript\Compiler\Constant\Exception\JsConstantCompilerException;
 
-class CannotConvertToJson extends Exception implements JsConstantCompilerException {
+class CannotConvertToJsonException extends Exception implements JsConstantCompilerException {
 
 	/**
 	 * @param string $message
