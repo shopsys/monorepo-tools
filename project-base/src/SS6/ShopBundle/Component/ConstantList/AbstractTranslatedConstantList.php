@@ -24,7 +24,7 @@ abstract class AbstractTranslatedConstantList implements TranslatedConstantListI
 	}
 
 	/**
-	 * @param type $constant
+	 * @param string $constant
 	 */
 	public function getTranslation($constant) {
 		$translations = $this->getTranslationsIndexedByValue();
