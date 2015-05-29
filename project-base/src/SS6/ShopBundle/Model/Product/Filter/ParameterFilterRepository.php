@@ -50,7 +50,7 @@ class ParameterFilterRepository {
 	private function getParameterQueryBuilder(
 		ParameterFilterData $parameterFilterData,
 		EntityManager $em,
-		&$parameterIndex,
+		$parameterIndex,
 		&$valueIndex
 	) {
 		$ppvAlias = 'ppv' . $parameterIndex;

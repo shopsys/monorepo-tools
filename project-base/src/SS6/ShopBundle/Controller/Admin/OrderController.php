@@ -91,7 +91,7 @@ class OrderController extends Controller {
 			$flashMessageSender->addErrorFlash('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$flashMessageSender->addErrorFlash('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
-		} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
+		} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
 			$flashMessageSender->addErrorFlash('Nepodařilo se odeslat aktualizační email');
 		}
 

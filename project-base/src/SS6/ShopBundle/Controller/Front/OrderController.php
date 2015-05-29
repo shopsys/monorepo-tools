@@ -110,7 +110,7 @@ class OrderController extends Controller {
 
 				try {
 					$this->sendMail($order);
-				} catch (\SS6\ShopBundle\Model\Order\Mail\Exception\SendMailFailedException $e) {
+				} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
 					$flashMessageSender->addErrorFlash('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.');
 				}
 

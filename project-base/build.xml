@@ -205,15 +205,10 @@
 	</target>
 
 	<target name="warmup">
-		<if>
-			<available file="${path.root}/PRODUCTION" property="production" />
-			<then>
-				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-					<arg value="app/console" />
-					<arg value="cache:warmup" />
-				</exec>
-			</then>
-		</if>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="cache:warmup" />
+		</exec>
 	</target>
 
 </project>

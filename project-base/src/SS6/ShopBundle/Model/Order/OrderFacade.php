@@ -178,13 +178,13 @@ class OrderFacade {
 	 */
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
-		$orderStatus = $this->orderStatusRepository->getById($orderData->statusId);
-		$user = null;
+		$newOrderStatus = $this->orderStatusRepository->getById($orderData->statusId);
+		$newUser = null;
 		if ($orderData->customerId !== null) {
-			$user = $this->userRepository->getUserById($orderData->customerId);
+			$newUser = $this->userRepository->getUserById($orderData->customerId);
 		}
 		$statusChanged = $order->getStatus()->getId() !== $orderData->statusId;
-		$orderEditResult = $this->orderService->editOrder($order, $orderData, $orderStatus, $user);
+		$orderEditResult = $this->orderService->editOrder($order, $orderData, $newOrderStatus, $newUser);
 
 		foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
 			$this->em->persist($orderItem);
