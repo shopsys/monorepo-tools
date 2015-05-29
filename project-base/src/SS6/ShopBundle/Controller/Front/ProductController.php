@@ -112,8 +112,9 @@ class ProductController extends Controller {
 		);
 
 		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/productsWithLoader.html.twig', [
+			return $this->render('@SS6Shop/Front/Content/Product/productsWithControls.html.twig', [
 				'paginationResult' => $paginationResult,
+				'filterFormSubmited' => $filterForm->isSubmitted(),
 			]);
 		}
 
@@ -179,8 +180,10 @@ class ProductController extends Controller {
 		);
 
 		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/productsWithLoader.html.twig', [
+			return $this->render('@SS6Shop/Front/Content/Product/productsWithControls.html.twig', [
 				'paginationResult' => $paginationResult,
+				'filterFormSubmited' => $filterForm->isSubmitted(),
+				'searchText' => $searchText,
 			]);
 		}
 

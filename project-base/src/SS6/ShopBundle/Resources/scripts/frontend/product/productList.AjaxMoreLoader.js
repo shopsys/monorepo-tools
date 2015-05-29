@@ -2,32 +2,39 @@
 
 	SS6 = window.SS6 || {};
 	SS6.productList = SS6.productList || {};
-
-	SS6.productList.init = function () {
-		$('.js-productListOrderingMode').change(function () {
-			var cookieName = $(this).data('cookie-name');
-
-			$.cookie(cookieName, $(this).val(), { path: '/' });
-
-			location.reload(true);
-		});
-	};
+	SS6.productList.AjaxMoreLoader = SS6.productList.AjaxMoreLoader || {};
 
 	SS6.productList.AjaxMoreLoader = function () {
-		var $loadMoreButton = $('.js-load-more-button');
-		var $loadMoreSpinner = $('.js-load-more-spinner');
-		var $currentProductList = $('.js-product-list');
-		var $paginationToItemSpan = $('.js-pagination-to-item');
+		var self = this;
+		var $loadMoreButton;
+		var $loadMoreSpinner;
+		var $currentProductList;
+		var $paginationToItemSpan;
 
-		var totalCount = $loadMoreButton.data('total-count');
-		var pageSize = $loadMoreButton.data('page-size');
-		var page = $loadMoreButton.data('page');
-		var paginationToItem = $loadMoreButton.data('pagination-to-item');
+		var totalCount;
+		var pageSize;
+		var page;
+		var paginationToItem;
 
 		this.init = function () {
+			$loadMoreButton = $('.js-load-more-button');
+			$loadMoreSpinner = $('.js-load-more-spinner');
+			$currentProductList = $('.js-product-list');
+			$paginationToItemSpan = $('.js-pagination-to-item');
+
+			totalCount = $loadMoreButton.data('total-count');
+			pageSize = $loadMoreButton.data('page-size');
+			page = $loadMoreButton.data('page');
+			paginationToItem = $loadMoreButton.data('pagination-to-item');
+
 			updateLoadMoreButton();
 			$loadMoreButton.on('click', onClickLoadMoreButton);
 		};
+
+		this.reInit = function () {
+			self.init();
+		};
+
 
 		var onClickLoadMoreButton = function () {
 			$(this).hide();
@@ -38,7 +45,7 @@
 				data: {page: page + 1},
 				success: function (data) {
 					var $response = $($.parseHTML(data));
-					var $nextProducts = $response.find('>li');
+					var $nextProducts = $response.find('.js-product-list>li');
 					$currentProductList.append($nextProducts);
 					$loadMoreSpinner.hide();
 					page++;
@@ -46,7 +53,8 @@
 					$paginationToItemSpan.text(paginationToItem);
 					updateLoadMoreButton();
 
-					SS6.register.registerNewContent($nextProducts);
+					// TODO: temporal solution, US-537 should fix this
+					$nextProducts.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 				}
 			});
 		};
@@ -61,14 +69,9 @@
 				$loadMoreButton.hide();
 			}
 		};
-	};
 
-	$(document).ready(function () {
-		SS6.productList.init();
-		var ajaxMoreLoader = new SS6.productList.AjaxMoreLoader();
-		ajaxMoreLoader.init();
-		var ajaxFilter = new SS6.productList.AjaxFilter(ajaxMoreLoader);
-		ajaxFilter.init();
-	});
+
+
+	};
 
 })(jQuery);

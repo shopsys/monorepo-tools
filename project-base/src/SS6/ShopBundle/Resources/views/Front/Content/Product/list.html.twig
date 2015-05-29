@@ -22,31 +22,13 @@
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
-		<div class="box-filter">
+		<div class="box-filter js-product-filter">
 			{{ productFilterForm.filterForm(filterForm, url('front_product_list', { id: category.id }), url('front_product_list', { id: category.id }), null, 'product_list') }}
 		</div>
 	{% endif %}
 
-	{% if productDetails|length > 0 %}
-		{% set entityName = 'zboží'|trans %}
-
-		<div>
-			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
-		</div>
-
-		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
-
-		{% include '@SS6Shop/Front/Content/Product/productsWithLoader.html.twig' with {paginationResult: paginationResult} %}
-
-		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
-	{% else %}
-		<div class="in-message in-message--static in-message--info js-flash-message">
-			{% if (filterFormSubmited) %}
-				{{ 'Filtru neodpovídají žádné výsledky'|trans }}
-			{% else %}
-				{{ 'Tato kategorie neobsahuje žádné produkty'|trans }}
-			{% endif %}
-		</div>
-	{% endif %}
+	<div class="js-product-list-ajax-filter-products-with-controls">
+		{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
+	</div>
 
 {% endblock %}

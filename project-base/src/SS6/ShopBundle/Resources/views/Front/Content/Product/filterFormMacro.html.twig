@@ -35,9 +35,8 @@
 
 		<div class="box-filter__buttons">
 
-			<a class="button button--simple mr-half" href="{{ resetUrl }}">{{ 'Vynulovat filtr'|trans }}</a>
-
-			{{ form_widget(filterForm.search, { label: 'Filtrovat' }) }}
+			<a class="button button--simple mr-half js-product-filter-reset-button" href="{{ resetUrl }}">{{ 'Vynulovat filtr'|trans }}</a>
+			<a class="button mr-half js-product-filter-show-result-button" href="{{ resetUrl }}">{{ 'Zobrazit výsledky'|trans }}</a>
 		</div>
 
 	{{ form_end(filterForm) }}
