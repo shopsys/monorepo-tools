@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixture extends AbstractReferenceFixture {
 
-	const PRODUCTS = 1000;
+	const PRODUCTS = 40000;
 	const BATCH_SIZE = 1000;
 
 	/**
