@@ -199,7 +199,7 @@
 {% endblock checkbox_label %}
 
 {% block product_widget %}
-	<span class="js-product-picker-container">
+	<span class="js-product-picker-container" data-placeholder="{{ placeholder }}">
 		<input
 			class="form-control js-product-picker-label"
 			value="{{ productName|default(placeholder) }}"
@@ -210,12 +210,16 @@
 			type="button"
 			data-product-picker-url="{{ url('admin_productpicker_productpicker', {parentInputId: '__input_id__'}) }}"
 			class="js-product-picker-create-picker-button"
-			title="Kliknutím přejdete k výběru produktu"
-			onclick="SS6.productPicker.makePicker(this); return false;"
+			title="{{ 'Kliknutím přejdete k výběru produktu'|trans }}"
 			type="button"
 		>
 			...
 		</button>
+		{% if enableRemove %}
+			<a href="#" class="js-product-picker-remove-button display-none">
+				<i class="fa fa-trash-o" title="{{ 'Odebrat'|trans }}"></i>
+			</a>
+		{% endif %}
 		{{- form_widget(form, {attr: {class: 'js-product-picker-input'}}) -}}
 	</span>
 {% endblock product_widget %}

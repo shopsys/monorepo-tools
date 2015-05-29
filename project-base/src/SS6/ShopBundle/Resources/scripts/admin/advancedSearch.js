@@ -66,6 +66,7 @@
 				$rule.replaceWith($newRule);
 
 				$newRule.find('.js-datePicker').datepicker();
+				SS6.productPicker.init($newRule);
 			}
 		});
 	};
@@ -76,6 +77,7 @@
 		$rule.appendTo($rulesContainer);
 
 		$rule.find('.js-datePicker').datepicker();
+		SS6.productPicker.init($rule);
 	};
 
 	SS6.advancedSearch.actualizeAllValuesByOperator = function ($rulesContainer) {
