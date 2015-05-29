@@ -10,6 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class JavascriptCompilerService {
 
 	const NOT_COMPILED_FOLDER = '/plugins/';
+	const MAX_CACHE_TIME_WEEKS = 2;
 
 	/**
 	 * @var string
@@ -131,8 +132,13 @@ class JavascriptCompilerService {
 		}
 
 		if (is_file($sourcePath)) {
+			$lastModified = filemtime($sourcePath);
 			$this->compileJavascriptFile($sourcePath, $relativeTargetPath);
-			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($relativeTargetPath);
+			if ($lastModified < time() - self::MAX_CACHE_TIME_WEEKS * 7 * 24 * 3600) {
+				$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($relativeTargetPath);
+			} else {
+				$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($relativeTargetPath) . '?v=' . $lastModified;
+			}
 			return true;
 		}
 
