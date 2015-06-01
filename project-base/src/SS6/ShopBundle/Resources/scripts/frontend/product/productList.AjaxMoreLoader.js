@@ -39,7 +39,7 @@
 			$(this).hide();
 			$loadMoreSpinner.show();
 			$.ajax({
-				type: 'POST',
+				type: 'GET',
 				url: document.location,
 				data: {page: page + 1},
 				success: function (data) {

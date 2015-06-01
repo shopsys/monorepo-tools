@@ -39,8 +39,8 @@ front_order_sent:
   defaults: { _controller: SS6ShopBundle:Front\Order:sent }
 
 front_product_search:
-  pattern: /search/{page}
-  defaults: { _controller: SS6ShopBundle:Front\Product:search, page: 1 }
+  pattern: /search
+  defaults: { _controller: SS6ShopBundle:Front\Product:search }
 
 front_registration_register:
   pattern: /registration/

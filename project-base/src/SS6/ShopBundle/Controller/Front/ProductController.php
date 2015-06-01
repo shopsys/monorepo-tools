@@ -131,9 +131,8 @@ class ProductController extends Controller {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $page
 	 */
-	public function searchAction(Request $request, $page) {
+	public function searchAction(Request $request) {
 		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
 		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
 		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
@@ -147,7 +146,7 @@ class ProductController extends Controller {
 
 		$searchText = $request->query->get('q');
 
-		$page = $request->request->get('page', $page);
+		$page = $request->get(self::PAGE_QUERY_PARAMETER);
 
 		if ($page === '1') {
 			return $this->redirect($this->generateUrl('front_product_search', $request->query->all()));
