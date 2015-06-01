@@ -35,7 +35,6 @@
 			self.init();
 		};
 
-
 		var onClickLoadMoreButton = function () {
 			$(this).hide();
 			$loadMoreSpinner.show();
@@ -45,7 +44,7 @@
 				data: {page: page + 1},
 				success: function (data) {
 					var $response = $($.parseHTML(data));
-					var $nextProducts = $response.find('.js-product-list>li');
+					var $nextProducts = $response.find('.js-product-list > li');
 					$currentProductList.append($nextProducts);
 					$loadMoreSpinner.hide();
 					page++;
@@ -69,8 +68,6 @@
 				$loadMoreButton.hide();
 			}
 		};
-
-
 
 	};
 
