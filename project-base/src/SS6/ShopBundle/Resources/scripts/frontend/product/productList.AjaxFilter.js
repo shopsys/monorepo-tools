@@ -24,7 +24,9 @@
 
 			$resetFilterButton.click(function () {
 				$productsWithControls.addClass('js-disable');
-				$productFilterForm[0].reset();
+				$productFilterForm
+					.find(':radio, :checkbox').removeAttr('checked').end()
+					.find('textarea, :text, select').val('');
 				submitFormWithAjax();
 				return false;
 			});
