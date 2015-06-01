@@ -13,6 +13,7 @@
 		this.init = function () {
 			$productFilterForm.change(function () {
 				$productsWithControls.addClass('js-disable');
+				history.replaceState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
 				submitFormWithAjax($productFilterForm.serialize());
 			});
 
@@ -27,6 +28,8 @@
 				$productFilterForm
 					.find(':radio, :checkbox').removeAttr('checked').end()
 					.find('textarea, :text, select').val('');
+				var resetUrl = $(this).attr('href');
+				history.replaceState({}, '', resetUrl);
 				submitFormWithAjax();
 				return false;
 			});
