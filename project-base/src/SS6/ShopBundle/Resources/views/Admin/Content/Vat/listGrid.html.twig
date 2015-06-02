@@ -20,6 +20,48 @@
 	</span>
 {% endblock %}
 
+{% block grid_value_cell_id_name %}
+	{% if row.vat.markedAsDeleted %}
+		<span class="text-muted">
+			{{ value }}
+			<span
+				title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
+				class="js-tooltip table-action cursor-help"
+				data-toggle="tooltip"
+				data-placement="right"
+			>
+				<i class="fa fa-warning"></i>
+			</span>
+		</span>
+	{% else %}
+		{{ value }}
+	{% endif %}
+{% endblock %}
+
+{% block grid_action_cell %}
+	{% if row.vat.markedAsDeleted %}
+		<span
+			title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
+			class="js-tooltip table-action cursor-help text-muted"
+			data-toggle="tooltip"
+			data-placement="bottom"
+		>
+			<i class="fa fa-trash-o"></i>
+		</span>
+	{% elseif row.asReplacementCount > 0 %}
+		<span
+			title="{{ 'Sazba DPH nemůže být odstraněna, protože právě probíhá přepočet na tuto sazbu DPH.'|trans }}"
+			class="js-tooltip table-action cursor-help text-muted"
+			data-toggle="tooltip"
+			data-placement="bottom"
+		>
+			<i class="fa fa-trash-o"></i>
+		</span>
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
 {% block grid_value_cell_id_percent %}
 	{{ value|formatPercent }}
 {% endblock %}

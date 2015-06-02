@@ -71,6 +71,19 @@ class VatRepository {
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @return bool
+	 */
+	public function existsVatToBeReplacedWith(Vat $vat) {
+		$query = $this->em->createQuery('
+			SELECT COUNT(v)
+			FROM ' . Vat::class . ' v
+			WHERE v.replaceWith = :vat')
+			->setParameter('vat', $vat);
+		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+	}
+
 	public function isVatUsed(Vat $vat) {
 		return $this->existsPaymentWithVat($vat)
 			|| $this->existsTransportWithVat($vat)
@@ -78,7 +91,7 @@ class VatRepository {
 	}
 
 	/**
-	 * @param Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	private function existsPaymentWithVat(Vat $vat) {
@@ -91,7 +104,7 @@ class VatRepository {
 	}
 
 	/**
-	 * @param Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	private function existsTransportWithVat(Vat $vat) {
@@ -104,7 +117,7 @@ class VatRepository {
 	}
 
 	/**
-	 * @param Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	private function existsProductWithVat(Vat $vat) {

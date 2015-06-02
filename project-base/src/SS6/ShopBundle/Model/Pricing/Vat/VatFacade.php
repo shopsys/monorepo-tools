@@ -135,6 +135,14 @@ class VatFacade {
 		$oldVat = $this->vatRepository->getById($vatId);
 		$newVat = $newVatId ? $this->vatRepository->getById($newVatId) : null;
 
+		if ($oldVat->isMarkedAsDeleted()) {
+			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatMarkedAsDeletedDeleteException();
+		}
+
+		if ($this->vatRepository->existsVatToBeReplacedWith($oldVat)) {
+			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatWithReplacedDeleteException();
+		}
+
 		$this->em->beginTransaction();
 
 		if ($newVat !== null) {
@@ -147,14 +155,13 @@ class VatFacade {
 
 			$this->paymentEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
 			$this->trasnportEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
-			$this->productEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
+			$oldVat->markForDeletion($newVat);
+		} else {
+			$this->em->remove($oldVat);
 		}
 
-		$this->em->remove($oldVat);
 		$this->em->flush();
 		$this->em->commit();
-
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
 	}
 
 	/**
