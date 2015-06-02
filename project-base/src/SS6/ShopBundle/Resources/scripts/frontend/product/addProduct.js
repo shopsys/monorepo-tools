@@ -3,8 +3,8 @@
 	SS6 = window.SS6 || {};
 	SS6.addProduct = SS6.addProduct || {};
 
-	SS6.addProduct.init = function () {
-		$('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
+	SS6.addProduct.init = function ($container) {
+		$container.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 	};
 
 	SS6.addProduct.ajaxSubmit = function (event) {
@@ -21,15 +21,10 @@
 	};
 
 	SS6.addProduct.onSuccess = function (data) {
-		var $data = $($.parseHTML(data));
-
 		SS6.window({
-			content: $data,
+			content: data,
 			wide: true
 		});
-
-		// TODO: temporal solution, US-537 should fix this
-		$data.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 
 		$('#cart-box').trigger('reload');
 	};
@@ -40,8 +35,6 @@
 		});
 	};
 
-	$(document).ready(function () {
-		SS6.addProduct.init();
-	});
+	SS6.eventBinder.registerCallback(SS6.addProduct.init);
 
 })(jQuery);
