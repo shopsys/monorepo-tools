@@ -65,7 +65,6 @@
 				var $newRule = $($.parseHTML(data));
 				$rule.replaceWith($newRule);
 
-				$newRule.find('.js-datePicker').datepicker();
 				SS6.eventBinder.init($newRule);
 			}
 		});
@@ -76,7 +75,6 @@
 		var $rule = $($.parseHTML(ruleHtml));
 		$rule.appendTo($rulesContainer);
 
-		$rule.find('.js-datePicker').datepicker();
 		SS6.eventBinder.init($rule);
 	};
 
