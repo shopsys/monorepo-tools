@@ -153,7 +153,7 @@
 	}
 
 	SS6.grid.inlineEdit.loadComponents = function ($row) {
-		$row.find('.js-tooltip[title]').tooltip();
+		SS6.eventBinder.init($row);
 		$row.find('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
 		$row.find('.js-colorPicker').minicolors({
 			theme: 'bootstrap'

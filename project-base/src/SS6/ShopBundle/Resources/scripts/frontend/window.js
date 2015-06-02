@@ -109,7 +109,7 @@
 			$window.append($windowActions);
 		}
 
-		$window.find('.js-tooltip[title]').tooltip();
+		SS6.eventBinder.init($window);
 
 		show();
 
