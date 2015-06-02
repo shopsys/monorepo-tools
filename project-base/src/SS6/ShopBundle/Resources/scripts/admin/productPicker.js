@@ -61,8 +61,6 @@
 		return elementId;
 	};
 
-	$(document).ready(function () {
-		SS6.productPicker.init($('body'));
-	});
+	SS6.eventBinder.registerCallback(SS6.productPicker.init);
 
 })(jQuery);
