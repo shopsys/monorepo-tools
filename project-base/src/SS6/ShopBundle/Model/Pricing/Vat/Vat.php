@@ -75,7 +75,6 @@ class Vat {
 	 */
 	public function edit(VatData $vatData) {
 		$this->name = $vatData->name;
-		$this->percent = $vatData->percent;
 	}
 
 }

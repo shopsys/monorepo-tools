@@ -39,10 +39,8 @@ class VatServiceTest extends PHPUnit_Framework_TestCase {
 
 		$vatService->edit($vat, $vatDataEdit);
 
-		$vatDataNew = new VatData();
-		$vatDataNew->setFromEntity($vat);
-
-		$this->assertEquals($vatDataEdit, $vatDataNew);
+		$this->assertSame('editVatName', $vat->getName());
+		$this->assertEquals('21.00', $vat->getPercent());
 	}
 
 	public function testEditSchedulesPriceRecalculation() {
