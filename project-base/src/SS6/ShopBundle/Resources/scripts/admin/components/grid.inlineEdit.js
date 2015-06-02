@@ -77,8 +77,7 @@
 				if (saveResult.success) {
 					var $newRow = $(saveResult.rowHtml);
 					$formRow.replaceWith($newRow).remove();
-					SS6.grid.inlineEdit.loadComponents($formRow);
-					SS6.ajaxConfirm.init();
+					SS6.grid.inlineEdit.loadComponents($newRow);
 				} else {
 					$buttons.show();
 					$saving.hide();
@@ -154,7 +153,6 @@
 
 	SS6.grid.inlineEdit.loadComponents = function ($row) {
 		SS6.eventBinder.init($row);
-		$row.find('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
 		$row.find('.js-colorPicker').minicolors({
 			theme: 'bootstrap'
 		});
