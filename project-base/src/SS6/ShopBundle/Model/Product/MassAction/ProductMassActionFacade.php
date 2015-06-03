@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Product\MassAction;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
+use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductMassActionFacade {
 
@@ -17,12 +19,26 @@ class ProductMassActionFacade {
 	 */
 	private $productMassActionRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
+	 */
+	private $productVisibilityFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductHiddenRecalculator
+	 */
+	private $productHiddenRecalculator;
+
 	public function __construct(
 		EntityManager $em,
-		ProductMassActionRepository $productMassActionRepository
+		ProductMassActionRepository $productMassActionRepository,
+		ProductVisibilityFacade $productVisibilityFacade,
+		ProductHiddenRecalculator $productHiddenRecalculator
 	) {
 		$this->em = $em;
 		$this->productMassActionRepository = $productMassActionRepository;
+		$this->productVisibilityFacade = $productVisibilityFacade;
+		$this->productHiddenRecalculator = $productHiddenRecalculator;
 	}
 
 	/**
@@ -47,6 +63,8 @@ class ProductMassActionFacade {
 					$selectedProductIds,
 					$productMassActionData->value === ProductMassActionData::VALUE_PRODUCT_HIDE
 				);
+				$this->productHiddenRecalculator->calculateHiddenForAll();
+				$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 			}
 		}
 	}
