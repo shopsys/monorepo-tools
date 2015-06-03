@@ -152,9 +152,6 @@
 
 	SS6.grid.inlineEdit.loadComponents = function ($row) {
 		SS6.eventBinder.init($row);
-		$row.find('.js-colorPicker').minicolors({
-			theme: 'bootstrap'
-		});
 	}
 
 	$(document).ready(function () {
