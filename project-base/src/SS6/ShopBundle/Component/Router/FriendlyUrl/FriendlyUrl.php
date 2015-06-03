@@ -95,6 +95,13 @@ class FriendlyUrl {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isMain() {
+		return $this->main;
+	}
+
+	/**
 	 * @param bool $main
 	 */
 	public function setMain($main) {

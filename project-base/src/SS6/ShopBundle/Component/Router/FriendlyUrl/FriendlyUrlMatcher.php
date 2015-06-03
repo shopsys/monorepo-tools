@@ -39,6 +39,12 @@ class FriendlyUrlMatcher {
 		$matchedParameters['_route'] = $friendlyUrl->getRouteName();
 		$matchedParameters['id'] = $friendlyUrl->getEntityId();
 
+		if (!$friendlyUrl->isMain()) {
+			$matchedParameters['_controller'] = 'FrameworkBundle:Redirect:redirect';
+			$matchedParameters['route'] = $friendlyUrl->getRouteName();
+			$matchedParameters['permanent'] = true;
+		}
+
 		return $matchedParameters;
 	}
 
