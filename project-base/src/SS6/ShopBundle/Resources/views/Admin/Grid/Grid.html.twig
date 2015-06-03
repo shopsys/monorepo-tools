@@ -68,6 +68,9 @@
 			{% if grid.dragAndDrop %}
 				<th></th>
 			{% endif %}
+			{% if grid.isAllowedSelecting %}
+				<th><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
+			{% endif %}
 			{% for column in grid.columns %}
 				<th class="{% if column.classAttribute %} {{ column.classAttribute }}{% endif %}{% if loop.last and grid.actionColumns is empty %} last-column{% endif %}">
 					{{ gridView.renderTitleCell(column) }}
@@ -125,6 +128,17 @@
 		{% if grid.dragAndDrop %}
 			<td class="table-col-40px">
 				<i class="cursor-move fa fa-arrows"></i>
+			</td>
+		{% endif %}
+		{% if grid.isAllowedSelecting %}
+			<td>
+				<input
+					class="js-grid-mass-action-select-row"
+					type="checkbox"
+					name="g[{{ grid.id|escape('html_attr') }}][selectedRowIds][]"
+					value="{{ grid.getRowId(row)|escape('html_attr') }}"
+					{% if grid.isRowSelected(row) %}checked="checked"{% endif %}
+				/>
 			</td>
 		{% endif %}
 		{% for column in grid.columns %}

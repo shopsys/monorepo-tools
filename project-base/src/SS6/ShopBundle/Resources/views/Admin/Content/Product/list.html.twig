@@ -18,12 +18,22 @@
 						isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
 					}
 				%}
+			{{ form_end(quickSearchForm) }}
+
+			{{ form_start(massActionForm) }}
+				<div class="wrap-box">
+					{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans }) }}
+					{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
+					{{ form_widget(massActionForm.subject) }}
+					{{ form_widget(massActionForm.value) }}
+
+					{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn btn-primary' } }) }}
+				</div>
 
 				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
 				{{ gridView.render() }}
 				{{ gridView.renderHiddenInputs('page') }}
-
-			{{ form_end(quickSearchForm) }}
+			{{ form_end(massActionForm) }}
 		</div>
 	</div>
 {% endblock %}
