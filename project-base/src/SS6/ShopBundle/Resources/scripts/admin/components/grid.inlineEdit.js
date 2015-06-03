@@ -77,7 +77,7 @@
 				if (saveResult.success) {
 					var $newRow = $(saveResult.rowHtml);
 					$formRow.replaceWith($newRow).remove();
-					SS6.grid.inlineEdit.loadComponents($newRow);
+					SS6.register.registerNewContent($newRow);
 				} else {
 					$buttons.show();
 					$saving.hide();
@@ -103,7 +103,7 @@
 				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
 				$row.replaceWith($formRow);
-				SS6.grid.inlineEdit.loadComponents($formRow);
+				SS6.register.registerNewContent($formRow);
 				$formRow.data('$originalRow', $row);
 			}
 		});
@@ -121,7 +121,7 @@
 				var $formRow = $($.parseHTML(formRowData));
 				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
-				SS6.grid.inlineEdit.loadComponents($formRow);
+				SS6.register.registerNewContent($formRow);
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
 				$formRow.find('input[type=text]:first').focus();
 			}
@@ -132,7 +132,7 @@
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
 			$formRow.replaceWith($originalRow).remove();
-			SS6.grid.inlineEdit.loadComponents($originalRow);
+			SS6.register.registerNewContent($originalRow);
 			SS6.grid.inlineEdit.enableRow($originalRow);
 		}
 		$formRow.remove();
@@ -148,10 +148,6 @@
 
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
-	}
-
-	SS6.grid.inlineEdit.loadComponents = function ($row) {
-		SS6.register.registerNewContent($row);
 	}
 
 	$(document).ready(function () {
