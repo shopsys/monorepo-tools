@@ -31,9 +31,27 @@ class VatRepository {
 	}
 
 	/**
+	 * @param string $vatAlias
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getQueryBuilderForAll($vatAlias) {
+		return $this->getVatRepository()
+			->createQueryBuilder($vatAlias)
+			->where($vatAlias . '.replaceWith IS NULL')
+			->orderBy($vatAlias . '.percent');
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAll() {
+		return $this->getQueryBuilderForAll('v')->getQuery()->getResult();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 */
+	public function getAllIncludingMarkedForDeletion() {
 		return $this->getVatRepository()->findAll();
 	}
 
@@ -64,8 +82,8 @@ class VatRepository {
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAllExceptId($vatId) {
-		$qb = $this->getVatRepository()->createQueryBuilder('v')
-			->where('v.id != :id')
+		$qb = $this->getQueryBuilderForAll('v')
+			->andWhere('v.id != :id')
 			->setParameter('id', $vatId);
 
 		return $qb->getQuery()->getResult();
