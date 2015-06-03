@@ -15,14 +15,14 @@
 			success: function (data) {
 				$('#cart-box').replaceWith(data);
 
-				SS6.eventBinder.init($('#cart-box').parent());
+				SS6.register.registerNewContent($('#cart-box').parent());
 			}
 		});
 
 		event.preventDefault();
 	};
 
-	SS6.eventBinder.registerCallback(SS6.cartBox.init);
+	SS6.register.registerCallback(SS6.cartBox.init);
 
 })(jQuery);
 

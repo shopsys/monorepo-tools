@@ -61,6 +61,6 @@
 		return elementId;
 	};
 
-	SS6.eventBinder.registerCallback(SS6.productPicker.init);
+	SS6.register.registerCallback(SS6.productPicker.init);
 
 })(jQuery);

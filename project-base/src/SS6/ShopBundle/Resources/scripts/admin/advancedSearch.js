@@ -65,7 +65,7 @@
 				var $newRule = $($.parseHTML(data));
 				$rule.replaceWith($newRule);
 
-				SS6.eventBinder.init($newRule);
+				SS6.register.registerNewContent($newRule);
 			}
 		});
 	};
@@ -75,7 +75,7 @@
 		var $rule = $($.parseHTML(ruleHtml));
 		$rule.appendTo($rulesContainer);
 
-		SS6.eventBinder.init($rule);
+		SS6.register.registerNewContent($rule);
 	};
 
 	SS6.advancedSearch.actualizeAllValuesByOperator = function ($rulesContainer) {

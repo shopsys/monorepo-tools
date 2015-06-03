@@ -46,7 +46,7 @@
 					$paginationToItemSpan.text(paginationToItem);
 					updateLoadMoreButton();
 
-					SS6.eventBinder.init($nextProducts);
+					SS6.register.registerNewContent($nextProducts);
 				}
 			});
 		};

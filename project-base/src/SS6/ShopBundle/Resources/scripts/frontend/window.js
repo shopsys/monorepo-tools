@@ -109,7 +109,7 @@
 			$window.append($windowActions);
 		}
 
-		SS6.eventBinder.init($window);
+		SS6.register.registerNewContent($window);
 
 		show();
 

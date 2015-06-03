@@ -35,6 +35,6 @@
 		});
 	};
 
-	SS6.eventBinder.registerCallback(SS6.addProduct.init);
+	SS6.register.registerCallback(SS6.addProduct.init);
 
 })(jQuery);

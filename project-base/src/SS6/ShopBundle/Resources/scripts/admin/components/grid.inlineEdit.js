@@ -151,7 +151,7 @@
 	}
 
 	SS6.grid.inlineEdit.loadComponents = function ($row) {
-		SS6.eventBinder.init($row);
+		SS6.register.registerNewContent($row);
 	}
 
 	$(document).ready(function () {

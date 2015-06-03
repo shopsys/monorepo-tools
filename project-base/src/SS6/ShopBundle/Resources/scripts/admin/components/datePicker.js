@@ -10,6 +10,6 @@
 		});
 	};
 
-	SS6.eventBinder.registerCallback(datePicker);
+	SS6.register.registerCallback(datePicker);
 
 })(jQuery);

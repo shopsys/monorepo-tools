@@ -29,6 +29,6 @@
 			});
 	};
 
-	SS6.eventBinder.registerCallback(SS6.ajaxConfirm.init);
+	SS6.register.registerCallback(SS6.ajaxConfirm.init);
 
 })(jQuery);
