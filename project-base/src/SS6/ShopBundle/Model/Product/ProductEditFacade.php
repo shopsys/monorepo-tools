@@ -15,7 +15,9 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
 use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Product\ProductSellableRecalculator;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
@@ -82,6 +84,16 @@ class ProductEditFacade {
 	 */
 	private $friendlyUrlFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductHiddenRecalculator
+	 */
+	private $productHiddenRecalculator;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductSellableRecalculator
+	 */
+	private $productSellableRecalculator;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -94,7 +106,9 @@ class ProductEditFacade {
 		PricingGroupRepository $pricingGroupRepository,
 		ProductManualInputPriceFacade $productManualInputPriceFacade,
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
-		FriendlyUrlFacade $friendlyUrlFacade
+		FriendlyUrlFacade $friendlyUrlFacade,
+		ProductHiddenRecalculator $productHiddenRecalculator,
+		ProductSellableRecalculator $productSellableRecalculator
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -108,6 +122,8 @@ class ProductEditFacade {
 		$this->productManualInputPriceFacade = $productManualInputPriceFacade;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
+		$this->productHiddenRecalculator = $productHiddenRecalculator;
+		$this->productSellableRecalculator = $productSellableRecalculator;
 	}
 
 	/**
@@ -133,6 +149,8 @@ class ProductEditFacade {
 		$this->createProductVisibilities($product);
 		$this->refreshProductDomains($product, $productEditData);
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+		$this->productHiddenRecalculator->calculateHiddenForProduct($product);
+		$this->productSellableRecalculator->calculateSellableForProduct($product);
 
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
@@ -161,6 +179,8 @@ class ProductEditFacade {
 			$this->refreshProductDomains($product, $productEditData);
 			$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 			$this->em->flush();
+			$this->productHiddenRecalculator->calculateHiddenForProduct($product);
+			$this->productSellableRecalculator->calculateSellableForProduct($product);
 			$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 			$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
 			$this->friendlyUrlFacade->saveUrlListFormData($productEditData->urls);
