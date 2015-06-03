@@ -96,7 +96,7 @@ class VatFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAll() {
-		return $this->vatRepository->findAll();
+		return $this->vatRepository->getAll();
 	}
 
 	/**

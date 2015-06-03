@@ -34,7 +34,7 @@ class PaymentFormTypeFactory {
 	 */
 	public function create() {
 		$allTransports = $this->transportRepository->findAll();
-		$vats = $this->vatRepository->findAll();
+		$vats = $this->vatRepository->getAll();
 
 		return new PaymentFormType($allTransports, $vats);
 	}

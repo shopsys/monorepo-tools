@@ -33,7 +33,7 @@ class VatRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getVatRepository()->findAll();
 	}
 
