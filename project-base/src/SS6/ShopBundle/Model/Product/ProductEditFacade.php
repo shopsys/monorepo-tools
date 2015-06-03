@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -215,30 +214,6 @@ class ProductEditFacade {
 			$toFlush[] = $productParameterValue;
 		}
 		$this->em->flush($toFlush);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
-	 */
-	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
-		$products = $this->productRepository->getAllByVat($oldVat);
-		foreach ($products as $product) {
-			$this->productService->replaceOldVatWithNewVat($product, $newVat);
-		}
-		$this->em->flush();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
-	 * @param string $newVatPercent
-	 */
-	public function recalculateInputPricesForNewVatPercent(Vat $oldVat, $newVatPercent) {
-		$products = $this->productRepository->getAllByVat($oldVat);
-		foreach ($products as $product) {
-			$this->productService->recalculateInputPriceForNewVatPercent($product, $newVatPercent);
-		}
-		$this->em->flush();
 	}
 
 	/**

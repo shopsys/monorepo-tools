@@ -102,6 +102,21 @@ class VatRepository {
 		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 */
+	public function getVatsWithoutProductsMarkedForDeletion() {
+		$query = $this->em->createQuery('
+			SELECT v
+			FROM ' . Vat::class . ' v
+			LEFT JOIN ' . Product::class . ' p WITH p.vat = v
+			WHERE v.replaceWith IS NOT NULL
+			GROUP BY v
+			HAVING COUNT(p) = 0');
+
+		return $query->getResult();
+	}
+
 	public function isVatUsed(Vat $vat) {
 		return $this->existsPaymentWithVat($vat)
 			|| $this->existsTransportWithVat($vat)

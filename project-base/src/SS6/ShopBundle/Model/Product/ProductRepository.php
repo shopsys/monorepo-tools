@@ -368,11 +368,17 @@ class ProductRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Iterator
 	 */
-	public function getAllByVat(Vat $vat) {
-		return $this->getProductRepository()->findBy(['vat' => $vat]);
+	public function getProductIteratorForReplaceVat() {
+		$query = $this->em->createQuery('
+			SELECT p
+			FROM ' . Product::class . ' p
+			JOIN p.vat v
+			WHERE v.replaceWith IS NOT NULL
+		');
+
+		return $query->iterate();
 	}
 
 	/**
@@ -441,15 +447,6 @@ class ProductRepository {
 		$this->em
 			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE')
 			->execute();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 */
-	public function markProductsForPriceRecalculationByVat(Vat $vat) {
-		$this->em
-			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE WHERE p.vat = :vat')
-			->execute(['vat' => $vat]);
 	}
 
 	/**

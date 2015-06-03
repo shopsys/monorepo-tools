@@ -1,3 +1,8 @@
+- service: SS6\ShopBundle\Model\Pricing\Vat\VatDeletionCronService
+  time:
+    minutes: '*'
+    hours: '*'
+
 - service: SS6\ShopBundle\Model\Product\Pricing\ProductPriceCronService
   time:
     minutes: '*'

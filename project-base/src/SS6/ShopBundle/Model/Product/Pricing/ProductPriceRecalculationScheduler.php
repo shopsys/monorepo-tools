@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -30,13 +29,6 @@ class ProductPriceRecalculationScheduler {
 	 */
 	public function scheduleRecalculatePriceForProduct(Product $product) {
 		$this->products[$product->getId()] = $product;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 */
-	public function scheduleRecalculatePriceForVat(Vat $vat) {
-		$this->productRepository->markProductsForPriceRecalculationByVat($vat);
 	}
 
 	public function scheduleRecalculatePriceForAllProducts() {

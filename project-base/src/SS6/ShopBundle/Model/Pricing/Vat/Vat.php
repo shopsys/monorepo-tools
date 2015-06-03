@@ -70,6 +70,13 @@ class Vat {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 */
+	public function getReplaceWith() {
+		return $this->replaceWith;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getCoefficient() {

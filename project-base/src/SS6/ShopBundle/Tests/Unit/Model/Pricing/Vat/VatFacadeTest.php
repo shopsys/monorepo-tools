@@ -21,7 +21,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 	public function testGetDefaultVat() {
 		$expected = new stdClass();
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
-		$vatServiceMock = $this->getMock(VatService::class, [], [], '', false);
+		$vatService = new VatService();
 		$paymentEditFacadeMock = $this->getMock(PaymentEditFacade::class, [], [], '', false);
 		$productEditFacadeMock = $this->getMock(ProductEditFacade::class, [], [], '', false);
 		$transportEditFacadeMock = $this->getMock(TransportEditFacade::class, [], [], '', false);
@@ -53,7 +53,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 		$vatFacade = new VatFacade(
 			$emMock,
 			$vatRepositoryMock,
-			$vatServiceMock,
+			$vatService,
 			$settingMock,
 			$paymentEditFacadeMock,
 			$productEditFacadeMock,
@@ -66,7 +66,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testSetDefaultVat() {
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
-		$vatServiceMock = $this->getMock(VatService::class, [], [], '', false);
+		$vatService = new VatService();
 		$vatRepositoryMock = $this->getMock(VatRepository::class, [], [], '', false);
 		$paymentEditFacadeMock = $this->getMock(PaymentEditFacade::class, [], [], '', false);
 		$productEditFacadeMock = $this->getMock(ProductEditFacade::class, [], [], '', false);
@@ -94,7 +94,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 		$vatFacade = new VatFacade(
 			$emMock,
 			$vatRepositoryMock,
-			$vatServiceMock,
+			$vatService,
 			$settingMock,
 			$paymentEditFacadeMock,
 			$productEditFacadeMock,

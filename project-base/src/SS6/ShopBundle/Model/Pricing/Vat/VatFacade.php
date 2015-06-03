@@ -118,7 +118,6 @@ class VatFacade {
 	 */
 	public function edit($vatId, VatData $vatData) {
 		$vat = $this->vatRepository->getById($vatId);
-		$this->productEditFacade->recalculateInputPricesForNewVatPercent($vat, $vatData->percent);
 		$this->vatService->edit($vat, $vatData);
 		$this->em->flush();
 
@@ -162,6 +161,19 @@ class VatFacade {
 
 		$this->em->flush();
 		$this->em->commit();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function deleteAllReplacedVats() {
+		$vatsForDelete = $this->vatRepository->getVatsWithoutProductsMarkedForDeletion();
+		foreach ($vatsForDelete as $vatForDelete) {
+			$this->em->remove($vatForDelete);
+		}
+		$this->em->flush($vatsForDelete);
+
+		return count($vatsForDelete);
 	}
 
 	/**
