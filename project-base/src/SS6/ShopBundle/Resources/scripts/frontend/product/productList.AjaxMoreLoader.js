@@ -59,13 +59,16 @@
 
 		var updateLoadMoreButton = function () {
 			var remaining = totalCount - page * pageSize;
-			if (remaining > 0 && remaining < pageSize) {
-				$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': remaining})).show();
-			} else if (remaining >= pageSize) {
-				$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': pageSize})).show();
-			} else if (remaining <= 0) {
-				$loadMoreButton.hide();
-			}
+			var loadNextCount = remaining >= pageSize ? pageSize : remaining;
+			var buttonText = SS6.translator.transChoice(
+				'[1,4] Načíst další %loadNextCount% zboží|[5,Inf]Načíst dalších %loadNextCount% zboží',
+				loadNextCount,
+				{'%loadNextCount%': loadNextCount}
+			);
+
+			$loadMoreButton
+				.val(buttonText)
+				.toggle(remaining > 0);
 		};
 
 	};
