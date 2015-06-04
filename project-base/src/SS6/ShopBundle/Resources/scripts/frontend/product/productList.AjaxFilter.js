@@ -13,6 +13,7 @@
 		this.init = function () {
 			$productFilterForm.change(function () {
 				$productsWithControls.addClass('js-disable');
+				$('.js-product-list-ajax-filter-loading').show();
 				history.replaceState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
 				submitFormWithAjax($productFilterForm.serialize());
 			});
@@ -25,6 +26,7 @@
 
 			$resetFilterButton.click(function () {
 				$productsWithControls.addClass('js-disable');
+				$('.js-product-list-ajax-filter-loading').show();
 				$productFilterForm
 					.find(':radio, :checkbox').removeAttr('checked').end()
 					.find('textarea, :text, select').val('');
@@ -43,6 +45,7 @@
 					$productsWithControls.html(data);
 					$productsWithControls.show();
 					$productsWithControls.removeClass('js-disable');
+					$('.js-product-list-ajax-filter-loading').hide();
 					ajaxMoreLoader.reInit();
 					SS6.register.registerNewContent($productsWithControls);
 				}

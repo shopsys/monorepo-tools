@@ -27,6 +27,9 @@
 		</div>
 	{% endif %}
 
+	<div class="js-product-list-ajax-filter-loading text-center display-none">
+		<i class="fa fa-spinner fa-spin fa-5x" title="{{ 'Načítám'|trans }}"></i>
+	</div>
 	<div class="js-product-list-ajax-filter-products-with-controls">
 		{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
 	</div>
