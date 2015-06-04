@@ -62,7 +62,7 @@
 			var remaining = totalCount - page * pageSize;
 			if (remaining > 0 && remaining < pageSize) {
 				$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': remaining})).show();
-			} else if (remaining > pageSize) {
+			} else if (remaining >= pageSize) {
 				$loadMoreButton.val(SS6.translator.trans('Načíst dalších %remaining% zboží', {'%remaining%': pageSize})).show();
 			} else if (remaining <= 0) {
 				$loadMoreButton.hide();
