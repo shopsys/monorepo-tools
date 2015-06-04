@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
@@ -146,6 +147,7 @@ class ProductController extends Controller {
 		$advancedSearchData = $advancedSearchForm->getData();
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
+		$quickSearchForm->setData(new QuickSearchFormData());
 		$quickSearchForm->handleRequest($request);
 		$quickSearchData = $quickSearchForm->getData();
 

@@ -6,6 +6,7 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
@@ -95,12 +96,12 @@ class OrderRepository {
 
 	/**
 	 * @param string $locale
-	 * @param array|null $searchData
+	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getOrderListQueryBuilderByQuickSearchData(
 		$locale,
-		array $searchData = null
+		QuickSearchFormData $quickSearchData
 	) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('
@@ -122,7 +123,7 @@ class OrderRepository {
 			->setParameter('deleted', false)
 			->setParameter('locale', $locale);
 
-		if ($searchData['text'] !== null && $searchData['text'] !== '') {
+		if ($quickSearchData->text !== null && $quickSearchData->text !== '') {
 			$queryBuilder
 				->leftJoin(User::class, 'u', Join::WITH, 'o.customer = u.id')
 				->andWhere('
@@ -138,7 +139,7 @@ class OrderRepository {
 						NORMALIZE(u.email) LIKE NORMALIZE(:text)
 					)'
 				);
-			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
+			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
 			$queryBuilder->setParameter('text', $querySerachText);
 		}
 

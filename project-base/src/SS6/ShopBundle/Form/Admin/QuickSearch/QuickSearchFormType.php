@@ -33,6 +33,7 @@ class QuickSearchFormType extends AbstractType {
 		$resolver->setDefaults([
 			'attr' => ['novalidate' => 'novalidate'],
 			'csrf_protection' => false,
+			'data_class' => QuickSearchFormData::class,
 		]);
 	}
 
