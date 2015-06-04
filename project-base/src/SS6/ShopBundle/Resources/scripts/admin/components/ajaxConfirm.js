@@ -3,9 +3,9 @@
 	SS6 = window.SS6 || {};
 	SS6.ajaxConfirm = SS6.ajaxConfirm || {};
 
-	SS6.ajaxConfirm.init = function () {
-		$('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
-	}
+	SS6.ajaxConfirm.init = function ($container) {
+		$container.find('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
+	};
 
 	SS6.ajaxConfirm.bind = function () {
 		$(this)
@@ -29,8 +29,6 @@
 			});
 	};
 
-	$(document).ready(function () {
-		SS6.ajaxConfirm.init();
-	});
+	SS6.register.registerCallback(SS6.ajaxConfirm.init);
 
 })(jQuery);

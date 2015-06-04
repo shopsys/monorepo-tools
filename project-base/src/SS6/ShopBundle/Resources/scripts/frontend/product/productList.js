@@ -46,8 +46,7 @@
 					$paginationToItemSpan.text(paginationToItem);
 					updateLoadMoreButton();
 
-					// TODO: temporal solution, US-537 should fix this
-					$nextProducts.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
+					SS6.register.registerNewContent($nextProducts);
 				}
 			});
 		};

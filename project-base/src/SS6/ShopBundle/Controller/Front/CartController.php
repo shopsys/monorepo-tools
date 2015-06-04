@@ -285,7 +285,7 @@ class CartController extends BaseController {
 				$productName = $cartFacade->getProductByCartItemId($cartItemId)->getName();
 				$cartFacade->deleteCartItem($cartItemId);
 				$flashMessageSender->addSuccessFlashTwig(
-					'Z košíku bylo ostraněno zboží {{ name }}',
+					'Z košíku bylo odstraněno zboží {{ name }}',
 					['name' => $productName]
 				);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {

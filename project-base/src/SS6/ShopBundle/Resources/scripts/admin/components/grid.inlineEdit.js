@@ -77,8 +77,7 @@
 				if (saveResult.success) {
 					var $newRow = $(saveResult.rowHtml);
 					$formRow.replaceWith($newRow).remove();
-					SS6.grid.inlineEdit.loadComponents($formRow);
-					SS6.ajaxConfirm.init();
+					SS6.register.registerNewContent($newRow);
 				} else {
 					$buttons.show();
 					$saving.hide();
@@ -104,7 +103,7 @@
 				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
 				$row.replaceWith($formRow);
-				SS6.grid.inlineEdit.loadComponents($formRow);
+				SS6.register.registerNewContent($formRow);
 				$formRow.data('$originalRow', $row);
 			}
 		});
@@ -122,10 +121,9 @@
 				var $formRow = $($.parseHTML(formRowData));
 				$formRow.addClass('js-grid-editing-row');
 				$formRow.find('.js-inline-edit-saving').hide();
-				SS6.grid.inlineEdit.loadComponents($formRow);
+				SS6.register.registerNewContent($formRow);
 				$grid.find('.js-inline-edit-rows').prepend($formRow);
 				$formRow.find('input[type=text]:first').focus();
-				SS6.productPicker.init($formRow);
 			}
 		});
 	}
@@ -134,7 +132,7 @@
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
 			$formRow.replaceWith($originalRow).remove();
-			SS6.grid.inlineEdit.loadComponents($originalRow);
+			SS6.register.registerNewContent($originalRow);
 			SS6.grid.inlineEdit.enableRow($originalRow);
 		}
 		$formRow.remove();
@@ -150,14 +148,6 @@
 
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
-	}
-
-	SS6.grid.inlineEdit.loadComponents = function ($row) {
-		$row.find('.js-tooltip[title]').tooltip();
-		$row.find('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
-		$row.find('.js-colorPicker').minicolors({
-			theme: 'bootstrap'
-		});
 	}
 
 	$(document).ready(function () {
