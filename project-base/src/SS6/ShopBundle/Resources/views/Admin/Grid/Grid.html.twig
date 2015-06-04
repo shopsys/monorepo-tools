@@ -1,5 +1,6 @@
 {% block grid %}
 <div class="grid js-grid" {% spaceless %}
+		data-total-count="{{ grid.totalCount }}"
 		{% if grid.inlineEdit %}
 			data-inline-edit-service-name="{{ grid.inlineEditService.serviceName }}"
 			data-inline-edit-url-get-form="{{ url('admin_grid_getform') }}"

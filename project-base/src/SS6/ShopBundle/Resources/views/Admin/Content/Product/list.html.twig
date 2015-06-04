@@ -22,12 +22,12 @@
 
 			{{ form_start(massActionForm) }}
 				<div class="wrap-box">
-					{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans }) }}
+					{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans, attr: { class: 'js-mass-action-select-type' } }) }}
 					{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
 					{{ form_widget(massActionForm.subject) }}
-					{{ form_widget(massActionForm.value) }}
+					{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' } }) }}
 
-					{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn btn-primary' } }) }}
+					{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn btn-primary js-mass-action-submit' } }) }}
 				</div>
 
 				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
