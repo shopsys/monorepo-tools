@@ -2,11 +2,14 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Product;
 
-use PHPUnit_Framework_TestCase;
+use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductTest extends PHPUnit_Framework_TestCase {
+class ProductEditFacadeTest extends DatabaseTestCase {
 
 	/**
 	 * @dataProvider getTestHandleOutOfStockStateDataProvider
@@ -26,10 +29,22 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		$productData->outOfStockAction = $outOfStockAction;
 		$productData->usingStock = true;
 
-		$product = new Product($productData);
+		$productEditData = new ProductEditData($productData);
 
-		$this->assertSame($product->getCalculatedHidden(), $calculatedHidden);
-		$this->assertSame($product->getCalculatedSellable(), $calculatedSellable);
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+
+		$product = $productEditFacade->create($productEditData);
+
+		$entityManager = $this->getContainer()->get(EntityManager::class);
+		/* @var $entityManager \Doctrine\ORM\EntityManager */
+
+		$entityManager->clear();
+
+		$productFromDb = $productEditFacade->getById($product->getId());
+
+		$this->assertSame($productFromDb->getCalculatedHidden(), $calculatedHidden);
+		$this->assertSame($calculatedSellable, $productFromDb->getCalculatedSellable());
 	}
 
 	/**
@@ -40,7 +55,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 			[
 				'hidden' => true,
 				'sellable' => false,
-				'stockQuantity' => null,
+				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => true,
 				'calculatedSellable' => false,
@@ -48,7 +63,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 			[
 				'hidden' => false,
 				'sellable' => true,
-				'stockQuantity' => null,
+				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => false,
 				'calculatedSellable' => true,
@@ -56,7 +71,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 			[
 				'hidden' => true,
 				'sellable' => true,
-				'stockQuantity' => null,
+				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => true,
 				'calculatedSellable' => true,
@@ -64,7 +79,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 			[
 				'hidden' => false,
 				'sellable' => false,
-				'stockQuantity' => null,
+				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => false,
 				'calculatedSellable' => false,
@@ -72,7 +87,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 			[
 				'hidden' => false,
 				'sellable' => true,
-				'stockQuantity' => null,
+				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE,
 				'calculatedHidden' => false,
 				'calculatedSellable' => false,
@@ -80,7 +95,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 			[
 				'hidden' => false,
 				'sellable' => true,
-				'stockQuantity' => null,
+				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_HIDE,
 				'calculatedHidden' => true,
 				'calculatedSellable' => true,
