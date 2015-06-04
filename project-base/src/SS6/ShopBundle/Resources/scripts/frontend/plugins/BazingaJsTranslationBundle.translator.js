@@ -1,6 +1,8 @@
 /*!
  * William DURAND <william.durand1@gmail.com>
  * MIT Licensed
+ *
+ * Copy, paste and customized from https://github.com/willdurand/BazingaJsTranslationBundle/blob/2f9ee8b087af3c2998b6091168c31da13ca0cfcd/Resources/js/translator.js
  */
 var Translator = (function(document, undefined) {
     "use strict";
@@ -584,7 +586,17 @@ var Translator = (function(document, undefined) {
             _messages   = {};
             _domains    = [];
             this.locale = get_current_locale();
-        }
+        },
+
+        /**
+         * Custom method for SS6\ShopBundle
+         *
+         * @param {String} message  The message id
+         * @param {Number} number   The number to use to find the indice of the message
+         * @param {String} locale   The locale
+         * @return {String}         The message part to use for translation
+         */
+        pluralize: pluralize
     };
 })(document, undefined);
 
