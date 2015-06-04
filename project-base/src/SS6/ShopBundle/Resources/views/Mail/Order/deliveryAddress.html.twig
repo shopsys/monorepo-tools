@@ -1,11 +1,11 @@
 <table>
 	<tr>
-		<th>{{ 'Kontaktní osoba'|trans }}</th>
-		<th>{{ 'Firma'|trans }}</th>
-		<th>{{ 'Telefon'|trans }}</th>
-		<th>{{ 'Ulice'|trans }}</th>
-		<th>{{ 'Město'|trans }}</th>
-		<th>{{ 'PSČ'|trans }}</th>
+		<th>{% trans into orderLocale %}Kontaktní osoba{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Firma{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Telefon{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Ulice{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Město{% endtrans %}</th>
+		<th>{% trans into orderLocale %}PSČ{% endtrans %}</th>
 	</tr>
 	<tr>
 		<td>{{ order.deliveryContactPerson }}</td>

@@ -1,13 +1,13 @@
 <table>
 	<tr>
-		<th>{{ 'Jméno'|trans }}</th>
-		<th>{{ 'Příjmení'|trans }}</th>
-		<th>{{ 'Firma'|trans }}</th>
-		<th>{{ 'IČ'|trans }}</th>
-		<th>{{ 'DIČ'|trans }}</th>
-		<th>{{ 'Ulice'|trans }}</th>
-		<th>{{ 'Město'|trans }}</th>
-		<th>{{ 'PSČ'|trans }}</th>
+		<th>{% trans into orderLocale %}Jméno{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Příjmení{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Firma{% endtrans %}</th>
+		<th>{% trans into orderLocale %}IČ{% endtrans %}</th>
+		<th>{% trans into orderLocale %}DIČ{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Ulice{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Město{% endtrans %}</th>
+		<th>{% trans into orderLocale %}PSČ{% endtrans %}</th>
 	</tr>
 	<tr>
 		<td>{{ order.firstName }}</td>

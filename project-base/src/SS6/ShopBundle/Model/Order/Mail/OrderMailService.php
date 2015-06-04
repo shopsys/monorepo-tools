@@ -206,6 +206,7 @@ class OrderMailService {
 	private function getBillingAddressHtmlTable(Order $order) {
 		return $this->twig->render('@SS6Shop/Mail/Order/billingAddress.html.twig', [
 			'order' => $order,
+			'orderLocale' => $this->getDomainLocaleByOrder($order),
 		]);
 	}
 
@@ -216,6 +217,7 @@ class OrderMailService {
 	private function getDeliveryAddressHtmlTable(Order $order) {
 		return $this->twig->render('@SS6Shop/Mail/Order/deliveryAddress.html.twig', [
 			'order' => $order,
+			'orderLocale' => $this->getDomainLocaleByOrder($order),
 		]);
 	}
 
