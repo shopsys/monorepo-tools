@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Form\Admin\Product\QuickSearchFormType;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;

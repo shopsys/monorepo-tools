@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product;
+namespace SS6\ShopBundle\Form\Admin\QuickSearch;
 
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
