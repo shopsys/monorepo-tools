@@ -99,7 +99,7 @@ class VatRepository {
 			FROM ' . Vat::class . ' v
 			WHERE v.replaceWith = :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 	/**
@@ -133,7 +133,7 @@ class VatRepository {
 			FROM ' . Payment::class . ' p
 			WHERE p.vat= :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 	/**
@@ -146,7 +146,7 @@ class VatRepository {
 			FROM ' . Transport::class . ' t
 			WHERE t.vat= :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 	/**
@@ -159,7 +159,7 @@ class VatRepository {
 			FROM ' . Product::class . ' p
 			WHERE p.vat= :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 }
