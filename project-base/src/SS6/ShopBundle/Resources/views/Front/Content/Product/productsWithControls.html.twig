@@ -1,0 +1,38 @@
+{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
+
+{% if paginationResult.results|length > 0 %}
+	<div>
+		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
+	</div>
+	<div class="js-product-list-with-paginator">
+		{% set entityName = 'zboží'|trans %}
+		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
+
+		{{ productList.list(paginationResult.results) }}
+
+		<div class="text-center">
+			<input type="button" class="js-load-more-button button button--simple"
+				data-page="{{ paginationResult.page }}"
+				data-total-count="{{ paginationResult.totalCount }}"
+				data-page-size="{{ paginationResult.pageSize }}"
+				data-pagination-to-item="{{ paginationResult.toItem }}"
+			/>
+			<span class="js-load-more-spinner display-none">
+				<i class="fa fa-spinner fa-spin fa-5x" title="{{ 'Načítám'|trans }}"></i>
+			</span>
+		</div>
+
+		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
+	</div>
+{% else %}
+	<div class="in-message in-message--static in-message--info js-flash-message">
+		{% if (filterFormSubmited) %}
+			{{ 'Filtru neodpovídají žádné výsledky'|trans }}
+		{% elseif searchText is defined %}
+			{{ 'Hledání neodpovídají žádné produkty'|trans }}
+		{% else %}
+			{{ 'Tato kategorie neobsahuje žádné produkty'|trans }}
+		{% endif %}
+	</div>
+{% endif %}
