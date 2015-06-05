@@ -4,7 +4,7 @@
 	SS6.productList = SS6.productList || {};
 
 	SS6.register.registerCallback(function () {
-		$('.js-productListOrderingMode').change(function () {
+		$('.js-product-list-ordering-mode').change(function () {
 			var cookieName = $(this).data('cookie-name');
 
 			$.cookie(cookieName, $(this).val(), { path: '/' });

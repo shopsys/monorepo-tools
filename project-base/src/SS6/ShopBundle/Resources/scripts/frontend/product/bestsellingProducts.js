@@ -4,11 +4,11 @@
 	SS6.bestsellingProducts = SS6.bestsellingProducts || {};
 
 	SS6.bestsellingProducts.init = function () {
-		$('.js-bestsellingProductsLoadMore').click(function () {
+		$('.js-bestselling-products-load-more').click(function () {
 			var $loadMoreButton = $(this);
-			var $loadMoreItems = $loadMoreButton.closest('.js-bestsellingProducts').find('.js-bestsellingProduct');
+			var $loadMoreItems = $loadMoreButton.closest('.js-bestselling-products').find('.js-bestselling-product');
 			$loadMoreItems.slideDown('fast');
-			$loadMoreButton.closest('.js-bestsellingProductsLoadMoreContainer').slideUp('fast');
+			$loadMoreButton.closest('.js-bestselling-products-load-more-container').slideUp('fast');
 		});
 	};
 

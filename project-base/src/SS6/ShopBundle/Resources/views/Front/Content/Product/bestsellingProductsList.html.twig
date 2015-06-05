@@ -1,8 +1,8 @@
 {% if productDetails|length > 0 %}
 	<h2>{{ 'Nejprodávanější zboží'|trans }}</h2>
-	<ul class="list-items-line js-bestsellingProducts">
+	<ul class="list-items-line js-bestselling-products">
 		{% for productDetail in productDetails %}
-			<li class="list-items-line__item js-bestsellingProduct{% if (loop.index > maxShownProducts )%} display-none{% endif %}">
+			<li class="list-items-line__item js-bestselling-product{% if (loop.index > maxShownProducts )%} display-none{% endif %}">
 				<a href="{{ url('front_product_detail', {'id': productDetail.product.id}) }}" class="list-items-line__block">
 					<div class="list-items-line__position">
 						<span>
@@ -33,8 +33,8 @@
 			</li>
 		{% endfor %}
 		{% if productDetails|length > maxShownProducts %}
-			<li class="list-items-line__item js-bestsellingProductsLoadMoreContainer">
-				<div class="list-items-line__load-more js-bestsellingProductsLoadMore">
+			<li class="list-items-line__item js-bestselling-products-load-more-container">
+				<div class="list-items-line__load-more js-bestselling-products-load-more">
 					▼ {{ 'Další nejprodávanější'|trans }}
 				</div>
 			</li>
