@@ -24,7 +24,6 @@ class HashGenerator {
 
 	/**
 	 * @param int $max
-	 * @throws \SS6\ShopBundle\Component\String\Exception\HashGenerationFailedException
 	 */
 	private function getRandomUnsigned16($max) {
 		do {

@@ -87,7 +87,6 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	 * @param mixed $value
 	 * @param string $field
 	 * @return mixed
-	 * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
 	 */
 	private function getFieldValue($value, $field) {
 		$propertyAccessor = PropertyAccess::createPropertyAccessor();
