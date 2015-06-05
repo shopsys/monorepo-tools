@@ -24,7 +24,9 @@
 	};
 
 	SS6.validation.getErrorListClass = function (elementName) {
-		return elementName.replace(/-/g, '_').replace('form_error_', 'js-validation-error-list-');
+		return elementName.replace(/-/g, '_')
+			.replace('form_error_', 'js-validation-error-list-')
+			.replace('value_to_duplicates_', 'js-validation-error-list-'); // defined in function SymfonyComponentFormExtensionCoreDataTransformerValueToDuplicatesTransformer()
 	};
 
 	SS6.validation.ckeditorValidationInit = function (element) {
