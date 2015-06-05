@@ -211,13 +211,15 @@
 
 		var closestCommonAncestor = null;
 		for (var ancestorLevel = 0; ancestorLevel < firstDomElementAncestors.length; ancestorLevel++) {
-			for (var i = 1; i < domElementsAncestors.length; i++) {
-				if (domElementsAncestors[i][ancestorLevel] !== firstDomElementAncestors[ancestorLevel]) {
-					return closestCommonAncestor;
+			if (firstDomElementAncestors[ancestorLevel].tagName.toLowerCase() !== 'form') {
+				for (var i = 1; i < domElementsAncestors.length; i++) {
+					if (domElementsAncestors[i][ancestorLevel] !== firstDomElementAncestors[ancestorLevel]) {
+						return closestCommonAncestor;
+					}
 				}
-			}
 
-			closestCommonAncestor = firstDomElementAncestors[ancestorLevel];
+				closestCommonAncestor = firstDomElementAncestors[ancestorLevel];
+			}
 		}
 
 		return closestCommonAncestor;
