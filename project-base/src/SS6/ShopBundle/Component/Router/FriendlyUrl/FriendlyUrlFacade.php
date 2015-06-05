@@ -152,8 +152,8 @@ class FriendlyUrlFacade {
 		foreach ($urlListFormData[UrlListType::MAIN_ON_DOMAINS] as $friendlyUrl) {
 			if ($friendlyUrl !== null) {
 				$this->refreshMainUrl($friendlyUrl);
+				$toFlush[] = $friendlyUrl;
 			}
-			$toFlush[] = $friendlyUrl;
 		}
 
 		$this->em->flush($toFlush);
