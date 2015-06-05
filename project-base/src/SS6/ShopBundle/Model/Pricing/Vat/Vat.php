@@ -36,6 +36,13 @@ class Vat {
 	 */
 	private $percent;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
+	 */
+	private $replaceWith;
+
 	public function __construct(VatData $vatData) {
 		$this->name = $vatData->name;
 		$this->percent = $vatData->percent;
@@ -63,6 +70,13 @@ class Vat {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 */
+	public function getReplaceWith() {
+		return $this->replaceWith;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getCoefficient() {
@@ -75,7 +89,17 @@ class Vat {
 	 */
 	public function edit(VatData $vatData) {
 		$this->name = $vatData->name;
-		$this->percent = $vatData->percent;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	public function markForDeletion(Vat $newVat) {
+		$this->replaceWith = $newVat;
+	}
+
+	public function isMarkedAsDeleted() {
+		return $this->replaceWith !== null;
 	}
 
 }

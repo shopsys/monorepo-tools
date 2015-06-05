@@ -31,9 +31,27 @@ class VatRepository {
 	}
 
 	/**
+	 * @param string $vatAlias
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getQueryBuilderForAll($vatAlias) {
+		return $this->getVatRepository()
+			->createQueryBuilder($vatAlias)
+			->where($vatAlias . '.replaceWith IS NULL')
+			->orderBy($vatAlias . '.percent');
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
-	public function findAll() {
+	public function getAll() {
+		return $this->getQueryBuilderForAll('v')->getQuery()->getResult();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 */
+	public function getAllIncludingMarkedForDeletion() {
 		return $this->getVatRepository()->findAll();
 	}
 
@@ -64,11 +82,39 @@ class VatRepository {
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAllExceptId($vatId) {
-		$qb = $this->getVatRepository()->createQueryBuilder('v')
-			->where('v.id != :id')
+		$qb = $this->getQueryBuilderForAll('v')
+			->andWhere('v.id != :id')
 			->setParameter('id', $vatId);
 
 		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @return bool
+	 */
+	public function existsVatToBeReplacedWith(Vat $vat) {
+		$query = $this->em->createQuery('
+			SELECT COUNT(v)
+			FROM ' . Vat::class . ' v
+			WHERE v.replaceWith = :vat')
+			->setParameter('vat', $vat);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 */
+	public function getVatsWithoutProductsMarkedForDeletion() {
+		$query = $this->em->createQuery('
+			SELECT v
+			FROM ' . Vat::class . ' v
+			LEFT JOIN ' . Product::class . ' p WITH p.vat = v
+			WHERE v.replaceWith IS NOT NULL
+			GROUP BY v
+			HAVING COUNT(p) = 0');
+
+		return $query->getResult();
 	}
 
 	public function isVatUsed(Vat $vat) {
@@ -78,7 +124,7 @@ class VatRepository {
 	}
 
 	/**
-	 * @param Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	private function existsPaymentWithVat(Vat $vat) {
@@ -87,11 +133,11 @@ class VatRepository {
 			FROM ' . Payment::class . ' p
 			WHERE p.vat= :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 	/**
-	 * @param Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	private function existsTransportWithVat(Vat $vat) {
@@ -100,11 +146,11 @@ class VatRepository {
 			FROM ' . Transport::class . ' t
 			WHERE t.vat= :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 	/**
-	 * @param Vat $vat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	private function existsProductWithVat(Vat $vat) {
@@ -113,7 +159,7 @@ class VatRepository {
 			FROM ' . Product::class . ' p
 			WHERE p.vat= :vat')
 			->setParameter('vat', $vat);
-		return 0 < $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
 }

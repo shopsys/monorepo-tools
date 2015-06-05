@@ -77,7 +77,7 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 	 * @return \SS6\ShopBundle\Form\Admin\Vat\VatFormType
 	 */
 	protected function getFormType($rowId) {
-		return new VatFormType();
+		return new VatFormType($rowId === null ? VatFormType::SCENARIO_CREATE : VatFormType::SCENARIO_EDIT);
 	}
 
 }

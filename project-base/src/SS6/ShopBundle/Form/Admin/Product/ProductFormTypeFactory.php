@@ -63,7 +63,7 @@ class ProductFormTypeFactory {
 	 * @return \SS6\ShopBundle\Form\Admin\Product\ProductFormType
 	 */
 	public function create(Product $product = null) {
-		$vats = $this->vatRepository->findAll();
+		$vats = $this->vatRepository->getAllIncludingMarkedForDeletion();
 		$availabilities = $this->availabilityRepository->getAll();
 		$flags = $this->flagRepository->findAll();
 

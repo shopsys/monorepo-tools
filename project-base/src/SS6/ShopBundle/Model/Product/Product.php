@@ -310,6 +310,7 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function changeVat(Vat $vat) {
 		$this->vat = $vat;
+		$this->recalculatePrice = true;
 	}
 
 	/**

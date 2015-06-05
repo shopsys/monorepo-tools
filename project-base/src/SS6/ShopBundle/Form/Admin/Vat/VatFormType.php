@@ -11,7 +11,22 @@ use Symfony\Component\Validator\Constraints;
 
 class VatFormType extends AbstractType {
 
+	const SCENARIO_CREATE = 1;
+	const SCENARIO_EDIT = 2;
+
 	/**
+	 * @var bool
+	 */
+	private $scenario;
+
+	/**
+	 * @param int $scenario
+	 */
+	public function __construct($scenario) {
+		$this->scenario = $scenario;
+	}
+
+		/**
 	 * @return string
 	 */
 	public function getName() {
@@ -34,6 +49,8 @@ class VatFormType extends AbstractType {
 			->add('percent', FormType::NUMBER, [
 				'required' => false,
 				'precision' => 4,
+				'disabled' => $this->scenario === self::SCENARIO_EDIT,
+				'read_only' => $this->scenario === self::SCENARIO_EDIT,
 				'invalid_message' => 'Prosím zadejte DPH v platném formátu',
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši dph']),

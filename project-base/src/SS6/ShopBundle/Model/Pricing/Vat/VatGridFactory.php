@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
@@ -50,8 +51,10 @@ class VatGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('v')
-			->from(Vat::class, 'v');
+			->select('v, COUNT(rv.id) as asReplacementCount')
+			->from(Vat::class, 'v')
+			->leftJoin(Vat::class, 'rv', Join::WITH, 'v.id = rv.replaceWith')
+			->groupBy('v');
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource($queryBuilder, 'v.id', function ($row) {
 			$row['vat'] = $this->vatFacade->getById($row['v']['id']);
 

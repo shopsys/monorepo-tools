@@ -23,7 +23,7 @@ class TransportFormTypeFactory {
 	 * @return \SS6\ShopBundle\Form\Admin\Transport\TransportFormType
 	 */
 	public function create() {
-		$vats = $this->vatRepository->findAll();
+		$vats = $this->vatRepository->getAll();
 
 		return new TransportFormType($vats);
 	}

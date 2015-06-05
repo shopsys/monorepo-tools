@@ -96,7 +96,7 @@ class VatFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAll() {
-		return $this->vatRepository->findAll();
+		return $this->vatRepository->getAll();
 	}
 
 	/**
@@ -118,7 +118,6 @@ class VatFacade {
 	 */
 	public function edit($vatId, VatData $vatData) {
 		$vat = $this->vatRepository->getById($vatId);
-		$this->productEditFacade->recalculateInputPricesForNewVatPercent($vat, $vatData->percent);
 		$this->vatService->edit($vat, $vatData);
 		$this->em->flush();
 
@@ -135,6 +134,14 @@ class VatFacade {
 		$oldVat = $this->vatRepository->getById($vatId);
 		$newVat = $newVatId ? $this->vatRepository->getById($newVatId) : null;
 
+		if ($oldVat->isMarkedAsDeleted()) {
+			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatMarkedAsDeletedDeleteException();
+		}
+
+		if ($this->vatRepository->existsVatToBeReplacedWith($oldVat)) {
+			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatWithReplacedDeleteException();
+		}
+
 		$this->em->beginTransaction();
 
 		if ($newVat !== null) {
@@ -147,14 +154,26 @@ class VatFacade {
 
 			$this->paymentEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
 			$this->trasnportEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
-			$this->productEditFacade->replaceOldVatWithNewVat($oldVat, $newVat);
+			$oldVat->markForDeletion($newVat);
+		} else {
+			$this->em->remove($oldVat);
 		}
 
-		$this->em->remove($oldVat);
 		$this->em->flush();
 		$this->em->commit();
+	}
 
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+	/**
+	 * @return int
+	 */
+	public function deleteAllReplacedVats() {
+		$vatsForDelete = $this->vatRepository->getVatsWithoutProductsMarkedForDeletion();
+		foreach ($vatsForDelete as $vatForDelete) {
+			$this->em->remove($vatForDelete);
+		}
+		$this->em->flush($vatsForDelete);
+
+		return count($vatsForDelete);
 	}
 
 	/**

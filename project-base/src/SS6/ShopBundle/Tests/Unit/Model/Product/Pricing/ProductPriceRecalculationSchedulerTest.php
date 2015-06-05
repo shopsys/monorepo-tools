@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -57,30 +56,4 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 		$this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForRecalculation());
 	}
 
-	public function testScheduleRecalculatePriceForVat() {
-		$vatMock = $this->getMock(Vat::class, null, [], '', false);
-		$productMock = $this->getMock(Product::class, null, [], '', false);
-		$productsIterator = [$productMock];
-		$productRepositoryMock = $this->getMock(
-			ProductRepository::class,
-			['markProductsForPriceRecalculationByVat', 'getProductsForPriceRecalculationIterator'],
-			[],
-			'',
-			false
-		);
-		$productRepositoryMock
-			->expects($this->once())
-			->method('markProductsForPriceRecalculationByVat')
-			->with($this->equalTo($vatMock));
-		$productRepositoryMock
-			->expects($this->once())
-			->method('getProductsForPriceRecalculationIterator')
-			->willReturn($productsIterator);
-
-		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
-		$productPriceRecalculationScheduler->scheduleRecalculatePriceForVat($vatMock);
-
-		$this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation());
-		$this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForRecalculation());
-	}
 }

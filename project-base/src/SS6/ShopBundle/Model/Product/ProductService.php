@@ -46,15 +46,6 @@ class ProductService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
-	 */
-	public function replaceOldVatWithNewVat(Product $product, Vat $newVat) {
-		$this->recalculateInputPriceForNewVatPercent($product, $newVat->getPercent());
-		$this->changeVat($product, $newVat);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param string $newVatPercent
 	 */
 	public function recalculateInputPriceForNewVatPercent(Product $product, $newVatPercent) {
