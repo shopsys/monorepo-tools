@@ -31,6 +31,11 @@ class JsTranslatorCall {
 	private $domain;
 
 	/**
+	 * @var string
+	 */
+	private $functionName;
+
+	/**
 	 * @param \JCallExprNode $callExprNode
 	 * @param \JNodeBase $messageIdArgumentNode
 	 * @param string $messageId
@@ -40,12 +45,14 @@ class JsTranslatorCall {
 		JCallExprNode $callExprNode,
 		JNodeBase $messageIdArgumentNode,
 		$messageId,
-		$domain
+		$domain,
+		$functionName
 	) {
 		$this->callExprNode = $callExprNode;
 		$this->messageIdArgumentNode = $messageIdArgumentNode;
 		$this->messageId = $messageId;
 		$this->domain = $domain;
+		$this->functionName = $functionName;
 	}
 
 	/**
@@ -74,6 +81,13 @@ class JsTranslatorCall {
 	 */
 	public function getDomain() {
 		return $this->domain;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFunctionName() {
+		return $this->functionName;
 	}
 
 }
