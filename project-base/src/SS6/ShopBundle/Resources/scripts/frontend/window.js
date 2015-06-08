@@ -117,7 +117,9 @@
 
 		function show() {
 			$window.hide().appendTo(getMainContainer());
-			moveToCenter();
+			if (options.wide) {
+				moveToCenter();
+			}
 			$window.fadeIn('fast');
 		}
 
