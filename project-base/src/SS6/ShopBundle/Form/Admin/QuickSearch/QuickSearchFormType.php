@@ -26,7 +26,7 @@ class QuickSearchFormType extends AbstractType {
 			->add('text', FormType::TEXT, [
 				'required' => false,
 			])
-			->add('save', FormType::SUBMIT);
+			->add('submit', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

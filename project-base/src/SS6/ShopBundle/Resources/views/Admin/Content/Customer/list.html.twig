@@ -12,7 +12,7 @@
 			{{ form_start(quickSearchForm) }}
 				<div class="wrap-box form-inline mb-1 mt-1">
 					{{ form_widget(quickSearchForm.text) }}
-					{{ form_widget(quickSearchForm.save, { label: 'Vyhledat'|trans, full_name: ''}) }}
+					{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, full_name: ''}) }}
 					<i class="fa fa-info cursor-help js-tooltip"
 					 data-toggle="tooltip" data-placement="right"
 					 title="{{ 'Vyhledávání hledá v příjmení, názvu firmy, emailu a telefonu. Je možné používat operátory * a ?.'|trans }}"
