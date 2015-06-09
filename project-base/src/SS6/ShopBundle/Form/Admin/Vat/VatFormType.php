@@ -30,7 +30,7 @@ class VatFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'vat';
+		return 'vat_form';
 	}
 
 	/**

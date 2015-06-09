@@ -25,7 +25,7 @@ class InputPriceTypeFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'inputPriceType';
+		return 'inputPriceType_form';
 	}
 
 	/**

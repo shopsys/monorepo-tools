@@ -89,7 +89,7 @@ class ProductEditFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'product_edit';
+		return 'product_edit_form';
 	}
 
 	/**

@@ -28,7 +28,7 @@ class TransportFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'transport';
+		return 'transport_form';
 	}
 
 	/**

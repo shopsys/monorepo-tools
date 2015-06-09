@@ -20,7 +20,7 @@ class NewProductTest extends FunctionalTestCase {
 	public function testCreateOrEditProduct($route) {
 		$client1 = $this->getClient(false, 'admin', 'admin123');
 		$crawler = $client1->request('GET', $route);
-		$form = $crawler->filter('form[name=product_edit]')->form();
+		$form = $crawler->filter('form[name=product_edit_form]')->form();
 
 		$client2 = $this->getClient(true, 'admin', 'admin123');
 		$em2 = $client2->getContainer()->get('doctrine.orm.entity_manager');
@@ -45,19 +45,19 @@ class NewProductTest extends FunctionalTestCase {
 	 * @param string $csrfToken
 	 */
 	private function setFormValuesAndToken($form, $csrfToken) {
-		$form['product_edit[productData][name][cs]'] = 'testProduct';
-		$form['product_edit[productData][showOnDomains]'] = [1];
-		$form['product_edit[productData][catnum]'] = '123456';
-		$form['product_edit[productData][partno]'] = '123456';
-		$form['product_edit[productData][ean]'] = '123456';
-		$form['product_edit[productData][description][cs]'] = 'test description';
-		$form['product_edit[productData][price]'] = '10000';
-		$form['product_edit[productData][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
-		$form['product_edit[productData][sellingFrom]'] = '1.1.1990';
-		$form['product_edit[productData][sellingTo]'] = '1.1.2000';
-		$form['product_edit[productData][stockQuantity]'] = '10';
-		$form['product_edit[productData][availability]']->select($this->getReference(AvailabilityDataFixture::IN_STOCK)->getId());
-		$form['product_edit[_token]'] = $csrfToken;
+		$form['product_edit_form[productData][name][cs]'] = 'testProduct';
+		$form['product_edit_form[productData][showOnDomains]'] = [1];
+		$form['product_edit_form[productData][catnum]'] = '123456';
+		$form['product_edit_form[productData][partno]'] = '123456';
+		$form['product_edit_form[productData][ean]'] = '123456';
+		$form['product_edit_form[productData][description][cs]'] = 'test description';
+		$form['product_edit_form[productData][price]'] = '10000';
+		$form['product_edit_form[productData][vat]']->select($this->getReference(VatDataFixture::VAT_ZERO)->getId());
+		$form['product_edit_form[productData][sellingFrom]'] = '1.1.1990';
+		$form['product_edit_form[productData][sellingTo]'] = '1.1.2000';
+		$form['product_edit_form[productData][stockQuantity]'] = '10';
+		$form['product_edit_form[productData][availability]']->select($this->getReference(AvailabilityDataFixture::IN_STOCK)->getId());
+		$form['product_edit_form[_token]'] = $csrfToken;
 	}
 
 }

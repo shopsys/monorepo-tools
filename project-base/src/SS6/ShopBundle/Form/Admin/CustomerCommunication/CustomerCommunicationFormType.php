@@ -12,7 +12,7 @@ class CustomerCommunicationFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'customer_communication';
+		return 'customer_communication_form';
 	}
 
 	/**

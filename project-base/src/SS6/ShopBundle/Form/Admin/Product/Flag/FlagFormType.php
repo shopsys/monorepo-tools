@@ -15,7 +15,7 @@ class FlagFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'flag';
+		return 'flag_form';
 	}
 
 	/**

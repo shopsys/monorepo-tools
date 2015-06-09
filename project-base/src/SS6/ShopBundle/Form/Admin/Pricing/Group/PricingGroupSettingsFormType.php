@@ -27,7 +27,7 @@ class PricingGroupSettingsFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'pricing_group_settings';
+		return 'pricing_group_settings_form';
 	}
 
 	/**

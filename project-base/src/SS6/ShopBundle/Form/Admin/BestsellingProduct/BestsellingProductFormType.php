@@ -14,7 +14,7 @@ class BestsellingProductFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'bestselling_product';
+		return 'bestselling_product_form';
 	}
 
 	/**

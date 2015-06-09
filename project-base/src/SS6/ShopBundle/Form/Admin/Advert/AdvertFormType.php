@@ -44,7 +44,7 @@ class AdvertFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'advert';
+		return 'advert_form';
 	}
 
 	/**

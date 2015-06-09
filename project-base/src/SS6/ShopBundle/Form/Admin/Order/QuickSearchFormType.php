@@ -13,7 +13,7 @@ class QuickSearchFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'orderQuickSearch';
+		return 'orderQuickSearch_form';
 	}
 
 	/**

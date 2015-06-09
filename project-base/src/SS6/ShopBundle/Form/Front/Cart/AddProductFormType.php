@@ -38,7 +38,7 @@ class AddProductFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'addProduct';
+		return 'addProduct_form';
 	}
 
 	/**

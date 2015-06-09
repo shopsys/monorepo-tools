@@ -34,7 +34,7 @@ class PaymentEditFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'payment_edit';
+		return 'payment_edit_form';
 	}
 
 	/**

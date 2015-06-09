@@ -27,7 +27,7 @@ class CurrencySettingsFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'currency_settings';
+		return 'currency_settings_form';
 	}
 
 	/**

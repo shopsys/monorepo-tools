@@ -34,7 +34,7 @@ class TransportEditFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'transport_edit';
+		return 'transport_edit_form';
 	}
 
 	/**

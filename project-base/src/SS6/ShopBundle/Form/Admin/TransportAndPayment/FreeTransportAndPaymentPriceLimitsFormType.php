@@ -33,7 +33,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'free_transport_price_limits';
+		return 'free_transport_price_limits_form';
 	}
 
 	/**

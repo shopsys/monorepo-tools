@@ -28,7 +28,7 @@ class OrderFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'order';
+		return 'order_form';
 	}
 
 	/**

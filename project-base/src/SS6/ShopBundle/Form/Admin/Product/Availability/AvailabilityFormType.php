@@ -15,7 +15,7 @@ class AvailabilityFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'availability';
+		return 'availability_form';
 	}
 
 	/**

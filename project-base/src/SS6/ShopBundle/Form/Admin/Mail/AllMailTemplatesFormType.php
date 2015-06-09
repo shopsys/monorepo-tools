@@ -28,7 +28,7 @@ class AllMailTemplatesFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'all_mail_templates';
+		return 'all_mail_templates_form';
 	}
 
 	/**

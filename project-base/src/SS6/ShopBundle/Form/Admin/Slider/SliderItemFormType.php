@@ -24,7 +24,7 @@ class SliderItemFormType extends AbstractType {
 	}
 
 	public function getName() {
-		return 'sliderItem';
+		return 'sliderItem_form';
 	}
 
 	/**

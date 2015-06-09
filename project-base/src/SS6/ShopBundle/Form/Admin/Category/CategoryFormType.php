@@ -49,7 +49,7 @@ class CategoryFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'category';
+		return 'category_form';
 	}
 
 	/**

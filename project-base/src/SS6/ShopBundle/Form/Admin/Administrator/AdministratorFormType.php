@@ -22,7 +22,7 @@ class AdministratorFormType extends AbstractType {
 	}
 
 	public function getName() {
-		return 'administrator';
+		return 'administrator_form';
 	}
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {

@@ -54,7 +54,7 @@ class RegistrationFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'registration';
+		return 'registration_form';
 	}
 
 	/**

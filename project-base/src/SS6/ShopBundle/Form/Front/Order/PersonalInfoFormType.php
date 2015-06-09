@@ -117,7 +117,7 @@ class PersonalInfoFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'orderPersonalInfo';
+		return 'orderPersonalInfo_form';
 	}
 
 	/**

@@ -28,7 +28,7 @@ class ArticleFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'article';
+		return 'article_form';
 	}
 
 	/**

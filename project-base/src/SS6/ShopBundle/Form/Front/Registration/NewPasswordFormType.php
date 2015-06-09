@@ -36,7 +36,7 @@ class NewPasswordFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'reset_password';
+		return 'reset_password_form';
 	}
 
 	/**

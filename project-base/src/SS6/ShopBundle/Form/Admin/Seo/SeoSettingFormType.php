@@ -44,7 +44,7 @@ class SeoSettingFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'seo_setting';
+		return 'seo_setting_form';
 	}
 
 	/**

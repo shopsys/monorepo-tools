@@ -42,7 +42,7 @@ class UserFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'user';
+		return 'user_form';
 	}
 
 	/**

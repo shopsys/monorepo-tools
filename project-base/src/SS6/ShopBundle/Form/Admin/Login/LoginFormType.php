@@ -34,7 +34,7 @@ class LoginFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'admin_login';
+		return 'admin_login_form';
 	}
 
 	/**
