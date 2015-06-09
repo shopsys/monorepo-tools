@@ -96,4 +96,30 @@ class AvailabilityRepository {
 		return $queryBuilder->getQuery()->getOneOrNullResult(AbstractQuery::HYDRATE_SCALAR) !== null;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $oldAvailability
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $newAvailability
+	 */
+	public function replaceAvailability(Availability $oldAvailability, Availability $newAvailability) {
+		$this->em->flush();
+
+		$this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.availability', ':newAvailability')->setParameter('newAvailability', $newAvailability)
+			->where('p.availability = :oldAvailability')->setParameter('oldAvailability', $oldAvailability)
+			->getQuery()->execute();
+
+		$this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.outOfStockAvailability', ':newAvailability')->setParameter('newAvailability', $newAvailability)
+			->where('p.outOfStockAvailability = :oldAvailability')->setParameter('oldAvailability', $oldAvailability)
+			->getQuery()->execute();
+
+		$this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.calculatedAvailability', ':newAvailability')->setParameter('newAvailability', $newAvailability)
+			->where('p.calculatedAvailability = :oldAvailability')->setParameter('oldAvailability', $oldAvailability)
+			->getQuery()->execute();
+	}
+
 }

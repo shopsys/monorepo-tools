@@ -11,7 +11,6 @@ use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
@@ -420,21 +419,6 @@ class ProductRepository {
 		}
 
 		return $productDomain;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	public function getProductsByAvailability(Availability $availability) {
-		$queryBuilder = $this->em->createQueryBuilder();
-		$queryBuilder
-			->select('p')
-			->from(Product::class, 'p')
-			->where('p.availability = :availability OR p.outOfStockAvailability = :availability')
-			->setParameter('availability', $availability->getId());
-
-		return $queryBuilder->getQuery()->execute();
 	}
 
 	public function markAllProductsForAvailabilityRecalculation() {

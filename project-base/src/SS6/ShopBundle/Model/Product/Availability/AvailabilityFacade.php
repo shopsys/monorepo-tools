@@ -108,13 +108,12 @@ class AvailabilityFacade {
 		$availability = $this->availabilityRepository->getById($availabilityId);
 
 		if ($newAvailabilityId !== null) {
-			$products = $this->productRepository->getProductsByAvailability($availability);
 			$newAvailability = $this->availabilityRepository->getById($newAvailabilityId);
-			$this->availabilityService->delete($products, $availability, $newAvailability);
+
+			$this->availabilityRepository->replaceAvailability($availability, $newAvailability);
 			if ($this->isAvailabilityDefault($availability)) {
 				$this->setDefaultInStockAvailability($newAvailability);
 			}
-			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 		}
 
 		$this->em->remove($availability);
