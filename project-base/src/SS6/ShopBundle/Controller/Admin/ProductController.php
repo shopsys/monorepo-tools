@@ -4,15 +4,18 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductController extends Controller {
+class ProductController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
@@ -24,12 +27,26 @@ class ProductController extends Controller {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade
+	 */
+	private $productMassActionFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
 	public function __construct(
 		CategoryFacade $categoryFacade,
-		Translator $translator
+		Translator $translator,
+		ProductMassActionFacade $productMassActionFacade,
+		GridFactory $gridFactory
 	) {
 		$this->categoryFacade = $categoryFacade;
 		$this->translator = $translator;
+		$this->productMassActionFacade = $productMassActionFacade;
+		$this->gridFactory = $gridFactory;
 	}
 
 	/**
@@ -136,8 +153,6 @@ class ProductController extends Controller {
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
 		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
 		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
@@ -147,9 +162,15 @@ class ProductController extends Controller {
 		$advancedSearchData = $advancedSearchForm->getData();
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
-		$quickSearchForm->setData(new QuickSearchFormData());
-		$quickSearchForm->handleRequest($request);
-		$quickSearchData = $quickSearchForm->getData();
+		$quickSearchData = new QuickSearchFormData();
+		$quickSearchForm->setData($quickSearchData);
+
+		// Cannot call $form->handleRequest() because the GET forms are not handled in POST request.
+		// See: https://github.com/symfony/symfony/issues/12244
+		$quickSearchForm->submit($request->query->get($quickSearchForm->getName()));
+
+		$massActionForm = $this->createForm(new ProductMassActionFormType($this->translator));
+		$massActionForm->handleRequest($request);
 
 		$isAdvancedSearchFormSubmitted = $advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
 		if ($isAdvancedSearchFormSubmitted) {
@@ -160,8 +181,9 @@ class ProductController extends Controller {
 
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
-		$grid = $gridFactory->create('productList', $dataSource);
+		$grid = $this->gridFactory->create('productList', $dataSource);
 		$grid->allowPaging();
+		$grid->allowSelecting();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
@@ -175,12 +197,25 @@ class ProductController extends Controller {
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig');
 
+		if ($massActionForm->get('submit')->isClicked()) {
+			$this->productMassActionFacade->doMassAction(
+				$massActionForm->getData(),
+				$queryBuilder,
+				array_map('intval', $grid->getSelectedRowIds())
+			);
+
+			$this->getFlashMessageSender()->addSuccessFlash('Hromadná úprava byla provedena');
+
+			return $this->redirect($this->getRequest()->headers->get('referer', $this->generateUrl('admin_product_list')));
+		}
+
 		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
 			'advancedSearchForm' => $advancedSearchForm->createView(),
+			'massActionForm' => $massActionForm->createView(),
 			'isAdvancedSearchFormSubmitted' => $advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
 		]);
 	}

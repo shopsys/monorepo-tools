@@ -256,7 +256,8 @@ class Product extends AbstractTranslatableEntity {
 		$this->accessories = $productData->accessories;
 		$this->recalculatePrice = true;
 		$this->recalculateVisibility = true;
-		$this->calculateSellableAndHidden();
+		$this->calculatedHidden = true;
+		$this->calculatedSellable = false;
 	}
 
 	/**
@@ -287,22 +288,6 @@ class Product extends AbstractTranslatableEntity {
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->accessories = $productData->accessories;
-		$this->calculateSellableAndHidden();
-	}
-
-	private function calculateSellableAndHidden() {
-		$this->calculatedSellable = $this->sellable;
-		$this->calculatedHidden = $this->hidden;
-		if ($this->isUsingStock() && $this->getStockQuantity() <= 0) {
-			switch ($this->outOfStockAction) {
-				case self::OUT_OF_STOCK_ACTION_HIDE:
-					$this->calculatedHidden = true;
-					break;
-				case self::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE:
-					$this->calculatedSellable = false;
-					break;
-			}
-		}
 	}
 
 	/**

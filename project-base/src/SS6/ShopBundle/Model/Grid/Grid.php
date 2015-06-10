@@ -42,6 +42,11 @@ class Grid {
 	private $allowPaging = false;
 
 	/**
+	 * @var bool
+	 */
+	private $allowSelecting = false;
+
+	/**
 	 * @var array
 	 */
 	private $allowedLimits = [30, 100, 200, 500];
@@ -147,6 +152,11 @@ class Grid {
 	private $viewTemplateParameters;
 
 	/**
+	 * @var array
+	 */
+	private $selectedRowIds;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
@@ -179,6 +189,8 @@ class Grid {
 
 		$this->viewTheme = self::DEFAULT_VIEW_THEME;
 		$this->viewTemplateParameters = [];
+
+		$this->selectedRowIds = [];
 
 		$this->loadFromRequest();
 	}
@@ -315,6 +327,10 @@ class Grid {
 		$this->allowPaging = true;
 	}
 
+	public function allowSelecting() {
+		$this->allowSelecting = true;
+	}
+
 	/**
 	 * @param int $limit
 	 */
@@ -375,6 +391,29 @@ class Grid {
 	 */
 	public function isAllowedPaging() {
 		return $this->allowPaging;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isAllowedSelecting() {
+		return $this->allowSelecting;
+	}
+
+	/**
+	 * @param array $row
+	 * @return bool
+	 */
+	public function isRowSelected(array $row) {
+		$rowId = $this->getRowId($row);
+		return in_array($rowId, $this->selectedRowIds);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getSelectedRowIds() {
+		return $this->selectedRowIds;
 	}
 
 	/**
@@ -487,6 +526,10 @@ class Grid {
 			if (array_key_exists('order', $gridData)) {
 				$this->setOrderingByOrderString(trim($gridData['order']));
 				$this->isOrderFromRequest = true;
+			}
+
+			if (array_key_exists('selectedRowIds', $gridData) && is_array($gridData['selectedRowIds'])) {
+				$this->selectedRowIds = $gridData['selectedRowIds'];
 			}
 		}
 	}
