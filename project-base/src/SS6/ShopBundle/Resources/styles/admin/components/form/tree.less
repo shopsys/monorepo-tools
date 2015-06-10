@@ -1,0 +1,136 @@
+/*
+Form tree
+===========
+
+*/
+
+.form-tree {
+	width: 440px;
+	max-width: 100%;
+
+	border: 1px solid @color-border;
+
+	&__title {
+		display: block;
+		padding: 5px;
+
+		cursor: pointer;
+
+		.form-tree--open & {
+			border-bottom: 1px dashed @color-border;
+		}
+
+		&__image {
+			display: inline-block;
+			width: 40px;
+			height: 12px;
+			margin-right: 5px;
+			position: relative;
+			top: 1px;
+
+			img {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				text-align: center;
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+
+		&__name {
+			color: @color-link;
+			text-decoration: underline;
+
+			.form-tree__title:hover & {
+				color: @color-link-hover;
+			}
+		}
+
+		&__arrow {
+			float: right;
+			height: 24px;
+			width: 24px;
+			position: relative;
+			top: -2px;
+
+			background: @bg-input-icon;
+
+			&:after {
+				content: '';
+				display: block;
+				width: 0;
+				height: 0;
+				position: absolute;
+				top: 9px;
+				left: 7px;
+
+				border-bottom: 5px solid @color-primary;
+				border-left: 5px solid transparent;
+				border-right: 5px solid transparent;
+			}
+
+			.form-tree--open & {
+
+				&:after {
+					top: 10px;
+
+					border-top: 5px solid @color-primary;
+					border-bottom: 0;
+				}
+			}
+		}
+	}
+
+	&__content {
+		display: none;
+		.reset-ul();
+		padding: 5px 10px;
+
+		.form-tree--open & {
+			display: block;
+		}
+	}
+
+	&__item {
+		display: block;
+
+		&__click {
+			padding: 4px 0;
+			cursor: pointer;
+
+			&--active {
+				font-weight: bold;
+			}
+		}
+
+		&__name {
+			color: @color-link;
+			text-decoration: underline;
+
+			.form-tree__item__sub & {
+				font-size: 12px;
+			}
+
+			.form-tree__item__click:hover & {
+				color: @color-link-hover;
+			}
+		}
+
+		&__icon {
+			display: inline-block;
+			width: 10px;
+			margin-right: 5px;
+			height: 6px;
+
+			background: @color-primary;
+		}
+
+		&__sub {
+			.reset-ul();
+			padding-left: 20px;
+		}
+	}
+}

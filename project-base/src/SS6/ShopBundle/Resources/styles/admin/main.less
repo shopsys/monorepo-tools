@@ -1,134 +1,74 @@
-// Bootstrap - used files from bootstrap
-@import "bootstrap/variables.less";
-@import "bootstrap/mixins.less";
-
-@import "bootstrap/normalize.less";
-@import "bootstrap/print.less";
-
-@import "bootstrap/scaffolding.less";
-@import "bootstrap/type.less";
-@import "bootstrap/code.less";
-@import "bootstrap/grid.less";
-@import "bootstrap/tables.less";
-@import "bootstrap/forms.less";
-@import "bootstrap/buttons.less";
-
-@import "bootstrap/component-animations.less";
-@import "bootstrap/glyphicons.less";
-@import "bootstrap/dropdowns.less";
-@import "bootstrap/button-groups.less";
-@import "bootstrap/input-groups.less";
-@import "bootstrap/navs.less";
-@import "bootstrap/navbar.less";
-@import "bootstrap/breadcrumbs.less";
-@import "bootstrap/pagination.less";
-@import "bootstrap/pager.less";
-@import "bootstrap/labels.less";
-@import "bootstrap/badges.less";
-@import "bootstrap/jumbotron.less";
-@import "bootstrap/thumbnails.less";
-@import "bootstrap/alerts.less";
-@import "bootstrap/progress-bars.less";
-@import "bootstrap/media.less";
-@import "bootstrap/list-group.less";
-@import "bootstrap/panels.less";
-@import "bootstrap/wells.less";
-@import "bootstrap/close.less";
-@import "bootstrap/tooltip.less";
-
-@import "bootstrap/utilities.less";
-@import "bootstrap/responsive-utilities.less";
-
-
-
 // Core
 @import "core/variables.less";
-
 @import "core/mixins.less";
-@import "core/drawing.less";
 
+@import "core/reset.less";
+
+//// Typo
 @import "core/typography.less";
 
 //// Forms
-
-//// Typo
-
+@import "core/form/inp.less";
+@import "core/form/inp-choice.less";
+@import "core/form/btn.less";
 
 
 // Layout
 @import "layout/layout.less";
 
+@import "layout/header/position.less";
+@import "layout/header/navig.less";
+
+@import "layout/footer/foot.less";
 
 
 // Libs
 @import "libs/sprites.less";
 @import "libs/sprites-set.less";
-
-//// Bootsrap extend
-@import "libs/bootstrap/buttons.less";
-@import "libs/bootstrap/forms.less";
-@import "libs/bootstrap/navbar.less";
-@import "libs/bootstrap/tables.less";
-@import "libs/bootstrap/tooltip.less";
+@import "libs/colorpicker/colorpicker.less";
+@import "libs/magnific/magnific-popup.less";
+@import "libs/magnific/magnific-popup-custom.less";
 
 //// Font
-@import "libs/font/font-awesome.less";
+@import "libs/svg.less";
 
 
 
 // Components
-//// box
-@import "components/box/breadcrumb.less";
-@import "components/box/domain.less";
-@import "components/box/expand.less";
-@import "components/box/grid-actions.less";
-@import "components/box/login.less";
-@import "components/box/panel.less";
-@import "components/box/upload.less";
+//// wrap
 
 //// form
-@import "components/form/group.less";
-@import "components/form/edit-block.less";
 @import "components/form/error.less";
-@import "components/form/icon.less";
-@import "components/form/input-required.less";
 @import "components/form/line.less";
-
-//// in
-@import "components/in/action-icons.less";
-@import "components/in/message.less";
-@import "components/in/semaphore.less";
-@import "components/in/sort-arrows.less";
-@import "components/in/pill.less";
-@import "components/in/simple-item.less";
+@import "components/form/choice.less";
+@import "components/form/choice-list.less";
+@import "components/form/tree.less";
 
 //// list
-@import "components/list/image.less";
+
+//// in
+@import "components/in/breadcrumb.less";
+@import "components/in/message.less";
 
 //// table
-@import "components/table/action.less";
 @import "components/table/col.less";
-@import "components/table/drop.less";
-@import "components/table/edit.less";
-@import "components/table/inline-edit.less";
+@import "components/table/touch.less";
 
 
 //// window
 @import "components/window/content.less";
-@import "components/window/fixed-bar.less";
 @import "components/window/window.less";
-@import "components/window/preview.less";
 
-//// wrap
-@import "components/wrap/box.less";
-@import "components/wrap/group.less";
-
-//// colorpicker
-@import "components/colorpicker/colorpicker.less";
+//// box
+@import "components/box/login.less";
 
 
 // programmer place for style
 @import "todo.less";
 
 // helpers at the end
-@import "helpers.less";
+@import "helpers/cols.less";
+@import "helpers/main.less";
+@import "helpers/tablet.less";
+@import "helpers/mobile.less";
+@import "helpers/mobile-xs.less";

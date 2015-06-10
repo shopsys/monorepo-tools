@@ -1,130 +1,77 @@
 /*
-Flash messages
-========
-Many types of messagess
+Message
+=======
+Alert, info, success atc messages box
 
-	<div class="form-group">
-		Text
-		<div class="in-message">
-			Simple message
-		</div>
+	<div class="in-message">
+
 	</div>
 
-	<div class="form-group">
-		Text
-		<div class="in-message in-message--success">
-			Success message
-		</div>
-	</div>
-
-	<div class="form-group">
-		Text
-		<div class="in-message in-message--info">
-			Info message
-		</div>
-	</div>
-
-	<div class="form-group">
-		Text
-		<div class="in-message in-message--warning">
-			Warning message
-		</div>
-	</div>
-
-	<div class="form-group">
-		Text
-		<div class="in-message in-message--danger">
-			Danger message with close button
-
-			<span class="in-message__close">X</span>
-		</div>
-	</div>
-
-	<div class="form-group">
-		Text
-		<div class="in-message in-message--danger">
-			<ul class="in-message__list">
-				<li>Error list in message</li>
-				<li>Error list in message</li>
-				<li>Error list in message</li>
-			</ul>
-		</div>
-	</div>
 */
+
 .in-message {
-	padding: 2px 10px;
-	position: absolute;
-	top: 6px;
-	left: 550px;
-	z-index: 10;
+	display: inline-block;
+	padding: 3px 6px;
 
-	border: 1px solid @color-e;
-	background: lighten(@color-e, 10%);
-	font-size: 12px;
+	font-style: italic;
+	font-size: 14px;
 
-	.border-radius(@border-radius-base);
-}
+	&__icon {
+		margin-right: 5px;
+		position: relative;
+		top: -1px;
+	}
 
-.in-message:hover {
-	z-index: 11;
-}
+	&__close {
+		position: absolute;
+		top: 3px;
+		right: 6px;
 
-.in-message__wrap .in-message{
-	top: 26px;
-	left: 205px;
-}
+		color: @color-base;
+		cursor: pointer;
+		font-style: normal;
+	}
 
-.in-message--static {
-	padding: 20px;
-	margin: 20px 0;
-	position: static;
-}
+	&--alert, &--error {
+		color: @color-message-alert;
+		background: lighten(@color-message-alert, 35%);
+	}
 
-.in-message--success {
-	border-color: darken(@bg-success, 10%);
+	&--warning {
+		color: @color-message-warning;
+		background: lighten(@color-message-warning, 35%);
+	}
 
-	.bg-variant(@bg-success);
-}
-.in-message--info {
-	border-color: darken(@bg-info, 10%);
+	&--info {
+		color: @color-message-info;
+		background: lighten(@color-message-info, 35%);
+	}
 
-	.bg-variant(@bg-info);
-}
-.in-message--warning {
-	border-color: darken(@bg-warning, 10%);
+	&--pin {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		margin-top: 10px;
+		width: 230px;
+		z-index: 4px;
 
-	.bg-variant(@bg-warning);
-}
-.in-message--danger {
-	border-color: darken(@bg-alert, 10%);
+		text-align: left;
+		border: 1px solid @color-message-alert;
 
-	.bg-variant(@bg-alert);
-}
+		&:after {
+			display: block;
+			position: absolute;
+			top: -5px;
+			left: 5px;
+			width: 8px;
+			height: 8px;
+			content: '';
 
-.in-message .in-message__list {
-	.reset-ul();
-}
+			border-top: 1px solid @color-message-alert;
+			border-left: 1px solid @color-message-alert;
+			background: lighten(@color-message-alert, 35%);
 
-.in-message__close {
-	float: right;
-	margin-left: 20px;
-	height: 20px;
-	line-height: 20px;
-	width: 20px;
-
-	text-align: center;
-	font-weight: bold;
-	color: @color-f;
-	background: @color-5;
-	cursor: pointer;
-
-	.border-radius(@border-radius-base);
-	.set-transition();
-	.transition(background);
-
-	&:hover {
-		background: @color-3;
-		color: @color-f;
-		text-decoration: none;
+			.rotate(45deg);
+		}
 	}
 }

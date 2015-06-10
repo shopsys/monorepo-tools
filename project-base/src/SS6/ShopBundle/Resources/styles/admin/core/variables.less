@@ -1,58 +1,68 @@
 /*******************************************************************
+// PATHS
+*******************************************************************/
+@path-design: '../images';
+@path-fonts: '../fonts';
+
+
+/*******************************************************************
 // FONTS
 *******************************************************************/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
 
-@font: 'Open Sans', Arial, Helvetica, sans-serif;
-@font-title: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+@font-base: 'Open Sans', Arial, Helvetica, sans-serif;
+@font: @font-base;
 
 @font-size: 14px;
-@line-height: 20px;
 
 
 /*******************************************************************
 // SIZES
 *******************************************************************/
-@margin-gap: @line-height;
+@width-web: 1200px;
+@width-panel: 235px;
 
-
-/*******************************************************************
-// PATHS
-*******************************************************************/
-@path-image: '../images';
-@path-fonts: '../fonts';
-
+@height-header: 72px;
+@height-footer: 52px;
 
 /*******************************************************************
 // COLORS
 *******************************************************************/
 @color-0: #000;
+@color-1: #111;
+@color-2: #222;
 @color-3: #333;
+@color-4: #444;
 @color-5: #555;
+@color-6: #666;
 @color-7: #777;
 @color-8: #888;
 @color-9: #999;
 @color-a: #aaa;
+@color-b: #bbb;
 @color-c: #ccc;
 @color-d: #ddd;
 @color-e: #eee;
 @color-f: #fff;
+
 @color-fa: #fafafa;
 
 @color-grey-dark: #cacaca;
 @color-grey: #dadada;
 @color-grey-light: #eaeaea;
 
-@color-blue: #138ee4;
-@color-green: #5faf2f;
-@color-orange: #d76f2a;
-@color-red: #d22525;
+@color-blue: #009BD9;
+@color-green: #A0C515;
+@color-orange: #FFA200;
+@color-red: #D60000;
+@color-yellow: #FFDD0E;
 
 // context colors
-@color-base: @color-3;
+@color-base: @color-0;
 @color-desc: @color-5;
 
 @color-primary: @color-blue;
+@color-add: @color-f;
 
 @color-info: @color-green;
 @color-alert: @color-red;
@@ -61,21 +71,22 @@
 @color-link: @color-blue;
 @color-link-hover: @color-base;
 
-@color-alterlink: @color-base;
-@color-alterlink-hover: @color-blue;
+@color-alterlink: @color-f;
+@color-alterlink-hover: @color-yellow;
 
-@color-border: @color-e;
-@color-border-light: @color-fa;
-@color-border-dark: @color-d;
-@color-shadow: @color-e;
-@color-inactive: lighten(@color-base, 55%);
+@color-border: #DCDFE0;
+@color-border-dark: #CCD0D4;
+@color-border-darker: #C1CDD1;
+@color-inactive: #BCC2C5;
 
-@bg-web: @color-e;
-@bg-page: @color-f;
-@bg-box: @color-grey-light;
+@bg-web: #CCD0D4;
+@bg-page: #EDF2F4;
+@bg-box: @color-f;
 @bg-window: @color-f;
-@bg-table: @color-grey-light;
-@bg-primary: @color-blue;
+@bg-table: #EBECED;
+@bg-primary: @color-primary;
+@bg-bread: #E1E8EB;
+@bg-input-icon: #EBECED;
 
 @bg-success: #dff0d8;
 @bg-info: #d9edf7;
@@ -83,80 +94,29 @@
 @bg-alert: #f2dede;
 @bg-light: #f8f8f8;
 
+// message colors
+@color-message-alert: @color-red;
+@color-message-warning: @color-yellow;
+@color-message-info: @color-blue;
+
 
 /*******************************************************************
-// RADIUS
+// BUTTONS
 *******************************************************************/
-@border-radius-base: 4px;
-@border-radius-large: 6px;
-@border-radius-small: 3px;
+// btn default
+@btn-color: @color-f;
+@btn-color-hover: @color-f;
+@btn-bg: @color-green;
+@btn-bg-hover: darken(@btn-bg, 5%);
+@btn-height: 24px;
 
 
 /*******************************************************************
 // OTHER
 *******************************************************************/
-
-// transition
 @transition: cubic-bezier(.61, .20, .48, 1.0);
 @transition-time: 0.3s;
 
-/*******************************************************************
-// BOOTSTRAP REWRITE VARIABLES
-*******************************************************************/
-@brand-primary: @color-primary;
-@brand-success: #5faf2f;
-@brand-info: #868686;
-@brand-warning: #d76f2a;
-@brand-danger: #d22525;
-
-@state-success-bg: @bg-success;
-@state-info-bg: @bg-info;
-@state-warning-bg: @bg-warning;
-@state-danger-bg: @bg-alert;
-
-@line-height-computed: @margin-gap;
-
-@font-family-sans-serif: @font;
-@font-family-base: @font;
-@font-size-base: @font-size;
-
-@text-color: @color-base;
-@link-color: @color-link;
-@link-hover-color: @color-link-hover;
-
-@navbar-height: 60px;
-
-@nav-link-padding-left: 15px;
-
-@breadcrumb-padding-vertical: 6px;
-@breadcrumb-bg: @color-f;
-@breadcrumb-border: @color-e;
-@breadcrumb-separator: "-";
-
-@table-bg-accent: @color-grey-light;
-@table-bg-hover: darken(@color-grey-light, 5%);
-@table-bg-active: @table-bg-hover;
-@table-border-color: @color-border;
-
-@input-color: @color-base;
-@input-border: @color-c;
-@input-color-placeholder: @color-9;
-
-@dropdown-bg: @color-f;
-@dropdown-border: @color-border;
-
-
-@input-height-xsmall: 22px;
-@padding-xsmall-vertical: 0;
-@padding-xsmall-horizontal: 5px;
-@font-size-xsmall: @font-size-small;
-@line-height-xsmall: 22px;
-@border-radius-xsmall: @border-radius-small;
-
-/*******************************************************************
-// BOOTSTRAP EXTENDED VARIABLES
-*******************************************************************/
-@nav-link-padding: 10px @nav-link-padding-left;
 
 /*******************************************************************
 // POPUP WINDOWS
@@ -172,3 +132,31 @@
 
 @window-wide-float-width: 600px;
 @window-wide-float-height: 250px;
+/*******************************************************************
+// RESPONSIVE POINTS
+*******************************************************************/
+@respons-1: 320px;
+@respons-1-a: (@respons-1 - 1);
+@respons-2: 480px;
+@respons-2-a: (@respons-2 - 1);
+@respons-3: 600px;
+@respons-3-a: (@respons-3 - 1);
+@respons-4: 768px;
+@respons-4-a: (@respons-4 - 1);
+@respons-5: @width-web;
+@respons-5-a: (@respons-5 - 1);
+
+/*******************************************************************
+// MEDIA QUERIES
+*******************************************************************/
+@query-xs: ~"screen and (min-width: @{respons-1})";
+@query-sm: ~"screen and (min-width: @{respons-2})";
+@query-md: ~"screen and (min-width: @{respons-3})";
+@query-lg: ~"screen and (min-width: @{respons-4})";
+@query-xl: ~"screen and (min-width: @{respons-5})";
+
+@query-mobile-xs: ~"screen and (max-width: @{respons-2-a})";
+@query-mobile: ~"screen and (max-width: @{respons-3-a})";
+@query-tablet: ~"screen and (max-width: @{respons-4-a})";
+@query-tablet-only: ~"screen and (min-width: @{respons-3}) and (max-width: @{respons-4-a})";
+@query-not-large-desktop: ~"screen and (max-width: @{respons-5-a})";

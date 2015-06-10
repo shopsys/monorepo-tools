@@ -1,0 +1,41 @@
+/*
+Form choice list
+===========
+Form block construction, where is one choice on one line.
+
+*/
+
+.form-choice-list {
+	display: inline-block;
+
+	&__item {
+		display: block;
+		padding: 2px 0;
+	}
+
+	&__input {
+		position: relative;
+		top: 1px;
+		margin-right: 5px;
+	}
+
+	&__icon {
+		display: inline-block;
+		margin-right: 5px;
+		width: 40px;
+		height: 12px;
+		position: relative;
+		top: 1px;
+
+		img {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			text-align: center;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+}

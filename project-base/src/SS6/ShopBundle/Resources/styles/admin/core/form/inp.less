@@ -1,0 +1,39 @@
+.inp {
+	width: 210px;
+	max-width: 100%;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+
+	border: 1px solid @color-border;
+
+	&--iconic {
+		padding-right: 40px;
+	}
+
+	&__wrap {
+		position: relative;
+	}
+
+	&__icon {
+		position: absolute;
+		top: 1px;
+		bottom: 1px;
+		right: 1px;
+		width: 30px;
+		line-height: 30px;
+
+		text-align: center;
+		background: @bg-input-icon;
+
+		i {
+			position: relative;
+			left: 1px;
+		}
+	}
+
+
+	.form-line--error & {
+		border-color: @color-red;
+	}
+}

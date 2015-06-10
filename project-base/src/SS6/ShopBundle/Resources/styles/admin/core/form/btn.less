@@ -1,0 +1,36 @@
+/*
+Default buttons
+===========
+button types
+
+*/
+
+.btn {
+	width: auto;
+	height: @btn-height;
+	padding: 5px;
+	line-height: @btn-height - 10;
+	vertical-align:middle;
+
+	border: 0;
+	color: @btn-color;
+	background: @btn-bg;
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 12px;
+
+	.set-transition();
+	.transition(~"background, color");
+
+	&:hover {
+		color: @btn-color-hover;
+		background: @btn-bg-hover;
+	}
+
+	&__icon {
+		margin-right: 2px;
+
+		font-size: 12px;
+	}
+}
