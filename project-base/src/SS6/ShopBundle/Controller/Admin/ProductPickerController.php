@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -67,8 +68,9 @@ class ProductPickerController extends Controller {
 		$advancedSearchData = $advancedSearchForm->getData();
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
+		$quickSearchData = new QuickSearchFormData();
+		$quickSearchForm->setData($quickSearchData);
 		$quickSearchForm->handleRequest($request);
-		$quickSearchData = $quickSearchForm->getData();
 
 		$isAdvancedSearchFormSubmitted = $advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
 		if ($isAdvancedSearchFormSubmitted) {
