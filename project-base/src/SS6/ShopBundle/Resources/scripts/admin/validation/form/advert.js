@@ -1,6 +1,6 @@
 (function ($){
 	$(document).ready(function () {
-		var $advertForm = $('form[name="advert"]');
+		var $advertForm = $('form[name="advert_form"]');
 
 		$.fn.initAdvertType = function(){
 			var $checkedType = $(this).find('input[name="advert[type]"]:checked').val();

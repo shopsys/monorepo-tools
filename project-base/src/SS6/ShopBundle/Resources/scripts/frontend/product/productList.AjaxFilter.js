@@ -6,7 +6,7 @@
 
 	SS6.productList.AjaxFilter = function (ajaxMoreLoader) {
 		var $productsWithControls = $('.js-product-list-ajax-filter-products-with-controls');
-		var $productFilterForm = $('form[name="productFilter"]');
+		var $productFilterForm = $('form[name="productFilter_form"]');
 		var $showResultsButton = $('.js-product-filter-show-result-button');
 		var $resetFilterButton = $('.js-product-filter-reset-button');
 

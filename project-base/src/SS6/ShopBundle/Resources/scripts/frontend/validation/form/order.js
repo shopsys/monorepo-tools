@@ -10,7 +10,7 @@
 			}
 		});
 
-		var $orderPersonalInfoForm = $('form[name="orderPersonalInfo"]');
+		var $orderPersonalInfoForm = $('form[name="orderPersonalInfo_form"]');
 		$orderPersonalInfoForm.jsFormValidator({
 			'groups': function () {
 
