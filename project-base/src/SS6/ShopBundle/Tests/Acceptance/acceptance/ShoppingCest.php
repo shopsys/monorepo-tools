@@ -14,7 +14,7 @@ class ShoppingCest {
 		$me->waitForJS('return $.active == 0;', 15);
 		$me->see('Do košíku bylo vloženo zboží');
 		$me->click('Přejít do košíku');
-		$me->amOnPage('/kosik/');
+		$me->seeInCurrentUrl('/kosik/');
 		$me->see('Objednat');
 	}
 
