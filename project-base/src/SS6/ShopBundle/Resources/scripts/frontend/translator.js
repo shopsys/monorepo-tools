@@ -12,7 +12,12 @@
 	};
 
 	SS6.translator.transChoice = function (id, number, parameters, domain) {
-		return SS6.translator.replaceParameters(id, parameters);
+		var pluralized = Translator.pluralize(id, number, document.documentElement.lang.replace('-', '_'));
+		if (pluralized === undefined) {
+			pluralized = id;
+		}
+
+		return SS6.translator.replaceParameters(pluralized, parameters);
 	};
 
 	SS6.translator.replaceParameters = function (message, parameters) {

@@ -63,14 +63,12 @@ class JsTranslatorCallParser {
 			if ($this->isTransFunctionCall($callExprNode)) {
 				$messageIdArgumentNode = $this->getMessageIdArgumentNode($callExprNode);
 
-				$messageId = $this->getMessageId($messageIdArgumentNode);
-				$domain = $this->getDomain($callExprNode);
-
 				$jsTranslatorCalls[] = new JsTranslatorCall(
 					$callExprNode,
 					$messageIdArgumentNode,
-					$messageId,
-					$domain
+					$this->getMessageId($messageIdArgumentNode),
+					$this->getDomain($callExprNode),
+					$this->jsFunctionCallParser->getFunctionName($callExprNode)
 				);
 			}
 		}

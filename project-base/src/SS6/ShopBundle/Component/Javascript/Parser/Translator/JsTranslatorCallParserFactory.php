@@ -9,6 +9,9 @@ use SS6\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory {
 
+	const METHOD_NAME_TRANS = 'SS6.translator.trans';
+	const METHOD_NAME_TRANS_CHOICE = 'SS6.translator.transChoice';
+
 	/**
 	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
 	 */
@@ -36,8 +39,8 @@ class JsTranslatorCallParserFactory {
 	 */
 	public function create() {
 		$transMethodSpecifications = [
-			new TransMethodSpecification('SS6.translator.trans', 0, 2),
-			new TransMethodSpecification('SS6.translator.transChoice', 0, 3),
+			new TransMethodSpecification(self::METHOD_NAME_TRANS, 0, 2),
+			new TransMethodSpecification(self::METHOD_NAME_TRANS_CHOICE, 0, 3),
 		];
 
 		return new JsTranslatorCallParser(
