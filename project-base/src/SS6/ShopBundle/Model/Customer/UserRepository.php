@@ -3,7 +3,10 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\String\DatabaseSearching;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserRepository {
@@ -95,6 +98,57 @@ class UserRepository {
 			'id' => $id,
 			'loginToken' => $loginToken,
 		]);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getCustomerListQueryBuilderByQuickSearchData(
+		$domainId,
+		QuickSearchFormData $quickSearchData
+	) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('
+				u.id,
+				u.email,
+				MAX(pg.name) AS pricingGroup,
+				MAX(ba.city) city,
+				MAX(ba.telephone) telephone,
+				MAX(CASE WHEN ba.companyName IS NOT NULL
+						THEN ba.companyName
+						ELSE CONCAT(u.firstName, \' \', u.lastName)
+					END) AS name,
+				COUNT(o.id) ordersCount,
+				SUM(o.totalPriceWithVat) ordersSumPrice,
+				MAX(o.createdAt) lastOrderAt')
+			->from(User::class, 'u')
+			->where('u.domainId = :selectedDomainId')
+			->setParameter('selectedDomainId', $domainId)
+			->join('u.billingAddress', 'ba')
+			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
+			->leftJoin(PricingGroup::class, 'pg', 'WITH', 'pg.id = u.pricingGroup')
+			->groupBy('u.id');
+
+		if ($quickSearchData->text !== null && $quickSearchData->text !== '') {
+			$queryBuilder
+				->andWhere('
+					(
+						NORMALIZE(u.lastName) LIKE :text
+						OR
+						NORMALIZE(u.email) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(ba.companyName) LIKE NORMALIZE(:text)
+						OR
+						NORMALIZE(ba.telephone) LIKE NORMALIZE(:text)
+					)'
+				);
+			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
+			$queryBuilder->setParameter('text', $querySerachText);
+		}
+
+		return $queryBuilder;
 	}
 
 }

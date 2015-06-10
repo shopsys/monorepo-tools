@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\Listing;
 
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
@@ -43,12 +44,12 @@ class ProductListAdminFacade {
 	}
 
 	/**
-	 * @param array|null $searchData
+	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getQueryBuilderByQuickSearchData(array $searchData = null) {
+	public function getQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData) {
 		$queryBuilder = $this->getProductListQueryBuilder();
-		$this->productListAdminRepository->extendQueryBuilderByQuickSearchData($queryBuilder, $searchData);
+		$this->productListAdminRepository->extendQueryBuilderByQuickSearchData($queryBuilder, $quickSearchData);
 
 		return $queryBuilder;
 	}

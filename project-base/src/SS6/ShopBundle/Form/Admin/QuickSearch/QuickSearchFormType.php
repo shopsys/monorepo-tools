@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product;
+namespace SS6\ShopBundle\Form\Admin\QuickSearch;
 
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
@@ -26,13 +26,14 @@ class QuickSearchFormType extends AbstractType {
 			->add('text', FormType::TEXT, [
 				'required' => false,
 			])
-			->add('save', FormType::SUBMIT);
+			->add('submit', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
 			'attr' => ['novalidate' => 'novalidate'],
 			'csrf_protection' => false,
+			'data_class' => QuickSearchFormData::class,
 		]);
 	}
 

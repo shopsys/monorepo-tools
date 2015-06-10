@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
@@ -276,13 +277,13 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param array|null $searchData
+	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getOrderListQueryBuilderByQuickSearchData(array $searchData = null) {
+	public function getOrderListQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData) {
 		return $this->orderRepository->getOrderListQueryBuilderByQuickSearchData(
 			$this->localization->getDefaultLocale(),
-			$searchData
+			$quickSearchData
 		);
 	}
 }

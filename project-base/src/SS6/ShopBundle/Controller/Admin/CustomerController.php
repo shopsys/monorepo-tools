@@ -5,12 +5,14 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
+use SS6\ShopBundle\Model\Customer\CustomerListAdminFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,12 +31,19 @@ class CustomerController extends Controller {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerListAdminFacade
+	 */
+	private $customerListAdminFacade;
+
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		Translator $translator
+		Translator $translator,
+		CustomerListAdminFacade $customerListAdminFacade
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
+		$this->customerListAdminFacade = $customerListAdminFacade;
 	}
 
 	/**
@@ -92,9 +101,10 @@ class CustomerController extends Controller {
 
 	/**
 	 * @Route("/customer/list/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
-	public function listAction() {
+	public function listAction(Request $request) {
 		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
 		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
@@ -104,29 +114,15 @@ class CustomerController extends Controller {
 		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
 		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
-		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-		/* @var $queryBuilder \Doctrine\ORM\QueryBuilder */
-		$queryBuilder
-			->select('
-				u.id,
-				u.email,
-				MAX(pg.name) AS pricingGroup,
-				MAX(ba.city) city,
-				MAX(ba.telephone) telephone,
-				MAX(CASE WHEN ba.companyName IS NOT NULL
-						THEN ba.companyName
-						ELSE CONCAT(u.firstName, \' \', u.lastName)
-					END) AS name,
-				COUNT(o.id) ordersCount,
-				SUM(o.totalPriceWithVat) ordersSumPrice,
-				MAX(o.createdAt) lastOrderAt')
-			->from(User::class, 'u')
-			->where('u.domainId = :selectedDomainId')
-			->setParameter('selectedDomainId', $selectedDomain->getId())
-			->leftJoin('u.billingAddress', 'ba')
-			->leftJoin(Order::class, 'o', 'WITH', 'o.customer = u.id')
-			->leftJoin(PricingGroup::class, 'pg', 'WITH', 'pg.id = u.pricingGroup')
-			->groupBy('u.id');
+		$quickSearchForm = $this->createForm(new QuickSearchFormType());
+		$quickSearchForm->setData(new QuickSearchFormData());
+		$quickSearchForm->handleRequest($request);
+		$quickSearchData = $quickSearchForm->getData();
+
+		$queryBuilder = $this->customerListAdminFacade->getCustomerListQueryBuilderByQuickSearchData(
+			$selectedDomain->getId(),
+			$quickSearchData
+		);
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
 
 		$grid = $gridFactory->create('customerList', $dataSource);
@@ -155,6 +151,7 @@ class CustomerController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', [
 			'gridView' => $grid->createView(),
+			'quickSearchForm' => $quickSearchForm->createView(),
 		]);
 	}
 

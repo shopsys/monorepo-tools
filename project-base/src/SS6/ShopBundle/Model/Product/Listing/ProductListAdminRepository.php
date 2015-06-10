@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
+use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use SS6\ShopBundle\Model\Product\Product;
@@ -52,10 +53,13 @@ class ProductListAdminRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param array $searchData
+	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 */
-	public function extendQueryBuilderByQuickSearchData(QueryBuilder $queryBuilder, $searchData) {
-		if ($searchData['text'] !== null && $searchData['text'] !== '') {
+	public function extendQueryBuilderByQuickSearchData(
+		QueryBuilder $queryBuilder,
+		QuickSearchFormData $quickSearchData
+	) {
+		if ($quickSearchData->text !== null && $quickSearchData->text !== '') {
 			$queryBuilder->andWhere('
 				(
 					NORMALIZE(pt.name) LIKE NORMALIZE(:text)
@@ -64,7 +68,7 @@ class ProductListAdminRepository {
 					OR
 					NORMALIZE(p.partno) LIKE NORMALIZE(:text)
 				)');
-			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($searchData['text']) . '%';
+			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
 			$queryBuilder->setParameter('text', $querySerachText);
 		}
 	}
