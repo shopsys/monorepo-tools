@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d500383688b758d6f992ac764a834b0a",
+    "hash": "6a38afc3e33a8e26b3914c2cba3ae458",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -251,7 +251,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/36d1e3c4519c709faa2cf6bb785852d1c090da2c",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/55da5011b857c8901d516b3cb45c6474383dc04d",
                 "reference": "55da501",
                 "shasum": ""
             },
@@ -494,7 +494,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1290,37 +1290,36 @@
         },
         {
             "name": "fabpot/php-cs-fixer",
-            "version": "v1.3",
+            "version": "v1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "653cefbf33241185b58f7323157f1829552e370d"
+                "reference": "c1e28e95a978e967dade5469a4bf88162faa67bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/653cefbf33241185b58f7323157f1829552e370d",
-                "reference": "653cefbf33241185b58f7323157f1829552e370d",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/c1e28e95a978e967dade5469a4bf88162faa67bf",
+                "reference": "c1e28e95a978e967dade5469a4bf88162faa67bf",
                 "shasum": ""
             },
             "require": {
+                "ext-tokenizer": "*",
                 "php": ">=5.3.6",
                 "sebastian/diff": "~1.1",
-                "symfony/console": "~2.1",
+                "symfony/console": "~2.3",
                 "symfony/event-dispatcher": "~2.1",
                 "symfony/filesystem": "~2.1",
                 "symfony/finder": "~2.1",
                 "symfony/process": "~2.3",
                 "symfony/stopwatch": "~2.5"
             },
+            "require-dev": {
+                "satooshi/php-coveralls": "0.7.*@dev"
+            },
             "bin": [
                 "php-cs-fixer"
             ],
             "type": "application",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Symfony\\CS\\": "Symfony/CS/"
@@ -1340,8 +1339,8 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "A script to automatically fix Symfony Coding Standard",
-            "time": "2014-12-12 06:09:01"
+            "description": "A tool to automatically fix PHP code style",
+            "time": "2015-05-29 06:10:12"
         },
         {
             "name": "fp/jsformvalidator-bundle",
@@ -1354,7 +1353,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/88ba9696c77da536fba0719f871963d61ec1d2bf",
+                "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/bb2be7e9e78fbd02b37f01d6c899065c54fdb2d4",
                 "reference": "bb2be7e",
                 "shasum": ""
             },
@@ -4497,7 +4496,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ee85c33afd0afda9debee2d4b35421d930913598",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/f9f3db44b9f4686c6dc98720d3f5163a6f61d1c6",
                 "reference": "3234289",
                 "shasum": ""
             },
@@ -4777,7 +4776,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/07940eada3d2c33a2fb30dc148629644f3fd8097",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/41365ce7af6be4b55a3507965dd39ea743637080",
                 "reference": "41365ce",
                 "shasum": ""
             },
@@ -5011,20 +5010,21 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "dev-phpcs-fixer",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "676e90b"
+                "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/676e90b8ccfddf89b9bf72e9b01072c4b3342b94",
-                "reference": "676e90b",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
+                "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
                 "php": ">=5.1.2"
             },
             "bin": [
@@ -5034,7 +5034,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-phpcs-fixer": "2.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -5074,13 +5074,13 @@
                     "role": "lead"
                 }
             ],
-            "description": "PHP_CodeSniffer tokenises PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
             "homepage": "http://www.squizlabs.com/php-codesniffer",
             "keywords": [
                 "phpcs",
                 "standards"
             ],
-            "time": "2014-12-02 22:52:08"
+            "time": "2015-04-28 23:28:20"
         },
         {
             "name": "symfony/icu",
@@ -5142,8 +5142,7 @@
         "prezent/doctrine-translatable-bundle": 20,
         "timwhitlock/jparser": 20,
         "codeception/codeception": 20,
-        "jakub-onderka/php-parallel-lint": 20,
-        "squizlabs/php_codesniffer": 20
+        "jakub-onderka/php-parallel-lint": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
