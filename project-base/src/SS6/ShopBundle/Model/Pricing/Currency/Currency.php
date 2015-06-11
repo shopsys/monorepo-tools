@@ -83,7 +83,7 @@ class Currency {
 	 * @return string
 	 */
 	public function getReversedExchangeRate() {
-		return (1/$this->exchangeRate);
+		return 1 / $this->exchangeRate;
 	}
 
 	/**
