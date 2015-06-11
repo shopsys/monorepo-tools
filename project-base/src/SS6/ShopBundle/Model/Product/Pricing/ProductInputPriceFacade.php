@@ -133,7 +133,8 @@ class ProductInputPriceFacade {
 			}
 
 			$newVat = $product->getVat()->getReplaceWith();
-			$this->productService->recalculateInputPriceForNewVatPercent($product, $newVat->getPercent());
+			$productManualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
+			$this->productService->recalculateInputPriceForNewVatPercent($product, $productManualInputPrices, $newVat->getPercent());
 			$product->changeVat($newVat);
 
 			$count++;
