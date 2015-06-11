@@ -56,7 +56,7 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 	 */
 	public function getIterator(DomainConfig $domainConfig) {
 		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
-		$queryBuilder = $this->productRepository->getAllVisibleQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
+		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
 
 		return new HeurekaDataIterator(
 			$queryBuilder->getQuery()->iterate(),

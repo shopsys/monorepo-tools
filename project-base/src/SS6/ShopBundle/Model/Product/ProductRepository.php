@@ -93,7 +93,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllVisibleQueryBuilder($domainId, $pricingGroup) {
+	private function getAllVisibleQueryBuilder($domainId, $pricingGroup) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')
