@@ -135,13 +135,13 @@ class UserRepository {
 			$queryBuilder
 				->andWhere('
 					(
-						NORMALIZE(u.lastName) LIKE :text
+						NORMALIZE(u.lastName) LIKE NORMALIZE(:text)
 						OR
 						NORMALIZE(u.email) LIKE NORMALIZE(:text)
 						OR
 						NORMALIZE(ba.companyName) LIKE NORMALIZE(:text)
 						OR
-						NORMALIZE(ba.telephone) LIKE NORMALIZE(:text)
+						NORMALIZE(ba.telephone) LIKE :text
 					)'
 				);
 			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
