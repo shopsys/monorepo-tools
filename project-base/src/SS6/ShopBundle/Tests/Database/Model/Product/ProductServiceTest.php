@@ -2,9 +2,11 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
+use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Setting\SettingValue;
@@ -23,14 +25,19 @@ class ProductServiceTest extends DatabaseTestCase {
 		$vatData = new VatData('vat', 21);
 		$vat = new Vat($vatData);
 
+		$pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+
 		$productData = new ProductData();
 		$productData->price = 1000;
 		$productData->vat = $vat;
 		$product = new Product($productData);
 
-		$productService->recalculateInputPriceForNewVatPercent($product, 15);
+		$productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
+
+		$productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
 		$this->assertSame('1052.173913', (string)$product->getPrice());
+		$this->assertSame('1052.173913', (string)$productManualInputPrice->getInputPrice());
 	}
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat() {
@@ -44,14 +51,19 @@ class ProductServiceTest extends DatabaseTestCase {
 		$vatData = new VatData('vat', 21);
 		$vat = new Vat($vatData);
 
+		$pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
+
 		$productData = new ProductData();
 		$productData->price = 1000;
 		$productData->vat = $vat;
 		$product = new Product($productData);
 
-		$productService->recalculateInputPriceForNewVatPercent($product, 15);
+		$productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
+
+		$productService->recalculateInputPriceForNewVatPercent($product, [$productManualInputPrice], 15);
 
 		$this->assertSame('1000', (string)$product->getPrice());
+		$this->assertSame('1000', (string)$productManualInputPrice->getInputPrice());
 	}
 
 }
