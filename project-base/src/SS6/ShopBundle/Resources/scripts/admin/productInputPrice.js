@@ -4,7 +4,7 @@
 	SS6.productInputPrice = SS6.productInputPrice || {};
 
 	SS6.productInputPrice.init = function () {
-		var priceCalculationTypeSelection = $('#product_edit_productData_priceCalculationType input[type="radio"]');
+		var priceCalculationTypeSelection = $('#product_edit_form_productData_priceCalculationType input[type="radio"]');
 		priceCalculationTypeSelection.change(function(){
 			SS6.productInputPrice.showInputByPriceCalculationType($(this).val() === SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Product::PRICE_CALCULATION_TYPE_AUTO'));
 		});
