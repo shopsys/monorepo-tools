@@ -26,7 +26,7 @@ class PriceExtensionTest extends FunctionalTestCase {
 			[
 				'input' => '123456789.123456789',
 				'domainId' => 1,
-				'result' => '123' . self::NBSP . '456' . self::NBSP . '789,123456789' . self::NBSP . 'Kč'
+				'result' => '123' . self::NBSP . '456' . self::NBSP . '789,123456789' . self::NBSP . 'Kč',
 			],
 			['input' => null, 'domainId' => 1, 'result' => null],
 			['input' => 'asdf', 'domainId' => 1, 'result' => 'asdf'],

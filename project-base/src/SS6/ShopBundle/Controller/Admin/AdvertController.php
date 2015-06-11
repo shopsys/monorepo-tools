@@ -103,7 +103,7 @@ class AdvertController extends BaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla upravena', [
-					'name' => $advert->getName()
+					'name' => $advert->getName(),
 				]);
 			return $this->redirect($this->generateUrl('admin_advert_list'));
 		}
