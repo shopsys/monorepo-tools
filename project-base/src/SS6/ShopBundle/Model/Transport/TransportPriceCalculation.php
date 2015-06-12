@@ -60,7 +60,7 @@ class TransportPriceCalculation {
 		Transport $transport,
 		Currency $currency
 	) {
-		return $this->basePriceCalculation->calculatePrice(
+		return $this->basePriceCalculation->calculateBasePrice(
 			$transport->getPrice($currency)->getPrice(),
 			$this->pricingSetting->getInputPriceType(),
 			$transport->getVat()

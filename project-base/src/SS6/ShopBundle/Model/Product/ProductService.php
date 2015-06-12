@@ -61,7 +61,7 @@ class ProductService {
 		$inputPriceType = $this->pricingSetting->getInputPriceType();
 
 		foreach ($productManualInputPrices as $productManualInputPrice) {
-			$basePriceForPricingGroup = $this->basePriceCalculation->calculatePrice(
+			$basePriceForPricingGroup = $this->basePriceCalculation->calculateBasePrice(
 				$productManualInputPrice->getInputPrice(),
 				$inputPriceType,
 				$product->getVat()
