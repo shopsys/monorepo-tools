@@ -36,6 +36,7 @@ $config = Symfony\CS\Config\Config::create()
 		'ordered_use',
 		'parenthesis',
 		'php_closing_tag',
+		'phpdoc_indent',
 		'phpdoc_no_access',
 		'phpdoc_no_empty_return',
 		'phpdoc_no_package',
