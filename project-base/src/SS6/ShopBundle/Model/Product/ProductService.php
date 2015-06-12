@@ -74,10 +74,14 @@ class ProductService {
 			$productManualInputPrice->setInputPrice($inputPriceForPricingGroup);
 		}
 
-		$productPrice = $this->productPriceCalculation->calculateBasePrice($product);
+		$productBasePrice = $this->basePriceCalculation->calculateBasePrice(
+			$product->getPrice(),
+			$inputPriceType,
+			$product->getVat()
+		);
 		$inputPrice = $this->inputPriceCalculation->getInputPrice(
 			$inputPriceType,
-			$productPrice->getPriceWithVat(),
+			$productBasePrice->getPriceWithVat(),
 			$newVatPercent
 		);
 
