@@ -21,7 +21,6 @@ class SliderItemFacade {
 	private $sliderItemRepository;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
 	private $selectedDomain;

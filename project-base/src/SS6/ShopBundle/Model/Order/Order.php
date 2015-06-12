@@ -542,7 +542,6 @@ class Order {
 	}
 
 	/**
-	 *
 	 * @param int $orderItemId
 	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem
 	 */

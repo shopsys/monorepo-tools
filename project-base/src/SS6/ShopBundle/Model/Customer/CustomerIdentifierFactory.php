@@ -14,7 +14,6 @@ class CustomerIdentifierFactory {
 	private $currentCustomer;
 
 	/**
-	 *
 	 * @var \Symfony\Component\HttpFoundation\Session\Session
 	 */
 	private $session;

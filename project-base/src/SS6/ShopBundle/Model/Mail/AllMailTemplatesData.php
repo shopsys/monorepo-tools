@@ -10,13 +10,11 @@ class AllMailTemplatesData {
 	public $orderStatusTemplates;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateData
 	 */
 	public $registrationTemplate;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateData
 	 */
 	public $resetPasswordTemplate;

@@ -20,7 +20,6 @@ class OrderTotalPrice {
 	private $productPriceWithVat;
 
 	/**
-	 *
 	 * @param string $priceWithVat
 	 * @param string $priceWithoutVat
 	 * @param string $productPriceWithVat

@@ -29,7 +29,6 @@ class AdvertFormType extends AbstractType {
 	private $imageUploaded;
 
 	/**
-	 *
 	 * @param bool $imageUploaded
 	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 * @param array $advertPositionsLocalizedNamesByName

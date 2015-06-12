@@ -29,7 +29,6 @@ class TransportGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
 	 */
 	private $transportRepository;

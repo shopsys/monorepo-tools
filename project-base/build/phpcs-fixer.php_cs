@@ -44,6 +44,7 @@ $config = Symfony\CS\Config\Config::create()
 		'phpdoc_scalar',
 		//'phpdoc_separation',
 		//'phpdoc_short_description',
+		'phpdoc_trim',
 		'phpdoc_type_to_var',
 		//'pre_increment',
 		'psr0',

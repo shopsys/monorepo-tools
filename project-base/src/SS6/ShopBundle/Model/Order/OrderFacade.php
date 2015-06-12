@@ -172,7 +172,6 @@ class OrderFacade {
 	}
 
 	/**
-	 *
 	 * @param int $orderId
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @return \SS6\ShopBundle\Model\Order\Order

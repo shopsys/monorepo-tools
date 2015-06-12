@@ -10,7 +10,6 @@ class FileThumbnailInfo {
 	private $iconType;
 
 	/**
-	 *
 	 * @var string|null
 	 */
 	private $imageUri;

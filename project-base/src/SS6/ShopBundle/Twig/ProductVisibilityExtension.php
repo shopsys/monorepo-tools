@@ -48,7 +48,6 @@ class ProductVisibilityExtension extends \Twig_Extension {
 	}
 
 	/**
-	 *
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @return bool

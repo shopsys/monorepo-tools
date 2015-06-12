@@ -27,7 +27,6 @@ class GridFactory {
 	private $twig;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService
 	 */
 	private $gridOrderingService;

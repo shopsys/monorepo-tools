@@ -29,7 +29,6 @@ class PaymentGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;

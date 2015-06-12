@@ -34,7 +34,6 @@ class ImageEntityConfig {
 	private $multipleByType;
 
 	/**
-	 *
 	 * @param string $entityName
 	 * @param string $entityClass
 	 * @param array $sizeConfigsByType
