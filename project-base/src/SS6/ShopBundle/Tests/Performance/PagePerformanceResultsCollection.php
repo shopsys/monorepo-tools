@@ -1,4 +1,5 @@
 <?php
+
 namespace SS6\ShopBundle\Tests\Performance;
 
 use SS6\ShopBundle\Tests\Performance\PagePerformanceResult;
