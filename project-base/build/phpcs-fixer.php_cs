@@ -21,6 +21,7 @@ $config = Symfony\CS\Config\Config::create()
 		'join_function',
 		'line_after_namespace',
 		'linefeed',
+		'list_commas',
 		'lowercase_constants',
 		'lowercase_keywords',
 		'method_argument_space',
