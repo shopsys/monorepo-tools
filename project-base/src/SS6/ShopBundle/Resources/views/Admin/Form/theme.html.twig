@@ -110,8 +110,9 @@
 {%- endblock url_list_row %}
 
 {% block url_list_widget -%}
+	<div class="js-entity-urls" >
 		{% for domainId, friendlyUrlForms in form.toDelete %}
-			<table class="table">
+			<table class="table js-entity-urls-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
 			<tr>
 				<th>{{ 'Hlavní'|trans }}</th>
 				<th>{{ 'Doména '|trans ~ getDomainName(domainId) }}</th>
@@ -158,9 +159,48 @@
 					</td>
 				</tr>
 			{% endfor %}
+			{% for newUrlForm in form.newSlugsOnDomains[domainId] %}
+				{{ _self.urlListWidgetNewUrlRow(newUrlForm) }}
+			{% endfor %}
 			</table>
 		{% endfor %}
+		<button
+			type="button"
+			class="js-entity-urls-button-add-url btn btn-primary"
+			data-window-content-template="{{ _self.urlListNewUrlWindowContentTemplate(form.vars.newUrlForm, form.vars.domainUrlsById)|e }}"
+		>
+			<i class="fa fa-plus fa-lg"></i> {{ 'Přidat URL'|trans }}
+		</button>
+	</div>
 {%- endblock url_list_widget -%}
+
+{% macro urlListWidgetNewUrlRow(form) %}
+	<tr class="js-entity-urls-new-row">
+		<td class="table-col-10"></td>
+		<td class="table-col-40">
+			<span class="js-entity-urls-new-row-domain-url"></span><span class="js-entity-urls-new-row-slug"></span>
+			{{ form_widget(form, {attr: {class: 'js-entity-urls-new-row-slug-input display-none', id: null}}) }}
+		</td>
+		<td class="table-col-30">
+			<button class="btn btn-iconic js-entity-urls-new-row-delete-button" type="button">
+				<i class="fa fa-trash-o"></i>{{ 'Smazat URL'|trans }}
+			</button>
+		</td>
+	</tr>
+{% endmacro %}
+
+{% macro urlListNewUrlWindowContentTemplate(form, domainUrlsById) %}
+	{{ form_start(form) }}
+		<h3>{{ 'Přidat URL'|trans }}</h3>
+		<div class="form-inline">
+			{{ form_row(form.domain, { label: 'Doména', attr: {class: 'js-entity-urls-window-content-domain-row'} }) }}
+			<div>
+				<span class="js-entity-urls-window-content-domain-url" data-domain-urls-by-id="{{ domainUrlsById|json_encode }}"></span>{{ form_widget(form.slug) }}
+			</div>
+			{{ form_row(form.create, { label: 'Vytvořit URL'}) }}
+		</div>
+	{{ form_end(form) }}
+{% endmacro %}
 
 {% block ckeditor_row -%}
 	{{ block('textarea_row') }}

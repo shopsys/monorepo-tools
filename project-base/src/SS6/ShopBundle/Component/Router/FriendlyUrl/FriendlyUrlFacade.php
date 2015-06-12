@@ -135,9 +135,11 @@ class FriendlyUrlFacade {
 	}
 
 	/**
+	 * @param string $routeName
+	 * @param int $entityId
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][] $urlListFormData
 	 */
-	public function saveUrlListFormData(array $urlListFormData) {
+	public function saveUrlListFormData($routeName, $entityId, array $urlListFormData) {
 		$toFlush = [];
 
 		foreach ($urlListFormData[UrlListType::TO_DELETE] as $friendlyUrls) {
@@ -153,6 +155,14 @@ class FriendlyUrlFacade {
 			if ($friendlyUrl !== null) {
 				$this->refreshMainUrl($friendlyUrl);
 				$toFlush[] = $friendlyUrl;
+			}
+		}
+
+		foreach ($urlListFormData[UrlListType::NEW_SLUGS_ON_DOMAINS] as $domainId => $newSlugs) {
+			foreach ($newSlugs as $newSlug) {
+				$newFriendlyUrl = new FriendlyUrl($routeName, $entityId, $domainId, $newSlug);
+				$this->em->persist($newFriendlyUrl);
+				$toFlush[] = $newFriendlyUrl;
 			}
 		}
 

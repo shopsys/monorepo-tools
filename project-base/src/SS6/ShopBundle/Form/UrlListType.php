@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,6 +18,12 @@ class UrlListType extends AbstractType {
 
 	const TO_DELETE = 'toDelete';
 	const MAIN_ON_DOMAINS = 'mainOnDomains';
+	const NEW_SLUGS_ON_DOMAINS = 'newSlugsOnDomains';
+
+	/**
+	 * @var \Symfony\Component\Form\FormFactoryInterface
+	 */
+	private $formFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
@@ -34,6 +41,7 @@ class UrlListType extends AbstractType {
 	private $domain;
 
 	public function __construct(
+		FormFactoryInterface $formFactory,
 		FriendlyUrlFacade $friendlyUrlFacade,
 		DomainRouterFactory $domainRouterFactory,
 		Domain $domain
@@ -41,6 +49,7 @@ class UrlListType extends AbstractType {
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->domainRouterFactory = $domainRouterFactory;
 		$this->domain = $domain;
+		$this->formFactory = $formFactory;
 	}
 
 	/**
@@ -54,6 +63,7 @@ class UrlListType extends AbstractType {
 
 		$builder->add(self::TO_DELETE, FormType::FORM);
 		$builder->add(self::MAIN_ON_DOMAINS, FormType::FORM);
+		$builder->add(self::NEW_SLUGS_ON_DOMAINS, FormType::FORM);
 
 		$friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
@@ -70,6 +80,11 @@ class UrlListType extends AbstractType {
 				'expanded' => true,
 				'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
 				'invalid_message' => 'Původně vybraná hlavní URL již neexistuje',
+			]);
+			$builder->get(self::NEW_SLUGS_ON_DOMAINS)->add($domainId, FormType::COLLECTION, [
+				'type' => FormType::HIDDEN,
+				'required' => false,
+				'allow_add' => true,
 			]);
 		}
 	}
@@ -93,6 +108,20 @@ class UrlListType extends AbstractType {
 		$view->vars['routeName'] = $options['route_name'];
 		$view->vars['entityId'] = $options['entity_id'];
 		$view->vars['mainUrlsSlugsOnDomains'] = $mainUrlsSlugsOnDomains;
+		$view->vars['newUrlForm'] = $this->getNewUrlForm()->createView();
+		$view->vars['domainUrlsById'] = $this->getDomainUrlsIndexedById();
+	}
+
+	/**
+	 * @return \Symfony\Component\Form\FormInterface
+	 */
+	private function getNewUrlForm() {
+		$newUrlFormBuilder = $this->formFactory->createNamedBuilder('new_url_form');
+		$newUrlFormBuilder->add('domain', FormType::DOMAIN);
+		$newUrlFormBuilder->add('slug', FormType::TEXT);
+		$newUrlFormBuilder->add('create', FormType::SUBMIT);
+
+		return $newUrlFormBuilder->getForm();
 	}
 
 	/**
@@ -183,6 +212,18 @@ class UrlListType extends AbstractType {
 		}
 
 		return $mainFriendlyUrlsSlugsOnDomains;
+	}
+
+	/**
+	 * @return string[domainId]
+	 */
+	private function getDomainUrlsIndexedById() {
+		$domainUrlsById = [];
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$domainUrlsById[$domainConfig->getId()] = $domainConfig->getUrl();
+		}
+
+		return $domainUrlsById;
 	}
 
 }

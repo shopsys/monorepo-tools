@@ -65,6 +65,10 @@ class ProductEditDataFactory {
 		$productEditData->seoTitles = [];
 		$productEditData->seoMetaDescriptions = [];
 
+		$productEditData->urls[UrlListType::TO_DELETE] = [];
+		$productEditData->urls[UrlListType::MAIN_ON_DOMAINS] = [];
+		$productEditData->urls[UrlListType::NEW_SLUGS_ON_DOMAINS] = [];
+
 		return $productEditData;
 	}
 
