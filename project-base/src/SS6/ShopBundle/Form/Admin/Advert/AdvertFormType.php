@@ -24,13 +24,13 @@ class AdvertFormType extends AbstractType {
 	private $advertPositionsLocalizedNamesByName;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $imageUploaded;
 
 	/**
 	 *
-	 * @param boolean $imageUploaded
+	 * @param bool $imageUploaded
 	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 * @param array $advertPositionsLocalizedNamesByName
 	 */

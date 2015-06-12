@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Article {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
@@ -20,7 +20,7 @@ class Article {
 	private $id;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */
@@ -58,14 +58,14 @@ class Article {
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getDomainId() {
 		return $this->domainId;

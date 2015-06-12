@@ -18,7 +18,7 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -55,7 +55,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	private $hidden;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -112,7 +112,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
@@ -187,21 +187,21 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHidden() {
 		return $this->hidden;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDeleted() {
 		return $this->deleted;
 	}
 
 	/**
-	 * @param boolean $deleted
+	 * @param bool $deleted
 	 */
 	public function markAsDeleted() {
 		$this->deleted = true;

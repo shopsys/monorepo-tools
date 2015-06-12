@@ -196,7 +196,7 @@ class GridView {
 
 	/**
 	 * @param string $name
-	 * @return boolean
+	 * @return bool
 	 */
 	private function blockExists($name) {
 		foreach ($this->getTemplates() as $template) {

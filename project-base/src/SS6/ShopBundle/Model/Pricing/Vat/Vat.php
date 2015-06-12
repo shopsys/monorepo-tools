@@ -14,7 +14,7 @@ class Vat {
 	const SETTING_DEFAULT_VAT = 'defaultVatId';
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

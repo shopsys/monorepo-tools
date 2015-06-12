@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class BillingAddress {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -20,7 +20,7 @@ class BillingAddress {
 	private $id;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean", nullable=false)
 	 */
@@ -112,7 +112,7 @@ class BillingAddress {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isCompanyCustomer() {
 		return $this->companyCustomer;

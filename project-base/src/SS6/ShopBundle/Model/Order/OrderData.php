@@ -89,7 +89,7 @@ class OrderData {
 	public $postcode;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	public $deliveryAddressFilled;
 

@@ -20,7 +20,7 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -58,14 +58,14 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	private $transports;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -165,7 +165,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
@@ -224,21 +224,21 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHidden() {
 		return $this->hidden;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDeleted() {
 		return $this->deleted;
 	}
 
 	/**
-	 * @param boolean $deleted
+	 * @param bool $deleted
 	 */
 	public function markAsDeleted() {
 		$this->deleted = true;

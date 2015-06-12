@@ -127,7 +127,7 @@ class TopProductFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
-	 * @return boolean
+	 * @return bool
 	 */
 	private function alreadyExists(TopProductData $topProductData) {
 		$exists = true;

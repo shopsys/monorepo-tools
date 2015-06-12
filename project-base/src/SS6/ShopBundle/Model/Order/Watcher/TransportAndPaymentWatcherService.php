@@ -103,7 +103,7 @@ class TransportAndPaymentWatcherService {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function checkTransportPrice(
 		Transport $transport,
@@ -135,7 +135,7 @@ class TransportAndPaymentWatcherService {
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function checkPaymentPrice(
 		Payment $payment,

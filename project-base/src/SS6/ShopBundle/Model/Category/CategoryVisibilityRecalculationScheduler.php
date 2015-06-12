@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 class CategoryVisibilityRecalculationScheduler {
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $recaluculate = false;
 
@@ -26,7 +26,7 @@ class CategoryVisibilityRecalculationScheduler {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isRecalculationScheduled() {
 		return $this->recaluculate;

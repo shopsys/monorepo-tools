@@ -21,7 +21,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	const TYPE_CANCELED = 4;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -37,7 +37,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	protected $translations;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */

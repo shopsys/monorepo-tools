@@ -19,12 +19,12 @@ class InputPriceRecalculationScheduler {
 	private $setting;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $recalculateInputPricesWithoutVat;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $recalculateInputPricesWithVat;
 

@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Product\Product;
 class CartItem {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -45,7 +45,7 @@ class CartItem {
 	private $product;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */

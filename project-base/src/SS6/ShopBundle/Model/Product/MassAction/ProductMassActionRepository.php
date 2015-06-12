@@ -20,7 +20,7 @@ class ProductMassActionRepository {
 
 	/**
 	 * @param int[] $selectedProductIds
-	 * @param boolean $hidden
+	 * @param bool $hidden
 	 */
 	public function setHidden(array $selectedProductIds, $hidden) {
 		$updateQueryBuilder = $this->em->createQueryBuilder()

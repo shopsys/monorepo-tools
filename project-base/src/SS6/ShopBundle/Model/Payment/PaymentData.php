@@ -32,7 +32,7 @@ class PaymentData {
 	public $domains;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	public $hidden;
 
@@ -51,7 +51,7 @@ class PaymentData {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string[] $description
 	 * @param string[] $instructions
-	 * @param boolean $hidden
+	 * @param bool $hidden
 	 * @param int[] $domains
 	 */
 	public function __construct(

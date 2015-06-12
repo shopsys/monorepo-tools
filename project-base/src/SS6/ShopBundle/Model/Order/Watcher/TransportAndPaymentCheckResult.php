@@ -5,18 +5,18 @@ namespace SS6\ShopBundle\Model\Order\Watcher;
 class TransportAndPaymentCheckResult {
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $transportPriceChanged;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $paymentPriceChanged;
 
 	/**
-	 * @param boolean $transportPriceChanged
-	 * @param boolean $paymentPriceChanged
+	 * @param bool $transportPriceChanged
+	 * @param bool $paymentPriceChanged
 	 */
 	public function __construct(
 		$transportPriceChanged,
@@ -27,14 +27,14 @@ class TransportAndPaymentCheckResult {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isTransportPriceChanged() {
 		return $this->transportPriceChanged;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isPaymentPriceChanged() {
 		return $this->paymentPriceChanged;

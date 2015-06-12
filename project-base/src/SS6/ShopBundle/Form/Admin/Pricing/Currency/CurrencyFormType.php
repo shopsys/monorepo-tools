@@ -13,7 +13,7 @@ class CurrencyFormType extends AbstractType {
 	const EXCHANGE_RATE_IS_READ_ONLY = true;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $isRateReadOnly;
 

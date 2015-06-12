@@ -18,7 +18,7 @@ class Image implements EntityFileUploadInterface {
 	const UPLOAD_KEY = 'image';
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
@@ -34,7 +34,7 @@ class Image implements EntityFileUploadInterface {
 	private $entityName;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */

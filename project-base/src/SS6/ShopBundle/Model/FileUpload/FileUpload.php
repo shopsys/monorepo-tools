@@ -69,7 +69,7 @@ class FileUpload {
 
 	/**
 	 * @param string $filename
-	 * @return boolean
+	 * @return bool
 	 */
 	public function tryDeleteTemporaryFile($filename) {
 		if (!empty($filename)) {

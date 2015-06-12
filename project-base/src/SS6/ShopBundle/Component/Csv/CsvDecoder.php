@@ -6,7 +6,7 @@ class CsvDecoder {
 
 	/**
 	 * @param string $value
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function decodeBoolean($value) {
 		return $value === 'true';

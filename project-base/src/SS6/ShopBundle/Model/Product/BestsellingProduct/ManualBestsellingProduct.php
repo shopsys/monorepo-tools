@@ -36,7 +36,7 @@ class ManualBestsellingProduct {
 	private $product;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="domains")
 	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
@@ -44,14 +44,14 @@ class ManualBestsellingProduct {
 	private $category;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */
 	private $domainId;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */

@@ -16,7 +16,7 @@ use SS6\ShopBundle\Model\Product\Availability\AvailabilityTranslation;
 class Availability extends AbstractTranslatableEntity {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

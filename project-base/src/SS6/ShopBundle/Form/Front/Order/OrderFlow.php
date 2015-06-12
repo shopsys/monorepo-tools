@@ -131,7 +131,7 @@ class OrderFlow extends FormFlow {
 
 	/**
 	 * @param \Craue\FormFlowBundle\Form\StepInterface $step
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isStepValid(StepInterface $step) {
 		$stepNumber = $step->getNumber();

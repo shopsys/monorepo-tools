@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Customer;
 class DeliveryAddressData {
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	public $addressFilled;
 
@@ -40,7 +40,7 @@ class DeliveryAddressData {
 	public $postcode;
 
 	/**
-	 * @param boolean $addressFilled
+	 * @param bool $addressFilled
 	 * @param string|null $street
 	 * @param string|null $city
 	 * @param string|null $postcode

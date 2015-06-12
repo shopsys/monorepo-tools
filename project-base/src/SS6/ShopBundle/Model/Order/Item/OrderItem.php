@@ -15,7 +15,7 @@ use SS6\ShopBundle\Model\Order\Order;
 abstract class OrderItem {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

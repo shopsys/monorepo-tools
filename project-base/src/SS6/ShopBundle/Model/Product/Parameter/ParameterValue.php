@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
 class ParameterValue {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

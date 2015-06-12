@@ -78,7 +78,7 @@ class JsTranslatorCallParser {
 
 	/**
 	 * @param \JCallExprNode $callExprNode
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isTransFunctionCall(JCallExprNode $callExprNode) {
 		$functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);

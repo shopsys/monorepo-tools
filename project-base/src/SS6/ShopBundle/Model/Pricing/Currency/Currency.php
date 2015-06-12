@@ -13,7 +13,7 @@ class Currency {
 	const DEFAULT_EXCHANGE_RATE = 1;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

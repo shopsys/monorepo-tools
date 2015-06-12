@@ -28,7 +28,7 @@ class IndependentPaymentVisibilityCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isIndependentlyVisible(Payment $payment, $domainId) {
 		$locale = $this->domain->getDomainConfigById($domainId)->getLocale();
@@ -51,7 +51,7 @@ class IndependentPaymentVisibilityCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isOnDomain(Payment $payment, $domainId) {
 		$paymentDomains = $this->paymentRepository->getPaymentDomainsByPayment($payment);

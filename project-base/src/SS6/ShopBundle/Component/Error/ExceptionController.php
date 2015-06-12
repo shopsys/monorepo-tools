@@ -7,14 +7,14 @@ use Symfony\Bundle\TwigBundle\Controller\ExceptionController as BaseController;
 class ExceptionController extends BaseController {
 
 	/**
-	 * @param boolean $bool
+	 * @param bool $bool
 	 */
 	public function setDebug($bool) {
 		$this->debug = $bool;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDebug() {
 		return $this->debug;

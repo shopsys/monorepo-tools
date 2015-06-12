@@ -41,6 +41,7 @@ $config = Symfony\CS\Config\Config::create()
 		'phpdoc_no_empty_return',
 		'phpdoc_no_package',
 		//'phpdoc_params',
+		'phpdoc_scalar',
 		//'phpdoc_separation',
 		//'phpdoc_short_description',
 		'phpdoc_type_to_var',

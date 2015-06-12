@@ -21,7 +21,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 class Order {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -220,7 +220,7 @@ class Order {
 	private $note;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -493,14 +493,14 @@ class Order {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDeleted() {
 		return $this->deleted;
 	}
 
 	/**
-	 * @param boolean $deleted
+	 * @param bool $deleted
 	 */
 	public function markAsDeleted() {
 		$this->deleted = true;

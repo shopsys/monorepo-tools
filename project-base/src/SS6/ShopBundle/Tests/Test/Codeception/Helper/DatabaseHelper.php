@@ -9,11 +9,11 @@ use SS6\ShopBundle\Tests\Test\Codeception\Module\Db;
 
 class DatabaseHelper extends Module {
 
+	// @codingStandardsIgnoreStart
 	/**
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	// @codingStandardsIgnoreStart
 	public function _initialize() {
 	// @codingStandardsIgnoreEnd
 		$dbModule = $this->getModule(Db::class);

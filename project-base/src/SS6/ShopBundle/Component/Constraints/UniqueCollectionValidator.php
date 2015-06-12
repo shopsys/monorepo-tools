@@ -48,7 +48,7 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	 * @param \SS6\ShopBundle\Component\Constraints\UniqueCollection $constraint
 	 * @param mixed $value1
 	 * @param mixed $value2
-	 * @return boolean
+	 * @return bool
 	 */
 	private function areValuesEqual(UniqueCollection $constraint, $value1, $value2) {
 		if ($constraint->allowEmpty) {
@@ -68,7 +68,7 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	 * @param array $fields
 	 * @param mixed $value1
 	 * @param mixed $value2
-	 * @return boolean
+	 * @return bool
 	 */
 	private function areValuesEqualInFields(array $fields, $value1, $value2) {
 		foreach ($fields as $field) {

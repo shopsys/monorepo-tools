@@ -16,7 +16,7 @@ use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 class Category extends AbstractTranslatableEntity {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

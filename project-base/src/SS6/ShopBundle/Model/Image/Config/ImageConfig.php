@@ -87,7 +87,7 @@ class ImageConfig {
 
 	/**
 	 * @param object $entity
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasImageConfig($entity) {
 		foreach ($this->imageEntityConfigsByClass as $className => $entityConfig) {
