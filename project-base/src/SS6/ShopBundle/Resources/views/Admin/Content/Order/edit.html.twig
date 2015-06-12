@@ -26,7 +26,23 @@
 						</div>
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
 						{{ form_row(form.statusId, { label: 'Stav' }) }}
-						{{ form_row(form.customerId, { label: 'ID zákazníka' }) }}
+						<div class="form-line">
+							<label class="form-line__label">{{ 'Vytvořeno zákazníkem'|trans }}:</label>
+							<span class="form-line__text">
+								{% if order.customer is null%}
+									{{ 'neregistrovaný zákazník'|trans }}
+								{% else %}
+									<a href="{{ path('admin_customer_edit', { id: order.customer.id }) }}" target="_blank">
+										{% if order.customer.billingAddress.companyCustomer %}
+											{{ order.customer.billingAddress.companyName }} -
+										{% endif %}
+										{{ order.customer.lastName }}
+										{{ order.customer.firstName }}
+										<i class="fa fa-external-link"></i>
+									</a>
+								{% endif %}
+							</span>
+						</div>
 					</fieldset>
 				</div>
 

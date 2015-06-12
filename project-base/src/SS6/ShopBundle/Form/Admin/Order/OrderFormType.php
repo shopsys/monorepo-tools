@@ -51,7 +51,6 @@ class OrderFormType extends AbstractType {
 				'expanded' => false,
 				'required' => true,
 			])
-			->add('customerId', FormType::INTEGER, ['required' => false])
 			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),

@@ -299,12 +299,10 @@ class Order {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function edit(
 		OrderData $orderData,
-		OrderStatus $orderStatus,
-		User $user = null
+		OrderStatus $orderStatus
 	) {
 		$this->firstName = $orderData->firstName;
 		$this->lastName = $orderData->lastName;
@@ -330,7 +328,6 @@ class Order {
 				$orderData->deliveryPostcode);
 		}
 		$this->status = $orderStatus;
-		$this->customer = $user;
 	}
 
 	/**

@@ -24,11 +24,6 @@ class OrderData {
 	public $payment;
 
 	/**
-	 * @var int
-	 */
-	public $customerId;
-
-	/**
 	 * @var string
 	 */
 	public $orderNumber;
@@ -149,9 +144,6 @@ class OrderData {
 	public function setFromEntity(Order $order) {
 		$this->orderNumber = $order->getNumber();
 		$this->statusId = $order->getStatus()->getId();
-		if ($order->getCustomer()) {
-			$this->customerId = $order->getCustomer()->getId();
-		}
 		$this->firstName = $order->getFirstName();
 		$this->lastName = $order->getLastName();
 		$this->email = $order->getEmail();

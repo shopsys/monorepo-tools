@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
@@ -34,14 +33,12 @@ class OrderService {
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Order\OrderEditResult
 	 */
-	public function editOrder(Order $order, OrderData $orderData, OrderStatus $orderStatus, User $user = null) {
+	public function editOrder(Order $order, OrderData $orderData, OrderStatus $orderStatus) {
 		$order->edit(
 			$orderData,
-			$orderStatus,
-			$user
+			$orderStatus
 		);
 
 		$orderItemsData = $orderData->items;
