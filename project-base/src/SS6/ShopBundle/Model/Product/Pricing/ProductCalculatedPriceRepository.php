@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
@@ -48,6 +49,18 @@ class ProductCalculatedPriceRepository {
 		}
 
 		$this->em->flush($productCalculatedPrice);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	public function createProductCalculatedPricesForPricingGroup(PricingGroup $pricingGroup) {
+		$query = $this->em->createNativeQuery('INSERT INTO product_calculated_prices (product_id, pricing_group_id, price_with_vat)
+			SELECT id, :pricingGroupId, :priceWithVat FROM products', new ResultSetMapping());
+		$query->execute([
+			'pricingGroupId' => $pricingGroup->getId(),
+			'priceWithVat' => 0,
+		]);
 	}
 
 }
