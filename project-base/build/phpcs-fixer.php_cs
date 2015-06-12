@@ -12,6 +12,7 @@ $config = Symfony\CS\Config\Config::create()
 		'elseif',
 		//'empty_return',
 		'encoding',
+		'eof_ending',
 		'extra_empty_lines',
 		'function_call_space',
 		'function_declaration',
