@@ -46,6 +46,7 @@ $config = Symfony\CS\Config\Config::create()
 		//'phpdoc_short_description',
 		'phpdoc_trim',
 		'phpdoc_type_to_var',
+		'phpdoc_var_without_name',
 		//'pre_increment',
 		'psr0',
 		'remove_lines_between_uses',
