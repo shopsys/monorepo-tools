@@ -15,11 +15,11 @@ class SymfonyHelper extends Module {
 	 */
 	private $kernel;
 
+	// @codingStandardsIgnoreStart
 	/**
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	// @codingStandardsIgnoreStart
 	public function _initialize() {
 	// @codingStandardsIgnoreEnd
 		$projectDir = Configuration::projectDir();
@@ -33,11 +33,11 @@ class SymfonyHelper extends Module {
 		$this->kernel->boot();
 	}
 
+	// @codingStandardsIgnoreStart
 	/**
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	// @codingStandardsIgnoreStart
 	public function _before(TestCase $test) {
 	// @codingStandardsIgnoreEnd
 		$this->kernel->boot();

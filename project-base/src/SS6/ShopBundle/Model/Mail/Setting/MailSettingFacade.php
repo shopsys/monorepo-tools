@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Setting\Setting;
 class MailSettingFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
 	 */
 	private $setting;
 

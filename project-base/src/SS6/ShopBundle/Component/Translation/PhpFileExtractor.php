@@ -151,7 +151,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 
 	/**
 	 * @param \PHPParser_Node $node
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isTransMethodCall(PHPParser_Node $node) {
 		if ($node instanceof PHPParser_Node_Expr_MethodCall && is_string($node->name)) {
@@ -167,7 +167,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 
 	/**
 	 * @param \PHPParser_Node $node
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isIgnored(PHPParser_Node $node) {
 		foreach ($this->getAnnotations($node) as $annotation) {

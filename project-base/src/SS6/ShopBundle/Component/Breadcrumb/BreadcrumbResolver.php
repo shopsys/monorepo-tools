@@ -42,7 +42,7 @@ class BreadcrumbResolver {
 
 	/**
 	 * @param string $routeName
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasGeneratorForRoute($routeName) {
 		return array_key_exists($routeName, $this->breadcrumbGeneratorsByRouteName);

@@ -27,7 +27,7 @@ class Product extends AbstractTranslatableEntity {
 	const OUT_OF_STOCK_ACTION_HIDE = 'hide';
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
@@ -92,28 +92,28 @@ class Product extends AbstractTranslatableEntity {
 	private $sellingTo;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
 	private $sellable;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
 	private $calculatedSellable;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -169,7 +169,7 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculateAvailability;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -306,7 +306,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
@@ -390,7 +390,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHidden() {
 		return $this->hidden;
@@ -404,7 +404,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSellable() {
 		return $this->sellable;
@@ -418,7 +418,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isUsingStock() {
 		return $this->usingStock;
@@ -505,7 +505,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isVisible() {
 		return $this->visible;

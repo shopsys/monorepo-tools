@@ -199,7 +199,7 @@ class Grid {
 	 * @param string $id
 	 * @param string $sourceColumnName
 	 * @param string $title
-	 * @param boolean $sortable
+	 * @param bool $sortable
 	 * @return \SS6\ShopBundle\Model\Grid\Column
 	 */
 	public function addColumn($id, $sourceColumnName, $title, $sortable = false) {
@@ -657,7 +657,7 @@ class Grid {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDragAndDrop() {
 		return $this->orderingEntityClass !== null;

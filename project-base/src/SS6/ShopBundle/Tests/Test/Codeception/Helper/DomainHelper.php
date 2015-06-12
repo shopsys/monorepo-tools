@@ -8,11 +8,11 @@ use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 
 class DomainHelper extends Module {
 
+	// @codingStandardsIgnoreStart
 	/**
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	// @codingStandardsIgnoreStart
 	public function _before(TestCase $test) {
 	// @codingStandardsIgnoreEnd
 		$webDriver = $this->getModule('WebDriver');

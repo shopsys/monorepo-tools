@@ -39,7 +39,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 
 	/**
 	 * @param \Symfony\Component\Validator\Mapping\ClassMetadata $classMetadata
-	 * @return boolean
+	 * @return bool
 	 */
 	public function loadClassMetadata(ClassMetadata $classMetadata) {
 		$loaded = false;

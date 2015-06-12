@@ -14,7 +14,7 @@ class CartFactory {
 	private $carts = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemRepository
 	 */
 	private $cartItemRepository;
 

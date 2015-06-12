@@ -27,7 +27,7 @@ class FeedGenerator {
 		$this->em = $em;
 	}
 
-		/**
+	/**
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
 	 * @param string $targetFilepath
 	 */

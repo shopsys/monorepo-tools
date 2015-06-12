@@ -20,7 +20,6 @@ class AdvancedSearchRuleData {
 	public $value;
 
 	/**
-	 *
 	 * @param string|null $subject
 	 * @param string|null $operator
 	 * @param mixed $value

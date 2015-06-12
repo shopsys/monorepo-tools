@@ -13,7 +13,7 @@ class Currency {
 	const DEFAULT_EXCHANGE_RATE = 1;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -83,7 +83,7 @@ class Currency {
 	 * @return string
 	 */
 	public function getReversedExchangeRate() {
-		return (1/$this->exchangeRate);
+		return 1 / $this->exchangeRate;
 	}
 
 	/**

@@ -33,12 +33,12 @@ class MenuItem {
 	private $routeParameters;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $visible;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $superadmin;
 
@@ -47,8 +47,8 @@ class MenuItem {
 	 * @param string|null $type
 	 * @param string|null $route
 	 * @param array|null $routeParameters
-	 * @param boolean $visible
-	 * @param boolean $superadmin
+	 * @param bool $visible
+	 * @param bool $superadmin
 	 * @param array|null $items
 	 */
 	public function __construct(
@@ -126,14 +126,14 @@ class MenuItem {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isVisible() {
 		return $this->visible === true;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSuperadmin() {
 		return $this->superadmin === true;

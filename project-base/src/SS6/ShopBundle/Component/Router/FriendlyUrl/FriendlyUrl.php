@@ -23,14 +23,14 @@ class FriendlyUrl {
 	private $routeName;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */
 	private $entityId;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -74,7 +74,7 @@ class FriendlyUrl {
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getEntityId() {
 		return $this->entityId;

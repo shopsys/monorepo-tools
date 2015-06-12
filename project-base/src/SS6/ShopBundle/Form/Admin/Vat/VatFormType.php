@@ -26,7 +26,7 @@ class VatFormType extends AbstractType {
 		$this->scenario = $scenario;
 	}
 
-		/**
+	/**
 	 * @return string
 	 */
 	public function getName() {

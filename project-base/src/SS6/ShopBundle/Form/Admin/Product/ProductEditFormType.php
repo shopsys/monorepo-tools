@@ -175,14 +175,14 @@ class ProductEditFormType extends AbstractType {
 					'required' => false,
 					'attr' => [
 						'placeholder' => $this->getTitlePlaceholder($domainConfig),
-					]
+					],
 				]);
 			$builder->get('seoMetaDescriptions')
 				->add($domainConfig->getId(), FormType::TEXTAREA, [
 					'required' => false,
 					'attr' => [
 						'placeholder' => $this->getMetaDescriptionPlaceholder($domainConfig),
-					]
+					],
 				]);
 		}
 	}

@@ -24,13 +24,12 @@ class AdvertFormType extends AbstractType {
 	private $advertPositionsLocalizedNamesByName;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $imageUploaded;
 
 	/**
-	 *
-	 * @param boolean $imageUploaded
+	 * @param bool $imageUploaded
 	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 * @param array $advertPositionsLocalizedNamesByName
 	 */
@@ -141,7 +140,7 @@ class AdvertFormType extends AbstractType {
 	private function getTypeChoices() {
 		return [
 			Advert::TYPE_CODE => $this->translator->trans('HTML kód'),
-			Advert::TYPE_IMAGE =>  $this->translator->trans('Obrázek s odkazem')
+			Advert::TYPE_IMAGE =>  $this->translator->trans('Obrázek s odkazem'),
 		];
 	}
 

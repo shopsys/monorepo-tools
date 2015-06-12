@@ -20,7 +20,6 @@ class ParameterProcessor {
 	private $classResolver;
 
 	/**
-	 *
 	 * @var \Symfony\Component\DependencyInjection\ContainerBuilder
 	 */
 	private $containerBuilder;

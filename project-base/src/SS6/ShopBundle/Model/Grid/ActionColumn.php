@@ -56,7 +56,6 @@ class ActionColumn {
 	private $isAjaxConfirm;
 
 	/**
-	 *
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param string $type
 	 * @param string $name

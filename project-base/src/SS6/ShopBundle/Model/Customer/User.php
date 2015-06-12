@@ -330,7 +330,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 			$this->email,
 			$this->password,
 			$timestamp,
-			$this->domainId,
+			$this->domainId
 		) = unserialize($serialized);
 		$this->lastActivity = new DateTime();
 		$this->lastActivity->setTimestamp($timestamp);

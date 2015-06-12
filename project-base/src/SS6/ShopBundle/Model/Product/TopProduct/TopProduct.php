@@ -37,7 +37,7 @@ class TopProduct {
 	private $product;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */

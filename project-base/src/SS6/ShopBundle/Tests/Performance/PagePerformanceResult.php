@@ -51,7 +51,7 @@ class PagePerformanceResult {
 	 * @param float $duration
 	 * @param int $queryCount
 	 * @param int $statusCode
-	 * @param boolean $isSuccessful
+	 * @param bool $isSuccessful
 	 */
 	public function addMeasurement($duration, $queryCount, $statusCode, $isSuccessful) {
 		$this->durations[] = $duration;

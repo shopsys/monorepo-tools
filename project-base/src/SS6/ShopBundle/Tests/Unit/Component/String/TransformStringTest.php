@@ -72,7 +72,7 @@ class TransformStringTest extends PHPUnit_Framework_TestCase {
 			[
 				'actual' => 'Příliš žluťoučký kůň úpěl ďábelské ódy',
 				'expected' => 'prilis-zlutoucky-kun-upel-dabelske-ody',
-			]
+			],
 		];
 	}
 

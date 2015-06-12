@@ -57,7 +57,7 @@ class TransportController extends Controller {
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', [
 			'form' => $form->createView(),
-			'currencies' => $currencyFacade->getAllIndexedById()
+			'currencies' => $currencyFacade->getAllIndexedById(),
 		]);
 	}
 
@@ -110,7 +110,7 @@ class TransportController extends Controller {
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),
 			'transportDetail' => $transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
-			'currencies' => $currencyFacade->getAllIndexedById()
+			'currencies' => $currencyFacade->getAllIndexedById(),
 		]);
 	}
 

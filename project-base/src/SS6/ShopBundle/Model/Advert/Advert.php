@@ -14,7 +14,7 @@ class Advert {
 	const TYPE_CODE = 'code';
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
@@ -23,7 +23,7 @@ class Advert {
 	private $id;
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */
@@ -65,7 +65,7 @@ class Advert {
 	private $positionName;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -98,14 +98,14 @@ class Advert {
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getId() {
 		return $this->id;
 	}
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getDomainId() {
 		return $this->domainId;
@@ -140,7 +140,7 @@ class Advert {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHidden() {
 		return $this->hidden;

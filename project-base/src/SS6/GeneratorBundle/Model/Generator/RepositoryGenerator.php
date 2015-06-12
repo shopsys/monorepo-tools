@@ -18,12 +18,12 @@ class RepositoryGenerator extends AbstractGenerator {
 			->add('entityNamespace', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Please insert entity namespace']),
-				]
+				],
 			])
 			->add('entityName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Please insert entity name']),
-				]
+				],
 			]);
 	}
 

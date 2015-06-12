@@ -20,7 +20,6 @@ class CurrentDomainRouter implements RouterInterface {
 	private $domain;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
 	private $domainRouterFactory;

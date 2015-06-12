@@ -30,7 +30,7 @@ class ProductDomain {
 	private $domainId;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -70,14 +70,14 @@ class ProductDomain {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHidden() {
 		return $this->hidden;
 	}
 
 	/**
-	 * @param boolean $hidden
+	 * @param bool $hidden
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;

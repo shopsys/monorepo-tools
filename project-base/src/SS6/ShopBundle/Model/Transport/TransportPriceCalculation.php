@@ -70,7 +70,7 @@ class TransportPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isFree(Price $productsPrice, $domainId) {
 		$freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);

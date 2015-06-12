@@ -121,7 +121,7 @@ class JavascriptCompilerService {
 
 	/**
 	 * @param string $javascript
-	 * @return boolean
+	 * @return bool
 	 */
 	private function tryToProcessJavascriptFile($javascript) {
 		$sourcePath = $this->jsSourcePath . '/' . $javascript;
@@ -187,7 +187,7 @@ class JavascriptCompilerService {
 	/**
 	 * @param string $compiledFilename
 	 * @param string $sourceFilename
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isCompiledFileFresh($compiledFilename, $sourceFilename) {
 		if (is_file($compiledFilename) && parse_url($sourceFilename, PHP_URL_HOST) === null) {
@@ -200,7 +200,7 @@ class JavascriptCompilerService {
 
 	/**
 	 * @param string $directoryMask
-	 * @return boolean
+	 * @return bool
 	 */
 	private function tryToProcessJavascriptDirectoryMask($directoryMask) {
 		$parts = explode('/', $directoryMask);
@@ -237,7 +237,7 @@ class JavascriptCompilerService {
 
 	/**
 	 * @param string $filenameMask
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isMaskValid($filenameMask) {
 		return $filenameMask === '' || strpos($filenameMask, '*') !== false;

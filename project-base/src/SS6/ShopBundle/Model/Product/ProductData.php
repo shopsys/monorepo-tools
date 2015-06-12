@@ -86,13 +86,11 @@ class ProductData {
 	public $outOfStockAction;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public $availability;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public $outOfStockAvailability;

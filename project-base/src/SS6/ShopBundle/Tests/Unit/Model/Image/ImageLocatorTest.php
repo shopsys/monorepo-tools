@@ -83,19 +83,19 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 				'Name_1',
 				'TypeName_1',
 				null,
-				'Name_1' . DIRECTORY_SEPARATOR . 'TypeName_1' . DIRECTORY_SEPARATOR . ImageConfig::DEFAULT_SIZE_NAME . DIRECTORY_SEPARATOR
+				'Name_1' . DIRECTORY_SEPARATOR . 'TypeName_1' . DIRECTORY_SEPARATOR . ImageConfig::DEFAULT_SIZE_NAME . DIRECTORY_SEPARATOR,
 			],
 			[
 				'Name_1',
 				null,
 				'SizeName_0_1',
-				'Name_1' . DIRECTORY_SEPARATOR . 'SizeName_0_1' . DIRECTORY_SEPARATOR
+				'Name_1' . DIRECTORY_SEPARATOR . 'SizeName_0_1' . DIRECTORY_SEPARATOR,
 			],
 			[
 				'Name_1',
 				null,
 				null,
-				'Name_1' . DIRECTORY_SEPARATOR . ImageConfig::DEFAULT_SIZE_NAME . DIRECTORY_SEPARATOR
+				'Name_1' . DIRECTORY_SEPARATOR . ImageConfig::DEFAULT_SIZE_NAME . DIRECTORY_SEPARATOR,
 			],
 		];
 	}
@@ -121,13 +121,13 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 				'Name_1',
 				'NonexistentTypeName',
 				null,
-				\SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException::class
+				\SS6\ShopBundle\Model\Image\Config\Exception\ImageTypeNotFoundException::class,
 			],
 			[
 				'Name_1',
 				null,
 				'NonexistentSizeName',
-				\SS6\ShopBundle\Model\Image\Config\Exception\ImageSizeNotFoundException::class
+				\SS6\ShopBundle\Model\Image\Config\Exception\ImageSizeNotFoundException::class,
 			],
 		];
 	}

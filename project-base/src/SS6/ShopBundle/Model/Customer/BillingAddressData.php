@@ -10,7 +10,7 @@ class BillingAddressData {
 	public $telephone;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	public $companyCustomer;
 
@@ -48,7 +48,7 @@ class BillingAddressData {
 	 * @param string|null $street
 	 * @param string|null $city
 	 * @param string|null $postcode
-	 * @param boolean $companyCustomer
+	 * @param bool $companyCustomer
 	 * @param string|null $companyName
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber

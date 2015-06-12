@@ -21,7 +21,7 @@ class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider testSupportsDataProvider
 	 * @param string $filename
-	 * @param boolean $expected
+	 * @param bool $expected
 	 */
 	public function testSupports($filename, $expected) {
 		$missingButtonTypeFixer = new MissingButtonTypeFixer();

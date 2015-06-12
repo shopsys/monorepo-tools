@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class DeliveryAddress {
 
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

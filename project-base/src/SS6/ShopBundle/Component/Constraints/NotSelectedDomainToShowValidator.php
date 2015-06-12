@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class NotSelectedDomainToShowValidator extends ConstraintValidator {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
 

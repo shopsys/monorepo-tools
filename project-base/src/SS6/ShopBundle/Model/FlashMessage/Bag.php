@@ -38,7 +38,7 @@ class Bag {
 
 	/**
 	 * @param string|array $message
-	 * @param boolean $escape
+	 * @param bool $escape
 	 */
 	public function addError($message, $escape = true) {
 		$this->addMessage($message, $escape, self::KEY_ERROR);
@@ -46,7 +46,7 @@ class Bag {
 
 	/**
 	 * @param string|array $message
-	 * @param boolean $escape
+	 * @param bool $escape
 	 */
 	public function addInfo($message, $escape = true) {
 		$this->addMessage($message, $escape, self::KEY_INFO);
@@ -54,7 +54,7 @@ class Bag {
 
 	/**
 	 * @param string|array $message
-	 * @param boolean $escape
+	 * @param bool $escape
 	 */
 	public function addSuccess($message, $escape = true) {
 		$this->addMessage($message, $escape, self::KEY_SUCCESS);
@@ -111,7 +111,7 @@ class Bag {
 
 	/**
 	 * @param string|array $message
-	 * @param boolean $escape
+	 * @param bool $escape
 	 * @param string $key
 	 */
 	private function addMessage($message, $escape, $key) {

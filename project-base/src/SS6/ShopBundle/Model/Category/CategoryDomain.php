@@ -29,14 +29,14 @@ class CategoryDomain {
 	private $domainId;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -61,21 +61,21 @@ class CategoryDomain {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isHidden() {
 		return $this->hidden;
 	}
 
 	/**
-	 * @param boolean $hidden
+	 * @param bool $hidden
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isVisible() {
 		return $this->visible;

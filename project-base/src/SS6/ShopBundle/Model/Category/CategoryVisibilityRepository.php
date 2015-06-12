@@ -77,7 +77,7 @@ class CategoryVisibilityRepository {
 				AND c.parent_id IS NULL
 			',
 			[
-				'domainId' => $domainConfig->getId()
+				'domainId' => $domainConfig->getId(),
 			]
 		);
 	}

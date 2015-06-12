@@ -80,7 +80,6 @@ class FriendlyUrlRepository {
 	}
 
 	/**
-	 *
 	 * @param string $routeName
 	 * @param int $entityId
 	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
@@ -100,7 +99,6 @@ class FriendlyUrlRepository {
 	}
 
 	/**
-	 *
 	 * @param string $routeName
 	 * @param int $entityId
 	 * @param int $domainId

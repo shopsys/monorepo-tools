@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 class AdministratorController extends Controller {
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorFacade
 	 */
 	private $administratorFacade;

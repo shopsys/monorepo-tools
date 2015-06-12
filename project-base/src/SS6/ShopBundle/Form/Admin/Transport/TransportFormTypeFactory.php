@@ -14,7 +14,6 @@ class TransportFormTypeFactory {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 */
-
 	public function __construct(VatRepository $vatRepository) {
 		$this->vatRepository = $vatRepository;
 	}

@@ -42,7 +42,7 @@ class PaymentVisibilityCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isVisible(Payment $payment, $domainId) {
 		if (!$this->independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId)) {
@@ -55,7 +55,7 @@ class PaymentVisibilityCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function hasIndependentlyVisibleTransport(Payment $payment, $domainId) {
 		foreach ($payment->getTransports() as $transport) {

@@ -121,7 +121,7 @@ class ProductFormType extends AbstractType {
 			->add(
 				$builder
 					->create('sellable', FormType::YES_NO, [
-						'required' => false
+						'required' => false,
 					])
 					->addModelTransformer(new InverseTransformer())
 			)

@@ -60,7 +60,6 @@ class OrderStatusFacade {
 	}
 
 	/**
-	 *
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */

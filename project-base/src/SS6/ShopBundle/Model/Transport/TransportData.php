@@ -46,7 +46,7 @@ class TransportData {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string[] $descriptions
 	 * @param string[] $instructions
-	 * @param boolean $hidden
+	 * @param bool $hidden
 	 * @param int[] $domains
 	 */
 	public function __construct(

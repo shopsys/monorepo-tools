@@ -64,7 +64,7 @@ class JsConstantCallParser {
 
 	/**
 	 * @param \JCallExprNode $callExprNode
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isConstantFunctionCall(JCallExprNode $callExprNode) {
 		$functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);

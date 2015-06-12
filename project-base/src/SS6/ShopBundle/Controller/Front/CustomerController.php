@@ -91,7 +91,6 @@ class CustomerController extends Controller {
 	}
 
 	/**
-	 *
 	 * @param string $urlHash
 	 * @param string $orderNumber
 	 */

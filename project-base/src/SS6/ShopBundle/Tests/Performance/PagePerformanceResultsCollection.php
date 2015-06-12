@@ -1,4 +1,5 @@
 <?php
+
 namespace SS6\ShopBundle\Tests\Performance;
 
 use SS6\ShopBundle\Tests\Performance\PagePerformanceResult;
@@ -20,7 +21,7 @@ class PagePerformanceResultsCollection {
 	 * @param float $duration
 	 * @param int $queryCount
 	 * @param int $statusCode
-	 * @param boolean $isSuccessful
+	 * @param bool $isSuccessful
 	 */
 	public function addMeasurement($routeName, $url, $duration, $queryCount, $statusCode, $isSuccessful) {
 		if (!array_key_exists($routeName, $this->results)) {

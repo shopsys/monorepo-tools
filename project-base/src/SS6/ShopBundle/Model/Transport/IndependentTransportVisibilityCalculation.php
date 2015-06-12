@@ -28,7 +28,7 @@ class IndependentTransportVisibilityCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isIndependentlyVisible(Transport $transport, $domainId) {
 		$locale = $this->domain->getDomainConfigById($domainId)->getLocale();
@@ -51,7 +51,7 @@ class IndependentTransportVisibilityCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
 	 * @param int $domainId
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isOnDomain(Transport $transport, $domainId) {
 		$transportDomains = $this->transportRepository->getTransportDomainsByTransport($transport);

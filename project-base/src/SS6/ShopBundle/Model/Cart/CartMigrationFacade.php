@@ -28,7 +28,6 @@ class CartMigrationFacade {
 	private $customerIdentifier;
 
 	/**
-	 *
 	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
 	 */
 	private $cartFactory;

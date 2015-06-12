@@ -43,7 +43,6 @@ class OrderMailService {
 	private $domainRouterFactory;
 
 	/**
-	 *
 	 * @var \Twig_Environment
 	 */
 	private $twig;
@@ -247,7 +246,6 @@ class OrderMailService {
 	}
 
 	/**
-	 *
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
