@@ -23,7 +23,14 @@
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
 		<div class="box-filter js-product-filter">
-			{{ productFilterForm.filterForm(filterForm, url('front_product_list', { id: category.id }), url('front_product_list', { id: category.id }), null, 'product_list') }}
+			{{ productFilterForm.filterForm(
+				filterForm,
+				url('front_product_list', { id: category.id }),
+				url('front_product_list', { id: category.id }),
+				null,
+				'product_list',
+				productFilterCountData
+			) }}
 		</div>
 	{% endif %}
 

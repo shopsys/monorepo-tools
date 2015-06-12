@@ -120,6 +120,11 @@ class ProductController extends Controller {
 			$id
 		);
 
+		$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataInCategory(
+			$id,
+			$productFilterData
+		);
+
 		if ($request->isXmlHttpRequest()) {
 			return $this->render('@SS6Shop/Front/Content/Product/productsWithControls.html.twig', [
 				'paginationResult' => $paginationResult,
@@ -131,6 +136,7 @@ class ProductController extends Controller {
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
+			'productFilterCountData' => $productFilterCountData,
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),

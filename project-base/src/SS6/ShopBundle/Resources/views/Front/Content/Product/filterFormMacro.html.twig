@@ -1,4 +1,4 @@
-{% macro filterForm(filterForm, actionUrl, resetUrl, searchText, page) %}
+{% macro filterForm(filterForm, actionUrl, resetUrl, searchText, page, productFilterCountData) %}
 	{{ form_start(filterForm, { action: actionUrl }) }}
 		{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
 
@@ -19,7 +19,11 @@
 
 		</div>
 
-		{{ form_row(filterForm.inStock, {label: 'Jen zboží skladem'}) }}
+		<label>
+			{{ form_widget(filterForm.inStock) }}
+			{{ 'Jen zboží skladem'|trans }}
+			<span>({{ productFilterCountData.countInStock }})</span>
+		</label>
 
 		{% if filterForm.flags is empty %}
 			{% do filterForm.flags.setRendered %}
