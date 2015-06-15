@@ -33,7 +33,7 @@ class BasePriceCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculatePrice($inputPrice, $inputPriceType, Vat $vat) {
+	public function calculateBasePrice($inputPrice, $inputPriceType, Vat $vat) {
 		$basePriceWithVat = $this->getBasePriceWithVat($inputPrice, $inputPriceType, $vat);
 		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
 		$basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);

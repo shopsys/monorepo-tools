@@ -70,7 +70,7 @@ class ProductPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculateBasePrice(Product $product) {
-		return $this->basePriceCalculation->calculatePrice(
+		return $this->basePriceCalculation->calculateBasePrice(
 				$product->getPrice(),
 				$this->pricingSetting->getInputPriceType(),
 				$product->getVat()
@@ -89,7 +89,7 @@ class ProductPriceCalculation {
 		} else {
 			$price = 0;
 		}
-		return $this->basePriceCalculation->calculatePrice(
+		return $this->basePriceCalculation->calculateBasePrice(
 			$price,
 			$this->pricingSetting->getInputPriceType(),
 			$product->getVat()

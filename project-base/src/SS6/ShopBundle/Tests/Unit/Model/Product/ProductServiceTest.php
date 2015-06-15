@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Product;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
@@ -22,6 +23,9 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+			->disableOriginalConstructor()
+			->getMock();
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -33,6 +37,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productService = new ProductService(
 			$productPriceCalculationMock,
 			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
 			$pricingSettingMock,
 			$productPriceRecalculationSchedulerMock
 		);
@@ -50,6 +55,9 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+			->disableOriginalConstructor()
+			->getMock();
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -61,6 +69,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productService = new ProductService(
 			$productPriceCalculationMock,
 			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
 			$pricingSettingMock,
 			$productPriceRecalculationSchedulerMock
 		);
@@ -78,6 +87,9 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$inputPriceCalculationMock = $this->getMockBuilder(InputPriceCalculation::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$basePriceCalculationMock = $this->getMockBuilder(BasePriceCalculation::class)
+			->disableOriginalConstructor()
+			->getMock();
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -89,6 +101,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productService = new ProductService(
 			$productPriceCalculationMock,
 			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
 			$pricingSettingMock,
 			$productPriceRecalculationSchedulerMock
 		);
