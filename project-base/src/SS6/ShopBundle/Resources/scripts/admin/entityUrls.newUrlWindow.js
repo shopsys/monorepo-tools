@@ -4,10 +4,10 @@
 	SS6.entityUrls = SS6.entityUrls || {};
 
 	SS6.entityUrls.NewUrlWindow = function ($window, $entityUrls) {
-		var $domainSelectbox = $window.find('#new_url_form_domain');
-		var $slugInput = $window.find('#new_url_form_slug');
+		var $domainSelectbox = $window.find('#url_list_new_url_form_domain');
+		var $slugInput = $window.find('#url_list_new_url_form_slug');
 		var $domainUrl = $window.find('.js-entity-urls-window-content-domain-url');
-		var $newUrlForm = $window.find('form[name=new_url_form]');
+		var $newUrlForm = $window.find('form[name=url_list_new_url_form]');
 		var $domainRow = $window.find('.js-entity-urls-window-content-domain-row');
 		var domainUrlsById = $domainUrl.data('domain-urls-by-id');
 

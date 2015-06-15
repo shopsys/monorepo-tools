@@ -5,14 +5,20 @@
 
 	SS6.entityUrls.Widget = function ($entityUrls) {
 		var $buttonAdd = $entityUrls.find('.js-entity-urls-button-add-url');
-		var windowContentHtml = $buttonAdd.data('window-content-template');
 
 		this.init = function () {
-			$buttonAdd.click(openWindow);
+			$buttonAdd.click(loadWindow);
 			$entityUrls.on('click', '.js-entity-urls-new-row-delete-button', onClickRemoveNewUrl);
 		};
 
-		var openWindow = function () {
+		var loadWindow = function () {
+			$.ajax({
+				url: $buttonAdd.data('window-content-ajax-url'),
+				success: openWindow
+			});
+		};
+
+		var openWindow = function (windowContentHtml) {
 			var $window = SS6.window({
 				content: windowContentHtml
 			});

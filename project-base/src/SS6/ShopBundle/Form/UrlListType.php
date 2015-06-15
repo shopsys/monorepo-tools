@@ -108,20 +108,7 @@ class UrlListType extends AbstractType {
 		$view->vars['routeName'] = $options['route_name'];
 		$view->vars['entityId'] = $options['entity_id'];
 		$view->vars['mainUrlsSlugsOnDomains'] = $mainUrlsSlugsOnDomains;
-		$view->vars['newUrlForm'] = $this->getNewUrlForm()->createView();
 		$view->vars['domainUrlsById'] = $this->getDomainUrlsIndexedById();
-	}
-
-	/**
-	 * @return \Symfony\Component\Form\FormInterface
-	 */
-	private function getNewUrlForm() {
-		$newUrlFormBuilder = $this->formFactory->createNamedBuilder('new_url_form');
-		$newUrlFormBuilder->add('domain', FormType::DOMAIN);
-		$newUrlFormBuilder->add('slug', FormType::TEXT);
-		$newUrlFormBuilder->add('create', FormType::SUBMIT);
-
-		return $newUrlFormBuilder->getForm();
 	}
 
 	/**

@@ -164,11 +164,7 @@
 			{% endfor %}
 			</table>
 		{% endfor %}
-		<button
-			type="button"
-			class="js-entity-urls-button-add-url btn btn-primary"
-			data-window-content-template="{{ _self.urlListNewUrlWindowContentTemplate(form.vars.newUrlForm, form.vars.domainUrlsById)|e }}"
-		>
+		<button type="button" class="js-entity-urls-button-add-url btn btn-primary" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
 			<i class="fa fa-plus fa-lg"></i> {{ 'Přidat URL'|trans }}
 		</button>
 	</div>
@@ -187,19 +183,6 @@
 			</button>
 		</td>
 	</tr>
-{% endmacro %}
-
-{% macro urlListNewUrlWindowContentTemplate(form, domainUrlsById) %}
-	{{ form_start(form) }}
-		<h3>{{ 'Přidat URL'|trans }}</h3>
-		<div class="form-inline">
-			{{ form_row(form.domain, { label: 'Doména', attr: {class: 'js-entity-urls-window-content-domain-row'} }) }}
-			<div>
-				<span class="js-entity-urls-window-content-domain-url" data-domain-urls-by-id="{{ domainUrlsById|json_encode }}"></span>{{ form_widget(form.slug) }}
-			</div>
-			{{ form_row(form.create, { label: 'Vytvořit URL'}) }}
-		</div>
-	{{ form_end(form) }}
 {% endmacro %}
 
 {% block ckeditor_row -%}
