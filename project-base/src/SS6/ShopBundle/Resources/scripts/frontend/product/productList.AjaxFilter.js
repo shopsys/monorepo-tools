@@ -39,7 +39,7 @@
 
 		var submitFormWithAjax = function (submitData) {
 			$.ajax({
-				url: document.location,
+				url: SS6.url.getBaseUrl(),
 				data: submitData,
 				success: function (data) {
 					$productsWithControls.html(data);
