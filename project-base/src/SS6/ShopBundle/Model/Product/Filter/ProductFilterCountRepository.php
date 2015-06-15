@@ -65,6 +65,32 @@ class ProductFilterCountRepository {
 	}
 
 	/**
+	 * @param string|null $searchText
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
+	 */
+	public function getProductFilterCountDataForSearch(
+		$searchText,
+		$domainId,
+		$locale,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup
+	) {
+		$productsQueryBuilder = $this->productRepository->getFilteredListableForSearchQueryBuilder(
+			$searchText,
+			$domainId,
+			$locale,
+			$productFilterData,
+			$pricingGroup
+		);
+
+		return $this->getProductFilterCountData($productsQueryBuilder);
+	}
+
+	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */

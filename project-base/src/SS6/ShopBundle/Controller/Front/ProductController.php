@@ -151,6 +151,8 @@ class ProductController extends Controller {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 *
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function searchAction(Request $request) {
 		$searchText = $request->query->get('q');
@@ -187,9 +189,16 @@ class ProductController extends Controller {
 			self::PRODUCTS_PER_PAGE
 		);
 
+		$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch(
+			$searchText,
+			$productFilterData
+		);
+
 		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/productsWithControls.html.twig', [
+			return $this->render('@SS6Shop/Front/Content/Product/ajaxSearch.html.twig', [
 				'paginationResult' => $paginationResult,
+				'productFilterCountData' => $productFilterCountData,
+				'filterForm' => $filterForm->createView(),
 				'filterFormSubmited' => $filterForm->isSubmitted(),
 				'searchText' => $searchText,
 			]);
@@ -201,6 +210,7 @@ class ProductController extends Controller {
 			'productDetails' => $paginationResult->getResults(),
 			'orderingSetting' => $orderingSetting,
 			'paginationResult' => $paginationResult,
+			'productFilterCountData' => $productFilterCountData,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'domainId' => $this->domain->getId(),

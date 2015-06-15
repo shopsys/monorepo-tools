@@ -34,8 +34,15 @@
 	{% endif %}
 
 	{% if productDetails|length > 0 or filterFormSubmited %}
-		<div class="box-filter">
-			{{ productFilterForm.filterForm(filterForm, url('front_product_search'), url('front_product_search', { q: searchText }), searchText, 'search') }}
+		<div class="box-filter js-product-filter">
+			{{ productFilterForm.filterForm(
+				filterForm,
+				url('front_product_search'),
+				url('front_product_search', { q: searchText }),
+				searchText,
+				'search',
+				productFilterCountData
+			) }}
 		</div>
 	{% endif %}
 

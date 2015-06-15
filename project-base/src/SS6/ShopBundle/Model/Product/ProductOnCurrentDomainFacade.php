@@ -218,4 +218,22 @@ class ProductOnCurrentDomainFacade {
 		);
 	}
 
+	/**
+	 * @param string|null $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
+	 */
+	public function getProductFilterCountDataForSearch(
+		$searchText,
+		ProductFilterData $productFilterData
+	) {
+		return $this->productFilterCountRepository->getProductFilterCountDataForSearch(
+			$searchText,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$productFilterData,
+			$this->currentCustomer->getPricingGroup()
+		);
+	}
+
 }
