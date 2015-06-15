@@ -141,10 +141,10 @@ class ProductVisibilityRepository {
 	 */
 	public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup) {
 		$query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
-			SELECT id, :pricing_group_id, :domain_id, :visible FROM products', new ResultSetMapping());
+			SELECT id, :pricingGroupId, :domainId, :visible FROM products', new ResultSetMapping());
 		$query->execute([
-			'pricing_group_id' => $pricingGroup->getId(),
-			'domain_id' => $pricingGroup->getDomainId(),
+			'pricingGroupId' => $pricingGroup->getId(),
+			'domainId' => $pricingGroup->getDomainId(),
 			'visible' => false,
 		]);
 		$this->refreshProductsVisibility();
