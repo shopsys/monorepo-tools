@@ -85,22 +85,8 @@ class ParameterFacade {
 	 */
 	public function deleteById($parameterId) {
 		$parameter = $this->parameterRepository->getById($parameterId);
-		$this->deleteProductParameterValuesByParameterId($parameter);
 
 		$this->em->remove($parameter);
 		$this->em->flush();
 	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
-	 */
-	private function deleteProductParameterValuesByParameterId(Parameter $parameter) {
-		$productParameterValues = $this->parameterRepository->getProductParameterValuesByParameter($parameter);
-
-		foreach ($productParameterValues as $productParameterValue) {
-			$this->em->remove($productParameterValue);
-		}
-		$this->em->flush();
-	}
-
 }

@@ -27,6 +27,7 @@ class ProductParameterValue {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Parameter\Parameter")
+	 * @ORM\JoinColumn(name="parameter_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $parameter;
 
