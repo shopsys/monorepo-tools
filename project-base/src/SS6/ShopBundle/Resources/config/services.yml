@@ -248,6 +248,11 @@ services:
     tags:
       - { name: validator.constraint_validator, alias: SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShowValidator }
 
+  ss6.shop.component.validator.constraints.unique_slugs_on_domains:
+    class: SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator
+    tags:
+      - { name: validator.constraint_validator, alias: SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator }
+
   ss6.shop.component.transformers.inverse_array_values_transformer:
     class: SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 

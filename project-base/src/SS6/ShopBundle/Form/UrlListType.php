@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form;
 
+use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -13,8 +14,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class UrlListType extends AbstractType {
+
+	const SLUG_REGEX = '/^[\w_\-\/]+$/';
 
 	const TO_DELETE = 'toDelete';
 	const MAIN_ON_DOMAINS = 'mainOnDomains';
@@ -63,7 +67,16 @@ class UrlListType extends AbstractType {
 
 		$builder->add(self::TO_DELETE, FormType::FORM);
 		$builder->add(self::MAIN_ON_DOMAINS, FormType::FORM);
-		$builder->add(self::NEW_SLUGS_ON_DOMAINS, FormType::FORM);
+		$builder->add(
+			self::NEW_SLUGS_ON_DOMAINS,
+			FormType::FORM,
+			[
+				'constraints' => [
+					new UniqueSlugsOnDomains(),
+				],
+				'error_bubbling' => false,
+			]
+		);
 
 		$friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
@@ -85,6 +98,15 @@ class UrlListType extends AbstractType {
 				'type' => FormType::HIDDEN,
 				'required' => false,
 				'allow_add' => true,
+				'constraints' => [
+
+				],
+				'options' => [
+					'constraints' => [
+						new Constraints\NotBlank(),
+						new Constraints\Regex(self::SLUG_REGEX),
+					],
+				],
 			]);
 		}
 	}

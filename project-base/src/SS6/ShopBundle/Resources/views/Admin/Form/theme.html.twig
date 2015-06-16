@@ -111,6 +111,7 @@
 
 {% block url_list_widget -%}
 	<div class="js-entity-urls" >
+		{{ form_errors(form.newSlugsOnDomains) }}
 		{% for domainId, friendlyUrlForms in form.toDelete %}
 			<table class="table js-entity-urls-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
 				<tr>
@@ -159,9 +160,9 @@
 						</td>
 					</tr>
 				{% endfor %}
-			{% for newUrlForm in form.newSlugsOnDomains[domainId] %}
-				{{ _self.urlListWidgetNewUrlRow(newUrlForm) }}
-			{% endfor %}
+				{% for newUrlForm in form.newSlugsOnDomains[domainId] %}
+					{{ _self.urlListWidgetNewUrlRow(newUrlForm, form.vars.domainUrlsById[domainId]) }}
+				{% endfor %}
 			</table>
 		{% endfor %}
 		<button type="button" class="js-entity-urls-button-add-url btn btn-primary" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
@@ -170,11 +171,12 @@
 	</div>
 {%- endblock url_list_widget -%}
 
-{% macro urlListWidgetNewUrlRow(form) %}
+{% macro urlListWidgetNewUrlRow(form, domainUrl) %}
 	<tr class="js-entity-urls-new-row">
 		<td class="table-col-10"></td>
 		<td class="table-col-40">
-			<span class="js-entity-urls-new-row-domain-url"></span><span class="js-entity-urls-new-row-slug"></span>
+			<span class="js-entity-urls-new-row-domain-url">{{ domainUrl }}/</span><span class="js-entity-urls-new-row-slug">{{ form.vars.value }}</span>
+			{{ form_errors(form) }}
 			{{ form_widget(form, {attr: {class: 'js-entity-urls-new-row-slug-input display-none', id: null}}) }}
 		</td>
 		<td class="table-col-30">
