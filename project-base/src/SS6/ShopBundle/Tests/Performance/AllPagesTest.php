@@ -15,11 +15,39 @@ class AllPagesTest extends FunctionalTestCase {
 
 	const PASSES = 3;
 
+	const ADMIN_USERNAME = 'superadmin';
+	const ADMIN_PASSWORD = 'admin123';
+
+	const FRONT_USERNAME = 'no-reply@netdevelo.cz';
+	const FRONT_PASSWORD = 'user123';
+
+	/**
+	 * @group warmup
+	 */
+	public function testAdminPagesWarmup() {
+		$this->doWarmupPagesWithProgress(
+			$this->createUrlProvider()->getAdminTestableUrlsProviderData(),
+			self::ADMIN_USERNAME,
+			self::ADMIN_PASSWORD
+		);
+	}
+
+	/**
+	 * @group warmup
+	 */
+	public function testFrontPagesWarmup() {
+		$this->doWarmupPagesWithProgress(
+			$this->createUrlProvider()->getFrontTestableUrlsProviderData(),
+			self::FRONT_USERNAME,
+			self::FRONT_PASSWORD
+		);
+	}
+
 	public function testAdminPages() {
 		$this->doTestPagesWithProgress(
 			$this->createUrlProvider()->getAdminTestableUrlsProviderData(),
-			'superadmin',
-			'admin123',
+			self::ADMIN_USERNAME,
+			self::ADMIN_PASSWORD,
 			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-admin.csv'
 		);
 	}
@@ -27,8 +55,8 @@ class AllPagesTest extends FunctionalTestCase {
 	public function testFrontPages() {
 		$this->doTestPagesWithProgress(
 			$this->createUrlProvider()->getFrontTestableUrlsProviderData(),
-			'no-reply@netdevelo.cz',
-			'user123',
+			self::FRONT_USERNAME,
+			self::FRONT_PASSWORD,
 			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-front.csv'
 		);
 	}
@@ -53,6 +81,45 @@ class AllPagesTest extends FunctionalTestCase {
 	 * @param array $testableUrlsDataProviderData
 	 * @param string $username
 	 * @param string $password
+	 */
+	private function doWarmupPagesWithProgress(
+		array $testableUrlsDataProviderData,
+		$username,
+		$password
+	) {
+		$consoleOutput = new ConsoleOutput();
+		$pagePerformanceResultsCollection = new PagePerformanceResultsCollection();
+		$consoleOutput->writeln('');
+
+		$countTestedUrls = count($testableUrlsDataProviderData);
+		$pageIndex = 0;
+		foreach ($testableUrlsDataProviderData as $testUrlData) {
+			$pageIndex++;
+			list($routeName, $url, $expectedStatusCode, $asLogged) = $testUrlData;
+
+			$progressLine = sprintf(
+				'Warmup: %3d%% (%s)',
+				round($pageIndex / $countTestedUrls * 100),
+				$routeName
+			);
+			$consoleOutput->write(str_pad($progressLine, 80) . "\r");
+
+			$this->doTestUrl(
+				$pagePerformanceResultsCollection,
+				$routeName,
+				$url,
+				$expectedStatusCode,
+				$asLogged,
+				$username,
+				$password
+			);
+		}
+	}
+
+	/**
+	 * @param array $testableUrlsDataProviderData
+	 * @param string $username
+	 * @param string $password
 	 * @param string $jmeterOutputFilename
 	 */
 	private function doTestPagesWithProgress(
@@ -67,7 +134,7 @@ class AllPagesTest extends FunctionalTestCase {
 		$consoleOutput->writeln('');
 
 		$countTestedUrls = count($testableUrlsDataProviderData);
-		for ($pass = 0; $pass <= self::PASSES; $pass++) {
+		for ($pass = 1; $pass <= self::PASSES; $pass++) {
 			$pageIndex = 0;
 			foreach ($testableUrlsDataProviderData as $testUrlData) {
 				$pageIndex++;
@@ -75,7 +142,7 @@ class AllPagesTest extends FunctionalTestCase {
 
 				$progressLine = sprintf(
 					'%s: %3d%% (%s)',
-					$pass === 0 ? 'Warmup' : 'Pass ' . $pass . '/' . self::PASSES,
+					'Pass ' . $pass . '/' . self::PASSES,
 					round($pageIndex / $countTestedUrls * 100),
 					$routeName
 				);
@@ -90,10 +157,6 @@ class AllPagesTest extends FunctionalTestCase {
 					$username,
 					$password
 				);
-			}
-
-			if ($pass === 0) {
-				$pagePerformanceResultsCollection->clear();
 			}
 		}
 

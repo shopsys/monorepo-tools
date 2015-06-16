@@ -16,7 +16,7 @@
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
 
-	<target name="tests-performance-run" depends="clean,test-db-demo,test-db-fixtures-performance,tests-performance" />
+	<target name="tests-performance-run" depends="clean,test-db-demo,test-db-fixtures-performance,tests-performance-warmup,tests-performance" />
 
 	<target name="composer-dev">
 		<exec
@@ -497,6 +497,23 @@
 		</exec>
 	</target>
 
+	<target name="tests-performance-warmup">
+		<exec
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Performance"/>
+			<arg value="--group"/>
+			<arg value="warmup"/>
+		</exec>
+	</target>
+
 	<target name="tests-performance">
 		<exec
 			executable="${path.phpunit.executable}"
@@ -509,6 +526,8 @@
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
 			<arg value="Performance"/>
+			<arg value="--exclude-group"/>
+			<arg value="warmup"/>
 		</exec>
 	</target>
 
