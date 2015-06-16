@@ -2,12 +2,14 @@
 
 
 {% block content %}
-	<div class="main-content main-content--alone">
-		{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index')) }}
+	<div class="web__container web__container--blank">
+		<div class="web__content">
+			{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index')) }}
 
-		{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
+			{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
 
-		<h1>{% block h1 %}{{ 'Administrace'|trans }}{% endblock %}</h1>
-		{% block main_content %}{% endblock %}
+			<h1>{% block h1 %}{{ 'Administrace'|trans }}{% endblock %}</h1>
+			{% block main_content %}{% endblock %}
+		</div>
 	</div>
 {% endblock %}

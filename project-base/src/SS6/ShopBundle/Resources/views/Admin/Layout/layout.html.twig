@@ -1,18 +1,46 @@
 {% extends '@SS6Shop/Admin/Layout/base.html.twig' %}
 
 {% block html_body %}
-	<div class="navbar navbar navbar-static-top navbar-default">
-		<div class="container-fluid">
-			{{ render(controller('SS6ShopBundle:Admin/Menu:menu', {
-				route: app.request.get('_route'),
-				parameters: app.request.attributes.get('_route_params')
-			}	)) }}
-		</div>
-	</div>
+	<div class="web">
+		{% block header %}
+			<header class="web__header">
+				<div class="web__header__in">
+					{{ render(controller('SS6ShopBundle:Admin/Menu:menu', {
+						route: app.request.get('_route'),
+						parameters: app.request.attributes.get('_route_params')
+					}	)) }}
+				</div>
+			</header>
+		{% endblock %}
 
-	<div class="content container-fluid">
-		<div class="row">
-			{% block content %}{% endblock %}
-		</div>
+		{% block content %}{% endblock %}
+
+		{% block footer %}
+			<footer class="web__footer">
+				<div class="web__footer__in">
+					<div class="foot">
+						<div class="foot__item">
+							<div class="foot__item__in">
+								1. part
+							</div>
+						</div>
+
+						<div class="foot__item">
+							<div class="foot__item__in">
+								2. part
+							</div>
+						</div>
+
+						<div class="foot__item foot__item--2">
+							<div class="foot__item__in">
+								<div class="foot__item__in__cell text-right">
+									3. part
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		{% endblock %}
 	</div>
 {% endblock %}

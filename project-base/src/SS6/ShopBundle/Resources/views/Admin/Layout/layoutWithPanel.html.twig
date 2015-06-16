@@ -1,19 +1,21 @@
 {% extends '@SS6Shop/Admin/Layout/layout.html.twig' %}
 
 {% block content %}
-	<div class="main-panel col-xs-12 col-sm-3 col-md-3 col-lg-2">
-		{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
-			route: app.request.get('_route'),
-			parameters: app.request.attributes.get('_route_params')
-		}	)) }}
-	</div>
+	<div class="web__container">
+		<div class="web__panel">
+			{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
+				route: app.request.get('_route'),
+				parameters: app.request.attributes.get('_route_params')
+			}	)) }}
+		</div>
 
-	<div class="main-content col-xs-12 col-sm-9 col-md-9 col-lg-10">
-		{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index'	)) }}
+		<div class="web__content">
+			{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index'	)) }}
 
-		{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
+			{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
 
-		<h1>{% block h1 %}{{ 'Administrace'|trans }}{% endblock %}</h1>
-		{% block main_content %}{% endblock %}
+			<h1>{% block h1 %}{{ 'Administrace'|trans }}{% endblock %}</h1>
+			{% block main_content %}{% endblock %}
+		</div>
 	</div>
 {% endblock %}

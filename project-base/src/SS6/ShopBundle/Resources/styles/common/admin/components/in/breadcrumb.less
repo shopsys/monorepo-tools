@@ -1,0 +1,39 @@
+/*
+Breadcrumb
+=======
+Classic breadcrumbs, it should be used with DIV element, not UL or OL (copy paste problem)
+
+	<div class="in-breadcrumb">
+		<a href="#" class="in-breadcrumb__item">Main page</a>
+		<span class="in-breadcrumb__separator">-</span>
+		<a href="#" class="in-breadcrumb__item">Category</a>
+		<span class="in-breadcrumb__separator">-</span>
+		<span class="in-breadcrumb__item">This page</span>
+	</div>
+
+*/
+
+.in-breadcrumb {
+	padding: 10px 30px;
+	margin: 0 -30px 15px;
+
+	background: @bg-bread;
+	border-bottom: 1px solid @color-f;
+	font-size: 12px;
+
+	&__separator {
+		display: inline-block;
+		padding: 0 3px;
+
+		color: @color-a;
+	}
+
+	&__item {
+		display: inline-block;
+		padding: 0 3px;
+
+		&--actual {
+			font-weight: bold;
+		}
+	}
+}

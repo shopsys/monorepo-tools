@@ -1,8 +1,14 @@
-<div class="box-breadcrumb">
+<div class="in-breadcrumb">
 	{% for item in items %}
-		<span class="box-breadcrumb__item">{{ item.label }}</span>
-		{% if not loop.last %}
-			<span class="box-breadcrumb__separator"> > </span>
+		{% if loop.first %}
+			<a href="{{ url('admin_default_dashboard') }}" class="in-breadcrumb__item in-breadcrumb__item--home">#H#</a>
+			<span class="in-breadcrumb__separator"> > </span>
+		{% endif %}
+		{% if loop.last %}
+			<span class="in-breadcrumb__item in-breadcrumb__item--actual">{{ item.label }}</span>
+		{% else %}
+			<span class="in-breadcrumb__item">{{ item.label }}</span>
+			<span class="in-breadcrumb__separator"> > </span>
 		{% endif %}
 	{% endfor %}
 </div>
