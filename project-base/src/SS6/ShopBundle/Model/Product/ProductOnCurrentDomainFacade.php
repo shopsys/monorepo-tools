@@ -91,7 +91,7 @@ class ProductOnCurrentDomainFacade {
 
 		foreach ($accessories as $accessory) {
 			$accessoryVisibility = $this->productVisibilityRepository->getProductVisibility(
-				$product,
+				$accessory,
 				$this->currentCustomer->getPricingGroup(),
 				$this->domain->getId()
 			);
