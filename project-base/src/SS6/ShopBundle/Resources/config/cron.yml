@@ -22,3 +22,8 @@
   time:
     minutes: '*'
     hours: '*'
+
+- service: SS6\ShopBundle\Model\Feed\FeedCronService
+  time:
+    minutes: '0'
+    hours: '*/6'
