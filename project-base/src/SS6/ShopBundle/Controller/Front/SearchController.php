@@ -12,18 +12,31 @@ class SearchController extends Controller {
 	const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
 	const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
 
-	public function autocompleteAction(Request $request) {
-		$productOnCurrentDomainFacade = $this->get(ProductOnCurrentDomainFacade::class);
-		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
-		$categoryFacade = $this->get(CategoryFacade::class);
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
+	 */
+	private $productOnCurrentDomainFacade;
+
+	public function __construct(
+		CategoryFacade $categoryFacade,
+		ProductOnCurrentDomainFacade $productOnCurrentDomainFacade
+	) {
+		$this->categoryFacade = $categoryFacade;
+		$this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
+	}
+
+	public function autocompleteAction(Request $request) {
 		$searchText = $request->get('searchText');
 
-		$categoriesPaginationResult = $categoryFacade
+		$categoriesPaginationResult = $this->categoryFacade
 			->getSearchAutocompleteCategories($searchText, self::AUTOCOMPLETE_CATEGORY_LIMIT);
 
-		$productsPaginationResult = $productOnCurrentDomainFacade
+		$productsPaginationResult = $this->productOnCurrentDomainFacade
 			->getSearchAutocompleteProducts($searchText, self::AUTOCOMPLETE_PRODUCT_LIMIT);
 
 		return $this->render('@SS6Shop/Front/Content/Search/autocomplete.html.twig', [

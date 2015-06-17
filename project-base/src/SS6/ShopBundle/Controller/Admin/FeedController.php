@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use DateTime;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -11,6 +12,16 @@ use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 
 class FeedController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Feed\FeedFacade
@@ -22,15 +33,16 @@ class FeedController extends BaseController {
 	 */
 	private $gridFactory;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
-	 */
-	private $domain;
-
-	public function __construct(FeedFacade $feedFacade, GridFactory $gridFactory, Domain $domain) {
+	public function __construct(
+		FeedFacade $feedFacade,
+		GridFactory $gridFactory,
+		Domain $domain,
+		EntityManager $em
+	) {
 		$this->feedFacade = $feedFacade;
 		$this->gridFactory = $gridFactory;
 		$this->domain = $domain;
+		$this->em = $em;
 	}
 
 	/**
@@ -61,7 +73,11 @@ class FeedController extends BaseController {
 
 		$dataSource = new ArrayDataSource($feeds, 'name');
 
-		$grid = $this->gridFactory->create('feedsList', $dataSource);
+		$grid = $this->em->transactional(
+			function () use ($dataSource) {
+				return $this->gridFactory->create('feedsList', $dataSource);
+			}
+		);
 
 		$grid->addColumn('name', 'name', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');

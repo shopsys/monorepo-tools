@@ -3,10 +3,12 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
+use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
+use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use SS6\ShopBundle\Twig\RequestExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,9 +19,9 @@ class ProductController extends Controller {
 	const PRODUCTS_PER_PAGE = 12;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\RequestExtension
+	 * @var \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
 	 */
-	private $requestExtension;
+	private $productFilterFormTypeFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
@@ -31,26 +33,44 @@ class ProductController extends Controller {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
+	 */
+	private $productOnCurrentDomainFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Twig\RequestExtension
+	 */
+	private $requestExtension;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductListOrderingService
+	 */
+	private $productListOrderingService;
+
 	public function __construct(
 		RequestExtension $requestExtension,
 		CategoryFacade $categoryFacade,
-		Domain $domain
+		Domain $domain,
+		ProductOnCurrentDomainFacade $productOnCurrentDomainFacade,
+		ProductFilterFormTypeFactory $productFilterFormTypeFactory,
+		ProductListOrderingService $productListOrderingService
 	) {
 		$this->requestExtension = $requestExtension;
 		$this->categoryFacade = $categoryFacade;
 		$this->domain = $domain;
+		$this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
+		$this->productFilterFormTypeFactory = $productFilterFormTypeFactory;
+		$this->productListOrderingService = $productListOrderingService;
 	}
 
 	/**
 	 * @param int $id
 	 */
 	public function detailAction($id) {
-		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
-		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
+		$productDetail = $this->productOnCurrentDomainFacade->getVisibleProductDetailById($id);
 
-		$productDetail = $productOnCurrentDomainFacade->getVisibleProductDetailById($id);
-
-		$accessoriesDetails = $productOnCurrentDomainFacade
+		$accessoriesDetails = $this->productOnCurrentDomainFacade
 			->getAccessoriesProductDetailsForProduct($productDetail->getProduct());
 
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
@@ -68,18 +88,7 @@ class ProductController extends Controller {
 	 * @param int $id
 	 */
 	public function listByCategoryAction(Request $request, $id) {
-		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
-		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
-		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
-		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
-		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
-
-		$category = $categoryFacade->getById($id);
+		$category = $this->categoryFacade->getById($id);
 
 		$page = $request->get(self::PAGE_QUERY_PARAMETER);
 		if ($page === '1') {
@@ -91,19 +100,19 @@ class ProductController extends Controller {
 			));
 		}
 
-		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
+		$orderingSetting = $this->productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createForm($productFilterFormTypeFactory->createForCategory(
-			$domain->getId(),
-			$domain->getLocale(),
+		$filterForm = $this->createForm($this->productFilterFormTypeFactory->createForCategory(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
 			$category
 		));
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
-		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
+		$paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
 			$productFilterData,
 			$orderingSetting,
 			$page,
@@ -125,7 +134,7 @@ class ProductController extends Controller {
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
-			'domainId' => $domain->getId(),
+			'domainId' => $this->domain->getId(),
 		]);
 	}
 
@@ -133,17 +142,6 @@ class ProductController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function searchAction(Request $request) {
-		$productOnCurrentDomainFacade = $this->get('ss6.shop.product.product_on_current_domain_facade');
-		/* @var $productOnCurrentDomainFacade \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
-		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
-		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$productFilterFormTypeFactory = $this->get('ss6.shop.form.front.product.product_filter_form_type_factory');
-		/* @var $productFilterFormTypeFactory \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory */
-		$categoryFacade = $this->get(CategoryFacade::class);
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-
 		$searchText = $request->query->get('q');
 
 		$page = $request->get(self::PAGE_QUERY_PARAMETER);
@@ -152,25 +150,25 @@ class ProductController extends Controller {
 			return $this->redirect($this->generateUrl('front_product_search', $request->query->all()));
 		}
 
-		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
+		$orderingSetting = $this->productListOrderingService->getOrderingSettingFromRequest($request);
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createForm($productFilterFormTypeFactory->createForSearch(
-			$domain->getId(),
-			$domain->getLocale(),
+		$filterForm = $this->createForm($this->productFilterFormTypeFactory->createForSearch(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
 			$searchText
 		));
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
-		$foundCategories = $categoryFacade->getVisibleByDomainAndSearchText(
-			$domain->getId(),
-			$domain->getLocale(),
+		$foundCategories = $this->categoryFacade->getVisibleByDomainAndSearchText(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
 			$searchText
 		);
 
-		$paginationResult = $productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
+		$paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
 			$searchText,
 			$productFilterData,
 			$orderingSetting,
@@ -194,15 +192,12 @@ class ProductController extends Controller {
 			'paginationResult' => $paginationResult,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
-			'domainId' => $domain->getId(),
+			'domainId' => $this->domain->getId(),
 		]);
 	}
 
 	public function selectOrderingModeAction(Request $request) {
-		$productListOrderingService = $this->get('ss6.shop.product.product_list_ordering_service');
-		/* @var $productListOrderingService \SS6\ShopBundle\Model\Product\ProductListOrderingService */
-
-		$orderingSetting = $productListOrderingService->getOrderingSettingFromRequest($request);
+		$orderingSetting = $this->productListOrderingService->getOrderingSettingFromRequest($request);
 		$form = $this->createForm(new OrderingSettingFormType());
 		$form->setData(['orderingMode' => $orderingSetting->getOrderingMode()]);
 

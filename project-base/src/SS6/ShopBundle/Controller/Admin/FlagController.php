@@ -2,17 +2,44 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
+use SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit;
 
-class FlagController extends Controller {
+class FlagController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
+	 */
+	private $flagFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit
+	 */
+	private $flagInlineEdit;
+
+	public function __construct(
+		EntityManager $em,
+		FlagFacade $flagFacade,
+		FlagInlineEdit $flagInlineEdit
+	) {
+		$this->em = $em;
+		$this->flagFacade = $flagFacade;
+		$this->flagInlineEdit = $flagInlineEdit;
+	}
 
 	/**
 	 * @Route("/product/flag/list/")
 	 */
 	public function listAction() {
-		$productInlineEdit = $this->get('ss6.shop.product.flag.flag_inline_edit');
-		/* @var $productInlineEdit \SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit */
+		$productInlineEdit = $this->flagInlineEdit;
 
 		$grid = $productInlineEdit->getGrid();
 
@@ -26,21 +53,19 @@ class FlagController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
-		$flagFacade = $this->get('ss6.shop.product.flag.flag_facade');
-		/* @var $flagFacade \SS6\ShopBundle\Model\Product\Flag\FlagFacade */
-
 		try {
-			$fullName = $flagFacade->getById($id)->getName();
-			$flagFacade->deleteById($id);
+			$fullName = $this->flagFacade->getById($id)->getName();
+			$this->em->transactional(
+				function () use ($id) {
+					$this->flagFacade->deleteById($id);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Příznak <strong>{{ name }}</strong> byl smazán', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Příznak <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
 			]);
 		} catch (\SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolený příznak neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolený příznak neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_flag_list'));

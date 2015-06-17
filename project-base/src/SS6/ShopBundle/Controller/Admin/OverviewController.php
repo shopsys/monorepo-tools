@@ -3,21 +3,38 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
+use SS6\ShopBundle\Model\Grid\GridFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class OverviewController extends Controller {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
+	public function __construct(
+		GridFactory $gridFactory,
+		Domain $domain
+	) {
+		$this->gridFactory = $gridFactory;
+		$this->domain = $domain;
+	}
+
+	/**
 	 * @Route("/overview/")
 	 */
 	public function listAction() {
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-
 		$dataSource = new ArrayDataSource($this->loadData(), 'id');
 
-		$grid = $gridFactory->create('domainsList', $dataSource);
+		$grid = $this->gridFactory->create('domainsList', $dataSource);
 
 		$grid->addColumn('name', 'name', 'Název domény');
 		$grid->addColumn('locale', 'locale', 'Jazyk');
@@ -30,15 +47,12 @@ class OverviewController extends Controller {
 	}
 
 	private function loadData() {
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-
 		$data = [];
-		foreach ($domain->getAll() as $domainConfig) {
+		foreach ($this->domain->getAll() as $domainConfig) {
 			$data[] = [
 				'id' => $domainConfig->getId(),
 				'name' => $domainConfig->getName(),
-				'locale' =>  $domainConfig->getLocale(),
+				'locale' => $domainConfig->getLocale(),
 			];
 		}
 

@@ -2,19 +2,34 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CategoryController extends Controller {
 
-	public function panelAction() {
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
 
-		$categoryDetails = $categoryFacade->getVisibleCategoryDetailsForDomain(
-			$domain->getId(),
-			$domain->getLocale()
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	public function __construct(
+		Domain $domain,
+		CategoryFacade $categoryFacade
+	) {
+		$this->domain = $domain;
+		$this->categoryFacade = $categoryFacade;
+	}
+
+	public function panelAction() {
+		$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain(
+			$this->domain->getId(),
+			$this->domain->getLocale()
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [

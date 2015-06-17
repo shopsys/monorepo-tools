@@ -2,19 +2,44 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
+use SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit;
 
-class TopProductController extends Controller {
+class TopProductController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade
+	 */
+	private $topProductFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit
+	 */
+	private $topProductInlineEdit;
+
+	public function __construct(
+		EntityManager $em,
+		TopProductFacade $topProductFacade,
+		TopProductInlineEdit $topProductInlineEdit
+	) {
+		$this->em = $em;
+		$this->topProductFacade = $topProductFacade;
+		$this->topProductInlineEdit = $topProductInlineEdit;
+	}
 
 	/**
 	 * @Route("/product/top_product/list/")
 	 */
 	public function listAction() {
-		$topProductInlineEdit = $this->get('ss6.shop.product.top_product.top_product_inline_edit');
-		/* @var $topProductInlineEdit \SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit */
-
-		$grid = $topProductInlineEdit->getGrid();
+		$grid = $this->topProductInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/TopProducts/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -26,18 +51,17 @@ class TopProductController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$topProductFacade = $this->get('ss6.shop.product.top_product.top_product_facade');
-		/* @var $topProductFacade \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade */
-
 		try {
-			$topProductFacade->getById($id);
-			$topProductFacade->deleteById($id);
+			$this->topProductFacade->getById($id);
+			$this->em->transactional(
+				function () use ($id) {
+					$this->topProductFacade->deleteById($id);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Zboží bylo odstraněno');
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Zboží bylo odstraněno');
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException $e) {
-			$flashMessageSender->addErrorFlashTwig('Zboží se nepodařilo odstranit - zboží není v tomto seznamu.');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Zboží se nepodařilo odstranit - zboží není v tomto seznamu.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_topproduct_list'));

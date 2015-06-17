@@ -2,65 +2,125 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory;
+use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryDataFactory;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class CategoryController extends Controller {
+class CategoryController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryDataFactory
+	 */
+	private $categoryDataFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory
+	 */
+	private $categoryFormTypeFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	/**
+	 * @var \Symfony\Component\HttpFoundation\Session\Session
+	 */
+	private $session;
 
 	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
 
-	public function __construct(Translator $translator) {
+	public function __construct(
+		Translator $translator,
+		EntityManager $em,
+		CategoryFacade $categoryFacade,
+		CategoryFormTypeFactory $categoryFormTypeFactory,
+		CategoryDataFactory $categoryDataFactory,
+		Session $session,
+		Domain $domain,
+		Localization $localization,
+		Breadcrumb $breadcrumb
+	) {
 		$this->translator = $translator;
+		$this->em = $em;
+		$this->categoryFacade = $categoryFacade;
+		$this->categoryFormTypeFactory = $categoryFormTypeFactory;
+		$this->categoryDataFactory = $categoryDataFactory;
+		$this->session = $session;
+		$this->domain = $domain;
+		$this->localization = $localization;
+		$this->breadcrumb = $breadcrumb;
 	}
 
 	/**
 	 * @Route("/category/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
-		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
-		$categoryDataFactory = $this->get(CategoryDataFactory::class);
-		/* @var $categoryDataFactory \SS6\ShopBundle\Model\Category\CategoryDataFactory */
+		$category = $this->categoryFacade->getById($id);
+		$form = $this->createForm($this->categoryFormTypeFactory->createForCategory($category));
 
-		$category = $categoryFacade->getById($id);
-		$form = $this->createForm($categoryFormTypeFactory->createForCategory($category));
-
-		$categoryData = $categoryDataFactory->createFromCategory($category);
+		$categoryData = $this->categoryDataFactory->createFromCategory($category);
 
 		$form->setData($categoryData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$categoryFacade->edit($id, $categoryData);
+			$this->em->transactional(
+				function () use ($id, $categoryData) {
+					$this->categoryFacade->edit($id, $categoryData);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $category->getName(),
-				'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				'Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				[
+					'name' => $category->getName(),
+					'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
+				]
+			);
 			return $this->redirect($this->generateUrl('admin_category_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace kategorie - ') . $category->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace kategorie - ') . $category->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Category/edit.html.twig', [
 			'form' => $form->createView(),
@@ -73,18 +133,9 @@ class CategoryController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-		$categoryFormTypeFactory = $this->get('ss6.shop.form.admin.category_form_type_factory');
-		/* @var $categoryFormTypeFactory \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory */
-		$categoryDataFactory = $this->get(CategoryDataFactory::class);
-		/* @var $categoryDataFactory \SS6\ShopBundle\Model\Category\CategoryDataFactory */
+		$form = $this->createForm($this->categoryFormTypeFactory->create());
 
-		$form = $this->createForm($categoryFormTypeFactory->create());
-
-		$categoryData = $categoryDataFactory->createDefault();
+		$categoryData = $this->categoryDataFactory->createDefault();
 
 		$form->setData($categoryData);
 		$form->handleRequest($request);
@@ -92,17 +143,25 @@ class CategoryController extends Controller {
 		if ($form->isValid()) {
 			$categoryData = $form->getData();
 
-			$category = $categoryFacade->create($categoryData);
+			$category = $this->em->transactional(
+				function () use ($categoryData) {
+					return $this->categoryFacade->create($categoryData);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $category->getName(),
-				'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				'Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				[
+					'name' => $category->getName(),
+					'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
+				]
+			);
+
 			return $this->redirect($this->generateUrl('admin_category_list'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Category/new.html.twig', [
@@ -115,33 +174,26 @@ class CategoryController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
-		$session = $this->get('session');
-		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-
 		if ($request->query->has('domain')) {
 			$domainId = (int)$request->query->get('domain');
 		} else {
-			$domainId = (int)$session->get('categories_selected_domain_id', 0);
+			$domainId = (int)$this->session->get('categories_selected_domain_id', 0);
 		}
 
 		if ($domainId !== 0) {
 			try {
-				$domain->getDomainConfigById($domainId);
+				$this->domain->getDomainConfigById($domainId);
 			} catch (\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException $ex) {
 				$domainId = 0;
 			}
 		}
 
-		$session->set('categories_selected_domain_id', $domainId);
+		$this->session->set('categories_selected_domain_id', $domainId);
 
 		if ($domainId === 0) {
-			$categoryDetails = $categoryFacade->getAllCategoryDetails($request->getLocale());
+			$categoryDetails = $this->categoryFacade->getAllCategoryDetails($request->getLocale());
 		} else {
-			$categoryDetails = $categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
+			$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
@@ -155,9 +207,6 @@ class CategoryController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveOrderAction(Request $request) {
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-
 		$categoriesOrderingData = $request->get('categoriesOrderingData');
 		foreach ($categoriesOrderingData as $categoryOrderingData) {
 			$categoryId = (int)$categoryOrderingData['categoryId'];
@@ -165,7 +214,7 @@ class CategoryController extends Controller {
 			$parentIdByCategoryId[$categoryId] = $parentId;
 		}
 
-		$categoryFacade->editOrdering($parentIdByCategoryId);
+		$this->categoryFacade->editOrdering($parentIdByCategoryId);
 
 		return new Response('OK - dummy');
 	}
@@ -175,40 +224,32 @@ class CategoryController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
-
 		try {
-			$fullName = $categoryFacade->getById($id)->getName();
+			$fullName = $this->categoryFacade->getById($id)->getName();
 
-			$categoryFacade->deleteById($id);
+			$this->em->transactional(
+				function () use ($id) {
+					$this->categoryFacade->deleteById($id);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Kategorie <strong>{{ name }}</strong> byla smazána', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Kategorie <strong>{{ name }}</strong> byla smazána', [
 				'name' => $fullName,
 			]);
 		} catch (\SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolená kategorie neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolená kategorie neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_category_list'));
 	}
 
 	public function listDomainTabsAction() {
-		$session = $this->get('session');
-		/* @var $session \Symfony\Component\HttpFoundation\Session\Session */
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$localization = $this->get('ss6.shop.localization.localization');
-		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
-
-		$domainId = $session->get('categories_selected_domain_id', 0);
+		$domainId = $this->session->get('categories_selected_domain_id', 0);
 
 		return $this->render('@SS6Shop/Admin/Content/Category/domainTabs.html.twig', [
-			'domainConfigs' => $domain->getAll(),
+			'domainConfigs' => $this->domain->getAll(),
 			'selectedDomainId' => $domainId,
-			'multipleLocales' => count($localization->getAllLocales()) > 1,
+			'multipleLocales' => count($this->localization->getAllLocales()) > 1,
 		]);
 	}
 

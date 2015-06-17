@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Component\Translation\Translator;
@@ -21,34 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends BaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	private $articleEditFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleDataFactory
-	 */
-	private $articleDataFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
-	 */
-	private $administratorGridFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
-	 */
-	private $gridFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
-	 */
-	private $breadcrumb;
+	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
@@ -60,6 +36,36 @@ class ArticleController extends BaseController {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 */
+	private $administratorGridFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 */
+	private $articleEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\ArticleDataFactory
+	 */
+	private $articleDataFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		ArticleDataFactory $articleDataFactory,
@@ -68,7 +74,8 @@ class ArticleController extends BaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		Translator $translator
+		Translator $translator,
+		EntityManager $em
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->articleDataFactory = $articleDataFactory;
@@ -78,6 +85,7 @@ class ArticleController extends BaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->translator = $translator;
+		$this->em = $em;
 	}
 
 	/**
@@ -95,7 +103,11 @@ class ArticleController extends BaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->articleEditFacade->edit($id, $articleData);
+			$this->em->transactional(
+				function () use ($id, $articleData) {
+					$this->articleEditFacade->edit($id, $articleData);
+				}
+			);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
@@ -167,7 +179,11 @@ class ArticleController extends BaseController {
 		if ($form->isValid()) {
 			$articleData = $form->getData();
 
-			$article = $this->articleEditFacade->create($articleData);
+			$article = $this->em->transactional(
+				function () use ($articleData) {
+					return $this->articleEditFacade->create($articleData);
+				}
+			);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
@@ -193,7 +209,11 @@ class ArticleController extends BaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->articleEditFacade->getById($id)->getName();
-			$this->articleEditFacade->delete($id);
+			$this->em->transactional(
+				function () use ($id) {
+					$this->articleEditFacade->delete($id);
+				}
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,

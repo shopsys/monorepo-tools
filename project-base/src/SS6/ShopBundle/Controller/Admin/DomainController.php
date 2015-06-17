@@ -3,23 +3,44 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends Controller {
 
-	public function domainTabsAction() {
-		$domain = $this->get('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
-		$localization = $this->get('ss6.shop.localization.localization');
-		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	public function __construct(
+		Domain $domain,
+		SelectedDomain $selectedDomain,
+		Localization $localization
+	) {
+		$this->domain = $domain;
+		$this->selectedDomain = $selectedDomain;
+		$this->localization = $localization;
+	}
+
+	public function domainTabsAction() {
 		return $this->render('@SS6Shop/Admin/Inline/Domain/tabs.html.twig', [
-			'domainConfigs' => $domain->getAll(),
-			'selectedDomainId' => $selectedDomain->getId(),
-			'multipleLocales' => count($localization->getAllLocales()) > 1,
+			'domainConfigs' => $this->domain->getAll(),
+			'selectedDomainId' => $this->selectedDomain->getId(),
+			'multipleLocales' => count($this->localization->getAllLocales()) > 1,
 		]);
 	}
 
@@ -29,10 +50,8 @@ class DomainController extends Controller {
 	 */
 	public function selectDomainAction(Request $request, $id) {
 		$id = (int)$id;
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
-		$selectedDomain->setId($id);
+		$this->selectedDomain->setId($id);
 
 		$referer = $request->server->get('HTTP_REFERER');
 		if ($referer === null) {

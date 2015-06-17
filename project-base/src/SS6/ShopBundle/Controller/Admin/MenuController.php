@@ -2,27 +2,31 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use SS6\ShopBundle\Model\AdminNavigation\Menu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MenuController extends Controller {
 
-	public function menuAction($route, array $parameters = null) {
-		$menu = $this->get('ss6.shop.admin_navigation.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Menu
+	 */
+	private $menu;
 
-		$activePath = $menu->getMenuPath($route, $parameters);
+	public function __construct(Menu $menu) {
+		$this->menu = $menu;
+	}
+
+	public function menuAction($route, array $parameters = null) {
+		$activePath = $this->menu->getMenuPath($route, $parameters);
 
 		return $this->render('@SS6Shop/Admin/Inline/Menu/menu.html.twig', [
-			'menu' => $menu,
+			'menu' => $this->menu,
 			'activePath' => $activePath,
 		]);
 	}
 
 	public function panelAction($route, array $parameters = null) {
-		$menu = $this->get('ss6.shop.admin_navigation.menu');
-		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
-
-		$activePath = $menu->getMenuPath($route, $parameters);
+		$activePath = $this->menu->getMenuPath($route, $parameters);
 
 		$secondLevelItems = [];
 		if (isset($activePath[0])) {

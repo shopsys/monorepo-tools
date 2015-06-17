@@ -3,12 +3,32 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class FileUploadController extends Controller {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
+	/**
+	 * @var \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
+	 */
+	private $fileThumbnailExtension;
+
+	public function __construct(
+		FileUpload $fileUpload,
+		FileThumbnailExtension $fileThumbnailExtension
+	) {
+		$this->fileUpload = $fileUpload;
+		$this->fileThumbnailExtension = $fileThumbnailExtension;
+	}
 
 	/**
 	 * @Route("/file_upload/")
@@ -25,14 +45,9 @@ class FileUploadController extends Controller {
 		$file = $request->files->get('file');
 
 		if ($file instanceof UploadedFile) {
-			$fileUpload = $this->get('ss6.shop.file_upload');
-			/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
-			$fileThumbnailExtension = $this->get('ss6.shop.file.file_thumbnail_extension');
-			/* @var $fileThumbnailExtension \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension */
-
 			try {
-				$temporaryFilename = $fileUpload->upload($file);
-				$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
+				$temporaryFilename = $this->fileUpload->upload($file);
+				$fileThumbnailInfo = $this->fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
 
 				$actionResult = [
 					'status' => 'success',
@@ -58,10 +73,8 @@ class FileUploadController extends Controller {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function deleteTemporaryFileAction(Request $request) {
-		$fileUpload = $this->get('ss6.shop.file_upload');
-		/* @var $fileUpload \SS6\ShopBundle\Model\FileUpload\FileUpload */
 		$filename = $request->get('filename');
-		$actionResult = $fileUpload->tryDeleteTemporaryFile($filename);
+		$actionResult = $this->fileUpload->tryDeleteTemporaryFile($filename);
 
 		return new JsonResponse($actionResult);
 	}

@@ -3,16 +3,22 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Module\ModulesFormType;
 use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
+use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Module\ModuleFacade;
 use SS6\ShopBundle\Model\Module\ModuleList;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use SS6\ShopBundle\Model\Pricing\PricingSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
-class SuperadminController extends Controller {
+class SuperadminController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Module\ModuleList
@@ -24,12 +30,54 @@ class SuperadminController extends Controller {
 	 */
 	private $moduleFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
+	 */
+	private $localizedRouterFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 */
+	private $pricingSetting;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSettingFacade
+	 */
+	private $pricingSettingFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
+	 */
+	private $translator;
+
 	public function __construct(
 		ModuleList $moduleList,
-		ModuleFacade $moduleFacade
+		ModuleFacade $moduleFacade,
+		PricingSetting $pricingSetting,
+		PricingSettingFacade $pricingSettingFacade,
+		Translator $translator,
+		GridFactory $gridFactory,
+		Localization $localization,
+		LocalizedRouterFactory $localizedRouterFactory
 	) {
 		$this->moduleList = $moduleList;
 		$this->moduleFacade = $moduleFacade;
+		$this->pricingSetting = $pricingSetting;
+		$this->pricingSettingFacade = $pricingSettingFacade;
+		$this->translator = $translator;
+		$this->gridFactory = $gridFactory;
+		$this->localization = $localization;
+		$this->localizedRouterFactory = $localizedRouterFactory;
 	}
 
 	/**
@@ -61,20 +109,11 @@ class SuperadminController extends Controller {
 	 * @Route("/superadmin/pricing/")
 	 */
 	public function pricingAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$pricingSetting = $this->get('ss6.shop.pricing.pricing_setting');
-		/* @var $pricingSetting \SS6\ShopBundle\Model\Pricing\PricingSetting */
-		$pricingSettingFacade = $this->get('ss6.shop.pricing.pricing_setting_facade');
-		/* @var $pricingSettingFacade \SS6\ShopBundle\Model\Pricing\PricingSettingFacade */
-		$translator = $this->get('translator');
-		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
-
-		$form = $this->createForm(new InputPriceTypeFormType($translator));
+		$form = $this->createForm(new InputPriceTypeFormType($this->translator));
 
 		$pricingSettingData = [];
 		if (!$form->isSubmitted()) {
-			$pricingSettingData['type'] = $pricingSetting->getInputPriceType();
+			$pricingSettingData['type'] = $this->pricingSetting->getInputPriceType();
 		}
 
 		$form->setData($pricingSettingData);
@@ -82,11 +121,14 @@ class SuperadminController extends Controller {
 
 		if ($form->isValid()) {
 			$pricingSettingData = $form->getData();
-			$pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
+			$this->pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
 
-			$flashMessageSender->addSuccessFlashTwig('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno', [
-				'url' => $this->generateUrl('admin_superadmin_pricing'),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				'<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno',
+				[
+					'url' => $this->generateUrl('admin_superadmin_pricing'),
+				]
+			);
 			return $this->redirect($this->generateUrl('admin_superadmin_pricing'));
 		}
 
@@ -99,18 +141,13 @@ class SuperadminController extends Controller {
 	 * @Route("/superadmin/urls/")
 	 */
 	public function urlsAction() {
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-		$localization = $this->get('ss6.shop.localization.localization');
-		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
-
-		$allLocales = $localization->getAllLocales();
+		$allLocales = $this->localization->getAllLocales();
 		$dataSource = new ArrayDataSource($this->loadDataForUrls($allLocales));
 
-		$grid = $gridFactory->create('urlsList', $dataSource);
+		$grid = $this->gridFactory->create('urlsList', $dataSource);
 
 		foreach ($allLocales as $locale) {
-			$grid->addColumn($locale, $locale, $localization->getLanguageName($locale));
+			$grid->addColumn($locale, $locale, $this->localization->getLanguageName($locale));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Superadmin/urlsListGrid.html.twig', [
@@ -123,14 +160,11 @@ class SuperadminController extends Controller {
 	 * @return array
 	 */
 	private function loadDataForUrls(array $locales) {
-		$localizedRouterFactory = $this->get('ss6.shop.router.localized_router_factory');
-		/* @var $localizedRouterFactory \SS6\ShopBundle\Component\Router\LocalizedRouterFactory */
-
 		$data = [];
 		$requestContext = new RequestContext();
 		foreach ($locales as $locale) {
 			$rowIndex = 0;
-			$allRoutes = $localizedRouterFactory->getRouter($locale, $requestContext)
+			$allRoutes = $this->localizedRouterFactory->getRouter($locale, $requestContext)
 				->getRouteCollection()
 				->all();
 			foreach ($allRoutes as $route) {
@@ -146,8 +180,6 @@ class SuperadminController extends Controller {
 	 * @Route("/superadmin/modules/")
 	 */
 	public function modulesAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 		$form = $this->createForm(new ModulesFormType($this->moduleList));
 
 		$formData = [];
@@ -164,7 +196,7 @@ class SuperadminController extends Controller {
 				$this->moduleFacade->setEnabled($moduleName, $isEnabled);
 			}
 
-			$flashMessageSender->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
 			]);
 			return $this->redirect($this->generateUrl('admin_superadmin_modules'));

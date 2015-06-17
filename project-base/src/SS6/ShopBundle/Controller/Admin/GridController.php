@@ -2,7 +2,10 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService;
+use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,14 +13,36 @@ use Symfony\Component\HttpFoundation\Request;
 class GridController extends Controller {
 
 	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
+	 */
+	private $inlineEditService;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade
+	 */
+	private $gridOrderingFacade;
+
+	public function __construct(
+		EntityManager $em,
+		GridOrderingFacade $gridOrderingFacade,
+		InlineEditService $inlineEditService
+	) {
+		$this->em = $em;
+		$this->gridOrderingFacade = $gridOrderingFacade;
+		$this->inlineEditService = $inlineEditService;
+	}
+
+	/**
 	 * @Route("/_grid/get_form/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function getFormAction(Request $request) {
-		$inlineEditService = $this->get('ss6.shop.grid.inline_edit.inline_edit_service');
-		/* @var $inlineEditService \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService */
-
-		$renderedFormRow = $inlineEditService->getRenderedFormRow(
+		$renderedFormRow = $this->inlineEditService->getRenderedFormRow(
 			$request->get('serviceName'),
 			$request->get('rowId')
 		);
@@ -30,16 +55,13 @@ class GridController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveFormAction(Request $request) {
-		$inlineEditService = $this->get('ss6.shop.grid.inline_edit.inline_edit_service');
-		/* @var $inlineEditService \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService */
-
 		$responseData = [];
 		$rowId = $request->get('rowId');
 
 		try {
-			$rowId = $inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+			$rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
 			$responseData['success'] = true;
-			$responseData['rowHtml'] = $inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
+			$responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
 		} catch (\SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
 			$responseData['errors'] = array_unique($e->getFormErrors());
@@ -53,10 +75,11 @@ class GridController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveOrderingAction(Request $request) {
-		$gridOrderingFacade = $this->get('ss6.shop.grid.ordering.grid_ordering_facade');
-		/* @var $gridOrderingFacade \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade */
-
-		$gridOrderingFacade->saveOrdering($request->get('entityClass'), $request->get('rowIds'));
+		$this->em->transactional(
+			function () use ($request) {
+				$this->gridOrderingFacade->saveOrdering($request->get('entityClass'), $request->get('rowIds'));
+			}
+		);
 		$responseData = ['success' => true];
 
 		return new JsonResponse($responseData);

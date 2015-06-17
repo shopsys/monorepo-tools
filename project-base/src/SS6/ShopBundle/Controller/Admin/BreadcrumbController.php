@@ -2,15 +2,22 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BreadcrumbController extends Controller {
 
-	public function indexAction() {
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
 
-		$items = $breadcrumb->getItems();
+	public function __construct(Breadcrumb $breadcrumb) {
+		$this->breadcrumb = $breadcrumb;
+	}
+
+	public function indexAction() {
+		$items = $this->breadcrumb->getItems();
 
 		return $this->render('@SS6Shop/Admin/Inline/Breadcrumb/breadcrumb.html.twig', [
 			'items' => $items,

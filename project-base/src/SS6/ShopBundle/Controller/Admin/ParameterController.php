@@ -2,19 +2,44 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
 
-class ParameterController extends Controller {
+class ParameterController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
+	 */
+	private $parameterFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit
+	 */
+	private $parameterInlineEdit;
+
+	public function __construct(
+		EntityManager $em,
+		ParameterFacade $parameterFacade,
+		ParameterInlineEdit $parameterInlineEdit
+	) {
+		$this->em = $em;
+		$this->parameterFacade = $parameterFacade;
+		$this->parameterInlineEdit = $parameterInlineEdit;
+	}
 
 	/**
 	 * @Route("/product/parameter/list/")
 	 */
 	public function listAction() {
-		$parameterInlineEdit = $this->get('ss6.shop.product.parameter.parameter_inline_edit');
-		/* @var $parameterInlineEdit \SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit */
-
-		$grid = $parameterInlineEdit->getGrid();
+		$grid = $this->parameterInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/Parameter/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -26,21 +51,19 @@ class ParameterController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
-		$parameterFacade = $this->get('ss6.shop.product.parameter.parameter_facade');
-		/* @var $parameterFacade \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade */
-
 		try {
-			$fullName = $parameterFacade->getById($id)->getName();
-			$parameterFacade->deleteById($id);
+			$fullName = $this->parameterFacade->getById($id)->getName();
+			$this->em->transactional(
+				function () use ($id) {
+					$this->parameterFacade->deleteById($id);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
 			]);
 		} catch (\SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolený parametr neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolený parametr neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_parameter_list'));

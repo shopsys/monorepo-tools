@@ -6,7 +6,10 @@ use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
+use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
+use SS6\ShopBundle\Model\Cart\CartSummaryCalculation;
+use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade;
@@ -18,14 +21,24 @@ use Symfony\Component\HttpFoundation\Request;
 class CartController extends BaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade
+	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
-	private $accessoryFacade;
+	private $cart;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Cart\CartSummaryCalculation
+	 */
+	private $cartSummaryCalculation;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
+	 */
+	private $cartItemPriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
@@ -38,14 +51,19 @@ class CartController extends BaseController {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade
 	 */
-	private $freeTransportAndPaymentFacade;
+	private $accessoryFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
+	 */
+	private $freeTransportAndPaymentFacade;
 
 	public function __construct(
 		AccessoryFacade $accessoryFacade,
@@ -53,7 +71,10 @@ class CartController extends BaseController {
 		CurrentCustomer $currentCustomer,
 		Domain $domain,
 		FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
-		ProductDetailFactory $productDetailFactory
+		ProductDetailFactory $productDetailFactory,
+		CartItemPriceCalculation $cartItemPriceCalculation,
+		Cart $cart,
+		CartSummaryCalculation $cartSummaryCalculation
 	) {
 		$this->accessoryFacade = $accessoryFacade;
 		$this->cartFacade = $cartFacade;
@@ -61,6 +82,9 @@ class CartController extends BaseController {
 		$this->domain = $domain;
 		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
 		$this->productDetailFactory = $productDetailFactory;
+		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
+		$this->cart = $cart;
+		$this->cartSummaryCalculation = $cartSummaryCalculation;
 	}
 
 	/**
@@ -68,30 +92,19 @@ class CartController extends BaseController {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function indexAction(Request $request) {
-		$cart = $this->get('ss6.shop.cart');
-		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$cartItemPriceCalculation = $this->get('ss6.shop.cart.item.cart_item_price_calculation');
-		/* @var $cartItemPriceCalculation \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation */
-		$cartSummaryCalculation = $this->get('ss6.shop.cart.cart_summary_calculation');
-		/* @var $cartSummaryCalculation \SS6\ShopBundle\Model\Cart\CartSummaryCalculation */
-
 		$cartFormData = [
 			'quantities' => [],
 		];
-		foreach ($cart->getItems() as $cartItem) {
+		foreach ($this->cart->getItems() as $cartItem) {
 			$cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
 		}
 
-		$form = $this->createForm(new CartFormType($cart));
+		$form = $this->createForm(new CartFormType($this->cart));
 		$form->setData($cartFormData);
 		$form->handleRequest($request);
 		$invalidCartRecalc = false;
 
 		if ($form->isValid()) {
-			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
-			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 			try {
 				$cartFacade->changeQuantities($form->getData()['quantities']);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
@@ -102,7 +115,7 @@ class CartController extends BaseController {
 				if ($form->get('recalcToOrder')->isClicked()) {
 					return $this->redirect($this->generateUrl('front_order_index'));
 				} else {
-					$flashMessageSender->addSuccessFlash('Počet kusů položek v košíku byl úspěšně přepočítán.');
+					$this->getFlashMessageSender()->addSuccessFlash('Počet kusů položek v košíku byl úspěšně přepočítán.');
 					return $this->redirect($this->generateUrl('front_cart'));
 				}
 			}
@@ -111,18 +124,20 @@ class CartController extends BaseController {
 		}
 
 		if ($invalidCartRecalc) {
-			$flashMessageSender->addErrorFlash('Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.');
+			$this->getFlashMessageSender()->addErrorFlash(
+				'Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.'
+			);
 		}
 
-		$cartItems = $cart->getItems();
-		$cartItemPrices = $cartItemPriceCalculation->calculatePrices($cartItems);
-		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
+		$cartItems = $this->cart->getItems();
+		$cartItemPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
+		$cartSummary = $this->cartSummaryCalculation->calculateSummary($this->cart);
 		/* @var $cartSummary \SS6\ShopBundle\Model\Cart\CartSummary */
 		$productsPriceWithVat = $cartSummary->getPriceWithVat();
 		$domainId = $this->domain->getId();
 
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
-			'cart' => $cart,
+			'cart' => $this->cart,
 			'cartItems' => $cartItems,
 			'cartItemPrices' => $cartItemPrices,
 			'cartSummary' => $cartSummary,
@@ -134,15 +149,10 @@ class CartController extends BaseController {
 	}
 
 	public function boxAction() {
-		$cart = $this->get('ss6.shop.cart');
-		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-		$cartSummaryCalculation = $this->get('ss6.shop.cart.cart_summary_calculation');
-		/* @var $cartSummaryCalculation \SS6\ShopBundle\Model\Cart\CartSummaryCalculation */
-
-		$cartSummary = $cartSummaryCalculation->calculateSummary($cart);
+		$cartSummary = $this->cartSummaryCalculation->calculateSummary($this->cart);
 
 		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', [
-			'cart' => $cart,
+			'cart' => $this->cart,
 			'cartSummary' => $cartSummary,
 		]);
 	}
@@ -166,9 +176,6 @@ class CartController extends BaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function addProductAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
 		$form = $this->createForm(new AddProductFormType(), null, [
 			'method' => 'POST',
 		]);
@@ -177,20 +184,18 @@ class CartController extends BaseController {
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
-				$cartFacade = $this->get('ss6.shop.cart.cart_facade');
-				/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 				$addProductResult = $cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-				$flashMessageSender->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
+				$this->getFlashMessageSender()->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$flashMessageSender->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
-				$flashMessageSender->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
 			}
 		} else {
-			$flashMessageSender->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+			$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
 		}
 
 		if ($this->getRequest()->headers->get('referer')) {
@@ -272,27 +277,22 @@ class CartController extends BaseController {
 	 * @param int $cartItemId
 	 */
 	public function deleteAction(Request $request, $cartItemId) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
 		$cartItemId = (int)$cartItemId;
 		$token = $request->query->get('_token');
 
 		if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
-			$cartFacade = $this->get('ss6.shop.cart.cart_facade');
-			/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 			try {
 				$productName = $cartFacade->getProductByCartItemId($cartItemId)->getName();
 				$cartFacade->deleteCartItem($cartItemId);
-				$flashMessageSender->addSuccessFlashTwig(
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					'Z košíku bylo odstraněno zboží {{ name }}',
 					['name' => $productName]
 				);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
-				$flashMessageSender->addErrorFlash('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
+				$this->getFlashMessageSender()->addErrorFlash('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
 			}
 		} else {
-			$flashMessageSender->addErrorFlash('Nepodařilo se odstranit položku z košíku.
+			$this->getFlashMessageSender()->addErrorFlash('Nepodařilo se odstranit položku z košíku.
 					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.');
 		}
 

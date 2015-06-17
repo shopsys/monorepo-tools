@@ -3,12 +3,31 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
+use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Setting\Setting;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerCommunicationController extends Controller {
+class CustomerCommunicationController extends BaseController {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 */
+	private $setting;
+
+	public function __construct(
+		Setting $setting,
+		SelectedDomain $selectedDomain
+	) {
+		$this->setting = $setting;
+		$this->selectedDomain = $selectedDomain;
+	}
 
 	/**
 	 * @Route("/customer_communication/")
@@ -21,14 +40,7 @@ class CustomerCommunicationController extends Controller {
 	 * @Route("/customer_communication/order_submitted/")
 	 */
 	public function orderSubmittedAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$setting = $this->get('ss6.shop.setting');
-		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
-
-		$data = $setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $selectedDomain->getId());
+		$data = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());
 		$form = $this->createForm(new CustomerCommunicationFormType());
 
 		$form->setData(['content' => $data]);
@@ -36,9 +48,10 @@ class CustomerCommunicationController extends Controller {
 
 		if ($form->isValid()) {
 			$formData = $form->getData();
-			$setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $selectedDomain->getId());
+			$this->setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $this->selectedDomain->getId());
 
-			$flashMessageSender->addSuccessFlash('Nastavení textu po potvrzení objednávky bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlash('Nastavení textu po potvrzení objednávky bylo upraveno');
+
 			return $this->redirect($this->generateUrl('admin_customercommunication_ordersubmitted'));
 		}
 

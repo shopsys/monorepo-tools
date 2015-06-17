@@ -2,32 +2,63 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AvailabilityController extends Controller {
+class AvailabilityController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
+	 */
+	private $confirmDeleteResponseFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade
+	 */
+	private $availabilityFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit
+	 */
+	private $availabilityInlineEdit;
 
 	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
 
-	public function __construct(Translator $translator) {
+	public function __construct(
+		Translator $translator,
+		EntityManager $em,
+		AvailabilityFacade $availabilityFacade,
+		AvailabilityInlineEdit $availabilityInlineEdit,
+		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
+	) {
 		$this->translator = $translator;
+		$this->em = $em;
+		$this->availabilityFacade = $availabilityFacade;
+		$this->availabilityInlineEdit = $availabilityInlineEdit;
+		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
 	}
 
 	/**
 	 * @Route("/product/availability/list/")
 	 */
 	public function listAction() {
-		$availabilityInlineEdit = $this->get('ss6.shop.product.availability.availability_inline_edit');
-		/* @var $availabilityInlineEdit \SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit */
-
-		$grid = $availabilityInlineEdit->getGrid();
+		$grid = $this->availabilityInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -40,25 +71,23 @@ class AvailabilityController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
-		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
-		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
-
 		$newId = $request->get('newId');
 
 		try {
-			$fullName = $availabilityFacade->getById($id)->getName();
-			$availabilityFacade->deleteById($id, $newId);
+			$fullName = $this->availabilityFacade->getById($id)->getName();
+			$this->em->transactional(
+				function () use ($id, $newId) {
+					$this->availabilityFacade->deleteById($id, $newId);
+				}
+			);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byl smazána', [
+				$this->getFlashMessageSender()->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', [
 					'name' => $fullName,
 				]);
 			} else {
-				$newAvailability = $availabilityFacade->getById($newId);
-				$flashMessageSender->addSuccessFlashTwig('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
+				$newAvailability = $this->availabilityFacade->getById($newId);
+				$this->getFlashMessageSender()->addSuccessFlashTwig('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
 					. ' <strong>{{ newName }}</strong> a byla smazána.',
 					[
 						'oldName' => $fullName,
@@ -67,7 +96,7 @@ class AvailabilityController extends Controller {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolená dostupnost neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolená dostupnost neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_availability_list'));
@@ -78,15 +107,10 @@ class AvailabilityController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {
-		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
-		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
-		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
-		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */;
-
 		try {
-			$availability = $availabilityFacade->getById($id);
-			$isAvailabilityDefault = $availabilityFacade->isAvailabilityDefault($availability);
-			if ($availabilityFacade->isAvailabilityUsed($availability) || $isAvailabilityDefault) {
+			$availability = $this->availabilityFacade->getById($id);
+			$isAvailabilityDefault = $this->availabilityFacade->isAvailabilityDefault($availability);
+			if ($this->availabilityFacade->isAvailabilityUsed($availability) || $isAvailabilityDefault) {
 				if ($isAvailabilityDefault) {
 					$message = $this->translator->trans(
 						'Dostupnost "%name%" je nastavena jako výchozí. '
@@ -102,10 +126,11 @@ class AvailabilityController extends Controller {
 					);
 				}
 				$availabilityNamesById = [];
-				foreach ($availabilityFacade->getAllExceptId($id) as $newAvailabilty) {
+				foreach ($this->availabilityFacade->getAllExceptId($id) as $newAvailabilty) {
 					$availabilityNamesById[$newAvailabilty->getId()] = $newAvailabilty->getName();
 				}
-				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+
+				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
 					$message,
 					'admin_availability_delete',
 					$id,
@@ -117,7 +142,7 @@ class AvailabilityController extends Controller {
 					['%name%' => $availability->getName()]
 				);
 
-				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
+				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
 			return new Response($this->translator->trans('Zvolená dostupnost neexistuje'));
@@ -129,16 +154,11 @@ class AvailabilityController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function settingAction(Request $request) {
-		$availabilityFacade = $this->get('ss6.shop.product.availability.availability_facade');
-		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
-		$availabilities = $availabilityFacade->getAll();
+		$availabilities = $this->availabilityFacade->getAll();
 		$form = $this->createForm(new AvailabilitySettingFormType($availabilities));
 
 		$availabilitySettingsFormData = [];
-		$availabilitySettingsFormData['defaultInStockAvailability'] = $availabilityFacade->getDefaultInStockAvailability();
+		$availabilitySettingsFormData['defaultInStockAvailability'] = $this->availabilityFacade->getDefaultInStockAvailability();
 
 		$form->setData($availabilitySettingsFormData);
 
@@ -146,8 +166,8 @@ class AvailabilityController extends Controller {
 
 		if ($form->isValid()) {
 			$availabilitySettingsFormData = $form->getData();
-			$availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
-			$flashMessageSender->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
+			$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_availability_list'));
 		}

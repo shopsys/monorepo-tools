@@ -2,17 +2,27 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
+use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends BaseController {
@@ -37,65 +47,125 @@ class ProductController extends BaseController {
 	 */
 	private $gridFactory;
 
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 */
+	private $productEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 */
+	private $productDetailFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory
+	 */
+	private $productEditFormTypeFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditDataFactory
+	 */
+	private $productEditDataFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 */
+	private $pricingGroupFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 */
+	private $administratorGridFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+	 */
+	private $productListAdminFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
+	 */
+	private $advancedSearchFacade;
+
 	public function __construct(
 		CategoryFacade $categoryFacade,
 		Translator $translator,
 		ProductMassActionFacade $productMassActionFacade,
-		GridFactory $gridFactory
+		GridFactory $gridFactory,
+		EntityManager $em,
+		ProductEditFacade $productEditFacade,
+		ProductDetailFactory $productDetailFactory,
+		ProductEditFormTypeFactory $productEditFormTypeFactory,
+		ProductEditDataFactory $productEditDataFactory,
+		Breadcrumb $breadcrumb,
+		PricingGroupFacade $pricingGroupFacade,
+		AdministratorGridFacade $administratorGridFacade,
+		ProductListAdminFacade $productListAdminFacade,
+		AdvancedSearchFacade $advancedSearchFacade
 	) {
 		$this->categoryFacade = $categoryFacade;
 		$this->translator = $translator;
 		$this->productMassActionFacade = $productMassActionFacade;
 		$this->gridFactory = $gridFactory;
+		$this->em = $em;
+		$this->productEditFacade = $productEditFacade;
+		$this->productDetailFactory = $productDetailFactory;
+		$this->productEditFormTypeFactory = $productEditFormTypeFactory;
+		$this->productEditDataFactory = $productEditDataFactory;
+		$this->breadcrumb = $breadcrumb;
+		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->administratorGridFacade = $administratorGridFacade;
+		$this->productListAdminFacade = $productListAdminFacade;
+		$this->advancedSearchFacade = $advancedSearchFacade;
 	}
 
 	/**
 	 * @Route("/product/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$productDetailFactory = $this->get('ss6.shop.product.product_detail_factory');
-		/* @var $productDetailFactory \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory */
-		$productEditFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_edit_form_type_factory');
-		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
-		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
-		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+		$product = $this->productEditFacade->getById($id);
 
-		$product = $productEditFacade->getById($id);
-
-		$form = $this->createForm($productEditFormTypeFactory->create($product));
-		$productEditData = $productEditDataFactory->createFromProduct($product);
+		$form = $this->createForm($this->productEditFormTypeFactory->create($product));
+		$productEditData = $this->productEditDataFactory->createFromProduct($product);
 
 		$form->setData($productEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$productEditFacade->edit($id, $form->getData());
+			$this->em->transactional(
+				function () use ($id, $form) {
+					$this->productEditFacade->edit($id, $form->getData());
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', [
 				'name' => $product->getName(),
 			]);
 			return $this->redirect($this->generateUrl('admin_product_edit', ['id' => $product->getId()]));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zboží - ') . $product->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zboží - ') . $product->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', [
 			'form' => $form->createView(),
 			'product' => $product,
-			'productDetail' => $productDetailFactory->getDetailForProduct($product),
-			'productSellingPricesIndexedByDomainId' => $productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
+			'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
+			'productSellingPricesIndexedByDomainId' => $this->productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
 			'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
 		]);
 	}
@@ -105,28 +175,21 @@ class ProductController extends BaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$productEditFormTypeFactory = $this->get('ss6.shop.form.admin.product.product_edit_form_type_factory');
-		/* @var $productEditFormTypeFactory \SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory */
-		$productEditDataFactory = $this->get('ss6.shop.product.product_edit_data_factory');
-		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
-		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+		$form = $this->createForm($this->productEditFormTypeFactory->create());
 
-		$form = $this->createForm($productEditFormTypeFactory->create());
-
-		$productEditData = $productEditDataFactory->createDefault();
+		$productEditData = $this->productEditDataFactory->createDefault();
 
 		$form->setData($productEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-			/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-			$product = $productEditFacade->create($form->getData());
+			$product = $this->em->transactional(
+				function () use ($form) {
+					return $this->productEditFacade->create($form->getData());
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Bylo vytvořeno zboží'
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo vytvořeno zboží'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
 				'name' => $product->getName(),
 				'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
@@ -135,12 +198,12 @@ class ProductController extends BaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', [
 			'form' => $form->createView(),
-			'pricingGroupsIndexedByDomainId' => $pricingGroupFacade->getAllIndexedByDomainId(),
+			'pricingGroupsIndexedByDomainId' => $this->pricingGroupFacade->getAllIndexedByDomainId(),
 		]);
 	}
 
@@ -149,16 +212,10 @@ class ProductController extends BaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
-		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
-		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$productListAdminFacade = $this->get('ss6.shop.product.list.product_list_admin_facade');
-		/* @var $productListAdminFacade \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade */
-		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
-		/* @var $advancedSearchFacade \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade */
 
-		$advancedSearchForm = $advancedSearchFacade->createAdvancedSearchForm($request);
+		$advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
 		$advancedSearchData = $advancedSearchForm->getData();
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
@@ -172,11 +229,11 @@ class ProductController extends BaseController {
 		$massActionForm = $this->createForm(new ProductMassActionFormType($this->translator));
 		$massActionForm->handleRequest($request);
 
-		$isAdvancedSearchFormSubmitted = $advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
+		$isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
 		if ($isAdvancedSearchFormSubmitted) {
-			$queryBuilder = $advancedSearchFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
+			$queryBuilder = $this->advancedSearchFacade->getQueryBuilderByAdvancedSearchData($advancedSearchData);
 		} else {
-			$queryBuilder = $productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
+			$queryBuilder = $this->productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
 		}
 
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
@@ -209,14 +266,14 @@ class ProductController extends BaseController {
 			return $this->redirect($this->getRequest()->headers->get('referer', $this->generateUrl('admin_product_list')));
 		}
 
-		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
+		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
 			'advancedSearchForm' => $advancedSearchForm->createView(),
 			'massActionForm' => $massActionForm->createView(),
-			'isAdvancedSearchFormSubmitted' => $advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
+			'isAdvancedSearchFormSubmitted' => $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request),
 		]);
 	}
 
@@ -225,20 +282,19 @@ class ProductController extends BaseController {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-
 		try {
-			$productName = $productEditFacade->getById($id)->getName();
-			$productEditFacade->delete($id);
+			$productName = $this->productEditFacade->getById($id)->getName();
+			$this->em->transactional(
+				function () use ($id) {
+					$this->productEditFacade->delete($id);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', [
 				'name' => $productName,
 			]);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolený produkt neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolený produkt neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_product_list'));
@@ -249,10 +305,7 @@ class ProductController extends BaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function getRuleFormAction(Request $request) {
-		$advancedSearchFacade = $this->get('ss6.shop.advanced_search.advanced_search_facade');
-		/* @var $advancedSearchFacade \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade */
-
-		$ruleForm = $advancedSearchFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
+		$ruleForm = $this->advancedSearchFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
 		return $this->render('@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),

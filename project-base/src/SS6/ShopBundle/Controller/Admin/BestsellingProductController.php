@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
@@ -15,19 +16,24 @@ use Symfony\Component\HttpFoundation\Request;
 class BestsellingProductController extends BaseController {
 
 	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade
@@ -38,12 +44,14 @@ class BestsellingProductController extends BaseController {
 		BestsellingProductFacade $bestsellingProductFacade,
 		CategoryFacade $categoryFacade,
 		SelectedDomain $selectedDomain,
-		Breadcrumb $breadcrumb
+		Breadcrumb $breadcrumb,
+		EntityManager $em
 	) {
 		$this->bestsellingProductFacade = $bestsellingProductFacade;
 		$this->categoryFacade = $categoryFacade;
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
+		$this->em = $em;
 	}
 
 	/**
@@ -84,10 +92,14 @@ class BestsellingProductController extends BaseController {
 		if ($form->isValid()) {
 			$formBestsellingProducts = $form->getData()['bestsellingProducts'];
 
-			$this->bestsellingProductFacade->edit(
-				$category,
-				$domainId,
-				$formBestsellingProducts
+			$this->em->transactional(
+				function () use ($category, $domainId, $formBestsellingProducts) {
+					$this->bestsellingProductFacade->edit(
+						$category,
+						$domainId,
+						$formBestsellingProducts
+					);
+				}
 			);
 
 			$this->getFlashMessageSender()

@@ -2,22 +2,58 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
+use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
+use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class OrderController extends Controller {
+class OrderController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 */
+	private $administratorGridFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
+	 */
+	private $advancedSearchOrderFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+	 */
+	private $orderItemPriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
@@ -25,9 +61,9 @@ class OrderController extends Controller {
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
+	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
 	 */
-	private $advancedSearchOrderFacade;
+	private $orderRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
@@ -43,12 +79,24 @@ class OrderController extends Controller {
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
 		OrderStatusRepository $orderStatusRepository,
-		Translator $translator
+		Translator $translator,
+		OrderRepository $orderRepository,
+		OrderItemPriceCalculation $orderItemPriceCalculation,
+		AdministratorGridFacade $administratorGridFacade,
+		GridFactory $gridFactory,
+		Breadcrumb $breadcrumb,
+		EntityManager $em
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->translator = $translator;
+		$this->orderRepository = $orderRepository;
+		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
+		$this->administratorGridFacade = $administratorGridFacade;
+		$this->gridFactory = $gridFactory;
+		$this->breadcrumb = $breadcrumb;
+		$this->em = $em;
 	}
 
 	/**
@@ -58,14 +106,7 @@ class OrderController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$orderRepository = $this->get('ss6.shop.order.order_repository');
-		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-		$orderItemPriceCalculation = $this->get('ss6.shop.order.item.order_item_price_calculation');
-		/* @var $orderItemPriceCalculation \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation */
-
-		$order = $orderRepository->getById($id);
+		$order = $this->orderRepository->getById($id);
 		$allOrderStatuses = $this->orderStatusRepository->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStatuses));
 
@@ -79,9 +120,13 @@ class OrderController extends Controller {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$order = $this->orderFacade->edit($id, $orderData);
+				$order = $this->em->transactional(
+					function () use ($id, $orderData) {
+						return $this->orderFacade->edit($id, $orderData);
+					}
+				);
 
-				$flashMessageSender->addSuccessFlashTwig('Byla upravena objednávka č.'
+				$this->getFlashMessageSender()->addSuccessFlashTwig('Byla upravena objednávka č.'
 						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', [
 					'number' => $order->getNumber(),
 					'url' => $this->generateUrl('admin_order_edit', ['id' => $order->getId()]),
@@ -89,22 +134,20 @@ class OrderController extends Controller {
 				return $this->redirect($this->generateUrl('admin_order_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			$flashMessageSender->addErrorFlash('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
+			$this->getFlashMessageSender()->addErrorFlash('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$flashMessageSender->addErrorFlash('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+			$this->getFlashMessageSender()->addErrorFlash('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
 		} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
-			$flashMessageSender->addErrorFlash('Nepodařilo se odeslat aktualizační email');
+			$this->getFlashMessageSender()->addErrorFlash('Nepodařilo se odeslat aktualizační email');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace objednávky - č. ') . $order->getNumber()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace objednávky - č. ') . $order->getNumber()));
 
-		$orderItemTotalPricesById = $orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
+		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', [
 			'form' => $form->createView(),
@@ -118,12 +161,8 @@ class OrderController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
-		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
-		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
 
 		$advancedSearchForm = $this->advancedSearchOrderFacade->createAdvancedSearchOrderForm($request);
 		$advancedSearchData = $advancedSearchForm->getData();
@@ -147,7 +186,7 @@ class OrderController extends Controller {
 			}
 		);
 
-		$grid = $gridFactory->create('orderList', $dataSource);
+		$grid = $this->gridFactory->create('orderList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
@@ -166,7 +205,7 @@ class OrderController extends Controller {
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');
 
-		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
+		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -191,22 +230,19 @@ class OrderController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$orderRepository = $this->get('ss6.shop.order.order_repository');
-		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-
 		try {
-			$orderNumber = $orderRepository->getById($id)->getNumber();
-			$orderFacade = $this->get('ss6.shop.order.order_facade');
-			/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-			$orderFacade->deleteById($id);
+			$orderNumber = $this->orderRepository->getById($id)->getNumber();
+			$this->em->transactional(
+				function () use ($id) {
+					$this->orderFacade->deleteById($id);
+				}
+			);
 
-			$flashMessageSender->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', [
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', [
 				'number' => $orderNumber,
 			]);
 		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolená objednávka neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolená objednávka neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_order_list'));

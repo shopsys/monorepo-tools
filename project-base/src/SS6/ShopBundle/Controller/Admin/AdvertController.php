@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
@@ -21,34 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
 class AdvertController extends BaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertEditFacade
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	private $advertEditFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
-	 */
-	private $administratorGridFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
-	 */
-	private $gridFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
-	 */
-	private $breadcrumb;
-
-	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
-	 */
-	private $advertFormTypeFactory;
+	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Translation\Translator
@@ -56,9 +32,39 @@ class AdvertController extends BaseController {
 	private $translator;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 */
+	private $administratorGridFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Advert\AdvertEditFacade
+	 */
+	private $advertEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
+	 */
+	private $advertFormTypeFactory;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionList
 	 */
 	private $advertPositionList;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
 
 	public function __construct(
 		AdvertEditFacade $advertEditFacade,
@@ -68,7 +74,8 @@ class AdvertController extends BaseController {
 		Breadcrumb $breadcrumb,
 		AdvertFormTypeFactory $advertFormTypeFactory,
 		Translator $translator,
-		AdvertPositionList $advertPositionList
+		AdvertPositionList $advertPositionList,
+		EntityManager $em
 	) {
 		$this->advertEditFacade = $advertEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -78,6 +85,7 @@ class AdvertController extends BaseController {
 		$this->advertFormTypeFactory = $advertFormTypeFactory;
 		$this->translator = $translator;
 		$this->advertPositionList = $advertPositionList;
+		$this->em = $em;
 	}
 
 	/**
@@ -99,7 +107,11 @@ class AdvertController extends BaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->advertEditFacade->edit($id, $advertData);
+			$this->em->transactional(
+				function () use ($id, $advertData) {
+					$this->advertEditFacade->edit($id, $advertData);
+				}
+			);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla upravena', [
@@ -184,7 +196,11 @@ class AdvertController extends BaseController {
 		if ($form->isValid()) {
 			$advertData = $form->getData();
 
-			$advert = $this->advertEditFacade->create($advertData);
+			$advert = $this->em->transactional(
+				function () use ($advertData) {
+					return $this->advertEditFacade->create($advertData);
+				}
+			);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla vytvořena', [
@@ -209,7 +225,11 @@ class AdvertController extends BaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->advertEditFacade->getById($id)->getName();
-			$this->advertEditFacade->delete($id);
+			$this->em->transactional(
+				function () use ($id) {
+					$this->advertEditFacade->delete($id);
+				}
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla smazána', [
 				'name' => $fullName,

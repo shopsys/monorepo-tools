@@ -2,29 +2,79 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
+use SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory;
+use SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PricingGroupController extends Controller {
+class PricingGroupController extends BaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
+	 */
+	private $paymentEditFormTypeFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
+	 */
+	private $paymentDetailFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\Grid\PaymentGridFactory
+	 */
+	private $paymentGridFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditDataFactory
+	 */
+	private $paymentEditDataFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 */
+	private $paymentEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 */
+	private $currencyFacade;
 
 	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
-	 */
-	private $pricingGroupSettingFacade;
-
-	public function __construct(Translator $translator, PricingGroupSettingFacade $pricingGroupSettingFacade) {
+	public function __construct(
+		Translator $translator,
+		PricingGroupSettingFacade $pricingGroupSettingFacade,
+		EntityManager $em,
+		PricingGroupFacade $pricingGroupFacade,
+		PricingGroupInlineEdit $pricingGroupInlineEdit,
+		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
+	) {
 		$this->translator = $translator;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
+		$this->em = $em;
+		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->pricingGroupInlineEdit = $pricingGroupInlineEdit;
+		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
 	}
 
 	/**
@@ -32,10 +82,7 @@ class PricingGroupController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction() {
-		$pricingGroupInlineEdit = $this->get('ss6.shop.pricing.group.grid.pricing_group_inline_edit');
-		/* @var $pricingGroupInlineEdit \SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit */
-
-		$grid = $pricingGroupInlineEdit->getGrid();
+		$grid = $this->pricingGroupInlineEdit->getGrid();
 
 		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -48,25 +95,24 @@ class PricingGroupController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
-
 		$newId = $request->get('newId');
 		$newId = $newId !== null ? (int)$newId : null;
 
 		try {
-			$name = $pricingGroupFacade->getById($id)->getName();
-			$pricingGroupFacade->delete($id, $newId);
+			$name = $this->pricingGroupFacade->getById($id)->getName();
+			$this->em->transactional(
+				function () use ($id, $newId) {
+					$this->pricingGroupFacade->delete($id, $newId);
+				}
+			);
 
 			if ($newId === null) {
-				$flashMessageSender->addSuccessFlashTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', [
+				$this->getFlashMessageSender()->addSuccessFlashTwig('Cenová skupina <strong>{{ name }}</strong> byla smazána', [
 					'name' => $name,
 				]);
 			} else {
-				$newPricingGroup = $pricingGroupFacade->getById($newId);
-				$flashMessageSender->addSuccessFlashTwig(
+				$newPricingGroup = $this->pricingGroupFacade->getById($newId);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					'Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou'
 					. ' <strong>{{ newName }}</strong>.',
 					[
@@ -75,7 +121,7 @@ class PricingGroupController extends Controller {
 					]);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolená cenová skupina neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolená cenová skupina neexistuje.');
 		}
 
 		return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
@@ -86,15 +132,10 @@ class PricingGroupController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {
-		$pricingGroupFacade = $this->get('ss6.shop.pricing.group.pricing_group_facade');
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
-		$confirmDeleteResponseFactory = $this->get('ss6.shop.confirm_delete.confirm_delete_response_factory');
-		/* @var $confirmDeleteResponseFactory \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory */
-
 		try {
-			$pricingGroup = $pricingGroupFacade->getById($id);
+			$pricingGroup = $this->pricingGroupFacade->getById($id);
 			$pricingGroupsNamesById = [];
-			$pricingGroups = $pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
+			$pricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
 			foreach ($pricingGroups as $newPricingGroup) {
 				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
 			}
@@ -114,7 +155,7 @@ class PricingGroupController extends Controller {
 					);
 				}
 
-				return $confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
 					$message,
 					'admin_pricinggroup_delete',
 					$id,
@@ -125,7 +166,7 @@ class PricingGroupController extends Controller {
 					'Opravdu si přejete trvale odstranit cenovou skupinu "%name%"? Nikde není použita.',
 					['%name%' => $pricingGroup->getName()]
 				);
-				return $confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
+				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
@@ -138,9 +179,6 @@ class PricingGroupController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function settingsAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-
 		$pricingGroups = $this->pricingGroupSettingFacade->getPricingGroupsBySelectedDomainId();
 		$form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
 
@@ -155,7 +193,7 @@ class PricingGroupController extends Controller {
 		if ($form->isValid()) {
 			$pricingGroupSettingsFormData = $form->getData();
 			$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
-			$flashMessageSender->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
 		}

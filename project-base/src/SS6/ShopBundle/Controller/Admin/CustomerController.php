@@ -2,24 +2,29 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
+use SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
+use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\CustomerListAdminFacade;
-use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerController extends Controller {
+class CustomerController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
@@ -36,14 +41,63 @@ class CustomerController extends Controller {
 	 */
 	private $customerListAdminFacade;
 
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 */
+	private $customerEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
+	 */
+	private $customerFormTypeFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 */
+	private $breadcrumb;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 */
+	private $administratorGridFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 */
+	private $gridFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		Translator $translator,
-		CustomerListAdminFacade $customerListAdminFacade
+		CustomerListAdminFacade $customerListAdminFacade,
+		EntityManager $em,
+		CustomerEditFacade $customerEditFacade,
+		CustomerFormTypeFactory $customerFormTypeFactory,
+		Breadcrumb $breadcrumb,
+		AdministratorGridFacade $administratorGridFacade,
+		GridFactory $gridFactory,
+		SelectedDomain $selectedDomain
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
 		$this->customerListAdminFacade = $customerListAdminFacade;
+		$this->em = $em;
+		$this->customerEditFacade = $customerEditFacade;
+		$this->customerFormTypeFactory = $customerFormTypeFactory;
+		$this->breadcrumb = $breadcrumb;
+		$this->administratorGridFacade = $administratorGridFacade;
+		$this->gridFactory = $gridFactory;
+		$this->selectedDomain = $selectedDomain;
 	}
 
 	/**
@@ -52,15 +106,8 @@ class CustomerController extends Controller {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
-		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
-		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory */
-
-		$user = $customerEditFacade->getUserById($id);
-		$form = $this->createForm($customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
+		$user = $this->customerEditFacade->getUserById($id);
+		$form = $this->createForm($this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
 
 		try {
 			$customerData = new CustomerData();
@@ -73,12 +120,19 @@ class CustomerController extends Controller {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$customerEditFacade->editByAdmin($id, $customerData);
+				$this->em->transactional(
+					function () use ($id, $customerData) {
+						$this->customerEditFacade->editByAdmin($id, $customerData);
+					}
+				);
 
-				$flashMessageSender->addSuccessFlashTwig('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $user->getFullName(),
-					'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					'Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>',
+					[
+						'name' => $user->getFullName(),
+						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
+					]
+				);
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -86,12 +140,10 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$breadcrumb = $this->get('ss6.shop.admin_navigation.breadcrumb');
-		/* @var $breadcrumb \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb */
-		$breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zákazníka - ') . $user->getFullName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zákazníka - ') . $user->getFullName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', [
 			'form' => $form->createView(),
@@ -105,14 +157,8 @@ class CustomerController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function listAction(Request $request) {
-		$administratorGridFacade = $this->get('ss6.shop.administrator.administrator_grid_facade');
-		/* @var $administratorGridFacade \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade */
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$gridFactory = $this->get('ss6.shop.grid.factory');
-		/* @var $gridFactory \SS6\ShopBundle\Model\Grid\GridFactory */
-		$selectedDomain = $this->get('ss6.shop.domain.selected_domain');
-		/* @var $selectedDomain \SS6\ShopBundle\Model\Domain\SelectedDomain */
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
 		$quickSearchForm->setData(new QuickSearchFormData());
@@ -120,12 +166,13 @@ class CustomerController extends Controller {
 		$quickSearchData = $quickSearchForm->getData();
 
 		$queryBuilder = $this->customerListAdminFacade->getCustomerListQueryBuilderByQuickSearchData(
-			$selectedDomain->getId(),
+			$this->selectedDomain->getId(),
 			$quickSearchData
 		);
+
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
 
-		$grid = $gridFactory->create('customerList', $dataSource);
+		$grid = $this->gridFactory->create('customerList', $dataSource);
 		$grid->allowPaging();
 		$grid->setDefaultOrder('name');
 
@@ -147,7 +194,7 @@ class CustomerController extends Controller {
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');
 
-		$administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
+		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', [
 			'gridView' => $grid->createView(),
@@ -160,13 +207,8 @@ class CustomerController extends Controller {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$customerFormTypeFactory = $this->get('ss6.shop.form.admin.customer_form_type_factory');
-		/* @var $customerFormTypeFactory \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory */
-
 		$form = $this->createForm(
-			$customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
+			$this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
 			null,
 			['validation_groups' => ['Default', CustomerFormType::SCENARIO_CREATE]]
 		);
@@ -183,15 +225,20 @@ class CustomerController extends Controller {
 
 			if ($form->isValid()) {
 				$customerData = $form->getData();
-				$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
-				/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-				$user = $customerEditFacade->create($customerData);
+				$user = $this->em->transactional(
+					function () use ($customerData) {
+						return $this->customerEditFacade->create($customerData);
+					}
+				);
 
-				$flashMessageSender->addSuccessFlashTwig('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $user->getFullName(),
-					'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					'Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>',
+					[
+						'name' => $user->getFullName(),
+						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
+					]
+				);
 				return $this->redirect($this->generateUrl('admin_customer_list'));
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
@@ -199,7 +246,7 @@ class CustomerController extends Controller {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageSender->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', [
@@ -212,19 +259,18 @@ class CustomerController extends Controller {
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
-		$customerEditFacade = $this->get('ss6.shop.customer.customer_edit_facade');
-		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
-
 		try {
-			$fullName = $customerEditFacade->getUserById($id)->getFullName();
-			$customerEditFacade->delete($id);
-			$flashMessageSender->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', [
+			$fullName = $this->customerEditFacade->getUserById($id)->getFullName();
+			$this->em->transactional(
+				function () use ($id) {
+					$this->customerEditFacade->delete($id);
+				}
+			);
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', [
 				'name' => $fullName,
 			]);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
-			$flashMessageSender->addErrorFlash('Zvolený zákazník neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash('Zvolený zákazník neexistuje');
 		}
 
 		return $this->redirect($this->generateUrl('admin_customer_list'));
