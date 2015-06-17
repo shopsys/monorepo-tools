@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
@@ -37,18 +38,25 @@ class ProductEditDataFactory {
 	 */
 	private $friendlyUrlFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository
+	 */
+	private $accessoryRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductDataFactory $productDataFactory,
 		ProductInputPriceFacade $productInputPriceFacade,
-		FriendlyUrlFacade $friendlyUrlFacade
+		FriendlyUrlFacade $friendlyUrlFacade,
+		AccessoryRepository $accessoryRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productDataFactory = $productDataFactory;
 		$this->productInputPriceFacade = $productInputPriceFacade;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
+		$this->accessoryRepository = $accessoryRepository;
 	}
 
 	/**
@@ -64,6 +72,7 @@ class ProductEditDataFactory {
 		$productEditData->manualInputPrices = [];
 		$productEditData->seoTitles = [];
 		$productEditData->seoMetaDescriptions = [];
+		$productEditData->accessories = [];
 
 		$productEditData->urls[UrlListType::TO_DELETE] = [];
 		$productEditData->urls[UrlListType::MAIN_ON_DOMAINS] = [];
@@ -101,6 +110,12 @@ class ProductEditDataFactory {
 			$productEditData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 		}
+
+		$productAccessories = [];
+		foreach ($this->accessoryRepository->getAllByProduct($product) as $productAccessory) {
+			$productAccessories[$productAccessory->getPosition()] = $productAccessory->getAccessory();
+		}
+		$productEditData->accessories = $productAccessories;
 
 		return $productEditData;
 	}

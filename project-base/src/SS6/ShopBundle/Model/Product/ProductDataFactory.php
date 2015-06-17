@@ -81,7 +81,6 @@ class ProductDataFactory {
 
 		$productData->categories = $product->getCategories()->toArray();
 		$productData->priceCalculationType = $product->getPriceCalculationType();
-		$productData->accessories = $product->getAccessories();
 
 		return $productData;
 	}

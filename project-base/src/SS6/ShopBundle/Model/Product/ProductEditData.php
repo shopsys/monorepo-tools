@@ -48,6 +48,11 @@ class ProductEditData {
 	public $urls;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public $accessories;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
@@ -55,6 +60,7 @@ class ProductEditData {
 	 * @param string[] $manualInputPrices
 	 * @param string[] $seoTitles
 	 * @param string[] $seoMetaDescriptions
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
 	 */
 	public function __construct(
 		ProductData $productData = null,
@@ -63,7 +69,8 @@ class ProductEditData {
 		array $imagesToDelete = [],
 		array $manualInputPrices = [],
 		array $seoTitles = [],
-		array $seoMetaDescriptions = []
+		array $seoMetaDescriptions = [],
+		array $accessories = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -78,6 +85,7 @@ class ProductEditData {
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
 		$this->urls[UrlListType::TO_DELETE] = [];
 		$this->urls[UrlListType::MAIN_ON_DOMAINS] = [];
+		$this->accessories = $accessories;
 	}
 
 }

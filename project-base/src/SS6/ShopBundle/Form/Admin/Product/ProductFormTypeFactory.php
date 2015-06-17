@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
@@ -37,25 +36,18 @@ class ProductFormTypeFactory {
 	 */
 	private $translator;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
-	 */
-	private $removeDuplicatesFromArrayTransformer;
-
 	public function __construct(
 		VatRepository $vatRepository,
 		AvailabilityRepository $availabilityRepository,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		FlagRepository $flagRepository,
-		Translator $translator,
-		RemoveDuplicatesFromArrayTransformer $removeDuplicatesFromArrayTransformer
+		Translator $translator
 	) {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flagRepository = $flagRepository;
 		$this->translator = $translator;
-		$this->removeDuplicatesFromArrayTransformer = $removeDuplicatesFromArrayTransformer;
 	}
 
 	/**
@@ -73,7 +65,6 @@ class ProductFormTypeFactory {
 			$this->inverseArrayValuesTransformer,
 			$flags,
 			$this->translator,
-			$this->removeDuplicatesFromArrayTransformer,
 			$product
 		);
 	}

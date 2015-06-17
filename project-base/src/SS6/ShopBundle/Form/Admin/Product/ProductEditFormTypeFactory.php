@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -42,13 +43,19 @@ class ProductEditFormTypeFactory {
 	 */
 	private $seoSettingFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 */
+	private $removeDuplicatesFromArrayTransformer;
+
 	public function __construct(
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		ImageFacade $imageFacade,
 		ProductFormTypeFactory $productFormTypeFactory,
 		PricingGroupFacade $pricingGroupFacade,
 		Domain $domain,
-		SeoSettingFacade $seoSettingFacade
+		SeoSettingFacade $seoSettingFacade,
+		RemoveDuplicatesFromArrayTransformer $removeDuplicatesFromArrayTransformer
 	) {
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->imageFacade = $imageFacade;
@@ -56,6 +63,7 @@ class ProductEditFormTypeFactory {
 		$this->pricingGroupFacade = $pricingGroupFacade;
 		$this->domain = $domain;
 		$this->seoSettingFacade = $seoSettingFacade;
+		$this->removeDuplicatesFromArrayTransformer = $removeDuplicatesFromArrayTransformer;
 	}
 
 	/**
@@ -84,6 +92,7 @@ class ProductEditFormTypeFactory {
 			$pricingGroups,
 			$domains,
 			$metaDescriptionsIndexedByDomainId,
+			$this->removeDuplicatesFromArrayTransformer,
 			$product
 		);
 	}

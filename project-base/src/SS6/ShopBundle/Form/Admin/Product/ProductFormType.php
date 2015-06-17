@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Component\Transformers\InverseTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Product\Product;
@@ -51,11 +50,6 @@ class ProductFormType extends AbstractType {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
-	 */
-	private $removeDuplicatesTransformer;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	private $product;
@@ -66,7 +60,6 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
-	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
@@ -75,7 +68,6 @@ class ProductFormType extends AbstractType {
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $flags,
 		TranslatorInterface $translator,
-		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
 		Product $product = null
 	) {
 		$this->vats = $vats;
@@ -83,7 +75,6 @@ class ProductFormType extends AbstractType {
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flags = $flags;
 		$this->translator = $translator;
-		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
 		$this->product = $product;
 	}
 
@@ -251,15 +242,7 @@ class ProductFormType extends AbstractType {
 					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
 					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
 				],
-			])
-			->add(
-				$builder
-					->create('accessories', FormType::PRODUCTS, [
-						'required' => false,
-						'main_product' => $this->product,
-					])
-					->addViewTransformer($this->removeDuplicatesTransformer)
-			);
+			]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
