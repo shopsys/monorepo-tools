@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Cart\CartSummaryCalculation;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade;
+use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
@@ -51,9 +51,9 @@ class CartController extends BaseController {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryFacade
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade
 	 */
-	private $accessoryFacade;
+	private $productAccessoryFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
@@ -66,7 +66,7 @@ class CartController extends BaseController {
 	private $freeTransportAndPaymentFacade;
 
 	public function __construct(
-		AccessoryFacade $accessoryFacade,
+		ProductAccessoryFacade $productAccessoryFacade,
 		CartFacade $cartFacade,
 		CurrentCustomer $currentCustomer,
 		Domain $domain,
@@ -76,7 +76,7 @@ class CartController extends BaseController {
 		Cart $cart,
 		CartSummaryCalculation $cartSummaryCalculation
 	) {
-		$this->accessoryFacade = $accessoryFacade;
+		$this->productAccessoryFacade = $productAccessoryFacade;
 		$this->cartFacade = $cartFacade;
 		$this->currentCustomer = $currentCustomer;
 		$this->domain = $domain;
@@ -223,7 +223,7 @@ class CartController extends BaseController {
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 
-				$accessories = $this->accessoryFacade->getTop3ListableAccessories(
+				$accessories = $this->productAccessoryFacade->getTop3ListableAccessories(
 					$addProductResult->getCartItem()->getProduct(),
 					$this->domain->getId(),
 					$this->currentCustomer->getPricingGroup()

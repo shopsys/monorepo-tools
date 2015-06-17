@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Form\UrlListType;
-use SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository;
+use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
@@ -39,9 +39,9 @@ class ProductEditDataFactory {
 	private $friendlyUrlFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
 	 */
-	private $accessoryRepository;
+	private $productAccessoryRepository;
 
 	public function __construct(
 		ProductRepository $productRepository,
@@ -49,14 +49,14 @@ class ProductEditDataFactory {
 		ProductDataFactory $productDataFactory,
 		ProductInputPriceFacade $productInputPriceFacade,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		AccessoryRepository $accessoryRepository
+		ProductAccessoryRepository $productAccessoryRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productDataFactory = $productDataFactory;
 		$this->productInputPriceFacade = $productInputPriceFacade;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
-		$this->accessoryRepository = $accessoryRepository;
+		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
 	/**
@@ -112,7 +112,7 @@ class ProductEditDataFactory {
 		}
 
 		$productAccessories = [];
-		foreach ($this->accessoryRepository->getAllByProduct($product) as $productAccessory) {
+		foreach ($this->productAccessoryRepository->getAllByProduct($product) as $productAccessory) {
 			$productAccessories[$productAccessory->getPosition()] = $productAccessory->getAccessory();
 		}
 		$productEditData->accessories = $productAccessories;

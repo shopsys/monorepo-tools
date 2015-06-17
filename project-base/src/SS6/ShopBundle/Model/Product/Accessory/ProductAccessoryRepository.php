@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class AccessoryRepository {
+class ProductAccessoryRepository {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

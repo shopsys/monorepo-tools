@@ -7,8 +7,8 @@ use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
+use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -97,9 +97,9 @@ class ProductEditFacade {
 	private $productSellableRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
 	 */
-	private $accessoryRepository;
+	private $productAccessoryRepository;
 
 	public function __construct(
 		EntityManager $em,
@@ -116,7 +116,7 @@ class ProductEditFacade {
 		FriendlyUrlFacade $friendlyUrlFacade,
 		ProductHiddenRecalculator $productHiddenRecalculator,
 		ProductSellableRecalculator $productSellableRecalculator,
-		AccessoryRepository $accessoryRepository
+		ProductAccessoryRepository $productAccessoryRepository
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -132,7 +132,7 @@ class ProductEditFacade {
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->productHiddenRecalculator = $productHiddenRecalculator;
 		$this->productSellableRecalculator = $productSellableRecalculator;
-		$this->accessoryRepository = $accessoryRepository;
+		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
 	/**

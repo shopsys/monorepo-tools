@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository;
+use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -51,9 +51,9 @@ class ProductOnCurrentDomainFacade {
 	private $productFilterCountRepository;
 
 	/*
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
 	 */
-	private $accessoryRepository;
+	private $productAccessoryRepository;
 
 	public function __construct(
 		ProductRepository $productRepository,
@@ -63,7 +63,7 @@ class ProductOnCurrentDomainFacade {
 		CategoryRepository $categoryRepository,
 		ProductVisibilityRepository $productVisibilityRepository,
 		ProductFilterCountRepository $productFilterCountRepository,
-		AccessoryRepository $accessoryRepository
+		ProductAccessoryRepository $productAccessoryRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
@@ -72,7 +72,7 @@ class ProductOnCurrentDomainFacade {
 		$this->categoryRepository = $categoryRepository;
 		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->productFilterCountRepository = $productFilterCountRepository;
-		$this->accessoryRepository = $accessoryRepository;
+		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
 	/**
@@ -94,7 +94,7 @@ class ProductOnCurrentDomainFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAccessoriesProductDetailsForProduct(Product $product) {
-		$productAccessories = $this->accessoryRepository->getAllByProduct($product);
+		$productAccessories = $this->productAccessoryRepository->getAllByProduct($product);
 		$accessoriesVisibleOnDomain = [];
 
 		foreach ($productAccessories as $productAccessory) {
