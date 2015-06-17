@@ -77,14 +77,6 @@ class Vat {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getCoefficient() {
-		$ratio = $this->percent / (100 + $this->percent);
-		return round($ratio, 4);
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
 	 */
 	public function edit(VatData $vatData) {

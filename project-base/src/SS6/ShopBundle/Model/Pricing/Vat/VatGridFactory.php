@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatGridFactory implements GridFactoryInterface {
@@ -33,16 +34,23 @@ class VatGridFactory implements GridFactoryInterface {
 	 */
 	private $vatFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
+	 */
+	private $priceCalculation;
+
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		Translator $translator,
-		VatFacade $vatFacade
+		VatFacade $vatFacade,
+		PriceCalculation $priceCalculation
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->translator = $translator;
 		$this->vatFacade = $vatFacade;
+		$this->priceCalculation = $priceCalculation;
 	}
 
 	/**
@@ -56,7 +64,9 @@ class VatGridFactory implements GridFactoryInterface {
 			->leftJoin(Vat::class, 'rv', Join::WITH, 'v.id = rv.replaceWith')
 			->groupBy('v');
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource($queryBuilder, 'v.id', function ($row) {
-			$row['vat'] = $this->vatFacade->getById($row['v']['id']);
+			$vat = $this->vatFacade->getById($row['v']['id']);
+			$row['vat'] = $vat;
+			$row['coefficient'] = $this->priceCalculation->getVatCoefficientByPercent($vat->getPercent());
 
 			return $row;
 		});

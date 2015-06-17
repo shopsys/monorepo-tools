@@ -12,18 +12,28 @@ class PriceCalculation {
 	 */
 	private $rounding;
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Rounding $rounding
-	 */
 	public function __construct(Rounding $rounding) {
 		$this->rounding = $rounding;
 	}
 
 	/**
+	 * @param string $priceWithVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return string
 	 */
 	public function getVatAmountByPriceWithVat($priceWithVat, Vat $vat) {
-		return $this->rounding->roundVatAmount($priceWithVat * $vat->getCoefficient());
+		return $this->rounding->roundVatAmount(
+			$priceWithVat * $this->getVatCoefficientByPercent($vat->getPercent())
+		);
+	}
+
+	/**
+	 * @param string $vatPercent
+	 * @return string
+	 */
+	public function getVatCoefficientByPercent($vatPercent) {
+		$ratio = $vatPercent / (100 + $vatPercent);
+		return round($ratio, 4);
 	}
 
 	/**

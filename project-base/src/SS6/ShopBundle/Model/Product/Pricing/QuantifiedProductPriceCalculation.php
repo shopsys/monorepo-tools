@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
@@ -37,12 +38,18 @@ class QuantifiedProductPriceCalculation {
 	private $productPrice;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-	 * @param \SS6\ShopBundle\Model\Pricing\Rounding$rounding
+	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
 	 */
-	public function __construct(ProductPriceCalculationForUser $productPriceCalculationForUser, Rounding $rounding) {
+	private $priceCalculation;
+
+	public function __construct(
+		ProductPriceCalculationForUser $productPriceCalculationForUser,
+		Rounding $rounding,
+		PriceCalculation $priceCalculation
+	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->rounding = $rounding;
+		$this->priceCalculation = $priceCalculation;
 	}
 
 	/**
@@ -96,8 +103,10 @@ class QuantifiedProductPriceCalculation {
 	 * @return string
 	 */
 	private function getTotalPriceVatAmount() {
+		$vatPercent = $this->product->getVat()->getPercent();
+
 		return $this->rounding->roundVatAmount(
-			$this->getTotalPriceWithVat() * $this->product->getVat()->getCoefficient()
+			$this->getTotalPriceWithVat() * $this->priceCalculation->getVatCoefficientByPercent($vatPercent)
 		);
 	}
 

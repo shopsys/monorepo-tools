@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Cart\Item;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
+use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 
@@ -30,12 +31,18 @@ class CartItemPriceCalculation {
 	private $productPrice;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-	 * @param \SS6\ShopBundle\Model\Pricing\Rounding$rounding
+	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
 	 */
-	public function __construct(ProductPriceCalculationForUser $productPriceCalculationForUser, Rounding $rounding) {
+	private $priceCalculation;
+
+	public function __construct(
+		ProductPriceCalculationForUser $productPriceCalculationForUser,
+		Rounding $rounding,
+		PriceCalculation $priceCalculation
+	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->rounding = $rounding;
+		$this->priceCalculation = $priceCalculation;
 	}
 
 	/**
@@ -76,8 +83,10 @@ class CartItemPriceCalculation {
 	 * @return string
 	 */
 	private function getTotalPriceVatAmount() {
+		$vatPercent = $this->cartItem->getProduct()->getVat()->getPercent();
+
 		return $this->rounding->roundVatAmount(
-			$this->getTotalPriceWithVat() * $this->cartItem->getProduct()->getVat()->getCoefficient()
+			$this->getTotalPriceWithVat() * $this->priceCalculation->getVatCoefficientByPercent($vatPercent)
 		);
 	}
 
