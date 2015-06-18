@@ -4,14 +4,17 @@
 	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-rebuild,dirs-structure,checks-diff" />
 	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,checks-diff" />
 	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,img-demo,checks-ci" />
+	<target name="build-demo-ci-diff" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,img-demo,checks-ci-diff" />
 
 	<target name="checks" depends="standards,tests" />
-	<target name="checks-ci" depends="standards-ci,tests,tests-acceptance" />
 	<target name="checks-diff" depends="standards-diff,tests" />
+	<target name="checks-ci" depends="standards-ci,tests,tests-acceptance" />
+	<target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" />
 
 	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" />
-	<target name="standards-ci" depends="standards,phpstorm-inspect" />
 	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint,yaml-lint" />
+	<target name="standards-ci" depends="standards,phpstorm-inspect" />
+	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" />
 
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
