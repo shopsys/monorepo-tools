@@ -6,9 +6,9 @@
 	var containerIdDataAttribute = 'checkbox-toggle-container-id';
 
 	SS6.checkboxToggle.init = function () {
-		$('.checkbox-toggle').on('change', SS6.checkboxToggle.onChange);
+		$('.js-checkbox-toggle').on('change', SS6.checkboxToggle.onChange);
 
-		$('.checkbox-toggle').each(function () {
+		$('.js-checkbox-toggle').each(function () {
 			var containerId = $(this).data(containerIdDataAttribute);
 
 			if ($(this).is(':checked')) {

@@ -24,7 +24,7 @@
 				<h2 class="mt-0">{{ 'Firemní údaje'|trans }} <span class="heading-addition">{{ '(Pokud nakupuji na firmu)'|trans }}</span></h2>
 				<fieldset>
 					{{ form_row(form.companyCustomer, {
-						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
+						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
 						label: 'Nakupuji na firmu'})
 					}}
 					<div id="js-company-fields">
@@ -50,7 +50,7 @@
 				<h2 class="mt-0">{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
 				<fieldset>
 					{{ form_row(form.deliveryAddressFilled, {
-						attr: { class: 'checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
 						label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
 					}}
 					<div id="js-delivery-address-fields">
