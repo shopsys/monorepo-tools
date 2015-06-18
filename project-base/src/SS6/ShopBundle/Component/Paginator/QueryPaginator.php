@@ -6,7 +6,7 @@ use Doctrine\DBAL\SQLParserUtils;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
+use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface {
 

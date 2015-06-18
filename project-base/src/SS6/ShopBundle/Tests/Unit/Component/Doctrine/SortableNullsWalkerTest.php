@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\DoctrineWalker;
+namespace SS6\ShopBundle\Tests\Unit\Component\Doctrine;
 
 use Doctrine\ORM\Query;
-use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
+use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
-use SS6\ShopBundle\Component\DoctrineWalker\SortableNullsWalker;
+use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Product;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DoctrineWalker;
+namespace SS6\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\Query\SqlWalker;
 
