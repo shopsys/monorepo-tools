@@ -42,7 +42,7 @@ doctrine:
         prefix: SS6\ShopBundle\Tests\Unit\Component\Validator
         is_bundle: false
     hydrators:
-      GroupedScalarHydrator: \SS6\ShopBundle\Component\GroupedScalarHydrator
+      GroupedScalarHydrator: \SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator
 
 framework:
   secret: "%secret%"

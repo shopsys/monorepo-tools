@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace SS6\ShopBundle\Component\Doctrine;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
