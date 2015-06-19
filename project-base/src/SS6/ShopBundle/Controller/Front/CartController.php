@@ -106,7 +106,7 @@ class CartController extends BaseController {
 
 		if ($form->isValid()) {
 			try {
-				$cartFacade->changeQuantities($form->getData()['quantities']);
+				$this->cartFacade->changeQuantities($form->getData()['quantities']);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$invalidCartRecalc = true;
 			}
@@ -184,7 +184,7 @@ class CartController extends BaseController {
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
-				$addProductResult = $cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
+				$addProductResult = $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
@@ -282,8 +282,8 @@ class CartController extends BaseController {
 
 		if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
 			try {
-				$productName = $cartFacade->getProductByCartItemId($cartItemId)->getName();
-				$cartFacade->deleteCartItem($cartItemId);
+				$productName = $this->cartFacade->getProductByCartItemId($cartItemId)->getName();
+				$this->cartFacade->deleteCartItem($cartItemId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					'Z košíku bylo odstraněno zboží {{ name }}',
 					['name' => $productName]
