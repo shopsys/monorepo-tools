@@ -13,7 +13,7 @@
 				return groups;
 			}
 		});
-		var $productForm = $('#product_edit_productData');
+		var $productForm = $('#product_edit_form_productData');
 		$productForm.jsFormValidator({
 			'groups': function () {
 

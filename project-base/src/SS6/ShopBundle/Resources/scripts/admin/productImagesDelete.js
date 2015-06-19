@@ -15,7 +15,7 @@
 			var imageId = $image.data('id');
 
 			$deleteButton.bind('click.deleteImage', function() {
-				SS6.choiceControl.select('#product_edit_imagesToDelete', imageId);
+				SS6.choiceControl.select('#product_edit_form_imagesToDelete', imageId);
 				$imagePreview.addClass('list-image__item__in--removed');
 				$delete.hide();
 				$revert.show();
@@ -24,14 +24,14 @@
 			});
 
 			$revertButton.bind('click.deleteImage', function() {
-				SS6.choiceControl.deselect('#product_edit_imagesToDelete', imageId);
+				SS6.choiceControl.deselect('#product_edit_form_imagesToDelete', imageId);
 				$imagePreview.removeClass('list-image__item__in--removed');
 				$delete.show();
 				$revert.hide();
 				return false;
 			});
 
-			var imageIds = SS6.choiceControl.getSelectedValues('#product_edit_imagesToDelete');
+			var imageIds = SS6.choiceControl.getSelectedValues('#product_edit_form_imagesToDelete');
 			if ($.inArray(imageId, imageIds) !== -1) {
 				$deleteButton.trigger('click.deleteImage');
 			}

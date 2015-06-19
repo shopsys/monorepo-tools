@@ -4,7 +4,7 @@
 	SS6.product = SS6.product || {};
 
 	SS6.product.init = function () {
-		var usingStockSelection = $('#product_edit_productData_usingStock input[type="radio"]');
+		var usingStockSelection = $('#product_edit_form_productData_usingStock input[type="radio"]');
 		var $outOfStockActionSelection = $('select[name="product_edit[productData][outOfStockAction]"]');
 
 		usingStockSelection.change(function () {
