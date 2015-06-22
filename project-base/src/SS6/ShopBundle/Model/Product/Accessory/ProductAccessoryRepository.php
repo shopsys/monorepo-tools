@@ -59,7 +59,7 @@ class ProductAccessoryRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Accessory\ProductAccessory
 	 */
 	public function getAllByProduct(Product $product) {
-		return $this->getProductAccesoryRepository()->findBy(['product' => $product]);
+		return $this->getProductAccesoryRepository()->findBy(['product' => $product], ['position' => 'asc']);
 	}
 
 	/**
