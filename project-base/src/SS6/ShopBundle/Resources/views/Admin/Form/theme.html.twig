@@ -260,7 +260,10 @@
 {%- endblock %}
 
 {% macro productsWidgetItem(productName, form) %}
-	<div class="js-products-picker-item in-simple-item">
+	<li class="js-products-picker-item in-simple-item">
+		<span class="left top-right-padding-5-px">
+			<i class="cursor-move fa fa-arrows"></i>
+		</span>
 		<span class="in-simple-item__icon js-products-picker-item-button-delete cursor-pointer">
 			{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
 			<i class="fa fa-trash-o"></i>
@@ -268,7 +271,7 @@
 		<span class="in-simple-item__desc">
 			<span class="js-products-picker-item-product-name">{{ productName }}</span>
 		</span>
-	</div>
+	</li>
 {% endmacro %}
 
 {% block products_widget %}
@@ -278,11 +281,11 @@
 		data-products-picker-url="{{ url('admin_productpicker_productspicker', {jsInstanceId: '__js_instance_id__'}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
-		<div class="js-products-picker-items mb-1">
+		<ul class="js-products-picker-items mb-1 list-style-none">
 			{% for key, productForm in form %}
 				{{ _self.productsWidgetItem(form.vars.products[key].name, productForm) }}
 			{% endfor %}
-		</div>
+		</ul>
 		<a href="#" class="btn btn-primary js-products-picker-button-add">
 			<i class="fa fa-plus fa-lg"></i>
 			{{ 'Přidat zboží'|trans }}
