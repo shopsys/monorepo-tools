@@ -67,7 +67,8 @@ class DomainsConfigLoader {
 			$domainConfig[DomainsConfigDefinition::CONFIG_URL],
 			$domainConfig[DomainsConfigDefinition::CONFIG_NAME],
 			$domainConfig[DomainsConfigDefinition::CONFIG_LOCALE],
-			$domainConfig[DomainsConfigDefinition::CONFIG_TEMPLATES_DIRECTORY]
+			$domainConfig[DomainsConfigDefinition::CONFIG_TEMPLATES_DIRECTORY],
+			$domainConfig[DomainsConfigDefinition::CONFIG_STYLES_DIRECTORY]
 		);
 	}
 

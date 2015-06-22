@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 
 	public function testDelegateRouter() {
-		$domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en', 'en');
+		$domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en', 'en', 'stylesDirectory');
 		$domain = new Domain([$domainConfigs]);
 		$domain->switchDomainById(1);
 

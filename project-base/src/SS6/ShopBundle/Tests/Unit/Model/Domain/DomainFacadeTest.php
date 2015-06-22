@@ -13,9 +13,9 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testGeDomainConfigsByCurrency() {
 		$testDomainConfigs = [
-			1 => new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1'),
-			2 => new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2'),
-			3 => new DomainConfig(3, 'http://example.edu:8080', 'example.edu', 'en', 'design3'),
+			1 => new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1', 'stylesDirectory'),
+			2 => new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
+			3 => new DomainConfig(3, 'http://example.edu:8080', 'example.edu', 'en', 'design3', 'stylesDirectory'),
 		];
 		$domain = new Domain($testDomainConfigs);
 
