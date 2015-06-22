@@ -175,8 +175,15 @@
 		</delete>
 	</target>
 
-	<target name="grunt">
+	<target name="grunt" depends="gruntfile">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
+	</target>
+
+	<target name="gruntfile">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:generate:gruntfile" />
+		</exec>
 	</target>
 
 	<target name="img-dirs">
