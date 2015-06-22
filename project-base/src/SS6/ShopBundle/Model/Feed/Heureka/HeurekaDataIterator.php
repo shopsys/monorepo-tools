@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
-use Doctrine\ORM\Internal\Hydration\IterableResult;
+use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
@@ -33,14 +33,14 @@ class HeurekaDataIterator extends AbstractDataIterator {
 	private $imageFacade;
 
 	/**
-	 * @param \Doctrine\ORM\Internal\Hydration\IterableResult $iterableResult
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
 	 * @param \SS6\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
 	 */
 	public function __construct(
-		IterableResult $iterableResult,
+		QueryBuilder $queryBuilder,
 		DomainConfig $domainConfig,
 		DomainRouterFactory $domainRouterFactory,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
@@ -51,7 +51,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 		$this->router = $domainRouterFactory->getRouter($domainConfig->getId());
 		$this->imageFacade = $imageFacade;
 
-		parent::__construct($iterableResult);
+		parent::__construct($queryBuilder);
 	}
 
 	/**
