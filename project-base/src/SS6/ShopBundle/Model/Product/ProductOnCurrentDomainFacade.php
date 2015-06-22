@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
@@ -43,13 +44,19 @@ class ProductOnCurrentDomainFacade {
 	 */
 	private $productVisibilityRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository
+	 */
+	private $productFilterCountRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		Domain $domain,
 		ProductDetailFactory $productDetailFactory,
 		CurrentCustomer $currentCustomer,
 		CategoryRepository $categoryRepository,
-		ProductVisibilityRepository $productVisibilityRepository
+		ProductVisibilityRepository $productVisibilityRepository,
+		ProductFilterCountRepository $productFilterCountRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
@@ -57,6 +64,7 @@ class ProductOnCurrentDomainFacade {
 		$this->productDetailFactory = $productDetailFactory;
 		$this->categoryRepository = $categoryRepository;
 		$this->productVisibilityRepository = $productVisibilityRepository;
+		$this->productFilterCountRepository = $productFilterCountRepository;
 	}
 
 	/**
@@ -190,6 +198,42 @@ class ProductOnCurrentDomainFacade {
 		);
 
 		return $paginationResult;
+	}
+
+	/**
+	 * @param int $categoryId
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
+	 */
+	public function getProductFilterCountDataInCategory(
+		$categoryId,
+		ProductFilterData $productFilterData
+	) {
+		return $this->productFilterCountRepository->getProductFilterCountDataInCategory(
+			$this->categoryRepository->getById($categoryId),
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$productFilterData,
+			$this->currentCustomer->getPricingGroup()
+		);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
+	 */
+	public function getProductFilterCountDataForSearch(
+		$searchText,
+		ProductFilterData $productFilterData
+	) {
+		return $this->productFilterCountRepository->getProductFilterCountDataForSearch(
+			$searchText,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$productFilterData,
+			$this->currentCustomer->getPricingGroup()
+		);
 	}
 
 }

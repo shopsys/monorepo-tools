@@ -196,6 +196,36 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
+		$queryBuilder = $this->getFilteredListableInCategoryQueryBuilder(
+			$category,
+			$domainId,
+			$locale,
+			$productFilterData,
+			$pricingGroup
+		);
+
+		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
+
+		$queryPaginator = new QueryPaginator($queryBuilder);
+
+		return $queryPaginator->getResult($page, $limit);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getFilteredListableInCategoryQueryBuilder(
+		Category $category,
+		$domainId,
+		$locale,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup
+	) {
 		$queryBuilder = $this->getListableInCategoryQueryBuilder(
 			$domainId,
 			$pricingGroup,
@@ -205,11 +235,8 @@ class ProductRepository {
 		$this->addTranslation($queryBuilder, $locale);
 		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
 		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
-		$queryPaginator = new QueryPaginator($queryBuilder);
-
-		return $queryPaginator->getResult($page, $limit);
+		return $queryBuilder;
 	}
 
 	/**
@@ -233,14 +260,46 @@ class ProductRepository {
 		$page,
 		$limit
 	) {
-		$queryBuilder = $this->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
+		$queryBuilder = $this->getFilteredListableForSearchQueryBuilder(
+			$searchText,
+			$domainId,
+			$locale,
+			$productFilterData,
+			$pricingGroup
+		);
 
-		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
 		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
 		return $queryPaginator->getResult($page, $limit);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @param int $domainId
+	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getFilteredListableForSearchQueryBuilder(
+		$searchText,
+		$domainId,
+		$locale,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup
+	) {
+		$queryBuilder = $this->getListableBySearchTextQueryBuilder(
+			$domainId,
+			$pricingGroup,
+			$locale,
+			$searchText
+		);
+
+		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
+
+		return $queryBuilder;
 	}
 
 	/**

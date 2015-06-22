@@ -35,6 +35,50 @@
 				submitFormWithAjax();
 				return false;
 			});
+
+			updateFiltersDisabled();
+		};
+
+		var showProducts = function ($wrappedData) {
+			var $productsHtml = $wrappedData.find('.js-product-list-ajax-filter-products-with-controls');
+			$productsWithControls.html($productsHtml);
+			$productsWithControls.show();
+			$productsWithControls.removeClass('js-disable');
+			ajaxMoreLoader.reInit();
+			SS6.register.registerNewContent($productsWithControls);
+		};
+
+		var updateFiltersCounts = function ($wrappedData) {
+			var $existingCountElements = $('.js-product-filter-count');
+			var $newCountElements = $wrappedData.find('.js-product-filter-count');
+
+			$newCountElements.each(function () {
+				var $newCountElement = $(this);
+
+				var $existingCountElement = $existingCountElements
+					.filter('[data-form-id="' + $newCountElement.data('form-id') + '"]');
+
+				$existingCountElement.html($newCountElement.html());
+			});
+		};
+
+		var updateFiltersDisabled = function () {
+			$('.js-product-filter-count').each(function () {
+				var $countElement = $(this);
+
+				var $label = $countElement.closest('label');
+				var $formElement = $('#' + $countElement.data('form-id'));
+
+				if (parseInt($countElement.html()) === 0) {
+					if (!$formElement.is(':checked')) {
+						$label.addClass('js-disable');
+						$formElement.prop('disabled', true);
+					}
+				} else {
+					$label.removeClass('js-disable');
+					$formElement.prop('disabled', false);
+				}
+			});
 		};
 
 		var submitFormWithAjax = function (submitData) {
@@ -42,12 +86,12 @@
 				url: SS6.url.getBaseUrl(),
 				data: submitData,
 				success: function (data) {
-					$productsWithControls.html(data);
-					$productsWithControls.show();
-					$productsWithControls.removeClass('js-disable');
+					var $wrappedData = $($.parseHTML('<div>' + data + '</div>'));
+
+					showProducts($wrappedData);
+					updateFiltersCounts($wrappedData);
+					updateFiltersDisabled();
 					$('.js-product-list-ajax-filter-loading').hide();
-					ajaxMoreLoader.reInit();
-					SS6.register.registerNewContent($productsWithControls);
 				}
 			});
 		};
