@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
@@ -41,16 +42,23 @@ class ProductRepository {
 	 */
 	private $queryBuilderService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 */
+	private $localization;
+
 	public function __construct(
 		EntityManager $em,
 		ParameterFilterRepository $parameterFilterRepository,
 		ProductFilterRepository $productFilterRepository,
-		QueryBuilderService $queryBuilderService
+		QueryBuilderService $queryBuilderService,
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->parameterFilterRepository = $parameterFilterRepository;
 		$this->productFilterRepository = $productFilterRepository;
 		$this->queryBuilderService = $queryBuilderService;
+		$this->localization = $localization;
 	}
 
 	/**
@@ -204,7 +212,7 @@ class ProductRepository {
 			$pricingGroup
 		);
 
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
+		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -268,7 +276,7 @@ class ProductRepository {
 			$pricingGroup
 		);
 
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup);
+		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -326,19 +334,23 @@ class ProductRepository {
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param string $locale
 	 */
 	private function applyOrdering(
 		QueryBuilder $queryBuilder,
 		ProductListOrderingSetting $orderingSetting,
-		PricingGroup $pricingGroup
+		PricingGroup $pricingGroup,
+		$locale
 	) {
 		switch ($orderingSetting->getOrderingMode()) {
 			case ProductListOrderingSetting::ORDER_BY_NAME_ASC:
-				$queryBuilder->orderBy('pt.name', 'asc');
+				$collation = $this->localization->getCollationByLocale($locale);
+				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
-				$queryBuilder->orderBy('pt.name', 'desc');
+				$collation = $this->localization->getCollationByLocale($locale);
+				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'desc');
 				break;
 
 			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
