@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 	<h3>{{ 'Přidat URL'|trans }}</h3>
 	<div class="form-inline">
-		{{ form_row(form.domain, { label: 'Doména', attr: {class: 'js-entity-urls-window-content-domain-row'} }) }}
+		{{ form_row(form.domain, { label: 'Doména', attr: {class: 'js-entity-url-list-window-content-domain-row'} }) }}
 		<div>
-			<span class="js-entity-urls-window-content-domain-url" data-domain-urls-by-id="{{ form.vars.domainUrlsById|json_encode }}"></span>{{ form_widget(form.slug) }}
+			<span class="js-entity-url-list-window-content-domain-url" data-domain-urls-by-id="{{ form.vars.domainUrlsById|json_encode }}"></span>{{ form_widget(form.slug) }}
 		</div>
 		{{ form_row(form.create, { label: 'Vytvořit URL'}) }}
 	</div>

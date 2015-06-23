@@ -110,10 +110,10 @@
 {%- endblock url_list_row %}
 
 {% block url_list_widget -%}
-	<div class="js-entity-urls" >
+	<div class="js-entity-url-list" >
 		{{ form_errors(form.newSlugsOnDomains) }}
 		{% for domainId, friendlyUrlForms in form.toDelete %}
-			<table class="table js-entity-urls-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
+			<table class="table js-entity-url-list-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
 				<tr>
 					<th>{{ 'Hlavní'|trans }}</th>
 					<th>{{ 'Doména '|trans ~ getDomainName(domainId) }}</th>
@@ -121,29 +121,29 @@
 				</tr>
 				{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
 				{% for slug, friendlyUrlForm in friendlyUrlForms %}
-					<tr class="js-entity-urls-friendly-url">
+					<tr class="js-entity-url-list-friendly-url">
 						<td class="table-col-10">
 							{% set mainUrlRadioButton = form.mainOnDomains[domainId][slug] %}
-							{{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-urls-select-main' } }) }}
+							{{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-url-list-select-main' } }) }}
 						</td>
-						<td class="table-col-40 js-entity-urls-row-label">
+						<td class="table-col-40 js-entity-url-list-row-label">
 							{% set absoluteUrl = form.vars.absoluteUrlsByDomainIdAndSlug[domainId][friendlyUrlForm.vars.value] %}
 							{% if mainUrl == absoluteUrl %}
 								<strong>{{ absoluteUrl }}</strong>
 							{% else %}
 								{{ absoluteUrl }}
 							{% endif %}
-							{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-urls-row-checkbox display-none'}}) }}
+							{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
 						</td>
 						<td class="table-col-30">
-							<div class="js-entity-urls-row-delete-revert-wrapper">
-								<div class="js-entity-urls-row-delete-block">
-									<button class="btn btn-iconic js-entity-urls-row-delete-block-button" type="button">
+							<div class="js-entity-url-list-row-delete-revert-wrapper">
+								<div class="js-entity-url-list-row-delete-block">
+									<button class="btn btn-iconic js-entity-url-list-row-delete-block-button" type="button">
 										<i class="fa fa-trash-o"></i>{{ 'Smazat URL'|trans }}
 									</button>
 								</div>
-								<div class="js-entity-urls-row-revert-block display-none">
-									<button class="btn btn-iconic js-entity-urls-row-revert-block-button" type="button">
+								<div class="js-entity-url-list-row-revert-block display-none">
+									<button class="btn btn-iconic js-entity-url-list-row-revert-block-button" type="button">
 										<i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}
 									</button>
 
@@ -154,7 +154,7 @@
 								</div>
 							</div>
 							<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
-								class="js-entity-urls-info-main-delete js-tooltip cursor-help form-icon display-none" data-toggle="tooltip" data-placement="right">
+								class="js-entity-url-list-info-main-delete js-tooltip cursor-help form-icon display-none" data-toggle="tooltip" data-placement="right">
 								<i class="fa fa-info"></i>
 							</span>
 						</td>
@@ -165,22 +165,22 @@
 				{% endfor %}
 			</table>
 		{% endfor %}
-		<button type="button" class="js-entity-urls-button-add-url btn btn-primary" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
+		<button type="button" class="js-entity-url-list-button-add-url btn btn-primary" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
 			<i class="fa fa-plus fa-lg"></i> {{ 'Přidat URL'|trans }}
 		</button>
 	</div>
 {%- endblock url_list_widget -%}
 
 {% macro urlListWidgetNewUrlRow(form, domainUrl) %}
-	<tr class="js-entity-urls-new-row">
+	<tr class="js-entity-url-list-new-row">
 		<td class="table-col-10"></td>
 		<td class="table-col-40">
-			<span class="js-entity-urls-new-row-domain-url">{{ domainUrl }}/</span><span class="js-entity-urls-new-row-slug">{{ form.vars.value }}</span>
+			<span class="js-entity-url-list-new-row-domain-url">{{ domainUrl }}/</span><span class="js-entity-url-list-new-row-slug">{{ form.vars.value }}</span>
 			{{ form_errors(form) }}
-			{{ form_widget(form, {attr: {class: 'js-entity-urls-new-row-slug-input display-none', id: null}}) }}
+			{{ form_widget(form, {attr: {class: 'js-entity-url-list-new-row-slug-input display-none', id: null}}) }}
 		</td>
 		<td class="table-col-30">
-			<button class="btn btn-iconic js-entity-urls-new-row-delete-button" type="button">
+			<button class="btn btn-iconic js-entity-url-list-new-row-delete-button" type="button">
 				<i class="fa fa-trash-o"></i>{{ 'Smazat URL'|trans }}
 			</button>
 		</td>
