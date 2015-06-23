@@ -147,7 +147,6 @@ class FriendlyUrlFacade {
 				if (!$this->friendlyUrlRepository->isMainFriendlyUrl($friendlyUrl)) {
 					$this->em->remove($friendlyUrl);
 				}
-				$toFlush[] = $friendlyUrl;
 			}
 		}
 
