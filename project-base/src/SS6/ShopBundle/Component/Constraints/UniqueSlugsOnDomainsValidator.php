@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Component\Constraints;
 use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -42,20 +43,48 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 		}
 
 		foreach ($values as $domainId => $slugs) {
-			foreach ($slugs as $slug) {
-				$domainRouter = $this->domainRouterFactory->getRouter($domainId);
-				try {
-					$domainRouter->match('/' . $slug);
-				} catch (\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
-					continue;
-				}
+			$domainConfig = $this->domain->getDomainConfigById($domainId);
+
+			$this->validateDuplication($domainConfig, $slugs);
+			$this->validateExists($domainConfig, $slugs);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param string[] $slugs
+	 */
+	private function validateDuplication(DomainConfig $domainConfig, $slugs) {
+		foreach (array_count_values($slugs) as $slug => $count) {
+			if ($count > 1) {
 				$this->context->addViolation($this->translator->trans(
-					'Adresa %%url%% již existuje.',
+					'Adresa %%url%% může být zadána pouze jednou.',
 					[
-						'%%url%%' => $this->domain->getDomainConfigById($domainId)->getUrl() . '/' . $slug,
+						'%%url%%' => $domainConfig->getUrl() . '/' . $slug,
 					]
 				));
 			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param string[] $slugs
+	 */
+	private function validateExists(DomainConfig $domainConfig, $slugs) {
+		foreach ($slugs as $slug) {
+			$domainRouter = $this->domainRouterFactory->getRouter($domainConfig->getId());
+			try {
+				$domainRouter->match('/' . $slug);
+			} catch (\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
+				continue;
+			}
+			$this->context->addViolation($this->translator->trans(
+				'Adresa %%url%% již existuje.',
+				[
+					'%%url%%' => $domainConfig->getUrl() . '/' . $slug,
+				]
+			));
 		}
 	}
 
