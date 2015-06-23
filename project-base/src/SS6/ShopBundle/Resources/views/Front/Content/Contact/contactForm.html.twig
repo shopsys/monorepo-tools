@@ -1,0 +1,23 @@
+{{ init_js_validation() }}
+<h2>{{ 'Napište nám'|trans }}</h2>
+
+{{ form_errors(form) }}
+
+{{ form_start(form) }}
+
+	{{ form_label(form.name, 'Jméno') }}
+	{{ form_errors(form.name, {errors_attr: { class: 'in-message--static-small'}}) }}
+	{{ form_widget(form.name) }}
+
+	{{ form_label(form.email, 'Email') }}
+	{{ form_errors(form.email, {errors_attr: { class: 'in-message--static-small'}}) }}
+	{{ form_widget(form.email) }}
+
+	{{ form_label(form.message, 'Vzkaz') }}
+	{{ form_errors(form.message, {errors_attr: { class: 'in-message--static-small'}}) }}
+	{{ form_widget(form.message) }}
+
+	<br/>
+	{{ form_widget(form.send, { label: 'Odeslat'|trans }) }}
+
+{{ form_end(form) }}

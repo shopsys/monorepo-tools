@@ -45,8 +45,8 @@ class MessageData {
 	 * @param string $subject
 	 * @param string $fromEmail
 	 * @param string $fromName
-	 * @param array $variablesReplacementsForBody
-	 * @param array|null $variablesReplacementsForSubject
+	 * @param string[] $variablesReplacementsForBody
+	 * @param string[] $variablesReplacementsForSubject
 	 */
 	public function __construct(
 		$toEmail,
@@ -54,8 +54,8 @@ class MessageData {
 		$subject,
 		$fromEmail,
 		$fromName,
-		$variablesReplacementsForBody,
-		$variablesReplacementsForSubject = null
+		array $variablesReplacementsForBody = [],
+		array $variablesReplacementsForSubject = []
 	) {
 		$this->toEmail = $toEmail;
 		$this->body = $body;
@@ -63,7 +63,7 @@ class MessageData {
 		$this->fromEmail = $fromEmail;
 		$this->fromName = $fromName;
 		$this->variablesReplacementsForBody = $variablesReplacementsForBody;
-		if ($variablesReplacementsForSubject !== null) {
+		if (!empty($variablesReplacementsForSubject)) {
 			$this->variablesReplacementsForSubject = $variablesReplacementsForSubject;
 		} else {
 			$this->variablesReplacementsForSubject = $variablesReplacementsForBody;
