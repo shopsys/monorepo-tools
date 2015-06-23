@@ -104,7 +104,10 @@ class UrlListType extends AbstractType {
 				'options' => [
 					'constraints' => [
 						new Constraints\NotBlank(),
-						new Constraints\Regex(self::SLUG_REGEX),
+						new Constraints\Regex([
+							'pattern' => self::SLUG_REGEX,
+							'message' => 'Url {{ value }} obsahuje nepovolené znaky.',
+						]),
 					],
 				],
 			]);
