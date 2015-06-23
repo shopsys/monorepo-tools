@@ -82,7 +82,7 @@ class ImageConfig {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($className);
+		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($entity ? get_class($entity) : null);
 	}
 
 	/**
@@ -113,10 +113,22 @@ class ImageConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[]
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig[class]
 	 */
 	public function getAllImageEntityConfigsByClass() {
 		return $this->imageEntityConfigsByClass;
+	}
+
+	/**
+	 * @param string $class
+	 * @return \SS6\ShopBundle\Model\Image\Config\ImageEntityConfig
+	 */
+	public function getImageEntityConfigByClass($class) {
+		if (array_key_exists($class, $this->imageEntityConfigsByClass)) {
+			return $this->imageEntityConfigsByClass[$class];
+		}
+
+		throw new \SS6\ShopBundle\Model\Image\Config\Exception\ImageEntityConfigNotFoundException($class);
 	}
 
 }

@@ -7,7 +7,7 @@ use Iterator;
 
 abstract class AbstractDataIterator implements Iterator {
 
-	const ITEMS_BUFFER_SIZE = 100;
+	const BUFFER_SIZE = 100;
 
 	/**
 	 * @var int
@@ -17,7 +17,7 @@ abstract class AbstractDataIterator implements Iterator {
 	/**
 	 * @var array|null
 	 */
-	private $currentItem;
+	private $currentRowWithData;
 
 	/**
 	 * @var \Doctrine\ORM\QueryBuilder
@@ -27,7 +27,7 @@ abstract class AbstractDataIterator implements Iterator {
 	/**
 	 * @var array
 	 */
-	private $itemsBuffer;
+	private $rowsWithDataBuffer;
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
@@ -39,8 +39,8 @@ abstract class AbstractDataIterator implements Iterator {
 
 	public function rewind() {
 		$this->position = 0;
-		$this->itemsBuffer = [];
-		$this->currentItem = null;
+		$this->rowsWithDataBuffer = [];
+		$this->currentRowWithData = null;
 	}
 
 	public function next() {
@@ -51,24 +51,26 @@ abstract class AbstractDataIterator implements Iterator {
 	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
 	 */
 	public function current() {
-		if (!array_key_exists($this->position, $this->itemsBuffer)) {
-			$offset = $this->position - ($this->position % self::ITEMS_BUFFER_SIZE);
+		if (!array_key_exists($this->position, $this->rowsWithDataBuffer)) {
+			$offset = $this->position - ($this->position % self::BUFFER_SIZE);
 
 			$queryBuilder = clone $this->queryBuilder;
 			$queryBuilder->setFirstResult($offset);
-			$queryBuilder->setMaxResults(self::ITEMS_BUFFER_SIZE);
+			$queryBuilder->setMaxResults(self::BUFFER_SIZE);
 
-			$this->itemsBuffer = [];
-			foreach ($queryBuilder->getQuery()->execute() as $queryPosition => $item) {
-				$this->itemsBuffer[$offset + $queryPosition] = $item;
+			$rowsWithData = $this->loadOtherData($queryBuilder->getQuery()->execute());
+
+			$this->rowsWithDataBuffer = [];
+			foreach ($rowsWithData as $rowWithData) {
+				$this->rowsWithDataBuffer[$offset + count($this->rowsWithDataBuffer)] = $rowWithData;
 			}
 		}
 
-		if (array_key_exists($this->position, $this->itemsBuffer)) {
-			$this->currentItem = $this->itemsBuffer[$this->position];
-			return $this->createItem([$this->currentItem]);
+		if (array_key_exists($this->position, $this->rowsWithDataBuffer)) {
+			$this->currentRowWithData = $this->rowsWithDataBuffer[$this->position];
+			return $this->createItem($this->currentRowWithData);
 		} else {
-			$this->currentItem = false;
+			$this->currentRowWithData = false;
 			return false;
 		}
 	}
@@ -91,5 +93,11 @@ abstract class AbstractDataIterator implements Iterator {
 	 * @param array $row
 	 */
 	abstract protected function createItem(array $row);
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @return array
+	 */
+	abstract protected function loadOtherData(array $products);
 
 }

@@ -99,4 +99,25 @@ class ImageRepository {
 
 		return $image;
 	}
+
+	/**
+	 * @param array $entities
+	 * @param string $entityName
+	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
+	 */
+	public function getMainImagesByEntitiesIndexedByEntityId(array $entities, $entityName) {
+		$queryBuilder = $this->getImageRepository()
+			->createQueryBuilder('i')
+			->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
+			->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entities)
+			->orderBy('i.id', 'desc');
+
+		$imagesByProductId = [];
+		foreach ($queryBuilder->getQuery()->execute() as $image) {
+			/* @var $image \SS6\ShopBundle\Model\Image\Image */
+			$imagesByProductId[$image->getEntityId()] = $image;
+		}
+
+		return $imagesByProductId;
+	}
 }
