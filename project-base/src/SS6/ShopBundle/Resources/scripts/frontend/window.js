@@ -36,6 +36,7 @@
 			textCancel: 'Ne',
 			urlContinue: '#',
 			wide: false,
+			cssClass: '',
 			eventClose: function () {},
 			eventContinue: function () {},
 			eventCancel: function () {}
@@ -49,6 +50,9 @@
 		var $window = $('<div class="window window--active"></div>');
 		if (options.wide) {
 			$window.addClass('window--wide');
+		}
+		if (options.cssClass !== '') {
+			$window.addClass(options.cssClass);
 		}
 
 		var $windowContent = $('<div class="js-window-content"></div>').html(options.content);

@@ -1,10 +1,27 @@
 {{ form_start(form) }}
-	<h3>{{ 'Přidat URL'|trans }}</h3>
-	<div class="form-inline">
-		{{ form_row(form.domain, { label: 'Doména', attr: {class: 'js-entity-url-list-window-content-domain-row'} }) }}
-		<div>
-			<span class="js-entity-url-list-window-content-domain-url" data-domain-urls-by-id="{{ form.vars.domainUrlsById|json_encode }}"></span>{{ form_widget(form.slug) }}
+	<div class="text-left">
+		<h2 class="window__title">{{ 'Přidat URL'|trans }}</h2>
+
+		<div class="form-line js-entity-url-list-window-content-domain-row">
+			<span class="form-line__label">
+				{{ form_label(form.domain, "Doména" ) }}
+			</span>
+			<span class="form-line__field">
+				{{ form_widget(form.domain, { attr: {class: 'js-entity-url-list-window-content-domain-row'} }) }}
+			</span>
 		</div>
-		{{ form_row(form.create, { label: 'Vytvořit URL'}) }}
+		<div class="form-line">
+			<span class="form-line__label js-entity-url-list-window-content-domain-url" data-domain-urls-by-id="{{ form.vars.domainUrlsById|json_encode }}"></span>
+			<span class="form-line__field">
+				{{ form_widget(form.slug) }}
+			</span>
+		</div>
+		<div class="window__actions form-line">
+			<span class="form-line__field">
+				{{ form_row(form.create, { label: 'Vytvořit URL'}) }}
+			</span>
+		</div>
+
 	</div>
+
 {{ form_end(form) }}

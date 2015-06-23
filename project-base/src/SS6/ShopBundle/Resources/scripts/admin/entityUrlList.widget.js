@@ -20,7 +20,8 @@
 
 		var openWindow = function (windowContentHtml) {
 			var $window = SS6.window({
-				content: windowContentHtml
+				content: windowContentHtml,
+				cssClass: 'window--wide-float'
 			});
 			var newUrlWindow = new SS6.entityUrls.NewUrlWindow($window, $entityUrls);
 			newUrlWindow.init();
