@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Accessory;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
 use SS6\ShopBundle\Model\Product\Product;
@@ -20,9 +21,19 @@ class ProductAccessoryRepository {
 	 */
 	private $productRepository;
 
-	public function __construct(EntityManager $em, ProductRepository $productRepository) {
+	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\QueryBuilderService
+	 */
+	private $queryBuilderService;
+
+	public function __construct(
+		EntityManager $em,
+		ProductRepository $productRepository,
+		QueryBuilderService $queryBuilderService
+	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
+		$this->queryBuilderService = $queryBuilderService;
 	}
 
 	/**
@@ -39,17 +50,8 @@ class ProductAccessoryRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getTop3ListableAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
-		$productAccessories = $this->getAllByProduct($product);
-
-		$accessoriesIds = [];
-		foreach ($productAccessories as $productAccessory) {
-			$accessoriesIds[] = $productAccessory->getAccessory()->getId();
-		}
-
-		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
-		$queryBuilder->andWhere('p.id IN (:accessoriesIds)')
-			->setParameter('accessoriesIds', $accessoriesIds)
-			->setMaxResults(3);
+		$queryBuilder = $this->getAllListableAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup);
+		$queryBuilder->setMaxResults(3);
 
 		return $queryBuilder->getQuery()->getResult();
 	}
@@ -60,6 +62,39 @@ class ProductAccessoryRepository {
 	 */
 	public function getAllByProduct(Product $product) {
 		return $this->getProductAccesoryRepository()->findBy(['product' => $product], ['position' => 'asc']);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getAllListableAccessoriesByProduct(Product $product, $domainId, PricingGroup $pricingGroup) {
+		return $this->getAllListableAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup)
+			->getQuery()
+			->getResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	private function getAllListableAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup) {
+		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
+		$this->queryBuilderService->addOrExtendJoin(
+			$queryBuilder,
+			ProductAccessory::class,
+			'pa',
+			'pa.accessory = p AND pa.product = :product'
+		);
+		$queryBuilder
+			->setParameter('product', $product)
+			->orderBy('pa.position', 'ASC');
+
+		return $queryBuilder;
 	}
 
 	/**

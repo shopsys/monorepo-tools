@@ -94,21 +94,13 @@ class ProductOnCurrentDomainFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAccessoriesProductDetailsForProduct(Product $product) {
-		$productAccessories = $this->productAccessoryRepository->getAllByProduct($product);
-		$accessoriesVisibleOnDomain = [];
+		$accessories = $this->productAccessoryRepository->getAllListableAccessoriesByProduct(
+			$product,
+			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup()
+		);
 
-		foreach ($productAccessories as $productAccessory) {
-			$accessoryVisibility = $this->productVisibilityRepository->getProductVisibility(
-				$productAccessory->getAccessory(),
-				$this->currentCustomer->getPricingGroup(),
-				$this->domain->getId()
-			);
-			if ($accessoryVisibility->isVisible() && $productAccessory->getAccessory()->getCalculatedSellable()) {
-				$accessoriesVisibleOnDomain[] = $productAccessory->getAccessory();
-			}
-		}
-
-		return $this->productDetailFactory->getDetailsForProducts($accessoriesVisibleOnDomain);
+		return $this->productDetailFactory->getDetailsForProducts($accessories);
 	}
 
 	/**
