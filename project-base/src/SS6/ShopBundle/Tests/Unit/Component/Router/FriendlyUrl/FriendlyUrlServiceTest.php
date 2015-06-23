@@ -32,9 +32,9 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 			$this->assertSame($entityId, $friendlyUrl->getEntityId());
 			$this->assertSame($routeName, $friendlyUrl->getRouteName());
 			if ($friendlyUrl->getDomainId() === 1) {
-				$this->assertSame($namesByLocale['cs'], $friendlyUrl->getSlug());
+				$this->assertSame($namesByLocale['cs'] . '/', $friendlyUrl->getSlug());
 			} elseif ($friendlyUrl->getDomainId() === 2) {
-				$this->assertSame($namesByLocale['en'], $friendlyUrl->getSlug());
+				$this->assertSame($namesByLocale['en'] . '/', $friendlyUrl->getSlug());
 			}
 		}
 	}
@@ -112,7 +112,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($friendlyUrl->getRouteName(), $friendlyUrlForPersist->getRouteName());
 		$this->assertSame($friendlyUrl->getEntityId(), $friendlyUrlForPersist->getEntityId());
 		$this->assertSame($friendlyUrl->getDomainId(), $friendlyUrlForPersist->getDomainId());
-		$this->assertSame('name-4', $friendlyUrlForPersist->getSlug());
+		$this->assertSame('name-4/', $friendlyUrlForPersist->getSlug());
 	}
 
 }

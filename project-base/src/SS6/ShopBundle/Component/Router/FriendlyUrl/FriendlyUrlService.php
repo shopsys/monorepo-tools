@@ -96,7 +96,7 @@ class FriendlyUrlService {
 			&& $entityName !== ''
 		) {
 			$nameForUrl = $entityName . ($entityName === null ? '' : '-' . $indexPostfix);
-			$slug = TransformString::stringToFriendlyUrlSlug($nameForUrl);
+			$slug = TransformString::stringToFriendlyUrlSlug($nameForUrl) . '/';
 
 			return new FriendlyUrl($routeName, $entityId, $domainId, $slug);
 		}
