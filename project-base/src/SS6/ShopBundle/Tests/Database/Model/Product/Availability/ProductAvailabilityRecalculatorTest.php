@@ -24,7 +24,6 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->usingStock = false;
 		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
-		$productEditData->urls['toDelete'] = [];
 
 		$productEditFacade->edit($productId, $productEditData);
 		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
@@ -58,7 +57,6 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 5;
 		$productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
 		$productEditData->productData->availability = null;
-		$productEditData->urls['toDelete'] = [];
 
 		$productEditFacade->edit($productId, $productEditData);
 		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
@@ -91,7 +89,6 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY;
 		$productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
 		$productEditData->productData->availability = null;
-		$productEditData->urls['toDelete'] = [];
 
 		$productEditFacade->edit($productId, $productEditData);
 		$productAvailabilityRecalculator->runScheduledRecalculations(function () {

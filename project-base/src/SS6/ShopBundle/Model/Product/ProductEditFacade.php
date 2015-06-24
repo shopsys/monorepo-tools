@@ -183,7 +183,7 @@ class ProductEditFacade {
 			$this->productSellableRecalculator->calculateSellableForProduct($product);
 			$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 			$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
-			$this->friendlyUrlFacade->saveUrlListFormData($productEditData->urls);
+			$this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
 			$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 			$this->em->commit();
 		} catch (\Exception $exception) {

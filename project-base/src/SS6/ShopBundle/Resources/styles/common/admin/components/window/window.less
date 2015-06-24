@@ -50,13 +50,26 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 		height: @window-wide-height;
 		margin: 0 0 0 -@window-wide-width/2;
 	}
+
+	&--wide-float {
+		position: fixed;
+		top: 50%;
+		width: @window-wide-float-width;
+		min-height: @window-wide-float-height;
+		margin: -@window-wide-float-height/2 0 0 -@window-wide-float-width/2;
+	}
+
+	&__title {
+		font-weight: bold;
+		font-size: 18px;
+	}
 }
 
 .window--active {
 	display: block;
 }
 
-.window .window__close {
+.window__close {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -77,6 +90,6 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 	}
 }
 
-.window .window__actions {
+.window__actions {
 	margin-top: 20px;
 }

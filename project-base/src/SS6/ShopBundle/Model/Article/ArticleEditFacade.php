@@ -92,7 +92,7 @@ class ArticleEditFacade {
 		$article->edit($articleData);
 
 		$this->em->beginTransaction();
-		$this->friendlyUrlFacade->saveUrlListFormData($articleData->urls);
+		$this->friendlyUrlFacade->saveUrlListFormData('front_article_detail', $article->getId(), $articleData->urls);
 		try {
 			$this->friendlyUrlFacade->createFriendlyUrlForDomain(
 				'front_article_detail',
