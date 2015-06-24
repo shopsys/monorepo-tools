@@ -6,13 +6,30 @@ use SS6\ShopBundle\Model\Domain\Domain;
 
 class Localization {
 
-	private $languageNames = [
+	const DEFAULT_COLLATION = 'en_US';
+
+	/**
+	 * @var string[locale]
+	 */
+	private $languageNamesByLocale = [
 		'cs' => 'Čeština',
 		'de' => 'Deutsch',
 		'en' => 'English',
 		'hu' => 'Magyar',
 		'pl' => 'Polski',
 		'sk' => 'Slovenčina',
+	];
+
+	/**
+	 * @var string[locale]
+	 */
+	private $collationsByLocale = [
+		'cs' => 'cs_CZ',
+		'de' => 'de_DE',
+		'en' => 'en_US',
+		'hu' => 'hu_HU',
+		'pl' => 'pl_PL',
+		'sk' => 'sk_SK',
 	];
 
 	/**
@@ -60,14 +77,30 @@ class Localization {
 		return $this->allLocales;
 	}
 
+	/**
+	 * @param string $locale
+	 * @return string
+	 */
 	public function getLanguageName($locale) {
-		if (!array_key_exists($locale, $this->languageNames)) {
+		if (!array_key_exists($locale, $this->languageNamesByLocale)) {
 			throw new \SS6\ShopBundle\Model\Localization\Exception\InvalidLocaleException(
 				sprintf('Locale "%s" is not valid', $locale)
 			);
 		}
 
-		return $this->languageNames[$locale];
+		return $this->languageNamesByLocale[$locale];
+	}
+
+	/**
+	 * @param string $locale
+	 * @return string
+	 */
+	public function getCollationByLocale($locale) {
+		if (array_key_exists($locale, $this->collationsByLocale)) {
+			return $this->collationsByLocale[$locale];
+		} else {
+			return self::DEFAULT_COLLATION;
+		}
 	}
 
 }
