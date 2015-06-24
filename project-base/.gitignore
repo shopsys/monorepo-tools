@@ -1,9 +1,7 @@
 /bin
-/docs
 /nbproject
 /node_modules
 /vendor
 /DEVELOPMENT
 /PRODUCTION
 /TEST
-Gruntfile.js

@@ -1,0 +1,15 @@
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<svg viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-person-man">
+    <!-- Generator: Sketch 3.0.3 (7891) - http://www.bohemiancoding.com/sketch -->
+    <title>737</title>
+    
+    <defs></defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(1.000000, 1.000000)" fill="#434343">
+            <path d="M8.918,12.338 L7.975,13.958 L7.033,12.338 L7.521,9.042 L8.429,9.042 L8.918,12.338 Z" class="si-glyph-fill"></path>
+            <path d="M5.534,14 C3.833,11.746 4.378,8.224 4.21,8 C0.123,7.999 0,14 0,14 L5.534,14 Z" class="si-glyph-fill"></path>
+            <path d="M10.5819092,14 L16,14 C15.999,14 16,7.96850586 12.319458,7.96850586 C12.156458,8.18850586 12.2849092,11.728 10.5819092,14 Z" class="si-glyph-fill"></path>
+            <path d="M8.00799561,7.94122333 C6.38999561,7.94122333 5,4.732 5,3.064 C5,1.394 6.38899561,0.0581054693 8.00799561,0.0581054693 C9.62799561,0.0581054693 11.0015869,1.39500007 11.0015869,3.06400007 C11.0015869,4.73200007 9.62799561,7.94122333 8.00799561,7.94122333 Z" class="si-glyph-fill"></path>
+        </g>
+    </g>
+</svg>
