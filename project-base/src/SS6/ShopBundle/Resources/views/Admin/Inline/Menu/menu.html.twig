@@ -16,7 +16,7 @@
 			</a>
 		</li>
 		<li class="navig__item">
-			<a href="{{ url('admin_logout') }}" class="navig__item__link" id="js-navig-item-logout">
+			<a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__link" id="js-navig-item-logout">
 				<i class="svg svg-forward-page"></i>
 			</a>
 		</li>

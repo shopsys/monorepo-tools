@@ -4,11 +4,6 @@ Breadcrumb
 Classic breadcrumbs, it should be used with DIV element, not UL or OL (copy paste problem)
 
 	<div class="in-breadcrumb">
-		<a href="#" class="in-breadcrumb__item">Main page</a>
-		<span class="in-breadcrumb__separator">-</span>
-		<a href="#" class="in-breadcrumb__item">Category</a>
-		<span class="in-breadcrumb__separator">-</span>
-		<span class="in-breadcrumb__item">This page</span>
 	</div>
 
 */
@@ -34,6 +29,14 @@ Classic breadcrumbs, it should be used with DIV element, not UL or OL (copy past
 
 		&--actual {
 			font-weight: bold;
+		}
+
+		&--home {
+			position: relative;
+			top: -2px;
+
+			font-size: 16px;
+			text-decoration: none;
 		}
 	}
 }

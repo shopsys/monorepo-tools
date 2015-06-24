@@ -23,13 +23,24 @@
 			display: block;
 			height: @height-header;
 			line-height: @height-header;
-			padding: 0 15px;
+			padding: 0 20px;
 
 			color: @color-alterlink;
 			text-decoration: none;
+			font-size: 26px;
+
+			i {
+				position: relative;
+				top: -3px;
+			}
 
 			&:hover {
 				color: @color-alterlink-hover;
+			}
+
+			&--active {
+				color: @color-alterlink-hover;
+				background: darken(@bg-primary, 5%);
 			}
 		}
 	}

@@ -1,7 +1,9 @@
 <div class="in-breadcrumb">
 	{% for item in items %}
 		{% if loop.first %}
-			<a href="{{ url('admin_default_dashboard') }}" class="in-breadcrumb__item in-breadcrumb__item--home">#H#</a>
+			<a href="{{ url('admin_default_dashboard') }}" class="in-breadcrumb__item in-breadcrumb__item--home">
+				<i class="svg svg-house"></i>
+			</a>
 			<span class="in-breadcrumb__separator"> > </span>
 		{% endif %}
 		{% if loop.last %}
