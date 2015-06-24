@@ -23,7 +23,7 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
 		$productEditData = $productEditDataFactory->createFromProduct($product);
-		$productEditData->productData->accessories = [
+		$productEditData->accessories = [
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24'),
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
 		];

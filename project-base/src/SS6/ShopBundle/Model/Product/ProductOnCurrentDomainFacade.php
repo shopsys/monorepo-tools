@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -49,6 +50,11 @@ class ProductOnCurrentDomainFacade {
 	 */
 	private $productFilterCountRepository;
 
+	/*
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+	 */
+	private $productAccessoryRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		Domain $domain,
@@ -56,7 +62,8 @@ class ProductOnCurrentDomainFacade {
 		CurrentCustomer $currentCustomer,
 		CategoryRepository $categoryRepository,
 		ProductVisibilityRepository $productVisibilityRepository,
-		ProductFilterCountRepository $productFilterCountRepository
+		ProductFilterCountRepository $productFilterCountRepository,
+		ProductAccessoryRepository $productAccessoryRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
@@ -65,6 +72,7 @@ class ProductOnCurrentDomainFacade {
 		$this->categoryRepository = $categoryRepository;
 		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->productFilterCountRepository = $productFilterCountRepository;
+		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
 	/**
@@ -86,21 +94,13 @@ class ProductOnCurrentDomainFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAccessoriesProductDetailsForProduct(Product $product) {
-		$accessories = $product->getAccessories();
-		$accessoriesVisibleOnDomain = [];
+		$accessories = $this->productAccessoryRepository->getAllListableAccessoriesByProduct(
+			$product,
+			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup()
+		);
 
-		foreach ($accessories as $accessory) {
-			$accessoryVisibility = $this->productVisibilityRepository->getProductVisibility(
-				$product,
-				$this->currentCustomer->getPricingGroup(),
-				$this->domain->getId()
-			);
-			if ($accessoryVisibility->isVisible() && $accessory->getCalculatedSellable()) {
-				$accessoriesVisibleOnDomain[] = $accessory;
-			}
-		}
-
-		return $this->productDetailFactory->getDetailsForProducts($accessoriesVisibleOnDomain);
+		return $this->productDetailFactory->getDetailsForProducts($accessories);
 	}
 
 	/**

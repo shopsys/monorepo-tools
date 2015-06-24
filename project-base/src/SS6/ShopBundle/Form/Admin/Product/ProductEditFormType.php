@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constraints\UniqueCollection;
 use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
+use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Form\FormType;
@@ -59,12 +60,18 @@ class ProductEditFormType extends AbstractType {
 	private $product;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 */
+	private $removeDuplicatesTransformer;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
 	 * @param string[] $metaDescriptionsIndexedByDomainId
+	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
@@ -74,6 +81,7 @@ class ProductEditFormType extends AbstractType {
 		array $pricingGroups,
 		array $domains,
 		array $metaDescriptionsIndexedByDomainId,
+		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
 		Product $product = null
 	) {
 		$this->images = $images;
@@ -82,6 +90,7 @@ class ProductEditFormType extends AbstractType {
 		$this->pricingGroups = $pricingGroups;
 		$this->domains = $domains;
 		$this->metaDescriptionsIndexedByDomainId = $metaDescriptionsIndexedByDomainId;
+		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
 		$this->product = $product;
 	}
 
@@ -146,6 +155,14 @@ class ProductEditFormType extends AbstractType {
 				'route_name' => 'front_product_detail',
 				'entity_id' => $this->product === null ? null : $this->product->getId(),
 			])
+			->add(
+				$builder
+					->create('accessories', FormType::PRODUCTS, [
+						'required' => false,
+						'main_product' => $this->product,
+					])
+					->addViewTransformer($this->removeDuplicatesTransformer)
+			)
 			->add('save', FormType::SUBMIT);
 
 		foreach ($this->pricingGroups as $pricingGroup) {

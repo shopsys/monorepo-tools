@@ -5,15 +5,15 @@ namespace SS6\ShopBundle\Model\Product\Accessory;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Product;
 
-class AccessoryFacade {
+class ProductAccessoryFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\AccessoryRepository
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
 	 */
-	private $accessoryRepository;
+	private $productAccessoryRepository;
 
-	public function __construct(AccessoryRepository $accessoryRepository) {
-		$this->accessoryRepository = $accessoryRepository;
+	public function __construct(ProductAccessoryRepository $productAccessoryRepository) {
+		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
 	/**
@@ -23,7 +23,7 @@ class AccessoryFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getTop3ListableAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
-		return $this->accessoryRepository->getTop3ListableAccessories($product, $domainId, $pricingGroup);
+		return $this->productAccessoryRepository->getTop3ListableAccessories($product, $domainId, $pricingGroup);
 	}
 
 }

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
@@ -37,18 +38,25 @@ class ProductEditDataFactory {
 	 */
 	private $friendlyUrlFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+	 */
+	private $productAccessoryRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductDataFactory $productDataFactory,
 		ProductInputPriceFacade $productInputPriceFacade,
-		FriendlyUrlFacade $friendlyUrlFacade
+		FriendlyUrlFacade $friendlyUrlFacade,
+		ProductAccessoryRepository $productAccessoryRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productDataFactory = $productDataFactory;
 		$this->productInputPriceFacade = $productInputPriceFacade;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
+		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
 	/**
@@ -64,6 +72,7 @@ class ProductEditDataFactory {
 		$productEditData->manualInputPrices = [];
 		$productEditData->seoTitles = [];
 		$productEditData->seoMetaDescriptions = [];
+		$productEditData->accessories = [];
 
 		$productEditData->urls[UrlListType::TO_DELETE] = [];
 		$productEditData->urls[UrlListType::MAIN_ON_DOMAINS] = [];
@@ -78,9 +87,34 @@ class ProductEditDataFactory {
 	 */
 	public function createFromProduct(Product $product) {
 		$productEditData = $this->createDefault();
-		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-		$productEditData->productData = $this->productDataFactory->createFromProduct($product, $productDomains);
 
+		$productEditData->parameters = $this->getParametersData($product);
+		$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
+		$productEditData->accessories = $this->getAccessoriesData($product);
+
+		$this->setMultidomainData($product, $productEditData);
+
+		return $productEditData;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Product[position]
+	 */
+	private function getAccessoriesData(Product $product) {
+		$productAccessories = [];
+		foreach ($this->productAccessoryRepository->getAllByProduct($product) as $productAccessory) {
+			$productAccessories[$productAccessory->getPosition()] = $productAccessory->getAccessory();
+		}
+
+		return $productAccessories;
+	}
+
+	/**
+	 * @param Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 */
+	private function getParametersData(Product $product) {
 		$productParameterValuesData = [];
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
 		foreach ($productParameterValues as $productParameterValue) {
@@ -88,10 +122,17 @@ class ProductEditDataFactory {
 			$productParameterValueData->setFromEntity($productParameterValue);
 			$productParameterValuesData[] = $productParameterValueData;
 		}
-		$productEditData->parameters = $productParameterValuesData;
 
-		$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
+		return $productParameterValuesData;
+	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 */
+	private function setMultidomainData(Product $product, ProductEditData $productEditData) {
+		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
+		$productEditData->productData = $this->productDataFactory->createFromProduct($product, $productDomains);
 		foreach ($productDomains as $productDomain) {
 			$domainId = $productDomain->getDomainId();
 
@@ -101,8 +142,6 @@ class ProductEditDataFactory {
 			$productEditData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 		}
-
-		return $productEditData;
 	}
 
 }
