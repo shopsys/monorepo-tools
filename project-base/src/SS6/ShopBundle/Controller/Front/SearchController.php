@@ -47,7 +47,7 @@ class SearchController extends Controller {
 	}
 
 	public function boxAction(Request $request) {
-		$searchText = $request->query->get('q');
+		$searchText = $request->query->get(ProductController::SEARCH_TEXT_PARAMETER);
 
 		return $this->render('@SS6Shop/Front/Content/Search/searchBox.html.twig', [
 			'searchText' => $searchText,

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
 
+	const SEARCH_TEXT_PARAMETER = 'q';
 	const PAGE_QUERY_PARAMETER = 'page';
 	const PRODUCTS_PER_PAGE = 12;
 
@@ -155,7 +156,7 @@ class ProductController extends Controller {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function searchAction(Request $request) {
-		$searchText = $request->query->get('q');
+		$searchText = $request->query->get(self::SEARCH_TEXT_PARAMETER);
 
 		$page = $request->get(self::PAGE_QUERY_PARAMETER);
 

@@ -2,7 +2,7 @@
 	<form action="{{ url('front_product_search') }}" method="get">
 		<input
 			type="text"
-			name="q"
+			name="{{ constant('SS6\\ShopBundle\\Controller\\Front\\ProductController::SEARCH_TEXT_PARAMETER') }}"
 			value="{{ searchText|escape('html_attr') }}"
 			placeholder="{{ 'Vyhledávání'|trans }}"
 			class="form-control search__input"

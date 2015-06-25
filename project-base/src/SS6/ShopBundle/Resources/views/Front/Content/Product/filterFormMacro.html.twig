@@ -5,7 +5,11 @@
 		{% set isSearch = page == 'search' %}
 
 		{% if isSearch %}
-			<input type="hidden" name="q" value="{{ searchText|escape('html_attr') }}" />
+			<input
+				type="hidden"
+				name="{{ constant('SS6\\ShopBundle\\Controller\\Front\\ProductController::SEARCH_TEXT_PARAMETER') }}"
+				value="{{ searchText|escape('html_attr') }}"
+			/>
 		{% endif %}
 
 		<div class="box-filter__group">
