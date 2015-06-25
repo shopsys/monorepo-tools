@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Collection;
 
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
@@ -31,16 +33,30 @@ class ProductCollectionFacade {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+	 */
+	private $friendlyUrlRepository;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+	 */
+	private $friendlyUrlService;
+
 	public function __construct(
 		ProductCollectionService $productCollectionService,
 		ImageConfig $imageConfig,
 		ImageRepository $imageRepository,
-		ImageFacade $imageFacade
+		ImageFacade $imageFacade,
+		FriendlyUrlRepository $friendlyUrlRepository,
+		FriendlyUrlService $friendlyUrlService
 	) {
 		$this->productCollectionService = $productCollectionService;
 		$this->imageConfig = $imageConfig;
 		$this->imageRepository = $imageRepository;
 		$this->imageFacade = $imageFacade;
+		$this->friendlyUrlRepository = $friendlyUrlRepository;
+		$this->friendlyUrlService = $friendlyUrlService;
 	}
 
 	/**
@@ -75,5 +91,25 @@ class ProductCollectionFacade {
 		$imagesByProductId = $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($products, $productEntityName);
 
 		return $this->productCollectionService->getImagesIndexedByProductId($products, $imagesByProductId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
+	 */
+	public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig) {
+		$mainFriendlyUrlByProductid = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(
+			$products,
+			'front_product_detail',
+			$domainConfig->getId()
+		);
+
+		$absoluteUrlsByProductId = [];
+		foreach ($mainFriendlyUrlByProductid as $productId => $friendlyUrl) {
+			$absoluteUrlsByProductId[$productId] = $this->friendlyUrlService->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
+		}
+
+		return $absoluteUrlsByProductId;
 	}
 }

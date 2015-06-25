@@ -103,4 +103,14 @@ class FriendlyUrlService {
 
 		return null;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @return string
+	 */
+	public function getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl) {
+		$domainConfig = $this->domain->getDomainConfigById($friendlyUrl->getDomainId());
+
+		return $domainConfig->getUrl() . '/' . $friendlyUrl->getSlug();
+	}
 }

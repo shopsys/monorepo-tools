@@ -115,4 +115,17 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('name-4/', $friendlyUrlForPersist->getSlug());
 	}
 
+	public function testGetAbsoluteUrlByFriendlyUrl() {
+		$domainConfigs = [
+			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir'),
+		];
+		$domain = new Domain($domainConfigs);
+
+		$friendlyUrlService = new FriendlyUrlService($domain);
+		$friendlyUrl = new FriendlyUrl('routeName', 1, 1, 'slug/');
+		$absoluteUrl = $friendlyUrlService->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
+
+		$this->assertSame('http://example.cz/slug/', $absoluteUrl);
+	}
+
 }

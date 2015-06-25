@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
@@ -23,11 +22,6 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
-	 */
-	private $domainRouterFactory;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
 	private $productPriceCalculationForUser;
@@ -40,13 +34,11 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 	public function __construct(
 		ProductRepository $productRepository,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		DomainRouterFactory $domainRouterFactory,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ProductCollectionFacade $productCollectionFacade
 	) {
 		$this->productRepository = $productRepository;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->domainRouterFactory = $domainRouterFactory;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productCollectionFacade = $productCollectionFacade;
 	}
@@ -62,7 +54,6 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 		return new HeurekaDataIterator(
 			$queryBuilder,
 			$domainConfig,
-			$this->domainRouterFactory,
 			$this->productPriceCalculationForUser,
 			$this->productCollectionFacade
 		);

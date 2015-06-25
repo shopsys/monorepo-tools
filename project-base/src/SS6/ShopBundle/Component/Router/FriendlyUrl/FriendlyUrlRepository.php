@@ -127,4 +127,22 @@ class FriendlyUrlRepository {
 
 		return $mainFriendlyUrl === $friendlyUrl;
 	}
+
+	/**
+	 * @param object[] $entities
+	 * @param string $routeName
+	 * @param int $domainId
+	 * @return \\SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+	 */
+	public function getMainFriendlyUrlsByEntitiesIndexedByEntityId(array $entities, $routeName, $domainId) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('f')
+			->from(FriendlyUrl::class, 'f', 'f.entityId')
+			->andWhere('f.routeName = :routeName')->setParameter('routeName', $routeName)
+			->andWhere('f.entityId IN (:entities)')->setParameter('entities', $entities)
+			->andWhere('f.domainId = :domainId')->setParameter('domainId', $domainId)
+			->andWhere('f.main = TRUE');
+
+		return $queryBuilder->getQuery()->execute();
+	}
 }
