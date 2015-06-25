@@ -48,11 +48,11 @@ class ProductPickerController extends Controller {
 	}
 
 	/**
-	 * @Route("/_products-picker/{jsInstanceId}/")
+	 * @Route("/product-picker/pick-multiple/{jsInstanceId}/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param string $jsInstanceId
 	 */
-	public function productsPickerAction(Request $request, $jsInstanceId) {
+	public function pickMultipleAction(Request $request, $jsInstanceId) {
 		return $this->getPickerResponse(
 			$request,
 			[
@@ -66,11 +66,11 @@ class ProductPickerController extends Controller {
 	}
 
 	/**
-	 * @Route("/_product-picker/{parentInputId}/")
+	 * @Route("/product-picker/pick-single/{parentInputId}/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param string $parentInputId
 	 */
-	public function productPickerAction(Request $request, $parentInputId) {
+	public function pickSingleAction(Request $request, $parentInputId) {
 		return $this->getPickerResponse(
 			$request,
 			[
