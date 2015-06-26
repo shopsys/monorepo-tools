@@ -32,7 +32,24 @@
 		{% if filterForm.flags is empty %}
 			{% do filterForm.flags.setRendered %}
 		{% else %}
-			{{ form_row(filterForm.flags, { label: 'Příznaky' }) }}
+			<div class="form-block">
+				<label class="form-block__label">{{ 'Příznaky'|trans }}:</label>
+				<div class="form-block__field">
+					<div class="form-choice" id="productFilter_form_flags">
+						{% for flagForm in filterForm.flags %}
+							<div class="form-choice__item">
+								<label>
+									{{ form_widget(flagForm, { attr: { class: 'form-choice__input'} }) }}
+									<span class="form-choice__text">
+										{{ flagForm.vars.label }}
+										(<span class="js-product-filter-count" data-form-id="{{ flagForm.vars.id }}">{{ productFilterCountData.countByFlagId[flagForm.vars.value] }}</span>)
+									</span>
+								</label>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
 		{% endif %}
 
 		{% if isSearch or filterForm.parameters is empty %}

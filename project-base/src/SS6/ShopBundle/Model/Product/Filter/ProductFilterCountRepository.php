@@ -99,6 +99,7 @@ class ProductFilterCountRepository {
 	) {
 		$productFilterCountData = new ProductFilterCountData();
 		$productFilterCountData->countInStock = $this->getCountInStock($productsQueryBuilder);
+		$productFilterCountData->countByFlagId = $this->getCountByFlagId($productsQueryBuilder);
 
 		return $productFilterCountData;
 	}
@@ -115,6 +116,14 @@ class ProductFilterCountRepository {
 			->resetDQLPart('orderBy');
 
 		return $productsInStockQueryBuilder->getQuery()->getSingleScalarResult();
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @return int[flagId]
+	 */
+	private function getCountByFlagId(QueryBuilder $productsQueryBuilder) {
+		return [1 => 10, 2 => 20, 3 => 30];
 	}
 
 }
