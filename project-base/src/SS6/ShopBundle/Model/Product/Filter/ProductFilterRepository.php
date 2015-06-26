@@ -99,21 +99,12 @@ class ProductFilterRepository {
 	private function getFlagsQueryBuilder(array $flags, EntityManager $em) {
 		$flagsQueryBuilder = $em->createQueryBuilder();
 
-		$orExpr = $flagsQueryBuilder->expr()->orX();
-
-		$index = 0;
-		foreach ($flags as $flag) {
-			$orExpr->add('f = :flag' . $index);
-			$flagsQueryBuilder->setParameter('flag' . $index, $flag);
-			$index++;
-		}
-
 		$flagsQueryBuilder
 			->select('1')
 			->from(Product::class, 'pf')
 			->join('pf.flags', 'f', Join::ON)
 			->where('pf = p')
-			->andWhere($orExpr);
+			->andWhere('f IN (:flags)')->setParameter('flags', $flags);
 
 		return $flagsQueryBuilder;
 	}
