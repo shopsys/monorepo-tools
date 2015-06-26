@@ -112,12 +112,23 @@
 										</tr>
 									</thead>
 									<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
-										{% macro orderItem(orderItem, orderItemId, orderItemTotalPricesById, currency) %}
+										{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
 											<tr class="js-order-item" data-index="{{ orderItemId }}">
-												<td>{{ form_widget(orderItem.name, {attr: { class: 'js-order-item-name'}}) }}</td>
-												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
-												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+												<td>
+													{% if productItem and productItem.product %}
+														{{ form_widget(orderItemForm.name, { type: 'hidden' }) }}
+														{% do orderItemForm.name.setRendered() %}
+														<span class="js-order-item-name">{{ productItem.name }}</span>
+														<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
+															<i class="fa fa-external-link"></i>
+														</a>
+													{% else %}
+														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+													{% endif %}
+												</td>
+												<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 												<td class="text-right text-middle">
 													{% if orderItemTotalPricesById[orderItemId] is defined %}
 														{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
@@ -134,8 +145,14 @@
 											</tr>
 										{% endmacro %}
 
-										{% for orderItemId, orderItem in form.items %}
-											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById, order.currency) }}
+										{% for productItem in order.productItems %}
+											{{ _self.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+										{% endfor %}
+
+										{% for orderItemId, orderItemForm in form.items %}
+											{% if not orderItemForm.rendered %}
+												{{ _self.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+											{% endif %}
 										{% endfor %}
 									</tbody>
 									<tfoot>

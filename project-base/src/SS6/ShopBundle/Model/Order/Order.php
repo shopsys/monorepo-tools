@@ -688,14 +688,21 @@ class Order {
 	 * @return int
 	 */
 	public function getProductItemsCount() {
-		$itemsCount = 0;
+		return count($this->getProductItems());
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderProduct[]
+	 */
+	public function getProductItems() {
+		$productItems = [];
 		foreach ($this->items as $item) {
 			if ($item instanceof OrderProduct) {
-				$itemsCount++;
+				$productItems[] = $item;
 			}
 		}
 
-		return $itemsCount;
+		return $productItems;
 	}
 
 }

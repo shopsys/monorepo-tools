@@ -50,10 +50,29 @@ class OrderProduct extends OrderItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	public function getProduct() {
 		return $this->product;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasProduct() {
+		return $this->product !== null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function edit(OrderItemData $orderItemData) {
+		$name = $this->name;
+		parent::edit($orderItemData);
+
+		if ($this->hasProduct()) {
+			$this->name = $name;
+		}
 	}
 
 }
