@@ -18,6 +18,10 @@ front_cart_delete:
   requirements:
     cartItemId: \d+
 
+front_contact_form:
+    pattern: /contactForm/
+    defaults: { _controller: SS6ShopBundle:Front\ContactForm:index }
+
 front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Default:index }
