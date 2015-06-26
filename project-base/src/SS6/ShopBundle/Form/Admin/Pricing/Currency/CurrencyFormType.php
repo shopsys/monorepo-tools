@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class CurrencyFormType extends AbstractType {
 
@@ -46,6 +47,9 @@ class CurrencyFormType extends AbstractType {
 			->add('exchangeRate', FormType::NUMBER, [
 				'required' => true,
 				'read_only' => $this->isRateReadOnly,
+				'constraints' => [
+					new Constraints\GreaterThan(0),
+				],
 			]);
 	}
 
