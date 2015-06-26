@@ -103,7 +103,7 @@ class ImageRepository {
 	/**
 	 * @param array $entities
 	 * @param string $entityName
-	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
+	 * @return \SS6\ShopBundle\Model\Image\Image[entityId]
 	 */
 	public function getMainImagesByEntitiesIndexedByEntityId(array $entities, $entityName) {
 		$queryBuilder = $this->getImageRepository()
@@ -112,12 +112,12 @@ class ImageRepository {
 			->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entities)
 			->orderBy('i.id', 'desc');
 
-		$imagesByProductId = [];
+		$imagesByEntityId = [];
 		foreach ($queryBuilder->getQuery()->execute() as $image) {
 			/* @var $image \SS6\ShopBundle\Model\Image\Image */
-			$imagesByProductId[$image->getEntityId()] = $image;
+			$imagesByEntityId[$image->getEntityId()] = $image;
 		}
 
-		return $imagesByProductId;
+		return $imagesByEntityId;
 	}
 }

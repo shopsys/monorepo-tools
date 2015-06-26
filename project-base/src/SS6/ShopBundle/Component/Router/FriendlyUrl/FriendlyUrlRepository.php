@@ -132,7 +132,7 @@ class FriendlyUrlRepository {
 	 * @param object[] $entities
 	 * @param string $routeName
 	 * @param int $domainId
-	 * @return \\SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
 	 */
 	public function getMainFriendlyUrlsByEntitiesIndexedByEntityId(array $entities, $routeName, $domainId) {
 		$queryBuilder = $this->em->createQueryBuilder()

@@ -63,23 +63,23 @@ class ProductCollectionFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
 	 * @param string|null $sizeName
-	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
+	 * @return string[productId]
 	 */
-	public function findImagesUrlIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null) {
-		$imagesUrlByProductId = [];
+	public function findImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null) {
+		$imagesUrlsByProductId = [];
 		foreach ($this->findMainImagesIndexedByProductId($products) as $productId => $image) {
 			if ($image === null) {
-				$imagesUrlByProductId[$productId] = null;
+				$imagesUrlsByProductId[$productId] = null;
 			} else {
 				try {
-					$imagesUrlByProductId[$productId] = $this->imageFacade->getImageUrl($domainConfig, $image, $sizeName);
+					$imagesUrlsByProductId[$productId] = $this->imageFacade->getImageUrl($domainConfig, $image, $sizeName);
 				} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
-					$imagesUrlByProductId[$productId] = null;
+					$imagesUrlsByProductId[$productId] = null;
 				}
 			}
 		}
 
-		return $imagesUrlByProductId;
+		return $imagesUrlsByProductId;
 	}
 
 	/**
@@ -99,14 +99,14 @@ class ProductCollectionFacade {
 	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
 	 */
 	public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig) {
-		$mainFriendlyUrlByProductid = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(
+		$mainFriendlyUrlsByProductId = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(
 			$products,
 			'front_product_detail',
 			$domainConfig->getId()
 		);
 
 		$absoluteUrlsByProductId = [];
-		foreach ($mainFriendlyUrlByProductid as $productId => $friendlyUrl) {
+		foreach ($mainFriendlyUrlsByProductId as $productId => $friendlyUrl) {
 			$absoluteUrlsByProductId[$productId] = $this->friendlyUrlService->getAbsoluteUrlByFriendlyUrl($friendlyUrl);
 		}
 

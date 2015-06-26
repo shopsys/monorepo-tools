@@ -15,7 +15,7 @@ abstract class AbstractDataIterator implements Iterator {
 	private $position;
 
 	/**
-	 * @var array|null
+	 * @var mixed|bool|null
 	 */
 	private $currentItem;
 
@@ -48,7 +48,7 @@ abstract class AbstractDataIterator implements Iterator {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
+	 * @return mixed
 	 */
 	public function current() {
 		if (!array_key_exists($this->position, $this->itemsByPosition)) {
