@@ -111,7 +111,7 @@ class ProductFilterRepository {
 		$flagsQueryBuilder
 			->select('1')
 			->from(Product::class, 'pf')
-			->join('p.flags', 'f', Join::ON)
+			->join('pf.flags', 'f', Join::ON)
 			->where('pf = p')
 			->andWhere($orExpr);
 
