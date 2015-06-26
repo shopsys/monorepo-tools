@@ -103,9 +103,10 @@
 									<thead>
 										<tr>
 											<th class="table-col-30">{{ 'Název'|trans }}</th>
+											<th class="table-col-5">{{ 'Kat. číslo'|trans }}</th>
 											<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
 											<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
-											<th class="table-col-15 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
+											<th class="table-col-10 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
 											<th class="table-col-15 text-right text-nowrap">{{ 'Celkem s DPH'|trans }}</th>
 											<th class="table-col-15 text-right text-nowrap">{{ 'Celkem bez DPH'|trans }}</th>
 											<th ></th>
@@ -124,6 +125,11 @@
 														</a>
 													{% else %}
 														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+													{% endif %}
+												</td>
+												<td>
+													{% if productItem and productItem.product %}
+														{{ productItem.product.catnum }}
 													{% endif %}
 												</td>
 												<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
@@ -157,7 +163,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="7">
+											<td colspan="8">
 												<a id="js-order-item-add" href="#" class="btn btn-primary">
 													<i class="fa fa-plus fa-lg"></i>
 													{{ 'Přidat položku'|trans }}
@@ -165,7 +171,7 @@
 											</td>
 										</tr>
 										<tr>
-											<th colspan="4">{{ 'Celkem'|trans }}:</th>
+											<th colspan="5">{{ 'Celkem'|trans }}:</th>
 											<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
 											<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
 											<th></th>
