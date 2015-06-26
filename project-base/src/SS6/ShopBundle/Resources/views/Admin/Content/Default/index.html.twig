@@ -5,4 +5,125 @@
 
 {% block main_content %}
 
+	<div class="form-line">
+		<div class="form-line__label">
+			Label
+		</div>
+
+		<div class="form-line__side">
+			<div class="form-line__item form-line__item--text">
+				Field text
+			</div>
+		</div>
+	</div>
+
+	<div class="form-line mb20">
+		<div class="form-line__label">
+			Label
+		</div>
+
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<input type="text" class="inp">
+			</div>
+		</div>
+	</div>
+
+	<div class="form-line__group">
+		<div class="form-line__title">
+			Title of group
+			<span class="form-line__title__click">
+				-
+			</span>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item form-line__item--text">
+					Field text
+				</div>
+			</div>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<select class="inp" name="" id="">
+						<option value="">1</option>
+						<option value="">2</option>
+						<option value="">3</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<input type="text" class="inp">
+				</div>
+				<div class="form-line__item form-line__item--text">
+					text after
+				</div>
+			</div>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<label class="form-choice">
+						<input type="radio" class="inp-choice form-choice__input">
+						yes
+					</label>
+					<label class="form-choice">
+						<input type="radio" class="inp-choice form-choice__input">
+						no
+					</label>
+				</div>
+				<div class="form-line__item form-line__item--alone">
+					<div class="in-message in-message--info">
+						<i class="svg svg-info"></i> info message
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item form-line__item--alone">
+					<div class="form-choice-list">
+						<label class="form-choice-list__item">
+							<input type="checkbox" class="inp-choice form-choice-list__input">
+							yes
+						</label>
+						<label class="form-choice-list__item">
+							<input type="checkbox" class="inp-choice form-choice-list__input">
+							no
+						</label>
+					</div>
+				</div>
+				<div class="form-line__item form-line__item--alone">
+					<div class="in-message in-message--warning">
+						warning message
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}
