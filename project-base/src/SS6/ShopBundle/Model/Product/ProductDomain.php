@@ -51,6 +51,12 @@ class ProductDomain {
 	private $seoMetaDescription;
 
 	/**
+	 * @var string
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $description;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 */
@@ -58,8 +64,6 @@ class ProductDomain {
 		$this->product = $product;
 		$this->domainId = $domainId;
 		$this->hidden = false;
-		$this->seoTitle = null;
-		$this->seoMetaDescription = null;
 	}
 
 	/**
@@ -122,6 +126,20 @@ class ProductDomain {
 		} else {
 			return $seoTitle;
 		}
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * @param string|null $description
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 	}
 
 }
