@@ -2,11 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
-use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -23,32 +22,25 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
-	 */
-	private $domainRouterFactory;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
 	private $productPriceCalculationForUser;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade
 	 */
-	private $imageFacade;
+	private $productCollectionFacade;
 
 	public function __construct(
 		ProductRepository $productRepository,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		DomainRouterFactory $domainRouterFactory,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ImageFacade $imageFacade
+		ProductCollectionFacade $productCollectionFacade
 	) {
 		$this->productRepository = $productRepository;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->domainRouterFactory = $domainRouterFactory;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
-		$this->imageFacade = $imageFacade;
+		$this->productCollectionFacade = $productCollectionFacade;
 	}
 
 	/**
@@ -57,13 +49,13 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 	public function getIterator(DomainConfig $domainConfig) {
 		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
 		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
+		$this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
 
 		return new HeurekaDataIterator(
-			$queryBuilder->getQuery()->iterate(),
+			$queryBuilder,
 			$domainConfig,
-			$this->domainRouterFactory,
 			$this->productPriceCalculationForUser,
-			$this->imageFacade
+			$this->productCollectionFacade
 		);
 	}
 }

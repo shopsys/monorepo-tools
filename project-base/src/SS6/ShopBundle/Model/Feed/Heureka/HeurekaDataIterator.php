@@ -2,13 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
-use Doctrine\ORM\Internal\Hydration\IterableResult;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
-use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem;
+use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use Symfony\Component\Routing\RouterInterface;
 
 class HeurekaDataIterator extends AbstractDataIterator {
 
@@ -18,78 +17,70 @@ class HeurekaDataIterator extends AbstractDataIterator {
 	private $domainConfig;
 
 	/**
-	 * @var \Symfony\Component\Routing\RouterInterface
-	 */
-	private $router;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
 	private $productPriceCalculationForUser;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade
 	 */
-	private $imageFacade;
+	private $productCollectionFacade;
 
 	/**
-	 * @param \Doctrine\ORM\Internal\Hydration\IterableResult $iterableResult
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
+	 * @param \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
 	 */
 	public function __construct(
-		IterableResult $iterableResult,
+		QueryBuilder $queryBuilder,
 		DomainConfig $domainConfig,
-		DomainRouterFactory $domainRouterFactory,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ImageFacade $imageFacade
+		ProductCollectionFacade $productCollectionFacade
 	) {
 		$this->domainConfig = $domainConfig;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
-		$this->router = $domainRouterFactory->getRouter($domainConfig->getId());
-		$this->imageFacade = $imageFacade;
+		$this->productCollectionFacade = $productCollectionFacade;
 
-		parent::__construct($iterableResult);
+		parent::__construct($queryBuilder);
 	}
 
 	/**
-	 * @param array $row
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
 	 */
-	protected function createItem(array $row) {
-		$product = $row[0];
-		/* @var $product \SS6\ShopBundle\Model\Product\Product */
-		$calculatedAvailability = $product->getCalculatedAvailability();
-		if ($calculatedAvailability === null) {
-			$deliveryDate = null;
-		} else {
-			$deliveryDate = $calculatedAvailability->getDeliveryTime();
+	protected function createItems(array $products) {
+		$imagesByProductId = $this->productCollectionFacade->findImagesUrlsIndexedByProductId($products, $this->domainConfig);
+		$urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $this->domainConfig);
+
+		$items = [];
+		foreach ($products as $product) {
+			$calculatedAvailability = $product->getCalculatedAvailability();
+			if ($calculatedAvailability === null) {
+				$deliveryDate = null;
+			} else {
+				$deliveryDate = $calculatedAvailability->getDeliveryTime();
+			}
+
+			$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
+				$product,
+				$this->domainConfig->getId(),
+				null
+			);
+
+			$items[] = new HeurekaItem(
+				$product->getId(),
+				$product->getName($this->domainConfig->getLocale()),
+				$product->getDescription($this->domainConfig->getLocale()),
+				$urlsByProductId[$product->getId()],
+				$imagesByProductId[$product->getId()],
+				$productPrice->getPriceWithVat(),
+				$product->getEan(),
+				$deliveryDate
+			);
 		}
 
-		$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
-			$product,
-			$this->domainConfig->getId(),
-			null
-		);
-
-		try {
-			$imageUrl = $this->imageFacade->getImageUrl($this->domainConfig, $product);
-		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
-			$imageUrl = null;
-		}
-
-		return new HeurekaItem(
-			$product->getId(),
-			$product->getName($this->domainConfig->getLocale()),
-			$product->getDescription($this->domainConfig->getLocale()),
-			$this->router->generate('front_product_detail', ['id' => $product->getId()], RouterInterface::ABSOLUTE_URL),
-			$imageUrl,
-			$productPrice->getPriceWithVat(),
-			$product->getEan(),
-			$deliveryDate
-		);
+		return $items;
 	}
 
 }

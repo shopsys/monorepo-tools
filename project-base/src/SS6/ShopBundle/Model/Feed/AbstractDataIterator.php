@@ -2,68 +2,97 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
-use Doctrine\ORM\Internal\Hydration\IterableResult;
+use Doctrine\ORM\QueryBuilder;
 use Iterator;
 
 abstract class AbstractDataIterator implements Iterator {
 
-	/**
-	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult
-	 */
-	private $iterableResult;
+	const BUFFER_SIZE = 500;
 
 	/**
-	 * @param \Doctrine\ORM\Internal\Hydration\IterableResult $iterableResult
+	 * @var int
 	 */
-	public function __construct(IterableResult $iterableResult) {
-		$this->iterableResult = $iterableResult;
+	private $position;
+
+	/**
+	 * @var mixed|bool|null
+	 */
+	private $currentItem;
+
+	/**
+	 * @var \Doctrine\ORM\QueryBuilder
+	 */
+	private $queryBuilder;
+
+	/**
+	 * @var array
+	 */
+	private $itemsByPosition;
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 */
+	public function __construct(QueryBuilder $queryBuilder) {
+		$this->queryBuilder = $queryBuilder;
+		$this->rewind();
 	}
 
 	public function rewind() {
-		$this->iterableResult->rewind();
+		$this->position = 0;
+		$this->itemsByPosition = [];
+		$this->currentItem = null;
 	}
 
-	/**
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
-	 */
 	public function next() {
-		$current = $this->iterableResult->next();
-		if ($current === false) {
-			return false;
-		}
-
-		return $this->createItem($current);
+		$this->position++;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem
+	 * @return mixed
 	 */
 	public function current() {
-		$current = $this->iterableResult->current();
-		if ($current === false) {
-			return false;
+		if (!array_key_exists($this->position, $this->itemsByPosition)) {
+			$offset = $this->position - ($this->position % self::BUFFER_SIZE);
+
+			$queryBuilder = clone $this->queryBuilder;
+			$queryBuilder->setFirstResult($offset);
+			$queryBuilder->setMaxResults(self::BUFFER_SIZE);
+
+			$items = $this->createItems($queryBuilder->getQuery()->execute());
+
+			$this->itemsByPosition = [];
+			foreach ($items as $item) {
+				$this->itemsByPosition[$offset + count($this->itemsByPosition)] = $item;
+			}
 		}
 
-		return $this->createItem($current);
+		if (array_key_exists($this->position, $this->itemsByPosition)) {
+			$this->currentItem = $this->itemsByPosition[$this->position];
+		} else {
+			$this->currentItem = false;
+		}
+
+		return $this->currentItem;
 	}
 
 	/**
 	 * @return int
 	 */
 	public function key() {
-		return $this->iterableResult->key();
+		return $this->position;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function valid() {
-		return $this->iterableResult->valid();
+		return $this->current() !== false;
 	}
 
 	/**
-	 * @param array $row
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @return array
 	 */
-	abstract protected function createItem(array $row);
+	abstract protected function createItems(array $products);
 
 }
