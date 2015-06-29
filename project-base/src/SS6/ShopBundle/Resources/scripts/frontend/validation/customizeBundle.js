@@ -104,7 +104,7 @@
 				SS6.window({
 					content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
 				});
-			} else if ($(this).attr('data-on-submit') !== undefined) {
+			} else if ($(this).data('on-submit') !== undefined) {
 				$(this).trigger($(this).data('on-submit'));
 				event.preventDefault();
 			}
