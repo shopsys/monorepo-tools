@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Twig_Environment;
 
-class GenerateGruntCommand extends ContainerAwareCommand {
+class GenerateGruntfileCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this

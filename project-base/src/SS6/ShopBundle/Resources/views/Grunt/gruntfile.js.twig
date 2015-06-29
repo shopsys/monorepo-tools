@@ -105,37 +105,34 @@ module.exports = function(grunt) {
 				}
 			},
 
-			{% for domain in domains -%}
-				frontend{{ domain.id }}: {
-					src: 'web/assets/frontend{{ domain.id }}/images/icons/*.png',
-					dest: 'web/assets/frontend{{ domain.id }}/images/icons/*.png',
-					destImg: 'web/assets/frontend{{ domain.id }}/images/sprites/sprite.png',
-					destCSS: '{{ domain.stylesDirectory|raw }}libs/sprites.less',
-					imgPath: '../images/sprites/sprite.png',
-					algorithm: 'binary-tree',
-					padding: 50,
-					engine: 'auto',
-					cssFormat: 'css',
-					cssVarMap: function (sprite) {
-						sprite.name = 'sprite.sprite-' + sprite.name;
-					},
-					engineOpts: {
-						imagemagick: true
-					},
-					imgOpts: {
-						format: 'png',
-						quality: 90,
-						timeout: 10000
-					},
-					cssOpts: {
-						functions: false,
-						cssClass: function (item) {
-								return '.' + item.name;
-						}
+			frontend: {
+				src: 'web/assets/frontend/images/icons/*.png',
+				dest: 'web/assets/frontend/images/icons/*.png',
+				destImg: 'web/assets/frontend/images/sprites/sprite.png',
+				destCSS: 'src/SS6/ShopBundle/Resources/styles/common/front/libs/sprites.less',
+				imgPath: '../images/sprites/sprite.png',
+				algorithm: 'binary-tree',
+				padding: 50,
+				engine: 'auto',
+				cssFormat: 'css',
+				cssVarMap: function (sprite) {
+					sprite.name = 'sprite.sprite-' + sprite.name;
+				},
+				engineOpts: {
+					imagemagick: true
+				},
+				imgOpts: {
+					format: 'png',
+					quality: 90,
+					timeout: 10000
+				},
+				cssOpts: {
+					functions: false,
+					cssClass: function (item) {
+							return '.' + item.name;
 					}
-				}{% if not loop.last %},{% endif %}
-
-			{% endfor %}
+				}
+			}
 		},
 
 		styledocco: {
@@ -167,27 +164,22 @@ module.exports = function(grunt) {
 					livereload: true,
 				}
 			},
-			{% for domain in domains -%}
-				frontend{{ domain.id }}Sprite: {
-					files: ['web/assets/frontend{{ domain.id }}/images/icons/**/*.png'],
-					tasks: ['frontend{{ domain.id }}Sprite'],
-					options: {
-						livereload: true,
-					}
-				},
-			{% endfor -%}
-			frontend1: {
-				files: ['src/SS6/ShopBundle/Resources/styles/common/front/**/*.less'],
-				tasks: [{% for domain in domains %}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+			frontendSprite: {
+				files: ['web/assets/frontend/images/icons/**/*.png'],
+				tasks: ['frontendSprite'],
+				options: {
+					livereload: true,
+				}
 			},
 			{% for domain in domains -%}
-				{%- if domain.id != 1 -%}
-					frontend{{ domain.id }}: {
-						files: ['{{ domain.stylesDirectory|raw }}**/*.less'],
-						tasks: ['frontend{{ domain.id }}']
-					},
-				{%- endif -%}
-			{%- endfor %}
+				frontend{{ domain.id }}: {
+					files: ['{{ domain.stylesDirectory|raw }}**/*.less'],
+					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+					{% else -%}
+						['frontend{{ domain.id }}']
+					{% endif -%}
+				},
+			{% endfor %}
 
 			livereload: {
 				options: {
@@ -218,7 +210,7 @@ module.exports = function(grunt) {
 	{% for domain in domains -%}
 		grunt.registerTask('frontend{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
 	{% endfor -%}
-	grunt.registerTask('frontendSprite', ['frontend1', 'frontend2']);
+	grunt.registerTask('frontendSprite', [{% for domain in domains -%}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]);
 	grunt.registerTask('adminSprite', ['admin']);
 	grunt.registerTask('admin', ['sprite:admin','less:admin', 'legacssy:admin' ]);
 
