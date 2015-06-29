@@ -43,12 +43,18 @@ class MenuItem {
 	private $superadmin;
 
 	/**
+	 * @var string|null
+	 */
+	private $icon;
+
+	/**
 	 * @param string $label
 	 * @param string|null $type
 	 * @param string|null $route
 	 * @param array|null $routeParameters
 	 * @param bool $visible
 	 * @param bool $superadmin
+	 * @param string|null $icon
 	 * @param array|null $items
 	 */
 	public function __construct(
@@ -58,6 +64,7 @@ class MenuItem {
 		array $routeParameters = null,
 		$visible = true,
 		$superadmin = false,
+		$icon = null,
 		array $items = null
 	) {
 		if (isset($type)) {
@@ -85,6 +92,12 @@ class MenuItem {
 			$this->superadmin = $superadmin;
 		} else {
 			$this->superadmin = false;
+		}
+
+		if (isset($icon)) {
+			$this->icon = $icon;
+		} else {
+			$this->icon = null;
 		}
 
 		$this->items = $items;
@@ -137,6 +150,13 @@ class MenuItem {
 	 */
 	public function isSuperadmin() {
 		return $this->superadmin === true;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getIcon() {
+		return $this->icon;
 	}
 
 	/**

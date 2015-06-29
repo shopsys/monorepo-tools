@@ -1,8 +1,10 @@
 - label: 'Nástěnka'
   route: admin_default_dashboard
+  icon: house
 
 - label: 'Objednávky'
   route: admin_order_list
+  icon: document-copy
   items:
     - label: 'Přehled objednávek'
       route: admin_order_list
@@ -13,6 +15,7 @@
 
 - label: 'Zákazníci'
   route: admin_customer_list
+  icon: person-public
   items:
     - label: 'Registrovaní zákazníci'
       route: admin_customer_list
@@ -26,6 +29,7 @@
 
 - label: 'Zboží'
   route: admin_product_list
+  icon: basket
   items:
     - label: 'Přehled zboží'
       route: admin_product_list
@@ -51,6 +55,7 @@
 
 - label: 'Cenotvorba'
   route: admin_pricinggroup_list
+  icon: tag
   items:
     - label: 'Cenové skupiny'
       route: admin_pricinggroup_list
@@ -65,6 +70,7 @@
 
 - label: 'Marketing'
   route: admin_article_list
+  icon: chart-piece
   items:
     - label: 'Přehled článků'
       route: admin_article_list
@@ -106,6 +112,7 @@
 
 - label: 'Administrátoři'
   route: admin_administrator_list
+  icon: person-door-man
   items:
     - label: 'Přehled administrátorů'
       route: admin_administrator_list
@@ -120,6 +127,7 @@
 - label: 'Nastavení'
   route: admin_domain_list
   type: settings
+  icon: gear
   items:
     - label: 'Identifikace e-shopu'
       route: admin_domain_list
