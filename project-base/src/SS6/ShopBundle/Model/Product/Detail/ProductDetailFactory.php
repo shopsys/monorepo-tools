@@ -69,7 +69,7 @@ class ProductDetailFactory {
 			$this->getSellingPrice($product),
 			$this->getProductDomainsIndexedByDomainId($product),
 			$this->getParameters($product),
-			$this->getImages($product)
+			$this->getImagesIndexedById($product)
 		);
 	}
 
@@ -121,10 +121,10 @@ class ProductDetailFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 * @return \SS6\ShopBundle\Model\Image\Image[imageId]
 	 */
-	private function getImages(Product $product) {
-		return $this->imageFacade->getImagesByEntity($product, null);
+	private function getImagesIndexedById(Product $product) {
+		return $this->imageFacade->getImagesByEntityIndexedById($product, null);
 	}
 
 	/**

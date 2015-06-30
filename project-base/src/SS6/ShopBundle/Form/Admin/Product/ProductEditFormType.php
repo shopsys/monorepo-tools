@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constraints\UniqueCollection;
+use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
@@ -65,6 +66,11 @@ class ProductEditFormType extends AbstractType {
 	private $removeDuplicatesTransformer;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
+	 */
+	private $imagesIdsToImagesTransformer;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
@@ -82,6 +88,7 @@ class ProductEditFormType extends AbstractType {
 		array $domains,
 		array $metaDescriptionsIndexedByDomainId,
 		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
+		ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer,
 		Product $product = null
 	) {
 		$this->images = $images;
@@ -91,6 +98,7 @@ class ProductEditFormType extends AbstractType {
 		$this->domains = $domains;
 		$this->metaDescriptionsIndexedByDomainId = $metaDescriptionsIndexedByDomainId;
 		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
+		$this->imagesIdsToImagesTransformer = $imagesIdsToImagesTransformer;
 		$this->product = $product;
 	}
 
@@ -136,6 +144,12 @@ class ProductEditFormType extends AbstractType {
 					]),
 				],
 			])
+			->add(
+				$builder->create('imagePositions', FormType::COLLECTION, [
+					'required' => false,
+					'type' => FormType::HIDDEN,
+				])->addModelTransformer($this->imagesIdsToImagesTransformer)
+			)
 			->add('imagesToDelete', FormType::CHOICE, [
 				'required' => false,
 				'multiple' => true,

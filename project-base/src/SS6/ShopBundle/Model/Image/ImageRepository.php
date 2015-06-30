@@ -61,16 +61,23 @@ class ImageRepository {
 	 * @param string $entityName
 	 * @param int $entityId
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 * @return \SS6\ShopBundle\Model\Image\Image[imageId]
 	 */
-	public function getImagesByEntity($entityName, $entityId, $type) {
-		return $this->getImageRepository()->findBy([
-				'entityName' => $entityName,
-				'entityId' => $entityId,
-				'type' => $type,
-			],
-			['id' => 'asc']
-		);
+	public function getImagesByEntityIndexedById($entityName, $entityId, $type) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('i')
+			->from(Image::class, 'i', 'i.id')
+			->where('i.entityName = :entityName')->setParameter('entityName', $entityName)
+			->andWhere('i.entityId = :entityId')->setParameter('entityId', $entityId)
+			->orderBy('i.id', 'asc');
+
+		if ($type === null) {
+			$queryBuilder->andWhere('i.type IS NULL');
+		} else {
+			$queryBuilder->andWhere('i.type = :type')->setParameter('type', $type);
+		}
+
+		return $queryBuilder->getQuery()->execute();
 	}
 
 	/**

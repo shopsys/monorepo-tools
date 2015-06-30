@@ -28,6 +28,11 @@ class ProductEditData {
 	public $imagesToDelete;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Image\Image[imageId]
+	 */
+	public $imagePositions;
+
+	/**
 	 * @var string[pricingGroupId]
 	 */
 	public $manualInputPrices;
@@ -62,6 +67,7 @@ class ProductEditData {
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesToDelete
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagePositions
 	 * @param string[] $manualInputPrices
 	 * @param string[] $seoTitles
 	 * @param string[] $seoMetaDescriptions
@@ -73,6 +79,7 @@ class ProductEditData {
 		array $parameters = [],
 		array $imagesToUpload = [],
 		array $imagesToDelete = [],
+		array $imagePositions = [],
 		array $manualInputPrices = [],
 		array $seoTitles = [],
 		array $seoMetaDescriptions = [],
@@ -87,6 +94,7 @@ class ProductEditData {
 		$this->parameters = $parameters;
 		$this->imagesToUpload = $imagesToUpload;
 		$this->imagesToDelete = $imagesToDelete;
+		$this->imagePositions = $imagePositions;
 		$this->manualInputPrices = $manualInputPrices;
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;

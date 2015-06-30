@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
@@ -43,13 +44,19 @@ class ProductEditDataFactory {
 	 */
 	private $productAccessoryRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 */
+	private $imageFacade;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductDataFactory $productDataFactory,
 		ProductInputPriceFacade $productInputPriceFacade,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		ProductAccessoryRepository $productAccessoryRepository
+		ProductAccessoryRepository $productAccessoryRepository,
+		ImageFacade $imageFacade
 	) {
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
@@ -57,6 +64,7 @@ class ProductEditDataFactory {
 		$this->productInputPriceFacade = $productInputPriceFacade;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->productAccessoryRepository = $productAccessoryRepository;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -92,6 +100,7 @@ class ProductEditDataFactory {
 		$productEditData->parameters = $this->getParametersData($product);
 		$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
 		$productEditData->accessories = $this->getAccessoriesData($product);
+		$productEditData->imagePositions = $this->imageFacade->getImagesByEntityIndexedById($product, null);
 
 		$this->setMultidomainData($product, $productEditData);
 

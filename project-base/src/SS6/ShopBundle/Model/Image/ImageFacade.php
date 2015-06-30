@@ -154,10 +154,10 @@ class ImageFacade {
 	/**
 	 * @param object $entity
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 * @return \SS6\ShopBundle\Model\Image\Image[imageId]
 	 */
-	public function getImagesByEntity($entity, $type) {
-		return $this->imageRepository->getImagesByEntity(
+	public function getImagesByEntityIndexedById($entity, $type) {
+		return $this->imageRepository->getImagesByEntityIndexedById(
 			$this->imageConfig->getEntityName($entity),
 			$this->getEntityId($entity),
 			$type
@@ -238,5 +238,13 @@ class ImageFacade {
 		} else {
 			return $this->getImageByEntity($imageOrEntity, $type);
 		}
+	}
+
+	/**
+	 * @param int $imageId
+	 * @return \SS6\ShopBundle\Model\Image\Image
+	 */
+	public function getById($imageId) {
+		return $this->imageRepository->getById($imageId);
 	}
 }
