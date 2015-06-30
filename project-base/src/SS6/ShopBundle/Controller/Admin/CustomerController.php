@@ -20,6 +20,7 @@ use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,6 +77,11 @@ class CustomerController extends BaseController {
 	 */
 	private $selectedDomain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
+	 */
+	private $orderFacade;
+
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		Translator $translator,
@@ -86,7 +92,8 @@ class CustomerController extends BaseController {
 		Breadcrumb $breadcrumb,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
-		SelectedDomain $selectedDomain
+		SelectedDomain $selectedDomain,
+		OrderFacade $orderFacade
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
@@ -98,6 +105,7 @@ class CustomerController extends BaseController {
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
+		$this->orderFacade = $orderFacade;
 	}
 
 	/**
@@ -145,9 +153,12 @@ class CustomerController extends BaseController {
 
 		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zákazníka - ') . $user->getFullName()));
 
+		$orders = $this->orderFacade->getCustomerOrderList($user);
+
 		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', [
 			'form' => $form->createView(),
 			'user' => $user,
+			'orders' => $orders,
 		]);
 	}
 

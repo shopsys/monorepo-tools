@@ -1,0 +1,42 @@
+<h2>{{ 'Objednávky zákazníka'|trans }}</h2>
+
+{% if orders|length == 0 %}
+	{{ 'Zákazník prozatím nemá žádné objednávky.'|trans }}
+{% else %}
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>{{ 'Číslo objednávky'|trans }}</th>
+				<th>{{ 'Fakturační adresa'|trans }}</th>
+				<th>{{ 'Doručovací adresa'|trans }}</th>
+				<th>{{ 'Celková cena s DPH'|trans }}</th>
+				<th>{{ 'Stav'|trans }}</th>
+			</tr>
+		</thead>
+		{% for order in orders %}
+			<tr>
+				<td>
+					<a href="{{ url('admin_order_edit', { id: order.id }) }}" target="_blank">
+						{{ order.number }}
+						<i class="fa fa-external-link"></i>
+					</a>
+				</td>
+				<td>
+					{{ order.street }}<br />
+					{{ order.city }}, {{ order.postcode }}
+				</td>
+				<td>
+					{% if order.deliveryStreet is not null %}
+						{{ order.deliveryStreet }}<br />
+						{{ order.deliveryCity }}, {{ order.deliveryPostcode }}
+					{% else %}
+						{{ order.street }}<br />
+						{{ order.city }}, {{ order.postcode }}
+					{% endif %}
+				</td>
+				<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+				<td>{{ order.status.name }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endif %}
