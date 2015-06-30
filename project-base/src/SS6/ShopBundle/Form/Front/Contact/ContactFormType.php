@@ -44,7 +44,7 @@ class ContactFormType extends AbstractType {
 				],
 			])
 			->add('email2', FormType::HONEY_POT)
-			->add('send', 'submit');
+			->add('send', FormType::SUBMIT);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

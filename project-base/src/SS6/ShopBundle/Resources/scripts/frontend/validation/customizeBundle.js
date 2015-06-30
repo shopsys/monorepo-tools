@@ -77,14 +77,36 @@
 	};
 
 	FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
+
+	// Custom behavior:
+	// - disable JS validation for forms with class js-no-validate
+	// - let the submit event propagate instead of stoping it and then calling item.submit()
+	// - do not submit if custom "on-submit" code is specified
+	// (the rest is copy&pasted from original method; eg. ajax validation)
 	FpJsFormValidator.customizeMethods.submitForm = function (event) {
 		if (!$(this).hasClass('js-no-validate')) {
-			FpJsFormValidator.customizeMethods._submitForm.call(this);
+			FpJsFormValidator.each(this, function (item) {
+				var element = item.jsFormValidator;
+				element.validateRecursively();
+				if (FpJsFormValidator.ajax.queue) {
+					FpJsFormValidator.ajax.callbacks.push(function () {
+						element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
+						if (element.isValid()) {
+							item.submit();
+						}
+					});
+				} else {
+					element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
+				}
+			});
 			if (!SS6.validation.isFormValid(this)) {
 				event.preventDefault();
 				SS6.window({
 					content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
 				});
+			} else if ($(this).data('on-submit') !== undefined) {
+				$(this).trigger($(this).data('on-submit'));
+				event.preventDefault();
 			}
 		}
 	};
