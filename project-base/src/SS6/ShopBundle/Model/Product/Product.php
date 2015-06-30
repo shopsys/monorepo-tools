@@ -340,14 +340,6 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param string|null $locale
-	 * @return string|null
-	 */
-	public function getDescription($locale = null) {
-		return $this->translation($locale)->getDescription();
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getPrice() {
@@ -511,9 +503,6 @@ class Product extends AbstractTranslatableEntity {
 	private function setTranslations(ProductData $productData) {
 		foreach ($productData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
-		}
-		foreach ($productData->description as $locale => $description) {
-			$this->translation($locale)->setDescription($description);
 		}
 	}
 

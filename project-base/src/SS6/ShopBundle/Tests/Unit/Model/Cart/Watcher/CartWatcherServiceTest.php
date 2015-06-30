@@ -26,7 +26,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$productMock = $this->getMockBuilder(Product::class)
 			->setMethods(['getCurrentLocale'])
-			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, [], 100, $vat)])
+			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, 100, $vat)])
 			->getMock();
 		$productMock->expects($this->any())->method('getCurrentLocale')->willReturn('cs');
 
@@ -43,7 +43,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 		$this->assertEmpty($modifiedItems1);
 
-		$productMock->edit(new ProductData(['cs' => 'Product 1'], null, null, null, [], 200, $vat));
+		$productMock->edit(new ProductData(['cs' => 'Product 1'], null, null, null, 200, $vat));
 		$modifiedItems2 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 		$this->assertNotEmpty($modifiedItems2);
 
@@ -81,7 +81,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$vat = new Vat(new VatData('vat', 21));
 		$productMock = $this->getMockBuilder(Product::class)
 			->setMethods(['getCurrentLocale'])
-			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, [], 100, $vat, null, null, false)])
+			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, 100, $vat, null, null, false)])
 			->getMock();
 
 		$cartItemMock = $this->getMockBuilder(CartItem::class)

@@ -72,6 +72,7 @@ class ProductEditDataFactory {
 		$productEditData->manualInputPrices = [];
 		$productEditData->seoTitles = [];
 		$productEditData->seoMetaDescriptions = [];
+		$productEditData->descriptions = [];
 		$productEditData->accessories = [];
 
 		$productEditData->urls[UrlListType::TO_DELETE] = [];
@@ -138,6 +139,7 @@ class ProductEditDataFactory {
 
 			$productEditData->seoTitles[$domainId] = $productDomain->getSeoTitle();
 			$productEditData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
+			$productEditData->descriptions[$domainId] = $productDomain->getDescription();
 
 			$productEditData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());

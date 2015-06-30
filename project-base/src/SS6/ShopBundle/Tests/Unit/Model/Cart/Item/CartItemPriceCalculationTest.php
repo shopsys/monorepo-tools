@@ -21,7 +21,7 @@ class CartItemPriceCalculationTest extends FunctionalTestCase {
 		$inputPrice = 11790;
 		$quantity = 3;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $inputPrice, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $inputPrice, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, $quantity, null);
 

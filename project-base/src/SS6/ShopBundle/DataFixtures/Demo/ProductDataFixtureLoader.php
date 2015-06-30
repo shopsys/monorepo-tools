@@ -111,7 +111,7 @@ class ProductDataFixtureLoader {
 		$productEditData->productData->catnum = $row[2];
 		$productEditData->productData->partno = $row[3];
 		$productEditData->productData->ean = $row[4];
-		$productEditData->productData->description = ['cs' => $row[5], 'en' => $row[6]];
+		$productEditData->descriptions = [1 => $row[5], 2 => $row[6]];
 		$productEditData->productData->price = $row[7];
 		switch ($row[8]) {
 			case 'high':

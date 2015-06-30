@@ -151,6 +151,10 @@ class ProductEditFormType extends AbstractType {
 			->add('seoMetaDescriptions', FormType::FORM, [
 				'compound' => true,
 			])
+			->add('descriptions', FormType::MULTIDOMAIN, [
+				'type' => FormType::WYSIWYG,
+				'required' => false,
+			])
 			->add('urls', FormType::URL_LIST, [
 				'route_name' => 'front_product_detail',
 				'entity_id' => $this->product === null ? null : $this->product->getId(),

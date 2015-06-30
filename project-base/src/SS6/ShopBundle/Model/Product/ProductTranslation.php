@@ -25,13 +25,6 @@ class ProductTranslation extends AbstractTranslation {
 	private $name;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $description;
-
-	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -39,24 +32,10 @@ class ProductTranslation extends AbstractTranslation {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
 	 * @param string $name
 	 */
 	public function setName($name) {
 		$this->name = $name;
-	}
-
-	/**
-	 * @param string $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
 	}
 
 }
