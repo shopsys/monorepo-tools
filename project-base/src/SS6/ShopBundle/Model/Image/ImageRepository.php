@@ -35,7 +35,10 @@ class ImageRepository {
 				'entityId' => $entityId,
 				'type' => $type,
 			],
-			['id' => 'asc']
+			[
+				'position' => 'asc',
+				'id' => 'asc',
+			]
 		);
 
 		return $image;
@@ -67,9 +70,10 @@ class ImageRepository {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('i')
 			->from(Image::class, 'i', 'i.id')
-			->where('i.entityName = :entityName')->setParameter('entityName', $entityName)
+			->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
 			->andWhere('i.entityId = :entityId')->setParameter('entityId', $entityId)
-			->orderBy('i.id', 'asc');
+			->addOrderBy('i.position', 'asc')
+			->addOrderBy('i.id', 'desc');
 
 		if ($type === null) {
 			$queryBuilder->andWhere('i.type IS NULL');
@@ -117,7 +121,8 @@ class ImageRepository {
 			->createQueryBuilder('i')
 			->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
 			->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entities)
-			->orderBy('i.id', 'desc');
+			->addOrderBy('i.position', 'asc')
+			->addOrderBy('i.id', 'desc');
 
 		$imagesByEntityId = [];
 		foreach ($queryBuilder->getQuery()->execute() as $image) {

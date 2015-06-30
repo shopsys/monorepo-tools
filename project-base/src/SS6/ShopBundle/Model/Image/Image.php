@@ -55,6 +55,13 @@ class Image implements EntityFileUploadInterface {
 	private $extension;
 
 	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $position;
+
+	/**
 	 * @var \Datetime
 	 *
 	 * @ORM\Column(type="datetime")
@@ -115,6 +122,13 @@ class Image implements EntityFileUploadInterface {
 		$this->temporaryFilename = $temporaryFilename;
 		// workaround: Entity must be changed so that preUpdate and postUpdate are called
 		$this->modifiedAt = new DateTime();
+	}
+
+	/**
+	 * @param int $position
+	 */
+	public function setPosition($position) {
+		$this->position = $position;
 	}
 
 	/**

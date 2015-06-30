@@ -105,6 +105,14 @@ class ImageFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesByPosition
+	 */
+	public function saveImagePositions($imagesByPosition) {
+		$this->imageService->setImagePositions($imagesByPosition);
+		$this->em->flush($imagesByPosition);
+	}
+
+	/**
 	 * @param object $entity
 	 * @param array|null $temporaryFilenames
 	 * @param string|null $type
