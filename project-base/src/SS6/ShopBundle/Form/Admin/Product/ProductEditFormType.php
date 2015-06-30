@@ -107,6 +107,21 @@ class ProductEditFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		$seoTitlesOptionsByDomainId = [];
+		$seoMetaDescriptionsOptionsByDomainId = [];
+		foreach ($this->domains as $domainConfig) {
+			$seoTitlesOptionsByDomainId[$domainConfig->getId()] = [
+				'attr' => [
+					'placeholder' => $this->getTitlePlaceholder($domainConfig),
+				],
+			];
+			$seoMetaDescriptionsOptionsByDomainId[$domainConfig->getId()] = [
+				'attr' => [
+					'placeholder' => $this->getMetaDescriptionPlaceholder($domainConfig),
+				],
+			];
+		}
+
 		$builder
 			->add('productData', $this->productFormTypeFactory->create($this->product))
 			->add('imagesToUpload', FormType::FILE_UPLOAD, [
@@ -145,11 +160,15 @@ class ProductEditFormType extends AbstractType {
 			->add('manualInputPrices', FormType::FORM, [
 				'compound' => true,
 			])
-			->add('seoTitles', FormType::FORM, [
-				'compound' => true,
+			->add('seoTitles', FormType::MULTIDOMAIN, [
+				'type' => FormType::TEXT,
+				'required' => false,
+				'optionsByDomainId' => $seoTitlesOptionsByDomainId,
 			])
-			->add('seoMetaDescriptions', FormType::FORM, [
-				'compound' => true,
+			->add('seoMetaDescriptions', FormType::MULTIDOMAIN, [
+				'type' => FormType::TEXTAREA,
+				'required' => false,
+				'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
 			])
 			->add('descriptions', FormType::MULTIDOMAIN, [
 				'type' => FormType::WYSIWYG,
@@ -186,23 +205,6 @@ class ProductEditFormType extends AbstractType {
 							'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
 							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
-					],
-				]);
-		}
-
-		foreach ($this->domains as $domainConfig) {
-			$builder->get('seoTitles')
-				->add($domainConfig->getId(), FormType::TEXT, [
-					'required' => false,
-					'attr' => [
-						'placeholder' => $this->getTitlePlaceholder($domainConfig),
-					],
-				]);
-			$builder->get('seoMetaDescriptions')
-				->add($domainConfig->getId(), FormType::TEXTAREA, [
-					'required' => false,
-					'attr' => [
-						'placeholder' => $this->getMetaDescriptionPlaceholder($domainConfig),
 					],
 				]);
 		}

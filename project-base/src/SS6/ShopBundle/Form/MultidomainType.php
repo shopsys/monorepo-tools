@@ -30,11 +30,17 @@ class MultidomainType extends AbstractType {
 		Condition::setArrayDefaultValue($options['options'], 'required', $options['required']);
 		Condition::setArrayDefaultValue($options['options'], 'constraints', []);
 
-		$otherLocaleOptions = $options['options'];
-		$otherLocaleOptions['required'] = $options['required'] && $otherLocaleOptions['required'];
+		$subOptions = $options['options'];
+		$subOptions['required'] = $options['required'] && $subOptions['required'];
 
 		foreach ($this->domain->getAll() as $domainConfig) {
-			$builder->add($domainConfig->getId(), $options['type'], $otherLocaleOptions);
+			if (array_key_exists($domainConfig->getId(), $options['optionsByDomainId'])) {
+				$domainOptions = array_merge($subOptions, $options['optionsByDomainId'][$domainConfig->getId()]);
+			} else {
+				$domainOptions = $subOptions;
+			}
+
+			$builder->add($domainConfig->getId(), $options['type'], $domainOptions);
 		}
 	}
 
@@ -45,6 +51,7 @@ class MultidomainType extends AbstractType {
 		$resolver->setDefaults([
 			'compound' => true,
 			'options' => [],
+			'optionsByDomainId' => [],
 			'type' => 'text',
 		]);
 	}

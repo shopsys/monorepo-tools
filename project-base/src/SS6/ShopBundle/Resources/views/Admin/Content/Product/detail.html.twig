@@ -116,17 +116,17 @@
 				<div class="wrap-group">
 					<h2>{{ 'SEO atributy'|trans }}:</h2>
 					<strong>{{ 'Titulek'|trans }}</strong>
-					{% for domainId, title in form.seoTitles %}
+					{% for domainId, seoTitleForm in form.seoTitles %}
 						<div class="js-characters-counter form-group">
-							{{ form_row(title, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}
+							{{ form_row(seoTitleForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input' } }) }}
 							<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
 						</div>
 					{% endfor %}
 
 					<strong>{{ 'Meta description'|trans }}</strong>
-					{% for domainId, metaDescription in form.seoMetaDescriptions %}
+					{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
 						<div class="js-characters-counter form-group form-line--size-6">
-							{{ form_row(metaDescription, { label: getDomainName(domainId), attr: { class: 'js-characters-counter-input' } }) }}
+							{{ form_row(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input' } }) }}
 							<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
 						</div>
 					{% endfor %}
