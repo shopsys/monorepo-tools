@@ -107,7 +107,7 @@
 			{{ 'Obrázek'|trans }}:
 		</label>
 		{% if productDetail.images|length > 0 %}
-			<ul class="list-image">
+			<ul class="list-image" id="js-product-images">
 				{% for image in productDetail.images %}
 					<li class="list-image__item js-product-images-image" data-id="{{ image.id }}">
 						<div class="js-product-images-preview list-image__item__in">
@@ -129,6 +129,9 @@
 									<i class="fa fa-info"></i>
 								</span>
 							</div>
+							<span class="cursor-move js-product-images-image-handle" title="{{ 'Přesunout'|trans }}">
+								<i class="fa fa-arrows"></i>
+							</span>
 						</div>
 					</li>
 				{% endfor %}
