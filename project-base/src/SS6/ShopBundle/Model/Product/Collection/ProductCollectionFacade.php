@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageRepository;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionService;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductCollectionFacade {
 
@@ -17,6 +18,11 @@ class ProductCollectionFacade {
 	 * @var \SS6\ShopBundle\Model\Product\Collection\ProductCollectionService
 	 */
 	private $productCollectionService;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
@@ -45,6 +51,7 @@ class ProductCollectionFacade {
 
 	public function __construct(
 		ProductCollectionService $productCollectionService,
+		ProductRepository $productRepository,
 		ImageConfig $imageConfig,
 		ImageRepository $imageRepository,
 		ImageFacade $imageFacade,
@@ -57,6 +64,7 @@ class ProductCollectionFacade {
 		$this->imageFacade = $imageFacade;
 		$this->friendlyUrlRepository = $friendlyUrlRepository;
 		$this->friendlyUrlService = $friendlyUrlService;
+		$this->productRepository = $productRepository;
 	}
 
 	/**
@@ -111,5 +119,17 @@ class ProductCollectionFacade {
 		}
 
 		return $absoluteUrlsByProductId;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[productId]
+	 */
+	public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig) {
+		return $this->productRepository->getProductDomainsByProductsAndDomainConfigIndexedByProductId(
+			$products,
+			$domainConfig
+		);
 	}
 }

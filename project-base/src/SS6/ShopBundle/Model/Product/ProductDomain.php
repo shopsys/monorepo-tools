@@ -142,4 +142,11 @@ class ProductDomain {
 		$this->description = $description;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getProduct() {
+		return $this->product;
+	}
+
 }

@@ -9,9 +9,9 @@ use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -444,6 +444,27 @@ class ProductRepository {
 		$queryBuilder->setParameter('product', $product);
 
 		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[productId]
+	 */
+	public function getProductDomainsByProductsAndDomainConfigIndexedByProductId(array $products, DomainConfig $domainConfig) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('pd')
+			->from(ProductDomain::class, 'pd')
+			->where('pd.product IN (:products)')->setParameter('products', $products)
+			->andWhere('pd.domainId = :domainId')->setParameter('domainId', $domainConfig->getId());
+
+		$productDomainByProductId = [];
+		foreach ($queryBuilder->getQuery()->execute() as $productDomain) {
+			/* @var $productDomain \SS6\ShopBundle\Model\Product\ProductDomain */
+			$productDomainByProductId[$productDomain->getProduct()->getId()] = $productDomain;
+		}
+
+		return $productDomainByProductId;
 	}
 
 	/**

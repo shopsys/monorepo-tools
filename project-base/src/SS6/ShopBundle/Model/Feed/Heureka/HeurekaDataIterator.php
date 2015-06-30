@@ -50,6 +50,10 @@ class HeurekaDataIterator extends AbstractDataIterator {
 	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
 	 */
 	protected function createItems(array $products) {
+		$productDomainsByProductId = $this->productCollectionFacade->getProductDomainsIndexedByProductId(
+			$products,
+			$this->domainConfig
+		);
 		$imagesByProductId = $this->productCollectionFacade->findImagesUrlsIndexedByProductId($products, $this->domainConfig);
 		$urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $this->domainConfig);
 
@@ -71,7 +75,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 			$items[] = new HeurekaItem(
 				$product->getId(),
 				$product->getName($this->domainConfig->getLocale()),
-				$product->getDescription($this->domainConfig->getLocale()),
+				$productDomainsByProductId[$product->getId()]->getDescription(),
 				$urlsByProductId[$product->getId()],
 				$imagesByProductId[$product->getId()],
 				$productPrice->getPriceWithVat(),
