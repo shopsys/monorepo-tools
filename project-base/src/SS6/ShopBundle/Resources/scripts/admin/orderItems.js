@@ -16,6 +16,7 @@
 
 			var $itemNameElement = $item.find('.js-order-item-name');
 			if ($itemNameElement.is('input')) {
+				// html escaping
 				var itemName = $("<textarea/>").text($itemNameElement.val()).html();
 			} else {
 				var itemName = $itemNameElement.html();
