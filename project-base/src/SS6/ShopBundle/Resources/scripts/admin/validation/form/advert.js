@@ -3,13 +3,13 @@
 		var $advertForm = $('form[name="advert_form"]');
 
 		$.fn.initAdvertType = function(){
-			var $checkedType = $(this).find('input[name="advert[type]"]:checked').val();
+			var $checkedType = $(this).find('input[name="advert_form[type]"]:checked').val();
 			$(this).find('.js-advert-type-content').hide();
 			$(this).find('.js-advert-type-content[data-type=' + $checkedType + ']').show();
 		};
 
 		$advertForm.initAdvertType();
-		$advertForm.find('input[name="advert[type]"]').on('change',function(){
+		$advertForm.find('input[name="advert_form[type]"]').on('change',function(){
 			$advertForm.initAdvertType();
 		});
 
