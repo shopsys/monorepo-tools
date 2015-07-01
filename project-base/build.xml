@@ -42,6 +42,7 @@
 	<property name="path.test.database.dump" value="${path.app}/cache/test-db-dump.sql"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	<property name="path.web" value="${path.root}/web"/>
+	<property name="path.web.scripts" value="${path.web}/assets/scripts"/>
 
 	<if>
 		<os family="windows" />
@@ -81,6 +82,7 @@
 	<target name="clean">
 		<mkdir dir="${path.app}/cache" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.app}/logs" mode="${mkdir.mode}"/>
+		<mkdir dir="${path.web.scripts}" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.build.stats}" mode="${mkdir.mode}"/>
 
 		<delete failonerror="false" includeemptydirs="true">
@@ -91,6 +93,9 @@
 				<exclude name="/" />
 			</fileset>
 			<fileset dir="${path.build.stats}/">
+				<exclude name="/" />
+			</fileset>
+			<fileset dir="${path.web.scripts}/">
 				<exclude name="/" />
 			</fileset>
 		</delete>
