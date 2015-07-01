@@ -71,7 +71,7 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 		return new ImageConfig($imageEntityConfigByClass);
 	}
 
-	public function testGetRelativeImagePathProvider() {
+	public function getRelativeImagePathProvider() {
 		return [
 			[
 				'Name_1',
@@ -101,7 +101,7 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testGetRelativeImagePathProvider
+	 * @dataProvider getRelativeImagePathProvider
 	 */
 	public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath) {
 		$imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());
@@ -109,7 +109,7 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expectedPath, $imageLocator->getRelativeImagePath($entityName, $type, $sizeName));
 	}
 
-	public function testGetRelativeImagePathExceptionProvider() {
+	public function getRelativeImagePathExceptionProvider() {
 		return [
 			[
 				'NonexistentName',
@@ -133,7 +133,7 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testGetRelativeImagePathExceptionProvider
+	 * @dataProvider getRelativeImagePathExceptionProvider
 	 */
 	public function testGetRelativeImagePathException($entityName, $type, $sizeName, $exceptionClass) {
 		$imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());

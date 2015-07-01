@@ -19,7 +19,7 @@ class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testSupportsDataProvider
+	 * @dataProvider supportsDataProvider
 	 * @param string $filename
 	 * @param bool $expected
 	 */
@@ -35,7 +35,7 @@ class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expected, $missingButtonTypeFixer->supports($splFileInfoMock));
 	}
 
-	public function testSupportsDataProvider() {
+	public function supportsDataProvider() {
 		return [
 			['test.php', false],
 			['test.html', true],

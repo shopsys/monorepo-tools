@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testApplyVatPercentProvider() {
+	public function applyVatPercentProvider() {
 		return [
 			[
 				'priceWithoutVat' => '0',
@@ -37,7 +37,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testApplyVatPercentProvider
+	 * @dataProvider applyVatPercentProvider
 	 */
 	public function testApplyVatPercent(
 		$priceWithoutVat,
@@ -61,7 +61,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(round($expectedPriceWithVat, 6), round($actualPriceWithVat, 6));
 	}
 
-	public function testGetVatAmountByPriceWithVatProvider() {
+	public function getVatAmountByPriceWithVatProvider() {
 		return [
 			[
 				'priceWithVat' => '0',
@@ -82,7 +82,7 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testGetVatAmountByPriceWithVatProvider
+	 * @dataProvider getVatAmountByPriceWithVatProvider
 	 */
 	public function testGetVatAmountByPriceWithVat(
 		$priceWithVat,

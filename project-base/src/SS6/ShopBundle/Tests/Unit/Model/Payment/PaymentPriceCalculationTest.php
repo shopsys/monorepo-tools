@@ -18,7 +18,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculateIndependentPriceProvider() {
+	public function calculateIndependentPriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -37,7 +37,7 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
-	public function testCalculatePriceProvider() {
+	public function calculatePriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -59,7 +59,7 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculateIndependentPriceProvider
+	 * @dataProvider calculateIndependentPriceProvider
 	 */
 	public function testCalculateIndependentPrice(
 		$inputPriceType,
@@ -99,7 +99,7 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculatePriceProvider
+	 * @dataProvider calculatePriceProvider
 	 */
 	public function testCalculatePrice(
 		$inputPriceType,

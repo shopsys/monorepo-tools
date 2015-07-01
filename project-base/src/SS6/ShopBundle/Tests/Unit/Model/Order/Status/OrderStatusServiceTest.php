@@ -22,7 +22,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 		$orderStatusService->delete($orderStatus, []);
 	}
 
-	public function testDeleteForbiddenProvider() {
+	public function deleteForbiddenProvider() {
 		return [
 			['type' => OrderStatus::TYPE_NEW, 'expectedException' => OrderStatusDeletionForbiddenException::class],
 			['type' => OrderStatus::TYPE_IN_PROGRESS, 'expectedException' => null],
@@ -32,7 +32,7 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testDeleteForbiddenProvider
+	 * @dataProvider deleteForbiddenProvider
 	 */
 	public function testDeleteForbidden($statusType, $expectedException = null) {
 		$orderStatusService = new OrderStatusService();

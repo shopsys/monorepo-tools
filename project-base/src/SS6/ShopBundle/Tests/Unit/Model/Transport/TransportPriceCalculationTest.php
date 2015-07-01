@@ -17,7 +17,7 @@ use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculateIndependentPriceProvider() {
+	public function calculateIndependentPriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -37,7 +37,7 @@ class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculateIndependentPriceProvider
+	 * @dataProvider calculateIndependentPriceProvider
 	 */
 	public function testCalculateIndependentPrice(
 		$inputPriceType,

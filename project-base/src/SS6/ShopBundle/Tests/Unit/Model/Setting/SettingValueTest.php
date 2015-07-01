@@ -9,7 +9,7 @@ use stdClass;
 
 class SettingValueTest extends PHPUnit_Framework_TestCase {
 
-	public function testEditProvider() {
+	public function editProvider() {
 		return [
 			['string'],
 			[0],
@@ -20,7 +20,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
-	public function testEditExceptionProvider() {
+	public function editExceptionProvider() {
 		return [
 			[[]],
 			[new stdClass()],
@@ -28,7 +28,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testEditProvider
+	 * @dataProvider editProvider
 	 */
 	public function testEdit($value) {
 		$settingValue = new SettingValue('name', $value, 1);
@@ -36,7 +36,7 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testEditExceptionProvider
+	 * @dataProvider editExceptionProvider
 	 */
 	public function testEditException($value) {
 		$this->setExpectedException(InvalidArgumentException::class);

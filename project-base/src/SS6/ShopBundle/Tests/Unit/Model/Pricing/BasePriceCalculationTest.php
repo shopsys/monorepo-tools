@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
 class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculateBasePriceProvider() {
+	public function calculateBasePriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -35,7 +35,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculateBasePriceProvider
+	 * @dataProvider calculateBasePriceProvider
 	 */
 	public function testCalculateBasePrice(
 		$inputPriceType,
@@ -66,7 +66,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(round($basePriceVatAmount, 6), round($basePrice->getVatAmount(), 6));
 	}
 
-	public function testApplyCoefficientProvider() {
+	public function applyCoefficientProvider() {
 		return [
 			[
 				'priceWithVat' => '100',
@@ -96,7 +96,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testApplyCoefficientProvider
+	 * @dataProvider applyCoefficientProvider
 	 */
 	public function testApplyCoefficient(
 		$priceWithVat,

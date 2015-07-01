@@ -9,17 +9,17 @@ use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class NewProductTest extends FunctionalTestCase {
 
-	public function testCreateOrEditProductProvider() {
+	public function createOrEditProductProvider() {
 
 		return [['admin/product/new/'], ['admin/product/edit/1']];
 	}
 
 	/**
-	 * @dataProvider testCreateOrEditProductProvider
+	 * @dataProvider createOrEditProductProvider
 	 */
-	public function testCreateOrEditProduct($route) {
+	public function testCreateOrEditProduct($relativeUrl) {
 		$client1 = $this->getClient(false, 'admin', 'admin123');
-		$crawler = $client1->request('GET', $route);
+		$crawler = $client1->request('GET', $relativeUrl);
 		$form = $crawler->filter('form[name=product_edit_form]')->form();
 
 		$client2 = $this->getClient(true, 'admin', 'admin123');

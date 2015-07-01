@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Pricing\Rounding;
 
 class RoundingTest extends PHPUnit_Framework_TestCase {
 
-	public function testRoundingProvider() {
+	public function roundingProvider() {
 		return [
 			[
 				'unroundedPrice' => '0',
@@ -50,7 +50,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testRoundingProvider
+	 * @dataProvider roundingProvider
 	 */
 	public function testRounding(
 		$unroundedPrice,
@@ -73,7 +73,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
 	}
 
-	public function testRoundingPriceWithVatProvider() {
+	public function roundingPriceWithVatProvider() {
 		return [
 			[
 				'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,
@@ -124,7 +124,7 @@ class RoundingTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testRoundingPriceWithVatProvider
+	 * @dataProvider roundingPriceWithVatProvider
 	 */
 	public function testRoundingPriceWithVat(
 		$roundingType,

@@ -6,7 +6,7 @@ use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdminAccessRightsTest extends FunctionalTestCase {
 
-	public function testAdminAccessDeniedProvider() {
+	public function adminAccessDeniedProvider() {
 		return [
 			['admin/superadmin/modules/'],
 			['admin/superadmin/icons/'],
@@ -16,7 +16,7 @@ class AdminAccessRightsTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @dataProvider testAdminAccessDeniedProvider
+	 * @dataProvider adminAccessDeniedProvider
 	 */
 	public function testAdminAccessDenied($route) {
 		$client = $this->getClient(true, 'admin', 'admin123');

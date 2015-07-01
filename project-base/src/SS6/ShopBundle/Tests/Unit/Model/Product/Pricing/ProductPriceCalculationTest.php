@@ -20,7 +20,7 @@ use SS6\ShopBundle\Model\Product\ProductData;
 
 class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testCalculatePriceProvider() {
+	public function calculatePriceProvider() {
 		return [
 			[
 				'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -42,7 +42,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testCalculatePriceProvider
+	 * @dataProvider calculatePriceProvider
 	 */
 	public function testCalculatePrice(
 		$inputPriceType,
