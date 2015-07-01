@@ -6,7 +6,7 @@
 
 	<div class="wrap-box mb-1 mt-1">
 		{% for item in form.domainDefaultCurrencies %}
-			{{ form_row(item, { label: 'Základní měna domény ' ~ domainNames[item.vars.name]}) }}
+			{{ form_row(item, { label: 'Základní měna domény %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
 		{% endfor %}
 	</div>
 
