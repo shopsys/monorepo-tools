@@ -7,10 +7,10 @@ use SS6\ShopBundle\Component\Csv\CsvDecoder;
 use SS6\ShopBundle\Component\Csv\CsvReader;
 use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Component\String\TransformString;
-use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
@@ -134,6 +134,7 @@ class ProductDataFixtureLoader {
 		}
 		$productEditData->productData->usingStock = $row[11] !== null;
 		$productEditData->productData->stockQuantity = $row[11];
+		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
 		$hiddenOnDomains = [];
 		if (!CsvDecoder::decodeBoolean($row[12])) {
 			$hiddenOnDomains[] = 1;
