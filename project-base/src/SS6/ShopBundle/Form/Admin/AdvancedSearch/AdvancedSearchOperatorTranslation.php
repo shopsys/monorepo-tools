@@ -26,6 +26,8 @@ class AdvancedSearchOperatorTranslation {
 			AdvancedSearchFilterInterface::OPERATOR_NOT_SET => $this->translator->trans('není zadáno'),
 			AdvancedSearchFilterInterface::OPERATOR_IS => $this->translator->trans('je'),
 			AdvancedSearchFilterInterface::OPERATOR_IS_NOT => $this->translator->trans('není'),
+			AdvancedSearchFilterInterface::OPERATOR_IS_USED => $this->translator->trans('používá'),
+			AdvancedSearchFilterInterface::OPERATOR_IS_NOT_USED => $this->translator->trans('nepoužívá'),
 			AdvancedSearchFilterInterface::OPERATOR_BEFORE => $this->translator->trans('před'),
 			AdvancedSearchFilterInterface::OPERATOR_AFTER => $this->translator->trans('po'),
 			AdvancedSearchFilterInterface::OPERATOR_GT => $this->translator->trans('větší než'),

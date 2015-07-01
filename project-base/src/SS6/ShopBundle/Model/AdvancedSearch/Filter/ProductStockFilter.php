@@ -19,8 +19,8 @@ class ProductStockFilter implements AdvancedSearchFilterInterface {
 	 */
 	public function getAllowedOperators() {
 		return [
-			self::OPERATOR_IS,
-			self::OPERATOR_IS_NOT,
+			self::OPERATOR_IS_USED,
+			self::OPERATOR_IS_NOT_USED,
 		];
 	}
 
@@ -43,7 +43,7 @@ class ProductStockFilter implements AdvancedSearchFilterInterface {
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
 		foreach ($rulesData as $index => $ruleData) {
-			$usingStock = $ruleData->operator === self::OPERATOR_IS;
+			$usingStock = $ruleData->operator === self::OPERATOR_IS_USED;
 
 			$parameterName = 'usingStock_' . $index;
 			$queryBuilder->andWhere('p.usingStock = :' . $parameterName)
