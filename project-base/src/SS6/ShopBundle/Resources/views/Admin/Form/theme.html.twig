@@ -52,7 +52,7 @@
 	<div class="form-line {{ attr.class|default('') }}">
 		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-		{{ form_widget(form, { attr: {class: 'form-line__field'}, symbolAfterInput: null }) }}
+		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
 		{{- block('appendix_block') -}}
 	</div>
 {% endblock form_row %}
@@ -95,14 +95,14 @@
 	<div class="form-line {{ attr.class|default('') }}">
 		{{ form_errors(form) }}
 		{% if localized is defined %}
-			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon', symbolAfterInput: null } }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon' } }) }}
 			<span class="form-line__icon form-line__icon--{{locale}}"></span>
 		{% elseif multidomain is defined %}
 			{{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label'} }) }}
-			{{ form_widget(form, { attr: { class: 'form-line__field', symbolAfterInput: null } }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
 		{% else %}
 			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-			{{ form_widget(form, { attr: { class: 'form-line__field', symbolAfterInput: null } }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
 		{% endif %}
 		{{- block('appendix_block') -}}
 	</div>
@@ -119,7 +119,7 @@
 		{% endif %}
 		{{- form_errors(form) -}}
 		<div class="form-line__full">
-			{{- form_widget(form, { attr: { symbolAfterInput: null } }) -}}
+			{{- form_widget(form) -}}
 		</div>
 	</div>
 {%- endblock textarea_row %}
@@ -129,7 +129,7 @@
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{{- form_errors(form) -}}
 		<div class="form-line__full">
-			{{- form_widget(form, { attr: { symbolAfterInput: null } }) -}}
+			{{- form_widget(form) -}}
 		</div>
 	</div>
 {%- endblock url_list_row %}
