@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Debug;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
@@ -38,10 +37,18 @@ class TopProductRepository {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
+	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
 	 */
 	public function getById($id) {
-		return $this->getOneByCriteria(['id' => $id]);
+		$topProduct = $this->getTopProductRepository()->find($id);
+
+		if ($topProduct === null) {
+			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException(
+				'TopProduct with ID ' . $id . ' not found.'
+			);
+		}
+
+		return $topProduct;
 	}
 
 	/**
@@ -50,7 +57,15 @@ class TopProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
 	 */
 	public function getByProductAndDomainId(Product $product, $domainId) {
-		return $this->getOneByCriteria(['product' => $product, 'domainId' => $domainId]);
+		$topProduct = $this->getTopProductRepository()->findOneBy([
+			'product' => $product,
+			'domainId' => $domainId,
+		]);
+
+		if ($topProduct === null) {
+			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException();
+		}
+		return $topProduct;
 	}
 
 	/**
@@ -59,19 +74,6 @@ class TopProductRepository {
 	 */
 	public function getAll($domainId) {
 		return $this->getTopProductRepository()->findBy(['domainId' => $domainId]);
-	}
-
-	/**
-	 * @param array $criteria
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
-	 */
-	private function getOneByCriteria(array $criteria) {
-		$result = $this->getTopProductRepository()->findOneBy($criteria);
-		if ($result === null) {
-			$message = 'Top product not found by criteria ' . Debug::export($criteria);
-			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException($message);
-		}
-		return $result;
 	}
 
 	/**

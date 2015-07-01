@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductFormType;
+use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
@@ -23,18 +25,27 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	private $productIdToProductTransformer;
 
 	/**
-	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductGridFactory $topProductGridFactory
-	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade $topProductFacade
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
+	private $translator;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
 	public function __construct(
 		FormFactory $formFactory,
 		TopProductGridFactory $topProductGridFactory,
 		TopProductFacade $topProductFacade,
-		ProductIdToProductTransformer $productIdToProductTransformer
+		ProductIdToProductTransformer $productIdToProductTransformer,
+		Translator $translator,
+		SelectedDomain $selectedDomain
 	) {
 		$this->topProductFacade = $topProductFacade;
 		$this->productIdToProductTransformer = $productIdToProductTransformer;
+		$this->translator = $translator;
+		$this->selectedDomain = $selectedDomain;
 
 		parent::__construct($formFactory, $topProductGridFactory);
 	}
@@ -52,10 +63,12 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	 */
 	protected function createEntityAndGetId($topProductData) {
 		try {
-			$topProduct = $this->topProductFacade->create($topProductData);
+			$topProduct = $this->topProductFacade->create($topProductData, $this->selectedDomain->getId());
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
-				['Tento produkt již v seznamu existuje.']
+				[
+					$this->translator->trans('Tento produkt již v seznamu existuje.'),
+				]
 			);
 		}
 		return $topProduct->getId();
@@ -70,7 +83,9 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 			$this->topProductFacade->edit($id, $topProductData);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
-				['Tento produkt již v seznamu existuje.']
+				[
+					$this->translator->trans('Tento produkt již v seznamu existuje.'),
+				]
 			);
 		}
 	}

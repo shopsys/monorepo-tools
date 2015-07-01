@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 
 class TopProductData {
 
@@ -15,7 +16,7 @@ class TopProductData {
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
-	public function __construct($product = null) {
+	public function __construct(Product $product = null) {
 		$this->product = $product;
 	}
 
@@ -23,7 +24,6 @@ class TopProductData {
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProduct $topProduct
 	 */
 	public function setFromEntity(TopProduct $topProduct) {
-		$this->id = $topProduct->getId();
 		$this->product = $topProduct->getProduct();
 	}
 

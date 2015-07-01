@@ -58,7 +58,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('tp, pt')
+			->select('tp, pt, p.id')
 			->from(TopProduct::class, 'tp')
 			->join('tp.product', 'p')
 			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
@@ -78,7 +78,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 			)
 			->setConfirmMessage($this->translator->trans('Opravdu chcete odebrat tento produkt z akce na titulní stránce?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/TopProducts/listGrid.html.twig');
+		$grid->setTheme('@SS6Shop/Admin/Content/TopProduct/listGrid.html.twig');
 
 		return $grid;
 	}

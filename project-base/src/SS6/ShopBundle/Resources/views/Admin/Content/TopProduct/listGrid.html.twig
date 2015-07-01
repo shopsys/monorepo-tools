@@ -1,5 +1,10 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% block grid_value_cell_id_product %}
+	{{ value }}
+	<a href="{{ url('admin_product_edit', { id: row.id }) }}" target="_blank"><i class="fa fa-external-link"></i></a>
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Nebyly nalezeny žádné záznamy.'|trans }}
 {% endblock %}

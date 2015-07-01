@@ -714,7 +714,7 @@ msgstr "Nebyly nalezeny žádné parametry. Nejprve musíte nějaké vytvořit."
 msgid "Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit."
 msgstr "Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit."
 
-#: Content/TopProducts/listGrid.html.twig:4
+#: Content/TopProduct/listGrid.html.twig:4
 #: Admin/Grid/Grid.html.twig:51
 msgid "Nebyly nalezeny žádné záznamy."
 msgstr "Nebyly nalezeny žádné záznamy."
@@ -1159,7 +1159,7 @@ msgstr "Přidat"
 msgid "Přidat položku"
 msgstr "Přidat položku"
 
-#: Content/TopProducts/listGrid.html.twig:8
+#: Content/TopProduct/listGrid.html.twig:8
 msgid "Přidat produkt"
 msgstr "Přidat produkt"
 
@@ -1580,8 +1580,8 @@ msgstr "Zboží bylo odstraněno"
 msgid "Zboží chci doručit na jinou adresu než fakturační"
 msgstr "Zboží chci doručit na jinou adresu než fakturační"
 
-#: Content/TopProducts/list.html.twig:3
-#: Content/TopProducts/list.html.twig:4
+#: Content/TopProduct/list.html.twig:3
+#: Content/TopProduct/list.html.twig:4
 msgid "Zboží na titulní stránce"
 msgstr "Zboží na titulní stránce"
 

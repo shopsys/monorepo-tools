@@ -36,18 +36,18 @@ class TopProductController extends BaseController {
 	}
 
 	/**
-	 * @Route("/product/top_product/list/")
+	 * @Route("/product/top-product/list/")
 	 */
 	public function listAction() {
 		$grid = $this->topProductInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/TopProducts/list.html.twig', [
+		return $this->render('@SS6Shop/Admin/Content/TopProduct/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
 
 	/**
-	 * @Route("/product/top_product/delete/{id}", requirements={"id" = "\d+"})
+	 * @Route("/product/top-product/delete/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteAction($id) {

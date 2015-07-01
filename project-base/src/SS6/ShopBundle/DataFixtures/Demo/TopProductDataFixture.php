@@ -6,9 +6,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
+use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 
 class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -26,25 +25,22 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
 			ProductDataFixture::PRODUCT_PREFIX . '7' => 2,
 		];
 		foreach ($topProductsOnDomainData as $productReferenceName => $domainId) {
-			$product = $this->getReference($productReferenceName);
-			$this->createTopProduct($manager, $product, $domainId);
+			$this->createTopProduct($productReferenceName, $domainId);
 		}
-
-		$manager->flush();
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string $productReferenceName
 	 * @param int $domainId
 	 */
-	private function createTopProduct(ObjectManager $manager, Product $product, $domainId) {
+	private function createTopProduct($productReferenceName, $domainId) {
+		$topProductFacade = $this->get(TopProductFacade::class);
+		/* @var $topProductFacade \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade */
+
 		$topProductData = new TopProductData();
-		$topProductData->product = $product;
+		$topProductData->product = $this->getReference($productReferenceName);
 
-		$topProduct = new TopProduct($domainId, $topProductData);
-
-		$manager->persist($topProduct);
+		$topProductFacade->create($topProductData, $domainId);
 	}
 
 	/**
