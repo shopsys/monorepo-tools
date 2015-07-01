@@ -9,13 +9,14 @@
 		var $productFilterForm = $('form[name="productFilter_form"]');
 		var $showResultsButton = $('.js-product-filter-show-result-button');
 		var $resetFilterButton = $('.js-product-filter-reset-button');
+		var requestTimer = null;
+		var requestDelay = 700;
 
 		this.init = function () {
 			$productFilterForm.change(function () {
-				$productsWithControls.addClass('js-disable');
-				$('.js-product-list-ajax-filter-loading').show();
+				clearTimeout(requestTimer);
+				requestTimer = setTimeout(submitFormWithAjax, requestDelay);
 				history.replaceState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
-				submitFormWithAjax($productFilterForm.serialize());
 			});
 
 			$showResultsButton.click(function () {
@@ -25,8 +26,6 @@
 			});
 
 			$resetFilterButton.click(function () {
-				$productsWithControls.addClass('js-disable');
-				$('.js-product-list-ajax-filter-loading').show();
 				$productFilterForm
 					.find(':radio, :checkbox').removeAttr('checked').end()
 					.find('textarea, :text, select').val('');
@@ -85,10 +84,12 @@
 			return $countElement.html().indexOf('(0)') !== -1;
 		};
 
-		var submitFormWithAjax = function (submitData) {
+		var submitFormWithAjax = function () {
+			$productsWithControls.addClass('js-disable');
+			$('.js-product-list-ajax-filter-loading').show();
 			$.ajax({
 				url: SS6.url.getBaseUrl(),
-				data: submitData,
+				data: $productFilterForm.serialize(),
 				success: function (data) {
 					var $wrappedData = $($.parseHTML('<div>' + data + '</div>'));
 
