@@ -5,7 +5,7 @@
 
 	SS6.product.init = function () {
 		var usingStockSelection = $('#product_edit_form_productData_usingStock input[type="radio"]');
-		var $outOfStockActionSelection = $('select[name="product_edit[productData][outOfStockAction]"]');
+		var $outOfStockActionSelection = $('select[name="product_edit_form[productData][outOfStockAction]"]');
 
 		usingStockSelection.change(function () {
 			SS6.product.toggleIsUsingStock($(this).val() === '1');
