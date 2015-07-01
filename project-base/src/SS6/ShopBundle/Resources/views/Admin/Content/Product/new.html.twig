@@ -13,7 +13,7 @@
 				</thead>
 				<tbody>
 					<tr class="js-input-price-type-auto">
-						<td>{{ form_row(form.productData.price, {label: 'Základní cena', attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolDefault()}) }}</td>
+						<td>{{ form_row(form.productData.price, {label: 'Základní cena'|trans, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolDefault()}) }}</td>
 					</tr>
 					{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
 						<tr class="js-input-price-type-manual">

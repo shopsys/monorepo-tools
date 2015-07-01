@@ -104,7 +104,7 @@
 
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat', attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
 				{% endif %}
 
 				<a href="{{ url('front_homepage') }}" class="button button--alter box-buttons__left">

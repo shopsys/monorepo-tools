@@ -24,8 +24,8 @@
 							<label class="form-line__label">{{ 'Doména'|trans }}:</label>
 							<input type="text" value="{{ getDomainName(order.domainId) }}" class="form-control form-line__field" readonly="readonly">
 						</div>
-						{{ form_row(form.orderNumber, { label: 'Číslo objednávky' }) }}
-						{{ form_row(form.statusId, { label: 'Stav' }) }}
+						{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
+						{{ form_row(form.statusId, { label: 'Stav'|trans }) }}
 						<div class="form-line">
 							<label class="form-line__label">{{ 'Vytvořeno zákazníkem'|trans }}:</label>
 							<span class="form-line__text">
@@ -49,47 +49,47 @@
 				<div class="wrap-group">
 					<h2 class="mt-0">{{ 'Osobní údaje'|trans }}</h2>
 					<fieldset>
-						{{ form_row(form.firstName, { label: 'Jméno' }) }}
-						{{ form_row(form.lastName, { label: 'Příjmení' }) }}
-						{{ form_row(form.email, { label: 'E-mail' }) }}
-						{{ form_row(form.telephone, { label: 'Telefon', attr: { class: 'form-line--size-2' } }) }}
+						{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
+						{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
+						{{ form_row(form.email, { label: 'E-mail'|trans }) }}
+						{{ form_row(form.telephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-2' } }) }}
 					</fieldset>
 				</div>
 
 				<div class="wrap-group">
 					<h2 class="mt-0">{{ 'Firemní údaje'|trans }}</h2>
 					<fieldset>
-						{{ form_row(form.companyName, { label: 'Název firmy' }) }}
-						{{ form_row(form.companyNumber, { label: 'IČ', attr: { class: 'form-line--size-3' } }) }}
-						{{ form_row(form.companyTaxNumber, { label: 'DIČ', attr: { class: 'form-line--size-3' } }) }}
+						{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
+						{{ form_row(form.companyNumber, { label: 'IČ'|trans, attr: { class: 'form-line--size-3' } }) }}
+						{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans, attr: { class: 'form-line--size-3' } }) }}
 					</fieldset>
 				</div>
 
 				<div class="wrap-group">
 					<h2 class="mt-0">{{ 'Fakturační údaje'|trans }}</h2>
 					<fieldset>
-						{{ form_row(form.street, { label: 'Ulice' }) }}
-						{{ form_row(form.city, { label: 'Město' }) }}
-						{{ form_row(form.postcode, { label: 'PSČ', attr: { class: 'form-line--size-2' } }) }}
+						{{ form_row(form.street, { label: 'Ulice'|trans }) }}
+						{{ form_row(form.city, { label: 'Město'|trans }) }}
+						{{ form_row(form.postcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
 					</fieldset>
 				</div>
 
 				<div class="wrap-group">
 					<h2 class="mt-0">{{ 'Doručovací adresa'|trans }}</h2>
 					<fieldset>
-						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba' }) }}
-						{{ form_row(form.deliveryCompanyName, { label: 'Firma' }) }}
-						{{ form_row(form.deliveryTelephone, { label: 'Telefon', attr: { class: 'form-line--size-3' } }) }}
-						{{ form_row(form.deliveryStreet, { label: 'Ulice' }) }}
-						{{ form_row(form.deliveryCity, { label: 'Město' }) }}
-						{{ form_row(form.deliveryPostcode, { label: 'PSČ', attr: { class: 'form-line--size-2' } }) }}
+						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
+						{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
+						{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+						{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
+						{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
+						{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
 					</fieldset>
 				</div>
 
 				<div class="wrap-group">
 					<h2 class="mt-0">{{ 'Poznámka'|trans }}</h2>
 					<fieldset>
-						{{ form_row(form.note, { label: 'Napište nám' }) }}
+						{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
 					</fieldset>
 				</div>
 

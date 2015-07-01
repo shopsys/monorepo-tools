@@ -19,18 +19,18 @@
 				<div class="wrap-group">
 					{{ form_id(transportDetail.transport|default(null)) }}
 
-					{{ form_row(form.transportData.name, { label: 'Název' }) }}
-					{{ form_row(form.transportData.domains, { label: 'Doména' }) }}
-					{{ form_row(form.transportData.hidden, { label: 'Skryté', attr: {class: 'form-line--between'} }) }}
-					{{ form_row(form.transportData.vat, { label: 'DPH' }) }}
+					{{ form_row(form.transportData.name, { label: 'Název'|trans }) }}
+					{{ form_row(form.transportData.domains, { label: 'Doména'|trans }) }}
+					{{ form_row(form.transportData.hidden, { label: 'Skryté'|trans, attr: {class: 'form-line--between'} }) }}
+					{{ form_row(form.transportData.vat, { label: 'DPH'|trans }) }}
 					{% block transport_base_prices %}{% endblock %}
-					{{ form_row(form.transportData.description, { label: 'Popis' }) }}
-					{{ form_row(form.transportData.instructions, { label: 'Pokyny' }) }}
+					{{ form_row(form.transportData.description, { label: 'Popis'|trans }) }}
+					{{ form_row(form.transportData.instructions, { label: 'Pokyny'|trans }) }}
 				</div>
 
 				<div class="wrap-group">
 					{% block image %}{% endblock %}
-					{{ form_row(form.transportData.image, { label: 'Nahrát obrázek' }) }}
+					{{ form_row(form.transportData.image, { label: 'Nahrát obrázek'|trans }) }}
 				</div>
 
 				<div class="window-fixed-bar">

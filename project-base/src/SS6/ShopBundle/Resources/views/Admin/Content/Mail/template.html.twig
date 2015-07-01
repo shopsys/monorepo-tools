@@ -19,8 +19,8 @@
 						</span>
 					</h2>
 					<div id="{{ template.vars.id }}" class="js-mail-template toggle-content display-none box-expand__hidden">
-						{{ form_row(template.subject, { label: 'Předmět'}) }}
-						{{ form_row(template.body, { label: 'Text'}) }}
+						{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
+						{{ form_row(template.body, { label: 'Text'|trans}) }}
 						{% if sendMailText is not null %}
 							{{ form_row(template.sendMail, { label: sendMailText }) }}
 						{% else %}
@@ -104,7 +104,7 @@
 
 				<div class="window-fixed-bar">
  					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, { label: 'Uložit změny ve všech šablonách'}) }}
+						{{ form_widget(form.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
 					</div>
 				</div>
 			{{ form_end(form) }}

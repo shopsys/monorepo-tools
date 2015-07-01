@@ -13,9 +13,9 @@
 				<div class="wrap-group">
 					{{ form_id(category|default(null)) }}
 					{% block category_url %}{% endblock %}
-					{{ form_row(form.name, { label: 'Název' }) }}
-					{{ form_row(form.parent, { label: 'Nadřazená kategorie'}) }}
-					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'}) }}
+					{{ form_row(form.name, { label: 'Název'|trans }) }}
+					{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
+					{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
 					{% block category_urls %}{% endblock %}
 				</div>
 

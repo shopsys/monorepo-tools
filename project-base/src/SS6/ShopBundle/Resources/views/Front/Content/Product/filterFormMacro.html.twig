@@ -14,11 +14,11 @@
 
 		<div class="box-filter__group">
 			<div class="box-filter__group__item">
-				{{ form_row(filterForm.minimalPrice, {label: 'Cena od', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+				{{ form_row(filterForm.minimalPrice, {label: 'Cena od'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
 			</div>
 
 			<div class="box-filter__group__item">
-				{{ form_row(filterForm.maximalPrice, {label: 'Cena do', symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+				{{ form_row(filterForm.maximalPrice, {label: 'Cena do'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
 			</div>
 
 		</div>
@@ -68,13 +68,13 @@
 		{% if isSearch or filterForm.parameters is empty %}
 			{% do filterForm.parameters.setRendered %}
 		{% else %}
-			{{ form_row(filterForm.parameters, { label: 'Parametry' }) }}
+			{{ form_row(filterForm.parameters, { label: 'Parametry'|trans }) }}
 		{% endif %}
 
 		<div class="box-filter__buttons">
 
 			<a class="button button--simple mr-half js-product-filter-reset-button" href="{{ resetUrl }}">{{ 'Vynulovat filtr'|trans }}</a>
-			{{ form_widget(filterForm.search, { label: 'Zobrazit výsledky', attr: {class: 'js-product-filter-show-result-button' } }) }}
+			{{ form_widget(filterForm.search, { label: 'Zobrazit výsledky'|trans, attr: {class: 'js-product-filter-show-result-button' } }) }}
 		</div>
 
 	{{ form_end(filterForm) }}

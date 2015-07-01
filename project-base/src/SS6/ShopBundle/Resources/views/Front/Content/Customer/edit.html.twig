@@ -12,10 +12,10 @@
 				{{ form_errors(form) }}
 				<div class="wrap-box">
 					<h2>{{ 'Osobní údaje'|trans }}</h2>
-					{{ form_row(form.userData.firstName, { label: 'Jméno'}) }}
-					{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
-					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'}) }}
-					{{ form_row(form.userData.email, { label: 'Email'}) }}
+					{{ form_row(form.userData.firstName, { label: 'Jméno'|trans}) }}
+					{{ form_row(form.userData.lastName, { label: 'Příjmení'|trans}) }}
+					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'|trans}) }}
+					{{ form_row(form.userData.email, { label: 'Email'|trans}) }}
 					<p>
 						{{ 'Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
 						Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte.'|trans }}
@@ -24,29 +24,29 @@
 
 				<div class="wrap-box">
 					<h2>{{ 'Registrovaní zák.'|trans }}</h2>
-					{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
-					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
+					{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
+					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
 				</div>
 
 				<div class="wrap-box" id="customer_billingAddressData">
 					<h2>{{ 'Firemní údaje'|trans }}</h2>
 					{{ form_row(form.billingAddressData.companyCustomer, {
 						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-						label: 'Nakupuji na firmu'})
+						label: 'Nakupuji na firmu'|trans})
 					}}
 					<div id="js-company-fields">
-						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'}) }}
-						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'}) }}
+						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'|trans}) }}
+						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'|trans}) }}
+						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'|trans}) }}
 					</div>
 				</div>
 
 
 				<div class="wrap-box">
 					<h2>{{ 'Adresa'|trans }}</h2>
-					{{ form_row(form.billingAddressData.street, { label: 'Ulice'}) }}
-					{{ form_row(form.billingAddressData.city, { label: 'Město'}) }}
-					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'}) }}
+					{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
+					{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
+					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans}) }}
 				</div>
 
 
@@ -54,15 +54,15 @@
 					<h2>{{ 'Doručovací adresa'|trans }}</h2>
 					{{ form_row(form.deliveryAddressData.addressFilled, {
 						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-						label: 'Zboží chci doručit na jinou adresu než fakturační'})
+						label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
 					}}
 					<div id="js-delivery-address-fields">
-						{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'}) }}
-						{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'}) }}
-						{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'}) }}
-						{{ form_row(form.deliveryAddressData.city, { label: 'Město'}) }}
-						{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'}) }}
+						{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'|trans}) }}
+						{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'|trans}) }}
+						{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'|trans}) }}
+						{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
+						{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}
+						{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'|trans}) }}
 					</div>
 				</div>
 

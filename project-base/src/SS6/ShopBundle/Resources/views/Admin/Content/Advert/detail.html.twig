@@ -12,21 +12,21 @@
 
 				<div class="wrap-group">
 					{{ form_id(advert|default(null)) }}
-					{{ form_row(form.domainId, { label: 'Doména' }) }}
-					{{ form_row(form.name, { label: 'Název', icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
-					{{ form_row(form.type, { label: 'Typ'}) }}
-					{{ form_row(form.positionName, { label: 'Plocha'}) }}
+					{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
+					{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
+					{{ form_row(form.type, { label: 'Typ'|trans}) }}
+					{{ form_row(form.positionName, { label: 'Plocha'|trans}) }}
 				</div>
 				<div class="wrap-group js-advert-type-content" data-type="code">
-					{{ form_row(form.code, { label: 'Kód'}) }}
+					{{ form_row(form.code, { label: 'Kód'|trans}) }}
 				</div>
 				<div class="wrap-group js-advert-type-content" data-type="image">
-					{{ form_row(form.link, { label: 'Odkaz'}) }}
+					{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
 					{% block image %}{% endblock %}
-					{{ form_row(form.image, { label: 'Nahrát nový obrázek'}) }}
+					{{ form_row(form.image, { label: 'Nahrát nový obrázek'|trans}) }}
 				</div>
 				<div class="wrap-group">
-					{{ form_row(form.hidden, { label: 'Skrýt reklamu'}) }}
+					{{ form_row(form.hidden, { label: 'Skrýt reklamu'|trans}) }}
 				</div>
 				<div class="window-fixed-bar">
 					<div class="window-fixed-bar__buttons">
