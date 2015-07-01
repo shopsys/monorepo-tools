@@ -12,6 +12,7 @@ class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTransla
 		$this->addFilterTranslation('productCatnum', $translator->trans('Katalogové číslo'));
 		$this->addFilterTranslation('productName', $translator->trans('Název produktu'));
 		$this->addFilterTranslation('productPartno', $translator->trans('Partno'));
+		$this->addFilterTranslation('productStock', $translator->trans('Skladové zásoby'));
 	}
 
 }
