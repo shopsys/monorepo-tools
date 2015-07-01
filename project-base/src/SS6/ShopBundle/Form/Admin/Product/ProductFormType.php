@@ -135,10 +135,6 @@ class ProductFormType extends AbstractType {
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('description', FormType::LOCALIZED, [
-				'type' => FormType::WYSIWYG,
-				'required' => false,
-			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])
 			->add('stockQuantity', FormType::INTEGER, [
 				'required' => true,

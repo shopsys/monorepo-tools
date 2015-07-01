@@ -30,6 +30,7 @@ class FormType {
 	const LOCALE = 'locale';
 	const LOCALIZED = 'localized';
 	const MONEY = 'money';
+	const MULTIDOMAIN = 'multidomain';
 	const NUMBER = 'number';
 	const PASSWORD = 'password';
 	const PERCENT = 'percent';

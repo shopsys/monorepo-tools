@@ -16,8 +16,9 @@
 
 		this.countCharacters = function() {
 			var currentLength = $input.val().length;
-			if (currentLength === 0) {
-				currentLength = $input.attr('placeholder').length;
+			var placeholder = $input.attr('placeholder');
+			if (currentLength === 0 && placeholder) {
+				currentLength = placeholder.length;
 			}
 			$info.text(SS6.translator.trans(
 				'Je využito %currentLength% znaků. Doporučujeme maximálně %recommendedLength%',

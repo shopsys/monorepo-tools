@@ -103,7 +103,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
 
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $inputPrice, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $inputPrice, $vat));
 
 		$price = $productPriceCalculation->calculatePrice($product, $pricingGroup);
 

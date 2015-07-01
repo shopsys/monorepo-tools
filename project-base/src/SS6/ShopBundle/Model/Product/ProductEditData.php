@@ -43,6 +43,11 @@ class ProductEditData {
 	public $seoMetaDescriptions;
 
 	/**
+	 * @var string[domainId]
+	 */
+	public $descriptions;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
 	 */
 	public $urls;
@@ -60,6 +65,7 @@ class ProductEditData {
 	 * @param string[] $manualInputPrices
 	 * @param string[] $seoTitles
 	 * @param string[] $seoMetaDescriptions
+	 * @param string[] $descriptions
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
 	 */
 	public function __construct(
@@ -70,6 +76,7 @@ class ProductEditData {
 		array $manualInputPrices = [],
 		array $seoTitles = [],
 		array $seoMetaDescriptions = [],
+		array $descriptions = [],
 		array $accessories = []
 	) {
 		if ($productData !== null) {
@@ -83,6 +90,7 @@ class ProductEditData {
 		$this->manualInputPrices = $manualInputPrices;
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
+		$this->descriptions = $descriptions;
 		$this->urls[UrlListType::TO_DELETE] = [];
 		$this->urls[UrlListType::MAIN_ON_DOMAINS] = [];
 		$this->accessories = $accessories;

@@ -63,6 +63,26 @@
 	{% endfor %}
 {%- endblock localized_form_rows %}
 
+{% block multidomain_row -%}
+	<div class="form-line {{ attr.class|default('') }}">
+		{{- form_label(form) -}}
+		{{- form_errors(form) -}}
+		{{- block('multidomain_form_rows') -}}
+	</div>
+{%- endblock multidomain_row %}
+
+{% block multidomain_widget -%}
+	{% for domainId, child in form %}
+		{{- form_row(child, { multidomain: true, domainId: domainId, attr: { class: attr.class|default('form-line--compact')}}) -}}
+	{% endfor %}
+{%- endblock multidomain_widget %}
+
+{% block multidomain_form_rows -%}
+	{% for domainId, child in form %}
+		{{- form_row(child, { multidomain: true, domainId: domainId }) -}}
+	{% endfor %}
+{%- endblock multidomain_form_rows %}
+
 {% block checkbox_row %}
 	<div class="checkbox">
 		{{ form_label(form) }}
@@ -74,12 +94,15 @@
 {% block text_row -%}
 	<div class="form-line {{ attr.class|default('') }}">
 		{{ form_errors(form) }}
-		{% if localized is not defined %}
-			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-			{{ form_widget(form, { attr: { class: 'form-line__field', symbolAfterInput: null } }) }}
-		{% else %}
+		{% if localized is defined %}
 			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon', symbolAfterInput: null } }) }}
 			<span class="form-line__icon form-line__icon--{{locale}}"></span>
+		{% elseif multidomain is defined %}
+			{{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label'} }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field', symbolAfterInput: null } }) }}
+		{% else %}
+			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+			{{ form_widget(form, { attr: { class: 'form-line__field', symbolAfterInput: null } }) }}
 		{% endif %}
 		{{- block('appendix_block') -}}
 	</div>
@@ -87,10 +110,12 @@
 
 {% block textarea_row -%}
 	<div class="form-line">
-		{% if localized is not defined %}
-			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-		{% else %}
+		{% if localized is defined %}
 			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { label_attr: {class: 'form-line__label'}, raw: true }) }}
+		{% elseif multidomain is defined %}
+			{{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label'} }) }}
+		{% else %}
+			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{% endif %}
 		{{- form_errors(form) -}}
 		<div class="form-line__full">

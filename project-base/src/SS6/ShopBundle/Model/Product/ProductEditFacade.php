@@ -271,6 +271,7 @@ class ProductEditFacade {
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 		$seoTitles = $productEditData->seoTitles;
 		$seoMetaDescriptions = $productEditData->seoMetaDescriptions;
+		$descriptions = $productEditData->descriptions;
 		foreach ($productDomains as $domainId => $productDomain) {
 			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
 				$productDomain->setHidden(true);
@@ -282,6 +283,9 @@ class ProductEditFacade {
 			}
 			if (!empty($seoMetaDescriptions)) {
 				$productDomain->setSeoMetaDescription($seoMetaDescriptions[$domainId]);
+			}
+			if (!empty($descriptions)) {
+				$productDomain->setDescription($descriptions[$domainId]);
 			}
 		}
 

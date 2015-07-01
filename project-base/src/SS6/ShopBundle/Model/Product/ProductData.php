@@ -36,11 +36,6 @@ class ProductData {
 	public $ean;
 
 	/**
-	 * @var array
-	 */
-	public $description;
-
-	/**
 	 * @var string
 	 */
 	public $price;
@@ -120,7 +115,6 @@ class ProductData {
 	 * @param string|null $catnum
 	 * @param string|null $partno
 	 * @param string|null $ean
-	 * @param array $description
 	 * @param string $price
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param \DateTime|null $sellingFrom
@@ -142,7 +136,6 @@ class ProductData {
 		$catnum = null,
 		$partno = null,
 		$ean = null,
-		$description = [],
 		$price = null,
 		Vat $vat = null,
 		DateTime $sellingFrom = null,
@@ -163,7 +156,6 @@ class ProductData {
 		$this->catnum = $catnum;
 		$this->partno = $partno;
 		$this->ean = $ean;
-		$this->description = $description;
 		$this->price = Condition::ifNull($price, 0);
 		$this->vat = $vat;
 		$this->sellingFrom = $sellingFrom;

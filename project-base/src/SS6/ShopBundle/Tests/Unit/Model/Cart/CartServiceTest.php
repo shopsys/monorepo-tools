@@ -23,7 +23,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
@@ -39,7 +39,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
@@ -55,7 +55,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
@@ -71,7 +71,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
 
 		$quantity = 2;
 
@@ -88,7 +88,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -108,7 +108,7 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
+		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -125,8 +125,8 @@ class CartServiceTest extends FunctionalTestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, [], $price, $vat));
-		$product2 = new Product(new ProductData(['cs' => 'Product 2'], null, null, null, [], $price, $vat));
+		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
+		$product2 = new Product(new ProductData(['cs' => 'Product 2'], null, null, null, $price, $vat));
 
 		$sessionId1 = 'abc123';
 		$sessionId2 = 'def456';
