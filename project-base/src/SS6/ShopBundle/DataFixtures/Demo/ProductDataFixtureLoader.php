@@ -132,6 +132,7 @@ class ProductDataFixtureLoader {
 		if ($row[10] !== null) {
 			$productEditData->productData->sellingTo = new DateTime($row[10]);
 		}
+		$productEditData->productData->usingStock = $row[11] !== null;
 		$productEditData->productData->stockQuantity = $row[11];
 		$hiddenOnDomains = [];
 		if (!CsvDecoder::decodeBoolean($row[12])) {
