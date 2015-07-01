@@ -21,7 +21,7 @@ abstract class OrderItem {
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $id;
+	protected $id;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Order
@@ -36,35 +36,35 @@ abstract class OrderItem {
 	 *
 	 * @ORM\Column(type="text")
 	 */
-	private $name;
+	protected $name;
 
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
-	private $priceWithoutVat;
+	protected $priceWithoutVat;
 
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
-	private $priceWithVat;
+	protected $priceWithVat;
 
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="decimal", precision=20, scale=6)
 	 */
-	private $vatPercent;
+	protected $vatPercent;
 
 	/**
 	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
 	 */
-	private $quantity;
+	protected $quantity;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order

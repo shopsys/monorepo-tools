@@ -112,10 +112,8 @@ class OrderController extends BaseController {
 
 		try {
 			$orderData = new OrderData();
+			$orderData->setFromEntity($order);
 
-			if (!$form->isSubmitted()) {
-				$orderData->setFromEntity($order);
-			}
 			$form->setData($orderData);
 			$form->handleRequest($request);
 

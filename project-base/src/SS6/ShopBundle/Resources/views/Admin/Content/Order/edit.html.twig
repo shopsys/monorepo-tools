@@ -103,21 +103,41 @@
 									<thead>
 										<tr>
 											<th class="table-col-30">{{ 'Název'|trans }}</th>
+											<th class="table-col-5">{{ 'Kat. číslo'|trans }}</th>
 											<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
 											<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
-											<th class="table-col-15 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
+											<th class="table-col-10 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
 											<th class="table-col-15 text-right text-nowrap">{{ 'Celkem s DPH'|trans }}</th>
 											<th class="table-col-15 text-right text-nowrap">{{ 'Celkem bez DPH'|trans }}</th>
 											<th ></th>
 										</tr>
 									</thead>
 									<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
-										{% macro orderItem(orderItem, orderItemId, orderItemTotalPricesById, currency) %}
+										{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
 											<tr class="js-order-item" data-index="{{ orderItemId }}">
-												<td>{{ form_widget(orderItem.name, {attr: { class: 'js-order-item-name'}}) }}</td>
-												<td>{{ form_widget(orderItem.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-												<td>{{ form_widget(orderItem.quantity, {attr: { class: 'text-right'}}) }}</td>
-												<td>{{ form_widget(orderItem.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+												<td>
+													{% if productItem and productItem.product %}
+														{{ form_widget(orderItemForm.name, { type: 'hidden' }) }}
+														{% do orderItemForm.name.setRendered() %}
+														<span class="js-order-item-name">{{ productItem.name }}</span>
+														<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
+															<i class="fa fa-external-link"></i>
+														</a>
+													{% elseif productItem and not productItem.product %}
+														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+														<i class="fa fa-question-circle js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
+													{% else %}
+														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+													{% endif %}
+												</td>
+												<td>
+													{% if productItem and productItem.product %}
+														{{ productItem.product.catnum }}
+													{% endif %}
+												</td>
+												<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
+												<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 												<td class="text-right text-middle">
 													{% if orderItemTotalPricesById[orderItemId] is defined %}
 														{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
@@ -134,13 +154,19 @@
 											</tr>
 										{% endmacro %}
 
-										{% for orderItemId, orderItem in form.items %}
-											{{ _self.orderItem(orderItem, orderItemId, orderItemTotalPricesById, order.currency) }}
+										{% for productItem in order.productItems %}
+											{{ _self.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+										{% endfor %}
+
+										{% for orderItemId, orderItemForm in form.items %}
+											{% if not orderItemForm.rendered %}
+												{{ _self.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+											{% endif %}
 										{% endfor %}
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="7">
+											<td colspan="8">
 												<a id="js-order-item-add" href="#" class="btn btn-primary">
 													<i class="fa fa-plus fa-lg"></i>
 													{{ 'Přidat položku'|trans }}
@@ -148,7 +174,7 @@
 											</td>
 										</tr>
 										<tr>
-											<th colspan="4">{{ 'Celkem'|trans }}:</th>
+											<th colspan="5">{{ 'Celkem'|trans }}:</th>
 											<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
 											<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
 											<th></th>

@@ -13,7 +13,14 @@
 	SS6.order.items.onRemoveItemClick = function(event) {
 		if (!$(this).hasClass('text-disabled')) {
 			var $item = $(this).closest('.js-order-item');
-			var itemName = $("<textarea/>").text($item.find('.js-order-item-name').val()).html();
+
+			var $itemNameElement = $item.find('.js-order-item-name');
+			if ($itemNameElement.is('input')) {
+				// html escaping
+				var itemName = $("<textarea/>").text($itemNameElement.val()).html();
+			} else {
+				var itemName = $itemNameElement.html();
+			}
 
 			SS6.window({
 				content: 'Opravdu chcete odebrat z objednávky položku "<i>' + itemName + '</i>"?',
