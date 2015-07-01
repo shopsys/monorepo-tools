@@ -12,7 +12,6 @@ use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -26,11 +25,6 @@ class ProductRepository {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
-	 */
-	private $parameterFilterRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository
@@ -49,13 +43,11 @@ class ProductRepository {
 
 	public function __construct(
 		EntityManager $em,
-		ParameterFilterRepository $parameterFilterRepository,
 		ProductFilterRepository $productFilterRepository,
 		QueryBuilderService $queryBuilderService,
 		Localization $localization
 	) {
 		$this->em = $em;
-		$this->parameterFilterRepository = $parameterFilterRepository;
 		$this->productFilterRepository = $productFilterRepository;
 		$this->queryBuilderService = $queryBuilderService;
 		$this->localization = $localization;
@@ -145,6 +137,7 @@ class ProductRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 * @param string|null $searchText
 	 * @return \Doctrine\ORM\QueryBuilder
@@ -241,8 +234,11 @@ class ProductRepository {
 		);
 
 		$this->addTranslation($queryBuilder, $locale);
-		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
-		$this->parameterFilterRepository->filterByParameters($queryBuilder, $productFilterData->parameters);
+		$this->productFilterRepository->applyFiltering(
+			$queryBuilder,
+			$productFilterData,
+			$pricingGroup
+		);
 
 		return $queryBuilder;
 	}
@@ -305,29 +301,13 @@ class ProductRepository {
 			$searchText
 		);
 
-		$this->applyBasicFiltering($queryBuilder, $productFilterData, $pricingGroup);
+		$this->productFilterRepository->applyFiltering(
+			$queryBuilder,
+			$productFilterData,
+			$pricingGroup
+		);
 
 		return $queryBuilder;
-	}
-
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 */
-	private function applyBasicFiltering(
-		QueryBuilder $queryBuilder,
-		ProductFilterData $productFilterData,
-		PricingGroup $pricingGroup
-	) {
-		$this->productFilterRepository->filterByStock($queryBuilder, $productFilterData->inStock);
-		$this->productFilterRepository->filterByPrice(
-			$queryBuilder,
-			$pricingGroup,
-			$productFilterData->minimalPrice,
-			$productFilterData->maximalPrice
-		);
-		$this->productFilterRepository->filterByFlags($queryBuilder, $productFilterData->flags);
 	}
 
 	/**

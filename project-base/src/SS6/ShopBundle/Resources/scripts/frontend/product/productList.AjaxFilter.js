@@ -69,7 +69,7 @@
 				var $label = $countElement.closest('label');
 				var $formElement = $('#' + $countElement.data('form-id'));
 
-				if (parseInt($countElement.html()) === 0) {
+				if (willFilterZeroProducts($countElement)) {
 					if (!$formElement.is(':checked')) {
 						$label.addClass('js-disable');
 						$formElement.prop('disabled', true);
@@ -79,6 +79,10 @@
 					$formElement.prop('disabled', false);
 				}
 			});
+		};
+
+		var willFilterZeroProducts = function ($countElement) {
+			return $countElement.html().indexOf('(0)') !== -1;
 		};
 
 		var submitFormWithAjax = function (submitData) {

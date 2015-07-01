@@ -8,6 +8,8 @@ use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
+use SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository;
+use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -20,23 +22,60 @@ class ProductFilterRepository {
 	 */
 	private $queryBuilderService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterRepository
+	 */
+	private $parameterFilterRepository;
+
 	public function __construct(
-		QueryBuilderService $queryBuilderService
+		QueryBuilderService $queryBuilderService,
+		ParameterFilterRepository $parameterFilterRepository
 	) {
 		$this->queryBuilderService = $queryBuilderService;
+		$this->parameterFilterRepository = $parameterFilterRepository;
 	}
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 */
+	public function applyFiltering(
+		QueryBuilder $productsQueryBuilder,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup
+	) {
+		$this->filterByPrice(
+			$productsQueryBuilder,
+			$productFilterData->minimalPrice,
+			$productFilterData->maximalPrice,
+			$pricingGroup
+		);
+		$this->filterByStock(
+			$productsQueryBuilder,
+			$productFilterData->inStock
+		);
+		$this->filterByFlags(
+			$productsQueryBuilder,
+			$productFilterData->flags
+		);
+		$this->parameterFilterRepository->filterByParameters(
+			$productsQueryBuilder,
+			$productFilterData->parameters
+		);
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param string $minimalPrice
 	 * @param string $maximalPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
-	public function filterByPrice(
+	private function filterByPrice(
 		QueryBuilder $productsQueryBuilder,
-		PricingGroup $pricingGroup,
 		$minimalPrice,
-		$maximalPrice
+		$maximalPrice,
+		PricingGroup $pricingGroup
 	) {
 		$priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
 		if ($minimalPrice !== null) {
@@ -54,7 +93,6 @@ class ProductFilterRepository {
 			$priceLimits
 		);
 		$productsQueryBuilder->setParameter('pricingGroup', $pricingGroup);
-
 	}
 
 	/**
@@ -79,7 +117,7 @@ class ProductFilterRepository {
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 */
-	public function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
+	private function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
 		$flagsCount = count($flags);
 		if ($flagsCount !== 0) {
 			$flagsQueryBuilder = $this->getFlagsQueryBuilder($flags, $productsQueryBuilder->getEntityManager());
@@ -99,21 +137,12 @@ class ProductFilterRepository {
 	private function getFlagsQueryBuilder(array $flags, EntityManager $em) {
 		$flagsQueryBuilder = $em->createQueryBuilder();
 
-		$orExpr = $flagsQueryBuilder->expr()->orX();
-
-		$index = 0;
-		foreach ($flags as $flag) {
-			$orExpr->add('f = :flag' . $index);
-			$flagsQueryBuilder->setParameter('flag' . $index, $flag);
-			$index++;
-		}
-
 		$flagsQueryBuilder
 			->select('1')
 			->from(Product::class, 'pf')
-			->join('p.flags', 'f', Join::ON)
+			->join('pf.flags', 'f', Join::ON)
 			->where('pf = p')
-			->andWhere($orExpr);
+			->andWhere('f IN (:flags)')->setParameter('flags', $flags);
 
 		return $flagsQueryBuilder;
 	}

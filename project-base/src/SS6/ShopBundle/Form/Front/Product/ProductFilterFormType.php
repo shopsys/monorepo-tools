@@ -69,7 +69,7 @@ class ProductFilterFormType extends AbstractType {
 				'required' => false,
 				'expanded' => true,
 				'multiple' => true,
-				'choice_list' => new ObjectChoiceList($this->flagFilterChoices, 'name'),
+				'choice_list' => new ObjectChoiceList($this->flagFilterChoices, 'name', [], null, 'id'),
 			])
 			->add('search', FormType::SUBMIT);
 	}
