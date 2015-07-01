@@ -21,24 +21,26 @@
 
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-	{% if productDetails|length > 0 or filterFormSubmited %}
-		<div class="box-filter js-product-filter">
-			{{ productFilterForm.filterForm(
-				filterForm,
-				url('front_product_list', { id: category.id }),
-				url('front_product_list', { id: category.id }),
-				null,
-				'product_list',
-				productFilterCountData
-			) }}
-		</div>
-	{% endif %}
+	<div class="position-relative">
+		{% if productDetails|length > 0 or filterFormSubmited %}
+			<div class="box-filter js-product-filter">
+				{{ productFilterForm.filterForm(
+					filterForm,
+					url('front_product_list', { id: category.id }),
+					url('front_product_list', { id: category.id }),
+					null,
+					'product_list',
+					productFilterCountData
+				) }}
+			</div>
+		{% endif %}
 
-	<div class="js-product-list-ajax-filter-loading text-center display-none">
-		<i class="fa fa-spinner fa-spin fa-5x" title="{{ 'Načítám'|trans }}"></i>
-	</div>
-	<div class="js-product-list-ajax-filter-products-with-controls">
-		{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
+		<div class="js-product-list-ajax-filter-loading text-center display-none">
+			<i class="fa fa-spinner fa-spin fa-5x position-top-150" title="{{ 'Načítám'|trans }}"></i>
+		</div>
+		<div class="js-product-list-ajax-filter-products-with-controls">
+			{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
+		</div>
 	</div>
 
 {% endblock %}
