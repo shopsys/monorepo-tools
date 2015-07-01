@@ -13,7 +13,7 @@
 				<ul class="top-menu">
 					{% if is_granted('ROLE_CUSTOMER') %}
 						<li class="top-menu__item top-menu__item--main in-dropdown">
-							<a href="#">{{ app.user.fullname }}</a>
+							<a href="#">{{ app.user.firstName }} {{ app.user.lastName }}</a>
 							<ul class="in-dropdown__menu">
 								<li class="in-dropdown__menu__item">
 									<a href="{{ url('front_customer_edit') }}">{{ 'Osobní údaje'|trans }}</a>

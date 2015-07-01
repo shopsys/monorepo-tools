@@ -256,7 +256,11 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	 * @return string
 	 */
 	public function getFullName() {
-		return $this->firstName . ' ' . $this->lastName;
+		if ($this->billingAddress->isCompanyCustomer()) {
+			return $this->billingAddress->getCompanyName();
+		}
+
+		return $this->lastName . ' ' . $this->firstName;
 	}
 
 	/**

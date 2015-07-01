@@ -113,7 +113,7 @@ class OrderRepository {
 				o.totalPriceWithVat,
 				(CASE WHEN o.companyName IS NOT NULL
 							THEN o.companyName
-							ELSE CONCAT(o.firstName, \' \', o.lastName)
+							ELSE CONCAT(o.lastName, \' \', o.firstName)
 						END) AS customerName')
 			->from(Order::class, 'o')
 			->where('o.deleted = :deleted')

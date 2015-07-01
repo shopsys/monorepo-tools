@@ -116,9 +116,9 @@ class UserRepository {
 				MAX(pg.name) AS pricingGroup,
 				MAX(ba.city) city,
 				MAX(ba.telephone) telephone,
-				MAX(CASE WHEN ba.companyName IS NOT NULL
+				MAX(CASE WHEN ba.companyCustomer = true
 						THEN ba.companyName
-						ELSE CONCAT(u.firstName, \' \', u.lastName)
+						ELSE CONCAT(u.lastName, \' \', u.firstName)
 					END) AS name,
 				COUNT(o.id) ordersCount,
 				SUM(o.totalPriceWithVat) ordersSumPrice,
