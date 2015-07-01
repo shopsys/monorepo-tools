@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
@@ -48,6 +49,11 @@ class ProductEditFormTypeFactory {
 	 */
 	private $removeDuplicatesFromArrayTransformer;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
+	 */
+	private $imagesIdsToImagesTransformer;
+
 	public function __construct(
 		ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory,
 		ImageFacade $imageFacade,
@@ -55,7 +61,8 @@ class ProductEditFormTypeFactory {
 		PricingGroupFacade $pricingGroupFacade,
 		Domain $domain,
 		SeoSettingFacade $seoSettingFacade,
-		RemoveDuplicatesFromArrayTransformer $removeDuplicatesFromArrayTransformer
+		RemoveDuplicatesFromArrayTransformer $removeDuplicatesFromArrayTransformer,
+		ImagesIdsToImagesTransformer $imagesIdsToImagesTransformer
 	) {
 		$this->productParameterValueFormTypeFactory = $productParameterValueFormTypeFactory;
 		$this->imageFacade = $imageFacade;
@@ -64,6 +71,7 @@ class ProductEditFormTypeFactory {
 		$this->domain = $domain;
 		$this->seoSettingFacade = $seoSettingFacade;
 		$this->removeDuplicatesFromArrayTransformer = $removeDuplicatesFromArrayTransformer;
+		$this->imagesIdsToImagesTransformer = $imagesIdsToImagesTransformer;
 	}
 
 	/**
@@ -72,7 +80,7 @@ class ProductEditFormTypeFactory {
 	 */
 	public function create(Product $product = null) {
 		if ($product !== null) {
-			$images = $this->imageFacade->getImagesByEntity($product, null);
+			$images = $this->imageFacade->getImagesByEntityIndexedById($product, null);
 		} else {
 			$images = [];
 		}
@@ -93,6 +101,7 @@ class ProductEditFormTypeFactory {
 			$domains,
 			$metaDescriptionsIndexedByDomainId,
 			$this->removeDuplicatesFromArrayTransformer,
+			$this->imagesIdsToImagesTransformer,
 			$product
 		);
 	}

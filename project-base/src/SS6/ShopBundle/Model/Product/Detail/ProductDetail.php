@@ -35,7 +35,7 @@ class ProductDetail {
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Image[]
 	 */
-	private $images;
+	private $imagesById;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
@@ -43,7 +43,7 @@ class ProductDetail {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
-	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 * @param \SS6\ShopBundle\Model\Image\Image[imageId] $imagesById
 	 */
 	public function __construct(
 		Product $product,
@@ -51,14 +51,14 @@ class ProductDetail {
 		Price $sellingPrice,
 		array $productDomainsIndexedByDomainId,
 		array $parameters,
-		array $images
+		array $imagesById
 	) {
 		$this->product = $product;
 		$this->basePrice = $basePrice;
 		$this->sellingPrice = $sellingPrice;
 		$this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
 		$this->parameters = $parameters;
-		$this->images = $images;
+		$this->imagesById = $imagesById;
 	}
 
 	/**
@@ -99,8 +99,8 @@ class ProductDetail {
 	/**
 	 * @return \SS6\ShopBundle\Model\Image\Image[]
 	 */
-	public function getImages() {
-		return $this->images;
+	public function getImagesIndexedById() {
+		return $this->imagesById;
 	}
 
 }

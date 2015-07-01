@@ -105,4 +105,13 @@ class ImageService {
 		}
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesByPosition
+	 */
+	public function setImagePositions($imagesByPosition) {
+		foreach ($imagesByPosition as $position => $image) {
+			$image->setPosition($position);
+		}
+	}
+
 }

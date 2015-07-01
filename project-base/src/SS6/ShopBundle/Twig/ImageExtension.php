@@ -115,10 +115,10 @@ class ImageExtension extends Twig_Extension {
 	/**
 	 * @param Object $entity
 	 * @param string|null $type
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Image\Image[]
 	 */
 	public function getImages($entity, $type = null) {
-		return $this->imageFacade->getImagesByEntity($entity, $type);
+		return $this->imageFacade->getImagesByEntityIndexedById($entity, $type);
 	}
 
 	/**
