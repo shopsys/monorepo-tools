@@ -230,7 +230,7 @@
 			{% endif %}
 			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 				{% if raw is not defined %}
-					{{ label|trans({}, translation_domain) }}
+					{{ label }}
 				{% else %}
 					{{ label|raw }}
 				{% endif %}
@@ -371,7 +371,18 @@
 
 {% block button_widget %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary button')|trim}) %}
-	{{ parent('button_widget') }}
+
+	{%- if label is empty -%}
+		{%- if label_format is not empty -%}
+			{% set label = label_format|replace({
+				'%name%': name,
+				'%id%': id,
+			}) %}
+		{%- else -%}
+			{% set label = name|humanize %}
+		{%- endif -%}
+	{%- endif -%}
+	<button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label }}</button>
 {% endblock button_widget %}
 
 {% block choice_widget_collapsed -%}
@@ -442,7 +453,7 @@
 	{%- for attrname, attrvalue in attr -%}
 		{{- " " -}}
 		{%- if attrname in ['placeholder', 'title'] -%}
-			{{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+			{{- attrname }}="{{ attrvalue }}"
 		{%- elseif attrvalue is sameas(true) -%}
 			{{- attrname }}="{{ attrname }}"
 		{%- elseif attrvalue is not sameas(false) -%}
@@ -464,7 +475,7 @@
 	{%- for attrname, attrvalue in attr -%}
 		{{- " " -}}
 		{%- if attrname in ['placeholder', 'title'] -%}
-			{{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+			{{- attrname }}="{{ attrvalue }}"
 		{%- elseif attrvalue is sameas(true) -%}
 			{{- attrname }}="{{ attrname }}"
 		{%- elseif attrvalue is not sameas(false) -%}
