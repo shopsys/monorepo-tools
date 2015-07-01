@@ -58,7 +58,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();
 		$queryBuilder
-			->select('tp, pt')
+			->select('tp, pt, p.id')
 			->from(TopProduct::class, 'tp')
 			->join('tp.product', 'p')
 			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')

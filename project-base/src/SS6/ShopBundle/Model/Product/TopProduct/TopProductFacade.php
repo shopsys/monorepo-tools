@@ -3,9 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository;
 
@@ -22,46 +20,18 @@ class TopProductFacade {
 	private $topProductRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
-	 */
-	private $productRepository;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository $topProductRepository
-	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
-	 */
 	public function __construct(
 		EntityManager $em,
 		TopProductRepository $topProductRepository,
-		ProductRepository $productRepository,
-		SelectedDomain $selectedDomain,
 		ProductDetailFactory $productDetailFactory
 	) {
 		$this->em = $em;
 		$this->topProductRepository = $topProductRepository;
-		$this->productRepository = $productRepository;
-		$this->selectedDomain = $selectedDomain;
 		$this->productDetailFactory = $productDetailFactory;
-	}
-
-	/**
-	 * @param int $productId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
-	 */
-	public function getByProductId($productId) {
-		$product = $this->productRepository->findById($productId);
-		return $this->topProductRepository->getByProductAndDomainId($product, $this->selectedDomain->getId());
 	}
 
 	/**
@@ -84,15 +54,16 @@ class TopProductFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
 	 */
-	public function create(TopProductData $topProductData) {
-		if ($this->alreadyExists($topProductData)) {
+	public function create(TopProductData $topProductData, $domainId) {
+		if ($this->alreadyExists($topProductData, $domainId)) {
 			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException();
 		}
-		$topProduct = new TopProduct($this->selectedDomain->getId(), $topProductData);
+		$topProduct = new TopProduct($domainId, $topProductData);
 		$this->em->persist($topProduct);
-		$this->em->flush();
+		$this->em->flush($topProduct);
 
 		return $topProduct;
 	}
@@ -104,13 +75,13 @@ class TopProductFacade {
 	 */
 	public function edit($id, TopProductData $topProductData) {
 		$topProduct = $this->topProductRepository->getById($id);
-		if ($this->alreadyExists($topProductData)
+		if ($this->alreadyExists($topProductData, $topProduct->getDomainId())
 			&& $topProduct->getProduct() !== $topProductData->product
 		) {
 			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException();
 		}
 		$topProduct->edit($topProductData);
-		$this->em->flush();
+		$this->em->flush($topProduct);
 
 		return $topProduct;
 	}
@@ -127,18 +98,20 @@ class TopProductFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
+	 * @param int $domainId
 	 * @return bool
 	 */
-	private function alreadyExists(TopProductData $topProductData) {
-		$exists = true;
+	private function alreadyExists(TopProductData $topProductData, $domainId) {
 		try {
 			$this->topProductRepository->getByProductAndDomainId(
-				$topProductData->product, $this->selectedDomain->getId()
+				$topProductData->product,
+				$domainId
 			);
+
+			return true;
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException $e) {
-			$exists = false;
+			return false;
 		}
-		return (bool)$exists;
 	}
 
 }
