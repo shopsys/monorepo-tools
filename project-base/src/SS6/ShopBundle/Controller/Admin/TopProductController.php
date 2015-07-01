@@ -41,7 +41,7 @@ class TopProductController extends BaseController {
 	public function listAction() {
 		$grid = $this->topProductInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/TopProducts/list.html.twig', [
+		return $this->render('@SS6Shop/Admin/Content/TopProduct/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
