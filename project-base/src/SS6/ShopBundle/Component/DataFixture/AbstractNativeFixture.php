@@ -23,6 +23,14 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
 	}
 
 	/**
+	 * @param string $serviceId
+	 * @return mixed
+	 */
+	protected function get($serviceId) {
+		return $this->container->get($serviceId);
+	}
+
+	/**
 	 * @param string $sql
 	 * @param arra
 	 * @return mixed
