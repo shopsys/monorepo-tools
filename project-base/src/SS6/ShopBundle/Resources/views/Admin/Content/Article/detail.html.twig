@@ -16,8 +16,8 @@
 					{% block article_domain %}{% endblock %}
 					{% block article_url %}{% endblock %}
 
-					{{ form_row(form.name, { label: 'Název'}) }}
-					{{ form_row(form.text, { label: 'Text'}) }}
+					{{ form_row(form.name, { label: 'Název'|trans}) }}
+					{{ form_row(form.text, { label: 'Text'|trans}) }}
 					{% block article_urls %}{% endblock %}
 				</div>
 

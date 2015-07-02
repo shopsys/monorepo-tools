@@ -16,52 +16,52 @@
 					{{ form_id(product|default(null)) }}
 					{% block product_url %}{% endblock %}
 
-					{{ form_row(form.productData.name, { label: 'Název'}) }}
-					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'}) }}
-					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží', attr: {class: 'form-line--between'} }) }}
+					{{ form_row(form.productData.name, { label: 'Název'|trans}) }}
+					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
+					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží'|trans, attr: {class: 'form-line--between'} }) }}
 					{% block product_calculated_hidden_info %}{% endblock %}
-					{{ form_row(form.productData.sellable, { label: 'Vyřadit z prodeje',
+					{{ form_row(form.productData.sellable, { label: 'Vyřadit z prodeje'|trans,
 						icon: {
 							title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
 						}
 						, attr: {class: 'form-line--between'} }) }}
 					{% block product_calculated_sellable_info %}{% endblock %}
 					{% block product_main_categories %}{% endblock %}
-					{{ form_row(form.productData.categories, { label: 'Kategorie'}) }}
-					{{ form_row(form.productData.flags, { label: 'Příznaky'}) }}
+					{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
+					{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}
 				</div>
 
 				<div class="wrap-group">
-					{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby', attr: {class: 'form-line--between' } } ) }}
+					{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans, attr: {class: 'form-line--between' } } ) }}
 					<div class="js-product-using-stock">
-						{{ form_row(form.productData.stockQuantity, { label: 'Skladem', attr: {class: 'form-line--size-1'} }) }}
-						{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání', attr: {class: 'form-line--size-3'} }) }}
+						{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans, attr: {class: 'form-line--size-1'} }) }}
+						{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans, attr: {class: 'form-line--size-3'} }) }}
 						<div class="js-product-using-stock-and-alternate-availability">
-							{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání', attr: {class: 'form-line--size-3'} }) }}
+							{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans, attr: {class: 'form-line--size-3'} }) }}
 						</div>
 					</div>
 					<div class="js-product-not-using-stock">
-						{{ form_row(form.productData.availability, { label: 'Dostupnost', attr: {class: 'form-line--size-2'} }) }}
+						{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans, attr: {class: 'form-line--size-2'} }) }}
 					</div>
 				</div>
 
 				<div class="wrap-group">
-					{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen', attr: { class: 'form-line--between' } }) }}
-					{{ form_row(form.productData.vat, { label: 'DPH', attr: { class: 'form-line--size-2' } }) }}
+					{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans, attr: { class: 'form-line--between' } }) }}
+					{{ form_row(form.productData.vat, { label: 'DPH'|trans, attr: { class: 'form-line--size-2' } }) }}
 					{% block product_calculated_prices %}{% endblock %}
 				</div>
 
 				<div class="wrap-group">
-					{{ form_row(form.productData.catnum, { label: 'Katalogové číslo' }) }}
-					{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)' }) }}
-					{{ form_row(form.productData.ean, { label: 'EAN' }) }}
+					{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans }) }}
+					{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans }) }}
+					{{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
 				</div>
 
 
 				<div class="wrap-group">
-					{{ form_row(form.descriptions, { label: 'Popis'}) }}
-					{{ form_row(form.productData.sellingFrom, { label: 'Datum vložení', attr: {class: 'form-line--size-1'} }) }}
-					{{ form_row(form.productData.sellingTo, { label: 'Datum stažení', attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.descriptions, { label: 'Popis'|trans}) }}
+					{{ form_row(form.productData.sellingFrom, { label: 'Datum vložení'|trans, attr: {class: 'form-line--size-1'} }) }}
+					{{ form_row(form.productData.sellingTo, { label: 'Datum stažení'|trans, attr: {class: 'form-line--size-1'} }) }}
 				</div>
 
 				<div class="wrap-group js-form-group">
@@ -135,12 +135,12 @@
 
 				<div class="wrap-group">
 					{% block images %}{% endblock %}
-					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek' }) }}
+					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek'|trans }) }}
 					{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 				</div>
 
 				<div class="wrap-group">
-					{{ form_row(form.accessories, { label: 'Příslušenství' }) }}
+					{{ form_row(form.accessories, { label: 'Příslušenství'|trans }) }}
 				</div>
 
 				<div class="window-fixed-bar">

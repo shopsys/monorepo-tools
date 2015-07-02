@@ -3,6 +3,6 @@
 		<span class="box-cart-adding__input">
 			{{ form_widget(form.quantity, {attr: {class: 'text-center'}}) }} Ks
 		</span>
-		{{ form_widget(form.add, {label: 'Vložit do košíku', attr: {class: 'button--cart'}}) }}
+		{{ form_widget(form.add, {label: 'Vložit do košíku'|trans, attr: {class: 'button--cart'}}) }}
 	{{ form_end(form) }}
 </span>

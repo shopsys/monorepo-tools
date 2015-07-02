@@ -15,22 +15,22 @@
 					<h2>{{ 'Systémové údaje'|trans }}</h2>
 					{{ form_id(user|default(null)) }}
 					{% block customer_domain %}{% endblock %}
-					{{ form_row(form.userData.pricingGroup, { label: 'Cenová skupina' }) }}
+					{{ form_row(form.userData.pricingGroup, { label: 'Cenová skupina'|trans }) }}
 					{% block customer_created_at %}{% endblock %}
 				</div>
 
 				<div class="wrap-group">
 					<h2>{{ 'Osobní údaje'|trans }}</h2>
-					{{ form_row(form.userData.firstName, { label: 'Jméno'}) }}
-					{{ form_row(form.userData.lastName, { label: 'Příjmení'}) }}
-					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon', attr: {class: 'form-line--size-3'} }) }}
-					{{ form_row(form.userData.email, { label: 'Email', attr: {class: 'form-line--size-3'} }) }}
+					{{ form_row(form.userData.firstName, { label: 'Jméno'|trans}) }}
+					{{ form_row(form.userData.lastName, { label: 'Příjmení'|trans}) }}
+					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'|trans, attr: {class: 'form-line--size-3'} }) }}
+					{{ form_row(form.userData.email, { label: 'Email'|trans, attr: {class: 'form-line--size-3'} }) }}
 				</div>
 
 				<div class="wrap-group">
 					<h2>{{ 'Registrovaní zák.'|trans }}</h2>
-					{{ form_row(form.userData.password.first, { label: 'Heslo'}) }}
-					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'}) }}
+					{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
+					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
 					{% block customer_last_login %}{% endblock %}
 				</div>
 
@@ -38,20 +38,20 @@
 					<h2>{{ 'Firemní údaje'|trans }}</h2>
 					{{ form_row(form.billingAddressData.companyCustomer, {
 						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-						label: 'Nakupuji na firmu'})
+						label: 'Nakupuji na firmu'|trans})
 					}}
 					<div id="js-company-fields">
-						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ', attr: {class: 'form-line--size-3'} }) }}
-						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ', attr: {class: 'form-line--size-3'} }) }}
+						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'|trans}) }}
+						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'|trans, attr: {class: 'form-line--size-3'} }) }}
+						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'|trans, attr: {class: 'form-line--size-3'} }) }}
 					</div>
 				</div>
 
 				<div class="wrap-group">
 					<h2>{{ 'Adresa'|trans }}</h2>
-					{{ form_row(form.billingAddressData.street, { label: 'Ulice'}) }}
-					{{ form_row(form.billingAddressData.city, { label: 'Město'}) }}
-					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ', attr: {class: 'form-line--size-2'} }) }}
+					{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
+					{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
+					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans, attr: {class: 'form-line--size-2'} }) }}
 				</div>
 
 				<div class="wrap-group" id="customer_deliveryAddressData">
@@ -61,12 +61,12 @@
 						label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
 					}}
 					<div id="js-delivery-address-fields">
-						{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'}) }}
-						{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'}) }}
-						{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon', attr: {class: 'form-line--size-3'} }) }}
-						{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'}) }}
-						{{ form_row(form.deliveryAddressData.city, { label: 'Město'}) }}
-						{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ', attr: {class: 'form-line--size-2'} }) }}
+						{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'|trans}) }}
+						{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'|trans}) }}
+						{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'|trans, attr: {class: 'form-line--size-3'} }) }}
+						{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
+						{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}
+						{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'|trans, attr: {class: 'form-line--size-2'} }) }}
 					</div>
 				</div>
 

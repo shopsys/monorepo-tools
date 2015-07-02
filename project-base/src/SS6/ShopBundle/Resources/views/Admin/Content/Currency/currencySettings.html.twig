@@ -1,12 +1,12 @@
 {{ form_start(form) }}
 	<div class="wrap-box mb-1 mt-1">
-		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna eshopu', icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen' } }) }}
+		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna eshopu'|trans, icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen' } }) }}
 
 	</div>
 
 	<div class="wrap-box mb-1 mt-1">
 		{% for item in form.domainDefaultCurrencies %}
-			{{ form_row(item, { label: 'Základní měna domény ' ~ domainNames[item.vars.name]}) }}
+			{{ form_row(item, { label: 'Základní měna domény %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
 		{% endfor %}
 	</div>
 

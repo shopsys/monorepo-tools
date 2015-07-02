@@ -11,11 +11,11 @@
 
 	{{ form_start(form) }}
 
-		{{ form_row(form.firstName, { label: 'Jméno' }) }}
-		{{ form_row(form.lastName, { label: 'Příjmení' }) }}
-		{{ form_row(form.email, { label: 'Email' }) }}
-		{{ form_row(form.password.first, { label: 'Heslo' }) }}
-		{{ form_row(form.password.second, { label: 'Heslo znovu' }) }}
+		{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
+		{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
+		{{ form_row(form.email, { label: 'Email'|trans }) }}
+		{{ form_row(form.password.first, { label: 'Heslo'|trans }) }}
+		{{ form_row(form.password.second, { label: 'Heslo znovu'|trans }) }}
 
 		{{ form_widget(form.save, { label: 'Registrovat'|trans }) }}
 

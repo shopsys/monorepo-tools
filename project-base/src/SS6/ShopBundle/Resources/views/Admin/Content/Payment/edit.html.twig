@@ -20,7 +20,7 @@
 							<td>
 								{{ form_row(
 									form.prices[currencyId],
-									{label: 'Základní cena v ' ~ currency.code, attr: { class: 'form-line--size-2' }, symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
+									{label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), attr: { class: 'form-line--size-2' }, symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
 								) }}
 							</td>
 							<td>{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>

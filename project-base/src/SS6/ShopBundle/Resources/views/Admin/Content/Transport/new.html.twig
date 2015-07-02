@@ -17,7 +17,7 @@
 							<td>
 								{{ form_row(
 									form.prices[currencyId], {
-										label: 'Základní cena v ' ~ currency.code,
+										label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}),
 										attr: { class: 'form-line--size-2' },
 										symbolAfterInput: currencySymbolByCurrencyId(currencyId)
 									}

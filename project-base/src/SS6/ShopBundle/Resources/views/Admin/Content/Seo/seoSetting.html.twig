@@ -11,10 +11,10 @@
 			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 			{{ form_start(form) }}
-				{{ form_row(form.title, { label: 'Titulek' }) }}
+				{{ form_row(form.title, { label: 'Titulek'|trans }) }}
 				{% set infoText = 'Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na " | Můj obchod" a název zboží je "D-Link", bude výsledný titulek u tohoto zboží "D-Link | Můj obchod"' %}
-				{{ form_row(form.titleAddOn, { label: 'Doplněk k titulku', icon: { title: infoText } }) }}
-				{{ form_row(form.metaDescription, { label: 'Meta description' }) }}
+				{{ form_row(form.titleAddOn, { label: 'Doplněk k titulku'|trans, icon: { title: infoText } }) }}
+				{{ form_row(form.metaDescription, { label: 'Meta description'|trans }) }}
 
 				<div class="window-fixed-bar">
  					<div class="window-fixed-bar__buttons">
