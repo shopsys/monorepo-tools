@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/styles/index.css': '{{ rootStylesDirectory|raw }}/common/admin/main.less'
+					'web/assets/admin/styles/index.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
 				},
 				options: {
 					compress: true,
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
 					files: {
-						'web/assets/frontend/styles/index{{ domain.id }}.css': '{{ (rootStylesDirectory ~ '/' ~ domain.stylesDirectory)|raw }}/front/main.less'
+						'web/assets/frontend/styles/index{{ domain.id }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
 					},
 					options: {
 						compress: true,
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 			{% for domain in domains -%}
 				wysiwyg{{ domain.id }}: {
 					files: {
-						'web/assets/admin/styles/wysiwyg.css': '{{ (rootStylesDirectory ~ '/' ~ domain.stylesDirectory)|raw }}/front/wysiwyg.less'
+						'web/assets/admin/styles/wysiwyg.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/wysiwyg.less'
 					},
 					options: {
 						compress: true
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 				src: 'web/assets/admin/images/icons/*.png',
 				dest: 'web/assets/admin/images/icons/*.png',
 				destImg: 'web/assets/admin/images/sprites/sprite.png',
-				destCSS: '{{ rootStylesDirectory|raw }}/common/admin/libs/sprites.less',
+				destCSS: '{{ rootStylesDirectory|raw }}/admin/libs/sprites.less',
 				imgPath: '../images/sprites/sprite.png',
 				algorithm: 'binary-tree',
 				padding: 50,
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
 				src: 'web/assets/frontend/images/icons/*.png',
 				dest: 'web/assets/frontend/images/icons/*.png',
 				destImg: 'web/assets/frontend/images/sprites/sprite.png',
-				destCSS: '{{ rootStylesDirectory|raw }}/common/front/libs/sprites.less',
+				destCSS: '{{ rootStylesDirectory|raw }}/front/common/libs/sprites.less',
 				imgPath: '../images/sprites/sprite.png',
 				algorithm: 'binary-tree',
 				padding: 50,
@@ -145,16 +145,16 @@ module.exports = function(grunt) {
 					]
 				},
 				files: {
-					'docs/common/frontend/components': '{{ rootStylesDirectory|raw }}/common/front/components/',
-					'docs/common/frontend/core/buttons': '{{ rootStylesDirectory|raw }}/common/front/core/forms/buttons.less',
-					'docs/common/admin/components': '{{ rootStylesDirectory|raw }}/common/admin/components/'
+					'docs/common/frontend/components': '{{ rootStylesDirectory|raw }}/front/common/components/',
+					'docs/common/frontend/core/buttons': '{{ rootStylesDirectory|raw }}/front/common/core/forms/buttons.less',
+					'docs/common/admin/components': '{{ rootStylesDirectory|raw }}/admin/components/'
 				}
 			}
 		},
 
 		watch: {
 			admin: {
-				files: ['{{ rootStylesDirectory|raw }}/common/admin/**/*.less'],
+				files: ['{{ rootStylesDirectory|raw }}/admin/**/*.less'],
 				tasks: ['admin']
 			},
 			adminSprite: {
@@ -173,7 +173,7 @@ module.exports = function(grunt) {
 			},
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
-					files: ['{{ (rootStylesDirectory ~ '/' ~ domain.stylesDirectory)|raw }}/front/**/*.less'],
+					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less'],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
 						['frontend{{ domain.id }}']
