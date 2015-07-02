@@ -11,8 +11,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetIdNotSet() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2'),
+			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
 		];
 
 		$domain = new Domain($domainConfigs);
@@ -22,8 +22,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testSwitchDomainByRequest() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2'),
+			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
 		];
 
 		$domain = new Domain($domainConfigs);
@@ -45,8 +45,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetAll() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2'),
+			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
 		];
 
 		$domain = new Domain($domainConfigs);
@@ -56,8 +56,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetDomainConfigById() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2'),
+			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
 		];
 
 		$domain = new Domain($domainConfigs);

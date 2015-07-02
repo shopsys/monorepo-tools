@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Domain\Config;
 
 use SS6\ShopBundle\Command\ConfigVersionsCheckCommand;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -14,6 +15,7 @@ class DomainsConfigDefinition implements ConfigurationInterface {
 	const CONFIG_NAME = 'name';
 	const CONFIG_LOCALE = 'locale';
 	const CONFIG_TEMPLATES_DIRECTORY = 'templates_directory';
+	const CONFIG_STYLES_DIRECTORY = 'styles_directory';
 
 	/**
 	 * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
@@ -32,6 +34,7 @@ class DomainsConfigDefinition implements ConfigurationInterface {
 							->scalarNode(self::CONFIG_NAME)->isRequired()->cannotBeEmpty()->end()
 							->scalarNode(self::CONFIG_LOCALE)->isRequired()->cannotBeEmpty()->end()
 							->scalarNode(self::CONFIG_TEMPLATES_DIRECTORY)->isRequired()->cannotBeEmpty()->end()
+							->scalarNode(self::CONFIG_STYLES_DIRECTORY)->defaultValue(DomainConfig::STYLES_DIRECTORY_DEFAULT)->end()
 						->end()
 					->end()
 				->end()

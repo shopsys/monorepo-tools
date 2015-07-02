@@ -12,8 +12,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateFriendlyUrls() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir'),
-			new DomainConfig(2, 'http://example.com', 'example.com', 'en', 'templateDir'),
+			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
 		$domain = new Domain($domainConfigs);
 
@@ -41,7 +41,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetFriendlyUrlUniqueResultNewUnique() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir'),
+			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
 		$domain = new Domain($domainConfigs);
 
@@ -63,7 +63,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetFriendlyUrlUniqueResultOldUnique() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir'),
+			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
 		$domain = new Domain($domainConfigs);
 
@@ -88,7 +88,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetFriendlyUrlUniqueResultNotUnique() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir'),
+			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
 		$domain = new Domain($domainConfigs);
 
@@ -117,7 +117,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetAbsoluteUrlByFriendlyUrl() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir'),
+			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir', 'stylesDirectory'),
 		];
 		$domain = new Domain($domainConfigs);
 

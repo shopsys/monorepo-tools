@@ -1,0 +1,37 @@
+/*
+Form error
+===========
+Error state of input, multiple variants - on element, on wrapping element, used with JS
+
+	<div class="form-line">
+		<label class="form-line__label">
+			Type 1
+		</label>
+		<span class="form-line__field form-error">
+			<input class="form-control" type="text">
+		</span>
+	</div>
+
+	<div class="form-line">
+		<label class="form-line__label">
+			Type 2
+		</label>
+		<span class="form-line__field">
+			<input class="form-control form-error" type="text">
+		</span>
+	</div>
+*/
+
+.form-error {
+	select, input, textarea {
+		background: @bg-alert;
+		border: 1px solid @color-red;
+	}
+}
+
+select, input, textarea {
+	&.form-error {
+		background: @bg-alert;
+		border: 1px solid @color-red;
+	}
+}

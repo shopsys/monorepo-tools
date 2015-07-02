@@ -17,7 +17,7 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRouter() {
 
-		$domainConfig = new DomainConfig(3, 'http://example.com:8080', 'example', 'en', 'templateDirectory');
+		$domainConfig = new DomainConfig(3, 'http://example.com:8080', 'example', 'en', 'templateDirectory', 'stylesDirectory');
 		$domain = new Domain([$domainConfig]);
 
 		$localizedRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
