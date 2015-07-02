@@ -115,20 +115,6 @@ class FriendlyUrlRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
-	 * @return bool
-	 */
-	public function isMainFriendlyUrl(FriendlyUrl $friendlyUrl) {
-		$mainFriendlyUrl = $this->getMainFriendlyUrl(
-			$friendlyUrl->getDomainId(),
-			$friendlyUrl->getRouteName(),
-			$friendlyUrl->getEntityId()
-		);
-
-		return $mainFriendlyUrl === $friendlyUrl;
-	}
-
-	/**
 	 * @param object[] $entities
 	 * @param string $routeName
 	 * @param int $domainId

@@ -111,7 +111,7 @@ class FriendlyUrlFacade {
 		if ($friendlyUrl !== null) {
 			$this->em->persist($friendlyUrl);
 			$this->em->flush($friendlyUrl);
-			$this->refreshMainUrl($friendlyUrl);
+			$this->setFriendlyUrlAsMain($friendlyUrl);
 		}
 	}
 
@@ -142,18 +142,18 @@ class FriendlyUrlFacade {
 	public function saveUrlListFormData($routeName, $entityId, array $urlListFormData) {
 		$toFlush = [];
 
-		foreach ($urlListFormData[UrlListType::TO_DELETE] as $friendlyUrls) {
-			foreach ($friendlyUrls as $friendlyUrl) {
-				if (!$this->friendlyUrlRepository->isMainFriendlyUrl($friendlyUrl)) {
-					$this->em->remove($friendlyUrl);
-				}
+		foreach ($urlListFormData[UrlListType::MAIN_ON_DOMAINS] as $friendlyUrl) {
+			if ($friendlyUrl !== null) {
+				$this->setFriendlyUrlAsMain($friendlyUrl);
+				$toFlush[] = $friendlyUrl;
 			}
 		}
 
-		foreach ($urlListFormData[UrlListType::MAIN_ON_DOMAINS] as $friendlyUrl) {
-			if ($friendlyUrl !== null) {
-				$this->refreshMainUrl($friendlyUrl);
-				$toFlush[] = $friendlyUrl;
+		foreach ($urlListFormData[UrlListType::TO_DELETE] as $friendlyUrls) {
+			foreach ($friendlyUrls as $friendlyUrl) {
+				if (!$friendlyUrl->isMain()) {
+					$this->em->remove($friendlyUrl);
+				}
 			}
 		}
 
@@ -171,7 +171,7 @@ class FriendlyUrlFacade {
 	/**
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $mainFriendlyUrl
 	 */
-	public function refreshMainUrl(FriendlyUrl $mainFriendlyUrl) {
+	private function setFriendlyUrlAsMain(FriendlyUrl $mainFriendlyUrl) {
 		$friendlyUrls = $this->friendlyUrlRepository->getAllByRouteNameAndEntityIdAndDomainId(
 			$mainFriendlyUrl->getRouteName(),
 			$mainFriendlyUrl->getEntityId(),
