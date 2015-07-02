@@ -10,6 +10,7 @@ class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTransla
 		parent::__construct();
 
 		$this->addFilterTranslation('productCatnum', $translator->trans('Katalogové číslo'));
+		$this->addFilterTranslation('productFlag', $translator->trans('Příznak'));
 		$this->addFilterTranslation('productName', $translator->trans('Název produktu'));
 		$this->addFilterTranslation('productPartno', $translator->trans('Partno'));
 		$this->addFilterTranslation('productStock', $translator->trans('Skladové zásoby'));

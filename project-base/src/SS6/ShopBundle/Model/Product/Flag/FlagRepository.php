@@ -51,7 +51,7 @@ class FlagRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getFlagRepository()->findBy([], ['id' => 'asc']);
 	}
 

@@ -82,4 +82,11 @@ class FlagFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	public function getAll() {
+		return $this->flagRepository->getAll();
+	}
+
 }

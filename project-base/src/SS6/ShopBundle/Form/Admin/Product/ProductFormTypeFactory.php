@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
-use SS6\ShopBundle\Model\Product\Flag\FlagRepository;
+use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductFormTypeFactory {
@@ -27,9 +27,9 @@ class ProductFormTypeFactory {
 	private $inverseArrayValuesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagRepository
+	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
 	 */
-	private $flagRepository;
+	private $flagFacade;
 
 	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
@@ -40,13 +40,13 @@ class ProductFormTypeFactory {
 		VatRepository $vatRepository,
 		AvailabilityRepository $availabilityRepository,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
-		FlagRepository $flagRepository,
+		FlagFacade $flagFacade,
 		Translator $translator
 	) {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
-		$this->flagRepository = $flagRepository;
+		$this->flagFacade = $flagFacade;
 		$this->translator = $translator;
 	}
 
@@ -57,7 +57,7 @@ class ProductFormTypeFactory {
 	public function create(Product $product = null) {
 		$vats = $this->vatRepository->getAllIncludingMarkedForDeletion();
 		$availabilities = $this->availabilityRepository->getAll();
-		$flags = $this->flagRepository->findAll();
+		$flags = $this->flagFacade->getAll();
 
 		return new ProductFormType(
 			$vats,
