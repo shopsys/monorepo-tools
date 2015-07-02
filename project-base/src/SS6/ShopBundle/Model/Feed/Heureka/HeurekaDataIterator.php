@@ -59,13 +59,6 @@ class HeurekaDataIterator extends AbstractDataIterator {
 
 		$items = [];
 		foreach ($products as $product) {
-			$calculatedAvailability = $product->getCalculatedAvailability();
-			if ($calculatedAvailability === null) {
-				$deliveryDate = null;
-			} else {
-				$deliveryDate = $calculatedAvailability->getDeliveryTime();
-			}
-
 			$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
 				$product,
 				$this->domainConfig->getId(),
@@ -80,7 +73,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$imagesByProductId[$product->getId()],
 				$productPrice->getPriceWithVat(),
 				$product->getEan(),
-				$deliveryDate
+				$product->getCalculatedAvailability()->getDeliveryTime()
 			);
 		}
 

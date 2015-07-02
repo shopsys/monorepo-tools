@@ -9,6 +9,8 @@ use SS6\ShopBundle\Model\Pricing\InputPriceRecalculator;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
@@ -77,7 +79,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT, SettingValue::DOMAIN_ID_COMMON);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
+		$availability = new Availability(new AvailabilityData([], 0));
 		$em->persist($vat);
+		$em->persist($availability);
 
 		$currency1 = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -86,6 +90,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$productEditData->productData->name = ['cs' => 'name'];
 		$productEditData->productData->price = $inputPriceWithVat;
 		$productEditData->productData->vat = $vat;
+		$productEditData->productData->availability = $availability;
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
@@ -157,12 +162,15 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
+		$availability = new Availability(new AvailabilityData([], 0));
 		$em->persist($vat);
+		$em->persist($availability);
 
 		$productEditData = new ProductEditData();
 		$productEditData->productData->name = ['cs' => 'name'];
 		$productEditData->productData->price = $inputPriceWithoutVat;
 		$productEditData->productData->vat = $vat;
+		$productEditData->productData->availability = $availability;
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 

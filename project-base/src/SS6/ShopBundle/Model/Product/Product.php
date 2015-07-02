@@ -141,9 +141,9 @@ class Product extends AbstractTranslatableEntity {
 	private $outOfStockAction;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
-	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
+	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=false)
 	 */
 	private $availability;
 
@@ -155,9 +155,9 @@ class Product extends AbstractTranslatableEntity {
 	private $outOfStockAvailability;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
-	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=true)
+	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=false)
 	 */
 	private $calculatedAvailability;
 
@@ -236,6 +236,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->outOfStockAction = $productData->outOfStockAction;
 		$this->availability = $productData->availability;
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
+		$this->calculatedAvailability = $this->availability;
 		$this->recalculateAvailability = true;
 		$this->visible = false;
 		$this->setTranslations($productData);
@@ -417,7 +418,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getAvailability() {
 		return $this->availability;
@@ -431,7 +432,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getCalculatedAvailability() {
 		return $this->calculatedAvailability;
@@ -446,17 +447,17 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $outOfStockAvailability
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $outOfStockAvailability|null
 	 */
-	public function setOutOfStockAvailability(Availability $outOfStockAvailability) {
+	public function setOutOfStockAvailability(Availability $outOfStockAvailability = null) {
 		$this->outOfStockAvailability = $outOfStockAvailability;
 		$this->recalculateAvailability = true;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $calculatedAvailability
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $calculatedAvailability
 	 */
-	public function setCalculatedAvailability(Availability $calculatedAvailability = null) {
+	public function setCalculatedAvailability(Availability $calculatedAvailability) {
 		$this->calculatedAvailability = $calculatedAvailability;
 		$this->recalculateAvailability = false;
 	}

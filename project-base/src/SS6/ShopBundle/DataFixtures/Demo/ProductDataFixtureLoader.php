@@ -153,8 +153,6 @@ class ProductDataFixtureLoader {
 			case 'on-request':
 				$productEditData->productData->availability = $this->availabilities['on-request'];
 				break;
-			default:
-				$productEditData->productData->availability = null;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
 		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);

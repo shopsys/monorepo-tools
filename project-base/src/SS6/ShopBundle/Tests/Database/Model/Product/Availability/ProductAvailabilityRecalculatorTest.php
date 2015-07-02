@@ -56,7 +56,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->usingStock = true;
 		$productEditData->productData->stockQuantity = 5;
 		$productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
-		$productEditData->productData->availability = null;
+		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
 
 		$productEditFacade->edit($productId, $productEditData);
 		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
@@ -88,7 +88,7 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 0;
 		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY;
 		$productEditData->productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
-		$productEditData->productData->availability = null;
+		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
 
 		$productEditFacade->edit($productId, $productEditData);
 		$productAvailabilityRecalculator->runScheduledRecalculations(function () {

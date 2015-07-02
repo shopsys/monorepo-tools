@@ -6,6 +6,8 @@ use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Product\Availability\Availability;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -17,11 +19,18 @@ class CartItemTest extends DatabaseTestCase {
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
-		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
-		$product2 = new Product(new ProductData(['cs' => 'Product 2'], null, null, null, $price, $vat));
+		$availability = new Availability(new AvailabilityData([], 0));
+		$productData = new ProductData();
+		$productData->name = [];
+		$productData->price = 100;
+		$productData->vat = $vat;
+		$productData->availability = $availability;
+
+		$product1 = new Product($productData);
+		$product2 = new Product($productData);
 		$em->persist($vat);
+		$em->persist($availability);
 		$em->persist($product1);
 		$em->persist($product2);
 		$em->flush();

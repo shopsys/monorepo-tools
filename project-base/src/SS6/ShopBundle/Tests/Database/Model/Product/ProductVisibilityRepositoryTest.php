@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
 use DateTime;
+use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -35,6 +36,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->sellable = true;
 		$productEditData->productData->hiddenOnDomains = [];
 		$productEditData->productData->categories = [$category];
+		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
 
 		return $productEditData;
 	}
