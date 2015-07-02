@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Domain\Config;
 
 class DomainConfig {
 
+	const STYLES_DIRECTORY_DEFAULT = 'common';
+
 	/**
 	 * @var int
 	 */

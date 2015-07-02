@@ -5,11 +5,10 @@ domains:
     name: localhost
     locale: cs
     templates_directory: cz
-    styles_directory: src/SS6/ShopBundle/Resources/styles/common/front/
 
   - id: 2
     url: http://2.localhost:8080
     name: localhosten
     locale: en
     templates_directory: en
-    styles_directory: src/SS6/ShopBundle/Resources/styles/domain2/front/
+    styles_directory: domain2

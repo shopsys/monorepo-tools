@@ -26,6 +26,7 @@ parameters:
   ss6.javascript_url_prefix: /assets/scripts/
   ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
   ss6.root_dir: %kernel.root_dir%/..
+  ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
   ss6.web_dir: %kernel.root_dir%/../web
   translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader

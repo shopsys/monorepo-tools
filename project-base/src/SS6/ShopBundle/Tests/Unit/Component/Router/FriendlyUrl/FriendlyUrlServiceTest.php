@@ -117,7 +117,7 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetAbsoluteUrlByFriendlyUrl() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir'),
+			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir', 'stylesDirectory'),
 		];
 		$domain = new Domain($domainConfigs);
 

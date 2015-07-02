@@ -29,6 +29,7 @@ class GenerateGruntfileCommand extends ContainerAwareCommand {
 		$output->writeln('Start of generating Gruntfile.js.');
 		$gruntfileContents = $twig->render('@SS6Shop/Grunt/gruntfile.js.twig', [
 			'domains' => $domain->getAll(),
+			'rootStylesDirectory' => $this->getContainer()->getParameter('ss6.styles_dir'),
 		]);
 		$path = $this->getContainer()->getParameter('ss6.root_dir');
 		file_put_contents($path . '/Gruntfile.js', $gruntfileContents);
