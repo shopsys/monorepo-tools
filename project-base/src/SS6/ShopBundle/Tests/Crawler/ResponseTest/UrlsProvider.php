@@ -25,6 +25,8 @@ class UrlsProvider {
 	 * @var string[]
 	 */
 	private $ignoredRouteNames = [
+		// protected by csrf token
+		'admin_customer_loginasuser',
 		// used only for internal setting of selected domain by tab control in admin
 		'admin_domain_selectdomain',
 		// do not rewrite XML feed by test products
@@ -54,11 +56,12 @@ class UrlsProvider {
 	 * @var int[]
 	 */
 	private $expectedStatusCodesByRouteName = [
-		'front_order_index' => 302,
-		'front_order_sent' => 302,
 		'admin_login' => 302,
 		'admin_logout' => 302,
+		'front_customer_login_as_remembered_user' => 302,
 		'front_logout' => 302,
+		'front_order_index' => 302,
+		'front_order_sent' => 302,
 		'front_registration_set_new_password' => 302,
 	];
 

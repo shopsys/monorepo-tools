@@ -22,10 +22,14 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class CustomerController extends BaseController {
+
+	const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
@@ -82,6 +86,16 @@ class CustomerController extends BaseController {
 	 */
 	private $orderFacade;
 
+	/**
+	 * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+	 */
+	private $csrfTokenManager;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginAsUserFacade
+	 */
+	private $loginAsUserFacade;
+
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		Translator $translator,
@@ -93,7 +107,9 @@ class CustomerController extends BaseController {
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
-		OrderFacade $orderFacade
+		OrderFacade $orderFacade,
+		CsrfTokenManagerInterface $csrfTokenManager,
+		LoginAsUserFacade $loginAsUserFacade
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
@@ -106,6 +122,8 @@ class CustomerController extends BaseController {
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
 		$this->orderFacade = $orderFacade;
+		$this->csrfTokenManager = $csrfTokenManager;
+		$this->loginAsUserFacade = $loginAsUserFacade;
 	}
 
 	/**
@@ -159,6 +177,7 @@ class CustomerController extends BaseController {
 			'form' => $form->createView(),
 			'user' => $user,
 			'orders' => $orders,
+			'loginAsUserCsrfToken' => $this->csrfTokenManager->getToken($this->getLoginAsUserCsrfTokenId($id)),
 		]);
 	}
 
@@ -285,6 +304,34 @@ class CustomerController extends BaseController {
 		}
 
 		return $this->redirect($this->generateUrl('admin_customer_list'));
+	}
+
+	/**
+	 * @Route("/customer/login-as-user/{userId}/{csrfToken}/", requirements={"id" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $userId
+	 * @param string $csrfToken
+	 */
+	public function loginAsUserAction(Request $request, $userId, $csrfToken) {
+		$csrfTokenId = $this->getLoginAsUserCsrfTokenId($userId);
+		if (!$this->isCsrfTokenValid($csrfTokenId, $csrfToken)) {
+			$this->getFlashMessageSender()->addErrorFlash('Chyba CSRF, prosím zkuste se přihlásit za uživatele ještě jednou.');
+			return $this->redirect($request->server->get('HTTP_REFERER'));
+		}
+
+		$user = $this->customerEditFacade->getUserById($userId);
+		$this->csrfTokenManager->removeToken($csrfTokenId);
+		$this->loginAsUserFacade->rememberLoginAsUser($user);
+
+		return $this->redirectToRoute('front_customer_login_as_remembered_user');
+	}
+
+	/**
+	 * @param int $userId
+	 * @return string
+	 */
+	private function getLoginAsUserCsrfTokenId($userId) {
+		return self::LOGIN_AS_TOKEN_ID_PREFIX . $userId;
 	}
 
 }

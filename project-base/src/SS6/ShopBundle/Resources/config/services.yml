@@ -870,6 +870,12 @@ services:
   ss6.shop.security.customer_login_handler:
     class: SS6\ShopBundle\Model\Security\CustomerLoginHandler
 
+  ss6.shop.security.login_as_user_facade:
+    class: SS6\ShopBundle\Model\Security\LoginAsUserFacade
+    arguments:
+      - @security.token_storage
+      - @event_dispatcher
+
   ss6.shop.security.login_listener:
     class: SS6\ShopBundle\Model\Security\LoginListener
     tags:
