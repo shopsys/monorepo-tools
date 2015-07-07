@@ -76,8 +76,8 @@ services:
   ss6.shop.admin_navigation.menu_loader:
     class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader
 
-  ss6.shop.administrator.admin_user_provider:
-    class: SS6\ShopBundle\Model\Administrator\AdminUserProvider
+  ss6.shop.administrator.security.administrator_user_provider:
+    class: SS6\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
 
   ss6.shop.administrator.administrator_facade:
     class: SS6\ShopBundle\Model\Administrator\AdministratorFacade

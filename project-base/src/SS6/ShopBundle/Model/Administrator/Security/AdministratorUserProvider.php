@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace SS6\ShopBundle\Model\Administrator\Security;
 
 use DateTime;
 use SS6\ShopBundle\Model\Administrator\Administrator;
@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class AdminUserProvider implements UserProviderInterface {
+class AdministratorUserProvider implements UserProviderInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorRepository

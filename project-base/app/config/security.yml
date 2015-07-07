@@ -9,7 +9,7 @@ security:
 
   providers:
     administrators:
-      id: ss6.shop.administrator.admin_user_provider
+      id: ss6.shop.administrator.security.administrator_user_provider
 
     user_identities:
       id: ss6.shop.customer.frontend_user_provider
