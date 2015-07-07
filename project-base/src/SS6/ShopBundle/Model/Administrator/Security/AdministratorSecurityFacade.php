@@ -41,22 +41,11 @@ class AdministratorSecurityFacade {
 
 	/**
 	 * @return bool
-	 * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
 	 */
 	public function isAdministratorLogged() {
-		$serializedToken = $this->session->get('_security_' . self::ADMINISTRATION_CONTEXT);
-		if ($serializedToken === null) {
-			return false;
-		}
-
-		$token = unserialize($serializedToken);
-		if (!$token instanceof TokenInterface) {
-			return false;
-		}
-
 		try {
-			$this->refreshUserInToken($token);
-		} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenUserException $e) {
+			$token = $this->getAdministratorToken();
+		} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $e) {
 			return false;
 		}
 
@@ -68,6 +57,27 @@ class AdministratorSecurityFacade {
 	}
 
 	/**
+	 * @return \Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+	 * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
+	 */
+	private function getAdministratorToken() {
+		$serializedToken = $this->session->get('_security_' . self::ADMINISTRATION_CONTEXT);
+		if ($serializedToken === null) {
+			$message = 'Token not found.';
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+		}
+
+		$token = unserialize($serializedToken);
+		if (!$token instanceof TokenInterface) {
+			$message = 'Token has invalid interface.';
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+		}
+		$this->refreshUserInToken($token);
+
+		return $token;
+	}
+
+	/**
 	 * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
 	 * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
 	 * @see \Symfony\Component\Security\Core\Authentication\Token\AbstractToken::setUser()
@@ -76,18 +86,20 @@ class AdministratorSecurityFacade {
 		$user = $token->getUser();
 		if (!$user instanceof UserInterface) {
 			$message = 'User in token must implement UserInterface.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenUserException($message);
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
 		}
 
 		try {
-			$token->setUser($this->administratorUserProvider->refreshUser($user));
+			$freshUser = $this->administratorUserProvider->refreshUser($user);
 		} catch (\Symfony\Component\Security\Core\Exception\UnsupportedUserException $e) {
 			$message = 'AdministratorUserProvider does not support user in this token.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenUserException($message, $e);
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message, $e);
 		} catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
 			$message = 'Username not found.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenUserException($message, $e);
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message, $e);
 		}
+
+		$token->setUser($freshUser);
 	}
 
 }

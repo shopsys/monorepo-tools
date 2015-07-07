@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Administrator\Security\Exception;
 use Exception;
 use SS6\ShopBundle\Model\Administrator\Security\Exception\SecurityException;
 
-class InvalidTokenUserException extends Exception implements SecurityException {
+class InvalidTokenException extends Exception implements SecurityException {
 
 	/**
 	 * @param string $message
