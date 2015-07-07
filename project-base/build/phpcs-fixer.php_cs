@@ -4,20 +4,20 @@ $config = Symfony\CS\Config\Config::create()
 	->level(Symfony\CS\FixerInterface::NONE_LEVEL)
 	->fixers([
 		'blankline_after_open_tag',
-		//'braces',
+		//'braces', // do not want open braces at new line
 		'concat_with_spaces',
-		//'concat_without_spaces',
+		//'concat_without_spaces', // concatenation operator should be surrounded by single space
 		'double_arrow_multiline_whitespaces',
 		'duplicate_semicolon',
 		'elseif',
-		//'empty_return',
+		//'empty_return', // rewrites "return null;" to "return;"
 		'encoding',
 		'eof_ending',
 		'extra_empty_lines',
 		'function_call_space',
 		'function_declaration',
 		'include',
-		//'indentation',
+		//'indentation', // uses spaces instead of tabs
 		'join_function',
 		'line_after_namespace',
 		'linefeed',
@@ -29,7 +29,7 @@ $config = Symfony\CS\Config\Config::create()
 		'multiple_use',
 		'namespace_no_leading_whitespace',
 		'new_with_braces',
-		//'no_blank_lines_after_class_opening',
+		//'no_blank_lines_after_class_opening', // we would like the exact opposite
 		'no_empty_lines_after_phpdocs',
 		'object_operator',
 		'operators_spaces',
@@ -40,14 +40,14 @@ $config = Symfony\CS\Config\Config::create()
 		'phpdoc_no_access',
 		'phpdoc_no_empty_return',
 		'phpdoc_no_package',
-		//'phpdoc_params',
+		//'phpdoc_params', // do not want vertically aligned phpdocs
 		'phpdoc_scalar',
-		//'phpdoc_separation',
-		//'phpdoc_short_description',
+		//'phpdoc_separation', // do not want phpdoc annotations grouping
+		//'phpdoc_short_description', // descriptons does not have to end with ".", "!" or "?"
 		'phpdoc_trim',
 		'phpdoc_type_to_var',
 		'phpdoc_var_without_name',
-		//'pre_increment',
+		//'pre_increment', // post-increment is totally OK
 		'psr0',
 		'remove_lines_between_uses',
 		'short_array_syntax',
