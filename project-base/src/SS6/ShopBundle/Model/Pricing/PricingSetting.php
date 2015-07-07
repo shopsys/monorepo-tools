@@ -74,7 +74,7 @@ class PricingSetting {
 	 */
 	public function setDefaultCurrency(Currency $currency) {
 		$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
-		$this->setting->set(PricingSetting::DEFAULT_CURRENCY, $currency->getId(), SettingValue::DOMAIN_ID_COMMON);
+		$this->setting->set(self::DEFAULT_CURRENCY, $currency->getId(), SettingValue::DOMAIN_ID_COMMON);
 	}
 
 	/**
@@ -82,7 +82,7 @@ class PricingSetting {
 	 * @param int $domainId
 	 */
 	public function setDomainDefaultCurrency(Currency $currency, $domainId) {
-		$this->setting->set(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $currency->getId(), $domainId);
+		$this->setting->set(self::DEFAULT_DOMAIN_CURRENCY, $currency->getId(), $domainId);
 	}
 
 	/**

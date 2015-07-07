@@ -52,6 +52,7 @@ $config = Symfony\CS\Config\Config::create()
 		'remove_leading_slash_use',
 		'remove_lines_between_uses',
 		//'return', // not every return looks good with empty line before it
+		'self_accessor',
 		'short_array_syntax',
 		'short_tag',
 		'single_array_no_trailing_comma',

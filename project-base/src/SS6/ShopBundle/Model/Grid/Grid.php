@@ -263,7 +263,7 @@ class Grid {
 	 * @return mixed
 	 */
 	public function getRowId($row) {
-		return Grid::getValueFromRowBySourceColumnName($row, $this->dataSource->getRowIdSourceColumnName());
+		return self::getValueFromRowBySourceColumnName($row, $this->dataSource->getRowIdSourceColumnName());
 	}
 
 	/**
