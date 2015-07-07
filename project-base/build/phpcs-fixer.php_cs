@@ -56,6 +56,7 @@ $config = Symfony\CS\Config\Config::create()
 		'short_array_syntax',
 		'short_tag',
 		'single_array_no_trailing_comma',
+		'single_blank_line_before_namespace',
 		'single_line_after_imports',
 		'spaces_before_semicolon',
 		'standardize_not_equal',
