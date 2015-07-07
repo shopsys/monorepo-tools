@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\AdminNavigation;
 
-use \Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class BreadcrumbFactory {
 

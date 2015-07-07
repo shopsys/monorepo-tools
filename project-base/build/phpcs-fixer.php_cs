@@ -49,6 +49,7 @@ $config = Symfony\CS\Config\Config::create()
 		'phpdoc_var_without_name',
 		//'pre_increment', // post-increment is totally OK
 		'psr0',
+		'remove_leading_slash_use',
 		'remove_lines_between_uses',
 		'short_array_syntax',
 		'short_tag',
