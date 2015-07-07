@@ -15,6 +15,7 @@ security:
       id: ss6.shop.customer.frontend_user_provider
 
   firewalls:
+    # see SS6\ShopBundle\Model\Security\SecurityFacade
     administration:
       pattern: ^/(admin/|efconnect|elfinder)
       anonymous: ~

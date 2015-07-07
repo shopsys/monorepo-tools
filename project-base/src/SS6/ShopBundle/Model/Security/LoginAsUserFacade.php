@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Security;
 
+use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -36,16 +37,23 @@ class LoginAsUserFacade {
 	 */
 	private $userRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade
+	 */
+	private $administratorSecurityFacade;
+
 	public function __construct(
 		TokenStorageInterface $tokenStorage,
 		EventDispatcherInterface $eventDispatcher,
 		SessionInterface $session,
-		UserRepository $userRepository
+		UserRepository $userRepository,
+		AdministratorSecurityFacade $administratorSecurityFacade
 	) {
 		$this->tokenStorage = $tokenStorage;
 		$this->eventDispatcher = $eventDispatcher;
 		$this->session = $session;
 		$this->userRepository = $userRepository;
+		$this->administratorSecurityFacade = $administratorSecurityFacade;
 	}
 
 	/**
@@ -59,6 +67,10 @@ class LoginAsUserFacade {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAsRememberedUser(Request $request) {
+		if (!$this->administratorSecurityFacade->isAdministratorLogged()) {
+			throw new \SS6\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
+		}
+
 		if (!$this->session->has(self::SESSION_LOGIN_AS)) {
 			throw new \SS6\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('User not set.');
 		}
