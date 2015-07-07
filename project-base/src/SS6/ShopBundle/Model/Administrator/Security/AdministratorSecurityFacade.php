@@ -3,8 +3,10 @@
 namespace SS6\ShopBundle\Model\Administrator\Security;
 
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorUserProvider;
+use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class AdministratorSecurityFacade {
@@ -22,9 +24,19 @@ class AdministratorSecurityFacade {
 	 */
 	private $administratorUserProvider;
 
-	public function __construct(SessionInterface $session, AdministratorUserProvider $administratorUserProvider) {
+	/**
+	 * @var \Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
+	 */
+	private $accessDecisionManager;
+
+	public function __construct(
+		SessionInterface $session,
+		AdministratorUserProvider $administratorUserProvider,
+		AccessDecisionManagerInterface $accessDecisionManager
+	) {
 		$this->session = $session;
 		$this->administratorUserProvider = $administratorUserProvider;
+		$this->accessDecisionManager = $accessDecisionManager;
 	}
 
 	/**
@@ -48,7 +60,11 @@ class AdministratorSecurityFacade {
 			return false;
 		}
 
-		return $token->isAuthenticated();
+		if (!$token->isAuthenticated()) {
+			return false;
+		}
+
+		return $this->accessDecisionManager->decide($token, [Roles::ROLE_ADMIN]);
 	}
 
 	/**
