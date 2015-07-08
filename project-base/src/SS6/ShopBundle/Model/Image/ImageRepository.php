@@ -73,7 +73,7 @@ class ImageRepository {
 			->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
 			->andWhere('i.entityId = :entityId')->setParameter('entityId', $entityId)
 			->addOrderBy('i.position', 'asc')
-			->addOrderBy('i.id', 'desc');
+			->addOrderBy('i.id', 'asc');
 
 		if ($type === null) {
 			$queryBuilder->andWhere('i.type IS NULL');
@@ -122,7 +122,7 @@ class ImageRepository {
 			->andWhere('i.entityName = :entityName')->setParameter('entityName', $entityName)
 			->andWhere('i.entityId IN (:entities)')->setParameter('entities', $entities)
 			->addOrderBy('i.position', 'asc')
-			->addOrderBy('i.id', 'desc');
+			->addOrderBy('i.id', 'asc');
 
 		$imagesByEntityId = [];
 		foreach ($queryBuilder->getQuery()->execute() as $image) {
