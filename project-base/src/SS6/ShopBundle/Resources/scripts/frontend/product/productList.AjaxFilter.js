@@ -10,7 +10,7 @@
 		var $showResultsButton = $('.js-product-filter-show-result-button');
 		var $resetFilterButton = $('.js-product-filter-reset-button');
 		var requestTimer = null;
-		var requestDelay = 700;
+		var requestDelay = 1000;
 
 		this.init = function () {
 			$productFilterForm.change(function () {
