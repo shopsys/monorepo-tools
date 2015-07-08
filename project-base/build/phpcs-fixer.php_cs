@@ -60,6 +60,7 @@ $config = Symfony\CS\Config\Config::create()
 		'single_line_after_imports',
 		'single_quote',
 		'spaces_before_semicolon',
+		//'spaces_cast', // cast and variable should not be separated by a space
 		'standardize_not_equal',
 		'ternary_spaces',
 		'trailing_spaces',
