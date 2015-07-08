@@ -53,7 +53,6 @@
 		{{ form_errors(form) }}
 		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
-		{{- block('appendix_block') -}}
 	</div>
 {% endblock form_row %}
 
@@ -104,7 +103,6 @@
 			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
 		{% endif %}
-		{{- block('appendix_block') -}}
 	</div>
 {%- endblock text_row %}
 
@@ -358,9 +356,7 @@
 {% block form_widget_simple %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
 	{{ parent('form_widget_simple') }}
-	{% if symbolAfterInput is defined %}
-		<span>{{ symbolAfterInput }}</span>
-	{% endif %}
+	{{- block('appendix_block') -}}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}
