@@ -36,6 +36,7 @@
 				</div>
 
 				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
+				<a href="{{ url('admin_product_createvariant') }}" class="btn btn-primary mb-1">{{ 'Vytvořit variantu'|trans }}</a>
 				{{ gridView.render() }}
 				{{ gridView.renderHiddenInputs('page') }}
 			{{ form_end(massActionForm) }}

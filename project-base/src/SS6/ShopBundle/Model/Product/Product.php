@@ -25,6 +25,9 @@ class Product extends AbstractTranslatableEntity {
 	const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
 	const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
 	const OUT_OF_STOCK_ACTION_HIDE = 'hide';
+	const VARIANT_TYPE_NONE = 'none';
+	const VARIANT_TYPE_MAIN = 'main';
+	const VARIANT_TYPE_VARIANT = 'variant';
 
 	/**
 	 * @var int
@@ -220,6 +223,28 @@ class Product extends AbstractTranslatableEntity {
 	private $brand;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 *
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant", orphanRemoval=true)
+	 */
+	private $variants;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="variants")
+	 * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true)
+	 */
+	private $mainVariant;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=32, nullable=false)
+	 */
+	private $variantType;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -254,6 +279,8 @@ class Product extends AbstractTranslatableEntity {
 		$this->calculatedHidden = true;
 		$this->calculatedSellable = false;
 		$this->brand = $productData->brand;
+		$this->variants = [];
+		$this->variantType = self::VARIANT_TYPE_NONE;
 	}
 
 	/**
@@ -512,6 +539,26 @@ class Product extends AbstractTranslatableEntity {
 
 	public function markForVisibilityRecalculation() {
 		$this->recalculateVisibility = true;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
+	 */
+	public function setVariants(array $variants) {
+		$this->variantType = self::VARIANT_TYPE_MAIN;
+		$this->variants = $variants;
+		foreach ($variants as $variant) {
+			$variant->setMainVariant($this);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used but not through $this
+	 */
+	private function setMainVariant(Product $mainVariant) {
+		$this->variantType = self::VARIANT_TYPE_VARIANT;
+		$this->mainVariant = $mainVariant;
 	}
 
 	/**

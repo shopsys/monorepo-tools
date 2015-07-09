@@ -36,6 +36,9 @@
         - label: 'Editace zboží'
           route: admin_product_edit
           visible: false
+        - label: 'Vytvořit variantu'
+          route: admin_product_createvariant
+          visible: false
     - label: 'Kategorie'
       route: admin_category_list
       items:
