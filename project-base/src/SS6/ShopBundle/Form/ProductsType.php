@@ -49,6 +49,7 @@ class ProductsType extends AbstractType {
 			'allow_delete' => true,
 			'delete_empty' => true,
 			'main_product' => null,
+			'error_bubbling' => false,
 		]);
 	}
 
