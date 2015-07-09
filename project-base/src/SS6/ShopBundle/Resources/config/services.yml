@@ -856,6 +856,11 @@ services:
   ss6.shop.slider.slider_item_repository:
     class: SS6\ShopBundle\Model\Slider\SliderItemRepository
 
+  ss6.shop.http_foundation.response_listener:
+    class: SS6\ShopBundle\Component\HttpFoundation\ResponseListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
   ss6.shop.http_foundation.sub_request_listener:
     class: SS6\ShopBundle\Component\HttpFoundation\SubRequestListener
     tags:
