@@ -25,6 +25,6 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
 
-		$this->assertEmpty($result, 'Unsellable product was listed');
+		$this->assertEmpty($result, 'Product with denied selling was listed');
 	}
 }

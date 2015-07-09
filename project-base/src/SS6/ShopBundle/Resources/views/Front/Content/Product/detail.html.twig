@@ -70,7 +70,7 @@
 						{{ 'Dostupnost'|trans }}:
 					</dt>
 					<dd class="list-params__definition">
-						{% if productDetail.product.calculatedSellable == false %}
+						{% if productDetail.product.calculatedSellingDenied %}
 							{{ 'Zboží se již neprodává'|trans }}
 						{% else %}
 							{{ productDetail.product.calculatedAvailability.name }}
@@ -126,7 +126,7 @@
 						</strong>
 					</dd>
 				</dl>
-				{% if productDetail.product.calculatedSellable %}
+				{% if not productDetail.product.calculatedSellingDenied %}
 					{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 				{% else %}
 					<div>

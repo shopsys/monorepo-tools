@@ -104,14 +104,14 @@ class Product extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
-	private $sellable;
+	private $sellingDenied;
 
 	/**
 	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
-	private $calculatedSellable;
+	private $calculatedSellingDenied;
 
 	/**
 	 * @var bool
@@ -266,7 +266,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
-		$this->sellable = $productData->sellable;
+		$this->sellingDenied = $productData->sellingDenied;
 		$this->hidden = $productData->hidden;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
@@ -282,7 +282,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->recalculatePrice = true;
 		$this->recalculateVisibility = true;
 		$this->calculatedHidden = true;
-		$this->calculatedSellable = false;
+		$this->calculatedSellingDenied = true;
 		$this->brand = $productData->brand;
 		$this->variants = [];
 		$this->variantType = self::VARIANT_TYPE_NONE;
@@ -304,7 +304,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
-		$this->sellable = $productData->sellable;
+		$this->sellingDenied = $productData->sellingDenied;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
 		$this->outOfStockAction = $productData->outOfStockAction;
@@ -426,15 +426,15 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @return bool
 	 */
-	public function isSellable() {
-		return $this->sellable;
+	public function isSellingDenied() {
+		return $this->sellingDenied;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function getCalculatedSellable() {
-		return $this->calculatedSellable;
+	public function getCalculatedSellingDenied() {
+		return $this->calculatedSellingDenied;
 	}
 
 	/**

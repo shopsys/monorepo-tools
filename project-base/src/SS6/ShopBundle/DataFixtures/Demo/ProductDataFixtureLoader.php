@@ -164,7 +164,7 @@ class ProductDataFixtureLoader {
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
 		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
 		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
-		$productEditData->productData->sellable = $row[18];
+		$productEditData->productData->sellingDenied = $row[18];
 
 		if ($row[19] !== null) {
 			$productEditData->productData->brand = $this->brands[$row[19]];
