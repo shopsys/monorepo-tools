@@ -108,6 +108,29 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
+	 * @return int[mainVariantRowId][]
+	 */
+	public function getVariantCatnumsIndexedByMainVariantCatnum() {
+		$rows = $this->csvReader->getRowsFromCsv($this->path);
+
+		$variantCatnumsByMainVariantCatnum = [];
+		foreach ($rows as $rowId => $row) {
+			if ($rowId === 0) {
+				continue;
+			}
+
+			$row = array_map([TransformString::class, 'emptyToNull'], $row);
+			$row = EncodingConverter::cp1250ToUtf8($row);
+
+			if ($row[20] !== null && $row[2] !== null) {
+				$variantCatnumsByMainVariantCatnum[$row[20]][] = $row[2];
+			}
+		}
+
+		return $variantCatnumsByMainVariantCatnum;
+	}
+
+	/**
 	 * @param array $row
 	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

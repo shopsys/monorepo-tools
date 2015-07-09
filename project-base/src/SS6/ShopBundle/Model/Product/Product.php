@@ -221,14 +221,15 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculateVisibility;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand|null
+	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Brand\Brand")
 	 * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
 	 */
 	private $brand;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
 	 *
 	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant", orphanRemoval=true)
 	 */
@@ -284,7 +285,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->calculatedHidden = true;
 		$this->calculatedSellingDenied = true;
 		$this->brand = $productData->brand;
-		$this->variants = [];
+		$this->variants = new ArrayCollection();
 		$this->variantType = self::VARIANT_TYPE_NONE;
 	}
 
@@ -547,13 +548,27 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $variant
+	 */
+	public function addVariant(Product $variant) {
+		if ($this->variantType === self::VARIANT_TYPE_NONE) {
+			$this->variantType = self::VARIANT_TYPE_MAIN;
+		} elseif ($this->variantType === self::VARIANT_TYPE_VARIANT) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException();
+		}
+
+		if (!$this->variants->contains($variant)) {
+			$this->variants->add($variant);
+			$variant->setMainVariant($this);
+		}
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
 	 */
 	public function setVariants(array $variants) {
-		$this->variantType = self::VARIANT_TYPE_MAIN;
-		$this->variants = $variants;
 		foreach ($variants as $variant) {
-			$variant->setMainVariant($this);
+			$this->addVariant($variant);
 		}
 	}
 
