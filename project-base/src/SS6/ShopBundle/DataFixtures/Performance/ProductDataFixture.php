@@ -10,6 +10,7 @@ use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixture extends AbstractReferenceFixture {
@@ -28,6 +29,11 @@ class ProductDataFixture extends AbstractReferenceFixture {
 	private $countImported;
 
 	/**
+	 * @var int
+	 */
+	private $demoDataIterationCounter;
+
+	/**
 	 * @var float
 	 */
 	private $batchStartMicrotime;
@@ -37,9 +43,15 @@ class ProductDataFixture extends AbstractReferenceFixture {
 	 */
 	private $sqlLogger;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[catnum]
+	 */
+	private $productsByCatnum;
+
 	public function __construct() {
 		$this->randomImportIndex = rand(1, 10000) * 1000000;
 		$this->countImported = 0;
+		$this->demoDataIterationCounter = 0;
 	}
 
 	/**
@@ -50,17 +62,27 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		/* @var $em \Doctrine\ORM\EntityManager */
 		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
+		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
 		// Sql logging during mass data import makes memory leak
 		$this->temporailyDisableLogging($em);
 		$productsEditData = $this->cleanAndWarmUp($em);
+		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();
+
 		while ($this->countImported < self::PRODUCTS) {
 			$productEditData = next($productsEditData);
 			if ($productEditData === false) {
+				$this->createVariants($variantCatnumsByMainVariantCatnum);
 				$productEditData = reset($productsEditData);
+				$this->demoDataIterationCounter++;
 			}
 			$this->makeProductEditDataUnique($productEditData);
-			$productEditFacade->create($productEditData);
+			$product = $productEditFacade->create($productEditData);
+
+			if ($product->getCatnum() !== null) {
+				$this->productsByCatnum[$product->getCatnum()] = $product;
+			}
 
 			$this->printProgress();
 			if ($this->countImported % self::BATCH_SIZE === 0) {
@@ -69,6 +91,7 @@ class ProductDataFixture extends AbstractReferenceFixture {
 
 			$this->countImported++;
 		}
+		$this->createVariants($variantCatnumsByMainVariantCatnum);
 		$this->runRecalculators(true);
 		$em->clear();
 		$this->reenableLogging($em);
@@ -91,6 +114,48 @@ class ProductDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
+	 * @param string[catnum][] $variantCatnumsByMainVariantCatnum
+	 */
+	private function createVariants(array $variantCatnumsByMainVariantCatnum) {
+		$uniqueIndex = $this->getUniqueIndex();
+		$variantsToFlush = [];
+
+		foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
+			try {
+				$mainVariant = $this->getProductByCatnum($mainVariantCatnum . $uniqueIndex);
+				foreach ($variantsCatnums as $variantCatnum) {
+					$variant = $this->getProductByCatnum($variantCatnum . $uniqueIndex);
+					$mainVariant->addVariant($variant);
+					$variantsToFlush[] = $variant;
+				}
+			} catch (\Doctrine\ORM\NoResultException $e) {
+				continue;
+			}
+		}
+
+		$em = $this->get(EntityManager::class);
+		/* @var $em \Doctrine\ORM\EntityManager */
+		$em->flush($variantsToFlush);
+	}
+
+	/**
+	 * @param string $catnum
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	private function getProductByCatnum($catnum) {
+		if (!array_key_exists($catnum, $this->productsByCatnum)) {
+			$em = $this->get(EntityManager::class);
+			/* @var $em \Doctrine\ORM\EntityManager */
+
+			$query = $em->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.catnum = :catnum')
+				->setParameter('catnum', $catnum);
+			$this->productsByCatnum[$catnum] = $query->getSingleResult();
+		}
+
+		return $this->productsByCatnum[$catnum];
+	}
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	private function temporailyDisableLogging(EntityManager $em) {
@@ -110,16 +175,29 @@ class ProductDataFixture extends AbstractReferenceFixture {
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	private function makeProductEditDataUnique(ProductEditData $productEditData) {
-		$uniqueIndex = $this->randomImportIndex + $this->countImported;
+		$matches = [];
+		$uniqueIndex = $this->getUniqueIndex();
 
-		foreach ($productEditData->productData->name as $key => $name) {
-			$matches = [];
-			if (preg_match('/^(.*)#\d+$/', $name, $matches)) {
-				$productEditData->productData->name[$key] = $matches[1] . ' #' . $uniqueIndex;
+		if (preg_match('/^(.*) #\d+$/', $productEditData->productData->catnum, $matches)) {
+			$productEditData->productData->catnum = $matches[1] . $uniqueIndex;
+		} else {
+			$productEditData->productData->catnum .= $uniqueIndex;
+		}
+
+		foreach ($productEditData->productData->name as $locale => $name) {
+			if (preg_match('/^(.*) #\d+$/', $name, $matches)) {
+				$productEditData->productData->name[$locale] = $matches[1] . $uniqueIndex;
 			} else {
-				$productEditData->productData->name[$key] .= ' #' . $uniqueIndex;
+				$productEditData->productData->name[$locale] .= $uniqueIndex;
 			}
 		}
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getUniqueIndex() {
+		return ' #' . ($this->randomImportIndex + $this->demoDataIterationCounter);
 	}
 
 	/**
@@ -160,6 +238,7 @@ class ProductDataFixture extends AbstractReferenceFixture {
 	private function cleanAndWarmUp(EntityManager $em) {
 		$this->clearResources($em);
 		$this->batchStartMicrotime = microtime(true);
+		$this->productsByCatnum = [];
 
 		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
