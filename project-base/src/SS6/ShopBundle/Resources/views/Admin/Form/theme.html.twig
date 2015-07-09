@@ -246,6 +246,10 @@
 	{% endspaceless %}
 {% endblock checkbox_label %}
 
+{% block product_row %}
+	{{ block('form_row') }}
+{% endblock product_row %}
+
 {% block product_widget %}
 	<span class="js-product-picker-container" data-placeholder="{{ placeholder }}">
 		<input
