@@ -83,7 +83,7 @@ class ProductAccessoryRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	private function getAllListableAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup) {
-		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainId, $pricingGroup);
 		$this->queryBuilderService->addOrExtendJoin(
 			$queryBuilder,
 			ProductAccessory::class,

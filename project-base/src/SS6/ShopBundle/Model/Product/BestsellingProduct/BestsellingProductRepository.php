@@ -55,7 +55,7 @@ class BestsellingProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
 	 */
 	public function getListableManualBestsellingProducts($domainId, Category $category, PricingGroup $pricingGroup) {
-		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainId, $pricingGroup);
 
 		$queryBuilder
 			->select('bp')
@@ -80,7 +80,7 @@ class BestsellingProductRepository {
 		PricingGroup $pricingGroup,
 		$maxResults
 	) {
-		$queryBuilder = $this->productRepository->getListableInCategoryQueryBuilder($domainId, $pricingGroup, $category);
+		$queryBuilder = $this->productRepository->getSellableInCategoryQueryBuilder($domainId, $pricingGroup, $category);
 
 		$queryBuilder
 			->addSelect('COUNT(op) AS HIDDEN orderCount')
