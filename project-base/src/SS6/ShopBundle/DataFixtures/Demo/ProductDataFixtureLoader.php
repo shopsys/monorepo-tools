@@ -94,15 +94,16 @@ class ProductDataFixtureLoader {
 	public function getProductsEditData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
 
-		$rowId = 0;
-		foreach ($rows as $row) {
-			if ($rowId !== 0) {
-				$row = array_map([TransformString::class, 'emptyToNull'], $row);
-				$row = EncodingConverter::cp1250ToUtf8($row);
-				$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
+		foreach ($rows as $rowId => $row) {
+			if ($rowId === 0) {
+				continue;
 			}
-			$rowId++;
+
+			$row = array_map([TransformString::class, 'emptyToNull'], $row);
+			$row = EncodingConverter::cp1250ToUtf8($row);
+			$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
 		}
+
 		return $productsEditData;
 	}
 
