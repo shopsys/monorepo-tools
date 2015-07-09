@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\SubRequest;
+namespace SS6\ShopBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,7 +65,7 @@ class SubRequestListener {
 				$this->redirectResponse = $subResponse;
 			} else {
 				$message = 'Only one subresponse can do a redirect.';
-				throw new \SS6\ShopBundle\Component\SubRequest\Exception\TooManyRedirectResponsesException($message);
+				throw new \SS6\ShopBundle\Component\HttpFoundation\Exception\TooManyRedirectResponsesException($message);
 			}
 		}
 	}
