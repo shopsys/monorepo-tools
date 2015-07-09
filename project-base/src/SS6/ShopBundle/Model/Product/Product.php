@@ -14,7 +14,12 @@ use SS6\ShopBundle\Model\Product\Availability\Availability;
 /**
  * Product
  *
- * @ORM\Table(name="products")
+ * @ORM\Table(
+ *		name="products",
+ *		indexes={
+ *			@ORM\Index(columns={"variant_type"})
+ *		}
+ *	)
  * @ORM\Entity
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
