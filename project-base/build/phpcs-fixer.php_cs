@@ -31,6 +31,7 @@ $config = Symfony\CS\Config\Config::create()
 		'lowercase_keywords',
 		'method_argument_space',
 		'multiline_array_trailing_comma',
+		'multiline_spaces_before_semicolon',
 		'multiple_use',
 		'namespace_no_leading_whitespace',
 		'new_with_braces',
