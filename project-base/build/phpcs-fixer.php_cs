@@ -68,6 +68,7 @@ $config = Symfony\CS\Config\Config::create()
 		'unalign_double_arrow',
 		'unalign_equals',
 		'unary_operators_spaces',
+		//'unused_use', // we use custom UnusedUseFixer
 		'visibility',
 		'whitespacy_lines',
 	])
