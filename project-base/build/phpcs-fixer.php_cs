@@ -66,6 +66,7 @@ $config = Symfony\CS\Config\Config::create()
 		'trailing_spaces',
 		'trim_array_spaces',
 		'unalign_double_arrow',
+		'unalign_equals',
 		'visibility',
 		'whitespacy_lines',
 	])
