@@ -4,6 +4,16 @@
 	{{ 'Nebylo nalezeno žádné zboží.'|trans }}
 {% endblock %}
 
+{% block grid_value_cell_id_name %}
+	{{ value }}
+	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
+		<span class="text-in-circle cursor-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
+	{% endif %}
+	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_VARIANT') %}
+		<span class="text-in-circle cursor-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
+	{% endif %}
+{% endblock %}
+
 {% block grid_value_cell_id_visible %}
 	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
 	{% if row.p.calculatedSellingDenied %}
