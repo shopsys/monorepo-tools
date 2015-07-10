@@ -34,6 +34,7 @@ $config = Symfony\CS\Config\Config::create()
 		'multiline_spaces_before_semicolon',
 		'multiple_use',
 		'namespace_no_leading_whitespace',
+		'newline_after_open_tag',
 		'new_with_braces',
 		//'no_blank_lines_after_class_opening', // we would like the exact opposite
 		'no_empty_lines_after_phpdocs',
