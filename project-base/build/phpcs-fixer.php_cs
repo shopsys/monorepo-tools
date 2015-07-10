@@ -19,6 +19,7 @@ $config = Symfony\CS\Config\Config::create()
 		'extra_empty_lines',
 		'function_call_space',
 		'function_declaration',
+		// 'header_comment', // header comments does not matter
 		'include',
 		//'indentation', // uses spaces instead of tabs
 		'join_function',
