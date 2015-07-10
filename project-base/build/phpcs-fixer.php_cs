@@ -37,6 +37,7 @@ $config = Symfony\CS\Config\Config::create()
 		'newline_after_open_tag',
 		'new_with_braces',
 		//'no_blank_lines_after_class_opening', // we would like the exact opposite
+		//'no_blank_lines_before_namespace', // there should be single blank line before namespace
 		'no_empty_lines_after_phpdocs',
 		'object_operator',
 		'operators_spaces',
