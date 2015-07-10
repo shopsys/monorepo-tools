@@ -15,6 +15,7 @@ $config = Symfony\CS\Config\Config::create()
 		//'empty_return', // rewrites "return null;" to "return;"
 		'encoding',
 		'eof_ending',
+		'ereg_to_preg',
 		'extra_empty_lines',
 		'function_call_space',
 		'function_declaration',
