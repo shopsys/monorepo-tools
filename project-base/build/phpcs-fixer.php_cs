@@ -3,6 +3,8 @@
 $config = Symfony\CS\Config\Config::create()
 	->level(Symfony\CS\FixerInterface::NONE_LEVEL)
 	->fixers([
+		//'align_double_arrow', // opposite to unalign_double_arrow
+		//'align_equals', // opposite to unalign_equals
 		'blankline_after_open_tag',
 		//'braces', // do not want open braces at new line
 		'concat_with_spaces',
