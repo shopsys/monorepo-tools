@@ -548,6 +548,13 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isMainVariant() {
+		return $this->variantType === self::VARIANT_TYPE_MAIN;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $variant
 	 */
 	public function addVariant(Product $variant) {
