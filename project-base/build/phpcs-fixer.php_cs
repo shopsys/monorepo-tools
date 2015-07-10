@@ -49,6 +49,7 @@ $config = Symfony\CS\Config\Config::create()
 		'phpdoc_no_access',
 		'phpdoc_no_empty_return',
 		'phpdoc_no_package',
+		'phpdoc_order',
 		//'phpdoc_params', // do not want vertically aligned phpdocs
 		'phpdoc_scalar',
 		//'phpdoc_separation', // do not want phpdoc annotations grouping
