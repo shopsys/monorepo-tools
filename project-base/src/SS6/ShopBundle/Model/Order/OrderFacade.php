@@ -213,7 +213,7 @@ class OrderFacade {
 
 		$variables = [
 			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),
-			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS =>  $order->getPayment()->getInstructions(),
+			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $order->getPayment()->getInstructions(),
 		];
 
 		return strtr($confirmTextTemplate, $variables);

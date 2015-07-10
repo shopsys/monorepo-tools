@@ -125,7 +125,7 @@ class OrderMailService {
 		$paymentInstructions = $payment->getInstructions($orderDomainConfig->getLocale());
 
 		return [
-			self::VARIABLE_NUMBER  => $order->getNumber(),
+			self::VARIABLE_NUMBER => $order->getNumber(),
 			self::VARIABLE_DATE => $this->getFormattedDateTime($order),
 			self::VARIABLE_URL => $router->generate('front_homepage', [], true),
 			self::VARIABLE_TRANSPORT => $order->getTransportName(),
@@ -133,7 +133,7 @@ class OrderMailService {
 			self::VARIABLE_TOTAL_PRICE => $this->getFormattedPrice($order),
 			self::VARIABLE_BILLING_ADDRESS => $this->getBillingAddressHtmlTable($order),
 			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
-			self::VARIABLE_NOTE  => $order->getNote(),
+			self::VARIABLE_NOTE => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
 			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
 			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
@@ -148,7 +148,7 @@ class OrderMailService {
 	 */
 	private function getVariablesReplacementsForSubject(Order $order) {
 		return [
-			self::VARIABLE_NUMBER  => $order->getNumber(),
+			self::VARIABLE_NUMBER => $order->getNumber(),
 			self::VARIABLE_DATE => $this->getFormattedDateTime($order),
 		];
 
