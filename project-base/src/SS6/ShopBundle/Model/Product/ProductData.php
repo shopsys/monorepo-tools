@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
+use SS6\ShopBundle\Model\Product\Brand\Brand;
 
 /**
  * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Product")
@@ -111,6 +112,11 @@ class ProductData {
 	public $priceCalculationType;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand|null
+	 */
+	public $brand;
+
+	/**
 	 * @param array $name
 	 * @param string|null $catnum
 	 * @param string|null $partno
@@ -130,6 +136,7 @@ class ProductData {
 	 * @param array $hiddenOnDomains
 	 * @param array $categories
 	 * @param string $priceCalculationType
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand|null $brand
 	 */
 	public function __construct(
 		$name = [],
@@ -150,7 +157,8 @@ class ProductData {
 		Availability $outOfStockAvailability = null,
 		array $hiddenOnDomains = [],
 		array $categories = [],
-		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO
+		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO,
+		Brand $brand = null
 	) {
 		$this->name = $name;
 		$this->catnum = $catnum;
@@ -171,6 +179,7 @@ class ProductData {
 		$this->hiddenOnDomains = $hiddenOnDomains;
 		$this->categories = $categories;
 		$this->priceCalculationType = $priceCalculationType;
+		$this->brand = $brand;
 	}
 
 }

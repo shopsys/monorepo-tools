@@ -42,6 +42,17 @@
 		<div class="col-xs-12 col-md-6">
 			<h1>{{ productDetail.product.name }}</h1>
 
+			{% if productDetail.product.brand %}
+				<dl class="list-params">
+					<dt class="list-params__title">
+						{{ 'Značka'|trans }}:
+					</dt>
+					<dd class="list-params__definition">
+						{{ productDetail.product.brand.name }}
+					</dd>
+				</dl>
+			{% endif %}
+
 			{% if productDetail.product.catnum %}
 				<dl class="list-params">
 					<dt class="list-params__title">
