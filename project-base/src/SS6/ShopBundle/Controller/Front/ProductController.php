@@ -73,10 +73,13 @@ class ProductController extends Controller {
 
 		$accessoriesDetails = $this->productOnCurrentDomainFacade
 			->getAccessoriesProductDetailsForProduct($productDetail->getProduct());
+		$variantsDetails = $this->productOnCurrentDomainFacade
+			->getVariantsProductDetailsForProduct($productDetail->getProduct());
 
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
 			'accesoriesDetails' => $accessoriesDetails,
+			'variantsDetails' => $variantsDetails,
 			'productMainCategory' => $this->categoryFacade->getProductMainCategoryByDomainId(
 				$productDetail->getProduct(),
 				$this->domain->getId()

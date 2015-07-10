@@ -555,4 +555,19 @@ class ProductRepository {
 			->iterate();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getAllSellableVariantsByMainVariant(Product $mainVariant, $domainId, PricingGroup $pricingGroup) {
+		$queryBuilder = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder
+			->andWhere('p.mainVariant = :mainVariant')
+			->setParameter('mainVariant', $mainVariant);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
 }
