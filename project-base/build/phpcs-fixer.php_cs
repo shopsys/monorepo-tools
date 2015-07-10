@@ -44,6 +44,7 @@ $config = Symfony\CS\Config\Config::create()
 		'ordered_use',
 		'parenthesis',
 		'php_closing_tag',
+		'php4_constructor',
 		'phpdoc_indent',
 		'phpdoc_no_access',
 		'phpdoc_no_empty_return',
