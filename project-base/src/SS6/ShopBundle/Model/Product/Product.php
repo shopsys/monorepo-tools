@@ -566,7 +566,7 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getMainVariant() {
 		if (!$this->isVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
 		}
 
 		return $this->mainVariant;
