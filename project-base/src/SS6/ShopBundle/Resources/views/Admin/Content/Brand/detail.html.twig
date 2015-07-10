@@ -1,0 +1,28 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Značka'|trans }}{% endblock %}
+{% block h1 %}{{ 'Značka'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="wrap-group">
+					{{ form_id(brand|default(null)) }}
+					{{ form_row(form.name, { label: 'Název'|trans}) }}
+				</div>
+
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						<a href="{{ url('admin_brand_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
+						{{ form_save(brand|default(null), form) }}
+					</div>
+				</div>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}
