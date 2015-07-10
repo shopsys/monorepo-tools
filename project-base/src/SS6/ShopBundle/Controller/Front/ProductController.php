@@ -72,6 +72,10 @@ class ProductController extends Controller {
 		$productDetail = $this->productOnCurrentDomainFacade->getVisibleProductDetailById($id);
 		$product = $productDetail->getProduct();
 
+		if ($product->isVariant()) {
+			return $this->redirectToRoute('front_product_detail', ['id' => $product->getMainVariant()->getId()]);
+		}
+
 		$accessoriesDetails = $this->productOnCurrentDomainFacade->getAccessoriesProductDetailsForProduct($product);
 		$variantsDetails = $this->productOnCurrentDomainFacade->getVariantsProductDetailsForProduct($product);
 		$productMainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $this->domain->getId());

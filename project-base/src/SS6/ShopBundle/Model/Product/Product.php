@@ -236,7 +236,7 @@ class Product extends AbstractTranslatableEntity {
 	private $variants;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="variants")
 	 * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true)
@@ -552,6 +552,24 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function isMainVariant() {
 		return $this->variantType === self::VARIANT_TYPE_MAIN;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isVariant() {
+		return $this->variantType === self::VARIANT_TYPE_VARIANT;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getMainVariant() {
+		if (!$this->isVariant()) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException();
+		}
+
+		return $this->mainVariant;
 	}
 
 	/**
