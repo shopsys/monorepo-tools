@@ -60,6 +60,7 @@ framework:
   trusted_proxies: ~
   session:
     handler_id: ~
+    cookie_httponly: true
   fragments: ~
   http_method_override: true
   translator: ~

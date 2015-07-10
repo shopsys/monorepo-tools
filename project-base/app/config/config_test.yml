@@ -13,6 +13,7 @@ framework:
   test: ~
   session:
     storage_id: session.storage.mock_file
+    cookie_httponly: true
 
 # disable logging in tests
 monolog:
