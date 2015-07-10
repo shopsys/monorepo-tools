@@ -56,6 +56,7 @@ $config = Symfony\CS\Config\Config::create()
 		//'phpdoc_short_description', // descriptons does not have to end with ".", "!" or "?"
 		'phpdoc_trim',
 		'phpdoc_type_to_var',
+		//'phpdoc_var_to_type', // opposite to phpdoc_type_to_var
 		'phpdoc_var_without_name',
 		//'pre_increment', // post-increment is totally OK
 		'psr0',
