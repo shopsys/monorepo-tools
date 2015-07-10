@@ -70,20 +70,17 @@ class ProductController extends Controller {
 	 */
 	public function detailAction($id) {
 		$productDetail = $this->productOnCurrentDomainFacade->getVisibleProductDetailById($id);
+		$product = $productDetail->getProduct();
 
-		$accessoriesDetails = $this->productOnCurrentDomainFacade
-			->getAccessoriesProductDetailsForProduct($productDetail->getProduct());
-		$variantsDetails = $this->productOnCurrentDomainFacade
-			->getVariantsProductDetailsForProduct($productDetail->getProduct());
+		$accessoriesDetails = $this->productOnCurrentDomainFacade->getAccessoriesProductDetailsForProduct($product);
+		$variantsDetails = $this->productOnCurrentDomainFacade->getVariantsProductDetailsForProduct($product);
+		$productMainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $this->domain->getId());
 
 		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
 			'accesoriesDetails' => $accessoriesDetails,
 			'variantsDetails' => $variantsDetails,
-			'productMainCategory' => $this->categoryFacade->getProductMainCategoryByDomainId(
-				$productDetail->getProduct(),
-				$this->domain->getId()
-			),
+			'productMainCategory' => $productMainCategory,
 		]);
 	}
 
