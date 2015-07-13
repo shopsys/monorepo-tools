@@ -1,6 +1,12 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
-{% block title %}{{ parent() }} - {{ article.name }}{% endblock %}
+{% block title %}
+	{{- article.seoTitle|default(article.name) -}}
+{% endblock %}
+
+{% block meta_description %}
+	{{- article.seoMetaDescription|default(getSeoMetaDescription()) -}}
+{% endblock %}
 
 {% block main_content %}
 	<h1>{{ article.name }}</h1>
