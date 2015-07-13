@@ -31,15 +31,7 @@ class ArticleData {
 	 */
 	public $urls;
 
-	/**
-	 * @param string|null $name
-	 * @param string|null $text
-	 * @param int|null $domainId
-	 */
-	public function __construct($name = null, $text = null, $domainId = null) {
-		$this->name = $name;
-		$this->text = $text;
-		$this->domainId = $domainId;
+	public function __construct() {
 		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
