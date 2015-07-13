@@ -43,6 +43,12 @@ class ArticleFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
 				],
 			])
+			->add('seoTitle', FormType::TEXT, [
+				'required' => false,
+			])
+			->add('seoMetaDescription', FormType::TEXTAREA, [
+				'required' => false,
+			])
 			->add('urls', FormType::URL_LIST, [
 				'route_name' => 'front_article_detail',
 				'entity_id' => $this->article === null ? null : $this->article->getId(),

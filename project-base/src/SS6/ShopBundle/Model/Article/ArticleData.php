@@ -22,6 +22,16 @@ class ArticleData {
 	public $text;
 
 	/**
+	 * @var string|null
+	 */
+	public $seoTitle;
+
+	/**
+	 * @var string|null
+	 */
+	public $seoMetaDescription;
+
+	/**
 	 * @var int|null
 	 */
 	public $domainId;
@@ -41,6 +51,8 @@ class ArticleData {
 	public function setFromEntity(Article $article) {
 		$this->name = $article->getName();
 		$this->text = $article->getText();
+		$this->seoTitle = $article->getSeoTitle();
+		$this->seoMetaDescription = $article->getSeoMetaDescription();
 		$this->domainId = $article->getDomainId();
 	}
 }
