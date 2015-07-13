@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
-use SS6\ShopBundle\Form\Admin\Article\ArticleFormType;
+use SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -57,6 +57,11 @@ class ArticleController extends BaseController {
 	private $articleDataFactory;
 
 	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory
+	 */
+	private $articleFormTypeFactory;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
@@ -69,6 +74,7 @@ class ArticleController extends BaseController {
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		ArticleDataFactory $articleDataFactory,
+		ArticleFormTypeFactory $articleFormTypeFactory,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
@@ -79,6 +85,7 @@ class ArticleController extends BaseController {
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->articleDataFactory = $articleDataFactory;
+		$this->articleFormTypeFactory = $articleFormTypeFactory;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
@@ -95,7 +102,10 @@ class ArticleController extends BaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$article = $this->articleEditFacade->getById($id);
-		$form = $this->createForm(new ArticleFormType($article));
+		$form = $this->createForm($this->articleFormTypeFactory->create(
+			$this->selectedDomain->getId(),
+			$article
+		));
 
 		$articleData = $this->articleDataFactory->createFromArticle($article);
 
@@ -159,7 +169,7 @@ class ArticleController extends BaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
-		$form = $this->createForm(new ArticleFormType());
+		$form = $this->createForm($this->articleFormTypeFactory->create($this->selectedDomain->getId()));
 
 		$articleData = $this->articleDataFactory->createDefault();
 

@@ -18,10 +18,20 @@ class ArticleFormType extends AbstractType {
 	private $article;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\Article|null $article
+	 * @var \SS6\ShopBundle\Model\Article\Article|null
 	 */
-	public function __construct(Article $article = null) {
+	private $defaultSeoMetaDescription;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Article\Article|null $article
+	 * @param string|null $defaultSeoMetaDescription
+	 */
+	public function __construct(
+		Article $article = null,
+		$defaultSeoMetaDescription = null
+	) {
 		$this->article = $article;
+		$this->defaultSeoMetaDescription = $defaultSeoMetaDescription;
 	}
 
 	/**
@@ -48,6 +58,9 @@ class ArticleFormType extends AbstractType {
 			])
 			->add('seoMetaDescription', FormType::TEXTAREA, [
 				'required' => false,
+				'attr' => [
+					'placeholder' => $this->defaultSeoMetaDescription,
+				],
 			])
 			->add('urls', FormType::URL_LIST, [
 				'route_name' => 'front_article_detail',
