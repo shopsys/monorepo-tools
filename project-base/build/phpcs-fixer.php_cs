@@ -2,6 +2,7 @@
 
 $config = Symfony\CS\Config\Config::create()
 	->level(Symfony\CS\FixerInterface::NONE_LEVEL)
+	// list of all available fixers: https://github.com/FriendsOfPHP/PHP-CS-Fixer/
 	->fixers([
 		//'align_double_arrow', // opposite to unalign_double_arrow
 		//'align_equals', // opposite to unalign_equals
