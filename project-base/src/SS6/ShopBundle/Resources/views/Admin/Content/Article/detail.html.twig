@@ -18,7 +18,11 @@
 
 					{{ form_row(form.name, { label: 'Název'|trans}) }}
 					{{ form_row(form.text, { label: 'Text'|trans}) }}
-					{{ form_row(form.seoTitle, { label: 'SEO titulek'|trans}) }}
+					<div class="form-line">
+						{{ form_errors(form.seoTitle) }}
+						{{ form_label(form.seoTitle, 'SEO titulek'|trans) }}
+						{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+					</div>
 					{{ form_row(form.seoMetaDescription, { label: 'SEO meta description'|trans}) }}
 					{% block article_urls %}{% endblock %}
 				</div>
