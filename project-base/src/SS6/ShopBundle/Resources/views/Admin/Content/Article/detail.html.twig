@@ -18,12 +18,18 @@
 
 					{{ form_row(form.name, { label: 'Název'|trans}) }}
 					{{ form_row(form.text, { label: 'Text'|trans}) }}
-					<div class="form-line">
+					<div class="form-line js-characters-counter">
 						{{ form_errors(form.seoTitle) }}
 						{{ form_label(form.seoTitle, 'SEO titulek'|trans) }}
-						{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+						{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+						<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
 					</div>
-					{{ form_row(form.seoMetaDescription, { label: 'SEO meta description'|trans}) }}
+					<div class="form-line js-characters-counter">
+						{{ form_errors(form.seoMetaDescription) }}
+						{{ form_label(form.seoMetaDescription, 'SEO meta description'|trans) }}
+						{{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input'}}) }}
+						<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
+					</div>
 					{% block article_urls %}{% endblock %}
 				</div>
 
