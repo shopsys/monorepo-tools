@@ -447,7 +447,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $outOfStockAvailability|null
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 */
 	public function setOutOfStockAvailability(Availability $outOfStockAvailability = null) {
 		$this->outOfStockAvailability = $outOfStockAvailability;
