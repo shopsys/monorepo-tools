@@ -26,7 +26,7 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface {
 
 		if (is_array($products) || $products instanceof IteratorAggregate) {
 			foreach ($products as $product) {
-				$productsIds[] =  $product->getId();
+				$productsIds[] = $product->getId();
 			}
 		}
 

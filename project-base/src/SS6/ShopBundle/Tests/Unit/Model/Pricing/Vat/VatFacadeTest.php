@@ -46,7 +46,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			->with($this->equalTo(1))
 			->will($this->returnValue($expected));
 
-		$productPriceRecalculationSchedulerMock =  $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -87,7 +87,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 			->method('set')
 			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT), $this->equalTo(1));
 
-		$productPriceRecalculationSchedulerMock =  $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
+		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
 			->disableOriginalConstructor()
 			->getMock();
 

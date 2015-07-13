@@ -30,7 +30,7 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
 	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 */
 	public function __construct(CurrentDomainRouter $router, Translator $translator) {
-		$this->router  = $router;
+		$this->router = $router;
 		$this->translator = $translator;
 	}
 

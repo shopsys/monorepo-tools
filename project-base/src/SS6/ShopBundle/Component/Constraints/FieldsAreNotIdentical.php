@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Constraints;
 
-use \Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraint;
 
 class FieldsAreNotIdentical extends Constraint {
 

@@ -79,7 +79,7 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface {
 		$markedMessages = [];
 		foreach ($pluralizationParts as $part) {
 			$endBracePosition = strpos($part, '}');
-			$endBracketPosition =  strpos($part, ']');
+			$endBracketPosition = strpos($part, ']');
 			if ($endBracePosition !== false) {
 				$notTranslatedPrefixPosition = $endBracePosition + 1;
 			} elseif ($endBracketPosition !== false) {

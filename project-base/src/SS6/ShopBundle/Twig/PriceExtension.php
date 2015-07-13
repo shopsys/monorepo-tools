@@ -227,8 +227,8 @@ class PriceExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @return \CommerceGuys\Intl\Formatter\NumberFormatter
 	 * @param string $locale
+	 * @return \CommerceGuys\Intl\Formatter\NumberFormatter
 	 */
 	private function getNumberFormatter($locale) {
 		$numberFormat = $this->numberFormatRepository->get($locale);

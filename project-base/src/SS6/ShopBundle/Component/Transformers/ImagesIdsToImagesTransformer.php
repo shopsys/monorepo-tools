@@ -26,7 +26,7 @@ class ImagesIdsToImagesTransformer implements DataTransformerInterface {
 
 		if (is_array($images) || $images instanceof IteratorAggregate) {
 			foreach ($images as $image) {
-				$imagesIds[] =  $image->getId();
+				$imagesIds[] = $image->getId();
 			}
 		}
 

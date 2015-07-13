@@ -140,7 +140,7 @@ class AdvertFormType extends AbstractType {
 	private function getTypeChoices() {
 		return [
 			Advert::TYPE_CODE => $this->translator->trans('HTML kód'),
-			Advert::TYPE_IMAGE =>  $this->translator->trans('Obrázek s odkazem'),
+			Advert::TYPE_IMAGE => $this->translator->trans('Obrázek s odkazem'),
 		];
 	}
 

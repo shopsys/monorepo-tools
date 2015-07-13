@@ -263,7 +263,7 @@ class Grid {
 	 * @return mixed
 	 */
 	public function getRowId($row) {
-		return Grid::getValueFromRowBySourceColumnName($row, $this->dataSource->getRowIdSourceColumnName());
+		return self::getValueFromRowBySourceColumnName($row, $this->dataSource->getRowIdSourceColumnName());
 	}
 
 	/**
@@ -286,7 +286,7 @@ class Grid {
 	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createView() {
-		$gridView =  $this->createViewWithoutRows();
+		$gridView = $this->createViewWithoutRows();
 		if ($this->isAllowedPaging()) {
 			$this->executeTotalQuery();
 		}
@@ -300,7 +300,7 @@ class Grid {
 	 * @return \SS6\ShopBundle\Model\Grid\GridView
 	 */
 	public function createViewWithOneRow($rowId) {
-		$gridView =  $this->createViewWithoutRows();
+		$gridView = $this->createViewWithoutRows();
 		$this->loadRowsWithOneRow($rowId);
 
 		return $gridView;

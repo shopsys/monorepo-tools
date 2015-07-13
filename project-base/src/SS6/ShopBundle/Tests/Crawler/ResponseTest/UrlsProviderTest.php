@@ -148,7 +148,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetTestableRoutes() {
 		$routeCollection = [
-			'front_testable' =>  new Route('testable'),
+			'front_testable' => new Route('testable'),
 			'front_ignored' => new Route('ignored'),
 			'front_underscore' => new Route('_underscore'),
 			'front_post' => new Route('post', [], [], [], '', [], ['POST']),
