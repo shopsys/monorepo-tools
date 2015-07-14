@@ -10,7 +10,7 @@
 		var recommendedLength = $info.data('recommended-length');
 
 		this.init = function() {
-			$input.keyup(self.countCharacters);
+			$input.bind('keyup placeholderChange', self.countCharacters);
 			self.countCharacters();
 		};
 

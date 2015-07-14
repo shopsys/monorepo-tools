@@ -17,6 +17,7 @@
 
 		var updatePlaceholder = function () {
 			$input.attr('placeholder', $sourceInput.val());
+			$input.trigger('placeholderChange');
 		};
 	};
 
