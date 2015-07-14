@@ -3,62 +3,54 @@
 	SS6 = window.SS6 || {};
 	SS6.productPicker = SS6.productPicker || {};
 
-	var generatorIdCounter = 0;
+	SS6.productPicker.instances = [];
 
-	SS6.productPicker.init = function ($container) {
-		$container.find('.js-product-picker-container').each(function () {
-			var $removeButton = $(this).find('.js-product-picker-remove-button');
-			$removeButton.toggle($(this).find('.js-product-picker-label').val() !== $(this).data('placeholder'));
-		});
-		$container.find('.js-product-picker-remove-button').click(function () {
-			var $productPickerContainer = $(this).closest('.js-product-picker-container');
-			var $input = $productPickerContainer.find('.js-product-picker-input');
-			var placeholder = $productPickerContainer.data('placeholder');
-			SS6.productPicker.selectProduct($input.attr('id'), '', placeholder);
+	SS6.productPicker.ProductPicker = function ($pickerButton) {
+		var self = this;
+		var instanceId = SS6.productPicker.instances.length;
+		SS6.productPicker.instances[instanceId] = this;
 
-			return false;
-		});
-		$container.find('.js-product-picker-create-picker-button').click(function () {
-			SS6.productPicker.makePicker(this);
+		var $container = $pickerButton.closest('.js-product-picker-container');
+		var $input = $container.find('.js-product-picker-input');
+		var $label = $container.find('.js-product-picker-label');
+		var $removeButton = $container.find('.js-product-picker-remove-button');
 
-			return false;
-		});
+		this.init = function () {
+
+			$pickerButton.click(makePicker);
+			$removeButton.toggle($label.val() !== $container.data('placeholder'));
+
+			$removeButton.click(function () {
+				self.selectProduct('', $container.data('placeholder'));
+				return false;
+			});
+		};
+
+		this.selectProduct = function (productId, productName) {
+			$input.val(productId);
+			$label.val(productName);
+			$removeButton.toggle(productId !== '');
+		};
+
+		var makePicker = function () {
+			$.magnificPopup.open({
+				items: {src: $pickerButton.data('product-picker-url').replace('__instance_id__', instanceId)},
+				type: 'iframe',
+				closeOnBgClick: false
+			});
+		};
 	};
 
-	SS6.productPicker.makePicker = function (pickerButton) {
-		var $pickerButton = $(pickerButton);
-		var $pickerContainer = $pickerButton.closest('.js-product-picker-container');
-		var $pickerInput = $pickerContainer.find('.js-product-picker-input');
-
-		var inputId = getOrGenerateElementId($pickerInput);
-
-		$.magnificPopup.open({
-			items: {src: $pickerButton.data('product-picker-url').replace('__input_id__', inputId)},
-			type: 'iframe',
-			closeOnBgClick: false
-		});
-	};
-
-	SS6.productPicker.selectProduct = function (parentPickerInputId, productId, productName) {
-		var $parentPickerInput = $(window.parent.document).find('#' + parentPickerInputId);
-		var $parentPickerContainer = $parentPickerInput.closest('.js-product-picker-container');
-		var $parentPickerLabel = $parentPickerContainer.find('.js-product-picker-label');
-		var $parentPickerRemoveButton = $parentPickerContainer.find('.js-product-picker-remove-button');
-
-		$parentPickerRemoveButton.toggle(productId !== '');
-		$parentPickerInput.val(productId);
-		$parentPickerLabel.val(productName);
+	SS6.productPicker.onClickSelectProduct = function (instanceId, productId, productName) {
+		window.parent.SS6.productPicker.instances[instanceId].selectProduct(productId, productName);
 		$.magnificPopup.close();
 	};
 
-	var getOrGenerateElementId = function ($element) {
-		var elementId = $element.attr('id');
-		if (elementId === undefined) {
-			elementId = 'js-product-picker-generator-id-' + (generatorIdCounter++);
-			$element.attr('id', elementId);
-		}
-
-		return elementId;
+	SS6.productPicker.init = function ($container) {
+		$container.find('.js-product-picker-create-picker-button').each(function () {
+			var productPicker = new SS6.productPicker.ProductPicker($(this));
+			productPicker.init();
+		});
 	};
 
 	SS6.register.registerCallback(SS6.productPicker.init);
