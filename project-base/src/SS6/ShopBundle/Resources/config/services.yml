@@ -4,7 +4,7 @@ imports:
 
 parameters:
   fp_js_form_validator.factory.class: SS6\ShopBundle\Component\Validator\JsFormValidatorFactory
-  fragment.handler.class: SS6\ShopBundle\Component\SubRequest\RedirectFragmentHandler
+  fragment.handler.class: SS6\ShopBundle\Component\HttpFoundation\RedirectFragmentHandler
   prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localization\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
@@ -856,8 +856,13 @@ services:
   ss6.shop.slider.slider_item_repository:
     class: SS6\ShopBundle\Model\Slider\SliderItemRepository
 
-  ss6.shop.sub_request.sub_request_listener:
-    class: SS6\ShopBundle\Component\SubRequest\SubRequestListener
+  ss6.shop.http_foundation.response_listener:
+    class: SS6\ShopBundle\Component\HttpFoundation\ResponseListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+  ss6.shop.http_foundation.sub_request_listener:
+    class: SS6\ShopBundle\Component\HttpFoundation\SubRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
