@@ -116,11 +116,11 @@
           visible: false
 
 - label: 'Nastavení'
-  route: admin_overview_list
+  route: admin_domain_list
   type: settings
   items:
     - label: 'Identifikace e-shopu'
-      route: admin_overview_list
+      route: admin_domain_list
 
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
