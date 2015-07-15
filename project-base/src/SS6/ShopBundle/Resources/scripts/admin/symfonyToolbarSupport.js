@@ -34,7 +34,7 @@
 		});
 
 		$('.sf-toolbar').on('click', '[id^="sfToolbarMainContent-"] > a.hide-button', function () {
-			SS6.symfonyToolbarSupport.notifyOnToolbarHide()();
+			SS6.symfonyToolbarSupport.notifyOnToolbarHide();
 		});
 
 		// condition copied from: vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/toolbar_js.html.twig
