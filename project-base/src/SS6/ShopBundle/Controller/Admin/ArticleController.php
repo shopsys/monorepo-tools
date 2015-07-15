@@ -133,22 +133,14 @@ class ArticleController extends BaseController {
 	 * @Route("/article/list/")
 	 */
 	public function listAction() {
-		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$queryBuilder = $this->articleEditFacade->getOrderedArticlesByDomainIdQueryBuilder($this->selectedDomain->getId());
 
-		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
-		$queryBuilder
-			->select('a')
-			->from(Article::class, 'a')
-			->where('a.domainId = :selectedDomainId')
-			->setParameter('selectedDomainId', $this->selectedDomain->getId());
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $this->gridFactory->create('articleList', $dataSource);
-		$grid->allowPaging();
-		$grid->setDefaultOrder('name');
+		$grid->enableDragAndDrop(Article::class);
 
-		$grid->addColumn('name', 'a.name', 'Název', true);
+		$grid->addColumn('name', 'a.name', 'Název');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', ['id' => 'a.id']);
@@ -156,8 +148,6 @@ class ArticleController extends BaseController {
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
-
-		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
 		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', [
 			'gridView' => $grid->createView(),

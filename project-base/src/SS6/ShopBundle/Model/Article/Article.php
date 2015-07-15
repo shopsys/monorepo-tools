@@ -3,12 +3,13 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 
 /**
  * @ORM\Table(name="articles")
  * @ORM\Entity
  */
-class Article {
+class Article implements OrderableEntityInterface {
 
 	/**
 	 * @var int
@@ -25,6 +26,13 @@ class Article {
 	 * @ORM\Column(type="integer")
 	 */
 	private $domainId;
+
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private $position;
 
 	/**
 	 * @var string
@@ -83,6 +91,13 @@ class Article {
 	 */
 	public function getText() {
 		return $this->text;
+	}
+
+	/**
+	 * @param int $position
+	 */
+	public function setPosition($position) {
+		$this->position = $position;
 	}
 
 }

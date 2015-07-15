@@ -14,6 +14,12 @@
 			<a href="{{ url('admin_article_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nový článek'|trans }}</a>
 
 			{{ gridView.render() }}
+
+			<div class="window-fixed-bar">
+				<div class="window-fixed-bar__buttons">
+					<button class="js-drag-and-drop-grid-submit-all btn btn-primary btn-disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}

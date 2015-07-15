@@ -63,6 +63,14 @@ class ArticleEditFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getOrderedArticlesByDomainIdQueryBuilder($domainId) {
+		return $this->articleRepository->getOrderedArticlesByDomainIdQueryBuilder($domainId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */

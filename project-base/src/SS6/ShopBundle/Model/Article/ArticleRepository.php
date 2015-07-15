@@ -35,10 +35,22 @@ class ArticleRepository {
 
 	/**
 	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getOrderedArticlesByDomainIdQueryBuilder($domainId) {
+		return $this->em->createQueryBuilder()
+			->select('a')
+			->from(Article::class, 'a')
+			->where('a.domainId = :domainId')->setParameter('domainId', $domainId)
+			->orderBy('a.position, a.id');
+	}
+
+	/**
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
 	public function getArticlesForMenu($domainId) {
-		return $this->getArticleRepository()->findBy(['domainId' => $domainId]);
+		return $this->getOrderedArticlesByDomainIdQueryBuilder($domainId)->getQuery()->execute();
 	}
 
 	/**
