@@ -9,7 +9,7 @@
 
 			var $item = $(this).closest('.js-parameters-item');
 			var index = $item.data('index');
-			SS6.validation.removeItemFromCollection('#product_edit_parameters', index);
+			SS6.validation.removeItemFromCollection('#product_edit_form_parameters', index);
 			$item.remove();
 
 			SS6.formChangeInfo.showInfo();
@@ -19,7 +19,7 @@
 			event.preventDefault();
 		});
 
-		$('.js-parameters-item-add').on('click', function (event) {
+		$('.js-parameters-item-add').on('click', function () {
 			var $collection = $(this).prev('table').find('.js-parameters');
 			var index = $collection.data('index');
 
@@ -35,12 +35,10 @@
 			$collection.append($item);
 
 			SS6.formChangeInfo.showInfo();
-
 			SS6.parameters.refreshCount($collection);
+			SS6.validation.addNewItemToCollection('#product_edit_form_parameters', index);
 
-			event.preventDefault();
-
-			SS6.validation.addNewItemToCollection('#product_edit_parameters', index);
+			return false;
 		});
 
 		SS6.parameters.refreshCount($('.js-parameters'));
