@@ -54,12 +54,13 @@ class ContactFormFacade {
 	 */
 	public function sendMail(ContactFormData $contactFormData) {
 		$messageData = new MessageData(
-				$this->mailSettingFacade->getMainAdminMail($this->domain->getId()),
-				$this->getMailBody($contactFormData),
-				'Kontaktní formulář',
-				$contactFormData->email,
-				$contactFormData->name
-			);
+			$this->mailSettingFacade->getMainAdminMail($this->domain->getId()),
+			null,
+			$this->getMailBody($contactFormData),
+			'Kontaktní formulář',
+			$contactFormData->email,
+			$contactFormData->name
+		);
 		$this->mailerService->send($messageData);
 	}
 

@@ -10,6 +10,11 @@ class MessageData {
 	public $toEmail;
 
 	/**
+	 * @var string|null
+	 */
+	public $bccEmail;
+
+	/**
 	 * @var string
 	 */
 	public $body;
@@ -41,6 +46,7 @@ class MessageData {
 
 	/**
 	 * @param string $toEmail
+	 * @param string|null $bccEmail
 	 * @param string $body
 	 * @param string $subject
 	 * @param string $fromEmail
@@ -50,6 +56,7 @@ class MessageData {
 	 */
 	public function __construct(
 		$toEmail,
+		$bccEmail,
 		$body,
 		$subject,
 		$fromEmail,
@@ -58,6 +65,7 @@ class MessageData {
 		array $variablesReplacementsForSubject = []
 	) {
 		$this->toEmail = $toEmail;
+		$this->bccEmail = $bccEmail;
 		$this->body = $body;
 		$this->subject = $subject;
 		$this->fromEmail = $fromEmail;

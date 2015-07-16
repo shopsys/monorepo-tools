@@ -36,6 +36,12 @@ class MailTemplateFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
+			->add('bccEmail', FormType::EMAIL, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Email(),
+				],
+			])
 			->add('subject', FormType::TEXT, [
 				'required' => true,
 				'constraints' => $this->getSubjectConstraints(),

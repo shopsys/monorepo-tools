@@ -46,16 +46,16 @@ class MailerService {
 		$fromEmail = $messageData->fromEmail;
 		$fromName = $messageData->fromName;
 
-		$message = Swift_Message::newInstance()
-			->setSubject($subject)
-			->setFrom(
-				$fromEmail,
-				$fromName
-			)
-			->setTo($toEmail)
-			->setContentType('text/plain; charset=UTF-8')
-			->setBody(strip_tags($body), 'text/plain')
-			->addPart($body, 'text/html');
+		$message = Swift_Message::newInstance();
+		$message->setSubject($subject);
+		$message->setFrom($fromEmail, $fromName);
+		$message->setTo($toEmail);
+		if ($messageData->bccEmail !== null) {
+			$message->addBcc($messageData->bccEmail);
+		}
+		$message->setContentType('text/plain; charset=UTF-8');
+		$message->setBody(strip_tags($body), 'text/plain');
+		$message->addPart($body, 'text/html');
 
 		return $message;
 	}

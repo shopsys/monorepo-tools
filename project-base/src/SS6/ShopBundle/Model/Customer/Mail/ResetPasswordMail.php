@@ -75,6 +75,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface {
 	public function createMessage(MailTemplate $template, $user) {
 		return new MessageData(
 			$user->getEmail(),
+			$template->getBccEmail(),
 			$template->getBody(),
 			$template->getSubject(),
 			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),

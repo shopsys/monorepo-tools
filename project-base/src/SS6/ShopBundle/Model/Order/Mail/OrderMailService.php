@@ -93,6 +93,7 @@ class OrderMailService {
 	public function getMessageDataByOrder(Order $order, MailTemplate $mailTemplate) {
 		return new MessageData(
 			$order->getEmail(),
+			$mailTemplate->getBccEmail(),
 			$mailTemplate->getBody(),
 			$mailTemplate->getSubject(),
 			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),

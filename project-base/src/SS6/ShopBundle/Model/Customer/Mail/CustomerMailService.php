@@ -40,6 +40,7 @@ class CustomerMailService {
 	public function getMessageDataByUser(User $user, MailTemplate $mailTemplate) {
 		return new MessageData(
 			$user->getEmail(),
+			$mailTemplate->getBccEmail(),
 			$mailTemplate->getBody(),
 			$mailTemplate->getSubject(),
 			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),

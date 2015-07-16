@@ -45,6 +45,13 @@ class MailTemplate {
 	 *
 	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
+	private $bccEmail;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
 	private $subject;
 
 	/**
@@ -76,6 +83,7 @@ class MailTemplate {
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
 	public function edit(MailTemplateData $mailTemplateData) {
+		$this->bccEmail = $mailTemplateData->bccEmail;
 		$this->subject = $mailTemplateData->subject;
 		$this->body = $mailTemplateData->body;
 		$this->sendMail = $mailTemplateData->sendMail;
@@ -100,6 +108,13 @@ class MailTemplate {
 	 */
 	public function getDomainId() {
 		return $this->domainId;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getBccEmail() {
+		return $this->bccEmail;
 	}
 
 	/**
