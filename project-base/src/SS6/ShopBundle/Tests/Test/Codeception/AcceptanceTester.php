@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Test\Codeception;
 
+use RemoteWebDriver;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -21,7 +23,11 @@ class AcceptanceTester extends \Codeception\Actor {
 
 	use _generated\AcceptanceTesterActions;
 
-	/**
-	 * Define custom actions here
-	 */
+	public function switchToLastOpenedWindow() {
+		$this->executeInSelenium(function (RemoteWebDriver $webdriver) {
+			$handles = $webdriver->getWindowHandles();
+			$lastWindow = end($handles);
+			$this->switchToWindow($lastWindow);
+		});
+	}
 }

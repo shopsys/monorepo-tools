@@ -9,6 +9,9 @@ use SS6\ShopBundle\Model\Administrator\AdministratorData;
 
 class AdministratorDataFixture extends AbstractReferenceFixture {
 
+	const SUPERADMINISTRATOR = 'administrator_superadministrator';
+	const ADMINISTRATOR = 'admistrator_administrator';
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
@@ -23,6 +26,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 		$superadmin->setEmail('no-reply@netdevelo.cz');
 
 		$manager->persist($superadmin);
+		$this->addReference(self::SUPERADMINISTRATOR, $superadmin);
 
 		$administrator = new Administrator(new AdministratorData());
 		$administrator->setUsername('admin');
@@ -31,6 +35,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 		$administrator->setEmail('no-reply@netdevelo.cz');
 
 		$manager->persist($administrator);
+		$this->addReference(self::ADMINISTRATOR, $administrator);
 
 		$manager->flush();
 	}

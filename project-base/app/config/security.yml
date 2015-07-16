@@ -9,12 +9,13 @@ security:
 
   providers:
     administrators:
-      id: ss6.shop.administrator.admin_user_provider
+      id: ss6.shop.administrator.security.administrator_user_provider
 
     user_identities:
       id: ss6.shop.customer.frontend_user_provider
 
   firewalls:
+    # see SS6\ShopBundle\Model\Security\SecurityFacade
     administration:
       pattern: ^/(admin/|efconnect|elfinder)
       anonymous: ~
@@ -55,6 +56,8 @@ security:
         success_handler: ss6.shop.security.logout_handler
 
   access_control:
+    # same pattern must be in routing_front.yml
+    - { path: ^/login-as-remembered-user/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/superadmin/, roles: ROLE_SUPER_ADMIN }
     - { path: ^/admin/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/, roles: ROLE_ADMIN }

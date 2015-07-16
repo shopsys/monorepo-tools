@@ -19,6 +19,7 @@ modules:
     # The setting is reset before _before() of WebDriver is called,
     # so DomainHelper must be included after WebDriver.
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\DomainHelper
+    - SS6\ShopBundle\Tests\Test\Codeception\Helper\CloseNewlyOpenedWindowsHelper
   config:
     SS6\ShopBundle\Tests\Test\Codeception\Module\Db:
       dsn: ~

@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderFacade;
+use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,16 +35,23 @@ class CustomerController extends BaseController {
 	 */
 	private $orderFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginAsUserFacade
+	 */
+	private $loginAsUserFacade;
+
 	public function __construct(
 		CustomerEditFacade $customerEditFacade,
 		OrderFacade $orderFacade,
 		Domain $domain,
-		OrderItemPriceCalculation $orderItemPriceCalculation
+		OrderItemPriceCalculation $orderItemPriceCalculation,
+		LoginAsUserFacade $loginAsUserFacade
 	) {
 		$this->customerEditFacade = $customerEditFacade;
 		$this->orderFacade = $orderFacade;
 		$this->domain = $domain;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
+		$this->loginAsUserFacade = $loginAsUserFacade;
 	}
 
 	public function editAction(Request $request) {
@@ -145,6 +153,26 @@ class CustomerController extends BaseController {
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
 		]);
 
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function loginAsRememberedUserAction(Request $request) {
+		try {
+			$this->loginAsUserFacade->loginAsRememberedUser($request);
+		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
+			$adminFlashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+			/* @var $adminFlashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+			$adminFlashMessageSender->addErrorFlash('Uživatel nebyl nalezen.');
+
+			return $this->redirectToRoute('admin_customer_list');
+		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException $e) {
+			throw $this->createAccessDeniedException('', $e);
+		}
+
+		return $this->redirectToRoute('front_homepage');
 	}
 
 }

@@ -3,8 +3,9 @@
 namespace SS6\ShopBundle\Model\Security\Exception;
 
 use Exception;
+use SS6\ShopBundle\Model\Security\Exception\SecurityException;
 
-class LoginFailedException extends Exception implements SecurityException {
+class LoginAsRememberedUserException extends Exception implements SecurityException {
 
 	/**
 	 * @param string $message

@@ -1,7 +1,13 @@
 {% extends '@SS6Shop/Admin/Content/Customer/detail.html.twig' %}
 
 {% block title %}- {{ 'Editace zákazníka'|trans }} - {{ user.fullName }}{% endblock %}
-{% block h1 %}{{ 'Editace zákazníka'|trans }} - {{ user.fullName }}{% endblock %}
+{% block h1 %}
+	{{ 'Editace zákazníka'|trans }} - {{ user.fullName }}
+	<a href="{{ url('admin_customer_loginasuser', { userId: user.id, csrfToken: loginAsUserCsrfToken }) }}" target="_blank" class="btn btn-default">
+		{{ 'Přihlásit za uživatele' }}
+		<i class="fa fa-external-link"></i>
+	</a>
+{% endblock %}
 
 {% block customer_created_at %}
 	<div class="form-line">
@@ -12,7 +18,6 @@
 			{{ user.createdAt|formatDateTime }}
 		</span>
 	</div>
-
 {% endblock %}
 
 {% block customer_last_login %}
