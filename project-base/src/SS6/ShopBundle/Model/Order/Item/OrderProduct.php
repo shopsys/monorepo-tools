@@ -27,6 +27,7 @@ class OrderProduct extends OrderItem {
 	 * @param string $priceWithVat
 	 * @param string $vatPercent
 	 * @param int $quantity
+	 * @param string|null $catnum
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
@@ -36,6 +37,7 @@ class OrderProduct extends OrderItem {
 		$priceWithVat,
 		$vatPercent,
 		$quantity,
+		$catnum,
 		Product $product = null
 	) {
 		parent::__construct(
@@ -44,7 +46,8 @@ class OrderProduct extends OrderItem {
 			$priceWithoutVat,
 			$priceWithVat,
 			$vatPercent,
-			$quantity
+			$quantity,
+			$catnum
 		);
 		$this->product = $product;
 	}

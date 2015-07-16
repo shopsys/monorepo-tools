@@ -30,6 +30,11 @@ class OrderItemData {
 	public $quantity;
 
 	/**
+	 * @var string|null
+	 */
+	public $catnum;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
 	 */
 	public function setFromEntity(OrderItem $orderItem) {
@@ -38,6 +43,7 @@ class OrderItemData {
 		$this->priceWithoutVat = $orderItem->getPriceWithoutVat();
 		$this->vatPercent = $orderItem->getVatPercent();
 		$this->quantity = $orderItem->getQuantity();
+		$this->catnum = $orderItem->getCatnum();
 	}
 
 }

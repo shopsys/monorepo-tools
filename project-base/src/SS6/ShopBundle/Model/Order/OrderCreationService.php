@@ -194,6 +194,7 @@ class OrderCreationService {
 				$quantifiedItemPrice->getUnitPriceWithVat(),
 				$product->getVat()->getPercent(),
 				$quantifiedItem->getQuantity(),
+				$product->getCatnum(),
 				$product
 			);
 

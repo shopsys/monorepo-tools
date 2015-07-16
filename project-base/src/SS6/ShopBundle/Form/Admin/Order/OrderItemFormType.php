@@ -30,6 +30,12 @@ class OrderItemFormType extends AbstractType {
 				],
 				'error_bubbling' => true,
 			])
+			->add('catnum', FormType::TEXT, [
+				'constraints' => [
+					new Constraints\Length(['max' => '255']),
+				],
+				'error_bubbling' => true,
+			])
 			->add('priceWithVat', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [

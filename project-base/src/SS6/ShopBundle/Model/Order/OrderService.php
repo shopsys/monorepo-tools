@@ -65,7 +65,8 @@ class OrderService {
 					$orderItemData->priceWithoutVat,
 					$orderItemData->priceWithVat,
 					$orderItemData->vatPercent,
-					$orderItemData->quantity
+					$orderItemData->quantity,
+					$orderItemData->catnum
 				);
 				$orderItemsToCreate[] = $orderItem;
 			}

@@ -67,12 +67,20 @@ abstract class OrderItem {
 	protected $quantity;
 
 	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $catnum;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
 	 * @param string $priceWithoutVat
 	 * @param string $priceWithVat
 	 * @param string $vatPercent
 	 * @param int $quantity
+	 * @param string|null $catnum
 	 */
 	public function __construct(
 		Order $order,
@@ -80,7 +88,8 @@ abstract class OrderItem {
 		$priceWithoutVat,
 		$priceWithVat,
 		$vatPercent,
-		$quantity
+		$quantity,
+		$catnum
 	) {
 		$this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
 		$this->name = $name;
@@ -88,6 +97,7 @@ abstract class OrderItem {
 		$this->priceWithVat = $priceWithVat;
 		$this->vatPercent = $vatPercent;
 		$this->quantity = $quantity;
+		$this->catnum = $catnum;
 		$this->order->addItem($this); // call after setting attrs for recalc total price
 	}
 
@@ -134,6 +144,13 @@ abstract class OrderItem {
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getCatnum() {
+		return $this->catnum;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getTotalPriceWithVat() {
@@ -149,6 +166,7 @@ abstract class OrderItem {
 		$this->priceWithVat = $orderItemData->priceWithVat;
 		$this->vatPercent = $orderItemData->vatPercent;
 		$this->quantity = $orderItemData->quantity;
+		$this->catnum = $orderItemData->catnum;
 	}
 
 }

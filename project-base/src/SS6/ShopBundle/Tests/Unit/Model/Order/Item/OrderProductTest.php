@@ -21,7 +21,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$orderItemData->quantity = 2;
 		$orderItemData->vatPercent = 10;
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, $productMock);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, $productMock);
 		$orderProduct->edit($orderItemData);
 
 		$this->assertSame('productName', $orderProduct->getName());
@@ -41,7 +41,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$orderItemData->quantity = 2;
 		$orderItemData->vatPercent = 10;
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, null);
 		$orderProduct->edit($orderItemData);
 
 		$this->assertSame('newName', $orderProduct->getName());

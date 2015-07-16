@@ -133,6 +133,10 @@
 												<td>
 													{% if productItem and productItem.product %}
 														{{ productItem.product.catnum }}
+														{{ form_widget(orderItemForm.catnum, {type: 'hidden'}) }}
+														{% do orderItemForm.catnum.setRendered() %}
+													{% else %}
+														{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}
 													{% endif %}
 												</td>
 												<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
