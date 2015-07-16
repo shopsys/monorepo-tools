@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Image\ImageService;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 
@@ -34,8 +35,15 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 			]);
 
 		$imageServiceMock = $this->getMock(ImageService::class, [], [], '', false);
+		$filesystemMock = $this->getMock(Filesystem::class, [], [], '', false);
 
-		$domainFacade = new DomainFacade($domain, $pricingSettingMock, $imageServiceMock);
+		$domainFacade = new DomainFacade(
+			'domainImagesDirectory',
+			$domain,
+			$pricingSettingMock,
+			$imageServiceMock,
+			$filesystemMock
+		);
 		$domainConfigs = $domainFacade->getDomainConfigsByCurrency($currencyMock);
 
 		$this->assertCount(2, $domainConfigs);
