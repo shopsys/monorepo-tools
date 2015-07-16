@@ -192,6 +192,7 @@
 				<exclude name="noimage.gif" />
 				<exclude name =".gitignore" />
 			</fileset>
+			<fileset dir="${path.root}/web/assets/admin/images/domain" />
 		</delete>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />

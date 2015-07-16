@@ -14,6 +14,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testMakeImageDirectories() {
 		$imageDir = 'imageDir';
+		$domainImageDir = 'domainImageDir';
 		$imageEntityConfigByClass = [
 			new ImageEntityConfig(
 				'entityName1',
@@ -47,6 +48,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 						. 'entityName2' . DIRECTORY_SEPARATOR
 						. 'type' . DIRECTORY_SEPARATOR
 						. 'sizeName2_1' . DIRECTORY_SEPARATOR,
+					'domainImageDir',
 				];
 				asort($expected);
 				asort($actual);
@@ -54,7 +56,7 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 				return true;
 			}));
 
-		$creator = new DirectoryStructureCreator($imageDir, $imageConfig, $imageLocator, $filesystemMock);
+		$creator = new DirectoryStructureCreator($imageDir, $domainImageDir, $imageConfig, $imageLocator, $filesystemMock);
 		$creator->makeImageDirectories();
 	}
 

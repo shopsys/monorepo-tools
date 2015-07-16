@@ -12,7 +12,7 @@ parameters:
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources
   ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
   ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
-  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v5.zip
+  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v6.zip
   ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v5.sql
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.domain_images_dir_rel: /assets/admin/images/domain
@@ -436,7 +436,9 @@ services:
 
   ss6.shop.image.directory_structure_creator:
     class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
-    arguments: [%ss6.image_dir%]
+    arguments:
+      - %ss6.image_dir%
+      - %ss6.domain_images_dir%
 
   ss6.shop.image.image_config:
     class: SS6\ShopBundle\Model\Image\Config\ImageConfig

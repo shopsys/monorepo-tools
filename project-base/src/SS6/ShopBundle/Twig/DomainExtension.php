@@ -77,17 +77,18 @@ class DomainExtension extends \Twig_Extension {
 	 * @return string
 	 */
 	public function getDomainIconHtml($domainId) {
+		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
 		if ($this->existsDomainIcon($domainId)) {
 			$src = sprintf('%s/%u.png', $this->domainImagesDirRelPath, $domainId);
+
+			return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
+				. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
+				. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>';
 		} else {
-			$src = sprintf('/assets/admin/images/domains/noicon.png', $domainId);
+			return '<span
+				class="text-in-circle text-in-circle--filled text-in-circle--filled__' . $domainId . '"
+				title="' . htmlspecialchars($domainName, ENT_QUOTES) . '">' . $domainId . '</span>';
 		}
-
-		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
-
-		return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
-			. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
-			. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>';
 	}
 
 	/**

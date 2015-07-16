@@ -29,13 +29,26 @@ class DirectoryStructureCreator {
 	private $imageDir;
 
 	/**
+	 * @var string
+	 */
+	private $domainImageDir;
+
+	/**
 	 * @param string $imageDir
+	 * @param string $domainImageDir
 	 * @param \SS6\ShopBundle\Model\Image\Config\ImageConfig $imageConfig
 	 * @param \SS6\ShopBundle\Model\Image\ImageLocator $imageLocator
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
-	public function __construct($imageDir, ImageConfig $imageConfig, ImageLocator $imageLocator, Filesystem $filesystem) {
+	public function __construct(
+		$imageDir,
+		$domainImageDir,
+		ImageConfig $imageConfig,
+		ImageLocator $imageLocator,
+		Filesystem $filesystem
+	) {
 		$this->imageDir = $imageDir;
+		$this->domainImageDir = $domainImageDir;
 		$this->imageConfig = $imageConfig;
 		$this->imageLocator = $imageLocator;
 		$this->filesysytem = $filesystem;
@@ -63,6 +76,8 @@ class DirectoryStructureCreator {
 				$directories = array_merge($directories, $typeSizesDirectories);
 			}
 		}
+
+		$directories[] = $this->domainImageDir;
 
 		$this->filesysytem->mkdir($directories);
 	}
