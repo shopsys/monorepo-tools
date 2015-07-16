@@ -14,7 +14,7 @@
 		</label>
 		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
 			<div class="form-line">
-				<span class="form-line__label">{{ getDomainName(productDomain.domainId) ~ ' :' }}</span>
+				<span class="form-line__image">{{ domainIcon(productDomain.domainId) }}</span> <span class="form-line__label form-line__label--with-image">{{ getDomainName(productDomain.domainId) ~ ' :' }}</span>
 				<span class="form-line__text">
 					{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId) %}
 					{% if url %}
@@ -53,7 +53,7 @@
 			{% set mainCategoryName = mainCategory.name %}
 		{% endif %}
 		<div class="form-line">
-			<label class="form-line__label">{{ getDomainName(domainId) ~ ' :' }}</label>
+			<span class="form-line__image">{{ domainIcon(domainId) }}</span> <label class="form-line__label form-line__label--with-image">{{ getDomainName(domainId) ~ ' :' }}</label>
 			<input
 				type="text"
 				value="{{ mainCategoryName }}"
@@ -86,7 +86,7 @@
 			</tr>
 			{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
 				<tr>
-					<th colspan="3">{{ getDomainName(domainId) }}</th>
+					<th colspan="3">{{ domainIcon(domainId) }} {{ getDomainName(domainId) }}</th>
 				</tr>
 				{% for productSellingPrice in productSellingPrices %}
 					<tr>
