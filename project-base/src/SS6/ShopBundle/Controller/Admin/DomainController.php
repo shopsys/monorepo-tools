@@ -14,7 +14,6 @@ use SS6\ShopBundle\Model\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends BaseController {
@@ -28,11 +27,6 @@ class DomainController extends BaseController {
 	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
-	 */
-	private $localization;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
@@ -62,7 +56,6 @@ class DomainController extends BaseController {
 	public function __construct(
 		Domain $domain,
 		SelectedDomain $selectedDomain,
-		Localization $localization,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
 		Translator $translator,
@@ -71,7 +64,6 @@ class DomainController extends BaseController {
 	) {
 		$this->domain = $domain;
 		$this->selectedDomain = $selectedDomain;
-		$this->localization = $localization;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->translator = $translator;
@@ -83,7 +75,6 @@ class DomainController extends BaseController {
 		return $this->render('@SS6Shop/Admin/Inline/Domain/tabs.html.twig', [
 			'domainConfigs' => $this->domain->getAll(),
 			'selectedDomainId' => $this->selectedDomain->getId(),
-			'multipleLocales' => count($this->localization->getAllLocales()) > 1,
 		]);
 	}
 

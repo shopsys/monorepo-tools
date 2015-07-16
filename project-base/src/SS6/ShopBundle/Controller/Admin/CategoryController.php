@@ -12,7 +12,6 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryDataFactory;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -50,11 +49,6 @@ class CategoryController extends BaseController {
 	private $categoryFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
-	 */
-	private $localization;
-
-	/**
 	 * @var \Symfony\Component\HttpFoundation\Session\Session
 	 */
 	private $session;
@@ -72,7 +66,6 @@ class CategoryController extends BaseController {
 		CategoryDataFactory $categoryDataFactory,
 		Session $session,
 		Domain $domain,
-		Localization $localization,
 		Breadcrumb $breadcrumb
 	) {
 		$this->translator = $translator;
@@ -82,7 +75,6 @@ class CategoryController extends BaseController {
 		$this->categoryDataFactory = $categoryDataFactory;
 		$this->session = $session;
 		$this->domain = $domain;
-		$this->localization = $localization;
 		$this->breadcrumb = $breadcrumb;
 	}
 
@@ -249,7 +241,6 @@ class CategoryController extends BaseController {
 		return $this->render('@SS6Shop/Admin/Content/Category/domainTabs.html.twig', [
 			'domainConfigs' => $this->domain->getAll(),
 			'selectedDomainId' => $domainId,
-			'multipleLocales' => count($this->localization->getAllLocales()) > 1,
 		]);
 	}
 
