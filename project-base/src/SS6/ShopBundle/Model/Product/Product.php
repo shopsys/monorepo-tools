@@ -213,6 +213,13 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculateVisibility;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Brand\Brand")
+	 * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+	 */
+	private $brand;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function __construct(ProductData $productData) {
@@ -246,6 +253,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->recalculateVisibility = true;
 		$this->calculatedHidden = true;
 		$this->calculatedSellable = false;
+		$this->brand = $productData->brand;
 	}
 
 	/**
@@ -275,6 +283,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->setTranslations($productData);
 		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
+		$this->brand = $productData->brand;
 	}
 
 	/**
@@ -481,6 +490,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getPriceCalculationType() {
 		return $this->priceCalculationType;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
+	 */
+	public function getBrand() {
+		return $this->brand;
 	}
 
 	/**

@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
@@ -192,7 +193,14 @@ class ProductDataFixture extends AbstractReferenceFixture {
 			'top' => $persistentReferenceService->getReference(FlagDataFixture::TOP_PRODUCT),
 		];
 
-		$loaderService->injectReferences($vats, $availabilities, $categories, $flags);
+		$brands = [
+			'apple' => $this->getReference(BrandDataFixture::APPLE),
+			'canon' => $this->getReference(BrandDataFixture::CANON),
+			'lg' => $this->getReference(BrandDataFixture::LG),
+			'philips' => $this->getReference(BrandDataFixture::PHILIPS),
+		];
+
+		$loaderService->injectReferences($vats, $availabilities, $categories, $flags, $brands);
 
 		return $loaderService->getProductsEditData();
 	}

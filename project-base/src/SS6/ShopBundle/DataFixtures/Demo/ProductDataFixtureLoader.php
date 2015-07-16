@@ -57,6 +57,11 @@ class ProductDataFixtureLoader {
 	private $flags;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 */
+	private $brands;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
@@ -72,12 +77,14 @@ class ProductDataFixtureLoader {
 	 * @param array $availabilities
 	 * @param array $categories
 	 * @param array $flags
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 */
-	public function injectReferences(array $vats, array $availabilities, array $categories, array $flags) {
+	public function injectReferences(array $vats, array $availabilities, array $categories, array $flags, array $brands) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->categories = $categories;
 		$this->flags = $flags;
+		$this->brands = $brands;
 		$this->parameters = [];
 	}
 
@@ -158,6 +165,10 @@ class ProductDataFixtureLoader {
 		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
 		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
 		$productEditData->productData->sellable = $row[18];
+
+		if ($row[19] !== null) {
+			$productEditData->productData->brand = $this->brands[$row[19]];
+		}
 
 		return $productEditData;
 	}

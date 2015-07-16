@@ -1,0 +1,14 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_brand_edit', { id: row.b.id }) }}">{{ value }}</a>
+{% endblock %}
+
+{% block grid_no_data %}
+	{{ 'Nebyly nalezeny žádné značky. Nejprve musíte nějaké vytvořit.'|trans }}
+{% endblock %}
+
+{% block grid_pager_totalcount %}
+	{% set entityName = 'značek'|trans %}
+	{{ parent() }}
+{% endblock %}

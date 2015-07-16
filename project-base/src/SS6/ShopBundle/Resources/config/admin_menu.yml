@@ -169,6 +169,16 @@
               route: admin_orderstatus_new
               visible: false
 
+        - label: 'Značky'
+          route: admin_brand_list
+          items:
+            - label: 'Editace značky'
+              route: admin_brand_edit
+              visible: false
+            - label: 'Nová značka'
+              route: admin_brand_new
+              visible: false
+
     - label: 'Překlady'
       route: admin_translation_list
       items:

@@ -35,6 +35,11 @@ class ProductFormType extends AbstractType {
 	private $availabilities;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 */
+	private $brands;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 */
 	private $inverseArrayValuesTransformer;
@@ -57,6 +62,7 @@ class ProductFormType extends AbstractType {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -65,6 +71,7 @@ class ProductFormType extends AbstractType {
 	public function __construct(
 		array $vats,
 		array $availabilities,
+		array $brands,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $flags,
 		TranslatorInterface $translator,
@@ -72,6 +79,7 @@ class ProductFormType extends AbstractType {
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
+		$this->brands = $brands;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flags = $flags;
 		$this->translator = $translator;
@@ -134,6 +142,11 @@ class ProductFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků']),
 				],
+			])
+			->add('brand', FormType::CHOICE, [
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->brands, 'name', [], null, 'id'),
+				'placeholder' => $this->translator->trans('-- Vyberte značku --'),
 			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])
 			->add('stockQuantity', FormType::INTEGER, [
