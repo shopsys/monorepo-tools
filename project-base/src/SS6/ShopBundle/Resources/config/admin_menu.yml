@@ -121,6 +121,10 @@
   items:
     - label: 'Identifikace e-shopu'
       route: admin_domain_list
+      items:
+        - label: 'Editace domény'
+          route: admin_domain_edit
+          visible: false
 
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list

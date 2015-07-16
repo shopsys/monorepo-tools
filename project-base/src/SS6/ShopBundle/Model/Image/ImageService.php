@@ -75,6 +75,15 @@ class ImageService {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $temporaryFilename
+	 */
+	public function editDomainIcon($domainId, $temporaryFilename) {
+		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
+		$this->imageProcessingService->convertToDomainIconFormatAndSave($domainId, $temporaryFilepath);
+	}
+
+	/**
 	 * @param string $entityName
 	 * @param int $entityId
 	 * @param \SS6\ShopBundle\Model\Image\Image[] $images

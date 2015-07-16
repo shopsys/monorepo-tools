@@ -4,6 +4,16 @@
 	{{ 'Doposud nejsou žádné domény.'|trans }}
 {% endblock %}
 
+{% block grid_value_cell_id_name %}
+	<a href="{{ url('admin_domain_edit', { id: row.id }) }}">{{ value }}</a>
+{% endblock %}
+
 {% block grid_value_cell_id_locale %}
 	{{ localeFlag(value) }}
+{% endblock %}
+
+{% block grid_value_cell_id_icon %}
+	{% if value is null %}
+		<a href="{{ url('admin_domain_edit', { id: row.id }) }}">{{ 'Nahrát...'|trans }}</a>
+	{% endif %}
 {% endblock %}

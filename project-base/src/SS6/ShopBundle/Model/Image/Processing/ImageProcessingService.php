@@ -15,6 +15,9 @@ class ImageProcessingService {
 	const EXTENSION_PNG = 'png';
 	const EXTENSION_GIF = 'gif';
 
+	const DOMAIN_ICON_WIDTH = 16;
+	const DOMAIN_ICON_HEIGHT = 11;
+
 	/**
 	 * @var string[]
 	 */
@@ -30,7 +33,17 @@ class ImageProcessingService {
 	 */
 	private $filesystem;
 
-	public function __construct(ImageManager $imageManager, Filesystem $filesystem) {
+	/**
+	 * @var string
+	 */
+	private $domainImagesDirectory;
+
+	public function __construct(
+		$domainImagesDirectory,
+		ImageManager $imageManager,
+		Filesystem $filesystem
+	) {
+		$this->domainImagesDirectory = $domainImagesDirectory;
 		$this->imageManager = $imageManager;
 		$this->filesystem = $filesystem;
 
@@ -80,6 +93,38 @@ class ImageProcessingService {
 		}
 
 		return $image->filename . '.' . $image->extension;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $filepath
+	 */
+	public function convertToDomainIconFormatAndSave($domainId, $filepath) {
+		$extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+		$newTemporaryFilepath = pathinfo($filepath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . $domainId . '.';
+
+		if (in_array($extension, $this->supportedImageExtensions)) {
+			$newTemporaryFilepath .= self::EXTENSION_PNG;
+		} else {
+			throw new \SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
+		}
+
+		$this->createInterventionImage($filepath)
+			->resize(self::DOMAIN_ICON_WIDTH, self::DOMAIN_ICON_HEIGHT, function (Constraint $constraint) {
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			})
+			->save($newTemporaryFilepath);
+
+		$targetFileName = pathinfo($newTemporaryFilepath, PATHINFO_BASENAME);
+		$targetFilePath = $this->domainImagesDirectory . DIRECTORY_SEPARATOR . $targetFileName;
+
+		try {
+			$this->filesystem->rename($newTemporaryFilepath, $targetFilePath, true);
+		} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
+			$message = 'Failed to rename file from temporary directory to domain directory';
+			throw new \SS6\ShopBundle\Model\FileUpload\Exception\MoveToFolderFailedException($message, $ex);
+		}
 	}
 
 	/**

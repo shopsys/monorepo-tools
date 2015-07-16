@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\DomainFacade;
+use SS6\ShopBundle\Model\Image\ImageService;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
@@ -32,7 +33,9 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 				[3, 1],
 			]);
 
-		$domainFacade = new DomainFacade($domain, $pricingSettingMock);
+		$imageServiceMock = $this->getMock(ImageService::class, [], [], '', false);
+
+		$domainFacade = new DomainFacade($domain, $pricingSettingMock, $imageServiceMock);
 		$domainConfigs = $domainFacade->getDomainConfigsByCurrency($currencyMock);
 
 		$this->assertCount(2, $domainConfigs);

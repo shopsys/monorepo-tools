@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Domain;
 
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Image\ImageService;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
@@ -18,9 +19,19 @@ class DomainFacade {
 	 */
 	private $pricingSetting;
 
-	public function __construct(Domain $domain, PricingSetting $pricingSetting) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Image\ImageService
+	 */
+	private $imageService;
+
+	public function __construct(
+		Domain $domain,
+		PricingSetting $pricingSetting,
+		ImageService $imageService
+	) {
 		$this->domain = $domain;
 		$this->pricingSetting = $pricingSetting;
+		$this->imageService = $imageService;
 	}
 
 	/**
@@ -38,4 +49,13 @@ class DomainFacade {
 
 		return $domainConfigs;
 	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $iconName
+	 */
+	public function editIcon($domainId, $iconName) {
+		$this->imageService->editDomainIcon($domainId, $iconName);
+	}
+
 }
