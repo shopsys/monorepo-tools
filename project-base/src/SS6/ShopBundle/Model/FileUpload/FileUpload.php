@@ -176,7 +176,7 @@ class FileUpload {
 			try {
 				$this->filesystem->rename($sourceFilepath, $targetFilename, true);
 			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
-				$message = 'Failed to rename file from temporary direcotory to entity';
+				$message = 'Failed to rename file from temporary directory to entity';
 				throw new \SS6\ShopBundle\Model\FileUpload\Exception\MoveToEntityFailedException($message, $ex);
 			}
 		}
