@@ -51,7 +51,6 @@ class ProductAvailabilityRecalculationScheduler {
 
 	public function cleanImmediatelyRecalculationSchedule() {
 		$this->products = [];
-		$this->recalculateAll = false;
 	}
 
 }
