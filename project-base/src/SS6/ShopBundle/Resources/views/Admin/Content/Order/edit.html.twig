@@ -22,7 +22,7 @@
 						</div>
 						<div class="form-line">
 							<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-							<input type="text" value="{{ getDomainName(order.domainId) }}" class="form-control form-line__field" readonly="readonly">
+							{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
 						</div>
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
 						{{ form_row(form.statusId, { label: 'Stav'|trans }) }}
