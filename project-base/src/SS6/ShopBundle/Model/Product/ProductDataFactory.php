@@ -59,7 +59,7 @@ class ProductDataFactory {
 		$productData->vat = $product->getVat();
 		$productData->sellingFrom = $product->getSellingFrom();
 		$productData->sellingTo = $product->getSellingTo();
-		$productData->sellable = $product->isSellable();
+		$productData->sellingDenied = $product->isSellingDenied();
 		$productData->flags = $product->getFlags()->toArray();
 		$productData->usingStock = $product->isUsingStock();
 		$productData->stockQuantity = $product->getStockQuantity();

@@ -246,6 +246,10 @@
 	{% endspaceless %}
 {% endblock checkbox_label %}
 
+{% block product_row %}
+	{{ block('form_row') }}
+{% endblock product_row %}
+
 {% block product_widget %}
 	<span class="js-product-picker-container" data-placeholder="{{ placeholder }}">
 		<input
@@ -282,11 +286,13 @@
 	</div>
 {%- endblock %}
 
-{% macro productsWidgetItem(productName, form) %}
+{% macro productsWidgetItem(productName, form, sortable) %}
 	<li class="js-products-picker-item in-simple-item">
-		<span class="left top-right-padding-5-px">
-			<i class="cursor-move fa fa-arrows"></i>
-		</span>
+		{%if sortable %}
+			<span class="left top-right-padding-5-px">
+				<i class="cursor-move fa fa-arrows"></i>
+			</span>
+		{% endif %}
 		<span class="in-simple-item__icon js-products-picker-item-button-delete cursor-pointer">
 			{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
 			<i class="fa fa-trash-o"></i>
@@ -300,13 +306,13 @@
 {% block products_widget %}
 	<div
 		class="js-products-picker"
-		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype)|e }}"
+		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype, form.vars.sortable)|e }}"
 		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__'}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
 		<ul class="js-products-picker-items mb-1 list-style-none">
 			{% for key, productForm in form %}
-				{{ _self.productsWidgetItem(form.vars.products[key].name, productForm) }}
+				{{ _self.productsWidgetItem(form.vars.products[key].name, productForm, form.vars.sortable) }}
 			{% endfor %}
 		</ul>
 		<a href="#" class="btn btn-primary js-products-picker-button-add">

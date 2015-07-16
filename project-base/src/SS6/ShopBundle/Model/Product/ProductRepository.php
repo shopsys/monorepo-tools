@@ -82,7 +82,23 @@ class ProductRepository {
 	 */
 	public function getAllListableQueryBuilder($domainId, $pricingGroup) {
 		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
-		$queryBuilder->andWhere('p.calculatedSellable = TRUE');
+		$queryBuilder->andWhere('p.calculatedSellingDenied = FALSE');
+		$queryBuilder->andWhere('p.variantType != :variantTypeVariant')
+			->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT);
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllSellableQueryBuilder($domainId, $pricingGroup) {
+		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder->andWhere('p.calculatedSellingDenied = FALSE');
+		$queryBuilder->andWhere('p.variantType != :variantTypeMain')
+			->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN);
 
 		return $queryBuilder;
 	}
@@ -131,6 +147,22 @@ class ProductRepository {
 		Category $category
 	) {
 		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
+		$this->filterByCategory($queryBuilder, $category);
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getSellableInCategoryQueryBuilder(
+		$domainId,
+		PricingGroup $pricingGroup,
+		Category $category
+	) {
+		$queryBuilder = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
 		$this->filterByCategory($queryBuilder, $category);
 		return $queryBuilder;
 	}
@@ -403,8 +435,8 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
-	public function getVisibleAndSellable($id, $domainId, PricingGroup $pricingGroup) {
-		$qb = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
+	public function getSellableById($id, $domainId, PricingGroup $pricingGroup) {
+		$qb = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
 		$qb->andWhere('p.id = :productId');
 		$qb->setParameter('productId', $id);
 
@@ -521,6 +553,21 @@ class ProductRepository {
 			->where('p.recalculateAvailability = TRUE')
 			->getQuery()
 			->iterate();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getAllSellableVariantsByMainVariant(Product $mainVariant, $domainId, PricingGroup $pricingGroup) {
+		$queryBuilder = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder
+			->andWhere('p.mainVariant = :mainVariant')
+			->setParameter('mainVariant', $mainVariant);
+
+		return $queryBuilder->getQuery()->execute();
 	}
 
 }

@@ -19,7 +19,7 @@ use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
 use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\ProductSellableRecalculator;
+use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
@@ -92,9 +92,9 @@ class ProductEditFacade {
 	private $productHiddenRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductSellableRecalculator
+	 * @var \SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
 	 */
-	private $productSellableRecalculator;
+	private $productSellingDeniedRecalculator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
@@ -115,7 +115,7 @@ class ProductEditFacade {
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
 		FriendlyUrlFacade $friendlyUrlFacade,
 		ProductHiddenRecalculator $productHiddenRecalculator,
-		ProductSellableRecalculator $productSellableRecalculator,
+		ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
 		ProductAccessoryRepository $productAccessoryRepository
 	) {
 		$this->em = $em;
@@ -131,7 +131,7 @@ class ProductEditFacade {
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->productHiddenRecalculator = $productHiddenRecalculator;
-		$this->productSellableRecalculator = $productSellableRecalculator;
+		$this->productSellingDeniedRecalculator = $productSellingDeniedRecalculator;
 		$this->productAccessoryRepository = $productAccessoryRepository;
 	}
 
@@ -160,7 +160,7 @@ class ProductEditFacade {
 		$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
 		$this->refreshProductAccessories($product, $productEditData->accessories);
 		$this->productHiddenRecalculator->calculateHiddenForProduct($product);
-		$this->productSellableRecalculator->calculateSellableForProduct($product);
+		$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
 
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
@@ -191,7 +191,7 @@ class ProductEditFacade {
 			$this->refreshProductAccessories($product, $productEditData->accessories);
 			$this->em->flush();
 			$this->productHiddenRecalculator->calculateHiddenForProduct($product);
-			$this->productSellableRecalculator->calculateSellableForProduct($product);
+			$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
 			$this->imageFacade->saveImagePositions($productEditData->imagePositions);
 			$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 			$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);

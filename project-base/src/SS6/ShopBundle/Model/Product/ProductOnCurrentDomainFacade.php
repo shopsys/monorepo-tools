@@ -104,6 +104,20 @@ class ProductOnCurrentDomainFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
+	 */
+	public function getVariantsProductDetailsForProduct(Product $product) {
+		$variants = $this->productRepository->getAllSellableVariantsByMainVariant(
+			$product,
+			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup()
+		);
+
+		return $this->productDetailFactory->getDetailsForProducts($variants);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
 	 * @param int $page

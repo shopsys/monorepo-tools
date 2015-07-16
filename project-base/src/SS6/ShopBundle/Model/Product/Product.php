@@ -14,7 +14,12 @@ use SS6\ShopBundle\Model\Product\Availability\Availability;
 /**
  * Product
  *
- * @ORM\Table(name="products")
+ * @ORM\Table(
+ *		name="products",
+ *		indexes={
+ *			@ORM\Index(columns={"variant_type"})
+ *		}
+ *	)
  * @ORM\Entity
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
@@ -25,6 +30,9 @@ class Product extends AbstractTranslatableEntity {
 	const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';
 	const OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE = 'excludeFromSale';
 	const OUT_OF_STOCK_ACTION_HIDE = 'hide';
+	const VARIANT_TYPE_NONE = 'none';
+	const VARIANT_TYPE_MAIN = 'main';
+	const VARIANT_TYPE_VARIANT = 'variant';
 
 	/**
 	 * @var int
@@ -96,14 +104,14 @@ class Product extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
-	private $sellable;
+	private $sellingDenied;
 
 	/**
 	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
-	private $calculatedSellable;
+	private $calculatedSellingDenied;
 
 	/**
 	 * @var bool
@@ -213,11 +221,34 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculateVisibility;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand|null
+	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Brand\Brand")
 	 * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
 	 */
 	private $brand;
+
+	/**
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
+	 *
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant", orphanRemoval=true)
+	 */
+	private $variants;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product|null
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="variants")
+	 * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true)
+	 */
+	private $mainVariant;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=32, nullable=false)
+	 */
+	private $variantType;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
@@ -236,7 +267,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
-		$this->sellable = $productData->sellable;
+		$this->sellingDenied = $productData->sellingDenied;
 		$this->hidden = $productData->hidden;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
@@ -252,8 +283,10 @@ class Product extends AbstractTranslatableEntity {
 		$this->recalculatePrice = true;
 		$this->recalculateVisibility = true;
 		$this->calculatedHidden = true;
-		$this->calculatedSellable = false;
+		$this->calculatedSellingDenied = true;
 		$this->brand = $productData->brand;
+		$this->variants = new ArrayCollection();
+		$this->variantType = self::VARIANT_TYPE_NONE;
 	}
 
 	/**
@@ -272,7 +305,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
-		$this->sellable = $productData->sellable;
+		$this->sellingDenied = $productData->sellingDenied;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
 		$this->outOfStockAction = $productData->outOfStockAction;
@@ -394,15 +427,15 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @return bool
 	 */
-	public function isSellable() {
-		return $this->sellable;
+	public function isSellingDenied() {
+		return $this->sellingDenied;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function getCalculatedSellable() {
-		return $this->calculatedSellable;
+	public function getCalculatedSellingDenied() {
+		return $this->calculatedSellingDenied;
 	}
 
 	/**
@@ -512,6 +545,65 @@ class Product extends AbstractTranslatableEntity {
 
 	public function markForVisibilityRecalculation() {
 		$this->recalculateVisibility = true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMainVariant() {
+		return $this->variantType === self::VARIANT_TYPE_MAIN;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isVariant() {
+		return $this->variantType === self::VARIANT_TYPE_VARIANT;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getMainVariant() {
+		if (!$this->isVariant()) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
+		}
+
+		return $this->mainVariant;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $variant
+	 */
+	public function addVariant(Product $variant) {
+		if ($this->variantType === self::VARIANT_TYPE_NONE) {
+			$this->variantType = self::VARIANT_TYPE_MAIN;
+		} elseif ($this->variantType === self::VARIANT_TYPE_VARIANT) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException();
+		}
+
+		if (!$this->variants->contains($variant)) {
+			$this->variants->add($variant);
+			$variant->setMainVariant($this);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
+	 */
+	public function setVariants(array $variants) {
+		foreach ($variants as $variant) {
+			$this->addVariant($variant);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used but not through $this
+	 */
+	private function setMainVariant(Product $mainVariant) {
+		$this->variantType = self::VARIANT_TYPE_VARIANT;
+		$this->mainVariant = $mainVariant;
 	}
 
 	/**

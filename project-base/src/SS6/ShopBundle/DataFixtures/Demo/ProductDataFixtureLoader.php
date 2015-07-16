@@ -94,16 +94,40 @@ class ProductDataFixtureLoader {
 	public function getProductsEditData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
 
-		$rowId = 0;
-		foreach ($rows as $row) {
-			if ($rowId !== 0) {
-				$row = array_map([TransformString::class, 'emptyToNull'], $row);
-				$row = EncodingConverter::cp1250ToUtf8($row);
-				$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
+		foreach ($rows as $rowId => $row) {
+			if ($rowId === 0) {
+				continue;
 			}
-			$rowId++;
+
+			$row = array_map([TransformString::class, 'emptyToNull'], $row);
+			$row = EncodingConverter::cp1250ToUtf8($row);
+			$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
 		}
+
 		return $productsEditData;
+	}
+
+	/**
+	 * @return int[mainVariantRowId][]
+	 */
+	public function getVariantCatnumsIndexedByMainVariantCatnum() {
+		$rows = $this->csvReader->getRowsFromCsv($this->path);
+
+		$variantCatnumsByMainVariantCatnum = [];
+		foreach ($rows as $rowId => $row) {
+			if ($rowId === 0) {
+				continue;
+			}
+
+			$row = array_map([TransformString::class, 'emptyToNull'], $row);
+			$row = EncodingConverter::cp1250ToUtf8($row);
+
+			if ($row[20] !== null && $row[2] !== null) {
+				$variantCatnumsByMainVariantCatnum[$row[20]][] = $row[2];
+			}
+		}
+
+		return $variantCatnumsByMainVariantCatnum;
 	}
 
 	/**
@@ -164,7 +188,7 @@ class ProductDataFixtureLoader {
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
 		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
 		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
-		$productEditData->productData->sellable = $row[18];
+		$productEditData->productData->sellingDenied = $row[18];
 
 		if ($row[19] !== null) {
 			$productEditData->productData->brand = $this->brands[$row[19]];

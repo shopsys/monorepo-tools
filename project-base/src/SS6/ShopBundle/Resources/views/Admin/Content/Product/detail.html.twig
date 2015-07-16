@@ -20,12 +20,12 @@
 					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
 					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží'|trans, attr: {class: 'form-line--between'} }) }}
 					{% block product_calculated_hidden_info %}{% endblock %}
-					{{ form_row(form.productData.sellable, { label: 'Vyřadit z prodeje'|trans,
+					{{ form_row(form.productData.sellingDenied, { label: 'Vyřadit z prodeje'|trans,
 						icon: {
 							title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
 						}
 						, attr: {class: 'form-line--between'} }) }}
-					{% block product_calculated_sellable_info %}{% endblock %}
+					{% block product_calculated_selling_denied_info %}{% endblock %}
 					{% block product_main_categories %}{% endblock %}
 					{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
 					{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}

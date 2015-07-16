@@ -38,8 +38,8 @@
 	{% endif %}
 {% endblock %}
 
-{% block product_calculated_sellable_info %}
-	{% if product.isUsingStock and not product.calculatedSellable %}
+{% block product_calculated_selling_denied_info %}
+	{% if product.isUsingStock and product.calculatedSellingDenied %}
 		<div class="form-line form-line__text text-red">{{ 'Produkt je vyřazen z prodeje z důvodu vyprodání'|trans }}</div>
 	{% endif %}
 {% endblock %}

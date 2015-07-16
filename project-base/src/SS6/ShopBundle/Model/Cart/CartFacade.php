@@ -78,7 +78,7 @@ class CartFacade {
 	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
 	 */
 	public function addProductToCart($productId, $quantity) {
-		$product = $this->productRepository->getVisibleAndSellable(
+		$product = $this->productRepository->getSellableById(
 			$productId,
 			$this->domain->getId(),
 			$this->currentCustomer->getPricingGroup()

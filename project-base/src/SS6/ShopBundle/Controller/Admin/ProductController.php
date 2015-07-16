@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
+use SS6\ShopBundle\Form\Admin\Product\VariantFormType;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -23,6 +24,7 @@ use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVariantFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends BaseController {
@@ -97,6 +99,11 @@ class ProductController extends BaseController {
 	 */
 	private $advancedSearchFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVariantFacade
+	 */
+	private $productVariantFacade;
+
 	public function __construct(
 		CategoryFacade $categoryFacade,
 		Translator $translator,
@@ -111,7 +118,8 @@ class ProductController extends BaseController {
 		PricingGroupFacade $pricingGroupFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		ProductListAdminFacade $productListAdminFacade,
-		AdvancedSearchFacade $advancedSearchFacade
+		AdvancedSearchFacade $advancedSearchFacade,
+		ProductVariantFacade $productVariantFacade
 	) {
 		$this->categoryFacade = $categoryFacade;
 		$this->translator = $translator;
@@ -127,6 +135,7 @@ class ProductController extends BaseController {
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->productListAdminFacade = $productListAdminFacade;
 		$this->advancedSearchFacade = $advancedSearchFacade;
+		$this->productVariantFacade = $productVariantFacade;
 	}
 
 	/**
@@ -309,6 +318,38 @@ class ProductController extends BaseController {
 
 		return $this->render('@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),
+		]);
+	}
+
+	/**
+	 * @Route("/product/create-variant/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function createVariantAction(Request $request) {
+		$form = $this->createForm(new VariantFormType());
+
+		$form->handleRequest($request);
+		if ($form->isValid()) {
+			$formData = $form->getData();
+			$mainVariant = $formData[VariantFormType::MAIN_VARIANT];
+			$this->productVariantFacade->createVariant(
+				$mainVariant,
+				$formData[VariantFormType::VARIANTS]
+			);
+
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				'Varianta <a href="{{ url }}">{{ variantName }}</a> byla úspěšně vytvořena.',
+				[
+					'url' => $this->generateUrl('admin_product_edit', ['id' => $mainVariant->getId()]),
+					'variantName' => $mainVariant->getName(),
+				]
+			);
+
+			return $this->redirectToRoute('admin_product_list');
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Product/createVariant.html.twig', [
+			'form' => $form->createView(),
 		]);
 	}
 }

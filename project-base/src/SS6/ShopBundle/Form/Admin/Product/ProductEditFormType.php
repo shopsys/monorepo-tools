@@ -197,6 +197,7 @@ class ProductEditFormType extends AbstractType {
 					->create('accessories', FormType::PRODUCTS, [
 						'required' => false,
 						'main_product' => $this->product,
+						'sortable' => true,
 					])
 					->addViewTransformer($this->removeDuplicatesTransformer)
 			)

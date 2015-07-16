@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 
-class ProductSellableRecalculator {
+class ProductSellingDeniedRecalculator {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -20,11 +20,11 @@ class ProductSellableRecalculator {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
-	public function calculateSellableForProduct(Product $product) {
+	public function calculateSellingDeniedForProduct(Product $product) {
 		$this->executeQuery($product);
 	}
 
-	public function calculateSellableForAll() {
+	public function calculateSellingDeniedForAll() {
 		$this->executeQuery();
 	}
 
@@ -34,13 +34,13 @@ class ProductSellableRecalculator {
 	private function executeQuery(Product $product = null) {
 		$qb = $this->em->createQueryBuilder()
 			->update(Product::class, 'p')
-			->set('p.calculatedSellable', '
+			->set('p.calculatedSellingDenied', '
 				CASE
 					WHEN p.usingStock = TRUE
 						AND p.stockQuantity <= 0
 						AND p.outOfStockAction = :outOfStockActionExcludeFromSale
-					THEN FALSE
-					ELSE p.sellable
+					THEN TRUE
+					ELSE p.sellingDenied
 				END
 				')
 			->setParameter('outOfStockActionExcludeFromSale', Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE);

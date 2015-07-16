@@ -77,6 +77,7 @@ class ProductType extends AbstractType {
 		$resolver->setDefaults([
 			'placeholder' => $this->translator->trans('Vyberte produkt'),
 			'enableRemove' => false,
+			'required' => true,
 		]);
 	}
 

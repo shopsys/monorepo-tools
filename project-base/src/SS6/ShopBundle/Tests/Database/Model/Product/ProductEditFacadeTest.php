@@ -17,15 +17,15 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 	 */
 	public function testHandleOutOfStockState(
 		$hidden,
-		$sellable,
+		$sellingDenied,
 		$stockQuantity,
 		$outOfStockAction,
 		$calculatedHidden,
-		$calculatedSellable
+		$calculatedSellingDenied
 	) {
 		$productData = new ProductData();
 		$productData->hidden = $hidden;
-		$productData->sellable = $sellable;
+		$productData->sellingDenied = $sellingDenied;
 		$productData->stockQuantity = $stockQuantity;
 		$productData->outOfStockAction = $outOfStockAction;
 		$productData->usingStock = true;
@@ -46,7 +46,7 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 		$productFromDb = $productEditFacade->getById($product->getId());
 
 		$this->assertSame($productFromDb->getCalculatedHidden(), $calculatedHidden);
-		$this->assertSame($calculatedSellable, $productFromDb->getCalculatedSellable());
+		$this->assertSame($calculatedSellingDenied, $productFromDb->getCalculatedSellingDenied());
 	}
 
 	/**
@@ -56,51 +56,51 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 		return [
 			[
 				'hidden' => true,
-				'sellable' => false,
+				'sellingDenied' => true,
 				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => true,
-				'calculatedSellable' => false,
+				'calculatedSellingDenied' => true,
 			],
 			[
 				'hidden' => false,
-				'sellable' => true,
+				'sellingDenied' => false,
 				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => false,
-				'calculatedSellable' => true,
+				'calculatedSellingDenied' => false,
 			],
 			[
 				'hidden' => true,
-				'sellable' => true,
+				'sellingDenied' => false,
 				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => true,
-				'calculatedSellable' => true,
+				'calculatedSellingDenied' => false,
 			],
 			[
 				'hidden' => false,
-				'sellable' => false,
+				'sellingDenied' => true,
 				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY,
 				'calculatedHidden' => false,
-				'calculatedSellable' => false,
+				'calculatedSellingDenied' => true,
 			],
 			[
 				'hidden' => false,
-				'sellable' => true,
+				'sellingDenied' => false,
 				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE,
 				'calculatedHidden' => false,
-				'calculatedSellable' => false,
+				'calculatedSellingDenied' => true,
 			],
 			[
 				'hidden' => false,
-				'sellable' => true,
+				'sellingDenied' => false,
 				'stockQuantity' => 0,
 				'outOfStockAction' => Product::OUT_OF_STOCK_ACTION_HIDE,
 				'calculatedHidden' => true,
-				'calculatedSellable' => true,
+				'calculatedSellingDenied' => false,
 			],
 		];
 	}
