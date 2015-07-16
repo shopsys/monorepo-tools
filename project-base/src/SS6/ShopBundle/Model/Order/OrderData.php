@@ -4,9 +4,6 @@ namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
