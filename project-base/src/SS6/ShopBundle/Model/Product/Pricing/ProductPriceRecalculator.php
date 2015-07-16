@@ -89,6 +89,7 @@ class ProductPriceRecalculator {
 			$this->recalculateProductPrices($product);
 		}
 		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->clearCache();
 	}
 
 	private function clearCache() {

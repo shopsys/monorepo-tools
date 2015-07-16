@@ -211,12 +211,8 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		$productPriceRecalculator = $this->get('ss6.shop.product.pricing.product_price_recalculator');
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-		$productAvailabilityRecalculator->runScheduledRecalculations(function () {
-			return true;
-		});
-		$productPriceRecalculator->runScheduledRecalculations(function () {
-			return true;
-		});
+		$productAvailabilityRecalculator->runImmediateRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
 		if ($runGlobalRecalculators) {
 			$productVisibilityFacade->refreshProductsVisibility();
 		}
@@ -228,6 +224,7 @@ class ProductDataFixture extends AbstractReferenceFixture {
 	private function clearResources(EntityManager $em) {
 		$this->runRecalculators();
 		$em->clear();
+		gc_collect_cycles();
 		echo "\nMemory usage: " . round(memory_get_usage() / 1024 / 1024, 1) . "MB\n";
 	}
 
