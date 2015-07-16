@@ -4,6 +4,15 @@
 {% block h1 %}{{ 'Editace domény'|trans }} - {{ domain.name }}{% endblock %}
 
 {% block main_content %}
+	{% if existsDomainIcon(domain.id) %}
+		<div class="form-line">
+			<label>
+				{{ 'Ikona'|trans }}:
+			</label>
+			{{ domainIcon(domain.id) }}
+		</div>
+	{% endif %}
+
 	<div class="row">
 
 		<div class="col-xs-12 col-lg-10">

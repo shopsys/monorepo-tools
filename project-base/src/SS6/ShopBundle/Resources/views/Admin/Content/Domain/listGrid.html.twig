@@ -13,7 +13,9 @@
 {% endblock %}
 
 {% block grid_value_cell_id_icon %}
-	{% if value is null %}
+	{% if existsDomainIcon(row.id) %}
+		{{ domainIcon(row.id) }}
+	{% else %}
 		<a href="{{ url('admin_domain_edit', { id: row.id }) }}">{{ 'Nahrát...'|trans }}</a>
 	{% endif %}
 {% endblock %}

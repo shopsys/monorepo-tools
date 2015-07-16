@@ -6,6 +6,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageService;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacade {
 
@@ -24,14 +25,28 @@ class DomainFacade {
 	 */
 	private $imageService;
 
+	/**
+	 * @var \Symfony\Component\Filesystem\Filesystem
+	 */
+	private $filesystem;
+
+	/**
+	 * @var string
+	 */
+	private $domainImagesDirectory;
+
 	public function __construct(
+		$domainImagesDirectory,
 		Domain $domain,
 		PricingSetting $pricingSetting,
-		ImageService $imageService
+		ImageService $imageService,
+		Filesystem $fileSystem
 	) {
+		$this->domainImagesDirectory = $domainImagesDirectory;
 		$this->domain = $domain;
 		$this->pricingSetting = $pricingSetting;
 		$this->imageService = $imageService;
+		$this->filesystem = $fileSystem;
 	}
 
 	/**
@@ -56,6 +71,14 @@ class DomainFacade {
 	 */
 	public function editIcon($domainId, $iconName) {
 		$this->imageService->editDomainIcon($domainId, $iconName);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return bool
+	 */
+	public function existsDomainIcon($domainId) {
+		return $this->filesystem->exists($this->domainImagesDirectory . DIRECTORY_SEPARATOR . $domainId . '.png');
 	}
 
 }

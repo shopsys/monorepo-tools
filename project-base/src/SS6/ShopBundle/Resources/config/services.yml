@@ -355,6 +355,11 @@ services:
   ss6.shop.domain.config.domains_config_loader:
     class: SS6\ShopBundle\Model\Domain\Config\DomainsConfigLoader
 
+  ss6.shop.domain.domain_facade:
+    class: SS6\ShopBundle\Model\Domain\DomainFacade
+    arguments:
+      - %ss6.domain_images_dir%
+
   ss6.shop.domain.domain_factory:
     class: SS6\ShopBundle\Model\Domain\DomainFactory
 
