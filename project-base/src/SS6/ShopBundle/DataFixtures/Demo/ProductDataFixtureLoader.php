@@ -17,7 +17,7 @@ use SS6\ShopBundle\Model\Product\ProductEditData;
 class ProductDataFixtureLoader {
 
 	/**
-	 * @var CsvReader
+	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
 	 */
 	private $csvReader;
 
@@ -32,12 +32,12 @@ class ProductDataFixtureLoader {
 	private $path;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
 
@@ -47,12 +47,12 @@ class ProductDataFixtureLoader {
 	private $parameters;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	private $categories;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private $flags;
 
@@ -73,10 +73,10 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @param array $vats
-	 * @param array $availabilities
-	 * @param array $categories
-	 * @param array $flags
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
+	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 */
 	public function injectReferences(array $vats, array $availabilities, array $categories, array $flags, array $brands) {
