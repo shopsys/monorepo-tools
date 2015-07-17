@@ -3,7 +3,8 @@
 namespace SS6\ShopBundle\Model\Domain;
 
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Image\ImageService;
+use SS6\ShopBundle\Model\Domain\DomainService;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,9 +22,9 @@ class DomainFacade {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageService
+	 * @var \SS6\ShopBundle\Model\Domain\DomainService
 	 */
-	private $imageService;
+	private $domainService;
 
 	/**
 	 * @var \Symfony\Component\Filesystem\Filesystem
@@ -35,18 +36,25 @@ class DomainFacade {
 	 */
 	private $domainImagesDirectory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
 	public function __construct(
 		$domainImagesDirectory,
 		Domain $domain,
 		PricingSetting $pricingSetting,
-		ImageService $imageService,
-		Filesystem $fileSystem
+		DomainService $domainService,
+		Filesystem $fileSystem,
+		FileUpload $fileUpload
 	) {
 		$this->domainImagesDirectory = $domainImagesDirectory;
 		$this->domain = $domain;
 		$this->pricingSetting = $pricingSetting;
-		$this->imageService = $imageService;
+		$this->domainService = $domainService;
 		$this->filesystem = $fileSystem;
+		$this->fileUpload = $fileUpload;
 	}
 
 	/**
@@ -70,7 +78,8 @@ class DomainFacade {
 	 * @param string $iconName
 	 */
 	public function editIcon($domainId, $iconName) {
-		$this->imageService->editDomainIcon($domainId, $iconName);
+		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($iconName);
+		$this->domainService->convertToDomainIconFormatAndSave($domainId, $temporaryFilepath, $this->domainImagesDirectory);
 	}
 
 	/**

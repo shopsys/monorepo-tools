@@ -472,11 +472,6 @@ services:
   ss6.shop.image.processing.image_generator_service:
     class: SS6\ShopBundle\Model\Image\Processing\ImageGeneratorService
 
-  ss6.shop.image.processing.image_processing_service:
-    class: SS6\ShopBundle\Model\Image\Processing\ImageProcessingService
-    arguments:
-      - %ss6.domain_images_dir%
-
   ss6.shop.image.processing.image_thumbnail_factory:
     class: SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
 

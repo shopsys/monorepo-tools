@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\DomainFacade;
-use SS6\ShopBundle\Model\Image\ImageService;
+use SS6\ShopBundle\Model\Domain\DomainService;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
@@ -34,15 +35,17 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 				[3, 1],
 			]);
 
-		$imageServiceMock = $this->getMock(ImageService::class, [], [], '', false);
+		$domainServiceMock = $this->getMock(DomainService::class, [], [], '', false);
 		$filesystemMock = $this->getMock(Filesystem::class, [], [], '', false);
+		$fileUploadMock = $this->getMock(FileUpload::class, [], [], '', false);
 
 		$domainFacade = new DomainFacade(
 			'domainImagesDirectory',
 			$domain,
 			$pricingSettingMock,
-			$imageServiceMock,
-			$filesystemMock
+			$domainServiceMock,
+			$filesystemMock,
+			$fileUploadMock
 		);
 		$domainConfigs = $domainFacade->getDomainConfigsByCurrency($currencyMock);
 
