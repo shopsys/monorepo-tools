@@ -273,10 +273,10 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		];
 
 		$brands = [
-			'apple' => $this->getReference(BrandDataFixture::APPLE),
-			'canon' => $this->getReference(BrandDataFixture::CANON),
-			'lg' => $this->getReference(BrandDataFixture::LG),
-			'philips' => $this->getReference(BrandDataFixture::PHILIPS),
+			'apple' => $persistentReferenceService->getReference(BrandDataFixture::APPLE),
+			'canon' => $persistentReferenceService->getReference(BrandDataFixture::CANON),
+			'lg' => $persistentReferenceService->getReference(BrandDataFixture::LG),
+			'philips' => $persistentReferenceService->getReference(BrandDataFixture::PHILIPS),
 		];
 
 		$loaderService->injectReferences($vats, $availabilities, $categories, $flags, $brands);
