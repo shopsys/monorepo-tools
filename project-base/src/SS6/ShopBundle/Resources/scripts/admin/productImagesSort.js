@@ -5,7 +5,8 @@
 
 	SS6.productImagesSort.init = function () {
 		$('#js-product-images').sortable({
-			handle: '.js-product-images-image-handle'
+			handle: '.js-product-images-image-handle',
+			update: SS6.formChangeInfo.showInfo
 		});
 	};
 
