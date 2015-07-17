@@ -4,9 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -47,19 +45,13 @@ class ImageExtension extends Twig_Extension {
 	 */
 	private $imageFacade;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Domain\DomainFacade
-	 */
-	private $domainFacade;
-
 	public function __construct(
 		$imageUrlPrefix,
 		ContainerInterface $container,
 		Domain $domain,
 		ImageLocator $imageLocator,
 		ImageConfig $imageConfig,
-		ImageFacade $imageFacade,
-		DomainFacade $domainFacade
+		ImageFacade $imageFacade
 	) {
 		$this->imageUrlPrefix = $imageUrlPrefix;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
@@ -67,7 +59,6 @@ class ImageExtension extends Twig_Extension {
 		$this->imageLocator = $imageLocator;
 		$this->imageConfig = $imageConfig;
 		$this->imageFacade = $imageFacade;
-		$this->domainFacade = $domainFacade;
 	}
 
 	/**
@@ -88,8 +79,6 @@ class ImageExtension extends Twig_Extension {
 			new Twig_SimpleFunction('imageUrl', [$this, 'getImageUrl']),
 			new Twig_SimpleFunction('image', [$this, 'getImageHtml'], ['is_safe' => ['html']]),
 			new Twig_SimpleFunction('getImages', [$this, 'getImages']),
-			new Twig_SimpleFunction('existsDomainIcon', [$this, 'existsDomainIcon']),
-			new Twig_SimpleFunction('domainIcon', [$this, 'getDomainIconHtml'], ['is_safe' => ['html']]),
 		];
 	}
 
@@ -158,32 +147,6 @@ class ImageExtension extends Twig_Extension {
 			'attr' => $htmlAttributes,
 			'imageCssClass' => $this->getImageCssClass($entityName, $attributtes['type'], $attributtes['size']),
 		]);
-	}
-
-	/**
-	 * @param int $domainId
-	 * @return string
-	 */
-	public function getDomainIconHtml($domainId) {
-		if ($this->existsDomainIcon($domainId)) {
-			$src = sprintf('/assets/admin/images/domains/%u.png', $domainId);
-		} else {
-			$src = sprintf('/assets/admin/images/domains/noicon.png', $domainId);
-		}
-
-		$domainName = $this->domain->getDomainConfigById($domainId)->getName();
-
-		return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
-			. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
-			. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>';
-	}
-
-	/**
-	 * @param int $domainId
-	 * @return bool
-	 */
-	public function existsDomainIcon($domainId) {
-		return $this->domainFacade->existsDomainIcon($domainId);
 	}
 
 	/**

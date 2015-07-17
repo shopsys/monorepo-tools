@@ -12,6 +12,8 @@ services:
 
   ss6.twig.domain_extension:
     class: SS6\ShopBundle\Twig\DomainExtension
+    arguments:
+     - %ss6.domain_images_dir_rel%
     tags:
       - { name: twig.extension }
 
