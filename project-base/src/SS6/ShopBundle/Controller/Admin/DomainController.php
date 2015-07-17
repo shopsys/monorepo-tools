@@ -129,18 +129,29 @@ class DomainController extends BaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$iconName = reset($form->getData()[DomainFormType::DOMAIN_ICON]);
-			$this->em->transactional(
-				function () use ($id, $iconName) {
-					$this->domainFacade->editIcon($id, $iconName);
+			try {
+				if (count($form->getData()[DomainFormType::DOMAIN_ICON]) !== 0) {
+					$iconName = reset($form->getData()[DomainFormType::DOMAIN_ICON]);
+					$this->em->transactional(
+						function () use ($id, $iconName) {
+							$this->domainFacade->editIcon($id, $iconName);
+						}
+					);
 				}
-			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upravena doména <strong>{{ name }}</strong>', [
-				'name' => $domain->getName(),
-			]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					'Bylo upravena doména <strong><a href="{{ url }}">{{ name }}</a></strong>', [
+						'name' => $domain->getName(),
+						'url' => $this->generateUrl('admin_domain_edit', ['id' => $domain->getId()]),
+				]);
 
-			return $this->redirect($this->generateUrl('admin_domain_list'));
+				return $this->redirect($this->generateUrl('admin_domain_list'));
+			} catch (\SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash('Typ souboru není podporován.');
+			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\MoveToFolderFailedException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash('Nahrání souboru selhalo, zkuste to, prosím, znovu.');
+			}
+
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
