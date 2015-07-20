@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle;
 
+use SS6\ShopBundle\DependencyInjection\Compiler\CustomTranslationsCompilerPass;
 use SS6\ShopBundle\DependencyInjection\Compiler\ValidatorBuilderCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -15,6 +16,7 @@ class SS6ShopBundle extends Bundle {
 		parent::build($container);
 
 		$container->addCompilerPass(new ValidatorBuilderCompilerPass());
+		$container->addCompilerPass(new CustomTranslationsCompilerPass());
 	}
 
 }
