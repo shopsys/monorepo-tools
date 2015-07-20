@@ -40,7 +40,7 @@ class TranslationGridFactory implements GridFactoryInterface {
 	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create() {
-		$dataSource = new ArrayDataSource($this->translationEditFacade->getAllTranslations(), 'id');
+		$dataSource = new ArrayDataSource($this->translationEditFacade->getAllTranslationsData(), 'id');
 
 		$grid = $this->gridFactory->create('translationList', $dataSource);
 

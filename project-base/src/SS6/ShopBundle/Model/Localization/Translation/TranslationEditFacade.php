@@ -2,13 +2,15 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation;
 
-use JMS\TranslationBundle\Model\Message;
-use JMS\TranslationBundle\Model\MessageCatalogue;
+use JMS\TranslationBundle\Model\Message as JmsMessage;
+use JMS\TranslationBundle\Model\MessageCatalogue as JmsMessageCatalogue;
 use SS6\ShopBundle\Component\Translation\PoDumper;
+use SS6\ShopBundle\Component\Translation\PoFileLoader;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Translation\MessageCatalogue;
 
 class TranslationEditFacade {
 
@@ -33,6 +35,11 @@ class TranslationEditFacade {
 	private $translator;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Translation\PoFileLoader
+	 */
+	private $poFileLoader;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Translation\PoDumper
 	 */
 	private $poDumper;
@@ -47,6 +54,7 @@ class TranslationEditFacade {
 		$cacheDir,
 		Translator $translator,
 		Filesystem $filesystem,
+		PoFileLoader $poFileLoader,
 		PoDumper $poDumper,
 		Localization $localization
 	) {
@@ -54,6 +62,7 @@ class TranslationEditFacade {
 		$this->cacheDir = $cacheDir;
 		$this->translator = $translator;
 		$this->filesystem = $filesystem;
+		$this->poFileLoader = $poFileLoader;
 		$this->poDumper = $poDumper;
 		$this->localization = $localization;
 	}
@@ -63,10 +72,14 @@ class TranslationEditFacade {
 	 * @param array $translation
 	 */
 	public function saveTranslation($translationId, $translation) {
-		foreach ($translation as $locale => $translationText) {
-			$catalogue = $this->translator->getCatalogue($locale);
-			$catalogue->add([$translationId => $translationText], Translator::DEFAULT_DOMAIN);
-			$this->dumpCatalogToFile($catalogue->all(Translator::DEFAULT_DOMAIN), Translator::DEFAULT_DOMAIN, $locale);
+		foreach ($this->getTranslatableLocales() as $locale) {
+			if (array_key_exists($locale, $translation)) {
+				$catalogue = $this->loadCatalogueFromFile(Translator::DEFAULT_DOMAIN, $locale);
+				if ($catalogue->has($translationId, Translator::DEFAULT_DOMAIN)) {
+					$catalogue->set($translationId, $translation[$locale], Translator::DEFAULT_DOMAIN);
+					$this->dumpCatalogToFile($catalogue, Translator::DEFAULT_DOMAIN, $locale);
+				}
+			}
 		}
 
 		$this->invalidateTranslationCache();
@@ -79,25 +92,52 @@ class TranslationEditFacade {
 	}
 
 	/**
-	 * @param array $catalogue
+	 * @param string $domain
+	 * @param string $locale
+	 * @return string
+	 */
+	private function getResourceFilepath($domain, $locale) {
+		return $this->rootDir
+			. '/../src/SS6/ShopBundle/Resources/translations/custom/'
+			. $domain . '.' . $locale . '.po';
+	}
+
+	/**
+	 * @param string $domain
+	 * @param string $locale
+	 * @return \Symfony\Component\Translation\MessageCatalogue
+	 */
+	private function loadCatalogueFromFile($domain, $locale) {
+		$filename = $this->getResourceFilepath($domain, $locale);
+
+		if (file_exists($filename)) {
+			$catalogue = $this->poFileLoader->loadIncludingEmpty($filename, $locale, $domain);
+		} else {
+			$catalogue = new MessageCatalogue($locale);
+		}
+
+		return $catalogue;
+	}
+
+	/**
+	 * @param \Symfony\Component\Translation\MessageCatalogue $catalogue
 	 * @param string $domain
 	 * @param string $locale
 	 */
-	private function dumpCatalogToFile($catalogue, $domain, $locale) {
-		$filepath = $this->rootDir
-			. '/../src/SS6/ShopBundle/Resources/translations/'
-			. $domain . '.' . $locale . '.po';
-
-		$messageCatalogue = new MessageCatalogue();
-		$messageCatalogue->setLocale($locale);
-		foreach ($catalogue as $key => $translation) {
-			$message = new Message($key, $domain);
-			$message->setLocaleString($translation);
-			$message->setNew(false);
-			$messageCatalogue->add($message);
+	private function dumpCatalogToFile(MessageCatalogue $catalogue, $domain, $locale) {
+		$jmsMessageCatalogue = new JmsMessageCatalogue();
+		$jmsMessageCatalogue->setLocale($locale);
+		foreach ($catalogue->all($domain) as $key => $translation) {
+			$jmsMessage = new JmsMessage($key, $domain);
+			$jmsMessage->setLocaleString($translation);
+			$jmsMessage->setNew(false);
+			$jmsMessageCatalogue->add($jmsMessage);
 		}
 
-		file_put_contents($filepath, $this->poDumper->dump($messageCatalogue, $domain));
+		file_put_contents(
+			$this->getResourceFilepath($domain, $locale),
+			$this->poDumper->dump($jmsMessageCatalogue, $domain)
+		);
 	}
 
 	/**
@@ -105,9 +145,15 @@ class TranslationEditFacade {
 	 * @return string[locale]
 	 */
 	public function getTranslationById($translationId) {
+		$translationsData = $this->getAllTranslationsData();
+
 		$translationData = [];
 		foreach ($this->getTranslatableLocales() as $locale) {
-			$translationData[$locale] = $this->translator->getCatalogue($locale)->get($translationId, Translator::DEFAULT_DOMAIN);
+			if (isset($translationsData[$translationId][$locale])) {
+				$translationData[$locale] = $translationsData[$translationId][$locale];
+			} else {
+				$translationData[$locale] = null;
+			}
 		}
 
 		return $translationData;
@@ -116,10 +162,10 @@ class TranslationEditFacade {
 	/**
 	 * @return string[translationId][locale]
 	 */
-	public function getAllTranslations() {
+	public function getAllTranslationsData() {
 		$catalogues = [];
 		foreach ($this->getTranslatableLocales() as $locale) {
-			$catalogues[$locale] = $this->translator->getCatalogue($locale);
+			$catalogues[$locale] = $this->loadCatalogueFromFile(Translator::DEFAULT_DOMAIN, $locale);
 		}
 
 		$data = [];
