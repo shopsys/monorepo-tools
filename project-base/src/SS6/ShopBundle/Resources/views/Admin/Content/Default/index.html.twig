@@ -7,7 +7,7 @@
 
 	<div class="form-line">
 		<div class="form-line__label">
-			Label
+			Label:
 		</div>
 
 		<div class="form-line__side">
@@ -17,14 +17,28 @@
 		</div>
 	</div>
 
-	<div class="form-line mb20">
+	<div class="form-line form-line--error mb20">
 		<div class="form-line__label">
-			Label
+			Label and error:
 		</div>
 
 		<div class="form-line__side">
 			<div class="form-line__item">
 				<input type="text" class="inp">
+			</div>
+
+			<div class="form-line__item form-line__item--right form-line__item--btn">
+				<button class="btn">
+					<span class="btn__icon">+</span>
+					Add one more
+				</button>
+			</div>
+			<div class="form-line__item form-line__item--error">
+				<i class="svg svg-circle-remove"></i>
+				<div class="in-message in-message--error in-message--pin">
+					Text of floated alert
+					<span class="in-message__close">x</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -39,18 +53,19 @@
 
 		<div class="form-line">
 			<div class="form-line__label">
-				Label
+				Label and compulsory:
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item form-line__item--text">
 					Field text
 				</div>
+				<div class="form-line__item form-line__item--compulsory">*</div>
 			</div>
 		</div>
 
 		<div class="form-line">
 			<div class="form-line__label">
-				Label
+				Label:
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item">
@@ -65,7 +80,7 @@
 
 		<div class="form-line">
 			<div class="form-line__label">
-				Label
+				Label:
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item">
@@ -79,7 +94,7 @@
 
 		<div class="form-line">
 			<div class="form-line__label">
-				Label
+				Label:
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item">
@@ -102,7 +117,7 @@
 
 		<div class="form-line">
 			<div class="form-line__label">
-				Label
+				Label:
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item form-line__item--alone">
@@ -113,6 +128,7 @@
 						</label>
 						<label class="form-choice-list__item">
 							<input type="checkbox" class="inp-choice form-choice-list__input">
+							<span class="form-choice-list__icon"><img src="http://placehold.it/120x36" alt=""></span>
 							no
 						</label>
 					</div>
@@ -121,6 +137,173 @@
 					<div class="in-message in-message--warning">
 						warning message
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label for date:
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<div class="inp__wrap">
+						<input type="date" class="inp inp--iconic">
+						<span class="inp__icon">
+							<i class="svg svg-calendar-1"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label tree:
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item form-line__item--btn form-line__item--right">
+					<button class="btn">
+						<i class="btn__icon svg svg-gear"></i>
+						Set something
+					</button>
+				</div>
+			</div>
+			<div class="form-line__line">
+				<div class="form-tree">
+					<div class="form-tree__title">
+						<span class="form-tree__title__image">
+							<img src="http://placehold.it/120x36" alt="">
+						</span>
+
+						<span class="form-tree__title__name">domain.name</span>
+
+						<span class="form-tree__title__arrow"></span>
+					</div>
+					<ul class="form-tree__content">
+						<li class="form-tree__item">
+							<div class="form-tree__item__click">
+								<span class="form-tree__item__name">Item name here</span>
+							</div>
+
+							<ul class="form-tree__item__sub">
+								<li class="form-tree__item">
+									<div class="form-tree__item__click">
+										<span class="form-tree__item__icon"></span>
+										<span class="form-tree__item__name">Item name here</span>
+									</div>
+								</li>
+								<li class="form-tree__item">
+									<div class="form-tree__item__click form-tree__item__click--active">
+										<span class="form-tree__item__icon"></span>
+										<span class="form-tree__item__name">Item name here</span>
+									</div>
+									<ul class="form-tree__item__sub">
+										<li class="form-tree__item">
+											<div class="form-tree__item__click">
+												<span class="form-tree__item__icon"></span>
+												<span class="form-tree__item__name">Item name here</span>
+											</div>
+										</li>
+										<li class="form-tree__item">
+											<div class="form-tree__item__click">
+												<span class="form-tree__item__icon"></span>
+												<span class="form-tree__item__name">Item name here</span>
+											</div>
+										</li>
+										<li class="form-tree__item">
+											<div class="form-tree__item__click">
+												<span class="form-tree__item__icon"></span>
+												<span class="form-tree__item__name">Item name here</span>
+											</div>
+										</li>
+									</ul>
+								</li>
+								<li class="form-tree__item">
+									<div class="form-tree__item__click">
+										<span class="form-tree__item__icon"></span>
+										<span class="form-tree__item__name">Item name here</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-line">
+			<div class="form-line__label">
+				Label tree:
+			</div>
+			<div class="form-line__side">
+				<div class="form-line__item form-line__item--btn form-line__item--right">
+					<button class="btn">
+						<i class="btn__icon svg svg-gear"></i>
+						Set something
+					</button>
+				</div>
+			</div>
+			<div class="form-line__line">
+				<div class="form-tree form-tree--open">
+					<div class="form-tree__title">
+						<span class="form-tree__title__image">
+							<img src="http://placehold.it/120x36" alt="">
+						</span>
+
+						<span class="form-tree__title__name">domain.name</span>
+
+						<span class="form-tree__title__arrow"></span>
+					</div>
+					<ul class="form-tree__content">
+						<li class="form-tree__item">
+							<div class="form-tree__item__click">
+								<span class="form-tree__item__name">Item name here</span>
+							</div>
+
+							<ul class="form-tree__item__sub">
+								<li class="form-tree__item">
+									<div class="form-tree__item__click">
+										<span class="form-tree__item__icon"></span>
+										<span class="form-tree__item__name">Item name here</span>
+									</div>
+								</li>
+								<li class="form-tree__item">
+									<div class="form-tree__item__click form-tree__item__click--active">
+										<span class="form-tree__item__icon"></span>
+										<span class="form-tree__item__name">Item name here</span>
+									</div>
+									<ul class="form-tree__item__sub">
+										<li class="form-tree__item">
+											<div class="form-tree__item__click">
+												<span class="form-tree__item__icon"></span>
+												<span class="form-tree__item__name">Item name here</span>
+											</div>
+										</li>
+										<li class="form-tree__item">
+											<div class="form-tree__item__click">
+												<span class="form-tree__item__icon"></span>
+												<span class="form-tree__item__name">Item name here</span>
+											</div>
+										</li>
+										<li class="form-tree__item">
+											<div class="form-tree__item__click">
+												<span class="form-tree__item__icon"></span>
+												<span class="form-tree__item__name">Item name here</span>
+											</div>
+										</li>
+									</ul>
+								</li>
+								<li class="form-tree__item">
+									<div class="form-tree__item__click">
+										<span class="form-tree__item__icon"></span>
+										<span class="form-tree__item__name">Item name here</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
