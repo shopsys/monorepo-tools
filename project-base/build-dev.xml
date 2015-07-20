@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-rebuild,dirs-structure,checks-diff" />
-	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,checks-diff" />
-	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,img-demo,checks-ci" />
-	<target name="build-demo-ci-diff" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,img-demo,checks-ci-diff" />
+	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-rebuild,dirs-structure,checks-diff" />
+	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-demo,dirs-structure,checks-diff" />
+	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-demo,dirs-structure,img-demo,checks-ci" />
+	<target name="build-demo-ci-diff" depends="clean,composer-dev,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-demo,dirs-structure,img-demo,checks-ci-diff" />
 
 	<target name="checks" depends="standards,tests" />
 	<target name="checks-diff" depends="standards-diff,tests" />
@@ -52,28 +52,6 @@
 			<arg value="--exclude-dir=admin/plugins" />
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--output-format=po" />
-
-			<arg value="en" />
-		</exec>
-	</target>
-
-	<target name="dump-translations-custom">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="translation:extract" />
-			<arg value="--bundle=SS6ShopBundle" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
-			<arg value="--exclude-dir=admin/plugins" />
-			<arg value="--exclude-dir=frontend/plugins" />
-			<arg value="--exclude-dir=admin" />
-			<arg value="--exclude-dir=Admin" />
-			<arg value="--keep" />
-			<arg value="--output-format=po" />
-			<arg value="--output-dir=${path.translations.custom}" />
 
 			<arg value="en" />
 		</exec>

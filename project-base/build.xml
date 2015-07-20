@@ -55,8 +55,8 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,grunt,db-rebuild,dirs-structure,warmup"/>
-	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,grunt,db-demo,dirs-structure,warmup"/>
+	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-rebuild,dirs-structure,warmup"/>
+	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-demo,dirs-structure,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 
@@ -174,6 +174,28 @@
 				<exclude name="/" />
 			</fileset>
 		</delete>
+	</target>
+
+	<target name="dump-translations-custom">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="translation:extract" />
+			<arg value="--bundle=SS6ShopBundle" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
+			<arg value="--exclude-dir=admin/plugins" />
+			<arg value="--exclude-dir=frontend/plugins" />
+			<arg value="--exclude-dir=admin" />
+			<arg value="--exclude-dir=Admin" />
+			<arg value="--keep" />
+			<arg value="--output-format=po" />
+			<arg value="--output-dir=${path.translations.custom}" />
+
+			<arg value="en" />
+		</exec>
 	</target>
 
 	<target name="grunt" depends="gruntfile">
