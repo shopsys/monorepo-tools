@@ -2,18 +2,16 @@
 
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
-class ProductDataFixture extends AbstractReferenceFixture {
+class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	const PRODUCTS = 40000;
 	const BATCH_SIZE = 1000;
@@ -237,48 +235,21 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		$this->batchStartMicrotime = microtime(true);
 		$this->productsByCatnum = [];
 
-		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
-		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-		$persistentReferenceService = $this->get('ss6.shop.data_fixture.persistent_reference_service');
-		/* @var $persistentReferenceService \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
+		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
+		/* @var $$productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		$referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
+		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
 
-		$vats = [
-			'high' => $persistentReferenceService->getReference(VatDataFixture::VAT_HIGH),
-			'low' => $persistentReferenceService->getReference(VatDataFixture::VAT_LOW),
-			'zero' => $persistentReferenceService->getReference(VatDataFixture::VAT_ZERO),
-		];
-		$availabilities = [
-			'in-stock' => $persistentReferenceService->getReference(AvailabilityDataFixture::IN_STOCK),
-			'out-of-stock' => $persistentReferenceService->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-			'on-request' => $persistentReferenceService->getReference(AvailabilityDataFixture::ON_REQUEST),
-		];
-		$categories = [
-			'1' => $persistentReferenceService->getReference(CategoryDataFixture::TV),
-			'2' => $persistentReferenceService->getReference(CategoryDataFixture::PHOTO),
-			'3' => $persistentReferenceService->getReference(CategoryDataFixture::PRINTERS),
-			'4' => $persistentReferenceService->getReference(CategoryDataFixture::PC),
-			'5' => $persistentReferenceService->getReference(CategoryDataFixture::PHONES),
-			'6' => $persistentReferenceService->getReference(CategoryDataFixture::COFFEE),
-			'7' => $persistentReferenceService->getReference(CategoryDataFixture::BOOKS),
-			'8' => $persistentReferenceService->getReference(CategoryDataFixture::TOYS),
-		];
+		$referenceInjector->loadReferences($productDataFixtureLoader, $this->referenceRepository);
 
-		$flags = [
-			'action' => $persistentReferenceService->getReference(FlagDataFixture::ACTION_PRODUCT),
-			'new' => $persistentReferenceService->getReference(FlagDataFixture::NEW_PRODUCT),
-			'top' => $persistentReferenceService->getReference(FlagDataFixture::TOP_PRODUCT),
-		];
+		return $productDataFixtureLoader->getProductsEditData();
+	}
 
-		$brands = [
-			'apple' => $persistentReferenceService->getReference(BrandDataFixture::APPLE),
-			'canon' => $persistentReferenceService->getReference(BrandDataFixture::CANON),
-			'lg' => $persistentReferenceService->getReference(BrandDataFixture::LG),
-			'philips' => $persistentReferenceService->getReference(BrandDataFixture::PHILIPS),
-		];
-
-		$loaderService->injectReferences($vats, $availabilities, $categories, $flags, $brands);
-
-		return $loaderService->getProductsEditData();
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return ProductDataFixtureReferenceInjector::getDependencies();
 	}
 
 }

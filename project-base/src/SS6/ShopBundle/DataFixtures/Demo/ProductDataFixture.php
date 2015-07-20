@@ -5,11 +5,8 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -20,45 +17,14 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
-		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
+		/* @var $productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		$referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
+		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
 
-		$vats = [
-			'high' => $this->getReference(VatDataFixture::VAT_HIGH),
-			'low' => $this->getReference(VatDataFixture::VAT_LOW),
-			'zero' => $this->getReference(VatDataFixture::VAT_ZERO),
-		];
-		$availabilities = [
-			'in-stock' => $this->getReference(AvailabilityDataFixture::IN_STOCK),
-			'out-of-stock' => $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-			'on-request' => $this->getReference(AvailabilityDataFixture::ON_REQUEST),
-		];
-		$categories = [
-			'1' => $this->getReference(CategoryDataFixture::TV),
-			'2' => $this->getReference(CategoryDataFixture::PHOTO),
-			'3' => $this->getReference(CategoryDataFixture::PRINTERS),
-			'4' => $this->getReference(CategoryDataFixture::PC),
-			'5' => $this->getReference(CategoryDataFixture::PHONES),
-			'6' => $this->getReference(CategoryDataFixture::COFFEE),
-			'7' => $this->getReference(CategoryDataFixture::BOOKS),
-			'8' => $this->getReference(CategoryDataFixture::TOYS),
-		];
+		$referenceInjector->loadReferences($productDataFixtureLoader, $this->referenceRepository);
 
-		$flags = [
-			'action' => $this->getReference(FlagDataFixture::ACTION_PRODUCT),
-			'new' => $this->getReference(FlagDataFixture::NEW_PRODUCT),
-			'top' => $this->getReference(FlagDataFixture::TOP_PRODUCT),
-		];
-
-		$brands = [
-			'apple' => $this->getReference(BrandDataFixture::APPLE),
-			'canon' => $this->getReference(BrandDataFixture::CANON),
-			'lg' => $this->getReference(BrandDataFixture::LG),
-			'philips' => $this->getReference(BrandDataFixture::PHILIPS),
-		];
-
-		$loaderService->injectReferences($vats, $availabilities, $categories, $flags, $brands);
-		$productsEditData = $loaderService->getProductsEditData();
+		$productsEditData = $productDataFixtureLoader->getProductsEditData();
 		$productNo = 1;
 		$productsByCatnum = [];
 		foreach ($productsEditData as $productEditData) {
@@ -114,12 +80,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return [
-			VatDataFixture::class,
-			AvailabilityDataFixture::class,
-			CategoryDataFixture::class,
-			BrandDataFixture::class,
-		];
+		return ProductDataFixtureReferenceInjector::getDependencies();
 	}
 
 }
