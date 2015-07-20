@@ -11,7 +11,7 @@ class DomainExtension extends \Twig_Extension {
 	/**
 	 * @var string
 	 */
-	private $domainImagesDirRelPath;
+	private $domainImagesUrlPrefix;
 
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -19,11 +19,11 @@ class DomainExtension extends \Twig_Extension {
 	private $container;
 
 	/**
-	 * @param string $domainImagesDirRelPath
+	 * @param string $domainImagesUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 */
-	public function __construct($domainImagesDirRelPath, ContainerInterface $container) {
-		$this->domainImagesDirRelPath = $domainImagesDirRelPath;
+	public function __construct($domainImagesUrlPrefix, ContainerInterface $container) {
+		$this->domainImagesUrlPrefix = $domainImagesUrlPrefix;
 		$this->container = $container;
 	}
 
@@ -79,7 +79,7 @@ class DomainExtension extends \Twig_Extension {
 	public function getDomainIconHtml($domainId) {
 		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
 		if ($this->existsDomainIcon($domainId)) {
-			$src = sprintf('%s/%u.png', $this->domainImagesDirRelPath, $domainId);
+			$src = sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId);
 
 			return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
 				. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
