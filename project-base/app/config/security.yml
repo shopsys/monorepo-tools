@@ -31,6 +31,9 @@ security:
       logout:
         path: admin_logout
         target: admin_login
+        csrf_parameter: _csrf_token
+        csrf_token_generator: form.csrf_provider
+        csrf_token_id: admin_logout
 
     frontend:
       pattern: ^/
@@ -54,6 +57,9 @@ security:
       logout:
         path: front_logout
         success_handler: ss6.shop.security.logout_handler
+        csrf_parameter: _csrf_token
+        csrf_token_generator: form.csrf_provider
+        csrf_token_id: frontend_logout
 
   access_control:
     # same pattern must be in routing_front.yml

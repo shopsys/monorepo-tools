@@ -22,7 +22,7 @@
 							</ul>
 						</li>
 						<li class="top-menu__item top-menu__item--main">
-							<a href="{{ url('front_logout') }}"><strong>{{ 'Odhlásit se'|trans }}</strong></a>
+							<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}"><strong>{{ 'Odhlásit se'|trans }}</strong></a>
 						</li>
 					{% else %}
 						<li class="top-menu__item top-menu__item--main">

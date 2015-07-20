@@ -8,6 +8,7 @@ use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProvider {
 
@@ -20,6 +21,11 @@ class UrlsProvider {
 	 * @var \Symfony\Component\Routing\RouterInterface
 	 */
 	private $router;
+
+	/**
+	 * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+	 */
+	private $tokenManager;
 
 	/**
 	 * @var string[]
@@ -83,6 +89,12 @@ class UrlsProvider {
 				// category ID 1 is special root category, therefore we use ID 2
 				return ['categoryId' => 2, 'domainId' => 1];
 
+			case 'admin_logout':
+				return ['_csrf_token' => '{admin_logout}'];
+
+			case 'front_logout':
+				return ['_csrf_token' => '{frontend_logout}'];
+
 			case 'admin_superadmin_icondetail':
 				return ['icon' => 'delete'];
 
@@ -128,10 +140,16 @@ class UrlsProvider {
 	/**
 	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
 	 * @param \Symfony\Component\Routing\RouterInterface $router
+	 * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
 	 */
-	public function __construct(PersistentReferenceService $persistentReferenceService, RouterInterface $router) {
+	public function __construct(
+		PersistentReferenceService $persistentReferenceService,
+		RouterInterface $router,
+		CsrfTokenManagerInterface $tokenManager
+	) {
 		$this->persistentReferenceService = $persistentReferenceService;
 		$this->router = $router;
+		$this->tokenManager = $tokenManager;
 	}
 
 	/**
@@ -170,6 +188,22 @@ class UrlsProvider {
 		}
 
 		return $urls;
+	}
+
+	/**
+	 * Method will called from outside in another Client with own container with another TokenManager
+	 *
+	 * @param string $url
+	 * @return string
+	 */
+	public function prepareUrl($url) {
+		return preg_replace_callback(
+			'@\%7B([^%]+)\%7D@',
+			function ($matches) {
+				return $this->tokenManager->getToken($matches[1])->getValue();
+			},
+			$url
+		);
 	}
 
 	/**
