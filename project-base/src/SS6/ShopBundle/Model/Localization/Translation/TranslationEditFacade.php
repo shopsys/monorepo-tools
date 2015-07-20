@@ -106,7 +106,7 @@ class TranslationEditFacade {
 	 */
 	public function getTranslationById($translationId) {
 		$translationData = [];
-		foreach ($this->localization->getAllLocales() as $locale) {
+		foreach ($this->getTranslatableLocales() as $locale) {
 			$translationData[$locale] = $this->translator->getCatalogue($locale)->get($translationId, Translator::DEFAULT_DOMAIN);
 		}
 
@@ -118,34 +118,34 @@ class TranslationEditFacade {
 	 */
 	public function getAllTranslations() {
 		$catalogues = [];
-		foreach ($this->localization->getAllLocales() as $locale) {
+		foreach ($this->getTranslatableLocales() as $locale) {
 			$catalogues[$locale] = $this->translator->getCatalogue($locale);
 		}
 
 		$data = [];
 
-		foreach ($catalogues[Translator::SOURCE_LOCALE]->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
-			$data[$id]['id'] = $id;
-			$data[$id][Translator::SOURCE_LOCALE] = $translation;
-			foreach ($catalogues as $locale => $catalogue) {
-				if ($locale !== Translator::SOURCE_LOCALE) {
-					$data[$id][$locale] = null;
-				}
-			}
-		}
-
 		foreach ($catalogues as $locale => $catalogue) {
-			if ($locale !== Translator::SOURCE_LOCALE) {
-				foreach ($catalogue->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
-					$data[$id]['id'] = $id;
-					if (!isset($data[$id][Translator::SOURCE_LOCALE])) {
-						$data[$id][Translator::SOURCE_LOCALE] = null;
-					}
-					$data[$id][$locale] = $translation;
-				}
+			foreach ($catalogue->all(Translator::DEFAULT_DOMAIN) as $id => $translation) {
+				$data[$id]['id'] = $id;
+				$data[$id][$locale] = $translation;
 			}
 		}
 
 		return $data;
 	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getTranslatableLocales() {
+		$translatableLocales = [];
+		foreach ($this->localization->getAllLocales() as $locale) {
+			if ($locale !== Translator::SOURCE_LOCALE) {
+				$translatableLocales[] = $locale;
+			}
+		}
+
+		return $translatableLocales;
+	}
+
 }

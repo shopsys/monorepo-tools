@@ -17,11 +17,6 @@ class TranslationGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
 	 */
 	private $translationEditFacade;
@@ -33,12 +28,10 @@ class TranslationGridFactory implements GridFactoryInterface {
 
 	public function __construct(
 		GridFactory $gridFactory,
-		Translator $translator,
 		TranslationEditFacade $translationEditFacade,
 		Localization $localization
 	) {
 		$this->gridFactory = $gridFactory;
-		$this->translator = $translator;
 		$this->translationEditFacade = $translationEditFacade;
 		$this->localization = $localization;
 	}
@@ -51,8 +44,8 @@ class TranslationGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('translationList', $dataSource);
 
-		$grid->addColumn('id', 'id', $this->translator->trans('Konstanta'));
-		foreach ($this->localization->getAllLocales() as $locale) {
+		$grid->addColumn('id', 'id', $this->localization->getLanguageName(Translator::SOURCE_LOCALE));
+		foreach ($this->translationEditFacade->getTranslatableLocales() as $locale) {
 			$grid->addColumn(
 				$locale,
 				$locale,
