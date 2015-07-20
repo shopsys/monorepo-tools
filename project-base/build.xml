@@ -40,6 +40,7 @@
 	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.test.database.dump" value="${path.app}/cache/test-db-dump.sql"/>
+	<property name="path.translations.custom" value="${path.root}/src/SS6/ShopBundle/Resources/translations/custom"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	<property name="path.web" value="${path.root}/web"/>
 	<property name="path.web.scripts" value="${path.web}/assets/scripts"/>
