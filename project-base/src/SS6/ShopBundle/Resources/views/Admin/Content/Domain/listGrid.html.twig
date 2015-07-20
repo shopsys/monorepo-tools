@@ -13,9 +13,8 @@
 {% endblock %}
 
 {% block grid_value_cell_id_icon %}
-	{% if existsDomainIcon(row.id) %}
-		{{ domainIcon(row.id) }}
-	{% else %}
-		<a href="{{ url('admin_domain_edit', { id: row.id }) }}">{{ 'Nahrát...'|trans }}</a>
-	{% endif %}
+	{{ domainIcon(row.id) }}
+	<a href="{{ url('admin_domain_edit', { id: row.id }) }}">
+		<i class="fa fa-pencil" title="{{ 'Editovat'|trans }}"></i>
+	</a>
 {% endblock %}

@@ -106,7 +106,6 @@ class DomainController extends BaseController {
 		$grid->addColumn('name', 'name', 'Název domény');
 		$grid->addColumn('locale', 'locale', 'Jazyk');
 		$grid->addColumn('icon', 'icon', 'Ikona');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_domain_edit', ['id' => 'id']);
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Domain/listGrid.html.twig');
 

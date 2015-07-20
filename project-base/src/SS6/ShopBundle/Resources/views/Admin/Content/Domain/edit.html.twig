@@ -1,17 +1,15 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Editace domény'|trans }} - {{ domain.name }}{% endblock %}
-{% block h1 %}{{ 'Editace domény'|trans }} - {{ domain.name }}{% endblock %}
+{% block title %}- {{ 'Editace ikony k doméně'|trans }} - {{ domain.name }}{% endblock %}
+{% block h1 %}{{ 'Editace ikony k doméně'|trans }} - {{ domain.name }}{% endblock %}
 
 {% block main_content %}
-	{% if existsDomainIcon(domain.id) %}
-		<div class="form-line">
-			<label>
-				{{ 'Ikona'|trans }}:
-			</label>
-			{{ domainIcon(domain.id) }}
-		</div>
-	{% endif %}
+	<div class="form-line">
+		<label>
+			{{ 'Současná ikona'|trans }}:
+		</label>
+		{{ domainIcon(domain.id) }}
+	</div>
 
 	<div class="row">
 

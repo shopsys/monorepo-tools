@@ -34,7 +34,6 @@ class DomainExtension extends \Twig_Extension {
 		return [
 			new Twig_SimpleFunction('getDomain', [$this, 'getDomain']),
 			new Twig_SimpleFunction('getDomainName', [$this, 'getDomainNameById']),
-			new Twig_SimpleFunction('existsDomainIcon', [$this, 'existsDomainIcon']),
 			new Twig_SimpleFunction('domainIcon', [$this, 'getDomainIconHtml'], ['is_safe' => ['html']]),
 		];
 	}
@@ -78,7 +77,7 @@ class DomainExtension extends \Twig_Extension {
 	 */
 	public function getDomainIconHtml($domainId) {
 		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
-		if ($this->existsDomainIcon($domainId)) {
+		if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
 			$src = sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId);
 
 			return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
@@ -89,13 +88,5 @@ class DomainExtension extends \Twig_Extension {
 				class="text-in-circle text-in-circle--filled text-in-circle--filled__' . $domainId . '"
 				title="' . htmlspecialchars($domainName, ENT_QUOTES) . '">' . $domainId . '</span>';
 		}
-	}
-
-	/**
-	 * @param int $domainId
-	 * @return bool
-	 */
-	public function existsDomainIcon($domainId) {
-		return $this->getDomainFacade()->existsDomainIcon($domainId);
 	}
 }
