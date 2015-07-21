@@ -29,7 +29,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
 		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
-		$url = $urlsProvider->prepareUrl($url);
+		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		$this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
 
@@ -69,7 +69,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged) {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
 		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
-		$url = $urlsProvider->prepareUrl($url);
+		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		if ($asLogged) {
 			$this->getClient(false, 'no-reply@netdevelo.cz', 'user123')->request('GET', $url);

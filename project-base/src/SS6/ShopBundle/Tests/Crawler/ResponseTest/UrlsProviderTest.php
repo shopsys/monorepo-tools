@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -22,6 +23,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceServiceMock = $this->getMock(PersistentReferenceService::class, [], [], '', false);
 		$tokenManagerMock = $this->getMockForAbstractClass(CsrfTokenManagerInterface::class);
+		$routeCsrfProtector = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
 		$routerMock = $this->getMockBuilder(CurrentDomainRouter::class)
 			->setMethods(['getRouteCollection', 'generate'])
 			->disableOriginalConstructor()
@@ -36,7 +38,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			}
 		});
 
-		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock);
+		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock, $routeCsrfProtector);
 
 		$reflectionClass = new ReflectionClass(UrlsProvider::class);
 		$reflectionProperty = $reflectionClass->getProperty('frontAsLoggedRouteNames');
@@ -69,6 +71,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceServiceMock = $this->getMock(PersistentReferenceService::class, [], [], '', false);
 		$tokenManagerMock = $this->getMockForAbstractClass(CsrfTokenManagerInterface::class);
+		$routeCsrfProtector = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
 		$routerMock = $this->getMockBuilder(CurrentDomainRouter::class)
 			->setMethods(['getRouteCollection', 'generate'])
 			->disableOriginalConstructor()
@@ -80,7 +83,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			}
 		});
 
-		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock);
+		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock, $routeCsrfProtector);
 
 		$providerData = $urlsProvider->getAdminTestableUrlsProviderData();
 
@@ -99,6 +102,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceServiceMock = $this->getMock(PersistentReferenceService::class, [], [], '', false);
 		$tokenManagerMock = $this->getMockForAbstractClass(CsrfTokenManagerInterface::class);
+		$routeCsrfProtector = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
 		$routerMock = $this->getMockBuilder(CurrentDomainRouter::class)
 			->setMethods(['getRouteCollection', 'generate'])
 			->disableOriginalConstructor()
@@ -110,7 +114,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			}
 		});
 
-		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock);
+		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock, $routeCsrfProtector);
 		$reflectionClass = new ReflectionClass(UrlsProvider::class);
 		$reflectionProperty = $reflectionClass->getProperty('expectedStatusCodesByRouteName');
 		$reflectionProperty->setAccessible(true);
@@ -131,6 +135,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceServiceMock = $this->getMock(PersistentReferenceService::class, [], [], '', false);
 		$tokenManagerMock = $this->getMockForAbstractClass(CsrfTokenManagerInterface::class);
+		$routeCsrfProtector = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
 		$routerMock = $this->getMockBuilder(CurrentDomainRouter::class)
 			->setMethods(['getRouteCollection', 'generate'])
 			->disableOriginalConstructor()
@@ -142,7 +147,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			}
 		});
 
-		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock);
+		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock, $routeCsrfProtector);
 		$reflectionClass = new ReflectionClass(UrlsProvider::class);
 		$reflectionProperty = $reflectionClass->getProperty('expectedStatusCodesByRouteName');
 		$reflectionProperty->setAccessible(true);
@@ -169,6 +174,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceServiceMock = $this->getMock(PersistentReferenceService::class, [], [], '', false);
 		$tokenManagerMock = $this->getMockForAbstractClass(CsrfTokenManagerInterface::class);
+		$routeCsrfProtector = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
 		$routerMock = $this->getMockBuilder(CurrentDomainRouter::class)
 			->setMethods(['getRouteCollection', 'generate'])
 			->disableOriginalConstructor()
@@ -183,7 +189,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			}
 		});
 
-		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock);
+		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock, $routeCsrfProtector);
 
 		$reflectionClass = new ReflectionClass(UrlsProvider::class);
 		$reflectionProperty = $reflectionClass->getProperty('ignoredRouteNames');
@@ -211,6 +217,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceServiceMock = $this->getMock(PersistentReferenceService::class, [], [], '', false);
 		$tokenManagerMock = $this->getMockForAbstractClass(CsrfTokenManagerInterface::class);
+		$routeCsrfProtector = $this->getMock(RouteCsrfProtector::class, [], [], '', false);
 		$routerMock = $this->getMockBuilder(CurrentDomainRouter::class)
 			->setMethods(['getRouteCollection', 'generate'])
 			->disableOriginalConstructor()
@@ -224,7 +231,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			}
 		});
 
-		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock);
+		$urlsProvider = new UrlsProvider($persistentReferenceServiceMock, $routerMock, $tokenManagerMock, $routeCsrfProtector);
 		$urlsProvider->getFrontTestableUrlsProviderData();
 	}
 }

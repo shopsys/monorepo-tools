@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Grid;
 
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\Grid;
 use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService;
@@ -22,6 +23,11 @@ class GridFactory {
 	private $router;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 */
+	private $routeCsrfProtector;
+
+	/**
 	 * @var \Twig_Environment
 	 */
 	private $twig;
@@ -31,19 +37,16 @@ class GridFactory {
 	 */
 	private $gridOrderingService;
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-	 * @param \Symfony\Component\Routing\Router $router
-	 * @param \Twig_Environment $twig
-	 */
 	public function __construct(
 		RequestStack $requestStack,
 		Router $router,
+		RouteCsrfProtector $routeCsrfProtector,
 		Twig_Environment $twig,
 		GridOrderingService $gridOrderingService
 	) {
 		$this->requestStack = $requestStack;
 		$this->router = $router;
+		$this->routeCsrfProtector = $routeCsrfProtector;
 		$this->twig = $twig;
 		$this->gridOrderingService = $gridOrderingService;
 	}
@@ -54,6 +57,14 @@ class GridFactory {
 	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
 	public function create($gridId, DataSourceInterface $dataSource) {
-		return new Grid($gridId, $dataSource, $this->requestStack, $this->router, $this->twig, $this->gridOrderingService);
+		return new Grid(
+			$gridId,
+			$dataSource,
+			$this->requestStack,
+			$this->router,
+			$this->routeCsrfProtector,
+			$this->twig,
+			$this->gridOrderingService
+		);
 	}
 }

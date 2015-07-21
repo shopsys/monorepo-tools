@@ -2,6 +2,11 @@
 	{{ message|nl2br }}
 
 	<form action="{{ url(route, {id: entityId}) }}" method="get" class="mt-1 js-confirm-delete-form">
+		<input
+			type="hidden"
+			name="{{ constant('SS6\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER') }}"
+			value="{{ routeCsrfToken }}"
+		/>
 		<select name="newId" class="js-confirm-delete-select">
 			<option value="">-- {{ 'Zvolte novou hodnotu'|trans }} --</option>
 			{% for newEntityId, name in listOfNewEntities %}

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Grid;
 
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Model\Grid\ActionColumn;
 use SS6\ShopBundle\Model\Grid\Column;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
@@ -107,6 +108,11 @@ class Grid {
 	private $router;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 */
+	private $routeCsrfProtector;
+
+	/**
 	 * @var \Twig_Environment
 	 */
 	private $twig;
@@ -161,6 +167,7 @@ class Grid {
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 * @param \Symfony\Component\Routing\Router $router
+	 * @param \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
 	 * @param \Twig_Environment $twig
 	 * @param \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingService $gridOrderingService
 	 */
@@ -169,6 +176,7 @@ class Grid {
 		DataSourceInterface $dataSource,
 		RequestStack $requestStack,
 		Router $router,
+		RouteCsrfProtector $routeCsrfProtector,
 		Twig_Environment $twig,
 		GridOrderingService $gridOrderingService
 	) {
@@ -181,6 +189,7 @@ class Grid {
 		$this->dataSource = $dataSource;
 		$this->requestStack = $requestStack;
 		$this->router = $router;
+		$this->routeCsrfProtector = $routeCsrfProtector;
 		$this->twig = $twig;
 		$this->gridOrderingService = $gridOrderingService;
 
@@ -226,6 +235,7 @@ class Grid {
 	) {
 		$actionColumn = new ActionColumn(
 			$this->router,
+			$this->routeCsrfProtector,
 			$type,
 			$name,
 			$route,
