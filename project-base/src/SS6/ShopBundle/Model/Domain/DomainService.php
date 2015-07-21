@@ -42,7 +42,7 @@ class DomainService {
 			. ImageProcessingService::EXTENSION_PNG;
 
 		$this->imageProcessingService->createInterventionImage($filepath)
-			->resize(self::DOMAIN_ICON_WIDTH, self::DOMAIN_ICON_HEIGHT, function (Constraint $constraint) {
+			->fit(self::DOMAIN_ICON_WIDTH, self::DOMAIN_ICON_HEIGHT, function (Constraint $constraint) {
 				$constraint->aspectRatio();
 				$constraint->upsize();
 			})
