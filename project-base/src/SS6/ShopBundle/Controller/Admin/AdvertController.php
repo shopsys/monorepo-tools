@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
@@ -220,6 +221,7 @@ class AdvertController extends BaseController {
 
 	/**
 	 * @Route("/advert/delete/{id}", requirements={"id" = "\d+"})
+	 * @CsrfProtection
 	 * @param int $id
 	 */
 	public function deleteAction($id) {

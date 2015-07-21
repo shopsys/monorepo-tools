@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit;
@@ -48,6 +49,7 @@ class TopProductController extends BaseController {
 
 	/**
 	 * @Route("/product/top-product/delete/{id}", requirements={"id" = "\d+"})
+	 * @CsrfProtection
 	 * @param int $id
 	 */
 	public function deleteAction($id) {
