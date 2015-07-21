@@ -22,44 +22,29 @@ class PricingGroupController extends BaseController {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
-	 */
-	private $paymentEditFormTypeFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
-	 */
-	private $breadcrumb;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
-	 */
-	private $paymentDetailFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Grid\PaymentGridFactory
-	 */
-	private $paymentGridFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditDataFactory
-	 */
-	private $paymentEditDataFactory;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
-	 */
-	private $paymentEditFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
-	 */
-	private $currencyFacade;
-
-	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 */
+	private $pricingGroupSettingFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 */
+	private $pricingGroupFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
+	 */
+	private $pricingGroupInlineEdit;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
+	 */
+	private $confirmDeleteResponseFactory;
 
 	public function __construct(
 		Translator $translator,
