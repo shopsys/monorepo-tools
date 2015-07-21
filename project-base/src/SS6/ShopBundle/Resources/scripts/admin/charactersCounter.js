@@ -5,12 +5,12 @@
 
 	SS6.charactersCounter.Counter = function ($counter) {
 		var self = this;
-		var $input = $counter.find('.js-characters-counter-input input, textarea.js-characters-counter-input');
+		var $input = $counter.find('.js-characters-counter-input input, input.js-characters-counter-input, textarea.js-characters-counter-input');
 		var $info = $counter.find('.js-characters-counter-info');
 		var recommendedLength = $info.data('recommended-length');
 
 		this.init = function() {
-			$input.keyup(self.countCharacters);
+			$input.bind('keyup placeholderChange', self.countCharacters);
 			self.countCharacters();
 		};
 

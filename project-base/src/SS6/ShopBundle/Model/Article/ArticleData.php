@@ -22,6 +22,16 @@ class ArticleData {
 	public $text;
 
 	/**
+	 * @var string|null
+	 */
+	public $seoTitle;
+
+	/**
+	 * @var string|null
+	 */
+	public $seoMetaDescription;
+
+	/**
 	 * @var int|null
 	 */
 	public $domainId;
@@ -31,15 +41,7 @@ class ArticleData {
 	 */
 	public $urls;
 
-	/**
-	 * @param string|null $name
-	 * @param string|null $text
-	 * @param int|null $domainId
-	 */
-	public function __construct($name = null, $text = null, $domainId = null) {
-		$this->name = $name;
-		$this->text = $text;
-		$this->domainId = $domainId;
+	public function __construct() {
 		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
@@ -49,6 +51,8 @@ class ArticleData {
 	public function setFromEntity(Article $article) {
 		$this->name = $article->getName();
 		$this->text = $article->getText();
+		$this->seoTitle = $article->getSeoTitle();
+		$this->seoMetaDescription = $article->getSeoMetaDescription();
 		$this->domainId = $article->getDomainId();
 	}
 }
