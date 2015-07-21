@@ -10,7 +10,7 @@
 
 {% block grid_value_cell_id_icon %}
 	{{ domainIcon(row.id) }}
-	<a href="{{ url('admin_domain_edit', { id: row.id }) }}">
+	<a href="#" data-url="{{ url('admin_domain_edit', { id: row.id }) }}">
 		<i class="fa fa-pencil js-edit-domain-icon" title="{{ 'Editovat'|trans }}"></i>
 	</a>
 {% endblock %}

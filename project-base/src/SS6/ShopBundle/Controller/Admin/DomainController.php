@@ -115,7 +115,7 @@ class DomainController extends BaseController {
 	}
 
 	/**
-	 * @Route("/domain/edit/{id}", requirements={"id" = "\d+"})
+	 * @Route("/domain/edit/{id}", requirements={"id" = "\d+"}, condition="request.isXmlHttpRequest()")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
 	 */
