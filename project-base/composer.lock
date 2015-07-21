@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "175cfdef05a9a7dbad27289a243681ac",
+    "hash": "a505d53d22c94caaff4b0e661e49eafe",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -251,7 +251,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/e19d2c64ede3454c2f743a33e20f9716e05d408d",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/2fe269695aaeb11602ddaea0d25679c7c40e6673",
                 "reference": "55da501",
                 "shasum": ""
             },
@@ -1816,17 +1816,17 @@
         },
         {
             "name": "jms/translation-bundle",
-            "version": "dev-master",
+            "version": "dev-fix-external-translations",
             "target-dir": "JMS/TranslationBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "8eff567"
+                "url": "https://github.com/sustmi/JMSTranslationBundle.git",
+                "reference": "527da12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/8eff56746b73762dfe06414faf0fb609bfe51754",
-                "reference": "8eff567",
+                "url": "https://api.github.com/repos/sustmi/JMSTranslationBundle/zipball/527da1230ed11a85f62dda5a0c61e7f58c15924e",
+                "reference": "527da12",
                 "shasum": ""
             },
             "require": {
@@ -1862,7 +1862,6 @@
                     "JMS\\TranslationBundle": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache2"
             ],
@@ -1884,7 +1883,10 @@
                 "ui",
                 "webinterface"
             ],
-            "time": "2014-10-29 13:23:47"
+            "support": {
+                "source": "https://github.com/sustmi/JMSTranslationBundle/tree/fix-external-translations"
+            },
+            "time": "2015-07-21 14:02:05"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -4495,7 +4497,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/3bcddd38cf840d9d2213a7b94266729edeac30d8",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ec9ecce26d10c31170fedd89dde538269ca033a1",
                 "reference": "3234289",
                 "shasum": ""
             },
@@ -4775,7 +4777,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/1b693fb455201cacf595163c92bfb1adfa2158d8",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/4bfd21a02ffaa860a9d4ebec06071a8ad7085dd4",
                 "reference": "41365ce",
                 "shasum": ""
             },
