@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Model\Domain\DomainFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Templating\Helper\CoreAssetsHelper;
 use Twig_SimpleFunction;
 
 class DomainExtension extends \Twig_Extension {
@@ -57,6 +58,15 @@ class DomainExtension extends \Twig_Extension {
 	}
 
 	/**
+	 * Service "templating.helper.assets" cannot be created in CLI, because service "request" is inactive in CLI
+	 *
+	 * @return \Symfony\Component\Templating\Helper\CoreAssetsHelper
+	 */
+	private function getAssetsHelper() {
+		return $this->container->get(CoreAssetsHelper::class);
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -78,7 +88,7 @@ class DomainExtension extends \Twig_Extension {
 	public function getDomainIconHtml($domainId) {
 		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
 		if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
-			$src = sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId);
+			$src = $this->getAssetsHelper()->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
 
 			return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
 				. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
