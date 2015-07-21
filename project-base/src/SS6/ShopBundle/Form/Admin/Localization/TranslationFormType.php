@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
 class TranslationFormType extends AbstractType implements DataTransformerInterface {
 
@@ -58,7 +59,10 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 		foreach ($this->locales as $locale) {
 			$builder->add(
 				$builder
-					->create($locale, FormType::TEXTAREA, ['required' => false])
+					->create($locale, FormType::TEXTAREA, [
+						'required' => true,
+						'constraints' => new Constraints\NotBlank(['message' => 'Vyplňte prosím překlad']),
+					])
 					->addModelTransformer($this)
 			);
 		}
