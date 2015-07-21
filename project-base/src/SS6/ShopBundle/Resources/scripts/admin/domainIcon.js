@@ -30,7 +30,7 @@
 
 	SS6.domainIcon.uploadIcon = function($form) {
 		var $iconErrorListContainer = $('#js-domain-icon-errors');
-		var $spinner = $('.js-domain-icon-spinner');
+		var $spinner = $('.js-overlay-spinner');
 		$iconErrorListContainer.hide();
 		$spinner.show();
 		$.ajax({
