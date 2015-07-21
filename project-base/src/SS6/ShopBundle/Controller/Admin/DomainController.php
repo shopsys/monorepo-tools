@@ -8,12 +8,12 @@ use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends BaseController {
@@ -123,7 +123,14 @@ class DomainController extends BaseController {
 		$id = (int)$id;
 		$domain = $this->domain->getDomainConfigById($id);
 
-		$form = $this->createForm(new DomainFormType());
+		$form = $this->createForm(
+			new DomainFormType(),
+			null,
+			[
+				'method' => 'POST',
+				'action' => $this->generateUrl('admin_domain_edit', ['id' => $id]),
+			]
+		);
 
 		$form->handleRequest($request);
 
@@ -139,12 +146,9 @@ class DomainController extends BaseController {
 				}
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Bylo upravena doména <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-						'name' => $domain->getName(),
-						'url' => $this->generateUrl('admin_domain_edit', ['id' => $domain->getId()]),
-				]);
+					'Byla upravena doména <strong>{{ name }}</strong>', ['name' => $domain->getName()]);
 
-				return $this->redirect($this->generateUrl('admin_domain_list'));
+				return new JsonResponse(['result' => 'valid']);
 			} catch (\SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Typ souboru není podporován.');
 			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\MoveToFolderFailedException $ex) {
@@ -154,16 +158,31 @@ class DomainController extends BaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			return new JsonResponse(['result' => 'invalid', 'errors' => $this->getAllErrorsAsArray($form)]);
 		}
-
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace domény - ') . $domain->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Domain/edit.html.twig', [
 			'form' => $form->createView(),
 			'domain' => $domain,
 		]);
 
+	}
+
+	/**
+	 * @param \Symfony\Component\Form\Form $form
+	 * @return string[]
+	 */
+	private function getAllErrorsAsArray($form) {
+		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.admin');
+		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
+		$errors = $flashMessageBag->getErrorMessages();
+
+		foreach ($form->getErrors(true) as $error) {
+			/* @var $error \Symfony\Component\Form\FormError */
+			$errors[] = $error->getMessage();
+		}
+
+		return $errors;
 	}
 
 	private function loadData() {

@@ -1,34 +1,20 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
-
-{% block title %}- {{ 'Editace ikony k doméně'|trans }} - {{ domain.name }}{% endblock %}
-{% block h1 %}{{ 'Editace ikony k doméně'|trans }} - {{ domain.name }}{% endblock %}
-
-{% block main_content %}
-	<div class="form-line">
-		<label>
-			{{ 'Současná ikona'|trans }}:
-		</label>
-		{{ domainIcon(domain.id) }}
+<div class="row text-left">
+	<div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors display-none">
+		<ul class="in-message__list"></ul>
 	</div>
+	<label>
+		{{ 'Současná ikona'|trans }}:
+	</label>
+	{{ domainIcon(domain.id) }}
 
-	<div class="row">
-
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
-
-				<div class="wrap-group">
-					{{ form_row(form.icon, { label: 'Nahrát ikonu'|trans}) }}
-				</div>
-
-				<div class="window-fixed-bar">
-					<div class="window-fixed-bar__buttons">
-						<a href="{{ url('admin_domain_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-						{{ form_save(domain|default(null), form) }}
-					</div>
-				</div>
-			{{ form_end(form) }}
+	{{ form_start(form) }}
+		<div class="wrap-group">
+			{{ form_row(form.icon, { label: 'Nahrát ikonu'|trans}) }}
 		</div>
 
-	</div>
-{% endblock %}
+		{{ form_save(domain|default(null), form) }}
+	{{ form_end(form) }}
+</div>
+<div class="js-domain-icon-spinner display-none text-center">
+	<i class="fa fa-spinner fa-spin fa-5x position-top-150" title="{{ 'Načítám'|trans }}"></i>
+</div>

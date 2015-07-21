@@ -4,10 +4,6 @@
 	{{ 'Doposud nejsou žádné domény.'|trans }}
 {% endblock %}
 
-{% block grid_value_cell_id_name %}
-	<a href="{{ url('admin_domain_edit', { id: row.id }) }}">{{ value }}</a>
-{% endblock %}
-
 {% block grid_value_cell_id_locale %}
 	{{ localeFlag(value) }}
 {% endblock %}
@@ -15,6 +11,6 @@
 {% block grid_value_cell_id_icon %}
 	{{ domainIcon(row.id) }}
 	<a href="{{ url('admin_domain_edit', { id: row.id }) }}">
-		<i class="fa fa-pencil" title="{{ 'Editovat'|trans }}"></i>
+		<i class="fa fa-pencil js-edit-domain-icon" title="{{ 'Editovat'|trans }}"></i>
 	</a>
 {% endblock %}
