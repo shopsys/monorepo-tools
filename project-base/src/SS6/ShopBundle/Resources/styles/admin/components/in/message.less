@@ -11,7 +11,7 @@ Alert, info, success atc messages box
 
 .in-message {
 	display: inline-block;
-	padding: 3px 6px;
+	padding: 6px 9px;
 
 	font-style: italic;
 	font-size: 14px;
@@ -24,27 +24,32 @@ Alert, info, success atc messages box
 
 	&__close {
 		position: absolute;
-		top: 3px;
-		right: 6px;
+		top: 5px;
+		right: 5px;
+		padding: 5px;
+		display: inline-block;
+		vertical-align: middle;
 
-		color: @color-base;
+		color: #66757B;
 		cursor: pointer;
 		font-style: normal;
+		font-size: 14px;
+		text-align: center;
 	}
 
 	&--alert, &--error {
-		color: @color-message-alert;
-		background: lighten(@color-message-alert, 35%);
+		color: @color-message-alert-text;
+		background: @color-message-alert;
 	}
 
 	&--warning {
-		color: @color-message-warning;
-		background: lighten(@color-message-warning, 35%);
+		color: @color-message-warning-text;
+		background: @color-message-warning;
 	}
 
 	&--info {
-		color: @color-message-info;
-		background: lighten(@color-message-info, 35%);
+		color: @color-message-info-text;
+		background: @color-message-info;
 	}
 
 	&--pin {
@@ -54,9 +59,10 @@ Alert, info, success atc messages box
 		margin-top: 10px;
 		width: 230px;
 		z-index: 4px;
+		padding: 10px;
 
 		text-align: left;
-		border: 1px solid @color-message-alert;
+		border: 1px solid darken(@color-message-alert, 15%);
 
 		&:after {
 			display: block;
@@ -67,9 +73,9 @@ Alert, info, success atc messages box
 			height: 8px;
 			content: '';
 
-			border-top: 1px solid @color-message-alert;
-			border-left: 1px solid @color-message-alert;
-			background: lighten(@color-message-alert, 35%);
+			border-top: 1px solid darken(@color-message-alert, 15%);
+			border-left: 1px solid darken(@color-message-alert, 15%);
+			background: @color-message-alert;
 
 			.rotate(45deg);
 		}

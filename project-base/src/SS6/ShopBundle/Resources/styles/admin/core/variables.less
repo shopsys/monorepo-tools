@@ -2,15 +2,15 @@
 // PATHS
 *******************************************************************/
 @path-design: '../images';
-@path-fonts: '../fonts';
+@path-font: '../fonts';
 
 
 /*******************************************************************
 // FONTS
 *******************************************************************/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext);
+.font-face('Nimbus san', 'nimbussan-regular', @font-weight: '400', @font-style: 'normal');
 
-@font-base: 'Open Sans', Arial, Helvetica, sans-serif;
+@font-base: 'Nimbus san', Arial, Helvetica, sans-serif;
 @font: @font-base;
 
 @font-size: 14px;
@@ -89,15 +89,19 @@
 @bg-input-icon: #EBECED;
 
 @bg-success: #dff0d8;
-@bg-info: #d9edf7;
+@bg-info: #BCE0EE;
 @bg-warning: #fcf8e3;
-@bg-alert: #f2dede;
+@bg-alert: #FFEDED;
 @bg-light: #f8f8f8;
 
 // message colors
-@color-message-alert: @color-red;
-@color-message-warning: @color-yellow;
-@color-message-info: @color-blue;
+@color-message-alert: #F7D6D6;
+@color-message-warning: #FFE7AD;
+@color-message-info: #BAE3F2;
+
+@color-message-alert-text: @color-red;
+@color-message-warning-text: #735204;
+@color-message-info-text: #005B7E;
 
 
 /*******************************************************************

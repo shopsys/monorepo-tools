@@ -13,6 +13,7 @@ Form tree
 	&__title {
 		display: block;
 		padding: 5px;
+		line-height: 20px;
 
 		cursor: pointer;
 
@@ -110,22 +111,14 @@ Form tree
 			color: @color-link;
 			text-decoration: underline;
 
-			.form-tree__item__sub & {
-				font-size: 12px;
-			}
-
 			.form-tree__item__click:hover & {
 				color: @color-link-hover;
 			}
 		}
 
 		&__icon {
-			display: inline-block;
-			width: 10px;
 			margin-right: 5px;
-			height: 6px;
-
-			background: @color-primary;
+			margin-left: -20px;
 		}
 
 		&__sub {
