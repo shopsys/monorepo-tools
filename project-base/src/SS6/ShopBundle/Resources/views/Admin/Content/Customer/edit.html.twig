@@ -37,13 +37,8 @@
 
 {% block customer_domain %}
 	<div class="form-line js-change-price-categories">
-		<label class="form-line__label">{{ 'Doména'|trans }}: </label>
-		<input
-			type="text"
-			value="{{ getDomainName(user.domainId) }}"
-			class="form-control form-line__field"
-			readonly="readonly"
-		>
+		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
+		{{ domainIcon(user.domainId) }} {{ getDomainName(user.domainId) }}
 	</div>
 {% endblock %}
 

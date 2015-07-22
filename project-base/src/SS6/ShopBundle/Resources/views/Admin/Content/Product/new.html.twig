@@ -17,7 +17,7 @@
 					</tr>
 					{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
 						<tr class="js-input-price-type-manual">
-							<th>{{ getDomainName(domainId) }}</th>
+							<th>{{ domainIcon(domainId) }} {{ getDomainName(domainId) }}</th>
 						</tr>
 						{% for pricingGroup in pricingGroups %}
 							<tr class="js-input-price-type-manual">

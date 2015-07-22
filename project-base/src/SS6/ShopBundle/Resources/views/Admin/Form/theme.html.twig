@@ -97,7 +97,7 @@
 			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon' } }) }}
 			<span class="form-line__icon form-line__icon--{{locale}}"></span>
 		{% elseif multidomain is defined %}
-			{{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label'} }) }}
+			<span class="form-line__image">{{ domainIcon(domainId) }}</span> {{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label form-line__label--with-image'} }) }}
 			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
 		{% else %}
 			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
@@ -111,7 +111,7 @@
 		{% if localized is defined %}
 			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { label_attr: {class: 'form-line__label'}, raw: true }) }}
 		{% elseif multidomain is defined %}
-			{{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label'} }) }}
+			<span class="form-line__image">{{ domainIcon(domainId) }}</span> {{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label form-line__label--with-image'} }) }}
 		{% else %}
 			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
 		{% endif %}
@@ -139,7 +139,7 @@
 			<table class="table js-entity-url-list-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
 				<tr>
 					<th>{{ 'Hlavní'|trans }}</th>
-					<th>{{ 'Doména '|trans ~ getDomainName(domainId) }}</th>
+					<th>{{ domainIcon(domainId) }} {{ 'Doména '|trans ~ getDomainName(domainId) }}</th>
 					<th>{{ form_errors(form.mainOnDomains[domainId]) }}</th>
 				</tr>
 				{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}

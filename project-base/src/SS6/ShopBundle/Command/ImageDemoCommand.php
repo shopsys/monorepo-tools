@@ -40,14 +40,17 @@ class ImageDemoCommand extends ContainerAwareCommand {
 		$cachePath = $this->getContainer()->getParameter('kernel.cache_dir');
 		$localArchiveFilepath = $cachePath . DIRECTORY_SEPARATOR . 'demoImages.zip';
 		$imagesPath = $this->getContainer()->getParameter('ss6.image_dir');
+		$domainImagesPath = $this->getContainer()->getParameter('ss6.domain_images_dir');
+		$unpackedDomainImagesPath = $imagesPath . DIRECTORY_SEPARATOR . 'domain';
 
 		if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {
 			if ($this->unpackImages($output, $imagesPath, $localArchiveFilepath)) {
+				$this->moveFiles($unpackedDomainImagesPath, $domainImagesPath);
 				$this->loadDbChanges($output, $dqlUrl);
 			}
 		}
 
-		$this->cleanUp($output, $localArchiveFilepath);
+		$this->cleanUp($output, [$localArchiveFilepath, $unpackedDomainImagesPath]);
 	}
 
 	/**
@@ -117,14 +120,29 @@ class ImageDemoCommand extends ContainerAwareCommand {
 
 	/**
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 * @param string $localArchiveFilepath
+	 * @param string[] $pathsToRemove
 	 */
-	private function cleanUp(OutputInterface $output, $localArchiveFilepath) {
+	private function cleanUp(OutputInterface $output, $pathsToRemove) {
 		try {
-			$this->filesystem->remove($localArchiveFilepath);
+			$this->filesystem->remove($pathsToRemove);
 		} catch (Exception $e) {
 			$output->writeln('<fg=red>Deleting of demo archive in cache failed</fg=red>');
 			$output->writeln('<fg=red>Exception: ' . $e->getMessage() . '</fg=red>');
+		}
+	}
+
+	/**
+	 * @param string $origin
+	 * @param string $target
+	 */
+	private function moveFiles($origin, $target) {
+		$files = scandir($origin);
+		foreach ($files as $file) {
+			$filepath = $origin . DIRECTORY_SEPARATOR . $file;
+			if (is_file($filepath)) {
+				$newFilepath = $target . DIRECTORY_SEPARATOR . $file;
+				$this->filesystem->rename($filepath, $newFilepath, true);
+			}
 		}
 	}
 

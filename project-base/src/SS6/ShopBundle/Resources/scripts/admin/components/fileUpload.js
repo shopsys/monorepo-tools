@@ -3,12 +3,14 @@
 	SS6 = window.SS6 || {};
 	SS6.fileUpload = SS6.fileUpload || {};
 
-	$(document).ready(function() {
-		$('.js-file-upload').each(function() {
+	var fileUpload = function ($container) {
+		$container.find('.js-file-upload').each(function() {
 			var uploader = new SS6.fileUpload.Uploader($(this));
 			uploader.init();
 		});
-	});
+	};
+
+	SS6.register.registerCallback(fileUpload);
 
 	SS6.fileUpload.Uploader = function($uploader) {
 		var self = this;

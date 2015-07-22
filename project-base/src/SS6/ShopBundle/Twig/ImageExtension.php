@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Twig;
 use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;

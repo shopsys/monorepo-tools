@@ -41,6 +41,8 @@ class UrlsProvider {
 		// used by firewall to catch login requests
 		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'front_login_check',
+		//only for ajax
+		'admin_domain_edit',
 	];
 
 	/**

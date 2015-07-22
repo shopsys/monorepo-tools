@@ -1,6 +1,6 @@
-$(document).ready(function () {
+SS6 = window.SS6 || {};
 
-	// file input
-	$('input[type=file]').bootstrapFileInput();
-	$('.file-inputs').bootstrapFileInput();
-})
+SS6.register.registerCallback(function ($container) {
+	$container.find('input[type=file]').bootstrapFileInput();
+	$container.find('.file-inputs').bootstrapFileInput();
+});

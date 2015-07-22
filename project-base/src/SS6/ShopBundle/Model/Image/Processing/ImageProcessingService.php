@@ -30,7 +30,10 @@ class ImageProcessingService {
 	 */
 	private $filesystem;
 
-	public function __construct(ImageManager $imageManager, Filesystem $filesystem) {
+	public function __construct(
+		ImageManager $imageManager,
+		Filesystem $filesystem
+	) {
 		$this->imageManager = $imageManager;
 		$this->filesystem = $filesystem;
 
@@ -111,6 +114,13 @@ class ImageProcessingService {
 	 */
 	public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig) {
 		$this->resize($image, $sizeConfig->getWidth(), $sizeConfig->getHeight(), $sizeConfig->getCrop());
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getSupportedImageExtensions() {
+		return $this->supportedImageExtensions;
 	}
 
 }

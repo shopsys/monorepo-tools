@@ -3,8 +3,11 @@
 namespace SS6\ShopBundle\Model\Domain;
 
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Domain\DomainService;
+use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacade {
 
@@ -18,9 +21,40 @@ class DomainFacade {
 	 */
 	private $pricingSetting;
 
-	public function __construct(Domain $domain, PricingSetting $pricingSetting) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\DomainService
+	 */
+	private $domainService;
+
+	/**
+	 * @var \Symfony\Component\Filesystem\Filesystem
+	 */
+	private $filesystem;
+
+	/**
+	 * @var string
+	 */
+	private $domainImagesDirectory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 */
+	private $fileUpload;
+
+	public function __construct(
+		$domainImagesDirectory,
+		Domain $domain,
+		PricingSetting $pricingSetting,
+		DomainService $domainService,
+		Filesystem $fileSystem,
+		FileUpload $fileUpload
+	) {
+		$this->domainImagesDirectory = $domainImagesDirectory;
 		$this->domain = $domain;
 		$this->pricingSetting = $pricingSetting;
+		$this->domainService = $domainService;
+		$this->filesystem = $fileSystem;
+		$this->fileUpload = $fileUpload;
 	}
 
 	/**
@@ -38,4 +72,22 @@ class DomainFacade {
 
 		return $domainConfigs;
 	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $iconName
+	 */
+	public function editIcon($domainId, $iconName) {
+		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($iconName);
+		$this->domainService->convertToDomainIconFormatAndSave($domainId, $temporaryFilepath, $this->domainImagesDirectory);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return bool
+	 */
+	public function existsDomainIcon($domainId) {
+		return $this->filesystem->exists($this->domainImagesDirectory . DIRECTORY_SEPARATOR . $domainId . '.png');
+	}
+
 }
