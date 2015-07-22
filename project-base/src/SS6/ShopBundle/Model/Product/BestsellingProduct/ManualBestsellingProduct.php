@@ -85,10 +85,10 @@ class ManualBestsellingProduct {
 	}
 
 	/**
-	 * @return int
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
-	public function getCategoryId() {
-		return $this->categoryId;
+	public function getCategory() {
+		return $this->category;
 	}
 
 	/**

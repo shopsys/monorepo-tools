@@ -98,6 +98,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 		$masterRequestMock = $this->getMockBuilder(Request::class)
 			->setMethods(['getMethod'])
 			->getMock();
+		/* @var $masterRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
 		$masterRequestMock->expects($this->once())->method('getMethod')->will($this->returnValue('POST'));
 		$masterRequestMock->query->replace([
 			'key1' => 'value1',
@@ -108,6 +109,7 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 		$subRequestMock = $this->getMockBuilder(Request::class)
 			->setMethods(['setMethod'])
 			->getMock();
+		/* @var $subRequestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
 		$subRequestMock->expects($this->once())->method('setMethod')->with($this->equalTo('POST'));
 		$subRequestMock->query->replace([
 			'key2' => 'value2_2',
