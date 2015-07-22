@@ -50,8 +50,15 @@ class PaginationResult {
 		$this->pageSize = $pageSize;
 		$this->totalCount = $totalCount;
 		$this->results = $results;
-		if ($pageSize === null) {
-			$this->pageCount = 1;
+
+		if ($pageSize === 0) {
+			$this->pageCount = 0;
+		} elseif ($pageSize === null) {
+			if ($totalCount > 0) {
+				$this->pageCount = 1;
+			} else {
+				$this->pageCount = 0;
+			}
 		} else {
 			$this->pageCount = (int)ceil($this->totalCount / $this->pageSize);
 		}

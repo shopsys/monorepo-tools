@@ -123,8 +123,8 @@
 
 {% block grid_row %}
 	<tr class="grid-row-cells {{ cycle(['odd', 'even'], loopIndex) }} js-grid-row"
-			{% if grid.inlineEdit and row is not null%} data-inline-edit-row-id="{{ grid.getRowId(row) }}"{% endif %}
-			{% if grid.dragAndDrop %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row) }}"{% endif %}
+			{% if grid.inlineEdit and row is not null%} data-inline-edit-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
+			{% if grid.dragAndDrop %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
 	>
 		{% if grid.dragAndDrop %}
 			<td class="table-col-40px">
@@ -137,7 +137,7 @@
 					class="js-grid-mass-action-select-row"
 					type="checkbox"
 					name="g[{{ grid.id|escape('html_attr') }}][selectedRowIds][]"
-					value="{{ grid.getRowId(row)|escape('html_attr') }}"
+					value="{{ grid.getRowId(row)|json_encode() }}"
 					{% if grid.isRowSelected(row) %}checked="checked"{% endif %}
 				/>
 			</td>

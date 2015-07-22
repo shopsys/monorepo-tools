@@ -1,5 +1,9 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% block grid_value_cell_edit_id_id %}
+	{{ row.id }}
+{% endblock %}
+
 {% block grid_no_data %}
 	{{ 'Doposud nebyly vytvořeny žádné překlady.'|trans }}
 {% endblock %}
