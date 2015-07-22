@@ -529,7 +529,7 @@ class Grid {
 			}
 
 			if (array_key_exists('selectedRowIds', $gridData) && is_array($gridData['selectedRowIds'])) {
-				$this->selectedRowIds = $gridData['selectedRowIds'];
+				$this->selectedRowIds = array_map('json_decode', $gridData['selectedRowIds']);
 			}
 		}
 	}

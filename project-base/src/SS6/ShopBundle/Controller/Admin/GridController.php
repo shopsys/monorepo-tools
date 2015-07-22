@@ -44,7 +44,7 @@ class GridController extends Controller {
 	public function getFormAction(Request $request) {
 		$renderedFormRow = $this->inlineEditService->getRenderedFormRow(
 			$request->get('serviceName'),
-			$request->get('rowId')
+			json_decode($request->get('rowId'))
 		);
 
 		return new JsonResponse($renderedFormRow);
@@ -56,7 +56,7 @@ class GridController extends Controller {
 	 */
 	public function saveFormAction(Request $request) {
 		$responseData = [];
-		$rowId = $request->get('rowId');
+		$rowId = json_decode($request->get('rowId'));
 
 		try {
 			$rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
@@ -77,7 +77,10 @@ class GridController extends Controller {
 	public function saveOrderingAction(Request $request) {
 		$this->em->transactional(
 			function () use ($request) {
-				$this->gridOrderingFacade->saveOrdering($request->get('entityClass'), $request->get('rowIds'));
+				$this->gridOrderingFacade->saveOrdering(
+					$request->get('entityClass'),
+					array_map('json_decode', $request->get('rowIds'))
+				);
 			}
 		);
 		$responseData = ['success' => true];
