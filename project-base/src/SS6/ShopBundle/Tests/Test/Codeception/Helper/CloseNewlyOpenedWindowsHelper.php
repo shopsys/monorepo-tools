@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
 
 use Codeception\Module;
 use Codeception\TestCase;
-use DriverCommand;
-use RemoteWebDriver;
+use Facebook\WebDriver\Remote\DriverCommand;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 class CloseNewlyOpenedWindowsHelper extends Module {
 

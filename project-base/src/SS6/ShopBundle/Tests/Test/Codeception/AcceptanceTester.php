@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Test\Codeception;
 
-use RemoteWebDriver;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
  * Inherited Methods
