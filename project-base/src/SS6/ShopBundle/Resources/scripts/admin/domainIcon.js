@@ -18,7 +18,7 @@
 
 	SS6.domainIcon.openDialog = function($editDomainIcon) {
 		$.ajax({
-			url: $editDomainIcon.closest('a').data('url'),
+			url: $editDomainIcon.closest('.js-domain-icon-edit-container').data('url'),
 			success: function (data) {
 				SS6.window({
 					content: data,

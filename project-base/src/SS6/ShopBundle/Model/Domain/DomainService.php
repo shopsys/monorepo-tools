@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Domain;
 
-use Intervention\Image\Constraint;
 use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -41,12 +40,13 @@ class DomainService {
 			. '.'
 			. ImageProcessingService::EXTENSION_PNG;
 
-		$this->imageProcessingService->createInterventionImage($filepath)
-			->fit(self::DOMAIN_ICON_WIDTH, self::DOMAIN_ICON_HEIGHT, function (Constraint $constraint) {
-				$constraint->aspectRatio();
-				$constraint->upsize();
-			})
-			->save($newTemporaryFilepath);
+		$resizedImage = $this->imageProcessingService->resize(
+			$this->imageProcessingService->createInterventionImage($filepath),
+			self::DOMAIN_ICON_WIDTH,
+			self::DOMAIN_ICON_HEIGHT,
+			true
+		);
+		$resizedImage->save($newTemporaryFilepath);
 
 		$targetFileName = pathinfo($newTemporaryFilepath, PATHINFO_BASENAME);
 		$targetFilePath = $domainImagesDirectory . DIRECTORY_SEPARATOR . $targetFileName;

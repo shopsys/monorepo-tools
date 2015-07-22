@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
@@ -34,11 +33,6 @@ class DomainController extends BaseController {
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
-	 */
-	private $breadcrumb;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
 	private $translator;
@@ -57,7 +51,6 @@ class DomainController extends BaseController {
 		Domain $domain,
 		SelectedDomain $selectedDomain,
 		GridFactory $gridFactory,
-		Breadcrumb $breadcrumb,
 		Translator $translator,
 		EntityManager $em,
 		DomainFacade $domainFacade
@@ -65,7 +58,6 @@ class DomainController extends BaseController {
 		$this->domain = $domain;
 		$this->selectedDomain = $selectedDomain;
 		$this->gridFactory = $gridFactory;
-		$this->breadcrumb = $breadcrumb;
 		$this->translator = $translator;
 		$this->em = $em;
 		$this->domainFacade = $domainFacade;
