@@ -16,6 +16,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method void haveFriend($name, $actorClass = null)
+ * @method \Codeception\Scenario getScenario()
  *
  * @SuppressWarnings(PHPMD)
  */
