@@ -15,7 +15,7 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderDataMapper;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
@@ -71,9 +71,9 @@ class OrderController extends BaseController {
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
+	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 	 */
-	private $orderPreviewCalculation;
+	private $orderPreviewFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
@@ -114,7 +114,7 @@ class OrderController extends BaseController {
 		OrderFacade $orderFacade,
 		CartFacade $cartFacade,
 		Cart $cart,
-		OrderPreviewCalculation $orderPreviewCalculation,
+		OrderPreviewFactory $orderPreviewFactory,
 		CustomerEditFacade $customerEditFacade,
 		TransportPriceCalculation $transportPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
@@ -131,7 +131,7 @@ class OrderController extends BaseController {
 		$this->orderFacade = $orderFacade;
 		$this->cartFacade = $cartFacade;
 		$this->cart = $cart;
-		$this->orderPreviewCalculation = $orderPreviewCalculation;
+		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
@@ -183,14 +183,7 @@ class OrderController extends BaseController {
 		$payment = $frontOrderFormData->payment;
 		$transport = $frontOrderFormData->transport;
 
-		$orderPreview = $this->orderPreviewCalculation->calculatePreview(
-			$currency,
-			$domainId,
-			$this->cart->getQuantifiedItems(),
-			$transport,
-			$payment,
-			$user
-		);
+		$orderPreview = $this->orderPreviewFactory->create($transport, $payment);
 
 		$isValid = $this->flow->isValid($form);
 		// FormData are filled during isValid() call
