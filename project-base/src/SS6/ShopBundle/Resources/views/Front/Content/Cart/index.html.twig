@@ -102,6 +102,8 @@
 				{% endif %}
 			{% endif %}
 
+			{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
+
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
 					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
