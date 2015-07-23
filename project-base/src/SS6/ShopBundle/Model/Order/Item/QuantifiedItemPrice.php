@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Order\Item;
 
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+
 class QuantifiedItemPrice {
 
 	/**
@@ -35,12 +37,18 @@ class QuantifiedItemPrice {
 	private $totalPriceVatAmount;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 */
+	private $vat;
+
+	/**
 	 * @param string $unitPriceWithoutVat
 	 * @param string $unitPriceWithVat
 	 * @param string $unitPriceVatAmount
 	 * @param string $totalPriceWithoutVat
 	 * @param string $totalPriceWithVat
 	 * @param string $totalPriceVatAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function __construct(
 		$unitPriceWithoutVat,
@@ -48,7 +56,8 @@ class QuantifiedItemPrice {
 		$unitPriceVatAmount,
 		$totalPriceWithoutVat,
 		$totalPriceWithVat,
-		$totalPriceVatAmount
+		$totalPriceVatAmount,
+		Vat $vat
 	) {
 		$this->unitPriceWithoutVat = $unitPriceWithoutVat;
 		$this->unitPriceWithVat = $unitPriceWithVat;
@@ -56,6 +65,7 @@ class QuantifiedItemPrice {
 		$this->totalPriceWithoutVat = $totalPriceWithoutVat;
 		$this->totalPriceWithVat = $totalPriceWithVat;
 		$this->totalPriceVatAmount = $totalPriceVatAmount;
+		$this->vat = $vat;
 	}
 
 	/**
@@ -98,6 +108,13 @@ class QuantifiedItemPrice {
 	 */
 	public function getTotalPriceVatAmount() {
 		return $this->totalPriceVatAmount;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 */
+	public function getVat() {
+		return $this->vat;
 	}
 
 }

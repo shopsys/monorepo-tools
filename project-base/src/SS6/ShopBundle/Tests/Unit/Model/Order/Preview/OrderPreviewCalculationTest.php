@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
-use SS6\ShopBundle\Model\Cart\Item\CartItemPrice;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
@@ -11,6 +10,9 @@ use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
@@ -24,11 +26,13 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 	public function testCalculatePreviewWithTransportAndPayment() {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$vat = new Vat(new VatData('vatName', 20));
 
 		$paymentPrice = new Price(100, 120, 20);
 		$transportPrice = new Price(10, 12, 2);
-		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400);
+		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400, $vat);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
+		$quantifiedItemsDiscounts = [null, null];
 		$currency = new Currency(new CurrencyData());
 
 		$quantifiedProductPriceCalculationMock = $this->getMockBuilder(QuantifiedProductPriceCalculation::class)
@@ -37,6 +41,13 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->getMock();
 		$quantifiedProductPriceCalculationMock->expects($this->once())->method('calculatePrices')
 			->will($this->returnValue($quantifiedItemsPrices));
+
+		$quantifiedProductDiscountCalculationMock = $this->getMockBuilder(QuantifiedProductDiscountCalculation::class)
+			->setMethods(['calculateDiscounts', '__construct'])
+			->disableOriginalConstructor()
+			->getMock();
+		$quantifiedProductDiscountCalculationMock->expects($this->once())->method('calculateDiscounts')
+			->will($this->returnValue($quantifiedItemsDiscounts));
 
 		$paymentPriceCalculationMock = $this->getMockBuilder(PaymentPriceCalculation::class)
 			->setMethods(['calculatePrice', '__construct'])
@@ -52,6 +63,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 
 		$previewCalculation = new OrderPreviewCalculation(
 			$quantifiedProductPriceCalculationMock,
+			$quantifiedProductDiscountCalculationMock,
 			$transportPriceCalculationMock,
 			$paymentPriceCalculationMock
 		);
@@ -85,12 +97,17 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		$this->assertSame($transportPrice, $orderPreview->getTransportPrice());
 	}
 
+	/**
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
 	public function testCalculatePreviewWithoutTransportAndPayment() {
 		$domain = $this->getContainer()->get('ss6.shop.domain');
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$vat = new Vat(new VatData('vatName', 20));
 
-		$quantifiedItemPrice = new CartItemPrice(1000, 1200, 200, 2000, 2400, 400);
+		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400, $vat);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
+		$quantifiedItemsDiscounts = [null, null];
 		$currency = new Currency(new CurrencyData());
 
 		$quantifiedProductPriceCalculationMock = $this->getMockBuilder(QuantifiedProductPriceCalculation::class)
@@ -99,6 +116,13 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->getMock();
 		$quantifiedProductPriceCalculationMock->expects($this->once())->method('calculatePrices')
 			->will($this->returnValue($quantifiedItemsPrices));
+
+		$quantifiedProductDiscountCalculationMock = $this->getMockBuilder(QuantifiedProductDiscountCalculation::class)
+			->setMethods(['calculateDiscounts', '__construct'])
+			->disableOriginalConstructor()
+			->getMock();
+		$quantifiedProductDiscountCalculationMock->expects($this->once())->method('calculateDiscounts')
+			->will($this->returnValue($quantifiedItemsDiscounts));
 
 		$paymentPriceCalculationMock = $this->getMockBuilder(PaymentPriceCalculation::class)
 			->setMethods(['calculatePrice', '__construct'])
@@ -114,6 +138,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 
 		$previewCalculation = new OrderPreviewCalculation(
 			$quantifiedProductPriceCalculationMock,
+			$quantifiedProductDiscountCalculationMock,
 			$transportPriceCalculationMock,
 			$paymentPriceCalculationMock
 		);

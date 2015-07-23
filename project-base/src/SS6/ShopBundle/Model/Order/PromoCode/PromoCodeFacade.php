@@ -54,10 +54,21 @@ class PromoCodeFacade {
 	}
 
 	/**
-	 * @return int
+	 * @return float
 	 */
 	public function getPromoCodePercent() {
-		return 10;
+		return 10.0;
+	}
+
+	/**
+	 * @return float|null
+	 */
+	public function getEnteredPromoCodePercent() {
+		if ($this->getEnteredPromoCode() === null) {
+			return null;
+		}
+
+		return $this->getPromoCodePercent();
 	}
 
 	public function removeEnteredPromoCode() {

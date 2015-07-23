@@ -19,6 +19,11 @@ class OrderPreview {
 	private $quantifiedItemsPrices;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+	 */
+	private $quantifiedItemsDiscounts;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Transport\Transport|null
 	 */
 	private $transport;
@@ -51,6 +56,7 @@ class OrderPreview {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItems
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
+	 * @param \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
@@ -61,6 +67,7 @@ class OrderPreview {
 	public function __construct(
 		array $quantifiedItems,
 		array $quantifiedItemsPrices,
+		array $quantifiedItemsDiscounts,
 		Price $productsPrice,
 		Price $totalPrice,
 		Transport $transport = null,
@@ -70,6 +77,7 @@ class OrderPreview {
 	) {
 		$this->quantifiedItems = $quantifiedItems;
 		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
+		$this->quantifiedItemsDiscounts = $quantifiedItemsDiscounts;
 		$this->productsPrice = $productsPrice;
 		$this->totalPrice = $totalPrice;
 		$this->transport = $transport;
@@ -90,6 +98,13 @@ class OrderPreview {
 	 */
 	public function getQuantifiedItemsPrices() {
 		return $this->quantifiedItemsPrices;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+	 */
+	public function getQuantifiedItemsDiscounts() {
+		return $this->quantifiedItemsDiscounts;
 	}
 
 	/**
