@@ -60,6 +60,8 @@
       route: admin_transportandpayment_freetransportandpaymentlimit
     - label: Měny
       route: admin_currency_list
+    - label: Slevové kupóny
+      route: admin_promocode_index
 
 - label: 'Marketing'
   route: admin_article_list
