@@ -183,7 +183,7 @@ class OrderController extends BaseController {
 		$payment = $frontOrderFormData->payment;
 		$transport = $frontOrderFormData->transport;
 
-		$orderPreview = $this->orderPreviewFactory->create($transport, $payment);
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
 
 		$isValid = $this->flow->isValid($form);
 		// FormData are filled during isValid() call
@@ -195,7 +195,7 @@ class OrderController extends BaseController {
 			if ($this->flow->nextStep()) {
 				$form = $this->flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
-				$order = $this->orderFacade->createOrderFromCart($orderData, $this->getUser());
+				$order = $this->orderFacade->createOrder($orderData, $orderPreview, $this->getUser());
 				$this->cartFacade->cleanCart();
 				if ($user instanceof User) {
 					$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);

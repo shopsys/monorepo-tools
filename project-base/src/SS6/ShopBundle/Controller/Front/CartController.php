@@ -141,7 +141,7 @@ class CartController extends BaseController {
 		$cartItemPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
 		$domainId = $this->domain->getId();
 
-		$orderPreview = $this->orderPreviewFactory->create();
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
 		$productsPrice = $orderPreview->getProductsPrice();
 		$remainingPriceWithVat = $this->freeTransportAndPaymentFacade->getRemainingPriceWithVat(
 			$productsPrice->getPriceWithVat(),

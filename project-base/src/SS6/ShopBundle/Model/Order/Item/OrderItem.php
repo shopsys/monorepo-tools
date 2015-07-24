@@ -109,6 +109,13 @@ abstract class OrderItem {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 */
+	public function getOrder() {
+		return $this->order;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {

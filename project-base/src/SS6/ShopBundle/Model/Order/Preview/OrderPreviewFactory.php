@@ -4,10 +4,12 @@ namespace SS6\ShopBundle\Model\Order\Preview;
 
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -64,10 +66,10 @@ class OrderPreviewFactory {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
-	public function create(Transport $transport = null, Payment $payment = null) {
+	public function createForCurrentUser(Transport $transport = null, Payment $payment = null) {
 		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($this->domain->getId());
 
-		return $this->orderPreviewCalculation->calculatePreview(
+		return $this->create(
 			$currency,
 			$this->domain->getId(),
 			$this->cart->getQuantifiedItems(),
@@ -75,6 +77,36 @@ class OrderPreviewFactory {
 			$payment,
 			$this->currentCustomer->findCurrentUser(),
 			$this->promoCodeFacade->getEnteredPromoCodePercent()
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @param float|null $discountPercent
+	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
+	 */
+	public function create(
+		Currency $currency,
+		$domainId,
+		array $quantifiedItems,
+		Transport $transport = null,
+		Payment $payment = null,
+		User $user = null,
+		$discountPercent = null
+	) {
+		return $this->orderPreviewCalculation->calculatePreview(
+			$currency,
+			$domainId,
+			$quantifiedItems,
+			$transport,
+			$payment,
+			$user,
+			$discountPercent
 		);
 	}
 

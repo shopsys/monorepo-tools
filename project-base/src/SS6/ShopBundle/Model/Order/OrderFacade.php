@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
@@ -16,6 +15,7 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
@@ -31,11 +31,6 @@ class OrderFacade {
 	 * @var \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
 	 */
 	private $orderNumberSequenceRepository;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
-	 */
-	private $cart;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
@@ -90,7 +85,6 @@ class OrderFacade {
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
-		Cart $cart,
 		OrderRepository $orderRepository,
 		OrderService $orderService,
 		OrderPreviewCalculation $orderPreviewCalculation,
@@ -104,7 +98,6 @@ class OrderFacade {
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
-		$this->cart = $cart;
 		$this->orderRepository = $orderRepository;
 		$this->orderService = $orderService;
 		$this->orderPreviewCalculation = $orderPreviewCalculation;
@@ -119,20 +112,11 @@ class OrderFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
-	public function createOrder(OrderData $orderData, array $quantifiedItems, User $user = null) {
-		$orderPreview = $this->orderPreviewCalculation->calculatePreview(
-			$orderData->currency,
-			$orderData->domainId,
-			$quantifiedItems,
-			$orderData->transport,
-			$orderData->payment,
-			$user
-		);
-
+	public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
 		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
@@ -156,19 +140,6 @@ class OrderFacade {
 		$this->em->flush();
 
 		return $order;
-	}
-
-	/**
-	 * @param $orderData \SS6\ShopBundle\Model\Order\OrderData
-	 * @param $user \SS6\ShopBundle\Model\Customer\User|null
-	 * @return \SS6\ShopBundle\Model\Order\Order
-	 */
-	public function createOrderFromCart(OrderData $orderData, User $user = null) {
-		return $this->createOrder(
-			$orderData,
-			$this->cart->getQuantifiedItems(),
-			$user
-		);
 	}
 
 	/**
