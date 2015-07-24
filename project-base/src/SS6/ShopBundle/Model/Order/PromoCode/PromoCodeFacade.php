@@ -47,7 +47,7 @@ class PromoCodeFacade {
 	 * @param string $promoCode
 	 * @return true
 	 */
-	public function isPromoCodeValid($promoCode) {
+	private function isPromoCodeValid($promoCode) {
 		if ($promoCode === null || $this->getPromoCodePercent() === null) {
 			return false;
 		}
