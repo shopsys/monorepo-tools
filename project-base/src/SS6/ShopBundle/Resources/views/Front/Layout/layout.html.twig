@@ -1,7 +1,14 @@
 {% extends '@SS6Shop/Front/Layout/base.html.twig' %}
 
 {% block html_body %}
-	<div class="web-wrap">
+	{% set adminLoggedAsCustomer = is_granted(constant('SS6\\ShopBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
+	{% if adminLoggedAsCustomer %}
+		<div class="window-fixed-bar--top">
+			<strong>{{ 'Pozor! Jste jako administrátor přihlášen za zákazníka.'|trans }}</strong>
+			<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}"><strong>{{ 'Odhlásit se'|trans }}</strong></a>
+		</div>
+	{% endif %}
+	<div class="web-wrap {% if adminLoggedAsCustomer %} web-wrap--admin {% endif %}">
 
 			<div class="header">
 				<div class="logo">
