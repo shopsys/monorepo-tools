@@ -16,6 +16,7 @@ use SS6\ShopBundle\Model\Order\OrderDataMapper;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
@@ -110,6 +111,11 @@ class OrderController extends BaseController {
 	 */
 	private $session;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+	 */
+	private $promoCodeFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		CartFacade $cartFacade,
@@ -126,7 +132,8 @@ class OrderController extends BaseController {
 		OrderFlow $flow,
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
-		OrderMailFacade $orderMailFacade
+		OrderMailFacade $orderMailFacade,
+		PromoCodeFacade $promoCodeFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->cartFacade = $cartFacade;
@@ -144,6 +151,7 @@ class OrderController extends BaseController {
 		$this->session = $session;
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
+		$this->promoCodeFacade = $promoCodeFacade;
 	}
 
 	/**
@@ -197,6 +205,7 @@ class OrderController extends BaseController {
 			} elseif ($flashMessageBag->isEmpty()) {
 				$order = $this->orderFacade->createOrder($orderData, $orderPreview, $this->getUser());
 				$this->cartFacade->cleanCart();
+				$this->promoCodeFacade->removeEnteredPromoCode();
 				if ($user instanceof User) {
 					$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);
 				}
