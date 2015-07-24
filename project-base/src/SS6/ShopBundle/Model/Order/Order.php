@@ -248,6 +248,21 @@ class Order {
 	private $currency;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 *
+	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Administrator\Administrator")
+	 * @ORM\JoinColumn(name="administrator_id", referencedColumnName="id", onDelete="SET NULL")
+	 */
+	private $createdAsAdministrator;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $createdAsAdministratorName;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
@@ -294,6 +309,8 @@ class Order {
 		$this->domainId = $orderData->domainId;
 		$this->urlHash = $urlHash;
 		$this->currency = $orderData->currency;
+		$this->createdAsAdministrator = $orderData->createdAsAdministrator;
+		$this->createdAsAdministratorName = $orderData->createdAsAdministratorName;
 	}
 
 	/**
@@ -703,6 +720,20 @@ class Order {
 		}
 
 		return $productItems;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 */
+	public function getCreatedAsAdministrator() {
+		return $this->createdAsAdministrator;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCreatedAsAdministratorName() {
+		return $this->createdAsAdministratorName;
 	}
 
 }

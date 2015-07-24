@@ -57,6 +57,18 @@ class AdministratorSecurityFacade {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 */
+	public function getCurrentAdministrator() {
+		if ($this->isAdministratorLogged()) {
+			return $this->getAdministratorToken()->getUser();
+		} else {
+			$message = 'Administrator is not logged.';
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException($message);
+		}
+	}
+
+	/**
 	 * @return \Symfony\Component\Security\Core\Authentication\Token\TokenInterface
 	 * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
 	 */
