@@ -54,8 +54,8 @@ class CartFactory {
 	 */
 	private function createNewCart(CustomerIdentifier $customerIdentifier) {
 		$cartItems = $this->cartItemRepository->findAllByCustomerIdentifier($customerIdentifier);
-		$cart = new Cart($cartItems);
-		return $cart;
+
+		return new Cart($cartItems);
 	}
 
 }
