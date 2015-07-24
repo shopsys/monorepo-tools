@@ -14,15 +14,11 @@ SymfonyComponentValidatorConstraintsRange = function() {
 			return [];
 		} else if (compareValue < this.min) {
 			return [
-				this.minMessage
-					.replace('{{ value }}', String(value))
-					.replace('{{ compared_value }}', String(this.min))
+				this.minMessage.replace('{{ limit }}', String(this.min))
 			];
 		} else if (compareValue > this.max) {
 			return [
-				this.maxMessage
-					.replace('{{ value }}', String(value))
-					.replace('{{ compared_value }}', String(this.max))
+				this.maxMessage.replace('{{ limit }}', String(this.max))
 			];
 		} else {
 			return [
