@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Security;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
+use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -86,7 +87,8 @@ class LoginAsUserFacade {
 
 		$password = '';
 		$firewallName = 'frontend';
-		$token = new UsernamePasswordToken($freshUser, $password, $firewallName, $freshUser->getRoles());
+		$freshUserRoles = array_merge($freshUser->getRoles(), [Roles::ROLE_ADMIN_AS_CUSTOMER]);
+		$token = new UsernamePasswordToken($freshUser, $password, $firewallName, $freshUserRoles);
 		$this->tokenStorage->setToken($token);
 
 		$event = new InteractiveLoginEvent($request, $token);
