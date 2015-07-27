@@ -598,6 +598,13 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @return \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getVariants() {
+		return $this->variants;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used but not through $this
 	 */

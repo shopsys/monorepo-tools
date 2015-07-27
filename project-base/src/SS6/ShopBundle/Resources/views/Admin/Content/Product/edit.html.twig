@@ -3,6 +3,41 @@
 {% block title %}- {{ 'Editace zboží'|trans }} - {{ product.name }}{% endblock %}
 {% block h1 %}{{ 'Editace zboží'|trans }} - {{ product.name }}{% endblock %}
 
+{% block product_variants %}
+	{% if product.isVariant %}
+		<div class="wrap-group">
+			<strong>
+				{{ 'Produkt je variantou'|trans }}
+				<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
+					{{ product.mainVariant.name }}<i class="fa fa-external-link"></i>
+				</a>
+			</strong>
+		</div>
+	{% endif %}
+	{% if product.isMainVariant %}
+		{% if product.variants|length > 0 %}
+			<div class="wrap-group">
+				<strong>
+					{{ 'Produkt je hlavní variantou a má nastaveny varianty'|trans }}:
+					<ul>
+						{% for variant in product.variants %}
+							<li>
+								<a href="{{ url('admin_product_edit', {id: variant.id}) }}" target="_blank">
+									{{ variant.name }}<i class="fa fa-external-link"></i>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</strong>
+			</div>
+		{% else %}
+			<div class="wrap-group">
+				<strong>{{ 'Produkt je hlavní variantou.'|trans }}</strong>
+			</div>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
 {% block product_url %}
 	<div class="form-line">
 		<label>
