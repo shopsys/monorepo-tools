@@ -3,11 +3,14 @@
 namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProvider {
 
@@ -17,9 +20,19 @@ class UrlsProvider {
 	private $persistentReferenceService;
 
 	/**
-	 * @var \Symfony\Component\Routing\RouterInterface
+	 * @var \SS6\ShopBundle\Component\Router\CurrentDomainRouter
 	 */
 	private $router;
+
+	/**
+	 * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+	 */
+	private $tokenManager;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 */
+	private $routeCsrfProtector;
 
 	/**
 	 * @var string[]
@@ -83,6 +96,12 @@ class UrlsProvider {
 				// category ID 1 is special root category, therefore we use ID 2
 				return ['categoryId' => 2, 'domainId' => 1];
 
+			case 'admin_logout':
+				return ['_csrf_token' => '{admin_logout}'];
+
+			case 'front_logout':
+				return ['_csrf_token' => '{frontend_logout}'];
+
 			case 'admin_superadmin_icondetail':
 				return ['icon' => 'delete'];
 
@@ -128,10 +147,19 @@ class UrlsProvider {
 	/**
 	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
 	 * @param \Symfony\Component\Routing\RouterInterface $router
+	 * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
+	 * @param \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
 	 */
-	public function __construct(PersistentReferenceService $persistentReferenceService, RouterInterface $router) {
+	public function __construct(
+		PersistentReferenceService $persistentReferenceService,
+		CurrentDomainRouter $router,
+		CsrfTokenManagerInterface $tokenManager,
+		RouteCsrfProtector $routeCsrfProtector
+	) {
 		$this->persistentReferenceService = $persistentReferenceService;
 		$this->router = $router;
+		$this->tokenManager = $tokenManager;
+		$this->routeCsrfProtector = $routeCsrfProtector;
 	}
 
 	/**
@@ -141,9 +169,11 @@ class UrlsProvider {
 		$urls = [];
 		foreach ($this->router->getRouteCollection() as $routeName => $route) {
 			if ($this->isTestableRoute($route, $routeName) && $this->isAdminRouteName($routeName)) {
+				$routeParameters = $this->getRouteParameters($route, $routeName);
+				$routeParameters = $this->addRouteCsrfParameter($routeName, $routeParameters);
 				$urls[] = [
 					$routeName,
-					$this->router->generate($routeName, $this->getRouteParameters($route, $routeName), RouterInterface::RELATIVE_PATH),
+					$this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
 					$this->getExpectedStatusCode($route, $routeName),
 					true,
 				];
@@ -160,9 +190,11 @@ class UrlsProvider {
 		$urls = [];
 		foreach ($this->router->getRouteCollection() as $routeName => $route) {
 			if ($this->isTestableRoute($route, $routeName) && $this->isFrontRouteName($routeName)) {
+				$routeParameters = $this->getRouteParameters($route, $routeName);
+				$routeParameters = $this->addRouteCsrfParameter($routeName, $routeParameters);
 				$urls[] = [
 					$routeName,
-					$this->router->generate($routeName, $this->getRouteParameters($route, $routeName), RouterInterface::RELATIVE_PATH),
+					$this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
 					$this->getExpectedStatusCode($route, $routeName),
 					in_array($routeName, $this->frontAsLoggedRouteNames),
 				];
@@ -170,6 +202,39 @@ class UrlsProvider {
 		}
 
 		return $urls;
+	}
+
+	/**
+	 * @param string $routeName
+	 * @param array $routeParameters
+	 * @return array
+	 */
+	private function addRouteCsrfParameter($routeName, $routeParameters) {
+		if (preg_match('@_delete$@', $routeName)) {
+			$routeParameters[RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER] =
+				'{'
+				. $this->routeCsrfProtector->getCsrfTokenId($routeName)
+				. '}';
+		}
+
+		return $routeParameters;
+	}
+
+	/**
+	 * Each url creates new client with clean TokenManager.
+	 * Csrf token must be generated for the new client before request is created.
+	 *
+	 * @param string $url
+	 * @return string
+	 */
+	public function replaceCsrfTokensInUrl($url) {
+		return preg_replace_callback(
+			'@\%7B([^%]+)\%7D@',
+			function ($matches) {
+				return $this->tokenManager->getToken($matches[1])->getValue();
+			},
+			$url
+		);
 	}
 
 	/**

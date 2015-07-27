@@ -856,6 +856,13 @@ services:
     class: SS6\ShopBundle\Component\Router\LocalizedRouterFactory
     arguments: [%ss6.router.locale_router_filepaths%]
 
+  ss6.shop.router.security.route_csrf_protector:
+    class: SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+    arguments:
+      - @annotations.reader
+    tags:
+      - { name: kernel.event_subscriber }
+
   ss6.shop.slider.slider_item_facade:
     class: SS6\ShopBundle\Model\Slider\SliderItemFacade
 

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Grid;
 
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Model\Grid\Grid;
 use Symfony\Component\Routing\Router;
 
@@ -14,6 +15,11 @@ class ActionColumn {
 	 * @var \Symfony\Component\Routing\Router
 	 */
 	private $router;
+
+	/**
+	 * @var RouteCsrfProtector
+	 */
+	private $routeCsrfProtector;
 
 	/**
 	 * @var string
@@ -63,8 +69,17 @@ class ActionColumn {
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
 	 */
-	public function __construct(Router $router, $type, $name, $route, array $bindingRouteParams, array $additionalRouteParams) {
+	public function __construct(
+		Router $router,
+		RouteCsrfProtector $routeCsrfProtector,
+		$type,
+		$name,
+		$route,
+		array $bindingRouteParams,
+		array $additionalRouteParams
+	) {
 		$this->router = $router;
+		$this->routeCsrfProtector = $routeCsrfProtector;
 		$this->type = $type;
 		$this->name = $name;
 		$this->route = $route;
@@ -146,6 +161,10 @@ class ActionColumn {
 
 		foreach ($this->bindingRouteParams as $key => $sourceColumnName) {
 			$parameters[$key] = Grid::getValueFromRowBySourceColumnName($row, $sourceColumnName);
+		}
+
+		if ($this->type === self::TYPE_DELETE) {
+			$parameters[RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER] = $this->routeCsrfProtector->getCsrfTokenByRoute($this->route);
 		}
 
 		return $this->router->generate($this->route, $parameters, Router::ABSOLUTE_URL);

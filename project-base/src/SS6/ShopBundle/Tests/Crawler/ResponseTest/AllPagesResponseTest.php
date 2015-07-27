@@ -2,23 +2,20 @@
 
 namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AllPagesResponseTest extends DatabaseTestCase {
 
 	public function adminTestableUrlsProvider() {
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$domain = $this->getContainer()->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$router = $this->getContainer()->get('router');
-		/* @var $router \Symfony\Component\Routing\RouterInterface */
-		$persistentReferenceService = $this->getContainer()->get('ss6.shop.data_fixture.persistent_reference_service');
-		/* @var $router \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
-
 		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 
-		$urlsProvider = new UrlsProvider($persistentReferenceService, $router);
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		return $urlsProvider->getAdminTestableUrlsProviderData();
 	}
@@ -30,6 +27,10 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 * @dataProvider adminTestableUrlsProvider
 	 */
 	public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
+
 		$this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
 
 		$statusCode = $this->getClient()->getResponse()->getStatusCode();
@@ -47,16 +48,13 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	}
 
 	public function frontTestableUrlsProvider() {
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$domain = $this->getContainer()->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$router = $this->getContainer()->get('router');
-		/* @var $router \Symfony\Component\Routing\RouterInterface */
-		$persistentReferenceService = $this->getContainer()->get('ss6.shop.data_fixture.persistent_reference_service');
-		/* @var $router \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
-
 		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
-		$urlsProvider = new UrlsProvider($persistentReferenceService, $router);
+
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		return $urlsProvider->getFrontTestableUrlsProviderData();
 	}
@@ -69,6 +67,10 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 * @dataProvider frontTestableUrlsProvider
 	 */
 	public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged) {
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
+
 		if ($asLogged) {
 			$this->getClient(false, 'no-reply@netdevelo.cz', 'user123')->request('GET', $url);
 		} else {
