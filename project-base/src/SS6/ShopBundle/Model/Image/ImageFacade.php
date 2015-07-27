@@ -255,4 +255,31 @@ class ImageFacade {
 	public function getById($imageId) {
 		return $this->imageRepository->getById($imageId);
 	}
+
+	/**
+	 * @param object $sourceEntity
+	 * @param object $targetEntity
+	 */
+	public function copyImages($sourceEntity, $targetEntity) {
+		$sourceImages = $this->getAllImagesByEntity($sourceEntity);
+		$targetImages = [];
+		foreach ($sourceImages as $sourceImage) {
+			$this->filesystem->copy(
+				$this->imageLocator->getAbsoluteImageFilepath($sourceImage, ImageConfig::ORIGINAL_SIZE_NAME),
+				$this->fileUpload->getTemporaryFilepath($sourceImage->getFilename()),
+				true
+			);
+
+			$targetImage = $this->imageService->createImage(
+				$this->imageConfig->getImageEntityConfig($targetEntity),
+				$this->getEntityId($targetEntity),
+				$sourceImage->getFilename(),
+				$sourceImage->getType()
+			);
+
+			$this->em->persist($targetImage);
+			$targetImages[] = $targetImage;
+		}
+		$this->em->flush($targetImages);
+	}
 }

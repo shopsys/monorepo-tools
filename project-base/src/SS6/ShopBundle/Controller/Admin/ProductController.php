@@ -334,20 +334,18 @@ class ProductController extends BaseController {
 		if ($form->isValid()) {
 			$formData = $form->getData();
 			$mainVariant = $formData[VariantFormType::MAIN_VARIANT];
-			$this->productVariantFacade->createVariant(
+			$newMainVariant = $this->productVariantFacade->createVariant(
 				$mainVariant,
 				$formData[VariantFormType::VARIANTS]
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Varianta <a href="{{ url }}">{{ variantName }}</a> byla úspěšně vytvořena.',
-				[
-					'url' => $this->generateUrl('admin_product_edit', ['id' => $mainVariant->getId()]),
-					'variantName' => $mainVariant->getName(),
+				'Varianta <strong>{{ variantName }}</strong> byla úspěšně vytvořena.', [
+					'variantName' => $newMainVariant->getName(),
 				]
 			);
 
-			return $this->redirectToRoute('admin_product_list');
+			return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/createVariant.html.twig', [

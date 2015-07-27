@@ -138,7 +138,7 @@ class FileUpload {
 		if ($temporaryFilename && preg_match('/^.+?__(.+)$/', $temporaryFilename, $matches)) {
 			return $matches[1];
 		}
-		return '';
+		return $temporaryFilename;
 	}
 
 	/**
