@@ -48,7 +48,6 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->lastName = 'lastName';
 		$orderData->email = 'email';
 		$orderData->telephone = 'telephone';
-		$orderData->companyCustomer = true;
 		$orderData->companyName = 'companyName';
 		$orderData->companyNumber = 'companyNumber';
 		$orderData->companyTaxNumber = 'companyTaxNumber';

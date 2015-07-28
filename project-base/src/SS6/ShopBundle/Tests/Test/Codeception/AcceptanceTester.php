@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Test\Codeception;
 
-use RemoteWebDriver;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
  * Inherited Methods
@@ -16,6 +16,7 @@ use RemoteWebDriver;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method void haveFriend($name, $actorClass = null)
+ * @method \Codeception\Scenario getScenario()
  *
  * @SuppressWarnings(PHPMD)
  */

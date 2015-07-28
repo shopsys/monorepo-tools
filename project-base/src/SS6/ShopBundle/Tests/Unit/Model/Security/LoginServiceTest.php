@@ -12,6 +12,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$loginService = new LoginService();
 
 		$requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
+		/* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
 		$requestMock->expects($this->never())->method('getSession');
 
 		$requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');
@@ -30,6 +31,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$sessionMock->expects($this->atLeastOnce())->method('remove');
 
 		$requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
+		/* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
 		$requestMock->expects($this->once())->method('getSession')->will($this->returnValue($sessionMock));
 
 		$requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');
@@ -48,6 +50,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$sessionMock->expects($this->once())->method('remove');
 
 		$requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
+		/* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
 		$requestMock->expects($this->once())->method('getSession')->will($this->returnValue($sessionMock));
 
 		$requestMock->attributes = $this->getMock('\Symfony\Component\HttpFoundation\ParameterBag');

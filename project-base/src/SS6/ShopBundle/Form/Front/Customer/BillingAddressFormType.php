@@ -61,10 +61,10 @@ class BillingAddressFormType extends AbstractType {
 			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
-				$customerData = $form->getData();
-				/* @var $customerData \SS6\ShopBundle\Model\Customer\CustomerData */
+				$billingAddressData = $form->getData();
+				/* @var $billingAddressData \SS6\ShopBundle\Model\Customer\BillingAddressData */
 
-				if ($customerData->companyCustomer) {
+				if ($billingAddressData->companyCustomer) {
 					$validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
 				}
 

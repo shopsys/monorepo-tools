@@ -102,14 +102,6 @@ class Domain {
 		throw new \SS6\ShopBundle\Model\Domain\Exception\UnableToResolveDomainException();
 	}
 
-	public function revertDomain() {
-		if (count($this->queueDomainConfig) === 0) {
-			throw new \SS6\ShopBundle\Model\Domain\Exception\DomainQueueEmptyException();
-		}
-
-		$this->currentDomainConfig = array_pop($this->queueDomainConfig);
-	}
-
 	/**
 	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
 	 */
