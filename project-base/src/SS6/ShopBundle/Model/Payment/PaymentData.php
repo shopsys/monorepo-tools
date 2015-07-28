@@ -47,12 +47,18 @@ class PaymentData {
 	public $transports;
 
 	/**
+	 * @var bool
+	 */
+	public $czkRounding;
+
+	/**
 	 * @param string[] $name
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat|null $vat
 	 * @param string[] $description
 	 * @param string[] $instructions
 	 * @param bool $hidden
 	 * @param int[] $domains
+	 * @param bool $czkRounding
 	 */
 	public function __construct(
 		array $name = [],
@@ -60,7 +66,8 @@ class PaymentData {
 		array $description = [],
 		array $instructions = [],
 		$hidden = false,
-		array $domains = []
+		array $domains = [],
+		$czkRounding = false
 	) {
 		$this->name = $name;
 		$this->vat = $vat;
@@ -69,6 +76,7 @@ class PaymentData {
 		$this->domains = $domains;
 		$this->hidden = $hidden;
 		$this->transports = [];
+		$this->czkRounding = $czkRounding;
 	}
 
 	/**
@@ -78,6 +86,7 @@ class PaymentData {
 	public function setFromEntity(Payment $payment, array $paymentDomains) {
 		$this->vat = $payment->getVat();
 		$this->hidden = $payment->isHidden();
+		$this->czkRounding = $payment->isCzkRounding();
 		$this->transports = $payment->getTransports()->toArray();
 
 		$translations = $payment->getTranslations();

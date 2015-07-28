@@ -57,6 +57,7 @@ class PaymentFormType extends AbstractType {
 				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
+			->add('czkRounding', FormType::YES_NO, ['required' => false])
 			->add('transports', FormType::CHOICE, [
 				'choice_list' => new ObjectChoiceList($this->allTransports, 'name', [], null, 'id'),
 				'multiple' => true,

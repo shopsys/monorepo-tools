@@ -58,14 +58,14 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	private $transports;
 
 	/**
-	 * @var int
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
 	private $hidden;
 
 	/**
-	 * @var int
+	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
@@ -79,6 +79,13 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	private $position;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $czkRounding;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function __construct(PaymentData $paymentData) {
@@ -89,6 +96,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 		$this->deleted = false;
 		$this->setTranslations($paymentData);
 		$this->prices = new ArrayCollection();
+		$this->czkRounding = $paymentData->czkRounding;
 	}
 
 	/**
@@ -139,6 +147,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	public function edit(PaymentData $paymentData) {
 		$this->vat = $paymentData->vat;
 		$this->hidden = $paymentData->hidden;
+		$this->czkRounding = $paymentData->czkRounding;
 		$this->setTranslations($paymentData);
 	}
 
@@ -257,6 +266,13 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	 */
 	public function setPosition($position) {
 		$this->position = $position;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isCzkRounding() {
+		return $this->czkRounding;
 	}
 
 	/**

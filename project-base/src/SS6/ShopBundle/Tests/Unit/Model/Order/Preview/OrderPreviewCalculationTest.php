@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
+use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
@@ -61,11 +62,15 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->getMock();
 		$transportPriceCalculationMock->expects($this->once())->method('calculatePrice')->will($this->returnValue($transportPrice));
 
+		$orderPriceCalculationMock = $this->getMock(OrderPriceCalculation::class, ['calculateOrderRoundingAmount'], [], '', false);
+		$orderPriceCalculationMock->expects($this->any())->method('calculateOrderRoundingAmount')->willReturn(null);
+
 		$previewCalculation = new OrderPreviewCalculation(
 			$quantifiedProductPriceCalculationMock,
 			$quantifiedProductDiscountCalculationMock,
 			$transportPriceCalculationMock,
-			$paymentPriceCalculationMock
+			$paymentPriceCalculationMock,
+			$orderPriceCalculationMock
 		);
 
 		$quantifiedItemMock = $this->getMock(QuantifiedItem::class, [], [], '', false);
@@ -136,11 +141,14 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->getMock();
 		$transportPriceCalculationMock->expects($this->never())->method('calculatePrice');
 
+		$orderPriceCalculationMock = $this->getMock(OrderPriceCalculation::class, [], [], '', false);
+
 		$previewCalculation = new OrderPreviewCalculation(
 			$quantifiedProductPriceCalculationMock,
 			$quantifiedProductDiscountCalculationMock,
 			$transportPriceCalculationMock,
-			$paymentPriceCalculationMock
+			$paymentPriceCalculationMock,
+			$orderPriceCalculationMock
 		);
 
 		$quantifiedItemMock = $this->getMock(QuantifiedItem::class, [], [], '', false);

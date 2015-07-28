@@ -22,6 +22,11 @@
 					{{ form_row(form.paymentData.name, { label: 'Název'|trans}) }}
 					{{ form_row(form.paymentData.domains, { label: 'Doména'|trans }) }}
 					{{ form_row(form.paymentData.hidden, { label: 'Skryté'|trans, attr: {class: 'form-line--between'} }) }}
+					{{ form_row(form.paymentData.czkRounding, {
+						label: 'Objednávku v CZK zaokrouhlit na celé koruny'|trans,
+						attr: { class: 'form-line--between' },
+						icon: { title: 'Do objednávky bude přidána zaokrouhlovací položka s 0% DPH. Používá se pro platbu v hotovosti.'|trans }
+					}) }}
 					{{ form_row(form.paymentData.vat, { label: 'DPH'|trans}) }}
 					{% block payment_base_prices %}{% endblock %}
 					{{ form_row(form.paymentData.transports, { label: 'Dopravy'|trans, empty_message: 'Musíte nejdřív nějakou dopravu vytvořit.'}) }}

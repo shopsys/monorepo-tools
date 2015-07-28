@@ -6,6 +6,10 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderTotalPrice;
+use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Pricing\Rounding;
 
 class OrderPriceCalculation {
 
@@ -15,10 +19,16 @@ class OrderPriceCalculation {
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation $orderItemPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
 	 */
-	public function __construct(OrderItemPriceCalculation $orderItemPriceCalculation) {
+	private $rounding;
+
+	public function __construct(
+		OrderItemPriceCalculation $orderItemPriceCalculation,
+		Rounding $rounding
+	) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
+		$this->rounding = $rounding;
 	}
 
 	/**
@@ -42,6 +52,31 @@ class OrderPriceCalculation {
 		}
 
 		return new OrderTotalPrice($priceWithVat, $priceWithoutVat, $productPriceWithVat);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $orderTotalPrice
+	 * @return string|null
+	 */
+	public function calculateOrderRoundingAmount(
+		Payment $payment,
+		Currency $currency,
+		Price $orderTotalPrice
+	) {
+		if (!$payment->isCzkRounding() || $currency->getCode() !== Currency::CODE_CZK) {
+			return null;
+		}
+
+		$roundingAmount = $this->rounding->roundPriceWithVat(
+			round($orderTotalPrice->getPriceWithVat()) - $orderTotalPrice->getPriceWithVat()
+		);
+		if ($roundingAmount === 0.0) {
+			return null;
+		}
+
+		return $roundingAmount;
 	}
 
 }

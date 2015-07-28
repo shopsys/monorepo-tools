@@ -134,6 +134,7 @@ class OrderCreationService {
 
 		$this->fillOrderProducts($order, $orderPreview, $locale);
 		$this->fillOrderTransportAndPayment($order, $orderPreview, $locale);
+		$this->fillOrderRounding($order, $orderPreview, $locale);
 	}
 
 	/**
@@ -214,6 +215,26 @@ class OrderCreationService {
 			if ($quantifiedItemDiscount !== null) {
 				$this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale);
 			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param string $locale
+	 */
+	private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale) {
+		if ($orderPreview->getRoundingAmount() !== null) {
+			new OrderProduct(
+				$order,
+				$this->translator->trans('Zaokrouhlení', [], 'messages', $locale),
+				$orderPreview->getRoundingAmount(),
+				$orderPreview->getRoundingAmount(),
+				0,
+				1,
+				null,
+				null
+			);
 		}
 	}
 

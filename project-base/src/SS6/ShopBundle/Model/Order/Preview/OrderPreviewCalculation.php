@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Preview;
 
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
@@ -34,16 +35,23 @@ class OrderPreviewCalculation {
 	 */
 	private $paymentPriceCalculation;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderPriceCalculation
+	 */
+	private $orderPriceCalculation;
+
 	public function __construct(
 		QuantifiedProductPriceCalculation $quantifiedProductPriceCalculation,
 		QuantifiedProductDiscountCalculation $quantifiedProductDiscountCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
-		PaymentPriceCalculation $paymentPriceCalculation
+		PaymentPriceCalculation $paymentPriceCalculation,
+		OrderPriceCalculation $orderPriceCalculation
 	) {
 		$this->quantifiedProductPriceCalculation = $quantifiedProductPriceCalculation;
 		$this->quantifiedProductDiscountCalculation = $quantifiedProductDiscountCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
+		$this->orderPriceCalculation = $orderPriceCalculation;
 	}
 
 	/**
@@ -55,6 +63,7 @@ class OrderPreviewCalculation {
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 * @param float|null $discountPercent
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function calculatePreview(
 		Currency $currency,
@@ -95,14 +104,23 @@ class OrderPreviewCalculation {
 				$productsPrice,
 				$domainId
 			);
+			$roundingAmount = $this->calculateRoundingAmount(
+				$payment,
+				$currency,
+				$productsPrice,
+				$transportPrice,
+				$paymentPrice
+			);
 		} else {
 			$paymentPrice = null;
+			$roundingAmount = null;
 		}
 
 		$totalPrice = $this->calculateTotalPrice(
 			$productsPrice,
 			$transportPrice,
-			$paymentPrice
+			$paymentPrice,
+			$roundingAmount
 		);
 
 		return new OrderPreview(
@@ -114,20 +132,48 @@ class OrderPreviewCalculation {
 			$transport,
 			$transportPrice,
 			$payment,
-			$paymentPrice
+			$paymentPrice,
+			$roundingAmount
 		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
+	 * @return string|null
+	 */
+	private function calculateRoundingAmount(
+		Payment $payment,
+		Currency $currency,
+		Price $productsPrice,
+		Price $transportPrice = null,
+		Price $paymentPrice = null
+	) {
+		$totalPrice = $this->calculateTotalPrice(
+			$productsPrice,
+			$transportPrice,
+			$paymentPrice,
+			null
+		);
+
+		return $this->orderPriceCalculation->calculateOrderRoundingAmount($payment, $currency, $totalPrice);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
+	 * @param string|null $roundingAmount
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
 		Price $productsPrice,
 		Price $transportPrice = null,
-		Price $paymentPrice = null
+		Price $paymentPrice = null,
+		$roundingAmount = null
 	) {
 		$totalPriceWithoutVat = 0;
 		$totalPriceWithVat = 0;
@@ -147,6 +193,11 @@ class OrderPreviewCalculation {
 			$totalPriceWithoutVat += $paymentPrice->getPriceWithoutVat();
 			$totalPriceWithVat += $paymentPrice->getPriceWithVat();
 			$totalPriceVatAmount += $paymentPrice->getVatAmount();
+		}
+
+		if ($roundingAmount !== null) {
+			$totalPriceWithoutVat += $roundingAmount;
+			$totalPriceWithVat += $roundingAmount;
 		}
 
 		return new Price(

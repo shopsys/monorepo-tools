@@ -49,6 +49,17 @@
 					</tr>
 				{% endif %}
 
+				{% if orderPreview.roundingAmount is not empty %}
+					<tr class="list-cart-preview__row">
+						<td class="list-cart-preview__cell">
+							{{ 'Zaokrouhlení'|trans }}:
+						</td>
+						<td class="list-cart-preview__cell list-cart-preview__cell--price">
+							{{ orderPreview.roundingAmount|price }}
+						</td>
+					</tr>
+				{% endif %}
+
 				<tr class="list-cart-preview__row list-cart-preview__row--total list-cart-preview__row--important">
 					<td class="list-cart-preview__cell">
 						{{ 'Cena celkem s DPH'|trans }}:

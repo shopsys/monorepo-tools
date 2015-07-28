@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Currency {
 
+	const CODE_CZK = 'CZK';
+	const CODE_EUR = 'EUR';
+
 	const DEFAULT_EXCHANGE_RATE = 1;
 
 	/**

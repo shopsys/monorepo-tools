@@ -20,11 +20,11 @@ class CurrencyDataFixture extends AbstractReferenceFixture {
 		$currencyData = new CurrencyData();
 
 		$currencyData->name = 'Česká koruna';
-		$currencyData->code = 'CZK';
+		$currencyData->code = Currency::CODE_CZK;
 		$this->createCurrency($manager, self::CURRENCY_CZK, $currencyData);
 
 		$currencyData->name = 'Euro';
-		$currencyData->code = 'EUR';
+		$currencyData->code = Currency::CODE_EUR;
 		$currencyData->exchangeRate = 25;
 		$this->createCurrency($manager, self::CURRENCY_EUR, $currencyData);
 

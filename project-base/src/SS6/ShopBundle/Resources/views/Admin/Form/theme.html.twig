@@ -406,6 +406,8 @@
 		{% set options = choices -%}
 		{{- block('choice_widget_options') -}}
 	</select>
+
+		{{- block('appendix_block') -}}
 {%- endblock choice_widget_collapsed %}
 
 {% block choice_widget_options -%}
@@ -436,6 +438,7 @@
 			{% endfor %}
 			</div>
 	{% endspaceless %}
+	{{- block('appendix_block') -}}
 {% endblock choice_widget_expanded %}
 
 {% block widget_attributes -%}
