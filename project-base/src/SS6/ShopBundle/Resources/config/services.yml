@@ -877,8 +877,14 @@ services:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
+  ss6.shop.security.admin_logout_handler:
+    class: SS6\ShopBundle\Model\Security\AdminLogoutHandler
+
   ss6.shop.security.customer_login_handler:
     class: SS6\ShopBundle\Model\Security\CustomerLoginHandler
+
+  ss6.shop.security.front_logout_handler:
+    class: SS6\ShopBundle\Model\Security\FrontLogoutHandler
 
   ss6.shop.security.login_as_user_facade:
     class: SS6\ShopBundle\Model\Security\LoginAsUserFacade
@@ -893,9 +899,6 @@ services:
 
   ss6.shop.security.login_service:
     class: SS6\ShopBundle\Model\Security\LoginService
-
-  ss6.shop.security.logout_handler:
-    class: SS6\ShopBundle\Model\Security\LogoutHandler
 
   ss6.shop.setting:
     class: SS6\ShopBundle\Model\Setting\Setting

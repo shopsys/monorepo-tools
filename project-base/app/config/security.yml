@@ -30,10 +30,11 @@ security:
         csrf_parameter: "admin_login_form[_token]"
       logout:
         path: admin_logout
-        target: admin_login
+        success_handler: ss6.shop.security.admin_logout_handler
         csrf_parameter: _csrf_token
         csrf_token_generator: form.csrf_provider
         csrf_token_id: admin_logout
+        invalidate_session: false
 
     frontend:
       pattern: ^/
@@ -56,10 +57,11 @@ security:
         remember_me_parameter: "front_login_form[rememberMe]"
       logout:
         path: front_logout
-        success_handler: ss6.shop.security.logout_handler
+        success_handler: ss6.shop.security.front_logout_handler
         csrf_parameter: _csrf_token
         csrf_token_generator: form.csrf_provider
         csrf_token_id: frontend_logout
+        invalidate_session: false
 
   access_control:
     # same pattern must be in routing_front.yml

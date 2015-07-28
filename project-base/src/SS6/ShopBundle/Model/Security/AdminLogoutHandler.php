@@ -2,18 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Security;
 
-use SS6\ShopBundle\Model\Order\OrderFlowFacade;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
-class LogoutHandler implements LogoutSuccessHandlerInterface {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderFlowFacade
-	 */
-	private $orderFlowFacade;
+class AdminLogoutHandler implements LogoutSuccessHandlerInterface {
 
 	/**
 	 * @var \Symfony\Component\Routing\Router
@@ -22,11 +16,9 @@ class LogoutHandler implements LogoutSuccessHandlerInterface {
 
 	/**
 	 * @param \Symfony\Component\Routing\Router $router
-	 * @param \SS6\ShopBundle\Model\Order\OrderFlowFacade $orderFlowFacade
 	 */
-	public function __construct(Router $router, OrderFlowFacade $orderFlowFacade) {
+	public function __construct(Router $router) {
 		$this->router = $router;
-		$this->orderFlowFacade = $orderFlowFacade;
 	}
 
 	/**
@@ -34,8 +26,8 @@ class LogoutHandler implements LogoutSuccessHandlerInterface {
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
 	public function onLogoutSuccess(Request $request) {
-		$this->orderFlowFacade->resetOrderForm();
-		$url = $this->router->generate('front_homepage');
+		$url = $this->router->generate('admin_login');
+		$request->getSession()->migrate();
 
 		return new RedirectResponse($url);
 	}
