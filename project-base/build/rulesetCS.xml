@@ -2,7 +2,9 @@
 <ruleset name="ruleset">
 	<description>Shopsys 6 coding standards</description>
 
-	<rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+	<rule ref="Generic.CodeAnalysis.EmptyStatement">
+		<exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH"/>
+	</rule>
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
 	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
 	<rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
