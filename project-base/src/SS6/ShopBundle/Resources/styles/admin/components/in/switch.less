@@ -1,0 +1,70 @@
+/*
+Switch
+=======
+Switcher for domains, languages etc
+
+
+*/
+
+.in-switch {
+	display: inline-block;
+	.cfx();
+
+	&__title {
+		float: left;
+		padding: 2px 10px;
+		line-height: 20px;
+
+		font-weight: bold;
+
+		.in-switch--muted & {
+			padding: 0 10px;
+		}
+	}
+
+	&__list {
+		.reset-ul();
+		.cfx();
+		float: left;
+
+		.in-switch--muted & {
+			position: relative;
+			top: -2px;
+		}
+
+		&__item {
+			width: 44px;
+			margin: 0 2px;
+			float: left;
+
+			border: 2px solid @color-f;
+
+			.in-switch--muted & {
+				.opacity(70);
+			}
+
+			&__in {
+				position: relative;
+				height: 20px;
+				display: block;
+
+				cursor: pointer;
+				background: @color-f;
+
+				img {
+					.center-image();
+				}
+			}
+
+			&--active {
+				border-color: @color-green;
+
+				.in-switch--muted & {
+					border-color: @color-f;
+
+					.opacity(100);
+				}
+			}
+		}
+	}
+}

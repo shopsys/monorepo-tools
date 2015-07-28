@@ -11,47 +11,30 @@ Form field constructions, with many variants and uses
 	position: relative;
 
 	border: 1px solid @color-border;
+	border-left-color: @color-border-darker;
+	border-right-color: @color-border-darker;
 	background: @color-f;
 
 	& + .form-line {
 		border-top: 0;
 	}
 
+	&:last-child {
+		border-bottom-color: @color-border-darker;
+	}
+
 	&--error {
 		background: lighten(@color-red, 55%);
 	}
 
-	&__title {
-		padding: 15px;
-		position: relative;
-
-		background: @bg-primary;
-		border-bottom: 1px solid darken(@bg-primary, 5%);
-		color: @color-f;
-		font-size: 14px;
-		text-transform: uppercase;
-		font-weight: bold;
-
-		&__click {
-			float: right;
-			cursor: pointer;
-			margin: -15px -15px -15px 0;
-			padding: 15px;
-			width: 45px;
-			height: 50px;
-			line-height: 16px;
-
-			text-align: center;
-			font-size: 28px;
-			background: darken(@bg-primary, 5%);
-		}
+	&--no-padd {
+		padding: 0;
 	}
 
 	&__label {
 		width: 230px;
 		padding: 6px 10px 6px 0;
 		float: left;
-		line-height: 20px;
 
 		font-weight: bold;
 	}
@@ -87,47 +70,75 @@ Form field constructions, with many variants and uses
 			padding-left: 10px;
 		}
 
+		&--left {
+			float: left;
+			padding-right: 4px;
+		}
+
 		&--compulsory {
 			position: absolute;
-			top: 16px;
+			top: 15px;
 			left: -9px;
-			width: 18px;
-			height: 18px;
-			line-height: 16px;
-			padding: 0;
-			z-index: 2;
-
-			text-align: center;
-			font-weight: normal;
-			background: @color-f;
-			border: 1px solid @color-border;
-			color: @color-red;
-
-			.border-radius(50%);
+			padding-right: 0;
 		}
 
 		&--error {
 			position: absolute;
 			top: 14px;
 			left: -12px;
-			width: 24px;
-			height: 24px;
-			line-height: 18px;
-			padding: 0;
-			z-index: 3;
+			padding-right: 0;
+		}
 
+		&__icon {
+			position: absolute;
+			top: 4px;
+			left: 0;
+			width: 58px;
+			padding: 0 2px;
+
+			border-right: 1px solid @color-border;
 			text-align: center;
-			font-size: 18px;
-			background: @color-f;
-			border: 1px solid @color-border;
-			color: @color-red;
 
-			.border-radius(50%);
-
-			i {
+			&__in {
+				display: block;
 				position: relative;
-				left: 1px;
-				top: 1px;
+				height: 24px;
+			}
+
+			img {
+				.center-image();
+			}
+		}
+
+		&__count {
+			display: table;
+			height: 32px;
+
+			&__val {
+				display: table-cell;
+				vertical-align: middle;
+				padding-right: 7px;
+
+				span {
+					display: inline-block;
+					padding: 3px 7px;
+					line-height: 16px;
+
+					font-size: 12px;
+					text-align: center;
+					color: @color-hint;
+					background: @bg-input-icon;
+				}
+			}
+
+			&__desc {
+				display: table-cell;
+				vertical-align: middle;
+				line-height: 12px;
+
+				font-size: 12px;
+				color: @color-hint;
+				font-style: italic;
 			}
 		}
 	}
@@ -136,15 +147,72 @@ Form field constructions, with many variants and uses
 		clear: left;
 		margin-top: 10px;
 	}
-}.form-line__label--with-image {
-	padding-left: 25px;
-}
-.form-line__image {
-	position: absolute;
-	top: 5px;
-	left: 0;
-	width: 25px;
-	display: block;
 
-	text-align: center;
+	&__group {
+		.cfx();
+		padding: 6px 15px;
+
+		background: @bg-info;
+
+		&__image {
+			float: left;
+			width: 46px;
+			height: 26px;
+			position: relative;
+			margin-right: 10px;
+
+			text-align: center;
+			background: @color-f;
+
+			img {
+				.center-image();
+			}
+		}
+
+		&__name {
+			line-height: 26px;
+
+			font-weight: bold;
+		}
+	}
+
+	&__box {
+		margin-bottom: 4px;
+
+		&__title {
+			.cfx();
+			padding: 6px 15px;
+
+			background: @bg-info;
+			border: 1px solid @color-border;
+
+			&__image {
+				float: left;
+				width: 46px;
+				height: 26px;
+				position: relative;
+				margin-right: 10px;
+
+				text-align: center;
+				background: @color-f;
+
+				img {
+					.center-image();
+				}
+			}
+
+			&__name {
+				line-height: 26px;
+
+				font-weight: bold;
+			}
+		}
+
+		&__content {
+			padding: 6px 15px;
+
+			border: 1px solid @color-border;
+			border-top: none;
+		}
+	}
 }

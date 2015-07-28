@@ -1,0 +1,48 @@
+/*
+Form groop
+===========
+
+*/
+
+.form-group {
+	position: relative;
+
+	&__title {
+		padding: 15px;
+		position: relative;
+
+		background: @bg-primary;
+		border-bottom: 1px solid darken(@bg-primary, 5%);
+		color: @color-f;
+		font-size: 14px;
+		text-transform: uppercase;
+		font-weight: bold;
+
+		&__click {
+			float: right;
+			cursor: pointer;
+			margin: -15px -15px -15px 0;
+			padding: 15px;
+			width: 45px;
+			height: 48px;
+			line-height: 16px;
+
+			text-align: center;
+			font-size: 28px;
+			background: darken(@bg-primary, 5%);
+		}
+
+		&__buttons {
+			float: right;
+			margin-top: -2px;
+			margin-right: 10px;
+
+			text-transform: none;
+		}
+	}
+
+	&__error {
+		top: 11px;
+		left: -12px;
+	}
+}

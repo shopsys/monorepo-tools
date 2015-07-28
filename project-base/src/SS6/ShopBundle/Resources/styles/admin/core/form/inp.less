@@ -6,13 +6,30 @@
 	padding: 0 10px;
 
 	border: 1px solid @color-border;
+	color: @color-base;
+
+	.box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.15));
 
 	&--iconic {
 		padding-right: 40px;
 	}
 
+	&--flag {
+		width: 300px;
+		padding-left: 40px;
+	}
+
+	&--domain {
+		width: 408px;
+		padding-left: 60px;
+	}
+
 	&__wrap {
 		position: relative;
+
+		+ .inp__wrap {
+			margin-top: 5px;
+		}
 	}
 
 	&__icon {
@@ -32,8 +49,59 @@
 		}
 	}
 
+	&__flag {
+		position: absolute;
+		top: 10px;
+		left: 7px;
+		width: 22px;
+		height: 14px;
+
+		&:after {
+			position: absolute;
+			top: -3px;
+			bottom: -3px;
+			width: 1px;
+			right: -7px;
+			display: block;
+			content: '';
+
+			background: @color-border;
+		}
+
+		img {
+			.center-image();
+		}
+	}
+
+	&__domain {
+		position: absolute;
+		top: 7px;
+		left: 7px;
+		width: 40px;
+		height: 18px;
+
+		&:after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			right: -7px;
+			display: block;
+			content: '';
+
+			background: @color-border;
+		}
+
+		img {
+			.center-image();
+		}
+	}
+
+
 
 	.form-line--error & {
 		border-color: @color-red;
+
+		.box-shadow(none);
 	}
 }

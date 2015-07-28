@@ -1,0 +1,50 @@
+/*
+Table for grid
+==============
+
+*/
+
+.table-grid {
+	width: 100%;
+	border-collapse: collapse;
+
+	thead {
+		background: @bg-primary;
+		color: @color-f;
+		font-weight: bold;
+	}
+
+	tbody {
+		background: @color-f;
+		border: 1px solid @color-border;
+	}
+
+	&__row {
+		border-bottom: 1px solid @color-border;
+
+		&--edit {
+			background: @bg-edit;
+		}
+	}
+
+	&__cell {
+		padding: 6px 17px;
+
+		text-align: left;
+
+		&--choice {
+			width: 40px;
+		}
+
+		&--actions {
+			width: 90px;
+
+			text-align: right;
+		}
+
+		thead & {
+			padding-top: 14px;
+			padding-bottom: 14px;
+		}
+	}
+}

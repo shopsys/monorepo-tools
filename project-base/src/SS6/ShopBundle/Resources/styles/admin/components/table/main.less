@@ -1,0 +1,38 @@
+/*
+Simple main table style
+==============
+
+*/
+
+.table-main {
+	width: 100%;
+	border-collapse: collapse;
+
+	thead {
+		background: @bg-primary;
+		color: @color-f;
+		font-weight: bold;
+	}
+
+	tbody {
+		background: @color-f;
+		border: 1px solid @color-border;
+	}
+
+	tr {
+		border-bottom: 1px solid @color-border;
+	}
+
+	td, th {
+		padding: 6px 17px;
+
+		text-align: left;
+	}
+
+	thead {
+		td, th {
+			padding-top: 14px;
+			padding-bottom: 14px;
+		}
+	}
+}
