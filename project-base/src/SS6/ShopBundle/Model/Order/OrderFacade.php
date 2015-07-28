@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
@@ -82,6 +83,11 @@ class OrderFacade {
 	 */
 	private $localization;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade
+	 */
+	private $administratorSecurityFacade;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -94,7 +100,8 @@ class OrderFacade {
 		OrderMailFacade $orderMailFacade,
 		OrderHashGeneratorRepository $orderHashGeneratorRepository,
 		Setting $setting,
-		Localization $localization
+		Localization $localization,
+		AdministratorSecurityFacade $administratorSecurityFacade
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -108,6 +115,7 @@ class OrderFacade {
 		$this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
 		$this->setting = $setting;
 		$this->localization = $localization;
+		$this->administratorSecurityFacade = $administratorSecurityFacade;
 	}
 
 	/**
@@ -120,6 +128,8 @@ class OrderFacade {
 		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
+
+		$this->setOrderDataAdministrator($orderData);
 
 		$order = new Order(
 			$orderData,
@@ -251,5 +261,19 @@ class OrderFacade {
 			$this->localization->getDefaultLocale(),
 			$quickSearchData
 		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 */
+	private function setOrderDataAdministrator(OrderData $orderData) {
+		if ($this->administratorSecurityFacade->isAdministratorLoggedAsCustomer()) {
+			try {
+				$currentAdmin = $this->administratorSecurityFacade->getCurrentAdministrator();
+				$orderData->createdAsAdministrator = $currentAdmin;
+				$orderData->createdAsAdministratorName = $currentAdmin->getRealName();
+			} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
+			}
+		}
 	}
 }

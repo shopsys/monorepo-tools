@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class AdministratorSecurityFacade {
@@ -29,14 +30,21 @@ class AdministratorSecurityFacade {
 	 */
 	private $accessDecisionManager;
 
+	/**
+	 * @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker
+	 */
+	private $authorizationChecker;
+
 	public function __construct(
 		SessionInterface $session,
 		AdministratorUserProvider $administratorUserProvider,
-		AccessDecisionManagerInterface $accessDecisionManager
+		AccessDecisionManagerInterface $accessDecisionManager,
+		AuthorizationChecker $authorizationChecker
 	) {
 		$this->session = $session;
 		$this->administratorUserProvider = $administratorUserProvider;
 		$this->accessDecisionManager = $accessDecisionManager;
+		$this->authorizationChecker = $authorizationChecker;
 	}
 
 	/**
@@ -54,6 +62,17 @@ class AdministratorSecurityFacade {
 		}
 
 		return $this->accessDecisionManager->decide($token, [Roles::ROLE_ADMIN]);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isAdministratorLoggedAsCustomer() {
+		try {
+			return $this->authorizationChecker->isGranted(Roles::ROLE_ADMIN_AS_CUSTOMER);
+		} catch (\Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException $e) {
+			return false;
+		}
 	}
 
 	/**

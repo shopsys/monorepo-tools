@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
-use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
@@ -22,7 +21,6 @@ use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
@@ -118,11 +116,6 @@ class OrderController extends BaseController {
 	 */
 	private $promoCodeFacade;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade
-	 */
-	private $administratorSecurityFacade;
-
 	public function __construct(
 		OrderFacade $orderFacade,
 		CartFacade $cartFacade,
@@ -140,8 +133,7 @@ class OrderController extends BaseController {
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
 		OrderMailFacade $orderMailFacade,
-		PromoCodeFacade $promoCodeFacade,
-		AdministratorSecurityFacade $administratorSecurityFacade
+		PromoCodeFacade $promoCodeFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->cartFacade = $cartFacade;
@@ -160,7 +152,6 @@ class OrderController extends BaseController {
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
 		$this->promoCodeFacade = $promoCodeFacade;
-		$this->administratorSecurityFacade = $administratorSecurityFacade;
 	}
 
 	/**
@@ -213,7 +204,6 @@ class OrderController extends BaseController {
 				$form = $this->flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
 				$order = $this->orderFacade->createOrder($orderData, $orderPreview, $this->getUser());
-				$this->tryAmendOrderDataAsAdmin();
 				$this->cartFacade->cleanCart();
 				$this->promoCodeFacade->removeEnteredPromoCode();
 				if ($user instanceof User) {
@@ -329,20 +319,6 @@ class OrderController extends BaseController {
 		$mailTemplate = $this->orderMailFacade->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
 		if ($mailTemplate->isSendMail()) {
 			$this->orderMailFacade->sendEmail($order);
-		}
-	}
-
-	private function tryAmendOrderDataAsAdmin() {
-		if ($this->isGranted(Roles::ROLE_ADMIN_AS_CUSTOMER)) {
-			try {
-				$currentAdmin = $this->administratorSecurityFacade->getCurrentAdministrator();
-				$orderData->createdAsAdministrator = $currentAdmin;
-				$orderData->createdAsAdministratorName = $currentAdmin->getRealName();
-			} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Administrátor není přihlášen.');
-
-				return $this->redirect($this->generateUrl('front_order_index'));
-			}
 		}
 	}
 
