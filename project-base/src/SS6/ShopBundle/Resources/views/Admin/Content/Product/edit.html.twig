@@ -68,13 +68,13 @@
 {% endblock %}
 
 {% block product_calculated_hidden_info %}
-	{% if product.isUsingStock and product.calculatedHidden %}
+	{% if product.isUsingStock and product.calculatedHidden and product.stockQuantity <= 0 %}
 		<div class="form-line form-line__text text-red">{{ 'Produkt je skrytý z důvodu vyprodání'|trans }}</div>
 	{% endif %}
 {% endblock %}
 
 {% block product_calculated_selling_denied_info %}
-	{% if product.isUsingStock and product.calculatedSellingDenied %}
+	{% if product.isUsingStock and product.calculatedSellingDenied and product.stockQuantity <= 0 %}
 		<div class="form-line form-line__text text-red">{{ 'Produkt je vyřazen z prodeje z důvodu vyprodání'|trans }}</div>
 	{% endif %}
 {% endblock %}
