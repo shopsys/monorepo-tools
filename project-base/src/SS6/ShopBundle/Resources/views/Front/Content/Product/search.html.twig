@@ -34,7 +34,7 @@
 	{% endif %}
 
 	<div class="position-relative">
-		{% if productDetails|length > 0 or filterFormSubmited %}
+		{% if paginationResult.results|length > 0 or filterFormSubmited %}
 			<div class="box-filter js-product-filter">
 				{{ productFilterForm.filterForm(
 					filterForm,

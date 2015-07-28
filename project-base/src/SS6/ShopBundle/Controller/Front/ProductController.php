@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
 use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -91,8 +92,6 @@ class ProductController extends Controller {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
-	 *
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function listByCategoryAction(Request $request, $id) {
 		$category = $this->categoryFacade->getById($id);
@@ -111,11 +110,7 @@ class ProductController extends Controller {
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createForm($this->productFilterFormTypeFactory->createForCategory(
-			$this->domain->getId(),
-			$this->domain->getLocale(),
-			$category
-		));
+		$filterForm = $this->createFilterFormForCategory($category);
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
@@ -132,32 +127,23 @@ class ProductController extends Controller {
 			$productFilterData
 		);
 
-		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/ajaxList.html.twig', [
-				'paginationResult' => $paginationResult,
-				'productFilterCountData' => $productFilterCountData,
-				'category' => $category,
-				'filterForm' => $filterForm->createView(),
-				'filterFormSubmited' => $filterForm->isSubmitted(),
-			]);
-		}
-
-		return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', [
-			'productDetails' => $paginationResult->getResults(),
-			'orderingSetting' => $orderingSetting,
+		$viewParameters = [
 			'paginationResult' => $paginationResult,
 			'productFilterCountData' => $productFilterCountData,
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
-			'domainId' => $this->domain->getId(),
-		]);
+		];
+
+		if ($request->isXmlHttpRequest()) {
+			return $this->render('@SS6Shop/Front/Content/Product/ajaxList.html.twig', $viewParameters);
+		} else {
+			return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', $viewParameters);
+		}
 	}
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 *
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function searchAction(Request $request) {
 		$searchText = $request->query->get(self::SEARCH_TEXT_PARAMETER);
@@ -172,19 +158,9 @@ class ProductController extends Controller {
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createForm($this->productFilterFormTypeFactory->createForSearch(
-			$this->domain->getId(),
-			$this->domain->getLocale(),
-			$searchText
-		));
+		$filterForm = $this->createFilterFormForSearch($searchText);
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
-
-		$foundCategories = $this->categoryFacade->getVisibleByDomainAndSearchText(
-			$this->domain->getId(),
-			$this->domain->getLocale(),
-			$searchText
-		);
 
 		$paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
 			$searchText,
@@ -199,27 +175,56 @@ class ProductController extends Controller {
 			$productFilterData
 		);
 
-		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/ajaxSearch.html.twig', [
-				'paginationResult' => $paginationResult,
-				'productFilterCountData' => $productFilterCountData,
-				'filterForm' => $filterForm->createView(),
-				'filterFormSubmited' => $filterForm->isSubmitted(),
-				'searchText' => $searchText,
-			]);
-		}
-
-		return $this->render('@SS6Shop/Front/Content/Product/search.html.twig', [
-			'searchText' => $searchText,
-			'foundCategories' => $foundCategories,
-			'productDetails' => $paginationResult->getResults(),
-			'orderingSetting' => $orderingSetting,
+		$viewParameters = [
 			'paginationResult' => $paginationResult,
 			'productFilterCountData' => $productFilterCountData,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
-			'domainId' => $this->domain->getId(),
-		]);
+			'searchText' => $searchText,
+		];
+
+		if ($request->isXmlHttpRequest()) {
+			return $this->render('@SS6Shop/Front/Content/Product/ajaxSearch.html.twig', $viewParameters);
+		} else {
+			$viewParameters['foundCategories'] = $this->searchCategories($searchText);
+			return $this->render('@SS6Shop/Front/Content/Product/search.html.twig', $viewParameters);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \Symfony\Component\Form\Form
+	 */
+	private function createFilterFormForCategory(Category $category) {
+		return $this->createForm($this->productFilterFormTypeFactory->createForCategory(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$category
+		));
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @return \Symfony\Component\Form\Form
+	 */
+	private function createFilterFormForSearch($searchText) {
+		return $this->createForm($this->productFilterFormTypeFactory->createForSearch(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$searchText
+		));
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	private function searchCategories($searchText) {
+		return $this->categoryFacade->getVisibleByDomainAndSearchText(
+			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$searchText
+		);
 	}
 
 	public function selectOrderingModeAction(Request $request) {
