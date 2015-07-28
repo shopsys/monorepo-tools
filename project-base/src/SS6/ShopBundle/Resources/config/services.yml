@@ -146,9 +146,6 @@ services:
   ss6.shop.cart.cart_service:
     class: SS6\ShopBundle\Model\Cart\CartService
 
-  ss6.shop.cart.cart_summary_calculation:
-    class: SS6\ShopBundle\Model\Cart\CartSummaryCalculation
-
   ss6.shop.cart.cart_watcher_facade:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
     arguments:

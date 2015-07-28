@@ -29,6 +29,7 @@
 				<tbody>
 					{% for cartItemKey, cartItem in cartItems %}
 						{% set cartItemPrice = cartItemPrices[cartItemKey] %}
+						{% set cartItemDiscount = cartItemDiscounts[cartItemKey] %}
 						<tr class="table-cart__item">
 							<td class="table-cart__image text-center">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}">
@@ -64,6 +65,12 @@
 
 							<td class="table-cart__price-final">
 								{{ cartItemPrice.totalPriceWithVat|price }}
+								{% if cartItemDiscount is not null %}
+									<div>
+										{{ 'Sleva' }}:
+										{{ cartItemDiscount.priceWithVat|price }}
+									</div>
+								{% endif %}
 							</td>
 
 							<td class="table-cart__remove">
@@ -86,7 +93,7 @@
 						<td colspan="4" class="table-cart__foot__total text-right">
 							{{ 'Celková cena s DPH'|trans }}:
 							<span class="table-cart__price-total">
-								<span class="price-main price-big">{{ cartSummary.priceWithVat|price }}</span>
+								<span class="price-main price-big">{{ productsPrice.priceWithVat|price }}</span>
 							</span>
 						</td>
 					</tr>
@@ -101,6 +108,8 @@
 					<strong>{{ 'Musíte ještě nakoupit zboží za %remaining%, abyste měli dopravu i platbu zdarma.'|trans({'%remaining%': remainingPriceWithVat|price })|raw }}</strong>
 				{% endif %}
 			{% endif %}
+
+			{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
 
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}

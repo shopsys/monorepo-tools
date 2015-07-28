@@ -6,6 +6,7 @@ use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase {
@@ -20,6 +21,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		/* @var $cart \SS6\ShopBundle\Model\Cart\CartService */
 		$orderFacade = $this->getContainer()->get('ss6.shop.order.order_facade');
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+		$orderPreviewFactory = $this->getContainer()->get(OrderPreviewFactory::class);
+		/* @var $orderPreviewFactory \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
 		$orderRepository = $this->getContainer()->get('ss6.shop.order.order_repository');
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
@@ -63,7 +66,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 
-		$order = $orderFacade->createOrderFromCart($orderData);
+		$orderPreview = $orderPreviewFactory->createForCurrentUser($transport, $payment);
+		$order = $orderFacade->createOrder($orderData, $orderPreview, null);
 
 		$orderFromDb = $orderRepository->getById($order->getId());
 

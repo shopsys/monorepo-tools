@@ -79,7 +79,8 @@ class QuantifiedProductPriceCalculation {
 			$this->productPrice->getVatAmount(),
 			$this->getTotalPriceWithoutVat(),
 			$this->getTotalPriceWithVat(),
-			$this->getTotalPriceVatAmount()
+			$this->getTotalPriceVatAmount(),
+			$product->getVat()
 		);
 
 		return $quantifiedItemPrice;

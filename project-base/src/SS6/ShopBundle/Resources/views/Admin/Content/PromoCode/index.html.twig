@@ -1,0 +1,27 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Slevový kupón'|trans }}{% endblock %}
+{% block h1 %}{{ 'Slevový kupón'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="row">
+
+		<div class="col-xs-12 col-lg-10">
+			{{ form_start(form) }}
+				{{ form_errors(form) }}
+
+				<div class="wrap-group">
+					{{ form_row(form.code, { label: 'Kód'|trans}) }}
+					{{ form_row(form.percent, { label: 'Sleva'|trans, symbolAfterInput: '%', attr: {class: 'form-line--size-1'} }) }}
+				</div>
+
+				<div class="window-fixed-bar">
+					<div class="window-fixed-bar__buttons">
+						{{ form_row(form.save, { label: 'Uložit'|trans}) }}
+					</div>
+				</div>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+{% endblock %}

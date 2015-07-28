@@ -6,6 +6,7 @@
 
 				{% for quantifiedItemKey, quantifiedItem in orderPreview.quantifiedItems %}
 					{% set quantifiedItemPrice = orderPreview.quantifiedItemsPrices[quantifiedItemKey] %}
+					{% set quantifiedItemDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedItemKey] %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
 							<strong>{{ quantifiedItem.quantity|formatNumber }} x</strong> {{ quantifiedItem.item.name }}
@@ -14,6 +15,16 @@
 							{{ quantifiedItemPrice.totalPriceWithVat|price }}
 						</td>
 					</tr>
+					{% if quantifiedItemDiscount is not null %}
+						<tr>
+							<td class="list-cart-preview__cell">
+								{{ 'Sleva'|trans }}:
+							</td>
+							<td class="list-cart-preview__cell list-cart-preview__cell--price">
+								{{ quantifiedItemDiscount.priceWithVat|price }}
+							</td>
+						</tr>
+					{% endif %}
 				{% endfor %}
 
 				{% if orderPreview.transport is not empty %}

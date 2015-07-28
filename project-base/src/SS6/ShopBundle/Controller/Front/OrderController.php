@@ -15,7 +15,8 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderDataMapper;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
@@ -71,9 +72,9 @@ class OrderController extends BaseController {
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
+	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 	 */
-	private $orderPreviewCalculation;
+	private $orderPreviewFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
@@ -110,11 +111,16 @@ class OrderController extends BaseController {
 	 */
 	private $session;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+	 */
+	private $promoCodeFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		CartFacade $cartFacade,
 		Cart $cart,
-		OrderPreviewCalculation $orderPreviewCalculation,
+		OrderPreviewFactory $orderPreviewFactory,
 		CustomerEditFacade $customerEditFacade,
 		TransportPriceCalculation $transportPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
@@ -126,12 +132,13 @@ class OrderController extends BaseController {
 		OrderFlow $flow,
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
-		OrderMailFacade $orderMailFacade
+		OrderMailFacade $orderMailFacade,
+		PromoCodeFacade $promoCodeFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->cartFacade = $cartFacade;
 		$this->cart = $cart;
-		$this->orderPreviewCalculation = $orderPreviewCalculation;
+		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
@@ -144,6 +151,7 @@ class OrderController extends BaseController {
 		$this->session = $session;
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
+		$this->promoCodeFacade = $promoCodeFacade;
 	}
 
 	/**
@@ -183,14 +191,7 @@ class OrderController extends BaseController {
 		$payment = $frontOrderFormData->payment;
 		$transport = $frontOrderFormData->transport;
 
-		$orderPreview = $this->orderPreviewCalculation->calculatePreview(
-			$currency,
-			$domainId,
-			$this->cart->getQuantifiedItems(),
-			$transport,
-			$payment,
-			$user
-		);
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
 
 		$isValid = $this->flow->isValid($form);
 		// FormData are filled during isValid() call
@@ -202,8 +203,9 @@ class OrderController extends BaseController {
 			if ($this->flow->nextStep()) {
 				$form = $this->flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
-				$order = $this->orderFacade->createOrderFromCart($orderData, $this->getUser());
+				$order = $this->orderFacade->createOrder($orderData, $orderPreview, $this->getUser());
 				$this->cartFacade->cleanCart();
+				$this->promoCodeFacade->removeEnteredPromoCode();
 				if ($user instanceof User) {
 					$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);
 				}

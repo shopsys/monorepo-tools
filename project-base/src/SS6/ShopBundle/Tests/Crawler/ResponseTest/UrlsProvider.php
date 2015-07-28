@@ -77,6 +77,7 @@ class UrlsProvider {
 		'front_logout' => 302,
 		'front_order_index' => 302,
 		'front_order_sent' => 302,
+		'front_promo_code_remove' => 302,
 		'front_registration_set_new_password' => 302,
 	];
 

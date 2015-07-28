@@ -8,10 +8,10 @@ use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Cart\CartSummaryCalculation;
 use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Product;
@@ -29,11 +29,6 @@ class CartController extends BaseController {
 	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartSummaryCalculation
-	 */
-	private $cartSummaryCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
@@ -65,6 +60,11 @@ class CartController extends BaseController {
 	 */
 	private $freeTransportAndPaymentFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+	 */
+	private $orderPreviewFactory;
+
 	public function __construct(
 		ProductAccessoryFacade $productAccessoryFacade,
 		CartFacade $cartFacade,
@@ -74,7 +74,7 @@ class CartController extends BaseController {
 		ProductDetailFactory $productDetailFactory,
 		CartItemPriceCalculation $cartItemPriceCalculation,
 		Cart $cart,
-		CartSummaryCalculation $cartSummaryCalculation
+		OrderPreviewFactory $orderPreviewFactory
 	) {
 		$this->productAccessoryFacade = $productAccessoryFacade;
 		$this->cartFacade = $cartFacade;
@@ -84,7 +84,7 @@ class CartController extends BaseController {
 		$this->productDetailFactory = $productDetailFactory;
 		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
 		$this->cart = $cart;
-		$this->cartSummaryCalculation = $cartSummaryCalculation;
+		$this->orderPreviewFactory = $orderPreviewFactory;
 	}
 
 	/**
@@ -131,29 +131,34 @@ class CartController extends BaseController {
 
 		$cartItems = $this->cart->getItems();
 		$cartItemPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
-		$cartSummary = $this->cartSummaryCalculation->calculateSummary($this->cart);
-		/* @var $cartSummary \SS6\ShopBundle\Model\Cart\CartSummary */
-		$productsPriceWithVat = $cartSummary->getPriceWithVat();
 		$domainId = $this->domain->getId();
+
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
+		$productsPrice = $orderPreview->getProductsPrice();
+		$remainingPriceWithVat = $this->freeTransportAndPaymentFacade->getRemainingPriceWithVat(
+			$productsPrice->getPriceWithVat(),
+			$domainId
+		);
 
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
 			'cart' => $this->cart,
 			'cartItems' => $cartItems,
 			'cartItemPrices' => $cartItemPrices,
-			'cartSummary' => $cartSummary,
 			'form' => $form->createView(),
 			'isFreeTransportAndPaymentActive' => $this->freeTransportAndPaymentFacade->isActive($domainId),
-			'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree($productsPriceWithVat, $domainId),
-			'remainingPriceWithVat' => $this->freeTransportAndPaymentFacade->getRemainingPriceWithVat($productsPriceWithVat, $domainId),
+			'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree($productsPrice->getPriceWithVat(), $domainId),
+			'remainingPriceWithVat' => $remainingPriceWithVat,
+			'cartItemDiscounts' => $orderPreview->getQuantifiedItemsDiscounts(),
+			'productsPrice' => $productsPrice,
 		]);
 	}
 
 	public function boxAction() {
-		$cartSummary = $this->cartSummaryCalculation->calculateSummary($this->cart);
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
 
 		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', [
 			'cart' => $this->cart,
-			'cartSummary' => $cartSummary,
+			'productsPrice' => $orderPreview->getProductsPrice(),
 		]);
 	}
 

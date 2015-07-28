@@ -2,9 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
+use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
@@ -13,6 +15,7 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
@@ -49,13 +52,19 @@ class OrderCreationService {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
+	 */
+	private $translator;
+
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		OrderPriceCalculation $orderPriceCalculation,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
-		Domain $domain
+		Domain $domain,
+		Translator $translator
 	) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
@@ -63,6 +72,7 @@ class OrderCreationService {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->domain = $domain;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -176,6 +186,7 @@ class OrderCreationService {
 	 */
 	private function fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale) {
 		$quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
+		$quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
 
 		foreach ($orderPreview->getQuantifiedItems() as $index => $quantifiedItem) {
 			$product = $quantifiedItem->getItem();
@@ -186,6 +197,8 @@ class OrderCreationService {
 
 			$quantifiedItemPrice = $quantifiedItemPrices[$index];
 			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
+			$quantifiedItemDiscount = $quantifiedItemDiscounts[$index];
+			/* @var $quantifiedItemDiscount \SS6\ShopBundle\Model\Pricing\Price|null */
 
 			$orderItem = new OrderProduct(
 				$order,
@@ -198,8 +211,28 @@ class OrderCreationService {
 				$product
 			);
 
-			$order->addItem($orderItem);
+			if ($quantifiedItemDiscount !== null) {
+				$this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale);
+			}
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $discount
+	 * @param string $locale
+	 */
+	private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale) {
+		new OrderProduct(
+			$orderItem->getOrder(),
+			$this->translator->trans('Sleva', [], 'messages', $locale) . ' - ' . $orderItem->getName(),
+			-$discount->getPriceWithoutVat(),
+			-$discount->getPriceWithVat(),
+			$orderItem->getVatPercent(),
+			1,
+			null,
+			null
+		);
 	}
 
 }

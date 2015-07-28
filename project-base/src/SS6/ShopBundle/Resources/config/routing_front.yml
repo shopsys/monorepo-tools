@@ -56,6 +56,15 @@ front_order_save_form:
   defaults: { _controller: SS6ShopBundle:Front\Order:saveOrderForm }
   methods: [POST]
 
+front_promo_code_apply:
+  pattern: /promo-code/apply/
+  defaults: { _controller: SS6ShopBundle:Front\PromoCode:apply }
+  methods: [POST]
+
+front_promo_code_remove:
+  pattern: /promo-code/remove/
+  defaults: { _controller: SS6ShopBundle:Front\PromoCode:remove }
+
 front_search_autocomplete:
   pattern: /search/autocomplete/
   defaults: { _controller: SS6ShopBundle:Front\Search:autocomplete }

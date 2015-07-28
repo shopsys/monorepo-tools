@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 
 class CartWatcherFacade {
 
@@ -27,32 +27,27 @@ class CartWatcherFacade {
 	private $flashMessageSender;
 
 	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender $flashMessageSender
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartWatcherService
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
 	 */
+	private $promoCodeFacade;
+
 	public function __construct(
 		FlashMessageSender $flashMessageSender,
 		EntityManager $em,
 		CartWatcherService $cartWatcherService,
-		Translator $translator,
-		CurrentCustomer $currentCustomer
+		CurrentCustomer $currentCustomer,
+		PromoCodeFacade $promoCodeFacade
 	) {
 		$this->flashMessageSender = $flashMessageSender;
 		$this->em = $em;
 		$this->cartWatcherService = $cartWatcherService;
-		$this->translator = $translator;
 		$this->currentCustomer = $currentCustomer;
+		$this->promoCodeFacade = $promoCodeFacade;
 	}
 
 	/**
@@ -61,10 +56,14 @@ class CartWatcherFacade {
 	public function checkCartModifications(Cart $cart) {
 		$this->checkModifiedPrices($cart);
 		$this->checkNotListableItems($cart);
+		$this->checkEmptyCart($cart);
 
 		$this->em->flush();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 */
 	private function checkModifiedPrices(Cart $cart) {
 		$modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 
@@ -77,6 +76,9 @@ class CartWatcherFacade {
 		}
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 */
 	private function checkNotListableItems(Cart $cart) {
 		$notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
 
@@ -91,6 +93,15 @@ class CartWatcherFacade {
 		}
 
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 */
+	private function checkEmptyCart(Cart $cart) {
+		if ($cart->isEmpty()) {
+			$this->promoCodeFacade->removeEnteredPromoCode();
+		}
 	}
 
 }

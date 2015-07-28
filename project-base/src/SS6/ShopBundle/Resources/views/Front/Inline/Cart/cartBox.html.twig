@@ -2,10 +2,10 @@
 	<a class="cart-box__block" href="{{ url('front_cart') }}">
 		<strong>{{ 'Košík'|trans }}</strong>
 		<div class="cart-box__info">
-			{% if cart.itemsCount == 0 %}
+			{% if cart.isEmpty %}
 				{{ 'Váš nákupní košík je prázdný'|trans }}
 			{% else %}
-				{{ '<strong class="cart-box__state">%itemsCount%</strong> položek za <strong class="cart-box__state">%priceWithVat%</strong>'|trans({ '%itemsCount%': cart.itemsCount, '%priceWithVat%': cartSummary.priceWithVat|price })|raw }}
+				{{ '<strong class="cart-box__state">%itemsCount%</strong> položek za <strong class="cart-box__state">%priceWithVat%</strong>'|trans({ '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price })|raw }}
 			{% endif %}
 		</div>
 
