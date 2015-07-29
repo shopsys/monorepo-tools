@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageRepository;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionService;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -49,6 +50,11 @@ class ProductCollectionFacade {
 	 */
 	private $friendlyUrlService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
+	 */
+	private $parameterRepository;
+
 	public function __construct(
 		ProductCollectionService $productCollectionService,
 		ProductRepository $productRepository,
@@ -56,7 +62,8 @@ class ProductCollectionFacade {
 		ImageRepository $imageRepository,
 		ImageFacade $imageFacade,
 		FriendlyUrlRepository $friendlyUrlRepository,
-		FriendlyUrlService $friendlyUrlService
+		FriendlyUrlService $friendlyUrlService,
+		ParameterRepository $parameterRepository
 	) {
 		$this->productCollectionService = $productCollectionService;
 		$this->imageConfig = $imageConfig;
@@ -65,6 +72,7 @@ class ProductCollectionFacade {
 		$this->friendlyUrlRepository = $friendlyUrlRepository;
 		$this->friendlyUrlService = $friendlyUrlService;
 		$this->productRepository = $productRepository;
+		$this->parameterRepository = $parameterRepository;
 	}
 
 	/**
@@ -130,6 +138,21 @@ class ProductCollectionFacade {
 		return $this->productRepository->getProductDomainsByProductsAndDomainConfigIndexedByProductId(
 			$products,
 			$domainConfig
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return string[productId][paramName]
+	 */
+	public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig) {
+		$locale = $domainConfig->getLocale();
+		$productParametersValues = $this->parameterRepository->getProductParameterValuesByProductsAndLocale($products, $locale);
+
+		return $this->productCollectionService->getParametersIndexedByProductId(
+			$productParametersValues,
+			$locale
 		);
 	}
 }

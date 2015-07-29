@@ -19,6 +19,15 @@
 		{% if item.deliveryDate is not null -%}
 			<DELIVERY_DATE>{{ item.deliveryDate }}</DELIVERY_DATE>
 		{% endif -%}
+		{% if item.manufacturer is not null -%}
+			<MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
+		{% endif -%}
+		{% for paramName, paramVal in item.params -%}
+			<PARAM>
+				<PARAM_NAME>{{ paramName }}</PARAM_NAME>
+				<VAL>{{ paramVal }}</VAL>
+			</PARAM>
+		{% endfor -%}
 	</SHOPITEM>
 {% endblock %}
 

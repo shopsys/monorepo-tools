@@ -45,6 +45,16 @@ class HeurekaItem {
 	private $deliveryDate;
 
 	/**
+	 * @var string|null
+	 */
+	private $manufacturer;
+
+	/**
+	 * @var string[paramName]
+	 */
+	private $params;
+
+	/**
 	 * @param int $itemId
 	 * @param string $productname
 	 * @param string $description
@@ -53,8 +63,21 @@ class HeurekaItem {
 	 * @param string $priceVat
 	 * @param string|null $ean
 	 * @param int|null $deliveryDate
+	 * @param string|null $manufacturer
+	 * @param string[paramName] $params
 	 */
-	public function __construct($itemId, $productname, $description, $url, $imgurl, $priceVat, $ean, $deliveryDate) {
+	public function __construct(
+		$itemId,
+		$productname,
+		$description,
+		$url,
+		$imgurl,
+		$priceVat,
+		$ean,
+		$deliveryDate,
+		$manufacturer,
+		$params
+	) {
 		$this->itemId = $itemId;
 		$this->productname = $productname;
 		$this->description = $description;
@@ -63,6 +86,8 @@ class HeurekaItem {
 		$this->priceVat = $priceVat;
 		$this->ean = $ean;
 		$this->deliveryDate = $deliveryDate;
+		$this->manufacturer = $manufacturer;
+		$this->params = $params;
 	}
 
 	/**
@@ -119,6 +144,20 @@ class HeurekaItem {
 	 */
 	public function getDeliveryDate() {
 		return $this->deliveryDate;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getManufacturer() {
+		return $this->manufacturer;
+	}
+
+	/**
+	 * @return string[paramName]
+	 */
+	public function getParams() {
+		return $this->params;
 	}
 
 }

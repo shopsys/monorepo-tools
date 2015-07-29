@@ -116,6 +116,28 @@ class ParameterRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function getProductParameterValuesByProductsAndLocale(array $products, $locale) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('ppv', 'p', 'pt', 'pv')
+			->from(ProductParameterValue::class, 'ppv')
+			->join('ppv.parameter', 'p')
+			->join('p.translations', 'pt')
+			->join('ppv.value', 'pv')
+			->where('ppv.product IN (:products)')
+			->andWhere('ppv.locale = :locale')
+			->setParameters([
+				'products' => $products,
+				'locale' => $locale,
+			]);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */

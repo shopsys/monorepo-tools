@@ -56,6 +56,10 @@ class HeurekaDataIterator extends AbstractDataIterator {
 		);
 		$imagesByProductId = $this->productCollectionFacade->findImagesUrlsIndexedByProductId($products, $this->domainConfig);
 		$urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $this->domainConfig);
+		$paramsByProductId = $this->productCollectionFacade->getProductParameterValuesIndexedByProductIdAndParameterName(
+			$products,
+			$this->domainConfig
+		);
 
 		$items = [];
 		foreach ($products as $product) {
@@ -64,6 +68,15 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$this->domainConfig->getId(),
 				null
 			);
+			$manufacturer = null;
+			if ($product->getBrand() !== null) {
+				$manufacturer = $product->getBrand()->getName();
+			}
+			if (array_key_exists($product->getId(), $paramsByProductId)) {
+				$params = $paramsByProductId[$product->getId()];
+			} else {
+				$params = [];
+			}
 
 			$items[] = new HeurekaItem(
 				$product->getId(),
@@ -73,7 +86,9 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$imagesByProductId[$product->getId()],
 				$productPrice->getPriceWithVat(),
 				$product->getEan(),
-				$product->getCalculatedAvailability()->getDeliveryTime()
+				$product->getCalculatedAvailability()->getDeliveryTime(),
+				$manufacturer,
+				$params
 			);
 		}
 

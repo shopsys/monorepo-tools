@@ -50,6 +50,9 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
 		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
 		$this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
+		$queryBuilder->addSelect('v')->join('p.vat', 'v');
+		$queryBuilder->addSelect('a')->join('p.calculatedAvailability', 'a');
+		$queryBuilder->addSelect('b')->leftJoin('p.brand', 'b');
 
 		return new HeurekaDataIterator(
 			$queryBuilder,
