@@ -96,15 +96,13 @@ class ProductController extends Controller {
 	public function listByCategoryAction(Request $request, $id) {
 		$category = $this->categoryFacade->getById($id);
 
-		$page = $request->get(self::PAGE_QUERY_PARAMETER);
-		if ($page === '1') {
-			$params = $this->requestExtension->getAllRequestParams();
-			unset($params['page']);
-			return $this->redirect($this->generateUrl(
-				'front_product_list',
-				$params
-			));
+		$requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
+		if (!$this->isRequestPageValid($requestPage)) {
+			$parameters = $this->requestExtension->getAllRequestParams();
+			unset($parameters[self::PAGE_QUERY_PARAMETER]);
+			return $this->redirect($this->generateUrl('front_product_list', $parameters));
 		}
+		$page = $requestPage === null ? 1 : (int)$requestPage;
 
 		$orderingSetting = $this->productListOrderingService->getOrderingSettingFromRequest($request);
 
@@ -148,11 +146,13 @@ class ProductController extends Controller {
 	public function searchAction(Request $request) {
 		$searchText = $request->query->get(self::SEARCH_TEXT_PARAMETER);
 
-		$page = $request->get(self::PAGE_QUERY_PARAMETER);
-
-		if ($page === '1') {
-			return $this->redirect($this->generateUrl('front_product_search', $request->query->all()));
+		$requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
+		if (!$this->isRequestPageValid($requestPage)) {
+			$parameters = $request->query->all();
+			unset($parameters[self::PAGE_QUERY_PARAMETER]);
+			return $this->redirect($this->generateUrl('front_product_search', $parameters));
 		}
+		$page = $requestPage === null ? 1 : (int)$requestPage;
 
 		$orderingSetting = $this->productListOrderingService->getOrderingSettingFromRequest($request);
 
@@ -236,6 +236,14 @@ class ProductController extends Controller {
 			'form' => $form->createView(),
 			'cookieName' => ProductListOrderingService::COOKIE_NAME,
 		]);
+	}
+
+	/**
+	 * @param string|null $page
+	 * @return bool
+	 */
+	private function isRequestPageValid($page) {
+		return $page === null || (preg_match('@^([2-9]|[1-9][0-9]+)$@', $page));
 	}
 
 }
