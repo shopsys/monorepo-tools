@@ -121,6 +121,7 @@ class ParameterRepository {
 	 */
 	public function getProductParameterValuesByProductEagerLoaded(Product $product) {
 		$queryBuilder = $this->getProductParameterValuesByProductQueryBuilder($product)
+			->addSelect('p', 'pt', 'pv')
 			->join('ppv.parameter', 'p')
 			->join('p.translations', 'pt')
 			->join('ppv.value', 'pv');
