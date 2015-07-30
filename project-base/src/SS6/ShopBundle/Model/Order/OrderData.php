@@ -136,6 +136,16 @@ class OrderData {
 	public $currency;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 */
+	public $createdAsAdministrator;
+
+	/**
+	 * @var string|null
+	 */
+	public $createdAsAdministratorName;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 */
 	public function setFromEntity(Order $order) {
@@ -167,6 +177,8 @@ class OrderData {
 		$this->items = $orderItemsData;
 		$this->domainId = $order->getDomainId();
 		$this->currency = $order->getCurrency();
+		$this->createdAsAdministrator = $order->getCreatedAsAdministrator();
+		$this->createdAsAdministratorName = $order->getCreatedAsAdministratorName();
 	}
 
 }

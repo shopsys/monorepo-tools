@@ -27,7 +27,7 @@
 						{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
 						{{ form_row(form.statusId, { label: 'Stav'|trans }) }}
 						<div class="form-line">
-							<label class="form-line__label">{{ 'Vytvořeno zákazníkem'|trans }}:</label>
+							<label class="form-line__label">{{ 'Zákazník'|trans }}:</label>
 							<span class="form-line__text">
 								{% if order.customer is null%}
 									{{ 'neregistrovaný zákazník'|trans }}
@@ -43,6 +43,18 @@
 								{% endif %}
 							</span>
 						</div>
+						{% if order.createdAsAdministrator is not null or order.createdAsAdministratorName is not null %}
+							<div class="form-line">
+								<label class="form-line__label">{{ 'Vytvořeno administrátorem'|trans }}:</label>
+								<span class="form-line__text">
+									{% if order.createdAsAdministrator is null%}
+										{{ order.createdAsAdministratorName }}
+									{% else %}
+										{{ order.createdAsAdministrator.realName }}
+									{% endif %}
+								</span>
+							</div>
+						{% endif %}
 					</fieldset>
 				</div>
 
