@@ -98,6 +98,11 @@ class ProductFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		if ($this->product !== null && $this->product->isVariant()) {
+			$builder->add('variantAlias', FormType::LOCALIZED, [
+				'options' => ['required' => false],
+			]);
+		}
 		$builder
 			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [

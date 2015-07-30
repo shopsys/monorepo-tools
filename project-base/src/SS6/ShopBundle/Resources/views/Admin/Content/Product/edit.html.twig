@@ -12,6 +12,7 @@
 					{{ product.mainVariant.name }}<i class="fa fa-external-link"></i>
 				</a>
 			</strong>
+			{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
 		</div>
 	{% endif %}
 	{% if product.isMainVariant %}

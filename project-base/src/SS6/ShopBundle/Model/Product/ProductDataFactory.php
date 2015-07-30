@@ -47,10 +47,13 @@ class ProductDataFactory {
 
 		$translations = $product->getTranslations();
 		$names = [];
+		$variantAliases = [];
 		foreach ($translations as $translation) {
 			$names[$translation->getLocale()] = $translation->getName();
+			$variantAliases[$translation->getLocale()] = $translation->getVariantAlias();
 		}
 		$productData->name = $names;
+		$productData->variantAlias = $variantAliases;
 
 		$productData->catnum = $product->getCatnum();
 		$productData->partno = $product->getPartno();

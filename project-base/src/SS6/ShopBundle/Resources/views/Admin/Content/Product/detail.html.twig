@@ -8,9 +8,8 @@
 
 		<div class="col-xs-12 col-lg-10">
 
-			{% block product_variants %}{% endblock %}
-
 			{{ form_start(form) }}
+				{% block product_variants %}{% endblock %}
 				<div id="product_edit_form_productData"></div>
 				{{ form_errors(form) }}
 

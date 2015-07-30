@@ -164,7 +164,11 @@
 							{% endif %}
 						</td>
 						<td>
-							{{ variantDetail.product.name }}
+							{% if variantDetail.product.variantAlias is not null %}
+								{{ variantDetail.product.variantAlias }}
+							{% else %}
+								{{ variantDetail.product.name }}
+							{% endif %}
 						</td>
 						<td class="text-right">
 							{{ variantDetail.sellingPrice.priceWithoutVat|price }}

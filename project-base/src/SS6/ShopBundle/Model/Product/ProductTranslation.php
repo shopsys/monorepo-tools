@@ -25,6 +25,13 @@ class ProductTranslation extends AbstractTranslation {
 	private $name;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $variantAlias;
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -38,4 +45,17 @@ class ProductTranslation extends AbstractTranslation {
 		$this->name = $name;
 	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getVariantAlias() {
+		return $this->variantAlias;
+	}
+
+	/**
+	 * @param string|null $variantAlias
+	 */
+	public function setVariantAlias($variantAlias) {
+		$this->variantAlias = $variantAlias;
+	}
 }

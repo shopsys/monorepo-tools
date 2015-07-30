@@ -351,6 +351,14 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @param string|null $locale
+	 * @return string|null
+	 */
+	public function getVariantAlias($locale = null) {
+		return $this->translation($locale)->getVariantAlias();
+	}
+
+	/**
 	 * @return string[locale]
 	 */
 	public function getNames() {
@@ -620,6 +628,9 @@ class Product extends AbstractTranslatableEntity {
 	private function setTranslations(ProductData $productData) {
 		foreach ($productData->name as $locale => $name) {
 			$this->translation($locale)->setName($name);
+		}
+		foreach ($productData->variantAlias as $locale => $variantAlias) {
+			$this->translation($locale)->setVariantAlias($variantAlias);
 		}
 	}
 
