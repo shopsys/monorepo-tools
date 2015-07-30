@@ -16,6 +16,7 @@ use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
 
@@ -182,7 +183,7 @@ class ProductRepository {
 	) {
 		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
 		$this->addTranslation($queryBuilder, $locale);
-		$this->filterBySearchText($queryBuilder, $searchText);
+		$this->filterBySearchText($queryBuilder, $searchText, $domainId);
 		return $queryBuilder;
 	}
 
@@ -198,14 +199,20 @@ class ProductRepository {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string|null $searchText
+	 * @param int $domainId
 	 */
-	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
+	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText, $domainId) {
+		$queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
+		$queryBuilder->setParameter('domainId', $domainId);
+
 		$queryBuilder->andWhere(
 			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
 			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
+			. ' OR NORMALIZE(pd.description) LIKE NORMALIZE(:productDescription)'
 		);
 		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
+		$queryBuilder->setParameter('productDescription', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
 	}
 
 	/**
