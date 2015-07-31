@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
@@ -30,6 +31,7 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 		$productData->outOfStockAction = $outOfStockAction;
 		$productData->usingStock = true;
 		$productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+		$productData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
 
 		$productEditData = new ProductEditData($productData);
 

@@ -14,7 +14,7 @@ class ProductAccessory {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 * @ORM\Id
 	 */
 	private $product;
@@ -22,7 +22,7 @@ class ProductAccessory {
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 * @ORM\JoinColumn(name="accessory_product_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(nullable=false, name="accessory_product_id", referencedColumnName="id", onDelete="CASCADE")
 	 * @ORM\Id
 	 */
 	private $accessory;

@@ -40,6 +40,7 @@ class Vat {
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
+	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $replaceWith;
 

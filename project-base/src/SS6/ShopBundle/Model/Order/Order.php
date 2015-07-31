@@ -37,9 +37,10 @@ class Order {
 	private $number;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\User
+	 * @var \SS6\ShopBundle\Model\Customer\User|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\User")
+	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $customer;
 
@@ -62,6 +63,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Transport\Transport
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $transport;
 
@@ -69,6 +71,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Payment\Payment
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $payment;
 
@@ -76,6 +79,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 *
 	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Order\Status\OrderStatus")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $status;
 
@@ -244,6 +248,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency
 	 *
 	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Pricing\Currency\Currency")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $currency;
 
@@ -251,7 +256,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Administrator\Administrator|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Administrator\Administrator")
-	 * @ORM\JoinColumn(name="administrator_id", referencedColumnName="id", onDelete="SET NULL")
+	 * @ORM\JoinColumn(nullable=true, name="administrator_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $createdAsAdministrator;
 
@@ -535,7 +540,7 @@ class Order {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
 	 */
 	public function getCustomer() {
 		return $this->customer;

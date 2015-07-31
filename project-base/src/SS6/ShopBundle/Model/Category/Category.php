@@ -32,11 +32,11 @@ class Category extends AbstractTranslatableEntity {
 	protected $translations;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category
+	 * @var \SS6\ShopBundle\Model\Category\Category|null
 	 *
 	 * @Gedmo\TreeParent
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="children")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(nullable=true, name="parent_id", referencedColumnName="id")
 	 */
 	private $parent;
 
@@ -138,7 +138,7 @@ class Category extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public function getParent() {
 		return $this->parent;

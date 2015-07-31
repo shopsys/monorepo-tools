@@ -17,7 +17,7 @@ class ProductDomain {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $product;
 

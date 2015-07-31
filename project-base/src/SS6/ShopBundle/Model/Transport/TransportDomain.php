@@ -16,6 +16,7 @@ class TransportDomain {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $transport;
 
