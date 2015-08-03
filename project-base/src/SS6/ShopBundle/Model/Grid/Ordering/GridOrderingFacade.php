@@ -44,7 +44,7 @@ class GridOrderingFacade {
 	 */
 	private function getEntityRepository($entityClass) {
 		$interfaces = class_implements($entityClass);
-		if (isset($interfaces[OrderableEntityInterface::class])) {
+		if (array_key_exists(OrderableEntityInterface::class, $interfaces)) {
 			return $this->em->getRepository($entityClass);
 		} else {
 			throw new \SS6\ShopBundle\Model\Grid\Ordering\Exception\EntityIsNotOrderableException();

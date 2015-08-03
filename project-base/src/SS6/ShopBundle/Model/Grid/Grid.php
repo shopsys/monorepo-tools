@@ -28,12 +28,12 @@ class Grid {
 	private $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\Column[]
+	 * @var \SS6\ShopBundle\Model\Grid\Column[columnId]
 	 */
 	private $columns = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\ActionColumn[]
+	 * @var \SS6\ShopBundle\Model\Grid\ActionColumn[actionColumnId]
 	 */
 	private $actionColumns = [];
 
@@ -545,10 +545,10 @@ class Grid {
 	}
 
 	/**
-	 * @param array|string|null $removeParameters
+	 * @param array|string $removeParameters
 	 * @return array
 	 */
-	public function getGridParameters($removeParameters = null) {
+	public function getGridParameters($removeParameters = []) {
 		$gridParameters = [];
 		if ($this->isEnabledPaging()) {
 			$gridParameters['limit'] = $this->getLimit();
@@ -561,9 +561,11 @@ class Grid {
 		}
 
 		foreach ((array)$removeParameters as $parameterToRemove) {
-			// trigger notice when typo
-			unset($gridParameters[$parameterToRemove]);
+			if (array_key_exists($parameterToRemove, $gridParameters)) {
+				unset($gridParameters[$parameterToRemove]);
+			}
 		}
+
 		return $gridParameters;
 	}
 
@@ -596,10 +598,10 @@ class Grid {
 
 	private function loadRows() {
 		if (
-			array_key_exists($this->orderSourceColumnName, $this->getColumns())
+			array_key_exists($this->orderSourceColumnName, $this->columns)
 			&& $this->columns[$this->orderSourceColumnName]->isSortable()
 		) {
-			$orderSourceColumnName = $this->getColumns()[$this->orderSourceColumnName]->getOrderSourceColumnName();
+			$orderSourceColumnName = $this->columns[$this->orderSourceColumnName]->getOrderSourceColumnName();
 		} else {
 			$orderSourceColumnName = null;
 		}
@@ -643,20 +645,20 @@ class Grid {
 		$sourceColumnNameParts = explode('.', $sourceColumnName);
 
 		if (count($sourceColumnNameParts) === 1) {
-			$value = $row[$sourceColumnNameParts[0]];
+			return $row[$sourceColumnNameParts[0]];
 		} elseif (count($sourceColumnNameParts) === 2) {
 			if (array_key_exists($sourceColumnNameParts[0], $row)
 				&& array_key_exists($sourceColumnNameParts[1], $row[$sourceColumnNameParts[0]])
 			) {
-				$value = $row[$sourceColumnNameParts[0]][$sourceColumnNameParts[1]];
+				return $row[$sourceColumnNameParts[0]][$sourceColumnNameParts[1]];
 			} elseif (array_key_exists($sourceColumnNameParts[1], $row)) {
-				$value = $row[$sourceColumnNameParts[1]];
+				return $row[$sourceColumnNameParts[1]];
 			} else {
-				$value = $row[$sourceColumnName];
+				return $row[$sourceColumnName];
 			}
 		}
 
-		return $value;
+		return $row[$sourceColumnName];
 	}
 
 	/**

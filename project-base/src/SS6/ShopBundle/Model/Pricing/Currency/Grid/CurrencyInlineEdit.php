@@ -74,10 +74,10 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit {
 			if ($this->currencyFacade->isDefaultCurrency($currency)) {
 				return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
 			} else {
-				return new CurrencyFormType(!CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
+				return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_NOT_READ_ONLY);
 			}
 		} else {
-			return new CurrencyFormType(!CurrencyFormType::EXCHANGE_RATE_IS_READ_ONLY);
+			return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_NOT_READ_ONLY);
 		}
 	}
 

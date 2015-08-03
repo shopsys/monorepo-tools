@@ -63,7 +63,7 @@ class QueryBuilderDataSource implements DataSourceInterface {
 		$queryBuilder = clone $this->queryBuilder;
 		$this->prepareQueryWithOneRow($queryBuilder, $rowId);
 
-		return $queryBuilder->getQuery()->getSingleResult('GroupedScalarHydrator');
+		return $queryBuilder->getQuery()->getSingleResult(self::HYDRATION_MODE);
 	}
 
 	/**
