@@ -16,6 +16,7 @@ class PaymentDomain {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $payment;
 

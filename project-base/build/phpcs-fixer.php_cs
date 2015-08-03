@@ -85,6 +85,7 @@ $config = Symfony\CS\Config\Config::create()
 		'whitespacy_lines',
 	])
 	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\MissingButtonTypeFixer())
+	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\OrmJoinColumnRequireNullableFixer())
 	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\UnusedUseFixer());
 
 // variable $path is available from include from FixCommand::execute()

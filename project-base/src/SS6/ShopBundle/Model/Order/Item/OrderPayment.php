@@ -16,6 +16,7 @@ class OrderPayment extends OrderItem {
 	 * @var \SS6\ShopBundle\Model\Payment\Payment
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
+	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $payment;
 

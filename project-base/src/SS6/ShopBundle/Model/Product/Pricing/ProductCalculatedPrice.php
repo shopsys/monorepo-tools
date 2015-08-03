@@ -17,7 +17,7 @@ class ProductCalculatedPrice {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $product;
 
@@ -26,7 +26,7 @@ class ProductCalculatedPrice {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Group\PricingGroup")
-	 * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(nullable=false, name="pricing_group_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $pricingGroup;
 

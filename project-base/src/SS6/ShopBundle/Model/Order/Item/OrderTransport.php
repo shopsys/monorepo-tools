@@ -16,6 +16,7 @@ class OrderTransport extends OrderItem {
 	 * @var \SS6\ShopBundle\Model\Transport\Transport
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
+	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $transport;
 

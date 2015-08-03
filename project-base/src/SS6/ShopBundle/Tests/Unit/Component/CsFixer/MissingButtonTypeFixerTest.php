@@ -9,8 +9,8 @@ use SS6\ShopBundle\Component\CsFixer\MissingButtonTypeFixer;
 class MissingButtonTypeFixerTest extends PHPUnit_Framework_TestCase {
 
 	public function testFix() {
-		$file = new SplFileInfo(__DIR__ . '/testcase.txt');
-		$expectedResult = file_get_contents(__DIR__ . '/expectedResult.txt');
+		$file = new SplFileInfo(__DIR__ . '/missingButtonTypeFixerTestcase.txt');
+		$expectedResult = file_get_contents(__DIR__ . '/missingButtonTypeFixerExpectedResult.txt');
 
 		$missingButtonTypeFixer = new MissingButtonTypeFixer();
 		$result = $missingButtonTypeFixer->fix($file, file_get_contents($file->getRealPath()));

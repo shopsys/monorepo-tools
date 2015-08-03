@@ -17,6 +17,7 @@ class TransportPrice {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport", inversedBy="prices")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $transport;
 
@@ -25,6 +26,7 @@ class TransportPrice {
 	 *
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Currency\Currency")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $currency;
 

@@ -44,6 +44,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $vat;
 
