@@ -19,7 +19,7 @@
 	{% if grid.rows is not empty or grid.inlineEdit %}
 		<div class="js-inline-edit-data-container{% if grid.rows is empty and grid.inlineEdit %} hidden{% endif %}">
 			<div class="grid_header">
-			{% if grid.allowedPaging %}
+			{% if grid.enabledPaging %}
 				{{ gridView.renderBlock('grid_pager') }}
 			{% endif %}
 			</div>
@@ -30,7 +30,7 @@
 				</table>
 			</div>
 			<div class="grid_footer">
-				{% if grid.allowedPaging %}
+				{% if grid.enabledPaging %}
 					{{ gridView.renderBlock('grid_pager') }}
 				{% endif %}
 				{% if grid.dragAndDrop %}
@@ -69,7 +69,7 @@
 			{% if grid.dragAndDrop %}
 				<th></th>
 			{% endif %}
-			{% if grid.isAllowedSelecting %}
+			{% if grid.enabledSelecting %}
 				<th><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
 			{% endif %}
 			{% for column in grid.columns %}
@@ -131,7 +131,7 @@
 				<i class="cursor-move fa fa-arrows"></i>
 			</td>
 		{% endif %}
-		{% if grid.isAllowedSelecting %}
+		{% if grid.enabledSelecting %}
 			<td>
 				<input
 					class="js-grid-mass-action-select-row"

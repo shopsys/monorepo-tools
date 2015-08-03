@@ -14,7 +14,7 @@ class AdministratorGridService {
 	 * @return \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit|null
 	 */
 	public function rememberGridLimit(Administrator $administrator, Grid $grid) {
-		if (!$grid->isAllowedPaging()) {
+		if (!$grid->isEnabledPaging()) {
 			throw new \SS6\ShopBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
 		}
 		if ($grid->getLimit() <= 0) {

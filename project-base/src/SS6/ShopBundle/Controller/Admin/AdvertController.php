@@ -157,7 +157,7 @@ class AdvertController extends BaseController {
 		);
 
 		$grid = $this->gridFactory->create('advertList', $dataSource);
-		$grid->allowPaging();
+		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('visible', 'a.hidden', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');

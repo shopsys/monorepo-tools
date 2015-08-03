@@ -186,7 +186,7 @@ class OrderController extends BaseController {
 		);
 
 		$grid = $this->gridFactory->create('orderList', $dataSource);
-		$grid->allowPaging();
+		$grid->enablePaging();
 		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
 		$grid->addColumn('preview', 'o.id', 'Náhled', false);

@@ -40,12 +40,12 @@ class Grid {
 	/**
 	 * @var bool
 	 */
-	private $allowPaging = false;
+	private $enablePaging = false;
 
 	/**
 	 * @var bool
 	 */
-	private $allowSelecting = false;
+	private $enableSelecting = false;
 
 	/**
 	 * @var array
@@ -297,7 +297,7 @@ class Grid {
 	 */
 	public function createView() {
 		$gridView = $this->createViewWithoutRows();
-		if ($this->isAllowedPaging()) {
+		if ($this->isEnabledPaging()) {
 			$this->executeTotalQuery();
 		}
 		$this->loadRows();
@@ -333,12 +333,12 @@ class Grid {
 		return $gridView;
 	}
 
-	public function allowPaging() {
-		$this->allowPaging = true;
+	public function enablePaging() {
+		$this->enablePaging = true;
 	}
 
-	public function allowSelecting() {
-		$this->allowSelecting = true;
+	public function enableSelecting() {
+		$this->enableSelecting = true;
 	}
 
 	/**
@@ -399,15 +399,15 @@ class Grid {
 	/**
 	 * @return bool
 	 */
-	public function isAllowedPaging() {
-		return $this->allowPaging;
+	public function isEnabledPaging() {
+		return $this->enablePaging;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isAllowedSelecting() {
-		return $this->allowSelecting;
+	public function isEnabledSelecting() {
+		return $this->enableSelecting;
 	}
 
 	/**
@@ -550,7 +550,7 @@ class Grid {
 	 */
 	public function getGridParameters($removeParameters = null) {
 		$gridParameters = [];
-		if ($this->isAllowedPaging()) {
+		if ($this->isEnabledPaging()) {
 			$gridParameters['limit'] = $this->getLimit();
 			if ($this->getPage() > 1) {
 				$gridParameters['page'] = $this->getPage();
@@ -612,7 +612,7 @@ class Grid {
 		}
 
 		$this->paginationResults = $this->dataSource->getPaginatedRows(
-			$this->allowPaging ? $this->limit : null,
+			$this->enablePaging ? $this->limit : null,
 			$this->page,
 			$orderSourceColumnName,
 			$orderDirection

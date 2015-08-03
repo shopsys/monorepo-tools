@@ -120,7 +120,7 @@ class BrandController extends BaseController {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'b.id');
 
 		$grid = $this->gridFactory->create('brandList', $dataSource);
-		$grid->allowPaging();
+		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('name', 'b.name', 'Název', true);

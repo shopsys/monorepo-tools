@@ -204,7 +204,7 @@ class CustomerController extends BaseController {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
 
 		$grid = $this->gridFactory->create('customerList', $dataSource);
-		$grid->allowPaging();
+		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('name', 'name', 'Jméno', true);

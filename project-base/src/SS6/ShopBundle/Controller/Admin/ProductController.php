@@ -249,8 +249,8 @@ class ProductController extends BaseController {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $this->gridFactory->create('productList', $dataSource);
-		$grid->allowPaging();
-		$grid->allowSelecting();
+		$grid->enablePaging();
+		$grid->enableSelecting();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');

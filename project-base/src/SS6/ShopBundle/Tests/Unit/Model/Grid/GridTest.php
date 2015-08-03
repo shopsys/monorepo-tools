@@ -123,7 +123,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 		$grid->addColumn('columnId1', 'sourceColumnName2', 'title2');
 	}
 
-	public function testAllowPaging() {
+	public function testEnablePaging() {
 		$request = new Request();
 		$requestStack = new RequestStack();
 		$requestStack->push($request);
@@ -143,11 +143,11 @@ class GridTest extends PHPUnit_Framework_TestCase {
 			$twigMock,
 			$gridOrderingServiceMock
 		);
-		$grid->allowPaging();
-		$this->assertTrue($grid->isAllowedPaging());
+		$grid->enablePaging();
+		$this->assertTrue($grid->isEnabledPaging());
 	}
 
-	public function testAllowPagingDefaultDisable() {
+	public function testEnablePagingDefaultDisable() {
 		$request = new Request();
 		$requestStack = new RequestStack();
 		$requestStack->push($request);
@@ -167,7 +167,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 			$twigMock,
 			$gridOrderingServiceMock
 		);
-		$this->assertFalse($grid->isAllowedPaging());
+		$this->assertFalse($grid->isEnabledPaging());
 	}
 
 	public function testSetDefaultOrder() {
@@ -286,7 +286,7 @@ class GridTest extends PHPUnit_Framework_TestCase {
 			$twigMock,
 			$gridOrderingServiceMock
 		);
-		$grid->allowPaging();
+		$grid->enablePaging();
 		$gridView = $grid->createView();
 
 		$this->assertInstanceOf(GridView::class, $gridView);

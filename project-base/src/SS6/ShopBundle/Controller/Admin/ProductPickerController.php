@@ -110,7 +110,7 @@ class ProductPickerController extends Controller {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
 
 		$grid = $this->gridFactory->create('productPicker', $dataSource);
-		$grid->allowPaging();
+		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
