@@ -65,7 +65,7 @@ class ActionColumn {
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param string $type
 	 * @param string $name
-	 * @param \Symfony\Component\Routing\Router $route
+	 * @param string $route
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
 	 */
