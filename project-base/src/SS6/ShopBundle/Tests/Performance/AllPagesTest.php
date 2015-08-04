@@ -3,8 +3,6 @@
 namespace SS6\ShopBundle\Tests\Performance;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection;
 use SS6\ShopBundle\Tests\Performance\ThresholdService;
@@ -25,8 +23,11 @@ class AllPagesTest extends FunctionalTestCase {
 	 * @group warmup
 	 */
 	public function testAdminPagesWarmup() {
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+
 		$this->doWarmupPagesWithProgress(
-			$this->createUrlProvider()->getAdminTestableUrlsProviderData(),
+			$urlsProvider->getAdminTestableUrlsProviderData(),
 			self::ADMIN_USERNAME,
 			self::ADMIN_PASSWORD
 		);
@@ -36,16 +37,22 @@ class AllPagesTest extends FunctionalTestCase {
 	 * @group warmup
 	 */
 	public function testFrontPagesWarmup() {
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+
 		$this->doWarmupPagesWithProgress(
-			$this->createUrlProvider()->getFrontTestableUrlsProviderData(),
+			$urlsProvider->getFrontTestableUrlsProviderData(),
 			self::FRONT_USERNAME,
 			self::FRONT_PASSWORD
 		);
 	}
 
 	public function testAdminPages() {
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+
 		$this->doTestPagesWithProgress(
-			$this->createUrlProvider()->getAdminTestableUrlsProviderData(),
+			$urlsProvider->getAdminTestableUrlsProviderData(),
 			self::ADMIN_USERNAME,
 			self::ADMIN_PASSWORD,
 			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-admin.csv'
@@ -53,28 +60,15 @@ class AllPagesTest extends FunctionalTestCase {
 	}
 
 	public function testFrontPages() {
+		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
+		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+
 		$this->doTestPagesWithProgress(
-			$this->createUrlProvider()->getFrontTestableUrlsProviderData(),
+			$urlsProvider->getFrontTestableUrlsProviderData(),
 			self::FRONT_USERNAME,
 			self::FRONT_PASSWORD,
 			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-front.csv'
 		);
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider
-	 */
-	private function createUrlProvider() {
-		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$router = $this->getContainer()->get('router');
-		/* @var $router \Symfony\Component\Routing\RouterInterface */
-		$persistentReferenceService = $this->getContainer()->get(PersistentReferenceService::class);
-		/* @var $router \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
-
-		// DataProvider is called before setUp() - domain is not set
-		$domain->switchDomainById(1);
-		return new UrlsProvider($persistentReferenceService, $router);
 	}
 
 	/**
