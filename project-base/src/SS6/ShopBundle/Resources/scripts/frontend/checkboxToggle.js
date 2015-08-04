@@ -11,7 +11,12 @@
 		$('.js-checkbox-toggle').each(function () {
 			var containerId = $(this).data(containerIdDataAttribute);
 
-			if ($(this).is(':checked')) {
+			var show = $(this).is(':checked');
+			if ($(this).hasClass('js-checkbox-toggle--inverted')) {
+				show = !show;
+			}
+
+			if (show) {
 				$('#' + containerId).show();
 			} else {
 				$('#' + containerId).hide();
@@ -22,7 +27,12 @@
 	SS6.checkboxToggle.onChange = function (event) {
 		var containerId = $(this).data(containerIdDataAttribute);
 
-		if ($(this).is(':checked')) {
+		var show = $(this).is(':checked');
+		if ($(this).hasClass('js-checkbox-toggle--inverted')) {
+			show = !show;
+		}
+
+		if (show) {
 			$('#' + containerId).slideDown('fast');
 		} else {
 			$('#' + containerId).slideUp('fast');
