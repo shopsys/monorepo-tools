@@ -38,7 +38,7 @@
 
 		var onApplyPromoCode = function(response) {
 			if (response.result === true) {
-				document.location.reload();
+				document.location = document.location;
 			} else {
 				SS6.window({
 					content: response.message

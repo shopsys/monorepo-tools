@@ -7,7 +7,7 @@ use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -41,9 +41,9 @@ class OrderPreviewFactory {
 	private $cart;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
 	 */
-	private $promoCodeFacade;
+	private $currentPromoCodeFacade;
 
 	public function __construct(
 		OrderPreviewCalculation $orderPreviewCalculation,
@@ -51,14 +51,14 @@ class OrderPreviewFactory {
 		CurrencyFacade $currencyFacade,
 		CurrentCustomer $currentCustomer,
 		Cart $cart,
-		PromoCodeFacade $promoCodeFacade
+		CurrentPromoCodeFacade $currentPromoCodeFacade
 	) {
 		$this->orderPreviewCalculation = $orderPreviewCalculation;
 		$this->domain = $domain;
 		$this->currencyFacade = $currencyFacade;
 		$this->currentCustomer = $currentCustomer;
 		$this->cart = $cart;
-		$this->promoCodeFacade = $promoCodeFacade;
+		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
 	}
 
 	/**
@@ -76,7 +76,7 @@ class OrderPreviewFactory {
 			$transport,
 			$payment,
 			$this->currentCustomer->findCurrentUser(),
-			$this->promoCodeFacade->getEnteredPromoCodePercent()
+			$this->currentPromoCodeFacade->getValidEnteredPromoCodePercent()
 		);
 	}
 

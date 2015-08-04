@@ -1,4 +1,4 @@
-{% if enteredPromoCode is null %}
+{% if validEnteredPromoCode is null %}
 	<label>
 		{{ 'Slevový kód'|trans }}:
 		<input type="text" value="" id="js-promo-code-input" class="form-control" data-apply-code-url="{{ url('front_promo_code_apply') }}"/>
@@ -10,5 +10,5 @@
 			{{ 'Vaše sleva'|trans }}: {{ promoCodePercent|formatPercent }}
 			<a href="{{ url('front_promo_code_remove') }}"><i class="fa fa-remove"></i>{{ 'Odebrat'|trans }}</a>
 		</span>
-	</div>
+	</div><br /><br />
 {% endif %}

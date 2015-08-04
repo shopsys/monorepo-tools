@@ -3,12 +3,13 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Order\PromoCode;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class PromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
+class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetEnteredPromoCode() {
 		$validCode = 'validCode';
@@ -28,12 +29,13 @@ class PromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 			],
 		]);
 
-		$promoCodeFacade = new PromoCodeFacade($sessionMock, $settingMock);
-		$this->assertSame($validCode, $promoCodeFacade->getEnteredPromoCode());
-		$this->assertSame(10.0, $promoCodeFacade->getEnteredPromoCodePercent());
+		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
+		$this->assertSame($validCode, $currentPromoCodeFacade->getValidEnteredPromoCode());
+		$this->assertSame(10.0, $currentPromoCodeFacade->getValidEnteredPromoCodePercent());
 	}
 
-	public function testGetEnteredPromoCodeIvalid() {
+	public function testGetEnteredPromoCodeInvalid() {
 		$validCode = 'validCode';
 		$enteredCode = 'enteredCode';
 		$sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
@@ -52,9 +54,10 @@ class PromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 			],
 		]);
 
-		$promoCodeFacade = new PromoCodeFacade($sessionMock, $settingMock);
-		$this->assertNull($promoCodeFacade->getEnteredPromoCode());
-		$this->assertNull($promoCodeFacade->getEnteredPromoCodePercent());
+		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
+		$this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCode());
+		$this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCodePercent());
 	}
 
 	public function testSetEnteredPromoCode() {
@@ -79,8 +82,9 @@ class PromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 			],
 		]);
 
-		$promoCodeFacade = new PromoCodeFacade($sessionMock, $settingMock);
-		$promoCodeFacade->setEnteredPromoCode($enteredCode);
+		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
+		$currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
 	}
 
 	public function testSetEnteredPromoCodeInvalid() {
@@ -102,9 +106,10 @@ class PromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 			],
 		]);
 
-		$promoCodeFacade = new PromoCodeFacade($sessionMock, $settingMock);
+		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
 		$this->setExpectedException(\SS6\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
-		$promoCodeFacade->setEnteredPromoCode($enteredCode);
+		$currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
 	}
 
 }

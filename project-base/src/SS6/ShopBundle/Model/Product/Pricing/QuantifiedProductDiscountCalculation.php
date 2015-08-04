@@ -51,7 +51,7 @@ class QuantifiedProductDiscountCalculation {
 	public function calculateDiscounts(array $quantifiedItemsPrices, $discountPercent) {
 		$quantifiedItemsDiscounts = [];
 		foreach ($quantifiedItemsPrices as $index => $quantifiedItemPrice) {
-			if ((float)$discountPercent === 0.0) {
+			if ($discountPercent === 0.0 || $discountPercent === null) {
 				$quantifiedItemsDiscounts[$index] = null;
 			} else {
 				$quantifiedItemsDiscounts[$index] = $this->calculateDiscount($quantifiedItemPrice, $discountPercent);

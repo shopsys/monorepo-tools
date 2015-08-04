@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 
 class CartWatcherFacadeTest extends PHPUnit_Framework_TestCase {
 
@@ -29,15 +29,15 @@ class CartWatcherFacadeTest extends PHPUnit_Framework_TestCase {
 		$cartWatcherServiceMock->expects($this->atLeastOnce())->method('getModifiedPriceItemsAndUpdatePrices')->willReturn([]);
 		$cartWatcherServiceMock->expects($this->atLeastOnce())->method('getNotListableItems')->willReturn([]);
 
-		$promoCodeFacadeMock = $this->getMock(PromoCodeFacade::class, ['removeEnteredPromoCode'], [], '', false);
-		$promoCodeFacadeMock->expects($this->once())->method('removeEnteredPromoCode');
+		$currentPromoCodeFacadeMock = $this->getMock(CurrentPromoCodeFacade::class, ['removeEnteredPromoCode'], [], '', false);
+		$currentPromoCodeFacadeMock->expects($this->once())->method('removeEnteredPromoCode');
 
 		$cartWatcherFacade = new CartWatcherFacade(
 			$flashMessageSenderMock,
 			$emMock,
 			$cartWatcherServiceMock,
 			$currentCustomerMock,
-			$promoCodeFacadeMock
+			$currentPromoCodeFacadeMock
 		);
 
 		$cart = new Cart([]);
@@ -60,15 +60,15 @@ class CartWatcherFacadeTest extends PHPUnit_Framework_TestCase {
 		$cartWatcherServiceMock->expects($this->atLeastOnce())->method('getModifiedPriceItemsAndUpdatePrices')->willReturn([]);
 		$cartWatcherServiceMock->expects($this->atLeastOnce())->method('getNotListableItems')->willReturn([]);
 
-		$promoCodeFacadeMock = $this->getMock(PromoCodeFacade::class, ['removeEnteredPromoCode'], [], '', false);
-		$promoCodeFacadeMock->expects($this->never())->method('removeEnteredPromoCode');
+		$currentPromoCodeFacadeMock = $this->getMock(CurrentPromoCodeFacade::class, ['removeEnteredPromoCode'], [], '', false);
+		$currentPromoCodeFacadeMock->expects($this->never())->method('removeEnteredPromoCode');
 
 		$cartWatcherFacade = new CartWatcherFacade(
 			$flashMessageSenderMock,
 			$emMock,
 			$cartWatcherServiceMock,
 			$currentCustomerMock,
-			$promoCodeFacadeMock
+			$currentPromoCodeFacadeMock
 		);
 		$cartItem = $this->getMock(CartItem::class, [], [], '', false);
 		$cart = new Cart([$cartItem]);

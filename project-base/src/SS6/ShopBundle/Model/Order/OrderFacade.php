@@ -5,6 +5,9 @@ namespace SS6\ShopBundle\Model\Order;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
+use SS6\ShopBundle\Model\Cart\CartFacade;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
+use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
@@ -17,7 +20,8 @@ use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
+use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
 
@@ -42,11 +46,6 @@ class OrderFacade {
 	 * @var \SS6\ShopBundle\Model\Order\OrderService
 	 */
 	private $orderService;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
-	 */
-	private $orderPreviewCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\OrderCreationService
@@ -88,12 +87,36 @@ class OrderFacade {
 	 */
 	private $administratorSecurityFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+	 */
+	private $currentPromoCodeFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
+	 */
+	private $cartFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 */
+	private $customerEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+	 */
+	private $orderPreviewFactory;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
 		OrderRepository $orderRepository,
 		OrderService $orderService,
-		OrderPreviewCalculation $orderPreviewCalculation,
 		OrderCreationService $orderCreationService,
 		UserRepository $userRepository,
 		OrderStatusRepository $orderStatusRepository,
@@ -101,13 +124,17 @@ class OrderFacade {
 		OrderHashGeneratorRepository $orderHashGeneratorRepository,
 		Setting $setting,
 		Localization $localization,
-		AdministratorSecurityFacade $administratorSecurityFacade
+		AdministratorSecurityFacade $administratorSecurityFacade,
+		CurrentPromoCodeFacade $currentPromoCodeFacade,
+		CartFacade $cartFacade,
+		CustomerEditFacade $customerEditFacade,
+		CurrentCustomer $currentCustomer,
+		OrderPreviewFactory $orderPreviewFactory
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
 		$this->orderRepository = $orderRepository;
 		$this->orderService = $orderService;
-		$this->orderPreviewCalculation = $orderPreviewCalculation;
 		$this->orderCreationService = $orderCreationService;
 		$this->userRepository = $userRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
@@ -116,6 +143,11 @@ class OrderFacade {
 		$this->setting = $setting;
 		$this->localization = $localization;
 		$this->administratorSecurityFacade = $administratorSecurityFacade;
+		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
+		$this->cartFacade = $cartFacade;
+		$this->customerEditFacade = $customerEditFacade;
+		$this->currentCustomer = $currentCustomer;
+		$this->orderPreviewFactory = $orderPreviewFactory;
 	}
 
 	/**
@@ -148,6 +180,24 @@ class OrderFacade {
 		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
 		$this->em->flush();
+
+		return $order;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @return \SS6\ShopBundle\Model\Order\Order
+	 */
+	public function createOrderFromFront(OrderData $orderData) {
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
+		$order = $this->createOrder($orderData, $orderPreview);
+
+		$this->cartFacade->cleanCart();
+		$this->currentPromoCodeFacade->removeEnteredPromoCode();
+		$user = $this->currentCustomer->findCurrentUser();
+		if ($user instanceof User) {
+			$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);
+		}
 
 		return $order;
 	}

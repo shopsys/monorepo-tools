@@ -5,8 +5,6 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
@@ -16,7 +14,6 @@ use SS6\ShopBundle\Model\Order\OrderDataMapper;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
@@ -40,16 +37,6 @@ class OrderController extends BaseController {
 	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
 	private $cart;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
-	 */
-	private $cartFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
-	 */
-	private $customerEditFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
@@ -111,17 +98,10 @@ class OrderController extends BaseController {
 	 */
 	private $session;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
-	 */
-	private $promoCodeFacade;
-
 	public function __construct(
 		OrderFacade $orderFacade,
-		CartFacade $cartFacade,
 		Cart $cart,
 		OrderPreviewFactory $orderPreviewFactory,
-		CustomerEditFacade $customerEditFacade,
 		TransportPriceCalculation $transportPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		Domain $domain,
@@ -132,14 +112,11 @@ class OrderController extends BaseController {
 		OrderFlow $flow,
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
-		OrderMailFacade $orderMailFacade,
-		PromoCodeFacade $promoCodeFacade
+		OrderMailFacade $orderMailFacade
 	) {
 		$this->orderFacade = $orderFacade;
-		$this->cartFacade = $cartFacade;
 		$this->cart = $cart;
 		$this->orderPreviewFactory = $orderPreviewFactory;
-		$this->customerEditFacade = $customerEditFacade;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->domain = $domain;
@@ -151,7 +128,6 @@ class OrderController extends BaseController {
 		$this->session = $session;
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
-		$this->promoCodeFacade = $promoCodeFacade;
 	}
 
 	/**
@@ -203,12 +179,7 @@ class OrderController extends BaseController {
 			if ($this->flow->nextStep()) {
 				$form = $this->flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
-				$order = $this->orderFacade->createOrder($orderData, $orderPreview, $this->getUser());
-				$this->cartFacade->cleanCart();
-				$this->promoCodeFacade->removeEnteredPromoCode();
-				if ($user instanceof User) {
-					$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);
-				}
+				$order = $this->orderFacade->createOrderFromFront($orderData);
 
 				$this->flow->reset();
 
