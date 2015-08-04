@@ -3,92 +3,161 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Transport;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportDomain;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
-class TransportVisibilityCalculationTest {
+class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase {
 
-	public function testIsVisibleHiddenTransport() {
-		$transportRepositoryMock = $this->getMock(TransportRepository::class, [], [], '', false);
-		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
-		$transportMock->expects($this->once())->method('isHidden')->willReturn(true);
+	public function testIsVisibleWhenIndepentlyInvisible() {
+		$domainId = 1;
+		$transportMock = $this->getMock(Transport::class, [], [], '', false);
 
-		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
+		$independentTransportVisibilityCalculationMock = $this
+			->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentTransportVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($transportMock), $this->equalTo($domainId))
+			->willReturn(false);
 
-		$this->assertFalse($visibilityCalculation->isVisible($transportMock, [], 1));
+		$independentPaymentVisibilityCalculationMock = $this
+			->getMock(IndependentPaymentVisibilityCalculation::class, [], [], '', false);
+
+		$transportVisibilityCalculation = new TransportVisibilityCalculation(
+			$independentTransportVisibilityCalculationMock,
+			$independentPaymentVisibilityCalculationMock
+		);
+
+		$this->assertFalse($transportVisibilityCalculation->isVisible($transportMock, [], $domainId));
 	}
 
-	public function testIsVisibleWithoutPayments() {
-		$transportRepositoryMock = $this->getMock(TransportRepository::class, [], [], '', false);
-		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
-		$transportMock->expects($this->once())->method('isHidden')->willReturn(false);
+	public function testIsVisibleWithHiddenPayment() {
+		$domainId = 1;
+		$transportMock = $this->getMock(Transport::class, [], [], '', false);
+		$paymentMock = $this->getMock(Payment::class, [], [], '', false);
 
-		$paymentMock = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
-		$paymentMock->expects($this->any())->method('isHidden')->willReturn(false);
+		$independentTransportVisibilityCalculationMock = $this
+			->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentTransportVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($transportMock), $this->equalTo($domainId))
+			->willReturn(true);
 
-		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
+		$independentPaymentVisibilityCalculationMock = $this
+			->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentPaymentVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($paymentMock), $this->equalTo($domainId))
+			->willReturn(false);
 
-		$this->assertFalse($visibilityCalculation->isVisible($transportMock, [$paymentMock], 1));
+		$transportVisibilityCalculation = new TransportVisibilityCalculation(
+			$independentTransportVisibilityCalculationMock,
+			$independentPaymentVisibilityCalculationMock
+		);
+
+		$this->assertFalse($transportVisibilityCalculation->isVisible($transportMock, [$paymentMock], $domainId));
 	}
 
-	public function testIsVisibleWithPaymentsAndWithoutDomain() {
-		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
-		$transportMock->expects($this->once())->method('isHidden')->willReturn(false);
+	public function testIsVisibleWithoutPayment() {
+		$domainId = 1;
+		$transportMock = $this->getMock(Transport::class, [], [], '', false);
+		$paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
+		$paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([]));
 
-		$transportDomain = new TransportDomain($transportMock, 2);
+		$independentTransportVisibilityCalculationMock = $this
+			->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentTransportVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($transportMock), $this->equalTo($domainId))
+			->willReturn(true);
 
-		$transportRepositoryMock = $this->getMock(TransportRepository::class, ['getTransportDomainsByTransport'], [], '', false);
-		$transportRepositoryMock
-			->expects($this->once())
-			->method('getTransportDomainsByTransport')
-			->with($this->equalTo($transportMock))
-			->willReturn([$transportDomain]);
+		$independentPaymentVisibilityCalculationMock = $this
+			->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentPaymentVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($paymentMock), $this->equalTo($domainId))
+			->willReturn(true);
 
-		$paymentMock1 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock1->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
-		$paymentMock1->expects($this->any())->method('isHidden')->willReturn(false);
+		$transportVisibilityCalculation = new TransportVisibilityCalculation(
+			$independentTransportVisibilityCalculationMock,
+			$independentPaymentVisibilityCalculationMock
+		);
 
-		$paymentMock2 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock2->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
-		$paymentMock2->expects($this->any())->method('isHidden')->willReturn(false);
-
-		$payments = [$paymentMock1, $paymentMock2];
-
-		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
-
-		$this->assertFalse($visibilityCalculation->isVisible($transportMock, $payments, 1));
+		$this->assertFalse($transportVisibilityCalculation->isVisible($transportMock, [$paymentMock], $domainId));
 	}
 
-	public function testIsVisibleWithPaymentsAndWithDomain() {
-		$transportMock = $this->getMock(Transport::class, ['isHidden'], [], '', false);
-		$transportMock->expects($this->once())->method('isHidden')->willReturn(false);
+	public function testIsVisibleWithVisiblePayment() {
+		$domainId = 1;
+		$transportMock = $this->getMock(Transport::class, [], [], '', false);
+		$paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
+		$paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
 
-		$wrongTransportDomain = new TransportDomain($transportMock, 2);
-		$transportDomain = new TransportDomain($transportMock, 1);
+		$independentTransportVisibilityCalculationMock = $this
+			->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentTransportVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($transportMock), $this->equalTo($domainId))
+			->willReturn(true);
 
-		$transportRepositoryMock = $this->getMock(TransportRepository::class, ['getTransportDomainsByTransport'], [], '', false);
-		$transportRepositoryMock
-			->expects($this->once())
-			->method('getTransportDomainsByTransport')
-			->with($this->equalTo($transportMock))
-			->willReturn([$wrongTransportDomain, $transportDomain]);
+		$independentPaymentVisibilityCalculationMock = $this
+			->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentPaymentVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($paymentMock), $this->equalTo($domainId))
+			->willReturn(true);
 
-		$paymentMock1 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock1->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection());
-		$paymentMock1->expects($this->any())->method('isHidden')->willReturn(false);
+		$transportVisibilityCalculation = new TransportVisibilityCalculation(
+			$independentTransportVisibilityCalculationMock,
+			$independentPaymentVisibilityCalculationMock
+		);
 
-		$paymentMock2 = $this->getMock(Payment::class, ['getTransports', 'isHidden'], [], '', false);
-		$paymentMock2->expects($this->once())->method('getTransports')->willReturn(new ArrayCollection([$transportMock]));
-		$paymentMock2->expects($this->any())->method('isHidden')->willReturn(false);
-
-		$payments = [$paymentMock1, $paymentMock2];
-
-		$visibilityCalculation = new TransportVisibilityCalculation($transportRepositoryMock);
-
-		$this->assertTrue($visibilityCalculation->isVisible($transportMock, $payments, 1));
+		$this->assertTrue($transportVisibilityCalculation->isVisible($transportMock, [$paymentMock], $domainId));
 	}
+
+	public function testFilterVisible() {
+		$domainId = 1;
+		$transportHiddenMock = $this->getMock(Transport::class, [], [], '', false);
+		$transportVisibleMock = $this->getMock(Transport::class, [], [], '', false);
+		$paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
+		$paymentMock->expects($this->atLeastOnce())->method('getTransports')->willReturn(new ArrayCollection([$transportVisibleMock]));
+
+		$independentTransportVisibilityCalculationMock = $this
+			->getMock(IndependentTransportVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentTransportVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($transportVisibleMock), $this->equalTo($domainId))
+			->willReturn(true);
+
+		$independentPaymentVisibilityCalculationMock = $this
+			->getMock(IndependentPaymentVisibilityCalculation::class, ['isIndependentlyVisible'], [], '', false);
+		$independentPaymentVisibilityCalculationMock
+			->expects($this->atLeastOnce())
+			->method('isIndependentlyVisible')
+			->with($this->equalTo($paymentMock), $this->equalTo($domainId))
+			->willReturn(true);
+
+		$transportVisibilityCalculation = new TransportVisibilityCalculation(
+			$independentTransportVisibilityCalculationMock,
+			$independentPaymentVisibilityCalculationMock
+		);
+
+		$transports = [$transportHiddenMock, $transportVisibleMock];
+
+		$filteredTransports = $transportVisibilityCalculation->filterVisible($transports, [$paymentMock], $domainId);
+
+		$this->assertCount(1, $filteredTransports);
+		$this->assertContains($transportVisibleMock, $filteredTransports);
+	}
+
 }
