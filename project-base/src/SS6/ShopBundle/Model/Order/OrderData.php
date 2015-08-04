@@ -83,7 +83,7 @@ class OrderData {
 	/**
 	 * @var bool
 	 */
-	public $deliveryAddressFilled;
+	public $deliveryAddressSameAsBillingAddress;
 
 	/**
 	 * @var string
@@ -161,12 +161,15 @@ class OrderData {
 		$this->street = $order->getStreet();
 		$this->city = $order->getCity();
 		$this->postcode = $order->getPostcode();
-		$this->deliveryContactPerson = $order->getDeliveryContactPerson();
-		$this->deliveryCompanyName = $order->getDeliveryCompanyName();
-		$this->deliveryTelephone = $order->getDeliveryTelephone();
-		$this->deliveryStreet = $order->getDeliveryStreet();
-		$this->deliveryCity = $order->getDeliveryCity();
-		$this->deliveryPostcode = $order->getDeliveryPostcode();
+		$this->deliveryAddressSameAsBillingAddress = $order->isDeliveryAddressSameAsBillingAddress();
+		if (!$order->isDeliveryAddressSameAsBillingAddress()) {
+			$this->deliveryContactPerson = $order->getDeliveryContactPerson();
+			$this->deliveryCompanyName = $order->getDeliveryCompanyName();
+			$this->deliveryTelephone = $order->getDeliveryTelephone();
+			$this->deliveryStreet = $order->getDeliveryStreet();
+			$this->deliveryCity = $order->getDeliveryCity();
+			$this->deliveryPostcode = $order->getDeliveryPostcode();
+		}
 		$this->note = $order->getNote();
 		$orderItemsData = [];
 		foreach ($order->getItems() as $orderItem) {

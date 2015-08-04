@@ -24,7 +24,7 @@ class OrderDataMapper {
 		$orderData->street = $frontOrderData->street;
 		$orderData->city = $frontOrderData->city;
 		$orderData->postcode = $frontOrderData->postcode;
-		$orderData->deliveryAddressFilled = $frontOrderData->deliveryAddressFilled;
+		$orderData->deliveryAddressSameAsBillingAddress = $frontOrderData->deliveryAddressSameAsBillingAddress;
 		$orderData->deliveryContactPerson = $frontOrderData->deliveryContactPerson;
 		$orderData->deliveryCompanyName = $frontOrderData->deliveryCompanyName;
 		$orderData->deliveryTelephone = $frontOrderData->deliveryTelephone;

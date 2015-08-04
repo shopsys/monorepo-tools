@@ -4,13 +4,17 @@ namespace SS6\ShopBundle\Form\Admin\Order;
 
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Order\OrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class OrderFormType extends AbstractType {
+
+	const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
@@ -90,12 +94,45 @@ class OrderFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
 				],
 			])
-			->add('deliveryContactPerson', FormType::TEXT, ['required' => false])
+			->add('deliveryAddressSameAsBillingAddress', FormType::CHECKBOX, ['required' => false])
+			->add('deliveryContactPerson', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím kontatkní osobu',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
 			->add('deliveryCompanyName', FormType::TEXT, ['required' => false])
 			->add('deliveryTelephone', FormType::TEXT, ['required' => false])
-			->add('deliveryStreet', FormType::TEXT, ['required' => false])
-			->add('deliveryCity', FormType::TEXT, ['required' => false])
-			->add('deliveryPostcode', FormType::TEXT, ['required' => false])
+			->add('deliveryStreet', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím ulici',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
+			->add('deliveryCity', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím město',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
+			->add('deliveryPostcode', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím PSČ',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
 			->add('note', FormType::TEXTAREA, ['required' => false])
 			->add('items', FormType::COLLECTION, [
 				'type' => new OrderItemFormType(),
@@ -113,6 +150,18 @@ class OrderFormType extends AbstractType {
 		$resolver->setDefaults([
 			'data_class' => OrderData::class,
 			'attr' => ['novalidate' => 'novalidate'],
+			'validation_groups' => function (FormInterface $form) {
+				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
+
+				$orderData = $form->getData();
+				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
+
+				if (!$orderData->deliveryAddressSameAsBillingAddress) {
+					$validationGroups[] = self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS;
+				}
+
+				return $validationGroups;
+			},
 		]);
 	}
 

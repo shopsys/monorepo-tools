@@ -89,12 +89,18 @@
 				<div class="wrap-group">
 					<h2 class="mt-0">{{ 'Doručovací adresa'|trans }}</h2>
 					<fieldset>
-						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
-						{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
-						{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
-						{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
-						{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
-						{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+						{{ form_row(form.deliveryAddressSameAsBillingAddress, {
+							attr: { class: 'js-checkbox-toggle js-checkbox-toggle--inverted', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+							label: 'Doručovací adresa je stejná jako fakturační'|trans})
+						}}
+						<div id="js-delivery-address-fields">
+							{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
+							{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
+							{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+							{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
+							{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
+							{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+						</div>
 					</fieldset>
 				</div>
 

@@ -175,9 +175,16 @@ class Order {
 	private $postcode;
 
 	/**
-	 * @var string|null
+	 * @var bool
 	 *
-	 * @ORM\Column(type="string", length=200, nullable=true)
+	 * @ORM\Column(type="boolean")
+	 */
+	private $deliveryAddressSameAsBillingAddress;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=200)
 	 */
 	private $deliveryContactPerson;
 
@@ -189,30 +196,30 @@ class Order {
 	private $deliveryCompanyName;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=30, nullable=true)
+	 * @ORM\Column(type="string", length=30)
 	 */
 	private $deliveryTelephone;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $deliveryStreet;
 
 	/**
 	 * @var string|null
 	 *
-	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $deliveryCity;
 
 	/**
 	 * @var string|null
 	 *
-	 * @ORM\Column(type="string", length=30, nullable=true)
+	 * @ORM\Column(type="string", length=30)
 	 */
 	private $deliveryPostcode;
 
@@ -297,15 +304,7 @@ class Order {
 			$orderData->companyNumber,
 			$orderData->companyTaxNumber
 		);
-		if ($orderData->deliveryAddressFilled) {
-			$this->setDeliveryAddress(
-				$orderData->deliveryContactPerson,
-				$orderData->deliveryCompanyName,
-				$orderData->deliveryTelephone,
-				$orderData->deliveryStreet,
-				$orderData->deliveryCity,
-				$orderData->deliveryPostcode);
-		}
+		$this->setDeliveryAddress($orderData);
 		$this->number = $orderNumber;
 		$this->status = $orderStatus;
 		$this->customer = $user;
@@ -340,16 +339,30 @@ class Order {
 			$orderData->companyNumber,
 			$orderData->companyTaxNumber
 		);
-		if ($orderData->deliveryAddressFilled) {
-			$this->setDeliveryAddress(
-				$orderData->deliveryContactPerson,
-				$orderData->deliveryCompanyName,
-				$orderData->deliveryTelephone,
-				$orderData->deliveryStreet,
-				$orderData->deliveryCity,
-				$orderData->deliveryPostcode);
-		}
+		$this->setDeliveryAddress($orderData);
 		$this->status = $orderStatus;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 */
+	private function setDeliveryAddress(OrderData $orderData) {
+		$this->deliveryAddressSameAsBillingAddress = $orderData->deliveryAddressSameAsBillingAddress;
+		if ($orderData->deliveryAddressSameAsBillingAddress) {
+			$this->deliveryContactPerson = $orderData->firstName . ' ' . $orderData->lastName;
+			$this->deliveryCompanyName = $orderData->companyName;
+			$this->deliveryTelephone = $orderData->telephone;
+			$this->deliveryStreet = $orderData->street;
+			$this->deliveryCity = $orderData->city;
+			$this->deliveryPostcode = $orderData->postcode;
+		} else {
+			$this->deliveryContactPerson = $orderData->deliveryContactPerson;
+			$this->deliveryCompanyName = $orderData->deliveryCompanyName;
+			$this->deliveryTelephone = $orderData->deliveryTelephone;
+			$this->deliveryStreet = $orderData->deliveryStreet;
+			$this->deliveryCity = $orderData->deliveryCity;
+			$this->deliveryPostcode = $orderData->deliveryPostcode;
+		}
 	}
 
 	/**
@@ -390,30 +403,6 @@ class Order {
 		$this->companyName = $companyName;
 		$this->companyNumber = $companyNumber;
 		$this->companyTaxNumber = $companyTaxNumber;
-	}
-
-	/**
-	 * @param string|null $deliveryContactPerson
-	 * @param string|null $deliveryCompanyName
-	 * @param string|null $deliveryTelephone
-	 * @param string|null $deliveryStreet
-	 * @param string|null $deliveryCity
-	 * @param string|null $deliveryPostcode
-	 */
-	public function setDeliveryAddress(
-		$deliveryContactPerson = null,
-		$deliveryCompanyName = null,
-		$deliveryTelephone = null,
-		$deliveryStreet = null,
-		$deliveryCity = null,
-		$deliveryPostcode = null
-	) {
-		$this->deliveryContactPerson = $deliveryContactPerson;
-		$this->deliveryCompanyName = $deliveryCompanyName;
-		$this->deliveryTelephone = $deliveryTelephone;
-		$this->deliveryStreet = $deliveryStreet;
-		$this->deliveryCity = $deliveryCity;
-		$this->deliveryPostcode = $deliveryPostcode;
 	}
 
 	/**
@@ -641,6 +630,13 @@ class Order {
 	 */
 	public function getPostcode() {
 		return $this->postcode;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeliveryAddressSameAsBillingAddress() {
+		return $this->deliveryAddressSameAsBillingAddress;
 	}
 
 	/**
