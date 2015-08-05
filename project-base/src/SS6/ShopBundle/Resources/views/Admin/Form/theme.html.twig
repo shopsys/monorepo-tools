@@ -541,11 +541,11 @@
 	{% spaceless %}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
 		<div {{ block('widget_container_attributes') }}>
-			{% for child in form %}
+			{% for domainId, child in form %}
 				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice-list__item')|trim}) %}
 				<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 					<span class="form-choice-list__icon in-image__wrap in-image__wrap--small">
-						{{ child.vars.value }}
+						{{ domainIcon(domainId) }}
 					</span>
 					{{ form_widget(child, { inList: true}) }}
 					{{ child.vars.label }}
