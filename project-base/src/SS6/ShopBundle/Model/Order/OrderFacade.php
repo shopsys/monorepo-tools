@@ -190,11 +190,11 @@ class OrderFacade {
 	 */
 	public function createOrderFromFront(OrderData $orderData) {
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
-		$order = $this->createOrder($orderData, $orderPreview);
+		$user = $this->currentCustomer->findCurrentUser();
+		$order = $this->createOrder($orderData, $orderPreview, $user);
 
 		$this->cartFacade->cleanCart();
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
-		$user = $this->currentCustomer->findCurrentUser();
 		if ($user instanceof User) {
 			$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);
 		}
