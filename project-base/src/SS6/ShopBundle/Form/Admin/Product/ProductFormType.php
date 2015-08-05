@@ -100,7 +100,7 @@ class ProductFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		if ($this->product !== null && $this->product->isVariant()) {
 			$builder->add('variantAlias', FormType::LOCALIZED, [
-				'options' => ['required' => false],
+				'required' => false,
 			]);
 		}
 		$builder

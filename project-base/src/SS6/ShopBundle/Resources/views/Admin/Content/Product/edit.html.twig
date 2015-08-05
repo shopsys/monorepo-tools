@@ -6,12 +6,14 @@
 {% block product_variants %}
 	{% if product.isVariant %}
 		<div class="wrap-group">
-			<strong>
-				{{ 'Produkt je variantou'|trans }}
-				<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
-					{{ product.mainVariant.name }}<i class="fa fa-external-link"></i>
-				</a>
-			</strong>
+			<div class="form-line">
+				<strong>
+					{{ 'Produkt je variantou'|trans }}
+					<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
+						{{ product.mainVariant.name }}<i class="fa fa-external-link"></i>
+					</a>
+				</strong>
+			</div>
 			{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
 		</div>
 	{% endif %}
