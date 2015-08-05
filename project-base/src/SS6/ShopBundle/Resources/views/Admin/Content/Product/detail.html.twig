@@ -196,7 +196,7 @@
 							{{ 'Titulek'|trans }}
 						</strong>
 						{% for domainId, seoTitleForm in form.seoTitles %}
-							<div class="form-line__side">
+							<div class="form-line__side js-characters-counter">
 								<div class="form-line__item form-line__item--left">
 									<div class="input__wrap">
 										{{ form_widget(seoTitleForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain' } }) }}
@@ -206,7 +206,7 @@
 									</div>
 								</div>
 
-								<div class="form-line__count js-characters-counter">
+								<div class="form-line__count">
 									<span class="form-line__count__val">
 										<span>42</span>
 									</span>
@@ -224,13 +224,13 @@
 						</strong>
 
 						{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
-							<div class="form-line__side">
+							<div class="form-line__side js-characters-counter">
 								<div class="form-line__item form-line__item--left">
 									{{ form_row(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input' } }) }}
 								</div>
 
 								<div class="form-line__item">
-									<div class="form-line__item__count js-characters-counter">
+									<div class="form-line__item__count">
 										<div class="js-characters-counter-info" data-recommended-length="155"></div>
 									</div>
 								</div>
