@@ -32,7 +32,8 @@
 				initItem($(this));
 			});
 			$itemsContainer.sortable({
-				handle: '.cursor-move',
+				items: '.js-products-picker-item',
+				handle: '.js-products-picker-item-handle',
 				update: updateOrdering
 			});
 		};
