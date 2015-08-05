@@ -1,4 +1,4 @@
-.inp {
+.input {
 	width: 210px;
 	max-width: 100%;
 	height: 32px;
@@ -22,6 +22,10 @@
 	&--domain {
 		width: 408px;
 		padding-left: 60px;
+	}
+
+	&--textarea {
+
 	}
 
 	&__wrap {
@@ -55,6 +59,7 @@
 		left: 7px;
 		width: 22px;
 		height: 14px;
+		display: block;
 
 		&:after {
 			position: absolute;
@@ -98,8 +103,8 @@
 	}
 
 
-
-	.form-line--error & {
+	.form-input-error & ,
+	&.form-input-error {
 		border-color: @color-red;
 
 		.box-shadow(none);

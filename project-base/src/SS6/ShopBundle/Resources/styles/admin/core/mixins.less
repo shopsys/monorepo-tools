@@ -310,6 +310,24 @@
 *  MIXINS - DRAWING ARROWS
 **************************************************************************************/
 
+
+// Náhrada za before, nastavuje hlasické nastavení pro before bez ikonky s možností nastavení pozadí
+// hodí se pro případ, kdy chceme udělat útvar bez ikonky, nebo pozadi s pismem, popř tímhle něco zakrýt
+.after-c(@width, @height, @bg: transparent, @content: '' , @left: 0, @top: 0) {
+	position: relative;
+
+	&:after {
+		content: @content;
+		position: absolute;
+		top: @top;
+		left: @left;
+		display: block;
+		width: @width;
+		height: @height;
+		background: @bg;
+	}
+} // .after
+
 .draw-arrow-right(@size, @bg, @pos-x, @pos-y) {
 	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
 

@@ -95,7 +95,7 @@ class DomainExtension extends \Twig_Extension {
 				. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>';
 		} else {
 			return '<span
-				class="text-in-circle text-in-circle--filled text-in-circle--filled__' . $domainId . '"
+				class="in-image in-image--' . $domainId . '"
 				title="' . htmlspecialchars($domainName, ENT_QUOTES) . '">' . $domainId . '</span>';
 		}
 	}

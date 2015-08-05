@@ -1,0 +1,45 @@
+/*
+Temp image
+=======
+
+*/
+
+.in-image {
+	.center-image();
+	line-height: 18px;
+
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color: @color-f;
+
+	&--1 {background: #b04454}
+	&--2 {background: #c357a1}
+	&--3 {background: #a157c3}
+	&--4 {background: #6657c3}
+	&--5 {background: #578fc3}
+	&--6 {background: #57c3b8}
+	&--7 {background: #57c357}
+	&--8 {background: #adc357}
+	&--9 {background: #c38f57}
+
+	.in-image__wrap & {
+		line-height: 26px;
+	}
+
+	.in-image__wrap--small & {
+		line-height: 18px;
+	}
+
+	&__wrap {
+		position: relative;
+		width: 40px;
+		height: 26px;
+		float: left;
+		margin-right: 5px;
+
+		&--small {
+			height: 18px;
+		}
+	}
+}

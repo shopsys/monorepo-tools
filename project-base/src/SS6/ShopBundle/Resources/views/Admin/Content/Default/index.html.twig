@@ -36,9 +36,9 @@
 				<div class="form-full__field__item form-full__field__item--compulsory form-compulsory">
 					<span class="sprite sprite-star"></span>
 				</div>
-				<div class="inp__wrap">
-					<input type="text" class="inp inp--domain form-full__field__input">
-					<span class="inp__domain">
+				<div class="input__wrap">
+					<input type="text" class="input input--domain form-full__field__input">
+					<span class="input__domain">
 						<img src="http://placehold.it/120x36" alt="">
 					</span>
 				</div>
@@ -55,9 +55,9 @@
 						<span class="in-message__close">x</span>
 					</div>
 				</div>
-				<div class="inp__wrap">
-					<input type="text" class="inp inp--domain form-full__field__input">
-					<span class="inp__domain">
+				<div class="input__wrap">
+					<input type="text" class="input input--domain form-full__field__input">
+					<span class="input__domain">
 						<img src="http://placehold.it/120x36" alt="">
 					</span>
 				</div>
@@ -84,7 +84,7 @@
 
 		<div class="form-line__side">
 			<div class="form-line__item">
-				<input type="text" class="inp">
+				<input type="text" class="input">
 			</div>
 
 			<div class="form-line__item form-line__item--right form-line__item--btn">
@@ -133,7 +133,7 @@
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item">
-					<select class="inp" name="" id="">
+					<select class="input" name="" id="">
 						<option value="">1</option>
 						<option value="">2</option>
 						<option value="">3</option>
@@ -142,18 +142,22 @@
 			</div>
 		</div>
 
-		<div class="form-line">
-			<div class="form-line__label">
-				Label:
-			</div>
-			<div class="form-line__side">
-				<div class="form-line__item">
-					<input type="text" class="inp">
+		<div class="form-line__js">
+
+			<div class="form-line">
+				<div class="form-line__label">
+					Label:
 				</div>
-				<div class="form-line__item form-line__item--text">
-					text after
+				<div class="form-line__side">
+					<div class="form-line__item">
+						<input type="text" class="input">
+					</div>
+					<div class="form-line__item form-line__item--text">
+						text after
+					</div>
 				</div>
 			</div>
+
 		</div>
 
 		<div class="form-line">
@@ -173,7 +177,7 @@
 				</div>
 				<div class="form-line__item form-line__item--alone">
 					<div class="in-message in-message--info">
-						<i class="svg svg-info"></i> info message
+						<i class="in-message__in svg svg-info"></i> info message
 					</div>
 				</div>
 			</div>
@@ -199,7 +203,7 @@
 				</div>
 				<div class="form-line__item form-line__item--alone">
 					<div class="in-message in-message--warning">
-						<i class="svg svg-warning"></i> warning message
+						<i class="in-message__in svg svg-warning"></i> warning message
 					</div>
 				</div>
 			</div>
@@ -211,10 +215,10 @@
 			</div>
 			<div class="form-line__side">
 				<div class="form-line__item">
-					<div class="inp__wrap">
-						<input type="date" class="inp inp--iconic">
-						<span class="inp__icon">
-							<i class="svg svg-calendar-1"></i>
+					<div class="input__wrap">
+						<input type="date" class="input input--iconic">
+						<span class="input__icon">
+							<i class="svg svg-calendar-3"></i>
 						</span>
 					</div>
 				</div>
@@ -358,7 +362,7 @@
 					Text
 				</td>
 				<td class="table-grid__cell">
-					<input type="text" class="inp">
+					<input type="text" class="input">
 				</td>
 				<td class="table-grid__cell">
 					Text
@@ -375,7 +379,7 @@
 					Text
 				</td>
 				<td class="table-grid__cell">
-					<input type="text" class="inp">
+					<input type="text" class="input">
 				</td>
 				<td class="table-grid__cell">
 					Text
@@ -392,7 +396,7 @@
 					Text
 				</td>
 				<td class="table-grid__cell">
-					<input type="text" class="inp">
+					<input type="text" class="input">
 				</td>
 				<td class="table-grid__cell">
 					Text
@@ -478,7 +482,7 @@
 							Label
 						</td>
 						<td class="table-form__cell table-form__cell--field">
-							<input type="text" class="inp"> Kč
+							<input type="text" class="input"> Kč
 						</td>
 						<td class="table-form__cell">
 							3 333 Kč
@@ -592,13 +596,13 @@
 		</div>
 
 		<div class="form-line">
-			<div class="form-line__line__line">
+			<div class="form-line__line">
 				WYSIWYG
 			</div>
 		</div>
 
 		<div class="form-line">
-			<div class="form-line__line__line">
+			<div class="form-line__line">
 				<label class="form-choice">
 					<input type="checkbox" class="form-choice__input">
 					<strong>Checkbox label</strong>
@@ -613,9 +617,9 @@
 
 			<div class="form-line__side">
 				<div class="form-line__item form-line__item--left">
-					<div class="inp__wrap">
-						<input type="text" class="inp inp--domain">
-						<div class="inp__domain">
+					<div class="input__wrap">
+						<input type="text" class="input input--domain">
+						<div class="input__domain">
 							<img src="http://placehold.it/120x36" alt="">
 						</div>
 					</div>
@@ -730,15 +734,15 @@
 			<tbody>
 				<tr class="table-form__row">
 					<td class="table-form__cell table-form__cell--del-before">
-						<select name="" id="" class="inp"><option value="">none</option></select>
+						<select name="" id="" class="input"><option value="">none</option></select>
 					</td>
 					<td class="table-form__cell table-form__cell--del">
 						<span class="svg svg-arrow-thick-right"></span>
 					</td>
 					<td class="table-form__cell table-form__cell--del-after">
-						<div class="inp__wrap">
-							<input type="text" class="inp inp--flag">
-							<div class="inp__flag">
+						<div class="input__wrap">
+							<input type="text" class="input input--flag">
+							<div class="input__flag">
 								<img alt="" src="http://placehold.it/350x150">
 							</div>
 						</div>
@@ -749,21 +753,21 @@
 				</tr>
 				<tr class="table-form__row">
 					<td class="table-form__cell table-form__cell--del-before">
-						<select name="" id="" class="inp"><option value="">none</option></select>
+						<select name="" id="" class="input"><option value="">none</option></select>
 					</td>
 					<td class="table-form__cell table-form__cell--del">
 						<span class="svg svg-arrow-thick-right"></span>
 					</td>
 					<td class="table-form__cell table-form__cell--del-after">
-						<div class="inp__wrap">
-							<input type="text" class="inp inp--flag">
-							<div class="inp__flag">
+						<div class="input__wrap">
+							<input type="text" class="input input--flag">
+							<div class="input__flag">
 								<img alt="" src="http://placehold.it/350x150">
 							</div>
 						</div>
-						<div class="inp__wrap">
-							<input type="text" class="inp inp--flag">
-							<div class="inp__flag">
+						<div class="input__wrap">
+							<input type="text" class="input input--flag">
+							<div class="input__flag">
 								<img alt="" src="http://placehold.it/350x150">
 							</div>
 						</div>

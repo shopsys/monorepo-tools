@@ -20,7 +20,7 @@
 	};
 
 	SS6.validation.isFormValid = function (form) {
-		return $(form).find('.form-error:first, .js-validation-errors-list li[class]:first').size() === 0;
+		return $(form).find('.form-input-error:first, .js-validation-errors-list li[class]:first').size() === 0;
 	};
 
 	SS6.validation.getErrorListClass = function (elementName) {
@@ -69,7 +69,7 @@
 				}
 			})
 			.focus(function () {
-				$(this).closest('.form-error').removeClass('form-error');
+				$(this).closest('.form-input-error').removeClass('form-input-error');
 			})
 			.jsFormValidator({
 				'showErrors': SS6.validation.showErrors

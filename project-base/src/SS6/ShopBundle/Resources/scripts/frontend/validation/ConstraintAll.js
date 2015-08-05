@@ -4,7 +4,7 @@ function SymfonyComponentValidatorConstraintsAll() {
 
 	this.validate = function (value, element) {
 		var constraints = FpJsFormValidator.parseConstraints(this.constraints);
-		var sourceId = 'form-error-' + String(element.id).replace(/_/g, '-');
+		var sourceId = 'form-input-error-' + String(element.id).replace(/_/g, '-');
 
 		for (var childName in element.children) {
 			var childElement = element.children[childName];

@@ -23,6 +23,12 @@ Form field constructions, with many variants and uses
 		border-bottom-color: @color-border-darker;
 	}
 
+	&__js {
+		.form-line:first-child {
+			border-top: none;
+		}
+	}
+
 	&--error {
 		background: lighten(@color-red, 55%);
 	}
@@ -37,6 +43,19 @@ Form field constructions, with many variants and uses
 		float: left;
 
 		font-weight: bold;
+
+		.form-compulsory {
+			position: absolute;
+			top: 15px;
+			left: -9px;
+		}
+	}
+
+	&__error {
+		position: absolute;
+		top: 14px;
+		left: -12px;
+		z-index: 10;
 	}
 
 	&__side {
@@ -75,20 +94,6 @@ Form field constructions, with many variants and uses
 			padding-right: 4px;
 		}
 
-		&--compulsory {
-			position: absolute;
-			top: 15px;
-			left: -9px;
-			padding-right: 0;
-		}
-
-		&--error {
-			position: absolute;
-			top: 14px;
-			left: -12px;
-			padding-right: 0;
-		}
-
 		&__icon {
 			position: absolute;
 			top: 4px;
@@ -109,43 +114,47 @@ Form field constructions, with many variants and uses
 				.center-image();
 			}
 		}
+	}
 
-		&__count {
-			display: table;
-			height: 32px;
+	&__count {
+		display: table;
+		height: 32px;
 
-			&__val {
-				display: table-cell;
-				vertical-align: middle;
-				padding-right: 7px;
+		&__val {
+			display: table-cell;
+			vertical-align: middle;
+			padding-right: 7px;
 
-				span {
-					display: inline-block;
-					padding: 3px 7px;
-					line-height: 16px;
-
-					font-size: 12px;
-					text-align: center;
-					color: @color-hint;
-					background: @bg-input-icon;
-				}
-			}
-
-			&__desc {
-				display: table-cell;
-				vertical-align: middle;
-				line-height: 12px;
+			span {
+				display: inline-block;
+				padding: 3px 7px;
+				line-height: 16px;
 
 				font-size: 12px;
+				text-align: center;
 				color: @color-hint;
-				font-style: italic;
+				background: @bg-input-icon;
 			}
+		}
+
+		&__desc {
+			display: table-cell;
+			vertical-align: middle;
+			line-height: 12px;
+
+			font-size: 12px;
+			color: @color-hint;
+			font-style: italic;
 		}
 	}
 
 	&__line {
 		clear: left;
 		margin-top: 10px;
+
+		&--no-space {
+			margin-top: 0;
+		}
 	}
 
 	&__group {

@@ -31,13 +31,13 @@
 		$errorListUl.find('li:not([class]), li.' + elementErrorClass).remove();
 
 		if (errors.length > 0) {
-			$elementsToHighlight.addClass('form-error');
+			$elementsToHighlight.addClass('form-input-error');
 			$.each(errors, function (key, message) {
 				$errorListUl.append($('<li/>').addClass(elementErrorClass).text(message));
 			});
 			$errorList.show();
 		} else if ($errorListUl.find('li').size() === 0) {
-			$elementsToHighlight.removeClass('form-error');
+			$elementsToHighlight.removeClass('form-input-error');
 			$errorList.hide();
 		}
 

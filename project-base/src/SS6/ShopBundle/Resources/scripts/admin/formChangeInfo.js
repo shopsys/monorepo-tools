@@ -9,7 +9,7 @@
 				SS6.formChangeInfo.showInfo();
 			})
 			.each(function() {
-				if ($(this).find('.form-error:first, .js-validation-errors-list li:first').size() > 0) {
+				if ($(this).find('.form-input-error:first, .js-validation-errors-list li:first').size() > 0) {
 					SS6.formChangeInfo.showInfo();
 				}
 			});

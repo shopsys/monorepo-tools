@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Content/Product/detail.html.twig' %}
 
 {% block title %}- {{ 'Editace zboží'|trans }} - {{ product.name }}{% endblock %}
-{% block h1 %}{{ 'Editace zboží'|trans }} - {{ product.name }}{% endblock %}
+{% block h1 %}{% endblock %}
 
 {% block product_variants %}
 	{% if product.isVariant %}
@@ -43,28 +43,35 @@
 
 {% block product_url %}
 	<div class="form-line">
-		<label>
+		<label class="form-line__label">
 			{{ 'URL adresy na doménách :' |trans }}
-			<i class="fa fa-info-circle cursor-help js-tooltip"
+			<i class="svg svg-info cursor-help js-tooltip"
 				data-toggle="tooltip" data-placement="right"
 				title="{{ 'Pokud je produkt viditelný pro výchozí cenovou skupinu na dané doméně, je URL adresa odkazem, v opačném případě se zobrazuje pouze jako text'|trans }}"
 			 ></i>
 		</label>
 		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
-			<div class="form-line">
-				<span class="form-line__image">{{ domainIcon(productDomain.domainId) }}</span> <span class="form-line__label form-line__label--with-image">{{ getDomainName(productDomain.domainId) ~ ' :' }}</span>
-				<span class="form-line__text">
-					{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId) %}
-					{% if url %}
-						{% if isVisibileForDefaultPricingGroup(product, productDomain.domainId) %}
-							<a href="{{ url }}" target="_blank">{{ url }}</a>
+			<div class="form-line__line form-line__line--no-space">
+				<div class="form-line__label">
+					<span class="in-image__wrap in-image__wrap--small">
+						{{ domainIcon(productDomain.domainId) }}
+					</span>
+					{{ getDomainName(productDomain.domainId) ~ ' :' }}
+				</div>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--text">
+						{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId) %}
+						{% if url %}
+							{% if isVisibileForDefaultPricingGroup(product, productDomain.domainId) %}
+								<a href="{{ url }}" target="_blank">{{ url }}</a>
+							{% else %}
+								{{ url }}
+							{% endif %}
 						{% else %}
-							{{ url }}
+							-
 						{% endif %}
-					{% else %}
-						-
-					{% endif %}
-				</span>
+					</div>
+				</div>
 			</div>
 		{% endfor %}
 	</div>
@@ -72,71 +79,126 @@
 
 {% block product_calculated_hidden_info %}
 	{% if product.isUsingStock and product.calculatedHidden and product.stockQuantity <= 0 %}
-		<div class="form-line form-line__text text-red">{{ 'Produkt je skrytý z důvodu vyprodání'|trans }}</div>
+		<div class="form-line">
+			<div class="form-line__line form-line__line--no-space">
+				<div class="in-message in-message--warning">
+					<span class="in-message__icon svg svg-warning"></span>
+					{{ 'Produkt je skrytý z důvodu vyprodání'|trans }}
+				</div>
+			</div>
+		</div>
 	{% endif %}
 {% endblock %}
 
 {% block product_calculated_selling_denied_info %}
 	{% if product.isUsingStock and product.calculatedSellingDenied and product.stockQuantity <= 0 %}
-		<div class="form-line form-line__text text-red">{{ 'Produkt je vyřazen z prodeje z důvodu vyprodání'|trans }}</div>
+		<div class="form-line">
+			<div class="form-line__line form-line__line--no-space">
+				<div class="in-message in-message--warning">
+					<span class="in-message__icon svg svg-warning"></span>
+					{{ 'Produkt je vyřazen z prodeje z důvodu vyprodání'|trans }}
+				</div>
+			</div>
+		</div>
 	{% endif %}
 {% endblock %}
 
 {% block product_main_categories %}
-	<label>{{ 'Hlavní kategorie na doménách :' |trans }}</label>
-	{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}
-		{% if mainCategory is null %}
-			{% set mainCategoryName = '-' %}
-		{% else %}
-			{% set mainCategoryName = mainCategory.name %}
-		{% endif %}
-		<div class="form-line">
-			<span class="form-line__image">{{ domainIcon(domainId) }}</span> <label class="form-line__label form-line__label--with-image">{{ getDomainName(domainId) ~ ' :' }}</label>
-			<input
-				type="text"
-				value="{{ mainCategoryName }}"
-				class="form-control form-line__field"
-				readonly="readonly"
-			>
-		</div>
-	{% endfor %}
+	<div class="form-line">
+
+		<label class="form-line__label">{{ 'Hlavní kategorie na doménách :' |trans }}</label>
+
+		{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}
+			<div class="form-line__line">
+				{% if mainCategory is null %}
+					{% set mainCategoryName = '-' %}
+				{% else %}
+					{% set mainCategoryName = mainCategory.name %}
+				{% endif %}
+
+				<label class="form-line__label">
+					{{ getDomainName(domainId) ~ ' :' }}
+				</label>
+
+				<div class="form-line__side">
+					<div class="form-line__item wrap__input">
+						<input
+							type="text"
+							value="{{ mainCategoryName }}"
+							class="input input--domain"
+							readonly="readonly"
+						>
+						<span class="input__domain">
+							{{ domainIcon(domainId) }}
+						</span>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
 {% endblock %}
 
 {% block product_calculated_prices %}
-	<table class="table table-dark mt-1">
-		<thead>
-			<tr>
-				<th class="form-line__group-title">{{ inputPriceLabel() }}</th>
-				<th>{{ 'Cena bez DPH'|trans }}</th>
-				<th>{{ 'Cena s DPH'|trans }}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="js-input-price-type-auto">
-				<td>{{ form_row(form.productData.price, {label: 'Základní cena'|trans, symbolAfterInput: currencySymbolDefault(), attr: { class: 'form-line--size-2 mr-1 in-message__wrap' } }) }}</td>
-				{% if productDetail.product.priceCalculationType == constant('SS6\\ShopBundle\\Model\\Product\\Product::PRICE_CALCULATION_TYPE_AUTO') %}
-					<td class="text-muted">{{ productDetail.basePrice.priceWithoutVat|priceWithCurrencyAdmin }}</td>
-					<td class="text-muted"><strong>{{ productDetail.basePrice.priceWithVat|priceWithCurrencyAdmin }}</strong></td>
-				{% else %}
-					<td class="text-muted">-</td>
-					<td class="text-muted"><strong>-</strong></td>
-				{% endif %}
-			</tr>
-			{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
-				<tr>
-					<th colspan="3">{{ domainIcon(domainId) }} {{ getDomainName(domainId) }}</th>
+	<div class="table-form__wrap">
+		<table class="table-form">
+			<thead>
+				<tr class="table-form__row">
+					<th class="table-form__cell table-form__cell--label">{{ inputPriceLabel() }}</th>
+					<th class="table-form__cell table-form__cell--field"></th>
+					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
+					<th class="table-form__cell">{{ 'Cena s DPH'|trans }}</th>
 				</tr>
-				{% for productSellingPrice in productSellingPrices %}
-					<tr>
-						<td class="js-input-price-type-auto">{{ productSellingPrice.pricingGroup.name }}</td>
-						<td class="js-input-price-type-manual">{{ form_row(form.manualInputPrices[productSellingPrice.pricingGroup.id], {label:  productSellingPrice.pricingGroup.name, attr: { class: 'form-line--size-2 mr-1 in-message__wrap' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}</td>
-						<td>{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}</td>
-						<td><strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyByDomainId(domainId) }}</strong></td>
+			</thead>
+			<tbody>
+				<tr class="table-form__row js-input-price-type-auto">
+					<td class="table-form__cell table-form__cell--label">
+						{{ form_label(form.productData.price, 'Základní cena'|trans) }}
+					</td>
+					<td class="table-form__cell table-form__cell--filed">
+						{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
+						{{ form_errors(form.productData.price) }}
+					</td>
+					{% if productDetail.product.priceCalculationType == constant('SS6\\ShopBundle\\Model\\Product\\Product::PRICE_CALCULATION_TYPE_AUTO') %}
+						<td class="table-form__cell">{{ productDetail.basePrice.priceWithoutVat|priceWithCurrencyAdmin }}</td>
+						<td class="table-form__cell"><strong>{{ productDetail.basePrice.priceWithVat|priceWithCurrencyAdmin }}</strong></td>
+					{% else %}
+						<td class="table-form__cell">-</td>
+						<td class="table-form__cell"><strong>-</strong></td>
+					{% endif %}
+				</tr>
+				{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
+					<tr class="table-form__row table-form__row--group">
+						<th class="table-form__cell" colspan="4">
+							<span class="in-image__wrap table-form__cell__image">
+								{{ domainIcon(domainId) }}
+							</span>
+							<strong class="table-form__cell__group-name">
+								{{ getDomainName(domainId) }}
+							</strong>
+						</th>
 					</tr>
+					{% for productSellingPrice in productSellingPrices %}
+						<tr class="table-form__row">
+							<td class="table-form__cell table-form__cell--label js-input-price-type-auto">
+								{{ form_label(form.manualInputPrices[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name) }}
+							</td>
+							<td class="table-form__cell table-form__cell--filed js-input-price-type-manual">
+								{{ form_widget(form.manualInputPrices[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+								{{ form_errors(form.manualInputPrices[productSellingPrice.pricingGroup.id]) }}
+							</td>
+							<td class="table-form__cell">
+								{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}
+							</td>
+							<td class="table-form__cell">
+								<strong>{{ productSellingPrice.sellingPrice.priceWithVat|priceWithCurrencyByDomainId(domainId) }}</strong>
+							</td>
+						</tr>
+					{% endfor %}
 				{% endfor %}
-			{% endfor %}
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
 {% endblock %}
 
 {% block images %}
@@ -190,5 +252,5 @@
 {% endblock %}
 
 {% block product_urls %}
-	{{ form_row(form.urls, { label: 'URL adresy'|trans }) }}
+	{{ form_row(form.urls, { label: 'Nastavení URL'|trans }) }}
 {% endblock %}

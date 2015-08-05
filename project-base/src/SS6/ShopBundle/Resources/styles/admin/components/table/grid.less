@@ -28,7 +28,8 @@ Table for grid
 	}
 
 	&__cell {
-		padding: 6px 17px;
+		padding: 6px;
+		height: 40px;
 
 		text-align: left;
 
@@ -36,8 +37,16 @@ Table for grid
 			width: 40px;
 		}
 
+		&--move {
+			width: 40px;
+			padding-left: 17px;
+			padding-right: 17px;
+		}
+
 		&--actions {
 			width: 90px;
+			padding-left: 17px;
+			padding-right: 17px;
 
 			text-align: right;
 		}
@@ -45,6 +54,11 @@ Table for grid
 		thead & {
 			padding-top: 14px;
 			padding-bottom: 14px;
+
+			a {
+				color: @color-f;
+				text-decoration: none;
+			}
 		}
 	}
 }
