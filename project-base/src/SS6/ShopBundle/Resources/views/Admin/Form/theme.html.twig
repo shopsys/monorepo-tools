@@ -369,14 +369,14 @@
 		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__'}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
-		<table class="js-products-picker-items table-form mb20">
+		<table class="table-form mb20">
 			<thead class="js-products-picker-header">
 				<tr class="table-form__row">
 					<td class="table-form__cell">{{ 'Název'|trans }}</td>
 					<td class="table-form__cell table-form__cell--actions"></td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="js-products-picker-items">
 				{% for key, productForm in form %}
 					{{ _self.productsWidgetItem(form.vars.products[key].name, productForm, form.vars.sortable) }}
 				{% endfor %}

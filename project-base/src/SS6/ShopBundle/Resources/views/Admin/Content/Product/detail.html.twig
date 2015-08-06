@@ -138,51 +138,60 @@
 				</div>
 
 
-				<div class="js-form-group">
-					<h2>{{ 'Parametry'|trans }}:</h2>
+				<div class="js-form-group wrap-border form-group">
+					<div class="form-group__title">
+						{{ 'Parametry'|trans }}
 
-					{{ form_errors(form.parameters) }}
+						{{ form_errors(form.parameters) }}
+					</div>
+					<table class="table-form" id="product_edit_form_parameters">
+						<thead>
+							<tr class="table-form__row">
+								<th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parametr'|trans }}</th>
+								<th class="table-form__cell table-form__cell--del"></th>
+								<th class="table-form__cell table-form__cell--del-after">{{ 'Hodnota'|trans }}</th>
+								<th class="table-form__cell"></th>
+							</tr>
+						</thead>
+						<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
+							{% macro parameterRow(parameter, index) %}
+								<tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
+									<td class="table-form__cell table-form__cell--del-before">
+										{{ form_widget(parameter.parameter) }}
+									</td>
+									<td class="table-form__cell table-form__cell--del">
+										<span class="svg svg-arrow-thick-right"></span>
+									</td>
+									<td class="table-form__cell  table-form__cell--del-after">
+										{% for locale, valueTextLocaleForm in parameter.valueText %}
+											<div class="input__wrap">
+												{{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
+												<span class="input__flag">
+													{{ localeFlag(locale) }}
+												</span>
+												{{ form_errors(valueTextLocaleForm) }}
+											</div>
+										{% endfor %}
+									</td>
+									<td class="table-form__cell text-right">
+										<a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
+									</td>
+								</tr>
+							{% endmacro %}
+
+							{% for key, parameter in form.parameters %}
+								{{ _self.parameterRow(parameter, key) }}
+							{% else %}
+								{% do form.parameters.setRendered %}
+							{% endfor %}
+
+							<tr class="js-parameters-empty-item table-form__row">
+								<td class="table-form__cell" colspan="3">{{ 'Přidejte nějaké parametry'|trans }}</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<div class="wrap-group__inner">
-
-						<table class="table-edit mb-1" id="product_edit_form_parameters">
-							<thead class="table-edit__heading">
-								<tr>
-									<th class="table-edit__heading__cell">{{ 'Parametr'|trans }}</th>
-									<th class="table-edit__heading__cell">{{ 'Hodnota'|trans }}</th>
-									<th class="table-edit__heading__cell"></th>
-								</tr>
-							</thead>
-							<tbody class="js-parameters table-edit__body" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
-
-								{% macro parameterRow(parameter, index) %}
-									<tr class="js-parameters-item js-form-group" data-index="{{ index }}">
-										<td class="table-col-45 table-edit__body__cell">
-											{{ form_widget(parameter.parameter) }}
-										</td>
-										<td class="table-col-50 table-edit__body__cell">
-											<span class="table-edit__body__cell__error">
-												 {{ form_errors(parameter.valueText, {errors_attr: {class: 'table-edit__body__cell__error__message'}}) }}
-											</span>
-											{{ form_widget(parameter.valueText)}}
-										</td>
-										<td class="table-col-5 table-edit__body__cell text-center">
-											<a href="#" class="js-parameters-item-remove table-action"><i class="fa fa-trash-o"></i></a>
-										</td>
-									</tr>
-								{% endmacro %}
-
-								{% for key, parameter in form.parameters %}
-									{{ _self.parameterRow(parameter, key) }}
-								{% else %}
-									{% do form.parameters.setRendered %}
-								{% endfor %}
-
-								<tr class="js-parameters-empty-item">
-									<td colspan="3">{{ 'Přidejte nějaké parametry'|trans }}</td>
-								</tr>
-							</tbody>
-						</table>
 						<a href="#" class="js-parameters-item-add btn btn-primary"><i class="fa fa-plus fa-lg"></i> {{ 'Přidat'|trans }}</a>
 					</div>
 				</div>
@@ -254,34 +263,21 @@
 
 				{{ form_row(form.accessories, { label: 'Příslušenství'|trans }) }}
 
-				{% block footer %}
-					<footer class="web__footer">
-						<div class="web__footer__in">
-							<div class="foot">
-								<div class="foot__item">
-									<div class="foot__item__in">
-
-									</div>
-								</div>
-
-								<div class="foot__item">
-									<div class="foot__item__in">
-
-									</div>
-								</div>
-
-								<div class="foot__item foot__item--2">
-									<div class="foot__item__in">
-										<div class="foot__item__in__cell text-right">
-											{{ form_save(product|default(null), form) }}
-											<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-										</div>
+				<footer class="web__footer">
+					<div class="web__footer__in">
+						<div class="foot">
+							<div class="foot__item foot__item--2">
+								<div class="foot__item__in">
+									<div class="foot__item__in__cell text-right">
+										{{ form_save(product|default(null), form) }}
+										<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
 									</div>
 								</div>
 							</div>
 						</div>
-					</footer>
-				{% endblock footer%}
+					</div>
+				</footer>
+
 			{{ form_end(form) }}
 		</div>
 
