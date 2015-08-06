@@ -196,7 +196,7 @@
 							{{ 'Titulek'|trans }}
 						</strong>
 						{% for domainId, seoTitleForm in form.seoTitles %}
-							<div class="form-line__side js-characters-counter">
+							<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
 								<div class="form-line__item form-line__item--left">
 									<div class="input__wrap">
 										{{ form_widget(seoTitleForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain' } }) }}
