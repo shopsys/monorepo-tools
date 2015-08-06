@@ -45,4 +45,56 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(1, $order->getProductItemsCount());
 	}
 
+	public function testOrderWithDeliveryAddressSameAsBillingAddress() {
+		$orderData = new OrderData();
+		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
+
+		$orderData->companyName = 'companyName';
+		$orderData->telephone = 'telephone';
+		$orderData->firstName = 'firstName';
+		$orderData->lastName = 'lastName';
+		$orderData->street = 'street';
+		$orderData->city = 'city';
+		$orderData->postcode = 'postcode';
+		$orderData->deliveryAddressSameAsBillingAddress = true;
+
+		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', null);
+
+		$this->assertSame('companyName', $order->getDeliveryCompanyName());
+		$this->assertSame('telephone', $order->getDeliveryTelephone());
+		$this->assertSame('firstName lastName', $order->getDeliveryContactPerson());
+		$this->assertSame('street', $order->getDeliveryStreet());
+		$this->assertSame('city', $order->getDeliveryCity());
+		$this->assertSame('postcode', $order->getDeliveryPostcode());
+	}
+
+	public function testOrderWithoutDeliveryAddressSameAsBillingAddress() {
+		$orderData = new OrderData();
+		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
+
+		$orderData->companyName = 'companyName';
+		$orderData->telephone = 'telephone';
+		$orderData->firstName = 'firstName';
+		$orderData->lastName = 'lastName';
+		$orderData->street = 'street';
+		$orderData->city = 'city';
+		$orderData->postcode = 'postCode';
+		$orderData->deliveryAddressSameAsBillingAddress = false;
+		$orderData->deliveryCompanyName = 'deliveryCompanyName';
+		$orderData->deliveryTelephone = 'deliveryTelephone';
+		$orderData->deliveryContactPerson = 'deliveryContactPerson';
+		$orderData->deliveryStreet = 'deliveryStreet';
+		$orderData->deliveryCity = 'deliveryCity';
+		$orderData->deliveryPostcode = 'deliveryPostcode';
+
+		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', null);
+
+		$this->assertSame('deliveryCompanyName', $order->getDeliveryCompanyName());
+		$this->assertSame('deliveryTelephone', $order->getDeliveryTelephone());
+		$this->assertSame('deliveryContactPerson', $order->getDeliveryContactPerson());
+		$this->assertSame('deliveryStreet', $order->getDeliveryStreet());
+		$this->assertSame('deliveryCity', $order->getDeliveryCity());
+		$this->assertSame('deliveryPostcode', $order->getDeliveryPostCode());
+	}
+
 }

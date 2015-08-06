@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Order;
 
+use SS6\ShopBundle\Component\Transformers\InverseTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
@@ -78,8 +79,22 @@ class PersonalInfoFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
 				],
 			])
-			->add('deliveryAddressFilled', FormType::CHECKBOX, ['required' => false])
-			->add('deliveryContactPerson', FormType::TEXT, ['required' => false])
+			->add($builder
+				->create('deliveryAddressFilled', FormType::CHECKBOX, [
+					'required' => false,
+					'property_path' => 'deliveryAddressSameAsBillingAddress',
+				])
+				->addModelTransformer(new InverseTransformer())
+			)
+			->add('deliveryContactPerson', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím kontatkní osobu',
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+					]),
+				],
+			])
 			->add('deliveryCompanyName', FormType::TEXT, ['required' => false])
 			->add('deliveryTelephone', FormType::TEXT, ['required' => false])
 			->add('deliveryStreet', FormType::TEXT, [
@@ -135,7 +150,7 @@ class PersonalInfoFormType extends AbstractType {
 				if ($orderData->companyCustomer) {
 					$validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;
 				}
-				if ($orderData->deliveryAddressFilled) {
+				if (!$orderData->deliveryAddressSameAsBillingAddress) {
 					$validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;
 				}
 

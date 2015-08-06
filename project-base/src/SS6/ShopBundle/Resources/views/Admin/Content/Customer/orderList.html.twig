@@ -26,13 +26,8 @@
 					{{ order.city }}, {{ order.postcode }}
 				</td>
 				<td>
-					{% if order.deliveryStreet is not null %}
-						{{ order.deliveryStreet }}<br />
-						{{ order.deliveryCity }}, {{ order.deliveryPostcode }}
-					{% else %}
-						{{ order.street }}<br />
-						{{ order.city }}, {{ order.postcode }}
-					{% endif %}
+					{{ order.deliveryStreet }}<br />
+					{{ order.deliveryCity }}, {{ order.deliveryPostcode }}
 				</td>
 				<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
 				<td>{{ order.status.name }}</td>

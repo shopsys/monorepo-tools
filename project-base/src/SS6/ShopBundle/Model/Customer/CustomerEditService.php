@@ -69,7 +69,7 @@ class CustomerEditService {
 		$deliveryAddressData = new DeliveryAddressData();
 
 		if ($deliveryAddress === null) {
-			$deliveryAddressData->addressFilled = $order->getDeliveryStreet() !== null;
+			$deliveryAddressData->addressFilled = !$order->isDeliveryAddressSameAsBillingAddress();
 			$deliveryAddressData->street = $order->getDeliveryStreet();
 			$deliveryAddressData->city = $order->getDeliveryCity();
 			$deliveryAddressData->postcode = $order->getDeliveryPostcode();

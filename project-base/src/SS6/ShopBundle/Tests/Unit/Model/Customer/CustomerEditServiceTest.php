@@ -67,6 +67,13 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->street = 'orderStreet';
 		$orderData->city = 'orderCity';
 		$orderData->postcode = 'orderPostcode';
+		$orderData->deliveryAddressSameAsBillingAddress = false;
+		$orderData->deliveryContactPerson = 'orderDeliveryContactPerson';
+		$orderData->deliveryCompanyName = 'orderDeliveryCompanyName';
+		$orderData->deliveryTelephone = 'orderDeliveryTelephone';
+		$orderData->deliveryStreet = 'orderDeliveryStreet';
+		$orderData->deliveryCity = 'orderDeliveryCity';
+		$orderData->deliveryPostcode = 'orderDeliveryPostcode';
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -77,14 +84,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			'companyName',
 			'companyNumber',
 			'companyTaxNumber'
-		);
-		$order->setDeliveryAddress(
-			'orderDeliveryContactPerson',
-			'orderDeliveryCompanyName',
-			'orderDeliveryTelephone',
-			'orderDeliveryStreet',
-			'orderDeliveryCity',
-			'orderDeliveryPostcode'
 		);
 
 		$customerData = $customerEditService->getAmendedCustomerDataByOrder($user, $order);
@@ -121,6 +120,13 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->street = 'orderStreet';
 		$orderData->city = 'orderCity';
 		$orderData->postcode = 'orderPostcode';
+		$orderData->deliveryAddressSameAsBillingAddress = false;
+		$orderData->deliveryContactPerson = 'orderDeliveryContactPerson';
+		$orderData->deliveryCompanyName = 'orderDeliveryCompanyName';
+		$orderData->deliveryTelephone = 'orderDeliveryTelephone';
+		$orderData->deliveryStreet = 'orderDeliveryStreet';
+		$orderData->deliveryCity = 'orderDeliveryCity';
+		$orderData->deliveryPostcode = 'orderDeliveryPostcode';
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -131,14 +137,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			'companyName',
 			'companyNumber',
 			'companyTaxNumber'
-		);
-		$order->setDeliveryAddress(
-			'orderDeliveryContactPerson',
-			'orderDeliveryCompanyName',
-			'orderDeliveryTelephone',
-			'orderDeliveryStreet',
-			'orderDeliveryCity',
-			'orderDeliveryPostcode'
 		);
 
 		$deliveryAddressData = new DeliveryAddressData(

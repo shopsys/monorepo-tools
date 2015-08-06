@@ -54,7 +54,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->street = 'street';
 		$orderData->city = 'city';
 		$orderData->postcode = 'postcode';
-		$orderData->deliveryAddressFilled = true;
+		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = 'deliveryContanctPerson';
 		$orderData->deliveryCompanyName = 'deliveryCompanyName';
 		$orderData->deliveryTelephone = 'deliveryTelephone';

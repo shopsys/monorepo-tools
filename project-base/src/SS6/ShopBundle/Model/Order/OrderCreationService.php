@@ -113,7 +113,7 @@ class OrderCreationService {
 		$frontOrderData->city = $user->getBillingAddress()->getCity();
 		$frontOrderData->postcode = $user->getBillingAddress()->getPostcode();
 		if ($user->getDeliveryAddress() !== null) {
-			$frontOrderData->deliveryAddressFilled = true;
+			$frontOrderData->deliveryAddressSameAsBillingAddress = false;
 			$frontOrderData->deliveryContactPerson = $user->getDeliveryAddress()->getContactPerson();
 			$frontOrderData->deliveryCompanyName = $user->getDeliveryAddress()->getCompanyName();
 			$frontOrderData->deliveryTelephone = $user->getDeliveryAddress()->getTelephone();
@@ -121,7 +121,7 @@ class OrderCreationService {
 			$frontOrderData->deliveryCity = $user->getDeliveryAddress()->getCity();
 			$frontOrderData->deliveryPostcode = $user->getDeliveryAddress()->getPostcode();
 		} else {
-			$frontOrderData->deliveryAddressFilled = false;
+			$frontOrderData->deliveryAddressSameAsBillingAddress = true;
 		}
 	}
 

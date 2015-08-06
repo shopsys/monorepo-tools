@@ -146,6 +146,7 @@ class OrderController extends BaseController {
 		$user = $this->getUser();
 
 		$frontOrderFormData = new FrontOrderData();
+		$frontOrderFormData->deliveryAddressSameAsBillingAddress = true;
 		if ($user instanceof User) {
 			$this->orderFacade->prefillFrontOrderData($frontOrderFormData, $user);
 		}
