@@ -101,9 +101,7 @@
 			});
 			if (!SS6.validation.isFormValid(this)) {
 				event.preventDefault();
-				SS6.window({
-					content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
-				});
+				SS6.validation.showFormErrorsWindow(this);
 			} else if ($(this).data('on-submit') !== undefined) {
 				$(this).trigger($(this).data('on-submit'));
 				event.preventDefault();
@@ -257,6 +255,82 @@
 		}
 
 		return result;
+	};
+
+	SS6.validation.getFormErrorsIndexedByLabel = function (form) {
+		var errorsByLabel = {};
+
+		$(form).find('.js-validation-errors-list li[class]').each(function () {
+			var $errorList = $(this).closest('.js-validation-errors-list');
+
+			var inputId = SS6.validation.getInputIdByErrorList($errorList);
+			if (inputId !== undefined) {
+				var $label = $('label[for="' + inputId + '"]');
+				if ($label.size() > 0) {
+					errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), $(this).text());
+				} else {
+					errorsByLabel = SS6.validation.addLabelErrorsByClosestLabel(errorsByLabel, inputId);
+				}
+			}
+		});
+
+		return errorsByLabel;
+	};
+
+	SS6.validation.addLabelErrorsByClosestLabel = function(errorsByLabel, inputId) {
+		var $input = $('#' + inputId);
+		var $formLine = $input.closest('.form-line:has(label), .js-form-group:has(label)');
+		var $label = $formLine.find('label:first');
+		if ($label.size() > 0) {
+			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), $(this).text());
+		}
+
+		return errorsByLabel;
+	};
+
+	SS6.validation.getInputIdByErrorList = function($errorList) {
+		var inputIdMatch = $errorList.attr('class').match(/js\-validation\-error\-list\-([^\s]+)/);
+		if (inputIdMatch) {
+			return inputIdMatch[1];
+		}
+
+		return undefined;
+	};
+
+	SS6.validation.addLabelError = function(errorsByLabel, labelText, errorMessage) {
+		labelText = SS6.validation.normalizeLabelText(labelText);
+
+		if (errorsByLabel[labelText] === undefined) {
+			errorsByLabel[labelText] = [];
+		}
+		if (errorsByLabel[labelText].indexOf(errorMessage) === -1) {
+			errorsByLabel[labelText].push(errorMessage);
+		}
+
+		return errorsByLabel;
+	};
+
+	SS6.validation.normalizeLabelText = function (labelText) {
+		return labelText.replace(/^\s*(.*)[\s:\*]*$/, '$1');
+	};
+
+	SS6.validation.showFormErrorsWindow = function (form) {
+		var errorsByLabel = SS6.validation.getFormErrorsIndexedByLabel(form);
+		var $errorsByLabel = $('<ul/>');
+		for (var label in errorsByLabel) {
+			var $errorsUl = $('<ul/>');
+			for (var i in errorsByLabel[label]) {
+				$errorsUl.append($('<li/>').text(errorsByLabel[label][i]));
+			}
+			$errorsByLabel.append($('<li/>').text(label).append($errorsUl));
+		}
+		SS6.window({
+			content:
+				'<div class="text-left">'
+				+ SS6.translator.trans('Překontrolujte prosím zadané hodnoty.<br><br>')
+				+ $errorsByLabel[0].outerHTML
+				+ '</div>'
+		});
 	};
 
 	var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
