@@ -258,7 +258,7 @@
 			{% if label is empty %}
 				{% set label = name|humanize %}
 			{% endif %}
-			<label class="{{ isCheckbox|default(false) ? '' : 'form-line__label' }}"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+			<label class="{{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__label' }}"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 				{% if raw is not defined %}
 					{{ label }}
 				{% else %}

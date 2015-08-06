@@ -142,7 +142,7 @@
 		<table class="table-form">
 			<thead>
 				<tr class="table-form__row">
-					<th class="table-form__cell table-form__cell--label">{{ inputPriceLabel() }}</th>
+					<th class="table-form__cell table-form__cell--label">{{ inputPriceLabel({ isSimple: true }) }}</th>
 					<th class="table-form__cell table-form__cell--field"></th>
 					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
 					<th class="table-form__cell">{{ 'Cena s DPH'|trans }}</th>
@@ -151,7 +151,7 @@
 			<tbody>
 				<tr class="table-form__row js-input-price-type-auto">
 					<td class="table-form__cell table-form__cell--label">
-						{{ form_label(form.productData.price, 'Základní cena'|trans) }}
+						{{ form_label(form.productData.price, 'Základní cena'|trans, { isSimple: true } ) }}
 					</td>
 					<td class="table-form__cell table-form__cell--filed">
 						{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
@@ -178,13 +178,14 @@
 					</tr>
 					{% for productSellingPrice in productSellingPrices %}
 						<tr class="table-form__row">
-							<td class="table-form__cell table-form__cell--label js-input-price-type-auto">
-								{{ form_label(form.manualInputPrices[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name) }}
+							<td class="table-form__cell table-form__cell--label">
+								{{ form_label(form.manualInputPrices[productSellingPrice.pricingGroup.id], productSellingPrice.pricingGroup.name, { isSimple: true }) }}
 							</td>
 							<td class="table-form__cell table-form__cell--filed js-input-price-type-manual">
 								{{ form_widget(form.manualInputPrices[productSellingPrice.pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
 								{{ form_errors(form.manualInputPrices[productSellingPrice.pricingGroup.id]) }}
 							</td>
+							<td class="table-form__cell js-input-price-type-auto"></td>
 							<td class="table-form__cell">
 								{{ productSellingPrice.sellingPrice.priceWithoutVat|priceWithCurrencyByDomainId(domainId) }}
 							</td>
