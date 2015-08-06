@@ -253,9 +253,9 @@ class ProductController extends BaseController {
 		$grid->enableSelecting();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
 		$grid->addColumn('name', 'pt.name', 'Název', true);
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('text-center table-col table-col-10');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', ['id' => 'p.id']);

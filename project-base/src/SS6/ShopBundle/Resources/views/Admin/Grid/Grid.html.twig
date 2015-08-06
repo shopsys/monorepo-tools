@@ -67,7 +67,9 @@
 	<thead>
 		<tr class="table-grid__row">
 			{% if grid.dragAndDrop %}
-				<th class="table-grid__cell table-grid__cell--move"></th>
+				<th class="table-grid__cell table-grid__cell--move">
+					<span class="svg svg-move"></span>
+				</th>
 			{% endif %}
 			{% if grid.enabledSelecting %}
 				<th class="table-grid__cell table-grid__cell--choice"><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
@@ -91,13 +93,13 @@
 		{% else %}
 			{% set orderBy = column.id %}
 		{% endif %}
-		<a class="in-sort-arrows__wrap" href="{{ gridView.url({'order': orderBy}) }}">
+		<a class="in-sort-arrows" href="{{ gridView.url({'order': orderBy}) }}">
 			<span class="in-sort-arrows__link">{{ column.title }}</span>
 			{% if grid.orderSourceColumnName == column.id %}
 				{% if grid.orderDirection == 'desc' %}
-					<span class="in-sort-arrows in-sort-arrows--down"></span>
+					<span class="in-sort-arrows__item in-sort-arrows__item--down"></span>
 				{% else %}
-					<span class="in-sort-arrows in-sort-arrows--up"></span>
+					<span class="in-sort-arrows__item in-sort-arrows__item--up"></span>
 				{% endif %}
 			{% endif %}
 		</a>
@@ -148,31 +150,23 @@
 			</td>
 		{% endfor %}
 		{% if grid.actionColumns|length > 0 or grid.inlineEdit %}
-			<td class="grid-column-actions table-grid__cell--actions js-inline-edit-unmatched-inputs">
-				<span class="in-action-icons">
-					{% if grid.inlineEdit and form is defined %}
-						<span class="js-inline-edit-buttons">
-							<a href="#" class="js-inline-edit-save in-action-icons__item in-action-icons__item--confirm">
-								<i class="fa fa-check" title="{{ 'Uložit změny'|trans }}"></i>
-							</a>
-							<a href="#" class="js-inline-edit-cancel in-action-icons__item in-action-icons__item--discard">
-								<i class="fa fa-delete" title="{{ 'Zahodit změny'|trans }}"></i>
-							</a>
-						</span>
-						<span class="js-inline-edit-saving">
-							<i class="fa fa-spinner fa-spin" title="{{ 'Ukládám'|trans }}"></i>
-						</span>
-					{% else %}
-						{% if grid.inlineEdit %}
-							<a href="#" class="js-inline-edit-edit in-action-icons__item in-action-icons__item--edit">
-								<i class="fa fa-pencil" title="{{ 'Upravit'|trans }}"></i>
-							</a>
-						{% endif %}
-						{% for actionColumn in grid.actionColumns %}
-							{{ gridView.renderActionCell(actionColumn, row)|raw }}
-						{% endfor %}
+			<td class="table-grid__cell--actions js-inline-edit-unmatched-inputs">
+				{% if grid.inlineEdit and form is defined %}
+					<span class="js-inline-edit-buttons">
+						<a href="#" class="js-inline-edit-save in-icon in-icon--ok svg svg-checked" title="{{ 'Uložit změny'|trans }}">></a>
+						<a href="#" class="js-inline-edit-cancel in-icon in-icon--ok svg svg-circle-cross" title="{{ 'Zahodit změny'|trans }}"></a>
+					</span>
+					<span class="js-inline-edit-saving">
+						<span class="svg svg-gear in-icon in-icon--spinner"></span>
+					</span>
+				{% else %}
+					{% if grid.inlineEdit %}
+						<a href="#" class="js-inline-edit-edit svg svg-pencil in-icon in-icon--edit" title="{{ 'Upravit'|trans }}"></a>
 					{% endif %}
-				</span>
+					{% for actionColumn in grid.actionColumns %}
+						{{ gridView.renderActionCell(actionColumn, row)|raw }}
+					{% endfor %}
+				{% endif %}
 				{% if form is defined %}
 					{% if not render_rest is defined or render_rest %}
 						{{- form_rest(form) -}}
@@ -187,12 +181,12 @@
 	{% if actionColumn.type == 'edit' %}
 		{% set icon = 'pencil' %}
 	{% elseif actionColumn.type == 'delete' %}
-		{% set icon = 'trash-o' %}
+		{% set icon = 'trash' %}
 	{% else %}
 		{% set icon = actionColumn.type %}
 	{% endif %}
 	<a
-		class="in-action-icons__item table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
+		class="in-icon in-icon--{{ actionColumn.type }} svg svg-{{ icon }} table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
 		data-ajax-confirm-on-open="SS6.createConfirmDelete(this);"
 		href="{{ actionColumn.targetUrl(row) }}"
 		{% if actionColumn.confirmMessage is not empty -%}
@@ -206,11 +200,11 @@
 				});
 				return false;"
 		{%- endif %}
-	><i class="fa fa-{{ icon }}"></i></a>
+	></a>
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	<strong class="left mt-half form-fake">
+	<strong class="">
 		{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
 		{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
 	</strong>
@@ -218,14 +212,14 @@
 
 {% block grid_pager_selectpage %}
 	{% spaceless %}
-		<ul class="pagination mb-0 mt-half">
+		<ul class="in-paging">
 
 			{% if grid.page > 1 %}
-				<li>
+				<li class="in-paging__item in-paging__item--prev">
 					<a href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>
 				</li>
 
-				<li>
+				<li class="in-paging__item">
 					<a href="{{ gridView.url({'page': 1}) }}">1</a>
 				</li>
 			{% endif %}
@@ -233,44 +227,44 @@
 			{% set pagerExpand = 2 %}
 
 			{% if grid.page > pagerExpand + 2 %}
-				<li class="disabled">
-					<a href="#" class="cursor-default">...</a>
+				<li class="in-paging__item">
+					<span>...</span>
 				</li>
 
 			{% endif %}
 
 			{% for page in (grid.page - pagerExpand)..(grid.page) if page > 1 and page < grid.page %}
-				<li>
+				<li class="in-paging__item">
 					<a href="{{ gridView.url({'page': page}) }}">{{ page }}</a>
 				</li>
 			{% endfor %}
-			<li class="active">
-				<span>{{ grid.page }}</span>
+			<li class="in-paging__item">
+				<strong>{{ grid.page }}</strong>
 			</li>
 
 			{% for page in (grid.page + 1)..(grid.page + pagerExpand) if page > grid.page and page < grid.pageCount %}
-				<li>
+				<li class="in-paging__item">
 					<a href="{{ gridView.url({'page': page}) }}">{{ page }}</a>
 				</li>
 			{% endfor %}
 
 			{% if grid.page <= grid.pageCount - pagerExpand - 2 %}
-				<li class="disabled">
-					<a href="#" class="cursor-default">...</a>
+				<li class="in-paging__item">
+					<span>...</span>
 				</li>
 			{% endif %}
 
 			{% if grid.page < grid.pageCount %}
-				<li>
+				<li class="in-paging__item">
 					<a href="{{ gridView.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>
 				</li>
-				<li>
+				<li class="in-paging__item in-paging__item--next">
 					<a href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
 				</li>
 			{% endif %}
 		</ul>
 
-		<div class="js-grid-go-to box-grid-actions__to-page clear-r small">
+		<div class="js-grid-go-to">
 			<span>{{ 'Přejít na stránku:'|trans }}</span>
 			<input
 				type="number"
@@ -286,8 +280,8 @@
 {% endblock %}
 
 {% block grid_pager_results_perpage %}
-	<div class="right mb-half small">
-		<span class="form-inline">
+	<div class="">
+		<span class="">
 			{{ 'Položek na stránku:'|trans }}
 			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="input">
 				{% for value in grid.allowedLimits %}
@@ -299,7 +293,7 @@
 {% endblock %}
 
 {% block grid_pager %}
-	<div class="text-center mb-half box-grid-actions">
+	<div class="">
 		{{ gridView.renderBlock('grid_pager_totalcount') }}
 		{{ gridView.renderBlock('grid_pager_results_perpage') }}
 		{% if grid.pageCount > 1 %}
@@ -309,7 +303,7 @@
 {% endblock %}
 
 {% block grid_value_cell_type_boolean %}
-	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-semaphore in-semaphore--{{ value ? 'true' : 'false' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
+	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}" ></span>
 {% endblock %}
 
 {% block grid_value_cell_type_DateTime %}
@@ -341,7 +335,7 @@
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	<a href="#" class="btn btn-primary mb-1 js-inline-edit-add">
+	<a href="#" class="btn js-inline-edit-add">
 		{{ addEntity|default('Vytvořit záznam'|trans) }}
 	</a>
 {% endblock %}

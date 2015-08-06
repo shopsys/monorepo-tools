@@ -25,22 +25,29 @@ Arrows for sorting ascendent/descendent in grid. It has fix for links in chrome!
 
 .in-sort-arrows {
 	position: relative;
-	display: inline-block;
-	width: 10px;
-}
+	display: block;
 
-.in-sort-arrows__wrap:hover {
 	text-decoration: none;
 
-	.in-sort-arrows__link {
+	&__link {
+		display: inline-block;
+
 		text-decoration: underline;
+
+		.in-sort-arrows:hover & {
+			text-decoration: none;
+		}
 	}
-}
 
-.in-sort-arrows--up {
-	.draw-arrow-top(5px, @color-f, 5px, -8px);
-}
+	&__item {
+		display: inline-block;
+		width: 10px;
 
-.in-sort-arrows--down {
-	.draw-arrow-bottom(5px, @color-f, 5px, -6px);
+		&--up {
+			.draw-arrow-top(5px, @color-f, 5px, -8px);
+		}
+		&--down {
+			.draw-arrow-bottom(5px, @color-f, 5px, -6px);
+		}
+	}
 }
