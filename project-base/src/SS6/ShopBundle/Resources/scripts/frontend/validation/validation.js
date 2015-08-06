@@ -64,4 +64,10 @@
 		}
 	};
 
+	SS6.validation.showFormErrorsWindow = function (container) {
+		SS6.window({
+			content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
+		});
+	}
+
 })(jQuery);
