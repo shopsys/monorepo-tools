@@ -329,9 +329,6 @@
 	<div class="form-group">
 		<div class="form-group__title">
 			{{- form_label(form) -}}
-			<span class="form-group__title__click">
-				-
-			</span>
 
 			<div class="form-group__error">
 				{{- form_errors(form) -}}
@@ -350,16 +347,16 @@
 	<tr class="js-products-picker-item table-form__row">
 		<td class="table-form__cell">
 			{%if sortable %}
-				<span class="left mr5 js-products-picker-item-handle">
-					move
+				<span class="left mr5 js-products-picker-item-handle c-move">
+					<span class="svg svg-move"></span>
 				</span>
 			{% endif %}
 			<span class="js-products-picker-item-product-name">{{ productName }}</span>
 		</td>
 		<td class="table-form__cell table-form__cell--actions">
-			<span class="cursor-pointer js-products-picker-item-button-delete">
+			<span class="cursor-pointer js-products-picker-item-button-delete c-pointer">
+				<span class="svg svg-circle-cross"></span>
 				{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
-				trash
 			</span>
 		</td>
 	</tr>
