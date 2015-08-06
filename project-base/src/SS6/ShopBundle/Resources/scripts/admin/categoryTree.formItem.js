@@ -81,7 +81,7 @@
 		};
 
 		var updateStatusIcon = function () {
-			$statusIcon.removeClass('svg svg-circle-plus svg-circle-remove sprite sprite-level');
+			$statusIcon.removeClass('svg svg-circle-plus svg-circle-remove sprite sprite-level form-tree__item__icon--level');
 			switch (status) {
 				case self.STATUS_OPENED:
 					$statusIcon.addClass('svg svg-circle-remove');
@@ -90,7 +90,7 @@
 					$statusIcon.addClass('svg svg-circle-plus');
 					break;
 				case self.STATUS_NONE:
-					$statusIcon.addClass('sprite sprite-level');
+					$statusIcon.addClass('sprite sprite-level form-tree__item__icon--level');
 					break;
 			}
 		};
