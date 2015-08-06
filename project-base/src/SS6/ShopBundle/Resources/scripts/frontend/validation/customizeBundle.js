@@ -280,8 +280,8 @@
 
 	SS6.validation.addLabelErrorsByClosestLabel = function(errorsByLabel, inputId, errorMessage) {
 		var $input = $('#' + inputId);
-		var $formLine = $input.closest('.form-line:has(label), .form-full:has(label), .js-form-group:has(label)');
-		var $label = $formLine.find('label:first');
+		var $formLine = $input.closest('.form-line:has(.js-validation-label, label), .form-full:has(.js-validation-label, label), .js-form-group:has(.js-validation-label, label)');
+		var $label = $formLine.find('.js-validation-label, label').filter(':first');
 		if ($label.size() > 0) {
 			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 		}
