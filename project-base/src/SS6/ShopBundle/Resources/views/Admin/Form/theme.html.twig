@@ -139,9 +139,7 @@
 			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { raw: true }) }}
 		{% elseif multidomain is defined %}
 			{{ form_label(form, getDomainName(domainId)) }}
-			<span class="in-image__wrap in-image__wrap--small">
-				{{ domainIcon(domainId) }}
-			</span>
+			{{ domainIcon(domainId) }}
 		{% else %}
 			{{ form_label(form, label) }}
 		{% endif %}
@@ -169,8 +167,8 @@
 		{% for domainId, friendlyUrlForms in form.toDelete %}
 			<div class="form-line__box js-entity-url-list-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
 				<div class="form-line__box__title">
-					<span class="form-line__box__title__image in-image__wrap">
-						{{ domainIcon(domainId) }}
+					<span class="form-line__box__title__image">
+						{{ domainIcon(domainId, 'large') }}
 					</span>
 					<strong class="form-line__box__title__name">
 						{{ 'Doména '|trans ~ getDomainName(domainId) }}
@@ -538,8 +536,8 @@
 				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice-list__item')|trim}) %}
 				<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 					{{ form_widget(child, { inList: true}) }}
-					<span class="form-choice-list__icon in-image__wrap in-image__wrap--small">
-						{{ domainIcon(domainId) }}
+					<span class="form-choice-list__icon">
+						{{ domainIcon(domainId, 'small') }}
 					</span>
 					{{ child.vars.label }}
 				</label>

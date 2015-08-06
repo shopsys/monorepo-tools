@@ -53,9 +53,7 @@
 		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
 			<div class="form-line__line form-line__line--no-space">
 				<div class="form-line__label">
-					<span class="in-image__wrap in-image__wrap--small">
-						{{ domainIcon(productDomain.domainId) }}
-					</span>
+					{{ domainIcon(productDomain.domainId) }}
 					{{ getDomainName(productDomain.domainId) ~ ' :' }}
 				</div>
 				<div class="form-line__side">
@@ -170,8 +168,8 @@
 				{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
 					<tr class="table-form__row table-form__row--group">
 						<th class="table-form__cell" colspan="4">
-							<span class="in-image__wrap table-form__cell__image">
-								{{ domainIcon(domainId) }}
+							<span class="table-form__cell__image">
+								{{ domainIcon(domainId, 'large') }}
 							</span>
 							<strong class="table-form__cell__group-name">
 								{{ getDomainName(domainId) }}

@@ -85,7 +85,7 @@ class DomainExtension extends \Twig_Extension {
 	 * @param int $domainId
 	 * @return string
 	 */
-	public function getDomainIconHtml($domainId) {
+	public function getDomainIconHtml($domainId, $size = 'normal') {
 		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
 		if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
 			$src = $this->getAssetsHelper()->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
@@ -94,9 +94,14 @@ class DomainExtension extends \Twig_Extension {
 				. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
 				. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>';
 		} else {
-			return '<span
-				class="in-image in-image--' . $domainId . '"
-				title="' . htmlspecialchars($domainName, ENT_QUOTES) . '">' . $domainId . '</span>';
+			return '
+				<span class="in-image in-image--' . $size . '">
+					<span
+						class="in-image__in in-image__in--' . $domainId . '"
+						title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"
+					>' . $domainId . '</span>
+				</span>
+			';
 		}
 	}
 }
