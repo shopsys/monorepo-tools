@@ -29,10 +29,13 @@
 		$('#cart-box').trigger('reload');
 	};
 
-	SS6.addProduct.onError = function () {
-		SS6.window({
-			content: SS6.translator.trans('Operace se nezdařila')
-		});
+	SS6.addProduct.onError = function (jqXHR) {
+		// on FireFox abort ajax request, but request was probably successful
+		if (jqXHR.status !== 0) {
+			SS6.window({
+				content: SS6.translator.trans('Operace se nezdařila')
+			});
+		}
 	};
 
 	SS6.register.registerCallback(SS6.addProduct.init);
