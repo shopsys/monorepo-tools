@@ -257,10 +257,10 @@
 		return result;
 	};
 
-	SS6.validation.getFormErrorsIndexedByLabel = function (form) {
+	SS6.validation.getFormErrorsIndexedByLabel = function (container) {
 		var errorsByLabel = {};
 
-		$(form).find('.js-validation-errors-list li').each(function () {
+		$(container).find('.js-validation-errors-list li').each(function () {
 			var $errorList = $(this).closest('.js-validation-errors-list');
 			var errorMessage = $(this).text();
 			var inputId = SS6.validation.getInputIdByErrorList($errorList);
@@ -280,13 +280,21 @@
 
 	SS6.validation.addLabelErrorsByClosestLabel = function(errorsByLabel, inputId, errorMessage) {
 		var $input = $('#' + inputId);
-		var $formLine = $input.closest('.form-line:has(.js-validation-label, label), .form-full:has(.js-validation-label, label), .js-form-group:has(.js-validation-label, label)');
-		var $label = $formLine.find('.js-validation-label, label').filter(':first');
+		var $label = SS6.validation.getClosestLabel($input, '.js-validation-label');
+		if ($label.size() === 0) {
+			$label = SS6.validation.getClosestLabel($input, 'label');
+		}
+
 		if ($label.size() > 0) {
 			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 		}
 
 		return errorsByLabel;
+	};
+
+	SS6.validation.getClosestLabel = function ($input, selector) {
+		var $formLine = $input.closest('.form-line:has(' + selector + '), .js-form-group:has(' + selector + '), .form-full:has(' + selector + ')');
+		return $formLine.find(selector).filter(':first');
 	};
 
 	SS6.validation.getInputIdByErrorList = function($errorList) {
@@ -315,24 +323,36 @@
 		return labelText.replace(/^\s*(.*)[\s:\*]*$/, '$1');
 	};
 
-	SS6.validation.showFormErrorsWindow = function (form) {
-		var errorsByLabel = SS6.validation.getFormErrorsIndexedByLabel(form);
-		var $errorsByLabel = $('<ul/>');
+	SS6.validation.showFormErrorsWindow = function (container) {
+		var $formattedFormErrors = SS6.validation.getFormattedFormErrors(container);
+
+		SS6.window({
+			content:
+				'<div class="text-left">'
+				+ SS6.translator.trans('Překontrolujte prosím zadané hodnoty.<br><br>')
+				+ $formattedFormErrors[0].outerHTML
+				+ '</div>'
+		});
+	};
+
+	SS6.validation.getFormattedFormErrors = function (container) {
+		var errorsByLabel = SS6.validation.getFormErrorsIndexedByLabel(container);
+		var $formattedFormErrors = $('<ul/>');
 		for (var label in errorsByLabel) {
 			var $errorsUl = $('<ul/>');
 			for (var i in errorsByLabel[label]) {
 				$errorsUl.append($('<li/>').text(errorsByLabel[label][i]));
 			}
-			$errorsByLabel.append($('<li/>').text(label).append($errorsUl));
+			$formattedFormErrors.append($('<li/>').text(label).append($errorsUl));
 		}
-		SS6.window({
-			content:
-				'<div class="text-left">'
-				+ SS6.translator.trans('Překontrolujte prosím zadané hodnoty.<br><br>')
-				+ $errorsByLabel[0].outerHTML
-				+ '</div>'
-		});
+
+		return $formattedFormErrors;
 	};
+
+	$(document).ready(function () {
+		var $formattedFormErrors = SS6.validation.getFormattedFormErrors(document);
+		$('.js-flash-message.in-message--danger').append($formattedFormErrors);
+	});
 
 	var _SymfonyComponentValidatorConstraintsUrl = SymfonyComponentValidatorConstraintsUrl;
 	SymfonyComponentValidatorConstraintsUrl = function () {
