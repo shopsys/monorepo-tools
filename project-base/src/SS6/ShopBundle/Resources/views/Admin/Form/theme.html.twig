@@ -537,10 +537,10 @@
 			{% for domainId, child in form %}
 				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice-list__item')|trim}) %}
 				<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+					{{ form_widget(child, { inList: true}) }}
 					<span class="form-choice-list__icon in-image__wrap in-image__wrap--small">
 						{{ domainIcon(domainId) }}
 					</span>
-					{{ form_widget(child, { inList: true}) }}
 					{{ child.vars.label }}
 				</label>
 			{% endfor %}
