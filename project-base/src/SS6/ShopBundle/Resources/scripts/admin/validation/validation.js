@@ -28,12 +28,16 @@
 		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this), elementName);
 
 		var elementErrorClass = 'js-' + elementName;
-		$errorListUl.find('li:not([class]), li.' + elementErrorClass).remove();
+		$errorListUl.find('li').remove();
 
 		if (errors.length > 0) {
 			$elementsToHighlight.addClass('form-input-error');
 			$.each(errors, function (key, message) {
-				$errorListUl.append($('<li/>').addClass(elementErrorClass).text(message));
+				$errorListUl
+					.append($('<li/>')
+					.addClass('js-validation-errors-message')
+					.addClass(elementErrorClass)
+					.text(message));
 			});
 			$errorList.show();
 		} else if ($errorListUl.find('li').size() === 0) {

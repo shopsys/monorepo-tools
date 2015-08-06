@@ -20,7 +20,7 @@
 	};
 
 	SS6.validation.isFormValid = function (form) {
-		return $(form).find('.form-input-error:first, .js-validation-errors-list li[class]:first').size() === 0;
+		return $(form).find('.form-input-error:first, .js-validation-errors-list li.js-validation-errors-message:first').size() === 0;
 	};
 
 	SS6.validation.getErrorListClass = function (elementName) {
@@ -260,16 +260,17 @@
 	SS6.validation.getFormErrorsIndexedByLabel = function (form) {
 		var errorsByLabel = {};
 
-		$(form).find('.js-validation-errors-list li[class]').each(function () {
+		$(form).find('.js-validation-errors-list li').each(function () {
 			var $errorList = $(this).closest('.js-validation-errors-list');
-
+			var errorMessage = $(this).text();
 			var inputId = SS6.validation.getInputIdByErrorList($errorList);
+
 			if (inputId !== undefined) {
 				var $label = $('label[for="' + inputId + '"]');
 				if ($label.size() > 0) {
-					errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), $(this).text());
+					errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 				} else {
-					errorsByLabel = SS6.validation.addLabelErrorsByClosestLabel(errorsByLabel, inputId);
+					errorsByLabel = SS6.validation.addLabelErrorsByClosestLabel(errorsByLabel, inputId, errorMessage);
 				}
 			}
 		});
@@ -277,12 +278,12 @@
 		return errorsByLabel;
 	};
 
-	SS6.validation.addLabelErrorsByClosestLabel = function(errorsByLabel, inputId) {
+	SS6.validation.addLabelErrorsByClosestLabel = function(errorsByLabel, inputId, errorMessage) {
 		var $input = $('#' + inputId);
-		var $formLine = $input.closest('.form-line:has(label), .js-form-group:has(label)');
+		var $formLine = $input.closest('.form-line:has(label), .form-full:has(label), .js-form-group:has(label)');
 		var $label = $formLine.find('label:first');
 		if ($label.size() > 0) {
-			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), $(this).text());
+			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 		}
 
 		return errorsByLabel;
