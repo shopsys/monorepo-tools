@@ -20,7 +20,7 @@
 		});
 
 		$('.js-parameters-item-add').on('click', function () {
-			var $collection = $(this).prev('table').find('.js-parameters');
+			var $collection = $('.js-parameters');
 			var index = $collection.data('index');
 
 			var prototype = $collection.data('prototype');
