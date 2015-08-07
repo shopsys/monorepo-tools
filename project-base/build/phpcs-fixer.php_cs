@@ -88,22 +88,26 @@ $config = Symfony\CS\Config\Config::create()
 	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\OrmJoinColumnRequireNullableFixer())
 	->addCustomFixer(new SS6\ShopBundle\Component\CsFixer\UnusedUseFixer());
 
+$config->getFinder()
+	->exclude('_generated');
+
 // variable $path is available from include from FixCommand::execute()
 if (!is_dir($path) && !is_file($path)) {
-	$files = [];
+	$realpaths = [];
 
 	foreach (explode(' ', trim($path)) as $filepath) {
-		if (strpos($filepath, '_generated') !== false) {
-			continue;
-		}
-
-		$files[] = new \SplFileInfo($filepath);
+		$splFileInfo = new \SplFileInfo($filepath);
+		$realpaths[] = $splFileInfo->getRealPath();
 	}
 
-	$config->finder(new \ArrayIterator($files));
-} else {
 	$config->getFinder()
-		->exclude('_generated');
+		->filter(
+			function (\SplFileInfo $file) use ($realpaths) {
+				return in_array($file->getRealPath(), $realpaths, true);
+			}
+		);
+
+	$path = __DIR__ . '/../src';
 }
 
 return $config;
