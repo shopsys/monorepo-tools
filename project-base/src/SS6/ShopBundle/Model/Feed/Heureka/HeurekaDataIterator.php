@@ -86,7 +86,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$imagesByProductId[$product->getId()],
 				$productPrice->getPriceWithVat(),
 				$product->getEan(),
-				$product->getCalculatedAvailability()->getDeliveryTime(),
+				$product->getCalculatedAvailability()->getDispatchTime(),
 				$manufacturer,
 				$params
 			);

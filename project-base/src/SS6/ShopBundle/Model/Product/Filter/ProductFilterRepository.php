@@ -107,8 +107,8 @@ class ProductFilterRepository {
 				'a',
 				'p.calculatedAvailability = a'
 			);
-			$productsQueryBuilder->andWhere('a.deliveryTime = :deliveryTime');
-			$productsQueryBuilder->setParameter('deliveryTime', self::DAYS_FOR_STOCK_FILTER);
+			$productsQueryBuilder->andWhere('a.dispatchTime = :dispatchTime');
+			$productsQueryBuilder->setParameter('dispatchTime', self::DAYS_FOR_STOCK_FILTER);
 		}
 
 	}

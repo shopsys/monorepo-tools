@@ -33,13 +33,13 @@ class AvailabilityFormType extends AbstractType {
 					],
 				],
 			])
-			->add('deliveryTime', FormType::NUMBER, [
+			->add('dispatchTime', FormType::NUMBER, [
 				'precision' => 0,
 				'required' => false,
-				'invalid_message' => 'Doba dodání musí být celé číslo',
+				'invalid_message' => 'Počet dní k expedici musí být celé číslo',
 				'constraints' => [
 					new Constraints\GreaterThanOrEqual([
-						'value' => 0, 'message' => 'Doba dodání musí být větší nebo rovna {{ compared_value }}',
+						'value' => 0, 'message' => 'Počet dní k expedici musí být větší nebo roven {{ compared_value }}',
 					]),
 				],
 			]);

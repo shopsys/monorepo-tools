@@ -36,7 +36,7 @@ class Availability extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="integer", nullable=true)
 	 */
-	private $deliveryTime;
+	private $dispatchTime;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
@@ -44,7 +44,7 @@ class Availability extends AbstractTranslatableEntity {
 	public function __construct(AvailabilityData $availabilityData) {
 		$this->translations = new ArrayCollection();
 		$this->setTranslations($availabilityData);
-		$this->deliveryTime = $availabilityData->deliveryTime;
+		$this->dispatchTime = $availabilityData->dispatchTime;
 	}
 
 	/**
@@ -83,14 +83,14 @@ class Availability extends AbstractTranslatableEntity {
 	 */
 	public function edit(AvailabilityData $availabilityData) {
 		$this->setTranslations($availabilityData);
-		$this->deliveryTime = $availabilityData->deliveryTime;
+		$this->dispatchTime = $availabilityData->dispatchTime;
 	}
 
 	/**
 	 * @return int|null
 	 */
-	public function getDeliveryTime() {
-		return $this->deliveryTime;
+	public function getDispatchTime() {
+		return $this->dispatchTime;
 	}
 
 }

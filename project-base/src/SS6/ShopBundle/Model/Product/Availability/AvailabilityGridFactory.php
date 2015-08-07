@@ -58,10 +58,10 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
-		$grid->setDefaultOrder('deliveryTime');
+		$grid->setDefaultOrder('dispatchTime');
 
 		$grid->addColumn('name', 'at.name', $this->translator->trans('Název'), true);
-		$grid->addColumn('deliveryTime', 'a.deliveryTime', $this->translator->trans('Doba dodání'), true);
+		$grid->addColumn('dispatchTime', 'a.dispatchTime', $this->translator->trans('Počet dní k expedici'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(

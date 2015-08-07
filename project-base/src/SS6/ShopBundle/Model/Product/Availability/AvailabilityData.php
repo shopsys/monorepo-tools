@@ -12,14 +12,14 @@ class AvailabilityData {
 	/**
 	 * @var int|null
 	 */
-	public $deliveryTime;
+	public $dispatchTime;
 
 	/**
 	 * @param string[] $name
-	 * @param int|null $deliveryTime
+	 * @param int|null $dispatchTime
 	 */
-	public function __construct(array $name = [], $deliveryTime = null) {
-		$this->deliveryTime = $deliveryTime;
+	public function __construct(array $name = [], $dispatchTime = null) {
+		$this->dispatchTime = $dispatchTime;
 		$this->name = $name;
 	}
 
@@ -27,7 +27,7 @@ class AvailabilityData {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
 	 */
 	public function setFromEntity(Availability $availability) {
-		$this->deliveryTime = $availability->getDeliveryTime();
+		$this->dispatchTime = $availability->getDispatchTime();
 		$translations = $availability->getTranslations();
 		$names = [];
 		foreach ($translations as $translate) {

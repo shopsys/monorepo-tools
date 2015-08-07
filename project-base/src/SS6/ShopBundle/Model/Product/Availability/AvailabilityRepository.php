@@ -61,7 +61,7 @@ class AvailabilityRepository {
 		$queryBuilder
 			->select('a')
 			->from(Availability::class, 'a')
-			->orderBy('a.deliveryTime');
+			->orderBy('a.dispatchTime');
 		$query = $queryBuilder->getQuery();
 		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
 
