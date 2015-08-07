@@ -132,4 +132,21 @@ class ProductService {
 		return $productSellingPrices;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Product|null
+	 */
+	public function delete(Product $product) {
+		if ($product->isVariant()) {
+			return $product->getMainVariant();
+		}
+		if ($product->isMainVariant()) {
+			foreach ($product->getVariants() as $variantProduct) {
+				$variantProduct->unsetVariant();
+			}
+		}
+
+		return null;
+	}
+
 }

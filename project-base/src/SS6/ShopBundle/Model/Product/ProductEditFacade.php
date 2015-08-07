@@ -214,6 +214,12 @@ class ProductEditFacade {
 	 */
 	public function delete($productId) {
 		$product = $this->productRepository->getById($productId);
+		$productForRecalculations = $this->productService->delete($product);
+		if ($productForRecalculations !== null) {
+			$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($productForRecalculations);
+			$productForRecalculations->markForVisibilityRecalculation();
+			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productForRecalculations);
+		}
 		$this->em->remove($product);
 		$this->em->flush();
 	}
