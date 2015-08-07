@@ -5,7 +5,7 @@
 
 	SS6.productPicker.instances = [];
 
-	SS6.productPicker.ProductPicker = function ($pickerButton) {
+	SS6.productPicker.ProductPicker = function ($pickerButton, onSelectProductCallback) {
 		var self = this;
 		var instanceId = SS6.productPicker.instances.length;
 		SS6.productPicker.instances[instanceId] = this;
@@ -26,6 +26,14 @@
 			});
 		};
 
+		this.onSelectProduct = function(productId, productName) {
+			if (onSelectProductCallback !== undefined) {
+				onSelectProductCallback(productId, productName);
+			} else {
+				this.selectProduct(productId, productName)
+			}
+		}
+
 		this.selectProduct = function (productId, productName) {
 			$input.val(productId);
 			$label.val(productName);
@@ -44,7 +52,7 @@
 	};
 
 	SS6.productPicker.onClickSelectProduct = function (instanceId, productId, productName) {
-		window.parent.SS6.productPicker.instances[instanceId].selectProduct(productId, productName);
+		window.parent.SS6.productPicker.instances[instanceId].onSelectProduct(productId, productName);
 		$.magnificPopup.close();
 	};
 
