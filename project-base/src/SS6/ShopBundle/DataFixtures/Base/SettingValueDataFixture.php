@@ -9,7 +9,6 @@ use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
@@ -66,8 +65,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys 6 - Title page', 2));
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo obchod', 1));
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo eshop', 2));
-		$manager->persist(new SettingValue(PromoCodeFacade::PROMO_CODE_SETTING_KEY, null, SettingValue::DOMAIN_ID_COMMON));
-		$manager->persist(new SettingValue(PromoCodeFacade::PROMO_CODE_PERCENT_SETTING_KEY, null, SettingValue::DOMAIN_ID_COMMON));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
