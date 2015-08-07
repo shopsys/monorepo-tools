@@ -41,6 +41,7 @@
 
 		var createNewUrlOnSubmit = function () {
 			var $domainTable = $entityUrls.find('.js-entity-url-list-domain-' + $domainSelectbox.val());
+			var $urlsContainer = $domainTable.find('.js-entity-url-list-container');
 			var prototypeHtml = $domainTable.data('new-url-prototype');
 			var $newUrl = $($.parseHTML(prototypeHtml.replace(/__name__/g, '')));
 
@@ -48,7 +49,7 @@
 			$newUrl.find('.js-entity-url-list-new-row-slug').text($slugInput.val());
 			$newUrl.find('.js-entity-url-list-new-row-slug-input').val($slugInput.val());
 
-			$newUrl.appendTo($domainTable.find('>tbody'));
+			$newUrl.appendTo($urlsContainer);
 			$window.trigger('windowClose');
 
 			return false;

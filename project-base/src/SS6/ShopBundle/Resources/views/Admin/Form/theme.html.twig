@@ -176,7 +176,7 @@
 					{{ form_errors(form.mainOnDomains[domainId]) }}
 				</div>
 				<div class="form-line__box__content">
-					<div class="form-choice-list">
+					<div class="form-choice-list js-entity-url-list-container">
 						{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
 						{% for slug, friendlyUrlForm in friendlyUrlForms %}
 							<label class="form-choice-list__item js-entity-url-list-friendly-url">
