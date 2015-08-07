@@ -1,26 +1,44 @@
-<div class="navbar-header">
-	<a href="{{ url('admin_default_dashboard') }}" class="navbar-logo">Shopsys</a>
+<div class="position">
+	<div id="js-position-actual-container">
+		<span class="position__title">{{ 'Nacházíte se v:'|trans }}</span>
+		<strong class="position__actual">{{ (activePath|first).label }}</strong>
+	</div>
+	<div id="js-position-go-to-container" class="display-none">
+		<span class="position__title">{{ 'Přejít na:'|trans }}</span>
+		<strong class="position__actual" id="js-position-go-to"></strong>
+	</div>
 </div>
+<div class="js-main-navigation">
+	<ul class="navig navig--side">
+		<li class="navig__item" >
+			<a href="{{ url(menu.settingsItem.route, menu.settingsItem.routeParameters) }}" class="navig__item__link {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}" title="{{ menu.settingsItem.label }}">
+				<i class="svg svg-gear"></i>
+			</a>
+		</li>
+		<li class="navig__item">
+			<a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__link" id="js-navig-item-logout">
+				<i class="svg svg-forward-page"></i>
+			</a>
+		</li>
+	</ul>
 
-<ul class="nav navbar-nav">
-	{% for item in menu.regularItems %}
-		{% if (item.visible) %}
-			<li {% if item in activePath %}class="active"{% endif %} >
-				{% if item.route %}
-					<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
-				{% else %}
-					<a href="#">{{ item.label }}</a>
+	<nav>
+		<ul class="navig">
+			{% for item in menu.regularItems %}
+				{% if (item.visible) %}
+					<li class="navig__item" >
+						{% if item.route %}
+							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
+								<i class="svg svg-{{ item.icon }}"></i>
+							</a>
+						{% else %}
+							<a href="#" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
+								<i class="svg svg-{{ item.icon }}"></i>
+							</a>
+						{% endif %}
+					</li>
 				{% endif %}
-			</li>
-		{% endif %}
-	{% endfor %}
-</ul>
-
-<ul class="nav navbar-nav navbar-right">
-	<li class="{% if menu.settingsItem in activePath %}active{% endif %}" >
-		<a href="{{ url(menu.settingsItem.route, menu.settingsItem.routeParameters) }}">{{ menu.settingsItem.label }}</a>
-	</li>
-	<li>
-		<a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}">{{ 'Odhlásit'|trans }}</a>
-	</li>
-</ul>
+			{% endfor %}
+		</ul>
+	</nav>
+</div>

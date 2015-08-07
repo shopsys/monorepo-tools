@@ -1,0 +1,72 @@
+/*
+Table for grid
+==============
+
+*/
+
+.table-grid {
+	width: 100%;
+	border-collapse: collapse;
+
+	thead {
+		background: @bg-primary;
+		color: @color-f;
+		font-weight: bold;
+	}
+
+	tbody {
+		background: @color-f;
+		border: 1px solid @color-border;
+	}
+
+	&__row {
+		border-bottom: 1px solid @color-border;
+
+		&--edit {
+			background: @bg-edit;
+		}
+	}
+
+	&__cell {
+		padding: 6px;
+		height: 40px;
+
+		text-align: left;
+
+		&:first-child {
+			padding-left: 17px;
+		}
+
+		&:last-child {
+			padding-left: 17px;
+		}
+
+		&--choice {
+			width: 40px;
+		}
+
+		&--move {
+			width: 40px;
+			padding-left: 17px;
+			padding-right: 17px;
+		}
+
+		&--actions {
+			width: 90px;
+			padding-left: 17px;
+			padding-right: 17px;
+
+			text-align: right;
+		}
+
+		thead & {
+			padding-top: 14px;
+			padding-bottom: 14px;
+
+			a {
+				color: @color-f;
+				text-decoration: none;
+			}
+		}
+	}
+}

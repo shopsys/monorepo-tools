@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form;
 
+use SS6\ShopBundle\Form\Extension\IndexedChoiceList;
 use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -24,13 +25,17 @@ class DomainsType extends AbstractType {
 	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$choices = [];
+		$ids = [];
+		$labels = [];
+		$values = [];
 		foreach ($this->domain->getAll() as $domainConfig) {
-			$choices[$domainConfig->getId()] = $domainConfig->getName();
+			$ids[] = $domainConfig->getId();
+			$labels[] = $domainConfig->getName();
+			$values[] = (string)$domainConfig->getId();
 		}
 
 		$resolver->setDefaults([
-			'choices' => $choices,
+			'choice_list' => new IndexedChoiceList($ids, $labels, $ids, $values),
 			'multiple' => true,
 			'expanded' => true,
 		]);

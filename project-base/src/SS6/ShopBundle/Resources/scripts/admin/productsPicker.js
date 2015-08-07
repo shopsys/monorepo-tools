@@ -21,6 +21,7 @@
 		var instanceId = SS6.productsPicker.instances.length;
 		SS6.productsPicker.instances[instanceId] = this;
 
+		var $header = $productsPicker.find('.js-products-picker-header');
 		var $addButton = $productsPicker.find('.js-products-picker-button-add');
 		var $itemsContainer = $productsPicker.find('.js-products-picker-items');
 		var productItems = [];
@@ -32,7 +33,8 @@
 				initItem($(this));
 			});
 			$itemsContainer.sortable({
-				handle: '.cursor-move',
+				items: '.js-products-picker-item',
+				handle: '.js-products-picker-item-handle',
 				update: updateOrdering
 			});
 		};
@@ -45,6 +47,7 @@
 			$item.find('.js-products-picker-item-input').val(productId);
 			$itemsContainer.append($item);
 			initItem($item);
+			actualizeHeader();
 			SS6.formChangeInfo.showInfo();
 		};
 
@@ -85,8 +88,18 @@
 		var removeItem = function ($item) {
 			var productId = $item.find('.js-products-picker-item-input:first').val();
 			delete productItems[findProductItemIndex(productId)];
+			var productItem = findProductItemIndex(productId);
+			var newProductItems = [];
+			for (var key in productItems) {
+				if (productItems[key] !== productItem) {
+					newProductItems.push(productItems[key]);
+				}
+			}
+			productItems = newProductItems;
+
 			$item.remove();
 			reIndex();
+			actualizeHeader();
 			SS6.formChangeInfo.showInfo();
 		};
 
@@ -103,6 +116,10 @@
 		var updateOrdering = function () {
 			reIndex();
 			SS6.formChangeInfo.showInfo();
+		};
+
+		var actualizeHeader = function () {
+			$header.toggle(productItems.length !== 0);
 		};
 	};
 

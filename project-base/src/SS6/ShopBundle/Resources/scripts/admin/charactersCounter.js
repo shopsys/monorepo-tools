@@ -10,11 +10,13 @@
 		var recommendedLength = $info.data('recommended-length');
 
 		this.init = function() {
-			$input.bind('keyup placeholderChange', self.countCharacters);
-			self.countCharacters();
+			if ($input.size() > 0) {
+				$input.bind('keyup placeholderChange', countCharacters);
+				countCharacters();
+			}
 		};
 
-		this.countCharacters = function() {
+		var countCharacters = function() {
 			var currentLength = $input.val().length;
 			var placeholder = $input.attr('placeholder');
 			if (currentLength === 0 && placeholder) {

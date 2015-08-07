@@ -81,16 +81,16 @@
 		};
 
 		var updateStatusIcon = function () {
-			$statusIcon.removeClass('fa-plus-square-o fa-minus-square-o fa-square-o');
+			$statusIcon.removeClass('svg svg-circle-plus svg-circle-remove sprite sprite-level form-tree__item__icon--level');
 			switch (status) {
 				case self.STATUS_OPENED:
-					$statusIcon.addClass('fa-minus-square-o');
+					$statusIcon.addClass('svg svg-circle-remove');
 					break;
 				case self.STATUS_CLOSED:
-					$statusIcon.addClass('fa-plus-square-o');
+					$statusIcon.addClass('svg svg-circle-plus');
 					break;
 				case self.STATUS_NONE:
-					$statusIcon.addClass('fa-square-o');
+					$statusIcon.addClass('sprite sprite-level form-tree__item__icon--level');
 					break;
 			}
 		};

@@ -40,6 +40,9 @@ class MenuConfiguration implements ConfigurationInterface {
 				->booleanNode('superadmin')
 					->defaultFalse()
 				->end()
+				->scalarNode('icon')
+					->defaultNull()
+				->end()
 				->variableNode('items')
 					->defaultValue([])
 					->validate()->always(function (array $items) {

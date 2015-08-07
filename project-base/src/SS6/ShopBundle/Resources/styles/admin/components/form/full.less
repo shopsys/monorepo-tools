@@ -1,0 +1,51 @@
+/*
+Form full
+===========
+Form field in 100% width
+
+*/
+
+.form-full {
+	&__title {
+		.cfx();
+		padding: 4px;
+
+		&__in {
+			display: inline-block;
+			line-height: 24px;
+
+			font-weight: bold;
+			font-size: 15px;
+			text-transform: uppercase;
+		}
+
+		&__buttons{
+			float: right;
+			margin-left: 10px;
+		}
+	}
+
+	&__field {
+		position: relative;
+		margin-bottom: 10px;
+
+		&__input {
+			width: 100%;
+		}
+
+		&__item {
+			position: absolute;
+
+			&--compulsory {
+				left: -9px;
+				top: 7px;
+			}
+
+			&--error {
+				top: 4px;
+				left: -12px;
+				z-index: 10;
+			}
+		}
+	}
+}

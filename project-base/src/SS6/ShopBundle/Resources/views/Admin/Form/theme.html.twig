@@ -35,24 +35,24 @@
 {% endblock form_end %}
 
 {% block localized_row -%}
-	<div class="form-line {{ attr.class|default('') }}">
+	<div class="form-line">
 		{{- form_label(form) -}}
 		{{- form_errors(form) -}}
-		{{- block('localized_form_rows') -}}
+		{{- block('localized_form_rows', { attr: attr}) -}}
 	</div>
 {%- endblock localized_row %}
 
 {% block localized_widget -%}
 	{% for child in form %}
-		{{- form_row(child, { localized: true, locale: child.vars.name, attr: { class: attr.class|default('form-line--compact')}}) -}}
+		{{- form_row(child, { localized: true, locale: child.vars.name}) -}}
 	{% endfor %}
 {%- endblock localized_widget %}
 
 {% block form_row %}
-	<div class="form-line {{ attr.class|default('') }}">
+	<div class="form-line">
 		{{ form_errors(form) }}
-		{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-		{{ form_widget(form, { attr: {class: 'form-line__field'} }) }}
+		{{ form_label(form, label) }}
+		{{ form_widget(form) }}
 	</div>
 {% endblock form_row %}
 
@@ -63,16 +63,17 @@
 {%- endblock localized_form_rows %}
 
 {% block multidomain_row -%}
-	<div class="form-line {{ attr.class|default('') }}">
+	<div class="form-line">
 		{{- form_label(form) -}}
 		{{- form_errors(form) -}}
+
 		{{- block('multidomain_form_rows') -}}
 	</div>
 {%- endblock multidomain_row %}
 
 {% block multidomain_widget -%}
 	{% for domainId, child in form %}
-		{{- form_row(child, { multidomain: true, domainId: domainId, attr: { class: attr.class|default('form-line--compact')}}) -}}
+		{{- form_row(child, { multidomain: true, domainId: domainId}) -}}
 	{% endfor %}
 {%- endblock multidomain_widget %}
 
@@ -83,40 +84,67 @@
 {%- endblock multidomain_form_rows %}
 
 {% block checkbox_row %}
-	<div class="checkbox">
-		{{ form_label(form) }}
-		{{ form_errors(form) }}
-		{{ form_widget(form) }}
+	<div class="form-line">
+		<div class="form-line__line">
+			<div class="form-choice">
+				{{ form_widget(form) }}
+				{{ form_label(form) }}
+				{{ form_errors(form) }}
+			</div>
+		</div>
 	</div>
 {% endblock checkbox_row %}
 
 {% block text_row -%}
-	<div class="form-line {{ attr.class|default('') }}">
-		{{ form_errors(form) }}
+	<div class="form-line">
 		{% if localized is defined %}
-			{{ form_widget(form, { attr: { class: 'form-line__field form-line__field--icon' } }) }}
-			<span class="form-line__icon form-line__icon--{{locale}}"></span>
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<div class="input__wrap">
+						{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--flag')|trim}) %}
+						{{ form_widget(form, { attr: inputAttr }) }}
+						<span class="input__flag">
+							{{ localeFlag(locale) }}
+						</span>
+					</div>
+				</div>
+			</div>
 		{% elseif multidomain is defined %}
-			<span class="form-line__image">{{ domainIcon(domainId) }}</span> {{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label form-line__label--with-image'} }) }}
-			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<div class="input__wrap">
+						{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--domain')|trim}) %}
+						{{ form_widget(form, { attr: inputAttr }) }}
+						<span class="input__domain">
+							{{ domainIcon(domainId) }}
+						</span>
+					</div>
+				</div>
+			</div>
 		{% else %}
-			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
-			{{ form_widget(form, { attr: { class: 'form-line__field' } }) }}
+			{{ form_label(form, label) }}
+			<div class="form-line__side">
+				<div class="form-line__item">
+					{{ form_widget(form) }}
+				</div>
+			</div>
 		{% endif %}
+		{{ form_errors(form) }}
 	</div>
 {%- endblock text_row %}
 
 {% block textarea_row -%}
 	<div class="form-line">
 		{% if localized is defined %}
-			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { label_attr: {class: 'form-line__label'}, raw: true }) }}
+			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { raw: true }) }}
 		{% elseif multidomain is defined %}
-			<span class="form-line__image">{{ domainIcon(domainId) }}</span> {{ form_label(form, getDomainName(domainId), { label_attr: {class: 'form-line__label form-line__label--with-image'} }) }}
+			{{ form_label(form, getDomainName(domainId)) }}
+			{{ domainIcon(domainId) }}
 		{% else %}
-			{{ form_label(form, label, { label_attr: {class: 'form-line__label'} }) }}
+			{{ form_label(form, label) }}
 		{% endif %}
 		{{- form_errors(form) -}}
-		<div class="form-line__full">
+		<div class="form-line__line">
 			{{- form_widget(form) -}}
 		</div>
 	</div>
@@ -133,81 +161,85 @@
 {%- endblock url_list_row %}
 
 {% block url_list_widget -%}
-	<div class="js-entity-url-list" >
+	<div class="js-entity-url-list form-line__line">
 		{{ form_errors(form.newSlugsOnDomains) }}
-		{% for domainId, friendlyUrlForms in form.toDelete %}
-			<table class="table js-entity-url-list-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
-				<tr>
-					<th>{{ 'Hlavní'|trans }}</th>
-					<th>{{ domainIcon(domainId) }} {{ 'Doména '|trans ~ getDomainName(domainId) }}</th>
-					<th>{{ form_errors(form.mainOnDomains[domainId]) }}</th>
-				</tr>
-				{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
-				{% for slug, friendlyUrlForm in friendlyUrlForms %}
-					<tr class="js-entity-url-list-friendly-url">
-						<td class="table-col-10">
-							{% set mainUrlRadioButton = form.mainOnDomains[domainId][slug] %}
-							{{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-url-list-select-main' } }) }}
-						</td>
-						<td class="table-col-40 js-entity-url-list-row-label">
-							{% set absoluteUrl = form.vars.absoluteUrlsByDomainIdAndSlug[domainId][friendlyUrlForm.vars.value] %}
-							{% if mainUrl == absoluteUrl %}
-								<strong>{{ absoluteUrl }}</strong>
-							{% else %}
-								{{ absoluteUrl }}
-							{% endif %}
-							{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
-						</td>
-						<td class="table-col-30">
-							<div class="js-entity-url-list-row-delete-revert-wrapper">
-								<div class="js-entity-url-list-row-delete-block">
-									<button class="btn btn-iconic js-entity-url-list-row-delete-block-button" type="button">
-										<i class="fa fa-trash-o"></i>{{ 'Smazat URL'|trans }}
-									</button>
-								</div>
-								<div class="js-entity-url-list-row-revert-block display-none">
-									<button class="btn btn-iconic js-entity-url-list-row-revert-block-button" type="button">
-										<i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}
-									</button>
 
-									<span title="{{ 'Po uložení bude url smazána'|trans }}"
-										class="js-tooltip cursor-help form-icon" data-toggle="tooltip" data-placement="bottom">
-										<i class="fa fa-info"></i>
+		{% for domainId, friendlyUrlForms in form.toDelete %}
+			<div class="form-line__box js-entity-url-list-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
+				<div class="form-line__box__title">
+					<span class="form-line__box__title__image">
+						{{ domainIcon(domainId, 'large') }}
+					</span>
+					<strong class="form-line__box__title__name">
+						{{ 'Doména '|trans ~ getDomainName(domainId) }}
+					</strong>
+					{{ form_errors(form.mainOnDomains[domainId]) }}
+				</div>
+				<div class="form-line__box__content">
+					<div class="form-choice-list">
+						{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
+						{% for slug, friendlyUrlForm in friendlyUrlForms %}
+							<label class="form-choice-list__item js-entity-url-list-friendly-url">
+								{% set mainUrlRadioButton = form.mainOnDomains[domainId][slug] %}
+								{{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-url-list-select-main' } }) }}
+
+								<span class="js-entity-url-list-row-label">
+									{% set absoluteUrl = form.vars.absoluteUrlsByDomainIdAndSlug[domainId][friendlyUrlForm.vars.value] %}
+									{% if mainUrl == absoluteUrl %}
+										<strong>{{ absoluteUrl }}</strong>
+									{% else %}
+										{{ absoluteUrl }}
+									{% endif %}
+									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
+								</span>
+
+								<span class="js-entity-url-list-row-delete-revert-wrapper">
+									<span class="js-entity-url-list-row-delete-block">
+										<button class="btn-no-style form-choice-list__item__remove js-entity-url-list-row-delete-block-button" type="button">
+											<span class="svg svg-circle-cross"></span>
+										</button>
 									</span>
-								</div>
-							</div>
-							<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
-								class="js-entity-url-list-info-main-delete js-tooltip cursor-help form-icon display-none" data-toggle="tooltip" data-placement="right">
-								<i class="fa fa-info"></i>
-							</span>
-						</td>
-					</tr>
-				{% endfor %}
-				{% for newUrlForm in form.newSlugsOnDomains[domainId] %}
-					{{ _self.urlListWidgetNewUrlRow(newUrlForm, form.vars.domainUrlsById[domainId]) }}
-				{% endfor %}
-			</table>
+									<span class="js-entity-url-list-row-revert-block display-none">
+										<button class="btn js-entity-url-list-row-revert-block-button" type="button">
+											{{ 'Vrátit zpět'|trans }}
+										</button>
+
+										<span title="{{ 'Po uložení bude url smazána'|trans }}"
+											class="js-tooltip cursor-help form-icon" data-toggle="tooltip" data-placement="bottom">
+											{{ 'Info'|trans }}
+										</button>
+										</span>
+									</span>
+								</span>
+								<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
+									class="js-entity-url-list-info-main-delete js-tooltip cursor-help form-icon display-none" data-toggle="tooltip" data-placement="right">
+									{{ 'Info'|trans }}
+								</span>
+						</label>
+						{% endfor %}
+						{% for newUrlForm in form.newSlugsOnDomains[domainId] %}
+							{{ _self.urlListWidgetNewUrlRow(newUrlForm, form.vars.domainUrlsById[domainId]) }}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
 		{% endfor %}
-		<button type="button" class="js-entity-url-list-button-add-url btn btn-primary" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
-			<i class="fa fa-plus fa-lg"></i> {{ 'Přidat URL'|trans }}
+		<button type="button" class="js-entity-url-list-button-add-url btn" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
+			<span class="btn__icon sprite sprite-plus"></span>{{ 'Přidat URL'|trans }}
 		</button>
 	</div>
 {%- endblock url_list_widget -%}
 
 {% macro urlListWidgetNewUrlRow(form, domainUrl) %}
-	<tr class="js-entity-url-list-new-row">
-		<td class="table-col-10"></td>
-		<td class="table-col-40">
-			<span class="js-entity-url-list-new-row-domain-url">{{ domainUrl }}/</span><span class="js-entity-url-list-new-row-slug">{{ form.vars.value }}</span>
-			{{ form_errors(form) }}
-			{{ form_widget(form, {attr: {class: 'js-entity-url-list-new-row-slug-input display-none', id: null}}) }}
-		</td>
-		<td class="table-col-30">
-			<button class="btn btn-iconic js-entity-url-list-new-row-delete-button" type="button">
-				<i class="fa fa-trash-o"></i>{{ 'Smazat URL'|trans }}
-			</button>
-		</td>
-	</tr>
+	<label class="form-choice-list__item js-entity-url-list-new-row">
+		<span class="js-entity-url-list-new-row-domain-url">{{ domainUrl }}/</span>
+		<span class="js-entity-url-list-new-row-slug">{{ form.vars.value }}</span>
+		{{ form_errors(form) }}
+		{{ form_widget(form, {attr: {class: 'js-entity-url-list-new-row-slug-input display-none', id: null}}) }}
+		<button class="js-entity-url-list-new-row-delete-button" type="button">
+			<span class="svg svg-circle-remove"></span>
+		</button>
+	</label>
 {% endmacro %}
 
 {% block ckeditor_row -%}
@@ -226,22 +258,39 @@
 			{% if label is empty %}
 				{% set label = name|humanize %}
 			{% endif %}
-			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+			<label class="{{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__label' }}"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 				{% if raw is not defined %}
 					{{ label }}
 				{% else %}
 					{{ label|raw }}
 				{% endif %}
-				{% if not withoutColon|default(false) %}:{% endif %}
-				{% if required %}<span class="form-input-required">*</span>{% endif %}
+				{% if not isCheckbox|default(false) %}:{% endif %}
+				{% if required %}
+					<span class="form-compulsory">
+						<span class="sprite sprite-star"></span>
+					</span>
+				{% endif %}
 			</label>
 		{% endif %}
 	{% endspaceless %}
 {% endblock form_label %}
 
+{% block checkbox_widget %}
+	{% if inTree|default(false) == true %}
+		{% set class = 'form-tree__item__choice' %}
+	{% elseif inList|default(false) == true %}
+		{% set class = 'form-choice-list__input' %}
+	{% else %}
+		{% set class = 'form-choice__input' %}
+	{% endif %}
+
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ class)|trim}) %}
+	{{ parent('form_widget_simple') }}
+{% endblock checkbox_widget %}
+
 {% block checkbox_label %}
 	{% spaceless %}
-		{% set withoutColon = true %}
+		{% set isCheckbox = true %}
 		{{ block('form_label') }}
 	{% endspaceless %}
 {% endblock checkbox_label %}
@@ -253,7 +302,7 @@
 {% block product_widget %}
 	<span class="js-product-picker-container" data-placeholder="{{ placeholder }}">
 		<input
-			class="form-control js-product-picker-label"
+			class="input js-product-picker-label"
 			value="{{ productName|default(placeholder) }}"
 			disabled="disabled"
 			readonly="readonly"
@@ -269,7 +318,7 @@
 		</button>
 		{% if enableRemove %}
 			<a href="#" class="js-product-picker-remove-button display-none">
-				<i class="fa fa-trash-o" title="{{ 'Odebrat'|trans }}"></i>
+				{{ 'Odebrat'|trans }}
 			</a>
 		{% endif %}
 		{{- form_widget(form, {attr: {class: 'js-product-picker-input'}}) -}}
@@ -277,30 +326,40 @@
 {% endblock product_widget %}
 
 {% block products_row -%}
-	<div class="form-line">
-		{{- form_label(form) -}}
-		{{- form_errors(form) -}}
-		<div class="form-line__full">
-			{{- form_widget(form) -}}
+	<div class="form-group">
+		<div class="form-group__title">
+			{{- form_label(form) -}}
+
+			<div class="form-group__error">
+				{{- form_errors(form) -}}
+			</div>
 		</div>
+		{{- form_widget(form) -}}
 	</div>
 {%- endblock %}
 
+
+{% block products_label -%}
+	{{ label }}
+{% endblock products_label -%}
+
 {% macro productsWidgetItem(productName, form, sortable) %}
-	<li class="js-products-picker-item in-simple-item">
-		{%if sortable %}
-			<span class="left top-right-padding-5-px">
-				<i class="cursor-move fa fa-arrows"></i>
-			</span>
-		{% endif %}
-		<span class="in-simple-item__icon js-products-picker-item-button-delete cursor-pointer">
-			{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
-			<i class="fa fa-trash-o"></i>
-		</span>
-		<span class="in-simple-item__desc">
+	<tr class="js-products-picker-item table-form__row">
+		<td class="table-form__cell">
+			{%if sortable %}
+				<span class="left mr5 js-products-picker-item-handle c-move">
+					<span class="svg svg-move"></span>
+				</span>
+			{% endif %}
 			<span class="js-products-picker-item-product-name">{{ productName }}</span>
-		</span>
-	</li>
+		</td>
+		<td class="table-form__cell table-form__cell--actions">
+			<span class="cursor-pointer js-products-picker-item-button-delete c-pointer">
+				<span class="svg svg-circle-cross"></span>
+				{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
+			</span>
+		</td>
+	</tr>
 {% endmacro %}
 
 {% block products_widget %}
@@ -310,69 +369,84 @@
 		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__'}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
-		<ul class="js-products-picker-items mb-1 list-style-none">
-			{% for key, productForm in form %}
-				{{ _self.productsWidgetItem(form.vars.products[key].name, productForm, form.vars.sortable) }}
-			{% endfor %}
-		</ul>
-		<a href="#" class="btn btn-primary js-products-picker-button-add">
+		<table class="table-form mb20">
+			<thead class="js-products-picker-header">
+				<tr class="table-form__row">
+					<td class="table-form__cell">{{ 'Název'|trans }}</td>
+					<td class="table-form__cell table-form__cell--actions"></td>
+				</tr>
+			</thead>
+			<tbody class="js-products-picker-items">
+				{% for key, productForm in form %}
+					{{ _self.productsWidgetItem(form.vars.products[key].name, productForm, form.vars.sortable) }}
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="#" class="btn js-products-picker-button-add">
 			<i class="fa fa-plus fa-lg"></i>
 			{{ 'Přidat zboží'|trans }}
 		</a>
 	</div>
 {% endblock products_widget %}
 
-{% macro categoriesWidgetItem(categoryDetails, form) %}
-	<ul class="js-category-tree-form-children-container">
+{% macro categoriesWidgetItem(categoryDetails, form, isFirstLevel) %}
+	<ul class="js-category-tree-form-children-container {{ isFirstLevel ? 'form-tree__content' : 'form-tree__item__sub' }}">
 		{% for categoryDetail in categoryDetails %}
 			{% set categoryForm = form[categoryDetail.category.id] %}
-			<li class="checkbox js-category-tree-form-item">
-				<i class="fa fa-square-o js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' cursor-pointer' : ''}}"></i>
-				<label>
-					{{ form_widget(categoryForm, { attr: { class: 'js-category-tree-form-item-checkbox' } }) }}
-					{{ categoryForm.vars.label }}
-				</label>
-				{{ _self.categoriesWidgetItem(categoryDetail.children, form) }}
+			<li class="form-tree__item js-category-tree-form-item">
+				<div class="form-tree__item__click">
+					<span class="form-tree__item__icon js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' cursor-pointer' : ''}}"></span>
+					<span class="form-tree__item__name">
+						{{ form_widget(categoryForm, { inTree: true, attr: { class: 'js-category-tree-form-item-checkbox' } }) }}
+						{{ categoryForm.vars.label }}</span>
+				</div>
+				{{ _self.categoriesWidgetItem(categoryDetail.children, form, false) }}
 			</li>
 		{% endfor %}
 	</ul>
 {% endmacro %}
 
 {% block categories_widget %}
-	<div class="form-line__field category-tree category-tree--form js-category-tree-form">
-		{{ _self.categoriesWidgetItem(form.vars.categoryDetails, form) }}
+	<div class="form-line__line">
+		<div class="form-tree form-tree--open js-category-tree-form">
+			{{ _self.categoriesWidgetItem(form.vars.categoryDetails, form, true) }}
+		</div>
 	</div>
 {% endblock categories_widget %}
 
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
-		<div class="in-message in-message--danger js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : ' display-none' }}">
-			<ul class="in-message__list">
-				{% if errors|length > 0 %}
-					{% for error in errors %}
-						<li>{{ error.message }}</li>
-					{% endfor %}
-				{% endif %}
-			</ul>
+		<div class="form-line__error form-error {{ errors|length > 0 ? '' : ' display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
+			<span class="svg svg-circle-remove"></span>
+			<div class="in-message in-message--error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
+				<ul class="in-message__list">
+					{% if errors|length > 0 %}
+						{% for error in errors %}
+							<li>{{ error.message }}</li>
+						{% endfor %}
+					{% endif %}
+				</ul>
+				<span class="in-message__close">x</span>
+			</div>
 		</div>
 	{% endspaceless %}
 {% endblock form_errors %}
 
 {% block form_widget_simple %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
 	{{ parent('form_widget_simple') }}
 	{{- block('appendix_block') -}}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input input--textarea')|trim}) %}
 	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
 	{{ parent('textarea_widget') }}
 {% endblock textarea_widget %}
 
 {% block button_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-primary button')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn')|trim}) %}
 
 	{%- if label is empty -%}
 		{%- if label_format is not empty -%}
@@ -391,7 +465,7 @@
 	{% if required and placeholder is none and not placeholder_in_choices and not multiple -%}
 		{% set required = false %}
 	{% endif %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
 	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
 		{% if placeholder is not none -%}
 			<option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder }}</option>
@@ -425,21 +499,49 @@
 
 {% block choice_widget_expanded %}
 	{% spaceless %}
-			<div {{ block('widget_container_attributes') }}>
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
+		<div {{ block('widget_container_attributes') }}>
 			{% for child in form %}
-				<div class="radio checkbox">
-					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-						{{ form_widget(child) }}
-						{{ child.vars.label }}
-					</label>
-				</div>
+				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice-list__item')|trim}) %}
+				<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+					{{ form_widget(child, { inList: true}) }}
+					{{ child.vars.label }}
+				</label>
 			{% else %}
 				{{ empty_message|default('Není z čeho vybírat.') }}
 			{% endfor %}
-			</div>
+		</div>
 	{% endspaceless %}
 	{{- block('appendix_block') -}}
 {% endblock choice_widget_expanded %}
+
+{% block yes_no_widget %}
+	{% for child in form %}
+		{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice')|trim}) %}
+		<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+			{{ form_widget(child, { inList: true, attr: { class: 'form-choice__input' } }) }}
+			{{ child.vars.label }}
+		</label>
+	{% endfor %}
+{% endblock yes_no_widget %}
+
+{% block domains_widget %}
+	{% spaceless %}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
+		<div {{ block('widget_container_attributes') }}>
+			{% for domainId, child in form %}
+				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice-list__item')|trim}) %}
+				<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+					{{ form_widget(child, { inList: true}) }}
+					<span class="form-choice-list__icon">
+						{{ domainIcon(domainId, 'small') }}
+					</span>
+					{{ child.vars.label }}
+				</label>
+			{% endfor %}
+		</div>
+	{% endspaceless %}
+{% endblock domains_widget %}
 
 {% block widget_attributes -%}
 	{%- if globalMultipleFormSetting.currentFormMultiple -%}
@@ -500,13 +602,13 @@
 {% endblock number_widget %}
 
 {% block appendix_block %}
+	{% if symbolAfterInput is defined %}
+		<span class="form-line__item form-line__item--text">{{ symbolAfterInput }}</span>
+	{% endif %}
 	{% if icon is defined %}
-		<i class="fa fa-{{ icon.type|default('info-circle') }} cursor-help form-line__info js-tooltip"
+		<i class="svg svg-{{ icon.type|default('info') }} cursor-help form-line__item form-line__item--text js-tooltip"
 			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
 			title="{{ icon.title }}"
 		 ></i>
-	{% endif %}
-	{% if symbolAfterInput is defined %}
-		<span class="form-line__appendix">{{ symbolAfterInput }}</span>
 	{% endif %}
 {% endblock %}

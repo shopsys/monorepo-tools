@@ -1,0 +1,35 @@
+.foot {
+	.flex();
+	width: 100%;
+	height: @height-footer;
+
+	&__item {
+		padding-left: 20px;
+		padding-right: 20px;
+		flex-grow: 1;
+
+		border-left: 1px solid @color-border-dark;
+
+		&:first-child {
+			border-left: none;
+		}
+
+		&--2 {
+			flex-grow: 2;
+		}
+
+		&--3 {
+			flex-grow: 3;
+		}
+
+		&__in {
+			.flex();
+			.align-items(center);
+			height: @height-footer;
+
+			&__cell {
+				width: 100%;
+			}
+		}
+	}
+}

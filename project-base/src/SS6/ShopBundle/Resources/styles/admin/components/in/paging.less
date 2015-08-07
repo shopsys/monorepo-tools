@@ -1,0 +1,37 @@
+.in-paging {
+	.reset-ul();
+
+	text-align: center;
+
+	&__item {
+		display: inline-block;
+		margin: 0 1px;
+
+		a, strong, span {
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			padding: 0 5px;
+
+			text-align: center;
+			font-weight: bold;
+			text-decoration: none;
+
+			&:hover {
+				color: @color-base;
+				background: @color-f;
+			}
+		}
+
+		a, strong {
+			min-width: 30px;
+
+			border: 1px solid @color-border-dark;
+		}
+
+		strong {
+			cursor: auto;
+			background: @color-f;
+		}
+	}
+}
