@@ -1,8 +1,12 @@
 {% if messages %}
-	<div class="in-message in-message--static in-message--{{ type }} js-flash-message">
+	<div class="in-message in-message--block in-message--{{ type }} js-flash-message">
 		<a href="#" class="in-message__close js-flash-message-close" title="Zavřít">X</a>
-		{% for message in messages %}
-			<div>{{ message|raw }}</div>
-		{% endfor %}
+		<ul class="in-message__list">
+			{% for message in messages %}
+				<li class="in-message__list__item">
+					{{ message|raw }}
+				</li>
+			{% endfor %}
+		</ul>
 	</div>
 {% endif %}
