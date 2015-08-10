@@ -5,7 +5,7 @@
 	{{ 'Editace zákazníka'|trans }} - {{ user.fullName }}
 	<a href="{{ url('admin_customer_loginasuser', { userId: user.id, csrfToken: loginAsUserCsrfToken }) }}" target="_blank" class="btn btn-default">
 		{{ 'Přihlásit za uživatele' }}
-		<i class="fa fa-external-link"></i>
+		<i class="svg svg-forward-page"></i>
 	</a>
 {% endblock %}
 

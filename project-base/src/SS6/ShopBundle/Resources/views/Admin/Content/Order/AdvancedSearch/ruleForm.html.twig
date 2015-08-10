@@ -11,12 +11,12 @@
 			{{ form_widget(ruleForm.value) }}
 
 			{% if ruleForm.subject.vars.value == 'orderTotalPriceWithVat' %}
-				<i class="js-tooltip fa fa-info cursor-help"
+				<i class="js-tooltip svg svg-info c-help"
 					data-toggle="tooltip" data-placement="right"
 					title="{{ 'Vyhledává se ve všech měnách'|trans }}"
 				></i>
 			{% endif %}
 		</span>
-		<i class="fa fa-delete cursor-pointer js-advanced-search-remove-rule-button"></i>
+		<i class="svg svg-circle-cross c-pointer js-advanced-search-remove-rule-button"></i>
 	</div>
 {% endfor %}

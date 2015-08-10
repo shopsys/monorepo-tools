@@ -38,7 +38,7 @@
 										{% endif %}
 										{{ order.customer.lastName }}
 										{{ order.customer.firstName }}
-										<i class="fa fa-external-link"></i>
+										<i class="svg svg-forward-page"></i>
 									</a>
 								{% endif %}
 							</span>
@@ -139,11 +139,11 @@
 														{% do orderItemForm.name.setRendered() %}
 														<span class="js-order-item-name">{{ productItem.name }}</span>
 														<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
-															<i class="fa fa-external-link"></i>
+															<i class="svg svg-forward-page"></i>
 														</a>
 													{% elseif productItem and not productItem.product %}
 														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-														<i class="fa fa-question-circle js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
+														<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
 													{% else %}
 														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
 													{% endif %}
@@ -171,7 +171,7 @@
 													{% endif %}
 												</td>
 												<td class="table-col-5 table-edit__body__cell text-center">
-													<a href="#" class="js-order-item-remove table-action"><i class="fa fa-trash-o"></i></a>
+													<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
 												</td>
 											</tr>
 										{% endmacro %}
@@ -190,7 +190,7 @@
 										<tr>
 											<td colspan="8">
 												<a id="js-order-item-add" href="#" class="btn btn-primary">
-													<i class="fa fa-plus fa-lg"></i>
+													<i class="sprite sprite-plus"></i>
 													{{ 'Přidat položku'|trans }}
 												</a>
 											</td>

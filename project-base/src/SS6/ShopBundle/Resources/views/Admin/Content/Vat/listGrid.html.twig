@@ -9,11 +9,11 @@
 			{% if row is not null %}
 				<span
 					title="{{ 'Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou odstranit s nahrazením za novou.'|trans }}"
-					class="js-tooltip table-action cursor-help in-action-icons__item"
+					class="js-tooltip table-action c-help in-action-icons__item"
 					data-toggle="tooltip"
 					data-placement="bottom"
 				>
-					<i class="fa fa-info"></i>
+					<i class="svg svg-info"></i>
 				</span>
 			{% endif %}
 		</span>
@@ -26,11 +26,11 @@
 			{{ value }}
 			<span
 				title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
-				class="js-tooltip table-action cursor-help"
+				class="js-tooltip table-action c-help"
 				data-toggle="tooltip"
 				data-placement="right"
 			>
-				<i class="fa fa-warning"></i>
+				<i class="svg svg-warning"></i>
 			</span>
 		</span>
 	{% else %}
@@ -42,20 +42,20 @@
 	{% if row.vat.markedAsDeleted %}
 		<span
 			title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
-			class="js-tooltip table-action cursor-help text-muted"
+			class="js-tooltip table-action c-help text-muted"
 			data-toggle="tooltip"
 			data-placement="bottom"
 		>
-			<i class="fa fa-trash-o"></i>
+			<i class="svg svg-trash"></i>
 		</span>
 	{% elseif row.asReplacementCount > 0 %}
 		<span
 			title="{{ 'Sazba DPH nemůže být odstraněna, protože právě probíhá přepočet na tuto sazbu DPH.'|trans }}"
-			class="js-tooltip table-action cursor-help text-muted"
+			class="js-tooltip table-action c-help text-muted"
 			data-toggle="tooltip"
 			data-placement="bottom"
 		>
-			<i class="fa fa-trash-o"></i>
+			<i class="svg svg-trash"></i>
 		</span>
 	{% else %}
 		{{ parent() }}

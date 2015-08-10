@@ -7,17 +7,17 @@
 {% block grid_value_cell_id_name %}
 	{{ value }}
 	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
-		<span class="text-in-circle cursor-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
+		<span class="text-in-circle c-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
 	{% endif %}
 	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_VARIANT') %}
-		<span class="text-in-circle cursor-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
+		<span class="text-in-circle c-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
 	{% endif %}
 {% endblock %}
 
 {% block grid_value_cell_id_visible %}
 	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
 	{% if row.p.calculatedSellingDenied %}
-		<i class="fa fa-shopping-cart cart-disabled" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
+		<i class="svg svg-basket cart-disabled" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
 	{% endif %}
 {% endblock %}
 
@@ -30,7 +30,7 @@
 			data-product-picker-product-id="{{ row.p.id }}"
 			data-product-picker-product-name="{{ row.pt.name }}"
 		>
-			<i class="fa fa-plus js-products-picker-icon"></i>
+			<i class="sprite sprite-plus js-products-picker-icon"></i>
 			<span class="js-products-picker-label">{{ 'Přidat'|trans }}</span>
 		</a>
 	{% else %}
@@ -39,7 +39,7 @@
 			href="#"
 			onclick="SS6.productPicker.selectProduct('{{ parentInputId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
 		>
-			<i class="fa fa-check"></i>
+			<i class="svg svg-checked"></i>
 			{{ 'Vybrat'|trans }}
 		</a>
 	{% endif %}

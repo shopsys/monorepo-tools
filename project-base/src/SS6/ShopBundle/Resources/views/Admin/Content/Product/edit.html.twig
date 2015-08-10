@@ -10,7 +10,7 @@
 				<strong>
 					{{ 'Produkt je variantou'|trans }}
 					<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
-						{{ product.mainVariant.name }}<i class="fa fa-external-link"></i>
+						{{ product.mainVariant.name }}<i class="svg svg-forward-page"></i>
 					</a>
 				</strong>
 			</div>
@@ -26,7 +26,7 @@
 						{% for variant in product.variants %}
 							<li>
 								<a href="{{ url('admin_product_edit', {id: variant.id}) }}" target="_blank">
-									{{ variant.name }}<i class="fa fa-external-link"></i>
+									{{ variant.name }}<i class="svg svg-forward-page"></i>
 								</a>
 							</li>
 						{% endfor %}
@@ -45,7 +45,7 @@
 	<div class="form-line">
 		<label class="form-line__label">
 			{{ 'URL adresy na doménách :' |trans }}
-			<i class="svg svg-info cursor-help js-tooltip"
+			<i class="svg svg-info c-help js-tooltip"
 				data-toggle="tooltip" data-placement="right"
 				title="{{ 'Pokud je produkt viditelný pro výchozí cenovou skupinu na dané doméně, je URL adresa odkazem, v opačném případě se zobrazuje pouze jako text'|trans }}"
 			 ></i>
@@ -221,7 +221,7 @@
 								<div class="list-image__item__button">
 									<div class="js-product-images-delete-button">
 										<button class="btn btn-iconic" type="button">
-											<i class="fa fa-trash-o"></i>{{ 'Smazat obrázek'|trans }}
+											<i class="svg svg-trash"></i>{{ 'Smazat obrázek'|trans }}
 										</button>
 									</div>
 									<div class="js-product-images-delete-revert-button display-none">
@@ -230,12 +230,12 @@
 										</button>
 
 										<span title="{{ 'Po uložení bude obrázek smazán'|trans }}"
-										class="js-tooltip cursor-help form-icon" data-toggle="tooltip" data-placement="bottom">
-											<i class="fa fa-info"></i>
+										class="js-tooltip c-help form-icon" data-toggle="tooltip" data-placement="bottom">
+											<i class="svg svg-info"></i>
 										</span>
 									</div>
-									<span class="cursor-move js-product-images-image-handle" title="{{ 'Přesunout'|trans }}">
-										<i class="fa fa-arrows"></i>
+									<span class="c-move js-product-images-image-handle" title="{{ 'Přesunout'|trans }}">
+										<i class="svg svg-move"></i>
 									</span>
 								</div>
 							</div>
