@@ -72,7 +72,7 @@
 				<label class="form-block__label">{{ 'Parametry'|trans }}:</label>
 				<div class="form-block__field">
 					<div class="form-block__wrap" id="{{ filterForm.parameters.vars.id }}}">
-						{% for parameterForm in filterForm.parameters %}
+						{% for parameterId, parameterForm in filterForm.parameters %}
 							<div class="form-block">
 								<label class="form-block__label">{{ parameterForm.vars.label }}:</label>
 								<div class="form-block__field">
@@ -84,6 +84,18 @@
 
 													<span class="form-choice__text">
 														{{ parameterValueForm.vars.label }}
+
+														<span
+															class="js-product-filter-count"
+															data-form-id="{{ parameterValueForm.vars.id }}"
+														>
+															{% if not parameterValueForm.vars.checked %}
+																(
+																	{%- if parameterForm.vars.data is not empty %}+{% endif -%}
+																	{{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
+																)
+															{% endif %}
+														</span>
 													</span>
 												</label>
 											</div>
