@@ -29,7 +29,7 @@ body {
 		padding-top: @height-header;
 		padding-bottom: @height-footer;
 		position: relative;
-		min-height: 95vh;
+		min-height: 100vh;
 		padding-left: @width-panel;
 
 		background: @bg-page;
@@ -45,6 +45,14 @@ body {
 			content: '';
 
 			background: @color-a;
+		}
+
+		&--blank {
+			padding-left: 0;
+
+			&:after {
+				display: none;
+			}
 		}
 	}
 

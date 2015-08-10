@@ -3,14 +3,6 @@ Login box
 =======
 Box, with input fields for loging in.
 
-	<div class="box-login">
-		<h1 class="box-login__heading">
-			Heading
-		</h1>
-		<input type="text" class="form-control" placeholder="Useranme" >
-		<input type="password" class="form-control" placeholder="Password">
-		<button class="btn-lg btn-block btn btn-primary button" type="submit">Log in</button>
-	</div>
 */
 
 .box-login {
@@ -24,19 +16,30 @@ Box, with input fields for loging in.
 
 	.box-shadow(0 0 30px @color-grey);
 
-	input[type="text"] {
-		margin-bottom: -1px;
+	&__heading {
+		margin: 0 0 20px;
+
+		font-size: 28px;
+		text-align: left;
+		font-weight: bold;
 	}
 
-	input[type="password"] {
-		margin-bottom: 10px;
+	&__row {
+		position: relative;
+		margin-bottom: 5px;
+
+		&--btn {
+			margin-bottom: 0;
+		}
 	}
-}
 
-.box-login__heading {
-	margin: 0 0 20px;
+	&__input {
+		width: 100%;
+	}
 
-	font-size: 28px;
-	text-align: left;
-	font-weight: bold;
+	&__error {
+		position: absolute;
+		top: -10px;
+		left: -15px;
+	}
 }

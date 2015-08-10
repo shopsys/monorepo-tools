@@ -19,7 +19,7 @@ button types
 	cursor: pointer;
 	font-weight: bold;
 	text-decoration: none;
-	font-size: 12px;
+	font-size: 14px;
 
 	.set-transition();
 	.transition(~"background, color");
@@ -32,6 +32,17 @@ button types
 	&__icon {
 		margin-right: 5px;
 		float: left;
+	}
+
+	&--block {
+		width: 100%;
+
+		text-align: center;
+	}
+
+	&--lg {
+		height: @btn-height + 5;
+		line-height: @btn-height - 10 + 5;
 	}
 }
 
