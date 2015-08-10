@@ -68,7 +68,33 @@
 		{% if isSearch or filterForm.parameters is empty %}
 			{% do filterForm.parameters.setRendered %}
 		{% else %}
-			{{ form_row(filterForm.parameters, { label: 'Parametry'|trans }) }}
+			<div class="form-block">
+				<label class="form-block__label">{{ 'Parametry'|trans }}:</label>
+				<div class="form-block__field">
+					<div class="form-block__wrap" id="{{ filterForm.parameters.vars.id }}}">
+						{% for parameterForm in filterForm.parameters %}
+							<div class="form-block">
+								<label class="form-block__label">{{ parameterForm.vars.label }}:</label>
+								<div class="form-block__field">
+									<div id="{{ parameterForm.vars.id }}" class="form-choice">
+										{% for parameterValueForm in parameterForm %}
+											<div class="form-choice__item">
+												<label>
+													{{ form_widget(parameterValueForm, { attr: { class: 'form-choice__input'} }) }}
+
+													<span class="form-choice__text">
+														{{ parameterValueForm.vars.label }}
+													</span>
+												</label>
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
 		{% endif %}
 
 		<div class="box-filter__buttons">
