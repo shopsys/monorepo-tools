@@ -23,6 +23,7 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
@@ -160,7 +161,7 @@ class ProductController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', [
-				'name' => $product->getName(),
+				'name' => $this->getProductName($product),
 			]);
 			return $this->redirect($this->generateUrl('admin_product_edit', ['id' => $product->getId()]));
 		}
@@ -169,7 +170,9 @@ class ProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zboží - ') . $product->getName()));
+		$this->breadcrumb->replaceLastItem(
+			new MenuItem($this->translator->trans('Editace zboží - ') . $this->getProductName($product))
+		);
 
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', [
 			'form' => $form->createView(),
@@ -201,7 +204,7 @@ class ProductController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo vytvořeno zboží'
 					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $product->getName(),
+				'name' => $this->getProductName($product),
 				'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
 			]);
 			return $this->redirect($this->generateUrl('admin_product_list'));
@@ -294,7 +297,7 @@ class ProductController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$productName = $this->productEditFacade->getById($id)->getName();
+			$productName = $this->getProductName($this->productEditFacade->getById($id));
 			$this->em->transactional(
 				function () use ($id) {
 					$this->productEditFacade->delete($id);
@@ -341,7 +344,7 @@ class ProductController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				'Varianta <strong>{{ variantName }}</strong> byla úspěšně vytvořena.', [
-					'variantName' => $newMainVariant->getName(),
+					'variantName' => $this->getProductName($newMainVariant),
 				]
 			);
 
@@ -351,5 +354,17 @@ class ProductController extends AdminBaseController {
 		return $this->render('@SS6Shop/Admin/Content/Product/createVariant.html.twig', [
 			'form' => $form->createView(),
 		]);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return string
+	 */
+	private function getProductName(Product $product) {
+		if ($product->getName() === null) {
+			return $this->translator->trans('ID ') . $product->getId();
+		}
+
+		return $product->getName();
 	}
 }

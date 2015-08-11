@@ -1,6 +1,13 @@
 {% extends '@SS6Shop/Admin/Content/Product/detail.html.twig' %}
 
-{% block title %}- {{ 'Editace zboží'|trans }} - {{ product.name }}{% endblock %}
+{% block title -%}
+	- {{ 'Editace zboží'|trans }} -
+	{% if product.name is not null -%}
+		{{ product.name }}
+	{% else -%}
+		{{ 'ID '|trans ~ product.id }}
+	{% endif %}
+{% endblock %}
 {% block h1 %}{% endblock %}
 
 {% block product_variants %}
