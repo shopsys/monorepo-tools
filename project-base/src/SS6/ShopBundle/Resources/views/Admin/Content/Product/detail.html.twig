@@ -18,9 +18,6 @@
 				</div>
 				{% for locale, formName in form.productData.name %}
 					<div class="form-full__field">
-						<div class="form-full__field__item form-full__field__item--compulsory form-compulsory">
-							<span class="sprite sprite-star"></span>
-						</div>
 						<div class="input__wrap">
 							{{ form_widget(formName, { attr: { class: 'input--flag form-full__field__input'} }) }}
 							<span class="input__flag">
