@@ -93,4 +93,18 @@ class ProductFilterFormType extends AbstractType {
 		]);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
+	 */
+	public function getParameterFilterChoices() {
+		return $this->parameterFilterChoices;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 */
+	public function getFlagFilterChoices() {
+		return $this->flagFilterChoices;
+	}
+
 }

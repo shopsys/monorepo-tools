@@ -7,7 +7,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
@@ -32,27 +31,22 @@ class ProductFilterCountRepository {
 	 */
 	private $productFilterRepository;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
-	 */
-	private $parameterFilterChoiceRepository;
-
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
-		ProductFilterRepository $productFilterRepository,
-		ParameterFilterChoiceRepository $parameterFilterChoiceRepository
+		ProductFilterRepository $productFilterRepository
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productFilterRepository = $productFilterRepository;
-		$this->parameterFilterChoiceRepository = $parameterFilterChoiceRepository;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
@@ -61,6 +55,8 @@ class ProductFilterCountRepository {
 		Category $category,
 		$domainId,
 		$locale,
+		array $flagFilterChoices,
+		array $parameterFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
@@ -78,11 +74,13 @@ class ProductFilterCountRepository {
 		);
 		$productFilterCountData->countByFlagId = $this->getCountByFlagId(
 			$productsQueryBuilder,
+			$flagFilterChoices,
 			$productFilterData,
 			$pricingGroup
 		);
 		$productFilterCountData->countByParameterIdAndValueId = $this->getCountByParameterIdAndValueId(
 			$productsQueryBuilder,
+			$parameterFilterChoices,
 			$productFilterData,
 			$pricingGroup,
 			$locale
@@ -95,6 +93,7 @@ class ProductFilterCountRepository {
 	 * @param string|null $searchText
 	 * @param int $domainId
 	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
@@ -103,6 +102,7 @@ class ProductFilterCountRepository {
 		$searchText,
 		$domainId,
 		$locale,
+		array $flagFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
@@ -121,6 +121,7 @@ class ProductFilterCountRepository {
 		);
 		$productFilterCountData->countByFlagId = $this->getCountByFlagId(
 			$productsQueryBuilder,
+			$flagFilterChoices,
 			$productFilterData,
 			$pricingGroup
 		);
@@ -159,15 +160,21 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return int
 	 */
 	private function getCountByFlagId(
 		QueryBuilder $productsQueryBuilder,
+		array $flagFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
+		if (count($flagFilterChoices) === 0) {
+			return [];
+		}
+
 		$productFilterDataExceptFlags = clone $productFilterData;
 		$productFilterDataExceptFlags->flags = [];
 
@@ -182,20 +189,27 @@ class ProductFilterCountRepository {
 		$productsFilteredExceptFlagsQueryBuilder
 			->select('f.id, COUNT(p) AS cnt')
 			->join('p.flags', 'f')
-			->andWhere(
-				$productsFilteredExceptFlagsQueryBuilder->expr()->notIn(
-					'p.id',
-					$this->em->createQueryBuilder()
-						->select('_p.id')
-						->from(Product::class, '_p')
-						->join('_p.flags', '_f')
-						->where('_f IN (:activeFlags)')
-						->getDQL()
+			->andWhere('f IN (:filterFlags)')->setParameter('filterFlags', $flagFilterChoices);
+
+		if (count($productFilterData->flags) > 0) {
+			$productsFilteredExceptFlagsQueryBuilder
+				->andWhere(
+					$productsFilteredExceptFlagsQueryBuilder->expr()->notIn(
+						'p.id',
+						$this->em->createQueryBuilder()
+							->select('_p.id')
+							->from(Product::class, '_p')
+							->join('_p.flags', '_f')
+							->where('_f IN (:activeFlags)')
+							->getDQL()
+					)
 				)
-			)
+				->setParameter('activeFlags', $productFilterData->flags);
+		}
+
+		$productsFilteredExceptFlagsQueryBuilder
 			->resetDQLPart('orderBy')
-			->groupBy('f.id')
-			->setParameter('activeFlags', $productFilterData->flags);
+			->groupBy('f.id');
 
 		$rows = $productsFilteredExceptFlagsQueryBuilder->getQuery()->execute();
 
@@ -209,28 +223,19 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param int $domainId
 	 * @param string $locale
 	 * @return int
 	 */
 	private function getCountByParameterIdAndValueId(
 		QueryBuilder $productsQueryBuilder,
+		array $parameterFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup,
-		Category $category,
-		$domainId,
 		$locale
 	) {
-		$parameterFilterChoices = $this->parameterFilterChoiceRepository->getParameterFilterChoicesInCategory(
-			$domainId,
-			$pricingGroup,
-			$locale,
-			$category
-		);
-
 		$countByParameterIdAndValueId = [];
 
 		foreach ($parameterFilterChoices as $parameterFilterChoice) {
