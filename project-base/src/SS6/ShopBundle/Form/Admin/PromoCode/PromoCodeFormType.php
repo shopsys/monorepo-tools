@@ -13,15 +13,15 @@ use Symfony\Component\Validator\Constraints;
 class PromoCodeFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCode[]
+	 * @var string[]
 	 */
-	private $promoCodes;
+	private $prohibitedCodes;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCode[] $promoCodes
+	 * @param string[] $prohibitedCodes
 	 */
-	public function __construct(array $promoCodes) {
-		$this->promoCodes = $promoCodes;
+	public function __construct(array $prohibitedCodes) {
+		$this->prohibitedCodes = $prohibitedCodes;
 	}
 
 	/**
@@ -41,15 +41,15 @@ class PromoCodeFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplńte prosím kód.',
+						'message' => 'Vyplňte prosím kód.',
 					]),
 					new NotInArray([
-						'array' => $this->getExistingPromoCodes(),
+						'array' => $this->prohibitedCodes,
 						'message' => 'Slevový kupón s tímto kódem již existuje.',
 					]),
 				],
 			])
-			->add('percent', FormType::NUMBER, [
+			->add('percent', FormType::INTEGER, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
@@ -69,18 +69,6 @@ class PromoCodeFormType extends AbstractType {
 			'data_class' => PromoCodeData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 		]);
-	}
-
-	/**
-	 * @return string[]
-	 */
-	private function getExistingPromoCodes() {
-		$existingPromoCodes = [];
-		foreach ($this->promoCodes as $promoCode) {
-			$existingPromoCodes[] = $promoCode->getCode();
-		}
-
-		return $existingPromoCodes;
 	}
 
 }

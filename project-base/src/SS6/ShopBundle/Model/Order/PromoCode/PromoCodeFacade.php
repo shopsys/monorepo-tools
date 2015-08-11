@@ -72,7 +72,4 @@ class PromoCodeFacade {
 		return $this->promoCodeRepository->findByCode($code);
 	}
 
-	public function getAll() {
-		return $this->promoCodeRepository->getAll();
-	}
 }

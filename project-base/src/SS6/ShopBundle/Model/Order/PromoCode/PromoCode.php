@@ -29,7 +29,7 @@ class PromoCode {
 	/**
 	 * @var float
 	 *
-	 * @ORM\Column(type="float")
+	 * @ORM\Column(type="decimal", precision=20, scale=4)
 	 */
 	private $percent;
 
