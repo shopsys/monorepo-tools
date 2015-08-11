@@ -226,6 +226,7 @@ class ProductOnCurrentDomainFacade {
 		return $this->productFilterCountRepository->getProductFilterCountDataInCategory(
 			$this->categoryRepository->getById($categoryId),
 			$this->domain->getId(),
+			$this->domain->getLocale(),
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
 		);

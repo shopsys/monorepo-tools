@@ -3,12 +3,15 @@
 namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -29,19 +32,27 @@ class ProductFilterCountRepository {
 	 */
 	private $productFilterRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
+	 */
+	private $parameterFilterChoiceRepository;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
-		ProductFilterRepository $productFilterRepository
+		ProductFilterRepository $productFilterRepository,
+		ParameterFilterChoiceRepository $parameterFilterChoiceRepository
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
 		$this->productFilterRepository = $productFilterRepository;
+		$this->parameterFilterChoiceRepository = $parameterFilterChoiceRepository;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
+	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
@@ -49,6 +60,7 @@ class ProductFilterCountRepository {
 	public function getProductFilterCountDataInCategory(
 		Category $category,
 		$domainId,
+		$locale,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
@@ -58,11 +70,25 @@ class ProductFilterCountRepository {
 			$category
 		);
 
-		return $this->getProductFilterCountData(
+		$productFilterCountData = new ProductFilterCountData();
+		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
 			$productFilterData,
 			$pricingGroup
 		);
+		$productFilterCountData->countByFlagId = $this->getCountByFlagId(
+			$productsQueryBuilder,
+			$productFilterData,
+			$pricingGroup
+		);
+		$productFilterCountData->countByParameterIdAndValueId = $this->getCountByParameterIdAndValueId(
+			$productsQueryBuilder,
+			$productFilterData,
+			$pricingGroup,
+			$locale
+		);
+
+		return $productFilterCountData;
 	}
 
 	/**
@@ -87,24 +113,6 @@ class ProductFilterCountRepository {
 			$searchText
 		);
 
-		return $this->getProductFilterCountData(
-			$productsQueryBuilder,
-			$productFilterData,
-			$pricingGroup
-		);
-	}
-
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
-	 */
-	private function getProductFilterCountData(
-		QueryBuilder $productsQueryBuilder,
-		ProductFilterData $productFilterData,
-		PricingGroup $pricingGroup
-	) {
 		$productFilterCountData = new ProductFilterCountData();
 		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
@@ -197,6 +205,71 @@ class ProductFilterCountRepository {
 		}
 
 		return $countByFlagId;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @param string $locale
+	 * @return int
+	 */
+	private function getCountByParameterIdAndValueId(
+		QueryBuilder $productsQueryBuilder,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup,
+		Category $category,
+		$domainId,
+		$locale
+	) {
+		$parameterFilterChoices = $this->parameterFilterChoiceRepository->getParameterFilterChoicesInCategory(
+			$domainId,
+			$pricingGroup,
+			$locale,
+			$category
+		);
+
+		$countByParameterIdAndValueId = [];
+
+		foreach ($parameterFilterChoices as $parameterFilterChoice) {
+			$currentParameter = $parameterFilterChoice->getParameter();
+
+			$productFilterDataExceptCurrentParameter = clone $productFilterData;
+			foreach ($productFilterDataExceptCurrentParameter->parameters as $index => $parameterFilterData) {
+				if ($parameterFilterData->parameter->getId() === $currentParameter->getId()) {
+					unset($productFilterDataExceptCurrentParameter->parameters[$index]);
+				}
+			}
+
+			$productsFilteredExceptCurrentParameterQueryBuilder = clone $productsQueryBuilder;
+
+			$this->productFilterRepository->applyFiltering(
+				$productsFilteredExceptCurrentParameterQueryBuilder,
+				$productFilterDataExceptCurrentParameter,
+				$pricingGroup
+			);
+
+			$productsFilteredExceptCurrentParameterQueryBuilder
+				->select('pv.id, COUNT(p) AS cnt')
+				->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p AND ppv.locale = :locale')
+				->join('ppv.value', 'pv')
+				->andWhere('ppv.parameter = :parameter')
+				->resetDQLPart('orderBy')
+				->groupBy('pv.id')
+				->setParameter('locale', $locale)
+				->setParameter('parameter', $currentParameter);
+
+			$rows = $productsFilteredExceptCurrentParameterQueryBuilder->getQuery()->execute();
+
+			$countByParameterIdAndValueId[$currentParameter->getId()] = [];
+			foreach ($rows as $row) {
+				$countByParameterIdAndValueId[$currentParameter->getId()][$row['id']] = $row['cnt'];
+			}
+		}
+
+		return $countByParameterIdAndValueId;
 	}
 
 }
