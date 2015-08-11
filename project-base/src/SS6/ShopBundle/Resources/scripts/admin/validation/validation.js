@@ -105,7 +105,9 @@
 		if ($label.size() === 0) {
 			$label = SS6.validation.getClosestLabel($input, 'label');
 		}
-
+		if ($label.size() === 0) {
+			$label = SS6.validation.getClosestLabel($input, '.form-full__title');
+		}
 		if ($label.size() > 0) {
 			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 		}
