@@ -12,9 +12,9 @@ use SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleDataFactory;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use SS6\ShopBundle\Model\Article\ArticlePlacementList;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
@@ -144,24 +144,12 @@ class ArticleController extends AdminBaseController {
 	 * @Route("/article/list/")
 	 */
 	public function listAction() {
-		$queryBuilder = $this->articleEditFacade->getOrderedArticlesByDomainIdQueryBuilder($this->selectedDomain->getId());
-
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
-
-		$grid = $this->gridFactory->create('articleList', $dataSource);
-		$grid->enableDragAndDrop(Article::class);
-
-		$grid->addColumn('name', 'a.name', 'Název');
-
-		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', ['id' => 'a.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', ['id' => 'a.id'])
-			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
-
-		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
+		$gridTop = $this->getGrid(ArticlePlacementList::PLACEMENT_TOP_MENU);
+		$gridFooter = $this->getGrid(ArticlePlacementList::PLACEMENT_FOOTER);
 
 		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', [
-			'gridView' => $grid->createView(),
+			'gridViewTop' => $gridTop->createView(),
+			'gridViewFooter' => $gridFooter->createView(),
 		]);
 	}
 
@@ -225,6 +213,33 @@ class ArticleController extends AdminBaseController {
 		}
 
 		return $this->redirect($this->generateUrl('admin_article_list'));
+	}
+
+	/**
+	 * @param string $articlePlacement
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 */
+	private function getGrid($articlePlacement) {
+		$queryBuilder = $this->articleEditFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
+			$this->selectedDomain->getId(),
+			$articlePlacement
+		);
+
+		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
+
+		$gridId = 'articleList-' . $articlePlacement;
+		$grid = $this->gridFactory->create($gridId, $dataSource);
+
+		$grid->addColumn('name', 'a.name', 'Název');
+
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', ['id' => 'a.id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', ['id' => 'a.id'])
+			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
+
+		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
+
+		return $grid;
 	}
 
 }

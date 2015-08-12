@@ -9,7 +9,11 @@
 
 	<a href="{{ url('admin_article_new') }}" class="btn">{{ 'Vytvořit nový článek'|trans }}</a>
 
-	{{ gridView.render() }}
+	<h2>{{ 'Články v horním menu'|trans }}</h2>
+	{{ gridViewTop.render() }}
+
+	<h2>{{ 'Články v patičce'|trans }}</h2>
+	{{ gridViewFooter.render() }}
 
 	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 		{% block fixed_bar_content %}

@@ -64,10 +64,11 @@ class ArticleEditFacade {
 
 	/**
 	 * @param int $domainId
+	 * @param string $placement
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getOrderedArticlesByDomainIdQueryBuilder($domainId) {
-		return $this->articleRepository->getOrderedArticlesByDomainIdQueryBuilder($domainId);
+	public function getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement) {
+		return $this->articleRepository->getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement);
 	}
 
 	/**
