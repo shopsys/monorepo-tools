@@ -67,9 +67,7 @@
 	<thead>
 		<tr class="table-grid__row">
 			{% if grid.dragAndDrop %}
-				<th class="table-grid__cell table-grid__cell--move">
-					<span class="svg svg-move"></span>
-				</th>
+				<th class="table-grid__cell"></th>
 			{% endif %}
 			{% if grid.enabledSelecting %}
 				<th class="table-grid__cell table-grid__cell--choice"><input type="checkbox" class="js-grid-mass-action-select-all" /></th>
