@@ -4,33 +4,31 @@
 {% block h1 %}{{ 'Editace platby'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
 
 {% block payment_base_prices %}
-	<fieldset class="row">
-		<div class="table-responsive mt-1" id="transport_prices">
-			<table class="table">
-				<thead>
+	<div id="transport_prices">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{{ inputPriceLabel() }}</th>
+					<th>{{ 'Cena bez DPH'|trans }}</th>
+					<th>{{ 'Cena s DPH'|trans }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for currencyId, currency in currencies %}
 					<tr>
-						<th>{{ inputPriceLabel() }}</th>
-						<th>{{ 'Cena bez DPH'|trans }}</th>
-						<th>{{ 'Cena s DPH'|trans }}</th>
+						<td>
+							{{ form_row(
+								form.prices[currencyId],
+								{label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
+							) }}
+						</td>
+						<td>{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
+						<td>{{ paymentDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
 					</tr>
-				</thead>
-				<tbody>
-					{% for currencyId, currency in currencies %}
-						<tr>
-							<td>
-								{{ form_row(
-									form.prices[currencyId],
-									{label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), attr: { class: 'form-line--size-2' }, symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
-								) }}
-							</td>
-							<td>{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
-							<td>{{ paymentDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</fieldset>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}
 
 {% block image %}
@@ -38,8 +36,10 @@
 		<label class="form-line__label">
 			{{ 'Obrázek'|trans }}:
 		</label>
-		<div class="form-line__field mb-1">
-			{{ image(paymentDetail.payment, { size: 'original', height: 100 }) }}
+		<div class="form-line__side">
+			<div class="form-line__item">
+				{{ image(paymentDetail.payment, { size: 'original', height: 100 }) }}
+			</div>
 		</div>
 	</div>
 {% endblock %}

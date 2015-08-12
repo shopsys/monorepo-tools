@@ -4,15 +4,11 @@
 {% block h1 %}{{ 'Vytvořit variantu'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				<div class="wrap-group">
-					{{ form_row(form.mainVariant, { label: 'Hlavní zboží'|trans }) }}
-					{{ form_row(form.variants, { label: 'Varianty'|trans }) }}
-					{{ form_row(form.save, { label: 'Vytvořit'|trans }) }}
-				</div>
-			{{ form_end(form) }}
+	{{ form_start(form) }}
+		<div class="wrap-group">
+			{{ form_row(form.mainVariant, { label: 'Hlavní zboží'|trans }) }}
+			{{ form_row(form.variants, { label: 'Varianty'|trans }) }}
+			{{ form_row(form.save, { label: 'Vytvořit'|trans }) }}
 		</div>
-	</div>
+	{{ form_end(form) }}
 {% endblock %}

@@ -1,18 +1,17 @@
 {{ form_start(form) }}
-	<div class="wrap-box mb-1 mt-1">
+	<div class="wrap-box">
 		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna eshopu'|trans, icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen' } }) }}
-
 	</div>
 
-	<div class="wrap-box mb-1 mt-1">
+	<div class="wrap-box">
 		{% for item in form.domainDefaultCurrencies %}
 			{{ form_row(item, { label: 'Základní měna domény %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
 		{% endfor %}
 	</div>
 
-	<div class="window-fixed-bar">
-		<div class="window-fixed-bar__buttons">
+	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% block fixed_bar_content %}
 			{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
-		</div>
-	</div>
+		{% endblock %}
+	{% endembed %}
 {{ form_end(form) }}

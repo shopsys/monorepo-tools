@@ -7,9 +7,5 @@
 
 	{{ render(controller('SS6ShopBundle:Admin/Vat:settings')) }}
 
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ gridView.render() }}
-		</div>
-	</div>
+	{{ gridView.render() }}
 {% endblock %}

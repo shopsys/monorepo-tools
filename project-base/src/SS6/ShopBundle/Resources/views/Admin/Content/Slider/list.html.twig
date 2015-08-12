@@ -4,14 +4,9 @@
 {% block h1 %}{{ 'Stránky slideru'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	<a href="{{ url('admin_slider_new') }}" class="btn">{{ 'Vytvořit novou stránku'|trans }}</a>
 
-			<a href="{{ url('admin_slider_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou stránku'|trans }}</a>
-
-			{{ gridView.render() }}
-		</div>
-	</div>
+	{{ gridView.render() }}
 {% endblock %}

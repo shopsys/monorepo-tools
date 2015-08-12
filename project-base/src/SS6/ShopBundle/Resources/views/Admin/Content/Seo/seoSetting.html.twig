@@ -5,24 +5,20 @@
 
 {% block main_content %}
 
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ form_start(form) }}
+		{{ form_row(form.title, { label: 'Titulek'|trans }) }}
+		{% set infoText = 'Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na " | Můj obchod" a název zboží je "D-Link", bude výsledný titulek u tohoto zboží "D-Link | Můj obchod"' %}
+		{{ form_row(form.titleAddOn, { label: 'Doplněk k titulku'|trans, icon: { title: infoText } }) }}
+		{{ form_row(form.metaDescription, { label: 'Meta description'|trans }) }}
 
-			{{ form_start(form) }}
-				{{ form_row(form.title, { label: 'Titulek'|trans }) }}
-				{% set infoText = 'Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na " | Můj obchod" a název zboží je "D-Link", bude výsledný titulek u tohoto zboží "D-Link | Můj obchod"' %}
-				{{ form_row(form.titleAddOn, { label: 'Doplněk k titulku'|trans, icon: { title: infoText } }) }}
-				{{ form_row(form.metaDescription, { label: 'Meta description'|trans }) }}
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			{% endblock %}
+		{% endembed %}
 
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
-					</div>
-				</div>
-			{{ form_end(form) }}
+	{{ form_end(form) }}
 
-		</div>
-	</div>
 {% endblock %}

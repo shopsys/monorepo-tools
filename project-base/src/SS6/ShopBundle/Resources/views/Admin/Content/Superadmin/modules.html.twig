@@ -4,32 +4,28 @@
 {% block h1 %}{{ 'Superadmin - Zapínací moduly'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				<div class="wrap-group">
-					<table class="table">
-						<tr>
-							<th class="table-col-80">Název modulu</th>
-							<th class="table-col-10">Aktivní</th>
-							<th class="table-col-10">Neaktivní</th>
-						</tr>
-						{% for moduleName, moduleForm in form.modules %}
-							<tr>
-								<td class="table-col-80">{{ moduleForm.vars.label }}</td>
-								<td class="table-col-10">{{ form_widget(moduleForm['yes']) }}</td>
-								<td class="table-col-10">{{ form_widget(moduleForm['no']) }}</td>
-							</tr>
-						{% endfor %}
-					</table>
-				</div>
-
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
-					</div>
-				</div>
-			{{ form_end(form) }}
+	{{ form_start(form) }}
+		<div class="wrap-group">
+			<table class="table">
+				<tr>
+					<th class="table-col-80">Název modulu</th>
+					<th class="table-col-10">Aktivní</th>
+					<th class="table-col-10">Neaktivní</th>
+				</tr>
+				{% for moduleName, moduleForm in form.modules %}
+					<tr>
+						<td class="table-col-80">{{ moduleForm.vars.label }}</td>
+						<td class="table-col-10">{{ form_widget(moduleForm['yes']) }}</td>
+						<td class="table-col-10">{{ form_widget(moduleForm['no']) }}</td>
+					</tr>
+				{% endfor %}
+			</table>
 		</div>
-	</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 {% endblock %}

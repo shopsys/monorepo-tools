@@ -3,32 +3,30 @@
 {% block title %}- {{ 'Nové zboží'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nové zboží'|trans }}{% endblock %}
 {% block product_calculated_prices %}
-	<fieldset class="row">
-		<div class="table-responsive mt-1">
-			<table class="table">
-				<thead>
-					<tr>
-						<th class="form-line__group-title">{{ inputPriceLabel() }}</th>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="form-line__group-title">{{ inputPriceLabel() }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="js-input-price-type-auto">
+					<td>{{ form_row(form.productData.price, {label: 'Základní cena'|trans, symbolAfterInput: currencySymbolDefault()}) }}</td>
+				</tr>
+				{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
+					<tr class="js-input-price-type-manual">
+						<th>{{ domainIcon(domainId) }} {{ getDomainName(domainId) }}</th>
 					</tr>
-				</thead>
-				<tbody>
-					<tr class="js-input-price-type-auto">
-						<td>{{ form_row(form.productData.price, {label: 'Základní cena'|trans, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolDefault()}) }}</td>
-					</tr>
-					{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
+					{% for pricingGroup in pricingGroups %}
 						<tr class="js-input-price-type-manual">
-							<th>{{ domainIcon(domainId) }} {{ getDomainName(domainId) }}</th>
+							<td>{{ form_row(form.manualInputPrices[pricingGroup.id], {label: pricingGroup.name, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}</td>
 						</tr>
-						{% for pricingGroup in pricingGroups %}
-							<tr class="js-input-price-type-manual">
-								<td>{{ form_row(form.manualInputPrices[pricingGroup.id], {label: pricingGroup.name, attr: { class: 'form-line--size-2' }, symbolAfterInput: currencySymbolByDomainId(domainId) }) }}</td>
-							</tr>
-						{% endfor %}
 					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</fieldset>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}
 
 {% block product_urls %}

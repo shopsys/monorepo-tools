@@ -9,33 +9,28 @@
 {% endblock %}
 
 {% block main_content %}
-	<div class="row">
 
-		<div class="col-xs-12 col-lg-10">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
-
-				<div class="wrap-group">
-					{{ form_id(sliderItem|default(null)) }}
-					{% block domain %}{% endblock %}
-					{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
-					{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
-				</div>
-
-				<div class="wrap-group">
-					{% block image %}{% endblock %}
-					{{ form_row(form.image, { label: 'Nahrát obrázek'|trans}) }}
-				</div>
-
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_save(sliderItem|default(null), form) }}
-						<a href="{{ url('admin_slider_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-					</div>
-				</div>
-			{{ form_end(form) }}
+		<div class="wrap-group">
+			{{ form_id(sliderItem|default(null)) }}
+			{% block domain %}{% endblock %}
+			{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
+			{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
 		</div>
 
-	</div>
+		<div class="wrap-group">
+			{% block image %}{% endblock %}
+			{{ form_row(form.image, { label: 'Nahrát obrázek'|trans}) }}
+		</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_slider_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_save(sliderItem|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
+
 {% endblock %}

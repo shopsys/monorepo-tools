@@ -4,43 +4,37 @@
 {% block h1 %}{{ 'Článek'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
+		<div class="wrap-group">
+			{{ form_id(article|default(null)) }}
 
-				<div class="wrap-group">
-					{{ form_id(article|default(null)) }}
+			{% block article_domain %}{% endblock %}
+			{% block article_url %}{% endblock %}
 
-					{% block article_domain %}{% endblock %}
-					{% block article_url %}{% endblock %}
-
-					{{ form_row(form.name, { label: 'Název'|trans}) }}
-					{{ form_row(form.text, { label: 'Text'|trans}) }}
-					<div class="form-line js-characters-counter">
-						{{ form_errors(form.seoTitle) }}
-						{{ form_label(form.seoTitle, 'SEO titulek'|trans) }}
-						{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
-						<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
-					</div>
-					<div class="form-line js-characters-counter">
-						{{ form_errors(form.seoMetaDescription) }}
-						{{ form_label(form.seoMetaDescription, 'SEO meta description'|trans) }}
-						{{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input'}}) }}
-						<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
-					</div>
-					{% block article_urls %}{% endblock %}
-				</div>
-
-				<div class="window-fixed-bar">
-					<div class="window-fixed-bar__buttons">
-						<a href="{{ url('admin_article_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-						{{ form_save(article|default(null), form) }}
-					</div>
-				</div>
-			{{ form_end(form) }}
+			{{ form_row(form.name, { label: 'Název'|trans}) }}
+			{{ form_row(form.text, { label: 'Text'|trans}) }}
+			<div class="form-line js-characters-counter">
+				{{ form_errors(form.seoTitle) }}
+				{{ form_label(form.seoTitle, 'SEO titulek'|trans) }}
+				{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+				<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
+			</div>
+			<div class="form-line js-characters-counter">
+				{{ form_errors(form.seoMetaDescription) }}
+				{{ form_label(form.seoMetaDescription, 'SEO meta description'|trans) }}
+				{{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input'}}) }}
+				<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
+			</div>
+			{% block article_urls %}{% endblock %}
 		</div>
 
-	</div>
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_save(article|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 {% endblock %}

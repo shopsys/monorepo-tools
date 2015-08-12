@@ -5,112 +5,108 @@
 
 {% block main_content %}
 
-	<div class="row">
+	<div id="js-mail-templates">
 
-		<div id="js-mail-templates" class="col-xs-12 col-lg-10">
+		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-
-			{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
-				<div class="toggle-container box-expand">
-					<h2 class ="toggle-headline box-expand__heading">
-						<span class="in-arrows in-arrows--down">
-							{{ name }}
-						</span>
-					</h2>
-					<div id="{{ template.vars.id }}" class="js-mail-template toggle-content display-none box-expand__hidden">
-						{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
-						{{ form_row(template.bccEmail, { label: 'Skrytá kopie'|trans}) }}
-						{{ form_row(template.body, { label: 'Text'|trans}) }}
-						{% if sendMailText is not null %}
-							{{ form_row(template.sendMail, { label: sendMailText }) }}
-						{% else %}
-							{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
-						{% endif %}
-
-						<div class="table-responsive grid_body mt-1">
-							<table class="table table-dark table-hover">
-								<thead>
-									<tr class="grid-row-titles">
-										<th>
-											{{ 'Použitelné proměnné'|trans }}
-											{% if variablesInfoText is not null %}
-												<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
-											{% endif %}
-										</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for key in variables %}
-										<tr class="grid-row-cells">
-											<td>
-												{{ key }}
-												{% if key in requiredVariables %}
-													<span class="form-input-required">*</span>
-												{% endif %}
-											</td>
-											<td>{{ variablesLabels[key] }}</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			{% endmacro%}
-
-			{{ form_start(form) }}
-			{{ form_errors(form) }}
-				{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
-					{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
-					{% if orderStatus.type == constant('TYPE_NEW', orderStatus) %}
-						{{ _self.mailTemplate(
-								orderStatus.name,
-								orderStatusTemplate,
-								orderStatusVariables,
-								[],
-								orderStatusVariablesLabels,
-								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
-								'Zasílat potvrzení o přijetí objednávky'|trans
-						) }}
+		{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
+			<div class="toggle-container box-expand">
+				<h2 class ="toggle-headline box-expand__heading">
+					<span class="in-arrows in-arrows--down">
+						{{ name }}
+					</span>
+				</h2>
+				<div id="{{ template.vars.id }}" class="js-mail-template toggle-content display-none box-expand__hidden">
+					{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
+					{{ form_row(template.bccEmail, { label: 'Skrytá kopie'|trans}) }}
+					{{ form_row(template.body, { label: 'Text'|trans}) }}
+					{% if sendMailText is not null %}
+						{{ form_row(template.sendMail, { label: sendMailText }) }}
 					{% else %}
-						{{ _self.mailTemplate(
-								orderStatus.name,
-								orderStatusTemplate,
-								orderStatusVariables,
-								[],
-								orderStatusVariablesLabels,
-								'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
-								'Zasílat e-mail o změně na tento stav'|trans
-						) }}
+						{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
 					{% endif %}
-				{% endfor %}
 
-				{{ _self.mailTemplate(
-					'Potvrzení registrace'|trans,
-					form.registrationTemplate,
-					registrationVariables,
-					[],
-					registrationVariablesLabels
-				) }}
-
-				{{ _self.mailTemplate(
-					'Zaslání zapomenutého hesla'|trans,
-					form.resetPasswordTemplate,
-					resetPasswordVariables,
-					resetPasswordRequiredVariables,
-					resetPasswordVariablesLabels
-				) }}
-
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
+					<div class="grid_body">
+						<table class="table">
+							<thead>
+								<tr class="grid-row-titles">
+									<th>
+										{{ 'Použitelné proměnné'|trans }}
+										{% if variablesInfoText is not null %}
+											<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+										{% endif %}
+									</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for key in variables %}
+									<tr class="grid-row-cells">
+										<td>
+											{{ key }}
+											{% if key in requiredVariables %}
+												<span class="form-input-required">*</span>
+											{% endif %}
+										</td>
+										<td>{{ variablesLabels[key] }}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
 					</div>
 				</div>
-			{{ form_end(form) }}
+			</div>
+		{% endmacro%}
 
-		</div>
+		{{ form_start(form) }}
+		{{ form_errors(form) }}
+			{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
+				{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
+				{% if orderStatus.type == constant('TYPE_NEW', orderStatus) %}
+					{{ _self.mailTemplate(
+							orderStatus.name,
+							orderStatusTemplate,
+							orderStatusVariables,
+							[],
+							orderStatusVariablesLabels,
+							'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
+							'Zasílat potvrzení o přijetí objednávky'|trans
+					) }}
+				{% else %}
+					{{ _self.mailTemplate(
+							orderStatus.name,
+							orderStatusTemplate,
+							orderStatusVariables,
+							[],
+							orderStatusVariablesLabels,
+							'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
+							'Zasílat e-mail o změně na tento stav'|trans
+					) }}
+				{% endif %}
+			{% endfor %}
+
+			{{ _self.mailTemplate(
+				'Potvrzení registrace'|trans,
+				form.registrationTemplate,
+				registrationVariables,
+				[],
+				registrationVariablesLabels
+			) }}
+
+			{{ _self.mailTemplate(
+				'Zaslání zapomenutého hesla'|trans,
+				form.resetPasswordTemplate,
+				resetPasswordVariables,
+				resetPasswordRequiredVariables,
+				resetPasswordVariablesLabels
+			) }}
+
+			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+				{% block fixed_bar_content %}
+					{{ form_widget(form.save, { label: 'Uložit změny ve všech šablonách'|trans}) }}
+				{% endblock %}
+			{% endembed %}
+		{{ form_end(form) }}
 
 	</div>
 

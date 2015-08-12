@@ -4,285 +4,269 @@
 {% block h1 %}{{ 'Karta zboží'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
 
-		<div class="col-xs-12 col-lg-10">
+	{{ form_start(form) }}
+		{% block product_variants %}{% endblock %}
+		<div id="product_edit_form_productData"></div>
+		{{ form_errors(form) }}
 
-			{{ form_start(form) }}
-				{% block product_variants %}{% endblock %}
-				<div id="product_edit_form_productData"></div>
-				{{ form_errors(form) }}
-
-				<div class="wrap-border wrap-border--small">
-					<div class="form-full">
-						<div class="form-full__title">
-							<div class="form-full__title__in">{{ 'Název'|trans }}</div>
-							<div class="form-full__title__buttons"></div>
+		<div class="wrap-border wrap-border--small">
+			<div class="form-full">
+				<div class="form-full__title">
+					<div class="form-full__title__in">{{ 'Název'|trans }}</div>
+					<div class="form-full__title__buttons"></div>
+				</div>
+				{% for locale, formName in form.productData.name %}
+					<div class="form-full__field">
+						<div class="form-full__field__item form-full__field__item--compulsory form-compulsory">
+							<span class="sprite sprite-star"></span>
 						</div>
-						{% for locale, formName in form.productData.name %}
-							<div class="form-full__field">
-								<div class="form-full__field__item form-full__field__item--compulsory form-compulsory">
-									<span class="sprite sprite-star"></span>
-								</div>
-								<div class="input__wrap">
-									{{ form_widget(formName, { attr: { class: 'input--flag form-full__field__input'} }) }}
-									<span class="input__flag">
-										{{ localeFlag(locale) }}
-									</span>
-								</div>
-								{{ form_errors(formName) }}
-							</div>
-						{% endfor %}
-					</div>
-				</div>
-
-				<div class="form-group wrap-border">
-
-					<div class="form-group__title">
-						{{ 'Základní nastavení'|trans }}
-					</div>
-
-
-					{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans }) }}
-
-					{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans }) }}
-
-					{{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
-
-					{{ form_id(product|default(null)) }}
-					{% block product_url %}{% endblock %}
-
-					{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}
-
-					{{ form_row(form.productData.brand, { label: 'Značka'|trans}) }}
-
-				</div>
-
-				<div class="form-group wrap-border">
-
-					<div class="form-group__title">
-						{{ 'Zobrazení a dostupnost'|trans }}
-					</div>
-
-					{{ form_row(form.productData.hidden, { label: 'Skrýt zboží'|trans }) }}
-
-					{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
-
-					{{ form_row(form.productData.sellingFrom, { label: 'Datum vložení'|trans }) }}
-
-					{{ form_row(form.productData.sellingTo, { label: 'Datum stažení'|trans }) }}
-
-					{% block product_calculated_hidden_info %}{% endblock %}
-
-					{{ form_row(form.productData.sellingDenied, { label: 'Vyřadit z prodeje'|trans,
-						icon: {
-							title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
-						} }) }}
-
-					{% block product_calculated_selling_denied_info %}{% endblock %}
-
-					{% block product_main_categories %}{% endblock %}
-
-
-					{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
-
-					{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans }) }}
-					<div class="js-product-using-stock form-line__js">
-						{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans }) }}
-						{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans }) }}
-						<div class="js-product-using-stock-and-alternate-availability">
-							{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans }) }}
+						<div class="input__wrap">
+							{{ form_widget(formName, { attr: { class: 'input--flag form-full__field__input'} }) }}
+							<span class="input__flag">
+								{{ localeFlag(locale) }}
+							</span>
 						</div>
+						{{ form_errors(formName) }}
 					</div>
-					<div class="js-product-not-using-stock form-line__js">
-						{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans }) }}
-					</div>
-
-				</div>
-
-				<div class="form-group wrap-border">
-
-					<div class="form-group__title">
-						{{ 'Ceny'|trans }}
-					</div>
-
-					{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans }) }}
-
-					{{ form_row(form.productData.vat, { label: 'DPH'|trans }) }}
-
-					{% block product_calculated_prices %}{% endblock %}
-
-				</div>
-
-				<div class="form-group wrap-border">
-					<div class="form-group__title">
-						{{ 'Popis'|trans }}
-					</div>
-
-					{% for domainId, descriptionForm in form.descriptions %}
-						<div class="form-line form-line--no-padd">
-							<div class="form-line__group">
-								<span class="form-line__group__image">
-									{{ domainIcon(domainId, 'large') }}
-								</span>
-								<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-							</div>
-						</div>
-						<div class="form-line">
-							<div class="form-line__line form-line__line--no-spance">
-								{{ form_widget(descriptionForm) }}
-							</div>
-						</div>
-
-					{% endfor %}
-				</div>
-
-
-				<div class="js-form-group wrap-border form-group">
-					<div class="form-group__title">
-						{{ 'Parametry'|trans }}
-
-						{{ form_errors(form.parameters) }}
-					</div>
-					<table class="table-form" id="product_edit_form_parameters">
-						<thead>
-							<tr class="table-form__row">
-								<th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parametr'|trans }}</th>
-								<th class="table-form__cell table-form__cell--del"></th>
-								<th class="table-form__cell table-form__cell--del-after">{{ 'Hodnota'|trans }}</th>
-								<th class="table-form__cell"></th>
-							</tr>
-						</thead>
-						<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
-							{% macro parameterRow(parameter, index) %}
-								<tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
-									<td class="table-form__cell table-form__cell--del-before">
-										{{ form_widget(parameter.parameter) }}
-									</td>
-									<td class="table-form__cell table-form__cell--del">
-										<span class="svg svg-arrow-thick-right"></span>
-									</td>
-									<td class="table-form__cell  table-form__cell--del-after">
-										{% for locale, valueTextLocaleForm in parameter.valueText %}
-											<div class="input__wrap">
-												{{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
-												<span class="input__flag">
-													{{ localeFlag(locale) }}
-												</span>
-												{{ form_errors(valueTextLocaleForm) }}
-											</div>
-										{% endfor %}
-									</td>
-									<td class="table-form__cell text-right">
-										<a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
-									</td>
-								</tr>
-							{% endmacro %}
-
-							{% for key, parameter in form.parameters %}
-								{{ _self.parameterRow(parameter, key) }}
-							{% else %}
-								{% do form.parameters.setRendered %}
-							{% endfor %}
-
-							<tr class="js-parameters-empty-item table-form__row">
-								<td class="table-form__cell" colspan="3">{{ 'Přidejte nějaké parametry'|trans }}</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<div class="wrap-group__inner">
-						<a href="#" class="js-parameters-item-add btn btn-primary"><i class="sprite sprite-plus"></i> {{ 'Přidat'|trans }}</a>
-					</div>
-				</div>
-
-				<div class="form-group wrap-border">
-					<div class="form-group__title">
-						{{ 'SEO'|trans }}
-					</div>
-					<div class="form-line">
-						<strong class="form-line__label">
-							{{ 'Titulek'|trans }}
-						</strong>
-						{% for domainId, seoTitleForm in form.seoTitles %}
-							<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
-								<div class="form-line__item form-line__item--left">
-									<div class="input__wrap">
-										{{ form_widget(seoTitleForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain' } }) }}
-										<span class="input__domain">
-											{{ domainIcon(domainId) }}
-										</span>
-									</div>
-								</div>
-
-								<div class="form-line__count">
-									<span class="form-line__count__val">
-										<span>42</span>
-									</span>
-									<span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60">
-										characters from 60 recomended for description
-									</span>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-
-					<div class="form-line">
-						<strong class="form-line__label">
-							{{ 'Meta description'|trans }}
-						</strong>
-
-						{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
-							<div class="form-line__side js-characters-counter">
-								<div class="form-line__item form-line__item--left">
-									{{ form_row(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input' } }) }}
-								</div>
-
-								<div class="form-line__item">
-									<div class="form-line__item__count">
-										<div class="js-characters-counter-info" data-recommended-length="155"></div>
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-
-					{% block product_urls %}{% endblock %}
-				</div>
-
-
-				<div class="form-group wrap-border">
-					<div class="form-group__title">
-						{{ 'Obrázky'|trans }}
-					</div>
-
-					{% block images %}{% endblock %}
-					{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek'|trans }) }}
-					{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
-				</div>
-
-				{{ form_row(form.accessories, { label: 'Příslušenství'|trans }) }}
-
-				<footer class="web__footer">
-					<div class="web__footer__in">
-						<div class="foot">
-							<div class="foot__item foot__item--2">
-								<div class="foot__item__in">
-									<div class="foot__item__in__cell text-right">
-										{{ form_save(product|default(null), form) }}
-										<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
-
-			{{ form_end(form) }}
+				{% endfor %}
+			</div>
 		</div>
 
-	</div>
+		<div class="form-group wrap-border">
+
+			<div class="form-group__title">
+				{{ 'Základní nastavení'|trans }}
+			</div>
 
 
+			{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans }) }}
+
+			{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans }) }}
+
+			{{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
+
+			{{ form_id(product|default(null)) }}
+			{% block product_url %}{% endblock %}
+
+			{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}
+
+			{{ form_row(form.productData.brand, { label: 'Značka'|trans}) }}
+
+		</div>
+
+		<div class="form-group wrap-border">
+
+			<div class="form-group__title">
+				{{ 'Zobrazení a dostupnost'|trans }}
+			</div>
+
+			{{ form_row(form.productData.hidden, { label: 'Skrýt zboží'|trans }) }}
+
+			{{ form_row(form.productData.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
+
+			{{ form_row(form.productData.sellingFrom, { label: 'Datum vložení'|trans }) }}
+
+			{{ form_row(form.productData.sellingTo, { label: 'Datum stažení'|trans }) }}
+
+			{% block product_calculated_hidden_info %}{% endblock %}
+
+			{{ form_row(form.productData.sellingDenied, { label: 'Vyřadit z prodeje'|trans,
+				icon: {
+					title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
+				} }) }}
+
+			{% block product_calculated_selling_denied_info %}{% endblock %}
+
+			{% block product_main_categories %}{% endblock %}
+
+
+			{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
+
+			{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans }) }}
+			<div class="js-product-using-stock form-line__js">
+				{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans }) }}
+				{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans }) }}
+				<div class="js-product-using-stock-and-alternate-availability">
+					{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans }) }}
+				</div>
+			</div>
+			<div class="js-product-not-using-stock form-line__js">
+				{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans }) }}
+			</div>
+
+		</div>
+
+		<div class="form-group wrap-border">
+
+			<div class="form-group__title">
+				{{ 'Ceny'|trans }}
+			</div>
+
+			{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans }) }}
+
+			{{ form_row(form.productData.vat, { label: 'DPH'|trans }) }}
+
+			{% block product_calculated_prices %}{% endblock %}
+
+		</div>
+
+		<div class="form-group wrap-border">
+			<div class="form-group__title">
+				{{ 'Popis'|trans }}
+			</div>
+
+			{% for domainId, descriptionForm in form.descriptions %}
+				<div class="form-line form-line--no-padd">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					</div>
+				</div>
+				<div class="form-line">
+					<div class="form-line__line form-line__line--no-spance">
+						{{ form_widget(descriptionForm) }}
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+
+
+		<div class="js-form-group wrap-border form-group">
+			<div class="form-group__title">
+				{{ 'Parametry'|trans }}
+
+				{{ form_errors(form.parameters) }}
+			</div>
+			<table class="table-form" id="product_edit_form_parameters">
+				<thead>
+					<tr class="table-form__row">
+						<th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parametr'|trans }}</th>
+						<th class="table-form__cell table-form__cell--del"></th>
+						<th class="table-form__cell table-form__cell--del-after">{{ 'Hodnota'|trans }}</th>
+						<th class="table-form__cell"></th>
+					</tr>
+				</thead>
+				<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
+					{% macro parameterRow(parameter, index) %}
+						<tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
+							<td class="table-form__cell table-form__cell--del-before">
+								{{ form_widget(parameter.parameter) }}
+							</td>
+							<td class="table-form__cell table-form__cell--del">
+								<span class="svg svg-arrow-thick-right"></span>
+							</td>
+							<td class="table-form__cell  table-form__cell--del-after">
+								{% for locale, valueTextLocaleForm in parameter.valueText %}
+									<div class="input__wrap">
+										{{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
+										<span class="input__flag">
+											{{ localeFlag(locale) }}
+										</span>
+										{{ form_errors(valueTextLocaleForm) }}
+									</div>
+								{% endfor %}
+							</td>
+							<td class="table-form__cell text-right">
+								<a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
+							</td>
+						</tr>
+					{% endmacro %}
+
+					{% for key, parameter in form.parameters %}
+						{{ _self.parameterRow(parameter, key) }}
+					{% else %}
+						{% do form.parameters.setRendered %}
+					{% endfor %}
+
+					<tr class="js-parameters-empty-item table-form__row">
+						<td class="table-form__cell" colspan="3">{{ 'Přidejte nějaké parametry'|trans }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="wrap-group__inner">
+				<a href="#" class="js-parameters-item-add btn btn-primary"><i class="sprite sprite-plus"></i> {{ 'Přidat'|trans }}</a>
+			</div>
+		</div>
+
+		<div class="form-group wrap-border">
+			<div class="form-group__title">
+				{{ 'SEO'|trans }}
+			</div>
+			<div class="form-line">
+				<strong class="form-line__label">
+					{{ 'Titulek'|trans }}
+				</strong>
+				{% for domainId, seoTitleForm in form.seoTitles %}
+					<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
+						<div class="form-line__item form-line__item--left">
+							<div class="input__wrap">
+								{{ form_widget(seoTitleForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain' } }) }}
+								<span class="input__domain">
+									{{ domainIcon(domainId) }}
+								</span>
+							</div>
+						</div>
+
+						<div class="form-line__count">
+							<span class="form-line__count__val">
+								<span>42</span>
+							</span>
+							<span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60">
+								characters from 60 recomended for description
+							</span>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			<div class="form-line">
+				<strong class="form-line__label">
+					{{ 'Meta description'|trans }}
+				</strong>
+
+				{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
+					<div class="form-line__side js-characters-counter">
+						<div class="form-line__item form-line__item--left">
+							{{ form_row(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input' } }) }}
+						</div>
+
+						<div class="form-line__item">
+							<div class="form-line__item__count">
+								<div class="js-characters-counter-info" data-recommended-length="155"></div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			{% block product_urls %}{% endblock %}
+		</div>
+
+
+		<div class="form-group wrap-border">
+			<div class="form-group__title">
+				{{ 'Obrázky'|trans }}
+			</div>
+
+			{% block images %}{% endblock %}
+			{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek'|trans }) }}
+			{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
+		</div>
+
+		{{ form_row(form.accessories, { label: 'Příslušenství'|trans }) }}
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_save(product|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+
+	{{ form_end(form) }}
 
 {% endblock %}

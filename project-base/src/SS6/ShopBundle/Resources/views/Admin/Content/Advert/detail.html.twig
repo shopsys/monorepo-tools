@@ -4,38 +4,32 @@
 {% block h1 %}{{ 'Reklama'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
-
-				<div class="wrap-group">
-					{{ form_id(advert|default(null)) }}
-					{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
-					{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
-					{{ form_row(form.type, { label: 'Typ'|trans}) }}
-					{{ form_row(form.positionName, { label: 'Plocha'|trans}) }}
-				</div>
-				<div class="wrap-group js-advert-type-content" data-type="code">
-					{{ form_row(form.code, { label: 'Kód'|trans}) }}
-				</div>
-				<div class="wrap-group js-advert-type-content" data-type="image">
-					{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
-					{% block image %}{% endblock %}
-					{{ form_row(form.image, { label: 'Nahrát nový obrázek'|trans}) }}
-				</div>
-				<div class="wrap-group">
-					{{ form_row(form.hidden, { label: 'Skrýt reklamu'|trans}) }}
-				</div>
-				<div class="window-fixed-bar">
-					<div class="window-fixed-bar__buttons">
-						<a href="{{ url('admin_advert_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-						{{ form_save(advert|default(null), form) }}
-					</div>
-				</div>
-			{{ form_end(form) }}
+		<div class="wrap-group">
+			{{ form_id(advert|default(null)) }}
+			{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
+			{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
+			{{ form_row(form.type, { label: 'Typ'|trans}) }}
+			{{ form_row(form.positionName, { label: 'Plocha'|trans}) }}
 		</div>
-
-	</div>
+		<div class="wrap-group js-advert-type-content" data-type="code">
+			{{ form_row(form.code, { label: 'Kód'|trans}) }}
+		</div>
+		<div class="wrap-group js-advert-type-content" data-type="image">
+			{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
+			{% block image %}{% endblock %}
+			{{ form_row(form.image, { label: 'Nahrát nový obrázek'|trans}) }}
+		</div>
+		<div class="wrap-group">
+			{{ form_row(form.hidden, { label: 'Skrýt reklamu'|trans}) }}
+		</div>
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_advert_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_save(advert|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 {% endblock %}

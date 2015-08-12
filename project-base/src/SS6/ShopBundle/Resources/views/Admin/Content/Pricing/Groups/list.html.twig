@@ -4,14 +4,9 @@
 {% block h1 %}{{ 'Cenové skupiny'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ render(controller('SS6ShopBundle:Admin/PricingGroup:settings')) }}
 
-			{{ render(controller('SS6ShopBundle:Admin/PricingGroup:settings')) }}
-
-			{{ gridView.render() }}
-		</div>
-	</div>
+	{{ gridView.render() }}
 {% endblock %}

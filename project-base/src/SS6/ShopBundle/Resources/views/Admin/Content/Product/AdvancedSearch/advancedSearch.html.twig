@@ -1,12 +1,12 @@
-<div class="mb-1 wrap-box form-inline mb-1 mt-1{{ isAdvancedSearchFormSubmitted ? ' js-advanced-search-enabled' : ' display-none'}}" id="js-advanced-search">
-	<div class="mb-1" id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
+<div class="wrap-box form-inline{{ isAdvancedSearchFormSubmitted ? ' js-advanced-search-enabled' : ' display-none'}}" id="js-advanced-search">
+	<div id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
 		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig' with {rulesForm: advancedSearchForm} %}
 	</div>
-	<button type="button" class="btn btn-primary mb-1" id="js-advanced-search-add-rule-button">
+	<button type="button" class="btn" id="js-advanced-search-add-rule-button">
 		<i class="sprite sprite-plus"></i> {{ 'Přidat'|trans }}
 	</button>
 	<br />
-	<a href="{{ url('admin_product_list') }}" class="btn btn-default">{{ 'Zrušit filtr'|trans }}</a>
-	<input type="submit" value="{{ 'Vyhledat'|trans }}" class="btn btn-primary">
+	<a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Zrušit filtr'|trans }}</a>
+	<input type="submit" value="{{ 'Vyhledat'|trans }}" class="btn">
 
 </div>
