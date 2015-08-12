@@ -53,14 +53,14 @@ class Article implements OrderableEntityInterface {
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
-	public $seoTitle;
+	private $seoTitle;
 
 	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
-	public $seoMetaDescription;
+	private $seoMetaDescription;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
