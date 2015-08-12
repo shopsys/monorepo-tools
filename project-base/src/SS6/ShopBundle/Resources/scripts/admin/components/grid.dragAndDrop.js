@@ -89,7 +89,7 @@
 
 	SS6.grid.dragAndDrop.unifyMultipleGrids = function () {
 		var $gridSaveButtons = $('.js-drag-and-drop-grid-submit');
-		var $gridsOnPage = $('.js-grid');
+		var $gridsOnPage = $('.js-grid[data-drag-and-drop-ordering-entity-class]');
 		var $saveAllButton = $('.js-drag-and-drop-grid-submit-all');
 
 		if ($saveAllButton.size() === 1) {
