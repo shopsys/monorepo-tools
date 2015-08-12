@@ -7,6 +7,10 @@
 	{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
 {% endblock %}
 
+{% block article_placement %}
+	{{ form_row(form.placement, { label: 'Umístění'|trans }) }}
+{% endblock %}
+
 {% block article_urls %}
 	{% do form.urls.setRendered %}
 {% endblock %}

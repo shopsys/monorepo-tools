@@ -63,6 +63,13 @@ class Article implements OrderableEntityInterface {
 	private $seoMetaDescription;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text")
+	 */
+	private $placement;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function __construct(ArticleData $articleData) {
@@ -71,6 +78,7 @@ class Article implements OrderableEntityInterface {
 		$this->text = $articleData->text;
 		$this->seoTitle = $articleData->seoTitle;
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
+		$this->placement = $articleData->placement;
 	}
 
 	/**
@@ -81,6 +89,7 @@ class Article implements OrderableEntityInterface {
 		$this->text = $articleData->text;
 		$this->seoTitle = $articleData->seoTitle;
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
+		$this->placement = $articleData->placement;
 	}
 
 	/**
@@ -123,6 +132,13 @@ class Article implements OrderableEntityInterface {
 	 */
 	public function getSeoMetaDescription() {
 		return $this->seoMetaDescription;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPlacement() {
+		return $this->placement;
 	}
 
 	/**
