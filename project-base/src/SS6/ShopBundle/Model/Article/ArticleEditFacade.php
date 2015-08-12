@@ -56,10 +56,11 @@ class ArticleEditFacade {
 	}
 
 	/**
+	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForMenuOnCurrentDomain() {
-		return $this->articleRepository->getArticlesForMenu($this->domain->getId());
+	public function getArticlesForPlacementOnCurrentDomain($placement) {
+		return $this->articleRepository->getArticlesForPlacement($this->domain->getId(), $placement);
 	}
 
 	/**

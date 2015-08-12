@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleRepository {
 
@@ -50,12 +49,13 @@ class ArticleRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForMenu($domainId) {
+	public function getArticlesForPlacement($domainId, $placement) {
 		$queryBuilder = $this->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
 			$domainId,
-			ArticlePlacementList::PLACEMENT_TOP_MENU
+			$placement
 		);
 
 		return $queryBuilder->getQuery()->execute();
