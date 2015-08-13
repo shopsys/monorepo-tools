@@ -1,6 +1,7 @@
 {% block grid %}
 <div class="js-grid" {% spaceless %}
 		data-total-count="{{ grid.totalCount }}"
+		data-grid-id="{{ grid.id|escape('html_attr') }}"
 		{% if grid.inlineEdit %}
 			data-inline-edit-service-name="{{ grid.inlineEditService.serviceName }}"
 			data-inline-edit-url-get-form="{{ url('admin_grid_getform') }}"
@@ -66,7 +67,7 @@
 {% block grid_titles %}
 	<thead>
 		<tr class="table-grid__row">
-			{% if grid.dragAndDrop %}
+			{% if grid.dragAndDrop or grid.multipleDragAndDrop %}
 				<th class="table-grid__cell"></th>
 			{% endif %}
 			{% if grid.enabledSelecting %}
@@ -124,9 +125,9 @@
 {% block grid_row %}
 	<tr class="table-grid__row {{ cycle(['odd', 'even'], loopIndex) }} js-grid-row"
 			{% if grid.inlineEdit and row is not null%} data-inline-edit-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
-			{% if grid.dragAndDrop %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
+			{% if grid.dragAndDrop or grid.multipleDragAndDrop %} data-drag-and-drop-grid-row-id="{{ grid.getRowId(row)|json_encode() }}"{% endif %}
 	>
-		{% if grid.dragAndDrop %}
+		{% if grid.dragAndDrop or grid.multipleDragAndDrop %}
 			<td class="table-grid__cell table-grid__cell--move">
 				<i class="c-move svg svg-move"></i>
 			</td>

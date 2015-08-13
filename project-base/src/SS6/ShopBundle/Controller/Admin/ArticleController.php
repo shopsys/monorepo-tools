@@ -18,6 +18,7 @@ use SS6\ShopBundle\Model\Article\ArticlePlacementList;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AdminBaseController {
@@ -216,6 +217,22 @@ class ArticleController extends AdminBaseController {
 	}
 
 	/**
+	 * @Route("/article/save_ordering/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 */
+	public function saveOrderingAction(Request $request) {
+		$this->em->transactional(
+			function () use ($request) {
+				$this->articleEditFacade->saveOrdering($request->get('rowIdsByGridId'));
+			}
+		);
+		$responseData = ['success' => true];
+
+		return new JsonResponse($responseData);
+	}
+
+	/**
 	 * @param string $articlePlacement
 	 * @return \SS6\ShopBundle\Model\Grid\Grid
 	 */
@@ -227,7 +244,7 @@ class ArticleController extends AdminBaseController {
 
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
-		$gridId = 'articleList-' . $articlePlacement;
+		$gridId = $articlePlacement;
 		$grid = $this->gridFactory->create($gridId, $dataSource);
 
 		$grid->addColumn('name', 'a.name', 'Název');
@@ -237,6 +254,7 @@ class ArticleController extends AdminBaseController {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
 
+		$grid->enableMultipleDragAndDrop();
 		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
 
 		return $grid;

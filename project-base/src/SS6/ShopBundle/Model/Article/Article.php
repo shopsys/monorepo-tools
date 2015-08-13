@@ -148,4 +148,11 @@ class Article implements OrderableEntityInterface {
 		$this->position = $position;
 	}
 
+	/**
+	 * @param string $placement
+	 */
+	public function setPlacement($placement) {
+		$this->placement = $placement;
+	}
+
 }

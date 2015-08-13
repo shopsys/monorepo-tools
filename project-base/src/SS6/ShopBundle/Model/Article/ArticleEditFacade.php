@@ -130,4 +130,18 @@ class ArticleEditFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param string[gridId][] $rowIdsByGridId
+	 */
+	public function saveOrdering(array $rowIdsByGridId) {
+		foreach ($rowIdsByGridId as $gridId => $rowIds) {
+			foreach ($rowIds as $position => $rowId) {
+				$article = $this->articleRepository->findById($rowId);
+				$article->setPosition($position);
+				$article->setPlacement($gridId);
+			}
+		}
+		$this->em->flush();
+	}
+
 }
