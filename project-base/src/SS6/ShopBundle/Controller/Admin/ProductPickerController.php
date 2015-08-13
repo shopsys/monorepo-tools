@@ -9,8 +9,9 @@ use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductPickerController extends AdminBaseController {
@@ -35,16 +36,23 @@ class ProductPickerController extends AdminBaseController {
 	 */
 	private $productListAdminFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 */
+	private $productEditFacade;
+
 	public function __construct(
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		ProductListAdminFacade $productListAdminFacade,
-		AdvancedSearchFacade $advancedSearchFacade
+		AdvancedSearchFacade $advancedSearchFacade,
+		ProductEditFacade $productEditFacade
 	) {
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->productListAdminFacade = $productListAdminFacade;
 		$this->advancedSearchFacade = $advancedSearchFacade;
+		$this->productEditFacade = $productEditFacade;
 	}
 
 	/**
@@ -107,7 +115,15 @@ class ProductPickerController extends AdminBaseController {
 			$queryBuilder = $this->productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
 		}
 
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
+			$queryBuilder,
+			'p.id',
+			function ($row) {
+				$product = $this->productEditFacade->getById($row['p']['id']);
+				$row['product'] = $product;
+				return $row;
+			}
+		);
 
 		$grid = $this->gridFactory->create('productPicker', $dataSource);
 		$grid->enablePaging();
