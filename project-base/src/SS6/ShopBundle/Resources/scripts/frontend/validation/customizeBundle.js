@@ -20,7 +20,7 @@
 	};
 
 	SS6.validation.isFormValid = function (form) {
-		return $(form).find('.form-input-error:first, .js-validation-errors-list li.js-validation-errors-message:first').size() === 0;
+		return $(form).find('.form-input-error:first').size() === 0;
 	};
 
 	SS6.validation.getErrorListClass = function (elementName) {

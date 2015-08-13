@@ -86,11 +86,9 @@
 			var inputId = SS6.validation.getInputIdByErrorList($errorList);
 
 			if (inputId !== undefined) {
-				var $label = $('label[for="' + inputId + '"]');
+				var $label = SS6.validation.findLabelByInputId(inputId);
 				if ($label.size() > 0) {
 					errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
-				} else {
-					errorsByLabel = SS6.validation.addLabelErrorsByClosestLabel(errorsByLabel, inputId, errorMessage);
 				}
 			}
 		});
@@ -98,21 +96,21 @@
 		return errorsByLabel;
 	};
 
-	SS6.validation.addLabelErrorsByClosestLabel = function(errorsByLabel, inputId, errorMessage) {
+	SS6.validation.findLabelByInputId = function (inputId) {
+		var $label = $('label[for="' + inputId + '"]');
 		var $input = $('#' + inputId);
 
-		var $label = SS6.validation.getClosestLabel($input, '.js-validation-label');
+		if ($label.size() === 0) {
+			$label = SS6.validation.getClosestLabel($input, '.js-validation-label');
+		}
 		if ($label.size() === 0) {
 			$label = SS6.validation.getClosestLabel($input, 'label');
 		}
 		if ($label.size() === 0) {
 			$label = SS6.validation.getClosestLabel($input, '.form-full__title');
 		}
-		if ($label.size() > 0) {
-			errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
-		}
 
-		return errorsByLabel;
+		return $label;
 	};
 
 	SS6.validation.getClosestLabel = function ($input, selector) {
