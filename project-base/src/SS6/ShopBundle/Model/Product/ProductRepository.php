@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
-use SS6\ShopBundle\Component\Fulltext\TsqueryFactory;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
@@ -19,6 +18,7 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
+use SS6\ShopBundle\Model\Product\Search\ProductSearchRepository;
 
 class ProductRepository {
 
@@ -43,22 +43,22 @@ class ProductRepository {
 	private $localization;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Fulltext\TsqueryFactory
+	 * @var \SS6\ShopBundle\Model\Product\Search\ProductSearchRepository
 	 */
-	private $tsqueryFactory;
+	private $productSearchRepository;
 
 	public function __construct(
 		EntityManager $em,
 		ProductFilterRepository $productFilterRepository,
 		QueryBuilderService $queryBuilderService,
 		Localization $localization,
-		TsqueryFactory $tsqueryFactory
+		ProductSearchRepository $productSearchRepository
 	) {
 		$this->em = $em;
 		$this->productFilterRepository = $productFilterRepository;
 		$this->queryBuilderService = $queryBuilderService;
 		$this->localization = $localization;
-		$this->tsqueryFactory = $tsqueryFactory;
+		$this->productSearchRepository = $productSearchRepository;
 	}
 
 	/**
@@ -144,6 +144,15 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param int $domainId
+	 */
+	public function addDomain(QueryBuilder $queryBuilder, $domainId) {
+		$queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
+		$queryBuilder->setParameter('domainId', $domainId);
+	}
+
+	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
@@ -189,8 +198,12 @@ class ProductRepository {
 		$searchText
 	) {
 		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
+
 		$this->addTranslation($queryBuilder, $locale);
-		$this->filterBySearchText($queryBuilder, $searchText, $domainId);
+		$this->addDomain($queryBuilder, $domainId);
+
+		$this->productSearchRepository->filterBySearchText($queryBuilder, $searchText);
+
 		return $queryBuilder;
 	}
 
@@ -201,20 +214,6 @@ class ProductRepository {
 	private function filterByCategory(QueryBuilder $queryBuilder, Category $category) {
 		$queryBuilder->join('p.categories', 'c', Join::WITH, 'c = :category');
 		$queryBuilder->setParameter('category', $category);
-	}
-
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string|null $searchText
-	 * @param int $domainId
-	 */
-	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText, $domainId) {
-		$queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
-		$queryBuilder->setParameter('domainId', $domainId);
-
-		$queryBuilder
-			->andWhere('TSQUERY(pd.fulltextTsvector, :tsquery) = TRUE')
-			->setParameter('tsquery', $this->tsqueryFactory->getTsqueryWithAndConditions($searchText));
 	}
 
 	/**
