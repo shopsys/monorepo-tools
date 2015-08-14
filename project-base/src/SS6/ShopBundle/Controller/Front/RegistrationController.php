@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use SS6\ShopBundle\Form\Front\Registration\ResetPasswordFormType;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class RegistrationController extends BaseController {
+class RegistrationController extends FrontBaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

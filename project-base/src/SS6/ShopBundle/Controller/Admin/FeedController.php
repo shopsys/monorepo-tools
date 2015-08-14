@@ -5,13 +5,13 @@ namespace SS6\ShopBundle\Controller\Admin;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Feed\FeedFacade;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 
-class FeedController extends BaseController {
+class FeedController extends AdminBaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
 
-class BestsellingProductController extends BaseController {
+class BestsellingProductController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade

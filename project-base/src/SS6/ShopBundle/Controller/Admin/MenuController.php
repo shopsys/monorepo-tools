@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Model\AdminNavigation\Menu;
 
-class MenuController extends BaseController {
+class MenuController extends AdminBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Menu

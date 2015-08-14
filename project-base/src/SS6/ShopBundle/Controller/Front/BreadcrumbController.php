@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 
-class BreadcrumbController extends BaseController {
+class BreadcrumbController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver

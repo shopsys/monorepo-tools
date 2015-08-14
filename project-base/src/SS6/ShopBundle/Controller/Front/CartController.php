@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
@@ -18,7 +18,7 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class CartController extends BaseController {
+class CartController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart

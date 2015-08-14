@@ -2,14 +2,14 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Login\LoginFormType;
 use SS6\ShopBundle\Model\Security\LoginService;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
-class LoginController extends BaseController {
+class LoginController extends FrontBaseController {
 
 	public function loginAction(Request $request) {
 		if ($this->isGranted(Roles::ROLE_CUSTOMER)) {

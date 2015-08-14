@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace SS6\ShopBundle\Component\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class BaseController extends Controller {
+class FrontBaseController extends Controller {
 
 	/**
 	 * @return \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender

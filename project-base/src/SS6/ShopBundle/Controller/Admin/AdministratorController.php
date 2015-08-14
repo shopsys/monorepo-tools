@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
 use SS6\ShopBundle\Model\Administrator\AdministratorFacade;
@@ -16,7 +16,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdministratorController extends BaseController {
+class AdministratorController extends AdminBaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

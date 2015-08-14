@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -28,7 +28,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class CustomerController extends BaseController {
+class CustomerController extends AdminBaseController {
 
 	const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 

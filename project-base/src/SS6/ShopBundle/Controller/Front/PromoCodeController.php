@@ -2,14 +2,14 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class PromoCodeController extends BaseController {
+class PromoCodeController extends FrontBaseController {
 
 	const PROMO_CODE_PARAMETER = 'code';
 

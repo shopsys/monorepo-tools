@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use Exception;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Error\ExceptionController;
 use SS6\ShopBundle\Component\Error\ExceptionListener;
-use SS6\ShopBundle\Controller\Front\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\FlattenException;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Tracy\BlueScreen;
 use Tracy\Debugger;
 
-class ErrorController extends BaseController {
+class ErrorController extends FrontBaseController {
 
 	/**
 	 * @param int $code

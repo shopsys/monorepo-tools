@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
 use SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -15,7 +15,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CurrencyController extends BaseController {
+class CurrencyController extends AdminBaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

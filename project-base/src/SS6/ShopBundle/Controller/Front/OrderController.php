@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class OrderController extends BaseController {
+class OrderController extends FrontBaseController {
 
 	const SESSION_CREATED_ORDER = 'created_order_id';
 

@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 
-class ArticleController extends BaseController {
+class ArticleController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade

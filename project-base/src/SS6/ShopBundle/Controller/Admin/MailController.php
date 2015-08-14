@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
@@ -15,7 +15,7 @@ use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use Symfony\Component\HttpFoundation\Request;
 
-class MailController extends BaseController {
+class MailController extends AdminBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory

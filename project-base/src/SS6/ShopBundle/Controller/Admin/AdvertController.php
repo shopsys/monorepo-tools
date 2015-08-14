@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -20,7 +20,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdvertController extends BaseController {
+class AdvertController extends AdminBaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

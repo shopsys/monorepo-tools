@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPriceLimitsFormType;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\HttpFoundation\Request;
 
-class TransportAndPaymentController extends BaseController {
+class TransportAndPaymentController extends AdminBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain

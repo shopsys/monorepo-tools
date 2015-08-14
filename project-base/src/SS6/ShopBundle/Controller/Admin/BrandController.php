@@ -4,9 +4,9 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\Product\Brand\BrandFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -18,7 +18,7 @@ use SS6\ShopBundle\Model\Product\Brand\BrandData;
 use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class BrandController extends BaseController {
+class BrandController extends AdminBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Translation\Translator

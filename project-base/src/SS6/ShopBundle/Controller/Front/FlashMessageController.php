@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 
-class FlashMessageController extends BaseController {
+class FlashMessageController extends FrontBaseController {
 
 	public function indexAction() {
 		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');

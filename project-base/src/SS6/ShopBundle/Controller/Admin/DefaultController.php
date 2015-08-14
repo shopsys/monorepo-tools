@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 
-class DefaultController extends BaseController {
+class DefaultController extends AdminBaseController {
 
 	/**
 	 * @Route("/dashboard/")

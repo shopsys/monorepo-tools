@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerController extends BaseController {
+class CustomerController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade

@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
 use SS6\ShopBundle\Model\Security\LoginService;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 
-class LoginController extends BaseController {
+class LoginController extends AdminBaseController {
 
 	/**
 	 * @Route("/", name="admin_login")

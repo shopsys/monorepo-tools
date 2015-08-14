@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 
-class BreadcrumbController extends BaseController {
+class BreadcrumbController extends AdminBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb

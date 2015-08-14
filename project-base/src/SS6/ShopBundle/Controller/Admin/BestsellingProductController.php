@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class BestsellingProductController extends BaseController {
+class BestsellingProductController extends AdminBaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Controller\Admin\BaseController;
+use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Form\Admin\Seo\SeoSettingFormTypeFactory;
 use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class SeoController extends BaseController {
+class SeoController extends AdminBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Seo\SeoSettingFormTypeFactory

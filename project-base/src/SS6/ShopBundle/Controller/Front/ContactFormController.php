@@ -2,15 +2,15 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Form\Front\Contact\ContactFormType;
 use SS6\ShopBundle\Model\ContactForm\ContactFormData;
 use SS6\ShopBundle\Model\ContactForm\ContactFormFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class ContactFormController extends BaseController {
+class ContactFormController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\ContactForm\ContactFormFacade

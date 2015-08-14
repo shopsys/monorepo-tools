@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Controller\Front\BaseController;
+use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
 use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
 use SS6\ShopBundle\Model\Category\Category;
@@ -14,7 +14,7 @@ use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use SS6\ShopBundle\Twig\RequestExtension;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductController extends BaseController {
+class ProductController extends FrontBaseController {
 
 	const SEARCH_TEXT_PARAMETER = 'q';
 	const PAGE_QUERY_PARAMETER = 'page';
