@@ -62,10 +62,10 @@
 				$grid.data('positionsChanged', false);
 				SS6.grid.dragAndDrop.highlightChanges($grid, false);
 
-				SS6.window({content: 'Pořadí bylo uloženo'});
+				SS6.window({content: SS6.translator.trans('Pořadí bylo uloženo')});
 			},
 			error: function () {
-				SS6.window({content: 'Pořadí se nepodařilo uložit'});
+				SS6.window({content: SS6.translator.trans('Pořadí se nepodařilo uložit')});
 			}
 		});
 		$grid.trigger('save');
