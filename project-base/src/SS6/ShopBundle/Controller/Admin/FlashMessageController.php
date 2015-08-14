@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 
-class FlashMessageController extends Controller {
+class FlashMessageController extends BaseController {
 
 	public function indexAction() {
 		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.admin');

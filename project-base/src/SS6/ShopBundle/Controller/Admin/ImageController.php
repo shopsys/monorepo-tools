@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ImageController extends Controller {
+class ImageController extends BaseController {
 
 	const ENTITY_NAME_PAYMENT = 'payment';
 	const ENTITY_NAME_PRODUCT = 'product';

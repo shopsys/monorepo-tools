@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -10,10 +11,9 @@ use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductPickerController extends Controller {
+class ProductPickerController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade

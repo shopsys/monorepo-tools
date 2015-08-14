@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class CategoryController extends Controller {
+class CategoryController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade

@@ -4,13 +4,13 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService;
 use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class GridController extends Controller {
+class GridController extends BaseController {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

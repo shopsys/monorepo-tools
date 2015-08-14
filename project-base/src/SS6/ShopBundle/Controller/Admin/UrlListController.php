@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Form\UrlListNewUrlType;
 use SS6\ShopBundle\Model\Domain\Domain;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class UrlListController extends Controller {
+class UrlListController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain

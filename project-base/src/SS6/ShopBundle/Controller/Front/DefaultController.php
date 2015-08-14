@@ -2,14 +2,14 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 use SS6\ShopBundle\Model\Slider\SliderItemFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller {
+class DefaultController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer

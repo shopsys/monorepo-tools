@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Controller\Admin\BaseController;
 use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class TranslationController extends Controller {
+class TranslationController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit

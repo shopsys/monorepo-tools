@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Processing\ImageGeneratorFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class ImageController extends Controller {
+class ImageController extends BaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageGeneratorFacade

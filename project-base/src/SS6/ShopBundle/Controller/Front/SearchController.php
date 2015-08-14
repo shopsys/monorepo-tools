@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Controller\Front\BaseController;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class SearchController extends Controller {
+class SearchController extends BaseController {
 
 	const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
 	const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
