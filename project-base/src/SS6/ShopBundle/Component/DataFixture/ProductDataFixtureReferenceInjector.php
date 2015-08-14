@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Component\DataFixture;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
@@ -64,6 +65,7 @@ class ProductDataFixtureReferenceInjector {
 	 */
 	public static function getDependencies() {
 		return [
+			FulltextTriggersDataFixture::class,
 			VatDataFixture::class,
 			AvailabilityDataFixture::class,
 			CategoryDataFixture::class,
