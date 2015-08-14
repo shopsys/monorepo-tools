@@ -29,7 +29,7 @@ class ActionColumn {
 	/**
 	 * @var string
 	 */
-	private $name;
+	private $title;
 
 	/**
 	 * @var string
@@ -64,7 +64,7 @@ class ActionColumn {
 	/**
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param string $type
-	 * @param string $name
+	 * @param string $title
 	 * @param string $route
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
@@ -73,7 +73,7 @@ class ActionColumn {
 		Router $router,
 		RouteCsrfProtector $routeCsrfProtector,
 		$type,
-		$name,
+		$title,
 		$route,
 		array $bindingRouteParams,
 		array $additionalRouteParams
@@ -81,7 +81,7 @@ class ActionColumn {
 		$this->router = $router;
 		$this->routeCsrfProtector = $routeCsrfProtector;
 		$this->type = $type;
-		$this->name = $name;
+		$this->title = $title;
 		$this->route = $route;
 		$this->bindingRouteParams = $bindingRouteParams;
 		$this->additionalRouteParams = $additionalRouteParams;
@@ -98,8 +98,8 @@ class ActionColumn {
 	/**
 	 * @return string
 	 */
-	public function getName() {
-		return $this->name;
+	public function getTitle() {
+		return $this->title;
 	}
 
 	/**
