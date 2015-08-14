@@ -6,8 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
+use SS6\ShopBundle\Component\Fulltext\TsqueryFactory;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
-use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Localization\Localization;
@@ -42,16 +42,23 @@ class ProductRepository {
 	 */
 	private $localization;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Fulltext\TsqueryFactory
+	 */
+	private $tsqueryFactory;
+
 	public function __construct(
 		EntityManager $em,
 		ProductFilterRepository $productFilterRepository,
 		QueryBuilderService $queryBuilderService,
-		Localization $localization
+		Localization $localization,
+		TsqueryFactory $tsqueryFactory
 	) {
 		$this->em = $em;
 		$this->productFilterRepository = $productFilterRepository;
 		$this->queryBuilderService = $queryBuilderService;
 		$this->localization = $localization;
+		$this->tsqueryFactory = $tsqueryFactory;
 	}
 
 	/**
@@ -205,14 +212,9 @@ class ProductRepository {
 		$queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
 		$queryBuilder->setParameter('domainId', $domainId);
 
-		$queryBuilder->andWhere(
-			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
-			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
-			. ' OR NORMALIZE(pd.description) LIKE NORMALIZE(:productDescription)'
-		);
-		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-		$queryBuilder->setParameter('productDescription', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
+		$queryBuilder
+			->andWhere('TSQUERY(pd.fulltextTsvector, :tsquery) = TRUE')
+			->setParameter('tsquery', $this->tsqueryFactory->getTsqueryWithAndConditions($searchText));
 	}
 
 	/**
