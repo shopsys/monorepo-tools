@@ -58,11 +58,25 @@ class Product extends AbstractTranslatableEntity {
 	private $catnum;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="tsvector", nullable=false)
+	 */
+	private $catnumTsvector;
+
+	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	private $partno;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="tsvector", nullable=false)
+	 */
+	private $partnoTsvector;
 
 	/**
 	 * @var string|null

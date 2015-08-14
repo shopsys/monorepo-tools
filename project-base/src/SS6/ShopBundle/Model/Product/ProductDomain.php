@@ -57,6 +57,20 @@ class ProductDomain {
 	private $description;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="tsvector", nullable=false)
+	 */
+	private $descriptionTsvector;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="tsvector", nullable=false)
+	 */
+	private $fulltextTsvector;
+
+	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
