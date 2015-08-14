@@ -4,31 +4,25 @@
 {% block h1 %}{{ 'Administrátor'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
+		<div class="wrap-group">
+			{{ form_id(administrator|default(null)) }}
 
-				<div class="wrap-group">
-					{{ form_id(administrator|default(null)) }}
-
-					{{ form_row(form.username, { label: 'Přihlašovací jméno'|trans}) }}
-					{{ form_row(form.realName, { label: 'Jméno'|trans}) }}
-					{{ form_row(form.email, { label: 'Email'|trans}) }}
-					{{ form_row(form.password.first, { label: 'Heslo'|trans}) }}
-					{{ form_row(form.password.second, { label: 'Heslo znovu'|trans}) }}
-					<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno"></i>
-				</div>
-
-				<div class="window-fixed-bar">
-					<div class="window-fixed-bar__buttons">
-						{{ form_save(administrator|default(null), form) }}
-						<a href="{{ url('admin_administrator_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-					</div>
-				</div>
-			{{ form_end(form) }}
+			{{ form_row(form.username, { label: 'Přihlašovací jméno'|trans}) }}
+			{{ form_row(form.realName, { label: 'Jméno'|trans}) }}
+			{{ form_row(form.email, { label: 'Email'|trans}) }}
+			{{ form_row(form.password.first, { label: 'Heslo'|trans}) }}
+			{{ form_row(form.password.second, { label: 'Heslo znovu'|trans}) }}
+			<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno"></i>
 		</div>
 
-	</div>
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_save(administrator|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 {% endblock %}

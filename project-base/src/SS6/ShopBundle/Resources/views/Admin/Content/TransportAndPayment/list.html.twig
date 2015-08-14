@@ -9,15 +9,12 @@
 {% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ render(controller('SS6ShopBundle:Admin/Transport:list')) }}
-			{{ render(controller('SS6ShopBundle:Admin/Payment:list')) }}
-		</div>
-	</div>
-	<div class="window-fixed-bar">
-		<div class="window-fixed-bar__buttons">
-			<button class="js-drag-and-drop-grid-submit-all btn btn-primary btn-disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
-		</div>
-	</div>
+	{{ render(controller('SS6ShopBundle:Admin/Transport:list')) }}
+	{{ render(controller('SS6ShopBundle:Admin/Payment:list')) }}
+
+	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% block fixed_bar_content %}
+			<button class="js-drag-and-drop-grid-submit-all btn btn--disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
+		{% endblock %}
+	{% endembed %}
 {% endblock %}

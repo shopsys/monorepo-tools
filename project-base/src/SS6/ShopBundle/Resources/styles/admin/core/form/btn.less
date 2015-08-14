@@ -19,7 +19,7 @@ button types
 	cursor: pointer;
 	font-weight: bold;
 	text-decoration: none;
-	font-size: 12px;
+	font-size: 14px;
 
 	.set-transition();
 	.transition(~"background, color");
@@ -33,11 +33,62 @@ button types
 		margin-right: 5px;
 		float: left;
 	}
+
+	&--block {
+		width: 100%;
+
+		text-align: center;
+	}
+
+	&--lg {
+		height: @btn-height + 5;
+		line-height: @btn-height - 10 + 5;
+	}
+
+	&--disabled {
+		background: @btn-disabled-bg;
+		color: @btn-disabled-color;
+		cursor: default;
+
+		&:hover {
+			background: @btn-disabled-bg;
+			color: @btn-disabled-color;
+		}
+	}
+
+	&--default {
+		background: @btn-disabled-bg;
+		color: @btn-disabled-color;
+		cursor: default;
+
+		&:hover {
+			background: @btn-disabled-color;
+			color: @btn-disabled-bg;
+		}
+	}
 }
 
 .btn-no-style {
 	padding: 0;
+	display: inline-block;
 
 	border: 0;
 	background: none;
+}
+
+.btn-link-style {
+	height: @btn-height;
+	padding: 5px;
+	line-height: @btn-height - 10;
+	display: inline-block;
+
+	border: 0;
+	background: none;
+	text-decoration: underline;
+	color: @color-link;
+
+	&:hover {
+		text-decoration: none;
+		color: @color-link-hover;
+	}
 }

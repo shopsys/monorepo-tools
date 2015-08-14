@@ -4,10 +4,6 @@
 {% block h1 %}{{ 'Přehled značek'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			<a href="{{ url('admin_brand_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou značku'|trans }}</a>
-			{{ gridView.render() }}
-		</div>
-	</div>
+	<a href="{{ url('admin_brand_new') }}" class="btn">{{ 'Vytvořit novou značku'|trans }}</a>
+	{{ gridView.render() }}
 {% endblock %}

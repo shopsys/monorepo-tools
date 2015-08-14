@@ -5,21 +5,16 @@
 
 {% block main_content %}
 
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
+	<a href="{{ url('admin_article_new') }}" class="btn">{{ 'Vytvořit nový článek'|trans }}</a>
 
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ gridView.render() }}
 
-			<a href="{{ url('admin_article_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nový článek'|trans }}</a>
+	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% block fixed_bar_content %}
+			<button class="js-drag-and-drop-grid-submit-all btn btn--disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
+		{% endblock %}
+	{% endembed %}
 
-			{{ gridView.render() }}
-
-			<div class="window-fixed-bar">
-				<div class="window-fixed-bar__buttons">
-					<button class="js-drag-and-drop-grid-submit-all btn btn-primary btn-disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
-				</div>
-			</div>
-		</div>
-	</div>
 {% endblock %}

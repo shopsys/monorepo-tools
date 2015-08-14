@@ -7,8 +7,10 @@
 		<label class="form-line__label">
 			{{ 'Nahraný obrázek'|trans }}:
 		</label>
-		<div class="form-line__field mb-1">
-			{{ image(advert, { size: 'original', height: 100 }) }}
+		<div class="form-line__side">
+			<div class="form-line__item">
+				{{ image(advert, { size: 'original', height: 100 }) }}
+			</div>
 		</div>
 	</div>
 {% endblock %}

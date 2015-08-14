@@ -4,16 +4,9 @@
 {% block h1 %}{{ 'Reklamní systém'|trans }}{% endblock %}
 
 {% block main_content %}
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
+	<a href="{{ url('admin_advert_new') }}" class="btn">{{ 'Vytvořit novou reklamu'|trans }}</a>
 
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-
-			<a href="{{ url('admin_advert_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou reklamu'|trans }}</a>
-
-			{{ gridView.render() }}
-		</div>
-	</div>
+	{{ gridView.render() }}
 {% endblock %}

@@ -4,224 +4,225 @@
 {% block h1 %}{{ 'Objednávka č.'|trans }} {{ order.number }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
 
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-				<div class="wrap-group">
-					<fieldset>
-						{{ form_id(order) }}
-						<div class="form-line">
-							<span class="form-line__text">
-								<a href="{{ findUrlByDomainId('front_customer_order_detail_unregistered', { urlHash: order.urlHash }, order.domainId) }}" target="_blank">
-									{{ findUrlByDomainId('front_customer_order_detail_unregistered', { urlHash: order.urlHash }, order.domainId) }}
-								</a>
-							</span>
+		<div class="wrap-group">
+			<fieldset>
+				{{ form_id(order) }}
+				<div class="form-line">
+					<div class="form-line__side">
+						<div class="form-line__item form-line__item--text">
+							<a href="{{ findUrlByDomainId('front_customer_order_detail_unregistered', { urlHash: order.urlHash }, order.domainId) }}" target="_blank">
+								{{ findUrlByDomainId('front_customer_order_detail_unregistered', { urlHash: order.urlHash }, order.domainId) }}
+							</a>
 						</div>
-						<div class="form-line">
-							<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-							{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
-						</div>
-						{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
-						{{ form_row(form.statusId, { label: 'Stav'|trans }) }}
-						<div class="form-line">
-							<label class="form-line__label">{{ 'Zákazník'|trans }}:</label>
-							<span class="form-line__text">
-								{% if order.customer is null%}
-									{{ 'neregistrovaný zákazník'|trans }}
-								{% else %}
-									<a href="{{ path('admin_customer_edit', { id: order.customer.id }) }}" target="_blank">
-										{% if order.customer.billingAddress.companyCustomer %}
-											{{ order.customer.billingAddress.companyName }} -
-										{% endif %}
-										{{ order.customer.lastName }}
-										{{ order.customer.firstName }}
-										<i class="svg svg-forward-page"></i>
-									</a>
-								{% endif %}
-							</span>
-						</div>
-						{% if order.createdAsAdministrator is not null or order.createdAsAdministratorName is not null %}
-							<div class="form-line">
-								<label class="form-line__label">{{ 'Vytvořeno administrátorem'|trans }}:</label>
-								<span class="form-line__text">
-									{% if order.createdAsAdministrator is null%}
-										{{ order.createdAsAdministratorName }}
-									{% else %}
-										{{ order.createdAsAdministrator.realName }}
-									{% endif %}
-								</span>
-							</div>
-						{% endif %}
-					</fieldset>
-				</div>
-
-				<div class="wrap-group">
-					<h2 class="mt-0">{{ 'Osobní údaje'|trans }}</h2>
-					<fieldset>
-						{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
-						{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
-						{{ form_row(form.email, { label: 'E-mail'|trans }) }}
-						{{ form_row(form.telephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-2' } }) }}
-					</fieldset>
-				</div>
-
-				<div class="wrap-group">
-					<h2 class="mt-0">{{ 'Firemní údaje'|trans }}</h2>
-					<fieldset>
-						{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
-						{{ form_row(form.companyNumber, { label: 'IČ'|trans, attr: { class: 'form-line--size-3' } }) }}
-						{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans, attr: { class: 'form-line--size-3' } }) }}
-					</fieldset>
-				</div>
-
-				<div class="wrap-group">
-					<h2 class="mt-0">{{ 'Fakturační údaje'|trans }}</h2>
-					<fieldset>
-						{{ form_row(form.street, { label: 'Ulice'|trans }) }}
-						{{ form_row(form.city, { label: 'Město'|trans }) }}
-						{{ form_row(form.postcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
-					</fieldset>
-				</div>
-
-				<div class="wrap-group">
-					<h2 class="mt-0">{{ 'Doručovací adresa'|trans }}</h2>
-					<fieldset>
-						{{ form_row(form.deliveryAddressSameAsBillingAddress, {
-							attr: { class: 'js-checkbox-toggle js-checkbox-toggle--inverted', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-							label: 'Doručovací adresa je stejná jako fakturační'|trans})
-						}}
-						<div id="js-delivery-address-fields">
-							{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
-							{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
-							{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
-							{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
-							{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
-							{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
-						</div>
-					</fieldset>
-				</div>
-
-				<div class="wrap-group">
-					<h2 class="mt-0">{{ 'Poznámka'|trans }}</h2>
-					<fieldset>
-						{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
-					</fieldset>
-				</div>
-
-				<div class="wrap-group form-group">
-					<h2 class="mt-0">{{ 'Položky objednávky'|trans }}</h2>
-					<fieldset>
-						{% if form.items is not empty %}
-							<div class="table-responsive">
-								{{ form_errors(form.items) }}
-								<table id="order_items" class="table table-striped table-hover">
-									<thead>
-										<tr>
-											<th class="table-col-30">{{ 'Název'|trans }}</th>
-											<th class="table-col-5">{{ 'Kat. číslo'|trans }}</th>
-											<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
-											<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
-											<th class="table-col-10 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
-											<th class="table-col-15 text-right text-nowrap">{{ 'Celkem s DPH'|trans }}</th>
-											<th class="table-col-15 text-right text-nowrap">{{ 'Celkem bez DPH'|trans }}</th>
-											<th ></th>
-										</tr>
-									</thead>
-									<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
-										{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
-											<tr class="js-order-item" data-index="{{ orderItemId }}">
-												<td>
-													{% if productItem and productItem.product %}
-														{{ form_widget(orderItemForm.name, { type: 'hidden' }) }}
-														{% do orderItemForm.name.setRendered() %}
-														<span class="js-order-item-name">{{ productItem.name }}</span>
-														<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
-															<i class="svg svg-forward-page"></i>
-														</a>
-													{% elseif productItem and not productItem.product %}
-														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-														<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
-													{% else %}
-														{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-													{% endif %}
-												</td>
-												<td>
-													{% if productItem and productItem.product %}
-														{{ productItem.product.catnum }}
-														{{ form_widget(orderItemForm.catnum, {type: 'hidden'}) }}
-														{% do orderItemForm.catnum.setRendered() %}
-													{% else %}
-														{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}
-													{% endif %}
-												</td>
-												<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-												<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
-												<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-												<td class="text-right text-middle">
-													{% if orderItemTotalPricesById[orderItemId] is defined %}
-														{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
-													{% endif %}
-												</td>
-												<td class="text-right text-middle">
-													{% if orderItemTotalPricesById[orderItemId] is defined %}
-														{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
-													{% endif %}
-												</td>
-												<td class="table-col-5 table-edit__body__cell text-center">
-													<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
-												</td>
-											</tr>
-										{% endmacro %}
-
-										{% for productItem in order.productItems %}
-											{{ _self.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
-										{% endfor %}
-
-										{% for orderItemId, orderItemForm in form.items %}
-											{% if not orderItemForm.rendered %}
-												{{ _self.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
-											{% endif %}
-										{% endfor %}
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="8">
-												<a id="js-order-item-add" href="#" class="btn btn-primary">
-													<i class="sprite sprite-plus"></i>
-													{{ 'Přidat položku'|trans }}
-												</a>
-											</td>
-										</tr>
-										<tr>
-											<th colspan="5">{{ 'Celkem'|trans }}:</th>
-											<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
-											<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
-											<th></th>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						{% else %}
-							{{ form_widget(form.items, { type: 'hidden' }) }}
-							<div class="in-message in-message--info in-message--static">
-								{{ 'Objednávka neobsahuje žádné položky.'|trans }}
-							</div>
-						{% endif %}
-					</fieldset>
-				</div>
-
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
-						<a href="{{ url('admin_order_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
 					</div>
 				</div>
-			{{ form_end(form) }}
-
+				<div class="form-line">
+					<label class="form-line__label">{{ 'Doména'|trans }}:</label>
+					{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
+				</div>
+				{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
+				{{ form_row(form.statusId, { label: 'Stav'|trans }) }}
+				<div class="form-line">
+					<label class="form-line__label">{{ 'Zákazník'|trans }}:</label>
+					<div class="form-line__side">
+						<div class="form-line__item form-line__item--text">
+							{% if order.customer is null%}
+								{{ 'neregistrovaný zákazník'|trans }}
+							{% else %}
+								<a href="{{ path('admin_customer_edit', { id: order.customer.id }) }}" target="_blank">
+									{% if order.customer.billingAddress.companyCustomer %}
+										{{ order.customer.billingAddress.companyName }} -
+									{% endif %}
+									{{ order.customer.lastName }}
+									{{ order.customer.firstName }}
+									<i class="svg svg-forward-page"></i>
+								</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				{% if order.createdAsAdministrator is not null or order.createdAsAdministratorName is not null %}
+					<div class="form-line">
+						<label class="form-line__label">{{ 'Vytvořeno administrátorem'|trans }}:</label>
+						<div class="form-line__side">
+							<div class="form-line__item form-line__item--text">
+								{% if order.createdAsAdministrator is null%}
+									{{ order.createdAsAdministratorName }}
+								{% else %}
+									{{ order.createdAsAdministrator.realName }}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</fieldset>
 		</div>
-	</div>
+
+		<div class="wrap-group">
+			<h2>{{ 'Osobní údaje'|trans }}</h2>
+			<fieldset>
+				{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
+				{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
+				{{ form_row(form.email, { label: 'E-mail'|trans }) }}
+				{{ form_row(form.telephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-2' } }) }}
+			</fieldset>
+		</div>
+
+		<div class="wrap-group">
+			<h2>{{ 'Firemní údaje'|trans }}</h2>
+			<fieldset>
+				{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
+				{{ form_row(form.companyNumber, { label: 'IČ'|trans, attr: { class: 'form-line--size-3' } }) }}
+				{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans, attr: { class: 'form-line--size-3' } }) }}
+			</fieldset>
+		</div>
+
+		<div class="wrap-group">
+			<h2>{{ 'Fakturační údaje'|trans }}</h2>
+			<fieldset>
+				{{ form_row(form.street, { label: 'Ulice'|trans }) }}
+				{{ form_row(form.city, { label: 'Město'|trans }) }}
+				{{ form_row(form.postcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+			</fieldset>
+		</div>
+
+		<div class="wrap-group">
+			<h2>{{ 'Doručovací adresa'|trans }}</h2>
+			<fieldset>
+				{{ form_row(form.deliveryAddressSameAsBillingAddress, {
+					attr: { class: 'js-checkbox-toggle js-checkbox-toggle--inverted', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+					label: 'Doručovací adresa je stejná jako fakturační'|trans})
+				}}
+				<div id="js-delivery-address-fields">
+					{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
+					{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
+					{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+					{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
+					{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
+					{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+				</div>
+			</fieldset>
+		</div>
+
+		<div class="wrap-group">
+			<h2>{{ 'Poznámka'|trans }}</h2>
+			<fieldset>
+				{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
+			</fieldset>
+		</div>
+
+		<div class="wrap-group form-group">
+			<h2>{{ 'Položky objednávky'|trans }}</h2>
+			<fieldset>
+				{% if form.items is not empty %}
+					<div class="table-responsive">
+						{{ form_errors(form.items) }}
+						<table id="order_items" class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th class="table-col-30">{{ 'Název'|trans }}</th>
+									<th class="table-col-5">{{ 'Kat. číslo'|trans }}</th>
+									<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
+									<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
+									<th class="table-col-10 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
+									<th class="table-col-15 text-right text-nowrap">{{ 'Celkem s DPH'|trans }}</th>
+									<th class="table-col-15 text-right text-nowrap">{{ 'Celkem bez DPH'|trans }}</th>
+									<th ></th>
+								</tr>
+							</thead>
+							<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
+								{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
+									<tr class="js-order-item" data-index="{{ orderItemId }}">
+										<td>
+											{% if productItem and productItem.product %}
+												{{ form_widget(orderItemForm.name, { type: 'hidden' }) }}
+												{% do orderItemForm.name.setRendered() %}
+												<span class="js-order-item-name">{{ productItem.name }}</span>
+												<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
+													<i class="svg svg-forward-page"></i>
+												</a>
+											{% elseif productItem and not productItem.product %}
+												{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+												<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
+											{% else %}
+												{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+											{% endif %}
+										</td>
+										<td>
+											{% if productItem and productItem.product %}
+												{{ productItem.product.catnum }}
+												{{ form_widget(orderItemForm.catnum, {type: 'hidden'}) }}
+												{% do orderItemForm.catnum.setRendered() %}
+											{% else %}
+												{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}
+											{% endif %}
+										</td>
+										<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+										<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
+										<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+										<td class="text-right text-middle">
+											{% if orderItemTotalPricesById[orderItemId] is defined %}
+												{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
+											{% endif %}
+										</td>
+										<td class="text-right text-middle">
+											{% if orderItemTotalPricesById[orderItemId] is defined %}
+												{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
+											{% endif %}
+										</td>
+										<td class="table-col-5 table-edit__body__cell text-center">
+											<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
+										</td>
+									</tr>
+								{% endmacro %}
+
+								{% for productItem in order.productItems %}
+									{{ _self.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+								{% endfor %}
+
+								{% for orderItemId, orderItemForm in form.items %}
+									{% if not orderItemForm.rendered %}
+										{{ _self.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+									{% endif %}
+								{% endfor %}
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="8">
+										<a id="js-order-item-add" href="#" class="btn">
+											<i class="sprite sprite-plus"></i>
+											{{ 'Přidat položku'|trans }}
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="5">{{ 'Celkem'|trans }}:</th>
+									<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
+									<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
+									<th></th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				{% else %}
+					{{ form_widget(form.items, { type: 'hidden' }) }}
+					<div class="in-message in-message--info in-message--static">
+						{{ 'Objednávka neobsahuje žádné položky.'|trans }}
+					</div>
+				{% endif %}
+			</fieldset>
+		</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_order_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 
 {% endblock %}

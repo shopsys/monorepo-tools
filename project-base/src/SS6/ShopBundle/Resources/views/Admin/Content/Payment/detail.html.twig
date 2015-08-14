@@ -9,44 +9,38 @@
 {% endblock %}
 
 {% block main_content %}
-	<div class="row">
 
-		<div class="col-xs-12 col-lg-10">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
+		<div class="wrap-group">
+			{{ form_id(paymentDetail.payment|default(null)) }}
 
-				<div class="wrap-group">
-					{{ form_id(paymentDetail.payment|default(null)) }}
-
-					{{ form_row(form.paymentData.name, { label: 'Název'|trans}) }}
-					{{ form_row(form.paymentData.domains, { label: 'Doména'|trans }) }}
-					{{ form_row(form.paymentData.hidden, { label: 'Skryté'|trans, attr: {class: 'form-line--between'} }) }}
-					{{ form_row(form.paymentData.czkRounding, {
-						label: 'Objednávku v CZK zaokrouhlit na celé koruny'|trans,
-						attr: { class: 'form-line--between' },
-						icon: { title: 'Do objednávky bude přidána zaokrouhlovací položka s 0% DPH. Používá se pro platbu v hotovosti.'|trans }
-					}) }}
-					{{ form_row(form.paymentData.vat, { label: 'DPH'|trans}) }}
-					{% block payment_base_prices %}{% endblock %}
-					{{ form_row(form.paymentData.transports, { label: 'Dopravy'|trans, empty_message: 'Musíte nejdřív nějakou dopravu vytvořit.'}) }}
-					{{ form_row(form.paymentData.description, { label: 'Popis'|trans}) }}
-					{{ form_row(form.paymentData.instructions, { label: 'Pokyny'|trans}) }}
-				</div>
-
-				<div class="wrap-group">
-					{% block image %}{% endblock %}
-					{{ form_row(form.paymentData.image, { label: 'Nahrát obrázek'|trans}) }}
-				</div>
-
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_save(paymentDetail|default(null), form) }}
-						<a href="{{ url('admin_transportandpayment_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-					</div>
-				</div>
-			{{ form_end(form) }}
+			{{ form_row(form.paymentData.name, { label: 'Název'|trans}) }}
+			{{ form_row(form.paymentData.domains, { label: 'Doména'|trans }) }}
+			{{ form_row(form.paymentData.hidden, { label: 'Skryté'|trans, attr: {class: 'form-line--between'} }) }}
+			{{ form_row(form.paymentData.czkRounding, {
+				label: 'Objednávku v CZK zaokrouhlit na celé koruny'|trans,
+				attr: { class: 'form-line--between' },
+				icon: { title: 'Do objednávky bude přidána zaokrouhlovací položka s 0% DPH. Používá se pro platbu v hotovosti.'|trans }
+			}) }}
+			{{ form_row(form.paymentData.vat, { label: 'DPH'|trans}) }}
+			{% block payment_base_prices %}{% endblock %}
+			{{ form_row(form.paymentData.transports, { label: 'Dopravy'|trans, empty_message: 'Musíte nejdřív nějakou dopravu vytvořit.'}) }}
+			{{ form_row(form.paymentData.description, { label: 'Popis'|trans}) }}
+			{{ form_row(form.paymentData.instructions, { label: 'Pokyny'|trans}) }}
 		</div>
 
-	</div>
+		<div class="wrap-group">
+			{% block image %}{% endblock %}
+			{{ form_row(form.paymentData.image, { label: 'Nahrát obrázek'|trans}) }}
+		</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_save(paymentDetail|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 {% endblock %}

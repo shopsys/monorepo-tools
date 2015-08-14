@@ -6,7 +6,11 @@
 {% block domain %}
 	<div class="form-line">
 		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-		<input type="text" value="{{ getDomainName(sliderItem.domainId) }}" class="form-control form-line__field" readonly="readonly" />
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<input type="text" value="{{ getDomainName(sliderItem.domainId) }}" class="input" readonly="readonly" />
+			</div>
+		</div>
 	</div>
 {% endblock %}
 
@@ -15,7 +19,7 @@
 		<label class="form-line__label">
 			{{ 'Obrázek'|trans }}:
 		</label>
-		<div class="form-line__field mb-1">
+		<div class="form-line__line">
 			{{ image(sliderItem, { size: 'original', height: 100 }) }}
 		</div>
 	</div>

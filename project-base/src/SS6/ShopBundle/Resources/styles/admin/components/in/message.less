@@ -35,13 +35,24 @@ Alert, info, success atc messages box
 		font-style: normal;
 		font-size: 14px;
 		text-align: center;
+		text-decoration: none;
+
+		.in-message--block & {
+			top: 2px;
+		}
 	}
 
 	&__list {
 		.reset-ul();
 	}
 
-	&--alert, &--error {
+	&--block {
+		display: block;
+		margin-bottom: 10px;
+		position: relative;
+	}
+
+	&--error {
 		color: @color-message-alert-text;
 		background: @color-message-alert;
 	}
@@ -54,6 +65,11 @@ Alert, info, success atc messages box
 	&--info {
 		color: @color-message-info-text;
 		background: @color-message-info;
+	}
+
+	&--success {
+		color: @color-message-success-text;
+		background: @color-message-success;
 	}
 
 	&--pin {

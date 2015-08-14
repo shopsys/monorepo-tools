@@ -6,7 +6,7 @@
 
 {% block content %}
 	{% if error %}
-		<p class="in-message in-message--danger in-message--static">{{ error }}</p>
+		<p class="in-message in-message--danger">{{ error }}</p>
 	{% endif %}
 
 	{{ form_start(form, {attr: {class: 'box-login'}}) }}
@@ -14,13 +14,23 @@
 
 		<h1 class="box-login__heading">{{ 'Administrace'|trans }}</h1>
 
-		{{ form_errors(form.username) }}
-		{{ form_widget(form.username, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
+		<div class="box-login__row">
+			<span class="box-login__error">
+				{{ form_errors(form.username) }}
+			</span>
+			{{ form_widget(form.username, {attr: {placeholder: 'Uživatelské jméno'|trans, class: 'box-login__input'}}) }}
+		</div>
 
-		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+		<div class="box-login__row">
+			<span class="box-login__error">
+				{{ form_errors(form.password) }}
+			</span>
+			{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans, class: 'box-login__input'}}) }}
+		</div>
 
-		{{ form_widget(form.login, {label: 'Přihlásit'|trans, attr: {class: 'btn-lg btn-block'}}) }}
+		<div class="box-login__row box-login__row--btn">
+			{{ form_widget(form.login, {label: 'Přihlásit'|trans, attr: {class: 'btn--block btn--lg'}}) }}
+		</div>
 
 	{{ form_end(form) }}
 

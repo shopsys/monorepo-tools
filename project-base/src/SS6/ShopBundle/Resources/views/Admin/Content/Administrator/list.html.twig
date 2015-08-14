@@ -4,14 +4,7 @@
 {% block h1 %}{{ 'Přehled administrátorů'|trans }}{% endblock %}
 
 {% block main_content %}
+	<a href="{{ url('admin_administrator_new') }}" class="btn">{{ 'Vytvořit nového administrátora'|trans }}</a>
 
-
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-
-			<a href="{{ url('admin_administrator_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nového administrátora'|trans }}</a>
-
-			{{ gridView.render() }}
-		</div>
-	</div>
+	{{ gridView.render() }}
 {% endblock %}

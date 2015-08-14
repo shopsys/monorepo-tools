@@ -29,7 +29,7 @@ body {
 		padding-top: @height-header;
 		padding-bottom: @height-footer;
 		position: relative;
-		min-height: 95vh;
+		min-height: 100vh;
 		padding-left: @width-panel;
 
 		background: @bg-page;
@@ -45,6 +45,14 @@ body {
 			content: '';
 
 			background: @color-a;
+		}
+
+		&--blank {
+			padding-left: 0;
+
+			&:after {
+				display: none;
+			}
 		}
 	}
 
@@ -64,25 +72,6 @@ body {
 		padding: 0 30px 30px;
 		position: relative;
 	}
-
-	&__footer {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 2000;
-
-		border: 1px solid @color-border-dark;
-
-		&__in {
-			width: 100%;
-			margin: 0 auto;
-			min-width: 768px;
-			height: @height-footer;
-
-			background: @color-f;
-		}
-	}
 }
 
 @media @query-xl {
@@ -99,12 +88,6 @@ body {
 			left: 50%;
 			margin-left: -@width-web / 2;
 			z-index: 1000;
-		}
-
-		&__footer {
-			&__in {
-				width: @width-web;
-			}
 		}
 	}
 }

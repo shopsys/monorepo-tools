@@ -24,7 +24,7 @@
 {% block grid_value_cell_id_select %}
 	{%- if isMultiple %}
 		<a
-			class="btn btn-default btn-xs btn-iconic-small js-products-picker-window-add-product"
+			class="btn btn--default js-products-picker-window-add-product"
 			href="#"
 			data-product-picker-instance-id="{{ jsInstanceId }}"
 			data-product-picker-product-id="{{ row.p.id }}"
@@ -35,7 +35,7 @@
 		</a>
 	{% else %}
 		<a
-			class="btn btn-default btn-xs btn-iconic-small"
+			class="btn btn--default"
 			href="#"
 			onclick="SS6.productPicker.selectProduct('{{ parentInputId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
 		>

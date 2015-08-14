@@ -4,32 +4,28 @@
 {% block h1 %}{{ 'Nejprodávanější zboží kategorie'|trans }} {{ categoryName }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-				<div class="js-form-group">
-					{{ form_errors(form.bestsellingProducts) }}
+		<div class="js-form-group">
+			{{ form_errors(form.bestsellingProducts) }}
 
-					<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
-						{% for productForm in form.bestsellingProducts %}
-							<div class="form-line js-bestselling-product-container">
-								<label class="col-xs-1">{{ loop.index }}</label>
-								{{ form_widget(productForm) }}
-							</div>
-						{% endfor %}
+			<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
+				{% for productForm in form.bestsellingProducts %}
+					<div class="form-line js-bestselling-product-container">
+						<label>{{ loop.index }}</label>
+						{{ form_widget(productForm) }}
 					</div>
-				</div>
-
-				<div class="window-fixed-bar">
-					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, {label: 'Uložit'|trans}) }}
-						<a href="{{ url('admin_bestsellingproduct_list') }}" class="btn btn-default">{{ 'Zpět na přehled'|trans }}</a>
-					</div>
-				</div>
-			{{ form_end(form) }}
-
+				{% endfor %}
+			</div>
 		</div>
-	</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, {label: 'Uložit'|trans}) }}
+				<a href="{{ url('admin_bestsellingproduct_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
+
 {% endblock %}

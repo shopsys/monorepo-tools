@@ -4,21 +4,17 @@
 {% block h1 %}{{ 'Přehled objednávek'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(quickSearchForm) }}
+	{{ form_start(quickSearchForm) }}
 
-			<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
-				{% include '@SS6Shop/Admin/Content/Order/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
-			</div>
-			{% include '@SS6Shop/Admin/Content/Order/AdvancedSearch/advancedSearch.html.twig'
-			with {
-				advancedSearchForm: advancedSearchForm,
-				isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-			}
-			%}
-			{{ gridView.render() }}
-			{{ form_end(quickSearchForm) }}
-		</div>
+	<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
+		{% include '@SS6Shop/Admin/Content/Order/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 	</div>
+	{% include '@SS6Shop/Admin/Content/Order/AdvancedSearch/advancedSearch.html.twig'
+	with {
+		advancedSearchForm: advancedSearchForm,
+		isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
+	}
+	%}
+	{{ gridView.render() }}
+	{{ form_end(quickSearchForm) }}
 {% endblock %}

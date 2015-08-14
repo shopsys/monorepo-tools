@@ -3,7 +3,7 @@
 {% block title %}- {{ 'Editace zákazníka'|trans }} - {{ user.fullName }}{% endblock %}
 {% block h1 %}
 	{{ 'Editace zákazníka'|trans }} - {{ user.fullName }}
-	<a href="{{ url('admin_customer_loginasuser', { userId: user.id, csrfToken: loginAsUserCsrfToken }) }}" target="_blank" class="btn btn-default">
+	<a href="{{ url('admin_customer_loginasuser', { userId: user.id, csrfToken: loginAsUserCsrfToken }) }}" target="_blank" class="btn-link-style">
 		{{ 'Přihlásit za uživatele' }}
 		<i class="svg svg-forward-page"></i>
 	</a>
@@ -11,34 +11,43 @@
 
 {% block customer_created_at %}
 	<div class="form-line">
-		<span class="form-line form-line__label">
+		<div class="form-line__label">
 			{{ 'Datum registrace'|trans }} :
-		</span>
-		<span class="form-line form-line__text">
-			{{ user.createdAt|formatDateTime }}
-		</span>
+		</div>
+		<div class="form-line__side">
+			<div class="form-line__item form-line__item--text">
+				{{ user.createdAt|formatDateTime }}
+			</div>
+		</div>
 	</div>
 {% endblock %}
 
 {% block customer_last_login %}
 	<div class="form-line">
-		<span class="form-line form-line__label">
+		<div class="form-line__label">
 			{{ 'Poslední přihlášení'|trans }} :
-		</span>
-		<span class="form-line form-line__text">
-			{% if user.lastLogin != null %}
-				{{ user.lastLogin|formatDateTime }}
-			{% else %}
-				{{ 'nikdy'|trans }}
-			{% endif %}
-		</span>
+		</div>
+		<div class="form-line__side">
+			<div class="form-line__item form-line__item--text">
+				{% if user.lastLogin != null %}
+					{{ user.lastLogin|formatDateTime }}
+				{% else %}
+					{{ 'nikdy'|trans }}
+				{% endif %}
+			</div>
+		</div>
 	</div>
 {% endblock %}
 
 {% block customer_domain %}
 	<div class="form-line js-change-price-categories">
 		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-		{{ domainIcon(user.domainId) }} {{ getDomainName(user.domainId) }}
+
+		<div class="form-line__side">
+			<div class="form-line__item form-line__item--text">
+				{{ domainIcon(user.domainId) }} {{ getDomainName(user.domainId) }}
+			</div>
+		</div>
 	</div>
 {% endblock %}
 

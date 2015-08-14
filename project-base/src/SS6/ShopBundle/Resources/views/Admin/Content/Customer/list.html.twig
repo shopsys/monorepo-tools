@@ -4,25 +4,20 @@
 {% block h1 %}{{ 'Přehled zákazníků'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-			{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-
-			{{ form_start(quickSearchForm) }}
-				<div class="wrap-box form-inline mb-1 mt-1">
-					{{ form_widget(quickSearchForm.text) }}
-					{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, full_name: ''}) }}
-					<i class="svg svg-info c-help js-tooltip"
-					 data-toggle="tooltip" data-placement="right"
-					 title="{{ 'Vyhledávání hledá v příjmení, názvu firmy, emailu a telefonu. Je možné používat operátory * a ?.'|trans }}"
-					></i>
-				</div>
-			{{ form_end(quickSearchForm) }}
-
-			<a href="{{ url('admin_customer_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nového zákazníka'|trans }}</a>
-
-			{{ gridView.render() }}
+	{{ form_start(quickSearchForm) }}
+		<div class="wrap-box form-inline">
+			{{ form_widget(quickSearchForm.text) }}
+			{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, full_name: ''}) }}
+			<i class="svg svg-info c-help js-tooltip"
+			 data-toggle="tooltip" data-placement="right"
+			 title="{{ 'Vyhledávání hledá v příjmení, názvu firmy, emailu a telefonu. Je možné používat operátory * a ?.'|trans }}"
+			></i>
 		</div>
-	</div>
+	{{ form_end(quickSearchForm) }}
+
+	<a href="{{ url('admin_customer_new') }}" class="btn">{{ 'Vytvořit nového zákazníka'|trans }}</a>
+
+	{{ gridView.render() }}
 {% endblock %}

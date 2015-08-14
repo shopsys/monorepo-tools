@@ -1,9 +1,9 @@
 {{ message }}
 
 <div class="window__actions">
-	<a href="{{ url(route, routeParams) }}" class="window-button-continue button btn btn-primary js-confirm-delete-direct-link">{{ 'Ano'|trans }}</a>
+	<a href="{{ url(route, routeParams) }}" class="window-button-continue button btn js-confirm-delete-direct-link">{{ 'Ano'|trans }}</a>
 	<a
-		class="window-button-close button btn btn-primary ml-1"
+		class="window-button-close button btn"
 		href="#"
 		onclick="$(this).closest('.window').trigger('windowClose'); return false;"
 	>

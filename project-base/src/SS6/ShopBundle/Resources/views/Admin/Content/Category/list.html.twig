@@ -4,73 +4,65 @@
 {% block h1 %}{{ 'Kategorie'|trans }}{% endblock %}
 
 {% block main_content %}
+	{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
 
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
+	<a href="{{ url('admin_category_new') }}" class="btn">{{ 'Vytvořit novou kategorii'|trans }}</a>
 
-			<a href="{{ url('admin_category_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit novou kategorii'|trans }}</a>
-
-			{% macro categoryTreeItem(categoryDetails) %}
-				<ul class="js-category-tree-items">
-					{% for categoryDetail in categoryDetails %}
-						<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
-							<div class="js-category-tree-item-line">
-								<span class="js-category-tree-item-handle">{{ categoryDetail.category.name }}</span>
-								<span class="js-category-tree-item-icons">
-									<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}">
-										<i class="svg svg-pencil"></i>
-									</a>
-									<a
-										href="{{ url('admin_category_delete', {id: categoryDetail.category.id}) }}"
-										onclick="
-											SS6.window({
-												content: '{{ 'Opravdu chcete smazat tuto kategorii?'|trans|e('js') }}',
-												buttonCancel: true,
-												buttonContinue: true,
-												textContinue: '{{ 'Ano'|trans|e('js') }}',
-												urlContinue: '{{ url('admin_category_delete', {id: categoryDetail.category.id})|e('js') }}'
-											});
-											return false;"
-									>
-										<i class="svg svg-trash"></i>
-									</a>
-								</span>
-							</div>
-							{{ _self.categoryTreeItem(categoryDetail.children) }}
-						</li>
-					{% endfor %}
-				</ul>
-			{% endmacro %}
-
-			{% if isForAllDomains %}
-				<div class="row">
-					<div id="js-category-tree-sorting" class="category-tree category-tree--sorting mb-1 col-xs-12 col-md-9 col-lg-8">
-						{{ _self.categoryTreeItem(categoryDetails) }}
+	{% macro categoryTreeItem(categoryDetails) %}
+		<ul class="js-category-tree-items">
+			{% for categoryDetail in categoryDetails %}
+				<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
+					<div class="js-category-tree-item-line">
+						<span class="js-category-tree-item-handle">{{ categoryDetail.category.name }}</span>
+						<span class="js-category-tree-item-icons">
+							<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}">
+								<i class="svg svg-pencil"></i>
+							</a>
+							<a
+								href="{{ url('admin_category_delete', {id: categoryDetail.category.id}) }}"
+								onclick="
+									SS6.window({
+										content: '{{ 'Opravdu chcete smazat tuto kategorii?'|trans|e('js') }}',
+										buttonCancel: true,
+										buttonContinue: true,
+										textContinue: '{{ 'Ano'|trans|e('js') }}',
+										urlContinue: '{{ url('admin_category_delete', {id: categoryDetail.category.id})|e('js') }}'
+									});
+									return false;"
+							>
+								<i class="svg svg-trash"></i>
+							</a>
+						</span>
 					</div>
-				</div>
+					{{ _self.categoryTreeItem(categoryDetail.children) }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endmacro %}
 
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						<button
-							class="btn btn-primary btn-disabled"
-							id="js-category-tree-sorting-save-button"
-							data-category-save-order-url="{{ url('admin_category_saveorder') }}"
-							type="button"
-						>
-							{{ 'Uložit změny v pořadí'|trans }}
-						</button>
-					</div>
-				</div>
-			{% else %}
-				<div class="category-tree mb-1">
-					{{ _self.categoryTreeItem(categoryDetails) }}
-				</div>
-				<div>
-					{{ 'Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén.'|trans }}
-				</div>
-			{% endif %}
-
+	{% if isForAllDomains %}
+		<div id="js-category-tree-sorting" class="category-tree category-tree--sorting">
+			{{ _self.categoryTreeItem(categoryDetails) }}
 		</div>
-	</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<button
+					class="btn btn--disabled"
+					id="js-category-tree-sorting-save-button"
+					data-category-save-order-url="{{ url('admin_category_saveorder') }}"
+					type="button"
+				>
+					{{ 'Uložit změny v pořadí'|trans }}
+				</button>
+			{% endblock %}
+		{% endembed %}
+	{% else %}
+		<div class="category-tree">
+			{{ _self.categoryTreeItem(categoryDetails) }}
+		</div>
+		<div>
+			{{ 'Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén.'|trans }}
+		</div>
+	{% endif %}
 {% endblock %}

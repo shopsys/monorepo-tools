@@ -9,42 +9,35 @@
 {% endblock %}
 
 {% block main_content %}
-	<div class="row">
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
 
-		<div class="col-xs-12 col-lg-10">
+		<table class="table">
+			<thead>
+				<th>{{ 'Doména'|trans }}</th>
+				<th>{{ 'Používat'|trans }}</th>
+				<th>{{ 'Minimální cena zboží'|trans }}</th>
+			</thead>
+			<tbody>
+				{% for domainId, priceLimitForm in form.priceLimits %}
+					{% set domainName = domain.getDomainConfigById(domainId).getName() %}
+					<tr id="{{ priceLimitForm.vars.id }}" class="js-free-transport-and-payment-price-limit" data-domain-id="{{ domainId }}">
+						<td>{{ domainName }}</td>
+						<td>
+							{{ form_widget(priceLimitForm.enabled, { attr: { class: 'js-free-transport-and-payment-price-limit-enabled' } } ) }}
+						</td>
+						<td class="form-inline">
+							{{ form_widget(priceLimitForm.priceLimit, { symbolAfterInput: currencySymbolByDomainId(domainId), attr: { class: 'js-free-transport-and-payment-price-limit-input' } }) }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-			{{ form_start(form) }}
-				{{ form_errors(form) }}
-
-				<table class="table table-striped table-vertical-center">
-					<thead>
-						<th>{{ 'Doména'|trans }}</th>
-						<th>{{ 'Používat'|trans }}</th>
-						<th>{{ 'Minimální cena zboží'|trans }}</th>
-					</thead>
-					<tbody>
-						{% for domainId, priceLimitForm in form.priceLimits %}
-							{% set domainName = domain.getDomainConfigById(domainId).getName() %}
-							<tr id="{{ priceLimitForm.vars.id }}" class="js-free-transport-and-payment-price-limit" data-domain-id="{{ domainId }}">
-								<td>{{ domainName }}</td>
-								<td>
-									{{ form_widget(priceLimitForm.enabled, { attr: { class: 'js-free-transport-and-payment-price-limit-enabled' } } ) }}
-								</td>
-								<td class="form-inline">
-									{{ form_widget(priceLimitForm.priceLimit, { symbolAfterInput: currencySymbolByDomainId(domainId), attr: { class: 'js-free-transport-and-payment-price-limit-input' } }) }}
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-
-				<div class="window-fixed-bar">
- 					<div class="window-fixed-bar__buttons">
-						{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
-					</div>
-				</div>
-			{{ form_end(form) }}
-		</div>
-
-	</div>
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
 {% endblock %}

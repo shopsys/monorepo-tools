@@ -4,42 +4,40 @@
 {% block h1 %}{{ 'Přehled zboží'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{{ form_start(quickSearchForm) }}
+	{{ form_start(quickSearchForm) }}
 
-				<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
-					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
-				</div>
-
-				{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
-					with {
-						advancedSearchForm: advancedSearchForm,
-						isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-					}
-				%}
-			{{ form_end(quickSearchForm) }}
-
-			{{ form_start(massActionForm) }}
-				<div class="wrap-box">
-					{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans, attr: { class: 'js-mass-action-select-type' } }) }}
-					{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
-					<div class="form-line mb-1">
-						<div class="form-line__label form-line__label--input">
-							{{ form_widget(massActionForm.subject) }}
-						</div>
-						<div class="form-line__field">
-							{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' } }) }}
-						</div>
-					</div>
-					{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn btn-primary js-mass-action-submit' } }) }}
-				</div>
-
-				<a href="{{ url('admin_product_new') }}" class="btn btn-primary mb-1">{{ 'Vytvořit nové zboží'|trans }}</a>
-				<a href="{{ url('admin_product_createvariant') }}" class="btn btn-primary mb-1">{{ 'Vytvořit variantu'|trans }}</a>
-				{{ gridView.render() }}
-				{{ gridView.renderHiddenInputs('page') }}
-			{{ form_end(massActionForm) }}
+		<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
+			{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 		</div>
-	</div>
+
+		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+			with {
+				advancedSearchForm: advancedSearchForm,
+				isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
+			}
+		%}
+	{{ form_end(quickSearchForm) }}
+
+	{{ form_start(massActionForm) }}
+		<div class="wrap-box">
+			{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans, attr: { class: 'js-mass-action-select-type' } }) }}
+			{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
+			<div class="form-line">
+				<div class="form-line__label form-line__label--input">
+					{{ form_widget(massActionForm.subject) }}
+				</div>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' } }) }}
+					</div>
+				</div>
+			</div>
+			{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn js-mass-action-submit' } }) }}
+		</div>
+
+		<a href="{{ url('admin_product_new') }}" class="btn">{{ 'Vytvořit nové zboží'|trans }}</a>
+		<a href="{{ url('admin_product_createvariant') }}" class="btn">{{ 'Vytvořit variantu'|trans }}</a>
+		{{ gridView.render() }}
+		{{ gridView.renderHiddenInputs('page') }}
+	{{ form_end(massActionForm) }}
 {% endblock %}

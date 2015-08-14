@@ -4,26 +4,21 @@
 {% block h1 %}{{ 'Rozměry obrázků'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="row">
-		<div class="col-xs-12 col-lg-10">
-			{% for imageEntityConfig in imageEntityConfigs %}
-				{% set entityName = imageEntityConfig.entityName %}
-				{% if imageEntityConfig.sizeConfigs is not empty %}
-					{{ _self.entitySizes(entityNames[entityName], imageEntityConfig.sizeConfigs, usagesByEntityAndSizeName[entityName]) }}
-				{% endif %}
-				{% if imageEntityConfig.sizeConfigsByTypes is not empty %}
-					{% for typeName, sizeConfigs in imageEntityConfig.sizeConfigsByTypes %}
-						{{ _self.entitySizes(entityNames[entityName] ~ ' - ' ~ typeName, sizeConfigs, usagesByEntityAndTypeAndSizeName[entityName][typeName]) }}
-					{% endfor %}
-				{% endif %}
+	{% for imageEntityConfig in imageEntityConfigs %}
+		{% set entityName = imageEntityConfig.entityName %}
+		{% if imageEntityConfig.sizeConfigs is not empty %}
+			{{ _self.entitySizes(entityNames[entityName], imageEntityConfig.sizeConfigs, usagesByEntityAndSizeName[entityName]) }}
+		{% endif %}
+		{% if imageEntityConfig.sizeConfigsByTypes is not empty %}
+			{% for typeName, sizeConfigs in imageEntityConfig.sizeConfigsByTypes %}
+				{{ _self.entitySizes(entityNames[entityName] ~ ' - ' ~ typeName, sizeConfigs, usagesByEntityAndTypeAndSizeName[entityName][typeName]) }}
 			{% endfor %}
-		</div>
-	</div>
+		{% endif %}
+	{% endfor %}
 {% endblock %}
 
 {% macro entitySizes(name, sizeConfigs, usages) %}
 	<h2>{{ name }}</h2>
-	<div class="table-responsive">
 	<table class="table">
 		<thead>
 			<tr>
@@ -54,5 +49,4 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	</div>
 {% endmacro %}
