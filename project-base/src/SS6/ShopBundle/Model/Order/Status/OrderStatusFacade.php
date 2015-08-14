@@ -133,4 +133,11 @@ class OrderStatusFacade {
 		return $this->orderRepository->getOrdersCountByStatus($orderStatus);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 */
+	public function findAll() {
+		return $this->orderStatusRepository->findAll();
+	}
+
 }

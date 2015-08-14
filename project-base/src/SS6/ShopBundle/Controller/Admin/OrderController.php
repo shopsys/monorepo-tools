@@ -20,8 +20,7 @@ use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Order\OrderRepository;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends BaseController {
@@ -62,42 +61,35 @@ class OrderController extends BaseController {
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
-	 */
-	private $orderRepository;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
-	 */
-	private $orderStatusRepository;
-
-	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
+	 */
+	private $orderStatusFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
-		OrderStatusRepository $orderStatusRepository,
 		Translator $translator,
-		OrderRepository $orderRepository,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		EntityManager $em
+		EntityManager $em,
+		OrderStatusFacade $orderStatusFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
-		$this->orderStatusRepository = $orderStatusRepository;
 		$this->translator = $translator;
-		$this->orderRepository = $orderRepository;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->em = $em;
+		$this->orderStatusFacade = $orderStatusFacade;
 	}
 
 	/**
@@ -107,8 +99,8 @@ class OrderController extends BaseController {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
-		$order = $this->orderRepository->getById($id);
-		$allOrderStatuses = $this->orderStatusRepository->findAll();
+		$order = $this->orderFacade->getById($id);
+		$allOrderStatuses = $this->orderStatusFacade->findAll();
 		$form = $this->createForm(new OrderFormType($allOrderStatuses));
 
 		try {
@@ -231,7 +223,7 @@ class OrderController extends BaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$orderNumber = $this->orderRepository->getById($id)->getNumber();
+			$orderNumber = $this->orderFacade->getById($id)->getNumber();
 			$this->em->transactional(
 				function () use ($id) {
 					$this->orderFacade->deleteById($id);
