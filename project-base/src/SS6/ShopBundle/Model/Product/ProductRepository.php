@@ -222,7 +222,7 @@ class ProductRepository {
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $page
 	 * @param int $limit
@@ -233,7 +233,7 @@ class ProductRepository {
 		$domainId,
 		$locale,
 		ProductFilterData $productFilterData,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		PricingGroup $pricingGroup,
 		$page,
 		$limit
@@ -246,7 +246,7 @@ class ProductRepository {
 			$pricingGroup
 		);
 
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup, $locale);
+		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -289,7 +289,7 @@ class ProductRepository {
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $page
 	 * @param int $limit
@@ -300,7 +300,7 @@ class ProductRepository {
 		$domainId,
 		$locale,
 		ProductFilterData $productFilterData,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		PricingGroup $pricingGroup,
 		$page,
 		$limit
@@ -313,7 +313,7 @@ class ProductRepository {
 			$pricingGroup
 		);
 
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup, $locale);
+		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -353,17 +353,17 @@ class ProductRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 */
 	private function applyOrdering(
 		QueryBuilder $queryBuilder,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		PricingGroup $pricingGroup,
 		$locale
 	) {
-		switch ($orderingSetting->getOrderingMode()) {
+		switch ($orderingMode) {
 			case ProductListOrderingSetting::ORDER_BY_NAME_ASC:
 				$collation = $this->localization->getCollationByLocale($locale);
 				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
@@ -397,7 +397,7 @@ class ProductRepository {
 				break;
 
 			default:
-				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode() . '" is not supported.';
+				$message = 'Product list ordering mode "' . $orderingMode . '" is not supported.';
 				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 

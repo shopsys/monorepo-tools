@@ -124,7 +124,7 @@ class ProductController extends FrontBaseController {
 
 		$paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsInCategory(
 			$productFilterData,
-			$orderingSetting,
+			$orderingSetting->getOrderingMode(),
 			$page,
 			self::PRODUCTS_PER_PAGE,
 			$id
@@ -181,7 +181,7 @@ class ProductController extends FrontBaseController {
 		$paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForSearch(
 			$searchText,
 			$productFilterData,
-			$orderingSetting,
+			$orderingSetting->getOrderingMode(),
 			$page,
 			self::PRODUCTS_PER_PAGE
 		);
