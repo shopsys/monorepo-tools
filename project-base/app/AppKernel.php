@@ -15,6 +15,7 @@ class AppKernel extends Kernel {
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 			new FM\ElfinderBundle\FMElfinderBundle(),
 			new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
+			new Intaro\PostgresSearchBundle\IntaroPostgresSearchBundle(),
 			new JMS\TranslationBundle\JMSTranslationBundle(),
 			new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),

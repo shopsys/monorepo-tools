@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ff1aed3e7d998fb1e5b2254f12fcb4a",
+    "hash": "83adb752cb7e621e9e4b116e4cf67bb6",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -251,7 +251,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/e19d2c64ede3454c2f743a33e20f9716e05d408d",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/10d8e5e8ace5f2abf6d623875d468725bff33a89",
                 "reference": "55da501",
                 "shasum": ""
             },
@@ -1656,6 +1656,54 @@
                 "parameters management"
             ],
             "time": "2013-12-07 10:10:39"
+        },
+        {
+            "name": "intaro/postgres-search-bundle",
+            "version": "dev-support-mapping-without-options",
+            "target-dir": "Intaro/PostgresSearchBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sustmi/postgres-search-bundle.git",
+                "reference": "810f7ab610"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sustmi/postgres-search-bundle/zipball/810f7ab61004e726158c52d4eabeb467fb586552",
+                "reference": "810f7ab610",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": ">=2.2.3",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Intaro\\PostgresSearchBundle\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gruzd Sergey",
+                    "homepage": "https://github.com/ddmaster"
+                }
+            ],
+            "description": "Tools to use full-text search PostgreSQL in Doctrine.",
+            "homepage": "https://github.com/ddmaster/PostgresSearchBundle",
+            "keywords": [
+                "doctrine2",
+                "postgresql",
+                "search",
+                "symfony2"
+            ],
+            "support": {
+                "source": "https://github.com/sustmi/postgres-search-bundle/tree/support-mapping-without-options"
+            },
+            "time": "2015-08-14 10:52:02"
         },
         {
             "name": "intervention/image",
@@ -4831,7 +4879,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/1b693fb455201cacf595163c92bfb1adfa2158d8",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/4bfd21a02ffaa860a9d4ebec06071a8ad7085dd4",
                 "reference": "41365ce",
                 "shasum": ""
             },
@@ -5241,6 +5289,7 @@
     "stability-flags": {
         "craue/formflow-bundle": 20,
         "fp/jsformvalidator-bundle": 20,
+        "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
         "prezent/doctrine-translatable-bundle": 20,
         "timwhitlock/jparser": 20,
