@@ -8,7 +8,7 @@
 		$('.js-drag-and-drop-grid-rows').sortable({
 			create: SS6.grid.dragAndDrop.onCreate,
 			cursor: 'move',
-			handle: '.cursor-move',
+			handle: '.c-move',
 			items: '.js-grid-row',
 			placeholder: 'table-drop',
 			revert: 200,
@@ -81,15 +81,15 @@
 
 	SS6.grid.dragAndDrop.highlightChanges = function ($grid, highlight) {
 		if (highlight) {
-			$grid.find('.js-drag-and-drop-grid-submit').removeClass('btn-disabled');
+			$grid.find('.js-drag-and-drop-grid-submit').removeClass('btn--disabled');
 		} else {
-			$grid.find('.js-drag-and-drop-grid-submit').addClass('btn-disabled');
+			$grid.find('.js-drag-and-drop-grid-submit').addClass('btn--disabled');
 		}
 	};
 
 	SS6.grid.dragAndDrop.unifyMultipleGrids = function () {
 		var $gridSaveButtons = $('.js-drag-and-drop-grid-submit');
-		var $gridsOnPage = $('.grid');
+		var $gridsOnPage = $('.js-grid');
 		var $saveAllButton = $('.js-drag-and-drop-grid-submit-all');
 
 		if ($saveAllButton.size() === 1) {
@@ -97,12 +97,12 @@
 
 			$gridsOnPage.on('update', function() {
 				SS6.formChangeInfo.showInfo();
-				$saveAllButton.removeClass('btn-disabled');
+				$saveAllButton.removeClass('btn--disabled');
 			});
 
 			$gridsOnPage.on('save', function() {
 				SS6.formChangeInfo.removeInfo();
-				$saveAllButton.addClass('btn-disabled');
+				$saveAllButton.addClass('btn--disabled');
 			});
 
 			$saveAllButton.click(function() {
