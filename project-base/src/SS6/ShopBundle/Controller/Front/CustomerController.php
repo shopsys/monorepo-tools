@@ -163,7 +163,7 @@ class CustomerController extends BaseController {
 		try {
 			$this->loginAsUserFacade->loginAsRememberedUser($request);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$adminFlashMessageSender = $this->get('ss6.shop.flash_message.sender.front');
+			$adminFlashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
 			/* @var $adminFlashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
 			$adminFlashMessageSender->addErrorFlash('Uživatel nebyl nalezen.');
 
