@@ -26,12 +26,14 @@
 		<label>
 			{{ form_widget(filterForm.inStock) }}
 			{{ 'Jen zboží skladem'|trans }}
-			<span
-				class="js-product-filter-count"
-				data-form-id="{{ filterForm.inStock.vars.id }}"
-			>
-				({{ productFilterCountData.countInStock }})
-			</span>
+			{% if productFilterCountData is not null %}
+				<span
+					class="js-product-filter-count"
+					data-form-id="{{ filterForm.inStock.vars.id }}"
+				>
+					({{ productFilterCountData.countInStock }})
+				</span>
+			{% endif %}
 		</label>
 
 		{% if filterForm.flags is empty %}
@@ -47,15 +49,16 @@
 									{{ form_widget(flagForm, { attr: { class: 'form-choice__input'} }) }}
 									<span class="form-choice__text">
 										{{ flagForm.vars.label }}
-
-										<span
-											class="js-product-filter-count"
-											data-form-id="{{ flagForm.vars.id }}"
-										>
-											{% if not flagForm.vars.checked %}
-												({% if filterForm.flags.vars.data is not empty %}+{% endif %}{{ productFilterCountData.countByFlagId[flagForm.vars.value]|default(0) }})
-											{% endif %}
-										</span>
+										{% if productFilterCountData is not null %}
+											<span
+												class="js-product-filter-count"
+												data-form-id="{{ flagForm.vars.id }}"
+											>
+												{% if not flagForm.vars.checked %}
+													({% if filterForm.flags.vars.data is not empty %}+{% endif %}{{ productFilterCountData.countByFlagId[flagForm.vars.value]|default(0) }})
+												{% endif %}
+											</span>
+										{% endif %}
 									</span>
 								</label>
 							</div>
@@ -85,17 +88,19 @@
 													<span class="form-choice__text">
 														{{ parameterValueForm.vars.label }}
 
-														<span
-															class="js-product-filter-count"
-															data-form-id="{{ parameterValueForm.vars.id }}"
-														>
-															{% if not parameterValueForm.vars.checked %}
-																(
-																	{%- if parameterForm.vars.data is not empty %}+{% endif -%}
-																	{{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
-																)
-															{% endif %}
-														</span>
+														{% if productFilterCountData is not null %}
+															<span
+																class="js-product-filter-count"
+																data-form-id="{{ parameterValueForm.vars.id }}"
+															>
+																{% if not parameterValueForm.vars.checked %}
+																	(
+																		{%- if parameterForm.vars.data is not empty %}+{% endif -%}
+																		{{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
+																	)
+																{% endif %}
+															</span>
+														{% endif %}
 													</span>
 												</label>
 											</div>

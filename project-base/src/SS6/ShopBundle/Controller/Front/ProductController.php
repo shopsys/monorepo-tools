@@ -8,6 +8,8 @@ use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Module\ModuleFacade;
+use SS6\ShopBundle\Model\Module\ModuleList;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\ProductListOrderingService;
 use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
@@ -50,13 +52,19 @@ class ProductController extends FrontBaseController {
 	 */
 	private $productListOrderingService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 */
+	private $moduleFacade;
+
 	public function __construct(
 		RequestExtension $requestExtension,
 		CategoryFacade $categoryFacade,
 		Domain $domain,
 		ProductOnCurrentDomainFacade $productOnCurrentDomainFacade,
 		ProductFilterFormTypeFactory $productFilterFormTypeFactory,
-		ProductListOrderingService $productListOrderingService
+		ProductListOrderingService $productListOrderingService,
+		ModuleFacade $moduleFacade
 	) {
 		$this->requestExtension = $requestExtension;
 		$this->categoryFacade = $categoryFacade;
@@ -64,6 +72,7 @@ class ProductController extends FrontBaseController {
 		$this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
 		$this->productFilterFormTypeFactory = $productFilterFormTypeFactory;
 		$this->productListOrderingService = $productListOrderingService;
+		$this->moduleFacade = $moduleFacade;
 	}
 
 	/**
@@ -121,12 +130,15 @@ class ProductController extends FrontBaseController {
 			$id
 		);
 
-		$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataInCategory(
-			$id,
-			$productFilterFormType->getFlagFilterChoices(),
-			$productFilterFormType->getParameterFilterChoices(),
-			$productFilterData
-		);
+		$productFilterCountData = null;
+		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_FILTER_COUNTS)) {
+			$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataInCategory(
+				$id,
+				$productFilterFormType->getFlagFilterChoices(),
+				$productFilterFormType->getParameterFilterChoices(),
+				$productFilterData
+			);
+		}
 
 		$viewParameters = [
 			'paginationResult' => $paginationResult,
@@ -174,11 +186,14 @@ class ProductController extends FrontBaseController {
 			self::PRODUCTS_PER_PAGE
 		);
 
-		$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch(
-			$searchText,
-			$productFilterFormType->getFlagFilterChoices(),
-			$productFilterData
-		);
+		$productFilterCountData = null;
+		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_FILTER_COUNTS)) {
+			$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch(
+				$searchText,
+				$productFilterFormType->getFlagFilterChoices(),
+				$productFilterData
+			);
+		}
 
 		$viewParameters = [
 			'paginationResult' => $paginationResult,
