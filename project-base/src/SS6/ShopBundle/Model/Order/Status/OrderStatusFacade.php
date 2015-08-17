@@ -136,8 +136,8 @@ class OrderStatusFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
-	public function findAll() {
-		return $this->orderStatusRepository->findAll();
+	public function getAll() {
+		return $this->orderStatusRepository->getAll();
 	}
 
 }

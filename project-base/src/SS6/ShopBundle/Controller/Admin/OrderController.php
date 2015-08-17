@@ -100,7 +100,7 @@ class OrderController extends BaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$order = $this->orderFacade->getById($id);
-		$allOrderStatuses = $this->orderStatusFacade->findAll();
+		$allOrderStatuses = $this->orderStatusFacade->getAll();
 		$form = $this->createForm(new OrderFormType($allOrderStatuses));
 
 		try {

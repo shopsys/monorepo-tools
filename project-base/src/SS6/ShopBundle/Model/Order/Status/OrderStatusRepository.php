@@ -66,7 +66,7 @@ class OrderStatusRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getOrderStatusRepository()->findBy([], ['id' => 'asc']);
 	}
 
@@ -76,7 +76,7 @@ class OrderStatusRepository {
 	public function getAllIndexedById() {
 		$orderStatusesIndexedById = [];
 
-		foreach ($this->findAll() as $orderStatus) {
+		foreach ($this->getAll() as $orderStatus) {
 			$orderStatusesIndexedById[$orderStatus->getId()] = $orderStatus;
 		}
 

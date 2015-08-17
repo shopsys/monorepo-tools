@@ -100,7 +100,7 @@ class MailTemplateFacade {
 	 * @return \SS6\ShopBundle\Model\Mail\AllMailTemplatesData
 	 */
 	public function getAllMailTemplatesDataByDomainId($domainId) {
-		$orderStatuses = $this->orderStatusRepository->findAll();
+		$orderStatuses = $this->orderStatusRepository->getAll();
 		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
 
 		$allMailTemplatesData = new AllMailTemplatesData();

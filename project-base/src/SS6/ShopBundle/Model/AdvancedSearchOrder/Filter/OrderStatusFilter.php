@@ -44,7 +44,7 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface {
 	 */
 	public function getValueFormOptions() {
 		$orderStatusChoices = [];
-		foreach ($this->orderStatusRepository->findAll() as $orderStatus) {
+		foreach ($this->orderStatusRepository->getAll() as $orderStatus) {
 			/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
 			$orderStatusChoices[$orderStatus->getId()] = $orderStatus->getName();
 		}
