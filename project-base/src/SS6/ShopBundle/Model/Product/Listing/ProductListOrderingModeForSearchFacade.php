@@ -6,9 +6,9 @@ use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductListOrderingModeForListFacade {
+class ProductListOrderingModeForSearchFacade {
 
-	const COOKIE_NAME = 'productListOrderingMode';
+	const COOKIE_NAME = 'productSearchOrderingMode';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService

@@ -51,6 +51,9 @@
 			<i class="fa fa-spinner fa-spin fa-5x position-top-150" title="{{ 'Načítám'|trans }}"></i>
 		</div>
 		<div class="js-product-list-ajax-filter-products-with-controls">
+			<div>
+				{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForSearch')) }}
+			</div>
 			{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited, searchText: searchText} %}
 		</div>
 	</div>
