@@ -2,44 +2,74 @@
 
 namespace SS6\ShopBundle\Model\Order\PromoCode;
 
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
+use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 
 class PromoCodeFacade {
 
-	const PROMO_CODE_SETTING_KEY = 'promoCode';
-	const PROMO_CODE_PERCENT_SETTING_KEY = 'promoCodePercent';
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
 	 */
-	private $setting;
+	private $promoCodeRepository;
 
-	public function __construct(Setting $setting) {
-		$this->setting = $setting;
+	public function __construct(EntityManager $em, PromoCodeRepository $promoCodeRepository) {
+		$this->em = $em;
+		$this->promoCodeRepository = $promoCodeRepository;
 	}
 
 	/**
-	 * @return string|null
+	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
-	public function getPromoCode() {
-		return $this->setting->get(self::PROMO_CODE_SETTING_KEY, SettingValue::DOMAIN_ID_COMMON);
+	public function create(PromoCodeData $promoCodeData) {
+		$promoCode = new PromoCode($promoCodeData);
+		$this->em->persist($promoCode);
+		$this->em->flush();
+
+		return $promoCode;
 	}
 
 	/**
-	 * @param string|null $code
-	 * @param float|null $percent
+	 * @param int $promoCodeId
+	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
-	public function editPromoCode($code, $percent) {
-		$this->setting->set(self::PROMO_CODE_SETTING_KEY, $code, SettingValue::DOMAIN_ID_COMMON);
-		$this->setting->set(self::PROMO_CODE_PERCENT_SETTING_KEY, $percent, SettingValue::DOMAIN_ID_COMMON);
+	public function edit($promoCodeId, PromoCodeData $promoCodeData) {
+		$promoCode = $this->getById($promoCodeId);
+		$promoCode->edit($promoCodeData);
+		$this->em->flush();
+
+		return $promoCode;
 	}
 
 	/**
-	 * @return float|null
+	 * @param int $promoCodeId
+	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
-	public function getPromoCodePercent() {
-		return $this->setting->get(self::PROMO_CODE_PERCENT_SETTING_KEY, SettingValue::DOMAIN_ID_COMMON);
+	public function getById($promoCodeId) {
+		return $this->promoCodeRepository->getById($promoCodeId);
+	}
+
+	/**
+	 * @param int $promoCodeId
+	 */
+	public function deleteById($promoCodeId) {
+		$promoCode = $this->getById($promoCodeId);
+		$this->em->remove($promoCode);
+		$this->em->flush();
+	}
+
+	/**
+	 * @param string $code
+	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode|null
+	 */
+	public function findPromoCodeByCode($code) {
+		return $this->promoCodeRepository->findByCode($code);
 	}
 
 }

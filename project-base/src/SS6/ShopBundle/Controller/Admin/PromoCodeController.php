@@ -2,47 +2,73 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType;
+use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use SS6\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
-use Symfony\Component\HttpFoundation\Request;
 
 class PromoCodeController extends AdminBaseController {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
 	 */
 	private $promoCodeFacade;
 
-	public function __construct(PromoCodeFacade $promoCodeFacade) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit
+	 */
+	private $promoCodeInlineEdit;
+
+	public function __construct(
+		EntityManager $em,
+		PromoCodeFacade $promoCodeFacade,
+		PromoCodeInlineEdit $promoCodeInlineEdit
+	) {
+		$this->em = $em;
 		$this->promoCodeFacade = $promoCodeFacade;
+		$this->promoCodeInlineEdit = $promoCodeInlineEdit;
 	}
 
 	/**
-	 * @Route("/promo-code/")
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @Route("/promo-code/list")
 	 */
-	public function indexAction(Request $request) {
-		$form = $this->createForm(new PromoCodeFormType());
-		$form->setData([
-			'code' => $this->promoCodeFacade->getPromoCode(),
-			'percent' => $this->promoCodeFacade->getPromoCodePercent(),
+	public function listAction() {
+		$grid = $this->promoCodeInlineEdit->getGrid();
+
+		return $this->render('@SS6Shop/Admin/Content/PromoCode/list.html.twig', [
+			'gridView' => $grid->createView(),
 		]);
+	}
 
-		$form->handleRequest($request);
+	/**
+	 * @Route("/promo-code/delete/{id}", requirements={"id" = "\d+"})
+	 * @CsrfProtection
+	 * @param int $id
+	 */
+	public function deleteAction($id) {
+		try {
+			$code = $this->promoCodeFacade->getById($id)->getCode();
+			$this->em->transactional(
+				function () use ($id) {
+					$this->promoCodeFacade->deleteById($id);
+				}
+			);
 
-		if ($form->isValid()) {
-			$formData = $form->getData();
-			$this->promoCodeFacade->editPromoCode($formData['code'], $formData['percent']);
-			$this->getFlashMessageSender()->addSuccessFlash('Nastavení slevového kupónu bylo uloženo.');
-
-			return $this->redirectToRoute('admin_promocode_index');
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Slevový kupón <strong>{{ code }}</strong> byl smazán', [
+				'code' => $code,
+			]);
+		} catch (\SS6\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException $ex) {
+			$this->getFlashMessageSender()->addErrorFlash('Zvolený slevový kupón neexistuje.');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/PromoCode/index.html.twig', [
-			'form' => $form->createView(),
-		]);
+		return $this->redirectToRoute('admin_promocode_list');
 	}
 
 }

@@ -7,7 +7,7 @@
 {% else %}
 	<div>
 		<span class="in-message in-message--static in-message--success js-flash-message">
-			{{ 'Vaše sleva'|trans }}: {{ promoCodePercent|formatPercent }}
+			{{ 'Vaše sleva'|trans }}: {{ validEnteredPromoCode.percent|formatPercent }}
 			<a href="{{ url('front_promo_code_remove') }}"><i class="fa fa-remove"></i>{{ 'Odebrat'|trans }}</a>
 		</span>
 	</div><br /><br />

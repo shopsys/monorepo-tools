@@ -25,50 +25,24 @@ class CurrentPromoCodeFacade {
 	}
 
 	/**
-	 * @param string $promoCode
-	 * @return bool
-	 */
-	private function isPromoCodeValid($promoCode) {
-		if ($promoCode === null || $this->promoCodeFacade->getPromoCodePercent() === null) {
-			return false;
-		}
-
-		return $this->promoCodeFacade->getPromoCode() === $promoCode;
-	}
-
-	/**
-	 * @return string|null
+	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode|null
 	 */
 	public function getValidEnteredPromoCode() {
-		$enteredPromoCode = $this->session->get(self::PROMO_CODE_SESSION_KEY);
+		$enteredCode = $this->session->get(self::PROMO_CODE_SESSION_KEY);
 
-		if (!$this->isPromoCodeValid($enteredPromoCode)) {
-			$enteredPromoCode = null;
-		}
-
-		return $enteredPromoCode;
+		return $this->promoCodeFacade->findPromoCodeByCode($enteredCode);
 	}
 
 	/**
-	 * @param string $enteredPromoCode
+	 * @param string $enteredCode
 	 */
-	public function setEnteredPromoCode($enteredPromoCode) {
-		if (!$this->isPromoCodeValid($enteredPromoCode)) {
-			throw new \SS6\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException($enteredPromoCode);
+	public function setEnteredPromoCode($enteredCode) {
+		$promoCode = $this->promoCodeFacade->findPromoCodeByCode($enteredCode);
+		if ($promoCode === null) {
+			throw new \SS6\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException($enteredCode);
 		} else {
-			$this->session->set(self::PROMO_CODE_SESSION_KEY, $enteredPromoCode);
+			$this->session->set(self::PROMO_CODE_SESSION_KEY, $enteredCode);
 		}
-	}
-
-	/**
-	 * @return float|null
-	 */
-	public function getValidEnteredPromoCodePercent() {
-		if ($this->getValidEnteredPromoCode() === null) {
-			return null;
-		}
-
-		return $this->promoCodeFacade->getPromoCodePercent();
 	}
 
 	public function removeEnteredPromoCode() {

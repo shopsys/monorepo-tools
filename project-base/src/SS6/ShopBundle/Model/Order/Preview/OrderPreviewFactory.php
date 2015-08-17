@@ -68,6 +68,11 @@ class OrderPreviewFactory {
 	 */
 	public function createForCurrentUser(Transport $transport = null, Payment $payment = null) {
 		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($this->domain->getId());
+		$validEnteredPromoCode = $this->currentPromoCodeFacade->getValidEnteredPromoCode();
+		$validEnteredPromoCodePercent = null;
+		if ($validEnteredPromoCode !== null) {
+			$validEnteredPromoCodePercent = $validEnteredPromoCode->getPercent();
+		}
 
 		return $this->create(
 			$currency,
@@ -76,7 +81,7 @@ class OrderPreviewFactory {
 			$transport,
 			$payment,
 			$this->currentCustomer->findCurrentUser(),
-			$this->currentPromoCodeFacade->getValidEnteredPromoCodePercent()
+			$validEnteredPromoCodePercent
 		);
 	}
 

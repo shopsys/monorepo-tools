@@ -2,111 +2,73 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Order\PromoCode;
 
+use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCode;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
+use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetEnteredPromoCode() {
-		$validCode = 'validCode';
+		$validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
 		$sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
-		$sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validCode);
-		$settingMock = $this->getMock(Setting::class, ['get'], [], '', false);
-		$settingMock->expects($this->atLeastOnce())->method('get')->willReturnMap([
-			[
-				PromoCodeFacade::PROMO_CODE_PERCENT_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				10.0,
-			],
-			[
-				PromoCodeFacade::PROMO_CODE_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				$validCode,
-			],
-		]);
+		$sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
+		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
+		$promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+		$promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn($validPromoCode);
 
-		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
 		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
-		$this->assertSame($validCode, $currentPromoCodeFacade->getValidEnteredPromoCode());
-		$this->assertSame(10.0, $currentPromoCodeFacade->getValidEnteredPromoCodePercent());
+
+		$this->assertSame($validPromoCode, $currentPromoCodeFacade->getValidEnteredPromoCode());
 	}
 
 	public function testGetEnteredPromoCodeInvalid() {
-		$validCode = 'validCode';
-		$enteredCode = 'enteredCode';
+		$validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
 		$sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
-		$sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($enteredCode);
-		$settingMock = $this->getMock(Setting::class, ['get'], [], '', false);
-		$settingMock->expects($this->atLeastOnce())->method('get')->willReturnMap([
-			[
-				PromoCodeFacade::PROMO_CODE_PERCENT_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				10.0,
-			],
-			[
-				PromoCodeFacade::PROMO_CODE_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				$validCode,
-			],
-		]);
+		$sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
+		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
+		$promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+		$promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn(null);
 
-		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
 		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
+
 		$this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCode());
-		$this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCodePercent());
 	}
 
 	public function testSetEnteredPromoCode() {
-		$validCode = 'validCode';
 		$enteredCode = 'validCode';
+		$validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
 		$sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
 		$sessionMock->expects($this->atLeastOnce())->method('set')->with(
 			$this->anything(),
 			$this->equalTo($enteredCode)
 		);
-		$settingMock = $this->getMock(Setting::class, ['get'], [], '', false);
-		$settingMock->expects($this->atLeastOnce())->method('get')->willReturnMap([
-			[
-				PromoCodeFacade::PROMO_CODE_PERCENT_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				10.0,
-			],
-			[
-				PromoCodeFacade::PROMO_CODE_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				$validCode,
-			],
-		]);
 
-		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
+		$promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+		$promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn($validPromoCode);
+
+		$promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
 		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
 		$currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
 	}
 
 	public function testSetEnteredPromoCodeInvalid() {
-		$validCode = 'validCode';
 		$enteredCode = 'invalidCode';
 		$sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
 		$sessionMock->expects($this->never())->method('set');
-		$settingMock = $this->getMock(Setting::class, ['get'], [], '', false);
-		$settingMock->expects($this->atLeastOnce())->method('get')->willReturnMap([
-			[
-				PromoCodeFacade::PROMO_CODE_PERCENT_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				10.0,
-			],
-			[
-				PromoCodeFacade::PROMO_CODE_SETTING_KEY,
-				SettingValue::DOMAIN_ID_COMMON,
-				$validCode,
-			],
-		]);
 
-		$promoCodeFacade = new PromoCodeFacade($settingMock);
+		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
+		$promoCodeRepositoryMock = $this->getMock(PromoCodeRepository::class, ['findByCode'], [], '', false);
+		$promoCodeRepositoryMock->expects($this->atLeastOnce())->method('findByCode')->willReturn(null);
+
+		$promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
 		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
 		$this->setExpectedException(\SS6\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
 		$currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
