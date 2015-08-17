@@ -96,41 +96,41 @@
 {% endblock checkbox_row %}
 
 {% block text_row -%}
-	<div class="form-line">
-		{% if localized is defined %}
-			<div class="form-line__side">
-				<div class="form-line__item">
-					<div class="input__wrap">
-						{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--flag')|trim}) %}
-						{{ form_widget(form, { attr: inputAttr }) }}
-						<span class="input__flag">
-							{{ localeFlag(locale) }}
-						</span>
-					</div>
+	{% if localized is defined %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<div class="input__wrap">
+					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--flag')|trim}) %}
+					{{ form_widget(form, { attr: inputAttr }) }}
+					<span class="input__flag">
+						{{ localeFlag(locale) }}
+					</span>
 				</div>
 			</div>
-		{% elseif multidomain is defined %}
-			<div class="form-line__side">
-				<div class="form-line__item">
-					<div class="input__wrap">
-						{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--domain')|trim}) %}
-						{{ form_widget(form, { attr: inputAttr }) }}
-						<span class="input__domain">
-							{{ domainIcon(domainId) }}
-						</span>
-					</div>
+		</div>
+	{% elseif multidomain is defined %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<div class="input__wrap">
+					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--domain')|trim}) %}
+					{{ form_widget(form, { attr: inputAttr }) }}
+					<span class="input__domain">
+						{{ domainIcon(domainId) }}
+					</span>
 				</div>
 			</div>
-		{% else %}
+		</div>
+	{% else %}
+		<div class="form-line">
 			{{ form_label(form, label) }}
 			<div class="form-line__side">
 				<div class="form-line__item">
 					{{ form_widget(form) }}
 				</div>
 			</div>
-		{% endif %}
-		{{ form_errors(form) }}
-	</div>
+		</div>
+	{% endif %}
+	{{ form_errors(form) }}
 {%- endblock text_row %}
 
 {% block textarea_row -%}
