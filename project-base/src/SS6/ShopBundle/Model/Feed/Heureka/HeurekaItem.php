@@ -55,6 +55,11 @@ class HeurekaItem {
 	private $params;
 
 	/**
+	 * @var string|null
+	 */
+	private $cpc;
+
+	/**
 	 * @param int $itemId
 	 * @param string $productname
 	 * @param string $description
@@ -65,6 +70,7 @@ class HeurekaItem {
 	 * @param int|null $deliveryDate
 	 * @param string|null $manufacturer
 	 * @param string[paramName] $params
+	 * @param string|null $cpc
 	 */
 	public function __construct(
 		$itemId,
@@ -76,7 +82,8 @@ class HeurekaItem {
 		$ean,
 		$deliveryDate,
 		$manufacturer,
-		$params
+		$params,
+		$cpc
 	) {
 		$this->itemId = $itemId;
 		$this->productname = $productname;
@@ -88,6 +95,7 @@ class HeurekaItem {
 		$this->deliveryDate = $deliveryDate;
 		$this->manufacturer = $manufacturer;
 		$this->params = $params;
+		$this->cpc = $cpc;
 	}
 
 	/**
@@ -158,6 +166,13 @@ class HeurekaItem {
 	 */
 	public function getParams() {
 		return $this->params;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCpc() {
+		return $this->cpc;
 	}
 
 }

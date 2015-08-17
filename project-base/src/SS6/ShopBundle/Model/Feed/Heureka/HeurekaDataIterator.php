@@ -88,7 +88,8 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$product->getEan(),
 				$product->getCalculatedAvailability()->getDispatchTime(),
 				$manufacturer,
-				$params
+				$params,
+				$productDomainsByProductId[$product->getId()]->getHeurekaCpc()
 			);
 		}
 
