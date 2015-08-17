@@ -2,46 +2,53 @@
 
 namespace SS6\ShopBundle\Model\Product\Listing;
 
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
-
 class ProductListOrderingConfig {
 
-	const COOKIE_NAME = 'productListOrdering';
+	/**
+	 * @var string[orderingMode]
+	 */
+	private $supportedOrderingModesNames;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
+	 * @var string
 	 */
-	private $translator;
+	private $defaultOrderingMode;
 
-	public function __construct(Translator $translator) {
-		$this->translator = $translator;
+	/**
+	 * @var string
+	 */
+	private $cookieName;
+
+	/**
+	 * @param string[orderingMode] $supportedOrderingModesNames
+	 * @param string $defaultOrderingMode
+	 * @param string $cookieName
+	 */
+	public function __construct($supportedOrderingModesNames, $defaultOrderingMode, $cookieName) {
+		$this->supportedOrderingModesNames = $supportedOrderingModesNames;
+		$this->defaultOrderingMode = $defaultOrderingMode;
+		$this->cookieName = $cookieName;
 	}
 
 	/**
 	 * @return string[orderingMode]
 	 */
 	public function getSupportedOrderingModesNames() {
-		return [
-			ProductListOrderingModeService::ORDER_BY_NAME_ASC => $this->translator->trans('abecedně A -> Z'),
-			ProductListOrderingModeService::ORDER_BY_NAME_DESC => $this->translator->trans('abecedně Z -> A'),
-			ProductListOrderingModeService::ORDER_BY_PRICE_ASC => $this->translator->trans('od nejlevnějšího'),
-			ProductListOrderingModeService::ORDER_BY_PRICE_DESC => $this->translator->trans('od nejdražšího'),
-		];
+		return $this->supportedOrderingModesNames;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getCookieName() {
-		return self::COOKIE_NAME;
+		return $this->cookieName;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getDefaultOrderingMode() {
-		return ProductListOrderingModeService::ORDER_BY_NAME_ASC;
+		return $this->defaultOrderingMode;
 	}
 
 }
