@@ -4,7 +4,7 @@
 	SS6.formChangeInfo = SS6.formChangeInfo || {};
 
 	SS6.formChangeInfo.init = function () {
-		$('.main-content form')
+		$('.web__content form')
 			.change(function(){
 				SS6.formChangeInfo.showInfo();
 			})
@@ -25,10 +25,15 @@
 
 	SS6.formChangeInfo.showInfo = function () {
 		var textToShow = SS6.translator.trans('Provedli jste změny, nezapomeňte je uložit!');
-		var $fixedBar = $('.main-content .window-fixed-bar');
-		var $infoDiv = $fixedBar.find('#js-form-change-info');
+		var $fixedBarIn = $('.web__content .window-fixed-bar .window-fixed-bar__in');
+		var $infoDiv = $fixedBarIn.find('#js-form-change-info');
 		if ($infoDiv.length === 0) {
-			$fixedBar.append('<div id="js-form-change-info"><strong>' + textToShow + '</strong></div>');
+			$fixedBarIn.prepend(
+				'<div class="window-fixed-bar__item">\
+					<div id="js-form-change-info" class="window-fixed-bar__item__cell text-center">\
+						<strong>' + textToShow + '</strong>\
+					</div>\
+				</div>');
 		} else {
 			$infoDiv.text = textToShow;
 		}
