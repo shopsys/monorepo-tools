@@ -615,6 +615,7 @@ class Product extends AbstractTranslatableEntity {
 
 	public function unsetVariant() {
 		$this->variantType = self::VARIANT_TYPE_NONE;
+		$this->mainVariant = null;
 	}
 
 	/**
