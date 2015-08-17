@@ -12,7 +12,7 @@ use SS6\ShopBundle\Model\Module\ModuleFacade;
 use SS6\ShopBundle\Model\Module\ModuleList;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeFacade;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use SS6\ShopBundle\Twig\RequestExtension;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,9 +49,9 @@ class ProductController extends FrontBaseController {
 	private $requestExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeFacade
+	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService
 	 */
-	private $productListOrderingModeFacade;
+	private $productListOrderingModeService;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig
@@ -69,7 +69,7 @@ class ProductController extends FrontBaseController {
 		Domain $domain,
 		ProductOnCurrentDomainFacade $productOnCurrentDomainFacade,
 		ProductFilterFormTypeFactory $productFilterFormTypeFactory,
-		ProductListOrderingModeFacade $productListOrderingModeFacade,
+		ProductListOrderingModeService $productListOrderingModeService,
 		ProductListOrderingConfig $productListOrderingConfig,
 		ModuleFacade $moduleFacade
 	) {
@@ -78,7 +78,7 @@ class ProductController extends FrontBaseController {
 		$this->domain = $domain;
 		$this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
 		$this->productFilterFormTypeFactory = $productFilterFormTypeFactory;
-		$this->productListOrderingModeFacade = $productListOrderingModeFacade;
+		$this->productListOrderingModeService = $productListOrderingModeService;
 		$this->productListOrderingConfig = $productListOrderingConfig;
 		$this->moduleFacade = $moduleFacade;
 	}
@@ -121,7 +121,7 @@ class ProductController extends FrontBaseController {
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
-		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest(
+		$orderingMode = $this->productListOrderingModeService->getOrderingModeFromRequest(
 			$request,
 			$this->productListOrderingConfig
 		);
@@ -180,7 +180,7 @@ class ProductController extends FrontBaseController {
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
-		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest(
+		$orderingMode = $this->productListOrderingModeService->getOrderingModeFromRequest(
 			$request,
 			$this->productListOrderingConfig
 		);
@@ -262,7 +262,7 @@ class ProductController extends FrontBaseController {
 	}
 
 	public function selectOrderingModeAction(Request $request) {
-		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest(
+		$orderingMode = $this->productListOrderingModeService->getOrderingModeFromRequest(
 			$request,
 			$this->productListOrderingConfig
 		);

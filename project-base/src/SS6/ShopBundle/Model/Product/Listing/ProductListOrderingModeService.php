@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Listing;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductListOrderingModeFacade {
+class ProductListOrderingModeService {
 
 	const ORDER_BY_NAME_ASC = 'name_asc';
 	const ORDER_BY_NAME_DESC = 'name_desc';

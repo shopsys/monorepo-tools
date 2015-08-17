@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeFacade;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDomain;
@@ -363,17 +363,17 @@ class ProductRepository {
 		$locale
 	) {
 		switch ($orderingMode) {
-			case ProductListOrderingModeFacade::ORDER_BY_NAME_ASC:
+			case ProductListOrderingModeService::ORDER_BY_NAME_ASC:
 				$collation = $this->localization->getCollationByLocale($locale);
 				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
 				break;
 
-			case ProductListOrderingModeFacade::ORDER_BY_NAME_DESC:
+			case ProductListOrderingModeService::ORDER_BY_NAME_DESC:
 				$collation = $this->localization->getCollationByLocale($locale);
 				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'desc');
 				break;
 
-			case ProductListOrderingModeFacade::ORDER_BY_PRICE_ASC:
+			case ProductListOrderingModeService::ORDER_BY_PRICE_ASC:
 				$this->queryBuilderService->addOrExtendJoin(
 					$queryBuilder,
 					ProductCalculatedPrice::class,
@@ -384,7 +384,7 @@ class ProductRepository {
 				$queryBuilder->setParameter('pricingGroup', $pricingGroup);
 				break;
 
-			case ProductListOrderingModeFacade::ORDER_BY_PRICE_DESC:
+			case ProductListOrderingModeService::ORDER_BY_PRICE_DESC:
 				$this->queryBuilderService->addOrExtendJoin(
 					$queryBuilder,
 					ProductCalculatedPrice::class,

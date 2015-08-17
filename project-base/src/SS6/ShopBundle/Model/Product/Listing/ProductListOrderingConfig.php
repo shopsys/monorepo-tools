@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Listing;
 
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeFacade;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 
 class ProductListOrderingConfig {
 
@@ -23,10 +23,10 @@ class ProductListOrderingConfig {
 	 */
 	public function getSupportedOrderingModesNames() {
 		return [
-			ProductListOrderingModeFacade::ORDER_BY_NAME_ASC => $this->translator->trans('abecedně A -> Z'),
-			ProductListOrderingModeFacade::ORDER_BY_NAME_DESC => $this->translator->trans('abecedně Z -> A'),
-			ProductListOrderingModeFacade::ORDER_BY_PRICE_ASC => $this->translator->trans('od nejlevnějšího'),
-			ProductListOrderingModeFacade::ORDER_BY_PRICE_DESC => $this->translator->trans('od nejdražšího'),
+			ProductListOrderingModeService::ORDER_BY_NAME_ASC => $this->translator->trans('abecedně A -> Z'),
+			ProductListOrderingModeService::ORDER_BY_NAME_DESC => $this->translator->trans('abecedně Z -> A'),
+			ProductListOrderingModeService::ORDER_BY_PRICE_ASC => $this->translator->trans('od nejlevnějšího'),
+			ProductListOrderingModeService::ORDER_BY_PRICE_DESC => $this->translator->trans('od nejdražšího'),
 		];
 	}
 
@@ -41,7 +41,7 @@ class ProductListOrderingConfig {
 	 * @return string
 	 */
 	public function getDefaultOrderingMode() {
-		return ProductListOrderingModeFacade::ORDER_BY_NAME_ASC;
+		return ProductListOrderingModeService::ORDER_BY_NAME_ASC;
 	}
 
 }
