@@ -273,6 +273,7 @@ class ProductEditFacade {
 		$seoTitles = $productEditData->seoTitles;
 		$seoMetaDescriptions = $productEditData->seoMetaDescriptions;
 		$descriptions = $productEditData->descriptions;
+		$heurekaCpcValues = $productEditData->heurekaCpcValues;
 		foreach ($productDomains as $domainId => $productDomain) {
 			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
 				$productDomain->setHidden(true);
@@ -287,6 +288,9 @@ class ProductEditFacade {
 			}
 			if (!empty($descriptions)) {
 				$productDomain->setDescription($descriptions[$domainId]);
+			}
+			if (!empty($heurekaCpcValues)) {
+				$productDomain->setHeurekaCpc($heurekaCpcValues[$domainId]);
 			}
 		}
 

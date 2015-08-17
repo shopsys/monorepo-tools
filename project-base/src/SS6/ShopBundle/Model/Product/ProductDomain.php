@@ -57,6 +57,13 @@ class ProductDomain {
 	private $description;
 
 	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
+	 */
+	private $heurekaCpc;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 */
@@ -147,6 +154,20 @@ class ProductDomain {
 	 */
 	public function getProduct() {
 		return $this->product;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getHeurekaCpc() {
+		return $this->heurekaCpc;
+	}
+
+	/**
+	 * @param string|null $heurekaCpc
+	 */
+	public function setHeurekaCpc($heurekaCpc) {
+		$this->heurekaCpc = $heurekaCpc;
 	}
 
 }
