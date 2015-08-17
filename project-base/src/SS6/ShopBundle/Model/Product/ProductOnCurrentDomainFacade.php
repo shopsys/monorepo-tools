@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
@@ -204,7 +205,7 @@ class ProductOnCurrentDomainFacade {
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$emptyProductFilterData,
-			ProductListOrderingSetting::ORDER_BY_NAME_ASC,
+			ProductListOrderingModeFacade::ORDER_BY_NAME_ASC,
 			$this->currentCustomer->getPricingGroup(),
 			$page,
 			$limit
