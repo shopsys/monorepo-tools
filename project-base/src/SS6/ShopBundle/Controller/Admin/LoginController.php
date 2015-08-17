@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
+use SS6\ShopBundle\Model\Security\LoginService;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ class LoginController extends Controller {
 			'method' => 'POST',
 		]);
 
-		$loginService = $this->container->get('ss6.shop.security.login_service');
+		$loginService = $this->container->get(LoginService::class);
 		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
 		try {
 			$loginService->checkLoginProcess($request);

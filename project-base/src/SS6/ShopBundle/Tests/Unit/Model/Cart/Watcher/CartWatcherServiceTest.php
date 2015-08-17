@@ -30,14 +30,14 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 			->getMock();
 		$productMock->expects($this->any())->method('getCurrentLocale')->willReturn('cs');
 
-		$productPriceCalculationForUser = $this->getContainer()->get('ss6.shop.product.pricing.product_price_calculation_for_user');
+		$productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
 		/* @var $productPriceCalculationForUser \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
 		$productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($productMock);
 		$cartItem = new CartItem($customerIdentifier, $productMock, 1, $productPrice->getPriceWithVat());
 		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
 
-		$cartWatcherService = $this->getContainer()->get('ss6.shop.cart.cart_watcher_service');
+		$cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
 		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
 
 		$modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
@@ -70,7 +70,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartItems = [$cartItemMock];
 		$cart = new Cart($cartItems);
 
-		$cartWatcherService = $this->getContainer()->get('ss6.shop.cart.cart_watcher_service');
+		$cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
 		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
 
 		$notListableItems = $cartWatcherService->getNotListableItems($cart, $currentCustomerMock);

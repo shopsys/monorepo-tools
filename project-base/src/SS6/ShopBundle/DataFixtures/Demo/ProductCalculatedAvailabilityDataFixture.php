@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 
 class ProductCalculatedAvailabilityDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -15,9 +17,9 @@ class ProductCalculatedAvailabilityDataFixture extends AbstractReferenceFixture 
 	 */
 	public function load(ObjectManager $manager) {
 		// @codingStandardsIgnoreStart
-		$productAvailabilityRecalculationScheduler = $this->get('ss6.shop.product.availability.product_availability_recalculation_scheduler');
+		$productAvailabilityRecalculationScheduler = $this->get(ProductAvailabilityRecalculationScheduler::class);
 		/* @var $productAvailabilityRecalculationScheduler \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler */
-		$productAvailabilityRecalculator = $this->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->get(ProductAvailabilityRecalculator::class);
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 		// @codingStandardsIgnoreEnd
 

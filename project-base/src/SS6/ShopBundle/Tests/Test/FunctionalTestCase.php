@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Test;
 
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase {
@@ -12,7 +14,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 	private $client;
 
 	protected function setUpDomain() {
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$domain = $this->getContainer()->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
 		$domain->switchDomainById(1);
 	}
@@ -58,7 +60,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @return object
 	 */
 	protected function getReference($referenceName) {
-		$persistentReferenceService = $this->getContainer()->get('ss6.shop.data_fixture.persistent_reference_service');
+		$persistentReferenceService = $this->getContainer()->get(PersistentReferenceService::class);
 		/* @var $persistentReferenceService \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
 
 		return $persistentReferenceService->getReference($referenceName);

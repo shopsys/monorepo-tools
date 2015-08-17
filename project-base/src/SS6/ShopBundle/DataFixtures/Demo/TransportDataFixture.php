@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
+use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -75,7 +76,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 * @param \SS6\ShopBundle\Model\Transport\TransportEditData $transportEditData
 	 */
 	private function createTransport($referenceName, TransportEditData $transportEditData) {
-		$transportEditFacade = $this->get('ss6.shop.transport.transport_edit_facade');
+		$transportEditFacade = $this->get(TransportEditFacade::class);
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 
 		$transport = $transportEditFacade->create($transportEditData);

@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 
 class ProductCalculatedPriceDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -14,9 +16,9 @@ class ProductCalculatedPriceDataFixture extends AbstractReferenceFixture impleme
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$productPriceRecalculationScheduler = $this->get('ss6.shop.product.pricing.product_price_recalculation_scheduler');
+		$productPriceRecalculationScheduler = $this->get(ProductPriceRecalculationScheduler::class);
 		/* @var $productPriceRecalculationScheduler \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler */
-		$productPriceRecalculator = $this->get('ss6.shop.product.pricing.product_price_recalculator');
+		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
 		$productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();

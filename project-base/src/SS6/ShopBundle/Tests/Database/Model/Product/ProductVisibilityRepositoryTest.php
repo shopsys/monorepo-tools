@@ -12,7 +12,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
+use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase {
@@ -43,7 +45,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleOnAnyDomainWhenHidden() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
@@ -56,7 +58,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$id = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -76,7 +78,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleOnAnyDomainWhenNotHidden() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
@@ -88,7 +90,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$id = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -108,7 +110,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleOnAnyDomainWhenSellingInFuture() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
@@ -124,7 +126,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$id = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -136,7 +138,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleOnAnyDomainWhenSellingInPast() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
@@ -152,7 +154,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$id = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -164,7 +166,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleOnAnyDomainWhenSellingNow() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
@@ -183,7 +185,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$id = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -195,7 +197,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsNotVisibleWhenZeroOrNullPrice() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
@@ -211,7 +213,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$product2Id = $product2->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -226,7 +228,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleWithEmptyName() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
@@ -239,7 +241,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productId = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -267,7 +269,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsVisibleAccordingToVisibilityOfCategory() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
@@ -282,7 +284,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productId = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
@@ -310,7 +312,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 	public function testIsNotVisibleWhenNullOrZeroManualPrice() {
 		$em = $this->getEntityManager();
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
@@ -337,7 +339,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productId = $product->getId();
 		$em->clear();
 
-		$productVisibilityRepository = $this->getContainer()->get('ss6.shop.product.product_visibility_repository');
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 

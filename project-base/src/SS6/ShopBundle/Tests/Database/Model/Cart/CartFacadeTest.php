@@ -6,20 +6,25 @@ use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
+use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
+use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
+use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase {
 
 	public function testAddProductToCart() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
-		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$cartService = $this->getContainer()->get(CartService::class);
+		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
-		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
+		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
+		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -52,12 +57,12 @@ class CartFacadeTest extends DatabaseTestCase {
 	}
 
 	public function testAddUnsellableProductToCart() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
-		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$cartService = $this->getContainer()->get(CartService::class);
+		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
-		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
+		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
+		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product = $this->getReference('product_6');
@@ -95,12 +100,12 @@ class CartFacadeTest extends DatabaseTestCase {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function testChangeQuantities() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
-		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$cartService = $this->getContainer()->get(CartService::class);
+		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
-		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
+		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
+		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -152,10 +157,10 @@ class CartFacadeTest extends DatabaseTestCase {
 	public function testDeleteCartItemNonexistItem() {
 		$em = $this->getEntityManager();
 
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
-		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$cartService = $this->getContainer()->get(CartService::class);
+		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
@@ -181,12 +186,12 @@ class CartFacadeTest extends DatabaseTestCase {
 	public function testDeleteCartItem() {
 		$em = $this->getEntityManager();
 
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
-		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$cartService = $this->getContainer()->get(CartService::class);
+		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItemRepository = $this->getContainer()->get('ss6.shop.cart.item.cart_item_repository');
-		$cartWatcherFacade = $this->getContainer()->get('ss6.shop.cart.cart_watcher_facade');
-		$domain = $this->getContainer()->get('ss6.shop.domain');
+		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
+		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
+		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');

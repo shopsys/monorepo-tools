@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
+use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase {
@@ -25,7 +26,7 @@ class PaymentTest extends DatabaseTestCase {
 		$em->persist($payment);
 		$em->flush();
 
-		$transportEditFacade = $this->getContainer()->get('ss6.shop.transport.transport_edit_facade');
+		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 		$transportEditFacade->deleteById($transport->getId());
 

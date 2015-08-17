@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
 use SS6\ShopBundle\Model\Category\CategoryData;
+use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -24,7 +26,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$categoryVisibilityRepository = $this->get('ss6.shop.category.category_visibility_repository');
+		$categoryVisibilityRepository = $this->get(CategoryVisibilityRepository::class);
 		/* @var $categoryVisibilityRepository \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository */
 
 		$categoryData = new CategoryData();
@@ -70,7 +72,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	private function createCategory($referenceName, CategoryData $categoryData) {
-		$categoryFacade = $this->get('ss6.shop.category.category_facade');
+		$categoryFacade = $this->get(CategoryFacade::class);
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		$category = $categoryFacade->create($categoryData);

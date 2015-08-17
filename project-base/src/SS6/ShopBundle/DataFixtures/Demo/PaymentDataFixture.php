@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
+use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -78,7 +79,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		PaymentEditData $paymentEditData,
 		array $transportsReferenceNames
 	) {
-		$paymentEditFacade = $this->get('ss6.shop.payment.payment_edit_facade');
+		$paymentEditFacade = $this->get(PaymentEditFacade::class);
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$payment = $paymentEditFacade->create($paymentEditData);

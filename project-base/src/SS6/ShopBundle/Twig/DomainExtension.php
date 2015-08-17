@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Domain\DomainFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Templating\Helper\CoreAssetsHelper;
@@ -45,7 +46,7 @@ class DomainExtension extends \Twig_Extension {
 	public function getDomain() {
 		// Twig extensions are loaded during assetic:dump command,
 		// so they cannot be dependent on Domain service
-		return $this->container->get('ss6.shop.domain');
+		return $this->container->get(Domain::class);
 	}
 
 	/**

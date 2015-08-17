@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
+use SS6\ShopBundle\Model\Administrator\AdministratorService;
 
 class AdministratorDataFixture extends AbstractReferenceFixture {
 
@@ -16,7 +17,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$administratorService = $this->get('ss6.shop.administrator.administrator_service');
+		$administratorService = $this->get(AdministratorService::class);
 		/* @var $administratorService \SS6\ShopBundle\Model\Administrator\AdministratorService */
 
 		$superadmin = new Administrator(new AdministratorData(true));

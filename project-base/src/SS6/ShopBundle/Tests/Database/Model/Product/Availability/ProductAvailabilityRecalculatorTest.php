@@ -3,18 +3,21 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Product\Availability;
 
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 
 	public function testRecalculateOnProductEditNotUsingStock() {
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$productEditDataFactory = $this->getContainer()->get('ss6.shop.product.product_edit_data_factory');
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productAvailabilityRecalculator = $this->getContainer()
-			->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
 		$productId = 1;
@@ -38,14 +41,13 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 	}
 
 	public function testRecalculateOnProductEditUsingStockInStock() {
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$productEditDataFactory = $this->getContainer()->get('ss6.shop.product.product_edit_data_factory');
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
-		$availabilityFacade = $this->getContainer()->get('ss6.shop.product.availability.availability_facade');
+		$availabilityFacade = $this->getContainer()->get(AvailabilityFacade::class);
 		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
-		$productAvailabilityRecalculator = $this->getContainer()
-			->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
 		$productId = 1;
@@ -71,12 +73,11 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 	}
 
 	public function testRecalculateOnProductEditUsingStockOutOfStock() {
-		$productEditFacade = $this->getContainer()->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$productEditDataFactory = $this->getContainer()->get('ss6.shop.product.product_edit_data_factory');
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productAvailabilityRecalculator = $this->getContainer()
-			->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->getContainer()->get(ProductAvailabilityRecalculator::class);
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
 
 		$productId = 1;

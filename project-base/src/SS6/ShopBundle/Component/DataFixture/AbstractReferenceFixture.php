@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use SS6\Environment;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -31,7 +32,7 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	public function setContainer(ContainerInterface $container = null) {
 		$this->container = $container;
 		$this->kernel = $this->get('kernel');
-		$this->persistentReferenceService = $this->get('ss6.shop.data_fixture.persistent_reference_service');
+		$this->persistentReferenceService = $this->get(PersistentReferenceService::class);
 	}
 
 	/**

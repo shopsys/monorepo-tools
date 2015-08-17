@@ -3,10 +3,17 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Order;
 
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\OrderFacade;
+use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Product\ProductRepository;
+use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase {
@@ -15,21 +22,21 @@ class OrderFacadeTest extends DatabaseTestCase {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function testCreate() {
-		$cart = $this->getContainer()->get('ss6.shop.cart');
+		$cart = $this->getContainer()->get(Cart::class);
 		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cart \SS6\ShopBundle\Model\Cart\CartService */
-		$orderFacade = $this->getContainer()->get('ss6.shop.order.order_facade');
+		$orderFacade = $this->getContainer()->get(OrderFacade::class);
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$orderPreviewFactory = $this->getContainer()->get(OrderPreviewFactory::class);
 		/* @var $orderPreviewFactory \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
-		$orderRepository = $this->getContainer()->get('ss6.shop.order.order_repository');
+		$orderRepository = $this->getContainer()->get(OrderRepository::class);
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
-		$productRepository = $this->getContainer()->get('ss6.shop.product.product_repository');
+		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
-		$transportRepository = $this->getContainer()->get('ss6.shop.transport.transport_repository');
+		$transportRepository = $this->getContainer()->get(TransportRepository::class);
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
-		$paymentRepository = $this->getContainer()->get('ss6.shop.payment.payment_repository');
+		$paymentRepository = $this->getContainer()->get(PaymentRepository::class);
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -95,9 +102,9 @@ class OrderFacadeTest extends DatabaseTestCase {
 	}
 
 	public function testEdit() {
-		$orderFacade = $this->getContainer()->get('ss6.shop.order.order_facade');
+		$orderFacade = $this->getContainer()->get(OrderFacade::class);
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
-		$orderRepository = $this->getContainer()->get('ss6.shop.order.order_repository');
+		$orderRepository = $this->getContainer()->get(OrderRepository::class);
 		/* @var $orderRepository \SS6\ShopBundle\Model\Order\OrderRepository */
 
 		$order = $this->getReference('order_1');

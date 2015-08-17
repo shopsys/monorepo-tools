@@ -9,8 +9,10 @@ use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\OrderData;
+use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
@@ -24,7 +26,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function load(ObjectManager $manager) {
-		$userRepository = $this->get('ss6.shop.customer.user_repository');
+		$userRepository = $this->get(UserRepository::class);
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply@netdevelo.cz', 1);
@@ -518,7 +520,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		OrderStatus $orderStatus,
 		User $user = null
 	) {
-		$orderFacade = $this->get('ss6.shop.order.order_facade');
+		$orderFacade = $this->get(OrderFacade::class);
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$orderPreviewFactory = $this->get(OrderPreviewFactory::class);
 		/* @var $orderPreviewFactory \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory */

@@ -2,14 +2,14 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Javascript\Compiler\Constant;
 
+use SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase {
 
 	public function testProcess() {
-		$jsConstantCompilerPass = $this->getContainer()
-			->get('ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass');
+		$jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 
 		$jsCompiler = new JsCompiler([
 			$jsConstantCompilerPass,
@@ -29,8 +29,7 @@ EOD;
 	public function testProcessConstantNotFoundException() {
 		$this->setExpectedException(\SS6\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
 
-		$jsConstantCompilerPass = $this->getContainer()
-			->get('ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass');
+		$jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 
 		$jsCompiler = new JsCompiler([
 			$jsConstantCompilerPass,

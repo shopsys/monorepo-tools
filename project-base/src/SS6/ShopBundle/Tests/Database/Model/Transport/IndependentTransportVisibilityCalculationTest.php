@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Database\Model\Transport;
 
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportDomain;
@@ -27,7 +28,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$em->flush();
 
 		$independentTransportVisibilityCalculation =
-			$this->getContainer()->get('ss6.shop.transport.independent_transport_visibility_calculation');
+			$this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
 		/* @var $independentTransportVisibilityCalculation \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
 		$this->assertTrue($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
@@ -49,7 +50,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$em->flush();
 
 		$independentTransportVisibilityCalculation =
-			$this->getContainer()->get('ss6.shop.transport.independent_transport_visibility_calculation');
+			$this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
 		/* @var $independentTransportVisibilityCalculation \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
 		$this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
@@ -72,7 +73,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$em->flush();
 
 		$independentTransportVisibilityCalculation =
-			$this->getContainer()->get('ss6.shop.transport.independent_transport_visibility_calculation');
+			$this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
 		/* @var $independentTransportVisibilityCalculation \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
 		$this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
@@ -94,7 +95,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$em->flush();
 
 		$independentTransportVisibilityCalculation =
-			$this->getContainer()->get('ss6.shop.transport.independent_transport_visibility_calculation');
+			$this->getContainer()->get(IndependentTransportVisibilityCalculation::class);
 		/* @var $independentTransportVisibilityCalculation \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation */
 
 		$this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));

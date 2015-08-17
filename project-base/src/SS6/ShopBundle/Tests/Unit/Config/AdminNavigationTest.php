@@ -2,20 +2,21 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Config;
 
+use SS6\ShopBundle\Model\AdminNavigation\Menu;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdminNavigationTest extends FunctionalTestCase {
 
 	public function testHasSettingsItem() {
-		$menu = $this->getContainer()->get('ss6.shop.admin_navigation.menu');
+		$menu = $this->getContainer()->get(Menu::class);
 		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
 
 		$this->assertInstanceOf(MenuItem::class, $menu->getSettingsItem());
 	}
 
 	public function testResolveRoutes() {
-		$menu = $this->getContainer()->get('ss6.shop.admin_navigation.menu');
+		$menu = $this->getContainer()->get(Menu::class);
 		/* @var $menu \SS6\ShopBundle\Model\AdminNavigation\Menu */
 
 		$this->resolveRoutesRecursive($menu->getItems());

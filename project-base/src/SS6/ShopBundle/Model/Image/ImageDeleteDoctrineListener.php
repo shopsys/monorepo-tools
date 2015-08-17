@@ -7,6 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
+use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -58,7 +59,7 @@ class ImageDeleteDoctrineListener {
 	 * @return \SS6\ShopBundle\Model\Image\ImageFacade
 	 */
 	private function getImageFacade() {
-		return $this->container->get('ss6.shop.image.image_facade');
+		return $this->container->get(ImageFacade::class);
 	}
 
 	/**

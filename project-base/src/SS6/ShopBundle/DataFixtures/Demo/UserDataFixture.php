@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
@@ -17,10 +18,10 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$registrationService = $this->get('ss6.shop.customer.registration_service');
+		$registrationService = $this->get(RegistrationService::class);
 		/* @var $registrationService \SS6\ShopBundle\Model\Customer\RegistrationService */
 
-		$loaderService = $this->get('ss6.shop.data_fixtures.user_data_fixture_loader');
+		$loaderService = $this->get(UserDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
 
 		$customersData = $loaderService->getCustomersData();

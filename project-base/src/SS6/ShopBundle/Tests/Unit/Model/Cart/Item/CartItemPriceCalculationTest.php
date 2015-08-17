@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Cart\Item;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
+use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -13,7 +14,7 @@ use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 class CartItemPriceCalculationTest extends FunctionalTestCase {
 
 	public function testCalculatePrices() {
-		$cartItemPriceCalculation = $this->getContainer()->get('ss6.shop.cart.item.cart_item_price_calculation');
+		$cartItemPriceCalculation = $this->getContainer()->get(CartItemPriceCalculation::class);
 		/* @var $cartItemPriceCalculation \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');

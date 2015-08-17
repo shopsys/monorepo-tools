@@ -7,6 +7,8 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryDomain;
+use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
+use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture {
 
@@ -16,9 +18,9 @@ class CategoryRootDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$domain = $this->get('ss6.shop.domain');
+		$domain = $this->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
-		$categoryVisibilityRepository = $this->get('ss6.shop.category.category_visibility_repository');
+		$categoryVisibilityRepository = $this->get(CategoryVisibilityRepository::class);
 		/* @var $categoryVisibilityRepository \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository */
 
 		$category = new Category(new CategoryData());

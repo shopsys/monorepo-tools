@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
 
 use DateTime;
+use SS6\ShopBundle\Component\String\HashGenerator;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
@@ -16,7 +17,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreate() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
-		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+		$hashGenerator = $this->getContainer()->get(HashGenerator::class);
 
 		$registrationService = new RegistrationService(
 			$encoderFactory,
@@ -44,7 +45,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateNotDuplicateEmail() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
-		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+		$hashGenerator = $this->getContainer()->get(HashGenerator::class);
 
 		$registrationService = new RegistrationService(
 			$encoderFactory,
@@ -87,7 +88,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateDuplicateEmail() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
-		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+		$hashGenerator = $this->getContainer()->get(HashGenerator::class);
 
 		$registrationService = new RegistrationService(
 			$encoderFactory,
@@ -129,7 +130,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 
 	public function testCreateDuplicateEmailCaseInsentitive() {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
-		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+		$hashGenerator = $this->getContainer()->get(HashGenerator::class);
 
 		$registrationService = new RegistrationService(
 			$encoderFactory,
@@ -214,7 +215,7 @@ class RegistrationServiceTest extends FunctionalTestCase {
 		$isExpectedValid
 	) {
 		$encoderFactory = $this->getContainer()->get('security.encoder_factory');
-		$hashGenerator = $this->getContainer()->get('ss6.shop.component.string.hash_generator');
+		$hashGenerator = $this->getContainer()->get(HashGenerator::class);
 
 		$registrationService = new RegistrationService(
 			$encoderFactory,

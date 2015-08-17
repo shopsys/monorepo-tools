@@ -9,15 +9,17 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductService;
+use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductServiceTest extends DatabaseTestCase {
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat() {
-		$productService = $this->getContainer()->get('ss6.shop.product.product_service');
+		$productService = $this->getContainer()->get(ProductService::class);
 		/* @var $productService \SS6\ShopBundle\Model\Product\ProductService */
-		$setting = $this->getContainer()->get('ss6.shop.setting');
+		$setting = $this->getContainer()->get(Setting::class);
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON);
@@ -41,9 +43,9 @@ class ProductServiceTest extends DatabaseTestCase {
 	}
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat() {
-		$productService = $this->getContainer()->get('ss6.shop.product.product_service');
+		$productService = $this->getContainer()->get(ProductService::class);
 		/* @var $productService \SS6\ShopBundle\Model\Product\ProductService */
-		$setting = $this->getContainer()->get('ss6.shop.setting');
+		$setting = $this->getContainer()->get(Setting::class);
 		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT, SettingValue::DOMAIN_ID_COMMON);

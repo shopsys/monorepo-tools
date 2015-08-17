@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
@@ -14,7 +15,7 @@ use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 class CartServiceTest extends FunctionalTestCase {
 
 	public function testAddProductToCartInvalidFloatQuantity() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -30,7 +31,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductToCartInvalidZeroQuantity() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -46,7 +47,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductToCartInvalidNegativeQuantity() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -62,7 +63,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductToCartNewProduct() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -81,7 +82,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductToCartSameProduct() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -101,7 +102,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testCleanCart() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
@@ -120,7 +121,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testMergeCarts() {
-		$cartService = $this->getContainer()->get('ss6.shop.cart.cart_service');
+		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$price = 100;

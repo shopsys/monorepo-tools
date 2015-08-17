@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Form\Front\Login\LoginFormType;
+use SS6\ShopBundle\Model\Security\LoginService;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -15,7 +16,7 @@ class LoginController extends Controller {
 			return $this->redirect($this->generateUrl('front_homepage'));
 		}
 
-		$loginService = $this->container->get('ss6.shop.security.login_service');
+		$loginService = $this->container->get(LoginService::class);
 		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
 
 		$form = $this->getLoginForm();

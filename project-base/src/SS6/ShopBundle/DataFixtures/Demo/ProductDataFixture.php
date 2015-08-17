@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -47,7 +48,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	private function createProduct($referenceName, ProductEditData $productEditData) {
-		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
 		$product = $productEditFacade->create($productEditData);
@@ -61,7 +62,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \SS6\ShopBundle\Model\Product\Product[catnum] $productsByCatnum
 	 */
 	private function createVariants(array $productsByCatnum) {
-		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
+		$loaderService = $this->get(ProductDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
 		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();

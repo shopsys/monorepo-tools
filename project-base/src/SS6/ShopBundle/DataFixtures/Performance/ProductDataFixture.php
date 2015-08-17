@@ -8,8 +8,12 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -58,9 +62,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	public function load(ObjectManager $objectManager) {
 		$em = $this->get('doctrine.orm.entity_manager');
 		/* @var $em \Doctrine\ORM\EntityManager */
-		$productEditFacade = $this->get('ss6.shop.product.product_edit_facade');
+		$productEditFacade = $this->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$loaderService = $this->get('ss6.shop.data_fixtures.product_data_fixture_loader');
+		$loaderService = $this->get(ProductDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
 		// Sql logging during mass data import makes memory leak
@@ -202,11 +206,11 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param bool $runGlobalRecalculators
 	 */
 	private function runRecalculators($runGlobalRecalculators = false) {
-		$productAvailabilityRecalculator = $this->get('ss6.shop.product.availability.product_availability_recalculator');
+		$productAvailabilityRecalculator = $this->get(ProductAvailabilityRecalculator::class);
 		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
-		$productVisibilityFacade = $this->get('ss6.shop.product.product_visibility_facade');
+		$productVisibilityFacade = $this->get(ProductVisibilityFacade::class);
 		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
-		$productPriceRecalculator = $this->get('ss6.shop.product.pricing.product_price_recalculator');
+		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
 		$productAvailabilityRecalculator->runImmediateRecalculations();
