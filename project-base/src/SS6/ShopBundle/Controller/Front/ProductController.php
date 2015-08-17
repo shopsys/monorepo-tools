@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Module\ModuleFacade;
 use SS6\ShopBundle\Model\Module\ModuleList;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeFacade;
 use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use SS6\ShopBundle\Twig\RequestExtension;
@@ -53,6 +54,11 @@ class ProductController extends FrontBaseController {
 	private $productListOrderingModeFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig
+	 */
+	private $productListOrderingConfig;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
 	 */
 	private $moduleFacade;
@@ -64,6 +70,7 @@ class ProductController extends FrontBaseController {
 		ProductOnCurrentDomainFacade $productOnCurrentDomainFacade,
 		ProductFilterFormTypeFactory $productFilterFormTypeFactory,
 		ProductListOrderingModeFacade $productListOrderingModeFacade,
+		ProductListOrderingConfig $productListOrderingConfig,
 		ModuleFacade $moduleFacade
 	) {
 		$this->requestExtension = $requestExtension;
@@ -72,6 +79,7 @@ class ProductController extends FrontBaseController {
 		$this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
 		$this->productFilterFormTypeFactory = $productFilterFormTypeFactory;
 		$this->productListOrderingModeFacade = $productListOrderingModeFacade;
+		$this->productListOrderingConfig = $productListOrderingConfig;
 		$this->moduleFacade = $moduleFacade;
 	}
 
@@ -113,7 +121,10 @@ class ProductController extends FrontBaseController {
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
-		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest($request);
+		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest(
+			$request,
+			$this->productListOrderingConfig
+		);
 
 		$productFilterData = new ProductFilterData();
 
@@ -169,7 +180,10 @@ class ProductController extends FrontBaseController {
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
-		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest($request);
+		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest(
+			$request,
+			$this->productListOrderingConfig
+		);
 
 		$productFilterData = new ProductFilterData();
 
@@ -248,15 +262,18 @@ class ProductController extends FrontBaseController {
 	}
 
 	public function selectOrderingModeAction(Request $request) {
-		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest($request);
+		$orderingMode = $this->productListOrderingModeFacade->getOrderingModeFromRequest(
+			$request,
+			$this->productListOrderingConfig
+		);
 		$form = $this->createForm(new OrderingSettingFormType(
-			$this->productListOrderingModeFacade->getSupportedOrderingModesNames()
+			$this->productListOrderingConfig->getSupportedOrderingModesNames()
 		));
 		$form->setData(['orderingMode' => $orderingMode]);
 
 		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
 			'form' => $form->createView(),
-			'cookieName' => $this->productListOrderingModeFacade->getCookieName(),
+			'cookieName' => $this->productListOrderingConfig->getCookieName(),
 		]);
 	}
 
