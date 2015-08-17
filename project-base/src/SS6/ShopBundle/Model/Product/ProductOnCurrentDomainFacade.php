@@ -216,16 +216,23 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param int $categoryId
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
 	public function getProductFilterCountDataInCategory(
 		$categoryId,
+		array $flagFilterChoices,
+		array $parameterFilterChoices,
 		ProductFilterData $productFilterData
 	) {
 		return $this->productFilterCountRepository->getProductFilterCountDataInCategory(
 			$this->categoryRepository->getById($categoryId),
 			$this->domain->getId(),
+			$this->domain->getLocale(),
+			$flagFilterChoices,
+			$parameterFilterChoices,
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
 		);
@@ -233,17 +240,20 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param string|null $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
 	public function getProductFilterCountDataForSearch(
 		$searchText,
+		array $flagFilterChoices,
 		ProductFilterData $productFilterData
 	) {
 		return $this->productFilterCountRepository->getProductFilterCountDataForSearch(
 			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
+			$flagFilterChoices,
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
 		);

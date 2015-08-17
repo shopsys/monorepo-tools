@@ -108,7 +108,8 @@ class ProductController extends FrontBaseController {
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createFilterFormForCategory($category);
+		$productFilterFormType = $this->createProductFilterFormTypeForCategory($category);
+		$filterForm = $this->createForm($productFilterFormType);
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
@@ -122,6 +123,8 @@ class ProductController extends FrontBaseController {
 
 		$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataInCategory(
 			$id,
+			$productFilterFormType->getFlagFilterChoices(),
+			$productFilterFormType->getParameterFilterChoices(),
 			$productFilterData
 		);
 
@@ -158,7 +161,8 @@ class ProductController extends FrontBaseController {
 
 		$productFilterData = new ProductFilterData();
 
-		$filterForm = $this->createFilterFormForSearch($searchText);
+		$productFilterFormType = $this->createProductFilterFormTypeForSearch($searchText);
+		$filterForm = $this->createForm($productFilterFormType);
 		$filterForm->setData($productFilterData);
 		$filterForm->handleRequest($request);
 
@@ -172,6 +176,7 @@ class ProductController extends FrontBaseController {
 
 		$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch(
 			$searchText,
+			$productFilterFormType->getFlagFilterChoices(),
 			$productFilterData
 		);
 
@@ -193,26 +198,26 @@ class ProductController extends FrontBaseController {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \Symfony\Component\Form\Form
+	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
-	private function createFilterFormForCategory(Category $category) {
-		return $this->createForm($this->productFilterFormTypeFactory->createForCategory(
+	private function createProductFilterFormTypeForCategory(Category $category) {
+		return $this->productFilterFormTypeFactory->createForCategory(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$category
-		));
+		);
 	}
 
 	/**
 	 * @param string|null $searchText
-	 * @return \Symfony\Component\Form\Form
+	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
-	private function createFilterFormForSearch($searchText) {
-		return $this->createForm($this->productFilterFormTypeFactory->createForSearch(
+	private function createProductFilterFormTypeForSearch($searchText) {
+		return $this->productFilterFormTypeFactory->createForSearch(
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$searchText
-		));
+		);
 	}
 
 	/**

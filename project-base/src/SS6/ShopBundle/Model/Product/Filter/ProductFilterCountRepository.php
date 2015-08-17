@@ -3,12 +3,14 @@
 namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
+use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -42,6 +44,9 @@ class ProductFilterCountRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
+	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
@@ -49,6 +54,9 @@ class ProductFilterCountRepository {
 	public function getProductFilterCountDataInCategory(
 		Category $category,
 		$domainId,
+		$locale,
+		array $flagFilterChoices,
+		array $parameterFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
@@ -58,17 +66,34 @@ class ProductFilterCountRepository {
 			$category
 		);
 
-		return $this->getProductFilterCountData(
+		$productFilterCountData = new ProductFilterCountData();
+		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
 			$productFilterData,
 			$pricingGroup
 		);
+		$productFilterCountData->countByFlagId = $this->getCountByFlagId(
+			$productsQueryBuilder,
+			$flagFilterChoices,
+			$productFilterData,
+			$pricingGroup
+		);
+		$productFilterCountData->countByParameterIdAndValueId = $this->getCountByParameterIdAndValueId(
+			$productsQueryBuilder,
+			$parameterFilterChoices,
+			$productFilterData,
+			$pricingGroup,
+			$locale
+		);
+
+		return $productFilterCountData;
 	}
 
 	/**
 	 * @param string|null $searchText
 	 * @param int $domainId
 	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
@@ -77,6 +102,7 @@ class ProductFilterCountRepository {
 		$searchText,
 		$domainId,
 		$locale,
+		array $flagFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
@@ -87,24 +113,6 @@ class ProductFilterCountRepository {
 			$searchText
 		);
 
-		return $this->getProductFilterCountData(
-			$productsQueryBuilder,
-			$productFilterData,
-			$pricingGroup
-		);
-	}
-
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
-	 */
-	private function getProductFilterCountData(
-		QueryBuilder $productsQueryBuilder,
-		ProductFilterData $productFilterData,
-		PricingGroup $pricingGroup
-	) {
 		$productFilterCountData = new ProductFilterCountData();
 		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
@@ -113,6 +121,7 @@ class ProductFilterCountRepository {
 		);
 		$productFilterCountData->countByFlagId = $this->getCountByFlagId(
 			$productsQueryBuilder,
+			$flagFilterChoices,
 			$productFilterData,
 			$pricingGroup
 		);
@@ -151,15 +160,21 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return int
 	 */
 	private function getCountByFlagId(
 		QueryBuilder $productsQueryBuilder,
+		array $flagFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
+		if (count($flagFilterChoices) === 0) {
+			return [];
+		}
+
 		$productFilterDataExceptFlags = clone $productFilterData;
 		$productFilterDataExceptFlags->flags = [];
 
@@ -174,20 +189,27 @@ class ProductFilterCountRepository {
 		$productsFilteredExceptFlagsQueryBuilder
 			->select('f.id, COUNT(p) AS cnt')
 			->join('p.flags', 'f')
-			->andWhere(
-				$productsFilteredExceptFlagsQueryBuilder->expr()->notIn(
-					'p.id',
-					$this->em->createQueryBuilder()
-						->select('_p.id')
-						->from(Product::class, '_p')
-						->join('_p.flags', '_f')
-						->where('_f IN (:activeFlags)')
-						->getDQL()
+			->andWhere('f IN (:filterFlags)')->setParameter('filterFlags', $flagFilterChoices);
+
+		if (count($productFilterData->flags) > 0) {
+			$productsFilteredExceptFlagsQueryBuilder
+				->andWhere(
+					$productsFilteredExceptFlagsQueryBuilder->expr()->notIn(
+						'p.id',
+						$this->em->createQueryBuilder()
+							->select('_p.id')
+							->from(Product::class, '_p')
+							->join('_p.flags', '_f')
+							->where('_f IN (:activeFlags)')
+							->getDQL()
+					)
 				)
-			)
+				->setParameter('activeFlags', $productFilterData->flags);
+		}
+
+		$productsFilteredExceptFlagsQueryBuilder
 			->resetDQLPart('orderBy')
-			->groupBy('f.id')
-			->setParameter('activeFlags', $productFilterData->flags);
+			->groupBy('f.id');
 
 		$rows = $productsFilteredExceptFlagsQueryBuilder->getQuery()->execute();
 
@@ -197,6 +219,62 @@ class ProductFilterCountRepository {
 		}
 
 		return $countByFlagId;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param string $locale
+	 * @return int
+	 */
+	private function getCountByParameterIdAndValueId(
+		QueryBuilder $productsQueryBuilder,
+		array $parameterFilterChoices,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup,
+		$locale
+	) {
+		$countByParameterIdAndValueId = [];
+
+		foreach ($parameterFilterChoices as $parameterFilterChoice) {
+			$currentParameter = $parameterFilterChoice->getParameter();
+
+			$productFilterDataExceptCurrentParameter = clone $productFilterData;
+			foreach ($productFilterDataExceptCurrentParameter->parameters as $index => $parameterFilterData) {
+				if ($parameterFilterData->parameter->getId() === $currentParameter->getId()) {
+					unset($productFilterDataExceptCurrentParameter->parameters[$index]);
+				}
+			}
+
+			$productsFilteredExceptCurrentParameterQueryBuilder = clone $productsQueryBuilder;
+
+			$this->productFilterRepository->applyFiltering(
+				$productsFilteredExceptCurrentParameterQueryBuilder,
+				$productFilterDataExceptCurrentParameter,
+				$pricingGroup
+			);
+
+			$productsFilteredExceptCurrentParameterQueryBuilder
+				->select('pv.id, COUNT(p) AS cnt')
+				->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p AND ppv.locale = :locale')
+				->join('ppv.value', 'pv')
+				->andWhere('ppv.parameter = :parameter')
+				->resetDQLPart('orderBy')
+				->groupBy('pv.id')
+				->setParameter('locale', $locale)
+				->setParameter('parameter', $currentParameter);
+
+			$rows = $productsFilteredExceptCurrentParameterQueryBuilder->getQuery()->execute();
+
+			$countByParameterIdAndValueId[$currentParameter->getId()] = [];
+			foreach ($rows as $row) {
+				$countByParameterIdAndValueId[$currentParameter->getId()][$row['id']] = $row['cnt'];
+			}
+		}
+
+		return $countByParameterIdAndValueId;
 	}
 
 }
