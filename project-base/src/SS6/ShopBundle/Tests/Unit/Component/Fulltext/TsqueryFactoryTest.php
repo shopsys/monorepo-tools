@@ -27,6 +27,32 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 			["one  \t\n two", 'one & two'],
 			['at&t', 'at & t'],
 			['full-text', 'full-text'],
+			['přílišžluťoučkýkůňúpělďábelskéódy', 'přílišžluťoučkýkůňúpělďábelskéódy'],
+			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', 'PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY'],
+		];
+	}
+
+	/**
+	 * @dataProvider getTsqueryWithOrConditionsData
+	 */
+	public function testGetTsqueryWithOrConditions($searchText, $expectedResult) {
+		$tsqueryFactory = new TsqueryFactory();
+
+		$result = $tsqueryFactory->getTsqueryWithOrConditions($searchText);
+
+		$this->assertSame($expectedResult, $result);
+	}
+
+	public function getTsqueryWithOrConditionsData() {
+		return [
+			[null, ''],
+			['', ''],
+			['asdf', 'asdf'],
+			['one two', 'one | two'],
+			["one  \t\n two", 'one | two'],
+			['at&t', 'at | t'],
+			['full-text', 'full-text'],
+			['one|two', 'one | two'],
 		];
 	}
 

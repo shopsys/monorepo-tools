@@ -34,12 +34,13 @@ class ProductListOrderingModeForSearchFacade {
 	public function getProductListOrderingConfig() {
 		return new ProductListOrderingConfig(
 			[
+				ProductListOrderingModeService::ORDER_BY_RELEVANCE => $this->translator->trans('relevance'),
 				ProductListOrderingModeService::ORDER_BY_NAME_ASC => $this->translator->trans('abecedně A -> Z'),
 				ProductListOrderingModeService::ORDER_BY_NAME_DESC => $this->translator->trans('abecedně Z -> A'),
 				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => $this->translator->trans('od nejlevnějšího'),
 				ProductListOrderingModeService::ORDER_BY_PRICE_DESC => $this->translator->trans('od nejdražšího'),
 			],
-			ProductListOrderingModeService::ORDER_BY_NAME_ASC,
+			ProductListOrderingModeService::ORDER_BY_RELEVANCE,
 			self::COOKIE_NAME
 		);
 	}

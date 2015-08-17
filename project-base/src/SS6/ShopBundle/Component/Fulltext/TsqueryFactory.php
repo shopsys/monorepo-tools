@@ -16,6 +16,16 @@ class TsqueryFactory {
 
 	/**
 	 * @param string|null $searchText
+	 * @return string
+	 */
+	public function getTsqueryWithOrConditions($searchText) {
+		$tokens = $this->splitToTokens($searchText);
+
+		return implode(' | ', $tokens);
+	}
+
+	/**
+	 * @param string|null $searchText
 	 * @return string[]
 	 */
 	private function splitToTokens($searchText) {

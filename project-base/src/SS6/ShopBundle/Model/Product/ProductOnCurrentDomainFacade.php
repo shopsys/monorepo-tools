@@ -205,7 +205,7 @@ class ProductOnCurrentDomainFacade {
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$emptyProductFilterData,
-			ProductListOrderingModeService::ORDER_BY_NAME_ASC,
+			ProductListOrderingModeService::ORDER_BY_RELEVANCE,
 			$this->currentCustomer->getPricingGroup(),
 			$page,
 			$limit

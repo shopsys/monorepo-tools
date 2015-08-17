@@ -312,6 +312,7 @@ class ProductRepository {
 			$pricingGroup
 		);
 
+		$this->productSearchRepository->addRelevance($queryBuilder, $searchText);
 		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
@@ -393,6 +394,10 @@ class ProductRepository {
 				);
 				$queryBuilder->orderBy('pcp.priceWithVat', 'desc');
 				$queryBuilder->setParameter('pricingGroup', $pricingGroup);
+				break;
+
+			case ProductListOrderingModeService::ORDER_BY_RELEVANCE:
+				$queryBuilder->orderBy('relevance', 'asc');
 				break;
 
 			default:
