@@ -133,6 +133,32 @@
 	{{ form_errors(form) }}
 {%- endblock text_row %}
 
+{% block money_row %}
+	{% if multidomain is defined %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<div class="input__wrap">
+					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--domain')|trim}) %}
+					{{ form_widget(form, { attr: inputAttr }) }}
+					<span class="input__domain">
+						{{ domainIcon(domainId) }}
+					</span>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<div class="form-line">
+			{{ form_label(form, label) }}
+			<div class="form-line__side">
+				<div class="form-line__item">
+					{{ form_widget(form) }}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	{{ form_errors(form) }}
+{% endblock %}
+
 {% block textarea_row -%}
 	<div class="form-line">
 		{% if localized is defined %}

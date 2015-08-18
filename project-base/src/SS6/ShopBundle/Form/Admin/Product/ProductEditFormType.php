@@ -201,6 +201,20 @@ class ProductEditFormType extends AbstractType {
 					])
 					->addViewTransformer($this->removeDuplicatesTransformer)
 			)
+			->add('heurekaCpcValues', FormType::MULTIDOMAIN, [
+				'type' => FormType::MONEY,
+				'required' => false,
+				'options' => [
+					'currency' => 'CZK',
+					'precision' => 2,
+					'constraints' => [
+						new Constraints\Range([
+							'min' => 0,
+							'max' => 100,
+						]),
+					],
+				],
+			])
 			->add('save', FormType::SUBMIT);
 
 		foreach ($this->pricingGroups as $pricingGroup) {

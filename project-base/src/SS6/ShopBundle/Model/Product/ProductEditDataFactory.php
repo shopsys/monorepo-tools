@@ -82,6 +82,7 @@ class ProductEditDataFactory {
 		$productEditData->seoMetaDescriptions = [];
 		$productEditData->descriptions = [];
 		$productEditData->accessories = [];
+		$productEditData->heurekaCpcValues = [];
 
 		$productEditData->urls[UrlListType::TO_DELETE] = [];
 		$productEditData->urls[UrlListType::MAIN_ON_DOMAINS] = [];
@@ -152,6 +153,7 @@ class ProductEditDataFactory {
 
 			$productEditData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
+			$productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
 		}
 	}
 
