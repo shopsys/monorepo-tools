@@ -17,7 +17,7 @@
 {% block grid_value_cell_id_visible %}
 	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
 	{% if row.p.calculatedSellingDenied %}
-		<i class="svg svg-basket cart-disabled" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
+		<i class="svg svg-cart cart-disabled" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
 	{% endif %}
 {% endblock %}
 
