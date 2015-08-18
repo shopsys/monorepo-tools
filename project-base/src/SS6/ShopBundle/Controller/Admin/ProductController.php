@@ -289,6 +289,8 @@ class ProductController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
+			$product = $this->productEditFacade->getById($id);
+
 			$this->em->transactional(
 				function () use ($id) {
 					$this->productEditFacade->delete($id);
@@ -296,7 +298,7 @@ class ProductController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán', [
-				'product' => $this->productEditFacade->getById($id),
+				'product' => $product,
 			]);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený produkt neexistuje.');
