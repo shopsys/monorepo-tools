@@ -373,15 +373,15 @@
 	<tr class="js-products-picker-item table-form__row">
 		<td class="table-form__cell">
 			{%if sortable %}
-				<span class="left mr5 js-products-picker-item-handle c-move">
-					<span class="svg svg-move"></span>
+				<span class="js-products-picker-item-handle table-form__cell__move">
+					<span class="in-icon in-icon--move svg svg-move"></span>
 				</span>
 			{% endif %}
 			<span class="js-products-picker-item-product-name">{{ productName }}</span>
 		</td>
 		<td class="table-form__cell table-form__cell--actions">
 			<span class="c-pointer js-products-picker-item-button-delete c-pointer">
-				<span class="svg svg-circle-cross"></span>
+				<span class="svg svg-circle-cross in-icon"></span>
 				{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
 			</span>
 		</td>
