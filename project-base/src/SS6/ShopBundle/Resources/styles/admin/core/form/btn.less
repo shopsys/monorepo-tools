@@ -86,9 +86,35 @@ button types
 	background: none;
 	text-decoration: underline;
 	color: @color-link;
+	font-size: 13px;
+	font-weight: normal;
 
 	&:hover {
 		text-decoration: none;
 		color: @color-link-hover;
+	}
+
+	&--iconic-l {
+		text-decoration: none;
+
+		i {
+			margin-right: 3px;
+			position: relative;
+			top: -2px;
+
+			font-size: 16px;
+		}
+
+		span {
+			display: inline-block;
+
+			text-decoration: underline;
+		}
+
+		&:hover {
+			span {
+				text-decoration: none;
+			}
+		}
 	}
 }
