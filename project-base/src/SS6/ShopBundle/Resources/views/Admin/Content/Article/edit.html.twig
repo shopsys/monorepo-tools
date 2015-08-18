@@ -6,12 +6,16 @@
 {% block article_domain %}
 	<div class="form-line">
 		<label class="form-line__label">{{ 'Doména:'|trans }}</label>
-		<input
-			type="text"
-			value="{{ getDomainName(article.domainId) }}"
-			class="form-control form-line__field"
-			readonly="readonly"
-		>
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<input
+					type="text"
+					value="{{ getDomainName(article.domainId) }}"
+					class="input"
+					readonly="readonly"
+				>
+			</div>
+		</div>
 	</div>
 {% endblock %}
 
