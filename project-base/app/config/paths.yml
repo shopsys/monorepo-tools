@@ -1,0 +1,24 @@
+parameters:
+  ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
+  ss6.cron_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/cron.yml
+  ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources
+  ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
+  ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
+  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v6.zip
+  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v5.sql
+  ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
+  ss6.domain_images_url_prefix: /assets/admin/images/domain
+  ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
+  ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
+  ss6.feed_url_prefix: /assets/content/feeds/
+  ss6.file_dir: %ss6.web_dir%/assets/content/files
+  ss6.file_url_prefix: /assets/content/files/
+  ss6.image_dir: %ss6.web_dir%/assets/content/images
+  ss6.image_url_prefix: /assets/content/images/
+  ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
+  ss6.javascript_sources_dir: %ss6.resources_dir%/scripts
+  ss6.javascript_url_prefix: /assets/scripts/
+  ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
+  ss6.root_dir: %kernel.root_dir%/..
+  ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
+  ss6.web_dir: %kernel.root_dir%/../web
