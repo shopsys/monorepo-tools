@@ -20,7 +20,7 @@
 	};
 
 	SS6.validation.isFormValid = function (form) {
-		return $(form).find('.form-input-error:first, .js-validation-errors-list li[class]:first').size() === 0;
+		return $(form).find('.form-input-error:first, .js-validation-errors-list li').size() === 0;
 	};
 
 	SS6.validation.getErrorListClass = function (elementName) {
@@ -101,9 +101,7 @@
 			});
 			if (!SS6.validation.isFormValid(this)) {
 				event.preventDefault();
-				SS6.window({
-					content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
-				});
+				SS6.validation.showFormErrorsWindow(this);
 			} else if ($(this).data('on-submit') !== undefined) {
 				$(this).trigger($(this).data('on-submit'));
 				event.preventDefault();

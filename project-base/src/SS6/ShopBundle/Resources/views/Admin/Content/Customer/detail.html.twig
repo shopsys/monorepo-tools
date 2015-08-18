@@ -31,7 +31,7 @@
 			{% block customer_last_login %}{% endblock %}
 		</div>
 
-		<div class="wrap-group" id="customer_billingAddressData">
+		<div class="wrap-group" id="customer_form_billingAddressData">
 			<h2>{{ 'Firemní údaje'|trans }}</h2>
 			{{ form_row(form.billingAddressData.companyCustomer, {
 				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
@@ -51,7 +51,7 @@
 			{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans }) }}
 		</div>
 
-		<div class="wrap-group" id="customer_deliveryAddressData">
+		<div class="wrap-group" id="customer_form_deliveryAddressData">
 			<h2>{{ 'Doručovací adresa'|trans }}</h2>
 			{{ form_row(form.deliveryAddressData.addressFilled, {
 				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
