@@ -44,6 +44,10 @@ Table for form line component
 
 		text-align: left;
 
+		.ui-sortable-helper & {
+			width: 100%;
+		}
+
 		&--label {
 			width: 229px;
 
@@ -116,6 +120,14 @@ Table for form line component
 			line-height: 26px;
 
 			font-weight: bold;
+		}
+
+		&__move {
+			float: left;
+			margin-right: 5px;
+			position: relative;
+			top: -1px;
+			margin-bottom: -1px;
 		}
 	}
 

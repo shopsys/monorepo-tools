@@ -29,7 +29,7 @@
 
 - label: 'Zboží'
   route: admin_product_list
-  icon: basket
+  icon: cart
   items:
     - label: 'Přehled zboží'
       route: admin_product_list
