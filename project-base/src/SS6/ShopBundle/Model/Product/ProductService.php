@@ -140,7 +140,7 @@ class ProductService {
 	public function delete(Product $product) {
 		if ($product->isMainVariant()) {
 			foreach ($product->getVariants() as $variantProduct) {
-				$variantProduct->unsetVariant();
+				$variantProduct->unsetMainVariant();
 			}
 		}
 		if ($product->isVariant()) {

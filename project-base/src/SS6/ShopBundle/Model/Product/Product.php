@@ -613,7 +613,7 @@ class Product extends AbstractTranslatableEntity {
 		return $this->variants;
 	}
 
-	public function unsetVariant() {
+	public function unsetMainVariant() {
 		$this->variantType = self::VARIANT_TYPE_NONE;
 		$this->mainVariant = null;
 	}
