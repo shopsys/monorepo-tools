@@ -8,7 +8,7 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			<fieldset>
 				{{ form_id(order) }}
 				<div class="form-line">
@@ -62,7 +62,7 @@
 			</fieldset>
 		</div>
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			<h2>{{ 'Osobní údaje'|trans }}</h2>
 			<fieldset>
 				{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
@@ -72,7 +72,7 @@
 			</fieldset>
 		</div>
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			<h2>{{ 'Firemní údaje'|trans }}</h2>
 			<fieldset>
 				{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
@@ -81,7 +81,7 @@
 			</fieldset>
 		</div>
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			<h2>{{ 'Fakturační údaje'|trans }}</h2>
 			<fieldset>
 				{{ form_row(form.street, { label: 'Ulice'|trans }) }}
@@ -90,7 +90,7 @@
 			</fieldset>
 		</div>
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			<h2>{{ 'Doručovací adresa'|trans }}</h2>
 			<fieldset>
 				{{ form_row(form.deliveryAddressSameAsBillingAddress, {
@@ -108,14 +108,14 @@
 			</fieldset>
 		</div>
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			<h2>{{ 'Poznámka'|trans }}</h2>
 			<fieldset>
 				{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
 			</fieldset>
 		</div>
 
-		<div class="wrap-group form-group">
+		<div class="wrap-border">
 			<h2>{{ 'Položky objednávky'|trans }}</h2>
 			<fieldset>
 				{% if form.items is not empty %}
