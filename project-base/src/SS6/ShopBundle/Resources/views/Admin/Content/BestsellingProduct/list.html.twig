@@ -8,12 +8,13 @@
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 	{% macro categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) %}
-		<ul class="js-category-tree-items">
+		<ul class="js-category-tree-items form-tree__content">
 			{% for categoryDetail in categoryDetails %}
-				<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
+				<li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryDetail.category.id }}">
 					<div class="js-category-tree-item-line">
 						<span class="js-category-tree-item-handle">
-							<a href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryDetail.category.id, domainId: selectedDomainId}) }}">
+							<span class="form-tree__item__icon form-tree__item__icon--level sprite sprite-level"></span>
+							<a href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryDetail.category.id, domainId: selectedDomainId}) }}" class="form-tree__item__name">
 								{{ categoryDetail.category.name }}
 							</a>
 							({{ bestsellingProductsInCategories[categoryDetail.category.id] }})
@@ -25,8 +26,10 @@
 		</ul>
 	{% endmacro %}
 
-	<div class="category-tree">
-		{{ _self.categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) }}
+	<div class="form-line">
+		<div class="form-tree form-tree--open">
+			{{ _self.categoryTreeItem(categoryDetails, selectedDomainId, bestsellingProductsInCategories) }}
+		</div>
 	</div>
 
 {% endblock %}
