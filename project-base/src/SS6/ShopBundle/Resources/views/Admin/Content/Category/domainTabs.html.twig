@@ -1,22 +1,22 @@
-<div class="box-domain" role="tablist">
+<div class="in-domain" role="tablist">
 	{% if selectedDomainId == 0 %}
-		<span class="box-domain__item box-domain__item--active">
+		<span class="in-domain__item in-domain__item--active">
 			{{ 'Všechny domény'|trans }}
 		</span>
 	{% else %}
-		<a class="box-domain__item" href="{{ url('admin_category_list', { domain: 0 }) }}">
+		<a class="in-domain__item" href="{{ url('admin_category_list', { domain: 0 }) }}">
 			{{ 'Všechny domény'|trans }}
 		</a>
 	{% endif %}
 
 	{% for domainConfig in domainConfigs %}
 		{% if domainConfig.id == selectedDomainId %}
-			<span class="box-domain__item box-domain__item--active">
+			<span class="in-domain__item in-domain__item--active">
 				{{ domainIcon(domainConfig.id) }}
 				{{ domainConfig.name }}
 			</span>
 		{% else %}
-			<a class="box-domain__item" href="{{ url('admin_category_list', {domain: domainConfig.id}) }}">
+			<a class="in-domain__item" href="{{ url('admin_category_list', {domain: domainConfig.id}) }}">
 				{{ domainIcon(domainConfig.id) }}
 				{{ domainConfig.name }}
 			</a>

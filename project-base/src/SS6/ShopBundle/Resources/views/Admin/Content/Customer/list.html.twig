@@ -6,9 +6,7 @@
 {% block main_content %}
 	<a href="{{ url('admin_customer_new') }}" class="btn mb25">{{ 'Vytvořit nového zákazníka'|trans }}</a>
 
-	<div class="wrap-border">
-		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-	</div>
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 	{{ form_start(quickSearchForm) }}
 		<div class="wrap-border form-inline">
