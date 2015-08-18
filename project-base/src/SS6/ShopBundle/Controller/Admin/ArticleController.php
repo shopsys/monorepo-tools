@@ -246,6 +246,7 @@ class ArticleController extends AdminBaseController {
 
 		$gridId = $articlePlacement;
 		$grid = $this->gridFactory->create($gridId, $dataSource);
+		$grid->setDefaultOrder('position');
 
 		$grid->addColumn('name', 'a.name', 'Název');
 

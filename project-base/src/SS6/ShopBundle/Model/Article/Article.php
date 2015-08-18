@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use SS6\ShopBundle\Component\Gedmo\SortablePosition;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 
 /**
@@ -23,6 +25,7 @@ class Article implements OrderableEntityInterface {
 	/**
 	 * @var int
 	 *
+	 * @Gedmo\SortableGroup
 	 * @ORM\Column(type="integer")
 	 */
 	private $domainId;
@@ -30,7 +33,8 @@ class Article implements OrderableEntityInterface {
 	/**
 	 * @var int
 	 *
-	 * @ORM\Column(type="integer", nullable=true)
+	 * @Gedmo\SortablePosition
+	 * @ORM\Column(type="integer")
 	 */
 	private $position;
 
@@ -65,6 +69,7 @@ class Article implements OrderableEntityInterface {
 	/**
 	 * @var string
 	 *
+	 * @Gedmo\SortableGroup
 	 * @ORM\Column(type="text")
 	 */
 	private $placement;
@@ -79,6 +84,7 @@ class Article implements OrderableEntityInterface {
 		$this->seoTitle = $articleData->seoTitle;
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
 		$this->placement = $articleData->placement;
+		$this->position = SortablePosition::LAST_POSITION;
 	}
 
 	/**
