@@ -857,6 +857,11 @@ services:
   ss6.shop.security.customer_login_handler:
     class: SS6\ShopBundle\Model\Security\CustomerLoginHandler
 
+  ss6.shop.security.filesystem.filemanager_access:
+    class: SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess
+    arguments:
+      - %ss6.filemanager_upload_dir%
+
   ss6.shop.security.front_logout_handler:
     class: SS6\ShopBundle\Model\Security\FrontLogoutHandler
 

@@ -13,6 +13,8 @@ parameters:
   ss6.feed_url_prefix: /assets/content/feeds/
   ss6.file_dir: %ss6.web_dir%/assets/content/files
   ss6.file_url_prefix: /assets/content/files/
+  ss6.filemanager_upload_dir: %ss6.web_dir%/%ss6.filemanager_upload_web_dir%
+  ss6.filemanager_upload_web_dir: assets/uploads
   ss6.image_dir: %ss6.web_dir%/assets/content/images
   ss6.image_url_prefix: /assets/content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
