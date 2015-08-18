@@ -4,9 +4,13 @@
 {% block h1 %}{{ 'Kategorie'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
+	<div class="wrap-border">
+		<a href="{{ url('admin_category_new') }}" class="btn">{{ 'Vytvořit 	novou kategorii'|trans }}</a>
+	</div>
 
-	<a href="{{ url('admin_category_new') }}" class="btn">{{ 'Vytvořit novou kategorii'|trans }}</a>
+	<div class="wrap-border">
+		{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
+	</div>
 
 	{% macro categoryTreeItem(categoryDetails) %}
 		<ul class="js-category-tree-items form-tree__content">
