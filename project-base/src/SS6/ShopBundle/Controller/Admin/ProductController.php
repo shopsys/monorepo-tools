@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -18,7 +19,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
@@ -26,6 +27,7 @@ use SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
+use SS6\ShopBundle\Twig\ProductExtension;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AdminBaseController {
@@ -105,6 +107,11 @@ class ProductController extends AdminBaseController {
 	 */
 	private $productVariantFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Twig\ProductExtension
+	 */
+	private $productExtension;
+
 	public function __construct(
 		CategoryFacade $categoryFacade,
 		Translator $translator,
@@ -120,7 +127,8 @@ class ProductController extends AdminBaseController {
 		AdministratorGridFacade $administratorGridFacade,
 		ProductListAdminFacade $productListAdminFacade,
 		AdvancedSearchFacade $advancedSearchFacade,
-		ProductVariantFacade $productVariantFacade
+		ProductVariantFacade $productVariantFacade,
+		ProductExtension $productExtension
 	) {
 		$this->categoryFacade = $categoryFacade;
 		$this->translator = $translator;
@@ -137,6 +145,7 @@ class ProductController extends AdminBaseController {
 		$this->productListAdminFacade = $productListAdminFacade;
 		$this->advancedSearchFacade = $advancedSearchFacade;
 		$this->productVariantFacade = $productVariantFacade;
+		$this->productExtension = $productExtension;
 	}
 
 	/**
@@ -159,8 +168,8 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ name }}</strong>', [
-				'name' => $product->getName(),
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>', [
+				'product' => $product,
 			]);
 			return $this->redirect($this->generateUrl('admin_product_edit', ['id' => $product->getId()]));
 		}
@@ -169,7 +178,9 @@ class ProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zboží - ') . $product->getName()));
+		$this->breadcrumb->replaceLastItem(
+			new MenuItem($this->translator->trans('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
+		);
 
 		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', [
 			'form' => $form->createView(),
@@ -200,8 +211,8 @@ class ProductController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo vytvořeno zboží'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $product->getName(),
+					. ' <strong><a href="{{ url }}">{{ product|productDisplayName }}</a></strong>', [
+				'product' => $product,
 				'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
 			]);
 			return $this->redirect($this->generateUrl('admin_product_list'));
@@ -246,23 +257,7 @@ class ProductController extends AdminBaseController {
 			$queryBuilder = $this->productListAdminFacade->getQueryBuilderByQuickSearchData($quickSearchData);
 		}
 
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'p.id');
-
-		$grid = $this->gridFactory->create('productList', $dataSource);
-		$grid->enablePaging();
-		$grid->enableSelecting();
-		$grid->setDefaultOrder('name');
-
-		$grid->addColumn('name', 'pt.name', 'Název', true);
-		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('text-center table-col table-col-10');
-
-		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', ['id' => 'p.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', ['id' => 'p.id'])
-			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
-
-		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig');
+		$grid = $this->getGrid($queryBuilder);
 
 		if ($massActionForm->get('submit')->isClicked()) {
 			$this->productMassActionFacade->doMassAction(
@@ -294,15 +289,14 @@ class ProductController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$productName = $this->productEditFacade->getById($id)->getName();
 			$this->em->transactional(
 				function () use ($id) {
 					$this->productEditFacade->delete($id);
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Produkt <strong>{{ name }}</strong> byl smazán', [
-				'name' => $productName,
+			$this->getFlashMessageSender()->addSuccessFlashTwig('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán', [
+				'product' => $this->productEditFacade->getById($id),
 			]);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený produkt neexistuje.');
@@ -340,8 +334,8 @@ class ProductController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Varianta <strong>{{ variantName }}</strong> byla úspěšně vytvořena.', [
-					'variantName' => $newMainVariant->getName(),
+				'Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.', [
+					'productVariant' => $newMainVariant,
 				]
 			);
 
@@ -352,4 +346,39 @@ class ProductController extends AdminBaseController {
 			'form' => $form->createView(),
 		]);
 	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 */
+	private function getGrid(QueryBuilder $queryBuilder) {
+		$dataSource = new QueryBuilderWithRowManipulatorDataSource(
+			$queryBuilder,
+			'p.id',
+			function ($row) {
+				$product = $this->productEditFacade->getById($row['p']['id']);
+				$row['product'] = $product;
+				return $row;
+			}
+		);
+
+		$grid = $this->gridFactory->create('productList', $dataSource);
+		$grid->enablePaging();
+		$grid->enableSelecting();
+		$grid->setDefaultOrder('name');
+
+		$grid->addColumn('name', 'pt.name', 'Název', true);
+		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
+		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('text-center table-col table-col-10');
+
+		$grid->setActionColumnClassAttribute('table-col table-col-10');
+		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', ['id' => 'p.id']);
+		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', ['id' => 'p.id'])
+			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
+
+		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig');
+
+		return $grid;
+	}
+
 }

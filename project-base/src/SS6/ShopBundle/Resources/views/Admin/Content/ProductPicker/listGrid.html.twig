@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_name %}
-	{{ value }}
+	{{ row.product|productListDisplayName }}
 	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
 		<span class="text-in-circle c-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
 	{% endif %}

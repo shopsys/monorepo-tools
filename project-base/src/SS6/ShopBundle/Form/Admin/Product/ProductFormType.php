@@ -105,10 +105,7 @@ class ProductFormType extends AbstractType {
 		}
 		$builder
 			->add('name', FormType::LOCALIZED, [
-				'main_constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
-				],
-				'options' => ['required' => false],
+				'required' => false,
 			])
 			->add(
 				$builder
