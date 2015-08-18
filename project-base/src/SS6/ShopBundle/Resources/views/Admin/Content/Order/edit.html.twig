@@ -9,6 +9,11 @@
 		{{ form_errors(form) }}
 
 		<div class="wrap-border">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Objednávka č.'|trans }} {{ order.number }}
+				</div>
+			</div>
 			<fieldset>
 				{{ form_id(order) }}
 				<div class="form-line">
@@ -63,7 +68,11 @@
 		</div>
 
 		<div class="wrap-border">
-			<h2>{{ 'Osobní údaje'|trans }}</h2>
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Osobní údaje'|trans }}
+				</div>
+			</div>
 			<fieldset>
 				{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
 				{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
@@ -73,7 +82,11 @@
 		</div>
 
 		<div class="wrap-border">
-			<h2>{{ 'Firemní údaje'|trans }}</h2>
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Firemní údaje'|trans }}
+				</div>
+			</div>
 			<fieldset>
 				{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
 				{{ form_row(form.companyNumber, { label: 'IČ'|trans }) }}
@@ -82,7 +95,11 @@
 		</div>
 
 		<div class="wrap-border">
-			<h2>{{ 'Fakturační údaje'|trans }}</h2>
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Fakturační údaje'|trans }}
+				</div>
+			</div>
 			<fieldset>
 				{{ form_row(form.street, { label: 'Ulice'|trans }) }}
 				{{ form_row(form.city, { label: 'Město'|trans }) }}
@@ -91,7 +108,11 @@
 		</div>
 
 		<div class="wrap-border">
-			<h2>{{ 'Doručovací adresa'|trans }}</h2>
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Doručovací adresa'|trans }}
+				</div>
+			</div>
 			<fieldset>
 				{{ form_row(form.deliveryAddressSameAsBillingAddress, {
 					attr: { class: 'js-checkbox-toggle js-checkbox-toggle--inverted', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
@@ -109,7 +130,11 @@
 		</div>
 
 		<div class="wrap-border">
-			<h2>{{ 'Poznámka'|trans }}</h2>
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Poznámka'|trans }}
+				</div>
+			</div>
 			<fieldset>
 				{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
 			</fieldset>
