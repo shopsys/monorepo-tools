@@ -634,7 +634,7 @@
 		<span class="form-line__item form-line__item--text">{{ symbolAfterInput }}</span>
 	{% endif %}
 	{% if icon is defined %}
-		<i class="svg svg-{{ icon.type|default('info') }} c-help form-line__item form-line__item--text js-tooltip"
+		<i class="svg svg-{{ icon.type|default('info') }} in-icon c-help form-line__item form-line__item--text js-tooltip"
 			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
 			title="{{ icon.title }}"
 		 ></i>
