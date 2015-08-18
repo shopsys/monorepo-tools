@@ -64,7 +64,7 @@
 	};
 
 	SS6.validation.findElementsToHighlight = function ($formInput) {
-		return $formInput.filter('input, select, textarea, .form-line');
+		return $formInput.filter('input, select, textarea, .form-line, .table-form');
 	};
 
 	SS6.validation.highlightSubmitButtons = function($form){
