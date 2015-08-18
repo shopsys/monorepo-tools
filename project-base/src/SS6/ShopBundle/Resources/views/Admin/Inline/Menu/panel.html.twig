@@ -1,16 +1,18 @@
-<ul class="box-panel">
+<ul class="side-menu">
 	{% for item in items %}
 		{% if (item.visible) %}
 			{% if not (item.superadmin and not is_granted(constant('SS6\\ShopBundle\\Model\\Security\\Roles::ROLE_SUPER_ADMIN'))) %}
-				<li class="box-panel__item {% if item in activePath %}box-panel__item--active {% endif %}{% if item.superadmin %} box-panel__item--superadmin{% endif %}" >
-					<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
+				<li class="side-menu__item {% if item in activePath %}side-menu__item--active {% endif %}{% if item.superadmin %} side-menu__item--superadmin{% endif %}" >
+					<a href="{{ url(item.route, item.routeParameters) }}" class="side-menu__item__link">
+						{{ item.label }}
+					</a>
 					{% if item.items is not empty %}
-						<ul class="box-panel__submenu">
+						<ul class="side-menu__submenu">
 							{% for subitem in item.items %}
 								{% if (subitem.visible) %}
 									{% if not (subitem.superadmin and not is_granted(constant('SS6\\ShopBundle\\Model\\Security\\Roles::ROLE_SUPER_ADMIN'))) %}
-										<li class="box-panel__submenu__item {% if subitem in activePath %}box-panel__submenu__item--active{% endif %}{% if subitem.superadmin or item.superadmin %} box-panel__submenu__item--superadmin{% endif %}" >
-											<a href="{{ url(subitem.route, subitem.routeParameters) }}">{{ subitem.label }}</a>
+										<li class="side-menu__submenu__item {% if subitem in activePath %}side-menu__submenu__item--active{% endif %}{% if subitem.superadmin or item.superadmin %} side-menu__submenu__item--superadmin{% endif %}" >
+											<a href="{{ url(subitem.route, subitem.routeParameters) }}" class="side-menu__submenu__item__link">{{ subitem.label }}</a>
 										</li>
 									{% endif %}
 								{% endif %}
