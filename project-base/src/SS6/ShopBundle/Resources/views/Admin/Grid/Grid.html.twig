@@ -204,10 +204,12 @@
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	<strong class="">
-		{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
-		{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
-	</strong>
+	<div class="in-grid-control__show">
+		<strong>
+			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
+			{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
+		</strong>
+	</div>
 {% endblock %}
 
 {% block grid_pager_selectpage %}
@@ -264,6 +266,19 @@
 			{% endif %}
 		</ul>
 
+	{% endspaceless %}
+{% endblock %}
+
+{% block grid_pager_results_perpage %}
+	<div class="in-grid-control__settings">
+		<span class="">
+			{{ 'Položek na stránku:'|trans }}
+			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="input">
+				{% for value in grid.allowedLimits %}
+					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
+				{% endfor %}
+			</select>
+		</span>
 		<div class="js-grid-go-to">
 			<span>{{ 'Přejít na stránku:'|trans }}</span>
 			<input
@@ -276,29 +291,18 @@
 			/>
 			<a class="btn js-grid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
 		</div>
-	{% endspaceless %}
-{% endblock %}
-
-{% block grid_pager_results_perpage %}
-	<div class="">
-		<span class="">
-			{{ 'Položek na stránku:'|trans }}
-			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="input">
-				{% for value in grid.allowedLimits %}
-					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
-				{% endfor %}
-			</select>
-		</span>
 	</div>
 {% endblock %}
 
 {% block grid_pager %}
-	<div class="">
+	<div class="in-grid-control">
 		{{ gridView.renderBlock('grid_pager_totalcount') }}
+		<div class="in-grid-control__paging">
+			{% if grid.pageCount > 1 %}
+				{{ gridView.renderBlock('grid_pager_selectpage') }}
+			{% endif %}
+		</div>
 		{{ gridView.renderBlock('grid_pager_results_perpage') }}
-		{% if grid.pageCount > 1 %}
-			{{ gridView.renderBlock('grid_pager_selectpage') }}
-		{% endif %}
 	</div>
 {% endblock %}
 
