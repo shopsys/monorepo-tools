@@ -232,15 +232,15 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant")
 	 */
 	private $variants;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="variants")
-	 * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true)
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="variants", cascade={"persist"})
+	 * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
 	 */
 	private $mainVariant;
 
@@ -611,6 +611,11 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getVariants() {
 		return $this->variants;
+	}
+
+	public function unsetMainVariant() {
+		$this->variantType = self::VARIANT_TYPE_NONE;
+		$this->mainVariant = null;
 	}
 
 	/**

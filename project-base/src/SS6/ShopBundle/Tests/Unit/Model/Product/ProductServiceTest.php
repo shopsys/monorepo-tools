@@ -115,4 +115,72 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productService->changeVat($product, $vat);
 	}
 
+	public function testDeleteNotVariant() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$productData = new ProductData();
+		$product = new Product($productData);
+
+		$this->assertNull($productService->delete($product)->getProductForRecalculations());
+	}
+
+	public function testDeleteVariant() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$productData = new ProductData();
+		$mainVariant = new Product($productData);
+		$variant = new Product($productData);
+		$mainVariant->setVariants([$variant]);
+
+		$this->assertSame($mainVariant, $productService->delete($variant)->getProductForRecalculations());
+	}
+
+	public function testDeleteMainVariant() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$productData = new ProductData();
+		$mainVariant = new Product($productData);
+		$variant = new Product($productData);
+		$mainVariant->setVariants([$variant]);
+
+		$this->assertNull($productService->delete($mainVariant)->getProductForRecalculations());
+		$this->assertFalse($variant->isVariant());
+	}
+
 }

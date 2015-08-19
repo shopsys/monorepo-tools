@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductDeleteResult;
 
 class ProductService {
 
@@ -130,6 +131,23 @@ class ProductService {
 		}
 
 		return $productSellingPrices;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\ProductDeleteResult
+	 */
+	public function delete(Product $product) {
+		if ($product->isMainVariant()) {
+			foreach ($product->getVariants() as $variantProduct) {
+				$variantProduct->unsetMainVariant();
+			}
+		}
+		if ($product->isVariant()) {
+			return new ProductDeleteResult($product->getMainVariant());
+		}
+
+		return new ProductDeleteResult();
 	}
 
 }
