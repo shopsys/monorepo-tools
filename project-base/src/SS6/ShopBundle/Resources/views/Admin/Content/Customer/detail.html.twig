@@ -8,31 +8,47 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-group">
-			<h2>{{ 'Systémové údaje'|trans }}</h2>
+		<div class="wrap-border">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Systémové údaje'|trans }}
+				</div>
+			</div>
 			{{ form_id(user|default(null)) }}
 			{% block customer_domain %}{% endblock %}
 			{{ form_row(form.userData.pricingGroup, { label: 'Cenová skupina'|trans }) }}
 			{% block customer_created_at %}{% endblock %}
 		</div>
 
-		<div class="wrap-group">
-			<h2>{{ 'Osobní údaje'|trans }}</h2>
+		<div class="wrap-border">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Osobní údaje'|trans }}
+				</div>
+			</div>
 			{{ form_row(form.userData.firstName, { label: 'Jméno'|trans}) }}
 			{{ form_row(form.userData.lastName, { label: 'Příjmení'|trans}) }}
 			{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'|trans }) }}
 			{{ form_row(form.userData.email, { label: 'Email'|trans }) }}
 		</div>
 
-		<div class="wrap-group">
-			<h2>{{ 'Registrovaní zák.'|trans }}</h2>
+		<div class="wrap-border">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Registrovaní zák.'|trans }}
+				</div>
+			</div>
 			{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
 			{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
 			{% block customer_last_login %}{% endblock %}
 		</div>
 
-		<div class="wrap-group" id="customer_form_billingAddressData">
-			<h2>{{ 'Firemní údaje'|trans }}</h2>
+		<div class="wrap-border" id="customer_form_billingAddressData">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Firemní údaje'|trans }}
+				</div>
+			</div>
 			{{ form_row(form.billingAddressData.companyCustomer, {
 				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
 				label: 'Nakupuji na firmu'|trans})
@@ -44,15 +60,23 @@
 			</div>
 		</div>
 
-		<div class="wrap-group">
-			<h2>{{ 'Adresa'|trans }}</h2>
+		<div class="wrap-border">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Adresa'|trans }}
+				</div>
+			</div>
 			{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
 			{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
 			{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans }) }}
 		</div>
 
-		<div class="wrap-group" id="customer_form_deliveryAddressData">
-			<h2>{{ 'Doručovací adresa'|trans }}</h2>
+		<div class="wrap-border" id="customer_form_deliveryAddressData">
+			<div class="form-group">
+				<div class="form-group__title">
+					{{ 'Doručovací adresa'|trans }}
+				</div>
+			</div>
 			{{ form_row(form.deliveryAddressData.addressFilled, {
 				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
 				label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})

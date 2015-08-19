@@ -48,6 +48,11 @@ Form field constructions, with many variants and uses
 
 		font-weight: bold;
 
+		&--input {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
 		.form-compulsory {
 			position: absolute;
 			top: 15px;
@@ -96,6 +101,12 @@ Form field constructions, with many variants and uses
 		&--left {
 			float: left;
 			padding-right: 4px;
+		}
+
+		&--fixed-width {
+			width: 40px;
+
+			text-align: center;
 		}
 
 		&__icon {

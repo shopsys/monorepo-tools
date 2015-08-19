@@ -13,7 +13,7 @@
 			<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
 				{% for productForm in form.bestsellingProducts %}
 					<div class="form-line js-bestselling-product-container">
-						<label>{{ loop.index }}</label>
+						<label class="form-line__item form-line__item--text form-line__item--fixed-width">{{ loop.index }}</label>
 						{{ form_widget(productForm) }}
 					</div>
 				{% endfor %}

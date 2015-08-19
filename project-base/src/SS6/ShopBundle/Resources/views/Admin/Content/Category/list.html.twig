@@ -4,18 +4,21 @@
 {% block h1 %}{{ 'Kategorie'|trans }}{% endblock %}
 
 {% block main_content %}
+	<div class="wrap-border">
+		<a href="{{ url('admin_category_new') }}" class="btn">{{ 'Vytvořit 	novou kategorii'|trans }}</a>
+	</div>
+
 	{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
 
-	<a href="{{ url('admin_category_new') }}" class="btn">{{ 'Vytvořit novou kategorii'|trans }}</a>
-
 	{% macro categoryTreeItem(categoryDetails) %}
-		<ul class="js-category-tree-items">
+		<ul class="js-category-tree-items form-tree__content">
 			{% for categoryDetail in categoryDetails %}
-				<li class="js-category-tree-item" id="js-category-tree-{{ categoryDetail.category.id }}">
+				<li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryDetail.category.id }}">
 					<div class="js-category-tree-item-line">
-						<span class="js-category-tree-item-handle">{{ categoryDetail.category.name }}</span>
+						<span class="form-tree__item__icon form-tree__item__icon--level sprite sprite-level"></span>
+						<span class="js-category-tree-item-handle form-tree__item__name">{{ categoryDetail.category.name }}</span>
 						<span class="js-category-tree-item-icons">
-							<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}">
+							<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}" class="form-tree__item__control">
 								<i class="svg svg-pencil"></i>
 							</a>
 							<a
@@ -29,6 +32,7 @@
 										urlContinue: '{{ url('admin_category_delete', {id: categoryDetail.category.id})|e('js') }}'
 									});
 									return false;"
+								class="form-tree__item__control"
 							>
 								<i class="svg svg-trash"></i>
 							</a>
@@ -41,8 +45,12 @@
 	{% endmacro %}
 
 	{% if isForAllDomains %}
-		<div id="js-category-tree-sorting" class="category-tree category-tree--sorting">
-			{{ _self.categoryTreeItem(categoryDetails) }}
+		<div id="js-category-tree-sorting">
+			<div class="form-line">
+				<div class="form-tree form-tree--open">
+					{{ _self.categoryTreeItem(categoryDetails) }}
+				</div>
+			</div>
 		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

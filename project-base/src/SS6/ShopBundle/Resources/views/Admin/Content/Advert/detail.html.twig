@@ -7,24 +7,23 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-group">
+		<div class="wrap-border">
 			{{ form_id(advert|default(null)) }}
 			{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
 			{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
 			{{ form_row(form.type, { label: 'Typ'|trans}) }}
 			{{ form_row(form.positionName, { label: 'Plocha'|trans}) }}
 		</div>
-		<div class="wrap-group js-advert-type-content" data-type="code">
+		<div class="wrap-border js-advert-type-content" data-type="code">
 			{{ form_row(form.code, { label: 'Kód'|trans}) }}
 		</div>
-		<div class="wrap-group js-advert-type-content" data-type="image">
+		<div class="wrap-border js-advert-type-content" data-type="image">
 			{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
 			{% block image %}{% endblock %}
 			{{ form_row(form.image, { label: 'Nahrát nový obrázek'|trans}) }}
 		</div>
-		<div class="wrap-group">
-			{{ form_row(form.hidden, { label: 'Skrýt reklamu'|trans}) }}
-		</div>
+		{{ form_row(form.hidden, { label: 'Skrýt reklamu'|trans}) }}
+
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_advert_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>

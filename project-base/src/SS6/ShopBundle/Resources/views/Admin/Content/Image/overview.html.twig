@@ -18,35 +18,37 @@
 {% endblock %}
 
 {% macro entitySizes(name, sizeConfigs, usages) %}
-	<h2>{{ name }}</h2>
-	<table class="table">
-		<thead>
-			<tr>
-				<th class="table-col-20">{{ 'Název rozměru'|trans }}</th>
-				<th class="table-col-10">{{ 'Šířka [px]'|trans }}</th>
-				<th class="table-col-10">{{ 'Výška [px]'|trans }}</th>
-				<th class="table-col-50">{{ 'Výskyt'|trans }}</th>
-				<th class="table-col-10 text-right">{{ 'Ořezávání'|trans }}</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for sizeConfig in sizeConfigs %}
-				{% if sizeConfig.name != 'original' %}
-					<tr>
-						<td>{{ sizeConfig.name|default('default'|trans)|humanize }}</td>
-						<td>{{ sizeConfig.width|default('-')}}</td>
-						<td>{{ sizeConfig.height|default('-') }}</td>
-						<td>{{ usages[sizeConfig.name|default('default')] }}</td>
-						<td class ="text-right">
-							{% if sizeConfig.crop == true %}
-								{{ 'Ano'|trans }}
-							{% else %}
-								{{ 'Ne'|trans }}
-							{% endif %}
-						</td>
-					</tr>
-				{% endif %}
-			{% endfor %}
-		</tbody>
-	</table>
+	<div class="wrap-border">
+		<h2>{{ name }}</h2>
+		<table class="table-main">
+			<thead>
+				<tr>
+					<th class="table-col-20">{{ 'Název rozměru'|trans }}</th>
+					<th class="table-col-10">{{ 'Šířka [px]'|trans }}</th>
+					<th class="table-col-10">{{ 'Výška [px]'|trans }}</th>
+					<th class="table-col-50">{{ 'Výskyt'|trans }}</th>
+					<th class="table-col-10 text-right">{{ 'Ořezávání'|trans }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for sizeConfig in sizeConfigs %}
+					{% if sizeConfig.name != 'original' %}
+						<tr>
+							<td>{{ sizeConfig.name|default('default'|trans)|humanize }}</td>
+							<td>{{ sizeConfig.width|default('-')}}</td>
+							<td>{{ sizeConfig.height|default('-') }}</td>
+							<td>{{ usages[sizeConfig.name|default('default')] }}</td>
+							<td class ="text-right">
+								{% if sizeConfig.crop == true %}
+									{{ 'Ano'|trans }}
+								{% else %}
+									{{ 'Ne'|trans }}
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endmacro %}

@@ -4,26 +4,26 @@
 {% block h1 %}{{ 'Editace platby'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
 
 {% block payment_base_prices %}
-	<div id="transport_prices">
-		<table class="table">
+	<div id="transport_prices" class="table-form__wrap">
+		<table class="table-form">
 			<thead>
-				<tr>
-					<th>{{ inputPriceLabel() }}</th>
-					<th>{{ 'Cena bez DPH'|trans }}</th>
-					<th>{{ 'Cena s DPH'|trans }}</th>
+				<tr class="table-form__row">
+					<th class="table-form__cell">{{ inputPriceLabel() }}</th>
+					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
+					<th class="table-form__cell">{{ 'Cena s DPH'|trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for currencyId, currency in currencies %}
-					<tr>
-						<td>
+					<tr class="table-form__row">
+						<td class="table-form__cell">
 							{{ form_row(
 								form.prices[currencyId],
 								{label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
 							) }}
 						</td>
-						<td>{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
-						<td>{{ paymentDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
+						<td class="table-form__cell">{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
+						<td class="table-form__cell">{{ paymentDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>

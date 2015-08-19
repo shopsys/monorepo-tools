@@ -5,21 +5,23 @@
 
 {% block main_content %}
 	{{ form_start(quickSearchForm) }}
+		<div class="wrap-border">
 
-		<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
-			{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+			<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
+				{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+			</div>
+
+			{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+				with {
+					advancedSearchForm: advancedSearchForm,
+					isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
+				}
+			%}
 		</div>
-
-		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
-			with {
-				advancedSearchForm: advancedSearchForm,
-				isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-			}
-		%}
 	{{ form_end(quickSearchForm) }}
 
 	{{ form_start(massActionForm) }}
-		<div class="wrap-box">
+		<div class="wrap-border">
 			{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans, attr: { class: 'js-mass-action-select-type' } }) }}
 			{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
 			<div class="form-line">
@@ -32,11 +34,15 @@
 					</div>
 				</div>
 			</div>
-			{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn js-mass-action-submit' } }) }}
+			<div class="form-line">
+				{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn js-mass-action-submit' } }) }}
+			</div>
 		</div>
 
-		<a href="{{ url('admin_product_new') }}" class="btn">{{ 'Vytvořit nové zboží'|trans }}</a>
-		<a href="{{ url('admin_product_createvariant') }}" class="btn">{{ 'Vytvořit variantu'|trans }}</a>
+		<div class="wrap-border">
+			<a href="{{ url('admin_product_new') }}" class="btn">{{ 'Vytvořit nové zboží'|trans }}</a>
+			<a href="{{ url('admin_product_createvariant') }}" class="btn">{{ 'Vytvořit variantu'|trans }}</a>
+		</div>
 		{{ gridView.render() }}
 		{{ gridView.renderHiddenInputs('page') }}
 	{{ form_end(massActionForm) }}
