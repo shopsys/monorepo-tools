@@ -51,7 +51,7 @@
 		"sensio/distribution-bundle": "3.0.4",
 		"sensio/framework-extra-bundle": "3.0.1",
 		"sensio/generator-bundle": "2.3.5",
-		"stof/doctrine-extensions-bundle": "1.1.0",
+		"stof/doctrine-extensions-bundle": "1.2.1",
 		"symfony/assetic-bundle": "2.6.1",
 		"symfony/finder": "2.6.5",
 		"symfony/monolog-bundle": "2.7.1",

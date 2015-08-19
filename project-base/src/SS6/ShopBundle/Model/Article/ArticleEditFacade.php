@@ -56,18 +56,20 @@ class ArticleEditFacade {
 	}
 
 	/**
+	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForMenuOnCurrentDomain() {
-		return $this->articleRepository->getArticlesForMenu($this->domain->getId());
+	public function getArticlesForPlacementOnCurrentDomain($placement) {
+		return $this->articleRepository->getArticlesForPlacement($this->domain->getId(), $placement);
 	}
 
 	/**
 	 * @param int $domainId
+	 * @param string $placement
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getOrderedArticlesByDomainIdQueryBuilder($domainId) {
-		return $this->articleRepository->getOrderedArticlesByDomainIdQueryBuilder($domainId);
+	public function getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement) {
+		return $this->articleRepository->getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement);
 	}
 
 	/**
@@ -125,6 +127,20 @@ class ArticleEditFacade {
 		$article = $this->articleRepository->getById($articleId);
 
 		$this->em->remove($article);
+		$this->em->flush();
+	}
+
+	/**
+	 * @param string[gridId][] $rowIdsByGridId
+	 */
+	public function saveOrdering(array $rowIdsByGridId) {
+		foreach ($rowIdsByGridId as $gridId => $rowIds) {
+			foreach ($rowIds as $position => $rowId) {
+				$article = $this->articleRepository->findById($rowId);
+				$article->setPosition($position);
+				$article->setPlacement($gridId);
+			}
+		}
 		$this->em->flush();
 	}
 

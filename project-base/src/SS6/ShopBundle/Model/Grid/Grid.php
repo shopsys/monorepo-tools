@@ -163,6 +163,11 @@ class Grid {
 	private $selectedRowIds;
 
 	/**
+	 * @var bool
+	 */
+	private $multipleDragAndDrop;
+
+	/**
 	 * @param string $id
 	 * @param \SS6\ShopBundle\Model\Grid\DataSourceInterface $dataSource
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
@@ -200,6 +205,7 @@ class Grid {
 		$this->viewTemplateParameters = [];
 
 		$this->selectedRowIds = [];
+		$this->multipleDragAndDrop = false;
 
 		$this->loadFromRequest();
 	}
@@ -668,6 +674,10 @@ class Grid {
 		$this->orderingEntityClass = $entityClass;
 	}
 
+	public function enableMultipleDragAndDrop() {
+		$this->multipleDragAndDrop = true;
+	}
+
 	/**
 	 * @return bool
 	 */
@@ -680,6 +690,13 @@ class Grid {
 	 */
 	public function getOrderingEntityClass() {
 		return $this->orderingEntityClass;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMultipleDragAndDrop() {
+		return $this->multipleDragAndDrop;
 	}
 
 }

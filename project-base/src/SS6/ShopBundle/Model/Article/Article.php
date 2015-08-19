@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use SS6\ShopBundle\Component\Gedmo\SortablePosition;
 use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
 
 /**
@@ -23,6 +25,7 @@ class Article implements OrderableEntityInterface {
 	/**
 	 * @var int
 	 *
+	 * @Gedmo\SortableGroup
 	 * @ORM\Column(type="integer")
 	 */
 	private $domainId;
@@ -30,7 +33,8 @@ class Article implements OrderableEntityInterface {
 	/**
 	 * @var int
 	 *
-	 * @ORM\Column(type="integer", nullable=true)
+	 * @Gedmo\SortablePosition
+	 * @ORM\Column(type="integer")
 	 */
 	private $position;
 
@@ -53,14 +57,22 @@ class Article implements OrderableEntityInterface {
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
-	public $seoTitle;
+	private $seoTitle;
 
 	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
-	public $seoMetaDescription;
+	private $seoMetaDescription;
+
+	/**
+	 * @var string
+	 *
+	 * @Gedmo\SortableGroup
+	 * @ORM\Column(type="text")
+	 */
+	private $placement;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
@@ -71,6 +83,8 @@ class Article implements OrderableEntityInterface {
 		$this->text = $articleData->text;
 		$this->seoTitle = $articleData->seoTitle;
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
+		$this->placement = $articleData->placement;
+		$this->position = SortablePosition::LAST_POSITION;
 	}
 
 	/**
@@ -81,6 +95,7 @@ class Article implements OrderableEntityInterface {
 		$this->text = $articleData->text;
 		$this->seoTitle = $articleData->seoTitle;
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
+		$this->placement = $articleData->placement;
 	}
 
 	/**
@@ -126,10 +141,24 @@ class Article implements OrderableEntityInterface {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getPlacement() {
+		return $this->placement;
+	}
+
+	/**
 	 * @param int $position
 	 */
 	public function setPosition($position) {
 		$this->position = $position;
+	}
+
+	/**
+	 * @param string $placement
+	 */
+	public function setPlacement($placement) {
+		$this->placement = $placement;
 	}
 
 }

@@ -61,6 +61,9 @@
 			{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_FOOTER')})) }}
 			<div class="footer">
 				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+				<ul class="articles-menu">
+					{{ render(controller('SS6ShopBundle:Front/Article:footer')) }}
+				</ul>
 			</div>
 		</div>
 

@@ -41,6 +41,11 @@ class ArticleData {
 	 */
 	public $urls;
 
+	/**
+	 * @var string
+	 */
+	public $placement;
+
 	public function __construct() {
 		$this->urls[UrlListType::TO_DELETE] = [];
 	}
@@ -54,5 +59,6 @@ class ArticleData {
 		$this->seoTitle = $article->getSeoTitle();
 		$this->seoMetaDescription = $article->getSeoMetaDescription();
 		$this->domainId = $article->getDomainId();
+		$this->placement = $article->getPlacement();
 	}
 }

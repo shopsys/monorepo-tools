@@ -5,16 +5,22 @@
 
 {% block main_content %}
 
-	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	<div class="js-multiple-grids-rows-unified">
+		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-	<a href="{{ url('admin_article_new') }}" class="btn">{{ 'Vytvořit nový článek'|trans }}</a>
+		<a href="{{ url('admin_article_new') }}" class="btn">{{ 'Vytvořit nový článek'|trans }}</a>
 
-	{{ gridView.render() }}
+		<h2>{{ 'Články v horním menu'|trans }}</h2>
+		{{ gridViewTop.render() }}
 
-	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-		{% block fixed_bar_content %}
-			<button class="js-drag-and-drop-grid-submit-all btn btn--disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
-		{% endblock %}
-	{% endembed %}
+		<h2>{{ 'Články v patičce'|trans }}</h2>
+		{{ gridViewFooter.render() }}
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				<button class="js-multiple-grids-save-all-button btn btn--disabled" data-drag-and-drop-url-save-ordering="{{ url('admin_article_saveordering') }}" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
+			{% endblock %}
+		{% endembed %}
+	</div>
 
 {% endblock %}

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use SS6\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleController extends FrontBaseController {
 
@@ -28,7 +29,15 @@ class ArticleController extends FrontBaseController {
 	}
 
 	public function menuAction() {
-		$articles = $this->articleEditFacade->getArticlesForMenuOnCurrentDomain();
+		$articles = $this->articleEditFacade->getArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
+
+		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', [
+			'articles' => $articles,
+		]);
+	}
+
+	public function footerAction() {
+		$articles = $this->articleEditFacade->getArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
 
 		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', [
 			'articles' => $articles,

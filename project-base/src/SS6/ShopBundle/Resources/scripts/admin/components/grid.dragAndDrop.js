@@ -62,10 +62,10 @@
 				$grid.data('positionsChanged', false);
 				SS6.grid.dragAndDrop.highlightChanges($grid, false);
 
-				SS6.window({content: 'Pořadí bylo uloženo'});
+				SS6.window({content: SS6.translator.trans('Pořadí bylo uloženo')});
 			},
 			error: function () {
-				SS6.window({content: 'Pořadí se nepodařilo uložit'});
+				SS6.window({content: SS6.translator.trans('Pořadí se nepodařilo uložit')});
 			}
 		});
 		$grid.trigger('save');
@@ -89,7 +89,7 @@
 
 	SS6.grid.dragAndDrop.unifyMultipleGrids = function () {
 		var $gridSaveButtons = $('.js-drag-and-drop-grid-submit');
-		var $gridsOnPage = $('.js-grid');
+		var $gridsOnPage = $('.js-grid[data-drag-and-drop-ordering-entity-class]');
 		var $saveAllButton = $('.js-drag-and-drop-grid-submit-all');
 
 		if ($saveAllButton.size() === 1) {
