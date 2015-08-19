@@ -8,52 +8,44 @@ use SS6\ShopBundle\Component\Fulltext\TsqueryFactory;
 class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider getTsqueryWithAndConditionsData
+	 * @dataProvider getSplitToTokensData
 	 */
-	public function testGetTsqueryWithAndConditions($searchText, $expectedResult) {
+	public function testSplitToTokens($searchText, $expectedResult) {
 		$tsqueryFactory = new TsqueryFactory();
 
-		$result = $tsqueryFactory->getTsqueryWithAndConditions($searchText);
+		$result = $tsqueryFactory->splitToTokens($searchText);
 
 		$this->assertSame($expectedResult, $result);
 	}
 
-	public function getTsqueryWithAndConditionsData() {
+	public function getSplitToTokensData() {
 		return [
-			[null, ''],
-			['', ''],
-			['asdf', 'asdf'],
-			['one two', 'one & two'],
-			["one  \t\n two", 'one & two'],
-			['at&t', 'at & t'],
-			['full-text', 'full-text'],
-			['přílišžluťoučkýkůňúpělďábelskéódy', 'přílišžluťoučkýkůňúpělďábelskéódy'],
-			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', 'PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY'],
+			[null, []],
+			['', []],
+			['asdf', ['asdf']],
+			['one two', ['one', 'two']],
+			["one  \t\n two", ['one', 'two']],
+			['at&t', ['at', 't']],
+			['full-text', ['full-text']],
+			['přílišžluťoučkýkůňúpělďábelskéódy', ['přílišžluťoučkýkůňúpělďábelskéódy']],
+			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', ['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY']],
 		];
 	}
 
-	/**
-	 * @dataProvider getTsqueryWithOrConditionsData
-	 */
-	public function testGetTsqueryWithOrConditions($searchText, $expectedResult) {
+	public function testGetTsqueryWithAndConditions() {
 		$tsqueryFactory = new TsqueryFactory();
 
-		$result = $tsqueryFactory->getTsqueryWithOrConditions($searchText);
+		$result = $tsqueryFactory->getTsqueryWithAndConditions('one two three');
 
-		$this->assertSame($expectedResult, $result);
+		$this->assertSame('one & two & three', $result);
 	}
 
-	public function getTsqueryWithOrConditionsData() {
-		return [
-			[null, ''],
-			['', ''],
-			['asdf', 'asdf'],
-			['one two', 'one | two'],
-			["one  \t\n two", 'one | two'],
-			['at&t', 'at | t'],
-			['full-text', 'full-text'],
-			['one|two', 'one | two'],
-		];
+	public function testGetTsqueryWithOrConditions() {
+		$tsqueryFactory = new TsqueryFactory();
+
+		$result = $tsqueryFactory->getTsqueryWithOrConditions('one two three');
+
+		$this->assertSame('one | two | three', $result);
 	}
 
 }

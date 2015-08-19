@@ -22,9 +22,15 @@ class ProductSearchRepository {
 	 * @param string|null $searchText
 	 */
 	public function filterBySearchText(QueryBuilder $productQueryBuilder, $searchText) {
-		$productQueryBuilder
-			->andWhere('TSQUERY(pd.fulltextTsvector, :fulltextQuery) = TRUE')
-			->setParameter('fulltextQuery', $this->tsqueryFactory->getTsqueryWithAndConditions($searchText));
+		$tokens = $this->tsqueryFactory->splitToTokens($searchText);
+
+		if (count($tokens) > 0) {
+			$productQueryBuilder
+				->andWhere('TSQUERY(pd.fulltextTsvector, :fulltextQuery) = TRUE')
+				->setParameter('fulltextQuery', $this->tsqueryFactory->getTsqueryWithAndConditions($searchText));
+		} else {
+			$productQueryBuilder->andWhere('TRUE = FALSE');
+		}
 	}
 
 	/**

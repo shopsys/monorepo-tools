@@ -28,7 +28,7 @@ class TsqueryFactory {
 	 * @param string|null $searchText
 	 * @return string[]
 	 */
-	private function splitToTokens($searchText) {
+	public function splitToTokens($searchText) {
 		return preg_split(
 			'/[^\w-]+/ui',
 			$searchText,
