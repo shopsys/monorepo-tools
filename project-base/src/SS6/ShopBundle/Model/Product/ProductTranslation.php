@@ -27,6 +27,13 @@ class ProductTranslation extends AbstractTranslation {
 	/**
 	 * @var string
 	 *
+	 * @ORM\Column(type="tsvector", nullable=false)
+	 */
+	private $nameTsvector;
+
+	/**
+	 * @var string
+	 *
 	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $variantAlias;

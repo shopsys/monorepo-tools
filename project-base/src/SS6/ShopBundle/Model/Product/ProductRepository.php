@@ -7,18 +7,18 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
-use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDomain;
-use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
+use SS6\ShopBundle\Model\Product\Search\ProductSearchRepository;
 
 class ProductRepository {
 
@@ -42,16 +42,23 @@ class ProductRepository {
 	 */
 	private $localization;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Search\ProductSearchRepository
+	 */
+	private $productSearchRepository;
+
 	public function __construct(
 		EntityManager $em,
 		ProductFilterRepository $productFilterRepository,
 		QueryBuilderService $queryBuilderService,
-		Localization $localization
+		Localization $localization,
+		ProductSearchRepository $productSearchRepository
 	) {
 		$this->em = $em;
 		$this->productFilterRepository = $productFilterRepository;
 		$this->queryBuilderService = $queryBuilderService;
 		$this->localization = $localization;
+		$this->productSearchRepository = $productSearchRepository;
 	}
 
 	/**
@@ -137,6 +144,15 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param int $domainId
+	 */
+	public function addDomain(QueryBuilder $queryBuilder, $domainId) {
+		$queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
+		$queryBuilder->setParameter('domainId', $domainId);
+	}
+
+	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
@@ -182,8 +198,12 @@ class ProductRepository {
 		$searchText
 	) {
 		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
+
 		$this->addTranslation($queryBuilder, $locale);
-		$this->filterBySearchText($queryBuilder, $searchText, $domainId);
+		$this->addDomain($queryBuilder, $domainId);
+
+		$this->productSearchRepository->filterBySearchText($queryBuilder, $searchText);
+
 		return $queryBuilder;
 	}
 
@@ -197,30 +217,11 @@ class ProductRepository {
 	}
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string|null $searchText
-	 * @param int $domainId
-	 */
-	private function filterBySearchText(QueryBuilder $queryBuilder, $searchText, $domainId) {
-		$queryBuilder->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p AND pd.domainId = :domainId');
-		$queryBuilder->setParameter('domainId', $domainId);
-
-		$queryBuilder->andWhere(
-			'NORMALIZE(pt.name) LIKE NORMALIZE(:productName)'
-			. ' OR NORMALIZE(p.catnum) LIKE NORMALIZE(:productCatnum)'
-			. ' OR NORMALIZE(pd.description) LIKE NORMALIZE(:productDescription)'
-		);
-		$queryBuilder->setParameter('productName', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-		$queryBuilder->setParameter('productCatnum', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-		$queryBuilder->setParameter('productDescription', '%' . DatabaseSearching::getLikeSearchString($searchText) . '%');
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $page
 	 * @param int $limit
@@ -231,7 +232,7 @@ class ProductRepository {
 		$domainId,
 		$locale,
 		ProductFilterData $productFilterData,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		PricingGroup $pricingGroup,
 		$page,
 		$limit
@@ -244,7 +245,7 @@ class ProductRepository {
 			$pricingGroup
 		);
 
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup, $locale);
+		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -287,7 +288,7 @@ class ProductRepository {
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $page
 	 * @param int $limit
@@ -298,7 +299,7 @@ class ProductRepository {
 		$domainId,
 		$locale,
 		ProductFilterData $productFilterData,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		PricingGroup $pricingGroup,
 		$page,
 		$limit
@@ -311,7 +312,8 @@ class ProductRepository {
 			$pricingGroup
 		);
 
-		$this->applyOrdering($queryBuilder, $orderingSetting, $pricingGroup, $locale);
+		$this->productSearchRepository->addRelevance($queryBuilder, $searchText);
+		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);
 
@@ -351,28 +353,28 @@ class ProductRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 */
 	private function applyOrdering(
 		QueryBuilder $queryBuilder,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		PricingGroup $pricingGroup,
 		$locale
 	) {
-		switch ($orderingSetting->getOrderingMode()) {
-			case ProductListOrderingSetting::ORDER_BY_NAME_ASC:
+		switch ($orderingMode) {
+			case ProductListOrderingModeService::ORDER_BY_NAME_ASC:
 				$collation = $this->localization->getCollationByLocale($locale);
 				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
 				break;
 
-			case ProductListOrderingSetting::ORDER_BY_NAME_DESC:
+			case ProductListOrderingModeService::ORDER_BY_NAME_DESC:
 				$collation = $this->localization->getCollationByLocale($locale);
 				$queryBuilder->orderBy("COLLATE(pt.name, '" . $collation . "')", 'desc');
 				break;
 
-			case ProductListOrderingSetting::ORDER_BY_PRICE_ASC:
+			case ProductListOrderingModeService::ORDER_BY_PRICE_ASC:
 				$this->queryBuilderService->addOrExtendJoin(
 					$queryBuilder,
 					ProductCalculatedPrice::class,
@@ -383,7 +385,7 @@ class ProductRepository {
 				$queryBuilder->setParameter('pricingGroup', $pricingGroup);
 				break;
 
-			case ProductListOrderingSetting::ORDER_BY_PRICE_DESC:
+			case ProductListOrderingModeService::ORDER_BY_PRICE_DESC:
 				$this->queryBuilderService->addOrExtendJoin(
 					$queryBuilder,
 					ProductCalculatedPrice::class,
@@ -394,8 +396,12 @@ class ProductRepository {
 				$queryBuilder->setParameter('pricingGroup', $pricingGroup);
 				break;
 
+			case ProductListOrderingModeService::ORDER_BY_RELEVANCE:
+				$queryBuilder->orderBy('relevance', 'asc');
+				break;
+
 			default:
-				$message = 'Product list ordering mode "' . $orderingSetting->getOrderingMode() . '" is not supported.';
+				$message = 'Product list ordering mode "' . $orderingMode . '" is not supported.';
 				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);
 		}
 

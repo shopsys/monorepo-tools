@@ -2,9 +2,6 @@
 {% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 
 {% if paginationResult.results|length > 0 %}
-	<div>
-		{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingMode')) }}
-	</div>
 	<div class="js-product-list-with-paginator">
 		{% set entityName = 'zboží'|trans %}
 		{{ paginator.paginatorNavigation(paginationResult, entityName) }}

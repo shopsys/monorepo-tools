@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Form\Front\Product;
 
 use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\ProductListOrderingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -11,18 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class OrderingSettingFormType extends AbstractType {
 
 	/**
-	 * @param string $orderingMode
-	 * @return string
+	 * @var string[]
 	 */
-	private function getOrderingModeName($orderingMode) {
-		$orderingModeNames = [
-			ProductListOrderingSetting::ORDER_BY_NAME_ASC => 'abecedně A -> Z',
-			ProductListOrderingSetting::ORDER_BY_NAME_DESC => 'abecedně Z -> A',
-			ProductListOrderingSetting::ORDER_BY_PRICE_ASC => 'od nejlevnějšího',
-			ProductListOrderingSetting::ORDER_BY_PRICE_DESC => 'od nejdražšího',
-		];
+	private $orderingModesWithNames;
 
-		return $orderingModeNames[$orderingMode];
+	public function __construct($orderingModesWithNames) {
+		$this->orderingModesWithNames = $orderingModesWithNames;
 	}
 
 	/**
@@ -30,16 +23,9 @@ class OrderingSettingFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$orderingModes = ProductListOrderingSetting::getOrderingModes();
-
-		$orderingChoices = [];
-		foreach ($orderingModes as $orderingMode) {
-			$orderingChoices[$orderingMode] = $this->getOrderingModeName($orderingMode);
-		}
-
 		$builder
 			->add('orderingMode', FormType::CHOICE, [
-				'choices' => $orderingChoices,
+				'choices' => $this->orderingModesWithNames,
 			]);
 	}
 

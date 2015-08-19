@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
@@ -119,7 +120,7 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param int $page
 	 * @param int $limit
 	 * @param int $categoryId
@@ -127,7 +128,7 @@ class ProductOnCurrentDomainFacade {
 	 */
 	public function getPaginatedProductDetailsInCategory(
 		ProductFilterData $productFilterData,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		$page,
 		$limit,
 		$categoryId
@@ -139,7 +140,7 @@ class ProductOnCurrentDomainFacade {
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$productFilterData,
-			$orderingSetting,
+			$orderingMode,
 			$this->currentCustomer->getPricingGroup(),
 			$page,
 			$limit
@@ -157,7 +158,7 @@ class ProductOnCurrentDomainFacade {
 	/**
 	 * @param string|null $searchText
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Product\ProductListOrderingSetting $orderingSetting
+	 * @param string $orderingMode
 	 * @param int $page
 	 * @param int $limit
 	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
@@ -165,7 +166,7 @@ class ProductOnCurrentDomainFacade {
 	public function getPaginatedProductDetailsForSearch(
 		$searchText,
 		ProductFilterData $productFilterData,
-		ProductListOrderingSetting $orderingSetting,
+		$orderingMode,
 		$page,
 		$limit
 	) {
@@ -174,7 +175,7 @@ class ProductOnCurrentDomainFacade {
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$productFilterData,
-			$orderingSetting,
+			$orderingMode,
 			$this->currentCustomer->getPricingGroup(),
 			$page,
 			$limit
@@ -196,7 +197,6 @@ class ProductOnCurrentDomainFacade {
 	 */
 	public function getSearchAutocompleteProducts($searchText, $limit) {
 		$emptyProductFilterData = new ProductFilterData();
-		$orderingSetting = new ProductListOrderingSetting(ProductListOrderingSetting::ORDER_BY_NAME_ASC);
 
 		$page = 1;
 
@@ -205,7 +205,7 @@ class ProductOnCurrentDomainFacade {
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$emptyProductFilterData,
-			$orderingSetting,
+			ProductListOrderingModeService::ORDER_BY_RELEVANCE,
 			$this->currentCustomer->getPricingGroup(),
 			$page,
 			$limit
