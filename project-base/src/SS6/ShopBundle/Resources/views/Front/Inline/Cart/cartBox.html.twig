@@ -5,7 +5,11 @@
 			{% if cart.isEmpty %}
 				{{ 'Váš nákupní košík je prázdný'|trans }}
 			{% else %}
-				{{ '<strong class="cart-box__state">%itemsCount%</strong> položek za <strong class="cart-box__state">%priceWithVat%</strong>'|trans({ '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price })|raw }}
+				{% transchoice cart.itemsCount with { '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price } %}
+					{1} <strong class="cart-box__state">%itemsCount%</strong> položka za <strong class="cart-box__state">%priceWithVat%</strong>
+					|[2,4] <strong class="cart-box__state">%itemsCount%</strong> položky za <strong class="cart-box__state">%priceWithVat%</strong>
+					|[5,Inf] <strong class="cart-box__state">%itemsCount%</strong> položek za <strong class="cart-box__state">%priceWithVat%</strong>
+				{% endtranschoice %}
 			{% endif %}
 		</div>
 
