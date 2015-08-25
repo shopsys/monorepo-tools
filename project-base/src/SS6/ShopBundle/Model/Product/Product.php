@@ -308,30 +308,35 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\ProductData
 	 */
 	public function edit(ProductData $productData) {
-		$this->catnum = $productData->catnum;
-		$this->partno = $productData->partno;
-		$this->ean = $productData->ean;
-		$this->priceCalculationType = $productData->priceCalculationType;
-		if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_AUTO) {
-			$this->setPrice($productData->price);
-		} else {
-			$this->setPrice(null);
-		}
 		$this->vat = $productData->vat;
 		$this->sellingFrom = $productData->sellingFrom;
 		$this->sellingTo = $productData->sellingTo;
 		$this->sellingDenied = $productData->sellingDenied;
-		$this->usingStock = $productData->usingStock;
-		$this->stockQuantity = $productData->stockQuantity;
-		$this->outOfStockAction = $productData->outOfStockAction;
-		$this->availability = $productData->availability;
-		$this->outOfStockAvailability = $productData->outOfStockAvailability;
 		$this->recalculateAvailability = true;
 		$this->hidden = $productData->hidden;
-		$this->setTranslations($productData);
-		$this->categories = $productData->categories;
 		$this->flags = $productData->flags;
 		$this->brand = $productData->brand;
+		$this->setTranslations($productData);
+
+		if (!$this->isVariant()) {
+			$this->categories = $productData->categories;
+		}
+		if (!$this->isMainVariant()) {
+			$this->usingStock = $productData->usingStock;
+			$this->stockQuantity = $productData->stockQuantity;
+			$this->outOfStockAction = $productData->outOfStockAction;
+			$this->availability = $productData->availability;
+			$this->outOfStockAvailability = $productData->outOfStockAvailability;
+			$this->catnum = $productData->catnum;
+			$this->partno = $productData->partno;
+			$this->ean = $productData->ean;
+			$this->priceCalculationType = $productData->priceCalculationType;
+			if ($this->getPriceCalculationType() === self::PRICE_CALCULATION_TYPE_AUTO) {
+				$this->setPrice($productData->price);
+			} else {
+				$this->setPrice(null);
+			}
+		}
 	}
 
 	/**

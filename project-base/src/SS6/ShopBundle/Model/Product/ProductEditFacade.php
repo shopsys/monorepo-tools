@@ -187,7 +187,9 @@ class ProductEditFacade {
 		try {
 			$this->saveParameters($product, $productEditData->parameters);
 			$this->refreshProductDomains($product, $productEditData);
-			$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+			if (!$product->isMainVariant()) {
+				$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+			}
 			$this->refreshProductAccessories($product, $productEditData->accessories);
 			$this->em->flush();
 			$this->productHiddenRecalculator->calculateHiddenForProduct($product);
@@ -281,7 +283,9 @@ class ProductEditFacade {
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 		$seoTitles = $productEditData->seoTitles;
 		$seoMetaDescriptions = $productEditData->seoMetaDescriptions;
-		$descriptions = $productEditData->descriptions;
+		if (!$product->isVariant()) {
+			$descriptions = $productEditData->descriptions;
+		}
 		$heurekaCpcValues = $productEditData->heurekaCpcValues;
 		foreach ($productDomains as $domainId => $productDomain) {
 			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
