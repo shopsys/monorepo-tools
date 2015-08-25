@@ -237,6 +237,10 @@ class ProductEditFormType extends AbstractType {
 					],
 				]);
 		}
+
+		if ($this->product !== null) {
+			$this->disableIrrelevantFields($builder, $this->product);
+		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
@@ -276,6 +280,19 @@ class ProductEditFormType extends AbstractType {
 	 */
 	private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig) {
 		return $this->metaDescriptionsIndexedByDomainId[$domainConfig->getId()];
+	}
+
+	/**
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 */
+	private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product) {
+		if ($product->isMainVariant()) {
+			$builder->get('manualInputPrices')->setDisabled(true);
+		}
+		if ($product->isVariant()) {
+			$builder->get('descriptions')->setDisabled(true);
+		}
 	}
 
 }

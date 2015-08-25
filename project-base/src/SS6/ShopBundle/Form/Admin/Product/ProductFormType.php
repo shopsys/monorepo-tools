@@ -248,6 +248,10 @@ class ProductFormType extends AbstractType {
 					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
 				],
 			]);
+
+		if ($this->product !== null) {
+			$this->disableIrrelevantFields($builder, $this->product);
+		}
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
@@ -275,6 +279,36 @@ class ProductFormType extends AbstractType {
 				return $validationGroups;
 			},
 		]);
+	}
+
+	/**
+	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 */
+	private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product) {
+		$irrelevantFields = [];
+		if ($product->isMainVariant()) {
+			$irrelevantFields = [
+				'catnum',
+				'partno',
+				'ean',
+				'usingStock',
+				'availability',
+				'price',
+				'priceCalculationType',
+				'stockQuantity',
+				'outOfStockAction',
+				'outOfStockAvailability',
+			];
+		}
+		if ($product->isVariant()) {
+			$irrelevantFields = [
+				'categories',
+			];
+		}
+		foreach ($irrelevantFields as $irrelevantField) {
+			$builder->get($irrelevantField)->setDisabled(true);
+		}
 	}
 
 }
