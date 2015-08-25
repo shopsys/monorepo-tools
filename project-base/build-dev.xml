@@ -383,6 +383,18 @@
 		</exec>
 	</target>
 
+	<target name="standards-fix-diff">
+		<phingcall target="phpcs-fixer-fix-diff" />
+		<trycatch>
+			<try>
+				<phingcall target="phpcs-diff" />
+			</try>
+			<catch>
+				<phingcall target="phpcbf-diff" />
+			</catch>
+		</trycatch>
+	</target>
+
 	<target name="tests-unit">
 		<exec
 			executable="${path.phpunit.executable}"
