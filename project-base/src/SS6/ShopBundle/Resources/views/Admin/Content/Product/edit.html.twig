@@ -41,6 +41,48 @@
 	{% endif %}
 {% endblock %}
 
+{% block product_catnum %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_partno %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_ean %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.ean, { label: 'EAN'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_stock_and_availability %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		<div class="js-product-using-stock form-line__js">
+			{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+			{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+			<div class="js-product-using-stock-and-alternate-availability">
+				{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+			</div>
+		</div>
+		<div class="js-product-not-using-stock form-line__js">
+			{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		</div>
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
 {% block product_url %}
 	<div class="form-line">
 		<label class="form-line__label">
@@ -137,12 +179,33 @@
 
 {% endblock %}
 
+{% block product_categories %}
+	{% if product.isVariant %}
+		{{ form_row(form.productData.categories, { label: 'Kategorie'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě hlavního zboží'|trans }}) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
+{% block product_price_calculation_type %}
+	{% if product.isMainVariant %}
+		{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
+
 {% block product_calculated_prices %}
 	<div class="table-form__wrap">
 		<table class="table-form">
 			<thead>
 				<tr class="table-form__row">
-					<th class="table-form__cell table-form__cell--label">{{ inputPriceLabel({ isSimple: true }) }}</th>
+					<th class="table-form__cell table-form__cell--label">
+						{{ inputPriceLabel({ isSimple: true }) }}
+						{% if product.isMainVariant %}
+							<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tuto položku můžete nastavit na kartě konkrétní varianty"></i>
+						{% endif %}
+					</th>
 					<th class="table-form__cell table-form__cell--field"></th>
 					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
 					<th class="table-form__cell">{{ 'Cena s DPH'|trans }}</th>
@@ -198,6 +261,32 @@
 			</tbody>
 		</table>
 	</div>
+{% endblock %}
+
+{% block product_description %}
+	{% if product.isVariant %}
+		<div class="form-group__title">
+			{{ 'Popis'|trans }}
+			<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tuto položku můžete nastavit na kartě hlavního zboží"></i>
+		</div>
+		{% for domainId, descriptionForm in form.descriptions %}
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__group">
+					<span class="form-line__group__image">
+						{{ domainIcon(domainId, 'large') }}
+					</span>
+					<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-line__line form-line__line--no-space">
+					{{ form_widget(descriptionForm) }}
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
 {% endblock %}
 
 {% block images %}

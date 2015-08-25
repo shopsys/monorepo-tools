@@ -37,12 +37,17 @@
 				{{ 'Základní nastavení'|trans }}
 			</div>
 
+			{% block product_catnum %}
+				{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans }) }}
+			{% endblock %}
 
-			{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans }) }}
+			{% block product_partno %}
+				{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans }) }}
+			{% endblock %}
 
-			{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans }) }}
-
-			{{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
+			{% block product_ean %}
+				{{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
+			{% endblock %}
 
 			{{ form_id(product|default(null)) }}
 			{% block product_url %}{% endblock %}
@@ -78,20 +83,23 @@
 
 			{% block product_main_categories %}{% endblock %}
 
+			{% block product_categories %}
+				{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
+			{% endblock %}
 
-			{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
-
-			{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans }) }}
-			<div class="js-product-using-stock form-line__js">
-				{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans }) }}
-				{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans }) }}
-				<div class="js-product-using-stock-and-alternate-availability">
-					{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans }) }}
+			{% block product_stock_and_availability %}
+				{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans }) }}
+				<div class="js-product-using-stock form-line__js">
+					{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans }) }}
+					{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans }) }}
+					<div class="js-product-using-stock-and-alternate-availability">
+						{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans }) }}
+					</div>
 				</div>
-			</div>
-			<div class="js-product-not-using-stock form-line__js">
-				{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans }) }}
-			</div>
+				<div class="js-product-not-using-stock form-line__js">
+					{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans }) }}
+				</div>
+			{% endblock %}
 
 		</div>
 
@@ -101,7 +109,9 @@
 				{{ 'Ceny'|trans }}
 			</div>
 
-			{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans }) }}
+			{% block product_price_calculation_type %}
+				{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans }) }}
+			{% endblock %}
 
 			{{ form_row(form.productData.vat, { label: 'DPH'|trans }) }}
 
@@ -110,28 +120,29 @@
 		</div>
 
 		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Popis'|trans }}
-			</div>
-
-			{% for domainId, descriptionForm in form.descriptions %}
-				<div class="form-line form-line--no-padd">
-					<div class="form-line__group">
-						<span class="form-line__group__image">
-							{{ domainIcon(domainId, 'large') }}
-						</span>
-						<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-					</div>
-				</div>
-				<div class="form-line">
-					<div class="form-line__line form-line__line--no-space">
-						{{ form_widget(descriptionForm) }}
-					</div>
+			{% block product_description %}
+				<div class="form-group__title">
+					{{ 'Popis'|trans }}
 				</div>
 
-			{% endfor %}
+				{% for domainId, descriptionForm in form.descriptions %}
+					<div class="form-line form-line--no-padd">
+						<div class="form-line__group">
+							<span class="form-line__group__image">
+								{{ domainIcon(domainId, 'large') }}
+							</span>
+							<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+						</div>
+					</div>
+					<div class="form-line">
+						<div class="form-line__line form-line__line--no-space">
+							{{ form_widget(descriptionForm) }}
+						</div>
+					</div>
+
+				{% endfor %}
+			{% endblock %}
 		</div>
-
 
 		<div class="js-form-group wrap-border form-group">
 			<div class="form-group__title">

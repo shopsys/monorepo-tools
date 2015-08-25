@@ -445,6 +445,7 @@
 			{{ _self.categoriesWidgetItem(form.vars.categoryDetails, form, true) }}
 		</div>
 	</div>
+	{{- block('appendix_block') -}}
 {% endblock categories_widget %}
 
 {% block form_errors %}
@@ -566,6 +567,7 @@
 				{{ child.vars.label }}
 			</label>
 		{% endfor %}
+		{{- block('appendix_block') -}}
 	</div>
 {% endblock yes_no_widget %}
 
