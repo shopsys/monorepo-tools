@@ -100,6 +100,22 @@
 		</property>
 	</target>
 
+	<target name="phpcbf">
+		<exec
+			executable="${path.phpcbf.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--standard=${path.phpcs.ruleset}"/>
+			<arg value="--extensions=php"/>
+			<arg value="--encoding=utf-8"/>
+			<arg value="--ignore=${path.phpcs.ignored}"/>
+			<arg value="--no-patch"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
 	<target name="phpcs">
 		<exec
 			executable="${path.phpcs.executable}"
@@ -144,6 +160,29 @@
 			<arg value="--verbose" />
 			<arg path="${path.src}" />
 		</exec>
+	</target>
+
+	<target name="phpcbf-diff" depends="diff-files-phpcs">
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phpcbf.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="--standard=${path.phpcs.ruleset}"/>
+					<arg value="--extensions=php"/>
+					<arg value="--encoding=utf-8"/>
+					<arg value="--ignore=${path.phpcs.ignored}"/>
+					<arg value="--no-patch"/>
+					<arg line="${diff.files.phpcs}"/>
+				</exec>
+			</then>
+		</if>
 	</target>
 
 	<target name="phpcs-diff" depends="diff-files-phpcs">
