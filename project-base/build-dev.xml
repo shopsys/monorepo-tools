@@ -90,6 +90,16 @@
 		</property>
 	</target>
 
+	<target name="diff-files-phpcs" depends="diff-files">
+		<property name="diff.files.phpcs" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
+			</filterchain>
+		</property>
+	</target>
+
 	<target name="phpcs">
 		<exec
 			executable="${path.phpcs.executable}"
@@ -136,15 +146,7 @@
 		</exec>
 	</target>
 
-	<target name="phpcs-diff" depends="diff-files">
-		<property name="diff.files.phpcs" value="${diff.files.php}">
-			<filterchain>
-				<replaceregexp>
-					<regexp pattern="[\r\n]+" replace=" " />
-				</replaceregexp>
-			</filterchain>
-		</property>
-
+	<target name="phpcs-diff" depends="diff-files-phpcs">
 		<if>
 			<not>
 				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
