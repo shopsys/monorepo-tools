@@ -7,29 +7,6 @@ parameters:
   fragment.handler.class: SS6\ShopBundle\Component\HttpFoundation\RedirectFragmentHandler
   prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localization\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
-  ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
-  ss6.cron_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/cron.yml
-  ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources
-  ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
-  ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
-  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v6.zip
-  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v5.sql
-  ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
-  ss6.domain_images_url_prefix: /assets/admin/images/domain
-  ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
-  ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
-  ss6.feed_url_prefix: /assets/content/feeds/
-  ss6.file_dir: %ss6.web_dir%/assets/content/files
-  ss6.file_url_prefix: /assets/content/files/
-  ss6.image_dir: %ss6.web_dir%/assets/content/images
-  ss6.image_url_prefix: /assets/content/images/
-  ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
-  ss6.javascript_sources_dir: %ss6.resources_dir%/scripts
-  ss6.javascript_url_prefix: /assets/scripts/
-  ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
-  ss6.root_dir: %kernel.root_dir%/..
-  ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
-  ss6.web_dir: %kernel.root_dir%/../web
   translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\Error\ExceptionController
@@ -879,6 +856,11 @@ services:
 
   ss6.shop.security.customer_login_handler:
     class: SS6\ShopBundle\Model\Security\CustomerLoginHandler
+
+  ss6.shop.security.filesystem.filemanager_access:
+    class: SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess
+    arguments:
+      - %ss6.filemanager_upload_dir%
 
   ss6.shop.security.front_logout_handler:
     class: SS6\ShopBundle\Model\Security\FrontLogoutHandler
