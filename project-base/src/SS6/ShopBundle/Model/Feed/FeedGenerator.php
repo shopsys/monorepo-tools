@@ -82,7 +82,7 @@ class FeedGenerator {
 			return $twigTemplate->renderBlock($name, $templateParameters);
 		}
 
-		throw new \SS6\ShopBundle\Model\Feed\TemplateBlockNotFoundException($name, $twigTemplate->getTemplateName());
+		throw new \SS6\ShopBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $twigTemplate->getTemplateName());
 	}
 
 }
