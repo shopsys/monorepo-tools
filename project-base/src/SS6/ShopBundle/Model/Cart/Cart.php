@@ -52,12 +52,12 @@ class Cart {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[cartItemKey]
 	 */
 	public function getQuantifiedItems() {
 		$quantifiedItems = [];
-		foreach ($this->getItems() as $cartItem) {
-			$quantifiedItems[] = new QuantifiedItem($cartItem->getProduct(), $cartItem->getQuantity());
+		foreach ($this->getItems() as $cartItemKey => $cartItem) {
+			$quantifiedItems[$cartItemKey] = new QuantifiedItem($cartItem->getProduct(), $cartItem->getQuantity());
 		}
 
 		return $quantifiedItems;

@@ -54,8 +54,8 @@ class CartWatcherFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
 	public function checkCartModifications(Cart $cart) {
-		$this->checkModifiedPrices($cart);
 		$this->checkNotListableItems($cart);
+		$this->checkModifiedPrices($cart);
 		$this->checkEmptyCart($cart);
 
 		$this->em->flush();
@@ -83,11 +83,19 @@ class CartWatcherFacade {
 		$notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
 
 		foreach ($notVisibleItems as $cartItem) {
-			$this->flashMessageSender->addErrorFlashTwig(
-				'Zboží <strong>{{ name }}</strong>'
-				. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
-				['name' => $cartItem->getName()]
-			);
+			try {
+				$productName = $cartItem->getName();
+				$this->flashMessageSender->addErrorFlashTwig(
+					'Zboží <strong>{{ name }}</strong>'
+					. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.',
+					['name' => $productName]
+				);
+			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+				$this->flashMessageSender->addErrorFlash(
+					'Zboží, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.'
+				);
+			}
+
 			$cart->removeItemById($cartItem->getId());
 			$this->em->remove($cartItem);
 		}

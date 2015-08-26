@@ -29,7 +29,7 @@ class CartItem {
 	private $sessionId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\User
+	 * @var \SS6\ShopBundle\Model\Customer\User|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\User")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true)
@@ -37,10 +37,10 @@ class CartItem {
 	private $user;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
-	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="SET NULL")
+	 * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $product;
 
@@ -96,7 +96,7 @@ class CartItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product|null
+	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getProduct() {
 		if ($this->product === null) {
