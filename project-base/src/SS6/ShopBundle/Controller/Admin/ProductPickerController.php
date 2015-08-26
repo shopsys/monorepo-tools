@@ -69,6 +69,7 @@ class ProductPickerController extends AdminBaseController {
 			[
 				'isMultiple' => true,
 				'jsInstanceId' => $jsInstanceId,
+				'allowVariants' => $request->query->getBoolean('allowVariants'),
 			]
 		);
 	}
@@ -87,6 +88,7 @@ class ProductPickerController extends AdminBaseController {
 			[
 				'isMultiple' => false,
 				'parentInputId' => $parentInputId,
+				'allowVariants' => $request->query->getBoolean('allowVariants'),
 			]
 		);
 	}

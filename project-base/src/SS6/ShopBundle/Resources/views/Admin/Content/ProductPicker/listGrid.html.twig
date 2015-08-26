@@ -22,17 +22,21 @@
 {% endblock %}
 
 {% block grid_value_cell_id_select %}
-	{%- if isMultiple %}
-		<a
-			class="btn btn--default js-products-picker-window-add-product"
-			href="#"
-			data-product-picker-instance-id="{{ jsInstanceId }}"
-			data-product-picker-product-id="{{ row.p.id }}"
-			data-product-picker-product-name="{{ row.pt.name }}"
-		>
-			<i class="sprite sprite-plus js-products-picker-icon"></i>
-			<span class="js-products-picker-label">{{ 'Přidat'|trans }}</span>
-		</a>
+	{%- if not allowVariants and row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
+		<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které již je hlavní variantou"></i>
+	{% elseif not allowVariants and row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_VARIANT') %}
+		<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které již je variantou"></i>
+	{% elseif isMultiple %}
+			<a
+				class="btn btn--default js-products-picker-window-add-product"
+				href="#"
+				data-product-picker-instance-id="{{ jsInstanceId }}"
+				data-product-picker-product-id="{{ row.p.id }}"
+				data-product-picker-product-name="{{ row.pt.name }}"
+			>
+				<i class="sprite sprite-plus js-products-picker-icon"></i>
+				<span class="js-products-picker-label">{{ 'Přidat'|trans }}</span>
+			</a>
 	{% else %}
 		<a
 			class="btn btn--default"
