@@ -26,7 +26,7 @@ class CronFacade {
 	/**
 	 * @param \DateTime $roundedTime
 	 */
-	public function runServicesForTime(DateTime $roundedTime) {
+	public function runServicesByTime(DateTime $roundedTime) {
 		$this->runServices($this->cronConfig->getCronServiceConfigsByTime($roundedTime));
 	}
 
