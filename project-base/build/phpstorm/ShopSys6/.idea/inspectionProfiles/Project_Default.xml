@@ -347,7 +347,9 @@
       <option name="DONT_REPORT_MULTI_RESOLVE" value="true" />
     </inspection_tool>
     <inspection_tool class="PhpUndefinedConstantInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="PhpUndefinedFieldInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PhpUndefinedFieldInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="NOTIFY_ACCESS_VIA_MAGIC_METHOD" value="false" />
+    </inspection_tool>
     <inspection_tool class="PhpUndefinedFunctionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedGotoLabelInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedMethodInspection" enabled="false" level="WARNING" enabled_by_default="false" />
