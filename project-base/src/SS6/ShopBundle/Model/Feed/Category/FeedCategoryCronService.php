@@ -3,45 +3,25 @@
 namespace SS6\ShopBundle\Model\Feed\Category;
 
 use SS6\ShopBundle\Component\Cron\CronServiceInterface;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade;
-use SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader;
+use SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class FeedCategoryCronService implements CronServiceInterface {
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade
 	 */
-	private $heurekaCategoryFeedUrl;
+	private $feedCategoryDownloadFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade
+	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade FeedCategoryDownloadFacade
 	 */
-	private $feedCategoryFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader
-	 */
-	private $heurekaFeedCategoryLoader;
-
-	/**
-	 * @param string $heurekaCategoryFeedUrl
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade $feedCategoryFacade
-	 * @param \SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader $heurekaFeedCategoryLoader
-	 */
-	public function __construct(
-		$heurekaCategoryFeedUrl,
-		FeedCategoryFacade $feedCategoryFacade,
-		HeurekaFeedCategoryLoader $heurekaFeedCategoryLoader
-	) {
-		$this->heurekaCategoryFeedUrl = $heurekaCategoryFeedUrl;
-		$this->feedCategoryFacade = $feedCategoryFacade;
-		$this->heurekaFeedCategoryLoader = $heurekaFeedCategoryLoader;
+	public function __construct(FeedCategoryDownloadFacade $feedCategoryDownloadFacade) {
+		$this->feedCategoryDownloadFacade = $feedCategoryDownloadFacade;
 	}
 
 	public function run(Logger $logger) {
-		$feedCategoriesData = $this->heurekaFeedCategoryLoader->load($this->heurekaCategoryFeedUrl);
-		$this->feedCategoryFacade->replaceFeedCategories($feedCategoriesData);
+		$this->feedCategoryDownloadFacade->download();
 	}
 
 }
