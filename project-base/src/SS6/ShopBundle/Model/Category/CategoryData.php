@@ -31,18 +31,9 @@ class CategoryData {
 	 */
 	public $urls;
 
-	/**
-	 * @param string[] $name
-	 * @param \SS6\ShopBundle\Model\Category\Category|null $parent
-	 */
-	public function __construct(
-		array $name = [],
-		Category $parent = null,
-		array $hiddenOnDomains = []
-	) {
-		$this->name = $name;
-		$this->parent = $parent;
-		$this->hiddenOnDomains = $hiddenOnDomains;
+	public function __construct() {
+		$this->name = [];
+		$this->hiddenOnDomains = [];
 		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
