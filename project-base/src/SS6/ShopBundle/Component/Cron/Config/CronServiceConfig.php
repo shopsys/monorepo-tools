@@ -15,6 +15,11 @@ class CronServiceConfig implements CronTimeInterface {
 	/**
 	 * @var string
 	 */
+	private $serviceId;
+
+	/**
+	 * @var string
+	 */
 	private $timeMinutes;
 
 	/**
@@ -24,11 +29,13 @@ class CronServiceConfig implements CronTimeInterface {
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Cron\CronServiceInterface $cronService
+	 * @param string $serviceId
 	 * @param string $timeMinutes
 	 * @param string $timeHours
 	 */
-	public function __construct(CronServiceInterface $cronService, $timeMinutes, $timeHours) {
+	public function __construct(CronServiceInterface $cronService, $serviceId, $timeMinutes, $timeHours) {
 		$this->cronService = $cronService;
+		$this->serviceId = $serviceId;
 		$this->timeMinutes = $timeMinutes;
 		$this->timeHours = $timeHours;
 	}
@@ -38,6 +45,13 @@ class CronServiceConfig implements CronTimeInterface {
 	 */
 	public function getCronService() {
 		return $this->cronService;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getServiceId() {
+		return $this->serviceId;
 	}
 
 	/**

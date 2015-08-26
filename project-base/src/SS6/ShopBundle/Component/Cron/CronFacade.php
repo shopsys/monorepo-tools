@@ -27,13 +27,27 @@ class CronFacade {
 	 * @param \DateTime $roundedTime
 	 */
 	public function runServicesForTime(DateTime $roundedTime) {
+		$this->runServices($this->cronConfig->getCronServiceConfigsByTime($roundedTime));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[] $cronServiceConfigs
+	 */
+	private function runServices(array $cronServiceConfigs) {
 		$this->logger->addInfo('====== Start of cron ======');
 
-		foreach ($this->cronConfig->getCronServiceConfigsByTime($roundedTime) as $cronServiceConfig) {
-			$this->logger->addInfo('Start of ' . get_class($cronServiceConfig->getCronService()));
+		foreach ($cronServiceConfigs as $cronServiceConfig) {
+			$this->logger->addInfo('Start of ' . $cronServiceConfig->getServiceId());
 			$cronServiceConfig->getCronService()->run($this->logger);
 		}
 
 		$this->logger->addInfo('======= End of cron =======');
+	}
+
+	/**
+	 * @param string $serviceId
+	 */
+	public function runServiceByServiceId($serviceId) {
+		$this->runServices([$this->cronConfig->getCronServiceConfigByServiceId($serviceId)]);
 	}
 }

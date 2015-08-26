@@ -52,4 +52,17 @@ class CronConfig {
 		return $matchedCronConfigs;
 	}
 
+	/**
+	 * @param string $serviceId
+	 */
+	public function getCronServiceConfigByServiceId($serviceId) {
+		foreach ($this->cronServiceConfigs as $cronConfig) {
+			if ($cronConfig->getServiceId() === $serviceId) {
+				return $cronConfig;
+			}
+		}
+
+		throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronServiceConfigNotFoundException($serviceId);
+	}
+
 }

@@ -5,15 +5,19 @@ namespace SS6\ShopBundle\Command;
 use SS6\ShopBundle\Component\Cron\CronFacade;
 use SS6\ShopBundle\Component\Mutex\MutexFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CronCommand extends ContainerAwareCommand {
 
+	const ARGUMENT_MODULE = 'module';
+
 	protected function configure() {
 		$this
 			->setName('ss6:cron')
-			->setDescription('Maintenance service of ShopSys 6');
+			->setDescription('Maintenance service of ShopSys 6')
+			->addOption(self::ARGUMENT_MODULE, null, InputArgument::OPTIONAL, 'Service ID');
 	}
 
 	/**
@@ -28,7 +32,11 @@ class CronCommand extends ContainerAwareCommand {
 
 		$mutex = $mutexFactory->getCronMutex();
 		if ($mutex->acquireLock(0)) {
-			$cronFacade->runServicesForTime($this->getActualRoundedTime());
+			if ($input->getOption(self::ARGUMENT_MODULE) === null) {
+				$cronFacade->runServicesForTime($this->getActualRoundedTime());
+			} else {
+				$cronFacade->runServiceByServiceId($input->getOption(self::ARGUMENT_MODULE));
+			}
 			$mutex->releaseLock();
 		} else {
 			throw new \SS6\ShopBundle\Command\Exception\CronCommandException('Cron can run only one at this time');

@@ -99,7 +99,7 @@ class CronConfigLoader {
 		$this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
 		$this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
 
-		return new CronServiceConfig($this->container->get($serviceId), $timeMinutes, $timeHours);
+		return new CronServiceConfig($this->container->get($serviceId), $serviceId, $timeMinutes, $timeHours);
 	}
 
 }
