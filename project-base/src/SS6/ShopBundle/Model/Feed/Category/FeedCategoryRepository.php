@@ -49,4 +49,11 @@ class FeedCategoryRepository {
 		return $this->getFeedCategoryRepository()->createQueryBuilder('fc', 'fc.extId')->getQuery()->execute();
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategory[]
+	 */
+	public function getAllHeurekaCz() {
+		return $this->getFeedCategoryRepository()->findBy([], ['fullName' => 'asc']);
+	}
+
 }

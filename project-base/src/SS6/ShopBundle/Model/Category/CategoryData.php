@@ -27,6 +27,11 @@ class CategoryData {
 	public $hiddenOnDomains;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
+	 */
+	public $heurekaCzFeedCategory;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
 	 */
 	public $urls;
@@ -48,6 +53,7 @@ class CategoryData {
 		}
 		$this->name = $names;
 		$this->parent = $category->getParent();
+		$this->heurekaCzFeedCategory = $category->getHeurekaCzFeedCategory();
 		$hiddenOnDomains = [];
 		foreach ($categoryDomains as $categoryDomain) {
 			if ($categoryDomain->isHidden()) {
