@@ -41,7 +41,7 @@ class CronServiceConfig implements CronTimeInterface {
 	}
 
 	/**
-	 * @return string
+	 * @return \SS6\ShopBundle\Component\Cron\CronServiceInterface
 	 */
 	public function getCronService() {
 		return $this->cronService;
