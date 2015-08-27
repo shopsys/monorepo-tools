@@ -50,6 +50,11 @@ class HeurekaItem {
 	private $manufacturer;
 
 	/**
+	 * @var string|null
+	 */
+	private $categorytext;
+
+	/**
 	 * @var string[paramName]
 	 */
 	private $params;
@@ -69,6 +74,7 @@ class HeurekaItem {
 	 * @param string|null $ean
 	 * @param int|null $deliveryDate
 	 * @param string|null $manufacturer
+	 * @param string|null $categorytext
 	 * @param string[paramName] $params
 	 * @param string|null $cpc
 	 */
@@ -82,6 +88,7 @@ class HeurekaItem {
 		$ean,
 		$deliveryDate,
 		$manufacturer,
+		$categorytext,
 		$params,
 		$cpc
 	) {
@@ -94,6 +101,7 @@ class HeurekaItem {
 		$this->ean = $ean;
 		$this->deliveryDate = $deliveryDate;
 		$this->manufacturer = $manufacturer;
+		$this->categorytext = $categorytext;
 		$this->params = $params;
 		$this->cpc = $cpc;
 	}
@@ -159,6 +167,13 @@ class HeurekaItem {
 	 */
 	public function getManufacturer() {
 		return $this->manufacturer;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCategorytext() {
+		return $this->categorytext;
 	}
 
 	/**

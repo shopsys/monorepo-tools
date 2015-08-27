@@ -3,11 +3,13 @@
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
 use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use SS6\ShopBundle\Model\Product\Product;
 
 class HeurekaDataIterator extends AbstractDataIterator {
 
@@ -27,6 +29,11 @@ class HeurekaDataIterator extends AbstractDataIterator {
 	private $productCollectionFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
+
+	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
@@ -36,11 +43,13 @@ class HeurekaDataIterator extends AbstractDataIterator {
 		QueryBuilder $queryBuilder,
 		DomainConfig $domainConfig,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ProductCollectionFacade $productCollectionFacade
+		ProductCollectionFacade $productCollectionFacade,
+		CategoryFacade $categoryFacade
 	) {
 		$this->domainConfig = $domainConfig;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productCollectionFacade = $productCollectionFacade;
+		$this->categoryFacade = $categoryFacade;
 
 		parent::__construct($queryBuilder);
 	}
@@ -88,12 +97,29 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$product->getEan(),
 				$product->getCalculatedAvailability()->getDispatchTime(),
 				$manufacturer,
+				$this->getProductCategorytext($product, $this->domainConfig),
 				$params,
 				$productDomainsByProductId[$product->getId()]->getHeurekaCpc()
 			);
 		}
 
 		return $items;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return string|null
+	 */
+	private function getProductCategorytext(Product $product, DomainConfig $domainConfig) {
+		$productMainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainConfig->getId());
+		$feedCategory = $productMainCategory->getHeurekaCzFeedCategory();
+
+		if ($feedCategory !== null) {
+			return $feedCategory->getFullName();
+		} else {
+			return null;
+		}
 	}
 
 }
