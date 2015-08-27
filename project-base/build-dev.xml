@@ -90,6 +90,32 @@
 		</property>
 	</target>
 
+	<target name="diff-files-phpcs" depends="diff-files">
+		<property name="diff.files.phpcs" value="${diff.files.php}">
+			<filterchain>
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
+			</filterchain>
+		</property>
+	</target>
+
+	<target name="phpcbf">
+		<exec
+			executable="${path.phpcbf.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--standard=${path.phpcs.ruleset}"/>
+			<arg value="--extensions=php"/>
+			<arg value="--encoding=utf-8"/>
+			<arg value="--ignore=${path.phpcs.ignored}"/>
+			<arg value="--no-patch"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
 	<target name="phpcs">
 		<exec
 			executable="${path.phpcs.executable}"
@@ -136,15 +162,30 @@
 		</exec>
 	</target>
 
-	<target name="phpcs-diff" depends="diff-files">
-		<property name="diff.files.phpcs" value="${diff.files.php}">
-			<filterchain>
-				<replaceregexp>
-					<regexp pattern="[\r\n]+" replace=" " />
-				</replaceregexp>
-			</filterchain>
-		</property>
+	<target name="phpcbf-diff" depends="diff-files-phpcs">
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+					executable="${path.phpcbf.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="--standard=${path.phpcs.ruleset}"/>
+					<arg value="--extensions=php"/>
+					<arg value="--encoding=utf-8"/>
+					<arg value="--ignore=${path.phpcs.ignored}"/>
+					<arg value="--no-patch"/>
+					<arg line="${diff.files.phpcs}"/>
+				</exec>
+			</then>
+		</if>
+	</target>
 
+	<target name="phpcs-diff" depends="diff-files-phpcs">
 		<if>
 			<not>
 				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
@@ -340,6 +381,18 @@
 			<arg value="-jar" />
 			<arg path="vendor/se/selenium-server-standalone/composer/bin/selenium-server-standalone.jar" />
 		</exec>
+	</target>
+
+	<target name="standards-fix-diff">
+		<phingcall target="phpcs-fixer-fix-diff" />
+		<trycatch>
+			<try>
+				<phingcall target="phpcs-diff" />
+			</try>
+			<catch>
+				<phingcall target="phpcbf-diff" />
+			</catch>
+		</trycatch>
 	</target>
 
 	<target name="tests-unit">
