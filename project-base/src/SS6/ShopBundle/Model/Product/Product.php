@@ -599,10 +599,17 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\Product $variant
 	 */
 	public function addVariant(Product $variant) {
+		if ($this->variantType === self::VARIANT_TYPE_VARIANT) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException($this->getId());
+		}
+		if ($variant->variantType === self::VARIANT_TYPE_MAIN) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException($variant->getId());
+		}
+		if ($variant->variantType === self::VARIANT_TYPE_VARIANT) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeVariantException($variant->getId());
+		}
 		if ($this->variantType === self::VARIANT_TYPE_NONE) {
 			$this->variantType = self::VARIANT_TYPE_MAIN;
-		} elseif ($this->variantType === self::VARIANT_TYPE_VARIANT) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException();
 		}
 
 		if (!$this->variants->contains($variant)) {

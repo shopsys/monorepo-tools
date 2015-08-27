@@ -6,7 +6,7 @@ use Exception;
 use SS6\ShopBundle\Model\Product\Exception\ProductException;
 use SS6\ShopBundle\Model\Product\Exception\VariantException;
 
-class VariantCannotBeMainVariantException extends Exception implements ProductException, VariantException {
+class VariantCannotBeVariantException extends Exception implements ProductException, VariantException {
 
 	/**
 	 * @param int $productId

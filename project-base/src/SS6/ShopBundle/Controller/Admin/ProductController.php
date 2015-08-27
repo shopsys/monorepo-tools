@@ -330,18 +330,28 @@ class ProductController extends AdminBaseController {
 		if ($form->isValid()) {
 			$formData = $form->getData();
 			$mainVariant = $formData[VariantFormType::MAIN_VARIANT];
-			$newMainVariant = $this->productVariantFacade->createVariant(
-				$mainVariant,
-				$formData[VariantFormType::VARIANTS]
-			);
+			try {
+				$newMainVariant = $this->em->transactional(
+					function () use ($mainVariant, $formData) {
+						return $this->productVariantFacade->createVariant(
+							$mainVariant,
+							$formData[VariantFormType::VARIANTS]
+						);
+					}
+				);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.', [
-					'productVariant' => $newMainVariant,
-				]
-			);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					'Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.', [
+						'productVariant' => $newMainVariant,
+					]
+				);
 
-			return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
+				return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
+			} catch (\SS6\ShopBundle\Model\Product\Exception\VariantException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash(
+					'Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou.'
+				);
+			}
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/createVariant.html.twig', [

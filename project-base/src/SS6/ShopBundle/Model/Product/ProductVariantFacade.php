@@ -4,9 +4,12 @@ namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantFacade {
 
@@ -30,16 +33,37 @@ class ProductVariantFacade {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVariantService
+	 */
+	private $productVariantService;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 */
+	private $productPriceRecalculationScheduler;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 */
+	private $productAvailabilityRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		ProductEditFacade $productEditFacade,
 		ProductEditDataFactory $productEditDataFactory,
-		ImageFacade $imageFacade
+		ImageFacade $imageFacade,
+		ProductVariantService $productVariantService,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
 		$this->productEditDataFactory = $productEditDataFactory;
 		$this->imageFacade = $imageFacade;
+		$this->productVariantService = $productVariantService;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 	}
 
 	/**
@@ -48,12 +72,23 @@ class ProductVariantFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function createVariant(Product $mainProduct, array $variants) {
-		$variants[] = $mainProduct;
-		$mainProductEditData = $this->productEditDataFactory->createFromProduct($mainProduct);
-		$newMainVariant = $this->productEditFacade->create($mainProductEditData);
-		$this->imageFacade->copyImages($mainProduct, $newMainVariant);
-		$newMainVariant->setVariants($variants);
+		$this->productVariantService->checkProductVariantType($mainProduct, $variants);
+		$this->em->beginTransaction();
+		try {
+			$variants[] = $mainProduct;
+			$mainProductEditData = $this->productEditDataFactory->createFromProduct($mainProduct);
+			$newMainVariant = $this->productEditFacade->create($mainProductEditData);
+			$newMainVariant->setVariants($variants);
+		} catch (\Exception $exception) {
+			$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+			$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+			$this->em->rollback();
+			throw $exception;
+		}
+		$this->em->commit();
 		$this->em->flush();
+
+		$this->imageFacade->copyImages($mainProduct, $newMainVariant);
 
 		return $newMainVariant;
 	}
