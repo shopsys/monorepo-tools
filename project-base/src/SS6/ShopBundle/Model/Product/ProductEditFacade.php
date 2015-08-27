@@ -246,8 +246,10 @@ class ProductEditFacade {
 			$productParameterValue = new ProductParameterValue(
 				$productParameterValueData->product,
 				$productParameterValueData->parameter,
-				$productParameterValueData->locale,
-				$this->parameterRepository->findOrCreateParameterValueByValueText($productParameterValueData->valueText)
+				$this->parameterRepository->findOrCreateParameterValueByValueTextAndLocale(
+					$productParameterValueData->valueText,
+					$productParameterValueData->locale
+				)
 			);
 			$this->em->persist($productParameterValue);
 			$toFlush[] = $productParameterValue;

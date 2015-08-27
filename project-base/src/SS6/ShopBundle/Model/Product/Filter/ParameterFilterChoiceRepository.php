@@ -53,9 +53,9 @@ class ParameterFilterChoiceRepository {
 
 		$productsQueryBuilder
 			->select('MIN(p), pp, pv')
-			->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p AND ppv.locale = :locale')
+			->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p')
 			->join(Parameter::class, 'pp', Join::WITH, 'pp = ppv.parameter')
-			->join(ParameterValue::class, 'pv', Join::WITH, 'pv = ppv.value')
+			->join(ParameterValue::class, 'pv', Join::WITH, 'pv = ppv.value AND pv.locale = :locale')
 			->groupBy('pp, pv')
 			->resetDQLPart('orderBy')
 			->setParameter('locale', $locale);

@@ -73,15 +73,17 @@ class ParameterRepository {
 
 	/**
 	 * @param string $valueText
+	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
 	 */
-	public function findOrCreateParameterValueByValueText($valueText) {
+	public function findOrCreateParameterValueByValueTextAndLocale($valueText, $locale) {
 		$parameterValue = $this->getParameterValueRepository()->findOneBy([
 			'text' => $valueText,
+			'locale' => $locale,
 		]);
 
 		if ($parameterValue === null) {
-			$parameterValue = new ParameterValue(new ParameterValueData($valueText));
+			$parameterValue = new ParameterValue(new ParameterValueData($valueText, $locale));
 			$this->em->persist($parameterValue);
 			// Doctrine's identity map is not cache.
 			// We have to flush now, so that next findOneBy() finds new ParameterValue.
@@ -128,7 +130,7 @@ class ParameterRepository {
 			->join('p.translations', 'pt')
 			->join('ppv.value', 'pv')
 			->where('ppv.product IN (:products)')
-			->andWhere('ppv.locale = :locale')
+			->andWhere('pv.locale = :locale')
 			->setParameters([
 				'products' => $products,
 				'locale' => $locale,

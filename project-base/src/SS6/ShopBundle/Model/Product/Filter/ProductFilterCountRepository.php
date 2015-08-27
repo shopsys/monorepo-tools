@@ -258,8 +258,8 @@ class ProductFilterCountRepository {
 
 			$productsFilteredExceptCurrentParameterQueryBuilder
 				->select('pv.id, COUNT(p) AS cnt')
-				->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p AND ppv.locale = :locale')
-				->join('ppv.value', 'pv')
+				->join(ProductParameterValue::class, 'ppv', Join::WITH, 'ppv.product = p')
+				->join('ppv.value', 'pv', Join::WITH, 'pv.locale = :locale')
 				->andWhere('ppv.parameter = :parameter')
 				->resetDQLPart('orderBy')
 				->groupBy('pv.id')

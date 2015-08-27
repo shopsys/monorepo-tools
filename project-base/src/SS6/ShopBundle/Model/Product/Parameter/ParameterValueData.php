@@ -10,17 +10,17 @@ class ParameterValueData {
 	public $text;
 
 	/**
-	 * @param string|null $text
+	 * @var string|null
 	 */
-	public function __construct($text = null) {
-		$this->text = $text;
-	}
+	public $locale;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $parameterValue
+	 * @param string|null $text
+	 * @param string|null $locale
 	 */
-	public function setFromEntity(ParameterValue $parameterValue) {
-		$this->text = $parameterValue->getText();
+	public function __construct($text = null, $locale = null) {
+		$this->text = $text;
+		$this->locale = $locale;
 	}
 
 }

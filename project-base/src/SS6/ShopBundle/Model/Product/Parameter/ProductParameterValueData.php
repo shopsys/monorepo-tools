@@ -2,8 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
-use SS6\ShopBundle\Model\Product\Product;
-
 class ProductParameterValueData {
 
 	/**
@@ -32,7 +30,7 @@ class ProductParameterValueData {
 	public function setFromEntity(ProductParameterValue $productParameterValue) {
 		$this->product = $productParameterValue->getProduct();
 		$this->parameter = $productParameterValue->getParameter();
-		$this->locale = $productParameterValue->getLocale();
+		$this->locale = $productParameterValue->getValue()->getLocale();
 		$this->valueText = $productParameterValue->getValue()->getText();
 	}
 

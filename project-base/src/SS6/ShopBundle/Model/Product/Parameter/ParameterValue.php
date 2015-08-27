@@ -28,10 +28,18 @@ class ParameterValue {
 	private $text;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string")
+	 */
+	private $locale;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValueData $parameterData
 	 */
 	public function __construct(ParameterValueData $parameterData) {
 		$this->text = $parameterData->text;
+		$this->locale = $parameterData->locale;
 	}
 
 	/**
@@ -46,6 +54,13 @@ class ParameterValue {
 	 */
 	public function getText() {
 		return $this->text;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLocale() {
+		return $this->locale;
 	}
 
 	/**

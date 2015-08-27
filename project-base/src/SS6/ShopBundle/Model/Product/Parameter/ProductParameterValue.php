@@ -32,16 +32,9 @@ class ProductParameterValue {
 	private $parameter;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(name="locale", type="string")
-	 */
-	private $locale;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
 	 *
+	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Parameter\ParameterValue")
 	 * @ORM\JoinColumn(name="value_id", referencedColumnName="id", nullable=false)
 	 */
@@ -50,18 +43,15 @@ class ProductParameterValue {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
-	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $value
 	 */
 	public function __construct(
 		Product $product,
 		Parameter $parameter,
-		$locale,
 		ParameterValue $value
 	) {
 		$this->product = $product;
 		$this->parameter = $parameter;
-		$this->locale = $locale;
 		$this->value = $value;
 	}
 
@@ -77,13 +67,6 @@ class ProductParameterValue {
 	 */
 	public function getParameter() {
 		return $this->parameter;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLocale() {
-		return $this->locale;
 	}
 
 	/**

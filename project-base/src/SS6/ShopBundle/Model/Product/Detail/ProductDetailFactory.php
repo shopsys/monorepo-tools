@@ -111,7 +111,9 @@ class ProductDetailFactory {
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
 		foreach ($productParameterValues as $index => $productParameterValue) {
 			$parameter = $productParameterValue->getParameter();
-			if ($parameter->getName() === null || $productParameterValue->getLocale() !== $this->localization->getLocale()) {
+			if ($parameter->getName() === null
+				|| $productParameterValue->getValue()->getLocale() !== $this->localization->getLocale()
+			) {
 				unset($productParameterValues[$index]);
 			}
 		}
