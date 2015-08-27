@@ -26,6 +26,12 @@ Table for grid
 		&--edit {
 			background: @bg-edit;
 		}
+
+		&:nth-child(2n) {
+			tbody & {
+				background: @bg-stripe;
+			}
+		}
 	}
 
 	&__cell {

@@ -39,8 +39,7 @@
 	SS6.productsPicker.window.markAddButtonAsAdded = function ($addButton) {
 		$addButton
 			.addClass('cursor-default btn-success')
-			.find('.js-products-picker-icon').removeClass('fa-plus').addClass('fa-check').end()
-			.find('.js-products-picker-label').text(SS6.translator.trans('Přidáno'))
+			.find('.js-products-picker-icon').removeClass('svg-circle-plus in-icon in-icon--add').addClass('svg-circle-cross in-icon in-icon--delete').end()
 			.click(function () {
 				return false;
 			});
@@ -53,8 +52,7 @@
 				title: SS6.translator.trans('Nelze přiřadit produkt sám sobě'),
 				placement: 'left'
 			})
-			.find('.js-products-picker-icon').removeClass('fa-plus').addClass('fa-question-circle').end()
-			.find('.js-products-picker-label').text(SS6.translator.trans('Nelze'))
+			.find('.js-products-picker-icon').removeClass('svg-circle-plus in-icon in-icon--add').addClass('svg-circle-remove in-icon in-icon--denied').end()
 			.click(function () {
 				return false;
 			});
