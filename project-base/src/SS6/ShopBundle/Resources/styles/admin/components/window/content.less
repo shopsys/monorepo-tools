@@ -5,5 +5,24 @@ Fancy window for content
 */
 
 .window-content {
-	padding: 10px 20px;
+
+	&__heading {
+		padding: 10px 20px;
+		height: 48px;
+		line-height: 28px;
+		position: relative;
+
+		color: @color-f;
+		background: @bg-primary;
+		text-transform: uppercase;
+		font-weight: bold;
+		border-bottom: 1px solid @bg-primary-dark;
+	}
+
+	&__in {
+		padding: 10px 20px;
+
+		background: @bg-window;
+		border: 1px solid @color-border;
+	}
 }
