@@ -29,7 +29,7 @@ class FeedCategoryFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
 	 */
-	public function replaceFeedCategories(array $feedCategoriesData) {
+	public function refreshFeedCategories(array $feedCategoriesData) {
 		$this->deleteOldFeedCategories($feedCategoriesData);
 		$this->createOrEditCategories($feedCategoriesData);
 	}
@@ -44,7 +44,7 @@ class FeedCategoryFacade {
 			$currentExtIds[] = $currentFeedCategoryData->extId;
 		}
 
-		$this->feedCategoryRepository->deleteByExtIdNotIn($currentExtIds);
+		$this->feedCategoryRepository->deleteAllExceptExtIds($currentExtIds);
 	}
 
 	/**

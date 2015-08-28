@@ -40,11 +40,11 @@ class CategoryFormTypeFactory {
 	 */
 	public function create() {
 		$categories = $this->categoryRepository->getAll();
-		$heurekaCzfeedCategories = $this->feedCategoryRepository->getAllHeurekaCz();
+		$heurekaCzFeedCategories = $this->feedCategoryRepository->getAllHeurekaCz();
 
 		return new CategoryFormType(
 			$categories,
-			$heurekaCzfeedCategories,
+			$heurekaCzFeedCategories,
 			$this->inverseArrayValuesTransformer
 		);
 	}
@@ -55,11 +55,11 @@ class CategoryFormTypeFactory {
 	 */
 	public function createForCategory(Category $category) {
 		$categories = $this->categoryRepository->getAllWithoutBranch($category);
-		$heurekaCzfeedCategories = $this->feedCategoryRepository->getAllHeurekaCz();
+		$heurekaCzFeedCategories = $this->feedCategoryRepository->getAllHeurekaCz();
 
 		return new CategoryFormType(
 			$categories,
-			$heurekaCzfeedCategories,
+			$heurekaCzFeedCategories,
 			$this->inverseArrayValuesTransformer,
 			$category
 		);

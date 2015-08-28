@@ -23,7 +23,7 @@ class CategoryFormType extends AbstractType {
 	/**
 	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory[]
 	 */
-	private $heurekaCzfeedCategories;
+	private $heurekaCzFeedCategories;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
@@ -37,18 +37,18 @@ class CategoryFormType extends AbstractType {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzfeedCategories
+	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Category\Category|null $category
 	 */
 	public function __construct(
 		array $categories,
-		array $heurekaCzfeedCategories,
+		array $heurekaCzFeedCategories,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		Category $category = null
 	) {
 		$this->categories = $categories;
-		$this->heurekaCzfeedCategories = $heurekaCzfeedCategories;
+		$this->heurekaCzFeedCategories = $heurekaCzFeedCategories;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->category = $category;
 	}
@@ -86,7 +86,7 @@ class CategoryFormType extends AbstractType {
 				->addViewTransformer($this->inverseArrayValuesTransformer))
 			->add('heurekaCzFeedCategory', FormType::CHOICE, [
 				'required' => false,
-				'choice_list' => new ObjectChoiceList($this->heurekaCzfeedCategories, 'name', [], null, 'id'),
+				'choice_list' => new ObjectChoiceList($this->heurekaCzFeedCategories, 'name', [], null, 'id'),
 			])
 			->add('urls', FormType::URL_LIST, [
 				'route_name' => 'front_product_list',

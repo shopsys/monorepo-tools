@@ -16,6 +16,9 @@ class FeedCategoryRepository {
 		$this->em = $em;
 	}
 
+	/**
+	 * @return \Doctrine\ORM\EntityRepository
+	 */
 	private function getFeedCategoryRepository() {
 		return $this->em->getRepository(FeedCategory::class);
 	}
@@ -32,7 +35,7 @@ class FeedCategoryRepository {
 	/**
 	 * @param int[] $extIds
 	 */
-	public function deleteByExtIdNotIn(array $extIds) {
+	public function deleteAllExceptExtIds(array $extIds) {
 		$qb = $this->em->createQueryBuilder();
 
 		$qb->delete(FeedCategory::class, 'fc')

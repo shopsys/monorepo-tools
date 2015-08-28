@@ -39,7 +39,7 @@ class FeedCategoryDownloadFacade {
 
 	public function download() {
 		$feedCategoriesData = $this->heurekaFeedCategoryLoader->load($this->heurekaCategoryFeedUrl);
-		$this->feedCategoryFacade->replaceFeedCategories($feedCategoriesData);
+		$this->feedCategoryFacade->refreshFeedCategories($feedCategoriesData);
 	}
 
 }
