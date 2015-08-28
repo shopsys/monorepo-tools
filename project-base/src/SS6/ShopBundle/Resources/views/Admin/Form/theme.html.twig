@@ -428,7 +428,10 @@
 					<span class="form-tree__item__icon js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' c-pointer' : ''}}"></span>
 					<span class="form-tree__item__name">
 						{{ form_widget(categoryForm, { inTree: true, attr: { class: 'js-category-tree-form-item-checkbox' } }) }}
-						{{ categoryForm.vars.label }}</span>
+						<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}" target="_blank">
+							{{ categoryForm.vars.label }}
+						</a>
+					</span>
 				</div>
 				{{ _self.categoriesWidgetItem(categoryDetail.children, form, false) }}
 			</li>
