@@ -66,7 +66,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		$mainVariant->addVariant($variant);
 		$mainVariant2->addVariant($variant2);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\VariantCannotBeVariantException::class);
+		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException::class);
 		$mainVariant->addVariant($variant2);
 	}
 
@@ -97,6 +97,14 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException::class);
 		$variant2->addVariant($variant3);
+	}
+
+	public function testAddSelfAsVariantException() {
+		$productData = new ProductData();
+		$product = new Product($productData);
+
+		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
+		$product->addVariant($product);
 	}
 
 }

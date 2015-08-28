@@ -602,11 +602,11 @@ class Product extends AbstractTranslatableEntity {
 		if ($this->variantType === self::VARIANT_TYPE_VARIANT) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException($this->getId());
 		}
-		if ($variant->variantType === self::VARIANT_TYPE_MAIN) {
+		if ($variant->variantType === self::VARIANT_TYPE_MAIN || $this === $variant) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException($variant->getId());
 		}
 		if ($variant->variantType === self::VARIANT_TYPE_VARIANT) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeVariantException($variant->getId());
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException($variant->getId());
 		}
 		if ($this->variantType === self::VARIANT_TYPE_NONE) {
 			$this->variantType = self::VARIANT_TYPE_MAIN;

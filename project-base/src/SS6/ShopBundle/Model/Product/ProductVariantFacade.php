@@ -72,23 +72,21 @@ class ProductVariantFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function createVariant(Product $mainProduct, array $variants) {
-		$this->productVariantService->checkProductVariantType($mainProduct, $variants);
-		$this->em->beginTransaction();
+		$this->productVariantService->checkProductIsNotMainVariant($mainProduct);
+
 		try {
 			$variants[] = $mainProduct;
 			$mainProductEditData = $this->productEditDataFactory->createFromProduct($mainProduct);
 			$newMainVariant = $this->productEditFacade->create($mainProductEditData);
 			$newMainVariant->setVariants($variants);
+			$this->imageFacade->copyImages($mainProduct, $newMainVariant);
+
+			$this->em->flush();
 		} catch (\Exception $exception) {
 			$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 			$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
-			$this->em->rollback();
 			throw $exception;
 		}
-		$this->em->commit();
-		$this->em->flush();
-
-		$this->imageFacade->copyImages($mainProduct, $newMainVariant);
 
 		return $newMainVariant;
 	}
