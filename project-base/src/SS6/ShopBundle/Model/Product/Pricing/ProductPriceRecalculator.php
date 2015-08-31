@@ -112,8 +112,13 @@ class ProductPriceRecalculator {
 	 */
 	private function recalculateProductPrices(Product $product) {
 		foreach ($this->getAllPricingGroups() as $pricingGroup) {
-			$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
-			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $price->getPriceWithVat());
+			try {
+				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+				$priceWithVat = $price->getPriceWithVat();
+			} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
+				$priceWithVat = 0;
+			}
+			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $priceWithVat);
 		}
 		$product->markPriceAsRecalculated();
 		$product->markForVisibilityRecalculation();

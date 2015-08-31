@@ -91,12 +91,17 @@ class ProductVisibilityRepository {
 								(p.selling_from IS NULL OR p.selling_from <= :now)
 								AND
 								(p.selling_to IS NULL OR p.selling_to >= :now)
-								AND EXISTS (
-									SELECT 1
-									FROM product_calculated_prices as pcp
-									WHERE pcp.price_with_vat > 0
-										AND pcp.product_id = pv.product_id
-										AND pcp.pricing_group_id = pv.pricing_group_id
+								AND
+								(
+									p.variant_type = :variantTypeMain
+									OR
+									EXISTS (
+										SELECT 1
+										FROM product_calculated_prices as pcp
+										WHERE pcp.price_with_vat > 0
+											AND pcp.product_id = pv.product_id
+											AND pcp.pricing_group_id = pv.pricing_group_id
+									)
 								)
 								AND EXISTS (
 									SELECT 1
@@ -132,6 +137,7 @@ class ProductVisibilityRepository {
 				'domainId' => $domain->getId(),
 				'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
 				'pricingGroupId' => $pricingGroup->getId(),
+				'variantTypeMain' => Product::VARIANT_TYPE_MAIN,
 			]);
 		}
 	}

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ProductCalculatedPriceDataFixture;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class ProductVisibilityDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -24,6 +25,7 @@ class ProductVisibilityDataFixture extends AbstractReferenceFixture implements D
 	public function getDependencies() {
 		return [
 			ProductDataFixture::class,
+			ProductCalculatedPriceDataFixture::class,
 		];
 	}
 
