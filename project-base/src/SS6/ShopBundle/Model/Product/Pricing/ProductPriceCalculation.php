@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceCalculation {
 
@@ -32,20 +33,22 @@ class ProductPriceCalculation {
 	private $currencyFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
-	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository $productManualInputPriceRepository
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
+	private $productRepository;
+
 	public function __construct(
 		BasePriceCalculation $basePriceCalculation,
 		PricingSetting $pricingSetting,
 		ProductManualInputPriceRepository $productManualInputPriceRepository,
-		CurrencyFacade $currencyFacade
+		CurrencyFacade $currencyFacade,
+		ProductRepository $productRepository
 	) {
 		$this->pricingSetting = $pricingSetting;
 		$this->basePriceCalculation = $basePriceCalculation;
 		$this->productManualInputPriceRepository = $productManualInputPriceRepository;
 		$this->currencyFacade = $currencyFacade;
+		$this->productRepository = $productRepository;
 	}
 
 	/**
@@ -54,6 +57,10 @@ class ProductPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice(Product $product, PricingGroup $pricingGroup) {
+		if ($product->isMainVariant()) {
+			return $this->calculateMainVariantPrice($product, $pricingGroup);
+		}
+
 		$priceCalculationType = $product->getPriceCalculationType();
 		if ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
 			return $this->calculateBasePriceForPricingGroupAuto($product, $pricingGroup);
@@ -63,6 +70,33 @@ class ProductPriceCalculation {
 			$message = 'Product price calculation type ' . $priceCalculationType . ' is not supported';
 			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException($message);
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	private function calculateMainVariantPrice(Product $mainVariant, PricingGroup $pricingGroup) {
+		$variants = $this->productRepository->getAllSellableVariantsByMainVariant(
+			$mainVariant,
+			$pricingGroup->getDomainId(),
+			$pricingGroup
+		);
+		$minVariantPrice = null;
+		foreach ($variants as $variant) {
+			$variantPrice = $this->calculatePrice($variant, $pricingGroup);
+			if ($minVariantPrice === null || $variantPrice->getPriceWithoutVat() < $minVariantPrice->getPriceWithoutVat()) {
+				$minVariantPrice = $variantPrice;
+			}
+		}
+
+		if ($minVariantPrice === null) {
+			$message = 'Main variant ID = ' . $mainVariant->getId() . ' has no sellable variants.';
+			throw new \SS6\ShopBundle\Model\Product\Pricing\Exception\CalculatePriceException($message);
+		}
+
+		return $minVariantPrice;
 	}
 
 	/**
