@@ -5,8 +5,10 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Pricing\PricingService;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -37,24 +39,31 @@ class ProductPriceCalculation {
 	 */
 	private $productRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingService
+	 */
+	private $pricingService;
+
 	public function __construct(
 		BasePriceCalculation $basePriceCalculation,
 		PricingSetting $pricingSetting,
 		ProductManualInputPriceRepository $productManualInputPriceRepository,
 		CurrencyFacade $currencyFacade,
-		ProductRepository $productRepository
+		ProductRepository $productRepository,
+		PricingService $pricingService
 	) {
 		$this->pricingSetting = $pricingSetting;
 		$this->basePriceCalculation = $basePriceCalculation;
 		$this->productManualInputPriceRepository = $productManualInputPriceRepository;
 		$this->currencyFacade = $currencyFacade;
 		$this->productRepository = $productRepository;
+		$this->pricingService = $pricingService;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	public function calculatePrice(Product $product, PricingGroup $pricingGroup) {
 		if ($product->isMainVariant()) {
@@ -75,7 +84,7 @@ class ProductPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	private function calculateMainVariantPrice(Product $mainVariant, PricingGroup $pricingGroup) {
 		$variants = $this->productRepository->getAllSellableVariantsByMainVariant(
@@ -83,20 +92,20 @@ class ProductPriceCalculation {
 			$pricingGroup->getDomainId(),
 			$pricingGroup
 		);
-		$minVariantPrice = null;
-		foreach ($variants as $variant) {
-			$variantPrice = $this->calculatePrice($variant, $pricingGroup);
-			if ($minVariantPrice === null || $variantPrice->getPriceWithoutVat() < $minVariantPrice->getPriceWithoutVat()) {
-				$minVariantPrice = $variantPrice;
-			}
-		}
-
-		if ($minVariantPrice === null) {
+		if (count($variants) === 0) {
 			$message = 'Main variant ID = ' . $mainVariant->getId() . ' has no sellable variants.';
 			throw new \SS6\ShopBundle\Model\Product\Pricing\Exception\CalculatePriceException($message);
 		}
 
-		return $minVariantPrice;
+		$variantPrices = [];
+		foreach ($variants as $variant) {
+			$variantPrices[] = $this->calculatePrice($variant, $pricingGroup);
+		}
+
+		$minVariantPrice = $this->pricingService->getMinimumPrice($variantPrices);
+		$from = $this->pricingService->areDifferent($variantPrices);
+
+		return new ProductPrice($minVariantPrice, $from);
 	}
 
 	/**
@@ -114,7 +123,7 @@ class ProductPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	private function calculateBasePriceForPricingGroupManual(Product $product, PricingGroup $pricingGroup) {
 		$manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
@@ -123,26 +132,30 @@ class ProductPriceCalculation {
 		} else {
 			$price = 0;
 		}
-		return $this->basePriceCalculation->calculateBasePrice(
+		$price = $this->basePriceCalculation->calculateBasePrice(
 			$price,
 			$this->pricingSetting->getInputPriceType(),
 			$product->getVat()
 		);
+
+		return new ProductPrice($price, false);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	private function calculateBasePriceForPricingGroupAuto(Product $product, PricingGroup $pricingGroup) {
 		$basePrice = $this->calculateBasePrice($product);
 
-		return $this->basePriceCalculation->applyCoefficients(
+		$price = $this->basePriceCalculation->applyCoefficients(
 			$basePrice,
 			$product->getVat(),
 			[$pricingGroup->getCoefficient(), $this->getDomainDefaultCurrencyReversedExchangeRate($pricingGroup)]
 		);
+
+		return new ProductPrice($price, false);
 	}
 
 	/**

@@ -37,7 +37,7 @@ class ProductPriceCalculationForUser {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	public function calculatePriceForCurrentUser(Product $product) {
 		return $this->productPriceCalculation->calculatePrice(
@@ -50,7 +50,7 @@ class ProductPriceCalculationForUser {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	public function calculatePriceForUserAndDomainId(Product $product, $domainId, User $user = null) {
 		if ($user === null) {

@@ -1,0 +1,44 @@
+<?php
+
+namespace SS6\ShopBundle\Model\Pricing;
+
+class PricingService {
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price[] $prices
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function getMinimumPrice(array $prices) {
+		if (count($prices) === 0) {
+			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException('Array can not be empty.');
+		}
+
+		$minimumPrice = null;
+		foreach ($prices as $price) {
+			if ($minimumPrice === null || $price->getPriceWithoutVat() < $minimumPrice->getPriceWithoutVat()) {
+				$minimumPrice = $price;
+			}
+		}
+
+		return $minimumPrice;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price[] $prices
+	 * @return bool
+	 */
+	public function areDifferent(array $prices) {
+		if (count($prices) === 0) {
+			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException('Array can not be empty.');
+		}
+
+		$firstPrice = array_pop($prices);
+		foreach ($prices as $price) {
+			if ($price->getPriceWithoutVat() !== $firstPrice->getPriceWithoutVat()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
