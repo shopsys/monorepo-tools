@@ -6,7 +6,6 @@
 {% block main_content %}
 
 	{{ form_start(form) }}
-		{% block product_variants %}{% endblock %}
 		<div id="product_edit_form_productData"></div>
 		{{ form_errors(form) }}
 
@@ -28,6 +27,10 @@
 					</div>
 				{% endfor %}
 			</div>
+		</div>
+
+		<div class="wrap-border">
+			{% block product_variants %}{% endblock %}
 		</div>
 
 		<div class="form-group wrap-border">
