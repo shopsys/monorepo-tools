@@ -29,6 +29,7 @@
     <inspection_tool class="CallableReferenceNameMismatchInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="CallerJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="CascadeStringReplacementInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CaseSensitivityServiceInspection" enabled="false" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ChainedEqualityJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ChainedFunctionCallJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="CheckDtdRefs" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -346,7 +347,9 @@
       <option name="DONT_REPORT_MULTI_RESOLVE" value="true" />
     </inspection_tool>
     <inspection_tool class="PhpUndefinedConstantInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="PhpUndefinedFieldInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PhpUndefinedFieldInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="NOTIFY_ACCESS_VIA_MAGIC_METHOD" value="false" />
+    </inspection_tool>
     <inspection_tool class="PhpUndefinedFunctionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedGotoLabelInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PhpUndefinedMethodInspection" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -388,6 +391,7 @@
       <option name="SAFARI" value="true" />
     </inspection_tool>
     <inspection_tool class="RandomApiMigrationInspection" enabled="false" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RealpathOnRelativePathsInspection" enabled="false" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantTypeConversion" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="CHECK_ANY" value="false" />
     </inspection_tool>
@@ -400,6 +404,7 @@
     <inspection_tool class="ReservedWordUsedAsNameJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ReturnFromFinallyBlockJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ReuseOfLocalVariableJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SOffsetOperationsInspection" enabled="false" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SSBasedInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SassScssResolvedByNameOnly" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="SassScssUnresolvedMixin" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -407,6 +412,7 @@
     <inspection_tool class="SassScssUnresolvedVariable" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="Schema" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="SenselessCommaInArrayDefinitionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SenselessProxyMethodInspection" enabled="false" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SenselessTernaryOperatorInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SequentialUnSetCallsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ShiftOutOfRangeJS" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -440,6 +446,7 @@
     </inspection_tool>
     <inspection_tool class="StaticInvocationViaThisInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="StrStrUsedAsStrPosInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="StrTrUsageAsStrReplaceInspect" enabled="false" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="StringLiteralBreaksHTMLJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="StrlenInEmptyStringCheckContextInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SuspiciousLoopInspection" enabled="false" level="WARNING" enabled_by_default="false" />

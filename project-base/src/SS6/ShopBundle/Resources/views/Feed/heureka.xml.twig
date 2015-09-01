@@ -22,6 +22,9 @@
 		{% if item.manufacturer is not null -%}
 			<MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
 		{% endif -%}
+		{% if item.categorytext is not null -%}
+			<CATEGORYTEXT>{{ item.categorytext }}</CATEGORYTEXT>
+		{% endif -%}
 		{% for paramName, paramVal in item.params -%}
 			<PARAM>
 				<PARAM_NAME>{{ paramName }}</PARAM_NAME>

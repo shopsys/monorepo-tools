@@ -27,22 +27,18 @@ class CategoryData {
 	public $hiddenOnDomains;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
+	 */
+	public $heurekaCzFeedCategory;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
 	 */
 	public $urls;
 
-	/**
-	 * @param string[] $name
-	 * @param \SS6\ShopBundle\Model\Category\Category|null $parent
-	 */
-	public function __construct(
-		array $name = [],
-		Category $parent = null,
-		array $hiddenOnDomains = []
-	) {
-		$this->name = $name;
-		$this->parent = $parent;
-		$this->hiddenOnDomains = $hiddenOnDomains;
+	public function __construct() {
+		$this->name = [];
+		$this->hiddenOnDomains = [];
 		$this->urls[UrlListType::TO_DELETE] = [];
 	}
 
@@ -57,6 +53,7 @@ class CategoryData {
 		}
 		$this->name = $names;
 		$this->parent = $category->getParent();
+		$this->heurekaCzFeedCategory = $category->getHeurekaCzFeedCategory();
 		$hiddenOnDomains = [];
 		foreach ($categoryDomains as $categoryDomain) {
 			if ($categoryDomain->isHidden()) {

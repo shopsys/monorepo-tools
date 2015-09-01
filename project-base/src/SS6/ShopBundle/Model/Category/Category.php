@@ -87,12 +87,21 @@ class Category extends AbstractTranslatableEntity {
 	private $products;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Feed\Category\FeedCategory")
+	 * @ORM\JoinColumn(nullable=true)
+	 */
+	private $heurekaCzFeedCategory;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	public function __construct(CategoryData $categoryData) {
 		$this->setParent($categoryData->parent);
 		$this->translations = new ArrayCollection();
 		$this->setTranslations($categoryData);
+		$this->heurekaCzFeedCategory = $categoryData->heurekaCzFeedCategory;
 	}
 
 	/**
@@ -101,6 +110,7 @@ class Category extends AbstractTranslatableEntity {
 	public function edit(CategoryData $categoryData) {
 		$this->setParent($categoryData->parent);
 		$this->setTranslations($categoryData);
+		$this->heurekaCzFeedCategory = $categoryData->heurekaCzFeedCategory;
 	}
 
 	/**
@@ -170,6 +180,13 @@ class Category extends AbstractTranslatableEntity {
 	 */
 	public function getRgt() {
 		return $this->rgt;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
+	 */
+	public function getHeurekaCzFeedCategory() {
+		return $this->heurekaCzFeedCategory;
 	}
 
 	/**

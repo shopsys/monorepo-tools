@@ -27,3 +27,8 @@
   time:
     minutes: '0'
     hours: '*/6'
+
+- service: SS6\ShopBundle\Model\Feed\Category\FeedCategoryCronService
+  time:
+    minutes: '0'
+    hours: '3'

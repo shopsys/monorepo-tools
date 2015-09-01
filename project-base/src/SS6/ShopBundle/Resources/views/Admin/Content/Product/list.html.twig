@@ -26,13 +26,9 @@
 			{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
 			<div class="form-line">
 				<div class="form-line__label form-line__label--input">
-					{{ form_widget(massActionForm.subject) }}
+					{{ form_widget(massActionForm.subject, { isSimple: true }) }}
 				</div>
-				<div class="form-line__side">
-					<div class="form-line__item">
-						{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' } }) }}
-					</div>
-				</div>
+				{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' } }) }}
 			</div>
 			<div class="form-line">
 				{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn js-mass-action-submit' } }) }}

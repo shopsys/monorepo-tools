@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
+use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
@@ -31,16 +32,23 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 	 */
 	private $productCollectionFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 */
+	private $categoryFacade;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ProductCollectionFacade $productCollectionFacade
+		ProductCollectionFacade $productCollectionFacade,
+		CategoryFacade $categoryFacade
 	) {
 		$this->productRepository = $productRepository;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productCollectionFacade = $productCollectionFacade;
+		$this->categoryFacade = $categoryFacade;
 	}
 
 	/**
@@ -58,7 +66,8 @@ class HeurekaFeedDataSource implements FeedDataSourceInterface {
 			$queryBuilder,
 			$domainConfig,
 			$this->productPriceCalculationForUser,
-			$this->productCollectionFacade
+			$this->productCollectionFacade,
+			$this->categoryFacade
 		);
 	}
 }

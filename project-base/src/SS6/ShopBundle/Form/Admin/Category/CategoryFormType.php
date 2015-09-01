@@ -21,6 +21,11 @@ class CategoryFormType extends AbstractType {
 	private $categories;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory[]
+	 */
+	private $heurekaCzFeedCategories;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 */
 	private $inverseArrayValuesTransformer;
@@ -32,15 +37,18 @@ class CategoryFormType extends AbstractType {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Category\Category|null $category
 	 */
 	public function __construct(
 		array $categories,
+		array $heurekaCzFeedCategories,
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		Category $category = null
 	) {
 		$this->categories = $categories;
+		$this->heurekaCzFeedCategories = $heurekaCzFeedCategories;
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->category = $category;
 	}
@@ -76,6 +84,10 @@ class CategoryFormType extends AbstractType {
 					'property_path' => 'hiddenOnDomains',
 				])
 				->addViewTransformer($this->inverseArrayValuesTransformer))
+			->add('heurekaCzFeedCategory', FormType::CHOICE, [
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->heurekaCzFeedCategories, 'name', [], null, 'id'),
+			])
 			->add('urls', FormType::URL_LIST, [
 				'route_name' => 'front_product_list',
 				'entity_id' => $this->category === null ? null : $this->category->getId(),

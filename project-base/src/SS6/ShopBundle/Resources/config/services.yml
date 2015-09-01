@@ -346,6 +346,11 @@ services:
   ss6.shop.domain.selected_domain:
     class: SS6\ShopBundle\Model\Domain\SelectedDomain
 
+  ss6.shop.feed.category.feed_category_download_facade:
+    class: SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade
+    arguments:
+      - %ss6.heureka_category_feed_url%
+
   ss6.shop.feed.feed_facade:
     class: SS6\ShopBundle\Model\Feed\FeedFacade
     arguments:

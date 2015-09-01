@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace SS6\ShopBundle\Model\Feed\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Feed\FeedException;
+use SS6\ShopBundle\Model\Feed\Exception\FeedException;
 
 class TemplateBlockNotFoundException extends Exception implements FeedException {
 
