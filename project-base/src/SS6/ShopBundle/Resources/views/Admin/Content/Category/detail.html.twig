@@ -7,15 +7,13 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-group">
-			{{ form_id(category|default(null)) }}
-			{% block category_url %}{% endblock %}
-			{{ form_row(form.name, { label: 'Název'|trans }) }}
-			{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
-			{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
-			{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
-			{% block category_urls %}{% endblock %}
-		</div>
+		{{ form_id(category|default(null)) }}
+		{% block category_url %}{% endblock %}
+		{{ form_row(form.name, { label: 'Název'|trans }) }}
+		{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
+		{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
+		{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
+		{% block category_urls %}{% endblock %}
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
