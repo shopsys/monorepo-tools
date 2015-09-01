@@ -5,22 +5,24 @@
 
 {% block main_content %}
 	{{ form_start(form) }}
-		<div class="wrap-group">
-			<table class="table">
+		<table class="table-main">
+			<thead>
 				<tr>
 					<th class="table-col-80">Název modulu</th>
 					<th class="table-col-10">Aktivní</th>
 					<th class="table-col-10">Neaktivní</th>
 				</tr>
-				{% for moduleName, moduleForm in form.modules %}
+			</thead>
+			{% for moduleName, moduleForm in form.modules %}
+				<tbody>
 					<tr>
 						<td class="table-col-80">{{ moduleForm.vars.label }}</td>
-						<td class="table-col-10">{{ form_widget(moduleForm['yes']) }}</td>
-						<td class="table-col-10">{{ form_widget(moduleForm['no']) }}</td>
+						<td class="table-col-10 text-center">{{ form_widget(moduleForm['yes']) }}</td>
+						<td class="table-col-10 text-center">{{ form_widget(moduleForm['no']) }}</td>
 					</tr>
-				{% endfor %}
-			</table>
-		</div>
+				</tbody>
+			{% endfor %}
+		</table>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}

@@ -2,6 +2,11 @@
 
 {% block html_body %}
 	<div class="window-content">
-		{% block content %}{% endblock %}
+		<div class="window-content__heading">
+			{% block heading %}{% endblock %}
+		</div>
+		<div class="window-content__in">
+			{% block content %}{% endblock %}
+		</div>
 	</div>
 {% endblock %}

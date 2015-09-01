@@ -14,17 +14,18 @@
 
 .mfp-image-holder .mfp-close,
 .mfp-iframe-holder .mfp-close {
-	padding: 3px 5px;
+	padding: 0;
 	right: 0;
 	top: 0px;
-	width: auto;
-	height: auto;
-	line-height: 20px;
+	width: 48px;
+	height: 48px;
+	line-height: 48px;
 
 	text-align: center;
-	border: 3px solid @color-f;
 	color: @color-f;
-	background: @color-0;
+	text-align: center;
+	background: @bg-primary-dark;
+	.opacity(100);
 }
 
 img.mfp-img {
@@ -38,4 +39,16 @@ img.mfp-img {
 	bottom: 0;
 
 	.box-shadow(0 0 15px rgba(0, 0, 0, 0.6));
+}
+
+.mfp-iframe-scaler iframe {
+	.box-shadow(none);
+}
+
+.mfp-container {
+	background: rgba(36,51,58, 0.5);
+}
+
+.mfp-wrap {
+	z-index: 4000;
 }

@@ -1,0 +1,25 @@
+.list-main {
+	.reset-ul();
+	margin: 0 0 25px;
+	padding: 0;
+
+	&__item {
+		display: block;
+		position: relative;
+		padding: 0 5px 3px 15px;
+
+		&:after {
+			content: '';
+			display: block;
+			width: 4px;
+			height: 4px;
+			position: absolute;
+			top: 6px;
+			left: 3px;
+
+			background: @color-primary;
+
+			.border-radius(50%);
+		}
+	}
+}
