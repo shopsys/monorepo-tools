@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form;
 use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
@@ -92,6 +93,7 @@ class UrlListType extends AbstractType {
 				'multiple' => false,
 				'expanded' => true,
 				'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
+				'data_class' => FriendlyUrl::class,
 				'invalid_message' => 'Původně vybraná hlavní URL již neexistuje',
 			]);
 			$builder->get(self::NEW_SLUGS_ON_DOMAINS)->add($domainId, FormType::COLLECTION, [
