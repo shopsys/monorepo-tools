@@ -7,7 +7,6 @@ parameters:
   fragment.handler.class: SS6\ShopBundle\Component\HttpFoundation\RedirectFragmentHandler
   prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localization\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
-  translator.class: SS6\ShopBundle\Component\Translation\Translator
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\Error\ExceptionController
   validator.builder.factory.class: SS6\ShopBundle\Component\Validator\ValidatorBuilderFactory
@@ -263,6 +262,13 @@ services:
     class: SS6\ShopBundle\Component\Translation\PoDumper
     tags:
       - { name: jms_translation.dumper, format: po }
+
+  ss6.shop.component.translation.translator:
+    class: SS6\ShopBundle\Component\Translation\Translator
+    decorates: translator
+    arguments:
+      - "@ss6.shop.component.translation.translator.inner"
+      - "@ss6.shop.component.translation.translator.inner"
 
   ss6.shop.component.validator.auto_validator_annotation_loader:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader
