@@ -7,18 +7,24 @@ use Symfony\Component\Form\DataTransformerInterface;
 class InverseArrayValuesTransformer implements DataTransformerInterface {
 
 	/**
-	 * @param array $value
-	 * @return array
+	 * {@inheritDoc}
 	 */
 	public function transform($value) {
+		if (!is_array($value)) {
+			return '';
+		}
+
 		return $this->inverseDomainsInArray($value);
 	}
 
 	/**
-	 * @param array $value
-	 * @return array
+	 * {@inheritDoc}
 	 */
 	public function reverseTransform($value) {
+		if (!is_array($value)) {
+			return null;
+		}
+
 		return $this->inverseDomainsInArray($value);
 	}
 
