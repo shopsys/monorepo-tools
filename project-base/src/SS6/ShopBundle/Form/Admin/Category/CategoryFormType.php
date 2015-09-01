@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Category;
 
 use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
-use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
+use SS6\ShopBundle\Component\Form\InvertChoiceTypeExtension;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
@@ -26,11 +26,6 @@ class CategoryFormType extends AbstractType {
 	private $heurekaCzFeedCategories;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
-	 */
-	private $inverseArrayValuesTransformer;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	private $category;
@@ -38,18 +33,15 @@ class CategoryFormType extends AbstractType {
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
-	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Category\Category|null $category
 	 */
 	public function __construct(
 		array $categories,
 		array $heurekaCzFeedCategories,
-		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		Category $category = null
 	) {
 		$this->categories = $categories;
 		$this->heurekaCzFeedCategories = $heurekaCzFeedCategories;
-		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->category = $category;
 	}
 
@@ -81,9 +73,10 @@ class CategoryFormType extends AbstractType {
 					'constraints' => [
 						new NotSelectedDomainToShow(['message' => 'Musíte vybrat alespoň jednu doménu']),
 					],
+					InvertChoiceTypeExtension::INVERT_OPTION => true,
 					'property_path' => 'hiddenOnDomains',
 				])
-				->addViewTransformer($this->inverseArrayValuesTransformer))
+			)
 			->add('heurekaCzFeedCategory', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->heurekaCzFeedCategories, 'name', [], null, 'id'),

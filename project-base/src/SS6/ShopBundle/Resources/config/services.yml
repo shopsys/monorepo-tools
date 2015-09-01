@@ -92,6 +92,11 @@ services:
       # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
+  ss6.shop.component.form.invert_choice_type_extension:
+    class: SS6\ShopBundle\Component\Form\InvertChoiceTypeExtension
+    tags:
+      - { name: form.type_extension, alias: choice }
+
   ss6.shop.component.controller.controller_resolver:
     class: SS6\ShopBundle\Component\Controller\ControllerResolver
 

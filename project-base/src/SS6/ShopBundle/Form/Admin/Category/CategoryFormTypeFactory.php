@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Category;
 
-use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\Admin\Category\CategoryFormType;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
@@ -20,19 +19,12 @@ class CategoryFormTypeFactory {
 	 */
 	private $feedCategoryRepository;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
-	 */
-	private $inverseArrayValuesTransformer;
-
 	public function __construct(
 		CategoryRepository $categoryRepository,
-		FeedCategoryRepository $feedCategoryRepository,
-		InverseArrayValuesTransformer $inverseArrayValuesTransformer
+		FeedCategoryRepository $feedCategoryRepository
 	) {
 		$this->categoryRepository = $categoryRepository;
 		$this->feedCategoryRepository = $feedCategoryRepository;
-		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 	}
 
 	/**
@@ -44,8 +36,7 @@ class CategoryFormTypeFactory {
 
 		return new CategoryFormType(
 			$categories,
-			$heurekaCzFeedCategories,
-			$this->inverseArrayValuesTransformer
+			$heurekaCzFeedCategories
 		);
 	}
 
@@ -60,7 +51,6 @@ class CategoryFormTypeFactory {
 		return new CategoryFormType(
 			$categories,
 			$heurekaCzFeedCategories,
-			$this->inverseArrayValuesTransformer,
 			$category
 		);
 	}
