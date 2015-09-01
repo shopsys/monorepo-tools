@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Vrstva_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+	 viewBox="-236.9 -251 512 512" style="enable-background:new -236.9 -251 512 512;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#444444;}
 </style>
 <g>
 	<g transform="translate(1.000000, 1.000000)">
-		<path class="st0" d="M11.1,11.7c2.4,0,4.4-3.7,4.4-6.3c0-0.4,0-0.7-0.1-1H6.7C6.7,4.7,6.6,5,6.6,5.4C6.6,8,8.6,11.7,11.1,11.7
-			L11.1,11.7z"/>
-		<rect x="6.6" y="-0.1" class="st0" width="8.8" height="2.9"/>
-		<path class="st0" d="M15.6,14.2v7.9h7.3c0,0,0.5-8.8-6.2-8.8C16.4,13.6,16,13.9,15.6,14.2z"/>
-		<path class="st0" d="M5.5,13.2c-6.1,0-6.3,8.9-6.3,8.9H14v-7.4c-1.5,0.5-3,0.6-3,0.6S6.7,15,5.5,13.2L5.5,13.2z M12.6,20.7H11
-			v-1.6h1.6V20.7L12.6,20.7z M12.6,17.7H11v-1.6h1.6V17.7L12.6,17.7z"/>
+		<path class="st0" d="M19,19.1c51.8,0,95-79.9,95-136.1c0-8.6,0-15.1-2.2-21.6H-76c0,6.5-2.2,13-2.2,21.6
+			C-78.1-60.8-34.9,19.1,19,19.1L19,19.1z"/>
+		<rect x="-78.1" y="-235.7" class="st0" width="190" height="62.6"/>
+		<path class="st0" d="M116.2,73.1v170.6h157.6c0,0,10.8-190-133.9-190C133.5,60.1,124.9,66.6,116.2,73.1z"/>
+		<path class="st0" d="M-101.9,51.5c-131.7,0-136.1,192.2-136.1,192.2H81.7V83.9c-32.4,10.8-64.8,13-64.8,13S-76,90.4-101.9,51.5
+			L-101.9,51.5z M51.4,213.5H16.9v-34.6h34.6V213.5L51.4,213.5z M51.4,148.7H16.9v-34.6h34.6V148.7L51.4,148.7z"/>
 	</g>
 </g>
 </svg>
