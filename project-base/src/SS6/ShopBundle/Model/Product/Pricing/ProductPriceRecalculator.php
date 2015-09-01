@@ -113,7 +113,7 @@ class ProductPriceRecalculator {
 	private function recalculateProductPrices(Product $product) {
 		foreach ($this->getAllPricingGroups() as $pricingGroup) {
 			try {
-				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 				$priceWithVat = $price->getPriceWithVat();
 			} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
 				$priceWithVat = 0;

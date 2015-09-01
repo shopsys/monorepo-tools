@@ -126,7 +126,7 @@ class ProductService {
 		foreach ($pricingGroups as $pricingGroup) {
 			$productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
 				$pricingGroup,
-				$this->productPriceCalculation->calculatePrice($product, $pricingGroup)
+				$this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup)
 			);
 		}
 

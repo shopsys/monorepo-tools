@@ -62,12 +62,13 @@ class ProductPriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
-	public function calculatePrice(Product $product, PricingGroup $pricingGroup) {
+	public function calculatePrice(Product $product, $domainId, PricingGroup $pricingGroup) {
 		if ($product->isMainVariant()) {
-			return $this->calculateMainVariantPrice($product, $pricingGroup);
+			return $this->calculateMainVariantPrice($product, $domainId, $pricingGroup);
 		}
 
 		$priceCalculationType = $product->getPriceCalculationType();
@@ -83,13 +84,14 @@ class ProductPriceCalculation {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
-	private function calculateMainVariantPrice(Product $mainVariant, PricingGroup $pricingGroup) {
+	private function calculateMainVariantPrice(Product $mainVariant, $domainId, PricingGroup $pricingGroup) {
 		$variants = $this->productRepository->getAllSellableVariantsByMainVariant(
 			$mainVariant,
-			$pricingGroup->getDomainId(),
+			$domainId,
 			$pricingGroup
 		);
 		if (count($variants) === 0) {
@@ -98,7 +100,7 @@ class ProductPriceCalculation {
 
 		$variantPrices = [];
 		foreach ($variants as $variant) {
-			$variantPrices[] = $this->calculatePrice($variant, $pricingGroup);
+			$variantPrices[] = $this->calculatePrice($variant, $domainId, $pricingGroup);
 		}
 
 		$minVariantPrice = $this->pricingService->getMinimumPrice($variantPrices);

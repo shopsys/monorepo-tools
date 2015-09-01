@@ -105,7 +105,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $inputPrice, $vat));
 
-		$price = $productPriceCalculation->calculatePrice($product, $pricingGroup);
+		$price = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 
 		$this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
 		$this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
