@@ -7,33 +7,37 @@
 
 {% block product_variants %}
 	{% if product.isVariant %}
-		<div class="form-line">
-			<strong>
-				{{ 'Produkt je variantou'|trans }}
-				<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
-					<i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ product.mainVariant.name }}
-				</a>
-			</strong>
+		<div class="wrap-border">
+			<div class="form-line">
+				<strong>
+					{{ 'Produkt je variantou'|trans }}
+					<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
+						<i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ product.mainVariant.name }}
+					</a>
+				</strong>
+			</div>
+			{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
 		</div>
-		{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
 	{% endif %}
 	{% if product.isMainVariant %}
-		{% if product.variants|length > 0 %}
-			<strong>
-				{{ 'Produkt je hlavní variantou a má nastaveny varianty'|trans }}:
-				<ul>
-					{% for variant in product.variants %}
-						<li>
-							<a href="{{ url('admin_product_edit', {id: variant.id}) }}" target="_blank">
-								{{ variant.name }}<i class="svg svg-forward-page"></i>
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
-			</strong>
-		{% else %}
-			<strong>{{ 'Produkt je hlavní variantou.'|trans }}</strong>
-		{% endif %}
+		<div class="wrap-border">
+			{% if product.variants|length > 0 %}
+				<strong>
+					{{ 'Produkt je hlavní variantou a má nastaveny varianty'|trans }}:
+					<ul>
+						{% for variant in product.variants %}
+							<li>
+								<a href="{{ url('admin_product_edit', {id: variant.id}) }}" target="_blank">
+									{{ variant.name }}<i class="svg svg-forward-page"></i>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</strong>
+			{% else %}
+				<strong>{{ 'Produkt je hlavní variantou.'|trans }}</strong>
+			{% endif %}
+		</div>
 	{% endif %}
 {% endblock %}
 
