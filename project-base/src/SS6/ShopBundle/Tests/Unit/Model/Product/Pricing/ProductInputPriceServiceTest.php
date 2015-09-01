@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceService;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
@@ -59,10 +60,12 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
 		$product = new Product($productData);
 
-		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
+		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
 		$pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
-		$pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
+		$pricingGroupMock1->expects($this->any())->method('getDomainId')->willReturn(1);
+		$pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
 		$pricingGroupMock2->expects($this->any())->method('getId')->willReturn(2);
+		$pricingGroupMock2->expects($this->any())->method('getDomainId')->willReturn(1);
 		$pricingGroups = [$pricingGroupMock1, $pricingGroupMock2];
 
 		$inputPriceCalculation = new InputPriceCalculation();
@@ -71,8 +74,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 			->expects($this->any())
 			->method('calculatePrice')
 			->willReturnMap([
-				[$product, $pricingGroups[0], new Price('1000', '1100', '100')],
-				[$product, $pricingGroups[1], new Price('2000', '2200', '200')],
+				[$product, 1, $pricingGroups[0], new ProductPrice(new Price('1000', '1100', '100'), false)],
+				[$product, 1, $pricingGroups[1], new ProductPrice(new Price('2000', '2200', '200'), false)],
 			]);
 
 		$inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;
@@ -101,10 +104,12 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
 		$product = new Product($productData);
 
-		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
+		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
 		$pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
-		$pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
+		$pricingGroupMock1->expects($this->any())->method('getDomainId')->willReturn(1);
+		$pricingGroupMock2 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
 		$pricingGroupMock2->expects($this->any())->method('getId')->willReturn(2);
+		$pricingGroupMock2->expects($this->any())->method('getDomainId')->willReturn(1);
 		$pricingGroups = [$pricingGroupMock1, $pricingGroupMock2];
 
 		$inputPriceCalculation = new InputPriceCalculation();
@@ -113,8 +118,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 			->expects($this->any())
 			->method('calculatePrice')
 			->willReturnMap([
-				[$product, $pricingGroups[0], new Price('1000', '1100', '100')],
-				[$product, $pricingGroups[1], new Price('2000', '2200', '200')],
+				[$product, 1, $pricingGroups[0], new ProductPrice(new Price('1000', '1100', '100'), false)],
+				[$product, 1, $pricingGroups[1], new ProductPrice(new Price('2000', '2200', '200'), false)],
 			]);
 
 		$inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;
