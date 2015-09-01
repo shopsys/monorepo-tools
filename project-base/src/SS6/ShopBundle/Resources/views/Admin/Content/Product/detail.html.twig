@@ -109,13 +109,12 @@
 				{{ 'Ceny'|trans }}
 			</div>
 
-			{% block product_price_calculation_type %}
+			{% block product_pricing %}
 				{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans }) }}
+				{{ form_row(form.productData.vat, { label: 'DPH'|trans }) }}
+
+				{% block product_calculated_prices %}{% endblock %}
 			{% endblock %}
-
-			{{ form_row(form.productData.vat, { label: 'DPH'|trans }) }}
-
-			{% block product_calculated_prices %}{% endblock %}
 
 		</div>
 

@@ -49,10 +49,16 @@
 {%- endblock localized_widget %}
 
 {% block form_row %}
-	<div class="form-line">
+	<div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
 		{{ form_errors(form) }}
 		{{ form_label(form, label) }}
 		{{ form_widget(form) }}
+		{% if disabledField is defined %}
+			<span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
+				title="{{ disabledField.title }}">
+				<i class="svg svg-pencil"></i>
+			</span>
+		{% endif %}
 	</div>
 {% endblock form_row %}
 
@@ -121,13 +127,19 @@
 			</div>
 		</div>
 	{% else %}
-		<div class="form-line">
+		<div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
 			{{ form_label(form, label) }}
 			<div class="form-line__side">
 				<div class="form-line__item">
 					{{ form_widget(form) }}
 				</div>
 			</div>
+			{% if disabledField is defined %}
+				<span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
+					title="{{ disabledField.title }}">
+					<i class="svg svg-pencil"></i>
+				</span>
+			{% endif %}
 		</div>
 	{% endif %}
 	{{ form_errors(form) }}

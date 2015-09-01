@@ -43,7 +43,7 @@
 
 {% block product_catnum %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -51,7 +51,7 @@
 
 {% block product_partno %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -59,7 +59,7 @@
 
 {% block product_ean %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.ean, { label: 'EAN'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		{{ form_row(form.productData.ean, { label: 'EAN'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -67,16 +67,16 @@
 
 {% block product_stock_and_availability %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 		<div class="js-product-using-stock form-line__js">
-			{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
-			{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+			{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+			{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 			<div class="js-product-using-stock-and-alternate-availability">
-				{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+				{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 			</div>
 		</div>
 		<div class="js-product-not-using-stock form-line__js">
-			{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+			{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
 		</div>
 	{% else %}
 		{{ parent() }}
@@ -181,15 +181,23 @@
 
 {% block product_categories %}
 	{% if product.isVariant %}
-		{{ form_row(form.productData.categories, { label: 'Kategorie'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě hlavního zboží'|trans }}) }}
+		{{ form_row(form.productData.categories, { label: 'Kategorie'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě hlavního zboží'|trans, class: 'form-line__disabled' }}) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
 {% endblock %}
 
-{% block product_price_calculation_type %}
+{% block product_pricing %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans, icon: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans } }) }}
+		<div class="form-line form-line--disabled">
+			<div class="form-line__item form-line__item--text">
+				<strong>{{ 'Ceny můžete nastavit na kartě konkrétní varianty.'|trans }}</strong>
+			</div>
+		</div>
+		{% do form.productData.priceCalculationType.setRendered %}
+		{% do form.productData.vat.setRendered %}
+		{% do form.productData.price.setRendered %}
+		{% do form.manualInputPrices.setRendered %}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -202,9 +210,6 @@
 				<tr class="table-form__row">
 					<th class="table-form__cell table-form__cell--label">
 						{{ inputPriceLabel({ isSimple: true }) }}
-						{% if product.isMainVariant %}
-							<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tuto položku můžete nastavit na kartě konkrétní varianty"></i>
-						{% endif %}
 					</th>
 					<th class="table-form__cell table-form__cell--field"></th>
 					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
@@ -264,11 +269,17 @@
 {% endblock %}
 
 {% block product_description %}
+	<div class="form-group__title">
+		{{ 'Popis'|trans }}
+	</div>
 	{% if product.isVariant %}
-		<div class="form-group__title">
-			{{ 'Popis'|trans }}
-			<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tuto položku můžete nastavit na kartě hlavního zboží"></i>
+		<div class="form-line form-line--disabled">
+			<div class="form-line__item form-line__item--text">
+				<strong>{{ 'Popis můžete nastavit na kartě hlavního zboží.'|trans }}</strong>
+			</div>
 		</div>
+		{% do form.descriptions.setRendered %}
+	{% else %}
 		{% for domainId, descriptionForm in form.descriptions %}
 			<div class="form-line form-line--no-padd">
 				<div class="form-line__group">
@@ -284,8 +295,6 @@
 				</div>
 			</div>
 		{% endfor %}
-	{% else %}
-		{{ parent() }}
 	{% endif %}
 {% endblock %}
 
