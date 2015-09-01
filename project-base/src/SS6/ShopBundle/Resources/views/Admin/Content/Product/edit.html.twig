@@ -11,12 +11,12 @@
 			<div class="form-line">
 				<strong>
 					{{ 'Produkt je variantou'|trans }}
-					<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
-						{{ product.mainVariant.name }}<i class="svg svg-forward-page"></i>
-					</a>
 				</strong>
 			</div>
 			{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
+				<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
+					<i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ product.mainVariant.name }}
+				</a>
 		</div>
 	{% endif %}
 	{% if product.isMainVariant %}
