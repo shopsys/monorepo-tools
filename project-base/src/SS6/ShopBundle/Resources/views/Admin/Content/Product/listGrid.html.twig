@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block grid_value_cell_id_name %}
-	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}">{{ row.product|productListDisplayName }}</a>
 	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
-		<span class="text-in-circle c-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
+		<span class="in-letter c-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
 	{% endif %}
 	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_VARIANT') %}
-		<span class="text-in-circle c-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
+		<span class="in-letter c-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
 	{% endif %}
+	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}">{{ row.product|productListDisplayName }}</a>
 {% endblock %}
 
 {% block grid_value_cell_id_visible %}

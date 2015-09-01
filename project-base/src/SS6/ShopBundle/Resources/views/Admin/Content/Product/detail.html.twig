@@ -6,7 +6,6 @@
 {% block main_content %}
 
 	{{ form_start(form) }}
-		{% block product_variants %}{% endblock %}
 		<div id="product_edit_form_productData"></div>
 		{{ form_errors(form) }}
 
@@ -29,6 +28,8 @@
 				{% endfor %}
 			</div>
 		</div>
+
+		{% block product_variants %}{% endblock %}
 
 		<div class="form-group wrap-border">
 
@@ -154,7 +155,7 @@
 								{{ form_widget(parameter.parameter) }}
 							</td>
 							<td class="table-form__cell table-form__cell--del">
-								<span class="svg svg-arrow-thick-right"></span>
+								<span class="svg svg-arrow-right"></span>
 							</td>
 							<td class="table-form__cell  table-form__cell--del-after">
 								{% for locale, valueTextLocaleForm in parameter.valueText %}
