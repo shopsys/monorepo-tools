@@ -492,6 +492,11 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
+			<arg value="ss6:schema:create" />
+		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
 			<arg value="doctrine:schema:create" />
 			<arg value="--no-interaction" />
 		</exec>
@@ -501,10 +506,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="doctrine:schema:drop" />
-			<arg value="--force" />
-			<arg value="--full-database" />
-			<arg value="--no-interaction" />
+			<arg value="ss6:schema:drop" />
 		</exec>
 	</target>
 

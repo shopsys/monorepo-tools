@@ -56,7 +56,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand {
 
 		while (!feof($stdout)) {
 			$line = fgets($stdout);
-			fwrite($outputFileHandle, $this->filterLine($line));
+			fwrite($outputFileHandle, $line);
 		}
 
 		$errorMessage = stream_get_contents($stderr);
@@ -87,22 +87,6 @@ class DatabaseDumpCommand extends ContainerAwareCommand {
 			1 => ['pipe', 'w'], // stdout
 			2 => ['pipe', 'w'], // stderr
 		];
-	}
-
-	/**
-	 * @param string $line
-	 * @return string
-	 */
-	private function filterLine($line) {
-		if (mb_strpos($line, 'CREATE EXTENSION') === 0
-			|| mb_strpos($line, 'COMMENT ON EXTENSION') === 0
-		) {
-			return '-- ' . $line;
-		} elseif (mb_strpos($line, 'CREATE FUNCTION') === 0) {
-			$line = preg_replace('/^CREATE FUNCTION/u', 'CREATE OR REPLACE FUNCTION', $line);
-		}
-
-		return $line;
 	}
 
 }
