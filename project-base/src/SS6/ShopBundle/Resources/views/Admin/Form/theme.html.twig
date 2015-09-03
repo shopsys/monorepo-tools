@@ -306,7 +306,7 @@
 				{% endif %}
 				{% if not isCheckbox|default(false) %}:{% endif %}
 				{% if required %}
-					<span class="form-compulsory">
+					<span class="form-compulsory {{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__compulsory' }}">
 						<span class="sprite sprite-star"></span>
 					</span>
 				{% endif %}
