@@ -162,7 +162,7 @@
 					{% macro parameterRow(parameter, index) %}
 						<tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
 							<td class="table-form__cell table-form__cell--del-before">
-								{{ form_widget(parameter.parameter) }}
+								{{ form_widget(parameter.parameter, { isSimple: true} ) }}
 							</td>
 							<td class="table-form__cell table-form__cell--del">
 								<span class="svg svg-arrow-right"></span>
