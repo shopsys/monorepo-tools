@@ -53,15 +53,23 @@
 					</div>
 				</div>
 
-				<div class="js-file-upload-input">
-					<div class="js-file-upload-fallback-hide box-upload__place form-line__full">
-						<i class="sprite sprite-plus"></i> {{ 'Zde přetáhněte soubor'|trans }}
-					</div>
-					<div class="form-line form-line--size-3">
-						<div class="js-file-upload-fallback-hide box-upload__between form-line__label">{{ 'nebo'|trans }}:</div>
-						<div class="box-upload__file-input form-line__field">
-							{{ form_widget(form.children.file) }}
+				<div class="js-file-upload-input box-upload__place">
+					<div class="js-file-upload-fallback-hide box-upload__place__drop">
+						<div class="box-upload__place__drop__icon">
+							<i class="svg svg-download"></i>
 						</div>
+						<div class="box-upload__place__drop__title">
+							{{ 'Zde přetáhněte soubor'|trans }}
+						</div>
+						<div class="box-upload__place__drop__info">
+							{{ 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }}
+						</div>
+					</div>
+					<div class="box-upload__place__button">
+						{{ form_widget(form.children.file) }}
+					</div>
+					<div class="js-file-upload-fallback-hide box-upload__place__between">
+						{{ 'nebo'|trans }}
 					</div>
 				</div>
 			</div>

@@ -8,17 +8,15 @@
 		$('.js-product-images-image').each(function () {
 			var $image = $(this);
 			var $imagePreview = $image.find('.js-product-images-preview');
-			var $delete = $image.find('.js-product-images-delete-button');
-			var $deleteButton = $delete.find('button');
-			var $revert = $image.find('.js-product-images-delete-revert-button');
-			var $revertButton = $revert.find('button');
+			var $deleteButton = $image.find('.js-product-images-delete-button');
+			var $revertButton = $image.find('.js-product-images-delete-revert-button');
 			var imageId = $image.data('id');
 
 			$deleteButton.bind('click.deleteImage', function() {
 				SS6.choiceControl.select('#product_edit_form_imagesToDelete', imageId);
-				$imagePreview.addClass('list-image__item__in--removed');
-				$delete.hide();
-				$revert.show();
+				$imagePreview.addClass('list-images__item__in--removed');
+				$deleteButton.hide();
+				$revertButton.show();
 				SS6.formChangeInfo.showInfo();
 				return false;
 			});
@@ -26,8 +24,8 @@
 			$revertButton.bind('click.deleteImage', function() {
 				SS6.choiceControl.deselect('#product_edit_form_imagesToDelete', imageId);
 				$imagePreview.removeClass('list-image__item__in--removed');
-				$delete.show();
-				$revert.hide();
+				$deleteButton.show();
+				$revertButton.hide();
 				return false;
 			});
 

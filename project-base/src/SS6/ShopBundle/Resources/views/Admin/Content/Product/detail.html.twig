@@ -275,7 +275,8 @@
 			</div>
 
 			{% block images %}{% endblock %}
-			{{ form_row(form.imagesToUpload, { label: 'Nahrát obrázek'|trans }) }}
+
+			{{ form_widget(form.imagesToUpload) }}
 			{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 		</div>
 
