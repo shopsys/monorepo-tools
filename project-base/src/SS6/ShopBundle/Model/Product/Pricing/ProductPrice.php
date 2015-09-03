@@ -9,22 +9,22 @@ class ProductPrice extends Price {
 	/**
 	 * @var bool
 	 */
-	private $from;
+	private $priceFrom;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
-	 * @param bool $from
+	 * @param bool $priceFrom
 	 */
-	public function __construct(Price $price, $from) {
-		$this->from = $from;
+	public function __construct(Price $price, $priceFrom) {
+		$this->priceFrom = $priceFrom;
 		parent::__construct($price->getPriceWithoutVat(), $price->getPriceWithVat(), $price->getVatAmount());
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function isFrom() {
-		return $this->from;
+	public function isPriceFrom() {
+		return $this->priceFrom;
 	}
 
 }

@@ -14,7 +14,7 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase {
 	public function testGetMinimumPrice(array $prices, $minimumPrice) {
 		$pricingService = new PricingService();
 
-		$this->assertEquals($minimumPrice, $pricingService->getMinimumPrice($prices));
+		$this->assertEquals($minimumPrice, $pricingService->getMinimumPriceByPriceWithoutVat($prices));
 	}
 
 	public function getMinimumPriceProvider() {
@@ -47,55 +47,55 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase {
 		$pricingService = new PricingService();
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
-		$pricingService->getMinimumPrice([]);
+		$pricingService->getMinimumPriceByPriceWithoutVat([]);
 	}
 
 	/**
-	 * @dataProvider getAreDifferentProvider
+	 * @dataProvider getArePricesDifferentProvider
 	 */
-	public function testAreDifferent(array $prices, $areDifferent) {
+	public function testArePricesDifferent(array $prices, $arePricesDifferent) {
 		$pricingService = new PricingService();
 
-		$this->assertSame($areDifferent, $pricingService->areDifferent($prices));
+		$this->assertSame($arePricesDifferent, $pricingService->arePricesDifferent($prices));
 	}
 
-	public function getAreDifferentProvider() {
+	public function getArePricesDifferentProvider() {
 		return [
 			[
 				'prices' => [
 					new Price(100, 120, 20),
 					new Price(100, 120, 20),
 				],
-				'areDifferent' => false,
+				'arePricesDifferent' => false,
 			],
 			[
 				'prices' => [
 					new Price(100, 120, 20),
 				],
-				'areDifferent' => false,
+				'arePricesDifferent' => false,
 			],
 			[
 				'prices' => [
 					new Price(100, 120, 20),
 					new Price('100', '120', '20'),
 				],
-				'areDifferent' => true,
+				'arePricesDifferent' => true,
 			],
 			[
 				'prices' => [
 					new Price(200, 240, 40),
 					new Price(100, 120, 20),
 				],
-				'areDifferent' => true,
+				'arePricesDifferent' => true,
 			],
 		];
 	}
 
-	public function testAreDifferentEmptyArray() {
+	public function testArePricesDifferentEmptyArray() {
 		$pricingService = new PricingService();
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
-		$pricingService->areDifferent([]);
+		$pricingService->arePricesDifferent([]);
 	}
 
 }

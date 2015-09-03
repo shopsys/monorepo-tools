@@ -23,7 +23,7 @@
 								{{ 'Cena s DPH'|trans }}:
 							</dt>
 							<dd class="list-params-side__definition price-main price-big">
-								{% if productDetail.sellingPrice.from %}
+								{% if productDetail.sellingPrice.priceFrom %}
 									{{ 'od'|trans }}
 								{% endif %}
 								{{ productDetail.sellingPrice.priceWithVat|price }}
@@ -34,7 +34,7 @@
 								{{ 'Cena bez DPH'|trans }}:
 							</dt>
 							<dd class="list-params-side__definition">
-								{% if productDetail.sellingPrice.from %}
+								{% if productDetail.sellingPrice.priceFrom %}
 									{{ 'od'|trans }}
 								{% endif %}
 								{{ productDetail.sellingPrice.priceWithoutVat|price }}

@@ -223,7 +223,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		/* @var $productPrice \SS6\ShopBundle\Model\Product\Pricing\ProductPrice */
 
 		$this->assertSame(round($expectedPriceWithVat, 6), round($productPrice->getPriceWithVat(), 6));
-		$this->assertSame($expectedFrom, $productPrice->isFrom());
+		$this->assertSame($expectedFrom, $productPrice->isPriceFrom());
 	}
 
 	public function testCalculatePriceMainVariantWithoutSellableVariants() {

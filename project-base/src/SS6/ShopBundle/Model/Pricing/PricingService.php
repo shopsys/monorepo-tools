@@ -8,7 +8,7 @@ class PricingService {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price[] $prices
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getMinimumPrice(array $prices) {
+	public function getMinimumPriceByPriceWithoutVat(array $prices) {
 		if (count($prices) === 0) {
 			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException('Array can not be empty.');
 		}
@@ -27,7 +27,7 @@ class PricingService {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price[] $prices
 	 * @return bool
 	 */
-	public function areDifferent(array $prices) {
+	public function arePricesDifferent(array $prices) {
 		if (count($prices) === 0) {
 			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException('Array can not be empty.');
 		}
