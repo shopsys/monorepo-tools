@@ -5,10 +5,10 @@
 
 {% block main_content %}
 
-	<ul>
-		<li><a href="{{ url('admin_mail_setting') }}">{{ 'Nastavení e-mailů'|trans }}</a></li>
-		<li><a href="{{ url('admin_mail_template') }}">{{ 'Šablony e-mailů'|trans }}</a></li>
-		<li><a href="{{ url('admin_customercommunication_ordersubmitted') }}">{{ 'Stránka s potvrzením objednávky'|trans }}</a></li>
+	<ul class="list-main">
+		<li class="list-main__item"><a href="{{ url('admin_mail_setting') }}">{{ 'Nastavení e-mailů'|trans }}</a></li>
+		<li class="list-main__item"><a href="{{ url('admin_mail_template') }}">{{ 'Šablony e-mailů'|trans }}</a></li>
+		<li class="list-main__item"><a href="{{ url('admin_customercommunication_ordersubmitted') }}">{{ 'Stránka s potvrzením objednávky'|trans }}</a></li>
 	</ul>
 
 {% endblock %}
