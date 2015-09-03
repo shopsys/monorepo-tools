@@ -1,31 +1,7 @@
 /*
-.form-line--compact {
-
-	.form-line__field {
-		margin-left: 0px;
-		padding-left: 5px;
-
-		&.form-line__field--icon {
-			padding-left: 27px;
-		}
-	}
-
-	.form-line__icon {
-		left: 7px;
-	}
-}
-
-//// Mangific popup
-@import "../front/common/libs/magnific/magnific-popup.less";
-@import "../front/common/libs/magnific/magnific-popup-custom.less";
-
 .js-product-picker-label {
 	display: inline-block;
 	width: 315px;
-}
-
-.mfp-iframe-scaler iframe {
-	background: #ffffff center no-repeat url('@{path-image}/preloader.gif');
 }
 
 .advanced-search-rule-disabled {
@@ -34,76 +10,8 @@
 	.opacity(.45);
 }
 
-.category-tree {
-	ul {
-		list-style: none;
-		margin: 0px 0px 0px 20px;
-		padding: 0px;
-		.js-category-tree-item-line {
-			border: 1px #FFFFFF dotted;
-			background-color: #FFFFFF;
-		}
-		.js-category-tree-item-handle {
-			padding: 5px;
-			display: inline-block;
-			min-width: 400px;
-		}
-		.js-category-tree-item-icons {
-			float: right;
-			padding: 5px;
-		}
-	}
-	.js-category-tree-placeholder {
-		outline: 1px dashed red;
-	}
-}
-*/
-
-.js-category-tree-placeholder {
-	outline: 1px dashed red;
-}
-
-.js-category-tree-items {
-	ul {
-		margin: 0px;
-		width: 100%;
-		li {
-			padding-left: 0px;
-			ul li {
-				padding-left: 20px;
-			}
-		}
-	}
-}
-
-.js-category-tree-item-line {
-	&:hover {
-		border-color: #AAAAAA;
-	}
-}
-.js-category-tree-item-handle {
-	cursor: move;
-}
-/*
-.category-tree--sorting {
-	ul {
-		.js-category-tree-item-line {
-			&:hover {
-				border-color: #AAAAAA;
-			}
-		}
-		.js-category-tree-item-handle {
-			cursor: move;
-		}
-	}
-}
-
 .js-accessory {
 	margin-bottom: 4px;
-}
-
-.window-fixed-bar {
-	z-index: 2;
 }
 
 .cart-disabled {
@@ -162,39 +70,6 @@
 	padding: 3px;
 	color: @color-f;
 	background: @color-blue;
-}
-
-.form-inline .form-line__appendix {
-	position: static;
-}
-
-.text-in-circle {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	top: -2px;
-	position: relative;
-	border-radius: 50%;
-	padding: 1px;
-	border: @color-blue 2px solid;
-	color: @color-blue;
-	text-align: center;
-	font-size: 8pt;
-	font-weight: bold;
-	line-height: initial;
-}
-
-.text-in-circle--filled {
-	color: @color-0;
-	border: @color-0 1px solid;
-	background: @color-fa;
-}
-.text-in-circle--filled__1 {
-	background: @color-blue;
-}
-
-.text-in-circle--filled__2 {
-	background: @color-green;
 }
 
 .js-domain-icon-errors {
