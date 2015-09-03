@@ -182,13 +182,20 @@ class ProductController extends AdminBaseController {
 			new MenuItem($this->translator->trans('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
 		);
 
-		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', [
+		$viewParameters = [
 			'form' => $form->createView(),
 			'product' => $product,
 			'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
-			'productSellingPricesIndexedByDomainId' => $this->productEditFacade->getAllProductSellingPricesIndexedByDomainId($product),
 			'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
-		]);
+		];
+
+		try {
+			$productSellingPricesIndexedByDomainId = $this->productEditFacade->getAllProductSellingPricesIndexedByDomainId($product);
+			$viewParameters['productSellingPricesIndexedByDomainId'] = $productSellingPricesIndexedByDomainId;
+		} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', $viewParameters);
 	}
 
 	/**
