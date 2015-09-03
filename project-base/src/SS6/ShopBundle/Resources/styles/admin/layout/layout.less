@@ -15,6 +15,10 @@ body {
 		right: 0;
 		z-index: 3000;
 
+		.dump-mode & {
+			position: relative;
+		}
+
 		&__in {
 			width: 100%;
 			margin: 0 auto;
@@ -33,6 +37,10 @@ body {
 		padding-left: @width-panel;
 
 		background: @bg-page;
+
+		.dump-mode & {
+			padding-top: 0;
+		}
 
 		&:after {
 			display: block;
@@ -65,6 +73,11 @@ body {
 		width: @width-panel;
 
 		background-color: @color-f;
+
+		.dump-mode & {
+			position: absolute;
+			top: 0;
+		}
 
 		&__in {
 			position: absolute;
