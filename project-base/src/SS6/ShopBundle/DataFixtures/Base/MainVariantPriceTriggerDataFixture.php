@@ -17,8 +17,8 @@ class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture {
 					UPDATE products p_main
 						SET recalculate_price = TRUE
 					FROM products p
-					WHERE p.id = NEW.product_id
-						AND p_main.id = p.main_variant_id;
+					WHERE p_main.id = p.main_variant_id
+						AND p.id = NEW.product_id;
 					RETURN NEW;
 				END;
 			$$ LANGUAGE plpgsql;
@@ -26,7 +26,7 @@ class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture {
 
 		$this->executeNativeQuery('
 			CREATE TRIGGER recalc_main_variant_price
-			BEFORE INSERT OR UPDATE OF visible
+			AFTER INSERT OR UPDATE OF visible
 			ON product_visibilities
 			FOR EACH ROW
 			EXECUTE PROCEDURE set_main_variant_price_recalculation_by_product_visibility();
