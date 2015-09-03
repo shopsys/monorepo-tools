@@ -57,8 +57,13 @@
 		outline: 1px dashed red;
 	}
 }
+*/
 
-.category-tree--form {
+.js-category-tree-placeholder {
+	outline: 1px dashed red;
+}
+
+.js-category-tree-items {
 	ul {
 		margin: 0px;
 		width: 100%;
@@ -69,17 +74,17 @@
 			}
 		}
 	}
-	.fa {
-		float: left;
-		margin: 0px 33px 0 0;
-		line-height: 22px;
-		color: @color-primary;
-	}
-	.fa-square-o:before {
-		visibility: hidden;
-	}
 }
 
+.js-category-tree-item-line {
+	&:hover {
+		border-color: #AAAAAA;
+	}
+}
+.js-category-tree-item-handle {
+	cursor: move;
+}
+/*
 .category-tree--sorting {
 	ul {
 		.js-category-tree-item-line {

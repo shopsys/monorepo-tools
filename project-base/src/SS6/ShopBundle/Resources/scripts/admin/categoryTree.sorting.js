@@ -22,7 +22,7 @@
 				listType: 'ul',
 				handle: '.js-category-tree-item-handle',
 				items: '.js-category-tree-item',
-				placeholder: 'js-category-tree-placeholder',
+				placeholder: 'js-category-tree-placeholder form-tree__placeholder',
 				toleranceElement: '> .js-category-tree-item-line',
 				forcePlaceholderSize: true,
 				helper:	'clone',
@@ -35,7 +35,7 @@
 		};
 
 		self.onSaveClick = function () {
-			if (self.$saveButton.hasClass('btn-disabled')) {
+			if (self.$saveButton.hasClass('btn--disabled')) {
 				return;
 			}
 
@@ -46,7 +46,7 @@
 					categoriesOrderingData: self.getCategoriesOrderingData()
 				},
 				success: function () {
-					self.$saveButton.addClass('btn-disabled');
+					self.$saveButton.addClass('btn--disabled');
 					SS6.window({
 						content: SS6.translator.trans('Pořadí bylo uloženo.')
 					});
@@ -80,7 +80,7 @@
 		}
 
 		self.onChange = function () {
-			self.$saveButton.removeClass('btn-disabled');
+			self.$saveButton.removeClass('btn--disabled');
 			SS6.formChangeInfo.showInfo();
 		};
 	};

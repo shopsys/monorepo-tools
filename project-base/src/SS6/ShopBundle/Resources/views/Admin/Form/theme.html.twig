@@ -432,7 +432,7 @@
 {% endblock products_widget %}
 
 {% macro categoriesWidgetItem(categoryDetails, form, isFirstLevel) %}
-	<ul class="js-category-tree-form-children-container {{ isFirstLevel ? 'form-tree__content' : 'form-tree__item__sub' }}">
+	<ul class="js-category-tree-form-children-container {{ isFirstLevel ? 'form-tree__content' : '' }}">
 		{% for categoryDetail in categoryDetails %}
 			{% set categoryForm = form[categoryDetail.category.id] %}
 			<li class="form-tree__item js-category-tree-form-item">

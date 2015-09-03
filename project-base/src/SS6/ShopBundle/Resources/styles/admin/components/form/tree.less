@@ -88,31 +88,60 @@ Form tree
 	&__content {
 		display: none;
 		.reset-ul();
-		padding: 5px 10px;
+		padding: 5px 0 5px 10px;
 
 		.form-tree--open & {
 			display: block;
 		}
 	}
 
+	&__placeholder {
+		margin-right: 5px;
+
+		outline: 1px dotted @color-red;
+		outline-offset: -1px;
+	}
+
 	&__item {
 		display: block;
+		position: relative;
+
+		background: @color-f;
 
 		&__click {
 			padding: 4px 0;
-			cursor: pointer;
 
 			&--active {
 				font-weight: bold;
 			}
 		}
 
+		&__drag {
+			padding: 4px 0 4px 5px;
+			margin-right: 5px;
+			margin-left: -5px;
+
+			cursor: move;
+
+			&:hover {
+				outline: 1px dotted @color-border;
+				outline-offset: -1px;
+			}
+		}
+
 		&__name {
+			display: block;
+
 			color: @color-link;
 			text-decoration: underline;
 
 			.form-tree__item__click:hover & {
 				color: @color-link-hover;
+			}
+
+			.form-tree--dragable & {
+				padding-left: 10px;
+				padding-right: 40px;
 			}
 		}
 
@@ -125,9 +154,19 @@ Form tree
 			}
 		}
 
+		&__controls {
+			position: absolute;
+			top: 3px;
+			right: 0;
+			padding-right: 6px;
+		}
+
 		&__control {
+			padding: 0 2px;
+
 			text-decoration: none;
 			color: @color-action;
+			font-size: 13px;
 		}
 
 		&__choice {
@@ -137,7 +176,7 @@ Form tree
 			top: 2px;
 		}
 
-		&__sub {
+		ul {
 			.reset-ul();
 			padding-left: 20px;
 		}

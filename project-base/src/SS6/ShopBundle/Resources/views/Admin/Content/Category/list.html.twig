@@ -10,14 +10,14 @@
 
 	{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
 
-	{% macro categoryTreeItem(categoryDetails) %}
-		<ul class="js-category-tree-items form-tree__content">
+	{% macro categoryTreeItem(categoryDetails, isFirstLevel) %}
+		<ul class="js-category-tree-items {{ isFirstLevel ? 'form-tree__content' : '' }}">
 			{% for categoryDetail in categoryDetails %}
 				<li class="js-category-tree-item form-tree__item" id="js-category-tree-{{ categoryDetail.category.id }}">
-					<div class="js-category-tree-item-line">
+					<div class="js-category-tree-item-line form-tree__item__drag">
 						<span class="form-tree__item__icon form-tree__item__icon--level sprite sprite-level"></span>
-						<span class="js-category-tree-item-handle form-tree__item__name">{{ categoryDetail.category.name }}</span>
-						<span class="js-category-tree-item-icons">
+						<span class="js-category-tree-item-line  js-category-tree-item-handle form-tree__item__name">{{ categoryDetail.category.name }}</span>
+						<span class="js-category-tree-item-icons form-tree__item__controls">
 							<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}" class="form-tree__item__control">
 								<i class="svg svg-pencil"></i>
 							</a>
@@ -38,18 +38,16 @@
 							</a>
 						</span>
 					</div>
-					{{ _self.categoryTreeItem(categoryDetail.children) }}
+					{{ _self.categoryTreeItem(categoryDetail.children, false) }}
 				</li>
 			{% endfor %}
 		</ul>
 	{% endmacro %}
 
 	{% if isForAllDomains %}
-		<div id="js-category-tree-sorting">
-			<div class="form-line">
-				<div class="form-tree form-tree--open">
-					{{ _self.categoryTreeItem(categoryDetails) }}
-				</div>
+		<div class="form-line">
+			<div id="js-category-tree-sorting" class="form-tree form-tree--open form-tree--dragable">
+				{{ _self.categoryTreeItem(categoryDetails, true) }}
 			</div>
 		</div>
 
@@ -67,8 +65,8 @@
 		{% endembed %}
 	{% else %}
 		<div class="form-line">
-			<div class="form-tree form-tree--open">
-				{{ _self.categoryTreeItem(categoryDetails) }}
+			<div class="form-tree form-tree--open form-tree--dragable">
+				{{ _self.categoryTreeItem(categoryDetails, true) }}
 			</div>
 		</div>
 		<div>
