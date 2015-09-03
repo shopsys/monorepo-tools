@@ -22,9 +22,7 @@ class ProductCalculatedPriceDataFixture extends AbstractReferenceFixture impleme
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
 		$productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
-		$productPriceRecalculator->runScheduledRecalculations(function () {
-			return true;
-		});
+		$productPriceRecalculator->runAllScheduledRecalculations();
 	}
 
 	/**

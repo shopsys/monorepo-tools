@@ -17,9 +17,7 @@ class MainVariantCalculatedPriceDataFixture extends AbstractReferenceFixture imp
 		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-		$productPriceRecalculator->runScheduledRecalculations(function () {
-			return true;
-		});
+		$productPriceRecalculator->runAllScheduledRecalculations();
 	}
 
 	/**

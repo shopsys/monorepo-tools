@@ -62,7 +62,7 @@ class ProductPriceRecalculator {
 	 * @param callable $canRunCallback
 	 * @return int
 	 */
-	public function runScheduledRecalculations(callable $canRunCallback) {
+	public function runScheduledRecalculationsWhile(callable $canRunCallback) {
 		$productRows = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
 		$count = 0;
 
@@ -81,6 +81,15 @@ class ProductPriceRecalculator {
 		$this->em->clear();
 
 		return $count;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function runAllScheduledRecalculations() {
+		$this->runScheduledRecalculationsWhile(function () {
+			return true;
+		});
 	}
 
 	public function runImmediateRecalculations() {

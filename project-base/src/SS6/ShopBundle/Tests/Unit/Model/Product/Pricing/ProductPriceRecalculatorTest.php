@@ -95,7 +95,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$calculationCallbackLimit = $calculationLimit;
-		$recalculatedCount = $productPriceRecalculator->runScheduledRecalculations(function () use (&$calculationCallbackLimit) {
+		$recalculatedCount = $productPriceRecalculator->runScheduledRecalculationsWhile(function () use (&$calculationCallbackLimit) {
 			return $calculationCallbackLimit-- > 0;
 		});
 

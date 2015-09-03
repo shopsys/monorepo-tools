@@ -24,7 +24,7 @@ class ProductPriceCronModule implements CronModuleInterface {
 	 */
 	public function run(Logger $logger) {
 		$timeStart = time();
-		$recalculated = $this->productPriceRecalculator->runScheduledRecalculations(function () use ($timeStart) {
+		$recalculated = $this->productPriceRecalculator->runScheduledRecalculationsWhile(function () use ($timeStart) {
 			return time() - $timeStart < self::PRODUCT_PRICE_RECALCULATIONS_TIMELIMIT;
 		});
 
