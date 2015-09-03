@@ -545,7 +545,8 @@ class ProductRepository {
 	}
 
 	public function markAllProductsForPriceRecalculation() {
-		// Main variant price recalculation is triggered by visibility recalculation
+		// Performance optimization:
+		// Main variant price recalculation is triggered by variants visibility recalculation
 		// and visibility recalculation is triggered by variant price recalculation.
 		// Therefore main variant price recalculation is useless here.
 		$this->em
