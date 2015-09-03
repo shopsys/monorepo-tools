@@ -66,8 +66,10 @@
 			{% endblock %}
 		{% endembed %}
 	{% else %}
-		<div class="category-tree">
-			{{ _self.categoryTreeItem(categoryDetails) }}
+		<div class="form-line">
+			<div class="form-tree form-tree--open">
+				{{ _self.categoryTreeItem(categoryDetails) }}
+			</div>
 		</div>
 		<div>
 			{{ 'Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén.'|trans }}
