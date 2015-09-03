@@ -63,9 +63,17 @@ body {
 		bottom: 0;
 		padding-bottom: @height-footer;
 		width: @width-panel;
-		overflow: auto;
 
 		background-color: @color-f;
+
+		&__in {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: @height-footer;
+			overflow: auto;
+		}
 	}
 
 	&__content {
