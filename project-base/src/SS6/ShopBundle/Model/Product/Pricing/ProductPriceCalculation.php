@@ -95,7 +95,8 @@ class ProductPriceCalculation {
 			$pricingGroup
 		);
 		if (count($variants) === 0) {
-			throw new \SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException($mainVariant);
+			$message = 'Main variant ID = ' . $mainVariant->getId() . ' has no sellable variants.';
+			throw new \SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException($message);
 		}
 
 		$variantPrices = [];
