@@ -80,13 +80,6 @@ class Category extends AbstractTranslatableEntity {
 	private $domains;
 
 	/**
-	 * @internal
-	 *
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="categories", fetch="EXTRA_LAZY")
-	 */
-	private $products;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Feed\Category\FeedCategory")

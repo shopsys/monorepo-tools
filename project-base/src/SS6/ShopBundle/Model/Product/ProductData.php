@@ -102,9 +102,9 @@ class ProductData {
 	public $hiddenOnDomains;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Model\Category\Category[domainId][]
 	 */
-	public $categories;
+	public $categoriesByDomainId;
 
 	/**
 	 * @var string
@@ -139,7 +139,7 @@ class ProductData {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $availability
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 * @param array $hiddenOnDomains
-	 * @param array $categories
+	 * @param array $categoriesByDomainId
 	 * @param string $priceCalculationType
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand|null $brand
 	 * @param string[] $variantAlias
@@ -162,7 +162,7 @@ class ProductData {
 		Availability $availability = null,
 		Availability $outOfStockAvailability = null,
 		array $hiddenOnDomains = [],
-		array $categories = [],
+		array $categoriesByDomainId = [],
 		$priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO,
 		Brand $brand = null,
 		array $variantAlias = []
@@ -184,7 +184,7 @@ class ProductData {
 		$this->availability = $availability;
 		$this->outOfStockAvailability = $outOfStockAvailability;
 		$this->hiddenOnDomains = $hiddenOnDomains;
-		$this->categories = $categories;
+		$this->categoriesByDomainId = $categoriesByDomainId;
 		$this->priceCalculationType = $priceCalculationType;
 		$this->brand = $brand;
 		$this->variantAlias = $variantAlias;

@@ -79,7 +79,7 @@ class ProductDataFactory {
 		}
 		$productData->hiddenOnDomains = $hiddenOnDomains;
 
-		$productData->categories = $product->getCategories()->toArray();
+		$productData->categoriesByDomainId = $product->getCategoriesIndexedByDomainId();
 		$productData->priceCalculationType = $product->getPriceCalculationType();
 		$productData->brand = $product->getBrand();
 

@@ -84,7 +84,27 @@
 			{% block product_main_categories %}{% endblock %}
 
 			{% block product_categories %}
-				{{ form_row(form.productData.categories, { label: 'Kategorie'|trans}) }}
+				<div class="form-line">
+					{{ form_label(form.productData.categoriesByDomainId, 'Přiřazení do kategorie'|trans) }}
+					<div class="form-line__line">
+						{% for domainId, categoriesForm in form.productData.categoriesByDomainId %}
+							<div class="form-line__box">
+								<div class="form-line__group form-line__box__title">
+									<span class="form-line__group__image">
+										<span class="in-image in-image--large">
+											<span class="in-image__in in-image__in--{{ domainId }}" title="{{ getDomainName(domainId) }}">{{ domainId }}</span>
+										</span>
+									</span>
+									<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+								</div>
+								<div class="form-line__box__content">
+									{{ form_widget(categoriesForm) }}
+									{{ form_errors(categoriesForm) }}
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
 			{% endblock %}
 
 			{% block product_stock_and_availability %}

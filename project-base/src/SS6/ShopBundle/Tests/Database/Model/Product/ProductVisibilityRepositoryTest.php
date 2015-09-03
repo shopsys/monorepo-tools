@@ -37,7 +37,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->hidden = false;
 		$productEditData->productData->sellingDenied = false;
 		$productEditData->productData->hiddenOnDomains = [];
-		$productEditData->productData->categories = [$category];
+		$productEditData->productData->categoriesByDomainId = [1 => [$category]];
 		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
 
 		return $productEditData;
@@ -277,7 +277,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$category = $this->getReference(CategoryDataFixture::TOYS);
 
 		$productEditData = $this->getDefaultProductEditData();
-		$productEditData->productData->categories = [$category];
+		$productEditData->productData->categoriesByDomainId = [1 => [$category]];
 		$product = $productEditFacade->create($productEditData);
 		$productPriceRecalculator->runImmediateRecalculations();
 

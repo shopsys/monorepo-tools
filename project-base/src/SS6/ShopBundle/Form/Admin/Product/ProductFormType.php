@@ -59,12 +59,18 @@ class ProductFormType extends AbstractType {
 	private $product;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 */
+	private $domainConfigs;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domainConfigs
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
@@ -74,6 +80,7 @@ class ProductFormType extends AbstractType {
 		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $flags,
 		TranslatorInterface $translator,
+		array $domainConfigs,
 		Product $product = null
 	) {
 		$this->vats = $vats;
@@ -82,6 +89,7 @@ class ProductFormType extends AbstractType {
 		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flags = $flags;
 		$this->translator = $translator;
+		$this->domainConfigs = $domainConfigs;
 		$this->product = $product;
 	}
 
@@ -231,9 +239,6 @@ class ProductFormType extends AbstractType {
 				],
 				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
 			])
-			->add('categories', FormType::CATEGORIES, [
-				'required' => false,
-			])
 			->add('flags', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->flags, 'name', [], null, 'id'),
@@ -248,6 +253,13 @@ class ProductFormType extends AbstractType {
 					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
 				],
 			]);
+
+		$builder->add('categoriesByDomainId', FormType::FORM, ['required' => false]);
+		foreach ($this->domainConfigs as $domainConfig) {
+			$builder->get('categoriesByDomainId')->add($domainConfig->getId(), FormType::CATEGORIES, [
+				'required' => false,
+			]);
+		}
 
 		if ($this->product !== null) {
 			$this->disableIrrelevantFields($builder, $this->product);
@@ -304,7 +316,7 @@ class ProductFormType extends AbstractType {
 		}
 		if ($product->isVariant()) {
 			$irrelevantFields = [
-				'categories',
+				'categoriesByDomainId',
 			];
 		}
 		foreach ($irrelevantFields as $irrelevantField) {

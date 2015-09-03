@@ -186,7 +186,8 @@ class ProductDataFixtureLoader {
 				break;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
-		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
+		$productEditData->productData->categoriesByDomainId[1] = $this->getProductDataFromString($row[16], $this->categories);
+		$productEditData->productData->categoriesByDomainId[2] = $this->getProductDataFromString($row[16], $this->categories);
 		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
 		$productEditData->productData->sellingDenied = $row[18];
 
