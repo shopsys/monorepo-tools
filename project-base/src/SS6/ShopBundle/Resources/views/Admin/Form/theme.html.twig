@@ -159,6 +159,7 @@
 					</span>
 				</div>
 			</div>
+			{{ form_errors(form) }}
 		</div>
 	{% else %}
 		<div class="form-line">
@@ -169,8 +170,8 @@
 				</div>
 			</div>
 		</div>
+		{{ form_errors(form) }}
 	{% endif %}
-	{{ form_errors(form) }}
 {% endblock %}
 
 {% block textarea_row -%}
