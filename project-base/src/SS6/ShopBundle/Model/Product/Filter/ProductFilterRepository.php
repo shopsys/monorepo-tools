@@ -58,6 +58,10 @@ class ProductFilterRepository {
 			$productsQueryBuilder,
 			$productFilterData->flags
 		);
+		$this->filterByBrands(
+			$productsQueryBuilder,
+			$productFilterData->brands
+		);
 		$this->parameterFilterRepository->filterByParameters(
 			$productsQueryBuilder,
 			$productFilterData->parameters
@@ -129,6 +133,22 @@ class ProductFilterRepository {
 	}
 
 	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
+	 */
+	private function filterByBrands(QueryBuilder $productsQueryBuilder, array $brands) {
+		$brandsCount = count($brands);
+		if ($brandsCount !== 0) {
+			$brandsQueryBuilder = $this->getBrandsQueryBuilder($brands, $productsQueryBuilder->getEntityManager());
+
+			$productsQueryBuilder->andWhere($productsQueryBuilder->expr()->exists($brandsQueryBuilder));
+			foreach ($brandsQueryBuilder->getParameters() as $parameter) {
+				$productsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
+			}
+		}
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @return \Doctrine\ORM\QueryBuilder
@@ -144,6 +164,24 @@ class ProductFilterRepository {
 			->andWhere('f IN (:flags)')->setParameter('flags', $flags);
 
 		return $flagsQueryBuilder;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getBrandsQueryBuilder(array $brands, EntityManager $em) {
+		$brandsQueryBuilder = $em->createQueryBuilder();
+
+		$brandsQueryBuilder
+			->select('1')
+			->from(Product::class, 'pb')
+			->join('pb.brand', 'b')
+			->where('pb = p')
+			->andWhere('b IN (:brands)')->setParameter('brands', $brands);
+
+		return $brandsQueryBuilder;
 	}
 
 }

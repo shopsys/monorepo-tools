@@ -23,12 +23,19 @@ class ProductFilterFormType extends AbstractType {
 	private $flagFilterChoices;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 */
+	private $brandFilterChoices;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 */
-	public function __construct(array $parameterFilterChoices, array $flagFilterChoices) {
+	public function __construct(array $parameterFilterChoices, array $flagFilterChoices, array $brandFilterChoices) {
 		$this->parameterFilterChoices = $parameterFilterChoices;
 		$this->flagFilterChoices = $flagFilterChoices;
+		$this->brandFilterChoices = $brandFilterChoices;
 	}
 
 	/**
@@ -70,6 +77,12 @@ class ProductFilterFormType extends AbstractType {
 				'expanded' => true,
 				'multiple' => true,
 				'choice_list' => new ObjectChoiceList($this->flagFilterChoices, 'name', [], null, 'id'),
+			])
+			->add('brands', FormType::CHOICE, [
+				'required' => false,
+				'expanded' => true,
+				'multiple' => true,
+				'choice_list' => new ObjectChoiceList($this->brandFilterChoices, 'name', [], null, 'id'),
 			])
 			->add('search', FormType::SUBMIT);
 	}

@@ -68,6 +68,28 @@
 			</div>
 		{% endif %}
 
+		{% if filterForm.brands is empty %}
+			{% do filterForm.brands.setRendered %}
+		{% else %}
+			<div class="form-block">
+				<label class="form-block__label">{{ 'Značka'|trans }}:</label>
+				<div class="form-block__field">
+					<div class="form-choice" id="productFilter_form_brands">
+						{% for brandForm in filterForm.brands %}
+							<div class="form-choice__item">
+								<label>
+									{{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
+									<span class="form-choice__text">
+										{{ brandForm.vars.label }}
+									</span>
+								</label>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
 		{% if isSearch or filterForm.parameters is empty %}
 			{% do filterForm.parameters.setRendered %}
 		{% else %}
