@@ -25,8 +25,8 @@ class DatabaseSchemaFacade {
 	/**
 	 * @param string $schemaName
 	 */
-	public function dropSchema($schemaName) {
-		$this->em->getConnection()->query('DROP SCHEMA ' . $schemaName . ' CASCADE');
+	public function dropSchemaIfExists($schemaName) {
+		$this->em->getConnection()->query('DROP SCHEMA IF EXISTS ' . $schemaName . ' CASCADE');
 	}
 
 }

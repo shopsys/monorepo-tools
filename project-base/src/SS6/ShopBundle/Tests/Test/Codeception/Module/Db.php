@@ -25,7 +25,7 @@ class Db extends BaseDb {
 		/* @var $symfonyHelper \SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
 		$databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer(DatabaseSchemaFacade::class);
 		/* @var $databaseSchemaFacade \SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
-		$databaseSchemaFacade->dropSchema('public');
+		$databaseSchemaFacade->dropSchemaIfExists('public');
 		$databaseSchemaFacade->createSchema('public');
 	}
 

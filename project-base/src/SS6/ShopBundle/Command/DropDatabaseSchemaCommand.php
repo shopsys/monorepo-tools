@@ -24,7 +24,7 @@ class DropDatabaseSchemaCommand extends ContainerAwareCommand {
 		/* @var $databaseSchemaFacade \SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
 
 		$output->writeln('Dropping database schema...');
-		$databaseSchemaFacade->dropSchema('public');
+		$databaseSchemaFacade->dropSchemaIfExists('public');
 		$output->writeln('Database schema dropped successfully!');
 	}
 
