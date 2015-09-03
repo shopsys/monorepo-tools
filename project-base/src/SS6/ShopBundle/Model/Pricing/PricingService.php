@@ -33,8 +33,11 @@ class PricingService {
 		}
 
 		$firstPrice = array_pop($prices);
+		/* @var $firstPrice \SS6\ShopBundle\Model\Pricing\Price */
 		foreach ($prices as $price) {
-			if ($price->getPriceWithoutVat() !== $firstPrice->getPriceWithoutVat()) {
+			if ($price->getPriceWithoutVat() !== $firstPrice->getPriceWithoutVat()
+				|| $price->getPriceWithVat() !== $firstPrice->getPriceWithVat()
+			) {
 				return true;
 			}
 		}
