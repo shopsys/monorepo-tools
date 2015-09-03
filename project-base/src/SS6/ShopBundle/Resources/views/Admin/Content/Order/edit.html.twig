@@ -27,7 +27,11 @@
 				</div>
 				<div class="form-line">
 					<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-					{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
+					<div class="form-line__side">
+						<div class="form-line__item form-line__item--text">
+							{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
+						</div>
+					</div>
 				</div>
 				{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
 				{{ form_row(form.statusId, { label: 'Stav'|trans }) }}
