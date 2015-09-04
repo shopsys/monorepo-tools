@@ -15,12 +15,8 @@
 			var $item = $(this).closest('.js-order-item');
 
 			var $itemNameElement = $item.find('.js-order-item-name');
-			if ($itemNameElement.is('input')) {
-				// html escaping
-				var itemName = $("<textarea/>").text($itemNameElement.val()).html();
-			} else {
-				var itemName = $itemNameElement.html();
-			}
+			// html escaping
+			var itemName = $("<textarea/>").text($itemNameElement.val()).html();
 
 			SS6.window({
 				content: 'Opravdu chcete odebrat z objednávky položku "<i>' + itemName + '</i>"?',

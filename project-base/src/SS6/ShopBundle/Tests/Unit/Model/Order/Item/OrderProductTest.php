@@ -24,7 +24,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, $productMock);
 		$orderProduct->edit($orderItemData);
 
-		$this->assertSame('productName', $orderProduct->getName());
+		$this->assertSame('newName', $orderProduct->getName());
 		$this->assertSame(20, $orderProduct->getPriceWithVat());
 		$this->assertSame(30, $orderProduct->getPriceWithoutVat());
 		$this->assertSame(2, $orderProduct->getQuantity());

@@ -65,17 +65,4 @@ class OrderProduct extends OrderItem {
 	public function hasProduct() {
 		return $this->product !== null;
 	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function edit(OrderItemData $orderItemData) {
-		$name = $this->name;
-		parent::edit($orderItemData);
-
-		if ($this->hasProduct()) {
-			$this->name = $name;
-		}
-	}
-
 }

@@ -167,9 +167,7 @@
 								<tr class="js-order-item" data-index="{{ orderItemId }}">
 									<td>
 										{% if productItem and productItem.product %}
-											{{ form_widget(orderItemForm.name, { type: 'hidden' }) }}
-											{% do orderItemForm.name.setRendered() %}
-											<span class="js-order-item-name">{{ productItem.name }}</span>
+											{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
 											<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
 												<i class="svg svg-forward-page"></i>
 											</a>
@@ -180,15 +178,7 @@
 											{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
 										{% endif %}
 									</td>
-									<td>
-										{% if productItem and productItem.product %}
-											{{ productItem.product.catnum }}
-											{{ form_widget(orderItemForm.catnum, {type: 'hidden'}) }}
-											{% do orderItemForm.catnum.setRendered() %}
-										{% else %}
-											{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}
-										{% endif %}
-									</td>
+									<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
 									<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 									<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
 									<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
