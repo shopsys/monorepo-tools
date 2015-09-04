@@ -1,43 +1,4 @@
 services:
-  ss6.shop.form.admin.advanced_search.advanced_search_order_filter_translation:
-    class: SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation
-
-  ss6.shop.form.admin.advanced_search.advanced_search_product_filter_translation:
-    class: SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation
-
-  ss6.shop.form.admin.category_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory
-
-  ss6.shop.form.admin.customer_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
-
-  ss6.shop.form.admin.mail.all_mail_templates_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory
-
-  ss6.shop.form.admin.payment.payment_edit_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
-
-  ss6.shop.form.admin.payment.payment_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
-
-  ss6.shop.form.admin.product.parameter.product_parameter_value_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
-
-  ss6.shop.form.admin.product.product_edit_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory
-
-  ss6.shop.form.admin.product.product_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
-
-  ss6.shop.form.admin.slider.slider_item_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
-
-  ss6.shop.form.admin.transport.transport_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
-
-  ss6.shop.form.admin.transport.transport_edit_form_type_factory:
-    class: SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
-
   ss6.shop.form.categories:
     class: SS6\ShopBundle\Form\CategoriesType
     tags:
@@ -77,9 +38,6 @@ services:
     class: SS6\ShopBundle\Form\FileUploadType
     tags:
       - { name: form.type, alias: file_upload }
-
-  ss6.shop.form.front.product.product_filter_form_type_factory:
-    class: SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
 
   ss6.shop.form.honey_pot:
     class: SS6\ShopBundle\Form\HoneyPotType
