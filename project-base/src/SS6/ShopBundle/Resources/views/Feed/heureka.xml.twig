@@ -6,11 +6,11 @@
 {% block item %}
 	<SHOPITEM>
 		<ITEM_ID>{{ item.itemId }}</ITEM_ID>
-		<PRODUCTNAME>{{ item.productname }}</PRODUCTNAME>
+		<PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
 		<DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
 		<URL>{{ item.url }}</URL>
-		{% if item.imgurl -%}
-			<IMGURL>{{ item.imgurl }}</IMGURL>
+		{% if item.imgUrl -%}
+			<IMGURL>{{ item.imgUrl }}</IMGURL>
 		{% endif -%}
 		<PRICE_VAT>{{ item.priceVat|number_format(2, ',', '') }}</PRICE_VAT>
 		{% if item.ean -%}
@@ -22,8 +22,8 @@
 		{% if item.manufacturer is not null -%}
 			<MANUFACTURER>{{ item.manufacturer }}</MANUFACTURER>
 		{% endif -%}
-		{% if item.categorytext is not null -%}
-			<CATEGORYTEXT>{{ item.categorytext }}</CATEGORYTEXT>
+		{% if item.categoryText is not null -%}
+			<CATEGORYTEXT>{{ item.categoryText }}</CATEGORYTEXT>
 		{% endif -%}
 		{% for paramName, paramVal in item.params -%}
 			<PARAM>

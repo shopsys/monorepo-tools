@@ -12,7 +12,7 @@ class HeurekaItem {
 	/**
 	 * @var string
 	 */
-	private $productname;
+	private $productName;
 
 	/**
 	 * @var string
@@ -27,7 +27,7 @@ class HeurekaItem {
 	/**
 	 * @var string|null
 	 */
-	private $imgurl;
+	private $imgUrl;
 
 	/**
 	 * @var string
@@ -52,7 +52,7 @@ class HeurekaItem {
 	/**
 	 * @var string|null
 	 */
-	private $categorytext;
+	private $categoryText;
 
 	/**
 	 * @var string[paramName]
@@ -66,42 +66,42 @@ class HeurekaItem {
 
 	/**
 	 * @param int $itemId
-	 * @param string $productname
+	 * @param string $productName
 	 * @param string $description
 	 * @param string $url
-	 * @param string|null $imgurl
+	 * @param string|null $imgUrl
 	 * @param string $priceVat
 	 * @param string|null $ean
 	 * @param int|null $deliveryDate
 	 * @param string|null $manufacturer
-	 * @param string|null $categorytext
+	 * @param string|null $categoryText
 	 * @param string[paramName] $params
 	 * @param string|null $cpc
 	 */
 	public function __construct(
 		$itemId,
-		$productname,
+		$productName,
 		$description,
 		$url,
-		$imgurl,
+		$imgUrl,
 		$priceVat,
 		$ean,
 		$deliveryDate,
 		$manufacturer,
-		$categorytext,
+		$categoryText,
 		$params,
 		$cpc
 	) {
 		$this->itemId = $itemId;
-		$this->productname = $productname;
+		$this->productName = $productName;
 		$this->description = $description;
 		$this->url = $url;
-		$this->imgurl = $imgurl;
+		$this->imgUrl = $imgUrl;
 		$this->priceVat = $priceVat;
 		$this->ean = $ean;
 		$this->deliveryDate = $deliveryDate;
 		$this->manufacturer = $manufacturer;
-		$this->categorytext = $categorytext;
+		$this->categoryText = $categoryText;
 		$this->params = $params;
 		$this->cpc = $cpc;
 	}
@@ -116,8 +116,8 @@ class HeurekaItem {
 	/**
 	 * @return string
 	 */
-	public function getProductname() {
-		return $this->productname;
+	public function getProductName() {
+		return $this->productName;
 	}
 
 	/**
@@ -137,8 +137,8 @@ class HeurekaItem {
 	/**
 	 * @return string|null
 	 */
-	public function getImgurl() {
-		return $this->imgurl;
+	public function getImgUrl() {
+		return $this->imgUrl;
 	}
 
 	/**
@@ -172,8 +172,8 @@ class HeurekaItem {
 	/**
 	 * @return string|null
 	 */
-	public function getCategorytext() {
-		return $this->categorytext;
+	public function getCategoryText() {
+		return $this->categoryText;
 	}
 
 	/**
