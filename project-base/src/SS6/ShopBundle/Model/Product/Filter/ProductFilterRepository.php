@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
@@ -140,7 +139,7 @@ class ProductFilterRepository {
 		$flagsQueryBuilder
 			->select('1')
 			->from(Product::class, 'pf')
-			->join('pf.flags', 'f', Join::ON)
+			->join('pf.flags', 'f')
 			->where('pf = p')
 			->andWhere('f IN (:flags)')->setParameter('flags', $flags);
 
