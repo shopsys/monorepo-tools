@@ -226,6 +226,7 @@
 							<span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60">
 							</span>
 						</div>
+						{{ form_errors(seoTitleForm) }}
 					</div>
 				{% endfor %}
 			</div>
@@ -236,17 +237,21 @@
 				</strong>
 
 				{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
-					<div class="form-line__side js-characters-counter">
+					<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
 						<div class="form-line__item form-line__item--left">
-							{{ form_row(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input' } }) }}
+							<span class="input__wrap">
+								{{ form_widget(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain' } }) }}
+								<span class="input__domain">
+									{{ domainIcon(domainId) }}
+								</span>
+							</span>
 						</div>
 
-						<div class="form-line__item">
-							<div class="form-line__item__count">
-								<div class="js-characters-counter-info" data-recommended-length="155"></div>
-							</div>
+						<div class="form-line__count">
+							<div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
 						</div>
 					</div>
+					{{ form_errors(seoMetaDescriptionForm) }}
 				{% endfor %}
 			</div>
 
