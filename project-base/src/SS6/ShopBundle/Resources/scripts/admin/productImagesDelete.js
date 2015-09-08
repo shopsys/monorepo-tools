@@ -10,6 +10,7 @@
 			var $imagePreview = $image.find('.js-product-images-preview');
 			var $deleteButton = $image.find('.js-product-images-delete-button');
 			var $revertButton = $image.find('.js-product-images-delete-revert-button');
+			var $deleteInfo = $image.find('.js-product-images-image-overlay');
 			var imageId = $image.data('id');
 
 			$deleteButton.bind('click.deleteImage', function() {
@@ -17,6 +18,7 @@
 				$imagePreview.addClass('list-images__item__in--removed');
 				$deleteButton.hide();
 				$revertButton.show();
+				$deleteInfo.show();
 				SS6.formChangeInfo.showInfo();
 				return false;
 			});
@@ -26,6 +28,7 @@
 				$imagePreview.removeClass('list-image__item__in--removed');
 				$deleteButton.show();
 				$revertButton.hide();
+				$deleteInfo.hide();
 				return false;
 			});
 

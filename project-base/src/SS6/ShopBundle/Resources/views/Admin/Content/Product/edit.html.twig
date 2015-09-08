@@ -312,15 +312,16 @@
 							<span class="list-images__item__main">
 								{{ 'Hlavní obrázek'|trans }}
 							</span>
-							<button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button">
+							<button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Smazat'|trans }}">
 								<i class="svg svg-circle-cross"></i>
 							</button>
 							<span class="js-product-images-image-handle list-images__item__move" title="{{ 'Přesunout'|trans }}">
 								<i class="svg svg-move"></i>
 							</span>
-							<button class="btn-no-style js-product-images-delete-revert-button display-none js-tooltip list-images__item__revert" type="button" title="{{ 'Po uložení bude obrázek smazán'|trans }}" data-toggle="tooltip" data-placement="bottom">
+							<button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Vrátit zpět'|trans }}">
 								<i class="svg svg-forward-page"></i>
 							</button>
+							<span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Po uložení bude obrázek smazán'|trans }}</span>
 						</div>
 						{# Ignore indices from form definition. Let them reflect new positions. #}
 						{{ form_widget(imageForm, { full_name: form.imagePositions.vars.full_name ~ '[]'}) }}
