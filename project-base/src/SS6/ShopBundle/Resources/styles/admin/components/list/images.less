@@ -13,7 +13,7 @@
 	}
 
 	&__item {
-		display: inline-block;
+		display: inline-block !important;
 		width: 100% / 4 - 0.5;
 		vertical-align: top;
 		padding: 0;
@@ -125,6 +125,40 @@
 
 				.border-radius(3px);
 			}
+		}
+
+		&__pipe {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 120px;
+			height: 20px;
+			margin: -10px 0 0 -60px;
+			line-height: 18px;
+
+			background: @color-f;
+			border: 1px solid @color-border;
+
+			&__line {
+				display: block;
+				height: 18px;
+				width: 0;
+
+				background: @color-primary;
+				text-align: center;
+				color: @color-f;
+				font-weight: bold;
+			}
+		}
+
+		&__info {
+			display: block;
+			padding: 10px;
+			margin-top: 10px;
+
+			border: 1px solid @color-border;
+			font-size: 10px;
+			word-wrap: break-word;
 		}
 	}
 }
