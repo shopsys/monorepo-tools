@@ -28,7 +28,7 @@ class QuantifiedProductDiscountCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem $quantifiedItemPrice
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice $quantifiedItemPrice
 	 * @param float $discountPercent
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
@@ -44,7 +44,7 @@ class QuantifiedProductDiscountCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItemsPrices
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
 	 * @param float|null $discountPercent
 	 * @return \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
 	 */
