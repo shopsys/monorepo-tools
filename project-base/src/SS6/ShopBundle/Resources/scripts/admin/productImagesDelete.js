@@ -25,7 +25,7 @@
 
 			$revertButton.bind('click.deleteImage', function() {
 				SS6.choiceControl.deselect('#product_edit_form_imagesToDelete', imageId);
-				$imagePreview.removeClass('list-image__item__in--removed');
+				$imagePreview.removeClass('list-images__item__in--removed');
 				$deleteButton.show();
 				$revertButton.hide();
 				$deleteInfo.hide();
