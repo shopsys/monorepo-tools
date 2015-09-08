@@ -38,7 +38,7 @@ $.fn.bootstrapFileInput = function() {
 
     // Now we're going to wrap that input field with a Bootstrap button.
     // The input will actually still be there, it will just be float above and transparent (done with the CSS).
-    $elem.wrap('<a class="file-input-wrapper btn btn-default ' + className + '"></a>').parent().prepend($('<span></span>').html(buttonWord));
+    $elem.wrap('<a class="js-fileInputWrapper btn ' + className + '"></a>').parent().prepend($('<span></span>').html(buttonWord)).prepend($('<i class="svg svg-search btn__icon"></i>'));
   })
 
   // After we have found all of the file inputs let's apply a listener for tracking the mouse movement.
@@ -47,7 +47,7 @@ $.fn.bootstrapFileInput = function() {
 
     // As the cursor moves over our new Bootstrap button we need to adjust the position of the invisible file input Browse button to be under the cursor.
     // This gives us the pointer cursor that FF denies us
-    $('.file-input-wrapper').mousemove(function(cursor) {
+    $('.js-fileInputWrapper').mousemove(function(cursor) {
 
       var input, wrapper,
         wrapperX, wrapperY,
@@ -83,7 +83,7 @@ $.fn.bootstrapFileInput = function() {
       });
     });
 
-    $('body').on('change', '.file-input-wrapper input[type=file]', function(){
+    $('body').on('change', '.js-fileInputWrapper input[type=file]', function(){
 
       var fileName;
       fileName = $(this).val();
@@ -120,9 +120,8 @@ $.fn.bootstrapFileInput = function() {
 // Add the styles before the first stylesheet
 // This ensures they can be easily overridden with developer styles
 var cssHtml = '<style>'+
-  '.file-input-wrapper { overflow: hidden; position: relative; cursor: pointer; z-index: 1; }'+
-  '.file-input-wrapper input[type=file], .file-input-wrapper input[type=file]:focus, .file-input-wrapper input[type=file]:hover { position: absolute; top: 0; left: 0; cursor: pointer; opacity: 0; filter: alpha(opacity=0); z-index: 99; outline: 0; }'+
-  '.file-input-name { margin-left: 8px; }'+
+  '.js-fileInputWrapper { overflow: hidden; position: relative; cursor: pointer; z-index: 1; }'+
+  '.js-fileInputWrapper input[type=file], .js-fileInputWrapper input[type=file]:focus, .js-fileInputWrapper input[type=file]:hover { position: absolute; top: 0; left: 0; cursor: pointer; opacity: 0; filter: alpha(opacity=0); z-index: 99; outline: 0; }'+
   '</style>';
 $('link[rel=stylesheet]').eq(0).before(cssHtml);
 
