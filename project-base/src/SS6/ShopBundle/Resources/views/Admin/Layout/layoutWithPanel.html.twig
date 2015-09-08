@@ -3,10 +3,12 @@
 {% block content %}
 	<div class="web__container">
 		<div class="web__panel">
-			{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
-				route: app.request.get('_route'),
-				parameters: app.request.attributes.get('_route_params')
-			}	)) }}
+			<div class="web__panel__in">
+				{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
+					route: app.request.get('_route'),
+					parameters: app.request.attributes.get('_route_params')
+				}	)) }}
+			</div>
 		</div>
 
 		<div class="web__content">

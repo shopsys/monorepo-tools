@@ -81,24 +81,6 @@ class SuperadminController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/superadmin/icons/")
-	 */
-	public function iconsAction() {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/icons.html.twig');
-	}
-
-	/**
-	 * @Route("/superadmin/icons/{icon}/")
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $id
-	 */
-	public function iconDetailAction($icon) {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/iconDetail.html.twig', [
-			'icon' => $icon,
-		]);
-	}
-
-	/**
 	 * @Route("/superadmin/errors/")
 	 */
 	public function errorsAction() {

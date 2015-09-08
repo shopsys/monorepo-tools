@@ -299,53 +299,38 @@
 {% endblock %}
 
 {% block images %}
-	<div class="form-line">
-		<label class="form-line__label">
-			{{ 'Obrázek'|trans }}:
-		</label>
-		{% if form.imagePositions|length > 0 %}
-			<div class="list-image-wrap">
-				<div class="list-image-main">
-					<div class="list-image-main__label">{{ 'Hlavní obrázek'|trans }}</div>
-				</div>
-				<ul class="list-image" id="js-product-images">
-					{% for imageForm in form.imagePositions %}
-						{% set image = productDetail.imagesIndexedById[imageForm.vars.value] %}
-						<li class="list-image__item js-product-images-image" data-id="{{ image.id }}">
-							<div class="list-image__item__wrap">
-								<div class="js-product-images-preview list-image__item__in">
-									{{ image(image, {size: 'original', height: '100'}) }}
-								</div>
-								<div class="list-image__item__button">
-									<div class="js-product-images-delete-button">
-										<button class="btn btn-iconic" type="button">
-											<i class="svg svg-trash"></i>{{ 'Smazat obrázek'|trans }}
-										</button>
-									</div>
-									<div class="js-product-images-delete-revert-button display-none">
-										<button class="btn btn-iconic" type="button">
-											<i class="fa fa-undo"></i>{{ 'Vrátit zpět'|trans }}
-										</button>
-
-										<span title="{{ 'Po uložení bude obrázek smazán'|trans }}"
-										class="js-tooltip c-help form-icon" data-toggle="tooltip" data-placement="bottom">
-											<i class="svg svg-info"></i>
-										</span>
-									</div>
-									<span class="c-move js-product-images-image-handle" title="{{ 'Přesunout'|trans }}">
-										<i class="in-icon in-icon--move svg svg-move"></i>
-									</span>
-								</div>
+	{% if form.imagePositions|length > 0 %}
+		<div class="list-images__wrap">
+			<ul class="list-images" id="js-product-images">
+				{% for imageForm in form.imagePositions %}
+					{% set image = productDetail.imagesIndexedById[imageForm.vars.value] %}
+					<li class="list-images__item js-product-images-image" data-id="{{ image.id }}">
+						<div class="list-images__item__in">
+							<div class="list-images__item__image js-product-images-preview">
+								{{ image(image, {size: 'original', height: '100'}) }}
 							</div>
-							{# Ignore indices from form definition. Let them reflect new positions. #}
-							{{ form_widget(imageForm, { full_name: form.imagePositions.vars.full_name ~ '[]'}) }}
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-		{% endif %}
-		{% do form.imagePositions.setRendered %}
-	</div>
+							<span class="list-images__item__main">
+								{{ 'Hlavní obrázek'|trans }}
+							</span>
+							<button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Smazat'|trans }}">
+								<i class="svg svg-circle-cross"></i>
+							</button>
+							<span class="js-product-images-image-handle list-images__item__move" title="{{ 'Přesunout'|trans }}">
+								<i class="svg svg-move"></i>
+							</span>
+							<button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Vrátit zpět'|trans }}">
+								<i class="svg svg-forward-page"></i>
+							</button>
+							<span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Po uložení bude obrázek smazán'|trans }}</span>
+						</div>
+						{# Ignore indices from form definition. Let them reflect new positions. #}
+						{{ form_widget(imageForm, { full_name: form.imagePositions.vars.full_name ~ '[]'}) }}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	{% do form.imagePositions.setRendered %}
 {% endblock %}
 
 {% block product_urls %}

@@ -15,6 +15,10 @@ body {
 		right: 0;
 		z-index: 3000;
 
+		.dump-mode & {
+			position: relative;
+		}
+
 		&__in {
 			width: 100%;
 			margin: 0 auto;
@@ -22,6 +26,7 @@ body {
 
 			background: @bg-primary;
 			color: @color-f;
+			border-bottom: 1px solid @color-border-blue;
 		}
 	}
 
@@ -33,6 +38,10 @@ body {
 		padding-left: @width-panel;
 
 		background: @bg-page;
+
+		.dump-mode & {
+			padding-top: 0;
+		}
 
 		&:after {
 			display: block;
@@ -63,9 +72,22 @@ body {
 		bottom: 0;
 		padding-bottom: @height-footer;
 		width: @width-panel;
-		overflow: auto;
 
 		background-color: @color-f;
+
+		.dump-mode & {
+			position: absolute;
+			top: 0;
+		}
+
+		&__in {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: @height-footer;
+			overflow: auto;
+		}
 	}
 
 	&__content {

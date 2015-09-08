@@ -218,12 +218,6 @@
       items:
         - label: 'Zapínací moduly'
           route: admin_superadmin_modules
-        - label: 'Ikonky'
-          route: admin_superadmin_icons
-          items:
-            - label: 'Detail ikony'
-              route: admin_superadmin_icondetail
-              visible: false
         - label: 'Chybové hlášky'
           route: admin_superadmin_errors
         - label: 'Nastavení prodeje s/bez DPH'

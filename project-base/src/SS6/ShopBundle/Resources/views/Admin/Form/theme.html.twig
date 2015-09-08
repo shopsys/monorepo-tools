@@ -113,6 +113,7 @@
 					</span>
 				</div>
 			</div>
+			{{ form_errors(form) }}
 		</div>
 	{% elseif multidomain is defined %}
 		<div class="form-line__side">
@@ -125,6 +126,7 @@
 					</span>
 				</div>
 			</div>
+			{{ form_errors(form) }}
 		</div>
 	{% else %}
 		<div class="form-line{{ disabledField is defined ? ' form-input-disabled form-line--disabled' }}">
@@ -133,6 +135,7 @@
 				<div class="form-line__item">
 					{{ form_widget(form) }}
 				</div>
+				{{ form_errors(form) }}
 			</div>
 			{% if disabledField is defined %}
 				<span class="form-disabled {{ disabledField.class }} js-tooltip" data-toggle="tooltip" data-placement="{{ disabledField.placement|default('right') }}"
@@ -142,7 +145,6 @@
 			{% endif %}
 		</div>
 	{% endif %}
-	{{ form_errors(form) }}
 {%- endblock text_row %}
 
 {% block money_row %}
@@ -157,6 +159,7 @@
 					</span>
 				</div>
 			</div>
+			{{ form_errors(form) }}
 		</div>
 	{% else %}
 		<div class="form-line">
@@ -167,8 +170,8 @@
 				</div>
 			</div>
 		</div>
+		{{ form_errors(form) }}
 	{% endif %}
-	{{ form_errors(form) }}
 {% endblock %}
 
 {% block textarea_row -%}
@@ -304,7 +307,7 @@
 				{% endif %}
 				{% if not isCheckbox|default(false) %}:{% endif %}
 				{% if required %}
-					<span class="form-compulsory">
+					<span class="form-compulsory {{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__compulsory' }}">
 						<span class="sprite sprite-star"></span>
 					</span>
 				{% endif %}
