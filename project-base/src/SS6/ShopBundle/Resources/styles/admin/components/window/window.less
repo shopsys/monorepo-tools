@@ -49,6 +49,7 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 		width: @window-wide-width;
 		height: @window-wide-height;
 		margin: 0 0 0 -@window-wide-width/2;
+		z-index: 1000;
 	}
 
 	&--wide-float {
@@ -63,33 +64,43 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 		font-weight: bold;
 		font-size: 18px;
 	}
-}
 
-.window--active {
-	display: block;
-}
+	&--active {
+		display: block;
+	}
 
-.window__close {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 25px;
-	height: 25px;
-	line-height: 25px;
+	&__close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 48px;
+		height: 48px;
+		line-height: 48px;
 
-	background: @bg-box;
-	color: @color-base;
-	text-decoration: none;
-	font-weight: bold;
-	text-align: center;
-
-	&:hover {
-		background: @color-0;
+		background: @bg-primary-dark;
 		color: @color-f;
 		text-decoration: none;
-	}
-}
+		font-weight: bold;
+		text-align: center;
 
-.window__actions {
-	margin-top: 20px;
+		&:hover {
+			background: @bg-primary-dark;
+			color: @color-f;
+			text-decoration: none;
+		}
+	}
+
+	&__title {
+		margin: -25px -30px 30px;
+		height: 48px;
+		line-height: 28px;
+		padding: 10px 68px 10px 20px;
+
+		background: @bg-primary;
+		color: @color-f;
+	}
+
+	&__actions {
+		margin-top: 20px;
+	}
 }
