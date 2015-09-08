@@ -17,29 +17,30 @@
 {% block grid_value_cell_id_visible %}
 	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
 	{% if row.p.calculatedSellingDenied %}
-		<i class="svg svg-cart cart-disabled" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
+		<i class="svg svg-cart cart-disabled in-icon" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
 	{% endif %}
 {% endblock %}
 
 {% block grid_value_cell_id_select %}
 	{%- if not allowVariants and row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
-		<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které již je hlavní variantou"></i>
+		<i class="in-icon svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které již je hlavní variantou"></i>
 	{% elseif not allowVariants and row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_VARIANT') %}
-		<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které již je variantou"></i>
+		<i class="in-icon svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které již je variantou"></i>
 	{% elseif isMultiple %}
-			<a
-				class="js-products-picker-window-add-product"
-				href="#"
-				data-product-picker-instance-id="{{ jsInstanceId }}"
-				data-product-picker-product-id="{{ row.p.id }}"
-				data-product-picker-product-name="{{ row.pt.name }}"
-			><i class="js-products-picker-icon svg svg-circle-plus in-icon in-icon--add"></i></a>
+		<a
+			class="js-products-picker-window-add-product"
+			href="#"
+			data-product-picker-instance-id="{{ jsInstanceId }}"
+			data-product-picker-product-id="{{ row.p.id }}"
+			data-product-picker-product-name="{{ row.pt.name }}"
+		><i class="js-products-picker-icon svg svg-circle-plus in-icon in-icon--add"></i></a>
 	{% else %}
 		<a
 			href="#"
 			onclick="SS6.productPicker.selectProduct('{{ parentInputId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
+			class="btn"
 		>
-			<i class="svg svg-checked"></i>
+			<i class="btn__icon svg svg-checked"></i>
 			{{ 'Vybrat'|trans }}
 		</a>
 	{% endif %}
