@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
+use SS6\ShopBundle\Model\Order\Item\OrderProductFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Order;
@@ -22,6 +23,7 @@ use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use SS6\ShopBundle\Model\Setting\Setting;
 
@@ -112,6 +114,11 @@ class OrderFacade {
 	 */
 	private $orderPreviewFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderProductFacade
+	 */
+	private $orderProductFacade;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -129,7 +136,8 @@ class OrderFacade {
 		CartFacade $cartFacade,
 		CustomerEditFacade $customerEditFacade,
 		CurrentCustomer $currentCustomer,
-		OrderPreviewFactory $orderPreviewFactory
+		OrderPreviewFactory $orderPreviewFactory,
+		OrderProductFacade $orderProductFacade
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -148,6 +156,7 @@ class OrderFacade {
 		$this->customerEditFacade = $customerEditFacade;
 		$this->currentCustomer = $currentCustomer;
 		$this->orderPreviewFactory = $orderPreviewFactory;
+		$this->orderProductFacade = $orderProductFacade;
 	}
 
 	/**
@@ -179,6 +188,7 @@ class OrderFacade {
 
 		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
+		$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 		$this->em->flush();
 
 		return $order;
