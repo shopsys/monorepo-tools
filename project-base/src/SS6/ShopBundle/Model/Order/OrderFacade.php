@@ -210,7 +210,6 @@ class OrderFacade {
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
 		$newOrderStatus = $this->orderStatusRepository->getById($orderData->statusId);
-		$statusChanged = $order->getStatus()->getId() !== $orderData->statusId;
 		$orderEditResult = $this->orderService->editOrder($order, $orderData, $newOrderStatus);
 
 		foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
@@ -221,7 +220,7 @@ class OrderFacade {
 		}
 
 		$this->em->flush();
-		if ($statusChanged) {
+		if ($orderEditResult->isStatusChanged()) {
 			$mailTemplate = $this->orderMailFacade
 				->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
 			if ($mailTemplate->isSendMail()) {

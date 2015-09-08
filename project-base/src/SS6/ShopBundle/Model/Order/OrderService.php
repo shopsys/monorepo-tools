@@ -36,6 +36,7 @@ class OrderService {
 	 * @return \SS6\ShopBundle\Model\Order\OrderEditResult
 	 */
 	public function editOrder(Order $order, OrderData $orderData, OrderStatus $orderStatus) {
+		$statusChanged = $order->getStatus()->getId() !== $orderData->statusId;
 		$order->edit(
 			$orderData,
 			$orderStatus
@@ -74,7 +75,7 @@ class OrderService {
 
 		$this->calculateTotalPrice($order);
 
-		return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete);
+		return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete, $statusChanged);
 	}
 
 	/**
