@@ -35,6 +35,11 @@
 				}
 			}
 
+			.side-menu__item--superadmin & {
+				border-left-color: @color-red;
+				color: @color-red;
+			}
+
 			&__icon {
 				float: left;
 				margin-right: 5px;
@@ -76,12 +81,20 @@
 					border-left: 4px solid @color-blue;
 				}
 
+				.side-menu__item--superadmin & {
+					border-left-color: @color-red;
+				}
+
 				.side-menu__submenu__item--active & {
 					color: @color-link;
 
 					&:hover {
 						color: @color-link-hover;
 					}
+				}
+
+				.side-menu__submenu__item--superadmin & {
+					color: @color-red;
 				}
 
 			}
