@@ -10,11 +10,10 @@
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 		{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
-			<div class="toggle-container box-expand">
-				<h2 class ="toggle-headline box-expand__heading">
-					<span class="in-arrows in-arrows--down">
+			<div class="toggle-container form-group wrap-border">
+				<h2 class ="form-group__title">
 						{{ name }}
-					</span>
+					<span class="form-group__title__click toggle-headline">+</span>
 				</h2>
 				<div id="{{ template.vars.id }}" class="js-mail-template toggle-content display-none box-expand__hidden">
 					{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
