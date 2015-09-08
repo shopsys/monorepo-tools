@@ -46,7 +46,6 @@ class NewProductTest extends FunctionalTestCase {
 	 */
 	private function setFormValuesAndToken($form, $csrfToken) {
 		$form['product_edit_form[productData][name][cs]'] = 'testProduct';
-		$form['product_edit_form[productData][showOnDomains]'] = [1];
 		$form['product_edit_form[productData][catnum]'] = '123456';
 		$form['product_edit_form[productData][partno]'] = '123456';
 		$form['product_edit_form[productData][ean]'] = '123456';

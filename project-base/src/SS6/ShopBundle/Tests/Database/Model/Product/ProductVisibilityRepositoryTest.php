@@ -36,7 +36,6 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
 		$productEditData->productData->hidden = false;
 		$productEditData->productData->sellingDenied = false;
-		$productEditData->productData->hiddenOnDomains = [];
 		$productEditData->productData->categoriesByDomainId = [1 => [$category]];
 		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
 

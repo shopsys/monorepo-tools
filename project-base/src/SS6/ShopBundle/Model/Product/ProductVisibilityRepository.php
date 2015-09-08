@@ -86,8 +86,6 @@ class ProductVisibilityRepository {
 							WHEN (
 								p.calculated_hidden = FALSE
 								AND
-								pd.hidden = FALSE
-								AND
 								(p.selling_from IS NULL OR p.selling_from <= :now)
 								AND
 								(p.selling_to IS NULL OR p.selling_to >= :now)

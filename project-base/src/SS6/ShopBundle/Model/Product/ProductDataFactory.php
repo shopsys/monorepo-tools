@@ -39,10 +39,9 @@ class ProductDataFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomains
 	 * @return \SS6\ShopBundle\Model\Product\ProductData
 	 */
-	public function createFromProduct(Product $product, array $productDomains) {
+	public function createFromProduct(Product $product) {
 		$productData = $this->createDefault();
 
 		$translations = $product->getTranslations();
@@ -71,13 +70,6 @@ class ProductDataFactory {
 		$productData->outOfStockAction = $product->getOutOfStockAction();
 
 		$productData->hidden = $product->isHidden();
-		$hiddenOnDomains = [];
-		foreach ($productDomains as $productDomain) {
-			if ($productDomain->isHidden()) {
-				$hiddenOnDomains[] = $productDomain->getDomainId();
-			}
-		}
-		$productData->hiddenOnDomains = $hiddenOnDomains;
 
 		$productData->categoriesByDomainId = $product->getCategoriesIndexedByDomainId();
 		$productData->priceCalculationType = $product->getPriceCalculationType();

@@ -98,6 +98,7 @@ class ProductEditDataFactory {
 	public function createFromProduct(Product $product) {
 		$productEditData = $this->createDefault();
 
+		$productEditData->productData = $this->productDataFactory->createFromProduct($product);
 		$productEditData->parameters = $this->getParametersData($product);
 		try {
 			$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
@@ -147,7 +148,6 @@ class ProductEditDataFactory {
 	 */
 	private function setMultidomainData(Product $product, ProductEditData $productEditData) {
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
-		$productEditData->productData = $this->productDataFactory->createFromProduct($product, $productDomains);
 		foreach ($productDomains as $productDomain) {
 			$domainId = $productDomain->getDomainId();
 

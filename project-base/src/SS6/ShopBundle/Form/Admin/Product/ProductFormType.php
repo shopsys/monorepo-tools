@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
@@ -115,16 +114,6 @@ class ProductFormType extends AbstractType {
 			->add('name', FormType::LOCALIZED, [
 				'required' => false,
 			])
-			->add(
-				$builder
-					->create('showOnDomains', FormType::DOMAINS, [
-						'constraints' => [
-							new NotSelectedDomainToShow(['message' => 'Musíte vybrat alespoň jednu doménu']),
-						],
-						'property_path' => 'hiddenOnDomains',
-					])
-					->addViewTransformer($this->inverseArrayValuesTransformer)
-			)
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('sellingDenied', FormType::YES_NO, [
 				'required' => false,
