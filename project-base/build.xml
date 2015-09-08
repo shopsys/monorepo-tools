@@ -56,8 +56,8 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-rebuild,dirs-structure,warmup"/>
-	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,grunt,dump-translations-custom,db-demo,dirs-structure,warmup"/>
+	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,grunt,dump-translations-custom,db-rebuild,warmup"/>
+	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,grunt,dump-translations-custom,db-demo,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 
@@ -169,11 +169,18 @@
 	</target>
 
 	<target name="dirs-structure" depends="img-dirs">
+		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/assets/content/feeds" mode="${mkdir.mode}"/>
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.web}/assets/content/feeds/">
 				<exclude name="/" />
+			</fileset>
+		</delete>
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${path.root}/docs/">
+				<exclude name="/" />
+				<exclude name="admin" />
 			</fileset>
 		</delete>
 	</target>
