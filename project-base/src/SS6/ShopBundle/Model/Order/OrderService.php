@@ -2,14 +2,24 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Product;
 
 class OrderService {
+
+	const DEFAULT_QUANTITY = 1;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 */
+	private $domain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
@@ -22,9 +32,11 @@ class OrderService {
 	private $orderPriceCalculation;
 
 	public function __construct(
+		Domain $domain,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		OrderPriceCalculation $orderPriceCalculation
 	) {
+		$this->domain = $domain;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
 	}
@@ -76,6 +88,32 @@ class OrderService {
 		$this->calculateTotalPrice($order);
 
 		return new OrderEditResult($orderItemsToCreate, $orderItemsToDelete, $statusChanged);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $productPrice
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderProduct
+	 */
+	public function addProduct(Order $order, Product $product, Price $productPrice) {
+		$orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
+
+		$orderProduct = new OrderProduct(
+			$order,
+			$product->getName($orderDomainConfig->getLocale()),
+			$productPrice->getPriceWithoutVat(),
+			$productPrice->getPriceWithVat(),
+			$product->getVat()->getPercent(),
+			self::DEFAULT_QUANTITY,
+			$product->getCatnum(),
+			$product
+		);
+
+		$order->addItem($orderProduct);
+		$this->calculateTotalPrice($order);
+
+		return $orderProduct;
 	}
 
 	/**

@@ -17,6 +17,7 @@ use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Order\Item\OrderItemFacade;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
@@ -70,6 +71,11 @@ class OrderController extends AdminBaseController {
 	 */
 	private $orderStatusFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemFacade
+	 */
+	private $orderItemFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
@@ -79,7 +85,8 @@ class OrderController extends AdminBaseController {
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
 		EntityManager $em,
-		OrderStatusFacade $orderStatusFacade
+		OrderStatusFacade $orderStatusFacade,
+		OrderItemFacade $orderItemFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
@@ -90,6 +97,7 @@ class OrderController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->em = $em;
 		$this->orderStatusFacade = $orderStatusFacade;
+		$this->orderItemFacade = $orderItemFacade;
 	}
 
 	/**
@@ -153,6 +161,14 @@ class OrderController extends AdminBaseController {
 	 * @param int $orderId
 	 */
 	public function addProductAction(Request $request, $orderId) {
+		$productId = $request->get('productId');
+
+		$this->em->transactional(
+			function () use ($orderId, $productId) {
+				$this->orderItemFacade->addProductToOrder($orderId, $productId);
+			}
+		);
+
 		return $this->render('TODO');
 	}
 
