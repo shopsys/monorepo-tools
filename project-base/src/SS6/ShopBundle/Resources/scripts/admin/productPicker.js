@@ -32,12 +32,14 @@
 			$removeButton.toggle(productId !== '');
 		};
 
-		var makePicker = function () {
+		var makePicker = function (event) {
 			$.magnificPopup.open({
 				items: {src: $pickerButton.data('product-picker-url').replace('__instance_id__', instanceId)},
 				type: 'iframe',
 				closeOnBgClick: false
 			});
+
+			event.preventDefault();
 		};
 	};
 
