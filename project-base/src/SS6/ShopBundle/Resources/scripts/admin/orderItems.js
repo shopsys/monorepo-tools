@@ -41,7 +41,7 @@
 		var $collection = $item.closest('#js-order-items');
 		var index = $item.data('index');
 
-		SS6.validation.removeItemFromCollection('#order_items', index);
+		SS6.validation.removeItemFromCollection('#order_form_items', index);
 		$item.remove();
 
 		SS6.order.items.refreshCount($collection);
@@ -69,11 +69,11 @@
 		var index = SS6.order.items.getNewIndex($collection);
 
 		var item = prototype.replace(/__name__/g, index);
-		var $item = $(item);
+		var $item = $($.parseHTML(item));
 		$item.data('index', index);
 
 		$collection.append($item);
-		SS6.validation.addNewItemToCollection('#order_items', index);
+		SS6.validation.addNewItemToCollection('#order_form_items', index);
 
 		SS6.order.items.refreshCount($collection);
 		SS6.formChangeInfo.showInfo();
