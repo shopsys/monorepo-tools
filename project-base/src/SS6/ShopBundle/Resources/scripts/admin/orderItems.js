@@ -91,7 +91,11 @@
 				productId: productId
 			},
 			success: function(data) {
-				console.log(data);
+				var $orderItem = $($.parseHTML(data));
+				$collection.append($orderItem);
+			},
+			error: function() {
+				SS6.window({content: SS6.translator.trans('Zboží se nepodařilo vložit')});
 			}
 		});
 	};

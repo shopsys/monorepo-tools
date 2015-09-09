@@ -163,13 +163,29 @@ class OrderController extends AdminBaseController {
 	public function addProductAction(Request $request, $orderId) {
 		$productId = $request->get('productId');
 
-		$this->em->transactional(
+		$orderItem = $this->em->transactional(
 			function () use ($orderId, $productId) {
-				$this->orderItemFacade->addProductToOrder($orderId, $productId);
+				return $this->orderItemFacade->addProductToOrder($orderId, $productId);
 			}
 		);
 
-		return $this->render('TODO');
+		$order = $this->orderFacade->getById($orderId);
+
+		$orderData = new OrderData();
+		$orderData->setFromEntity($order);
+
+		$allOrderStatuses = $this->orderStatusFacade->getAll();
+		$form = $this->createForm(new OrderFormType($allOrderStatuses));
+		$form->setData($orderData);
+
+		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
+
+		return $this->render('@SS6Shop/Admin/Content/Order/addProduct.html.twig', [
+			'form' => $form->createView(),
+			'order' => $order,
+			'orderItem' => $orderItem,
+			'orderItemTotalPricesById' => $orderItemTotalPricesById,
+		]);
 	}
 
 	/**
