@@ -240,6 +240,9 @@ class OrderFacade {
 			if ($originalOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
 				$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 			}
+			if ($newOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
+				$this->orderProductFacade->addOrderProductsToStock($order->getProductItems());
+			}
 
 		}
 
