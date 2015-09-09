@@ -29,4 +29,9 @@ class ProductFilterData {
 	 */
 	public $flags = [];
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 */
+	public $brands = [];
+
 }
