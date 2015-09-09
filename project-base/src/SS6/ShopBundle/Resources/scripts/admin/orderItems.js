@@ -91,8 +91,15 @@
 				productId: productId
 			},
 			success: function(data) {
-				var $orderItem = $($.parseHTML(data));
+				var $data = $($.parseHTML(data));
+
+				var $orderItem = $data.filter('.js-order-item');
+				var index = $orderItem.data('index');
+
 				$collection.append($orderItem);
+				SS6.validation.addNewItemToCollection('#order_form_items', index);
+
+				SS6.order.items.refreshCount($collection);
 			},
 			error: function() {
 				SS6.window({content: SS6.translator.trans('Zboží se nepodařilo vložit')});
