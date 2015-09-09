@@ -16,6 +16,7 @@ class EnabledModuleDataFixture extends AbstractReferenceFixture {
 		$moduleFacade = $this->get(ModuleFacade::class);
 		/* @var $moduleFacade \SS6\ShopBundle\Model\Module\ModuleFacade */
 		$moduleFacade->setEnabled(ModuleList::PRODUCT_FILTER_COUNTS, true);
+		$moduleFacade->setEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS, true);
 
 		$manager->flush();
 	}

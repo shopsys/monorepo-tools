@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Module\ModuleFacade;
+use SS6\ShopBundle\Model\Module\ModuleList;
 use SS6\ShopBundle\Model\Order\Item\OrderProductService;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
@@ -41,13 +43,19 @@ class OrderProductFacade {
 	 */
 	private $orderProductService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 */
+	private $moduleFacade;
+
 	public function __construct(
 		EntityManager $em,
 		ProductHiddenRecalculator $productHiddenRecalculator,
 		ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
 		ProductVisibilityFacade $productVisibilityFacade,
-		OrderProductService $orderProductService
+		OrderProductService $orderProductService,
+		ModuleFacade $moduleFacade
 	) {
 		$this->em = $em;
 		$this->productHiddenRecalculator = $productHiddenRecalculator;
@@ -55,24 +63,29 @@ class OrderProductFacade {
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 		$this->productVisibilityFacade = $productVisibilityFacade;
 		$this->orderProductService = $orderProductService;
+		$this->moduleFacade = $moduleFacade;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
 	 */
 	public function subtractOrderProductsFromStock(array $orderProducts) {
-		$this->orderProductService->subtractOrderProductsFromStock($orderProducts);
-		$this->em->flush();
-		$this->runRecalculationsAfterStockQuantityChange($orderProducts);
+		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
+			$this->orderProductService->subtractOrderProductsFromStock($orderProducts);
+			$this->em->flush();
+			$this->runRecalculationsAfterStockQuantityChange($orderProducts);
+		}
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
 	 */
 	public function addOrderProductsToStock(array $orderProducts) {
-		$this->orderProductService->addOrderProductsToStock($orderProducts);
-		$this->em->flush();
-		$this->runRecalculationsAfterStockQuantityChange($orderProducts);
+		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
+			$this->orderProductService->addOrderProductsToStock($orderProducts);
+			$this->em->flush();
+			$this->runRecalculationsAfterStockQuantityChange($orderProducts);
+		}
 	}
 
 	/**
