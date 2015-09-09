@@ -162,7 +162,11 @@
 								<th ></th>
 							</tr>
 						</thead>
-						<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
+						<tbody
+							id="js-order-items"
+							data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}"
+							data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
+						>
 							{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
 								<tr class="js-order-item" data-index="{{ orderItemId }}">
 									<td>

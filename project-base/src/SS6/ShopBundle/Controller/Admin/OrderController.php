@@ -148,6 +148,15 @@ class OrderController extends AdminBaseController {
 	}
 
 	/**
+	 * @Route("/order/add-product/{orderId}", requirements={"orderId" = "\d+"}, condition="request.isXmlHttpRequest()")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $orderId
+	 */
+	public function addProductAction(Request $request, $orderId) {
+		return $this->render('TODO');
+	}
+
+	/**
 	 * @Route("/order/list/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */

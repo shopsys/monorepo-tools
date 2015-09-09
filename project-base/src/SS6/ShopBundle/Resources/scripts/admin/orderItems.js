@@ -83,7 +83,17 @@
 	};
 
 	SS6.order.items.addProduct = function(productId, productName) {
-		console.log(productId, productName);
+		var $collection = $('#js-order-items');
+		$.ajax({
+			url: $collection.data('order-product-add-url'),
+			method: 'POST',
+			data: {
+				productId: productId
+			},
+			success: function(data) {
+				console.log(data);
+			}
+		});
 	};
 
 	SS6.order.items.refreshCount = function($collection) {
