@@ -295,6 +295,7 @@ class ProductFormType extends AbstractType {
 				'usingStock',
 				'availability',
 				'price',
+				'vat',
 				'priceCalculationType',
 				'stockQuantity',
 				'outOfStockAction',
