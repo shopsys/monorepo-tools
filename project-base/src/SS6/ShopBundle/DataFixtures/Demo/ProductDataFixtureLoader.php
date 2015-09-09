@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Component\String\TransformString;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
@@ -219,9 +220,8 @@ class ProductDataFixtureLoader {
 			$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);
 			foreach ($valueTexts as $locale => $valueText) {
 				$productParameterValueData = new ProductParameterValueData();
+				$productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
 				$productParameterValueData->parameter = $this->parameters[$serializedParameterNames];
-				$productParameterValueData->locale = $locale;
-				$productParameterValueData->valueText = $valueText;
 				$productParameterValuesData[] = $productParameterValueData;
 			}
 		}

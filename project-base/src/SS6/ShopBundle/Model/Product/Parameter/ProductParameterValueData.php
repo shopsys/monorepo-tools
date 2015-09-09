@@ -5,33 +5,22 @@ namespace SS6\ShopBundle\Model\Product\Parameter;
 class ProductParameterValueData {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
-	 */
-	public $product;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter|null
 	 */
 	public $parameter;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValueData|null
 	 */
-	public $locale;
-
-	/**
-	 * @var string|null
-	 */
-	public $valueText;
+	public $parameterValueData;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue $productParameterValue
 	 */
 	public function setFromEntity(ProductParameterValue $productParameterValue) {
-		$this->product = $productParameterValue->getProduct();
 		$this->parameter = $productParameterValue->getParameter();
-		$this->locale = $productParameterValue->getValue()->getLocale();
-		$this->valueText = $productParameterValue->getValue()->getText();
+		$this->parameterValueData = new ParameterValueData();
+		$this->parameterValueData->setFromEntity($productParameterValue->getValue());
 	}
 
 }

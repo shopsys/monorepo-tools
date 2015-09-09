@@ -163,7 +163,7 @@ class ProductEditFormType extends AbstractType {
 					'type' => $this->productParameterValueFormTypeFactory->create(),
 					'constraints' => [
 						new UniqueCollection([
-							'fields' => ['parameter', 'locale'],
+							'fields' => ['parameter', 'parameterValueData.locale'],
 							'message' => 'Každý parametr může být nastaven pouze jednou',
 						]),
 					],

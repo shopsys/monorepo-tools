@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Transformers;
 
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -23,7 +24,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 			foreach ($normData as $productParameterValueData) {
 				/* @var $productParameterValueData \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData */
 				$parameterId = $productParameterValueData->parameter->getId();
-				$locale = $productParameterValueData->locale;
+				$locale = $productParameterValueData->parameterValueData->locale;
 
 				if (array_key_exists($parameterId, $normValue)) {
 					$productParameterValuesLocalizedData = $normValue[$parameterId];
@@ -32,7 +33,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 				}
 
 				$productParameterValuesLocalizedData->parameter = $productParameterValueData->parameter;
-				$productParameterValuesLocalizedData->valueText[$locale] = $productParameterValueData->valueText;
+				$productParameterValuesLocalizedData->valueText[$locale] = $productParameterValueData->parameterValueData->text;
 
 				$normValue[$parameterId] = $productParameterValuesLocalizedData;
 			}
@@ -58,8 +59,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 					if ($valueText !== null) {
 						$productParameterValueData = new ProductParameterValueData();
 						$productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
-						$productParameterValueData->locale = $locale;
-						$productParameterValueData->valueText = $valueText;
+						$productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
 
 						$normData[] = $productParameterValueData;
 					}
