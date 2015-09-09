@@ -273,6 +273,9 @@ class OrderFacade {
 	 */
 	public function deleteById($orderId) {
 		$order = $this->orderRepository->getById($orderId);
+		if ($order->getStatus()->getType() !== OrderStatus::TYPE_CANCELED) {
+			$this->orderProductFacade->addOrderProductsToStock($order->getProductItems());
+		}
 		$order->markAsDeleted();
 		$this->em->flush();
 	}

@@ -69,6 +69,15 @@ class OrderProductFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
 	 */
+	public function addOrderProductsToStock(array $orderProducts) {
+		$this->orderProductService->addOrderProductsToStock($orderProducts);
+		$this->em->flush();
+		$this->runRecalculationsAfterStockQuantityChange($orderProducts);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+	 */
 	private function runRecalculationsAfterStockQuantityChange(array $orderProducts) {
 		$relevantProducts = $this->orderProductService->getProductsUsingStockFromOrderProducts($orderProducts);
 		foreach ($relevantProducts as $relevantProduct) {
