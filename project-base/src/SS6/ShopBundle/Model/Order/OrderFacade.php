@@ -219,6 +219,7 @@ class OrderFacade {
 	 */
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
+		$originalOrderStatus = $order->getStatus();
 		$newOrderStatus = $this->orderStatusRepository->getById($orderData->statusId);
 		$orderEditResult = $this->orderService->editOrder($order, $orderData, $newOrderStatus);
 
@@ -235,6 +236,9 @@ class OrderFacade {
 				->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
 			if ($mailTemplate->isSendMail()) {
 				$this->orderMailFacade->sendEmail($order);
+			}
+			if ($originalOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
+				$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 			}
 
 		}
