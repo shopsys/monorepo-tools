@@ -8,6 +8,9 @@
 		$('#js-order-items').on('click', '.js-order-item-remove', SS6.order.items.onRemoveItemClick);
 		$('#js-order-item-add').on('click', SS6.order.items.onAddItemClick);
 		SS6.order.items.refreshCount($('#js-order-items'));
+
+		var productPicker = new SS6.productPicker.ProductPicker($('#js-order-item-add-product'), SS6.order.items.addProduct);
+		productPicker.init();
 	};
 
 	SS6.order.items.onRemoveItemClick = function(event) {
@@ -77,6 +80,10 @@
 
 		SS6.order.items.refreshCount($collection);
 		SS6.formChangeInfo.showInfo();
+	};
+
+	SS6.order.items.addProduct = function(productId, productName) {
+		console.log(productId, productName);
 	};
 
 	SS6.order.items.refreshCount = function($collection) {
