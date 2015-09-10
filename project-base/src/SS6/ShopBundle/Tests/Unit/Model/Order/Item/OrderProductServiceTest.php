@@ -63,7 +63,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, $product);
 
 		$orderProductService = new OrderProductService();
-		$orderProductService->addOrderProductsToStock([$orderProduct]);
+		$orderProductService->returnOrderProductsToStock([$orderProduct]);
 
 		$this->assertSame($productStockQuantity + $orderProductQuantity, $product->getStockQuantity());
 	}
@@ -82,7 +82,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, $product);
 
 		$orderProductService = new OrderProductService();
-		$orderProductService->addOrderProductsToStock([$orderProduct]);
+		$orderProductService->returnOrderProductsToStock([$orderProduct]);
 
 		$this->assertSame($productStockQuantity, $product->getStockQuantity());
 	}

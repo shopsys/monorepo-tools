@@ -82,7 +82,7 @@ class OrderProductFacade {
 	 */
 	public function addOrderProductsToStock(array $orderProducts) {
 		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
-			$this->orderProductService->addOrderProductsToStock($orderProducts);
+			$this->orderProductService->returnOrderProductsToStock($orderProducts);
 			$this->em->flush();
 			$this->runRecalculationsAfterStockQuantityChange($orderProducts);
 		}
