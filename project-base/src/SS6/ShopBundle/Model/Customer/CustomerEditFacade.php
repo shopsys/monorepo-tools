@@ -208,9 +208,6 @@ class CustomerEditFacade {
 	public function delete($userId) {
 		$user = $this->userRepository->getUserById($userId);
 
-		$orders = $this->orderRepository->findByUserId($userId);
-		$this->orderService->detachCustomer($orders);
-
 		$this->em->remove($user);
 		$this->em->flush();
 	}
