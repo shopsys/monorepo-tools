@@ -14,7 +14,10 @@
 					<div class="js-category-tree-item-line">
 						<span class="js-category-tree-item-handle">
 							<span class="form-tree__item__icon form-tree__item__icon--level sprite sprite-level"></span>
-							<a href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryDetail.category.id, domainId: selectedDomainId}) }}" class="form-tree__item__name">
+							<a
+								href="{{ url('admin_bestsellingproduct_detail', {categoryId: categoryDetail.category.id, domainId: selectedDomainId}) }}"
+								class="form-tree__item__name form-tree__item__name--link"
+							>
 								{{ categoryDetail.category.name }}
 							</a>
 							({{ bestsellingProductsInCategories[categoryDetail.category.id] }})

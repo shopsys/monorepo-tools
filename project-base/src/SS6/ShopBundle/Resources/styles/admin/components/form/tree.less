@@ -132,11 +132,13 @@ Form tree
 		&__name {
 			display: block;
 
-			color: @color-link;
-			text-decoration: underline;
+			&--link {
+				color: @color-link;
+				text-decoration: underline;
 
-			.form-tree__item__click:hover & {
-				color: @color-link-hover;
+				.form-tree__item__click:hover & {
+					color: @color-link-hover;
+				}
 			}
 
 			.form-tree--dragable & {
