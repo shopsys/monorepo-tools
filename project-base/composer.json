@@ -23,10 +23,6 @@
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/sustmi/postgres-search-bundle.git"
-		},
-		{
-			"type": "vcs",
 			"url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git"
 		}
 	],
@@ -46,7 +42,7 @@
 		"fp/jsformvalidator-bundle": "dev-translate-invalid-message#bb2be7e",
 		"helios-ag/fm-elfinder-bundle": "4.0.2",
 		"incenteev/composer-parameter-handler": "2.1.0",
-		"intaro/postgres-search-bundle": "dev-support-mapping-without-options#810f7ab610",
+		"intaro/postgres-search-bundle": "dev-master#0eb26e0812",
 		"intervention/image": "2.0.17",
 		"jms/translation-bundle": "dev-fix-external-translations#527da12",
 		"phing/phing": "2.9.1",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "caa0f90da7bcf0bb809f5534c3804882",
+    "hash": "a70581fc08e4bf2469bb0f6aeaea598b",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1659,17 +1659,17 @@
         },
         {
             "name": "intaro/postgres-search-bundle",
-            "version": "dev-support-mapping-without-options",
+            "version": "dev-master",
             "target-dir": "Intaro/PostgresSearchBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sustmi/postgres-search-bundle.git",
-                "reference": "810f7ab610"
+                "url": "https://github.com/1on/postgres-search-bundle.git",
+                "reference": "0eb26e0812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/postgres-search-bundle/zipball/810f7ab61004e726158c52d4eabeb467fb586552",
-                "reference": "810f7ab610",
+                "url": "https://api.github.com/repos/1on/postgres-search-bundle/zipball/0eb26e0812246305dd2fa647536c94e23930c26d",
+                "reference": "0eb26e0812",
                 "shasum": ""
             },
             "require": {
@@ -1683,6 +1683,7 @@
                     "Intaro\\PostgresSearchBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1695,15 +1696,12 @@
             "description": "Tools to use full-text search PostgreSQL in Doctrine.",
             "homepage": "https://github.com/ddmaster/PostgresSearchBundle",
             "keywords": [
+                "Symfony2",
                 "doctrine2",
                 "postgresql",
-                "search",
-                "symfony2"
+                "search"
             ],
-            "support": {
-                "source": "https://github.com/sustmi/postgres-search-bundle/tree/support-mapping-without-options"
-            },
-            "time": "2015-08-14 10:52:02"
+            "time": "2015-09-10 08:46:47"
         },
         {
             "name": "intervention/image",
@@ -4880,7 +4878,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/4bfd21a02ffaa860a9d4ebec06071a8ad7085dd4",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/51950402bd17f9938c99aa837d3525a8b48cd0fc",
                 "reference": "41365ce",
                 "shasum": ""
             },
