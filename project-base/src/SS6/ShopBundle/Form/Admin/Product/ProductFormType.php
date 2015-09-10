@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
+use SS6\ShopBundle\Form\CategoriesType;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Product\Product;
@@ -247,6 +248,7 @@ class ProductFormType extends AbstractType {
 		foreach ($this->domainConfigs as $domainConfig) {
 			$builder->get('categoriesByDomainId')->add($domainConfig->getId(), FormType::CATEGORIES, [
 				'required' => false,
+				CategoriesType::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => $domainConfig->getId(),
 			]);
 		}
 

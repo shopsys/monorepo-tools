@@ -73,7 +73,7 @@ class Category extends AbstractTranslatableEntity {
 	private $rgt;
 
 	/**
-	 * @internal
+	 * @var \SS6\ShopBundle\Model\Category\CategoryDomain[]|\Doctrine\Common\Collections\ArrayCollection
 	 *
 	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Category\CategoryDomain", mappedBy="category", fetch="EXTRA_LAZY")
 	 */
@@ -173,6 +173,20 @@ class Category extends AbstractTranslatableEntity {
 	 */
 	public function getRgt() {
 		return $this->rgt;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\CategoryDomain
+	 */
+	public function getCategoryDomain($domainId) {
+		foreach ($this->domains as $categoryDomain) {
+			if ($categoryDomain->getDomainId() === $domainId) {
+				return $categoryDomain;
+			}
+		}
+
+		throw new \SS6\ShopBundle\Model\Category\Exception\CategoryDomainNotFoundException($this->id, $domainId);
 	}
 
 	/**
