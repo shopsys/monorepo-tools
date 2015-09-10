@@ -31,6 +31,11 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 			if (!array_key_exists($parameterId, $normValue)) {
 				$normValue[$parameterId] = new ProductParameterValuesLocalizedData();
 				$normValue[$parameterId]->parameter = $productParameterValueData->parameter;
+				$normValue[$parameterId]->valueText = [];
+			}
+
+			if (array_key_exists($locale, $normValue[$parameterId]->valueText)) {
+				throw new \Symfony\Component\Form\Exception\TransformationFailedException('Duplicate parameter');
 			}
 
 			$normValue[$parameterId]->valueText[$locale] = $productParameterValueData->parameterValueData->text;
