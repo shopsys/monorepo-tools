@@ -54,7 +54,7 @@ class OrderItemFacade {
 	 * @param int $productId
 	 * @return \SS6\ShopBundle\Model\Order\Item\OrderProduct
 	 */
-	public function addProductToOrder($orderId, $productId) {
+	public function createOrderProductInOrder($orderId, $productId) {
 		$order = $this->orderRepository->getById($orderId);
 		$product = $this->productRepository->getById($productId);
 
@@ -64,7 +64,7 @@ class OrderItemFacade {
 			$order->getCustomer()
 		);
 
-		$orderProduct = $this->orderService->addProduct($order, $product, $productPrice);
+		$orderProduct = $this->orderService->createOrderProductInOrder($order, $product, $productPrice);
 
 		$this->em->persist($orderProduct);
 		$this->em->flush([

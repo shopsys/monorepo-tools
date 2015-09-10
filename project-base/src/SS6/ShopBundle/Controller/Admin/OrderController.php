@@ -165,7 +165,7 @@ class OrderController extends AdminBaseController {
 
 		$orderItem = $this->em->transactional(
 			function () use ($orderId, $productId) {
-				return $this->orderItemFacade->addProductToOrder($orderId, $productId);
+				return $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
 			}
 		);
 

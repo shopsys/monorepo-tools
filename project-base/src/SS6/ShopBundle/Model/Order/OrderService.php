@@ -96,7 +96,7 @@ class OrderService {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productPrice
 	 * @return \SS6\ShopBundle\Model\Order\Item\OrderProduct
 	 */
-	public function addProduct(Order $order, Product $product, Price $productPrice) {
+	public function createOrderProductInOrder(Order $order, Product $product, Price $productPrice) {
 		$orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
 		$orderProduct = new OrderProduct(
