@@ -132,7 +132,7 @@ class ProductEditDataFactory {
 	 */
 	private function getParametersData(Product $product) {
 		$productParameterValuesData = [];
-		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductEagerLoaded($product);
+		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
 		foreach ($productParameterValues as $productParameterValue) {
 			$productParameterValueData = new ProductParameterValueData();
 			$productParameterValueData->setFromEntity($productParameterValue);
