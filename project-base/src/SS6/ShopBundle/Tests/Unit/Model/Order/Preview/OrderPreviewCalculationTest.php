@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
 use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -34,7 +34,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		$transportPrice = new Price(10, 12, 2);
 		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400, $vat);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
-		$quantifiedItemsDiscounts = [null, null];
+		$quantifiedProductsDiscounts = [null, null];
 		$currency = new Currency(new CurrencyData());
 
 		$quantifiedProductPriceCalculationMock = $this->getMockBuilder(QuantifiedProductPriceCalculation::class)
@@ -49,7 +49,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$quantifiedProductDiscountCalculationMock->expects($this->once())->method('calculateDiscounts')
-			->will($this->returnValue($quantifiedItemsDiscounts));
+			->will($this->returnValue($quantifiedProductsDiscounts));
 
 		$paymentPriceCalculationMock = $this->getMockBuilder(PaymentPriceCalculation::class)
 			->setMethods(['calculatePrice', '__construct'])
@@ -74,10 +74,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			$orderPriceCalculationMock
 		);
 
-		$quantifiedItemMock = $this->getMock(QuantifiedItem::class, [], [], '', false);
-		$quantifiedItems = [
-			$quantifiedItemMock,
-			$quantifiedItemMock,
+		$quantifiedProductMock = $this->getMock(QuantifiedProduct::class, [], [], '', false);
+		$quantifiedProducts = [
+			$quantifiedProductMock,
+			$quantifiedProductMock,
 		];
 
 		$transport = $this->getMock(Transport::class, [], [], '', false);
@@ -86,13 +86,13 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		$orderPreview = $previewCalculation->calculatePreview(
 			$currency,
 			$domain->getId(),
-			$quantifiedItems,
+			$quantifiedProducts,
 			$transport,
 			$payment,
 			null
 		);
 
-		$this->assertSame($quantifiedItems, $orderPreview->getQuantifiedItems());
+		$this->assertSame($quantifiedProducts, $orderPreview->getQuantifiedProducts());
 		$this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertSame($payment, $orderPreview->getPayment());
 		$this->assertSame($paymentPrice, $orderPreview->getPaymentPrice());
@@ -113,7 +113,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 
 		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400, $vat);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
-		$quantifiedItemsDiscounts = [null, null];
+		$quantifiedProductsDiscounts = [null, null];
 		$currency = new Currency(new CurrencyData());
 
 		$quantifiedProductPriceCalculationMock = $this->getMockBuilder(QuantifiedProductPriceCalculation::class)
@@ -128,7 +128,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$quantifiedProductDiscountCalculationMock->expects($this->once())->method('calculateDiscounts')
-			->will($this->returnValue($quantifiedItemsDiscounts));
+			->will($this->returnValue($quantifiedProductsDiscounts));
 
 		$paymentPriceCalculationMock = $this->getMockBuilder(PaymentPriceCalculation::class)
 			->setMethods(['calculatePrice', '__construct'])
@@ -152,22 +152,22 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			$orderPriceCalculationMock
 		);
 
-		$quantifiedItemMock = $this->getMock(QuantifiedItem::class, [], [], '', false);
-		$quantifiedItems = [
-			$quantifiedItemMock,
-			$quantifiedItemMock,
+		$quantifiedProductMock = $this->getMock(QuantifiedProduct::class, [], [], '', false);
+		$quantifiedProducts = [
+			$quantifiedProductMock,
+			$quantifiedProductMock,
 		];
 
 		$orderPreview = $previewCalculation->calculatePreview(
 			$currency,
 			$domain->getId(),
-			$quantifiedItems,
+			$quantifiedProducts,
 			null,
 			null,
 			null
 		);
 
-		$this->assertSame($quantifiedItems, $orderPreview->getQuantifiedItems());
+		$this->assertSame($quantifiedProducts, $orderPreview->getQuantifiedProducts());
 		$this->assertSame($quantifiedItemsPrices, $orderPreview->getQuantifiedItemsPrices());
 		$this->assertNull($orderPreview->getPayment());
 		$this->assertNull($orderPreview->getPaymentPrice());

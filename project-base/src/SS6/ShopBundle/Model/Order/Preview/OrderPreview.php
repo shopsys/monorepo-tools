@@ -9,9 +9,9 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class OrderPreview {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex]
+	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
 	 */
-	private $quantifiedItems;
+	private $quantifiedProducts;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
@@ -59,7 +59,7 @@ class OrderPreview {
 	private $roundingAmount;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
 	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
 	 * @param \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
@@ -71,7 +71,7 @@ class OrderPreview {
 	 * @param string|null $roundingAmount
 	 */
 	public function __construct(
-		array $quantifiedItems,
+		array $quantifiedProducts,
 		array $quantifiedItemsPrices,
 		array $quantifiedItemsDiscounts,
 		Price $productsPrice,
@@ -82,7 +82,7 @@ class OrderPreview {
 		Price $paymentPrice = null,
 		$roundingAmount = null
 	) {
-		$this->quantifiedItems = $quantifiedItems;
+		$this->quantifiedProducts = $quantifiedProducts;
 		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
 		$this->quantifiedItemsDiscounts = $quantifiedItemsDiscounts;
 		$this->productsPrice = $productsPrice;
@@ -95,10 +95,10 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[quantifiedItemIndex]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
 	 */
-	public function getQuantifiedItems() {
-		return $this->quantifiedItems;
+	public function getQuantifiedProducts() {
+		return $this->quantifiedProducts;
 	}
 
 	/**
