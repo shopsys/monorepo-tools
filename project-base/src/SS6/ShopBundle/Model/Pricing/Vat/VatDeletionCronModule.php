@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
-use SS6\ShopBundle\Component\Cron\CronServiceInterface;
+use SS6\ShopBundle\Component\Cron\CronModuleInterface;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class VatDeletionCronService implements CronServiceInterface {
+class VatDeletionCronModule implements CronModuleInterface {
 
 	const PRODUCTS_REPLACE_VAT_TIMELIMIT = 240;
 

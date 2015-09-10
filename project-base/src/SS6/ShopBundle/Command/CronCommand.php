@@ -33,9 +33,9 @@ class CronCommand extends ContainerAwareCommand {
 		$mutex = $mutexFactory->getCronMutex();
 		if ($mutex->acquireLock(0)) {
 			if ($input->getOption(self::ARGUMENT_MODULE) === null) {
-				$cronFacade->runServicesByTime($this->getActualRoundedTime());
+				$cronFacade->runModulesByTime($this->getActualRoundedTime());
 			} else {
-				$cronFacade->runServiceByServiceId($input->getOption(self::ARGUMENT_MODULE));
+				$cronFacade->runModuleByModuleId($input->getOption(self::ARGUMENT_MODULE));
 			}
 			$mutex->releaseLock();
 		} else {

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Component\Cron\Config;
 
 use SS6\ShopBundle\Component\Cron\Config\CronConfigDefinition;
-use SS6\ShopBundle\Component\Cron\Config\CronServiceConfig;
+use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronTimeResolver;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -53,9 +53,9 @@ class CronConfigLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[]
+	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
-	public function loadCronServiceConfigsFromYaml($filename) {
+	public function loadCronModuleConfigsFromYaml($filename) {
 		if (!$this->filesystem->exists($filename)) {
 			throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException(
 				'File ' . $filename . ' does not exist'
@@ -67,39 +67,39 @@ class CronConfigLoader {
 		$parsedConfig = $this->yamlParser->parse(file_get_contents($filename));
 		$processedConfig = $this->processor->processConfiguration($cronConfigDefinition, [$parsedConfig]);
 
-		return $this->loadCronServiceConfigsFromArray($processedConfig);
+		return $this->loadCronModuleConfigsFromArray($processedConfig);
 	}
 
 	/**
 	 * @param array $processedConfig
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[]
+	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
-	private function loadCronServiceConfigsFromArray($processedConfig) {
-		$cronServiceConfigs = [];
+	private function loadCronModuleConfigsFromArray($processedConfig) {
+		$cronModuleConfigs = [];
 
-		foreach ($processedConfig as $cronServiceConfigArray) {
-			$cronServiceConfigs[] = $this->processCronServiceConfigArray($cronServiceConfigArray);
+		foreach ($processedConfig as $cronModuleConfigArray) {
+			$cronModuleConfigs[] = $this->processCronModuleConfigArray($cronModuleConfigArray);
 		}
 
-		return $cronServiceConfigs;
+		return $cronModuleConfigs;
 	}
 
 	/**
-	 * @param array $cronServiceConfigArray
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig
+	 * @param array $cronModuleConfigArray
+	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig
 	 */
-	private function processCronServiceConfigArray(array $cronServiceConfigArray) {
-		$serviceId = $cronServiceConfigArray[CronConfigDefinition::CONFIG_SERVICE];
-		$timeMinutes = $cronServiceConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_MINUTES];
-		$timeHours = $cronServiceConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_HOURS];
+	private function processCronModuleConfigArray(array $cronModuleConfigArray) {
+		$moduleId = $cronModuleConfigArray[CronConfigDefinition::CONFIG_SERVICE];
+		$timeMinutes = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_MINUTES];
+		$timeHours = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_HOURS];
 
-		if (!$this->container->has($serviceId)) {
-			throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronServiceNotFoundException($serviceId);
+		if (!$this->container->has($moduleId)) {
+			throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronModuleNotFoundException($moduleId);
 		}
 		$this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
 		$this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
 
-		return new CronServiceConfig($this->container->get($serviceId), $serviceId, $timeMinutes, $timeHours);
+		return new CronModuleConfig($this->container->get($moduleId), $moduleId, $timeMinutes, $timeHours);
 	}
 
 }

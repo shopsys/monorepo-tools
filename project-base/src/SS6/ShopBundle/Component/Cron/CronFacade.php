@@ -26,28 +26,28 @@ class CronFacade {
 	/**
 	 * @param \DateTime $roundedTime
 	 */
-	public function runServicesByTime(DateTime $roundedTime) {
-		$this->runServices($this->cronConfig->getCronServiceConfigsByTime($roundedTime));
+	public function runModulesByTime(DateTime $roundedTime) {
+		$this->runModules($this->cronConfig->getCronModuleConfigsByTime($roundedTime));
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[] $cronServiceConfigs
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
 	 */
-	private function runServices(array $cronServiceConfigs) {
+	private function runModules(array $cronModuleConfigs) {
 		$this->logger->addInfo('====== Start of cron ======');
 
-		foreach ($cronServiceConfigs as $cronServiceConfig) {
-			$this->logger->addInfo('Start of ' . $cronServiceConfig->getServiceId());
-			$cronServiceConfig->getCronService()->run($this->logger);
+		foreach ($cronModuleConfigs as $cronModuleConfig) {
+			$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
+			$cronModuleConfig->getCronModule()->run($this->logger);
 		}
 
 		$this->logger->addInfo('======= End of cron =======');
 	}
 
 	/**
-	 * @param string $serviceId
+	 * @param string $moduleId
 	 */
-	public function runServiceByServiceId($serviceId) {
-		$this->runServices([$this->cronConfig->getCronServiceConfigByServiceId($serviceId)]);
+	public function runModuleByModuleId($moduleId) {
+		$this->runModules([$this->cronConfig->getCronModuleConfigByModuleId($moduleId)]);
 	}
 }

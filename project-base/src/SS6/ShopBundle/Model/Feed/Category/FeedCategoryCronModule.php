@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Feed\Category;
 
-use SS6\ShopBundle\Component\Cron\CronServiceInterface;
+use SS6\ShopBundle\Component\Cron\CronModuleInterface;
 use SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class FeedCategoryCronService implements CronServiceInterface {
+class FeedCategoryCronModule implements CronModuleInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade

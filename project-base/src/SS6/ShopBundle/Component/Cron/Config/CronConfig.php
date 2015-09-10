@@ -13,37 +13,37 @@ class CronConfig {
 	private $cronTimeResolver;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[]
+	 * @var \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
-	private $cronServiceConfigs;
+	private $cronModuleConfigs;
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Cron\CronTimeResolver $cronTimeResolver
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[] $cronServiceConfigs
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
 	 */
 	public function __construct(
 		CronTimeResolver $cronTimeResolver,
-		array $cronServiceConfigs
+		array $cronModuleConfigs
 	) {
-		$this->cronServiceConfigs = $cronServiceConfigs;
+		$this->cronModuleConfigs = $cronModuleConfigs;
 		$this->cronTimeResolver = $cronTimeResolver;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[]
+	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function getAll() {
-		return $this->cronServiceConfigs;
+		return $this->cronModuleConfigs;
 	}
 
 	/**
 	 * @param \DateTime $roundedTime
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronServiceConfig[]
+	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
-	public function getCronServiceConfigsByTime(DateTime $roundedTime) {
+	public function getCronModuleConfigsByTime(DateTime $roundedTime) {
 		$matchedCronConfigs = [];
 
-		foreach ($this->cronServiceConfigs as $cronConfig) {
+		foreach ($this->cronModuleConfigs as $cronConfig) {
 			if ($this->cronTimeResolver->isValidAtTime($cronConfig, $roundedTime)) {
 				$matchedCronConfigs[] = $cronConfig;
 			}
@@ -53,16 +53,16 @@ class CronConfig {
 	}
 
 	/**
-	 * @param string $serviceId
+	 * @param string $moduleId
 	 */
-	public function getCronServiceConfigByServiceId($serviceId) {
-		foreach ($this->cronServiceConfigs as $cronConfig) {
-			if ($cronConfig->getServiceId() === $serviceId) {
+	public function getCronModuleConfigByModuleId($moduleId) {
+		foreach ($this->cronModuleConfigs as $cronConfig) {
+			if ($cronConfig->getModuleId() === $moduleId) {
 				return $cronConfig;
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronServiceConfigNotFoundException($serviceId);
+		throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($moduleId);
 	}
 
 }

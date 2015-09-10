@@ -28,9 +28,9 @@ class CronConfigFactory {
 	 * @return \SS6\ShopBundle\Component\Cron\Config\CronConfig
 	 */
 	public function create($ymlFilepath) {
-		$cronServiceConfigs = $this->cronConfigLoader->loadCronServiceConfigsFromYaml($ymlFilepath);
+		$cronModuleConfigs = $this->cronConfigLoader->loadCronModuleConfigsFromYaml($ymlFilepath);
 
-		return new CronConfig($this->cronTimeResolver, $cronServiceConfigs);
+		return new CronConfig($this->cronTimeResolver, $cronModuleConfigs);
 	}
 
 }

@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
-use SS6\ShopBundle\Component\Cron\CronServiceInterface;
+use SS6\ShopBundle\Component\Cron\CronModuleInterface;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductPriceCronService implements CronServiceInterface {
+class ProductPriceCronModule implements CronModuleInterface {
 
 	const PRODUCT_PRICE_RECALCULATIONS_TIMELIMIT = 20;
 

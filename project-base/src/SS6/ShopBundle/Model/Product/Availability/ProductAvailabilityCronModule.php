@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Product\Availability;
 
-use SS6\ShopBundle\Component\Cron\CronServiceInterface;
+use SS6\ShopBundle\Component\Cron\CronModuleInterface;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductAvailabilityCronService implements CronServiceInterface {
+class ProductAvailabilityCronModule implements CronModuleInterface {
 
 	const PRODUCTS_AVAILABILITY_RECALCULATIONS_TIMELIMIT = 20;
 
