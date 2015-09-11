@@ -97,7 +97,7 @@
 				var index = $orderItem.data('index');
 
 				$collection.append($orderItem);
-				SS6.validation.addNewItemToCollection('#order_form_items', index);
+				$($('#order_form_items')).jsFormValidator('addPrototype', index);
 
 				SS6.order.items.refreshCount($collection);
 
