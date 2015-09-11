@@ -17,6 +17,7 @@ class AppKernel extends Kernel {
 			new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
 			new Intaro\PostgresSearchBundle\IntaroPostgresSearchBundle(),
 			new JMS\TranslationBundle\JMSTranslationBundle(),
+			new Presta\SitemapBundle\PrestaSitemapBundle(),
 			new Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
