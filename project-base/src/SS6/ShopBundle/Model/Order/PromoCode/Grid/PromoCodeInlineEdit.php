@@ -39,13 +39,6 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return self::class;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
 	 * @return int
 	 */

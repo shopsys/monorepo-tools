@@ -32,13 +32,6 @@ class AvailabilityInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.product.availability.availability_inline_edit';
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
 	 * @return int
 	 */

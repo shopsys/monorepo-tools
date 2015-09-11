@@ -80,12 +80,4 @@ class CurrencyInlineEdit extends AbstractGridInlineEdit {
 			return new CurrencyFormType(CurrencyFormType::EXCHANGE_RATE_IS_NOT_READ_ONLY);
 		}
 	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.pricing.currency.currency_inline_edit';
-	}
-
 }

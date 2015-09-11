@@ -72,12 +72,4 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 	protected function getFormType($rowId) {
 		return new OrderStatusFormType();
 	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.order.status.grid.order_status_inline_edit';
-	}
-
 }

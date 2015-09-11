@@ -30,14 +30,6 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 
 		parent::__construct($formFactory, $parameterGridFactory);
 	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.product.parameter.parameter_inline_edit';
-	}
-
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 * @return int

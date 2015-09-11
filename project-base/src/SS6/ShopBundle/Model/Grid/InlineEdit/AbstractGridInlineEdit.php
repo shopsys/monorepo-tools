@@ -87,7 +87,9 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	/**
 	 * @return string
 	 */
-	abstract public function getServiceName();
+	public function getServiceName() {
+		return get_called_class();
+	}
 
 	/**
 	 * @param int $rowId

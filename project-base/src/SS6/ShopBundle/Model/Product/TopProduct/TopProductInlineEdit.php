@@ -51,13 +51,6 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.product.top_product.top_product_inline_edit';
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
 	 * @return int
 	 */

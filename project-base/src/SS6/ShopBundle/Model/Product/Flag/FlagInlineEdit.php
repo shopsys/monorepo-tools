@@ -32,13 +32,6 @@ class FlagInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.product.flag.flag_inline_edit';
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 * @return int
 	 */

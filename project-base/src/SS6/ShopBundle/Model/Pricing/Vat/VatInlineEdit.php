@@ -32,13 +32,6 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.pricing.vat.vat_inline_edit';
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
 	 * @return int
 	 */

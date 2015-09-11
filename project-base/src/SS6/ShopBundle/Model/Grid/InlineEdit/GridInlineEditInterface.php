@@ -25,11 +25,6 @@ interface GridInlineEditInterface {
 	public function getGrid();
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName();
-
-	/**
 	 * @return bool
 	 */
 	public function canAddNewRow();

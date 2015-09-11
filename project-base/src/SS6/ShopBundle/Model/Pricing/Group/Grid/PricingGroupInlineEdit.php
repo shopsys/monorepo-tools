@@ -71,12 +71,4 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 	protected function getFormType($rowId) {
 		return new PricingGroupFormType();
 	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.pricing.group.grid.pricing_group_inline_edit';
-	}
-
 }

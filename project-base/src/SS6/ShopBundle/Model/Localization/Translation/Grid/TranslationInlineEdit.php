@@ -63,13 +63,6 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getServiceName() {
-		return 'ss6.shop.localization.translation.grid.translation_inline_edit';
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function canAddNewRow() {
