@@ -130,6 +130,21 @@ services:
   ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
 
+  ss6.shop.component.sitemap.sitemap_dumper_factory:
+    class: SS6\ShopBundle\Component\Sitemap\SitemapDumperFactory
+    arguments:
+      - @event_dispatcher
+
+  ss6.shop.component.sitemap.sitemap_facade:
+    class: SS6\ShopBundle\Component\Sitemap\SitemapFacade
+    arguments:
+      - %ss6.sitemaps_dir%
+
+  ss6.shop.component.sitemap.sitemap_listener:
+    class: SS6\ShopBundle\Component\Sitemap\SitemapListener
+    tags:
+      - { name: presta.sitemap.listener }
+
   ss6.shop.component.translation.php_file_extractor:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractor
     factory_service: ss6.shop.component.translation.php_file_extractor_factory
