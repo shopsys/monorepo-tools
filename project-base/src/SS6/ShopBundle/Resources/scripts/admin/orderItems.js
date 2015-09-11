@@ -100,6 +100,8 @@
 				SS6.validation.addNewItemToCollection('#order_form_items', index);
 
 				SS6.order.items.refreshCount($collection);
+
+				SS6.window({content: SS6.translator.trans('Zboží bylo uloženo do objednávky')});
 			},
 			error: function() {
 				SS6.window({content: SS6.translator.trans('Zboží se nepodařilo vložit')});
