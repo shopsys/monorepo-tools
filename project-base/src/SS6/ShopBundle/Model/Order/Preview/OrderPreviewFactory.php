@@ -77,7 +77,7 @@ class OrderPreviewFactory {
 		return $this->create(
 			$currency,
 			$this->domain->getId(),
-			$this->cart->getQuantifiedItems(),
+			$this->cart->getQuantifiedProducts(),
 			$transport,
 			$payment,
 			$this->currentCustomer->findCurrentUser(),
@@ -88,7 +88,7 @@ class OrderPreviewFactory {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
@@ -98,7 +98,7 @@ class OrderPreviewFactory {
 	public function create(
 		Currency $currency,
 		$domainId,
-		array $quantifiedItems,
+		array $quantifiedProducts,
 		Transport $transport = null,
 		Payment $payment = null,
 		User $user = null,
@@ -107,7 +107,7 @@ class OrderPreviewFactory {
 		return $this->orderPreviewCalculation->calculatePreview(
 			$currency,
 			$domainId,
-			$quantifiedItems,
+			$quantifiedProducts,
 			$transport,
 			$payment,
 			$user,

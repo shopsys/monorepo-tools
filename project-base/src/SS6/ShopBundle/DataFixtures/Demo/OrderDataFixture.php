@@ -10,7 +10,7 @@ use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -525,15 +525,15 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderPreviewFactory = $this->get(OrderPreviewFactory::class);
 		/* @var $orderPreviewFactory \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
 
-		$quantifiedItems = [];
+		$quantifiedProducts = [];
 		foreach ($products as $productReferenceName => $quantity) {
 			$product = $this->getReference($productReferenceName);
-			$quantifiedItems[] = new QuantifiedItem($product, $quantity);
+			$quantifiedProducts[] = new QuantifiedProduct($product, $quantity);
 		}
 		$orderPreview = $orderPreviewFactory->create(
 			$orderData->currency,
 			$orderData->domainId,
-			$quantifiedItems,
+			$quantifiedProducts,
 			$orderData->transport,
 			$orderData->payment,
 			$user,

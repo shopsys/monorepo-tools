@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedItem;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 
 class Cart {
 
@@ -52,15 +52,15 @@ class Cart {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[cartItemKey]
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
 	 */
-	public function getQuantifiedItems() {
-		$quantifiedItems = [];
-		foreach ($this->getItems() as $cartItemKey => $cartItem) {
-			$quantifiedItems[$cartItemKey] = new QuantifiedItem($cartItem->getProduct(), $cartItem->getQuantity());
+	public function getQuantifiedProducts() {
+		$quantifiedProducts = [];
+		foreach ($this->getItems() as $cartItem) {
+			$quantifiedProducts[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
 		}
 
-		return $quantifiedItems;
+		return $quantifiedProducts;
 	}
 
 	/**

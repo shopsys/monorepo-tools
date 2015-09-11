@@ -57,7 +57,7 @@ class OrderPreviewCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItem[] $quantifiedItems
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
@@ -68,14 +68,14 @@ class OrderPreviewCalculation {
 	public function calculatePreview(
 		Currency $currency,
 		$domainId,
-		array $quantifiedItems,
+		array $quantifiedProducts,
 		Transport $transport = null,
 		Payment $payment = null,
 		User $user = null,
 		$discountPercent = null
 	) {
 		$quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
-			$quantifiedItems,
+			$quantifiedProducts,
 			$domainId,
 			$user
 		);
@@ -124,7 +124,7 @@ class OrderPreviewCalculation {
 		);
 
 		return new OrderPreview(
-			$quantifiedItems,
+			$quantifiedProducts,
 			$quantifiedItemsPrices,
 			$quantifiedItemsDiscounts,
 			$productsPrice,

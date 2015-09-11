@@ -189,11 +189,11 @@ class OrderCreationService {
 		$quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
 		$quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
 
-		foreach ($orderPreview->getQuantifiedItems() as $index => $quantifiedItem) {
-			$product = $quantifiedItem->getItem();
+		foreach ($orderPreview->getQuantifiedProducts() as $index => $quantifiedProduct) {
+			$product = $quantifiedProduct->getProduct();
 			if (!$product instanceof Product) {
 				$message = 'Object "' . get_class($product) . '" is not valid for order creation.';
-				throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidQuantifiedItemException($message);
+				throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidQuantifiedProductException($message);
 			}
 
 			$quantifiedItemPrice = $quantifiedItemPrices[$index];
@@ -207,7 +207,7 @@ class OrderCreationService {
 				$quantifiedItemPrice->getUnitPriceWithoutVat(),
 				$quantifiedItemPrice->getUnitPriceWithVat(),
 				$product->getVat()->getPercent(),
-				$quantifiedItem->getQuantity(),
+				$quantifiedProduct->getQuantity(),
 				$product->getCatnum(),
 				$product
 			);
