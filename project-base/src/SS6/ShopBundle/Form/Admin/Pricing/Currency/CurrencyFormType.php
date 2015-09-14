@@ -47,6 +47,7 @@ class CurrencyFormType extends AbstractType {
 			])
 			->add('exchangeRate', FormType::NUMBER, [
 				'required' => true,
+				'precision' => 6,
 				'read_only' => $this->isRateReadOnly,
 				'constraints' => [
 					new Constraints\GreaterThan(0),
