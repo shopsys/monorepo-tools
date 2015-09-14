@@ -86,8 +86,6 @@ class ProductVisibilityRepository {
 							WHEN (
 								p.calculated_hidden = FALSE
 								AND
-								pd.hidden = FALSE
-								AND
 								(p.selling_from IS NULL OR p.selling_from <= :now)
 								AND
 								(p.selling_to IS NULL OR p.selling_to >= :now)
@@ -112,10 +110,11 @@ class ProductVisibilityRepository {
 								)
 								AND EXISTS (
 									SELECT 1
-									FROM product_categories AS pc
-									JOIN category_domains AS cd ON cd.category_id = pc.category_id
-										AND cd.domain_id = pv.domain_id
-									WHERE pc.product_id = p.id
+									FROM product_category_domains AS pcd
+									JOIN category_domains AS cd ON cd.category_id = pcd.category_id
+										AND cd.domain_id = pcd.domain_id
+									WHERE pcd.product_id = p.id
+										AND pcd.domain_id = pv.domain_id
 										AND cd.visible = TRUE
 								)
 							)

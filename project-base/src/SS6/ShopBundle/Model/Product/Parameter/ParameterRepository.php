@@ -140,20 +140,6 @@ class ParameterRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
-	 */
-	public function getProductParameterValuesByProductEagerLoaded(Product $product) {
-		$queryBuilder = $this->getProductParameterValuesByProductQueryBuilder($product)
-			->addSelect('p', 'pt', 'pv')
-			->join('ppv.parameter', 'p')
-			->join('p.translations', 'pt')
-			->join('ppv.value', 'pv');
-
-		return $queryBuilder->getQuery()->execute();
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */

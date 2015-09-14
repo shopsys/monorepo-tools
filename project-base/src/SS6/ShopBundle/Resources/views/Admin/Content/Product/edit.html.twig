@@ -181,7 +181,15 @@
 
 {% block product_categories %}
 	{% if product.isVariant %}
-		{{ form_row(form.productData.categories, { label: 'Kategorie'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě hlavního zboží'|trans, class: 'form-line__disabled' }}) }}
+		{% do form.productData.categoriesByDomainId.setRendered %}
+		<div class="form-line">
+			{{ form_label(form.productData.categoriesByDomainId, 'Přiřazení do kategorie'|trans) }}
+			<div class="form-line__line">
+				<div class="form-line__item">
+					{{ 'Kategorie můžete nastavit na kartě hlavního zboží'|trans }}
+				</div>
+			</div>
+		</div>
 	{% else %}
 		{{ parent() }}
 	{% endif %}

@@ -10,6 +10,7 @@ use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
+use SS6\ShopBundle\Model\Product\ProductCategoryDomain;
 
 /**
  * Product
@@ -199,12 +200,16 @@ class Product extends AbstractTranslatableEntity {
 	private $visible;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category[]
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\ProductCategoryDomain[]
 	 *
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="products")
-	 * @ORM\JoinTable(name="product_categories")
+	 * @ORM\OneToMany(
+	 *   targetEntity="SS6\ShopBundle\Model\Product\ProductCategoryDomain",
+	 *   mappedBy="product",
+	 *   orphanRemoval=true,
+	 *   cascade={"persist"}
+	 * )
 	 */
-	private $categories;
+	private $productCategoryDomains;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
@@ -293,7 +298,13 @@ class Product extends AbstractTranslatableEntity {
 		$this->recalculateAvailability = true;
 		$this->visible = false;
 		$this->setTranslations($productData);
-		$this->categories = $productData->categories;
+		$this->productCategoryDomains = new ArrayCollection();
+		foreach ($productData->categoriesByDomainId as $domainId => $categories) {
+			foreach ($categories as $category) {
+				$productCategoryDomain = new ProductCategoryDomain($this, $category, $domainId);
+				$this->productCategoryDomains->add($productCategoryDomain);
+			}
+		}
 		$this->flags = $productData->flags;
 		$this->recalculatePrice = true;
 		$this->recalculateVisibility = true;
@@ -319,7 +330,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->setTranslations($productData);
 
 		if (!$this->isVariant()) {
-			$this->categories = $productData->categories;
+			$this->setCategories($productData->categoriesByDomainId);
 		}
 		if (!$this->isMainVariant()) {
 			$this->usingStock = $productData->usingStock;
@@ -533,6 +544,62 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param int $domainId
+	 */
+	private function setCategories(array $categoriesByDomainId) {
+		foreach ($categoriesByDomainId as $domainId => $categories) {
+			$this->removeOldProductCategoryDomains($categories, $domainId);
+			$this->createNewProductCategoryDomains($categories, $domainId);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $newCategories
+	 * @param int $domainId
+	 */
+	private function createNewProductCategoryDomains(array $newCategories, $domainId) {
+		$currentProductCategoryDomainsOnDomainByCategoryId = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
+
+		foreach ($newCategories as $newCategory) {
+			if (!array_key_exists($newCategory->getId(), $currentProductCategoryDomainsOnDomainByCategoryId)) {
+				$productCategoryDomain = new ProductCategoryDomain($this, $newCategory, $domainId);
+				$this->productCategoryDomains->add($productCategoryDomain);
+			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $newCategories
+	 * @param int $domainId
+	 */
+	private function removeOldProductCategoryDomains(array $newCategories, $domainId) {
+		$currentProductCategoryDomains = $this->getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId);
+
+		foreach ($currentProductCategoryDomains as $currentProductCategoryDomain) {
+			if (!in_array($currentProductCategoryDomain->getCategory(), $newCategories, true)) {
+				$this->productCategoryDomains->removeElement($currentProductCategoryDomain);
+			}
+		}
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\ProductCategoryDomain[categoryId]
+	 */
+	private function getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId) {
+		$productCategoryDomainsByCategoryId = [];
+
+		foreach ($this->productCategoryDomains as $productCategoryDomain) {
+			if ($productCategoryDomain->getDomainId() === $domainId) {
+				$productCategoryDomainsByCategoryId[$productCategoryDomain->getCategory()->getId()] = $productCategoryDomain;
+			}
+		}
+
+		return $productCategoryDomainsByCategoryId;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlags() {
@@ -540,10 +607,16 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 * @return \SS6\ShopBundle\Model\Category\Category[domainId][]
 	 */
-	public function getCategories() {
-		return $this->categories;
+	public function getCategoriesIndexedByDomainId() {
+		$categoriesByDomainId = [];
+
+		foreach ($this->productCategoryDomains as $productCategoryDomain) {
+			$categoriesByDomainId[$productCategoryDomain->getDomainId()][] = $productCategoryDomain->getCategory();
+		}
+
+		return $categoriesByDomainId;
 	}
 
 	/**

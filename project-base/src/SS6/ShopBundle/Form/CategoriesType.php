@@ -12,6 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CategoriesType extends AbstractType {
 
+	const OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID = 'muted_not_visible_on_domain_id';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
 	 */
@@ -37,6 +39,9 @@ class CategoriesType extends AbstractType {
 	 */
 	public function buildView(FormView $view, FormInterface $form, array $options) {
 		$view->vars['categoryDetails'] = $this->categoryDetailFactory->createDetailsHierarchy($options['choice_list']->getChoices());
+		if (isset($options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID])) {
+			$view->vars['mutedNotVisibleOnDomainId'] = $options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID];
+		}
 	}
 
 	/**
@@ -49,6 +54,14 @@ class CategoriesType extends AbstractType {
 			'choice_list' => new IndexedObjectChoiceList($categories, 'id', 'name', [], null, 'id'),
 			'multiple' => true,
 			'expanded' => true,
+		]);
+
+		$resolver->setOptional([
+			self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID,
+		]);
+
+		$resolver->setAllowedTypes([
+			self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID => 'int',
 		]);
 	}
 

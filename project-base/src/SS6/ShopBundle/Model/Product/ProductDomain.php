@@ -30,13 +30,6 @@ class ProductDomain {
 	private $domainId;
 
 	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(type="boolean")
-	 */
-	private $hidden;
-
-	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="text", nullable=true)
@@ -84,7 +77,6 @@ class ProductDomain {
 	public function __construct(Product $product, $domainId) {
 		$this->product = $product;
 		$this->domainId = $domainId;
-		$this->hidden = false;
 	}
 
 	/**
@@ -92,20 +84,6 @@ class ProductDomain {
 	 */
 	public function getDomainId() {
 		return $this->domainId;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isHidden() {
-		return $this->hidden;
-	}
-
-	/**
-	 * @param bool $hidden
-	 */
-	public function setHidden($hidden) {
-		$this->hidden = $hidden;
 	}
 
 	/**

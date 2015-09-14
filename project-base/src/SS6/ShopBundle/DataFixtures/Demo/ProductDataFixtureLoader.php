@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\Component\Csv\CsvDecoder;
 use SS6\ShopBundle\Component\Csv\CsvReader;
 use SS6\ShopBundle\Component\String\EncodingConverter;
 use SS6\ShopBundle\Component\String\TransformString;
@@ -166,14 +165,6 @@ class ProductDataFixtureLoader {
 		$productEditData->productData->usingStock = $row[11] !== null;
 		$productEditData->productData->stockQuantity = $row[11];
 		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
-		$hiddenOnDomains = [];
-		if (!CsvDecoder::decodeBoolean($row[12])) {
-			$hiddenOnDomains[] = 1;
-		}
-		if (!CsvDecoder::decodeBoolean($row[13])) {
-			$hiddenOnDomains[] = 2;
-		}
-		$productEditData->productData->hiddenOnDomains = $hiddenOnDomains;
 		switch ($row[14]) {
 			case 'in-stock':
 				$productEditData->productData->availability = $this->availabilities['in-stock'];
@@ -186,7 +177,8 @@ class ProductDataFixtureLoader {
 				break;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
-		$productEditData->productData->categories = $this->getProductDataFromString($row[16], $this->categories);
+		$productEditData->productData->categoriesByDomainId[1] = $this->getProductDataFromString($row[16], $this->categories);
+		$productEditData->productData->categoriesByDomainId[2] = $this->getProductDataFromString($row[16], $this->categories);
 		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
 		$productEditData->productData->sellingDenied = $row[18];
 

@@ -10,6 +10,7 @@ use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductCategoryDomain;
 
 class CategoryRepository extends NestedTreeRepository {
 
@@ -261,8 +262,11 @@ class CategoryRepository extends NestedTreeRepository {
 	 */
 	public function findProductMainCategoryOnDomain(Product $product, $domainId) {
 		$qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
-			->join('c.products', 'cp')
-			->andWhere('cp = :product')
+			->join(ProductCategoryDomain::class, 'pcd', Join::WITH,
+				'pcd.product = :product
+					AND pcd.category = c
+					AND pcd.domainId = :domainId'
+			)
 			->orderBy('c.level DESC, c.lft')
 			->setMaxResults(1);
 

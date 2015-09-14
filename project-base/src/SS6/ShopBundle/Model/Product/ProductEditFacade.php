@@ -279,7 +279,6 @@ class ProductEditFacade {
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	private function refreshProductDomains(Product $product, ProductEditData $productEditData) {
-		$hiddenOnDomainData = $productEditData->productData->hiddenOnDomains;
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 		$seoTitles = $productEditData->seoTitles;
 		$seoMetaDescriptions = $productEditData->seoMetaDescriptions;
@@ -288,11 +287,6 @@ class ProductEditFacade {
 		}
 		$heurekaCpcValues = $productEditData->heurekaCpcValues;
 		foreach ($productDomains as $domainId => $productDomain) {
-			if (in_array($productDomain->getDomainId(), $hiddenOnDomainData)) {
-				$productDomain->setHidden(true);
-			} else {
-				$productDomain->setHidden(false);
-			}
 			if (!empty($seoTitles)) {
 				$productDomain->setSeoTitle($seoTitles[$domainId]);
 			}

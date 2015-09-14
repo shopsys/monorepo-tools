@@ -164,7 +164,7 @@ class ProductRepository {
 		Category $category
 	) {
 		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
-		$this->filterByCategory($queryBuilder, $category);
+		$this->filterByCategory($queryBuilder, $category, $domainId);
 		return $queryBuilder;
 	}
 
@@ -180,7 +180,7 @@ class ProductRepository {
 		Category $category
 	) {
 		$queryBuilder = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
-		$this->filterByCategory($queryBuilder, $category);
+		$this->filterByCategory($queryBuilder, $category, $domainId);
 		return $queryBuilder;
 	}
 
@@ -210,10 +210,12 @@ class ProductRepository {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
 	 */
-	private function filterByCategory(QueryBuilder $queryBuilder, Category $category) {
-		$queryBuilder->join('p.categories', 'c', Join::WITH, 'c = :category');
+	private function filterByCategory(QueryBuilder $queryBuilder, Category $category, $domainId) {
+		$queryBuilder->join('p.productCategoryDomains', 'pcd', Join::WITH, 'pcd.category = :category AND pcd.domainId = :domainId');
 		$queryBuilder->setParameter('category', $category);
+		$queryBuilder->setParameter('domainId', $domainId);
 	}
 
 	/**
