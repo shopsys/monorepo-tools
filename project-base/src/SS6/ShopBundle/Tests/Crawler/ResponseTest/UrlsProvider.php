@@ -47,6 +47,8 @@ class UrlsProvider {
 		// used by firewall to catch login requests
 		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'admin_login_check',
+		// currently, we cannot test AJAX requests
+		'admin_order_addproduct',
 		// when tests are processed, there are no images in the shop
 		'front_image',
 		// when tests are processed, there are no images in the shop
@@ -54,9 +56,9 @@ class UrlsProvider {
 		// used by firewall to catch login requests
 		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'front_login_check',
-		// only for ajax
+		// currently, we cannot test AJAX requests
 		'admin_domain_edit',
-		// only for ajax
+		// currently, we cannot test AJAX requests
 		'admin_article_saveordering',
 	];
 

@@ -17,6 +17,7 @@ use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
 use SS6\ShopBundle\Model\Grid\DataSourceInterface;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Model\Order\Item\OrderItemFacade;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
@@ -70,6 +71,11 @@ class OrderController extends AdminBaseController {
 	 */
 	private $orderStatusFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemFacade
+	 */
+	private $orderItemFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
@@ -79,7 +85,8 @@ class OrderController extends AdminBaseController {
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
 		EntityManager $em,
-		OrderStatusFacade $orderStatusFacade
+		OrderStatusFacade $orderStatusFacade,
+		OrderItemFacade $orderItemFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
@@ -90,6 +97,7 @@ class OrderController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->em = $em;
 		$this->orderStatusFacade = $orderStatusFacade;
+		$this->orderItemFacade = $orderItemFacade;
 	}
 
 	/**
@@ -143,6 +151,39 @@ class OrderController extends AdminBaseController {
 		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', [
 			'form' => $form->createView(),
 			'order' => $order,
+			'orderItemTotalPricesById' => $orderItemTotalPricesById,
+		]);
+	}
+
+	/**
+	 * @Route("/order/add-product/{orderId}", requirements={"orderId" = "\d+"}, condition="request.isXmlHttpRequest()")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $orderId
+	 */
+	public function addProductAction(Request $request, $orderId) {
+		$productId = $request->get('productId');
+
+		$orderItem = $this->em->transactional(
+			function () use ($orderId, $productId) {
+				return $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
+			}
+		);
+
+		$order = $this->orderFacade->getById($orderId);
+
+		$orderData = new OrderData();
+		$orderData->setFromEntity($order);
+
+		$allOrderStatuses = $this->orderStatusFacade->getAll();
+		$form = $this->createForm(new OrderFormType($allOrderStatuses));
+		$form->setData($orderData);
+
+		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
+
+		return $this->render('@SS6Shop/Admin/Content/Order/addProduct.html.twig', [
+			'form' => $form->createView(),
+			'order' => $order,
+			'orderItem' => $orderItem,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
 		]);
 	}

@@ -1,5 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
+{% import '@SS6Shop/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
+
 {% block title %}{{ 'Objednávka č.'|trans }} {{ order.number }}{% endblock %}
 {% block h1 %}{{ 'Objednávka č.'|trans }} {{ order.number }}{% endblock %}
 
@@ -149,7 +151,7 @@
 			{% if form.items is not empty %}
 				<div class="table-touch">
 					{{ form_errors(form.items) }}
-					<table id="order_items" class="table-main table-touch__in">
+					<table id="order_form_items" class="table-main table-touch__in">
 						<thead>
 							<tr>
 								<th class="table-col-30">{{ 'Název'|trans }}</th>
@@ -162,49 +164,18 @@
 								<th ></th>
 							</tr>
 						</thead>
-						<tbody id="js-order-items" data-prototype="{{ _self.orderItem(form.items.vars.prototype)|escape }}">
-							{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
-								<tr class="js-order-item" data-index="{{ orderItemId }}">
-									<td>
-										{% if productItem and productItem.product %}
-											{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-											<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
-												<i class="svg svg-forward-page"></i>
-											</a>
-										{% elseif productItem and not productItem.product %}
-											{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-											<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
-										{% else %}
-											{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-										{% endif %}
-									</td>
-									<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
-									<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-									<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
-									<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-									<td class="text-right text-middle">
-										{% if orderItemTotalPricesById[orderItemId] is defined %}
-											{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
-										{% endif %}
-									</td>
-									<td class="text-right text-middle">
-										{% if orderItemTotalPricesById[orderItemId] is defined %}
-											{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
-										{% endif %}
-									</td>
-									<td class="table-col-5 table-edit__body__cell text-center">
-										<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
-									</td>
-								</tr>
-							{% endmacro %}
-
+						<tbody
+							id="js-order-items"
+							data-prototype="{{ orderItemMacro.orderItem(form.items.vars.prototype)|escape }}"
+							data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
+						>
 							{% for productItem in order.productItems %}
-								{{ _self.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+								{{ orderItemMacro.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
 							{% endfor %}
 
 							{% for orderItemId, orderItemForm in form.items %}
 								{% if not orderItemForm.rendered %}
-									{{ _self.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+									{{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
 								{% endif %}
 							{% endfor %}
 						</tbody>
@@ -214,6 +185,10 @@
 									<a id="js-order-item-add" href="#" class="btn">
 										<i class="sprite sprite-plus"></i>
 										{{ 'Přidat položku'|trans }}
+									</a>
+									<a id="js-order-item-add-product" href="#" class="btn" data-product-picker-url="{{ url('admin_productpicker_picksingle') }}">
+										<i class="sprite sprite-plus"></i>
+										{{ 'Přidat zboží'|trans }}
 									</a>
 								</td>
 							</tr>

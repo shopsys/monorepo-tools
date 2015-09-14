@@ -8,6 +8,9 @@
 		$('#js-order-items').on('click', '.js-order-item-remove', SS6.order.items.onRemoveItemClick);
 		$('#js-order-item-add').on('click', SS6.order.items.onAddItemClick);
 		SS6.order.items.refreshCount($('#js-order-items'));
+
+		var productPicker = new SS6.productPicker.ProductPicker($('#js-order-item-add-product'), SS6.order.items.addProduct);
+		productPicker.init();
 	};
 
 	SS6.order.items.onRemoveItemClick = function(event) {
@@ -41,7 +44,7 @@
 		var $collection = $item.closest('#js-order-items');
 		var index = $item.data('index');
 
-		SS6.validation.removeItemFromCollection('#order_items', index);
+		SS6.validation.removeItemFromCollection('#order_form_items', index);
 		$item.remove();
 
 		SS6.order.items.refreshCount($collection);
@@ -69,14 +72,41 @@
 		var index = SS6.order.items.getNewIndex($collection);
 
 		var item = prototype.replace(/__name__/g, index);
-		var $item = $(item);
+		var $item = $($.parseHTML(item));
 		$item.data('index', index);
 
 		$collection.append($item);
-		SS6.validation.addNewItemToCollection('#order_items', index);
+		SS6.validation.addNewItemToCollection('#order_form_items', index);
 
 		SS6.order.items.refreshCount($collection);
 		SS6.formChangeInfo.showInfo();
+	};
+
+	SS6.order.items.addProduct = function(productId, productName) {
+		var $collection = $('#js-order-items');
+		$.ajax({
+			url: $collection.data('order-product-add-url'),
+			method: 'POST',
+			data: {
+				productId: productId
+			},
+			success: function(data) {
+				var $data = $($.parseHTML(data));
+
+				var $orderItem = $data.filter('.js-order-item');
+				var index = $orderItem.data('index');
+
+				$collection.append($orderItem);
+				$($('#order_form_items')).jsFormValidator('addPrototype', index);
+
+				SS6.order.items.refreshCount($collection);
+
+				SS6.window({content: SS6.translator.trans('Zboží bylo uloženo do objednávky')});
+			},
+			error: function() {
+				SS6.window({content: SS6.translator.trans('Zboží se nepodařilo vložit')});
+			}
+		});
 	};
 
 	SS6.order.items.refreshCount = function($collection) {

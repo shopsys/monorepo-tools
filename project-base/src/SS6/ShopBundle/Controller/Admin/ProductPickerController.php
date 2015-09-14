@@ -69,17 +69,17 @@ class ProductPickerController extends AdminBaseController {
 			[
 				'isMultiple' => true,
 				'jsInstanceId' => $jsInstanceId,
-				'allowVariants' => $request->query->getBoolean('allowVariants'),
+				'allowVariants' => $request->query->getBoolean('allowVariants', true),
 			]
 		);
 	}
 
 	/**
-	 * @Route("/product-picker/pick-single/{parentInputId}/")
+	 * @Route("/product-picker/pick-single/{parentInstanceId}/", defaults={"parentInstanceId"="__instance_id__"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param string $parentInputId
+	 * @param string $parentInstanceId
 	 */
-	public function pickSingleAction(Request $request, $parentInputId) {
+	public function pickSingleAction(Request $request, $parentInstanceId) {
 		return $this->getPickerResponse(
 			$request,
 			[
@@ -87,8 +87,8 @@ class ProductPickerController extends AdminBaseController {
 			],
 			[
 				'isMultiple' => false,
-				'parentInputId' => $parentInputId,
-				'allowVariants' => $request->query->getBoolean('allowVariants'),
+				'parentInstanceId' => $parentInstanceId,
+				'allowVariants' => $request->query->getBoolean('allowVariants', true),
 			]
 		);
 	}

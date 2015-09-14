@@ -1,0 +1,34 @@
+{% macro orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, currency, productItem) %}
+	<tr class="js-order-item" data-index="{{ orderItemId }}">
+		<td>
+			{% if productItem and productItem.product %}
+				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+				<a href="{{ path('admin_product_edit', { id: productItem.product.id }) }}" target="_blank">
+					<i class="svg svg-forward-page"></i>
+				</a>
+			{% elseif productItem and not productItem.product %}
+				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+				<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.' }}"></i>
+			{% else %}
+				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
+			{% endif %}
+		</td>
+		<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+		<td class="text-right text-middle">
+			{% if orderItemTotalPricesById[orderItemId] is defined %}
+				{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
+			{% endif %}
+		</td>
+		<td class="text-right text-middle">
+			{% if orderItemTotalPricesById[orderItemId] is defined %}
+				{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
+			{% endif %}
+		</td>
+		<td class="table-col-5 table-edit__body__cell text-center">
+			<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
+		</td>
+	</tr>
+{% endmacro %}
