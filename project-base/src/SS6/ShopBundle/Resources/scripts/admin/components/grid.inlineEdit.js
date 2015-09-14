@@ -47,7 +47,7 @@
 		});
 
 		$grid.on('keyup', '.js-grid-editing-row input', function(event) {
-			if (event.keyCode == 13) { // enter
+			if (event.keyCode == SS6.keyCodes.ENTER) {
 				SS6.grid.inlineEdit.saveRow($(this).closest('.js-grid-editing-row'), $grid);
 			}
 			return false;

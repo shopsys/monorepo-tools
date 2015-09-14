@@ -12,7 +12,7 @@
 		var $input = $(this).find('.js-grid-go-to-input');
 
 		$input.bind('keyup.gridGoTo', function (event) {
-			if (event.keyCode == 13) {
+			if (event.keyCode == SS6.keyCodes.ENTER) {
 				$button.trigger('click.gridGoTo', event);
 			}
 		});

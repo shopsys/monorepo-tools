@@ -10,7 +10,7 @@
 		this.init = function() {
 			$promoCodeSubmitButton.click(applyPromoCode);
 			$promoCodeInput.keypress(function(event){
-				if (event.keyCode === 13) {
+				if (event.keyCode === SS6.keyCodes.ENTER) {
 					applyPromoCode();
 					return false;
 				};
