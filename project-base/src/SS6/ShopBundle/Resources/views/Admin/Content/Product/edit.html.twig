@@ -37,6 +37,7 @@
 			{% else %}
 				<strong>{{ 'Produkt je hlavní variantou.'|trans }}</strong>
 			{% endif %}
+			{{ form_row(form.variants, { label: 'Varianty'|trans }) }}
 		</div>
 	{% endif %}
 {% endblock %}

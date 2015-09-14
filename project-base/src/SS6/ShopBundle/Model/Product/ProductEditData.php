@@ -68,6 +68,11 @@ class ProductEditData {
 	public $heurekaCpcValues;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public $variants;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
@@ -79,6 +84,7 @@ class ProductEditData {
 	 * @param string[] $descriptions
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
 	 * @param string[] $heurekaCpcValues
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
 	 */
 	public function __construct(
 		ProductData $productData = null,
@@ -91,7 +97,8 @@ class ProductEditData {
 		array $seoMetaDescriptions = [],
 		array $descriptions = [],
 		array $accessories = [],
-		array $heurekaCpcValues = []
+		array $heurekaCpcValues = [],
+		array $variants = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -110,6 +117,7 @@ class ProductEditData {
 		$this->urls[UrlListType::MAIN_ON_DOMAINS] = [];
 		$this->accessories = $accessories;
 		$this->heurekaCpcValues = $heurekaCpcValues;
+		$this->variants = $variants;
 	}
 
 }

@@ -107,6 +107,7 @@ class ProductEditDataFactory {
 		}
 		$productEditData->accessories = $this->getAccessoriesData($product);
 		$productEditData->imagePositions = $this->imageFacade->getImagesByEntityIndexedById($product, null);
+		$productEditData->variants = $product->getVariants();
 
 		$this->setMultidomainData($product, $productEditData);
 
