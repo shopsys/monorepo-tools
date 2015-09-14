@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
+
 class ParameterValueData {
 
 	/**
@@ -21,6 +23,14 @@ class ParameterValueData {
 	public function __construct($text = null, $locale = null) {
 		$this->text = $text;
 		$this->locale = $locale;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $parameterValue
+	 */
+	public function setFromEntity(ParameterValue $parameterValue) {
+		$this->text = $parameterValue->getText();
+		$this->locale = $parameterValue->getLocale();
 	}
 
 }

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Constraints\UniqueCollection;
+use SS6\ShopBundle\Component\Constraints\UniqueProductParameters;
 use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
@@ -162,8 +162,7 @@ class ProductEditFormType extends AbstractType {
 					'allow_delete' => true,
 					'type' => $this->productParameterValueFormTypeFactory->create(),
 					'constraints' => [
-						new UniqueCollection([
-							'fields' => ['parameter', 'locale'],
+						new UniqueProductParameters([
 							'message' => 'Každý parametr může být nastaven pouze jednou',
 						]),
 					],

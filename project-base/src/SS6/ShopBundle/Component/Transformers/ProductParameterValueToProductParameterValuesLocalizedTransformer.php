@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Transformers;
 
+use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -17,30 +18,30 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 			return null;
 		}
 
-		if (is_array($normData)) {
-			$normValue = [];
-
-			foreach ($normData as $productParameterValueData) {
-				/* @var $productParameterValueData \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData */
-				$parameterId = $productParameterValueData->parameter->getId();
-				$locale = $productParameterValueData->locale;
-
-				if (array_key_exists($parameterId, $normValue)) {
-					$productParameterValuesLocalizedData = $normValue[$parameterId];
-				} else {
-					$productParameterValuesLocalizedData = new ProductParameterValuesLocalizedData();
-				}
-
-				$productParameterValuesLocalizedData->parameter = $productParameterValueData->parameter;
-				$productParameterValuesLocalizedData->valueText[$locale] = $productParameterValueData->valueText;
-
-				$normValue[$parameterId] = $productParameterValuesLocalizedData;
-			}
-
-			return $this->resetArrayIndexes($normValue);
+		if (!is_array($normData)) {
+			throw new \Symfony\Component\Form\Exception\TransformationFailedException('Invalid value');
 		}
 
-		throw new \Symfony\Component\Form\Exception\TransformationFailedException('Invalid value');
+		$normValue = [];
+		foreach ($normData as $productParameterValueData) {
+			/* @var $productParameterValueData \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData */
+			$parameterId = $productParameterValueData->parameter->getId();
+			$locale = $productParameterValueData->parameterValueData->locale;
+
+			if (!array_key_exists($parameterId, $normValue)) {
+				$normValue[$parameterId] = new ProductParameterValuesLocalizedData();
+				$normValue[$parameterId]->parameter = $productParameterValueData->parameter;
+				$normValue[$parameterId]->valueText = [];
+			}
+
+			if (array_key_exists($locale, $normValue[$parameterId]->valueText)) {
+				throw new \Symfony\Component\Form\Exception\TransformationFailedException('Duplicate parameter');
+			}
+
+			$normValue[$parameterId]->valueText[$locale] = $productParameterValueData->parameterValueData->text;
+		}
+
+		return array_values($normValue);
 	}
 
 	/**
@@ -58,8 +59,7 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 					if ($valueText !== null) {
 						$productParameterValueData = new ProductParameterValueData();
 						$productParameterValueData->parameter = $productParameterValuesLocalizedData->parameter;
-						$productParameterValueData->locale = $locale;
-						$productParameterValueData->valueText = $valueText;
+						$productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
 
 						$normData[] = $productParameterValueData;
 					}
@@ -70,19 +70,6 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 		}
 
 		throw new \Symfony\Component\Form\Exception\TransformationFailedException('Invalid value');
-	}
-
-	/**
-	 * @param array $array
-	 * @return array
-	 */
-	private function resetArrayIndexes($array) {
-		$newArray = [];
-		foreach ($array as $item) {
-			$newArray[] = $item;
-		}
-
-		return $newArray;
 	}
 
 }
