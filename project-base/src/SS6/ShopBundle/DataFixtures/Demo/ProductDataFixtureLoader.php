@@ -16,6 +16,28 @@ use SS6\ShopBundle\Model\Product\ProductEditData;
 
 class ProductDataFixtureLoader {
 
+	const COLUMN_NAME_CS = 0;
+	const COLUMN_NAME_EN = 1;
+	const COLUMN_CATNUM = 2;
+	const COLUMN_PARTNO = 3;
+	const COLUMN_EAN = 4;
+	const COLUMN_DESCRIPTION_CS = 5;
+	const COLUMN_DESCRIPTION_EN = 6;
+	const COLUMN_PRICE = 7;
+	const COLUMN_VAT = 8;
+	const COLUMN_SELLING_FROM = 9;
+	const COLUMN_SELLING_TO = 10;
+	const COLUMN_STOCK_QUANTITY = 11;
+	const COLUMN_SHOW_1 = 12;
+	const COLUMN_SHOW_2 = 13;
+	const COLUMN_AVAILABILITY = 14;
+	const COLUMN_PARAMETERS = 15;
+	const COLUMN_CATEGORIES = 16;
+	const COLUMN_FLAGS = 17;
+	const COLUMN_SELLING_DENIED = 18;
+	const COLUMN_BRAND = 19;
+	const COLUMN_MAIN_VARIANT_CATNUM = 20;
+
 	/**
 	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
 	 */
@@ -122,8 +144,8 @@ class ProductDataFixtureLoader {
 			$row = array_map([TransformString::class, 'emptyToNull'], $row);
 			$row = EncodingConverter::cp1250ToUtf8($row);
 
-			if ($row[20] !== null && $row[2] !== null) {
-				$variantCatnumsByMainVariantCatnum[$row[20]][] = $row[2];
+			if ($row[self::COLUMN_MAIN_VARIANT_CATNUM] !== null && $row[self::COLUMN_CATNUM] !== null) {
+				$variantCatnumsByMainVariantCatnum[$row[self::COLUMN_MAIN_VARIANT_CATNUM]][] = $row[self::COLUMN_CATNUM];
 			}
 		}
 
@@ -138,13 +160,13 @@ class ProductDataFixtureLoader {
 	private function getProductEditDataFromCsvRow(array $row) {
 		$productEditData = new ProductEditData();
 		$productEditData->productData = new ProductData();
-		$productEditData->productData->name = ['cs' => $row[0], 'en' => $row[1]];
-		$productEditData->productData->catnum = $row[2];
-		$productEditData->productData->partno = $row[3];
-		$productEditData->productData->ean = $row[4];
-		$productEditData->descriptions = [1 => $row[5], 2 => $row[6]];
-		$productEditData->productData->price = $row[7];
-		switch ($row[8]) {
+		$productEditData->productData->name = ['cs' => $row[self::COLUMN_NAME_CS], 'en' => $row[self::COLUMN_NAME_EN]];
+		$productEditData->productData->catnum = $row[self::COLUMN_CATNUM];
+		$productEditData->productData->partno = $row[self::COLUMN_PARTNO];
+		$productEditData->productData->ean = $row[self::COLUMN_EAN];
+		$productEditData->descriptions = [1 => $row[self::COLUMN_DESCRIPTION_CS], 2 => $row[self::COLUMN_DESCRIPTION_EN]];
+		$productEditData->productData->price = $row[self::COLUMN_PRICE];
+		switch ($row[self::COLUMN_VAT]) {
 			case 'high':
 				$productEditData->productData->vat = $this->vats['high'];
 				break;
@@ -157,16 +179,16 @@ class ProductDataFixtureLoader {
 			default:
 				$productEditData->productData->vat = null;
 		}
-		if ($row[9] !== null) {
-			$productEditData->productData->sellingFrom = new DateTime($row[9]);
+		if ($row[self::COLUMN_SELLING_FROM] !== null) {
+			$productEditData->productData->sellingFrom = new DateTime($row[self::COLUMN_SELLING_FROM]);
 		}
-		if ($row[10] !== null) {
-			$productEditData->productData->sellingTo = new DateTime($row[10]);
+		if ($row[self::COLUMN_SELLING_TO] !== null) {
+			$productEditData->productData->sellingTo = new DateTime($row[self::COLUMN_SELLING_TO]);
 		}
-		$productEditData->productData->usingStock = $row[11] !== null;
-		$productEditData->productData->stockQuantity = $row[11];
+		$productEditData->productData->usingStock = $row[self::COLUMN_STOCK_QUANTITY] !== null;
+		$productEditData->productData->stockQuantity = $row[self::COLUMN_STOCK_QUANTITY];
 		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
-		switch ($row[14]) {
+		switch ($row[self::COLUMN_AVAILABILITY]) {
 			case 'in-stock':
 				$productEditData->productData->availability = $this->availabilities['in-stock'];
 				break;
@@ -177,14 +199,14 @@ class ProductDataFixtureLoader {
 				$productEditData->productData->availability = $this->availabilities['on-request'];
 				break;
 		}
-		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[15]);
-		$productEditData->productData->categoriesByDomainId[1] = $this->getProductDataFromString($row[16], $this->categories);
-		$productEditData->productData->categoriesByDomainId[2] = $this->getProductDataFromString($row[16], $this->categories);
-		$productEditData->productData->flags = $this->getProductDataFromString($row[17], $this->flags);
-		$productEditData->productData->sellingDenied = $row[18];
+		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[self::COLUMN_PARAMETERS]);
+		$productEditData->productData->categoriesByDomainId[1] = $this->getProductDataFromString($row[self::COLUMN_CATEGORIES], $this->categories);
+		$productEditData->productData->categoriesByDomainId[2] = $this->getProductDataFromString($row[self::COLUMN_CATEGORIES], $this->categories);
+		$productEditData->productData->flags = $this->getProductDataFromString($row[self::COLUMN_FLAGS], $this->flags);
+		$productEditData->productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
 
-		if ($row[19] !== null) {
-			$productEditData->productData->brand = $this->brands[$row[19]];
+		if ($row[self::COLUMN_BRAND] !== null) {
+			$productEditData->productData->brand = $this->brands[$row[self::COLUMN_BRAND]];
 		}
 
 		return $productEditData;
