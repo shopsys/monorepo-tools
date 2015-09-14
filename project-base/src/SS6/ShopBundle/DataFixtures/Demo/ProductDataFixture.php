@@ -7,8 +7,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -40,6 +43,22 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$this->createVariants($productsByCatnum);
 
 		$manager->flush();
+		$this->runRecalculators();
+	}
+
+	private function runRecalculators() {
+		$productAvailabilityRecalculator = $this->get(ProductAvailabilityRecalculator::class);
+		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
+		$productVisibilityFacade = $this->get(ProductVisibilityFacade::class);
+		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
+		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
+		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
+
+		$productAvailabilityRecalculator->runImmediateRecalculations();
+		$productPriceRecalculator->runImmediateRecalculations();
+		$productVisibilityFacade->refreshProductsVisibility();
+		// Main variant is set for recalculations after change of variants visibility.
+		$productPriceRecalculator->runAllScheduledRecalculations();
 	}
 
 	/**
