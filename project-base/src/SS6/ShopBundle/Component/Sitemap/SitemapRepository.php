@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Sitemap\SitemapItem;
+use SS6\ShopBundle\Model\Article\ArticleRepository;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
@@ -24,12 +25,19 @@ class SitemapRepository {
 	 */
 	private $categoryRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\ArticleRepository
+	 */
+	private $articleRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
-		CategoryRepository $categoryRepository
+		CategoryRepository $categoryRepository,
+		ArticleRepository $articleRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->categoryRepository = $categoryRepository;
+		$this->articleRepository = $articleRepository;
 	}
 
 	/**
@@ -68,6 +76,26 @@ class SitemapRepository {
 				AND fu.main = TRUE'
 			)
 			->setParameter('productListRouteName', 'front_product_list')
+			->setParameter('domainId', $domainConfig->getId());
+
+		return $this->getSitemapItemsFromQueryBuilderWithSlugField($queryBuilder);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 */
+	public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {
+		$queryBuilder = $this->articleRepository->getArticlesByDomainIdQueryBuilder($domainConfig->getId());
+		$queryBuilder
+			->select('fu.slug')
+			->join(FriendlyUrl::class, 'fu', Join::WITH,
+				'fu.routeName = :articleDetailRouteName
+				AND fu.entityId = a.id
+				AND fu.domainId = :domainId
+				AND fu.main = TRUE'
+			)
+			->setParameter('articleDetailRouteName', 'front_article_detail')
 			->setParameter('domainId', $domainConfig->getId());
 
 		return $this->getSitemapItemsFromQueryBuilderWithSlugField($queryBuilder);

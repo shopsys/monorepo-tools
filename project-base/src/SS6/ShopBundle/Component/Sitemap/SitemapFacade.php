@@ -87,4 +87,12 @@ class SitemapFacade {
 		return $this->sitemapRepository->getSitemapItemsForVisibleCategories($domainConfig);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 */
+	public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {
+		return $this->sitemapRepository->getSitemapItemsForArticlesOnDomain($domainConfig);
+	}
+
 }

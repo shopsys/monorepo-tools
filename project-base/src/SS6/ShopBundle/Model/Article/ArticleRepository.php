@@ -39,12 +39,20 @@ class ArticleRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement) {
+		return $this->getArticlesByDomainIdQueryBuilder($domainId)
+			->andWhere('a.placement = :placement')->setParameter('placement', $placement)
+			->orderBy('a.position, a.id');
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getArticlesByDomainIdQueryBuilder($domainId) {
 		return $this->em->createQueryBuilder()
 			->select('a')
 			->from(Article::class, 'a')
-			->where('a.domainId = :domainId')->setParameter('domainId', $domainId)
-			->andWhere('a.placement = :placement')->setParameter('placement', $placement)
-			->orderBy('a.position, a.id');
+			->where('a.domainId = :domainId')->setParameter('domainId', $domainId);
 	}
 
 	/**
