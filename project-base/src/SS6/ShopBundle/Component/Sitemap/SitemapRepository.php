@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\Sitemap;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Sitemap\SitemapItem;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
@@ -49,15 +50,7 @@ class SitemapRepository {
 			->setParameter('productDetailRouteName', 'front_product_detail')
 			->setParameter('domainId', $domainConfig->getId());
 
-		$rows = $queryBuilder->getQuery()->execute(null, AbstractQuery::HYDRATE_SCALAR);
-		$sitemapItems = [];
-		foreach ($rows as $row) {
-			$sitemapItem = new SitemapItem();
-			$sitemapItem->slug = $row['slug'];
-			$sitemapItems[] = $sitemapItem;
-		}
-
-		return $sitemapItems;
+		return $this->getSitemapItemsFromQueryBuilderWithSlugField($queryBuilder);
 	}
 
 	/**
@@ -77,6 +70,14 @@ class SitemapRepository {
 			->setParameter('productListRouteName', 'front_product_list')
 			->setParameter('domainId', $domainConfig->getId());
 
+		return $this->getSitemapItemsFromQueryBuilderWithSlugField($queryBuilder);
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 */
+	private function getSitemapItemsFromQueryBuilderWithSlugField(QueryBuilder $queryBuilder) {
 		$rows = $queryBuilder->getQuery()->execute(null, AbstractQuery::HYDRATE_SCALAR);
 		$sitemapItems = [];
 		foreach ($rows as $row) {
