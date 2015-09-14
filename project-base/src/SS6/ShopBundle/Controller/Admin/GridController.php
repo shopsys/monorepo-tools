@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService;
@@ -11,11 +10,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class GridController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
@@ -28,11 +22,9 @@ class GridController extends AdminBaseController {
 	private $gridOrderingFacade;
 
 	public function __construct(
-		EntityManager $em,
 		GridOrderingFacade $gridOrderingFacade,
 		InlineEditService $inlineEditService
 	) {
-		$this->em = $em;
 		$this->gridOrderingFacade = $gridOrderingFacade;
 		$this->inlineEditService = $inlineEditService;
 	}
@@ -75,7 +67,7 @@ class GridController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveOrderingAction(Request $request) {
-		$this->em->transactional(
+		$this->transactional(
 			function () use ($request) {
 				$this->gridOrderingFacade->saveOrdering(
 					$request->get('entityClass'),

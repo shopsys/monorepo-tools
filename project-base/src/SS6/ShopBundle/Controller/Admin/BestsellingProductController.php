@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
@@ -14,11 +13,6 @@ use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class BestsellingProductController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -44,14 +38,12 @@ class BestsellingProductController extends AdminBaseController {
 		BestsellingProductFacade $bestsellingProductFacade,
 		CategoryFacade $categoryFacade,
 		SelectedDomain $selectedDomain,
-		Breadcrumb $breadcrumb,
-		EntityManager $em
+		Breadcrumb $breadcrumb
 	) {
 		$this->bestsellingProductFacade = $bestsellingProductFacade;
 		$this->categoryFacade = $categoryFacade;
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
-		$this->em = $em;
 	}
 
 	/**
@@ -92,7 +84,7 @@ class BestsellingProductController extends AdminBaseController {
 		if ($form->isValid()) {
 			$formBestsellingProducts = $form->getData()['bestsellingProducts'];
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($category, $domainId, $formBestsellingProducts) {
 					$this->bestsellingProductFacade->edit(
 						$category,

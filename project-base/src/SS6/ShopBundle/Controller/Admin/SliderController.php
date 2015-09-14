@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -19,11 +18,6 @@ use SS6\ShopBundle\Model\Slider\SliderItemFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
@@ -57,7 +51,6 @@ class SliderController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		SliderItemFacade $sliderItemFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
@@ -65,7 +58,6 @@ class SliderController extends AdminBaseController {
 		Breadcrumb $breadcrumb
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->sliderItemFacade = $sliderItemFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
@@ -114,7 +106,7 @@ class SliderController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$sliderItem = $this->em->transactional(
+			$sliderItem = $this->transactional(
 				function () use ($form) {
 					return $this->sliderItemFacade->create($form->getData());
 				}
@@ -154,7 +146,7 @@ class SliderController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $sliderItemData) {
 					$this->sliderItemFacade->edit($id, $sliderItemData);
 				}
@@ -193,7 +185,7 @@ class SliderController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$name = $this->sliderItemFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->sliderItemFacade->delete($id);
 				}

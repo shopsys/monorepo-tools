@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
@@ -51,11 +50,6 @@ class ProductController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
 	 */
 	private $gridFactory;
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
@@ -117,7 +111,6 @@ class ProductController extends AdminBaseController {
 		Translator $translator,
 		ProductMassActionFacade $productMassActionFacade,
 		GridFactory $gridFactory,
-		EntityManager $em,
 		ProductEditFacade $productEditFacade,
 		ProductDetailFactory $productDetailFactory,
 		ProductEditFormTypeFactory $productEditFormTypeFactory,
@@ -134,7 +127,6 @@ class ProductController extends AdminBaseController {
 		$this->translator = $translator;
 		$this->productMassActionFacade = $productMassActionFacade;
 		$this->gridFactory = $gridFactory;
-		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->productEditFormTypeFactory = $productEditFormTypeFactory;
@@ -162,7 +154,7 @@ class ProductController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $form) {
 					$this->productEditFacade->edit($id, $form->getData());
 				}
@@ -211,7 +203,7 @@ class ProductController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$product = $this->em->transactional(
+			$product = $this->transactional(
 				function () use ($form) {
 					return $this->productEditFacade->create($form->getData());
 				}
@@ -298,7 +290,7 @@ class ProductController extends AdminBaseController {
 		try {
 			$product = $this->productEditFacade->getById($id);
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->productEditFacade->delete($id);
 				}
@@ -338,7 +330,7 @@ class ProductController extends AdminBaseController {
 			$formData = $form->getData();
 			$mainVariant = $formData[VariantFormType::MAIN_VARIANT];
 			try {
-				$newMainVariant = $this->em->transactional(
+				$newMainVariant = $this->transactional(
 					function () use ($mainVariant, $formData) {
 						return $this->productVariantFacade->createVariant(
 							$mainVariant,

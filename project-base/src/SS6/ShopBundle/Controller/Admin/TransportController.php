@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -18,11 +17,6 @@ use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
@@ -66,7 +60,6 @@ class TransportController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		TransportEditFacade $transportEditFacade,
 		TransportGridFactory $transportGridFactory,
 		TransportEditFormTypeFactory $transportEditFormTypeFactory,
@@ -76,7 +69,6 @@ class TransportController extends AdminBaseController {
 		Breadcrumb $breadcrumb
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->transportEditFacade = $transportEditFacade;
 		$this->transportGridFactory = $transportGridFactory;
 		$this->transportEditFormTypeFactory = $transportEditFormTypeFactory;
@@ -97,7 +89,7 @@ class TransportController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = $this->em->transactional(
+			$transport = $this->transactional(
 				function () use ($form) {
 					return $this->transportEditFacade->create($form->getData());
 				}
@@ -136,7 +128,7 @@ class TransportController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($transport, $transportEditData) {
 					$this->transportEditFacade->edit($transport, $transportEditData);
 				}
@@ -171,7 +163,7 @@ class TransportController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$transportName = $this->transportEditFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->transportEditFacade->deleteById($id);
 				}

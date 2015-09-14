@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Controller\ErrorService;
@@ -39,11 +38,6 @@ class DomainController extends AdminBaseController {
 	private $translator;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Domain\DomainFacade
 	 */
 	private $domainFacade;
@@ -58,7 +52,6 @@ class DomainController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		GridFactory $gridFactory,
 		Translator $translator,
-		EntityManager $em,
 		DomainFacade $domainFacade,
 		ErrorService $errorService
 	) {
@@ -66,7 +59,6 @@ class DomainController extends AdminBaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->gridFactory = $gridFactory;
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->domainFacade = $domainFacade;
 		$this->errorService = $errorService;
 	}
@@ -138,7 +130,7 @@ class DomainController extends AdminBaseController {
 			try {
 				if (count($form->getData()[DomainFormType::DOMAIN_ICON]) !== 0) {
 					$iconName = reset($form->getData()[DomainFormType::DOMAIN_ICON]);
-					$this->em->transactional(
+					$this->transactional(
 						function () use ($id, $iconName) {
 							$this->domainFacade->editIcon($id, $iconName);
 						}
