@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\Sitemap;
 
 use Presta\SitemapBundle\Service\Dumper;
+use SS6\ShopBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -20,9 +21,19 @@ class SitemapDumperFactory {
 	 */
 	private $filesystem;
 
-	public function __construct(EventDispatcherInterface $eventDispatcher, Filesystem $filesystem) {
+	/**
+	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapService
+	 */
+	private $sitemapService;
+
+	public function __construct(
+		EventDispatcherInterface $eventDispatcher,
+		Filesystem $filesystem,
+		SitemapService $sitemapService
+	) {
 		$this->eventDispatcher = $eventDispatcher;
 		$this->filesystem = $filesystem;
+		$this->sitemapService = $sitemapService;
 	}
 
 	/**
@@ -33,8 +44,9 @@ class SitemapDumperFactory {
 		return new Dumper(
 			$this->eventDispatcher,
 			$this->filesystem,
-			'domain_' . $domainId . '_sitemap',
+			$this->sitemapService->getSitemapFilePrefixForDomain($domainId),
 			self::MAX_ITEMS_IN_FILE
 		);
 	}
+
 }
