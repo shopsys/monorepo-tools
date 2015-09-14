@@ -713,7 +713,11 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	public function unsetMainVariant() {
+		if (!$this->isVariant()) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
+		}
 		$this->variantType = self::VARIANT_TYPE_NONE;
+		$this->mainVariant->variants->removeElement($this);
 		$this->mainVariant = null;
 	}
 
