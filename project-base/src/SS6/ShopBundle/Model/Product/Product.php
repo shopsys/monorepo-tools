@@ -654,6 +654,13 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
+	 * @param int $stockQuantity
+	 */
+	public function setStockQuantity($stockQuantity) {
+		$this->stockQuantity = $stockQuantity;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 */
 	private function setTranslations(ProductData $productData) {
