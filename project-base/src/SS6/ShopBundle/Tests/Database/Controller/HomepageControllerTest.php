@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Controller\DefaultController;
+namespace SS6\ShopBundle\Tests\Database\Controller;
 
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class DefaultControllerTest extends FunctionalTestCase {
+class HomepageControllerTest extends FunctionalTestCase {
 
 	public function testHomepageHttpStatus200() {
 		$client = $this->getClient();

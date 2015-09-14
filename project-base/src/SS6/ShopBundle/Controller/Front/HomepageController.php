@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 use SS6\ShopBundle\Model\Slider\SliderItemFacade;
 
-class DefaultController extends FrontBaseController {
+class HomepageController extends FrontBaseController {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer

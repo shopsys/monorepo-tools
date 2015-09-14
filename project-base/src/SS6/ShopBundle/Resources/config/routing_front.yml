@@ -31,7 +31,7 @@ front_customer_login_as_remembered_user:
 
 front_homepage:
   pattern: /
-  defaults: { _controller: SS6ShopBundle:Front\Default:index }
+  defaults: { _controller: SS6ShopBundle:Front\Homepage:index }
 
 front_image:
   pattern: /assets/content/images/{entityName}/{type}/{sizeName}/{imageId}.{extension}
