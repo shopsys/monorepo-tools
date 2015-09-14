@@ -60,4 +60,32 @@ class SitemapRepository {
 		return $sitemapItems;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 */
+	public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig) {
+		$queryBuilder = $this->categoryRepository->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId());
+		$queryBuilder
+			->select('fu.slug')
+			->join(FriendlyUrl::class, 'fu', Join::WITH,
+				'fu.routeName = :productListRouteName
+				AND fu.entityId = c.id
+				AND fu.domainId = :domainId
+				AND fu.main = TRUE'
+			)
+			->setParameter('productListRouteName', 'front_product_list')
+			->setParameter('domainId', $domainConfig->getId());
+
+		$rows = $queryBuilder->getQuery()->execute(null, AbstractQuery::HYDRATE_SCALAR);
+		$sitemapItems = [];
+		foreach ($rows as $row) {
+			$sitemapItem = new SitemapItem();
+			$sitemapItem->slug = $row['slug'];
+			$sitemapItems[] = $sitemapItem;
+		}
+
+		return $sitemapItems;
+	}
+
 }

@@ -233,7 +233,7 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @param int $domainId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	private function getAllVisibleByDomainIdQueryBuilder($domainId) {
+	public function getAllVisibleByDomainIdQueryBuilder($domainId) {
 		$queryBuilder = $this->getAllQueryBuilder()
 			->join(CategoryDomain::class, 'cd', Join::WITH, 'cd.category = c.id')
 			->andWhere('cd.domainId = :domainId')

@@ -79,4 +79,12 @@ class SitemapFacade {
 		return $this->sitemapRepository->getSitemapItemsForVisibleProducts($domainConfig, $pricingGroup);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 */
+	public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig) {
+		return $this->sitemapRepository->getSitemapItemsForVisibleCategories($domainConfig);
+	}
+
 }

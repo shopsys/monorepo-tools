@@ -50,6 +50,9 @@ class SitemapListener implements SitemapListenerInterface {
 
 		$productSitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleProducts($domainConfig);
 		$this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section);
+
+		$categorySitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleCategories($domainConfig);
+		$this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section);
 	}
 
 	/**
