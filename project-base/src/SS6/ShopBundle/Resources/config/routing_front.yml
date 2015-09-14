@@ -65,6 +65,10 @@ front_promo_code_remove:
   pattern: /promo-code/remove/
   defaults: { _controller: SS6ShopBundle:Front\PromoCode:remove }
 
+front_robots_txt:
+  pattern: /robots.txt
+  defaults: { _controller: SS6ShopBundle:Front\Robots:index }
+
 front_search_autocomplete:
   pattern: /search/autocomplete/
   defaults: { _controller: SS6ShopBundle:Front\Search:autocomplete }
