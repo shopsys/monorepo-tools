@@ -11,8 +11,7 @@ class OrderProductService {
 		$orderProductsUsingStock = $this->getOrderProductsUsingStockFromOrderProducts($orderProducts);
 		foreach ($orderProductsUsingStock as $orderProductUsingStock) {
 			$product = $orderProductUsingStock->getProduct();
-			$originalQuantity = $product->getStockQuantity();
-			$product->setStockQuantity($originalQuantity - $orderProductUsingStock->getQuantity());
+			$product->subtractStockQuantity($orderProductUsingStock->getQuantity());
 		}
 	}
 
@@ -23,8 +22,7 @@ class OrderProductService {
 		$orderProductsUsingStock = $this->getOrderProductsUsingStockFromOrderProducts($orderProducts);
 		foreach ($orderProductsUsingStock as $orderProductUsingStock) {
 			$product = $orderProductUsingStock->getProduct();
-			$originalQuantity = $product->getStockQuantity();
-			$product->setStockQuantity($originalQuantity + $orderProductUsingStock->getQuantity());
+			$product->addStockQuantity($orderProductUsingStock->getQuantity());
 		}
 	}
 

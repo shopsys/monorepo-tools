@@ -727,10 +727,17 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param int $stockQuantity
+	 * @param int $quantity
 	 */
-	public function setStockQuantity($stockQuantity) {
-		$this->stockQuantity = $stockQuantity;
+	public function addStockQuantity($quantity) {
+		$this->stockQuantity += $quantity;
+	}
+
+	/**
+	 * @param int $quantity
+	 */
+	public function subtractStockQuantity($quantity) {
+		$this->stockQuantity -= $quantity;
 	}
 
 	/**
