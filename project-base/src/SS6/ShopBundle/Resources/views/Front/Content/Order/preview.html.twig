@@ -4,24 +4,24 @@
 		<table class="list-cart-preview">
 			<tbody>
 
-				{% for quantifiedItemKey, quantifiedItem in orderPreview.quantifiedItems %}
-					{% set quantifiedItemPrice = orderPreview.quantifiedItemsPrices[quantifiedItemKey] %}
-					{% set quantifiedItemDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedItemKey] %}
+				{% for quantifiedProductKey, quantifiedProduct in orderPreview.quantifiedProducts %}
+					{% set quantifiedProductPrice = orderPreview.quantifiedItemsPrices[quantifiedProductKey] %}
+					{% set quantifiedProductDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedProductKey] %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
-							<strong>{{ quantifiedItem.quantity|formatNumber }} x</strong> {{ quantifiedItem.item.name }}
+							<strong>{{ quantifiedProduct.quantity|formatNumber }} x</strong> {{ quantifiedProduct.product.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ quantifiedItemPrice.totalPriceWithVat|price }}
+							{{ quantifiedProductPrice.totalPriceWithVat|price }}
 						</td>
 					</tr>
-					{% if quantifiedItemDiscount is not null %}
+					{% if quantifiedProductDiscount is not null %}
 						<tr>
 							<td class="list-cart-preview__cell">
 								{{ 'Sleva'|trans }}:
 							</td>
 							<td class="list-cart-preview__cell list-cart-preview__cell--price">
-								{{ quantifiedItemDiscount.priceWithVat|price }}
+								{{ quantifiedProductDiscount.priceWithVat|price }}
 							</td>
 						</tr>
 					{% endif %}

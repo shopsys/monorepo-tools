@@ -8,7 +8,6 @@ use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
@@ -29,11 +28,6 @@ class CartController extends FrontBaseController {
 	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemPriceCalculation
-	 */
-	private $cartItemPriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
@@ -72,7 +66,6 @@ class CartController extends FrontBaseController {
 		Domain $domain,
 		FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
 		ProductDetailFactory $productDetailFactory,
-		CartItemPriceCalculation $cartItemPriceCalculation,
 		Cart $cart,
 		OrderPreviewFactory $orderPreviewFactory
 	) {
@@ -82,7 +75,6 @@ class CartController extends FrontBaseController {
 		$this->domain = $domain;
 		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
 		$this->productDetailFactory = $productDetailFactory;
-		$this->cartItemPriceCalculation = $cartItemPriceCalculation;
 		$this->cart = $cart;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 	}
@@ -130,7 +122,6 @@ class CartController extends FrontBaseController {
 		}
 
 		$cartItems = $this->cart->getItems();
-		$cartItemPrices = $this->cartItemPriceCalculation->calculatePrices($cartItems);
 		$domainId = $this->domain->getId();
 
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
@@ -143,7 +134,7 @@ class CartController extends FrontBaseController {
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
 			'cart' => $this->cart,
 			'cartItems' => $cartItems,
-			'cartItemPrices' => $cartItemPrices,
+			'cartItemPrices' => $orderPreview->getQuantifiedItemsPrices(),
 			'form' => $form->createView(),
 			'isFreeTransportAndPaymentActive' => $this->freeTransportAndPaymentFacade->isActive($domainId),
 			'isPaymentAndTransportFree' => $this->freeTransportAndPaymentFacade->isFree($productsPrice->getPriceWithVat(), $domainId),
