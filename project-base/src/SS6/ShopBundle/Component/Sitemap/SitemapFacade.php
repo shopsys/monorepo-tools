@@ -16,6 +16,11 @@ class SitemapFacade {
 	private $sitemapsDir;
 
 	/**
+	 * @var string
+	 */
+	private $sitemapsUrlPrefix;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Domain\Domain
 	 */
 	private $domain;
@@ -37,12 +42,14 @@ class SitemapFacade {
 
 	public function __construct(
 		$sitemapsDir,
+		$sitemapsUrlPrefix,
 		Domain $domain,
 		SitemapDumperFactory $domainSitemapDumperFactory,
 		SitemapRepository $sitemapRepository,
 		PricingGroupSettingFacade $pricingGroupSettingFacade
 	) {
 		$this->sitemapsDir = $sitemapsDir;
+		$this->sitemapsUrlPrefix = $sitemapsUrlPrefix;
 		$this->domain = $domain;
 		$this->domainSitemapDumperFactory = $domainSitemapDumperFactory;
 		$this->sitemapRepository = $sitemapRepository;
@@ -54,7 +61,11 @@ class SitemapFacade {
 			$section = (string)$domainConfig->getId();
 
 			$domainSitemapDumper = $this->domainSitemapDumperFactory->createForDomain($domainConfig->getId());
-			$domainSitemapDumper->dump($this->sitemapsDir, $domainConfig->getUrl() . '/', $section);
+			$domainSitemapDumper->dump(
+				$this->sitemapsDir,
+				$domainConfig->getUrl() . $this->sitemapsUrlPrefix,
+				$section
+			);
 		}
 	}
 

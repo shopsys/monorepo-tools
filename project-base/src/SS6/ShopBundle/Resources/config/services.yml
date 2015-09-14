@@ -139,6 +139,7 @@ services:
     class: SS6\ShopBundle\Component\Sitemap\SitemapFacade
     arguments:
       - %ss6.sitemaps_dir%
+      - %ss6.sitemaps_url_prefix%
 
   ss6.shop.component.sitemap.sitemap_listener:
     class: SS6\ShopBundle\Component\Sitemap\SitemapListener

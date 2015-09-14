@@ -24,5 +24,6 @@ parameters:
   ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
   ss6.root_dir: %kernel.root_dir%/..
   ss6.sitemaps_dir: %ss6.web_dir%/assets/content/sitemaps
+  ss6.sitemaps_url_prefix: /assets/content/sitemaps/
   ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
   ss6.web_dir: %kernel.root_dir%/../web
