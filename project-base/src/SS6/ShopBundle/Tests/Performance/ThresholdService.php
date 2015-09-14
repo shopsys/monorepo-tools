@@ -33,6 +33,14 @@ class ThresholdService {
 	}
 
 	/**
+	 * @param int $errorsCount
+	 * @return string
+	 */
+	public function getErrorsCountFormatterTag($errorsCount) {
+		return 'fg=' . $this->getStatusConsoleTextColor($this->getErrorsCountStatus($errorsCount));
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $collection
 	 * @return int
 	 */
@@ -42,6 +50,7 @@ class ThresholdService {
 		foreach ($collection->getAll() as $pagePerformanceResult) {
 			$allStatuses[] = $this->getDurationStatus($pagePerformanceResult->getAvgDuration());
 			$allStatuses[] = $this->getQueryCountStatus($pagePerformanceResult->getMaxQueryCount());
+			$allStatuses[] = $this->getErrorsCountStatus($pagePerformanceResult->getErrorsCount());
 		}
 
 		return max($allStatuses);
@@ -88,6 +97,14 @@ class ThresholdService {
 		}
 
 		return self::STATUS_OK;
+	}
+
+	/**
+	 * @param int $errorsCount
+	 * @return int
+	 */
+	public function getErrorsCountStatus($errorsCount) {
+		return $errorsCount > 0 ? self::STATUS_CRITICAL : self::STATUS_OK;
 	}
 
 }
