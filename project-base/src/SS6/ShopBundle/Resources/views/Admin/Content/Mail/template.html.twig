@@ -10,11 +10,10 @@
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 		{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
-			<div class="toggle-container box-expand">
-				<h2 class ="toggle-headline box-expand__heading">
-					<span class="in-arrows in-arrows--down">
+			<div class="toggle-container form-group wrap-border">
+				<h2 class ="form-group__title">
 						{{ name }}
-					</span>
+					<span class="form-group__title__click toggle-headline">+</span>
 				</h2>
 				<div id="{{ template.vars.id }}" class="js-mail-template toggle-content display-none box-expand__hidden">
 					{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
@@ -26,34 +25,32 @@
 						{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
 					{% endif %}
 
-					<div class="grid_body">
-						<table class="table">
-							<thead>
-								<tr class="grid-row-titles">
-									<th>
-										{{ 'Použitelné proměnné'|trans }}
-										{% if variablesInfoText is not null %}
-											<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+					<table class="table-main">
+						<thead>
+							<tr>
+								<th>
+									{{ 'Použitelné proměnné'|trans }}
+									{% if variablesInfoText is not null %}
+										<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+									{% endif %}
+								</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for key in variables %}
+								<tr>
+									<td>
+										{{ key }}
+										{% if key in requiredVariables %}
+											<span class="form-input-required">*</span>
 										{% endif %}
-									</th>
-									<th></th>
+									</td>
+									<td>{{ variablesLabels[key] }}</td>
 								</tr>
-							</thead>
-							<tbody>
-								{% for key in variables %}
-									<tr class="grid-row-cells">
-										<td>
-											{{ key }}
-											{% if key in requiredVariables %}
-												<span class="form-input-required">*</span>
-											{% endif %}
-										</td>
-										<td>{{ variablesLabels[key] }}</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
+							{% endfor %}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		{% endmacro%}
