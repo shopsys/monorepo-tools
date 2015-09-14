@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
@@ -21,7 +22,8 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
-		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn(new Price(0, 0, 0));
+		$productPrice = new ProductPrice(new Price(0, 0, 0), false);
+		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($productPrice);
 		$productCalculatedPriceRepositoryMock = $this->getMock(
 			ProductCalculatedPriceRepository::class,
 			['saveCalculatedPrice'],
@@ -62,7 +64,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculationMock
 			->expects($this->exactly($calculationLimit))
 			->method('calculatePrice')
-			->willReturn(new Price(0, 0, 0));
+			->willReturn(new ProductPrice(new Price(0, 0, 0), false));
 		$productCalculatedPriceRepositoryMock = $this->getMock(
 			ProductCalculatedPriceRepository::class,
 			['saveCalculatedPrice'],
@@ -93,7 +95,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$calculationCallbackLimit = $calculationLimit;
-		$recalculatedCount = $productPriceRecalculator->runScheduledRecalculations(function () use (&$calculationCallbackLimit) {
+		$recalculatedCount = $productPriceRecalculator->runScheduledRecalculationsWhile(function () use (&$calculationCallbackLimit) {
 			return $calculationCallbackLimit-- > 0;
 		});
 

@@ -97,10 +97,15 @@ class ProductDetailFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	private function getSellingPrice(Product $product) {
-		return $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
+		try {
+			$productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
+		} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
+			$productPrice = null;
+		}
+		return $productPrice;
 	}
 
 	/**

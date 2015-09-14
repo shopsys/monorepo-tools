@@ -7,10 +7,12 @@ use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
@@ -24,7 +26,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$userData = new UserData();
 		$userData->pricingGroup = $pricingGroup;
 		$user = new User($userData, $billingAddress, null);
-		$expectedProductPrice = new Price(1, 1, 1);
+		$expectedProductPrice = new ProductPrice(new Price(1, 1, 1), false);
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
 		$pricingGroupSettingFacadeMock = $this->getMock(PricingGroupSettingFacade::class, [], [], '', false);
@@ -32,10 +34,13 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
 		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($expectedProductPrice);
 
+		$domainMock = $this->getMock(Domain::class, [], [], '', false);
+
 		$productPriceCalculationForUser = new ProductPriceCalculationForUser(
 			$productPriceCalculationMock,
 			$currentCustomerMock,
-			$pricingGroupSettingFacadeMock
+			$pricingGroupSettingFacadeMock,
+			$domainMock
 		);
 
 		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, 1, $user);
@@ -46,7 +51,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$domainId = 1;
 		$product = $this->getMock(Product::class, [], [], '', false);
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', 1), $domainId);
-		$expectedProductPrice = new Price(1, 1, 1);
+		$expectedProductPrice = new ProductPrice(new Price(1, 1, 1), false);
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
 
@@ -60,10 +65,13 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
 		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($expectedProductPrice);
 
+		$domainMock = $this->getMock(Domain::class, [], [], '', false);
+
 		$productPriceCalculationForUser = new ProductPriceCalculationForUser(
 			$productPriceCalculationMock,
 			$currentCustomerMock,
-			$pricingGroupFacadeMock
+			$pricingGroupFacadeMock,
+			$domainMock
 		);
 
 		$productPrice = $productPriceCalculationForUser->calculatePriceForUserAndDomainId($product, $domainId, null);

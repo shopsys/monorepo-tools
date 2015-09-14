@@ -18,22 +18,30 @@
 						{{ productDetail.product.name }}
 					</h2>
 					<div class="list-items__price">
-						<dl class="list-params-side">
-							<dt class="list-params-side__title">
-								{{ 'Cena s DPH'|trans }}:
-							</dt>
-							<dd class="list-params-side__definition price-main price-big">
-								{{ productDetail.sellingPrice.priceWithVat|price }}
-							</dd>
-						</dl>
-						<dl class="list-params-side">
-							<dt class="list-params-side__title">
-								{{ 'Cena bez DPH'|trans }}:
-							</dt>
-							<dd class="list-params-side__definition">
-								{{ productDetail.sellingPrice.priceWithoutVat|price }}
-							</dd>
-						</dl>
+						{% if productDetail.sellingPrice is not null %}
+							<dl class="list-params-side">
+								<dt class="list-params-side__title">
+									{{ 'Cena s DPH'|trans }}:
+								</dt>
+								<dd class="list-params-side__definition price-main price-big">
+									{% if productDetail.sellingPrice.priceFrom %}
+										{{ 'od'|trans }}
+									{% endif %}
+									{{ productDetail.sellingPrice.priceWithVat|price }}
+								</dd>
+							</dl>
+							<dl class="list-params-side">
+								<dt class="list-params-side__title">
+									{{ 'Cena bez DPH'|trans }}:
+								</dt>
+								<dd class="list-params-side__definition">
+									{% if productDetail.sellingPrice.priceFrom %}
+										{{ 'od'|trans }}
+									{% endif %}
+									{{ productDetail.sellingPrice.priceWithoutVat|price }}
+								</dd>
+							</dl>
+						{% endif %}
 					</div>
 				</a>
 				<div class="list-items__actions">

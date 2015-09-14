@@ -99,7 +99,11 @@ class ProductEditDataFactory {
 		$productEditData = $this->createDefault();
 
 		$productEditData->parameters = $this->getParametersData($product);
-		$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
+		try {
+			$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
+		} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
+			$productEditData->manualInputPrices = null;
+		}
 		$productEditData->accessories = $this->getAccessoriesData($product);
 		$productEditData->imagePositions = $this->imageFacade->getImagesByEntityIndexedById($product, null);
 

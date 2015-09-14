@@ -44,7 +44,11 @@ class ProductInputPriceService {
 		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
 			foreach ($pricingGroups as $pricingGroup) {
 				$pricingGroupId = $pricingGroup->getId();
-				$productPrice = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
+				$productPrice = $this->productPriceCalculation->calculatePrice(
+					$product,
+					$pricingGroup->getDomainId(),
+					$pricingGroup
+				);
 
 				$manualInputPricesData[$pricingGroupId] = $this->inputPriceCalculation->getInputPrice(
 					$inputPriceType,
@@ -97,7 +101,12 @@ class ProductInputPriceService {
 	private function getMaxSellingPriceWithVatInDefaultCurrency(Product $product, array $manualInputPricesInDefaultCurrency) {
 		$maxSellingPriceWithVatInDefaultCurrency = null;
 		foreach ($manualInputPricesInDefaultCurrency as $manualInputPrice) {
-			$productPrice = $this->productPriceCalculation->calculatePrice($product, $manualInputPrice->getPricingGroup());
+			$pricingGroup = $manualInputPrice->getPricingGroup();
+			$productPrice = $this->productPriceCalculation->calculatePrice(
+				$product,
+				$pricingGroup->getDomainId(),
+				$pricingGroup
+			);
 
 			if ($maxSellingPriceWithVatInDefaultCurrency === null
 				|| $productPrice->getPriceWithVat() > $maxSellingPriceWithVatInDefaultCurrency

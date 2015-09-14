@@ -62,7 +62,7 @@ class ProductPriceRecalculator {
 	 * @param callable $canRunCallback
 	 * @return int
 	 */
-	public function runScheduledRecalculations(callable $canRunCallback) {
+	public function runScheduledRecalculationsWhile(callable $canRunCallback) {
 		$productRows = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
 		$count = 0;
 
@@ -81,6 +81,15 @@ class ProductPriceRecalculator {
 		$this->em->clear();
 
 		return $count;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function runAllScheduledRecalculations() {
+		$this->runScheduledRecalculationsWhile(function () {
+			return true;
+		});
 	}
 
 	public function runImmediateRecalculations() {
@@ -112,8 +121,13 @@ class ProductPriceRecalculator {
 	 */
 	private function recalculateProductPrices(Product $product) {
 		foreach ($this->getAllPricingGroups() as $pricingGroup) {
-			$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup);
-			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $price->getPriceWithVat());
+			try {
+				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
+				$priceWithVat = $price->getPriceWithVat();
+			} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
+				$priceWithVat = 0;
+			}
+			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $priceWithVat);
 		}
 		$product->markPriceAsRecalculated();
 		$product->markForVisibilityRecalculation();

@@ -545,8 +545,13 @@ class ProductRepository {
 	}
 
 	public function markAllProductsForPriceRecalculation() {
+		// Performance optimization:
+		// Main variant price recalculation is triggered by variants visibility recalculation
+		// and visibility recalculation is triggered by variant price recalculation.
+		// Therefore main variant price recalculation is useless here.
 		$this->em
-			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE')
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE WHERE p.variantType != :variantyTypeMain')
+			->setParameter('variantyTypeMain', Product::VARIANT_TYPE_MAIN)
 			->execute();
 	}
 

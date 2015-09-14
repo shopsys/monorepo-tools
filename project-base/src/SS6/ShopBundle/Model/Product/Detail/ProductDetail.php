@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetail {
@@ -18,7 +19,7 @@ class ProductDetail {
 	private $basePrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	private $sellingPrice;
 
@@ -40,7 +41,7 @@ class ProductDetail {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $sellingPrice
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
 	 * @param \SS6\ShopBundle\Model\Image\Image[imageId] $imagesById
@@ -48,7 +49,7 @@ class ProductDetail {
 	public function __construct(
 		Product $product,
 		Price $basePrice,
-		Price $sellingPrice,
+		$sellingPrice,
 		array $productDomainsIndexedByDomainId,
 		array $parameters,
 		array $imagesById
@@ -76,7 +77,7 @@ class ProductDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	public function getSellingPrice() {
 		return $this->sellingPrice;
