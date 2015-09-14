@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\String\TransformString;
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 
 class FriendlyUrlService {
@@ -113,4 +114,14 @@ class FriendlyUrlService {
 
 		return $domainConfig->getUrl() . '/' . $friendlyUrl->getSlug();
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param string $slug
+	 * @return string
+	 */
+	public function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug) {
+		return $domainConfig->getUrl() . '/' . $slug;
+	}
+
 }
