@@ -21,15 +21,20 @@
 							<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}" class="form-tree__item__control">
 								<i class="svg svg-pencil"></i>
 							</a>
+							{% set csrfTokenId = constant('SS6\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_ID_PREFIX') ~ 'admin_category_delete' %}
+							{% set categoryDeleteUrl = url('admin_category_delete', {
+								id: categoryDetail.category.id,
+								(constant('SS6\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER')): csrf_token(csrfTokenId)
+							}) %}
 							<a
-								href="{{ url('admin_category_delete', {id: categoryDetail.category.id}) }}"
+								href="{{ categoryDeleteUrl }}"
 								onclick="
 									SS6.window({
 										content: '{{ 'Opravdu chcete smazat tuto kategorii?'|trans|e('js') }}',
 										buttonCancel: true,
 										buttonContinue: true,
 										textContinue: '{{ 'Ano'|trans|e('js') }}',
-										urlContinue: '{{ url('admin_category_delete', {id: categoryDetail.category.id})|e('js') }}'
+										urlContinue: '{{ categoryDeleteUrl|e('js') }}'
 									});
 									return false;"
 								class="form-tree__item__control"
