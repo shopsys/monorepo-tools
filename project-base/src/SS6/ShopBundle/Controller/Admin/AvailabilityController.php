@@ -160,7 +160,11 @@ class AvailabilityController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$availabilitySettingsFormData = $form->getData();
-			$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+			$this->transactional(
+				function () use ($availabilitySettingsFormData) {
+					$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+				}
+			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_availability_list'));

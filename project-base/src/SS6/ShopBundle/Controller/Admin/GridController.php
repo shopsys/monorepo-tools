@@ -51,7 +51,11 @@ class GridController extends AdminBaseController {
 		$rowId = json_decode($request->get('rowId'));
 
 		try {
-			$rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+			$this->transactional(
+				function () use ($request, $rowId) {
+					$rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+				}
+			);
 			$responseData['success'] = true;
 			$responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
 		} catch (\SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException $e) {

@@ -171,7 +171,11 @@ class PricingGroupController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$pricingGroupSettingsFormData = $form->getData();
-			$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+			$this->transactional(
+				function () use ($pricingGroupSettingsFormData) {
+					$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+				}
+			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));

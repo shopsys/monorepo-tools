@@ -199,7 +199,11 @@ class CategoryController extends AdminBaseController {
 			$parentIdByCategoryId[$categoryId] = $parentId;
 		}
 
-		$this->categoryFacade->editOrdering($parentIdByCategoryId);
+		$this->transactional(
+			function () use ($parentIdByCategoryId) {
+				$this->categoryFacade->editOrdering($parentIdByCategoryId);
+			}
+		);
 
 		return new Response('OK - dummy');
 	}

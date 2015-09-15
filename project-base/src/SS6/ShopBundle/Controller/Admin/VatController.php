@@ -179,8 +179,12 @@ class VatController extends AdminBaseController {
 
 			if ($form->isValid()) {
 				$vatSettingsFormData = $form->getData();
-				$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
-				$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+				$this->transactional(
+					function () use ($vatSettingsFormData) {
+						$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
+						$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+					}
+				);
 				$this->getFlashMessageSender()->addSuccessFlash('Nastavení DPH bylo upraveno');
 
 				return $this->redirect($this->generateUrl('admin_vat_list'));

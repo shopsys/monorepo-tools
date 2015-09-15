@@ -103,7 +103,11 @@ class SuperadminController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$pricingSettingData = $form->getData();
-			$this->pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
+			$this->transactional(
+				function () use ($pricingSettingData) {
+					$this->pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
+				}
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				'<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno',
@@ -174,9 +178,13 @@ class SuperadminController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$formData = $form->getData();
-			foreach ($formData[ModulesFormType::MODULES_SUBFORM_NAME] as $moduleName => $isEnabled) {
-				$this->moduleFacade->setEnabled($moduleName, $isEnabled);
-			}
+			$this->transactional(
+				function () use ($formData, $moduleName, $isEnabled) {
+					foreach ($formData[ModulesFormType::MODULES_SUBFORM_NAME] as $moduleName => $isEnabled) {
+						$this->moduleFacade->setEnabled($moduleName, $isEnabled);
+					}
+				}
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
 				'url' => $this->generateUrl('admin_superadmin_pricing'),

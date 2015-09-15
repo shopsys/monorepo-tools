@@ -137,7 +137,13 @@ class MailController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->mailTemplateFacade->saveMailTemplatesData($allMailTemplatesData->getAllTemplates(), $allMailTemplatesData->domainId);
+			$this->transactional(
+				function () use ($allMailTemplatesData) {
+					$this->mailTemplateFacade->saveMailTemplatesData(
+						$allMailTemplatesData->getAllTemplates(), $allMailTemplatesData->domainId
+					);
+				}
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení šablony e-mailu bylo upraveno');
 
@@ -193,9 +199,12 @@ class MailController extends AdminBaseController {
 		if ($form->isValid()) {
 			$mailSettingData = $form->getData();
 
-			$this->mailSettingFacade->setMainAdminMail($mailSettingData['email'], $selectedDomainId);
-			$this->mailSettingFacade->setMainAdminMailName($mailSettingData['name'], $selectedDomainId);
-
+			$this->transactional(
+				function () use ($mailSettingData, $selectedDomainId) {
+					$this->mailSettingFacade->setMainAdminMail($mailSettingData['email'], $selectedDomainId);
+					$this->mailSettingFacade->setMainAdminMailName($mailSettingData['name'], $selectedDomainId);
+				}
+			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení emailů bylo upraveno.');
 		}
 
