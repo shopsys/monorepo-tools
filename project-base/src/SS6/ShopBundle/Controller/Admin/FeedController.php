@@ -81,11 +81,7 @@ class FeedController extends AdminBaseController {
 
 		$dataSource = new ArrayDataSource($feeds, 'name');
 
-		$grid = $this->transactional(
-			function () use ($dataSource) {
-				return $this->gridFactory->create('feedsList', $dataSource);
-			}
-		);
+		$grid = $this->gridFactory->create('feedsList', $dataSource);
 
 		$grid->addColumn('name', 'feedName', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
