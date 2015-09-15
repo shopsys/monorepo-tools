@@ -23,7 +23,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 */
 	private function getDefaultProductEditData() {
-		$category = $this->getReference(CategoryDataFixture::ELECTRONICS);
+		$category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::ELECTRONICS);
 
 		$em = $this->getEntityManager();
 		$vat = new Vat(new VatData('vat', 21));
@@ -273,7 +273,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 
-		$category = $this->getReference(CategoryDataFixture::TOYS);
+		$category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TOYS);
 
 		$productEditData = $this->getDefaultProductEditData();
 		$productEditData->productData->categoriesByDomainId = [1 => [$category]];

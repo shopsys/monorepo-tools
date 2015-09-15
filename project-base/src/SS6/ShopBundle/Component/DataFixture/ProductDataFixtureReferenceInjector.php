@@ -34,14 +34,30 @@ class ProductDataFixtureReferenceInjector {
 		];
 
 		$categories = [
-			'1' => $referenceRepository->getReference(CategoryDataFixture::TV),
-			'2' => $referenceRepository->getReference(CategoryDataFixture::PHOTO),
-			'3' => $referenceRepository->getReference(CategoryDataFixture::PRINTERS),
-			'4' => $referenceRepository->getReference(CategoryDataFixture::PC),
-			'5' => $referenceRepository->getReference(CategoryDataFixture::PHONES),
-			'6' => $referenceRepository->getReference(CategoryDataFixture::COFFEE),
-			'7' => $referenceRepository->getReference(CategoryDataFixture::BOOKS),
-			'8' => $referenceRepository->getReference(CategoryDataFixture::TOYS),
+			CategoryDataFixture::TV => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::TV
+			),
+			CategoryDataFixture::PHOTO => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO
+			),
+			CategoryDataFixture::PRINTERS => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS
+			),
+			CategoryDataFixture::PC => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::PC
+			),
+			CategoryDataFixture::PHONES => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::PHONES
+			),
+			CategoryDataFixture::COFFEE => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::COFFEE
+			),
+			CategoryDataFixture::BOOKS => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::BOOKS
+			),
+			CategoryDataFixture::TOYS => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::TOYS
+			),
 		];
 
 		$flags = [
