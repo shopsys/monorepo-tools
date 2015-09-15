@@ -459,10 +459,6 @@ class Order {
 		return $this->status;
 	}
 
-	public function detachCustomer() {
-		$this->customer = null;
-	}
-
 	/**
 	 * @return string
 	 */
