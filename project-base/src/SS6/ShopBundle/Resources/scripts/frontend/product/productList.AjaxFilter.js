@@ -40,7 +40,7 @@
 
 		var showProducts = function ($wrappedData) {
 			var $productsHtml = $wrappedData.find('.js-product-list-ajax-filter-products-with-controls');
-			$productsWithControls.html($productsHtml);
+			$productsWithControls.replaceWith($productsHtml);
 			$productsWithControls.show();
 			$productsWithControls.removeClass('js-disable');
 			ajaxMoreLoader.reInit();
