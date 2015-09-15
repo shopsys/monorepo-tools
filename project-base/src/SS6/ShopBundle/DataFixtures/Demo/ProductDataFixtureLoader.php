@@ -28,15 +28,14 @@ class ProductDataFixtureLoader {
 	const COLUMN_SELLING_FROM = 9;
 	const COLUMN_SELLING_TO = 10;
 	const COLUMN_STOCK_QUANTITY = 11;
-	const COLUMN_SHOW_1 = 12;
-	const COLUMN_SHOW_2 = 13;
-	const COLUMN_AVAILABILITY = 14;
-	const COLUMN_PARAMETERS = 15;
-	const COLUMN_CATEGORIES = 16;
-	const COLUMN_FLAGS = 17;
-	const COLUMN_SELLING_DENIED = 18;
-	const COLUMN_BRAND = 19;
-	const COLUMN_MAIN_VARIANT_CATNUM = 20;
+	const COLUMN_AVAILABILITY = 12;
+	const COLUMN_PARAMETERS = 13;
+	const COLUMN_CATEGORIES_1 = 14;
+	const COLUMN_CATEGORIES_2 = 15;
+	const COLUMN_FLAGS = 16;
+	const COLUMN_SELLING_DENIED = 17;
+	const COLUMN_BRAND = 18;
+	const COLUMN_MAIN_VARIANT_CATNUM = 19;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
@@ -200,8 +199,10 @@ class ProductDataFixtureLoader {
 				break;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[self::COLUMN_PARAMETERS]);
-		$productEditData->productData->categoriesByDomainId[1] = $this->getProductDataFromString($row[self::COLUMN_CATEGORIES], $this->categories);
-		$productEditData->productData->categoriesByDomainId[2] = $this->getProductDataFromString($row[self::COLUMN_CATEGORIES], $this->categories);
+		$productEditData->productData->categoriesByDomainId = [
+			1 => $this->getProductDataFromString($row[self::COLUMN_CATEGORIES_1], $this->categories),
+			2 => $this->getProductDataFromString($row[self::COLUMN_CATEGORIES_2], $this->categories),
+		];
 		$productEditData->productData->flags = $this->getProductDataFromString($row[self::COLUMN_FLAGS], $this->flags);
 		$productEditData->productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
 
