@@ -48,6 +48,7 @@ class RegistrationFacade {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
 		$this->registrationService->resetPassword($user);
+		$this->em->flush($user);
 		$this->resetPasswordMailFacade->sendMail($user);
 	}
 
