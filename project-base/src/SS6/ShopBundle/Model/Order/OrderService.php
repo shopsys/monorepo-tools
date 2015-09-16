@@ -124,14 +124,4 @@ class OrderService {
 		$order->setTotalPrice($orderTotalPrice);
 	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order[]
-	 */
-	public function detachCustomer(array $orders) {
-		foreach ($orders as $order) {
-			/* @var $order \SS6\ShopBundle\Model\Order\Order */
-			$order->detachCustomer();
-		}
-	}
-
 }

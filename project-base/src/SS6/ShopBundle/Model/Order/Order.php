@@ -40,7 +40,7 @@ class Order {
 	 * @var \SS6\ShopBundle\Model\Customer\User|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\User")
-	 * @ORM\JoinColumn(nullable=true)
+	 * @ORM\JoinColumn(nullable=true, name="customer_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $customer;
 
@@ -457,10 +457,6 @@ class Order {
 	 */
 	public function getStatus() {
 		return $this->status;
-	}
-
-	public function detachCustomer() {
-		$this->customer = null;
 	}
 
 	/**
