@@ -21,4 +21,25 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 		$productVariantService->checkProductIsNotMainVariant($mainVariant);
 	}
 
+	public function testRefreshProductVariants() {
+		$productVariantService = new ProductVariantService();
+		$productData = new ProductData();
+		$mainVariant = new Product($productData);
+		$variant1 = new Product($productData);
+		$variant2 = new Product($productData);
+		$variant3 = new Product($productData);
+
+		$mainVariant->addVariant($variant1);
+		$mainVariant->addVariant($variant2);
+
+		$currentVariants = [$variant2, $variant3];
+		$productVariantService->refreshProductVariants($mainVariant, $currentVariants);
+
+		$variantsArray = $mainVariant->getVariants()->toArray();
+
+		$this->assertNotContains($variant1, $variantsArray);
+		$this->assertContains($variant2, $variantsArray);
+		$this->assertContains($variant3, $variantsArray);
+	}
+
 }

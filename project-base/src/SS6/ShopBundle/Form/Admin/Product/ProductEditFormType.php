@@ -237,6 +237,14 @@ class ProductEditFormType extends AbstractType {
 				]);
 		}
 
+		if ($this->product !== null && $this->product->isMainVariant()) {
+			$builder->add('variants', FormType::PRODUCTS, [
+				'required' => false,
+				'main_product' => $this->product,
+				'allow_variants' => false,
+			]);
+		}
+
 		if ($this->product !== null) {
 			$this->disableIrrelevantFields($builder, $this->product);
 		}

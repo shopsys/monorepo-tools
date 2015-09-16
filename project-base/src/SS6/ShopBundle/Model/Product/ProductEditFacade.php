@@ -101,6 +101,11 @@ class ProductEditFacade {
 	 */
 	private $productAccessoryRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVariantService
+	 */
+	private $productVariantService;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -116,7 +121,8 @@ class ProductEditFacade {
 		FriendlyUrlFacade $friendlyUrlFacade,
 		ProductHiddenRecalculator $productHiddenRecalculator,
 		ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
-		ProductAccessoryRepository $productAccessoryRepository
+		ProductAccessoryRepository $productAccessoryRepository,
+		ProductVariantService $productVariantService
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -133,6 +139,7 @@ class ProductEditFacade {
 		$this->productHiddenRecalculator = $productHiddenRecalculator;
 		$this->productSellingDeniedRecalculator = $productSellingDeniedRecalculator;
 		$this->productAccessoryRepository = $productAccessoryRepository;
+		$this->productVariantService = $productVariantService;
 	}
 
 	/**
@@ -189,6 +196,8 @@ class ProductEditFacade {
 			$this->refreshProductDomains($product, $productEditData);
 			if (!$product->isMainVariant()) {
 				$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+			} else {
+				$this->productVariantService->refreshProductVariants($product, $productEditData->variants);
 			}
 			$this->refreshProductAccessories($product, $productEditData->accessories);
 			$this->em->flush();
@@ -207,6 +216,7 @@ class ProductEditFacade {
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
+		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 
 		return $product;
 	}

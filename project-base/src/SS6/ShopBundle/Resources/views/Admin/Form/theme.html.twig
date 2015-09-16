@@ -429,7 +429,11 @@
 		</table>
 		<a href="#" class="btn js-products-picker-button-add">
 			<i class="sprite sprite-plus"></i>
-			{{ 'Přidat zboží'|trans }}
+			{% if labelButtonAdd is defined %}
+				{{ labelButtonAdd }}
+			{% else %}
+				{{ 'Přidat zboží'|trans }}
+			{% endif %}
 		</a>
 	</div>
 {% endblock products_widget %}
