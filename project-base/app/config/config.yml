@@ -94,6 +94,9 @@ monolog:
     console:
       type: console
 
+presta_sitemap:
+  route_annotation_listener: false
+
 ss6_shop:
   router:
     locale_router_filepaths:

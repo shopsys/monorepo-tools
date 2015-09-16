@@ -28,6 +28,11 @@
     minutes: '0'
     hours: '*/6'
 
+- service: SS6\ShopBundle\Component\Sitemap\SitemapCronModule
+  time:
+    minutes: '0'
+    hours: '4'
+
 - service: SS6\ShopBundle\Model\Feed\Category\FeedCategoryCronModule
   time:
     minutes: '0'
