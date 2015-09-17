@@ -12,15 +12,17 @@ use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	const ELECTRONICS = 'category_electronics';
-	const TV = 'category_tv';
-	const PHOTO = 'category_photo';
-	const PRINTERS = 'category_printers';
-	const PC = 'category_pc';
-	const PHONES = 'category_phones';
-	const COFFEE = 'category_coffee';
-	const BOOKS = 'category_books';
-	const TOYS = 'category_toys';
+	const PREFIX = 'category_';
+
+	const ELECTRONICS = 'electronics';
+	const TV = 'tv';
+	const PHOTO = 'photo';
+	const PRINTERS = 'printers';
+	const PC = 'pc';
+	const PHONES = 'phones';
+	const COFFEE = 'coffee';
+	const BOOKS = 'books';
+	const TOYS = 'toys';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -76,7 +78,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
 
 		$category = $categoryFacade->create($categoryData);
-		$this->addReference($referenceName, $category);
+		$this->addReference(self::PREFIX . $referenceName, $category);
 
 		return $category;
 	}

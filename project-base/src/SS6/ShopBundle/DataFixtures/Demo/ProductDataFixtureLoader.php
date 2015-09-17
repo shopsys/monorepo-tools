@@ -200,10 +200,10 @@ class ProductDataFixtureLoader {
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[self::COLUMN_PARAMETERS]);
 		$productEditData->productData->categoriesByDomainId = [
-			1 => $this->getProductDataFromString($row[self::COLUMN_CATEGORIES_1], $this->categories),
-			2 => $this->getProductDataFromString($row[self::COLUMN_CATEGORIES_2], $this->categories),
+			1 => $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories),
+			2 => $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories),
 		];
-		$productEditData->productData->flags = $this->getProductDataFromString($row[self::COLUMN_FLAGS], $this->flags);
+		$productEditData->productData->flags = $this->getValuesByKeyString($row[self::COLUMN_FLAGS], $this->flags);
 		$productEditData->productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
 
 		if ($row[self::COLUMN_BRAND] !== null) {
@@ -267,19 +267,19 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @param string $string
-	 * @param array $productData
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 * @param string $keyString
+	 * @param array $valuesByKey
+	 * @return array $values
 	 */
-	private function getProductDataFromString($string, array $productData) {
-		$data = [];
-		if (!empty($string)) {
-			$ids = explode(';', $string);
-			foreach ($ids as $id) {
-				$data[] = $productData[$id];
+	private function getValuesByKeyString($keyString, array $valuesByKey) {
+		$values = [];
+		if (!empty($keyString)) {
+			$keys = explode(';', $keyString);
+			foreach ($keys as $key) {
+				$values[] = $valuesByKey[$key];
 			}
 		}
 
-		return $data;
+		return $values;
 	}
 }

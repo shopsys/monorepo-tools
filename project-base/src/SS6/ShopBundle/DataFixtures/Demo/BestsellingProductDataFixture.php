@@ -18,7 +18,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 		$bestsellingProductFacade = $this->get(BestsellingProductFacade::class);
 
 		$bestsellingProductFacade->edit(
-			$this->getReference(CategoryDataFixture::PHOTO),
+			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			1,
 			[
 				0 => $this->getReference('product_7'),
@@ -28,7 +28,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 		);
 
 		$bestsellingProductFacade->edit(
-			$this->getReference(CategoryDataFixture::PHOTO),
+			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			2,
 			[$this->getReference('product_7')]
 		);
