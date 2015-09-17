@@ -45,7 +45,9 @@
 		"intaro/postgres-search-bundle": "dev-master#0eb26e0812",
 		"intervention/image": "2.0.17",
 		"jms/translation-bundle": "dev-fix-external-translations#527da12",
+		"pdepend/pdepend": "2.0.0",
 		"phing/phing": "2.9.1",
+		"phpmd/phpmd": "2.0.0",
 		"phpunit/phpunit": "4.8.4",
 		"presta/sitemap-bundle": "1.4",
 		"prezent/doctrine-translatable-bundle": "dev-master#adfc849",
@@ -67,8 +69,6 @@
 	"require-dev": {
 		"codeception/codeception": "2.1.2",
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
-		"pdepend/pdepend": "2.0.0",
-		"phpmd/phpmd": "2.0.0",
 		"se/selenium-server-standalone": "2.45.0",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"squizlabs/php_codesniffer": "2.3.2"
