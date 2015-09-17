@@ -12,4 +12,27 @@ abstract class Kernel extends BaseKernel {
 	public function getContainer() {
 		return parent::getContainer()->get('ss6.auto_services.auto_container');
 	}
+
+	protected function initializeContainer() {
+		if ($this->isContainerClassAlreadyLoaded()) {
+			$this->initializeContainerWithoutRebuilding();
+		} else {
+			parent::initializeContainer();
+		}
+	}
+
+	private function initializeContainerWithoutRebuilding() {
+		$class = $this->getContainerClass();
+		$this->container = new $class();
+		$this->container->set('kernel', $this);
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function isContainerClassAlreadyLoaded() {
+		$class = $this->getContainerClass();
+		return class_exists($class, false);
+	}
+
 }
