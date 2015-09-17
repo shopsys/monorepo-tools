@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
+use SS6\ShopBundle\Form\Admin\Order\OrderFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
@@ -21,7 +21,6 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemFacade;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController {
@@ -62,14 +61,14 @@ class OrderController extends AdminBaseController {
 	private $orderFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Form\Admin\Order\OrderFormTypeFactory
+	 */
+	private $orderFormTypeFactory;
+
+	/**
 	 * @var \Symfony\Component\Translation\Translator
 	 */
 	private $translator;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
-	 */
-	private $orderStatusFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemFacade
@@ -83,9 +82,9 @@ class OrderController extends AdminBaseController {
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
+		OrderFormTypeFactory $orderFormTypeFactory,
 		Breadcrumb $breadcrumb,
 		EntityManager $em,
-		OrderStatusFacade $orderStatusFacade,
 		OrderItemFacade $orderItemFacade
 	) {
 		$this->orderFacade = $orderFacade;
@@ -94,9 +93,9 @@ class OrderController extends AdminBaseController {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
+		$this->orderFormTypeFactory = $orderFormTypeFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->em = $em;
-		$this->orderStatusFacade = $orderStatusFacade;
 		$this->orderItemFacade = $orderItemFacade;
 	}
 
@@ -108,8 +107,7 @@ class OrderController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$order = $this->orderFacade->getById($id);
-		$allOrderStatuses = $this->orderStatusFacade->getAll();
-		$form = $this->createForm(new OrderFormType($allOrderStatuses));
+		$form = $this->createForm($this->orderFormTypeFactory->create());
 
 		try {
 			$orderData = new OrderData();
@@ -174,8 +172,7 @@ class OrderController extends AdminBaseController {
 		$orderData = new OrderData();
 		$orderData->setFromEntity($order);
 
-		$allOrderStatuses = $this->orderStatusFacade->getAll();
-		$form = $this->createForm(new OrderFormType($allOrderStatuses));
+		$form = $this->createForm($this->orderFormTypeFactory->create());
 		$form->setData($orderData);
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
