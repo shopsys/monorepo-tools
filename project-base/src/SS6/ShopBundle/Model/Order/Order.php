@@ -423,13 +423,18 @@ class Order {
 	 * @return string
 	 */
 	public function getPaymentName() {
+		return $this->getOrderPayment()->getName();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderPayment
+	 */
+	public function getOrderPayment() {
 		foreach ($this->items as $item) {
 			if ($item instanceof OrderPayment) {
-				return $item->getName();
+				return $item;
 			}
 		}
-
-		return null;
 	}
 
 	/**
@@ -443,13 +448,18 @@ class Order {
 	 * @return string
 	 */
 	public function getTransportName() {
+		return $this->getTransport()->getName();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderTransport
+	 */
+	public function getOrderTransport() {
 		foreach ($this->items as $item) {
 			if ($item instanceof OrderTransport) {
-				return $item->getName();
+				return $item;
 			}
 		}
-
-		return null;
 	}
 
 	/**
@@ -543,6 +553,20 @@ class Order {
 	 */
 	public function getItems() {
 		return $this->items;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 */
+	public function getItemsWithoutTransportAndPayment() {
+		$itemsWithoutTransportAndPayment = [];
+		foreach ($this->getItems() as $orderItem) {
+			if (!($orderItem instanceof OrderTransport || $orderItem instanceof OrderPayment)) {
+				$itemsWithoutTransportAndPayment[] = $orderItem;
+			}
+		}
+
+		return $itemsWithoutTransportAndPayment;
 	}
 
 	/**

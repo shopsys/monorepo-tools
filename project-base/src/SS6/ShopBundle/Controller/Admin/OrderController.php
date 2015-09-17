@@ -107,7 +107,7 @@ class OrderController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$order = $this->orderFacade->getById($id);
-		$form = $this->createForm($this->orderFormTypeFactory->create());
+		$form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 
 		try {
 			$orderData = new OrderData();
@@ -172,7 +172,7 @@ class OrderController extends AdminBaseController {
 		$orderData = new OrderData();
 		$orderData->setFromEntity($order);
 
-		$form = $this->createForm($this->orderFormTypeFactory->create());
+		$form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 		$form->setData($orderData);
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());

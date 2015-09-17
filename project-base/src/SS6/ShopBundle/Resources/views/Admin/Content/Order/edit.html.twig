@@ -148,9 +148,9 @@
 
 		<h2>{{ 'Položky objednávky'|trans }}</h2>
 		<fieldset>
-			{% if form.items is not empty %}
+			{% if form.itemsWithoutTransportAndPayment is not empty %}
 				<div class="table-touch-always">
-					{{ form_errors(form.items) }}
+					{{ form_errors(form.itemsWithoutTransportAndPayment) }}
 					<div class="table-touch-always__in">
 						<table id="order_form_items" class="table-main">
 							<thead>
@@ -167,18 +167,39 @@
 							</thead>
 							<tbody
 								id="js-order-items"
-								data-prototype="{{ orderItemMacro.orderItem(form.items.vars.prototype)|escape }}"
+								data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
 								data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
 							>
 								{% for productItem in order.productItems %}
-									{{ orderItemMacro.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+									{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
 								{% endfor %}
 
-								{% for orderItemId, orderItemForm in form.items %}
+								{% for orderItemId, orderItemForm in form.itemsWithoutTransportAndPayment %}
 									{% if not orderItemForm.rendered %}
 										{{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
 									{% endif %}
 								{% endfor %}
+
+								<tr>
+									<td>{{ form_widget(form.orderTransport.transport, {isSimple: true}) }}</td>
+									<td class="text-right">-</td>
+									<td>{{ form_widget(form.orderTransport.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+									<td class="text-right">1</td>
+									<td class="text-right">{{ form_widget(form.orderTransport.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+									<td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
+									<td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>{{ form_widget(form.orderPayment.payment, {isSimple: true}) }}</td>
+									<td class="text-right">-</td>
+									<td>{{ form_widget(form.orderPayment.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+									<td class="text-right">1</td>
+									<td class="text-right">{{ form_widget(form.orderPayment.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+									<td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
+									<td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+									<td></td>
+								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
@@ -204,7 +225,7 @@
 					</div>
 				</div>
 			{% else %}
-				{{ form_widget(form.items, { type: 'hidden' }) }}
+				{{ form_widget(form.itemsWithoutTransportAndPayment, { type: 'hidden' }) }}
 				<div class="in-message in-message--info in-message--static">
 					{{ 'Objednávka neobsahuje žádné položky.'|trans }}
 				</div>

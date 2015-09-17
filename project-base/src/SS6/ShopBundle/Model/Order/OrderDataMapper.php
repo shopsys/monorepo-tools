@@ -32,7 +32,9 @@ class OrderDataMapper {
 		$orderData->deliveryCity = $frontOrderData->deliveryCity;
 		$orderData->deliveryPostcode = $frontOrderData->deliveryPostcode;
 		$orderData->note = $frontOrderData->note;
-		$orderData->items = $frontOrderData->items;
+		$orderData->itemsWithoutTransportAndPayment = $frontOrderData->itemsWithoutTransportAndPayment;
+		$orderData->orderTransport = $frontOrderData->orderTransport;
+		$orderData->orderPayment = $frontOrderData->orderPayment;
 		$orderData->domainId = $frontOrderData->domainId;
 		$orderData->currency = $frontOrderData->currency;
 
