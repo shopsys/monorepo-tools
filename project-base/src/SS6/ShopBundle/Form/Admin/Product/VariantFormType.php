@@ -41,7 +41,7 @@ class VariantFormType extends AbstractType {
 							new Constraints\NotBlank(),
 						],
 					])
-					->addViewTransformer(new RemoveDuplicatesFromArrayTransformer())
+					->addModelTransformer(new RemoveDuplicatesFromArrayTransformer())
 			)
 			->add('save', FormType::SUBMIT);
 	}

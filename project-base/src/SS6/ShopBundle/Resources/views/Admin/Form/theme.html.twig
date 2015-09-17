@@ -408,8 +408,9 @@
 {% endmacro %}
 
 {% block products_widget %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' js-products-picker')|trim}) %}
 	<div
-		class="js-products-picker"
+		{{ block('widget_attributes') }}
 		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype, form.vars.sortable)|e }}"
 		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowVariants: allow_variants}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"

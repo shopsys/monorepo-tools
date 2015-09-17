@@ -150,6 +150,13 @@
 		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
 			return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
 		}
+		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::PRODUCTS')) {
+			var value = [];
+			$(element.domNode).find('.js-products-picker-item-input').each(function () {
+				value.push($(this).val());
+			});
+			return value;
+		}
 		return FpJsFormValidator._getInputValue(element);
 	};
 
