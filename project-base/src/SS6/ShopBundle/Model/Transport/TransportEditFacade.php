@@ -154,9 +154,18 @@ class TransportEditFacade {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getVisibleOnCurrentDomain(array $visiblePayments) {
-		$transports = $this->transportRepository->getAllByDomainId($this->domain->getId());
+		return $this->getVisibleByDomainId($this->domain->getId(), $visiblePayments);
+	}
 
-		return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePayments, $this->domain->getId());
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
+	public function getVisibleByDomainId($domainId, $visiblePaymentsOnDomain) {
+		$transports = $this->transportRepository->getAllByDomainId($domainId);
+
+		return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePaymentsOnDomain, $domainId);
 	}
 
 	/**

@@ -152,9 +152,17 @@ class PaymentEditFacade {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getVisibleOnCurrentDomain() {
+		return $this->getVisibleByDomainId($this->domain->getId());
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getVisibleByDomainId($domainId) {
 		$allPayments = $this->paymentRepository->findAllWithTransports();
 
-		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $this->domain->getId());
+		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
 	}
 
 	/**
