@@ -41,13 +41,20 @@ class OrderFormTypeFactory {
 	 */
 	public function createForOrder(Order $order) {
 		$orderDomainId = $order->getDomainId();
-		$visiblePaymentsOnDomain = $this->paymentEditFacade->getVisibleByDomainId($orderDomainId);
-		$visibleTransportsOnDomain = $this->transportEditFacade->getVisibleByDomainId($orderDomainId, $visiblePaymentsOnDomain);
+		$payments = $this->paymentEditFacade->getVisibleByDomainId($orderDomainId);
+		$transports = $this->transportEditFacade->getVisibleByDomainId($orderDomainId, $payments);
+
+		if (!in_array($order->getPayment(), $payments, true)) {
+			$payments[] = $order->getPayment();
+		}
+		if (!in_array($order->getTransport(), $transports, true)) {
+			$transports[] = $order->getTransport();
+		}
 
 		return new OrderFormType(
 			$this->orderStatusFacade->getAll(),
-			$visibleTransportsOnDomain,
-			$visiblePaymentsOnDomain
+			$transports,
+			$payments
 		);
 	}
 }
