@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Component\Controller\ErrorService;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
@@ -59,6 +60,11 @@ class CartController extends FrontBaseController {
 	 */
 	private $orderPreviewFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Controller\ErrorService
+	 */
+	private $errorService;
+
 	public function __construct(
 		ProductAccessoryFacade $productAccessoryFacade,
 		CartFacade $cartFacade,
@@ -67,7 +73,8 @@ class CartController extends FrontBaseController {
 		FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
 		ProductDetailFactory $productDetailFactory,
 		Cart $cart,
-		OrderPreviewFactory $orderPreviewFactory
+		OrderPreviewFactory $orderPreviewFactory,
+		ErrorService $errorService
 	) {
 		$this->productAccessoryFacade = $productAccessoryFacade;
 		$this->cartFacade = $cartFacade;
@@ -77,6 +84,7 @@ class CartController extends FrontBaseController {
 		$this->productDetailFactory = $productDetailFactory;
 		$this->cart = $cart;
 		$this->orderPreviewFactory = $orderPreviewFactory;
+		$this->errorService = $errorService;
 	}
 
 	/**
@@ -191,7 +199,15 @@ class CartController extends FrontBaseController {
 				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
 			}
 		} else {
-			$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+			// Form errors list in flash message is temporary solution.
+			// We need to determine couse of error when adding product to cart.
+			$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
+			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
+			$this->getFlashMessageSender()->addErrorFlashTwig(
+				'Zadejte prosím platné množství kusů, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
+					'errors' => implode('<br/>', $formErrors),
+				]
+			);
 		}
 
 		if ($this->getRequest()->headers->get('referer')) {
@@ -237,7 +253,15 @@ class CartController extends FrontBaseController {
 				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
 			}
 		} else {
-			$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+			// Form errors list in flash message is temporary solution.
+			// We need to determine couse of error when adding product to cart.
+			$flashMessageBag = $this->get('ss6.shop.flash_message.bag.front');
+			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
+			$this->getFlashMessageSender()->addErrorFlashTwig(
+				'Zadejte prosím platné množství kusů, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
+					'errors' => implode('<br/>', $formErrors),
+				]
+			);
 		}
 
 		return $this->forward('SS6ShopBundle:Front/FlashMessage:index');
