@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Controller\ErrorService;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
 use SS6\ShopBundle\Model\Domain\Domain;
@@ -47,13 +48,19 @@ class DomainController extends AdminBaseController {
 	 */
 	private $domainFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Controller\ErrorService
+	 */
+	private $errorService;
+
 	public function __construct(
 		Domain $domain,
 		SelectedDomain $selectedDomain,
 		GridFactory $gridFactory,
 		Translator $translator,
 		EntityManager $em,
-		DomainFacade $domainFacade
+		DomainFacade $domainFacade,
+		ErrorService $errorService
 	) {
 		$this->domain = $domain;
 		$this->selectedDomain = $selectedDomain;
@@ -61,6 +68,7 @@ class DomainController extends AdminBaseController {
 		$this->translator = $translator;
 		$this->em = $em;
 		$this->domainFacade = $domainFacade;
+		$this->errorService = $errorService;
 	}
 
 	public function domainTabsAction() {
@@ -150,7 +158,11 @@ class DomainController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			return new JsonResponse(['result' => 'invalid', 'errors' => $this->getAllErrorsAsArray($form)]);
+			$flashMessageBag = $this->get('ss6.shop.flash_message.bag.admin');
+			return new JsonResponse([
+				'result' => 'invalid',
+				'errors' => $this->errorService->getAllErrorsAsArray($form, $flashMessageBag),
+			]);
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Domain/edit.html.twig', [
@@ -158,23 +170,6 @@ class DomainController extends AdminBaseController {
 			'domain' => $domain,
 		]);
 
-	}
-
-	/**
-	 * @param \Symfony\Component\Form\Form $form
-	 * @return string[]
-	 */
-	private function getAllErrorsAsArray($form) {
-		$flashMessageBag = $this->get('ss6.shop.flash_message.bag.admin');
-		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
-		$errors = $flashMessageBag->getErrorMessages();
-
-		foreach ($form->getErrors(true) as $error) {
-			/* @var $error \Symfony\Component\Form\FormError */
-			$errors[] = $error->getMessage();
-		}
-
-		return $errors;
 	}
 
 	private function loadData() {
