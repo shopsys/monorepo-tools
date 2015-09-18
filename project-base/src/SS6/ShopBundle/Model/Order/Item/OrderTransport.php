@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
+use SS6\ShopBundle\Model\Order\Item\OrderItemData;
+use SS6\ShopBundle\Model\Order\Item\OrderTransportData;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Transport\Transport;
 
@@ -55,6 +57,20 @@ class OrderTransport extends OrderItem {
 	 */
 	public function getTransport() {
 		return $this->transport;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderTransportData
+	 */
+	public function edit(OrderItemData $orderTransportData) {
+		if ($orderTransportData instanceof OrderTransportData) {
+			$this->transport = $orderTransportData->transport;
+			parent::edit($orderTransportData);
+		} else {
+			throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+				'Instance of ' . OrderTransportData::class . ' is required as argument.'
+			);
+		}
 	}
 
 }

@@ -341,6 +341,27 @@ class Order {
 		);
 		$this->setDeliveryAddress($orderData);
 		$this->status = $orderStatus;
+
+		$this->editOrderTransport($orderData);
+		$this->editOrderPayment($orderData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 */
+	private function editOrderTransport(OrderData $orderData) {
+		$orderTransportData = $orderData->orderTransport;
+		$this->transport = $orderTransportData->transport;
+		$this->getOrderTransport()->edit($orderTransportData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 */
+	private function editOrderPayment(OrderData $orderData) {
+		$orderPaymentData = $orderData->orderPayment;
+		$this->payment = $orderPaymentData->payment;
+		$this->getOrderPayment()->edit($orderPaymentData);
 	}
 
 	/**
