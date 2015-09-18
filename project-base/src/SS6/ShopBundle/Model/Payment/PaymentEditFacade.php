@@ -211,4 +211,41 @@ class PaymentEditFacade {
 		}
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getAllIncludingDeleted() {
+		return $this->paymentRepository->findAllIncludingDeleted();
+	}
+
+	/**
+	 * @return string[paymentId][currencyId]
+	 */
+	public function getPaymentPricesIndexedByPaymentIdAndCurrencyId() {
+		$paymentPricesByTransportIdAndCurrencyId = [];
+		$payments = $this->getAllIncludingDeleted();
+		foreach ($payments as $payment) {
+			$paymentPricesByCurrencyId = [];
+			foreach ($payment->getPrices() as $paymentPrice) {
+				$paymentPricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
+			}
+			$paymentPricesByTransportIdAndCurrencyId[$payment->getId()] = $paymentPricesByCurrencyId;
+		}
+
+		return $paymentPricesByTransportIdAndCurrencyId;
+	}
+
+	/**
+	 * @return string[paymentId]
+	 */
+	public function getPaymentVatPercentsIndexedByPaymentId() {
+		$paymentVatPercentsByTransportId = [];
+		$payments = $this->getAllIncludingDeleted();
+		foreach ($payments as $payment) {
+			$paymentVatPercentsByTransportId[$payment->getId()] = $payment->getVat()->getPercent();
+		}
+
+		return $paymentVatPercentsByTransportId;
+	}
+
 }

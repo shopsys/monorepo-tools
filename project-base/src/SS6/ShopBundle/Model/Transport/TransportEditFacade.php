@@ -199,4 +199,41 @@ class TransportEditFacade {
 		}
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
+	public function getAllIncludingDeleted() {
+		return $this->transportRepository->findAllIncludingDeleted();
+	}
+
+	/**
+	 * @return string[transportId][currencyId]
+	 */
+	public function getTransportPricesIndexedByTransportIdAndCurrencyId() {
+		$transportPricesByTransportIdAndCurrencyId = [];
+		$transports = $this->getAllIncludingDeleted();
+		foreach ($transports as $transport) {
+			$transportPricesByCurrencyId = [];
+			foreach ($transport->getPrices() as $transportPrice) {
+				$transportPricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
+			}
+			$transportPricesByTransportIdAndCurrencyId[$transport->getId()] = $transportPricesByCurrencyId;
+		}
+
+		return $transportPricesByTransportIdAndCurrencyId;
+	}
+
+	/**
+	 * @return string[transportId]
+	 */
+	public function getTransportVatPercentsIndexedByTransportId() {
+		$transportVatPercentsByTransportId = [];
+		$transports = $this->getAllIncludingDeleted();
+		foreach ($transports as $transport) {
+			$transportVatPercentsByTransportId[$transport->getId()] = $transport->getVat()->getPercent();
+		}
+
+		return $transportVatPercentsByTransportId;
+	}
+
 }
