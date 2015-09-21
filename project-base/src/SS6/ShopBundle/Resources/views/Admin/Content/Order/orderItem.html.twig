@@ -32,3 +32,37 @@
 		</td>
 	</tr>
 {% endmacro %}
+
+{% macro orderTransport(orderTransportForm, order, transportPricesByTransportIdAndCurrencyId, transportVatPercentsByTransportId) %}
+	<tr
+			class="js-order-transport-row"
+			data-transport-prices-by-transport-id-and-currency-id="{{ transportPricesByTransportIdAndCurrencyId|json_encode() }}"
+			data-transport-vat-percents-by-transport-id="{{ transportVatPercentsByTransportId|json_encode() }}"
+			>
+		<td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
+		<td class="text-right">-</td>
+		<td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+		<td class="text-right">1</td>
+		<td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+		<td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
+		<td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+		<td></td>
+	</tr>
+{% endmacro %}
+
+{% macro orderPayment(orderPaymentForm, order, paymentPricesByPaymentIdAndCurrencyId, paymentVatPercentsByPaymentId) %}
+	<tr
+			class="js-order-payment-row"
+			data-payment-prices-by-payment-id-and-currency-id="{{ paymentPricesByPaymentIdAndCurrencyId|json_encode() }}"
+			data-payment-vat-percents-by-payment-id="{{ paymentVatPercentsByPaymentId|json_encode() }}"
+			>
+		<td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>
+		<td class="text-right">-</td>
+		<td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
+		<td class="text-right">1</td>
+		<td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
+		<td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
+		<td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+		<td></td>
+	</tr>
+{% endmacro %}
