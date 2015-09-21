@@ -7,15 +7,13 @@
 	SS6.order.transportAndPayment.Prefiller = function () {
 		var self = this;
 
-		var orderCurrencyId = $('#js-order-items').data('order-currency-id');
-
 		var $transportSelect = $('#order_form_orderTransport_transport');
-		var $transportPricesByTransportIdAndCurrencyId = $transportSelect.closest('.js-order-transport-row').data('transport-prices-by-transport-id-and-currency-id');
-		var $transportVatPercentsByTransportId = $transportSelect.closest('.js-order-transport-row').data('transport-vat-percents-by-transport-id');
+		var transportPricesWithVatByTransportId = $transportSelect.closest('.js-order-transport-row').data('transport-prices-with-vat-by-transport-id');
+		var transportVatPercentsByTransportId = $transportSelect.closest('.js-order-transport-row').data('transport-vat-percents-by-transport-id');
 
 		var $paymentSelect = $('#order_form_orderPayment_payment');
-		var $paymentPricesByPaymentIdAndCurrencyId = $paymentSelect.closest('.js-order-payment-row').data('payment-prices-by-payment-id-and-currency-id');
-		var $paymentVatPercentsByPaymentId = $paymentSelect.closest('.js-order-payment-row').data('payment-vat-percents-by-payment-id');
+		var paymentPricesWithVatByPaymentId = $paymentSelect.closest('.js-order-payment-row').data('payment-prices-with-vat-by-payment-id');
+		var paymentVatPercentsByPaymentId = $paymentSelect.closest('.js-order-payment-row').data('payment-vat-percents-by-payment-id');
 
 		this.init = function () {
 			$transportSelect.on('change', onOrderTransportChange);
@@ -24,14 +22,14 @@
 
 		var onOrderTransportChange = function() {
 			var selectedTransportId = $transportSelect.val();
-			$('#order_form_orderTransport_priceWithVat').val($transportPricesByTransportIdAndCurrencyId[selectedTransportId][orderCurrencyId]);
-			$('#order_form_orderTransport_vatPercent').val($transportVatPercentsByTransportId[selectedTransportId]);
+			$('#order_form_orderTransport_priceWithVat').val(transportPricesWithVatByTransportId[selectedTransportId]);
+			$('#order_form_orderTransport_vatPercent').val(transportVatPercentsByTransportId[selectedTransportId]);
 		};
 
 		var onOrderPaymentChange = function() {
 			var selectedPaymentId = $paymentSelect.val();
-			$('#order_form_orderPayment_priceWithVat').val($paymentPricesByPaymentIdAndCurrencyId[selectedPaymentId][orderCurrencyId]);
-			$('#order_form_orderPayment_vatPercent').val($paymentVatPercentsByPaymentId[selectedPaymentId]);
+			$('#order_form_orderPayment_priceWithVat').val(paymentPricesWithVatByPaymentId[selectedPaymentId]);
+			$('#order_form_orderPayment_vatPercent').val(paymentVatPercentsByPaymentId[selectedPaymentId]);
 		};
 	};
 

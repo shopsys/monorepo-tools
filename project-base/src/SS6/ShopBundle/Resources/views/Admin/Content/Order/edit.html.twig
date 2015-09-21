@@ -168,7 +168,6 @@
 							id="js-order-items"
 							data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
 							data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
-							data-order-currency-id="{{ order.currency.id }}"
 						>
 							{% for productItem in order.productItems %}
 								{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
@@ -180,8 +179,8 @@
 								{% endif %}
 							{% endfor %}
 
-							{{ orderItemMacro.orderTransport(form.orderTransport, order, transportPricesByTransportIdAndCurrencyId, transportVatPercentsByTransportId) }}
-							{{ orderItemMacro.orderPayment(form.orderPayment, order, paymentPricesByPaymentIdAndCurrencyId, paymentVatPercentsByPaymentId) }}
+							{{ orderItemMacro.orderTransport(form.orderTransport, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) }}
+							{{ orderItemMacro.orderPayment(form.orderPayment, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) }}
 						</tbody>
 						<tfoot>
 							<tr>

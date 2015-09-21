@@ -33,10 +33,10 @@
 	</tr>
 {% endmacro %}
 
-{% macro orderTransport(orderTransportForm, order, transportPricesByTransportIdAndCurrencyId, transportVatPercentsByTransportId) %}
+{% macro orderTransport(orderTransportForm, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) %}
 	<tr
 			class="js-order-transport-row"
-			data-transport-prices-by-transport-id-and-currency-id="{{ transportPricesByTransportIdAndCurrencyId|json_encode() }}"
+			data-transport-prices-with-vat-by-transport-id="{{ transportPricesWithVatByTransportId|json_encode() }}"
 			data-transport-vat-percents-by-transport-id="{{ transportVatPercentsByTransportId|json_encode() }}"
 			>
 		<td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
@@ -50,10 +50,10 @@
 	</tr>
 {% endmacro %}
 
-{% macro orderPayment(orderPaymentForm, order, paymentPricesByPaymentIdAndCurrencyId, paymentVatPercentsByPaymentId) %}
+{% macro orderPayment(orderPaymentForm, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) %}
 	<tr
 			class="js-order-payment-row"
-			data-payment-prices-by-payment-id-and-currency-id="{{ paymentPricesByPaymentIdAndCurrencyId|json_encode() }}"
+			data-payment-prices-with-vat-by-payment-id="{{ paymentPricesWithVatByPaymentId|json_encode() }}"
 			data-payment-vat-percents-by-payment-id="{{ paymentVatPercentsByPaymentId|json_encode() }}"
 			>
 		<td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>

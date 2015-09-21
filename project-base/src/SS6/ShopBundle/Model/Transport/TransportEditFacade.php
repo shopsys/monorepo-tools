@@ -6,9 +6,11 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
@@ -49,6 +51,11 @@ class TransportEditFacade {
 	 */
 	private $currencyFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 */
+	private $transportPriceCalculation;
+
 	public function __construct(
 		EntityManager $em,
 		TransportRepository $transportRepository,
@@ -56,7 +63,8 @@ class TransportEditFacade {
 		TransportVisibilityCalculation $transportVisibilityCalculation,
 		Domain $domain,
 		ImageFacade $imageFacade,
-		CurrencyFacade $currencyFacade
+		CurrencyFacade $currencyFacade,
+		TransportPriceCalculation $transportPriceCalculation
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
@@ -65,6 +73,7 @@ class TransportEditFacade {
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
 		$this->currencyFacade = $currencyFacade;
+		$this->transportPriceCalculation = $transportPriceCalculation;
 	}
 
 	/**
@@ -207,20 +216,18 @@ class TransportEditFacade {
 	}
 
 	/**
-	 * @return string[transportId][currencyId]
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string [transportId]
 	 */
-	public function getTransportPricesIndexedByTransportIdAndCurrencyId() {
-		$transportPricesByTransportIdAndCurrencyId = [];
+	public function getTransportPricesWithVatIndexedByTransportId(Currency $currency) {
+		$transportPricesWithVatByTransportId = [];
 		$transports = $this->getAllIncludingDeleted();
 		foreach ($transports as $transport) {
-			$transportPricesByCurrencyId = [];
-			foreach ($transport->getPrices() as $transportPrice) {
-				$transportPricesByCurrencyId[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
-			}
-			$transportPricesByTransportIdAndCurrencyId[$transport->getId()] = $transportPricesByCurrencyId;
+			$transportPrice = $this->transportPriceCalculation->calculateIndependentPrice($transport, $currency);
+			$transportPricesWithVatByTransportId[$transport->getId()] = $transportPrice->getPriceWithVat();
 		}
 
-		return $transportPricesByTransportIdAndCurrencyId;
+		return $transportPricesWithVatByTransportId;
 	}
 
 	/**

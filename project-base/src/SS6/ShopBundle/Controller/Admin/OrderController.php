@@ -166,14 +166,14 @@ class OrderController extends AdminBaseController {
 			'form' => $form->createView(),
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
-			'transportPricesByTransportIdAndCurrencyId' => $this->transportEditFacade
-				->getTransportPricesIndexedByTransportIdAndCurrencyId(),
-			'transportVatPercentsByTransportId' => $this->transportEditFacade
-				->getTransportVatPercentsIndexedByTransportId(),
-			'paymentPricesByPaymentIdAndCurrencyId' => $this->paymentEditFacade
-				->getPaymentPricesIndexedByPaymentIdAndCurrencyId(),
-			'paymentVatPercentsByPaymentId' => $this->paymentEditFacade
-				->getPaymentVatPercentsIndexedByPaymentId(),
+			'transportPricesWithVatByTransportId' => $this->transportEditFacade->getTransportPricesWithVatIndexedByTransportId(
+				$order->getCurrency()
+			),
+			'transportVatPercentsByTransportId' => $this->transportEditFacade->getTransportVatPercentsIndexedByTransportId(),
+			'paymentPricesWithVatByPaymentId' => $this->paymentEditFacade->getPaymentPricesWithVatIndexedByPaymentId(
+				$order->getCurrency()
+			),
+			'paymentVatPercentsByPaymentId' => $this->paymentEditFacade->getPaymentVatPercentsIndexedByPaymentId(),
 		]);
 	}
 

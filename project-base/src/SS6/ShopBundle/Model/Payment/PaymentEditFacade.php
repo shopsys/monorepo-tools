@@ -9,8 +9,10 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -52,6 +54,11 @@ class PaymentEditFacade {
 	 */
 	private $currencyFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 */
+	private $paymentPriceCalculation;
+
 	public function __construct(
 		EntityManager $em,
 		PaymentRepository $paymentRepository,
@@ -59,7 +66,8 @@ class PaymentEditFacade {
 		PaymentVisibilityCalculation $paymentVisibilityCalculation,
 		Domain $domain,
 		ImageFacade	$imageFacade,
-		CurrencyFacade $currencyFacade
+		CurrencyFacade $currencyFacade,
+		PaymentPriceCalculation $paymentPriceCalculation
 	) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
@@ -68,6 +76,7 @@ class PaymentEditFacade {
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
 		$this->currencyFacade = $currencyFacade;
+		$this->paymentPriceCalculation = $paymentPriceCalculation;
 	}
 
 	/**
@@ -219,33 +228,31 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @return string[paymentId][currencyId]
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string [paymentId]
 	 */
-	public function getPaymentPricesIndexedByPaymentIdAndCurrencyId() {
-		$paymentPricesByTransportIdAndCurrencyId = [];
+	public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency) {
+		$paymentPricesWithVatByPaymentId = [];
 		$payments = $this->getAllIncludingDeleted();
 		foreach ($payments as $payment) {
-			$paymentPricesByCurrencyId = [];
-			foreach ($payment->getPrices() as $paymentPrice) {
-				$paymentPricesByCurrencyId[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
-			}
-			$paymentPricesByTransportIdAndCurrencyId[$payment->getId()] = $paymentPricesByCurrencyId;
+			$paymentPrice = $this->paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
+			$paymentPricesWithVatByPaymentId[$payment->getId()] = $paymentPrice->getPriceWithVat();
 		}
 
-		return $paymentPricesByTransportIdAndCurrencyId;
+		return $paymentPricesWithVatByPaymentId;
 	}
 
 	/**
 	 * @return string[paymentId]
 	 */
 	public function getPaymentVatPercentsIndexedByPaymentId() {
-		$paymentVatPercentsByTransportId = [];
+		$paymentVatPercentsByPaymentId = [];
 		$payments = $this->getAllIncludingDeleted();
 		foreach ($payments as $payment) {
-			$paymentVatPercentsByTransportId[$payment->getId()] = $payment->getVat()->getPercent();
+			$paymentVatPercentsByPaymentId[$payment->getId()] = $payment->getVat()->getPercent();
 		}
 
-		return $paymentVatPercentsByTransportId;
+		return $paymentVatPercentsByPaymentId;
 	}
 
 }
