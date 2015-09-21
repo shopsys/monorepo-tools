@@ -14,6 +14,8 @@ framework:
   session:
     storage_id: session.storage.mock_file
     cookie_httponly: true
+  router:
+    resource: "%kernel.root_dir%/config/routing_test.yml"
 
 # disable logging in tests
 monolog:
