@@ -74,7 +74,8 @@ class FeedController extends AdminBaseController {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
 				$feeds[] = [
-					'name' => $feedConfig->getName() . ' - ' . $domainConfig->getName(),
+					'feedName' => $feedConfig->getName(),
+					'domainName' => $domainConfig->getName(),
 					'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
 					'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
 				];
@@ -89,7 +90,7 @@ class FeedController extends AdminBaseController {
 			}
 		);
 
-		$grid->addColumn('name', 'name', 'Feed');
+		$grid->addColumn('name', 'feedName', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
@@ -109,7 +110,8 @@ class FeedController extends AdminBaseController {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
 				$feeds[] = [
-					'name' => $feedConfig->getName() . ' - ' . $domainConfig->getName(),
+					'feedName' => $feedConfig->getName(),
+					'domainName' => $domainConfig->getName(),
 					'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
 					'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
 				];
@@ -124,7 +126,7 @@ class FeedController extends AdminBaseController {
 			}
 		);
 
-		$grid->addColumn('name', 'name', 'Feed');
+		$grid->addColumn('name', 'feedName', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
