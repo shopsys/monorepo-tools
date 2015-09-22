@@ -42,17 +42,18 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 */
-	public function trans($id, array $parameters = [], $domain = self::DEFAULT_DOMAIN, $locale = null) {
+	public function trans($id, array $parameters = [], $domain = null, $locale = null) {
 		$resolvedLocale = $this->resolveLocale($locale);
+		$resolvedDomain = $this->resolveDomain($domain);
 
 		if ($resolvedLocale === self::SOURCE_LOCALE) {
 			return strtr($id, $parameters);
 		}
 
-		$message = $this->originalTranslator->trans($id, $parameters, $domain, $resolvedLocale);
+		$message = $this->originalTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
 		$catalogue = $this->originalTranslatorBag->getCatalogue($resolvedLocale);
 
-		if ($catalogue->defines($id, $domain)) {
+		if ($catalogue->defines($id, $resolvedDomain)) {
 			return $message;
 		} else {
 			return self::NOT_TRANSLATED_PREFIX . $message;
@@ -64,18 +65,19 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
 	 * {@inheritdoc}
 	 */
-	public function transChoice($id, $number, array $parameters = [], $domain = self::DEFAULT_DOMAIN, $locale = null) {
+	public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null) {
 		$resolvedLocale = $this->resolveLocale($locale);
+		$resolvedDomain = $this->resolveDomain($domain);
 
 		if ($resolvedLocale === self::SOURCE_LOCALE) {
 			$message = $this->messageSelector->choose($id, (int)$number, $resolvedLocale);
 			return strtr($message, $parameters);
 		}
 
-		$message = $this->originalTranslator->transChoice($id, $number, $parameters, $domain, $resolvedLocale);
+		$message = $this->originalTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
 		$catalogue = $this->originalTranslatorBag->getCatalogue($resolvedLocale);
 
-		if ($catalogue->defines($id, $domain)) {
+		if ($catalogue->defines($id, $resolvedDomain)) {
 			return $message;
 		} else {
 			return self::NOT_TRANSLATED_PREFIX . $message;
@@ -92,6 +94,18 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 		}
 
 		return $locale;
+	}
+
+	/**
+	 * @param string|null $domain
+	 * @return string
+	 */
+	private function resolveDomain($domain) {
+		if ($domain === null) {
+			return self::DEFAULT_DOMAIN;
+		}
+
+		return $domain;
 	}
 
 	/**
