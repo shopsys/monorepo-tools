@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
+use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
 use SS6\ShopBundle\Model\Feed\FeedGenerator;
@@ -53,15 +54,34 @@ class FeedFacade {
 	public function generateAllFeeds() {
 		foreach ($this->domain->getAll() as $domainConfig) {
 			$feedFilename = 'heureka_' . $domainConfig->getId() . '.xml';
-
-			$temporaryFeedFilepath = $this->feedsPath . '/' . $feedFilename . self::TEMPORARY_FILENAME_SULFIX;
-			$this->feedGenerator->generate(
-				$this->heurekaFeedDataSource,
+			$this->generateFeed(
+				$feedFilename,
 				$domainConfig,
-				'@SS6Shop/Feed/heureka.xml.twig',
-				$temporaryFeedFilepath
+				$this->heurekaFeedDataSource,
+				'@SS6Shop/Feed/heureka.xml.twig'
 			);
-			$this->filesystem->rename($temporaryFeedFilepath, $this->feedsPath . '/' . $feedFilename, true);
 		}
+	}
+
+	/**
+	 * @param string $feedFilename
+	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface $feedDataSource
+	 * @param string $templateFilepath
+	 */
+	private function generateFeed(
+		$feedFilename,
+		DomainConfig $domainConfig,
+		FeedDataSourceInterface $feedDataSource,
+		$templateFilepath
+	) {
+		$temporaryFeedFilepath = $this->feedsPath . '/' . $feedFilename . self::TEMPORARY_FILENAME_SULFIX;
+		$this->feedGenerator->generate(
+			$feedDataSource,
+			$domainConfig,
+			$templateFilepath,
+			$temporaryFeedFilepath
+		);
+		$this->filesystem->rename($temporaryFeedFilepath, $this->feedsPath . '/' . $feedFilename, true);
 	}
 }
