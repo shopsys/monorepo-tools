@@ -2,107 +2,243 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Component\Translation;
 
-use ReflectionClass;
+use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Translation\Translator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
-class TranslatorTest extends \PHPUnit_Framework_TestCase {
+class TranslatorTest extends PHPUnit_Framework_TestCase {
 
-	public function testTransWithParameters() {
-		$this->markTestSkipped('Needs rewrite');
+	public function testTransWithSourceLocaleReturnsSourceMessage() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
 
 		$messageSelector = new MessageSelector();
-		$containerMock = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-		$catalogueSourceLocale = new MessageCatalogue(Translator::SOURCE_LOCALE);
-		$catalogueOtherLocale = new MessageCatalogue('otherLocale');
-		$catalogueOtherLocale->add(['Foo %%bar%%' => 'Foo %%bar%%'], Translator::DEFAULT_DOMAIN);
-		$catalogues = [
-			Translator::SOURCE_LOCALE => $catalogueSourceLocale,
-			'otherLocale' => $catalogueOtherLocale,
-		];
 
-		$translator = new Translator($containerMock, $messageSelector);
-		$reflectionClass = new ReflectionClass(Translator::class);
-		$reflectionProperty = $reflectionClass->getProperty('catalogues');
-		$reflectionProperty->setAccessible(true);
-		$reflectionProperty->setValue($translator, $catalogues);
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
 
-		$translation = $translator->trans('Foo %%bar%%', ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertSame('Foo baz', $translation);
-
-		$notTranslated = $translator->trans('FooBar %%bar%%', ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertSame(Translator::NOT_TRANSLATED_PREFIX . 'FooBar baz', $notTranslated);
-
-		$notTranslatedInSourceLanguage = $translator->trans(
-			'FooBar %%bar%%',
-			['%%bar%%' => 'baz'],
-			Translator::DEFAULT_DOMAIN,
+		$translatedMessage = $translator->trans(
+			'source message %parameter%',
+			['%parameter%' => 'parameter value'],
+			null,
 			Translator::SOURCE_LOCALE
 		);
-		$this->assertSame('FooBar baz', $notTranslatedInSourceLanguage);
+
+		$this->assertSame('source message parameter value', $translatedMessage);
 	}
 
-	public function testTransChoiceWithParameters() {
-		$this->markTestSkipped('Needs rewrite');
+	public function testTransWithSourceLocaleAsDefaultLocaleReturnsSourceMessage() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorMock->expects($this->any())->method('getLocale')
+			->willReturn(Translator::SOURCE_LOCALE);
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
 
 		$messageSelector = new MessageSelector();
-		$containerMock = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-		$catalogueSourceLocale = new MessageCatalogue(Translator::SOURCE_LOCALE);
-		$catalogueOtherLocale = new MessageCatalogue('otherLocale');
-		$catalogueOtherLocale->add(['Foo %%bar%%' => 'Foo %%bar%%'], Translator::DEFAULT_DOMAIN);
-		$catalogues = [
-			Translator::SOURCE_LOCALE => $catalogueSourceLocale,
-			'otherLocale' => $catalogueOtherLocale,
-		];
 
-		$translator = new Translator($containerMock, $messageSelector);
-		$reflectionClass = new ReflectionClass(Translator::class);
-		$reflectionProperty = $reflectionClass->getProperty('catalogues');
-		$reflectionProperty->setAccessible(true);
-		$reflectionProperty->setValue($translator, $catalogues);
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
 
-		$translation = $translator->transChoice('Foo %%bar%%', 0, ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertSame('Foo baz', $translation);
+		$translatedMessage = $translator->trans(
+			'source message %parameter%',
+			['%parameter%' => 'parameter value']
+		);
 
-		$notTranslated = $translator->transChoice('FooBar %%bar%%', 0, ['%%bar%%' => 'baz'], Translator::DEFAULT_DOMAIN, 'otherLocale');
-		$this->assertSame(Translator::NOT_TRANSLATED_PREFIX . 'FooBar baz', $notTranslated);
+		$this->assertSame('source message parameter value', $translatedMessage);
+	}
 
-		$notTranslatedInSourceLanguage = $translator->transChoice(
-			'FooBar %%bar%%',
-			0,
-			['%%bar%%' => 'baz'],
-			Translator::DEFAULT_DOMAIN,
+	public function testTransWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorMock->expects($this->any())->method('trans')
+			->with(
+				$this->identicalTo('source message %parameter%'),
+				$this->identicalTo(['%parameter%' => 'parameter value'])
+			)
+			->willReturn('source message parameter value');
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
+
+		$originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
+			->willReturn(new MessageCatalogue('nonSourceLocale', []));
+
+		$messageSelector = new MessageSelector();
+
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
+
+		$translatedMessage = $translator->trans(
+			'source message %parameter%',
+			['%parameter%' => 'parameter value'],
+			null,
+			'nonSourceLocale'
+		);
+
+		$this->assertSame('##source message parameter value', $translatedMessage);
+	}
+
+	public function testTransWithTranslatedMessageAndNonSourceLocaleReturnsTranslatedMessage() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorMock->expects($this->any())->method('trans')
+			->with(
+				$this->identicalTo('source message %parameter%'),
+				$this->identicalTo(['%parameter%' => 'parameter value'])
+			)
+			->willReturn('translated message parameter value');
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
+
+		$messageCatalogue = new MessageCatalogue(
+			'nonSourceLocale',
+			[
+				'translationDomain' => ['source message %parameter%' => 'translated message %parameter%'],
+			]
+		);
+
+		$originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
+			->willReturn($messageCatalogue);
+
+		$messageSelector = new MessageSelector();
+
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
+
+		$translatedMessage = $translator->trans(
+			'source message %parameter%',
+			['%parameter%' => 'parameter value'],
+			'translationDomain',
+			'nonSourceLocale'
+		);
+
+		$this->assertSame('translated message parameter value', $translatedMessage);
+	}
+
+	public function testTransChoiceWithSourceLocaleReturnsSourceMessage() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
+
+		$messageSelector = new MessageSelector();
+
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
+
+		$translatedMessage = $translator->transChoice(
+			'{0}zero|{1}source message %parameter%',
+			1,
+			['%parameter%' => 'parameter value'],
+			null,
 			Translator::SOURCE_LOCALE
 		);
-		$this->assertSame('FooBar baz', $notTranslatedInSourceLanguage);
+
+		$this->assertSame('source message parameter value', $translatedMessage);
 	}
 
-	public function testTransChoice() {
-		$this->markTestSkipped('Needs rewrite');
+	public function testTransChoiceWithSourceLocaleAsDefaultLocaleReturnsSourceMessage() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorMock->expects($this->any())->method('getLocale')
+			->willReturn(Translator::SOURCE_LOCALE);
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
 
 		$messageSelector = new MessageSelector();
-		$containerMock = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-		$catalogueSourceLocale = new MessageCatalogue(Translator::SOURCE_LOCALE);
-		$catalogues = [Translator::SOURCE_LOCALE => $catalogueSourceLocale];
 
-		$translator = new Translator($containerMock, $messageSelector);
-		$reflectionClass = new ReflectionClass(Translator::class);
-		$reflectionProperty = $reflectionClass->getProperty('catalogues');
-		$reflectionProperty->setAccessible(true);
-		$reflectionProperty->setValue($translator, $catalogues);
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
 
-		$message = '{0}none|[1,5]1 to 5|[6,Inf]too much';
+		$translatedMessage = $translator->transChoice(
+			'{0}zero|{1}source message %parameter%',
+			1,
+			['%parameter%' => 'parameter value']
+		);
 
-		$translationZero = $translator->transChoice($message, 0, [], Translator::DEFAULT_DOMAIN, Translator::SOURCE_LOCALE);
-		$this->assertSame('none', $translationZero);
+		$this->assertSame('source message parameter value', $translatedMessage);
+	}
 
-		$translation1to5 = $translator->transChoice($message, 5, [], Translator::DEFAULT_DOMAIN, Translator::SOURCE_LOCALE);
-		$this->assertSame('1 to 5', $translation1to5);
+	public function testTransChoiceWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
 
-		$translationTooMuch = $translator->transChoice($message, 6, [], Translator::DEFAULT_DOMAIN, Translator::SOURCE_LOCALE);
-		$this->assertSame('too much', $translationTooMuch);
+		$originalTranslatorMock->expects($this->any())->method('transChoice')
+			->with(
+				$this->identicalTo('{0}zero|{1}source message %parameter%'),
+				$this->identicalTo(1),
+				$this->identicalTo(['%parameter%' => 'parameter value'])
+			)
+			->willReturn('source message parameter value');
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
+
+		$originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
+			->willReturn(new MessageCatalogue('nonSourceLocale', []));
+
+		$messageSelector = new MessageSelector();
+
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
+
+		$translatedMessage = $translator->transChoice(
+			'{0}zero|{1}source message %parameter%',
+			1,
+			['%parameter%' => 'parameter value'],
+			null,
+			'nonSourceLocale'
+		);
+
+		$this->assertSame('##source message parameter value', $translatedMessage);
+	}
+
+	public function testTransChoiceWithTranslatedMessageAndNonSourceLocaleReturnsTranslatedMessage() {
+		$originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
+			->getMock();
+
+		$originalTranslatorMock->expects($this->any())->method('transChoice')
+			->with(
+				$this->identicalTo('{0}zero|{1}source message %parameter%'),
+				$this->identicalTo(1),
+				$this->identicalTo(['%parameter%' => 'parameter value'])
+			)
+			->willReturn('translated message parameter value');
+
+		$originalTranslatorBagMock = $this->getMockBuilder(TranslatorBagInterface::class)
+			->getMock();
+
+		$messageCatalogue = new MessageCatalogue(
+			'nonSourceLocale',
+			[
+				'translationDomain' => ['{0}zero|{1}source message %parameter%' => '{0}zero|{1}translated message %parameter%'],
+			]
+		);
+
+		$originalTranslatorBagMock->expects($this->any())->method('getCatalogue')
+			->willReturn($messageCatalogue);
+
+		$messageSelector = new MessageSelector();
+
+		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $messageSelector);
+
+		$translatedMessage = $translator->transChoice(
+			'{0}zero|{1}source message %parameter%',
+			1,
+			['%parameter%' => 'parameter value'],
+			'translationDomain',
+			'nonSourceLocale'
+		);
+
+		$this->assertSame('translated message parameter value', $translatedMessage);
 	}
 
 }
