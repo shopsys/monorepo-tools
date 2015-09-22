@@ -18,10 +18,42 @@ class TsqueryFactory {
 	 * @param string|null $searchText
 	 * @return string
 	 */
+	public function getTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText) {
+		$tokens = $this->splitToTokensWithPrefixMatchForLastToken($searchText);
+
+		return implode(' & ', $tokens);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @return string
+	 */
 	public function getTsqueryWithOrConditions($searchText) {
 		$tokens = $this->splitToTokens($searchText);
 
 		return implode(' | ', $tokens);
+	}
+
+	/**
+	 * @param string|null $searchText
+	 * @return string
+	 */
+	public function getTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText) {
+		$tokens = $this->splitToTokensWithPrefixMatchForLastToken($searchText);
+
+		return implode(' | ', $tokens);
+	}
+
+	private function splitToTokensWithPrefixMatchForLastToken($searchText) {
+		$tokens = $this->splitToTokens($searchText);
+
+		if (count($tokens)) {
+			end($tokens);
+			$lastKey = key($tokens);
+			$tokens[$lastKey] = $tokens[$lastKey] . ':*';
+		}
+
+		return $tokens;
 	}
 
 	/**

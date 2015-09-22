@@ -25,7 +25,10 @@ class ProductSearchRepository {
 		if ($this->tsqueryFactory->isValidSearchText($searchText)) {
 			$productQueryBuilder
 				->andWhere('TSQUERY(pd.fulltextTsvector, :fulltextQuery) = TRUE')
-				->setParameter('fulltextQuery', $this->tsqueryFactory->getTsqueryWithAndConditions($searchText));
+				->setParameter(
+					'fulltextQuery',
+					$this->tsqueryFactory->getTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText)
+				);
 		} else {
 			$productQueryBuilder->andWhere('TRUE = FALSE');
 		}
@@ -38,19 +41,36 @@ class ProductSearchRepository {
 	public function addRelevance(QueryBuilder $productQueryBuilder, $searchText) {
 		$productQueryBuilder->addSelect('
 			CASE
-				WHEN pt.name LIKE :searchTextLike THEN 1
+				WHEN (
+					pt.name LIKE :searchTextLikeWithWildcardOnLeftAndSpaceAndWildcardOnRight
+					OR
+					pt.name LIKE :searchTextLikeWithWildcardOnLeft
+				) THEN 1
 				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryAnd) = TRUE THEN 2
 				WHEN TSQUERY(p.catnumTsvector, :searchTextTsqueryOr) = TRUE THEN 3
 				WHEN TSQUERY(p.partnoTsvector, :searchTextTsqueryOr) = TRUE THEN 4
-				WHEN pd.description LIKE :searchTextLike THEN 5
-				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryOr) = TRUE THEN 6
-				ELSE 7
+				WHEN pt.name LIKE :searchTextLikeWithWildcardsOnBothSides THEN 5
+				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryAndWithPrefixMatchForLastWord) = TRUE THEN 6
+				WHEN TSQUERY(pd.descriptionTsvector, :searchTextTsqueryAnd) = TRUE THEN 7
+				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryOr) = TRUE THEN 8
+				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryOrWithPrefixMatchForLastWord) = TRUE THEN 9
+				ELSE 10
 			END AS HIDDEN relevance
 		');
 
 		$productQueryBuilder->setParameter(
-			'searchTextLike',
+			'searchTextLikeWithWildcardsOnBothSides',
 			'%' . DatabaseSearching::getLikeSearchString($searchText) . '%'
+		);
+
+		$productQueryBuilder->setParameter(
+			'searchTextLikeWithWildcardOnLeft',
+			'%' . DatabaseSearching::getLikeSearchString($searchText)
+		);
+
+		$productQueryBuilder->setParameter(
+			'searchTextLikeWithWildcardOnLeftAndSpaceAndWildcardOnRight',
+			'%' . DatabaseSearching::getLikeSearchString($searchText) . ' %'
 		);
 
 		$productQueryBuilder->setParameter(
@@ -59,8 +79,18 @@ class ProductSearchRepository {
 		);
 
 		$productQueryBuilder->setParameter(
+			'searchTextTsqueryAndWithPrefixMatchForLastWord',
+			$this->tsqueryFactory->getTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText)
+		);
+
+		$productQueryBuilder->setParameter(
 			'searchTextTsqueryOr',
 			$this->tsqueryFactory->getTsqueryWithOrConditions($searchText)
+		);
+
+		$productQueryBuilder->setParameter(
+			'searchTextTsqueryOrWithPrefixMatchForLastWord',
+			$this->tsqueryFactory->getTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText)
 		);
 	}
 

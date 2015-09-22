@@ -29,6 +29,10 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 			['full-text', true],
 			['přílišžluťoučkýkůňúpělďábelskéódy', true],
 			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', true],
+			['ab*', true],
+			['ab:*', true],
+			['a*:b', true],
+			['a:* b', true],
 		];
 	}
 
@@ -54,6 +58,39 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 			['full-text', 'full-text'],
 			['přílišžluťoučkýkůňúpělďábelskéódy', 'přílišžluťoučkýkůňúpělďábelskéódy'],
 			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', 'PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY'],
+			['ab*', 'ab'],
+			['ab:*', 'ab'],
+			['a*:b', 'a & b'],
+			['a:* b', 'a & b'],
+		];
+	}
+
+	/**
+	 * @dataProvider getTsqueryWithAndConditionsAndPrefixMatchForLastWordData
+	 */
+	public function testGetTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText, $expectedResult) {
+		$tsqueryFactory = new TsqueryFactory();
+
+		$result = $tsqueryFactory->getTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText);
+
+		$this->assertSame($expectedResult, $result);
+	}
+
+	public function getTsqueryWithAndConditionsAndPrefixMatchForLastWordData() {
+		return [
+			[null, ''],
+			['', ''],
+			['asdf', 'asdf:*'],
+			['one two', 'one & two:*'],
+			["one  \t\n two", 'one & two:*'],
+			['at&t', 'at & t:*'],
+			['full-text', 'full-text:*'],
+			['přílišžluťoučkýkůňúpělďábelskéódy', 'přílišžluťoučkýkůňúpělďábelskéódy:*'],
+			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', 'PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY:*'],
+			['ab*', 'ab:*'],
+			['ab:*', 'ab:*'],
+			['a*:b', 'a & b:*'],
+			['a:* b', 'a & b:*'],
 		];
 	}
 
@@ -79,6 +116,39 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 			['full-text', 'full-text'],
 			['přílišžluťoučkýkůňúpělďábelskéódy', 'přílišžluťoučkýkůňúpělďábelskéódy'],
 			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', 'PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY'],
+			['ab*', 'ab'],
+			['ab:*', 'ab'],
+			['a*:b', 'a | b'],
+			['a:* b', 'a | b'],
+		];
+	}
+
+	/**
+	 * @dataProvider getTsqueryWithOrConditionsAndPrefixMatchForLastWordData
+	 */
+	public function testGetTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText, $expectedResult) {
+		$tsqueryFactory = new TsqueryFactory();
+
+		$result = $tsqueryFactory->getTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText);
+
+		$this->assertSame($expectedResult, $result);
+	}
+
+	public function getTsqueryWithOrConditionsAndPrefixMatchForLastWordData() {
+		return [
+			[null, ''],
+			['', ''],
+			['asdf', 'asdf:*'],
+			['one two', 'one | two:*'],
+			["one  \t\n two", 'one | two:*'],
+			['at&t', 'at | t:*'],
+			['full-text', 'full-text:*'],
+			['přílišžluťoučkýkůňúpělďábelskéódy', 'přílišžluťoučkýkůňúpělďábelskéódy:*'],
+			['PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY', 'PŘÍLIŠŽLUŤOUČKÝKŮŇÚPĚLĎÁBELSKÉÓDY:*'],
+			['ab*', 'ab:*'],
+			['ab:*', 'ab:*'],
+			['a*:b', 'a | b:*'],
+			['a:* b', 'a | b:*'],
 		];
 	}
 
