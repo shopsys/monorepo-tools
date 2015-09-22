@@ -22,9 +22,7 @@ class ProductSearchRepository {
 	 * @param string|null $searchText
 	 */
 	public function filterBySearchText(QueryBuilder $productQueryBuilder, $searchText) {
-		$tokens = $this->tsqueryFactory->splitToTokens($searchText);
-
-		if (count($tokens) > 0) {
+		if ($this->tsqueryFactory->isValidSearchText($searchText)) {
 			$productQueryBuilder
 				->andWhere('TSQUERY(pd.fulltextTsvector, :fulltextQuery) = TRUE')
 				->setParameter('fulltextQuery', $this->tsqueryFactory->getTsqueryWithAndConditions($searchText));

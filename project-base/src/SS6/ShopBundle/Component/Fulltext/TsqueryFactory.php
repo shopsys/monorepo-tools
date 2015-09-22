@@ -26,9 +26,17 @@ class TsqueryFactory {
 
 	/**
 	 * @param string|null $searchText
+	 * @return bool
+	 */
+	public function isValidSearchText($searchText) {
+		return count($this->splitToTokens($searchText)) > 0;
+	}
+
+	/**
+	 * @param string|null $searchText
 	 * @return string[]
 	 */
-	public function splitToTokens($searchText) {
+	private function splitToTokens($searchText) {
 		return preg_split(
 			'/[^\w-]+/ui',
 			$searchText,
