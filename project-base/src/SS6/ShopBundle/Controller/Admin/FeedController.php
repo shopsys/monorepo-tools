@@ -89,4 +89,37 @@ class FeedController extends AdminBaseController {
 		]);
 	}
 
+	/**
+	 * @Route("/feed/list-delivery/")
+	 */
+	public function listDeliveryAction() {
+		$feeds = [];
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$filename = 'heureka_delivery_' . $domainConfig->getId() . '.xml';
+			$heurekaFilepath = $this->container->getParameter('ss6.feed_dir') . '/' . $filename;
+			$feeds[] = [
+				'name' => $domainConfig->getName() . ' - Heureka',
+				'url' => $domainConfig->getUrl() . $this->container->getParameter('ss6.feed_url_prefix') . $filename,
+				'created' => file_exists($heurekaFilepath) ? new DateTime('@' . filemtime($heurekaFilepath)) : null,
+			];
+		}
+
+		$dataSource = new ArrayDataSource($feeds, 'name');
+
+		$grid = $this->em->transactional(
+			function () use ($dataSource) {
+				return $this->gridFactory->create('deliveryFeedsList', $dataSource);
+			}
+		);
+
+		$grid->addColumn('name', 'name', 'Feed');
+		$grid->addColumn('created', 'created', 'Vygenerováno');
+
+		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
+
+		return $this->render('@SS6Shop/Admin/Content/Feed/listDelivery.html.twig', [
+			'gridView' => $grid->createView(),
+		]);
+	}
+
 }

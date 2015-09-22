@@ -103,6 +103,8 @@
           visible: false
     - label: 'XML Feedy'
       route: admin_feed_list
+    - label: 'XML dostupnostní feedy'
+      route: admin_feed_listdelivery
     - label: 'Nejprodávanější zboží'
       route: admin_bestsellingproduct_list
       items:
